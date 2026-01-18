@@ -3,845 +3,969 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stroke Complete | Clinical Adventure</title>
+    <title>Acute Ischemic Stroke - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
         .container { max-width: 900px; margin: 0 auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(76, 29, 149, 0.9); border-radius: 16px; margin-bottom: 20px; }
-        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #8b5cf6; margin-left: 10px; }
-        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #c4b5fd); border-radius: 3px; }
-        .scene { background: linear-gradient(135deg, #4c1d95, #6d28d9); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-        .scene-header { background: rgba(139, 92, 246, 0.15); padding: 16px 20px; }
-        .scene-phase { font-size: 0.75rem; color: #c4b5fd; text-transform: uppercase; }
-        .scene-title { font-size: 1.4rem; font-weight: 700; }
-        .scene-body { padding: 24px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #60a5fa; font-weight: 600; }
         .critical { color: #f87171; font-weight: 600; }
-        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.2)); border: 1px solid rgba(139, 92, 246, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
-        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
-        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
-        .btn { padding: 16px 28px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); color: #c4b5fd; }
-        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(124, 58, 237, 0.15)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 16px; padding: 24px; margin: 24px 0; }
-        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
-        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
-        .outcome-banner { text-align: center; padding: 40px; }
-        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
-        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
-        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
-        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: #4ade80; }
-        .pitfall .tip-header { color: #f87171; }
-        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
-    </style>
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #93c5fd; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            position: fixed;
+            top: 85px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #3b82f6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+</style>
 </head>
 <body>
-    <div class="container" id="app"></div>
-    <script>
-    const STAGES = [
-        'arrival', 'recognize', 'nihss', 'imaging', 'ischemic_hemorrhagic',
-        'tpa_criteria', 'tpa_administration', 'thrombectomy', 'bp_management',
-        'complications', 'workup', 'secondary_prevention', 'rehabilitation', 'debrief'
-    ];
-    const state = { stage: 0 };
-
-    function render() {
-        const progress = ((state.stage + 1) / STAGES.length) * 100;
-        let c = `<div class="header">
-            <div style="font-size:1.3rem;font-weight:700">🧠 Stroke Complete<span class="badge">14 STAGES</span></div>
-            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
-        
-        switch(STAGES[state.stage]) {
-            case 'arrival': c += renderArrival(); break;
-            case 'recognize': c += renderRecognize(); break;
-            case 'nihss': c += renderNIHSS(); break;
-            case 'imaging': c += renderImaging(); break;
-            case 'ischemic_hemorrhagic': c += renderTypes(); break;
-            case 'tpa_criteria': c += renderTPACriteria(); break;
-            case 'tpa_administration': c += renderTPAAdmin(); break;
-            case 'thrombectomy': c += renderThrombectomy(); break;
-            case 'bp_management': c += renderBP(); break;
-            case 'complications': c += renderComplications(); break;
-            case 'workup': c += renderWorkup(); break;
-            case 'secondary_prevention': c += renderSecondary(); break;
-            case 'rehabilitation': c += renderRehab(); break;
-            case 'debrief': c += renderDebrief(); break;
-        }
-        document.getElementById('app').innerHTML = c;
-    }
-
-    function renderArrival() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">Acute Stroke Presentation</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Time is brain: 1.9 million neurons die per minute in untreated stroke</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When would you use tenecteplase over alteplase?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Wake-up stroke: DWI-FLAIR mismatch can extend treatment window</p>
-                </div>
-                <div class="narrative"><p>A <span class="highlight">68-year-old man</span> with HTN and AFib (not on anticoagulation) is brought by EMS with <span class="critical">sudden right-sided weakness and slurred speech</span> that started 90 minutes ago while eating breakfast. Wife witnessed onset.</p>
-                <p style="margin-top:12px;"><strong>Vitals:</strong> BP 178/95, HR 88 (irregular), RR 16, SpO2 97% on RA<br>
-                <strong>Glucose:</strong> 142 mg/dL<br>
-                <strong>Exam:</strong> Right facial droop, right arm drift, dysarthria, right leg weakness</p></div>
-                
-                <div class="alert-box"><div class="alert-title">🚨 Time is Brain!</div>
-                    <p>1.9 million neurons die per minute during ischemic stroke. Door-to-needle goal: <strong>&lt;60 minutes</strong>. Every 15-minute delay in tPA = 4% worse outcomes.</p></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Stroke Code Activation</div>
-                    <ol style="margin-left:20px;line-height:2;">
-                        <li>Establish time of onset (or last known well)</li>
-                        <li>Check glucose (hypoglycemia mimics stroke)</li>
-                        <li>Activate stroke team</li>
-                        <li>Obtain non-contrast CT head STAT</li>
-                        <li>Establish IV access, draw labs</li>
-                    </ol></div>
-                <button class="btn" onclick="nextStage()">Recognition →</button>
-            </div></div>`;
-    }
-
-    function renderRecognize() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">Stroke Recognition</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> tPA window: 4.5 hours from last known well (with exclusion criteria)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of endovascular therapy beyond 24 hours (DAWN/DEFUSE-3)?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 BE-FAST Screening</div>
-                    <table class="comparison-table">
-                        <tr><th>Letter</th><th>Symptom</th><th>Patient</th></tr>
-                        <tr><td><strong>B</strong>alance</td><td>Sudden loss of balance/coordination</td><td>Mild ataxia</td></tr>
-                        <tr><td><strong>E</strong>yes</td><td>Vision changes, diplopia</td><td>Normal</td></tr>
-                        <tr><td><strong>F</strong>ace</td><td>Facial droop</td><td>Right droop ✓</td></tr>
-                        <tr><td><strong>A</strong>rm</td><td>Arm weakness/drift</td><td>Right drift ✓</td></tr>
-                        <tr><td><strong>S</strong>peech</td><td>Slurred or abnormal speech</td><td>Dysarthric ✓</td></tr>
-                        <tr><td><strong>T</strong>ime</td><td>Time to call 911</td><td>90 min ago ✓</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Stroke Mimics</div>
-                    <div class="pathway">• Hypoglycemia (check glucose!)<br>• Seizure with Todd's paralysis<br>• Migraine with aura<br>• Conversion disorder<br>• Brain tumor<br>• Subdural hematoma<br>• Hypertensive encephalopathy<br>• Drug intoxication<br><br>Up to 30% of stroke codes are mimics!</div></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Vascular Territories</div>
-                    <table class="comparison-table">
-                        <tr><th>Territory</th><th>Clinical Features</th></tr>
-                        <tr><td><strong>MCA</strong> (most common)</td><td>Contralateral face/arm > leg, aphasia (L), neglect (R)</td></tr>
-                        <tr><td><strong>ACA</strong></td><td>Contralateral leg > arm, personality change</td></tr>
-                        <tr><td><strong>PCA</strong></td><td>Homonymous hemianopia, visual agnosia</td></tr>
-                        <tr><td><strong>Basilar</strong></td><td>Coma, quadriplegia, locked-in syndrome</td></tr>
-                        <tr><td><strong>Cerebellar</strong></td><td>Ataxia, vertigo, nystagmus</td></tr>
-                    </table></div>
-                <button class="btn" onclick="nextStage()">NIHSS →</button>
-            </div></div>`;
-    }
-
-    function renderNIHSS() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">NIH Stroke Scale</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> NIHSS guides severity but don't let a low score delay treatment</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How do you manage stroke in a patient on anticoagulation?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Permissive HTN unless >220/120 (or >185/110 if tPA candidate)</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 NIHSS Components (0-42)</div>
-                    <table class="comparison-table">
-                        <tr><th>Item</th><th>Assessment</th><th>Patient</th></tr>
-                        <tr><td>1a. LOC</td><td>Alertness</td><td>0 (alert)</td></tr>
-                        <tr><td>1b. Questions</td><td>Month, age</td><td>0</td></tr>
-                        <tr><td>1c. Commands</td><td>Close eyes, grip</td><td>0</td></tr>
-                        <tr><td>2. Gaze</td><td>Horizontal eye movement</td><td>0</td></tr>
-                        <tr><td>3. Visual</td><td>Visual fields</td><td>0</td></tr>
-                        <tr><td>4. Facial palsy</td><td>Show teeth, raise brows</td><td>2 (partial)</td></tr>
-                        <tr><td>5. Motor arm</td><td>Hold arms up 10 sec</td><td>3 (right drift)</td></tr>
-                        <tr><td>6. Motor leg</td><td>Hold legs up 5 sec</td><td>2 (right drift)</td></tr>
-                        <tr><td>7. Ataxia</td><td>Finger-nose, heel-shin</td><td>0</td></tr>
-                        <tr><td>8. Sensory</td><td>Pinprick</td><td>1 (mild loss R)</td></tr>
-                        <tr><td>9. Language</td><td>Name items, describe</td><td>1 (mild)</td></tr>
-                        <tr><td>10. Dysarthria</td><td>Read words</td><td>2 (severe)</td></tr>
-                        <tr><td>11. Neglect</td><td>Extinction, inattention</td><td>0</td></tr>
-                    </table>
-                    <p style="margin-top:12px;"><strong>Total NIHSS: 11</strong> (Moderate stroke)</p></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 NIHSS Interpretation</div>
-                    <div class="pathway">0: No stroke<br>1-4: Minor stroke<br>5-15: Moderate stroke<br>16-20: Moderate-severe<br>21-42: Severe stroke<br><br>Higher NIHSS = larger infarct, worse prognosis<br>NIHSS >25 may have higher bleeding risk with tPA</div></div>
-                <button class="btn" onclick="nextStage()">Imaging →</button>
-            </div></div>`;
-    }
-
-    function renderImaging() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">Neuroimaging</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Always check glucose - hypoglycemia can mimic stroke</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When is permissive hypertension appropriate vs when should you treat BP?</p>
-                </div>
-                <div class="alert-box"><div class="alert-title">🚨 CT Head is FIRST Priority</div>
-                    <p>Must rule out hemorrhage before giving tPA. CT should be done within 25 minutes of arrival.</p></div>
-                
-                <div class="narrative"><p><strong>This patient's CT:</strong> No hemorrhage, no early infarct signs, hyperdense MCA sign on left</p></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 CT Findings Timeline</div>
-                    <table class="comparison-table">
-                        <tr><th>Time</th><th>Finding</th></tr>
-                        <tr><td>Immediate</td><td>Hyperdense artery sign (clot)</td></tr>
-                        <tr><td>1-3 hours</td><td>Loss of gray-white differentiation</td></tr>
-                        <tr><td>3-6 hours</td><td>Sulcal effacement, early edema</td></tr>
-                        <tr><td>6-12 hours</td><td>Hypodensity becomes visible</td></tr>
-                        <tr><td>24-48 hours</td><td>Well-defined infarct</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Advanced Imaging</div>
-                    <div class="pathway"><strong>CTA:</strong> Identifies large vessel occlusion (LVO)<br>→ Required if considering thrombectomy<br><br><strong>CT Perfusion:</strong> Core vs penumbra<br>→ Core: Irreversibly damaged<br>→ Penumbra: Salvageable with reperfusion<br>→ Mismatch = good thrombectomy candidate<br><br><strong>MRI DWI:</strong> Most sensitive for acute infarct<br>→ Positive within minutes of onset</div></div>
-                <button class="btn" onclick="nextStage()">Ischemic vs Hemorrhagic →</button>
-            </div></div>`;
-    }
-
-    function renderTypes() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">Ischemic vs Hemorrhagic Stroke</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> CT head rules out hemorrhage before considering thrombolytics</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does posterior circulation stroke presentation differ?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fef2f2; border:1px solid #ef4444; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #ef4444;">
-                    <p style="margin:0; color:#991b1b; font-size:0.9rem;"><strong>⚠️ Don't Miss:</strong> Posterior stroke: vertigo, diplopia, ataxia - easily missed!</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Stroke Types</div>
-                    <table class="comparison-table">
-                        <tr><th>Feature</th><th>Ischemic (87%)</th><th>Hemorrhagic (13%)</th></tr>
-                        <tr><td>Mechanism</td><td>Vessel occlusion</td><td>Vessel rupture</td></tr>
-                        <tr><td>CT appearance</td><td>Hypodense (delayed)</td><td>Hyperdense (immediate)</td></tr>
-                        <tr><td>Headache</td><td>Usually absent</td><td>Often severe</td></tr>
-                        <tr><td>Vomiting</td><td>Uncommon</td><td>Common</td></tr>
-                        <tr><td>LOC</td><td>Usually preserved</td><td>Often impaired</td></tr>
-                        <tr><td>Seizure at onset</td><td>Rare</td><td>More common</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Ischemic Stroke Subtypes (TOAST)</div>
-                    <div class="pathway"><strong>Large artery atherosclerosis:</strong> Carotid stenosis<br><strong>Cardioembolism:</strong> AFib, valve disease, MI<br><strong>Small vessel (lacunar):</strong> HTN, DM<br><strong>Other determined:</strong> Dissection, vasculitis<br><strong>Cryptogenic:</strong> Unknown after workup (~25%)</div></div>
-                
-                <div class="narrative"><p><strong>This patient:</strong> Ischemic stroke (no hemorrhage on CT) + AFib = likely <span class="highlight">cardioembolic stroke</span></p></div>
-                <button class="btn" onclick="nextStage()">tPA Criteria →</button>
-            </div></div>`;
-    }
-
-    function renderTPACriteria() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">tPA Eligibility</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Large vessel occlusion = consider thrombectomy (extended window)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Discuss the role of dual antiplatelet therapy in minor stroke/TIA</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 IV tPA Time Window</div>
-                    <ul style="margin-left:20px;line-height:2;">
-                        <li><strong>0-3 hours:</strong> Standard indication</li>
-                        <li><strong>3-4.5 hours:</strong> Extended window (additional exclusions)</li>
-                        <li><strong>Wake-up stroke:</strong> May qualify with MRI mismatch</li>
-                    </ul></div>
-                
-                <div class="alert-box"><div class="alert-title">🚨 Absolute Contraindications</div>
-                    <ul style="margin-left:20px;">
-                        <li>ICH on imaging</li>
-                        <li>Prior ICH</li>
-                        <li>Ischemic stroke or head trauma <3 months</li>
-                        <li>Intracranial neoplasm, AVM, aneurysm</li>
-                        <li>Recent intracranial/spinal surgery</li>
-                        <li>Active internal bleeding</li>
-                        <li>Severe uncontrolled HTN (>185/110 despite treatment)</li>
-                        <li>Platelets <100,000, INR >1.7, aPTT elevated</li>
-                    </ul></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Additional 3-4.5h Exclusions</div>
-                    <ul style="margin-left:20px;">
-                        <li>Age >80 (relative in US)</li>
-                        <li>NIHSS >25</li>
-                        <li>Both diabetes AND prior stroke</li>
-                        <li>Taking any oral anticoagulant</li>
-                    </ul></div>
-                
-                <div class="narrative"><p><strong>This patient:</strong> 90 min from onset, no contraindications, NIHSS 11 → <span class="highlight">tPA candidate!</span></p></div>
-                <button class="btn" onclick="nextStage()">tPA Administration →</button>
-            </div></div>`;
-    }
-
-    function renderTPAAdmin() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">IV Alteplase Administration</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Time is brain: 1.9 million neurons die per minute in untreated stroke</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When would you use tenecteplase over alteplase?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fef2f2; border:1px solid #ef4444; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #ef4444;">
-                    <p style="margin:0; color:#991b1b; font-size:0.9rem;"><strong>⚠️ Don't Miss:</strong> Carotid dissection: young patient, neck pain, Horner syndrome</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 tPA Protocol</div>
-                    <table class="comparison-table">
-                        <tr><td><strong>Dose</strong></td><td>0.9 mg/kg (max 90 mg)</td></tr>
-                        <tr><td><strong>Administration</strong></td><td>10% bolus, 90% infusion over 60 min</td></tr>
-                        <tr><td><strong>BP goal pre-tPA</strong></td><td><185/110</td></tr>
-                        <tr><td><strong>BP goal post-tPA</strong></td><td><180/105 for 24 hours</td></tr>
-                    </table></div>
-                
-                <div class="alert-box"><div class="alert-title">🚨 Post-tPA Monitoring</div>
-                    <ul style="margin-left:20px;">
-                        <li>Neuro checks q15min × 2h, then q30min × 6h, then hourly</li>
-                        <li>BP q15min × 2h, then q30min × 6h, then hourly</li>
-                        <li>No anticoagulants or antiplatelets × 24h</li>
-                        <li>No arterial punctures, central lines, NG tubes × 24h</li>
-                        <li>Repeat CT at 24h before starting anticoagulation</li>
-                    </ul></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Symptomatic ICH (sICH)</div>
-                    <div class="pathway">Risk: ~6% with tPA (vs 0.6% without)<br><br><strong>Signs:</strong> Sudden neuro decline, headache, ↑BP, vomiting<br><br><strong>Management:</strong><br>→ STOP infusion immediately<br>→ STAT CT head<br>→ Cryoprecipitate 10 units (fibrinogen)<br>→ Tranexamic acid (TXA) 1g<br>→ Platelets if needed<br>→ Neurosurgery consult</div></div>
-                <button class="btn" onclick="nextStage()">Thrombectomy →</button>
-            </div></div>`;
-    }
-
-    function renderThrombectomy() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">Mechanical Thrombectomy</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> tPA window: 4.5 hours from last known well (with exclusion criteria)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of endovascular therapy beyond 24 hours (DAWN/DEFUSE-3)?</p>
-                </div>
-                <div class="alert-box"><div class="alert-title">🚨 Game-Changer for Large Vessel Occlusion</div>
-                    <p>NNT = 2.6 for good outcome. One of the most effective interventions in medicine!</p></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Thrombectomy Criteria</div>
-                    <ul style="margin-left:20px;line-height:2;">
-                        <li><strong>Large vessel occlusion (LVO):</strong> ICA, M1, M2, basilar</li>
-                        <li><strong>Time window:</strong> Up to 24h if favorable perfusion imaging</li>
-                        <li><strong>Prestroke function:</strong> mRS 0-1 (functional independence)</li>
-                        <li><strong>NIHSS:</strong> Generally ≥6</li>
-                        <li><strong>Age:</strong> No upper limit if otherwise eligible</li>
-                    </ul></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Extended Time Windows</div>
-                    <div class="pathway"><strong>DAWN trial:</strong> 6-24 hours<br>→ Small core + clinical mismatch<br><br><strong>DEFUSE 3 trial:</strong> 6-16 hours<br>→ Perfusion mismatch (penumbra > core)<br><br>Key: "Tissue window" not just "time window"<br>Some patients have salvageable brain at 24h!</div></div>
-                
-                <div class="narrative"><p><strong>This patient:</strong> CTA shows left M1 occlusion → Thrombectomy candidate! Give tPA AND proceed to thrombectomy ("drip and ship" or "drip and drive").</p></div>
-                <button class="btn" onclick="nextStage()">BP Management →</button>
-            </div></div>`;
-    }
-
-    function renderBP() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">Blood Pressure Management</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> NIHSS guides severity but don't let a low score delay treatment</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How do you manage stroke in a patient on anticoagulation?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fefce8; border:1px solid #eab308; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #eab308;">
-                    <p style="margin:0; color:#854d0e; font-size:0.9rem;"><strong>🚫 Common Mistake:</strong> Don't give antiplatelet until hemorrhage is excluded by imaging</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 BP Goals in Acute Stroke</div>
-                    <table class="comparison-table">
-                        <tr><th>Scenario</th><th>BP Target</th></tr>
-                        <tr><td>Pre-tPA</td><td><185/110 (required for tPA)</td></tr>
-                        <tr><td>Post-tPA (24h)</td><td><180/105</td></tr>
-                        <tr><td>No tPA, no thrombectomy</td><td>Permissive HTN <220/120</td></tr>
-                        <tr><td>Post-thrombectomy</td><td><180/105 (or per protocol)</td></tr>
-                        <tr><td>Hemorrhagic stroke</td><td>SBP <140 (if presenting SBP 150-220)</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Permissive Hypertension?</div>
-                    <div class="pathway">Ischemic penumbra needs perfusion pressure<br>→ Autoregulation impaired in ischemia<br>→ Cerebral blood flow becomes pressure-dependent<br>→ Lowering BP may extend infarct<br><br>BUT: After tPA, high BP increases ICH risk<br>→ Must lower BP for safe thrombolysis</div></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Antihypertensive Agents</div>
-                    <ul style="margin-left:20px;line-height:1.8;">
-                        <li><strong>Labetalol:</strong> 10-20mg IV bolus, can repeat</li>
-                        <li><strong>Nicardipine:</strong> 5mg/hr infusion, titrate q5min</li>
-                        <li><strong>Clevidipine:</strong> Alternative IV calcium channel blocker</li>
-                        <li>Avoid: Sublingual nifedipine (unpredictable drops)</li>
-                    </ul></div>
-                <button class="btn" onclick="nextStage()">Complications →</button>
-            </div></div>`;
-    }
-
-    function renderComplications() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Acute Complications</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Always check glucose - hypoglycemia can mimic stroke</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When is permissive hypertension appropriate vs when should you treat BP?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Major Complications</div>
-                    <table class="comparison-table">
-                        <tr><th>Complication</th><th>Timing</th><th>Management</th></tr>
-                        <tr><td><strong>Cerebral edema</strong></td><td>24-72h peak</td><td>HOB 30°, osmotherapy, hemicraniectomy</td></tr>
-                        <tr><td><strong>Hemorrhagic transformation</strong></td><td>24-48h</td><td>Reverse anticoag, BP control</td></tr>
-                        <tr><td><strong>Seizures</strong></td><td>Any time</td><td>Levetiracetam (no prophylaxis routinely)</td></tr>
-                        <tr><td><strong>Aspiration pneumonia</strong></td><td>Days</td><td>Swallow eval before PO, antibiotics</td></tr>
-                        <tr><td><strong>DVT/PE</strong></td><td>Days-weeks</td><td>SCDs, then prophylactic anticoag</td></tr>
-                    </table></div>
-                
-                <div class="alert-box"><div class="alert-title">🚨 Malignant MCA Infarction</div>
-                    <p>Large MCA stroke → massive edema → herniation<br>
-                    <strong>Mortality 80% with medical management alone</strong><br>
-                    <strong>Hemicraniectomy:</strong> Reduces mortality to 20%, improves functional outcomes in patients <60yo. Must be done within 48h.</p></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Cerebral Edema Management</div>
-                    <div class="pathway"><strong>Tier 1:</strong> HOB 30°, avoid hyperthermia, normoglycemia<br><strong>Tier 2:</strong> Mannitol 0.5-1g/kg or hypertonic saline<br><strong>Tier 3:</strong> Hyperventilation (temporary)<br><strong>Tier 4:</strong> Decompressive hemicraniectomy<br><br>Monitor for signs: ↓ LOC, pupil changes, posturing</div></div>
-                <button class="btn" onclick="nextStage()">Etiology Workup →</button>
-            </div></div>`;
-    }
-
-    function renderWorkup() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Stroke Etiology Workup</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> CT head rules out hemorrhage before considering thrombolytics</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does posterior circulation stroke presentation differ?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#f5f3ff; border:1px solid #8b5cf6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #8b5cf6;">
-                    <p style="margin:0; color:#5b21b6; font-size:0.9rem;"><strong>📋 Board Tip:</strong> ASPECTS score: <6 suggests large infarct core, guides thrombectomy decision</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Standard Workup</div>
-                    <ul style="margin-left:20px;line-height:2;">
-                        <li><strong>Cardiac:</strong> ECG, telemetry × 24h+, TTE (or TEE if indicated)</li>
-                        <li><strong>Vascular:</strong> Carotid duplex, CTA/MRA head and neck</li>
-                        <li><strong>Labs:</strong> Lipids, HbA1c, CBC, BMP, coagulation studies</li>
-                        <li><strong>Extended monitoring:</strong> Holter or implantable loop recorder if cryptogenic</li>
-                    </ul></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Finding AFib</div>
-                    <div class="pathway">AFib found in ~25% of cryptogenic strokes<br>with prolonged monitoring<br><br>CRYSTAL-AF trial: Implantable loop recorder<br>→ Found AFib in 30% at 3 years<br>→ vs 3% with standard monitoring<br><br>Finding AFib changes management:<br>Antiplatelet → Anticoagulation</div></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Hypercoagulability Workup</div>
-                    <p><strong>Consider in:</strong> Young patients, cryptogenic stroke, multiple events, unusual locations, family history</p>
-                    <ul style="margin-left:20px;">
-                        <li>Antiphospholipid antibodies</li>
-                        <li>Factor V Leiden, prothrombin mutation</li>
-                        <li>Protein C, S, antithrombin III</li>
-                        <li>Homocysteine</li>
-                    </ul></div>
-                <button class="btn" onclick="nextStage()">Secondary Prevention →</button>
-            </div></div>`;
-    }
-
-    function renderSecondary() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Secondary Prevention</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Large vessel occlusion = consider thrombectomy (extended window)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Discuss the role of dual antiplatelet therapy in minor stroke/TIA</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Antithrombotic Therapy</div>
-                    <table class="comparison-table">
-                        <tr><th>Etiology</th><th>Treatment</th></tr>
-                        <tr><td><strong>Cardioembolic (AFib)</strong></td><td>Anticoagulation (DOAC preferred)</td></tr>
-                        <tr><td><strong>Large artery atherosclerosis</strong></td><td>Antiplatelet + statin + BP control</td></tr>
-                        <tr><td><strong>Small vessel</strong></td><td>Antiplatelet + risk factor control</td></tr>
-                        <tr><td><strong>Cryptogenic</strong></td><td>Antiplatelet (or anticoag if AFib found)</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 DAPT in Acute Stroke</div>
-                    <div class="pathway"><strong>CHANCE/POINT trials:</strong> ASA + clopidogrel<br>→ Started within 24h of minor stroke/TIA<br>→ 21-90 days of DAPT, then single antiplatelet<br>→ Reduces recurrent stroke<br><br>Only for MINOR stroke (NIHSS ≤3) or TIA!<br>Major stroke + DAPT = increased bleeding risk</div></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Risk Factor Management</div>
-                    <ul style="margin-left:20px;line-height:2;">
-                        <li><strong>BP:</strong> Target <130/80 (after acute phase)</li>
-                        <li><strong>Statin:</strong> High-intensity for all ischemic stroke</li>
-                        <li><strong>Diabetes:</strong> A1c <7%</li>
-                        <li><strong>Smoking cessation</strong></li>
-                        <li><strong>Carotid stenosis ≥70%:</strong> CEA or CAS</li>
-                    </ul></div>
-                
-                <div class="narrative"><p><strong>This patient:</strong> AFib → Start DOAC (after 24h CT rules out hemorrhagic transformation). High-intensity statin. BP control.</p></div>
-                <button class="btn" onclick="nextStage()">Rehabilitation →</button>
-            </div></div>`;
-    }
-
-    function renderRehab() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Rehabilitation</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Time is brain: 1.9 million neurons die per minute in untreated stroke</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When would you use tenecteplase over alteplase?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Wake-up stroke: DWI-FLAIR mismatch can extend treatment window</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Early Mobilization</div>
-                    <ul style="margin-left:20px;line-height:2;">
-                        <li>Start PT/OT within 24-48h if stable</li>
-                        <li>Swallow evaluation before any oral intake</li>
-                        <li>Speech therapy for aphasia/dysarthria</li>
-                        <li>DVT prophylaxis (SCDs, then anticoag when safe)</li>
-                    </ul></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Neuroplasticity</div>
-                    <div class="pathway">Brain can rewire after stroke<br>→ Adjacent areas take over function<br>→ Window for maximum recovery: 3-6 months<br>→ Intensive, repetitive, task-specific therapy<br><br>Constraint-induced movement therapy<br>→ Forces use of affected limb<br>→ Promotes cortical reorganization</div></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Disposition</div>
-                    <table class="comparison-table">
-                        <tr><th>Discharge To</th><th>Criteria</th></tr>
-                        <tr><td>Home</td><td>Mild deficits, good support, safe environment</td></tr>
-                        <tr><td>Acute rehab (IRF)</td><td>Tolerate 3h therapy/day, good potential</td></tr>
-                        <tr><td>Skilled nursing (SNF)</td><td>Need nursing care, less intensive rehab</td></tr>
-                        <tr><td>Long-term acute care (LTAC)</td><td>Medically complex, ventilator dependent</td></tr>
-                    </table></div>
-                <button class="btn" onclick="nextStage()">Complete →</button>
-            </div></div>`;
-    }
-
-    function renderDebrief() {
-        return `<div class="outcome-banner">
-            <div style="font-size:5rem">🏆</div>
-            <div style="font-size:2rem;font-weight:700;color:#4ade80;">Case Complete!</div>
-            <div style="color:#94a3b8;margin-top:8px;">MCA Stroke → tPA + Thrombectomy → Recovery → Secondary Prevention</div>
-        </div>
-        
-        <div class="why-chain"><div class="why-chain-title">🔗 Key WHY Chains</div>
-            <div class="why-item"><div class="why-q">Why is the time window for tPA 4.5 hours?</div>
-                <div class="why-a">Beyond 4.5h, the risk of hemorrhagic transformation exceeds benefit. The ischemic tissue becomes increasingly fragile, and reperfusion can cause bleeding. Earlier treatment = more brain saved = better outcomes.</div></div>
-            <div class="why-item"><div class="why-q">Why can thrombectomy extend to 24 hours?</div>
-                <div class="why-a">Some patients have good collateral circulation that maintains the penumbra longer. Perfusion imaging identifies patients with small core and large penumbra (mismatch) who can still benefit from reperfusion beyond traditional windows.</div></div>
-            <div class="why-item"><div class="why-q">Why DOACs over warfarin for AFib-related stroke?</div>
-                <div class="why-a">DOACs have lower intracranial bleeding risk (the most feared complication), faster onset, no monitoring, and similar or better efficacy for stroke prevention. Major trials (RE-LY, ROCKET-AF, ARISTOTLE) established superiority.</div></div>
-            <div class="why-item"><div class="why-q">Why permissive hypertension without tPA?</div>
-                <div class="why-a">The ischemic penumbra loses autoregulation and becomes pressure-dependent. Lowering BP can decrease perfusion to borderline tissue and extend the infarct. The brain "needs" higher pressure to perfuse through collaterals around the occlusion.</div></div>
-        </div>
-        
-        <div class="tips">
-            <div class="pearl"><div class="tip-header">💎 Pearl</div>
-                <p><strong>Don't let "minor" symptoms delay care.</strong> TIA and minor stroke have 10-15% risk of major stroke within 90 days. ABCD2 score helps stratify, but all need urgent workup.</p></div>
-            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
-                <p><strong>Don't skip glucose check.</strong> Hypoglycemia perfectly mimics stroke. Always check fingerstick before imaging. It's on the stroke protocol for a reason.</p></div>
-        </div>
-        
-        <div class="tips">
-            <div class="pearl"><div class="tip-header">💎 Pearl</div>
-                <p><strong>Thrombectomy NNT = 2.6.</strong> For every ~3 patients treated with thrombectomy for LVO, one has a better outcome. Few interventions in medicine are this effective.</p></div>
-            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
-                <p><strong>Don't delay tPA for thrombectomy workup.</strong> "Drip and ship" - give tPA at the presenting hospital, then transfer for thrombectomy. Every minute counts.</p></div>
-        </div>
-        
-        <button class="btn" onclick="location.reload()">🔄 Restart Case</button>`;
-    }
-
-    function nextStage() { 
-        if (state.stage < STAGES.length - 1) {
-            state.stage++; 
-            render(); 
-            window.scrollTo(0, 0);
-        }
-    }
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
     
-    render();
-    </script>
-
-<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
-<style>
-/* Enhanced Feature Styles */
-.rdx-difficulty-panel {
-    background: white;
-    border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    max-width: 300px;
-}
-.rdx-diff-btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.2s;
-    margin: 2px;
-}
-.rdx-diff-btn.active {
-    background: #3b82f6;
-    color: white;
-}
-.rdx-diff-btn:not(.active) {
-    background: #f1f5f9;
-    color: #475569;
-}
-.rdx-diff-btn:hover:not(.active) {
-    background: #e2e8f0;
-}
-.rdx-refs-panel {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #93c5fd;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 20px auto;
-    max-width: 900px;
-}
-.rdx-refs-title {
-    font-weight: 700;
-    color: #1e40af;
-    margin-bottom: 8px;
-}
-.rdx-refs-links {
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-.rdx-refs-links a {
-    color: #2563eb;
-    text-decoration: none;
-}
-.rdx-refs-links a:hover {
-    text-decoration: underline;
-}
-.rdx-debrief-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-.rdx-debrief-panel {
-    background: white;
-    border-radius: 20px;
-    padding: 32px;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    color: #1f2937;
-}
-.rdx-path-item {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-.rdx-path-optimal {
-    background: #dcfce7;
-    border-left: 4px solid #22c55e;
-}
-.rdx-path-suboptimal {
-    background: #fef9c3;
-    border-left: 4px solid #eab308;
-}
-.rdx-path-wrong {
-    background: #fecaca;
-    border-left: 4px solid #ef4444;
-}
-.rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    display: none;
-}
-.rdx-hint-advanced {
-    background: #fef3c7;
-    border: 1px solid #fcd34d;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    display: none;
-}
-</style>
-
-<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
-    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
-        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
-        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
-    </div>
-</div>
-
-
-<!-- CROSS-PLATFORM LEARNING LINKS -->
-<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../mechanism/stroke-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Stroke</a>
-        </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="tbi-icp-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
-            <a href="spinal-cord-compression-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Spinal Cord Compression</a>
-            <a href="sah-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sah</a>
-        </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
         </div>
     </div>
-</div>
-<!-- END CROSS-PLATFORM LINKS -->
-<div class="rdx-refs-panel" id="rdxRefsPanel">
-    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
-    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211" target="_blank" class="text-blue-600 hover:underline">AHA Stroke Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Stroke</a></div>
-</div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
 
-<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
-    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.heart.org/en/professional/quality-improvement/get-with-the-guidelines/get-with-the-guidelines-stroke" target="_blank" rel="noopener">Stroke Guidelines (AHA)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK499997/" target="_blank" rel="noopener">Ischemic Stroke - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/715/nih-stroke-scale-score-nihss" target="_blank" rel="noopener">NIHSS Calculator (MDCalc)</a>
+    </div>
 </div>
+</div>
+        <div id="scene-container"></div>
+    </div>
 
 <script>
-// ReasonDx Enhanced Features Module
-(function() {
-    // Decision tracking
-    window.rdxDecisionPath = window.rdxDecisionPath || [];
-    window.rdxTotalScore = window.rdxTotalScore || 0;
-    window.rdxMaxScore = window.rdxMaxScore || 0;
-    window.rdxDifficulty = 'intermediate';
-    
-    // Difficulty control
-    window.rdxSetDifficulty = function(level) {
-        window.rdxDifficulty = level;
-        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById('rdx-btn-' + level).classList.add('active');
-        
-        // Update hint visibility
-        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
-            el.style.display = level === 'beginner' ? 'block' : 'none';
-        });
-        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
-            el.style.display = level === 'advanced' ? 'block' : 'none';
-        });
-    };
-    
-    // Track a decision
-    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
-        window.rdxDecisionPath.push({
-            stage: stageId,
-            title: stageTitle,
-            choice: choiceId,
-            choiceText: choiceText,
-            outcome: outcome,
-            points: points,
-            maxPoints: maxPoints,
-            isOptimal: isOptimal,
-            optimalChoice: optimalChoice,
-            optimalText: optimalText
-        });
-        window.rdxTotalScore += points;
-        window.rdxMaxScore += maxPoints;
-    };
-    
-    // Show visual debrief
-    window.rdxShowDebrief = function() {
-        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
-        
-        let grade, gradeColor, gradeEmoji;
-        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
-        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
-        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
-        
-        let pathHTML = '';
-        if (window.rdxDecisionPath.length > 0) {
-            pathHTML = window.rdxDecisionPath.map(d => {
-                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
-                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
-                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
-                return '<div class="' + pathClass + ' rdx-path-item">' +
-                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
-                    '<div>' +
-                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
-                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
-                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
-                    '</div>' +
-                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
-                    '</div></div>';
-            }).join('');
-        } else {
-            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>EMS brings a <span class=\"highlight\">68-year-old right-handed man</span> who was found by his wife with right-sided weakness and difficulty speaking. She reports he was normal when she left for work at 7 AM; she returned at 11 AM to find him on the floor.</p>\n                <p style=\"margin-top:12px;\"><strong>PMH:</strong> Hypertension, atrial fibrillation (not on anticoagulation), type 2 diabetes</p>\n                <p><strong>Time of arrival:</strong> 11:45 AM</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">182/98</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">88 irreg</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">GCS</div><div class=\"vital-value abnormal\">13 (E4V3M6)</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Glucose</div><div class=\"vital-value normal\">142</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What is the \"last known well\" time? Why is this critical in stroke?",
+        "hint_advanced": "He was found at 11 AM but last seen normal at 7 AM. What does this mean for thrombolytic eligibility?",
+        "question": {
+            "prompt": "What is the \"last known well\" (LKW) time for this patient, and why does it matter?",
+            "options": [
+                {
+                    "text": "LKW is 7:00 AM (when wife last saw him normal) - this determines eligibility for time-sensitive reperfusion therapies",
+                    "correct": true
+                },
+                {
+                    "text": "LKW is 11:00 AM (when he was found) - symptoms clearly started after the wife left",
+                    "correct": false
+                },
+                {
+                    "text": "LKW is unknown and cannot be determined without the patient confirming symptom onset",
+                    "correct": false
+                },
+                {
+                    "text": "LKW is not relevant since he is outside the 3-hour window for any intervention",
+                    "correct": false
+                },
+                {
+                    "text": "LKW should be estimated as 9:00 AM (midpoint between 7 AM and 11 AM) for treatment decisions",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "LKW is 7:00 AM - the last time he was KNOWN to be at his baseline. We cannot assume symptoms started at any particular time after that. LKW determines eligibility for thrombolysis (up to 4.5 hours) and thrombectomy (up to 24 hours with appropriate imaging). Time = Brain.",
+                "incorrect": "In stroke, we use the last known well time - when the patient was last seen at their neurological baseline. Since he was normal at 7 AM and found symptomatic at 11 AM, LKW is 7 AM. We cannot assume when symptoms started within that window. This is conservative but necessary for safety."
+            },
+            "teaching": "<h4>\ud83d\udcda \"Time is Brain\" - Last Known Well</h4>\n                    <p><strong>Definition:</strong> Last time patient was witnessed at neurological baseline</p>\n                    <p><strong>Why it matters:</strong></p>\n                    <ul>\n                        <li>~1.9 million neurons die per minute in untreated stroke</li>\n                        <li>LKW determines eligibility for reperfusion therapies</li>\n                        <li>If patient wakes with symptoms (\"wake-up stroke\"), LKW = when they went to sleep</li>\n                    </ul>\n                    <p><strong>Treatment windows from LKW:</strong></p>\n                    <ul>\n                        <li>IV tPA: Up to 4.5 hours</li>\n                        <li>Mechanical thrombectomy: Up to 24 hours (with appropriate imaging selection)</li>\n                    </ul>",
+            "points": 10
         }
-        
-        document.getElementById('rdxDebriefContent').innerHTML = 
-            '<div style="text-align:center;margin-bottom:24px;">' +
-            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
-            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
-            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
-            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
-            '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
-            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
-            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
-            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
-            '</div></div>' +
-            '<div style="display:flex;gap:12px;">' +
-            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
-            '</div>';
-        
-        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
-    };
-    
-    // Auto-inject hint examples into existing content
-    window.rdxInit = function() {
-        // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Stroke Expanded Adventure');
-    };
-    
-    // Initialize on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', window.rdxInit);
-    } else {
-        window.rdxInit();
+    },
+    {
+        "title": "Neurological Examination",
+        "content": "<div class=\"narrative\">\n                <p>You perform a rapid neurological examination:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Eyes:</strong> Gaze preference to the left, right visual field cut</li>\n                    <li><strong>Face:</strong> Right lower facial droop</li>\n                    <li><strong>Motor:</strong> Right arm plegic (0/5), right leg weak (2/5)</li>\n                    <li><strong>Sensory:</strong> Decreased on right side</li>\n                    <li><strong>Language:</strong> Global aphasia (non-fluent, poor comprehension)</li>\n                </ul>\n            </div>",
+        "hint_beginner": "What vascular territory do these findings suggest? What is the NIHSS and why calculate it?",
+        "hint_advanced": "His left gaze preference suggests the lesion is where? How does motor strip organization explain arm > leg weakness?",
+        "question": {
+            "prompt": "Based on the examination, what is the most likely stroke localization?",
+            "options": [
+                {
+                    "text": "Left middle cerebral artery (MCA) territory - left hemisphere signs including aphasia, right-sided weakness (arm > leg), and gaze preference toward the lesion",
+                    "correct": true
+                },
+                {
+                    "text": "Right MCA territory - contralateral weakness with visual field cut",
+                    "correct": false
+                },
+                {
+                    "text": "Left anterior cerebral artery (ACA) - leg weakness greater than arm with cognitive changes",
+                    "correct": false
+                },
+                {
+                    "text": "Posterior circulation (basilar) - multiple cranial nerve findings with bilateral motor weakness",
+                    "correct": false
+                },
+                {
+                    "text": "Left internal carotid artery occlusion - severe presentation must indicate large vessel involvement",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "This is a left MCA syndrome: aphasia (dominant hemisphere = left in right-handed patients), right hemiparesis (arm > leg due to motor homunculus organization - arm representation is in MCA territory), gaze preference toward the lesion (left), right visual field cut, right facial droop. Classic presentation.",
+                "incorrect": "The combination of aphasia (dominant hemisphere) + right-sided weakness + gaze preference to the left localizes to the LEFT hemisphere. In right-handed patients, the left hemisphere is dominant for language. Arm > leg weakness is characteristic of MCA (leg is ACA territory). This is left MCA syndrome."
+            },
+            "teaching": "<h4>\ud83d\udcda MCA Stroke Syndrome</h4>\n                    <table>\n                        <tr><th>Finding</th><th>Explanation</th></tr>\n                        <tr><td>Contralateral hemiparesis (arm > leg)</td><td>Motor strip: arm/face in MCA; leg in ACA territory</td></tr>\n                        <tr><td>Contralateral sensory loss</td><td>Sensory cortex in parietal lobe</td></tr>\n                        <tr><td>Gaze preference toward lesion</td><td>Frontal eye fields push gaze contralaterally</td></tr>\n                        <tr><td>Aphasia (dominant hemisphere)</td><td>Language areas in left hemisphere (95% of right-handers)</td></tr>\n                        <tr><td>Neglect (non-dominant hemisphere)</td><td>Right parietal lesion causes left neglect</td></tr>\n                    </table>\n                    <p><strong>This patient:</strong> Left MCA \u2192 Right deficits + aphasia</p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Emergent Imaging",
+        "content": "<div class=\"narrative\">\n                <p>Stroke code is activated. Patient goes directly to CT scanner.</p>\n                <p style=\"margin-top:12px;\"><strong>Non-contrast CT head:</strong></p>\n                <ul>\n                    <li>No hemorrhage</li>\n                    <li>Subtle hypodensity in left MCA territory</li>\n                    <li>Dense MCA sign (left)</li>\n                    <li>ASPECTS score: 7</li>\n                </ul>\n                <p style=\"margin-top:12px;\"><strong>CT angiography:</strong> Occlusion of left M1 segment (proximal MCA)</p>\n                <p><strong>CT perfusion:</strong> Large penumbra with small core infarct (core ~15 mL, penumbra ~80 mL)</p>\n            </div>",
+        "hint_beginner": "What is the significance of \"no hemorrhage\" on CT? Why is this the first question to answer?",
+        "hint_advanced": "How do ASPECTS score and perfusion mismatch influence thrombectomy eligibility in extended time windows?",
+        "question": {
+            "prompt": "What is the significance of the CT findings for treatment planning?",
+            "options": [
+                {
+                    "text": "Large vessel occlusion (LVO) with favorable perfusion profile (small core, large penumbra) - candidate for thrombectomy despite extended time window",
+                    "correct": true
+                },
+                {
+                    "text": "ASPECTS of 7 indicates too much infarction for any intervention - supportive care only",
+                    "correct": false
+                },
+                {
+                    "text": "Dense MCA sign confirms clot but contraindicates thrombolysis due to high hemorrhage risk",
+                    "correct": false
+                },
+                {
+                    "text": "CT perfusion is only research tool - treatment decisions should be based on time from LKW alone",
+                    "correct": false
+                },
+                {
+                    "text": "Findings support IV tPA alone - thrombectomy not indicated without clinical deterioration",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "This patient has: 1) LVO confirmed on CTA (M1 occlusion), 2) Favorable imaging with small core and large penumbra (salvageable tissue), 3) ASPECTS 7 (\u22656 generally acceptable for thrombectomy). Despite unknown exact onset (LKW 4.75 hrs ago), perfusion imaging shows tissue worth saving \u2192 thrombectomy candidate.",
+                "incorrect": "ASPECTS \u22656 is generally acceptable for thrombectomy. The DAWN and DEFUSE-3 trials showed that perfusion imaging can identify patients who benefit from thrombectomy up to 24 hours from LKW if they have favorable imaging (small core, large penumbra). This patient's profile is favorable for intervention."
+            },
+            "teaching": "<h4>\ud83d\udcda Stroke Imaging for Treatment Selection</h4>\n                    <p><strong>CT Non-contrast:</strong> Rule out hemorrhage (must be done before thrombolysis)</p>\n                    <p><strong>CTA:</strong> Identify large vessel occlusion (LVO)</p>\n                    <p><strong>CT Perfusion / ASPECTS:</strong></p>\n                    <ul>\n                        <li>ASPECTS: 10-point score for early ischemic changes; \u22656 generally favorable</li>\n                        <li>Core: Irreversibly infarcted tissue</li>\n                        <li>Penumbra: At-risk but salvageable tissue</li>\n                        <li>Mismatch: Large penumbra with small core = tissue worth saving</li>\n                    </ul>\n                    <p><strong>Extended window trials (DAWN, DEFUSE-3):</strong> Thrombectomy up to 24h with favorable perfusion imaging</p>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Thrombolysis Decision",
+        "content": "<div class=\"narrative\">\n                <p>Current time: 12:00 PM. LKW: 7:00 AM (5 hours ago).</p>\n                <p style=\"margin-top:12px;\">The stroke team discusses IV alteplase. You review potential contraindications:</p>\n                <ul>\n                    <li>No recent surgery or trauma</li>\n                    <li>No history of intracranial hemorrhage</li>\n                    <li>Not on anticoagulation (patient was supposed to be on warfarin but wasn't taking it)</li>\n                    <li>BP currently 178/94 (was 182/98)</li>\n                    <li>Glucose 142 mg/dL</li>\n                </ul>\n            </div>",
+        "hint_beginner": "What is the time window for IV tPA? Does this patient qualify?",
+        "hint_advanced": "Should you give tPA while preparing for thrombectomy, or skip directly to thrombectomy since he has an LVO?",
+        "question": {
+            "prompt": "Is this patient a candidate for IV thrombolysis (alteplase)?",
+            "options": [
+                {
+                    "text": "No - LKW was 5 hours ago, which is outside the 4.5-hour window for IV tPA; proceed directly to thrombectomy",
+                    "correct": true
+                },
+                {
+                    "text": "Yes - give IV tPA now since any time savings helps, then proceed to thrombectomy (\"drip and ship\")",
+                    "correct": false
+                },
+                {
+                    "text": "No - NIHSS is too high for IV tPA to be effective; should only do thrombectomy for large strokes",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - extended tPA window up to 9 hours applies when perfusion imaging shows salvageable tissue",
+                    "correct": false
+                },
+                {
+                    "text": "No - IV tPA contraindicated in patients with LVO as it delays definitive thrombectomy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "IV tPA window is 4.5 hours from LKW. This patient's LKW is 5 hours ago, so he is outside the tPA window. However, thrombectomy can be performed up to 24 hours with favorable perfusion imaging (DAWN/DEFUSE-3 criteria). Proceed directly to thrombectomy without tPA.",
+                "incorrect": "The IV tPA window is 4.5 hours from last known well time, NOT 9 hours. This patient is outside the window (LKW 5 hours ago). NIHSS does not have an upper limit for tPA eligibility. For LVO within the tPA window, the approach is typically tPA + thrombectomy (bridging), not one or the other."
+            },
+            "teaching": "<h4>\ud83d\udcda Reperfusion Therapy Windows</h4>\n                    <table>\n                        <tr><th>Therapy</th><th>Time Window</th><th>Key Trials</th></tr>\n                        <tr><td>IV Alteplase (tPA)</td><td>0-4.5 hours from LKW</td><td>NINDS, ECASS-III</td></tr>\n                        <tr><td>IV Tenecteplase</td><td>0-4.5 hours (alternative to alteplase)</td><td>Non-inferior to tPA</td></tr>\n                        <tr><td>Mechanical Thrombectomy</td><td>0-6 hours (standard)</td><td>MR CLEAN, SWIFT PRIME, etc.</td></tr>\n                        <tr><td>Thrombectomy (extended)</td><td>6-24 hours with favorable imaging</td><td>DAWN, DEFUSE-3</td></tr>\n                    </table>\n                    <p><strong>This patient:</strong> LKW 5 hours \u2192 Outside tPA window \u2192 Thrombectomy only</p>\n                    <p><em>If within both windows: Give tPA and proceed to thrombectomy (\"bridging therapy\")</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Blood Pressure Management",
+        "content": "<div class=\"narrative\">\n                <p>You're preparing the patient for thrombectomy. The neurointerventionalist will be ready in 15 minutes.</p>\n                <p style=\"margin-top:12px;\"><strong>Current BP:</strong> 184/102 mmHg</p>\n                <p>The nurse asks if you need to treat the blood pressure before the procedure.</p>\n            </div>",
+        "hint_beginner": "What are the BP goals before and after reperfusion therapy in ischemic stroke?",
+        "hint_advanced": "Why is permissive hypertension allowed before reperfusion? How does this change after recanalization?",
+        "question": {
+            "prompt": "What is the appropriate blood pressure management for this patient going to thrombectomy (no tPA)?",
+            "options": [
+                {
+                    "text": "Permissive hypertension acceptable; treat only if BP >220/120 before thrombectomy, then target <180/105 after successful recanalization",
+                    "correct": true
+                },
+                {
+                    "text": "Lower BP to <140/90 immediately to reduce hemorrhagic transformation risk during procedure",
+                    "correct": false
+                },
+                {
+                    "text": "Target BP <180/105 before thrombectomy, same as if patient were receiving IV tPA",
+                    "correct": false
+                },
+                {
+                    "text": "No BP treatment needed - hypertension is protective and should not be treated during acute stroke",
+                    "correct": false
+                },
+                {
+                    "text": "Start nitroprusside drip to achieve rapid BP control before any intervention",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "For patients NOT receiving tPA, permissive hypertension (up to 220/120) is acceptable before reperfusion - the elevated BP helps maintain perfusion to the penumbra. After successful recanalization, target BP <180/105 (some centers target <140 based on recent data) to reduce hemorrhagic transformation risk.",
+                "incorrect": "In acute ischemic stroke without tPA, the penumbra depends on collateral flow which is pressure-dependent. Aggressive BP lowering before reperfusion can worsen ischemia. The threshold for treatment is >220/120 (not 180/105 which is the tPA threshold). After recanalization, tighter control is appropriate."
+            },
+            "teaching": "<h4>\ud83d\udcda Blood Pressure Management in Acute Stroke</h4>\n                    <table>\n                        <tr><th>Scenario</th><th>BP Target</th><th>Rationale</th></tr>\n                        <tr><td>Eligible for tPA</td><td>&lt;185/110 before, &lt;180/105 after</td><td>Reduce hemorrhage risk</td></tr>\n                        <tr><td>Not tPA candidate, pre-reperfusion</td><td>Treat only if &gt;220/120</td><td>Permissive HTN maintains penumbra</td></tr>\n                        <tr><td>Post-recanalization</td><td>&lt;180/105 (or &lt;140 per recent data)</td><td>Reduce hemorrhagic transformation</td></tr>\n                        <tr><td>Hemorrhagic stroke</td><td>&lt;140 systolic</td><td>Reduce hematoma expansion</td></tr>\n                    </table>\n                    <p><strong>This patient:</strong> No tPA, pre-thrombectomy \u2192 Permissive hypertension OK (184/102 is acceptable)</p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Thrombectomy Outcome",
+        "content": "<div class=\"narrative\">\n                <p>Mechanical thrombectomy is performed. The interventionalist reports successful recanalization with TICI 2b/3 flow.</p>\n                <p style=\"margin-top:12px;\"><strong>Post-procedure examination (2 hours later):</strong></p>\n                <ul>\n                    <li>Speech improving - now following some commands, attempting words</li>\n                    <li>Right arm: 2/5 strength (was 0/5)</li>\n                    <li>Right leg: 4/5 strength (was 2/5)</li>\n                    <li>Gaze preference resolved</li>\n                </ul>\n                <p><strong>NIHSS:</strong> Improved from 18 to 10</p>\n            </div>",
+        "hint_beginner": "What does TICI score measure? What is considered successful recanalization?",
+        "hint_advanced": "What complications should you monitor for in the first 24 hours after thrombectomy?",
+        "question": {
+            "prompt": "What is the most important monitoring priority in the first 24 hours post-thrombectomy?",
+            "options": [
+                {
+                    "text": "Frequent neurological checks and BP monitoring for hemorrhagic transformation; maintain BP <180/105; repeat head CT if any decline",
+                    "correct": true
+                },
+                {
+                    "text": "Cardiac telemetry only - the stroke is treated so neurological checks can be spaced out",
+                    "correct": false
+                },
+                {
+                    "text": "Repeat CTA in 6 hours to confirm continued vessel patency and rule out re-occlusion",
+                    "correct": false
+                },
+                {
+                    "text": "Start therapeutic anticoagulation immediately for atrial fibrillation to prevent recurrence",
+                    "correct": false
+                },
+                {
+                    "text": "Physical therapy evaluation within 6 hours to begin aggressive rehabilitation",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "The main risks post-thrombectomy are hemorrhagic transformation and re-occlusion. Frequent neuro checks (q1h initially) detect any decline. Maintain BP <180/105 (tighter targets may be appropriate). Any neurological worsening warrants immediate repeat CT to rule out hemorrhage. Anticoagulation is typically delayed 24-48+ hours.",
+                "incorrect": "Post-thrombectomy monitoring focuses on detecting hemorrhagic transformation (most dangerous complication). Neuro checks should be frequent, not spaced out. Routine repeat CTA is not standard unless clinical concern. Anticoagulation for AFib is delayed (typically 4-14 days depending on infarct size). Early mobilization is good but not the top priority."
+            },
+            "teaching": "<h4>\ud83d\udcda Post-Thrombectomy Management</h4>\n                    <p><strong>Monitoring priorities (first 24 hours):</strong></p>\n                    <ol>\n                        <li>Neurological checks every 1-2 hours</li>\n                        <li>Blood pressure control (&lt;180/105)</li>\n                        <li>Watch for signs of hemorrhage (worsening neuro exam, headache, vomiting)</li>\n                    </ol>\n                    <p><strong>TICI Score (recanalization grade):</strong></p>\n                    <ul>\n                        <li>0: No perfusion</li>\n                        <li>1: Minimal perfusion</li>\n                        <li>2a: Partial filling (&lt;50% territory)</li>\n                        <li>2b: Substantial filling (&gt;50%) - considered successful</li>\n                        <li>3: Complete perfusion - best outcome</li>\n                    </ul>\n                    <p><em>TICI 2b/3 is the goal; associated with better clinical outcomes</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Secondary Prevention",
+        "content": "<div class=\"narrative\">\n                <p>Day 3: The patient continues to improve. MRI confirms left MCA infarct without hemorrhagic transformation. He is now following commands consistently and speaking in short phrases.</p>\n                <p style=\"margin-top:12px;\">The cardiologist confirms atrial fibrillation on telemetry and asks about initiating anticoagulation.</p>\n                <p><strong>Infarct size:</strong> Moderate (estimated 40 mL on MRI)</p>\n            </div>",
+        "hint_beginner": "When is it safe to start anticoagulation after cardioembolic stroke?",
+        "hint_advanced": "What factors determine timing of anticoagulation? What is the \"1-3-6-12 day rule\"?",
+        "question": {
+            "prompt": "When should anticoagulation for atrial fibrillation be initiated in this patient?",
+            "options": [
+                {
+                    "text": "Wait 4-14 days based on infarct size; this moderate infarct suggests starting around day 7, after repeat imaging confirms no hemorrhage",
+                    "correct": true
+                },
+                {
+                    "text": "Start immediately - the stroke was cardioembolic and delay increases recurrence risk",
+                    "correct": false
+                },
+                {
+                    "text": "Wait 30 days for all ischemic strokes before starting anticoagulation",
+                    "correct": false
+                },
+                {
+                    "text": "Use aspirin only for 3 months, then switch to anticoagulation after the acute period",
+                    "correct": false
+                },
+                {
+                    "text": "Start anticoagulation now but at prophylactic dosing, then increase to full dose at 2 weeks",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Timing of anticoagulation after cardioembolic stroke depends on infarct size and hemorrhagic transformation risk. The \"1-3-6-12 rule\" suggests: TIA = day 1, small = day 3, moderate = day 6, large = day 12. For this moderate infarct, waiting 4-14 days (typically around day 7) and confirming no hemorrhage is appropriate.",
+                "incorrect": "Immediate anticoagulation after large ischemic stroke risks hemorrhagic transformation into the infarct. However, prolonged delay increases cardioembolic recurrence risk. The balance depends on infarct size. Common guidance: TIA = 1 day, small = 3 days, moderate = 6-7 days, large = 12-14 days."
+            },
+            "teaching": "<h4>\ud83d\udcda Anticoagulation After Cardioembolic Stroke</h4>\n                    <p><strong>\"1-3-6-12 Day Rule\" (guideline):</strong></p>\n                    <table>\n                        <tr><th>Infarct Size</th><th>Start Anticoagulation</th></tr>\n                        <tr><td>TIA (no infarct)</td><td>Day 1</td></tr>\n                        <tr><td>Small infarct (&lt;1.5 cm)</td><td>Day 3</td></tr>\n                        <tr><td>Moderate infarct</td><td>Day 6-7</td></tr>\n                        <tr><td>Large infarct</td><td>Day 12-14</td></tr>\n                    </table>\n                    <p><strong>Before starting:</strong></p>\n                    <ul>\n                        <li>Repeat CT/MRI to rule out hemorrhagic transformation</li>\n                        <li>Ensure BP controlled</li>\n                        <li>DOACs preferred over warfarin for AFib</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Discharge Planning",
+        "content": "<div class=\"narrative\">\n                <p>Day 7: The patient has continued to improve. He is now ambulatory with assistance and speaking in sentences. Apixaban has been started.</p>\n                <p style=\"margin-top:12px;\">The case manager asks about discharge disposition and secondary prevention plan.</p>\n            </div>",
+        "hint_beginner": "What are the key components of secondary stroke prevention?",
+        "hint_advanced": "What is the evidence for intensive lipid lowering after stroke? What LDL target should you aim for?",
+        "question": {
+            "prompt": "Which secondary prevention regimen is most appropriate for this patient?",
+            "options": [
+                {
+                    "text": "Apixaban for AFib, high-intensity statin (LDL goal <70), BP control targeting <130/80, and inpatient rehabilitation",
+                    "correct": true
+                },
+                {
+                    "text": "Aspirin plus apixaban (triple therapy), moderate-intensity statin, and discharge home with outpatient PT",
+                    "correct": false
+                },
+                {
+                    "text": "Apixaban only - statins and BP medications can be addressed as outpatient to simplify discharge regimen",
+                    "correct": false
+                },
+                {
+                    "text": "Warfarin (INR 2-3), low-intensity statin, and BP target <140/90 with home health follow-up",
+                    "correct": false
+                },
+                {
+                    "text": "Apixaban, statin, carotid endarterectomy evaluation since this was likely large-artery atherosclerosis",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Complete secondary prevention includes: 1) Anticoagulation for AFib (DOAC preferred - apixaban here), 2) High-intensity statin with LDL goal <70 mg/dL (SPARCL trial), 3) BP target <130/80 (SPRINT extended analysis), 4) Inpatient rehab for moderate-severe deficits. Do not add aspirin to anticoagulation (bleeding risk without benefit).",
+                "incorrect": "This is cardioembolic stroke from AFib - anticoagulation alone is appropriate (no aspirin - increases bleeding without benefit). DOACs are preferred over warfarin for non-valvular AFib. High-intensity statin is indicated for all atherosclerotic stroke (even if embolic). Carotid evaluation is not relevant for cardioembolic mechanism."
+            },
+            "teaching": "<h4>\ud83d\udcda Secondary Stroke Prevention</h4>\n                    <p><strong>For cardioembolic stroke (AFib):</strong></p>\n                    <ul>\n                        <li><strong>Anticoagulation:</strong> DOAC preferred (apixaban, rivaroxaban, dabigatran, edoxaban)</li>\n                        <li><strong>No aspirin:</strong> Adding to anticoagulation increases bleeding without reducing stroke</li>\n                    </ul>\n                    <p><strong>For all ischemic stroke:</strong></p>\n                    <ul>\n                        <li><strong>Statin:</strong> High-intensity; LDL goal &lt;70 (some guidelines say &lt;55)</li>\n                        <li><strong>Blood pressure:</strong> Target &lt;130/80 after acute phase</li>\n                        <li><strong>Diabetes:</strong> Optimize glycemic control</li>\n                        <li><strong>Lifestyle:</strong> Smoking cessation, exercise, Mediterranean diet</li>\n                    </ul>\n                    <p><strong>Rehabilitation:</strong> Inpatient rehab for moderate-severe deficits; early mobilization improves outcomes</p>",
+            "points": 10
+        }
     }
-})();
+];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3b82f6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../mechanism/stroke-module.html" class="crossplatform-link">📚 Stroke Pathophysiology</a>
+<a href="delirium-socratic-adventure.html" class="crossplatform-link">🎯 Altered Mental Status</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
 </script>
-<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronic Urticaria - ReasonDx Socratic Case</title>
+    <title>Venom Allergy - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
@@ -385,8 +385,8 @@
         <button onclick="toggleReferences()" class="refs-toggle">▼</button>
     </div>
     <div class="references-content" id="referencesContent">
-        <a href="https://www.aaaai.org/conditions-treatments/related-conditions/hives" target="_blank" rel="noopener">Urticaria - AAAAI (AAAAI)</a>
-<a href="https://www.ncbi.nlm.nih.gov/books/NBK538189/" target="_blank" rel="noopener">Urticaria - StatPearls (StatPearls)</a>
+        <a href="https://www.aaaai.org/conditions-treatments/allergies/insect-allergy" target="_blank" rel="noopener">Venom Allergy - AAAAI (AAAAI)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK518978/" target="_blank" rel="noopener">Hymenoptera Venom Allergy - StatPearls (StatPearls)</a>
     </div>
 </div>
 </div>
@@ -403,187 +403,187 @@ let decisionPath = [];
 
 const stages = [
     {
-        "title": "Initial Presentation",
-        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">34-year-old woman</span> presents with a 4-month history of recurrent hives. The wheals appear daily, last a few hours each, then resolve without scarring, only to reappear elsewhere.</p>\n                <p style=\"margin-top:12px;\"><strong>Characteristics:</strong> Intensely itchy, raised, red welts; worse in evening; no clear trigger identified</p>\n                <p><strong>Associated symptoms:</strong> Occasional lip swelling</p>\n            </div>",
-        "hint_beginner": "What defines chronic urticaria? How long must symptoms persist?",
-        "hint_advanced": "What is the pathophysiology of chronic spontaneous urticaria? What role do autoantibodies play?",
+        "title": "Initial Evaluation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">42-year-old landscaper</span> is referred after a yellow jacket sting 3 weeks ago. He was stung on the arm and within 10 minutes developed generalized hives, facial swelling, and difficulty breathing. He was treated with epinephrine in the ED.</p>\n                <p style=\"margin-top:12px;\"><strong>Past sting history:</strong> Multiple prior stings with only local reactions</p>\n            </div>",
+        "hint_beginner": "What defines a systemic reaction to insect sting? What are large local reactions?",
+        "hint_advanced": "How does sting reaction severity predict future risk? What is the natural history?",
         "question": {
-            "prompt": "Based on the 4-month history without identifiable trigger, what is the most likely diagnosis?",
+            "prompt": "How would you classify this patient's sting reaction?",
             "options": [
                 {
-                    "text": "Chronic spontaneous urticaria (CSU) - daily or near-daily hives for more than 6 weeks without identifiable external trigger",
+                    "text": "Systemic anaphylaxis - generalized symptoms (hives, angioedema, respiratory) beyond the sting site indicates IgE-mediated systemic reaction",
                     "correct": true
                 },
                 {
-                    "text": "Acute urticaria with prolonged course - need to identify the allergic trigger causing symptoms",
+                    "text": "Large local reaction - any significant swelling after a sting is classified as large local",
                     "correct": false
                 },
                 {
-                    "text": "Chronic inducible urticaria - symptoms must be triggered by physical stimuli",
+                    "text": "Toxic reaction - symptoms from venom toxicity rather than allergic mechanism",
                     "correct": false
                 },
                 {
-                    "text": "Urticarial vasculitis - any urticaria lasting more than 6 weeks",
+                    "text": "Delayed reaction - symptoms occurring more than a few minutes after sting",
                     "correct": false
                 },
                 {
-                    "text": "Mast cell activation syndrome - recurrent urticaria always indicates systemic mastocytosis",
+                    "text": "Normal reaction - hives and swelling are expected responses to Hymenoptera venom",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "Chronic spontaneous urticaria (CSU) is defined as hives occurring for more than 6 weeks without an identifiable external trigger. Individual wheals are transient (lasting <24 hours) but new ones continue to appear. CSU affects ~1% of population and is often autoimmune in etiology.",
-                "incorrect": "After 6 weeks, urticaria is classified as chronic. Without identifiable trigger (food, drug, infection), this is chronic SPONTANEOUS urticaria (CSU). Inducible urticaria requires specific physical trigger. Urticarial vasculitis lesions last >24 hours and may leave bruising."
+                "correct": "This is systemic anaphylaxis: symptoms BEYOND the sting site (generalized hives, facial angioedema, respiratory symptoms) occurring within minutes. Large local reactions are defined as swelling >10 cm at the sting site. His prior local-only reactions then systemic reaction shows progression typical of IgE-mediated allergy.",
+                "incorrect": "Systemic reaction = symptoms beyond the sting site. This patient had generalized hives (not just at sting site), facial swelling, and respiratory symptoms - clear systemic anaphylaxis. Large local reactions are extensive swelling AT the sting site, not distant symptoms."
             },
-            "teaching": "<h4>\ud83d\udcda Urticaria Classification</h4>\n                    <table>\n                        <tr><th>Type</th><th>Duration</th><th>Cause</th></tr>\n                        <tr><td>Acute</td><td>Less than 6 weeks</td><td>Often identifiable (infection, drug, food)</td></tr>\n                        <tr><td>Chronic Spontaneous (CSU)</td><td>More than 6 weeks</td><td>No identifiable external trigger; often autoimmune</td></tr>\n                        <tr><td>Chronic Inducible</td><td>More than 6 weeks</td><td>Physical trigger (cold, pressure, dermatographism)</td></tr>\n                    </table>\n                    <p><strong>CSU pathophysiology:</strong> ~40-50% have autoantibodies (anti-IgE or anti-Fc\u03b5RI) causing mast cell activation</p>",
+            "teaching": "<h4>\ud83d\udcda Classification of Insect Sting Reactions</h4>\n                    <table>\n                        <tr><th>Type</th><th>Description</th><th>Future Risk</th></tr>\n                        <tr><td>Normal</td><td>Pain, small local swelling less than 5cm</td><td>Low risk</td></tr>\n                        <tr><td>Large Local</td><td>Swelling greater than 10cm at sting site, peaks 24-48h</td><td>~5-10% systemic reaction risk</td></tr>\n                        <tr><td>Systemic (mild)</td><td>Isolated cutaneous symptoms (hives, angioedema)</td><td>Variable</td></tr>\n                        <tr><td><strong>Systemic (anaphylaxis)</strong></td><td>Multi-organ: respiratory, cardiovascular, GI</td><td>30-60% if re-stung</td></tr>\n                    </table>",
             "points": 10
         }
     },
     {
-        "title": "Diagnostic Workup",
-        "content": "<div class=\"narrative\">\n                <p>You consider what testing, if any, is indicated for this patient with likely CSU.</p>\n                <p style=\"margin-top:12px;\"><strong>Review of systems:</strong> No fevers, no joint pain, no weight loss, no other skin lesions</p>\n                <p><strong>Individual wheal duration:</strong> Each lesion lasts 2-6 hours</p>\n            </div>",
-        "hint_beginner": "Is extensive laboratory testing indicated in typical chronic urticaria?",
-        "hint_advanced": "What findings would prompt you to biopsy a lesion and test for urticarial vasculitis?",
+        "title": "Risk Assessment",
+        "content": "<div class=\"narrative\">\n                <p>You discuss future sting risk with the patient. He is concerned because his job puts him at high exposure risk.</p>\n                <p style=\"margin-top:12px;\"><strong>Additional history:</strong> No history of mastocytosis or elevated baseline tryptase. No cardiovascular disease. No beta-blocker or ACE inhibitor use.</p>\n            </div>",
+        "hint_beginner": "What is the risk of anaphylaxis with future stings after systemic reaction?",
+        "hint_advanced": "What factors increase risk of severe/fatal anaphylaxis from insect stings?",
         "question": {
-            "prompt": "What initial laboratory workup is indicated for this patient?",
+            "prompt": "What is his approximate risk of systemic reaction if stung again without treatment?",
             "options": [
                 {
-                    "text": "Limited testing only - CBC with differential and possibly TSH and CRP; extensive allergy panels are not indicated in typical CSU",
+                    "text": "30-60% risk of systemic reaction with future stings; severity may be similar or worse",
                     "correct": true
                 },
                 {
-                    "text": "Comprehensive allergy testing - food panels, drug panels, and environmental allergen testing",
+                    "text": "Greater than 90% risk - virtually certain to have another reaction",
                     "correct": false
                 },
                 {
-                    "text": "No testing needed - chronic urticaria is a clinical diagnosis and labs are never helpful",
+                    "text": "Less than 5% - most people outgrow venom allergy naturally",
                     "correct": false
                 },
                 {
-                    "text": "Skin biopsy required for all chronic urticaria to rule out vasculitis",
+                    "text": "100% risk of reaction but always milder with each subsequent sting",
                     "correct": false
                 },
                 {
-                    "text": "Serum tryptase and 24-hour urine histamine to evaluate for mastocytosis",
+                    "text": "Risk cannot be estimated without venom-specific IgE levels",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "For typical CSU, extensive workup has low yield. Guidelines suggest limited testing: CBC (eosinophilia, infection), possibly TSH (thyroid autoimmunity associated), CRP/ESR if vasculitis suspected. Allergy testing is NOT indicated - CSU is not caused by allergen exposure. Biopsy only if lesions last >24 hours or are painful/bruising.",
-                "incorrect": "Extensive allergy testing is not indicated for CSU - it is not IgE-mediated allergic disease. Limited labs (CBC, maybe TSH) are reasonable. Biopsy is reserved for suspected urticarial vasculitis (lesions >24h, painful, leave bruising). Tryptase only if systemic symptoms suggest mastocytosis."
+                "correct": "After a systemic anaphylactic reaction, the risk of systemic reaction with future stings is approximately 30-60%. The severity is unpredictable - may be similar, milder, or more severe. Risk factors for fatal anaphylaxis include: older age, cardiovascular disease, mast cell disorders, beta-blocker/ACE-I use.",
+                "incorrect": "The recurrence risk after systemic anaphylaxis is 30-60%, not higher or lower. Natural resolution occurs in children more than adults. The risk and severity cannot be predicted by IgE levels. This substantial risk is why venom immunotherapy is so important."
             },
-            "teaching": "<h4>\ud83d\udcda Workup for Chronic Urticaria</h4>\n                    <p><strong>Recommended (limited):</strong></p>\n                    <ul>\n                        <li>CBC with differential</li>\n                        <li>Consider: TSH, CRP/ESR</li>\n                    </ul>\n                    <p><strong>NOT recommended routinely:</strong></p>\n                    <ul>\n                        <li>Allergy skin testing or IgE panels</li>\n                        <li>Extensive autoimmune panels</li>\n                        <li>Infection workup (unless history suggests)</li>\n                        <li>Skin biopsy (unless vasculitis suspected)</li>\n                    </ul>\n                    <p><strong>Biopsy indications:</strong> Lesions last >24h, painful (not itchy), leave bruising/hyperpigmentation</p>",
+            "teaching": "<h4>\ud83d\udcda Risk Factors for Severe Venom Anaphylaxis</h4>\n                    <p><strong>Patient factors:</strong></p>\n                    <ul>\n                        <li>Older age</li>\n                        <li>Cardiovascular disease</li>\n                        <li>Mast cell disorders (mastocytosis, elevated baseline tryptase)</li>\n                        <li>Beta-blocker or ACE inhibitor use</li>\n                    </ul>\n                    <p><strong>Reaction factors:</strong></p>\n                    <ul>\n                        <li>Rapid onset (less than 5 minutes)</li>\n                        <li>Prior severe reaction</li>\n                        <li>Multiple simultaneous stings</li>\n                    </ul>\n                    <p><em>Baseline tryptase should be checked in all venom anaphylaxis patients to screen for mastocytosis</em></p>",
             "points": 10
         }
     },
     {
-        "title": "First-Line Treatment",
-        "content": "<div class=\"narrative\">\n                <p>Labs are unremarkable. You initiate treatment.</p>\n                <p style=\"margin-top:12px;\"><strong>Patient question:</strong> \"I've been taking Benadryl but it makes me so drowsy I can't function. Is there something better?\"</p>\n            </div>",
-        "hint_beginner": "What is first-line treatment for chronic urticaria? First vs second generation antihistamines?",
-        "hint_advanced": "Up to what dose of second-generation antihistamines can be used for CSU?",
+        "title": "Diagnostic Testing",
+        "content": "<div class=\"narrative\">\n                <p>You proceed with diagnostic workup to confirm venom sensitivity and guide immunotherapy.</p>\n            </div>",
+        "hint_beginner": "What testing is done to confirm venom allergy?",
+        "hint_advanced": "How do skin testing and serum IgE compare? What if skin test is negative shortly after reaction?",
         "question": {
-            "prompt": "What is the most appropriate first-line treatment?",
+            "prompt": "What testing approach is most appropriate?",
             "options": [
                 {
-                    "text": "Second-generation H1 antihistamine (cetirizine, loratadine, fexofenadine) at standard dose, can uptitrate to 4x standard dose if needed",
+                    "text": "Skin testing to Hymenoptera venoms (and/or serum venom-specific IgE); test 4-6 weeks after reaction for accurate results",
                     "correct": true
                 },
                 {
-                    "text": "First-generation antihistamine (diphenhydramine) around the clock for better mast cell stabilization",
+                    "text": "Serum total IgE level is sufficient to confirm venom allergy",
                     "correct": false
                 },
                 {
-                    "text": "Oral corticosteroids as first-line for chronic urticaria to control inflammation",
+                    "text": "Component-resolved diagnostics (CRD) has replaced skin testing for venom allergy",
                     "correct": false
                 },
                 {
-                    "text": "Omalizumab injection as initial therapy for all chronic urticaria",
+                    "text": "Testing should be done within 1 week while IgE levels are highest",
                     "correct": false
                 },
                 {
-                    "text": "Epinephrine auto-injector prescription since urticaria can progress to anaphylaxis",
+                    "text": "Clinical history alone is sufficient; testing not needed if reaction was clearly to insect sting",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "Second-generation (non-sedating) H1 antihistamines are first-line for CSU. Start at standard dose, but guidelines allow uptitration up to 4x the standard dose (e.g., cetirizine 40mg daily) before adding other agents. First-gen antihistamines are avoided due to sedation and anticholinergic effects.",
-                "incorrect": "Second-generation antihistamines are first-line. Key point: can use up to 4x standard dose (e.g., cetirizine 10mg \u2192 up to 40mg daily). First-generation agents cause sedation. Steroids are for short-term flares only, not maintenance. Omalizumab is third-line after antihistamine failure."
+                "correct": "Skin testing is the gold standard for venom allergy diagnosis (high sensitivity and specificity). Serum specific IgE can supplement or substitute if skin testing not available. Wait 4-6 weeks after reaction - IgE can be consumed during acute reaction causing false negatives. Test to relevant venoms: yellow jacket, honeybee, wasp, hornet.",
+                "incorrect": "Testing confirms IgE-mediated sensitivity and identifies specific venoms for immunotherapy. Total IgE is not useful. CRD is emerging but not standard of care. Test 4-6 weeks after reaction (not immediately) to avoid false negatives from IgE consumption. Testing confirms indication for VIT."
             },
-            "teaching": "<h4>\ud83d\udcda CSU Treatment Stepladder</h4>\n                    <p><strong>Step 1:</strong> Second-generation H1 antihistamine at standard dose</p>\n                    <p><strong>Step 2:</strong> Increase to 2-4x standard dose</p>\n                    <p><strong>Step 3:</strong> Add omalizumab (anti-IgE) OR cyclosporine</p>\n                    <p><strong>Examples of updosing:</strong></p>\n                    <ul>\n                        <li>Cetirizine: 10mg \u2192 20mg \u2192 40mg daily</li>\n                        <li>Fexofenadine: 180mg \u2192 360mg daily</li>\n                    </ul>\n                    <p><em>Corticosteroids: Only for short-term flare management (max 10 days), not maintenance</em></p>",
+            "teaching": "<h4>\ud83d\udcda Venom Allergy Testing</h4>\n                    <p><strong>Testing options:</strong></p>\n                    <ul>\n                        <li><strong>Skin testing:</strong> Gold standard; intradermal testing to venom extracts</li>\n                        <li><strong>Serum specific IgE:</strong> Alternative if skin testing unavailable</li>\n                    </ul>\n                    <p><strong>Timing:</strong> Wait 4-6 weeks after reaction</p>\n                    <p><strong>Venoms tested (Hymenoptera):</strong></p>\n                    <ul>\n                        <li>Yellow jacket (most common culprit)</li>\n                        <li>Honeybee</li>\n                        <li>Wasp (Polistes)</li>\n                        <li>Hornet</li>\n                    </ul>\n                    <p><em>If skin test negative with convincing history, check serum specific IgE or repeat testing in 3-6 months</em></p>",
             "points": 10
         }
     },
     {
-        "title": "Refractory Disease",
-        "content": "<div class=\"narrative\">\n                <p>After 6 weeks on cetirizine 40mg daily (4x dose), she still has daily hives affecting her quality of life.</p>\n                <p style=\"margin-top:12px;\"><strong>Urticaria Activity Score (UAS7):</strong> 32 (severe; scale 0-42)</p>\n            </div>",
-        "hint_beginner": "What is the next step when high-dose antihistamines fail?",
-        "hint_advanced": "How does omalizumab work in CSU? What is the response rate and time to effect?",
+        "title": "Venom Immunotherapy",
+        "content": "<div class=\"narrative\">\n                <p>Skin testing is positive to yellow jacket and wasp venom. You discuss venom immunotherapy (VIT).</p>\n            </div>",
+        "hint_beginner": "What is the efficacy of venom immunotherapy? How long is it given?",
+        "hint_advanced": "Who should receive lifelong VIT? What are the maintenance protocols?",
         "question": {
-            "prompt": "What is the most appropriate next step for this patient with antihistamine-refractory CSU?",
+            "prompt": "What do you tell the patient about venom immunotherapy?",
             "options": [
                 {
-                    "text": "Add omalizumab (anti-IgE antibody) - FDA approved for CSU, given as monthly injection",
+                    "text": "VIT is 95-98% effective in preventing systemic reactions; typically given for 5 years with option to extend for high-risk patients",
                     "correct": true
                 },
                 {
-                    "text": "Start chronic oral prednisone for ongoing disease control",
+                    "text": "VIT is experimental and not yet standard of care for venom allergy",
                     "correct": false
                 },
                 {
-                    "text": "Add H2 blocker (famotidine) to H1 blocker for synergistic effect",
+                    "text": "VIT must be continued lifelong in all patients to maintain protection",
                     "correct": false
                 },
                 {
-                    "text": "Discontinue antihistamines and switch to leukotriene receptor antagonist monotherapy",
+                    "text": "VIT only reduces severity but does not prevent systemic reactions",
                     "correct": false
                 },
                 {
-                    "text": "Refer for allergen immunotherapy since antihistamines have failed",
+                    "text": "VIT is only indicated for patients who have had multiple anaphylactic reactions",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "Omalizumab (anti-IgE monoclonal antibody) is approved for antihistamine-refractory CSU. It is given as a 300mg subcutaneous injection monthly. ~70% of patients respond, often within the first 1-2 months. It works by reducing free IgE and downregulating mast cell responsiveness.",
-                "incorrect": "Omalizumab is the guideline-recommended third-line agent for CSU after antihistamine uptitration fails. Chronic steroids are inappropriate due to side effects. H2 blockers have minimal evidence. Leukotriene antagonists are weak add-on at best. Immunotherapy is for allergic disease, not CSU."
+                "correct": "VIT is highly effective (95-98% protection) and is THE most effective immunotherapy we have in allergy. Standard duration is 5 years of maintenance injections. Can consider lifelong therapy for: very severe reaction (hypotension/LOC), mast cell disorder, or after reaction despite VIT. Can stop and continue carrying epinephrine.",
+                "incorrect": "VIT is standard of care and the most effective immunotherapy known - 95-98% protection vs 30-60% risk if untreated. Indicated after single systemic reaction, not multiple. Standard duration is 5 years, not lifelong for most patients."
             },
-            "teaching": "<h4>\ud83d\udcda Omalizumab for CSU</h4>\n                    <p><strong>Mechanism:</strong> Binds free IgE, downregulates Fc\u03b5RI on mast cells</p>\n                    <p><strong>Dosing:</strong> 300mg subcutaneous monthly (fixed dose, not weight-based like for asthma)</p>\n                    <p><strong>Efficacy:</strong> ~70% response rate; many have complete response</p>\n                    <p><strong>Time to effect:</strong> Often within 1-2 months; assess response at 3-6 months</p>\n                    <p><strong>Duration:</strong> Typically continue 6-12 months, then trial off; many patients can discontinue successfully</p>",
+            "teaching": "<h4>\ud83d\udcda Venom Immunotherapy (VIT)</h4>\n                    <p><strong>Efficacy:</strong> 95-98% protection from systemic reactions</p>\n                    <p><strong>Indications:</strong></p>\n                    <ul>\n                        <li>Systemic reaction + positive venom testing</li>\n                        <li>Large local reactions: consider if quality of life impaired</li>\n                    </ul>\n                    <p><strong>Protocol:</strong></p>\n                    <ul>\n                        <li>Build-up phase: weekly injections (conventional or rush/cluster)</li>\n                        <li>Maintenance: 100 mcg monthly for 5 years</li>\n                    </ul>\n                    <p><strong>Consider extended/lifelong VIT if:</strong></p>\n                    <ul>\n                        <li>Severe reaction (hypotension, LOC)</li>\n                        <li>Mast cell disorder</li>\n                        <li>Reaction despite VIT</li>\n                    </ul>",
             "points": 15
         }
     },
     {
-        "title": "Distinguishing Vasculitis",
-        "content": "<div class=\"narrative\">\n                <p>Your next patient has a different presentation: A <span class=\"highlight\">48-year-old woman</span> with skin lesions she calls \"hives\" for 2 months.</p>\n                <p style=\"margin-top:12px;\"><strong>Key differences:</strong></p>\n                <ul>\n                    <li>Individual lesions last 2-3 days</li>\n                    <li>Lesions are painful/burning rather than itchy</li>\n                    <li>Lesions leave brownish discoloration when they resolve</li>\n                    <li>Associated joint pain and low-grade fevers</li>\n                </ul>\n            </div>",
-        "hint_beginner": "What features distinguish urticarial vasculitis from ordinary urticaria?",
-        "hint_advanced": "What systemic diseases can present with urticarial vasculitis?",
+        "title": "Special Circumstance",
+        "content": "<div class=\"narrative\">\n                <p>Your next patient is a <span class=\"highlight\">55-year-old beekeeper</span> who had anaphylaxis to honeybee sting. He wants to continue beekeeping.</p>\n                <p style=\"margin-top:12px;\"><strong>Baseline tryptase:</strong> 18 ng/mL (normal less than 11.4)</p>\n            </div>",
+        "hint_beginner": "What does elevated baseline tryptase suggest?",
+        "hint_advanced": "How does mastocytosis affect venom allergy management?",
         "question": {
-            "prompt": "What is the most likely diagnosis and appropriate next step?",
+            "prompt": "What is the significance of the elevated baseline tryptase?",
             "options": [
                 {
-                    "text": "Urticarial vasculitis - skin biopsy indicated to confirm; workup for systemic disease (complement levels, ANA, hepatitis serologies)",
+                    "text": "Suggests underlying mastocytosis; increases risk of severe/fatal anaphylaxis; VIT should be lifelong and he may need additional workup",
                     "correct": true
                 },
                 {
-                    "text": "Severe chronic spontaneous urticaria - increase antihistamine dose to 4x",
+                    "text": "Normal finding after anaphylaxis; no clinical significance",
                     "correct": false
                 },
                 {
-                    "text": "Mastocytosis - check serum tryptase immediately",
+                    "text": "Indicates he is not a candidate for VIT due to high reaction risk",
                     "correct": false
                 },
                 {
-                    "text": "Drug-induced urticaria - detailed medication history is the only workup needed",
+                    "text": "Means his venom allergy will resolve faster and VIT duration can be shortened",
                     "correct": false
                 },
                 {
-                    "text": "Atypical CSU presentation - treat empirically with omalizumab",
+                    "text": "Indicates he should avoid beekeeping regardless of whether he receives VIT",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "This presentation suggests urticarial vasculitis, NOT typical urticaria. Red flags: lesions lasting >24 hours, painful/burning (not itchy), residual hyperpigmentation (purpura), systemic symptoms. Biopsy shows leukocytoclastic vasculitis. Workup for underlying cause: complement (hypocomplementemic UV associated with SLE), ANA, hepatitis.",
-                "incorrect": "These features distinguish urticarial vasculitis from CSU: lesion duration >24h, painful not itchy, leaves bruising/pigmentation, systemic symptoms. This requires biopsy and systemic workup. Treatment differs significantly - immunosuppressives often needed, not just antihistamines."
+                "correct": "Elevated baseline tryptase (>11.4 ng/mL) suggests underlying mast cell disorder (mastocytosis). This is a risk factor for severe/fatal venom anaphylaxis. He needs: 1) Additional workup for mastocytosis (bone marrow biopsy if tryptase >20 or other features), 2) Lifelong VIT (not just 5 years), 3) Can continue beekeeping with VIT protection.",
+                "incorrect": "Baseline tryptase (not drawn during acute reaction) that is elevated suggests mastocytosis. This significantly increases risk of fatal anaphylaxis and changes management - VIT should be lifelong. He is actually a candidate who NEEDS VIT more than typical patients."
             },
-            "teaching": "<h4>\ud83d\udcda Urticaria vs Urticarial Vasculitis</h4>\n                    <table>\n                        <tr><th>Feature</th><th>Urticaria</th><th>Urticarial Vasculitis</th></tr>\n                        <tr><td>Lesion duration</td><td>Less than 24 hours</td><td>Greater than 24 hours</td></tr>\n                        <tr><td>Sensation</td><td>Pruritic (itchy)</td><td>Painful/burning</td></tr>\n                        <tr><td>Resolution</td><td>No residual marks</td><td>Bruising/hyperpigmentation</td></tr>\n                        <tr><td>Systemic symptoms</td><td>Absent</td><td>May have fever, arthralgia</td></tr>\n                        <tr><td>Biopsy</td><td>Dermal edema, no vasculitis</td><td>Leukocytoclastic vasculitis</td></tr>\n                    </table>\n                    <p><strong>UV workup:</strong> Biopsy, complement levels (C3, C4, CH50), ANA, hepatitis B/C serologies</p>",
+            "teaching": "<h4>\ud83d\udcda Venom Allergy and Mastocytosis</h4>\n                    <p><strong>Key points:</strong></p>\n                    <ul>\n                        <li>Check baseline tryptase in ALL venom anaphylaxis patients</li>\n                        <li>Elevated tryptase (greater than 11.4 ng/mL): suggests mastocytosis</li>\n                        <li>Mastocytosis + venom allergy: highest risk population for fatal anaphylaxis</li>\n                    </ul>\n                    <p><strong>Management if elevated tryptase:</strong></p>\n                    <ul>\n                        <li>Hematology referral for mastocytosis workup</li>\n                        <li>Bone marrow biopsy if tryptase greater than 20 or clinical features</li>\n                        <li>Lifelong VIT (no stopping after 5 years)</li>\n                        <li>May continue high-risk occupation WITH VIT protection</li>\n                    </ul>",
             "points": 10
         }
     }
@@ -866,8 +866,8 @@ function showCompletion() {
             <div class="crossplatform">
                 <h4>🎯 Continue Learning</h4>
                 <div class="crossplatform-links">
-                    <a href="../mechanism/urticaria-module.html" class="crossplatform-link">📚 Urticaria Pathophysiology</a>
-<a href="angioedema-socratic-adventure.html" class="crossplatform-link">🎯 Angioedema</a>
+                    <a href="../mechanism/vit-module.html" class="crossplatform-link">📚 Venom Immunotherapy</a>
+<a href="anaphylaxis-socratic-adventure.html" class="crossplatform-link">🎯 Anaphylaxis</a>
 
                 </div>
             </div>
