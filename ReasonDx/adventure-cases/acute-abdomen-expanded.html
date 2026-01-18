@@ -105,6 +105,95 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
+
+/* EPA Badge Styles */
+.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.epa-badge { 
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
+}
+.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
+.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
+
+/* Confidence Slider Styles */
+.confidence-container {
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    display: none;
+}
+.confidence-container.show { display: block; }
+.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.confidence-icon { font-size: 1.2rem; }
+.confidence-label { font-weight: 600; color: #e2e8f0; }
+.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
+.confidence-slider {
+    width: 100%; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
+}
+.confidence-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
+.confidence-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white; border: none; border-radius: 8px;
+    font-weight: 600; font-size: 1rem; cursor: pointer;
+}
+.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Calibration Feedback */
+.calibration-feedback {
+    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
+    display: none; font-size: 0.9rem;
+}
+.calibration-feedback.show { display: block; }
+.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
+.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
+.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
+
+/* Process Feedback Styles */
+.process-feedback {
+    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+    display: none;
+}
+.process-feedback.show { display: block; }
+.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
+
+/* Selected option before submit */
+.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
+
+/* EPA Progress in Debrief */
+.epa-debrief-section { margin: 24px 0; }
+.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
+.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
+.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
+.epa-progress-card .epa-score.high { color: #22c55e; }
+.epa-progress-card .epa-score.medium { color: #f59e0b; }
+.epa-progress-card .epa-score.low { color: #ef4444; }
+
+/* Calibration Chart in Debrief */
+.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
+.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
+.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
+.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
+.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
+.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
+.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
+
 </style>
 </head>
 <body>
@@ -129,6 +218,25 @@
 </div>
 </div>
         <div id="scene-container"></div>
+
+<!-- Confidence Slider -->
+<div class="confidence-container" id="confidence-container">
+    <div class="confidence-header">
+        <span class="confidence-icon">🎯</span>
+        <span class="confidence-label">How confident are you in your answer?</span>
+    </div>
+    <div class="confidence-slider-wrapper">
+        <input type="range" class="confidence-slider" id="confidence-slider" 
+               min="0" max="100" value="50" 
+               oninput="updateConfidenceDisplay(this.value)">
+        <div class="confidence-labels">
+            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
+        </div>
+    </div>
+    <div class="confidence-value" id="confidence-display">50%</div>
+    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
+</div>
+
     </div>
     <script>
     let decisionPath = [];
@@ -136,7 +244,10 @@ let currentStage = 0, score = 0, difficulty = 'standard';
     const stages = [
     {
         title: "Peritonitis: The Surgical Abdomen",
-        content: `<div class="narrative"><p>A <span class="highlight">45-year-old man</span> presents with severe abdominal pain that woke him from sleep. The pain started suddenly 4 hours ago and has been constant. He lies very still on the stretcher.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 115, BP 100/70, T 38.5°C, RR 24<br><strong>Exam:</strong> Rigid abdomen, diffuse tenderness, rebound and guarding in all quadrants, absent bowel sounds</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A <span class="highlight">45-year-old man</span> presents with severe abdominal pain that woke him from sleep. The pain started suddenly 4 hours ago and has been constant. He lies very still on the stretcher.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 115, BP 100/70, T 38.5°C, RR 24<br><strong>Exam:</strong> Rigid abdomen, diffuse tenderness, rebound and guarding in all quadrants, absent bowel sounds</p></div>
         <div class="alert-box"><div class="alert-title">🚨 Classic "Surgical Abdomen"</div><p>Lying still, rigid abdomen, diffuse peritoneal signs = generalized peritonitis requiring emergent surgery.</p></div>
         <div class="socratic-prompt"><h4>Pattern Recognition</h4><p>What distinguishes peritoneal irritation from visceral pain, and why does the patient lie still?</p></div>`,
         hint_beginner: "Movement exacerbates parietal peritoneal irritation. Visceral pain causes writhing.",
@@ -170,7 +281,10 @@ PARIETAL/PERITONEAL PAIN:
     },
     {
         title: "Mesenteric Ischemia: Pain Out of Proportion",
-        content: `<div class="narrative"><p>A <span class="highlight">78-year-old woman</span> presents with sudden severe abdominal pain for 2 hours. PMH includes HTN, CHF, and <span class="critical">atrial fibrillation (on rate control, not anticoagulated due to fall risk)</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 110 (irregular), BP 150/90, T 99.0°F<br><strong>Exam:</strong> Writhing in pain, very distressed. <span class="highlight">Abdomen: SOFT, mildly tender</span>, NO peritoneal signs, bowel sounds present<br><strong>Labs:</strong> WBC 14K, <span class="critical">lactate 4.5</span>, pH 7.28</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A <span class="highlight">78-year-old woman</span> presents with sudden severe abdominal pain for 2 hours. PMH includes HTN, CHF, and <span class="critical">atrial fibrillation (on rate control, not anticoagulated due to fall risk)</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 110 (irregular), BP 150/90, T 99.0°F<br><strong>Exam:</strong> Writhing in pain, very distressed. <span class="highlight">Abdomen: SOFT, mildly tender</span>, NO peritoneal signs, bowel sounds present<br><strong>Labs:</strong> WBC 14K, <span class="critical">lactate 4.5</span>, pH 7.28</p></div>
         <div class="alert-box"><div class="alert-title">🚨 "Pain Out of Proportion to Exam"</div><p>Severe pain + soft abdomen + AFib + elevated lactate = Mesenteric ischemia until proven otherwise!</p></div>
         <div class="socratic-prompt"><h4>The Dangerous Trap</h4><p>Why is the soft abdomen misleading, and why is this presentation an emergency?</p></div>`,
         hint_beginner: "Early ischemia affects only the inner layers of bowel wall. Peritoneum isn't involved yet.",
@@ -204,7 +318,10 @@ Later: Full-thickness necrosis
     },
     {
         title: "Perforated Viscus",
-        content: `<div class="narrative"><p>A <span class="highlight">62-year-old man</span> with known peptic ulcer disease presents with sudden-onset severe epigastric pain that rapidly became diffuse. He describes it as <span class="critical">"like being stabbed"</span> 6 hours ago.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 120, BP 90/60, T 38.8°C, RR 28<br><strong>Exam:</strong> Board-like rigidity, diffuse tenderness, absent bowel sounds<br><strong>CXR:</strong> <span class="critical">Free air under diaphragm</span></p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A <span class="highlight">62-year-old man</span> with known peptic ulcer disease presents with sudden-onset severe epigastric pain that rapidly became diffuse. He describes it as <span class="critical">"like being stabbed"</span> 6 hours ago.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 120, BP 90/60, T 38.8°C, RR 28<br><strong>Exam:</strong> Board-like rigidity, diffuse tenderness, absent bowel sounds<br><strong>CXR:</strong> <span class="critical">Free air under diaphragm</span></p></div>
         <div class="socratic-prompt"><h4>Pneumoperitoneum</h4><p>What does free air signify and what are the causes?</p></div>`,
         hint_beginner: "Free air under the diaphragm = perforation of a hollow viscus until proven otherwise.",
         hint_advanced: "What percentage of perforations show free air on upright CXR?",
@@ -228,7 +345,10 @@ Later: Full-thickness necrosis
     },
     {
         title: "Appendicitis: The Classic Teaching Case",
-        content: `<div class="narrative"><p>A <span class="highlight">25-year-old man</span> presents with 18 hours of abdominal pain. It started as vague periumbilical discomfort, then <span class="highlight">migrated to the RLQ</span>. He has anorexia, nausea, and one episode of vomiting.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 95, BP 125/80, T 38.2°C<br><strong>Exam:</strong> RLQ tenderness with guarding, positive Rovsing's sign, psoas sign positive</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A <span class="highlight">25-year-old man</span> presents with 18 hours of abdominal pain. It started as vague periumbilical discomfort, then <span class="highlight">migrated to the RLQ</span>. He has anorexia, nausea, and one episode of vomiting.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 95, BP 125/80, T 38.2°C<br><strong>Exam:</strong> RLQ tenderness with guarding, positive Rovsing's sign, psoas sign positive</p></div>
         <div class="socratic-prompt"><h4>Classic Presentation</h4><p>Why does appendicitis pain start periumbilical and then migrate to RLQ?</p></div>`,
         hint_beginner: "Visceral pain (early) is poorly localized. Parietal pain (later) is well-localized.",
         hint_advanced: "What is the pathophysiology of each classic appendicitis sign?",
@@ -262,7 +382,10 @@ If untreated: Perforation → Peritonitis</div></div>`,
     },
     {
         title: "Bowel Obstruction: SBO vs LBO",
-        content: `<div class="narrative"><p>A <span class="highlight">55-year-old woman</span> with prior appendectomy presents with crampy abdominal pain, vomiting, distension, and inability to pass gas or stool for 24 hours.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 105, BP 130/85, T 99.2°F<br><strong>Exam:</strong> Distended abdomen, diffuse tenderness, no peritoneal signs, <span class="highlight">high-pitched tinkling bowel sounds with rushes</span></p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A <span class="highlight">55-year-old woman</span> with prior appendectomy presents with crampy abdominal pain, vomiting, distension, and inability to pass gas or stool for 24 hours.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 105, BP 130/85, T 99.2°F<br><strong>Exam:</strong> Distended abdomen, diffuse tenderness, no peritoneal signs, <span class="highlight">high-pitched tinkling bowel sounds with rushes</span></p></div>
         <div class="socratic-prompt"><h4>Obstruction Pattern</h4><p>How do you distinguish SBO from LBO, and what are the concerning features for strangulation?</p></div>`,
         hint_beginner: "Prior surgery = adhesions = SBO. High-pitched sounds = bowel trying to push past obstruction.",
         hint_advanced: "What CT findings suggest strangulation requiring emergent surgery?",
@@ -286,7 +409,10 @@ If untreated: Perforation → Peritonitis</div></div>`,
     },
     {
         title: "Large Bowel Obstruction: The Cecal Concern",
-        content: `<div class="narrative"><p>A <span class="highlight">72-year-old man</span> presents with 4 days of progressive distension, crampy pain, and no bowel movement. He reports blood mixed with stool over 2 months.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 95, BP 140/85, T 98.8°F<br><strong>Exam:</strong> Markedly distended, tympanitic abdomen, mild tenderness, no peritoneal signs<br><strong>CT:</strong> Dilated colon to 8cm with abrupt cutoff at sigmoid, <span class="critical">mass at transition point</span></p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A <span class="highlight">72-year-old man</span> presents with 4 days of progressive distension, crampy pain, and no bowel movement. He reports blood mixed with stool over 2 months.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 95, BP 140/85, T 98.8°F<br><strong>Exam:</strong> Markedly distended, tympanitic abdomen, mild tenderness, no peritoneal signs<br><strong>CT:</strong> Dilated colon to 8cm with abrupt cutoff at sigmoid, <span class="critical">mass at transition point</span></p></div>
         <div class="socratic-prompt"><h4>Closed-Loop Concern</h4><p>Why is cecal diameter the critical measurement in LBO, and what determines if this is a closed-loop?</p></div>`,
         hint_beginner: "If ileocecal valve is competent, colon can't decompress backward = closed-loop.",
         hint_advanced: "What is the Law of Laplace and why is the cecum at highest perforation risk?",
@@ -324,7 +450,10 @@ Cecum >12cm = HIGH PERFORATION RISK
     },
     {
         title: "Abdominal Pain by Location",
-        content: `<div class="narrative"><p>A systematic approach to abdominal pain uses anatomical location to generate a differential diagnosis.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>A systematic approach to abdominal pain uses anatomical location to generate a differential diagnosis.</p></div>
         <div class="socratic-prompt"><h4>Anatomical Framework</h4><p>How does pain location help narrow the differential, and what are the classic conditions for each quadrant?</p></div>`,
         hint_beginner: "Match the organ to the quadrant: liver/gallbladder (RUQ), spleen (LUQ), appendix/ovary (RLQ), sigmoid/ovary (LLQ).",
         hint_advanced: "What referred pain patterns can mislead you (e.g., Kehr's sign)?",
@@ -348,7 +477,10 @@ Cecum >12cm = HIGH PERFORATION RISK
     },
     {
         title: "Case Resolution: Surgical Decision-Making",
-        content: `<div class="narrative"><p>You've now evaluated several acute abdominal presentations. The key is recognizing which patients need emergent surgery vs. which can be managed conservatively or need further workup.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Gather H&P</span>
+        </div><div class="narrative"><p>You've now evaluated several acute abdominal presentations. The key is recognizing which patients need emergent surgery vs. which can be managed conservatively or need further workup.</p></div>
         <div class="mechanism-box"><div class="mechanism-title">📚 Acute Abdomen Algorithm</div><div class="pathway">Acute Abdominal Pain
     ↓
 Assess stability (ABCs, vitals, lactate)
@@ -538,6 +670,224 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
+
+
+
+// ============================================================================
+// EPA & CALIBRATION ENHANCEMENT - ReasonDx
+// ============================================================================
+
+// Case EPA Metadata
+const caseEPA = {
+    id: 'acute-abdomen',
+    primaryEPAs: ["EPA-2","EPA-3","EPA-1"],
+    secondaryEPAs: ["EPA-10","EPA-4"],
+    category: 'Gastroenterology'
+};
+
+// Response tracking for calibration
+let responseHistory = [];
+let pendingSelection = null;
+
+// EPA Names for display
+const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
+
+// Override selectOption to add confidence step
+const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
+
+function selectOptionEnhanced(index, correct) {
+    const qId = 'q' + currentStage;
+    if (answeredQuestions.has(qId)) return;
+    
+    // Store pending selection
+    pendingSelection = { index, correct, stageIdx: currentStage };
+    
+    // Highlight selected option
+    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if (i === index) opt.classList.add('selected');
+    });
+    
+    // Show confidence slider
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) {
+        confContainer.classList.add('show');
+        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function updateConfidenceDisplay(value) {
+    const display = document.getElementById('confidence-display');
+    if (display) display.textContent = value + '%';
+}
+
+function submitWithConfidence() {
+    if (!pendingSelection) return;
+    
+    const confidence = parseInt(document.getElementById('confidence-slider').value);
+    const { index, correct, stageIdx } = pendingSelection;
+    const stage = stages[stageIdx];
+    
+    // Record response with confidence
+    responseHistory.push({
+        stage: stageIdx + 1,
+        stageTitle: stage.title,
+        epaFocus: caseEPA.primaryEPAs[0],
+        selectedIndex: index,
+        selectedText: stage.question.options[index].text,
+        correct: correct,
+        confidence: confidence,
+        points: correct ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Hide confidence container
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) confContainer.classList.remove('show');
+    
+    // Now process the answer (call original logic)
+    const qId = 'q' + stageIdx;
+    answeredQuestions.add(qId);
+    decisionPath[stageIdx] = index;
+    
+    maxScore += stage.question.points;
+    if (correct) score += stage.question.points;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    // Show calibration feedback
+    showCalibrationFeedback(confidence, correct);
+    
+    pendingSelection = null;
+    renderStage();
+}
+
+function showCalibrationFeedback(confidence, correct) {
+    // This will be shown in the feedback section after render
+    const feedback = document.createElement('div');
+    feedback.className = 'calibration-feedback show';
+    
+    if (correct && confidence >= 70) {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
+    } else if (correct && confidence < 50) {
+        feedback.classList.add('underconfident');
+        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
+    } else if (!correct && confidence >= 70) {
+        feedback.classList.add('overconfident');
+        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
+    } else {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
+    }
+    
+    // Store for rendering
+    window.lastCalibrationFeedback = feedback.outerHTML;
+}
+
+// Enhanced debrief with EPA and calibration
+function showEnhancedDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    const content = document.getElementById('debriefContent');
+    if (!overlay || !content) return;
+    
+    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    
+    // Calculate calibration
+    const withConf = responseHistory.filter(r => r.confidence !== undefined);
+    const correctWithConf = withConf.filter(r => r.correct);
+    const incorrectWithConf = withConf.filter(r => !r.correct);
+    const avgConfCorrect = correctWithConf.length > 0 
+        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
+    const avgConfIncorrect = incorrectWithConf.length > 0 
+        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
+    
+    // EPA performance
+    const epaPerf = {};
+    responseHistory.forEach(r => {
+        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
+        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
+        epaPerf[epa].total++;
+        if (r.correct) epaPerf[epa].correct++;
+    });
+    
+    // Calibration interpretation
+    let calibrationMsg = '';
+    if (avgConfCorrect - avgConfIncorrect > 20) {
+        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
+    } else if (avgConfIncorrect > 60) {
+        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
+    } else {
+        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
+    }
+    
+    content.innerHTML = `
+        <div style="text-align:center;margin-bottom:24px;">
+            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
+            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
+            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
+        </div>
+        
+        <div class="epa-debrief-section">
+            <h4>📋 EPA Competencies Assessed</h4>
+            <div class="epa-progress-grid">
+                ${Object.entries(epaPerf).map(([epa, data]) => {
+                    const pct = Math.round((data.correct / data.total) * 100);
+                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
+                    return `<div class="epa-progress-card">
+                        <div class="epa-name">${epaNames[epa] || epa}</div>
+                        <div class="epa-score ${colorClass}">${pct}%</div>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>
+        
+        <div class="calibration-debrief">
+            <h4>🎯 Confidence Calibration</h4>
+            <div class="calibration-stats">
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
+                    <div class="stat-label">Avg confidence when correct</div>
+                </div>
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
+                    <div class="stat-label">Avg confidence when incorrect</div>
+                </div>
+            </div>
+            <div class="calibration-interpretation">${calibrationMsg}</div>
+        </div>
+        
+        <div class="decision-path">
+            <h3>📝 Your Decisions</h3>
+            ${responseHistory.map(r => `
+                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
+                    <div style="display:flex;justify-content:space-between;">
+                        <div>
+                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
+                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
+                        </div>
+                        <div class="path-points">${r.points}/${r.maxPoints}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+// Replace selectOption globally
+window.selectOption = selectOptionEnhanced;
+
+// Store original showDebrief if exists
+if (typeof showDebrief === 'function') {
+    window.originalShowDebrief = showDebrief;
+}
+window.showDebrief = showEnhancedDebrief;
 
 </script>
 

@@ -103,6 +103,95 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
+
+/* EPA Badge Styles */
+.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.epa-badge { 
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
+}
+.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
+.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
+
+/* Confidence Slider Styles */
+.confidence-container {
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    display: none;
+}
+.confidence-container.show { display: block; }
+.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.confidence-icon { font-size: 1.2rem; }
+.confidence-label { font-weight: 600; color: #e2e8f0; }
+.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
+.confidence-slider {
+    width: 100%; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
+}
+.confidence-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
+.confidence-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white; border: none; border-radius: 8px;
+    font-weight: 600; font-size: 1rem; cursor: pointer;
+}
+.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Calibration Feedback */
+.calibration-feedback {
+    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
+    display: none; font-size: 0.9rem;
+}
+.calibration-feedback.show { display: block; }
+.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
+.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
+.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
+
+/* Process Feedback Styles */
+.process-feedback {
+    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+    display: none;
+}
+.process-feedback.show { display: block; }
+.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
+
+/* Selected option before submit */
+.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
+
+/* EPA Progress in Debrief */
+.epa-debrief-section { margin: 24px 0; }
+.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
+.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
+.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
+.epa-progress-card .epa-score.high { color: #22c55e; }
+.epa-progress-card .epa-score.medium { color: #f59e0b; }
+.epa-progress-card .epa-score.low { color: #ef4444; }
+
+/* Calibration Chart in Debrief */
+.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
+.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
+.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
+.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
+.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
+.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
+.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
+
 </style>
 </head>
 <body>
@@ -128,6 +217,25 @@
 </div>
 </div>
         <div id="scene-container"></div>
+
+<!-- Confidence Slider -->
+<div class="confidence-container" id="confidence-container">
+    <div class="confidence-header">
+        <span class="confidence-icon">🎯</span>
+        <span class="confidence-label">How confident are you in your answer?</span>
+    </div>
+    <div class="confidence-slider-wrapper">
+        <input type="range" class="confidence-slider" id="confidence-slider" 
+               min="0" max="100" value="50" 
+               oninput="updateConfidenceDisplay(this.value)">
+        <div class="confidence-labels">
+            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
+        </div>
+    </div>
+    <div class="confidence-value" id="confidence-display">50%</div>
+    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
+</div>
+
     </div>
 <script>
 let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
@@ -135,7 +243,10 @@ let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answered
 const stages = [
     {
         title: "The Swollen Leg",
-        content: `<div class="narrative"><p>A <span class="highlight">52-year-old woman</span> presents with <span class="critical">unilateral left leg swelling and pain</span> × 3 days. She had knee replacement surgery 2 weeks ago.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>A <span class="highlight">52-year-old woman</span> presents with <span class="critical">unilateral left leg swelling and pain</span> × 3 days. She had knee replacement surgery 2 weeks ago.</p></div>
         <div class="socratic-prompt"><h4>Clinical Probability Assessment</h4><p>Before any testing, you need to estimate pretest probability. What validated scoring system helps determine likelihood of DVT?</p></div>`,
         hint_beginner: "Wells criteria for DVT - different from Wells for PE!",
         hint_advanced: "How does pretest probability affect your use of D-dimer?",
@@ -158,7 +269,10 @@ const stages = [
     },
     {
         title: "Risk Assessment",
-        content: `<div class="narrative"><p>Wells Score calculation:<br>• Recent surgery (+1)<br>• Tenderness along deep veins (+1)<br>• Entire leg swollen (+1)<br>• Calf >3cm larger (+1)<br>• Pitting edema (+1)<br>• Alternative diagnosis less likely (+3)</p><p><strong>Total: 8 points = DVT LIKELY</strong></p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Wells Score calculation:<br>• Recent surgery (+1)<br>• Tenderness along deep veins (+1)<br>• Entire leg swollen (+1)<br>• Calf >3cm larger (+1)<br>• Pitting edema (+1)<br>• Alternative diagnosis less likely (+3)</p><p><strong>Total: 8 points = DVT LIKELY</strong></p></div>
         <div class="socratic-prompt"><h4>Testing Strategy</h4><p>With Wells ≥2 (DVT likely), what is the most appropriate INITIAL diagnostic test?</p></div>`,
         hint_beginner: "High pretest probability = go to definitive imaging, not D-dimer.",
         hint_advanced: "What's the sensitivity of D-dimer? Why can't it rule IN DVT?",
@@ -188,7 +302,10 @@ Pretest LOW + D-dimer NEGATIVE</div></div>`,
     },
     {
         title: "Imaging Findings",
-        content: `<div class="narrative"><p>Compression ultrasound result:<br><strong>Positive:</strong> Non-compressible left common femoral and popliteal veins consistent with acute DVT.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Compression ultrasound result:<br><strong>Positive:</strong> Non-compressible left common femoral and popliteal veins consistent with acute DVT.</p></div>
         <div class="socratic-prompt"><h4>Anatomic Considerations</h4><p>The DVT extends from common femoral to popliteal vein. This is "proximal" DVT. Why does anatomic location matter for management and prognosis?</p></div>`,
         hint_beginner: "Proximal DVT (above knee) has higher PE risk than distal (calf) DVT.",
         hint_advanced: "What percentage of untreated proximal DVT will cause PE?",
@@ -211,7 +328,10 @@ Pretest LOW + D-dimer NEGATIVE</div></div>`,
     },
     {
         title: "Anticoagulation Choice",
-        content: `<div class="narrative"><p>You decide to anticoagulate. She has no contraindications, normal renal function, and BMI 28. She prefers to avoid injections.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You decide to anticoagulate. She has no contraindications, normal renal function, and BMI 28. She prefers to avoid injections.</p></div>
         <div class="socratic-prompt"><h4>Treatment Selection</h4><p>Multiple anticoagulation options exist for DVT. What are the advantages of DOACs over warfarin for VTE treatment?</p></div>`,
         hint_beginner: "DOACs: No INR monitoring, fixed dosing, fewer drug interactions.",
         hint_advanced: "Which patients should NOT get DOACs for VTE?",
@@ -234,7 +354,10 @@ Pretest LOW + D-dimer NEGATIVE</div></div>`,
     },
     {
         title: "Duration of Therapy",
-        content: `<div class="narrative"><p>You start rivaroxaban. Now you need to determine treatment duration.</p><p style="margin-top:12px;">Her DVT was provoked by surgery (major transient risk factor).</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You start rivaroxaban. Now you need to determine treatment duration.</p><p style="margin-top:12px;">Her DVT was provoked by surgery (major transient risk factor).</p></div>
         <div class="socratic-prompt"><h4>Treatment Duration</h4><p>The cause of VTE affects treatment duration. What's the difference between provoked, unprovoked, and recurrent VTE in terms of anticoagulation duration?</p></div>`,
         hint_beginner: "Provoked = transient risk factor (surgery, immobilization). Unprovoked = no clear cause.",
         hint_advanced: "What's the recurrence rate after stopping anticoagulation for unprovoked VTE?",
@@ -257,7 +380,10 @@ Pretest LOW + D-dimer NEGATIVE</div></div>`,
     },
     {
         title: "Complications - Phlegmasia",
-        content: `<div class="narrative"><p>Different patient: 45-year-old man with <span class="critical">massive left leg swelling, severe pain, and cyanotic discoloration</span>. Pulses are diminished.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Different patient: 45-year-old man with <span class="critical">massive left leg swelling, severe pain, and cyanotic discoloration</span>. Pulses are diminished.</p></div>
         <div class="socratic-prompt"><h4>Limb-Threatening DVT</h4><p>This presentation is much more severe than typical DVT. What is phlegmasia cerulea dolens, and why is it an emergency?</p></div>`,
         hint_beginner: "Phlegmasia = massive DVT causing venous outflow obstruction so severe it threatens arterial flow.",
         hint_advanced: "What's the difference between phlegmasia alba dolens and cerulea dolens?",
@@ -280,7 +406,10 @@ Pretest LOW + D-dimer NEGATIVE</div></div>`,
     },
     {
         title: "Case Summary",
-        content: `<div class="narrative"><p>Excellent work on DVT management!</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Excellent work on DVT management!</p></div>
         <div class="mechanism-box"><div class="mechanism-title">🎯 Key Takeaways</div><div class="pathway">1. Wells score stratifies pretest probability
 2. Low probability → D-dimer first
 3. High probability → Ultrasound directly
@@ -313,7 +442,10 @@ Pretest LOW + D-dimer NEGATIVE</div></div>`,
 ,
     {
         title: "Key Takeaways",
-        content: `<div class="narrative"><p>Let's consolidate the key learning points from this case.</p></div>`,
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Let's consolidate the key learning points from this case.</p></div>`,
         hint_beginner: "Think about the most important concepts for your practice.",
         hint_advanced: "How will this case change your clinical approach?",
         question: {
@@ -448,6 +580,224 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
+
+
+
+// ============================================================================
+// EPA & CALIBRATION ENHANCEMENT - ReasonDx
+// ============================================================================
+
+// Case EPA Metadata
+const caseEPA = {
+    id: 'dvt',
+    primaryEPAs: ["EPA-2","EPA-3","EPA-4"],
+    secondaryEPAs: ["EPA-1"],
+    category: 'Hematology'
+};
+
+// Response tracking for calibration
+let responseHistory = [];
+let pendingSelection = null;
+
+// EPA Names for display
+const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
+
+// Override selectOption to add confidence step
+const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
+
+function selectOptionEnhanced(index, correct) {
+    const qId = 'q' + currentStage;
+    if (answeredQuestions.has(qId)) return;
+    
+    // Store pending selection
+    pendingSelection = { index, correct, stageIdx: currentStage };
+    
+    // Highlight selected option
+    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if (i === index) opt.classList.add('selected');
+    });
+    
+    // Show confidence slider
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) {
+        confContainer.classList.add('show');
+        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function updateConfidenceDisplay(value) {
+    const display = document.getElementById('confidence-display');
+    if (display) display.textContent = value + '%';
+}
+
+function submitWithConfidence() {
+    if (!pendingSelection) return;
+    
+    const confidence = parseInt(document.getElementById('confidence-slider').value);
+    const { index, correct, stageIdx } = pendingSelection;
+    const stage = stages[stageIdx];
+    
+    // Record response with confidence
+    responseHistory.push({
+        stage: stageIdx + 1,
+        stageTitle: stage.title,
+        epaFocus: caseEPA.primaryEPAs[0],
+        selectedIndex: index,
+        selectedText: stage.question.options[index].text,
+        correct: correct,
+        confidence: confidence,
+        points: correct ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Hide confidence container
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) confContainer.classList.remove('show');
+    
+    // Now process the answer (call original logic)
+    const qId = 'q' + stageIdx;
+    answeredQuestions.add(qId);
+    decisionPath[stageIdx] = index;
+    
+    maxScore += stage.question.points;
+    if (correct) score += stage.question.points;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    // Show calibration feedback
+    showCalibrationFeedback(confidence, correct);
+    
+    pendingSelection = null;
+    renderStage();
+}
+
+function showCalibrationFeedback(confidence, correct) {
+    // This will be shown in the feedback section after render
+    const feedback = document.createElement('div');
+    feedback.className = 'calibration-feedback show';
+    
+    if (correct && confidence >= 70) {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
+    } else if (correct && confidence < 50) {
+        feedback.classList.add('underconfident');
+        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
+    } else if (!correct && confidence >= 70) {
+        feedback.classList.add('overconfident');
+        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
+    } else {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
+    }
+    
+    // Store for rendering
+    window.lastCalibrationFeedback = feedback.outerHTML;
+}
+
+// Enhanced debrief with EPA and calibration
+function showEnhancedDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    const content = document.getElementById('debriefContent');
+    if (!overlay || !content) return;
+    
+    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    
+    // Calculate calibration
+    const withConf = responseHistory.filter(r => r.confidence !== undefined);
+    const correctWithConf = withConf.filter(r => r.correct);
+    const incorrectWithConf = withConf.filter(r => !r.correct);
+    const avgConfCorrect = correctWithConf.length > 0 
+        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
+    const avgConfIncorrect = incorrectWithConf.length > 0 
+        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
+    
+    // EPA performance
+    const epaPerf = {};
+    responseHistory.forEach(r => {
+        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
+        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
+        epaPerf[epa].total++;
+        if (r.correct) epaPerf[epa].correct++;
+    });
+    
+    // Calibration interpretation
+    let calibrationMsg = '';
+    if (avgConfCorrect - avgConfIncorrect > 20) {
+        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
+    } else if (avgConfIncorrect > 60) {
+        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
+    } else {
+        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
+    }
+    
+    content.innerHTML = `
+        <div style="text-align:center;margin-bottom:24px;">
+            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
+            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
+            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
+        </div>
+        
+        <div class="epa-debrief-section">
+            <h4>📋 EPA Competencies Assessed</h4>
+            <div class="epa-progress-grid">
+                ${Object.entries(epaPerf).map(([epa, data]) => {
+                    const pct = Math.round((data.correct / data.total) * 100);
+                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
+                    return `<div class="epa-progress-card">
+                        <div class="epa-name">${epaNames[epa] || epa}</div>
+                        <div class="epa-score ${colorClass}">${pct}%</div>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>
+        
+        <div class="calibration-debrief">
+            <h4>🎯 Confidence Calibration</h4>
+            <div class="calibration-stats">
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
+                    <div class="stat-label">Avg confidence when correct</div>
+                </div>
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
+                    <div class="stat-label">Avg confidence when incorrect</div>
+                </div>
+            </div>
+            <div class="calibration-interpretation">${calibrationMsg}</div>
+        </div>
+        
+        <div class="decision-path">
+            <h3>📝 Your Decisions</h3>
+            ${responseHistory.map(r => `
+                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
+                    <div style="display:flex;justify-content:space-between;">
+                        <div>
+                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
+                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
+                        </div>
+                        <div class="path-points">${r.points}/${r.maxPoints}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+// Replace selectOption globally
+window.selectOption = selectOptionEnhanced;
+
+// Store original showDebrief if exists
+if (typeof showDebrief === 'function') {
+    window.originalShowDebrief = showDebrief;
+}
+window.showDebrief = showEnhancedDebrief;
 
 </script>
 
