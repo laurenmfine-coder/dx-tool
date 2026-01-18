@@ -103,6 +103,95 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
+
+/* EPA Badge Styles */
+.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.epa-badge { 
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
+}
+.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
+.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
+
+/* Confidence Slider Styles */
+.confidence-container {
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    display: none;
+}
+.confidence-container.show { display: block; }
+.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.confidence-icon { font-size: 1.2rem; }
+.confidence-label { font-weight: 600; color: #e2e8f0; }
+.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
+.confidence-slider {
+    width: 100%; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
+}
+.confidence-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
+.confidence-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white; border: none; border-radius: 8px;
+    font-weight: 600; font-size: 1rem; cursor: pointer;
+}
+.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Calibration Feedback */
+.calibration-feedback {
+    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
+    display: none; font-size: 0.9rem;
+}
+.calibration-feedback.show { display: block; }
+.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
+.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
+.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
+
+/* Process Feedback Styles */
+.process-feedback {
+    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+    display: none;
+}
+.process-feedback.show { display: block; }
+.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
+
+/* Selected option before submit */
+.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
+
+/* EPA Progress in Debrief */
+.epa-debrief-section { margin: 24px 0; }
+.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
+.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
+.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
+.epa-progress-card .epa-score.high { color: #22c55e; }
+.epa-progress-card .epa-score.medium { color: #f59e0b; }
+.epa-progress-card .epa-score.low { color: #ef4444; }
+
+/* Calibration Chart in Debrief */
+.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
+.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
+.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
+.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
+.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
+.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
+.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
+
 </style>
 </head>
 <body>
@@ -129,6 +218,25 @@
 </div>
 </div>
         <div id="scene-container"></div>
+
+<!-- Confidence Slider -->
+<div class="confidence-container" id="confidence-container">
+    <div class="confidence-header">
+        <span class="confidence-icon">🎯</span>
+        <span class="confidence-label">How confident are you in your answer?</span>
+    </div>
+    <div class="confidence-slider-wrapper">
+        <input type="range" class="confidence-slider" id="confidence-slider" 
+               min="0" max="100" value="50" 
+               oninput="updateConfidenceDisplay(this.value)">
+        <div class="confidence-labels">
+            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
+        </div>
+    </div>
+    <div class="confidence-value" id="confidence-display">50%</div>
+    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
+</div>
+
     
 <!-- Platform Recommendations -->
 <div class="platform-panel">
@@ -143,7 +251,10 @@ let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answered
 const stages = [
     {
         title: "The Septic Patient",
-        content: `<div class="narrative"><p>A <span class="highlight">68-year-old woman</span> with diabetes is brought from a nursing home with <span class="critical">fever, confusion, and hypotension</span>. Vitals: T 39.2°C, HR 118, BP 82/48, RR 26, SpO2 92% on RA.</p><p>She's confused, with CVA tenderness and a foley catheter in place. Labs show <span class="critical">WBC 18,000, Cr 2.8 (baseline 1.0), lactate 4.8</span>.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>A <span class="highlight">68-year-old woman</span> with diabetes is brought from a nursing home with <span class="critical">fever, confusion, and hypotension</span>. Vitals: T 39.2°C, HR 118, BP 82/48, RR 26, SpO2 92% on RA.</p><p>She's confused, with CVA tenderness and a foley catheter in place. Labs show <span class="critical">WBC 18,000, Cr 2.8 (baseline 1.0), lactate 4.8</span>.</p></div>
         <div class="socratic-prompt"><h4>Recognition Challenge</h4><p>This patient has infection (likely UTI) plus organ dysfunction. The old SIRS criteria are OUT. What is the current definition of sepsis according to Sepsis-3?</p></div>`,
         hint_beginner: "Sepsis-3 (2016) replaced SIRS criteria with organ dysfunction measured by SOFA score.",
         hint_advanced: "How do the definitions of sepsis vs septic shock differ in terms of prognostic implications?",
@@ -166,7 +277,10 @@ const stages = [
     },
     {
         title: "The First Hour",
-        content: `<div class="narrative"><p>You recognize this as <span class="critical">septic shock</span>. Time is critical - <strong>each hour of delay in antibiotics increases mortality ~7.6%</strong>.</p><p>The Hour-1 Bundle must be initiated immediately.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You recognize this as <span class="critical">septic shock</span>. Time is critical - <strong>each hour of delay in antibiotics increases mortality ~7.6%</strong>.</p><p>The Hour-1 Bundle must be initiated immediately.</p></div>
         <div class="socratic-prompt"><h4>Bundle Elements</h4><p>What are the 5 components of the Hour-1 Bundle that must ALL be initiated within 1 hour of sepsis recognition?</p></div>`,
         hint_beginner: "Think: Lactate, Cultures, Antibiotics, Fluids, Vasopressors (if needed)",
         hint_advanced: "What's the evidence behind the 1-hour timing? What if cultures delay antibiotics?",
@@ -189,7 +303,10 @@ const stages = [
     },
     {
         title: "Fluid Resuscitation",
-        content: `<div class="narrative"><p>The nurse asks how much fluid to give. The patient weighs 70 kg.</p><p>Current guideline: <span class="highlight">30 mL/kg crystalloid</span> for hypotension or lactate ≥4.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>The nurse asks how much fluid to give. The patient weighs 70 kg.</p><p>Current guideline: <span class="highlight">30 mL/kg crystalloid</span> for hypotension or lactate ≥4.</p></div>
         <div class="socratic-prompt"><h4>Fluid Choice</h4><p>What crystalloid should you choose for initial resuscitation, and why does it matter?</p></div>`,
         hint_beginner: "Balanced crystalloids (LR, Plasmalyte) vs Normal Saline - which causes less kidney injury?",
         hint_advanced: "What does the SMART trial tell us about crystalloid choice in sepsis?",
@@ -219,7 +336,10 @@ SMART trial (2018): Balanced crystalloids
     },
     {
         title: "Vasopressor Selection",
-        content: `<div class="narrative"><p>After 2L crystalloid, BP remains 78/44 (MAP 55). The patient needs <span class="critical">vasopressors</span> to maintain perfusion.</p><p>You must choose the right agent and target.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>After 2L crystalloid, BP remains 78/44 (MAP 55). The patient needs <span class="critical">vasopressors</span> to maintain perfusion.</p><p>You must choose the right agent and target.</p></div>
         <div class="socratic-prompt"><h4>First-Line Agent</h4><p>What is the FIRST-LINE vasopressor in septic shock and why?</p></div>`,
         hint_beginner: "Norepinephrine is first-line. Think about the primary problem in septic shock - vasodilation.",
         hint_advanced: "When do you add vasopressin? What's the mechanism and dose?",
@@ -242,7 +362,10 @@ SMART trial (2018): Balanced crystalloids
     },
     {
         title: "Antibiotic Selection",
-        content: `<div class="narrative"><p>You suspect <span class="highlight">urosepsis</span> given the foley catheter and CVA tenderness, but can't rule out other sources. The patient was in a nursing home.</p><p>Empiric antibiotics must cover all likely pathogens.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You suspect <span class="highlight">urosepsis</span> given the foley catheter and CVA tenderness, but can't rule out other sources. The patient was in a nursing home.</p><p>Empiric antibiotics must cover all likely pathogens.</p></div>
         <div class="socratic-prompt"><h4>Coverage Decisions</h4><p>What empiric antibiotic regimen provides appropriate coverage for this nursing home patient with likely urosepsis?</p></div>`,
         hint_beginner: "Need to cover: Gram-negatives (including Pseudomonas in nursing home patients), Gram-positives including MRSA, and some anaerobes.",
         hint_advanced: "How do you decide between pip-tazo vs meropenem? When must you add MRSA coverage?",
@@ -265,7 +388,10 @@ SMART trial (2018): Balanced crystalloids
     },
     {
         title: "Source Control",
-        content: `<div class="narrative"><p>Antibiotics alone cannot cure sepsis if there's an ongoing source. CT abdomen shows a <span class="critical">perinephric abscess</span> on the left, likely from ascending UTI.</p><p>The foley has already been exchanged.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Antibiotics alone cannot cure sepsis if there's an ongoing source. CT abdomen shows a <span class="critical">perinephric abscess</span> on the left, likely from ascending UTI.</p><p>The foley has already been exchanged.</p></div>
         <div class="socratic-prompt"><h4>The Undrained Source</h4><p>Why can't antibiotics penetrate the abscess, and what must be done?</p></div>`,
         hint_beginner: "Abscesses have no blood flow inside - antibiotics travel through blood.",
         hint_advanced: "What are the time-sensitive source control emergencies where delay hours matter?",
@@ -288,7 +414,10 @@ SMART trial (2018): Balanced crystalloids
     },
     {
         title: "Lactate-Guided Resuscitation",
-        content: `<div class="narrative"><p>Initial lactate: <span class="critical">4.8 mmol/L</span>. After 2L fluids and norepinephrine, repeat lactate: <span class="highlight">3.6 mmol/L</span> (25% clearance).</p><p>Lactate clearance is a key marker of resuscitation adequacy.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Initial lactate: <span class="critical">4.8 mmol/L</span>. After 2L fluids and norepinephrine, repeat lactate: <span class="highlight">3.6 mmol/L</span> (25% clearance).</p><p>Lactate clearance is a key marker of resuscitation adequacy.</p></div>
         <div class="socratic-prompt"><h4>Lactate Physiology</h4><p>Why is lactate elevated in sepsis, and what does clearance tell us?</p></div>`,
         hint_beginner: "Lactate comes from anaerobic metabolism when tissues don't get enough oxygen.",
         hint_advanced: "What's the difference between Type A and Type B lactic acidosis in sepsis?",
@@ -322,7 +451,10 @@ Lactate ≥4 = ~30% mortality</div></div>`,
     },
     {
         title: "Refractory Shock",
-        content: `<div class="narrative"><p>Despite fluids and norepinephrine at 0.4 mcg/kg/min, MAP remains 60. Vasopressin 0.03 units/min has been added. The patient is still hypotensive.</p><p>This is <span class="critical">refractory septic shock</span>.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Despite fluids and norepinephrine at 0.4 mcg/kg/min, MAP remains 60. Vasopressin 0.03 units/min has been added. The patient is still hypotensive.</p><p>This is <span class="critical">refractory septic shock</span>.</p></div>
         <div class="socratic-prompt"><h4>Adjunctive Therapies</h4><p>What adjunctive therapy should be considered when vasopressors are escalating or shock is not responding?</p></div>`,
         hint_beginner: "Steroids can help restore vascular tone by increasing sensitivity to catecholamines.",
         hint_advanced: "What's the evidence from CORTICUS, ADRENAL, and APROCCHSS trials?",
@@ -352,7 +484,10 @@ Hydrocortisone:
     },
     {
         title: "Troubleshooting Refractory Shock",
-        content: `<div class="narrative"><p>The patient remains hypotensive. Before escalating further, you must think systematically about why shock is refractory.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>The patient remains hypotensive. Before escalating further, you must think systematically about why shock is refractory.</p></div>
         <div class="socratic-prompt"><h4>Differential Diagnosis</h4><p>What are the causes of persistent hypotension despite appropriate sepsis management?</p></div>`,
         hint_beginner: "Think: Uncontrolled source, wrong antibiotics, wrong diagnosis, cardiac dysfunction.",
         hint_advanced: "How do you differentiate distributive shock with cardiac dysfunction from primary cardiogenic shock?",
@@ -375,7 +510,10 @@ Hydrocortisone:
     },
     {
         title: "De-escalation",
-        content: `<div class="narrative"><p>After 72 hours, the patient has stabilized. Blood cultures grew <span class="highlight">E. coli</span> (susceptible to ceftriaxone). Abscess was drained. Vasopressors are weaned.</p><p>Time to narrow antibiotics.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>After 72 hours, the patient has stabilized. Blood cultures grew <span class="highlight">E. coli</span> (susceptible to ceftriaxone). Abscess was drained. Vasopressors are weaned.</p><p>Time to narrow antibiotics.</p></div>
         <div class="socratic-prompt"><h4>Antibiotic Stewardship</h4><p>When and how should you de-escalate antibiotics in sepsis?</p></div>`,
         hint_beginner: "Once you know the organism and source, narrow to the smallest spectrum antibiotic that works.",
         hint_advanced: "What role does procalcitonin play in guiding antibiotic duration?",
@@ -603,6 +741,224 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
+
+
+
+// ============================================================================
+// EPA & CALIBRATION ENHANCEMENT - ReasonDx
+// ============================================================================
+
+// Case EPA Metadata
+const caseEPA = {
+    id: 'sepsis',
+    primaryEPAs: ["EPA-10","EPA-2","EPA-4"],
+    secondaryEPAs: ["EPA-1","EPA-3","EPA-7"],
+    category: 'Critical Care'
+};
+
+// Response tracking for calibration
+let responseHistory = [];
+let pendingSelection = null;
+
+// EPA Names for display
+const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
+
+// Override selectOption to add confidence step
+const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
+
+function selectOptionEnhanced(index, correct) {
+    const qId = 'q' + currentStage;
+    if (answeredQuestions.has(qId)) return;
+    
+    // Store pending selection
+    pendingSelection = { index, correct, stageIdx: currentStage };
+    
+    // Highlight selected option
+    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if (i === index) opt.classList.add('selected');
+    });
+    
+    // Show confidence slider
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) {
+        confContainer.classList.add('show');
+        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function updateConfidenceDisplay(value) {
+    const display = document.getElementById('confidence-display');
+    if (display) display.textContent = value + '%';
+}
+
+function submitWithConfidence() {
+    if (!pendingSelection) return;
+    
+    const confidence = parseInt(document.getElementById('confidence-slider').value);
+    const { index, correct, stageIdx } = pendingSelection;
+    const stage = stages[stageIdx];
+    
+    // Record response with confidence
+    responseHistory.push({
+        stage: stageIdx + 1,
+        stageTitle: stage.title,
+        epaFocus: caseEPA.primaryEPAs[0],
+        selectedIndex: index,
+        selectedText: stage.question.options[index].text,
+        correct: correct,
+        confidence: confidence,
+        points: correct ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Hide confidence container
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) confContainer.classList.remove('show');
+    
+    // Now process the answer (call original logic)
+    const qId = 'q' + stageIdx;
+    answeredQuestions.add(qId);
+    decisionPath[stageIdx] = index;
+    
+    maxScore += stage.question.points;
+    if (correct) score += stage.question.points;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    // Show calibration feedback
+    showCalibrationFeedback(confidence, correct);
+    
+    pendingSelection = null;
+    renderStage();
+}
+
+function showCalibrationFeedback(confidence, correct) {
+    // This will be shown in the feedback section after render
+    const feedback = document.createElement('div');
+    feedback.className = 'calibration-feedback show';
+    
+    if (correct && confidence >= 70) {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
+    } else if (correct && confidence < 50) {
+        feedback.classList.add('underconfident');
+        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
+    } else if (!correct && confidence >= 70) {
+        feedback.classList.add('overconfident');
+        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
+    } else {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
+    }
+    
+    // Store for rendering
+    window.lastCalibrationFeedback = feedback.outerHTML;
+}
+
+// Enhanced debrief with EPA and calibration
+function showEnhancedDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    const content = document.getElementById('debriefContent');
+    if (!overlay || !content) return;
+    
+    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    
+    // Calculate calibration
+    const withConf = responseHistory.filter(r => r.confidence !== undefined);
+    const correctWithConf = withConf.filter(r => r.correct);
+    const incorrectWithConf = withConf.filter(r => !r.correct);
+    const avgConfCorrect = correctWithConf.length > 0 
+        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
+    const avgConfIncorrect = incorrectWithConf.length > 0 
+        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
+    
+    // EPA performance
+    const epaPerf = {};
+    responseHistory.forEach(r => {
+        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
+        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
+        epaPerf[epa].total++;
+        if (r.correct) epaPerf[epa].correct++;
+    });
+    
+    // Calibration interpretation
+    let calibrationMsg = '';
+    if (avgConfCorrect - avgConfIncorrect > 20) {
+        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
+    } else if (avgConfIncorrect > 60) {
+        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
+    } else {
+        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
+    }
+    
+    content.innerHTML = `
+        <div style="text-align:center;margin-bottom:24px;">
+            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
+            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
+            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
+        </div>
+        
+        <div class="epa-debrief-section">
+            <h4>📋 EPA Competencies Assessed</h4>
+            <div class="epa-progress-grid">
+                ${Object.entries(epaPerf).map(([epa, data]) => {
+                    const pct = Math.round((data.correct / data.total) * 100);
+                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
+                    return `<div class="epa-progress-card">
+                        <div class="epa-name">${epaNames[epa] || epa}</div>
+                        <div class="epa-score ${colorClass}">${pct}%</div>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>
+        
+        <div class="calibration-debrief">
+            <h4>🎯 Confidence Calibration</h4>
+            <div class="calibration-stats">
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
+                    <div class="stat-label">Avg confidence when correct</div>
+                </div>
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
+                    <div class="stat-label">Avg confidence when incorrect</div>
+                </div>
+            </div>
+            <div class="calibration-interpretation">${calibrationMsg}</div>
+        </div>
+        
+        <div class="decision-path">
+            <h3>📝 Your Decisions</h3>
+            ${responseHistory.map(r => `
+                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
+                    <div style="display:flex;justify-content:space-between;">
+                        <div>
+                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
+                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
+                        </div>
+                        <div class="path-points">${r.points}/${r.maxPoints}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+// Replace selectOption globally
+window.selectOption = selectOptionEnhanced;
+
+// Store original showDebrief if exists
+if (typeof showDebrief === 'function') {
+    window.originalShowDebrief = showDebrief;
+}
+window.showDebrief = showEnhancedDebrief;
 
 </script>
 

@@ -105,6 +105,95 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
+
+/* EPA Badge Styles */
+.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.epa-badge { 
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
+}
+.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
+.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
+
+/* Confidence Slider Styles */
+.confidence-container {
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    display: none;
+}
+.confidence-container.show { display: block; }
+.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.confidence-icon { font-size: 1.2rem; }
+.confidence-label { font-weight: 600; color: #e2e8f0; }
+.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
+.confidence-slider {
+    width: 100%; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
+}
+.confidence-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
+.confidence-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white; border: none; border-radius: 8px;
+    font-weight: 600; font-size: 1rem; cursor: pointer;
+}
+.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Calibration Feedback */
+.calibration-feedback {
+    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
+    display: none; font-size: 0.9rem;
+}
+.calibration-feedback.show { display: block; }
+.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
+.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
+.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
+
+/* Process Feedback Styles */
+.process-feedback {
+    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+    display: none;
+}
+.process-feedback.show { display: block; }
+.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
+
+/* Selected option before submit */
+.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
+
+/* EPA Progress in Debrief */
+.epa-debrief-section { margin: 24px 0; }
+.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
+.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
+.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
+.epa-progress-card .epa-score.high { color: #22c55e; }
+.epa-progress-card .epa-score.medium { color: #f59e0b; }
+.epa-progress-card .epa-score.low { color: #ef4444; }
+
+/* Calibration Chart in Debrief */
+.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
+.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
+.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
+.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
+.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
+.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
+.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
+
 </style>
 </head>
 <body>
@@ -129,6 +218,25 @@
 </div>
 </div>
         <div id="scene-container"></div>
+
+<!-- Confidence Slider -->
+<div class="confidence-container" id="confidence-container">
+    <div class="confidence-header">
+        <span class="confidence-icon">🎯</span>
+        <span class="confidence-label">How confident are you in your answer?</span>
+    </div>
+    <div class="confidence-slider-wrapper">
+        <input type="range" class="confidence-slider" id="confidence-slider" 
+               min="0" max="100" value="50" 
+               oninput="updateConfidenceDisplay(this.value)">
+        <div class="confidence-labels">
+            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
+        </div>
+    </div>
+    <div class="confidence-value" id="confidence-display">50%</div>
+    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
+</div>
+
     </div>
     <script>
     let decisionPath = [];
@@ -136,7 +244,10 @@ let currentStage = 0, score = 0, difficulty = 'standard';
     const stages = [
     {
         title: "Crampy Pain and Vomiting",
-        content: `<div class="narrative"><p>A <span class="highlight">65-year-old man</span> with prior appendectomy presents with <span class="critical">crampy abdominal pain, distension, nausea, and no BM/flatus × 2 days</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 102, BP 128/78, T 37.2°C<br><strong>Exam:</strong> Distended abdomen, tympanic to percussion, high-pitched "tinkling" bowel sounds, mild diffuse tenderness, well-healed RLQ scar</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>A <span class="highlight">65-year-old man</span> with prior appendectomy presents with <span class="critical">crampy abdominal pain, distension, nausea, and no BM/flatus × 2 days</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 102, BP 128/78, T 37.2°C<br><strong>Exam:</strong> Distended abdomen, tympanic to percussion, high-pitched "tinkling" bowel sounds, mild diffuse tenderness, well-healed RLQ scar</p></div>
         <div class="alert-box"><div class="alert-title">🚨 Classic SBO Presentation!</div><p>Prior surgery is the #1 risk factor (adhesions). The classic tetrad: colicky pain, vomiting, distension, and obstipation.</p></div>
         <div class="socratic-prompt"><h4>Pattern Recognition</h4><p>What combination of symptoms and history makes small bowel obstruction the leading diagnosis?</p></div>`,
         hint_beginner: "Remember the classic SBO tetrad: colicky pain, vomiting, distension, and obstipation (no stool/gas).",
@@ -160,7 +271,10 @@ let currentStage = 0, score = 0, difficulty = 'standard';
     },
     {
         title: "Physical Examination",
-        content: `<div class="narrative"><p>You perform a thorough abdominal exam. The abdomen is distended and tympanic. Bowel sounds are hyperactive with <span class="highlight">high-pitched "tinkling" quality</span>.</p><p>You note the well-healed RLQ appendectomy scar.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You perform a thorough abdominal exam. The abdomen is distended and tympanic. Bowel sounds are hyperactive with <span class="highlight">high-pitched "tinkling" quality</span>.</p><p>You note the well-healed RLQ appendectomy scar.</p></div>
         <div class="socratic-prompt"><h4>Don't Miss!</h4><p>What physical exam finding must you specifically check for that could change management immediately?</p></div>`,
         hint_beginner: "Where can bowel get trapped outside the abdomen? Check all the 'holes' in the abdominal wall.",
         hint_advanced: "Which type of hernia has the highest risk of strangulation and why?",
@@ -193,7 +307,10 @@ FEMORAL HERNIAS:
     },
     {
         title: "Imaging: Abdominal X-ray",
-        content: `<div class="narrative"><p>You order an abdominal X-ray (upright and supine). The films show <span class="highlight">multiple dilated loops of small bowel</span> with air-fluid levels at different heights, creating a "step-ladder" pattern.</p><p>There is minimal gas in the colon.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You order an abdominal X-ray (upright and supine). The films show <span class="highlight">multiple dilated loops of small bowel</span> with air-fluid levels at different heights, creating a "step-ladder" pattern.</p><p>There is minimal gas in the colon.</p></div>
         <div class="socratic-prompt"><h4>Image Interpretation</h4><p>How do you distinguish small bowel from large bowel on X-ray?</p></div>`,
         hint_beginner: "Look at the mucosal folds: do they cross the entire width of the bowel or only partway?",
         hint_advanced: "What is the 3-6-9 rule for identifying abnormal bowel diameter?",
@@ -216,7 +333,10 @@ FEMORAL HERNIAS:
     },
     {
         title: "CT Scan: Gold Standard",
-        content: `<div class="narrative"><p>You order CT abdomen/pelvis with IV contrast. Results show:</p><p><span class="highlight">Dilated proximal small bowel (up to 4.5 cm)</span> with an abrupt transition to decompressed distal bowel. No mass. No hernia. <span class="highlight">Adhesive band at transition point</span>. No signs of ischemia.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You order CT abdomen/pelvis with IV contrast. Results show:</p><p><span class="highlight">Dilated proximal small bowel (up to 4.5 cm)</span> with an abrupt transition to decompressed distal bowel. No mass. No hernia. <span class="highlight">Adhesive band at transition point</span>. No signs of ischemia.</p></div>
         <div class="alert-box"><div class="alert-title">🚨 CT is the Gold Standard!</div><p>Sensitivity 90-95% for SBO. Identifies the transition point, etiology, and complications.</p></div>
         <div class="socratic-prompt"><h4>Advanced Imaging</h4><p>What CT findings would indicate strangulation and mandate emergent surgery?</p></div>`,
         hint_beginner: "If the bowel isn't getting blood flow, what would happen to contrast enhancement?",
@@ -240,7 +360,10 @@ FEMORAL HERNIAS:
     },
     {
         title: "Strangulation: Surgical Emergency",
-        content: `<div class="narrative"><p>A colleague asks you to evaluate her patient: 72-year-old woman with known SBO who now has <span class="critical">constant severe pain (no longer colicky)</span>, fever to 38.5°C, HR 120, and peritoneal signs.</p><p>Labs: WBC 18,000, <span class="critical">lactate 4.2</span></p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>A colleague asks you to evaluate her patient: 72-year-old woman with known SBO who now has <span class="critical">constant severe pain (no longer colicky)</span>, fever to 38.5°C, HR 120, and peritoneal signs.</p><p>Labs: WBC 18,000, <span class="critical">lactate 4.2</span></p></div>
         <div class="alert-box"><div class="alert-title">🚨 Strangulation = Surgical Emergency!</div><p>Compromised blood supply → bowel necrosis. Mortality increases with every hour of delay.</p></div>
         <div class="socratic-prompt"><h4>Recognizing Strangulation</h4><p>How does strangulated SBO present differently from simple obstruction?</p></div>`,
         hint_beginner: "Simple obstruction has colicky pain. When does pain become constant?",
@@ -264,7 +387,10 @@ FEMORAL HERNIAS:
     },
     {
         title: "Partial vs Complete Obstruction",
-        content: `<div class="narrative"><p>Returning to your original patient: the CT shows adhesive SBO <span class="highlight">without signs of strangulation</span>.</p><p>The patient reports he had <span class="highlight">small amounts of flatus this morning</span>.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Returning to your original patient: the CT shows adhesive SBO <span class="highlight">without signs of strangulation</span>.</p><p>The patient reports he had <span class="highlight">small amounts of flatus this morning</span>.</p></div>
         <div class="socratic-prompt"><h4>Classification</h4><p>How do you distinguish partial from complete SBO, and why does this matter?</p></div>`,
         hint_beginner: "Can any gas or stool pass through? That's the key distinguishing feature.",
         hint_advanced: "How does the water-soluble contrast challenge help in decision-making?",
@@ -298,7 +424,10 @@ BONUS: Gastrografin may be THERAPEUTIC
     },
     {
         title: "Non-Operative Management",
-        content: `<div class="narrative"><p>You decide to trial non-operative management for this patient with partial adhesive SBO and no signs of strangulation.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>You decide to trial non-operative management for this patient with partial adhesive SBO and no signs of strangulation.</p></div>
         <div class="socratic-prompt"><h4>Conservative Treatment</h4><p>What are the essential components of non-operative SBO management?</p></div>`,
         hint_beginner: "Think: bowel rest, fluid replacement, decompression, and monitoring.",
         hint_advanced: "What electrolyte abnormalities do you expect from SBO with vomiting?",
@@ -321,7 +450,10 @@ BONUS: Gastrografin may be THERAPEUTIC
     },
     {
         title: "Indications for Surgery",
-        content: `<div class="narrative"><p>After 48 hours, your patient has had no improvement. NGT output remains high, he hasn't passed flatus, and repeat imaging shows persistent obstruction.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>After 48 hours, your patient has had no improvement. NGT output remains high, he hasn't passed flatus, and repeat imaging shows persistent obstruction.</p></div>
         <div class="socratic-prompt"><h4>Decision Point</h4><p>What are the indications for operative intervention in SBO?</p></div>`,
         hint_beginner: "Think about findings indicating bowel is in danger vs failure of conservative management.",
         hint_advanced: "What is the maximum duration for a non-operative trial?",
@@ -344,7 +476,10 @@ BONUS: Gastrografin may be THERAPEUTIC
     },
     {
         title: "Surgical Options",
-        content: `<div class="narrative"><p>Your patient goes to the OR. The surgeon finds a <span class="highlight">single adhesive band</span>. The bowel proximal to the band is dilated but <span class="highlight">viable (pink, peristaltic)</span>.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>Your patient goes to the OR. The surgeon finds a <span class="highlight">single adhesive band</span>. The bowel proximal to the band is dilated but <span class="highlight">viable (pink, peristaltic)</span>.</p></div>
         <div class="socratic-prompt"><h4>Operative Approach</h4><p>How do you assess bowel viability intraoperatively?</p></div>`,
         hint_beginner: "If the bowel looks healthy (pink, moving), do you need to remove it?",
         hint_advanced: "What are the indications for laparoscopic vs open approach?",
@@ -377,7 +512,10 @@ NON-VIABLE (needs resection):
     },
     {
         title: "Case Resolution",
-        content: `<div class="narrative"><p>The surgeon performs <span class="highlight">laparoscopic adhesiolysis</span>. The bowel is viable and returns to normal color after release.</p><p>Post-operatively, your patient recovers well. He passes flatus on post-op day 2 and tolerates diet by day 4.</p></div>
+        content: `
+        <div class="epa-badges">
+            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Enter Orders</span>
+        </div><div class="narrative"><p>The surgeon performs <span class="highlight">laparoscopic adhesiolysis</span>. The bowel is viable and returns to normal color after release.</p><p>Post-operatively, your patient recovers well. He passes flatus on post-op day 2 and tolerates diet by day 4.</p></div>
         <div class="mechanism-box"><div class="mechanism-title">📚 SBO Management Algorithm</div><div class="pathway">SBO suspected
           ↓
 Examine ALL hernia sites + Resuscitation
@@ -561,6 +699,224 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
+
+
+
+// ============================================================================
+// EPA & CALIBRATION ENHANCEMENT - ReasonDx
+// ============================================================================
+
+// Case EPA Metadata
+const caseEPA = {
+    id: 'sbo',
+    primaryEPAs: ["EPA-2","EPA-3","EPA-4"],
+    secondaryEPAs: ["EPA-10"],
+    category: 'Gastroenterology'
+};
+
+// Response tracking for calibration
+let responseHistory = [];
+let pendingSelection = null;
+
+// EPA Names for display
+const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
+
+// Override selectOption to add confidence step
+const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
+
+function selectOptionEnhanced(index, correct) {
+    const qId = 'q' + currentStage;
+    if (answeredQuestions.has(qId)) return;
+    
+    // Store pending selection
+    pendingSelection = { index, correct, stageIdx: currentStage };
+    
+    // Highlight selected option
+    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if (i === index) opt.classList.add('selected');
+    });
+    
+    // Show confidence slider
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) {
+        confContainer.classList.add('show');
+        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function updateConfidenceDisplay(value) {
+    const display = document.getElementById('confidence-display');
+    if (display) display.textContent = value + '%';
+}
+
+function submitWithConfidence() {
+    if (!pendingSelection) return;
+    
+    const confidence = parseInt(document.getElementById('confidence-slider').value);
+    const { index, correct, stageIdx } = pendingSelection;
+    const stage = stages[stageIdx];
+    
+    // Record response with confidence
+    responseHistory.push({
+        stage: stageIdx + 1,
+        stageTitle: stage.title,
+        epaFocus: caseEPA.primaryEPAs[0],
+        selectedIndex: index,
+        selectedText: stage.question.options[index].text,
+        correct: correct,
+        confidence: confidence,
+        points: correct ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Hide confidence container
+    const confContainer = document.getElementById('confidence-container');
+    if (confContainer) confContainer.classList.remove('show');
+    
+    // Now process the answer (call original logic)
+    const qId = 'q' + stageIdx;
+    answeredQuestions.add(qId);
+    decisionPath[stageIdx] = index;
+    
+    maxScore += stage.question.points;
+    if (correct) score += stage.question.points;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    // Show calibration feedback
+    showCalibrationFeedback(confidence, correct);
+    
+    pendingSelection = null;
+    renderStage();
+}
+
+function showCalibrationFeedback(confidence, correct) {
+    // This will be shown in the feedback section after render
+    const feedback = document.createElement('div');
+    feedback.className = 'calibration-feedback show';
+    
+    if (correct && confidence >= 70) {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
+    } else if (correct && confidence < 50) {
+        feedback.classList.add('underconfident');
+        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
+    } else if (!correct && confidence >= 70) {
+        feedback.classList.add('overconfident');
+        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
+    } else {
+        feedback.classList.add('well-calibrated');
+        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
+    }
+    
+    // Store for rendering
+    window.lastCalibrationFeedback = feedback.outerHTML;
+}
+
+// Enhanced debrief with EPA and calibration
+function showEnhancedDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    const content = document.getElementById('debriefContent');
+    if (!overlay || !content) return;
+    
+    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    
+    // Calculate calibration
+    const withConf = responseHistory.filter(r => r.confidence !== undefined);
+    const correctWithConf = withConf.filter(r => r.correct);
+    const incorrectWithConf = withConf.filter(r => !r.correct);
+    const avgConfCorrect = correctWithConf.length > 0 
+        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
+    const avgConfIncorrect = incorrectWithConf.length > 0 
+        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
+    
+    // EPA performance
+    const epaPerf = {};
+    responseHistory.forEach(r => {
+        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
+        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
+        epaPerf[epa].total++;
+        if (r.correct) epaPerf[epa].correct++;
+    });
+    
+    // Calibration interpretation
+    let calibrationMsg = '';
+    if (avgConfCorrect - avgConfIncorrect > 20) {
+        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
+    } else if (avgConfIncorrect > 60) {
+        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
+    } else {
+        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
+    }
+    
+    content.innerHTML = `
+        <div style="text-align:center;margin-bottom:24px;">
+            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
+            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
+            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
+        </div>
+        
+        <div class="epa-debrief-section">
+            <h4>📋 EPA Competencies Assessed</h4>
+            <div class="epa-progress-grid">
+                ${Object.entries(epaPerf).map(([epa, data]) => {
+                    const pct = Math.round((data.correct / data.total) * 100);
+                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
+                    return `<div class="epa-progress-card">
+                        <div class="epa-name">${epaNames[epa] || epa}</div>
+                        <div class="epa-score ${colorClass}">${pct}%</div>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>
+        
+        <div class="calibration-debrief">
+            <h4>🎯 Confidence Calibration</h4>
+            <div class="calibration-stats">
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
+                    <div class="stat-label">Avg confidence when correct</div>
+                </div>
+                <div class="calibration-stat">
+                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
+                    <div class="stat-label">Avg confidence when incorrect</div>
+                </div>
+            </div>
+            <div class="calibration-interpretation">${calibrationMsg}</div>
+        </div>
+        
+        <div class="decision-path">
+            <h3>📝 Your Decisions</h3>
+            ${responseHistory.map(r => `
+                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
+                    <div style="display:flex;justify-content:space-between;">
+                        <div>
+                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
+                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
+                        </div>
+                        <div class="path-points">${r.points}/${r.maxPoints}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+// Replace selectOption globally
+window.selectOption = selectOptionEnhanced;
+
+// Store original showDebrief if exists
+if (typeof showDebrief === 'function') {
+    window.originalShowDebrief = showDebrief;
+}
+window.showDebrief = showEnhancedDebrief;
 
 </script>
 
