@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EPA/Milestone Dashboard | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #0891b2;
+            --primary: #1e3a5f;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --purple: #7c3aed;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 32px 24px; }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .header h1 { font-size: 24px; }
+        .header-subtitle { opacity: 0.9; font-size: 14px; }
+        .header-actions { display: flex; gap: 12px; }
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; text-decoration: none; font-size: 14px; }
+        .btn-light { background: rgba(255,255,255,0.2); color: white; }
+        .btn-light:hover { background: rgba(255,255,255,0.3); }
+        .btn-primary { background: var(--accent); color: white; }
+        
+        /* Main */
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        
+        /* Profile Banner */
+        .profile-banner { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .profile-info { display: flex; align-items: center; gap: 16px; }
+        .profile-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+        .profile-details h2 { font-size: 20px; margin-bottom: 4px; }
+        .profile-details p { color: var(--text-secondary); font-size: 14px; }
+        .profile-stats { display: flex; gap: 32px; }
+        .profile-stat { text-align: center; }
+        .profile-stat-value { font-size: 28px; font-weight: 700; color: var(--accent); }
+        .profile-stat-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; }
+        
+        /* Tabs */
+        .tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .tab { padding: 10px 20px; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 500; color: var(--text-secondary); background: transparent; border: none; font-size: 14px; }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); margin-bottom: -9px; }
+        
+        /* EPA Grid */
+        .epa-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 16px; }
+        .epa-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: all 0.2s; }
+        .epa-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .epa-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .epa-id { background: var(--primary); color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .epa-level { display: flex; align-items: center; gap: 4px; }
+        .epa-level-badge { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .level-1 { background: #fef2f2; color: #991b1b; }
+        .level-2 { background: #fff7ed; color: #9a3412; }
+        .level-3 { background: #fefce8; color: #854d0e; }
+        .level-4 { background: #ecfdf5; color: #065f46; }
+        .level-5 { background: #f0fdf4; color: #14532d; }
+        .epa-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .epa-description { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+        
+        /* Progress Bar */
+        .progress-container { margin-bottom: 12px; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+        .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .progress-fill.level-1 { background: var(--danger); width: 20%; }
+        .progress-fill.level-2 { background: var(--warning); width: 40%; }
+        .progress-fill.level-3 { background: #eab308; width: 60%; }
+        .progress-fill.level-4 { background: var(--success); width: 80%; }
+        .progress-fill.level-5 { background: #22c55e; width: 100%; }
+        
+        /* Related Cases */
+        .related-cases { display: flex; flex-wrap: wrap; gap: 6px; }
+        .case-tag { background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; font-size: 11px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .case-tag:hover { border-color: var(--accent); color: var(--accent); }
+        
+        /* Summary Cards */
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .summary-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+        .summary-icon { font-size: 32px; margin-bottom: 8px; }
+        .summary-value { font-size: 32px; font-weight: 700; }
+        .summary-label { font-size: 13px; color: var(--text-secondary); }
+        .summary-card.strength .summary-value { color: var(--success); }
+        .summary-card.growth .summary-value { color: var(--warning); }
+        
+        /* Milestone View */
+        .milestone-section { margin-bottom: 32px; }
+        .milestone-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .milestone-header h3 { font-size: 18px; }
+        .competency-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .competency-pc { background: #dbeafe; color: #1e40af; }
+        .competency-mk { background: #dcfce7; color: #166534; }
+        .competency-sbp { background: #fef9c3; color: #854d0e; }
+        .competency-pbli { background: #f3e8ff; color: #6b21a8; }
+        .competency-prof { background: #ffe4e6; color: #9f1239; }
+        .competency-ics { background: #e0e7ff; color: #3730a3; }
+        
+        /* Activity Log */
+        .activity-log { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .activity-log h3 { margin-bottom: 16px; font-size: 16px; }
+        .activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .activity-icon.case { background: #dbeafe; }
+        .activity-icon.level-up { background: #dcfce7; }
+        .activity-icon.achievement { background: #fef9c3; }
+        .activity-content { flex: 1; }
+        .activity-title { font-weight: 500; font-size: 14px; }
+        .activity-meta { font-size: 12px; color: var(--text-secondary); }
+        
+        /* Export Section */
+        .export-section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 32px; }
+        .export-section h3 { margin-bottom: 8px; }
+        .export-section p { color: var(--text-secondary); font-size: 14px; margin-bottom: 16px; }
+        .export-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; }
+            .profile-banner { flex-direction: column; text-align: center; }
+            .profile-stats { justify-content: center; }
+            .epa-grid { grid-template-columns: 1fr; }
+            .tabs { overflow-x: auto; }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .header-actions, .export-section, .tabs { display: none; }
+            .epa-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>📊 Competency Dashboard</h1>
+                <p class="header-subtitle">Track your clinical reasoning development</p>
+            </div>
+            <div class="header-actions">
+                <a href="../index.html" class="btn btn-light">← Back to ReasonDx</a>
+                <button class="btn btn-light" onclick="toggleTheme()">🌙</button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <!-- Profile Banner -->
+        <div class="profile-banner">
+            <div class="profile-info">
+                <div class="profile-avatar" id="profileAvatar">🎓</div>
+                <div class="profile-details">
+                    <h2 id="profileName">Medical Student</h2>
+                    <p id="profileLevel">MS3 • EPA Framework</p>
+                </div>
+            </div>
+            <div class="profile-stats">
+                <div class="profile-stat">
+                    <div class="profile-stat-value" id="casesCompleted">0</div>
+                    <div class="profile-stat-label">Cases Done</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="profile-stat-value" id="avgLevel">--</div>
+                    <div class="profile-stat-label">Avg Level</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="profile-stat-value" id="epasAtTarget">0/13</div>
+                    <div class="profile-stat-label">EPAs at Target</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Summary Cards -->
+        <div class="summary-grid">
+            <div class="summary-card strength">
+                <div class="summary-icon">💪</div>
+                <div class="summary-value" id="strengthArea">EPA-2</div>
+                <div class="summary-label">Strongest Area</div>
+            </div>
+            <div class="summary-card growth">
+                <div class="summary-icon">🎯</div>
+                <div class="summary-value" id="growthArea">EPA-10</div>
+                <div class="summary-label">Growth Opportunity</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">🔥</div>
+                <div class="summary-value" id="streak">3</div>
+                <div class="summary-label">Day Streak</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">⏱️</div>
+                <div class="summary-value" id="totalTime">4.2h</div>
+                <div class="summary-label">Total Time</div>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('epas')">EPAs (13)</button>
+            <button class="tab" onclick="showTab('milestones')">ACGME Milestones</button>
+            <button class="tab" onclick="showTab('activity')">Activity Log</button>
+        </div>
+        
+        <!-- EPA Tab Content -->
+        <div id="epas-content">
+            <div class="epa-grid" id="epaGrid">
+                <!-- EPAs will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Milestones Tab Content -->
+        <div id="milestones-content" style="display:none;">
+            <div class="milestone-section">
+                <div class="milestone-header">
+                    <h3>Patient Care (PC)</h3>
+                    <span class="competency-badge competency-pc">Core Competency</span>
+                </div>
+                <div class="epa-grid" id="pcMilestones"></div>
+            </div>
+            <div class="milestone-section">
+                <div class="milestone-header">
+                    <h3>Medical Knowledge (MK)</h3>
+                    <span class="competency-badge competency-mk">Core Competency</span>
+                </div>
+                <div class="epa-grid" id="mkMilestones"></div>
+            </div>
+        </div>
+        
+        <!-- Activity Tab Content -->
+        <div id="activity-content" style="display:none;">
+            <div class="activity-log">
+                <h3>Recent Activity</h3>
+                <div id="activityList">
+                    <!-- Activities will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>📤 Export Your Progress</h3>
+            <p>Generate reports for your portfolio, clerkship director, or residency application.</p>
+            <div class="export-buttons">
+                <button class="btn btn-primary" onclick="exportPDF()">📄 Export PDF Report</button>
+                <button class="btn btn-primary" onclick="exportCSV()">📊 Export CSV Data</button>
+                <button class="btn btn-primary" onclick="shareProgress()">🔗 Share Progress Link</button>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // EPA Definitions with case mappings
+        const EPAs = [
+            {
+                id: 'EPA-1',
+                title: 'Gather History & Physical Exam',
+                description: 'Gather a history and perform a physical examination',
+                level: 3,
+                cases: ['chest-pain', 'acute-abdomen', 'syncope', 'stroke', 'meningitis'],
+                casesCompleted: 8
+            },
+            {
+                id: 'EPA-2',
+                title: 'Prioritize Differential Diagnosis',
+                description: 'Prioritize a differential diagnosis following a clinical encounter',
+                level: 4,
+                cases: ['acs', 'pe', 'gi-bleed', 'aki', 'shock', 'anaphylaxis'],
+                casesCompleted: 12
+            },
+            {
+                id: 'EPA-3',
+                title: 'Recommend & Interpret Tests',
+                description: 'Recommend and interpret common diagnostic and screening tests',
+                level: 3,
+                cases: ['dvt', 'pe', 'aki-workup', 'hyponatremia', 'ttp-hus'],
+                casesCompleted: 6
+            },
+            {
+                id: 'EPA-4',
+                title: 'Enter Orders & Prescriptions',
+                description: 'Enter and discuss orders and prescriptions',
+                level: 2,
+                cases: ['sepsis', 'dka', 'hyperkalemia', 'afib', 'anaphylaxis'],
+                casesCompleted: 4
+            },
+            {
+                id: 'EPA-5',
+                title: 'Document Clinical Encounter',
+                description: 'Document a clinical encounter in the patient record',
+                level: 3,
+                cases: ['all-cases'],
+                casesCompleted: 15
+            },
+            {
+                id: 'EPA-6',
+                title: 'Oral Presentation',
+                description: 'Provide an oral presentation of a clinical encounter',
+                level: 3,
+                cases: ['sbar-cases'],
+                casesCompleted: 5
+            },
+            {
+                id: 'EPA-7',
+                title: 'Form Clinical Questions',
+                description: 'Form clinical questions and retrieve evidence to advance patient care',
+                level: 2,
+                cases: ['evidence-based'],
+                casesCompleted: 3
+            },
+            {
+                id: 'EPA-8',
+                title: 'Patient Handoffs',
+                description: 'Give or receive a patient handover to transition care',
+                level: 2,
+                cases: ['handoff-cases'],
+                casesCompleted: 2
+            },
+            {
+                id: 'EPA-9',
+                title: 'Collaborate as Interprofessional Team',
+                description: 'Collaborate as a member of an interprofessional team',
+                level: 3,
+                cases: ['team-cases'],
+                casesCompleted: 4
+            },
+            {
+                id: 'EPA-10',
+                title: 'Recognize Urgency',
+                description: 'Recognize a patient requiring urgent care and initiate evaluation',
+                level: 1,
+                cases: ['sepsis', 'acs', 'stroke', 'anaphylaxis', 'pe', 'tension-ptx'],
+                casesCompleted: 2
+            },
+            {
+                id: 'EPA-11',
+                title: 'Informed Consent',
+                description: 'Obtain informed consent for tests and procedures',
+                level: 2,
+                cases: ['consent-cases'],
+                casesCompleted: 1
+            },
+            {
+                id: 'EPA-12',
+                title: 'Perform General Procedures',
+                description: 'Perform general procedures of a physician',
+                level: 2,
+                cases: ['procedure-cases'],
+                casesCompleted: 3
+            },
+            {
+                id: 'EPA-13',
+                title: 'Identify System Failures',
+                description: 'Identify system failures and contribute to a culture of safety',
+                level: 2,
+                cases: ['safety-cases'],
+                casesCompleted: 2
+            }
+        ];
+        
+        // ACGME Milestones (Internal Medicine example)
+        const Milestones = {
+            PC: [
+                { id: 'PC1', title: 'History', level: 3 },
+                { id: 'PC2', title: 'Physical Exam', level: 3 },
+                { id: 'PC3', title: 'Clinical Reasoning', level: 4 },
+                { id: 'PC4', title: 'Patient Management', level: 3 },
+                { id: 'PC5', title: 'Procedures', level: 2 }
+            ],
+            MK: [
+                { id: 'MK1', title: 'Clinical Knowledge', level: 4 },
+                { id: 'MK2', title: 'Diagnostic Testing', level: 3 }
+            ]
+        };
+        
+        // Sample activity data
+        const activities = [
+            { type: 'case', icon: '📚', title: 'Completed: Sepsis Case', meta: 'EPA-2, EPA-10 • 25 min • Today', epa: 'EPA-2' },
+            { type: 'level-up', icon: '⬆️', title: 'Level Up! EPA-2 → Level 4', meta: 'Differential Diagnosis • Yesterday', epa: 'EPA-2' },
+            { type: 'case', icon: '📚', title: 'Completed: ACS Adventure', meta: 'EPA-1, EPA-2, EPA-3 • 32 min • Yesterday', epa: 'EPA-1' },
+            { type: 'achievement', icon: '🏆', title: 'Badge: Cardiology Expert', meta: 'Completed 10 cardiology cases • 2 days ago', epa: null },
+            { type: 'case', icon: '📚', title: 'Completed: DKA Case', meta: 'EPA-3, EPA-4 • 18 min • 3 days ago', epa: 'EPA-3' }
+        ];
+        
+        // Render EPA cards
+        function renderEPAs() {
+            const grid = document.getElementById('epaGrid');
+            grid.innerHTML = EPAs.map(epa => `
+                <div class="epa-card">
+                    <div class="epa-header">
+                        <span class="epa-id">${epa.id}</span>
+                        <div class="epa-level">
+                            <span class="epa-level-badge level-${epa.level}">Level ${epa.level}/5</span>
+                        </div>
+                    </div>
+                    <h3 class="epa-title">${epa.title}</h3>
+                    <p class="epa-description">${epa.description}</p>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Progress</span>
+                            <span>${epa.casesCompleted} cases</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill level-${epa.level}"></div>
+                        </div>
+                    </div>
+                    <div class="related-cases">
+                        ${epa.cases.slice(0, 5).map(c => `<a href="${c}-expanded.html" class="case-tag">${c}</a>`).join('')}
+                        ${epa.cases.length > 5 ? `<span class="case-tag">+${epa.cases.length - 5} more</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Render Milestones
+        function renderMilestones() {
+            const pcGrid = document.getElementById('pcMilestones');
+            const mkGrid = document.getElementById('mkMilestones');
+            
+            pcGrid.innerHTML = Milestones.PC.map(m => `
+                <div class="epa-card">
+                    <div class="epa-header">
+                        <span class="epa-id">${m.id}</span>
+                        <span class="epa-level-badge level-${m.level}">Level ${m.level}/5</span>
+                    </div>
+                    <h3 class="epa-title">${m.title}</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill level-${m.level}"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            mkGrid.innerHTML = Milestones.MK.map(m => `
+                <div class="epa-card">
+                    <div class="epa-header">
+                        <span class="epa-id">${m.id}</span>
+                        <span class="epa-level-badge level-${m.level}">Level ${m.level}/5</span>
+                    </div>
+                    <h3 class="epa-title">${m.title}</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill level-${m.level}"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Render Activity Log
+        function renderActivities() {
+            const list = document.getElementById('activityList');
+            list.innerHTML = activities.map(a => `
+                <div class="activity-item">
+                    <div class="activity-icon ${a.type}">${a.icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-title">${a.title}</div>
+                        <div class="activity-meta">${a.meta}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Tab switching
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+            
+            document.getElementById('epas-content').style.display = tab === 'epas' ? 'block' : 'none';
+            document.getElementById('milestones-content').style.display = tab === 'milestones' ? 'block' : 'none';
+            document.getElementById('activity-content').style.display = tab === 'activity' ? 'block' : 'none';
+        }
+        
+        // Calculate summary stats
+        function updateStats() {
+            const totalCases = EPAs.reduce((sum, e) => sum + e.casesCompleted, 0);
+            const avgLevel = (EPAs.reduce((sum, e) => sum + e.level, 0) / EPAs.length).toFixed(1);
+            const atTarget = EPAs.filter(e => e.level >= 3).length;
+            
+            document.getElementById('casesCompleted').textContent = totalCases;
+            document.getElementById('avgLevel').textContent = avgLevel;
+            document.getElementById('epasAtTarget').textContent = `${atTarget}/13`;
+            
+            // Find strength and growth areas
+            const sorted = [...EPAs].sort((a, b) => b.level - a.level);
+            document.getElementById('strengthArea').textContent = sorted[0].id;
+            document.getElementById('growthArea').textContent = sorted[sorted.length - 1].id;
+        }
+        
+        // Export functions
+        function exportPDF() {
+            alert('PDF export would generate a comprehensive competency report.\n\nThis feature requires backend integration.');
+        }
+        
+        function exportCSV() {
+            let csv = 'EPA,Title,Level,Cases Completed\n';
+            EPAs.forEach(e => {
+                csv += `${e.id},"${e.title}",${e.level},${e.casesCompleted}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'reasondx-epa-progress.csv';
+            a.click();
+        }
+        
+        function shareProgress() {
+            const data = btoa(JSON.stringify(EPAs.map(e => ({ id: e.id, level: e.level }))));
+            const url = `${window.location.origin}${window.location.pathname}?share=${data}`;
+            navigator.clipboard.writeText(url);
+            alert('Progress link copied to clipboard!');
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme');
+            document.body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
+        
+        // Load profile from localStorage
+        function loadProfile() {
+            const profile = localStorage.getItem('reasondx_profile');
+            if (profile) {
+                const p = JSON.parse(profile);
+                document.getElementById('profileAvatar').textContent = p.level === 'student' ? '🎓' : '🩺';
+                document.getElementById('profileName').textContent = p.level === 'student' ? 'Medical Student' : 'Resident';
+                document.getElementById('profileLevel').textContent = p.level === 'student' 
+                    ? `${p.year || 'MS3'} • EPA Framework`
+                    : `${p.specialty || 'Internal Medicine'} • ACGME Milestones`;
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfile();
+            renderEPAs();
+            renderMilestones();
+            renderActivities();
+            updateStats();
+        });
+    </script>
+</body>
+</html>

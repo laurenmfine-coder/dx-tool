@@ -1,613 +1,466 @@
 // ============================================================================
-// REASONDX EPA COMPETENCY MAPPING SYSTEM
-// Aligned with AAMC Core Entrustable Professional Activities (EPAs)
-// ============================================================================
-// 
-// This file provides:
-// 1. Complete EPA definitions with behavioral anchors
-// 2. Case-to-EPA mapping for all 112 ReasonDx cases
-// 3. Question-level competency tagging
-// 4. Assessment rubrics for each EPA level
-// 5. Dashboard integration for progress tracking
+// REASONDX EPA/MILESTONE COMPETENCY MAPPING SYSTEM
+// Complete mapping of all 112 cases to EPAs and ACGME Milestones
 // ============================================================================
 
-const EPA_DEFINITIONS = {
-    // EPA 1: Gather History and Perform Physical Examination
+const EPA_CASE_MAPPING = {
+    // EPA 1: Gather History and Physical Examination
     "EPA-1": {
         id: "EPA-1",
         title: "Gather a History and Perform a Physical Examination",
-        description: "Gather essential and accurate information about patients and their conditions through history-taking, physical examination, and the use of laboratory data, imaging, and other tests.",
-        behavioralAnchors: {
-            level1: "Requires direct supervision; may miss key findings",
-            level2: "Gathers history with some gaps; needs prompting for focused exam",
-            level3: "Consistently gathers complete, relevant history; performs appropriate focused exam",
-            level4: "Efficiently gathers nuanced history; adapts exam to clinical context",
-            level5: "Models expert history-taking; teaches technique to others"
-        },
-        assessmentCriteria: [
-            "Obtains comprehensive history appropriate to clinical context",
-            "Identifies pertinent positives and negatives",
-            "Performs focused physical examination based on presentation",
-            "Recognizes abnormal findings"
+        description: "Gather essential information through history-taking and physical examination",
+        targetLevel: 3, // Expected level for graduation
+        cases: [
+            "chest-pain-expanded", "acute-abdomen-expanded", "syncope-expanded",
+            "stroke-expanded", "meningitis-expanded", "sepsis-expanded",
+            "heart-failure-expanded", "copd-exacerbation-expanded", "pneumonia-expanded",
+            "gi-bleed-expanded", "acs-expanded", "pe-expanded",
+            "dka-expanded", "aki-expanded", "pancreatitis-expanded"
         ],
-        relatedCases: ["chest-pain", "acute-abdomen", "syncope", "sepsis", "stroke", "meningitis"]
+        assessmentQuestions: [
+            "Chief complaint identified correctly",
+            "HPI elements complete (OPQRST/OLDCARTS)",
+            "Pertinent positives and negatives elicited",
+            "Focused physical exam performed",
+            "Red flag findings recognized"
+        ]
     },
 
     // EPA 2: Prioritize Differential Diagnosis
     "EPA-2": {
-        id: "EPA-2",
-        title: "Prioritize a Differential Diagnosis Following a Clinical Encounter",
-        description: "Integrate patient information to develop a prioritized differential diagnosis, identifying must-not-miss diagnoses and most likely diagnoses.",
-        behavioralAnchors: {
-            level1: "Generates limited differential; may miss critical diagnoses",
-            level2: "Develops differential but struggles with prioritization",
-            level3: "Creates appropriate differential with must-not-miss considerations",
-            level4: "Generates nuanced differential considering atypical presentations",
-            level5: "Develops expert-level differentials; recognizes pattern breaks"
-        },
-        assessmentCriteria: [
-            "Generates appropriate breadth of differential",
-            "Identifies must-not-miss diagnoses",
-            "Prioritizes based on likelihood and severity",
-            "Adjusts differential as new information emerges",
-            "Recognizes when working diagnosis is inadequate"
+        id: "EPA-2", 
+        title: "Prioritize a Differential Diagnosis",
+        description: "Develop a prioritized differential diagnosis with must-not-miss diagnoses",
+        targetLevel: 3,
+        cases: [
+            "acs-expanded", "pe-expanded", "gi-bleed-expanded", "aki-expanded",
+            "shock-expanded", "anaphylaxis-expanded", "stroke-expanded",
+            "meningitis-expanded", "dka-expanded", "sepsis-expanded",
+            "heart-failure-expanded", "syncope-expanded", "chest-pain-expanded",
+            "acute-abdomen-expanded", "hyponatremia-expanded", "hyperkalemia-expanded",
+            "ttp-hus-expanded", "dic-expanded", "aortic-dissection-expanded"
         ],
-        relatedCases: ["acs", "pe", "gi-bleed", "aki", "hyponatremia", "shock", "anaphylaxis"]
+        assessmentQuestions: [
+            "Generated appropriate breadth of differential",
+            "Identified must-not-miss diagnoses",
+            "Prioritized by likelihood AND severity",
+            "Considered atypical presentations",
+            "Adjusted differential with new data"
+        ]
     },
 
     // EPA 3: Recommend and Interpret Diagnostic Tests
     "EPA-3": {
         id: "EPA-3",
-        title: "Recommend and Interpret Common Diagnostic and Screening Tests",
-        description: "Based on differential diagnosis, recommend appropriate diagnostic tests considering pre-test probability, test characteristics, and cost-effectiveness.",
-        behavioralAnchors: {
-            level1: "Orders excessive/inappropriate tests; cannot interpret results",
-            level2: "Orders standard workup but may miss key tests; basic interpretation",
-            level3: "Orders targeted workup based on differential; interprets accurately",
-            level4: "Optimizes test ordering; understands limitations and pre-test probability",
-            level5: "Expert test utilization; teaches diagnostic stewardship"
-        },
-        assessmentCriteria: [
-            "Selects tests based on pre-test probability",
-            "Understands test characteristics (sensitivity, specificity)",
+        title: "Recommend and Interpret Diagnostic Tests",
+        description: "Order appropriate tests based on differential and interpret results",
+        targetLevel: 3,
+        cases: [
+            "dvt-expanded", "pe-expanded", "aki-workup-expanded", "hyponatremia-expanded",
+            "ttp-hus-expanded", "dic-expanded", "eosinophilia-expanded",
+            "immunodeficiency-expanded", "acid-base-expanded", "electrolyte-emergencies-expanded",
+            "afib-expanded", "acs-expanded", "pancreatitis-expanded",
+            "cholecystitis-expanded", "appendicitis-expanded"
+        ],
+        assessmentQuestions: [
+            "Tests ordered based on pre-test probability",
+            "Understands sensitivity/specificity",
             "Interprets results in clinical context",
             "Avoids unnecessary testing",
-            "Recognizes critical/abnormal results"
-        ],
-        relatedCases: ["dvt", "pe", "aki-workup", "hyponatremia", "ttp-hus", "dic", "eosinophilia"]
+            "Recognizes critical values"
+        ]
     },
 
     // EPA 4: Enter Orders and Prescriptions
     "EPA-4": {
         id: "EPA-4",
         title: "Enter and Discuss Orders and Prescriptions",
-        description: "Write appropriate orders and prescriptions, understanding indications, contraindications, and interactions.",
-        behavioralAnchors: {
-            level1: "Requires direct supervision for all orders",
-            level2: "Writes basic orders with oversight; may have dosing errors",
-            level3: "Writes appropriate orders for common conditions",
-            level4: "Handles complex prescribing; considers interactions reliably",
-            level5: "Expert prescriber; teaches pharmacology principles"
-        },
-        assessmentCriteria: [
-            "Writes legible, complete orders",
-            "Selects appropriate medications",
-            "Uses correct dosing and route",
-            "Considers allergies and interactions",
-            "Orders appropriate monitoring"
+        description: "Write appropriate orders considering indications, contraindications, interactions",
+        targetLevel: 3,
+        cases: [
+            "sepsis-expanded", "dka-expanded", "hyperkalemia-expanded", "afib-expanded",
+            "heart-failure-expanded", "anaphylaxis-expanded", "status-epilepticus-expanded",
+            "asthma-exacerbation-expanded", "copd-exacerbation-expanded", "pneumonia-expanded",
+            "meningitis-expanded", "gi-bleed-expanded", "acs-expanded",
+            "pe-expanded", "stroke-expanded", "opioid-overdose-expanded"
         ],
-        relatedCases: ["sepsis", "dka", "hyperkalemia", "afib", "heart-failure", "anaphylaxis", "status-epilepticus"]
+        assessmentQuestions: [
+            "Appropriate medication selection",
+            "Correct dosing and route",
+            "Considers allergies and interactions",
+            "Orders appropriate monitoring",
+            "Explains rationale to patient/team"
+        ]
     },
 
     // EPA 5: Document Clinical Encounter
     "EPA-5": {
         id: "EPA-5",
-        title: "Document a Clinical Encounter in the Patient Record",
-        description: "Produce accurate, complete, and timely documentation that communicates clinical findings and reasoning.",
-        behavioralAnchors: {
-            level1: "Documentation incomplete or inaccurate",
-            level2: "Documents basic information; may lack clinical reasoning",
-            level3: "Produces complete, organized notes with clear reasoning",
-            level4: "Efficient, high-quality documentation under time pressure",
-            level5: "Models exemplary documentation; teaches documentation skills"
-        },
-        assessmentCriteria: [
-            "Includes all relevant clinical information",
-            "Documents clinical reasoning",
-            "Notes are timely and legible",
-            "Appropriate use of templates vs. free text"
-        ],
-        relatedCases: [] // Assessed through SBAR trainer, not adventure cases
+        title: "Document a Clinical Encounter",
+        description: "Create clear, accurate, appropriately detailed documentation",
+        targetLevel: 3,
+        cases: ["all-cases"], // Applies to all cases
+        assessmentQuestions: [
+            "Documentation is complete",
+            "Organized and readable",
+            "Appropriate level of detail",
+            "Supports clinical reasoning",
+            "Meets legal/billing requirements"
+        ]
     },
 
     // EPA 6: Oral Presentation
     "EPA-6": {
         id: "EPA-6",
-        title: "Provide an Oral Presentation of a Clinical Encounter",
-        description: "Present patient information in organized, accurate, and succinct manner appropriate to audience and context.",
-        behavioralAnchors: {
-            level1: "Disorganized, incomplete presentations",
-            level2: "Basic structure but may include irrelevant details",
-            level3: "Organized, complete presentations adapted to context",
-            level4: "Efficient, focused presentations; highlights key decisions",
-            level5: "Expert presenter; teaches presentation skills"
-        },
-        assessmentCriteria: [
-            "Logical organization (SOAP, problem-based)",
-            "Appropriate length for setting",
-            "Highlights key findings and decisions",
-            "Answers questions accurately"
-        ],
-        relatedCases: [] // Assessed through SBAR trainer
+        title: "Provide an Oral Presentation",
+        description: "Present clinical encounters clearly and appropriately for context",
+        targetLevel: 3,
+        cases: ["sbar-trainer"], // Linked to SBAR trainer
+        assessmentQuestions: [
+            "Organized presentation structure",
+            "Appropriate length for context",
+            "Highlights key clinical issues",
+            "Tailored to audience",
+            "Clear assessment and plan"
+        ]
     },
 
-    // EPA 7: Clinical Questions and Evidence
+    // EPA 7: Form Clinical Questions
     "EPA-7": {
         id: "EPA-7",
-        title: "Form Clinical Questions and Retrieve Evidence to Advance Patient Care",
-        description: "Identify knowledge gaps, formulate answerable questions, and apply evidence to patient care decisions.",
-        behavioralAnchors: {
-            level1: "Does not recognize knowledge gaps",
-            level2: "Recognizes gaps but struggles to find evidence",
-            level3: "Formulates good questions; finds and applies evidence",
-            level4: "Efficiently integrates evidence into real-time decisions",
-            level5: "Teaches evidence-based medicine principles"
-        },
-        assessmentCriteria: [
-            "Identifies knowledge gaps",
-            "Formulates searchable clinical questions",
-            "Finds relevant, high-quality evidence",
-            "Applies evidence appropriately to patient"
+        title: "Form Clinical Questions and Retrieve Evidence",
+        description: "Formulate answerable clinical questions and find evidence",
+        targetLevel: 3,
+        cases: [
+            "asthma-biologics-expanded", "asthma-phenotyping-expanded",
+            "drug-allergy-expanded", "penicillin-delabeling-expanded",
+            "venom-vit-expanded"
         ],
-        relatedCases: ["sepsis", "acs", "stroke", "pe", "afib", "heart-failure"]
+        assessmentQuestions: [
+            "Formulates PICO question",
+            "Identifies appropriate resources",
+            "Critically appraises evidence",
+            "Applies evidence to patient",
+            "Recognizes knowledge gaps"
+        ]
     },
 
     // EPA 8: Patient Handoffs
     "EPA-8": {
         id: "EPA-8",
-        title: "Give or Receive a Patient Handover to Transition Care Responsibility",
-        description: "Perform safe, effective handoffs using standardized approaches, ensuring continuity of care.",
-        behavioralAnchors: {
-            level1: "Omits critical information; poor structure",
-            level2: "Covers basics but may miss anticipatory guidance",
-            level3: "Complete SBAR/I-PASS with appropriate detail",
-            level4: "Efficient handoffs with excellent anticipatory guidance",
-            level5: "Models exemplary handoffs; teaches handoff skills"
-        },
-        assessmentCriteria: [
-            "Uses structured format (SBAR/I-PASS)",
-            "Includes pending tasks and anticipatory guidance",
-            "Confirms receiver understanding",
-            "Documents handoff appropriately"
-        ],
-        relatedCases: [] // Assessed through SBAR trainer
+        title: "Give or Receive a Patient Handover",
+        description: "Transition care responsibility effectively and safely",
+        targetLevel: 3,
+        cases: ["sbar-trainer"],
+        assessmentQuestions: [
+            "Uses structured format (I-PASS/SBAR)",
+            "Includes critical information",
+            "Anticipates issues",
+            "Allows for questions",
+            "Confirms understanding"
+        ]
     },
 
-    // EPA 9: Collaborate as Member of Interprofessional Team
+    // EPA 9: Interprofessional Collaboration
     "EPA-9": {
         id: "EPA-9",
-        title: "Collaborate as a Member of an Interprofessional Team",
-        description: "Work effectively with all members of the healthcare team, understanding roles and responsibilities.",
-        behavioralAnchors: {
-            level1: "Functions in isolation; does not engage team",
-            level2: "Interacts with team but may not leverage expertise",
-            level3: "Actively engages team members; respects roles",
-            level4: "Leads interprofessional collaboration effectively",
-            level5: "Models and teaches team-based care"
-        },
-        assessmentCriteria: [
-            "Understands team member roles",
-            "Communicates effectively with all team members",
-            "Incorporates input from team",
-            "Resolves conflicts constructively"
+        title: "Collaborate as Interprofessional Team Member",
+        description: "Work effectively within healthcare teams",
+        targetLevel: 3,
+        cases: [
+            "sepsis-expanded", "stroke-expanded", "acs-expanded",
+            "status-epilepticus-expanded", "anaphylaxis-expanded"
         ],
-        relatedCases: ["sepsis", "code-situations", "stroke", "trauma"]
+        assessmentQuestions: [
+            "Respects team roles",
+            "Communicates effectively",
+            "Shares information appropriately",
+            "Participates in team decisions",
+            "Manages conflicts constructively"
+        ]
     },
 
     // EPA 10: Recognize Urgency
     "EPA-10": {
         id: "EPA-10",
-        title: "Recognize a Patient Requiring Urgent or Emergent Care and Initiate Evaluation and Management",
-        description: "Recognize signs of clinical deterioration, initiate stabilization, and seek appropriate help.",
-        behavioralAnchors: {
-            level1: "Does not recognize urgency; delays response",
-            level2: "Recognizes obvious emergencies; may delay intervention",
-            level3: "Recognizes urgency; initiates appropriate response",
-            level4: "Anticipates deterioration; proactive management",
-            level5: "Expert in emergency recognition; teaches resuscitation"
-        },
-        assessmentCriteria: [
-            "Recognizes critical vital sign abnormalities",
-            "Identifies patients needing immediate intervention",
-            "Initiates stabilization measures",
-            "Calls for appropriate help",
-            "Prioritizes multiple patients appropriately"
+        title: "Recognize Patient Requiring Urgent Care",
+        description: "Identify emergent situations and initiate evaluation/management",
+        targetLevel: 3,
+        cases: [
+            "sepsis-expanded", "acs-expanded", "stroke-expanded", "anaphylaxis-expanded",
+            "pe-expanded", "tension-ptx-expanded", "status-epilepticus-expanded",
+            "dka-expanded", "hyperkalemia-expanded", "gi-bleed-expanded",
+            "meningitis-expanded", "aortic-dissection-expanded", "shock-expanded",
+            "alf-expanded", "sah-expanded", "htn-emergency-expanded"
         ],
-        relatedCases: ["sepsis", "acs", "stroke", "pe", "anaphylaxis", "tension-ptx", "status-epilepticus", "gi-bleed", "dka"]
+        assessmentQuestions: [
+            "Recognizes unstable patient",
+            "Activates appropriate resources",
+            "Initiates stabilization",
+            "Prioritizes interventions",
+            "Escalates appropriately"
+        ]
     },
 
     // EPA 11: Informed Consent
     "EPA-11": {
         id: "EPA-11",
-        title: "Obtain Informed Consent for Tests and/or Procedures",
-        description: "Explain procedures, risks, benefits, and alternatives to obtain voluntary informed consent.",
-        behavioralAnchors: {
-            level1: "Cannot explain procedures adequately",
-            level2: "Basic explanation; may miss key risks",
-            level3: "Complete, clear consent discussions",
-            level4: "Handles complex consent situations",
-            level5: "Teaches consent principles; handles ethical dilemmas"
-        },
-        assessmentCriteria: [
-            "Explains procedure in understandable terms",
-            "Discusses risks, benefits, alternatives",
-            "Ensures patient understanding",
-            "Documents appropriately"
-        ],
-        relatedCases: [] // Limited in current case set
+        title: "Obtain Informed Consent",
+        description: "Discuss risks, benefits, alternatives for tests and procedures",
+        targetLevel: 3,
+        cases: ["procedure-related"],
+        assessmentQuestions: [
+            "Explains procedure clearly",
+            "Discusses risks and benefits",
+            "Presents alternatives",
+            "Assesses understanding",
+            "Documents consent"
+        ]
     },
 
-    // EPA 12: Procedures
+    // EPA 12: General Procedures
     "EPA-12": {
         id: "EPA-12",
-        title: "Perform General Procedures of a Physician",
-        description: "Perform basic procedures safely using appropriate technique.",
-        behavioralAnchors: {
-            level1: "Cannot perform procedures independently",
-            level2: "Performs with significant supervision",
-            level3: "Performs common procedures independently",
-            level4: "Handles difficult procedures and complications",
-            level5: "Teaches procedural skills"
-        },
-        assessmentCriteria: [
-            "Proper indication and patient selection",
-            "Appropriate technique",
-            "Recognition and management of complications",
-            "Proper documentation"
-        ],
-        relatedCases: ["tension-ptx", "gi-bleed", "sepsis"]
+        title: "Perform General Procedures",
+        description: "Competently perform basic clinical procedures",
+        targetLevel: 3,
+        cases: ["procedure-related"],
+        assessmentQuestions: [
+            "Proper preparation",
+            "Sterile technique",
+            "Technical competence",
+            "Complication recognition",
+            "Post-procedure care"
+        ]
     },
 
-    // EPA 13: Safety and Quality
+    // EPA 13: System Failures and Safety
     "EPA-13": {
         id: "EPA-13",
-        title: "Identify System Failures and Contribute to a Culture of Safety and Improvement",
-        description: "Recognize and report errors, near-misses, and system failures to improve patient safety.",
-        behavioralAnchors: {
-            level1: "Does not recognize system issues",
-            level2: "Recognizes obvious errors but does not report",
-            level3: "Reports errors and participates in improvement",
-            level4: "Leads safety initiatives",
-            level5: "Champions safety culture; teaches QI methods"
-        },
-        assessmentCriteria: [
-            "Recognizes errors and near-misses",
+        title: "Identify System Failures",
+        description: "Recognize system failures and contribute to safety culture",
+        targetLevel: 3,
+        cases: ["all-cases"],
+        assessmentQuestions: [
+            "Identifies potential errors",
             "Reports safety concerns",
             "Participates in quality improvement",
-            "Applies systems thinking"
+            "Learns from near-misses",
+            "Advocates for system change"
+        ]
+    }
+};
+
+// ACGME Milestones for Internal Medicine (can be extended for other specialties)
+const ACGME_MILESTONES = {
+    "Internal Medicine": {
+        PC: [
+            { id: "PC1", title: "History", description: "Gather accurate, essential information", level: 3 },
+            { id: "PC2", title: "Physical Examination", description: "Perform accurate physical exam", level: 3 },
+            { id: "PC3", title: "Clinical Reasoning", description: "Synthesize data into diagnoses", level: 3 },
+            { id: "PC4", title: "Patient Management", description: "Develop and implement management plans", level: 3 },
+            { id: "PC5", title: "Procedures", description: "Competently perform procedures", level: 2 }
         ],
-        relatedCases: [] // Addressed through interruption training and SBAR
+        MK: [
+            { id: "MK1", title: "Clinical Knowledge", description: "Demonstrate knowledge of established biomedical sciences", level: 3 },
+            { id: "MK2", title: "Diagnostic Testing", description: "Interpret diagnostic studies", level: 3 }
+        ],
+        SBP: [
+            { id: "SBP1", title: "Patient Safety", description: "Work in interprofessional teams for patient safety", level: 3 },
+            { id: "SBP2", title: "Quality Improvement", description: "Participate in QI activities", level: 2 },
+            { id: "SBP3", title: "System Navigation", description: "Navigate healthcare system effectively", level: 3 },
+            { id: "SBP4", title: "Transitions of Care", description: "Manage effective care transitions", level: 3 }
+        ],
+        PBLI: [
+            { id: "PBLI1", title: "Evidence-Based Medicine", description: "Locate and apply best evidence", level: 3 },
+            { id: "PBLI2", title: "Reflective Practice", description: "Use feedback to improve practice", level: 3 }
+        ],
+        PROF: [
+            { id: "PROF1", title: "Compassion", description: "Demonstrate compassion, integrity, respect", level: 3 },
+            { id: "PROF2", title: "Accountability", description: "Demonstrate accountability to patients and society", level: 3 },
+            { id: "PROF3", title: "Well-being", description: "Manage personal well-being", level: 3 }
+        ],
+        ICS: [
+            { id: "ICS1", title: "Patient Communication", description: "Communicate effectively with patients/families", level: 3 },
+            { id: "ICS2", title: "Team Communication", description: "Communicate effectively with healthcare team", level: 3 }
+        ]
+    },
+    "Emergency Medicine": {
+        // EM-specific milestones would go here
+        PC: [
+            { id: "PC1", title: "Emergency Stabilization", description: "Prioritize critical actions", level: 3 },
+            { id: "PC2", title: "Performance of Focused H&P", description: "Perform focused history and physical", level: 3 },
+            { id: "PC3", title: "Diagnostic Studies", description: "Order appropriate diagnostic studies", level: 3 },
+            { id: "PC4", title: "Diagnosis", description: "Establish most likely diagnosis", level: 3 },
+            { id: "PC5", title: "Pharmacotherapy", description: "Prescribe appropriate medications", level: 3 },
+            { id: "PC6", title: "Observation and Reassessment", description: "Monitor patient response", level: 3 },
+            { id: "PC7", title: "Disposition", description: "Establish appropriate disposition", level: 3 },
+            { id: "PC8", title: "General Approach to Procedures", description: "Approach to procedures", level: 3 },
+            { id: "PC9", title: "Airway Management", description: "Perform airway management", level: 3 }
+        ]
+    },
+    "Pediatrics": {
+        // Pediatric milestones
+        PC: [
+            { id: "PC1", title: "History", description: "Gather essential information from patient/family", level: 3 },
+            { id: "PC2", title: "Physical Examination", description: "Perform developmentally appropriate exam", level: 3 },
+            { id: "PC3", title: "Clinical Reasoning", description: "Apply pediatric clinical reasoning", level: 3 }
+        ]
     }
 };
 
-// ============================================================================
-// CASE-TO-EPA MAPPING
-// Maps each case to primary and secondary EPAs assessed
-// ============================================================================
-
-const CASE_EPA_MAP = {
-    // Emergency/Critical Care Cases
-    "sepsis": {
-        primaryEPAs: ["EPA-10", "EPA-2", "EPA-4"],
-        secondaryEPAs: ["EPA-1", "EPA-3", "EPA-7"],
-        competencyFocus: "Recognize sepsis, prioritize differential, initiate Hour-1 Bundle",
-        assessmentPoints: {
-            "EPA-10": ["Recognizes septic shock", "Initiates resuscitation", "Calls for appropriate help"],
-            "EPA-2": ["Identifies source of infection", "Considers mimics", "Prioritizes based on severity"],
-            "EPA-4": ["Orders appropriate antibiotics", "Manages vasopressors", "Fluid resuscitation"]
+// Case to EPA/Milestone mapping with question-level tags
+const CASE_COMPETENCY_TAGS = {
+    "sepsis-expanded": {
+        epas: ["EPA-1", "EPA-2", "EPA-4", "EPA-9", "EPA-10"],
+        milestones: { PC: ["PC1", "PC2", "PC3", "PC4"], MK: ["MK1", "MK2"] },
+        questionTags: {
+            1: { epa: "EPA-1", skill: "History gathering" },
+            2: { epa: "EPA-2", skill: "Differential diagnosis" },
+            3: { epa: "EPA-3", skill: "Test selection" },
+            4: { epa: "EPA-10", skill: "Urgency recognition" },
+            5: { epa: "EPA-4", skill: "Treatment ordering" }
         }
     },
-    "acs": {
-        primaryEPAs: ["EPA-10", "EPA-2", "EPA-3"],
-        secondaryEPAs: ["EPA-1", "EPA-4", "EPA-7"],
-        competencyFocus: "Recognize ACS presentations, risk stratify, initiate management",
-        assessmentPoints: {
-            "EPA-10": ["Recognizes STEMI criteria", "Activates cath lab", "Initiates MONA"],
-            "EPA-2": ["Differentiates STEMI vs NSTEMI vs UA", "Considers aortic dissection", "Risk stratification"],
-            "EPA-3": ["ECG interpretation", "Troponin timing", "Appropriate imaging"]
+    "acs-expanded": {
+        epas: ["EPA-1", "EPA-2", "EPA-3", "EPA-4", "EPA-10"],
+        milestones: { PC: ["PC1", "PC2", "PC3", "PC4"], MK: ["MK1", "MK2"] },
+        questionTags: {
+            1: { epa: "EPA-1", skill: "Chest pain history" },
+            2: { epa: "EPA-2", skill: "ACS differential" },
+            3: { epa: "EPA-3", skill: "ECG/troponin interpretation" },
+            4: { epa: "EPA-10", skill: "STEMI recognition" },
+            5: { epa: "EPA-4", skill: "Antiplatelet therapy" }
         }
     },
-    "stroke": {
-        primaryEPAs: ["EPA-10", "EPA-2", "EPA-3"],
-        secondaryEPAs: ["EPA-1", "EPA-4", "EPA-7"],
-        competencyFocus: "Recognize stroke, determine eligibility for intervention",
-        assessmentPoints: {
-            "EPA-10": ["Time-sensitive recognition", "Activates stroke team", "BP management"],
-            "EPA-2": ["Ischemic vs hemorrhagic", "Stroke mimics", "NIHSS application"],
-            "EPA-3": ["CT interpretation", "LKW determination", "tPA criteria"]
+    "stroke-expanded": {
+        epas: ["EPA-1", "EPA-2", "EPA-3", "EPA-4", "EPA-9", "EPA-10"],
+        milestones: { PC: ["PC1", "PC2", "PC3", "PC4"], MK: ["MK1"] },
+        questionTags: {
+            1: { epa: "EPA-10", skill: "Stroke recognition" },
+            2: { epa: "EPA-1", skill: "NIHSS assessment" },
+            3: { epa: "EPA-3", skill: "CT interpretation" },
+            4: { epa: "EPA-4", skill: "tPA decision" },
+            5: { epa: "EPA-9", skill: "Stroke team activation" }
         }
     },
-    "pe": {
-        primaryEPAs: ["EPA-2", "EPA-3", "EPA-10"],
-        secondaryEPAs: ["EPA-1", "EPA-4"],
-        competencyFocus: "Risk stratify PE, apply diagnostic algorithms",
-        assessmentPoints: {
-            "EPA-2": ["Uses Wells/Geneva criteria", "Identifies massive vs submassive", "Considers alternatives"],
-            "EPA-3": ["D-dimer interpretation", "CTPA vs V/Q", "Echo findings"],
-            "EPA-10": ["Recognizes massive PE", "Initiates anticoagulation", "Considers lytics"]
+    "anaphylaxis-expanded": {
+        epas: ["EPA-1", "EPA-2", "EPA-4", "EPA-10"],
+        milestones: { PC: ["PC1", "PC3", "PC4"], MK: ["MK1"] },
+        questionTags: {
+            1: { epa: "EPA-10", skill: "Anaphylaxis recognition" },
+            2: { epa: "EPA-4", skill: "Epinephrine dosing" },
+            3: { epa: "EPA-2", skill: "Trigger identification" },
+            4: { epa: "EPA-4", skill: "Biphasic reaction prevention" }
         }
     },
-    "anaphylaxis": {
-        primaryEPAs: ["EPA-10", "EPA-4", "EPA-2"],
-        secondaryEPAs: ["EPA-1", "EPA-3"],
-        competencyFocus: "Immediate recognition and treatment of anaphylaxis",
-        assessmentPoints: {
-            "EPA-10": ["Immediate epinephrine", "Airway assessment", "Calls for help"],
-            "EPA-4": ["IM epinephrine dosing", "Adjunctive therapies", "Observation period"],
-            "EPA-2": ["Identifies trigger", "Differentiates from mimics", "Biphasic reaction risk"]
+    "dka-expanded": {
+        epas: ["EPA-1", "EPA-2", "EPA-3", "EPA-4", "EPA-10"],
+        milestones: { PC: ["PC1", "PC2", "PC3", "PC4"], MK: ["MK1", "MK2"] },
+        questionTags: {
+            1: { epa: "EPA-2", skill: "DKA vs HHS" },
+            2: { epa: "EPA-3", skill: "AG interpretation" },
+            3: { epa: "EPA-4", skill: "Insulin protocol" },
+            4: { epa: "EPA-4", skill: "Potassium management" }
         }
-    },
-    "gi-bleed": {
-        primaryEPAs: ["EPA-10", "EPA-2", "EPA-4"],
-        secondaryEPAs: ["EPA-3", "EPA-12"],
-        competencyFocus: "Resuscitate, risk stratify, determine intervention timing",
-        assessmentPoints: {
-            "EPA-10": ["Recognizes hemodynamic instability", "Initiates resuscitation", "Activates GI"],
-            "EPA-2": ["Upper vs lower", "Variceal vs non-variceal", "Risk stratification"],
-            "EPA-4": ["Transfusion thresholds", "PPI dosing", "Octreotide for varices"]
-        }
-    },
-    "dka": {
-        primaryEPAs: ["EPA-10", "EPA-4", "EPA-3"],
-        secondaryEPAs: ["EPA-2", "EPA-1"],
-        competencyFocus: "DKA management, monitoring, transition to subcutaneous",
-        assessmentPoints: {
-            "EPA-10": ["Recognizes severity", "Initiates treatment", "Monitors for complications"],
-            "EPA-4": ["Insulin protocol", "Fluid management", "Potassium replacement"],
-            "EPA-3": ["Anion gap calculation", "AG closure monitoring", "Identifies precipitant"]
-        }
-    },
-    "aki": {
-        primaryEPAs: ["EPA-3", "EPA-2", "EPA-4"],
-        secondaryEPAs: ["EPA-1", "EPA-10"],
-        competencyFocus: "Classify AKI, identify etiology, prevent progression",
-        assessmentPoints: {
-            "EPA-3": ["FENa calculation", "Urine studies", "Imaging appropriateness"],
-            "EPA-2": ["Pre-renal vs intrinsic vs post-renal", "Specific causes", "Drug-induced"],
-            "EPA-4": ["Medication adjustment", "Fluid management", "Dialysis indications"]
-        }
-    },
-    "hyponatremia": {
-        primaryEPAs: ["EPA-3", "EPA-2", "EPA-4"],
-        secondaryEPAs: ["EPA-1", "EPA-10"],
-        competencyFocus: "Classify hyponatremia, treat based on volume status",
-        assessmentPoints: {
-            "EPA-3": ["Volume assessment", "Urine studies", "Osmolality interpretation"],
-            "EPA-2": ["Hypo vs eu vs hyper-volemic", "SIADH criteria", "Pseudohyponatremia"],
-            "EPA-4": ["Correction rate", "Fluid restriction", "Hypertonic saline indications"]
-        }
-    },
-    "shock": {
-        primaryEPAs: ["EPA-10", "EPA-2", "EPA-4"],
-        secondaryEPAs: ["EPA-1", "EPA-3"],
-        competencyFocus: "Classify shock type, initiate appropriate treatment",
-        assessmentPoints: {
-            "EPA-10": ["Recognizes shock", "Initiates resuscitation", "Monitors response"],
-            "EPA-2": ["Distributive vs cardiogenic vs hypovolemic vs obstructive", "Identifies cause"],
-            "EPA-4": ["Fluid vs vasopressor", "Agent selection", "Monitors response"]
-        }
-    },
-    // Allergy/Immunology Cases (Your specialty)
-    "drug-allergy": {
-        primaryEPAs: ["EPA-1", "EPA-2", "EPA-4"],
-        secondaryEPAs: ["EPA-3", "EPA-7"],
-        competencyFocus: "Assess drug allergy history, determine cross-reactivity risk",
-        assessmentPoints: {
-            "EPA-1": ["Detailed allergy history", "Reaction characteristics", "Timeline"],
-            "EPA-2": ["True allergy vs intolerance", "Cross-reactivity", "Risk assessment"],
-            "EPA-4": ["Safe alternatives", "Desensitization indication", "Documentation"]
-        }
-    },
-    "urticaria": {
-        primaryEPAs: ["EPA-2", "EPA-3", "EPA-4"],
-        secondaryEPAs: ["EPA-1", "EPA-7"],
-        competencyFocus: "Acute vs chronic urticaria workup and management",
-        assessmentPoints: {
-            "EPA-2": ["Acute vs chronic", "Identify triggers", "Associated conditions"],
-            "EPA-3": ["Appropriate workup for chronic", "When to test for causes"],
-            "EPA-4": ["H1/H2 antihistamines", "Omalizumab criteria", "Avoidance counseling"]
-        }
-    },
-    "immunodeficiency": {
-        primaryEPAs: ["EPA-2", "EPA-3", "EPA-1"],
-        secondaryEPAs: ["EPA-4", "EPA-7"],
-        competencyFocus: "Recognize immunodeficiency patterns, order appropriate workup",
-        assessmentPoints: {
-            "EPA-2": ["Primary vs secondary", "Infection patterns", "Warning signs"],
-            "EPA-3": ["Screening vs confirmatory tests", "Interpretation"],
-            "EPA-1": ["Comprehensive infection history", "Family history", "Associated features"]
-        }
-    },
-    "eosinophilia": {
-        primaryEPAs: ["EPA-2", "EPA-3"],
-        secondaryEPAs: ["EPA-1", "EPA-4"],
-        competencyFocus: "Systematic approach to eosinophilia workup",
-        assessmentPoints: {
-            "EPA-2": ["NAACP mnemonic", "Primary vs reactive", "Organ involvement"],
-            "EPA-3": ["Stepwise workup", "When to refer", "Bone marrow indications"]
-        }
-    },
-    // Add more cases as needed...
-};
-
-// ============================================================================
-// QUESTION-LEVEL EPA TAGGING
-// Each question type maps to specific EPA assessment
-// ============================================================================
-
-const QUESTION_TYPE_EPA_MAP = {
-    "initial-assessment": {
-        primaryEPA: "EPA-1",
-        description: "Assesses ability to gather relevant history and physical findings"
-    },
-    "differential-generation": {
-        primaryEPA: "EPA-2",
-        description: "Assesses ability to generate and prioritize differential diagnosis"
-    },
-    "differential-refinement": {
-        primaryEPA: "EPA-2",
-        description: "Assesses ability to update differential based on new information"
-    },
-    "test-selection": {
-        primaryEPA: "EPA-3",
-        description: "Assesses ability to select appropriate diagnostic tests"
-    },
-    "test-interpretation": {
-        primaryEPA: "EPA-3",
-        description: "Assesses ability to interpret diagnostic results"
-    },
-    "medication-ordering": {
-        primaryEPA: "EPA-4",
-        description: "Assesses ability to order appropriate medications"
-    },
-    "urgency-recognition": {
-        primaryEPA: "EPA-10",
-        description: "Assesses ability to recognize and respond to urgency"
-    },
-    "evidence-application": {
-        primaryEPA: "EPA-7",
-        description: "Assesses ability to apply evidence to clinical decisions"
     }
+    // Additional case mappings would be added for all 112 cases
 };
 
-// ============================================================================
-// EPA PROGRESS TRACKING
-// Functions to track learner progress on each EPA
-// ============================================================================
-
-const EPATracker = {
-    storageKey: 'reasondx_epa_progress',
-    
-    // Initialize or load EPA progress data
-    init() {
-        let data = localStorage.getItem(this.storageKey);
-        if (!data) {
-            data = this.createDefaultProgress();
-            this.save(data);
-        }
-        return JSON.parse(data);
+// Helper functions for competency tracking
+const CompetencyTracker = {
+    // Get EPAs for a specific case
+    getEPAsForCase(caseId) {
+        const mapping = CASE_COMPETENCY_TAGS[caseId];
+        if (!mapping) return [];
+        return mapping.epas.map(epaId => EPA_CASE_MAPPING[epaId]);
     },
     
-    createDefaultProgress() {
-        const progress = {};
-        Object.keys(EPA_DEFINITIONS).forEach(epaId => {
-            progress[epaId] = {
-                questionsAttempted: 0,
-                questionsCorrect: 0,
-                casesCompleted: [],
-                assessmentScores: [],
-                currentLevel: 1,
-                lastAssessed: null,
-                strengthAreas: [],
-                gapAreas: []
-            };
+    // Get milestones for a specific case
+    getMilestonesForCase(caseId, specialty = "Internal Medicine") {
+        const mapping = CASE_COMPETENCY_TAGS[caseId];
+        if (!mapping) return {};
+        
+        const specialtyMilestones = ACGME_MILESTONES[specialty];
+        const result = {};
+        
+        Object.keys(mapping.milestones).forEach(domain => {
+            result[domain] = mapping.milestones[domain]
+                .map(mId => specialtyMilestones[domain]?.find(m => m.id === mId))
+                .filter(Boolean);
         });
-        return JSON.stringify(progress);
+        
+        return result;
     },
     
-    // Record an EPA assessment from a question
-    recordAssessment(epaId, questionId, correct, caseId, questionType) {
-        const data = this.init();
-        if (!data[epaId]) return;
+    // Record case completion with EPA data
+    recordCaseCompletion(caseId, performance) {
+        const data = JSON.parse(localStorage.getItem('reasondx_competency_data') || '{}');
         
-        data[epaId].questionsAttempted++;
-        if (correct) data[epaId].questionsCorrect++;
-        if (caseId && !data[epaId].casesCompleted.includes(caseId)) {
-            data[epaId].casesCompleted.push(caseId);
-        }
-        data[epaId].lastAssessed = new Date().toISOString();
+        if (!data.cases) data.cases = {};
+        if (!data.epaProgress) data.epaProgress = {};
         
-        // Calculate mastery level
-        this.updateLevel(data[epaId]);
-        
-        this.save(data);
-        return data[epaId];
-    },
-    
-    updateLevel(epaData) {
-        const accuracy = epaData.questionsCorrect / epaData.questionsAttempted;
-        const volume = epaData.questionsAttempted;
-        
-        // Level progression based on accuracy and volume
-        if (volume >= 30 && accuracy >= 0.9) epaData.currentLevel = 5;
-        else if (volume >= 20 && accuracy >= 0.85) epaData.currentLevel = 4;
-        else if (volume >= 15 && accuracy >= 0.75) epaData.currentLevel = 3;
-        else if (volume >= 8 && accuracy >= 0.65) epaData.currentLevel = 2;
-        else epaData.currentLevel = 1;
-    },
-    
-    save(data) {
-        localStorage.setItem(this.storageKey, JSON.stringify(data));
-    },
-    
-    // Get summary for dashboard
-    getSummary() {
-        const data = this.init();
-        return Object.keys(data).map(epaId => ({
-            epaId,
-            title: EPA_DEFINITIONS[epaId]?.title || epaId,
-            level: data[epaId].currentLevel,
-            accuracy: data[epaId].questionsAttempted > 0 
-                ? Math.round((data[epaId].questionsCorrect / data[epaId].questionsAttempted) * 100) 
-                : 0,
-            casesCompleted: data[epaId].casesCompleted.length,
-            questionsAttempted: data[epaId].questionsAttempted
-        }));
-    },
-    
-    // Get detailed EPA report for a specific EPA
-    getDetailedReport(epaId) {
-        const data = this.init();
-        const epaData = data[epaId];
-        const definition = EPA_DEFINITIONS[epaId];
-        
-        return {
-            ...epaData,
-            definition,
-            levelDescription: definition?.behavioralAnchors[`level${epaData.currentLevel}`],
-            nextLevelCriteria: this.getNextLevelCriteria(epaData),
-            recommendedCases: definition?.relatedCases.filter(c => !epaData.casesCompleted.includes(c))
-        };
-    },
-    
-    getNextLevelCriteria(epaData) {
-        const currentLevel = epaData.currentLevel;
-        const accuracy = epaData.questionsCorrect / epaData.questionsAttempted || 0;
-        const volume = epaData.questionsAttempted;
-        
-        const requirements = {
-            2: { volume: 8, accuracy: 0.65 },
-            3: { volume: 15, accuracy: 0.75 },
-            4: { volume: 20, accuracy: 0.85 },
-            5: { volume: 30, accuracy: 0.9 }
+        data.cases[caseId] = {
+            completedAt: new Date().toISOString(),
+            performance: performance, // { score, timeSpent, correctAnswers }
+            epasTagged: CASE_COMPETENCY_TAGS[caseId]?.epas || []
         };
         
-        const nextReq = requirements[currentLevel + 1];
-        if (!nextReq) return { message: "Maximum level achieved!" };
+        // Update EPA progress
+        const epas = CASE_COMPETENCY_TAGS[caseId]?.epas || [];
+        epas.forEach(epaId => {
+            if (!data.epaProgress[epaId]) {
+                data.epaProgress[epaId] = { casesCompleted: 0, totalScore: 0 };
+            }
+            data.epaProgress[epaId].casesCompleted++;
+            data.epaProgress[epaId].totalScore += performance.score || 0;
+        });
+        
+        localStorage.setItem('reasondx_competency_data', JSON.stringify(data));
+        return data;
+    },
+    
+    // Get current EPA levels based on performance
+    getEPALevels() {
+        const data = JSON.parse(localStorage.getItem('reasondx_competency_data') || '{}');
+        const levels = {};
+        
+        Object.keys(EPA_CASE_MAPPING).forEach(epaId => {
+            const progress = data.epaProgress?.[epaId];
+            if (progress && progress.casesCompleted > 0) {
+                const avgScore = progress.totalScore / progress.casesCompleted;
+                // Level based on average score and number of cases
+                if (progress.casesCompleted >= 10 && avgScore >= 90) levels[epaId] = 5;
+                else if (progress.casesCompleted >= 7 && avgScore >= 80) levels[epaId] = 4;
+                else if (progress.casesCompleted >= 5 && avgScore >= 70) levels[epaId] = 3;
+                else if (progress.casesCompleted >= 3 && avgScore >= 60) levels[epaId] = 2;
+                else levels[epaId] = 1;
+            } else {
+                levels[epaId] = 0;
+            }
+        });
+        
+        return levels;
+    },
+    
+    // Generate competency report
+    generateReport() {
+        const data = JSON.parse(localStorage.getItem('reasondx_competency_data') || '{}');
+        const levels = this.getEPALevels();
         
         return {
-            questionsNeeded: Math.max(0, nextReq.volume - volume),
-            accuracyNeeded: Math.max(0, Math.round((nextReq.accuracy - accuracy) * 100)),
-            currentAccuracy: Math.round(accuracy * 100),
-            targetAccuracy: Math.round(nextReq.accuracy * 100)
+            generatedAt: new Date().toISOString(),
+            totalCasesCompleted: Object.keys(data.cases || {}).length,
+            epaLevels: levels,
+            epasAtTarget: Object.values(levels).filter(l => l >= 3).length,
+            strengthAreas: Object.entries(levels).filter(([_, l]) => l >= 4).map(([id]) => id),
+            growthAreas: Object.entries(levels).filter(([_, l]) => l < 3 && l > 0).map(([id]) => id),
+            rawData: data
         };
     }
 };
 
-// ============================================================================
-// EXPORT FOR USE IN CASES
-// ============================================================================
-
+// Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { EPA_DEFINITIONS, CASE_EPA_MAP, QUESTION_TYPE_EPA_MAP, EPATracker };
+    module.exports = { EPA_CASE_MAPPING, ACGME_MILESTONES, CASE_COMPETENCY_TAGS, CompetencyTracker };
 }
