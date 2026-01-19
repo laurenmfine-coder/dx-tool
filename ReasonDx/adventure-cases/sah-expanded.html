@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Subarachnoid Hemorrhage | Clinical Adventure</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #581c87 0%, #9333ea 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #0891b2 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(88, 28, 135, 0.9); border-radius: 16px; margin-bottom: 20px; }
-        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #9333ea; margin-left: 10px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #0891b2; margin-left: 10px; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #9333ea, #d8b4fe); border-radius: 3px; }
-        .scene { background: linear-gradient(135deg, #581c87, #7c3aed); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0891b2, #d8b4fe); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #1e3a5f, #7c3aed); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
         .scene-header { background: rgba(147, 51, 234, 0.15); padding: 16px 20px; }
         .scene-phase { font-size: 0.75rem; color: #d8b4fe; text-transform: uppercase; }
         .scene-title { font-size: 1.4rem; font-weight: 700; }
@@ -26,7 +26,7 @@
         .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
         .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
-        .btn { padding: 16px 28px; background: linear-gradient(135deg, #9333ea, #7c3aed); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #0891b2, #7c3aed); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
         .comparison-table th { background: rgba(0,0,0,0.3); color: #d8b4fe; }
@@ -38,6 +38,30 @@
         .pearl .tip-header { color: #4ade80; }
         .pitfall .tip-header { color: #f87171; }
         @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
     </style>
 </head>
 <body>
@@ -289,7 +313,31 @@
     font-size: 0.9rem;
     display: none;
 }
-</style>
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
 
 <div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
     <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
@@ -307,18 +355,18 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
         <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
             <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../mechanism/stroke-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Subarachnoid Hemorrhage</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Subarachnoid Hemorrhage</a>
         </div>
         <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
             <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="tbi-icp-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
-            <a href="spinal-cord-compression-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Spinal Cord Compression</a>
-            <a href="peds-febrile-seizure-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Febrile Seizure</a>
+            <a href="tbi-icp-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
+            <a href="spinal-cord-compression-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Spinal Cord Compression</a>
+            <a href="febrile-seizure-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Febrile Seizure</a>
         </div>
         <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
             <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
