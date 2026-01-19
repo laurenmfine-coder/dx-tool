@@ -885,13 +885,13 @@ Thank you,
                 'Urgency (emergent/urgent/routine)',
                 'Specific questions'
             ],
-            example: `ALLERGY/IMMUNOLOGY CONSULT REQUEST
+            example: `ALLERGY/IMMUNOLOGY COMedical SchoolLT REQUEST
 
 PATIENT: [Name, DOB, MRN]
 SERVICE: [Requesting service]
 URGENCY: [Emergent/Urgent/Routine]
 
-CONSULT QUESTION: [Primary question]
+COMedical SchoolLT QUESTION: [Primary question]
 
 CLINICAL SCENARIO:
 [Description of reaction/issue]

@@ -636,7 +636,7 @@ _coachPersona: {
         'assessment': 'Grunting (trying to maintain FRC), nasal flaring, subcostal retractions. SpO2 82% at 3 minutes (target is 70-75% at this point - almost okay). HR 140.',
         'cpap vs intubate': 'She\'s breathing and HR is good. Start CPAP 6 cmH2O. Reserve intubation for: apnea, HR <100 despite PPV, or no improvement on CPAP.',
         'cpap response': 'On CPAP 6, FiO2 40%: SpO2 88% at 10 min, HR 150, still grunting but improving. This is good response.',
-        'surfactant': 'At 28 weeks with RDS, she\'ll likely need surfactant. Can give via INSURE (Intubate-Surfactant-Extubate) or LISA (less invasive surfactant administration) if trained.',
+        'surfactant': 'At 28 weeks with RDS, she\'ll likely need surfactant. Can give via IMedical SchoolRE (Intubate-Surfactant-Extubate) or LISA (less invasive surfactant administration) if trained.',
         'if intubated': 'ETT size for 28 weeks ≈ 2.5mm. Depth at lip ≈ 7cm. Initial vent: PIP 18-20, PEEP 5, Rate 40-60, iTime 0.3s, FiO2 to target SpO2 88-95%.',
         'blood gas': 'First gas: pH 7.28, CO2 55, PO2 60. Moderate respiratory acidosis expected. Goal: pH >7.25, SpO2 88-95%, permissive hypercapnia okay (CO2 50-60).'
     },

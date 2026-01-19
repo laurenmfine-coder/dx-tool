@@ -3,10 +3,10 @@
  * Practice both requesting AND receiving A/I consultations
  */
 
-const AI_CONSULT_SCENARIOS = {
+const AI_COMedical SchoolLT_SCENARIOS = {
 
     // ============================================================================
-    // CONSULTS TO ALLERGY/IMMUNOLOGY (Other specialties calling A/I)
+    // COMedical SchoolLTS TO ALLERGY/IMMUNOLOGY (Other specialties calling A/I)
     // ============================================================================
     
     consultsToAI: {
@@ -336,7 +336,7 @@ const AI_CONSULT_SCENARIOS = {
     },
     
     // ============================================================================
-    // CONSULTS FROM ALLERGY/IMMUNOLOGY (A/I calling other specialties)
+    // COMedical SchoolLTS FROM ALLERGY/IMMUNOLOGY (A/I calling other specialties)
     // ============================================================================
     
     consultsFromAI: {
@@ -560,11 +560,11 @@ const AI_CONSULT_SCENARIOS = {
     },
 
     // ============================================================================
-    // SBAR TEMPLATES FOR CONSULTS
+    // SBAR TEMPLATES FOR COMedical SchoolLTS
     // ============================================================================
     
     templates: {
-        consultToAI: `ALLERGY/IMMUNOLOGY CONSULTATION REQUEST
+        consultToAI: `ALLERGY/IMMUNOLOGY COMedical SchoolLTATION REQUEST
 
 DATE/TIME: [Current]
 URGENCY: [ ] Emergent  [ ] Urgent  [ ] Routine
@@ -576,7 +576,7 @@ LOCATION: [Unit/Room]
 REQUESTING SERVICE: [Service]
 REQUESTING PROVIDER: [Name, Pager]
 
-REASON FOR CONSULTATION:
+REASON FOR COMedical SchoolLTATION:
 [Primary question/concern]
 
 SITUATION:
@@ -600,7 +600,7 @@ RECOMMENDATION/QUESTION:
 
 CONTACT: [Your name, pager/phone]`,
 
-        consultFromAI: `[SPECIALTY] CONSULTATION REQUEST
+        consultFromAI: `[SPECIALTY] COMedical SchoolLTATION REQUEST
 
 DATE/TIME: [Current]
 URGENCY: [ ] Emergent  [ ] Urgent  [ ] Routine
@@ -612,7 +612,7 @@ LOCATION: [Unit/Room]
 FROM: Allergy/Immunology
 PROVIDER: [Name, Contact]
 
-REASON FOR CONSULTATION:
+REASON FOR COMedical SchoolLTATION:
 [Primary question]
 
 RELEVANT A/I DIAGNOSES:
@@ -644,5 +644,5 @@ CONTACT: [Name, pager/phone]`
 
 // Export for use
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = AI_CONSULT_SCENARIOS;
+    module.exports = AI_COMedical SchoolLT_SCENARIOS;
 }

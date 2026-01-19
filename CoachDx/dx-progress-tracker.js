@@ -35,7 +35,7 @@ const DxProgressTracker = (function() {
             email: info.email || '',
             cohort: info.cohort || 'Default',
             program: info.program || 'General',
-            school: info.school || 'NSU',
+            school: info.school || 'Medical School',
             role: info.role || 'nursing',
             level: info.level || 'beginner',
             enrolledAt: info.enrolledAt || new Date().toISOString(),
@@ -660,10 +660,10 @@ const DxProgressTracker = (function() {
                         <label>School *</label>
                         <select id="regSchool" required>
                             <option value="">-- Select School --</option>
-                            <option value="NSU-KPCOM">NSU - Dr. Kiran C. Patel COM</option>
-                            <option value="NSU-Nursing">NSU - College of Nursing</option>
-                            <option value="NSU-PA">NSU - PA Program</option>
-                            <option value="NSU-Other">NSU - Other Program</option>
+                            <option value="Medical">Medical School</option>
+                            <option value="Nursing">Medical School - College of Nursing</option>
+                            <option value="PA">Medical School - PA Program</option>
+                            <option value="Other">Medical School - Other Program</option>
                             <option value="Other">Other Institution</option>
                         </select>
                     </div>
