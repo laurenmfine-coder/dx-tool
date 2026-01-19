@@ -2,166 +2,169 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Dx Suite | Clinical Education Platform</title>
     <style>
+        :root {
+            --primary: #1e3a5f;
+            --accent: #0891b2;
+            --purple: #7c3aed;
+            --success: #059669;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --primary: #3b82f6; --primary-bg: #eff6ff; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff; --bg-nav: #1e293b; --border: #e2e8f0; --nav-link: #94a3b8; --nav-active-bg: #3b82f6; --nav-active-text: #fff; --transition: all 0.3s; }
-        [data-theme="ocean-dark"] { --primary: #3b82f6; --primary-bg: #1e3a5f; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b; --bg-nav: #0f172a; --border: #334155; }
-        [data-theme="midnight-teal"] { --primary: #5eead4; --primary-bg: #0d3d3b; --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b; --bg-nav: #022c22; --border: #115e59; --nav-link: #86efac; --nav-active-bg: #5eead4; --nav-active-text: #052e16; }
-        [data-theme="muted-teal"] { --primary: #4a9a8e; --primary-bg: #e8f2f0; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #fff; --bg-nav: #f7fafa; --border: #d5e5e3; --nav-link: #64748b; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg-main); color: var(--text-primary); min-height: 100vh; transition: var(--transition); }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
         
-        /* Streamlined Nav */
-        .nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { text-decoration: none; } .nav-brand svg { height: 36px; }
-        .nav-links { display: flex; gap: 4px; align-items: center; }
-        .nav-link { padding: 8px 14px; text-decoration: none; color: var(--nav-link); font-size: 14px; font-weight: 500; border-radius: 8px; transition: var(--transition); }
-        .nav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-        .nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
-        .theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--nav-link); cursor: pointer; font-size: 14px; }
-        .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--purple) 100%); color: white; padding: 80px 24px; text-align: center; position: relative; }
+        .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .header-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .logo { font-size: 4rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -2px; }
+        .logo span { color: #22d3ee; }
+        .tagline { font-size: 1.5rem; opacity: 0.95; margin-bottom: 8px; }
+        .subtitle { font-size: 1.1rem; opacity: 0.8; }
+        .theme-btn { position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,0.15); border: none; padding: 12px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2rem; }
         
-        /* Hero */
-        .hero { text-align: center; padding: 60px 24px 40px; }
-        .hero-logo svg { height: 80px; margin-bottom: 16px; }
-        .hero .subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 8px; }
-        .hero .institution { font-size: 0.9rem; color: var(--text-secondary); opacity: 0.7; }
+        .main { max-width: 1000px; margin: -60px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
         
-        /* Stats */
-        .stats { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
+        .platforms { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .platform-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; text-decoration: none; color: var(--text); transition: all 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .platform-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .platform-header { padding: 32px; color: white; text-align: center; }
+        .platform-header.reason { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+        .platform-header.mechanism { background: linear-gradient(135deg, var(--purple), #a855f7); }
+        .platform-header.coach { background: linear-gradient(135deg, var(--success), #10b981); }
+        .platform-icon { font-size: 3rem; margin-bottom: 12px; }
+        .platform-name { font-size: 1.75rem; font-weight: 700; }
+        .platform-body { padding: 24px 32px 32px; }
+        .platform-desc { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7; }
+        .platform-stats { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; }
         .stat { text-align: center; }
-        .stat-value { font-size: 2.5rem; font-weight: 700; color: var(--text-primary); }
-        .stat-label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+        .platform-features { list-style: none; }
+        .platform-features li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .platform-features li:last-child { border-bottom: none; }
+        .feature-icon { color: var(--success); }
         
-        /* Platform Cards */
-        .platforms { max-width: 1000px; margin: 0 auto; padding: 0 24px 40px; }
-        .platforms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .platform-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: var(--transition); }
-        .platform-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); border-color: var(--primary); }
-        .platform-logo svg { height: 45px; margin-bottom: 12px; }
-        .platform-subtitle { font-size: 0.9rem; color: var(--primary); font-weight: 500; margin-bottom: 10px; }
-        .platform-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
-        .platform-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tag { font-size: 0.7rem; padding: 4px 8px; background: var(--primary-bg); color: var(--primary); border-radius: 4px; }
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer a { color: var(--accent); text-decoration: none; margin: 0 12px; }
         
-        /* Quick Links */
-        .quick-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 32px 24px; }
-        .quick-inner { max-width: 1000px; margin: 0 auto; }
-        .quick-title { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
-        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-        .quick-link { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: var(--transition); }
-        .quick-link:hover { border-color: var(--primary); }
-        .quick-icon { font-size: 1.3rem; }
-        .quick-text { font-size: 0.8rem; font-weight: 500; }
-        
-        /* Footer */
-        .footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.75rem; }
-        
-        /* Theme Modal */
-        .theme-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
-        .theme-modal.open { display: flex; }
-        .theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 380px; width: 90%; }
-        .theme-modal-header { display: flex; justify-content: space-between; margin-bottom: 16px; }
-        .theme-modal-title { font-weight: 600; }
-        .theme-modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
-        .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; }
-        .theme-option:hover, .theme-option.selected { border-color: var(--primary); }
-        .theme-preview { height: 32px; border-radius: 4px; margin-bottom: 6px; }
-        .theme-name { font-size: 0.8rem; }
-        
-        @media (max-width: 900px) { .platforms-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 600px) { .nav-links { display: none; } .quick-grid { grid-template-columns: repeat(2, 1fr); } .stats { gap: 24px; } }
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .tagline { font-size: 1.2rem; }
+            .platforms { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
-<body data-theme="ocean-dark">
-    <!-- STREAMLINED NAV: Home | MechanismDx | ReasonDx | CoachDx | Dashboard -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text><line x1="68" y1="42" x2="92" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="currentColor"/><path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="currentColor"/><circle cx="86" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="86" cy="108" r="5" fill="currentColor"/><text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Suite</text></svg>
-            </a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link active">🏠 Home</a>
-                <a href="mechanism/index.html" class="nav-link">⚙️ MechanismDx</a>
-                <a href="ReasonDx/index.html" class="nav-link">🩺 ReasonDx</a>
-                <a href="CoachDx/index.html" class="nav-link">🗣️ CoachDx</a>
-                <a href="ReasonDx/analytics-dashboard.html" class="nav-link">📊 Dashboard</a>
-                <button class="theme-btn" onclick="openThemeModal()">🎨</button>
-            </div>
+<body data-theme="light">
+    <header class="header">
+        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        <div class="header-content">
+            <div class="logo">Dx<span>Suite</span></div>
+            <p class="tagline">Clinical Education Platform</p>
+            <p class="subtitle">Master clinical reasoning through interactive cases, pathophysiology, and AI coaching</p>
         </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text><line x1="68" y1="42" x2="92" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="currentColor"/><path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="currentColor"/><circle cx="86" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="86" cy="108" r="5" fill="currentColor"/><text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Suite</text></svg>
-        </div>
-        <p class="subtitle">Clinical Education Platform</p>
-        <p class="institution">NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
-        <div class="stats">
-            <div class="stat"><div class="stat-value">226</div><div class="stat-label">Clinical Cases</div></div>
-            <div class="stat"><div class="stat-value">84</div><div class="stat-label">Modules</div></div>
-            <div class="stat"><div class="stat-value">50+</div><div class="stat-label">SBAR Scenarios</div></div>
-            <div class="stat"><div class="stat-value">800+</div><div class="stat-label">Diagnoses</div></div>
-        </div>
-    </section>
-
-    <section class="platforms">
-        <div class="platforms-grid">
+    </header>
+    
+    <main class="main">
+        <div class="platforms">
+            <!-- ReasonDx -->
             <a href="ReasonDx/index.html" class="platform-card">
-                <div class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Reason</text><text x="200" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text><line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/><path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/><circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/><circle cx="266" cy="108" r="5" fill="#1a1a1a"/></svg></div>
-                <div class="platform-subtitle">Clinical Reasoning Trainer</div>
-                <p class="platform-desc">Work through 226 cases using the RPFS framework. Build differentials, order tests, and develop clinical reasoning.</p>
-                <div class="platform-tags"><span class="tag">226 Cases</span><span class="tag">22 Categories</span></div>
+                <div class="platform-header reason">
+                    <div class="platform-icon">🧠</div>
+                    <div class="platform-name">ReasonDx</div>
+                </div>
+                <div class="platform-body">
+                    <p class="platform-desc">Interactive clinical cases with Socratic questioning, adventure mode, and competency tracking aligned to EPAs and ACGME Milestones.</p>
+                    <div class="platform-stats">
+                        <div class="stat"><div class="stat-value">112</div><div class="stat-label">Cases</div></div>
+                        <div class="stat"><div class="stat-value">18</div><div class="stat-label">Specialties</div></div>
+                        <div class="stat"><div class="stat-value">74</div><div class="stat-label">Deep Dives</div></div>
+                    </div>
+                    <ul class="platform-features">
+                        <li><span class="feature-icon">✓</span> Standard & Adventure modes</li>
+                        <li><span class="feature-icon">✓</span> EPA/Milestone tracking</li>
+                        <li><span class="feature-icon">✓</span> Board prep integration</li>
+                        <li><span class="feature-icon">✓</span> ECG Quiz & Generator</li>
+                    </ul>
+                </div>
             </a>
+            
+            <!-- MechanismDx -->
             <a href="mechanism/index.html" class="platform-card">
-                <div class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">MechanismD</text><line x1="355" y1="42" x2="379" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="#1a1a1a"/><path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="#1a1a1a"/><circle cx="373" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/><circle cx="373" cy="108" r="5" fill="#1a1a1a"/></svg></div>
-                <div class="platform-subtitle">Pathophysiology Modules</div>
-                <p class="platform-desc">Interactive modules covering disease mechanisms, from cellular pathology to clinical manifestations.</p>
-                <div class="platform-tags"><span class="tag">84 Modules</span><span class="tag">15 Systems</span></div>
+                <div class="platform-header mechanism">
+                    <div class="platform-icon">⚙️</div>
+                    <div class="platform-name">MechanismDx</div>
+                </div>
+                <div class="platform-body">
+                    <p class="platform-desc">Deep-dive pathophysiology modules with interactive diagrams, molecular mechanisms, and clinical correlations.</p>
+                    <div class="platform-stats">
+                        <div class="stat"><div class="stat-value">90+</div><div class="stat-label">Modules</div></div>
+                        <div class="stat"><div class="stat-value">15</div><div class="stat-label">Systems</div></div>
+                    </div>
+                    <ul class="platform-features">
+                        <li><span class="feature-icon">✓</span> Interactive diagrams</li>
+                        <li><span class="feature-icon">✓</span> Molecular mechanisms</li>
+                        <li><span class="feature-icon">✓</span> Clinical pearls</li>
+                        <li><span class="feature-icon">✓</span> ABG Analyzer tool</li>
+                    </ul>
+                </div>
             </a>
+            
+            <!-- CoachDx -->
             <a href="CoachDx/index.html" class="platform-card">
-                <div class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">CoachD</text><line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/><path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/><circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/><circle cx="236" cy="108" r="5" fill="#1a1a1a"/></svg></div>
-                <div class="platform-subtitle">Communication Trainer</div>
-                <p class="platform-desc">Practice SBAR presentations with an AI mentor. Get real-time feedback on clinical communication.</p>
-                <div class="platform-tags"><span class="tag">50+ Scenarios</span><span class="tag">AI Mentor</span></div>
+                <div class="platform-header coach">
+                    <div class="platform-icon">🗣️</div>
+                    <div class="platform-name">CoachDx</div>
+                </div>
+                <div class="platform-body">
+                    <p class="platform-desc">AI-powered coaching for clinical communication, SBAR handoffs, and interprofessional collaboration scenarios.</p>
+                    <div class="platform-stats">
+                        <div class="stat"><div class="stat-value">50+</div><div class="stat-label">Scenarios</div></div>
+                        <div class="stat"><div class="stat-value">8</div><div class="stat-label">Professions</div></div>
+                    </div>
+                    <ul class="platform-features">
+                        <li><span class="feature-icon">✓</span> SBAR trainer</li>
+                        <li><span class="feature-icon">✓</span> Interprofessional cases</li>
+                        <li><span class="feature-icon">✓</span> Mentor chat simulation</li>
+                        <li><span class="feature-icon">✓</span> Progress tracking</li>
+                    </ul>
+                </div>
             </a>
         </div>
-    </section>
-
-    <section class="quick-section">
-        <div class="quick-inner">
-            <h2 class="quick-title">Quick Links</h2>
-            <div class="quick-grid">
-                <a href="ReasonDx/training.html" class="quick-link"><span class="quick-icon">🎮</span><span class="quick-text">Start Case</span></a>
-                <a href="ReasonDx/adventure-hub.html" class="quick-link"><span class="quick-icon">🗺️</span><span class="quick-text">Adventures</span></a>
-                <a href="allergy-immunology-hub.html" class="quick-link"><span class="quick-icon">🌸</span><span class="quick-text">A/I Hub</span></a>
-                <a href="ReasonDx/board-prep.html" class="quick-link"><span class="quick-icon">📝</span><span class="quick-text">Board Prep</span></a>
-            </div>
+    </main>
+    
+    <footer class="footer">
+        <p>Dx Suite Clinical Education Platform</p>
+        <div style="margin-top: 12px;">
+            <a href="ReasonDx/adventure-cases/data-governance.html">Data Governance</a>
+            <a href="ReasonDx/adventure-cases/validation-roadmap.html">Validation</a>
+            <a href="ReasonDx/adventure-cases/epa-dashboard.html">EPA Dashboard</a>
         </div>
-    </section>
-
-    <footer class="footer">Dx Suite Clinical Education Platform • NSU Dr. Kiran C. Patel College of Allopathic Medicine</footer>
-
-    <div class="theme-modal" id="themeModal">
-        <div class="theme-modal-content">
-            <div class="theme-modal-header"><span class="theme-modal-title">🎨 Theme</span><button class="theme-modal-close" onclick="closeThemeModal()">&times;</button></div>
-            <div class="theme-grid">
-                <div class="theme-option" data-theme="ocean-dark" onclick="selectTheme('ocean-dark')"><div class="theme-preview" style="background: linear-gradient(135deg, #0f172a 50%, #1e293b 50%);"></div><div class="theme-name">Ocean Dark</div></div>
-                <div class="theme-option" data-theme="midnight-teal" onclick="selectTheme('midnight-teal')"><div class="theme-preview" style="background: linear-gradient(135deg, #022c22 50%, #0d3d3b 50%);"></div><div class="theme-name">Midnight Teal</div></div>
-                <div class="theme-option" data-theme="muted-teal" onclick="selectTheme('muted-teal')"><div class="theme-preview" style="background: linear-gradient(135deg, #f7fafa 50%, #e8f2f0 50%);"></div><div class="theme-name">Light</div></div>
-            </div>
-        </div>
-    </div>
+    </footer>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', () => { applyTheme(localStorage.getItem('dxsuite-theme') || 'ocean-dark'); });
-        function openThemeModal() { document.getElementById('themeModal').classList.add('open'); }
-        function closeThemeModal() { document.getElementById('themeModal').classList.remove('open'); }
-        document.getElementById('themeModal').addEventListener('click', e => { if (e.target.id === 'themeModal') closeThemeModal(); });
-        function selectTheme(t) { applyTheme(t); localStorage.setItem('dxsuite-theme', t); }
-        function applyTheme(t) { document.body.setAttribute('data-theme', t); document.querySelectorAll('.theme-option').forEach(o => o.classList.toggle('selected', o.dataset.theme === t)); }
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('dx-theme', isDark ? 'light' : 'dark');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('dx-theme');
+            if (saved) document.body.setAttribute('data-theme', saved);
+        });
     </script>
 </body>
 </html>
