@@ -129,6 +129,38 @@
         .footer-link { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; }
         .footer-link:hover { color: var(--accent); }
         
+        /* View Toggle */
+        .view-toggle { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 4px; }
+        .view-btn { background: none; border: none; color: rgba(255,255,255,0.6); padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+        .view-btn.active { background: rgba(255,255,255,0.2); color: white; }
+        .view-btn:hover:not(.active) { color: rgba(255,255,255,0.9); }
+        
+        /* Mobile View Mode - Simplified UI */
+        [data-view="mobile"] .mode-card-body { padding: 16px; }
+        [data-view="mobile"] .mode-card h3 { font-size: 1rem; }
+        [data-view="mobile"] .mode-card p { font-size: 0.8rem; margin-bottom: 10px; }
+        [data-view="mobile"] .modes-grid { grid-template-columns: 1fr; gap: 12px; }
+        [data-view="mobile"] .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        [data-view="mobile"] .tool-card { padding: 14px 10px; }
+        [data-view="mobile"] .tool-icon { font-size: 1.4rem; }
+        [data-view="mobile"] .tool-name { font-size: 0.8rem; }
+        [data-view="mobile"] .cases-grid { grid-template-columns: 1fr; gap: 8px; }
+        [data-view="mobile"] .case-card { padding: 12px; }
+        [data-view="mobile"] .category-header { padding-bottom: 8px; margin-bottom: 12px; }
+        [data-view="mobile"] .section-header { margin-bottom: 12px; }
+        [data-view="mobile"] .section-title { font-size: 1.1rem; }
+        [data-view="mobile"] .stats-inner { gap: 12px; flex-wrap: wrap; justify-content: space-around; }
+        [data-view="mobile"] .stat { min-width: 70px; }
+        [data-view="mobile"] .stat-value { font-size: 1.4rem; }
+        [data-view="mobile"] .stat-label { font-size: 0.65rem; }
+        [data-view="mobile"] .header-inner { padding: 24px 12px 32px; }
+        [data-view="mobile"] .hero-title { font-size: 1.6rem; }
+        [data-view="mobile"] .hero-subtitle { font-size: 0.9rem; }
+        [data-view="mobile"] .main { padding: 20px 12px; }
+        [data-view="mobile"] .filter-bar { flex-direction: column; gap: 8px; }
+        [data-view="mobile"] .filter-btn { padding: 10px 14px; font-size: 0.9rem; }
+        [data-view="mobile"] .filter-search { width: 100%; padding: 12px 14px; }
+        
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header-inner { padding: 32px 16px 40px; }
@@ -137,6 +169,7 @@
             .stats-inner { gap: 24px; }
             .modes-grid { grid-template-columns: 1fr; }
             .footer-inner { flex-direction: column; text-align: center; }
+            .header-actions { flex-wrap: wrap; justify-content: center; }
         }
         @media (max-width: 480px) {
             .header-top { flex-direction: column; gap: 16px; }
@@ -148,6 +181,7 @@
             .cases-grid { grid-template-columns: 1fr; }
             .filter-bar { flex-direction: column; }
             .filter-search { width: 100%; }
+            .btn-ghost { padding: 8px 12px; font-size: 0.8rem; }
         }
         @supports (padding: max(0px)) {
             body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
@@ -163,6 +197,10 @@
                     <span class="logo-text">ReasonDx<span class="logo-badge">BETA</span></span>
                 </a>
                 <div class="header-actions">
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setView('desktop')" title="Desktop View">🖥️</button>
+                        <button class="view-btn" onclick="setView('mobile')" title="Mobile View">📱</button>
+                    </div>
                     <a href="adventure-cases/epa-dashboard.html" class="btn-ghost">📊 EPA Dashboard</a>
                     <button class="btn-ghost" onclick="toggleTheme()">🌙</button>
                 </div>
@@ -177,9 +215,9 @@
     <div class="stats-strip">
         <div class="stats-inner">
             <div class="stat"><div class="stat-value">225</div><div class="stat-label">Trainer Cases</div></div>
-            <div class="stat"><div class="stat-value">22</div><div class="stat-label">Specialties</div></div>
-            <div class="stat"><div class="stat-value">74</div><div class="stat-label">Deep Dives</div></div>
+            <div class="stat"><div class="stat-value">91</div><div class="stat-label">Socratic Cases</div></div>
             <div class="stat"><div class="stat-value">21</div><div class="stat-label">Adventures</div></div>
+            <div class="stat"><div class="stat-value">74</div><div class="stat-label">Deep Dives</div></div>
         </div>
     </div>
     
@@ -223,6 +261,15 @@
                     <h3>Deep Dive</h3>
                     <p>Pathophysiology modules with mechanism-based learning</p>
                     <div class="mode-card-meta"><span class="mode-tag blue">74 Deep Dives</span></div>
+                </div>
+            </a>
+            <a href="#cases" class="mode-card" onclick="setTimeout(() => filterCases('standard'), 100)">
+                <div class="mode-card-accent purple"></div>
+                <div class="mode-card-body">
+                    <div class="mode-card-icon purple">📖</div>
+                    <h3>Socratic Cases</h3>
+                    <p>Question-and-answer format with detailed teaching points after each response</p>
+                    <div class="mode-card-meta"><span class="mode-tag purple">91 Cases</span><span class="mode-tag purple">Q&A Format</span></div>
                 </div>
             </a>
         </div>
@@ -422,7 +469,24 @@
             });
         }
         
+        function setView(mode) {
+            document.body.setAttribute('data-view', mode);
+            localStorage.setItem('viewMode', mode);
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.view-btn[onclick*="${mode}"]`).classList.add('active');
+        }
+        
+        function detectAndSetView() {
+            const savedView = localStorage.getItem('viewMode');
+            if (savedView) {
+                setView(savedView);
+            } else if (window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                setView('mobile');
+            }
+        }
+        
         if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
+        detectAndSetView();
     </script>
 </body>
 </html>
