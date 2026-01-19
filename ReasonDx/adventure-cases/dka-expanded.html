@@ -107,95 +107,6 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
-
-/* EPA Badge Styles */
-.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.epa-badge { 
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
-}
-.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
-.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
-
-/* Confidence Slider Styles */
-.confidence-container {
-    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
-    border: 1px solid rgba(59,130,246,0.3);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 16px 0;
-    display: none;
-}
-.confidence-container.show { display: block; }
-.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-.confidence-icon { font-size: 1.2rem; }
-.confidence-label { font-weight: 600; color: #e2e8f0; }
-.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
-.confidence-slider {
-    width: 100%; height: 8px; border-radius: 4px;
-    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
-}
-.confidence-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
-.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
-.confidence-submit {
-    width: 100%; padding: 14px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    color: white; border: none; border-radius: 8px;
-    font-weight: 600; font-size: 1rem; cursor: pointer;
-}
-.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
-
-/* Calibration Feedback */
-.calibration-feedback {
-    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
-    display: none; font-size: 0.9rem;
-}
-.calibration-feedback.show { display: block; }
-.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
-.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
-.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
-
-/* Process Feedback Styles */
-.process-feedback {
-    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
-    border: 1px solid rgba(251,191,36,0.3);
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 16px;
-    display: none;
-}
-.process-feedback.show { display: block; }
-.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
-
-/* Selected option before submit */
-.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
-
-/* EPA Progress in Debrief */
-.epa-debrief-section { margin: 24px 0; }
-.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
-.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
-.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
-.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
-.epa-progress-card .epa-score.high { color: #22c55e; }
-.epa-progress-card .epa-score.medium { color: #f59e0b; }
-.epa-progress-card .epa-score.low { color: #ef4444; }
-
-/* Calibration Chart in Debrief */
-.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
-.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
-.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
-.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
-.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
-.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
-.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
-
 </style>
 </head>
 <body>
@@ -217,33 +128,11 @@
 </div>
 </div>
         <div id="scene-container"></div>
-
-<!-- Confidence Slider -->
-<div class="confidence-container" id="confidence-container">
-    <div class="confidence-header">
-        <span class="confidence-icon">🎯</span>
-        <span class="confidence-label">How confident are you in your answer?</span>
-    </div>
-    <div class="confidence-slider-wrapper">
-        <input type="range" class="confidence-slider" id="confidence-slider" 
-               min="0" max="100" value="50" 
-               oninput="updateConfidenceDisplay(this.value)">
-        <div class="confidence-labels">
-            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
-        </div>
-    </div>
-    <div class="confidence-value" id="confidence-display">50%</div>
-    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
-</div>
-
     </div>
 <script>
 let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
 const stages = [
-    { title: "The Dehydrated Diabetic", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>24-year-old woman with Type 1 DM presents with nausea, vomiting, abdominal pain, and confusion for 2 days. She ran out of insulin last week.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 124, BP 92/58, RR 28 (deep), T 99.1°F</p></div><div class="socratic-prompt"><h4>Predict the Labs</h4><p>Before seeing labs, what metabolic abnormalities would you PREDICT in a patient with insulin deficiency, and why?</p></div>`,
+    { title: "The Dehydrated Diabetic", content: `<div class="narrative"><p>24-year-old woman with Type 1 DM presents with nausea, vomiting, abdominal pain, and confusion for 2 days. She ran out of insulin last week.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 124, BP 92/58, RR 28 (deep), T 99.1°F</p></div><div class="socratic-prompt"><h4>Predict the Labs</h4><p>Before seeing labs, what metabolic abnormalities would you PREDICT in a patient with insulin deficiency, and why?</p></div>`,
         hint_beginner: "Think: no insulin → glucose can't enter cells → what happens to blood sugar? And what does the body burn instead?", hint_advanced: "Why might serum potassium appear normal or high despite total body K+ depletion?",
         question: { prompt: "What lab abnormalities would you predict in DKA before seeing results?",
             options: [{ text: "Hyperglycemia + metabolic acidosis + elevated anion gap: glucose can't enter cells, body burns fat → ketoacids", correct: true },
@@ -254,10 +143,7 @@ const stages = [
             teaching: `<h4>DKA Pathophysiology</h4><p><strong>Insulin deficiency →</strong></p><p>1. Hyperglycemia (no uptake + gluconeogenesis)</p><p>2. Osmotic diuresis → dehydration (5-7L deficit)</p><p>3. Lipolysis → FFAs → ketogenesis</p><p>4. Ketoacids → AG metabolic acidosis</p>`,
             why_chain: [{q:"Why Kussmaul respirations?",a:"Metabolic acidosis → respiratory compensation. Deep, rapid breathing blows off CO2 to raise pH. The body is trying to fix itself."},{q:"Why fruity breath?",a:"Acetone is a volatile ketone exhaled through the lungs - the classic 'fruity' odor."}], points: 10 }
     },
-    { title: "Severity Assessment", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>Labs return: Glucose 486, pH 7.18, HCO3 8, K 5.8, Na 131, Cr 1.9</p><p style="margin-top:12px;">Calculate anion gap: 131 - (8 + 101) = <strong>22</strong></p></div><div class="socratic-prompt"><h4>Classify the Severity</h4><p>What criteria define mild vs moderate vs severe DKA, and how severe is this patient?</p></div>`,
+    { title: "Severity Assessment", content: `<div class="narrative"><p>Labs return: Glucose 486, pH 7.18, HCO3 8, K 5.8, Na 131, Cr 1.9</p><p style="margin-top:12px;">Calculate anion gap: 131 - (8 + 101) = <strong>22</strong></p></div><div class="socratic-prompt"><h4>Classify the Severity</h4><p>What criteria define mild vs moderate vs severe DKA, and how severe is this patient?</p></div>`,
         hint_beginner: "pH and bicarbonate determine severity. What pH makes it severe?", hint_advanced: "Can you have DKA with normal glucose? When?",
         question: { prompt: "What classifies this patient's DKA severity?",
             options: [{ text: "Moderate-severe: pH 7.18, HCO3 8, altered mental status - these define severity, not glucose level", correct: true },
@@ -268,10 +154,7 @@ const stages = [
             teaching: `<h4>DKA Diagnostic Criteria</h4><p><strong>Glucose:</strong> Usually >250 (but can be normal!)</p><p><strong>pH:</strong> Mild 7.25-7.30, Moderate 7.0-7.24, Severe <7.0</p><p><strong>HCO3:</strong> Mild 15-18, Moderate 10-15, Severe <10</p><p><strong>Anion Gap:</strong> >12 (typically >20)</p><p><strong>Ketones:</strong> Positive in serum/urine</p>`,
             why_chain: [{q:"What is euglycemic DKA?",a:"DKA with glucose <250. Causes: SGLT2 inhibitors (dump glucose in urine), pregnancy, partial treatment, poor oral intake. Don't rule out DKA just because glucose isn't sky-high!"}], points: 10 }
     },
-    { title: "Treatment Priority", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>You diagnose moderate-severe DKA. The nurse asks what to start first.</p><p style="margin-top:12px;">Available: IV fluids, insulin drip, potassium, bicarbonate</p></div><div class="socratic-prompt"><h4>Sequence Matters</h4><p>What is the FIRST intervention in DKA, and why does sequence matter?</p></div>`,
+    { title: "Treatment Priority", content: `<div class="narrative"><p>You diagnose moderate-severe DKA. The nurse asks what to start first.</p><p style="margin-top:12px;">Available: IV fluids, insulin drip, potassium, bicarbonate</p></div><div class="socratic-prompt"><h4>Sequence Matters</h4><p>What is the FIRST intervention in DKA, and why does sequence matter?</p></div>`,
         hint_beginner: "Average fluid deficit is 5-7 liters. What comes first?", hint_advanced: "Why is giving insulin before checking potassium dangerous?",
         question: { prompt: "What is the correct first step in DKA management?",
             options: [{ text: "IV fluids (NS 1-1.5L bolus) - restore perfusion before insulin; check K+ before starting insulin", correct: true },
@@ -282,10 +165,7 @@ const stages = [
             teaching: `<h4>DKA Treatment Sequence</h4><p>1. <strong>Fluids:</strong> NS 1-1.5L bolus → 250-500 mL/hr</p><p>2. <strong>Potassium:</strong> Check level - if <3.3, HOLD insulin</p><p>3. <strong>Insulin:</strong> Only after K+ ≥3.3: 0.1 U/kg/hr drip</p><p>4. <strong>Monitor:</strong> Glucose hourly, lytes Q2-4h, AG Q4h</p>`,
             why_chain: [{q:"Why NS first, not D5?",a:"Patient is severely dehydrated and hyperglycemic. NS restores volume without adding glucose. Switch to D5 when glucose <200 to allow continued insulin."},{q:"Why not LR?",a:"LR contains lactate (metabolized to bicarbonate) and potassium. In severe acidosis, NS is preferred for more predictable volume expansion."}], points: 15 }
     },
-    { title: "The Potassium Paradox", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>Labs show K+ 5.8 mEq/L - looks high!</p><p style="margin-top:12px;">The resident asks: "Should we treat hyperkalemia?"</p></div><div class="socratic-prompt"><h4>Understand the Shift</h4><p>This patient's K+ is 5.8 but she has TOTAL BODY potassium depletion. How is this possible, and what will happen when you give insulin?</p></div>`,
+    { title: "The Potassium Paradox", content: `<div class="narrative"><p>Labs show K+ 5.8 mEq/L - looks high!</p><p style="margin-top:12px;">The resident asks: "Should we treat hyperkalemia?"</p></div><div class="socratic-prompt"><h4>Understand the Shift</h4><p>This patient's K+ is 5.8 but she has TOTAL BODY potassium depletion. How is this possible, and what will happen when you give insulin?</p></div>`,
         hint_beginner: "In acidosis, K+ shifts out of cells. What happens when you correct the acidosis?", hint_advanced: "Calculate the expected K+ drop for each 0.1 pH increase",
         question: { prompt: "Why is serum K+ elevated despite total body K+ depletion?",
             options: [{ text: "Acidosis + insulin deficiency + hyperosmolality all shift K+ extracellularly; total body K+ is depleted from urinary losses", correct: true },
@@ -296,10 +176,7 @@ const stages = [
             teaching: `<h4>Potassium Management in DKA</h4><p><strong>K+ <3.3:</strong> HOLD insulin! Give 20-40 mEq/hr until K+ >3.3</p><p><strong>K+ 3.3-5.3:</strong> Add 20-30 mEq K+ per liter of IV fluid</p><p><strong>K+ >5.3:</strong> No K+ in fluids, recheck in 2 hours</p><p style="margin-top:8px;"><strong>Expect K+ to drop rapidly with insulin!</strong></p>`,
             why_chain: [{q:"How much will K+ drop?",a:"For each 0.1 unit pH increase, K+ drops ~0.6 mEq/L. A pH change from 7.18 to 7.38 could drop K+ by ~1.2 mEq/L - potentially fatal."},{q:"Why is hypokalemia dangerous?",a:"Hypokalemia causes fatal arrhythmias (Vfib, Vtach) and respiratory muscle weakness. It's a more immediate threat than hyperglycemia."}], points: 15 }
     },
-    { title: "Insulin Protocol", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>K+ is 5.8 (no K+ supplementation needed yet), fluids running.</p><p style="margin-top:12px;">Time to start insulin. Patient weighs 60 kg.</p></div><div class="socratic-prompt"><h4>Dose It Right</h4><p>How do you dose insulin in DKA, and what is the target rate of glucose decline?</p></div>`,
+    { title: "Insulin Protocol", content: `<div class="narrative"><p>K+ is 5.8 (no K+ supplementation needed yet), fluids running.</p><p style="margin-top:12px;">Time to start insulin. Patient weighs 60 kg.</p></div><div class="socratic-prompt"><h4>Dose It Right</h4><p>How do you dose insulin in DKA, and what is the target rate of glucose decline?</p></div>`,
         hint_beginner: "IV regular insulin drip - what's the rate per kg?", hint_advanced: "Why not drop glucose too fast? What's the cerebral edema risk?",
         question: { prompt: "What is the correct insulin protocol for this 60 kg patient?",
             options: [{ text: "Regular insulin 0.1 U/kg/hr IV (6 U/hr); target glucose drop 50-70 mg/dL per hour", correct: true },
@@ -310,10 +187,7 @@ const stages = [
             teaching: `<h4>Insulin Management</h4><p><strong>Confirm K+ ≥3.3 first!</strong></p><p><strong>Dose:</strong> 0.1 U/kg/hr (or 0.14 U/kg/hr without bolus)</p><p><strong>Goal:</strong> Glucose ↓ 50-70 mg/dL per hour</p><p><strong>If not dropping:</strong> Double infusion rate</p><p><strong>When glucose <200:</strong> Add D5 to fluids, reduce insulin to 0.05 U/kg/hr</p>`,
             why_chain: [{q:"Why IV not SubQ?",a:"IV regular insulin has 5-7 min half-life - easy to titrate. SubQ has poor absorption in dehydration and is unpredictable. Only use SubQ for mild DKA if IV unavailable."},{q:"Why keep glucose 150-200?",a:"You need continued insulin to clear ketones. If glucose drops too low, you must stop insulin before acidosis resolves → rebound DKA."}], points: 10 }
     },
-    { title: "The Anion Gap Trap", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>4 hours later: Glucose 220 (was 486). Great progress!</p><p style="margin-top:12px;">The intern wants to stop the insulin drip.</p></div><div class="socratic-prompt"><h4>Know When to Stop</h4><p>The glucose is nearly normal - can you stop the insulin drip? What determines when DKA is truly resolved?</p></div>`,
+    { title: "The Anion Gap Trap", content: `<div class="narrative"><p>4 hours later: Glucose 220 (was 486). Great progress!</p><p style="margin-top:12px;">The intern wants to stop the insulin drip.</p></div><div class="socratic-prompt"><h4>Know When to Stop</h4><p>The glucose is nearly normal - can you stop the insulin drip? What determines when DKA is truly resolved?</p></div>`,
         hint_beginner: "Glucose normalizes BEFORE ketoacidosis resolves. What else must you track?", hint_advanced: "Why does non-anion gap acidosis sometimes develop during DKA treatment?",
         question: { prompt: "When can you discontinue the IV insulin drip?",
             options: [{ text: "When anion gap closes (≤12) AND pH >7.30 AND HCO3 ≥18 - not when glucose normalizes", correct: true },
@@ -324,10 +198,7 @@ const stages = [
             teaching: `<h4>DKA Resolution Criteria (need 2 of 3)</h4><p>✓ Glucose <200 mg/dL</p><p>✓ Anion gap ≤12</p><p>✓ pH >7.30 AND/OR HCO3 ≥18</p><p style="margin-top:8px;"><strong>Common mistake:</strong> Stopping insulin when glucose normalizes but gap still elevated → rebound DKA within hours.</p>`,
             why_chain: [{q:"Why does AG close slower than glucose?",a:"Glucose drops quickly with insulin (cellular uptake). Ketones must be metabolized to bicarbonate - this regenerates buffer slowly. Gap closes last."},{q:"Why add D5 to fluids?",a:"You need to continue insulin to clear ketones, but must prevent hypoglycemia. D5 provides glucose substrate while allowing continued ketone clearance."}], points: 15 }
     },
-    { title: "The Bicarbonate Question", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>The pH is 7.18. The attending asks about bicarbonate.</p></div><div class="socratic-prompt"><h4>To Bicarb or Not?</h4><p>Should you give sodium bicarbonate to correct the acidosis? What does the evidence say?</p></div>`,
+    { title: "The Bicarbonate Question", content: `<div class="narrative"><p>The pH is 7.18. The attending asks about bicarbonate.</p></div><div class="socratic-prompt"><h4>To Bicarb or Not?</h4><p>Should you give sodium bicarbonate to correct the acidosis? What does the evidence say?</p></div>`,
         hint_beginner: "Bicarbonate is almost never indicated in DKA. Why?", hint_advanced: "What is paradoxical CNS acidosis and why does bicarb cause it?",
         question: { prompt: "When is bicarbonate indicated in DKA?",
             options: [{ text: "Almost never - only consider if pH <6.9 or life-threatening hyperkalemia; evidence shows no benefit and potential harm", correct: true },
@@ -338,10 +209,7 @@ const stages = [
             teaching: `<h4>Why NOT Bicarbonate</h4><p>1. <strong>Paradoxical CNS acidosis:</strong> CO2 crosses BBB faster than HCO3 → brain pH drops</p><p>2. <strong>Worsened hypokalemia:</strong> Alkalosis shifts K+ into cells</p><p>3. <strong>Left-shifted O2 curve:</strong> Tissue hypoxia</p><p>4. <strong>No proven benefit:</strong> Studies show no improvement</p>`,
             why_chain: [{q:"How does acidosis self-correct?",a:"Insulin stops ketogenesis. Existing ketones (β-hydroxybutyrate, acetoacetate) are metabolized. Each ketone molecule regenerates one bicarbonate. The body makes its own buffer."},{q:"When might you give bicarb?",a:"pH <6.9 (cardiac dysfunction risk) or severe hyperkalemia as temporizing measure. Even then, evidence is weak."}], points: 10 }
     },
-    { title: "Cerebral Edema", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>A pediatric DKA patient is mentioned - the feared complication of cerebral edema.</p></div><div class="socratic-prompt"><h4>Know the Warning Signs</h4><p>What causes cerebral edema in DKA treatment, who is at risk, and how do you recognize it?</p></div>`,
+    { title: "Cerebral Edema", content: `<div class="narrative"><p>A pediatric DKA patient is mentioned - the feared complication of cerebral edema.</p></div><div class="socratic-prompt"><h4>Know the Warning Signs</h4><p>What causes cerebral edema in DKA treatment, who is at risk, and how do you recognize it?</p></div>`,
         hint_beginner: "Brain adapts to high osmolality. What happens when you correct too fast?", hint_advanced: "What are 'idiogenic osmoles' and why do they matter?",
         question: { prompt: "What causes cerebral edema during DKA treatment?",
             options: [{ text: "Rapid osmolality correction: brain has idiogenic osmoles that take time to dissipate; water shifts into brain", correct: true },
@@ -352,10 +220,7 @@ const stages = [
             teaching: `<h4>Cerebral Edema in DKA</h4><p><strong>Incidence:</strong> ~1% of pediatric DKA, rare in adults</p><p><strong>Mortality:</strong> 20-25%</p><p><strong>Warning signs:</strong> Headache, confusion worsening, bradycardia, HTN, pupil changes</p><p><strong>Treatment:</strong> Mannitol 0.5-1 g/kg, hypertonic saline, reduce fluid rate, elevate HOB</p>`,
             why_chain: [{q:"Why is it more common in children?",a:"Children have larger brain:skull ratio, less room for swelling. Also more likely to present with new-onset DM and severe acidosis."},{q:"How to prevent it?",a:"Don't drop glucose >100 mg/dL/hr. Don't over-hydrate. Avoid hypotonic fluids early. Monitor neuro status closely."}], points: 10 }
     },
-    { title: "Transition to SubQ", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>DKA resolving: pH 7.34, HCO3 20, AG 10, glucose 180. Patient is eating.</p><p style="margin-top:12px;">Time to transition to subcutaneous insulin.</p></div><div class="socratic-prompt"><h4>The Overlap Principle</h4><p>How do you transition from IV to SubQ insulin without causing rebound DKA?</p></div>`,
+    { title: "Transition to SubQ", content: `<div class="narrative"><p>DKA resolving: pH 7.34, HCO3 20, AG 10, glucose 180. Patient is eating.</p><p style="margin-top:12px;">Time to transition to subcutaneous insulin.</p></div><div class="socratic-prompt"><h4>The Overlap Principle</h4><p>How do you transition from IV to SubQ insulin without causing rebound DKA?</p></div>`,
         hint_beginner: "SubQ long-acting insulin takes hours to work. What happens if you stop IV too soon?", hint_advanced: "Calculate the total daily dose for SubQ conversion",
         question: { prompt: "What is the critical principle when transitioning to SubQ insulin?",
             options: [{ text: "Give SubQ long-acting insulin AND continue IV drip for 2-4 hours overlap before stopping IV", correct: true },
@@ -366,10 +231,7 @@ const stages = [
             teaching: `<h4>Transition Protocol</h4><p><strong>Prerequisites:</strong> DKA resolved, patient eating, no nausea</p><p><strong>Steps:</strong></p><p>1. Give SubQ long-acting insulin</p><p>2. Continue IV drip for 2-4 HOURS</p><p>3. Stop IV after overlap period</p><p>4. Start mealtime rapid-acting insulin</p><p style="margin-top:8px;"><strong>Never stop IV before SubQ is working!</strong></p>`,
             why_chain: [{q:"How to calculate SubQ dose?",a:"Total daily dose ~0.5-0.8 U/kg. Give 50% as basal (glargine), 50% split among meals. Adjust based on prior regimen if known."},{q:"What if patient can't eat?",a:"Don't transition! Continue IV insulin and dextrose-containing fluids until patient tolerates PO intake."}], points: 10 }
     },
-    { title: "Find the Precipitant", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>DKA is resolving. Important question: Why did this happen?</p><p style="margin-top:12px;">She ran out of insulin - but always look for other triggers.</p></div><div class="socratic-prompt"><h4>Identify the Trigger</h4><p>What are the common precipitants of DKA, and why is identifying them critical?</p></div>`,
+    { title: "Find the Precipitant", content: `<div class="narrative"><p>DKA is resolving. Important question: Why did this happen?</p><p style="margin-top:12px;">She ran out of insulin - but always look for other triggers.</p></div><div class="socratic-prompt"><h4>Identify the Trigger</h4><p>What are the common precipitants of DKA, and why is identifying them critical?</p></div>`,
         hint_beginner: "The 'I's of DKA: Infection, Infarction, Insulin...", hint_advanced: "What workup would you do to rule out occult infection or MI?",
         question: { prompt: "What are the most common precipitants of DKA?",
             options: [{ text: "Infection (#1), insulin non-compliance, new-onset DM, MI/CVA, drugs (steroids, cocaine), pregnancy", correct: true },
@@ -380,10 +242,7 @@ const stages = [
             teaching: `<h4>DKA Precipitants (The I's)</h4><p><strong>I</strong>nfection - #1 cause, often occult</p><p><strong>I</strong>nsulin - non-compliance or pump failure</p><p><strong>I</strong>schemia - MI, CVA</p><p><strong>I</strong>nitial presentation - new-onset DM</p><p><strong>I</strong>ntoxication - cocaine, alcohol</p><p><strong>I</strong>atrogenic - steroids, SGLT2i</p>`,
             why_chain: [{q:"Why can infection precipitate DKA without hyperglycemia symptoms?",a:"Infection causes counter-regulatory hormone surge (cortisol, glucagon, catecholamines) that overwhelms insulin. Patient may present with DKA as first sign of occult infection."},{q:"What about SGLT2 inhibitor DKA?",a:"SGLT2i cause glycosuria → lower glucose but same ketone production. Can have severe DKA with normal glucose (euglycemic DKA). Hold SGLT2i before surgery!"}], points: 10 }
     },
-    { title: "Case Resolution", content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Enter Orders</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>Patient transitioned to SubQ insulin, eating well, glucose controlled. Precipitant: ran out of insulin (social issues identified, resources provided).</p><p style="margin-top:12px;">Discharged with endocrine follow-up, diabetes educator referral.</p></div><div class="socratic-prompt"><h4>Synthesis</h4><p>What are the key management principles that determine outcome in DKA?</p></div>`,
+    { title: "Case Resolution", content: `<div class="narrative"><p>Patient transitioned to SubQ insulin, eating well, glucose controlled. Precipitant: ran out of insulin (social issues identified, resources provided).</p><p style="margin-top:12px;">Discharged with endocrine follow-up, diabetes educator referral.</p></div><div class="socratic-prompt"><h4>Synthesis</h4><p>What are the key management principles that determine outcome in DKA?</p></div>`,
         hint_beginner: "Think: Fluids → Potassium → Insulin → Monitor gap → Transition", hint_advanced: "What's the mortality of DKA with optimal vs suboptimal management?",
         question: { prompt: "What determines successful DKA management?",
             options: [{ text: "Fluids first, K+ before insulin, monitor anion gap (not just glucose), proper SubQ transition with overlap", correct: true },
@@ -505,224 +364,6 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
-
-
-
-// ============================================================================
-// EPA & CALIBRATION ENHANCEMENT - ReasonDx
-// ============================================================================
-
-// Case EPA Metadata
-const caseEPA = {
-    id: 'dka',
-    primaryEPAs: ["EPA-10","EPA-4","EPA-3"],
-    secondaryEPAs: ["EPA-2","EPA-1"],
-    category: 'Endocrine'
-};
-
-// Response tracking for calibration
-let responseHistory = [];
-let pendingSelection = null;
-
-// EPA Names for display
-const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
-
-// Override selectOption to add confidence step
-const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
-
-function selectOptionEnhanced(index, correct) {
-    const qId = 'q' + currentStage;
-    if (answeredQuestions.has(qId)) return;
-    
-    // Store pending selection
-    pendingSelection = { index, correct, stageIdx: currentStage };
-    
-    // Highlight selected option
-    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
-        opt.classList.remove('selected');
-        if (i === index) opt.classList.add('selected');
-    });
-    
-    // Show confidence slider
-    const confContainer = document.getElementById('confidence-container');
-    if (confContainer) {
-        confContainer.classList.add('show');
-        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-}
-
-function updateConfidenceDisplay(value) {
-    const display = document.getElementById('confidence-display');
-    if (display) display.textContent = value + '%';
-}
-
-function submitWithConfidence() {
-    if (!pendingSelection) return;
-    
-    const confidence = parseInt(document.getElementById('confidence-slider').value);
-    const { index, correct, stageIdx } = pendingSelection;
-    const stage = stages[stageIdx];
-    
-    // Record response with confidence
-    responseHistory.push({
-        stage: stageIdx + 1,
-        stageTitle: stage.title,
-        epaFocus: caseEPA.primaryEPAs[0],
-        selectedIndex: index,
-        selectedText: stage.question.options[index].text,
-        correct: correct,
-        confidence: confidence,
-        points: correct ? stage.question.points : 0,
-        maxPoints: stage.question.points
-    });
-    
-    // Hide confidence container
-    const confContainer = document.getElementById('confidence-container');
-    if (confContainer) confContainer.classList.remove('show');
-    
-    // Now process the answer (call original logic)
-    const qId = 'q' + stageIdx;
-    answeredQuestions.add(qId);
-    decisionPath[stageIdx] = index;
-    
-    maxScore += stage.question.points;
-    if (correct) score += stage.question.points;
-    
-    document.getElementById('score').textContent = score;
-    document.getElementById('maxScore').textContent = maxScore;
-    
-    // Show calibration feedback
-    showCalibrationFeedback(confidence, correct);
-    
-    pendingSelection = null;
-    renderStage();
-}
-
-function showCalibrationFeedback(confidence, correct) {
-    // This will be shown in the feedback section after render
-    const feedback = document.createElement('div');
-    feedback.className = 'calibration-feedback show';
-    
-    if (correct && confidence >= 70) {
-        feedback.classList.add('well-calibrated');
-        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
-    } else if (correct && confidence < 50) {
-        feedback.classList.add('underconfident');
-        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
-    } else if (!correct && confidence >= 70) {
-        feedback.classList.add('overconfident');
-        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
-    } else {
-        feedback.classList.add('well-calibrated');
-        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
-    }
-    
-    // Store for rendering
-    window.lastCalibrationFeedback = feedback.outerHTML;
-}
-
-// Enhanced debrief with EPA and calibration
-function showEnhancedDebrief() {
-    const overlay = document.getElementById('debriefOverlay');
-    const content = document.getElementById('debriefContent');
-    if (!overlay || !content) return;
-    
-    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-    
-    // Calculate calibration
-    const withConf = responseHistory.filter(r => r.confidence !== undefined);
-    const correctWithConf = withConf.filter(r => r.correct);
-    const incorrectWithConf = withConf.filter(r => !r.correct);
-    const avgConfCorrect = correctWithConf.length > 0 
-        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
-    const avgConfIncorrect = incorrectWithConf.length > 0 
-        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
-    
-    // EPA performance
-    const epaPerf = {};
-    responseHistory.forEach(r => {
-        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
-        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
-        epaPerf[epa].total++;
-        if (r.correct) epaPerf[epa].correct++;
-    });
-    
-    // Calibration interpretation
-    let calibrationMsg = '';
-    if (avgConfCorrect - avgConfIncorrect > 20) {
-        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
-    } else if (avgConfIncorrect > 60) {
-        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
-    } else {
-        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
-    }
-    
-    content.innerHTML = `
-        <div style="text-align:center;margin-bottom:24px;">
-            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
-            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
-            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
-        </div>
-        
-        <div class="epa-debrief-section">
-            <h4>📋 EPA Competencies Assessed</h4>
-            <div class="epa-progress-grid">
-                ${Object.entries(epaPerf).map(([epa, data]) => {
-                    const pct = Math.round((data.correct / data.total) * 100);
-                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
-                    return `<div class="epa-progress-card">
-                        <div class="epa-name">${epaNames[epa] || epa}</div>
-                        <div class="epa-score ${colorClass}">${pct}%</div>
-                    </div>`;
-                }).join('')}
-            </div>
-        </div>
-        
-        <div class="calibration-debrief">
-            <h4>🎯 Confidence Calibration</h4>
-            <div class="calibration-stats">
-                <div class="calibration-stat">
-                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
-                    <div class="stat-label">Avg confidence when correct</div>
-                </div>
-                <div class="calibration-stat">
-                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
-                    <div class="stat-label">Avg confidence when incorrect</div>
-                </div>
-            </div>
-            <div class="calibration-interpretation">${calibrationMsg}</div>
-        </div>
-        
-        <div class="decision-path">
-            <h3>📝 Your Decisions</h3>
-            ${responseHistory.map(r => `
-                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
-                    <div style="display:flex;justify-content:space-between;">
-                        <div>
-                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
-                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
-                        </div>
-                        <div class="path-points">${r.points}/${r.maxPoints}</div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        
-        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
-        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
-    `;
-    
-    overlay.classList.add('show');
-}
-
-// Replace selectOption globally
-window.selectOption = selectOptionEnhanced;
-
-// Store original showDebrief if exists
-if (typeof showDebrief === 'function') {
-    window.originalShowDebrief = showDebrief;
-}
-window.showDebrief = showEnhancedDebrief;
 
 </script>
 
