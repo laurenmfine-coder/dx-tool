@@ -126,95 +126,6 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
-
-/* EPA Badge Styles */
-.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.epa-badge { 
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
-}
-.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
-.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
-
-/* Confidence Slider Styles */
-.confidence-container {
-    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
-    border: 1px solid rgba(59,130,246,0.3);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 16px 0;
-    display: none;
-}
-.confidence-container.show { display: block; }
-.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-.confidence-icon { font-size: 1.2rem; }
-.confidence-label { font-weight: 600; color: #e2e8f0; }
-.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
-.confidence-slider {
-    width: 100%; height: 8px; border-radius: 4px;
-    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
-}
-.confidence-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
-.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
-.confidence-submit {
-    width: 100%; padding: 14px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    color: white; border: none; border-radius: 8px;
-    font-weight: 600; font-size: 1rem; cursor: pointer;
-}
-.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
-
-/* Calibration Feedback */
-.calibration-feedback {
-    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
-    display: none; font-size: 0.9rem;
-}
-.calibration-feedback.show { display: block; }
-.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
-.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
-.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
-
-/* Process Feedback Styles */
-.process-feedback {
-    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
-    border: 1px solid rgba(251,191,36,0.3);
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 16px;
-    display: none;
-}
-.process-feedback.show { display: block; }
-.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
-
-/* Selected option before submit */
-.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
-
-/* EPA Progress in Debrief */
-.epa-debrief-section { margin: 24px 0; }
-.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
-.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
-.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
-.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
-.epa-progress-card .epa-score.high { color: #22c55e; }
-.epa-progress-card .epa-score.medium { color: #f59e0b; }
-.epa-progress-card .epa-score.low { color: #ef4444; }
-
-/* Calibration Chart in Debrief */
-.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
-.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
-.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
-.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
-.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
-.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
-.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
-
 </style>
 </head>
 <body>
@@ -241,25 +152,6 @@
 </div>
 </div>
         <div id="scene-container"></div>
-
-<!-- Confidence Slider -->
-<div class="confidence-container" id="confidence-container">
-    <div class="confidence-header">
-        <span class="confidence-icon">🎯</span>
-        <span class="confidence-label">How confident are you in your answer?</span>
-    </div>
-    <div class="confidence-slider-wrapper">
-        <input type="range" class="confidence-slider" id="confidence-slider" 
-               min="0" max="100" value="50" 
-               oninput="updateConfidenceDisplay(this.value)">
-        <div class="confidence-labels">
-            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
-        </div>
-    </div>
-    <div class="confidence-value" id="confidence-display">50%</div>
-    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
-</div>
-
     </div>
 <script>
 let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
@@ -267,10 +159,7 @@ let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answered
 const stages = [
     {
         title: "The Breathless Patient",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>A <span class="highlight">52-year-old woman</span> presents with <span class="critical">acute onset dyspnea and pleuritic chest pain</span> that started 6 hours ago.</p><p style="margin-top:12px;">She returned from a <span class="highlight">12-hour flight from Tokyo 3 days ago</span>.</p><p style="margin-top:12px;"><strong>PMH:</strong> Obesity, knee arthroscopy 2 weeks ago</p></div>
+        content: `<div class="narrative"><p>A <span class="highlight">52-year-old woman</span> presents with <span class="critical">acute onset dyspnea and pleuritic chest pain</span> that started 6 hours ago.</p><p style="margin-top:12px;">She returned from a <span class="highlight">12-hour flight from Tokyo 3 days ago</span>.</p><p style="margin-top:12px;"><strong>PMH:</strong> Obesity, knee arthroscopy 2 weeks ago</p></div>
         <div class="socratic-prompt"><h4>Before Any Testing</h4><p>You haven't examined this patient yet. Based on the history alone, what is Virchow's Triad and which elements are present here?</p></div>`,
         hint_beginner: "Virchow's Triad: stasis, endothelial injury, hypercoagulability. Which risk factors fit?",
         hint_advanced: "How does recent surgery affect coagulation beyond just immobility?",
@@ -293,10 +182,7 @@ const stages = [
     },
     {
         title: "The Physical Exam",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>You examine the patient:</p><ul style="margin-top:12px;"><li><strong>Vitals:</strong> BP 110/70, HR 112, RR 24, SpO2 91% on RA, Temp 37.8°C</li><li><strong>General:</strong> Anxious, mild respiratory distress</li><li><strong>Cardiac:</strong> Tachycardic, loud P2</li><li><strong>Lungs:</strong> Clear to auscultation</li><li><strong>Legs:</strong> Left calf tenderness, 2cm circumference difference</li></ul></div>
+        content: `<div class="narrative"><p>You examine the patient:</p><ul style="margin-top:12px;"><li><strong>Vitals:</strong> BP 110/70, HR 112, RR 24, SpO2 91% on RA, Temp 37.8°C</li><li><strong>General:</strong> Anxious, mild respiratory distress</li><li><strong>Cardiac:</strong> Tachycardic, loud P2</li><li><strong>Lungs:</strong> Clear to auscultation</li><li><strong>Legs:</strong> Left calf tenderness, 2cm circumference difference</li></ul></div>
         <div class="socratic-prompt"><h4>Interpret the Findings</h4><p>The lungs are CLEAR despite significant hypoxia. Why might PE cause hypoxemia without abnormal lung sounds?</p></div>`,
         hint_beginner: "Think about V/Q mismatch. What happens when an area is ventilated but not perfused?",
         hint_advanced: "Beyond V/Q mismatch, what other mechanisms contribute to hypoxemia in PE?",
@@ -322,10 +208,7 @@ const stages = [
     },
     {
         title: "Pre-Test Probability",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>Before ordering tests, you need to estimate the pre-test probability of PE.</p></div>
+        content: `<div class="narrative"><p>Before ordering tests, you need to estimate the pre-test probability of PE.</p></div>
         <div class="socratic-prompt"><h4>Think Before You Test</h4><p>Why does pre-test probability matter? Can't you just order a D-dimer on everyone with dyspnea?</p></div>`,
         hint_beginner: "Consider sensitivity vs specificity. D-dimer is very sensitive but not specific.",
         hint_advanced: "How does Bayes' theorem explain why D-dimer is useless in high-probability patients?",
@@ -348,10 +231,7 @@ const stages = [
     },
     {
         title: "Wells Score",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>You calculate the Wells Score for PE:</p><ul style="margin-top:12px;"><li>Clinical signs of DVT: +3 (calf tenderness, swelling)</li><li>PE most likely diagnosis: +3</li><li>HR >100: +1.5</li><li>Immobilization/surgery: +1.5</li><li>Previous DVT/PE: 0</li><li>Hemoptysis: 0</li><li>Malignancy: 0</li></ul><p style="margin-top:12px;"><strong>Total: 9 points</strong></p></div>
+        content: `<div class="narrative"><p>You calculate the Wells Score for PE:</p><ul style="margin-top:12px;"><li>Clinical signs of DVT: +3 (calf tenderness, swelling)</li><li>PE most likely diagnosis: +3</li><li>HR >100: +1.5</li><li>Immobilization/surgery: +1.5</li><li>Previous DVT/PE: 0</li><li>Hemoptysis: 0</li><li>Malignancy: 0</li></ul><p style="margin-top:12px;"><strong>Total: 9 points</strong></p></div>
         <div class="socratic-prompt"><h4>Interpret the Score</h4><p>The Wells score is 9. What does this mean for your diagnostic approach, and why is the "PE most likely" criterion controversial?</p></div>`,
         hint_beginner: "Wells >4 = PE likely. What test comes next?",
         hint_advanced: "The 'PE most likely diagnosis' criterion is subjective. How does this affect Wells score validity?",
@@ -383,10 +263,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "PERC Rule Deep Dive",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>A colleague asks: "Why didn't you use the PERC rule to avoid any testing?"</p></div>
+        content: `<div class="narrative"><p>A colleague asks: "Why didn't you use the PERC rule to avoid any testing?"</p></div>
         <div class="socratic-prompt"><h4>Know When NOT to Use a Rule</h4><p>The PERC rule can rule out PE without any testing. Why can't you use it in this patient?</p></div>`,
         hint_beginner: "PERC only applies to LOW pretest probability patients. What was this patient's Wells score?",
         hint_advanced: "What's the mathematical basis for PERC? What probability threshold makes testing inadvisable?",
@@ -409,10 +286,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "The CTPA Results",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>The CTPA shows:</p><ul style="margin-top:12px;"><li><span class="critical">Bilateral pulmonary emboli</span></li><li><span class="critical">Saddle embolus at the main PA bifurcation</span></li><li>RV:LV ratio = 1.3 (normal <0.9)</li><li>Septal bowing toward the LV</li><li>Reflux of contrast into hepatic veins</li></ul></div>
+        content: `<div class="narrative"><p>The CTPA shows:</p><ul style="margin-top:12px;"><li><span class="critical">Bilateral pulmonary emboli</span></li><li><span class="critical">Saddle embolus at the main PA bifurcation</span></li><li>RV:LV ratio = 1.3 (normal <0.9)</li><li>Septal bowing toward the LV</li><li>Reflux of contrast into hepatic veins</li></ul></div>
         <div class="socratic-prompt"><h4>Interpret the Imaging</h4><p>Beyond confirming PE, what do these CT findings tell you about the hemodynamic impact? Why is RV:LV ratio important?</p></div>`,
         hint_beginner: "RV:LV >0.9 indicates the RV is dilated. Why would PE cause RV dilation?",
         hint_advanced: "Septal bowing and contrast reflux indicate what about RV pressures? What's the mechanism?",
@@ -435,10 +309,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Risk Stratification",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>You have confirmed PE with RV strain on CT. You check biomarkers:</p><ul style="margin-top:12px;"><li><strong>Troponin I:</strong> 0.18 ng/mL (elevated, normal <0.04)</li><li><strong>BNP:</strong> 450 pg/mL (elevated, normal <100)</li><li><strong>BP:</strong> 108/68 mmHg (stable)</li></ul></div>
+        content: `<div class="narrative"><p>You have confirmed PE with RV strain on CT. You check biomarkers:</p><ul style="margin-top:12px;"><li><strong>Troponin I:</strong> 0.18 ng/mL (elevated, normal <0.04)</li><li><strong>BNP:</strong> 450 pg/mL (elevated, normal <100)</li><li><strong>BP:</strong> 108/68 mmHg (stable)</li></ul></div>
         <div class="socratic-prompt"><h4>Classify the Severity</h4><p>This patient has imaging evidence of RV strain AND elevated biomarkers, but stable blood pressure. What risk category is this, and why does it matter?</p></div>`,
         hint_beginner: "PE severity: massive (hypotensive), submassive (normotensive + RV strain), low-risk (neither). Which is this?",
         hint_advanced: "The ESC/AHA uses 'intermediate-high' vs 'intermediate-low' risk. What distinguishes them?",
@@ -461,10 +332,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Treatment Decision",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>You have intermediate-high risk PE. The patient remains hemodynamically stable. You need to decide on treatment.</p></div>
+        content: `<div class="narrative"><p>You have intermediate-high risk PE. The patient remains hemodynamically stable. You need to decide on treatment.</p></div>
         <div class="socratic-prompt"><h4>Anticoagulation vs Thrombolysis</h4><p>Should this patient receive anticoagulation alone, or should you consider thrombolysis given the RV strain?</p></div>`,
         hint_beginner: "Thrombolysis has bleeding risk. What's the main indication for systemic thrombolysis in PE?",
         hint_advanced: "PEITHO trial examined thrombolysis in intermediate-risk PE. What were the tradeoffs?",
@@ -487,10 +355,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Anticoagulation Choice",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>You've decided on anticoagulation. Options include:</p><ul style="margin-top:12px;"><li>Unfractionated heparin (UFH)</li><li>Low molecular weight heparin (LMWH)</li><li>Direct oral anticoagulants (DOACs)</li><li>Warfarin (with bridge)</li></ul></div>
+        content: `<div class="narrative"><p>You've decided on anticoagulation. Options include:</p><ul style="margin-top:12px;"><li>Unfractionated heparin (UFH)</li><li>Low molecular weight heparin (LMWH)</li><li>Direct oral anticoagulants (DOACs)</li><li>Warfarin (with bridge)</li></ul></div>
         <div class="socratic-prompt"><h4>Choose the Agent</h4><p>For this intermediate-high risk PE patient in the hospital, which anticoagulant would you start and why?</p></div>`,
         hint_beginner: "Consider if you might need to quickly reverse anticoagulation. Which agent is most reversible?",
         hint_advanced: "DOAC trials excluded patients with high-risk PE. Is there data supporting their use here?",
@@ -513,10 +378,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Monitoring and Deterioration",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>On hospital day 2, the patient develops:</p><ul style="margin-top:12px;"><li><strong>BP:</strong> 82/50 mmHg (was 108/68)</li><li><strong>HR:</strong> 128 bpm</li><li><strong>Mental status:</strong> Confused</li><li><strong>Urine output:</strong> <20 mL/hr</li></ul></div>
+        content: `<div class="narrative"><p>On hospital day 2, the patient develops:</p><ul style="margin-top:12px;"><li><strong>BP:</strong> 82/50 mmHg (was 108/68)</li><li><strong>HR:</strong> 128 bpm</li><li><strong>Mental status:</strong> Confused</li><li><strong>Urine output:</strong> <20 mL/hr</li></ul></div>
         <div class="socratic-prompt"><h4>Crisis Management</h4><p>The patient has become hemodynamically unstable. What's happening pathophysiologically, and what treatment is now indicated?</p></div>`,
         hint_beginner: "This patient has now crossed into 'massive' PE territory. What's the treatment for massive PE?",
         hint_advanced: "What's the evidence for thrombolysis in this scenario? What about catheter-directed therapy?",
@@ -539,10 +401,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Post-Thrombolysis",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>After tPA administration:</p><ul style="margin-top:12px;"><li><strong>BP:</strong> 98/62 → 115/70 mmHg</li><li><strong>HR:</strong> 128 → 95 bpm</li><li><strong>SpO2:</strong> 91% → 95% on 2L NC</li><li><strong>Mental status:</strong> Alert and oriented</li><li>No bleeding complications</li></ul><p style="margin-top:12px;">She stabilizes over the next 24 hours.</p></div>
+        content: `<div class="narrative"><p>After tPA administration:</p><ul style="margin-top:12px;"><li><strong>BP:</strong> 98/62 → 115/70 mmHg</li><li><strong>HR:</strong> 128 → 95 bpm</li><li><strong>SpO2:</strong> 91% → 95% on 2L NC</li><li><strong>Mental status:</strong> Alert and oriented</li><li>No bleeding complications</li></ul><p style="margin-top:12px;">She stabilizes over the next 24 hours.</p></div>
         <div class="socratic-prompt"><h4>Long-Term Planning</h4><p>She survived massive PE. Now you need to plan long-term anticoagulation. What determines the duration of therapy?</p></div>`,
         hint_beginner: "Was this PE provoked (identifiable risk factor) or unprovoked? This determines duration.",
         hint_advanced: "What's the recurrence risk for provoked vs unprovoked PE? What role do residual clot and D-dimer play?",
@@ -565,10 +424,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Special Considerations",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>Before discharge, you consider special populations and scenarios.</p></div>
+        content: `<div class="narrative"><p>Before discharge, you consider special populations and scenarios.</p></div>
         <div class="socratic-prompt"><h4>Apply to Other Contexts</h4><p>If this same patient were pregnant instead of post-surgical, how would your diagnostic and treatment approach differ?</p></div>`,
         hint_beginner: "DOACs and warfarin cross the placenta. What's safe in pregnancy?",
         hint_advanced: "D-dimer is physiologically elevated in pregnancy. How does this affect the diagnostic algorithm?",
@@ -591,10 +447,7 @@ Wells Score >4 (PE likely):
     },
     {
         title: "Case Resolution",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span><span class="epa-badge">📋 Recognize Urgency</span>
-        </div><div class="narrative"><p>The patient recovers and is discharged on rivaroxaban for 3 months of anticoagulation.</p><p style="margin-top:12px;">At 3-month follow-up, she is asymptomatic with good exercise tolerance. Anticoagulation is stopped.</p><p style="margin-top:12px;"><strong>Final Diagnosis:</strong> Provoked massive pulmonary embolism with RV strain, successfully treated with thrombolysis and anticoagulation.</p></div>
+        content: `<div class="narrative"><p>The patient recovers and is discharged on rivaroxaban for 3 months of anticoagulation.</p><p style="margin-top:12px;">At 3-month follow-up, she is asymptomatic with good exercise tolerance. Anticoagulation is stopped.</p><p style="margin-top:12px;"><strong>Final Diagnosis:</strong> Provoked massive pulmonary embolism with RV strain, successfully treated with thrombolysis and anticoagulation.</p></div>
         <div class="socratic-prompt"><h4>Synthesis</h4><p>Reflect on the key decision points in this case. What were the critical branch points where management could have gone wrong?</p></div>`,
         hint_beginner: "Think about: pretest probability → testing → risk stratification → treatment → duration",
         hint_advanced: "How would outcomes differ if thrombolysis had been given earlier (at intermediate-high stage) vs waiting for deterioration?",
@@ -732,224 +585,6 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
-
-
-
-// ============================================================================
-// EPA & CALIBRATION ENHANCEMENT - ReasonDx
-// ============================================================================
-
-// Case EPA Metadata
-const caseEPA = {
-    id: 'pe',
-    primaryEPAs: ["EPA-2","EPA-3","EPA-10"],
-    secondaryEPAs: ["EPA-1","EPA-4"],
-    category: 'Pulmonary'
-};
-
-// Response tracking for calibration
-let responseHistory = [];
-let pendingSelection = null;
-
-// EPA Names for display
-const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
-
-// Override selectOption to add confidence step
-const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
-
-function selectOptionEnhanced(index, correct) {
-    const qId = 'q' + currentStage;
-    if (answeredQuestions.has(qId)) return;
-    
-    // Store pending selection
-    pendingSelection = { index, correct, stageIdx: currentStage };
-    
-    // Highlight selected option
-    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
-        opt.classList.remove('selected');
-        if (i === index) opt.classList.add('selected');
-    });
-    
-    // Show confidence slider
-    const confContainer = document.getElementById('confidence-container');
-    if (confContainer) {
-        confContainer.classList.add('show');
-        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-}
-
-function updateConfidenceDisplay(value) {
-    const display = document.getElementById('confidence-display');
-    if (display) display.textContent = value + '%';
-}
-
-function submitWithConfidence() {
-    if (!pendingSelection) return;
-    
-    const confidence = parseInt(document.getElementById('confidence-slider').value);
-    const { index, correct, stageIdx } = pendingSelection;
-    const stage = stages[stageIdx];
-    
-    // Record response with confidence
-    responseHistory.push({
-        stage: stageIdx + 1,
-        stageTitle: stage.title,
-        epaFocus: caseEPA.primaryEPAs[0],
-        selectedIndex: index,
-        selectedText: stage.question.options[index].text,
-        correct: correct,
-        confidence: confidence,
-        points: correct ? stage.question.points : 0,
-        maxPoints: stage.question.points
-    });
-    
-    // Hide confidence container
-    const confContainer = document.getElementById('confidence-container');
-    if (confContainer) confContainer.classList.remove('show');
-    
-    // Now process the answer (call original logic)
-    const qId = 'q' + stageIdx;
-    answeredQuestions.add(qId);
-    decisionPath[stageIdx] = index;
-    
-    maxScore += stage.question.points;
-    if (correct) score += stage.question.points;
-    
-    document.getElementById('score').textContent = score;
-    document.getElementById('maxScore').textContent = maxScore;
-    
-    // Show calibration feedback
-    showCalibrationFeedback(confidence, correct);
-    
-    pendingSelection = null;
-    renderStage();
-}
-
-function showCalibrationFeedback(confidence, correct) {
-    // This will be shown in the feedback section after render
-    const feedback = document.createElement('div');
-    feedback.className = 'calibration-feedback show';
-    
-    if (correct && confidence >= 70) {
-        feedback.classList.add('well-calibrated');
-        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
-    } else if (correct && confidence < 50) {
-        feedback.classList.add('underconfident');
-        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
-    } else if (!correct && confidence >= 70) {
-        feedback.classList.add('overconfident');
-        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
-    } else {
-        feedback.classList.add('well-calibrated');
-        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
-    }
-    
-    // Store for rendering
-    window.lastCalibrationFeedback = feedback.outerHTML;
-}
-
-// Enhanced debrief with EPA and calibration
-function showEnhancedDebrief() {
-    const overlay = document.getElementById('debriefOverlay');
-    const content = document.getElementById('debriefContent');
-    if (!overlay || !content) return;
-    
-    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-    
-    // Calculate calibration
-    const withConf = responseHistory.filter(r => r.confidence !== undefined);
-    const correctWithConf = withConf.filter(r => r.correct);
-    const incorrectWithConf = withConf.filter(r => !r.correct);
-    const avgConfCorrect = correctWithConf.length > 0 
-        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
-    const avgConfIncorrect = incorrectWithConf.length > 0 
-        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
-    
-    // EPA performance
-    const epaPerf = {};
-    responseHistory.forEach(r => {
-        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
-        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
-        epaPerf[epa].total++;
-        if (r.correct) epaPerf[epa].correct++;
-    });
-    
-    // Calibration interpretation
-    let calibrationMsg = '';
-    if (avgConfCorrect - avgConfIncorrect > 20) {
-        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
-    } else if (avgConfIncorrect > 60) {
-        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
-    } else {
-        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
-    }
-    
-    content.innerHTML = `
-        <div style="text-align:center;margin-bottom:24px;">
-            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
-            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
-            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
-        </div>
-        
-        <div class="epa-debrief-section">
-            <h4>📋 EPA Competencies Assessed</h4>
-            <div class="epa-progress-grid">
-                ${Object.entries(epaPerf).map(([epa, data]) => {
-                    const pct = Math.round((data.correct / data.total) * 100);
-                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
-                    return `<div class="epa-progress-card">
-                        <div class="epa-name">${epaNames[epa] || epa}</div>
-                        <div class="epa-score ${colorClass}">${pct}%</div>
-                    </div>`;
-                }).join('')}
-            </div>
-        </div>
-        
-        <div class="calibration-debrief">
-            <h4>🎯 Confidence Calibration</h4>
-            <div class="calibration-stats">
-                <div class="calibration-stat">
-                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
-                    <div class="stat-label">Avg confidence when correct</div>
-                </div>
-                <div class="calibration-stat">
-                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
-                    <div class="stat-label">Avg confidence when incorrect</div>
-                </div>
-            </div>
-            <div class="calibration-interpretation">${calibrationMsg}</div>
-        </div>
-        
-        <div class="decision-path">
-            <h3>📝 Your Decisions</h3>
-            ${responseHistory.map(r => `
-                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
-                    <div style="display:flex;justify-content:space-between;">
-                        <div>
-                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
-                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
-                        </div>
-                        <div class="path-points">${r.points}/${r.maxPoints}</div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        
-        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
-        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
-    `;
-    
-    overlay.classList.add('show');
-}
-
-// Replace selectOption globally
-window.selectOption = selectOptionEnhanced;
-
-// Store original showDebrief if exists
-if (typeof showDebrief === 'function') {
-    window.originalShowDebrief = showDebrief;
-}
-window.showDebrief = showEnhancedDebrief;
 
 </script>
 

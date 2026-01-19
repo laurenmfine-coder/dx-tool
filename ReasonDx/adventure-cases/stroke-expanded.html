@@ -128,95 +128,6 @@
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
 
-
-/* EPA Badge Styles */
-.epa-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.epa-badge { 
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); color: #c4b5fd;
-}
-.epa-badge.primary { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); color: #93c5fd; }
-.epa-badge .epa-level { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; }
-
-/* Confidence Slider Styles */
-.confidence-container {
-    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
-    border: 1px solid rgba(59,130,246,0.3);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 16px 0;
-    display: none;
-}
-.confidence-container.show { display: block; }
-.confidence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-.confidence-icon { font-size: 1.2rem; }
-.confidence-label { font-weight: 600; color: #e2e8f0; }
-.confidence-slider-wrapper { position: relative; margin-bottom: 8px; }
-.confidence-slider {
-    width: 100%; height: 8px; border-radius: 4px;
-    background: rgba(255,255,255,0.1); outline: none; -webkit-appearance: none;
-}
-.confidence-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6); cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-.confidence-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
-.confidence-value { text-align: center; font-size: 2rem; font-weight: 700; margin: 12px 0; color: #fbbf24; }
-.confidence-submit {
-    width: 100%; padding: 14px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    color: white; border: none; border-radius: 8px;
-    font-weight: 600; font-size: 1rem; cursor: pointer;
-}
-.confidence-submit:hover { opacity: 0.9; transform: translateY(-1px); }
-
-/* Calibration Feedback */
-.calibration-feedback {
-    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px;
-    display: none; font-size: 0.9rem;
-}
-.calibration-feedback.show { display: block; }
-.calibration-feedback.well-calibrated { border-left: 3px solid #22c55e; }
-.calibration-feedback.overconfident { border-left: 3px solid #ef4444; }
-.calibration-feedback.underconfident { border-left: 3px solid #fbbf24; }
-
-/* Process Feedback Styles */
-.process-feedback {
-    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.1));
-    border: 1px solid rgba(251,191,36,0.3);
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 16px;
-    display: none;
-}
-.process-feedback.show { display: block; }
-.process-feedback h4 { color: #fbbf24; margin-bottom: 12px; }
-
-/* Selected option before submit */
-.mcq-option.selected { border-color: #3b82f6 !important; background: rgba(59,130,246,0.2) !important; }
-
-/* EPA Progress in Debrief */
-.epa-debrief-section { margin: 24px 0; }
-.epa-debrief-section h4 { color: #1f2937; margin-bottom: 16px; font-size: 1.1rem; }
-.epa-progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-.epa-progress-card { background: #f9fafb; border-radius: 10px; padding: 14px; text-align: center; }
-.epa-progress-card .epa-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
-.epa-progress-card .epa-score { font-size: 1.5rem; font-weight: 700; }
-.epa-progress-card .epa-score.high { color: #22c55e; }
-.epa-progress-card .epa-score.medium { color: #f59e0b; }
-.epa-progress-card .epa-score.low { color: #ef4444; }
-
-/* Calibration Chart in Debrief */
-.calibration-debrief { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
-.calibration-debrief h4 { color: #1f2937; margin-bottom: 16px; }
-.calibration-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
-.calibration-stat { padding: 16px; background: white; border-radius: 8px; }
-.calibration-stat .stat-value { font-size: 2rem; font-weight: 700; }
-.calibration-stat .stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 4px; }
-.calibration-interpretation { margin-top: 16px; padding: 12px; background: white; border-radius: 8px; font-size: 0.9rem; }
-
 </style>
 </head>
 <body>
@@ -249,25 +160,6 @@
 </div>
 </div>
         <div id="scene-container"></div>
-
-<!-- Confidence Slider -->
-<div class="confidence-container" id="confidence-container">
-    <div class="confidence-header">
-        <span class="confidence-icon">🎯</span>
-        <span class="confidence-label">How confident are you in your answer?</span>
-    </div>
-    <div class="confidence-slider-wrapper">
-        <input type="range" class="confidence-slider" id="confidence-slider" 
-               min="0" max="100" value="50" 
-               oninput="updateConfidenceDisplay(this.value)">
-        <div class="confidence-labels">
-            <span>Guessing</span><span>Uncertain</span><span>Fairly Sure</span><span>Very Sure</span><span>Certain</span>
-        </div>
-    </div>
-    <div class="confidence-value" id="confidence-display">50%</div>
-    <button class="confidence-submit" onclick="submitWithConfidence()">Submit Answer</button>
-</div>
-
     </div>
 
 <script>
@@ -276,10 +168,7 @@ let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answered
 const stages = [
     {
         title: "The 911 Call",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>EMS calls ahead: <em>"72-year-old man, sudden onset right-sided weakness and speech difficulty. Wife noticed symptoms 45 minutes ago when he dropped his coffee cup. History of AFib, hypertension."</em></p></div>
+        content: `<div class="narrative"><p>EMS calls ahead: <em>"72-year-old man, sudden onset right-sided weakness and speech difficulty. Wife noticed symptoms 45 minutes ago when he dropped his coffee cup. History of AFib, hypertension."</em></p></div>
         <div class="socratic-prompt"><h4>Time is Brain</h4><p>Before the patient even arrives, what is the SINGLE most important piece of information to establish, and WHY does it matter more than anything else in stroke?</p></div>`,
         hint_beginner: "There's a time-sensitive treatment. What determines if a patient can receive it?",
         hint_advanced: "How do the time windows for tPA vs thrombectomy differ? What drives this difference?",
@@ -302,10 +191,7 @@ const stages = [
     },
     {
         title: "Anticipate the Exam",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>The patient is 5 minutes out. You have time to prepare your team.</p><p style="margin-top:12px;">EMS confirms: <span class="highlight">Right-sided weakness, speech difficulty, left gaze deviation</span></p></div>
+        content: `<div class="narrative"><p>The patient is 5 minutes out. You have time to prepare your team.</p><p style="margin-top:12px;">EMS confirms: <span class="highlight">Right-sided weakness, speech difficulty, left gaze deviation</span></p></div>
         <div class="socratic-prompt"><h4>Localize Before You See</h4><p>Based ONLY on the history - right hemiplegia, speech difficulty, and LEFT gaze deviation - where do you predict the lesion is located? Which vascular territory?</p></div>`,
         hint_beginner: "In cortical stroke, eyes 'look toward' the lesion. Right-sided weakness means what hemisphere?",
         hint_advanced: "How would you distinguish a cortical MCA stroke from a pontine lesion based on gaze findings alone?",
@@ -328,10 +214,7 @@ const stages = [
     },
     {
         title: "First Imaging Decision",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>The patient arrives. Your clinical suspicion is high for left MCA stroke.</p><p style="margin-top:12px;">A medical student asks: <em>"Should we order MRI? Isn't it better for seeing strokes?"</em></p></div>
+        content: `<div class="narrative"><p>The patient arrives. Your clinical suspicion is high for left MCA stroke.</p><p style="margin-top:12px;">A medical student asks: <em>"Should we order MRI? Isn't it better for seeing strokes?"</em></p></div>
         <div class="socratic-prompt"><h4>Choose Your Imaging Wisely</h4><p>MRI with DWI IS more sensitive for acute ischemic stroke. So WHY is non-contrast CT the first-line imaging in the ED?</p></div>`,
         hint_beginner: "What's the PRIMARY purpose of the first scan - to see the stroke, or to rule something out?",
         hint_advanced: "What are the earliest CT signs of ischemic stroke, and when do they appear? Why might a 'normal' CT be reassuring?",
@@ -354,10 +237,7 @@ const stages = [
     },
     {
         title: "CT Results",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p><strong>CT Head (non-contrast):</strong> No hemorrhage. Subtle loss of gray-white differentiation in left MCA territory. ASPECTS 8.</p><p style="margin-top:12px;"><strong>CTA:</strong> <span class="critical">Left M1 occlusion</span> with good collateral filling distally.</p><p style="margin-top:12px;"><strong>Time check:</strong> 62 minutes from last known well</p></div>
+        content: `<div class="narrative"><p><strong>CT Head (non-contrast):</strong> No hemorrhage. Subtle loss of gray-white differentiation in left MCA territory. ASPECTS 8.</p><p style="margin-top:12px;"><strong>CTA:</strong> <span class="critical">Left M1 occlusion</span> with good collateral filling distally.</p><p style="margin-top:12px;"><strong>Time check:</strong> 62 minutes from last known well</p></div>
         <div class="socratic-prompt"><h4>The Treatment Decision</h4><p>You have confirmed left M1 occlusion (a large vessel occlusion) at 62 minutes. What treatments does this patient qualify for?</p></div>`,
         hint_beginner: "Large vessel occlusion (LVO) opens up treatment beyond just tPA. What is it?",
         hint_advanced: "Should you give tPA if thrombectomy is planned anyway? What does the evidence say?",
@@ -388,10 +268,7 @@ Combined approach maximizes chances</div></div>`,
     },
     {
         title: "Blood Pressure Threshold",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>Before tPA, you recheck: <span class="critical">BP 192/108 mmHg</span></p><p style="margin-top:12px;">The nurse asks: "Should we give tPA? The BP is high."</p></div>
+        content: `<div class="narrative"><p>Before tPA, you recheck: <span class="critical">BP 192/108 mmHg</span></p><p style="margin-top:12px;">The nurse asks: "Should we give tPA? The BP is high."</p></div>
         <div class="socratic-prompt"><h4>The BP Question</h4><p>What is the BP threshold for tPA, and WHY does elevated BP matter in the context of thrombolysis?</p></div>`,
         hint_beginner: "tPA has a BP cutoff. What happens if you give tPA with very high BP?",
         hint_advanced: "How do BP goals differ pre-tPA, post-tPA, and if tPA is NOT given? Why the differences?",
@@ -414,10 +291,7 @@ Combined approach maximizes chances</div></div>`,
     },
     {
         title: "tPA Contraindications",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>BP is lowered to 176/102 with labetalol. Before pushing the bolus, you review the checklist.</p><p style="margin-top:12px;"><strong>tPA Protocol:</strong> 0.9 mg/kg (max 90mg), 10% bolus, 90% over 60 minutes</p></div>
+        content: `<div class="narrative"><p>BP is lowered to 176/102 with labetalol. Before pushing the bolus, you review the checklist.</p><p style="margin-top:12px;"><strong>tPA Protocol:</strong> 0.9 mg/kg (max 90mg), 10% bolus, 90% over 60 minutes</p></div>
         <div class="socratic-prompt"><h4>Know Your Contraindications</h4><p>What conditions would ABSOLUTELY contraindicate tPA, making the bleeding risk unacceptable regardless of potential benefit?</p></div>`,
         hint_beginner: "Think: what conditions would make ANY bleeding catastrophic?",
         hint_advanced: "The 3-4.5 hour window has additional exclusion criteria. What are they and why?",
@@ -440,10 +314,7 @@ Combined approach maximizes chances</div></div>`,
     },
     {
         title: "Thrombectomy Criteria",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>tPA is infusing. The interventional team is scrubbed and ready.</p><p style="margin-top:12px;"><strong>Current status:</strong> NIHSS 16, no improvement yet, M1 occlusion confirmed</p><p><strong>Time to groin puncture:</strong> 95 minutes from symptom onset</p></div>
+        content: `<div class="narrative"><p>tPA is infusing. The interventional team is scrubbed and ready.</p><p style="margin-top:12px;"><strong>Current status:</strong> NIHSS 16, no improvement yet, M1 occlusion confirmed</p><p><strong>Time to groin puncture:</strong> 95 minutes from symptom onset</p></div>
         <div class="socratic-prompt"><h4>Who Gets Thrombectomy?</h4><p>What specific criteria make a patient eligible for mechanical thrombectomy? Not all strokes qualify.</p></div>`,
         hint_beginner: "Thrombectomy requires a LARGE vessel occlusion. Which vessels qualify?",
         hint_advanced: "DAWN and DEFUSE-3 extended the window. What imaging criteria must be met for late-window (6-24h) thrombectomy?",
@@ -471,10 +342,7 @@ DEFUSE-3 criteria: Perfusion mismatch
     },
     {
         title: "Post-Reperfusion Care",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p><strong>Thrombectomy result:</strong> TICI 2b/3 reperfusion (successful)</p><p style="margin-top:12px;"><strong>Time to reperfusion:</strong> 140 minutes from symptom onset</p><p style="margin-top:12px;">Post-procedure: Patient following commands, moving right arm against gravity</p></div>
+        content: `<div class="narrative"><p><strong>Thrombectomy result:</strong> TICI 2b/3 reperfusion (successful)</p><p style="margin-top:12px;"><strong>Time to reperfusion:</strong> 140 minutes from symptom onset</p><p style="margin-top:12px;">Post-procedure: Patient following commands, moving right arm against gravity</p></div>
         <div class="socratic-prompt"><h4>What Could Go Wrong</h4><p>The clot is out, reperfusion achieved. What is the most dangerous complication to monitor for in the next 24 hours?</p></div>`,
         hint_beginner: "What's the dreaded complication of reperfusion therapy?",
         hint_advanced: "How do you distinguish symptomatic ICH from asymptomatic hemorrhagic transformation? Does asymptomatic bleeding matter?",
@@ -497,10 +365,7 @@ DEFUSE-3 criteria: Perfusion mismatch
     },
     {
         title: "Secondary Prevention",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>Day 3: The patient has improved significantly. NIHSS down from 16 to 5.</p><p style="margin-top:12px;"><strong>Workup reveals:</strong></p><ul><li>Echo: Normal LV, no thrombus, PFO present</li><li>Carotid doppler: No significant stenosis</li><li>Telemetry: Intermittent AFib documented</li></ul></div>
+        content: `<div class="narrative"><p>Day 3: The patient has improved significantly. NIHSS down from 16 to 5.</p><p style="margin-top:12px;"><strong>Workup reveals:</strong></p><ul><li>Echo: Normal LV, no thrombus, PFO present</li><li>Carotid doppler: No significant stenosis</li><li>Telemetry: Intermittent AFib documented</li></ul></div>
         <div class="socratic-prompt"><h4>Prevent the Next One</h4><p>This patient had a cardioembolic stroke from AFib. What is the most important intervention to prevent recurrent stroke?</p></div>`,
         hint_beginner: "AFib is a major stroke risk factor. What prevents clot formation in AFib?",
         hint_advanced: "How do you weigh bleeding risk vs stroke risk when deciding on anticoagulation? What scores help?",
@@ -523,10 +388,7 @@ DEFUSE-3 criteria: Perfusion mismatch
     },
     {
         title: "Case Resolution",
-        content: `
-        <div class="epa-badges">
-            <span class="epa-badge primary">🎯 Recognize Urgency</span><span class="epa-badge">📋 Prioritize DDx</span><span class="epa-badge">📋 Recommend Tests</span>
-        </div><div class="narrative"><p>Day 7: Patient discharging to acute rehab.</p><p style="margin-top:12px;"><strong>Discharge NIHSS:</strong> 3 (mild word-finding difficulty, mild right hand weakness)</p><p style="margin-top:12px;"><strong>Discharge medications:</strong> Apixaban 5mg BID, atorvastatin 80mg, metoprolol</p><p style="margin-top:12px;"><strong>mRS at 90 days:</strong> 1 (no significant disability)</p></div>
+        content: `<div class="narrative"><p>Day 7: Patient discharging to acute rehab.</p><p style="margin-top:12px;"><strong>Discharge NIHSS:</strong> 3 (mild word-finding difficulty, mild right hand weakness)</p><p style="margin-top:12px;"><strong>Discharge medications:</strong> Apixaban 5mg BID, atorvastatin 80mg, metoprolol</p><p style="margin-top:12px;"><strong>mRS at 90 days:</strong> 1 (no significant disability)</p></div>
         <div class="socratic-prompt"><h4>Synthesis</h4><p>Reflect on the critical decision points. What made the difference between disability and recovery in this case?</p></div>`,
         hint_beginner: "Think about: time → imaging → treatment → prevention",
         hint_advanced: "What if the patient had arrived at 5 hours instead of 45 minutes? How would management differ?",
@@ -664,224 +526,6 @@ function toggleReferences() {
         toggle.textContent = '▶';
     }
 }
-
-
-
-// ============================================================================
-// EPA & CALIBRATION ENHANCEMENT - ReasonDx
-// ============================================================================
-
-// Case EPA Metadata
-const caseEPA = {
-    id: 'stroke',
-    primaryEPAs: ["EPA-10","EPA-2","EPA-3"],
-    secondaryEPAs: ["EPA-1","EPA-4"],
-    category: 'Neurology'
-};
-
-// Response tracking for calibration
-let responseHistory = [];
-let pendingSelection = null;
-
-// EPA Names for display
-const epaNames = {"EPA-1":"Gather H&P","EPA-2":"Prioritize DDx","EPA-3":"Recommend Tests","EPA-4":"Enter Orders","EPA-7":"Apply Evidence","EPA-10":"Recognize Urgency","EPA-12":"Perform Procedures"};
-
-// Override selectOption to add confidence step
-const originalSelectOption = typeof selectOption === 'function' ? selectOption : null;
-
-function selectOptionEnhanced(index, correct) {
-    const qId = 'q' + currentStage;
-    if (answeredQuestions.has(qId)) return;
-    
-    // Store pending selection
-    pendingSelection = { index, correct, stageIdx: currentStage };
-    
-    // Highlight selected option
-    document.querySelectorAll('.mcq-option').forEach((opt, i) => {
-        opt.classList.remove('selected');
-        if (i === index) opt.classList.add('selected');
-    });
-    
-    // Show confidence slider
-    const confContainer = document.getElementById('confidence-container');
-    if (confContainer) {
-        confContainer.classList.add('show');
-        confContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-}
-
-function updateConfidenceDisplay(value) {
-    const display = document.getElementById('confidence-display');
-    if (display) display.textContent = value + '%';
-}
-
-function submitWithConfidence() {
-    if (!pendingSelection) return;
-    
-    const confidence = parseInt(document.getElementById('confidence-slider').value);
-    const { index, correct, stageIdx } = pendingSelection;
-    const stage = stages[stageIdx];
-    
-    // Record response with confidence
-    responseHistory.push({
-        stage: stageIdx + 1,
-        stageTitle: stage.title,
-        epaFocus: caseEPA.primaryEPAs[0],
-        selectedIndex: index,
-        selectedText: stage.question.options[index].text,
-        correct: correct,
-        confidence: confidence,
-        points: correct ? stage.question.points : 0,
-        maxPoints: stage.question.points
-    });
-    
-    // Hide confidence container
-    const confContainer = document.getElementById('confidence-container');
-    if (confContainer) confContainer.classList.remove('show');
-    
-    // Now process the answer (call original logic)
-    const qId = 'q' + stageIdx;
-    answeredQuestions.add(qId);
-    decisionPath[stageIdx] = index;
-    
-    maxScore += stage.question.points;
-    if (correct) score += stage.question.points;
-    
-    document.getElementById('score').textContent = score;
-    document.getElementById('maxScore').textContent = maxScore;
-    
-    // Show calibration feedback
-    showCalibrationFeedback(confidence, correct);
-    
-    pendingSelection = null;
-    renderStage();
-}
-
-function showCalibrationFeedback(confidence, correct) {
-    // This will be shown in the feedback section after render
-    const feedback = document.createElement('div');
-    feedback.className = 'calibration-feedback show';
-    
-    if (correct && confidence >= 70) {
-        feedback.classList.add('well-calibrated');
-        feedback.innerHTML = '✅ <strong>Well calibrated!</strong> You were confident and correct.';
-    } else if (correct && confidence < 50) {
-        feedback.classList.add('underconfident');
-        feedback.innerHTML = '📚 Correct, but you were uncertain. <strong>Trust your knowledge more!</strong>';
-    } else if (!correct && confidence >= 70) {
-        feedback.classList.add('overconfident');
-        feedback.innerHTML = '⚠️ <strong>Overconfidence detected.</strong> High confidence + wrong answer is where diagnostic errors happen.';
-    } else {
-        feedback.classList.add('well-calibrated');
-        feedback.innerHTML = '📝 Incorrect, but your uncertainty was appropriate. Review this concept.';
-    }
-    
-    // Store for rendering
-    window.lastCalibrationFeedback = feedback.outerHTML;
-}
-
-// Enhanced debrief with EPA and calibration
-function showEnhancedDebrief() {
-    const overlay = document.getElementById('debriefOverlay');
-    const content = document.getElementById('debriefContent');
-    if (!overlay || !content) return;
-    
-    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-    
-    // Calculate calibration
-    const withConf = responseHistory.filter(r => r.confidence !== undefined);
-    const correctWithConf = withConf.filter(r => r.correct);
-    const incorrectWithConf = withConf.filter(r => !r.correct);
-    const avgConfCorrect = correctWithConf.length > 0 
-        ? Math.round(correctWithConf.reduce((s,r) => s + r.confidence, 0) / correctWithConf.length) : 0;
-    const avgConfIncorrect = incorrectWithConf.length > 0 
-        ? Math.round(incorrectWithConf.reduce((s,r) => s + r.confidence, 0) / incorrectWithConf.length) : 0;
-    
-    // EPA performance
-    const epaPerf = {};
-    responseHistory.forEach(r => {
-        const epa = r.epaFocus || caseEPA.primaryEPAs[0];
-        if (!epaPerf[epa]) epaPerf[epa] = { correct: 0, total: 0 };
-        epaPerf[epa].total++;
-        if (r.correct) epaPerf[epa].correct++;
-    });
-    
-    // Calibration interpretation
-    let calibrationMsg = '';
-    if (avgConfCorrect - avgConfIncorrect > 20) {
-        calibrationMsg = '✅ Good discrimination! You feel more confident when you\'re right.';
-    } else if (avgConfIncorrect > 60) {
-        calibrationMsg = '⚠️ Overconfidence pattern detected. Practice asking "What would make me wrong?"';
-    } else {
-        calibrationMsg = '📊 Work on calibration - confidence should differ between correct and incorrect answers.';
-    }
-    
-    content.innerHTML = `
-        <div style="text-align:center;margin-bottom:24px;">
-            <div style="font-size:4rem;">${percentage >= 80 ? '🏆' : percentage >= 60 ? '👍' : '📚'}</div>
-            <div style="font-size:2.5rem;font-weight:700;color:${percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#f59e0b' : '#ef4444'}">${percentage}%</div>
-            <div style="color:#6b7280;">Score: ${score}/${maxScore}</div>
-        </div>
-        
-        <div class="epa-debrief-section">
-            <h4>📋 EPA Competencies Assessed</h4>
-            <div class="epa-progress-grid">
-                ${Object.entries(epaPerf).map(([epa, data]) => {
-                    const pct = Math.round((data.correct / data.total) * 100);
-                    const colorClass = pct >= 80 ? 'high' : pct >= 60 ? 'medium' : 'low';
-                    return `<div class="epa-progress-card">
-                        <div class="epa-name">${epaNames[epa] || epa}</div>
-                        <div class="epa-score ${colorClass}">${pct}%</div>
-                    </div>`;
-                }).join('')}
-            </div>
-        </div>
-        
-        <div class="calibration-debrief">
-            <h4>🎯 Confidence Calibration</h4>
-            <div class="calibration-stats">
-                <div class="calibration-stat">
-                    <div class="stat-value" style="color:#22c55e;">${avgConfCorrect}%</div>
-                    <div class="stat-label">Avg confidence when correct</div>
-                </div>
-                <div class="calibration-stat">
-                    <div class="stat-value" style="color:${avgConfIncorrect > 60 ? '#ef4444' : '#f59e0b'};">${avgConfIncorrect}%</div>
-                    <div class="stat-label">Avg confidence when incorrect</div>
-                </div>
-            </div>
-            <div class="calibration-interpretation">${calibrationMsg}</div>
-        </div>
-        
-        <div class="decision-path">
-            <h3>📝 Your Decisions</h3>
-            ${responseHistory.map(r => `
-                <div class="path-item ${r.correct ? 'path-optimal' : 'path-incorrect'}">
-                    <div style="display:flex;justify-content:space-between;">
-                        <div>
-                            <div class="path-stage">${r.correct ? '✓' : '✗'} Stage ${r.stage}: ${r.stageTitle}</div>
-                            <div class="path-choice" style="font-size:0.85rem;color:#6b7280;">${r.confidence}% confident</div>
-                        </div>
-                        <div class="path-points">${r.points}/${r.maxPoints}</div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        
-        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
-        <button class="debrief-btn" style="background:#e5e7eb;color:#4b5563;margin-top:8px;" onclick="closeDebrief()">Close</button>
-    `;
-    
-    overlay.classList.add('show');
-}
-
-// Replace selectOption globally
-window.selectOption = selectOptionEnhanced;
-
-// Store original showDebrief if exists
-if (typeof showDebrief === 'function') {
-    window.originalShowDebrief = showDebrief;
-}
-window.showDebrief = showEnhancedDebrief;
 
 </script>
 

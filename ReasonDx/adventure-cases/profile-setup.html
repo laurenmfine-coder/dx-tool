@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Up Your Profile | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --accent: #2563eb;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+        .header { background: linear-gradient(135deg, #7c3aed, #2563eb); color: white; padding: 40px 24px; text-align: center; }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .header p { color: rgba(255,255,255,0.9); }
+        .main { flex: 1; max-width: 700px; margin: 0 auto; padding: 40px 24px; width: 100%; }
+        .step { display: none; }
+        .step.active { display: block; }
+        .step-indicator { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; }
+        .step-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border); }
+        .step-dot.active { background: var(--accent); }
+        .step-dot.complete { background: #16a34a; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card h2 { font-size: 1.3rem; margin-bottom: 8px; }
+        .card p { color: var(--text-secondary); margin-bottom: 24px; }
+        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .option-card { background: var(--bg); border: 2px solid var(--border); border-radius: 12px; padding: 24px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .option-card:hover { border-color: var(--accent); }
+        .option-card.selected { border-color: var(--accent); background: rgba(37,99,235,0.1); }
+        .option-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .option-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .option-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0; }
+        .specialty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+        .specialty-card { background: var(--bg); border: 2px solid var(--border); border-radius: 10px; padding: 16px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .specialty-card:hover { border-color: var(--accent); }
+        .specialty-card.selected { border-color: var(--accent); background: rgba(37,99,235,0.1); }
+        .specialty-card .icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .specialty-card span { font-size: 0.9rem; font-weight: 500; }
+        .pgy-select { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font-size: 1rem; margin-top: 16px; }
+        .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: white; border: none; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--bg); }
+        .summary-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .summary-label { color: var(--text-secondary); }
+        .summary-value { font-weight: 600; }
+        .info-box { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.3); border-radius: 10px; padding: 16px; margin-top: 20px; }
+        .info-box h4 { color: var(--accent); font-size: 0.9rem; margin-bottom: 8px; }
+        .info-box p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0; }
+        @media (max-width: 600px) { .option-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>👋 Welcome to ReasonDx</h1>
+        <p>Let's personalize your learning experience</p>
+    </header>
+    
+    <main class="main">
+        <div class="step-indicator">
+            <div class="step-dot active" id="dot1"></div>
+            <div class="step-dot" id="dot2"></div>
+            <div class="step-dot" id="dot3"></div>
+        </div>
+        
+        <!-- Step 1: Training Level -->
+        <div class="step active" id="step1">
+            <div class="card">
+                <h2>What's your training level?</h2>
+                <p>This determines which competency framework we use to track your progress.</p>
+                
+                <div class="option-grid">
+                    <div class="option-card" onclick="selectLevel('student')">
+                        <div class="icon">🎓</div>
+                        <h3>Medical Student</h3>
+                        <p>Track progress using AAMC Core EPAs (Entrustable Professional Activities)</p>
+                    </div>
+                    <div class="option-card" onclick="selectLevel('resident')">
+                        <div class="icon">🩺</div>
+                        <h3>Resident / Fellow</h3>
+                        <p>Track progress using ACGME Milestones for your specialty</p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h4>Why does this matter?</h4>
+                    <p>Medical students use EPAs - broad activities you'll be trusted to do. Residents use Milestones - developmental benchmarks specific to your specialty. Same great cases, different competency tracking!</p>
+                </div>
+                
+                <div class="btn-row">
+                    <button class="btn btn-primary" onclick="nextStep(2)" id="step1Next" disabled>Continue →</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 2: Details -->
+        <div class="step" id="step2">
+            <!-- Student Version -->
+            <div class="card" id="studentDetails" style="display:none">
+                <h2>Almost there!</h2>
+                <p>What year are you in?</p>
+                
+                <select class="pgy-select" id="studentYear" onchange="checkStep2()">
+                    <option value="">Select your year...</option>
+                    <option value="MS1">MS1 - First Year</option>
+                    <option value="MS2">MS2 - Second Year</option>
+                    <option value="MS3">MS3 - Third Year (Clerkships)</option>
+                    <option value="MS4">MS4 - Fourth Year</option>
+                </select>
+                
+                <div class="info-box">
+                    <h4>EPAs We'll Track</h4>
+                    <p>You'll see progress on all 13 Core EPAs including: Gathering history, Prioritizing differential, Recommending tests, Recognizing urgency, and more.</p>
+                </div>
+                
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="prevStep(1)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)" id="step2NextStudent" disabled>Continue →</button>
+                </div>
+            </div>
+            
+            <!-- Resident Version -->
+            <div class="card" id="residentDetails" style="display:none">
+                <h2>Select your specialty</h2>
+                <p>We'll track milestones specific to your training program.</p>
+                
+                <div class="specialty-grid">
+                    <div class="specialty-card" onclick="selectSpecialty('IM')">
+                        <div class="icon">🫀</div>
+                        <span>Internal Medicine</span>
+                    </div>
+                    <div class="specialty-card" onclick="selectSpecialty('FM')">
+                        <div class="icon">👨‍👩‍👧</div>
+                        <span>Family Medicine</span>
+                    </div>
+                    <div class="specialty-card" onclick="selectSpecialty('EM')">
+                        <div class="icon">🚑</div>
+                        <span>Emergency Medicine</span>
+                    </div>
+                    <div class="specialty-card" onclick="selectSpecialty('PED')">
+                        <div class="icon">👶</div>
+                        <span>Pediatrics</span>
+                    </div>
+                    <div class="specialty-card" onclick="selectSpecialty('PSYCH')">
+                        <div class="icon">🧠</div>
+                        <span>Psychiatry</span>
+                    </div>
+                    <div class="specialty-card" onclick="selectSpecialty('OBGYN')">
+                        <div class="icon">🤰</div>
+                        <span>OB/GYN</span>
+                    </div>
+                </div>
+                
+                <select class="pgy-select" id="pgyYear" onchange="checkStep2()">
+                    <option value="">Select your PGY level...</option>
+                    <option value="PGY1">PGY-1 (Intern)</option>
+                    <option value="PGY2">PGY-2</option>
+                    <option value="PGY3">PGY-3</option>
+                    <option value="PGY4">PGY-4</option>
+                    <option value="PGY5">PGY-5+</option>
+                    <option value="Fellow">Fellow</option>
+                </select>
+                
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="prevStep(1)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)" id="step2NextResident" disabled>Continue →</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 3: Confirm -->
+        <div class="step" id="step3">
+            <div class="card">
+                <h2>Confirm Your Profile</h2>
+                <p>Here's what we'll set up for you:</p>
+                
+                <div id="summaryContent">
+                    <!-- Filled by JS -->
+                </div>
+                
+                <div class="info-box">
+                    <h4>You can change this anytime</h4>
+                    <p>Access your profile settings from the dashboard to update your training level or specialty.</p>
+                </div>
+                
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="saveAndStart()">Start Learning →</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        let profile = {
+            type: null,
+            year: null,
+            specialty: null
+        };
+        
+        function selectLevel(level) {
+            profile.type = level;
+            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('step1Next').disabled = false;
+        }
+        
+        function selectSpecialty(specialty) {
+            profile.specialty = specialty;
+            document.querySelectorAll('.specialty-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            checkStep2();
+        }
+        
+        function checkStep2() {
+            if (profile.type === 'student') {
+                const year = document.getElementById('studentYear').value;
+                profile.year = year;
+                document.getElementById('step2NextStudent').disabled = !year;
+            } else {
+                const pgy = document.getElementById('pgyYear').value;
+                profile.year = pgy;
+                document.getElementById('step2NextResident').disabled = !(profile.specialty && pgy);
+            }
+        }
+        
+        function nextStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-dot').forEach((d, i) => {
+                d.classList.remove('active');
+                if (i < step - 1) d.classList.add('complete');
+            });
+            
+            // Show target step
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById(`dot${step}`).classList.add('active');
+            
+            // Handle step-specific logic
+            if (step === 2) {
+                if (profile.type === 'student') {
+                    document.getElementById('studentDetails').style.display = 'block';
+                    document.getElementById('residentDetails').style.display = 'none';
+                } else {
+                    document.getElementById('studentDetails').style.display = 'none';
+                    document.getElementById('residentDetails').style.display = 'block';
+                }
+            }
+            
+            if (step === 3) {
+                renderSummary();
+            }
+        }
+        
+        function prevStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-dot').forEach((d, i) => {
+                d.classList.remove('active', 'complete');
+                if (i < step) d.classList.add('complete');
+            });
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById(`dot${step}`).classList.add('active');
+        }
+        
+        function renderSummary() {
+            const specialtyNames = {
+                'IM': 'Internal Medicine',
+                'FM': 'Family Medicine',
+                'EM': 'Emergency Medicine',
+                'PED': 'Pediatrics',
+                'PSYCH': 'Psychiatry',
+                'OBGYN': 'OB/GYN'
+            };
+            
+            let html = '';
+            
+            if (profile.type === 'student') {
+                html = `
+                    <div class="summary-item">
+                        <span class="summary-label">Training Level</span>
+                        <span class="summary-value">🎓 Medical Student</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Year</span>
+                        <span class="summary-value">${profile.year}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Competency Framework</span>
+                        <span class="summary-value">AAMC Core EPAs</span>
+                    </div>
+                    <div class="summary-item" style="border-bottom:none">
+                        <span class="summary-label">EPAs Tracked</span>
+                        <span class="summary-value">13 Core EPAs</span>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="summary-item">
+                        <span class="summary-label">Training Level</span>
+                        <span class="summary-value">🩺 Resident</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Specialty</span>
+                        <span class="summary-value">${specialtyNames[profile.specialty]}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Year</span>
+                        <span class="summary-value">${profile.year}</span>
+                    </div>
+                    <div class="summary-item" style="border-bottom:none">
+                        <span class="summary-label">Competency Framework</span>
+                        <span class="summary-value">ACGME ${specialtyNames[profile.specialty]} Milestones</span>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('summaryContent').innerHTML = html;
+        }
+        
+        function saveAndStart() {
+            // Save to localStorage
+            localStorage.setItem('reasondx_profile', JSON.stringify(profile));
+            
+            // Redirect to main hub
+            window.location.href = 'adventure-hub.html';
+        }
+        
+        // Check if profile already exists
+        const existingProfile = localStorage.getItem('reasondx_profile');
+        if (existingProfile) {
+            // Could show "welcome back" or skip to cases
+        }
+    </script>
+</body>
+</html>
