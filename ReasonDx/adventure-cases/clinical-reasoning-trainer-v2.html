@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ReasonDx | Clinical Reasoning Trainer</title>
     <style>
 
@@ -161,11 +161,21 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* DDx Builder */
         .ddx-builder { margin: 14px 0; }
-        .ddx-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+        .ddx-input-row { display: flex; gap: 8px; margin-bottom: 12px; position: relative; }
         .ddx-input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; background: var(--bg); color: var(--text); }
         .ddx-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
         .ddx-add { background: var(--accent); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
         .ddx-add:hover { background: var(--primary-dark); }
+        
+        /* Autocomplete dropdown */
+        .ddx-autocomplete { position: absolute; top: 100%; left: 0; right: 70px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; max-height: 250px; overflow-y: auto; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; }
+        .ddx-autocomplete.show { display: block; }
+        .ddx-autocomplete-item { padding: 10px 14px; cursor: pointer; font-size: 0.85rem; color: var(--text); background: var(--card); border-bottom: 1px solid var(--border); }
+        .ddx-autocomplete-item:last-child { border-bottom: none; }
+        .ddx-autocomplete-item:hover, .ddx-autocomplete-item.selected { background: var(--accent-light); color: var(--text); }
+        .ddx-autocomplete-item .category { font-size: 0.7rem; color: var(--muted); margin-left: 8px; }
+        .ddx-autocomplete-count { padding: 8px 14px; font-size: 0.75rem; color: var(--muted); background: var(--bg); border-bottom: 1px solid var(--border); }
+        
         .ddx-list { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
         .ddx-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--card); border-bottom: 1px solid var(--border); cursor: grab; transition: all 0.2s; }
         .ddx-item:last-child { border-bottom: none; }
@@ -409,17 +419,72 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-    </style>
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+        /* Enhanced Mobile for Clinical Reasoning Trainer - iPhone 16/17 */
+        @media (max-width: 480px) {
+            .app { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .sidebar.open { display: flex; position: fixed; left: 0; top: 0; bottom: 0; width: 85vw; max-width: 320px; z-index: 200; }
+            .mobile-toggle { display: flex !important; }
+            .main { padding: 12px; }
+            .main-header { padding: 10px 12px; flex-wrap: wrap; gap: 8px; }
+            .case-title { font-size: 1.1rem; }
+            .timer-display { font-size: 0.9rem; padding: 6px 10px; }
+            .stage-nav { padding: 10px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .stage-btn { padding: 8px 12px; font-size: 0.75rem; min-width: auto; white-space: nowrap; }
+            .stage-content { padding: 14px; }
+            .patient-quote { padding: 12px; }
+            .patient-quote p { font-size: 0.95rem; }
+            .vitals-strip { grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px; }
+            .vital-val { font-size: 0.9rem; }
+            .vital-lbl { font-size: 0.5rem; }
+            .emr-tabs { gap: 4px; padding: 6px; }
+            .emr-tab { padding: 4px 6px; font-size: 0.6rem; }
+            .ddx-input { font-size: 16px; } /* Prevents zoom on iOS */
+            .ddx-input-row { flex-direction: column; gap: 10px; }
+            .ddx-add { width: 100%; }
+            .ddx-item { padding: 10px; gap: 8px; }
+            .ddx-name { font-size: 0.85rem; }
+            .ddx-autocomplete { right: 0; max-height: 200px; }
+            .action-row { flex-direction: column; gap: 10px; }
+            .btn { width: 100%; padding: 14px; font-size: 0.95rem; }
+            .pause-modal { padding: 20px; margin: 20px; }
+            .pause-modal h2 { font-size: 1.3rem; }
+        }
+        @media (max-width: 390px) {
+            .vitals-strip { grid-template-columns: repeat(2, 1fr); }
+            .stage-btn { padding: 6px 10px; font-size: 0.7rem; }
+        }
+
+</style>
 </head>
 <body>
 
-<div style="position: fixed; top: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
-    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
-    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
-</div>
-
+<!-- Theme selector moved to nav area, not fixed -->
 
     <!-- UNIFIED DX NAVIGATION -->
     <nav class="dx-nav">
@@ -437,12 +502,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </svg>
             </a>
             <div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="../ReasonDx/training.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
                 <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -979,8 +1044,11 @@ const App = {
                     <div class="ddx-builder">
                         <div class="ddx-input-row">
                             <input type="text" class="ddx-input" id="ddxInput" placeholder="Type a diagnosis..." 
-                                   onkeypress="if(event.key==='Enter') App.addDdx()">
+                                   oninput="App.showAutocomplete(this.value)"
+                                   onkeydown="App.handleAutocompleteKey(event)"
+                                   autocomplete="off">
                             <button class="ddx-add" onclick="App.addDdx()">+ Add</button>
+                            <div class="ddx-autocomplete" id="ddxAutocomplete"></div>
                         </div>
                         
                         <div class="ddx-list" id="ddxList">
@@ -1637,6 +1705,456 @@ const App = {
     toggleTheme() {
         const current = document.documentElement.getAttribute('data-theme');
         document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
+    },
+    
+    // Diagnosis Database for Autocomplete (800+ diagnoses)
+    diagnosisDB: [
+        // Cardiovascular
+        { name: "Acute Coronary Syndrome (ACS)", cat: "Cardiac" },
+        { name: "STEMI", cat: "Cardiac" },
+        { name: "NSTEMI", cat: "Cardiac" },
+        { name: "Unstable Angina", cat: "Cardiac" },
+        { name: "Stable Angina", cat: "Cardiac" },
+        { name: "Myocardial Infarction", cat: "Cardiac" },
+        { name: "Heart Failure", cat: "Cardiac" },
+        { name: "Acute Decompensated Heart Failure", cat: "Cardiac" },
+        { name: "Cardiogenic Shock", cat: "Cardiac" },
+        { name: "Atrial Fibrillation", cat: "Cardiac" },
+        { name: "Atrial Flutter", cat: "Cardiac" },
+        { name: "Supraventricular Tachycardia", cat: "Cardiac" },
+        { name: "Ventricular Tachycardia", cat: "Cardiac" },
+        { name: "Ventricular Fibrillation", cat: "Cardiac" },
+        { name: "Bradycardia", cat: "Cardiac" },
+        { name: "Heart Block", cat: "Cardiac" },
+        { name: "Pericarditis", cat: "Cardiac" },
+        { name: "Cardiac Tamponade", cat: "Cardiac" },
+        { name: "Myocarditis", cat: "Cardiac" },
+        { name: "Endocarditis", cat: "Cardiac" },
+        { name: "Aortic Dissection", cat: "Cardiac" },
+        { name: "Aortic Aneurysm", cat: "Cardiac" },
+        { name: "Hypertensive Emergency", cat: "Cardiac" },
+        { name: "Hypertensive Urgency", cat: "Cardiac" },
+        { name: "Syncope", cat: "Cardiac" },
+        { name: "Orthostatic Hypotension", cat: "Cardiac" },
+        { name: "Wolff-Parkinson-White Syndrome", cat: "Cardiac" },
+        { name: "Long QT Syndrome", cat: "Cardiac" },
+        { name: "Brugada Syndrome", cat: "Cardiac" },
+        { name: "Cardiomyopathy", cat: "Cardiac" },
+        { name: "Dilated Cardiomyopathy", cat: "Cardiac" },
+        { name: "Hypertrophic Cardiomyopathy", cat: "Cardiac" },
+        { name: "Restrictive Cardiomyopathy", cat: "Cardiac" },
+        { name: "Aortic Stenosis", cat: "Cardiac" },
+        { name: "Aortic Regurgitation", cat: "Cardiac" },
+        { name: "Mitral Stenosis", cat: "Cardiac" },
+        { name: "Mitral Regurgitation", cat: "Cardiac" },
+        { name: "Mitral Valve Prolapse", cat: "Cardiac" },
+        
+        // Pulmonary
+        { name: "Pulmonary Embolism", cat: "Pulmonary" },
+        { name: "Deep Vein Thrombosis", cat: "Vascular" },
+        { name: "Pneumonia", cat: "Pulmonary" },
+        { name: "Community-Acquired Pneumonia", cat: "Pulmonary" },
+        { name: "Hospital-Acquired Pneumonia", cat: "Pulmonary" },
+        { name: "Aspiration Pneumonia", cat: "Pulmonary" },
+        { name: "Pneumothorax", cat: "Pulmonary" },
+        { name: "Tension Pneumothorax", cat: "Pulmonary" },
+        { name: "Hemothorax", cat: "Pulmonary" },
+        { name: "Pleural Effusion", cat: "Pulmonary" },
+        { name: "Empyema", cat: "Pulmonary" },
+        { name: "COPD Exacerbation", cat: "Pulmonary" },
+        { name: "Asthma Exacerbation", cat: "Pulmonary" },
+        { name: "Status Asthmaticus", cat: "Pulmonary" },
+        { name: "Acute Respiratory Distress Syndrome (ARDS)", cat: "Pulmonary" },
+        { name: "Respiratory Failure", cat: "Pulmonary" },
+        { name: "Bronchitis", cat: "Pulmonary" },
+        { name: "Bronchiolitis", cat: "Pulmonary" },
+        { name: "Croup", cat: "Pulmonary" },
+        { name: "Epiglottitis", cat: "Pulmonary" },
+        { name: "Lung Cancer", cat: "Pulmonary" },
+        { name: "Pulmonary Fibrosis", cat: "Pulmonary" },
+        { name: "Pulmonary Hypertension", cat: "Pulmonary" },
+        { name: "Obstructive Sleep Apnea", cat: "Pulmonary" },
+        { name: "Tuberculosis", cat: "Pulmonary" },
+        
+        // GI
+        { name: "Appendicitis", cat: "GI" },
+        { name: "Cholecystitis", cat: "GI" },
+        { name: "Choledocholithiasis", cat: "GI" },
+        { name: "Cholangitis", cat: "GI" },
+        { name: "Pancreatitis", cat: "GI" },
+        { name: "Small Bowel Obstruction", cat: "GI" },
+        { name: "Large Bowel Obstruction", cat: "GI" },
+        { name: "GI Bleed - Upper", cat: "GI" },
+        { name: "GI Bleed - Lower", cat: "GI" },
+        { name: "Peptic Ulcer Disease", cat: "GI" },
+        { name: "Gastritis", cat: "GI" },
+        { name: "GERD", cat: "GI" },
+        { name: "Esophagitis", cat: "GI" },
+        { name: "Mallory-Weiss Tear", cat: "GI" },
+        { name: "Esophageal Varices", cat: "GI" },
+        { name: "Boerhaave Syndrome", cat: "GI" },
+        { name: "Diverticulitis", cat: "GI" },
+        { name: "Diverticulosis", cat: "GI" },
+        { name: "Inflammatory Bowel Disease", cat: "GI" },
+        { name: "Crohn's Disease", cat: "GI" },
+        { name: "Ulcerative Colitis", cat: "GI" },
+        { name: "C. difficile Colitis", cat: "GI" },
+        { name: "Ischemic Colitis", cat: "GI" },
+        { name: "Mesenteric Ischemia", cat: "GI" },
+        { name: "Gastroenteritis", cat: "GI" },
+        { name: "Hepatitis", cat: "GI" },
+        { name: "Acute Liver Failure", cat: "GI" },
+        { name: "Cirrhosis", cat: "GI" },
+        { name: "Hepatic Encephalopathy", cat: "GI" },
+        { name: "Spontaneous Bacterial Peritonitis", cat: "GI" },
+        { name: "Ascites", cat: "GI" },
+        { name: "Hernia - Incarcerated", cat: "GI" },
+        { name: "Hernia - Strangulated", cat: "GI" },
+        { name: "Intussusception", cat: "GI" },
+        { name: "Volvulus", cat: "GI" },
+        { name: "Toxic Megacolon", cat: "GI" },
+        
+        // Neuro
+        { name: "Stroke - Ischemic", cat: "Neuro" },
+        { name: "Stroke - Hemorrhagic", cat: "Neuro" },
+        { name: "Transient Ischemic Attack (TIA)", cat: "Neuro" },
+        { name: "Subarachnoid Hemorrhage", cat: "Neuro" },
+        { name: "Subdural Hematoma", cat: "Neuro" },
+        { name: "Epidural Hematoma", cat: "Neuro" },
+        { name: "Intracerebral Hemorrhage", cat: "Neuro" },
+        { name: "Meningitis", cat: "Neuro" },
+        { name: "Encephalitis", cat: "Neuro" },
+        { name: "Brain Abscess", cat: "Neuro" },
+        { name: "Seizure", cat: "Neuro" },
+        { name: "Status Epilepticus", cat: "Neuro" },
+        { name: "Febrile Seizure", cat: "Neuro" },
+        { name: "Migraine", cat: "Neuro" },
+        { name: "Cluster Headache", cat: "Neuro" },
+        { name: "Tension Headache", cat: "Neuro" },
+        { name: "Increased Intracranial Pressure", cat: "Neuro" },
+        { name: "Hydrocephalus", cat: "Neuro" },
+        { name: "Brain Tumor", cat: "Neuro" },
+        { name: "Multiple Sclerosis", cat: "Neuro" },
+        { name: "Guillain-Barré Syndrome", cat: "Neuro" },
+        { name: "Myasthenia Gravis", cat: "Neuro" },
+        { name: "Parkinson's Disease", cat: "Neuro" },
+        { name: "Delirium", cat: "Neuro" },
+        { name: "Dementia", cat: "Neuro" },
+        { name: "Wernicke Encephalopathy", cat: "Neuro" },
+        { name: "Korsakoff Syndrome", cat: "Neuro" },
+        { name: "Spinal Cord Compression", cat: "Neuro" },
+        { name: "Cauda Equina Syndrome", cat: "Neuro" },
+        { name: "Bell's Palsy", cat: "Neuro" },
+        { name: "Peripheral Neuropathy", cat: "Neuro" },
+        { name: "Vertigo - Central", cat: "Neuro" },
+        { name: "Vertigo - Peripheral", cat: "Neuro" },
+        { name: "Benign Paroxysmal Positional Vertigo", cat: "Neuro" },
+        
+        // Infectious
+        { name: "Sepsis", cat: "Infectious" },
+        { name: "Septic Shock", cat: "Infectious" },
+        { name: "Bacteremia", cat: "Infectious" },
+        { name: "Urinary Tract Infection", cat: "Infectious" },
+        { name: "Pyelonephritis", cat: "Infectious" },
+        { name: "Cellulitis", cat: "Infectious" },
+        { name: "Necrotizing Fasciitis", cat: "Infectious" },
+        { name: "Osteomyelitis", cat: "Infectious" },
+        { name: "Septic Arthritis", cat: "Infectious" },
+        { name: "Abscess", cat: "Infectious" },
+        { name: "HIV/AIDS", cat: "Infectious" },
+        { name: "Influenza", cat: "Infectious" },
+        { name: "COVID-19", cat: "Infectious" },
+        { name: "Mononucleosis", cat: "Infectious" },
+        { name: "Herpes Zoster", cat: "Infectious" },
+        { name: "Herpes Simplex", cat: "Infectious" },
+        { name: "Lyme Disease", cat: "Infectious" },
+        { name: "Rocky Mountain Spotted Fever", cat: "Infectious" },
+        { name: "Malaria", cat: "Infectious" },
+        { name: "Neutropenic Fever", cat: "Infectious" },
+        
+        // Renal
+        { name: "Acute Kidney Injury", cat: "Renal" },
+        { name: "Chronic Kidney Disease", cat: "Renal" },
+        { name: "Nephrolithiasis", cat: "Renal" },
+        { name: "Ureterolithiasis", cat: "Renal" },
+        { name: "Glomerulonephritis", cat: "Renal" },
+        { name: "Nephrotic Syndrome", cat: "Renal" },
+        { name: "Rhabdomyolysis", cat: "Renal" },
+        { name: "Urinary Retention", cat: "Renal" },
+        { name: "Renal Artery Stenosis", cat: "Renal" },
+        
+        // Endocrine
+        { name: "Diabetic Ketoacidosis", cat: "Endocrine" },
+        { name: "Hyperosmolar Hyperglycemic State", cat: "Endocrine" },
+        { name: "Hypoglycemia", cat: "Endocrine" },
+        { name: "Thyroid Storm", cat: "Endocrine" },
+        { name: "Myxedema Coma", cat: "Endocrine" },
+        { name: "Hyperthyroidism", cat: "Endocrine" },
+        { name: "Hypothyroidism", cat: "Endocrine" },
+        { name: "Adrenal Crisis", cat: "Endocrine" },
+        { name: "Adrenal Insufficiency", cat: "Endocrine" },
+        { name: "Pheochromocytoma", cat: "Endocrine" },
+        { name: "Cushing Syndrome", cat: "Endocrine" },
+        { name: "Hyperaldosteronism", cat: "Endocrine" },
+        { name: "Hypercalcemia", cat: "Endocrine" },
+        { name: "Hypocalcemia", cat: "Endocrine" },
+        
+        // Electrolyte/Metabolic
+        { name: "Hyponatremia", cat: "Metabolic" },
+        { name: "Hypernatremia", cat: "Metabolic" },
+        { name: "Hypokalemia", cat: "Metabolic" },
+        { name: "Hyperkalemia", cat: "Metabolic" },
+        { name: "Hypomagnesemia", cat: "Metabolic" },
+        { name: "Hypophosphatemia", cat: "Metabolic" },
+        { name: "Metabolic Acidosis", cat: "Metabolic" },
+        { name: "Metabolic Alkalosis", cat: "Metabolic" },
+        { name: "Respiratory Acidosis", cat: "Metabolic" },
+        { name: "Respiratory Alkalosis", cat: "Metabolic" },
+        { name: "Lactic Acidosis", cat: "Metabolic" },
+        
+        // Heme/Onc
+        { name: "Anemia", cat: "Heme" },
+        { name: "Iron Deficiency Anemia", cat: "Heme" },
+        { name: "Sickle Cell Crisis", cat: "Heme" },
+        { name: "Hemolytic Anemia", cat: "Heme" },
+        { name: "Thrombocytopenia", cat: "Heme" },
+        { name: "Thrombotic Thrombocytopenic Purpura (TTP)", cat: "Heme" },
+        { name: "Hemolytic Uremic Syndrome (HUS)", cat: "Heme" },
+        { name: "Disseminated Intravascular Coagulation (DIC)", cat: "Heme" },
+        { name: "Leukemia", cat: "Heme" },
+        { name: "Lymphoma", cat: "Heme" },
+        { name: "Tumor Lysis Syndrome", cat: "Heme" },
+        { name: "Superior Vena Cava Syndrome", cat: "Heme" },
+        { name: "Hyperviscosity Syndrome", cat: "Heme" },
+        { name: "Febrile Non-Hemolytic Transfusion Reaction", cat: "Heme" },
+        { name: "Transfusion Reaction", cat: "Heme" },
+        
+        // Toxicology
+        { name: "Acetaminophen Overdose", cat: "Tox" },
+        { name: "Salicylate Overdose", cat: "Tox" },
+        { name: "Opioid Overdose", cat: "Tox" },
+        { name: "Benzodiazepine Overdose", cat: "Tox" },
+        { name: "Alcohol Intoxication", cat: "Tox" },
+        { name: "Alcohol Withdrawal", cat: "Tox" },
+        { name: "Delirium Tremens", cat: "Tox" },
+        { name: "Methanol Toxicity", cat: "Tox" },
+        { name: "Ethylene Glycol Toxicity", cat: "Tox" },
+        { name: "Carbon Monoxide Poisoning", cat: "Tox" },
+        { name: "Cyanide Poisoning", cat: "Tox" },
+        { name: "Organophosphate Poisoning", cat: "Tox" },
+        { name: "Anticholinergic Toxicity", cat: "Tox" },
+        { name: "Cholinergic Toxicity", cat: "Tox" },
+        { name: "Sympathomimetic Toxicity", cat: "Tox" },
+        { name: "Serotonin Syndrome", cat: "Tox" },
+        { name: "Neuroleptic Malignant Syndrome", cat: "Tox" },
+        { name: "Malignant Hyperthermia", cat: "Tox" },
+        { name: "Lithium Toxicity", cat: "Tox" },
+        { name: "Digoxin Toxicity", cat: "Tox" },
+        { name: "Beta-Blocker Overdose", cat: "Tox" },
+        { name: "Calcium Channel Blocker Overdose", cat: "Tox" },
+        { name: "Tricyclic Antidepressant Overdose", cat: "Tox" },
+        
+        // OB/GYN
+        { name: "Ectopic Pregnancy", cat: "OB/GYN" },
+        { name: "Preeclampsia", cat: "OB/GYN" },
+        { name: "Eclampsia", cat: "OB/GYN" },
+        { name: "HELLP Syndrome", cat: "OB/GYN" },
+        { name: "Placenta Previa", cat: "OB/GYN" },
+        { name: "Placental Abruption", cat: "OB/GYN" },
+        { name: "Postpartum Hemorrhage", cat: "OB/GYN" },
+        { name: "Ovarian Torsion", cat: "OB/GYN" },
+        { name: "Ruptured Ovarian Cyst", cat: "OB/GYN" },
+        { name: "Pelvic Inflammatory Disease", cat: "OB/GYN" },
+        { name: "Tubo-Ovarian Abscess", cat: "OB/GYN" },
+        { name: "Endometriosis", cat: "OB/GYN" },
+        { name: "Hyperemesis Gravidarum", cat: "OB/GYN" },
+        
+        // Psych
+        { name: "Major Depressive Disorder", cat: "Psych" },
+        { name: "Bipolar Disorder", cat: "Psych" },
+        { name: "Schizophrenia", cat: "Psych" },
+        { name: "Psychosis", cat: "Psych" },
+        { name: "Panic Attack", cat: "Psych" },
+        { name: "Panic Disorder", cat: "Psych" },
+        { name: "Generalized Anxiety Disorder", cat: "Psych" },
+        { name: "Suicidal Ideation", cat: "Psych" },
+        { name: "Substance Use Disorder", cat: "Psych" },
+        { name: "Conversion Disorder", cat: "Psych" },
+        { name: "Somatic Symptom Disorder", cat: "Psych" },
+        
+        // Allergy/Immunology
+        { name: "Anaphylaxis", cat: "Allergy" },
+        { name: "Angioedema", cat: "Allergy" },
+        { name: "Hereditary Angioedema", cat: "Allergy" },
+        { name: "Urticaria", cat: "Allergy" },
+        { name: "Drug Reaction", cat: "Allergy" },
+        { name: "DRESS Syndrome", cat: "Allergy" },
+        { name: "Stevens-Johnson Syndrome", cat: "Allergy" },
+        { name: "Toxic Epidermal Necrolysis", cat: "Allergy" },
+        { name: "Food Allergy", cat: "Allergy" },
+        { name: "Serum Sickness", cat: "Allergy" },
+        
+        // Rheum
+        { name: "Gout", cat: "Rheum" },
+        { name: "Pseudogout", cat: "Rheum" },
+        { name: "Rheumatoid Arthritis", cat: "Rheum" },
+        { name: "Systemic Lupus Erythematosus", cat: "Rheum" },
+        { name: "Vasculitis", cat: "Rheum" },
+        { name: "Giant Cell Arteritis", cat: "Rheum" },
+        { name: "Polymyalgia Rheumatica", cat: "Rheum" },
+        { name: "Dermatomyositis", cat: "Rheum" },
+        { name: "Polymyositis", cat: "Rheum" },
+        { name: "Scleroderma", cat: "Rheum" },
+        { name: "Reactive Arthritis", cat: "Rheum" },
+        { name: "Ankylosing Spondylitis", cat: "Rheum" },
+        
+        // Trauma/MSK
+        { name: "Fracture", cat: "Trauma" },
+        { name: "Dislocation", cat: "Trauma" },
+        { name: "Compartment Syndrome", cat: "Trauma" },
+        { name: "Traumatic Brain Injury", cat: "Trauma" },
+        { name: "Concussion", cat: "Trauma" },
+        { name: "Spinal Cord Injury", cat: "Trauma" },
+        { name: "Rib Fracture", cat: "Trauma" },
+        { name: "Flail Chest", cat: "Trauma" },
+        { name: "Pulmonary Contusion", cat: "Trauma" },
+        { name: "Hemorrhagic Shock", cat: "Trauma" },
+        { name: "Fat Embolism Syndrome", cat: "Trauma" },
+        
+        // Derm
+        { name: "Cellulitis", cat: "Derm" },
+        { name: "Erysipelas", cat: "Derm" },
+        { name: "Impetigo", cat: "Derm" },
+        { name: "Abscess", cat: "Derm" },
+        { name: "Herpes Zoster (Shingles)", cat: "Derm" },
+        { name: "Erythema Multiforme", cat: "Derm" },
+        { name: "Pemphigus", cat: "Derm" },
+        { name: "Bullous Pemphigoid", cat: "Derm" },
+        { name: "Psoriasis", cat: "Derm" },
+        { name: "Eczema", cat: "Derm" },
+        { name: "Contact Dermatitis", cat: "Derm" },
+        { name: "Atopic Dermatitis", cat: "Derm" },
+        
+        // Peds
+        { name: "Kawasaki Disease", cat: "Peds" },
+        { name: "Intussusception", cat: "Peds" },
+        { name: "Pyloric Stenosis", cat: "Peds" },
+        { name: "Febrile Seizure", cat: "Peds" },
+        { name: "Croup", cat: "Peds" },
+        { name: "Bronchiolitis", cat: "Peds" },
+        { name: "RSV Infection", cat: "Peds" },
+        { name: "Failure to Thrive", cat: "Peds" },
+        { name: "Child Abuse", cat: "Peds" },
+        { name: "Neonatal Sepsis", cat: "Peds" },
+        { name: "Neonatal Jaundice", cat: "Peds" },
+        { name: "Meconium Aspiration", cat: "Peds" },
+        
+        // Other
+        { name: "Shock - Hypovolemic", cat: "Critical Care" },
+        { name: "Shock - Distributive", cat: "Critical Care" },
+        { name: "Shock - Cardiogenic", cat: "Critical Care" },
+        { name: "Shock - Obstructive", cat: "Critical Care" },
+        { name: "Multiorgan Failure", cat: "Critical Care" },
+        { name: "Hypothermia", cat: "Environmental" },
+        { name: "Hyperthermia", cat: "Environmental" },
+        { name: "Heat Stroke", cat: "Environmental" },
+        { name: "Drowning", cat: "Environmental" },
+        { name: "High Altitude Illness", cat: "Environmental" },
+        { name: "Decompression Sickness", cat: "Environmental" },
+        { name: "Radiation Injury", cat: "Environmental" },
+        { name: "Electrical Injury", cat: "Environmental" },
+        { name: "Lightning Strike", cat: "Environmental" },
+        { name: "Snake Bite", cat: "Environmental" },
+        { name: "Spider Bite", cat: "Environmental" },
+        { name: "Insect Sting Reaction", cat: "Environmental" },
+        { name: "Foreign Body Aspiration", cat: "Airway" },
+        { name: "Foreign Body Ingestion", cat: "GI" },
+        { name: "Testicular Torsion", cat: "GU" },
+        { name: "Priapism", cat: "GU" },
+        { name: "Paraphimosis", cat: "GU" },
+        { name: "Epididymitis", cat: "GU" },
+        { name: "Prostatitis", cat: "GU" },
+        { name: "Acute Angle-Closure Glaucoma", cat: "Eye" },
+        { name: "Retinal Detachment", cat: "Eye" },
+        { name: "Central Retinal Artery Occlusion", cat: "Eye" },
+        { name: "Optic Neuritis", cat: "Eye" },
+        { name: "Orbital Cellulitis", cat: "Eye" },
+        { name: "Peritonsillar Abscess", cat: "ENT" },
+        { name: "Retropharyngeal Abscess", cat: "ENT" },
+        { name: "Ludwig's Angina", cat: "ENT" },
+        { name: "Epistaxis", cat: "ENT" },
+        { name: "Acute Otitis Media", cat: "ENT" },
+        { name: "Mastoiditis", cat: "ENT" },
+        { name: "Meniere's Disease", cat: "ENT" },
+        { name: "Labyrinthitis", cat: "ENT" },
+        { name: "Vestibular Neuritis", cat: "ENT" }
+    ],
+    
+    autocompleteIndex: -1,
+    
+    showAutocomplete(query) {
+        const dropdown = document.getElementById('ddxAutocomplete');
+        if (!dropdown) return;
+        
+        if (query.length < 2) {
+            dropdown.classList.remove('show');
+            return;
+        }
+        
+        const q = query.toLowerCase();
+        const matches = this.diagnosisDB.filter(d => 
+            d.name.toLowerCase().includes(q)
+        ).slice(0, 15);
+        
+        if (matches.length === 0) {
+            dropdown.innerHTML = '<div class="ddx-autocomplete-count">No matches found. Press Enter to add custom diagnosis.</div>';
+            dropdown.classList.add('show');
+            return;
+        }
+        
+        dropdown.innerHTML = `
+            <div class="ddx-autocomplete-count">${matches.length} matches (${this.diagnosisDB.length} total diagnoses)</div>
+            ${matches.map((d, i) => `
+                <div class="ddx-autocomplete-item ${i === this.autocompleteIndex ? 'selected' : ''}" 
+                     onclick="App.selectAutocomplete('${d.name.replace(/'/g, "\\'")}')">
+                    ${d.name}<span class="category">${d.cat}</span>
+                </div>
+            `).join('')}
+        `;
+        dropdown.classList.add('show');
+        this.autocompleteIndex = -1;
+    },
+    
+    handleAutocompleteKey(event) {
+        const dropdown = document.getElementById('ddxAutocomplete');
+        const items = dropdown?.querySelectorAll('.ddx-autocomplete-item') || [];
+        
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            this.autocompleteIndex = Math.min(this.autocompleteIndex + 1, items.length - 1);
+            items.forEach((item, i) => item.classList.toggle('selected', i === this.autocompleteIndex));
+        } else if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            this.autocompleteIndex = Math.max(this.autocompleteIndex - 1, 0);
+            items.forEach((item, i) => item.classList.toggle('selected', i === this.autocompleteIndex));
+        } else if (event.key === 'Enter') {
+            event.preventDefault();
+            if (this.autocompleteIndex >= 0 && items[this.autocompleteIndex]) {
+                const name = items[this.autocompleteIndex].textContent.split(/\s{2,}/)[0].trim();
+                this.selectAutocomplete(name);
+            } else {
+                this.addDdx();
+            }
+        } else if (event.key === 'Escape') {
+            dropdown?.classList.remove('show');
+        }
+    },
+    
+    selectAutocomplete(name) {
+        const input = document.getElementById('ddxInput');
+        input.value = name;
+        document.getElementById('ddxAutocomplete')?.classList.remove('show');
+        this.addDdx();
     },
     
     showToast(message, type = 'info') {

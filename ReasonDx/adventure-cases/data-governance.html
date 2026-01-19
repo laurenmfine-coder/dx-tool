@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Data Governance | ReasonDx</title>
     <style>
         :root {
@@ -52,11 +52,35 @@
         .contact-box { background: var(--bg); border-radius: 12px; padding: 20px; text-align: center; margin-top: 24px; }
         .contact-box a { color: var(--accent); }
         .footer { text-align: center; padding: 24px; color: var(--text-secondary); font-size: 0.9rem; }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="index.html" class="back-link">← Back to ReasonDx</a>
+        <a href="../index.html" class="back-link">← Back to ReasonDx</a>
         <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         <h1>🔒 Data Governance</h1>
         <p>How we protect and manage your data</p>
@@ -218,7 +242,7 @@
     </main>
     
     <footer class="footer">
-        <p>ReasonDx Clinical Reasoning Trainer • <a href="index.html" style="color:var(--accent)">Back to Cases</a></p>
+        <p>ReasonDx Clinical Reasoning Trainer • <a href="../index.html" style="color:var(--accent)">Back to Cases</a></p>
     </footer>
     
     <script>

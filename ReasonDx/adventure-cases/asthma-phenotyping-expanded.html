@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Asthma Phenotyping - Expanded Deep Dive Adventure</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -14,6 +14,30 @@
         .optimal-path { background-color: #dcfce7; border-left: 4px solid #22c55e; }
         .suboptimal-path { background-color: #fef9c3; border-left: 4px solid #eab308; }
         .wrong-path { background-color: #fecaca; border-left: 4px solid #ef4444; }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
     </style>
 </head>
 <body class="bg-gradient-to-br from-cyan-50 to-teal-50 min-h-screen">
@@ -418,7 +442,7 @@
 
 <!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
 <style>
-.rdx-difficulty-panel { position: fixed; top: 80px; right: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
+.rdx-difficulty-panel { display: inline-block; top: 80px; right: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
 .rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
 .rdx-diff-btn:hover { border-color: #3b82f6; background: #eff6ff; }
 .rdx-diff-btn.active { border-color: #3b82f6; background: #3b82f6; color: white; }
@@ -431,7 +455,31 @@
 .rdx-hint-advanced { display: none; }
 [data-difficulty="beginner"] .rdx-hint-beginner { display: block; }
 [data-difficulty="advanced"] .rdx-hint-advanced { display: block; }
-</style>
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
 
 <div class="rdx-difficulty-panel">
     <div style="font-weight: 600; font-size: 12px; color: #64748b; margin-bottom: 4px;">DIFFICULTY</div>
@@ -448,24 +496,24 @@
         <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
             <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 MechanismDx Modules</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Master the pathophysiology</p>
-            <a href="../mechanism/copd-module.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Obstructive Lung Disease</a>
-            <a href="../mechanism/allergy-immunology-module.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergy/Immunology</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Obstructive Lung Disease</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergy/Immunology</a>
         </div>
         
         <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #3b82f6;">
             <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 8px;">🎮 Related ReasonDx Cases</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice similar scenarios</p>
-            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation</a>
-            <a href="asthma-biologics-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Biologics</a>
+            <a href="asthma-exacerbation-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation</a>
+            <a href="asthma-biologics-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Biologics</a>
             <a href="anaphylaxis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Anaphylaxis</a>
-            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="allergic-rhinitis-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
         </div>
         
         <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #10b981;">
             <h5 style="color: #10b981; font-weight: 600; margin-bottom: 8px;">💬 CoachDx Practice</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice communication skills</p>
-            <a href="../CoachDx/mentor-chat.html?case=asthma" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Management Coach</a>
-            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ SBAR Communication</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Management Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
