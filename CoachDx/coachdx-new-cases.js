@@ -27,7 +27,7 @@
     category: 'Hematology',
     acuity: 'Critical',
     patient: {
-      name: 'Sarah Mitchell',
+      name: 'Mei-Ling Wong',
       age: 34,
       sex: 'Female',
       setting: 'Emergency',
@@ -74,7 +74,7 @@
     category: 'Hematology',
     acuity: 'Critical',
     patient: {
-      name: 'William Johnson',
+      name: 'Babatunde Adeleke',
       age: 67,
       sex: 'Male',
       setting: 'ICU',
@@ -121,7 +121,7 @@
     category: 'Infectious Disease/Surgery',
     acuity: 'Critical',
     patient: {
-      name: 'Patricia Adams',
+      name: 'Sienna Nakagawa',
       age: 55,
       sex: 'Female',
       setting: 'Emergency',

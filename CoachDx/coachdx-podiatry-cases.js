@@ -153,7 +153,7 @@ const COACHDX_PODIATRY_CASES = {
     category: 'Forefoot Surgery',
     profession: 'dpm',
     patient: {
-        name: 'Patricia Chen',
+        name: 'Amara Keita',
         age: 45,
         sex: 'Female',
         setting: 'Podiatry Office',
@@ -161,7 +161,7 @@ const COACHDX_PODIATRY_CASES = {
         chiefComplaint: 'Painful bunion, wants surgery'
     },
     description: 'A 45-year-old woman presents requesting bunion surgery. She has moderate hallux valgus with HVA 32°, IMA 16°. Pain over the medial eminence in shoes. First MTP ROM: 45° dorsiflexion. Hypermobile first ray. No arthritis on X-ray.',
-    openingStatement: 'Mrs. Chen has done her research online and wants a "minimally invasive bunion procedure" she saw advertised. How do you approach surgical decision-making and manage expectations?',
+    openingStatement: 'Mrs. Nakamura has done her research online and wants a "minimally invasive bunion procedure" she saw advertised. How do you approach surgical decision-making and manage expectations?',
     
     conceptDomains: {
         'Evaluation': ['HVA_IMA_measurements', 'joint_assessment', 'first_ray_mobility', 'sesamoid_position'],
@@ -352,7 +352,7 @@ const COACHDX_PODIATRY_CASES = {
     category: 'Sports Medicine',
     profession: 'dpm',
     patient: {
-        name: 'Amanda Foster',
+        name: 'Zainab Osman',
         age: 32,
         sex: 'Female',
         setting: 'Sports Podiatry Clinic',

@@ -17,7 +17,7 @@
 
 const COACH_PERSONAS = {
     'md-do': {
-        name: 'Dr. Sarah Chen',
+        name: 'Dr. Amara Osei',
         title: 'Attending Physician',
         avatar: '👩‍⚕️',
         role: 'Your attending on this rotation',
@@ -92,7 +92,7 @@ const COACH_PERSONAS = {
         }
     },
     'resident': {
-        name: 'Dr. David Kim',
+        name: 'Dr. Rafael Mendoza',
         title: 'Senior Resident',
         avatar: '👨‍🔬',
         role: 'Your senior on service',

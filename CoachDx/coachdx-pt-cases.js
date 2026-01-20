@@ -213,7 +213,7 @@ const COACHDX_PT_CASES = {
     category: 'Post-Surgical',
     profession: 'pt',
     patient: {
-        name: 'William Foster',
+        name: 'Edem Koffi',
         age: 71,
         sex: 'Male',
         setting: 'Outpatient PT',

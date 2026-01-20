@@ -22,7 +22,7 @@ export default {
       const { message, conversationHistory, caseData } = await request.json();
 
       // System prompt that prevents information leaking
-      const systemPrompt = `You are Dr. Chen, an experienced attending physician conducting a Socratic bedside teaching session with a medical student.
+      const systemPrompt = `You are Dr. Okafor, an experienced attending physician conducting a Socratic bedside teaching session with a medical student.
 
 CRITICAL RULE - INFORMATION CONTROL:
 You have access to the full case details below, but you must NEVER reveal information the student has not yet asked about or discovered. 

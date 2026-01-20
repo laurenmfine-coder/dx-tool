@@ -42,7 +42,7 @@ _coachPersona: {
     discipline: 'rt',
     difficulty: 'intermediate',
     patient: {
-        name: 'Frank Kowalski',
+        name: 'Chukwuemeka Nnamdi',
         age: 68,
         sex: 'Male',
         setting: 'Emergency Department',
@@ -109,7 +109,7 @@ _coachPersona: {
     discipline: 'rt',
     difficulty: 'advanced',
     patient: {
-        name: 'Marcus Johnson',
+        name: 'Daisuke Yamamoto',
         age: 24,
         sex: 'Male',
         setting: 'Emergency Department',
@@ -146,7 +146,7 @@ _coachPersona: {
         callingTo: 'Dr. Williams (ED Attending)',
         yourRole: 'Respiratory Therapist',
         expectedSBAR: {
-            situation: 'I need you at Bed 4 now. Marcus Johnson, 24-year-old with severe asthma, is in impending respiratory failure.',
+            situation: 'I need you at Bed 4 now. Daisuke Yamamoto, 24-year-old with severe asthma, is in impending respiratory failure.',
             background: 'Multiple nebs by EMS and here without improvement. He now has a silent chest - barely moving air. ABG shows CO2 of 42 which is abnormal for asthma.',
             assessment: 'He\'s exhausted and failing. The normal CO2 tells me he can\'t maintain his respiratory effort. He may need intubation soon.',
             recommendation: 'I\'ve started continuous nebs and recommend magnesium 2g IV now. I have intubation equipment at bedside. Can you come evaluate him immediately?'
@@ -174,7 +174,7 @@ _coachPersona: {
     discipline: 'rt',
     difficulty: 'advanced',
     patient: {
-        name: 'Sarah Mitchell',
+        name: 'Mei-Ling Wong',
         age: 45,
         sex: 'Female',
         setting: 'ICU',
@@ -239,15 +239,15 @@ _coachPersona: {
     discipline: 'rt',
     difficulty: 'advanced',
     patient: {
-        name: 'William Chen',
+        name: 'Dmitri Volkov',
         age: 72,
         sex: 'Male',
         setting: 'ICU',
         acuity: 'Medium',
         chiefComplaint: 'Prolonged Ventilator Dependence'
     },
-    description: 'Mr. Chen has been intubated for 10 days after sepsis. His initial illness has resolved but he\'s failed two spontaneous breathing trials (SBTs). The team is frustrated - why can\'t he wean?',
-    openingStatement: 'Mr. Chen keeps failing SBTs. His sepsis is resolved, he\'s awake and following commands, but 30 minutes into the trial he becomes tachypneic and diaphoretic. Let\'s figure out why and fix it.',
+    description: 'Mr. Okonkwo has been intubated for 10 days after sepsis. His initial illness has resolved but he\'s failed two spontaneous breathing trials (SBTs). The team is frustrated - why can\'t he wean?',
+    openingStatement: 'Mr. Okonkwo keeps failing SBTs. His sepsis is resolved, he\'s awake and following commands, but 30 minutes into the trial he becomes tachypneic and diaphoretic. Let\'s figure out why and fix it.',
     conceptDomains: {
         'Weaning Assessment': ['readiness_criteria', 'rsbi', 'mental_status'],
         'Failure Analysis': ['why_sbt_fails', 'cardiac_vs_respiratory', 'secretions'],
@@ -275,7 +275,7 @@ _coachPersona: {
         callingTo: 'Dr. Rodriguez (ICU Attending)',
         yourRole: 'Respiratory Therapist',
         expectedSBAR: {
-            situation: 'I\'d like to discuss Mr. Chen\'s weaning failures. I think I\'ve identified some issues we can address.',
+            situation: 'I\'d like to discuss Mr. Okonkwo\'s weaning failures. I think I\'ve identified some issues we can address.',
             background: 'He\'s failed two SBTs at 30 minutes with tachycardia and tachypnea. His RSBI is borderline at 100.',
             assessment: 'I think he has cardiac wean failure. His BNP is 1200 and he\'s getting new ECG changes. When we increase his work of breathing, his heart can\'t keep up. He also has significant ICU-acquired weakness.',
             recommendation: 'I recommend holding the next SBT until we diurese him and check an echo. Can we also get PT more involved? Once he\'s optimized, I think he\'ll succeed.'
@@ -368,7 +368,7 @@ _coachPersona: {
     discipline: 'rt',
     difficulty: 'advanced',
     patient: {
-        name: 'Robert Martinez',
+        name: 'Sergei Petrov',
         age: 55,
         sex: 'Male',
         setting: 'Emergency Department',
@@ -547,15 +547,15 @@ _coachPersona: {
     discipline: 'rt',
     difficulty: 'intermediate',
     patient: {
-        name: 'Michael Thompson',
+        name: 'Jamal Washington',
         age: 45,
         sex: 'Male',
         setting: 'Emergency Department',
         acuity: 'Critical',
         chiefComplaint: 'Trach Emergency'
     },
-    description: 'EMS brings in Mr. Thompson, a vent-dependent quadriplegic with a trach. His home caregiver called 911 because the trach "came out" and she couldn\'t replace it. He\'s now on BVM via trach stoma.',
-    openingStatement: 'Mr. Thompson is being bagged through his trach stoma but it\'s not going well - air is leaking and he\'s desaturating. His trach tube is in the caregiver\'s hand. This is an airway emergency. What do you do?',
+    description: 'EMS brings in Mr. Petrov, a vent-dependent quadriplegic with a trach. His home caregiver called 911 because the trach "came out" and she couldn\'t replace it. He\'s now on BVM via trach stoma.',
+    openingStatement: 'Mr. Petrov is being bagged through his trach stoma but it\'s not going well - air is leaking and he\'s desaturating. His trach tube is in the caregiver\'s hand. This is an airway emergency. What do you do?',
     conceptDomains: {
         'Emergency Assessment': ['airway_patency', 'stoma_status', 'equipment_check'],
         'Trach Reinsertion': ['technique', 'backup_plans', 'smaller_tube'],
@@ -584,7 +584,7 @@ _coachPersona: {
         yourRole: 'Respiratory Therapist',
         expectedSBAR: {
             situation: 'I have an update on the trach emergency in Bed 1 - airway is now secure.',
-            background: 'Mr. Thompson is a vent-dependent quadriplegic whose trach dislodged at home. His stoma is mature from 2 years of trach.',
+            background: 'Mr. Petrov is a vent-dependent quadriplegic whose trach dislodged at home. His stoma is mature from 2 years of trach.',
             assessment: 'I was able to replace his Shiley 6 without difficulty. He\'s now back on ventilator with his home settings. He\'s saturating 98% and looks comfortable.',
             recommendation: 'I\'d like to get a portable chest X-ray to confirm position. We should also discuss what caused the dislodgement - the caregiver mentioned the ties were loose.'
         },

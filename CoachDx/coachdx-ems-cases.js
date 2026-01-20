@@ -23,7 +23,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'intermediate',
     patient: {
-        name: 'Thomas Reilly',
+        name: 'Hiroshi Sato',
         age: 58,
         sex: 'Male',
         setting: 'Field - Patient Home',
@@ -84,7 +84,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'intermediate',
     patient: {
-        name: 'Patricia Morrison',
+        name: 'Ayumi Watanabe',
         age: 64,
         sex: 'Female',
         setting: 'Field - Workplace',
@@ -191,7 +191,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'intermediate',
     patient: {
-        name: 'Dorothy Evans',
+        name: 'Esther Asante',
         age: 78,
         sex: 'Female',
         setting: 'Field - Nursing Facility',
@@ -245,7 +245,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'intermediate',
     patient: {
-        name: 'Frank Kowalski',
+        name: 'Chukwuemeka Nnamdi',
         age: 72,
         sex: 'Male',
         setting: 'Field - Patient Home',
@@ -410,7 +410,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'intermediate',
     patient: {
-        name: 'Sandra Chen',
+        name: 'Lakshmi Venkatesh',
         age: 28,
         sex: 'Female',
         setting: 'Field - Restaurant',
@@ -418,7 +418,7 @@ const COACHDX_EMS_CASES = {
         chiefComplaint: 'Allergic Reaction'
     },
     description: 'Dispatched to restaurant for allergic reaction. 28-year-old female with lip swelling and hives after eating. Patient has known peanut allergy but thought dish was safe. Epi-pen available but patient hesitant to use it.',
-    openingStatement: 'Ms. Chen has lip and tongue swelling, hives on her trunk, and feels her throat getting tight. She\'s scared to use her EpiPen. BP 92/58, HR 124. What do you do?',
+    openingStatement: 'Ms. Tanaka has lip and tongue swelling, hives on her trunk, and feels her throat getting tight. She\'s scared to use her EpiPen. BP 92/58, HR 124. What do you do?',
     conceptDomains: {
         'Scene Assessment': ['remove_trigger', 'resources'],
         'Recognition': ['anaphylaxis_criteria', 'multisystem_involvement'],
@@ -521,7 +521,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'advanced',
     patient: {
-        name: 'Robert Williams',
+        name: 'Tariq Hussain',
         age: 62,
         sex: 'Male',
         setting: 'Field - Grocery Store',
@@ -585,7 +585,7 @@ const COACHDX_EMS_CASES = {
         chiefComplaint: 'Weakness and Confusion'
     },
     description: 'Dispatched for 67-year-old diabetic female found confused by daughter. Patient takes insulin. Daughter gave her orange juice but called 911 anyway.',
-    openingStatement: 'Mrs. Thompson was confused when her daughter found her. Glucose is 54. The daughter gave OJ and she\'s more alert now. She wants to refuse transport. How do you handle this?',
+    openingStatement: 'Mrs. Adesanya was confused when her daughter found her. Glucose is 54. The daughter gave OJ and she\'s more alert now. She wants to refuse transport. How do you handle this?',
     conceptDomains: {
         'Assessment': ['mental_status', 'glucose_level', 'symptoms'],
         'History': ['diabetes_type', 'medications', 'cause_of_hypoglycemia', 'recurrent'],
@@ -688,7 +688,7 @@ const COACHDX_EMS_CASES = {
     discipline: 'ems',
     difficulty: 'intermediate',
     patient: {
-        name: 'Harold Foster',
+        name: 'Raj Malhotra',
         age: 74,
         sex: 'Male',
         setting: 'Field - Patient Home',
