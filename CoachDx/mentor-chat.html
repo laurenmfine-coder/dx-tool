@@ -374,6 +374,7 @@
     
     <!-- Load all case files (order matters - merged.js must be last) -->
     <script src="coachdx-cases-with-guidelines.js"></script>
+    <script src="coachdx-communication-cases.js"></script>
     <script src="coachdx-nursing-cases.js"></script>
     <script src="coachdx-ems-cases.js"></script>
     <script src="coachdx-rt-cases.js"></script>
@@ -688,13 +689,56 @@
         
         document.getElementById('professionSelect').value = currentProfession;
         
+        // Check for category filter (e.g., ?category=communication)
+        const categoryFilter = urlParams.get('category');
+        
         // Get case - use URL param, or default case for profession
         const caseId = urlParams.get('case') || getDefaultCaseForProfession(currentProfession);
         
         // Get cases filtered for this profession
-        const professionCases = getCasesForProfession(currentProfession);
+        let professionCases = getCasesForProfession(currentProfession);
         
-        currentCase = professionCases[caseId] || CASES[caseId];
+        // If category specified, filter further by category
+        if (categoryFilter) {
+            const categoryMap = {
+                'communication': ['communication', 'communication-skills', 'communication skills'],
+                'cardiology': ['cardiology', 'cardiovascular', 'cardiac'],
+                'pulmonology': ['pulmonology', 'pulmonary', 'respiratory'],
+                'gi': ['gi', 'gastroenterology', 'hepatology'],
+                'neurology': ['neurology', 'neuro'],
+                'infectious': ['infectious', 'infectious-disease', 'id'],
+                'renal': ['renal', 'nephrology', 'electrolytes'],
+                'endocrine': ['endocrine', 'endocrinology', 'diabetes'],
+                'heme-onc': ['heme-onc', 'hematology', 'oncology'],
+                'allergy': ['allergy', 'immunology', 'allergy-immunology']
+            };
+            
+            const allowedCategories = categoryMap[categoryFilter] || [categoryFilter];
+            const filteredCases = {};
+            
+            for (const [id, caseData] of Object.entries(professionCases)) {
+                const caseCategory = (caseData.category || caseData.specialty || '').toLowerCase();
+                if (allowedCategories.some(cat => caseCategory.includes(cat))) {
+                    filteredCases[id] = caseData;
+                }
+            }
+            
+            // If we found cases in this category, use them
+            if (Object.keys(filteredCases).length > 0) {
+                professionCases = filteredCases;
+                // Pick a random case from the category if no specific case requested
+                if (!urlParams.get('case')) {
+                    const caseIds = Object.keys(filteredCases);
+                    const randomId = caseIds[Math.floor(Math.random() * caseIds.length)];
+                    currentCase = filteredCases[randomId];
+                }
+            }
+        }
+        
+        // If no case set yet, use the caseId
+        if (!currentCase) {
+            currentCase = professionCases[caseId] || CASES[caseId];
+        }
         
         // If still no case, try the profession's default
         if (!currentCase) {
