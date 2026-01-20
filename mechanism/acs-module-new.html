@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acute Coronary Syndrome | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-bg: #ecfdf5;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-main: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --danger: #dc2626;
+            --danger-bg: #fef2f2;
+            --warning: #f59e0b;
+            --warning-bg: #fffbeb;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dx-nav-brand {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .dx-nav-links { display: flex; gap: 8px; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .dx-nav-link:hover { background: var(--border-light); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            padding: 48px 24px;
+            text-align: center;
+            color: white;
+        }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+        .hero h1 span { color: #fecaca; }
+        .hero-subtitle { font-size: 18px; opacity: 0.9; max-width: 700px; margin: 0 auto 24px; }
+        .hero-meta { display: flex; gap: 24px; justify-content: center; font-size: 14px; opacity: 0.85; }
+        
+        /* Progress */
+        .progress-container { background: var(--bg-card); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+        .progress-inner { max-width: 900px; margin: 0 auto; }
+        .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+        .progress-text { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
+        
+        /* Main Content */
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 48px 0 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .section-num {
+            width: 40px; height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .section-icon { font-size: 24px; }
+        .section-title { font-size: 22px; font-weight: 600; }
+        
+        /* Concept Cards */
+        .concept-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .concept-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .concept-content { color: var(--text-secondary); }
+        .concept-content ul { margin: 16px 0 16px 24px; }
+        .concept-content li { margin-bottom: 10px; }
+        .concept-content strong { color: var(--text-primary); }
+        
+        /* Special Boxes */
+        .pearl-box {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .pearl-content { color: #854d0e; font-size: 15px; }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 1px solid #fca5a5;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .danger-title { color: #b91c1c; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .danger-content { color: #991b1b; font-size: 15px; }
+        
+        .key-point-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid #2563eb;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: #1e40af; font-weight: 600; margin-bottom: 8px; }
+        .key-point-content { color: #1e3a8a; }
+        
+        /* Tables */
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: var(--border-light); padding: 14px 16px; text-align: left; font-weight: 600; font-size: 14px; }
+        td { padding: 14px 16px; border-top: 1px solid var(--border); font-size: 14px; color: var(--text-secondary); }
+        tr:hover td { background: var(--bg-main); }
+        .table-label { font-weight: 600; color: var(--text-primary); }
+        
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .formula-title { font-weight: 600; color: var(--primary-dark); margin-bottom: 12px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 16px; background: white; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+        .formula-note { font-size: 13px; color: var(--text-secondary); }
+        
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .comparison-card h4 { font-size: 16px; margin-bottom: 12px; color: var(--text-primary); }
+        .comparison-card ul { margin-left: 20px; font-size: 14px; color: var(--text-secondary); }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.stemi { border-color: #dc2626; border-width: 2px; }
+        .comparison-card.nstemi { border-color: #f59e0b; border-width: 2px; }
+        .comparison-card.unstable { border-color: #3b82f6; border-width: 2px; }
+        
+        /* Algorithm */
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { text-align: center; font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 24px; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num { width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+        .step-content { flex: 1; background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        
+        /* Quiz Section */
+        .quiz-card {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .quiz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .quiz-badge { background: var(--primary); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .quiz-question { font-size: 16px; font-weight: 500; margin-bottom: 20px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; }
+        .quiz-feedback.incorrect { background: #fef2f2; color: #991b1b; }
+        
+        /* Cross-links */
+        .crosslink-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 40px 0;
+        }
+        .crosslink-title { font-size: 18px; font-weight: 600; color: #166534; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .crosslink-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+        .crosslink-card {
+            background: white;
+            border: 1px solid #86efac;
+            border-radius: 10px;
+            padding: 16px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        .crosslink-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .crosslink-icon { font-size: 24px; margin-bottom: 8px; }
+        .crosslink-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .crosslink-name { font-weight: 600; color: var(--text-primary); margin-top: 4px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 28px; }
+            .hero-meta { flex-direction: column; gap: 8px; }
+            .section-header { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="index.html" class="dx-nav-brand">🩺 MechanismDx</a>
+            <div class="dx-nav-links">
+                <a href="index.html" class="dx-nav-link">🏠 Home</a>
+                <a href="index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link">🔬 ReasonDx</a>
+                <a href="../CoachDx/case-library.html" class="dx-nav-link">🧠 CoachDx</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-icon">❤️‍🔥</div>
+        <h1>Acute Coronary <span>Syndrome</span></h1>
+        <p class="hero-subtitle">From plaque rupture to reperfusion: understanding the pathophysiology, ECG patterns, biomarker kinetics, and time-critical management of myocardial ischemia.</p>
+        <div class="hero-meta">
+            <span>📚 22 concepts</span>
+            <span>❓ 12 MCQs</span>
+            <span>⏱️ ~60 min</span>
+            <span>🎯 Cardiology</span>
+        </div>
+    </section>
+
+    <div class="progress-container">
+        <div class="progress-inner">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% complete</div>
+        </div>
+    </div>
+
+    <main class="main">
+        <!-- Learning Objectives -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-color: var(--primary);">
+            <div class="concept-title">🎯 Learning Objectives</div>
+            <div class="concept-content">
+                <ul>
+                    <li>Explain the pathophysiology of atherosclerotic plaque rupture and thrombosis</li>
+                    <li>Differentiate STEMI, NSTEMI, and unstable angina based on clinical, ECG, and biomarker findings</li>
+                    <li>Interpret troponin kinetics and understand high-sensitivity troponin protocols</li>
+                    <li>Correlate ECG changes with coronary artery anatomy</li>
+                    <li>Apply evidence-based guidelines for acute management and reperfusion strategies</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 1: Pathophysiology -->
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <span class="section-icon">🔬</span>
+            <span class="section-title">Pathophysiology of ACS</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🩸 Atherosclerotic Plaque Rupture</div>
+            <div class="concept-content">
+                <p>The fundamental event in most ACS is <strong>disruption of an atherosclerotic plaque</strong>, exposing thrombogenic material to blood flow:</p>
+                <ul>
+                    <li><strong>Vulnerable Plaques:</strong> Thin fibrous cap (<65 μm), large lipid core (>40% of plaque volume), active inflammation with macrophages</li>
+                    <li><strong>Plaque Rupture:</strong> Physical stress causes fibrous cap disruption, exposing lipid core and tissue factor</li>
+                    <li><strong>Plaque Erosion:</strong> Alternative mechanism (more common in women, diabetics) - endothelial denudation without rupture</li>
+                    <li><strong>Thrombosis:</strong> Platelet adhesion → activation → aggregation → fibrin deposition → occlusive or non-occlusive thrombus</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Clinical Pearl</div>
+            <div class="pearl-content">
+                The degree of stenosis does NOT predict plaque rupture risk. Most MIs occur from plaques with <50% stenosis that suddenly rupture. This is why stress testing can miss "vulnerable" plaques—they don't limit flow until they rupture.
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">⏱️ The Ischemic Cascade</div>
+            <div class="concept-content">
+                <p>When coronary blood flow is interrupted, a predictable sequence of events occurs:</p>
+                <ol style="margin-left: 24px;">
+                    <li><strong>Seconds:</strong> Diastolic dysfunction (impaired relaxation)</li>
+                    <li><strong>~20 seconds:</strong> Systolic dysfunction (wall motion abnormality)</li>
+                    <li><strong>~30 seconds:</strong> ECG changes (ST-T abnormalities)</li>
+                    <li><strong>~1-2 minutes:</strong> Symptoms (chest pain/anginal equivalent)</li>
+                    <li><strong>>20 minutes:</strong> Irreversible myocyte death begins (necrosis)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="key-point-box">
+            <div class="key-point-title">⚡ Key Point: Time = Myocardium</div>
+            <div class="key-point-content">
+                <strong>Wavefront phenomenon:</strong> Necrosis starts in the subendocardium (most vulnerable to ischemia) and progresses transmurally over 3-6 hours. Early reperfusion salvages myocardium—this is why door-to-balloon time matters!
+            </div>
+        </div>
+
+        <!-- Section 2: ACS Spectrum -->
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <span class="section-icon">📊</span>
+            <span class="section-title">The ACS Spectrum</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">📈 Classification by ECG and Biomarkers</div>
+            <div class="concept-content">
+                <p>ACS is a clinical syndrome ranging from unstable angina to STEMI, distinguished by ECG findings and cardiac biomarkers:</p>
+            </div>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card stemi">
+                <h4>🔴 STEMI</h4>
+                <ul>
+                    <li><strong>Pathology:</strong> Complete coronary occlusion</li>
+                    <li><strong>ECG:</strong> ST elevation ≥1mm in 2+ contiguous leads (≥2mm in V2-V3)</li>
+                    <li><strong>Troponin:</strong> Will be elevated (may be negative initially)</li>
+                    <li><strong>Treatment:</strong> Emergent reperfusion (PCI or fibrinolysis)</li>
+                    <li><strong>Time Goal:</strong> Door-to-balloon <90 min</li>
+                </ul>
+            </div>
+            <div class="comparison-card nstemi">
+                <h4>🟡 NSTEMI</h4>
+                <ul>
+                    <li><strong>Pathology:</strong> Partial occlusion with distal embolization</li>
+                    <li><strong>ECG:</strong> ST depression, T-wave inversion, or non-diagnostic</li>
+                    <li><strong>Troponin:</strong> Elevated (diagnostic criterion)</li>
+                    <li><strong>Treatment:</strong> Antithrombotic + early invasive strategy</li>
+                    <li><strong>Time Goal:</strong> Cath within 24-72h based on risk</li>
+                </ul>
+            </div>
+            <div class="comparison-card unstable">
+                <h4>🔵 Unstable Angina</h4>
+                <ul>
+                    <li><strong>Pathology:</strong> Partial occlusion, no necrosis</li>
+                    <li><strong>ECG:</strong> May have ST-T changes or be normal</li>
+                    <li><strong>Troponin:</strong> Normal (negative x2)</li>
+                    <li><strong>Treatment:</strong> Antithrombotic + risk stratification</li>
+                    <li><strong>Evolution:</strong> Becoming less common with hs-Troponin</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">⚠️ STEMI Equivalents - Don't Miss!</div>
+            <div class="danger-content">
+                <ul style="margin-left: 20px;">
+                    <li><strong>Posterior MI:</strong> ST depression V1-V3 (reciprocal) + ST elevation V7-V9</li>
+                    <li><strong>de Winter pattern:</strong> Upsloping ST depression at J-point with tall, symmetric T waves in precordial leads (= proximal LAD occlusion)</li>
+                    <li><strong>Wellens syndrome:</strong> Biphasic or deeply inverted T waves in V2-V3 during pain-free interval (= critical LAD stenosis)</li>
+                    <li><strong>New LBBB:</strong> Consider STEMI equivalent if clinical suspicion high (use Sgarbossa criteria)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 3: ECG Localization -->
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <span class="section-icon">📍</span>
+            <span class="section-title">ECG Localization</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🗺️ Correlating ECG Leads with Coronary Anatomy</div>
+            <div class="concept-content">
+                <p>ECG changes in contiguous leads indicate the location of ischemia and the culprit artery:</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ECG Leads</th>
+                        <th>Wall/Territory</th>
+                        <th>Culprit Artery</th>
+                        <th>Complications</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="table-label">V1-V4</td>
+                        <td>Anterior / Septal</td>
+                        <td>LAD</td>
+                        <td>LV dysfunction, CHF, VT/VF, heart block</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">V5-V6, I, aVL</td>
+                        <td>Lateral</td>
+                        <td>LCx or Diagonal</td>
+                        <td>Mitral regurgitation</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">II, III, aVF</td>
+                        <td>Inferior</td>
+                        <td>RCA (85%) or LCx</td>
+                        <td>Bradycardia, heart block, RV infarct</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">V1-V3 (depression)</td>
+                        <td>Posterior</td>
+                        <td>RCA or LCx</td>
+                        <td>Often with inferior MI</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">V1, V4R</td>
+                        <td>Right Ventricle</td>
+                        <td>Proximal RCA</td>
+                        <td>Hypotension, JVD, clear lungs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Clinical Pearl: RV Infarct</div>
+            <div class="pearl-content">
+                When you see inferior STEMI, <strong>always get right-sided leads (V4R)</strong>. RV infarct occurs in ~30-50% of inferior MIs. These patients are <em>preload-dependent</em>—nitrates and diuretics can cause severe hypotension. Treat with fluids!
+            </div>
+        </div>
+
+        <!-- Section 4: Biomarkers -->
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <span class="section-icon">🧪</span>
+            <span class="section-title">Cardiac Biomarkers</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">📊 Troponin Kinetics</div>
+            <div class="concept-content">
+                <p>Cardiac troponins (cTnI, cTnT) are the gold standard biomarkers for myocardial necrosis:</p>
+                <ul>
+                    <li><strong>Rise:</strong> 3-6 hours after symptom onset (hs-Troponin: 1-3 hours)</li>
+                    <li><strong>Peak:</strong> 12-24 hours</li>
+                    <li><strong>Duration:</strong> 7-14 days (cTnI) or 10-14 days (cTnT)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-title">High-Sensitivity Troponin Rule-Out Protocols</div>
+            <div class="formula-content">
+                0/1-hour: hs-cTn < LOD at 0h AND Δ < 3 ng/L at 1h → Rule Out<br>
+                0/3-hour: hs-cTn < 99th %ile at 0h AND 3h with Δ < 50% → Rule Out
+            </div>
+            <div class="formula-note">LOD = Limit of Detection. These protocols allow rapid, safe rule-out of MI in low-risk patients.</div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Troponin Elevation ≠ ACS</div>
+            <div class="danger-content">
+                Many conditions cause troponin elevation without ACS (Type 2 MI or myocardial injury):
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Tachyarrhythmias, Heart failure, Myocarditis</li>
+                    <li>PE, Sepsis, Renal failure (decreased clearance)</li>
+                    <li>Hypertensive crisis, Takotsubo cardiomyopathy</li>
+                    <li>Cardiac contusion, Post-cardioversion/ablation</li>
+                </ul>
+                <strong>Context matters!</strong> A rising/falling pattern with ischemic symptoms suggests ACS.
+            </div>
+        </div>
+
+        <!-- Section 5: Management -->
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <span class="section-icon">💊</span>
+            <span class="section-title">Acute Management</span>
+        </div>
+
+        <div class="algorithm-box">
+            <div class="algorithm-title">🚑 Initial ACS Management Algorithm</div>
+            
+            <div class="algorithm-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <strong>Immediate:</strong> IV access, O₂ if SpO₂ < 90%, continuous monitoring, 12-lead ECG within 10 minutes
+                </div>
+            </div>
+            
+            <div class="algorithm-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <strong>Antiplatelet:</strong> Aspirin 162-325 mg chewed (non-enteric coated) + P2Y12 inhibitor (clopidogrel, ticagrelor, or prasugrel)
+                </div>
+            </div>
+            
+            <div class="algorithm-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <strong>Anticoagulation:</strong> Heparin (UFH or enoxaparin) or bivalirudin if PCI planned
+                </div>
+            </div>
+            
+            <div class="algorithm-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <strong>Anti-ischemic:</strong> Nitroglycerin SL/IV (avoid if hypotensive, RV infarct, or PDE5 inhibitor use), Beta-blocker (if no contraindications)
+                </div>
+            </div>
+            
+            <div class="algorithm-step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <strong>Reperfusion (STEMI):</strong> Primary PCI preferred (door-to-balloon <90 min). Fibrinolysis if PCI unavailable within 120 min of first medical contact.
+                </div>
+            </div>
+        </div>
+
+        <div class="key-point-box">
+            <div class="key-point-title">⏰ Time Targets - Know These!</div>
+            <div class="key-point-content">
+                <ul style="margin-left: 20px;">
+                    <li><strong>ECG:</strong> Within 10 minutes of arrival</li>
+                    <li><strong>Door-to-balloon (primary PCI):</strong> ≤90 minutes</li>
+                    <li><strong>First medical contact-to-balloon (transfer):</strong> ≤120 minutes</li>
+                    <li><strong>Door-to-needle (fibrinolysis):</strong> ≤30 minutes</li>
+                    <li><strong>NSTEMI high-risk:</strong> Cath within 24 hours</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="section-header">
+            <span class="section-num">6</span>
+            <span class="section-icon">❓</span>
+            <span class="section-title">Check Your Understanding</span>
+        </div>
+
+        <div class="quiz-card" id="quiz1">
+            <div class="quiz-header">
+                <span class="quiz-badge">MCQ 1 of 3</span>
+            </div>
+            <div class="quiz-question">
+                A 58-year-old man presents with 45 minutes of chest pain. ECG shows 3mm ST elevation in V1-V4. Troponin is negative. Which of the following is the most appropriate next step?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">A) Wait for troponin to become positive before cath lab activation</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, true)">B) Activate cath lab for primary PCI immediately</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">C) Administer fibrinolytics while awaiting troponin</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">D) Obtain serial ECGs every 30 minutes before deciding</div>
+            </div>
+            <div class="quiz-feedback" id="quiz1-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz2">
+            <div class="quiz-header">
+                <span class="quiz-badge">MCQ 2 of 3</span>
+            </div>
+            <div class="quiz-question">
+                A patient with inferior STEMI becomes hypotensive after receiving sublingual nitroglycerin. Lungs are clear and JVP is elevated. What is the most likely explanation?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">A) Cardiogenic shock from LV failure</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, true)">B) Right ventricular infarction with preload dependence</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">C) Anaphylactic reaction to nitroglycerin</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">D) Vasovagal response to chest pain</div>
+            </div>
+            <div class="quiz-feedback" id="quiz2-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz3">
+            <div class="quiz-header">
+                <span class="quiz-badge">MCQ 3 of 3</span>
+            </div>
+            <div class="quiz-question">
+                Which of the following ECG findings should be treated as a STEMI equivalent requiring emergent reperfusion?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">A) Sinus tachycardia with nonspecific ST-T changes</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">B) Atrial fibrillation with rapid ventricular response</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, true)">C) ST depression V1-V3 with ST elevation in V7-V9</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">D) Isolated T-wave inversions in V5-V6</div>
+            </div>
+            <div class="quiz-feedback" id="quiz3-feedback"></div>
+        </div>
+
+        <!-- Cross-links -->
+        <div class="crosslink-section">
+            <div class="crosslink-title">🔗 Continue Learning</div>
+            <div class="crosslink-grid">
+                <a href="../ReasonDx/training.html?case=chest-pain" class="crosslink-card">
+                    <div class="crosslink-icon">🔬</div>
+                    <div class="crosslink-label">ReasonDx Case</div>
+                    <div class="crosslink-name">Chest Pain Evaluation</div>
+                </a>
+                <a href="../CoachDx/mentor-chat.html?case=chest-pain-acs" class="crosslink-card">
+                    <div class="crosslink-icon">🧠</div>
+                    <div class="crosslink-label">CoachDx Scenario</div>
+                    <div class="crosslink-name">ACS Management Discussion</div>
+                </a>
+                <a href="hf-module.html" class="crosslink-card">
+                    <div class="crosslink-icon">⚙️</div>
+                    <div class="crosslink-label">Related Module</div>
+                    <div class="crosslink-name">Heart Failure Pathophysiology</div>
+                </a>
+                <a href="../ReasonDx/index.html#mcq" class="crosslink-card">
+                    <div class="crosslink-icon">📝</div>
+                    <div class="crosslink-label">Practice Questions</div>
+                    <div class="crosslink-name">ACS Board-Style MCQs</div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Progress tracking
+        let conceptsViewed = 0;
+        const totalConcepts = 22;
+        
+        function updateProgress() {
+            const percent = Math.round((conceptsViewed / totalConcepts) * 100);
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressText').textContent = percent + '% complete';
+        }
+        
+        // Quiz functionality
+        function checkQuiz(quizId, element, isCorrect) {
+            const options = document.querySelectorAll(`#${quizId} .quiz-option`);
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                opt.classList.remove('correct', 'incorrect');
+            });
+            
+            element.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            // Find and highlight correct answer if wrong
+            if (!isCorrect) {
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            const feedback = document.getElementById(`${quizId}-feedback`);
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            
+            if (quizId === 'quiz1') {
+                feedback.innerHTML = isCorrect 
+                    ? '<strong>Correct!</strong> STEMI is diagnosed by ECG, not troponin. ST elevation with symptoms = immediate reperfusion. Troponin may be negative early (<3 hours) but treatment should not wait.'
+                    : '<strong>Incorrect.</strong> STEMI requires immediate reperfusion based on ECG findings. Troponin rises 3-6 hours after symptom onset—waiting causes myocardial loss.';
+            } else if (quizId === 'quiz2') {
+                feedback.innerHTML = isCorrect
+                    ? '<strong>Correct!</strong> Inferior STEMI + hypotension + elevated JVP + clear lungs = RV infarct. RV is preload-dependent, so nitrates (which reduce preload) cause hypotension. Treat with IV fluids, not diuretics.'
+                    : '<strong>Incorrect.</strong> The triad of hypotension, elevated JVP, and clear lungs in inferior STEMI indicates RV infarction. These patients are preload-dependent and hypotensive with nitrates.';
+            } else if (quizId === 'quiz3') {
+                feedback.innerHTML = isCorrect
+                    ? '<strong>Correct!</strong> This describes posterior STEMI—ST depression in V1-V3 is reciprocal to posterior ST elevation. Confirm with posterior leads (V7-V9). Requires emergent reperfusion like any STEMI.'
+                    : '<strong>Incorrect.</strong> Posterior STEMI presents as ST depression in V1-V3 (reciprocal changes) with ST elevation in posterior leads V7-V9. It requires emergent reperfusion.';
+            }
+            
+            conceptsViewed++;
+            updateProgress();
+        }
+        
+        // Track scroll progress
+        window.addEventListener('scroll', function() {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            const progressConcepts = Math.floor((scrollPercent / 100) * totalConcepts);
+            if (progressConcepts > conceptsViewed) {
+                conceptsViewed = progressConcepts;
+                updateProgress();
+            }
+        });
+    </script>
+</body>
+</html>

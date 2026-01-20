@@ -4,114 +4,425 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meningitis | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0369a1; --primary-dark: #075985; --primary-light: #e0f2fe; --text: #1e293b; --text-secondary: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #0369a1 0%, #075985 100%); padding: 16px 24px; color: white; }
-        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .header-brand { font-size: 18px; font-weight: 600; text-decoration: none; color: white; }
-        .header-nav { display: flex; gap: 8px; }
-        .header-link { padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
-        .hero { background: linear-gradient(135deg, #075985 0%, #0c4a6e 100%); padding: 40px 24px; color: white; }
-        .hero-inner { max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
-        .hero-meta { display: flex; gap: 20px; font-size: 14px; opacity: 0.85; }
-        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
-        .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
-        .concept-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .concept-box h4 { font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
-        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .danger-box h4 { font-weight: 600; margin-bottom: 8px; color: #991b1b; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
-        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-        .card-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
-        .table-wrap { overflow-x: auto; margin: 16px 0; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--bg); font-weight: 600; }
-        .integration-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-top: 24px; }
-        .integration-box h3 { color: #166534; margin-bottom: 12px; }
-        .integration-links { display: flex; flex-wrap: wrap; gap: 10px; }
-        .integration-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1px solid #86efac; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; }
-        ul { padding-left: 20px; } li { margin-bottom: 8px; }
+        :root { --primary: #7c3aed; --primary-dark: #5b21b6; --primary-bg: #f5f3ff; --text-primary: #1f2937; --text-secondary: #6b7280; --bg-main: #f9fafb; --bg-card: #ffffff; --border: #e5e7eb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .dx-nav-brand { font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .hero { background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%); padding: 48px 24px; text-align: center; color: white; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+        .hero-subtitle { font-size: 18px; opacity: 0.9; max-width: 700px; margin: 0 auto 24px; }
+        .hero-meta { display: flex; gap: 24px; justify-content: center; font-size: 14px; opacity: 0.85; flex-wrap: wrap; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin: 48px 0 24px; padding-bottom: 16px; border-bottom: 2px solid var(--primary); }
+        .section-header:first-of-type { margin-top: 0; }
+        .section-num { width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .section-title { font-size: 22px; font-weight: 600; }
+        .concept-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .concept-title { font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 16px; }
+        .concept-content { color: var(--text-secondary); }
+        .concept-content ul { margin: 16px 0 16px 24px; }
+        .concept-content li { margin-bottom: 10px; }
+        .concept-content strong { color: var(--text-primary); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 1px solid #facc15; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl-content { color: #854d0e; font-size: 15px; }
+        .danger-box { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 1px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .danger-title { color: #b91c1c; font-weight: 600; margin-bottom: 10px; }
+        .danger-content { color: #991b1b; font-size: 15px; }
+        .key-point-box { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left: 4px solid var(--primary); padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f3f4f6; padding: 14px 16px; text-align: left; font-weight: 600; font-size: 14px; }
+        td { padding: 14px 16px; border-top: 1px solid var(--border); font-size: 14px; color: var(--text-secondary); }
+        .algorithm-box { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num { width: 36px; height: 36px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .quiz-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .quiz-badge { background: var(--primary-bg); color: var(--primary-dark); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .quiz-question { color: var(--text-primary); font-size: 15px; margin: 16px 0 20px; line-height: 1.6; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { background: var(--bg-main); border: 2px solid var(--border); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; }
     </style>
 </head>
 <body>
-    <header class="header"><div class="header-inner"><a href="../index.html" class="header-brand">🩺 Dx Suite</a><nav class="header-nav"><a href="index.html" class="header-link">MechanismDx</a><a href="../ReasonDx/index.html" class="header-link">ReasonDx</a><a href="../CoachDx/index.html" class="header-link">CoachDx</a></nav></div></header>
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="mechanismdx-index.html" class="dx-nav-brand">🧬 MechanismDx</a>
+        </div>
+    </nav>
 
-    <section class="hero"><div class="hero-inner"><h1>🧠 Bacterial Meningitis</h1><p>A CNS infection requiring rapid diagnosis and treatment. Don't delay antibiotics for imaging - minutes matter for neurologic outcomes.</p><div class="hero-meta"><span>⏱️ 22 min</span><span>📊 ID Emergency</span><span>🎯 ID/Neurology</span></div></div></section>
+    <header class="hero">
+        <div class="hero-icon">🦠</div>
+        <h1>Meningitis & Encephalitis</h1>
+        <div class="hero-subtitle">CNS Infections: Rapid Recognition, CSF Analysis, and Time-Critical Treatment</div>
+        <div class="hero-meta">
+            <span>⏱️ ~45 minutes</span>
+            <span>📚 16 concepts</span>
+            <span>❓ 6 MCQs</span>
+        </div>
+    </header>
 
     <main class="main">
-        <div class="section">
-            <h2 class="section-title">🩺 Classic Triad + Jolt Accentuation</h2>
-            <div class="grid-2">
-                <div class="card"><div class="card-title">Classic Triad (Full triad in &lt;50%)</div><ul><li><strong>Fever</strong></li><li><strong>Neck stiffness</strong> (nuchal rigidity)</li><li><strong>Altered mental status</strong></li></ul><p style="margin-top:8px"><em>95% have at least 2 of: fever, neck stiffness, AMS, or headache</em></p></div>
-                <div class="card"><div class="card-title">Physical Exam Signs</div><ul><li><strong>Kernig's:</strong> Pain with knee extension (hip flexed)</li><li><strong>Brudzinski's:</strong> Hip flexion with neck flexion</li><li><strong>Jolt accentuation:</strong> Headache worse with horizontal head rotation (sensitive)</li></ul></div>
+        
+        <!-- Section 1: Classification -->
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <span class="section-title">Classification & Etiology</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🧠 Meningitis vs Encephalitis</div>
+            <div class="concept-content">
+                <p><strong>Meningitis:</strong> Inflammation of the meninges</p>
+                <ul>
+                    <li>Headache, neck stiffness, photophobia</li>
+                    <li>Fever</li>
+                    <li>Mental status often preserved early (unless severe)</li>
+                </ul>
+                <p><strong>Encephalitis:</strong> Inflammation of brain parenchyma</p>
+                <ul>
+                    <li>Altered mental status, confusion, personality changes</li>
+                    <li>Seizures</li>
+                    <li>Focal neurological deficits</li>
+                    <li>Less prominent meningeal signs</li>
+                </ul>
+                <p><strong>Meningoencephalitis:</strong> Both - very common in practice</p>
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="section-title">🦠 Pathogens by Age/Risk</h2>
-            <div class="table-wrap">
-                <table>
-                    <tr><th>Population</th><th>Common Pathogens</th><th>Empiric Coverage</th></tr>
-                    <tr><td>Adults 18-50</td><td>S. pneumoniae, N. meningitidis</td><td>Ceftriaxone + Vanc + Dexamethasone</td></tr>
-                    <tr><td>Adults &gt;50, immunocompromised</td><td>+ Listeria monocytogenes</td><td>Ceftriaxone + Vanc + <strong>Ampicillin</strong> + Dex</td></tr>
-                    <tr><td>Neonates</td><td>GBS, E. coli, Listeria</td><td>Ampicillin + Cefotaxime (or Gent)</td></tr>
-                    <tr><td>Post-neurosurgery</td><td>Staph, gram-negatives</td><td>Vanc + Cefepime (or Meropenem)</td></tr>
-                </table>
-            </div>
-            <div class="danger-box">
-                <h4>⚠️ Don't Forget Listeria!</h4>
-                <p>Add ampicillin for patients &gt;50 years, pregnant, immunocompromised, or alcoholic. Listeria is NOT covered by cephalosporins!</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">🔎 CSF Analysis</h2>
-            <div class="table-wrap">
-                <table>
-                    <tr><th>Parameter</th><th>Bacterial</th><th>Viral</th><th>TB/Fungal</th></tr>
-                    <tr><td>Opening Pressure</td><td>↑↑ (&gt;25)</td><td>Normal/mild ↑</td><td>↑</td></tr>
-                    <tr><td>WBC</td><td>&gt;1000, PMN predominant</td><td>&lt;500, lymphocyte predominant</td><td>&lt;500, lymphocytes</td></tr>
-                    <tr><td>Glucose</td><td>↓↓ (&lt;40 or &lt;40% serum)</td><td>Normal</td><td>↓</td></tr>
-                    <tr><td>Protein</td><td>↑↑ (&gt;200)</td><td>Mild ↑</td><td>↑</td></tr>
-                    <tr><td>Gram Stain</td><td>+ in 60-90%</td><td>Negative</td><td>AFB rarely +</td></tr>
-                </table>
+        <div class="concept-card">
+            <div class="concept-title">🦠 Bacterial Meningitis by Age</div>
+            <div class="concept-content">
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Age Group</th><th>Common Pathogens</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Neonates (<1 mo)</strong></td><td>Group B Strep, E. coli, Listeria</td></tr>
+                            <tr><td><strong>Infants/Children</strong></td><td>S. pneumoniae, N. meningitidis, H. influenzae (unvaccinated)</td></tr>
+                            <tr><td><strong>Adults 18-50</strong></td><td>S. pneumoniae (#1), N. meningitidis</td></tr>
+                            <tr><td><strong>Adults >50</strong></td><td>S. pneumoniae, Listeria, Gram-negatives</td></tr>
+                            <tr><td><strong>Immunocompromised</strong></td><td>Listeria, Gram-negatives, Cryptococcus, TB</td></tr>
+                            <tr><td><strong>Post-neurosurgery/trauma</strong></td><td>S. aureus, Gram-negatives, Pseudomonas</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="section-title">💊 Treatment Sequence</h2>
-            <div class="concept-box">
-                <h4>🎯 Antibiotics BEFORE LP if:</h4>
-                <p>• Signs of increased ICP<br>• Need CT before LP (focal deficits, immunocompromised, papilledema)<br>• LP will be delayed &gt;30 minutes<br><br><strong>Sequence: Blood cultures → Antibiotics + Dexamethasone → CT → LP</strong></p>
-            </div>
-            <div class="grid-2">
-                <div class="card"><div class="card-title">💊 Dexamethasone</div><ul><li>Give BEFORE or WITH first antibiotic dose</li><li>0.15 mg/kg IV q6h x 4 days</li><li>Reduces mortality in pneumococcal meningitis</li><li>Continue only if pneumococcus confirmed</li></ul></div>
-                <div class="card"><div class="card-title">⏱️ Treatment Duration</div><ul><li>N. meningitidis: 7 days</li><li>H. influenzae: 7 days</li><li>S. pneumoniae: 10-14 days</li><li>Listeria: 21+ days</li><li>Gram-negative bacilli: 21 days</li></ul></div>
-            </div>
-        </div>
-
-        <div class="integration-box">
-            <h3>🔗 Continue Your Learning</h3>
-            <div class="integration-links">
-                <a href="../ReasonDx/meningitis-adventure.html" class="integration-link">🎮 <strong>ReasonDx:</strong> Meningitis Case</a>
-                <a href="../CoachDx/mentor-chat.html?case=meningitis" class="integration-link">🗣️ <strong>CoachDx:</strong> Meningitis SBAR</a>
-                <a href="sepsis-shock-module.html" class="integration-link">📚 <strong>Related:</strong> Sepsis Module</a>
+        <div class="pearl-box">
+            <div class="pearl-title">💎 Don't Forget Listeria!</div>
+            <div class="pearl-content">
+                <p>Add <strong>ampicillin</strong> for Listeria coverage in:</p>
+                <ul style="margin-left: 20px; margin-top: 8px;">
+                    <li>Age >50</li>
+                    <li>Immunocompromised (HIV, transplant, steroids)</li>
+                    <li>Alcoholism</li>
+                    <li>Pregnancy</li>
+                    <li>Neonates</li>
+                </ul>
+                <p style="margin-top: 8px;">Listeria is NOT covered by cephalosporins!</p>
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="section-title">📝 Key Takeaways</h2>
-            <div class="grid-2">
-                <div class="card"><div class="card-title">🎯 Must Know</div><ul><li>Classic triad present in &lt;50%</li><li>Don't delay antibiotics for LP/CT</li><li>Add ampicillin for Listeria coverage if &gt;50</li><li>Dex BEFORE/WITH first antibiotic dose</li></ul></div>
-                <div class="card"><div class="card-title">💊 Treatment Pearls</div><ul><li>Ceftriaxone + Vanc ± Ampicillin</li><li>Bacterial CSF: High WBC (PMNs), low glucose, high protein</li><li>Blood cultures before antibiotics</li><li>Dex reduces mortality in pneumococcal</li></ul></div>
+        <!-- Section 2: Clinical Presentation -->
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <span class="section-title">Clinical Presentation</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🩺 Classic Triad (Often Absent!)</div>
+            <div class="concept-content">
+                <p>The classic triad of <strong>fever + neck stiffness + altered mental status</strong> is present in only ~45% of bacterial meningitis cases.</p>
+                <p><strong>However:</strong> ~95% have at least 2 of the following 4:</p>
+                <ul>
+                    <li>Headache</li>
+                    <li>Fever</li>
+                    <li>Neck stiffness</li>
+                    <li>Altered mental status</li>
+                </ul>
             </div>
         </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🔍 Physical Exam Signs</div>
+            <div class="concept-content">
+                <p><strong>Kernig's sign:</strong> Hip flexed 90°, pain/resistance on knee extension</p>
+                <p><strong>Brudzinski's sign:</strong> Passive neck flexion → involuntary hip/knee flexion</p>
+                <p><strong>Jolt accentuation:</strong> Headache worse with horizontal head rotation (2-3x/sec)</p>
+                <p><strong>Sensitivity:</strong> These signs have <strong>poor sensitivity</strong> (~5-30%) but reasonable specificity. Absence does NOT rule out meningitis!</p>
+            </div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">🚨 Red Flags for Bacterial Meningitis</div>
+            <div class="danger-content">
+                <ul style="margin-left: 20px;">
+                    <li>Rapidly progressive symptoms</li>
+                    <li>Petechial/purpuric rash (think <strong>N. meningitidis</strong>)</li>
+                    <li>Seizures</li>
+                    <li>Focal neurological deficits</li>
+                    <li>Papilledema (increased ICP)</li>
+                    <li>Immunocompromised state</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 3: Diagnostic Approach -->
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <span class="section-title">Diagnostic Approach</span>
+        </div>
+
+        <div class="algorithm-box">
+            <div class="algorithm-title">🚨 Suspected Bacterial Meningitis Protocol</div>
+            <div class="algorithm-step">
+                <div class="step-num">1</div>
+                <div class="step-content"><strong>Blood cultures × 2</strong> - before antibiotics if possible (don't delay abx >30 min)</div>
+            </div>
+            <div class="algorithm-step">
+                <div class="step-num">2</div>
+                <div class="step-content"><strong>Empiric antibiotics + dexamethasone</strong> - give IMMEDIATELY if bacterial meningitis suspected</div>
+            </div>
+            <div class="algorithm-step">
+                <div class="step-num">3</div>
+                <div class="step-content"><strong>CT head</strong> - ONLY if indication (see below). Don't delay LP for CT if no contraindication.</div>
+            </div>
+            <div class="algorithm-step">
+                <div class="step-num">4</div>
+                <div class="step-content"><strong>Lumbar puncture</strong> - send CSF for cell count, protein, glucose, Gram stain, culture, +/- PCR panel</div>
+            </div>
+        </div>
+
+        <div class="key-point-box">
+            <div class="key-point-title">🧠 When to CT Before LP</div>
+            <div class="concept-content">
+                <p>CT head before LP is indicated if ANY of the following (concern for mass lesion/herniation):</p>
+                <ul>
+                    <li>Immunocompromised state</li>
+                    <li>History of CNS disease (mass, stroke, infection)</li>
+                    <li>New-onset seizure (within 1 week)</li>
+                    <li>Papilledema</li>
+                    <li>Altered consciousness</li>
+                    <li>Focal neurological deficit</li>
+                </ul>
+                <p><strong>If none present → go straight to LP</strong> (don't delay for CT)</p>
+            </div>
+        </div>
+
+        <!-- Section 4: CSF Analysis -->
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <span class="section-title">CSF Interpretation</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🔬 CSF Patterns</div>
+            <div class="concept-content">
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Parameter</th><th>Normal</th><th>Bacterial</th><th>Viral</th><th>TB/Fungal</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Opening pressure</strong></td><td><20 cm H2O</td><td>↑↑ (>30)</td><td>Normal/↑</td><td>↑</td></tr>
+                            <tr><td><strong>WBC</strong></td><td><5/μL</td><td>1000-5000+</td><td>50-500</td><td>100-500</td></tr>
+                            <tr><td><strong>Cell type</strong></td><td>Lymphs</td><td>PMNs (>80%)</td><td>Lymphs</td><td>Lymphs</td></tr>
+                            <tr><td><strong>Protein</strong></td><td><45 mg/dL</td><td>↑↑ (100-500)</td><td>↑ (50-100)</td><td>↑↑</td></tr>
+                            <tr><td><strong>Glucose</strong></td><td>>40 (or >60% serum)</td><td>↓↓ (<40)</td><td>Normal</td><td>↓</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="pearl-box">
+            <div class="pearl-title">💎 CSF Pearls</div>
+            <div class="pearl-content">
+                <p><strong>CSF:Serum glucose ratio <0.4</strong> is highly suggestive of bacterial meningitis</p>
+                <p><strong>Gram stain sensitivity:</strong> ~60-90% for bacterial meningitis (higher if untreated)</p>
+                <p><strong>PCR panels:</strong> FilmArray can detect multiple pathogens in ~1 hour - very helpful!</p>
+                <p><strong>Traumatic tap:</strong> Subtract 1 WBC for every 700-1000 RBCs to correct</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Treatment -->
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <span class="section-title">Treatment</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">💊 Empiric Antibiotic Therapy</div>
+            <div class="concept-content">
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Population</th><th>Empiric Regimen</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Adults 18-50</strong></td><td>Ceftriaxone 2g q12h + Vancomycin 15-20 mg/kg q8-12h</td></tr>
+                            <tr><td><strong>Adults >50, immunocompromised</strong></td><td>Ceftriaxone + Vancomycin + <strong>Ampicillin 2g q4h</strong> (Listeria)</td></tr>
+                            <tr><td><strong>Post-neurosurgery/trauma</strong></td><td>Vancomycin + Cefepime (or meropenem)</td></tr>
+                            <tr><td><strong>Neonates</strong></td><td>Ampicillin + Cefotaxime (or gentamicin)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">💉 Adjunctive Dexamethasone</div>
+            <div class="concept-content">
+                <p><strong>Dose:</strong> 0.15 mg/kg q6h × 4 days</p>
+                <p><strong>Timing:</strong> Give WITH or BEFORE first dose of antibiotics</p>
+                <p><strong>Benefit:</strong> Reduces mortality and neurological sequelae in <strong>S. pneumoniae</strong> meningitis</p>
+                <p><strong>Mechanism:</strong> Reduces inflammation from bacterial lysis</p>
+                <p><strong>Discontinue if:</strong> Non-bacterial cause confirmed, or pathogen other than S. pneumoniae</p>
+            </div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">⏰ TIME IS BRAIN</div>
+            <div class="danger-content">
+                <p><strong>Every hour of delay in antibiotics increases mortality.</strong></p>
+                <p>If bacterial meningitis is suspected:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Give antibiotics + dexamethasone IMMEDIATELY</li>
+                    <li>Don't wait for CT, LP, or lab results</li>
+                    <li>Blood cultures before antibiotics if possible, but NEVER delay antibiotics >30 minutes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 6: Viral & HSV Encephalitis -->
+        <div class="section-header">
+            <span class="section-num">6</span>
+            <span class="section-title">Viral Meningitis & HSV Encephalitis</span>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">🦠 Viral Meningitis</div>
+            <div class="concept-content">
+                <p><strong>Most common cause:</strong> Enteroviruses (coxsackie, echovirus)</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Usually self-limited (resolves in 7-10 days)</li>
+                    <li>Less severe than bacterial</li>
+                    <li>CSF: Lymphocytic pleocytosis, normal glucose</li>
+                </ul>
+                <p><strong>Treatment:</strong> Supportive care</p>
+            </div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">🔴 HSV Encephalitis - A Must-Not-Miss</div>
+            <div class="danger-content">
+                <p><strong>HSV-1 encephalitis is FATAL if untreated</strong> (70% mortality) but treatable!</p>
+                <p><strong>Clinical clues:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Altered mental status, personality changes</li>
+                    <li>Temporal lobe seizures</li>
+                    <li>Fever + focal neurological signs</li>
+                    <li>Olfactory/gustatory hallucinations</li>
+                </ul>
+                <p><strong>MRI:</strong> Temporal lobe involvement (often bilateral)</p>
+                <p><strong>Treatment:</strong> <strong>Acyclovir 10 mg/kg IV q8h × 14-21 days</strong></p>
+                <p><strong>Key:</strong> Start acyclovir empirically if encephalitis suspected - don't wait for HSV PCR results!</p>
+            </div>
+        </div>
+
+        <!-- Section 7: MCQs -->
+        <div class="section-header">
+            <span class="section-num">7</span>
+            <span class="section-title">Check Your Understanding</span>
+        </div>
+
+        <div class="quiz-card" id="quiz1">
+            <span class="quiz-badge">MCQ 1 of 4</span>
+            <div class="quiz-question">
+                A 68-year-old man with diabetes presents with fever, headache, and confusion. You suspect bacterial meningitis. Which empiric antibiotic regimen is most appropriate?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">A) Ceftriaxone + Vancomycin</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, true)">B) Ceftriaxone + Vancomycin + Ampicillin</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">C) Ceftriaxone alone</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">D) Vancomycin + Metronidazole</div>
+            </div>
+            <div class="quiz-feedback" id="quiz1-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz2">
+            <span class="quiz-badge">MCQ 2 of 4</span>
+            <div class="quiz-question">
+                A patient with suspected bacterial meningitis has a focal neurological deficit. What is the most appropriate sequence of actions?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">A) LP → CT → Antibiotics</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">B) CT → LP → Antibiotics</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, true)">C) Blood cultures → Antibiotics/Dexamethasone → CT → LP</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">D) Antibiotics → Wait 24 hours → LP</div>
+            </div>
+            <div class="quiz-feedback" id="quiz2-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz3">
+            <span class="quiz-badge">MCQ 3 of 4</span>
+            <div class="quiz-question">
+                CSF analysis shows: WBC 2,500 (92% PMNs), protein 180, glucose 25 (serum 120). What is the most likely diagnosis?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, true)">A) Bacterial meningitis</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">B) Viral meningitis</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">C) HSV encephalitis</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">D) Normal CSF</div>
+            </div>
+            <div class="quiz-feedback" id="quiz3-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz4">
+            <span class="quiz-badge">MCQ 4 of 4</span>
+            <div class="quiz-question">
+                A 45-year-old woman presents with fever, confusion, and new-onset seizures. MRI shows bilateral temporal lobe hyperintensities. What is the most important immediate treatment?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, false)">A) Ceftriaxone + Vancomycin</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, true)">B) IV Acyclovir</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, false)">C) IV Dexamethasone</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, false)">D) Supportive care only</div>
+            </div>
+            <div class="quiz-feedback" id="quiz4-feedback"></div>
+        </div>
+
     </main>
+
+    <script>
+        function checkQuiz(quizId, element, isCorrect) {
+            const options = document.querySelectorAll(`#${quizId} .quiz-option`);
+            options.forEach(opt => { opt.style.pointerEvents = 'none'; opt.classList.remove('correct', 'incorrect'); });
+            element.classList.add(isCorrect ? 'correct' : 'incorrect');
+            if (!isCorrect) options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+            const feedback = document.getElementById(`${quizId}-feedback`);
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            const explanations = {
+                'quiz1': isCorrect ? '<strong>Correct!</strong> Age >50 requires ampicillin for Listeria coverage in addition to ceftriaxone (pneumococcus, meningococcus) and vancomycin (resistant pneumococcus).' : '<strong>Incorrect.</strong> Patients >50 need ampicillin added for Listeria coverage. Cephalosporins do NOT cover Listeria.',
+                'quiz2': isCorrect ? '<strong>Correct!</strong> Focal deficit = need CT before LP. But NEVER delay antibiotics! Get blood cultures, give antibiotics + dexamethasone, THEN CT, then LP when safe.' : '<strong>Incorrect.</strong> Never delay antibiotics for imaging! With focal deficit: blood cultures → empiric treatment → CT → LP.',
+                'quiz3': isCorrect ? '<strong>Correct!</strong> High WBC with PMN predominance, elevated protein, and LOW glucose (CSF:serum ratio 25/120 = 0.21) is classic for bacterial meningitis.' : '<strong>Incorrect.</strong> The very low glucose (and low CSF:serum ratio) with PMN pleocytosis is diagnostic of bacterial meningitis. Viral causes have normal glucose.',
+                'quiz4': isCorrect ? '<strong>Correct!</strong> Fever, confusion, seizures, and bilateral temporal lobe findings = HSV encephalitis until proven otherwise. Start IV acyclovir immediately - this is fatal if untreated!' : '<strong>Incorrect.</strong> This presentation (confusion, seizures, temporal lobe involvement) is classic for HSV encephalitis. Acyclovir must be started immediately.'
+            };
+            feedback.innerHTML = explanations[quizId];
+        }
+    </script>
 </body>
 </html>

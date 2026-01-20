@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DKA & HHS | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #ea580c; --primary-dark: #c2410c; --primary-bg: #fff7ed; --text-primary: #1f2937; --text-secondary: #6b7280; --bg-main: #f9fafb; --bg-card: #ffffff; --border: #e5e7eb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .dx-nav-brand { font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .hero { background: linear-gradient(135deg, #ea580c 0%, #9a3412 100%); padding: 48px 24px; text-align: center; color: white; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+        .hero-subtitle { font-size: 18px; opacity: 0.9; max-width: 700px; margin: 0 auto 24px; }
+        .hero-meta { display: flex; gap: 24px; justify-content: center; font-size: 14px; opacity: 0.85; flex-wrap: wrap; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin: 48px 0 24px; padding-bottom: 16px; border-bottom: 2px solid var(--primary); }
+        .section-header:first-of-type { margin-top: 0; }
+        .section-num { width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .section-title { font-size: 22px; font-weight: 600; }
+        .concept-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .concept-title { font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 16px; }
+        .concept-content { color: var(--text-secondary); }
+        .concept-content ul { margin: 16px 0 16px 24px; }
+        .concept-content li { margin-bottom: 10px; }
+        .concept-content strong { color: var(--text-primary); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 1px solid #facc15; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl-content { color: #854d0e; font-size: 15px; }
+        .danger-box { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 1px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .danger-title { color: #b91c1c; font-weight: 600; margin-bottom: 10px; }
+        .danger-content { color: #991b1b; font-size: 15px; }
+        .key-point-box { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-left: 4px solid var(--primary); padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f3f4f6; padding: 14px 16px; text-align: left; font-weight: 600; font-size: 14px; }
+        td { padding: 14px 16px; border-top: 1px solid var(--border); font-size: 14px; color: var(--text-secondary); }
+        .algorithm-box { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num { width: 36px; height: 36px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .quiz-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .quiz-badge { background: var(--primary-bg); color: var(--primary-dark); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .quiz-question { color: var(--text-primary); font-size: 15px; margin: 16px 0 20px; line-height: 1.6; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { background: var(--bg-main); border: 2px solid var(--border); border-radius: 10px; padding: 14px 18px; cursor: pointer; font-size: 14px; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <nav class="dx-nav"><div class="dx-nav-inner"><a href="mechanismdx-index.html" class="dx-nav-brand">🧬 MechanismDx</a></div></nav>
+
+    <header class="hero">
+        <div class="hero-icon">🍬</div>
+        <h1>DKA & HHS</h1>
+        <div class="hero-subtitle">Diabetic Ketoacidosis and Hyperosmolar Hyperglycemic State</div>
+        <div class="hero-meta"><span>⏱️ ~50 min</span><span>📚 18 concepts</span><span>❓ 4 MCQs</span></div>
+    </header>
+
+    <main class="main">
+        <div class="section-header"><span class="section-num">1</span><span class="section-title">Pathophysiology</span></div>
+
+        <div class="concept-card">
+            <div class="concept-title">⚡ DKA: The Ketoacidosis Pathway</div>
+            <div class="concept-content">
+                <p><strong>Trigger:</strong> Insulin deficiency + counterregulatory hormone excess</p>
+                <ul>
+                    <li>↓ Insulin → ↑ Lipolysis → Free fatty acids to liver</li>
+                    <li>Liver converts FFAs to ketone bodies (β-hydroxybutyrate, acetoacetate)</li>
+                    <li>Ketones are acids → metabolic acidosis with increased anion gap</li>
+                    <li>Hyperglycemia → osmotic diuresis → dehydration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">💧 HHS: The Hyperosmolar Pathway</div>
+            <div class="concept-content">
+                <p><strong>Key difference:</strong> Enough insulin to prevent ketosis, not enough to prevent hyperglycemia</p>
+                <ul>
+                    <li>Severe hyperglycemia (often >600 mg/dL)</li>
+                    <li>Profound osmotic diuresis → severe dehydration (8-10L deficit)</li>
+                    <li>Hyperosmolarity (>320 mOsm/kg) → altered mental status</li>
+                    <li>No significant ketosis</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="key-point-box">
+            <div class="key-point-title">📊 DKA vs HHS</div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Feature</th><th>DKA</th><th>HHS</th></tr></thead>
+                    <tbody>
+                        <tr><td>Glucose</td><td>>250</td><td>>600</td></tr>
+                        <tr><td>pH</td><td><7.3</td><td>>7.3</td></tr>
+                        <tr><td>Bicarb</td><td><18</td><td>>18</td></tr>
+                        <tr><td>Ketones</td><td>Positive</td><td>Minimal</td></tr>
+                        <tr><td>Osmolality</td><td>Variable</td><td>>320</td></tr>
+                        <tr><td>Mortality</td><td>~1-5%</td><td>~10-20%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-header"><span class="section-num">2</span><span class="section-title">Precipitants & Diagnosis</span></div>
+
+        <div class="concept-card">
+            <div class="concept-title">🔍 The "I's" of DKA/HHS</div>
+            <div class="concept-content">
+                <ul>
+                    <li><strong>Infection:</strong> #1 cause - ALWAYS look for it!</li>
+                    <li><strong>Insulin:</strong> Non-compliance, pump failure, new diagnosis</li>
+                    <li><strong>Infarction:</strong> MI, stroke</li>
+                    <li><strong>Iatrogenic:</strong> Steroids, SGLT2 inhibitors (euglycemic DKA)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Euglycemic DKA</div>
+            <div class="danger-content">
+                SGLT2 inhibitors can cause DKA with glucose <250! Check ketones if symptomatic regardless of glucose.
+            </div>
+        </div>
+
+        <div class="pearl-box">
+            <div class="pearl-title">💎 The Potassium Paradox</div>
+            <div class="pearl-content">
+                Initial K+ is often NORMAL or HIGH despite MASSIVE total body depletion. When you give insulin, K+ crashes into cells. <strong>Rule: Do NOT give insulin until K+ >3.3</strong>
+            </div>
+        </div>
+
+        <div class="section-header"><span class="section-num">3</span><span class="section-title">Treatment</span></div>
+
+        <div class="algorithm-box">
+            <div class="algorithm-title">🚨 DKA/HHS Management</div>
+            <div class="algorithm-step"><div class="step-num">1</div><div class="step-content"><strong>FLUIDS:</strong> NS 1-1.5 L/hr initially, then 250-500 mL/hr</div></div>
+            <div class="algorithm-step"><div class="step-num">2</div><div class="step-content"><strong>POTASSIUM:</strong> If K <3.3 → hold insulin, give 20-40 mEq/hr</div></div>
+            <div class="algorithm-step"><div class="step-num">3</div><div class="step-content"><strong>INSULIN:</strong> 0.1 U/kg bolus, then 0.1 U/kg/hr drip</div></div>
+            <div class="algorithm-step"><div class="step-num">4</div><div class="step-content"><strong>DEXTROSE:</strong> When glucose <200 (DKA) or <300 (HHS), add D5. Continue insulin!</div></div>
+        </div>
+
+        <div class="danger-box">
+            <div class="danger-title">🛑 Critical Pitfalls</div>
+            <div class="danger-content">
+                <ul style="margin-left: 20px;">
+                    <li><strong>Don't stop insulin when glucose normalizes</strong> - continue until anion gap closes</li>
+                    <li><strong>Don't give insulin if K+ <3.3</strong></li>
+                    <li><strong>Don't give bicarb</strong> unless pH <6.9</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">✅ DKA Resolution Criteria</div>
+            <div class="concept-content">
+                <ul>
+                    <li>Glucose <200</li>
+                    <li>pH >7.3</li>
+                    <li>Bicarbonate ≥15</li>
+                    <li>Anion gap ≤12</li>
+                </ul>
+                <p><strong>All four must be met before transitioning to SubQ insulin.</strong></p>
+            </div>
+        </div>
+
+        <div class="section-header"><span class="section-num">4</span><span class="section-title">Check Your Understanding</span></div>
+
+        <div class="quiz-card" id="quiz1">
+            <span class="quiz-badge">MCQ 1 of 4</span>
+            <div class="quiz-question">A patient with DKA has: Glucose 450, pH 7.18, K+ 3.0. What is the first step?</div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">A) Start insulin drip</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">B) Give IV bicarbonate</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, true)">C) Give IV fluids and potassium, hold insulin</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz1', this, false)">D) Start subcutaneous insulin</div>
+            </div>
+            <div class="quiz-feedback" id="quiz1-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz2">
+            <span class="quiz-badge">MCQ 2 of 4</span>
+            <div class="quiz-question">DKA patient on insulin drip: Glucose 180, anion gap still 18. Next step?</div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">A) Stop insulin, start SubQ</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, true)">B) Continue insulin drip, add dextrose</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">C) Stop insulin and observe</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz2', this, false)">D) Increase insulin rate</div>
+            </div>
+            <div class="quiz-feedback" id="quiz2-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz3">
+            <span class="quiz-badge">MCQ 3 of 4</span>
+            <div class="quiz-question">Patient on empagliflozin: nausea, Kussmaul breathing, glucose 210. Suspect?</div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, true)">A) Euglycemic DKA</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">B) HHS</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">C) Lactic acidosis</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz3', this, false)">D) Gastroenteritis</div>
+            </div>
+            <div class="quiz-feedback" id="quiz3-feedback"></div>
+        </div>
+
+        <div class="quiz-card" id="quiz4">
+            <span class="quiz-badge">MCQ 4 of 4</span>
+            <div class="quiz-question">Which best distinguishes HHS from DKA?</div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, false)">A) Hyperglycemia</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, true)">B) Osmolality >320 with minimal ketosis</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, false)">C) Dehydration</div>
+                <div class="quiz-option" onclick="checkQuiz('quiz4', this, false)">D) Altered mental status</div>
+            </div>
+            <div class="quiz-feedback" id="quiz4-feedback"></div>
+        </div>
+    </main>
+
+    <script>
+        function checkQuiz(quizId, element, isCorrect) {
+            const options = document.querySelectorAll(`#${quizId} .quiz-option`);
+            options.forEach(opt => { opt.style.pointerEvents = 'none'; opt.classList.remove('correct', 'incorrect'); });
+            element.classList.add(isCorrect ? 'correct' : 'incorrect');
+            if (!isCorrect) options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+            const feedback = document.getElementById(`${quizId}-feedback`);
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            const explanations = {
+                'quiz1': isCorrect ? '<strong>Correct!</strong> K+ 3.0 is critically low. Give fluids and K+ first. Insulin will drive K+ into cells causing fatal hypokalemia.' : '<strong>Incorrect.</strong> With K+ <3.3, hold insulin and replace potassium first.',
+                'quiz2': isCorrect ? '<strong>Correct!</strong> Glucose controlled but gap elevated = ketones not cleared. Continue insulin, add dextrose to prevent hypoglycemia.' : '<strong>Incorrect.</strong> Elevated anion gap means DKA not resolved. Continue insulin until gap closes.',
+                'quiz3': isCorrect ? '<strong>Correct!</strong> SGLT2 inhibitors cause euglycemic DKA - ketoacidosis with near-normal glucose. Check ketones!' : '<strong>Incorrect.</strong> SGLT2 inhibitors cause euglycemic DKA. Kussmaul breathing suggests acidosis.',
+                'quiz4': isCorrect ? '<strong>Correct!</strong> HHS = severe hyperosmolarity (>320) with minimal ketosis. Both have hyperglycemia and dehydration.' : '<strong>Incorrect.</strong> HHS is defined by hyperosmolarity with minimal ketosis, not just hyperglycemia.'
+            };
+            feedback.innerHTML = explanations[quizId];
+        }
+    </script>
+</body>
+</html>
