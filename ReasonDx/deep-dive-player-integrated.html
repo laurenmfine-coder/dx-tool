@@ -2,10 +2,50 @@
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ReasonDx Deep Dive</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+
+/* Multi-Theme Support */
+:root {
+    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
+    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
+    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
+    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
+    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
+}
+[data-theme="light"] {
+    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
+    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
+    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
+    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
+    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
+}
+[data-theme="high-contrast"] {
+    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
+    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
+    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
+    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
+    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
+    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
+    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
+}
+[data-theme="sepia"] {
+    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
+    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
+    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
+    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
+    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
+    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
+    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
+}
+body { transition: background 0.3s, color 0.3s; }
+
         /* =====================================================
            ReasonDx Design System - Magnetic UI Integration
            ===================================================== */
@@ -243,26 +283,6 @@
             font-weight: 600;
             color: var(--text-primary);
             font-family: var(--font-mono);
-        }
-        
-        .stat-item-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: var(--space-sm);
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-md);
-        }
-        
-        .stat-item-box .stat-icon {
-            font-size: 18px;
-        }
-        
-        .stat-item-box .stat-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent-primary);
         }
 
         .nav-right {
@@ -1393,9 +1413,42 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
     </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
 </head>
 <body>
+
+<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
+    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
+    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
+    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
+    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
+</div>
+
     <!-- Navigation -->
     <!-- UNIFIED DX NAVIGATION -->
     <nav class="dx-nav">
@@ -1413,12 +1466,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </svg>
             </a>
             <div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="../ReasonDx/training.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
                 <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -1466,32 +1519,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="card-body">
                     <div class="layer-list" id="layerList">
                         <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Progress Stats -->
-            <div class="card" id="progressCard">
-                <div class="card-header">
-                    <div class="card-title">📊 Progress</div>
-                </div>
-                <div class="card-body">
-                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); text-align: center;">
-                        <div class="stat-item-box">
-                            <div class="stat-icon">⏱️</div>
-                            <div class="stat-value" id="timerDisplay">00:00</div>
-                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Time</div>
-                        </div>
-                        <div class="stat-item-box">
-                            <div class="stat-icon">🎯</div>
-                            <div class="stat-value" id="scoreDisplay">0</div>
-                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Score</div>
-                        </div>
-                        <div class="stat-item-box">
-                            <div class="stat-icon">🔥</div>
-                            <div class="stat-value" id="streakDisplay">0</div>
-                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Streak</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2252,11 +2279,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 currentStreak = 0;
             }
 
-            // Safely update score and streak displays
-            const scoreEl = document.getElementById('scoreDisplay');
-            const streakEl = document.getElementById('streakDisplay');
-            if (scoreEl) scoreEl.textContent = Math.round(score);
-            if (streakEl) streakEl.textContent = currentStreak;
+            document.getElementById('scoreDisplay').textContent = Math.round(score);
+            document.getElementById('streakDisplay').textContent = currentStreak;
 
             // Mark options
             const options = document.querySelectorAll('.option');
@@ -2279,130 +2303,83 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         function showExplanation(question, isCorrect) {
             const panel = document.getElementById('explanationPanel');
             const resultBadge = document.getElementById('resultBadge');
-            const resultIcon = document.getElementById('resultIcon');
-            const resultText = document.getElementById('resultText');
-            const explanationText = document.getElementById('explanationText');
             
-            // Safely update result badge
-            if (resultBadge) {
-                resultBadge.className = `result-badge ${isCorrect ? 'correct' : 'incorrect'}`;
-            }
-            if (resultIcon) {
-                resultIcon.textContent = isCorrect ? '✓' : '✗';
-            }
-            if (resultText) {
-                resultText.textContent = isCorrect ? 'Correct!' : 'Incorrect';
-            }
-            if (explanationText) {
-                explanationText.textContent = question.explanation || '';
-            }
+            resultBadge.className = `result-badge ${isCorrect ? 'correct' : 'incorrect'}`;
+            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
+            document.getElementById('resultText').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+
+            document.getElementById('explanationText').textContent = question.explanation;
 
             // Render WHY chain
             const whyItems = document.getElementById('whyItems');
-            if (whyItems) {
-                whyItems.innerHTML = '';
-                if (question.whyChain && question.whyChain.length > 0) {
-                    question.whyChain.forEach((item, i) => {
-                        const whyEl = document.createElement('div');
-                        whyEl.className = 'why-item';
-                        whyEl.id = `why-item-${i}`;
-                        whyEl.innerHTML = `
-                            <div class="why-question">WHY: ${item.why}</div>
-                            <div class="why-answer">${item.answer}</div>
-                            ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
-                        `;
-                        whyItems.appendChild(whyEl);
-                    });
-                    const revealBtn = document.getElementById('revealWhyBtn');
-                    if (revealBtn) revealBtn.style.display = 'block';
-                    whyRevealIndex = 0;
-                } else {
-                    const revealBtn = document.getElementById('revealWhyBtn');
-                    if (revealBtn) revealBtn.style.display = 'none';
-                }
+            whyItems.innerHTML = '';
+            if (question.whyChain && question.whyChain.length > 0) {
+                question.whyChain.forEach((item, i) => {
+                    const whyEl = document.createElement('div');
+                    whyEl.className = 'why-item';
+                    whyEl.id = `why-item-${i}`;
+                    whyEl.innerHTML = `
+                        <div class="why-question">WHY: ${item.why}</div>
+                        <div class="why-answer">${item.answer}</div>
+                        ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
+                    `;
+                    whyItems.appendChild(whyEl);
+                });
+                document.getElementById('revealWhyBtn').style.display = 'block';
+                whyRevealIndex = 0;
+            } else {
+                document.getElementById('revealWhyBtn').style.display = 'none';
             }
 
             // MechanismDx link
-            const mechanismLink = document.getElementById('mechanismLink');
-            if (mechanismLink) {
-                if (question.remediation) {
-                    mechanismLink.href = question.remediation.link || '#';
-                    const linkDesc = document.getElementById('mechanismLinkDesc');
-                    if (linkDesc) linkDesc.textContent = question.remediation.title || 'Review this topic';
-                    mechanismLink.style.display = 'flex';
-                } else {
-                    mechanismLink.style.display = 'none';
-                }
+            if (question.remediation) {
+                const link = document.getElementById('mechanismLink');
+                link.href = question.remediation.link || '#';
+                document.getElementById('mechanismLinkDesc').textContent = question.remediation.title || 'Review this topic';
+                link.style.display = 'flex';
+            } else {
+                document.getElementById('mechanismLink').style.display = 'none';
             }
 
-            // Render sources - handle both string and object formats
+            // Render sources
             const sourcesList = document.getElementById('sourcesList');
-            if (sourcesList) {
-                sourcesList.innerHTML = '';
-                if (question.sources && question.sources.length > 0) {
-                    question.sources.forEach(src => {
-                        const srcEl = document.createElement('div');
-                        srcEl.className = 'source-item';
-                        // Handle both string sources and object sources {text, url}
-                        if (typeof src === 'string') {
-                            srcEl.textContent = src;
-                        } else if (src && typeof src === 'object') {
-                            if (src.url) {
-                                const link = document.createElement('a');
-                                link.href = src.url;
-                                link.target = '_blank';
-                                link.rel = 'noopener noreferrer';
-                                link.textContent = src.text || src.url;
-                                link.style.color = 'var(--accent-text)';
-                                srcEl.appendChild(link);
-                            } else {
-                                srcEl.textContent = src.text || '';
-                            }
-                        }
-                        sourcesList.appendChild(srcEl);
-                    });
-                }
+            sourcesList.innerHTML = '';
+            if (question.sources) {
+                question.sources.forEach(src => {
+                    const srcEl = document.createElement('div');
+                    srcEl.className = 'source-item';
+                    srcEl.textContent = src;
+                    sourcesList.appendChild(srcEl);
+                });
             }
 
-            if (panel) panel.classList.add('visible');
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const hintBtn = document.getElementById('hintBtn');
-            const hintContainer = document.querySelector('.hint-container');
-            
-            if (submitBtn) submitBtn.style.display = 'none';
-            if (hintBtn) hintBtn.style.display = 'none';
-            if (hintContainer) hintContainer.style.display = 'none';
+            panel.classList.add('visible');
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('hintBtn').style.display = 'none';
+            document.querySelector('.hint-container').style.display = 'none';
         }
 
         function revealNextWhy() {
             const layer = deepDiveData.layers[currentLayerIndex];
             const question = layer.questions[currentQuestionIndex];
 
-            if (question.whyChain && whyRevealIndex < question.whyChain.length) {
+            if (whyRevealIndex < question.whyChain.length) {
                 const whyEl = document.getElementById(`why-item-${whyRevealIndex}`);
-                if (whyEl) {
-                    whyEl.classList.add('revealed');
-                    whyRevealIndex++;
-                }
+                whyEl.classList.add('revealed');
+                whyRevealIndex++;
             }
 
-            if (!question.whyChain || whyRevealIndex >= question.whyChain.length) {
-                const revealBtn = document.getElementById('revealWhyBtn');
-                if (revealBtn) revealBtn.style.display = 'none';
+            if (whyRevealIndex >= question.whyChain.length) {
+                document.getElementById('revealWhyBtn').style.display = 'none';
             }
         }
 
         // ============ NAVIGATION ============
         function nextQuestion() {
             currentQuestionIndex++;
-            const submitBtn = document.getElementById('submitBtn');
-            const hintBtn = document.getElementById('hintBtn');
-            const hintContainer = document.querySelector('.hint-container');
-            
-            if (submitBtn) submitBtn.style.display = 'block';
-            if (hintBtn) hintBtn.style.display = 'block';
-            if (hintContainer) hintContainer.style.display = 'flex';
+            document.getElementById('submitBtn').style.display = 'block';
+            document.getElementById('hintBtn').style.display = 'block';
+            document.querySelector('.hint-container').style.display = 'flex';
             loadQuestion();
         }
 
@@ -2614,5 +2591,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     });
     </script>
 
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
 </body>
 </html>
