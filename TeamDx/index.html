@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>TeamDx - Interprofessional Collaboration</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            min-height: 100vh; 
+            color: #e8e8e8; 
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
+        .header p { color: rgba(255,255,255,0.85); }
+        
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .scenario-btn {
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .scenario-btn:hover { background: rgba(167,139,250,0.2); border-color: #a78bfa; }
+        .scenario-btn h3 { margin-bottom: 6px; font-size: 1rem; }
+        .scenario-btn p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+        
+        .main-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            display: none;
+        }
+        .main-card.active { display: block; }
+        
+        .patient-bar {
+            padding: 16px 20px;
+            background: rgba(167,139,250,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .patient-bar h4 { color: #a78bfa; font-size: 0.9rem; }
+        .patient-bar p { font-size: 0.85rem; margin-top: 4px; }
+        
+        .team-bar {
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+        .team-tag {
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+        .team-tag.you { background: rgba(167,139,250,0.4); }
+        
+        .chat-area {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .msg-header {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .msg.attending { background: rgba(239,68,68,0.2); }
+        .msg.attending .msg-header { color: #ef4444; }
+        .msg.nurse { background: rgba(74,222,128,0.2); }
+        .msg.nurse .msg-header { color: #4ade80; }
+        .msg.pharmacy { background: rgba(251,191,36,0.2); }
+        .msg.pharmacy .msg-header { color: #fbbf24; }
+        .msg.pt { background: rgba(96,165,250,0.2); }
+        .msg.pt .msg-header { color: #60a5fa; }
+        .msg.rt { background: rgba(236,72,153,0.2); }
+        .msg.rt .msg-header { color: #ec4899; }
+        .msg.social { background: rgba(20,184,166,0.2); }
+        .msg.social .msg-header { color: #14b8a6; }
+        .msg.consult { background: rgba(249,115,22,0.2); }
+        .msg.consult .msg-header { color: #f97316; }
+        .msg.student {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            align-self: flex-end;
+        }
+        .msg.student .msg-header { color: rgba(255,255,255,0.8); }
+        .msg.system {
+            background: rgba(255,255,255,0.1);
+            align-self: center;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .response-area {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .response-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .response-opt {
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .response-opt:hover { background: rgba(167,139,250,0.2); border-color: #a78bfa; }
+        .response-opt.selected { background: rgba(167,139,250,0.3); border-color: #a78bfa; }
+        
+        .feedback-box {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback-box.visible { display: block; }
+        .feedback-box h5 { margin-bottom: 8px; }
+        .feedback-good { background: rgba(74,222,128,0.15); border: 1px solid #4ade80; }
+        .feedback-good h5 { color: #4ade80; }
+        .feedback-improve { background: rgba(251,191,36,0.15); border: 1px solid #fbbf24; }
+        .feedback-improve h5 { color: #fbbf24; }
+        
+        .progress-bar {
+            margin-top: 24px;
+            display: flex;
+            gap: 4px;
+        }
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+        .progress-dot.complete { background: #4ade80; }
+        .progress-dot.current { background: #a78bfa; }
+        
+        .summary-panel {
+            margin-top: 24px;
+            padding: 24px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            display: none;
+        }
+        .summary-panel.visible { display: block; }
+        .summary-panel h3 { color: #a78bfa; margin-bottom: 16px; }
+        
+        .skill-score {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .skill-score:last-child { border-bottom: none; }
+        .skill-bar {
+            width: 120px;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-fill { height: 100%; border-radius: 4px; }
+        .fill-good { background: #4ade80; }
+        .fill-moderate { background: #fbbf24; }
+        .fill-poor { background: #ef4444; }
+    </style>
+    <link rel="stylesheet" href="/dx-mobile-enhanced.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👥 TeamDx</h1>
+            <p>Interprofessional Collaboration Training</p>
+        </div>
+        
+        <div class="scenario-grid" id="scenarioGrid"></div>
+        
+        <div class="main-card" id="mainCard">
+            <div class="patient-bar" id="patientBar"></div>
+            <div class="team-bar" id="teamBar"></div>
+            <div class="chat-area" id="chatArea"></div>
+            <div class="response-area" id="responseArea"></div>
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="summary-panel" id="summaryPanel"></div>
+    </div>
+    
+    <script>
+        const SCENARIOS = [
+            {
+                id: 'icu-rounds',
+                title: 'ICU Multidisciplinary Rounds',
+                desc: 'Present your patient and coordinate care with the team',
+                setting: 'MICU',
+                patient: {
+                    summary: 'Mr. Johnson, 67M with COPD exacerbation, intubated 2 days ago. FiO2 60%, PEEP 8. Improving but not ready for extubation. Family asking about prognosis.'
+                },
+                team: [
+                    { role: 'Attending Physician', abbrev: 'Attending', class: 'attending' },
+                    { role: 'You (Medical Student)', abbrev: 'You', class: 'student' },
+                    { role: 'ICU Nurse', abbrev: 'RN', class: 'nurse' },
+                    { role: 'Respiratory Therapist', abbrev: 'RT', class: 'rt' },
+                    { role: 'Pharmacist', abbrev: 'PharmD', class: 'pharmacy' },
+                    { role: 'Social Worker', abbrev: 'SW', class: 'social' }
+                ],
+                exchanges: [
+                    {
+                        messages: [
+                            { from: 'Attending', class: 'attending', text: "Let's start with Mr. Johnson in bed 4. Who's presenting?" },
+                            { from: 'System', class: 'system', text: "You are the medical student presenting this patient." }
+                        ],
+                        prompt: "How do you begin your presentation?",
+                        options: [
+                            { text: "Mr. Johnson is a 67-year-old man with COPD exacerbation who was intubated two days ago. Overnight he was stable on current vent settings.", quality: 'good', feedback: "Good structure—ID, chief problem, overnight events. Clear and concise." },
+                            { text: "So this guy has been here for a while with his COPD acting up. He's still on the vent.", quality: 'poor', feedback: "Too casual for rounds. Use professional language and structured format." },
+                            { text: "This is a 67-year-old male with a past medical history of COPD, hypertension, diabetes, former smoker, who presented with shortness of breath...", quality: 'moderate', feedback: "Too detailed for ICU rounds. Focus on current status and overnight changes first." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'RT', class: 'rt', text: "He's still on 60% FiO2 and PEEP of 8. His secretions are thick and he's requiring frequent suctioning. I'm not sure he's ready for a spontaneous breathing trial today." }
+                        ],
+                        prompt: "How do you respond to the RT's assessment?",
+                        options: [
+                            { text: "I agree with your assessment. What do you think would help with the secretions—more aggressive pulmonary toilet or mucolytics?", quality: 'good', feedback: "Excellent—acknowledges expertise, asks for input, collaborative problem-solving." },
+                            { text: "The attending will decide when to do the SBT.", quality: 'poor', feedback: "Dismissive of RT's expertise. They have valuable bedside insight." },
+                            { text: "Can we try an SBT anyway and see how he does?", quality: 'moderate', feedback: "Not unreasonable but doesn't acknowledge RT's concerns. Better to explore their reasoning." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'RN', class: 'nurse', text: "The family called this morning asking when he'll wake up. They're frustrated no one has updated them. They want to come in at 2pm." }
+                        ],
+                        prompt: "How do you address the family communication issue?",
+                        options: [
+                            { text: "I can speak with the family when they arrive and update them on his progress. Should I coordinate with social work for additional support?", quality: 'good', feedback: "Takes ownership, involves appropriate team members, proactive approach." },
+                            { text: "The attending should probably talk to them since they'll have questions I can't answer.", quality: 'moderate', feedback: "Reasonable to involve attending for complex discussions, but don't avoid all family contact." },
+                            { text: "Can you just tell them he's doing better?", quality: 'poor', feedback: "Passing off communication responsibility. Family deserves proper updates from the team." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'PharmD', class: 'pharmacy', text: "I noticed he's been on empiric vancomycin for 5 days now. His cultures have been negative. Can we discuss de-escalation?" }
+                        ],
+                        prompt: "How do you respond to the pharmacist's recommendation?",
+                        options: [
+                            { text: "Good catch. His cultures are negative and he's improving clinically. I think de-escalation makes sense—what does the team think?", quality: 'good', feedback: "Validates pharmacist input, synthesizes clinical picture, invites team discussion." },
+                            { text: "I'll let the attending decide about antibiotics.", quality: 'moderate', feedback: "Safe but passive. Medical students can contribute to antibiotic stewardship discussions." },
+                            { text: "Let's keep him on it to be safe since he's still intubated.", quality: 'poor', feedback: "Antibiotic stewardship matters. Unnecessary antibiotics cause harm. Trust the data." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'SW', class: 'social', text: "I met with the family yesterday. His wife is overwhelmed—she's his primary caregiver at home and doesn't think she can manage him if he needs more support at discharge." }
+                        ],
+                        prompt: "How do you integrate this information into the care plan?",
+                        options: [
+                            { text: "That's important for discharge planning. Should we start discussing rehab options early so the family has time to prepare?", quality: 'good', feedback: "Thinks ahead, addresses psychosocial factors, includes family in planning." },
+                            { text: "We should focus on getting him extubated first.", quality: 'moderate', feedback: "True, but discharge planning should happen in parallel. Don't wait until the last minute." },
+                            { text: "That's really a social work issue, not medical.", quality: 'poor', feedback: "Discharge planning is everyone's responsibility. Medical decisions affect social needs." }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'floor-emergency',
+                title: 'Rapid Response Teamwork',
+                desc: 'Coordinate with the team during an acute decompensation',
+                setting: 'Medical Floor',
+                patient: {
+                    summary: 'Mrs. Chen, 72F admitted for CHF exacerbation. Nurse just called—patient acutely short of breath, O2 sat 82% on 4L NC. You arrive first.'
+                },
+                team: [
+                    { role: 'You (Intern)', abbrev: 'You', class: 'student' },
+                    { role: 'Floor Nurse', abbrev: 'RN', class: 'nurse' },
+                    { role: 'Respiratory Therapist', abbrev: 'RT', class: 'rt' },
+                    { role: 'Senior Resident', abbrev: 'Senior', class: 'attending' },
+                    { role: 'Rapid Response RN', abbrev: 'RR-RN', class: 'nurse' }
+                ],
+                exchanges: [
+                    {
+                        messages: [
+                            { from: 'RN', class: 'nurse', text: "She was fine 30 minutes ago! Now she can't catch her breath and her sat is dropping. What do we do?" }
+                        ],
+                        prompt: "What's your first action?",
+                        options: [
+                            { text: "Let's increase her oxygen—can you put her on a non-rebreather? I'm going to examine her while we call the rapid response.", quality: 'good', feedback: "Immediate intervention, parallel processing, clear communication, appropriate escalation." },
+                            { text: "Call the rapid response team right away.", quality: 'moderate', feedback: "Appropriate to escalate, but don't just wait—start assessment and treatment." },
+                            { text: "Let me examine her first before we do anything.", quality: 'poor', feedback: "Don't delay oxygen for a hypoxic patient. Treat and assess simultaneously." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'RT', class: 'rt', text: "I'm here. She's on 15L non-rebreather, sat is 88%. Lungs sound wet bilaterally. You want BiPAP?" }
+                        ],
+                        prompt: "How do you respond?",
+                        options: [
+                            { text: "Yes, let's try BiPAP. What settings do you recommend? And can someone get IV furosemide ready?", quality: 'good', feedback: "Accepts expertise, asks for input on specifics, thinks ahead to treatment." },
+                            { text: "We should wait for the senior resident to decide.", quality: 'poor', feedback: "This is time-sensitive. You can initiate treatment and update the senior when they arrive." },
+                            { text: "Yes, start BiPAP. Put her on 10/5.", quality: 'moderate', feedback: "Good to initiate, but RTs often know optimal settings better—collaborate." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'Senior', class: 'attending', text: "I'm here. What's the situation?" }
+                        ],
+                        prompt: "How do you update the senior resident?",
+                        options: [
+                            { text: "Mrs. Chen decompensated suddenly—hypoxic to 82% on NC, now on BiPAP at 88%. Lungs wet bilaterally. We're giving IV furosemide. Thinking flash pulmonary edema vs PE.", quality: 'good', feedback: "Excellent SBAR-style update: concise, current status, interventions, differential." },
+                            { text: "She got really sick really fast. We put her on BiPAP.", quality: 'poor', feedback: "Too vague. Senior needs vitals, exam findings, interventions, and your assessment." },
+                            { text: "I think she's having a CHF exacerbation. Her O2 sat dropped and we started BiPAP and Lasix.", quality: 'moderate', feedback: "Good but missing key data points—current vitals, exam findings, timeline." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'RR-RN', class: 'nurse', text: "Her BP is 190/110. EKG shows new ST depressions in V4-V6. Do you want cardiology?" }
+                        ],
+                        prompt: "How do you coordinate the next steps?",
+                        options: [
+                            { text: "Yes, let's get cardiology involved—this could be ACS causing the flash pulmonary edema. Can we get a troponin and repeat EKG in 15 minutes?", quality: 'good', feedback: "Recognizes pattern, appropriate consultation, follows up with testing." },
+                            { text: "Let's just focus on the respiratory issue for now.", quality: 'poor', feedback: "The cardiac findings may BE the cause. Don't compartmentalize—think systems." },
+                            { text: "Dr. [Senior], what do you think about cardiology?", quality: 'moderate', feedback: "Appropriate to defer but also reasonable to advocate for your clinical thinking." }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'handoff',
+                title: 'End-of-Shift Handoff',
+                desc: 'Transfer care safely to the night team',
+                setting: 'Sign-out Room',
+                patient: {
+                    summary: 'You have 6 patients to sign out. One is unstable—Mr. Patel, 55M with GI bleed, 2 units transfused today, still having melena, Hgb 7.2, GI doing EGD in the morning.'
+                },
+                team: [
+                    { role: 'You (Day Intern)', abbrev: 'You', class: 'student' },
+                    { role: 'Night Intern', abbrev: 'Night', class: 'attending' },
+                    { role: 'Day Senior', abbrev: 'Day Sr', class: 'consult' },
+                    { role: 'Night Senior', abbrev: 'Night Sr', class: 'consult' }
+                ],
+                exchanges: [
+                    {
+                        messages: [
+                            { from: 'Night', class: 'attending', text: "Hey, I'm ready for signout. What do you have for me?" }
+                        ],
+                        prompt: "How do you structure your handoff for Mr. Patel?",
+                        options: [
+                            { text: "Mr. Patel in 512 is my sickest patient—55M with upper GI bleed, likely from varices given his cirrhosis. He's had 2 units today, Hgb now 7.2, still having melena. GI is scoping him at 6am. If his Hgb drops below 7 or he becomes unstable, call GI and consider ICU transfer.", quality: 'good', feedback: "Excellent I-PASS format: Illness severity, Patient summary, Action items, Situation awareness, Synthesis." },
+                            { text: "Mr. Patel has a GI bleed. He got 2 units of blood and GI is coming in the morning.", quality: 'poor', feedback: "Missing critical info: current status, what to watch for, when to escalate." },
+                            { text: "Let me tell you about all my patients. Room 512 is Mr. Patel who came in 3 days ago with melena...", quality: 'moderate', feedback: "Too much background. Prioritize sick patients, focus on overnight action items." }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'Night', class: 'attending', text: "Got it. What's the transfusion threshold? And who do I call if he crashes?" }
+                        ],
+                        prompt: "How do you clarify the contingency plan?",
+                        options: [
+                            { text: "Transfuse if Hgb drops below 7. For urgent issues, GI fellow is Dr. Martinez, pager 5547. If he becomes unstable—tachycardia, hypotension, large volume hematemesis—call a rapid and transfer to ICU.", quality: 'good', feedback: "Clear parameters, specific contacts, escalation criteria defined." },
+                            { text: "Just call GI if anything happens.", quality: 'poor', feedback: "Too vague. What's 'anything'? Night team needs specific triggers and backup plans." },
+                            { text: "Keep his Hgb above 7 and check it in the morning.", quality: 'moderate', feedback: "Missing escalation pathway. What if he bleeds overnight?" }
+                        ]
+                    },
+                    {
+                        messages: [
+                            { from: 'Night', class: 'attending', text: "Quick question—any family issues or code status things I should know about?" }
+                        ],
+                        prompt: "What anticipatory guidance do you provide?",
+                        options: [
+                            { text: "He's full code. His wife is listed as contact—she's anxious and has been calling frequently. She knows about the EGD tomorrow. If he worsens, she asked to be called regardless of the hour.", quality: 'good', feedback: "Addresses code status, family dynamics, communication preferences—crucial for night coverage." },
+                            { text: "He's full code. Family is fine.", quality: 'poor', feedback: "Misses opportunity to prepare night team for family interactions." },
+                            { text: "I think he's full code—you can check the chart.", quality: 'poor', feedback: "Know your patients' code status. Don't make night team search for critical info." }
+                        ]
+                    }
+                ]
+            }
+        ];
+        
+        let currentScenario = null;
+        let currentExchange = 0;
+        let responses = [];
+        
+        function init() {
+            document.getElementById('scenarioGrid').innerHTML = SCENARIOS.map(s => `
+                <div class="scenario-btn" onclick="selectScenario('${s.id}')">
+                    <h3>${s.title}</h3>
+                    <p>${s.desc}</p>
+                </div>
+            `).join('');
+        }
+        
+        function selectScenario(id) {
+            currentScenario = SCENARIOS.find(s => s.id === id);
+            currentExchange = 0;
+            responses = [];
+            
+            document.getElementById('mainCard').classList.add('active');
+            document.getElementById('summaryPanel').classList.remove('visible');
+            
+            document.getElementById('patientBar').innerHTML = `
+                <h4>📋 ${currentScenario.setting}</h4>
+                <p>${currentScenario.patient.summary}</p>
+            `;
+            
+            document.getElementById('teamBar').innerHTML = currentScenario.team.map(t => 
+                `<span class="team-tag ${t.class === 'student' ? 'you' : ''}">${t.abbrev}</span>`
+            ).join('');
+            
+            renderExchange();
+        }
+        
+        function renderExchange() {
+            const exchange = currentScenario.exchanges[currentExchange];
+            const chatArea = document.getElementById('chatArea');
+            
+            // Add messages
+            exchange.messages.forEach(m => {
+                const msg = document.createElement('div');
+                msg.className = `msg ${m.class}`;
+                msg.innerHTML = `
+                    <div class="msg-header">${m.from}</div>
+                    <div>${m.text}</div>
+                `;
+                chatArea.appendChild(msg);
+            });
+            chatArea.scrollTop = chatArea.scrollHeight;
+            
+            // Render response options
+            document.getElementById('responseArea').innerHTML = `
+                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 12px;">${exchange.prompt}</p>
+                <div class="response-options">
+                    ${exchange.options.map((opt, i) => `
+                        <div class="response-opt" onclick="selectResponse(${i})">${opt.text}</div>
+                    `).join('')}
+                </div>
+                <div class="feedback-box" id="feedbackBox"></div>
+            `;
+            
+            // Update progress
+            renderProgress();
+        }
+        
+        function selectResponse(index) {
+            const exchange = currentScenario.exchanges[currentExchange];
+            const selected = exchange.options[index];
+            
+            responses.push({ exchange: currentExchange, quality: selected.quality });
+            
+            // Show user's response in chat
+            const chatArea = document.getElementById('chatArea');
+            const msg = document.createElement('div');
+            msg.className = 'msg student';
+            msg.innerHTML = `
+                <div class="msg-header">You</div>
+                <div>${selected.text}</div>
+            `;
+            chatArea.appendChild(msg);
+            chatArea.scrollTop = chatArea.scrollHeight;
+            
+            // Show feedback
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.className = `feedback-box visible ${selected.quality === 'good' ? 'feedback-good' : 'feedback-improve'}`;
+            feedbackBox.innerHTML = `
+                <h5>${selected.quality === 'good' ? '✓ Effective Communication' : '💡 Opportunity for Improvement'}</h5>
+                <p style="font-size: 0.9rem;">${selected.feedback}</p>
+                <button onclick="nextExchange()" style="margin-top: 12px; padding: 8px 16px; background: #a78bfa; border: none; border-radius: 6px; color: #fff; cursor: pointer;">
+                    ${currentExchange < currentScenario.exchanges.length - 1 ? 'Continue' : 'See Summary'}
+                </button>
+            `;
+            
+            // Disable options
+            document.querySelectorAll('.response-opt').forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                opt.style.opacity = '0.5';
+            });
+            document.querySelectorAll('.response-opt')[index].style.opacity = '1';
+        }
+        
+        function nextExchange() {
+            currentExchange++;
+            if (currentExchange >= currentScenario.exchanges.length) {
+                showSummary();
+            } else {
+                document.getElementById('responseArea').innerHTML = '';
+                renderExchange();
+            }
+        }
+        
+        function renderProgress() {
+            document.getElementById('progressBar').innerHTML = currentScenario.exchanges.map((_, i) => {
+                let cls = '';
+                if (i < currentExchange) cls = 'complete';
+                else if (i === currentExchange) cls = 'current';
+                return `<div class="progress-dot ${cls}"></div>`;
+            }).join('');
+        }
+        
+        function showSummary() {
+            const goodCount = responses.filter(r => r.quality === 'good').length;
+            const total = responses.length;
+            const score = Math.round((goodCount / total) * 100);
+            
+            const skills = {
+                'Clear Communication': responses.filter(r => r.quality === 'good').length >= total * 0.6 ? 85 : 55,
+                'Role Respect': responses.filter(r => r.quality !== 'poor').length >= total * 0.7 ? 80 : 50,
+                'Shared Decision-Making': goodCount >= 2 ? 75 : 45,
+                'Situation Awareness': goodCount >= total - 1 ? 90 : 60
+            };
+            
+            document.getElementById('summaryPanel').innerHTML = `
+                <h3>📊 Collaboration Summary</h3>
+                <p style="font-size: 1.5rem; font-weight: 600; text-align: center; padding: 20px; background: rgba(167,139,250,0.2); border-radius: 12px; margin-bottom: 20px;">
+                    ${score}% Effective Responses
+                </p>
+                <h4 style="margin-bottom: 12px;">Skill Assessment</h4>
+                ${Object.entries(skills).map(([skill, value]) => `
+                    <div class="skill-score">
+                        <span>${skill}</span>
+                        <div class="skill-bar">
+                            <div class="skill-fill ${value >= 70 ? 'fill-good' : value >= 50 ? 'fill-moderate' : 'fill-poor'}" 
+                                 style="width: ${value}%"></div>
+                        </div>
+                    </div>
+                `).join('')}
+                <div style="margin-top: 20px; padding: 16px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                    <h5 style="margin-bottom: 8px;">Key Takeaways</h5>
+                    <ul style="margin-left: 20px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                        <li>Every team member brings unique expertise—acknowledge and utilize it</li>
+                        <li>Clear, structured communication prevents errors</li>
+                        <li>Anticipate questions and provide context proactively</li>
+                        <li>Medical students can and should contribute to team discussions</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('summaryPanel').classList.add('visible');
+            document.getElementById('summaryPanel').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        init();
+    </script>
+    <script src="/dx-view-toggle.js"></script>
+</body>
+</html>
