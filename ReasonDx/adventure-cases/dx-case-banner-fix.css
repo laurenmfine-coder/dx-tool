@@ -1,0 +1,291 @@
+/* DxSuite Adventure Case Banner Fix
+   Resolves layout issues with score tracker, difficulty panel, and references
+   when used with dx-case-nav fixed navigation
+   
+   Add this CSS file to all adventure cases, or append to dx-case-nav.css
+*/
+
+/* ============================================
+   TOP BANNER CONTAINER - Wraps score & difficulty
+   ============================================ */
+
+/* Create a proper container for the top elements */
+.case-top-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   SCORE TRACKER FIXES
+   ============================================ */
+
+/* Override inline-block positioning issues */
+body.has-dx-nav .score-tracker {
+    position: relative !important;
+    display: inline-flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.6) !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 0 !important;
+    vertical-align: top;
+    min-width: 80px;
+}
+
+.score-tracker .score-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.score-tracker .score-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+/* ============================================
+   DIFFICULTY PANEL FIXES
+   ============================================ */
+
+body.has-dx-nav .difficulty-panel {
+    position: relative !important;
+    display: inline-block !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    padding: 12px 16px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 0 !important;
+    vertical-align: top;
+}
+
+.difficulty-panel .diff-label {
+    font-size: 0.7rem;
+    color: #475569;
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.difficulty-panel .diff-btns {
+    display: flex;
+    gap: 4px;
+}
+
+.difficulty-panel .diff-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: #f1f5f9;
+    color: #475569;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.difficulty-panel .diff-btn:hover {
+    background: #e2e8f0;
+}
+
+.difficulty-panel .diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+
+/* ============================================
+   REFERENCES PANEL FIXES
+   ============================================ */
+
+body.has-dx-nav .references-panel {
+    margin-top: 16px !important;
+    margin-bottom: 20px !important;
+}
+
+.references-panel {
+    background: linear-gradient(135deg, rgba(239, 246, 255, 0.95), rgba(219, 234, 254, 0.95)) !important;
+    border: 1px solid #bfdbfe !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.references-header {
+    padding: 12px 18px !important;
+    font-weight: 600;
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: transparent;
+    font-size: 0.9rem;
+}
+
+.references-content {
+    padding: 0 18px 14px !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.references-content a {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #2563eb;
+    font-size: 0.8rem;
+    border: 1px solid #bfdbfe;
+    transition: all 0.2s;
+}
+
+.references-content a:hover {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+/* ============================================
+   CONTAINER SPACING WITH FIXED NAV
+   ============================================ */
+
+/* Ensure container has proper top margin when nav is present */
+body.has-dx-nav .container {
+    margin-top: 0 !important;
+}
+
+/* First element spacing after top banner elements */
+body.has-dx-nav .container:first-of-type {
+    padding-top: 0;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE FIXES
+   ============================================ */
+
+@media (max-width: 768px) {
+    body.has-dx-nav .score-tracker,
+    body.has-dx-nav .difficulty-panel {
+        display: block !important;
+        width: auto;
+        margin: 8px 16px !important;
+    }
+    
+    .difficulty-panel .diff-btns {
+        flex-wrap: wrap;
+    }
+    
+    .difficulty-panel .diff-btn {
+        flex: 1;
+        min-width: 70px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body.has-dx-nav {
+        padding-top: 56px !important; /* Slightly less on mobile */
+    }
+    
+    body.has-dx-nav .score-tracker,
+    body.has-dx-nav .difficulty-panel {
+        margin: 6px 12px !important;
+        padding: 10px 14px !important;
+    }
+    
+    .score-tracker .score-value {
+        font-size: 1.2rem;
+    }
+    
+    .difficulty-panel .diff-btn {
+        padding: 5px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .references-header {
+        padding: 10px 14px !important;
+        font-size: 0.85rem;
+    }
+    
+    .references-content {
+        padding: 0 14px 12px !important;
+    }
+    
+    .references-content a {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   FIX OVERLAPPING Z-INDEX ISSUES
+   ============================================ */
+
+/* Ensure top elements don't overlap with nav */
+.score-tracker,
+.difficulty-panel,
+.references-panel {
+    z-index: 100;
+    position: relative;
+}
+
+/* Nav should always be on top */
+.dx-case-nav {
+    z-index: 9999 !important;
+}
+
+/* ============================================
+   PROGRESS BAR FIXES
+   ============================================ */
+
+body.has-dx-nav .progress-bar {
+    margin-top: 12px;
+    margin-bottom: 16px;
+}
+
+/* ============================================
+   DARK THEME COMPATIBILITY
+   ============================================ */
+
+/* For cases with dark backgrounds, ensure readability */
+[data-theme="dark"] .difficulty-panel,
+.difficulty-panel[data-dark="true"] {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .difficulty-panel .diff-label,
+.difficulty-panel[data-dark="true"] .diff-label {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .difficulty-panel .diff-btn,
+.difficulty-panel[data-dark="true"] .diff-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .difficulty-panel .diff-btn:hover,
+.difficulty-panel[data-dark="true"] .diff-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .difficulty-panel .diff-btn.active,
+.difficulty-panel[data-dark="true"] .diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
