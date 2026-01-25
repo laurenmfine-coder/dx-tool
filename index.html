@@ -721,5 +721,77 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     });
     </script>
 
+<!-- DxSuite Feedback Widget - Embed Code -->
+<style>
+.dx-feedback-trigger{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(59,130,246,0.4);display:flex;align-items:center;justify-content:center;font-size:24px;transition:transform 0.2s,box-shadow 0.2s;z-index:99998}
+.dx-feedback-trigger:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(59,130,246,0.5)}
+.dx-feedback-panel{position:fixed;bottom:96px;right:24px;width:380px;max-width:calc(100vw - 48px);max-height:calc(100vh - 140px);background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-radius:16px;box-shadow:0 10px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);overflow:hidden;display:none;flex-direction:column;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.dx-feedback-panel.open{display:flex}
+.dx-feedback-header{padding:20px;background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:#fff}
+.dx-feedback-header h3{margin:0 0 4px;font-size:1.1rem;font-weight:600}
+.dx-feedback-header p{margin:0;font-size:0.85rem;opacity:0.9}
+.dx-feedback-body{padding:20px;overflow-y:auto;flex:1;color:#e8e8e8}
+.dx-feedback-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+.dx-feedback-type{padding:14px 12px;background:rgba(255,255,255,0.05);border:2px solid transparent;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s}
+.dx-feedback-type:hover{background:rgba(255,255,255,0.08);border-color:rgba(96,165,250,0.3)}
+.dx-feedback-type.selected{background:rgba(96,165,250,0.15);border-color:#60a5fa}
+.dx-feedback-type-icon{font-size:1.5rem;margin-bottom:6px}
+.dx-feedback-type-label{font-size:0.8rem;color:rgba(255,255,255,0.8)}
+.dx-feedback-field{margin-bottom:16px}
+.dx-feedback-field label{display:block;font-size:0.85rem;color:rgba(255,255,255,0.7);margin-bottom:6px}
+.dx-feedback-field input,.dx-feedback-field select,.dx-feedback-field textarea{width:100%;padding:12px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:0.95rem;font-family:inherit}
+.dx-feedback-field input:focus,.dx-feedback-field select:focus,.dx-feedback-field textarea:focus{outline:none;border-color:#60a5fa;background:rgba(255,255,255,0.1)}
+.dx-feedback-field input::placeholder,.dx-feedback-field textarea::placeholder{color:rgba(255,255,255,0.4)}
+.dx-feedback-field select option{background:#1e293b;color:#fff}
+.dx-feedback-field textarea{min-height:100px;resize:vertical}
+.dx-feedback-priority{display:flex;gap:8px}
+.dx-priority-btn{flex:1;padding:10px;background:rgba(255,255,255,0.05);border:2px solid transparent;border-radius:8px;cursor:pointer;font-size:0.8rem;color:rgba(255,255,255,0.7);transition:all 0.2s}
+.dx-priority-btn:hover{background:rgba(255,255,255,0.08)}
+.dx-priority-btn.selected.low{background:rgba(74,222,128,0.15);border-color:#4ade80;color:#4ade80}
+.dx-priority-btn.selected.medium{background:rgba(251,191,36,0.15);border-color:#fbbf24;color:#fbbf24}
+.dx-priority-btn.selected.high{background:rgba(239,68,68,0.15);border-color:#ef4444;color:#ef4444}
+.dx-feedback-page-info{padding:10px 14px;background:rgba(96,165,250,0.1);border-radius:8px;margin-bottom:16px;font-size:0.8rem;color:rgba(255,255,255,0.7)}
+.dx-feedback-page-info strong{color:#60a5fa}
+.dx-feedback-submit{width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:opacity 0.2s}
+.dx-feedback-submit:hover{opacity:0.9}
+.dx-feedback-submit:disabled{opacity:0.5;cursor:not-allowed}
+.dx-feedback-success{text-align:center;padding:40px 20px}
+.dx-feedback-success-icon{font-size:3rem;margin-bottom:16px}
+.dx-feedback-success h4{font-size:1.2rem;margin:0 0 8px;color:#4ade80}
+.dx-feedback-success p{color:rgba(255,255,255,0.7);font-size:0.9rem;margin:0 0 20px}
+.dx-feedback-success-id{display:inline-block;padding:8px 16px;background:rgba(255,255,255,0.08);border-radius:6px;font-family:monospace;font-size:0.85rem;color:#60a5fa}
+.dx-feedback-close{position:absolute;top:16px;right:16px;width:28px;height:28px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.dx-feedback-close:hover{background:rgba(255,255,255,0.25)}
+@media(max-width:480px){.dx-feedback-panel{bottom:0;right:0;left:0;width:100%;max-width:100%;max-height:85vh;border-radius:16px 16px 0 0}.dx-feedback-trigger{bottom:16px;right:16px}}
+</style>
+<button class="dx-feedback-trigger" onclick="DxFeedback.toggle()" title="Send Feedback">💬</button>
+<div class="dx-feedback-panel" id="dxFeedbackPanel">
+<button class="dx-feedback-close" onclick="DxFeedback.close()">✕</button>
+<div class="dx-feedback-header"><h3>📣 Send Feedback</h3><p>Help us improve DxSuite</p></div>
+<div class="dx-feedback-body" id="dxFeedbackBody">
+<div class="dx-feedback-page-info"><strong>Current page:</strong> <span id="dxCurrentPage">-</span></div>
+<div class="dx-feedback-type-grid">
+<div class="dx-feedback-type" data-type="bug" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">🐛</div><div class="dx-feedback-type-label">Bug / Error</div></div>
+<div class="dx-feedback-type" data-type="broken-link" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">🔗</div><div class="dx-feedback-type-label">Broken Link</div></div>
+<div class="dx-feedback-type" data-type="content-error" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">📝</div><div class="dx-feedback-type-label">Content Error</div></div>
+<div class="dx-feedback-type" data-type="ui-issue" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">🎨</div><div class="dx-feedback-type-label">UI / Display</div></div>
+<div class="dx-feedback-type" data-type="request-content" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">📚</div><div class="dx-feedback-type-label">New Content</div></div>
+<div class="dx-feedback-type" data-type="request-feature" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">✨</div><div class="dx-feedback-type-label">New Feature</div></div>
+<div class="dx-feedback-type" data-type="resource" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">📎</div><div class="dx-feedback-type-label">Resource</div></div>
+<div class="dx-feedback-type" data-type="other" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">💭</div><div class="dx-feedback-type-label">Other</div></div>
+</div>
+<div class="dx-feedback-field"><label>Module / Section (optional)</label><select id="dxFeedbackModule"><option value="">Auto-detect from page</option><option value="mechanism-dx">MechanismDx</option><option value="clinical-trainer">Clinical Reasoning Trainer</option><option value="adventure-cases">Adventure Cases</option><option value="coachdx">CoachDx</option><option value="teamdx">TeamDx</option><option value="proceduredx">ProcedureDx</option><option value="consentdx">ConsentDx</option><option value="systemsdx">SystemsDx</option><option value="spaced-rep">Spaced Repetition</option><option value="dashboard">Dashboard</option><option value="general">General / Platform-wide</option></select></div>
+<div class="dx-feedback-field"><label>Brief Summary *</label><input type="text" id="dxFeedbackTitle" placeholder="e.g., Broken link in Sepsis case, Stage 3" required></div>
+<div class="dx-feedback-field"><label>Details *</label><textarea id="dxFeedbackDescription" placeholder="Describe the issue, error, or your request in detail."></textarea></div>
+<div class="dx-feedback-field"><label>Priority</label><div class="dx-feedback-priority"><button type="button" class="dx-priority-btn low" data-priority="low" onclick="DxFeedback.selectPriority(this)">Low</button><button type="button" class="dx-priority-btn medium selected" data-priority="medium" onclick="DxFeedback.selectPriority(this)">Medium</button><button type="button" class="dx-priority-btn high" data-priority="high" onclick="DxFeedback.selectPriority(this)">High</button></div></div>
+<div class="dx-feedback-field"><label>Your Email (optional)</label><input type="email" id="dxFeedbackEmail" placeholder="student@university.edu"></div>
+<button class="dx-feedback-submit" onclick="DxFeedback.submit()">Submit Feedback</button>
+</div>
+</div>
+<script>
+const DxFeedback={selectedType:null,selectedPriority:'medium',init(){document.getElementById('dxCurrentPage').textContent=document.title||window.location.pathname;this.autoDetectModule(window.location.pathname)},autoDetectModule(p){const s=document.getElementById('dxFeedbackModule');if(p.includes('mechanism'))s.value='mechanism-dx';else if(p.includes('coach'))s.value='coachdx';else if(p.includes('team'))s.value='teamdx';else if(p.includes('procedure'))s.value='proceduredx';else if(p.includes('consent'))s.value='consentdx';else if(p.includes('systems'))s.value='systemsdx';else if(p.includes('adventure')||p.includes('case'))s.value='adventure-cases';else if(p.includes('trainer'))s.value='clinical-trainer';else if(p.includes('dashboard'))s.value='dashboard'},toggle(){const p=document.getElementById('dxFeedbackPanel');p.classList.toggle('open');if(p.classList.contains('open'))this.init()},close(){document.getElementById('dxFeedbackPanel').classList.remove('open')},selectType(e){document.querySelectorAll('.dx-feedback-type').forEach(t=>t.classList.remove('selected'));e.classList.add('selected');this.selectedType=e.dataset.type},selectPriority(e){document.querySelectorAll('.dx-priority-btn').forEach(b=>b.classList.remove('selected'));e.classList.add('selected');this.selectedPriority=e.dataset.priority},submit(){const t=document.getElementById('dxFeedbackTitle').value.trim(),d=document.getElementById('dxFeedbackDescription').value.trim(),m=document.getElementById('dxFeedbackModule').value,e=document.getElementById('dxFeedbackEmail').value.trim();if(!this.selectedType){alert('Please select a feedback type.');return}if(!t){alert('Please enter a brief summary.');return}if(!d){alert('Please provide details.');return}const f={id:'FB-'+Date.now().toString(36).toUpperCase(),type:this.selectedType,priority:this.selectedPriority,title:t,description:d,module:m||'auto',email:e||null,page:window.location.href,pageTitle:document.title,userAgent:navigator.userAgent,timestamp:new Date().toISOString(),status:'new'};this.saveFeedback(f);this.showSuccess(f.id)},saveFeedback(f){const s=JSON.parse(localStorage.getItem('dxsuite-feedback')||'[]');s.push(f);localStorage.setItem('dxsuite-feedback',JSON.stringify(s));const p=JSON.parse(localStorage.getItem('dxsuite-feedback-pending')||'[]');p.push(f);localStorage.setItem('dxsuite-feedback-pending',JSON.stringify(p))},showSuccess(id){document.getElementById('dxFeedbackBody').innerHTML='<div class="dx-feedback-success"><div class="dx-feedback-success-icon">✅</div><h4>Feedback Submitted!</h4><p>Thank you for helping improve DxSuite.</p><div class="dx-feedback-success-id">'+id+'</div><button class="dx-feedback-submit" style="margin-top:20px" onclick="location.reload()">Submit Another</button></div>'}};
+</script>
+<!-- End Feedback Widget -->
+
 </body>
 </html>
