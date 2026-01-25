@@ -20,7 +20,7 @@
         }
         .nav-brand { font-weight: 700; font-size: 1.2rem; color: #60a5fa; }
         
-        .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 24px; padding-top: 88px; }
         
         .header {
             text-align: center;
@@ -274,13 +274,36 @@
         .category-score.good { color: #4ade80; }
         .category-score.moderate { color: #fbbf24; }
         .category-score.poor { color: #ef4444; }
+        
+        /* AI Feedback Panel */
+        .ai-feedback-panel {
+            margin-top: 24px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(59,130,246,0.15) 100%);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 16px;
+            display: none;
+        }
+        .ai-feedback-panel h4 {
+            color: #a78bfa;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .ai-feedback-text {
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+        .ai-feedback-text p {
+            margin-bottom: 12px;
+        }
+        .ai-feedback-text strong {
+            color: #fff;
+        }
     </style>
     <link rel="stylesheet" href="/dx-mobile-enhanced.css">
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-brand">🔧 ProcedureDx</div>
-    </nav>
+    <script src="/dx-universal-nav.js"></script>
     
     <div class="container">
         <div class="header">
@@ -651,11 +674,38 @@
         }
         
         function renderSupplyMenu() {
-            const allSupplies = [...currentProcedure.requiredSupplies, ...currentProcedure.distractorSupplies]
-                .sort((a, b) => a.name.localeCompare(b.name));
+            // Use the full supply closet instead of just procedure-specific supplies
+            const supplyMenu = document.getElementById('supplyMenu');
             
-            document.getElementById('supplyMenu').innerHTML = allSupplies.map(s => `
-                <div class="supply-item" onclick="toggleSupply('${s.id}')" id="supply-${s.id}">
+            // Add category filter
+            let html = `
+                <div style="margin-bottom: 12px;">
+                    <select id="supplyFilter" onchange="filterSupplies()" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; font-size: 0.9rem;">
+                        <option value="All">All Supplies (${SUPPLY_CLOSET.length} items)</option>
+                        ${SUPPLY_CATEGORIES.filter(c => c !== 'All').map(cat => {
+                            const count = SUPPLY_CLOSET.filter(s => s.category === cat).length;
+                            return `<option value="${cat}">${cat} (${count})</option>`;
+                        }).join('')}
+                    </select>
+                </div>
+                <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 12px; padding: 10px; background: rgba(59,130,246,0.1); border-radius: 8px;">
+                    💡 <strong>High-fidelity mode:</strong> Select supplies from the complete supply closet, just like you would in a real hospital.
+                </div>
+                <div id="supplyList" style="max-height: 400px; overflow-y: auto;"></div>
+            `;
+            supplyMenu.innerHTML = html;
+            
+            filterSupplies();
+        }
+        
+        function filterSupplies() {
+            const category = document.getElementById('supplyFilter').value;
+            const filtered = category === 'All' 
+                ? SUPPLY_CLOSET 
+                : SUPPLY_CLOSET.filter(s => s.category === category);
+            
+            document.getElementById('supplyList').innerHTML = filtered.map(s => `
+                <div class="supply-item ${selectedSupplies.has(s.id) ? 'selected' : ''}" onclick="toggleSupply('${s.id}')" id="supply-${s.id}">
                     <span class="supply-icon">${s.icon}</span>
                     <span class="supply-name">${s.name}</span>
                     <span class="supply-check"></span>
@@ -676,6 +726,12 @@
             const required = new Set(currentProcedure.requiredSupplies.map(s => s.id));
             const distractors = new Set(currentProcedure.distractorSupplies.map(s => s.id));
             
+            // Count results
+            let correct = 0, incorrect = 0, missing = 0;
+            const incorrectItems = [];
+            const missingItems = [];
+            
+            // First mark all visible items
             document.querySelectorAll('.supply-item').forEach(item => {
                 const id = item.id.replace('supply-', '');
                 item.classList.remove('correct', 'incorrect', 'missing');
@@ -683,13 +739,88 @@
                 if (selectedSupplies.has(id)) {
                     if (required.has(id)) {
                         item.classList.add('correct');
+                        correct++;
                     } else {
                         item.classList.add('incorrect');
+                        incorrect++;
+                        const supply = SUPPLY_CLOSET.find(s => s.id === id);
+                        if (supply) incorrectItems.push(supply.name);
                     }
-                } else if (required.has(id)) {
-                    item.classList.add('missing');
                 }
             });
+            
+            // Check for missing required items
+            currentProcedure.requiredSupplies.forEach(s => {
+                if (!selectedSupplies.has(s.id)) {
+                    missing++;
+                    missingItems.push(s.name);
+                    // Try to mark if visible
+                    const el = document.getElementById(`supply-${s.id}`);
+                    if (el) el.classList.add('missing');
+                }
+            });
+            
+            // Show summary feedback
+            let summaryHtml = `
+                <div style="margin-top: 16px; padding: 16px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                    <h5 style="margin-bottom: 12px; color: #60a5fa;">📊 Equipment Selection Results</h5>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;">
+                        <div style="text-align: center; padding: 12px; background: rgba(74,222,128,0.15); border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #4ade80;">${correct}</div>
+                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Correct</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: rgba(251,191,36,0.15); border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #fbbf24;">${missing}</div>
+                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Missing</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: rgba(239,68,68,0.15); border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;">${incorrect}</div>
+                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Unnecessary</div>
+                        </div>
+                    </div>
+            `;
+            
+            if (missingItems.length > 0) {
+                summaryHtml += `
+                    <div style="margin-bottom: 12px;">
+                        <strong style="color: #fbbf24;">⚠️ Missing Required Items:</strong>
+                        <ul style="margin-top: 8px; padding-left: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.8);">
+                            ${missingItems.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            if (incorrectItems.length > 0) {
+                summaryHtml += `
+                    <div>
+                        <strong style="color: #ef4444;">❌ Unnecessary Items Selected:</strong>
+                        <ul style="margin-top: 8px; padding-left: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.8);">
+                            ${incorrectItems.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            if (correct === currentProcedure.requiredSupplies.length && incorrect === 0) {
+                summaryHtml += `
+                    <div style="margin-top: 12px; padding: 12px; background: rgba(74,222,128,0.2); border-radius: 8px; text-align: center;">
+                        <span style="font-size: 1.5rem;">🎉</span>
+                        <strong style="color: #4ade80;"> Perfect! You selected all required supplies with no extras!</strong>
+                    </div>
+                `;
+            }
+            
+            summaryHtml += '</div>';
+            
+            // Insert or update summary
+            let summaryDiv = document.getElementById('supplySummary');
+            if (!summaryDiv) {
+                summaryDiv = document.createElement('div');
+                summaryDiv.id = 'supplySummary';
+                document.getElementById('supplyMenu').after(summaryDiv);
+            }
+            summaryDiv.innerHTML = summaryHtml;
         }
         
         function addStep() {
@@ -717,9 +848,115 @@
             `).join('');
         }
         
-        function checkSteps() {
-            // Show what-if scenarios after step evaluation
+        async function checkSteps() {
+            if (userSteps.length === 0) {
+                alert('Please enter at least one procedural step before evaluating.');
+                return;
+            }
+            
+            // Show loading state
+            const evalBtn = document.querySelector('.btn-success');
+            const originalText = evalBtn.innerHTML;
+            evalBtn.innerHTML = '⏳ Analyzing with AI...';
+            evalBtn.disabled = true;
+            
+            // Create or show the AI feedback panel
+            let feedbackPanel = document.getElementById('aiFeedbackPanel');
+            if (!feedbackPanel) {
+                feedbackPanel = document.createElement('div');
+                feedbackPanel.id = 'aiFeedbackPanel';
+                feedbackPanel.className = 'ai-feedback-panel';
+                feedbackPanel.innerHTML = '<h4>🤖 AI Procedure Analysis</h4><div id="aiFeedbackContent"></div>';
+                document.getElementById('mainContent').after(feedbackPanel);
+            }
+            feedbackPanel.style.display = 'block';
+            document.getElementById('aiFeedbackContent').innerHTML = '<p style="color: rgba(255,255,255,0.6);">Analyzing your procedural steps...</p>';
+            
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1500,
+                        messages: [{
+                            role: 'user',
+                            content: `You are an expert medical procedure educator. A medical student is learning the "${currentProcedure.name}" procedure.
+
+The CORRECT steps for this procedure are:
+${currentProcedure.keySteps.map((s, i) => `${i+1}. ${s}`).join('\n')}
+
+The student wrote these steps:
+${userSteps.map((s, i) => `${i+1}. ${s}`).join('\n')}
+
+Please provide specific, constructive feedback:
+1. What did the student do well? (be specific)
+2. What critical steps are MISSING that could harm the patient or compromise the procedure?
+3. What steps are in the WRONG ORDER that could cause problems?
+4. What steps are INCORRECT or contain errors?
+5. Give an overall assessment (Excellent/Good/Needs Improvement/Concerning) with a brief explanation.
+
+Be encouraging but clinically accurate. Patient safety is paramount. Format your response in clear sections.`
+                        }]
+                    })
+                });
+                
+                const data = await response.json();
+                const feedback = data.content?.[0]?.text || 'Unable to generate feedback. Please try again.';
+                
+                // Format and display feedback
+                document.getElementById('aiFeedbackContent').innerHTML = `
+                    <div class="ai-feedback-text">${formatAIFeedback(feedback)}</div>
+                    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">
+                            <strong>Reference Steps:</strong> Click below to see the expected procedural steps.
+                        </p>
+                        <button class="btn btn-primary" onclick="toggleReferenceSteps()" style="margin-top: 8px;">
+                            Show Expected Steps
+                        </button>
+                        <div id="referenceSteps" style="display: none; margin-top: 12px; padding: 16px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            ${currentProcedure.keySteps.map((s, i) => `<div style="margin-bottom: 8px;"><span style="color: #60a5fa; font-weight: 600;">${i+1}.</span> ${s}</div>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('AI feedback error:', error);
+                // Fallback to basic comparison
+                document.getElementById('aiFeedbackContent').innerHTML = `
+                    <p style="color: #fbbf24;">⚠️ AI feedback unavailable. Here's a basic comparison:</p>
+                    <div style="margin-top: 16px;">
+                        <p><strong>Your steps:</strong> ${userSteps.length}</p>
+                        <p><strong>Expected steps:</strong> ${currentProcedure.keySteps.length}</p>
+                        <p style="margin-top: 12px;"><strong>Expected procedure steps:</strong></p>
+                        ${currentProcedure.keySteps.map((s, i) => `<div style="margin: 8px 0; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 4px;"><span style="color: #60a5fa;">${i+1}.</span> ${s}</div>`).join('')}
+                    </div>
+                `;
+            }
+            
+            evalBtn.innerHTML = originalText;
+            evalBtn.disabled = false;
+            
+            // Show what-if scenarios after AI feedback
             showWhatIfScenarios();
+            
+            // Scroll to feedback
+            feedbackPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function formatAIFeedback(text) {
+            // Convert markdown-style formatting to HTML
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>')
+                .replace(/^/, '<p>')
+                .replace(/$/, '</p>');
+        }
+        
+        function toggleReferenceSteps() {
+            const ref = document.getElementById('referenceSteps');
+            ref.style.display = ref.style.display === 'none' ? 'block' : 'none';
         }
         
         function showWhatIfScenarios() {
@@ -853,6 +1090,11 @@
             }
         });
         
+        // init() will be called after supply-closet.js loads
+    </script>
+    <script src="supply-closet.js"></script>
+    <script>
+        // Now that SUPPLY_CLOSET is available, initialize
         init();
     </script>
     <script src="/dx-view-toggle.js"></script>
