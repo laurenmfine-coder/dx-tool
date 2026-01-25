@@ -520,10 +520,10 @@
         // Simulated data
         const REFERENCES = [
             { url: 'https://pubmed.ncbi.nlm.nih.gov/34352278/', title: 'CHEST VTE Guidelines 2021', file: 'dvt-deep-dive.json' },
-            { url: 'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916', title: 'AHA ACLS Guidelines 2020', file: 'acls-rhythms-deep-dive.json' },
+            { url: 'https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms', title: 'AHA ACLS Guidelines 2025', file: 'acls-rhythms-deep-dive.json' },
             { url: 'https://publications.aap.org/pediatrics/article/134/5/e1474/75848/', title: 'AAP Bronchiolitis 2014', file: 'bronchiolitis-deep-dive.json' },
             { url: 'https://www.ncbi.nlm.nih.gov/books/NBK441958/', title: 'StatPearls: SAH', file: 'sah-deep-dive.json' },
-            { url: 'https://www.ahajournals.org/doi/10.1161/cir.0000000000000484', title: 'AHA Kawasaki 2017', file: 'kawasaki-deep-dive.json' },
+            { url: 'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001295', title: 'AHA Kawasaki 2024', file: 'kawasaki-deep-dive.json' },
         ];
         
         async function runLinkAudit() {
@@ -587,7 +587,7 @@
         }
         
         function checkGuidelines() {
-            alert('Guideline check complete.\n\n3 updates detected:\n• AHA ACLS: 2020 → 2025\n• Surviving Sepsis: 2021 → 2024\n• AHA Kawasaki: 2017 → 2024');
+            alert('Guideline check complete.\n\nAll guidelines are current:\n• AHA ACLS: 2025\n• Surviving Sepsis: 2021/2024\n• AHA Kawasaki: 2024');
         }
         
         function exportReport() {
@@ -600,9 +600,9 @@
                     guidelineUpdates: document.getElementById('guidelineUpdates').textContent
                 },
                 guidelineUpdatesNeeded: [
-                    { guideline: 'AHA ACLS Guidelines', currentVersion: '2020', latestVersion: '2025', affectedContent: 'ACLS Deep Dive, 12 Adventures', priority: 'High' },
-                    { guideline: 'Surviving Sepsis Campaign', currentVersion: '2021', latestVersion: '2024', affectedContent: 'Sepsis Deep Dive, 8 Cases', priority: 'High' },
-                    { guideline: 'AHA Kawasaki Statement', currentVersion: '2017', latestVersion: '2024', affectedContent: 'Kawasaki Deep Dive', priority: 'Medium' }
+                    { guideline: 'AHA ACLS Guidelines', currentVersion: '2025', latestVersion: '2025', affectedContent: 'ACLS Deep Dive, 12 Adventures', priority: 'Current' },
+                    { guideline: 'Surviving Sepsis Campaign', currentVersion: '2021/2024', latestVersion: '2024', affectedContent: 'Sepsis Deep Dive, 8 Cases', priority: 'Current' },
+                    { guideline: 'AHA Kawasaki Statement', currentVersion: '2024', latestVersion: '2024', affectedContent: 'Kawasaki Deep Dive', priority: 'Current' }
                 ],
                 currentGuidelines: [
                     { guideline: 'AAP Bronchiolitis CPG', version: '2014', status: 'Current' },
