@@ -36,6 +36,52 @@
             font-size: 16px;
         }
         
+        /* Search Bar in Header */
+        .header-search {
+            max-width: 600px;
+            margin: 24px auto 0;
+            position: relative;
+        }
+        .header-search-input {
+            width: 100%;
+            padding: 16px 24px 16px 52px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        .header-search-input::placeholder { color: rgba(255,255,255,0.6); }
+        .header-search-input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.15);
+        }
+        .header-search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            opacity: 0.7;
+        }
+        .header-search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px 20px;
+            background: var(--primary);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .header-search-btn:hover { background: var(--primary-dark); }
+        
         /* Platform Cards */
         .platforms {
             max-width: 1100px;
@@ -378,7 +424,22 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         <h1>Dx Learning Ecosystem</h1>
         <p>A comprehensive clinical education platform integrating reasoning, pathophysiology, and AI-powered coaching.</p>
         <div class="tagline">Asking the right questions can change everything.</div>
+        <div class="header-search">
+            <span class="header-search-icon">🔍</span>
+            <input type="text" class="header-search-input" id="mainSearchInput" placeholder="Search any topic, disease, or symptom...">
+            <button class="header-search-btn" onclick="goToSearch()">Search</button>
+        </div>
     </header>
+    
+    <script>
+        function goToSearch() {
+            const query = document.getElementById('mainSearchInput').value;
+            window.location.href = 'search.html' + (query ? '?q=' + encodeURIComponent(query) : '');
+        }
+        document.getElementById('mainSearchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') goToSearch();
+        });
+    </script>
     
     <!-- Platform Cards -->
     <section class="platforms">
@@ -395,15 +456,15 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </p>
             <div class="platform-stats">
                 <div class="platform-stat">
-                    <div class="platform-stat-value">200+</div>
+                    <div class="platform-stat-value">3,137</div>
                     <div class="platform-stat-label">Cases</div>
                 </div>
                 <div class="platform-stat">
-                    <div class="platform-stat-value">15</div>
+                    <div class="platform-stat-value">22</div>
                     <div class="platform-stat-label">Specialties</div>
                 </div>
                 <div class="platform-stat">
-                    <div class="platform-stat-value">6</div>
+                    <div class="platform-stat-value">7</div>
                     <div class="platform-stat-label">Modes</div>
                 </div>
             </div>
@@ -423,16 +484,16 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </p>
             <div class="platform-stats">
                 <div class="platform-stat">
-                    <div class="platform-stat-value">18</div>
+                    <div class="platform-stat-value">54</div>
                     <div class="platform-stat-label">Modules</div>
                 </div>
                 <div class="platform-stat">
-                    <div class="platform-stat-value">230+</div>
+                    <div class="platform-stat-value">450+</div>
                     <div class="platform-stat-label">MCQs</div>
                 </div>
                 <div class="platform-stat">
-                    <div class="platform-stat-value">7</div>
-                    <div class="platform-stat-label">Systems</div>
+                    <div class="platform-stat-value">14</div>
+                    <div class="platform-stat-label">A/I Complete</div>
                 </div>
             </div>
             <div class="enter-btn">Enter MechanismDx →</div>
@@ -451,12 +512,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </p>
             <div class="platform-stats">
                 <div class="platform-stat">
-                    <div class="platform-stat-value">58+</div>
+                    <div class="platform-stat-value">200+</div>
                     <div class="platform-stat-label">Cases</div>
                 </div>
                 <div class="platform-stat">
-                    <div class="platform-stat-value">5</div>
-                    <div class="platform-stat-label">AI Coaches</div>
+                    <div class="platform-stat-value">12</div>
+                    <div class="platform-stat-label">Specialties</div>
                 </div>
                 <div class="platform-stat">
                     <div class="platform-stat-value">24/7</div>
@@ -467,12 +528,80 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         </a>
     </section>
     
+    <!-- Start Here Banner -->
+    <section style="max-width: 1100px; margin: 0 auto 32px; padding: 0 24px;">
+        <a href="start-here.html" style="display: block; padding: 20px 32px; background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border-radius: 16px; text-decoration: none; color: white; transition: transform 0.2s;">
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                <span style="font-size: 2rem;">🧭</span>
+                <div style="flex: 1; min-width: 200px;">
+                    <div style="font-size: 1.25rem; font-weight: 700;">New Here? Start with the Learning Navigator</div>
+                    <div style="opacity: 0.9; font-size: 0.95rem;">Find your ideal starting point based on your goals, time, and learning phase</div>
+                </div>
+                <span style="font-size: 1.5rem;">→</span>
+            </div>
+        </a>
+    </section>
+    
+    <!-- Clinical Skills Modules (EPA-Aligned) -->
+    <section style="max-width: 1100px; margin: 0 auto 48px; padding: 0 24px;">
+        <h2 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;">Clinical Skills & Professional Development</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+            <!-- ProcedureDx -->
+            <a href="ProcedureDx/index.html" style="padding: 20px; background: var(--bg-card); border-radius: 14px; border: 2px solid #dbeafe; text-decoration: none; color: inherit; transition: all 0.2s;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 1.75rem;">🔧</span>
+                    <div>
+                        <div style="font-weight: 700;">ProcedureDx</div>
+                        <div style="font-size: 0.75rem; color: #3b82f6;">EPA 12</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">Equipment selection, steps, complications</p>
+            </a>
+            
+            <!-- ConsentDx -->
+            <a href="ConsentDx/index.html" style="padding: 20px; background: var(--bg-card); border-radius: 14px; border: 2px solid #dcfce7; text-decoration: none; color: inherit; transition: all 0.2s;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 1.75rem;">📋</span>
+                    <div>
+                        <div style="font-weight: 700;">ConsentDx</div>
+                        <div style="font-size: 0.75rem; color: #22c55e;">EPA 11</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">Informed consent & patient communication</p>
+            </a>
+            
+            <!-- SystemsDx -->
+            <a href="SystemsDx/index.html" style="padding: 20px; background: var(--bg-card); border-radius: 14px; border: 2px solid #fef3c7; text-decoration: none; color: inherit; transition: all 0.2s;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 1.75rem;">⚠️</span>
+                    <div>
+                        <div style="font-weight: 700;">SystemsDx</div>
+                        <div style="font-size: 0.75rem; color: #f59e0b;">Patient Safety</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">RCA, Swiss Cheese, Just Culture</p>
+            </a>
+            
+            <!-- TeamDx -->
+            <a href="TeamDx/index.html" style="padding: 20px; background: var(--bg-card); border-radius: 14px; border: 2px solid #f3e8ff; text-decoration: none; color: inherit; transition: all 0.2s;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 1.75rem;">👥</span>
+                    <div>
+                        <div style="font-weight: 700;">TeamDx</div>
+                        <div style="font-size: 0.75rem; color: #a855f7;">Interprofessional</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">Team communication & handoffs</p>
+            </a>
+        </div>
+    </section>
+    
     <!-- Quick Links -->
     <section class="quick-links">
         <h2>Quick Access</h2>
         <div class="quick-links-grid">
-            <a href="ReasonDx/training.html" class="quick-link">🎯 Start Training</a>
-            <a href="CoachDx/index.html" class="quick-link">📚 Case Library</a>
+            <a href="start-here.html" class="quick-link">🧭 Start Here</a>
+            <a href="ReasonDx/training.html" class="quick-link">🎯 Training Hub</a>
             <a href="fingerprint-dashboard.html" class="quick-link">🧬 Learning Fingerprint</a>
             <a href="unified-scoreboard.html" class="quick-link">🏆 Scoreboard</a>
             <a href="ReasonDx/predict-labs-library.html" class="quick-link">🧪 PredictLabs</a>
