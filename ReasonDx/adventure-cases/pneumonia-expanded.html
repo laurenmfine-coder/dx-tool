@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Community-Acquired Pneumonia - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fdba74; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fff7ed; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #f97316; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(249,115,22,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(249,115,22,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f97316, #fdba74); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #f97316; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK430749/" target="_blank" rel="noopener">Community-Acquired Pneumonia - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/324/curb-65-score-pneumonia-severity" target="_blank" rel="noopener">CURB-65 Score (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    
+<!-- Platform Recommendations -->
+<div class="platform-panel">
+    <div class="platform-header">🔗 Continue Learning</div>
+    <div class="platform-item"><span class="platform-icon">🔬</span><span>MechanismDx: Pulmonary Module</span></div><div class="platform-item"><span class="platform-icon">🎯</span><span>CoachDx: CAP Management Scenario</span></div><div class="platform-item"><span class="platform-icon">📖</span><span>Deep Dive: Empiric Antibiotics</span></div>
+</div>
+
+</div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Febrile Cough",content:`<div class="narrative"><p>58-year-old man with 4 days of productive cough, fever, pleuritic chest pain.</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 102.8F, HR 108, RR 22, BP 128/78, SpO2 93% RA<br><strong>Exam:</strong> Crackles RLL, bronchial breath sounds, dullness to percussion<br><strong>PMH:</strong> DM2, HTN, former smoker</p></div><div class="socratic-prompt"><h4>Establish Diagnosis</h4><p>What confirms pneumonia diagnosis?</p></div>`,
+hint_beginner:"Fever + cough + infiltrate = classic triad",hint_advanced:"When is CXR falsely negative?",
+question:{prompt:"What confirms pneumonia diagnosis?",
+options:[{text:"Clinical syndrome (fever, cough, dyspnea) PLUS radiographic infiltrate; focal exam findings increase probability",correct:true},
+{text:"Positive sputum culture required",correct:false},
+{text:"CT chest required for all",correct:false},
+{text:"Procalcitonin determines diagnosis",correct:false}],
+explanation:{correct:"Pneumonia = clinical syndrome + radiographic evidence. Focal findings (bronchial breath sounds, dullness) have high specificity. CXR confirms diagnosis.",incorrect:"Pneumonia is clinical-radiographic diagnosis. Sputum cultures often negative. CXR is standard imaging."},
+teaching:`<h4>Pneumonia Diagnosis</h4><p><strong>Clinical:</strong> Fever, cough, dyspnea, pleuritic pain</p><p><strong>Exam:</strong> Crackles, bronchial breath sounds, dullness</p><p><strong>Imaging:</strong> CXR infiltrate confirms</p>`,
+why_chain:[{q:"When is CXR falsely negative?",a:"Early infection (first 24h), severe dehydration, neutropenia, PCP. If high suspicion with negative CXR, treat empirically or CT."}],points:10}},
+
+{title:"Severity Assessment",content:`<div class="narrative"><p>CXR: RLL consolidation. Determine disposition.</p></div><div class="socratic-prompt"><h4>Site of Care</h4><p>What scoring guides admission decision?</p></div>`,
+hint_beginner:"CURB-65 validated for CAP severity",hint_advanced:"What factors do scores miss?",
+question:{prompt:"CURB-65: Confusion(-), BUN 24(+), RR 22(-), BP normal(-), Age 58(-). Score and disposition?",
+options:[{text:"CURB-65 = 1; consider outpatient vs observation; also consider hypoxia (SpO2 93%), DM not in score",correct:true},
+{text:"Must admit all pneumonia",correct:false},
+{text:"Score 0, send home",correct:false},
+{text:"Always admit diabetics",correct:false}],
+explanation:{correct:"CURB-65 = 1 (BUN only). Score 0-1 = low risk. BUT SpO2 93% and DM favor observation. Scores guide, clinical judgment decides.",incorrect:"CURB-65: 0-1 outpatient, 2 consider admit, 3+ ICU. But scores miss hypoxia, comorbidities."},
+teaching:`<h4>CURB-65</h4><p><strong>C:</strong> Confusion | <strong>U:</strong> BUN >19 | <strong>R:</strong> RR >=30 | <strong>B:</strong> BP <90 | <strong>65:</strong> Age >=65</p><p>0-1: Outpatient | 2: Consider admit | 3+: ICU</p>`,
+why_chain:[{q:"What does CURB-65 miss?",a:"Hypoxia (not in score!), comorbidities, multilobar disease, social factors."}],points:15}},
+
+{title:"Pathogen Considerations",content:`<div class="narrative"><p>Admitted for observation. What organisms to cover?</p></div><div class="socratic-prompt"><h4>Know Your Bugs</h4><p>Most common CAP pathogens?</p></div>`,
+hint_beginner:"S. pneumoniae #1 in all CAP",hint_advanced:"When suspect Pseudomonas?",
+question:{prompt:"Most common bacterial cause of CAP?",
+options:[{text:"S. pneumoniae #1; also cover atypicals (Mycoplasma, Chlamydophila, Legionella)",correct:true},
+{text:"Staph aureus most common",correct:false},
+{text:"H. influenzae in all ages",correct:false},
+{text:"Atypicals rare, skip coverage",correct:false}],
+explanation:{correct:"Pneumococcus is #1 at all severity levels. Atypicals account for 10-30%. MRSA/Pseudomonas only with risk factors.",incorrect:"Pneumococcus dominates. Atypicals common enough for empiric coverage."},
+teaching:`<h4>CAP Microbiology</h4><p><strong>S. pneumoniae:</strong> #1 (40-50%)</p><p><strong>Atypicals:</strong> Mycoplasma, Chlamydophila, Legionella</p><p><strong>MRSA/Pseudomonas:</strong> Only with risk factors</p>`,
+why_chain:[{q:"When cover MRSA?",a:"Prior MRSA, recent hospitalization, severe necrotizing, post-influenza."},{q:"When cover Pseudomonas?",a:"Structural lung disease, recent IV antibiotics, severe COPD."}],points:10}},
+
+{title:"Antibiotic Selection",content:`<div class="narrative"><p>Select empiric antibiotics for non-severe inpatient CAP.</p></div><div class="socratic-prompt"><h4>Empiric Coverage</h4><p>Recommended regimen?</p></div>`,
+hint_beginner:"Beta-lactam + macrolide OR fluoroquinolone",hint_advanced:"Why add atypical coverage?",
+question:{prompt:"What empiric regimen for non-severe inpatient CAP?",
+options:[{text:"Beta-lactam (ceftriaxone) PLUS macrolide (azithromycin) OR respiratory fluoroquinolone monotherapy",correct:true},
+{text:"Ceftriaxone alone sufficient",correct:false},
+{text:"Vancomycin for all inpatients",correct:false},
+{text:"Oral amoxicillin only",correct:false}],
+explanation:{correct:"Non-severe inpatient: beta-lactam + macrolide (covers pneumococcus + atypicals) OR respiratory FQ alone (levofloxacin/moxifloxacin covers both).",incorrect:"Must cover both typical (pneumococcus) and atypical organisms. Ceftriaxone alone misses atypicals."},
+teaching:`<h4>Inpatient CAP Antibiotics</h4><p><strong>Option 1:</strong> Ceftriaxone 1g IV + Azithromycin 500mg</p><p><strong>Option 2:</strong> Levofloxacin 750mg or Moxifloxacin 400mg</p><p><strong>Severe:</strong> Add vanc + pip-tazo if MRSA/Pseudomonas risk</p>`,
+why_chain:[{q:"Why macrolide with beta-lactam?",a:"Beta-lactam covers pneumococcus, H. flu. Macrolide adds atypical coverage plus possible immunomodulatory benefit."}],points:15}},
+
+{title:"Duration of Therapy",content:`<div class="narrative"><p>Patient improving. How long to treat?</p></div><div class="socratic-prompt"><h4>When to Stop</h4><p>Standard duration for uncomplicated CAP?</p></div>`,
+hint_beginner:"Shorter courses now preferred",hint_advanced:"What about procalcitonin-guided duration?",
+question:{prompt:"Duration of antibiotics for uncomplicated CAP?",
+options:[{text:"Minimum 5 days; can stop when afebrile 48h and clinically stable; longer courses not better",correct:true},
+{text:"Always 10-14 days",correct:false},
+{text:"Until CXR clears",correct:false},
+{text:"7 days minimum for all",correct:false}],
+explanation:{correct:"5 days minimum if: afebrile 48+ hours, hemodynamically stable, tolerating PO, no complications. Studies show 5 days = 7-10 days for uncomplicated CAP.",incorrect:"Shorter courses (5 days) are now standard for uncomplicated CAP. CXR lags clinical improvement by weeks."},
+teaching:`<h4>CAP Duration</h4><p><strong>Minimum:</strong> 5 days</p><p><strong>Stop when:</strong> Afebrile 48h, stable, tolerating PO</p><p><strong>Longer if:</strong> Complications, slow response, specific pathogens (Legionella, Pseudomonas)</p>`,
+why_chain:[{q:"Why not treat until CXR clears?",a:"Radiographic resolution lags clinical improvement by weeks to months, especially in elderly. Treating to CXR clearance leads to unnecessary antibiotic exposure."}],points:10}},
+
+{title:"Severe CAP",content:`<div class="narrative"><p>Different patient: ICU admission with septic shock from pneumonia.</p></div><div class="socratic-prompt"><h4>Escalate Coverage</h4><p>What additional coverage for severe CAP?</p></div>`,
+hint_beginner:"Severe CAP needs broader coverage",hint_advanced:"What defines severe CAP?",
+question:{prompt:"What antibiotic changes for severe CAP requiring ICU?",
+options:[{text:"Beta-lactam + macrolide BOTH required (not FQ monotherapy); add MRSA coverage (vanc) and Pseudomonas coverage (pip-tazo) if risk factors",correct:true},
+{text:"Same as floor - FQ monotherapy OK",correct:false},
+{text:"Add antifungals empirically",correct:false},
+{text:"Broader coverage not needed",correct:false}],
+explanation:{correct:"Severe CAP: beta-lactam + macrolide required (FQ monotherapy not adequate). Add vancomycin if MRSA risk, broader gram-negative (pip-tazo, cefepime) if Pseudomonas risk.",incorrect:"Severe CAP needs dual therapy (beta-lactam + macrolide), not FQ monotherapy. Consider MRSA/Pseudomonas coverage based on risk factors."},
+teaching:`<h4>Severe CAP Antibiotics</h4><p><strong>Required:</strong> Beta-lactam + macrolide (both)</p><p><strong>Add if MRSA risk:</strong> Vancomycin or linezolid</p><p><strong>Add if Pseudomonas risk:</strong> Pip-tazo or cefepime</p>`,
+why_chain:[{q:"Why no FQ monotherapy in severe CAP?",a:"Higher mortality with FQ monotherapy in severe CAP. Dual therapy with beta-lactam + macrolide has mortality benefit, possibly from macrolide immunomodulation."}],points:15}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Original patient discharged after 3 days, completing 5-day course with levofloxacin.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>Summarize CAP management approach.</p></div>`,
+hint_beginner:"Diagnose, severity assess, cover bugs, short duration",hint_advanced:"What follow-up is needed?",
+question:{prompt:"What are the key CAP management principles?",
+options:[{text:"Clinical + radiographic diagnosis; CURB-65 for disposition; cover pneumococcus + atypicals; 5 days if uncomplicated; escalate for severe/risk factors",correct:true},
+{text:"Treat all CAP the same regardless of severity",correct:false},
+{text:"Always use broadest spectrum antibiotics",correct:false},
+{text:"10-14 days for all patients",correct:false}],
+explanation:{correct:"CAP approach: 1) Diagnose clinically + CXR, 2) Severity score + clinical judgment for disposition, 3) Cover typical + atypical, 4) 5 days if uncomplicated, 5) Escalate for severe/MRSA/Pseudomonas risk.",incorrect:"CAP management is tailored to severity and risk factors. Shorter courses preferred. Broad spectrum only when indicated."},
+teaching:`<h4>CAP Management Summary</h4><p>1. Diagnose: Clinical + CXR</p><p>2. Severity: CURB-65 + clinical judgment</p><p>3. Antibiotics: Cover typical + atypical</p><p>4. Duration: 5 days if uncomplicated</p><p>5. Escalate: Severe, MRSA/Pseudomonas risks</p>`,
+why_chain:[{q:"What follow-up needed?",a:"Repeat CXR in 6-8 weeks for smokers and age >50 to rule out underlying malignancy. Earlier if not improving."}],points:10}},
+        {title:"Clinical Integration",content:'<div class="narrative"><p>You synthesize all the clinical information to ensure optimal patient care.</p></div>',question:{prompt:"What principle is MOST important for excellent clinical outcomes?",options:[{text:"Integrating clinical presentation with evidence-based guidelines while reassessing response to treatment",correct:true},{text:"Following protocols exactly without clinical judgment",correct:false},{text:"Ordering comprehensive testing to avoid any missed diagnoses",correct:false},{text:"Making a diagnosis quickly and committing to it without reconsideration",correct:false}],explanation:{correct:"Excellent clinical care combines systematic assessment, evidence-based treatment, and ongoing reassessment. Guidelines inform but don't replace clinical reasoning.",incorrect:"Good clinical care requires flexibility, reassessment, and integration of guidelines with patient-specific factors."},teaching:'<h4>Clinical Reasoning</h4><ul><li>Systematic data gathering</li><li>Evidence-based management</li><li>Regular reassessment</li><li>Patient-centered communication</li></ul>',why_chain:[],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent pneumonia management!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp of CAP principles.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Review severity scoring and antibiotic selection.';}
+else{g='Keep Learning';clr='#ef4444';m='Focus on empiric coverage and duration.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Spinal Cord Compression - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-red-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🦴 Spinal Cord Compression</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-red-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-red-500 to-orange-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "Spinal Cord Compression",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "Malignant Spinal Cord Compression",
+            scenario: "A 68-year-old man with metastatic prostate cancer presents with 2 weeks of progressive mid-back pain that is worse when lying down and improves with standing. Over the past 3 days, he's developed leg weakness and difficulty walking.\n\nPMH: Prostate cancer diagnosed 3 years ago, on androgen deprivation therapy, known bone metastases\n\nVitals: Stable, afebrile\n\nExam:\n• Tenderness to percussion over T8-T10 spinous processes\n• Bilateral lower extremity weakness (4/5 hip flexors, 3/5 ankle dorsiflexion)\n• Sensory level at approximately T10 (decreased sensation below umbilicus)\n• Hyperreflexia in lower extremities, bilateral Babinski positive\n• Urinary retention (post-void residual 400mL)",
+            question: "What is the diagnosis and what is the most urgent next step?",
+            options: [
+                { id: "A", text: "Lumbar radiculopathy - MRI lumbar spine and NSAIDs", outcome: "Wrong localization and urgency", feedback: "This is NOT radiculopathy. The sensory level, bilateral weakness, hyperreflexia, and Babinski signs indicate SPINAL CORD compression, not nerve root. Also, the pain pattern (worse lying down) suggests malignancy.", points: 2, isOptimal: false },
+                { id: "B", text: "Malignant spinal cord compression - emergent MRI entire spine and high-dose dexamethasone", outcome: "Correct diagnosis and management", feedback: "Correct! This is metastatic spinal cord compression (MSCC) - an oncologic emergency. Emergent MRI of ENTIRE spine (30-40% have multiple levels) and immediate high-dose dexamethasone. Time to treatment determines neurological outcome.", points: 10, isOptimal: true },
+                { id: "C", text: "Epidural abscess - blood cultures, MRI, and IV antibiotics", outcome: "Less likely given history", feedback: "While epidural abscess is in the differential, he's afebrile with no infection source and has known metastatic cancer. The clinical picture strongly favors malignant compression. Start steroids while getting MRI.", points: 4, isOptimal: false },
+                { id: "D", text: "Schedule outpatient MRI and neurosurgery referral", outcome: "Dangerous delay", feedback: "This is an EMERGENCY. Delaying MRI and treatment by even hours can result in permanent paralysis. Patients ambulatory at diagnosis who are treated promptly usually remain ambulatory; those who wait often don't recover.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is MSCC so time-critical?", steps: ["Tumor compresses spinal cord directly or via vertebral collapse", "Compression causes edema, venous congestion, then ischemia", "Ischemia leads to irreversible neuronal death", "Neurological function at treatment start predicts outcome", "Ambulatory patients who receive prompt treatment usually stay ambulatory"] },
+            mechanism: { title: "Malignant Spinal Cord Compression", content: "EPIDEMIOLOGY:\n• Occurs in 5-10% of cancer patients\n• Most common: Lung, breast, prostate, myeloma, renal cell\n• Thoracic spine most common (60-70%)\n\nPATHOPHYSIOLOGY:\n• Direct tumor extension (most common)\n• Vertebral body collapse from metastasis\n• Epidural tumor growth\n• Rarely: Intramedullary metastasis\n\nCLINICAL FEATURES:\n• Back pain (90%) - often precedes neurological symptoms by weeks\n  - Worse lying down (venous engorgement)\n  - Better with standing\n  - Worse with Valsalva, cough\n• Weakness (75%)\n• Sensory changes with level\n• Autonomic dysfunction (bowel/bladder) - late finding\n• Upper motor neuron signs below lesion\n\nRED FLAGS FOR MSCC:\n• Known malignancy with new back pain\n• Pain worse when supine\n• Thoracic spine pain (rarely musculoskeletal)\n• Band-like pain around chest/abdomen\n• Neurological symptoms\n\nDIAGNOSIS:\n• MRI entire spine with contrast (gold standard)\n  - Image entire spine - 30-40% have multiple levels\n• CT myelography if MRI contraindicated\n\nTREATMENT:\n\nImmediate:\n• Dexamethasone 10-16mg IV bolus, then 4-6mg q6h\n• Reduces edema, may improve symptoms within hours\n\nDefinitive:\n• Radiation therapy (most common)\n• Surgery + radiation (if spinal instability, unknown primary, radioresistant tumor, or rapid neurological decline)\n• Surgery alone rarely indicated\n\nPROGNOSIS:\n• Ambulatory at diagnosis: 80-90% remain ambulatory\n• Paraparetic: 30-50% regain ambulation\n• Paraplegic: <10% regain ambulation\n• Bladder dysfunction: Often irreversible" },
+            pearl: "Back pain that's WORSE when lying down is a red flag for malignancy. Mechanical back pain is typically worse with activity and better with rest - the opposite pattern.",
+            pitfall: "Don't order just lumbar MRI for suspected cord compression. The thoracic spine is the most common site, and 30-40% have multiple levels. Image the ENTIRE spine."
+        },
+        {
+            id: 2,
+            title: "Cauda Equina Syndrome",
+            scenario: "A 45-year-old man presents with 3 days of severe low back pain radiating down both legs after lifting a heavy object. Today he noticed numbness in his 'saddle area' and had difficulty urinating.\n\nPMH: History of lumbar disc disease\n\nExam:\n• Severe distress from pain\n• Decreased sensation in perineum bilaterally ('saddle anesthesia')\n• Decreased anal tone on rectal exam\n• Bilateral lower extremity weakness, worse on right (2/5 ankle dorsiflexion)\n• Absent ankle reflexes bilaterally\n• Post-void residual: 600mL",
+            question: "What is the diagnosis and what distinguishes this from spinal cord compression?",
+            options: [
+                { id: "A", text: "Cauda equina syndrome - lower motor neuron signs because it affects nerve roots, not spinal cord", outcome: "Correct anatomical distinction", feedback: "Correct! The spinal cord ends at L1-L2; below this is the cauda equina (nerve roots). CES causes LOWER motor neuron signs (areflexia, flaccid weakness) vs spinal cord compression (UPPER motor neuron signs). Both are emergencies.", points: 10, isOptimal: true },
+                { id: "B", text: "Spinal cord compression at L4-L5 - causes the same upper motor neuron signs", outcome: "Anatomically incorrect", feedback: "The spinal cord ends at L1-L2. There is no spinal cord at L4-L5 to compress. Pathology at this level affects the cauda equina (nerve roots), causing LMN signs.", points: 3, isOptimal: false },
+                { id: "C", text: "Bilateral L5-S1 radiculopathy - conservative management appropriate", outcome: "Misses emergency", feedback: "The saddle anesthesia, bladder dysfunction, and decreased anal tone indicate cauda equina syndrome, not simple radiculopathy. This is a surgical emergency.", points: 1, isOptimal: false },
+                { id: "D", text: "Conus medullaris syndrome - same as cauda equina", outcome: "Similar but distinct", feedback: "Conus medullaris syndrome (cord compression at L1-L2) and CES can overlap but have subtle differences. Conus tends to have more UMN signs, symmetric presentation, and earlier bladder involvement. Both are emergencies.", points: 6, isOptimal: false }
+            ],
+            whyChain: { title: "WHY LMN signs in cauda equina?", steps: ["Spinal cord ends at L1-L2 vertebral level (conus medullaris)", "Below L1-L2, only nerve roots exist (cauda equina = 'horse's tail')", "Nerve roots are peripheral nerves → LMN when damaged", "LMN signs: Flaccid weakness, areflexia, fasciculations", "UMN signs: Spastic weakness, hyperreflexia, Babinski - require cord involvement"] },
+            mechanism: { title: "Cauda Equina Syndrome", content: "ANATOMY:\n• Spinal cord ends at L1-L2 (conus medullaris)\n• Cauda equina: L2-S5 nerve roots descending in spinal canal\n• Innervates lower limbs, bladder, bowel, sexual function, perineum\n\nCAUSES:\n• Massive disc herniation (most common) - usually L4-L5 or L5-S1\n• Spinal stenosis\n• Tumor\n• Trauma\n• Epidural abscess or hematoma\n\nCLASSIC FEATURES (Red Flags):\n• Saddle anesthesia (S2-S5 distribution)\n• Bladder dysfunction (retention > incontinence)\n• Bowel dysfunction (decreased tone, incontinence)\n• Sexual dysfunction\n• Bilateral leg weakness and/or pain\n• Bilateral sciatica\n• Lower motor neuron signs (areflexia, flaccid)\n\nCES VS CORD COMPRESSION:\n\nCauda Equina:\n• LMN signs (flaccid, areflexic)\n• Asymmetric often\n• Radicular pain pattern\n• Saddle anesthesia\n• Areflexic bladder\n\nSpinal Cord:\n• UMN signs (spastic, hyperreflexic, Babinski)\n• Often symmetric\n• Sensory level\n• Spastic bladder\n\nDIAGNOSIS:\n• Emergent MRI lumbar spine\n• Shows disc herniation, tumor, or other cause\n\nTREATMENT:\n• Surgical decompression within 24-48 hours\n• Earlier surgery = better outcomes\n• Bladder function often slowest to recover\n\nPROGNOSIS:\n• Surgery <24h: Best outcomes\n• Surgery 24-48h: Good outcomes possible\n• Surgery >48h: Often incomplete recovery\n• Bladder dysfunction: May be permanent even with early surgery" },
+            pearl: "Saddle anesthesia + urinary retention + bilateral leg symptoms = CES until proven otherwise. The triad should trigger emergent MRI.",
+            pitfall: "Don't wait for complete paralysis to act. 'Incomplete' CES (some preserved function) has better surgical outcomes than 'complete' CES. Early intervention is key."
+        },
+        {
+            id: 3,
+            title: "Epidural Abscess",
+            scenario: "A 52-year-old man with diabetes and recent MRSA skin infection presents with 5 days of severe neck pain and fever. Today he developed weakness in his arms and legs.\n\nPMH: Type 2 DM, IV drug use (remote), recent hospitalization for cellulitis\nVitals: Temp 102.4°F, HR 105, BP 110/70\n\nExam:\n• Appears ill, diaphoretic\n• Severe tenderness over cervical spine\n• Quadriparesis (3/5 all extremities)\n• Hyperreflexia, bilateral Babinski\n• Sensory level at C6\n\nLabs: WBC 18,000, ESR 95, CRP 12.5",
+            question: "What is the most likely diagnosis and immediate management?",
+            options: [
+                { id: "A", text: "Cervical disc herniation - schedule elective MRI", outcome: "Misses infection", feedback: "Fever, elevated WBC, ESR, CRP, and recent MRSA infection indicate INFECTION, not simple disc disease. This is spinal epidural abscess until proven otherwise.", points: 1, isOptimal: false },
+                { id: "B", text: "Spinal epidural abscess - emergent MRI, blood cultures, IV antibiotics, likely surgical drainage", outcome: "Correct diagnosis and management", feedback: "Correct! Classic triad (rarely complete): fever, back/neck pain, neurological deficits. Risk factors: diabetes, IVDU, recent infection. Management: emergent MRI, blood cultures, IV antibiotics (vancomycin + ceftriaxone), and urgent surgical consultation.", points: 10, isOptimal: true },
+                { id: "C", text: "Meningitis - lumbar puncture first", outcome: "Dangerous in this setting", feedback: "Do NOT do LP if spinal epidural abscess is suspected - you could seed the CSF and cause meningitis. MRI first to rule out epidural abscess, then LP if still needed.", points: 0, isOptimal: false },
+                { id: "D", text: "Transverse myelitis - start IV steroids", outcome: "Wrong diagnosis", feedback: "Transverse myelitis doesn't cause fever or elevated inflammatory markers. The infectious presentation (fever, elevated WBC/ESR/CRP, recent MRSA) indicates epidural abscess. Steroids without antibiotics would be harmful.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does epidural abscess cause cord compression?", steps: ["Bacteria seed epidural space (hematogenous spread or direct extension)", "Abscess forms and expands in confined space", "Direct compression of spinal cord", "Additionally: Vascular compromise from septic thrombophlebitis", "Inflammation and ischemia cause rapid neurological deterioration"] },
+            mechanism: { title: "Spinal Epidural Abscess", content: "EPIDEMIOLOGY:\n• Incidence increasing (more spinal procedures, immunocompromised patients)\n• Peak age 50-70 years\n• More common in thoracolumbar spine\n\nRISK FACTORS:\n• Diabetes mellitus (most common)\n• IV drug use\n• Immunocompromise\n• Spinal procedures/injections\n• Bacteremia from any source\n• Epidural catheter\n• Recent spine surgery\n\nMICROBIOLOGY:\n• Staphylococcus aureus (60-70%) - MRSA common\n• Gram-negative rods (especially in IVDU)\n• Streptococci\n• Rarely: TB, fungi\n\nCLASSIC TRIAD (only 10-15% have all three):\n1. Fever\n2. Back pain (focal, severe)\n3. Neurological deficits\n\nCLINICAL STAGES:\n1. Back pain (days to weeks)\n2. Radicular pain\n3. Weakness, sensory changes, bladder dysfunction\n4. Paralysis\n\nDIAGNOSIS:\n• MRI with gadolinium (gold standard)\n  - Shows epidural collection, enhancement\n• Blood cultures (positive in 60%)\n• Inflammatory markers elevated (ESR >20 in >95%)\n\nTREATMENT:\n\nAntibiotics:\n• Empiric: Vancomycin + ceftriaxone (or cefepime/meropenem)\n• Duration: 4-6 weeks IV, longer if vertebral osteomyelitis\n\nSurgery:\n• Urgent surgical decompression for:\n  - Neurological deficits\n  - Progressing symptoms\n  - Failure of medical therapy\n• May attempt medical management alone if:\n  - No neurological deficits\n  - Identified organism\n  - Able to monitor closely\n\nPROGNOSIS:\n• Neurological status at surgery predicts outcome\n• Paralysis >24-36 hours rarely improves\n• Mortality 5-20%\n• Early diagnosis crucial" },
+            pearl: "ESR >20 mm/hr has >95% sensitivity for spinal epidural abscess. A normal ESR essentially rules it out. But don't wait for ESR if clinical suspicion is high.",
+            pitfall: "Don't do lumbar puncture before imaging if epidural abscess is suspected. You risk seeding the subarachnoid space and causing meningitis. MRI first."
+        },
+        {
+            id: 4,
+            title: "Localizing the Lesion",
+            scenario: "Three patients present with weakness:\n\nPatient A: Right arm and leg weakness, hyperreflexia on right, Babinski positive on right, normal left side\n\nPatient B: Bilateral leg weakness with sensory level at T6, hyperreflexia in legs, bilateral Babinski, arms normal\n\nPatient C: Bilateral arm weakness (worse distally), NO leg weakness, absent arm reflexes, legs reflexes normal",
+            question: "Where is each lesion localized?",
+            options: [
+                { id: "A", text: "A: Right brain/left cord; B: Thoracic cord; C: Cervical cord", outcome: "Partially correct but C is wrong", feedback: "A and B are correct, but C has LMN signs in arms ONLY with normal legs. This suggests pathology at the level of the brachial plexus or cervical roots/anterior horn cells - not typical cord compression which would affect legs too.", points: 5, isOptimal: false },
+                { id: "B", text: "A: Left brain/right brainstem or high cervical cord; B: Thoracic cord; C: Bilateral brachial plexus or C5-T1 anterior horn", outcome: "Correct localization", feedback: "Correct! A: Unilateral UMN weakness = contralateral brain OR ipsilateral cord above decussation. B: Bilateral legs with level = thoracic cord. C: Bilateral arms with LMN signs, legs spared = brachial plexus or cervical enlargement pathology.", points: 10, isOptimal: true },
+                { id: "C", text: "A: Peripheral neuropathy; B: Lumbar cord; C: Cervical cord", outcome: "Multiple errors", feedback: "A has UMN signs (hyperreflexia, Babinski) - not peripheral. B has thoracic sensory level and normal arms. C's pattern doesn't fit typical cord compression.", points: 2, isOptimal: false },
+                { id: "D", text: "All three have spinal cord compression at different levels", outcome: "Doesn't account for findings", feedback: "Patient C's pattern (arms affected with LMN signs, legs completely normal) doesn't fit cord compression. Cervical cord compression would affect arms AND legs with UMN signs in legs.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does lesion location matter?", steps: ["Different locations produce different patterns of weakness", "UMN signs = lesion above the synapse (brain or cord)", "LMN signs = lesion at or below the synapse (nerve root, peripheral nerve, muscle)", "Sensory level localizes cord lesion", "Pattern of involvement (arms vs legs, unilateral vs bilateral) further localizes"] },
+            mechanism: { title: "Localizing Spinal Cord Lesions", content: "UPPER VS LOWER MOTOR NEURON:\n\nUMN (corticospinal tract):\n• Weakness\n• Hyperreflexia\n• Spasticity\n• Babinski positive\n• No atrophy (early)\n• No fasciculations\n\nLMN (anterior horn, nerve root, peripheral nerve):\n• Weakness\n• Hyporeflexia/areflexia\n• Flaccidity\n• Babinski negative\n• Atrophy\n• Fasciculations\n\nCORD COMPRESSION PATTERNS:\n\nCervical (above C5):\n• Quadriparesis (all four limbs UMN)\n• Respiratory compromise possible\n• Sensory level in upper chest/neck\n\nCervical enlargement (C5-T1):\n• Arms: LMN at level (areflexia, atrophy)\n• Legs: UMN below level (hyperreflexia, Babinski)\n• This is because anterior horn cells for arms are at C5-T1\n\nThoracic cord:\n• Arms spared (normal)\n• Legs: UMN (bilateral hyperreflexia, Babinski)\n• Sensory level on trunk\n\nLumbar enlargement (L1-S2)/Conus:\n• Arms spared\n• Legs: Mixed UMN/LMN signs\n• Early bladder involvement\n\nCauda equina (below L1-L2):\n• Arms spared\n• Legs: Pure LMN (areflexia, flaccid)\n• Saddle anesthesia\n• Bladder/bowel dysfunction\n\nHEMISECTION (Brown-Séquard):\n• Ipsilateral: Weakness (UMN), proprioception loss\n• Contralateral: Pain/temperature loss\n• Rare in pure form" },
+            pearl: "The cervical enlargement is special: it contains the LMN neurons for the arms. Compression here causes LMN signs in arms (at the level) PLUS UMN signs in legs (below the level).",
+            pitfall: "Don't assume all weakness is from one lesion. A patient with LMN arms and UMN legs could have cervical cord compression OR two separate lesions (peripheral neuropathy + thoracic cord lesion)."
+        },
+        {
+            id: 5,
+            title: "Steroids in Spinal Cord Compression",
+            scenario: "You've ordered emergent MRI for a patient with metastatic lung cancer and suspected spinal cord compression. While waiting for MRI, you consider starting steroids.\n\nThe patient has:\n• Bilateral leg weakness for 48 hours\n• Pain for 3 weeks\n• Can still take a few steps with assistance\n• No contraindications to steroids",
+            question: "What is the role and dosing of corticosteroids in malignant spinal cord compression?",
+            options: [
+                { id: "A", text: "Steroids are contraindicated - they mask symptoms and delay definitive treatment", outcome: "Incorrect - steroids are standard of care", feedback: "Steroids are a CORNERSTONE of MSCC treatment. They reduce vasogenic edema around the tumor, often providing rapid improvement. They don't delay definitive care - they're started immediately alongside planning for radiation/surgery.", points: 0, isOptimal: false },
+                { id: "B", text: "Start dexamethasone 10-16mg IV bolus now, then 4-6mg every 6 hours; this reduces edema and may improve function", outcome: "Correct standard approach", feedback: "Correct! High-dose dexamethasone is started immediately upon suspicion of MSCC - don't wait for MRI confirmation. It reduces vasogenic edema and can improve symptoms within hours. Some centers use higher doses (96mg/day) for severe deficits.", points: 10, isOptimal: true },
+                { id: "C", text: "Wait for MRI confirmation before starting steroids", outcome: "Delays beneficial treatment", feedback: "Don't wait! If clinical suspicion is high, start steroids immediately. The benefit of early treatment outweighs the small risk of starting steroids empirically. You're not committing to long-term steroids.", points: 3, isOptimal: false },
+                { id: "D", text: "Low-dose prednisone 10mg daily is sufficient", outcome: "Inadequate dosing", feedback: "Low-dose oral prednisone is insufficient. MSCC requires HIGH-DOSE dexamethasone (chosen for minimal mineralocorticoid effects). The standard is 10-16mg IV bolus followed by 4-6mg q6h.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY dexamethasone specifically?", steps: ["Reduces vasogenic edema around tumor rapidly", "Has potent anti-inflammatory effect", "Minimal mineralocorticoid activity (less fluid retention)", "Long half-life allows q6h dosing", "Can improve symptoms within hours while awaiting definitive treatment"] },
+            mechanism: { title: "Corticosteroids in MSCC", content: "MECHANISM OF BENEFIT:\n• Reduces vasogenic edema around tumor\n• Decreases inflammation\n• May have direct oncolytic effect on some tumors (lymphoma, myeloma)\n• Provides analgesia\n\nDOSING REGIMENS:\n\nModerate dose (most common):\n• Dexamethasone 10mg IV bolus\n• Then 4mg IV/PO q6h\n• Used for mild-moderate deficits\n\nHigh dose:\n• Dexamethasone 96mg IV bolus\n• Then 24mg q6h x 3 days, then taper\n• Used for severe/rapidly progressive deficits\n• Higher side effect rate\n\nTAPERING:\n• After definitive treatment (radiation/surgery) begins\n• Reduce dose every 3-4 days as tolerated\n• Watch for symptom recurrence\n\nSIDE EFFECTS:\n• Hyperglycemia (especially in diabetics)\n• GI bleeding (add PPI prophylaxis)\n• Infection risk\n• Psychiatric effects (insomnia, agitation, psychosis)\n• Proximal myopathy (with prolonged use)\n• Adrenal suppression\n\nWHEN TO START:\n• Immediately upon clinical suspicion\n• Don't wait for MRI if suspicion is high\n• Can always stop if diagnosis not confirmed\n\nEVIDENCE:\n• Clear benefit for MSCC\n• Less clear for traumatic cord injury (not recommended)\n• Reduces pain and may improve function\n• Doesn't replace need for definitive treatment" },
+            pearl: "Pain improvement often occurs before strength improvement with steroids. If the patient's pain gets significantly better, it suggests the steroids are working on the tumor edema.",
+            pitfall: "Don't use steroids as a reason to delay definitive treatment. Steroids buy time and improve symptoms, but radiation or surgery is still needed. They're a bridge, not the destination."
+        },
+        {
+            id: 6,
+            title: "Transverse Myelitis",
+            scenario: "A 32-year-old woman presents with rapidly progressive weakness in both legs over 48 hours. She had a 'flu-like' illness 2 weeks ago.\n\nPMH: None\nVitals: Afebrile, stable\n\nExam:\n• Bilateral leg weakness (2/5 throughout)\n• Sensory level at T4 (decreased all modalities)\n• Hyperreflexia in legs, bilateral Babinski\n• Urinary retention\n• Arms and cranial nerves normal\n\nMRI spine: T2 hyperintense lesion spanning T2-T6, no enhancement initially\nMRI brain: Normal\nCSF: Mild pleocytosis (50 WBC, lymphocyte predominant), elevated protein, negative cultures",
+            question: "What is the diagnosis and what workup is essential?",
+            options: [
+                { id: "A", text: "Guillain-Barré syndrome - start IVIG", outcome: "Wrong pattern", feedback: "GBS causes LMN signs (areflexia, flaccid weakness) and typically ascending pattern. This patient has UMN signs (hyperreflexia, Babinski) and a cord lesion on MRI - this is a myelopathy, not polyradiculopathy.", points: 2, isOptimal: false },
+                { id: "B", text: "Acute transverse myelitis - check for underlying cause (NMO, MS, infection, autoimmune)", outcome: "Correct diagnosis and approach", feedback: "Correct! This is acute transverse myelitis (ATM): inflammatory myelopathy with bilateral signs, sensory level, and sphincter dysfunction. Must determine etiology: test for NMO-IgG, MS (brain MRI, oligoclonal bands), infectious causes, autoimmune conditions.", points: 10, isOptimal: true },
+                { id: "C", text: "Spinal cord infarction - supportive care only", outcome: "Different presentation", feedback: "Spinal cord infarction is HYPERACUTE (seconds to minutes, not 48 hours) and classically spares posterior columns (proprioception). This subacute presentation with all modalities affected is more consistent with inflammation.", points: 4, isOptimal: false },
+                { id: "D", text: "Viral myelitis - acyclovir empirically", outcome: "Incomplete approach", feedback: "While viral myelitis is possible (post-infectious timing), you need to test for treatable causes. NMO-IgG and MS workup are essential because they change long-term management. Empiric acyclovir might be reasonable while awaiting results.", points: 5, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does etiology matter in transverse myelitis?", steps: ["Idiopathic TM often has good recovery and may not recur", "MS presents with TM in 20% of cases - needs disease-modifying therapy", "NMO (neuromyelitis optica) has high recurrence and disability without treatment", "Infectious causes need specific antimicrobials", "Treatment and prognosis depend on underlying cause"] },
+            mechanism: { title: "Transverse Myelitis", content: "DEFINITION:\n• Inflammatory disorder causing spinal cord dysfunction\n• Bilateral (not necessarily symmetric) signs\n• Clearly defined sensory level\n• Progression over hours to 4 weeks\n\nETIOLOGIES:\n\nIdiopathic (~30%):\n• Often post-infectious\n• Usually monophasic\n• Variable recovery\n\nMultiple Sclerosis (~20%):\n• Usually partial myelitis (<2 segments)\n• Brain MRI often abnormal\n• Oligoclonal bands in CSF\n\nNeuromyelitis Optica Spectrum Disorder:\n• Longitudinally extensive (≥3 segments)\n• NMO-IgG (aquaporin-4 antibody) positive\n• High recurrence rate\n• Optic neuritis common\n\nInfectious:\n• Viral (HSV, VZV, CMV, EBV, HIV, enteroviruses)\n• Bacterial (Lyme, syphilis, TB, Mycoplasma)\n\nAutoimmune:\n• SLE, Sjögren's, sarcoidosis\n• Anti-MOG antibody disease\n\nWORKUP:\n• MRI spine with contrast\n• MRI brain (for MS)\n• CSF: Cell count, protein, glucose, oligoclonal bands, cultures, cytology\n• NMO-IgG (aquaporin-4 antibody)\n• MOG antibody\n• ANA, SSA/SSB, ACE level\n• HIV, syphilis, Lyme\n• Consider viral PCRs\n\nTREATMENT:\n• High-dose IV methylprednisolone (1g/day x 3-5 days)\n• Plasma exchange if no response to steroids\n• Treat underlying cause if identified\n• Long-term immunotherapy if MS or NMO\n\nPROGNOSIS:\n• 1/3 good recovery, 1/3 fair, 1/3 poor\n• Poor prognostic factors: Rapid onset, severe deficits, spinal shock, longitudinally extensive" },
+            pearl: "Longitudinally extensive transverse myelitis (≥3 vertebral segments on MRI) is characteristic of NMO, not MS. This distinction is critical because NMO requires different treatment.",
+            pitfall: "Don't assume idiopathic TM - always check for NMO-IgG. Missing NMO has serious consequences because it has high recurrence without immunosuppression and is often more aggressive than MS."
+        },
+        {
+            id: 7,
+            title: "Central Cord Syndrome",
+            scenario: "A 72-year-old man fell forward, hitting his forehead on the ground. He has immediate onset of weakness, worse in his arms than legs.\n\nPMH: Cervical spondylosis (known moderate spinal stenosis)\n\nExam:\n• Bilateral arm weakness (1/5 deltoids, 2/5 grip) - can't lift arms\n• Bilateral leg weakness (4/5 hip flexors, 4/5 ankle dorsiflexion) - can walk with assistance\n• 'Cape-like' sensory loss (shoulders and upper arms)\n• Bladder dysfunction\n\nCT C-spine: Severe degenerative changes, no fracture\nMRI C-spine: T2 signal change within central cord C3-C6, no disc herniation",
+            question: "What is the diagnosis and mechanism?",
+            options: [
+                { id: "A", text: "Complete spinal cord injury - arms and legs should be equally affected", outcome: "Wrong pattern", feedback: "Complete cord injury affects arms and legs equally. This patient has arms MUCH WORSE than legs - a characteristic pattern of central cord syndrome.", points: 2, isOptimal: false },
+                { id: "B", text: "Central cord syndrome - hyperextension injury in stenotic canal causes central cord contusion with arm worse than leg weakness", outcome: "Correct diagnosis and mechanism", feedback: "Correct! Classic central cord syndrome: hyperextension in elderly with pre-existing stenosis → cord compression → central cord injury → arms worse than legs (motor tracts for arms are more medial). Most common incomplete cord injury.", points: 10, isOptimal: true },
+                { id: "C", text: "Bilateral brachial plexus injury - explains arm weakness with leg sparing", outcome: "Doesn't explain all findings", feedback: "Brachial plexus injury would cause LMN signs in arms only. This patient has UMN signs (hyperreflexia likely) and cord signal on MRI. Also, bilateral brachial plexus from a forehead strike is anatomically unlikely.", points: 3, isOptimal: false },
+                { id: "D", text: "Anterior cord syndrome - from vascular injury", outcome: "Different pattern", feedback: "Anterior cord syndrome causes weakness AND loss of pain/temperature with PRESERVED proprioception (posterior columns spared). This patient has 'cape-like' sensory loss affecting all modalities in a different pattern.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY are arms worse than legs in central cord syndrome?", steps: ["Motor tracts (corticospinal) are somatotopically organized in cord", "Arm fibers run more medially (centrally) in the lateral corticospinal tract", "Leg fibers run more laterally (peripherally)", "Central cord injury damages medial fibers more than lateral", "Result: Arms (central fibers) worse than legs (peripheral fibers)"] },
+            mechanism: { title: "Incomplete Spinal Cord Syndromes", content: "CENTRAL CORD SYNDROME:\n• Most common incomplete injury\n• Mechanism: Hyperextension with pre-existing stenosis\n• Arms >> legs weakness\n• Often elderly with cervical spondylosis\n• Variable sensory loss\n• Bladder dysfunction common\n• Prognosis: Fair - legs recover first, hands last\n\nANTERIOR CORD SYNDROME:\n• Mechanism: Flexion injury, anterior spinal artery occlusion\n• Complete motor loss below level\n• Loss of pain and temperature\n• PRESERVED proprioception and vibration (posterior columns)\n• Worst prognosis of incomplete injuries\n\nBROWN-SÉQUARD SYNDROME (Hemisection):\n• Usually penetrating trauma\n• Ipsilateral: Motor loss, proprioception loss\n• Contralateral: Pain/temperature loss\n• Best prognosis of incomplete injuries\n\nPOSTERIOR CORD SYNDROME:\n• Rare\n• Loss of proprioception and vibration\n• Motor preserved\n• Causes: B12 deficiency, tabes dorsalis, tumors\n\nCONUS MEDULLARIS SYNDROME:\n• Injury at cord termination (L1-L2)\n• Saddle anesthesia\n• Bladder/bowel dysfunction\n• Variable lower extremity findings\n• Often symmetric\n\nCAUDA EQUINA SYNDROME:\n• Below cord termination (nerve roots)\n• LMN signs (areflexic, flaccid)\n• Often asymmetric\n• Saddle anesthesia\n• Bladder/bowel dysfunction" },
+            pearl: "In central cord syndrome, hands recover LAST. The patient may regain walking ability but still struggle with fine motor tasks like buttoning shirts.",
+            pitfall: "Don't miss central cord syndrome in elderly falls. A 'simple fall' in someone with cervical stenosis can cause significant cord injury even without fracture. Low threshold for MRI."
+        },
+        {
+            id: 8,
+            title: "Vertebral Osteomyelitis",
+            scenario: "A 60-year-old man with diabetes presents with 6 weeks of progressive low back pain. No neurological symptoms yet. He had a UTI treated 2 months ago.\n\nPMH: Type 2 DM, recurrent UTIs\nVitals: Temp 99.5°F, otherwise stable\n\nExam:\n• Severe tenderness over L3-L4 spinous processes\n• No neurological deficits\n• Full strength, normal reflexes, intact sensation\n\nLabs: WBC 11,000, ESR 85, CRP 8.5\nMRI lumbar spine: T1 hypointense, T2 hyperintense signal in L3 and L4 vertebral bodies with disc space involvement and paravertebral enhancement",
+            question: "What is the diagnosis and management approach?",
+            options: [
+                { id: "A", text: "Degenerative disc disease - conservative management with NSAIDs", outcome: "Misses infection", feedback: "Degenerative disease doesn't cause fever, elevated ESR/CRP, or the MRI pattern described (which shows infection crossing the disc space). This is vertebral osteomyelitis.", points: 1, isOptimal: false },
+                { id: "B", text: "Vertebral osteomyelitis/discitis - blood cultures, consider biopsy for culture, prolonged IV antibiotics, monitor for neurological changes", outcome: "Correct approach", feedback: "Correct! This is pyogenic vertebral osteomyelitis. Diagnosis: blood cultures (positive in ~50%), consider CT-guided biopsy for culture. Treatment: 6+ weeks of IV antibiotics. Surgery only if abscess, instability, or neurological compromise.", points: 10, isOptimal: true },
+                { id: "C", text: "Metastatic spine disease - oncology referral for staging", outcome: "Different MRI pattern", feedback: "Metastatic disease typically SPARES the disc space and shows multiple lesions. This MRI shows disc space involvement (infection crosses disc), which is characteristic of osteomyelitis, not metastasis.", points: 3, isOptimal: false },
+                { id: "D", text: "Emergent surgical decompression", outcome: "No neurological compromise", feedback: "He has no neurological deficits. Surgery is reserved for abscess formation, spinal instability, neurological compromise, or failure of medical therapy. This can likely be managed medically.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does infection cross the disc space?", steps: ["Adults: Disc is avascular, but vertebral end plates have vascular supply", "Bacteria seed vertebral body via hematogenous spread", "Infection spreads across end plate to disc space", "Then to adjacent vertebral body", "This 'disc space involvement' distinguishes infection from tumor (which spares disc)"] },
+            mechanism: { title: "Vertebral Osteomyelitis (Spondylodiscitis)", content: "PATHOPHYSIOLOGY:\n• Usually hematogenous spread\n• Sources: UTI, skin, endocarditis, dental\n• Lumbar spine most common (>50%)\n\nRISK FACTORS:\n• Diabetes mellitus\n• IV drug use\n• Immunocompromise\n• Indwelling catheters\n• Recent spine procedure\n• Endocarditis\n\nMICROBIOLOGY:\n• Staphylococcus aureus (50-60%)\n• Gram-negative rods (UTI source)\n• Streptococci\n• TB (Pott's disease) - consider if risk factors\n• Brucella (endemic areas, animal exposure)\n\nCLINICAL FEATURES:\n• Insidious onset back pain (weeks to months)\n• Fever (often low-grade or absent)\n• Localized tenderness\n• Neurological deficits if epidural extension\n\nDIAGNOSIS:\n\nLab:\n• Elevated ESR (>90% sensitive), CRP\n• WBC may be normal or mildly elevated\n• Blood cultures (positive ~50%)\n\nImaging:\n• MRI with gadolinium (gold standard)\n  - T1 low, T2 high in vertebral bodies\n  - Disc space involvement (key finding)\n  - Enhancement\n• CT-guided biopsy if blood cultures negative\n\nMRI VS TUMOR:\n• Infection: Crosses disc space, involves 2 vertebrae + disc\n• Tumor: Spares disc, often multiple levels, posterior elements\n\nTREATMENT:\n\nMedical:\n• IV antibiotics x 6 weeks minimum (often 8-12)\n• Based on culture or empiric (vancomycin + ceftriaxone)\n• Monitor ESR/CRP for response\n\nSurgical indications:\n• Epidural abscess with neurological deficit\n• Spinal instability\n• Progressive deformity\n• Failure of medical therapy\n• Need for tissue diagnosis\n\nFOLLOW-UP:\n• Repeat MRI at 4-6 weeks may show 'paradoxical worsening' before improvement\n• Follow inflammatory markers" },
+            pearl: "Disc space involvement on MRI = infection. Tumors SPARE the disc space because the avascular disc doesn't support tumor growth. This is one of the most useful radiographic distinctions.",
+            pitfall: "Don't stop antibiotics early because the patient feels better. Vertebral osteomyelitis requires at least 6 weeks of therapy. Stopping early leads to relapse."
+        },
+        {
+            id: 9,
+            title: "Spinal Cord Infarction",
+            scenario: "A 65-year-old man is recovering from abdominal aortic aneurysm repair. Postoperatively, he awakes and cannot move his legs.\n\nExam:\n• Complete paraplegia (0/5 bilateral)\n• Absent lower extremity reflexes (spinal shock)\n• Loss of pain and temperature sensation below T8\n• PRESERVED proprioception and vibration in legs\n• Urinary retention",
+            question: "What syndrome is this and what is the mechanism?",
+            options: [
+                { id: "A", text: "Complete spinal cord transection - all modalities should be lost", outcome: "Posterior columns preserved", feedback: "Complete transection would affect ALL modalities including proprioception. The preservation of proprioception and vibration indicates posterior column sparing - this is anterior cord syndrome from spinal cord infarction.", points: 4, isOptimal: false },
+                { id: "B", text: "Anterior spinal artery syndrome - aortic surgery compromised spinal cord blood supply via radicular arteries", outcome: "Correct diagnosis and mechanism", feedback: "Correct! The anterior spinal artery (supplies anterior 2/3 of cord) can be compromised during aortic surgery when radicular arteries (especially artery of Adamkiewicz) are interrupted. Pattern: motor loss + pain/temp loss + preserved proprioception/vibration.", points: 10, isOptimal: true },
+                { id: "C", text: "Epidural hematoma from anticoagulation - needs emergent surgical evacuation", outcome: "Different pattern", feedback: "Epidural hematoma causes complete cord compression (all modalities affected). The selective posterior column sparing here points to anterior spinal artery syndrome, not mechanical compression.", points: 4, isOptimal: false },
+                { id: "D", text: "Central cord syndrome - expected after aneurysm repair", outcome: "Wrong pattern and setting", feedback: "Central cord syndrome affects arms more than legs (from hyperextension injury with stenosis). This patient has leg-only involvement with posterior column sparing - anterior cord syndrome from vascular compromise.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY are posterior columns spared?", steps: ["Anterior spinal artery supplies anterior 2/3 of cord (motor, spinothalamic)", "Posterior spinal arteries supply posterior 1/3 (posterior columns)", "These have separate vascular supplies with some redundancy in posterior circulation", "Anterior spinal artery is single, fed by radicular arteries (Adamkiewicz from aorta)", "Aortic surgery can interrupt anterior supply while posterior supply from vertebral arteries is preserved"] },
+            mechanism: { title: "Spinal Cord Vascular Anatomy and Infarction", content: "VASCULAR ANATOMY:\n\nAnterior spinal artery (single):\n• Supplies anterior 2/3 of cord\n• Includes: Motor (corticospinal), spinothalamic (pain/temp)\n• Fed by radicular arteries\n• Artery of Adamkiewicz: Major feeder at T9-L2 (usually left)\n\nPosterior spinal arteries (paired):\n• Supply posterior 1/3 of cord\n• Includes: Posterior columns (proprioception, vibration)\n• More collaterals, less vulnerable\n\nANTERIOR SPINAL ARTERY SYNDROME:\n\nCauses:\n• Aortic surgery/dissection (most common)\n• Aortic cross-clamping\n• Systemic hypotension\n• Atherosclerosis\n• Vasculitis\n• Fibrocartilaginous embolism (disc material)\n\nClinical features:\n• Acute onset (seconds to minutes)\n• Paraplegia or quadriplegia\n• Loss of pain and temperature below level\n• PRESERVED proprioception and vibration\n• Bladder/bowel dysfunction\n• Initial flaccidity (spinal shock), later spasticity\n\nDiagnosis:\n• MRI: T2 hyperintensity, 'owl eye' appearance (bilateral anterior horn involvement)\n• CT angiogram to assess aorta if not post-surgical\n\nTreatment:\n• Supportive care\n• Optimize spinal cord perfusion (MAP goals)\n• Treat underlying cause\n• No proven acute treatment\n• Prognosis: Generally poor for motor recovery\n\nPREVENTION:\n• Spinal cord monitoring during aortic surgery\n• CSF drainage during high-risk procedures\n• Staged aortic repair\n• Maintaining perfusion pressure" },
+            pearl: "The 'owl eyes' sign on axial MRI (bilateral anterior horn hyperintensity) is characteristic of anterior spinal artery infarction affecting the watershed zone of the anterior horns.",
+            pitfall: "Don't assume cord dysfunction after aortic surgery is temporary. Anterior spinal artery syndrome has poor prognosis for motor recovery. Early recognition allows optimization of perfusion pressure."
+        },
+        {
+            id: 10,
+            title: "Putting It Together: Spinal Emergency Triage",
+            scenario: "Four patients present with new neurological deficits:\n\n• Patient A: Known prostate cancer, 2-week back pain, progressive leg weakness over 3 days, can still stand\n• Patient B: Diabetic, fever 102°F, back pain x 1 week, now quadriparetic, ESR 110\n• Patient C: Healthy 25-year-old, bilateral leg weakness over 24 hours after viral illness, no fever, hyperreflexic\n• Patient D: Post-AAA repair day 1, woke with paraplegia, preserved proprioception",
+            question: "Match each patient with their most likely diagnosis and prioritize:",
+            options: [
+                { id: "A", text: "All need emergent MRI and can be worked up simultaneously", outcome: "True but misses priorities", feedback: "While all need urgent MRI, there are differences in urgency and management. Epidural abscess (B) needs antibiotics NOW. MSCC (A) needs steroids NOW. Spinal cord infarction (D) has no specific treatment.", points: 5, isOptimal: false },
+                { id: "B", text: "B (abscess) and A (MSCC) need immediate steroids/antibiotics; D (infarct) is irreversible; C (myelitis) needs workup", outcome: "Correct prioritization and diagnosis", feedback: "Correct! B: Epidural abscess (fever, diabetes, high ESR) - emergent antibiotics and likely surgery. A: MSCC - immediate steroids. D: Anterior cord infarction - supportive care, likely irreversible. C: Transverse myelitis - steroids and workup for cause.", points: 10, isOptimal: true },
+                { id: "C", text: "C is most urgent because youngest patient; D is least urgent because post-surgical", outcome: "Age doesn't determine urgency", feedback: "Age doesn't determine urgency - acuity and treatability do. The post-surgical patient (D) had an acute infarct that's largely irreversible, while the young patient (C) has a subacute process that allows time for workup.", points: 3, isOptimal: false },
+                { id: "D", text: "D needs emergent return to OR for surgical exploration", outcome: "Incorrect management of infarct", feedback: "Spinal cord infarction from aortic surgery is vascular, not compressive. Return to OR wouldn't help - the damage is ischemic. Management is supportive with perfusion pressure optimization.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY prioritize differently?", steps: ["Epidural abscess: Treatable infection that can worsen rapidly - minutes matter", "MSCC: Tumor causing edema - steroids help, time to radiation/surgery matters", "Transverse myelitis: Inflammatory - steroids help, but hours to workup okay", "Spinal cord infarction: Ischemic injury largely complete - supportive care only"] },
+            mechanism: { title: "Spinal Emergency Summary", content: "MALIGNANT SPINAL CORD COMPRESSION:\n• Risk: Known cancer + back pain + neurological symptoms\n• Action: Steroids + MRI + radiation/surgery planning\n• Key: Ambulatory status at treatment predicts outcome\n\nEPIDURAL ABSCESS:\n• Risk: Fever + back pain + neurological symptoms (especially with DM, IVDU)\n• Action: Blood cultures + antibiotics + MRI + surgical consultation\n• Key: Don't wait for culture results to treat\n\nCAUDA EQUINA SYNDROME:\n• Risk: Saddle anesthesia + bladder dysfunction + bilateral sciatica\n• Action: Emergent MRI + surgical decompression\n• Key: Surgery within 24-48 hours for best outcomes\n\nTRANSVERSE MYELITIS:\n• Risk: Post-infectious, bilateral cord syndrome, no compression on MRI\n• Action: Steroids + workup for MS/NMO/infection\n• Key: Check NMO-IgG - changes long-term management\n\nSPINAL CORD INFARCTION:\n• Risk: Post-aortic surgery, sudden onset, anterior cord pattern\n• Action: Supportive care, optimize perfusion\n• Key: Prognosis generally poor for motor recovery\n\nCENTRAL CORD SYNDROME:\n• Risk: Elderly + fall + cervical stenosis\n• Action: Imaging, often conservative management\n• Key: Arms worse than legs, hands recover last\n\nWHEN IN DOUBT:\n• Treat as compressive until proven otherwise\n• Start steroids if any suspicion of MSCC\n• Start antibiotics if any suspicion of infection\n• Get emergent MRI" },
+            pearl: "When in doubt, empirically treat for the most treatable condition. Steroids for suspected MSCC and antibiotics for suspected abscess are low-risk and can be stopped if wrong.",
+            pitfall: "Don't let a negative CT reassure you. CT misses most spinal cord pathology. MRI is the gold standard for cord compression, abscess, and myelitis."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+function init() { caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); }); renderStage(currentStage); }
+function renderStage(stageNum) { const stage = caseData.stages[stageNum - 1]; if (!stage) { renderSummary(); return; } const answered = answeredStages[stageNum]; document.getElementById('gameContainer').innerHTML = `<div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden"><div class="bg-gradient-to-r from-red-600 to-orange-600 text-white p-6"><span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span><h2 class="text-2xl font-bold mt-3">${stage.title}</h2></div><div class="p-6"><div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div><div class="bg-red-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-red-800 mb-2">🤔 Clinical Question</h3><p class="text-red-900 font-medium">${stage.question}</p></div><div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-red-300 hover:bg-red-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div></button>`).join('')}</div>${answered ? renderFeedback(stage, answered) : ''}</div></div>`; updateProgress(); }
+function renderFeedback(stage, answered) { const selected = stage.options.find(o => o.id === answered.selected); const optimal = stage.options.find(o => o.isOptimal); return `<div class="mt-6 space-y-4"><div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5"><h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4><p class="text-gray-700">${selected.feedback}</p></div>${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}<div class="why-chain rounded-xl p-5"><h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div><div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div><div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div><button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button></div>`; }
+function selectOption(stageNum, optionId) { if (answeredStages[stageNum]) return; const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId); answeredStages[stageNum] = { selected: optionId, points: option.points }; totalScore += option.points; renderStage(stageNum); }
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() { const pct = Math.round(totalScore / maxPossibleScore * 100); document.getElementById('gameContainer').classList.add('hidden'); document.getElementById('summaryPanel').classList.remove('hidden'); document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ MSCC: Pain worse lying down + cancer = red flag; MRI entire spine + dexamethasone</li><li>✓ Cauda equina: Saddle anesthesia + bladder dysfunction → LMN signs (cord ends at L1-L2)</li><li>✓ Epidural abscess: Fever + diabetes + neuro deficits; ESR >20 has 95% sensitivity</li><li>✓ UMN = cord or above; LMN = nerve root or below</li><li>✓ Transverse myelitis: Check NMO-IgG - changes prognosis and treatment</li><li>✓ Central cord: Arms >> legs weakness; hands recover last</li><li>✓ Anterior cord (infarct): Motor + pain/temp lost, proprioception PRESERVED</li><li>✓ Infection crosses disc space; tumor spares it</li><li>✓ When in doubt: Start steroids (MSCC) and antibiotics (abscess) empirically</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`; }
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Spinal Cord</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="tbi-icp-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
+            <a href="sah-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sah</a>
+            <a href="febrile-seizure-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Febrile Seizure</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211" target="_blank" class="text-blue-600 hover:underline">AHA Stroke Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Stroke</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Spinal Cord Compression Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>
