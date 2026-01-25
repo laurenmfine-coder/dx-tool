@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ectopic Pregnancy - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #be185d 0%, #ec4899 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #f9a8d4; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fbcfe8; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ec4899; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(236,72,153,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fbcfe8; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #ec4899, #be185d); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ec4899, #f9a8d4); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #f9a8d4; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK539860/" target="_blank" rel="noopener">Ectopic Pregnancy - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"Pelvic Pain in Early Pregnancy",content:'<div class="narrative"><p>A <span class="highlight">28-year-old</span> presents with abdominal pain and vaginal spotting. LMP 6 weeks ago. History of <span class="critical">PID and prior ectopic</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 98, BP 118/72<br><strong>β-hCG:</strong> Positive</p></div><div class="alert-box"><div class="alert-title">🚨 Ectopic Until Proven Otherwise!</div><p>Any reproductive-age woman with pain + positive test = rule out ectopic.</p></div>',question:{prompt:"Most common location for ectopic pregnancy?",options:[{text:"Ovary",correct:false},{text:"Fallopian tube (ampulla)",correct:true},{text:"Cervix",correct:false},{text:"Abdominal cavity",correct:false}],explanation:{correct:"Correct! 95% of ectopics are tubal, with the ampulla being the most common site.",incorrect:"Fallopian tube = 95% of ectopics. Ampulla is the most common segment."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📍 Ectopic Locations</div><div class="pathway">Fallopian tube: 95%\n  • Ampulla: 70%\n  • Isthmus: 12%\n  • Interstitial: 2-4% (most dangerous!)\nOvary: 1-3%\nCervix: <1%</div></div>',why_chain:[],points:10}},
+        {title:"Risk Factors",content:'<div class="narrative"><p>This patient has two major risk factors: prior PID and prior ectopic pregnancy.</p></div>',question:{prompt:"What is the STRONGEST risk factor for ectopic?",options:[{text:"Smoking",correct:false},{text:"Prior ectopic pregnancy",correct:true},{text:"IUD use",correct:false},{text:"Age >35",correct:false}],explanation:{correct:"Correct! Prior ectopic increases risk 10-fold. Other major factors: PID, tubal surgery, IUD in place.",incorrect:"Prior ectopic = strongest risk factor (10x increased risk)."},teaching:'<h4>Risk Factors</h4><table class="comparison-table"><tr><th>Factor</th><th>Risk</th></tr><tr style="background:rgba(251,191,36,0.2);"><td>Prior ectopic</td><td>10× risk</td></tr><tr><td>PID/STIs</td><td>Tubal scarring</td></tr><tr><td>Tubal surgery</td><td>Includes ligation</td></tr><tr><td>IUD in place</td><td>50% ectopic if pregnant</td></tr></table><div class="alert-box"><div class="alert-title">⚠️</div><p>50% of ectopics have NO risk factors!</p></div>',why_chain:[],points:10}},
+        {title:"The Discriminatory Zone",content:'<div class="narrative"><p>Her β-hCG is <span class="highlight">2,500 mIU/mL</span>. TVUS shows no intrauterine pregnancy.</p></div>',question:{prompt:"If β-hCG is above discriminatory zone (~1,500-2,000) and no IUP is seen, this indicates:",options:[{text:"Normal early pregnancy",correct:false},{text:"Definite ectopic",correct:false},{text:"Abnormal pregnancy (ectopic or failed IUP)",correct:true},{text:"Lab error",correct:false}],explanation:{correct:"Correct! Above the discriminatory zone, you should see an IUP. If not, it is an abnormal pregnancy - either ectopic or failed IUP.",incorrect:"Above discriminatory zone + no IUP = abnormal pregnancy (ectopic or failed IUP)."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📊 β-hCG Interpretation</div><div class="pathway">DISCRIMINATORY ZONE: 1,500-2,000\n\nAbove zone + no IUP = ABNORMAL\nBelow zone + no IUP = Indeterminate\n  → Serial β-hCG q48-72h\n  → Should rise ≥35-53% in 48h\n\nNormal: β-hCG doubles q48-72h</div></div>',why_chain:[],points:10}},
+        {title:"Ultrasound Findings",content:'<div class="narrative"><p>TVUS shows: No IUP, <span class="critical">adnexal mass with ring sign</span>, free fluid in pelvis.</p></div>',question:{prompt:"What is the ring of fire sign?",options:[{text:"IUP with yolk sac",correct:false},{text:"Ectopic with peripheral blood flow on Doppler",correct:true},{text:"Corpus luteum cyst",correct:false},{text:"Ovarian torsion",correct:false}],explanation:{correct:"Correct! Ring of fire = increased peripheral vascularity around ectopic on color Doppler.",incorrect:"Ring of fire = peripheral blood flow around ectopic. Corpus luteum can look similar."},teaching:'<h4>US Findings in Ectopic</h4><table class="comparison-table"><tr><th>Finding</th><th>Significance</th></tr><tr><td>No IUP above discriminatory zone</td><td>Suspicious</td></tr><tr style="background:rgba(251,191,36,0.2);"><td>Adnexal mass/ring sign</td><td>Likely ectopic</td></tr><tr><td>Fetal cardiac activity in adnexa</td><td>Definite ectopic</td></tr><tr><td>Free fluid</td><td>Concerning for rupture</td></tr></table>',why_chain:[],points:10}},
+        {title:"Ruptured Ectopic",content:'<div class="narrative"><p>The patient suddenly develops <span class="critical">severe pain, HR 125, BP 85/50</span>. She is pale and diaphoretic.</p></div><div class="alert-box"><div class="alert-title">🚨 Surgical Emergency!</div><p>Ruptured ectopic = hemorrhagic shock. Do NOT delay for imaging!</p></div>',question:{prompt:"Most important immediate action?",options:[{text:"CT scan to confirm",correct:false},{text:"Check serial β-hCG",correct:false},{text:"IV access, resuscitation, emergent surgery",correct:true},{text:"Give methotrexate",correct:false}],explanation:{correct:"Correct! Ruptured ectopic is a surgical emergency. Two large-bore IVs, resuscitate, emergent OR.",incorrect:"Don't delay! IV access, resuscitation, emergent surgery. Imaging can wait."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Signs of Rupture</div><div class="pathway">• Sudden severe abdominal pain\n• Hypotension, tachycardia\n• Peritoneal signs\n• Shoulder pain (diaphragm irritation)\n• Syncope\n\nIMM EDIATE:\n1. Two large-bore IVs\n2. Fluid resuscitation\n3. Type and cross\n4. EMERGENT OR</div></div>',why_chain:[],points:10}},
+        {title:"Methotrexate Criteria",content:'<div class="narrative"><p>Different scenario: stable patient, unruptured ectopic, β-hCG 1,800, no fetal cardiac activity.</p></div>',question:{prompt:"Which is a CONTRAINDICATION to methotrexate?",options:[{text:"β-hCG <5,000",correct:false},{text:"Fetal cardiac activity",correct:true},{text:"Ectopic <3 cm",correct:false},{text:"Stable patient",correct:false}],explanation:{correct:"Correct! Fetal cardiac activity = contraindication (higher failure rate). Other contraindications: rupture, unstable, immunodeficiency, liver/renal disease.",incorrect:"Fetal cardiac activity is a contraindication - higher MTX failure rate."},teaching:'<h4>Methotrexate Criteria</h4><table class="comparison-table"><tr><th>Inclusion</th><th>Contraindications</th></tr><tr><td>Hemodynamically stable</td><td>Rupture</td></tr><tr><td>Unruptured</td><td>Fetal cardiac activity</td></tr><tr><td>β-hCG <5,000 ideal</td><td>Liver/renal disease</td></tr><tr><td>Ectopic <3-4 cm</td><td>Immunodeficiency</td></tr></table><div class="mechanism-box"><div class="mechanism-title">MTX Protocol</div><div class="pathway">50 mg/m² IM single dose\nCheck β-hCG day 4 and 7\nIf <15% decline → repeat dose\nFollow weekly until β-hCG <5</div></div>',why_chain:[],points:10}},
+        {title:"Surgical Management",content:'<div class="narrative"><p>When is surgery preferred over methotrexate?</p></div>',question:{prompt:"Indication for SURGICAL management?",options:[{text:"β-hCG <1,000",correct:false},{text:"Reliable follow-up",correct:false},{text:"Hemodynamic instability or rupture",correct:true},{text:"Ectopic <2 cm",correct:false}],explanation:{correct:"Correct! Surgery for: rupture/instability, MTX contraindication, failed MTX, fetal cardiac activity, high β-hCG, patient preference.",incorrect:"Surgery indicated for unstable/ruptured, MTX contraindication, MTX failure."},teaching:'<div class="mechanism-box"><div class="mechanism-title">🔪 Surgical Options</div><div class="pathway">SALPINGOSTOMY:\n• Linear incision, remove pregnancy\n• Preserves tube\n• Must follow β-hCG to zero\n\nSALPINGECTOMY:\n• Remove entire tube\n• Lower recurrence risk\n• Preferred if tube damaged</div></div>',why_chain:[],points:10}},
+        {title:"Case Resolution",content:'<div class="narrative"><p>Patient underwent emergent laparoscopy with salpingectomy. She recovered well and was counseled on 10-15% recurrence risk.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 Summary</div><div class="pathway">ALWAYS CONSIDER in reproductive-age woman\nwith pain + positive pregnancy test\n\n95% are tubal (ampulla most common)\n\nDIAGNOSIS: β-hCG + TVUS\n\nRUPTURED = SURGICAL EMERGENCY\n\nSTABLE: MTX if meets criteria\n\nFOLLOW-UP: β-hCG to zero after salpingostomy</div></div>',question:{prompt:"After salpingostomy, what follow-up is essential?",options:[{text:"No follow-up needed",correct:false},{text:"Weekly ultrasounds",correct:false},{text:"Serial β-hCG until undetectable",correct:true},{text:"Immediate repeat surgery",correct:false}],explanation:{correct:"Correct! After salpingostomy, 5-20% have persistent ectopic tissue. Must follow β-hCG weekly until undetectable.",incorrect:"Must follow β-hCG to zero after salpingostomy - 5-20% have persistent tissue."},teaching:'<h4>Key Takeaways</h4><ul style="line-height:2;margin-left:20px;"><li>Ectopic until proven otherwise</li><li>Prior ectopic = 10x risk</li><li>Ruptured = surgical emergency</li><li>MTX for stable, unruptured, no cardiac activity</li><li>Follow β-hCG after salpingostomy</li></ul>',why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><p>You mastered Ectopic Pregnancy!</p></div>';}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>

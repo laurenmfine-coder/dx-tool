@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Asthma Phenotyping - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+        .optimal-path { background-color: #dcfce7; border-left: 4px solid #22c55e; }
+        .suboptimal-path { background-color: #fef9c3; border-left: 4px solid #eab308; }
+        .wrong-path { background-color: #fecaca; border-left: 4px solid #ef4444; }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body class="bg-gradient-to-br from-cyan-50 to-teal-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🫁 Asthma Phenotyping</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-cyan-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-cyan-500 to-teal-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+
+    <script>
+        let currentStage = 0;
+        let totalScore = 0;
+        let maxScore = 0;
+        const decisionPath = [];
+
+        const stages = [
+            {
+                id: 1,
+                title: "Initial Presentation",
+                scenario: "A 34-year-old woman presents to your allergy clinic with poorly controlled asthma despite being on fluticasone/salmeterol 250/50 twice daily. She reports using her rescue inhaler 4-5 times per week and has had 2 ED visits in the past year.\n\nShe notes her symptoms are worse at night and with exercise. She has a history of eczema as a child and seasonal allergies.\n\nSpirometry shows FEV1 78% predicted with 14% improvement post-bronchodilator.",
+                question: "What is the first step in evaluating this patient's uncontrolled asthma?",
+                options: [
+                    { id: "A", text: "Verify adherence, inhaler technique, and confirm the asthma diagnosis before escalating therapy", outcome: "Correct approach", feedback: "Correct! Before escalating therapy, you must confirm adherence (only 50% of patients take medications as prescribed), verify proper inhaler technique, and ensure the diagnosis is correct. Many patients labeled as 'severe asthma' actually have poor technique or adherence.", points: 10, isOptimal: true },
+                    { id: "B", text: "Immediately start a biologic agent for severe asthma", outcome: "Premature escalation", feedback: "Starting biologics without first confirming adherence and technique wastes expensive resources and may not address the real problem. Up to 50% of 'uncontrolled' asthma is due to modifiable factors.", points: 2, isOptimal: false },
+                    { id: "C", text: "Add oral corticosteroids daily for better control", outcome: "Inappropriate step", feedback: "Daily oral steroids have significant side effects and should be avoided if possible. First verify the basics - adherence, technique, and diagnosis confirmation.", points: 3, isOptimal: false },
+                    { id: "D", text: "Order a CT chest to look for structural lung disease", outcome: "Not first step", feedback: "Imaging may be part of the workup if diagnosis is uncertain, but the first step should always be verifying the fundamentals of asthma management.", points: 4, isOptimal: false }
+                ],
+                whyChain: { title: "WHY verify basics first?", steps: ["50% of asthma patients have poor adherence", "Up to 70% use inhalers incorrectly", "Misdiagnosis is common (vocal cord dysfunction, COPD)", "Addressing basics is cost-effective", "Prevents unnecessary medication escalation"] },
+                mechanism: { title: "Uncontrolled Asthma Evaluation", content: "STEP 1: VERIFY THE FUNDAMENTALS\n• Adherence assessment (pharmacy refill records)\n• Inhaler technique demonstration\n• Trigger identification and avoidance\n• Confirm diagnosis (spirometry with reversibility)\n\nCOMMON MIMICS:\n• Vocal cord dysfunction\n• COPD/asthma overlap\n• Chronic rhinosinusitis with postnasal drip\n• GERD\n• Heart failure\n• Anxiety/panic disorder\n\nADHERENCE BARRIERS:\n• Cost of medications\n• Complex regimens\n• Fear of side effects\n• Feeling well = stopping meds" },
+                pearl: "Ask patients to demonstrate their inhaler technique at every visit - even patients who have used inhalers for years often have significant errors.",
+                pitfall: "Don't assume 'severe' asthma based on symptoms alone. True severe asthma is defined as asthma requiring Step 4-5 therapy AND confirmed adherence/technique."
+            },
+            {
+                id: 2,
+                title: "Phenotype Assessment",
+                scenario: "You confirm the patient is adherent (pharmacy records show regular refills) and her inhaler technique is correct. Symptoms persist despite good compliance.\n\nYou order phenotyping studies:\n• Blood eosinophils: 450 cells/μL\n• Total IgE: 320 IU/mL\n• FeNO: 45 ppb\n• Skin prick testing: Multiple positive reactions to aeroallergens\n• Spirometry: FEV1 72% predicted, 15% improvement post-bronchodilator",
+                question: "Based on these biomarkers, what is this patient's asthma phenotype?,
+                options: [
+                    { id: "A", text: "Type 2 (T2)-high allergic asthma", outcome: "Correct phenotype", feedback: "Correct! This patient has classic T2-high allergic asthma: elevated IgE, eosinophilia, high FeNO, positive allergen sensitization, and atopic history (eczema, allergic rhinitis). This phenotype responds well to allergen immunotherapy and T2-targeted biologics.", points: 10, isOptimal: true },
+                    { id: "B", text: "T2-low/non-eosinophilic asthma", outcome: "Incorrect - has T2 markers", feedback: "This patient has elevated eosinophils (>150), elevated FeNO (>25), and elevated IgE - all markers of T2-high inflammation. T2-low asthma would have normal values for these markers.", points: 2, isOptimal: false },
+                    { id: "C", text: "Aspirin-exacerbated respiratory disease (AERD)", outcome: "No history of NSAID sensitivity", feedback: "AERD requires a history of respiratory reactions to aspirin/NSAIDs, nasal polyps, and asthma. This patient has no reported NSAID sensitivity.", points: 4, isOptimal: false },
+                    { id: "D", text: "Obesity-related asthma", outcome: "No mention of obesity", feedback: "Obesity-related asthma is typically T2-low and associated with mechanical effects of obesity. The patient's profile (high IgE, eosinophils, atopy) suggests T2-high disease.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY phenotype asthma?", steps: ["Different phenotypes respond to different treatments", "T2-high responds to biologics targeting IL-4, IL-5, IL-13, IgE", "T2-low may need different approaches (macrolides, bronchial thermoplasty)", "Prevents trial-and-error prescribing", "Optimizes expensive biologic selection"] },
+                mechanism: { title: "Asthma Phenotypes", content: "T2-HIGH ASTHMA (~50-70% of asthma):\n• Allergic: IgE-mediated, atopy, responds to anti-IgE\n• Eosinophilic: High eos, responds to anti-IL5\n• Mixed: Both features\n\nT2 BIOMARKERS:\n• Blood eosinophils ≥150 cells/μL\n• FeNO ≥25 ppb\n• IgE elevated (varies by age)\n• Sputum eosinophils ≥2%\n\nT2-LOW ASTHMA (~30-50%):\n• Neutrophilic: Infection-related, smoking\n• Paucigranulocytic: Minimal inflammation\n• Obesity-related: Mechanical factors\n\nOTHER PHENOTYPES:\n• AERD (Samter's triad)\n• Exercise-induced\n• Occupational\n• Asthma-COPD overlap" },
+                pearl: "FeNO is particularly useful for monitoring T2 inflammation - levels >50 ppb strongly suggest T2-high disease and predict response to ICS and biologics.",
+                pitfall: "Don't rely on a single biomarker. Some patients have discordant markers (high eosinophils but low FeNO). Use the full clinical picture."
+            },
+            {
+                id: 3,
+                title: "Comorbidity Assessment",
+                scenario: "You identify T2-high allergic asthma. Before adding therapy, you assess for comorbidities that could be contributing to poor control.\n\nThe patient reports:\n• Chronic nasal congestion and postnasal drip\n• Heartburn 2-3 times per week\n• Snoring and daytime fatigue\n• Symptoms worse during spring pollen season",
+                question: "Which comorbidity is MOST important to address for asthma control?",
+                options: [
+                    { id: "A", text: "Allergic rhinitis - the unified airway concept links upper and lower airway inflammation", outcome: "Correct priority", feedback: "Correct! Allergic rhinitis and asthma share the same inflammatory pathway (united airway disease). Treating rhinitis improves asthma control. Up to 80% of asthmatics have rhinitis, and uncontrolled rhinitis is a major driver of poor asthma control.", points: 10, isOptimal: true },
+                    { id: "B", text: "GERD - acid reflux triggers asthma", outcome: "Important but not first", feedback: "GERD can worsen asthma, but evidence for treatment improving asthma is mixed. Rhinitis has stronger evidence for impacting asthma control and should be prioritized in this allergic patient.", points: 6, isOptimal: false },
+                    { id: "C", text: "Obstructive sleep apnea - improves oxygenation", outcome: "Should be evaluated", feedback: "OSA can worsen asthma and should be evaluated (snoring + fatigue), but addressing allergic rhinitis in this clearly allergic patient will have more direct impact on asthma.", points: 5, isOptimal: false },
+                    { id: "D", text: "Seasonal allergies - only a temporary issue", outcome: "Part of allergic rhinitis", feedback: "Seasonal allergies ARE allergic rhinitis. This isn't a separate comorbidity - it's the same unified airway disease that needs treatment.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY prioritize rhinitis?", steps: ["United airway concept: nose and lungs share inflammation", "80% of asthmatics have allergic rhinitis", "Nasal inflammation drives lower airway inflammation", "Treating rhinitis reduces asthma exacerbations", "Intranasal steroids improve asthma outcomes"] },
+                mechanism: { title: "Asthma Comorbidities", content: "ALLERGIC RHINITIS (80% of asthmatics):\n• United airway disease concept\n• Nasal inflammation → bronchial inflammation\n• Treatment: Intranasal corticosteroids, antihistamines\n• Improves asthma control\n\nGERD (40-80% of asthmatics):\n• Micro-aspiration triggers bronchoconstriction\n• Vagal reflex from esophageal acid\n• Treatment benefit for asthma is variable\n\nOBESITY:\n• Mechanical effects on breathing\n• Pro-inflammatory state\n• Weight loss improves control\n\nOBSTRUCTIVE SLEEP APNEA:\n• Nocturnal hypoxia\n• Systemic inflammation\n• Screen: STOP-BANG questionnaire\n\nANXIETY/DEPRESSION:\n• Poor adherence\n• Symptom amplification\n• Vocal cord dysfunction overlap" },
+                pearl: "The nose is the 'canary in the coal mine' for the lungs - if rhinitis is uncontrolled, asthma will likely be uncontrolled too.",
+                pitfall: "Don't treat GERD empirically for asthma control - studies show inconsistent benefit. Only treat GERD if the patient has significant reflux symptoms."
+            },
+            {
+                id: 4,
+                title: "Allergen Avoidance",
+                scenario: "You start intranasal fluticasone for her allergic rhinitis. Now you address allergen exposure.\n\nShe is sensitized to dust mites, cat, and grass pollen. She has a cat at home and her bedroom has wall-to-wall carpet.\n\nShe asks what environmental changes would help her asthma.",
+                question: "What is the most evidence-based allergen avoidance recommendation?",
+                options: [
+                    { id: "A", text: "Multicomponent dust mite intervention: encasements, reduce humidity, remove carpet from bedroom, wash bedding in hot water", outcome: "Correct - comprehensive approach", feedback: "Correct! Single interventions for dust mites don't work - you need multicomponent strategies. Mattress/pillow encasements alone are ineffective, but combining encasements + humidity control + carpet removal + hot water washing shows benefit.", points: 10, isOptimal: true },
+                    { id: "B", text: "HEPA air purifier in every room of the house", outcome: "Limited evidence", feedback: "HEPA filters alone have not shown consistent benefit for asthma outcomes. They may help as part of a comprehensive plan but are not the most effective single intervention.", points: 4, isOptimal: false },
+                    { id: "C", text: "Mattress encasements alone for dust mites", outcome: "Single intervention insufficient", feedback: "Multiple studies show that mattress encasements ALONE do not improve asthma outcomes. Dust mite avoidance requires multicomponent intervention.", points: 3, isOptimal: false },
+                    { id: "D", text: "Remove the cat from the home immediately", outcome: "Difficult and may not help quickly", feedback: "While removing cat exposure is ideal, cat allergen persists in homes for months after removal. Many patients won't rehome pets. Focus on feasible interventions first.", points: 5, isOptimal: false }
+                ],
+                whyChain: { title: "WHY multicomponent approach?", steps: ["Single dust mite interventions fail in clinical trials", "Dust mites are ubiquitous - need multiple barriers", "Humidity control reduces mite reproduction", "Removing reservoir (carpet) reduces allergen load", "Comprehensive approach shows clinical benefit"] },
+                mechanism: { title: "Allergen Avoidance Strategies", content: "DUST MITES (multicomponent required):\n• Allergen-proof encasements (mattress, pillow, duvet)\n• Reduce humidity <50%\n• Remove carpet (especially bedroom)\n• Wash bedding weekly in hot water (>130°F)\n• HEPA vacuum weekly\n\nCAT/DOG ALLERGENS:\n• Removal is most effective but difficult\n• Keep pets out of bedroom\n• HEPA filters may help\n• Allergen persists 4-6 months after removal\n• Washing pets has minimal effect\n\nPOLLEN:\n• Keep windows closed during high pollen\n• Shower after outdoor exposure\n• Monitor pollen counts\n• Air conditioning helps\n\nCOCKROACH:\n• Integrated pest management\n• Reduce food/water sources\n• Professional extermination" },
+                pearl: "For dust mite allergic patients, the bedroom is the most important room - we spend 1/3 of our lives there in close contact with bedding where mites thrive.",
+                pitfall: "Don't recommend single interventions like 'just get mattress covers' - studies consistently show single interventions fail. Patients need comprehensive plans."
+            },
+            {
+                id: 5,
+                title: "Allergen Immunotherapy",
+                scenario: "Despite optimal inhaler therapy, rhinitis treatment, and allergen avoidance, the patient continues to have moderate persistent symptoms with frequent exacerbations.\n\nGiven her clear allergic phenotype with sensitization to perennial (dust mite, cat) and seasonal (grass) allergens, you consider allergen immunotherapy.",
+                question: "What is the role of allergen immunotherapy in this patient's asthma management?",
+                options: [
+                    { id: "A", text: "Subcutaneous immunotherapy (SCIT) can modify the underlying allergic disease and reduce asthma symptoms, medication use, and exacerbations", outcome: "Correct indication", feedback: "Correct! In patients with allergic asthma and confirmed sensitization, SCIT has disease-modifying potential. It can reduce symptoms, medication requirements, exacerbations, and may prevent asthma progression. It's the only treatment that addresses the underlying allergic mechanism.", points: 10, isOptimal: true },
+                    { id: "B", text: "Immunotherapy is contraindicated in asthma patients", outcome: "Incorrect - indicated for allergic asthma", feedback: "Immunotherapy is specifically INDICATED for allergic asthma. The only contraindication is severe uncontrolled asthma (FEV1 <70%) due to injection reaction risk.", points: 2, isOptimal: false },
+                    { id: "C", text: "Sublingual immunotherapy (SLIT) tablets are preferred over SCIT for asthma", outcome: "SCIT has more asthma data", feedback: "While SLIT tablets are available for specific allergens, SCIT has more extensive evidence for asthma outcomes. SLIT grass tablet does show asthma benefit, but customized SCIT allows treatment of multiple allergens.", points: 6, isOptimal: false },
+                    { id: "D", text: "Immunotherapy only helps rhinitis, not asthma", outcome: "Incorrect", feedback: "Multiple studies demonstrate immunotherapy benefits for asthma including reduced symptoms, medication use, bronchial hyperreactivity, and exacerbations. It's disease-modifying.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY immunotherapy for allergic asthma?", steps: ["Only treatment that modifies underlying allergic disease", "Induces tolerance to allergens", "Reduces need for controller medications", "Decreases exacerbation frequency", "Benefits may persist after treatment stops"] },
+                mechanism: { title: "Allergen Immunotherapy in Asthma", content: "MECHANISM:\n• Shifts immune response from Th2 → Th1/Treg\n• Induces blocking IgG4 antibodies\n• Reduces allergen-specific IgE over time\n• Decreases mast cell/basophil reactivity\n\nASHMA BENEFITS:\n• Reduced symptoms and medication use\n• Decreased bronchial hyperreactivity\n• Fewer exacerbations\n• Possible prevention of disease progression\n• Effects may persist years after stopping\n\nPATIENT SELECTION:\n• Allergic asthma (confirmed sensitization)\n• Symptoms correlate with exposure\n• Controlled asthma (FEV1 >70%)\n• Motivated for 3-5 year commitment\n\nCONTRAINDICATIONS:\n• Severe uncontrolled asthma (FEV1 <70%)\n• Unable to communicate symptoms\n• Severe cardiovascular disease\n• Beta-blocker use (relative)" },
+                pearl: "Immunotherapy is the only treatment that can potentially CURE allergic disease rather than just controlling symptoms - consider it early in motivated patients.",
+                pitfall: "Never give immunotherapy injections to a patient having an asthma exacerbation - ensure asthma is well-controlled at each visit before injecting."
+            },
+            {
+                id: 6,
+                title: "Biologic Selection",
+                scenario: "The patient is interested in immunotherapy but wants faster relief. You discuss adding a biologic agent for her severe T2-high allergic asthma.\n\nHer current biomarkers:\n• Blood eosinophils: 450 cells/μL\n• Total IgE: 485 IU/mL (in range for omalizumab)\n• FeNO: 48 ppb\n• Multiple positive allergen tests",
+                question: "Which biologic would be most appropriate as first-line for this patient?",
+                options: [
+                    { id: "A", text: "Omalizumab (anti-IgE) - targets her allergic phenotype with elevated IgE and multiple sensitizations", outcome: "Correct first choice", feedback: "Correct! For allergic asthma with elevated IgE, positive allergen tests, and symptoms correlating with exposure, omalizumab is the most appropriate first-line biologic. It directly targets the IgE pathway driving her disease.", points: 10, isOptimal: true },
+                    { id: "B", text: "Mepolizumab (anti-IL5) - targets eosinophils", outcome: "Better for eosinophilic-predominant", feedback: "While her eosinophils are elevated, her phenotype is predominantly ALLERGIC with high IgE and multiple sensitizations. Anti-IL5 agents are better suited for eosinophilic asthma without clear allergic triggers.", points: 6, isOptimal: false },
+                    { id: "C", text: "Dupilumab (anti-IL4Rα) - broadest T2 coverage", outcome: "Excellent option but consider IgE first", feedback: "Dupilumab is an excellent choice for T2-high asthma and would work well here. However, for clearly ALLERGIC asthma with IgE in range, omalizumab directly targets the disease mechanism.", points: 7, isOptimal: false },
+                    { id: "D", text: "Tezepelumab (anti-TSLP) - works for all asthma", outcome: "Typically reserved for others", feedback: "Tezepelumab works across phenotypes but is typically considered when other biologics fail or for patients with unclear phenotype. Start with phenotype-targeted therapy.", points: 4, isOptimal: false }
+                ],
+                whyChain: { title: "WHY omalizumab for allergic asthma?", steps: ["Directly targets IgE - the driver of allergic inflammation", "Approved specifically for allergic asthma", "Long track record of safety (since 2003)", "Also treats her comorbid allergic rhinitis", "Reduces exacerbations by ~50%"] },
+                mechanism: { title: "Asthma Biologics Selection", content: "OMALIZUMAB (anti-IgE):\n• Indication: Allergic asthma, IgE 30-1300, + skin test\n• Best for: Clear allergic triggers, elevated IgE\n• Dosing: Based on IgE and weight, q2-4 weeks\n\nMEPOLIZUMAB/BENRALIZUMAB (anti-IL5/IL5R):\n• Indication: Eosinophilic asthma, eos ≥150-300\n• Best for: High eosinophils, frequent exacerbations\n• Benralizumab: q4-8 weeks (depletes eosinophils)\n\nDUPILUMAB (anti-IL4Rα):\n• Indication: T2-high asthma, eos ≥150 or FeNO ≥25\n• Best for: Comorbid atopic dermatitis, nasal polyps\n• Blocks both IL-4 and IL-13\n\nTEZEPELUMAB (anti-TSLP):\n• Indication: Severe asthma (any phenotype)\n• Best for: T2-low or uncertain phenotype\n• Works upstream of other pathways" },
+                pearl: "When choosing biologics, match the mechanism to the phenotype: allergic → anti-IgE, eosinophilic → anti-IL5, broad T2 → anti-IL4R, uncertain → anti-TSLP.",
+                pitfall: "Don't start biologics in patients with poor adherence to inhaled therapy - they likely won't adhere to biologic injections either."
+            },
+            {
+                id: 7,
+                title: "Biologic Response Assessment",
+                scenario: "You start omalizumab at appropriate dosing based on her IgE (485) and weight. She returns after 4 months of treatment.\n\nShe reports:\n• Rescue inhaler use decreased from 4-5x/week to 1x/week\n• No ED visits since starting\n• Sleeping better without nighttime symptoms\n• Still having some breakthrough symptoms with high pollen exposure\n\nSpirometry: FEV1 improved from 78% to 86% predicted",
+                question: "How do you assess her response to omalizumab?",
+                options: [
+                    { id: "A", text: "Good response - continue therapy. She has clinically meaningful improvement in symptoms, exacerbations, and lung function", outcome: "Correct assessment", feedback: "Correct! She demonstrates meaningful response: reduced rescue use, no exacerbations, improved quality of life, and improved FEV1. GINA defines response as: ≥50% reduction in exacerbations, reduced OCS use, improved symptoms, or improved lung function.", points: 10, isOptimal: true },
+                    { id: "B", text: "Inadequate response - switch to a different biologic", outcome: "Premature switch", feedback: "Her response is clinically meaningful. Some breakthrough symptoms don't indicate failure. Give at least 4-6 months before determining response, and she's showing clear benefit.", points: 3, isOptimal: false },
+                    { id: "C", text: "Check IgE levels to confirm the biologic is working", outcome: "Not useful", feedback: "Total IgE actually INCREASES initially with omalizumab (omalizumab-IgE complexes are measured). IgE levels should NOT be used to assess response - use clinical criteria.", points: 4, isOptimal: false },
+                    { id: "D", text: "Add a second biologic for complete control", outcome: "Not indicated", feedback: "Dual biologic therapy is not standard practice and lacks safety data. She's responding well to omalizumab - optimize other factors before considering changes.", points: 2, isOptimal: false }
+                ],
+                whyChain: { title: "WHY is this a good response?", steps: ["Rescue use reduced by >75%", "Exacerbations eliminated (ED visits)", "Quality of life improved (sleep)", "Objective improvement in FEV1", "Meets GINA response criteria"] },
+                mechanism: { title: "Biologic Response Assessment", content: "RESPONSE CRITERIA (GINA):\n• ≥50% reduction in exacerbations\n• Reduction in OCS maintenance/bursts\n• Clinically meaningful symptom improvement\n• Improved lung function\n\nTIMELINE:\n• Assess at 4-6 months minimum\n• Some patients respond by 16 weeks\n• Others may take 6-12 months\n\nSUPER-RESPONDERS:\n• Complete symptom control\n• No exacerbations\n• May be able to reduce ICS\n\nNON-RESPONDERS:\n• <50% reduction in exacerbations\n• No symptom improvement\n• Consider: wrong phenotype, poor adherence, comorbidities\n\nNEXT STEPS FOR NON-RESPONSE:\n• Verify adherence and technique\n• Reassess phenotype\n• Consider switching biologic class" },
+                pearl: "Don't chase perfection with biologics - clinically meaningful improvement is the goal. Some patients will have breakthrough symptoms and that's acceptable.",
+                pitfall: "Don't check IgE levels to monitor omalizumab response - they increase with treatment and are misleading. Use clinical response criteria."
+            },
+            {
+                id: 8,
+                title: "Step-Down Therapy",
+                scenario: "After 2 years on omalizumab with excellent control, the patient asks if she can reduce her medications.\n\nCurrent regimen:\n• Omalizumab q4 weeks\n• Fluticasone/salmeterol 250/50 BID\n• Intranasal fluticasone daily\n• Montelukast 10mg daily\n\nShe has had no exacerbations for 18 months. ACT score is 24 (well-controlled).",
+                question: "What is the appropriate approach to step-down therapy?",
+                options: [
+                    { id: "A", text: "Reduce ICS dose first (to low-dose ICS/LABA), maintain biologic - stepping down ICS before biologic is safer", outcome: "Correct approach", feedback: "Correct! When stepping down, reduce ICS FIRST while maintaining the biologic. This approach has better outcomes than stopping the biologic first. The biologic provides a safety net while reducing steroid burden.", points: 10, isOptimal: true },
+                    { id: "B", text: "Stop omalizumab first since she's been controlled for so long", outcome: "Higher relapse risk", feedback: "Stopping the biologic first leads to higher relapse rates. Studies show stepping down ICS while maintaining biologic is safer. Many patients relapse within months of stopping biologics.", points: 4, isOptimal: false },
+                    { id: "C", text: "Stop all medications - she's cured", outcome: "Asthma is chronic", feedback: "Asthma is a chronic disease. While excellent control is achieved, stopping all medications typically leads to relapse. Gradual step-down with monitoring is required.", points: 1, isOptimal: false },
+                    { id: "D", text: "No changes - continue current regimen indefinitely", outcome: "May be overtreating", feedback: "While continuing therapy is safe, well-controlled patients may be able to reduce medication burden. Step-down should be attempted to find the minimum effective therapy.", points: 5, isOptimal: false }
+                ],
+                whyChain: { title: "WHY reduce ICS before biologic?", steps: ["Biologic provides safety net during step-down", "ICS has more daily side effects to reduce", "Studies show lower exacerbation rates with this approach", "Biologic addresses underlying disease mechanism", "Can always re-escalate ICS if needed"] },
+                mechanism: { title: "Step-Down Strategy in Biologic-Treated Asthma", content: "STEP-DOWN PRINCIPLES:\n• Attempt after 3-6 months of good control\n• Reduce one medication at a time\n• Monitor closely for deterioration\n• Have action plan for worsening\n\nRECOMMENDED SEQUENCE:\n1. First: Reduce ICS dose (high → medium → low)\n2. Then: Consider stopping add-on controllers (LTRA)\n3. Last: Consider biologic dose reduction or stopping\n\nBIOLOGIC STEP-DOWN:\n• Extended dosing intervals may work for some\n• High relapse rate when stopping (50-70%)\n• Consider seasonal/intermittent use in some patients\n\nMONITORING:\n• ACT/ACQ scores monthly\n• Spirometry q3-6 months\n• Watch for early warning signs\n• FeNO may help predict relapse" },
+                pearl: "Think of the biologic as the foundation - reduce the 'extras' (high-dose ICS, add-on controllers) while keeping the foundation stable.",
+                pitfall: "Don't stop biologics in spring for pollen-allergic patients - wait until after their worst season to attempt any step-down."
+            },
+            {
+                id: 9,
+                title: "Special Situations: AERD",
+                scenario: "A colleague asks you to see a 42-year-old woman with severe asthma, nasal polyps requiring 3 surgeries, and chronic rhinosinusitis. She mentions that ibuprofen makes her 'feel terrible' with nasal congestion and wheezing.\n\nShe is on high-dose ICS/LABA and has required 4 courses of oral prednisone this year.",
+                question: "What is the most likely diagnosis and key management consideration?",
+                options: [
+                    { id: "A", text: "AERD (Aspirin-Exacerbated Respiratory Disease) - consider aspirin desensitization after stabilization", outcome: "Correct diagnosis and management", feedback: "Correct! This triad of asthma + nasal polyps + NSAID sensitivity defines AERD. Aspirin desensitization is disease-modifying: it reduces polyp regrowth, decreases steroid requirements, and improves asthma control. Must be done in controlled setting.", points: 10, isOptimal: true },
+                    { id: "B", text: "Allergic fungal rhinosinusitis - needs antifungal therapy", outcome: "Different presentation", feedback: "AFRS presents with 'peanut butter' mucus, characteristic CT findings, and fungal elements. This patient's NSAID sensitivity points to AERD, not fungal disease.", points: 3, isOptimal: false },
+                    { id: "C", text: "Severe allergic asthma - start omalizumab", outcome: "AERD is not IgE-mediated", feedback: "AERD is NOT IgE-mediated allergic disease. It's driven by dysregulated leukotriene metabolism. While biologics may help (especially dupilumab), aspirin desensitization addresses the underlying mechanism.", points: 5, isOptimal: false },
+                    { id: "D", text: "Eosinophilic granulomatosis with polyangiitis - check ANCA", outcome: "No systemic features", feedback: "EGPA (Churg-Strauss) involves systemic vasculitis features (neuropathy, skin lesions, cardiac involvement). This patient has classic AERD triad without systemic features.", points: 4, isOptimal: false }
+                ],
+                whyChain: { title: "WHY aspirin desensitization for AERD?", steps: ["AERD caused by COX-1 inhibition → leukotriene surge", "Desensitization induces tolerance to COX-1 inhibition", "Reduces nasal polyp regrowth", "Decreases sinus surgeries", "Improves asthma control and reduces OCS"] },
+                mechanism: { title: "AERD (Samter's Triad)", content: "TRIAD:\n1. Asthma (often severe)\n2. Nasal polyps (recurrent)\n3. NSAID/aspirin sensitivity\n\nPATHOPHYSIOLOGY:\n• COX-1 inhibition → arachidonic acid shunted to LOX\n• Overproduction of cysteinyl leukotrienes\n• NOT IgE-mediated (not true allergy)\n\nASPIRIN DESENSITIZATION:\n• Done in monitored setting over 2 days\n• Induces tolerance to COX-1 inhibition\n• Maintenance: aspirin 650-1300mg daily\n• Benefits: Fewer surgeries, less steroids, better smell\n\nBIOLOGICS FOR AERD:\n• Dupilumab: FDA-approved for CRSwNP, helps asthma\n• Mepolizumab: May help eosinophilic component\n• Omalizumab: Less effective (not IgE-driven)\n\nAVOIDANCE:\n• All NSAIDs (except COX-2 selective)\n• Acetaminophen usually safe" },
+                pearl: "If a patient with nasal polyps reports 'ibuprofen doesn't work for my headaches,' probe deeper - they may be describing AERD symptoms, not lack of efficacy.",
+                pitfall: "Don't attempt aspirin desensitization in unstable asthma - patients must be optimized first with FEV1 >70% and no recent exacerbation."
+            },
+            {
+                id: 10,
+                title: "Long-term Management",
+                scenario: "Returning to your original patient: she has now been on omalizumab for 3 years with excellent control. She's been able to step down to low-dose ICS/LABA. She completed 3 years of allergen immunotherapy.\n\nShe asks about her long-term prognosis and ongoing management needs.",
+                question: "What is the recommended long-term approach for this patient?",
+                options: [
+                    { id: "A", text: "Continue low-dose ICS/LABA indefinitely as maintenance; consider trial off biologic given immunotherapy completion; annual flu vaccine; ongoing monitoring", outcome: "Correct comprehensive approach", feedback: "Correct! She needs ongoing maintenance therapy (at minimum low-dose ICS), can trial biologic discontinuation given disease modification from immunotherapy, annual influenza vaccine, and regular monitoring. Asthma is chronic and requires long-term management.", points: 10, isOptimal: true },
+                    { id: "B", text: "She's cured by immunotherapy - stop all medications", outcome: "Asthma requires ongoing treatment", feedback: "While immunotherapy is disease-modifying, it doesn't cure asthma. Most patients still need some maintenance therapy. Stopping all medications risks relapse.", points: 2, isOptimal: false },
+                    { id: "C", text: "Continue omalizumab forever - never attempt discontinuation", outcome: "May overtreat some patients", feedback: "Some patients, especially those who completed immunotherapy and have excellent control, can successfully discontinue biologics. A trial off therapy is reasonable with close monitoring.", points: 5, isOptimal: false },
+                    { id: "D", text: "Switch to PRN ICS/formoterol (SMART) and stop scheduled medications", outcome: "May be insufficient", feedback: "While SMART therapy works for mild-moderate asthma, this patient has severe disease requiring biologics. PRN-only therapy may be insufficient for her.", points: 4, isOptimal: false }
+                ],
+                whyChain: { title: "WHY this long-term approach?", steps: ["Asthma is a chronic disease requiring ongoing management", "Immunotherapy may allow biologic step-down", "Low-dose ICS provides maintenance control with minimal risk", "Annual flu vaccine prevents exacerbations", "Monitoring catches early deterioration"] },
+                mechanism: { title: "Long-term Asthma Management", content: "CORE PRINCIPLES:\n• Asthma is chronic - needs ongoing treatment\n• Goal: minimum effective therapy\n• Regular monitoring for control and complications\n\nMAINTENANCE REQUIREMENTS:\n• Most patients need at least low-dose ICS\n• Some may maintain on PRN ICS/formoterol\n• Rare patients achieve drug-free remission\n\nBIOLOGIC DISCONTINUATION:\n• Consider after 3-5 years of good control\n• Immunotherapy completion may allow trial\n• Close monitoring essential\n• 50-70% relapse rate\n\nPREVENTIVE CARE:\n• Annual influenza vaccine\n• COVID vaccination\n• Pneumococcal vaccine if indicated\n• Avoid NSAID triggers if sensitive\n\nMONITORING:\n• Annual spirometry\n• ACT scores at each visit\n• Review inhaler technique\n• Assess comorbidities" },
+                pearl: "The goal of asthma management is 'control with minimum medication' - regularly reassess whether patients can step down while maintaining control.",
+                pitfall: "Don't equate 'well-controlled' with 'cured.' Patients who feel great often want to stop medications - educate them about the chronic nature of asthma."
+            }
+        ];
+
+        function initGame() {
+            maxScore = stages.reduce((sum, stage) => sum + Math.max(...stage.options.map(o => o.points)), 0);
+            renderStage();
+        }
+
+        function renderStage() {
+            const stage = stages[currentStage];
+            const container = document.getElementById('gameContainer');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium">Stage ${stage.id} of ${stages.length}</span>
+                        <h2 class="text-xl font-bold text-gray-800">${stage.title}</h2>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-xl p-4 mb-6">
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700">${stage.scenario}</pre>
+                    </div>
+                    
+                    <p class="font-semibold text-gray-800 mb-4">${stage.question}</p>
+                    
+                    <div class="space-y-3" id="optionsContainer">
+                        ${stage.options.map(opt => `
+                            <button onclick="selectOption('${opt.id}')" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition-all">
+                                <span class="font-bold text-cyan-600">${opt.id}.</span> ${opt.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(optionId) {
+            const stage = stages[currentStage];
+            const option = stage.options.find(o => o.id === optionId);
+            const optimalOption = stage.options.find(o => o.isOptimal);
+            
+            totalScore += option.points;
+            decisionPath.push({
+                stage: stage.id,
+                title: stage.title,
+                choice: optionId,
+                choiceText: option.text,
+                outcome: option.outcome,
+                points: option.points,
+                maxPoints: Math.max(...stage.options.map(o => o.points)),
+                isOptimal: option.isOptimal,
+                optimalChoice: optimalOption.id,
+                optimalText: optimalOption.text
+            });
+            
+            updateProgress();
+            showFeedback(stage, option);
+        }
+
+        function updateProgress() {
+            const progress = ((currentStage + 1) / stages.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('score').textContent = Math.round((totalScore / maxScore) * 100) + '%';
+        }
+
+        function showFeedback(stage, option) {
+            const container = document.getElementById('gameContainer');
+            
+            let pathClass = option.isOptimal ? 'optimal-path' : (option.points >= 5 ? 'suboptimal-path' : 'wrong-path');
+            let pathLabel = option.isOptimal ? '✓ Optimal Choice' : (option.points >= 5 ? '~ Suboptimal' : '✗ Incorrect');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="${pathClass} p-4 rounded-xl mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="font-bold">${pathLabel}</span>
+                            <span class="text-gray-600">• ${option.points} points</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">${option.outcome}</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                        <p class="text-gray-700">${option.feedback}</p>
+                    </div>
+                    
+                    <div class="why-chain rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-cyan-800 mb-3">🔗 ${stage.whyChain.title}</h3>
+                        <div class="space-y-2">
+                            ${stage.whyChain.steps.map((step, i) => `
+                                <div class="flex items-start gap-2">
+                                    <span class="text-cyan-500 font-bold">${i + 1}.</span>
+                                    <span class="text-gray-700">${step}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mechanism-box rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h3>
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700 text-sm">${stage.mechanism.content}</pre>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="pearl-box rounded-xl p-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💎 Clinical Pearl</h4>
+                            <p class="text-gray-700 text-sm">${stage.pearl}</p>
+                        </div>
+                        <div class="pitfall-box rounded-xl p-4">
+                            <h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4>
+                            <p class="text-gray-700 text-sm">${stage.pitfall}</p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="nextStage()" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                        ${currentStage < stages.length - 1 ? 'Continue to Next Stage →' : 'View Final Summary'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function nextStage() {
+            currentStage++;
+            if (currentStage < stages.length) {
+                renderStage();
+            } else {
+                showSummary();
+            }
+        }
+
+        function showSummary() {
+            document.getElementById('gameContainer').classList.add('hidden');
+            const panel = document.getElementById('summaryPanel');
+            panel.classList.remove('hidden');
+            
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            let grade, gradeColor;
+            if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = 'text-green-600'; }
+            else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = 'text-blue-600'; }
+            else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = 'text-yellow-600'; }
+            else { grade = 'Keep Learning!'; gradeColor = 'text-red-600'; }
+            
+            panel.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">📊 Case Complete!</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold ${gradeColor}">${percentage}%</div>
+                        <div class="text-xl text-gray-600">${grade}</div>
+                    </div>
+                    
+                    <h3 class="font-bold text-gray-800 mb-4">Your Decision Path:</h3>
+                    <div class="space-y-3 mb-6">
+                        ${decisionPath.map(d => {
+                            let pathClass = d.isOptimal ? 'optimal-path' : (d.points >= 5 ? 'suboptimal-path' : 'wrong-path');
+                            return `
+                                <div class="${pathClass} p-3 rounded-lg">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="font-bold">Stage ${d.stage}:</span> ${d.title}
+                                            <div class="text-sm mt-1">Your choice: <strong>${d.choice}</strong> - ${d.outcome}</div>
+                                            ${!d.isOptimal ? `<div class="text-sm text-gray-600 mt-1">Better: ${d.optimalChoice} - ${d.optimalText.substring(0, 50)}...</div>` : ''}
+                                        </div>
+                                        <span class="text-sm font-medium">${d.points}/${d.maxPoints}</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-cyan-50 rounded-xl">
+                        <h4 class="font-bold text-cyan-800 mb-2">🎯 Asthma Phenotyping Key Points</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• Verify adherence and technique before escalating therapy</li>
+                            <li>• Phenotype asthma (T2-high vs T2-low) to guide biologic selection</li>
+                            <li>• Address comorbidities, especially allergic rhinitis (united airway)</li>
+                            <li>• Match biologic to phenotype: allergic → anti-IgE, eosinophilic → anti-IL5</li>
+                            <li>• Immunotherapy is disease-modifying for allergic asthma</li>
+                            <li>• Step down ICS before biologic when well-controlled</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-blue-50 rounded-xl">
+                        <h4 class="font-bold text-blue-800 mb-2">📚 References</h4>
+                        <p class="text-sm text-gray-700">
+                            <a href="https://ginasthma.org/gina-reports/" target="_blank" class="text-blue-600 hover:underline">GINA Guidelines</a> |
+                            <a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> |
+                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK430901/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Asthma</a>
+                        </p>
+                    </div>
+                    
+                    <button onclick="resetGame()" class="mt-6 w-full py-3 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-xl font-semibold hover:opacity-90">
+                        🔄 Try Again
+                    </button>
+                </div>
+            `;
+        }
+
+        function resetGame() {
+            currentStage = 0;
+            totalScore = 0;
+            decisionPath.length = 0;
+            document.getElementById('summaryPanel').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('score').textContent = '0%';
+            renderStage();
+        }
+
+        initGame();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+.rdx-difficulty-panel { display: inline-block; top: 80px; right: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
+.rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.rdx-diff-btn:hover { border-color: #3b82f6; background: #eff6ff; }
+.rdx-diff-btn.active { border-color: #3b82f6; background: #3b82f6; color: white; }
+.rdx-refs-panel { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 12px; padding: 16px; margin: 20px 0; border: 1px solid #bfdbfe; }
+.rdx-refs-title { font-weight: 700; color: #1e40af; margin-bottom: 12px; font-size: 16px; }
+.rdx-refs-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.rdx-refs-links a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 13px; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.rdx-refs-links a:hover { background: #2563eb; color: white; }
+.rdx-hint-beginner { display: none; }
+.rdx-hint-advanced { display: none; }
+[data-difficulty="beginner"] .rdx-hint-beginner { display: block; }
+[data-difficulty="advanced"] .rdx-hint-advanced { display: block; }
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+
+<div class="rdx-difficulty-panel">
+    <div style="font-weight: 600; font-size: 12px; color: #64748b; margin-bottom: 4px;">DIFFICULTY</div>
+    <button class="rdx-diff-btn" onclick="window.rdxSetDifficulty('beginner')">🌱 Beginner</button>
+    <button class="rdx-diff-btn active" onclick="window.rdxSetDifficulty('standard')">📚 Standard</button>
+    <button class="rdx-diff-btn" onclick="window.rdxSetDifficulty('advanced')">🎯 Advanced</button>
+</div>
+
+
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning Journey</h4>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 MechanismDx Modules</h5>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Master the pathophysiology</p>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Obstructive Lung Disease</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergy/Immunology</a>
+        </div>
+        
+        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 8px;">🎮 Related ReasonDx Cases</h5>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice similar scenarios</p>
+            <a href="asthma-exacerbation-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation</a>
+            <a href="asthma-biologics-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Biologics</a>
+            <a href="anaphylaxis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Anaphylaxis</a>
+            <a href="allergic-rhinitis-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+        </div>
+        
+        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 8px;">💬 CoachDx Practice</h5>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice communication skills</p>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Management Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+
+<div class="rdx-refs-panel" style="max-width: 1000px; margin: 20px auto;">
+    <div class="rdx-refs-title">📚 Open-Access References</div>
+    <div class="rdx-refs-links">
+        <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank">StatPearls Library</a>
+        <a href="https://ginasthma.org/gina-reports/" target="_blank">GINA Asthma Guidelines</a><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank">AAAAI Practice Parameters</a><a href="https://www.ncbi.nlm.nih.gov/books/NBK430901/" target="_blank">StatPearls: Asthma</a>
+    </div>
+</div>
+
+<script>
+// Difficulty Toggle
+window.rdxSetDifficulty = function(level) {
+    document.body.setAttribute('data-difficulty', level);
+    document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+};
+document.body.setAttribute('data-difficulty', 'standard');
+
+// Decision Path Tracking (enhanced)
+window.rdxDecisionPath = window.rdxDecisionPath || [];
+window.rdxTotalScore = window.rdxTotalScore || 0;
+window.rdxMaxScore = window.rdxMaxScore || 0;
+
+window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+    window.rdxDecisionPath.push({ stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText });
+    window.rdxTotalScore += points;
+    window.rdxMaxScore += maxPoints;
+};
+
+// Visual Debrief (enhanced)
+window.rdxShowDebrief = function() {
+    const pct = Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) || 0;
+    let grade = pct >= 90 ? '🌟 Outstanding!' : pct >= 80 ? '✨ Excellent!' : pct >= 70 ? '👍 Good Work!' : '📚 Keep Learning!';
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'rdx-debrief-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    
+    let pathHtml = window.rdxDecisionPath.map(d => {
+        let cls = d.isOptimal ? 'background:#dcfce7;border-left:4px solid #22c55e;' : d.points >= d.maxPoints*0.5 ? 'background:#fef9c3;border-left:4px solid #eab308;' : 'background:#fecaca;border-left:4px solid #ef4444;';
+        return `<div style="${cls}padding:12px;border-radius:8px;margin:8px 0;">
+            <div style="display:flex;justify-content:space-between;"><strong>Stage ${d.stageId}: ${d.stageTitle}</strong><span>${d.points}/${d.maxPoints}</span></div>
+            <div style="font-size:14px;margin-top:4px;">${d.outcome}</div>
+            ${!d.isOptimal ? `<div style="font-size:13px;color:#666;margin-top:4px;">Better: ${d.optimalChoice}</div>` : ''}
+        </div>`;
+    }).join('');
+    
+    overlay.innerHTML = `<div style="background:white;border-radius:16px;max-width:700px;max-height:90vh;overflow-y:auto;padding:24px;">
+        <h2 style="font-size:24px;margin-bottom:8px;">📊 Performance Summary</h2>
+        <div style="font-size:36px;font-weight:700;color:#2563eb;">${pct}%</div>
+        <div style="font-size:18px;margin-bottom:20px;">${grade}</div>
+        <h3 style="margin-bottom:12px;">Your Decision Path:</h3>
+        ${pathHtml}
+        <div style="margin-top:16px;padding:12px;background:#f1f5f9;border-radius:8px;font-size:13px;">
+            <strong>Legend:</strong> 🟢 Optimal | 🟡 Suboptimal | 🔴 Incorrect
+        </div>
+        <button onclick="this.closest('.rdx-debrief-overlay').remove()" style="margin-top:20px;width:100%;padding:12px;background:#3b82f6;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;">Close</button>
+    </div>`;
+    document.body.appendChild(overlay);
+};
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>

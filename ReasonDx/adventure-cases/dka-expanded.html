@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DKA - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fdba74; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fff7ed; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ea580c; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(234,88,12,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(234,88,12,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(234,88,12,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fff7ed; margin-bottom: 16px; line-height: 1.5; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; flex-shrink: 0; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #ea580c, #c2410c); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ea580c, #fdba74); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #ea580c; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; margin-bottom: 8px; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin-bottom: 16px; }
+        .completion-message { font-size: 1.2rem; color: #e2e8f0; margin-bottom: 32px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .crossplatform { margin-top: 32px; padding: 20px; background: rgba(234,88,12,0.1); border-radius: 12px; }
+        .crossplatform-links { display: flex; flex-direction: column; gap: 8px; }
+        .crossplatform-link { color: #fdba74; text-decoration: none; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK560723/" target="_blank" rel="noopener">DKA - StatPearls (StatPearls)</a>
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6820766/" target="_blank" rel="noopener">DKA Management (PMC)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
+const stages = [
+    { title: "The Dehydrated Diabetic", content: `<div class="narrative"><p>24-year-old woman with Type 1 DM presents with nausea, vomiting, abdominal pain, and confusion for 2 days. She ran out of insulin last week.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 124, BP 92/58, RR 28 (deep), T 99.1°F</p></div><div class="socratic-prompt"><h4>Predict the Labs</h4><p>Before seeing labs, what metabolic abnormalities would you PREDICT in a patient with insulin deficiency, and why?</p></div>`,
+        hint_beginner: "Think: no insulin → glucose can't enter cells → what happens to blood sugar? And what does the body burn instead?", hint_advanced: "Why might serum potassium appear normal or high despite total body K+ depletion?",
+        question: { prompt: "What lab abnormalities would you predict in DKA before seeing results?",
+            options: [{ text: "Hyperglycemia + metabolic acidosis + elevated anion gap: glucose can't enter cells, body burns fat → ketoacids", correct: true },
+                { text: "Hypoglycemia + respiratory acidosis: insulin deficiency causes low glucose", correct: false },
+                { text: "Hyperglycemia + metabolic alkalosis: vomiting causes bicarbonate retention", correct: false },
+                { text: "Normal glucose + lactic acidosis: sepsis pattern", correct: false }],
+            explanation: { correct: "No insulin → hyperglycemia (no cellular uptake + gluconeogenesis). Body switches to fat → ketogenesis → ketoacids (β-hydroxybutyrate, acetoacetate) → anion gap metabolic acidosis. The triad: hyperglycemia + ketosis + acidosis.", incorrect: "DKA = insulin deficiency. Without insulin, glucose rises (can't enter cells) and body burns fat instead, producing ketone acids." },
+            teaching: `<h4>DKA Pathophysiology</h4><p><strong>Insulin deficiency →</strong></p><p>1. Hyperglycemia (no uptake + gluconeogenesis)</p><p>2. Osmotic diuresis → dehydration (5-7L deficit)</p><p>3. Lipolysis → FFAs → ketogenesis</p><p>4. Ketoacids → AG metabolic acidosis</p>`,
+            why_chain: [{q:"Why Kussmaul respirations?",a:"Metabolic acidosis → respiratory compensation. Deep, rapid breathing blows off CO2 to raise pH. The body is trying to fix itself."},{q:"Why fruity breath?",a:"Acetone is a volatile ketone exhaled through the lungs - the classic 'fruity' odor."}], points: 10 }
+    },
+    { title: "Severity Assessment", content: `<div class="narrative"><p>Labs return: Glucose 486, pH 7.18, HCO3 8, K 5.8, Na 131, Cr 1.9</p><p style="margin-top:12px;">Calculate anion gap: 131 - (8 + 101) = <strong>22</strong></p></div><div class="socratic-prompt"><h4>Classify the Severity</h4><p>What criteria define mild vs moderate vs severe DKA, and how severe is this patient?</p></div>`,
+        hint_beginner: "pH and bicarbonate determine severity. What pH makes it severe?", hint_advanced: "Can you have DKA with normal glucose? When?",
+        question: { prompt: "What classifies this patient's DKA severity?",
+            options: [{ text: "Moderate-severe: pH 7.18, HCO3 8, altered mental status - these define severity, not glucose level", correct: true },
+                { text: "Severe based on glucose 486 alone", correct: false },
+                { text: "Mild because patient is awake", correct: false },
+                { text: "Cannot classify without ketone level", correct: false }],
+            explanation: { correct: "DKA severity is based on pH (mild 7.25-7.30, moderate 7.0-7.24, severe <7.0), HCO3 (mild 15-18, moderate 10-15, severe <10), and mental status. This patient: pH 7.18 + HCO3 8 + lethargy = moderate-severe.", incorrect: "Glucose level does NOT determine severity. A patient can have 'euglycemic DKA' (glucose <250) with severe acidosis - especially with SGLT2 inhibitors." },
+            teaching: `<h4>DKA Diagnostic Criteria</h4><p><strong>Glucose:</strong> Usually >250 (but can be normal!)</p><p><strong>pH:</strong> Mild 7.25-7.30, Moderate 7.0-7.24, Severe <7.0</p><p><strong>HCO3:</strong> Mild 15-18, Moderate 10-15, Severe <10</p><p><strong>Anion Gap:</strong> >12 (typically >20)</p><p><strong>Ketones:</strong> Positive in serum/urine</p>`,
+            why_chain: [{q:"What is euglycemic DKA?",a:"DKA with glucose <250. Causes: SGLT2 inhibitors (dump glucose in urine), pregnancy, partial treatment, poor oral intake. Don't rule out DKA just because glucose isn't sky-high!"}], points: 10 }
+    },
+    { title: "Treatment Priority", content: `<div class="narrative"><p>You diagnose moderate-severe DKA. The nurse asks what to start first.</p><p style="margin-top:12px;">Available: IV fluids, insulin drip, potassium, bicarbonate</p></div><div class="socratic-prompt"><h4>Sequence Matters</h4><p>What is the FIRST intervention in DKA, and why does sequence matter?</p></div>`,
+        hint_beginner: "Average fluid deficit is 5-7 liters. What comes first?", hint_advanced: "Why is giving insulin before checking potassium dangerous?",
+        question: { prompt: "What is the correct first step in DKA management?",
+            options: [{ text: "IV fluids (NS 1-1.5L bolus) - restore perfusion before insulin; check K+ before starting insulin", correct: true },
+                { text: "Insulin bolus immediately - need to stop ketogenesis", correct: false },
+                { text: "Bicarbonate to correct acidosis first", correct: false },
+                { text: "Potassium replacement as highest priority", correct: false }],
+            explanation: { correct: "FLUIDS FIRST! Average deficit is 5-7L. Start NS 1-1.5L in first hour. Check K+ before insulin because insulin drives K+ into cells - if K+ is <3.3, HOLD insulin until K+ repleted or you'll cause fatal arrhythmias.", incorrect: "Fluids are priority #1. Insulin should wait until K+ is confirmed ≥3.3. Bicarbonate is almost never indicated." },
+            teaching: `<h4>DKA Treatment Sequence</h4><p>1. <strong>Fluids:</strong> NS 1-1.5L bolus → 250-500 mL/hr</p><p>2. <strong>Potassium:</strong> Check level - if <3.3, HOLD insulin</p><p>3. <strong>Insulin:</strong> Only after K+ ≥3.3: 0.1 U/kg/hr drip</p><p>4. <strong>Monitor:</strong> Glucose hourly, lytes Q2-4h, AG Q4h</p>`,
+            why_chain: [{q:"Why NS first, not D5?",a:"Patient is severely dehydrated and hyperglycemic. NS restores volume without adding glucose. Switch to D5 when glucose <200 to allow continued insulin."},{q:"Why not LR?",a:"LR contains lactate (metabolized to bicarbonate) and potassium. In severe acidosis, NS is preferred for more predictable volume expansion."}], points: 15 }
+    },
+    { title: "The Potassium Paradox", content: `<div class="narrative"><p>Labs show K+ 5.8 mEq/L - looks high!</p><p style="margin-top:12px;">The resident asks: "Should we treat hyperkalemia?"</p></div><div class="socratic-prompt"><h4>Understand the Shift</h4><p>This patient's K+ is 5.8 but she has TOTAL BODY potassium depletion. How is this possible, and what will happen when you give insulin?</p></div>`,
+        hint_beginner: "In acidosis, K+ shifts out of cells. What happens when you correct the acidosis?", hint_advanced: "Calculate the expected K+ drop for each 0.1 pH increase",
+        question: { prompt: "Why is serum K+ elevated despite total body K+ depletion?",
+            options: [{ text: "Acidosis + insulin deficiency + hyperosmolality all shift K+ extracellularly; total body K+ is depleted from urinary losses", correct: true },
+                { text: "True hyperkalemia from renal failure", correct: false },
+                { text: "Lab error - redraw the sample", correct: false },
+                { text: "K+ is actually normal in DKA", correct: false }],
+            explanation: { correct: "THREE mechanisms cause K+ to shift OUT of cells: 1) Acidosis (H+ enters cells, K+ exits), 2) Insulin deficiency (insulin normally drives K+ into cells), 3) Hyperosmolality (water leaves cells, K+ follows). But osmotic diuresis has caused massive urinary K+ loss. When you give insulin → K+ shifts IN → serum K+ plummets.", incorrect: "The elevated K+ is a redistribution phenomenon, not true excess. Total body K+ is severely depleted from osmotic diuresis." },
+            teaching: `<h4>Potassium Management in DKA</h4><p><strong>K+ <3.3:</strong> HOLD insulin! Give 20-40 mEq/hr until K+ >3.3</p><p><strong>K+ 3.3-5.3:</strong> Add 20-30 mEq K+ per liter of IV fluid</p><p><strong>K+ >5.3:</strong> No K+ in fluids, recheck in 2 hours</p><p style="margin-top:8px;"><strong>Expect K+ to drop rapidly with insulin!</strong></p>`,
+            why_chain: [{q:"How much will K+ drop?",a:"For each 0.1 unit pH increase, K+ drops ~0.6 mEq/L. A pH change from 7.18 to 7.38 could drop K+ by ~1.2 mEq/L - potentially fatal."},{q:"Why is hypokalemia dangerous?",a:"Hypokalemia causes fatal arrhythmias (Vfib, Vtach) and respiratory muscle weakness. It's a more immediate threat than hyperglycemia."}], points: 15 }
+    },
+    { title: "Insulin Protocol", content: `<div class="narrative"><p>K+ is 5.8 (no K+ supplementation needed yet), fluids running.</p><p style="margin-top:12px;">Time to start insulin. Patient weighs 60 kg.</p></div><div class="socratic-prompt"><h4>Dose It Right</h4><p>How do you dose insulin in DKA, and what is the target rate of glucose decline?</p></div>`,
+        hint_beginner: "IV regular insulin drip - what's the rate per kg?", hint_advanced: "Why not drop glucose too fast? What's the cerebral edema risk?",
+        question: { prompt: "What is the correct insulin protocol for this 60 kg patient?",
+            options: [{ text: "Regular insulin 0.1 U/kg/hr IV (6 U/hr); target glucose drop 50-70 mg/dL per hour", correct: true },
+                { text: "High-dose insulin 1 U/kg bolus to rapidly correct ketosis", correct: false },
+                { text: "Glargine 0.5 U/kg SubQ - long-acting provides smooth control", correct: false },
+                { text: "No set dose - titrate to normalize glucose as fast as possible", correct: false }],
+            explanation: { correct: "Standard: 0.1 U/kg/hr continuous IV infusion (some add 0.1 U/kg bolus). For 60 kg = 6 U/hr. Target glucose drop: 50-70 mg/dL per hour. If not dropping, double the rate. Too fast = cerebral edema risk.", incorrect: "Use 0.1 U/kg/hr IV regular insulin. SubQ insulin has poor absorption in dehydrated, hypoperfused patients. Don't drop glucose too fast!" },
+            teaching: `<h4>Insulin Management</h4><p><strong>Confirm K+ ≥3.3 first!</strong></p><p><strong>Dose:</strong> 0.1 U/kg/hr (or 0.14 U/kg/hr without bolus)</p><p><strong>Goal:</strong> Glucose ↓ 50-70 mg/dL per hour</p><p><strong>If not dropping:</strong> Double infusion rate</p><p><strong>When glucose <200:</strong> Add D5 to fluids, reduce insulin to 0.05 U/kg/hr</p>`,
+            why_chain: [{q:"Why IV not SubQ?",a:"IV regular insulin has 5-7 min half-life - easy to titrate. SubQ has poor absorption in dehydration and is unpredictable. Only use SubQ for mild DKA if IV unavailable."},{q:"Why keep glucose 150-200?",a:"You need continued insulin to clear ketones. If glucose drops too low, you must stop insulin before acidosis resolves → rebound DKA."}], points: 10 }
+    },
+    { title: "The Anion Gap Trap", content: `<div class="narrative"><p>4 hours later: Glucose 220 (was 486). Great progress!</p><p style="margin-top:12px;">The intern wants to stop the insulin drip.</p></div><div class="socratic-prompt"><h4>Know When to Stop</h4><p>The glucose is nearly normal - can you stop the insulin drip? What determines when DKA is truly resolved?</p></div>`,
+        hint_beginner: "Glucose normalizes BEFORE ketoacidosis resolves. What else must you track?", hint_advanced: "Why does non-anion gap acidosis sometimes develop during DKA treatment?",
+        question: { prompt: "When can you discontinue the IV insulin drip?",
+            options: [{ text: "When anion gap closes (≤12) AND pH >7.30 AND HCO3 ≥18 - not when glucose normalizes", correct: true },
+                { text: "When glucose <200 mg/dL", correct: false },
+                { text: "When ketones are negative on urine dipstick", correct: false },
+                { text: "After 24 hours regardless of labs", correct: false }],
+            explanation: { correct: "GLUCOSE NORMALIZES BEFORE KETOSIS RESOLVES! Continue insulin until: Anion gap ≤12, pH >7.30, HCO3 ≥18. Add dextrose to fluids to allow continued insulin. Stop insulin early → rebound ketoacidosis.", incorrect: "Never stop insulin based on glucose alone! The anion gap must close, meaning ketoacids have been metabolized. This takes longer than glucose normalization." },
+            teaching: `<h4>DKA Resolution Criteria (need 2 of 3)</h4><p>✓ Glucose <200 mg/dL</p><p>✓ Anion gap ≤12</p><p>✓ pH >7.30 AND/OR HCO3 ≥18</p><p style="margin-top:8px;"><strong>Common mistake:</strong> Stopping insulin when glucose normalizes but gap still elevated → rebound DKA within hours.</p>`,
+            why_chain: [{q:"Why does AG close slower than glucose?",a:"Glucose drops quickly with insulin (cellular uptake). Ketones must be metabolized to bicarbonate - this regenerates buffer slowly. Gap closes last."},{q:"Why add D5 to fluids?",a:"You need to continue insulin to clear ketones, but must prevent hypoglycemia. D5 provides glucose substrate while allowing continued ketone clearance."}], points: 15 }
+    },
+    { title: "The Bicarbonate Question", content: `<div class="narrative"><p>The pH is 7.18. The attending asks about bicarbonate.</p></div><div class="socratic-prompt"><h4>To Bicarb or Not?</h4><p>Should you give sodium bicarbonate to correct the acidosis? What does the evidence say?</p></div>`,
+        hint_beginner: "Bicarbonate is almost never indicated in DKA. Why?", hint_advanced: "What is paradoxical CNS acidosis and why does bicarb cause it?",
+        question: { prompt: "When is bicarbonate indicated in DKA?",
+            options: [{ text: "Almost never - only consider if pH <6.9 or life-threatening hyperkalemia; evidence shows no benefit and potential harm", correct: true },
+                { text: "For any pH <7.20 to prevent cardiac dysfunction", correct: false },
+                { text: "Routinely to speed correction of acidosis", correct: false },
+                { text: "When HCO3 <10 regardless of pH", correct: false }],
+            explanation: { correct: "Bicarbonate does NOT improve outcomes in DKA and may cause harm: paradoxical CNS acidosis (CO2 crosses BBB faster than HCO3), worsened hypokalemia, delayed ketone clearance. Only consider if pH <6.9 (100 mEq NaHCO3 in 400 mL) or life-threatening hyperkalemia.", incorrect: "Evidence shows no benefit for routine bicarbonate in DKA. The acidosis self-corrects as ketones are metabolized to bicarbonate. Bicarb can worsen outcomes." },
+            teaching: `<h4>Why NOT Bicarbonate</h4><p>1. <strong>Paradoxical CNS acidosis:</strong> CO2 crosses BBB faster than HCO3 → brain pH drops</p><p>2. <strong>Worsened hypokalemia:</strong> Alkalosis shifts K+ into cells</p><p>3. <strong>Left-shifted O2 curve:</strong> Tissue hypoxia</p><p>4. <strong>No proven benefit:</strong> Studies show no improvement</p>`,
+            why_chain: [{q:"How does acidosis self-correct?",a:"Insulin stops ketogenesis. Existing ketones (β-hydroxybutyrate, acetoacetate) are metabolized. Each ketone molecule regenerates one bicarbonate. The body makes its own buffer."},{q:"When might you give bicarb?",a:"pH <6.9 (cardiac dysfunction risk) or severe hyperkalemia as temporizing measure. Even then, evidence is weak."}], points: 10 }
+    },
+    { title: "Cerebral Edema", content: `<div class="narrative"><p>A pediatric DKA patient is mentioned - the feared complication of cerebral edema.</p></div><div class="socratic-prompt"><h4>Know the Warning Signs</h4><p>What causes cerebral edema in DKA treatment, who is at risk, and how do you recognize it?</p></div>`,
+        hint_beginner: "Brain adapts to high osmolality. What happens when you correct too fast?", hint_advanced: "What are 'idiogenic osmoles' and why do they matter?",
+        question: { prompt: "What causes cerebral edema during DKA treatment?",
+            options: [{ text: "Rapid osmolality correction: brain has idiogenic osmoles that take time to dissipate; water shifts into brain", correct: true },
+                { text: "Direct toxicity of ketones to neurons", correct: false },
+                { text: "Hypoglycemia from insulin", correct: false },
+                { text: "Bicarbonate administration always causes it", correct: false }],
+            explanation: { correct: "Brain adapts to hyperosmolality by generating idiogenic osmoles (taurine, etc.). These take 24-48h to dissipate. Rapid osmolality correction → osmotic gradient favors water INTO brain → cerebral edema → herniation. Risk factors: young age (<5y), new-onset DM, severe acidosis, excessive fluids.", incorrect: "Cerebral edema is caused by rapid osmolality shifts, not ketone toxicity. The brain's adaptive osmoles create an osmotic gradient that draws water in when serum osmolality drops too fast." },
+            teaching: `<h4>Cerebral Edema in DKA</h4><p><strong>Incidence:</strong> ~1% of pediatric DKA, rare in adults</p><p><strong>Mortality:</strong> 20-25%</p><p><strong>Warning signs:</strong> Headache, confusion worsening, bradycardia, HTN, pupil changes</p><p><strong>Treatment:</strong> Mannitol 0.5-1 g/kg, hypertonic saline, reduce fluid rate, elevate HOB</p>`,
+            why_chain: [{q:"Why is it more common in children?",a:"Children have larger brain:skull ratio, less room for swelling. Also more likely to present with new-onset DM and severe acidosis."},{q:"How to prevent it?",a:"Don't drop glucose >100 mg/dL/hr. Don't over-hydrate. Avoid hypotonic fluids early. Monitor neuro status closely."}], points: 10 }
+    },
+    { title: "Transition to SubQ", content: `<div class="narrative"><p>DKA resolving: pH 7.34, HCO3 20, AG 10, glucose 180. Patient is eating.</p><p style="margin-top:12px;">Time to transition to subcutaneous insulin.</p></div><div class="socratic-prompt"><h4>The Overlap Principle</h4><p>How do you transition from IV to SubQ insulin without causing rebound DKA?</p></div>`,
+        hint_beginner: "SubQ long-acting insulin takes hours to work. What happens if you stop IV too soon?", hint_advanced: "Calculate the total daily dose for SubQ conversion",
+        question: { prompt: "What is the critical principle when transitioning to SubQ insulin?",
+            options: [{ text: "Give SubQ long-acting insulin AND continue IV drip for 2-4 hours overlap before stopping IV", correct: true },
+                { text: "Stop IV drip, then give SubQ insulin immediately", correct: false },
+                { text: "Continue IV for 24 hours after starting SubQ", correct: false },
+                { text: "Only transition once glucose is completely normal", correct: false }],
+            explanation: { correct: "SubQ basal insulin (glargine, detemir) takes 2-4 hours to start working. If you stop IV before SubQ is active, patient has NO insulin coverage → ketogenesis restarts → rebound DKA within hours. Give SubQ, THEN continue IV for 2-4h overlap, THEN stop IV.", incorrect: "The overlap is critical! IV insulin has a 5-7 minute half-life. Without overlap, there's a gap in coverage that allows ketogenesis to restart." },
+            teaching: `<h4>Transition Protocol</h4><p><strong>Prerequisites:</strong> DKA resolved, patient eating, no nausea</p><p><strong>Steps:</strong></p><p>1. Give SubQ long-acting insulin</p><p>2. Continue IV drip for 2-4 HOURS</p><p>3. Stop IV after overlap period</p><p>4. Start mealtime rapid-acting insulin</p><p style="margin-top:8px;"><strong>Never stop IV before SubQ is working!</strong></p>`,
+            why_chain: [{q:"How to calculate SubQ dose?",a:"Total daily dose ~0.5-0.8 U/kg. Give 50% as basal (glargine), 50% split among meals. Adjust based on prior regimen if known."},{q:"What if patient can't eat?",a:"Don't transition! Continue IV insulin and dextrose-containing fluids until patient tolerates PO intake."}], points: 10 }
+    },
+    { title: "Find the Precipitant", content: `<div class="narrative"><p>DKA is resolving. Important question: Why did this happen?</p><p style="margin-top:12px;">She ran out of insulin - but always look for other triggers.</p></div><div class="socratic-prompt"><h4>Identify the Trigger</h4><p>What are the common precipitants of DKA, and why is identifying them critical?</p></div>`,
+        hint_beginner: "The 'I's of DKA: Infection, Infarction, Insulin...", hint_advanced: "What workup would you do to rule out occult infection or MI?",
+        question: { prompt: "What are the most common precipitants of DKA?",
+            options: [{ text: "Infection (#1), insulin non-compliance, new-onset DM, MI/CVA, drugs (steroids, cocaine), pregnancy", correct: true },
+                { text: "Dietary indiscretion is the most common cause", correct: false },
+                { text: "Exercise-induced DKA is common in Type 1 DM", correct: false },
+                { text: "Precipitants are rarely identifiable", correct: false }],
+            explanation: { correct: "Infection is the #1 precipitant (often occult UTI or pneumonia) - always look for it! Other triggers: insulin non-compliance (this patient), new-onset DM (first presentation), ischemia (MI/stroke), drugs (steroids, cocaine, SGLT2i), pregnancy. Identifying the trigger prevents recurrence.", incorrect: "Infection is the most common trigger. Always check CBC, UA, CXR, and consider other sources. Treating only the DKA without addressing the precipitant leads to recurrence." },
+            teaching: `<h4>DKA Precipitants (The I's)</h4><p><strong>I</strong>nfection - #1 cause, often occult</p><p><strong>I</strong>nsulin - non-compliance or pump failure</p><p><strong>I</strong>schemia - MI, CVA</p><p><strong>I</strong>nitial presentation - new-onset DM</p><p><strong>I</strong>ntoxication - cocaine, alcohol</p><p><strong>I</strong>atrogenic - steroids, SGLT2i</p>`,
+            why_chain: [{q:"Why can infection precipitate DKA without hyperglycemia symptoms?",a:"Infection causes counter-regulatory hormone surge (cortisol, glucagon, catecholamines) that overwhelms insulin. Patient may present with DKA as first sign of occult infection."},{q:"What about SGLT2 inhibitor DKA?",a:"SGLT2i cause glycosuria → lower glucose but same ketone production. Can have severe DKA with normal glucose (euglycemic DKA). Hold SGLT2i before surgery!"}], points: 10 }
+    },
+    { title: "Case Resolution", content: `<div class="narrative"><p>Patient transitioned to SubQ insulin, eating well, glucose controlled. Precipitant: ran out of insulin (social issues identified, resources provided).</p><p style="margin-top:12px;">Discharged with endocrine follow-up, diabetes educator referral.</p></div><div class="socratic-prompt"><h4>Synthesis</h4><p>What are the key management principles that determine outcome in DKA?</p></div>`,
+        hint_beginner: "Think: Fluids → Potassium → Insulin → Monitor gap → Transition", hint_advanced: "What's the mortality of DKA with optimal vs suboptimal management?",
+        question: { prompt: "What determines successful DKA management?",
+            options: [{ text: "Fluids first, K+ before insulin, monitor anion gap (not just glucose), proper SubQ transition with overlap", correct: true },
+                { text: "Rapid insulin administration is the key determinant", correct: false },
+                { text: "Bicarbonate correction of acidosis determines outcome", correct: false },
+                { text: "Glucose normalization is the primary endpoint", correct: false }],
+            explanation: { correct: "Key principles: 1) Fluids first (5-7L deficit), 2) Check K+ before insulin (hold if <3.3), 3) Monitor ANION GAP not just glucose, 4) Continue insulin until gap closes, 5) Overlap IV/SubQ during transition, 6) Find and treat precipitant. Mortality <1% with proper management.", incorrect: "The sequence matters! Fluids before insulin, K+ monitoring throughout, gap closure before stopping insulin. Common mistakes: stopping insulin when glucose normalizes, inadequate K+ replacement, no overlap during transition." },
+            teaching: `<h4>DKA Management Summary</h4><p>✓ Fluids: NS 1-1.5L bolus → 250-500 mL/hr</p><p>✓ K+: Check before insulin; hold if <3.3</p><p>✓ Insulin: 0.1 U/kg/hr after K+ confirmed</p><p>✓ Monitor: Glucose hourly, lytes Q2-4h, AG Q4h</p><p>✓ D5 when glucose <200 (continue insulin!)</p><p>✓ Resolution: AG ≤12, pH >7.30, HCO3 ≥18</p><p>✓ Transition: 2-4h IV/SubQ overlap</p><p>✓ Find precipitant!</p>`,
+            why_chain: [{q:"What's the mortality of DKA?",a:"With optimal management, <1%. Mortality increases with delayed treatment, missed precipitants (especially MI), and cerebral edema (20-25% mortality if it occurs)."},{q:"How to prevent recurrence?",a:"Diabetes education, sick day rules (never stop insulin!), address social barriers to insulin access, close endocrine follow-up."}], points: 10 }
+    }
+];
+function shuffleArray(arr) { const s=[...arr]; for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];} return s; }
+function setDifficulty(l,b) { difficulty=l; document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderStage(currentStage); }
+function renderStage(i) {
+    const s=stages[i], opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))), ltrs='ABCD';
+    let hints='';
+    if(difficulty==='beginner'&&s.hint_beginner) hints=`<div class="hint-beginner" style="display:block;">💡 ${s.hint_beginner}</div>`;
+    else if(difficulty==='advanced'&&s.hint_advanced) hints=`<div class="hint-advanced" style="display:block;">🎯 ${s.hint_advanced}</div>`;
+    const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>🔗 WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">❓ ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+    document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+    document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">✓ Excellent!</div><div class="feedback-explanation">${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">✗ Not Quite</div><div class="feedback-explanation">${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div></div>`;
+}
+function selectOption(el,i) {
+    if(answeredQuestions.has(i)) return;
+    const c=el.dataset.correct==='true', s=stages[i];
+    answeredQuestions.add(i); decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+    if(c) score+=s.question.points; maxScore+=s.question.points;
+    document.getElementById('score').textContent=score; document.getElementById('maxScore').textContent=maxScore;
+    document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+    document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+    document.getElementById('teach').classList.add('show');
+    const w=document.getElementById('why'); if(w)w.classList.add('show');
+    document.getElementById('next-btn').classList.add('show');
+}
+function nextStage() { if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion(); }
+function showCompletion() {
+    const p=Math.round(score/maxScore*100);
+    let g,m,clr;
+    if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent understanding of DKA management!';}
+    else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp of DKA. Review potassium management.';}
+    else if(p>=70){g='Good Progress';clr='#f59e0b';m='Solid foundation. Focus on treatment sequence.';}
+    else{g='Keep Learning';clr='#ef4444';m='Review fluids first, K+ before insulin, gap closure.';}
+    document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'✓':'✗'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}pts</span></div>`).join('')}</div><div class="crossplatform"><h4>Continue Learning</h4><div class="crossplatform-links"><a href="#" class="crossplatform-link">🧬 MechanismDx: Ketone Metabolism</a><a href="#" class="crossplatform-link">📚 Related: HHS Case</a><a href="javascript:location.reload()" class="crossplatform-link">🔄 Restart</a></div></div></div>`;
+    document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>

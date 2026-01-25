@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Adrenal Crisis - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #701a75 0%, #c026d3 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #f0abfc; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fdf4ff; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #c026d3; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(192,38,211,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(192,38,211,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(192,38,211,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #c026d3, #a21caf); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #c026d3, #f0abfc); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #c026d3; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK499968/" target="_blank" rel="noopener">Adrenal Crisis - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Hypotensive Patient",content:`<div class="narrative"><p>52-year-old woman on chronic prednisone for rheumatoid arthritis presents with 3 days of vomiting and diarrhea from gastroenteritis. She ran out of prednisone 4 days ago and couldn't get a refill.</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 99.8F, HR 118, BP 76/48, RR 22<br><strong>Exam:</strong> Lethargic, dry mucous membranes, diffuse abdominal tenderness<br><strong>Labs:</strong> Na 128, K 5.8, Glucose 62, Cr 1.8 (baseline 0.9)</p></div><div class="socratic-prompt"><h4>Recognize the Emergency</h4><p>What is the likely diagnosis, and what is the FIRST treatment priority?</p></div>`,
+hint_beginner:"Chronic steroid use + sudden cessation + stressor = adrenal crisis",hint_advanced:"Why does secondary AI not usually cause hyperkalemia?",
+question:{prompt:"Chronic prednisone stopped abruptly + gastroenteritis + hypotension + hyponatremia + hyperkalemia + hypoglycemia. Diagnosis and first treatment?",
+options:[{text:"Adrenal crisis (acute adrenal insufficiency) - give IV hydrocortisone 100mg immediately PLUS aggressive IV fluids; don't wait for cortisol level to treat",correct:true},
+{text:"Wait for cortisol level before treating",correct:false},
+{text:"Sepsis only - antibiotics first",correct:false},
+{text:"Give insulin for hyperkalemia first",correct:false}],
+explanation:{correct:"Adrenal crisis is a CLINICAL diagnosis requiring IMMEDIATE treatment. Give IV hydrocortisone 100mg bolus + aggressive IV fluids (D5NS for hypoglycemia). Don't wait for cortisol levels - delay is fatal. This patient has typical precipitants: chronic steroid (HPA suppression) + abrupt cessation + physiologic stress (gastroenteritis).",incorrect:"Adrenal crisis is fatal if not treated immediately. Treat empirically based on clinical suspicion. Draw cortisol and ACTH but don't wait for results. The classic triad: hypotension + hyponatremia + hyperkalemia (though hyperkalemia less common in secondary AI)."},
+teaching:`<h4>Adrenal Crisis Recognition</h4><p><strong>Precipitants:</strong> Steroid cessation, infection, surgery, trauma in patient with AI</p><p><strong>Features:</strong> Hypotension (refractory to fluids), hyponatremia, hyperkalemia, hypoglycemia</p><p><strong>Treatment:</strong> IV hydrocortisone 100mg IMMEDIATELY + IV fluids</p><p><strong>Don't wait:</strong> Draw cortisol/ACTH but treat empirically</p>`,
+why_chain:[{q:"Why doesn't secondary AI usually cause hyperkalemia?",a:"In secondary (pituitary) AI, the adrenal still makes aldosterone (controlled by renin-angiotensin, not ACTH). Primary AI loses both cortisol AND aldosterone → hyperkalemia. This patient may have some primary component or severe volume depletion contributing to hyperkalemia."}],points:15}},
+
+{title:"Pathophysiology",content:`<div class="narrative"><p>Understand why this patient developed adrenal crisis.</p></div><div class="socratic-prompt"><h4>HPA Axis Suppression</h4><p>Why did stopping prednisone cause this crisis?</p></div>`,
+hint_beginner:"Chronic exogenous steroids suppress the HPA axis",hint_advanced:"How long does HPA suppression last after stopping steroids?",
+question:{prompt:"Why did stopping chronic prednisone cause adrenal crisis?",
+options:[{text:"Chronic exogenous steroids suppress ACTH (negative feedback), causing adrenal atrophy; when steroids stopped, adrenals can't respond to stress; takes weeks-months for recovery",correct:true},
+{text:"Prednisone directly damages adrenal glands",correct:false},
+{text:"The body has no cortisol stores",correct:false},
+{text:"Only IV steroids cause suppression",correct:false}],
+explanation:{correct:"Chronic steroids (>2-3 weeks of supraphysiologic doses) suppress CRH and ACTH via negative feedback. The adrenal cortex atrophies without ACTH stimulation. When exogenous steroids stop, the atrophied adrenals can't produce cortisol on demand. Recovery takes weeks to months.",incorrect:"HPA suppression is the mechanism. The adrenals aren't destroyed - they're atrophied from disuse. Any supraphysiologic steroid dose for >2-3 weeks can cause suppression. Recovery is gradual after steroids stopped."},
+teaching:`<h4>HPA Axis Suppression</h4><p><strong>Mechanism:</strong> Exogenous steroids → suppress ACTH → adrenal atrophy</p><p><strong>Risk:</strong> >2-3 weeks of supraphysiologic steroids</p><p><strong>Recovery:</strong> Weeks to months after stopping</p><p><strong>Crisis trigger:</strong> Stress (infection, surgery, trauma) when can't mount cortisol response</p>`,
+why_chain:[{q:"What dose/duration causes HPA suppression?",a:"Generally, prednisone >7.5mg/day (or equivalent) for >3 weeks causes clinically significant suppression. Any dose for >2-3 weeks may cause some suppression. Single morning doses are less suppressive than divided doses."}],points:10}},
+
+{title:"Immediate Treatment",content:`<div class="narrative"><p>You've given hydrocortisone 100mg IV and started fluids. What's next?</p></div><div class="socratic-prompt"><h4>Complete the Resuscitation</h4><p>What additional immediate treatments are needed?</p></div>`,
+hint_beginner:"Fluids, glucose, and treat the precipitant",hint_advanced:"Does she need mineralocorticoid replacement acutely?",
+question:{prompt:"After IV hydrocortisone bolus, what else does she need?",
+options:[{text:"Aggressive IV fluids (D5NS - addresses volume and hypoglycemia), continued hydrocortisone (50-100mg q6-8h), identify and treat precipitant; fludrocortisone NOT needed acutely (high-dose hydrocortisone has mineralocorticoid activity)",correct:true},
+{text:"Fludrocortisone immediately",correct:false},
+{text:"Hydrocortisone bolus alone is sufficient",correct:false},
+{text:"Restrict fluids",correct:false}],
+explanation:{correct:"Complete treatment: IV D5NS (corrects hypovolemia and hypoglycemia), continued stress-dose steroids (hydrocortisone 50-100mg q6-8h or continuous infusion), treat precipitant (gastroenteritis). Fludrocortisone (mineralocorticoid) NOT needed acutely - high-dose hydrocortisone has enough mineralocorticoid effect.",incorrect:"Volume resuscitation is critical - these patients are severely volume depleted. D5NS addresses both. Continued stress-dose steroids until stable. Fludrocortisone is for chronic primary AI, not acute crisis."},
+teaching:`<h4>Adrenal Crisis Treatment</h4><p><strong>Hydrocortisone:</strong> 100mg IV bolus, then 50-100mg q6-8h (or 200mg/24h infusion)</p><p><strong>Fluids:</strong> D5NS - aggressive (often need 2-3L in first hours)</p><p><strong>Glucose:</strong> Monitor and correct hypoglycemia</p><p><strong>Fludrocortisone:</strong> NOT needed acutely (add later for primary AI)</p>`,
+why_chain:[{q:"Why D5NS instead of NS?",a:"Addresses both hypovolemia and hypoglycemia simultaneously. Cortisol is needed for gluconeogenesis - without it, patients develop hypoglycemia. D5NS provides glucose while restoring volume."}],points:10}},
+
+{title:"Primary vs Secondary AI",content:`<div class="narrative"><p>This patient has secondary adrenal insufficiency (from exogenous steroid suppression). Compare to primary.</p></div><div class="socratic-prompt"><h4>Distinguish the Types</h4><p>What differentiates primary from secondary adrenal insufficiency?</p></div>`,
+hint_beginner:"Primary = adrenal problem; Secondary = pituitary/hypothalamic problem",hint_advanced:"Why is hyperpigmentation only in primary AI?",
+question:{prompt:"What distinguishes primary from secondary adrenal insufficiency?",
+options:[{text:"Primary (Addison's): adrenal destruction, high ACTH, hyperpigmentation, aldosterone deficiency (hyperkalemia). Secondary: pituitary/hypothalamic, low ACTH, NO hyperpigmentation, aldosterone preserved (no hyperkalemia)",correct:true},
+{text:"They present identically",correct:false},
+{text:"Primary has low ACTH",correct:false},
+{text:"Secondary causes more hyperpigmentation",correct:false}],
+explanation:{correct:"Primary AI: adrenal gland destroyed (autoimmune, infection, hemorrhage) → low cortisol, high ACTH (no feedback) → hyperpigmentation (ACTH/MSH), low aldosterone → hyperkalemia. Secondary AI: pituitary/hypothalamic (tumor, surgery, exogenous steroids) → low cortisol, low ACTH → no hyperpigmentation, aldosterone preserved.",incorrect:"The key distinctions: ACTH level (high in primary, low in secondary), hyperpigmentation (primary only - from high ACTH), and aldosterone (deficient in primary only - ACTH doesn't regulate aldosterone)."},
+teaching:`<h4>Primary vs Secondary AI</h4><p><strong>Primary (Addison's):</strong> Adrenal destruction, ↑ACTH, hyperpigmentation, ↓aldosterone, hyperkalemia</p><p><strong>Secondary:</strong> Pituitary/hypothalamic, ↓ACTH, NO hyperpigmentation, aldosterone preserved</p><p><strong>Most common cause:</strong> Secondary (exogenous steroids)</p>`,
+why_chain:[{q:"Why does hyperpigmentation occur in primary AI?",a:"ACTH is elevated due to loss of cortisol feedback. ACTH is cleaved from pro-opiomelanocortin (POMC), which also produces melanocyte-stimulating hormone (MSH). High POMC processing → high MSH → hyperpigmentation in skin creases, gums, scars."}],points:10}},
+
+{title:"Diagnostic Testing",content:`<div class="narrative"><p>Patient stabilized. Now confirm the diagnosis.</p></div><div class="socratic-prompt"><h4>Confirm AI</h4><p>What testing confirms adrenal insufficiency?</p></div>`,
+hint_beginner:"Morning cortisol and ACTH stimulation test",hint_advanced:"When can you skip the stim test?",
+question:{prompt:"What tests diagnose adrenal insufficiency?",
+options:[{text:"AM cortisol (low <3 diagnostic, >15-18 rules out); ACTH stimulation test (cosyntropin 250mcg → measure cortisol at 30/60min; peak <18-20 = AI); ACTH level distinguishes primary vs secondary",correct:true},
+{text:"Random cortisol is sufficient",correct:false},
+{text:"Only imaging is needed",correct:false},
+{text:"Potassium level confirms diagnosis",correct:false}],
+explanation:{correct:"AM cortisol: <3 mcg/dL is diagnostic of AI; >15-18 rules out. Between 3-15: do ACTH stimulation test. Cosyntropin test: give 250mcg IV/IM, measure cortisol at 0, 30, 60 min; peak <18-20 = AI. Check ACTH level to distinguish primary (high) from secondary (low).",incorrect:"Morning cortisol is screening test. ACTH stim test is confirmatory. ACTH level tells you primary vs secondary. Random cortisol is unreliable due to diurnal variation."},
+teaching:`<h4>AI Diagnostic Testing</h4><p><strong>AM cortisol:</strong> <3 = AI; >15-18 = rules out; 3-15 = stim test</p><p><strong>ACTH stim test:</strong> Cosyntropin 250mcg → cortisol at 30/60min; peak <18-20 = AI</p><p><strong>ACTH level:</strong> ↑ = primary; ↓ = secondary</p><p><strong>In crisis:</strong> Draw cortisol/ACTH before steroids if possible, but don't delay treatment</p>`,
+why_chain:[{q:"When can you skip the stim test?",a:"If AM cortisol is <3 (definitely AI) or >15-18 (definitely not AI). Also skip if high clinical suspicion and already treating empirically in crisis - can test after recovery. Stim test needed for intermediate cortisol values."}],points:10}},
+
+{title:"Causes of Primary AI",content:`<div class="narrative"><p>Review the causes of primary adrenal insufficiency.</p></div><div class="socratic-prompt"><h4>Etiology</h4><p>What causes primary adrenal insufficiency?</p></div>`,
+hint_beginner:"Autoimmune is most common in developed countries",hint_advanced:"What is Waterhouse-Friderichsen syndrome?",
+question:{prompt:"What are the causes of primary adrenal insufficiency?",
+options:[{text:"Autoimmune (most common in developed countries), infections (TB, HIV, fungal - common worldwide), adrenal hemorrhage (Waterhouse-Friderichsen with meningococcemia), metastases, medications (ketoconazole, etomidate)",correct:true},
+{text:"Only autoimmune causes primary AI",correct:false},
+{text:"Steroid use causes primary AI",correct:false},
+{text:"Primary AI has no identifiable cause",correct:false}],
+explanation:{correct:"Primary AI causes: Autoimmune adrenalitis (#1 in developed countries, often with other autoimmune conditions), infections (TB historically common, HIV-associated, fungal), hemorrhage/infarction (Waterhouse-Friderichsen with meningococcemia, anticoagulation), metastases, infiltration (sarcoid, amyloid), drugs (ketoconazole, etomidate).",incorrect:"Multiple causes exist. Autoimmune is most common in developed countries; TB is major cause globally. Steroid use causes secondary AI (HPA suppression), not primary."},
+teaching:`<h4>Primary AI Causes</h4><p><strong>Autoimmune:</strong> Most common (developed countries); often with APS</p><p><strong>Infection:</strong> TB, HIV, fungal (histoplasma, CMV)</p><p><strong>Hemorrhage:</strong> Waterhouse-Friderichsen, anticoagulation, trauma</p><p><strong>Infiltration:</strong> Metastases, sarcoid, amyloid</p><p><strong>Drugs:</strong> Ketoconazole, etomidate (inhibit steroidogenesis)</p>`,
+why_chain:[{q:"What is Waterhouse-Friderichsen syndrome?",a:"Bilateral adrenal hemorrhage classically associated with meningococcal sepsis (but can occur with other severe sepsis, DIC, or anticoagulation). Presents with shock, DIC, and purpura. Often fatal without prompt treatment."}],points:10}},
+
+{title:"Stress Dosing",content:`<div class="narrative"><p>Patient recovering well. Plan for discharge and future stress dosing.</p></div><div class="socratic-prompt"><h4>Sick Day Rules</h4><p>How should patients with AI manage illness or surgery?</p></div>`,
+hint_beginner:"Double or triple the dose during illness",hint_advanced:"What are surgical stress dose recommendations?",
+question:{prompt:"How should patients with AI adjust steroids during illness?",
+options:[{text:"Sick day rules: double or triple oral dose for minor illness; major illness/surgery needs IV hydrocortisone 50-100mg q8h; NEVER stop steroids abruptly; wear medical alert identification",correct:true},
+{text:"Keep dose the same during illness",correct:false},
+{text:"Stop steroids when sick to avoid immunosuppression",correct:false},
+{text:"Only increase if hospitalized",correct:false}],
+explanation:{correct:"Stress dosing: Minor illness (cold, flu) - double or triple oral dose. Moderate illness (vomiting) - inject hydrocortisone if can't take oral. Major surgery - IV hydrocortisone 50-100mg q8h perioperatively, taper over days. Never stop steroids abruptly. All patients need medical alert identification.",incorrect:"Cortisol demand increases during stress. Patients with AI can't increase endogenous cortisol, so must increase exogenous dose. Failure to stress-dose can precipitate crisis."},
+teaching:`<h4>Stress Dosing Guidelines</h4><p><strong>Minor illness:</strong> Double or triple oral dose</p><p><strong>GI illness (can't take PO):</strong> IM hydrocortisone 100mg</p><p><strong>Minor surgery:</strong> Hydrocortisone 25-50mg IV at induction</p><p><strong>Major surgery:</strong> Hydrocortisone 50-100mg q8h × 24-72h, then taper</p><p><strong>Always:</strong> Medical alert ID, emergency injection kit</p>`,
+why_chain:[{q:"How long to taper after major surgery?",a:"Taper over 1-3 days back to maintenance dose as clinical condition improves. No need for prolonged high doses. The body's stress response is time-limited, and prolonged high doses increase infection/wound healing risks."}],points:10}},
+
+{title:"Chronic Management",content:`<div class="narrative"><p>Plan chronic replacement therapy for this patient with steroid-induced adrenal suppression.</p></div><div class="socratic-prompt"><h4>Maintenance Therapy</h4><p>What is chronic replacement for adrenal insufficiency?</p></div>`,
+hint_beginner:"Hydrocortisone is most physiologic; primary AI also needs fludrocortisone",hint_advanced:"What's the difference in dosing for primary vs secondary AI?",
+question:{prompt:"What is maintenance replacement for adrenal insufficiency?",
+options:[{text:"Glucocorticoid: hydrocortisone 15-25mg/day in divided doses (or equivalent); Primary AI also needs mineralocorticoid (fludrocortisone 0.05-0.2mg/day); Secondary AI usually doesn't need mineralocorticoid",correct:true},
+{text:"Same treatment for all AI",correct:false},
+{text:"Only need steroids during illness",correct:false},
+{text:"Fludrocortisone for everyone",correct:false}],
+explanation:{correct:"Glucocorticoid replacement: hydrocortisone 15-25mg/day (typically 10-15mg AM, 5-10mg afternoon to mimic circadian rhythm) or prednisone/prednisolone. Primary AI also needs fludrocortisone (aldosterone replacement). Secondary AI usually doesn't need fludrocortisone (aldosterone preserved).",incorrect:"Primary AI loses both cortisol and aldosterone - needs both replaced. Secondary AI loses only cortisol (aldosterone regulated by renin-angiotensin, not ACTH). Hydrocortisone is preferred for its short half-life and mineralocorticoid activity."},
+teaching:`<h4>Chronic AI Management</h4><p><strong>Glucocorticoid:</strong> Hydrocortisone 15-25mg/day divided (or prednisone 3-5mg/day)</p><p><strong>Dosing:</strong> 2/3 AM, 1/3 afternoon (mimics circadian rhythm)</p><p><strong>Primary AI only:</strong> Fludrocortisone 0.05-0.2mg/day</p><p><strong>Monitoring:</strong> Clinical (energy, BP, weight), electrolytes</p>`,
+why_chain:[{q:"Why divided doses for hydrocortisone?",a:"Mimics the normal circadian rhythm of cortisol (high morning, low evening). Single daily dosing leads to afternoon fatigue. Some use 3x daily dosing. Extended-release hydrocortisone formulations now available for more physiologic replacement."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Patient recovered fully. Discharged on physiologic hydrocortisone with education on stress dosing, medical alert bracelet, and emergency injection kit. Endocrinology follow-up arranged to assess HPA recovery.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the essential principles of adrenal crisis management?</p></div>`,
+hint_beginner:"Treat immediately, don't wait for labs, stress dose appropriately",hint_advanced:"What's the mortality of untreated adrenal crisis?",
+question:{prompt:"What are the key adrenal crisis management principles?",
+options:[{text:"Clinical diagnosis - treat immediately with IV hydrocortisone + fluids; don't wait for cortisol level; distinguish primary (hyperkalemia, hyperpigmentation) from secondary; stress dose during illness/surgery; lifelong replacement for most primary AI",correct:true},
+{text:"Always wait for lab confirmation",correct:false},
+{text:"Treat only when hypotensive",correct:false},
+{text:"Steroids are only needed short-term",correct:false}],
+explanation:{correct:"Key principles: 1) Treat on clinical suspicion - don't wait for labs, 2) IV hydrocortisone 100mg + aggressive fluids, 3) Identify and treat precipitant, 4) Distinguish primary (needs fludrocortisone) from secondary, 5) Stress dosing education essential, 6) Medical alert ID and emergency injection kit for all patients.",incorrect:"Adrenal crisis is immediately life-threatening - mortality approaches 100% if untreated. Treat empirically on clinical suspicion. Labs confirm diagnosis but shouldn't delay treatment."},
+teaching:`<h4>Adrenal Crisis Summary</h4><p>1. Recognize: hypotension + hyponatremia + hyperkalemia (primary) + precipitant</p><p>2. Treat IMMEDIATELY: IV hydrocortisone 100mg + D5NS fluids</p><p>3. Don't wait for labs - draw cortisol/ACTH but treat empirically</p><p>4. Continue stress-dose steroids until stable</p><p>5. Identify primary vs secondary (determines need for mineralocorticoid)</p><p>6. Educate: stress dosing, medical alert, emergency kit</p>`,
+why_chain:[{q:"What's the mortality of untreated adrenal crisis?",a:"Approaches 100% without treatment. Even with treatment, mortality is 5-15% due to delayed diagnosis. The most common cause of death is cardiovascular collapse. This is why empiric treatment is essential when clinical suspicion exists."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent adrenal crisis management!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp. Review primary vs secondary AI.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on stress dosing guidelines.';}
+else{g='Keep Learning';clr='#ef4444';m='Review immediate treatment priorities.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>

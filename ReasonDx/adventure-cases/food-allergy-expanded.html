@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Food Allergy - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #14532d 0%, #22c55e 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #86efac; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #f0fdf4; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #22c55e; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(34,197,94,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #86efac); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #22c55e; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.aaaai.org/conditions-treatments/allergies/food-allergy" target="_blank" rel="noopener">Food Allergy - AAAAI (AAAAI)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK482187/" target="_blank" rel="noopener">Food Allergy - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Peanut Reaction",content:`<div class="narrative"><p>7-year-old boy develops hives, lip swelling, and vomiting within 15 minutes of eating a cookie at a birthday party. Cookie contained peanut butter.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 120, BP 90/60, RR 24, SpO2 95%<br><strong>Exam:</strong> Diffuse urticaria, angioedema of lips, mild wheezing<br><strong>History:</strong> Prior allergist testing showed peanut allergy (IgE 45 kU/L)</p></div><div class="socratic-prompt"><h4>Recognize and Act</h4><p>What type of reaction is this, and what is the FIRST treatment?</p></div>`,
+hint_beginner:"Multiple organ systems + hypotension = anaphylaxis",hint_advanced:"What defines anaphylaxis without hypotension?",
+question:{prompt:"Hives, angioedema, vomiting, wheezing, hypotension after peanut. What is this and what's FIRST treatment?",
+options:[{text:"Anaphylaxis - multisystem IgE-mediated reaction; FIRST treatment is intramuscular epinephrine (0.01 mg/kg, max 0.3-0.5mg) into lateral thigh; do not delay for antihistamines",correct:true},
+{text:"Give antihistamines first",correct:false},
+{text:"Mild allergic reaction - observe",correct:false},
+{text:"Wait for more symptoms before treating",correct:false}],
+explanation:{correct:"This is anaphylaxis: skin (hives, angioedema) + respiratory (wheeze) + GI (vomiting) + cardiovascular (hypotension). EPINEPHRINE IS FIRST - IM into lateral thigh. Do not delay for antihistamines. Epi auto-injector or 1:1000 IM.",incorrect:"Anaphylaxis with multisystem involvement requires IMMEDIATE epinephrine. Antihistamines are adjunctive but do NOT treat hypotension or airway edema. Never delay epi."},
+teaching:`<h4>Food Anaphylaxis</h4><p><strong>Diagnosis:</strong> Acute onset after allergen + ≥2 systems (skin, respiratory, GI, CV)</p><p><strong>First treatment:</strong> IM epinephrine (lateral thigh)</p><p><strong>Dose:</strong> 0.01 mg/kg (max 0.3mg child, 0.5mg adult)</p><p><strong>Adjuncts:</strong> Antihistamines, steroids, fluids, bronchodilators</p>`,
+why_chain:[{q:"Why lateral thigh?",a:"Best absorption from vastus lateralis muscle. Subcutaneous or deltoid absorption is slower and less predictable. Thigh has good blood flow and muscle mass."}],points:15}},
+
+{title:"Diagnosis Confirmation",content:`<div class="narrative"><p>Patient treated with epinephrine and recovered. Now need to confirm peanut allergy diagnosis.</p></div><div class="socratic-prompt"><h4>Testing Approach</h4><p>How do you diagnose IgE-mediated food allergy?</p></div>`,
+hint_beginner:"History is most important; testing supports but doesn't diagnose",hint_advanced:"What are component-resolved diagnostics?",
+question:{prompt:"How is IgE-mediated food allergy diagnosed?",
+options:[{text:"Clinical history is paramount; skin prick testing and serum specific IgE SUPPORT diagnosis but positive tests alone don't confirm allergy - many are sensitized without clinical reactivity",correct:true},
+{text:"Positive IgE test confirms allergy",correct:false},
+{text:"Only oral food challenge can diagnose",correct:false},
+{text:"Skin testing is 100% accurate",correct:false}],
+explanation:{correct:"HISTORY is king in food allergy. Tests detect sensitization (IgE presence), not clinical allergy. ~50% with positive tests tolerate the food. Diagnosis requires: convincing history + supportive testing. Oral food challenge is gold standard if uncertain.",incorrect:"Positive tests show sensitization, not allergy. Many people have IgE to foods they tolerate. History of reaction + positive test = diagnosis. Positive test alone = only sensitization."},
+teaching:`<h4>Food Allergy Diagnosis</h4><p><strong>History:</strong> Timing (minutes to 2h), reproducibility, symptoms</p><p><strong>Skin prick test:</strong> Wheal ≥3mm; high sensitivity, lower specificity</p><p><strong>Serum IgE:</strong> Quantitative; higher levels = higher (but not certain) risk</p><p><strong>Gold standard:</strong> Oral food challenge (if diagnosis uncertain)</p>`,
+why_chain:[{q:"What's the difference between sensitization and allergy?",a:"Sensitization = presence of IgE (positive test). Allergy = clinical symptoms upon exposure. You can be sensitized without being allergic. History determines if sensitization is clinically relevant."}],points:10}},
+
+{title:"Cross-Reactivity",content:`<div class="narrative"><p>Mother asks: "Does he need to avoid all tree nuts too?"</p></div><div class="socratic-prompt"><h4>Understanding Cross-Reactivity</h4><p>What is the relationship between peanut and tree nut allergy?</p></div>`,
+hint_beginner:"Peanuts are legumes, not tree nuts",hint_advanced:"What tree nuts commonly cross-react with each other?",
+question:{prompt:"Patient allergic to peanuts. Must they avoid all tree nuts?",
+options:[{text:"Not necessarily - peanuts are legumes, not tree nuts; ~30% of peanut-allergic patients also react to tree nuts (co-sensitization or coincidence, not cross-reactivity); evaluate each nut individually",correct:true},
+{text:"Must avoid all nuts",correct:false},
+{text:"Tree nuts and peanuts always cross-react",correct:false},
+{text:"No relationship between peanut and tree nut allergy",correct:false}],
+explanation:{correct:"Peanuts = legumes (like soy, lentils). Tree nuts = separate family. ~30% have both allergies, but this is co-allergy, not true cross-reactivity. Evaluate tree nuts individually - many peanut-allergic patients tolerate them. Cashew-pistachio and walnut-pecan DO cross-react.",incorrect:"Peanuts and tree nuts are botanically unrelated. Co-allergy is common but not universal. Don't unnecessarily restrict diet - test individual tree nuts. True cross-reactivity exists between cashew-pistachio and walnut-pecan."},
+teaching:`<h4>Peanut and Tree Nut Relationships</h4><p><strong>Peanut:</strong> Legume family (with soy, lentils, beans)</p><p><strong>Tree nuts:</strong> Separate botanical families</p><p><strong>Co-allergy:</strong> ~30% have both (coincidence, not cross-reactivity)</p><p><strong>True cross-reactivity:</strong> Cashew↔pistachio, walnut↔pecan</p>`,
+why_chain:[{q:"Why do allergists often recommend avoiding all tree nuts?",a:"Practical reasons: risk of cross-contamination in processing/serving, difficulty identifying nuts, and severity concerns. But this is often precautionary, not immunologically required. Can test and reintroduce if desired."}],points:10}},
+
+{title:"Management Plan",content:`<div class="narrative"><p>Confirm peanut allergy management plan.</p></div><div class="socratic-prompt"><h4>Living with Food Allergy</h4><p>What are the key components of food allergy management?</p></div>`,
+hint_beginner:"Avoidance + emergency preparedness",hint_advanced:"What's the role of oral immunotherapy?",
+question:{prompt:"What are the essential components of food allergy management?",
+options:[{text:"Strict avoidance, label reading education, ALWAYS carry 2 epinephrine auto-injectors, written anaphylaxis action plan, medical alert identification, school/caregiver education",correct:true},
+{text:"Carry one epinephrine device",correct:false},
+{text:"Avoidance alone is sufficient",correct:false},
+{text:"Antihistamines replace epinephrine",correct:false}],
+explanation:{correct:"Management pillars: 1) Strict avoidance (label reading, cross-contamination awareness), 2) TWO epi auto-injectors always available (biphasic reactions, device malfunction), 3) Action plan, 4) MedicAlert ID, 5) Education for all caregivers.",incorrect:"Must carry TWO epinephrine devices (reactions can be biphasic, device can malfunction). Avoidance isn't foolproof - accidental exposures happen. Antihistamines do NOT treat anaphylaxis."},
+teaching:`<h4>Food Allergy Management</h4><p><strong>Avoidance:</strong> Read labels, avoid cross-contact, restaurant awareness</p><p><strong>Emergency preparedness:</strong> 2 epi auto-injectors, action plan</p><p><strong>Education:</strong> School, caregivers, patient</p><p><strong>Follow-up:</strong> Annual allergist visits, device expiration</p>`,
+why_chain:[{q:"Why two epinephrine devices?",a:"~20% of anaphylaxis requires a second dose (biphasic reaction or inadequate initial response). Devices can malfunction or be used incorrectly. Always have backup."}],points:10}},
+
+{title:"Oral Immunotherapy",content:`<div class="narrative"><p>Mother asks about "peanut allergy treatment" she heard about.</p></div><div class="socratic-prompt"><h4>Disease Modification</h4><p>What is oral immunotherapy (OIT) for food allergy?</p></div>`,
+hint_beginner:"Gradually increasing doses to build tolerance",hint_advanced:"What's the difference between desensitization and tolerance?",
+question:{prompt:"What is oral immunotherapy for peanut allergy?",
+options:[{text:"FDA-approved treatment (Palforzia) involving gradual ingestion of increasing peanut protein doses; achieves desensitization (protection while on therapy), NOT cure; requires continued maintenance dosing; reactions common during therapy",correct:true},
+{text:"Cures peanut allergy permanently",correct:false},
+{text:"Works by avoidance",correct:false},
+{text:"No treatments exist for food allergy",correct:false}],
+explanation:{correct:"OIT (Palforzia for peanut): gradual dose escalation over months. Goal is desensitization - raised reaction threshold while on therapy. NOT a cure - stopping often leads to loss of protection. Reactions during treatment are common. Requires commitment to daily dosing.",incorrect:"OIT provides desensitization (temporary protection while dosing), not permanent cure. Must continue maintenance. Allergic reactions during treatment are expected and managed."},
+teaching:`<h4>Oral Immunotherapy (OIT)</h4><p><strong>Mechanism:</strong> Gradual exposure → desensitization</p><p><strong>Goal:</strong> Raise reaction threshold (protect against accidental exposure)</p><p><strong>Not a cure:</strong> Must continue maintenance dosing</p><p><strong>Side effects:</strong> GI symptoms, allergic reactions common</p><p><strong>FDA approved:</strong> Palforzia (peanut) for ages 4-17</p>`,
+why_chain:[{q:"What's the difference between desensitization and sustained unresponsiveness?",a:"Desensitization = protection while on therapy. Sustained unresponsiveness (true tolerance) = continued protection after stopping therapy. OIT reliably achieves desensitization; sustained unresponsiveness is less predictable."}],points:10}},
+
+{title:"FPIES",content:`<div class="narrative"><p>Different patient: 6-month-old infant with repetitive vomiting 2 hours after first rice cereal feeding. No hives, no respiratory symptoms. Becomes pale and lethargic.</p></div><div class="socratic-prompt"><h4>Non-IgE Food Reactions</h4><p>What is this presentation, and how does it differ from IgE-mediated allergy?</p></div>`,
+hint_beginner:"Delayed GI symptoms without skin/respiratory = think FPIES",hint_advanced:"What foods commonly cause FPIES?",
+question:{prompt:"Repetitive vomiting 2 hours after rice cereal, no hives/wheeze, pallor/lethargy. What is this?",
+options:[{text:"FPIES (Food Protein-Induced Enterocolitis Syndrome) - non-IgE mediated; delayed (1-4h) repetitive vomiting, diarrhea, pallor; NO skin/respiratory symptoms; can cause shock; epinephrine usually NOT effective",correct:true},
+{text:"IgE-mediated anaphylaxis",correct:false},
+{text:"Viral gastroenteritis",correct:false},
+{text:"Formula intolerance",correct:false}],
+explanation:{correct:"FPIES: non-IgE, cell-mediated GI reaction. Key features: delayed onset (1-4h), repetitive vomiting (hallmark), no urticaria or respiratory symptoms, can progress to shock from fluid loss. Common triggers: rice, oat, milk, soy. IgE testing negative. Epinephrine doesn't help (not IgE-mediated).",incorrect:"FPIES is distinct from IgE allergy: delayed onset, GI-only symptoms, no hives/wheeze, negative IgE testing. Fluids are primary treatment, not epinephrine."},
+teaching:`<h4>FPIES</h4><p><strong>Mechanism:</strong> Non-IgE, T-cell mediated</p><p><strong>Timing:</strong> 1-4 hours after ingestion</p><p><strong>Symptoms:</strong> Repetitive vomiting, pallor, lethargy, +/- diarrhea</p><p><strong>NO:</strong> Urticaria, angioedema, respiratory symptoms</p><p><strong>Common triggers:</strong> Rice, oat, milk, soy</p><p><strong>Treatment:</strong> IV fluids, ondansetron; NOT epinephrine</p>`,
+why_chain:[{q:"How is FPIES diagnosed?",a:"Clinical history and oral food challenge. IgE testing is negative. No specific test exists. Diagnosis is clinical: characteristic delayed vomiting pattern, resolution with food avoidance, recurrence on re-exposure."}],points:15}},
+
+{title:"Eosinophilic Esophagitis",content:`<div class="narrative"><p>Different patient: 14-year-old with years of dysphagia, food impaction, and chest pain. Endoscopy shows rings and furrows; biopsy shows >15 eosinophils/hpf.</p></div><div class="socratic-prompt"><h4>Chronic Food-Related Disorder</h4><p>What is eosinophilic esophagitis (EoE)?</p></div>`,
+hint_beginner:"Eosinophils in esophagus = EoE; often food triggered",hint_advanced:"What's the relationship between EoE and IgE-mediated food allergy?",
+question:{prompt:"Dysphagia, food impaction, esophageal eosinophilia. What is this?",
+options:[{text:"Eosinophilic esophagitis (EoE) - chronic immune/antigen-mediated disease; often triggered by foods (milk most common); treatment includes PPI, topical steroids (swallowed fluticasone/budesonide), and/or elimination diets",correct:true},
+{text:"IgE-mediated food allergy causing esophagitis",correct:false},
+{text:"GERD alone",correct:false},
+{text:"Infectious esophagitis",correct:false}],
+explanation:{correct:"EoE: chronic eosinophilic inflammation of esophagus. Often food-triggered (milk, wheat, egg, soy most common). NOT IgE-mediated (IgE testing has limited utility). Treatment: PPI (some respond), topical steroids, elimination diets, dilation for strictures.",incorrect:"EoE is distinct from IgE-mediated allergy - it's a chronic mixed immune response. IgE testing doesn't reliably identify EoE triggers. Elimination diets or empiric elimination often used instead."},
+teaching:`<h4>Eosinophilic Esophagitis</h4><p><strong>Symptoms:</strong> Dysphagia, food impaction, chest pain</p><p><strong>Diagnosis:</strong> ≥15 eos/hpf on esophageal biopsy</p><p><strong>Common triggers:</strong> Milk, wheat, egg, soy, nuts, seafood</p><p><strong>Treatment:</strong> PPI, topical steroids, elimination diet, dilation</p><p><strong>Note:</strong> IgE testing has limited utility for trigger identification</p>`,
+why_chain:[{q:"Why doesn't IgE testing work well for EoE?",a:"EoE pathophysiology involves Th2 inflammation but isn't purely IgE-mediated. Food-specific IgE often doesn't correlate with EoE triggers. Empiric 6-food elimination or step-up elimination protocols are often more effective."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Peanut-allergic child managed with strict avoidance, epi auto-injectors, and enrolled in OIT. FPIES infant avoids rice, doing well. EoE teenager on elimination diet with symptom improvement.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>How do you differentiate IgE-mediated food allergy, FPIES, and EoE?</p></div>`,
+hint_beginner:"Timing and symptom pattern distinguish the syndromes",hint_advanced:"What's the natural history of food allergy?",
+question:{prompt:"What distinguishes IgE-mediated food allergy, FPIES, and EoE?",
+options:[{text:"IgE-mediated: rapid onset (min-2h), multisystem, IgE+, treat with epi. FPIES: delayed (1-4h), GI only, IgE-, treat with fluids. EoE: chronic, dysphagia, eosinophils on biopsy, treat with steroids/diet",correct:true},
+{text:"All are IgE-mediated",correct:false},
+{text:"All treated the same way",correct:false},
+{text:"Cannot distinguish clinically",correct:false}],
+explanation:{correct:"Key distinctions: TIMING (IgE=rapid, FPIES=delayed, EoE=chronic), SYMPTOMS (IgE=multisystem, FPIES=GI, EoE=esophageal), TESTING (IgE+=IgE allergy, IgE-=FPIES/EoE), TREATMENT (Epi for IgE anaphylaxis, fluids for FPIES, steroids/diet for EoE).",incorrect:"These are distinct syndromes with different mechanisms, timelines, symptoms, and treatments. Recognizing the pattern is essential for appropriate management."},
+teaching:`<h4>Food Allergy Spectrum</h4><p><strong>IgE-mediated:</strong> Minutes to 2h, urticaria/anaphylaxis, IgE+, epinephrine</p><p><strong>FPIES:</strong> 1-4h, repetitive vomiting, NO skin symptoms, IgE-, IV fluids</p><p><strong>EoE:</strong> Chronic, dysphagia/impaction, biopsy diagnosis, steroids/diet</p><p><strong>Natural history:</strong> Many children outgrow milk/egg/wheat/soy; peanut/tree nut/shellfish usually persist</p>`,
+why_chain:[{q:"Which food allergies are outgrown?",a:"Milk, egg, wheat, soy - majority outgrown by school age. Peanut, tree nut, fish, shellfish - usually lifelong (~20% may outgrow peanut). OIT may modify natural history."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent food allergy knowledge!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp. Review FPIES vs IgE allergy.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on distinguishing reaction types.';}
+else{g='Keep Learning';clr='#ef4444';m='Review IgE vs non-IgE food reactions.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+</body>
+</html>
