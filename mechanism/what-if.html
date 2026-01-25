@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What If? - MechanismDx Calibration</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            min-height: 100vh; 
+            color: #f8fafc; 
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .nav { margin-bottom: 20px; }
+        .nav a { color: #94a3b8; text-decoration: none; font-size: 14px; }
+        .nav a:hover { color: #f8fafc; }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .exercise-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f97316;
+        }
+        
+        .scenario-box {
+            background: rgba(249,115,22,0.1);
+            border: 1px solid rgba(249,115,22,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .scenario-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .scenario-text { line-height: 1.7; font-size: 1rem; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        
+        .whatif-box {
+            background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(251,191,36,0.1));
+            border: 2px solid rgba(249,115,22,0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .whatif-label { font-size: 1.5rem; margin-bottom: 8px; }
+        .whatif-question { font-size: 1.1rem; font-weight: 600; color: #fed7aa; }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+        .option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .option:hover:not(.disabled) { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+        .option.selected { border-color: #f97316; background: rgba(249,115,22,0.2); }
+        .option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; }
+        .option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option.disabled { cursor: default; opacity: 0.7; }
+        .option-icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .option-text { font-size: 0.95rem; }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            background: linear-gradient(135deg, #f97316, #c2410c);
+            color: white;
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .explanation-panel {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        .explanation-panel.show { display: block; }
+        .explanation-panel.incorrect { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
+        .explanation-header { font-weight: 600; margin-bottom: 16px; font-size: 1.1rem; }
+        .explanation-text { line-height: 1.7; }
+        .mechanism-chain {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 2;
+            white-space: pre-line;
+        }
+        
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f97316, #fbbf24); border-radius: 3px; transition: width 0.5s; }
+        
+        .stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; font-size: 0.9rem; }
+        .stat-value { font-weight: 700; color: #fdba74; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html">← Back to MechanismDx</a>
+        </nav>
+        
+        <div class="header">
+            <h1>🎯 What If?</h1>
+            <p>Predict the consequence when conditions change</p>
+        </div>
+        
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
+        
+        <div class="stats">
+            <div>Question: <span class="stat-value" id="current-q">1</span>/<span id="total-q">14</span></div>
+            <div>Score: <span class="stat-value" id="score">0</span></div>
+        </div>
+        
+        <div id="exercise-container"></div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                scenario: 'A patient with <span class="highlight">DKA</span> has initial K+ of 5.8. You start <span class="highlight">insulin infusion</span>.',
+                question: 'What happens to serum potassium?',
+                options: [
+                    { icon: '📈', text: 'K+ increases further' },
+                    { icon: '➡️', text: 'K+ stays the same' },
+                    { icon: '📉', text: 'K+ drops (may become dangerously low)' },
+                    { icon: '🔄', text: 'K+ becomes unpredictable' }
+                ],
+                correct: 2,
+                explanation: 'Insulin drives K+ into cells! In DKA, despite a "normal" or elevated serum K+, total body potassium is depleted from osmotic diuresis. Once insulin is given, K+ rapidly shifts intracellularly, potentially causing dangerous hypokalemia.',
+                mechanism: 'Insulin → Activates Na+/K+-ATPase → K+ driven into cells → Serum K+ drops\n\n⚠️ Always replete K+ when <5.3 before starting insulin!'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">decompensated heart failure</span> (low EF, pulmonary edema) is given <span class="highlight">aggressive IV fluids</span>.',
+                question: 'What happens to their respiratory status?',
+                options: [
+                    { icon: '✅', text: 'Breathing improves' },
+                    { icon: '😰', text: 'Respiratory distress worsens' },
+                    { icon: '➡️', text: 'No change' },
+                    { icon: '🫁', text: 'Pneumothorax develops' }
+                ],
+                correct: 1,
+                explanation: 'The failing heart already cannot handle its current volume load. Adding more fluid increases preload → backs up into lungs → worsens pulmonary edema. These patients need diuretics, not fluids!',
+                mechanism: 'IV fluids → ↑ Preload → Failing LV cannot pump it forward\n→ ↑ LVEDP → ↑ LA pressure → ↑ Pulmonary capillary pressure\n→ Worsens pulmonary edema'
+            },
+            {
+                scenario: 'A patient on <span class="highlight">chronic steroids for lupus</span> develops pneumonia and you <span class="highlight">stop their steroids</span> abruptly.',
+                question: 'What happens?',
+                options: [
+                    { icon: '✅', text: 'Lupus flares but otherwise fine' },
+                    { icon: '💀', text: 'Adrenal crisis (hypotension, shock)' },
+                    { icon: '🦠', text: 'Infection clears faster' },
+                    { icon: '➡️', text: 'No significant effect' }
+                ],
+                correct: 1,
+                explanation: 'Chronic steroid use suppresses the HPA axis. The adrenals atrophy and cannot produce cortisol when needed. Abrupt withdrawal + stress of infection = adrenal crisis.',
+                mechanism: 'Chronic steroids → HPA suppression → Adrenal atrophy\nAbrupt stop + Stress → No cortisol response → Adrenal crisis\n\n⚠️ Stress dose steroids during illness!'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">suspected cardiac tamponade</span> (hypotension, JVD) is <span class="highlight">intubated with positive pressure ventilation</span>.',
+                question: 'What happens to their blood pressure?',
+                options: [
+                    { icon: '📈', text: 'Blood pressure improves' },
+                    { icon: '📉', text: 'Blood pressure drops further (may arrest)' },
+                    { icon: '➡️', text: 'No change' },
+                    { icon: '🔄', text: 'Becomes very variable' }
+                ],
+                correct: 1,
+                explanation: 'Positive pressure ventilation decreases venous return. In tamponade, the heart is already struggling to fill. Less venous return = even less filling = cardiac output crashes.',
+                mechanism: 'Tamponade → Impaired cardiac filling\n+ PPV → ↓ Venous return\n= Even less preload → Cardiac output crashes\n\n⚠️ Pericardiocentesis before intubation if possible!'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">severe chronic hyponatremia (Na 108)</span> is given <span class="highlight">rapid 3% saline correction</span>.',
+                question: 'What is the major risk?',
+                options: [
+                    { icon: '🧠', text: 'Osmotic demyelination syndrome' },
+                    { icon: '💧', text: 'Fluid overload only' },
+                    { icon: '❤️', text: 'Cardiac arrhythmia' },
+                    { icon: '✅', text: 'No significant risk' }
+                ],
+                correct: 0,
+                explanation: 'Rapid correction of chronic hyponatremia causes osmotic demyelination syndrome (ODS). Brain cells adapted to low osmolality; rapid correction causes water to shift out of brain cells → demyelination.',
+                mechanism: 'Chronic hyponatremia → Brain adapts (loses osmoles)\nRapid Na+ correction → Extracellular osmolality rises fast\n→ Water shifts OUT of adapted brain cells\n→ Osmotic demyelination\n\n⚠️ Correct Na+ <10-12 mEq/L per 24h!'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">rhabdomyolysis</span> has <span class="highlight">acidic urine (pH 5.0)</span>.',
+                question: 'What happens to the risk of AKI?',
+                options: [
+                    { icon: '📈', text: 'AKI risk increases' },
+                    { icon: '📉', text: 'AKI risk decreases' },
+                    { icon: '➡️', text: 'No effect on AKI risk' },
+                    { icon: '🔄', text: 'Variable effect' }
+                ],
+                correct: 0,
+                explanation: 'Myoglobin precipitates more readily in acidic urine, causing tubular obstruction and direct toxicity. Alkalinizing the urine (target pH >6.5) helps keep myoglobin soluble.',
+                mechanism: 'Acidic urine → Myoglobin precipitates in tubules\n→ Obstruction + direct toxicity → ATN\n\nAlkalinization → Keeps myoglobin soluble → ↓ AKI risk'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">massive PE causing RV strain</span> is given <span class="highlight">aggressive fluid boluses</span>.',
+                question: 'What happens?',
+                options: [
+                    { icon: '📈', text: 'Blood pressure improves' },
+                    { icon: '📉', text: 'RV fails further, cardiac output drops' },
+                    { icon: '➡️', text: 'No significant change' },
+                    { icon: '🫁', text: 'Pulmonary edema develops' }
+                ],
+                correct: 1,
+                explanation: 'The RV is already pressure-overloaded from the PE. Adding volume further dilates the RV, causing the septum to bow into the LV, compromising LV filling.',
+                mechanism: 'Massive PE → RV pressure overload → RV dilation\n+ Aggressive fluids → More RV dilation\n→ Septal bowing into LV → ↓ LV filling → ↓ CO\n\n⚠️ 250-500mL boluses only, reassess frequently!'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">suspected meningitis</span> has their <span class="highlight">LP delayed for CT scan</span>.',
+                question: 'What should happen with antibiotics?',
+                options: [
+                    { icon: '⏸️', text: 'Wait for LP results' },
+                    { icon: '💉', text: 'Start antibiotics immediately' },
+                    { icon: '🔬', text: 'Start after CT but before LP' },
+                    { icon: '💊', text: 'Oral antibiotics while waiting' }
+                ],
+                correct: 1,
+                explanation: 'In bacterial meningitis, every hour of delay in antibiotics increases mortality. Blood cultures + empiric antibiotics should be given IMMEDIATELY.',
+                mechanism: 'Time is brain!\nBacterial meningitis mortality ↑ with each hour of antibiotic delay\n\n→ Blood cultures → Empiric antibiotics → Then CT → Then LP\nCSF findings persist hours after antibiotics'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">Guillain-Barré syndrome</span> has <span class="highlight">FVC declining from 2L to 1.2L</span>.',
+                question: 'What should be done?',
+                options: [
+                    { icon: '👀', text: 'Continue monitoring' },
+                    { icon: '🫁', text: 'Elective intubation' },
+                    { icon: '💊', text: 'Start steroids' },
+                    { icon: '😮‍💨', text: 'BiPAP' }
+                ],
+                correct: 1,
+                explanation: 'FVC <20 mL/kg (or <1L), NIF weaker than -30, or >30% decline in FVC = intubation threshold in GBS. This patient dropped 40%! Elective intubation is safer than emergent.',
+                mechanism: 'GBS → Ascending paralysis → Respiratory muscle weakness\nFVC <20 mL/kg OR >30% decline → Imminent respiratory failure\n\n⚠️ Intubate electively! Do not wait for respiratory arrest.'
+            },
+            {
+                scenario: 'A patient receiving <span class="highlight">vancomycin + piperacillin-tazobactam</span> develops <span class="highlight">rising creatinine</span>.',
+                question: 'What is likely happening?',
+                options: [
+                    { icon: '🦠', text: 'Worsening infection' },
+                    { icon: '💊', text: 'Synergistic nephrotoxicity' },
+                    { icon: '💧', text: 'Dehydration' },
+                    { icon: '➡️', text: 'Expected and benign' }
+                ],
+                correct: 1,
+                explanation: 'The combination of vancomycin + piperacillin-tazobactam has higher AKI rates than vancomycin + other beta-lactams. Consider switching pip-tazo to cefepime.',
+                mechanism: 'Vancomycin alone → Some nephrotoxicity\nPip-tazo alone → Low nephrotoxicity\nVanc + Pip-tazo → Synergistic AKI\n\n⚠️ Consider vanc + cefepime as alternative'
+            },
+            {
+                scenario: 'A patient on <span class="highlight">warfarin</span> is started on <span class="highlight">fluconazole</span> for fungal infection.',
+                question: 'What happens to INR?',
+                options: [
+                    { icon: '📈', text: 'INR increases (bleeding risk!)' },
+                    { icon: '📉', text: 'INR decreases' },
+                    { icon: '➡️', text: 'No change' },
+                    { icon: '🔄', text: 'Unpredictable' }
+                ],
+                correct: 0,
+                explanation: 'Fluconazole inhibits CYP2C9, which metabolizes warfarin. Less metabolism = higher warfarin levels = increased INR and bleeding risk.',
+                mechanism: 'Fluconazole → Inhibits CYP2C9 → ↓ Warfarin metabolism\n→ ↑ Warfarin levels → ↑ INR → Bleeding risk\n\n⚠️ Reduce warfarin dose and monitor INR closely'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">COPD and chronic CO2 retention</span> is given <span class="highlight">high-flow oxygen (100%)</span>.',
+                question: 'What is the risk?',
+                options: [
+                    { icon: '😴', text: 'CO2 narcosis and respiratory depression' },
+                    { icon: '✅', text: 'No risk, oxygen is beneficial' },
+                    { icon: '❤️', text: 'Cardiac arrhythmia' },
+                    { icon: '🔥', text: 'Oxygen toxicity' }
+                ],
+                correct: 0,
+                explanation: 'Chronic CO2 retainers lose hypercapnic drive - their respiratory drive depends on hypoxia. High-flow O2 removes this drive → hypoventilation → worsening hypercapnia.',
+                mechanism: 'Chronic CO2 retention → Loss of hypercapnic drive\nRespiratory drive depends on hypoxemia\nHigh O2 → Removes hypoxic drive → ↓ Ventilation → ↑↑ CO2\n\n⚠️ Target SpO2 88-92% in COPD'
+            },
+            {
+                scenario: 'A patient in <span class="highlight">AFib with RVR and WPW</span> is given <span class="highlight">IV diltiazem</span>.',
+                question: 'What happens?',
+                options: [
+                    { icon: '✅', text: 'HR controlled, BP stable' },
+                    { icon: '📉', text: 'Severe hypotension/VF risk!' },
+                    { icon: '📈', text: 'Blood pressure increases' },
+                    { icon: '➡️', text: 'No effect' }
+                ],
+                correct: 1,
+                explanation: 'In WPW with AFib, impulses conduct down the accessory pathway. CCBs slow AV node but NOT the accessory pathway → more conduction down bypass tract → can degenerate to VF!',
+                mechanism: 'WPW + AFib: Conduction via accessory pathway\nDiltiazem → Blocks AV node only\n→ MORE impulses conduct via bypass tract → VF risk!\n\n⚠️ WPW + AFib = Procainamide or cardiovert'
+            },
+            {
+                scenario: 'A patient with <span class="highlight">suspected aortic dissection</span> has <span class="highlight">BP 180/100, HR 110</span>.',
+                question: 'How should BP be managed?',
+                options: [
+                    { icon: '📈', text: 'Raise BP to improve perfusion' },
+                    { icon: '📉', text: 'Beta-blocker first, then vasodilator' },
+                    { icon: '🩺', text: 'Vasodilator alone' },
+                    { icon: '➡️', text: 'No BP management needed' }
+                ],
+                correct: 1,
+                explanation: 'Target SBP <120 AND HR <60. Must lower HR FIRST (beta-blocker) before vasodilators. Vasodilators alone cause reflex tachycardia, increasing aortic wall stress.',
+                mechanism: 'Aortic dissection: Wall stress = BP × dP/dt\nVasodilator alone → Reflex tachycardia → ↑ dP/dt → Worse!\n\nβ-blocker FIRST → ↓ HR → ↓ dP/dt\nTHEN add vasodilator → ↓ BP'
+            }
+        ];
+        
+        let currentIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        
+        function renderExercise() {
+            const ex = exercises[currentIndex];
+            selectedOption = null;
+            
+            document.getElementById('total-q').textContent = exercises.length;
+            document.getElementById('current-q').textContent = currentIndex + 1;
+            document.getElementById('progress').style.width = ((currentIndex + 1) / exercises.length * 100) + '%';
+            
+            const optionsHTML = ex.options.map((opt, i) => 
+                '<div class="option" data-index="' + i + '" onclick="selectOption(' + i + ')">' +
+                    '<div class="option-icon">' + opt.icon + '</div>' +
+                    '<div class="option-text">' + opt.text + '</div>' +
+                '</div>'
+            ).join('');
+            
+            document.getElementById('exercise-container').innerHTML = 
+                '<div class="exercise-card">' +
+                    '<div class="scenario-box">' +
+                        '<div class="scenario-label">Scenario</div>' +
+                        '<div class="scenario-text">' + ex.scenario + '</div>' +
+                    '</div>' +
+                    '<div class="whatif-box">' +
+                        '<div class="whatif-label">🎯 What If?</div>' +
+                        '<div class="whatif-question">' + ex.question + '</div>' +
+                    '</div>' +
+                    '<div class="options-grid" id="options">' + optionsHTML + '</div>' +
+                    '<button class="btn" id="check-btn" onclick="checkAnswer()" disabled>Check My Prediction</button>' +
+                    '<div class="explanation-panel" id="explanation">' +
+                        '<div class="explanation-header" id="exp-header"></div>' +
+                        '<div class="explanation-text">' + ex.explanation + '</div>' +
+                        '<div class="mechanism-chain">' + ex.mechanism + '</div>' +
+                        '<button class="btn" onclick="nextExercise()" style="margin-top:20px;">Next Scenario →</button>' +
+                    '</div>' +
+                '</div>';
+        }
+        
+        function selectOption(index) {
+            if (document.querySelector('.option.disabled')) return;
+            document.querySelectorAll('.option').forEach(function(opt) { opt.classList.remove('selected'); });
+            document.querySelector('.option[data-index="' + index + '"]').classList.add('selected');
+            selectedOption = index;
+            document.getElementById('check-btn').disabled = false;
+        }
+        
+        function checkAnswer() {
+            const ex = exercises[currentIndex];
+            document.querySelectorAll('.option').forEach(function(opt, i) {
+                opt.classList.add('disabled');
+                if (i === ex.correct) opt.classList.add('correct');
+                else if (i === selectedOption) opt.classList.add('incorrect');
+            });
+            
+            const panel = document.getElementById('explanation');
+            const header = document.getElementById('exp-header');
+            
+            if (selectedOption === ex.correct) {
+                score++;
+                header.textContent = '✅ Correct! You predicted the outcome.';
+            } else {
+                panel.classList.add('incorrect');
+                header.textContent = '❌ Not quite. Here is what happens:';
+            }
+            
+            panel.classList.add('show');
+            document.getElementById('check-btn').style.display = 'none';
+            document.getElementById('score').textContent = score;
+        }
+        
+        function nextExercise() {
+            currentIndex++;
+            if (currentIndex >= exercises.length) { currentIndex = 0; score = 0; }
+            renderExercise();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        renderExercise();
+    </script>
+    
+    <!-- Open-Access References -->
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; font-size: 0.85rem;">
+        <h3 style="color: #8b5cf6; margin-bottom: 12px;">📚 Evidence-Based References</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK545177/" target="_blank" style="color: #a78bfa;">StatPearls: Clinical Decision Making</a> - Counterfactual reasoning</li>
+            <li style="margin-bottom: 8px;">• <a href="https://pubmed.ncbi.nlm.nih.gov/17052164/" target="_blank" style="color: #a78bfa;">Croskerry P. Cognitive Forcing Strategies. Ann Emerg Med. 2003</a> - Debiasing techniques</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK430685/" target="_blank" style="color: #a78bfa;">StatPearls Collection</a> - Disease-specific pathophysiology</li>
+        </ul>
+    </div>
+</body>
+</html>

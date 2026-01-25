@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Adventures | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --bg-secondary: #ffffff;
+            --card: #ffffff;
+            --card-hover: #f1f5f9;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-secondary: #334155;
+            --muted: #64748b;
+            --accent: #2563eb;
+            --accent-light: rgba(37,99,235,0.1);
+            --shadow: rgba(0,0,0,0.08);
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0F172A;
+            --bg-secondary: #1E293B;
+            --card: #1E293B;
+            --card-hover: #334155;
+            --border: #334155;
+            --text: #F1F5F9;
+            --text-secondary: #CBD5E1;
+            --muted: #94A3B8;
+            --accent: #3B82F6;
+            --accent-light: rgba(59,130,246,0.15);
+            --shadow: rgba(0,0,0,0.3);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            min-height: 100vh; 
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .header { 
+            background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); 
+            padding: 32px 24px; 
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .header h1 { font-size: 2.2rem; margin-bottom: 8px; font-weight: 700; }
+        .header p { color: rgba(255,255,255,0.9); font-size: 1.1rem; }
+        .header-features { display: flex; gap: 12px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+        .header-feature { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
+        .header-feature .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; }
+        
+        .theme-toggle {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+        .theme-toggle:hover { background: rgba(255,255,255,0.3); }
+        
+        .controls-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+        .controls-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .mode-toggle {
+            display: flex;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .mode-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mode-btn:hover { background: var(--card-hover); }
+        .mode-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+        .mode-btn .icon { font-size: 1.1rem; }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            min-width: 200px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { background: var(--accent-light); color: var(--accent); }
+        
+        .main { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+        
+        .stats-bar { 
+            display: flex; 
+            gap: 12px; 
+            justify-content: center; 
+            margin-bottom: 24px; 
+            flex-wrap: wrap; 
+        }
+        .stat-card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            padding: 14px 24px; 
+            border-radius: 12px; 
+            text-align: center;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .stat-number { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.8rem; color: var(--muted); }
+        
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .mode-info {
+            background: var(--accent-light);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .mode-info .icon { font-size: 1.5rem; }
+        .mode-info-text h3 { font-size: 1rem; font-weight: 600; color: var(--accent); margin-bottom: 2px; }
+        .mode-info-text p { font-size: 0.85rem; color: var(--text-secondary); }
+        
+        .category { margin-bottom: 40px; }
+        .category-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .category-icon { font-size: 1.5rem; }
+        .category-title { font-size: 1.3rem; font-weight: 700; }
+        .category-count { 
+            background: var(--accent-light); 
+            color: var(--accent); 
+            padding: 4px 12px; 
+            border-radius: 12px; 
+            font-size: 0.8rem; 
+            font-weight: 600;
+        }
+        
+        .cases-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 16px; 
+        }
+        
+        .case-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+            display: block;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .case-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--accent);
+        }
+        .case-title { 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            font-size: 1.05rem;
+        }
+        .case-presentation {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .case-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-adventure { background: #dbeafe; color: #1d4ed8; }
+        .badge-dual { background: #f3e8ff; color: #7c3aed; }
+        .badge-new { background: #dcfce7; color: #166534; }
+        .badge-standard { background: #f1f5f9; color: #475569; }
+        
+        /* Challenge mode hides diagnosis */
+        [data-mode="challenge"] .case-title .diagnosis { display: none; }
+        [data-mode="challenge"] .case-title .challenge-text { display: inline; }
+        [data-mode="study"] .case-title .challenge-text { display: none; }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 768px) {
+            .controls-inner { flex-direction: column; align-items: stretch; }
+            .search-box { max-width: none; }
+            .mode-toggle { justify-content: center; }
+            .nav-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body data-mode="study">
+    <header class="header">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">🌙</button>
+        <h1>🎮 Clinical Adventures</h1>
+        <p>Interactive case-based learning with branching decisions</p>
+        <div class="header-features">
+            <span class="header-feature"><span class="dot"></span> EPA Tracking</span>
+            <span class="header-feature"><span class="dot"></span> Confidence Calibration</span>
+            <span class="header-feature"><span class="dot"></span> Cognitive Error Detection</span>
+        </div>
+    </header>
+    
+    <div class="controls-bar">
+        <div class="controls-inner">
+            <div class="mode-toggle">
+                <button class="mode-btn active" onclick="setMode('study')" id="studyBtn">
+                    <span class="icon">📚</span>
+                    <span>Study Mode</span>
+                </button>
+                <button class="mode-btn" onclick="setMode('challenge')" id="challengeBtn">
+                    <span class="icon">🎯</span>
+                    <span>Challenge Mode</span>
+                </button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search cases..." onkeyup="filterCases()">
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html">← Back to ReasonDx</a>
+            </div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-number">112</div>
+                <div class="stat-label">Total Cases</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Adventure Cases</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Dual-Mode</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Specialties</div>
+            </div>
+        </div>
+        
+        <div class="mode-info" id="modeInfo">
+            <span class="icon">📚</span>
+            <div class="mode-info-text">
+                <h3>Study Mode</h3>
+                <p>Diagnoses are visible. Select cases by topic to review specific conditions.</p>
+            </div>
+        </div>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterByType('all')">All Cases</button>
+            <button class="filter-btn" onclick="filterByType('adventure')">🎮 Adventure</button>
+            <button class="filter-btn" onclick="filterByType('dual')">🔄 Dual-Mode</button>
+            <button class="filter-btn" onclick="filterByType('standard')">📋 Standard</button>
+        </div>
+
+        <!-- CARDIOLOGY -->
+        <section class="category" id="cardiology">
+            <div class="category-header">
+                <span class="category-icon">❤️</span>
+                <span class="category-title">Cardiology</span>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="acs-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Coronary Syndrome</span>
+                        <span class="challenge-text">58M with crushing chest pain radiating to jaw</span>
+                    </div>
+                    <div class="case-presentation">Substernal chest pressure, diaphoresis, ECG changes</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="acs-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">ACS Workup</span>
+                        <span class="challenge-text">62F with atypical chest discomfort and nausea</span>
+                    </div>
+                    <div class="case-presentation">Risk stratification, troponin interpretation, HEART score</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="afib-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Atrial Fibrillation</span>
+                        <span class="challenge-text">72M with palpitations and irregular pulse</span>
+                    </div>
+                    <div class="case-presentation">Rate vs rhythm control, anticoagulation decisions</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="afib-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">AFib Management</span>
+                        <span class="challenge-text">68F with new onset irregularly irregular rhythm</span>
+                    </div>
+                    <div class="case-presentation">CHA2DS2-VASc, HAS-BLED, cardioversion timing</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="heart-failure-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Heart Failure</span>
+                        <span class="challenge-text">70M with progressive dyspnea and leg swelling</span>
+                    </div>
+                    <div class="case-presentation">Volume assessment, diuretic strategy, EF classification</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="heart-failure-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">CHF Exacerbation</span>
+                        <span class="challenge-text">65F with orthopnea and paroxysmal nocturnal dyspnea</span>
+                    </div>
+                    <div class="case-presentation">BNP interpretation, GDMT optimization</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="svt-wpw-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">SVT / WPW</span>
+                        <span class="challenge-text">28F with sudden onset racing heart, 180 bpm</span>
+                    </div>
+                    <div class="case-presentation">Vagal maneuvers, adenosine, delta wave recognition</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="acls-rhythms-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">ACLS Rhythms</span>
+                        <span class="challenge-text">Pulseless patient found unresponsive</span>
+                    </div>
+                    <div class="case-presentation">VF/VT, PEA, asystole algorithms</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PULMONARY -->
+        <section class="category" id="pulmonary">
+            <div class="category-header">
+                <span class="category-icon">🫁</span>
+                <span class="category-title">Pulmonary</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="pe-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Pulmonary Embolism</span>
+                        <span class="challenge-text">45F post-op with sudden dyspnea and pleuritic chest pain</span>
+                    </div>
+                    <div class="case-presentation">Wells score, D-dimer, anticoagulation strategy</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="pe-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">PE Workup</span>
+                        <span class="challenge-text">55M with unexplained hypoxia and tachycardia</span>
+                    </div>
+                    <div class="case-presentation">Risk stratification, thrombolysis criteria</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="copd-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">COPD Exacerbation</span>
+                        <span class="challenge-text">68M with worsening dyspnea and productive cough</span>
+                    </div>
+                    <div class="case-presentation">Bronchodilators, steroids, BiPAP indications</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="copd-exacerbation-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">AECOPD Management</span>
+                        <span class="challenge-text">72F with increased sputum purulence, wheezing</span>
+                    </div>
+                    <div class="case-presentation">ABG interpretation, NIV criteria</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="asthma-exacerbation-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Asthma Exacerbation</span>
+                        <span class="challenge-text">22F with wheezing, accessory muscle use, can't complete sentences</span>
+                    </div>
+                    <div class="case-presentation">Severity assessment, treatment escalation</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="pneumonia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Community-Acquired Pneumonia</span>
+                        <span class="challenge-text">58M with fever, cough, and focal consolidation</span>
+                    </div>
+                    <div class="case-presentation">CURB-65, antibiotic selection, admission criteria</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- NEUROLOGY -->
+        <section class="category" id="neuro">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Neurology</span>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="stroke-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Ischemic Stroke</span>
+                        <span class="challenge-text">72M with sudden right-sided weakness and aphasia</span>
+                    </div>
+                    <div class="case-presentation">NIHSS, tPA window, thrombectomy criteria</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="stroke-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Stroke Workup</span>
+                        <span class="challenge-text">65F with facial droop and arm drift</span>
+                    </div>
+                    <div class="case-presentation">Imaging, contraindications, post-tPA care</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="meningitis-expanded-dual-adventure.html" class="case-card" data-type="dual">
+                    <div class="case-title">
+                        <span class="diagnosis">Meningitis (Dual-Mode)</span>
+                        <span class="challenge-text">Patient with fever, headache, and neck stiffness</span>
+                    </div>
+                    <div class="case-presentation">Adult vs Pediatric: CSF interpretation, empiric antibiotics</div>
+                    <div class="case-badges"><span class="badge badge-dual">Dual-Mode</span><span class="badge badge-new">NEW</span></div>
+                </a>
+                <a href="meningitis-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Bacterial Meningitis</span>
+                        <span class="challenge-text">19M college student with fever, photophobia, petechial rash</span>
+                    </div>
+                    <div class="case-presentation">LP timing, dexamethasone, contact prophylaxis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="meningitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Meningitis Workup</span>
+                        <span class="challenge-text">45F with severe headache and altered mental status</span>
+                    </div>
+                    <div class="case-presentation">CSF analysis, pathogen coverage by age</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="status-epilepticus-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Status Epilepticus</span>
+                        <span class="challenge-text">35M with continuous seizure activity >5 minutes</span>
+                    </div>
+                    <div class="case-presentation">Benzodiazepine dosing, second-line agents</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="sah-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Subarachnoid Hemorrhage</span>
+                        <span class="challenge-text">48F with thunderclap headache, worst of her life</span>
+                    </div>
+                    <div class="case-presentation">CT, LP timing, nimodipine, aneurysm management</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="syncope-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Syncope Workup</span>
+                        <span class="challenge-text">62M with witnessed loss of consciousness</span>
+                    </div>
+                    <div class="case-presentation">High-risk features, cardiac vs vasovagal</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- GI / ABDOMINAL -->
+        <section class="category" id="gi">
+            <div class="category-header">
+                <span class="category-icon">🏥</span>
+                <span class="category-title">GI / Abdominal</span>
+                <span class="category-count">10 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="gi-bleed-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Upper GI Bleed</span>
+                        <span class="challenge-text">58M with hematemesis and melena, HR 110, BP 90/60</span>
+                    </div>
+                    <div class="case-presentation">Resuscitation, PPI, transfusion thresholds, EGD timing</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="gi-bleed-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">GI Bleed Workup</span>
+                        <span class="challenge-text">72F on anticoagulation with black stools</span>
+                    </div>
+                    <div class="case-presentation">Glasgow-Blatchford, upper vs lower, anticoagulation reversal</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="acute-abdomen-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Abdomen</span>
+                        <span class="challenge-text">45M with severe abdominal pain and peritoneal signs</span>
+                    </div>
+                    <div class="case-presentation">Surgical emergency recognition, imaging approach</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="appendicitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Appendicitis</span>
+                        <span class="challenge-text">22M with periumbilical pain migrating to RLQ</span>
+                    </div>
+                    <div class="case-presentation">Alvarado score, imaging choice, antibiotics vs surgery</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="cholecystitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Cholecystitis</span>
+                        <span class="challenge-text">55F with RUQ pain, fever, positive Murphy's sign</span>
+                    </div>
+                    <div class="case-presentation">Tokyo guidelines, HIDA scan, surgical timing</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="pancreatitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Pancreatitis</span>
+                        <span class="challenge-text">42M with epigastric pain radiating to back after drinking</span>
+                    </div>
+                    <div class="case-presentation">Ranson criteria, fluid resuscitation, nutrition timing</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="sbo-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Small Bowel Obstruction</span>
+                        <span class="challenge-text">68F with abdominal distension, vomiting, prior surgeries</span>
+                    </div>
+                    <div class="case-presentation">Conservative vs surgical management, strangulation signs</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="cdiff-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">C. difficile Colitis</span>
+                        <span class="challenge-text">75F with watery diarrhea after recent antibiotics</span>
+                    </div>
+                    <div class="case-presentation">Severity assessment, vancomycin vs fidaxomicin, recurrence</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="alf-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Liver Failure</span>
+                        <span class="challenge-text">28F with jaundice, coagulopathy, and encephalopathy</span>
+                    </div>
+                    <div class="case-presentation">Etiology workup, King's College criteria, transplant evaluation</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="delirium-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Delirium</span>
+                        <span class="challenge-text">78M with acute confusion and fluctuating attention</span>
+                    </div>
+                    <div class="case-presentation">CAM criteria, reversible causes, non-pharmacologic management</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- RENAL / METABOLIC -->
+        <section class="category" id="renal">
+            <div class="category-header">
+                <span class="category-icon">💧</span>
+                <span class="category-title">Renal / Metabolic</span>
+                <span class="category-count">10 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="aki-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Kidney Injury</span>
+                        <span class="challenge-text">65M with rising creatinine from 1.0 to 3.5</span>
+                    </div>
+                    <div class="case-presentation">Pre-renal vs intrinsic vs post-renal, FENa, dialysis indications</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="aki-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">AKI Workup</span>
+                        <span class="challenge-text">70F with oliguria and elevated BUN/Cr</span>
+                    </div>
+                    <div class="case-presentation">Urine studies, medication review, volume assessment</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="dka-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Diabetic Ketoacidosis</span>
+                        <span class="challenge-text">28F with polyuria, vomiting, fruity breath, glucose 450</span>
+                    </div>
+                    <div class="case-presentation">Fluid resuscitation, insulin drip, potassium management</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="dka-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">DKA Management</span>
+                        <span class="challenge-text">35M with known T1DM presenting with altered mental status</span>
+                    </div>
+                    <div class="case-presentation">Anion gap, bicarbonate monitoring, transition to SubQ</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="hhs-dka-comparison-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">HHS vs DKA</span>
+                        <span class="challenge-text">72M with glucose >800, minimal ketones, profound dehydration</span>
+                    </div>
+                    <div class="case-presentation">Differentiating features, fluid calculations, cerebral edema risk</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="hyperkalemia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Hyperkalemia</span>
+                        <span class="challenge-text">62M with K+ 7.2 and peaked T waves on ECG</span>
+                    </div>
+                    <div class="case-presentation">Cardiac stabilization, shift, elimination</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="hyponatremia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Hyponatremia</span>
+                        <span class="challenge-text">55F with Na+ 118, confusion, and seizure</span>
+                    </div>
+                    <div class="case-presentation">Volume status, hypertonic saline, ODS prevention</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="acid-base-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acid-Base Disorders</span>
+                        <span class="challenge-text">45M with pH 7.22, pCO2 25, HCO3 10</span>
+                    </div>
+                    <div class="case-presentation">Systematic approach, anion gap, compensation</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="rhabdomyolysis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Rhabdomyolysis</span>
+                        <span class="challenge-text">25M with muscle pain and dark urine after marathon</span>
+                    </div>
+                    <div class="case-presentation">CK levels, aggressive IVF, compartment syndrome</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="electrolyte-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Electrolyte Emergencies</span>
+                        <span class="challenge-text">Multiple scenarios: hypo/hyperkalemia, calcium, magnesium</span>
+                    </div>
+                    <div class="case-presentation">ECG changes, rapid correction protocols</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ALLERGY / IMMUNOLOGY -->
+        <section class="category" id="allergy">
+            <div class="category-header">
+                <span class="category-icon">🦠</span>
+                <span class="category-title">Allergy / Immunology</span>
+                <span class="category-count">18 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="anaphylaxis-expanded-dual-adventure.html" class="case-card" data-type="dual">
+                    <div class="case-title">
+                        <span class="diagnosis">Anaphylaxis (Dual-Mode)</span>
+                        <span class="challenge-text">Patient with urticaria, dyspnea, hypotension after exposure</span>
+                    </div>
+                    <div class="case-presentation">Adult vs Pediatric: Epinephrine dosing, observation period</div>
+                    <div class="case-badges"><span class="badge badge-dual">Dual-Mode</span><span class="badge badge-new">NEW</span></div>
+                </a>
+                <a href="anaphylaxis-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Anaphylaxis</span>
+                        <span class="challenge-text">32F with diffuse hives, throat tightness after eating peanuts</span>
+                    </div>
+                    <div class="case-presentation">Epinephrine timing, biphasic reactions, discharge planning</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="anaphylaxis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Anaphylaxis Management</span>
+                        <span class="challenge-text">8yo with lip swelling and wheezing after bee sting</span>
+                    </div>
+                    <div class="case-presentation">Pediatric dosing, EpiPen prescription, allergy referral</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="angioedema-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Angioedema</span>
+                        <span class="challenge-text">55M on lisinopril with progressive lip and tongue swelling</span>
+                    </div>
+                    <div class="case-presentation">ACEi vs allergic vs hereditary, airway management</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="drug-allergy-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Drug Allergy Evaluation</span>
+                        <span class="challenge-text">Patient with "penicillin allergy" needing antibiotics</span>
+                    </div>
+                    <div class="case-presentation">Risk stratification, cross-reactivity, delabeling</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="drug-allergy-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Drug Hypersensitivity</span>
+                        <span class="challenge-text">28F with rash after starting new medication</span>
+                    </div>
+                    <div class="case-presentation">Type I-IV reactions, timing, rechallenge decisions</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="food-allergy-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Food Allergy</span>
+                        <span class="challenge-text">5yo with hives and vomiting after eating tree nuts</span>
+                    </div>
+                    <div class="case-presentation">IgE vs non-IgE mediated, testing, avoidance counseling</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="food-allergy-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Food Allergy Workup</span>
+                        <span class="challenge-text">Parent concerned about infant's reaction to formula</span>
+                    </div>
+                    <div class="case-presentation">Skin testing, specific IgE, oral food challenge</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="urticaria-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Chronic Urticaria</span>
+                        <span class="challenge-text">35F with daily hives for 8 weeks, no identifiable trigger</span>
+                    </div>
+                    <div class="case-presentation">Acute vs chronic, antihistamine escalation, omalizumab</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="urticaria-angioedema-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Urticaria/Angioedema</span>
+                        <span class="challenge-text">42M with recurrent swelling episodes</span>
+                    </div>
+                    <div class="case-presentation">Mast cell vs bradykinin-mediated, workup algorithm</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="venom-allergy-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Venom Allergy</span>
+                        <span class="challenge-text">45M with systemic reaction after yellow jacket sting</span>
+                    </div>
+                    <div class="case-presentation">Testing, venom immunotherapy indications</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="venom-allergy-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Hymenoptera Allergy</span>
+                        <span class="challenge-text">Beekeeper with large local reactions progressing</span>
+                    </div>
+                    <div class="case-presentation">Risk assessment, VIT protocol, field precautions</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="asthma-phenotyping-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Asthma Phenotyping</span>
+                        <span class="challenge-text">28F with poorly controlled asthma despite ICS/LABA</span>
+                    </div>
+                    <div class="case-presentation">T2 vs non-T2, biomarkers, biologic selection</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="asthma-biologics-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Asthma Biologics</span>
+                        <span class="challenge-text">Severe asthma patient failing conventional therapy</span>
+                    </div>
+                    <div class="case-presentation">Omalizumab, mepolizumab, dupilumab, tezepelumab</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="immunodeficiency-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Primary Immunodeficiency</span>
+                        <span class="challenge-text">25M with recurrent sinopulmonary infections since childhood</span>
+                    </div>
+                    <div class="case-presentation">Warning signs, CVID workup, IVIG therapy</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="eosinophilia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Eosinophilia Workup</span>
+                        <span class="challenge-text">38F with AEC 2500, cough, and skin findings</span>
+                    </div>
+                    <div class="case-presentation">Primary vs secondary, EGPA, hypereosinophilic syndrome</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="mast-cell-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Mast Cell Disorders</span>
+                        <span class="challenge-text">42F with flushing, hypotensive episodes, and urticaria pigmentosa</span>
+                    </div>
+                    <div class="case-presentation">Tryptase, bone marrow, MCAS criteria</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="penicillin-delabeling-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Penicillin Delabeling</span>
+                        <span class="challenge-text">Patient with childhood "penicillin allergy" - rash 20 years ago</span>
+                    </div>
+                    <div class="case-presentation">Risk stratification, direct challenge, documentation</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- CRITICAL CARE -->
+        <section class="category" id="critical">
+            <div class="category-header">
+                <span class="category-icon">🚨</span>
+                <span class="category-title">Critical Care</span>
+                <span class="category-count">5 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="sepsis-expanded-dual-adventure.html" class="case-card" data-type="dual">
+                    <div class="case-title">
+                        <span class="diagnosis">Sepsis & Septic Shock (Dual-Mode)</span>
+                        <span class="challenge-text">Patient with fever, tachycardia, hypotension, suspected infection</span>
+                    </div>
+                    <div class="case-presentation">Adult vs Pediatric: Hour-1 bundle, vasopressor choice</div>
+                    <div class="case-badges"><span class="badge badge-dual">Dual-Mode</span><span class="badge badge-new">NEW</span></div>
+                </a>
+                <a href="sepsis-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Septic Shock</span>
+                        <span class="challenge-text">62M with UTI source, lactate 4.5, MAP 58 despite fluids</span>
+                    </div>
+                    <div class="case-presentation">Surviving Sepsis guidelines, vasopressor titration</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="sepsis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Sepsis Recognition</span>
+                        <span class="challenge-text">78F from nursing home with altered mental status</span>
+                    </div>
+                    <div class="case-presentation">qSOFA, source identification, early antibiotics</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="shock-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Shock Classification</span>
+                        <span class="challenge-text">55M with hypotension - determine shock type</span>
+                    </div>
+                    <div class="case-presentation">Distributive, cardiogenic, hypovolemic, obstructive</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="tension-ptx-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Tension Pneumothorax</span>
+                        <span class="challenge-text">Trauma patient with absent breath sounds, tracheal deviation</span>
+                    </div>
+                    <div class="case-presentation">Clinical diagnosis, needle decompression, chest tube</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PEDIATRICS -->
+        <section class="category" id="peds">
+            <div class="category-header">
+                <span class="category-icon">👶</span>
+                <span class="category-title">Pediatrics</span>
+                <span class="category-count">7 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="peds-dka-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Pediatric DKA</span>
+                        <span class="challenge-text">12yo with new-onset diabetes, vomiting, Kussmaul respirations</span>
+                    </div>
+                    <div class="case-presentation">Two-bag system, cerebral edema prevention, slower correction</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="bronchiolitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Bronchiolitis</span>
+                        <span class="challenge-text">6-month-old with cough, wheezing, and respiratory distress</span>
+                    </div>
+                    <div class="case-presentation">Supportive care, high-flow nasal cannula, admission criteria</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="croup-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Croup</span>
+                        <span class="challenge-text">2yo with barky cough, stridor at rest, URI symptoms</span>
+                    </div>
+                    <div class="case-presentation">Westley score, dexamethasone, racemic epinephrine</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="kawasaki-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Kawasaki Disease</span>
+                        <span class="challenge-text">3yo with 5 days of fever, rash, conjunctivitis, strawberry tongue</span>
+                    </div>
+                    <div class="case-presentation">Diagnostic criteria, IVIG timing, coronary monitoring</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="febrile-seizure-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Febrile Seizure</span>
+                        <span class="challenge-text">18-month-old with generalized seizure during febrile illness</span>
+                    </div>
+                    <div class="case-presentation">Simple vs complex, LP indications, parental counseling</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="intussusception-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Intussusception</span>
+                        <span class="challenge-text">9-month-old with intermittent crying, currant jelly stool</span>
+                    </div>
+                    <div class="case-presentation">Ultrasound diagnosis, air enema reduction</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="pyloric-stenosis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Pyloric Stenosis</span>
+                        <span class="challenge-text">4-week-old with projectile vomiting, hungry after feeds</span>
+                    </div>
+                    <div class="case-presentation">Olive mass, metabolic alkalosis, pyloromyotomy</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- OB/GYN -->
+        <section class="category" id="obgyn">
+            <div class="category-header">
+                <span class="category-icon">🤰</span>
+                <span class="category-title">OB/GYN</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="ectopic-pregnancy-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Ectopic Pregnancy</span>
+                        <span class="challenge-text">28F with positive pregnancy test, pelvic pain, vaginal bleeding</span>
+                    </div>
+                    <div class="case-presentation">β-hCG trends, ultrasound findings, MTX vs surgery</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="preeclampsia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Preeclampsia</span>
+                        <span class="challenge-text">32F at 34 weeks with BP 165/105, headache, proteinuria</span>
+                    </div>
+                    <div class="case-presentation">Severity criteria, magnesium, delivery timing</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="placental-abruption-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Placental Abruption</span>
+                        <span class="challenge-text">35F at 36 weeks with painful vaginal bleeding, rigid uterus</span>
+                    </div>
+                    <div class="case-presentation">Fetal monitoring, DIC risk, emergent delivery</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="pph-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Postpartum Hemorrhage</span>
+                        <span class="challenge-text">Immediately postpartum with >500mL blood loss</span>
+                    </div>
+                    <div class="case-presentation">4 T's, uterotonic agents, massive transfusion</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="ovarian-torsion-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Ovarian Torsion</span>
+                        <span class="challenge-text">22F with sudden severe unilateral pelvic pain, nausea</span>
+                    </div>
+                    <div class="case-presentation">Doppler ultrasound, surgical urgency, ovarian salvage</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="pid-toa-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">PID / Tubo-ovarian Abscess</span>
+                        <span class="challenge-text">25F with pelvic pain, fever, cervical motion tenderness</span>
+                    </div>
+                    <div class="case-presentation">Empiric antibiotics, inpatient criteria, TOA drainage</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- TOXICOLOGY -->
+        <section class="category" id="tox">
+            <div class="category-header">
+                <span class="category-icon">☠️</span>
+                <span class="category-title">Toxicology</span>
+                <span class="category-count">4 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="apap-overdose-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acetaminophen Overdose</span>
+                        <span class="challenge-text">19F found with empty Tylenol bottles, timeline unknown</span>
+                    </div>
+                    <div class="case-presentation">Rumack-Matthew nomogram, NAC protocol, liver monitoring</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="opioid-overdose-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Opioid Overdose</span>
+                        <span class="challenge-text">28M found unresponsive with pinpoint pupils, RR 4</span>
+                    </div>
+                    <div class="case-presentation">Naloxone dosing, observation period, harm reduction</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="alcohol-withdrawal-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Alcohol Withdrawal</span>
+                        <span class="challenge-text">52M with tremor, tachycardia, agitation 48h after last drink</span>
+                    </div>
+                    <div class="case-presentation">CIWA protocol, benzodiazepine dosing, DT prevention</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="toxidromes-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Toxidromes</span>
+                        <span class="challenge-text">Unknown ingestion - identify the syndrome</span>
+                    </div>
+                    <div class="case-presentation">Anticholinergic, cholinergic, sympathomimetic, opioid, sedative</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ENDOCRINE -->
+        <section class="category" id="endo">
+            <div class="category-header">
+                <span class="category-icon">🦋</span>
+                <span class="category-title">Endocrine</span>
+                <span class="category-count">3 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="thyroid-storm-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Thyroid Storm</span>
+                        <span class="challenge-text">45F with fever, tachycardia, agitation, known Graves disease</span>
+                    </div>
+                    <div class="case-presentation">Burch-Wartofsky score, PTU, beta-blockade, iodine timing</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="adrenal-crisis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Adrenal Crisis</span>
+                        <span class="challenge-text">62M on chronic prednisone with hypotension and confusion</span>
+                    </div>
+                    <div class="case-presentation">Stress-dose steroids, fluid resuscitation, precipitant</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="hypoglycemia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Hypoglycemia</span>
+                        <span class="challenge-text">58M diabetic found confused with glucose 35</span>
+                    </div>
+                    <div class="case-presentation">Whipple's triad, treatment, cause identification</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PSYCHIATRY -->
+        <section class="category" id="psych">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Psychiatry</span>
+                <span class="category-count">3 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="psychosis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Acute Psychosis</span>
+                        <span class="challenge-text">22M with paranoid delusions and auditory hallucinations</span>
+                    </div>
+                    <div class="case-presentation">Medical workup, safety assessment, antipsychotic choice</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="depression-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Major Depression</span>
+                        <span class="challenge-text">35F with anhedonia, sleep changes, passive SI</span>
+                    </div>
+                    <div class="case-presentation">PHQ-9, safety planning, medication selection</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="bipolar-disorder-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Bipolar Disorder</span>
+                        <span class="challenge-text">28M with decreased sleep, grandiosity, impulsive spending</span>
+                    </div>
+                    <div class="case-presentation">Mania recognition, mood stabilizers, antidepressant caution</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- OTHER -->
+        <section class="category" id="other">
+            <div class="category-header">
+                <span class="category-icon">📋</span>
+                <span class="category-title">Other Specialties</span>
+                <span class="category-count">12 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="htn-emergency-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">
+                        <span class="diagnosis">Hypertensive Emergency</span>
+                        <span class="challenge-text">55M with BP 220/130, headache, and chest pain</span>
+                    </div>
+                    <div class="case-presentation">End-organ damage, IV antihypertensives, BP targets</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="htn-emergency-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">HTN Emergency Workup</span>
+                        <span class="challenge-text">48F with severely elevated BP and AKI</span>
+                    </div>
+                    <div class="case-presentation">Urgency vs emergency, medication selection</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="dvt-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Deep Vein Thrombosis</span>
+                        <span class="challenge-text">45F with unilateral leg swelling and calf tenderness</span>
+                    </div>
+                    <div class="case-presentation">Wells score, anticoagulation choice, cancer screening</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="cellulitis-necfasc-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Cellulitis vs Necrotizing Fasciitis</span>
+                        <span class="challenge-text">58M diabetic with rapidly spreading leg erythema, crepitus</span>
+                    </div>
+                    <div class="case-presentation">LRINEC score, surgical emergency, broad-spectrum antibiotics</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="neutropenic-fever-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Neutropenic Fever</span>
+                        <span class="challenge-text">62M post-chemo with ANC 200 and temperature 38.5°C</span>
+                    </div>
+                    <div class="case-presentation">MASCC score, empiric antibiotics, G-CSF</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="dic-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">DIC</span>
+                        <span class="challenge-text">Septic patient with oozing from IV sites, low platelets</span>
+                    </div>
+                    <div class="case-presentation">ISTH criteria, treat underlying cause, blood products</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="ttp-hus-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">TTP/HUS</span>
+                        <span class="challenge-text">35F with thrombocytopenia, hemolytic anemia, AKI</span>
+                    </div>
+                    <div class="case-presentation">PLASMIC score, plasma exchange, avoid platelets</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="tbi-icp-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">TBI / Elevated ICP</span>
+                        <span class="challenge-text">25M after MVA with declining GCS, unequal pupils</span>
+                    </div>
+                    <div class="case-presentation">ICP management, herniation signs, hyperosmolar therapy</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="spinal-cord-compression-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Spinal Cord Compression</span>
+                        <span class="challenge-text">68M with back pain, leg weakness, and urinary retention</span>
+                    </div>
+                    <div class="case-presentation">Emergent MRI, high-dose steroids, surgical decompression</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="aortic-dissection-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Aortic Dissection</span>
+                        <span class="challenge-text">62M with tearing chest pain radiating to back, BP differential</span>
+                    </div>
+                    <div class="case-presentation">Stanford classification, HR/BP control, surgical consultation</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="eye-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">Eye Emergencies</span>
+                        <span class="challenge-text">Various: acute vision loss, red eye, trauma</span>
+                    </div>
+                    <div class="case-presentation">CRAO, acute glaucoma, retinal detachment, chemical injury</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+                <a href="ent-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">
+                        <span class="diagnosis">ENT Emergencies</span>
+                        <span class="challenge-text">Various: epistaxis, peritonsillar abscess, foreign body</span>
+                    </div>
+                    <div class="case-presentation">Posterior packing, I&D, airway management</div>
+                    <div class="case-badges"><span class="badge badge-standard">Standard</span></div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.querySelector('.theme-toggle');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                btn.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        // Check saved theme on load (default to light)
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+        
+        // Mode toggle (Study vs Challenge)
+        function setMode(mode) {
+            document.body.setAttribute('data-mode', mode);
+            document.getElementById('studyBtn').classList.toggle('active', mode === 'study');
+            document.getElementById('challengeBtn').classList.toggle('active', mode === 'challenge');
+            
+            const modeInfo = document.getElementById('modeInfo');
+            if (mode === 'study') {
+                modeInfo.innerHTML = `
+                    <span class="icon">📚</span>
+                    <div class="mode-info-text">
+                        <h3>Study Mode</h3>
+                        <p>Diagnoses are visible. Select cases by topic to review specific conditions.</p>
+                    </div>
+                `;
+            } else {
+                modeInfo.innerHTML = `
+                    <span class="icon">🎯</span>
+                    <div class="mode-info-text">
+                        <h3>Challenge Mode</h3>
+                        <p>Diagnoses are hidden! Only clinical presentations shown - test your diagnostic reasoning.</p>
+                    </div>
+                `;
+            }
+            localStorage.setItem('caseMode', mode);
+        }
+        
+        // Check saved mode on load (default to study)
+        const savedMode = localStorage.getItem('caseMode') || 'study';
+        setMode(savedMode);
+        
+        // Filter by type
+        let currentFilter = 'all';
+        function filterByType(type) {
+            currentFilter = type;
+            const cards = document.querySelectorAll('.case-card');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                if (type === 'all' || cardType === type) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            filterCases(); // Reapply search filter
+        }
+        
+        // Search filter
+        function filterCases() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.case-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.case-title').textContent.toLowerCase();
+                const presentation = card.querySelector('.case-presentation').textContent.toLowerCase();
+                const cardType = card.getAttribute('data-type');
+                
+                const matchesSearch = title.includes(searchTerm) || presentation.includes(searchTerm);
+                const matchesFilter = currentFilter === 'all' || cardType === currentFilter;
+                
+                if (matchesSearch && matchesFilter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
