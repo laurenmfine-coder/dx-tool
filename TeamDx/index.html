@@ -8,11 +8,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
-            min-height: 100vh; 
-            color: #e8e8e8; 
+            background: #f8fafc; color: #1e293b; 
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; padding-top: 88px; }
         
         .header {
             text-align: center;
@@ -22,7 +20,7 @@
             margin-bottom: 24px;
         }
         .header h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
-        .header p { color: rgba(255,255,255,0.85); }
+        .header p { color: rgba(255,255,255,0.9); }
         
         .scenario-grid {
             display: grid;
@@ -32,19 +30,18 @@
         }
         .scenario-btn {
             padding: 20px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
             text-align: left;
         }
-        .scenario-btn:hover { background: rgba(167,139,250,0.2); border-color: #a78bfa; }
+        .scenario-btn:hover { background: rgba(139,92,246,0.1); border-color: #a78bfa; }
         .scenario-btn h3 { margin-bottom: 6px; font-size: 1rem; }
-        .scenario-btn p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+        .scenario-btn p { font-size: 0.8rem; color: #64748b; }
         
         .main-card {
-            background: rgba(255,255,255,0.08);
+            background: #fff;
             border-radius: 16px;
             overflow: hidden;
             display: none;
@@ -53,15 +50,15 @@
         
         .patient-bar {
             padding: 16px 20px;
-            background: rgba(167,139,250,0.15);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(139,92,246,0.08);
+            border-bottom: 1px solid #e2e8f0;
         }
         .patient-bar h4 { color: #a78bfa; font-size: 0.9rem; }
         .patient-bar p { font-size: 0.85rem; margin-top: 4px; }
         
         .team-bar {
             padding: 12px 20px;
-            background: rgba(0,0,0,0.2);
+            background: #f1f5f9;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -115,13 +112,13 @@
             background: linear-gradient(135deg, #8b5cf6, #6d28d9);
             align-self: flex-end;
         }
-        .msg.student .msg-header { color: rgba(255,255,255,0.8); }
+        .msg.student .msg-header { color: #475569; }
         .msg.system {
             background: rgba(255,255,255,0.1);
             align-self: center;
             text-align: center;
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.6);
+            color: #64748b;
         }
         
         .response-area {
@@ -135,14 +132,13 @@
         }
         .response-opt {
             padding: 12px 16px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border-radius: 10px;
             cursor: pointer;
             font-size: 0.9rem;
             transition: all 0.2s;
         }
-        .response-opt:hover { background: rgba(167,139,250,0.2); border-color: #a78bfa; }
+        .response-opt:hover { background: rgba(139,92,246,0.1); border-color: #a78bfa; }
         .response-opt.selected { background: rgba(167,139,250,0.3); border-color: #a78bfa; }
         
         .feedback-box {
@@ -167,7 +163,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
+            background: #e2e8f0;
         }
         .progress-dot.complete { background: #4ade80; }
         .progress-dot.current { background: #a78bfa; }
@@ -175,7 +171,7 @@
         .summary-panel {
             margin-top: 24px;
             padding: 24px;
-            background: rgba(255,255,255,0.08);
+            background: #fff;
             border-radius: 16px;
             display: none;
         }
@@ -186,7 +182,7 @@
             display: flex;
             justify-content: space-between;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid #e2e8f0;
         }
         .skill-score:last-child { border-bottom: none; }
         .skill-bar {
@@ -204,6 +200,7 @@
     <link rel="stylesheet" href="/dx-mobile-enhanced.css">
 </head>
 <body>
+    <script src="/dx-universal-nav.js"></script>
     <div class="container">
         <div class="header">
             <h1>👥 TeamDx</h1>
@@ -465,7 +462,7 @@
             
             // Render response options
             document.getElementById('responseArea').innerHTML = `
-                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 12px;">${exchange.prompt}</p>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 12px;">${exchange.prompt}</p>
                 <div class="response-options">
                     ${exchange.options.map((opt, i) => `
                         <div class="response-opt" onclick="selectResponse(${i})">${opt.text}</div>
@@ -501,7 +498,7 @@
             feedbackBox.innerHTML = `
                 <h5>${selected.quality === 'good' ? '✓ Effective Communication' : '💡 Opportunity for Improvement'}</h5>
                 <p style="font-size: 0.9rem;">${selected.feedback}</p>
-                <button onclick="nextExchange()" style="margin-top: 12px; padding: 8px 16px; background: #a78bfa; border: none; border-radius: 6px; color: #fff; cursor: pointer;">
+                <button onclick="nextExchange()" style="margin-top: 12px; padding: 8px 16px; background: #a78bfa; border: none; border-radius: 6px; color: #1e293b; cursor: pointer;">
                     ${currentExchange < currentScenario.exchanges.length - 1 ? 'Continue' : 'See Summary'}
                 </button>
             `;
@@ -547,7 +544,7 @@
             
             document.getElementById('summaryPanel').innerHTML = `
                 <h3>📊 Collaboration Summary</h3>
-                <p style="font-size: 1.5rem; font-weight: 600; text-align: center; padding: 20px; background: rgba(167,139,250,0.2); border-radius: 12px; margin-bottom: 20px;">
+                <p style="font-size: 1.5rem; font-weight: 600; text-align: center; padding: 20px; background: rgba(139,92,246,0.1); border-radius: 12px; margin-bottom: 20px;">
                     ${score}% Effective Responses
                 </p>
                 <h4 style="margin-bottom: 12px;">Skill Assessment</h4>
@@ -560,9 +557,9 @@
                         </div>
                     </div>
                 `).join('')}
-                <div style="margin-top: 20px; padding: 16px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                <div style="margin-top: 20px; padding: 16px; background: #fff; border-radius: 10px;">
                     <h5 style="margin-bottom: 8px;">Key Takeaways</h5>
-                    <ul style="margin-left: 20px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                    <ul style="margin-left: 20px; font-size: 0.9rem; color: #475569;">
                         <li>Every team member brings unique expertise—acknowledge and utilize it</li>
                         <li>Clear, structured communication prevents errors</li>
                         <li>Anticipate questions and provide context proactively</li>
@@ -582,42 +579,42 @@
 <style>
 .dx-feedback-trigger{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(59,130,246,0.4);display:flex;align-items:center;justify-content:center;font-size:24px;transition:transform 0.2s,box-shadow 0.2s;z-index:99998}
 .dx-feedback-trigger:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(59,130,246,0.5)}
-.dx-feedback-panel{position:fixed;bottom:96px;right:24px;width:380px;max-width:calc(100vw - 48px);max-height:calc(100vh - 140px);background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-radius:16px;box-shadow:0 10px 50px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);overflow:hidden;display:none;flex-direction:column;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.dx-feedback-panel{position:fixed;bottom:96px;right:24px;width:380px;max-width:calc(100vw - 48px);max-height:calc(100vh - 140px);background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-radius:16px;box-shadow:0 10px 50px rgba(0,0,0,0.5);border: 1px solid #e2e8f0;overflow:hidden;display:none;flex-direction:column;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 .dx-feedback-panel.open{display:flex}
-.dx-feedback-header{padding:20px;background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:#fff}
+.dx-feedback-header{padding:20px;background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color: #1e293b}
 .dx-feedback-header h3{margin:0 0 4px;font-size:1.1rem;font-weight:600}
 .dx-feedback-header p{margin:0;font-size:0.85rem;opacity:0.9}
-.dx-feedback-body{padding:20px;overflow-y:auto;flex:1;color:#e8e8e8}
+.dx-feedback-body{padding:20px;overflow-y:auto;flex:1;color: #334155}
 .dx-feedback-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
-.dx-feedback-type{padding:14px 12px;background:rgba(255,255,255,0.05);border:2px solid transparent;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s}
-.dx-feedback-type:hover{background:rgba(255,255,255,0.08);border-color:rgba(96,165,250,0.3)}
+.dx-feedback-type{padding:14px 12px;background: #fff;border:2px solid transparent;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s}
+.dx-feedback-type:hover{background: #fff;border-color:rgba(96,165,250,0.3)}
 .dx-feedback-type.selected{background:rgba(96,165,250,0.15);border-color:#60a5fa}
 .dx-feedback-type-icon{font-size:1.5rem;margin-bottom:6px}
-.dx-feedback-type-label{font-size:0.8rem;color:rgba(255,255,255,0.8)}
+.dx-feedback-type-label{font-size:0.8rem;color: #475569}
 .dx-feedback-field{margin-bottom:16px}
-.dx-feedback-field label{display:block;font-size:0.85rem;color:rgba(255,255,255,0.7);margin-bottom:6px}
-.dx-feedback-field input,.dx-feedback-field select,.dx-feedback-field textarea{width:100%;padding:12px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:0.95rem;font-family:inherit}
+.dx-feedback-field label{display:block;font-size:0.85rem;color: #64748b;margin-bottom:6px}
+.dx-feedback-field input,.dx-feedback-field select,.dx-feedback-field textarea{width:100%;padding:12px 14px;background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.08);border-radius:8px;color: #1e293b;font-size:0.95rem;font-family:inherit}
 .dx-feedback-field input:focus,.dx-feedback-field select:focus,.dx-feedback-field textarea:focus{outline:none;border-color:#60a5fa;background:rgba(255,255,255,0.1)}
-.dx-feedback-field input::placeholder,.dx-feedback-field textarea::placeholder{color:rgba(255,255,255,0.4)}
-.dx-feedback-field select option{background:#1e293b;color:#fff}
+.dx-feedback-field input::placeholder,.dx-feedback-field textarea::placeholder{color: #cbd5e1}
+.dx-feedback-field select option{background:#1e293b;color: #1e293b}
 .dx-feedback-field textarea{min-height:100px;resize:vertical}
 .dx-feedback-priority{display:flex;gap:8px}
-.dx-priority-btn{flex:1;padding:10px;background:rgba(255,255,255,0.05);border:2px solid transparent;border-radius:8px;cursor:pointer;font-size:0.8rem;color:rgba(255,255,255,0.7);transition:all 0.2s}
-.dx-priority-btn:hover{background:rgba(255,255,255,0.08)}
+.dx-priority-btn{flex:1;padding:10px;background: #fff;border:2px solid transparent;border-radius:8px;cursor:pointer;font-size:0.8rem;color: #64748b;transition:all 0.2s}
+.dx-priority-btn:hover{background: #fff}
 .dx-priority-btn.selected.low{background:rgba(74,222,128,0.15);border-color:#4ade80;color:#4ade80}
 .dx-priority-btn.selected.medium{background:rgba(251,191,36,0.15);border-color:#fbbf24;color:#fbbf24}
 .dx-priority-btn.selected.high{background:rgba(239,68,68,0.15);border-color:#ef4444;color:#ef4444}
-.dx-feedback-page-info{padding:10px 14px;background:rgba(96,165,250,0.1);border-radius:8px;margin-bottom:16px;font-size:0.8rem;color:rgba(255,255,255,0.7)}
+.dx-feedback-page-info{padding:10px 14px;background:rgba(96,165,250,0.1);border-radius:8px;margin-bottom:16px;font-size:0.8rem;color: #64748b}
 .dx-feedback-page-info strong{color:#60a5fa}
-.dx-feedback-submit{width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:opacity 0.2s}
+.dx-feedback-submit{width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;border-radius:10px;color: #1e293b;font-size:1rem;font-weight:600;cursor:pointer;transition:opacity 0.2s}
 .dx-feedback-submit:hover{opacity:0.9}
 .dx-feedback-submit:disabled{opacity:0.5;cursor:not-allowed}
 .dx-feedback-success{text-align:center;padding:40px 20px}
 .dx-feedback-success-icon{font-size:3rem;margin-bottom:16px}
 .dx-feedback-success h4{font-size:1.2rem;margin:0 0 8px;color:#4ade80}
-.dx-feedback-success p{color:rgba(255,255,255,0.7);font-size:0.9rem;margin:0 0 20px}
-.dx-feedback-success-id{display:inline-block;padding:8px 16px;background:rgba(255,255,255,0.08);border-radius:6px;font-family:monospace;font-size:0.85rem;color:#60a5fa}
-.dx-feedback-close{position:absolute;top:16px;right:16px;width:28px;height:28px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.dx-feedback-success p{color: #64748b;font-size:0.9rem;margin:0 0 20px}
+.dx-feedback-success-id{display:inline-block;padding:8px 16px;background: #fff;border-radius:6px;font-family:monospace;font-size:0.85rem;color:#60a5fa}
+.dx-feedback-close{position:absolute;top:16px;right:16px;width:28px;height:28px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;cursor:pointer;color: #1e293b;font-size:1rem;display:flex;align-items:center;justify-content:center}
 .dx-feedback-close:hover{background:rgba(255,255,255,0.25)}
 @media(max-width:480px){.dx-feedback-panel{bottom:0;right:0;left:0;width:100%;max-width:100%;max-height:85vh;border-radius:16px 16px 0 0}.dx-feedback-trigger{bottom:16px;right:16px}}
 </style>
