@@ -22,7 +22,7 @@ const COACHDX_INTERDISCIPLINARY_CASES = {
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Kwame Asante',
+        name: 'Robert Chen',
         age: 52,
         sex: 'Male',
         setting: 'Allergy/Immunology Clinic',
@@ -32,7 +32,7 @@ const COACHDX_INTERDISCIPLINARY_CASES = {
     
     description: `A 52-year-old man is referred by ENT for evaluation of recurrent CRSwNP. He has had 3 FESS procedures over 8 years with polyp recurrence within 12-18 months each time. He uses fluticasone nasal spray and saline rinses daily. He also has moderate persistent asthma on ICS/LABA. He denies aspirin/NSAID sensitivity.`,
     
-    openingStatement: `Mr. Okonkwo's ENT surgeon is frustrated with recurrent polyps despite technically successful surgeries. They want your input on biologics or other systemic therapies. How do you approach this evaluation?`,
+    openingStatement: `Mr. Chen's ENT surgeon is frustrated with recurrent polyps despite technically successful surgeries. They want your input on biologics or other systemic therapies. How do you approach this evaluation?`,
     
     levelAdaptations: {
         'medical-student': {
@@ -135,7 +135,7 @@ Many ENTs now start biologics before revision surgery or use them to maintain re
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Carmen Delgado',
+        name: 'Maria Santos',
         age: 45,
         sex: 'Female',
         setting: 'Severe Asthma Clinic',
@@ -248,7 +248,7 @@ Her FeNO comes back at 45 ppb (elevated >25), suggesting Type 2 inflammation des
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Adaeze Eze',
+        name: 'Emma Wilson',
         age: 8,
         sex: 'Female',
         setting: 'Allergy Clinic - Education Visit',
@@ -365,7 +365,7 @@ Copies go to: Parents, school nurse, teacher, coach, babysitter, grandparents, a
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Vikram Patel',
+        name: 'James Thompson',
         age: 34,
         sex: 'Male',
         setting: 'Allergy Clinic - Biologic Start Visit',

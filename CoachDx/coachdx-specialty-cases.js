@@ -71,7 +71,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'em',
     difficulty: 'advanced',
-    patient: { name: 'Daisuke Yamamoto', age: 28, sex: 'Male', setting: 'ED Trauma Bay', acuity: 'Critical', chiefComplaint: 'GSW Abdomen' },
+    patient: { name: 'Marcus Johnson', age: 28, sex: 'Male', setting: 'ED Trauma Bay', acuity: 'Critical', chiefComplaint: 'GSW Abdomen' },
     description: 'Gunshot wound to abdomen, hypotensive, distended. FAST is positive. Surgery wants CT first, you want him in the OR now. Navigate this conflict while keeping the patient alive.',
     openingStatement: 'He\'s shot in the belly, BP 78/50, abdomen rigid, FAST shows free fluid. The surgery resident wants a CT. Your attending is in a procedure. What do you do?',
     keyTeachingPoints: [
@@ -95,7 +95,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'surgery',
     difficulty: 'advanced',
-    patient: { name: 'Kwame Asante', age: 67, sex: 'Male', setting: 'ED Consult', acuity: 'High', chiefComplaint: 'Severe Abdominal Pain' },
+    patient: { name: 'Robert Chen', age: 67, sex: 'Male', setting: 'ED Consult', acuity: 'High', chiefComplaint: 'Severe Abdominal Pain' },
     description: 'ED consult for acute abdomen. CT shows dilated small bowel with transition point but no clear obstruction. Do you operate tonight or watch and wait?',
     openingStatement: 'The CT shows SBO with a transition point in the pelvis, maybe adhesive. No free air, no obvious dead bowel. ED wants to admit to medicine, you think he needs surgery. Convince me one way or the other.',
     keyTeachingPoints: [
@@ -135,9 +135,9 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'surgery',
     difficulty: 'intermediate',
-    patient: { name: 'Vikram Patel', age: 72, sex: 'Male', setting: 'Pre-Op', acuity: 'Elective', chiefComplaint: 'Consent for Colectomy' },
+    patient: { name: 'James Thompson', age: 72, sex: 'Male', setting: 'Pre-Op', acuity: 'Elective', chiefComplaint: 'Consent for Colectomy' },
     description: 'You\'re consenting a patient for right hemicolectomy for colon cancer. He asks "What could go wrong?" How do you discuss surgical risks honestly without terrifying him?',
-    openingStatement: 'Mr. Petrov is scheduled for right hemicolectomy tomorrow. You\'re doing the consent. He seems nervous and asks, "What are the chances something goes wrong?" How do you answer?',
+    openingStatement: 'Mr. Thompson is scheduled for right hemicolectomy tomorrow. You\'re doing the consent. He seems nervous and asks, "What are the chances something goes wrong?" How do you answer?',
     keyTeachingPoints: [
         'Informed consent is a conversation, not a form',
         'Discuss common AND serious risks',
@@ -179,7 +179,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'peds',
     difficulty: 'advanced',
-    patient: { name: 'Adaeze Eze', age: 2, sex: 'Female', setting: 'ED', acuity: 'High', chiefComplaint: 'Arm Injury' },
+    patient: { name: 'Emma Wilson', age: 2, sex: 'Female', setting: 'ED', acuity: 'High', chiefComplaint: 'Arm Injury' },
     description: 'A 2-year-old brought in for arm pain. Dad says she fell off the couch. X-ray shows spiral humerus fracture. Something doesn\'t add up.',
     openingStatement: 'The X-ray shows a spiral fracture of the humerus. Dad says she fell off the couch. She\'s quiet and won\'t make eye contact. What are you thinking and what do you do?',
     keyTeachingPoints: [
@@ -200,7 +200,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'peds',
     difficulty: 'intermediate',
-    patient: { name: 'Mikhail Sorokin', age: 8, sex: 'Male', setting: 'ED', acuity: 'Medium', chiefComplaint: 'Weight Loss and Polyuria' },
+    patient: { name: 'Tyler Johnson', age: 8, sex: 'Male', setting: 'ED', acuity: 'Medium', chiefComplaint: 'Weight Loss and Polyuria' },
     description: '8-year-old with 3 weeks of weight loss, polydipsia, polyuria. Blood glucose is 480, urine ketones positive. New Type 1 diabetes - now what?',
     openingStatement: 'Tyler has lost 8 pounds in 3 weeks and is up peeing all night. Glucose 480, positive ketones, pH 7.28. This is new-onset T1DM in DKA. Walk me through your management.',
     keyTeachingPoints: [
@@ -224,7 +224,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'obgyn',
     difficulty: 'advanced',
-    patient: { name: 'Carmen Delgado', age: 32, sex: 'Female', setting: 'L&D', acuity: 'Critical', chiefComplaint: 'Heavy Bleeding Post-Delivery' },
+    patient: { name: 'Maria Santos', age: 32, sex: 'Female', setting: 'L&D', acuity: 'Critical', chiefComplaint: 'Heavy Bleeding Post-Delivery' },
     description: 'Just delivered twins vaginally. Now bleeding heavily - 1500mL estimated and ongoing. BP dropping. Time to act.',
     openingStatement: 'She delivered twins 10 minutes ago, placenta is out and complete, but she\'s soaking pads and there\'s blood pooling. BP 88/54, HR 124. What\'s your plan?',
     keyTeachingPoints: [
@@ -314,7 +314,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'icu',
     difficulty: 'advanced',
-    patient: { name: 'Edem Koffi', age: 65, sex: 'Male', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Fighting the Ventilator' },
+    patient: { name: 'William Foster', age: 65, sex: 'Male', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Fighting the Ventilator' },
     description: 'Patient is "bucking the vent" - alarms going off, pressures high, SpO2 dropping. The nurse wants to sedate him more. Is that the right answer?',
     openingStatement: 'High-pressure alarms, SpO2 88%, patient looks uncomfortable, making double-triggered breaths. Nurse asks if you want propofol bolus. What do you assess first?',
     keyTeachingPoints: [
@@ -334,7 +334,7 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'icu',
     difficulty: 'intermediate',
-    patient: { name: 'Blessing Obi', age: 58, sex: 'Female', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Septic Shock Day 4' },
+    patient: { name: 'Angela Martinez', age: 58, sex: 'Female', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Septic Shock Day 4' },
     description: 'She\'s been in the ICU for 4 days on pressors. NPO since admission. The dietitian asks about nutrition. How do you feed a critically ill patient?',
     openingStatement: 'She\'s still on norepinephrine 8 mcg/min but stable-ish. Hasn\'t eaten in 4 days. When and how do you start feeding her?',
     keyTeachingPoints: [
@@ -355,9 +355,9 @@ const COACHDX_SPECIALTY_CASES = {
     discipline: 'resident',
     specialty: 'icu',
     difficulty: 'advanced',
-    patient: { name: 'Desmond Okafor', age: 82, sex: 'Male', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Transition to Comfort' },
+    patient: { name: 'Harold Thompson', age: 82, sex: 'Male', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Transition to Comfort' },
     description: 'After a family meeting, the decision is made to withdraw life support. The family is present and wants to be there at the end. How do you do this compassionately?',
-    openingStatement: 'The family has decided that Mr. Petrov would not have wanted prolonged life support. They want to be present when you extubate. Walk me through how you manage this transition.',
+    openingStatement: 'The family has decided that Mr. Thompson would not have wanted prolonged life support. They want to be present when you extubate. Walk me through how you manage this transition.',
     keyTeachingPoints: [
         'Prepare the family: what to expect, timeline, physical changes',
         'Pre-medicate for comfort: morphine for dyspnea, midazolam for agitation',

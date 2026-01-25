@@ -38,7 +38,7 @@ const INLINE_CASES = {
     title: 'Chest Pain - ACS Evaluation', 
     category: 'Cardiovascular',
     discipline: 'medical',
-    patient: { name: 'Carmen Delgado', age: 52, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Chest Pain' },
+    patient: { name: 'Maria Santos', age: 52, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Chest Pain' },
     description: 'A 52-year-old woman presents with chest pain that started 2 hours ago. Substernal pressure 7/10, diaphoresis, nausea. History of HTN and T2DM.',
     openingStatement: 'Mrs. Santos is a 52-year-old woman with chest pain, triaged as high acuity. What would you like to know first?',
     conceptDomains: {
@@ -65,9 +65,9 @@ const INLINE_CASES = {
     title: 'Acute Dyspnea - CHF',
     category: 'Cardiovascular',
     discipline: 'medical',
-    patient: { name: 'Alejandro Ruiz', age: 75, sex: 'Male', setting: 'Emergency', acuity: 'High' },
+    patient: { name: 'William Thompson', age: 75, sex: 'Male', setting: 'Emergency', acuity: 'High' },
     description: '75-year-old man with progressive dyspnea and leg swelling over 1 week. Known HFrEF.',
-    openingStatement: 'Mr. Petrov has a history of heart failure and says he can barely walk across the room now. His legs are very swollen. What would you like to assess?',
+    openingStatement: 'Mr. Thompson has a history of heart failure and says he can barely walk across the room now. His legs are very swollen. What would you like to assess?',
     conceptDomains: {
         'History': ['dyspnea_progression', 'orthopnea', 'dietary_compliance', 'medication_adherence'],
         'Physical Exam': ['jvd', 'lung_exam', 'edema', 's3_gallop'],
@@ -87,7 +87,7 @@ const INLINE_CASES = {
     title: 'New Onset Atrial Fibrillation',
     category: 'Cardiovascular',
     discipline: 'medical',
-    patient: { name: 'Ananya Reddy', age: 72, sex: 'Female', setting: 'Emergency', acuity: 'High' },
+    patient: { name: 'Patricia Hughes', age: 72, sex: 'Female', setting: 'Emergency', acuity: 'High' },
     description: '72-year-old woman with palpitations and heart rate of 142. Irregularly irregular rhythm.',
     openingStatement: 'Mrs. Hughes feels her heart racing. The monitor shows an irregularly irregular rhythm at 142. She is hemodynamically stable. How would you approach this?',
     conceptDomains: {
@@ -112,7 +112,7 @@ const INLINE_CASES = {
     title: 'Acute Dyspnea - PE',
     category: 'Pulmonary',
     discipline: 'medical',
-    patient: { name: 'Mei-Ling Wong', age: 45, sex: 'Female', setting: 'Emergency', acuity: 'High' },
+    patient: { name: 'Sarah Mitchell', age: 45, sex: 'Female', setting: 'Emergency', acuity: 'High' },
     description: '45-year-old woman 2 weeks post-op from knee surgery with sudden dyspnea and tachycardia.',
     openingStatement: 'Ms. Mitchell had knee surgery 2 weeks ago. She suddenly became short of breath this morning. Heart rate is 110, O2 sat 92%. What are you considering?',
     conceptDomains: {
@@ -159,7 +159,7 @@ const INLINE_CASES = {
     title: 'Urosepsis',
     category: 'Infectious Disease',
     discipline: 'medical',
-    patient: { name: 'Guadalupe Reyes', age: 82, sex: 'Female', setting: 'Emergency', acuity: 'Critical' },
+    patient: { name: 'Eleanor Davis', age: 82, sex: 'Female', setting: 'Emergency', acuity: 'Critical' },
     description: '82-year-old woman from nursing home with confusion, fever, and hypotension.',
     openingStatement: 'Mrs. Davis was brought from her nursing home because she was confused this morning. Her BP is 88/52 and temp is 102.1°F. The staff says she has a history of UTIs. What do you need to know?',
     conceptDomains: {
@@ -227,9 +227,9 @@ const INLINE_CASES = {
     title: 'Hyponatremia Workup',
     category: 'Endocrine',
     discipline: 'medical',
-    patient: { name: 'Ingrid Bergstrom', age: 68, sex: 'Female', setting: 'Hospital', acuity: 'Medium' },
+    patient: { name: 'Margaret Chen', age: 68, sex: 'Female', setting: 'Hospital', acuity: 'Medium' },
     description: '68-year-old woman with sodium of 122. Mild confusion, no focal neurologic deficits.',
-    openingStatement: 'Mrs. Nakamura was admitted for pneumonia and her morning labs show sodium of 122. She seems a bit confused but oriented. How do you approach this?',
+    openingStatement: 'Mrs. Chen was admitted for pneumonia and her morning labs show sodium of 122. She seems a bit confused but oriented. How do you approach this?',
     conceptDomains: {
         'Assessment': ['volume_status', 'osmolality', 'urine_studies'],
         'Workup': ['serum_osm', 'urine_osm', 'urine_sodium'],
@@ -274,7 +274,7 @@ const INLINE_CASES = {
     title: 'Acute Pancreatitis',
     category: 'GI',
     discipline: 'medical',
-    patient: { name: 'Aisha Mohammed', age: 45, sex: 'Female', setting: 'Emergency', acuity: 'High' },
+    patient: { name: 'Jennifer Martinez', age: 45, sex: 'Female', setting: 'Emergency', acuity: 'High' },
     description: '45-year-old woman with severe epigastric pain radiating to back. Lipase 1,850.',
     openingStatement: 'Ms. Martinez describes boring pain going straight through to her back. She is nauseated and the pain is 9/10. Lipase is very elevated. What is your approach?',
     conceptDomains: {
@@ -300,7 +300,7 @@ const INLINE_CASES = {
     category: 'Neurology',
     discipline: 'medical',
     isCritical: true,
-    patient: { name: 'Olumide Afolabi', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'Critical' },
+    patient: { name: 'George Patterson', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'Critical' },
     description: '72-year-old man with sudden right-sided weakness and slurred speech. Last known well 1 hour ago.',
     openingStatement: 'Mr. Patterson\'s wife says he was fine at breakfast but then couldn\'t lift his right arm and his speech was garbled. That was about an hour ago. Time is brain. What do you do?',
     conceptDomains: {
@@ -321,7 +321,7 @@ const INLINE_CASES = {
     title: 'Altered Mental Status',
     category: 'Neurology',
     discipline: 'medical',
-    patient: { name: 'Chioma Nwosu', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'High' },
+    patient: { name: 'Dorothy Williams', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'High' },
     description: '78-year-old woman found confused at home. Multiple medications, lives alone.',
     openingStatement: 'Mrs. Williams was found by her neighbor wandering in the hallway, confused. She lives alone and takes "a lot of pills." Baseline is alert and oriented. What do you want to know?',
     conceptDomains: {
@@ -346,7 +346,7 @@ const INLINE_CASES = {
     title: 'Deteriorating Patient - Early Recognition',
     category: 'Nursing',
     discipline: 'nursing',
-    patient: { name: 'Nneka Okonkwo', age: 72, sex: 'Female', setting: 'Medical-Surgical Floor', acuity: 'Medium → High' },
+    patient: { name: 'Eleanor Mitchell', age: 72, sex: 'Female', setting: 'Medical-Surgical Floor', acuity: 'Medium → High' },
     description: 'Post-op day 2 patient becoming more confused and tachycardic. You are the bedside nurse.',
     openingStatement: 'You are caring for Mrs. Mitchell, POD 2 from hip replacement. She was oriented this morning but now seems confused. Her heart rate has increased from 78 to 102. What do you assess first?',
     conceptDomains: {
@@ -372,7 +372,7 @@ const INLINE_CASES = {
     category: 'EMS',
     discipline: 'ems',
     isCritical: true,
-    patient: { name: 'Mustafa Yilmaz', age: 58, sex: 'Male', setting: 'Field', acuity: 'Critical' },
+    patient: { name: 'Frank Morrison', age: 58, sex: 'Male', setting: 'Field', acuity: 'Critical' },
     description: 'Dispatched to 58-year-old male with chest pain and diaphoresis at home.',
     openingStatement: 'You arrive to find a 58-year-old man clutching his chest, diaphoretic. His wife says it started 30 minutes ago. What do you do?',
     conceptDomains: {
@@ -397,7 +397,7 @@ const INLINE_CASES = {
     title: 'COPD - BiPAP Management',
     category: 'Respiratory',
     discipline: 'rt',
-    patient: { name: 'Emeka Obi', age: 71, sex: 'Male', setting: 'Emergency', acuity: 'High' },
+    patient: { name: 'Harold Stevens', age: 71, sex: 'Male', setting: 'Emergency', acuity: 'High' },
     description: 'COPD exacerbation with respiratory acidosis. pH 7.28, pCO2 62, using accessory muscles.',
     openingStatement: 'You are called to initiate NIV on Mr. Stevens. ABG shows pH 7.28, pCO2 62. He is working hard to breathe. Walk me through your approach.',
     conceptDomains: {

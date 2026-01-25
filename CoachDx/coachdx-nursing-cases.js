@@ -23,7 +23,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Nneka Okonkwo',
+        name: 'Eleanor Mitchell',
         age: 72,
         sex: 'Female',
         setting: 'Medical-Surgical Floor',
@@ -65,15 +65,15 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Hiroshi Tanaka',
+        name: 'James Chen',
         age: 58,
         sex: 'Male',
         setting: 'Cardiac Step-Down Unit',
         acuity: 'Medium',
         chiefComplaint: 'CHF Exacerbation'
     },
-    description: 'You\'re preparing to give Mr. Okonkwo\'s 8 AM medications. He\'s admitted for CHF exacerbation and has multiple cardiac medications. The MAR shows several high-alert medications.',
-    openingStatement: 'Mr. Okonkwo\'s MAR shows: metoprolol 50mg PO, lisinopril 20mg PO, potassium 40 mEq PO, digoxin 0.25mg PO, and furosemide 40mg IV. Before you administer these, walk me through your safety checks.',
+    description: 'You\'re preparing to give Mr. Chen\'s 8 AM medications. He\'s admitted for CHF exacerbation and has multiple cardiac medications. The MAR shows several high-alert medications.',
+    openingStatement: 'Mr. Chen\'s MAR shows: metoprolol 50mg PO, lisinopril 20mg PO, potassium 40 mEq PO, digoxin 0.25mg PO, and furosemide 40mg IV. Before you administer these, walk me through your safety checks.',
     keyTeachingPoints: [
         'High-alert medications require extra verification',
         'Know your hold parameters: typically hold digoxin if HR <60',
@@ -90,7 +90,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Tariq Hussain',
+        name: 'Robert Williams',
         age: 64,
         sex: 'Male',
         setting: 'PACU → Surgical Floor',
@@ -115,7 +115,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Sienna Nakagawa',
+        name: 'Patricia Adams',
         age: 68,
         sex: 'Female',
         setting: 'Medical-Surgical Floor',
@@ -140,15 +140,15 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Desmond Okafor',
+        name: 'Harold Thompson',
         age: 84,
         sex: 'Male',
         setting: 'Medical-Surgical Floor',
         acuity: 'Medium',
         chiefComplaint: 'Admitted for Heart Failure'
     },
-    description: 'Mr. Petrov was admitted 3 days ago for CHF exacerbation. He\'s been pleasant and cooperative. Today he\'s refusing medications, doesn\'t recognize his daughter, and thinks he\'s at a hotel.',
-    openingStatement: 'The day shift nurse says Mr. Petrov "sundowns" but he was fine yesterday. His daughter is upset - "this isn\'t like Dad." He\'s now agitated and trying to climb out of bed. What\'s going on?',
+    description: 'Mr. Thompson was admitted 3 days ago for CHF exacerbation. He\'s been pleasant and cooperative. Today he\'s refusing medications, doesn\'t recognize his daughter, and thinks he\'s at a hotel.',
+    openingStatement: 'The day shift nurse says Mr. Thompson "sundowns" but he was fine yesterday. His daughter is upset - "this isn\'t like Dad." He\'s now agitated and trying to climb out of bed. What\'s going on?',
     keyTeachingPoints: [
         'Acute confusion in elderly is DELIRIUM until proven otherwise',
         'CAM: acute onset, fluctuating course, inattention, disorganized thinking',
@@ -165,7 +165,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'basic',
     patient: {
-        name: 'Keiko Nakamura',
+        name: 'Linda Martinez',
         age: 56,
         sex: 'Female',
         setting: 'Medical-Surgical Floor',
@@ -190,7 +190,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Abayomi Oladipo',
+        name: 'Thomas Brown',
         age: 71,
         sex: 'Male',
         setting: 'Medical-Surgical Floor',
@@ -215,7 +215,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'basic',
     patient: {
-        name: 'Mirembe Nakato',
+        name: 'Evelyn Cooper',
         age: 82,
         sex: 'Female',
         setting: 'Medical-Surgical Floor',
@@ -265,15 +265,15 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Omar Farouk',
+        name: 'Raymond Chen',
         age: 69,
         sex: 'Male',
         setting: 'Medical-Surgical Floor',
         acuity: 'Medium',
         chiefComplaint: 'Admitted for Pneumonia'
     },
-    description: 'Mr. Okonkwo has been recovering from pneumonia. During routine vitals, you notice his heart rate is 142 and irregular. He says he feels "fluttery" in his chest.',
-    openingStatement: 'Mr. Okonkwo\'s monitor shows heart rate 142, irregularly irregular. He\'s never had AFib before. He feels palpitations but denies chest pain or shortness of breath. What do you assess?',
+    description: 'Mr. Chen has been recovering from pneumonia. During routine vitals, you notice his heart rate is 142 and irregular. He says he feels "fluttery" in his chest.',
+    openingStatement: 'Mr. Chen\'s monitor shows heart rate 142, irregularly irregular. He\'s never had AFib before. He feels palpitations but denies chest pain or shortness of breath. What do you assess?',
     keyTeachingPoints: [
         'Unstable AFib = hypotension, altered mental status, chest pain, acute HF',
         'Stable AFib with RVR = can rate control with medications',
@@ -365,7 +365,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'intermediate',
     patient: {
-        name: 'Svetlana Novak',
+        name: 'Margaret Wilson',
         age: 87,
         sex: 'Female',
         setting: 'Medical Floor',
@@ -390,7 +390,7 @@ const COACHDX_NURSING_CASES = {
     discipline: 'nursing',
     difficulty: 'basic',
     patient: {
-        name: 'Sergei Petrov',
+        name: 'Robert Martinez',
         age: 55,
         sex: 'Male',
         setting: 'Medical Floor',

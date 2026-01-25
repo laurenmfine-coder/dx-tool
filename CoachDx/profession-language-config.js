@@ -48,7 +48,7 @@ const PROFESSION_CONFIG = {
         decisionFramework: "Diagnosis → Treatment Plan",
         
         defaultCoach: {
-            name: "Dr. Amara Osei",
+            name: "Dr. Sarah Chen",
             title: "Attending Physician",
             avatar: "👩‍⚕️",
             role: "Your attending on this rotation"
@@ -528,7 +528,7 @@ const PROFESSION_CONFIG = {
         decisionFramework: "Efficient Workup → Management → Disposition",
         
         defaultCoach: {
-            name: "Dr. Rafael Mendoza",
+            name: "Dr. David Kim",
             title: "Senior Resident",
             avatar: "👨‍🔬",
             role: "Your senior on service"

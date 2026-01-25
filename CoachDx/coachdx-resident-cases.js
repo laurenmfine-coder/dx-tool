@@ -7,13 +7,13 @@
 // 15 Advanced cases for resident-level clinical reasoning
 // Designed for: PGY1-PGY3+ residents, fellows, advanced medical students
 // 
-// Coach Persona: Dr. Rafael Mendoza - Senior Resident / Fellow
+// Coach Persona: Dr. David Kim - Senior Resident / Fellow
 // ============================================================================
 
 const COACHDX_RESIDENT_CASES = {
 
 _coachPersona: {
-    name: 'Dr. Rafael Mendoza',
+    name: 'Dr. David Kim',
     title: 'Senior Resident',
     role: 'Your senior on service',
     style: 'collegial_challenging',
@@ -38,7 +38,7 @@ _coachPersona: {
 'resident-mof': {
     id: 'resident-mof', title: 'Multi-Organ Failure - Prioritization',
     category: 'Resident', discipline: 'resident', difficulty: 'advanced',
-    patient: { name: 'Blessing Obi', age: 58, sex: 'Female', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Septic Shock Day 3' },
+    patient: { name: 'Angela Martinez', age: 58, sex: 'Female', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Septic Shock Day 3' },
     description: 'Everything is failing: kidneys, liver, lungs. How do you think through multi-organ failure?',
     openingStatement: 'She\'s on 3 pressors, creatinine is 4.8, bili is 8, P/F ratio is 120. Everything is going wrong. How do you prioritize?',
     keyTeachingPoints: ['Find what\'s driving the cascade', 'Source control trumps everything in sepsis', 'Organ support is not cure - find the cause']
@@ -56,7 +56,7 @@ _coachPersona: {
 'resident-iatrogenic': {
     id: 'resident-iatrogenic', title: 'Iatrogenic Complication - Owning Your Mistake',
     category: 'Resident', discipline: 'resident', difficulty: 'advanced',
-    patient: { name: 'Raj Malhotra', age: 72, sex: 'Male', setting: 'Medicine Ward', acuity: 'High', chiefComplaint: 'Altered Mental Status' },
+    patient: { name: 'Harold Foster', age: 72, sex: 'Male', setting: 'Medicine Ward', acuity: 'High', chiefComplaint: 'Altered Mental Status' },
     description: 'You started D5W and high-dose furosemide. Now Na is 118. This is your mistake.',
     openingStatement: 'Sodium is 118, down from 136. He\'s on D5W and furosemide that you ordered. What do you do?',
     keyTeachingPoints: ['Stop the harm first', 'Tell your attending immediately', 'Disclosure is ethical and often legally protective', 'Document facts, not excuses']
@@ -65,7 +65,7 @@ _coachPersona: {
 'resident-attending-conflict': {
     id: 'resident-attending-conflict', title: 'Conflict with Attending - Evidence-Based Pushback',
     category: 'Resident', discipline: 'resident', difficulty: 'advanced',
-    patient: { name: 'Svetlana Novak', age: 82, sex: 'Female', setting: 'Medicine Ward', acuity: 'Medium', chiefComplaint: 'CHF Exacerbation' },
+    patient: { name: 'Margaret Wilson', age: 82, sex: 'Female', setting: 'Medicine Ward', acuity: 'Medium', chiefComplaint: 'CHF Exacerbation' },
     description: 'Attending wants digoxin. You\'ve read the evidence showing harm in elderly women. How do you handle it?',
     openingStatement: 'Dr. Hendricks told you to start digoxin. You know the evidence suggests harm. Do you just do it?',
     keyTeachingPoints: ['Know your evidence first', 'Frame as curiosity not confrontation', 'Focus on patient, not ego', 'Good attendings welcome evidence-based pushback']
@@ -83,7 +83,7 @@ _coachPersona: {
 'resident-code-status': {
     id: 'resident-code-status', title: 'Code Status Discussion - Leading a Family Meeting',
     category: 'Resident', discipline: 'resident', difficulty: 'advanced',
-    patient: { name: 'Kwame Asante', age: 81, sex: 'Male', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Multisystem Failure' },
+    patient: { name: 'Robert Chen', age: 81, sex: 'Male', setting: 'ICU', acuity: 'Critical', chiefComplaint: 'Multisystem Failure' },
     description: 'Intubated with metastatic cancer. Family wants "everything." Your attending asks you to lead the meeting.',
     openingStatement: 'The family is in the conference room. They\'re scared. Your attending wants you to lead. How do you approach this?',
     keyTeachingPoints: ['Start by assessing what family understands', 'Deliver news, then STOP', 'Respond to emotion before information', 'Make a recommendation based on patient values']
@@ -119,7 +119,7 @@ _coachPersona: {
 'resident-pregnancy': {
     id: 'resident-pregnancy', title: 'Pregnancy Complicating Everything',
     category: 'Resident', discipline: 'resident', difficulty: 'advanced',
-    patient: { name: 'Mei-Ling Wong', age: 29, sex: 'Female', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Abdominal Pain - 24 Weeks Pregnant' },
+    patient: { name: 'Sarah Mitchell', age: 29, sex: 'Female', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Abdominal Pain - 24 Weeks Pregnant' },
     description: 'RLQ pain at 24 weeks. Could be appendicitis or obstetric. Imaging is complicated. Everything needs modification.',
     openingStatement: 'She\'s 24 weeks pregnant with severe RLQ pain and fever. How do you work this up when she\'s pregnant?',
     keyTeachingPoints: ['Involve OB early', 'US first, MRI safe, CT acceptable if needed', 'Appendix migrates in pregnancy', 'Untreated surgical emergencies harm fetus more than surgery']
@@ -146,7 +146,7 @@ _coachPersona: {
 'resident-capacity': {
     id: 'resident-capacity', title: 'Capacity Assessment - Can They Refuse?',
     category: 'Resident', discipline: 'resident', difficulty: 'advanced',
-    patient: { name: 'Chioma Nwosu', age: 78, sex: 'Female', setting: 'Medicine Ward', acuity: 'Medium', chiefComplaint: 'Refusing Amputation' },
+    patient: { name: 'Dorothy Williams', age: 78, sex: 'Female', setting: 'Medicine Ward', acuity: 'Medium', chiefComplaint: 'Refusing Amputation' },
     description: 'She needs amputation to live. She\'s refusing. Team wants to override her. You need to assess capacity.',
     openingStatement: 'She needs her leg amputated or she\'ll die. She says no. Does she have capacity to refuse?',
     keyTeachingPoints: ['Capacity = understanding + appreciation + reasoning + choice', 'Bad decision ≠ lack of capacity', 'Disagreement is not incapacity', 'Respect autonomy']

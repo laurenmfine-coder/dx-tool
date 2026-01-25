@@ -23,7 +23,7 @@ const COACHDX_CASES = {
     id: 'chest-pain-acs', title: 'Chest Pain - ACS Evaluation', category: 'Cardiovascular',
     isParallel: false, parallelCase: 'chest-pain-acs-b',
     parallelDescription: 'Atypical ACS in diabetic patient',
-    patient: { name: 'Carmen Delgado', age: 52, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Chest Pain' },
+    patient: { name: 'Maria Santos', age: 52, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Chest Pain' },
     description: 'A 52-year-old woman presents with chest pain that started 2 hours ago. Substernal pressure 7/10, diaphoresis, nausea. History of HTN and T2DM.',
     openingStatement: 'Mrs. Santos is a 52-year-old woman with chest pain, triaged as high acuity. What would you like to know first?',
     conceptDomains: {
@@ -115,9 +115,9 @@ const COACHDX_CASES = {
     id: 'atrial-fibrillation', title: 'New Onset AFib', category: 'Cardiovascular',
     isParallel: false, parallelCase: 'atrial-fibrillation-b',
     parallelDescription: 'Unstable AFib with RVR',
-    patient: { name: 'Olga Petrov', age: 67, sex: 'Female', setting: 'Emergency', acuity: 'Medium', chiefComplaint: 'Palpitations' },
+    patient: { name: 'Barbara Chen', age: 67, sex: 'Female', setting: 'Emergency', acuity: 'Medium', chiefComplaint: 'Palpitations' },
     description: 'A 67-year-old woman with 2 days of palpitations and mild dyspnea. ECG shows AFib with RVR at 134. HTN and diabetes. No prior AFib.',
-    openingStatement: 'Mrs. Nakamura is in new-onset AFib with RVR at 134. We need to think rate control, rhythm control, and anticoagulation. How do you approach this?',
+    openingStatement: 'Mrs. Chen is in new-onset AFib with RVR at 134. We need to think rate control, rhythm control, and anticoagulation. How do you approach this?',
     conceptDomains: {
         'History': ['symptom_onset', 'triggers', 'stroke_risk'],
         'Physical Exam': ['heart_rate', 'signs_of_hf'],
@@ -147,7 +147,7 @@ const COACHDX_CASES = {
     id: 'atrial-fibrillation-b', title: 'Unstable AFib with RVR', category: 'Cardiovascular',
     isParallel: true, parallelCase: 'atrial-fibrillation',
     parallelDescription: 'Stable new-onset AFib',
-    patient: { name: 'Jean-Pierre Dubois', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Chest Pain and Dizziness' },
+    patient: { name: 'Richard Adams', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Chest Pain and Dizziness' },
     description: 'A 72-year-old with chest pain, dizziness, near-syncope. HR 178 irregular, BP 82/54. ECG: AFib with RVR, ST depressions. Known CHF, EF 35%.',
     openingStatement: 'Mr. Adams is in AFib with RVR and crashing - hypotensive with chest pain. This is unstable AFib. What do you do right now?',
     conceptDomains: {
@@ -197,7 +197,7 @@ const COACHDX_CASES = {
     id: 'syncope-cardiac', title: 'Syncope - Cardiac', category: 'Cardiovascular',
     isParallel: true, parallelCase: 'syncope',
     parallelDescription: 'Vasovagal syncope',
-    patient: { name: 'Kwesi Boateng', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Collapse' },
+    patient: { name: 'George Miller', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Collapse' },
     description: 'A 68-year-old collapsed suddenly while walking. No prodrome. Unconscious 2 minutes. Wife says face turned blue. Prior MI. ECG: sinus bradycardia 42, intermittent complete heart block.',
     openingStatement: 'Mr. Miller had sudden collapse without warning. ECG shows conduction disease. Concerning for cardiogenic syncope. What\'s your approach?',
     conceptDomains: {
@@ -217,9 +217,9 @@ const COACHDX_CASES = {
     id: 'acute-dyspnea-chf', title: 'Acute Dyspnea - CHF', category: 'Cardiovascular',
     isParallel: false, parallelCase: 'acute-dyspnea-pe',
     parallelDescription: 'PE in young patient',
-    patient: { name: 'Kwame Asante', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Shortness of Breath' },
+    patient: { name: 'Robert Chen', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Shortness of Breath' },
     description: 'A 68-year-old with sudden dyspnea waking him from sleep. Orthopnea, sleeping on 3 pillows. HTN, MI 5 years ago. Ran out of meds 2 weeks ago.',
-    openingStatement: 'Mr. Okonkwo came by ambulance with acute dyspnea. Using accessory muscles. What\'s your approach?',
+    openingStatement: 'Mr. Chen came by ambulance with acute dyspnea. Using accessory muscles. What\'s your approach?',
     conceptDomains: {
         'History': ['onset', 'orthopnea', 'pnd', 'edema', 'medications'],
         'Physical Exam': ['vitals', 'respiratory_exam', 'cardiac_exam', 'jvd'],
@@ -286,7 +286,7 @@ const COACHDX_CASES = {
     id: 'copd-exacerbation', title: 'COPD Exacerbation', category: 'Pulmonary',
     isParallel: false, parallelCase: 'asthma-exacerbation',
     parallelDescription: 'Severe asthma',
-    patient: { name: 'Emeka Obi', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Worsening SOB' },
+    patient: { name: 'Harold Stevens', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Worsening SOB' },
     description: 'A 72-year-old with severe COPD (FEV1 35%) with 3 days worsening dyspnea, increased purulent sputum. Home O2 2L. 50 pack-year smoking.',
     openingStatement: 'Mr. Stevens is a severe COPD patient much worse than baseline. Tripoding, pursed-lip breathing, SpO2 86% on 2L. How do you approach COPD exacerbation?',
     conceptDomains: {
@@ -318,7 +318,7 @@ const COACHDX_CASES = {
     id: 'asthma-exacerbation', title: 'Severe Asthma', category: 'Pulmonary',
     isParallel: true, parallelCase: 'copd-exacerbation',
     parallelDescription: 'COPD exacerbation',
-    patient: { name: 'Priya Sharma', age: 24, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Can\'t Breathe' },
+    patient: { name: 'Jessica Martinez', age: 24, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Can\'t Breathe' },
     description: 'A 24-year-old with asthma, 2 prior ICU admissions. Severe dyspnea, 2-word sentences. HR 128, RR 32, SpO2 88%. Using albuterol hourly x2 days.',
     openingStatement: 'Jessica has severe asthma and is in trouble - can barely talk, tachypneic, hypoxic. History of ICU admissions. What do you do?',
     conceptDomains: {
@@ -358,7 +358,7 @@ const COACHDX_CASES = {
     isParallel: false,
     parallelCase: 'sepsis-pneumonia',
     parallelDescription: 'Pneumonia-Source Sepsis',
-    patient: { name: 'Folake Adebayo', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Confusion and Fever' },
+    patient: { name: 'Helen Morrison', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Confusion and Fever' },
     description: 'A 78-year-old nursing home resident brought in for confusion and fever. History of recurrent UTIs and diabetes. T 39.4°C, HR 112, BP 88/54, RR 24. Altered mental status, suprapubic tenderness. WBC 18K, Cr 2.4 (baseline 1.1), lactate 4.2.',
     openingStatement: 'Mrs. Morrison appears septic with likely urinary source. Walk me through your approach to recognition, resuscitation, and treatment using Sepsis-3 criteria.',
     conceptDomains: {
@@ -408,9 +408,9 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'sepsis-uti',
     parallelDescription: 'Urosepsis',
-    patient: { name: 'Kwame Asante', age: 65, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Shortness of Breath and Fever' },
+    patient: { name: 'Robert Chen', age: 65, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Shortness of Breath and Fever' },
     description: 'A 65-year-old with COPD presents with 3 days of productive cough, now acutely short of breath. T 38.9°C, HR 118, BP 92/58, RR 28, O2 sat 88% on RA. Rhonchi and crackles RLL. WBC 22K, lactate 3.8, procalcitonin 8.5. CXR: RLL consolidation.',
-    openingStatement: 'Mr. Okonkwo has severe CAP with sepsis. His COPD adds complexity. How do you approach CAP severity assessment and sepsis management simultaneously?',
+    openingStatement: 'Mr. Chen has severe CAP with sepsis. His COPD adds complexity. How do you approach CAP severity assessment and sepsis management simultaneously?',
     conceptDomains: {
         'Severity Assessment': ['curb65', 'psi', 'ats_idsa_severe'],
         'Sepsis Recognition': ['sepsis3', 'qsofa', 'lactate_interpretation'],
@@ -432,7 +432,7 @@ const COACHDX_CASES = {
         { type: 'parallel', title: 'Urosepsis Case', link: 'mentor-chat.html?case=sepsis-uti', reason: 'Compare sepsis by source' }
     ],
     defined_responses: {
-        'curb65': 'CURB-65 for Mr. Okonkwo: Confusion (ask), Urea (need BUN), RR ≥30 (28 close), BP SBP<90 (92 borderline), Age ≥65 (yes). Even with 2-3, he needs ICU based on severity.',
+        'curb65': 'CURB-65 for Mr. Chen: Confusion (ask), Urea (need BUN), RR ≥30 (28 close), BP SBP<90 (92 borderline), Age ≥65 (yes). Even with 2-3, he needs ICU based on severity.',
         'severe cap': 'ATS/IDSA severe CAP: 1 major (mech vent or vasopressors) OR ≥3 minor (RR ≥30, PaO2/FiO2 ≤250, multilobar, confusion, BUN ≥20, WBC <4K, platelets <100K, hypothermia, hypotension). He likely meets several minor.',
         'antibiotics': 'ICU CAP: β-lactam (ceftriaxone) + macrolide (azithromycin) OR β-lactam + respiratory FQ. Given COPD with frequent exacerbations, consider Pseudomonas coverage with piperacillin-tazobactam.',
         'procalcitonin': 'Procalcitonin 8.5 is markedly elevated — strongly suggests bacterial infection. Use for duration guidance: stop when <0.25 or dropped ≥80%.'
@@ -457,7 +457,7 @@ const COACHDX_CASES = {
     category: 'Allergy/Immunology',
     isParallel: false,
     parallelCase: null,
-    patient: { name: 'Daisuke Yamamoto', age: 35, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Difficulty Breathing and Rash' },
+    patient: { name: 'Marcus Johnson', age: 35, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Difficulty Breathing and Rash' },
     description: 'A 35-year-old ate shrimp for the first time 20 minutes ago. Developed diffuse urticaria, lip swelling, wheezing, BP 82/48. On metoprolol for hypertension.',
     openingStatement: 'Mr. Johnson has anaphylaxis - multisystem involvement with hypotension. He\'s also on a beta-blocker which complicates treatment. What\'s your immediate approach?',
     keyTeachingPoints: [
@@ -498,7 +498,7 @@ const COACHDX_CASES = {
     isParallel: false,
     parallelCase: 'lower-gi-bleed',
     parallelDescription: 'Lower GI Bleeding',
-    patient: { name: 'Mustafa Yilmaz', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Vomiting Blood' },
+    patient: { name: 'Frank Morrison', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Vomiting Blood' },
     description: 'A 68-year-old on aspirin and ibuprofen presents with coffee-ground emesis and melena × 2 days. BP 88/52, HR 118. Hgb 7.2. BUN 42, Cr 1.1.',
     openingStatement: 'Mr. Morrison has hemodynamic instability from upper GI bleeding, likely NSAID-induced ulcer. Let\'s work through stabilization and management.',
     keyTeachingPoints: [
@@ -538,9 +538,9 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'upper-gi-bleed',
     parallelDescription: 'Upper GI Bleeding',
-    patient: { name: 'Yuki Tanaka', age: 75, sex: 'Female', setting: 'Emergency', acuity: 'Medium', chiefComplaint: 'Bloody Stool' },
+    patient: { name: 'Dorothy Chen', age: 75, sex: 'Female', setting: 'Emergency', acuity: 'Medium', chiefComplaint: 'Bloody Stool' },
     description: 'A 75-year-old with known diverticulosis presents with painless maroon stools × 6 hours. BP 108/68, HR 96. Hgb 10.2. No abdominal tenderness.',
-    openingStatement: 'Mrs. Nakamura likely has diverticular bleeding - most common cause of significant LGIB in elderly. How does our approach differ from upper GI bleeding?',
+    openingStatement: 'Mrs. Chen likely has diverticular bleeding - most common cause of significant LGIB in elderly. How does our approach differ from upper GI bleeding?',
     keyTeachingPoints: [
         'Diverticular bleeding is typically painless and self-limited (80%)',
         'Maroon stool can be upper (brisk) or lower - consider upper GI evaluation',
@@ -573,7 +573,7 @@ const COACHDX_CASES = {
     isParallel: false,
     parallelCase: 'diverticulitis',
     parallelDescription: 'Acute Diverticulitis',
-    patient: { name: 'Mikhail Sorokin', age: 24, sex: 'Male', setting: 'Emergency', acuity: 'Urgent', chiefComplaint: 'Abdominal Pain' },
+    patient: { name: 'Tyler Johnson', age: 24, sex: 'Male', setting: 'Emergency', acuity: 'Urgent', chiefComplaint: 'Abdominal Pain' },
     description: 'A 24-year-old man presents with 18 hours of abdominal pain. Started periumbilical, now localized to RLQ. Associated anorexia and one episode of vomiting. T 38.1°C, HR 92, RLQ tenderness with guarding, positive McBurney\'s point tenderness. WBC 14K with left shift.',
     openingStatement: 'Tyler has a classic appendicitis presentation. Walk me through the pathophysiology that explains his symptom progression, and how you\'d confirm the diagnosis.',
     conceptDomains: {
@@ -620,7 +620,7 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'appendicitis',
     parallelDescription: 'Acute Appendicitis',
-    patient: { name: 'Esperanza Vega', age: 62, sex: 'Female', setting: 'Emergency', acuity: 'Urgent', chiefComplaint: 'Left Lower Quadrant Pain' },
+    patient: { name: 'Barbara Williams', age: 62, sex: 'Female', setting: 'Emergency', acuity: 'Urgent', chiefComplaint: 'Left Lower Quadrant Pain' },
     description: 'A 62-year-old woman with no prior abdominal surgery presents with 2 days of progressive LLQ pain, low-grade fever, and constipation. T 38.3°C, HR 88, BP 138/82. LLQ tenderness without peritonitis. WBC 13K. CT shows sigmoid diverticulitis with 3cm pericolic abscess.',
     openingStatement: 'Mrs. Williams has complicated diverticulitis with a small abscess. How does this change your management compared to uncomplicated diverticulitis?',
     quickActions: ['Hinchey classification?', 'Abscess <4cm vs >4cm management', 'Antibiotics for diverticulitis', 'When to do colonoscopy?', 'Indications for surgery?'],
@@ -687,7 +687,7 @@ const COACHDX_CASES = {
     title: 'Small Bowel Obstruction',
     category: 'GI/Surgery',
     isParallel: false,
-    patient: { name: 'Sienna Nakagawa', age: 58, sex: 'Female', setting: 'Emergency', acuity: 'Urgent', chiefComplaint: 'Vomiting and Abdominal Distension' },
+    patient: { name: 'Patricia Adams', age: 58, sex: 'Female', setting: 'Emergency', acuity: 'Urgent', chiefComplaint: 'Vomiting and Abdominal Distension' },
     description: 'A 58-year-old woman with history of appendectomy and cesarean section presents with 24 hours of crampy abdominal pain, bilious vomiting, and distension. No BM or flatus for 12 hours. Distended abdomen with high-pitched bowel sounds. WBC 11K, lactate 1.4. CT: dilated small bowel with transition point in RLQ, no signs of ischemia.',
     openingStatement: 'Mrs. Adams has adhesive small bowel obstruction. She has prior surgeries — the #1 risk factor. Walk me through your assessment for complete vs partial obstruction and signs of strangulation.',
     quickActions: ['Signs of strangulation?', 'Complete vs partial obstruction', 'When to operate?', 'Role of contrast study?', 'How long to trial conservative management?'],
@@ -720,7 +720,7 @@ const COACHDX_CASES = {
     isParallel: false,
     parallelCase: 'hhs',
     parallelDescription: 'Hyperosmolar Hyperglycemic State',
-    patient: { name: 'Rashid Al-Farsi', age: 22, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Nausea, Vomiting, Abdominal Pain' },
+    patient: { name: 'Marcus Thompson', age: 22, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Nausea, Vomiting, Abdominal Pain' },
     description: 'A 22-year-old with Type 1 DM presents with 2 days of nausea, vomiting, and abdominal pain. He ran out of insulin 3 days ago. Lethargic, Kussmaul breathing, fruity breath. Glucose 485, pH 7.12, bicarb 8, anion gap 28.',
     openingStatement: 'Marcus is a young T1DM who ran out of insulin. He\'s in DKA - acidotic with Kussmaul breathing. Walk me through your approach to managing DKA.',
     quickActions: ['Calculate anion gap', 'Start IV fluids - what kind?', 'When do I start insulin?', 'Check potassium first!', 'What\'s the precipitant?'],
@@ -763,7 +763,7 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'dka',
     parallelDescription: 'Diabetic Ketoacidosis',
-    patient: { name: 'Chioma Nwosu', age: 72, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Confusion and Weakness' },
+    patient: { name: 'Dorothy Williams', age: 72, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Confusion and Weakness' },
     description: 'A 72-year-old with Type 2 DM brought from nursing home for confusion and weakness over 3 days. Decreased oral intake. Obtunded, severely dehydrated. Glucose 892, Na 152, serum osm 348, pH 7.32, bicarb 22, minimal ketones.',
     openingStatement: 'Mrs. Williams is critically ill with profound hyperglycemia but minimal acidosis. This is HHS, not DKA. How does your management approach differ?',
     quickActions: ['Calculate serum osmolarity', 'What\'s the corrected sodium?', 'How much fluid deficit?', 'Why no ketoacidosis?', 'DVT prophylaxis?'],
@@ -809,7 +809,7 @@ const COACHDX_CASES = {
     isParallel: false,
     parallelCase: 'aki-intrinsic',
     parallelDescription: 'Intrinsic AKI (ATN)',
-    patient: { name: 'Ravi Krishnamurthy', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Weakness and Decreased Urine' },
+    patient: { name: 'Harold Mitchell', age: 72, sex: 'Male', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Weakness and Decreased Urine' },
     description: 'A 72-year-old with HTN, CHF on lisinopril and furosemide presents after 3 days of diarrheal illness. Orthostatic, dry mucous membranes. Cr rose from baseline 1.2 to 3.8. BUN 68. UA bland. FENa 0.4%.',
     openingStatement: 'Mr. Mitchell has volume depletion from diarrhea on top of medications that affect renal hemodynamics. This looks like pre-renal AKI. How do we confirm and manage this?',
     keyTeachingPoints: [
@@ -849,7 +849,7 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'aki-prerenal',
     parallelDescription: 'Pre-Renal AKI',
-    patient: { name: 'Nkechi Eze', age: 58, sex: 'Female', setting: 'Inpatient', acuity: 'High', chiefComplaint: 'Post-Operative Rising Creatinine' },
+    patient: { name: 'Patricia Gomez', age: 58, sex: 'Female', setting: 'Inpatient', acuity: 'High', chiefComplaint: 'Post-Operative Rising Creatinine' },
     description: 'A 58-year-old had AAA repair with prolonged hypotension intraoperatively. POD 2 Cr rose from 1.0 to 4.2 despite adequate fluids. UA shows muddy brown granular casts. FENa 3.2%. Oliguric.',
     openingStatement: 'Mrs. Gomez had ischemic injury from intraoperative hypotension. Despite fluids, her creatinine keeps rising. This is ATN. How does our approach differ from pre-renal?',
     keyTeachingPoints: [
@@ -932,7 +932,7 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'hyponatremia-siadh',
     parallelDescription: 'SIADH',
-    patient: { name: 'Carmen Delgado', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'Medium', chiefComplaint: 'Weakness and Dizziness' },
+    patient: { name: 'Maria Santos', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'Medium', chiefComplaint: 'Weakness and Dizziness' },
     description: 'A 78-year-old woman on hydrochlorothiazide presents with 4 days of diarrhea, now weak and dizzy. Orthostatic (BP 142/78 lying → 98/62 standing). Dry mucous membranes, poor skin turgor. Na 126, urine Na 8, urine osm 650.',
     openingStatement: 'Mrs. Santos has hyponatremia with clear volume depletion from diarrhea, plus she\'s on a thiazide. How does hypovolemic hyponatremia differ in workup and management from SIADH?',
     quickActions: ['Check orthostatics', 'What does low urine Na mean?', 'Normal saline appropriate?', 'Stop the thiazide?', 'Monitor for overcorrection'],
@@ -974,7 +974,7 @@ const COACHDX_CASES = {
     id: 'altered-mental-status', title: 'Altered Mental Status', category: 'Neurology',
     isParallel: false, parallelCase: 'stroke-acute',
     parallelDescription: 'Acute stroke',
-    patient: { name: 'Chioma Nwosu', age: 74, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Confusion' },
+    patient: { name: 'Dorothy Williams', age: 74, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Confusion' },
     description: 'A 74-year-old woman was found confused at home by her daughter. She was fine yesterday but today doesn\'t recognize family. History of T2DM, HTN, and mild dementia. Meds: metformin, lisinopril, donepezil.',
     openingStatement: 'Mrs. Williams is a 74-year-old brought in by her daughter who says "Mom isn\'t acting right." She has baseline mild dementia but this is different. Where do you want to start?',
     conceptDomains: {
@@ -1084,7 +1084,7 @@ const COACHDX_CASES = {
     title: 'First-Time Seizure',
     category: 'Neurology',
     isParallel: false,
-    patient: { name: 'Chiamaka Okafor', age: 28, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Found Down with Shaking' },
+    patient: { name: 'Nicole Adams', age: 28, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Found Down with Shaking' },
     description: 'A 28-year-old graduate student found shaking by coworkers, now postictal. Witnesses report 2 minutes of generalized tonic-clonic activity. Lateral tongue bite. Sleep-deprived finishing thesis.',
     openingStatement: 'Ms. Adams had her first witnessed seizure. The lateral tongue bite strongly suggests true seizure. How do we work up a first unprovoked seizure?',
     keyTeachingPoints: [
@@ -1165,9 +1165,9 @@ const COACHDX_CASES = {
     isParallel: true,
     parallelCase: 'dvt',
     parallelDescription: 'Deep Vein Thrombosis',
-    patient: { name: 'Amara Diallo', age: 45, sex: 'Female', setting: 'Urgent Care', acuity: 'Low', chiefComplaint: 'Painful Red Cord on Leg' },
+    patient: { name: 'Linda Chen', age: 45, sex: 'Female', setting: 'Urgent Care', acuity: 'Low', chiefComplaint: 'Painful Red Cord on Leg' },
     description: 'A 45-year-old woman notices a painful, red, firm "cord" on her inner right thigh × 4 days. No recent immobilization or travel. Palpable tender cord along great saphenous vein distribution, surrounding erythema. No calf swelling.',
-    openingStatement: 'Mrs. Nakamura has what appears to be superficial venous thrombosis. How does our approach differ from DVT? When do we worry about extension?',
+    openingStatement: 'Mrs. Chen has what appears to be superficial venous thrombosis. How does our approach differ from DVT? When do we worry about extension?',
     quickActions: ['Need imaging?', 'DVT vs SVT distinction', 'When to anticoagulate SVT?', 'NSAID treatment', 'Proximity to SFJ?'],
     keyTeachingPoints: [
         'SVT presents as palpable, tender cord with surrounding erythema',
@@ -1201,7 +1201,7 @@ const COACHDX_CASES = {
 
 'anemia-workup': {
     id: 'anemia-workup', title: 'Anemia Workup', category: 'Hematology',
-    patient: { name: 'Mei-Ling Wong', age: 45, sex: 'Female', setting: 'Outpatient', acuity: 'Low', chiefComplaint: 'Fatigue' },
+    patient: { name: 'Sarah Mitchell', age: 45, sex: 'Female', setting: 'Outpatient', acuity: 'Low', chiefComplaint: 'Fatigue' },
     description: 'A 45-year-old woman with 3 months of progressive fatigue. Labs: Hgb 8.2, MCV 68, ferritin 8. Heavy menstrual periods, vegetarian for 2 years. Some dyspepsia.',
     openingStatement: 'Ms. Mitchell came in for fatigue and her labs show microcytic anemia with low ferritin. Walk me through your approach to anemia.',
     conceptDomains: {

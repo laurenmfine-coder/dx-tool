@@ -32,7 +32,7 @@ const COACHDX_DENTAL_CASES = {
     title: 'Oral Pathology - Cancer Screening',
     category: 'Oral Pathology',
     profession: 'dental',
-    patient: { name: 'Miriam Kovacs', age: 62, sex: 'Female', setting: 'Routine Exam', acuity: 'Medium', chiefComplaint: 'Here for cleaning, noticed white spot' },
+    patient: { name: 'Patricia Henderson', age: 62, sex: 'Female', setting: 'Routine Exam', acuity: 'Medium', chiefComplaint: 'Here for cleaning, noticed white spot' },
     description: '62-year-old former smoker (quit 5 years ago, 30 pack-years). White lesion on left lateral tongue, 1.5cm, non-wipeable, present 6 weeks. No pain.',
     openingStatement: 'You find a white lesion during routine exam. The patient says "Its probably nothing." How do you approach this?',
     conceptDomains: { 'Lesion Assessment': ['characteristics', 'risk_factors'], 'Biopsy Decision': ['indications'] },

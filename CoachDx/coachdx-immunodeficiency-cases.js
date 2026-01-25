@@ -28,7 +28,7 @@ const COACHDX_IMMUNODEFICIENCY_CASES = {
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Jamal Washington',
+        name: 'Michael Thompson',
         age: 34,
         sex: 'Male',
         setting: 'Medical ICU',
@@ -222,7 +222,7 @@ T cell numbers are preserved, but this doesn't assess function.`,
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Mei-Ling Wong',
+        name: 'Sarah Mitchell',
         age: 28,
         sex: 'Female',
         setting: 'Outpatient Allergy/Immunology Clinic',
@@ -337,7 +337,7 @@ Despite childhood vaccinations and a booster 1 year ago, she cannot maintain pro
     lastModified: '2026-01-07',
     
     patient: {
-        name: 'Kofi Mensah',
+        name: 'David Chen',
         age: 45,
         sex: 'Male',
         setting: 'Outpatient Allergy/Immunology Clinic',

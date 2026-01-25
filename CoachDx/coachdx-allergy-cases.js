@@ -25,7 +25,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'intermediate',
     patient: {
-        name: 'Aisha Mohammed',
+        name: 'Jennifer Martinez',
         age: 34,
         sex: 'Female',
         setting: 'Outpatient Allergy Clinic',
@@ -223,7 +223,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'intermediate',
     patient: {
-        name: 'Andrei Kozlov',
+        name: 'Robert Thompson',
         age: 62,
         sex: 'Male',
         setting: 'Outpatient Allergy Clinic',
@@ -231,7 +231,7 @@ const COACHDX_ALLERGY_CASES = {
         acuity: 'Stable'
     },
     description: 'Patient referred by his cardiologist prior to upcoming valve replacement surgery. Chart lists "penicillin allergy - rash" from childhood. He needs surgical prophylaxis and has had multiple antibiotic courses using alternatives due to this label. He cannot recall details of the original reaction.',
-    openingStatement: 'Mr. Petrov has carried this penicillin allergy label for 50+ years but doesn\'t remember what actually happened. His surgery is in 3 weeks. How do you approach this?',
+    openingStatement: 'Mr. Thompson has carried this penicillin allergy label for 50+ years but doesn\'t remember what actually happened. His surgery is in 3 weeks. How do you approach this?',
     
     levelAdaptations: {
         'medical-student': {
@@ -321,7 +321,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'intermediate',
     patient: {
-        name: 'Carmen Delgado',
+        name: 'Maria Santos',
         age: 45,
         sex: 'Female',
         setting: 'Outpatient Allergy Clinic',
@@ -528,7 +528,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'advanced',
     patient: {
-        name: 'Hassan Ibrahim',
+        name: 'James Wilson',
         age: 52,
         sex: 'Male',
         setting: 'Outpatient Allergy Clinic',
@@ -620,7 +620,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'advanced',
     patient: {
-        name: 'Fatima Hassan',
+        name: 'Emily Chen',
         age: 34,
         sex: 'Female',
         setting: 'Outpatient Allergy/Immunology Clinic',
@@ -628,7 +628,7 @@ const COACHDX_ALLERGY_CASES = {
         acuity: 'Stable'
     },
     description: 'Young woman referred for evaluation of recurrent infections. She reports 4-5 sinus infections per year requiring antibiotics, plus 2 pneumonias in the past 3 years. Recently diagnosed with bronchiectasis on CT. No significant childhood infections. Previously healthy until her mid-20s.',
-    openingStatement: 'Dr. Okafor\'s PCP is concerned about immunodeficiency given her recurrent infections and new bronchiectasis diagnosis. She\'s otherwise healthy and has no family history of immune problems. How do you approach this?',
+    openingStatement: 'Dr. Chen\'s PCP is concerned about immunodeficiency given her recurrent infections and new bronchiectasis diagnosis. She\'s otherwise healthy and has no family history of immune problems. How do you approach this?',
     
     levelAdaptations: {
         'medical-student': {
@@ -695,7 +695,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'advanced',
     patient: {
-        name: 'Oluwaseun Adeyemi',
+        name: 'Michael Johnson',
         age: 45,
         sex: 'Male',
         setting: 'Outpatient Allergy/Pulmonology Clinic',
@@ -765,7 +765,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'beginner',
     patient: {
-        name: 'Zainab Osman',
+        name: 'Amanda Foster',
         age: 28,
         sex: 'Female',
         setting: 'Outpatient Primary Care/Allergy Clinic',
@@ -847,7 +847,7 @@ const COACHDX_ALLERGY_CASES = {
     parallelCase: 'ai-food-intolerance',
     parallelDescription: 'Compare with food intolerance (non-IgE) - similar symptoms, different mechanism',
     patient: {
-        name: 'Kojo Asante',
+        name: 'Tyler Morrison',
         age: 8,
         sex: 'Male',
         setting: 'Outpatient Allergy Clinic',
@@ -924,7 +924,7 @@ const COACHDX_ALLERGY_CASES = {
     parallelCase: 'ai-food-allergy-ige',
     parallelDescription: 'Compare with IgE-mediated food allergy - different mechanism, different management',
     patient: {
-        name: 'Sunita Agarwal',
+        name: 'Karen Walsh',
         age: 34,
         sex: 'Female',
         setting: 'Outpatient Allergy Clinic',
@@ -1002,7 +1002,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'intermediate',
     patient: {
-        name: 'Idris Bello',
+        name: 'Richard Palmer',
         age: 58,
         sex: 'Male',
         setting: 'Outpatient Allergy Clinic',
@@ -1076,7 +1076,7 @@ const COACHDX_ALLERGY_CASES = {
     discipline: 'medical',
     difficulty: 'advanced',
     patient: {
-        name: 'Aminata Diop',
+        name: 'Patricia Nguyen',
         age: 45,
         sex: 'Female',
         setting: 'Outpatient Allergy/Immunology Clinic',

@@ -20,7 +20,7 @@ const AI_COMedical SchoolLT_SCENARIOS = {
             
             scenario: {
                 patient: {
-                    name: 'Kwame Asante',
+                    name: 'Robert Chen',
                     age: 58,
                     sex: 'M',
                     location: '6 South, Room 612',
@@ -85,7 +85,7 @@ const AI_COMedical SchoolLT_SCENARIOS = {
             
             scenario: {
                 patient: {
-                    name: 'Hassan Ibrahim',
+                    name: 'James Wilson',
                     age: 62,
                     sex: 'M',
                     location: 'ED Bay 4',
@@ -219,7 +219,7 @@ const AI_COMedical SchoolLT_SCENARIOS = {
             
             scenario: {
                 patient: {
-                    name: 'Sienna Nakagawa',
+                    name: 'Patricia Adams',
                     age: 58,
                     sex: 'F',
                     location: 'Infusion Center',
@@ -281,7 +281,7 @@ const AI_COMedical SchoolLT_SCENARIOS = {
             
             scenario: {
                 patient: {
-                    name: 'Mateo Herrera',
+                    name: 'Jake Thompson',
                     age: 12,
                     sex: 'M',
                     location: 'GI Clinic',
@@ -401,7 +401,7 @@ const AI_COMedical SchoolLT_SCENARIOS = {
             
             scenario: {
                 patient: {
-                    name: 'Carmen Delgado',
+                    name: 'Maria Santos',
                     age: 38,
                     sex: 'F',
                     location: 'A/I Clinic',
@@ -511,7 +511,7 @@ const AI_COMedical SchoolLT_SCENARIOS = {
             
             scenario: {
                 patient: {
-                    name: 'Idris Bello',
+                    name: 'Richard Palmer',
                     age: 58,
                     sex: 'M',
                     location: 'A/I Clinic',
