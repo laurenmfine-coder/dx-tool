@@ -1,0 +1,1244 @@
+{
+  "id": "pneumonia-deep-dive",
+  "title": "Community-Acquired Pneumonia",
+  "version": "1.0",
+  "totalQuestions": 28,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Recognize clinical presentations of community-acquired pneumonia",
+    "Apply severity scoring systems (CURB-65, PSI) for disposition decisions",
+    "Understand the microbiology of typical and atypical pathogens",
+    "Select appropriate empiric antibiotic therapy",
+    "Identify and manage complications of pneumonia",
+    "Distinguish CAP from healthcare-associated and aspiration pneumonia"
+  ],
+  "vignette": {
+    "text": "A 71-year-old man presents to the emergency department with 4 days of productive cough with yellow-green sputum, fever, and progressive shortness of breath. He reports right-sided chest pain that worsens with deep breathing. He has felt increasingly fatigued and had one episode of confusion this morning per his wife.\n\nPast Medical History: COPD (on home O2 2L at night), Type 2 diabetes mellitus, Hypertension, Former smoker (40 pack-years, quit 5 years ago)\n\nMedications: Tiotropium inhaler daily, Albuterol inhaler PRN, Metformin 1000mg BID, Lisinopril 20mg daily\n\nSocial History: Retired factory worker, lives with wife, no recent travel, no sick contacts, no recent hospitalizations\n\nAllergies: Penicillin (rash as a child)",
+    "physicalExam": {
+      "general": "Elderly man appearing ill, mild respiratory distress, oriented to person and place but confused about date",
+      "vitals": {
+        "BP": "105/62 mmHg",
+        "HR": "108 bpm",
+        "RR": "28/min",
+        "Temp": "102.4°F (39.1°C)",
+        "SpO2": "88% on room air, 93% on 4L NC"
+      },
+      "HEENT": "Dry mucous membranes",
+      "cardiovascular": "Tachycardic, regular rhythm, no murmurs",
+      "pulmonary": "Decreased breath sounds right lower lobe, dullness to percussion RLL, increased tactile fremitus RLL, bronchial breath sounds, egophony present ('E to A' change)",
+      "abdomen": "Soft, non-tender",
+      "extremities": "No edema, warm with 2+ pulses",
+      "neurologic": "Confused about date, otherwise non-focal"
+    },
+    "diagnostics": {
+      "labs": {
+        "WBC": {
+          "value": "18,400/μL",
+          "reference": "4,500-11,000",
+          "flag": "HIGH"
+        },
+        "Neutrophils": {
+          "value": "88%",
+          "reference": "40-70%",
+          "flag": "HIGH"
+        },
+        "Bands": {
+          "value": "12%",
+          "reference": "0-5%",
+          "flag": "HIGH"
+        },
+        "Hemoglobin": {
+          "value": "13.2 g/dL",
+          "reference": "13.5-17.5",
+          "flag": "LOW"
+        },
+        "Platelets": {
+          "value": "245,000/μL",
+          "reference": "150-400K",
+          "flag": "NORMAL"
+        },
+        "Sodium": {
+          "value": "131 mEq/L",
+          "reference": "136-145",
+          "flag": "LOW"
+        },
+        "BUN": {
+          "value": "32 mg/dL",
+          "reference": "7-20",
+          "flag": "HIGH"
+        },
+        "Creatinine": {
+          "value": "1.4 mg/dL",
+          "reference": "0.7-1.3",
+          "flag": "HIGH"
+        },
+        "Glucose": {
+          "value": "198 mg/dL",
+          "reference": "70-100",
+          "flag": "HIGH"
+        },
+        "Procalcitonin": {
+          "value": "4.2 ng/mL",
+          "reference": "<0.1",
+          "flag": "HIGH"
+        },
+        "Lactate": {
+          "value": "2.8 mmol/L",
+          "reference": "<2.0",
+          "flag": "HIGH"
+        }
+      },
+      "imaging": {
+        "CXR": "Right lower lobe consolidation with air bronchograms, small right pleural effusion, no pneumothorax"
+      },
+      "microbiology": {
+        "sputum_gram_stain": "Many PMNs, gram-positive diplococci in pairs",
+        "blood_cultures": "Pending",
+        "urine_antigens": "Streptococcus pneumoniae: POSITIVE, Legionella: Negative"
+      },
+      "abg": {
+        "pH": "7.46",
+        "pCO2": "32 mmHg",
+        "pO2": "58 mmHg",
+        "HCO3": "22 mEq/L",
+        "interpretation": "Respiratory alkalosis with hypoxemia (acute hyperventilation)"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "cap-anat-1",
+          "stem": "The CXR shows right lower lobe consolidation.",
+          "question": "How many lobes does the right lung have, and which is most commonly affected by aspiration?",
+          "hint": "Consider the anatomy of the bronchial tree.",
+          "options": [
+            {
+              "id": "A",
+              "text": "3 lobes; left upper lobe",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "4 lobes; right middle lobe",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "2 lobes (upper, lower); left lower lobe",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "3 lobes (upper, middle, lower); right lower lobe and superior segment most common for aspiration",
+              "correct": true
+            }
+          ],
+          "explanation": "The right lung has 3 lobes (upper, middle, lower) and the left has 2 (upper, lower). The right lower lobe (especially superior segment) is most common for aspiration because the right main bronchus is wider, shorter, and more vertical than the left.",
+          "whyChain": [
+            {
+              "why": "What about in an upright patient?",
+              "answer": "In upright aspiration, the basilar segments of lower lobes are affected (gravity-dependent). In supine aspiration, the superior segments of lower lobes and posterior segments of upper lobes are affected.",
+              "source": "StatPearls: Aspiration Pneumonia",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 22",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Lung Anatomy",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-anat-2",
+          "stem": "Physical exam reveals egophony and bronchial breath sounds.",
+          "question": "What physical finding indicates consolidation where alveoli are filled with fluid/exudate?",
+          "hint": "Consolidated lung transmits sound differently than aerated lung.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Vesicular breath sounds throughout",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Hyperresonance to percussion",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Bronchial breath sounds, egophony ('E to A' change), increased tactile fremitus",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Decreased tactile fremitus",
+              "correct": false
+            }
+          ],
+          "explanation": "Consolidation transmits sound better than air-filled lung: bronchial breath sounds (heard over airways transmitted through solid lung), egophony (E sounds like A), increased tactile fremitus, dullness to percussion. All present in this patient.",
+          "sources": [
+            {
+              "text": "StatPearls: Lung Examination",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "text": "StatPearls: Physical Examination (NCBI Bookshelf)",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-anat-3",
+          "stem": "He has pleuritic chest pain and a small pleural effusion.",
+          "question": "What structure is inflamed causing pleuritic chest pain?",
+          "hint": "The lungs themselves don't have pain receptors.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Bronchial smooth muscle",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Lung parenchyma",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Parietal pleura (has somatic innervation from intercostal nerves)",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Visceral pleura",
+              "correct": false
+            }
+          ],
+          "explanation": "The parietal pleura has somatic innervation (intercostal nerves) and causes sharp, localized, respiratory-phase pain. The visceral pleura and lung parenchyma lack pain receptors. Pleuritic pain indicates inflammation extending to the pleural surface.",
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 22",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Pleurisy",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "cap-phys-1",
+          "stem": "His ABG shows pH 7.46, pCO2 32, pO2 58 on room air.",
+          "question": "What is the primary physiologic cause of hypoxemia in pneumonia?",
+          "hint": "Consider what happens when alveoli are filled with inflammatory exudate.",
+          "options": [
+            {
+              "id": "A",
+              "text": "V/Q mismatch and shunt - perfusion of consolidated (non-ventilated) lung units",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Diffusion limitation only",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Decreased inspired oxygen",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Hypoventilation primarily",
+              "correct": false
+            }
+          ],
+          "explanation": "Pneumonia causes V/Q mismatch and intrapulmonary shunt: blood flows through consolidated lung that cannot participate in gas exchange. His low pCO2 (32) shows he's hyperventilating, so hypoventilation is not the cause of hypoxemia. Shunt doesn't correct well with supplemental O2.",
+          "whyChain": [
+            {
+              "why": "Why is his CO2 low despite lung disease?",
+              "answer": "He's hyperventilating (RR 28) to compensate for hypoxemia. CO2 diffuses more easily than O2, so hyperventilation effectively lowers CO2 even when O2 exchange is impaired. This causes respiratory alkalosis (pH 7.46).",
+              "source": "StatPearls: Respiratory Alkalosis",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 22 (Respiratory System)",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: V/Q Mismatch",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-phys-2",
+          "stem": "His procalcitonin is 4.2 ng/mL.",
+          "question": "What does an elevated procalcitonin indicate?",
+          "hint": "Procalcitonin rises in response to bacterial infection.",
+          "options": [
+            {
+              "id": "A",
+              "text": "No clinical significance",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Fungal infection specifically",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Likely bacterial infection - procalcitonin rises in response to bacterial toxins",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Viral infection specifically",
+              "correct": false
+            }
+          ],
+          "explanation": "Procalcitonin is released by multiple tissues in response to bacterial toxins and pro-inflammatory cytokines. It's elevated in bacterial infections and relatively low in viral infections. His level of 4.2 strongly supports bacterial etiology. Also useful for de-escalation when trending down.",
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: Procalcitonin",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-phys-3",
+          "stem": "He has WBC 18,400 with 88% neutrophils and 12% bands.",
+          "question": "What does a 'left shift' (bandemia) indicate?",
+          "hint": "Bands are immature neutrophils.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Allergic reaction",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Bone marrow release of immature neutrophils in response to severe infection",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Chronic inflammation only",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Viral infection",
+              "correct": false
+            }
+          ],
+          "explanation": "Bands are immature neutrophils released from bone marrow when demand exceeds supply of mature cells - a 'left shift' toward immature forms. >10% bands suggests significant acute bacterial infection. His 12% bandemia indicates severe infection with high bone marrow demand.",
+          "sources": [
+            {
+              "text": "StatPearls: Leukocytosis",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "text": "StatPearls: Bandemia",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-phys-4",
+          "stem": "He has altered mental status (confusion).",
+          "question": "Why does pneumonia cause confusion in elderly patients?",
+          "hint": "Consider multiple contributing factors.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Only from fever itself",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Hypoxemia, sepsis-related encephalopathy, and dehydration affecting brain function",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Pneumonia never causes confusion",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Direct brain infection by pneumonia bacteria",
+              "correct": false
+            }
+          ],
+          "explanation": "Confusion in elderly with pneumonia is multifactorial: hypoxemia (his pO2 is 58), inflammatory cytokines causing septic encephalopathy, dehydration, electrolyte abnormalities (his Na is 131), and underlying vulnerability. Altered mental status is a poor prognostic sign in pneumonia.",
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: Delirium",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "cap-patho-1",
+          "stem": "Sputum shows gram-positive diplococci and urine antigen is positive for S. pneumoniae.",
+          "question": "What is the most common cause of community-acquired pneumonia?",
+          "hint": "This pathogen accounts for the majority of CAP cases.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Klebsiella pneumoniae",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Staphylococcus aureus",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Pseudomonas aeruginosa",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Streptococcus pneumoniae (pneumococcus)",
+              "correct": true
+            }
+          ],
+          "explanation": "S. pneumoniae is the #1 cause of CAP, accounting for 20-30% of cases (when pathogen identified). Gram-positive diplococci (lancet-shaped pairs), positive urine antigen, and lobar consolidation are classic. Other common pathogens: H. influenzae, M. pneumoniae, respiratory viruses.",
+          "whyChain": [
+            {
+              "why": "What virulence factors make pneumococcus pathogenic?",
+              "answer": "Polysaccharide capsule (prevents phagocytosis - basis for vaccines), pneumolysin (cytotoxin), autolysin (releases cell wall fragments triggering inflammation). The capsule is the main virulence factor.",
+              "source": "StatPearls: Streptococcus Pneumoniae",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: Pneumococcal Pneumonia",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            }
+          ]
+        },
+        {
+          "id": "cap-patho-2",
+          "stem": "He has COPD and diabetes - both risk factors for pneumonia.",
+          "question": "How does COPD increase pneumonia risk?",
+          "hint": "Consider impaired host defenses.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Impaired mucociliary clearance, damaged airway epithelium, and often bacterial colonization",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "COPD doesn't increase pneumonia risk",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Only through immunosuppression from steroids",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Only by causing aspiration",
+              "correct": false
+            }
+          ],
+          "explanation": "COPD impairs lung defenses: damaged cilia from smoking, mucus hypersecretion and stasis, chronic bacterial colonization (H. influenzae, M. catarrhalis), airway inflammation, and often corticosteroid use. COPD patients have 2-4x higher pneumonia incidence and worse outcomes.",
+          "sources": [
+            {
+              "text": "GOLD COPD Guidelines",
+              "url": "https://goldcopd.org/gold-reports/"
+            },
+            {
+              "text": "StatPearls: COPD",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-patho-3",
+          "stem": "The CXR shows lobar consolidation with air bronchograms.",
+          "question": "What pathologic process causes the radiographic pattern of lobar consolidation?",
+          "hint": "Consider the stages of pneumococcal pneumonia.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Alveoli fill with inflammatory exudate (PMNs, fibrin) while bronchi remain patent",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Bronchial obstruction with distal atelectasis",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Pleural disease primarily",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Interstitial inflammation only",
+              "correct": false
+            }
+          ],
+          "explanation": "Lobar pneumonia progresses through stages: congestion (capillary engorgement), red hepatization (RBCs, fibrin in alveoli), gray hepatization (PMNs, fibrin), resolution. Air bronchograms occur because airways remain patent while surrounding alveoli fill with exudate.",
+          "sources": [
+            {
+              "text": "StatPearls: Pathophysiology (NCBI Bookshelf)",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "text": "StatPearls: Lobar Pneumonia",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            }
+          ]
+        },
+        {
+          "id": "cap-patho-4",
+          "stem": "He has a small parapneumonic effusion.",
+          "question": "What is the pathophysiology of parapneumonic effusion?",
+          "hint": "Inflammation affects the adjacent pleural space.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cirrhosis",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Pleural inflammation from adjacent pneumonia increases vascular permeability",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Direct bacterial invasion always",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Heart failure",
+              "correct": false
+            }
+          ],
+          "explanation": "Parapneumonic effusions occur in 40% of bacterial pneumonias. Inflammation from adjacent lung increases pleural vascular permeability, causing exudative effusion. Most are 'simple' and resolve with antibiotics. 'Complicated' effusions have bacterial invasion or loculations requiring drainage.",
+          "whyChain": [
+            {
+              "why": "When does effusion need drainage?",
+              "answer": "Drain if: empyema (pus), positive Gram stain/culture, pH <7.2, glucose <60, loculated, or large (>1/2 hemithorax). His small effusion can likely be monitored with antibiotics alone initially.",
+              "source": "ACCP Parapneumonic Effusion Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "cap-pharm-1",
+          "stem": "He needs empiric antibiotics for severe CAP. He has a penicillin allergy (childhood rash).",
+          "question": "What is the recommended empiric therapy for severe CAP requiring ICU admission?",
+          "hint": "Cover typical and atypical pathogens; consider his allergy.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Respiratory fluoroquinolone (levofloxacin) OR beta-lactam + macrolide; use FQ given PCN allergy",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Vancomycin alone",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Azithromycin alone",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Trimethoprim-sulfamethoxazole",
+              "correct": false
+            }
+          ],
+          "explanation": "Severe CAP empiric therapy: beta-lactam (ceftriaxone, ampicillin-sulbactam) + macrolide (azithromycin) OR respiratory fluoroquinolone alone (levofloxacin, moxifloxacin). Given his childhood PCN rash (low-risk for cross-reactivity), ceftriaxone is likely safe, but a respiratory FQ is a good alternative.",
+          "whyChain": [
+            {
+              "why": "Why cover atypical pathogens?",
+              "answer": "Even with confirmed pneumococcus, co-infection with atypicals (Mycoplasma, Legionella, Chlamydophila) occurs in 10-40% of CAP. Macrolides or FQs cover atypicals. Also, macrolides may have anti-inflammatory benefits.",
+              "source": "IDSA/ATS CAP Guidelines",
+              "sourceUrl": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "why": "Is his penicillin allergy significant?",
+              "answer": "Childhood rash is low-risk; true cross-reactivity between PCN and cephalosporins is <2%. However, with good alternatives available (respiratory FQ), avoiding potential reaction in a sick patient is reasonable.",
+              "source": "AAAAI Drug Allergy Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines 2019",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: CAP Treatment",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-pharm-2",
+          "stem": "Blood cultures are pending.",
+          "question": "When should antibiotics be administered in severe pneumonia?",
+          "hint": "Time to antibiotics affects outcomes.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Wait for culture results before starting antibiotics",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Within 1 hour of recognition; don't delay for diagnostic studies",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Timing doesn't matter",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Within 24 hours is acceptable",
+              "correct": false
+            }
+          ],
+          "explanation": "In severe sepsis/pneumonia, each hour of delay in antibiotics increases mortality. Administer within 1 hour of recognition. Obtain blood cultures and sputum before antibiotics if possible, but don't delay treatment. His lactate (2.8) and confusion suggest sepsis - treat urgently.",
+          "sources": [
+            {
+              "text": "Surviving Sepsis Campaign",
+              "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines"
+            },
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            }
+          ]
+        },
+        {
+          "id": "cap-pharm-3",
+          "stem": "He is started on levofloxacin.",
+          "question": "What are important adverse effects to monitor with fluoroquinolone use?",
+          "hint": "FDA has issued black box warnings for FQs.",
+          "options": [
+            {
+              "id": "A",
+              "text": "No significant adverse effects",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Tendinopathy/rupture, QT prolongation, CNS effects, aortic dissection risk",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Nephrotoxicity primarily",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Only GI upset",
+              "correct": false
+            }
+          ],
+          "explanation": "FQs have FDA black box warnings: tendinitis/rupture (especially in elderly, on steroids, transplant recipients), peripheral neuropathy, CNS effects (confusion, seizures), QT prolongation, and aortic dissection/aneurysm risk. Use alternative if available in low-risk settings.",
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        },
+        {
+          "id": "cap-pharm-4",
+          "stem": "His pneumococcal urine antigen is positive.",
+          "question": "Now that S. pneumoniae is confirmed, can antibiotics be narrowed?",
+          "hint": "Consider the value of pathogen-directed therapy.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Continue broad coverage initially; can narrow based on susceptibilities when cultures finalize",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Add additional antibiotics",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Immediately switch to penicillin G alone",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Stop all antibiotics since pathogen is identified",
+              "correct": false
+            }
+          ],
+          "explanation": "While urine antigen confirms pneumococcus, continue empiric coverage initially (possible co-infection, can't exclude resistant strain). Once clinically improving and susceptibilities available, de-escalate to targeted therapy. Most pneumococci remain susceptible to ceftriaxone and respiratory FQs.",
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: Antibiotic Stewardship",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-pharm-5",
+          "stem": "Duration of therapy needs to be determined.",
+          "question": "What is the recommended antibiotic duration for CAP?",
+          "hint": "Shorter courses are now preferred.",
+          "options": [
+            {
+              "id": "A",
+              "text": "3 days maximum",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Always 14 days",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "21 days standard",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Minimum 5 days; continue until afebrile for 48-72 hours and clinically stable",
+              "correct": true
+            }
+          ],
+          "explanation": "IDSA/ATS recommend minimum 5 days, continuing until afebrile ≥48 hours, clinically stable (normal vitals, eating, mental status). Studies show 5-7 days is equivalent to longer courses for most CAP. Longer courses (10-14 days) for complications (empyema, abscess) or specific pathogens (Legionella, MRSA).",
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "cap-clin-1",
+          "stem": "You need to determine disposition using a severity score.",
+          "question": "Calculate his CURB-65 score. What does it indicate?",
+          "hint": "CURB-65: Confusion, Urea, Respiratory rate, Blood pressure, Age ≥65.",
+          "options": [
+            {
+              "id": "A",
+              "text": "CURB-65 = 1; outpatient treatment appropriate",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "CURB-65 cannot be calculated",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "CURB-65 = 4 (Confusion + BUN >19 + RR ≥30 + Age ≥65); severe pneumonia, consider ICU",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "CURB-65 = 2; short hospitalization",
+              "correct": false
+            }
+          ],
+          "explanation": "CURB-65: C (Confusion) = 1, U (BUN >19 mg/dL = 32) = 1, R (RR ≥30 = 28, close but doesn't meet) = 0, B (SBP <90 or DBP ≤60 = 105/62) = 1, Age ≥65 = 1. Score = 4. Score ≥3 indicates severe CAP with high mortality risk - consider ICU admission.",
+          "whyChain": [
+            {
+              "why": "What does each score level mean?",
+              "answer": "CURB-65 0-1: low risk, outpatient treatment. 2: short hospital stay. ≥3: severe pneumonia, ICU consideration, ~15-30% mortality. His score of 4 indicates high severity.",
+              "source": "IDSA/ATS CAP Guidelines",
+              "sourceUrl": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        },
+        {
+          "id": "cap-clin-2",
+          "stem": "He has criteria for severe CAP.",
+          "question": "What are the IDSA/ATS major criteria for severe CAP requiring ICU admission?",
+          "hint": "Think about hemodynamic and respiratory failure.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Any positive blood culture",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Septic shock requiring vasopressors OR respiratory failure requiring mechanical ventilation",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Fever >101°F",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Age >50",
+              "correct": false
+            }
+          ],
+          "explanation": "Major criteria (either = ICU): (1) Septic shock with need for vasopressors; (2) Respiratory failure requiring mechanical ventilation. Minor criteria include RR ≥30, PaO2/FiO2 ≤250, multilobar infiltrates, confusion, BUN ≥20, WBC <4000, platelets <100K, hypothermia, hypotension requiring fluids. ≥3 minor = consider ICU.",
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: Severe Pneumonia",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            }
+          ]
+        },
+        {
+          "id": "cap-clin-3",
+          "stem": "He improves over 48 hours with defervescence.",
+          "question": "When can he be switched from IV to oral antibiotics?",
+          "hint": "Clinical stability criteria guide the switch.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Only after 7 days of IV therapy",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "When afebrile, hemodynamically stable, able to eat, and improving clinically",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "When CXR clears",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "IV therapy must continue until discharge",
+              "correct": false
+            }
+          ],
+          "explanation": "Switch to oral when: (1) Temperature normalizing; (2) HR <100; (3) RR <24; (4) SBP >90; (5) SpO2 >90% on room air; (6) Able to take oral; (7) Normal mental status. Early switch (day 2-3) is safe and reduces length of stay. CXR lag behind clinical improvement by weeks.",
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        },
+        {
+          "id": "cap-clin-4",
+          "stem": "He has not received pneumococcal vaccine.",
+          "question": "What pneumococcal vaccination should be recommended?",
+          "hint": "Current guidelines have changed vaccine recommendations.",
+          "options": [
+            {
+              "id": "A",
+              "text": "PCV20 (Prevnar 20) or PCV15 followed by PPSV23; recommended for adults ≥65",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "No vaccine is available for pneumococcus",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Vaccination contraindicated after pneumonia",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Only PPSV23 is recommended",
+              "correct": false
+            }
+          ],
+          "explanation": "CDC recommends pneumococcal vaccination for adults ≥65: PCV20 alone OR PCV15 followed by PPSV23. Also for adults 19-64 with risk factors (COPD, diabetes, smoking - he has all three). Vaccinate during hospitalization or at follow-up - prior pneumonia is not a contraindication.",
+          "sources": [
+            {
+              "text": "CDC ACIP Pneumococcal Recommendations",
+              "url": "https://www.cdc.gov/"
+            },
+            {
+              "text": "IDSA Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            }
+          ]
+        },
+        {
+          "id": "cap-clin-5",
+          "stem": "He is ready for discharge.",
+          "question": "What follow-up is recommended after hospitalization for CAP?",
+          "hint": "Post-discharge care affects outcomes.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repeat CXR before discharge mandatory",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Follow-up in 6 months",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Follow-up within 1-2 weeks; repeat CXR at 6-8 weeks (especially if smoker/older)",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "No follow-up needed if symptoms resolve",
+              "correct": false
+            }
+          ],
+          "explanation": "Early follow-up (1-2 weeks) ensures clinical resolution and addresses complications. Repeat CXR at 6-8 weeks in smokers, elderly, or those with persistent symptoms to ensure resolution and exclude underlying malignancy. Post-pneumonia, patients have increased 30-day and 1-year cardiovascular risk.",
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "cap-comp-1",
+          "stem": "On day 3, he develops worsening fever and the effusion has increased.",
+          "question": "What complication should you suspect and how do you evaluate it?",
+          "hint": "The effusion may have become complicated.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Heart failure",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "No evaluation needed",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Normal progression of pneumonia",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Complicated parapneumonic effusion or empyema - perform thoracentesis",
+              "correct": true
+            }
+          ],
+          "explanation": "Increasing effusion with persistent/worsening fever suggests complicated parapneumonic effusion or empyema. Thoracentesis is indicated: if pH <7.2, glucose <60, LDH >1000, positive culture, or purulent fluid - drainage required (chest tube or VATS).",
+          "whyChain": [
+            {
+              "why": "What's the difference between simple and complicated effusions?",
+              "answer": "Simple: sterile, pH >7.2, glucose >60, resolves with antibiotics. Complicated: bacterial invasion, pH <7.2, glucose <60, may loculate - requires drainage. Empyema: frank pus - always drain.",
+              "source": "ACCP Parapneumonic Effusion Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        },
+        {
+          "id": "cap-comp-2",
+          "stem": "A different patient with CAP develops cavitary lesion on imaging.",
+          "question": "Cavitary pneumonia suggests which pathogens?",
+          "hint": "Some organisms cause necrotic/abscess-forming pneumonia.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Viral pneumonia",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Mycoplasma pneumoniae",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "S. aureus, Klebsiella, anaerobes, tuberculosis",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Streptococcus pneumoniae (typical presentation)",
+              "correct": false
+            }
+          ],
+          "explanation": "Cavitary/necrotizing pneumonia suggests: S. aureus (especially MRSA), Klebsiella pneumoniae, anaerobes (aspiration/lung abscess), tuberculosis, and fungi (histoplasma, coccidioides). Pneumococcus rarely cavitates. Cavitation indicates tissue necrosis requiring prolonged therapy.",
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "StatPearls: Lung Abscess",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "cap-comp-3",
+          "stem": "After discharge, he develops new chest pain and dyspnea 2 weeks later.",
+          "question": "What cardiovascular complication increases after pneumonia?",
+          "hint": "Systemic inflammation affects the cardiovascular system.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Only heart failure from fluid overload",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Acute MI and other cardiovascular events - risk elevated post-pneumonia",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "No cardiovascular risk from pneumonia",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Only arrhythmias",
+              "correct": false
+            }
+          ],
+          "explanation": "Pneumonia significantly increases cardiovascular risk: MI, stroke, arrhythmia, and HF exacerbation - peaking in the first weeks but elevated for at least 1 year. Mechanisms: systemic inflammation, hypercoagulability, plaque destabilization, demand ischemia. New cardiac symptoms post-pneumonia warrant evaluation.",
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "cap-syn-1",
+          "stem": "Integrating all clinical information.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "hint": "Connect pathogen, risk factors, severity, and management.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Severe pneumococcal CAP in elderly male with COPD/DM, CURB-65=4, requiring ICU-level care with respiratory FQ and close monitoring",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Aspiration pneumonia requiring anaerobic coverage",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Mild viral pneumonia suitable for outpatient treatment",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Hospital-acquired pneumonia requiring anti-pseudomonal coverage",
+              "correct": false
+            }
+          ],
+          "explanation": "This synthesis captures: confirmed pathogen (S. pneumoniae by Gram stain and urine antigen), risk factors (elderly, COPD, diabetes), severity (CURB-65=4, confusion, hypoxemia, elevated lactate), and appropriate management (respiratory FQ given PCN allergy, ICU consideration).",
+          "sources": [
+            {
+              "text": "StatPearls: Pneumonia. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513321/"
+            },
+            {
+              "text": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. Accessed January 14, 2026.",
+              "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST"
+            }
+          ]
+        },
+        {
+          "id": "cap-syn-2",
+          "stem": "Planning comprehensive discharge care.",
+          "question": "What comprehensive discharge plan optimizes outcomes?",
+          "hint": "Address multiple preventive and follow-up needs.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Complete antibiotics, pneumococcal and influenza vaccines, smoking cessation reinforcement, close follow-up with repeat CXR",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Prophylactic antibiotics indefinitely",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Antibiotics only, no follow-up needed",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Transfer to nursing facility",
+              "correct": false
+            }
+          ],
+          "explanation": "Comprehensive discharge: (1) Complete appropriate antibiotic course; (2) Pneumococcal vaccination (PCV20 or PCV15 + PPSV23); (3) Annual influenza vaccine; (4) Smoking cessation support (even though quit, reinforce); (5) Follow-up in 1-2 weeks; (6) Repeat CXR at 6-8 weeks given age/smoking history; (7) Optimize COPD/DM management.",
+          "sources": [
+            {
+              "text": "IDSA/ATS CAP Guidelines",
+              "url": "https://www.idsociety.org/practice-guideline/practice-guidelines/"
+            },
+            {
+              "text": "CDC Vaccination Recommendations",
+              "url": "https://www.cdc.gov/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

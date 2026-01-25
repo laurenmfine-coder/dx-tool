@@ -1,0 +1,504 @@
+{
+  "id": "shock-deep-dive",
+  "title": "Shock: Cardiogenic & Distributive",
+  "version": "1.0",
+  "totalQuestions": 18,
+  "estimatedTime": "35 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Critical Care Fellows, Emergency Medicine, Cardiology",
+  "objectives": [
+    "Classify shock by mechanism (distributive, cardiogenic, hypovolemic, obstructive)",
+    "Recognize clinical features and hemodynamic profiles of each shock type",
+    "Apply SCAI classification for cardiogenic shock staging",
+    "Select appropriate vasopressors and inotropes based on shock type",
+    "Manage septic shock per Surviving Sepsis Campaign guidelines",
+    "Understand mixed shock states and their management challenges"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "Surviving Sepsis Campaign Guidelines 2021",
+      "citation": "Evans L, et al. Intensive Care Med. 2021;47:1181-1247",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34599691/",
+      "keyPoints": [
+        "Norepinephrine first-line vasopressor for septic shock",
+        "Target MAP ≥65 mmHg",
+        "Add vasopressin as second-line",
+        "Dobutamine for persistent hypoperfusion despite fluids"
+      ]
+    },
+    {
+      "name": "ACC Expert Consensus on Cardiogenic Shock 2025",
+      "url": "https://www.jacc.org/doi/10.1016/j.jacc.2025.02.018"
+    },
+    {
+      "name": "ISHLT Consensus on HF-related Cardiogenic Shock 2024",
+      "url": "https://emedicine.medscape.com/article/152191-guidelines"
+    }
+  ],
+  "vignette": {
+    "text": "A 68-year-old man presents with chest pain, diaphoresis, and progressive shortness of breath for 3 hours. He becomes increasingly confused and his skin is cool and mottled.\n\nPast Medical History: Hypertension, Type 2 diabetes, Hyperlipidemia, Prior MI 5 years ago\n\nMedications: Aspirin, metoprolol, atorvastatin, lisinopril, metformin\n\nAllergies: NKDA",
+    "physicalExam": {
+      "general": "Diaphoretic, confused, appears acutely ill",
+      "vitals": {
+        "BP": "78/52 mmHg",
+        "HR": "118 bpm",
+        "RR": "28/min",
+        "SpO2": "89% on RA",
+        "Temp": "97.8°F"
+      },
+      "cardiovascular": "Tachycardic, S3 gallop, JVD to angle of jaw, cool extremities, weak pulses",
+      "pulmonary": "Bilateral crackles to mid-lung fields",
+      "abdomen": "Soft, decreased bowel sounds",
+      "extremities": "Cool, mottled, delayed capillary refill >4 seconds",
+      "neuro": "Confused, oriented to person only"
+    },
+    "diagnostics": {
+      "labs": {
+        "Troponin_I": {
+          "value": "15.8 ng/mL",
+          "reference": "<0.04",
+          "flag": "MARKEDLY ELEVATED"
+        },
+        "BNP": {
+          "value": "1850 pg/mL",
+          "reference": "<100",
+          "flag": "ELEVATED"
+        },
+        "Lactate": {
+          "value": "5.8 mmol/L",
+          "reference": "<2.0",
+          "flag": "ELEVATED"
+        },
+        "Creatinine": {
+          "value": "2.1 mg/dL",
+          "reference": "0.7-1.3",
+          "flag": "ELEVATED (baseline 1.0)"
+        },
+        "WBC": {
+          "value": "14.2 K/μL",
+          "reference": "4-11",
+          "flag": "ELEVATED"
+        }
+      },
+      "ECG": "ST elevations in V1-V4 with reciprocal changes in inferior leads - STEMI",
+      "CXR": "Bilateral pulmonary edema, cardiomegaly",
+      "Echo_bedside": "Severe LV dysfunction, EF 15-20%, anterior wall akinesis, moderate MR"
+    }
+  },
+  "layers": [
+    {
+      "id": "classification",
+      "title": "Shock Classification",
+      "icon": "📊",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "shock-class-1",
+          "stem": "This patient is hypotensive with elevated lactate and signs of poor perfusion.",
+          "question": "What are the four major types of shock?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All shock is the same pathophysiology",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Shock classification doesn't affect treatment",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "DISTRIBUTIVE: Vasodilation, low SVR (septic, anaphylactic, neurogenic); CARDIOGENIC: Pump failure, low CO, high filling pressures; HYPOVOLEMIC: Volume loss, low preload (hemorrhage, dehydration); OBSTRUCTIVE: Mechanical obstruction to flow (PE, tamponade, tension pneumo); Each has distinct hemodynamic profile and treatment",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Only septic shock exists",
+              "correct": false
+            }
+          ],
+          "explanation": "Four shock categories: (1) DISTRIBUTIVE: Inappropriate vasodilation → low SVR, high or normal CO initially. Subtypes: Septic (most common), anaphylactic, neurogenic. Warm extremities early; (2) CARDIOGENIC: Pump failure → low CO, high filling pressures, high SVR. Causes: MI (this patient), HF, arrhythmia, valvular. Cold, clammy, pulmonary edema; (3) HYPOVOLEMIC: Volume loss → low preload, low CO. Causes: Hemorrhage, dehydration, burns. Tachycardia, flat JVP; (4) OBSTRUCTIVE: Mechanical obstruction → impaired filling or output. Causes: PE, tamponade, tension pneumothorax. Often with specific findings (pulsus paradoxus, unilateral breath sounds). This patient: CARDIOGENIC (STEMI with low EF, pulmonary edema, elevated JVP).",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.merckmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hemodynamics",
+      "title": "Hemodynamic Profiles",
+      "icon": "📈",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "shock-hemo-1",
+          "stem": "Understanding hemodynamics helps guide treatment.",
+          "question": "What are the hemodynamic profiles of cardiogenic vs distributive shock?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Septic shock never affects the heart",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "CARDIOGENIC: Low CO, high SVR (compensatory vasoconstriction), high filling pressures (PCWP elevated), cold extremities; DISTRIBUTIVE (septic): Initially high CO, low SVR (vasodilation), low/normal filling pressures, warm extremities; Late septic shock may have LOW CO (septic cardiomyopathy); MIXED SHOCK: Common - features of both",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Cardiogenic shock has low SVR",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "All shock has the same hemodynamics",
+              "correct": false
+            }
+          ],
+          "explanation": "Hemodynamic profiles: CARDIOGENIC: Cardiac Index <2.2 L/min/m², SVR elevated (>1200 dyne·s/cm⁵), PCWP elevated (>18 mmHg), SvO2 low (<65%), Cold extremities (vasoconstriction). DISTRIBUTIVE (Septic): Early: CI elevated (hyperdynamic), SVR low (<800), PCWP normal/low, SvO2 elevated (>70% - inadequate extraction), Warm extremities (vasodilation). Late: CI may fall (septic cardiomyopathy - up to 50% of patients). MIXED SHOCK: Very common in critically ill - cardiogenic + distributive features. Advanced cardiogenic → bacterial translocation → inflammatory response. Septic → cardiomyopathy. Treatment becomes complex.",
+          "whyChain": [
+            {
+              "why": "Why does this matter?",
+              "answer": "Treatment differs dramatically: Cardiogenic shock needs inotropes and afterload reduction (when tolerated), fluids may worsen pulmonary edema. Distributive shock needs fluids and vasopressors to restore SVR. Wrong treatment can be fatal - fluids in cardiogenic shock worsen pulmonary edema; vasoconstrictors alone in cardiogenic shock increase afterload without improving output.",
+              "source": "JACC Advances",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.jacc.org/doi/10.1016/j.jacadv.2024.101432"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scai-staging",
+      "title": "SCAI Shock Staging",
+      "icon": "🏥",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "shock-scai-1",
+          "stem": "This patient has cardiogenic shock from STEMI.",
+          "question": "How is cardiogenic shock staged using the SCAI classification?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All cardiogenic shock is the same severity",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "SCAI Stages: A (At Risk) - risk factors, no hypoperfusion; B (Beginning) - hypotension OR hypoperfusion, not both; C (Classic) - hypotension AND hypoperfusion requiring intervention; D (Deteriorating) - failing initial therapy, escalating support; E (Extremis) - refractory shock, near death, CPR/ECMO. Higher stages = higher mortality",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Only Stage E requires treatment",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Staging doesn't predict outcomes",
+              "correct": false
+            }
+          ],
+          "explanation": "SCAI Cardiogenic Shock Staging: Stage A (At Risk): Large MI, prior HF, no current signs; Stage B (Beginning): Hypotension (SBP <90 or MAP <60) OR signs of hypoperfusion (elevated lactate, oliguria), but not both; Stage C (Classic): Hypotension AND hypoperfusion, requires vasopressors/inotropes or MCS - this is 'classic' cardiogenic shock; Stage D (Deteriorating): Failing initial therapy, escalating vasopressors/inotropes, worsening labs; Stage E (Extremis): Refractory shock, cardiac arrest, CPR, ECMO as bridge. This patient: SCAI Stage C (hypotension + hypoperfusion + elevated lactate). Mortality increases with stage: B ~10%, C ~30%, D ~50%, E ~70%+.",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.jacc.org/doi/10.1016/j.jacc.2025.02.018"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-treatment",
+      "title": "Cardiogenic Shock Treatment",
+      "icon": "💊",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "shock-cardio-tx-1",
+          "stem": "You need to stabilize this patient with cardiogenic shock from STEMI.",
+          "question": "What is the treatment approach for cardiogenic shock?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Priorities: (1) REVASCULARIZATION for ACS-related CS - emergent PCI within 2 hours; (2) Hemodynamic support while awaiting: Inopressors (norepinephrine + dobutamine) or (epinephrine) for BP + inotropy; Avoid excessive fluids if pulmonary edema; (3) Mechanical circulatory support (MCS) if refractory: IABP, Impella, ECMO; (4) Treat congestion if present; (5) Minimize vasopressor duration/dose",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Vasopressors contraindicated",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Revascularization can wait",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Large volume fluid resuscitation first",
+              "correct": false
+            }
+          ],
+          "explanation": "Cardiogenic shock treatment: (1) REVASCULARIZATION: For ACS-related CS, emergent coronary angiography and PCI within 2 hours - this is definitive treatment; (2) HEMODYNAMIC SUPPORT: Inopressor (norepinephrine preferred over dopamine) for MAP, Add inotrope (dobutamine or milrinone) for low output, OR epinephrine monotherapy (provides both); (3) FLUIDS: Cautious - small bolus (250 mL) if no pulmonary edema, avoid if congested; (4) MECHANICAL CIRCULATORY SUPPORT (MCS): IABP (modest support), Impella (more support), VA-ECMO (most support, for extremis). Match MCS to shock severity; (5) DIURETICS: If congested (this patient has pulmonary edema); (6) Goal: Minimize vasoactive drug dose and duration - associated with worse outcomes.",
+          "whyChain": [
+            {
+              "why": "Why norepinephrine over dopamine?",
+              "answer": "SOAP II trial: Dopamine associated with more arrhythmias and higher mortality in cardiogenic shock subgroup compared to norepinephrine. Current guidelines recommend norepinephrine as first-line vasopressor if needed. Dobutamine or milrinone added for inotropic support. Epinephrine is an alternative single agent.",
+              "source": "ACC 2025",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.jacc.org/doi/10.1016/j.jacc.2025.02.018"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vasopressors",
+      "title": "Vasopressor Selection",
+      "icon": "💉",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "shock-vaso-1",
+          "stem": "You need to choose appropriate vasoactive agents.",
+          "question": "What are the key vasopressors and inotropes and their mechanisms?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Vasopressin works on β receptors",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "All vasopressors work the same way",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "NOREPINEPHRINE: α1 >> β1, increases SVR and MAP, mild inotropy - first-line for septic shock; EPINEPHRINE: α1 + β1 + β2, increases SVR, CO, HR - useful inopressor; VASOPRESSIN: V1 receptor, increases SVR, no cardiac effect - adjunct in septic shock; DOBUTAMINE: β1 >> β2, increases CO, decreases SVR (inodilator) - for low output; DOPAMINE: Dose-dependent α/β/DA - more arrhythmias, generally avoided",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Dopamine is preferred first-line",
+              "correct": false
+            }
+          ],
+          "explanation": "Vasopressor/inotrope mechanisms: NOREPINEPHRINE: Potent α1, moderate β1. Increases SVR (primary), mild inotropy. First-line for septic shock (SSC guidelines); EPINEPHRINE: Strong α1, β1, β2. Increases SVR, CO, HR, glucose. Useful as single inopressor agent; VASOPRESSIN: V1 receptors (non-adrenergic). Increases SVR. Useful adjunct in catecholamine-resistant shock, doesn't increase myocardial O2 demand; PHENYLEPHRINE: Pure α1. Increases SVR only. Useful for pure vasodilation (neurogenic shock, anesthesia); DOBUTAMINE: Strong β1, moderate β2. Increases CO, may decrease SVR (inodilator). For low output states; MILRINONE: PDE3 inhibitor. Increases CO, decreases SVR. Similar to dobutamine; DOPAMINE: Dose-dependent effects. More arrhythmias than norepinephrine. Generally avoided as first-line.",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://emcrit.org/ibcc/shock/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock",
+      "title": "Septic Shock",
+      "icon": "🦠",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "shock-septic-1",
+          "stem": "A different patient has septic shock from pneumonia.",
+          "question": "What is the management of septic shock per Surviving Sepsis Campaign?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Vasopressin is first-line",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Delay antibiotics until cultures return",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Hour-1 Bundle: Measure lactate, blood cultures before antibiotics, broad-spectrum antibiotics WITHIN 1 HOUR, IV crystalloid 30 mL/kg for hypotension or lactate ≥4; Vasopressors: NOREPINEPHRINE first-line (target MAP ≥65 mmHg), Add VASOPRESSIN if norepinephrine insufficient, Add DOBUTAMINE if persistent hypoperfusion despite fluids/pressors; Source control; Consider corticosteroids if refractory",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Fluid restriction in septic shock",
+              "correct": false
+            }
+          ],
+          "explanation": "Septic Shock Management (SSC 2021): HOUR-1 BUNDLE: (1) Measure lactate (repeat if elevated); (2) Blood cultures before antibiotics (but don't delay); (3) Broad-spectrum ANTIBIOTICS within 1 HOUR; (4) IV crystalloid 30 mL/kg for hypotension or lactate ≥4 mmol/L; (5) Vasopressors if hypotensive during/after fluids. VASOPRESSORS: Norepinephrine FIRST-LINE (target MAP ≥65 mmHg), Add vasopressin (up to 0.03 U/min) as second-line, Add epinephrine if inadequate MAP. INOTROPES: Dobutamine for persistent hypoperfusion with adequate volume status and MAP. SOURCE CONTROL: Identify and treat infection source. CORTICOSTEROIDS: Consider hydrocortisone 200 mg/day if vasopressor-refractory shock.",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/34599691/"
+          ]
+        },
+        {
+          "id": "shock-septic-2",
+          "stem": "The septic shock patient remains hypotensive on norepinephrine 0.5 mcg/kg/min.",
+          "question": "What is the approach to refractory septic shock?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Add VASOPRESSIN (0.03-0.04 U/min) to norepinephrine - different receptor, may reduce catecholamine dose; Consider EPINEPHRINE if still refractory; HYDROCORTISONE 200 mg/day for vasopressor-refractory shock (may be given as 50 mg q6h); Reassess volume status, source control, antimicrobial coverage; Consider septic cardiomyopathy - add dobutamine if CO low",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Stop all vasopressors",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Keep increasing norepinephrine indefinitely",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Steroids are contraindicated",
+              "correct": false
+            }
+          ],
+          "explanation": "Refractory septic shock: (1) ADD VASOPRESSIN: 0.03-0.04 U/min (fixed dose, not titrated). Different receptor (V1) from catecholamines - may work when α-receptors saturated. May allow catecholamine dose reduction (less arrhythmias); (2) EPINEPHRINE: As third-line or alternative; (3) CORTICOSTEROIDS: Hydrocortisone 200 mg/day (50 mg q6h or 200 mg continuous) if vasopressor-refractory. Improves shock reversal, questionable mortality benefit; (4) REASSESS: Volume status (may need more fluids or diuresis if congested), Source control (undrained abscess?), Antimicrobial coverage (resistant organism?); (5) SEPTIC CARDIOMYOPATHY: Up to 50% develop. If CO low despite fluids/pressors, add dobutamine or consider echo/PA catheter.",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/34599691/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mixed-shock",
+      "title": "Mixed Shock States",
+      "icon": "🔀",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "shock-mixed-1",
+          "stem": "A patient with decompensated heart failure develops sepsis.",
+          "question": "How is mixed cardiogenic-distributive shock managed?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Treat as pure septic shock with large volume fluids",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "CHALLENGES: Fluid resuscitation (sepsis) may worsen pulmonary edema (cardiogenic); APPROACH: Cautious fluids - small boluses with reassessment; Norepinephrine for vasodilation; Inotrope (dobutamine) if cardiac output remains low; Invasive hemodynamic monitoring often needed (PA catheter or equivalent); Treat both components - antibiotics AND cardiac optimization; Consider MCS in severe cases",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Inotropes are contraindicated",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Mixed shock doesn't exist",
+              "correct": false
+            }
+          ],
+          "explanation": "Mixed cardiogenic-distributive shock: COMMON SCENARIOS: HF patient with sepsis, Post-cardiac surgery vasoplegia, Late cardiogenic shock with bacterial translocation, Septic cardiomyopathy in septic shock. CHALLENGES: Standard sepsis fluids (30 mL/kg) can be devastating in cardiogenic shock. APPROACH: (1) Cautious fluids - 250 mL boluses with frequent reassessment (lung exam, echo, CVP/PCWP); (2) Norepinephrine for vasodilation component; (3) Inotrope (dobutamine) if CO remains low after volume optimization; (4) Invasive monitoring often necessary - PA catheter provides CO, SVR, filling pressures to guide therapy; (5) Source control and antibiotics for infection; (6) MCS may be needed if refractory.",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.chestcc.org/article/S2949-7884(24)00025-X/fulltext"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "shock-syn-1",
+          "stem": "Returning to the original patient with cardiogenic shock from STEMI.",
+          "question": "What is the complete management approach?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Immediate: (1) Activate cath lab for emergent PCI (definitive treatment); (2) Hemodynamic support: Start NOREPINEPHRINE for MAP, Add DOBUTAMINE for low CO (or epinephrine alone); (3) Avoid large fluid boluses (pulmonary edema present); (4) Aspirin, heparin, P2Y12 inhibitor per STEMI protocol; (5) Consider IABP or Impella if deteriorating; (6) Intubate if respiratory failure; (7) ICU with continuous monitoring; Goal: Emergent revascularization + hemodynamic support",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Large volume fluid resuscitation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Medical management only",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Wait for cardiac enzymes before intervention",
+              "correct": false
+            }
+          ],
+          "explanation": "Complete cardiogenic shock (STEMI) management: IMMEDIATE: (1) ACTIVATE CATH LAB - emergent PCI is definitive treatment for AMI-CS, target <2 hours; (2) HEMODYNAMIC SUPPORT: Norepinephrine for MAP (target ≥65 mmHg), Add dobutamine for low cardiac output, OR epinephrine as single inopressor agent; (3) AVOID excessive fluids - this patient has pulmonary edema; (4) STEMI PROTOCOL: Aspirin 325 mg, P2Y12 inhibitor, Anticoagulation (heparin); (5) MECHANICAL SUPPORT: Consider IABP or Impella if deteriorating, VA-ECMO if extremis; (6) RESPIRATORY: High-flow O2, NIPPV, or intubation if needed; (7) ICU admission, continuous hemodynamic monitoring, arterial line; (8) DIURETICS: After stabilization for pulmonary edema. This patient is SCAI Stage C - needs aggressive treatment and revascularization.",
+          "sources": [
+            {
+              "text": "StatPearls: Shock. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.jacc.org/doi/10.1016/j.jacc.2025.02.018",
+            "https://emedicine.medscape.com/article/152191-guidelines"
+          ]
+        }
+      ]
+    }
+  ]
+}

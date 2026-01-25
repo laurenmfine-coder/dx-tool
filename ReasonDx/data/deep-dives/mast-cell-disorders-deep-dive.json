@@ -1,0 +1,481 @@
+{
+  "id": "mast-cell-disorders-deep-dive",
+  "title": "Mast Cell Disorders",
+  "version": "1.0",
+  "totalQuestions": 16,
+  "estimatedTime": "30 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Allergy/Immunology Fellows, Hematology",
+  "objectives": [
+    "Differentiate cutaneous mastocytosis from systemic mastocytosis",
+    "Apply WHO 2022 diagnostic criteria for systemic mastocytosis",
+    "Recognize the role of KIT D816V mutation in diagnosis and treatment",
+    "Classify SM subtypes (ISM, SSM, ASM, SM-AHN, MCL)",
+    "Manage mast cell mediator symptoms and anaphylaxis risk",
+    "Understand treatment options including avapritinib for advanced SM"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "Systemic Mastocytosis 2023 Update",
+      "citation": "Pardanani A. Systemic mastocytosis in adults: 2023 update on diagnosis, risk stratification and management. Am J Hematol. 2023;98(7):1097-1116",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962",
+      "keyPoints": [
+        "WHO 2022 criteria: 1 major + 1 minor OR 3 minor criteria",
+        "KIT D816V present in >90% of adult SM",
+        "ISM: Observation and symptom management",
+        "Advanced SM: Avapritinib or midostaurin"
+      ]
+    },
+    {
+      "name": "WHO 5th Edition Classification 2022",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35732831/"
+    },
+    {
+      "name": "PMC: Evaluation of Mast Cell Disorders",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9820312/"
+    }
+  ],
+  "vignette": {
+    "text": "A 42-year-old woman is referred for evaluation of recurrent flushing, pruritus, and two episodes of anaphylaxis following bee stings (requiring epinephrine). She also reports chronic diarrhea and 'brain fog.' Physical exam reveals scattered tan-brown macules on her trunk that become raised and pruritic when stroked (positive Darier sign).\n\nPast Medical History: Osteoporosis (unusual for age), GERD\n\nMedications: Omeprazole, calcium/vitamin D\n\nAllergies: Bee sting (anaphylaxis x2)",
+    "physicalExam": {
+      "general": "Well-appearing",
+      "vitals": {
+        "BP": "118/72 mmHg",
+        "HR": "78 bpm",
+        "Temp": "98.2°F"
+      },
+      "skin": "Multiple tan-brown maculopapular lesions on trunk, positive Darier sign (urtication with stroking)",
+      "cardiovascular": "Regular rhythm, no murmurs",
+      "abdomen": "Soft, mild hepatomegaly on palpation, no splenomegaly",
+      "lymphatics": "No lymphadenopathy"
+    },
+    "diagnostics": {
+      "labs": {
+        "Serum Tryptase": {
+          "value": "45 ng/mL",
+          "reference": "<11.4",
+          "flag": "ELEVATED"
+        },
+        "CBC": "WBC 7.2, Hgb 13.8, Plt 245K - normal",
+        "LFTs": "Normal",
+        "IgE": {
+          "value": "35 IU/mL",
+          "reference": "<100",
+          "flag": "NORMAL"
+        }
+      },
+      "skinBiopsy": "Increased mast cells in dermis with aggregates, positive CD117 and CD25"
+    }
+  },
+  "layers": [
+    {
+      "id": "classification",
+      "title": "Classification",
+      "icon": "📊",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "mc-class-1",
+          "stem": "This patient has skin lesions with positive Darier sign and elevated tryptase.",
+          "question": "How are mast cell disorders classified?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All mastocytosis is the same disease",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Only children get mastocytosis",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Skin lesions exclude systemic disease",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "CUTANEOUS MASTOCYTOSIS (CM): Skin-only involvement, common in children, often resolves by puberty; SYSTEMIC MASTOCYTOSIS (SM): Extracutaneous organ involvement (bone marrow, GI, liver, spleen), requires WHO criteria; MAST CELL ACTIVATION SYNDROME (MCAS): Episodic mediator symptoms, may be clonal or non-clonal",
+              "correct": true
+            }
+          ],
+          "explanation": "Mast cell disorder classification: (1) CUTANEOUS MASTOCYTOSIS: Skin-only (urticaria pigmentosa, mastocytoma, diffuse cutaneous), common in children, often self-limited; (2) SYSTEMIC MASTOCYTOSIS: Extracutaneous involvement (bone marrow, GI, liver, spleen), classified by WHO criteria into subtypes; (3) MAST CELL ACTIVATION SYNDROME (MCAS): Episodic symptoms from mast cell mediator release without meeting full SM criteria - can be clonal (monoclonal MCAS) or non-clonal. This adult patient with skin lesions AND elevated tryptase likely has SM - needs bone marrow evaluation.",
+          "whyChain": [
+            {
+              "why": "Why does age matter?",
+              "answer": "Pediatric mastocytosis: Usually cutaneous only, polymorphic skin lesions, often resolves by puberty, bone marrow biopsy rarely needed unless red flags. Adult mastocytosis: Usually systemic, monomorphic skin lesions, rarely resolves, bone marrow biopsy recommended in ALL adults with suspected mastocytosis.",
+              "source": "PMC Mast Cell Review",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC9820312/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "WHO Diagnostic Criteria",
+      "icon": "🔬",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "mc-dx-1",
+          "stem": "You need to confirm systemic mastocytosis with bone marrow biopsy.",
+          "question": "What are the WHO 2022 diagnostic criteria for systemic mastocytosis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Bone marrow biopsy is never needed",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "MAJOR: Multifocal dense MC aggregates (≥15 MCs) in bone marrow or extracutaneous tissue; MINOR: (1) >25% spindle-shaped/atypical MCs, (2) KIT D816V or other activating KIT mutation, (3) Aberrant CD25 and/or CD2 expression, (4) Serum tryptase >20 ng/mL; Diagnosis: 1 major + 1 minor OR 3 minor criteria",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Skin lesions are required for diagnosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Elevated tryptase alone is diagnostic",
+              "correct": false
+            }
+          ],
+          "explanation": "WHO 2022 SM Criteria - Need 1 MAJOR + 1 MINOR or 3 MINOR: MAJOR: Multifocal dense MC aggregates (≥15 MCs) in BM or extracutaneous tissue. MINOR: (1) >25% atypical/spindle-shaped MCs in BM smear or tissue; (2) KIT D816V or other activating KIT mutation (high-sensitivity PCR); (3) Aberrant CD25 ± CD2 expression on MCs; (4) Serum tryptase persistently >20 ng/mL (adjust for hereditary alpha-tryptasemia). This patient has elevated tryptase (45 ng/mL) = 1 minor criterion. Bone marrow biopsy needed to confirm diagnosis.",
+          "whyChain": [
+            {
+              "why": "Why is KIT D816V so important?",
+              "answer": "KIT D816V mutation present in >90% of adult SM. It's a gain-of-function mutation causing constitutive mast cell activation and proliferation. Critical for: (1) Diagnosis - a minor criterion; (2) Treatment selection - D816V confers imatinib resistance but responds to avapritinib/midostaurin. Test using high-sensitivity PCR (standard NGS may miss it).",
+              "source": "2023 SM Update",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "subtypes",
+      "title": "SM Subtypes",
+      "icon": "📋",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "mc-sub-1",
+          "stem": "Bone marrow confirms SM. You need to classify the subtype.",
+          "question": "What are the subtypes of systemic mastocytosis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Treatment is the same for all subtypes",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Skin involvement determines subtype",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "All SM has the same prognosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "INDOLENT SM (ISM): No B/C findings, good prognosis; SMOLDERING SM (SSM): 2+ B-findings (high MC burden, organomegaly); AGGRESSIVE SM (ASM): 1+ C-findings (organ damage); SM with Associated Hematologic Neoplasm (SM-AHN); MAST CELL LEUKEMIA (MCL): ≥20% MCs in BM aspirate",
+              "correct": true
+            }
+          ],
+          "explanation": "SM Subtypes: (1) INDOLENT SM (ISM): Most common (~70%), no B or C findings, normal life expectancy, symptom management; (2) SMOLDERING SM (SSM): 2+ B-findings (high tryptase >200, organomegaly, high BM MC burden), higher progression risk; (3) AGGRESSIVE SM (ASM): 1+ C-findings (cytopenias, hepatomegaly with dysfunction, malabsorption, bone lesions), requires cytoreductive therapy; (4) SM-AHN: SM + associated myeloid neoplasm (MDS, MPN, AML, CMML); (5) MAST CELL LEUKEMIA (MCL): ≥20% MCs in BM, worst prognosis. B-findings = high burden without organ damage. C-findings = organ damage from MC infiltration.",
+          "whyChain": [
+            {
+              "why": "What determines this patient's subtype?",
+              "answer": "This patient has: Elevated tryptase (45, not >200), mild hepatomegaly, osteoporosis. No cytopenias, no liver dysfunction, no ascites. Most likely INDOLENT SM (ISM) - no C-findings, possibly 1 B-finding (hepatomegaly). Bone marrow results will finalize classification. ISM has excellent prognosis with normal life expectancy.",
+              "source": "2023 SM Update",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tryptase",
+      "title": "Tryptase Interpretation",
+      "icon": "🧪",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "mc-tryp-1",
+          "stem": "The patient's baseline tryptase is 45 ng/mL.",
+          "question": "How should serum tryptase be interpreted?",
+          "options": [
+            {
+              "id": "A",
+              "text": "BASELINE tryptase >20 ng/mL is a minor SM criterion; Elevated in SM, myeloid neoplasms, renal failure, anaphylaxis (acute rise); HEREDITARY ALPHA-TRYPTASEMIA (HαT): Extra TPSAB1 gene copies cause elevated baseline - adjust for this; ACUTE tryptase rise: Obtain within 4 hours of anaphylaxis, compare to baseline",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Tryptase is only elevated during reactions",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Any elevated tryptase confirms mastocytosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Normal tryptase excludes mastocytosis",
+              "correct": false
+            }
+          ],
+          "explanation": "Tryptase interpretation: BASELINE (not during reaction): >20 ng/mL is SM minor criterion, but also elevated in myeloid neoplasms, renal failure, HαT. ACUTE: Rises within 15-60 min of anaphylaxis, peaks 1-2 hours, returns to baseline in 6-24 hours - obtain within 4 hours of reaction and compare to baseline. HEREDITARY ALPHA-TRYPTASEMIA (HαT): Common (5-6% population), extra alpha-tryptase gene copies cause elevated baseline. Adjust: Corrected tryptase = measured/(1 + extra copies). ~20% of SM patients have concurrent HαT. CAVEAT: ~30% of ISM patients have tryptase <20 ng/mL - don't exclude SM based on normal tryptase alone.",
+          "whyChain": [
+            {
+              "why": "Why test for HαT?",
+              "answer": "HαT can cause elevated tryptase WITHOUT mastocytosis, leading to unnecessary workup. However, HαT can also coexist WITH mastocytosis (and worsens symptoms). Test TPSAB1 copy number if elevated tryptase without other SM features, or if tryptase seems disproportionately high for MC burden.",
+              "source": "2023 SM Update",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anaphylaxis",
+      "title": "Anaphylaxis Risk",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "mc-anaph-1",
+          "stem": "This patient has had two episodes of bee sting anaphylaxis.",
+          "question": "How should anaphylaxis risk be managed in mastocytosis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "VIT should be stopped after 5 years",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Mastocytosis patients have INCREASED anaphylaxis risk, especially to Hymenoptera (bee/wasp) stings; Carry epinephrine auto-injectors at all times (at least 2); Venom immunotherapy (VIT) recommended and should be CONTINUED INDEFINITELY; Avoid triggers (NSAIDs, opioids, contrast, alcohol, extreme temperatures)",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Anaphylaxis risk is not increased in mastocytosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Epinephrine is contraindicated",
+              "correct": false
+            }
+          ],
+          "explanation": "Anaphylaxis in mastocytosis: INCREASED RISK - Hymenoptera stings cause severe/fatal anaphylaxis more commonly in SM (especially ISM without skin lesions). Management: (1) Epinephrine auto-injectors x2 at all times; (2) VENOM IMMUNOTHERAPY (VIT) strongly recommended - reduces reaction risk by 90%+. CONTINUE VIT INDEFINITELY in mastocytosis patients (unlike general population where 5 years may suffice); (3) Avoid triggers: NSAIDs, opioids, radiocontrast, alcohol, extreme temperature changes, certain anesthetics; (4) Pre-medication for procedures; (5) Medical alert bracelet.",
+          "whyChain": [
+            {
+              "why": "Why indefinite VIT?",
+              "answer": "In mastocytosis patients, anaphylaxis risk returns when VIT is discontinued (unlike general population where protection often persists). Case reports of fatal reactions after stopping VIT in SM patients. Current guidelines recommend lifelong VIT for mastocytosis patients with Hymenoptera anaphylaxis.",
+              "source": "2023 SM Update",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "symptom-management",
+      "title": "Symptom Management",
+      "icon": "💊",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "mc-sx-1",
+          "stem": "You need to manage this patient's mediator symptoms.",
+          "question": "How are mast cell mediator symptoms treated in ISM?",
+          "options": [
+            {
+              "id": "A",
+              "text": "No treatment is available for mediator symptoms",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Steroids are first-line for skin symptoms",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Chemotherapy is first-line for all symptoms",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "H1 antihistamines (cetirizine, loratadine) for pruritus/flushing; H2 antihistamines (famotidine) or PPI for GI symptoms; Cromolyn sodium for GI symptoms; Leukotriene inhibitors (montelukast) for flushing; Aspirin (cautiously, after tolerance testing) for flushing; Omalizumab for refractory symptoms; Avoid known triggers",
+              "correct": true
+            }
+          ],
+          "explanation": "ISM symptom management (goal: control mediator release symptoms): (1) H1 ANTIHISTAMINES: Non-sedating (cetirizine, loratadine, fexofenadine) for pruritus, flushing - often need higher doses; (2) H2 ANTIHISTAMINES/PPI: Famotidine, ranitidine, omeprazole for GI symptoms, peptic disease; (3) CROMOLYN SODIUM: Mast cell stabilizer, particularly for GI symptoms; (4) LEUKOTRIENE INHIBITORS: Montelukast for flushing, may help other symptoms; (5) ASPIRIN: Can reduce flushing (blocks prostaglandin) but must test tolerance first (can trigger reactions); (6) OMALIZUMAB: For refractory symptoms; (7) OSTEOPOROSIS: Bisphosphonates, vitamin D, calcium. This patient: Start H1 + H2 antihistamines, continue omeprazole, consider cromolyn for diarrhea.",
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC9820312/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "advanced-treatment",
+      "title": "Advanced SM Treatment",
+      "icon": "🎯",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "mc-adv-1",
+          "stem": "A different patient has aggressive SM with cytopenias and hepatomegaly with ascites.",
+          "question": "How is advanced systemic mastocytosis treated?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Advanced SM has the same treatment as ISM",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "No targeted therapy exists for SM",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Imatinib is first-line for all SM",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "AVAPRITINIB: Selective KIT D816V inhibitor, FDA-approved for advanced SM (ASM, SM-AHN, MCL), high response rates (75%+); MIDOSTAURIN: Multi-kinase inhibitor, also FDA-approved for advanced SM; CLADRIBINE: Cytoreductive, used if TKIs unavailable; IMATINIB: Only effective if KIT D816V NEGATIVE (rare); Allogeneic HCT for eligible patients with advanced disease",
+              "correct": true
+            }
+          ],
+          "explanation": "Advanced SM treatment: (1) AVAPRITINIB: Potent, selective KIT D816V inhibitor, FDA-approved for advanced SM (ASM, SM-AHN, MCL). PATHFINDER trial: 75% ORR, significant reductions in tryptase, MC burden, spleen size. Also approved for ISM (lower dose) for symptom control; (2) MIDOSTAURIN: Multi-kinase inhibitor (KIT, FLT3, PDGFRα), FDA-approved for advanced SM, 60% ORR; (3) CLADRIBINE: Purine analog, cytoreductive; (4) INTERFERON-α: Older option; (5) IMATINIB: Only for D816V-NEGATIVE SM or FIP1L1-PDGFRA+ (rare) - D816V confers resistance; (6) Allogeneic HCT: For eligible patients with refractory/progressive advanced SM.",
+          "whyChain": [
+            {
+              "why": "Why not imatinib for most SM?",
+              "answer": "KIT D816V mutation (present in >90% of adult SM) causes conformational change that prevents imatinib binding - intrinsic resistance. Avapritinib was designed to specifically target the D816V mutant conformation. Imatinib only works for rare D816V-negative cases or when FIP1L1-PDGFRA fusion is present (as in some SM with eosinophilia).",
+              "source": "2023 SM Update",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "mc-syn-1",
+          "stem": "Returning to the original patient.",
+          "question": "What is the complete management approach?",
+          "options": [
+            {
+              "id": "A",
+              "text": "No further workup needed",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Observation only without treatment",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Diagnosis: Bone marrow biopsy with tryptase, CD25, KIT D816V mutation (high-sensitivity PCR); Classification: Likely ISM based on no C-findings; Symptoms: H1 + H2 antihistamines, cromolyn for GI, continue PPI; Anaphylaxis prevention: Epinephrine x2, venom immunotherapy indefinitely, avoid triggers, medical alert ID; Monitoring: Annual tryptase, CBC, LFTs, bone density; Referral: Mastocytosis specialty center",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Start chemotherapy immediately",
+              "correct": false
+            }
+          ],
+          "explanation": "Complete management: (1) CONFIRM DIAGNOSIS: Bone marrow biopsy with CD117, CD25, tryptase staining; Flow cytometry; KIT D816V by high-sensitivity PCR; Consider HαT testing; (2) CLASSIFY: Based on B/C findings - this patient likely ISM (good prognosis); (3) SYMPTOM MANAGEMENT: H1 antihistamines (cetirizine, consider higher doses), H2 blocker or continue PPI, Cromolyn sodium for diarrhea, Consider montelukast; (4) ANAPHYLAXIS PREVENTION: Epinephrine auto-injectors x2, Venom immunotherapy - START AND CONTINUE INDEFINITELY, Avoid triggers (NSAIDs with caution, opioids, contrast), Pre-medication protocol for procedures, Medical alert bracelet; (5) OSTEOPOROSIS: Already on treatment, continue; (6) MONITORING: Annual tryptase, CBC, LFTs; Repeat bone marrow if progression suspected; (7) REFERRAL: Mastocytosis center for comprehensive care.",
+          "sources": [
+            {
+              "text": "StatPearls: Mastocytosis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482476/"
+            }
+          ],
+          "sourceUrls": [
+            "https://onlinelibrary.wiley.com/doi/full/10.1002/ajh.26962",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC9820312/"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "id": "acute-appendicitis-deep-dive",
+  "title": "Acute Appendicitis",
+  "version": "1.0",
+  "totalQuestions": 18,
+  "estimatedTime": "35 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Emergency Medicine, Surgery, Primary Care",
+  "objectives": [
+    "Apply clinical scoring systems (Alvarado, AIR) for risk stratification",
+    "Understand appropriate use of imaging in suspected appendicitis",
+    "Distinguish complicated from uncomplicated appendicitis",
+    "Compare operative vs non-operative management approaches",
+    "Select appropriate antibiotic therapy"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "WSES Jerusalem Guidelines 2016",
+      "url": "https://wjes.biomedcentral.com/articles/10.1186/s13017-016-0090-5",
+      "keyPoints": [
+        "Clinical scoring systems guide risk stratification",
+        "CT has highest diagnostic accuracy in adults",
+        "Antibiotics may be considered for uncomplicated appendicitis",
+        "Laparoscopic appendectomy preferred when surgery indicated"
+      ]
+    },
+    {
+      "name": "SAGES Guideline 2024",
+      "url": "https://www.sages.org/publications/guidelines/diagnosis-and-treatment-of-appendicitis-sr-and-meta/"
+    }
+  ],
+  "vignette": {
+    "text": "A 28-year-old man presents to the ED with 18 hours of abdominal pain. Pain began periumbilically, then migrated to the right lower quadrant. He reports nausea with one episode of vomiting and anorexia. No diarrhea or urinary symptoms. No prior similar episodes.\n\nPast Medical History: None\n\nMedications: None\n\nAllergies: NKDA\n\nSocial History: Non-smoker, occasional alcohol",
+    "physicalExam": {
+      "general": "Uncomfortable-appearing male, lying still, reluctant to move",
+      "vitals": {
+        "BP": "128/76 mmHg",
+        "HR": "92 bpm",
+        "RR": "18/min",
+        "Temp": "100.8°F (38.2°C)",
+        "SpO2": "99% RA"
+      },
+      "abdomen": {
+        "inspection": "Flat, no distension, no surgical scars",
+        "auscultation": "Hypoactive bowel sounds",
+        "palpation": "Tenderness to palpation RLQ at McBurney's point, voluntary guarding, localized rebound tenderness",
+        "special_signs": "Positive Rovsing sign (RLQ pain with LLQ palpation), Positive psoas sign, Negative obturator sign"
+      },
+      "rectal": "No masses, no tenderness"
+    },
+    "diagnostics": {
+      "CBC": {
+        "WBC": "14,200/µL (82% neutrophils)",
+        "Hgb": "15.2 g/dL",
+        "Plt": "245,000/µL"
+      },
+      "CMP": "Normal",
+      "CRP": "45 mg/L (elevated)",
+      "Urinalysis": "Negative",
+      "Lipase": "Normal"
+    }
+  },
+  "layers": [
+    {
+      "id": "clinical-presentation",
+      "title": "Clinical Presentation",
+      "icon": "🩺",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "app-clin-1",
+          "stem": "This patient has classic migratory abdominal pain.",
+          "question": "What are the classic clinical features of acute appendicitis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "CLASSIC PRESENTATION (50-60% of cases): Periumbilical pain → migrates to RLQ over 12-24 hours; Anorexia (most consistent symptom - 80%); Nausea ± vomiting (after pain onset); Low-grade fever; EXAM FINDINGS: McBurney's point tenderness (1/3 distance from ASIS to umbilicus); Rovsing sign: RLQ pain with LLQ palpation; Psoas sign: Pain with right hip extension (retrocecal appendix); Obturator sign: Pain with internal rotation of flexed right hip (pelvic appendix); Guard­ing, rebound tenderness",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Pain starts in RLQ and stays there",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "High fever >40°C is typical early finding",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Diarrhea is the most common symptom",
+              "correct": false
+            }
+          ],
+          "explanation": "Classic appendicitis presentation: SYMPTOM PROGRESSION (Classic in ~50-60%): Vague periumbilical pain (visceral pain from distended appendix stimulating T10 dermatome) → Localizes to RLQ over 12-24 hours (parietal peritoneal irritation). ASSOCIATED SYMPTOMS: Anorexia - most consistent (~80%), Nausea ± vomiting (typically AFTER pain onset - key distinguishing feature), Low-grade fever (high fever suggests perforation). PHYSICAL EXAM: McBurney's point: 1/3 distance from ASIS to umbilicus - classic location of tenderness. Rovsing sign: RLQ pain with LLQ palpation (peritoneal irritation). Psoas sign: Pain with passive right hip extension OR active flexion against resistance (retrocecal appendix). Obturator sign: Pain with internal rotation of flexed right hip (pelvic appendix). Voluntary guarding → Involuntary rigidity (as inflammation progresses). Rebound tenderness. ATYPICAL PRESENTATIONS: Pregnant women (appendix displaced superiorly), Elderly (blunted symptoms), Retrocecal/pelvic appendix (altered pain location).",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.aafp.org/pubs/afp/issues/2018/0701/p25.html"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clinical-scores",
+      "title": "Clinical Scoring",
+      "icon": "📊",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "app-score-1",
+          "stem": "You want to risk-stratify this patient.",
+          "question": "How do clinical scoring systems help in appendicitis diagnosis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "ALVARADO SCORE (0-10 points): Migration of pain (1), Anorexia (1), Nausea/vomiting (1), RLQ tenderness (2), Rebound (1), Fever ≥37.3°C (1), Leukocytosis >10K (2), Left shift >75% neutrophils (1); INTERPRETATION: ≤3: Low risk - appendicitis unlikely (sens 96-99%); 4-6: Intermediate - imaging recommended; ≥7: High risk - surgical consultation (spec 81%); This patient: Migration(1) + Anorexia(1) + Nausea(1) + RLQ tenderness(2) + Rebound(1) + Fever(1) + Leukocytosis(2) + Left shift(1) = 10 → HIGH RISK",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Scores are only valid in children",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "All patients need CT regardless of score",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Scoring systems replace imaging entirely",
+              "correct": false
+            }
+          ],
+          "explanation": "Clinical Scoring Systems: ALVARADO SCORE (MANTRELS): M - Migration of pain to RLQ (1 point), A - Anorexia (1), N - Nausea/Vomiting (1), T - Tenderness in RLQ (2), R - Rebound tenderness (1), E - Elevated temperature ≥37.3°C (1), L - Leukocytosis >10,000 (2), S - Shift to left >75% neutrophils (1). Total: 10 points. INTERPRETATION: Score ≤3: Low probability - can often discharge with return precautions. Score 4-6: Intermediate - imaging recommended (CT or US). Score ≥7: High probability - surgical consultation warranted. Meta-analysis: Score <5 has 96-99% sensitivity to rule OUT appendicitis. AIR SCORE (Appendicitis Inflammatory Response): Includes CRP, More specific in high-risk patients. This patient's Alvarado: 1+1+1+2+1+1+2+1 = 10/10 → Very high probability, warrants surgical consultation.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://wjes.biomedcentral.com/articles/10.1186/s13017-016-0090-5",
+            "https://www.mdcalc.com/calc/617/alvarado-score-acute-appendicitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "imaging",
+      "title": "Diagnostic Imaging",
+      "icon": "🔬",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "app-img-1",
+          "stem": "You're considering imaging options.",
+          "question": "What is the role of imaging in suspected appendicitis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Plain X-rays are first-line imaging",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Imaging is never needed if clinical score is high",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "ULTRASOUND: First-line in children, pregnant women, young women; Operator-dependent; Sensitivity 75-90%, Specificity 85-95%; Positive findings: Non-compressible appendix >6mm, target sign, periappendiceal fluid; CT ABDOMEN/PELVIS: Highest accuracy - Sensitivity >95%, Specificity >95%; Gold standard in adults with intermediate/high clinical suspicion; Findings: Appendix >6mm diameter, wall thickening, periappendiceal fat stranding, appendicolith, abscess; Radiation exposure limits use in children/pregnancy; MRI: Alternative in pregnancy when US non-diagnostic",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "CT should be avoided in all patients",
+              "correct": false
+            }
+          ],
+          "explanation": "Imaging in Appendicitis: ULTRASOUND: First-line: Children, pregnant women, reproductive-age women. Advantages: No radiation, accessible, can evaluate ovarian pathology. Limitations: Operator-dependent, limited by body habitus, bowel gas. Sensitivity: 75-90%, Specificity: 85-95%. Positive findings: Appendix >6mm, non-compressible, aperistaltic, target sign (concentric rings), periappendiceal fluid. CT ABDOMEN/PELVIS: Gold standard in adults - highest diagnostic accuracy. Sensitivity: >95%, Specificity: >95%. Indications: Intermediate clinical probability, atypical presentation, obese patients. Key findings: Dilated appendix >6mm (often >7mm), Wall thickening >2mm, Periappendiceal fat stranding (inflammation), Appendicolith (associated with perforation), Abscess or phlegmon (complicated). Complications: Radiation exposure - limit in children/pregnancy. MRI: Second-line in pregnancy when US indeterminate. No radiation, excellent soft tissue. Limited by availability and cost.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.sages.org/publications/guidelines/diagnosis-and-treatment-of-appendicitis-sr-and-meta/",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC5894019/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complicated-vs-uncomplicated",
+      "title": "Complicated vs Uncomplicated",
+      "icon": "⚠️",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "app-comp-1",
+          "stem": "CT shows a dilated appendix at 9mm with fat stranding but no perforation.",
+          "question": "How do you distinguish complicated from uncomplicated appendicitis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "CT cannot distinguish complicated from uncomplicated",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Duration of symptoms doesn't affect classification",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "UNCOMPLICATED: Inflamed appendix without perforation, abscess, or gangrene; CT: Dilated appendix, fat stranding, NO extraluminal air/fluid/abscess; Clinical: Localized tenderness, <48h symptoms, no peritonitis; COMPLICATED: Perforation, Abscess/phlegmon, Gangrenous appendix; CT signs: Extraluminal air, abscess, loss of appendiceal wall integrity, appendicolith outside lumen; Clinical: Diffuse peritonitis, prolonged symptoms >48h, high fever, marked leukocytosis; IMPORTANCE: Guides treatment (antibiotics alone may be option for uncomplicated)",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "All appendicitis is considered complicated",
+              "correct": false
+            }
+          ],
+          "explanation": "Complicated vs Uncomplicated Appendicitis: UNCOMPLICATED APPENDICITIS: Pathology: Inflammation without perforation/gangrene. CT findings: Dilated appendix (>6mm), Periappendiceal fat stranding, Wall enhancement, NO extraluminal air or abscess. Clinical: Localized RLQ tenderness, Symptoms typically <48 hours, No generalized peritonitis. Lab: Moderate leukocytosis, CRP typically <60 mg/L. COMPLICATED APPENDICITIS (CAA): Includes: Perforation, Abscess formation, Phlegmon (inflammatory mass), Gangrenous/necrotic appendix. CT findings: Extraluminal air (perforation), Periappendiceal abscess or fluid collection, Loss of appendiceal wall integrity, Appendicolith outside appendix lumen. Clinical: Prolonged symptoms (>48 hours), High fever, Diffuse peritonitis, Sepsis. Lab: Marked leukocytosis (>18,000), CRP >60 mg/L, Elevated lactate. CLINICAL IMPORTANCE: Uncomplicated → May be candidate for antibiotic-only treatment. Complicated → Generally requires surgery ± percutaneous drainage.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10977505/",
+            "https://wjes.biomedcentral.com/articles/10.1186/s13017-016-0090-5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "treatment-options",
+      "title": "Treatment Options",
+      "icon": "💊",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "app-tx-1",
+          "stem": "This patient has uncomplicated appendicitis on CT.",
+          "question": "What are the treatment options for uncomplicated appendicitis?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All appendicitis requires emergency surgery within 1 hour",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "TWO APPROACHES: (1) APPENDECTOMY (Traditional standard): Laparoscopic preferred over open (fewer wound infections, shorter stay, faster recovery); Definitive treatment, eliminates recurrence; (2) ANTIBIOTIC-ONLY (Selected uncomplicated cases): APPAC trial: 73% success at 1 year, but 39% recurrence at 5 years; Patient selection criteria: Uncomplicated on imaging, No appendicolith, CRP <60, WBC <12K, Age <60, Symptom duration <24h; SHARED DECISION-MAKING recommended - discuss surgery vs antibiotics with patient",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Open surgery is preferred over laparoscopic",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Antibiotics are first-line for all patients",
+              "correct": false
+            }
+          ],
+          "explanation": "Treatment Options - Uncomplicated Appendicitis: APPENDECTOMY (Standard of Care): Laparoscopic preferred over open: Fewer wound infections, Shorter hospital stay, Faster return to activities, Longer operative time. Timing: Within 24 hours generally safe (not true emergency like perforation). Success rate: >99%, Recurrence: 0%. ANTIBIOTIC-ONLY TREATMENT (Selected Patients): Evidence: APPAC Trial - 73% initial success, but 27% required appendectomy within 1 year. 5-year data: 39% recurrence rate. PATIENT SELECTION for antibiotics: CT-confirmed uncomplicated (no perforation, abscess, appendicolith), CRP <60 mg/L, WBC <12,000, Age <60 years, Symptom duration <24 hours, Low Alvarado score (<4 per some criteria). Antibiotics used: IV followed by oral (typically 7-10 days total), Cover gram-negatives and anaerobes. SHARED DECISION-MAKING: Present both options. Surgery: Definitive, no recurrence risk. Antibiotics: Avoid surgery, but ~1 in 3 will eventually need appendectomy.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.sages.org/publications/guidelines/diagnosis-and-treatment-of-appendicitis-sr-and-meta/",
+            "https://wjes.biomedcentral.com/articles/10.1186/s13017-016-0090-5"
+          ]
+        },
+        {
+          "id": "app-tx-2",
+          "stem": "The patient chooses appendectomy.",
+          "question": "What is the perioperative antibiotic approach?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Only gram-positive coverage needed",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "No antibiotics needed for appendectomy",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "All patients need 14 days of antibiotics",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "UNCOMPLICATED APPENDICITIS: Preoperative prophylaxis only (single dose); Cover gram-negatives + anaerobes; Options: Cefoxitin, Cefazolin + metronidazole, Piperacillin-tazobactam; Post-op antibiotics generally NOT needed; COMPLICATED APPENDICITIS: Preoperative antibiotics + Continue post-operatively; Duration: 3-5 days (shorter courses now favored over traditional 7-10 days); IV → PO switch when tolerating diet, afebrile, WBC normalizing; Same spectrum coverage (gram-neg + anaerobes)",
+              "correct": true
+            }
+          ],
+          "explanation": "Perioperative Antibiotics: UNCOMPLICATED APPENDICITIS: Preoperative prophylaxis ONLY (within 60 min of incision). Coverage: Gram-negatives (E. coli, Klebsiella) + Anaerobes (Bacteroides). Options: Cefoxitin 2g IV (single agent), Cefazolin 2g + Metronidazole 500mg IV, Ampicillin-sulbactam 3g IV. Post-operative antibiotics: Generally NOT indicated for uncomplicated cases. COMPLICATED APPENDICITIS (Perforation/Abscess): Preoperative antibiotics: Start promptly. Continue post-operatively. Duration: Recent evidence favors SHORT courses (3-5 days), Traditional 7-10 days likely unnecessary. IV → PO transition when: Tolerating oral intake, Afebrile for 24 hours, WBC trending down, No signs of ongoing infection. Oral options: Amoxicillin-clavulanate, Ciprofloxacin + metronidazole, Moxifloxacin. Coverage spectrum: Same - gram-negatives + anaerobes.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.intechopen.com/chapters/1202870"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complicated-management",
+      "title": "Complicated Appendicitis",
+      "icon": "🏥",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "app-complic-1",
+          "stem": "A different patient presents with 5 days of RLQ pain and CT shows a periappendiceal abscess.",
+          "question": "How is complicated appendicitis with abscess managed?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All abscesses require immediate surgery",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "ABSCESS/PHLEGMON MANAGEMENT: If well-contained abscess: Percutaneous drainage + IV antibiotics (non-operative initially); Allows inflammation to resolve before surgery; INTERVAL APPENDECTOMY: Traditionally performed 6-8 weeks after resolution; Recent evidence questions necessity - recurrence only 5-20%; Consider if: Persistent symptoms, Concern for malignancy (age >40), Appendicolith present; If peritonitis/sepsis/failed drainage: Urgent operative intervention; Laparoscopic approach still often feasible",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Antibiotics alone without drainage for large abscess",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Interval appendectomy is always required",
+              "correct": false
+            }
+          ],
+          "explanation": "Complicated Appendicitis Management: ABSCESS/PHLEGMON (No Peritonitis): Initial: NON-OPERATIVE management often preferred. Percutaneous drainage (if abscess >3-4cm and accessible). IV antibiotics. Allows resolution of inflammation before surgery. Success rate: >90% with this approach. INTERVAL APPENDECTOMY: Traditionally: 6-8 weeks after resolution. Recent evidence: Routine interval appendectomy may not be necessary. Recurrence without appendectomy: Only 5-20%. Indications FOR interval appendectomy: Age >40 (rule out malignancy - colonoscopy also recommended), Appendicolith present (higher recurrence), Recurrent symptoms, Patient preference. PERITONITIS/SEPSIS/FAILED NON-OPERATIVE: Urgent surgical intervention required. Laparoscopic approach often still feasible. May require more extensive surgery (right hemicolectomy if cecal involvement). Drain placement often needed. Longer post-op antibiotic course.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.sages.org/publications/guidelines/diagnosis-and-treatment-of-appendicitis-sr-and-meta/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-populations",
+      "title": "Special Populations",
+      "icon": "👶",
+      "color": "#ec4899",
+      "questions": [
+        {
+          "id": "app-spec-1",
+          "stem": "You see a pregnant patient and an elderly patient with RLQ pain.",
+          "question": "How does appendicitis presentation differ in special populations?",
+          "options": [
+            {
+              "id": "A",
+              "text": "PREGNANCY: Most common surgical emergency; Appendix displaced superiorly by gravid uterus (RUQ pain in 3rd trimester); Leukocytosis normal in pregnancy (up to 16K); Imaging: US first, MRI if non-diagnostic (avoid CT if possible); Laparoscopic appendectomy safe in all trimesters; ELDERLY: Atypical presentation common, blunted symptoms; Higher perforation rate at presentation (50-70%); Higher mortality; Lower threshold for imaging; CHILDREN: Pediatric Appendicitis Score; Higher perforation rate (younger = higher risk); US preferred to minimize radiation",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Elderly patients always have classic presentation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Surgery is contraindicated in pregnancy",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Presentation is identical in all age groups",
+              "correct": false
+            }
+          ],
+          "explanation": "Special Populations: PREGNANCY: Most common non-obstetric surgical emergency. Anatomic changes: Appendix displaced upward and laterally by gravid uterus (pain may be RUQ by 3rd trimester). Physiologic changes: Leukocytosis up to 16,000 normal in pregnancy. Imaging: Ultrasound first-line, MRI if US non-diagnostic (no radiation), CT only if MRI unavailable. Treatment: Laparoscopic appendectomy safe in all trimesters. Risks of delayed diagnosis: Perforation increases fetal loss. ELDERLY (>65 years): Atypical presentation very common. Blunted fever, less localized pain. Higher perforation rate at presentation: 50-70% (vs 20% in young adults). Higher morbidity and mortality. Recommendations: Low threshold for CT imaging, Earlier surgical consultation, Evaluate for underlying malignancy. CHILDREN: Use Pediatric Appendicitis Score (age-specific). Higher perforation rates (especially <5 years - up to 80%). US first-line (avoid radiation). Laparoscopic approach preferred.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.aafp.org/pubs/afp/issues/2018/0701/p25.html",
+            "https://wjes.biomedcentral.com/articles/10.1186/s13017-016-0090-5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "app-syn-1",
+          "stem": "This 28-year-old male has classic presentation and Alvarado 10.",
+          "question": "What is the complete management approach?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Complete approach: (1) CLINICAL ASSESSMENT: Classic presentation - periumbilical → RLQ migration, anorexia, nausea, low-grade fever; Alvarado score 10/10 = HIGH probability; (2) IMAGING: Given high clinical probability, CT confirms diagnosis - dilated appendix 9mm, fat stranding, no perforation/abscess = UNCOMPLICATED; (3) TREATMENT OPTIONS: Discuss appendectomy vs antibiotics with patient; Surgery preferred: Definitive, no recurrence, patient is good surgical candidate; (4) SURGERY: Laparoscopic appendectomy; Preoperative antibiotics (cefoxitin or cefazolin + metronidazole); (5) POST-OP: No post-op antibiotics needed for uncomplicated; Diet advancement, discharge in 24-48h typically",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Observation only, no imaging or treatment",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Immediate open surgery without imaging",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "14 days of oral antibiotics alone",
+              "correct": false
+            }
+          ],
+          "explanation": "Complete Management for this patient: STEP 1 - CLINICAL ASSESSMENT: Classic presentation: Periumbilical pain → RLQ migration (18 hours), Anorexia, nausea, vomiting, Low-grade fever (100.8°F), McBurney's point tenderness, positive Rovsing and psoas signs. Alvarado Score: 10/10 (maximal) → HIGH probability. STEP 2 - IMAGING: Given high clinical probability, CT reasonable to confirm and assess for complications. Findings: Dilated appendix (9mm), periappendiceal fat stranding, no extraluminal air or abscess → UNCOMPLICATED APPENDICITIS. STEP 3 - TREATMENT DISCUSSION: Present options: Appendectomy (definitive, 0% recurrence) vs Antibiotics (avoid surgery but ~30% recurrence). Young healthy male → appendectomy preferred (avoids future episodes). STEP 4 - OPERATIVE MANAGEMENT: NPO, IV fluids. Preoperative antibiotics: Cefoxitin 2g IV (or cefazolin + metronidazole). Laparoscopic appendectomy (preferred over open). STEP 5 - POST-OPERATIVE: Uncomplicated → NO post-op antibiotics needed. Advance diet as tolerated. Typical discharge: 24-48 hours. Return precautions: Fever, wound infection, increased pain.",
+          "sources": [
+            {
+              "text": "StatPearls: Appendicitis. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.sages.org/publications/guidelines/diagnosis-and-treatment-of-appendicitis-sr-and-meta/",
+            "https://www.aafp.org/pubs/afp/issues/2018/0701/p25.html"
+          ]
+        }
+      ]
+    }
+  ]
+}

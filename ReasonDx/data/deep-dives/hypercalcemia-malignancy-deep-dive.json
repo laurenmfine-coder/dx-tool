@@ -1,0 +1,510 @@
+{
+  "id": "hypercalcemia-malignancy-deep-dive",
+  "title": "Hypercalcemia of Malignancy",
+  "version": "1.0",
+  "totalQuestions": 16,
+  "estimatedTime": "30 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Oncology Fellows, Endocrinology, Critical Care",
+  "objectives": [
+    "Understand mechanisms of hypercalcemia of malignancy (PTHrP, osteolytic, calcitriol)",
+    "Classify severity and recognize symptoms",
+    "Initiate appropriate treatment (hydration, calcitonin, bisphosphonates, denosumab)",
+    "Apply Endocrine Society 2022 guidelines",
+    "Manage refractory hypercalcemia",
+    "Recognize poor prognosis associated with HCM"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "Endocrine Society Clinical Practice Guideline: Treatment of Hypercalcemia of Malignancy",
+      "citation": "Goldner W, et al. J Clin Endocrinol Metab. 2023;108(3):507-528",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36545746/",
+      "keyPoints": [
+        "Denosumab or IV bisphosphonate recommended for all HCM",
+        "Denosumab preferred over bisphosphonates",
+        "Add calcitonin for severe HCM (Ca >14 mg/dL)",
+        "Glucocorticoids for calcitriol-mediated HCM (lymphoma)"
+      ]
+    },
+    {
+      "name": "Endocrine Society Hypercalcemia Resources",
+      "url": "https://www.endocrine.org/clinical-practice-guidelines/hypercalcemia"
+    }
+  ],
+  "vignette": {
+    "text": "A 68-year-old woman with metastatic squamous cell lung cancer presents with confusion, severe constipation, polyuria, and profound weakness over 2 weeks. She has known bone metastases and was recently started on immunotherapy. She appears dehydrated and lethargic.\n\nPast Medical History: Squamous cell lung cancer with bone metastases, Type 2 diabetes, CKD stage 3\n\nMedications: Pembrolizumab, metformin, lisinopril\n\nAllergies: NKDA",
+    "physicalExam": {
+      "general": "Cachectic, lethargic, oriented to person only",
+      "vitals": {
+        "BP": "102/68 mmHg",
+        "HR": "98 bpm",
+        "Temp": "98.2°F"
+      },
+      "cardiovascular": "Tachycardic, regular, no murmurs",
+      "pulmonary": "Decreased breath sounds at right base",
+      "abdomen": "Distended, hypoactive bowel sounds, non-tender",
+      "neuro": "Lethargic, slow responses, no focal deficits",
+      "skin": "Poor turgor, dry mucous membranes"
+    },
+    "diagnostics": {
+      "labs": {
+        "Calcium_total": {
+          "value": "15.8 mg/dL",
+          "reference": "8.5-10.5",
+          "flag": "CRITICALLY ELEVATED"
+        },
+        "Albumin": {
+          "value": "3.2 g/dL",
+          "reference": "3.5-5.0"
+        },
+        "Calcium_corrected": {
+          "value": "16.6 mg/dL",
+          "flag": "SEVERELY ELEVATED"
+        },
+        "PTH": {
+          "value": "8 pg/mL",
+          "reference": "15-65",
+          "flag": "SUPPRESSED"
+        },
+        "PTHrP": {
+          "value": "85 pmol/L",
+          "reference": "<2",
+          "flag": "MARKEDLY ELEVATED"
+        },
+        "Creatinine": {
+          "value": "2.1 mg/dL",
+          "reference": "0.6-1.2",
+          "flag": "ELEVATED (baseline 1.4)"
+        },
+        "Phosphorus": {
+          "value": "2.8 mg/dL",
+          "reference": "2.5-4.5"
+        }
+      },
+      "ECG": "Shortened QT interval"
+    }
+  },
+  "layers": [
+    {
+      "id": "mechanisms",
+      "title": "Mechanisms of HCM",
+      "icon": "🔬",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "hcm-mech-1",
+          "stem": "This patient has elevated PTHrP and suppressed PTH.",
+          "question": "What are the mechanisms of hypercalcemia of malignancy?",
+          "options": [
+            {
+              "id": "A",
+              "text": "HUMORAL (PTHrP-mediated, 80%): Tumor secretes PTHrP → bone resorption, renal calcium retention; squamous cell cancers, renal, breast; LOCAL OSTEOLYTIC (20%): Direct bone metastases → local cytokine release → bone destruction; breast, myeloma, lung; CALCITRIOL-MEDIATED (<1%): Lymphoma produces 1,25-vitamin D; PTH-MEDIATED: Parathyroid carcinoma (rare)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "HCM is always due to bone metastases",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Only hematologic malignancies cause HCM",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "PTH is elevated in HCM",
+              "correct": false
+            }
+          ],
+          "explanation": "Mechanisms of HCM: (1) HUMORAL HYPERCALCEMIA (PTHrP) - 80%: Tumor produces PTHrP (structurally similar to PTH) → increased bone resorption, increased renal calcium reabsorption, decreased phosphorus reabsorption. Common: Squamous cell carcinomas (lung, head/neck), renal cell, breast, bladder; (2) LOCAL OSTEOLYTIC - 20%: Direct bone destruction by metastases releasing cytokines (IL-6, TNF, RANKL). Common: Breast cancer, multiple myeloma, lung; (3) CALCITRIOL-MEDIATED - <1%: Tumor produces 1,25-dihydroxyvitamin D. Common: Hodgkin/non-Hodgkin lymphoma, ovarian dysgerminoma; (4) PTH-MEDIATED: Parathyroid carcinoma or ectopic PTH (extremely rare). This patient: PTHrP-mediated (humoral) - suppressed PTH, elevated PTHrP, squamous cell cancer.",
+          "whyChain": [
+            {
+              "why": "Why is PTH suppressed?",
+              "answer": "Elevated calcium from any cause suppresses parathyroid glands via calcium-sensing receptor. In HCM, the hypercalcemia is caused by PTHrP (not PTH), so PTH is appropriately suppressed. Suppressed PTH with elevated calcium rules out primary hyperparathyroidism and confirms malignancy-related or other non-PTH cause.",
+              "source": "Endocrine Society Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/36545746/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "severity",
+      "title": "Severity & Symptoms",
+      "icon": "⚠️",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "hcm-sev-1",
+          "stem": "This patient has calcium 16.6 mg/dL (corrected) with confusion and lethargy.",
+          "question": "How is hypercalcemia severity classified and what are the symptoms?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Neurologic symptoms don't occur",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "All hypercalcemia is equally severe",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "MILD: Ca 10.5-12 mg/dL (often asymptomatic); MODERATE: Ca 12-14 mg/dL (fatigue, constipation, polyuria); SEVERE: Ca >14 mg/dL (confusion, stupor, coma, cardiac arrhythmias - ONCOLOGIC EMERGENCY); Mnemonic 'Stones, Bones, Groans, Moans, Psychiatric Overtones' - but HCM typically presents acutely with severe symptoms",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Only calcium >20 is dangerous",
+              "correct": false
+            }
+          ],
+          "explanation": "Hypercalcemia severity: MILD (10.5-12 mg/dL): Often asymptomatic or vague fatigue; MODERATE (12-14 mg/dL): Fatigue, constipation, nausea, polyuria, polydipsia; SEVERE (>14 mg/dL): Altered mental status (confusion → stupor → coma), cardiac arrhythmias, severe dehydration, AKI - ONCOLOGIC EMERGENCY. Symptoms by system: GI (constipation, nausea, anorexia, pancreatitis), Renal (polyuria, nephrolithiasis, AKI), Neuro (confusion, weakness, lethargy, coma), Cardiac (shortened QT, arrhythmias, bradycardia). This patient: SEVERE HCM (16.6) with encephalopathy, AKI, dehydration.",
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/36545746/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnostic Workup",
+      "icon": "🔬",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "hcm-dx-1",
+          "stem": "You need to confirm the etiology of hypercalcemia.",
+          "question": "What is the diagnostic workup for hypercalcemia of malignancy?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Imaging is the only test needed",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Total calcium alone is sufficient",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Corrected calcium (for albumin) or ionized calcium; PTH (suppressed in HCM vs elevated in hyperparathyroidism); PTHrP (elevated in humoral HCM); 1,25-dihydroxyvitamin D (elevated in lymphoma); Phosphorus (low in PTHrP-mediated); Creatinine (assess AKI); 25-hydroxyvitamin D (rule out toxicity)",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "PTH is always elevated in cancer",
+              "correct": false
+            }
+          ],
+          "explanation": "HCM diagnostic workup: (1) CALCIUM: Correct for albumin (add 0.8 mg/dL per 1 g/dL albumin <4) or check ionized calcium; (2) PTH: Key discriminator - SUPPRESSED in HCM (<20), ELEVATED in primary hyperparathyroidism; (3) PTHrP: Elevated in humoral HCM (80% of cases); (4) 1,25-dihydroxyvitamin D: Elevated in lymphoma-associated HCM; (5) Phosphorus: Low/normal in PTHrP (PTHrP promotes phosphaturia), elevated in osteolytic; (6) Creatinine: Assess AKI (common); (7) 25-hydroxyvitamin D: Rule out vitamin D toxicity. This patient: Corrected Ca 16.6, suppressed PTH, elevated PTHrP → humoral HCM from squamous cell cancer.",
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC4683803/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "initial-treatment",
+      "title": "Initial Treatment",
+      "icon": "💧",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "hcm-tx-1",
+          "stem": "You need to initiate urgent treatment for this severely hypercalcemic patient.",
+          "question": "What is the initial treatment for severe hypercalcemia of malignancy?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Oral calcium binders",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Step 1: AGGRESSIVE IV HYDRATION with normal saline (200-300 mL/hr initially, adjust for volume status and cardiac function) - dilutes calcium, promotes calciuresis; Step 2: CALCITONIN 4 IU/kg SC/IM q12h for severe HCM (Ca >14) - rapid onset (4-6h) but tachyphylaxis by 48-72h; Step 3: Antiresorptive therapy (bisphosphonate or denosumab); Avoid loop diuretics unless volume overloaded",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Start loop diuretics immediately",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Fluid restriction is first-line",
+              "correct": false
+            }
+          ],
+          "explanation": "Initial HCM treatment: (1) IV HYDRATION: Normal saline 200-500 mL/hr initially (adjust for cardiac/renal status), goal 2-4 L in first 24 hours. Mechanism: Volume expansion dilutes calcium, increases GFR, promotes calciuresis; (2) CALCITONIN (for severe HCM >14 mg/dL): 4 IU/kg SC or IM q12h. Rapid onset (4-6 hours), but TACHYPHYLAXIS develops by 48-72 hours - use as bridge to bisphosphonates/denosumab; (3) Antiresorptive therapy: Start simultaneously with hydration/calcitonin. LOOP DIURETICS: Only if volume overloaded - do NOT give routinely as they worsen dehydration.",
+          "whyChain": [
+            {
+              "why": "Why not furosemide routinely?",
+              "answer": "Historically, loop diuretics were used to promote calciuresis. However, they also cause volume depletion (worsening hypercalcemia), hypokalemia, and hypomagnesemia. Current guidelines: Use ONLY if patient is volume overloaded after adequate hydration, not as routine treatment.",
+              "source": "Endocrine Society Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/36545746/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "antiresorptive",
+      "title": "Antiresorptive Therapy",
+      "icon": "💊",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "hcm-bisp-1",
+          "stem": "You need to choose between bisphosphonates and denosumab.",
+          "question": "What antiresorptive therapy is recommended for HCM?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Oral bisphosphonates are first-line",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Endocrine Society recommends DENOSUMAB over bisphosphonates; ZOLEDRONIC ACID 4mg IV over 15 min (most potent bisphosphonate) - onset 2-4 days, duration 2-4 weeks, renally cleared; DENOSUMAB 120mg SC - not renally cleared (preferred in renal impairment), onset 3-4 days, can repeat weekly for 4 weeks initially; Wait ≥7 days before repeating bisphosphonate",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Denosumab is contraindicated in HCM",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Bisphosphonates are always preferred",
+              "correct": false
+            }
+          ],
+          "explanation": "Antiresorptive therapy (2022 Endocrine Society Guidelines): DENOSUMAB PREFERRED over bisphosphonates (conditional recommendation). BISPHOSPHONATES: Zoledronic acid 4 mg IV over 15 min (most potent, most commonly used), Pamidronate 60-90 mg IV over 2-4 hours. Onset: 2-4 days, Peak: 4-7 days, Duration: 2-4 weeks. Renally cleared - reduce dose or avoid in severe CKD. Don't repeat <7 days. DENOSUMAB: 120 mg SC. Onset: 3-4 days. NOT renally cleared - preferred in renal impairment. Can give weekly x4 initially, then monthly. May cause profound hypocalcemia. This patient: Consider denosumab given her CKD (Cr 2.1).",
+          "whyChain": [
+            {
+              "why": "Why is denosumab preferred?",
+              "answer": "Denosumab advantages: (1) Not renally cleared - safe in renal impairment; (2) Effective in bisphosphonate-refractory HCM (64-70% response); (3) Can be dosed more frequently initially. Disadvantages: Risk of severe hypocalcemia (especially in renal impairment), longer duration of effect makes hypocalcemia harder to manage.",
+              "source": "Endocrine Society Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/36545746/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-situations",
+      "title": "Special Situations",
+      "icon": "⚕️",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "hcm-special-1",
+          "stem": "A different patient has hypercalcemia from lymphoma.",
+          "question": "How is calcitriol-mediated hypercalcemia (lymphoma) treated?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Calcitonin is the only treatment",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Treatment is identical to PTHrP-mediated",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Glucocorticoids are contraindicated",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "GLUCOCORTICOIDS first-line (prednisone 40-60 mg/day or equivalent) - suppress 1-alpha-hydroxylase in tumor; If severe or refractory despite steroids, ADD denosumab or bisphosphonate; Onset of steroid effect: 2-5 days; Also applies to granulomatous diseases (sarcoidosis) causing hypercalcemia",
+              "correct": true
+            }
+          ],
+          "explanation": "Calcitriol-mediated hypercalcemia (lymphoma, granulomatous disease): GLUCOCORTICOIDS are first-line. Mechanism: Suppress extra-renal 1-alpha-hydroxylase activity that converts 25-OH vitamin D to active 1,25-OH vitamin D. Dosing: Prednisone 40-60 mg/day or hydrocortisone 200-300 mg/day IV. Onset: 2-5 days. If severe or persistent despite steroids: Add bisphosphonate or denosumab. Also applies to: Sarcoidosis, tuberculosis, other granulomatous diseases, some ovarian tumors.",
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.endocrine.org/clinical-practice-guidelines/hypercalcemia"
+          ]
+        },
+        {
+          "id": "hcm-special-2",
+          "stem": "Another patient has refractory hypercalcemia despite zoledronic acid.",
+          "question": "How is refractory/recurrent HCM managed?",
+          "options": [
+            {
+              "id": "A",
+              "text": "No options exist for refractory HCM",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Stop all treatment",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "DENOSUMAB is recommended for bisphosphonate-refractory HCM (64-70% achieve response); May also consider: Repeat bisphosphonate (wait ≥7 days), Hemodialysis with low-calcium dialysate for severe/life-threatening HCM with AKI, Gallium nitrate (if available), Cinacalcet (for parathyroid carcinoma)",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Increase bisphosphonate dose indefinitely",
+              "correct": false
+            }
+          ],
+          "explanation": "Refractory/recurrent HCM management: (1) DENOSUMAB: Recommended for bisphosphonate-refractory HCM - 64-70% response rate in patients who failed bisphosphonates; (2) Repeat bisphosphonate: Wait at least 7 days, may try different agent; (3) HEMODIALYSIS: For severe, life-threatening HCM with renal failure - use low-calcium dialysate; (4) Gallium nitrate: Effective but limited availability, requires continuous infusion; (5) Cinacalcet: For parathyroid carcinoma specifically. Ultimate treatment: Control of underlying malignancy is essential for durable HCM control.",
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/36545746/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prognosis",
+      "title": "Prognosis",
+      "icon": "📊",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "hcm-prog-1",
+          "stem": "You are discussing prognosis with the patient's family.",
+          "question": "What is the prognosis of hypercalcemia of malignancy?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All patients survive >1 year",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "HCM has excellent long-term prognosis",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "HCM indicates POOR PROGNOSIS - median survival often weeks to months; Reflects advanced, often refractory cancer; Higher calcium levels and PTHrP correlate with worse survival; Treatment provides symptom relief and may enable further cancer therapy; Addressing underlying malignancy is essential for HCM control",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Prognosis is unrelated to cancer status",
+              "correct": false
+            }
+          ],
+          "explanation": "HCM prognosis: POOR - median survival often weeks to 3-4 months. HCM typically indicates advanced malignancy with high tumor burden. Higher calcium levels and higher PTHrP correlate with worse outcomes. Importance of treatment: (1) Symptom relief - improves quality of life significantly; (2) Enables further cancer therapy - can't give chemotherapy to confused, dehydrated patient; (3) Prevents complications (arrhythmias, renal failure, coma). Long-term HCM control depends on treating underlying malignancy. Goals of care discussion often appropriate.",
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC4675637/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "hcm-syn-1",
+          "stem": "Returning to the original patient with severe PTHrP-mediated HCM.",
+          "question": "What is the complete management approach?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Immediate: ICU admission, cardiac monitoring (QT), IV NS 200-300 mL/hr (adjust for cardiac status), Calcitonin 4 IU/kg SC q12h (bridge therapy x48-72h), Denosumab 120mg SC (preferred given CKD); Monitoring: Calcium, creatinine q6-12h, watch for hypocalcemia after denosumab; Supportive: Hold nephrotoxins (lisinopril), treat underlying cancer when stable; Prognosis discussion with family",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Oral medications only",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Dialysis immediately for all patients",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Observation only",
+              "correct": false
+            }
+          ],
+          "explanation": "Complete management for this patient: IMMEDIATE: (1) ICU/step-down admission, continuous cardiac monitoring (arrhythmia risk); (2) Aggressive IV NS hydration (200-300 mL/hr, adjust for cardiac status); (3) CALCITONIN 4 IU/kg SC q12h - bridge therapy while waiting for antiresorptive effect (limit to 48-72h due to tachyphylaxis); (4) DENOSUMAB 120mg SC - preferred over bisphosphonate given her CKD (Cr 2.1); (5) Hold nephrotoxins (lisinopril, metformin). MONITORING: Calcium q6-12h, renal function, phosphorus. Watch for hypocalcemia after denosumab (especially with renal impairment). AFTER STABILIZATION: Resume/modify cancer therapy; Goals of care discussion given poor prognosis associated with HCM; May need repeated denosumab every 4 weeks.",
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/36545746/"
+          ]
+        }
+      ]
+    }
+  ]
+}
