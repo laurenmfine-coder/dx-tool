@@ -284,6 +284,181 @@
         }
         .schedule-item h5 { font-size: 0.85rem; margin-bottom: 4px; }
         .schedule-item p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+        
+        /* Feedback Badge */
+        .feedback-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: #ef4444;
+            border-radius: 9px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #fff;
+            margin-left: 6px;
+        }
+        
+        /* Feedback Table */
+        .feedback-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .feedback-table th, .feedback-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .feedback-table th {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+        .feedback-table tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        /* Feedback Type Icons */
+        .type-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+        .type-icon span { font-size: 1.1rem; }
+        
+        /* Priority Indicators */
+        .priority-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .priority-low { background: #4ade80; }
+        .priority-medium { background: #fbbf24; }
+        .priority-high { background: #ef4444; }
+        
+        /* Status Badges for Feedback */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .status-new { background: rgba(96,165,250,0.2); color: #60a5fa; }
+        .status-reviewed { background: rgba(251,191,36,0.2); color: #fbbf24; }
+        .status-in-progress { background: rgba(167,139,250,0.2); color: #a78bfa; }
+        .status-resolved { background: rgba(74,222,128,0.2); color: #4ade80; }
+        .status-declined { background: rgba(239,68,68,0.2); color: #ef4444; }
+        
+        /* Feedback Filters */
+        .feedback-filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-select {
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .filter-select:focus { outline: none; border-color: #60a5fa; }
+        .filter-select option { background: #1e293b; }
+        
+        /* Feedback Detail Modal */
+        .feedback-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+        }
+        .feedback-modal.open { display: flex; }
+        .feedback-modal-content {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .feedback-modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .feedback-modal-header h3 { margin: 0; font-size: 1.1rem; }
+        .feedback-modal-close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .feedback-modal-close:hover { background: rgba(255,255,255,0.2); }
+        .feedback-modal-body { padding: 20px; }
+        .feedback-detail-row {
+            margin-bottom: 16px;
+        }
+        .feedback-detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        .feedback-detail-value {
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .feedback-detail-value a { color: #60a5fa; }
+        .feedback-modal-actions {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+        }
+        .action-btn:hover { opacity: 0.85; }
+        .action-btn.primary { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; }
+        .action-btn.success { background: rgba(74,222,128,0.2); border: 1px solid #4ade80; color: #4ade80; }
+        .action-btn.danger { background: rgba(239,68,68,0.2); border: 1px solid #ef4444; color: #ef4444; }
+        .action-btn.secondary { background: rgba(255,255,255,0.1); color: #fff; }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.5);
+        }
+        .empty-state-icon { font-size: 3rem; margin-bottom: 16px; opacity: 0.5; }
+        .empty-state h4 { color: rgba(255,255,255,0.7); margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -331,9 +506,9 @@
                     <div class="stat-detail">New versions available</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Total Content</h3>
-                    <div class="stat-value" style="color: #60a5fa;">1,025+</div>
-                    <div class="stat-detail">Educational pieces</div>
+                    <h3>User Feedback</h3>
+                    <div class="stat-value" style="color: #a78bfa;" id="feedbackCount">0</div>
+                    <div class="stat-detail">Pending review</div>
                 </div>
             </div>
             
@@ -341,6 +516,7 @@
                 <button class="tab" onclick="showTab('links')">🔗 Link Checker</button>
                 <button class="tab" onclick="showTab('content')">📄 Content Freshness</button>
                 <button class="tab active" onclick="showTab('guidelines')">📚 Guideline Monitor</button>
+                <button class="tab" onclick="showTab('feedback')">📣 User Feedback <span class="feedback-badge" id="feedbackBadge" style="display:none"></span></button>
                 <button class="tab" onclick="showTab('schedule')">⏰ Audit Schedule</button>
             </div>
             
@@ -466,6 +642,87 @@
                 </div>
             </div>
             
+            <!-- User Feedback Tab -->
+            <div class="tab-content" id="tab-feedback">
+                <div class="audit-panel">
+                    <div class="panel-header">
+                        <h2>📣 User Feedback Queue</h2>
+                        <div class="panel-actions">
+                            <button class="run-btn" onclick="refreshFeedback()">🔄 Refresh</button>
+                            <button class="export-btn" onclick="exportFeedback()">📥 Export All</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Filters -->
+                        <div class="feedback-filters">
+                            <select class="filter-select" id="filterType" onchange="filterFeedback()">
+                                <option value="">All Types</option>
+                                <option value="bug">🐛 Bug / Error</option>
+                                <option value="broken-link">🔗 Broken Link</option>
+                                <option value="content-error">📝 Content Error</option>
+                                <option value="ui-issue">🎨 UI / Display</option>
+                                <option value="request-content">📚 New Content</option>
+                                <option value="request-feature">✨ New Feature</option>
+                                <option value="resource">📎 Resource</option>
+                                <option value="other">💭 Other</option>
+                            </select>
+                            <select class="filter-select" id="filterStatus" onchange="filterFeedback()">
+                                <option value="">All Statuses</option>
+                                <option value="new">New</option>
+                                <option value="reviewed">Reviewed</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="resolved">Resolved</option>
+                                <option value="declined">Declined</option>
+                            </select>
+                            <select class="filter-select" id="filterPriority" onchange="filterFeedback()">
+                                <option value="">All Priorities</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Feedback Table -->
+                        <div id="feedbackTableContainer">
+                            <table class="feedback-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Type</th>
+                                        <th>Summary</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="feedbackTableBody">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Empty State -->
+                        <div class="empty-state" id="feedbackEmptyState" style="display: none;">
+                            <div class="empty-state-icon">📭</div>
+                            <h4>No Feedback Yet</h4>
+                            <p>User feedback will appear here when submitted through the feedback widget.</p>
+                        </div>
+                        
+                        <!-- Summary Stats -->
+                        <div class="schedule-panel" style="margin-top: 24px;">
+                            <h3>📊 Feedback Summary</h3>
+                            <div class="schedule-grid" id="feedbackSummaryGrid">
+                                <div class="schedule-item"><h5>Total Submissions</h5><p id="totalFeedback">0</p></div>
+                                <div class="schedule-item"><h5>Pending Review</h5><p id="pendingFeedback">0</p></div>
+                                <div class="schedule-item"><h5>In Progress</h5><p id="inProgressFeedback">0</p></div>
+                                <div class="schedule-item"><h5>Resolved</h5><p id="resolvedFeedback">0</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Schedule Tab -->
             <div class="tab-content" id="tab-schedule">
                 <div class="audit-panel">
@@ -480,6 +737,63 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Feedback Detail Modal -->
+    <div class="feedback-modal" id="feedbackModal">
+        <div class="feedback-modal-content">
+            <div class="feedback-modal-header">
+                <div>
+                    <h3 id="modalTitle">Feedback Details</h3>
+                    <span class="status-badge status-new" id="modalStatus">New</span>
+                </div>
+                <button class="feedback-modal-close" onclick="closeFeedbackModal()">✕</button>
+            </div>
+            <div class="feedback-modal-body">
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Feedback ID</div>
+                    <div class="feedback-detail-value" id="modalId">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Type</div>
+                    <div class="feedback-detail-value" id="modalType">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Priority</div>
+                    <div class="feedback-detail-value" id="modalPriority">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Module</div>
+                    <div class="feedback-detail-value" id="modalModule">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Summary</div>
+                    <div class="feedback-detail-value" id="modalSummary">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Details</div>
+                    <div class="feedback-detail-value" id="modalDescription" style="white-space: pre-wrap;">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Page / URL</div>
+                    <div class="feedback-detail-value"><a id="modalPage" href="#" target="_blank">-</a></div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Submitted By</div>
+                    <div class="feedback-detail-value" id="modalEmail">-</div>
+                </div>
+                <div class="feedback-detail-row">
+                    <div class="feedback-detail-label">Submitted</div>
+                    <div class="feedback-detail-value" id="modalTimestamp">-</div>
+                </div>
+            </div>
+            <div class="feedback-modal-actions">
+                <button class="action-btn primary" onclick="updateFeedbackStatus(currentFeedbackId, 'reviewed')">Mark Reviewed</button>
+                <button class="action-btn secondary" onclick="updateFeedbackStatus(currentFeedbackId, 'in-progress')">In Progress</button>
+                <button class="action-btn success" onclick="updateFeedbackStatus(currentFeedbackId, 'resolved')">Resolve</button>
+                <button class="action-btn danger" onclick="updateFeedbackStatus(currentFeedbackId, 'declined')">Decline</button>
             </div>
         </div>
     </div>
@@ -597,7 +911,8 @@
                 summary: {
                     brokenLinks: document.getElementById('brokenLinksCount').textContent,
                     staleContent: document.getElementById('staleContentCount').textContent,
-                    guidelineUpdates: document.getElementById('guidelineUpdates').textContent
+                    guidelineUpdates: document.getElementById('guidelineUpdates').textContent,
+                    userFeedback: document.getElementById('feedbackCount').textContent
                 },
                 guidelineUpdatesNeeded: [
                     { guideline: 'AHA ACLS Guidelines', currentVersion: '2025', latestVersion: '2025', affectedContent: 'ACLS Deep Dive, 12 Adventures', priority: 'Current' },
@@ -608,10 +923,12 @@
                     { guideline: 'AAP Bronchiolitis CPG', version: '2014', status: 'Current' },
                     { guideline: 'CHEST VTE Guidelines', version: '2021', status: 'Current' }
                 ],
+                userFeedback: getAllFeedback(),
                 recommendations: [
                     'Update ACLS content to reflect 2025 AHA guidelines',
                     'Review Surviving Sepsis 2024 changes for sepsis cases',
-                    'Evaluate Kawasaki 2024 statement for significant changes'
+                    'Evaluate Kawasaki 2024 statement for significant changes',
+                    'Review pending user feedback items'
                 ]
             };
             
@@ -627,8 +944,292 @@
             URL.revokeObjectURL(url);
             
             // Also show what was exported
-            alert('Report exported!\n\nFile: DxSuite-Audit-Report-' + new Date().toISOString().split('T')[0] + '.json\n\nContains:\n• Summary statistics\n• Guideline updates needed\n• Affected content list\n• Recommendations');
+            alert('Report exported!\n\nFile: DxSuite-Audit-Report-' + new Date().toISOString().split('T')[0] + '.json\n\nContains:\n• Summary statistics\n• Guideline updates needed\n• Affected content list\n• User feedback\n• Recommendations');
         }
+        
+        // ========================================
+        // USER FEEDBACK MANAGEMENT
+        // ========================================
+        
+        let currentFeedbackId = null;
+        let allFeedbackData = [];
+        
+        const TYPE_LABELS = {
+            'bug': '🐛 Bug / Error',
+            'broken-link': '🔗 Broken Link',
+            'content-error': '📝 Content Error',
+            'ui-issue': '🎨 UI / Display',
+            'request-content': '📚 New Content',
+            'request-feature': '✨ New Feature',
+            'resource': '📎 Resource',
+            'other': '💭 Other'
+        };
+        
+        function getAllFeedback() {
+            return JSON.parse(localStorage.getItem('dxsuite-feedback') || '[]');
+        }
+        
+        function getPendingFeedback() {
+            return getAllFeedback().filter(f => f.status === 'new');
+        }
+        
+        function refreshFeedback() {
+            allFeedbackData = getAllFeedback();
+            renderFeedbackTable(allFeedbackData);
+            updateFeedbackStats();
+            updateFeedbackBadge();
+        }
+        
+        function updateFeedbackStats() {
+            const all = getAllFeedback();
+            const pending = all.filter(f => f.status === 'new' || f.status === 'reviewed');
+            const inProgress = all.filter(f => f.status === 'in-progress');
+            const resolved = all.filter(f => f.status === 'resolved');
+            
+            document.getElementById('totalFeedback').textContent = all.length;
+            document.getElementById('pendingFeedback').textContent = pending.length;
+            document.getElementById('inProgressFeedback').textContent = inProgress.length;
+            document.getElementById('resolvedFeedback').textContent = resolved.length;
+            document.getElementById('feedbackCount').textContent = pending.length;
+            
+            // Update stat card color
+            const feedbackCountEl = document.getElementById('feedbackCount');
+            if (pending.length === 0) {
+                feedbackCountEl.style.color = '#4ade80';
+            } else if (pending.length > 5) {
+                feedbackCountEl.style.color = '#ef4444';
+            } else {
+                feedbackCountEl.style.color = '#a78bfa';
+            }
+        }
+        
+        function updateFeedbackBadge() {
+            const pending = getPendingFeedback();
+            const badge = document.getElementById('feedbackBadge');
+            if (pending.length > 0) {
+                badge.textContent = pending.length;
+                badge.style.display = 'inline-flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        function renderFeedbackTable(feedbackItems) {
+            const tbody = document.getElementById('feedbackTableBody');
+            const emptyState = document.getElementById('feedbackEmptyState');
+            const tableContainer = document.getElementById('feedbackTableContainer');
+            
+            if (feedbackItems.length === 0) {
+                tableContainer.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            tableContainer.style.display = 'block';
+            emptyState.style.display = 'none';
+            
+            // Sort by timestamp descending (newest first)
+            feedbackItems.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            tbody.innerHTML = feedbackItems.map(f => `
+                <tr>
+                    <td><code style="color: #60a5fa; font-size: 0.8rem;">${f.id}</code></td>
+                    <td><span class="type-icon"><span>${TYPE_LABELS[f.type]?.split(' ')[0] || '💭'}</span> ${f.type.replace('-', ' ')}</span></td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(f.title)}</td>
+                    <td><span class="priority-dot priority-${f.priority}"></span>${capitalize(f.priority)}</td>
+                    <td><span class="status-badge status-${f.status}">${formatStatus(f.status)}</span></td>
+                    <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${formatDate(f.timestamp)}</td>
+                    <td><button class="run-btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="viewFeedback('${f.id}')">View</button></td>
+                </tr>
+            `).join('');
+        }
+        
+        function filterFeedback() {
+            const typeFilter = document.getElementById('filterType').value;
+            const statusFilter = document.getElementById('filterStatus').value;
+            const priorityFilter = document.getElementById('filterPriority').value;
+            
+            let filtered = getAllFeedback();
+            
+            if (typeFilter) filtered = filtered.filter(f => f.type === typeFilter);
+            if (statusFilter) filtered = filtered.filter(f => f.status === statusFilter);
+            if (priorityFilter) filtered = filtered.filter(f => f.priority === priorityFilter);
+            
+            renderFeedbackTable(filtered);
+        }
+        
+        function viewFeedback(feedbackId) {
+            const feedback = getAllFeedback().find(f => f.id === feedbackId);
+            if (!feedback) return;
+            
+            currentFeedbackId = feedbackId;
+            
+            document.getElementById('modalId').textContent = feedback.id;
+            document.getElementById('modalTitle').textContent = feedback.title;
+            document.getElementById('modalType').textContent = TYPE_LABELS[feedback.type] || feedback.type;
+            document.getElementById('modalPriority').innerHTML = `<span class="priority-dot priority-${feedback.priority}"></span>${capitalize(feedback.priority)}`;
+            document.getElementById('modalModule').textContent = feedback.module || 'Not specified';
+            document.getElementById('modalSummary').textContent = feedback.title;
+            document.getElementById('modalDescription').textContent = feedback.description;
+            document.getElementById('modalPage').textContent = feedback.pageTitle || feedback.page;
+            document.getElementById('modalPage').href = feedback.page;
+            document.getElementById('modalEmail').textContent = feedback.email || 'Anonymous';
+            document.getElementById('modalTimestamp').textContent = new Date(feedback.timestamp).toLocaleString();
+            
+            const statusEl = document.getElementById('modalStatus');
+            statusEl.textContent = formatStatus(feedback.status);
+            statusEl.className = `status-badge status-${feedback.status}`;
+            
+            document.getElementById('feedbackModal').classList.add('open');
+        }
+        
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').classList.remove('open');
+            currentFeedbackId = null;
+        }
+        
+        function updateFeedbackStatus(feedbackId, newStatus) {
+            const all = getAllFeedback();
+            const updated = all.map(f => {
+                if (f.id === feedbackId) {
+                    f.status = newStatus;
+                    f.updatedAt = new Date().toISOString();
+                }
+                return f;
+            });
+            localStorage.setItem('dxsuite-feedback', JSON.stringify(updated));
+            
+            // Remove from pending if not 'new'
+            if (newStatus !== 'new') {
+                const pending = JSON.parse(localStorage.getItem('dxsuite-feedback-pending') || '[]');
+                const updatedPending = pending.filter(f => f.id !== feedbackId);
+                localStorage.setItem('dxsuite-feedback-pending', JSON.stringify(updatedPending));
+            }
+            
+            // Update modal status display
+            const statusEl = document.getElementById('modalStatus');
+            statusEl.textContent = formatStatus(newStatus);
+            statusEl.className = `status-badge status-${newStatus}`;
+            
+            // Refresh display
+            refreshFeedback();
+        }
+        
+        function exportFeedback() {
+            const feedback = getAllFeedback();
+            if (feedback.length === 0) {
+                alert('No feedback to export.');
+                return;
+            }
+            
+            const blob = new Blob([JSON.stringify(feedback, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `DxSuite-Feedback-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert(`Exported ${feedback.length} feedback item(s).`);
+        }
+        
+        // Helper functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        
+        function formatStatus(status) {
+            return status.split('-').map(capitalize).join(' ');
+        }
+        
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            if (diffHours < 24) return `${diffHours}h ago`;
+            if (diffDays < 7) return `${diffDays}d ago`;
+            return date.toLocaleDateString();
+        }
+        
+        // Add sample feedback for demo (can be removed in production)
+        function addSampleFeedback() {
+            const samples = [
+                {
+                    id: 'FB-DEMO1',
+                    type: 'broken-link',
+                    priority: 'high',
+                    title: 'PubMed link broken in Sepsis Adventure Case',
+                    description: 'The reference link to the Surviving Sepsis Campaign guidelines (pubmed.ncbi.nlm.nih.gov/xxxxx) returns a 404 error on Stage 3 of the sepsis case.',
+                    module: 'adventure-cases',
+                    email: 'student@med.edu',
+                    page: '/adventure-cases/sepsis-expanded.html',
+                    pageTitle: 'Sepsis Adventure Case',
+                    userAgent: 'Mozilla/5.0',
+                    timestamp: new Date(Date.now() - 86400000).toISOString(),
+                    status: 'new'
+                },
+                {
+                    id: 'FB-DEMO2',
+                    type: 'request-content',
+                    priority: 'medium',
+                    title: 'Request: Acute Coronary Syndrome case',
+                    description: 'Would love to see an adventure case covering ACS - STEMI vs NSTEMI differentiation, treatment algorithms, and risk stratification. This would be incredibly helpful for boards prep!',
+                    module: 'adventure-cases',
+                    email: 'ms3@university.edu',
+                    page: '/dashboard.html',
+                    pageTitle: 'DxSuite Dashboard',
+                    userAgent: 'Mozilla/5.0',
+                    timestamp: new Date(Date.now() - 172800000).toISOString(),
+                    status: 'new'
+                },
+                {
+                    id: 'FB-DEMO3',
+                    type: 'content-error',
+                    priority: 'high',
+                    title: 'Typo in ACLS algorithm description',
+                    description: 'In the ACLS Rhythms module, the epinephrine dosing says "1mg IV/IO q5-3min" but should be "q3-5min". Small typo but could cause confusion.',
+                    module: 'mechanism-dx',
+                    email: null,
+                    page: '/mechanism-dx/acls.html',
+                    pageTitle: 'ACLS Rhythms - MechanismDx',
+                    userAgent: 'Mozilla/5.0',
+                    timestamp: new Date(Date.now() - 259200000).toISOString(),
+                    status: 'reviewed'
+                }
+            ];
+            
+            const existing = getAllFeedback();
+            if (existing.length === 0) {
+                localStorage.setItem('dxsuite-feedback', JSON.stringify(samples));
+                localStorage.setItem('dxsuite-feedback-pending', JSON.stringify(samples.filter(s => s.status === 'new')));
+            }
+        }
+        
+        // Initialize feedback on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Uncomment the line below to add sample data for testing
+            // addSampleFeedback();
+            refreshFeedback();
+        });
+        
+        // Close modal on outside click
+        document.getElementById('feedbackModal').addEventListener('click', function(e) {
+            if (e.target === this) closeFeedbackModal();
+        });
     </script>
 </body>
 </html>
