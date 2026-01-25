@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Pyloric Stenosis</title>
+  <style>
+    :root {
+      --primary: #8B5CF6;
+      --primary-dark: #7C3AED;
+      --secondary: #EC4899;
+      --accent: #F59E0B;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --dark: #1F2937;
+      --light: #F3F4F6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #E5E7EB;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      background: rgba(139, 92, 246, 0.1);
+      border-radius: 1rem;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .module-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .module-section h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .key-concept {
+      background: rgba(139, 92, 246, 0.15);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .danger-box {
+      background: rgba(239, 68, 68, 0.15);
+      border-left: 4px solid var(--danger);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .success-box {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .mechanism-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    .chain-step {
+      background: rgba(139, 92, 246, 0.2);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--primary);
+    }
+    .chain-arrow {
+      color: var(--accent);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    th {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--primary);
+    }
+    .clinical-pearl {
+      background: rgba(245, 158, 11, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .quiz-section {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .quiz-option:hover { background: rgba(139, 92, 246, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+    }
+    .back-link:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .comparison-box {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .comparison-box h4 { color: var(--accent); margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍼 Pyloric Stenosis</h1>
+      <p class="subtitle">The "Hungry Vomiter" - Hypertrophic Pylorus → Gastric Outlet Obstruction</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Core Definition</h2>
+      <div class="key-concept">
+        <strong>Infantile Hypertrophic Pyloric Stenosis (IHPS) = Progressive hypertrophy and hyperplasia of the pyloric muscle causing gastric outlet obstruction</strong>
+      </div>
+      <p><strong>Epidemiology:</strong></p>
+      <ul>
+        <li>Incidence: 2-4 per 1,000 live births</li>
+        <li>Male:Female ratio = 4:1 (much more common in males)</li>
+        <li>Classic age: 2-8 weeks (rarely presents before 2 weeks or after 12 weeks)</li>
+        <li>More common in firstborn children</li>
+        <li>Associated with macrolide antibiotics (erythromycin) in first 2 weeks of life</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>⚙️ Pathophysiology</h2>
+      
+      <h3>The Mechanism Chain:</h3>
+      <div class="mechanism-chain">
+        <div class="chain-step">Pyloric muscle hypertrophy</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Narrowed pyloric channel</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Gastric outlet obstruction</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Forceful projectile vomiting</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Loss of gastric contents (HCl)</div>
+      </div>
+
+      <div class="key-concept">
+        <strong>Key Point:</strong> The obstruction is ABOVE the ampulla of Vater, so the vomit is NON-BILIOUS (stomach contents only, no bile). This distinguishes pyloric stenosis from malrotation/volvulus.
+      </div>
+
+      <h3>The Classic Electrolyte Pattern:</h3>
+      <div class="mechanism-chain">
+        <div class="chain-step">Loss of gastric HCl</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Hypochloremia</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Metabolic alkalosis</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Hypokalemia (renal K+ wasting)</div>
+      </div>
+
+      <table>
+        <tr><th>Finding</th><th>Mechanism</th></tr>
+        <tr><td>Hypochloremic</td><td>Direct loss of HCl in vomitus</td></tr>
+        <tr><td>Hypokalemic</td><td>Kidney exchanges K+ for H+ to conserve acid in alkalosis</td></tr>
+        <tr><td>Metabolic alkalosis</td><td>Loss of H+ in vomitus, HCO3- retention</td></tr>
+        <tr><td>Paradoxical aciduria</td><td>Kidney excretes H+ to conserve K+ when severely depleted</td></tr>
+      </table>
+
+      <div class="clinical-pearl">
+        <strong>Memorize:</strong> Hypochloremic, Hypokalemic, Metabolic Alkalosis = Classic "pyloric stenosis electrolytes"
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🩺 Clinical Presentation</h2>
+      
+      <h3>The "Hungry Vomiter":</h3>
+      <div class="key-concept">
+        <strong>Classic Triad:</strong>
+        <ol>
+          <li><strong>Projectile, non-bilious vomiting</strong> - "Shoots across the room"</li>
+          <li><strong>Palpable "olive"</strong> - Firm, mobile, 1-2cm mass in RUQ/epigastrium</li>
+          <li><strong>Visible peristaltic waves</strong> - Left-to-right gastric contractions</li>
+        </ol>
+      </div>
+
+      <h3>Typical History:</h3>
+      <ul>
+        <li>Age: 2-8 weeks old</li>
+        <li>Progressive vomiting over days to weeks</li>
+        <li>Vomiting typically immediately after feeds</li>
+        <li>Baby appears hungry after vomiting (wants to feed again)</li>
+        <li>Weight loss or failure to thrive</li>
+        <li>Decreased wet diapers (dehydration)</li>
+        <li>No diarrhea, no fever</li>
+      </ul>
+
+      <h3>Physical Exam Findings:</h3>
+      <ul>
+        <li><strong>"Olive"</strong> - Best felt after vomiting, with relaxed abdomen, in RUQ</li>
+        <li>Visible gastric peristalsis (left-to-right waves)</li>
+        <li>Signs of dehydration (sunken fontanelle, dry mucous membranes)</li>
+        <li>May appear well initially despite severe disease</li>
+      </ul>
+
+      <div class="clinical-pearl">
+        <strong>Clinical Pearl:</strong> The "olive" is palpable in only 70-80% of cases. Ultrasound is the diagnostic test of choice when physical exam is inconclusive.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Diagnosis</h2>
+      
+      <h3>Ultrasound (Gold Standard):</h3>
+      <div class="success-box">
+        <strong>Diagnostic Criteria:</strong>
+        <ul>
+          <li>Pyloric muscle thickness ≥3 mm (wall, not total diameter)</li>
+          <li>Pyloric channel length ≥15-17 mm</li>
+          <li>Total pyloric diameter ≥13 mm</li>
+        </ul>
+        <p><em>Sensitivity: >95%</em></p>
+      </div>
+
+      <h3>Upper GI Series (if ultrasound unavailable):</h3>
+      <ul>
+        <li>"String sign" - Narrow, elongated pyloric channel</li>
+        <li>"Shoulder sign" - Bulging of muscle into antrum</li>
+        <li>"Beak sign" - Tapered distal antrum</li>
+        <li>Delayed gastric emptying</li>
+      </ul>
+
+      <h3>Laboratory Findings:</h3>
+      <table>
+        <tr><th>Test</th><th>Expected Finding</th></tr>
+        <tr><td>Chloride</td><td>Low (<95 mEq/L)</td></tr>
+        <tr><td>Potassium</td><td>Low (<3.5 mEq/L)</td></tr>
+        <tr><td>Bicarbonate</td><td>High (>30 mEq/L)</td></tr>
+        <tr><td>pH</td><td>Elevated (alkalosis)</td></tr>
+        <tr><td>BUN</td><td>May be elevated (dehydration)</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Management</h2>
+      
+      <div class="danger-box">
+        <strong>⚠️ Pyloric stenosis is NOT a surgical emergency!</strong><br>
+        Resuscitate FIRST, operate SECOND. Correct fluid and electrolyte abnormalities before surgery.
+      </div>
+
+      <h3>Step 1: Fluid Resuscitation</h3>
+      <ul>
+        <li>NPO status</li>
+        <li>IV fluid bolus: NS 20 mL/kg</li>
+        <li>Maintenance fluids: D5 ½NS with KCl (once urinating)</li>
+        <li>Goal: Correct dehydration AND electrolyte abnormalities</li>
+        <li>Target before surgery: Cl >100, K+ >3.5, HCO3 <30</li>
+      </ul>
+
+      <h3>Step 2: Pyloromyotomy (Ramstedt Procedure)</h3>
+      <div class="success-box">
+        <strong>Surgical Treatment:</strong>
+        <ul>
+          <li>Longitudinal incision through hypertrophied muscle</li>
+          <li>Muscle is split, NOT removed</li>
+          <li>Mucosa is NOT entered</li>
+          <li>Can be done open or laparoscopically</li>
+          <li>Curative - does not recur</li>
+        </ul>
+      </div>
+
+      <h3>Post-operative Care:</h3>
+      <ul>
+        <li>Feeding typically resumes within 4-8 hours</li>
+        <li>Some post-op vomiting is common (self-limited)</li>
+        <li>Most discharged within 24-48 hours</li>
+        <li>Excellent prognosis</li>
+      </ul>
+
+      <div class="clinical-pearl">
+        <strong>Why wait for surgery?</strong> Anesthetizing a baby with severe metabolic alkalosis is dangerous. Alkalosis shifts the oxygen-hemoglobin dissociation curve left, causes hypoventilation (respiratory compensation), and can cause arrhythmias from hypokalemia.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔄 Differential Diagnosis</h2>
+      
+      <div class="comparison-grid">
+        <div class="comparison-box">
+          <h4>Pyloric Stenosis</h4>
+          <ul>
+            <li>Age 2-8 weeks</li>
+            <li>NON-bilious vomiting</li>
+            <li>Progressive</li>
+            <li>"Hungry vomiter"</li>
+            <li>Metabolic alkalosis</li>
+          </ul>
+        </div>
+        <div class="comparison-box">
+          <h4>Malrotation/Volvulus</h4>
+          <ul>
+            <li>Any age (often first weeks)</li>
+            <li>BILIOUS vomiting</li>
+            <li>Acute onset</li>
+            <li>Abdominal distension</li>
+            <li>Surgical EMERGENCY</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="danger-box">
+        <strong>Red Flag:</strong> BILIOUS vomiting in a neonate = Malrotation with volvulus until proven otherwise. This IS a surgical emergency (risk of bowel necrosis).
+      </div>
+
+      <h3>Other Differentials:</h3>
+      <ul>
+        <li><strong>GERD</strong> - Non-projectile, no weight loss, no electrolyte abnormalities</li>
+        <li><strong>Overfeeding</strong> - Normal weight gain, normal electrolytes</li>
+        <li><strong>Milk protein allergy</strong> - May have bloody stools, eczema</li>
+        <li><strong>Adrenal insufficiency</strong> - Hyponatremia, hyperkalemia (opposite electrolytes!)</li>
+      </ul>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Test Your Understanding</h3>
+      <p><strong>A 4-week-old male infant presents with 5 days of progressively worsening vomiting after feeds. The vomit is non-bilious. Labs show: Na 138, K 2.9, Cl 88, HCO3 34. What is the expected arterial blood pH?</strong></p>
+      
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. 7.25 (acidemia)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. 7.52 (alkalemia)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. 7.40 (normal)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. 7.32 (mild acidemia)</div>
+      
+      <div class="explanation" id="explanation">
+        <strong>Correct Answer: B</strong><br><br>
+        This infant has the classic presentation and electrolyte pattern of pyloric stenosis: non-bilious vomiting, hypokalemia (K 2.9), hypochloremia (Cl 88), and elevated bicarbonate (34). The loss of gastric acid (HCl) causes metabolic alkalosis, which would manifest as an elevated pH (alkalemia). The expected ABG would show pH >7.45 with elevated bicarbonate and potentially some respiratory compensation (elevated pCO2).
+      </div>
+    </section>
+
+    <a href="index.html" class="back-link">← Back to Modules</a>
+
+    <section class="module-section" style="margin-top: 2rem;">
+      <h2>📚 Open-Access References</h2>
+      <ul style="font-size: 0.9rem;">
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/22277188/" target="_blank" style="color: var(--primary);">Krogh C, et al. Risk factors for pyloric stenosis in Denmark. BMJ 2012</a> - Epidemiology and risk factors</li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3773709/" target="_blank" style="color: var(--primary);">Pediatric Surgery NaT - Hypertrophic Pyloric Stenosis</a> - Surgical approach and ultrasound criteria</li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/16456238/" target="_blank" style="color: var(--primary);">Hall NJ, et al. Randomized trial of pyloromyotomy techniques. Pediatrics 2009</a> - Open vs laparoscopic outcomes</li>
+        <li><a href="https://radiopaedia.org/articles/hypertrophic-pyloric-stenosis" target="_blank" style="color: var(--primary);">Radiopaedia: Hypertrophic Pyloric Stenosis</a> - Ultrasound diagnostic criteria (free access)</li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    function checkAnswer(element, isCorrect) {
+      document.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+      if (!isCorrect) {
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('explanation').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
