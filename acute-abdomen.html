@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acute Abdomen & Surgical Emergencies - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div>
+<div class="card-content"><div class="case-narrative" id="caseNarrative"></div>
+<div class="clinical-pearl"><div class="pearl-title">💡 Mechanism Pearl</div><div class="pearl-text" id="pearlText"></div></div>
+</div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Acute Abdomen with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=gi01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=abdominal-pain,appendicitis" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Abdominal Pain Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 11+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Acute abdomen assessment</strong>: Systematic approach to history, physical exam, and imaging selection.',pearl:'Peritoneal signs (rigidity, rebound, guarding) = peritonitis. Pain out of proportion to exam = mesenteric ischemia until proven otherwise.',objectives:['Recognize peritoneal signs','Understand visceral vs somatic pain','Select appropriate imaging','Identify surgical emergencies'],refs:[{t:'Acute Abdomen (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra0707446'},{t:'CT in Acute Abdomen (Radiology)',u:'https://pubs.rsna.org/doi/10.1148/radiol.2015132492'},{t:'ACS Emergency Surgery Guidelines',u:'https://www.facs.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'<strong>RUQ and RLQ pathology</strong>: Cholecystitis, cholangitis, appendicitis.',pearl:'Murphys sign = cholecystitis. Charcot triad = cholangitis. McBurneys point = appendicitis. Psoas/obturator signs = retrocecal appendix.',objectives:['Diagnose cholecystitis vs cholangitis','Recognize appendicitis variants','Apply Alvarado score','Know surgical indications'],refs:[{t:'Acute Cholecystitis (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMcp0800929'},{t:'Appendicitis (JAMA)',u:'https://jamanetwork.com/journals/jama/fullarticle/2654461'},{t:'Tokyo Guidelines Cholangitis',u:'https://www.jstage.jst.go.jp/article/jhbps/25/1/25_55/_article'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Bowel obstruction</strong>: SBO vs LBO, hernias, and surgical decision-making.',pearl:'SBO: adhesions #1, vomiting early, air-fluid levels. LBO: cancer #1, distension predominant, vomiting late. Closed-loop = surgical emergency.',objectives:['Differentiate SBO from LBO','Recognize strangulation','Identify hernia emergencies','Know operative indications'],refs:[{t:'Small Bowel Obstruction (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMcp065337'},{t:'Large Bowel Obstruction (Lancet)',u:'https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00320-3/fulltext'},{t:'WSES Adhesive SBO Guidelines',u:'https://wjes.biomedcentral.com/articles/10.1186/s13017-017-0149-x'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Vascular emergencies</strong>: Mesenteric ischemia, AAA, perforation.',pearl:'Mesenteric ischemia = pain out of proportion. Ruptured AAA = hypotension + pulsatile mass + back pain. Free air under diaphragm = perforation.',objectives:['Recognize mesenteric ischemia','Identify ruptured AAA','Diagnose hollow viscus perforation','Understand when NOT to delay'],refs:[{t:'Mesenteric Ischemia (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra1503966'},{t:'AAA Management (Lancet)',u:'https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(14)61460-9/fulltext'},{t:'Perforated Peptic Ulcer (BMJ)',u:'https://www.bmj.com/content/359/bmj.j5248'}]}
+};
+
+var Qs={
+1:{type:'Approach to Acute Abdomen',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'What findings suggest a surgical abdomen requiring urgent intervention?',
+opts:[['a','Peritoneal signs (involuntary guarding, rigidity, rebound), free air on imaging, signs of bowel ischemia or necrosis, hemodynamic instability with abdominal source'],['b','Any abdominal pain'],['c','Nausea and vomiting'],['d','Mild tenderness without guarding']],
+exp:'<strong>Surgical abdomen indicators:</strong> Peritoneal signs indicate peritonitis - involuntary guarding is most reliable. Free air = perforation. Ischemia signs: pain out of proportion, acidosis, elevated lactate. Strangulated obstruction: fever, tachycardia, focal tenderness.',
+kp:'Board-like rigidity = diffuse peritonitis. Pain out of proportion to exam = mesenteric ischemia. Dont delay surgery for complete workup in unstable patients.',
+dd:{mechanism:{title:'Surgical Abdomen Recognition',content:'<h4>Peritoneal Signs</h4><ul><li>Involuntary guarding (most reliable)</li><li>Rigidity (board-like)</li><li>Rebound tenderness</li><li>Referred pain</li></ul><h4>Imaging Red Flags</h4><ul><li>Free air (perforation)</li><li>Pneumatosis intestinalis (ischemia)</li><li>Portal venous gas</li><li>Non-enhancing bowel wall</li></ul><h4>Lab Red Flags</h4><ul><li>Lactate >2 (ischemia)</li><li>Metabolic acidosis</li><li>Leukocytosis with left shift</li></ul>',bw:['Peritoneal signs','Pain out of proportion','Free air','Lactate elevated']}},
+dist:{b:'Need specific findings',c:'Nonspecific',d:'May not be surgical'},related:[2]},
+
+2:{type:'Pain Localization',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'How does abdominal pain location guide differential diagnosis?',
+opts:[['a','RUQ: biliary/hepatic; Epigastric: gastric/pancreatic/cardiac; LUQ: splenic; RLQ: appendix/ovarian; LLQ: diverticulitis; Periumbilical: early appendicitis/SBO/aortic'],['b','Location is not helpful'],['c','All pain presents the same'],['d','Only severe pain is localizable']],
+exp:'<strong>Pain patterns:</strong> Visceral pain (early) is poorly localized, periumbilical. Somatic pain (peritoneal irritation) is well-localized. Classic appendicitis: periumbilical → RLQ migration as inflammation involves parietal peritoneum.',
+kp:'Visceral afferents travel with sympathetics → midline, poorly localized. Somatic afferents are dermatomal → well-localized. Referred pain: shoulder (diaphragm), back (retroperitoneal).',
+dd:{mechanism:{title:'Pain Localization',content:'<h4>By Quadrant</h4><table><tr><th>Location</th><th>Consider</th></tr><tr><td>RUQ</td><td>Cholecystitis, hepatitis, PNA</td></tr><tr><td>Epigastric</td><td>PUD, pancreatitis, MI, AAA</td></tr><tr><td>LUQ</td><td>Splenic pathology, PNA</td></tr><tr><td>RLQ</td><td>Appendicitis, ovarian, Crohns</td></tr><tr><td>LLQ</td><td>Diverticulitis, ovarian</td></tr><tr><td>Periumbilical</td><td>Early appy, SBO, AAA</td></tr></table><h4>Visceral vs Somatic</h4><ul><li>Visceral: dull, crampy, midline</li><li>Somatic: sharp, well-localized</li></ul>',bw:['RUQ = biliary','RLQ = appendix','LLQ = diverticulitis','Periumbilical = visceral']}},
+dist:{b:'Very helpful',c:'Patterns differ',d:'Mild pain localizes too'},related:[1]},
+
+3:{type:'Imaging Selection',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'What is the imaging modality of choice for acute abdominal conditions?',
+opts:[['a','CT with IV contrast: most acute conditions; Ultrasound: RUQ pain/biliary, pregnancy, pediatric; Upright CXR: free air; CT angiography: mesenteric ischemia'],['b','Always start with CT'],['c','MRI for everything'],['d','X-ray is sufficient']],
+exp:'<strong>Imaging selection:</strong> CT abdomen/pelvis with IV contrast is workhorse for most acute abdomen. US first for RUQ (biliary), pregnancy, children. Upright CXR can detect free air. CTA for suspected vascular emergencies. Avoid contrast if renal impairment.',
+kp:'Pregnant patients: US first, then MRI if needed, CT only if life-threatening. Pediatric: US to avoid radiation. Unstable patients may go directly to OR.',
+dd:{mechanism:{title:'Imaging Selection',content:'<h4>By Condition</h4><table><tr><th>Condition</th><th>First-Line</th></tr><tr><td>Appendicitis</td><td>CT (US in peds/pregnancy)</td></tr><tr><td>Cholecystitis</td><td>RUQ Ultrasound</td></tr><tr><td>Bowel obstruction</td><td>CT with contrast</td></tr><tr><td>Perforation</td><td>Upright CXR, then CT</td></tr><tr><td>Mesenteric ischemia</td><td>CT angiography</td></tr><tr><td>AAA rupture</td><td>Bedside US (unstable) or CT</td></tr></table>',bw:['CT = workhorse','US first for biliary','CXR for free air','CTA for vascular']}},
+dist:{b:'US better for some',c:'Rarely first-line acute',d:'Often insufficient'},related:[1]},
+
+4:{type:'Physical Exam Signs',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'Match the physical exam sign with its clinical significance:',
+opts:[['a','Murphys sign = cholecystitis; Rovsing sign = appendicitis; Cullen/Grey Turner = hemorrhagic pancreatitis; Psoas sign = retrocecal appendicitis; Kehr sign = splenic rupture'],['b','All signs indicate peritonitis'],['c','Signs are not reliable'],['d','Only rebound is significant']],
+exp:'<strong>Exam signs:</strong> Murphys: inspiratory arrest with RUQ palpation (cholecystitis). Rovsing: RLQ pain with LLQ palpation (appendicitis). Cullen (periumbilical ecchymosis) and Grey Turner (flank ecchymosis): retroperitoneal hemorrhage. Psoas/obturator: retrocecal/pelvic appendix.',
+kp:'Kehr sign: left shoulder pain from diaphragmatic irritation (splenic rupture, ectopic). McBurney point: 1/3 distance from ASIS to umbilicus.',
+dd:{mechanism:{title:'Physical Exam Signs',content:'<h4>Key Signs</h4><table><tr><th>Sign</th><th>Finding</th><th>Suggests</th></tr><tr><td>Murphys</td><td>Inspiratory arrest RUQ</td><td>Cholecystitis</td></tr><tr><td>Rovsing</td><td>RLQ pain with LLQ pressure</td><td>Appendicitis</td></tr><tr><td>Psoas</td><td>Pain with hip extension</td><td>Retrocecal appendix</td></tr><tr><td>Obturator</td><td>Pain with hip rotation</td><td>Pelvic appendix</td></tr><tr><td>Cullen</td><td>Periumbilical bruising</td><td>Retroperitoneal bleed</td></tr><tr><td>Grey Turner</td><td>Flank bruising</td><td>Retroperitoneal bleed</td></tr><tr><td>Kehr</td><td>Left shoulder pain</td><td>Diaphragm irritation</td></tr></table>',bw:['Murphys = cholecystitis','Rovsing = appendicitis','Cullen/Grey Turner = pancreatitis','Kehr = splenic rupture']}},
+dist:{b:'Specific to conditions',c:'Highly reliable',d:'Many important signs'},related:[2]},
+
+5:{type:'Laboratory Evaluation',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'Which lab findings are most concerning in acute abdomen?',
+opts:[['a','Elevated lactate (ischemia), metabolic acidosis, leukocytosis with bandemia, elevated lipase (pancreatitis), elevated LFTs with elevated bilirubin (biliary obstruction)'],['b','Mildly elevated WBC'],['c','Normal amylase'],['d','Elevated BUN alone']],
+exp:'<strong>Concerning labs:</strong> Lactate >2 suggests tissue hypoperfusion/ischemia. Metabolic acidosis with high anion gap. Leukocytosis with left shift (bandemia) indicates serious infection. Lipase >3x ULN diagnostic for pancreatitis. Elevated direct bilirubin + elevated alk phos = biliary obstruction.',
+kp:'Normal lactate doesnt rule out early ischemia. WBC can be normal or low in severe sepsis. Get lipase, not amylase, for pancreatitis (more specific).',
+dd:{mechanism:{title:'Lab Interpretation',content:'<h4>Key Labs</h4><table><tr><th>Lab</th><th>Concern</th></tr><tr><td>Lactate >2</td><td>Ischemia, hypoperfusion</td></tr><tr><td>AG metabolic acidosis</td><td>Ischemia, sepsis</td></tr><tr><td>WBC >15K with bands</td><td>Serious infection</td></tr><tr><td>Lipase >3x ULN</td><td>Acute pancreatitis</td></tr><tr><td>↑ Direct bili + ↑ ALP</td><td>Biliary obstruction</td></tr><tr><td>↑ AST/ALT >1000</td><td>Ischemic hepatitis, toxin</td></tr></table>',bw:['Lactate = ischemia','Lipase for pancreatitis','Bandemia = infection','Direct bili = obstruction']}},
+dist:{b:'May be concerning',c:'Check lipase instead',d:'Nonspecific'},related:[1]},
+
+6:{type:'Acute Cholecystitis',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'A 45-year-old obese woman presents with RUQ pain radiating to the right scapula, fever, and positive Murphy sign. Diagnosis and management?',
+opts:[['a','Acute cholecystitis - gallstone impaction in cystic duct → inflammation → infection; NPO, IV fluids, antibiotics, cholecystectomy within 72 hours if possible'],['b','Biliary colic - no surgery needed'],['c','Cholangitis - ERCP first'],['d','Hepatitis - supportive care']],
+exp:'<strong>Acute cholecystitis:</strong> Stone impacted in cystic duct → gallbladder distension → inflammation → secondary bacterial infection. Classic: RUQ pain, fever, positive Murphys sign, leukocytosis. US shows gallstones, thickened wall (>4mm), pericholecystic fluid. Sonographic Murphys is specific.',
+kp:'4 Fs: Female, Forty, Fertile, Fat (but occurs in anyone). Cholecystectomy within 72 hours reduces complications. Acalculous cholecystitis in critically ill - high mortality.',
+dd:{mechanism:{title:'Acute Cholecystitis',content:'<h4>Pathophysiology</h4><ul><li>Stone impaction in cystic duct</li><li>Gallbladder distension</li><li>Wall inflammation</li><li>Secondary bacterial infection</li><li>If untreated: gangrene, perforation</li></ul><h4>Diagnosis</h4><ul><li>RUQ pain, fever, leukocytosis</li><li>Positive Murphy sign</li><li>US: stones, wall >4mm, pericholecystic fluid</li><li>HIDA scan if US equivocal</li></ul><h4>Management</h4><ul><li>NPO, IV fluids</li><li>Antibiotics (cover gram-neg, anaerobes)</li><li>Cholecystectomy within 72h</li><li>Percutaneous drain if too sick for surgery</li></ul>',bw:['Murphy sign','Wall >4mm on US','Surgery within 72h','Acalculous in ICU']}},
+dist:{b:'Has fever and Murphy sign',c:'No jaundice or CBD dilation',d:'Different presentation'},related:[7]},
+
+7:{type:'Acute Cholangitis',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A patient presents with RUQ pain, fever, and jaundice. Labs show WBC 18K, total bilirubin 8, and direct bilirubin 6. What is the diagnosis?',
+opts:[['a','Acute cholangitis (Charcot triad) - biliary obstruction with infection; requires urgent biliary drainage (ERCP) + antibiotics; Reynolds pentad adds AMS and hypotension'],['b','Cholecystitis'],['c','Hepatitis'],['d','Pancreatitis']],
+exp:'<strong>Acute cholangitis:</strong> Charcot triad: fever, RUQ pain, jaundice. Caused by biliary obstruction (stone, stricture, tumor) + ascending infection. Reynolds pentad adds altered mental status + hypotension (septic shock). Emergency - requires biliary decompression (ERCP > PTC) and antibiotics.',
+kp:'Cholangitis is a biliary emergency. Charcot triad present in 50-70%. ERCP within 24 hours for moderate, within 12 hours for severe. Common organisms: E. coli, Klebsiella, Enterococcus.',
+dd:{mechanism:{title:'Acute Cholangitis',content:'<h4>Charcot Triad</h4><ol><li>Fever/chills</li><li>RUQ pain</li><li>Jaundice</li></ol><h4>Reynolds Pentad (Severe)</h4><ol><li>Charcot triad PLUS</li><li>Altered mental status</li><li>Hypotension/shock</li></ol><h4>Tokyo Guidelines Severity</h4><ul><li>Mild: responds to antibiotics</li><li>Moderate: organ dysfunction</li><li>Severe: shock, AMS</li></ul><h4>Management</h4><ul><li>IV fluids, antibiotics</li><li>ERCP (preferred) or PTC</li><li>Urgent drainage based on severity</li></ul>',bw:['Charcot triad','Reynolds pentad = severe','ERCP for drainage','Biliary emergency']}},
+dist:{b:'No jaundice in cholecystitis',c:'Different labs',d:'Lipase would be elevated'},related:[6]},
+
+8:{type:'Acute Appendicitis',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'An 18-year-old presents with periumbilical pain that migrated to RLQ, anorexia, and low-grade fever. WBC is 14K. What is the most likely diagnosis?',
+opts:[['a','Acute appendicitis - classic presentation of visceral pain migrating to somatic RLQ pain; appendectomy is definitive treatment; CT if diagnosis uncertain'],['b','Gastroenteritis'],['c','Mesenteric adenitis'],['d','Ovarian cyst']],
+exp:'<strong>Acute appendicitis:</strong> Obstruction of appendiceal lumen (fecalith, lymphoid hyperplasia) → distension → visceral pain (periumbilical) → inflammation reaches serosa → somatic pain (RLQ at McBurney point). Classic: anorexia, periumbilical→RLQ pain, low-grade fever, leukocytosis.',
+kp:'Alvarado score: Migration, Anorexia, Nausea, RLQ tenderness, Rebound, Elevation of temp, Leukocytosis, Shift left. Score ≥7 suggests appendicitis. CT sensitivity 94%.',
+dd:{mechanism:{title:'Acute Appendicitis',content:'<h4>Pathophysiology</h4><ul><li>Luminal obstruction (fecalith, lymphoid)</li><li>Continued mucus secretion</li><li>Increased intraluminal pressure</li><li>Venous/lymphatic compromise</li><li>Bacterial invasion</li><li>Perforation if untreated</li></ul><h4>Clinical Features</h4><ul><li>Periumbilical → RLQ pain migration</li><li>Anorexia (most sensitive)</li><li>Nausea/vomiting</li><li>Low-grade fever</li><li>McBurney point tenderness</li></ul><h4>Atypical Presentations</h4><ul><li>Retrocecal: back/flank pain</li><li>Pelvic: suprapubic, diarrhea</li><li>Pregnant: RUQ (displaced)</li></ul>',bw:['Pain migration','Anorexia most sensitive','McBurney point','Alvarado score']}},
+dist:{b:'Pain pattern different',c:'Typically younger children',d:'Different pain character'},related:[9]},
+
+9:{type:'Appendicitis Complications',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A patient with appendicitis symptoms for 5 days now has RLQ mass and continued fever. CT shows walled-off collection. Management?',
+opts:[['a','Appendiceal abscess - CT-guided drainage + antibiotics initially, interval appendectomy in 6-8 weeks; immediate surgery increases complications in this setting'],['b','Immediate appendectomy'],['c','Antibiotics alone'],['d','Observation only']],
+exp:'<strong>Complicated appendicitis:</strong> Perforation occurs 24-72 hours after symptom onset. Walled-off abscess or phlegmon may develop. Management: CT-guided drainage + IV antibiotics, followed by interval appendectomy in 6-8 weeks (avoids operating in hostile abdomen). Immediate surgery for free perforation with peritonitis.',
+kp:'Phlegmon (no drainable collection): antibiotics only. Abscess >3cm: drain. Interval appendectomy controversial but generally recommended to prevent recurrence.',
+dd:{mechanism:{title:'Complicated Appendicitis',content:'<h4>Progression</h4><ul><li>24-36h: gangrenous</li><li>36-72h: perforation risk</li><li>>72h: abscess/phlegmon</li></ul><h4>Management Algorithm</h4><table><tr><th>Finding</th><th>Management</th></tr><tr><td>Uncomplicated</td><td>Appendectomy</td></tr><tr><td>Phlegmon</td><td>Antibiotics, interval appy</td></tr><tr><td>Abscess >3cm</td><td>Drain + Abx, interval appy</td></tr><tr><td>Free perforation</td><td>Urgent appendectomy</td></tr></table>',bw:['Drain abscess >3cm','Interval appy 6-8 weeks','Free perf = surgery','Phlegmon = Abx only']}},
+dist:{b:'Increases complications',c:'Need drainage for abscess',d:'Active infection needs treatment'},related:[8]},
+
+10:{type:'Diverticulitis',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'A 60-year-old presents with LLQ pain, fever, and leukocytosis. CT shows sigmoid wall thickening with pericolic fat stranding. Diagnosis and management?',
+opts:[['a','Acute diverticulitis - microperforation of diverticulum → localized inflammation; uncomplicated: antibiotics ± outpatient; complicated (abscess/perforation): drainage or surgery'],['b','Colon cancer'],['c','IBD flare'],['d','Ischemic colitis']],
+exp:'<strong>Acute diverticulitis:</strong> Diverticulum (mucosal herniation) becomes obstructed → microperforation → localized inflammation/infection. LLQ pain (left-sided diverticula most common in West). CT shows wall thickening, fat stranding, ± abscess, ± free air.',
+kp:'Hinchey classification: I (pericolic abscess), II (pelvic abscess), III (purulent peritonitis), IV (fecal peritonitis). Colonoscopy 6-8 weeks after resolution to rule out cancer.',
+dd:{mechanism:{title:'Acute Diverticulitis',content:'<h4>Pathophysiology</h4><ul><li>Diverticulum obstruction</li><li>Microperforation</li><li>Pericolic inflammation</li><li>If progresses: abscess, free perforation</li></ul><h4>Hinchey Classification</h4><table><tr><th>Stage</th><th>Finding</th><th>Treatment</th></tr><tr><td>I</td><td>Pericolic abscess</td><td>Abx ± drain</td></tr><tr><td>II</td><td>Pelvic abscess</td><td>Drain + Abx</td></tr><tr><td>III</td><td>Purulent peritonitis</td><td>Surgery</td></tr><tr><td>IV</td><td>Fecal peritonitis</td><td>Urgent surgery</td></tr></table><h4>Follow-up</h4><ul><li>Colonoscopy 6-8 weeks after</li><li>Rule out underlying cancer</li></ul>',bw:['LLQ pain','Hinchey classification','Colonoscopy after recovery','Complicated = drain or surgery']}},
+dist:{b:'Acute presentation different',c:'Different history',d:'Different distribution'},related:[8]},
+
+11:{type:'Small Bowel Obstruction',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A patient with prior abdominal surgery presents with crampy abdominal pain, vomiting, distension, and obstipation. X-ray shows dilated loops with air-fluid levels. Diagnosis and initial management?',
+opts:[['a','Small bowel obstruction (adhesions most likely) - NPO, NGT decompression, IV fluids, serial exams; surgery if strangulation signs or no improvement in 24-72 hours'],['b','Immediate surgery'],['c','Colonoscopy'],['d','Oral contrast and discharge']],
+exp:'<strong>SBO:</strong> Adhesions (60%) > hernias > tumors. Mechanical obstruction → proximal dilation, distal decompression. Closed-loop (both ends obstructed) at high risk for strangulation. Initial: NPO, NGT, IVF, serial exams. Gastrografin challenge can be diagnostic and therapeutic.',
+kp:'Signs of strangulation: fever, tachycardia, peritoneal signs, leukocytosis, acidosis, focal tenderness - require urgent surgery. Transition point on CT helps localize.',
+dd:{mechanism:{title:'Small Bowel Obstruction',content:'<h4>Causes</h4><ul><li>Adhesions (60%) - prior surgery</li><li>Hernias (15%)</li><li>Malignancy (15%)</li><li>Crohns stricture</li></ul><h4>Clinical Features</h4><ul><li>Crampy pain (comes and goes)</li><li>Vomiting (early and prominent)</li><li>Distension</li><li>Obstipation (no flatus)</li></ul><h4>Management Algorithm</h4><ul><li>NPO, NGT decompression</li><li>IV fluids, electrolyte correction</li><li>Serial abdominal exams</li><li>CT to identify cause/transition point</li><li>Gastrografin challenge if partial</li></ul><h4>Surgical Indications</h4><ul><li>Complete obstruction</li><li>Signs of strangulation</li><li>No improvement 24-72h</li><li>Closed-loop obstruction</li></ul>',bw:['Adhesions #1 cause','NGT decompression','Strangulation = surgery','Transition point on CT']}},
+dist:{b:'Trial of conservative management first',c:'Wrong study',d:'Inappropriate'},related:[12]},
+
+12:{type:'Large Bowel Obstruction',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'An elderly patient presents with progressive abdominal distension, constipation, and late vomiting. X-ray shows massive colonic dilation. How does this differ from SBO?',
+opts:[['a','LBO: cancer most common cause, distension predominant, vomiting late; risk of perforation especially at cecum if >12cm; often requires surgical intervention'],['b','Same management as SBO'],['c','Always benign'],['d','Vomiting is early']],
+exp:'<strong>LBO vs SBO:</strong> LBO: cancer (60%), volvulus, diverticular stricture. Distension more prominent, vomiting later (ileocecal valve competence prevents retrograde decompression). Cecum most at risk for perforation if >12cm (law of Laplace). Often requires surgery - obstruction rarely resolves spontaneously.',
+kp:'Competent ileocecal valve = closed-loop → high perforation risk. Volvulus: sigmoid (elderly, psychiatric) or cecal (younger). Sigmoid volvulus: coffee bean sign, may decompress with sigmoidoscopy.',
+dd:{mechanism:{title:'LBO vs SBO',content:'<h4>Comparison</h4><table><tr><th>Feature</th><th>SBO</th><th>LBO</th></tr><tr><td>#1 Cause</td><td>Adhesions</td><td>Cancer</td></tr><tr><td>Vomiting</td><td>Early, prominent</td><td>Late</td></tr><tr><td>Distension</td><td>Moderate</td><td>Massive</td></tr><tr><td>Conservative tx</td><td>Often works</td><td>Rarely works</td></tr></table><h4>Perforation Risk</h4><ul><li>Cecum most vulnerable</li><li>>12cm diameter high risk</li><li>Law of Laplace: larger radius = more wall tension</li></ul><h4>Volvulus</h4><ul><li>Sigmoid: coffee bean, try endoscopic decompression</li><li>Cecal: surgery required</li></ul>',bw:['Cancer causes LBO','Late vomiting in LBO','Cecum >12cm = perforation risk','Sigmoid volvulus = endoscopy first']}},
+dist:{b:'Different causes and management',c:'Often malignant',d:'Vomiting is late'},related:[11]},
+
+13:{type:'Incarcerated Hernia',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A patient with a known inguinal hernia presents with severe groin pain, vomiting, and a tender, non-reducible bulge. What is the concern and management?',
+opts:[['a','Incarcerated hernia with risk of strangulation - bowel trapped in hernia sac; urgent surgical repair needed; strangulation (vascular compromise) is surgical emergency'],['b','Reduce and schedule elective repair'],['c','Antibiotics only'],['d','CT before any intervention']],
+exp:'<strong>Incarcerated hernia:</strong> Hernia contents trapped in defect, cannot reduce. Strangulation = vascular compromise → ischemia → necrosis. Signs: severe pain, tender bulge, erythema, signs of obstruction. Emergent surgery required - delay leads to bowel necrosis and sepsis.',
+kp:'Order of progression: reducible → incarcerated → strangulated. Never forcefully reduce potentially strangulated hernia (may reduce dead bowel). Inguinal > femoral, but femoral has higher strangulation rate.',
+dd:{mechanism:{title:'Hernia Emergencies',content:'<h4>Terminology</h4><ul><li>Reducible: contents return to abdomen</li><li>Incarcerated: trapped, cannot reduce</li><li>Strangulated: vascular compromise</li></ul><h4>Strangulation Signs</h4><ul><li>Severe, constant pain</li><li>Tender, erythematous bulge</li><li>Signs of obstruction</li><li>Fever, leukocytosis</li><li>Peritoneal signs</li></ul><h4>Management</h4><ul><li>Incarcerated: attempt gentle reduction, then surgery</li><li>Strangulated: immediate surgery, NO reduction attempt</li><li>May need bowel resection</li></ul><h4>By Type</h4><ul><li>Inguinal: most common overall</li><li>Femoral: highest strangulation rate</li></ul>',bw:['Incarcerated = trapped','Strangulated = ischemic','Femoral highest risk','Dont reduce if strangulated']}},
+dist:{b:'Risk of strangulation',c:'Surgical emergency',d:'Delays treatment'},related:[11]},
+
+14:{type:'Ogilvie Syndrome',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A post-operative patient develops massive colonic distension without mechanical obstruction. Cecum measures 11cm on X-ray. Diagnosis and treatment?',
+opts:[['a','Ogilvie syndrome (acute colonic pseudo-obstruction) - treat with neostigmine if no contraindications; colonoscopic decompression if neostigmine fails; surgery if perforation or >12cm despite treatment'],['b','Mechanical obstruction'],['c','Toxic megacolon'],['d','Observation only']],
+exp:'<strong>Ogilvie syndrome:</strong> Acute colonic pseudo-obstruction without mechanical cause. Common in hospitalized, post-op, critically ill patients. Imbalance of autonomic innervation. Risk of perforation when cecum >12cm. First-line: neostigmine (if no cardiac contraindications). Alternative: colonoscopic decompression.',
+kp:'Neostigmine: anticholinesterase increases parasympathetic tone. Contraindicated with bradycardia, recent MI, beta-blockers. Monitor with telemetry. Give atropine bedside.',
+dd:{mechanism:{title:'Ogilvie Syndrome',content:'<h4>Risk Factors</h4><ul><li>Post-operative (especially orthopedic)</li><li>Critical illness</li><li>Electrolyte abnormalities</li><li>Opioids, anticholinergics</li><li>Neurologic disorders</li></ul><h4>Diagnosis</h4><ul><li>Massive colonic dilation</li><li>No mechanical obstruction on CT</li><li>Cecum measurement critical</li></ul><h4>Management</h4><ol><li>Correct underlying factors</li><li>D/C offending meds (opioids)</li><li>Neostigmine 2mg IV (if no contraindications)</li><li>Colonoscopic decompression if fails</li><li>Surgery if perforation or >12cm refractory</li></ol>',bw:['No mechanical obstruction','Neostigmine first-line','Cecum >12cm = danger','Post-op patients']}},
+dist:{b:'No mechanical cause',c:'Different etiology (IBD)',d:'Risk of perforation'},related:[12]},
+
+15:{type:'Bowel Obstruction Imaging',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+stem:'What are the key imaging findings that differentiate complete from partial SBO and identify strangulation?',
+opts:[['a','Complete: no air/contrast past obstruction, decompressed distal bowel; Partial: some distal air; Strangulation: mesenteric haziness, bowel wall thickening, reduced enhancement, closed-loop'],['b','X-ray alone is sufficient'],['c','All SBO looks the same'],['d','CT not helpful']],
+exp:'<strong>SBO imaging:</strong> Complete obstruction: dilated proximal bowel, decompressed distal, no air past transition point. Partial: some air distally. CT findings of strangulation: mesenteric edema/haziness, bowel wall thickening, decreased/absent wall enhancement, closed-loop configuration, mesenteric vessel engorgement.',
+kp:'Gastrografin in colon at 24 hours predicts resolution without surgery. Small bowel feces sign indicates longstanding obstruction. Transition point localization guides surgery.',
+dd:{mechanism:{title:'SBO Imaging',content:'<h4>X-ray Findings</h4><ul><li>Dilated small bowel (>3cm)</li><li>Air-fluid levels (upright)</li><li>Paucity of colonic gas</li></ul><h4>CT Findings</h4><ul><li>Transition point (key finding)</li><li>Small bowel feces sign</li><li>Cause identification</li></ul><h4>Strangulation Signs on CT</h4><ul><li>Mesenteric haziness/fluid</li><li>Bowel wall thickening</li><li>Decreased wall enhancement</li><li>Closed-loop configuration</li><li>Mesenteric vessel engorgement</li></ul><h4>Gastrografin Challenge</h4><ul><li>Water-soluble contrast</li><li>In colon at 24h = will resolve</li><li>May be therapeutic (osmotic)</li></ul>',bw:['Transition point','Strangulation = haziness, wall thickening','Gastrografin predicts resolution','Closed-loop = emergency']}},
+dist:{b:'CT much better',c:'Features differ',d:'Critical for planning'},related:[11]},
+
+16:{type:'Mesenteric Ischemia',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'An elderly patient with atrial fibrillation presents with severe periumbilical pain but minimal findings on exam. Lactate is elevated. What is the likely diagnosis?',
+opts:[['a','Acute mesenteric ischemia (likely embolic from AFib) - pain out of proportion to exam is classic; CTA for diagnosis; requires urgent revascularization or resection'],['b','Gastroenteritis'],['c','Pancreatitis'],['d','Bowel obstruction']],
+exp:'<strong>Acute mesenteric ischemia:</strong> Pain out of proportion to physical exam is classic. Causes: SMA embolism (50% - AFib, recent MI), SMA thrombosis (25% - atherosclerosis), NOMI (non-occlusive - hypotension/vasopressors), mesenteric venous thrombosis (hypercoagulable). CTA is diagnostic. Treatment: anticoagulation, revascularization, bowel resection if necrotic.',
+kp:'Mortality 60-80% if diagnosis delayed. "Gut angina" (postprandial pain, food fear, weight loss) may precede acute SMA thrombosis. Venous thrombosis more insidious onset.',
+dd:{mechanism:{title:'Mesenteric Ischemia',content:'<h4>Types</h4><table><tr><th>Type</th><th>Cause</th><th>Onset</th></tr><tr><td>SMA Embolism</td><td>AFib, recent MI</td><td>Sudden</td></tr><tr><td>SMA Thrombosis</td><td>Atherosclerosis</td><td>Acute on chronic</td></tr><tr><td>NOMI</td><td>Hypotension, pressors</td><td>Insidious</td></tr><tr><td>Venous thrombosis</td><td>Hypercoagulable</td><td>Subacute</td></tr></table><h4>Classic Presentation</h4><ul><li>Pain out of proportion to exam</li><li>Rapid, severe periumbilical pain</li><li>Vomiting, diarrhea</li><li>Later: bloody stool, peritonitis</li></ul><h4>Diagnosis & Treatment</h4><ul><li>CTA (gold standard)</li><li>Elevated lactate (late finding)</li><li>Anticoagulation (heparin)</li><li>Revascularization (embolectomy, bypass)</li><li>Resection of necrotic bowel</li></ul>',bw:['Pain out of proportion','AFib = embolic risk','CTA diagnostic','High mortality if delayed']}},
+dist:{b:'Severe pain + risk factors',c:'Lipase would be elevated',d:'Different presentation'},related:[17]},
+
+17:{type:'Ruptured AAA',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A 70-year-old male smoker presents with sudden severe back pain, hypotension, and a pulsatile abdominal mass. What is the immediate management?',
+opts:[['a','Ruptured AAA - do NOT delay for imaging if unstable; immediate vascular surgery consultation and OR; permissive hypotension, type and cross for massive transfusion'],['b','CT scan first'],['c','Pain management and observation'],['d','Cardiology consult for MI']],
+exp:'<strong>Ruptured AAA:</strong> Classic triad: hypotension, pulsatile abdominal mass, severe back/abdominal pain. 50% die before reaching hospital. If unstable, go directly to OR - do not delay for imaging. If hemodynamically stable, CT confirms diagnosis. Risk factors: age >65, male, smoking, hypertension, family history.',
+kp:'Contained rupture may be transiently stable. Permissive hypotension (SBP 70-90) until aortic control obtained. EVAR (endovascular) increasingly used even for rupture if anatomy suitable.',
+dd:{mechanism:{title:'Ruptured AAA',content:'<h4>Classic Triad</h4><ol><li>Hypotension</li><li>Pulsatile abdominal mass</li><li>Back/flank/abdominal pain</li></ol><h4>Risk Factors</h4><ul><li>Age >65</li><li>Male (6:1)</li><li>Smoking</li><li>Hypertension</li><li>Family history</li><li>Known AAA</li></ul><h4>Management</h4><ul><li>Unstable: immediate OR</li><li>Stable: CT angiography</li><li>Permissive hypotension (SBP 70-90)</li><li>Massive transfusion protocol</li><li>Open repair or EVAR</li></ul><h4>Screening</h4><ul><li>One-time US for men 65-75 who ever smoked</li><li>Repair if >5.5cm or rapid growth</li></ul>',bw:['Triad: hypotension + mass + pain','Unstable = OR immediately','Permissive hypotension','Screening: men 65-75 smokers']}},
+dist:{b:'Delays life-saving surgery',c:'Will die without surgery',d:'Not cardiac presentation'},related:[16]},
+
+18:{type:'Perforated Viscus',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A patient with history of peptic ulcer disease presents with sudden severe epigastric pain that is now diffuse, with rigid abdomen. Upright CXR shows free air under diaphragm. Management?',
+opts:[['a','Perforated peptic ulcer - surgical emergency requiring exploratory laparotomy; free air confirms perforation; resuscitate, broad-spectrum antibiotics, urgent OR'],['b','PPI and observation'],['c','Upper endoscopy'],['d','Repeat imaging in 6 hours']],
+exp:'<strong>Perforated hollow viscus:</strong> Free air under diaphragm = perforation until proven otherwise. Peptic ulcer perforation: sudden, severe epigastric pain radiating to back and shoulders, then diffuse peritonitis. Management: IV resuscitation, broad-spectrum antibiotics (cover gram-neg, anaerobes), emergent laparotomy with repair ± omental patch.',
+kp:'Causes of perforation: PUD, diverticulitis, appendicitis, trauma, malignancy, foreign body. Upright CXR detects 70-80% of free air. Left lateral decubitus if patient cant sit up.',
+dd:{mechanism:{title:'Perforated Viscus',content:'<h4>Free Air Causes</h4><ul><li>Perforated peptic ulcer</li><li>Perforated diverticulitis</li><li>Perforated appendicitis</li><li>Bowel ischemia/necrosis</li><li>Trauma</li><li>Iatrogenic (post-procedure)</li></ul><h4>Presentation</h4><ul><li>Sudden severe pain</li><li>Rapid progression to diffuse peritonitis</li><li>Rigid "board-like" abdomen</li><li>Absent bowel sounds</li><li>Signs of sepsis</li></ul><h4>Diagnosis</h4><ul><li>Upright CXR: free air under diaphragm</li><li>CT: more sensitive, identifies cause</li><li>Left lateral decubitus if cant stand</li></ul><h4>Management</h4><ul><li>IV resuscitation</li><li>Broad-spectrum antibiotics</li><li>Emergent surgery</li></ul>',bw:['Free air = perforation','Rigid abdomen','Surgical emergency','Upright CXR first']}},
+dist:{b:'Perforation needs surgery',c:'Contraindicated with perforation',d:'Delays treatment'},related:[16,17]},
+
+19:{type:'Boerhaave Syndrome',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'After forceful vomiting, a patient develops severe chest pain, subcutaneous emphysema, and appears toxic. What is the diagnosis?',
+opts:[['a','Boerhaave syndrome (esophageal rupture) - full-thickness tear from forceful vomiting; Mackler triad: vomiting + chest pain + subcutaneous emphysema; surgical emergency'],['b','MI'],['c','Pneumothorax'],['d','Mallory-Weiss tear']],
+exp:'<strong>Boerhaave syndrome:</strong> Spontaneous esophageal rupture from forceful vomiting (transmural tear, usually distal left posterolateral esophagus). Mackler triad: vomiting, chest pain, subcutaneous emphysema. Left pleural effusion, pneumomediastinum. Mortality 20-40% even with treatment. Surgical repair within 24 hours.',
+kp:'Differs from Mallory-Weiss (partial thickness, bleeding) - Boerhaave is full-thickness perforation. Gastrografin swallow if stable. Hammans sign: mediastinal crunch on auscultation.',
+dd:{mechanism:{title:'Boerhaave Syndrome',content:'<h4>Mechanism</h4><ul><li>Forceful vomiting against closed glottis</li><li>Sudden increase in esophageal pressure</li><li>Full-thickness tear (usually left posterolateral)</li><li>Mediastinal contamination</li></ul><h4>Mackler Triad</h4><ol><li>Vomiting</li><li>Chest pain</li><li>Subcutaneous emphysema</li></ol><h4>Findings</h4><ul><li>Left pleural effusion</li><li>Pneumomediastinum</li><li>Hamman sign (mediastinal crunch)</li><li>Sepsis</li></ul><h4>Management</h4><ul><li>NPO, IV antibiotics</li><li>Gastrografin study if stable</li><li>Surgical repair (primary or drainage)</li><li>Earlier = better outcome</li></ul>',bw:['Mackler triad','Full-thickness (vs Mallory-Weiss)','Subcutaneous emphysema','Surgery within 24h']}},
+dist:{b:'Has subcutaneous emphysema',c:'Would see on CXR',d:'Mallory-Weiss is partial tear'},related:[18]},
+
+20:{type:'Abdominal Compartment Syndrome',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+stem:'A trauma patient after massive resuscitation has tense distended abdomen, oliguria, and difficulty ventilating. Bladder pressure is 28 mmHg. What is the diagnosis and treatment?',
+opts:[['a','Abdominal compartment syndrome - intra-abdominal pressure >20 with organ dysfunction; bladder pressure for diagnosis; decompressive laparotomy required'],['b','Fluid overload - diurese'],['c','Ileus - conservative management'],['d','Tension pneumothorax']],
+exp:'<strong>Abdominal compartment syndrome:</strong> Intra-abdominal hypertension (IAP >20 mmHg) with new organ dysfunction. Causes: massive resuscitation, abdominal trauma, pancreatitis, bowel distension. Effects: decreased venous return (cardiac), decreased renal perfusion (oliguria), elevated diaphragm (ventilation failure), decreased mesenteric flow (ischemia). Treatment: decompressive laparotomy.',
+kp:'Measure bladder pressure (gold standard). Grade I: 12-15, II: 16-20, III: 21-25, IV: >25 mmHg. Abdominal perfusion pressure = MAP - IAP (target >60).',
+dd:{mechanism:{title:'Abdominal Compartment Syndrome',content:'<h4>Definition</h4><ul><li>IAP >20 mmHg (sustained)</li><li>PLUS new organ dysfunction</li></ul><h4>Causes</h4><ul><li>Massive resuscitation</li><li>Abdominal trauma/hemorrhage</li><li>Pancreatitis</li><li>Bowel obstruction/ileus</li><li>Ascites</li></ul><h4>Organ Effects</h4><ul><li>Cardiac: ↓ venous return, ↓ CO</li><li>Pulmonary: ↑ airway pressures, ↓ compliance</li><li>Renal: ↓ perfusion, oliguria</li><li>GI: ↓ mesenteric flow, ischemia</li></ul><h4>Management</h4><ul><li>Measure bladder pressure</li><li>Medical: sedation, NG decompression, diuresis, paracentesis</li><li>Surgical: decompressive laparotomy if medical fails</li></ul>',bw:['IAP >20 + organ dysfunction','Bladder pressure measurement','Decompressive laparotomy','Massive resuscitation risk']}},
+dist:{b:'Needs decompression not diuresis alone',c:'Organ dysfunction beyond ileus',d:'Different findings'},related:[17]}
+};
+
+var answers={1:'b',2:'c',3:'c',4:'b',5:'a',6:'b',7:'d',8:'a',9:'a',10:'a',11:'d',12:'b',13:'d',14:'d',15:'c',16:'a',17:'c',18:'c',19:'b',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs&&ph.refs.length){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)"><div style="font-size:10px;font-weight:600;color: var(--text-secondary);margin-bottom:6px">📚 Academic References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:var(--primary-dark);text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';if(q.isNBME)html+='<span class="quiz-tag nbme">NBME</span>';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div class="exp-header '+(isCorrect?'correct':'incorrect')+'">'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+</body>
+</html>
+="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+</body>
+</html>

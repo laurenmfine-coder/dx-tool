@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes & DKA | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    
+    </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🩺</div>
+            <h1>Diabetes & DKA</h1>
+            <p>Understanding glucose metabolism, the pathophysiology of diabetic emergencies, and evidence-based management of hyperglycemic crises.</p>
+            <div class="hero-meta">
+                <span>📚 10 Concepts</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~45 min</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        
+        <!-- Section 1: Insulin Physiology -->
+        <section class="section">
+            <h2 class="section-title">🔬 Insulin Physiology</h2>
+            
+            <div class="concept-card">
+                <h3>Normal Glucose Homeostasis</h3>
+                <ul>
+                    <li><strong>Fed state</strong> — Insulin promotes glucose uptake into muscle/fat, glycogen synthesis, lipogenesis</li>
+                    <li><strong>Fasting state</strong> — Glucagon promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis</li>
+                    <li><strong>Insulin:glucagon ratio</strong> — The key determinant of metabolic state</li>
+                </ul>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 Insulin Actions</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step"><div class="step-num">1</div><div class="step-text"><strong>Glucose uptake</strong> — GLUT4 translocation to cell membrane (muscle, fat)</div></div>
+                    <div class="pathway-step"><div class="step-num">2</div><div class="step-text"><strong>Glycogen synthesis</strong> — Activates glycogen synthase in liver and muscle</div></div>
+                    <div class="pathway-step"><div class="step-num">3</div><div class="step-text"><strong>Lipogenesis</strong> — Promotes fat storage, inhibits lipolysis</div></div>
+                    <div class="pathway-step"><div class="step-num">4</div><div class="step-text"><strong>Protein synthesis</strong> — Anabolic effects on muscle</div></div>
+                    <div class="pathway-step"><div class="step-num">5</div><div class="step-text"><strong>K+ uptake</strong> — Drives potassium into cells (important in DKA!)</div></div>
+                </div>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Insulin's effect on potassium is critical in DKA management. Even with normal serum K+, total body potassium is severely depleted. Giving insulin without K+ replacement causes dangerous hypokalemia.</p>
+            </div>
+        </section>
+        
+        <!-- Section 2: Type 1 vs Type 2 -->
+        <section class="section">
+            <h2 class="section-title">⚖️ Type 1 vs Type 2 Diabetes</h2>
+            
+            <div class="concept-card">
+                <h3>Pathophysiology Comparison</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Feature</th><th>Type 1</th><th>Type 2</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Mechanism</strong></td><td>Autoimmune β-cell destruction</td><td>Insulin resistance + relative deficiency</td></tr>
+                        <tr><td><strong>Onset</strong></td><td>Usually childhood/young adult</td><td>Usually adult (but increasing in youth)</td></tr>
+                        <tr><td><strong>Insulin levels</strong></td><td>Absent or very low</td><td>Normal, high, or eventually low</td></tr>
+                        <tr><td><strong>Ketosis prone</strong></td><td>Yes (insulin-dependent)</td><td>Usually no (except stress/illness)</td></tr>
+                        <tr><td><strong>C-peptide</strong></td><td>Low or undetectable</td><td>Normal or elevated</td></tr>
+                        <tr><td><strong>Autoantibodies</strong></td><td>Present (GAD65, IA-2, etc.)</td><td>Absent</td></tr>
+                        <tr><td><strong>Association</strong></td><td>Other autoimmune diseases</td><td>Metabolic syndrome</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>LADA (Latent Autoimmune Diabetes in Adults) presents like T2DM but is actually slow-onset T1DM. Suspect it in lean adults with poor response to oral agents. Check GAD65 antibodies and C-peptide.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>A patient with DKA has serum potassium of 5.2 mEq/L. What is the status of their total body potassium?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Normal — the serum level reflects total body stores</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">Depleted — acidosis shifts K+ out of cells, masking deficiency</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Elevated — hyperglycemia causes potassium retention</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Cannot determine without 24-hour urine collection</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q2">
+                <p>Which finding would most strongly suggest Type 1 rather than Type 2 diabetes in a 35-year-old?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">HbA1c of 11.5% at diagnosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Presenting with polyuria and polydipsia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">Positive GAD65 antibodies and low C-peptide</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Family history of diabetes</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 3: DKA Pathophysiology -->
+        <section class="section">
+            <h2 class="section-title">⚡ DKA Pathophysiology</h2>
+            
+            <div class="concept-card">
+                <h3>The Metabolic Cascade</h3>
+                <p>DKA results from absolute or relative insulin deficiency combined with counter-regulatory hormone excess:</p>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 DKA Development</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step"><div class="step-num">1</div><div class="step-text"><strong>Insulin deficiency</strong> → Glucose cannot enter cells</div></div>
+                    <div class="pathway-step"><div class="step-num">2</div><div class="step-text"><strong>Counter-regulatory surge</strong> → Glucagon, cortisol, catecholamines, GH increase</div></div>
+                    <div class="pathway-step"><div class="step-num">3</div><div class="step-text"><strong>Uncontrolled lipolysis</strong> → Free fatty acids flood liver</div></div>
+                    <div class="pathway-step"><div class="step-num">4</div><div class="step-text"><strong>Ketogenesis</strong> → FFAs converted to ketones (β-hydroxybutyrate, acetoacetate)</div></div>
+                    <div class="pathway-step"><div class="step-num">5</div><div class="step-text"><strong>Metabolic acidosis</strong> → Ketoacids overwhelm buffering capacity</div></div>
+                    <div class="pathway-step"><div class="step-num">6</div><div class="step-text"><strong>Osmotic diuresis</strong> → Hyperglycemia causes massive fluid/electrolyte losses</div></div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h3>DKA Diagnostic Criteria</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Glucose</td><td colspan="3">>250 mg/dL (may be lower in "euglycemic DKA")</td></tr>
+                        <tr><td>pH</td><td>7.25-7.30</td><td>7.00-7.24</td><td><7.00</td></tr>
+                        <tr><td>Bicarbonate</td><td>15-18</td><td>10-14</td><td><10</td></tr>
+                        <tr><td>Anion gap</td><td colspan="3">>12 (elevated)</td></tr>
+                        <tr><td>Ketones</td><td colspan="3">Positive (serum or urine)</td></tr>
+                        <tr><td>Mental status</td><td>Alert</td><td>Alert/drowsy</td><td>Stupor/coma</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Euglycemic DKA</h4>
+                <p>DKA can occur with glucose <250 mg/dL, especially with:</p>
+                <ul>
+                    <li>SGLT2 inhibitors (glucosuria prevents hyperglycemia)</li>
+                    <li>Pregnancy</li>
+                    <li>Recent insulin use</li>
+                    <li>Decreased oral intake</li>
+                </ul>
+                <p>Don't rely on glucose alone — check ketones and pH!</p>
+            </div>
+        </section>
+        
+        <!-- Section 4: DKA Management -->
+        <section class="section">
+            <h2 class="section-title">💊 DKA Management</h2>
+            
+            <div class="concept-card">
+                <h3>The Four Pillars of DKA Treatment</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Pillar</th><th>Approach</th><th>Key Points</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Fluids</strong></td>
+                            <td>NS bolus → maintenance</td>
+                            <td>1-2L in first hour; total deficit 5-10L; switch to D5½NS when glucose <200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Insulin</strong></td>
+                            <td>Regular insulin drip</td>
+                            <td>0.1 U/kg/hr; goal glucose drop 50-70 mg/dL/hr; continue until gap closes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Potassium</strong></td>
+                            <td>Replace early and often</td>
+                            <td>Add K+ to fluids if K <5.3; hold insulin if K <3.3 until repleted</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Monitor</strong></td>
+                            <td>Frequent labs</td>
+                            <td>BMP q2-4h; follow anion gap (not just glucose) for resolution</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Potassium Management Algorithm</h3>
+                <ul>
+                    <li><strong>K+ &lt;3.3 mEq/L</strong> — Hold insulin! Give 20-40 mEq/hr K+ until >3.3</li>
+                    <li><strong>K+ 3.3-5.3 mEq/L</strong> — Add 20-40 mEq K+ to each liter of fluids</li>
+                    <li><strong>K+ &gt;5.3 mEq/L</strong> — No K+ initially; recheck in 2 hours</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>The anion gap, not glucose, determines DKA resolution. Continue insulin drip until gap closes (<12) and patient can eat. Overlap with subcutaneous insulin for 1-2 hours before stopping drip.</p>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Cerebral Edema Risk</h4>
+                <p>More common in pediatric DKA. Risk factors include rapid fluid administration, rapid glucose correction, and bicarbonate use. Correct glucose and osmolality gradually.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q3">
+                <p>A patient with DKA has glucose 450, pH 7.15, K+ 3.1. What is the immediate priority?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Start insulin drip to lower glucose rapidly</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">Hold insulin; give IV potassium until K+ >3.3</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Give IV bicarbonate for the severe acidosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Order stat CT head for altered mental status</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q4">
+                <p>After 6 hours of treatment, glucose is 180 mg/dL but anion gap remains 18. What should you do?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Stop insulin drip since glucose is controlled</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Increase insulin rate to close the gap faster</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, true)">Continue insulin drip; add dextrose to IV fluids</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Transition to subcutaneous insulin now</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 5: HHS -->
+        <section class="section">
+            <h2 class="section-title">💧 Hyperosmolar Hyperglycemic State (HHS)</h2>
+            
+            <div class="concept-card">
+                <h3>DKA vs HHS</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Feature</th><th>DKA</th><th>HHS</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Typical patient</strong></td><td>Type 1 (or T2 under stress)</td><td>Type 2, elderly</td></tr>
+                        <tr><td><strong>Glucose</strong></td><td>>250 mg/dL</td><td>>600 mg/dL (often >1000)</td></tr>
+                        <tr><td><strong>pH</strong></td><td><7.30</td><td>>7.30</td></tr>
+                        <tr><td><strong>Ketones</strong></td><td>Strongly positive</td><td>Minimal or absent</td></tr>
+                        <tr><td><strong>Osmolality</strong></td><td>Variable</td><td>>320 mOsm/kg</td></tr>
+                        <tr><td><strong>Fluid deficit</strong></td><td>~6L</td><td>~9L (more severe)</td></tr>
+                        <tr><td><strong>Mortality</strong></td><td>~1-5%</td><td>~10-20%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Why No Ketosis in HHS?</h3>
+                <p>Patients with HHS have enough residual insulin to prevent lipolysis and ketogenesis, but not enough to facilitate glucose uptake. The result is:</p>
+                <ul>
+                    <li>Profound hyperglycemia (often >1000 mg/dL)</li>
+                    <li>Severe dehydration from osmotic diuresis</li>
+                    <li>Hyperosmolality causing altered mental status</li>
+                    <li>No significant ketoacid production</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>HHS has higher mortality than DKA despite less acidosis. The key difference is fluid deficit — HHS patients are profoundly dehydrated. Fluids are even more critical than in DKA.</p>
+            </div>
+        </section>
+        
+        <!-- Section 6: Chronic Complications -->
+        <section class="section">
+            <h2 class="section-title">🔍 Chronic Complications</h2>
+            
+            <div class="concept-card">
+                <h3>Microvascular Complications</h3>
+                <ul>
+                    <li><strong>Retinopathy</strong> — Nonproliferative → proliferative; leading cause of blindness in working-age adults</li>
+                    <li><strong>Nephropathy</strong> — Microalbuminuria → macroalbuminuria → ESRD; screen with urine albumin:creatinine ratio</li>
+                    <li><strong>Neuropathy</strong> — "Stocking-glove" sensory loss; autonomic dysfunction; risk for foot ulcers</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Macrovascular Complications</h3>
+                <ul>
+                    <li><strong>Coronary artery disease</strong> — 2-4x increased risk; often silent ischemia</li>
+                    <li><strong>Cerebrovascular disease</strong> — Increased stroke risk</li>
+                    <li><strong>Peripheral arterial disease</strong> — Combined with neuropathy → high amputation risk</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Screening Recommendations</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Complication</th><th>Screening</th><th>Frequency</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Retinopathy</td><td>Dilated eye exam</td><td>Annual (at diagnosis for T2; 5 years after T1)</td></tr>
+                        <tr><td>Nephropathy</td><td>Urine albumin:creatinine + eGFR</td><td>Annual</td></tr>
+                        <tr><td>Neuropathy</td><td>10g monofilament exam</td><td>Annual</td></tr>
+                        <tr><td>CV risk</td><td>Lipids, BP, smoking cessation</td><td>At diagnosis and ongoing</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q5">
+                <p>An elderly patient with T2DM presents with glucose 1100 mg/dL, pH 7.35, minimal ketones, and obtundation. What is the diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Severe DKA with exhausted ketone production</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, true)">Hyperosmolar Hyperglycemic State (HHS)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Mixed DKA and HHS requiring bicarbonate</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Hyperglycemia with concurrent stroke</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q6">
+                <p>Why is HHS mortality higher than DKA despite less acidosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">HHS patients are more insulin resistant</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, true)">HHS has more severe dehydration and often occurs in elderly with comorbidities</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">The absence of ketones leads to more cellular damage</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">HHS is more difficult to diagnose, delaying treatment</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Diabetes Medications -->
+        <section class="section">
+            <h2 class="section-title">💉 Diabetes Medications</h2>
+            
+            <div class="concept-card">
+                <h3>Key Drug Classes</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Class</th><th>Mechanism</th><th>Key Points</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Metformin</strong></td>
+                            <td>Decreases hepatic glucose production</td>
+                            <td>First-line for T2DM; hold if eGFR <30; lactic acidosis rare</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SGLT2 inhibitors</strong></td>
+                            <td>Block renal glucose reabsorption</td>
+                            <td>CV and renal protection; risk of euglycemic DKA, UTIs, Fournier's gangrene</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GLP-1 agonists</strong></td>
+                            <td>Incretin mimetic; glucose-dependent insulin secretion</td>
+                            <td>Weight loss, CV benefit; GI side effects; pancreatitis risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sulfonylureas</strong></td>
+                            <td>Stimulate insulin secretion</td>
+                            <td>Hypoglycemia risk; weight gain; avoid in elderly/renal impairment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DPP-4 inhibitors</strong></td>
+                            <td>Prolong endogenous incretins</td>
+                            <td>Weight neutral; well-tolerated; modest efficacy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insulin</strong></td>
+                            <td>Exogenous replacement</td>
+                            <td>Required for T1DM; often needed in advanced T2DM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>For T2DM patients with established CV disease or high risk, add SGLT2 inhibitor or GLP-1 agonist with proven CV benefit regardless of HbA1c. For those with CKD or HF, SGLT2 inhibitors have additional benefits.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Final Questions</h3>
+            <div class="quiz-question" id="q7">
+                <p>A patient on empagliflozin presents with nausea, vomiting, and glucose of 180 mg/dL. pH is 7.18 with elevated ketones. What is occurring?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Viral gastroenteritis with incidental ketosis from poor intake</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, true)">Euglycemic DKA — a known complication of SGLT2 inhibitors</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Lactic acidosis from empagliflozin interaction</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Laboratory error since DKA requires glucose >250</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q8">
+                <p>A T2DM patient with HbA1c 8.2% has established heart failure with reduced EF. Which medication addition provides the most benefit?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Glipizide for better glycemic control</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, true)">SGLT2 inhibitor for HF and glycemic benefits</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">DPP-4 inhibitor for weight neutrality</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Pioglitazone for insulin sensitization</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Links -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Clinical Reasoning</h4>
+                <p>Apply what you've learned with a DKA case</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=dka" class="cross-link-btn">Try DKA Case →</a>
+        </div>
+        
+        <div class="cross-link" style="background: #fef3c7; border-color: #fcd34d;">
+            <div class="cross-link-icon">🧪</div>
+            <div class="cross-link-content">
+                <h4>Related: Acid-Base Module</h4>
+                <p>Master anion gap calculations and metabolic acidosis</p>
+            </div>
+            <a href="acid-base.html" class="cross-link-btn" style="background: #f59e0b;">Acid-Base Module →</a>
+        </div>
+        
+        
+        <!-- Cross-Platform Recommendations -->
+        <div class="cross-platform-recs">
+            <div class="cpr-header">🎯 Continue Learning: DKA & Diabetes</div>
+            <div class="cpr-body">
+                <div class="cpr-section">
+                    <div class="cpr-section-title">Apply What You've Learned</div>
+                    <div class="cpr-cards">
+                        <a href="../ReasonDx/training.html?case=dka" class="cpr-card">
+                            <div class="cpr-card-stripe reasondx"></div>
+                            <div class="cpr-card-content">
+                                <div class="cpr-card-icon reasondx">🩺</div>
+                                <div class="cpr-card-info">
+                                    <div class="cpr-card-title">DKA: Full Clinical Case</div>
+                                    <div class="cpr-card-meta"><span class="platform-name reasondx">ReasonDx</span> • Complete case walkthrough</div>
+                                </div>
+                                <div class="cpr-card-arrow">→</div>
+                            </div>
+                        </a>
+                        <a href="../CoachDx/mentor-chat.html?case=cc05" class="cpr-card">
+                            <div class="cpr-card-stripe coachdx"></div>
+                            <div class="cpr-card-content">
+                                <div class="cpr-card-icon coachdx">💬</div>
+                                <div class="cpr-card-info">
+                                    <div class="cpr-card-title">DKA: AI Coaching Session</div>
+                                    <div class="cpr-card-meta"><span class="platform-name coachdx">CoachDx</span> • Socratic dialogue with AI</div>
+                                </div>
+                                <div class="cpr-card-arrow">→</div>
+                            </div>
+                        </a>
+                        <a href="../predict-labs/predict-labs-dka.html" class="cpr-card">
+                            <div class="cpr-card-stripe predictlabs"></div>
+                            <div class="cpr-card-content">
+                                <div class="cpr-card-icon predictlabs">🔮</div>
+                                <div class="cpr-card-info">
+                                    <div class="cpr-card-title">DKA: Predict the Labs</div>
+                                    <div class="cpr-card-meta"><span class="platform-name predictlabs">Predict Labs</span> • Test your predictions</div>
+                                </div>
+                                <div class="cpr-card-arrow">→</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-color: #f472b6; text-align: center; padding: 32px;">
+            <h3 style="color: #be185d; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #db2777; margin-bottom: 16px;">You've completed the Diabetes & DKA module.</p>
+            <p style="color: #be185d;" id="scoreDisplay">Score: 0/0 correct (8 remaining)</p>
+        </div>
+    
+        <!-- References Section -->
+        <section style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; margin: 40px auto; max-width: 900px; padding: 30px; border-radius: 16px;">
+            <h2 style="color: #92400e; margin-bottom: 20px;">📚 Open-Access References</h2>
+            <div style="font-size: 14px;">
+                <div style="padding: 12px 0; border-bottom: 1px solid #fcd34d;">
+                    <strong>1. ADA Standards of Care: Hyperglycemic Crises (2024)</strong><br>
+                    American Diabetes Association Professional Practice Committee. Diabetes Care in the Hospital. <em>Diabetes Care</em>. 2024;47(Suppl 1):S295-S306.<br>
+                    <a href="https://diabetesjournals.org/care/issue/47/Supplement_1" target="_blank" style="color: #b45309;">ADA Standards (Open Access)</a>
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #fcd34d;">
+                    <strong>2. Joint British Diabetes Societies: DKA Guidelines (2023)</strong><br>
+                    JBDS-IP. The Management of Diabetic Ketoacidosis in Adults. 3rd Edition.<br>
+                    <a href="https://abcd.care/joint-british-diabetes-societies-jbds-inpatient-care-group" target="_blank" style="color: #b45309;">JBDS Guidelines Portal</a>
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #fcd34d;">
+                    <strong>3. DKA vs HHS Comparison</strong><br>
+                    Kitabchi AE, et al. Hyperglycemic crises in adult patients with diabetes. <em>Diabetes Care</em>. 2009;32(7):1335-43.<br>
+                    PMC2699725 | <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2699725/" target="_blank" style="color: #b45309;">Free PMC Article</a>
+                </div>
+                <div style="padding: 12px 0;">
+                    <strong>4. Euglycemic DKA (SGLT2 Inhibitors)</strong><br>
+                    Peters AL, et al. Euglycemic diabetic ketoacidosis: a potential complication of SGLT2 inhibition. <em>Diabetes Care</em>. 2015;38(9):1687-93.<br>
+                    PMID: 26078479
+                </div>
+            </div>
+        </section>
+    
+    </main>
+    
+    <footer class="footer"><p>© 2025 MechanismDx · Part of the <a href="index.html">Dx Suite</a></p></footer>
+    
+    <script>
+        const feedbackText = {
+            q1: { correct: "Correct! In DKA, acidosis and insulin deficiency shift K+ out of cells, making serum K+ appear normal or even high despite severe total body depletion. Giving insulin will drive K+ back into cells, unmasking the deficit.", incorrect: "Acidosis causes K+ to shift out of cells in exchange for H+. Serum K+ may appear normal but total body K+ is depleted. This is critical — giving insulin without K+ replacement causes dangerous hypokalemia." },
+            q2: { correct: "Correct! GAD65 antibodies indicate autoimmune β-cell destruction, and low C-peptide confirms little endogenous insulin production. These distinguish Type 1 from Type 2 diabetes.", incorrect: "Autoantibodies (GAD65, IA-2) and low C-peptide are the defining features of Type 1 diabetes. Other features like high HbA1c or polyuria/polydipsia occur in both types." },
+            q3: { correct: "Correct! With K+ <3.3 mEq/L, insulin must be held until potassium is repleted. Giving insulin will drive K+ into cells and can cause fatal arrhythmias from hypokalemia.", incorrect: "K+ <3.3 is a medical emergency — hold insulin until K+ >3.3! Insulin drives K+ into cells; giving it now could cause fatal arrhythmias." },
+            q4: { correct: "Correct! DKA resolution is determined by anion gap closure, not glucose. Continue insulin to suppress ketogenesis; add dextrose to prevent hypoglycemia while treating the acidosis.", incorrect: "The anion gap determines DKA resolution, not glucose. Continue the insulin drip until gap closes (<12). Add dextrose to fluids to prevent hypoglycemia while continuing to treat ketoacidosis." },
+            q5: { correct: "Correct! Extremely high glucose (>600), minimal ketones, normal pH, and altered mental status from hyperosmolality define HHS. It typically occurs in elderly T2DM patients.", incorrect: "This is classic HHS: extreme hyperglycemia (>600), minimal ketosis, normal pH, and altered mental status from hyperosmolality. Typically occurs in elderly T2DM patients." },
+            q6: { correct: "Correct! HHS has more severe volume depletion (~9L vs ~6L in DKA), and typically occurs in elderly patients with comorbidities who present later in their illness course.", incorrect: "HHS mortality is higher due to more severe dehydration and because it typically affects elderly patients with comorbidities who often present later in their course." },
+            q7: { correct: "Correct! SGLT2 inhibitors cause glucosuria, which can mask hyperglycemia. DKA can occur with normal or near-normal glucose levels. Always check ketones and pH in patients on SGLT2i with unexplained illness.", incorrect: "This is euglycemic DKA, a known complication of SGLT2 inhibitors. The glucosuria prevents hyperglycemia, but ketoacidosis can still develop. Don't rely on glucose alone!" },
+            q8: { correct: "Correct! SGLT2 inhibitors have proven benefits in HFrEF regardless of diabetes status. They reduce HF hospitalizations and CV death. Avoid pioglitazone in HF (causes fluid retention).", incorrect: "SGLT2 inhibitors are now standard of care in HFrEF due to proven CV and HF benefits (DAPA-HF, EMPEROR trials). Avoid pioglitazone in HF due to fluid retention." }
+        };
+        
+        let correctAnswers = 0, answeredQuestions = new Set();
+        
+        function checkAnswer(qId, el, isCorrect) {
+            if (answeredQuestions.has(qId)) return;
+            answeredQuestions.add(qId);
+            el.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === el) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                else if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+            const fb = document.getElementById(qId + '-feedback');
+            fb.textContent = feedbackText[qId][isCorrect ? 'correct' : 'incorrect'];
+            fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) correctAnswers++;
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / 8) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswers}/${answeredQuestions.size} correct (${8 - answeredQuestions.size} remaining)`;
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+</body>
+</html>

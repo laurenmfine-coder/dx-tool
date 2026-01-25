@@ -244,6 +244,26 @@
             color: var(--text-primary);
             font-family: var(--font-mono);
         }
+        
+        .stat-item-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: var(--space-sm);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+        }
+        
+        .stat-item-box .stat-icon {
+            font-size: 18px;
+        }
+        
+        .stat-item-box .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
 
         .nav-right {
             display: flex;
@@ -1374,32 +1394,31 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 }
 
     </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
 </head>
 <body>
     <!-- Navigation -->
     <!-- UNIFIED DX NAVIGATION -->
     <nav class="dx-nav">
         <div class="dx-nav-inner">
-            <a href="index.html" class="dx-nav-brand">
+            <a href="../index.html" class="dx-nav-brand">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#1a1a1a">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#1a1a1a"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#1a1a1a"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#1a1a1a"/>
     <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
 </svg>
             </a>
             <div class="dx-nav-links">
-                <a href="index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="../CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -1447,6 +1466,32 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="card-body">
                     <div class="layer-list" id="layerList">
                         <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Stats -->
+            <div class="card" id="progressCard">
+                <div class="card-header">
+                    <div class="card-title">📊 Progress</div>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); text-align: center;">
+                        <div class="stat-item-box">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-value" id="timerDisplay">00:00</div>
+                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Time</div>
+                        </div>
+                        <div class="stat-item-box">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-value" id="scoreDisplay">0</div>
+                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Score</div>
+                        </div>
+                        <div class="stat-item-box">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-value" id="streakDisplay">0</div>
+                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Streak</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1572,10 +1617,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <div class="modal-overlay" id="vignetteModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📋 Full Patient Case</h3>
-                <button class="modal-close" onclick="closeVignetteModal()">×</button>
+                <h3 class="modal-title" id="vignetteModalTitle">📋 Full Patient Case</h3>
+                <button class="modal-close" id="vignetteCloseBtn" onclick="closeVignetteModal()">×</button>
             </div>
             <div class="modal-body">
+                <div class="intro-instructions" id="introInstructions" style="background: var(--accent-primary-dim); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-lg); border-left: 4px solid var(--accent-primary);">
+                    <p style="color: var(--text-primary); margin-bottom: var(--space-sm);"><strong>📖 How Deep Dive Works:</strong></p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-xs);">1. Read this patient case carefully - all the information you need is here</p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-xs);">2. Answer questions across 7 layers (anatomy → synthesis)</p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-xs);">3. Explore the "WHY chain" after each question to deepen understanding</p>
+                    <p style="color: var(--text-secondary); font-size: 14px;">4. Click "View Case" anytime to return to this patient information</p>
+                </div>
                 <div class="vignette-text" id="vignetteText"></div>
                 <div class="vignette-section">
                     <div class="vignette-section-title">Physical Examination</div>
@@ -1588,6 +1640,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="vignette-section">
                     <div class="vignette-section-title">Laboratory Results</div>
                     <div id="labResults"></div>
+                </div>
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <button id="vignetteStartBtn" class="btn btn-primary" onclick="startModule()" style="display: none; padding: var(--space-md) var(--space-xl); font-size: 16px;">
+                        ✓ I've Read the Case — Begin Questions →
+                    </button>
                 </div>
             </div>
         </div>
@@ -1643,16 +1700,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         async function init() {
             deepDiveData = await loadDeepDiveData();
             
-            if (deepDiveData) {
-                document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
-                document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
+            if (deepDiveData && deepDiveData.layers) {
+                // Update page title
+                document.title = `${deepDiveData.title || 'Deep Dive'} - ReasonDx`;
+                
+                // Update patient info if available
+                if (deepDiveData.vignette) {
+                    const patientAgeEl = document.getElementById('patientAge');
+                    const patientCCEl = document.getElementById('patientCC');
+                    if (patientAgeEl) patientAgeEl.textContent = deepDiveData.vignette.patientAge || '58-year-old Male';
+                    if (patientCCEl) patientCCEl.textContent = `Chief Complaint: ${deepDiveData.vignette.chiefComplaint || 'Chest Pain'}`;
+                }
                 document.title = `${deepDiveData.title} - ReasonDx Deep Dive`;
                 
                 loadBookmarks();
                 renderLayerNav();
-                loadVignetteData();
-                loadQuestion();
-                startTimer();
+                loadQuestion(); // Load first question in background
+                
+                // Show vignette intro first - timer starts after they click "Begin"
+                showVignetteIntro();
             } else {
                 // Show error state
                 document.querySelector('.main-content').innerHTML = `
@@ -1673,6 +1739,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             // Map module IDs to JSON file paths
             // Dynamic path construction - module ID maps to JSON file
+            // e.g., 'sepsis' -> 'data/deep-dives/sepsis-deep-dive.json'
+            // Special cases for differently-named files
             const specialCases = {
                 'acs': 'acs-deep-dive-complete.json',
                 'dka': 'dka-deep-dive.json',
@@ -1684,8 +1752,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             try {
                 const response = await fetch(filePath);
+                console.log(`Fetching: ${filePath}, Status: ${response.status}`);
                 if (!response.ok) throw new Error('Module not found');
-                return await response.json();
+                const data = await response.json();
+                console.log('Data loaded:', data.title);
+                return data;
             } catch (e) {
                 console.log(`Could not load ${filePath}, trying fallback...`);
                 // Try alternate path (for local testing)
@@ -1830,8 +1901,10 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         function updateTimerDisplay() {
             const mins = Math.floor(timerSeconds / 60);
             const secs = timerSeconds % 60;
-            document.getElementById('timerDisplay').textContent = 
-                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            const timerEl = document.getElementById('timerDisplay');
+            if (timerEl) {
+                timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
         }
 
         // ============ LAYER NAVIGATION ============
@@ -1895,7 +1968,16 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 const exam = vignette.physicalExam;
                 let examHtml = '';
                 for (const [key, val] of Object.entries(exam)) {
-                    examHtml += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${val}</p>`;
+                    // Handle nested objects like vitals
+                    if (typeof val === 'object' && val !== null) {
+                        let nestedHtml = '';
+                        for (const [subKey, subVal] of Object.entries(val)) {
+                            nestedHtml += `${subKey}: ${subVal}, `;
+                        }
+                        examHtml += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${nestedHtml.slice(0, -2)}</p>`;
+                    } else {
+                        examHtml += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${val}</p>`;
+                    }
                 }
                 document.getElementById('examFindings').innerHTML = examHtml;
             }
@@ -1911,13 +1993,22 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 const labs = vignette.diagnostics.labs;
                 let labHtml = '<table style="width:100%;font-size:14px;border-collapse:collapse;">';
                 for (const [key, val] of Object.entries(labs)) {
-                    const flagColor = val.flag === 'CRITICAL' ? 'var(--error)' : 
-                                     val.flag === 'HIGH' ? 'var(--warning)' : 'var(--text-primary)';
-                    labHtml += `<tr style="border-bottom:1px solid var(--border-subtle);">
-                        <td style="padding:8px 0;font-weight:500;">${key}</td>
-                        <td style="color:${flagColor};font-weight:600;">${val.value}</td>
-                        <td style="color:var(--text-muted);font-size:12px;">(ref: ${val.reference})</td>
-                    </tr>`;
+                    // Handle both object format and simple string format
+                    if (typeof val === 'object' && val !== null) {
+                        const flagColor = val.flag === 'CRITICAL' ? 'var(--error)' : 
+                                         val.flag === 'HIGH' ? 'var(--warning)' : 'var(--text-primary)';
+                        labHtml += `<tr style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="padding:8px 0;font-weight:500;">${key}</td>
+                            <td style="color:${flagColor};font-weight:600;">${val.value}</td>
+                            <td style="color:var(--text-muted);font-size:12px;">(ref: ${val.reference})</td>
+                        </tr>`;
+                    } else {
+                        labHtml += `<tr style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="padding:8px 0;font-weight:500;">${key}</td>
+                            <td style="font-weight:600;">${val}</td>
+                            <td></td>
+                        </tr>`;
+                    }
                 }
                 labHtml += '</table>';
                 document.getElementById('labResults').innerHTML = labHtml;
@@ -1925,11 +2016,30 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         }
 
         function openVignetteModal() {
+            document.getElementById('introInstructions').style.display = 'none';
+            document.getElementById('vignetteModalTitle').textContent = '📋 Full Patient Case';
+            document.getElementById('vignetteCloseBtn').style.display = 'block';
+            document.getElementById('vignetteStartBtn').style.display = 'none';
             document.getElementById('vignetteModal').classList.add('visible');
         }
 
         function closeVignetteModal() {
             document.getElementById('vignetteModal').classList.remove('visible');
+        }
+        
+        // Show vignette intro on first load
+        function showVignetteIntro() {
+            loadVignetteData();
+            document.getElementById('introInstructions').style.display = 'block';
+            document.getElementById('vignetteModalTitle').textContent = '📋 Read the Patient Case First';
+            document.getElementById('vignetteCloseBtn').style.display = 'none';
+            document.getElementById('vignetteStartBtn').style.display = 'block';
+            document.getElementById('vignetteModal').classList.add('visible');
+        }
+        
+        function startModule() {
+            document.getElementById('vignetteModal').classList.remove('visible');
+            startTimer();
         }
 
         // ============ BOOKMARKS ============
@@ -2142,8 +2252,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 currentStreak = 0;
             }
 
-            document.getElementById('scoreDisplay').textContent = Math.round(score);
-            document.getElementById('streakDisplay').textContent = currentStreak;
+            // Safely update score and streak displays
+            const scoreEl = document.getElementById('scoreDisplay');
+            const streakEl = document.getElementById('streakDisplay');
+            if (scoreEl) scoreEl.textContent = Math.round(score);
+            if (streakEl) streakEl.textContent = currentStreak;
 
             // Mark options
             const options = document.querySelectorAll('.option');
@@ -2166,83 +2279,130 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         function showExplanation(question, isCorrect) {
             const panel = document.getElementById('explanationPanel');
             const resultBadge = document.getElementById('resultBadge');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultText = document.getElementById('resultText');
+            const explanationText = document.getElementById('explanationText');
             
-            resultBadge.className = `result-badge ${isCorrect ? 'correct' : 'incorrect'}`;
-            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
-            document.getElementById('resultText').textContent = isCorrect ? 'Correct!' : 'Incorrect';
-
-            document.getElementById('explanationText').textContent = question.explanation;
+            // Safely update result badge
+            if (resultBadge) {
+                resultBadge.className = `result-badge ${isCorrect ? 'correct' : 'incorrect'}`;
+            }
+            if (resultIcon) {
+                resultIcon.textContent = isCorrect ? '✓' : '✗';
+            }
+            if (resultText) {
+                resultText.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+            }
+            if (explanationText) {
+                explanationText.textContent = question.explanation || '';
+            }
 
             // Render WHY chain
             const whyItems = document.getElementById('whyItems');
-            whyItems.innerHTML = '';
-            if (question.whyChain && question.whyChain.length > 0) {
-                question.whyChain.forEach((item, i) => {
-                    const whyEl = document.createElement('div');
-                    whyEl.className = 'why-item';
-                    whyEl.id = `why-item-${i}`;
-                    whyEl.innerHTML = `
-                        <div class="why-question">WHY: ${item.why}</div>
-                        <div class="why-answer">${item.answer}</div>
-                        ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
-                    `;
-                    whyItems.appendChild(whyEl);
-                });
-                document.getElementById('revealWhyBtn').style.display = 'block';
-                whyRevealIndex = 0;
-            } else {
-                document.getElementById('revealWhyBtn').style.display = 'none';
+            if (whyItems) {
+                whyItems.innerHTML = '';
+                if (question.whyChain && question.whyChain.length > 0) {
+                    question.whyChain.forEach((item, i) => {
+                        const whyEl = document.createElement('div');
+                        whyEl.className = 'why-item';
+                        whyEl.id = `why-item-${i}`;
+                        whyEl.innerHTML = `
+                            <div class="why-question">WHY: ${item.why}</div>
+                            <div class="why-answer">${item.answer}</div>
+                            ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
+                        `;
+                        whyItems.appendChild(whyEl);
+                    });
+                    const revealBtn = document.getElementById('revealWhyBtn');
+                    if (revealBtn) revealBtn.style.display = 'block';
+                    whyRevealIndex = 0;
+                } else {
+                    const revealBtn = document.getElementById('revealWhyBtn');
+                    if (revealBtn) revealBtn.style.display = 'none';
+                }
             }
 
             // MechanismDx link
-            if (question.remediation) {
-                const link = document.getElementById('mechanismLink');
-                link.href = question.remediation.link || '#';
-                document.getElementById('mechanismLinkDesc').textContent = question.remediation.title || 'Review this topic';
-                link.style.display = 'flex';
-            } else {
-                document.getElementById('mechanismLink').style.display = 'none';
+            const mechanismLink = document.getElementById('mechanismLink');
+            if (mechanismLink) {
+                if (question.remediation) {
+                    mechanismLink.href = question.remediation.link || '#';
+                    const linkDesc = document.getElementById('mechanismLinkDesc');
+                    if (linkDesc) linkDesc.textContent = question.remediation.title || 'Review this topic';
+                    mechanismLink.style.display = 'flex';
+                } else {
+                    mechanismLink.style.display = 'none';
+                }
             }
 
-            // Render sources
+            // Render sources - handle both string and object formats
             const sourcesList = document.getElementById('sourcesList');
-            sourcesList.innerHTML = '';
-            if (question.sources) {
-                question.sources.forEach(src => {
-                    const srcEl = document.createElement('div');
-                    srcEl.className = 'source-item';
-                    srcEl.textContent = src;
-                    sourcesList.appendChild(srcEl);
-                });
+            if (sourcesList) {
+                sourcesList.innerHTML = '';
+                if (question.sources && question.sources.length > 0) {
+                    question.sources.forEach(src => {
+                        const srcEl = document.createElement('div');
+                        srcEl.className = 'source-item';
+                        // Handle both string sources and object sources {text, url}
+                        if (typeof src === 'string') {
+                            srcEl.textContent = src;
+                        } else if (src && typeof src === 'object') {
+                            if (src.url) {
+                                const link = document.createElement('a');
+                                link.href = src.url;
+                                link.target = '_blank';
+                                link.rel = 'noopener noreferrer';
+                                link.textContent = src.text || src.url;
+                                link.style.color = 'var(--accent-text)';
+                                srcEl.appendChild(link);
+                            } else {
+                                srcEl.textContent = src.text || '';
+                            }
+                        }
+                        sourcesList.appendChild(srcEl);
+                    });
+                }
             }
 
-            panel.classList.add('visible');
-            document.getElementById('submitBtn').style.display = 'none';
-            document.getElementById('hintBtn').style.display = 'none';
-            document.querySelector('.hint-container').style.display = 'none';
+            if (panel) panel.classList.add('visible');
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const hintBtn = document.getElementById('hintBtn');
+            const hintContainer = document.querySelector('.hint-container');
+            
+            if (submitBtn) submitBtn.style.display = 'none';
+            if (hintBtn) hintBtn.style.display = 'none';
+            if (hintContainer) hintContainer.style.display = 'none';
         }
 
         function revealNextWhy() {
             const layer = deepDiveData.layers[currentLayerIndex];
             const question = layer.questions[currentQuestionIndex];
 
-            if (whyRevealIndex < question.whyChain.length) {
+            if (question.whyChain && whyRevealIndex < question.whyChain.length) {
                 const whyEl = document.getElementById(`why-item-${whyRevealIndex}`);
-                whyEl.classList.add('revealed');
-                whyRevealIndex++;
+                if (whyEl) {
+                    whyEl.classList.add('revealed');
+                    whyRevealIndex++;
+                }
             }
 
-            if (whyRevealIndex >= question.whyChain.length) {
-                document.getElementById('revealWhyBtn').style.display = 'none';
+            if (!question.whyChain || whyRevealIndex >= question.whyChain.length) {
+                const revealBtn = document.getElementById('revealWhyBtn');
+                if (revealBtn) revealBtn.style.display = 'none';
             }
         }
 
         // ============ NAVIGATION ============
         function nextQuestion() {
             currentQuestionIndex++;
-            document.getElementById('submitBtn').style.display = 'block';
-            document.getElementById('hintBtn').style.display = 'block';
-            document.querySelector('.hint-container').style.display = 'flex';
+            const submitBtn = document.getElementById('submitBtn');
+            const hintBtn = document.getElementById('hintBtn');
+            const hintContainer = document.querySelector('.hint-container');
+            
+            if (submitBtn) submitBtn.style.display = 'block';
+            if (hintBtn) hintBtn.style.display = 'block';
+            if (hintContainer) hintContainer.style.display = 'flex';
             loadQuestion();
         }
 
@@ -2454,7 +2614,5 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     });
     </script>
 
-    <script src="dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "Home", platformRoot: "" }); });</script>
 </body>
 </html>

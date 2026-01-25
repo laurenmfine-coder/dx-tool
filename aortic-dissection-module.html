@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aortic Dissection | MechanismDx</title>
+    <style>
+        :root { --primary: #dc2626; --primary-dark: #991b1b; --primary-light: #fef2f2; --text: #1e293b; --text-secondary: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); padding: 16px 24px; color: white; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .header-brand { font-size: 18px; font-weight: 600; text-decoration: none; color: white; }
+        .header-nav { display: flex; gap: 8px; }
+        .header-link { padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
+        .header-link:hover { background: rgba(255,255,255,0.15); color: white; }
+        .hero { background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%); padding: 40px 24px; color: white; }
+        .hero-inner { max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
+        .hero-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
+        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .concept-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .concept-box h4 { font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .card-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .card p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; margin: 2px; }
+        .tag-red { background: #fef2f2; color: #dc2626; }
+        .tag-blue { background: #eff6ff; color: #2563eb; }
+        .tag-green { background: #f0fdf4; color: #16a34a; }
+        .tag-purple { background: #faf5ff; color: #9333ea; }
+        .flow-diagram { background: var(--bg); border-radius: 10px; padding: 20px; margin: 16px 0; }
+        .flow-step { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
+        .flow-step-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .table-wrap { overflow-x: auto; margin: 16px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg); font-weight: 600; }
+        .highlight { background: #fef3c7; }
+        .integration-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-top: 24px; }
+        .integration-box h3 { color: #166534; margin-bottom: 12px; }
+        .integration-links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .integration-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1px solid #86efac; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; transition: all 0.15s; }
+        .integration-link:hover { background: #f0fdf4; border-color: #22c55e; }
+        .quiz-box { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .quiz-box h4 { color: #92400e; margin-bottom: 8px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } .hero h1 { font-size: 24px; } }
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="../index.html" class="header-brand">🩺 Dx Suite</a>
+            <nav class="header-nav">
+                <a href="index.html" class="header-link">MechanismDx</a>
+                <a href="../ReasonDx/index.html" class="header-link">ReasonDx</a>
+                <a href="../CoachDx/index.html" class="header-link">CoachDx</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>🫀 Aortic Dissection</h1>
+            <p>Understand the pathophysiology, classification, and management of this cardiovascular emergency where time = aorta.</p>
+            <div class="hero-meta">
+                <span>⏱️ 25 min</span>
+                <span>📊 High Yield</span>
+                <span>🎯 Emergency Medicine</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <!-- Overview -->
+        <div class="section">
+            <h2 class="section-title">📋 Overview</h2>
+            <p>Aortic dissection occurs when blood enters the aortic wall through an intimal tear, creating a false lumen that propagates along the vessel. Without treatment, mortality increases ~1-2% per hour in the first 48 hours for Type A dissections.</p>
+            
+            <div class="concept-box">
+                <h4>🎯 Key Concept: The Intimal Tear</h4>
+                <p>The dissection begins with a tear in the intima (inner layer). Blood under arterial pressure forces its way into the media (middle layer), creating a false lumen that can propagate proximally or distally, compromising branch vessels and causing end-organ ischemia.</p>
+            </div>
+        </div>
+
+        <!-- Classification Systems -->
+        <div class="section">
+            <h2 class="section-title">📊 Classification Systems</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🅰️ Stanford Classification (Preferred)</div>
+                    <p><strong>Type A:</strong> Involves ascending aorta (regardless of origin)<br>
+                    <strong>Type B:</strong> Does NOT involve ascending aorta<br><br>
+                    <em>Clinical relevance: Type A = Surgery, Type B = Medical (usually)</em></p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔢 DeBakey Classification</div>
+                    <p><strong>Type I:</strong> Originates in ascending, extends to descending<br>
+                    <strong>Type II:</strong> Limited to ascending aorta only<br>
+                    <strong>Type III:</strong> Originates in descending aorta<br>
+                    <em>(IIIa: above diaphragm, IIIb: below)</em></p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Type A (Stanford)</th>
+                        <th>Type B (Stanford)</th>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>Ascending aorta involved</td>
+                        <td>Descending only</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency</td>
+                        <td>~65%</td>
+                        <td>~35%</td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td class="highlight"><strong>Emergent Surgery</strong></td>
+                        <td>Medical (BP/HR control)</td>
+                    </tr>
+                    <tr>
+                        <td>Mortality (untreated)</td>
+                        <td>1-2% per hour</td>
+                        <td>~10% at 30 days</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pathophysiology -->
+        <div class="section">
+            <h2 class="section-title">🔬 Pathophysiology</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <span class="flow-step-num">1</span>
+                    <div><strong>Risk Factors</strong> → Hypertension (present in 70-90%), connective tissue disorders (Marfan, Ehlers-Danlos), bicuspid aortic valve, aortic aneurysm, cocaine use</div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">2</span>
+                    <div><strong>Intimal Tear</strong> → Usually occurs at points of greatest hydraulic stress: proximal ascending aorta (65%), just distal to left subclavian (20%)</div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">3</span>
+                    <div><strong>False Lumen Creation</strong> → Blood enters media, separating intima from adventitia; can propagate proximally or distally</div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">4</span>
+                    <div><strong>Complications</strong> → Branch vessel occlusion (stroke, MI, limb ischemia, renal failure), aortic rupture, tamponade, aortic regurgitation</div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h4>⚠️ Why Hypertension Matters</h4>
+                <p>Blood pressure exerts force perpendicular to the vessel wall. Higher BP = greater wall stress = faster propagation. This is why immediate BP and heart rate control is critical: target SBP 100-120 mmHg and HR &lt;60.</p>
+            </div>
+        </div>
+
+        <!-- Clinical Presentation -->
+        <div class="section">
+            <h2 class="section-title">🩺 Clinical Presentation</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">⚡ Classic Presentation</div>
+                    <ul>
+                        <li><strong>Pain:</strong> Sudden, severe, "tearing/ripping" chest or back pain</li>
+                        <li><strong>Maximal at onset</strong> (vs crescendo in ACS)</li>
+                        <li>May migrate as dissection propagates</li>
+                        <li>Anterior chest → ascending; interscapular → descending</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔍 Physical Exam Findings</div>
+                    <ul>
+                        <li><strong>BP differential &gt;20 mmHg</strong> between arms</li>
+                        <li>Pulse deficits (asymmetric pulses)</li>
+                        <li>New aortic regurgitation murmur</li>
+                        <li>Neurologic deficits (stroke from carotid involvement)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin: 20px 0 12px;">Complications by Location</h3>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Branch Vessel</th>
+                        <th>Complication</th>
+                        <th>Clinical Finding</th>
+                    </tr>
+                    <tr>
+                        <td>Coronary ostia</td>
+                        <td>Myocardial ischemia/infarction</td>
+                        <td>Chest pain, ECG changes, troponin↑</td>
+                    </tr>
+                    <tr>
+                        <td>Brachiocephalic/Carotid</td>
+                        <td>Stroke</td>
+                        <td>Focal neurologic deficits</td>
+                    </tr>
+                    <tr>
+                        <td>Subclavian</td>
+                        <td>Arm ischemia</td>
+                        <td>BP differential, pulse deficit</td>
+                    </tr>
+                    <tr>
+                        <td>Mesenteric</td>
+                        <td>Bowel ischemia</td>
+                        <td>Abdominal pain, bloody diarrhea</td>
+                    </tr>
+                    <tr>
+                        <td>Renal</td>
+                        <td>Acute kidney injury</td>
+                        <td>Oliguria, rising creatinine</td>
+                    </tr>
+                    <tr>
+                        <td>Iliac</td>
+                        <td>Limb ischemia</td>
+                        <td>Leg pain, pallor, pulselessness</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Diagnosis -->
+        <div class="section">
+            <h2 class="section-title">🔎 Diagnosis</h2>
+            
+            <div class="concept-box">
+                <h4>🎯 Imaging of Choice: CT Angiography</h4>
+                <p>CTA is the first-line imaging modality: fast, widely available, highly sensitive/specific. Look for the intimal flap separating true and false lumens. TEE is an alternative when CT is unavailable or contraindicated.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">📋 Initial Workup</div>
+                    <ul>
+                        <li>CXR: Widened mediastinum (62%), abnormal aortic contour</li>
+                        <li>ECG: Rule out STEMI; may show LVH, ischemia</li>
+                        <li>Labs: Troponin, lactate, Cr, CBC, type & screen</li>
+                        <li>D-dimer: Sensitive but not specific</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">🖼️ Definitive Imaging</div>
+                    <ul>
+                        <li><strong>CT Angiography:</strong> Gold standard, Sens/Spec ~95-100%</li>
+                        <li><strong>TEE:</strong> Bedside option, excellent for ascending</li>
+                        <li><strong>MRA:</strong> Most accurate but time-consuming</li>
+                        <li><strong>Aortography:</strong> Rarely used now</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>💡 Clinical Pearl: ADD Risk Score</h4>
+                <p>The Aortic Dissection Detection Risk Score helps stratify pre-test probability:</p>
+                <ul>
+                    <li><strong>High-risk conditions:</strong> Marfan, family hx, known aortic disease, aortic valve disease, recent aortic manipulation</li>
+                    <li><strong>High-risk pain features:</strong> Abrupt onset, severe intensity, tearing/ripping</li>
+                    <li><strong>High-risk exam findings:</strong> Pulse deficit, BP differential, focal neuro deficit, new AI murmur, hypotension/shock</li>
+                </ul>
+                <p>≥1 feature in each category = high risk → proceed directly to imaging</p>
+            </div>
+        </div>
+
+        <!-- Management -->
+        <div class="section">
+            <h2 class="section-title">💊 Management</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <span class="flow-step-num">1</span>
+                    <div><strong>Immediate Stabilization</strong>
+                        <br>• IV access, continuous monitoring, pain control (morphine)
+                        <br>• Type and crossmatch, notify CT surgery
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">2</span>
+                    <div><strong>Anti-Impulse Therapy (Critical!)</strong>
+                        <br>• Target: SBP 100-120 mmHg, HR &lt;60 bpm
+                        <br>• <strong>Beta-blocker FIRST:</strong> Esmolol (titratable) or labetalol
+                        <br>• Then add vasodilator if needed (nitroprusside, nicardipine)
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">3</span>
+                    <div><strong>Definitive Treatment</strong>
+                        <br>• <span class="tag tag-red">Type A → Emergent surgical repair</span>
+                        <br>• <span class="tag tag-blue">Type B uncomplicated → Medical management</span>
+                        <br>• <span class="tag tag-purple">Type B complicated → TEVAR or surgery</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h4>⚠️ Why Beta-Blocker First?</h4>
+                <p>Vasodilators alone cause reflex tachycardia, which increases dP/dt (the rate of pressure change) and wall stress, potentially extending the dissection. Beta-blockers reduce both HR and contractility, decreasing shear stress on the aortic wall.</p>
+            </div>
+
+            <h3 style="margin: 20px 0 12px;">Complicated Type B Indications for Intervention</h3>
+            <ul>
+                <li>Rupture or impending rupture</li>
+                <li>Malperfusion syndrome (visceral, renal, limb ischemia)</li>
+                <li>Refractory pain despite optimal medical therapy</li>
+                <li>Rapid aortic expansion (&gt;1 cm/year)</li>
+                <li>Aneurysm formation &gt;5.5 cm</li>
+            </ul>
+        </div>
+
+        <!-- Integration Box -->
+        <div class="integration-box">
+            <h3>🔗 Continue Your Learning</h3>
+            <p>Master aortic dissection across all three platforms:</p>
+            <div class="integration-links">
+                <a href="../ReasonDx/aortic-dissection-adventure.html" class="integration-link">
+                    🎮 <strong>ReasonDx:</strong> Aortic Dissection Case
+                </a>
+                <a href="../CoachDx/mentor-chat.html?case=aortic-dissection" class="integration-link">
+                    🗣️ <strong>CoachDx:</strong> Dissection SBAR Practice
+                </a>
+                <a href="acs-module.html" class="integration-link">
+                    📚 <strong>Related:</strong> ACS Module
+                </a>
+                <a href="htn-emergency-module.html" class="integration-link">
+                    📚 <strong>Related:</strong> HTN Emergency
+                </a>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2 class="section-title">📝 Key Takeaways</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🎯 Must Know</div>
+                    <ul>
+                        <li>Type A = ascending involved = surgery</li>
+                        <li>Type B = descending only = medical (usually)</li>
+                        <li>Classic: tearing pain, maximal at onset</li>
+                        <li>BP differential &gt;20 mmHg is red flag</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">💊 Treatment Pearls</div>
+                    <ul>
+                        <li>Beta-blocker BEFORE vasodilator</li>
+                        <li>Target SBP 100-120, HR &lt;60</li>
+                        <li>CTA is imaging of choice</li>
+                        <li>Don't delay surgery for Type A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+</body>
+</html>
