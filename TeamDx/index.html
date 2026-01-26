@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>TeamDx - Interprofessional Collaboration</title>
+    <title>TeamDx - Interprofessional Collaboration Training</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #f8fafc; color: #1e293b; 
+            background: #f8fafc; 
+            color: #1e293b;
+            min-height: 100vh;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 24px; padding-top: 88px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 24px; padding-top: 88px; }
         
         .header {
             text-align: center;
@@ -18,206 +20,300 @@
             background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
             border-radius: 16px;
             margin-bottom: 24px;
+            color: #fff;
         }
-        .header h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
-        .header p { color: rgba(255,255,255,0.9); }
+        .header h1 { font-size: 2rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; }
         
         .scenario-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
         }
-        .scenario-btn {
-            padding: 20px;
-            background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .scenario-card {
+            padding: 24px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            text-align: left;
         }
-        .scenario-btn:hover { background: rgba(139,92,246,0.1); border-color: #a78bfa; }
-        .scenario-btn h3 { margin-bottom: 6px; font-size: 1rem; }
-        .scenario-btn p { font-size: 0.8rem; color: #64748b; }
+        .scenario-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-color: #8b5cf6;
+        }
+        .scenario-card h3 { margin-bottom: 8px; color: #1e293b; }
+        .scenario-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 12px; }
+        .scenario-card .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            color: #475569;
+        }
         
-        .main-card {
+        .sim-panel {
+            display: none;
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
-            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        .main-card.active { display: block; }
+        .sim-panel.active { display: block; }
         
-        .patient-bar {
-            padding: 16px 20px;
-            background: rgba(139,92,246,0.08);
+        .sim-header {
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: #fff;
+        }
+        .sim-header h2 { font-size: 1.3rem; margin-bottom: 4px; }
+        .sim-header .setting { opacity: 0.85; font-size: 0.9rem; }
+        
+        .patient-context {
+            padding: 16px 24px;
+            background: #fef3c7;
+            border-bottom: 1px solid #fcd34d;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+        .patient-context strong { color: #78350f; }
+        
+        .team-roster {
+            padding: 12px 24px;
+            background: #f8fafc;
             border-bottom: 1px solid #e2e8f0;
-        }
-        .patient-bar h4 { color: #a78bfa; font-size: 0.9rem; }
-        .patient-bar p { font-size: 0.85rem; margin-top: 4px; }
-        
-        .team-bar {
-            padding: 12px 20px;
-            background: #f1f5f9;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            font-size: 0.8rem;
         }
-        .team-tag {
-            padding: 4px 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-        }
-        .team-tag.you { background: rgba(167,139,250,0.4); }
-        
-        .chat-area {
-            height: 400px;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .msg {
-            max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-        }
-        .msg-header {
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 4px;
+        .team-member {
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-        .msg.attending { background: rgba(239,68,68,0.2); }
-        .msg.attending .msg-header { color: #ef4444; }
-        .msg.nurse { background: rgba(74,222,128,0.2); }
-        .msg.nurse .msg-header { color: #4ade80; }
-        .msg.pharmacy { background: rgba(251,191,36,0.2); }
-        .msg.pharmacy .msg-header { color: #fbbf24; }
-        .msg.pt { background: rgba(96,165,250,0.2); }
-        .msg.pt .msg-header { color: #60a5fa; }
-        .msg.rt { background: rgba(236,72,153,0.2); }
-        .msg.rt .msg-header { color: #ec4899; }
-        .msg.social { background: rgba(20,184,166,0.2); }
-        .msg.social .msg-header { color: #14b8a6; }
-        .msg.consult { background: rgba(249,115,22,0.2); }
-        .msg.consult .msg-header { color: #f97316; }
-        .msg.student {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-            align-self: flex-end;
-        }
-        .msg.student .msg-header { color: #475569; }
-        .msg.system {
-            background: rgba(255,255,255,0.1);
-            align-self: center;
-            text-align: center;
+            padding: 6px 12px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
             font-size: 0.8rem;
-            color: #64748b;
         }
+        .team-member.you { background: #8b5cf6; color: #fff; border-color: #8b5cf6; }
+        .team-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot-attending { background: #ef4444; }
+        .dot-nurse { background: #22c55e; }
+        .dot-rt { background: #ec4899; }
+        .dot-pharmacy { background: #f59e0b; }
+        .dot-social { background: #14b8a6; }
+        .dot-student { background: #8b5cf6; }
         
-        .response-area {
-            padding: 16px 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .response-options {
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 16px;
+            background: #fafafa;
         }
-        .response-opt {
+        
+        .message {
+            max-width: 85%;
             padding: 12px 16px;
-            background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 12px;
             font-size: 0.9rem;
-            transition: all 0.2s;
+            line-height: 1.5;
         }
-        .response-opt:hover { background: rgba(139,92,246,0.1); border-color: #a78bfa; }
-        .response-opt.selected { background: rgba(167,139,250,0.3); border-color: #a78bfa; }
-        
-        .feedback-box {
-            margin-top: 16px;
-            padding: 16px;
-            border-radius: 10px;
-            display: none;
+        .message .sender { font-size: 0.75rem; font-weight: 600; margin-bottom: 4px; }
+        .message.attending { background: #fee2e2; }
+        .message.attending .sender { color: #dc2626; }
+        .message.nurse { background: #dcfce7; }
+        .message.nurse .sender { color: #16a34a; }
+        .message.rt { background: #fce7f3; }
+        .message.rt .sender { color: #db2777; }
+        .message.pharmacy { background: #fef3c7; }
+        .message.pharmacy .sender { color: #d97706; }
+        .message.social { background: #ccfbf1; }
+        .message.social .sender { color: #0d9488; }
+        .message.student {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: #fff;
+            align-self: flex-end;
         }
-        .feedback-box.visible { display: block; }
-        .feedback-box h5 { margin-bottom: 8px; }
-        .feedback-good { background: rgba(74,222,128,0.15); border: 1px solid #4ade80; }
-        .feedback-good h5 { color: #4ade80; }
-        .feedback-improve { background: rgba(251,191,36,0.15); border: 1px solid #fbbf24; }
-        .feedback-improve h5 { color: #fbbf24; }
+        .message.student .sender { color: rgba(255,255,255,0.8); }
+        .message.system {
+            background: #f1f5f9;
+            align-self: center;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            max-width: 90%;
+        }
+        .message.ai-feedback {
+            background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(109,40,217,0.1));
+            border: 1px solid #8b5cf6;
+            max-width: 95%;
+        }
+        .message.ai-feedback .sender { color: #6d28d9; }
         
-        .progress-bar {
-            margin-top: 24px;
+        .typing-indicator {
             display: flex;
             gap: 4px;
-        }
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            padding: 12px 16px;
             background: #e2e8f0;
+            border-radius: 12px;
+            width: fit-content;
         }
-        .progress-dot.complete { background: #4ade80; }
-        .progress-dot.current { background: #a78bfa; }
+        .typing-indicator span {
+            width: 8px; height: 8px;
+            background: #94a3b8;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .input-area {
+            padding: 20px 24px;
+            border-top: 1px solid #e2e8f0;
+            background: #fff;
+        }
+        .input-prompt { font-size: 0.9rem; color: #475569; margin-bottom: 12px; font-weight: 500; }
+        .input-wrapper { display: flex; gap: 12px; }
+        .response-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            resize: none;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        .response-input:focus { outline: none; border-color: #8b5cf6; }
+        .response-input::placeholder { color: #94a3b8; }
+        
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: #fff;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(139,92,246,0.4); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-secondary { background: #f1f5f9; color: #475569; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        
+        .resources-panel {
+            margin-top: 24px;
+            padding: 20px 24px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .resources-panel h3 { font-size: 1rem; color: #475569; margin-bottom: 16px; }
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+        .resource-item {
+            padding: 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        .resource-item:hover { border-color: #8b5cf6; background: rgba(139,92,246,0.05); }
+        .resource-item .title { font-weight: 600; font-size: 0.9rem; color: #1e293b; margin-bottom: 4px; }
+        .resource-item .source { font-size: 0.75rem; color: #64748b; }
+        .resource-item .type {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            color: #475569;
+            margin-top: 8px;
+        }
         
         .summary-panel {
+            display: none;
             margin-top: 24px;
             padding: 24px;
             background: #fff;
             border-radius: 16px;
-            display: none;
+            border: 1px solid #e2e8f0;
         }
         .summary-panel.visible { display: block; }
-        .summary-panel h3 { color: #a78bfa; margin-bottom: 16px; }
+        .summary-panel h3 { color: #6d28d9; margin-bottom: 20px; }
+        .feedback-summary {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(109,40,217,0.05));
+            border-radius: 12px;
+            border-left: 4px solid #8b5cf6;
+        }
+        .feedback-summary h4 { color: #6d28d9; margin-bottom: 12px; }
+        .feedback-summary p { color: #475569; line-height: 1.7; }
+        .actions { display: flex; gap: 12px; margin-top: 20px; }
         
-        .skill-score {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
+        @media (max-width: 640px) {
+            .input-wrapper { flex-direction: column; }
+            .btn { width: 100%; }
         }
-        .skill-score:last-child { border-bottom: none; }
-        .skill-bar {
-            width: 120px;
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .skill-fill { height: 100%; border-radius: 4px; }
-        .fill-good { background: #4ade80; }
-        .fill-moderate { background: #fbbf24; }
-        .fill-poor { background: #ef4444; }
     </style>
-    <link rel="stylesheet" href="/dx-mobile-enhanced.css">
 </head>
 <body>
     <script src="/dx-universal-nav.js"></script>
+    
     <div class="container">
         <div class="header">
             <h1>👥 TeamDx</h1>
-            <p>Interprofessional Collaboration Training</p>
+            <p>AI-Powered Interprofessional Collaboration Training</p>
         </div>
         
         <div class="scenario-grid" id="scenarioGrid"></div>
         
-        <div class="main-card" id="mainCard">
-            <div class="patient-bar" id="patientBar"></div>
-            <div class="team-bar" id="teamBar"></div>
-            <div class="chat-area" id="chatArea"></div>
-            <div class="response-area" id="responseArea"></div>
-            <div class="progress-bar" id="progressBar"></div>
+        <div class="sim-panel" id="simPanel">
+            <div class="sim-header">
+                <h2 id="simTitle"></h2>
+                <div class="setting" id="simSetting"></div>
+            </div>
+            <div class="patient-context" id="patientContext"></div>
+            <div class="team-roster" id="teamRoster"></div>
+            <div class="chat-container" id="chatContainer"></div>
+            <div class="input-area" id="inputArea">
+                <div class="input-prompt" id="inputPrompt">How do you respond?</div>
+                <div class="input-wrapper">
+                    <textarea class="response-input" id="responseInput" placeholder="Type your response... Be specific about what you would say or do."></textarea>
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitResponse()">Send</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resources-panel" id="resourcesPanel" style="display: none;">
+            <h3>📚 Learning Resources</h3>
+            <div class="resource-grid" id="resourceGrid"></div>
         </div>
         
         <div class="summary-panel" id="summaryPanel"></div>
+        
+        <div style="margin-top: 24px; text-align: center;" id="backBtn" style="display: none;">
+            <button class="btn btn-secondary" onclick="backToScenarios()">← Back to Scenarios</button>
+        </div>
     </div>
     
     <script>
@@ -225,427 +321,283 @@
             {
                 id: 'icu-rounds',
                 title: 'ICU Multidisciplinary Rounds',
-                desc: 'Present your patient and coordinate care with the team',
-                setting: 'MICU',
+                description: 'Present your patient and coordinate care with the ICU team.',
+                tags: ['Communication', 'Presentation', 'Care Coordination'],
+                setting: 'Medical ICU - Morning Rounds',
                 patient: {
-                    summary: 'Mr. Johnson, 67M with COPD exacerbation, intubated 2 days ago. FiO2 60%, PEEP 8. Improving but not ready for extubation. Family asking about prognosis.'
+                    name: 'Mr. Johnson',
+                    summary: '67M with COPD exacerbation, intubated 2 days ago. FiO2 60%, PEEP 8. Improving but not ready for extubation.',
+                    details: 'PMH: COPD (FEV1 45%), HTN, T2DM. Day 2 of intubation, weaning parameters improving but not meeting SBT criteria. Family asking about prognosis.'
                 },
                 team: [
-                    { role: 'Attending Physician', abbrev: 'Attending', class: 'attending' },
-                    { role: 'You (Medical Student)', abbrev: 'You', class: 'student' },
-                    { role: 'ICU Nurse', abbrev: 'RN', class: 'nurse' },
-                    { role: 'Respiratory Therapist', abbrev: 'RT', class: 'rt' },
-                    { role: 'Pharmacist', abbrev: 'PharmD', class: 'pharmacy' },
-                    { role: 'Social Worker', abbrev: 'SW', class: 'social' }
+                    { role: 'Attending', abbrev: 'Dr. Martinez', class: 'attending' },
+                    { role: 'You', abbrev: 'You', class: 'student' },
+                    { role: 'ICU Nurse', abbrev: 'Sarah, RN', class: 'nurse' },
+                    { role: 'RT', abbrev: 'Mike, RT', class: 'rt' },
+                    { role: 'Pharmacist', abbrev: 'Dr. Patel', class: 'pharmacy' },
+                    { role: 'Social Work', abbrev: 'Lisa, LCSW', class: 'social' }
+                ],
+                initialMessages: [
+                    { from: 'Dr. Martinez', class: 'attending', text: "Good morning. Let's start with Mr. Johnson in bed 4. Who's presenting?" },
+                    { from: 'System', class: 'system', text: "You are the medical student assigned to present this patient." }
                 ],
                 exchanges: [
-                    {
-                        messages: [
-                            { from: 'Attending', class: 'attending', text: "Let's start with Mr. Johnson in bed 4. Who's presenting?" },
-                            { from: 'System', class: 'system', text: "You are the medical student presenting this patient." }
-                        ],
-                        prompt: "How do you begin your presentation?",
-                        options: [
-                            { text: "Mr. Johnson is a 67-year-old man with COPD exacerbation who was intubated two days ago. Overnight he was stable on current vent settings.", quality: 'good', feedback: "Good structure—ID, chief problem, overnight events. Clear and concise." },
-                            { text: "So this guy has been here for a while with his COPD acting up. He's still on the vent.", quality: 'poor', feedback: "Too casual for rounds. Use professional language and structured format." },
-                            { text: "This is a 67-year-old male with a past medical history of COPD, hypertension, diabetes, former smoker, who presented with shortness of breath...", quality: 'moderate', feedback: "Too detailed for ICU rounds. Focus on current status and overnight changes first." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'RT', class: 'rt', text: "He's still on 60% FiO2 and PEEP of 8. His secretions are thick and he's requiring frequent suctioning. I'm not sure he's ready for a spontaneous breathing trial today." }
-                        ],
-                        prompt: "How do you respond to the RT's assessment?",
-                        options: [
-                            { text: "I agree with your assessment. What do you think would help with the secretions—more aggressive pulmonary toilet or mucolytics?", quality: 'good', feedback: "Excellent—acknowledges expertise, asks for input, collaborative problem-solving." },
-                            { text: "The attending will decide when to do the SBT.", quality: 'poor', feedback: "Dismissive of RT's expertise. They have valuable bedside insight." },
-                            { text: "Can we try an SBT anyway and see how he does?", quality: 'moderate', feedback: "Not unreasonable but doesn't acknowledge RT's concerns. Better to explore their reasoning." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'RN', class: 'nurse', text: "The family called this morning asking when he'll wake up. They're frustrated no one has updated them. They want to come in at 2pm." }
-                        ],
-                        prompt: "How do you address the family communication issue?",
-                        options: [
-                            { text: "I can speak with the family when they arrive and update them on his progress. Should I coordinate with social work for additional support?", quality: 'good', feedback: "Takes ownership, involves appropriate team members, proactive approach." },
-                            { text: "The attending should probably talk to them since they'll have questions I can't answer.", quality: 'moderate', feedback: "Reasonable to involve attending for complex discussions, but don't avoid all family contact." },
-                            { text: "Can you just tell them he's doing better?", quality: 'poor', feedback: "Passing off communication responsibility. Family deserves proper updates from the team." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'PharmD', class: 'pharmacy', text: "I noticed he's been on empiric vancomycin for 5 days now. His cultures have been negative. Can we discuss de-escalation?" }
-                        ],
-                        prompt: "How do you respond to the pharmacist's recommendation?",
-                        options: [
-                            { text: "Good catch. His cultures are negative and he's improving clinically. I think de-escalation makes sense—what does the team think?", quality: 'good', feedback: "Validates pharmacist input, synthesizes clinical picture, invites team discussion." },
-                            { text: "I'll let the attending decide about antibiotics.", quality: 'moderate', feedback: "Safe but passive. Medical students can contribute to antibiotic stewardship discussions." },
-                            { text: "Let's keep him on it to be safe since he's still intubated.", quality: 'poor', feedback: "Antibiotic stewardship matters. Unnecessary antibiotics cause harm. Trust the data." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'SW', class: 'social', text: "I met with the family yesterday. His wife is overwhelmed—she's his primary caregiver at home and doesn't think she can manage him if he needs more support at discharge." }
-                        ],
-                        prompt: "How do you integrate this information into the care plan?",
-                        options: [
-                            { text: "That's important for discharge planning. Should we start discussing rehab options early so the family has time to prepare?", quality: 'good', feedback: "Thinks ahead, addresses psychosocial factors, includes family in planning." },
-                            { text: "We should focus on getting him extubated first.", quality: 'moderate', feedback: "True, but discharge planning should happen in parallel. Don't wait until the last minute." },
-                            { text: "That's really a social work issue, not medical.", quality: 'poor', feedback: "Discharge planning is everyone's responsibility. Medical decisions affect social needs." }
-                        ]
-                    }
+                    { context: 'initial_presentation', prompt: 'Present Mr. Johnson to the team.',
+                      teamResponse: { from: 'Mike, RT', class: 'rt', text: "His secretions are thick - we're suctioning frequently. Cough is weak. I don't think he's ready for an SBT today." }},
+                    { context: 'rt_assessment', prompt: 'How do you respond to the RT\'s assessment?',
+                      teamResponse: { from: 'Sarah, RN', class: 'nurse', text: "The family called - they're frustrated no one has updated them. His wife is coming at 2pm with questions." }},
+                    { context: 'family_communication', prompt: 'How do you address the family communication concern?',
+                      teamResponse: { from: 'Dr. Patel', class: 'pharmacy', text: "He's been on empiric vancomycin for 5 days, cultures negative. Should we discuss de-escalation?" }},
+                    { context: 'antibiotic_stewardship', prompt: 'How do you respond to the antibiotic stewardship question?',
+                      teamResponse: { from: 'Lisa, LCSW', class: 'social', text: "His wife is exhausted as his caregiver. She doesn't think she can manage more support needs at discharge." }},
+                    { context: 'discharge_planning', prompt: 'How do you integrate this into the care plan?',
+                      teamResponse: { from: 'Dr. Martinez', class: 'attending', text: "Good discussion. Let me summarize our plan..." }}
+                ],
+                resources: [
+                    { title: 'ICU Liberation Bundle (ABCDEF)', source: 'SCCM', url: 'https://www.sccm.org/ICULiberation/Home', type: 'Guideline' },
+                    { title: 'TeamSTEPPS Communication', source: 'AHRQ', url: 'https://www.ahrq.gov/teamstepps/index.html', type: 'Framework' },
+                    { title: 'Antibiotic Stewardship', source: 'IDSA', url: 'https://www.idsociety.org/practice-guideline/antimicrobial-stewardship/', type: 'Guideline' }
                 ]
             },
             {
-                id: 'floor-emergency',
-                title: 'Rapid Response Teamwork',
-                desc: 'Coordinate with the team during an acute decompensation',
-                setting: 'Medical Floor',
+                id: 'rapid-response',
+                title: 'Rapid Response Team',
+                description: 'Lead the response to a decompensating patient on the floor.',
+                tags: ['Emergency', 'Leadership', 'SBAR'],
+                setting: 'Medical Floor - Acute Decompensation',
                 patient: {
-                    summary: 'Mrs. Chen, 72F admitted for CHF exacerbation. Nurse just called—patient acutely short of breath, O2 sat 82% on 4L NC. You arrive first.'
+                    name: 'Mrs. Chen',
+                    summary: '72F admitted for CHF exacerbation. Acutely short of breath, O2 sat 82% on 4L NC.',
+                    details: 'PMH: HFrEF (EF 25%), AFib on anticoagulation, CKD 3. Was improving on IV diuresis, was on 2L NC this morning.'
                 },
                 team: [
                     { role: 'You (Intern)', abbrev: 'You', class: 'student' },
-                    { role: 'Floor Nurse', abbrev: 'RN', class: 'nurse' },
-                    { role: 'Respiratory Therapist', abbrev: 'RT', class: 'rt' },
-                    { role: 'Senior Resident', abbrev: 'Senior', class: 'attending' },
-                    { role: 'Rapid Response RN', abbrev: 'RR-RN', class: 'nurse' }
+                    { role: 'Floor Nurse', abbrev: 'Jenny, RN', class: 'nurse' },
+                    { role: 'RT', abbrev: 'Carlos, RT', class: 'rt' },
+                    { role: 'Senior Resident', abbrev: 'Dr. Kim', class: 'attending' }
+                ],
+                initialMessages: [
+                    { from: 'Jenny, RN', class: 'nurse', text: "She was fine 30 minutes ago! Now she's gasping, sat 82% and dropping. What do we do?!" }
                 ],
                 exchanges: [
-                    {
-                        messages: [
-                            { from: 'RN', class: 'nurse', text: "She was fine 30 minutes ago! Now she can't catch her breath and her sat is dropping. What do we do?" }
-                        ],
-                        prompt: "What's your first action?",
-                        options: [
-                            { text: "Let's increase her oxygen—can you put her on a non-rebreather? I'm going to examine her while we call the rapid response.", quality: 'good', feedback: "Immediate intervention, parallel processing, clear communication, appropriate escalation." },
-                            { text: "Call the rapid response team right away.", quality: 'moderate', feedback: "Appropriate to escalate, but don't just wait—start assessment and treatment." },
-                            { text: "Let me examine her first before we do anything.", quality: 'poor', feedback: "Don't delay oxygen for a hypoxic patient. Treat and assess simultaneously." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'RT', class: 'rt', text: "I'm here. She's on 15L non-rebreather, sat is 88%. Lungs sound wet bilaterally. You want BiPAP?" }
-                        ],
-                        prompt: "How do you respond?",
-                        options: [
-                            { text: "Yes, let's try BiPAP. What settings do you recommend? And can someone get IV furosemide ready?", quality: 'good', feedback: "Accepts expertise, asks for input on specifics, thinks ahead to treatment." },
-                            { text: "We should wait for the senior resident to decide.", quality: 'poor', feedback: "This is time-sensitive. You can initiate treatment and update the senior when they arrive." },
-                            { text: "Yes, start BiPAP. Put her on 10/5.", quality: 'moderate', feedback: "Good to initiate, but RTs often know optimal settings better—collaborate." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'Senior', class: 'attending', text: "I'm here. What's the situation?" }
-                        ],
-                        prompt: "How do you update the senior resident?",
-                        options: [
-                            { text: "Mrs. Chen decompensated suddenly—hypoxic to 82% on NC, now on BiPAP at 88%. Lungs wet bilaterally. We're giving IV furosemide. Thinking flash pulmonary edema vs PE.", quality: 'good', feedback: "Excellent SBAR-style update: concise, current status, interventions, differential." },
-                            { text: "She got really sick really fast. We put her on BiPAP.", quality: 'poor', feedback: "Too vague. Senior needs vitals, exam findings, interventions, and your assessment." },
-                            { text: "I think she's having a CHF exacerbation. Her O2 sat dropped and we started BiPAP and Lasix.", quality: 'moderate', feedback: "Good but missing key data points—current vitals, exam findings, timeline." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'RR-RN', class: 'nurse', text: "Her BP is 190/110. EKG shows new ST depressions in V4-V6. Do you want cardiology?" }
-                        ],
-                        prompt: "How do you coordinate the next steps?",
-                        options: [
-                            { text: "Yes, let's get cardiology involved—this could be ACS causing the flash pulmonary edema. Can we get a troponin and repeat EKG in 15 minutes?", quality: 'good', feedback: "Recognizes pattern, appropriate consultation, follows up with testing." },
-                            { text: "Let's just focus on the respiratory issue for now.", quality: 'poor', feedback: "The cardiac findings may BE the cause. Don't compartmentalize—think systems." },
-                            { text: "Dr. [Senior], what do you think about cardiology?", quality: 'moderate', feedback: "Appropriate to defer but also reasonable to advocate for your clinical thinking." }
-                        ]
-                    }
+                    { context: 'initial_response', prompt: 'What is your immediate response?',
+                      teamResponse: { from: 'Carlos, RT', class: 'rt', text: "Got her on 15L NRB, sat 88%. Lungs are wet bilaterally. Want me to set up BiPAP?" }},
+                    { context: 'bipap_decision', prompt: 'How do you respond to the RT?',
+                      teamResponse: { from: 'Dr. Kim', class: 'attending', text: "I'm here. Give me the quick rundown." }},
+                    { context: 'senior_handoff', prompt: 'Update the senior resident using SBAR.',
+                      teamResponse: { from: 'Jenny, RN', class: 'nurse', text: "BiPAP on, she's at 92%. BP 168/95, HR 110. What meds do you want?" }},
+                    { context: 'treatment_orders', prompt: 'What treatments do you want to order?',
+                      teamResponse: { from: 'Dr. Kim', class: 'attending', text: "Good work. Let's get CXR, BNP, troponin, BMP. What caused this decompensation?" }}
+                ],
+                resources: [
+                    { title: 'SBAR Communication', source: 'IHI', url: 'https://www.ihi.org/resources/Pages/Tools/SBARToolkit.aspx', type: 'Tool' },
+                    { title: 'Acute Heart Failure', source: 'ACC/AHA', url: 'https://www.acc.org/guidelines/hf', type: 'Guideline' },
+                    { title: 'Rapid Response Systems', source: 'AHRQ', url: 'https://psnet.ahrq.gov/primer/rapid-response-systems', type: 'Review' }
                 ]
             },
             {
                 id: 'handoff',
                 title: 'End-of-Shift Handoff',
-                desc: 'Transfer care safely to the night team',
-                setting: 'Sign-out Room',
+                description: 'Practice structured patient handoff using I-PASS.',
+                tags: ['Handoff', 'Patient Safety', 'I-PASS'],
+                setting: 'Team Room - 7pm Signout',
                 patient: {
-                    summary: 'You have 6 patients to sign out. One is unstable—Mr. Patel, 55M with GI bleed, 2 units transfused today, still having melena, Hgb 7.2, GI doing EGD in the morning.'
+                    name: 'Mr. Davis',
+                    summary: '58M with new AFib with RVR on diltiazem drip. AKI with K+ 5.8 (gave kayexalate). Repeat K pending.',
+                    details: 'Complex patient requiring close monitoring overnight. Family anxious and calling frequently.'
                 },
                 team: [
                     { role: 'You (Day Intern)', abbrev: 'You', class: 'student' },
-                    { role: 'Night Intern', abbrev: 'Night', class: 'attending' },
-                    { role: 'Day Senior', abbrev: 'Day Sr', class: 'consult' },
-                    { role: 'Night Senior', abbrev: 'Night Sr', class: 'consult' }
+                    { role: 'Night Intern', abbrev: 'Dr. Thompson', class: 'attending' },
+                    { role: 'Night Senior', abbrev: 'Dr. Okonkwo', class: 'attending' }
+                ],
+                initialMessages: [
+                    { from: 'Dr. Thompson', class: 'attending', text: "Ready for signout. I heard you have a sick one?" }
                 ],
                 exchanges: [
-                    {
-                        messages: [
-                            { from: 'Night', class: 'attending', text: "Hey, I'm ready for signout. What do you have for me?" }
-                        ],
-                        prompt: "How do you structure your handoff for Mr. Patel?",
-                        options: [
-                            { text: "Mr. Patel in 512 is my sickest patient—55M with upper GI bleed, likely from varices given his cirrhosis. He's had 2 units today, Hgb now 7.2, still having melena. GI is scoping him at 6am. If his Hgb drops below 7 or he becomes unstable, call GI and consider ICU transfer.", quality: 'good', feedback: "Excellent I-PASS format: Illness severity, Patient summary, Action items, Situation awareness, Synthesis." },
-                            { text: "Mr. Patel has a GI bleed. He got 2 units of blood and GI is coming in the morning.", quality: 'poor', feedback: "Missing critical info: current status, what to watch for, when to escalate." },
-                            { text: "Let me tell you about all my patients. Room 512 is Mr. Patel who came in 3 days ago with melena...", quality: 'moderate', feedback: "Too much background. Prioritize sick patients, focus on overnight action items." }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'Night', class: 'attending', text: "Got it. What's the transfusion threshold? And who do I call if he crashes?" }
-                        ],
-                        prompt: "How do you clarify the contingency plan?",
-                        options: [
-                            { text: "Transfuse if Hgb drops below 7. For urgent issues, GI fellow is Dr. Martinez, pager 5547. If he becomes unstable—tachycardia, hypotension, large volume hematemesis—call a rapid and transfer to ICU.", quality: 'good', feedback: "Clear parameters, specific contacts, escalation criteria defined." },
-                            { text: "Just call GI if anything happens.", quality: 'poor', feedback: "Too vague. What's 'anything'? Night team needs specific triggers and backup plans." },
-                            { text: "Keep his Hgb above 7 and check it in the morning.", quality: 'moderate', feedback: "Missing escalation pathway. What if he bleeds overnight?" }
-                        ]
-                    },
-                    {
-                        messages: [
-                            { from: 'Night', class: 'attending', text: "Quick question—any family issues or code status things I should know about?" }
-                        ],
-                        prompt: "What anticipatory guidance do you provide?",
-                        options: [
-                            { text: "He's full code. His wife is listed as contact—she's anxious and has been calling frequently. She knows about the EGD tomorrow. If he worsens, she asked to be called regardless of the hour.", quality: 'good', feedback: "Addresses code status, family dynamics, communication preferences—crucial for night coverage." },
-                            { text: "He's full code. Family is fine.", quality: 'poor', feedback: "Misses opportunity to prepare night team for family interactions." },
-                            { text: "I think he's full code—you can check the chart.", quality: 'poor', feedback: "Know your patients' code status. Don't make night team search for critical info." }
-                        ]
-                    }
+                    { context: 'handoff_start', prompt: 'Begin your handoff for Mr. Davis.',
+                      teamResponse: { from: 'Dr. Thompson', class: 'attending', text: "Got it. What's the plan overnight? What do I need to watch for?" }},
+                    { context: 'action_items', prompt: 'What are the action items and contingency plans?',
+                      teamResponse: { from: 'Dr. Okonkwo', class: 'attending', text: "What's his code status? Does family know how sick he is?" }},
+                    { context: 'goals_of_care', prompt: 'Address the code status and family communication question.',
+                      teamResponse: { from: 'Dr. Thompson', class: 'attending', text: "I think I have what I need. Anything you'd do differently overnight?" }}
+                ],
+                resources: [
+                    { title: 'I-PASS Handoff Bundle', source: 'I-PASS Study', url: 'https://www.ipasshandoffstudy.com/', type: 'Framework' },
+                    { title: 'Handoffs and Signouts', source: 'AHRQ', url: 'https://psnet.ahrq.gov/primer/handoffs-and-signouts', type: 'Review' }
                 ]
             }
         ];
         
         let currentScenario = null;
-        let currentExchange = 0;
-        let responses = [];
+        let currentExchangeIndex = 0;
+        let conversationHistory = [];
         
         function init() {
             document.getElementById('scenarioGrid').innerHTML = SCENARIOS.map(s => `
-                <div class="scenario-btn" onclick="selectScenario('${s.id}')">
+                <div class="scenario-card" onclick="loadScenario('${s.id}')">
                     <h3>${s.title}</h3>
-                    <p>${s.desc}</p>
+                    <p>${s.description}</p>
+                    <div class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
                 </div>
             `).join('');
         }
         
-        function selectScenario(id) {
+        function loadScenario(id) {
             currentScenario = SCENARIOS.find(s => s.id === id);
-            currentExchange = 0;
-            responses = [];
+            currentExchangeIndex = 0;
+            conversationHistory = [];
             
-            document.getElementById('mainCard').classList.add('active');
+            document.getElementById('scenarioGrid').style.display = 'none';
+            document.getElementById('simPanel').classList.add('active');
+            document.getElementById('backBtn').style.display = 'block';
+            document.getElementById('simTitle').textContent = currentScenario.title;
+            document.getElementById('simSetting').textContent = currentScenario.setting;
+            document.getElementById('patientContext').innerHTML = `<strong>${currentScenario.patient.name}:</strong> ${currentScenario.patient.summary}`;
+            document.getElementById('teamRoster').innerHTML = currentScenario.team.map(t => `
+                <div class="team-member ${t.class === 'student' ? 'you' : ''}">
+                    <span class="team-dot dot-${t.class}"></span>${t.abbrev}
+                </div>
+            `).join('');
+            
+            document.getElementById('resourcesPanel').style.display = 'block';
+            document.getElementById('resourceGrid').innerHTML = currentScenario.resources.map(r => `
+                <a href="${r.url}" target="_blank" class="resource-item">
+                    <div class="title">${r.title}</div>
+                    <div class="source">${r.source}</div>
+                    <span class="type">${r.type}</span>
+                </a>
+            `).join('');
+            
+            const chat = document.getElementById('chatContainer');
+            chat.innerHTML = '';
+            currentScenario.initialMessages.forEach(m => addMessage(m.from, m.class, m.text));
+            document.getElementById('inputPrompt').textContent = currentScenario.exchanges[0].prompt;
             document.getElementById('summaryPanel').classList.remove('visible');
-            
-            document.getElementById('patientBar').innerHTML = `
-                <h4>📋 ${currentScenario.setting}</h4>
-                <p>${currentScenario.patient.summary}</p>
-            `;
-            
-            document.getElementById('teamBar').innerHTML = currentScenario.team.map(t => 
-                `<span class="team-tag ${t.class === 'student' ? 'you' : ''}">${t.abbrev}</span>`
-            ).join('');
-            
-            renderExchange();
+            document.getElementById('inputArea').style.display = 'block';
         }
         
-        function renderExchange() {
-            const exchange = currentScenario.exchanges[currentExchange];
-            const chatArea = document.getElementById('chatArea');
-            
-            // Add messages
-            exchange.messages.forEach(m => {
-                const msg = document.createElement('div');
-                msg.className = `msg ${m.class}`;
-                msg.innerHTML = `
-                    <div class="msg-header">${m.from}</div>
-                    <div>${m.text}</div>
-                `;
-                chatArea.appendChild(msg);
-            });
-            chatArea.scrollTop = chatArea.scrollHeight;
-            
-            // Render response options
-            document.getElementById('responseArea').innerHTML = `
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 12px;">${exchange.prompt}</p>
-                <div class="response-options">
-                    ${exchange.options.map((opt, i) => `
-                        <div class="response-opt" onclick="selectResponse(${i})">${opt.text}</div>
-                    `).join('')}
-                </div>
-                <div class="feedback-box" id="feedbackBox"></div>
-            `;
-            
-            // Update progress
-            renderProgress();
+        function addMessage(from, cls, text) {
+            const chat = document.getElementById('chatContainer');
+            const div = document.createElement('div');
+            div.className = `message ${cls}`;
+            div.innerHTML = `<div class="sender">${from}</div><div>${text}</div>`;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
         }
         
-        function selectResponse(index) {
-            const exchange = currentScenario.exchanges[currentExchange];
-            const selected = exchange.options[index];
+        async function submitResponse() {
+            const input = document.getElementById('responseInput');
+            const text = input.value.trim();
+            if (!text) return;
             
-            responses.push({ exchange: currentExchange, quality: selected.quality });
+            input.disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+            addMessage('You', 'student', text);
+            conversationHistory.push(text);
+            input.value = '';
             
-            // Show user's response in chat
-            const chatArea = document.getElementById('chatArea');
-            const msg = document.createElement('div');
-            msg.className = 'msg student';
-            msg.innerHTML = `
-                <div class="msg-header">You</div>
-                <div>${selected.text}</div>
-            `;
-            chatArea.appendChild(msg);
-            chatArea.scrollTop = chatArea.scrollHeight;
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.id = 'typing';
+            indicator.innerHTML = '<span></span><span></span><span></span>';
+            document.getElementById('chatContainer').appendChild(indicator);
             
-            // Show feedback
-            const feedbackBox = document.getElementById('feedbackBox');
-            feedbackBox.className = `feedback-box visible ${selected.quality === 'good' ? 'feedback-good' : 'feedback-improve'}`;
-            feedbackBox.innerHTML = `
-                <h5>${selected.quality === 'good' ? '✓ Effective Communication' : '💡 Opportunity for Improvement'}</h5>
-                <p style="font-size: 0.9rem;">${selected.feedback}</p>
-                <button onclick="nextExchange()" style="margin-top: 12px; padding: 8px 16px; background: #a78bfa; border: none; border-radius: 6px; color: #1e293b; cursor: pointer;">
-                    ${currentExchange < currentScenario.exchanges.length - 1 ? 'Continue' : 'See Summary'}
-                </button>
-            `;
-            
-            // Disable options
-            document.querySelectorAll('.response-opt').forEach(opt => {
-                opt.style.pointerEvents = 'none';
-                opt.style.opacity = '0.5';
-            });
-            document.querySelectorAll('.response-opt')[index].style.opacity = '1';
-        }
-        
-        function nextExchange() {
-            currentExchange++;
-            if (currentExchange >= currentScenario.exchanges.length) {
-                showSummary();
-            } else {
-                document.getElementById('responseArea').innerHTML = '';
-                renderExchange();
+            try {
+                const exchange = currentScenario.exchanges[currentExchangeIndex];
+                const feedback = await getAIFeedback(text, exchange.context);
+                document.getElementById('typing')?.remove();
+                addMessage('🤖 Feedback', 'ai-feedback', feedback);
+                
+                if (exchange.teamResponse) {
+                    setTimeout(() => {
+                        addMessage(exchange.teamResponse.from, exchange.teamResponse.class, exchange.teamResponse.text);
+                        currentExchangeIndex++;
+                        if (currentExchangeIndex < currentScenario.exchanges.length) {
+                            document.getElementById('inputPrompt').textContent = currentScenario.exchanges[currentExchangeIndex].prompt;
+                        } else {
+                            completeScenario();
+                        }
+                    }, 1200);
+                }
+            } catch (e) {
+                document.getElementById('typing')?.remove();
+                const exchange = currentScenario.exchanges[currentExchangeIndex];
+                if (exchange.teamResponse) addMessage(exchange.teamResponse.from, exchange.teamResponse.class, exchange.teamResponse.text);
+                currentExchangeIndex++;
+                if (currentExchangeIndex >= currentScenario.exchanges.length) completeScenario();
+                else document.getElementById('inputPrompt').textContent = currentScenario.exchanges[currentExchangeIndex].prompt;
             }
+            
+            input.disabled = false;
+            document.getElementById('submitBtn').disabled = false;
+            input.focus();
         }
         
-        function renderProgress() {
-            document.getElementById('progressBar').innerHTML = currentScenario.exchanges.map((_, i) => {
-                let cls = '';
-                if (i < currentExchange) cls = 'complete';
-                else if (i === currentExchange) cls = 'current';
-                return `<div class="progress-dot ${cls}"></div>`;
-            }).join('');
+        const WORKER_URL = 'https://teamdx-feedback.laurenmfine.workers.dev';
+        
+        async function getAIFeedback(response, context) {
+            const r = await fetch(WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    studentResponse: response,
+                    context: context,
+                    scenarioTitle: currentScenario.title,
+                    patientInfo: currentScenario.patient.details,
+                    requestType: 'feedback'
+                })
+            });
+            const data = await r.json();
+            return data.feedback || 'Good effort. Consider how to make your communication more effective.';
         }
         
-        function showSummary() {
-            const goodCount = responses.filter(r => r.quality === 'good').length;
-            const total = responses.length;
-            const score = Math.round((goodCount / total) * 100);
-            
-            const skills = {
-                'Clear Communication': responses.filter(r => r.quality === 'good').length >= total * 0.6 ? 85 : 55,
-                'Role Respect': responses.filter(r => r.quality !== 'poor').length >= total * 0.7 ? 80 : 50,
-                'Shared Decision-Making': goodCount >= 2 ? 75 : 45,
-                'Situation Awareness': goodCount >= total - 1 ? 90 : 60
-            };
-            
-            document.getElementById('summaryPanel').innerHTML = `
-                <h3>📊 Collaboration Summary</h3>
-                <p style="font-size: 1.5rem; font-weight: 600; text-align: center; padding: 20px; background: rgba(139,92,246,0.1); border-radius: 12px; margin-bottom: 20px;">
-                    ${score}% Effective Responses
-                </p>
-                <h4 style="margin-bottom: 12px;">Skill Assessment</h4>
-                ${Object.entries(skills).map(([skill, value]) => `
-                    <div class="skill-score">
-                        <span>${skill}</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill ${value >= 70 ? 'fill-good' : value >= 50 ? 'fill-moderate' : 'fill-poor'}" 
-                                 style="width: ${value}%"></div>
-                        </div>
-                    </div>
-                `).join('')}
-                <div style="margin-top: 20px; padding: 16px; background: #fff; border-radius: 10px;">
-                    <h5 style="margin-bottom: 8px;">Key Takeaways</h5>
-                    <ul style="margin-left: 20px; font-size: 0.9rem; color: #475569;">
-                        <li>Every team member brings unique expertise—acknowledge and utilize it</li>
-                        <li>Clear, structured communication prevents errors</li>
-                        <li>Anticipate questions and provide context proactively</li>
-                        <li>Medical students can and should contribute to team discussions</li>
-                    </ul>
-                </div>
-            `;
-            
+        async function completeScenario() {
+            document.getElementById('inputArea').style.display = 'none';
+            try {
+                const r = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scenarioTitle: currentScenario.title,
+                        conversationHistory: conversationHistory,
+                        requestType: 'summary'
+                    })
+                });
+                const data = await r.json();
+                const summary = data.feedback || 'Good work completing this scenario.';
+                document.getElementById('summaryPanel').innerHTML = `
+                    <h3>📊 Session Summary</h3>
+                    <div class="feedback-summary"><h4>💡 Overall Feedback</h4><p>${summary}</p></div>
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="loadScenario('${currentScenario.id}')">Try Again</button>
+                        <button class="btn btn-primary" onclick="backToScenarios()">More Scenarios</button>
+                    </div>`;
+            } catch (e) {
+                document.getElementById('summaryPanel').innerHTML = `
+                    <h3>📊 Session Complete</h3>
+                    <p>Great work! Review the resources to strengthen your skills.</p>
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="loadScenario('${currentScenario.id}')">Try Again</button>
+                        <button class="btn btn-primary" onclick="backToScenarios()">More Scenarios</button>
+                    </div>`;
+            }
             document.getElementById('summaryPanel').classList.add('visible');
-            document.getElementById('summaryPanel').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function backToScenarios() {
+            document.getElementById('simPanel').classList.remove('active');
+            document.getElementById('scenarioGrid').style.display = 'grid';
+            document.getElementById('resourcesPanel').style.display = 'none';
+            document.getElementById('summaryPanel').classList.remove('visible');
+            document.getElementById('backBtn').style.display = 'none';
+        }
+        
+        document.getElementById('responseInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitResponse(); }
+        });
         
         init();
     </script>
-    <script src="/dx-view-toggle.js"></script>
-<!-- DxSuite Feedback Widget - Embed Code -->
-<style>
-.dx-feedback-trigger{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(59,130,246,0.4);display:flex;align-items:center;justify-content:center;font-size:24px;transition:transform 0.2s,box-shadow 0.2s;z-index:99998}
-.dx-feedback-trigger:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(59,130,246,0.5)}
-.dx-feedback-panel{position:fixed;bottom:96px;right:24px;width:380px;max-width:calc(100vw - 48px);max-height:calc(100vh - 140px);background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-radius:16px;box-shadow:0 10px 50px rgba(0,0,0,0.5);border: 1px solid #e2e8f0;overflow:hidden;display:none;flex-direction:column;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-.dx-feedback-panel.open{display:flex}
-.dx-feedback-header{padding:20px;background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color: #1e293b}
-.dx-feedback-header h3{margin:0 0 4px;font-size:1.1rem;font-weight:600}
-.dx-feedback-header p{margin:0;font-size:0.85rem;opacity:0.9}
-.dx-feedback-body{padding:20px;overflow-y:auto;flex:1;color: #334155}
-.dx-feedback-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
-.dx-feedback-type{padding:14px 12px;background: #fff;border:2px solid transparent;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s}
-.dx-feedback-type:hover{background: #fff;border-color:rgba(96,165,250,0.3)}
-.dx-feedback-type.selected{background:rgba(96,165,250,0.15);border-color:#60a5fa}
-.dx-feedback-type-icon{font-size:1.5rem;margin-bottom:6px}
-.dx-feedback-type-label{font-size:0.8rem;color: #475569}
-.dx-feedback-field{margin-bottom:16px}
-.dx-feedback-field label{display:block;font-size:0.85rem;color: #64748b;margin-bottom:6px}
-.dx-feedback-field input,.dx-feedback-field select,.dx-feedback-field textarea{width:100%;padding:12px 14px;background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.08);border-radius:8px;color: #1e293b;font-size:0.95rem;font-family:inherit}
-.dx-feedback-field input:focus,.dx-feedback-field select:focus,.dx-feedback-field textarea:focus{outline:none;border-color:#60a5fa;background:rgba(255,255,255,0.1)}
-.dx-feedback-field input::placeholder,.dx-feedback-field textarea::placeholder{color: #cbd5e1}
-.dx-feedback-field select option{background:#1e293b;color: #1e293b}
-.dx-feedback-field textarea{min-height:100px;resize:vertical}
-.dx-feedback-priority{display:flex;gap:8px}
-.dx-priority-btn{flex:1;padding:10px;background: #fff;border:2px solid transparent;border-radius:8px;cursor:pointer;font-size:0.8rem;color: #64748b;transition:all 0.2s}
-.dx-priority-btn:hover{background: #fff}
-.dx-priority-btn.selected.low{background:rgba(74,222,128,0.15);border-color:#4ade80;color:#4ade80}
-.dx-priority-btn.selected.medium{background:rgba(251,191,36,0.15);border-color:#fbbf24;color:#fbbf24}
-.dx-priority-btn.selected.high{background:rgba(239,68,68,0.15);border-color:#ef4444;color:#ef4444}
-.dx-feedback-page-info{padding:10px 14px;background:rgba(96,165,250,0.1);border-radius:8px;margin-bottom:16px;font-size:0.8rem;color: #64748b}
-.dx-feedback-page-info strong{color:#60a5fa}
-.dx-feedback-submit{width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:none;border-radius:10px;color: #1e293b;font-size:1rem;font-weight:600;cursor:pointer;transition:opacity 0.2s}
-.dx-feedback-submit:hover{opacity:0.9}
-.dx-feedback-submit:disabled{opacity:0.5;cursor:not-allowed}
-.dx-feedback-success{text-align:center;padding:40px 20px}
-.dx-feedback-success-icon{font-size:3rem;margin-bottom:16px}
-.dx-feedback-success h4{font-size:1.2rem;margin:0 0 8px;color:#4ade80}
-.dx-feedback-success p{color: #64748b;font-size:0.9rem;margin:0 0 20px}
-.dx-feedback-success-id{display:inline-block;padding:8px 16px;background: #fff;border-radius:6px;font-family:monospace;font-size:0.85rem;color:#60a5fa}
-.dx-feedback-close{position:absolute;top:16px;right:16px;width:28px;height:28px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;cursor:pointer;color: #1e293b;font-size:1rem;display:flex;align-items:center;justify-content:center}
-.dx-feedback-close:hover{background:rgba(255,255,255,0.25)}
-@media(max-width:480px){.dx-feedback-panel{bottom:0;right:0;left:0;width:100%;max-width:100%;max-height:85vh;border-radius:16px 16px 0 0}.dx-feedback-trigger{bottom:16px;right:16px}}
-</style>
-<button class="dx-feedback-trigger" onclick="DxFeedback.toggle()" title="Send Feedback">💬</button>
-<div class="dx-feedback-panel" id="dxFeedbackPanel">
-<button class="dx-feedback-close" onclick="DxFeedback.close()">✕</button>
-<div class="dx-feedback-header"><h3>📣 Send Feedback</h3><p>Help us improve DxSuite</p></div>
-<div class="dx-feedback-body" id="dxFeedbackBody">
-<div class="dx-feedback-page-info"><strong>Current page:</strong> <span id="dxCurrentPage">-</span></div>
-<div class="dx-feedback-type-grid">
-<div class="dx-feedback-type" data-type="bug" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">🐛</div><div class="dx-feedback-type-label">Bug / Error</div></div>
-<div class="dx-feedback-type" data-type="broken-link" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">🔗</div><div class="dx-feedback-type-label">Broken Link</div></div>
-<div class="dx-feedback-type" data-type="content-error" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">📝</div><div class="dx-feedback-type-label">Content Error</div></div>
-<div class="dx-feedback-type" data-type="ui-issue" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">🎨</div><div class="dx-feedback-type-label">UI / Display</div></div>
-<div class="dx-feedback-type" data-type="request-content" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">📚</div><div class="dx-feedback-type-label">New Content</div></div>
-<div class="dx-feedback-type" data-type="request-feature" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">✨</div><div class="dx-feedback-type-label">New Feature</div></div>
-<div class="dx-feedback-type" data-type="resource" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">📎</div><div class="dx-feedback-type-label">Resource</div></div>
-<div class="dx-feedback-type" data-type="other" onclick="DxFeedback.selectType(this)"><div class="dx-feedback-type-icon">💭</div><div class="dx-feedback-type-label">Other</div></div>
-</div>
-<div class="dx-feedback-field"><label>Module / Section (optional)</label><select id="dxFeedbackModule"><option value="">Auto-detect from page</option><option value="mechanism-dx">MechanismDx</option><option value="clinical-trainer">Clinical Reasoning Trainer</option><option value="adventure-cases">Adventure Cases</option><option value="coachdx">CoachDx</option><option value="teamdx">TeamDx</option><option value="proceduredx">ProcedureDx</option><option value="consentdx">ConsentDx</option><option value="systemsdx">SystemsDx</option><option value="spaced-rep">Spaced Repetition</option><option value="dashboard">Dashboard</option><option value="general">General / Platform-wide</option></select></div>
-<div class="dx-feedback-field"><label>Brief Summary *</label><input type="text" id="dxFeedbackTitle" placeholder="e.g., Broken link in Sepsis case, Stage 3" required></div>
-<div class="dx-feedback-field"><label>Details *</label><textarea id="dxFeedbackDescription" placeholder="Describe the issue, error, or your request in detail."></textarea></div>
-<div class="dx-feedback-field"><label>Priority</label><div class="dx-feedback-priority"><button type="button" class="dx-priority-btn low" data-priority="low" onclick="DxFeedback.selectPriority(this)">Low</button><button type="button" class="dx-priority-btn medium selected" data-priority="medium" onclick="DxFeedback.selectPriority(this)">Medium</button><button type="button" class="dx-priority-btn high" data-priority="high" onclick="DxFeedback.selectPriority(this)">High</button></div></div>
-<div class="dx-feedback-field"><label>Your Email (optional)</label><input type="email" id="dxFeedbackEmail" placeholder="student@university.edu"></div>
-<button class="dx-feedback-submit" onclick="DxFeedback.submit()">Submit Feedback</button>
-</div>
-</div>
-<script>
-const DxFeedback={selectedType:null,selectedPriority:'medium',init(){document.getElementById('dxCurrentPage').textContent=document.title||window.location.pathname;this.autoDetectModule(window.location.pathname)},autoDetectModule(p){const s=document.getElementById('dxFeedbackModule');if(p.includes('mechanism'))s.value='mechanism-dx';else if(p.includes('coach'))s.value='coachdx';else if(p.includes('team'))s.value='teamdx';else if(p.includes('procedure'))s.value='proceduredx';else if(p.includes('consent'))s.value='consentdx';else if(p.includes('systems'))s.value='systemsdx';else if(p.includes('adventure')||p.includes('case'))s.value='adventure-cases';else if(p.includes('trainer'))s.value='clinical-trainer';else if(p.includes('dashboard'))s.value='dashboard'},toggle(){const p=document.getElementById('dxFeedbackPanel');p.classList.toggle('open');if(p.classList.contains('open'))this.init()},close(){document.getElementById('dxFeedbackPanel').classList.remove('open')},selectType(e){document.querySelectorAll('.dx-feedback-type').forEach(t=>t.classList.remove('selected'));e.classList.add('selected');this.selectedType=e.dataset.type},selectPriority(e){document.querySelectorAll('.dx-priority-btn').forEach(b=>b.classList.remove('selected'));e.classList.add('selected');this.selectedPriority=e.dataset.priority},submit(){const t=document.getElementById('dxFeedbackTitle').value.trim(),d=document.getElementById('dxFeedbackDescription').value.trim(),m=document.getElementById('dxFeedbackModule').value,e=document.getElementById('dxFeedbackEmail').value.trim();if(!this.selectedType){alert('Please select a feedback type.');return}if(!t){alert('Please enter a brief summary.');return}if(!d){alert('Please provide details.');return}const f={id:'FB-'+Date.now().toString(36).toUpperCase(),type:this.selectedType,priority:this.selectedPriority,title:t,description:d,module:m||'auto',email:e||null,page:window.location.href,pageTitle:document.title,userAgent:navigator.userAgent,timestamp:new Date().toISOString(),status:'new'};this.saveFeedback(f);this.showSuccess(f.id)},saveFeedback(f){const s=JSON.parse(localStorage.getItem('dxsuite-feedback')||'[]');s.push(f);localStorage.setItem('dxsuite-feedback',JSON.stringify(s));const p=JSON.parse(localStorage.getItem('dxsuite-feedback-pending')||'[]');p.push(f);localStorage.setItem('dxsuite-feedback-pending',JSON.stringify(p))},showSuccess(id){document.getElementById('dxFeedbackBody').innerHTML='<div class="dx-feedback-success"><div class="dx-feedback-success-icon">✅</div><h4>Feedback Submitted!</h4><p>Thank you for helping improve DxSuite.</p><div class="dx-feedback-success-id">'+id+'</div><button class="dx-feedback-submit" style="margin-top:20px" onclick="location.reload()">Submit Another</button></div>'}};
-</script>
-<!-- End Feedback Widget -->
-
 </body>
 </html>
