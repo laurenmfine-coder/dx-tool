@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Pharyngeal Apparatus - Master Embryology</title>
+  <style>
+    :root {
+      --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #EC4899;
+      --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #E5E7EB; min-height: 100vh; line-height: 1.6;
+    }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header {
+      text-align: center; margin-bottom: 2rem; padding: 2rem;
+      background: rgba(139, 92, 246, 0.1); border-radius: 1rem;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 0.5rem;
+    }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab {
+      padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem;
+      cursor: pointer; color: #9CA3AF; transition: all 0.2s;
+    }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section {
+      background: rgba(255, 255, 255, 0.05); border-radius: 1rem;
+      padding: 2rem; margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept {
+      background: rgba(139, 92, 246, 0.15); border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .danger-box {
+      background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .success-box {
+      background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .clinical-pearl {
+      background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .info-box {
+      background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(139, 92, 246, 0.2); color: var(--primary); }
+    tr:hover { background: rgba(255,255,255,0.03); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .arch-card {
+      background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0;
+    }
+    .arch-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .arch-card .arch-number {
+      display: inline-block; background: var(--primary); color: white;
+      width: 2rem; height: 2rem; border-radius: 50%; text-align: center;
+      line-height: 2rem; font-weight: bold; margin-right: 0.5rem;
+    }
+    .pouch-card {
+      background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 1rem; border-radius: 0.5rem; margin: 0.5rem 0;
+    }
+    .pouch-card h4 { color: var(--success); margin-bottom: 0.5rem; }
+    .mnemonic {
+      background: rgba(236, 72, 153, 0.15); border: 2px dashed var(--secondary);
+      padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center;
+    }
+    .mnemonic strong { color: var(--secondary); font-size: 1.1rem; }
+    .timeline-item {
+      border-left: 3px solid var(--primary); padding-left: 1.5rem;
+      margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -8px; top: 0;
+      width: 14px; height: 14px; background: var(--primary);
+      border-radius: 50%; border: 2px solid #1a1a2e;
+    }
+    .timeline-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .condition-link {
+      display: inline-block; background: rgba(139,92,246,0.2);
+      padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem;
+      font-size: 0.85rem; color: var(--primary-dark);
+    }
+    .quiz-section {
+      background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success);
+      border-radius: 1rem; padding: 1.5rem; margin-top: 2rem;
+    }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option {
+      display: block; padding: 0.75rem 1rem; margin: 0.5rem 0;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem; cursor: pointer; transition: all 0.3s;
+    }
+    .quiz-option:hover { background: rgba(139, 92, 246, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+    .back-link {
+      display: inline-block; margin-top: 2rem; padding: 0.75rem 1.5rem;
+      background: var(--primary); color: white; text-decoration: none; border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧬 Pharyngeal Apparatus</h1>
+      <p class="subtitle">Master Embryology Module | Arches, Pouches, Clefts & Clinical Correlations</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('arches')">Pharyngeal Arches</div>
+      <div class="nav-tab" onclick="showTab('pouches')">Pouches & Clefts</div>
+      <div class="nav-tab" onclick="showTab('neural')">Neural Crest</div>
+      <div class="nav-tab" onclick="showTab('timeline')">Timeline</div>
+      <div class="nav-tab" onclick="showTab('clinical')">Clinical Connections</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 The Pharyngeal Apparatus</h2>
+        <div class="key-concept">
+          <strong>Definition:</strong> The pharyngeal (branchial) apparatus is the embryonic precursor to most head and neck structures. It consists of:
+          <ul style="margin-top:0.5rem;">
+            <li><strong>Pharyngeal Arches</strong> (mesoderm + neural crest) → bones, muscles, vessels</li>
+            <li><strong>Pharyngeal Pouches</strong> (endoderm) → glands, spaces</li>
+            <li><strong>Pharyngeal Clefts/Grooves</strong> (ectoderm) → external ear canal</li>
+            <li><strong>Pharyngeal Membranes</strong> (ectoderm + endoderm) → tympanic membrane</li>
+          </ul>
+        </div>
+
+        <h3>Why This Matters</h3>
+        <p>Understanding the pharyngeal apparatus explains:</p>
+        <ul>
+          <li>Why cleft lip/palate occurs (facial prominence fusion failure)</li>
+          <li>Why hemifacial microsomia is unilateral (1st/2nd arch disruption)</li>
+          <li>Why branchial cleft cysts occur at specific locations</li>
+          <li>Why certain syndromes have predictable feature combinations</li>
+          <li>Why specific nerves innervate specific muscles</li>
+        </ul>
+
+        <div class="mnemonic">
+          <strong>🧠 "When a FISH becomes a FACE"</strong><br>
+          The pharyngeal apparatus is evolutionarily derived from gill arches in fish.<br>
+          In humans, these structures transform into head and neck anatomy.
+        </div>
+
+        <h3>Components Summary</h3>
+        <table>
+          <tr><th>Component</th><th>Germ Layer</th><th>General Derivatives</th></tr>
+          <tr><td>Arches (6, but 5 regresses)</td><td>Mesoderm + Neural Crest</td><td>Bones, cartilage, muscles, arteries</td></tr>
+          <tr><td>Pouches (4 pairs)</td><td>Endoderm</td><td>Glands, middle ear, tonsils</td></tr>
+          <tr><td>Clefts/Grooves (4 pairs)</td><td>Ectoderm</td><td>External auditory canal only</td></tr>
+          <tr><td>Membranes (4 pairs)</td><td>Ecto + Endo</td><td>Tympanic membrane only</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ARCHES TAB -->
+    <div id="arches" class="tab-content">
+      <div class="module-section">
+        <h2>🦴 Pharyngeal Arches</h2>
+        
+        <div class="key-concept">
+          <strong>Each pharyngeal arch contains:</strong>
+          <ul>
+            <li>Cartilage bar (becomes bone/cartilage)</li>
+            <li>Aortic arch artery</li>
+            <li>Cranial nerve</li>
+            <li>Muscular component</li>
+          </ul>
+        </div>
+
+        <div class="mnemonic">
+          <strong>🧠 Arch Nerve Mnemonic: "1, 2, 3, 4, 6 - Some Say Marry Money But My Brother Says Big Brains Matter More"</strong><br>
+          Arch 1 = CN V (trigeminal) | Arch 2 = CN VII (facial) | Arch 3 = CN IX (glossopharyngeal) | Arch 4 & 6 = CN X (vagus)
+        </div>
+
+        <div class="arch-card">
+          <h4><span class="arch-number">1</span> FIRST PHARYNGEAL ARCH (Mandibular)</h4>
+          <table>
+            <tr><th>Component</th><th>Derivatives</th></tr>
+            <tr><td><strong>Cartilage</strong><br>(Meckel's)</td><td>Mandible, Malleus, Incus, Sphenomandibular ligament</td></tr>
+            <tr><td><strong>Muscles</strong></td><td>Muscles of Mastication (temporalis, masseter, pterygoids), Mylohyoid, Anterior digastric, Tensor tympani, Tensor veli palatini</td></tr>
+            <tr><td><strong>Nerve</strong></td><td><strong>CN V (Trigeminal)</strong> - V2 and V3</td></tr>
+            <tr><td><strong>Artery</strong></td><td>Maxillary artery (part)</td></tr>
+          </table>
+          <div class="clinical-pearl">
+            <strong>Clinical:</strong> 1st arch defects → <span class="condition-link">Treacher Collins</span> <span class="condition-link">Hemifacial Microsomia</span> <span class="condition-link">Pierre Robin</span>
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <h4><span class="arch-number">2</span> SECOND PHARYNGEAL ARCH (Hyoid)</h4>
+          <table>
+            <tr><th>Component</th><th>Derivatives</th></tr>
+            <tr><td><strong>Cartilage</strong><br>(Reichert's)</td><td>Stapes, Styloid process, Stylohyoid ligament, Lesser horn & upper body of hyoid</td></tr>
+            <tr><td><strong>Muscles</strong></td><td>Muscles of Facial Expression, Stapedius, Stylohyoid, Posterior digastric</td></tr>
+            <tr><td><strong>Nerve</strong></td><td><strong>CN VII (Facial)</strong></td></tr>
+            <tr><td><strong>Artery</strong></td><td>Stapedial artery (usually regresses)</td></tr>
+          </table>
+          <div class="clinical-pearl">
+            <strong>Clinical:</strong> 2nd arch defects → <span class="condition-link">Hemifacial Microsomia</span> <span class="condition-link">Treacher Collins</span> (facial nerve weakness, stapes anomalies)
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <h4><span class="arch-number">3</span> THIRD PHARYNGEAL ARCH</h4>
+          <table>
+            <tr><th>Component</th><th>Derivatives</th></tr>
+            <tr><td><strong>Cartilage</strong></td><td>Greater horn & lower body of hyoid</td></tr>
+            <tr><td><strong>Muscles</strong></td><td>Stylopharyngeus (only muscle!)</td></tr>
+            <tr><td><strong>Nerve</strong></td><td><strong>CN IX (Glossopharyngeal)</strong></td></tr>
+            <tr><td><strong>Artery</strong></td><td>Common carotid, Internal carotid (proximal)</td></tr>
+          </table>
+        </div>
+
+        <div class="arch-card">
+          <h4><span class="arch-number">4</span> FOURTH PHARYNGEAL ARCH</h4>
+          <table>
+            <tr><th>Component</th><th>Derivatives</th></tr>
+            <tr><td><strong>Cartilage</strong></td><td>Thyroid cartilage, Epiglottic cartilage</td></tr>
+            <tr><td><strong>Muscles</strong></td><td>Cricothyroid, Levator veli palatini, Constrictors of pharynx</td></tr>
+            <tr><td><strong>Nerve</strong></td><td><strong>CN X - Superior Laryngeal</strong></td></tr>
+            <tr><td><strong>Artery</strong></td><td>Left: Aortic arch | Right: Proximal subclavian</td></tr>
+          </table>
+        </div>
+
+        <div class="arch-card">
+          <h4><span class="arch-number">6</span> SIXTH PHARYNGEAL ARCH</h4>
+          <p style="color:var(--muted);margin-bottom:0.5rem;"><em>(5th arch regresses in humans)</em></p>
+          <table>
+            <tr><th>Component</th><th>Derivatives</th></tr>
+            <tr><td><strong>Cartilage</strong></td><td>Cricoid, Arytenoid, Corniculate, Cuneiform cartilages</td></tr>
+            <tr><td><strong>Muscles</strong></td><td>Intrinsic laryngeal muscles (except cricothyroid)</td></tr>
+            <tr><td><strong>Nerve</strong></td><td><strong>CN X - Recurrent Laryngeal</strong></td></tr>
+            <tr><td><strong>Artery</strong></td><td>Pulmonary arteries, Ductus arteriosus</td></tr>
+          </table>
+        </div>
+
+        <div class="mnemonic">
+          <strong>🧠 1st Arch Muscles: "MATT LT"</strong><br>
+          <strong>M</strong>uscles of Mastication, <strong>A</strong>nterior digastric, <strong>T</strong>ensor Tympani, <strong>T</strong>ensor veli palatini, my<strong>L</strong>ohyoid
+        </div>
+
+        <div class="mnemonic">
+          <strong>🧠 2nd Arch Muscles: "Facial expression Stapedius Stylohyoid Posterior digastric"</strong><br>
+          All innervated by CN VII (Facial nerve)
+        </div>
+      </div>
+    </div>
+
+    <!-- POUCHES TAB -->
+    <div id="pouches" class="tab-content">
+      <div class="module-section">
+        <h2>🧫 Pharyngeal Pouches (Endoderm)</h2>
+        
+        <div class="key-concept">
+          <strong>Pouches</strong> are outpocketings of the pharyngeal <strong>endoderm</strong> between the arches. They give rise to glands and epithelial structures.
+        </div>
+
+        <div class="pouch-card">
+          <h4>1st Pouch → MIDDLE EAR</h4>
+          <ul>
+            <li><strong>Tubotympanic recess</strong> → Eustachian tube</li>
+            <li><strong>Middle ear cavity</strong></li>
+            <li><strong>Mastoid air cells</strong> (lining)</li>
+          </ul>
+          <p><em>Clinical: Recurrent otitis media connects to this developmental origin</em></p>
+        </div>
+
+        <div class="pouch-card">
+          <h4>2nd Pouch → PALATINE TONSIL</h4>
+          <ul>
+            <li><strong>Epithelium of palatine tonsil</strong></li>
+            <li><strong>Tonsillar fossa</strong></li>
+          </ul>
+          <p><em>Clinical: 2nd branchial cleft cysts often drain to tonsillar fossa</em></p>
+        </div>
+
+        <div class="pouch-card">
+          <h4>3rd Pouch → THYMUS + INFERIOR PARATHYROIDS</h4>
+          <ul>
+            <li><strong>Dorsal wing:</strong> Inferior parathyroid glands</li>
+            <li><strong>Ventral wing:</strong> Thymus</li>
+          </ul>
+          <div class="danger-box">
+            <strong>⚠️ DiGeorge/22q11.2:</strong> 3rd & 4th pouch defects → Thymic hypoplasia + Parathyroid absence → Immune deficiency + Hypocalcemia
+          </div>
+        </div>
+
+        <div class="pouch-card">
+          <h4>4th Pouch → SUPERIOR PARATHYROIDS + ULTIMOBRANCHIAL BODY</h4>
+          <ul>
+            <li><strong>Dorsal wing:</strong> Superior parathyroid glands</li>
+            <li><strong>Ventral wing:</strong> Ultimobranchial body → Parafollicular C cells of thyroid</li>
+          </ul>
+          <p><em>C cells produce calcitonin; origin of medullary thyroid carcinoma</em></p>
+        </div>
+
+        <div class="mnemonic">
+          <strong>🧠 Pouch Mnemonic: "1-Ear, 2-Tonsil, 3-Thymus/Inferior PT, 4-Superior PT/C-cells"</strong><br>
+          Or: "1 2 3 4 = E T T S" (Ear, Tonsil, Thymus, Superior parathyroid)
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>Why are INFERIOR parathyroids from pouch 3 and SUPERIOR from pouch 4?</strong><br>
+          The 3rd pouch derivatives migrate further caudally (with thymus), ending up inferior to the 4th pouch derivatives. This explains ectopic parathyroid locations!
+        </div>
+      </div>
+
+      <div class="module-section">
+        <h2>📍 Pharyngeal Clefts/Grooves (Ectoderm)</h2>
+        
+        <div class="key-concept">
+          <strong>Clefts</strong> are invaginations of surface <strong>ectoderm</strong> between the arches (external).
+        </div>
+
+        <table>
+          <tr><th>Cleft</th><th>Fate</th><th>Clinical Significance</th></tr>
+          <tr><td><strong>1st Cleft</strong></td><td>External auditory canal</td><td>Only cleft that persists! 1st cleft anomalies → EAC area</td></tr>
+          <tr><td><strong>2nd-4th Clefts</strong></td><td>Normally obliterated by 2nd arch overgrowth (cervical sinus)</td><td>Persistence → Branchial cleft cysts/sinuses/fistulae</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Cervical Sinus of His:</strong> Temporary space formed when the 2nd arch overgrows clefts 2-4. Normally obliterates completely. Persistence = branchial anomalies.
+        </div>
+      </div>
+
+      <div class="module-section">
+        <h2>🔗 Pharyngeal Membranes</h2>
+        <div class="key-concept">
+          <strong>Membranes</strong> = where pouches (endoderm) meet clefts (ectoderm). Only the <strong>1st membrane persists</strong> as the <strong>tympanic membrane</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- NEURAL CREST TAB -->
+    <div id="neural" class="tab-content">
+      <div class="module-section">
+        <h2>🧠 Neural Crest Cells</h2>
+        
+        <div class="key-concept">
+          <strong>Neural crest cells (NCCs)</strong> are a transient, multipotent cell population that migrates from the dorsal neural tube to populate the pharyngeal arches and form most craniofacial structures.
+        </div>
+
+        <h3>Neural Crest Derivatives in Head/Neck</h3>
+        <table>
+          <tr><th>Structure Type</th><th>Examples</th></tr>
+          <tr><td><strong>Craniofacial bones</strong></td><td>Frontal, parietal, facial bones, mandible, maxilla</td></tr>
+          <tr><td><strong>Cartilage</strong></td><td>Nasal, laryngeal cartilages</td></tr>
+          <tr><td><strong>Connective tissue</strong></td><td>Dermis of face/neck, dental papilla</td></tr>
+          <tr><td><strong>Smooth muscle</strong></td><td>Aortic arch vessels (tunica media)</td></tr>
+          <tr><td><strong>Neurons</strong></td><td>Sensory ganglia, parasympathetic ganglia</td></tr>
+          <tr><td><strong>Glia</strong></td><td>Schwann cells</td></tr>
+          <tr><td><strong>Pigment cells</strong></td><td>Melanocytes</td></tr>
+          <tr><td><strong>Endocrine</strong></td><td>Adrenal medulla, C cells of thyroid</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>NEUROCRISTOPATHIES:</strong> Disorders of neural crest development
+          <ul style="margin-top:0.5rem;">
+            <li><span class="condition-link">Treacher Collins</span> - NCC apoptosis (TCOF1 → ribosome defect)</li>
+            <li><span class="condition-link">22q11.2 Deletion</span> - NCC migration defect</li>
+            <li><span class="condition-link">CHARGE Syndrome</span> - CHD7 affects NCC</li>
+            <li><span class="condition-link">Waardenburg Syndrome</span> - NCC migration (pigment, hearing)</li>
+            <li><span class="condition-link">Hirschsprung Disease</span> - NCC migration to gut</li>
+          </ul>
+        </div>
+
+        <h3>Treacher Collins Pathophysiology</h3>
+        <div class="info-box">
+          <p style="font-family:monospace; line-height:2;">
+          TCOF1 mutation<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+          ↓ Treacle protein (nucleolar)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+          ↓ Ribosome biogenesis<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+          p53-mediated apoptosis of neural crest cells<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+          Bilateral symmetric hypoplasia of 1st & 2nd arch derivatives
+          </p>
+        </div>
+
+        <h3>Neural Crest Migration Streams</h3>
+        <p>NCCs migrate in distinct streams to specific pharyngeal arches:</p>
+        <ul>
+          <li><strong>Trigeminal stream</strong> → Arch 1 → Jaw, malleus, incus</li>
+          <li><strong>Hyoid stream</strong> → Arch 2 → Stapes, facial structures</li>
+          <li><strong>Post-otic stream</strong> → Arches 3, 4, 6 → Laryngeal, great vessels</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TIMELINE TAB -->
+    <div id="timeline" class="tab-content">
+      <div class="module-section">
+        <h2>📅 Developmental Timeline</h2>
+        
+        <div class="danger-box">
+          <strong>CRITICAL PERIODS:</strong> Teratogenic exposure during specific windows causes specific defects. Most craniofacial development occurs weeks 4-10.
+        </div>
+
+        <div class="timeline-item">
+          <h4>Week 3: Neural Crest Formation</h4>
+          <p>Neural crest cells form at the junction of neural plate and surface ectoderm. Begin delamination and migration.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Week 4: Pharyngeal Arches Appear</h4>
+          <p>Arches 1-4 become visible. Neural crest cells populate the arches. Face begins to form from 5 prominences: frontonasal, 2 maxillary, 2 mandibular.</p>
+          <p><em>Disruption → Hemifacial microsomia (vascular theory: stapedial artery hemorrhage)</em></p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Week 5: Facial Prominences Develop</h4>
+          <p>Nasal placodes form. Maxillary and mandibular prominences enlarge. Arch 6 appears (arch 5 regresses).</p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Week 6: LIP FUSION</h4>
+          <p><strong>Medial nasal prominences fuse with maxillary prominences</strong> = upper lip forms.</p>
+          <p style="color:var(--danger);"><strong>Failure → CLEFT LIP</strong></p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Week 7: Palate Shelves Form</h4>
+          <p>Palatal shelves grow from maxillary prominences, initially vertical alongside tongue.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Weeks 8-9: Palate Shelves Elevate</h4>
+          <p>Palatal shelves rotate to horizontal position above tongue. Begin to fuse.</p>
+          <p><em>Pierre Robin: If mandible is small, tongue doesn't descend, blocks shelf elevation</em></p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Weeks 10-12: PALATE FUSION</h4>
+          <p><strong>Palatal shelves fuse in midline</strong>, anterior to posterior. Fusion with nasal septum.</p>
+          <p style="color:var(--danger);"><strong>Failure → CLEFT PALATE</strong></p>
+        </div>
+
+        <div class="timeline-item">
+          <h4>Weeks 8-20: Cranial Suture Development</h4>
+          <p>Membranous bones of skull form. Sutures remain patent for brain growth.</p>
+          <p style="color:var(--danger);"><strong>Premature fusion → CRANIOSYNOSTOSIS</strong></p>
+        </div>
+
+        <h3>Teratogen Timing</h3>
+        <table>
+          <tr><th>Exposure Window</th><th>Potential Defects</th></tr>
+          <tr><td>Weeks 4-5</td><td>Severe facial clefts, arch anomalies</td></tr>
+          <tr><td>Week 6</td><td>Cleft lip</td></tr>
+          <tr><td>Weeks 8-12</td><td>Cleft palate</td></tr>
+          <tr><td>After week 12</td><td>Craniofacial structures largely formed</td></tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>Known Teratogens:</strong> Retinoic acid (isotretinoin), alcohol, phenytoin, valproic acid, thalidomide, methotrexate, maternal diabetes
+        </div>
+      </div>
+    </div>
+
+    <!-- CLINICAL TAB -->
+    <div id="clinical" class="tab-content">
+      <div class="module-section">
+        <h2>🏥 Clinical Correlations</h2>
+        
+        <h3>Arch-Based Conditions</h3>
+        <table>
+          <tr><th>Condition</th><th>Arch(es) Affected</th><th>Key Features</th></tr>
+          <tr><td><strong>Treacher Collins</strong></td><td>1st & 2nd (bilateral)</td><td>Symmetric malar/mandibular hypoplasia, lid colobomas, microtia</td></tr>
+          <tr><td><strong>Hemifacial Microsomia</strong></td><td>1st & 2nd (unilateral)</td><td>Asymmetric mandible, microtia, facial nerve</td></tr>
+          <tr><td><strong>Pierre Robin</strong></td><td>1st arch (mandible)</td><td>Micrognathia → glossoptosis → airway obstruction</td></tr>
+          <tr><td><strong>DiGeorge/22q11.2</strong></td><td>3rd & 4th pouches</td><td>Thymic hypoplasia, hypoparathyroidism, cardiac</td></tr>
+        </table>
+
+        <h3>Pouch-Based Conditions</h3>
+        <table>
+          <tr><th>Pouch</th><th>Defect</th><th>Result</th></tr>
+          <tr><td>1st</td><td>Abnormal development</td><td>Middle ear anomalies, Eustachian tube dysfunction</td></tr>
+          <tr><td>3rd & 4th</td><td>22q11.2 deletion</td><td>Absent thymus (T-cell deficiency), absent parathyroids (hypocalcemia)</td></tr>
+          <tr><td>4th (ventral)</td><td>Ectopic C cells</td><td>Ectopic thyroid tissue</td></tr>
+        </table>
+
+        <h3>Cleft-Based Conditions (Branchial Anomalies)</h3>
+        <table>
+          <tr><th>Cleft</th><th>Anomaly Location</th><th>Internal Opening</th></tr>
+          <tr><td><strong>1st</strong></td><td>Periauricular, parotid region</td><td>EAC or middle ear</td></tr>
+          <tr><td><strong>2nd</strong></td><td>Anterior border of SCM (most common!)</td><td>Tonsillar fossa</td></tr>
+          <tr><td><strong>3rd</strong></td><td>Lower neck, anterior to SCM</td><td>Pyriform sinus</td></tr>
+          <tr><td><strong>4th</strong></td><td>Lower neck (rare)</td><td>Pyriform sinus apex</td></tr>
+        </table>
+
+        <h3>Integration: Why Features Cluster</h3>
+        <div class="success-box">
+          <strong>Understanding embryology explains syndrome patterns:</strong>
+          <ul>
+            <li><strong>TCS has ear + jaw + eye findings</strong> → All 1st/2nd arch derivatives</li>
+            <li><strong>22q11.2 has immune + calcium + cardiac issues</strong> → All 3rd/4th pouch + arch derivatives</li>
+            <li><strong>CHARGE has coloboma + heart + ear + choanae</strong> → Neural crest affects multiple systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>🧠 Self-Assessment</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p><strong>Which pharyngeal arch gives rise to the muscles of mastication?</strong></p>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">A. Second arch</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,true)">B. First arch</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">C. Third arch</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">D. Fourth arch</div>
+          <div class="explanation" id="exp-q1">
+            <strong>Correct: B - First Arch</strong><br>
+            The 1st pharyngeal arch gives rise to muscles of mastication (temporalis, masseter, pterygoids), innervated by CN V3 (trigeminal). The 2nd arch gives rise to muscles of facial expression (CN VII).
+          </div>
+        </div>
+
+        <div class="quiz-section" style="margin-top:1rem;">
+          <h3>Question 2</h3>
+          <p><strong>A newborn with 22q11.2 deletion has hypocalcemia. Which pharyngeal pouch derivative is affected?</strong></p>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">A. 1st pouch - middle ear</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">B. 2nd pouch - palatine tonsil</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,true)">C. 3rd/4th pouch - parathyroid glands</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">D. Thyroglossal duct</div>
+          <div class="explanation" id="exp-q2">
+            <strong>Correct: C - 3rd/4th Pouch</strong><br>
+            The inferior parathyroids come from the 3rd pouch and superior parathyroids from the 4th pouch. In 22q11.2 deletion (DiGeorge), 3rd and 4th pouch derivatives are affected → absent/hypoplastic parathyroids → hypocalcemia, and thymic hypoplasia → T-cell immunodeficiency.
+          </div>
+        </div>
+
+        <div class="quiz-section" style="margin-top:1rem;">
+          <h3>Question 3</h3>
+          <p><strong>At what gestational week does the upper lip fuse?</strong></p>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">A. Week 4</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,true)">B. Week 6</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">C. Week 10</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">D. Week 12</div>
+          <div class="explanation" id="exp-q3">
+            <strong>Correct: B - Week 6</strong><br>
+            The upper lip fuses around week 6 when the medial nasal prominences merge with the maxillary prominences. The palate fuses later, at weeks 8-12. This is why cleft lip and cleft palate can occur independently.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Modules</a>
+
+    <div class="module-section" style="margin-top: 2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size: 0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK459244/" target="_blank" style="color: var(--primary);">StatPearls: Embryology, Pharyngeal Arches</a></li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK534243/" target="_blank" style="color: var(--primary);">StatPearls: Branchial Cleft Cyst</a></li>
+        <li><a href="https://embryology.med.unsw.edu.au/embryology/index.php/Pharyngeal_Arch_Development" target="_blank" style="color: var(--primary);">UNSW Embryology: Pharyngeal Arch Development</a></li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK1523/" target="_blank" style="color: var(--primary);">GeneReviews: 22q11.2 Deletion Syndrome</a></li>
+      </ul>
+    </div>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK534245/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Embryology, Pharyngeal Apparatus</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK53175/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI Books: Pharyngeal Arches</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/pharyngeal-arches" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Pharyngeal Arches</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3039360/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: Neural Crest and Craniofacial Development</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="branchial-cleft-anomalies-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Branchial Cleft Anomalies</a>
+        <a href="cleft-lip-palate-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Cleft Lip and Palate</a>
+        <a href="treacher-collins-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Treacher Collins</a>
+        <a href="hemifacial-microsomia-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Hemifacial Microsomia</a>
+        <a href="pierre-robin-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Pierre Robin Sequence</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+    
+    function checkQ(qId, el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) {
+        section.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('exp-' + qId).style.display = 'block';
+    }
+  </script>
+</body>
+</html>

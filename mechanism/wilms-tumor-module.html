@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Wilms Tumor (Nephroblastoma)</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎗️ Wilms Tumor</h1>
+      <p class="subtitle">Nephroblastoma: The Most Common Pediatric Renal Malignancy</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Wilms tumor (nephroblastoma)</strong> is the most common primary renal malignancy in children, arising from <strong>persistent metanephric blastema</strong> (embryonic kidney tissue). It typically presents as an asymptomatic abdominal mass in a child under 5.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Incidence</td><td>~500 cases/year in US</td></tr>
+        <tr><td>Peak age</td><td>3-4 years (90% diagnosed &lt;7 years)</td></tr>
+        <tr><td>Bilateral</td><td>5-10%</td></tr>
+        <tr><td>5-year survival (favorable histology)</td><td>>90%</td></tr>
+        <tr><td>Associated syndromes</td><td>10-15%</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Embryology & Pathogenesis</h2>
+      <div class="info-box">
+        <strong>Nephrogenic Rests:</strong> Wilms tumor arises from <strong>nephrogenic rests</strong> - persistent foci of embryonic metanephric blastema that failed to differentiate into normal nephrons. These are precursor lesions found in 30-40% of Wilms tumors.
+      </div>
+      <h3>Genetics</h3>
+      <table>
+        <tr><th>Gene</th><th>Location</th><th>Syndrome Association</th></tr>
+        <tr><td><strong>WT1</strong></td><td>11p13</td><td>WAGR syndrome, Denys-Drash syndrome</td></tr>
+        <tr><td><strong>WT2</strong></td><td>11p15</td><td>Beckwith-Wiedemann syndrome (BWS)</td></tr>
+        <tr><td><strong>WTX</strong></td><td>Xq11</td><td>Sporadic Wilms</td></tr>
+        <tr><td><strong>CTNNB1</strong></td><td>3p22</td><td>Sporadic Wilms</td></tr>
+      </table>
+
+      <h3>Associated Syndromes</h3>
+      <div class="clinical-pearl">
+        <strong>WAGR Syndrome</strong> (WT1 deletion):
+        <ul>
+          <li><strong>W</strong>ilms tumor (50% risk)</li>
+          <li><strong>A</strong>niridia</li>
+          <li><strong>G</strong>enitourinary anomalies</li>
+          <li><strong>R</strong>etardation (intellectual disability)</li>
+        </ul>
+      </div>
+      <div class="clinical-pearl">
+        <strong>Beckwith-Wiedemann Syndrome</strong> (WT2/11p15):
+        <ul>
+          <li>Macroglossia, macrosomia, hemihypertrophy</li>
+          <li>Omphalocele</li>
+          <li>Visceromegaly</li>
+          <li>Ear creases/pits</li>
+          <li>Hypoglycemia (neonatal)</li>
+          <li>Wilms tumor risk ~5-10%</li>
+        </ul>
+      </div>
+      <div class="clinical-pearl">
+        <strong>Denys-Drash Syndrome</strong> (WT1 missense):
+        <ul>
+          <li>Wilms tumor (90% risk)</li>
+          <li>Diffuse mesangial sclerosis → early renal failure</li>
+          <li>Ambiguous genitalia (46,XY DSD)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Presentation</h2>
+      <h3>Classic Presentation</h3>
+      <ul>
+        <li><strong>Asymptomatic abdominal mass</strong> - most common (parent notices during bath)</li>
+        <li>Usually smooth, firm, does not cross midline</li>
+        <li>Abdominal pain (30%)</li>
+        <li>Hematuria (20%) - gross or microscopic</li>
+        <li>Hypertension (25%) - renin secretion from tumor</li>
+        <li>Fever (sometimes)</li>
+      </ul>
+
+      <div class="danger-box">
+        <strong>⚠️ DO NOT aggressively palpate!</strong> Wilms tumor is friable - vigorous palpation risks rupture and tumor spillage, which upstages the disease and worsens prognosis.
+      </div>
+
+      <h3>Wilms vs Neuroblastoma</h3>
+      <table>
+        <tr><th>Feature</th><th>Wilms Tumor</th><th>Neuroblastoma</th></tr>
+        <tr><td>Origin</td><td>Kidney (metanephric blastema)</td><td>Adrenal/sympathetic chain</td></tr>
+        <tr><td>Age</td><td>Peak 3-4 years</td><td>Peak &lt;2 years</td></tr>
+        <tr><td>Mass location</td><td>Intrarenal, displaces kidney</td><td>Suprarenal, crosses midline</td></tr>
+        <tr><td>Crosses midline</td><td>Rarely</td><td>Often</td></tr>
+        <tr><td>Calcifications</td><td>Rare (10%)</td><td>Common (90%)</td></tr>
+        <tr><td>Markers</td><td>None specific</td><td>VMA, HVA elevated</td></tr>
+        <tr><td>General health</td><td>Usually well</td><td>Often ill-appearing</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>📷 Diagnosis & Staging</h2>
+      <h3>Imaging</h3>
+      <table>
+        <tr><th>Modality</th><th>Findings</th></tr>
+        <tr><td><strong>Ultrasound</strong></td><td>Initial study; solid intrarenal mass; IVC/renal vein for tumor thrombus</td></tr>
+        <tr><td><strong>CT abdomen/pelvis</strong></td><td>Staging; assess contralateral kidney, lymph nodes, liver mets</td></tr>
+        <tr><td><strong>Chest CT</strong></td><td>Pulmonary metastases (most common metastatic site)</td></tr>
+        <tr><td><strong>MRI</strong></td><td>Alternative; better for IVC thrombus characterization</td></tr>
+      </table>
+
+      <h3>COG/NWTS Staging</h3>
+      <table>
+        <tr><th>Stage</th><th>Description</th><th>5-yr Survival</th></tr>
+        <tr><td><strong>I</strong></td><td>Limited to kidney, completely resected</td><td>>95%</td></tr>
+        <tr><td><strong>II</strong></td><td>Extends beyond kidney, completely resected</td><td>~95%</td></tr>
+        <tr><td><strong>III</strong></td><td>Residual non-hematogenous tumor (LN+, spillage, incomplete resection)</td><td>~90%</td></tr>
+        <tr><td><strong>IV</strong></td><td>Hematogenous metastases (lung, liver, bone, brain)</td><td>~80%</td></tr>
+        <tr><td><strong>V</strong></td><td>Bilateral renal involvement</td><td>Variable</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Histology</h2>
+      <h3>Classic "Triphasic" Pattern</h3>
+      <div class="info-box">
+        Wilms tumor classically shows three components:
+        <ol>
+          <li><strong>Blastemal</strong> - primitive small blue cells</li>
+          <li><strong>Epithelial</strong> - tubules, glomeruloid structures</li>
+          <li><strong>Stromal</strong> - mesenchymal elements (muscle, cartilage, bone)</li>
+        </ol>
+      </div>
+
+      <h3>Histologic Classification</h3>
+      <table>
+        <tr><th>Category</th><th>Features</th><th>Prognosis</th></tr>
+        <tr><td><strong>Favorable histology</strong></td><td>No anaplasia (~90%)</td><td>Excellent</td></tr>
+        <tr><td><strong>Unfavorable (Anaplastic)</strong></td><td>Focal or diffuse anaplasia (~10%)</td><td>Worse (esp. diffuse)</td></tr>
+      </table>
+
+      <div class="danger-box">
+        <strong>Anaplasia = Poor Prognosis</strong>
+        <ul>
+          <li>Marked nuclear enlargement (3x)</li>
+          <li>Hyperchromasia</li>
+          <li>Abnormal mitoses</li>
+          <li>Associated with TP53 mutations</li>
+          <li>More common in older children</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Treatment</h2>
+      <h3>North American Approach (COG)</h3>
+      <div class="pathway-box">SUSPECTED WILMS TUMOR
+        ↓
+Imaging (US → CT chest/abd/pelvis)
+        ↓
+UPFRONT NEPHRECTOMY (if feasible)
+        ↓
+Staging based on surgical/pathologic findings
+        ↓
+Adjuvant chemotherapy ± radiation based on stage/histology</div>
+
+      <h3>Treatment by Stage (Favorable Histology)</h3>
+      <table>
+        <tr><th>Stage</th><th>Treatment</th></tr>
+        <tr><td>I & II</td><td>Nephrectomy + Vincristine/Actinomycin D (VA) x18-24 weeks</td></tr>
+        <tr><td>III & IV</td><td>Nephrectomy + VAD (add Doxorubicin) + XRT to flank ± lung</td></tr>
+        <tr><td>V (bilateral)</td><td>Neoadjuvant chemo → nephron-sparing surgery if possible</td></tr>
+      </table>
+
+      <div class="success-box">
+        <strong>Excellent Outcomes:</strong> Overall survival >90% with modern multimodal therapy. Even stage IV has ~80% survival with favorable histology.
+      </div>
+
+      <h3>Surgical Principles</h3>
+      <ul>
+        <li>Radical nephrectomy with lymph node sampling</li>
+        <li>Inspect contralateral kidney</li>
+        <li>Avoid tumor rupture (upstages to III)</li>
+        <li>Nephron-sparing for bilateral disease</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📈 Surveillance</h2>
+      <h3>Screening for At-Risk Patients</h3>
+      <div class="clinical-pearl">
+        <strong>Renal ultrasound screening every 3-4 months until age 7:</strong>
+        <ul>
+          <li>Beckwith-Wiedemann syndrome</li>
+          <li>WAGR syndrome</li>
+          <li>Hemihypertrophy</li>
+          <li>Denys-Drash syndrome</li>
+          <li>Family history of Wilms</li>
+        </ul>
+      </div>
+
+      <h3>Post-Treatment Surveillance</h3>
+      <ul>
+        <li>Physical exam, imaging per protocol</li>
+        <li>Monitor for late effects (cardiac from doxorubicin, secondary malignancy from radiation)</li>
+        <li>Renal function monitoring (especially if nephron-sparing)</li>
+      </ul>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A 3-year-old with aniridia is found to have an abdominal mass. Genetic testing would most likely show a deletion at which locus?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">A. 11p13 (WT1)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">B. 11p15 (WT2)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. 13q14 (RB1)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. 17p13 (TP53)</div>
+      <div class="explanation" id="explanation1"><strong>Correct: A - 11p13 (WT1)</strong><br>Aniridia + Wilms tumor suggests WAGR syndrome, caused by contiguous gene deletion at 11p13 affecting WT1 (Wilms tumor) and PAX6 (aniridia). The "R" in WAGR refers to intellectual disability from adjacent gene involvement.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK442004/" target="_blank" style="color:var(--primary);">StatPearls: Wilms Tumor</a></li>
+        <li><a href="https://www.childrensoncologygroup.org/" target="_blank" style="color:var(--primary);">Children's Oncology Group</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK442004/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Wilms Tumor</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5803702/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: Wilms Tumor Management</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/wilms-tumour" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Wilms Tumor</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://childrensoncologygroup.org/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Children's Oncology Group</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="wilms-tumor-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="pediatric-urology-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+        <a href="pediatric-urology-sbar.html" style="display: block; padding: 1rem; background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.4); border-radius: 0.5rem; color: #f9a8d4; text-decoration: none; text-align: center;">
+          <strong>📞 SBAR Practice</strong><br><span style="font-size: 0.85rem; color: #fbcfe8;">Communication skills</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="rcc-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">RCC (adult renal cancer)</a>
+        <a href="gu-embryology-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">GU Embryology</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Hypospadias</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139, 92, 246, 0.1); border-radius: 1rem; border: 1px solid rgba(139, 92, 246, 0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .type-card { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); padding: 1rem; border-radius: 0.5rem; margin: 0.5rem 0; }
+    .type-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔧 Hypospadias</h1>
+      <p class="subtitle">One of the Most Common Congenital Anomalies in Males</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Hypospadias</strong> is a congenital condition where the urethral meatus opens on the <strong>ventral (underside)</strong> surface of the penis, proximal to its normal position at the tip of the glans.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Incidence</td><td><strong>1 in 200-300</strong> male births</td></tr>
+        <tr><td>Trend</td><td>Increasing (possibly environmental factors)</td></tr>
+        <tr><td>Familial</td><td>8% if father affected, 14% if sibling affected</td></tr>
+        <tr><td>Associated anomalies</td><td>Cryptorchidism (10%), inguinal hernia (10%)</td></tr>
+      </table>
+      <div class="danger-box">
+        <strong>⚠️ CRITICAL:</strong> DO NOT CIRCUMCISE a baby with hypospadias! The foreskin is needed for surgical repair (can be used as graft material).
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Embryology</h2>
+      <div class="info-box">
+        <strong>Normal Development:</strong> The penile urethra forms when the <strong>urogenital (urethral) folds</strong> fuse in the midline on the ventral surface of the penis, proceeding from proximal to distal during weeks 8-14.
+      </div>
+      <h3>Normal Urethral Fold Fusion</h3>
+      <div class="pathway-box">TESTOSTERONE (from fetal Leydig cells)
+         ↓
+5α-reductase (in genital skin)
+         ↓
+DHT (dihydrotestosterone)
+         ↓
+Urethral folds fuse ventrally
+(PROXIMAL → DISTAL direction)
+         ↓
+Complete penile urethra with meatus at glans tip</div>
+
+      <h3>Hypospadias: Fusion Failure</h3>
+      <div class="pathway-box">URETHRAL FOLD FUSION STOPS PREMATURELY
+         ↓
+┌─────────────────────────────────────────────┐
+│ WHERE FUSION STOPS = MEATUS LOCATION        │
+│                                             │
+│ Proximal failure = More severe hypospadias  │
+│ Distal failure = Milder hypospadias         │
+└─────────────────────────────────────────────┘
+         ↓
+Associated findings:
+• Ventral curvature (CHORDEE) - from fibrotic tissue
+• Hooded foreskin (dorsal only)
+• Abnormal glans (flattened, grooved)</div>
+
+      <h3>Etiology</h3>
+      <table>
+        <tr><th>Category</th><th>Examples</th></tr>
+        <tr><td><strong>Genetic</strong></td><td>Polygenic, AR mutations, WT1, SF1</td></tr>
+        <tr><td><strong>Hormonal</strong></td><td>↓ Testosterone, ↓ DHT, androgen receptor defects</td></tr>
+        <tr><td><strong>Environmental</strong></td><td>Endocrine disruptors (phthalates, pesticides)</td></tr>
+        <tr><td><strong>Placental</strong></td><td>Placental insufficiency, preeclampsia</td></tr>
+        <tr><td><strong>Idiopathic</strong></td><td>Most cases - no identifiable cause</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>📍 Classification by Meatus Location</h2>
+      
+      <div class="type-card">
+        <h4>DISTAL (Anterior) - 70%</h4>
+        <ul>
+          <li><strong>Glanular:</strong> On glans, just proximal to normal position</li>
+          <li><strong>Coronal:</strong> At corona (junction of glans and shaft)</li>
+          <li><strong>Subcoronal:</strong> Just proximal to corona</li>
+        </ul>
+        <p><em>Usually minimal chordee; simpler repair; best outcomes</em></p>
+      </div>
+
+      <div class="type-card">
+        <h4>MIDDLE (Penile Shaft) - 15-20%</h4>
+        <ul>
+          <li><strong>Distal shaft</strong></li>
+          <li><strong>Midshaft</strong></li>
+          <li><strong>Proximal shaft</strong></li>
+        </ul>
+        <p><em>Variable chordee; moderate complexity</em></p>
+      </div>
+
+      <div class="type-card">
+        <h4>PROXIMAL (Posterior) - 10-15%</h4>
+        <ul>
+          <li><strong>Penoscrotal:</strong> At junction of penis and scrotum</li>
+          <li><strong>Scrotal:</strong> On scrotum</li>
+          <li><strong>Perineal:</strong> Behind scrotum (most severe)</li>
+        </ul>
+        <p><em>Significant chordee; may have bifid scrotum; consider DSD workup</em></p>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>When to Evaluate for DSD (Disorder of Sex Development):</strong>
+        <ul>
+          <li>Proximal hypospadias (penoscrotal, scrotal, perineal)</li>
+          <li>Hypospadias + bilateral cryptorchidism</li>
+          <li>Hypospadias + unilateral cryptorchidism with nonpalpable gonad</li>
+          <li>Micropenis</li>
+        </ul>
+        <p>Get karyotype, hormonal evaluation!</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Features</h2>
+      <h3>Classic Triad</h3>
+      <ol>
+        <li><strong>Ectopic meatus</strong> - Opens ventrally, proximal to normal</li>
+        <li><strong>Chordee</strong> - Ventral penile curvature (fibrous bands)</li>
+        <li><strong>Hooded foreskin</strong> - Dorsal foreskin only, absent ventrally</li>
+      </ol>
+      <h3>Additional Findings</h3>
+      <ul>
+        <li>Glans may be flattened with ventral groove</li>
+        <li>Meatal stenosis possible</li>
+        <li>Abnormal urinary stream (sprays, deflected)</li>
+        <li>May have associated cryptorchidism or inguinal hernia</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>🔪 Surgical Management</h2>
+      <h3>Goals of Repair</h3>
+      <ol>
+        <li>Create a <strong>slit-like meatus at the glans tip</strong></li>
+        <li>Straighten the penis (correct chordee)</li>
+        <li>Create a <strong>neourethra</strong> from meatus to tip</li>
+        <li>Achieve good <strong>cosmesis</strong></li>
+        <li>Allow <strong>normal voiding</strong> (standing, forward stream)</li>
+        <li>Allow future <strong>sexual function</strong></li>
+      </ol>
+
+      <h3>Timing</h3>
+      <div class="success-box">
+        <strong>Optimal age: 6-18 months</strong>
+        <ul>
+          <li>Anesthesia safe</li>
+          <li>Before toilet training and gender awareness</li>
+          <li>Adequate penile size for surgery</li>
+          <li>Healing optimized</li>
+        </ul>
+      </div>
+
+      <h3>Surgical Techniques</h3>
+      <table>
+        <tr><th>Severity</th><th>Common Techniques</th></tr>
+        <tr><td><strong>Distal</strong></td><td>MAGPI, Snodgrass (TIP), Mathieu flip-flap</td></tr>
+        <tr><td><strong>Middle</strong></td><td>Snodgrass (TIP), Onlay flap</td></tr>
+        <tr><td><strong>Proximal</strong></td><td>Staged repairs, Bracka (staged graft), Koyanagi</td></tr>
+      </table>
+
+      <div class="info-box">
+        <strong>TIP (Tubularized Incised Plate) = Snodgrass Procedure</strong>
+        <ul>
+          <li>Most popular for distal/middle hypospadias</li>
+          <li>Uses native urethral plate</li>
+          <li>Single stage, good cosmesis</li>
+        </ul>
+      </div>
+
+      <h3>Complications</h3>
+      <table>
+        <tr><th>Complication</th><th>Frequency</th><th>Management</th></tr>
+        <tr><td><strong>Urethrocutaneous fistula</strong></td><td>5-15%</td><td>Observation or repair after 6 months</td></tr>
+        <tr><td><strong>Meatal stenosis</strong></td><td>5-10%</td><td>Dilation or meatoplasty</td></tr>
+        <tr><td><strong>Urethral stricture</strong></td><td>Variable</td><td>Dilation or urethroplasty</td></tr>
+        <tr><td><strong>Glans dehiscence</strong></td><td>Variable</td><td>Observation or revision</td></tr>
+        <tr><td><strong>Residual chordee</strong></td><td>Variable</td><td>Revision surgery</td></tr>
+        <tr><td><strong>Diverticulum</strong></td><td>Rare</td><td>Surgical excision</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>📋 Key Clinical Pearls</h2>
+      <div class="danger-box">
+        <strong>⚠️ DO NOT CIRCUMCISE!</strong> The foreskin may be needed for repair. If circumcised, buccal mucosa or other grafts will be required.
+      </div>
+      <div class="clinical-pearl">
+        <strong>Hypospadias + Undescended Testis:</strong>
+        <ul>
+          <li>Unilateral UDT + hypospadias: DSD workup if gonad nonpalpable</li>
+          <li>Bilateral UDT + hypospadias: ALWAYS evaluate for DSD!</li>
+          <li>Get karyotype before any surgery</li>
+        </ul>
+      </div>
+      <div class="success-box">
+        <strong>Outcomes:</strong>
+        <ul>
+          <li>Distal repairs: >90% success rate</li>
+          <li>Proximal repairs: More complications, may need multiple surgeries</li>
+          <li>Most boys achieve normal voiding and sexual function</li>
+          <li>Fertility generally preserved</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A newborn is noted to have the urethral meatus on the ventral shaft of the penis with a hooded foreskin. What should you advise the parents regarding circumcision?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Proceed with routine circumcision</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Do NOT circumcise - foreskin needed for repair</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Circumcision will fix the hypospadias</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Wait until age 5 for circumcision</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B</strong><br>The foreskin is preserved in hypospadias because it can be used as graft material during surgical repair. Circumcision should NOT be performed. If inadvertently circumcised, alternative tissue sources (buccal mucosa) will be needed.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK482122/" target="_blank" style="color:var(--primary);">StatPearls: Hypospadias</a></li>
+        <li><a href="https://www.auanet.org/" target="_blank" style="color:var(--primary);">AUA Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK482122/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Hypospadias</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3681095/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: Hypospadias Review</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/hypospadias" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Hypospadias</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="hypospadias-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="pediatric-urology-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+        <a href="pediatric-urology-sbar.html" style="display: block; padding: 1rem; background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.4); border-radius: 0.5rem; color: #f9a8d4; text-decoration: none; text-align: center;">
+          <strong>📞 SBAR Practice</strong><br><span style="font-size: 0.85rem; color: #fbcfe8;">Communication skills</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="gu-embryology-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">GU Embryology</a>
+        <a href="cryptorchidism-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Cryptorchidism (DSD workup)</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

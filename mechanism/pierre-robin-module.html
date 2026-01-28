@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Pierre Robin Sequence</title>
+  <style>
+    :root {
+      --primary: #8B5CF6;
+      --primary-dark: #7C3AED;
+      --secondary: #EC4899;
+      --accent: #F59E0B;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #E5E7EB;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      background: rgba(139, 92, 246, 0.1);
+      border-radius: 1rem;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .module-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept {
+      background: rgba(139, 92, 246, 0.15);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .danger-box {
+      background: rgba(239, 68, 68, 0.15);
+      border-left: 4px solid var(--danger);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .success-box {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .mechanism-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    .chain-step {
+      background: rgba(139, 92, 246, 0.2);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--primary);
+      text-align: center;
+    }
+    .chain-arrow { color: var(--accent); font-size: 1.5rem; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(139, 92, 246, 0.2); color: var(--primary); }
+    .clinical-pearl {
+      background: rgba(245, 158, 11, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .quiz-section {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .quiz-option:hover { background: rgba(139, 92, 246, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+    }
+    .back-link:hover { background: var(--primary-dark); }
+    .severity-card {
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    .severity-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .syndrome-card {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    .syndrome-card h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .step-card {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    .step-card h4 { color: var(--success); margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍼 Pierre Robin Sequence</h1>
+      <p class="subtitle">Micrognathia → Glossoptosis → Airway Obstruction (± Cleft Palate)</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Core Definition</h2>
+      <div class="key-concept">
+        <strong>Pierre Robin Sequence (PRS) = A SEQUENCE (not syndrome) of:</strong>
+        <ol>
+          <li><strong>Micrognathia</strong> (small, recessed mandible)</li>
+          <li><strong>Glossoptosis</strong> (posterior displacement of tongue base)</li>
+          <li><strong>Upper airway obstruction</strong></li>
+        </ol>
+        <p style="margin-top: 0.5rem;"><em>± U-shaped cleft palate (present in 75-90%, but not required for diagnosis)</em></p>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Why "Sequence" Not "Syndrome"?</strong> A sequence describes a cascade of events stemming from a single initiating problem. In PRS, micrognathia is the primary defect that leads to glossoptosis, which causes airway obstruction and may block palatal fusion.
+      </div>
+
+      <h3>Epidemiology:</h3>
+      <ul>
+        <li>Incidence: 1 in 8,500 - 14,000 live births</li>
+        <li>40% are isolated (nonsyndromic) PRS</li>
+        <li><strong>60% are syndromic</strong> (associated with other syndromes)</li>
+        <li>Most common associations: Stickler syndrome, 22q11.2 deletion</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Pathophysiology: The Cascade</h2>
+      
+      <div class="mechanism-chain">
+        <div class="chain-step"><strong>MICROGNATHIA</strong><br><small>(Primary defect)</small></div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Mandible fails to grow forward</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Tongue remains posterior<br><small>(GLOSSOPTOSIS)</small></div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step"><strong>AIRWAY OBSTRUCTION</strong></div>
+      </div>
+      <div class="mechanism-chain">
+        <div class="chain-step">GLOSSOPTOSIS</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Tongue blocks palatal shelf fusion</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step"><strong>U-SHAPED CLEFT PALATE</strong></div>
+      </div>
+
+      <h3>Why U-Shaped Cleft?</h3>
+      <p>The cleft in PRS is typically U-shaped (wide, horseshoe-shaped) rather than V-shaped because the posteriorly positioned tongue physically prevents the palatal shelves from meeting in the midline.</p>
+    </section>
+
+    <section class="module-section">
+      <h2>🩺 Clinical Features</h2>
+      
+      <div class="severity-card">
+        <h4>1. MICROGNATHIA</h4>
+        <ul>
+          <li>Small, recessed mandible</li>
+          <li>Retrognathia (positioned posteriorly)</li>
+          <li>Can range from mild to severe</li>
+        </ul>
+      </div>
+
+      <div class="severity-card">
+        <h4>2. GLOSSOPTOSIS</h4>
+        <ul>
+          <li>Tongue base falls posteriorly into oropharynx</li>
+          <li>Worse in supine position</li>
+          <li>Improves with prone positioning</li>
+        </ul>
+      </div>
+
+      <div class="severity-card">
+        <h4>3. UPPER AIRWAY OBSTRUCTION</h4>
+        <ul>
+          <li>Stridor, stertor, retractions, cyanosis</li>
+          <li>Worse during feeding and sleep</li>
+          <li>Positional dependency characteristic</li>
+          <li>OSA in 50-100% of patients</li>
+        </ul>
+      </div>
+
+      <h3>Severity Classification:</h3>
+      <table>
+        <tr><th>Grade</th><th>Airway Obstruction</th><th>Management</th></tr>
+        <tr><td><strong>Mild</strong></td><td>Positional only</td><td>Positioning, monitoring</td></tr>
+        <tr><td><strong>Moderate</strong></td><td>Desaturations with feeding</td><td>NPA, feeding support</td></tr>
+        <tr><td><strong>Severe</strong></td><td>Continuous respiratory distress</td><td>MDO or tracheostomy</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🧩 Syndromic Associations (60% of PRS)</h2>
+      
+      <div class="danger-box">
+        <strong>CRITICAL: Always evaluate for associated syndromes!</strong> They affect prognosis, management, and genetic counseling.
+      </div>
+
+      <div class="syndrome-card">
+        <h4>STICKLER SYNDROME (Most Common)</h4>
+        <p><strong>Gene:</strong> COL2A1, COL11A1, COL11A2</p>
+        <ul>
+          <li>PRS + <strong>Severe myopia</strong> (>-8 diopters)</li>
+          <li>Retinal detachment risk (12-50%)</li>
+          <li>Sensorineural hearing loss</li>
+          <li>Joint hypermobility</li>
+        </ul>
+        <p><strong>⚠️ Urgent ophthalmology eval required!</strong></p>
+      </div>
+
+      <div class="syndrome-card">
+        <h4>VELOCARDIOFACIAL (22q11.2 Deletion)</h4>
+        <p><strong>Features:</strong> CATCH-22</p>
+        <ul>
+          <li><strong>C</strong>ardiac defects</li>
+          <li><strong>A</strong>bnormal facies</li>
+          <li><strong>T</strong>hymic hypoplasia</li>
+          <li><strong>C</strong>left palate</li>
+          <li><strong>H</strong>ypocalcemia</li>
+        </ul>
+      </div>
+
+      <div class="syndrome-card">
+        <h4>TREACHER COLLINS SYNDROME</h4>
+        <p><strong>Gene:</strong> TCOF1</p>
+        <ul>
+          <li>Bilateral mandibular/malar hypoplasia</li>
+          <li>Downslanting palpebral fissures</li>
+          <li>Microtia, conductive hearing loss</li>
+        </ul>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Workup for Syndromes:</strong> Ophthalmology (Stickler), Genetics/22q11.2 FISH, Echo (cardiac), Audiology, Calcium/PTH, Renal ultrasound
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔪 Management Algorithm</h2>
+      
+      <div class="key-concept">
+        <strong>Principle:</strong> Start conservative, escalate as needed. Goal: safe airway while allowing mandibular catch-up growth.
+      </div>
+
+      <div class="step-card">
+        <h4>STEP 1: Positioning (First-Line)</h4>
+        <ul>
+          <li><strong>Prone positioning</strong> - allows tongue to fall forward</li>
+          <li>Effective for 50-70% of mild-moderate cases</li>
+          <li>Requires continuous monitoring initially</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <h4>STEP 2: Nasopharyngeal Airway (NPA)</h4>
+        <ul>
+          <li>Soft tube through nose to posterior pharynx</li>
+          <li>Bypasses tongue base obstruction</li>
+          <li>Bridge therapy to definitive management</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <h4>STEP 3: Mandibular Distraction Osteogenesis (MDO)</h4>
+        <ul>
+          <li><strong>Surgical lengthening of mandible</strong></li>
+          <li>Osteotomy + gradual distraction (1mm/day)</li>
+          <li>Success rate: 85-95% avoid tracheostomy</li>
+          <li>Preferred over tracheostomy when feasible</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <h4>STEP 4: Tracheostomy</h4>
+        <ul>
+          <li>Reserved for severe cases failing other interventions</li>
+          <li>Usually temporary - decannulation as mandible grows</li>
+          <li>Higher morbidity than MDO</li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>AIRWAY IS PRIORITY #1!</strong> PRS infants are difficult airways - prepare for fiberoptic. Avoid sedation without airway control.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🍼 Feeding Management</h2>
+      <ul>
+        <li><strong>Specialized cleft bottles</strong> (Mead Johnson, Pigeon, Haberman)</li>
+        <li><strong>Upright positioning</strong> during feeds</li>
+        <li><strong>Calorie fortification</strong> (24-27 cal/oz)</li>
+        <li><strong>NG tube</strong> if oral intake inadequate</li>
+        <li><strong>G-tube</strong> for prolonged feeding support</li>
+      </ul>
+      
+      <div class="clinical-pearl">
+        <strong>Goal:</strong> 100-120 kcal/kg/day. Feeds >30 minutes often expend more calories than gained.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📊 Prognosis</h2>
+      
+      <div class="success-box">
+        <strong>Mandibular Catch-Up Growth:</strong> In isolated PRS, the mandible often shows catch-up growth in the first 2-4 years. Some achieve near-normal size by adolescence.
+      </div>
+
+      <ul>
+        <li><strong>~40% still need orthognathic surgery</strong> at skeletal maturity</li>
+        <li>Nonsyndromic PRS: Generally good outcomes</li>
+        <li>Syndromic PRS: Outcomes depend on associated syndrome</li>
+        <li>VPI common - may need speech surgery</li>
+      </ul>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Test Your Understanding</h3>
+      <p><strong>A 1-day-old with micrognathia and U-shaped cleft palate has SpO2 of 75% supine but 95% prone. What is the FIRST step?</strong></p>
+      
+      <div class="quiz-option" onclick="checkAnswer(this, true)">A. Prone positioning and monitoring</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">B. Immediate mandibular distraction</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Tracheostomy</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Cleft palate repair</div>
+      
+      <div class="explanation" id="explanation1">
+        <strong>Correct Answer: A</strong><br><br>
+        Prone positioning is first-line treatment for PRS airway obstruction. The SpO2 improvement from 75% to 95% demonstrates position-dependency. Management escalates from positioning → NPA → MDO → tracheostomy only if previous measures fail.
+      </div>
+    </section>
+
+    <section class="quiz-section" style="margin-top: 1rem;">
+      <h3>🧠 Question 2</h3>
+      <p><strong>An infant with PRS has severe myopia (-10 diopters). Which syndrome and what major risk?</strong></p>
+      
+      <div class="quiz-option" onclick="checkAnswer2(this, true)">A. Stickler syndrome - Retinal detachment</div>
+      <div class="quiz-option" onclick="checkAnswer2(this, false)">B. Velocardiofacial - Cardiac defects</div>
+      <div class="quiz-option" onclick="checkAnswer2(this, false)">C. Treacher Collins - Hearing loss</div>
+      <div class="quiz-option" onclick="checkAnswer2(this, false)">D. Nager syndrome - Limb anomalies</div>
+      
+      <div class="explanation" id="explanation2">
+        <strong>Correct Answer: A</strong><br><br>
+        Stickler syndrome is the most common PRS-associated syndrome and features severe myopia. The major risk is retinal detachment (12-50%). Urgent ophthalmology referral is essential.
+      </div>
+    </section>
+
+    <a href="index.html" class="back-link">← Back to Modules</a>
+
+    <section class="module-section" style="margin-top: 2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size: 0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK562213/" target="_blank" style="color: var(--primary);">StatPearls: Pierre Robin Syndrome</a></li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK1302/" target="_blank" style="color: var(--primary);">GeneReviews: Stickler Syndrome</a></li>
+        <li><a href="https://medlineplus.gov/genetics/condition/pierre-robin-sequence/" target="_blank" style="color: var(--primary);">MedlinePlus: Pierre Robin Sequence</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK526103/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Pierre Robin Sequence</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5479443/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: PRS Airway Management</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4453014/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: PRS Review</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/pierre-robin-sequence" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Pierre Robin Sequence</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="pierre-robin-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="pierre-robin-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="cleft-lip-palate-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Cleft Lip and Palate</a>
+        <a href="treacher-collins-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Treacher Collins</a>
+        <a href="pharyngeal-apparatus-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Pharyngeal Apparatus</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(element, isCorrect) {
+      const section = element.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+      if (!isCorrect) {
+        section.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('explanation1').style.display = 'block';
+    }
+    
+    function checkAnswer2(element, isCorrect) {
+      const section = element.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+      if (!isCorrect) {
+        section.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('explanation2').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

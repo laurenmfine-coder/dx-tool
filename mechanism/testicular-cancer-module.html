@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Testicular Cancer</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .tumor-card { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); padding: 1rem; border-radius: 0.5rem; margin: 0.5rem 0; }
+    .tumor-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎗️ Testicular Cancer</h1>
+      <p class="subtitle">The Most Common Solid Malignancy in Young Men</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Testicular cancer</strong> is the most common solid tumor in men aged 15-35. The majority (95%) are <strong>germ cell tumors (GCTs)</strong>. Despite being aggressive, it is highly curable even with metastatic disease.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Peak age</td><td>15-35 years</td></tr>
+        <tr><td>Germ cell tumors</td><td>95% of testicular cancers</td></tr>
+        <tr><td>Cure rate (overall)</td><td>>95%</td></tr>
+        <tr><td>Cure rate (metastatic)</td><td>~80%</td></tr>
+        <tr><td>Risk with cryptorchidism</td><td>5-10x increased</td></tr>
+      </table>
+
+      <h3>Risk Factors</h3>
+      <ul>
+        <li><strong>Cryptorchidism</strong> - 5-10x risk (even after orchiopexy)</li>
+        <li><strong>Personal history</strong> - 2-3% risk in contralateral testis</li>
+        <li><strong>Family history</strong></li>
+        <li><strong>Testicular dysgenesis/DSD</strong></li>
+        <li><strong>Klinefelter syndrome</strong> (mediastinal GCT)</li>
+        <li><strong>HIV infection</strong></li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Classification</h2>
+      <h3>Germ Cell Tumors (95%)</h3>
+      
+      <div class="tumor-card">
+        <h4>SEMINOMA (40-50%)</h4>
+        <ul>
+          <li>Peak age: 30-40 years (slightly older)</li>
+          <li>Radiosensitive and chemosensitive</li>
+          <li>Excellent prognosis</li>
+          <li>Marker: May elevate <strong>hCG</strong> (10%), NEVER AFP</li>
+          <li>Histology: Sheets of uniform cells, "fried egg" appearance</li>
+        </ul>
+      </div>
+
+      <div class="tumor-card">
+        <h4>NON-SEMINOMATOUS GERM CELL TUMORS (NSGCT) (50-60%)</h4>
+        <p><em>More aggressive than seminoma; may elevate AFP and/or hCG</em></p>
+      </div>
+
+      <table>
+        <tr><th>NSGCT Type</th><th>Features</th><th>Markers</th></tr>
+        <tr><td><strong>Embryonal Carcinoma</strong></td><td>Most undifferentiated; aggressive</td><td>↑hCG, ↑AFP variable</td></tr>
+        <tr><td><strong>Yolk Sac Tumor</strong></td><td>Most common in children; Schiller-Duval bodies</td><td>↑AFP (always)</td></tr>
+        <tr><td><strong>Choriocarcinoma</strong></td><td>Most aggressive; hemorrhagic; early hematogenous spread</td><td>↑↑hCG</td></tr>
+        <tr><td><strong>Teratoma</strong></td><td>All 3 germ layers; mature vs immature; chemo-resistant</td><td>Normal markers</td></tr>
+        <tr><td><strong>Mixed GCT</strong></td><td>Combination of above (most common presentation)</td><td>Variable</td></tr>
+      </table>
+
+      <h3>Non-Germ Cell Tumors (5%)</h3>
+      <table>
+        <tr><th>Type</th><th>Notes</th></tr>
+        <tr><td><strong>Leydig cell tumor</strong></td><td>Produces testosterone/estrogen; gynecomastia; usually benign</td></tr>
+        <tr><td><strong>Sertoli cell tumor</strong></td><td>Usually benign</td></tr>
+        <tr><td><strong>Lymphoma</strong></td><td>Most common testicular tumor in men >60</td></tr>
+      </table>
+
+      <div class="clinical-pearl">
+        <strong>Age-Based Differential:</strong>
+        <ul>
+          <li><strong>Children:</strong> Yolk sac tumor most common</li>
+          <li><strong>Young adults (15-35):</strong> Mixed GCT, seminoma</li>
+          <li><strong>Older men (>60):</strong> Lymphoma most common</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Presentation</h2>
+      <h3>Typical Presentation</h3>
+      <ul>
+        <li><strong>Painless testicular mass</strong> - most common</li>
+        <li>Testicular heaviness or fullness</li>
+        <li>Dull ache in scrotum or lower abdomen</li>
+        <li>Acute pain (10%) - hemorrhage into tumor</li>
+        <li>Incidental finding on imaging or after trauma</li>
+      </ul>
+
+      <h3>Metastatic Symptoms</h3>
+      <ul>
+        <li>Back pain (retroperitoneal lymphadenopathy)</li>
+        <li>Dyspnea, cough (pulmonary mets)</li>
+        <li>Neck mass (supraclavicular nodes)</li>
+        <li>Gynecomastia (hCG-secreting tumors)</li>
+      </ul>
+
+      <div class="danger-box">
+        <strong>⚠️ Any solid testicular mass is cancer until proven otherwise!</strong><br>
+        Transillumination negative (solid) = concerning for malignancy
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📷 Diagnosis</h2>
+      <h3>Workup Algorithm</h3>
+      <div class="pathway-box">TESTICULAR MASS SUSPECTED
+        ↓
+Scrotal ultrasound (first test)
+        ↓
+If solid intratesticular mass:
+        ↓
+┌─────────────────────────────────────────────────┐
+│ 1. TUMOR MARKERS (before orchiectomy)           │
+│    • AFP, hCG, LDH                              │
+│                                                 │
+│ 2. STAGING CT (chest/abd/pelvis)                │
+│                                                 │
+│ 3. RADICAL INGUINAL ORCHIECTOMY                 │
+│    (NEVER trans-scrotal biopsy!)                │
+└─────────────────────────────────────────────────┘</div>
+
+      <h3>Tumor Markers</h3>
+      <table>
+        <tr><th>Marker</th><th>Half-life</th><th>Elevated In</th></tr>
+        <tr><td><strong>AFP</strong></td><td>5-7 days</td><td>Yolk sac, embryonal, mixed; NEVER pure seminoma</td></tr>
+        <tr><td><strong>hCG</strong></td><td>24-36 hours</td><td>Choriocarcinoma (high), seminoma (10%), embryonal</td></tr>
+        <tr><td><strong>LDH</strong></td><td>-</td><td>Nonspecific; correlates with tumor burden</td></tr>
+      </table>
+
+      <div class="clinical-pearl">
+        <strong>Key Marker Rules:</strong>
+        <ul>
+          <li>Elevated AFP = NSGCT (even if pathology says seminoma)</li>
+          <li>Pure seminoma NEVER elevates AFP</li>
+          <li>Markers should normalize after orchiectomy (based on half-life)</li>
+          <li>Persistent elevation = residual disease</li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>⚠️ NEVER perform trans-scrotal biopsy or orchiectomy!</strong><br>
+        This disrupts lymphatic drainage and can upstage disease. Always use <strong>inguinal approach</strong> with early cord clamping.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📍 Staging</h2>
+      <h3>TNM/Stage Grouping</h3>
+      <table>
+        <tr><th>Stage</th><th>Description</th></tr>
+        <tr><td><strong>I</strong></td><td>Confined to testis (no metastases)</td></tr>
+        <tr><td><strong>II</strong></td><td>Retroperitoneal lymph node involvement</td></tr>
+        <tr><td><strong>III</strong></td><td>Distant metastases (lung, liver, brain, bone) or markedly elevated markers</td></tr>
+      </table>
+
+      <h3>IGCCCG Risk Classification (Metastatic Disease)</h3>
+      <table>
+        <tr><th>Risk</th><th>NSGCT</th><th>Seminoma</th><th>5-yr Survival</th></tr>
+        <tr><td>Good</td><td>Testis/RP primary, lung mets only, markers low</td><td>Any primary, non-pulmonary visceral mets absent</td><td>90%</td></tr>
+        <tr><td>Intermediate</td><td>Testis/RP primary, lung mets, intermediate markers</td><td>Non-pulmonary visceral mets present</td><td>75%</td></tr>
+        <tr><td>Poor</td><td>Mediastinal primary OR non-pulmonary visceral mets OR high markers</td><td>No poor-risk category for seminoma</td><td>50%</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Treatment</h2>
+      <h3>Stage I (Confined to Testis)</h3>
+      <table>
+        <tr><th>Type</th><th>Options</th></tr>
+        <tr><td><strong>Seminoma</strong></td><td>Surveillance (preferred), single-agent carboplatin, or radiation</td></tr>
+        <tr><td><strong>NSGCT</strong></td><td>Surveillance (if low risk), RPLND, or adjuvant BEP x1-2</td></tr>
+      </table>
+
+      <h3>Stage II-III (Metastatic)</h3>
+      <div class="info-box">
+        <strong>BEP Chemotherapy:</strong>
+        <ul>
+          <li><strong>B</strong>leomycin</li>
+          <li><strong>E</strong>toposide</li>
+          <li><strong>P</strong>latinum (cisplatin)</li>
+        </ul>
+        3-4 cycles depending on risk category. Highly effective!
+      </div>
+
+      <h3>Post-Chemotherapy Residual Mass</h3>
+      <ul>
+        <li><strong>Seminoma:</strong> Observe if <3cm and PET negative; surgery if PET positive or growing</li>
+        <li><strong>NSGCT:</strong> RPLND (retroperitoneal lymph node dissection) for residual mass >1cm</li>
+      </ul>
+
+      <h3>Retroperitoneal Lymph Node Dissection (RPLND)</h3>
+      <ul>
+        <li>Can be primary treatment (stage I NSGCT) or post-chemo</li>
+        <li>Nerve-sparing technique preserves ejaculation</li>
+        <li>Therapeutic and staging procedure</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📋 Key Clinical Pearls</h2>
+      <div class="success-box">
+        <strong>High-Yield Points:</strong>
+        <ul>
+          <li>Most common solid tumor in young men (15-35)</li>
+          <li>Painless mass = cancer until proven otherwise</li>
+          <li>NEVER trans-scrotal approach; always inguinal</li>
+          <li>AFP elevated = NSGCT (even if biopsy says seminoma)</li>
+          <li>Highly curable even with metastatic disease (BEP chemo)</li>
+          <li>Self-examination and awareness are key</li>
+          <li>Cryptorchidism increases risk 5-10x</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A 28-year-old presents with a painless testicular mass. AFP is elevated at 500 ng/mL. Pathology after orchiectomy shows "pure seminoma." What is the correct interpretation?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Pure seminoma with paraneoplastic AFP elevation</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Must contain non-seminomatous elements (treat as NSGCT)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Lab error, repeat AFP</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Seminoma with yolk sac differentiation</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B</strong><br>Pure seminoma NEVER produces AFP. If AFP is elevated, there MUST be non-seminomatous elements (likely yolk sac tumor or embryonal carcinoma) even if not seen on pathology. Treat as NSGCT, not seminoma.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK563159/" target="_blank" style="color:var(--primary);">StatPearls: Testicular Cancer</a></li>
+        <li><a href="https://www.auanet.org/" target="_blank" style="color:var(--primary);">AUA Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK563159/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Testicular Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/testicular-cancer-guideline" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">AUA Guideline: Testicular Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/testicular-tumours" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Testicular Tumors</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5915337/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: GCT Management</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="testicular-cancer-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="testicular-cancer-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="cryptorchidism-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Cryptorchidism (risk factor)</a>
+        <a href="testicular-torsion-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Testicular Torsion (differential)</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

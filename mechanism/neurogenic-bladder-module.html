@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Neurogenic Bladder</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .lesion-card { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .lesion-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧠 Neurogenic Bladder</h1>
+      <p class="subtitle">Lesion Localization & Urodynamic Patterns</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Neurogenic bladder</strong> refers to bladder dysfunction caused by neurological disease or injury. The pattern of dysfunction depends on the <strong>level of the lesion</strong> in the nervous system.
+      </div>
+      <h3>Common Etiologies</h3>
+      <table>
+        <tr><th>Level</th><th>Conditions</th></tr>
+        <tr><td><strong>Brain</strong></td><td>Stroke, Parkinson's, dementia, brain tumor, MS</td></tr>
+        <tr><td><strong>Spinal cord</strong></td><td>SCI, MS, transverse myelitis, spinal stenosis, tumors</td></tr>
+        <tr><td><strong>Peripheral nerves</strong></td><td>Diabetes, pelvic surgery (radical hysterectomy, APR), herniated disc</td></tr>
+        <tr><td><strong>Congenital</strong></td><td>Myelomeningocele (spina bifida), tethered cord, sacral agenesis</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Neuroanatomy of Micturition</h2>
+      <div class="pathway-box">NORMAL VOIDING NEUROANATOMY
+
+CEREBRAL CORTEX (frontal lobe)
+├── Conscious control, social awareness
+├── Inhibits pontine micturition center until appropriate
+│
+PONTINE MICTURITION CENTER (PMC)
+├── Coordinates voiding reflex
+├── "ON/OFF switch" for micturition
+│
+SPINAL CORD
+├── T11-L2: Sympathetic (hypogastric nerve)
+│   • Bladder relaxation (β receptors)
+│   • Sphincter contraction (α receptors)
+│   • STORAGE function
+│
+├── S2-S4: Parasympathetic (pelvic nerve)
+│   • Detrusor CONTRACTION (M3 receptors)
+│   • VOIDING function
+│
+└── S2-S4: Somatic (pudendal nerve)
+    • External sphincter (voluntary control)
+    • "Guarding reflex"</div>
+
+      <div class="clinical-pearl">
+        <strong>The Guarding Reflex:</strong> When the bladder fills, afferent signals trigger reflexive contraction of the external sphincter (via pudendal nerve) to prevent leakage. This is disrupted in various neurogenic conditions.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📍 Classification by Lesion Level</h2>
+      
+      <div class="lesion-card">
+        <h4>SUPRAPONTINE LESIONS (Brain - above PMC)</h4>
+        <p><em>Examples: Stroke, Parkinson's, dementia, brain tumor</em></p>
+        <table>
+          <tr><td><strong>Pattern</strong></td><td>Detrusor overactivity WITH coordinated sphincter</td></tr>
+          <tr><td><strong>Mechanism</strong></td><td>Loss of cortical inhibition of PMC; voiding reflex intact</td></tr>
+          <tr><td><strong>Symptoms</strong></td><td>Urgency, frequency, urge incontinence</td></tr>
+          <tr><td><strong>Voiding</strong></td><td>Usually complete (no significant residual)</td></tr>
+          <tr><td><strong>Risk</strong></td><td>Low risk to upper tracts (sphincter relaxes with voiding)</td></tr>
+        </table>
+      </div>
+
+      <div class="lesion-card">
+        <h4>SUPRASACRAL SPINAL CORD LESIONS (Between PMC and S2-4)</h4>
+        <p><em>Examples: Spinal cord injury above S2, MS, transverse myelitis</em></p>
+        <table>
+          <tr><td><strong>Pattern</strong></td><td>Detrusor overactivity WITH <strong>detrusor-sphincter dyssynergia (DSD)</strong></td></tr>
+          <tr><td><strong>Mechanism</strong></td><td>Loss of coordination between bladder and sphincter</td></tr>
+          <tr><td><strong>DSD</strong></td><td>Sphincter contracts DURING bladder contraction (should relax!)</td></tr>
+          <tr><td><strong>Symptoms</strong></td><td>Incomplete emptying, high pressures, incontinence</td></tr>
+          <tr><td><strong>Risk</strong></td><td><strong>HIGH RISK</strong> to upper tracts (high pressure → hydro, reflux, renal damage)</td></tr>
+        </table>
+        <div class="danger-box">
+          <strong>⚠️ DSD is DANGEROUS!</strong> High bladder pressures (>40 cmH2O) can cause hydronephrosis, VUR, and renal failure. Close monitoring and treatment essential.
+        </div>
+      </div>
+
+      <div class="lesion-card">
+        <h4>SACRAL/INFRASACRAL LESIONS (S2-4 and below)</h4>
+        <p><em>Examples: Cauda equina, myelomeningocele, pelvic surgery, diabetic neuropathy</em></p>
+        <table>
+          <tr><td><strong>Pattern</strong></td><td>Detrusor areflexia/underactivity; sphincter weakness may occur</td></tr>
+          <tr><td><strong>Mechanism</strong></td><td>Damage to sacral voiding center (parasympathetic outflow)</td></tr>
+          <tr><td><strong>Symptoms</strong></td><td>Urinary retention, overflow incontinence, stress incontinence</td></tr>
+          <tr><td><strong>Voiding</strong></td><td>Poor emptying, high PVR</td></tr>
+          <tr><td><strong>Risk</strong></td><td>UTI (stasis), overflow incontinence; upper tract risk if high storage pressures</td></tr>
+        </table>
+      </div>
+
+      <h3>Summary Table</h3>
+      <table>
+        <tr><th>Lesion Level</th><th>Detrusor</th><th>Sphincter</th><th>Coordination</th><th>Upper Tract Risk</th></tr>
+        <tr><td>Suprapontine</td><td>Overactive</td><td>Normal</td><td>Synergic</td><td>Low</td></tr>
+        <tr><td>Suprasacral spinal</td><td>Overactive</td><td>Overactive</td><td><strong>Dyssynergic (DSD)</strong></td><td><strong>HIGH</strong></td></tr>
+        <tr><td>Sacral/Infrasacral</td><td>Underactive</td><td>Variable</td><td>N/A (areflexic)</td><td>Moderate</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Evaluation</h2>
+      <h3>Clinical Assessment</h3>
+      <ul>
+        <li>Detailed neurological history</li>
+        <li>Voiding diary</li>
+        <li>Post-void residual (PVR)</li>
+        <li>Neurological exam (perineal sensation, anal tone, bulbocavernosus reflex)</li>
+      </ul>
+
+      <h3>Urodynamic Studies</h3>
+      <div class="info-box">
+        <strong>Urodynamics is ESSENTIAL in neurogenic bladder:</strong>
+        <ul>
+          <li>Characterizes detrusor function (over/underactive)</li>
+          <li>Identifies DSD</li>
+          <li>Measures bladder compliance and pressures</li>
+          <li>Guides treatment decisions</li>
+          <li>Monitors for dangerous high-pressure patterns</li>
+        </ul>
+      </div>
+
+      <h3>Upper Tract Monitoring</h3>
+      <ul>
+        <li>Renal ultrasound (hydronephrosis)</li>
+        <li>Serum creatinine</li>
+        <li>VCUG if VUR suspected</li>
+        <li>Nuclear renal scan for differential function</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Management</h2>
+      <h3>Goals of Treatment</h3>
+      <ol>
+        <li><strong>Protect the upper urinary tract</strong> (most important!)</li>
+        <li>Achieve low-pressure urine storage</li>
+        <li>Ensure adequate bladder emptying</li>
+        <li>Maintain continence</li>
+        <li>Improve quality of life</li>
+      </ol>
+
+      <h3>Treatment Options</h3>
+      <table>
+        <tr><th>Problem</th><th>Treatment Options</th></tr>
+        <tr><td><strong>Detrusor overactivity</strong></td><td>Antimuscarinics, β3-agonists, Botox injection</td></tr>
+        <tr><td><strong>DSD</strong></td><td>α-blockers, Botox to sphincter, sphincterotomy</td></tr>
+        <tr><td><strong>Poor emptying</strong></td><td>Clean intermittent catheterization (CIC), indwelling catheter</td></tr>
+        <tr><td><strong>Low compliance</strong></td><td>Antimuscarinics, augmentation cystoplasty</td></tr>
+        <tr><td><strong>Incontinence</strong></td><td>Sling, artificial urinary sphincter, diversion</td></tr>
+      </table>
+
+      <h3>Clean Intermittent Catheterization (CIC)</h3>
+      <div class="success-box">
+        <strong>CIC is the gold standard for bladder emptying in neurogenic bladder:</strong>
+        <ul>
+          <li>Usually every 4-6 hours</li>
+          <li>Maintains low bladder pressures</li>
+          <li>Reduces UTI risk vs indwelling catheter</li>
+          <li>Preserves upper tract function</li>
+          <li>Requires adequate hand function or caregiver</li>
+        </ul>
+      </div>
+
+      <h3>Augmentation Cystoplasty</h3>
+      <ul>
+        <li>For refractory low compliance or small capacity</li>
+        <li>Uses intestinal segment to enlarge bladder</li>
+        <li>Requires CIC afterward</li>
+        <li>Complications: mucus, stones, metabolic issues, perforation</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📋 Specific Conditions</h2>
+      
+      <div class="clinical-pearl">
+        <strong>Spinal Cord Injury (SCI):</strong>
+        <ul>
+          <li><strong>Spinal shock:</strong> Initial areflexic bladder (weeks); requires catheter</li>
+          <li><strong>After recovery:</strong> Pattern depends on level (above/below S2-4)</li>
+          <li><strong>Autonomic dysreflexia:</strong> Emergency! Triggered by bladder distension in T6+ injuries</li>
+        </ul>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Myelomeningocele (Spina Bifida):</strong>
+        <ul>
+          <li>Most common cause of neurogenic bladder in children</li>
+          <li>Lifelong management from infancy</li>
+          <li>CIC often started in infancy</li>
+          <li>Goal: Protect kidneys, achieve continence for social integration</li>
+        </ul>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Diabetes Mellitus:</strong>
+        <ul>
+          <li>Autonomic neuropathy → impaired bladder sensation</li>
+          <li>Often presents late with large capacity, incomplete emptying</li>
+          <li>Detrusor underactivity common</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A patient with T10 spinal cord injury has urodynamics showing detrusor overactivity with simultaneous external sphincter contraction during voiding. What is this pattern called?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Detrusor areflexia</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Detrusor-sphincter dyssynergia (DSD)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Stress incontinence</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Urge incontinence</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B - DSD</strong><br>Detrusor-sphincter dyssynergia occurs with suprasacral spinal cord lesions (above S2-4, like T10). The sphincter contracts instead of relaxing during bladder contraction. This creates high pressures and is dangerous to the upper tracts.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK560617/" target="_blank" style="color:var(--primary);">StatPearls: Neurogenic Bladder</a></li>
+        <li><a href="https://www.auanet.org/" target="_blank" style="color:var(--primary);">AUA Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK560617/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Neurogenic Bladder</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/adult-neurogenic-lower-urinary-tract-dysfunction" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">AUA Guideline: Neurogenic Lower Urinary Tract Dysfunction</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4708205/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: Spinal Cord Injury and Bladder</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/neurogenic-bladder" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Neurogenic Bladder</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="neurogenic-bladder-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="neurogenic-bladder-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="urinary-incontinence-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Urinary Incontinence</a>
+        <a href="posterior-urethral-valves-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">PUV (valve bladder)</a>
+        <a href="bph-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">BPH (differential)</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Nephrolithiasis (Kidney Stones)</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .stone-card { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); padding: 1rem; border-radius: 0.75rem; margin: 0.75rem 0; }
+    .stone-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💎 Nephrolithiasis</h1>
+      <p class="subtitle">Stone Types, Imaging, and Management Algorithm</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Nephrolithiasis</strong> affects ~10% of the population lifetime. Understanding stone composition guides both acute management and long-term prevention.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Lifetime prevalence</td><td>10-15% (increasing)</td></tr>
+        <tr><td>Male:Female</td><td>2-3:1 (gap narrowing)</td></tr>
+        <tr><td>Peak age</td><td>30-50 years</td></tr>
+        <tr><td>Recurrence at 5 years</td><td>~50%</td></tr>
+        <tr><td>Recurrence at 10 years</td><td>~80%</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Stone Types & Composition</h2>
+      
+      <div class="stone-card">
+        <h4>CALCIUM OXALATE (75-80%)</h4>
+        <table>
+          <tr><td><strong>Appearance</strong></td><td>Envelope-shaped crystals; brown/black stones</td></tr>
+          <tr><td><strong>X-ray</strong></td><td>RADIOPAQUE</td></tr>
+          <tr><td><strong>Causes</strong></td><td>Hypercalciuria, hyperoxaluria, hypocitraturia, low urine volume</td></tr>
+          <tr><td><strong>Associations</strong></td><td>High oxalate foods (spinach, rhubarb, nuts), Crohn's (enteric hyperoxaluria), gastric bypass</td></tr>
+          <tr><td><strong>Prevention</strong></td><td>↑ Fluids, ↓ sodium, thiazides (for hypercalciuria), citrate supplementation</td></tr>
+        </table>
+      </div>
+
+      <div class="stone-card">
+        <h4>CALCIUM PHOSPHITE (Hydroxyapatite/Brushite) (5-10%)</h4>
+        <table>
+          <tr><td><strong>X-ray</strong></td><td>RADIOPAQUE</td></tr>
+          <tr><td><strong>Causes</strong></td><td>High urine pH (>7.0), RTA Type 1, hyperparathyroidism</td></tr>
+          <tr><td><strong>Key Point</strong></td><td>Form in ALKALINE urine (opposite of uric acid)</td></tr>
+        </table>
+      </div>
+
+      <div class="stone-card">
+        <h4>URIC ACID (5-10%)</h4>
+        <table>
+          <tr><td><strong>Appearance</strong></td><td>Rhomboid/rosette crystals; yellow-orange stones</td></tr>
+          <tr><td><strong>X-ray</strong></td><td>RADIOLUCENT (not seen on X-ray!)</td></tr>
+          <tr><td><strong>Causes</strong></td><td>Low urine pH (<5.5), gout, high purine diet, tumor lysis, myeloproliferative disorders</td></tr>
+          <tr><td><strong>Prevention</strong></td><td>Urine alkalinization (K-citrate to pH 6.5-7), allopurinol, ↓ purines, ↑ fluids</td></tr>
+          <tr><td><strong>Special</strong></td><td>Can be DISSOLVED with alkalinization!</td></tr>
+        </table>
+      </div>
+
+      <div class="stone-card">
+        <h4>STRUVITE (Magnesium Ammonium Phosphate) (5-15%)</h4>
+        <table>
+          <tr><td><strong>Appearance</strong></td><td>"Coffin lid" crystals; staghorn calculi</td></tr>
+          <tr><td><strong>X-ray</strong></td><td>RADIOPAQUE</td></tr>
+          <tr><td><strong>Causes</strong></td><td>Urease-producing bacteria (Proteus, Klebsiella, Pseudomonas) → high ammonia → high pH</td></tr>
+          <tr><td><strong>Key Point</strong></td><td>INFECTION stones; require complete removal + antibiotics</td></tr>
+          <tr><td><strong>Risk Factors</strong></td><td>Women, chronic catheters, neurogenic bladder, recurrent UTIs</td></tr>
+        </table>
+      </div>
+
+      <div class="stone-card">
+        <h4>CYSTINE (1-2%)</h4>
+        <table>
+          <tr><td><strong>Appearance</strong></td><td>Hexagonal crystals; yellow waxy stones</td></tr>
+          <tr><td><strong>X-ray</strong></td><td>Faintly radiopaque ("ground glass")</td></tr>
+          <tr><td><strong>Cause</strong></td><td>Cystinuria - autosomal recessive defect in dibasic amino acid transport</td></tr>
+          <tr><td><strong>Prevention</strong></td><td>Very high fluid intake (>3L/day), urine alkalinization, tiopronin or D-penicillamine</td></tr>
+          <tr><td><strong>Key Point</strong></td><td>Suspect in YOUNG patients with recurrent stones</td></tr>
+        </table>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Memory Aid - Radiolucency:</strong><br>
+        "U Can't See" = <strong>U</strong>ric acid and <strong>C</strong>ystine (and pure xanthine) are radiolucent on X-ray<br>
+        (Actually cystine is faintly opaque, but uric acid is truly radiolucent)
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Presentation</h2>
+      <h3>Classic Symptoms</h3>
+      <ul>
+        <li><strong>Renal colic:</strong> Severe, colicky flank pain radiating to groin/testicle/labia</li>
+        <li>Pain location follows stone location (flank → lower abdomen → groin)</li>
+        <li>Nausea and vomiting (common)</li>
+        <li>Hematuria (85-90%, may be microscopic)</li>
+        <li>Restlessness - can't find comfortable position (vs peritonitis = still)</li>
+        <li>Urinary urgency/frequency if stone at UVJ</li>
+      </ul>
+
+      <h3>Stone Location & Symptoms</h3>
+      <table>
+        <tr><th>Location</th><th>Typical Symptoms</th></tr>
+        <tr><td>Renal pelvis/UPJ</td><td>Deep flank/CVA pain</td></tr>
+        <tr><td>Mid-ureter</td><td>Pain radiates anteriorly to abdomen</td></tr>
+        <tr><td>Distal ureter</td><td>Pain radiates to groin, testicle/labia</td></tr>
+        <tr><td>UVJ/intramural</td><td>Bladder irritation (frequency, urgency)</td></tr>
+      </table>
+
+      <div class="danger-box">
+        <strong>⚠️ Complicated Stone = EMERGENCY:</strong>
+        <ul>
+          <li>Obstructing stone + INFECTION (pyonephrosis) - sepsis risk!</li>
+          <li>Obstruction of solitary kidney</li>
+          <li>Bilateral obstruction</li>
+          <li>Acute renal failure</li>
+        </ul>
+        → Requires URGENT decompression (ureteral stent or nephrostomy tube)
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📷 Imaging</h2>
+      <h3>Imaging Modalities</h3>
+      <table>
+        <tr><th>Modality</th><th>Sensitivity</th><th>Pros</th><th>Cons</th></tr>
+        <tr><td><strong>CT (non-contrast)</strong></td><td>95-100%</td><td>Gold standard; sees all stone types; fast</td><td>Radiation; cost</td></tr>
+        <tr><td><strong>Ultrasound</strong></td><td>45-85%</td><td>No radiation; good for pregnancy; shows hydronephrosis</td><td>Misses ureteral stones; operator dependent</td></tr>
+        <tr><td><strong>KUB (X-ray)</strong></td><td>45-60%</td><td>Low radiation; follow known radiopaque stones</td><td>Misses radiolucent stones; low sensitivity</td></tr>
+        <tr><td><strong>CT with contrast</strong></td><td>Variable</td><td>Evaluates anatomy, tumors</td><td>Contrast may obscure small stones</td></tr>
+      </table>
+
+      <div class="success-box">
+        <strong>Imaging Choice:</strong>
+        <ul>
+          <li><strong>First episode, adult:</strong> Non-contrast CT (low-dose if available)</li>
+          <li><strong>Pregnant:</strong> Ultrasound first; MRI if needed</li>
+          <li><strong>Pediatric:</strong> Ultrasound first; low-dose CT if needed</li>
+          <li><strong>Follow-up of known stone:</strong> KUB (if radiopaque) or US</li>
+        </ul>
+      </div>
+
+      <h3>CT Findings</h3>
+      <ul>
+        <li>Direct visualization of stone (measure size, location)</li>
+        <li>Hydroureter/hydronephrosis (obstruction)</li>
+        <li>Perinephric stranding (inflammation)</li>
+        <li>Stone density (HU) may predict composition</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Management</h2>
+      <h3>Acute Management Algorithm</h3>
+      <div class="pathway-box">ACUTE RENAL COLIC
+        ↓
+Rule out COMPLICATED stone (fever, solitary kidney, bilateral, AKI)
+        ↓
+┌─────────────────────────────────────────────────────────┐
+│ COMPLICATED                    UNCOMPLICATED            │
+│ (Infected/obstructed)          (Simple colic)           │
+│        ↓                              ↓                 │
+│ URGENT DECOMPRESSION           Stone size?              │
+│ • Ureteral stent or            ↓                        │
+│ • Nephrostomy tube        ≤10mm        >10mm            │
+│ + IV antibiotics             ↓              ↓           │
+│                         Trial of        Intervention    │
+│                         passage         likely needed   │
+└─────────────────────────────────────────────────────────┘</div>
+
+      <h3>Medical Expulsive Therapy (MET)</h3>
+      <div class="info-box">
+        <strong>For stones ≤10mm:</strong>
+        <ul>
+          <li><strong>Alpha-blockers</strong> (tamsulosin) - relax ureteral smooth muscle</li>
+          <li>Pain control (NSAIDs first-line; opioids if needed)</li>
+          <li>Hydration</li>
+          <li>Strain urine for stone analysis</li>
+        </ul>
+        <strong>Passage rates by size:</strong>
+        <ul>
+          <li>&lt;5mm: ~90% pass spontaneously</li>
+          <li>5-10mm: ~50% pass</li>
+          <li>&gt;10mm: Unlikely to pass; intervention usually needed</li>
+        </ul>
+      </div>
+
+      <h3>Surgical Interventions</h3>
+      <table>
+        <tr><th>Procedure</th><th>Indication</th><th>Notes</th></tr>
+        <tr><td><strong>Ureteroscopy (URS)</strong></td><td>Ureteral stones, lower pole renal stones &lt;2cm</td><td>Laser lithotripsy + basket extraction; high success</td></tr>
+        <tr><td><strong>Shock Wave Lithotripsy (SWL)</strong></td><td>Renal stones &lt;2cm, proximal ureteral stones</td><td>Non-invasive; may need multiple sessions</td></tr>
+        <tr><td><strong>PCNL</strong></td><td>Large renal stones (>2cm), staghorn calculi</td><td>Percutaneous access; highest stone-free rate for large stones</td></tr>
+        <tr><td><strong>Stent placement</strong></td><td>Temporizing for obstruction, post-procedure</td><td>Relieves obstruction; not definitive treatment</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔄 Prevention & Metabolic Workup</h2>
+      <h3>When to Do Metabolic Workup</h3>
+      <ul>
+        <li>Recurrent stone formers</li>
+        <li>First-time former with high risk (family history, young age, solitary kidney)</li>
+        <li>Non-calcium stones (uric acid, cystine, struvite)</li>
+        <li>Children</li>
+      </ul>
+
+      <h3>24-Hour Urine Analysis</h3>
+      <table>
+        <tr><th>Parameter</th><th>Goal</th><th>If Abnormal</th></tr>
+        <tr><td>Volume</td><td>>2.5 L/day</td><td>Increase fluids</td></tr>
+        <tr><td>Calcium</td><td>&lt;250 mg/day (women), &lt;300 (men)</td><td>Thiazide diuretic, ↓ sodium</td></tr>
+        <tr><td>Oxalate</td><td>&lt;40 mg/day</td><td>↓ Oxalate foods, calcium WITH meals</td></tr>
+        <tr><td>Citrate</td><td>>450 mg/day</td><td>Potassium citrate</td></tr>
+        <tr><td>Uric acid</td><td>&lt;800 mg/day (men)</td><td>↓ Purines, allopurinol</td></tr>
+        <tr><td>pH</td><td>6.0-6.5</td><td>Alkalinize if &lt;5.5 (uric acid risk)</td></tr>
+        <tr><td>Sodium</td><td>&lt;150 mEq/day</td><td>↓ Salt intake</td></tr>
+      </table>
+
+      <div class="clinical-pearl">
+        <strong>Universal Prevention:</strong>
+        <ul>
+          <li>Drink enough to produce >2.5L urine/day</li>
+          <li>Limit sodium (&lt;2300 mg/day)</li>
+          <li>Normal calcium intake (don't restrict!)</li>
+          <li>Limit animal protein</li>
+          <li>Increase fruits/vegetables (citrate)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A patient with history of gout presents with renal colic. KUB shows no stone. CT shows a 6mm stone in the distal ureter. What type of stone is most likely?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Calcium oxalate</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Uric acid</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Struvite</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Cystine</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B - Uric Acid</strong><br>Uric acid stones are RADIOLUCENT (not seen on KUB) but visible on CT. The history of gout strongly suggests uric acid stone. These stones form in acidic urine (pH <5.5) and can potentially be dissolved with urine alkalinization.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK442014/" target="_blank" style="color:var(--primary);">StatPearls: Nephrolithiasis</a></li>
+        <li><a href="https://www.auanet.org/guidelines-and-quality/guidelines/kidney-stones-surgical-management-guideline" target="_blank" style="color:var(--primary);">AUA Kidney Stones Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK442014/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Nephrolithiasis</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/kidney-stones-surgical-management-guideline" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">AUA Guideline: Surgical Management of Stones</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/kidney-stones-medical-mangement-guideline" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">AUA Guideline: Medical Management of Stones</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/renal-calculi" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Renal Calculi</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2845082/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: Stone Disease Review</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="kidney-stones-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="kidney-stones-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+        <a href="urology-sbar-collection.html" style="display: block; padding: 1rem; background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.4); border-radius: 0.5rem; color: #f9a8d4; text-decoration: none; text-align: center;">
+          <strong>📞 SBAR Practice</strong><br><span style="font-size: 0.85rem; color: #fbcfe8;">Communication skills</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="hematuria-crt.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Hematuria Workup</a>
+        <a href="upj-obstruction-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">UPJ Obstruction</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

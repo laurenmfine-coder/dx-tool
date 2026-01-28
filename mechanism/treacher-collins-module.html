@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Treacher Collins Syndrome</title>
+  <style>
+    :root {
+      --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #EC4899;
+      --accent: #F59E0B; --success: #10B981; --danger: #EF4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #E5E7EB; min-height: 100vh; line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header {
+      text-align: center; margin-bottom: 2rem; padding: 2rem;
+      background: rgba(139, 92, 246, 0.1); border-radius: 1rem;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 0.5rem;
+    }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .module-section {
+      background: rgba(255, 255, 255, 0.05); border-radius: 1rem;
+      padding: 2rem; margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept {
+      background: rgba(139, 92, 246, 0.15); border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .danger-box {
+      background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .success-box {
+      background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .clinical-pearl {
+      background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(139, 92, 246, 0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .feature-card {
+      background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);
+      padding: 1rem; border-radius: 0.5rem; margin: 0.5rem 0;
+    }
+    .feature-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section {
+      background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success);
+      border-radius: 1rem; padding: 1.5rem; margin-top: 2rem;
+    }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option {
+      display: block; padding: 0.75rem 1rem; margin: 0.5rem 0;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem; cursor: pointer; transition: all 0.3s;
+    }
+    .quiz-option:hover { background: rgba(139, 92, 246, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+    .back-link {
+      display: inline-block; margin-top: 2rem; padding: 0.75rem 1.5rem;
+      background: var(--primary); color: white; text-decoration: none; border-radius: 0.5rem;
+    }
+    .back-link:hover { background: var(--primary-dark); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧬 Treacher Collins Syndrome</h1>
+      <p class="subtitle">Mandibulofacial Dysostosis | TCOF1 Mutation | Bilateral Symmetric Craniofacial Hypoplasia</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Core Definition</h2>
+      <div class="key-concept">
+        <strong>Treacher Collins Syndrome (TCS) = Autosomal dominant condition causing BILATERAL, SYMMETRIC underdevelopment of structures derived from the first and second pharyngeal arches</strong>
+        <p style="margin-top: 0.5rem;">Also known as: Mandibulofacial dysostosis, Franceschetti-Zwahlen-Klein syndrome</p>
+      </div>
+
+      <h3>Epidemiology:</h3>
+      <ul>
+        <li>Incidence: 1 in 50,000 live births</li>
+        <li>No gender or ethnic predilection</li>
+        <li><strong>60% are de novo mutations</strong></li>
+        <li>40% inherited (autosomal dominant)</li>
+        <li>Variable expressivity - even within families</li>
+      </ul>
+
+      <div class="clinical-pearl">
+        <strong>TCS vs HFM:</strong> Treacher Collins is BILATERAL and SYMMETRIC, while Hemifacial Microsomia is typically UNILATERAL or asymmetric. This is a key clinical differentiator!
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Genetics</h2>
+      
+      <table>
+        <tr><th>Gene</th><th>Protein</th><th>Frequency</th><th>Inheritance</th></tr>
+        <tr><td><strong>TCOF1</strong></td><td>Treacle</td><td>78-93%</td><td>AD (most de novo)</td></tr>
+        <tr><td><strong>POLR1C</strong></td><td>RNA Polymerase I subunit</td><td>~2%</td><td>AR</td></tr>
+        <tr><td><strong>POLR1D</strong></td><td>RNA Polymerase I/III subunit</td><td>~2%</td><td>AD or AR</td></tr>
+        <tr><td><strong>POLR1B</strong></td><td>RNA Polymerase I subunit</td><td>Rare</td><td>AD</td></tr>
+      </table>
+
+      <h3>Pathophysiology:</h3>
+      <div class="key-concept">
+        <p><strong>TCOF1 encodes Treacle protein</strong> → Essential for ribosome biogenesis in neural crest cells</p>
+        <p>↓ Treacle → ↓ Ribosome production → Neural crest cell apoptosis → Hypoplasia of 1st & 2nd arch structures</p>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Genetic Counseling:</strong>
+        <ul>
+          <li>If one parent affected: 50% risk to offspring (AD)</li>
+          <li>Highly variable expressivity - mildly affected parent can have severely affected child</li>
+          <li>60% have no family history (de novo mutations)</li>
+          <li>Prenatal testing available if mutation known</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🩺 Clinical Features</h2>
+      
+      <div class="feature-card">
+        <h4>FACIAL BONES (Bilateral & Symmetric)</h4>
+        <ul>
+          <li><strong>Malar (zygomatic) hypoplasia</strong> - Flat cheekbones</li>
+          <li><strong>Mandibular hypoplasia</strong> - Micrognathia/retrognathia</li>
+          <li><strong>Maxillary hypoplasia</strong></li>
+          <li>Class II malocclusion, open bite</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>EYES</h4>
+        <ul>
+          <li><strong>Downslanting palpebral fissures</strong> - Pathognomonic</li>
+          <li><strong>Lower eyelid colobomas</strong> (notching) - 70-75%</li>
+          <li>Sparse or absent lower eyelashes (medially)</li>
+          <li>Vision usually normal</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>EARS</h4>
+        <ul>
+          <li><strong>Microtia</strong> - Bilaterally small/malformed ears</li>
+          <li><strong>External auditory canal atresia</strong></li>
+          <li><strong>Middle ear anomalies</strong> - Ossicle malformation</li>
+          <li><strong>Conductive hearing loss</strong> - Bilateral, often severe</li>
+          <li>Preauricular hair displacement (sideburns extend toward cheek)</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>OTHER FEATURES</h4>
+        <ul>
+          <li><strong>Cleft palate</strong> (30%)</li>
+          <li>Choanal atresia/stenosis (rare)</li>
+          <li><strong>Airway compromise</strong> - From micrognathia (Pierre Robin phenotype)</li>
+          <li>Normal intelligence in most cases</li>
+          <li>Normal limbs (distinguishes from Nager syndrome)</li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>AIRWAY IS THE #1 CONCERN!</strong>
+        <ul>
+          <li>Severe micrognathia causes Pierre Robin-like airway obstruction</li>
+          <li>May be life-threatening in neonates</li>
+          <li>Prepare for difficult intubation - always have fiberoptic available</li>
+          <li>May require mandibular distraction or tracheostomy</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Diagnosis</h2>
+      
+      <h3>Clinical Diagnosis Based on:</h3>
+      <ul>
+        <li>Bilateral malar and mandibular hypoplasia</li>
+        <li>Downslanting palpebral fissures</li>
+        <li>Lower eyelid colobomas</li>
+        <li>Ear anomalies (microtia, canal atresia)</li>
+      </ul>
+
+      <h3>Confirmatory Testing:</h3>
+      <ul>
+        <li><strong>TCOF1 gene sequencing</strong> - Detects 78-93%</li>
+        <li>If negative: POLR1C, POLR1D sequencing</li>
+        <li>Deletion/duplication analysis if sequencing negative</li>
+      </ul>
+
+      <h3>Prenatal Diagnosis:</h3>
+      <ul>
+        <li>Ultrasound may show micrognathia, polyhydramnios</li>
+        <li>3D ultrasound can reveal facial features</li>
+        <li>Chorionic villus sampling / amniocentesis if mutation known</li>
+      </ul>
+
+      <h3>Differential Diagnosis:</h3>
+      <table>
+        <tr><th>Condition</th><th>Key Differentiator</th></tr>
+        <tr><td>Hemifacial Microsomia</td><td>Unilateral/asymmetric (TCS is bilateral/symmetric)</td></tr>
+        <tr><td>Nager Syndrome</td><td>Limb anomalies (preaxial - thumb/radius)</td></tr>
+        <tr><td>Miller Syndrome</td><td>Limb anomalies (postaxial - 5th digit)</td></tr>
+        <tr><td>Goldenhar Syndrome</td><td>Epibulbar dermoids, vertebral anomalies</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔪 Management</h2>
+      
+      <div class="key-concept">
+        <strong>Multidisciplinary team essential:</strong> Craniofacial surgery, ENT, audiology, speech therapy, ophthalmology, genetics, psychology
+      </div>
+
+      <h3>Immediate Neonatal Priorities:</h3>
+      <ol>
+        <li><strong>Airway assessment and management</strong>
+          <ul>
+            <li>Prone positioning if obstruction</li>
+            <li>Nasopharyngeal airway</li>
+            <li>Mandibular distraction osteogenesis (MDO)</li>
+            <li>Tracheostomy if severe</li>
+          </ul>
+        </li>
+        <li><strong>Feeding assessment</strong> - May need NG/G-tube</li>
+        <li><strong>Hearing evaluation</strong> - Early amplification</li>
+      </ol>
+
+      <h3>Surgical Timeline:</h3>
+      <table>
+        <tr><th>Age</th><th>Procedure</th><th>Goal</th></tr>
+        <tr><td>Neonate</td><td>MDO or tracheostomy if needed</td><td>Secure airway</td></tr>
+        <tr><td>0-6 months</td><td>Bone-anchored hearing aid (BAHA)</td><td>Hearing rehabilitation</td></tr>
+        <tr><td>1-2 years</td><td>Palate repair (if cleft)</td><td>Speech development</td></tr>
+        <tr><td>3-5 years</td><td>Lower eyelid reconstruction</td><td>Prevent exposure keratopathy</td></tr>
+        <tr><td>6-10 years</td><td>Microtia reconstruction</td><td>External ear creation</td></tr>
+        <tr><td>6-12 years</td><td>Malar reconstruction (bone graft/implant)</td><td>Cheekbone contour</td></tr>
+        <tr><td>Adolescence</td><td>Orthognathic surgery (Le Fort)</td><td>Jaw advancement</td></tr>
+        <tr><td>Adolescence</td><td>Rhinoplasty, soft tissue procedures</td><td>Final refinement</td></tr>
+      </table>
+
+      <h3>Hearing Management:</h3>
+      <ul>
+        <li><strong>Early amplification critical</strong> for language development</li>
+        <li>Bone conduction hearing aids (soft band BAHA in infancy)</li>
+        <li>Osseointegrated implant (BAHA) after age 5</li>
+        <li>Cochlear implant if sensorineural component</li>
+        <li>Speech therapy ongoing</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📊 Prognosis</h2>
+      
+      <div class="success-box">
+        <ul>
+          <li><strong>Normal intelligence</strong> - Academic support may be needed due to hearing loss</li>
+          <li><strong>Normal life expectancy</strong> - If airway managed appropriately</li>
+          <li>Good functional outcomes with staged reconstruction</li>
+          <li>Psychosocial support essential throughout development</li>
+          <li>Multiple surgeries required - family preparation important</li>
+        </ul>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Key Points:</strong>
+        <ul>
+          <li>Hearing loss is the primary cause of developmental delay - early intervention prevents this</li>
+          <li>Appearance improves significantly with staged reconstruction</li>
+          <li>Many patients lead fully independent adult lives</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Test Your Understanding</h3>
+      <p><strong>A newborn has bilateral symmetric malar hypoplasia, downslanting palpebral fissures, lower eyelid colobomas, and microtia. Both hands are normal. What is the most likely diagnosis?</strong></p>
+      
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Hemifacial microsomia</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Treacher Collins syndrome</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Nager syndrome</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Goldenhar syndrome</div>
+      
+      <div class="explanation" id="explanation1">
+        <strong>Correct Answer: B</strong><br><br>
+        Treacher Collins syndrome is characterized by BILATERAL, SYMMETRIC craniofacial features including malar and mandibular hypoplasia, downslanting palpebral fissures, lower eyelid colobomas, and ear anomalies. The key differentiators: Hemifacial microsomia is unilateral/asymmetric. Nager syndrome has limb anomalies (preaxial - thumb/radius involvement). Goldenhar syndrome has epibulbar dermoids and vertebral anomalies. The normal hands rule out Nager and Miller syndromes.
+      </div>
+    </section>
+
+    <section class="quiz-section" style="margin-top: 1rem;">
+      <h3>🧠 Question 2</h3>
+      <p><strong>What is the inheritance pattern and most common gene involved in Treacher Collins syndrome?</strong></p>
+      
+      <div class="quiz-option" onclick="checkAnswer2(this, false)">A. Autosomal recessive, TCOF1</div>
+      <div class="quiz-option" onclick="checkAnswer2(this, true)">B. Autosomal dominant, TCOF1 (60% de novo)</div>
+      <div class="quiz-option" onclick="checkAnswer2(this, false)">C. X-linked recessive, POLR1D</div>
+      <div class="quiz-option" onclick="checkAnswer2(this, false)">D. Autosomal dominant, FGFR2</div>
+      
+      <div class="explanation" id="explanation2">
+        <strong>Correct Answer: B</strong><br><br>
+        Treacher Collins syndrome is autosomal dominant, with TCOF1 mutations accounting for 78-93% of cases. Importantly, 60% are de novo mutations (no family history). TCOF1 encodes the Treacle protein, essential for ribosome biogenesis in neural crest cells. POLR1C (AR) and POLR1D (AD or AR) are rarer causes. FGFR2 is associated with craniosynostosis syndromes (Apert, Crouzon), not Treacher Collins.
+      </div>
+    </section>
+
+    <a href="index.html" class="back-link">← Back to Modules</a>
+
+    <section class="module-section" style="margin-top: 2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size: 0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK1532/" target="_blank" style="color: var(--primary);">GeneReviews: Treacher Collins Syndrome</a></li>
+        <li><a href="https://rarediseases.org/rare-diseases/treacher-collins-syndrome/" target="_blank" style="color: var(--primary);">NORD: Treacher Collins Syndrome</a></li>
+        <li><a href="https://medlineplus.gov/genetics/condition/treacher-collins-syndrome/" target="_blank" style="color: var(--primary);">MedlinePlus: Treacher Collins Syndrome</a></li>
+        <li><a href="https://www.omim.org/entry/154500" target="_blank" style="color: var(--primary);">OMIM: Treacher Collins Syndrome</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #60a5fa;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK541049/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">StatPearls: Treacher Collins Syndrome</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3158421/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: TCOF1 and Craniofacial Development</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4815286/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">NCBI PMC: TCS Management</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK1532/" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">GeneReviews: Treacher Collins</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/treacher-collins-syndrome" target="_blank" rel="noopener" style="color: #93c5fd; text-decoration: none; border-bottom: 1px dotted #93c5fd;">Radiopaedia: Treacher Collins Syndrome</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="treacher-collins-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="treacher-collins-deepdive.html" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="pierre-robin-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Pierre Robin Sequence</a>
+        <a href="hemifacial-microsomia-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Hemifacial Microsomia</a>
+        <a href="pharyngeal-apparatus-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Pharyngeal Apparatus</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(element, isCorrect) {
+      const section = element.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+      if (!isCorrect) {
+        section.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('explanation1').style.display = 'block';
+    }
+    
+    function checkAnswer2(element, isCorrect) {
+      const section = element.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+      if (!isCorrect) {
+        section.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('explanation2').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
