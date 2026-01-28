@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Craniosynostosis - ReasonDx Clinical Reasoning Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .header h1 { font-size: 1.5rem; color: #fef3c7; }
+        .score-display { display: flex; gap: 20px; font-size: 0.9rem; }
+        .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #fbbf24); border-radius: 3px; transition: width 0.3s; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #e9d5ff; margin-top: 4px; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a78bfa; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.2)); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); border-color: rgba(168,85,247,0.5); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.2) !important; }
+        .option-letter { width: 28px; height: 28px; background: rgba(139,92,246,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; }
+        .feedback.show { display: block; }
+        .correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { display: none; margin-top: 20px; background: rgba(139,92,246,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .mechanism-title { color: #c4b5fd; font-weight: 600; font-size: 1rem; margin-bottom: 10px; }
+        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; color: #e2e8f0; }
+        .btn { background: linear-gradient(135deg, #a78bfa, #f472b6); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(167,139,250,0.4); }
+        .alert-box { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #fbbf24; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦴 Craniosynostosis</h1>
+            <div class="score-display">
+                <div class="score-item">Score: <strong id="score">0</strong>/<span id="maxScore">70</span></div>
+                <div class="score-item">Stage: <span id="stageNum">1</span>/7</div>
+            </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 14%"></div></div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Elongated Head",content:'<div class="narrative"><p>A <span class="highlight">4-month-old male</span> is referred for evaluation of an abnormal head shape. Parents describe his head as <span class="highlight">"long and narrow like a football."</span> On examination, you note an elongated anteroposterior dimension, narrow biparietal width, and a <span class="critical">palpable midline ridge</span> running front to back.</p><p style="margin-top:12px;"><strong>Additional findings:</strong> Frontal bossing, occipital prominence. Neurologically intact.</p></div>',question:{prompt:"Based on Virchow's Law, which suture is most likely fused?",options:[{text:"Metopic suture",correct:false},{text:"Sagittal suture",correct:true},{text:"Coronal suture",correct:false},{text:"Lambdoid suture",correct:false}],explanation:{correct:"Correct! The sagittal suture runs midline front-to-back. When it fuses, the skull cannot expand side-to-side (perpendicular to the suture), so it compensates by growing front-to-back (parallel), creating scaphocephaly. The midline ridge confirms sagittal involvement.",incorrect:"This is scaphocephaly from sagittal synostosis. Virchow's Law: Growth is restricted perpendicular to the fused suture and compensates parallel to it."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Virchow\'s Law</div><div class="pathway">VIRCHOW\'S LAW:\nWhen a suture fuses prematurely:\n• Growth RESTRICTED perpendicular to suture\n• Compensatory growth PARALLEL to suture\n\nSAGITTAL SYNOSTOSIS:\n• Most common (40-55%)\n• M:F = 3-4:1\n• Creates SCAPHOCEPHALY\n  - Long, narrow head\n  - Frontal bossing\n  - Occipital prominence\n  - Palpable midline ridge\n• Cephalic index <75 (normal 76-80)</div></div>',points:10}},
+        
+        {title:"Pattern Recognition",content:'<div class="narrative"><p>You examine several infants in clinic. Understanding the relationship between fused sutures and head shapes is essential for diagnosis.</p></div>',question:{prompt:"A baby has a triangular forehead with hypotelorism (closely-spaced eyes). Which suture is fused?",options:[{text:"Sagittal → Scaphocephaly",correct:false},{text:"Metopic → Trigonocephaly",correct:true},{text:"Coronal → Plagiocephaly",correct:false},{text:"Lambdoid → Brachycephaly",correct:false}],explanation:{correct:"Correct! Metopic synostosis causes trigonocephaly (triangular forehead). Key features: midline forehead ridge, HYPOTELORISM, and temporal hollowing. Must distinguish from benign metopic ridge which has NO orbital/eye changes.",incorrect:"Trigonocephaly with hypotelorism = metopic synostosis. The metopic suture runs vertically in the midline of the forehead."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Suture → Shape Patterns</div><div class="pathway">SUTURE          HEAD SHAPE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSagittal    →   Scaphocephaly\n                (long, narrow)\n\nMetopic     →   Trigonocephaly\n                (triangular, hypotelorism)\n\nCoronal     →   Plagiocephaly (unilateral)\n(unilat)        Brachycephaly (bilateral)\n\nLambdoid    →   Posterior plagiocephaly\n                (TRAPEZOID shape)\n\nBenign metopic ridge:\n• NO hypotelorism\n• NO temporal hollowing\n• Common, no treatment needed</div></div>',points:10}},
+
+        {title:"The Critical DDx",content:'<div class="narrative"><p>An infant has flattening of the back of the head on one side. The ear appears pushed forward on the flat side. You must distinguish between true lambdoid synostosis and positional plagiocephaly.</p></div>',question:{prompt:"When viewed from above, what head shape indicates TRUE lambdoid synostosis (vs positional)?",options:[{text:"Parallelogram shape",correct:false},{text:"Trapezoid shape",correct:true},{text:"Round shape",correct:false},{text:"Square shape",correct:false}],explanation:{correct:"Correct! True lambdoid synostosis creates a TRAPEZOID shape. Positional plagiocephaly creates a PARALLELOGRAM. Also in true synostosis: ear is DOWN and BACK; in positional, ear is pushed FORWARD.",incorrect:"Trapezoid = true synostosis. Parallelogram = positional. This is a critical distinction as positional plagiocephaly is 10x more common and doesn't need surgery."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Lambdoid vs Positional</div><div class="pathway">                LAMBDOID      POSITIONAL\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nHead shape      TRAPEZOID     PARALLELOGRAM\n(vertex view)\n\nEar position    DOWN & BACK   FORWARD\n\nMastoid         BULGING       Normal\n                (ipsilateral)\n\nSkull base      TILTED        Normal\n\nIncidence       2-4%          10x more common\n\nTreatment       SURGERY       Repositioning,\n                              helmet therapy</div></div>',points:10}},
+
+        {title:"Red Flags for Syndrome",content:'<div class="narrative"><p>A newborn has bicoronal synostosis (tall, wide skull), bulging eyes, and fused fingers on both hands that look like "mittens."</p></div><div class="alert-box"><div class="alert-title">⚠️ Syndromic Warning Signs</div><p>Multiple sutures, limb anomalies, and midface hypoplasia suggest syndromic craniosynostosis requiring comprehensive genetic workup.</p></div>',question:{prompt:"The presence of complex syndactyly ('mitten hands') with bicoronal synostosis is pathognomonic for which syndrome?",options:[{text:"Crouzon syndrome",correct:false},{text:"Apert syndrome",correct:true},{text:"Pfeiffer syndrome",correct:false},{text:"Muenke syndrome",correct:false}],explanation:{correct:"Correct! Apert syndrome = bicoronal synostosis + COMPLEX SYNDACTYLY (mitten hands). Crouzon has similar cranial features but NORMAL hands. Pfeiffer has BROAD thumbs/great toes. FGFR2 mutation, often de novo with advanced paternal age.",incorrect:"Mitten hands = Apert. Crouzon = normal hands. Pfeiffer = broad thumbs. This is high-yield for syndromic differentiation."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Syndromic Craniosynostosis</div><div class="pathway">SYNDROME      GENE     KEY DIFFERENTIATOR\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nApert         FGFR2    MITTEN HANDS\n                       (complex syndactyly)\n\nCrouzon       FGFR2    NORMAL HANDS\n                       (skull only)\n\nPfeiffer      FGFR1/2  BROAD THUMBS/\n                       GREAT TOES\n\nMuenke        FGFR3    HEARING LOSS\n                       (mild findings)\n\nSaethre-      TWIST1   LOW HAIRLINE\nChotzen                PTOSIS, SMALL EARS</div></div>',points:10}},
+
+        {title:"Complications",content:'<div class="narrative"><p>The parents of the child with sagittal synostosis ask about risks if left untreated. You explain the potential complications.</p></div>',question:{prompt:"What is the approximate risk of elevated intracranial pressure in single-suture craniosynostosis?",options:[{text:"1-2%",correct:false},{text:"15%",correct:true},{text:"50%",correct:false},{text:"85%",correct:false}],explanation:{correct:"Correct! Single-suture synostosis carries ~15% risk of elevated ICP. Multiple suture synostosis has >40% risk. Signs include bulging fontanelle, irritability, vomiting, papilledema, and the classic 'sunsetting' eyes.",incorrect:"Single suture ~15% ICP risk, multiple sutures >40%. This is why early surgical intervention is recommended even for 'cosmetic' single-suture cases."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Complications</div><div class="pathway">ELEVATED ICP RISK:\n• Single suture: ~15%\n• Multiple sutures: >40%\n\nSIGNS OF ELEVATED ICP:\n• Bulging fontanelle\n• Irritability, vomiting\n• Papilledema\n• "Sunsetting" eyes\n• Developmental regression\n\nOTHER COMPLICATIONS:\n• Visual impairment\n• Airway obstruction (syndromic)\n• Chiari malformation\n• Hearing loss\n• Developmental delay</div></div>',points:10}},
+
+        {title:"Diagnosis",content:'<div class="narrative"><p>You confirm your clinical suspicion with imaging.</p></div>',question:{prompt:"What is the gold standard imaging study for craniosynostosis?",options:[{text:"Plain skull X-ray",correct:false},{text:"CT with 3D reconstruction",correct:true},{text:"MRI brain",correct:false},{text:"Ultrasound",correct:false}],explanation:{correct:"Correct! CT with 3D reconstruction is the gold standard. It confirms which sutures are fused, shows the 3D head shape, aids surgical planning, and can show signs of elevated ICP (copper beaten appearance). Plain films are rarely needed.",incorrect:"CT with 3D reconstruction is the gold standard. Shows fused sutures, head shape, and surgical planning anatomy."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Diagnostic Workup</div><div class="pathway">CT WITH 3D RECONSTRUCTION:\n• Gold standard\n• Confirms fused sutures\n• 3D surface rendering\n• Surgical planning\n• ICP signs (copper beaten skull)\n\nADDITIONAL IF SYNDROMIC:\n• MRI brain (Chiari, ventricles)\n• Genetic testing panel\n• Ophthalmology\n• Audiology\n• Sleep study if airway concern\n\nCLINICAL EXAM STILL KEY:\n• Palpation for ridges\n• Head shape assessment\n• Cephalic index\n• Syndromic features</div></div>',points:10}},
+
+        {title:"Treatment",content:'<div class="narrative"><p>At 4 months, this infant with sagittal synostosis may be a candidate for different surgical approaches depending on timing and severity.</p></div>',question:{prompt:"For a 4-month-old with sagittal synostosis, what surgical approach is typically preferred?",options:[{text:"Open cranial vault remodeling",correct:false},{text:"Endoscopic strip craniectomy with post-op helmet",correct:true},{text:"Observation only",correct:false},{text:"Distraction osteogenesis",correct:false}],explanation:{correct:"Correct! Endoscopic strip craniectomy is preferred when done before 4-6 months. It's minimally invasive with less blood loss and shorter hospital stay, but requires 6-12 months of post-op helmet therapy. After 6 months, open cranial vault remodeling is typically needed.",incorrect:"Endoscopic surgery is ideal if <4-6 months. Benefits: minimally invasive, less blood loss. Requires helmet therapy afterward. Older infants need open CVR."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Surgical Options</div><div class="pathway">ENDOSCOPIC STRIP CRANIECTOMY:\n• Age: <4-6 months\n• Minimally invasive\n• Less blood loss\n• Shorter stay (1-2 days)\n• REQUIRES helmet 6-12 months\n\nOPEN CRANIAL VAULT REMODELING:\n• Age: 6-12 months typically\n• Larger incision\n• Direct bone reshaping\n• No helmet needed\n• Required for older infants\n\nTIMING BY SUTURE:\n• Sagittal: endo <3-4mo, CVR 4-9mo\n• Metopic: endo <3mo, FOA 9-12mo\n• Coronal: endo <3-4mo, FOA 9-12mo</div></div>',points:10}}
+    ];
+    
+    function updateProgress(){
+        document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';
+        document.getElementById('stageNum').textContent=currentStage+1;
+        document.getElementById('maxScore').textContent=stages.length*10;
+    }
+    
+    function renderStage(){
+        const stage=stages[currentStage];
+        let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;
+        if(stage.question){
+            html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';
+            stage.question.options.forEach((opt,i)=>{
+                html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';
+            });
+            html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div>';
+            html+='<div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';
+            if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';
+            html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';
+        }
+        html+='</div>';
+        document.getElementById('scene-container').innerHTML=html;
+        updateProgress();
+    }
+    
+    function checkAnswer(idx,correct){
+        const options=document.querySelectorAll('.mcq-option');
+        if(options[0].classList.contains('disabled'))return;
+        options.forEach((opt,i)=>{
+            opt.classList.add('disabled');
+            if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');
+            else if(i===idx&&!correct)opt.classList.add('incorrect');
+        });
+        if(correct){
+            document.getElementById('fb-correct').classList.add('show');
+            score+=stages[currentStage].question.points;
+            document.getElementById('score').textContent=score;
+        }else{
+            document.getElementById('fb-incorrect').classList.add('show');
+        }
+        const t=document.getElementById('teaching');
+        if(t)t.classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    
+    function nextStage(){
+        if(currentStage<stages.length-1){
+            currentStage++;
+            renderStage();
+            window.scrollTo(0,0);
+        }else{
+            document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#a78bfa;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:10px;border:1px solid rgba(59,130,246,0.3);"><p style="color:#93c5fd;margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="craniosynostosis-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 MechanismDx</a><a href="craniosynostosis-deepdive.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK544366/" target="_blank" style="color:#93c5fd;font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Craniosynostosis clinical reasoning!</p></div>';
+        }
+    }
+    
+    renderStage();
+    </script>
+</body>
+</html>
