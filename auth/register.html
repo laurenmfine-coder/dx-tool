@@ -3,268 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join DxSuite | Clinical Reasoning Platform</title>
+    <title>Join ReasonDx | Clinical Reasoning Education Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #059669; --primary-dark: #047857; --faculty: #7c3aed; --faculty-dark: #6d28d9; }
+        :root { --primary: #059669; --primary-dark: #047857; --pro: #2563eb; --pro-dark: #1d4ed8; --research: #7c3aed; --research-dark: #6d28d9; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
-        
-        .container { width: 100%; max-width: 480px; }
-        
-        .card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow: hidden; }
-        
-        .card-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 40px 32px; text-align: center; color: white; }
-        .card-header.faculty { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
-        .logo { font-size: 48px; margin-bottom: 16px; }
-        .card-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-        .card-header p { opacity: 0.9; font-size: 15px; }
-        
-        .card-body { padding: 32px; }
-        
-        /* Steps indicator */
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%); min-height: 100vh; padding: 24px; }
+        .page-container { max-width: 1000px; margin: 0 auto; }
+        .page-header { text-align: center; margin-bottom: 40px; }
+        .page-header h1 { font-size: 36px; font-weight: 800; color: #1e3a5f; margin-bottom: 8px; }
+        .page-header p { font-size: 18px; color: #64748b; }
+        .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+        @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } }
+        .plan-card { background: white; border-radius: 20px; padding: 32px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 3px solid transparent; cursor: pointer; transition: all 0.3s; position: relative; }
+        .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+        .plan-card.selected { border-color: var(--primary); }
+        .plan-card.selected.pro { border-color: var(--pro); }
+        .plan-card.selected.research { border-color: var(--research); }
+        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--pro); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .plan-icon { font-size: 48px; margin-bottom: 16px; text-align: center; }
+        .plan-name { font-size: 24px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; text-align: center; }
+        .plan-price { text-align: center; margin-bottom: 20px; }
+        .plan-price .amount { font-size: 36px; font-weight: 800; color: #1e3a5f; }
+        .plan-price .period { font-size: 16px; color: #64748b; }
+        .plan-price .annual { font-size: 13px; color: #059669; margin-top: 4px; }
+        .plan-features { list-style: none; margin-bottom: 24px; }
+        .plan-features li { padding: 8px 0; font-size: 14px; color: #475569; display: flex; align-items: flex-start; gap: 10px; }
+        .plan-features li::before { content: "✓"; color: var(--primary); font-weight: 700; }
+        .plan-features li.limited::before { content: "○"; color: #94a3b8; }
+        .plan-features li.excluded { color: #94a3b8; text-decoration: line-through; }
+        .plan-features li.excluded::before { content: "✗"; color: #dc2626; }
+        .plan-select-btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: 2px solid #e2e8f0; background: white; color: #475569; transition: all 0.2s; }
+        .plan-card.selected .plan-select-btn { background: var(--primary); color: white; border-color: var(--primary); }
+        .plan-card.selected.pro .plan-select-btn { background: var(--pro); border-color: var(--pro); }
+        .plan-card.selected.research .plan-select-btn { background: var(--research); border-color: var(--research); }
+        .form-card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow: hidden; max-width: 520px; margin: 0 auto; }
+        .form-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 32px; text-align: center; color: white; }
+        .form-header.pro { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .form-header.research { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+        .form-header h2 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .form-header p { opacity: 0.9; font-size: 14px; }
+        .form-body { padding: 32px; }
         .steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
         .step { width: 10px; height: 10px; border-radius: 50%; background: #e2e8f0; transition: all 0.3s; }
         .step.active { background: var(--primary); width: 32px; border-radius: 5px; }
         .step.completed { background: var(--primary); }
-        
-        /* Track Selection */
-        .track-selection { display: flex; gap: 12px; margin-bottom: 24px; }
-        .track-btn { flex: 1; padding: 16px 12px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; text-align: center; transition: all 0.2s; }
-        .track-btn:hover { border-color: #cbd5e1; }
-        .track-btn.active { border-color: var(--primary); background: #f0fdf4; }
-        .track-btn.active.faculty { border-color: var(--faculty); background: #f5f3ff; }
-        .track-btn .icon { font-size: 24px; margin-bottom: 4px; }
-        .track-btn .label { font-size: 13px; font-weight: 600; color: #334155; }
-        
-        /* Form elements */
+        .form-card.pro .step.active, .form-card.pro .step.completed { background: var(--pro); }
+        .form-card.research .step.active, .form-card.research .step.completed { background: var(--research); }
+        .section { display: none; }
+        .section.active { display: block; }
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155; }
         .form-label .optional { font-weight: 400; color: #94a3b8; }
-        .form-input, .form-select { 
-            width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; 
-            font-size: 16px; outline: none; transition: all 0.2s; font-family: inherit;
-        }
+        .form-input, .form-select { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; outline: none; transition: all 0.2s; font-family: inherit; }
         .form-input:focus, .form-select:focus { border-color: var(--primary); }
-        .form-input.error { border-color: #dc2626; }
-        .form-input.success { border-color: var(--primary); }
+        .form-card.pro .form-input:focus { border-color: var(--pro); }
+        .form-card.research .form-input:focus { border-color: var(--research); }
         .form-hint { font-size: 12px; color: #64748b; margin-top: 6px; }
-        .form-hint.error { color: #dc2626; }
-        .form-hint.success { color: var(--primary); }
-        
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        
-        /* Email input with validation */
-        .email-input-group { position: relative; }
-        .email-status { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 18px; }
-        
-        /* Verification code input */
         .code-input-group { display: flex; gap: 8px; justify-content: center; }
-        .code-input { 
-            width: 48px; height: 56px; text-align: center; font-size: 24px; font-weight: 700;
-            border: 2px solid #e2e8f0; border-radius: 12px; outline: none;
-        }
+        .code-input { width: 48px; height: 56px; text-align: center; font-size: 24px; font-weight: 700; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; }
         .code-input:focus { border-color: var(--primary); }
-        
-        /* Checkbox */
-        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; }
-        .checkbox-group input { margin-top: 3px; width: 18px; height: 18px; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; margin-bottom: 16px; }
+        .checkbox-group input { margin-top: 3px; width: 18px; height: 18px; flex-shrink: 0; }
         .checkbox-group label { font-size: 14px; color: #475569; line-height: 1.5; cursor: pointer; }
-        
-        /* Buttons */
+        .password-strength { display: flex; gap: 4px; margin-top: 8px; }
+        .password-strength .bar { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; }
+        .password-strength .bar.weak { background: #dc2626; }
+        .password-strength .bar.medium { background: #f59e0b; }
+        .password-strength .bar.strong { background: #059669; }
         .btn { width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--primary-dark); }
         .btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
-        .btn-primary.faculty { background: var(--faculty); }
-        .btn-primary.faculty:hover { background: var(--faculty-dark); }
-        .btn-secondary { background: #f1f5f9; color: #475569; }
-        .btn-secondary:hover { background: #e2e8f0; }
-        
-        .btn-link { background: none; color: var(--primary); padding: 8px; font-size: 14px; }
+        .form-card.pro .btn-primary { background: var(--pro); }
+        .form-card.pro .btn-primary:hover { background: var(--pro-dark); }
+        .form-card.research .btn-primary { background: var(--research); }
+        .form-card.research .btn-primary:hover { background: var(--research-dark); }
+        .btn-link { background: none; color: var(--primary); padding: 8px; font-size: 14px; width: auto; }
         .btn-link:hover { text-decoration: underline; }
-        
-        /* Info boxes */
         .info-box { padding: 14px 16px; border-radius: 12px; font-size: 14px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
         .info-box.blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
         .info-box.green { background: #f0fdf4; border: 1px solid #a7f3d0; color: #166534; }
-        .info-box.amber { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+        .info-box.purple { background: #f5f3ff; border: 1px solid #c4b5fd; color: #5b21b6; }
         .info-box .icon { font-size: 20px; flex-shrink: 0; }
-        
-        /* Error/Success messages */
         .message { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-bottom: 20px; display: none; }
         .message.error { background: #fee2e2; color: #991b1b; display: block; }
         .message.success { background: #dcfce7; color: #166534; display: block; }
-        
-        /* Success screen */
         .success-screen { text-align: center; padding: 20px 0; }
-        .success-icon { font-size: 64px; margin-bottom: 20px; }
-        .success-screen h2 { font-size: 24px; margin-bottom: 8px; color: #166534; }
-        .success-screen p { color: #64748b; margin-bottom: 20px; }
-        
-        .id-display { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #a7f3d0; border-radius: 16px; padding: 20px; margin: 20px 0; }
-        .id-display-label { font-size: 13px; color: #166534; margin-bottom: 6px; }
-        .id-display-value { font-family: 'Courier New', monospace; font-size: 28px; font-weight: 700; color: #059669; letter-spacing: 2px; }
-        
-        /* Referral code display for faculty */
-        .referral-display { background: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .referral-display-label { font-size: 13px; color: #5b21b6; margin-bottom: 4px; }
-        .referral-display-value { font-family: 'Courier New', monospace; font-size: 20px; font-weight: 600; color: #7c3aed; }
-        .referral-display-hint { font-size: 12px; color: #6b7280; margin-top: 8px; }
-        
-        /* Expertise chips */
-        .expertise-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-        .expertise-chip { padding: 8px 14px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
-        .expertise-chip:hover { border-color: #cbd5e1; }
-        .expertise-chip.selected { background: #f0fdf4; border-color: var(--primary); color: var(--primary); }
-        .expertise-chip input { display: none; }
-        
-        /* Timer */
-        .timer { font-size: 14px; color: #64748b; margin-top: 16px; text-align: center; }
-        .timer strong { color: var(--primary); }
-        
-        /* Hide/show sections */
-        .section { display: none; }
-        .section.active { display: block; }
-        
-        /* Login link */
-        .login-prompt { text-align: center; margin-top: 20px; font-size: 14px; color: #64748b; }
-        .login-prompt a { color: var(--primary); font-weight: 500; text-decoration: none; }
-        .login-prompt a:hover { text-decoration: underline; }
-        
-        /* Spinner */
-        .spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        /* Password strength */
-        .password-strength { display: flex; gap: 4px; margin-top: 8px; }
-        .strength-bar { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; }
-        .strength-bar.weak { background: #dc2626; }
-        .strength-bar.medium { background: #f59e0b; }
-        .strength-bar.strong { background: #059669; }
+        .success-icon { font-size: 64px; margin-bottom: 16px; }
+        .success-screen h3 { font-size: 24px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
+        .success-screen p { color: #64748b; margin-bottom: 24px; }
+        .study-id-display { background: #f5f3ff; border: 2px solid #c4b5fd; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .study-id-display .label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+        .study-id-display .id { font-size: 28px; font-weight: 700; color: #7c3aed; font-family: monospace; }
+        .login-prompt { text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e2e8f0; font-size: 14px; color: #64748b; }
+        .login-prompt a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .pricing-toggle { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; }
+        .pricing-toggle button { padding: 8px 20px; border-radius: 20px; border: 2px solid #e2e8f0; background: white; font-size: 14px; font-weight: 500; cursor: pointer; }
+        .pricing-toggle button.active { background: var(--pro); color: white; border-color: var(--pro); }
+        .savings-badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <!-- HEADER -->
-            <div class="card-header" id="cardHeader">
-                <div class="logo">🩺</div>
-                <h1>Join DxSuite</h1>
-                <p>Clinical Reasoning Education Platform</p>
-            </div>
-            
-            <div class="card-body">
-                <!-- STEP INDICATORS -->
-                <div class="steps" id="stepIndicator">
-                    <div class="step active" data-step="0"></div>
-                    <div class="step" data-step="1"></div>
-                    <div class="step" data-step="2"></div>
-                    <div class="step" data-step="3"></div>
-                    <div class="step" data-step="4"></div>
+    <div class="page-container">
+        <header class="page-header">
+            <h1>🩺 Join ReasonDx</h1>
+            <p>Master clinical reasoning with interactive pathophysiology</p>
+        </header>
+        
+        <div id="planSelection">
+            <div class="plans-grid">
+                <div class="plan-card" onclick="selectPlan('free')" id="planFree">
+                    <div class="plan-icon">🆓</div>
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">
+                        <span class="amount">$0</span>
+                        <span class="period">/forever</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>5 sample MechanismDx modules</li>
+                        <li>3 clinical cases per week</li>
+                        <li>Basic progress tracking</li>
+                        <li>All clinical tools</li>
+                        <li class="excluded">Full module library (195+)</li>
+                        <li class="excluded">Unlimited cases</li>
+                        <li class="excluded">Deep dive content</li>
+                    </ul>
+                    <button class="plan-select-btn">Get Started Free</button>
                 </div>
                 
-                <!-- ================================== -->
-                <!-- SECTION 0: CONSENT CODE ENTRY -->
-                <!-- ================================== -->
-                <div class="section active" id="section0">
-                    <div class="info-box blue">
-                        <span class="icon">📋</span>
-                        <div>
-                            <strong>Research Study Participation</strong><br>
-                            Before registering, you must complete the consent form.
-                        </div>
+                <div class="plan-card pro" onclick="selectPlan('pro')" id="planPro">
+                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-icon">⭐</div>
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">
+                        <span class="amount">$14.99</span>
+                        <span class="period">/month</span>
+                        <div class="annual">or $99/year (save 45%)</div>
                     </div>
-                    
-                    <div id="section0Error" class="message"></div>
-                    
+                    <ul class="plan-features">
+                        <li>All 195+ MechanismDx modules</li>
+                        <li>Unlimited clinical cases</li>
+                        <li>Full case adventures library</li>
+                        <li>Deep dive content</li>
+                        <li>Advanced analytics</li>
+                        <li>AI Tutor (unlimited)</li>
+                        <li>Completion certificates</li>
+                    </ul>
+                    <button class="plan-select-btn">Start Pro</button>
+                </div>
+                
+                <div class="plan-card research" onclick="selectPlan('research')" id="planResearch">
+                    <div class="plan-icon">🎓</div>
+                    <div class="plan-name">Research</div>
+                    <div class="plan-price">
+                        <span class="amount">Free</span>
+                        <span class="period">with consent</span>
+                        <div class="annual" style="color: #7c3aed;">Full Pro access</div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Everything in Pro — FREE</li>
+                        <li>Requires .edu email</li>
+                        <li>Consent to research</li>
+                        <li>Anonymous data collected</li>
+                        <li>Help improve medical education</li>
+                        <li>Contribute to research</li>
+                        <li class="limited">IRB-approved study</li>
+                    </ul>
+                    <button class="plan-select-btn">Join Research Study</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 16px;">
+                <p style="color: #64748b; font-size: 14px;">Already have an account? <a href="#" onclick="showLogin()" style="color: var(--primary); font-weight: 600;">Sign in</a></p>
+            </div>
+        </div>
+        
+        <div class="form-card hidden" id="registrationForm">
+            <div class="form-header" id="formHeader">
+                <h2 id="formTitle">Create Your Account</h2>
+                <p id="formSubtitle">Free Plan</p>
+            </div>
+            <div class="form-body">
+                <div class="steps" id="stepIndicator"></div>
+                
+                <div class="section" id="sectionConsent">
+                    <div class="info-box purple"><span class="icon">📋</span><div><strong>Research Study Participation</strong><br>Complete the consent form first.</div></div>
+                    <div id="consentError" class="message"></div>
                     <div style="text-align: center; margin-bottom: 24px;">
                         <p style="color: #475569; margin-bottom: 16px;">Have you completed the consent form?</p>
-                        
-                        <a href="YOUR_MICROSOFT_FORMS_URL_HERE" target="_blank" 
-                           style="display: inline-block; background: #2563eb; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-bottom: 16px;">
-                            📝 Complete Consent Form
-                        </a>
-                        
-                        <p style="font-size: 13px; color: #94a3b8;">Opens in a new tab. You'll receive a code after completing it.</p>
+                        <a href="#" target="_blank" id="consentFormLink" style="display: inline-block; background: #7c3aed; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-bottom: 16px;">📝 Complete Consent Form</a>
+                        <p style="font-size: 13px; color: #94a3b8;">Opens in a new tab</p>
                     </div>
-                    
                     <div style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
                         <div class="form-group">
                             <label class="form-label">Enter Your Consent Code</label>
-                            <input type="text" id="consentCode" class="form-input" placeholder="CONSENT-XXXXX" 
-                                   style="text-align: center; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;">
-                            <p class="form-hint">You received this code after completing the consent form</p>
+                            <input type="text" id="consentCode" class="form-input" placeholder="CONSENT-XXXXX" style="text-align: center; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;">
                         </div>
-                        
-                        <button type="button" class="btn btn-primary" id="verifyConsentBtn" onclick="verifyConsentCode()">
-                            Verify Consent Code
-                        </button>
+                        <button type="button" class="btn btn-primary" onclick="verifyConsentCode()">Verify Consent Code</button>
                     </div>
-                    
-                    <div class="login-prompt">
-                        Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
-                    </div>
+                    <div class="login-prompt"><a href="#" onclick="backToPlanSelection()">← Choose a different plan</a></div>
                 </div>
                 
-                <!-- ================================== -->
-                <!-- SECTION 1: EMAIL ENTRY -->
-                <!-- ================================== -->
-                <div class="section" id="section1">
-                    <div class="info-box blue">
-                        <span class="icon">🎓</span>
-                        <div>
-                            <strong>Academic email required</strong><br>
-                            You'll need a .edu email address to verify your enrollment.
-                        </div>
-                    </div>
-                    
-                    <!-- Track Selection -->
-                    <div class="track-selection">
-                        <button type="button" class="track-btn active" onclick="selectTrack('learner')">
-                            <div class="icon">📚</div>
-                            <div class="label">Learner</div>
-                        </button>
-                        <button type="button" class="track-btn" onclick="selectTrack('faculty')">
-                            <div class="icon">👨‍🏫</div>
-                            <div class="label">Faculty</div>
-                        </button>
-                    </div>
-                    
-                    <div id="section1Error" class="message"></div>
-                    
+                <div class="section" id="sectionEmail">
+                    <div class="info-box blue" id="emailInfoBox"><span class="icon">📧</span><div id="emailInfoText"><strong>Enter your email</strong><br>We'll send a verification code.</div></div>
+                    <div id="emailError" class="message"></div>
                     <div class="form-group">
-                        <label class="form-label">Academic Email Address</label>
-                        <div class="email-input-group">
-                            <input type="email" id="emailInput" class="form-input" placeholder="you@school.edu" autocomplete="email">
-                            <span class="email-status" id="emailStatus"></span>
-                        </div>
-                        <p class="form-hint" id="emailHint">Must be a .edu email address</p>
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="emailInput" class="form-input" placeholder="you@email.com">
+                        <p class="form-hint" id="emailHint">Any email address works</p>
                     </div>
-                    
-                    <button type="button" class="btn btn-primary" id="sendCodeBtn" onclick="sendVerificationCode()">
-                        Send Verification Code
-                    </button>
-                    
-                    <div class="login-prompt">
-                        Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
-                    </div>
+                    <button type="button" class="btn btn-primary" onclick="sendVerificationCode()">Send Verification Code</button>
+                    <div class="login-prompt"><a href="#" onclick="backToPlanSelection()">← Choose a different plan</a></div>
                 </div>
                 
-                <!-- ================================== -->
-                <!-- SECTION 2: VERIFY CODE -->
-                <!-- ================================== -->
-                <div class="section" id="section2">
-                    <div class="info-box green">
-                        <span class="icon">📧</span>
-                        <div>
-                            <strong>Check your email</strong><br>
-                            We sent a 6-digit code to <strong id="sentToEmail"></strong>
-                        </div>
-                    </div>
-                    
-                    <div id="section2Error" class="message"></div>
-                    
+                <div class="section" id="sectionVerify">
+                    <div class="info-box green"><span class="icon">📧</span><div><strong>Check your email</strong><br>Code sent to <strong id="sentToEmail"></strong></div></div>
+                    <div id="verifyError" class="message"></div>
                     <div class="form-group">
                         <label class="form-label">Enter verification code</label>
                         <div class="code-input-group">
@@ -276,304 +232,128 @@
                             <input type="text" class="code-input" maxlength="1" data-index="5" oninput="handleCodeInput(this)" onkeydown="handleCodeKeydown(event, this)">
                         </div>
                     </div>
-                    
-                    <button type="button" class="btn btn-primary" id="verifyCodeBtn" onclick="verifyCode()" disabled>
-                        Verify Code
-                    </button>
-                    
-                    <div class="timer" id="resendTimer">
-                        Didn't receive it? <button class="btn-link" id="resendBtn" onclick="resendCode()" disabled>Resend code</button> <span id="timerText"></span>
-                    </div>
-                    
-                    <button type="button" class="btn btn-link" onclick="goToSection(1)" style="margin-top: 12px;">
-                        ← Use different email
-                    </button>
+                    <button type="button" class="btn btn-primary" id="verifyCodeBtn" onclick="verifyEmailCode()" disabled>Verify Code</button>
+                    <button type="button" class="btn btn-link" onclick="resendCode()">Resend code</button>
                 </div>
                 
-                <!-- ================================== -->
-                <!-- SECTION 3: COMPLETE PROFILE -->
-                <!-- ================================== -->
-                <div class="section" id="section3">
-                    <div id="section3Error" class="message"></div>
-                    
-                    <!-- Learner Profile -->
-                    <div id="learnerProfile">
-                        <div class="form-group">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" id="fullName" class="form-input" placeholder="Jane Smith">
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Role</label>
-                                <select id="role" class="form-select">
-                                    <option value="">Select...</option>
-                                    <option value="ms1">MS1</option>
-                                    <option value="ms2">MS2</option>
-                                    <option value="ms3">MS3</option>
-                                    <option value="ms4">MS4</option>
-                                    <option value="do">DO Student</option>
-                                    <option value="pa">PA Student</option>
-                                    <option value="np">NP Student</option>
-                                    <option value="resident">Resident</option>
-                                    <option value="fellow">Fellow</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Institution</label>
-                                <input type="text" id="institution" class="form-input" placeholder="University name">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">How did you hear about us? <span class="optional">(optional)</span></label>
-                            <select id="source" class="form-select">
-                                <option value="">Select...</option>
-                                <option value="professor">Professor/Faculty</option>
-                                <option value="classmate">Classmate</option>
-                                <option value="linkedin">LinkedIn</option>
-                                <option value="twitter">Twitter/X</option>
-                                <option value="google">Google Search</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Referral Code <span class="optional">(optional)</span></label>
-                            <input type="text" id="referralCode" class="form-input" placeholder="REF-XX-XXX" style="text-transform: uppercase;">
-                            <p class="form-hint">If someone referred you, enter their code</p>
-                        </div>
+                <div class="section" id="sectionProfile">
+                    <div id="profileError" class="message"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">First Name</label><input type="text" id="firstName" class="form-input" placeholder="Jane"></div>
+                        <div class="form-group"><label class="form-label">Last Name</label><input type="text" id="lastName" class="form-input" placeholder="Doe"></div>
                     </div>
-                    
-                    <!-- Faculty Profile -->
-                    <div id="facultyProfile" style="display: none;">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Full Name</label>
-                                <input type="text" id="facFullName" class="form-input" placeholder="Dr. Jane Smith">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Credentials <span class="optional">(optional)</span></label>
-                                <input type="text" id="facCredentials" class="form-input" placeholder="MD, FACP">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Role</label>
-                                <select id="facRole" class="form-select">
-                                    <option value="">Select...</option>
-                                    <option value="faculty_basic">Basic Science Faculty</option>
-                                    <option value="faculty_clinical">Clinical Faculty</option>
-                                    <option value="course_director">Course Director</option>
-                                    <option value="clerkship_director">Clerkship Director</option>
-                                    <option value="program_director">Program Director</option>
-                                    <option value="attending">Attending Physician</option>
-                                    <option value="researcher">Med Ed Researcher</option>
-                                    <option value="retired">Retired</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Years Experience</label>
-                                <select id="facYears" class="form-select">
-                                    <option value="">Select...</option>
-                                    <option value="0-5">0-5 years</option>
-                                    <option value="6-10">6-10 years</option>
-                                    <option value="11-20">11-20 years</option>
-                                    <option value="20+">20+ years</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Institution</label>
-                            <input type="text" id="facInstitution" class="form-input" placeholder="University / Hospital">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Areas of Expertise</label>
-                            <div class="expertise-grid" id="expertiseGrid">
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="cardiology">Cardiology</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="pulmonology">Pulmonology</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="nephrology">Nephrology</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="gi">GI</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="neurology">Neurology</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="endocrine">Endocrine</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="heme">Heme/Onc</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="id">Infectious Disease</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="rheum">Rheumatology</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="allergy">Allergy/Immunology</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="emergency">Emergency</label>
-                                <label class="expertise-chip"><input type="checkbox" name="expertise" value="meded">Medical Education</label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Faculty Profile URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="facWebsite" class="form-input" placeholder="https://school.edu/faculty/you">
-                            <p class="form-hint">Helps us verify your credentials faster</p>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">I am a...</label>
+                        <select id="userRole" class="form-select">
+                            <option value="">Select your role</option>
+                            <option value="ms1">Medical Student - MS1</option>
+                            <option value="ms2">Medical Student - MS2</option>
+                            <option value="ms3">Medical Student - MS3</option>
+                            <option value="ms4">Medical Student - MS4</option>
+                            <option value="resident">Resident</option>
+                            <option value="fellow">Fellow</option>
+                            <option value="pa_student">PA Student</option>
+                            <option value="np_student">NP Student</option>
+                            <option value="physician">Attending Physician</option>
+                            <option value="educator">Medical Educator</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
-                    
-                    <button type="button" class="btn btn-primary" id="continueProfileBtn" onclick="continueToPassword()">
-                        Continue
-                    </button>
-                </div>
-                
-                <!-- ================================== -->
-                <!-- SECTION 4: CREATE PASSWORD -->
-                <!-- ================================== -->
-                <div class="section" id="section4">
-                    <div id="section4Error" class="message"></div>
-                    
+                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital"></div>
                     <div class="form-group">
                         <label class="form-label">Create Password</label>
-                        <input type="password" id="password" class="form-input" placeholder="Min 8 characters" oninput="checkPasswordStrength()">
-                        <div class="password-strength" id="passwordStrength">
-                            <div class="strength-bar" id="str1"></div>
-                            <div class="strength-bar" id="str2"></div>
-                            <div class="strength-bar" id="str3"></div>
-                            <div class="strength-bar" id="str4"></div>
+                        <input type="password" id="password" class="form-input" placeholder="At least 8 characters" oninput="checkPasswordStrength()">
+                        <div class="password-strength"><div class="bar" id="strengthBar1"></div><div class="bar" id="strengthBar2"></div><div class="bar" id="strengthBar3"></div><div class="bar" id="strengthBar4"></div></div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter password"></div>
+                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label></div>
+                    <div class="checkbox-group hidden" id="researchConsentBox"><input type="checkbox" id="agreeResearch" checked><label for="agreeResearch">I understand my anonymized data will be used for research</label></div>
+                    <button type="button" class="btn btn-primary" onclick="createAccount()">Create Account</button>
+                </div>
+                
+                <div class="section" id="sectionPayment">
+                    <div class="info-box blue"><span class="icon">💳</span><div><strong>Complete your Pro subscription</strong><br>Secure payment via Stripe</div></div>
+                    <div id="paymentError" class="message"></div>
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <div class="pricing-toggle">
+                            <button onclick="setBilling('monthly')" id="billingMonthly" class="active">Monthly</button>
+                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save 45%</span></button>
                         </div>
-                        <p class="form-hint" id="passwordHint">Use 8+ characters with letters and numbers</p>
+                    </div>
+                    
+                    <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
+                        <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">You'll be charged</div>
+                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
+                        <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter password" oninput="checkPasswordMatch()">
-                        <p class="form-hint" id="confirmHint"></p>
+                        <label class="form-label">Card Information</label>
+                        <div id="card-element" style="padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: white;">
+                            <p style="color: #94a3b8; font-size: 14px;">Card input will appear here when Stripe is configured</p>
+                        </div>
                     </div>
                     
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="consent">
-                        <label for="consent">
-                            I consent to participate in the research study. I understand my learning data will be collected <strong>anonymously</strong> using a Study ID.
-                        </label>
-                    </div>
-                    
-                    <button type="button" class="btn btn-primary" id="createAccountBtn" onclick="createAccount()" style="margin-top: 20px;">
-                        Create Account
+                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">
+                        Subscribe — $14.99/month
                     </button>
+                    
+                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">
+                        🔒 Secure payment · Cancel anytime · 30-day money-back guarantee
+                    </p>
                 </div>
                 
-                <!-- ================================== -->
-                <!-- SECTION 5: SUCCESS -->
-                <!-- ================================== -->
-                <div class="section" id="section5">
+                <!-- SECTION: SUCCESS -->
+                <div class="section" id="sectionSuccess">
                     <div class="success-screen">
-                        <div class="success-icon" id="successIcon">🎉</div>
-                        <h2 id="successTitle">Welcome to DxSuite!</h2>
-                        <p id="successMessage">Your account has been created.</p>
+                        <div class="success-icon">🎉</div>
+                        <h3>Welcome to ReasonDx!</h3>
+                        <p id="successMessage">Your account has been created successfully.</p>
                         
-                        <div class="id-display">
-                            <div class="id-display-label">Your Study ID</div>
-                            <div class="id-display-value" id="assignedStudyId"></div>
+                        <div class="study-id-display hidden" id="studyIdDisplay">
+                            <div class="label">Your Study ID</div>
+                            <div class="id" id="studyIdValue">DX01-R0001</div>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 8px;">Save this ID for your records</p>
                         </div>
                         
-                        <div id="facultyReferralSection" style="display: none;">
-                            <div class="referral-display">
-                                <div class="referral-display-label">Your Referral Code</div>
-                                <div class="referral-display-value" id="facultyReferralCode"></div>
-                                <div class="referral-display-hint">Share with students to track their progress</div>
-                            </div>
-                        </div>
-                        
-                        <p style="font-size: 14px; color: #64748b; margin-bottom: 20px;">
-                            📧 We've sent a confirmation to your email.<br>
-                            Your Study ID is how we track your progress anonymously.
-                        </p>
-                        
-                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none;">
+                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">
                             Start Learning →
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="form-card hidden" id="loginForm">
+            <div class="form-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your ReasonDx account</p>
+            </div>
+            
+            <div class="form-body">
+                <div id="loginError" class="message"></div>
                 
-                <!-- ================================== -->
-                <!-- LOGIN SECTION -->
-                <!-- ================================== -->
-                <div class="section" id="loginSection">
-                    <div id="loginError" class="message"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="loginEmail" class="form-input" placeholder="you@school.edu">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" id="loginPassword" class="form-input" placeholder="Your password">
-                    </div>
-                    
-                    <button type="button" class="btn btn-primary" onclick="login()">
-                        Sign In
-                    </button>
-                    
-                    <div style="text-align: center; margin-top: 16px;">
-                        <button class="btn-link" onclick="showForgotPassword()">Forgot password?</button>
-                    </div>
-                    
-                    <div class="login-prompt">
-                        Don't have an account? <a href="#" onclick="showRegister()">Sign up</a>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="you@email.com">
                 </div>
                 
-                <!-- ================================== -->
-                <!-- FORGOT PASSWORD SECTION -->
-                <!-- ================================== -->
-                <div class="section" id="forgotSection">
-                    <div class="info-box blue">
-                        <span class="icon">🔑</span>
-                        <div>Enter your email and we'll send you a code to reset your password.</div>
-                    </div>
-                    
-                    <div id="forgotError" class="message"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="forgotEmail" class="form-input" placeholder="you@school.edu">
-                    </div>
-                    
-                    <button type="button" class="btn btn-primary" onclick="sendResetCode()">
-                        Send Reset Code
-                    </button>
-                    
-                    <button type="button" class="btn btn-link" onclick="showLogin()" style="margin-top: 12px;">
-                        ← Back to login
-                    </button>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Your password">
                 </div>
                 
-                <!-- ================================== -->
-                <!-- RESET PASSWORD SECTION -->
-                <!-- ================================== -->
-                <div class="section" id="resetSection">
-                    <div class="info-box green">
-                        <span class="icon">📧</span>
-                        <div>Enter the code we sent to <strong id="resetEmail"></strong></div>
-                    </div>
-                    
-                    <div id="resetError" class="message"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Reset Code</label>
-                        <input type="text" id="resetCode" class="form-input" placeholder="6-digit code" maxlength="6" style="text-align: center; font-size: 20px; letter-spacing: 4px;">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">New Password</label>
-                        <input type="password" id="newPassword" class="form-input" placeholder="Min 8 characters">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Confirm New Password</label>
-                        <input type="password" id="confirmNewPassword" class="form-input" placeholder="Re-enter password">
-                    </div>
-                    
-                    <button type="button" class="btn btn-primary" onclick="resetPassword()">
-                        Reset Password
-                    </button>
+                <button type="button" class="btn btn-primary" onclick="login()">
+                    Sign In
+                </button>
+                
+                <button type="button" class="btn btn-link" onclick="showForgotPassword()">
+                    Forgot password?
+                </button>
+                
+                <div class="login-prompt">
+                    Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a>
                 </div>
             </div>
         </div>
@@ -583,53 +363,148 @@
         // ============================================
         // CONFIGURATION
         // ============================================
-        const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-        const STUDY_PREFIX = 'DX01';
-        
-        // Microsoft Forms consent URL - UPDATE THIS
-        const CONSENT_FORM_URL = 'YOUR_MICROSOFT_FORMS_URL_HERE';
-        
-        // Valid consent codes - these can be:
-        // Option 1: Static list (simple, you generate codes and put them in Forms)
-        // Option 2: Dynamic validation via Google Sheets (more secure)
-        // Option 3: Algorithm-based (codes follow a pattern you can verify)
-        
-        // OPTION 1: Static list of valid consent codes
-        // Generate these and add them as the "completion message" in Microsoft Forms
-        const VALID_CONSENT_CODES = [
-            'CONSENT-2026A', 'CONSENT-2026B', 'CONSENT-2026C', 'CONSENT-2026D', 'CONSENT-2026E',
-            'CONSENT-2026F', 'CONSENT-2026G', 'CONSENT-2026H', 'CONSENT-2026I', 'CONSENT-2026J',
-            // Add more codes as needed, or use algorithmic validation below
-        ];
-        
-        // OPTION 3: Algorithmic validation (more scalable)
-        // Codes follow pattern: CONSENT-[YEAR][MONTH][RANDOM]
-        // Example: CONSENT-2601A7X = valid for January 2026
-        const USE_ALGORITHMIC_VALIDATION = true;
-        const CONSENT_SECRET = 'DxSuite2026'; // Change this to your secret
-        
-        // In production, use a real email service (SendGrid, AWS SES, etc.)
-        // For demo, we'll simulate email sending
-        const DEMO_MODE = true;
+        const CONFIG = {
+            GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
+            CONSENT_FORM_URL: 'YOUR_MICROSOFT_FORMS_URL_HERE',
+            STRIPE_PUBLIC_KEY: 'YOUR_STRIPE_PUBLIC_KEY_HERE',
+            STUDY_PREFIX: 'DX01',
+            DEMO_MODE: true,
+            MONTHLY_PRICE: 14.99,
+            ANNUAL_PRICE: 99,
+            VALID_CONSENT_CODES: ['CONSENT-DXSUITE-2026', 'CONSENT-2026'],
+            USE_ALGORITHMIC_VALIDATION: true
+        };
         
         // ============================================
         // STATE
         // ============================================
-        let currentSection = 0;
-        let selectedTrack = 'learner';
-        let verifiedEmail = null;
-        let verifiedConsentCode = null;
-        let generatedCode = null;
-        let resendCountdown = 0;
-        let countdownInterval = null;
+        let state = {
+            selectedPlan: null,
+            currentSection: 0,
+            verifiedEmail: null,
+            verifiedConsentCode: null,
+            generatedCode: null,
+            billingPeriod: 'monthly',
+            resendCountdown: 0
+        };
+        
+        // ============================================
+        // PLAN SELECTION
+        // ============================================
+        function selectPlan(plan) {
+            state.selectedPlan = plan;
+            
+            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
+            
+            setTimeout(() => {
+                document.getElementById('planSelection').classList.add('hidden');
+                document.getElementById('registrationForm').classList.remove('hidden');
+                
+                const formCard = document.getElementById('registrationForm');
+                const formHeader = document.getElementById('formHeader');
+                formCard.className = 'form-card ' + plan;
+                formHeader.className = 'form-header ' + plan;
+                
+                const titles = {
+                    free: ['Create Free Account', 'Free Plan'],
+                    pro: ['Start Your Pro Subscription', 'Pro Plan — $14.99/month'],
+                    research: ['Join Research Study', 'Research Participant — Free Pro Access']
+                };
+                document.getElementById('formTitle').textContent = titles[plan][0];
+                document.getElementById('formSubtitle').textContent = titles[plan][1];
+                
+                setupStepsForPlan(plan);
+            }, 200);
+        }
+        
+        function setupStepsForPlan(plan) {
+            const stepIndicator = document.getElementById('stepIndicator');
+            
+            if (plan === 'research') {
+                stepIndicator.innerHTML = `
+                    <div class="step active" data-step="0"></div>
+                    <div class="step" data-step="1"></div>
+                    <div class="step" data-step="2"></div>
+                    <div class="step" data-step="3"></div>
+                `;
+                showSection('sectionConsent');
+                document.getElementById('emailInfoText').innerHTML = '<strong>Academic email required</strong><br>You\'ll need a .edu email address.';
+                document.getElementById('emailHint').textContent = 'Must be a .edu email address';
+            } else if (plan === 'pro') {
+                stepIndicator.innerHTML = `
+                    <div class="step active" data-step="0"></div>
+                    <div class="step" data-step="1"></div>
+                    <div class="step" data-step="2"></div>
+                    <div class="step" data-step="3"></div>
+                `;
+                showSection('sectionEmail');
+                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send you a verification code.';
+                document.getElementById('emailHint').textContent = 'Any email address works';
+            } else {
+                stepIndicator.innerHTML = `
+                    <div class="step active" data-step="0"></div>
+                    <div class="step" data-step="1"></div>
+                    <div class="step" data-step="2"></div>
+                `;
+                showSection('sectionEmail');
+                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send you a verification code.';
+                document.getElementById('emailHint').textContent = 'Any email address works';
+            }
+            
+            document.getElementById('researchConsentBox').classList.toggle('hidden', plan !== 'research');
+        }
+        
+        function backToPlanSelection() {
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('planSelection').classList.remove('hidden');
+            state.selectedPlan = null;
+            state.currentSection = 0;
+        }
+        
+        // ============================================
+        // SECTION NAVIGATION
+        // ============================================
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            const sectionOrder = getSectionOrder();
+            const currentIndex = sectionOrder.indexOf(sectionId);
+            
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index === currentIndex) step.classList.add('active');
+                else if (index < currentIndex) step.classList.add('completed');
+            });
+            
+            state.currentSection = currentIndex;
+        }
+        
+        function getSectionOrder() {
+            if (state.selectedPlan === 'research') {
+                return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
+            } else if (state.selectedPlan === 'pro') {
+                return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
+            } else {
+                return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
+            }
+        }
+        
+        function nextSection() {
+            const order = getSectionOrder();
+            const nextIndex = state.currentSection + 1;
+            if (nextIndex < order.length) {
+                showSection(order[nextIndex]);
+            }
+        }
         
         // ============================================
         // CONSENT CODE VERIFICATION
         // ============================================
         function verifyConsentCode() {
             const code = document.getElementById('consentCode').value.toUpperCase().trim();
-            const errorEl = document.getElementById('section0Error');
-            const btn = document.getElementById('verifyConsentBtn');
+            const errorEl = document.getElementById('consentError');
             
             errorEl.className = 'message';
             
@@ -639,15 +514,9 @@
                 return;
             }
             
-            let isValid = false;
-            
-            if (USE_ALGORITHMIC_VALIDATION) {
-                // Algorithmic validation
-                isValid = validateConsentCodeAlgorithm(code);
-            } else {
-                // Static list validation
-                isValid = VALID_CONSENT_CODES.includes(code);
-            }
+            let isValid = CONFIG.USE_ALGORITHMIC_VALIDATION 
+                ? code.startsWith('CONSENT-') && code.length >= 12
+                : CONFIG.VALID_CONSENT_CODES.includes(code);
             
             if (!isValid) {
                 errorEl.textContent = 'Invalid consent code. Please complete the consent form to receive a valid code.';
@@ -655,657 +524,456 @@
                 return;
             }
             
-            // Code is valid!
-            verifiedConsentCode = code;
-            
-            // Log consent verification
-            sendToSheets({
-                action: 'consent_verified',
-                consent_code: code,
-                timestamp: new Date().toISOString()
-            });
-            
-            // Proceed to email entry
-            goToSection(1);
-        }
-        
-        // Algorithmic validation: CONSENT-YYMM-XXXX
-        // YY = year (26), MM = month (01-12), XXXX = hash
-        function validateConsentCodeAlgorithm(code) {
-            // Format: CONSENT-XXXXXX or CONSENT-2601-XXXX
-            if (!code.startsWith('CONSENT-')) return false;
-            
-            const parts = code.replace('CONSENT-', '');
-            
-            // Simple validation: at least 4 characters after CONSENT-
-            if (parts.length < 4) return false;
-            
-            // For a more secure validation, you could:
-            // 1. Check if the date portion is current month
-            // 2. Verify a hash/checksum
-            // 3. Call Google Sheets to verify the code exists
-            
-            // For now, accept any code starting with CONSENT- that's long enough
-            // In production, implement proper validation
-            return parts.length >= 4;
-        }
-        
-        // Generate consent codes (run this to create codes for your Forms)
-        function generateConsentCodes(count = 100) {
-            const codes = [];
-            const now = new Date();
-            const yearMonth = now.getFullYear().toString().slice(2) + 
-                             String(now.getMonth() + 1).padStart(2, '0');
-            
-            for (let i = 0; i < count; i++) {
-                const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-                codes.push(`CONSENT-${yearMonth}-${random}`);
-            }
-            
-            console.log('Generated consent codes:');
-            console.log(codes.join('\n'));
-            return codes;
+            state.verifiedConsentCode = code;
+            sendToSheets({ action: 'consent_verified', consent_code: code, timestamp: new Date().toISOString() });
+            nextSection();
         }
         
         // ============================================
-        // TRACK SELECTION
-        // ============================================
-        function selectTrack(track) {
-            selectedTrack = track;
-            document.querySelectorAll('.track-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(track)) btn.classList.add('active');
-            });
-            
-            // Update header color
-            const header = document.getElementById('cardHeader');
-            header.classList.toggle('faculty', track === 'faculty');
-        }
-        
-        // ============================================
-        // SECTION NAVIGATION
-        // ============================================
-        function goToSection(num) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('section' + num).classList.add('active');
-            
-            // Update step indicators
-            document.querySelectorAll('.step').forEach(step => {
-                const stepNum = parseInt(step.dataset.step);
-                step.classList.remove('active', 'completed');
-                if (stepNum === num) step.classList.add('active');
-                else if (stepNum < num) step.classList.add('completed');
-            });
-            
-            currentSection = num;
-            
-            // Show/hide step indicator for non-registration flows
-            const hideSteps = ['loginSection', 'forgotSection', 'resetSection'].some(
-                id => document.getElementById(id)?.classList.contains('active')
-            );
-            document.getElementById('stepIndicator').style.display = hideSteps ? 'none' : 'flex';
-        }
-        
-        function showLogin() {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('loginSection').classList.add('active');
-            document.getElementById('stepIndicator').style.display = 'none';
-        }
-        
-        function showRegister() {
-            goToSection(1);
-            document.getElementById('stepIndicator').style.display = 'flex';
-        }
-        
-        function showForgotPassword() {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('forgotSection').classList.add('active');
-            document.getElementById('stepIndicator').style.display = 'none';
-        }
-        
-        // ============================================
-        // EMAIL VALIDATION
+        // EMAIL VERIFICATION
         // ============================================
         function validateEmail(email) {
-            const eduRegex = /^[^\s@]+@[^\s@]+\.edu$/i;
-            return eduRegex.test(email);
+            const basicValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            if (state.selectedPlan === 'research') {
+                return basicValid && email.toLowerCase().endsWith('.edu');
+            }
+            return basicValid;
         }
         
-        document.getElementById('emailInput')?.addEventListener('input', function() {
-            const email = this.value;
-            const status = document.getElementById('emailStatus');
-            const hint = document.getElementById('emailHint');
-            
-            if (!email) {
-                status.textContent = '';
-                hint.textContent = 'Must be a .edu email address';
-                hint.className = 'form-hint';
-                this.classList.remove('error', 'success');
-            } else if (validateEmail(email)) {
-                status.textContent = '✓';
-                hint.textContent = 'Valid .edu email';
-                hint.className = 'form-hint success';
-                this.classList.remove('error');
-                this.classList.add('success');
-            } else if (email.includes('@') && !email.endsWith('.edu')) {
-                status.textContent = '✗';
-                hint.textContent = 'Must be a .edu email address';
-                hint.className = 'form-hint error';
-                this.classList.remove('success');
-                this.classList.add('error');
-            } else {
-                status.textContent = '';
-                hint.textContent = 'Must be a .edu email address';
-                hint.className = 'form-hint';
-                this.classList.remove('error', 'success');
-            }
-        });
-        
-        // ============================================
-        // STEP 1: SEND VERIFICATION CODE
-        // ============================================
-        async function sendVerificationCode() {
+        function sendVerificationCode() {
             const email = document.getElementById('emailInput').value.trim().toLowerCase();
-            const errorEl = document.getElementById('section1Error');
-            const btn = document.getElementById('sendCodeBtn');
+            const errorEl = document.getElementById('emailError');
             
             errorEl.className = 'message';
             
             if (!validateEmail(email)) {
-                errorEl.textContent = 'Please enter a valid .edu email address.';
+                errorEl.textContent = state.selectedPlan === 'research' 
+                    ? 'Please enter a valid .edu email address.'
+                    : 'Please enter a valid email address.';
                 errorEl.className = 'message error';
                 return;
             }
             
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Sending...';
+            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+            state.verifiedEmail = email;
             
-            try {
-                // Generate 6-digit code
-                generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-                
-                if (DEMO_MODE) {
-                    // Demo: Show code in console and alert
-                    console.log('Verification code:', generatedCode);
-                    alert('DEMO MODE\n\nVerification code: ' + generatedCode + '\n\n(In production, this would be sent to ' + email + ')');
-                } else {
-                    // Production: Send email via your backend
-                    await sendEmail(email, 'Your DxSuite Verification Code', 
-                        `Your verification code is: ${generatedCode}\n\nThis code expires in 10 minutes.`);
-                }
-                
-                // Log to sheets
-                await sendToSheets({
-                    action: 'verification_sent',
-                    email: email,
-                    track: selectedTrack,
-                    timestamp: new Date().toISOString()
-                });
-                
-                verifiedEmail = email;
-                document.getElementById('sentToEmail').textContent = email;
-                
-                // Start resend countdown (60 seconds)
-                startResendCountdown(60);
-                
-                goToSection(2);
-                
-                // Focus first code input
-                document.querySelector('.code-input').focus();
-                
-            } catch (error) {
-                errorEl.textContent = 'Failed to send code. Please try again.';
-                errorEl.className = 'message error';
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Send Verification Code';
+            if (CONFIG.DEMO_MODE) {
+                alert('Demo Mode - Your verification code is: ' + state.generatedCode);
             }
+            
+            sendToSheets({ action: 'verification_sent', email: email, plan: state.selectedPlan, timestamp: new Date().toISOString() });
+            document.getElementById('sentToEmail').textContent = email;
+            nextSection();
         }
         
         // ============================================
-        // STEP 2: VERIFY CODE
+        // CODE INPUT HANDLING
         // ============================================
         function handleCodeInput(input) {
             const value = input.value.replace(/[^0-9]/g, '');
             input.value = value;
             
             if (value && input.dataset.index < 5) {
-                const next = document.querySelector(`.code-input[data-index="${parseInt(input.dataset.index) + 1}"]`);
-                if (next) next.focus();
+                const nextInput = document.querySelector(`.code-input[data-index="${parseInt(input.dataset.index) + 1}"]`);
+                if (nextInput) nextInput.focus();
             }
-            
-            // Check if all filled
-            const allInputs = document.querySelectorAll('.code-input');
-            const code = Array.from(allInputs).map(i => i.value).join('');
+            checkCodeComplete();
+        }
+        
+        function handleCodeKeydown(event, input) {
+            if (event.key === 'Backspace' && !input.value && input.dataset.index > 0) {
+                const prevInput = document.querySelector(`.code-input[data-index="${parseInt(input.dataset.index) - 1}"]`);
+                if (prevInput) { prevInput.focus(); prevInput.value = ''; }
+            }
+        }
+        
+        function checkCodeComplete() {
+            const inputs = document.querySelectorAll('.code-input');
+            const code = Array.from(inputs).map(i => i.value).join('');
             document.getElementById('verifyCodeBtn').disabled = code.length !== 6;
         }
         
-        function handleCodeKeydown(e, input) {
-            if (e.key === 'Backspace' && !input.value && input.dataset.index > 0) {
-                const prev = document.querySelector(`.code-input[data-index="${parseInt(input.dataset.index) - 1}"]`);
-                if (prev) prev.focus();
-            }
-        }
-        
-        async function verifyCode() {
-            const allInputs = document.querySelectorAll('.code-input');
-            const code = Array.from(allInputs).map(i => i.value).join('');
-            const errorEl = document.getElementById('section2Error');
-            const btn = document.getElementById('verifyCodeBtn');
+        function verifyEmailCode() {
+            const inputs = document.querySelectorAll('.code-input');
+            const enteredCode = Array.from(inputs).map(i => i.value).join('');
+            const errorEl = document.getElementById('verifyError');
             
-            errorEl.className = 'message';
-            
-            if (code !== generatedCode) {
-                errorEl.textContent = 'Invalid code. Please check and try again.';
-                errorEl.className = 'message error';
-                allInputs.forEach(i => i.value = '');
-                allInputs[0].focus();
-                return;
-            }
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Verifying...';
-            
-            // Code is correct!
-            await sendToSheets({
-                action: 'email_verified',
-                email: verifiedEmail,
-                track: selectedTrack,
-                timestamp: new Date().toISOString()
-            });
-            
-            // Show appropriate profile form
-            if (selectedTrack === 'faculty') {
-                document.getElementById('learnerProfile').style.display = 'none';
-                document.getElementById('facultyProfile').style.display = 'block';
-                document.getElementById('cardHeader').classList.add('faculty');
+            if (enteredCode === state.generatedCode) {
+                sendToSheets({ action: 'email_verified', email: state.verifiedEmail, plan: state.selectedPlan, timestamp: new Date().toISOString() });
+                nextSection();
             } else {
-                document.getElementById('learnerProfile').style.display = 'block';
-                document.getElementById('facultyProfile').style.display = 'none';
-                document.getElementById('cardHeader').classList.remove('faculty');
+                errorEl.textContent = 'Invalid code. Please try again.';
+                errorEl.className = 'message error';
+                inputs.forEach(i => i.value = '');
+                inputs[0].focus();
             }
-            
-            // Pre-fill institution from email domain
-            const domain = verifiedEmail.split('@')[1];
-            const instName = domain.replace('.edu', '').split('.').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            document.getElementById('institution').value = instName;
-            document.getElementById('facInstitution').value = instName;
-            
-            goToSection(3);
-            
-            btn.disabled = false;
-            btn.textContent = 'Verify Code';
         }
         
-        function startResendCountdown(seconds) {
-            resendCountdown = seconds;
-            const timerText = document.getElementById('timerText');
-            const resendBtn = document.getElementById('resendBtn');
+        function resendCode() {
+            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+            if (CONFIG.DEMO_MODE) alert('Demo Mode - Your new verification code is: ' + state.generatedCode);
             
+            state.resendCountdown = 60;
+            const resendBtn = document.getElementById('resendBtn');
             resendBtn.disabled = true;
             
-            if (countdownInterval) clearInterval(countdownInterval);
-            
-            countdownInterval = setInterval(() => {
-                resendCountdown--;
-                if (resendCountdown > 0) {
-                    timerText.textContent = `in ${resendCountdown}s`;
-                } else {
-                    timerText.textContent = '';
+            const interval = setInterval(() => {
+                state.resendCountdown--;
+                resendBtn.textContent = `Resend code (${state.resendCountdown}s)`;
+                if (state.resendCountdown <= 0) {
+                    clearInterval(interval);
                     resendBtn.disabled = false;
-                    clearInterval(countdownInterval);
+                    resendBtn.textContent = 'Resend code';
                 }
             }, 1000);
-            
-            timerText.textContent = `in ${resendCountdown}s`;
-        }
-        
-        async function resendCode() {
-            generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-            
-            if (DEMO_MODE) {
-                alert('DEMO MODE\n\nNew code: ' + generatedCode);
-            }
-            
-            startResendCountdown(60);
-            
-            // Clear existing code inputs
-            document.querySelectorAll('.code-input').forEach(i => i.value = '');
-            document.querySelector('.code-input').focus();
         }
         
         // ============================================
-        // STEP 3: PROFILE
-        // ============================================
-        function continueToPassword() {
-            const errorEl = document.getElementById('section3Error');
-            errorEl.className = 'message';
-            
-            if (selectedTrack === 'learner') {
-                const name = document.getElementById('fullName').value.trim();
-                const role = document.getElementById('role').value;
-                
-                if (!name) {
-                    errorEl.textContent = 'Please enter your name.';
-                    errorEl.className = 'message error';
-                    return;
-                }
-            } else {
-                const name = document.getElementById('facFullName').value.trim();
-                const role = document.getElementById('facRole').value;
-                
-                if (!name) {
-                    errorEl.textContent = 'Please enter your name.';
-                    errorEl.className = 'message error';
-                    return;
-                }
-            }
-            
-            goToSection(4);
-            
-            // Update button style for faculty
-            const createBtn = document.getElementById('createAccountBtn');
-            if (selectedTrack === 'faculty') {
-                createBtn.classList.add('faculty');
-            } else {
-                createBtn.classList.remove('faculty');
-            }
-        }
-        
-        // ============================================
-        // STEP 4: PASSWORD & CREATE ACCOUNT
+        // PASSWORD STRENGTH
         // ============================================
         function checkPasswordStrength() {
             const password = document.getElementById('password').value;
-            const bars = [
-                document.getElementById('str1'),
-                document.getElementById('str2'),
-                document.getElementById('str3'),
-                document.getElementById('str4')
-            ];
+            const bars = ['strengthBar1', 'strengthBar2', 'strengthBar3', 'strengthBar4'].map(id => document.getElementById(id));
             
             let strength = 0;
             if (password.length >= 8) strength++;
-            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
             if (/[0-9]/.test(password)) strength++;
-            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
             
-            bars.forEach((bar, i) => {
-                bar.className = 'strength-bar';
-                if (i < strength) {
-                    if (strength <= 1) bar.classList.add('weak');
-                    else if (strength <= 2) bar.classList.add('medium');
-                    else bar.classList.add('strong');
+            bars.forEach((bar, index) => {
+                bar.className = 'bar';
+                if (index < strength) {
+                    bar.classList.add(strength <= 1 ? 'weak' : strength <= 2 ? 'medium' : 'strong');
                 }
             });
         }
         
-        function checkPasswordMatch() {
-            const password = document.getElementById('password').value;
-            const confirm = document.getElementById('confirmPassword').value;
-            const hint = document.getElementById('confirmHint');
-            
-            if (!confirm) {
-                hint.textContent = '';
-                hint.className = 'form-hint';
-            } else if (password === confirm) {
-                hint.textContent = '✓ Passwords match';
-                hint.className = 'form-hint success';
-            } else {
-                hint.textContent = '✗ Passwords do not match';
-                hint.className = 'form-hint error';
-            }
-        }
-        
+        // ============================================
+        // ACCOUNT CREATION
+        // ============================================
         async function createAccount() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const role = document.getElementById('userRole').value;
+            const institution = document.getElementById('institution').value.trim();
             const password = document.getElementById('password').value;
-            const confirm = document.getElementById('confirmPassword').value;
-            const consent = document.getElementById('consent').checked;
-            const errorEl = document.getElementById('section4Error');
-            const btn = document.getElementById('createAccountBtn');
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            const errorEl = document.getElementById('profileError');
             
             errorEl.className = 'message';
             
-            if (password.length < 8) {
-                errorEl.textContent = 'Password must be at least 8 characters.';
-                errorEl.className = 'message error';
-                return;
+            if (!firstName || !lastName) { errorEl.textContent = 'Please enter your full name.'; errorEl.className = 'message error'; return; }
+            if (!role) { errorEl.textContent = 'Please select your role.'; errorEl.className = 'message error'; return; }
+            if (password.length < 8) { errorEl.textContent = 'Password must be at least 8 characters.'; errorEl.className = 'message error'; return; }
+            if (password !== confirmPassword) { errorEl.textContent = 'Passwords do not match.'; errorEl.className = 'message error'; return; }
+            if (!agreeTerms) { errorEl.textContent = 'Please agree to the Terms of Service.'; errorEl.className = 'message error'; return; }
+            
+            if (state.selectedPlan === 'pro') { nextSection(); return; }
+            
+            await finalizeAccount({ firstName, lastName, role, institution });
+        }
+        
+        async function finalizeAccount(profileData) {
+            let studyId = null;
+            if (state.selectedPlan === 'research') {
+                const idNum = Math.floor(1000 + Math.random() * 9000);
+                studyId = `${CONFIG.STUDY_PREFIX}-R${idNum}`;
             }
             
-            if (password !== confirm) {
-                errorEl.textContent = 'Passwords do not match.';
-                errorEl.className = 'message error';
-                return;
+            await sendToSheets({
+                action: 'registration',
+                plan: state.selectedPlan,
+                study_id: studyId,
+                email: state.verifiedEmail,
+                consent_code: state.verifiedConsentCode,
+                full_name: `${profileData.firstName} ${profileData.lastName}`,
+                role: profileData.role,
+                institution: profileData.institution,
+                timestamp: new Date().toISOString()
+            });
+            
+            localStorage.setItem('reasondx_user', JSON.stringify({
+                email: state.verifiedEmail,
+                name: `${profileData.firstName} ${profileData.lastName}`,
+                plan: state.selectedPlan,
+                studyId: studyId
+            }));
+            
+            if (state.selectedPlan === 'research' && studyId) {
+                document.getElementById('studyIdDisplay').classList.remove('hidden');
+                document.getElementById('studyIdValue').textContent = studyId;
+                document.getElementById('successMessage').textContent = 'Thank you for joining our research study!';
+            } else if (state.selectedPlan === 'free') {
+                document.getElementById('successMessage').textContent = 'Your free account is ready. Start exploring!';
+            } else {
+                document.getElementById('successMessage').textContent = 'Your Pro subscription is active. Enjoy unlimited access!';
             }
             
-            if (!consent) {
-                errorEl.textContent = 'Please agree to participate in the research study.';
-                errorEl.className = 'message error';
-                return;
+            showSection('sectionSuccess');
+        }
+        
+        // ============================================
+        // PAYMENT
+        // ============================================
+        function setBilling(period) {
+            state.billingPeriod = period;
+            document.getElementById('billingMonthly').classList.toggle('active', period === 'monthly');
+            document.getElementById('billingAnnual').classList.toggle('active', period === 'annual');
+            
+            if (period === 'monthly') {
+                document.getElementById('paymentAmount').textContent = '$' + CONFIG.MONTHLY_PRICE.toFixed(2);
+                document.getElementById('paymentPeriod').textContent = 'per month';
+                document.getElementById('payBtn').textContent = `Subscribe — $${CONFIG.MONTHLY_PRICE.toFixed(2)}/month`;
+            } else {
+                document.getElementById('paymentAmount').textContent = '$' + CONFIG.ANNUAL_PRICE;
+                document.getElementById('paymentPeriod').textContent = 'per year';
+                document.getElementById('payBtn').textContent = `Subscribe — $${CONFIG.ANNUAL_PRICE}/year`;
             }
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Creating account...';
-            
-            try {
-                // Generate Study ID
-                const studyId = getNextId(selectedTrack === 'faculty' ? 'F' : 'L');
-                
-                // Collect profile data
-                let profileData;
-                if (selectedTrack === 'learner') {
-                    profileData = {
-                        full_name: document.getElementById('fullName').value,
-                        role: document.getElementById('role').value,
-                        institution: document.getElementById('institution').value,
-                        source: document.getElementById('source').value,
-                        referral_code: document.getElementById('referralCode').value.toUpperCase()
-                    };
-                } else {
-                    const expertise = Array.from(document.querySelectorAll('#expertiseGrid input:checked'))
-                        .map(cb => cb.value);
-                    profileData = {
-                        full_name: document.getElementById('facFullName').value,
-                        credentials: document.getElementById('facCredentials').value,
-                        role: document.getElementById('facRole').value,
-                        years: document.getElementById('facYears').value,
-                        institution: document.getElementById('facInstitution').value,
-                        expertise: expertise.join(', '),
-                        website: document.getElementById('facWebsite').value
-                    };
-                }
-                
-                // Generate referral code for faculty
-                let facultyReferralCode = null;
-                if (selectedTrack === 'faculty') {
-                    facultyReferralCode = generateReferralCode(profileData.full_name);
-                }
-                
-                // Send to Google Sheets
-                await sendToSheets({
-                    action: 'registration',
-                    type: selectedTrack,
-                    study_id: studyId,
-                    email: verifiedEmail,
-                    consent_code: verifiedConsentCode,
-                    ...profileData,
-                    referral_code_generated: facultyReferralCode,
-                    timestamp: new Date().toISOString()
+        }
+        
+        async function processPayment() {
+            if (CONFIG.DEMO_MODE) {
+                alert('Demo Mode: Payment would be processed here via Stripe.\n\nSimulating successful payment...');
+                await finalizeAccount({
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    role: document.getElementById('userRole').value,
+                    institution: document.getElementById('institution').value.trim()
                 });
-                
-                // Track referral if used
-                if (profileData.referral_code) {
-                    await sendToSheets({
-                        action: 'referral_used',
-                        referral_code: profileData.referral_code,
-                        referred_id: studyId,
-                        timestamp: new Date().toISOString()
-                    });
-                }
-                
-                // Store locally
-                localStorage.setItem('dxsuite-study-id', studyId);
-                localStorage.setItem('dxsuite-email', verifiedEmail);
-                localStorage.setItem('dxsuite-track', selectedTrack);
-                if (facultyReferralCode) {
-                    localStorage.setItem('dxsuite-referral-code', facultyReferralCode);
-                }
-                
-                // Show success
-                document.getElementById('assignedStudyId').textContent = studyId;
-                
-                if (selectedTrack === 'faculty') {
-                    document.getElementById('successIcon').textContent = '👨‍🏫';
-                    document.getElementById('successTitle').textContent = 'Welcome, Faculty!';
-                    document.getElementById('facultyReferralCode').textContent = facultyReferralCode;
-                    document.getElementById('facultyReferralSection').style.display = 'block';
-                }
-                
-                goToSection(5);
-                document.getElementById('stepIndicator').style.display = 'none';
-                
-            } catch (error) {
-                errorEl.textContent = 'Failed to create account. Please try again.';
-                errorEl.className = 'message error';
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Create Account';
+            } else {
+                document.getElementById('paymentError').textContent = 'Payment processing is not yet configured.';
+                document.getElementById('paymentError').className = 'message error';
             }
         }
         
         // ============================================
         // LOGIN
         // ============================================
-        async function login() {
-            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        function showLogin() {
+            document.getElementById('planSelection').classList.add('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+        }
+        
+        function showPlanSelection() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('planSelection').classList.remove('hidden');
+        }
+        
+        function login() {
+            const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
-            const errorEl = document.getElementById('loginError');
-            
-            errorEl.className = 'message';
             
             if (!email || !password) {
-                errorEl.textContent = 'Please enter your email and password.';
-                errorEl.className = 'message error';
+                document.getElementById('loginError').textContent = 'Please enter your email and password.';
+                document.getElementById('loginError').className = 'message error';
                 return;
             }
             
-            // In production, verify against your auth system
-            // For demo, check localStorage
-            const storedEmail = localStorage.getItem('dxsuite-email');
-            if (email === storedEmail) {
+            if (CONFIG.DEMO_MODE) {
+                alert('Demo Mode: Login would be verified here.\n\nRedirecting to dashboard...');
                 window.location.href = '../index.html';
-            } else {
-                errorEl.textContent = 'Invalid email or password.';
-                errorEl.className = 'message error';
             }
         }
+        
+        function showForgotPassword() { alert('Password reset functionality coming soon!'); }
         
         // ============================================
-        // PASSWORD RESET
+        // GOOGLE SHEETS
         // ============================================
-        async function sendResetCode() {
-            const email = document.getElementById('forgotEmail').value.trim().toLowerCase();
-            const errorEl = document.getElementById('forgotError');
-            
-            errorEl.className = 'message';
-            
-            if (!validateEmail(email)) {
-                errorEl.textContent = 'Please enter a valid .edu email.';
-                errorEl.className = 'message error';
-                return;
-            }
-            
-            // Generate reset code
-            generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-            
-            if (DEMO_MODE) {
-                alert('DEMO MODE\n\nReset code: ' + generatedCode);
-            }
-            
-            document.getElementById('resetEmail').textContent = email;
-            verifiedEmail = email;
-            
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('resetSection').classList.add('active');
-        }
-        
-        async function resetPassword() {
-            const code = document.getElementById('resetCode').value;
-            const newPass = document.getElementById('newPassword').value;
-            const confirmPass = document.getElementById('confirmNewPassword').value;
-            const errorEl = document.getElementById('resetError');
-            
-            errorEl.className = 'message';
-            
-            if (code !== generatedCode) {
-                errorEl.textContent = 'Invalid reset code.';
-                errorEl.className = 'message error';
-                return;
-            }
-            
-            if (newPass.length < 8) {
-                errorEl.textContent = 'Password must be at least 8 characters.';
-                errorEl.className = 'message error';
-                return;
-            }
-            
-            if (newPass !== confirmPass) {
-                errorEl.textContent = 'Passwords do not match.';
-                errorEl.className = 'message error';
-                return;
-            }
-            
-            // In production, update password in your auth system
-            alert('Password reset successfully! You can now login with your new password.');
-            showLogin();
-        }
-        
-        // ============================================
-        // UTILITIES
-        // ============================================
-        function getNextId(prefix) {
-            const key = 'dx-' + prefix.toLowerCase() + '-counter';
-            let counter = parseInt(localStorage.getItem(key) || '1000');
-            const id = STUDY_PREFIX + '-' + prefix + String(counter).padStart(4, '0');
-            localStorage.setItem(key, String(counter + 1));
-            return id;
-        }
-        
-        function generateReferralCode(name) {
-            const initials = name.toUpperCase().split(' ').filter(p => p).map(p => p[0]).join('');
-            const random = Math.random().toString(36).substr(2, 4).toUpperCase();
-            return 'REF-' + initials + '-' + random;
-        }
-        
         async function sendToSheets(data) {
-            if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                console.log('Would send to Sheets:', data);
+            if (CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                console.log('Google Sheets not configured. Data:', data);
                 return;
             }
             try {
-                await fetch(GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
+                await fetch(CONFIG.GOOGLE_SHEETS_URL, {
+                    method: 'POST', mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-            } catch (e) {
-                console.error('Sheets error:', e);
-            }
+            } catch (error) { console.error('Error sending to sheets:', error); }
         }
         
-        async function sendEmail(to, subject, body) {
-            // In production, call your email API
-            // For now, this is a placeholder
-            console.log('Would send email:', { to, subject, body });
-        }
-        
-        // Expertise chip selection
-        document.querySelectorAll('.expertise-chip').forEach(chip => {
-            chip.addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('consentFormLink').href = CONFIG.CONSENT_FORM_URL;
         });
+    </script>
+</body>
+</html>>
+                    <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
+                        <div style="font-size: 14px; color: #64748b;">You'll be charged</div>
+                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
+                        <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Card Information</label><div id="card-element" style="padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px;"><p style="color: #94a3b8; font-size: 14px;">Stripe card input loads here</p></div></div>
+                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $14.99/month</button>
+                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure · Cancel anytime · 30-day guarantee</p>
+                </div>
+                
+                <div class="section" id="sectionSuccess">
+                    <div class="success-screen">
+                        <div class="success-icon">🎉</div>
+                        <h3>Welcome to ReasonDx!</h3>
+                        <p id="successMessage">Your account has been created.</p>
+                        <div class="study-id-display hidden" id="studyIdDisplay">
+                            <div class="label">Your Study ID</div>
+                            <div class="id" id="studyIdValue">DX01-R0001</div>
+                        </div>
+                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">Start Learning →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-card hidden" id="loginForm">
+            <div class="form-header"><h2>Welcome Back</h2><p>Sign in to ReasonDx</p></div>
+            <div class="form-body">
+                <div id="loginError" class="message"></div>
+                <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" class="form-input" placeholder="you@email.com"></div>
+                <div class="form-group"><label class="form-label">Password</label><input type="password" id="loginPassword" class="form-input" placeholder="Your password"></div>
+                <button type="button" class="btn btn-primary" onclick="login()">Sign In</button>
+                <button type="button" class="btn btn-link" onclick="alert('Password reset coming soon!')">Forgot password?</button>
+                <div class="login-prompt">Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const CONFIG = { GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE', CONSENT_FORM_URL: 'YOUR_MICROSOFT_FORMS_URL_HERE', STUDY_PREFIX: 'DX01', DEMO_MODE: true, MONTHLY_PRICE: 14.99, ANNUAL_PRICE: 99 };
+        let state = { selectedPlan: null, currentSection: 0, verifiedEmail: null, verifiedConsentCode: null, generatedCode: null, billingPeriod: 'monthly' };
+        
+        function selectPlan(plan) {
+            state.selectedPlan = plan;
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
+            setTimeout(() => {
+                document.getElementById('planSelection').classList.add('hidden');
+                document.getElementById('registrationForm').classList.remove('hidden');
+                document.getElementById('registrationForm').className = 'form-card ' + plan;
+                document.getElementById('formHeader').className = 'form-header ' + plan;
+                const titles = { free: ['Create Free Account', 'Free Plan'], pro: ['Start Pro Subscription', 'Pro — $14.99/mo'], research: ['Join Research Study', 'Free Pro Access'] };
+                document.getElementById('formTitle').textContent = titles[plan][0];
+                document.getElementById('formSubtitle').textContent = titles[plan][1];
+                setupSteps(plan);
+            }, 200);
+        }
+        
+        function setupSteps(plan) {
+            const si = document.getElementById('stepIndicator');
+            const numSteps = plan === 'research' ? 4 : plan === 'pro' ? 4 : 3;
+            si.innerHTML = Array(numSteps).fill(0).map((_, i) => '<div class="step' + (i === 0 ? ' active' : '') + '" data-step="' + i + '"></div>').join('');
+            showSection(plan === 'research' ? 'sectionConsent' : 'sectionEmail');
+            document.getElementById('emailInfoText').innerHTML = plan === 'research' ? '<strong>Academic email required</strong><br>You need a .edu email.' : '<strong>Enter your email</strong><br>We\'ll send a verification code.';
+            document.getElementById('emailHint').textContent = plan === 'research' ? 'Must be a .edu email' : 'Any email works';
+            document.getElementById('researchConsentBox').classList.toggle('hidden', plan !== 'research');
+        }
+        
+        function backToPlanSelection() { document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); state.selectedPlan = null; }
+        
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const order = getSectionOrder();
+            const idx = order.indexOf(id);
+            document.querySelectorAll('.step').forEach((s, i) => { s.classList.remove('active', 'completed'); if (i === idx) s.classList.add('active'); else if (i < idx) s.classList.add('completed'); });
+            state.currentSection = idx;
+        }
+        
+        function getSectionOrder() {
+            if (state.selectedPlan === 'research') return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
+            if (state.selectedPlan === 'pro') return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
+            return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
+        }
+        
+        function nextSection() { const o = getSectionOrder(); if (state.currentSection + 1 < o.length) showSection(o[state.currentSection + 1]); }
+        
+        function verifyConsentCode() {
+            const code = document.getElementById('consentCode').value.toUpperCase().trim();
+            const err = document.getElementById('consentError');
+            err.className = 'message';
+            if (!code || !code.startsWith('CONSENT-') || code.length < 12) { err.textContent = 'Invalid consent code.'; err.className = 'message error'; return; }
+            state.verifiedConsentCode = code;
+            nextSection();
+        }
+        
+        function sendVerificationCode() {
+            const email = document.getElementById('emailInput').value.trim().toLowerCase();
+            const err = document.getElementById('emailError');
+            err.className = 'message';
+            const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            if (!valid || (state.selectedPlan === 'research' && !email.endsWith('.edu'))) { err.textContent = state.selectedPlan === 'research' ? 'Please enter a valid .edu email.' : 'Please enter a valid email.'; err.className = 'message error'; return; }
+            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+            state.verifiedEmail = email;
+            if (CONFIG.DEMO_MODE) alert('Demo: Your code is ' + state.generatedCode);
+            document.getElementById('sentToEmail').textContent = email;
+            nextSection();
+        }
+        
+        function handleCodeInput(input) { input.value = input.value.replace(/[^0-9]/g, ''); if (input.value && input.dataset.index < 5) document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) + 1) + '"]')?.focus(); checkCodeComplete(); }
+        function handleCodeKeydown(e, input) { if (e.key === 'Backspace' && !input.value && input.dataset.index > 0) { const prev = document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) - 1) + '"]'); if (prev) { prev.focus(); prev.value = ''; } } }
+        function checkCodeComplete() { const code = Array.from(document.querySelectorAll('.code-input')).map(i => i.value).join(''); document.getElementById('verifyCodeBtn').disabled = code.length !== 6; }
+        
+        function verifyEmailCode() {
+            const code = Array.from(document.querySelectorAll('.code-input')).map(i => i.value).join('');
+            if (code === state.generatedCode) nextSection();
+            else { document.getElementById('verifyError').textContent = 'Invalid code.'; document.getElementById('verifyError').className = 'message error'; document.querySelectorAll('.code-input').forEach(i => i.value = ''); document.querySelector('.code-input').focus(); }
+        }
+        
+        function resendCode() { state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString(); if (CONFIG.DEMO_MODE) alert('Demo: New code is ' + state.generatedCode); }
+        
+        function checkPasswordStrength() {
+            const pw = document.getElementById('password').value;
+            let s = 0; if (pw.length >= 8) s++; if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++; if (/[0-9]/.test(pw)) s++; if (/[^a-zA-Z0-9]/.test(pw)) s++;
+            ['strengthBar1','strengthBar2','strengthBar3','strengthBar4'].forEach((id, i) => { const b = document.getElementById(id); b.className = 'bar'; if (i < s) b.classList.add(s <= 1 ? 'weak' : s <= 2 ? 'medium' : 'strong'); });
+        }
+        
+        function createAccount() {
+            const fn = document.getElementById('firstName').value.trim(), ln = document.getElementById('lastName').value.trim(), role = document.getElementById('userRole').value, pw = document.getElementById('password').value, cpw = document.getElementById('confirmPassword').value, terms = document.getElementById('agreeTerms').checked;
+            const err = document.getElementById('profileError'); err.className = 'message';
+            if (!fn || !ln) { err.textContent = 'Enter your name.'; err.className = 'message error'; return; }
+            if (!role) { err.textContent = 'Select your role.'; err.className = 'message error'; return; }
+            if (pw.length < 8) { err.textContent = 'Password must be 8+ characters.'; err.className = 'message error'; return; }
+            if (pw !== cpw) { err.textContent = 'Passwords don\'t match.'; err.className = 'message error'; return; }
+            if (!terms) { err.textContent = 'Please agree to terms.'; err.className = 'message error'; return; }
+            if (state.selectedPlan === 'pro') { nextSection(); return; }
+            finalize({ firstName: fn, lastName: ln, role, institution: document.getElementById('institution').value.trim() });
+        }
+        
+        function finalize(profile) {
+            let studyId = null;
+            if (state.selectedPlan === 'research') { studyId = CONFIG.STUDY_PREFIX + '-R' + Math.floor(1000 + Math.random() * 9000); }
+            localStorage.setItem('reasondx_user', JSON.stringify({ email: state.verifiedEmail, name: profile.firstName + ' ' + profile.lastName, plan: state.selectedPlan, studyId }));
+            if (studyId) { document.getElementById('studyIdDisplay').classList.remove('hidden'); document.getElementById('studyIdValue').textContent = studyId; document.getElementById('successMessage').textContent = 'Thank you for joining our research study!'; }
+            else if (state.selectedPlan === 'free') document.getElementById('successMessage').textContent = 'Your free account is ready!';
+            else document.getElementById('successMessage').textContent = 'Your Pro subscription is active!';
+            showSection('sectionSuccess');
+        }
+        
+        function setBilling(period) {
+            state.billingPeriod = period;
+            document.getElementById('billingMonthly').classList.toggle('active', period === 'monthly');
+            document.getElementById('billingAnnual').classList.toggle('active', period === 'annual');
+            document.getElementById('paymentAmount').textContent = period === 'monthly' ? '$14.99' : '$99';
+            document.getElementById('paymentPeriod').textContent = period === 'monthly' ? 'per month' : 'per year';
+            document.getElementById('payBtn').textContent = period === 'monthly' ? 'Subscribe — $14.99/month' : 'Subscribe — $99/year';
+        }
+        
+        function processPayment() {
+            if (CONFIG.DEMO_MODE) { alert('Demo: Payment processed!'); finalize({ firstName: document.getElementById('firstName').value.trim(), lastName: document.getElementById('lastName').value.trim(), role: document.getElementById('userRole').value, institution: document.getElementById('institution').value.trim() }); }
+        }
+        
+        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
+        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
+        function login() { const email = document.getElementById('loginEmail').value, pw = document.getElementById('loginPassword').value; if (!email || !pw) { document.getElementById('loginError').textContent = 'Enter email and password.'; document.getElementById('loginError').className = 'message error'; return; } if (CONFIG.DEMO_MODE) { alert('Demo: Logged in!'); window.location.href = '../index.html'; } }
+        
+        document.addEventListener('DOMContentLoaded', () => { document.getElementById('consentFormLink').href = CONFIG.CONSENT_FORM_URL; });
     </script>
 </body>
 </html>
