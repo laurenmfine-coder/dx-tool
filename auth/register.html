@@ -120,7 +120,7 @@
                     <div class="plan-name">Free</div>
                     <div class="plan-price">
                         <span class="amount">$0</span>
-                        <span class="period">/forever</span>
+                        <span class="period"></span>
                     </div>
                     <ul class="plan-features">
                         <li>5 sample MechanismDx modules</li>
@@ -189,10 +189,20 @@
                 <div class="steps" id="stepIndicator"></div>
                 
                 <div class="section" id="sectionConsent">
-                    <div class="info-box purple"><span class="icon">📋</span><div><strong>Research Study Participation</strong><br>Complete the consent form first.</div></div>
+                    <div class="info-box purple"><span class="icon">📋</span><div><strong>Research Study Participation</strong><br>Complete the consent form to get free Pro access.</div></div>
                     <div id="consentError" class="message"></div>
+                    
+                    <!-- Student/Faculty Selection -->
+                    <div style="margin-bottom: 24px;">
+                        <label class="form-label" style="text-align: center; display: block;">I am a:</label>
+                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 8px;">
+                            <button type="button" id="btnStudent" onclick="selectResearchType('student')" style="flex: 1; max-width: 180px; padding: 14px 20px; border-radius: 12px; border: 2px solid #7c3aed; background: #7c3aed; color: white; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s;">🎓 Student</button>
+                            <button type="button" id="btnFaculty" onclick="selectResearchType('faculty')" style="flex: 1; max-width: 180px; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; background: white; color: #475569; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s;">👨‍⚕️ Faculty/Expert</button>
+                        </div>
+                    </div>
+                    
                     <div style="text-align: center; margin-bottom: 24px;">
-                        <p style="color: #475569; margin-bottom: 16px;">Have you completed the consent form?</p>
+                        <p style="color: #475569; margin-bottom: 16px;" id="consentInstructions">Complete the consent form, then return here with your code.</p>
                         <a href="#" target="_blank" id="consentFormLink" style="display: inline-block; background: #7c3aed; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-bottom: 16px;">📝 Complete Consent Form</a>
                         <p style="font-size: 13px; color: #94a3b8;">Opens in a new tab</p>
                     </div>
@@ -200,6 +210,7 @@
                         <div class="form-group">
                             <label class="form-label">Enter Your Consent Code</label>
                             <input type="text" id="consentCode" class="form-input" placeholder="CONSENT-XXXXX" style="text-align: center; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;">
+                            <p class="form-hint" id="consentCodeHint">You'll receive this code after completing the consent form</p>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="verifyConsentCode()">Verify Consent Code</button>
                     </div>
@@ -846,8 +857,60 @@
     </div>
     
     <script>
-        const CONFIG = { GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE', CONSENT_FORM_URL: 'YOUR_MICROSOFT_FORMS_URL_HERE', STUDY_PREFIX: 'DX01', DEMO_MODE: true, MONTHLY_PRICE: 14.99, ANNUAL_PRICE: 99 };
-        let state = { selectedPlan: null, currentSection: 0, verifiedEmail: null, verifiedConsentCode: null, generatedCode: null, billingPeriod: 'monthly' };
+        const CONFIG = { 
+            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec', 
+            // Consent forms for research track
+            STUDENT_CONSENT_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
+            FACULTY_CONSENT_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUNkdHME1VNVlSNDg2TUgyUkI5S1pUVUpXSy4u',
+            // Post-study surveys (for reference)
+            STUDENT_POST_SURVEY_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUM1NSVkRSSDNXSk42NEZZVzMxTTFHNFhOTy4u',
+            FACULTY_POST_SURVEY_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUMDdETkRRSUM3VFlaQkJINU1OT0JORUQ0Ri4u',
+            // Legacy - keep for backwards compatibility
+            CONSENT_FORM_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
+            STUDY_PREFIX: 'DX01', 
+            DEMO_MODE: true, 
+            MONTHLY_PRICE: 14.99, 
+            ANNUAL_PRICE: 99,
+            // Consent codes - must match what's in MS Forms completion messages
+            STUDENT_CONSENT_CODE: 'CONSENT-REASONDX-2026',
+            FACULTY_CONSENT_CODE: 'CONSENT-FACULTY-2026',
+            // Admin credentials - CHANGE THESE before going live!
+            ADMIN_EMAIL: 'lfine1@nova.edu',
+            ADMIN_PASSWORD: 'DxAdmin2026!'
+        };
+        let state = { selectedPlan: null, currentSection: 0, verifiedEmail: null, verifiedConsentCode: null, generatedCode: null, billingPeriod: 'monthly', researchType: 'student' };
+        
+        // Research type selection (student vs faculty)
+        function selectResearchType(type) {
+            state.researchType = type;
+            const btnStudent = document.getElementById('btnStudent');
+            const btnFaculty = document.getElementById('btnFaculty');
+            const consentLink = document.getElementById('consentFormLink');
+            const instructions = document.getElementById('consentInstructions');
+            const codeHint = document.getElementById('consentCodeHint');
+            
+            if (type === 'student') {
+                btnStudent.style.background = '#7c3aed';
+                btnStudent.style.color = 'white';
+                btnStudent.style.borderColor = '#7c3aed';
+                btnFaculty.style.background = 'white';
+                btnFaculty.style.color = '#475569';
+                btnFaculty.style.borderColor = '#e2e8f0';
+                consentLink.href = CONFIG.STUDENT_CONSENT_URL;
+                instructions.textContent = 'Complete the student consent form and pre-study survey, then return here with your code.';
+                codeHint.textContent = 'Student code: CONSENT-REASONDX-2026';
+            } else {
+                btnFaculty.style.background = '#7c3aed';
+                btnFaculty.style.color = 'white';
+                btnFaculty.style.borderColor = '#7c3aed';
+                btnStudent.style.background = 'white';
+                btnStudent.style.color = '#475569';
+                btnStudent.style.borderColor = '#e2e8f0';
+                consentLink.href = CONFIG.FACULTY_CONSENT_URL;
+                instructions.textContent = 'Complete the faculty consent form and survey, then return here with your code.';
+                codeHint.textContent = 'Faculty code: CONSENT-FACULTY-2026';
+            }
+        }
         
         function selectPlan(plan) {
             state.selectedPlan = plan;
@@ -971,9 +1034,35 @@
         
         function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
         function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
-        function login() { const email = document.getElementById('loginEmail').value, pw = document.getElementById('loginPassword').value; if (!email || !pw) { document.getElementById('loginError').textContent = 'Enter email and password.'; document.getElementById('loginError').className = 'message error'; return; } if (CONFIG.DEMO_MODE) { alert('Demo: Logged in!'); window.location.href = '../index.html'; } }
+        function login() { 
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase(); 
+            const pw = document.getElementById('loginPassword').value; 
+            if (!email || !pw) { 
+                document.getElementById('loginError').textContent = 'Enter email and password.'; 
+                document.getElementById('loginError').className = 'message error'; 
+                return; 
+            }
+            // Admin/Owner bypass
+            if (email === CONFIG.ADMIN_EMAIL.toLowerCase() && pw === CONFIG.ADMIN_PASSWORD) {
+                localStorage.setItem('reasondx_user', JSON.stringify({ 
+                    email: email, 
+                    name: 'Admin', 
+                    plan: 'admin', 
+                    isAdmin: true 
+                }));
+                window.location.href = '../index.html';
+                return;
+            }
+            if (CONFIG.DEMO_MODE) { 
+                alert('Demo: Logged in!'); 
+                window.location.href = '../index.html'; 
+            } 
+        }
         
-        document.addEventListener('DOMContentLoaded', () => { document.getElementById('consentFormLink').href = CONFIG.CONSENT_FORM_URL; });
+        document.addEventListener('DOMContentLoaded', () => { 
+            document.getElementById('consentFormLink').href = CONFIG.STUDENT_CONSENT_URL; 
+            selectResearchType('student');
+        });
     </script>
 </body>
 </html>
