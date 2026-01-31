@@ -232,6 +232,9 @@
         .modal-btn.secondary { background: #f4f4f5; color: #18181b; }
         
         @media (max-width: 900px) { .concept-panel { display: none; } }
+        
+        /* Hide the floating quick nav button on this page */
+        .dx-quick-nav { display: none !important; }
     </style>
         <link rel="stylesheet" href="dx-case-nav.css">
 </head>
@@ -307,9 +310,16 @@
     
     <div class="main">
         <div class="chat-panel">
+            <!-- Educational Disclaimer -->
+            <div id="educationalDisclaimer" style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 12px 16px; margin: 16px 24px 0 24px; font-size: 13px; color: #0369a1;">
+                <strong>📚 Educational Case Discussion</strong><br>
+                This is a simulated case discussion with a virtual faculty mentor — not an actual patient encounter. Practice your clinical reasoning by presenting and discussing the case as you would with an attending physician.
+                <button onclick="this.parentElement.style.display='none'" style="float:right; background:none; border:none; color:#0369a1; cursor:pointer; font-size:16px; margin-top:-20px;">✕</button>
+            </div>
             <div class="chat-messages" id="chatMessages"></div>
             <div class="input-area">
-                <div class="quick-actions" id="quickActions"></div>
+                <!-- Quick actions hidden by default - learners should think independently -->
+                <div class="quick-actions" id="quickActions" style="display:none;"></div>
                 <div class="input-row">
                     <input type="text" id="userInput" placeholder="Type or click 🎤 to speak..." onkeypress="if(event.key==='Enter')sendMessage()">
                     <button type="button" id="voiceBtn" onclick="VoiceInput.toggle('userInput')" style="width:44px;height:44px;border-radius:50%;border:1px solid #e4e4e7;background: var(--bg-card);cursor:pointer;font-size:1.3rem;" title="Click to speak"><span id="voiceIcon">🎤</span></button>
@@ -328,13 +338,33 @@
                         <div class="mentor-name" id="mentorName">Dr. Sarah Chen</div>
                         <div class="mentor-title" id="mentorTitle">Attending Physician</div>
                     </div>
+                    <button id="mentorInfoBtn" onclick="toggleMentorInfo()" style="background:#f3e8ff; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:14px;" title="About mentors">ℹ️</button>
                     <button id="rotateMentorBtn" onclick="rotateMentor()" style="display:none; background:#e5e7eb; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:14px;" title="Switch mentor">🔄</button>
                 </div>
                 <div class="mentor-tip" id="mentorTip">"Walk me through your thinking step by step."</div>
+                
+                <!-- Mentor Types Explanation (hidden by default) -->
+                <div id="mentorInfoPanel" style="display:none; background:#faf5ff; border-radius:8px; padding:12px; margin-top:12px; font-size:12px;">
+                    <strong style="color:#7c3aed;">About Your Mentors</strong>
+                    <p style="margin:8px 0 6px; color:#6b7280;">Each mentor has a different teaching style:</p>
+                    <ul style="margin:0; padding-left:16px; color:#6b7280; line-height:1.6;">
+                        <li><strong>Socratic</strong> — Guides with questions</li>
+                        <li><strong>Direct</strong> — Gives clear explanations</li>
+                        <li><strong>Specialty-focused</strong> — Expert in specific areas</li>
+                        <li><strong>Supportive</strong> — Encouraging approach</li>
+                    </ul>
+                    <p style="margin:8px 0 0; color:#6b7280; font-style:italic;">Click 🔄 to try a different mentor style.</p>
+                </div>
             </div>
             
-            <div class="panel-header">📊 Concept Map</div>
-            <div id="conceptMap"></div>
+            <!-- Concept Map - Hidden by default, toggle to view -->
+            <div class="panel-header" style="cursor:pointer;" onclick="toggleConceptMap()">
+                📊 Concept Map <span id="conceptMapToggle" style="float:right; font-size:12px; color:#71717a;">▶ Show</span>
+            </div>
+            <div id="conceptMapContainer" style="display:none;">
+                <div id="conceptMap"></div>
+                <p style="padding:8px 16px; font-size:11px; color:#71717a; font-style:italic;">Use this to check your reasoning progress after discussing the case.</p>
+            </div>
             <div id="parallelCaseIndicator"></div>
             
             <div class="panel-header">📈 Session Stats</div>
@@ -374,32 +404,20 @@
     <script src="../dx-scoring.js"></script>
     
     <!-- Load all case files (order matters - merged.js must be last) -->
-    <script src="coachdx-cases-with-guidelines.js"></script>
-    <script src="coachdx-nursing-cases.js"></script>
-    <script src="coachdx-ems-cases.js"></script>
-    <script src="coachdx-rt-cases.js"></script>
-    <script src="coachdx-pt-cases.js"></script>
-    <script src="coachdx-pharmd-cases.js"></script>
-    <script src="coachdx-dental-cases.js"></script>
-    <script src="coachdx-omfs-cases.js"></script>
-    <script src="coachdx-podiatry-cases.js"></script>
-    <script src="coachdx-resident-cases.js"></script>
-    <script src="coachdx-interprofessional-cases.js"></script>
-    <script src="coachdx-specialty-cases.js"></script>
-    <script src="coachdx-allergy-cases.js"></script>
-    <script src="coachdx-critical-care-cases.js"></script>
-    <script src="coachdx-nephrology-cases.js"></script>
-    <script src="coachdx-gi-cases.js"></script>
-    <script src="coachdx-heme-onc-cases.js"></script>
-    <script src="coachdx-neurology-cases.js"></script>
-    <script src="coachdx-pulmonology-cases.js"></script>
-    <script src="coachdx-cardiology-cases.js"></script>
-    <script src="coachdx-endocrine-cases.js"></script>
-    <script src="coachdx-id-cases.js"></script>
-    <script src="coachdx-toxicology-cases.js"></script>
-    <script src="coachdx-obgyn-emergency-cases.js"></script>
-    <script src="dx-related-topics-sidebar.js"></script>
-    <script src="coachdx-cases-merged.js"></script>
+    <script src="../CoachDx/coachdx-cases-with-guidelines.js"></script>
+    <script src="../CoachDx/coachdx-nursing-cases.js"></script>
+    <script src="../CoachDx/coachdx-ems-cases.js"></script>
+    <script src="../CoachDx/coachdx-rt-cases.js"></script>
+    <script src="../CoachDx/coachdx-pt-cases.js"></script>
+    <script src="../CoachDx/coachdx-pharmd-cases.js"></script>
+    <script src="../CoachDx/coachdx-dental-cases.js"></script>
+    <script src="../CoachDx/coachdx-omfs-cases.js"></script>
+    <script src="../CoachDx/coachdx-podiatry-cases.js"></script>
+    <script src="../CoachDx/coachdx-resident-cases.js"></script>
+    <script src="../CoachDx/coachdx-interprofessional-cases.js"></script>
+    <script src="../CoachDx/coachdx-specialty-cases.js"></script>
+    <script src="../CoachDx/coachdx-allergy-cases.js"></script>
+    <script src="../CoachDx/coachdx-cases-merged.js"></script>
     
     <script>
     // ============================================================
@@ -539,6 +557,25 @@
     function rotateMentor() {
         currentMentorIndex++;
         updateMentorCard();
+    }
+    
+    // Toggle mentor info panel
+    function toggleMentorInfo() {
+        const panel = document.getElementById('mentorInfoPanel');
+        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    }
+    
+    // Toggle concept map visibility
+    function toggleConceptMap() {
+        const container = document.getElementById('conceptMapContainer');
+        const toggle = document.getElementById('conceptMapToggle');
+        if (container.style.display === 'none') {
+            container.style.display = 'block';
+            toggle.textContent = '▼ Hide';
+        } else {
+            container.style.display = 'none';
+            toggle.textContent = '▶ Show';
+        }
     }
     
     // Get default case for profession
