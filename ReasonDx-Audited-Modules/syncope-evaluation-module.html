@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Syncope Evaluation</title>
+  <style>
+    :root{--primary:#EF4444;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6;--purple:#8B5CF6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0a1a1a,#1a2e2e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(239,68,68,0.1);border-radius:1rem;border:1px solid rgba(239,68,68,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(239,68,68,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--purple);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.case-box{background:rgba(8,145,178,0.15);border:1px solid var(--secondary);border-radius:0.75rem;padding:1.25rem;margin:1.5rem 0}.decision-btn{display:inline-block;padding:0.5rem 1rem;margin:0.25rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.decision-btn:hover,.decision-btn.selected{background:var(--primary)}.feedback{padding:1rem;border-radius:0.5rem;margin-top:1rem;display:none}.feedback.correct{background:rgba(16,185,129,0.2);border:1px solid var(--success);display:block}.feedback.incorrect{background:rgba(239,68,68,0.2);border:1px solid var(--danger);display:block}.hidden{display:none}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💫 Syncope Evaluation</h1>
+      <p style="color:#9CA3AF">Differential • Risk Stratification • Workup Algorithm</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('causes')">Causes</div>
+      <div class="nav-tab" onclick="showTab('workup')">Workup</div>
+      <div class="nav-tab" onclick="showTab('risk')">Risk Scores</div>
+      <div class="nav-tab" onclick="showTab('crt')">Case Trainer</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Definition & Approach</h2>
+        
+        <div class="key-box">
+          <strong>Syncope</strong> = Transient loss of consciousness (TLOC) due to cerebral hypoperfusion, with rapid onset, short duration, and spontaneous complete recovery.<br><br>
+          <strong>Key question:</strong> Is this cardiac or non-cardiac?
+        </div>
+
+        <h3>Syncope vs Mimics</h3>
+        <table>
+          <tr><th>True Syncope</th><th>Not Syncope (Mimics)</th></tr>
+          <tr>
+            <td>Brief (seconds to minutes)<br>Spontaneous recovery<br>No postictal confusion</td>
+            <td>Seizure (postictal confusion, tongue biting, incontinence)<br>Hypoglycemia<br>Stroke/TIA<br>Psychogenic pseudosyncope</td>
+          </tr>
+        </table>
+
+        <h3>Categories of Syncope</h3>
+        <div class="mnemonic">
+          <strong>Syncope Categories: "CRONic"</strong><br>
+          <strong>C</strong>ardiac • <strong>R</strong>eflex (neurally mediated) • <strong>O</strong>rthostatic • <strong>N</strong>eurologic (rare, mostly mimics)
+        </div>
+
+        <table>
+          <tr><th>Category</th><th>%</th><th>Examples</th></tr>
+          <tr><td><strong>Reflex/Neurocardiogenic</strong></td><td>~45%</td><td>Vasovagal, situational, carotid sinus</td></tr>
+          <tr><td><strong>Cardiac</strong></td><td>~15-20%</td><td>Arrhythmia, structural heart disease</td></tr>
+          <tr><td><strong>Orthostatic</strong></td><td>~10%</td><td>Volume depletion, autonomic failure, medications</td></tr>
+          <tr><td><strong>Unknown</strong></td><td>~35%</td><td>Despite workup</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAUSES -->
+    <div id="causes" class="tab-content">
+      <div class="section">
+        <h2>📋 Causes of Syncope</h2>
+
+        <h3>Reflex (Neurally Mediated)</h3>
+        <table>
+          <tr><th>Type</th><th>Trigger</th><th>Features</th></tr>
+          <tr><td><strong>Vasovagal</strong></td><td>Prolonged standing, heat, emotional stress, pain</td><td>Prodrome: lightheadedness, warmth, nausea, diaphoresis; young healthy patients</td></tr>
+          <tr><td><strong>Situational</strong></td><td>Coughing, micturition, defecation, swallowing</td><td>Occurs during or after specific activity</td></tr>
+          <tr><td><strong>Carotid sinus</strong></td><td>Head turning, tight collar, shaving</td><td>Elderly; carotid sinus hypersensitivity</td></tr>
+        </table>
+
+        <h3>Cardiac</h3>
+        <div class="danger-box">
+          <strong>Cardiac syncope has highest mortality risk!</strong>
+        </div>
+        <table>
+          <tr><th>Arrhythmic</th><th>Structural</th></tr>
+          <tr>
+            <td>
+              Bradycardia: Sinus node dysfunction, AV block<br>
+              Tachycardia: VT, SVT with rapid rate<br>
+              Inherited: Long QT, Brugada, WPW<br>
+              Pacemaker malfunction
+            </td>
+            <td>
+              Aortic stenosis<br>
+              HOCM (hypertrophic cardiomyopathy)<br>
+              Pulmonary embolism<br>
+              Cardiac tamponade<br>
+              Aortic dissection<br>
+              MI
+            </td>
+          </tr>
+        </table>
+
+        <h3>Orthostatic Hypotension</h3>
+        <div class="info-box">
+          <strong>Definition:</strong> Drop in SBP ≥20 mmHg or DBP ≥10 mmHg within 3 minutes of standing<br><br>
+          <strong>Causes:</strong>
+          <ul>
+            <li>Volume depletion (bleeding, dehydration)</li>
+            <li>Medications (antihypertensives, diuretics, nitrates, α-blockers, antidepressants)</li>
+            <li>Autonomic dysfunction (diabetes, Parkinson's, MSA)</li>
+            <li>Prolonged bed rest</li>
+          </ul>
+        </div>
+
+        <h3>Red Flags for Cardiac Syncope</h3>
+        <div class="danger-box">
+          <strong>High-risk features suggesting cardiac cause:</strong>
+          <ul>
+            <li>Syncope during exertion</li>
+            <li>Syncope while supine or sitting</li>
+            <li>Preceded by palpitations</li>
+            <li>Family history of sudden cardiac death or inherited cardiac disease</li>
+            <li>Known structural heart disease or heart failure</li>
+            <li>Abnormal ECG</li>
+            <li>No prodrome (sudden onset)</li>
+            <li>Age >60 with no clear trigger</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKUP -->
+    <div id="workup" class="tab-content">
+      <div class="section">
+        <h2>🔬 Syncope Workup</h2>
+
+        <h3>Initial Evaluation (All Patients)</h3>
+        <div class="key-box">
+          <strong>Core evaluation:</strong>
+          <ol>
+            <li><strong>History</strong> - triggers, prodrome, position, witnesses, recovery</li>
+            <li><strong>Physical exam</strong> - vitals, orthostatic BP, cardiac exam, neuro exam</li>
+            <li><strong>ECG</strong> - ALL patients (arrhythmia, ischemia, conduction, intervals)</li>
+          </ol>
+          <strong>This alone establishes diagnosis in ~50% of cases!</strong>
+        </div>
+
+        <h3>ECG Findings to Look For</h3>
+        <table>
+          <tr><th>Finding</th><th>Consider</th></tr>
+          <tr><td>Prolonged QTc (>450ms men, >460ms women)</td><td>Long QT syndrome</td></tr>
+          <tr><td>Short PR, delta wave</td><td>WPW</td></tr>
+          <tr><td>Brugada pattern (coved ST in V1-V3)</td><td>Brugada syndrome</td></tr>
+          <tr><td>AV block (2nd/3rd degree)</td><td>Conduction disease</td></tr>
+          <tr><td>Bifascicular block</td><td>Risk for complete heart block</td></tr>
+          <tr><td>Q waves, ST changes</td><td>Ischemia/prior MI</td></tr>
+          <tr><td>ARVD pattern (epsilon waves, TWI V1-V3)</td><td>Arrhythmogenic RV cardiomyopathy</td></tr>
+          <tr><td>LVH with strain</td><td>HOCM, aortic stenosis</td></tr>
+        </table>
+
+        <h3>Additional Testing</h3>
+        <table>
+          <tr><th>Test</th><th>Indication</th></tr>
+          <tr><td><strong>Echocardiogram</strong></td><td>Suspected structural heart disease, abnormal ECG, exertional syncope</td></tr>
+          <tr><td><strong>Holter/event monitor</strong></td><td>Suspected arrhythmia; frequent episodes</td></tr>
+          <tr><td><strong>Loop recorder (ILR)</strong></td><td>Recurrent unexplained syncope with infrequent episodes</td></tr>
+          <tr><td><strong>Tilt table test</strong></td><td>Recurrent vasovagal syncope, atypical presentation</td></tr>
+          <tr><td><strong>EP study</strong></td><td>High risk for arrhythmia, abnormal ECG, structural heart disease</td></tr>
+          <tr><td><strong>Carotid sinus massage</strong></td><td>Elderly with syncope during head turning</td></tr>
+          <tr><td><strong>Stress test</strong></td><td>Exertional syncope, suspected ischemia</td></tr>
+        </table>
+
+        <h3>What NOT to Order Routinely</h3>
+        <div class="info-box">
+          <strong>Low yield tests:</strong>
+          <ul>
+            <li>CT head (unless head trauma or focal neuro signs)</li>
+            <li>EEG (unless seizure suspected)</li>
+            <li>Carotid ultrasound (carotid stenosis doesn't cause syncope)</li>
+            <li>Extensive lab panel (CBC, BMP usually sufficient)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- RISK -->
+    <div id="risk" class="tab-content">
+      <div class="section">
+        <h2>📊 Risk Stratification</h2>
+
+        <h3>San Francisco Syncope Rule (CHESS)</h3>
+        <div class="info-box">
+          Predicts 7-day serious outcomes. If ANY positive → higher risk.
+          <ul>
+            <li><strong>C</strong>HF history</li>
+            <li><strong>H</strong>ematocrit <30%</li>
+            <li><strong>E</strong>CG abnormal</li>
+            <li><strong>S</strong>hortness of breath</li>
+            <li><strong>S</strong>ystolic BP <90 at triage</li>
+          </ul>
+        </div>
+
+        <h3>Canadian Syncope Risk Score</h3>
+        <table>
+          <tr><th>Factor</th><th>Points</th></tr>
+          <tr><td>Predisposition to vasovagal (triggers, prodrome)</td><td>-1</td></tr>
+          <tr><td>Heart disease history</td><td>+1</td></tr>
+          <tr><td>Any SBP reading <90 or >180 mmHg</td><td>+2</td></tr>
+          <tr><td>Elevated troponin</td><td>+2</td></tr>
+          <tr><td>Abnormal QRS axis</td><td>+1</td></tr>
+          <tr><td>QRS >130ms</td><td>+1</td></tr>
+          <tr><td>QTc >480ms</td><td>+2</td></tr>
+          <tr><td>ED diagnosis: cardiac syncope</td><td>+2</td></tr>
+          <tr><td>ED diagnosis: vasovagal</td><td>-2</td></tr>
+        </table>
+        <p><strong>Score ≤-1:</strong> Very low risk (0.4%) → consider discharge<br>
+        <strong>Score ≥3:</strong> Higher risk (~10%+) → admission/observation</p>
+
+        <h3>Disposition Guidelines</h3>
+        <div class="success-box">
+          <strong>Safe for Discharge:</strong>
+          <ul>
+            <li>Classic vasovagal with clear trigger and prodrome</li>
+            <li>Situational syncope</li>
+            <li>Orthostatic hypotension (correctable cause)</li>
+            <li>Normal ECG, no cardiac history, young patient</li>
+          </ul>
+        </div>
+        <div class="danger-box">
+          <strong>Consider Admission:</strong>
+          <ul>
+            <li>Abnormal ECG</li>
+            <li>Known or suspected cardiac disease</li>
+            <li>Exertional syncope</li>
+            <li>Syncope causing injury</li>
+            <li>Family history of sudden death</li>
+            <li>Elderly with unexplained syncope</li>
+            <li>Frequent recurrent episodes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRT -->
+    <div id="crt" class="tab-content">
+      <div class="section">
+        <h2>🎯 Clinical Reasoning Trainer</h2>
+
+        <div class="case-box">
+          <h4>Case: 22-year-old with Syncope in Church</h4>
+          <p>A 22-year-old woman fainted while standing in church. She reports feeling hot, lightheaded, and nauseated before losing consciousness. She was out for ~20 seconds and recovered quickly with no confusion. No palpitations, chest pain, or exertional symptoms. No family history of sudden death. Vitals normal, exam normal, ECG normal.</p>
+
+          <div id="crt1">
+            <p><strong>Based on the history and presentation, what is the most likely diagnosis?</strong></p>
+            <div class="decision-btn" onclick="crtAnswer(1,'a')">Cardiac arrhythmia</div>
+            <div class="decision-btn" onclick="crtAnswer(1,'b')">Vasovagal syncope</div>
+            <div class="decision-btn" onclick="crtAnswer(1,'c')">Seizure</div>
+            <div class="decision-btn" onclick="crtAnswer(1,'d')">Orthostatic hypotension</div>
+            <div class="feedback" id="crt1-fb"></div>
+          </div>
+
+          <div id="crt2" class="hidden">
+            <p><strong>What additional workup is needed?</strong></p>
+            <div class="decision-btn" onclick="crtAnswer(2,'a')">Echocardiogram, Holter monitor, EP study</div>
+            <div class="decision-btn" onclick="crtAnswer(2,'b')">CT head and EEG</div>
+            <div class="decision-btn" onclick="crtAnswer(2,'c')">No additional workup needed at this time</div>
+            <div class="decision-btn" onclick="crtAnswer(2,'d')">Cardiac catheterization</div>
+            <div class="feedback" id="crt2-fb"></div>
+          </div>
+
+          <div id="crt3" class="hidden">
+            <p><strong>What is the appropriate disposition?</strong></p>
+            <div class="decision-btn" onclick="crtAnswer(3,'a')">Admit for cardiac monitoring</div>
+            <div class="decision-btn" onclick="crtAnswer(3,'b')">Discharge with education and reassurance</div>
+            <div class="decision-btn" onclick="crtAnswer(3,'c')">Observation unit for 23 hours</div>
+            <div class="feedback" id="crt3-fb"></div>
+          </div>
+
+          <div id="crt-summary" class="hidden">
+            <div class="success-box">
+              <strong>Summary:</strong> This is classic vasovagal syncope: young patient, clear trigger (prolonged standing in warm environment), prodrome (warmth, lightheadedness, nausea), brief episode with rapid recovery, no concerning features, normal ECG. No additional workup needed. Educate on triggers, avoidance, and counterpressure maneuvers. Safe for discharge.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000499" target="_blank">🔗 2017 ACC/AHA/HRS Syncope Guidelines</a>
+          <div class="citation">Shen WK, et al. Circulation. 2017;136:e60-e122</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK526027/" target="_blank">🔗 NCBI Bookshelf - Syncope</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on 2017 ACC/AHA/HRS Guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Which feature is MOST concerning for cardiac syncope?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Preceded by nausea and warmth</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Occurred during exercise</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Triggered by prolonged standing</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Followed by rapid complete recovery</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Exertional syncope is a red flag for cardiac causes (HOCM, aortic stenosis, arrhythmia). Prodromal symptoms (nausea, warmth) and clear triggers suggest benign vasovagal syncope.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What test should ALL patients with syncope receive?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. ECG</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. CT head</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Echocardiogram</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Tilt table test</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> An ECG is indicated for ALL patients with syncope to screen for arrhythmias, conduction abnormalities, and inherited conditions. History + exam + ECG establishes diagnosis in ~50% of cases.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> What defines orthostatic hypotension?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. SBP drop ≥10 mmHg on standing</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. SBP drop ≥20 mmHg or DBP drop ≥10 mmHg within 3 minutes of standing</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Any symptomatic BP drop</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. SBP <90 mmHg on standing</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> Orthostatic hypotension is defined as a drop in SBP ≥20 mmHg OR DBP ≥10 mmHg within 3 minutes of standing from supine position.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> A 70-year-old man has syncope while shaving his neck. What test would be most helpful?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Tilt table test</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Carotid sinus massage</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. CT head</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. EEG</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> Syncope triggered by neck manipulation (shaving, tight collar, head turning) in an elderly patient suggests carotid sinus hypersensitivity. Carotid sinus massage (with continuous ECG monitoring) can confirm this.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which of the following is NOT a typical feature of vasovagal syncope?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. Prodrome of nausea and diaphoresis</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Triggered by prolonged standing</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">C. Occurring while seated at rest</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Rapid recovery without confusion</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: C.</strong> Vasovagal syncope typically has triggers (standing, heat, stress, pain) and prodrome. Syncope occurring while seated at rest without trigger or prodrome should raise concern for cardiac causes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+    const crtAns={1:{correct:'b',fb:{a:'No palpitations or red flags; ECG normal.',b:'Correct! Classic vasovagal: young patient, prodrome (hot, lightheaded, nauseous), clear trigger (standing in warm environment), rapid recovery.',c:'Seizures have postictal confusion, often incontinence/tongue biting.',d:'Orthostatic would show BP drop on standing.'}},2:{correct:'c',fb:{a:'Not indicated for classic vasovagal with normal ECG and no red flags.',b:'CT/EEG not indicated without head trauma or seizure features.',c:'Correct! History + exam + normal ECG establishes vasovagal syncope. No further workup needed for a first typical episode.',d:'Not indicated.'}},3:{correct:'b',fb:{a:'Admission not needed for low-risk vasovagal syncope.',b:'Correct! Classic vasovagal syncope with no red flags is safe for discharge with education about triggers and counterpressure maneuvers.',c:'Observation not needed for typical low-risk presentation.'}}};
+    function crtAnswer(q,ans){const data=crtAns[q];const fb=document.getElementById('crt'+q+'-fb');event.target.classList.add('selected');fb.innerHTML=data.fb[ans];fb.className='feedback '+(ans===data.correct?'correct':'incorrect');if(ans===data.correct){setTimeout(()=>{if(q<3){document.getElementById('crt'+(q+1)).classList.remove('hidden')}else{document.getElementById('crt-summary').classList.remove('hidden')}},1000)}}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Syncope Evaluation"
+         data-key-points="🎯 Definition & Approach, 📋 Causes of Syncope, 🔬 Syncope Workup, 📊 Risk Stratification, 🎯 Clinical Reasoning Trainer, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Syncope vs Mimics, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

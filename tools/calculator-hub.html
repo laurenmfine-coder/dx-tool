@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Calculator Hub | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        
+        .header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            padding: 32px 24px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        
+        .nav-tabs {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+        }
+        .nav-tab {
+            padding: 14px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+        .nav-tab:hover { color: var(--text-primary); }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .content { max-width: 800px; margin: 0 auto; padding: 24px; }
+        
+        .calc-section { display: none; }
+        .calc-section.active { display: block; }
+        
+        .calc-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .calc-card h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+        .calc-card .subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 16px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+        .input-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .input-row input {
+            flex: 1;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+        
+        .calc-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+        }
+        .calc-btn:hover { background: var(--primary-dark); }
+        
+        .result-box {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .result-box.show { display: block; }
+        .result-box .result-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #047857;
+            margin-bottom: 4px;
+        }
+        .result-box .result-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #047857;
+        }
+        .result-box .result-interpretation {
+            font-size: 13px;
+            color: #065f46;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #a7f3d0;
+        }
+        
+        .formula-display {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        
+        .info-box {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #92400e;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🧮 Clinical Calculator Hub</h1>
+        <p>Essential formulas for clinical reasoning</p>
+    </header>
+
+    <nav class="nav-tabs">
+        <button class="nav-tab active" data-section="renal">Renal</button>
+        <button class="nav-tab" data-section="acidbase">Acid-Base</button>
+        <button class="nav-tab" data-section="electrolytes">Electrolytes</button>
+        <button class="nav-tab" data-section="respiratory">Respiratory</button>
+        <button class="nav-tab" data-section="cardio">Cardio</button>
+        <button class="nav-tab" data-section="other">Other</button>
+    </nav>
+
+    <main class="content">
+        <!-- RENAL SECTION -->
+        <div class="calc-section active" id="renal">
+            <!-- CrCl Calculator -->
+            <div class="calc-card">
+                <h3>Creatinine Clearance (Cockcroft-Gault)</h3>
+                <p class="subtitle">Estimates CrCl for drug dosing adjustments</p>
+                <div class="formula-display">CrCl = [(140 - age) × weight] / (72 × Cr) × 0.85 if female</div>
+                
+                <div class="input-group">
+                    <label>Age (years)</label>
+                    <input type="number" id="cg-age" placeholder="e.g., 65">
+                </div>
+                <div class="input-group">
+                    <label>Weight (kg)</label>
+                    <input type="number" id="cg-weight" placeholder="e.g., 70">
+                </div>
+                <div class="input-group">
+                    <label>Serum Creatinine (mg/dL)</label>
+                    <input type="number" id="cg-cr" step="0.1" placeholder="e.g., 1.2">
+                </div>
+                <div class="input-group">
+                    <label>Sex</label>
+                    <select id="cg-sex">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <button class="calc-btn" onclick="calcCrCl()">Calculate CrCl</button>
+                <div class="result-box" id="crcl-result">
+                    <div class="result-label">Creatinine Clearance</div>
+                    <div class="result-value"><span id="crcl-value"></span> mL/min</div>
+                    <div class="result-interpretation" id="crcl-interp"></div>
+                </div>
+            </div>
+
+            <!-- FENa Calculator -->
+            <div class="calc-card">
+                <h3>Fractional Excretion of Sodium (FENa)</h3>
+                <p class="subtitle">Differentiates pre-renal from intrinsic AKI</p>
+                <div class="formula-display">FENa = (UNa × PCr) / (PNa × UCr) × 100</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Urine Na (mEq/L)</label>
+                        <input type="number" id="fena-una" placeholder="UNa">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Plasma Cr (mg/dL)</label>
+                        <input type="number" id="fena-pcr" step="0.1" placeholder="PCr">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Plasma Na (mEq/L)</label>
+                        <input type="number" id="fena-pna" placeholder="PNa">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Urine Cr (mg/dL)</label>
+                        <input type="number" id="fena-ucr" placeholder="UCr">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcFENa()">Calculate FENa</button>
+                <div class="result-box" id="fena-result">
+                    <div class="result-label">FENa</div>
+                    <div class="result-value"><span id="fena-value"></span>%</div>
+                    <div class="result-interpretation" id="fena-interp"></div>
+                </div>
+                <div class="info-box">⚠️ FENa unreliable with diuretics — use FEUrea instead</div>
+            </div>
+
+            <!-- BUN:Cr Ratio -->
+            <div class="calc-card">
+                <h3>BUN:Creatinine Ratio</h3>
+                <p class="subtitle">Helps differentiate causes of AKI</p>
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>BUN (mg/dL)</label>
+                        <input type="number" id="buncr-bun" placeholder="BUN">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Creatinine (mg/dL)</label>
+                        <input type="number" id="buncr-cr" step="0.1" placeholder="Cr">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcBUNCr()">Calculate Ratio</button>
+                <div class="result-box" id="buncr-result">
+                    <div class="result-label">BUN:Cr Ratio</div>
+                    <div class="result-value"><span id="buncr-value"></span>:1</div>
+                    <div class="result-interpretation" id="buncr-interp"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACID-BASE SECTION -->
+        <div class="calc-section" id="acidbase">
+            <!-- Anion Gap -->
+            <div class="calc-card">
+                <h3>Anion Gap</h3>
+                <p class="subtitle">Evaluate metabolic acidosis</p>
+                <div class="formula-display">AG = Na - (Cl + HCO3) | Normal: 8-12</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Na (mEq/L)</label>
+                        <input type="number" id="ag-na" placeholder="Na">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Cl (mEq/L)</label>
+                        <input type="number" id="ag-cl" placeholder="Cl">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>HCO3 (mEq/L)</label>
+                        <input type="number" id="ag-hco3" placeholder="HCO3">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcAnionGap()">Calculate Anion Gap</button>
+                <div class="result-box" id="ag-result">
+                    <div class="result-label">Anion Gap</div>
+                    <div class="result-value"><span id="ag-value"></span> mEq/L</div>
+                    <div class="result-interpretation" id="ag-interp"></div>
+                </div>
+            </div>
+
+            <!-- Delta-Delta -->
+            <div class="calc-card">
+                <h3>Delta-Delta Ratio</h3>
+                <p class="subtitle">Identify mixed acid-base disorders in HAGMA</p>
+                <div class="formula-display">Δ/Δ = (AG - 12) / (24 - HCO3)</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Anion Gap</label>
+                        <input type="number" id="dd-ag" placeholder="AG">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>HCO3 (mEq/L)</label>
+                        <input type="number" id="dd-hco3" placeholder="HCO3">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcDeltaDelta()">Calculate Δ/Δ</button>
+                <div class="result-box" id="dd-result">
+                    <div class="result-label">Delta-Delta Ratio</div>
+                    <div class="result-value"><span id="dd-value"></span></div>
+                    <div class="result-interpretation" id="dd-interp"></div>
+                </div>
+            </div>
+
+            <!-- Winter's Formula -->
+            <div class="calc-card">
+                <h3>Winter's Formula</h3>
+                <p class="subtitle">Expected pCO2 compensation in metabolic acidosis</p>
+                <div class="formula-display">Expected pCO2 = 1.5 × HCO3 + 8 (±2)</div>
+                
+                <div class="input-group">
+                    <label>HCO3 (mEq/L)</label>
+                    <input type="number" id="winter-hco3" placeholder="HCO3">
+                </div>
+                <div class="input-group">
+                    <label>Measured pCO2 (mmHg) — optional</label>
+                    <input type="number" id="winter-pco2" placeholder="Actual pCO2">
+                </div>
+                <button class="calc-btn" onclick="calcWinter()">Calculate Expected pCO2</button>
+                <div class="result-box" id="winter-result">
+                    <div class="result-label">Expected pCO2</div>
+                    <div class="result-value"><span id="winter-value"></span> mmHg</div>
+                    <div class="result-interpretation" id="winter-interp"></div>
+                </div>
+            </div>
+
+            <!-- Osmolar Gap -->
+            <div class="calc-card">
+                <h3>Serum Osmolality & Osmolar Gap</h3>
+                <p class="subtitle">Detect toxic alcohols (methanol, ethylene glycol)</p>
+                <div class="formula-display">Calc Osm = 2×Na + Glucose/18 + BUN/2.8 | Gap = Measured - Calculated</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Na (mEq/L)</label>
+                        <input type="number" id="osm-na" placeholder="Na">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Glucose (mg/dL)</label>
+                        <input type="number" id="osm-glu" placeholder="Glucose">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>BUN (mg/dL)</label>
+                        <input type="number" id="osm-bun" placeholder="BUN">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Measured Osmolality (mOsm/kg) — optional for gap</label>
+                    <input type="number" id="osm-measured" placeholder="Measured Osm">
+                </div>
+                <button class="calc-btn" onclick="calcOsm()">Calculate Osmolality</button>
+                <div class="result-box" id="osm-result">
+                    <div class="result-label">Calculated Osmolality</div>
+                    <div class="result-value"><span id="osm-value"></span> mOsm/kg</div>
+                    <div class="result-interpretation" id="osm-interp"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ELECTROLYTES SECTION -->
+        <div class="calc-section" id="electrolytes">
+            <!-- Corrected Calcium -->
+            <div class="calc-card">
+                <h3>Corrected Calcium</h3>
+                <p class="subtitle">Adjusts total calcium for albumin level</p>
+                <div class="formula-display">Corrected Ca = Measured Ca + 0.8 × (4 - Albumin)</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Total Calcium (mg/dL)</label>
+                        <input type="number" id="ca-total" step="0.1" placeholder="Ca">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Albumin (g/dL)</label>
+                        <input type="number" id="ca-alb" step="0.1" placeholder="Albumin">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcCorrectedCa()">Calculate Corrected Ca</button>
+                <div class="result-box" id="ca-result">
+                    <div class="result-label">Corrected Calcium</div>
+                    <div class="result-value"><span id="ca-value"></span> mg/dL</div>
+                    <div class="result-interpretation" id="ca-interp"></div>
+                </div>
+            </div>
+
+            <!-- Corrected Sodium -->
+            <div class="calc-card">
+                <h3>Corrected Sodium (for Hyperglycemia)</h3>
+                <p class="subtitle">True sodium in setting of elevated glucose</p>
+                <div class="formula-display">Corrected Na = Measured Na + 1.6 × [(Glucose - 100) / 100]</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Measured Na (mEq/L)</label>
+                        <input type="number" id="na-measured" placeholder="Na">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Glucose (mg/dL)</label>
+                        <input type="number" id="na-glu" placeholder="Glucose">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcCorrectedNa()">Calculate Corrected Na</button>
+                <div class="result-box" id="na-result">
+                    <div class="result-label">Corrected Sodium</div>
+                    <div class="result-value"><span id="na-value"></span> mEq/L</div>
+                    <div class="result-interpretation" id="na-interp"></div>
+                </div>
+            </div>
+
+            <!-- Free Water Deficit -->
+            <div class="calc-card">
+                <h3>Free Water Deficit</h3>
+                <p class="subtitle">Calculate replacement for hypernatremia</p>
+                <div class="formula-display">Deficit = TBW × [(Na/140) - 1] | TBW = weight × 0.6 (male) or 0.5 (female)</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Serum Na (mEq/L)</label>
+                        <input type="number" id="fwd-na" placeholder="Na">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Weight (kg)</label>
+                        <input type="number" id="fwd-wt" placeholder="Weight">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Sex</label>
+                        <select id="fwd-sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcFWD()">Calculate Deficit</button>
+                <div class="result-box" id="fwd-result">
+                    <div class="result-label">Free Water Deficit</div>
+                    <div class="result-value"><span id="fwd-value"></span> L</div>
+                    <div class="result-interpretation" id="fwd-interp"></div>
+                </div>
+            </div>
+
+            <!-- Transtubular K Gradient -->
+            <div class="calc-card">
+                <h3>Transtubular Potassium Gradient (TTKG)</h3>
+                <p class="subtitle">Assesses renal K handling in hyper/hypokalemia</p>
+                <div class="formula-display">TTKG = (UK / PK) / (UOsm / POsm)</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Urine K (mEq/L)</label>
+                        <input type="number" id="ttkg-uk" placeholder="UK">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Plasma K (mEq/L)</label>
+                        <input type="number" id="ttkg-pk" step="0.1" placeholder="PK">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Urine Osm (mOsm/kg)</label>
+                        <input type="number" id="ttkg-uosm" placeholder="UOsm">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Plasma Osm (mOsm/kg)</label>
+                        <input type="number" id="ttkg-posm" placeholder="POsm">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcTTKG()">Calculate TTKG</button>
+                <div class="result-box" id="ttkg-result">
+                    <div class="result-label">TTKG</div>
+                    <div class="result-value"><span id="ttkg-value"></span></div>
+                    <div class="result-interpretation" id="ttkg-interp"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESPIRATORY SECTION -->
+        <div class="calc-section" id="respiratory">
+            <!-- A-a Gradient -->
+            <div class="calc-card">
+                <h3>A-a Gradient</h3>
+                <p class="subtitle">Alveolar-arterial oxygen gradient</p>
+                <div class="formula-display">A-a = PAO2 - PaO2 | PAO2 = FiO2×(Patm-47) - PaCO2/0.8 | Normal = Age/4 + 4</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>PaO2 (mmHg)</label>
+                        <input type="number" id="aa-pao2" placeholder="PaO2">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>PaCO2 (mmHg)</label>
+                        <input type="number" id="aa-paco2" placeholder="PaCO2">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>FiO2 (%)</label>
+                        <input type="number" id="aa-fio2" value="21" placeholder="FiO2">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Age (years) — for normal comparison</label>
+                    <input type="number" id="aa-age" placeholder="Age">
+                </div>
+                <button class="calc-btn" onclick="calcAaGradient()">Calculate A-a Gradient</button>
+                <div class="result-box" id="aa-result">
+                    <div class="result-label">A-a Gradient</div>
+                    <div class="result-value"><span id="aa-value"></span> mmHg</div>
+                    <div class="result-interpretation" id="aa-interp"></div>
+                </div>
+            </div>
+
+            <!-- P/F Ratio -->
+            <div class="calc-card">
+                <h3>P/F Ratio (PaO2/FiO2)</h3>
+                <p class="subtitle">Assess oxygenation / ARDS severity</p>
+                <div class="formula-display">P/F Ratio = PaO2 / FiO2</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>PaO2 (mmHg)</label>
+                        <input type="number" id="pf-pao2" placeholder="PaO2">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>FiO2 (decimal, e.g., 0.21)</label>
+                        <input type="number" id="pf-fio2" step="0.01" placeholder="e.g., 0.40">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcPF()">Calculate P/F Ratio</button>
+                <div class="result-box" id="pf-result">
+                    <div class="result-label">P/F Ratio</div>
+                    <div class="result-value"><span id="pf-value"></span></div>
+                    <div class="result-interpretation" id="pf-interp"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARDIO SECTION -->
+        <div class="calc-section" id="cardio">
+            <!-- QTc -->
+            <div class="calc-card">
+                <h3>Corrected QT Interval (QTc)</h3>
+                <p class="subtitle">Bazett formula for heart rate correction</p>
+                <div class="formula-display">QTc = QT / √(RR interval) | RR = 60/HR</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>QT interval (ms)</label>
+                        <input type="number" id="qtc-qt" placeholder="QT">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Heart Rate (bpm)</label>
+                        <input type="number" id="qtc-hr" placeholder="HR">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcQTc()">Calculate QTc</button>
+                <div class="result-box" id="qtc-result">
+                    <div class="result-label">QTc (Bazett)</div>
+                    <div class="result-value"><span id="qtc-value"></span> ms</div>
+                    <div class="result-interpretation" id="qtc-interp"></div>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="calc-card">
+                <h3>Mean Arterial Pressure (MAP)</h3>
+                <p class="subtitle">Average arterial pressure during cardiac cycle</p>
+                <div class="formula-display">MAP = DBP + 1/3(SBP - DBP) | Target ≥65 mmHg</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Systolic BP (mmHg)</label>
+                        <input type="number" id="map-sbp" placeholder="SBP">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Diastolic BP (mmHg)</label>
+                        <input type="number" id="map-dbp" placeholder="DBP">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcMAP()">Calculate MAP</button>
+                <div class="result-box" id="map-result">
+                    <div class="result-label">Mean Arterial Pressure</div>
+                    <div class="result-value"><span id="map-value"></span> mmHg</div>
+                    <div class="result-interpretation" id="map-interp"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTHER SECTION -->
+        <div class="calc-section" id="other">
+            <!-- BMI -->
+            <div class="calc-card">
+                <h3>Body Mass Index (BMI)</h3>
+                <p class="subtitle">Weight classification</p>
+                <div class="formula-display">BMI = weight(kg) / height(m)²</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Weight (kg)</label>
+                        <input type="number" id="bmi-wt" placeholder="Weight">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Height (cm)</label>
+                        <input type="number" id="bmi-ht" placeholder="Height">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcBMI()">Calculate BMI</button>
+                <div class="result-box" id="bmi-result">
+                    <div class="result-label">BMI</div>
+                    <div class="result-value"><span id="bmi-value"></span> kg/m²</div>
+                    <div class="result-interpretation" id="bmi-interp"></div>
+                </div>
+            </div>
+
+            <!-- IBW -->
+            <div class="calc-card">
+                <h3>Ideal Body Weight (IBW)</h3>
+                <p class="subtitle">Devine formula — for drug dosing, vent settings</p>
+                <div class="formula-display">Male: 50 + 2.3 × (height in inches - 60) | Female: 45.5 + 2.3 × (height in inches - 60)</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Height (cm)</label>
+                        <input type="number" id="ibw-ht" placeholder="Height">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Sex</label>
+                        <select id="ibw-sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcIBW()">Calculate IBW</button>
+                <div class="result-box" id="ibw-result">
+                    <div class="result-label">Ideal Body Weight</div>
+                    <div class="result-value"><span id="ibw-value"></span> kg</div>
+                    <div class="result-interpretation" id="ibw-interp"></div>
+                </div>
+            </div>
+
+            <!-- MELD -->
+            <div class="calc-card">
+                <h3>MELD Score</h3>
+                <p class="subtitle">Model for End-Stage Liver Disease</p>
+                <div class="formula-display">MELD = 10 × [0.957×ln(Cr) + 0.378×ln(Bili) + 1.120×ln(INR) + 0.643]</div>
+                
+                <div class="input-row">
+                    <div class="input-group" style="flex:1">
+                        <label>Creatinine (mg/dL)</label>
+                        <input type="number" id="meld-cr" step="0.1" placeholder="Cr">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Bilirubin (mg/dL)</label>
+                        <input type="number" id="meld-bili" step="0.1" placeholder="Bili">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>INR</label>
+                        <input type="number" id="meld-inr" step="0.1" placeholder="INR">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcMELD()">Calculate MELD</button>
+                <div class="result-box" id="meld-result">
+                    <div class="result-label">MELD Score</div>
+                    <div class="result-value"><span id="meld-value"></span></div>
+                    <div class="result-interpretation" id="meld-interp"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.calc-section').forEach(s => s.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.section).classList.add('active');
+            });
+        });
+
+        // Helper function to show results
+        function showResult(id, value, interp) {
+            document.getElementById(id).classList.add('show');
+            document.getElementById(id.replace('-result', '-value')).textContent = value;
+            document.getElementById(id.replace('-result', '-interp')).innerHTML = interp;
+        }
+
+        // RENAL CALCULATORS
+        function calcCrCl() {
+            const age = parseFloat(document.getElementById('cg-age').value);
+            const weight = parseFloat(document.getElementById('cg-weight').value);
+            const cr = parseFloat(document.getElementById('cg-cr').value);
+            const sex = document.getElementById('cg-sex').value;
+            
+            let crcl = ((140 - age) * weight) / (72 * cr);
+            if (sex === 'female') crcl *= 0.85;
+            
+            let interp = '';
+            if (crcl >= 90) interp = '✅ Normal kidney function';
+            else if (crcl >= 60) interp = '⚠️ Mild reduction — some drugs need adjustment';
+            else if (crcl >= 30) interp = '⚠️ Moderate reduction — many drugs need dose adjustment';
+            else if (crcl >= 15) interp = '🔴 Severe reduction — significant dose adjustments needed';
+            else interp = '🔴 Kidney failure — avoid nephrotoxic drugs, consider dialysis dosing';
+            
+            showResult('crcl-result', crcl.toFixed(1), interp);
+        }
+
+        function calcFENa() {
+            const una = parseFloat(document.getElementById('fena-una').value);
+            const pcr = parseFloat(document.getElementById('fena-pcr').value);
+            const pna = parseFloat(document.getElementById('fena-pna').value);
+            const ucr = parseFloat(document.getElementById('fena-ucr').value);
+            
+            const fena = (una * pcr) / (pna * ucr) * 100;
+            
+            let interp = '';
+            if (fena < 1) interp = '✅ <strong>Pre-renal AKI</strong> — kidneys appropriately retaining sodium. Consider volume depletion, CHF, cirrhosis.';
+            else if (fena <= 2) interp = '⚠️ Indeterminate — could be pre-renal or early ATN';
+            else interp = '🔴 <strong>Intrinsic renal disease (ATN)</strong> — kidneys unable to retain sodium. Look for muddy brown casts.';
+            
+            showResult('fena-result', fena.toFixed(2), interp);
+        }
+
+        function calcBUNCr() {
+            const bun = parseFloat(document.getElementById('buncr-bun').value);
+            const cr = parseFloat(document.getElementById('buncr-cr').value);
+            
+            const ratio = bun / cr;
+            
+            let interp = '';
+            if (ratio > 20) interp = '📈 <strong>Elevated ratio (>20:1)</strong> — suggests pre-renal azotemia, GI bleed, high protein intake, or catabolic state';
+            else if (ratio >= 10) interp = '✅ Normal ratio (10-20:1) — suggests intrinsic renal disease if AKI present';
+            else interp = '📉 Low ratio (<10:1) — suggests liver disease, malnutrition, or rhabdomyolysis';
+            
+            showResult('buncr-result', ratio.toFixed(1), interp);
+        }
+
+        // ACID-BASE CALCULATORS
+        function calcAnionGap() {
+            const na = parseFloat(document.getElementById('ag-na').value);
+            const cl = parseFloat(document.getElementById('ag-cl').value);
+            const hco3 = parseFloat(document.getElementById('ag-hco3').value);
+            
+            const ag = na - (cl + hco3);
+            
+            let interp = '';
+            if (ag <= 12) interp = '✅ <strong>Normal anion gap</strong> — if acidosis present, think NAGMA (diarrhea, RTA, saline)';
+            else interp = '🔴 <strong>Elevated anion gap (' + ag + ')</strong> — HAGMA present. Think MUDPILES: Methanol, Uremia, DKA, Propylene glycol, Isoniazid/Iron, Lactic acidosis, Ethylene glycol, Salicylates';
+            
+            showResult('ag-result', ag.toFixed(0), interp);
+        }
+
+        function calcDeltaDelta() {
+            const ag = parseFloat(document.getElementById('dd-ag').value);
+            const hco3 = parseFloat(document.getElementById('dd-hco3').value);
+            
+            const deltaAG = ag - 12;
+            const deltaHCO3 = 24 - hco3;
+            const ratio = deltaAG / deltaHCO3;
+            
+            let interp = '';
+            if (ratio < 1) interp = '🔴 <strong>Ratio <1</strong> — Mixed HAGMA + NAGMA (e.g., DKA + diarrhea)';
+            else if (ratio <= 2) interp = '✅ <strong>Ratio 1-2</strong> — Pure HAGMA (HCO3 drop matches AG rise)';
+            else interp = '🔴 <strong>Ratio >2</strong> — Mixed HAGMA + metabolic alkalosis (e.g., DKA + vomiting)';
+            
+            showResult('dd-result', ratio.toFixed(2), interp);
+        }
+
+        function calcWinter() {
+            const hco3 = parseFloat(document.getElementById('winter-hco3').value);
+            const measuredPCO2 = document.getElementById('winter-pco2').value;
+            
+            const expectedPCO2 = 1.5 * hco3 + 8;
+            const low = expectedPCO2 - 2;
+            const high = expectedPCO2 + 2;
+            
+            let interp = `Expected range: ${low.toFixed(0)}-${high.toFixed(0)} mmHg`;
+            
+            if (measuredPCO2) {
+                const actual = parseFloat(measuredPCO2);
+                if (actual < low) interp += '<br>🔴 <strong>Actual pCO2 is LOWER than expected</strong> — superimposed respiratory alkalosis';
+                else if (actual > high) interp += '<br>🔴 <strong>Actual pCO2 is HIGHER than expected</strong> — superimposed respiratory acidosis';
+                else interp += '<br>✅ <strong>Appropriate respiratory compensation</strong> — simple metabolic acidosis';
+            }
+            
+            showResult('winter-result', expectedPCO2.toFixed(0) + ' (±2)', interp);
+        }
+
+        function calcOsm() {
+            const na = parseFloat(document.getElementById('osm-na').value);
+            const glu = parseFloat(document.getElementById('osm-glu').value);
+            const bun = parseFloat(document.getElementById('osm-bun').value);
+            const measured = document.getElementById('osm-measured').value;
+            
+            const calcOsm = 2 * na + glu / 18 + bun / 2.8;
+            
+            let interp = '';
+            if (measured) {
+                const gap = parseFloat(measured) - calcOsm;
+                interp = `Osmolar gap: <strong>${gap.toFixed(1)}</strong> mOsm/kg<br>`;
+                if (gap > 10) interp += '🔴 <strong>Elevated osmolar gap</strong> — consider toxic alcohols (methanol, ethylene glycol), ethanol, or mannitol';
+                else interp += '✅ Normal osmolar gap (<10)';
+            }
+            
+            showResult('osm-result', calcOsm.toFixed(0), interp);
+        }
+
+        // ELECTROLYTE CALCULATORS
+        function calcCorrectedCa() {
+            const ca = parseFloat(document.getElementById('ca-total').value);
+            const alb = parseFloat(document.getElementById('ca-alb').value);
+            
+            const corrected = ca + 0.8 * (4 - alb);
+            
+            let interp = '';
+            if (corrected < 8.5) interp = '📉 <strong>Hypocalcemia</strong> — check PTH, vitamin D, Mg, phosphate';
+            else if (corrected <= 10.5) interp = '✅ Normal calcium (8.5-10.5 mg/dL)';
+            else interp = '📈 <strong>Hypercalcemia</strong> — check PTH (hyperparathyroidism vs malignancy)';
+            
+            showResult('ca-result', corrected.toFixed(1), interp);
+        }
+
+        function calcCorrectedNa() {
+            const na = parseFloat(document.getElementById('na-measured').value);
+            const glu = parseFloat(document.getElementById('na-glu').value);
+            
+            const corrected = na + 1.6 * ((glu - 100) / 100);
+            
+            let interp = `Original Na: ${na} → Corrected for hyperglycemia: <strong>${corrected.toFixed(1)}</strong>`;
+            if (corrected > na + 1) interp += '<br>⚠️ True sodium is higher than measured — as glucose is corrected, Na will rise';
+            
+            showResult('na-result', corrected.toFixed(1), interp);
+        }
+
+        function calcFWD() {
+            const na = parseFloat(document.getElementById('fwd-na').value);
+            const wt = parseFloat(document.getElementById('fwd-wt').value);
+            const sex = document.getElementById('fwd-sex').value;
+            
+            const tbw = wt * (sex === 'male' ? 0.6 : 0.5);
+            const deficit = tbw * ((na / 140) - 1);
+            
+            let interp = `Total Body Water: ${tbw.toFixed(1)} L<br>`;
+            interp += '⚠️ Replace slowly — correct Na by ≤10-12 mEq/L per 24h to avoid cerebral edema';
+            
+            showResult('fwd-result', deficit.toFixed(1), interp);
+        }
+
+        function calcTTKG() {
+            const uk = parseFloat(document.getElementById('ttkg-uk').value);
+            const pk = parseFloat(document.getElementById('ttkg-pk').value);
+            const uosm = parseFloat(document.getElementById('ttkg-uosm').value);
+            const posm = parseFloat(document.getElementById('ttkg-posm').value);
+            
+            const ttkg = (uk / pk) / (uosm / posm);
+            
+            let interp = '';
+            interp = 'In <strong>hyperkalemia</strong>: TTKG <5 suggests impaired renal K excretion (hypoaldosteronism)<br>';
+            interp += 'In <strong>hypokalemia</strong>: TTKG >3 suggests renal K wasting';
+            
+            showResult('ttkg-result', ttkg.toFixed(1), interp);
+        }
+
+        // RESPIRATORY CALCULATORS
+        function calcAaGradient() {
+            const pao2 = parseFloat(document.getElementById('aa-pao2').value);
+            const paco2 = parseFloat(document.getElementById('aa-paco2').value);
+            const fio2 = parseFloat(document.getElementById('aa-fio2').value) / 100;
+            const age = document.getElementById('aa-age').value;
+            
+            const pao2_alv = fio2 * (760 - 47) - paco2 / 0.8;
+            const gradient = pao2_alv - pao2;
+            
+            let interp = `PAO2 (alveolar): ${pao2_alv.toFixed(0)} mmHg<br>`;
+            if (age) {
+                const expected = parseFloat(age) / 4 + 4;
+                interp += `Expected A-a gradient for age ${age}: <${expected.toFixed(0)} mmHg<br>`;
+                if (gradient > expected + 10) interp += '🔴 <strong>Elevated A-a gradient</strong> — suggests V/Q mismatch, shunt, or diffusion impairment (PE, pneumonia, pulmonary fibrosis)';
+                else interp += '✅ Normal A-a gradient — if hypoxemic, consider hypoventilation or low FiO2';
+            }
+            
+            showResult('aa-result', gradient.toFixed(0), interp);
+        }
+
+        function calcPF() {
+            const pao2 = parseFloat(document.getElementById('pf-pao2').value);
+            const fio2 = parseFloat(document.getElementById('pf-fio2').value);
+            
+            const pf = pao2 / fio2;
+            
+            let interp = '';
+            if (pf >= 400) interp = '✅ Normal oxygenation';
+            else if (pf >= 300) interp = '⚠️ Mild impairment — mild ARDS if criteria met';
+            else if (pf >= 200) interp = '🔴 <strong>Moderate ARDS</strong> (P/F 200-300)';
+            else if (pf >= 100) interp = '🔴 <strong>Severe ARDS</strong> (P/F 100-200) — consider prone positioning';
+            else interp = '🔴 <strong>Very severe ARDS</strong> (P/F <100) — high mortality, consider ECMO';
+            
+            showResult('pf-result', pf.toFixed(0), interp);
+        }
+
+        // CARDIO CALCULATORS
+        function calcQTc() {
+            const qt = parseFloat(document.getElementById('qtc-qt').value);
+            const hr = parseFloat(document.getElementById('qtc-hr').value);
+            
+            const rr = 60 / hr;
+            const qtc = qt / Math.sqrt(rr);
+            
+            let interp = '';
+            if (qtc < 440) interp = '✅ Normal QTc (<440 ms for men, <460 ms for women)';
+            else if (qtc < 500) interp = '⚠️ <strong>Borderline prolonged</strong> — review medications (antipsychotics, antiemetics, fluoroquinolones, antiarrhythmics)';
+            else interp = '🔴 <strong>Significantly prolonged (>500 ms)</strong> — high risk of Torsades de Pointes. Check K, Mg, Ca. Review/stop QT-prolonging drugs.';
+            
+            showResult('qtc-result', qtc.toFixed(0), interp);
+        }
+
+        function calcMAP() {
+            const sbp = parseFloat(document.getElementById('map-sbp').value);
+            const dbp = parseFloat(document.getElementById('map-dbp').value);
+            
+            const map = dbp + (sbp - dbp) / 3;
+            
+            let interp = '';
+            if (map >= 65) interp = '✅ Adequate perfusion pressure (MAP ≥65 mmHg)';
+            else interp = '🔴 <strong>MAP <65 mmHg</strong> — inadequate organ perfusion. In septic shock, target MAP ≥65 with vasopressors.';
+            
+            showResult('map-result', map.toFixed(0), interp);
+        }
+
+        // OTHER CALCULATORS
+        function calcBMI() {
+            const wt = parseFloat(document.getElementById('bmi-wt').value);
+            const ht = parseFloat(document.getElementById('bmi-ht').value) / 100;
+            
+            const bmi = wt / (ht * ht);
+            
+            let interp = '';
+            if (bmi < 18.5) interp = '📉 Underweight (<18.5)';
+            else if (bmi < 25) interp = '✅ Normal weight (18.5-24.9)';
+            else if (bmi < 30) interp = '⚠️ Overweight (25-29.9)';
+            else if (bmi < 35) interp = '🔴 Obesity Class I (30-34.9)';
+            else if (bmi < 40) interp = '🔴 Obesity Class II (35-39.9)';
+            else interp = '🔴 Obesity Class III (≥40)';
+            
+            showResult('bmi-result', bmi.toFixed(1), interp);
+        }
+
+        function calcIBW() {
+            const ht = parseFloat(document.getElementById('ibw-ht').value);
+            const sex = document.getElementById('ibw-sex').value;
+            
+            const inches = ht / 2.54;
+            let ibw;
+            if (sex === 'male') ibw = 50 + 2.3 * (inches - 60);
+            else ibw = 45.5 + 2.3 * (inches - 60);
+            
+            let interp = 'Use IBW for tidal volume calculations (6-8 mL/kg IBW for lung-protective ventilation)';
+            
+            showResult('ibw-result', ibw.toFixed(1), interp);
+        }
+
+        function calcMELD() {
+            let cr = parseFloat(document.getElementById('meld-cr').value);
+            let bili = parseFloat(document.getElementById('meld-bili').value);
+            let inr = parseFloat(document.getElementById('meld-inr').value);
+            
+            // MELD constraints
+            if (cr < 1) cr = 1;
+            if (cr > 4) cr = 4;
+            if (bili < 1) bili = 1;
+            if (inr < 1) inr = 1;
+            
+            const meld = 10 * (0.957 * Math.log(cr) + 0.378 * Math.log(bili) + 1.120 * Math.log(inr) + 0.643);
+            
+            let interp = '';
+            if (meld < 10) interp = '3-month mortality ~2%';
+            else if (meld < 20) interp = '3-month mortality ~6%';
+            else if (meld < 30) interp = '3-month mortality ~20%';
+            else if (meld < 40) interp = '3-month mortality ~50%';
+            else interp = '3-month mortality >70%';
+            
+            showResult('meld-result', Math.round(meld), interp);
+        }
+    </script>
+</body>
+</html>

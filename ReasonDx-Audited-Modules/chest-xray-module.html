@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Chest X-Ray Interpretation</title>
+  <style>
+    :root { --primary: #00BCD4; --accent: #FF9800; --success: #4CAF50; --danger: #F44336; --info: #2196F3; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(0,188,212,0.15); border-radius: 1rem; border: 1px solid rgba(0,188,212,0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .subtitle { color: #9CA3AF; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem; font-size: 1rem; }
+    .key-box { background: rgba(0,188,212,0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(244,67,54,0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(33,150,243,0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(0,188,212,0.2); color: var(--primary); }
+    ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(76,175,80,0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .step-card { background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,151,167,0.1)); border: 1px solid rgba(0,188,212,0.3); border-radius: 0.75rem; padding: 1rem; margin: 0.75rem 0; }
+    .step-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(76,175,80,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.5rem 1rem; margin: 0.3rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(0,188,212,0.2); }
+    .quiz-option.correct { background: rgba(76,175,80,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(244,67,54,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.5rem; padding: 0.75rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🩻 Chest X-Ray Interpretation</h1>
+      <p class="subtitle">Systematic Approach • Key Findings • Common Pathology</p>
+    </header>
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('approach')">Systematic Approach</div>
+      <div class="nav-tab" onclick="showTab('technical')">Technical Quality</div>
+      <div class="nav-tab" onclick="showTab('findings')">Key Findings</div>
+      <div class="nav-tab" onclick="showTab('pathology')">Common Pathology</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+    <div id="approach" class="tab-content active">
+      <div class="section">
+        <h2>📋 Systematic Approach</h2>
+        <div class="key-box"><strong>Always use the same systematic approach</strong> to avoid missing findings.</div>
+        <div class="mnemonic"><strong>💡 "ABCDEFGHI"</strong><br><strong>A</strong>irway • <strong>B</strong>ones • <strong>C</strong>ardiac • <strong>D</strong>iaphragm • <strong>E</strong>ffusion/Edge • <strong>F</strong>ields • <strong>G</strong>astric • <strong>H</strong>ilum • <strong>I</strong>nstruments</div>
+        <div class="step-card"><h4>A - Airway</h4><ul><li>Trachea: Midline? Deviated?</li><li>Carina: T4-T5 level</li><li>Mainstem bronchi: Right more vertical</li></ul></div>
+        <div class="step-card"><h4>B - Bones & Soft Tissues</h4><ul><li>Ribs: Fractures, lesions</li><li>Clavicles, spine, shoulders</li><li>Soft tissues: Subcutaneous emphysema, mastectomy</li></ul></div>
+        <div class="step-card"><h4>C - Cardiac Silhouette</h4><ul><li>CTR &lt;50% on PA film</li><li>Right border = RA, Left = LV</li><li>Shape: Boot (RVH), water-bottle (effusion)</li></ul></div>
+        <div class="step-card"><h4>D - Diaphragm</h4><ul><li>Right 1-2 cm higher than left</li><li>Costophrenic angles sharp?</li><li>Free air = perforation</li></ul></div>
+        <div class="step-card"><h4>E - Effusion/Edges (Pleura)</h4><ul><li>Effusion: Meniscus sign</li><li>Pneumothorax: Lung edge, absent markings</li></ul></div>
+        <div class="step-card"><h4>F - Fields (Lung)</h4><ul><li>Compare side-to-side</li><li>Opacities: Consolidation, nodules</li><li>Lucencies: Emphysema, cavities</li></ul></div>
+        <div class="step-card"><h4>G - Gastric Bubble</h4><ul><li>Should be on left under diaphragm</li></ul></div>
+        <div class="step-card"><h4>H - Hilum</h4><ul><li>Left slightly higher than right</li><li>Lymphadenopathy?</li></ul></div>
+        <div class="step-card"><h4>I - Instruments</h4><ul><li>ETT: 2-4 cm above carina</li><li>NG: Below diaphragm</li><li>Central lines: Cavoatrial junction</li></ul></div>
+      </div>
+    </div>
+    <div id="technical" class="tab-content">
+      <div class="section">
+        <h2>🔧 Technical Quality: "RIPE"</h2>
+        <div class="mnemonic"><strong>R</strong>otation • <strong>I</strong>nspiration • <strong>P</strong>enetration • <strong>E</strong>xposure</div>
+        <h3>Rotation</h3><div class="info-box">Medial clavicle heads equidistant from spinous processes</div>
+        <h3>Inspiration</h3><div class="info-box"><strong>Good:</strong> 8-10 posterior ribs visible above diaphragm</div>
+        <h3>Penetration</h3><div class="info-box"><strong>Adequate:</strong> Spine visible through cardiac silhouette</div>
+        <h3>PA vs AP</h3>
+        <table>
+          <tr><th>Feature</th><th>PA</th><th>AP</th></tr>
+          <tr><td>Heart size</td><td>Accurate</td><td>Magnified</td></tr>
+          <tr><td>Use</td><td>Standard</td><td>Portable/ICU</td></tr>
+        </table>
+        <div class="danger-box"><strong>⚠️ Don't diagnose cardiomegaly on AP film</strong> - heart is magnified!</div>
+      </div>
+    </div>
+    <div id="findings" class="tab-content">
+      <div class="section">
+        <h2>🔍 Key Radiographic Findings</h2>
+        <h3>Silhouette Sign</h3>
+        <div class="key-box"><strong>Border lost when adjacent structures have similar density:</strong><ul><li>Right heart border → RML</li><li>Left heart border → Lingula</li><li>Right diaphragm → RLL</li><li>Left diaphragm → LLL</li></ul></div>
+        <h3>Air Bronchograms</h3><div class="info-box">Air-filled bronchi visible against opacified alveoli = alveolar pathology (pneumonia, edema, ARDS)</div>
+        <h3>Meniscus Sign</h3><div class="info-box">Curved upper border of pleural effusion on upright film</div>
+        <h3>Deep Sulcus Sign</h3><div class="info-box">Lucent CP angle on supine film = pneumothorax (air rises anteriorly)</div>
+        <h3>Kerley B Lines</h3><div class="info-box">Short horizontal lines at lung periphery = thickened septa (pulmonary edema)</div>
+      </div>
+    </div>
+    <div id="pathology" class="tab-content">
+      <div class="section">
+        <h2>🏥 Common Pathology</h2>
+        <h3>Pneumonia</h3>
+        <table>
+          <tr><th>Type</th><th>Pattern</th></tr>
+          <tr><td>Lobar</td><td>Dense consolidation, air bronchograms</td></tr>
+          <tr><td>Bronchopneumonia</td><td>Patchy, multifocal</td></tr>
+          <tr><td>Interstitial</td><td>Reticular (viral/atypical)</td></tr>
+        </table>
+        <h3>Pulmonary Edema</h3>
+        <div class="danger-box"><ul><li>Cardiomegaly</li><li>Cephalization</li><li>Kerley B lines</li><li>Perihilar "bat wing" opacities</li><li>Bilateral effusions</li></ul></div>
+        <h3>Pneumothorax</h3>
+        <div class="danger-box"><ul><li>Visceral pleural line visible</li><li>Absent lung markings beyond line</li><li><strong>Tension:</strong> Mediastinal shift AWAY, flattened diaphragm</li></ul></div>
+        <h3>Pleural Effusion</h3>
+        <ul><li>Upright: Meniscus, blunted CP angle (&gt;200mL)</li><li>Supine: Hazy hemithorax</li><li>Lateral decubitus: Most sensitive</li></ul>
+      </div>
+    </div>
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://radiopaedia.org/articles/chest-radiograph" target="_blank">🔗 Radiopaedia - Chest X-ray (CC-BY-NC-SA)</a>
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK459149/" target="_blank">🔗 NCBI - Chest X-ray Interpretation</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on radiology education standards.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>📝 Quiz</h2>
+        <div class="quiz-section"><p><strong>Q1:</strong> Loss of right heart border indicates pathology in:</p><div class="quiz-option" onclick="checkQ('q1',this,false)">A. RLL</div><div class="quiz-option" onclick="checkQ('q1',this,true)">B. RML</div><div class="quiz-option" onclick="checkQ('q1',this,false)">C. RUL</div><div id="exp-q1" class="explanation">RML - silhouette sign localizes pathology adjacent to obscured border.</div></div>
+        <div class="quiz-section"><p><strong>Q2:</strong> Good inspiration shows how many posterior ribs?</p><div class="quiz-option" onclick="checkQ('q2',this,false)">A. 5-6</div><div class="quiz-option" onclick="checkQ('q2',this,true)">B. 8-10</div><div class="quiz-option" onclick="checkQ('q2',this,false)">C. 12-14</div><div id="exp-q2" class="explanation">8-10 posterior ribs above diaphragm = adequate inspiration.</div></div>
+        <div class="quiz-section"><p><strong>Q3:</strong> Kerley B lines indicate:</p><div class="quiz-option" onclick="checkQ('q3',this,true)">A. Pulmonary edema</div><div class="quiz-option" onclick="checkQ('q3',this,false)">B. Pneumothorax</div><div class="quiz-option" onclick="checkQ('q3',this,false)">C. Pneumonia</div><div id="exp-q3" class="explanation">Kerley B lines = thickened interlobular septa, classic for pulmonary edema.</div></div>
+        <div class="quiz-section"><p><strong>Q4:</strong> On supine CXR, pneumothorax shows:</p><div class="quiz-option" onclick="checkQ('q4',this,true)">A. Deep sulcus sign</div><div class="quiz-option" onclick="checkQ('q4',this,false)">B. Meniscus sign</div><div class="quiz-option" onclick="checkQ('q4',this,false)">C. Bat wing opacity</div><div id="exp-q4" class="explanation">Deep sulcus sign - air collects anteriorly when supine.</div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showTab(id) { document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active')); document.getElementById(id).classList.add('active'); event.target.classList.add('active'); }
+    function checkQ(id, el, correct) { const s = el.closest('.quiz-section'); s.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'none'; }); el.classList.add(correct ? 'correct' : 'incorrect'); if (!correct) s.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); }); document.getElementById('exp-' + id).style.display = 'block'; }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Chest X"
+         data-key-points="📋 Systematic Approach, 🔧 Technical Quality: &quot;RIPE&quot;, 🔍 Key Radiographic Findings, 🏥 Common Pathology, 📚 Open-Access Learning Resources, 📝 Quiz, Rotation, Inspiration, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

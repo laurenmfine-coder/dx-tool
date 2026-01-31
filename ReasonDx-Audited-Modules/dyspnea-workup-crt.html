@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Can't Breathe | Dyspnea Workup | ReasonDx CRT</title>
+  <style>
+    :root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#0EA5E9;--success:#10B981;--danger:#DC2626;--warn:#F59E0B}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+    .header{background:linear-gradient(135deg,#0369A1,#0EA5E9);padding:14px 20px;position:sticky;top:0;z-index:100}
+    .header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
+    .header-title{font-size:1.1rem;font-weight:600}
+    .badge{background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:6px;font-size:0.7rem;margin-left:8px}
+    .stats{display:flex;gap:12px}
+    .stat{text-align:center;background:rgba(0,0,0,0.2);padding:5px 12px;border-radius:8px}
+    .stat-value{font-size:1rem;font-weight:700;font-family:monospace}
+    .stat-label{font-size:0.6rem;opacity:0.8}
+    .main{max-width:900px;margin:0 auto;padding:20px}
+    .progress-bar{height:5px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:16px}
+    .progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:16px}
+    .card-header{padding:16px 20px;border-bottom:1px solid var(--border)}
+    .card-phase{font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
+    .card-title{font-size:1.2rem;font-weight:700;margin-top:4px}
+    .card-body{padding:20px}
+    .narrative{background:linear-gradient(135deg,rgba(14,165,233,0.1),rgba(6,182,212,0.1));border-left:4px solid var(--accent);padding:16px;border-radius:0 10px 10px 0;margin-bottom:16px}
+    .hl{background:rgba(14,165,233,0.3);padding:2px 5px;border-radius:4px;font-weight:500}
+    .vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px;margin:16px 0}
+    .vital{background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;text-align:center}
+    .vital.critical{background:rgba(220,38,38,0.2);border:1px solid rgba(220,38,38,0.4)}
+    .vital.warning{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4)}
+    .vital-label{font-size:0.6rem;color:var(--muted)}
+    .vital-value{font-size:0.9rem;font-weight:600}
+    .choices{display:grid;gap:10px;margin-top:16px}
+    .choice{background:var(--card);border:2px solid var(--border);padding:12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s}
+    .choice:hover{border-color:var(--accent);transform:translateX(3px)}
+    .choice.correct{border-color:var(--success);background:rgba(16,185,129,0.2)}
+    .choice.wrong{border-color:var(--danger);background:rgba(220,38,38,0.2)}
+    .choice-icon{font-size:1.2rem}
+    .choice-title{font-weight:600;font-size:0.9rem}
+    .choice-desc{font-size:0.75rem;color:var(--muted)}
+    .feedback{display:none;margin-top:14px;padding:14px;border-radius:10px;font-size:0.85rem}
+    .feedback.show{display:block}
+    .feedback.good{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+    .feedback.bad{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+    .teaching{background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);border-radius:10px;padding:14px;margin:16px 0}
+    .teaching h4{color:#A78BFA;margin-bottom:6px;font-size:0.9rem}
+    .hidden{display:none!important}
+    .btn{padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;border:none}
+    .btn-primary{background:var(--accent);color:white}
+    .ddx-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+    .ddx-item{background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;font-size:0.85rem}
+    .ddx-item strong{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">😮‍💨 I Can't Breathe<span class="badge">DYSPNEA</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="stage">1/7</div><div class="stat-label">Stage</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:14%"></div></div>
+
+    <!-- STAGE 1 -->
+    <div id="s1" class="stage">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 1 of 7</div>
+          <div class="card-title">🚑 ED Arrival</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">A 58-year-old woman presents with <span class="hl">acute shortness of breath</span> that started 2 hours ago. She reports <span class="hl">pleuritic chest pain</span> on the right side. She returned from a long flight 3 days ago and has been <span class="hl">less mobile</span> due to a recent knee surgery.</div>
+          <div class="vitals">
+            <div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">112</div></div>
+            <div class="vital warning"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+            <div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">91%</div></div>
+            <div class="vital"><div class="vital-label">BP</div><div class="vital-value">118/76</div></div>
+            <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">37.4°C</div></div>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.9rem">Based on the presentation, what diagnosis is at the TOP of your differential?</p>
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🫁</div><div><div class="choice-title">Pulmonary Embolism</div><div class="choice-desc">Recent immobility + surgery + long flight + pleuritic pain</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🫀</div><div><div class="choice-title">Acute MI</div><div class="choice-desc">Chest pain with dyspnea</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🦠</div><div><div class="choice-title">Pneumonia</div><div class="choice-desc">Could explain hypoxia</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">💨</div><div><div class="choice-title">Asthma Exacerbation</div><div class="choice-desc">Sudden dyspnea</div></div></div>
+          </div>
+          <div class="feedback" id="f1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="s2" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 2 of 7</div>
+          <div class="card-title">📋 Risk Stratification</div>
+        </div>
+        <div class="card-body">
+          <div class="teaching">
+            <h4>💡 Wells Criteria for PE</h4>
+            <p>Clinical signs of DVT (+3), PE most likely diagnosis (+3), HR >100 (+1.5), Immobilization/surgery (+1.5), Previous DVT/PE (+1.5), Hemoptysis (+1), Malignancy (+1)</p>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.9rem">This patient has: HR>100 (+1.5), immobilization/surgery (+1.5), PE likely (+3) = 6 points (HIGH probability). What's the next step?</p>
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🧪</div><div><div class="choice-title">D-dimer</div><div class="choice-desc">Rule out PE</div></div></div>
+            <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">📸</div><div><div class="choice-title">CT Pulmonary Angiography (CTPA)</div><div class="choice-desc">Direct imaging for high-probability patient</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🫀</div><div><div class="choice-title">Echocardiogram</div><div class="choice-desc">Assess RV function</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🦵</div><div><div class="choice-title">Lower extremity ultrasound</div><div class="choice-desc">Look for DVT</div></div></div>
+          </div>
+          <div class="feedback" id="f2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div id="s3" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 3 of 7</div>
+          <div class="card-title">📸 CTPA Results</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">CTPA shows <span class="hl">filling defects in the right main pulmonary artery</span> and <span class="hl">segmental branches of the right lower lobe</span>. The right ventricle appears <span class="hl">dilated</span> (RV:LV ratio >1).</div>
+          <div class="teaching">
+            <h4>💡 RV Strain = More Severe PE</h4>
+            <p>RV dilation on CT suggests intermediate-high or high-risk PE. This indicates significant hemodynamic impact.</p>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.9rem">Additional labs: Troponin 0.18 ng/mL (elevated), BNP 450 pg/mL (elevated). What risk category is this PE?</p>
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🟢</div><div><div class="choice-title">Low risk</div><div class="choice-desc">Outpatient treatment possible</div></div></div>
+            <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">🟡</div><div><div class="choice-title">Intermediate-High Risk (Submassive)</div><div class="choice-desc">RV dysfunction + elevated biomarkers, hemodynamically stable</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🔴</div><div><div class="choice-title">High Risk (Massive)</div><div class="choice-desc">Requires thrombolytics</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">⚪</div><div><div class="choice-title">Intermediate-Low Risk</div><div class="choice-desc">RV dysfunction OR biomarkers</div></div></div>
+          </div>
+          <div class="feedback" id="f3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div id="s4" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 4 of 7</div>
+          <div class="card-title">💊 Initial Treatment</div>
+        </div>
+        <div class="card-body">
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.9rem">She is hemodynamically stable (BP 118/76). What is the first-line treatment?</p>
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">💉</div><div><div class="choice-title">Anticoagulation (heparin or DOAC)</div><div class="choice-desc">Standard treatment for stable PE</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">⚡</div><div><div class="choice-title">Systemic thrombolytics (tPA)</div><div class="choice-desc">Reserved for massive PE with shock</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🔧</div><div><div class="choice-title">Catheter-directed thrombolysis</div><div class="choice-desc">May consider if deteriorates</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🔪</div><div><div class="choice-title">Surgical embolectomy</div><div class="choice-desc">Last resort</div></div></div>
+          </div>
+          <div class="feedback" id="f4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div id="s5" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 5 of 7</div>
+          <div class="card-title">📊 Monitoring</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">You start anticoagulation. 6 hours later, she becomes <span class="hl">hypotensive</span> (BP 82/50) and more <span class="hl">tachycardic</span> (HR 128). SpO2 drops to 86% on 4L NC.</div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.9rem">She has decompensated to HIGH-RISK (massive) PE. What intervention is now indicated?</p>
+          <div class="choices" id="c5">
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">💊</div><div><div class="choice-title">Increase anticoagulation dose</div><div class="choice-desc">Won't work fast enough</div></div></div>
+            <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">⚡</div><div><div class="choice-title">Systemic thrombolytics (tPA)</div><div class="choice-desc">Indicated for massive PE with hemodynamic instability</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">💧</div><div><div class="choice-title">IV fluids and vasopressors only</div><div class="choice-desc">Supportive but won't fix clot</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🫁</div><div><div class="choice-title">Intubation</div><div class="choice-desc">May need but doesn't treat PE</div></div></div>
+          </div>
+          <div class="feedback" id="f5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 6 -->
+    <div id="s6" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 6 of 7</div>
+          <div class="card-title">🔄 Broader DDx Review</div>
+        </div>
+        <div class="card-body">
+          <div class="teaching">
+            <h4>💡 Systematic Dyspnea Approach</h4>
+            <p>Always consider the major categories: <strong>Cardiac, Pulmonary, Vascular, Other</strong></p>
+          </div>
+          <div class="ddx-grid">
+            <div class="ddx-item"><strong>Cardiac:</strong> ACS, CHF, tamponade, arrhythmia</div>
+            <div class="ddx-item"><strong>Pulmonary:</strong> PE, pneumonia, COPD/asthma, PTX, effusion</div>
+            <div class="ddx-item"><strong>Airway:</strong> Anaphylaxis, foreign body, angioedema</div>
+            <div class="ddx-item"><strong>Other:</strong> Anemia, acidosis, anxiety, neuromuscular</div>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.9rem">Which feature MOST distinguishes cardiac from pulmonary dyspnea?</p>
+          <div class="choices" id="c6">
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">📈</div><div><div class="choice-title">Elevated HR</div><div class="choice-desc">Seen in both</div></div></div>
+            <div class="choice" onclick="check(6,this,true)"><div class="choice-icon">🛏️</div><div><div class="choice-title">Orthopnea and PND</div><div class="choice-desc">Classic for cardiac (CHF)</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">😰</div><div><div class="choice-title">Anxiety</div><div class="choice-desc">Seen in both</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">💨</div><div><div class="choice-title">Tachypnea</div><div class="choice-desc">Nonspecific</div></div></div>
+          </div>
+          <div class="feedback" id="f6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 7 -->
+    <div id="s7" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 7 of 7</div>
+          <div class="card-title">🎓 Case Complete</div>
+        </div>
+        <div class="card-body">
+          <div style="text-align:center;padding:15px;background:rgba(16,185,129,0.15);border-radius:10px;margin-bottom:15px">
+            <div style="font-size:2.5rem">✅</div>
+            <p>Patient received tPA with hemodynamic improvement. She was bridged to anticoagulation and discharged on a DOAC for 3+ months.</p>
+          </div>
+          <div class="teaching">
+            <h4>🔑 Key Takeaways</h4>
+            <ul style="margin:8px 0 0 16px;font-size:0.85rem">
+              <li><strong>Wells criteria:</strong> Risk stratify before testing</li>
+              <li><strong>High probability:</strong> Go straight to CTPA, skip D-dimer</li>
+              <li><strong>Low probability:</strong> D-dimer can rule out PE</li>
+              <li><strong>RV strain + elevated biomarkers:</strong> Intermediate-high risk</li>
+              <li><strong>Hemodynamically stable:</strong> Anticoagulation alone</li>
+              <li><strong>Hemodynamically unstable:</strong> Thrombolytics (tPA)</li>
+              <li><strong>Orthopnea/PND:</strong> Think cardiac cause</li>
+            </ul>
+          </div>
+          <div style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);padding:14px;border-radius:10px;margin-top:15px">
+            <strong>📊 Final Score: <span id="final">0</span>/600</strong>
+          </div>
+          <div style="text-align:center;margin-top:16px"><button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score=0;
+    const fb={
+      1:{y:"Correct! This is a classic PE presentation: Recent surgery + immobility + long flight (Virchow's triad: stasis, endothelial injury, hypercoagulability) + pleuritic chest pain + tachycardia + hypoxia.",n:"With recent surgery, immobility, long flight, pleuritic pain, and hypoxia - PE should be at the top of your differential."},
+      2:{y:"Correct! For HIGH probability Wells score (>4), go directly to CTPA. D-dimer is only useful to RULE OUT PE in LOW probability patients. A negative D-dimer in high-probability doesn't exclude PE.",n:"In HIGH probability PE (Wells >4), skip D-dimer and go straight to CTPA. D-dimer is only useful to rule out PE in low-probability patients."},
+      3:{y:"Correct! Intermediate-High Risk (submassive): Hemodynamically STABLE but has RV dysfunction AND elevated cardiac biomarkers. High-risk (massive) = hemodynamic instability (shock, hypotension).",n:"This is intermediate-HIGH risk: stable BP but RV dysfunction + elevated troponin/BNP. Massive PE requires hemodynamic instability."},
+      4:{y:"Correct! For hemodynamically STABLE PE (even intermediate-high risk), start with anticoagulation. Monitor closely for deterioration. Thrombolytics reserved for hemodynamic instability.",n:"Anticoagulation is first-line for stable PE. Thrombolytics carry bleeding risk and are reserved for massive PE with shock."},
+      5:{y:"Correct! She's now hypotensive with worsening hypoxia = MASSIVE PE. This is the indication for systemic thrombolytics (tPA). Benefits outweigh bleeding risk when patient is crashing.",n:"Hemodynamic instability (hypotension, shock) upgrades this to massive PE → indication for thrombolytics."},
+      6:{y:"Correct! Orthopnea (dyspnea lying flat) and PND (paroxysmal nocturnal dyspnea) are classic for CARDIAC dyspnea, especially CHF. Fluid redistributes when supine, worsening pulmonary congestion.",n:"Orthopnea and PND are classic cardiac symptoms - fluid redistributes when lying flat. Pulmonary causes don't typically worsen with position."}
+    };
+    function check(n,el,ok){
+      document.querySelectorAll(`#c${n} .choice`).forEach(c=>{c.style.pointerEvents='none';if(c.onclick.toString().includes('true'))c.classList.add('correct')});
+      el.classList.add(ok?'correct':'wrong');
+      if(ok)score+=100;
+      document.getElementById('score').textContent=score;
+      const f=document.getElementById(`f${n}`);
+      f.className=`feedback show ${ok?'good':'bad'}`;
+      f.innerHTML=`<strong>${ok?'✅ +100':'❌'}</strong> ${ok?fb[n].y:fb[n].n}`;
+      setTimeout(()=>{
+        document.getElementById(`s${n}`).classList.add('hidden');
+        document.getElementById(`s${n+1}`).classList.remove('hidden');
+        document.getElementById('stage').textContent=`${n+1}/7`;
+        document.getElementById('progress').style.width=`${((n+1)/7)*100}%`;
+        if(n+1===7)document.getElementById('final').textContent=score;
+        window.scrollTo({top:0,behavior:'smooth'});
+      },2200);
+    }
+  </script>
+
+    <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK499965/" target="_blank">🔗 NCBI - Dyspnea</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on clinical approach to dyspnea.</div>
+      </div>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="I Can't Breathe"
+         data-key-points="📚 Open-Access Learning Resources, Educational Resources, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

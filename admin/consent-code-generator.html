@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DxSuite Consent Code Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; min-height: 100vh; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #1e3a5f; margin-bottom: 8px; }
+        .subtitle { color: #64748b; margin-bottom: 32px; }
+        .card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; }
+        .card h2 { font-size: 18px; color: #334155; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #475569; }
+        .form-input, .form-select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; }
+        .form-input:focus, .form-select:focus { outline: none; border-color: #059669; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-primary { background: #059669; color: white; }
+        .btn-primary:hover { background: #047857; }
+        .btn-secondary { background: #f1f5f9; color: #475569; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        .output-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 13px; max-height: 400px; overflow-y: auto; white-space: pre-wrap; }
+        .info-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+        .info-box h3 { color: #1e40af; font-size: 14px; margin-bottom: 8px; }
+        .info-box p, .info-box li { color: #1e40af; font-size: 13px; line-height: 1.6; }
+        .info-box ul { padding-left: 20px; margin-top: 8px; }
+        .stats { display: flex; gap: 24px; margin-bottom: 20px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #059669; }
+        .stat-label { font-size: 12px; color: #64748b; }
+        .copy-feedback { color: #059669; font-size: 13px; margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
+        .copy-feedback.show { opacity: 1; }
+        .code-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .code-chip { background: #f0fdf4; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 6px; font-family: monospace; font-size: 12px; color: #166534; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; font-weight: 600; font-size: 13px; color: #475569; }
+        td { font-size: 14px; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-blue { background: #dbeafe; color: #1e40af; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Consent Code Generator</h1>
+        <p class="subtitle">Generate codes to give participants after they complete your Microsoft Forms consent</p>
+        
+        <!-- INSTRUCTIONS -->
+        <div class="card">
+            <h2>📋 How This Works</h2>
+            <div class="info-box">
+                <h3>Microsoft Forms + Consent Codes Flow</h3>
+                <ol style="padding-left: 20px; margin-top: 8px;">
+                    <li><strong>Create consent form</strong> in Microsoft Forms with all required IRB language</li>
+                    <li><strong>Generate codes</strong> using this tool</li>
+                    <li><strong>Add codes to Forms</strong> as the completion message (see options below)</li>
+                    <li><strong>Participant completes form</strong> → sees their consent code</li>
+                    <li><strong>Participant enters code</strong> on DxSuite registration page</li>
+                    <li><strong>Code verified</strong> → can proceed with registration</li>
+                </ol>
+            </div>
+            
+            <h3 style="font-size: 14px; margin-bottom: 12px;">Three Options for Distributing Codes:</h3>
+            <table>
+                <tr>
+                    <th>Option</th>
+                    <th>How It Works</th>
+                    <th>Security</th>
+                    <th>Setup</th>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-green">Recommended</span> Single Code</td>
+                    <td>Everyone gets the same code (e.g., CONSENT-DXSUITE-2026)</td>
+                    <td>Low (code can be shared)</td>
+                    <td>Easiest</td>
+                </tr>
+                <tr>
+                    <td>Rotating Codes</td>
+                    <td>Change the code monthly (CONSENT-JAN26, CONSENT-FEB26)</td>
+                    <td>Medium</td>
+                    <td>Easy</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-blue">Most Secure</span> Unique Codes</td>
+                    <td>Each participant gets a unique code via email after submitting</td>
+                    <td>High</td>
+                    <td>Requires Power Automate</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- GENERATOR -->
+        <div class="card">
+            <h2>⚙️ Generate Codes</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Code Type</label>
+                    <select id="codeType" class="form-select" onchange="updatePreview()">
+                        <option value="single">Single Code (Simplest)</option>
+                        <option value="monthly">Monthly Rotating Codes</option>
+                        <option value="unique">Unique Codes (Batch)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prefix</label>
+                    <input type="text" id="prefix" class="form-input" value="CONSENT" onchange="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Study Name/Year</label>
+                    <input type="text" id="studyId" class="form-input" value="DXSUITE-2026" onchange="updatePreview()">
+                </div>
+            </div>
+            
+            <div class="form-group" id="countGroup" style="display: none;">
+                <label class="form-label">Number of Unique Codes</label>
+                <input type="number" id="codeCount" class="form-input" value="100" min="1" max="1000" style="width: 150px;">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Preview</label>
+                <div class="code-preview" id="codePreview"></div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="generateCodes()">Generate Codes</button>
+            </div>
+        </div>
+        
+        <!-- OUTPUT -->
+        <div class="card" id="outputCard" style="display: none;">
+            <h2>📤 Generated Codes</h2>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="codeCountStat">0</div>
+                    <div class="stat-label">Codes Generated</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="codeTypeStat">-</div>
+                    <div class="stat-label">Code Type</div>
+                </div>
+            </div>
+            
+            <div class="btn-group" style="margin-bottom: 16px;">
+                <button class="btn btn-secondary" onclick="copyToClipboard('formsMessage')">
+                    📋 Copy for Forms Message
+                    <span class="copy-feedback" id="copyFeedback1">Copied!</span>
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('codeList')">
+                    📋 Copy Code List
+                    <span class="copy-feedback" id="copyFeedback2">Copied!</span>
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('jsArray')">
+                    📋 Copy as JS Array
+                    <span class="copy-feedback" id="copyFeedback3">Copied!</span>
+                </button>
+                <button class="btn btn-secondary" onclick="downloadCSV()">
+                    ⬇️ Download CSV
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">For Microsoft Forms Completion Message:</label>
+                <div class="output-box" id="formsMessage"></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">All Codes (one per line):</label>
+                <div class="output-box" id="codeList"></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">JavaScript Array (for register.html):</label>
+                <div class="output-box" id="jsArray"></div>
+            </div>
+        </div>
+        
+        <!-- FORMS SETUP INSTRUCTIONS -->
+        <div class="card">
+            <h2>🔧 Microsoft Forms Setup</h2>
+            
+            <div class="info-box">
+                <h3>Option 1: Single Code (Simplest)</h3>
+                <ol style="padding-left: 20px; margin-top: 8px;">
+                    <li>Create your consent form in Microsoft Forms</li>
+                    <li>Go to Settings (⚙️) → Completion message</li>
+                    <li>Paste the "Forms Message" text generated above</li>
+                    <li>Save</li>
+                </ol>
+            </div>
+            
+            <div class="info-box" style="background: #f5f3ff; border-color: #c4b5fd;">
+                <h3 style="color: #5b21b6;">Option 2: Unique Codes via Power Automate (Most Secure)</h3>
+                <ol style="padding-left: 20px; margin-top: 8px; color: #5b21b6;">
+                    <li>Generate unique codes using this tool</li>
+                    <li>Upload codes to a SharePoint list or Excel file</li>
+                    <li>Create Power Automate flow: "When a new response is submitted"</li>
+                    <li>Flow assigns next unused code and emails it to participant</li>
+                    <li>Mark code as used in your list</li>
+                </ol>
+                <p style="margin-top: 12px; color: #5b21b6;"><strong>Benefit:</strong> Each code can only be used once, preventing sharing.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let generatedCodes = [];
+        
+        function updatePreview() {
+            const type = document.getElementById('codeType').value;
+            const prefix = document.getElementById('prefix').value || 'CONSENT';
+            const studyId = document.getElementById('studyId').value || '2026';
+            const preview = document.getElementById('codePreview');
+            const countGroup = document.getElementById('countGroup');
+            
+            countGroup.style.display = type === 'unique' ? 'block' : 'none';
+            
+            let codes = [];
+            if (type === 'single') {
+                codes = [`${prefix}-${studyId}`];
+            } else if (type === 'monthly') {
+                const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN'];
+                codes = months.map(m => `${prefix}-${m}26`);
+            } else {
+                codes = [
+                    `${prefix}-${studyId.slice(0,4)}-A1B2`,
+                    `${prefix}-${studyId.slice(0,4)}-C3D4`,
+                    `${prefix}-${studyId.slice(0,4)}-E5F6`,
+                    '...'
+                ];
+            }
+            
+            preview.innerHTML = codes.map(c => `<span class="code-chip">${c}</span>`).join('');
+        }
+        
+        function generateCodes() {
+            const type = document.getElementById('codeType').value;
+            const prefix = document.getElementById('prefix').value || 'CONSENT';
+            const studyId = document.getElementById('studyId').value || '2026';
+            const count = parseInt(document.getElementById('codeCount').value) || 100;
+            
+            generatedCodes = [];
+            
+            if (type === 'single') {
+                generatedCodes = [`${prefix}-${studyId}`];
+            } else if (type === 'monthly') {
+                const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+                generatedCodes = months.map(m => `${prefix}-${m}26`);
+            } else {
+                for (let i = 0; i < count; i++) {
+                    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+                    generatedCodes.push(`${prefix}-${studyId.slice(0,4)}-${random}`);
+                }
+            }
+            
+            // Update output
+            document.getElementById('outputCard').style.display = 'block';
+            document.getElementById('codeCountStat').textContent = generatedCodes.length;
+            document.getElementById('codeTypeStat').textContent = type === 'single' ? 'Single' : type === 'monthly' ? 'Monthly' : 'Unique';
+            
+            // Forms message
+            const formsMsg = `✅ Thank you for completing the consent form!
+
+Your consent code is:
+
+📋 ${generatedCodes[0]}
+
+Please copy this code and enter it on the DxSuite registration page to create your account.
+
+Note: This code confirms you have consented to participate in the research study.`;
+            
+            document.getElementById('formsMessage').textContent = formsMsg;
+            document.getElementById('codeList').textContent = generatedCodes.join('\n');
+            document.getElementById('jsArray').textContent = `const VALID_CONSENT_CODES = [\n    ${generatedCodes.map(c => `'${c}'`).join(',\n    ')}\n];`;
+            
+            // Scroll to output
+            document.getElementById('outputCard').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text);
+            
+            // Show feedback
+            const feedbackNum = elementId === 'formsMessage' ? 1 : elementId === 'codeList' ? 2 : 3;
+            const feedback = document.getElementById('copyFeedback' + feedbackNum);
+            feedback.classList.add('show');
+            setTimeout(() => feedback.classList.remove('show'), 2000);
+        }
+        
+        function downloadCSV() {
+            const csv = 'Consent Code,Status,Used By,Used Date\n' + 
+                        generatedCodes.map(c => `${c},Available,,`).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dxsuite-consent-codes.csv';
+            a.click();
+        }
+        
+        // Initialize
+        updatePreview();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biologics Selector Tool | Dx Learning Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: white;
+            padding: 24px;
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 16px; }
+        
+        .content-meta {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+        
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .filter-section h2 {
+            color: #6d28d9;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .filter-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .filter-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        .filter-group select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* Comparison Table */
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .comparison-table th:first-child {
+            min-width: 140px;
+        }
+        .comparison-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        .comparison-table tr:hover {
+            background: #faf5ff;
+        }
+        .comparison-table tr.hidden {
+            display: none;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #6d28d9;
+            font-size: 14px;
+        }
+        .brand-name {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: block;
+        }
+        
+        .indication-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin: 2px;
+        }
+        .indication-tag.asthma { background: var(--primary-bg); color: var(--primary-dark); }
+        .indication-tag.ciu { background: #fce7f3; color: #be185d; }
+        .indication-tag.ad { background: #fef3c7; color: #b45309; }
+        .indication-tag.crswnp { background: #d1fae5; color: #047857; }
+        .indication-tag.eoe { background: #e0e7ff; color: #4338ca; }
+        .indication-tag.food { background: #fee2e2; color: #dc2626; }
+        .indication-tag.prurigo { background: #f3e8ff; color: #7c3aed; }
+        
+        .mechanism-cell {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .mechanism-target {
+            font-weight: 600;
+            color: #7c3aed;
+        }
+        
+        .dosing-cell {
+            font-size: 12px;
+        }
+        .dosing-cell strong {
+            color: var(--text-primary);
+        }
+        
+        .biomarker-cell {
+            font-size: 12px;
+        }
+        .biomarker-positive {
+            color: #16a34a;
+            font-weight: 500;
+        }
+        .biomarker-note {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        .side-effect-list {
+            font-size: 12px;
+            margin: 0;
+            padding-left: 16px;
+        }
+        .side-effect-list li {
+            margin-bottom: 2px;
+        }
+        .boxed-warning {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .cost-cell {
+            font-size: 12px;
+        }
+        .cost-high { color: #dc2626; }
+        .cost-med { color: #f59e0b; }
+        
+        /* Legend */
+        .legend {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .legend h3 {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+        .legend-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        /* Clinical Pearls */
+        .pearls-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .pearls-section h2 {
+            color: #6d28d9;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .pearl-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #22c55e;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+        .pearl-card strong {
+            color: #166534;
+        }
+        
+        /* References */
+        .references {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .references h3 {
+            font-size: 16px;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+        .reference-item {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .reference-item::before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        .reference-item a { color: #7c3aed; }
+        .open-access { 
+            background: #dcfce7; 
+            color: #166534; 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-size: 10px; 
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        
+        .footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        .footer a { color: #7c3aed; text-decoration: none; }
+        
+        @media (max-width: 1024px) {
+            .table-container {
+                overflow-x: auto;
+            }
+            .comparison-table {
+                min-width: 1200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .filter-grid { grid-template-columns: 1fr; }
+        }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">Dx Ecosystem</a> → <a href="allergy-immunology-hub.html">A/I Hub</a> → Biologics Selector
+            </div>
+            <h1>💉 Biologics Selector Tool</h1>
+            <p>Compare biologics for asthma, atopic dermatitis, urticaria, and other allergic diseases</p>
+        </div>
+    </header>
+    
+    <div class="content-meta">
+        <span class="meta-badge">📅 Last updated: January 7, 2026</span>
+        <span class="meta-badge">💊 8 Biologics</span>
+        <span class="meta-badge">📋 Evidence-based</span>
+    </div>
+    
+    <main class="main">
+        <!-- Filters -->
+        <section class="filter-section">
+            <h2>🔍 Filter by Indication</h2>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label>Primary Indication</label>
+                    <select id="indicationFilter" onchange="filterTable()">
+                        <option value="all">All Indications</option>
+                        <option value="asthma">Severe Asthma</option>
+                        <option value="ciu">Chronic Urticaria (CIU/CSU)</option>
+                        <option value="ad">Atopic Dermatitis</option>
+                        <option value="crswnp">CRS with Nasal Polyps</option>
+                        <option value="eoe">Eosinophilic Esophagitis</option>
+                        <option value="food">Food Allergy</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Mechanism Target</label>
+                    <select id="mechanismFilter" onchange="filterTable()">
+                        <option value="all">All Mechanisms</option>
+                        <option value="ige">Anti-IgE</option>
+                        <option value="il5">Anti-IL-5/IL-5R</option>
+                        <option value="il4">Anti-IL-4/IL-13</option>
+                        <option value="tslp">Anti-TSLP</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Phenotype/Biomarker</label>
+                    <select id="phenotypeFilter" onchange="filterTable()">
+                        <option value="all">All Phenotypes</option>
+                        <option value="eos">Eosinophilic (High Eos)</option>
+                        <option value="allergic">Allergic (High IgE)</option>
+                        <option value="any">Phenotype-Agnostic</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Administration</label>
+                    <select id="adminFilter" onchange="filterTable()">
+                        <option value="all">Any Route</option>
+                        <option value="self">Self-Injectable</option>
+                        <option value="office">Office Administration</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Comparison Table -->
+        <div class="table-container">
+            <table class="comparison-table" id="biologicsTable">
+                <thead>
+                    <tr>
+                        <th>Drug</th>
+                        <th>Indications</th>
+                        <th>Mechanism</th>
+                        <th>Dosing</th>
+                        <th>Biomarker Predictors</th>
+                        <th>Key Side Effects</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Omalizumab -->
+                    <tr data-indications="asthma,ciu,food" data-mechanism="ige" data-phenotype="allergic" data-admin="office,self">
+                        <td>
+                            <span class="drug-name">Omalizumab</span>
+                            <span class="brand-name">Xolair®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 6+</span>
+                            <span class="indication-tag ciu">CIU 12+</span>
+                            <span class="indication-tag food">Food Allergy 1+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IgE</span><br>
+                            Binds free IgE, prevents binding to FcεRI on mast cells/basophils
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Asthma:</strong> 150-375mg q2-4wks (based on IgE + weight)<br>
+                            <strong>CIU:</strong> 150-300mg q4wks<br>
+                            <strong>Food allergy:</strong> 75-600mg q2-4wks (weight-based)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Total IgE 30-1500 IU/mL</span><br>
+                            <span class="biomarker-positive">✓ Positive aeroallergen SPT/sIgE</span><br>
+                            <span class="biomarker-note">IgE not predictive for CIU</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Injection site reactions</li>
+                                <li class="boxed-warning">⚠️ Anaphylaxis (0.1-0.2%)</li>
+                                <li>Headache</li>
+                                <li>Arthralgia</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            First 3 doses in office; home admin possible after. Observe 30min post-injection (2hrs for food allergy indication). Longest safety track record.
+                        </td>
+                    </tr>
+                    
+                    <!-- Dupilumab -->
+                    <tr data-indications="asthma,ad,crswnp,eoe,prurigo" data-mechanism="il4" data-phenotype="eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Dupilumab</span>
+                            <span class="brand-name">Dupixent®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 6+</span>
+                            <span class="indication-tag ad">Atopic Derm 6mo+</span>
+                            <span class="indication-tag crswnp">CRSwNP 18+</span>
+                            <span class="indication-tag eoe">EoE 12+</span>
+                            <span class="indication-tag prurigo">Prurigo Nod</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-4Rα</span><br>
+                            Blocks IL-4 AND IL-13 signaling (shared receptor); reduces Th2 inflammation
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Adults:</strong> 600mg load → 300mg q2wks<br>
+                            <strong>Asthma:</strong> 400mg load → 200mg q2wks (or 600/300 if OCS-dependent or high eos)<br>
+                            <strong>Peds:</strong> Weight-based
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥150 or FeNO ≥25</span><br>
+                            <span class="biomarker-positive">✓ Higher eos = better response</span><br>
+                            <span class="biomarker-note">Also works in some non-eos asthma</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Injection site reactions (15%)</li>
+                                <li>Conjunctivitis (AD indication)</li>
+                                <li>Eosinophilia (transient)</li>
+                                <li>Arthralgia</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Broadest indications. Self-injectable at home. No boxed warnings. Watch for conjunctivitis in AD patients. May cause transient eos rise.
+                        </td>
+                    </tr>
+                    
+                    <!-- Mepolizumab -->
+                    <tr data-indications="asthma,crswnp,egpa,hes" data-mechanism="il5" data-phenotype="eos" data-admin="self">
+                        <td>
+                            <span class="drug-name">Mepolizumab</span>
+                            <span class="brand-name">Nucala®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 6+</span>
+                            <span class="indication-tag crswnp">CRSwNP 18+</span>
+                            <span class="indication-tag egpa">EGPA 18+</span>
+                            <span class="indication-tag hes">HES 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-5</span><br>
+                            Binds IL-5, prevents eosinophil maturation and survival
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Asthma/CRSwNP:</strong> 100mg SC q4wks<br>
+                            <strong>EGPA:</strong> 300mg SC q4wks<br>
+                            <strong>HES:</strong> 300mg SC q4wks
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥150 (or ≥300 in past year)</span><br>
+                            <span class="biomarker-positive">✓ Higher baseline eos = better response</span><br>
+                            <span class="biomarker-note">OCS-dependent asthma responds well</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Injection site reactions</li>
+                                <li>Headache</li>
+                                <li>Back pain</li>
+                                <li>Fatigue</li>
+                                <li>Herpes zoster (rare)</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Only biologic for EGPA. Fixed dosing (simple). Can be self-administered. Consider for OCS-dependent eosinophilic asthma.
+                        </td>
+                    </tr>
+                    
+                    <!-- Benralizumab -->
+                    <tr data-indications="asthma" data-mechanism="il5" data-phenotype="eos" data-admin="self">
+                        <td>
+                            <span class="drug-name">Benralizumab</span>
+                            <span class="brand-name">Fasenra®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-5Rα</span><br>
+                            Binds IL-5 receptor; ADCC causes near-complete eosinophil depletion
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Loading:</strong> 30mg SC q4wks × 3 doses<br>
+                            <strong>Maintenance:</strong> 30mg SC q8wks
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥300</span><br>
+                            <span class="biomarker-positive">✓ Near-complete eos depletion</span><br>
+                            <span class="biomarker-note">Best for very high eos (≥500)</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Headache</li>
+                                <li>Pharyngitis</li>
+                                <li>Injection site reactions</li>
+                                <li>Hypersensitivity reactions</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Q8wk maintenance (fewer injections). Causes near-complete eos depletion via ADCC. May work faster than mepolizumab.
+                        </td>
+                    </tr>
+                    
+                    <!-- Reslizumab -->
+                    <tr data-indications="asthma" data-mechanism="il5" data-phenotype="eos" data-admin="office">
+                        <td>
+                            <span class="drug-name">Reslizumab</span>
+                            <span class="brand-name">Cinqair®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 18+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-5</span><br>
+                            Binds IL-5, prevents eosinophil maturation
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>3 mg/kg IV q4wks</strong><br>
+                            (Weight-based dosing)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥400</span><br>
+                            <span class="biomarker-note">Only IV biologic for asthma</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li class="boxed-warning">⚠️ Anaphylaxis (0.3%)</li>
+                                <li>Oropharyngeal pain</li>
+                                <li>Myalgia</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Only IV option. Weight-based (advantage for larger patients). Must be given in healthcare setting. Anaphylaxis risk requires monitoring.
+                        </td>
+                    </tr>
+                    
+                    <!-- Tezepelumab -->
+                    <tr data-indications="asthma" data-mechanism="tslp" data-phenotype="any,eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Tezepelumab</span>
+                            <span class="brand-name">Tezspire®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-TSLP</span><br>
+                            Blocks TSLP (epithelial alarmin); upstream inhibition of multiple inflammatory pathways
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>210mg SC q4wks</strong><br>
+                            (Fixed dosing)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Works across phenotypes</span><br>
+                            <span class="biomarker-positive">✓ Effective in low-eos asthma</span><br>
+                            <span class="biomarker-note">Best option for non-T2 asthma</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Pharyngitis</li>
+                                <li>Arthralgia</li>
+                                <li>Back pain</li>
+                                <li>Injection site reactions</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Phenotype-agnostic (works in low-eos asthma). Upstream mechanism. Good option when unclear phenotype or non-responders to other biologics.
+                        </td>
+                    </tr>
+                    
+                    <!-- Lebrikizumab -->
+                    <tr data-indications="ad" data-mechanism="il4" data-phenotype="eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Lebrikizumab</span>
+                            <span class="brand-name">Ebglyss®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag ad">Atopic Derm 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-13</span><br>
+                            Selectively blocks IL-13 (not IL-4); targets skin inflammation
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Loading:</strong> 500mg SC (2×250mg) at weeks 0 and 2<br>
+                            <strong>Maintenance:</strong> 250mg SC q2wks (may extend to q4wks if clear)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-note">No specific biomarker required</span><br>
+                            <span class="biomarker-note">Moderate-severe AD failing topicals</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Conjunctivitis (8%)</li>
+                                <li>Injection site reactions</li>
+                                <li>Herpes infections</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Newer anti-IL-13 for AD. May extend to monthly dosing in responders. Similar conjunctivitis risk as dupilumab. Not yet approved for asthma.
+                        </td>
+                    </tr>
+                    
+                    <!-- Tralokinumab -->
+                    <tr data-indications="ad" data-mechanism="il4" data-phenotype="eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Tralokinumab</span>
+                            <span class="brand-name">Adbry®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag ad">Atopic Derm 18+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-13</span><br>
+                            Blocks IL-13 binding to IL-13Rα1 and IL-13Rα2
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Loading:</strong> 600mg SC at week 0<br>
+                            <strong>Maintenance:</strong> 300mg SC q2wks (may extend to q4wks)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-note">No specific biomarker required</span><br>
+                            <span class="biomarker-note">Moderate-severe AD failing topicals</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Upper respiratory infections</li>
+                                <li>Conjunctivitis (7%)</li>
+                                <li>Injection site reactions</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Anti-IL-13 for AD (adults only currently). Can be used with topical corticosteroids. Less data than dupilumab but similar efficacy.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h3>📋 Indication Key</h3>
+            <div class="legend-grid">
+                <span class="indication-tag asthma">Severe Asthma</span>
+                <span class="indication-tag ciu">Chronic Urticaria</span>
+                <span class="indication-tag ad">Atopic Dermatitis</span>
+                <span class="indication-tag crswnp">CRS w/ Nasal Polyps</span>
+                <span class="indication-tag eoe">Eosinophilic Esophagitis</span>
+                <span class="indication-tag food">Food Allergy</span>
+            </div>
+        </div>
+        
+        <!-- Clinical Pearls -->
+        <section class="pearls-section">
+            <h2>💡 Clinical Decision Pearls</h2>
+            
+            <div class="pearl-card">
+                <strong>High Eosinophils (≥300):</strong> Anti-IL-5 agents (mepolizumab, benralizumab) or dupilumab are excellent choices. Benralizumab causes near-complete eosinophil depletion and has q8wk maintenance dosing.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Allergic Asthma with High IgE:</strong> Omalizumab is first-line if IgE 30-1500 IU/mL and positive aeroallergen sensitization. Longest safety track record (20+ years).
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Low/Unknown Eosinophils:</strong> Tezepelumab works across phenotypes including low-eos asthma. Consider when T2 biomarkers are low or phenotype unclear.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Multiple Atopic Comorbidities:</strong> Dupilumab covers asthma + atopic dermatitis + CRSwNP + EoE. One drug for multiple conditions = simplified regimen.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>OCS-Dependent Asthma:</strong> All asthma biologics can reduce OCS use. Anti-IL-5 agents and dupilumab have strong OCS-sparing data. Goal is complete OCS elimination.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>EGPA (Churg-Strauss):</strong> Mepolizumab is the only biologic FDA-approved for EGPA. Reduces relapse and allows OCS tapering.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Food Allergy:</strong> Omalizumab is FDA-approved to reduce allergic reactions to accidental food exposure in patients 1+ years old. Does NOT replace food avoidance or epinephrine for anaphylaxis.
+            </div>
+        </section>
+        
+        <!-- References -->
+        <div class="references">
+            <h3>📚 References & Guidelines</h3>
+            
+            <div class="reference-item">
+                Global Initiative for Asthma. <strong>GINA Report 2024: Difficult-to-Treat and Severe Asthma.</strong>
+                <a href="https://ginasthma.org/severe-asthma/" target="_blank">ginasthma.org</a>
+                <span class="open-access">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Busse WW, et al. <strong>Biologics for Severe Asthma: Current Evidence and Future Directions.</strong> J Allergy Clin Immunol. 2023.
+            </div>
+            
+            <div class="reference-item">
+                FDA Prescribing Information for each biologic agent (Xolair, Dupixent, Nucala, Fasenra, Cinqair, Tezspire, Ebglyss, Adbry).
+                <a href="https://www.accessdata.fda.gov/scripts/cder/daf/" target="_blank">FDA Drug Database</a>
+                <span class="open-access">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                AAAAI/ACAAI Joint Task Force. <strong>Practice Parameters for Biologic Therapies.</strong>
+                <a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank">AAAAI</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 Dx Learning Ecosystem · <a href="allergy-immunology-hub.html">Allergy/Immunology Hub</a></p>
+        <p style="margin-top: 8px;">Created for medical education</p>
+    </footer>
+    
+    <script>
+        function filterTable() {
+            const indication = document.getElementById('indicationFilter').value;
+            const mechanism = document.getElementById('mechanismFilter').value;
+            const phenotype = document.getElementById('phenotypeFilter').value;
+            const admin = document.getElementById('adminFilter').value;
+            
+            const rows = document.querySelectorAll('#biologicsTable tbody tr');
+            
+            rows.forEach(row => {
+                const rowIndications = row.dataset.indications || '';
+                const rowMechanism = row.dataset.mechanism || '';
+                const rowPhenotype = row.dataset.phenotype || '';
+                const rowAdmin = row.dataset.admin || '';
+                
+                let show = true;
+                
+                if (indication !== 'all' && !rowIndications.includes(indication)) {
+                    show = false;
+                }
+                if (mechanism !== 'all' && rowMechanism !== mechanism) {
+                    show = false;
+                }
+                if (phenotype !== 'all' && !rowPhenotype.includes(phenotype)) {
+                    show = false;
+                }
+                if (admin !== 'all' && !rowAdmin.includes(admin)) {
+                    show = false;
+                }
+                
+                row.classList.toggle('hidden', !show);
+            });
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "Home", platformRoot: "" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Biologics Selector Tool"
+         data-key-points="clinical education, patient care, evidence-based practice"
+         data-objectives="Apply clinical knowledge, improve patient outcomes"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

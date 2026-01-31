@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta-Lactam Antibiotics | PharmacologyDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-bg: #eff6ff;
+            --secondary: #059669;
+            --tertiary: #7c3aed;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; }
+        .nav-link:hover { background: var(--border); }
+        .nav-link.active { background: var(--primary); color: white; }
+        
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 48px 24px; }
+        .header-inner { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 36px; color: white; margin-bottom: 8px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
+        .header-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .header-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: white; }
+        
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives { background: linear-gradient(135deg, var(--primary-bg) 0%, #dbeafe 100%); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .objectives h2 { color: var(--primary); font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 20px; color: var(--primary-dark); }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
+        .section h2 { font-size: 22px; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { font-size: 18px; color: var(--primary-dark); margin: 24px 0 12px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .mechanism-box { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .mechanism-box h4 { color: #047857; margin-bottom: 12px; font-size: 16px; }
+        .mechanism-steps { display: flex; flex-direction: column; gap: 12px; }
+        .mechanism-step { display: flex; gap: 12px; align-items: flex-start; }
+        .step-num { width: 28px; height: 28px; background: #059669; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .step-text { color: #065f46; }
+        
+        .drug-class-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+        .drug-class-header { background: var(--primary-bg); padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .drug-class-header h4 { color: var(--primary); margin: 0; }
+        .drug-class-body { padding: 20px; }
+        .drug-class-body .row { display: grid; grid-template-columns: 120px 1fr; gap: 8px; margin-bottom: 12px; font-size: 14px; }
+        .drug-class-body .label { color: var(--text-secondary); font-weight: 500; }
+        .drug-class-body .value { color: var(--text-primary); }
+        
+        .generation-timeline { position: relative; padding-left: 30px; margin: 20px 0; }
+        .generation-timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .generation-item { position: relative; margin-bottom: 24px; }
+        .generation-item::before { content: ''; position: absolute; left: -24px; top: 8px; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; }
+        .generation-item h4 { color: var(--primary); margin-bottom: 8px; }
+        .generation-item p { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; }
+        
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+        .comparison-table th, .comparison-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        .comparison-table th { background: var(--primary-bg); color: var(--primary-dark); font-weight: 600; }
+        .comparison-table tr:hover { background: #f8fafc; }
+        
+        .resistance-section { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .resistance-section h4 { color: #991b1b; margin-bottom: 16px; }
+        .resistance-mechanism { background: white; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+        .resistance-mechanism h5 { color: #7f1d1d; margin-bottom: 8px; }
+        .resistance-mechanism p { font-size: 14px; color: #991b1b; margin: 0; }
+        
+        .key-point { background: var(--primary-bg); border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: var(--primary-dark); }
+        
+        .mcat-tip { background: #fef3c7; border-left: 4px solid var(--warning); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .mcat-tip strong { color: #92400e; }
+        .mcat-tip::before { content: '🎯 MCAT/Step 1: '; font-weight: 600; color: #92400e; }
+        
+        .clinical-pearl { background: #ecfdf5; border-left: 4px solid var(--secondary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl strong { color: #047857; }
+        .clinical-pearl::before { content: '🏥 Clinical: '; font-weight: 600; color: #047857; }
+        
+        .allergy-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .allergy-box h4 { color: #92400e; margin-bottom: 16px; }
+        .allergy-box ul { margin-left: 20px; color: #78350f; }
+        .allergy-box li { margin-bottom: 8px; }
+        
+        .cross-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 20px; }
+        .cross-link { display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; text-decoration: none; color: inherit; border: 1px solid var(--border); transition: all 0.2s; }
+        .cross-link:hover { transform: translateX(4px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 28px; }
+            .drug-class-body .row { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">💊 PharmacologyDx</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">DxSuite Home</a>
+                <a href="../microbiology/index.html" class="nav-link">Microbiology</a>
+                <a href="index.html" class="nav-link active">Pharmacology</a>
+                <a href="../CoachDx/index.html" class="nav-link">CoachDx</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb">
+                <a href="index.html">Pharmacology</a> → <a href="antimicrobials.html">Antimicrobials</a> → Beta-Lactams
+            </div>
+            <h1>Beta-Lactam Antibiotics</h1>
+            <p class="header-subtitle">The Foundation of Antibacterial Therapy - Penicillins, Cephalosporins, Carbapenems & Monobactams</p>
+            <div class="header-tags">
+                <span class="header-tag">Cell Wall Synthesis Inhibitor</span>
+                <span class="header-tag">Bactericidal</span>
+                <span class="header-tag">Time-Dependent Killing</span>
+                <span class="header-tag">PBP Target</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Learning Objectives -->
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Explain the mechanism of action of beta-lactam antibiotics (MCAT, Step 1)</li>
+                <li>Compare the spectrum of coverage across beta-lactam classes (Step 1, Clinical)</li>
+                <li>Describe mechanisms of bacterial resistance to beta-lactams (MCAT, Step 1)</li>
+                <li>Apply knowledge to select appropriate beta-lactam therapy (Clinical)</li>
+                <li>Recognize and manage beta-lactam allergies (Clinical)</li>
+            </ul>
+        </div>
+
+        <!-- Mechanism of Action -->
+        <section class="section">
+            <h2>⚙️ Mechanism of Action</h2>
+            
+            <p>Beta-lactam antibiotics contain a characteristic <strong>beta-lactam ring</strong> - a four-membered cyclic amide that is essential for activity. They work by inhibiting bacterial cell wall synthesis.</p>
+
+            <div class="mechanism-box">
+                <h4>Step-by-Step Mechanism</h4>
+                <div class="mechanism-steps">
+                    <div class="mechanism-step">
+                        <div class="step-num">1</div>
+                        <div class="step-text"><strong>Structural mimicry:</strong> The beta-lactam ring mimics the D-alanyl-D-alanine terminus of peptidoglycan precursors</div>
+                    </div>
+                    <div class="mechanism-step">
+                        <div class="step-num">2</div>
+                        <div class="step-text"><strong>PBP binding:</strong> Beta-lactams bind covalently to Penicillin-Binding Proteins (PBPs) - transpeptidases that cross-link peptidoglycan</div>
+                    </div>
+                    <div class="mechanism-step">
+                        <div class="step-num">3</div>
+                        <div class="step-text"><strong>Inhibition:</strong> PBP inhibition prevents cross-linking of peptidoglycan chains → weakened cell wall</div>
+                    </div>
+                    <div class="mechanism-step">
+                        <div class="step-num">4</div>
+                        <div class="step-text"><strong>Autolysis:</strong> Autolytic enzymes (murein hydrolases) continue degrading existing wall → osmotic lysis → cell death</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mcat-tip">
+                Beta-lactams are <strong>bactericidal</strong> (kill bacteria) and exhibit <strong>time-dependent killing</strong> - efficacy depends on the TIME that drug concentration exceeds MIC, not peak concentration. This is why continuous or frequent dosing is important. Compare to aminoglycosides which show concentration-dependent killing.
+            </div>
+
+            <div class="key-point">
+                <strong>Why bacteria, not humans?</strong> Human cells don't have cell walls - they have cell membranes with cholesterol instead. This is why beta-lactams have excellent selective toxicity (harm bacteria, not host cells).
+            </div>
+        </section>
+
+        <!-- Beta-Lactam Classes -->
+        <section class="section">
+            <h2>📊 Beta-Lactam Classes</h2>
+            
+            <h3>Penicillins</h3>
+            
+            <div class="drug-class-card">
+                <div class="drug-class-header">
+                    <h4>Natural Penicillins (Penicillin G, Penicillin V)</h4>
+                </div>
+                <div class="drug-class-body">
+                    <div class="row">
+                        <span class="label">Spectrum:</span>
+                        <span class="value">Streptococci (including S. pyogenes, S. pneumo - if susceptible), Neisseria, Treponema pallidum, Listeria, Actinomyces</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Uses:</span>
+                        <span class="value">Strep pharyngitis, syphilis (all stages), rheumatic fever prophylaxis</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">NOT Effective:</span>
+                        <span class="value">Most Staph (β-lactamase), Gram-negatives (can't penetrate outer membrane)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drug-class-card">
+                <div class="drug-class-header">
+                    <h4>Anti-Staphylococcal Penicillins (Nafcillin, Oxacillin, Dicloxacillin)</h4>
+                </div>
+                <div class="drug-class-body">
+                    <div class="row">
+                        <span class="label">Spectrum:</span>
+                        <span class="value">MSSA (methicillin-susceptible S. aureus), Streptococci</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Feature:</span>
+                        <span class="value">β-lactamase RESISTANT (bulky side chain protects β-lactam ring)</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Uses:</span>
+                        <span class="value">MSSA bacteremia, endocarditis, osteomyelitis - PREFERRED over vancomycin for MSSA!</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">NOT Effective:</span>
+                        <span class="value">MRSA (altered PBP2a), Gram-negatives, Enterococci</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drug-class-card">
+                <div class="drug-class-header">
+                    <h4>Aminopenicillins (Ampicillin, Amoxicillin)</h4>
+                </div>
+                <div class="drug-class-body">
+                    <div class="row">
+                        <span class="label">Spectrum:</span>
+                        <span class="value">Same as natural penicillins PLUS: E. coli, H. influenzae, Salmonella, Shigella, Listeria, Enterococcus</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Feature:</span>
+                        <span class="value">Extended Gram-negative coverage (amino group allows penetration through porins)</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Uses:</span>
+                        <span class="value">Listeria meningitis, enterococcal infections, H. pylori (with other agents), otitis media</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Rash Alert:</span>
+                        <span class="value">Ampicillin causes rash in EBV mononucleosis (not true allergy - mechanism unknown)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drug-class-card">
+                <div class="drug-class-header">
+                    <h4>Anti-Pseudomonal Penicillins (Piperacillin, Ticarcillin)</h4>
+                </div>
+                <div class="drug-class-body">
+                    <div class="row">
+                        <span class="label">Spectrum:</span>
+                        <span class="value">Broadest penicillin spectrum - includes Pseudomonas aeruginosa, many Enterobacteriaceae</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Combined with:</span>
+                        <span class="value">β-lactamase inhibitors (piperacillin-tazobactam = "Pip-Tazo" or Zosyn)</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Uses:</span>
+                        <span class="value">Hospital-acquired infections, neutropenic fever, intra-abdominal infections</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clinical-pearl">
+                For serious MSSA infections (bacteremia, endocarditis), nafcillin/oxacillin or cefazolin are PREFERRED over vancomycin. Studies show better outcomes with β-lactams for MSSA - "Don't vanco when you can nafcillin!"
+            </div>
+        </section>
+
+        <!-- Cephalosporins -->
+        <section class="section">
+            <h2>🔬 Cephalosporins by Generation</h2>
+            
+            <div class="generation-timeline">
+                <div class="generation-item">
+                    <h4>1st Generation (Cefazolin, Cephalexin)</h4>
+                    <p><strong>Spectrum:</strong> Excellent Gram-positive (MSSA, Strep), limited Gram-negative (E. coli, Klebsiella, Proteus)</p>
+                    <p><strong>Uses:</strong> Surgical prophylaxis (#1 choice), skin/soft tissue, UTI, MSSA infections</p>
+                    <p><strong>Remember:</strong> "First = Focused on Gram-positives"</p>
+                </div>
+                
+                <div class="generation-item">
+                    <h4>2nd Generation (Cefuroxime, Cefoxitin, Cefotetan)</h4>
+                    <p><strong>Spectrum:</strong> Less Gram-positive, more Gram-negative (H. flu, M. catarrhalis). Cefoxitin/cefotetan have anaerobe coverage.</p>
+                    <p><strong>Uses:</strong> CAP, sinusitis, intra-abdominal (cefoxitin), surgical prophylaxis (GI/GYN)</p>
+                    <p><strong>Remember:</strong> "Second = Shifts toward Gram-negatives + some anaerobes"</p>
+                </div>
+                
+                <div class="generation-item">
+                    <h4>3rd Generation (Ceftriaxone, Cefotaxime, Ceftazidime)</h4>
+                    <p><strong>Spectrum:</strong> Excellent Gram-negative (crosses BBB!), less Gram-positive. Ceftazidime covers Pseudomonas.</p>
+                    <p><strong>Uses:</strong> Meningitis, serious Gram-negative infections, gonorrhea (ceftriaxone), CAP (hospitalized)</p>
+                    <p><strong>Remember:</strong> "Third = Terrific for meningitis and serious GNRs"</p>
+                </div>
+                
+                <div class="generation-item">
+                    <h4>4th Generation (Cefepime)</h4>
+                    <p><strong>Spectrum:</strong> Broad - good Gram-positive AND Gram-negative including Pseudomonas</p>
+                    <p><strong>Uses:</strong> Neutropenic fever, nosocomial infections, Pseudomonal infections</p>
+                    <p><strong>Remember:</strong> "Fourth = Full spectrum (both sides)"</p>
+                </div>
+                
+                <div class="generation-item">
+                    <h4>5th Generation (Ceftaroline, Ceftobiprole)</h4>
+                    <p><strong>Spectrum:</strong> MRSA coverage! Binds altered PBP2a. Also covers usual Gram-negatives (not Pseudomonas)</p>
+                    <p><strong>Uses:</strong> MRSA skin infections, CAP</p>
+                    <p><strong>Remember:</strong> "Fifth = Finally covers MRSA"</p>
+                </div>
+            </div>
+
+            <div class="mcat-tip">
+                General rule: As cephalosporin generation increases, Gram-NEGATIVE coverage increases and Gram-POSITIVE coverage decreases (except 5th gen which adds MRSA back). Think of it as a trade-off... until 5th generation breaks the pattern.
+            </div>
+        </section>
+
+        <!-- Carbapenems and Monobactams -->
+        <section class="section">
+            <h2>💪 Carbapenems & Monobactams</h2>
+            
+            <div class="drug-class-card">
+                <div class="drug-class-header">
+                    <h4>Carbapenems (Meropenem, Imipenem, Ertapenem, Doripenem)</h4>
+                </div>
+                <div class="drug-class-body">
+                    <div class="row">
+                        <span class="label">Spectrum:</span>
+                        <span class="value">BROADEST of all β-lactams! Gram-positive, Gram-negative, anaerobes. ESBL-stable.</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Feature:</span>
+                        <span class="value">Resistant to most β-lactamases (including ESBLs). "Big guns" of antibiotics.</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Notable Gaps:</span>
+                        <span class="value">MRSA, VRE, atypicals (Legionella, Mycoplasma), Stenotrophomonas</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Ertapenem:</span>
+                        <span class="value">Once-daily dosing BUT no Pseudomonas or Acinetobacter coverage</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Imipenem:</span>
+                        <span class="value">Combined with cilastatin (prevents renal degradation). Lowers seizure threshold!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drug-class-card">
+                <div class="drug-class-header">
+                    <h4>Monobactams (Aztreonam)</h4>
+                </div>
+                <div class="drug-class-body">
+                    <div class="row">
+                        <span class="label">Spectrum:</span>
+                        <span class="value">ONLY Gram-negatives (including Pseudomonas). No Gram-positive or anaerobe activity.</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Feature:</span>
+                        <span class="value">Safe in penicillin-allergic patients! Different ring structure = minimal cross-reactivity.</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Key Use:</span>
+                        <span class="value">Gram-negative infections in patients with severe penicillin allergy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- β-Lactamase Inhibitors -->
+        <section class="section">
+            <h2>🛡️ β-Lactamase Inhibitors</h2>
+            
+            <p>These agents have minimal antibacterial activity alone but protect β-lactams from enzymatic degradation:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Inhibitor</th>
+                        <th>Combined With</th>
+                        <th>Trade Name</th>
+                        <th>Added Coverage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Clavulanic acid</strong></td>
+                        <td>Amoxicillin</td>
+                        <td>Augmentin</td>
+                        <td>β-lactamase producing H. flu, M. catarrhalis, MSSA, some anaerobes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sulbactam</strong></td>
+                        <td>Ampicillin</td>
+                        <td>Unasyn</td>
+                        <td>Similar to above; also has intrinsic activity vs Acinetobacter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tazobactam</strong></td>
+                        <td>Piperacillin</td>
+                        <td>Zosyn</td>
+                        <td>Broad spectrum including many ESBL producers (but not all!)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avibactam</strong></td>
+                        <td>Ceftazidime</td>
+                        <td>Avycaz</td>
+                        <td>KPC carbapenemases, ESBLs, AmpC - for CRE!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vaborbactam</strong></td>
+                        <td>Meropenem</td>
+                        <td>Vabomere</td>
+                        <td>KPC carbapenemases - for CRE!</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-point">
+                <strong>Important:</strong> β-lactamase inhibitors do NOT help against MRSA (which has altered PBPs, not β-lactamases) or against metallo-β-lactamases (like NDM-1). Know the difference between enzymatic resistance and target modification!
+            </div>
+        </section>
+
+        <!-- Resistance Mechanisms -->
+        <section class="section">
+            <h2>🦠 Mechanisms of Resistance</h2>
+            
+            <div class="resistance-section">
+                <h4>⚠️ How Bacteria Resist Beta-Lactams</h4>
+                
+                <div class="resistance-mechanism">
+                    <h5>1. β-Lactamase Production (Most Common)</h5>
+                    <p>Enzymes that hydrolyze the β-lactam ring. Types include: penicillinases, ESBLs (extended-spectrum β-lactamases), AmpC β-lactamases, carbapenemases (KPC, NDM, OXA). Genes often on plasmids = transferable!</p>
+                </div>
+                
+                <div class="resistance-mechanism">
+                    <h5>2. Altered PBPs (Target Modification)</h5>
+                    <p>MRSA has mecA gene encoding PBP2a with low affinity for β-lactams. S. pneumoniae acquires altered PBPs through transformation. This is NOT overcome by β-lactamase inhibitors!</p>
+                </div>
+                
+                <div class="resistance-mechanism">
+                    <h5>3. Decreased Permeability</h5>
+                    <p>Gram-negatives can lose or modify outer membrane porins (OprD in Pseudomonas). Prevents drug entry into periplasmic space.</p>
+                </div>
+                
+                <div class="resistance-mechanism">
+                    <h5>4. Efflux Pumps</h5>
+                    <p>Active transport of drug out of cell. Important in Pseudomonas (MexAB-OprM system). Often contributes to multidrug resistance.</p>
+                </div>
+            </div>
+
+            <div class="mcat-tip">
+                MRSA = altered PBP (mecA gene → PBP2a). NOT β-lactamase! This is why β-lactamase inhibitors don't work against MRSA, and why ALL β-lactams fail (penicillins, cephalosporins, AND carbapenems) - except ceftaroline which binds PBP2a.
+            </div>
+        </section>
+
+        <!-- Allergy Section -->
+        <section class="section">
+            <h2>⚠️ Beta-Lactam Allergy</h2>
+            
+            <div class="allergy-box">
+                <h4>Understanding Penicillin Allergy</h4>
+                <ul>
+                    <li><strong>~10% of patients report penicillin allergy</strong>, but only ~1-2% have true IgE-mediated allergy when tested</li>
+                    <li><strong>Most "allergies" are not true allergies:</strong> childhood rashes (often viral), GI upset, family history</li>
+                    <li><strong>True IgE-mediated reactions:</strong> urticaria, angioedema, anaphylaxis within 1 hour of dose</li>
+                    <li><strong>Delayed reactions:</strong> maculopapular rash (days later) - generally not dangerous, may be able to continue</li>
+                </ul>
+            </div>
+
+            <h3>Cross-Reactivity</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Drug Class</th>
+                        <th>Cross-Reactivity with Penicillin</th>
+                        <th>Clinical Guidance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cephalosporins</strong></td>
+                        <td>~2% (mostly 1st gen, side-chain dependent)</td>
+                        <td>Generally safe to use 3rd/4th gen in penicillin allergy. Avoid if anaphylaxis to amoxicillin (similar side chain to cephalexin)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Carbapenems</strong></td>
+                        <td>< 1%</td>
+                        <td>Safe in most penicillin-allergic patients. Consider in severe allergy.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aztreonam</strong></td>
+                        <td>~0% (different ring structure)</td>
+                        <td>Safe to use in penicillin allergy. EXCEPT: cross-reacts with ceftazidime (same side chain)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="clinical-pearl">
+                Penicillin allergy delabeling is important! Many patients labeled "allergic" can safely receive penicillins, leading to better outcomes and less antibiotic resistance. Skin testing can identify true IgE-mediated allergy. Consider referral to allergist for high-risk patients.
+            </div>
+        </section>
+
+        <!-- Pharmacokinetics -->
+        <section class="section">
+            <h2>📈 Pharmacokinetic Pearls</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Clinical Implication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Time-dependent killing</strong></td>
+                        <td>Efficacy depends on time above MIC. Frequent dosing or continuous infusion improves outcomes.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Renal excretion</strong></td>
+                        <td>Most β-lactams require dose adjustment in renal impairment. Exception: nafcillin, ceftriaxone (hepatic).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CNS penetration</strong></td>
+                        <td>Inflamed meninges allow penetration. 3rd gen cephalosporins (ceftriaxone) and carbapenems (meropenem) preferred for meningitis.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ceftriaxone + calcium</strong></td>
+                        <td>Do NOT mix with calcium-containing solutions in neonates - can form fatal precipitates!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Probenecid interaction</strong></td>
+                        <td>Blocks renal tubular secretion → increased penicillin levels. Used therapeutically (e.g., with ceftriaxone for gonorrhea).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Cross-Links -->
+        <section class="section">
+            <h2>🔗 Related Learning</h2>
+            <div class="cross-links">
+                <a href="../microbiology/s-aureus-module.html" class="cross-link">
+                    <div style="width: 40px; height: 40px; background: #ede9fe; border-radius: 8px; display: flex; align-items: center; justify-content: center;">🦠</div>
+                    <div>
+                        <strong>S. aureus Module</strong>
+                        <div style="font-size: 12px; color: var(--text-secondary);">MSSA vs MRSA treatment</div>
+                    </div>
+                </a>
+                <a href="../microbiology/foundations/bacterial-structure.html" class="cross-link">
+                    <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center;">🧬</div>
+                    <div>
+                        <strong>Bacterial Cell Structure</strong>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Peptidoglycan & cell wall</div>
+                    </div>
+                </a>
+                <a href="../microbiology/foundations/resistance-mechanisms.html" class="cross-link">
+                    <div style="width: 40px; height: 40px; background: #fee2e2; border-radius: 8px; display: flex; align-items: center; justify-content: center;">🛡️</div>
+                    <div>
+                        <strong>Resistance Mechanisms</strong>
+                        <div style="font-size: 12px; color: var(--text-secondary);">ESBLs, carbapenemases, efflux</div>
+                    </div>
+                </a>
+                <a href="vancomycin.html" class="cross-link">
+                    <div style="width: 40px; height: 40px; background: #fef3c7; border-radius: 8px; display: flex; align-items: center; justify-content: center;">💊</div>
+                    <div>
+                        <strong>Vancomycin Module</strong>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Alternative cell wall inhibitor</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="section" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-color: var(--primary);">
+            <h2>📝 High-Yield Summary</h2>
+            <ul style="margin-left: 20px;">
+                <li><strong>Mechanism:</strong> Inhibit PBPs (transpeptidases) → prevent peptidoglycan cross-linking → cell wall weakening → osmotic lysis</li>
+                <li><strong>Time-dependent killing:</strong> Efficacy depends on time above MIC (not peak concentration)</li>
+                <li><strong>Penicillins:</strong> Natural (strep, syphilis), anti-staph (MSSA), aminopenicillins (+ Listeria, enterococci), anti-pseudomonal</li>
+                <li><strong>Cephalosporins:</strong> ↑ generation = ↑ Gram-negative, ↓ Gram-positive (except 5th gen = MRSA)</li>
+                <li><strong>Carbapenems:</strong> Broadest spectrum, ESBL-stable. Use for serious resistant infections.</li>
+                <li><strong>Aztreonam:</strong> Only Gram-negatives. Safe in penicillin allergy!</li>
+                <li><strong>MRSA resistance:</strong> Altered PBP2a (mecA gene), NOT β-lactamase. All β-lactams fail except ceftaroline.</li>
+                <li><strong>Cross-reactivity:</strong> Penicillin → cephalosporin ~2%. Aztreonam safe (except ceftazidime cross-reaction).</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>📚 Sources & Guidelines</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Content verified against current open-access guidelines:</p>
+            <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li><strong>IDSA/ATS Community-Acquired Pneumonia Guidelines (2019).</strong> Metlay JP, et al. <a href="https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST" target="_blank" style="color: #2563eb;">Am J Respir Crit Care Med 2019;200:e45-e67</a> [Beta-lactam selection for CAP]</li>
+                <li><strong>IDSA HAP/VAP Guidelines (2016).</strong> Kalil AC, et al. <a href="https://academic.oup.com/cid/article/63/5/e61/2237650" target="_blank" style="color: #2563eb;">Clin Infect Dis 2016;63:e61-e111</a> [Anti-pseudomonal beta-lactams]</li>
+                <li><strong>FDA Drug Labels:</strong> Penicillin, Ampicillin, Piperacillin-tazobactam, Ceftriaxone, Meropenem. <a href="https://dailymed.nlm.nih.gov" target="_blank" style="color: #2563eb;">DailyMed</a> [Spectra, dosing, toxicities]</li>
+                <li><strong>CDC Antibiotic Resistance Threats Report (2019).</strong> <a href="https://www.cdc.gov/drugresistance/biggest-threats.html" target="_blank" style="color: #2563eb;">cdc.gov</a> [ESBL, CRE epidemiology]</li>
+                <li><strong>AAAAI/ACAAI Drug Allergy Practice Parameter (2022).</strong> Cross-reactivity data, penicillin testing. <a href="https://www.jacionline.org" target="_blank" style="color: #2563eb;">J Allergy Clin Immunol</a></li>
+                <li><strong>Sanford Guide (concepts verified):</strong> Generation-based spectrum patterns consistent with published guidelines.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Beta"
+         data-key-points="🎯 Learning Objectives, ⚙️ Mechanism of Action, 📊 Beta-Lactam Classes, 🔬 Cephalosporins by Generation, 💪 Carbapenems & Monobactams, 🛡️ β-Lactamase Inhibitors, 🦠 Mechanisms of Resistance, ⚠️ Beta-Lactam Allergy, pharmacology, mechanism of action, spectrum, dosing, adverse effects, drug interactions, resistance"
+         data-objectives="Understand drug mechanism, apply appropriate dosing, recognize toxicities"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

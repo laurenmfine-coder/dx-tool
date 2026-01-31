@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Systemic Lupus Erythematosus</title>
+  <style>
+    :root{--primary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(8,145,178,0.1);border-radius:1rem;border:1px solid rgba(8,145,178,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(8,145,178,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(8,145,178,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(8,145,178,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🦋 Systemic Lupus Erythematosus</h1>
+      <p style="color:#9CA3AF">Diagnostic Criteria • Antibodies • Organ Manifestations</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('diagnosis')">Diagnosis</div>
+      <div class="nav-tab" onclick="showTab('antibodies')">Antibodies</div>
+      <div class="nav-tab" onclick="showTab('manifestations')">Manifestations</div>
+      <div class="nav-tab" onclick="showTab('treatment')">Treatment</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <div id="diagnosis" class="tab-content active">
+      <div class="section">
+        <h2>📋 Diagnosis</h2>
+        
+        <div class="key-box">
+          <strong>SLE = Chronic multisystem autoimmune disease</strong><br>
+          Most common in women of childbearing age (9:1 female:male)<br>
+          Higher prevalence in African American, Hispanic, Asian populations
+        </div>
+
+        <h3>Classic Mnemonic</h3>
+        <div class="mnemonic">
+          <strong>SOAP BRAIN MD</strong><br>
+          <strong>S</strong>erositis (pleuritis, pericarditis)<br>
+          <strong>O</strong>ral ulcers (usually painless)<br>
+          <strong>A</strong>rthritis (non-erosive, symmetric)<br>
+          <strong>P</strong>hotosensitivity<br>
+          <strong>B</strong>lood disorders (cytopenias)<br>
+          <strong>R</strong>enal disease<br>
+          <strong>A</strong>NA positive<br>
+          <strong>I</strong>mmunologic (anti-dsDNA, anti-Smith, antiphospholipid)<br>
+          <strong>N</strong>eurologic (seizures, psychosis)<br>
+          <strong>M</strong>alar rash<br>
+          <strong>D</strong>iscoid rash
+        </div>
+
+        <h3>2019 EULAR/ACR Classification Criteria</h3>
+        <div class="info-box">
+          <strong>Entry criterion:</strong> ANA ≥1:80 (required)<br><br>
+          <strong>Then score additive criteria (need ≥10 points):</strong>
+          <table>
+            <tr><th>Domain</th><th>Criteria</th><th>Points</th></tr>
+            <tr><td>Constitutional</td><td>Fever</td><td>2</td></tr>
+            <tr><td>Hematologic</td><td>Leukopenia, thrombocytopenia, autoimmune hemolysis</td><td>3-4</td></tr>
+            <tr><td>Neuropsychiatric</td><td>Delirium, psychosis, seizure</td><td>2-5</td></tr>
+            <tr><td>Mucocutaneous</td><td>Alopecia, oral ulcers, various rashes</td><td>2-6</td></tr>
+            <tr><td>Serosal</td><td>Pleural or pericardial effusion</td><td>5-6</td></tr>
+            <tr><td>Musculoskeletal</td><td>Joint involvement</td><td>6</td></tr>
+            <tr><td>Renal</td><td>Proteinuria, Class III-V nephritis</td><td>4-10</td></tr>
+            <tr><td>Immunologic</td><td>Anti-dsDNA, anti-Sm, antiphospholipid, complement</td><td>2-6</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="antibodies" class="tab-content">
+      <div class="section">
+        <h2>🔬 Autoantibodies</h2>
+
+        <table>
+          <tr><th>Antibody</th><th>Sensitivity</th><th>Specificity</th><th>Clinical Association</th></tr>
+          <tr><td><strong>ANA</strong></td><td>~95%</td><td>Low</td><td>Screening test; not diagnostic alone</td></tr>
+          <tr><td><strong>Anti-dsDNA</strong></td><td>~70%</td><td>High</td><td>Correlates with disease activity, <strong>lupus nephritis</strong></td></tr>
+          <tr><td><strong>Anti-Smith</strong></td><td>~30%</td><td><strong>Very high</strong></td><td>Most specific for SLE</td></tr>
+          <tr><td><strong>Anti-histone</strong></td><td>Variable</td><td>Moderate</td><td><strong>Drug-induced lupus</strong></td></tr>
+          <tr><td><strong>Anti-Ro (SS-A)</strong></td><td>~30%</td><td>Moderate</td><td>Photosensitivity, <strong>neonatal lupus</strong>, subacute cutaneous lupus</td></tr>
+          <tr><td><strong>Anti-La (SS-B)</strong></td><td>~15%</td><td>Moderate</td><td>Often with anti-Ro; Sjögren's overlap</td></tr>
+          <tr><td><strong>Anti-RNP</strong></td><td>~40%</td><td>Moderate</td><td>Mixed connective tissue disease overlap</td></tr>
+          <tr><td><strong>Antiphospholipid</strong></td><td>~30-40%</td><td>Moderate</td><td>Thrombosis, pregnancy loss</td></tr>
+        </table>
+
+        <h3>Complement Levels</h3>
+        <div class="key-box">
+          <strong>Low C3 and C4:</strong> Suggests active disease (complement consumption)<br>
+          Monitor for flares; rising complement = improvement
+        </div>
+
+        <h3>Drug-Induced Lupus</h3>
+        <div class="info-box">
+          <strong>Classic drugs:</strong> Hydralazine, procainamide, isoniazid, minocycline<br>
+          <strong>Features:</strong> Arthralgias, serositis, fever, rash<br>
+          <strong>Labs:</strong> Anti-histone antibodies (>95%), ANA positive<br>
+          <strong>Usually spares:</strong> Kidneys and CNS<br>
+          <strong>Treatment:</strong> Stop offending drug; usually resolves
+        </div>
+      </div>
+    </div>
+
+    <div id="manifestations" class="tab-content">
+      <div class="section">
+        <h2>🎯 Organ Manifestations</h2>
+
+        <h3>Mucocutaneous</h3>
+        <table>
+          <tr><th>Finding</th><th>Features</th></tr>
+          <tr><td><strong>Malar (butterfly) rash</strong></td><td>Erythema over cheeks and nose bridge; spares nasolabial folds</td></tr>
+          <tr><td><strong>Discoid rash</strong></td><td>Raised, scarring plaques; can cause permanent alopecia</td></tr>
+          <tr><td><strong>Photosensitivity</strong></td><td>Rash after sun exposure</td></tr>
+          <tr><td><strong>Oral ulcers</strong></td><td>Usually painless; hard/soft palate</td></tr>
+          <tr><td><strong>Alopecia</strong></td><td>Diffuse or patchy; "lupus hair" at hairline</td></tr>
+        </table>
+
+        <h3>Musculoskeletal</h3>
+        <ul>
+          <li>Inflammatory polyarthritis (symmetric, small joints)</li>
+          <li><strong>Non-erosive</strong> (unlike RA)</li>
+          <li>Jaccoud's arthropathy (reducible deformities)</li>
+          <li>Avascular necrosis (especially with steroid use)</li>
+        </ul>
+
+        <h3>Renal (Lupus Nephritis)</h3>
+        <div class="danger-box">
+          <strong>Major cause of morbidity and mortality!</strong><br><br>
+          <strong>ISN/RPS Classification:</strong>
+          <table>
+            <tr><th>Class</th><th>Description</th><th>Treatment</th></tr>
+            <tr><td>I</td><td>Minimal mesangial</td><td>Conservative</td></tr>
+            <tr><td>II</td><td>Mesangial proliferative</td><td>Conservative</td></tr>
+            <tr><td>III</td><td>Focal proliferative (<50%)</td><td>Immunosuppression</td></tr>
+            <tr><td>IV</td><td>Diffuse proliferative (>50%)</td><td><strong>Aggressive immunosuppression</strong></td></tr>
+            <tr><td>V</td><td>Membranous</td><td>Immunosuppression if nephrotic</td></tr>
+            <tr><td>VI</td><td>Advanced sclerosing</td><td>Supportive (irreversible)</td></tr>
+          </table>
+          <strong>Class IV is most common and severe</strong>
+        </div>
+
+        <h3>Hematologic</h3>
+        <ul>
+          <li>Autoimmune hemolytic anemia (Coombs positive)</li>
+          <li>Leukopenia, lymphopenia</li>
+          <li>Thrombocytopenia</li>
+        </ul>
+
+        <h3>Cardiovascular</h3>
+        <ul>
+          <li>Pericarditis (most common cardiac manifestation)</li>
+          <li>Libman-Sacks endocarditis (sterile vegetations)</li>
+          <li>Accelerated atherosclerosis</li>
+          <li>Myocarditis (rare)</li>
+        </ul>
+
+        <h3>Neuropsychiatric</h3>
+        <ul>
+          <li>Headache, cognitive dysfunction</li>
+          <li>Seizures, psychosis</li>
+          <li>Stroke (especially with antiphospholipid antibodies)</li>
+          <li>Peripheral neuropathy</li>
+        </ul>
+
+        <h3>Pulmonary</h3>
+        <ul>
+          <li>Pleuritis/pleural effusion (most common)</li>
+          <li>Acute lupus pneumonitis</li>
+          <li>Chronic interstitial lung disease</li>
+          <li>Shrinking lung syndrome</li>
+          <li>Pulmonary hypertension</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="treatment" class="tab-content">
+      <div class="section">
+        <h2>💊 Treatment</h2>
+
+        <h3>General Principles</h3>
+        <div class="key-box">
+          <ul>
+            <li><strong>Hydroxychloroquine:</strong> All patients (reduces flares, mortality, thrombosis)</li>
+            <li>Sun protection, smoking cessation</li>
+            <li>Monitor for disease activity and damage</li>
+            <li>Vaccinations (avoid live vaccines on immunosuppression)</li>
+            <li>Cardiovascular risk management</li>
+          </ul>
+        </div>
+
+        <h3>Treatment by Severity</h3>
+        <table>
+          <tr><th>Manifestation</th><th>Treatment</th></tr>
+          <tr><td><strong>Mild</strong> (skin, joints)</td><td>NSAIDs, hydroxychloroquine, low-dose prednisone</td></tr>
+          <tr><td><strong>Moderate</strong> (serositis, hematologic)</td><td>Hydroxychloroquine + moderate-dose prednisone ± methotrexate/azathioprine</td></tr>
+          <tr><td><strong>Severe</strong> (nephritis, CNS)</td><td>High-dose steroids + mycophenolate or cyclophosphamide</td></tr>
+        </table>
+
+        <h3>Lupus Nephritis Treatment</h3>
+        <div class="info-box">
+          <strong>Induction (Class III/IV):</strong>
+          <ul>
+            <li>Mycophenolate mofetil (preferred, especially in Black patients)</li>
+            <li>OR Cyclophosphamide (IV pulses)</li>
+            <li>PLUS high-dose glucocorticoids</li>
+          </ul>
+          <strong>Maintenance:</strong>
+          <ul>
+            <li>Mycophenolate or azathioprine</li>
+            <li>Low-dose prednisone</li>
+            <li>Continue hydroxychloroquine</li>
+          </ul>
+          <strong>Newer:</strong> Voclosporin, belimumab (add-on therapy)
+        </div>
+
+        <h3>Biologics</h3>
+        <table>
+          <tr><th>Agent</th><th>Target</th><th>Use</th></tr>
+          <tr><td><strong>Belimumab</strong></td><td>BLyS (B-cell survival)</td><td>Active SLE despite standard therapy; lupus nephritis</td></tr>
+          <tr><td><strong>Anifrolumab</strong></td><td>Type I interferon receptor</td><td>Moderate-severe SLE</td></tr>
+          <tr><td><strong>Rituximab</strong></td><td>CD20 (B cells)</td><td>Off-label for refractory disease</td></tr>
+        </table>
+
+        <h3>Pregnancy Considerations</h3>
+        <div class="danger-box">
+          <ul>
+            <li><strong>Plan pregnancy during remission</strong> (≥6 months stable)</li>
+            <li>Continue hydroxychloroquine (safe, reduces flares)</li>
+            <li>Stop: Mycophenolate, cyclophosphamide, methotrexate (teratogenic)</li>
+            <li>Azathioprine is acceptable if needed</li>
+            <li>Anti-Ro antibodies → risk of neonatal lupus, congenital heart block</li>
+            <li>Antiphospholipid syndrome → aspirin ± heparin</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines (Open Access)</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://ard.bmj.com/content/78/9/1151" target="_blank">🔗 2019 EULAR/ACR SLE Classification Criteria</a>
+          <div class="citation">Aringer M, et al. Ann Rheum Dis. 2019;78:1151-1159</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.lupus.org/" target="_blank">🔗 Lupus Foundation of America</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on 2019 EULAR/ACR Criteria.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Which antibody is most specific for SLE?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. ANA</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Anti-Smith</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Anti-dsDNA</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Anti-Smith is the most specific antibody for SLE (~99%), though less sensitive (~30%). ANA is sensitive but not specific.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> Anti-histone antibodies are associated with:</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Drug-induced lupus</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. Lupus nephritis</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Neonatal lupus</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Anti-histone antibodies are present in >95% of drug-induced lupus. Common culprits: hydralazine, procainamide, isoniazid.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Which lupus nephritis class is most common and severe?</p>
+          <div class="quiz-option" onclick="check(this,true,'q3')">A. Class IV (diffuse proliferative)</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Class II (mesangial)</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Class V (membranous)</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: A.</strong> Class IV diffuse proliferative nephritis is the most common and severe form, requiring aggressive immunosuppression.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> Which medication should ALL SLE patients take?</p>
+          <div class="quiz-option" onclick="check(this,true,'q4')">A. Hydroxychloroquine</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">B. Prednisone</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Cyclophosphamide</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: A.</strong> Hydroxychloroquine is recommended for all SLE patients - reduces flares, organ damage, thrombosis, and mortality. Safe in pregnancy.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Anti-Ro (SS-A) antibodies in a pregnant woman put the fetus at risk for:</p>
+          <div class="quiz-option" onclick="check(this,true,'q5')">A. Neonatal lupus and congenital heart block</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Lupus nephritis</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Antiphospholipid syndrome</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: A.</strong> Anti-Ro antibodies cross the placenta and can cause neonatal lupus (rash, cytopenias - usually transient) and congenital heart block (permanent).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Systemic Lupus Erythematosus"
+         data-key-points="📋 Diagnosis, 🔬 Autoantibodies, 🎯 Organ Manifestations, 💊 Treatment, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Classic Mnemonic, 2019 EULAR/ACR Classification Criteria, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

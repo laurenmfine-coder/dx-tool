@@ -381,22 +381,20 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
-    <link rel="stylesheet" href="dx-case-banner-fix.css">
 </head>
 <body>
-    <div class="case-top-banner">
-        <div class="score-tracker">
+    <div class="score-tracker">
         <div class="score-label">Score</div>
         <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
     </div>
-        <div class="difficulty-panel">
+    
+    <div class="difficulty-panel">
         <div class="diff-label">📊 Difficulty</div>
         <div class="diff-btns">
             <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
             <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
             <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
         </div>
-    </div>
     </div>
     
     <div class="container">
@@ -608,7 +606,7 @@ const stages = [
                 "correct": "Antibiotics are the single most impactful early intervention. Kumar et al. demonstrated 7.6% increase in mortality for each hour of antibiotic delay in septic shock. While \"cultures before antibiotics\" is ideal, NEVER delay antibiotics to obtain cultures. Give antibiotics first, then get cultures (even minutes later is acceptable).",
                 "incorrect": "While all Hour-1 Bundle elements are important, antibiotics have the strongest mortality data. Kumar et al: 7.6% increased mortality per hour of delay. The guideline says obtain cultures \"before\" antibiotics but clarifies this should not delay antibiotic administration. The order should be: antibiotics \u2192 cultures \u2192 fluids \u2192 lactate \u2192 vasopressors."
             },
-            "teaching": "<h4>\ud83d\udcda Surviving Sepsis Hour-1 Bundle (2021/2024)</h4>\n                    <ol>\n                        <li>Measure lactate (repeat if >2 mmol/L)</li>\n                        <li>Obtain blood cultures <em>(but don't delay antibiotics!)</em></li>\n                        <li><strong>Administer broad-spectrum antibiotics \u2b50 HIGHEST PRIORITY</strong></li>\n                        <li>Begin 30 mL/kg crystalloid for hypotension or lactate \u22654 (weak recommendation - individualize)</li>\n                        <li>Start vasopressors if hypotensive during or after fluid resuscitation (can start peripherally)</li>\n                    </ol>\n                    <p><strong>Key Evidence:</strong> Kumar et al. (2006) - Each hour of antibiotic delay in septic shock increases mortality by 7.6%</p>\n                    <p><em>\"Cultures before antibiotics\" should never delay antibiotic administration.</em></p>",
+            "teaching": "<h4>\ud83d\udcda Surviving Sepsis Hour-1 Bundle (2021)</h4>\n                    <ol>\n                        <li>Measure lactate (repeat if >2 mmol/L)</li>\n                        <li>Obtain blood cultures <em>(but don't delay antibiotics!)</em></li>\n                        <li><strong>Administer broad-spectrum antibiotics \u2b50 HIGHEST PRIORITY</strong></li>\n                        <li>Begin 30 mL/kg crystalloid for hypotension or lactate \u22654</li>\n                        <li>Start vasopressors if hypotensive during or after fluid resuscitation</li>\n                    </ol>\n                    <p><strong>Key Evidence:</strong> Kumar et al. (2006) - Each hour of antibiotic delay in septic shock increases mortality by 7.6%</p>\n                    <p><em>\"Cultures before antibiotics\" should never delay antibiotic administration.</em></p>",
             "points": 15
         }
     },
@@ -1067,5 +1065,13 @@ function toggleReferences() {
 
     <script src="dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Sepsis & Septic Shock"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
 </body>
 </html>

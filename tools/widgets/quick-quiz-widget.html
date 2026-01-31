@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Quiz Widget Demo | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; --primary-dark: #047857; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; min-height: 100vh; padding: 24px; }
+        
+        .demo-content { max-width: 800px; margin: 0 auto; }
+        .demo-content h1 { margin-bottom: 16px; }
+        .demo-content p { color: #64748b; margin-bottom: 24px; }
+        .demo-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }
+        
+        /* QUICK QUIZ WIDGET - Copy this CSS to any page */
+        .quiz-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+            transition: all 0.3s;
+            z-index: 9999;
+        }
+        .quiz-fab:hover { transform: scale(1.1); }
+        .quiz-fab.has-badge::after {
+            content: attr(data-count);
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 24px;
+            height: 24px;
+            background: #ef4444;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            width: 380px;
+            max-width: calc(100vw - 48px);
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            z-index: 9998;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+        .quiz-modal.show { display: block; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quiz-header h3 { font-size: 16px; display: flex; align-items: center; gap: 8px; }
+        .quiz-close { background: none; border: none; color: white; font-size: 24px; cursor: pointer; opacity: 0.8; }
+        .quiz-close:hover { opacity: 1; }
+        
+        .quiz-body { padding: 20px; }
+        .quiz-category { font-size: 11px; color: #059669; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .quiz-question { font-size: 16px; font-weight: 600; color: #18181b; margin-bottom: 16px; line-height: 1.5; }
+        
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            padding: 14px 16px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .quiz-option:hover { border-color: #059669; background: #f0fdf4; }
+        .quiz-option.selected { border-color: #3b82f6; background: #eff6ff; }
+        .quiz-option.correct { border-color: #059669; background: #dcfce7; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; }
+        .quiz-option.correct::before { content: "✓ "; color: #059669; font-weight: bold; }
+        .quiz-option.incorrect::before { content: "✗ "; color: #ef4444; font-weight: bold; }
+        
+        .quiz-explanation {
+            margin-top: 16px;
+            padding: 14px;
+            background: #f0fdf4;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #166534;
+            line-height: 1.5;
+            display: none;
+        }
+        .quiz-explanation.show { display: block; }
+        
+        .quiz-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quiz-streak { font-size: 13px; color: #64748b; }
+        .quiz-streak strong { color: #059669; }
+        .quiz-next {
+            padding: 10px 20px;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+        }
+        .quiz-next.show { display: block; }
+        .quiz-next:hover { background: #047857; }
+        
+        .quiz-complete {
+            text-align: center;
+            padding: 32px 20px;
+            display: none;
+        }
+        .quiz-complete.show { display: block; }
+        .quiz-complete .emoji { font-size: 48px; margin-bottom: 12px; }
+        .quiz-complete h4 { font-size: 18px; margin-bottom: 8px; }
+        .quiz-complete p { color: #64748b; font-size: 14px; margin-bottom: 16px; }
+        .quiz-complete button {
+            padding: 12px 24px;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .quiz-source {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .quiz-source a { color: #059669; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="demo-content">
+        <h1>Quick Quiz Widget</h1>
+        <p>This floating button can be added to any page. Click the green button in the bottom-right corner to try it!</p>
+        <div class="demo-box">
+            <h3>How it works:</h3>
+            <ul style="margin-left: 20px; margin-top: 12px; color: #52525b;">
+                <li>Floating button appears on every page</li>
+                <li>Shows questions from your weak areas (spaced repetition)</li>
+                <li>Takes 30 seconds — perfect for microlearning</li>
+                <li>Tracks streak to build habit</li>
+                <li>Links to full module if you want to learn more</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- QUICK QUIZ WIDGET - Copy everything below to add to any page -->
+    <button class="quiz-fab has-badge" data-count="3" onclick="toggleQuiz()">⚡</button>
+    
+    <div class="quiz-modal" id="quizModal">
+        <div class="quiz-header">
+            <h3>⚡ Quick Quiz</h3>
+            <button class="quiz-close" onclick="toggleQuiz()">×</button>
+        </div>
+        <div class="quiz-body" id="quizBody">
+            <div class="quiz-category" id="quizCategory">Renal / Electrolytes</div>
+            <div class="quiz-question" id="quizQuestion">A patient with DKA has a serum glucose of 450 mg/dL and measured Na+ of 128 mEq/L. What is the corrected sodium?</div>
+            <div class="quiz-options" id="quizOptions">
+                <button class="quiz-option" onclick="selectAnswer(this, 0)">A. 128 mEq/L (no correction needed)</button>
+                <button class="quiz-option" onclick="selectAnswer(this, 1)">B. 133 mEq/L</button>
+                <button class="quiz-option" onclick="selectAnswer(this, 2)">C. 138 mEq/L</button>
+                <button class="quiz-option" onclick="selectAnswer(this, 3)">D. 142 mEq/L</button>
+            </div>
+            <div class="quiz-explanation" id="quizExplanation">
+                <strong>Correct!</strong> Use the correction formula: Na + 1.6 × [(glucose - 100) / 100]<br><br>
+                128 + 1.6 × [(450 - 100) / 100] = 128 + 1.6 × 3.5 = 128 + 5.6 ≈ <strong>133-134 mEq/L</strong><br><br>
+                This matters because the "true" sodium is higher than measured — important for management decisions.
+                <div class="quiz-source">
+                    📚 <a href="../mechanism/electrolytes-module.html">Learn more: Electrolytes Module</a>
+                </div>
+            </div>
+        </div>
+        <div class="quiz-complete" id="quizComplete">
+            <div class="emoji">🔥</div>
+            <h4>3-Day Streak!</h4>
+            <p>You've answered 3 questions today. Keep it up!</p>
+            <button onclick="resetQuiz()">One More Question</button>
+        </div>
+        <div class="quiz-footer" id="quizFooter">
+            <div class="quiz-streak">🔥 <strong>3 day</strong> streak</div>
+            <button class="quiz-next" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                category: "Renal / Electrolytes",
+                question: "A patient with DKA has a serum glucose of 450 mg/dL and measured Na+ of 128 mEq/L. What is the corrected sodium?",
+                options: ["A. 128 mEq/L (no correction needed)", "B. 133 mEq/L", "C. 138 mEq/L", "D. 142 mEq/L"],
+                correct: 1,
+                explanation: "<strong>Correct!</strong> Use the correction formula: Na + 1.6 × [(glucose - 100) / 100]<br><br>128 + 1.6 × [(450 - 100) / 100] = 128 + 5.6 ≈ <strong>133-134 mEq/L</strong><br><br>This matters because the \"true\" sodium is higher than measured.",
+                link: "../mechanism/electrolytes-module.html",
+                linkText: "Electrolytes Module"
+            },
+            {
+                category: "Microbiology",
+                question: "Which finding on histopathology distinguishes Aspergillus from Mucor?",
+                options: ["A. Septate hyphae with 45° branching", "B. Pauciseptate hyphae with 90° branching", "C. Yeast with broad-based budding", "D. Pseudohyphae"],
+                correct: 0,
+                explanation: "<strong>Correct!</strong> Aspergillus = septate hyphae with acute-angle (45°) branching.<br><br>Mucor = pauciseptate (few septa) with 90° wide-angle branching.<br><br>Memory trick: <strong>\"A for Aspergillus, A for Acute angle\"</strong>",
+                link: "../microbiology/aspergillus-module.html",
+                linkText: "Aspergillus Module"
+            },
+            {
+                category: "Acid-Base",
+                question: "A patient has pH 7.28, pCO2 24, HCO3 12. Using Winter's formula, is the respiratory compensation appropriate?",
+                options: ["A. Yes, appropriate compensation", "B. No, superimposed respiratory acidosis", "C. No, superimposed respiratory alkalosis", "D. Cannot determine"],
+                correct: 0,
+                explanation: "<strong>Correct!</strong> Winter's formula: Expected pCO2 = 1.5 × HCO3 + 8 (±2)<br><br>= 1.5 × 12 + 8 = 26 (range 24-28)<br><br>Measured pCO2 is 24, which is within range. This is <strong>appropriate respiratory compensation</strong> for metabolic acidosis.",
+                link: "../mechanism/acid-base-module.html",
+                linkText: "Acid-Base Module"
+            }
+        ];
+        
+        let currentQ = 0;
+        let answered = false;
+        
+        function toggleQuiz() {
+            document.getElementById('quizModal').classList.toggle('show');
+        }
+        
+        function selectAnswer(btn, index) {
+            if (answered) return;
+            answered = true;
+            
+            const q = questions[currentQ];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === q.correct) opt.classList.add('correct');
+                else if (i === index) opt.classList.add('incorrect');
+            });
+            
+            const explanation = document.getElementById('quizExplanation');
+            explanation.innerHTML = q.explanation + `<div class="quiz-source">📚 <a href="${q.link}">Learn more: ${q.linkText}</a></div>`;
+            explanation.classList.add('show');
+            
+            document.getElementById('nextBtn').classList.add('show');
+        }
+        
+        function nextQuestion() {
+            currentQ++;
+            if (currentQ >= questions.length) {
+                document.getElementById('quizBody').style.display = 'none';
+                document.getElementById('quizFooter').style.display = 'none';
+                document.getElementById('quizComplete').classList.add('show');
+                return;
+            }
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            answered = false;
+            const q = questions[currentQ];
+            document.getElementById('quizCategory').textContent = q.category;
+            document.getElementById('quizQuestion').textContent = q.question;
+            
+            const optionsDiv = document.getElementById('quizOptions');
+            optionsDiv.innerHTML = q.options.map((opt, i) => 
+                `<button class="quiz-option" onclick="selectAnswer(this, ${i})">${opt}</button>`
+            ).join('');
+            
+            document.getElementById('quizExplanation').classList.remove('show');
+            document.getElementById('nextBtn').classList.remove('show');
+        }
+        
+        function resetQuiz() {
+            currentQ = 0;
+            document.getElementById('quizBody').style.display = 'block';
+            document.getElementById('quizFooter').style.display = 'flex';
+            document.getElementById('quizComplete').classList.remove('show');
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>

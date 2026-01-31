@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Yellow Baby | Biliary Atresia | ReasonDx CRT</title>
+  <style>
+    :root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#FBBF24;--success:#10B981;--danger:#DC2626;--info:#3B82F6}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+    .header{background:linear-gradient(135deg,#92400E,#FBBF24);padding:14px 20px;position:sticky;top:0;z-index:100}
+    .header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
+    .header-title{font-size:1.15rem;font-weight:600;color:#1F2937}
+    .badge{background:rgba(0,0,0,0.2);padding:4px 12px;border-radius:6px;font-size:0.7rem;margin-left:10px;color:#1F2937}
+    .stats{display:flex;gap:14px}
+    .stat{text-align:center;background:rgba(0,0,0,0.2);padding:6px 14px;border-radius:8px}
+    .stat-value{font-size:1.1rem;font-weight:700;font-family:monospace;color:#1F2937}
+    .stat-label{font-size:0.6rem;color:#1F2937}
+    .main{max-width:900px;margin:0 auto;padding:24px}
+    .progress-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:20px}
+    .progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}
+    .card-header{padding:20px 24px;border-bottom:1px solid var(--border)}
+    .card-phase{font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
+    .card-title{font-size:1.4rem;font-weight:700;margin-top:4px}
+    .card-body{padding:24px}
+    .narrative{background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(245,158,11,0.1));border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}
+    .hl{background:rgba(251,191,36,0.3);padding:2px 6px;border-radius:4px;font-weight:500}
+    .findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:20px 0}
+    .finding{background:rgba(0,0,0,0.2);padding:12px;border-radius:10px;text-align:center}
+    .finding.critical{background:rgba(220,38,38,0.2);border:1px solid rgba(220,38,38,0.4)}
+    .finding.warning{background:rgba(251,191,36,0.2);border:1px solid rgba(251,191,36,0.4)}
+    .finding-label{font-size:0.7rem;color:var(--muted)}
+    .finding-value{font-size:1rem;font-weight:600}
+    .choices{display:grid;gap:12px;margin-top:20px}
+    .choice{background:var(--card);border:2px solid var(--border);padding:16px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all 0.2s}
+    .choice:hover{border-color:var(--accent);transform:translateX(4px)}
+    .choice.correct{border-color:var(--success);background:rgba(16,185,129,0.2)}
+    .choice.wrong{border-color:var(--danger);background:rgba(220,38,38,0.2)}
+    .choice-icon{font-size:1.5rem}
+    .choice-title{font-weight:600}
+    .choice-desc{font-size:0.85rem;color:var(--muted)}
+    .feedback{display:none;margin-top:16px;padding:16px;border-radius:12px}
+    .feedback.show{display:block}
+    .feedback.good{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+    .feedback.bad{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+    .teaching{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:16px;margin:20px 0}
+    .teaching h4{color:var(--info);margin-bottom:8px}
+    .alert{padding:16px;border-radius:12px;margin:20px 0;display:flex;gap:12px}
+    .alert.danger{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+    .alert.success{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+    .hidden{display:none!important}
+    .btn{padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;border:none;font-size:1rem}
+    .btn-primary{background:var(--accent);color:#1F2937}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">🟡 The Yellow Baby<span class="badge">TIME-CRITICAL</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="stage">1/6</div><div class="stat-label">Stage</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:17%"></div></div>
+
+    <!-- STAGE 1 -->
+    <div id="s1" class="stage">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 1 of 6</div>
+          <div class="card-title">🏥 2-Week Well Visit</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">A 2-week-old is brought for a routine checkup. Mom says the baby is "still yellow" with <span class="hl">pale, clay-colored stools</span>. Baby is breastfeeding well. Exam shows <span class="hl">jaundice</span> and <span class="hl">hepatomegaly</span>.</div>
+          <div class="findings">
+            <div class="finding warning"><div class="finding-label">Jaundice</div><div class="finding-value">Present</div></div>
+            <div class="finding warning"><div class="finding-label">Age</div><div class="finding-value">14 days</div></div>
+            <div class="finding critical"><div class="finding-label">Stool</div><div class="finding-value">Pale/Clay</div></div>
+            <div class="finding"><div class="finding-label">Liver</div><div class="finding-value">Enlarged</div></div>
+          </div>
+          <div class="alert danger"><div style="font-size:1.5rem">⚠️</div><div><strong>RED FLAG:</strong> Jaundice beyond 2 weeks with pale stools is NOT physiologic jaundice!</div></div>
+          <p style="margin-bottom:16px;font-weight:600">What type of hyperbilirubinemia does pale stool suggest?</p>
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🟡</div><div><div class="choice-title">Unconjugated (indirect)</div><div class="choice-desc">Breastmilk jaundice, hemolysis</div></div></div>
+            <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🟤</div><div><div class="choice-title">Conjugated (direct)</div><div class="choice-desc">Bile not reaching gut</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">⚪</div><div><div class="choice-title">Mixed hyperbilirubinemia</div><div class="choice-desc">Both types elevated</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">❓</div><div><div class="choice-title">Cannot determine</div><div class="choice-desc">Need labs first</div></div></div>
+          </div>
+          <div class="feedback" id="f1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="s2" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 2 of 6</div>
+          <div class="card-title">🔬 Lab Results</div>
+        </div>
+        <div class="card-body">
+          <div class="findings">
+            <div class="finding warning"><div class="finding-label">Total Bili</div><div class="finding-value">8.5</div></div>
+            <div class="finding critical"><div class="finding-label">Direct Bili</div><div class="finding-value">5.2 ↑↑</div></div>
+            <div class="finding critical"><div class="finding-label">GGT</div><div class="finding-value">450 ↑↑</div></div>
+            <div class="finding warning"><div class="finding-label">ALT</div><div class="finding-value">95 ↑</div></div>
+          </div>
+          <div class="teaching"><h4>💡 Direct Bili >1 mg/dL or >20% of total = ALWAYS pathologic</h4><p>Elevated GGT strongly suggests biliary obstruction.</p></div>
+          <p style="margin-bottom:16px;font-weight:600">What is the BEST initial imaging study?</p>
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">🔊</div><div><div class="choice-title">Abdominal ultrasound</div><div class="choice-desc">Look for gallbladder, triangular cord sign</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">☢️</div><div><div class="choice-title">HIDA scan</div><div class="choice-desc">Hepatobiliary scintigraphy</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🧲</div><div><div class="choice-title">MRCP</div><div class="choice-desc">MR cholangiopancreatography</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">📷</div><div><div class="choice-title">CT abdomen</div><div class="choice-desc">Cross-sectional imaging</div></div></div>
+          </div>
+          <div class="feedback" id="f2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div id="s3" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 3 of 6</div>
+          <div class="card-title">📸 Ultrasound Findings</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">US shows <span class="hl">absent gallbladder</span>, <span class="hl">"triangular cord" sign</span> at porta hepatis, hepatomegaly. No bile duct dilation.</div>
+          <div class="teaching"><h4>💡 Triangular Cord Sign</h4><p>Echogenic density at porta hepatis = fibrotic remnant of obliterated biliary tree. Highly specific for biliary atresia.</p></div>
+          <p style="margin-bottom:16px;font-weight:600">What study helps distinguish BA from other causes of neonatal cholestasis?</p>
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">☢️</div><div><div class="choice-title">HIDA scan</div><div class="choice-desc">Shows uptake but NO excretion into bowel in BA</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🔬</div><div><div class="choice-title">Liver biopsy alone</div><div class="choice-desc">Invasive first step</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🧪</div><div><div class="choice-title">Alpha-1 antitrypsin level</div><div class="choice-desc">Rules out A1AT deficiency only</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🧬</div><div><div class="choice-title">Genetic panel</div><div class="choice-desc">For Alagille syndrome</div></div></div>
+          </div>
+          <div class="feedback" id="f3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div id="s4" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 4 of 6</div>
+          <div class="card-title">⏰ The Critical Window</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">HIDA shows good hepatocyte uptake but <span class="hl">NO excretion into intestine after 24 hours</span>. Biliary atresia is highly suspected.</div>
+          <div class="alert danger"><div style="font-size:1.5rem">⏰</div><div><strong>TIME IS LIVER!</strong> Kasai procedure must be performed EARLY. Every day of delay increases liver damage.</div></div>
+          <p style="margin-bottom:16px;font-weight:600">What is the OPTIMAL timing for Kasai procedure?</p>
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">✅</div><div><div class="choice-title">Before 60 days (ideally &lt;45 days)</div><div class="choice-desc">Best chance of bile flow</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">⏳</div><div><div class="choice-title">Before 90 days</div><div class="choice-desc">Acceptable but suboptimal</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">📅</div><div><div class="choice-title">Before 6 months</div><div class="choice-desc">Too late</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🔄</div><div><div class="choice-title">Skip Kasai, go to transplant</div><div class="choice-desc">Transplant is backup</div></div></div>
+          </div>
+          <div class="feedback" id="f4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div id="s5" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 5 of 6</div>
+          <div class="card-title">🔪 The Kasai Procedure</div>
+        </div>
+        <div class="card-body">
+          <div class="teaching"><h4>💡 Hepatoportoenterostomy</h4><p>Fibrotic bile ducts are excised. A Roux-en-Y jejunal limb is anastomosed to the porta hepatis, allowing bile drainage from microscopic ductules.</p></div>
+          <p style="margin-bottom:16px;font-weight:600">What is the goal of the Kasai procedure?</p>
+          <div class="choices" id="c5">
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🏥</div><div><div class="choice-title">Cure biliary atresia permanently</div><div class="choice-desc">Complete cure</div></div></div>
+            <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">⏰</div><div><div class="choice-title">Establish bile flow, delay/prevent transplant</div><div class="choice-desc">Bridge therapy - many still need transplant</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🔧</div><div><div class="choice-title">Reconstruct bile ducts</div><div class="choice-desc">Rebuild normal anatomy</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">💊</div><div><div class="choice-title">Allow medication delivery</div><div class="choice-desc">Drug access route</div></div></div>
+          </div>
+          <div class="feedback" id="f5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 6 - SUMMARY -->
+    <div id="s6" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 6 of 6</div>
+          <div class="card-title">🎓 Case Complete</div>
+        </div>
+        <div class="card-body">
+          <div style="text-align:center;padding:20px"><div style="font-size:4rem">🎉</div><div style="font-size:1.5rem;font-weight:700;color:var(--success);margin:12px 0">Diagnosis & Management Mastered!</div></div>
+          <div class="teaching">
+            <h4>🔑 Key Learning Points</h4>
+            <ul style="margin:10px 0 0 20px">
+              <li><strong>Red flags:</strong> Jaundice >2 weeks + pale stools + dark urine = conjugated hyperbilirubinemia</li>
+              <li><strong>Conjugated bili:</strong> >1 mg/dL or >20% of total is ALWAYS pathologic</li>
+              <li><strong>US findings:</strong> Absent gallbladder, triangular cord sign, no duct dilation</li>
+              <li><strong>HIDA:</strong> Uptake but NO excretion confirms obstruction</li>
+              <li><strong>Timing is critical:</strong> Kasai before 60 days (ideally <45 days)</li>
+              <li><strong>Kasai goal:</strong> Establish bile flow, delay transplant (not a cure)</li>
+              <li><strong>Prognosis:</strong> ~50% achieve bile drainage; BA is #1 indication for pediatric liver transplant</li>
+            </ul>
+          </div>
+          <div class="teaching" style="background:rgba(251,191,36,0.15);border-color:rgba(251,191,36,0.3)">
+            <h4 style="color:var(--accent)">📚 Embryology Connection</h4>
+            <p>Biliary atresia is a progressive fibro-obliterative disease, not a true developmental malformation. The biliary tree forms normally but undergoes inflammatory destruction perinatally. The exact cause is unknown but may involve viral infection, immune dysregulation, or genetic factors.</p>
+          </div>
+          <div class="alert success"><div style="font-size:1.5rem">📊</div><div><strong>Final Score: <span id="final">0</span>/500</strong></div></div>
+          <div style="text-align:center;margin-top:24px"><button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score=0;
+    const fb={
+      1:{y:"Correct! Pale/clay stools = bile NOT reaching the intestine = CONJUGATED hyperbilirubinemia. Stool gets its brown color from stercobilin (bile pigment). No bile = pale stool. This is NEVER normal!",n:"Pale stools indicate CONJUGATED (direct) hyperbilirubinemia. Bile isn't reaching the gut to color the stool. Unconjugated jaundice (breastmilk, hemolysis) produces normal-colored stools."},
+      2:{y:"Correct! Ultrasound is first-line. Look for: absent/small gallbladder, triangular cord sign at porta hepatis, hepatomegaly. It's non-invasive and highly informative. HIDA comes next if US is suggestive.",n:"Abdominal US is the best INITIAL test. It's non-invasive and can show absent gallbladder and triangular cord sign. HIDA is useful but comes after US. CT has radiation; MRCP requires sedation."},
+      3:{y:"Correct! HIDA scan shows whether bile reaches the intestine. In biliary atresia: good hepatocyte UPTAKE but NO EXCRETION into bowel even at 24 hours. In neonatal hepatitis: delayed uptake AND excretion (both present).",n:"HIDA scan is key to distinguishing BA from other cholestatic conditions. It shows uptake (liver working) but no excretion (obstruction). Must be done after 5 days of phenobarbital to maximize uptake."},
+      4:{y:"Correct! Earlier = better outcomes. <45 days: ~70% achieve bile flow. 45-60 days: ~50%. 60-90 days: ~25%. >90 days: <25%. The progressive fibrosis is time-dependent. This is why screening with stool color cards has been implemented in some countries.",n:"Kasai should be done as early as possible, ideally before 45-60 days. Success rates drop dramatically with age due to progressive hepatic fibrosis. >90 days has very poor outcomes."},
+      5:{y:"Correct! Kasai is a BRIDGE, not a cure. Goals: establish bile flow, improve nutrition, prevent complications, and delay/avoid transplant. ~30-50% of patients with successful Kasai still need transplant by age 20. BA remains the #1 indication for pediatric liver transplant.",n:"Kasai is NOT a cure - it's a bridge to buy time. It establishes bile drainage but doesn't fix the underlying process. Many patients still need liver transplant eventually, but successful Kasai can delay this for years."}
+    };
+    function check(n,el,ok){
+      document.querySelectorAll(`#c${n} .choice`).forEach(c=>{c.style.pointerEvents='none';if(c.onclick.toString().includes('true'))c.classList.add('correct')});
+      el.classList.add(ok?'correct':'wrong');
+      if(ok)score+=100;
+      document.getElementById('score').textContent=score;
+      const f=document.getElementById(`f${n}`);
+      f.className=`feedback show ${ok?'good':'bad'}`;
+      f.innerHTML=`<strong>${ok?'✅ Correct! +100':'❌ Not quite'}</strong><br><br>${ok?fb[n].y:fb[n].n}`;
+      setTimeout(()=>{
+        document.getElementById(`s${n}`).classList.add('hidden');
+        document.getElementById(`s${n+1}`).classList.remove('hidden');
+        document.getElementById('stage').textContent=`${n+1}/6`;
+        document.getElementById('progress').style.width=`${((n+1)/6)*100}%`;
+        if(n+1===6)document.getElementById('final').textContent=score;
+        window.scrollTo({top:0,behavior:'smooth'});
+      },2500);
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="The Yellow Baby"
+         data-key-points="clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

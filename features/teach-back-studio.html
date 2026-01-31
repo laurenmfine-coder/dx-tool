@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach-Back Studio | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; }
+        
+        .header {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            padding: 48px 24px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .content { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .topic-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .topic-btn {
+            padding: 10px 18px;
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .topic-btn:hover { background: #e2e8f0; }
+        .topic-btn.active { background: #f0fdf4; border-color: var(--primary); color: var(--primary); }
+        
+        .prompt-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .prompt-card h3 {
+            font-size: 14px;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+        .prompt-card p {
+            font-size: 16px;
+            color: #78350f;
+            font-weight: 500;
+        }
+        
+        .recorder {
+            text-align: center;
+            padding: 40px 20px;
+            border: 2px dashed #e2e8f0;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .recorder.recording {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+        .recorder.recorded {
+            border-color: var(--primary);
+            background: #f0fdf4;
+        }
+        
+        .record-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            transition: all 0.2s;
+            margin-bottom: 16px;
+        }
+        .record-btn:hover { transform: scale(1.05); }
+        .record-btn.recording {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .timer {
+            font-size: 32px;
+            font-weight: 700;
+            color: #18181b;
+            margin-bottom: 8px;
+            font-family: monospace;
+        }
+        .timer-label { color: #64748b; font-size: 14px; }
+        
+        .playback {
+            display: none;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-top: 16px;
+        }
+        .playback.show { display: flex; }
+        .play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .waveform {
+            flex: 1;
+            height: 40px;
+            background: linear-gradient(90deg, var(--primary) 30%, #e2e8f0 30%);
+            border-radius: 4px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+        }
+        .submit-btn.show { display: block; }
+        
+        /* AI Feedback */
+        .feedback-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .feedback-card.show { display: block; }
+        
+        .feedback-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #047857 100%);
+            color: white;
+            padding: 20px 24px;
+        }
+        .feedback-header h3 { font-size: 18px; margin-bottom: 4px; }
+        .feedback-header p { opacity: 0.9; font-size: 14px; }
+        
+        .feedback-body { padding: 24px; }
+        
+        .score-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        .score-ring svg { transform: rotate(-90deg); }
+        .score-ring circle {
+            fill: none;
+            stroke-width: 10;
+        }
+        .score-ring .bg { stroke: #e2e8f0; }
+        .score-ring .progress { stroke: var(--primary); stroke-linecap: round; }
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        .feedback-section {
+            margin-bottom: 20px;
+        }
+        .feedback-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feedback-section p {
+            font-size: 14px;
+            color: #52525b;
+            line-height: 1.6;
+        }
+        .feedback-section ul {
+            margin-left: 20px;
+            color: #52525b;
+            font-size: 14px;
+        }
+        .feedback-section li { margin-bottom: 4px; }
+        
+        .feedback-good { color: #166534; }
+        .feedback-improve { color: #92400e; }
+        
+        .retry-btn {
+            width: 100%;
+            padding: 14px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎤 Teach-Back Studio</h1>
+        <p>The best way to learn is to teach. Record yourself explaining a concept and get AI feedback.</p>
+    </header>
+    
+    <main class="content">
+        <div class="card">
+            <h2>📚 Choose a Topic</h2>
+            <div class="topic-selector">
+                <button class="topic-btn active" onclick="selectTopic(this)">AKI vs CKD</button>
+                <button class="topic-btn" onclick="selectTopic(this)">Heart Failure</button>
+                <button class="topic-btn" onclick="selectTopic(this)">Anion Gap</button>
+                <button class="topic-btn" onclick="selectTopic(this)">COPD vs Asthma</button>
+                <button class="topic-btn" onclick="selectTopic(this)">Sepsis Criteria</button>
+            </div>
+            
+            <div class="prompt-card">
+                <h3>💡 Your Prompt</h3>
+                <p id="promptText">Explain the key differences between AKI and CKD to a medical student. Include how you would differentiate them clinically.</p>
+            </div>
+        </div>
+        
+        <div class="card" id="recorderCard">
+            <h2>🎙️ Record Your Explanation</h2>
+            <div class="recorder" id="recorder">
+                <button class="record-btn" id="recordBtn" onclick="toggleRecording()">🎤</button>
+                <div class="timer" id="timer">0:00</div>
+                <div class="timer-label">Target: 60-90 seconds</div>
+                
+                <div class="playback" id="playback">
+                    <button class="play-btn" onclick="playRecording()">▶</button>
+                    <div class="waveform"></div>
+                    <span>1:24</span>
+                </div>
+            </div>
+            
+            <button class="submit-btn" id="submitBtn" onclick="submitRecording()">
+                ✨ Get AI Feedback
+            </button>
+        </div>
+        
+        <div class="feedback-card" id="feedbackCard">
+            <div class="feedback-header">
+                <h3>✨ AI Feedback</h3>
+                <p>Based on your teach-back recording</p>
+            </div>
+            <div class="feedback-body">
+                <div class="score-ring">
+                    <svg width="120" height="120">
+                        <circle class="bg" cx="60" cy="60" r="50"/>
+                        <circle class="progress" cx="60" cy="60" r="50" 
+                            stroke-dasharray="314" stroke-dashoffset="63"/>
+                    </svg>
+                    <div class="score-value">80%</div>
+                </div>
+                
+                <div class="feedback-section">
+                    <h4 class="feedback-good">✅ What You Did Well</h4>
+                    <ul>
+                        <li>Clear distinction between acute (days) vs chronic (months) timeline</li>
+                        <li>Mentioned kidney size on ultrasound as a differentiator</li>
+                        <li>Good use of clinical examples</li>
+                    </ul>
+                </div>
+                
+                <div class="feedback-section">
+                    <h4 class="feedback-improve">💡 Areas to Strengthen</h4>
+                    <ul>
+                        <li>Consider mentioning baseline creatinine comparison</li>
+                        <li>Could add urine studies (bland sediment in CKD vs casts in AKI)</li>
+                        <li>Reversibility is a key concept — emphasize AKI is potentially reversible</li>
+                    </ul>
+                </div>
+                
+                <div class="feedback-section">
+                    <h4>📝 Key Points You Covered</h4>
+                    <p>Timeline differentiation ✓ | Ultrasound findings ✓ | GFR staging ✓ | Causes of each ✓</p>
+                </div>
+                
+                <div class="feedback-section">
+                    <h4>📝 Key Points to Add Next Time</h4>
+                    <p>Urine sediment analysis | Anemia of CKD | Reversibility concept | KDIGO staging</p>
+                </div>
+                
+                <button class="retry-btn" onclick="retry()">🔄 Try Again</button>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        let isRecording = false;
+        let seconds = 0;
+        let timer = null;
+        
+        const prompts = {
+            'AKI vs CKD': 'Explain the key differences between AKI and CKD to a medical student. Include how you would differentiate them clinically.',
+            'Heart Failure': 'Explain the pathophysiology of heart failure with reduced ejection fraction (HFrEF) and how it leads to symptoms.',
+            'Anion Gap': 'Walk through how you calculate and interpret anion gap, including the differential for elevated AG metabolic acidosis.',
+            'COPD vs Asthma': 'Compare and contrast COPD and asthma, including pathophysiology, presentation, and key management differences.',
+            'Sepsis Criteria': 'Explain the current criteria for sepsis and septic shock, and why early recognition matters.'
+        };
+        
+        function selectTopic(btn) {
+            document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('promptText').textContent = prompts[btn.textContent] || prompts['AKI vs CKD'];
+        }
+        
+        function toggleRecording() {
+            const recorder = document.getElementById('recorder');
+            const btn = document.getElementById('recordBtn');
+            
+            if (!isRecording) {
+                isRecording = true;
+                recorder.classList.add('recording');
+                btn.classList.add('recording');
+                btn.textContent = '⏹';
+                seconds = 0;
+                timer = setInterval(updateTimer, 1000);
+            } else {
+                isRecording = false;
+                recorder.classList.remove('recording');
+                recorder.classList.add('recorded');
+                btn.classList.remove('recording');
+                btn.textContent = '🎤';
+                clearInterval(timer);
+                
+                document.getElementById('playback').classList.add('show');
+                document.getElementById('submitBtn').classList.add('show');
+            }
+        }
+        
+        function updateTimer() {
+            seconds++;
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('timer').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        function playRecording() {
+            alert('Playing recording... (demo)');
+        }
+        
+        function submitRecording() {
+            document.getElementById('recorderCard').style.display = 'none';
+            document.getElementById('feedbackCard').classList.add('show');
+        }
+        
+        function retry() {
+            document.getElementById('feedbackCard').classList.remove('show');
+            document.getElementById('recorderCard').style.display = 'block';
+            document.getElementById('recorder').classList.remove('recorded');
+            document.getElementById('playback').classList.remove('show');
+            document.getElementById('submitBtn').classList.remove('show');
+            document.getElementById('timer').textContent = '0:00';
+            seconds = 0;
+        }
+    </script>
+</body>
+</html>

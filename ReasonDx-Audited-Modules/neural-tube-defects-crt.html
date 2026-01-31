@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Tube Defects | ReasonDx CRT</title>
+  <style>
+    :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #8B5CF6; --success: #10B981; --danger: #DC2626; --info: #3B82F6; --warning: #F59E0B; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    .header { background: linear-gradient(135deg, #5B21B6, #8B5CF6); padding: 14px 20px; position: sticky; top: 0; z-index: 100; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; }
+    .header-title { font-size: 1.1rem; font-weight: 600; }
+    .badge { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; margin-left: 8px; }
+    .stats { display: flex; gap: 12px; }
+    .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 12px; border-radius: 8px; }
+    .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+    .stat-label { font-size: 0.6rem; opacity: 0.8; }
+    .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+    .card-header { padding: 18px 22px; border-bottom: 1px solid var(--border); }
+    .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+    .card-title { font-size: 1.3rem; font-weight: 700; margin-top: 4px; }
+    .card-body { padding: 22px; }
+    .narrative { background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(168,85,247,0.1)); border-left: 4px solid var(--accent); padding: 18px; border-radius: 0 12px 12px 0; margin-bottom: 18px; }
+    .hl { background: rgba(139,92,246,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+    .choices { display: grid; gap: 10px; margin-top: 18px; }
+    .choice { background: var(--card); border: 2px solid var(--border); padding: 14px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
+    .choice:hover { border-color: var(--accent); transform: translateX(4px); }
+    .choice.correct { border-color: var(--success); background: rgba(16,185,129,0.2); }
+    .choice.wrong { border-color: var(--danger); background: rgba(220,38,38,0.2); }
+    .choice-icon { font-size: 1.4rem; }
+    .choice-title { font-weight: 600; }
+    .choice-desc { font-size: 0.85rem; color: var(--muted); }
+    .feedback { display: none; margin-top: 14px; padding: 14px; border-radius: 10px; }
+    .feedback.show { display: block; }
+    .feedback.good { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+    .feedback.bad { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+    .teaching { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 14px; margin: 16px 0; }
+    .teaching h4 { color: var(--info); margin-bottom: 6px; }
+    .hidden { display: none !important; }
+    .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: white; }
+    .outcome { text-align: center; padding: 24px; }
+    .outcome-icon { font-size: 3.5rem; }
+    .outcome-title { font-size: 1.6rem; font-weight: 700; color: var(--success); margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">🧠 Neural Tube Defects<span class="badge">PRENATAL</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="stage">1/6</div><div class="stat-label">Stage</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 16%"></div></div>
+
+    <!-- STAGE 1 -->
+    <div id="s1" class="stage">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 1 of 6</div><div class="card-title">🩺 Prenatal Visit</div></div>
+        <div class="card-body">
+          <div class="narrative">A 24-year-old G1P0 presents for anatomy scan at 20 weeks. She took no folic acid before or during pregnancy. Ultrasound shows <span class="hl">"lemon sign"</span> (frontal bone scalloping) and <span class="hl">"banana sign"</span> (curved cerebellum), with a lumbar spine defect.</div>
+          <p style="margin-bottom:14px;font-weight:600;">What is the diagnosis?</p>
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🧠</div><div><div class="choice-title">Myelomeningocele (spina bifida)</div><div class="choice-desc">Lemon + banana signs = classic for NTD with Chiari II</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">💧</div><div><div class="choice-title">Isolated hydrocephalus</div><div class="choice-desc">Would see ventriculomegaly without spine defect</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🔵</div><div><div class="choice-title">Dandy-Walker malformation</div><div class="choice-desc">Cystic posterior fossa, not banana sign</div></div></div>
+          </div>
+          <div class="feedback" id="f1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="s2" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 2 of 6</div><div class="card-title">🔬 Embryology</div></div>
+        <div class="card-body">
+          <div class="teaching"><h4>💡 Neural Tube Closure</h4><p>The neural tube closes during <strong>days 22-28</strong>. Anterior neuropore closes by day 24-26, posterior by day 26-28.</p></div>
+          <p style="margin-bottom:14px">Which neuropore failure causes spina bifida?</p>
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">⬆️</div><div><div class="choice-title">Anterior neuropore</div><div class="choice-desc">Would cause anencephaly</div></div></div>
+            <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">⬇️</div><div><div class="choice-title">Posterior neuropore</div><div class="choice-desc">Closes last; failure → spina bifida</div></div></div>
+          </div>
+          <div class="feedback" id="f2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div id="s3" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 3 of 6</div><div class="card-title">📊 Screening</div></div>
+        <div class="card-body">
+          <div class="narrative">The patient asks about blood tests that could have detected this earlier.</div>
+          <p style="margin-bottom:14px;font-weight:600;">What happens to maternal serum AFP (MSAFP) in open NTDs?</p>
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">⬆️</div><div><div class="choice-title">Elevated MSAFP</div><div class="choice-desc">AFP leaks from exposed neural tissue</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">⬇️</div><div><div class="choice-title">Decreased MSAFP</div><div class="choice-desc">This pattern seen in Down syndrome</div></div></div>
+          </div>
+          <div class="feedback" id="f3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div id="s4" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 4 of 6</div><div class="card-title">💬 Counseling</div></div>
+        <div class="card-body">
+          <div class="narrative">The family asks about expected complications of myelomeningocele.</div>
+          <p style="margin-bottom:14px;font-weight:600;">Which complication occurs in ~90% of cases?</p>
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">💧</div><div><div class="choice-title">Hydrocephalus requiring VP shunt</div><div class="choice-desc">Due to Chiari II blocking CSF flow</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">❤️</div><div><div class="choice-title">Congenital heart defect</div><div class="choice-desc">Not typically associated with NTDs</div></div></div>
+          </div>
+          <div class="feedback" id="f4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div id="s5" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 5 of 6</div><div class="card-title">💊 Prevention</div></div>
+        <div class="card-body">
+          <div class="teaching"><h4>💡 Folic Acid</h4><p>Folic acid supplementation can reduce NTD risk by 50-70%!</p></div>
+          <p style="margin-bottom:14px;font-weight:600;">What dose for a woman with PREVIOUS NTD pregnancy?</p>
+          <div class="choices" id="c5">
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">1️⃣</div><div><div class="choice-title">400 mcg daily</div><div class="choice-desc">Standard dose for all women</div></div></div>
+            <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">4️⃣</div><div><div class="choice-title">4 mg (4000 mcg) daily</div><div class="choice-desc">High-dose for previous NTD or antiepileptics</div></div></div>
+          </div>
+          <div class="feedback" id="f5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 6 -->
+    <div id="s6" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 6 of 6</div><div class="card-title">🎓 Complete</div></div>
+        <div class="card-body">
+          <div class="outcome">
+            <div class="outcome-icon">🎉</div>
+            <div class="outcome-title">Excellent Work!</div>
+            <p style="color:var(--muted);">Final Score: <span id="final">0</span>/500</p>
+          </div>
+          <div class="teaching">
+            <h4>🔑 Key Points</h4>
+            <ul style="margin: 8px 0 0 18px;">
+              <li><strong>Posterior neuropore failure →</strong> Spina bifida</li>
+              <li><strong>Anterior neuropore failure →</strong> Anencephaly</li>
+              <li><strong>US signs:</strong> Lemon (frontal), Banana (cerebellum)</li>
+              <li><strong>Chiari II:</strong> ~100% with myelomeningocele</li>
+              <li><strong>Hydrocephalus:</strong> ~90% require shunt</li>
+              <li><strong>MSAFP:</strong> Elevated in open NTDs</li>
+              <li><strong>Prevention:</strong> Folic acid 400mcg (all), 4mg (high-risk)</li>
+            </ul>
+          </div>
+          <div style="text-align:center;margin-top:20px;"><button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    const fb = {
+      1: { y: "Correct! Lemon sign + banana sign + spine defect = myelomeningocele with Chiari II malformation.", n: "The lemon and banana signs are classic for NTD with Chiari II. The cerebellum herniates downward, causing these characteristic appearances." },
+      2: { y: "Correct! Posterior neuropore closes last (days 26-28). Failure → spina bifida. Anterior failure → anencephaly.", n: "Spina bifida = posterior neuropore failure. Anencephaly = anterior neuropore failure." },
+      3: { y: "Correct! AFP leaks from exposed neural tissue → elevated MSAFP. Low MSAFP suggests Down syndrome.", n: "Open NTDs cause ELEVATED MSAFP due to AFP leaking from exposed neural tissue." },
+      4: { y: "Correct! ~90% develop hydrocephalus due to Chiari II blocking CSF flow. Most require VP shunt.", n: "Hydrocephalus occurs in ~90% of myelomeningocele cases due to Chiari II malformation." },
+      5: { y: "Correct! High-risk women need 4 mg daily (10x standard dose). Reduces recurrence risk significantly.", n: "Previous NTD pregnancy = 4 mg folic acid daily. Standard dose (400 mcg) is insufficient for high-risk." }
+    };
+    function check(n, el, ok) {
+      document.querySelectorAll(`#c${n} .choice`).forEach(c => { c.style.pointerEvents = 'none'; if (c.onclick.toString().includes('true')) c.classList.add('correct'); });
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if (ok) score += 100;
+      document.getElementById('score').textContent = score;
+      const f = document.getElementById(`f${n}`);
+      f.className = `feedback show ${ok ? 'good' : 'bad'}`;
+      f.innerHTML = `<strong>${ok ? '✅ +100' : '❌'}</strong> ${ok ? fb[n].y : fb[n].n}`;
+      setTimeout(() => {
+        document.getElementById(`s${n}`).classList.add('hidden');
+        document.getElementById(`s${n+1}`).classList.remove('hidden');
+        document.getElementById('stage').textContent = `${n+1}/6`;
+        document.getElementById('progress').style.width = `${((n+1)/6)*100}%`;
+        if (n+1 === 6) document.getElementById('final').textContent = score;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }, 2000);
+    }
+  </script>
+
+    <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.cdc.gov/ncbddd/folicacid/recommendations.html" target="_blank">🔗 CDC Folic Acid Recommendations</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK537219/" target="_blank">🔗 NCBI - Neural Tube Defects</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on CDC guidelines and NCBI resources.</div>
+      </div>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Neural Tube Defects"
+         data-key-points="📚 Open-Access Learning Resources, Clinical Guidelines, Educational Resources, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

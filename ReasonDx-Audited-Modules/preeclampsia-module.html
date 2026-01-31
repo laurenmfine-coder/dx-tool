@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Preeclampsia & Eclampsia</title>
+  <style>
+    :root { --primary: #E91E63; --secondary: #9C27B0; --accent: #FF9800; --success: #4CAF50; --danger: #F44336; --info: #2196F3; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(233, 30, 99, 0.1); border-radius: 1rem; border: 1px solid rgba(233, 30, 99, 0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .subtitle { color: #9CA3AF; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+    .key-box { background: rgba(233, 30, 99, 0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(244, 67, 54, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(76, 175, 80, 0.15); border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(33, 150, 243, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(233, 30, 99, 0.2); color: var(--primary); }
+    ul { padding-left: 1.25rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(76, 175, 80, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .quiz-section { background: rgba(76, 175, 80, 0.1); border: 1px solid var(--success); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.5rem; margin: 0.3rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.9rem; }
+    .quiz-option:hover { background: rgba(233, 30, 99, 0.2); }
+    .quiz-option.correct { background: rgba(76, 175, 80, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(244, 67, 54, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚠️ Preeclampsia & Eclampsia</h1>
+      <p class="subtitle">Diagnosis • Severe Features • Management • HELLP</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('diagnosis')">Diagnosis</div>
+      <div class="nav-tab" onclick="showTab('management')">Management</div>
+      <div class="nav-tab" onclick="showTab('hellp')">HELLP</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>📚 Overview</h2>
+        <div class="key-box">
+          <strong>Preeclampsia:</strong> New-onset HTN (≥140/90) after 20 weeks with proteinuria OR end-organ dysfunction. Affects 2-8% of pregnancies.
+        </div>
+        <h3>Classification</h3>
+        <table>
+          <tr><th>Type</th><th>Definition</th></tr>
+          <tr><td>Chronic HTN</td><td>HTN before pregnancy or &lt;20 weeks</td></tr>
+          <tr><td>Gestational HTN</td><td>HTN ≥20 weeks, no proteinuria/organ damage</td></tr>
+          <tr><td>Preeclampsia</td><td>HTN + proteinuria or end-organ damage ≥20 weeks</td></tr>
+          <tr><td>Eclampsia</td><td>Preeclampsia + seizures</td></tr>
+        </table>
+        <h3>Risk Factors</h3>
+        <ul>
+          <li><strong>High risk:</strong> Prior preeclampsia, multifetal, chronic HTN, diabetes, CKD, autoimmune</li>
+          <li><strong>Moderate:</strong> Nulliparity, age &gt;35, BMI &gt;30, family history</li>
+        </ul>
+        <div class="success-box">
+          <strong>Prevention:</strong> Low-dose aspirin 81 mg starting 12-16 weeks in high-risk women (≥1 high-risk OR ≥2 moderate factors)
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSIS -->
+    <div id="diagnosis" class="tab-content">
+      <div class="section">
+        <h2>🔍 Diagnostic Criteria</h2>
+        <div class="key-box">
+          <strong>HTN:</strong> SBP ≥140 OR DBP ≥90 (two readings ≥4h apart)<br>
+          <strong>PLUS:</strong> Proteinuria (≥300 mg/24h) OR end-organ damage
+        </div>
+        <h3>End-Organ Dysfunction (can diagnose WITHOUT proteinuria)</h3>
+        <ul>
+          <li>Platelets &lt;100,000</li>
+          <li>Creatinine &gt;1.1 or doubling</li>
+          <li>Liver transaminases &gt;2x normal</li>
+          <li>Pulmonary edema</li>
+          <li>New headache or visual disturbances</li>
+        </ul>
+        <div class="danger-box">
+          <strong>SEVERE FEATURES (any one):</strong>
+          <ul>
+            <li>BP ≥160/110</li>
+            <li>Platelets &lt;100,000</li>
+            <li>AST/ALT &gt;2x normal or RUQ pain</li>
+            <li>Creatinine &gt;1.1 or doubling</li>
+            <li>Pulmonary edema</li>
+            <li>Cerebral/visual symptoms</li>
+          </ul>
+        </div>
+        <div class="mnemonic">
+          <strong>💡 Severe Features: "HELP BP"</strong><br>
+          Headache • Epigastric pain • Liver enzymes • Platelets • BP ≥160/110 • Pulmonary edema
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGEMENT -->
+    <div id="management" class="tab-content">
+      <div class="section">
+        <h2>⚕️ Management</h2>
+        <div class="key-box">
+          <strong>Definitive treatment = DELIVERY</strong>
+        </div>
+        <h3>Timing of Delivery</h3>
+        <table>
+          <tr><th>Scenario</th><th>Deliver At</th></tr>
+          <tr><td>Without severe features</td><td>37 weeks</td></tr>
+          <tr><td>With severe features ≥34 weeks</td><td>34 weeks (after steroids)</td></tr>
+          <tr><td>Unstable at any GA</td><td>After maternal stabilization</td></tr>
+        </table>
+        <h3>Acute Severe HTN (≥160/110) - Treat within 30-60 min!</h3>
+        <div class="info-box">
+          <ul>
+            <li><strong>Labetalol IV:</strong> 20→40→80 mg q10min</li>
+            <li><strong>Hydralazine IV:</strong> 5-10 mg q20min</li>
+            <li><strong>Nifedipine PO:</strong> 10-20 mg q20min</li>
+          </ul>
+          <strong>Goal:</strong> SBP 140-150, DBP 90-100
+        </div>
+        <h3>Magnesium Sulfate - Seizure Prophylaxis</h3>
+        <div class="danger-box">
+          <ul>
+            <li><strong>Load:</strong> 4-6 g IV over 15-20 min</li>
+            <li><strong>Maintenance:</strong> 1-2 g/hour</li>
+            <li><strong>Continue:</strong> 24-48h postpartum</li>
+          </ul>
+          <strong>Monitor:</strong> Reflexes, RR &gt;12, UOP &gt;25 mL/hr<br>
+          <strong>Toxicity antidote:</strong> Calcium gluconate 1g IV
+        </div>
+        <h3>Eclampsia Management</h3>
+        <ul>
+          <li>Protect airway, lateral position</li>
+          <li>Mg sulfate 4-6g IV (or 2g if already on Mg)</li>
+          <li>Stabilize mother FIRST, then deliver</li>
+          <li>Do NOT use benzos/phenytoin first-line</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HELLP -->
+    <div id="hellp" class="tab-content">
+      <div class="section">
+        <h2>🩸 HELLP Syndrome</h2>
+        <div class="key-box">
+          <strong>H</strong>emolysis • <strong>E</strong>levated <strong>L</strong>iver enzymes • <strong>L</strong>ow <strong>P</strong>latelets
+        </div>
+        <h3>Criteria</h3>
+        <ul>
+          <li><strong>Hemolysis:</strong> Schistocytes, LDH ≥600, bili ≥1.2</li>
+          <li><strong>Elevated LFTs:</strong> AST ≥70</li>
+          <li><strong>Low platelets:</strong> &lt;100,000</li>
+        </ul>
+        <h3>Presentation</h3>
+        <ul>
+          <li>RUQ/epigastric pain (65-90%)</li>
+          <li>Nausea/vomiting</li>
+          <li>May lack hypertension (15-20%)!</li>
+        </ul>
+        <div class="danger-box">
+          <strong>Complications:</strong> DIC, abruption, renal failure, hepatic rupture, eclampsia
+        </div>
+        <div class="info-box">
+          <strong>Timeline:</strong> Labs worsen 24-48h after delivery; platelet nadir ~day 2. If no improvement by day 4, consider TTP/HUS/AFLP.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2020/06/gestational-hypertension-and-preeclampsia" target="_blank">🔗 ACOG Hypertension in Pregnancy</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.preeclampsia.org/" target="_blank">🔗 Preeclampsia Foundation</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ACOG guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>📝 Quiz</h2>
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> BP 162/108, platelets 85k, proteinuria. Diagnosis?</p>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">A. Gestational HTN</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,true)">B. Preeclampsia with severe features</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">C. HELLP syndrome</div>
+          <div id="exp-q1" class="explanation">Severe features: BP ≥160/110 AND platelets &lt;100k. HELLP requires elevated LFTs + hemolysis.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> First-line seizure prophylaxis in severe preeclampsia?</p>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">A. Phenytoin</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,true)">B. Magnesium sulfate</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">C. Lorazepam</div>
+          <div id="exp-q2" class="explanation">Magnesium sulfate is superior to phenytoin and benzos for eclampsia prevention/treatment.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Earliest sign of magnesium toxicity?</p>
+          <div class="quiz-option" onclick="checkQ('q3',this,true)">A. Loss of reflexes</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">B. Respiratory depression</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">C. Cardiac arrest</div>
+          <div id="exp-q3" class="explanation">Reflexes lost at 8-12 mEq/L → respiratory depression 12-17 → cardiac arrest &gt;25.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> When to start aspirin prophylaxis?</p>
+          <div class="quiz-option" onclick="checkQ('q4',this,true)">A. 12-16 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">B. 20-24 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">C. 28-32 weeks</div>
+          <div id="exp-q4" class="explanation">Low-dose aspirin 81mg starting 12-16 weeks in high-risk women, continue until delivery.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(id, el, correct) {
+      const s = el.closest('.quiz-section');
+      s.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) s.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      document.getElementById('exp-' + id).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Preeclampsia & Eclampsia"
+         data-key-points="📚 Overview, 🔍 Diagnostic Criteria, ⚕️ Management, 🩸 HELLP Syndrome, 📚 Open-Access Learning Resources, 📝 Quiz, Classification, Risk Factors, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

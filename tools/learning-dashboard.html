@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Dashboard | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            padding: 32px 24px;
+            color: white;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 24px; }
+        .header p { opacity: 0.9; font-size: 14px; margin-top: 4px; }
+        .streak-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .content { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .stat-card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .stat-card .icon.blue { background: #dbeafe; }
+        .stat-card .icon.green { background: #dcfce7; }
+        .stat-card .icon.purple { background: #f3e8ff; }
+        .stat-card .icon.orange { background: #ffedd5; }
+        .stat-card .value { font-size: 28px; font-weight: 700; }
+        .stat-card .label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .card h2 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Progress Bars */
+        .progress-item {
+            margin-bottom: 16px;
+        }
+        .progress-item:last-child { margin-bottom: 0; }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        .progress-header .label { color: var(--text-primary); font-weight: 500; }
+        .progress-header .value { color: var(--text-secondary); }
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .progress-fill.green { background: #10b981; }
+        .progress-fill.blue { background: #3b82f6; }
+        .progress-fill.purple { background: #8b5cf6; }
+        .progress-fill.orange { background: #f59e0b; }
+        
+        /* Knowledge Heat Map */
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+        .heatmap-cell {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            background: #e5e7eb;
+            cursor: pointer;
+            position: relative;
+        }
+        .heatmap-cell.level-1 { background: #dcfce7; }
+        .heatmap-cell.level-2 { background: #86efac; }
+        .heatmap-cell.level-3 { background: #22c55e; }
+        .heatmap-cell.level-4 { background: #15803d; }
+        .heatmap-cell:hover::after {
+            content: attr(data-topic);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        
+        /* Recent Activity */
+        .activity-list {
+            list-style: none;
+        }
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: #f1f5f9;
+        }
+        .activity-content { flex: 1; }
+        .activity-title { font-size: 14px; font-weight: 500; }
+        .activity-time { font-size: 12px; color: var(--text-secondary); }
+        
+        /* Weak Areas */
+        .weak-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #fef2f2;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .weak-area:last-child { margin-bottom: 0; }
+        .weak-area .emoji { font-size: 20px; }
+        .weak-area .info { flex: 1; }
+        .weak-area .topic { font-size: 14px; font-weight: 500; color: #991b1b; }
+        .weak-area .score { font-size: 12px; color: #7f1d1d; }
+        .weak-area .review-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        /* Study Streak Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+        }
+        .calendar-day-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            padding: 4px;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        .calendar-day.active {
+            background: #10b981;
+            color: white;
+        }
+        .calendar-day.today {
+            border: 2px solid #3b82f6;
+        }
+        
+        /* Recommendations */
+        .rec-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .rec-item:hover { background: #f1f5f9; }
+        .rec-item .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .rec-item .info { flex: 1; }
+        .rec-item .title { font-size: 14px; font-weight: 500; }
+        .rec-item .reason { font-size: 12px; color: var(--text-secondary); }
+        .rec-item .arrow { color: var(--text-secondary); }
+        
+        /* Goals */
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .goal-item:last-child { border-bottom: none; }
+        .goal-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .goal-checkbox.done {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+        .goal-text { font-size: 14px; flex: 1; }
+        .goal-text.done { text-decoration: line-through; color: var(--text-secondary); }
+        
+        /* Settings button */
+        .settings-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .settings-btn:hover { background: #f8fafc; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div>
+                <h1>👋 Welcome back, Learner!</h1>
+                <p>Keep up the momentum — you're making great progress</p>
+            </div>
+            <div class="streak-badge">
+                🔥 <span id="streak-count">7</span> day streak
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon blue">📚</div>
+                <div class="value" id="modules-completed">47</div>
+                <div class="label">Modules Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon green">⏱️</div>
+                <div class="value" id="hours-studied">23.5</div>
+                <div class="label">Hours Studied</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon purple">🎯</div>
+                <div class="value" id="avg-score">78%</div>
+                <div class="label">Average Quiz Score</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon orange">📈</div>
+                <div class="value" id="mastery-level">Intermediate</div>
+                <div class="label">Current Level</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Progress by Category -->
+                <div class="card">
+                    <h2>📊 Progress by Category</h2>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Microbiology</span>
+                            <span class="value">32/40 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill green" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Pharmacology</span>
+                            <span class="value">10/16 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill blue" style="width: 62%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Cardiology</span>
+                            <span class="value">8/15 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill purple" style="width: 53%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Renal/Electrolytes</span>
+                            <span class="value">4/12 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill orange" style="width: 33%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Heat Map -->
+                <div class="card">
+                    <h2>🗺️ Knowledge Map</h2>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Hover over cells to see topic. Darker = stronger mastery.</p>
+                    <div class="heatmap-grid" id="heatmap">
+                        <!-- Generated by JS -->
+                    </div>
+                    <div style="display: flex; gap: 16px; margin-top: 12px; font-size: 11px; color: var(--text-secondary);">
+                        <span>◻️ Not started</span>
+                        <span style="color: #dcfce7;">■</span> Learning
+                        <span style="color: #22c55e;">■</span> Proficient
+                        <span style="color: #15803d;">■</span> Mastered
+                    </div>
+                </div>
+
+                <!-- Recommended Next -->
+                <div class="card">
+                    <h2>🎯 Recommended Next</h2>
+                    <div class="rec-item" onclick="alert('Opening module...')">
+                        <div class="icon" style="background: #fee2e2;">🦠</div>
+                        <div class="info">
+                            <div class="title">Mucormycosis</div>
+                            <div class="reason">Related to your recent Aspergillus study</div>
+                        </div>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="rec-item" onclick="alert('Opening module...')">
+                        <div class="icon" style="background: #dbeafe;">💊</div>
+                        <div class="info">
+                            <div class="title">Anti-TB Drugs</div>
+                            <div class="reason">Complete your pharmacology series</div>
+                        </div>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="rec-item" onclick="alert('Opening module...')">
+                        <div class="icon" style="background: #fef3c7;">⚡</div>
+                        <div class="info">
+                            <div class="title">Electrolyte Disorders Review</div>
+                            <div class="reason">Due for spaced repetition (last: 8 days ago)</div>
+                        </div>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Weak Areas -->
+                <div class="card">
+                    <h2>⚠️ Areas Needing Review</h2>
+                    <div class="weak-area">
+                        <span class="emoji">🧪</span>
+                        <div class="info">
+                            <div class="topic">Acid-Base Interpretation</div>
+                            <div class="score">Last quiz: 45%</div>
+                        </div>
+                        <button class="review-btn">Review</button>
+                    </div>
+                    <div class="weak-area">
+                        <span class="emoji">💉</span>
+                        <div class="info">
+                            <div class="topic">Antibiotic Mechanisms</div>
+                            <div class="score">Last quiz: 52%</div>
+                        </div>
+                        <button class="review-btn">Review</button>
+                    </div>
+                    <div class="weak-area">
+                        <span class="emoji">🫀</span>
+                        <div class="info">
+                            <div class="topic">ECG Interpretation</div>
+                            <div class="score">Last quiz: 58%</div>
+                        </div>
+                        <button class="review-btn">Review</button>
+                    </div>
+                </div>
+
+                <!-- Daily Goals -->
+                <div class="card">
+                    <h2>✅ Today's Goals</h2>
+                    <div class="goal-item">
+                        <div class="goal-checkbox done" onclick="this.classList.toggle('done')">✓</div>
+                        <span class="goal-text done">Complete 1 new module</span>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox" onclick="this.classList.toggle('done')"></div>
+                        <span class="goal-text">Review 5 flashcards</span>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox" onclick="this.classList.toggle('done')"></div>
+                        <span class="goal-text">Take 1 practice quiz</span>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox" onclick="this.classList.toggle('done')"></div>
+                        <span class="goal-text">Spend 30 min studying</span>
+                    </div>
+                </div>
+
+                <!-- Study Calendar -->
+                <div class="card">
+                    <h2>📅 Study Streak</h2>
+                    <div class="calendar-grid" id="calendar">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <h2>🕐 Recent Activity</h2>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">📖</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Completed: Aspergillus</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">🎯</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Quiz: Fungi (85%)</div>
+                                <div class="activity-time">Yesterday</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">📖</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Completed: Cryptococcus</div>
+                                <div class="activity-time">Yesterday</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">🔖</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Bookmarked: AKI Module</div>
+                                <div class="activity-time">2 days ago</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Generate Heat Map
+        const topics = [
+            'S. aureus', 'E. coli', 'Pseudomonas', 'Klebsiella', 'Strep pneumo', 'Enterococcus', 'C. diff',
+            'Candida', 'Aspergillus', 'Crypto', 'PCP', 'Histo', 'Cocci', 'Blasto',
+            'HIV', 'Hepatitis', 'Influenza', 'RSV', 'Herpes', 'TB', 'Syphilis',
+            'Beta-lactams', 'Vancomycin', 'Aminoglycosides', 'FQs', 'Macrolides', 'Antifungals', 'Antivirals',
+            'AKI', 'Acid-Base', 'Electrolytes', 'CHF', 'ACS', 'Arrhythmias', 'Shock'
+        ];
+        const levels = [4, 4, 3, 3, 4, 2, 3, 3, 4, 2, 1, 2, 1, 1, 4, 3, 2, 2, 3, 4, 3, 4, 3, 2, 3, 4, 2, 3, 1, 1, 1, 2, 3, 2, 2];
+        
+        const heatmap = document.getElementById('heatmap');
+        topics.forEach((topic, i) => {
+            const cell = document.createElement('div');
+            cell.className = `heatmap-cell level-${levels[i]}`;
+            cell.setAttribute('data-topic', topic);
+            heatmap.appendChild(cell);
+        });
+
+        // Generate Calendar
+        const calendar = document.getElementById('calendar');
+        const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        days.forEach(d => {
+            const label = document.createElement('div');
+            label.className = 'calendar-day-label';
+            label.textContent = d;
+            calendar.appendChild(label);
+        });
+        
+        // Last 28 days
+        const activeDays = [1, 2, 3, 4, 5, 8, 9, 10, 12, 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 27, 28];
+        for (let i = 1; i <= 28; i++) {
+            const day = document.createElement('div');
+            day.className = 'calendar-day';
+            if (activeDays.includes(i)) day.classList.add('active');
+            if (i === 28) day.classList.add('today');
+            day.textContent = i;
+            calendar.appendChild(day);
+        }
+
+        // Load saved data from localStorage
+        function loadProgress() {
+            const data = localStorage.getItem('reasondx-progress');
+            if (data) {
+                const progress = JSON.parse(data);
+                document.getElementById('modules-completed').textContent = progress.modulesCompleted || 47;
+                document.getElementById('hours-studied').textContent = progress.hoursStudied || 23.5;
+                document.getElementById('avg-score').textContent = (progress.avgScore || 78) + '%';
+                document.getElementById('streak-count').textContent = progress.streak || 7;
+            }
+        }
+
+        function saveProgress(key, value) {
+            let data = JSON.parse(localStorage.getItem('reasondx-progress') || '{}');
+            data[key] = value;
+            localStorage.setItem('reasondx-progress', JSON.stringify(data));
+        }
+
+        loadProgress();
+    </script>
+</body>
+</html>

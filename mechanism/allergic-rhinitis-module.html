@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergic Rhinitis - MechanismDx</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: white; text-align: center; margin-bottom: 10px; font-size: 2.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .subtitle { color: rgba(255,255,255,0.9); text-align: center; margin-bottom: 30px; font-size: 1.1em; }
+        .card { background: white; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .card h2 { color: #5a67d8; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; }
+        .card h3 { color: #6b46c1; margin: 20px 0 10px 0; }
+        .mechanism-box { background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); border-left: 4px solid #5a67d8; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .pathway { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .pathway-step { background: #5a67d8; color: white; padding: 10px 15px; border-radius: 20px; font-weight: 500; }
+        .pathway-arrow { color: #5a67d8; font-size: 1.5em; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .comparison-table th { background: #5a67d8; color: white; }
+        .comparison-table tr:nth-child(even) { background: #f7fafc; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl strong { color: #b45309; }
+        .treatment-ladder { background: #f0fff4; border: 2px solid #48bb78; border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .treatment-step { display: flex; align-items: center; margin: 10px 0; }
+        .step-number { background: #48bb78; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+        .quiz-section { background: #faf5ff; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .quiz-question { font-weight: 600; color: #553c9a; margin-bottom: 15px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 12px 15px; background: white; border: 2px solid #d6bcfa; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .quiz-option:hover { border-color: #9f7aea; background: #faf5ff; }
+        .quiz-option.correct { background: #c6f6d5; border-color: #48bb78; }
+        .quiz-option.incorrect { background: #fed7d7; border-color: #f56565; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #c6f6d5; color: #276749; }
+        .feedback.incorrect { background: #fed7d7; color: #c53030; }
+        .allergen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0; }
+        .allergen-card { background: #f7fafc; border-radius: 8px; padding: 15px; text-align: center; }
+        .allergen-card h4 { color: #5a67d8; margin-bottom: 8px; }
+        .symptom-list { list-style: none; padding: 0; }
+        .symptom-list li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .symptom-list li::before { content: "•"; color: #5a67d8; font-size: 1.5em; position: absolute; left: 0; top: 5px; }
+        .aria-score { background: #ebf8ff; border: 2px solid #4299e1; border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .severity-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin: 5px; }
+        .mild { background: #c6f6d5; color: #276749; }
+        .moderate { background: #fef3c7; color: #b45309; }
+        .severe { background: #fed7d7; color: #c53030; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        .nav-btn { padding: 12px 25px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; }
+        .nav-btn.primary { background: #5a67d8; color: white; }
+        .nav-btn.primary:hover { background: #4c51bf; }
+        .nav-btn.secondary { background: #e2e8f0; color: #4a5568; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .progress-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: all 0.3s; }
+        .progress-dot.active { background: white; transform: scale(1.3); }
+        .progress-dot.completed { background: #48bb78; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤧 Allergic Rhinitis</h1>
+        <p class="subtitle">MechanismDx Module - Understanding the Pathophysiology & Management</p>
+        
+        <div class="progress-bar">
+            <div class="progress-dot active" data-section="0"></div>
+            <div class="progress-dot" data-section="1"></div>
+            <div class="progress-dot" data-section="2"></div>
+            <div class="progress-dot" data-section="3"></div>
+            <div class="progress-dot" data-section="4"></div>
+            <div class="progress-dot" data-section="5"></div>
+        </div>
+
+        <!-- Section 0: Overview -->
+        <div class="section active" id="section-0">
+            <div class="card">
+                <h2>📚 Overview & Epidemiology</h2>
+                
+                <p>Allergic rhinitis (AR) is an <strong>IgE-mediated inflammatory disease</strong> of the nasal mucosa characterized by sneezing, rhinorrhea, nasal congestion, and pruritus.</p>
+                
+                <div class="mechanism-box">
+                    <h3>Key Facts</h3>
+                    <ul class="symptom-list">
+                        <li><strong>Prevalence:</strong> 10-30% of adults, up to 40% of children</li>
+                        <li><strong>Economic burden:</strong> $3-4 billion annually in direct costs</li>
+                        <li><strong>Quality of life:</strong> Significant impact on sleep, work, school performance</li>
+                        <li><strong>Comorbidities:</strong> Asthma (20-40% comorbidity), sinusitis, otitis media, sleep apnea</li>
+                    </ul>
+                </div>
+
+                <h3>Classification: ARIA Guidelines</h3>
+                <div class="aria-score">
+                    <p><strong>Intermittent vs Persistent:</strong></p>
+                    <ul>
+                        <li><span class="severity-badge mild">Intermittent</span> Symptoms &lt;4 days/week OR &lt;4 consecutive weeks</li>
+                        <li><span class="severity-badge moderate">Persistent</span> Symptoms &gt;4 days/week AND &gt;4 consecutive weeks</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Mild vs Moderate-Severe:</strong></p>
+                    <ul>
+                        <li><span class="severity-badge mild">Mild</span> No impairment of sleep, daily activities, work/school</li>
+                        <li><span class="severity-badge severe">Moderate-Severe</span> ≥1 of: sleep disturbance, impaired activities, impaired work/school, troublesome symptoms</li>
+                    </ul>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> Always ask about asthma! The "unified airway" concept recognizes that AR and asthma frequently coexist. Treating AR can improve asthma control.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" disabled>← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Pathophysiology →</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Pathophysiology -->
+        <div class="section" id="section-1">
+            <div class="card">
+                <h2>🔬 Pathophysiology</h2>
+                
+                <h3>Two-Phase Response</h3>
+                
+                <div class="mechanism-box">
+                    <h4>Early Phase (Minutes)</h4>
+                    <div class="pathway">
+                        <span class="pathway-step">Allergen exposure</span>
+                        <span class="pathway-arrow">→</span>
+                        <span class="pathway-step">IgE cross-linking on mast cells</span>
+                        <span class="pathway-arrow">→</span>
+                        <span class="pathway-step">Mast cell degranulation</span>
+                        <span class="pathway-arrow">→</span>
+                        <span class="pathway-step">Histamine, tryptase, PGD2, leukotrienes</span>
+                    </div>
+                    <p><strong>Clinical effect:</strong> Sneezing, itching, rhinorrhea, early congestion (within 5-30 minutes)</p>
+                </div>
+
+                <div class="mechanism-box">
+                    <h4>Late Phase (4-8 hours)</h4>
+                    <div class="pathway">
+                        <span class="pathway-step">Cytokine release (IL-4, IL-5, IL-13)</span>
+                        <span class="pathway-arrow">→</span>
+                        <span class="pathway-step">Eosinophil recruitment</span>
+                        <span class="pathway-arrow">→</span>
+                        <span class="pathway-step">Tissue inflammation</span>
+                        <span class="pathway-arrow">→</span>
+                        <span class="pathway-step">Nasal congestion (predominant)</span>
+                    </div>
+                    <p><strong>Clinical effect:</strong> Persistent congestion, mucosal swelling, continued symptoms</p>
+                </div>
+
+                <h3>Key Mediators & Their Effects</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Mediator</th>
+                        <th>Source</th>
+                        <th>Clinical Effect</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Histamine</strong></td>
+                        <td>Mast cells, basophils</td>
+                        <td>Itch, sneeze, rhinorrhea, early congestion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Leukotrienes (CysLTs)</strong></td>
+                        <td>Mast cells, eosinophils</td>
+                        <td>Prolonged congestion, mucus secretion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prostaglandin D2</strong></td>
+                        <td>Mast cells</td>
+                        <td>Congestion, Th2 cell recruitment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IL-4, IL-13</strong></td>
+                        <td>Th2 cells, ILC2s</td>
+                        <td>IgE class switching, goblet cell hyperplasia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IL-5</strong></td>
+                        <td>Th2 cells, ILC2s</td>
+                        <td>Eosinophil survival and recruitment</td>
+                    </tr>
+                </table>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> This two-phase response explains why antihistamines help itching/sneezing (early phase) but are less effective for congestion (late phase) – use intranasal steroids for congestion!
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Allergens →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Common Allergens -->
+        <div class="section" id="section-2">
+            <div class="card">
+                <h2>🌿 Common Allergens & Patterns</h2>
+                
+                <h3>Seasonal (Intermittent) Allergens</h3>
+                <div class="allergen-grid">
+                    <div class="allergen-card">
+                        <h4>🌸 Tree Pollen</h4>
+                        <p><strong>Season:</strong> Early spring (Feb-May)</p>
+                        <p>Oak, birch, cedar, maple</p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🌾 Grass Pollen</h4>
+                        <p><strong>Season:</strong> Late spring-summer (May-July)</p>
+                        <p>Timothy, Bermuda, Kentucky blue</p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🍂 Weed Pollen</h4>
+                        <p><strong>Season:</strong> Late summer-fall (Aug-Oct)</p>
+                        <p>Ragweed (most common), sagebrush</p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🍄 Outdoor Mold</h4>
+                        <p><strong>Season:</strong> Varies, peaks fall</p>
+                        <p>Alternaria, Cladosporium</p>
+                    </div>
+                </div>
+
+                <h3>Perennial (Persistent) Allergens</h3>
+                <div class="allergen-grid">
+                    <div class="allergen-card">
+                        <h4>🏠 Dust Mites</h4>
+                        <p>Der p 1, Der f 1 allergens</p>
+                        <p>Thrive in humidity >50%</p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🐱 Cat Dander</h4>
+                        <p>Fel d 1 (saliva protein)</p>
+                        <p>Highly persistent in environment</p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🐕 Dog Dander</h4>
+                        <p>Can f 1</p>
+                        <p>No truly "hypoallergenic" breeds</p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🪳 Cockroach</h4>
+                        <p>Bla g 1, Bla g 2</p>
+                        <p>Major urban allergen</p>
+                    </div>
+                </div>
+
+                <div class="mechanism-box">
+                    <h3>Pattern Recognition for Diagnosis</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Pattern</th>
+                            <th>Timing</th>
+                            <th>Likely Allergen</th>
+                        </tr>
+                        <tr>
+                            <td>Symptoms year-round, worse at night/morning</td>
+                            <td>Perennial</td>
+                            <td>Dust mites (in bedding)</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms at specific homes</td>
+                            <td>Exposure-related</td>
+                            <td>Pet dander</td>
+                        </tr>
+                        <tr>
+                            <td>Spring symptoms only</td>
+                            <td>March-May</td>
+                            <td>Tree pollen</td>
+                        </tr>
+                        <tr>
+                            <td>Fall symptoms, August-October</td>
+                            <td>Seasonal</td>
+                            <td>Ragweed</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms with rain/damp weather</td>
+                            <td>Weather-related</td>
+                            <td>Mold</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> "Hypoallergenic" pets don't exist! All cats produce Fel d 1 (in saliva/skin), and all dogs produce Can f 1. Some breeds produce LESS, but none produce zero.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Diagnosis →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Diagnosis -->
+        <div class="section" id="section-3">
+            <div class="card">
+                <h2>🔍 Diagnosis</h2>
+                
+                <h3>Clinical Features</h3>
+                <div class="mechanism-box">
+                    <h4>Cardinal Symptoms (The "SOAP" of AR)</h4>
+                    <ul class="symptom-list">
+                        <li><strong>S</strong>neezing (paroxysmal, often in clusters)</li>
+                        <li><strong>O</strong>bstruction (nasal congestion)</li>
+                        <li><strong>A</strong>queous rhinorrhea (clear, watery discharge)</li>
+                        <li><strong>P</strong>ruritus (nasal, ocular, palatal)</li>
+                    </ul>
+                </div>
+
+                <h3>Physical Exam Findings</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Finding</th>
+                        <th>Description</th>
+                        <th>Significance</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Allergic shiners</strong></td>
+                        <td>Dark circles under eyes</td>
+                        <td>Venous congestion from nasal obstruction</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Allergic salute</strong></td>
+                        <td>Upward rubbing of nose</td>
+                        <td>Common in children</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transverse nasal crease</strong></td>
+                        <td>Horizontal line across nose</td>
+                        <td>From repeated "allergic salute"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pale, boggy turbinates</strong></td>
+                        <td>Bluish-gray nasal mucosa</td>
+                        <td>Classic for allergic (vs. red in infectious)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cobblestoning</strong></td>
+                        <td>Bumpy posterior pharynx</td>
+                        <td>Lymphoid hyperplasia from postnasal drip</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dennie-Morgan lines</strong></td>
+                        <td>Extra eyelid creases</td>
+                        <td>Associated with atopy</td>
+                    </tr>
+                </table>
+
+                <h3>Diagnostic Testing</h3>
+                <div class="mechanism-box">
+                    <h4>Skin Prick Testing (SPT)</h4>
+                    <ul class="symptom-list">
+                        <li><strong>Gold standard</strong> for identifying specific IgE sensitization</li>
+                        <li>Results in 15-20 minutes</li>
+                        <li>Must hold antihistamines 3-7 days prior</li>
+                        <li>Positive = wheal ≥3mm larger than negative control</li>
+                    </ul>
+                </div>
+
+                <div class="mechanism-box">
+                    <h4>Serum Specific IgE (ImmunoCAP)</h4>
+                    <ul class="symptom-list">
+                        <li>Alternative when SPT not feasible</li>
+                        <li>No need to hold antihistamines</li>
+                        <li>Useful in dermatographism, severe eczema, or antihistamine dependence</li>
+                        <li>More expensive than SPT</li>
+                    </ul>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> A positive test shows SENSITIZATION, not clinical allergy! Always correlate with history. Up to 50% of people with positive tests have no clinical symptoms.
+                </div>
+
+                <h3>Differential Diagnosis</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Condition</th>
+                        <th>Key Distinguishing Features</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Vasomotor (non-allergic) rhinitis</strong></td>
+                        <td>Triggered by irritants, temperature, no IgE sensitization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infectious rhinitis</strong></td>
+                        <td>Purulent discharge, fever, short duration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rhinitis medicamentosa</strong></td>
+                        <td>Rebound congestion from decongestant overuse (>3-5 days)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NARES</strong></td>
+                        <td>Non-allergic rhinitis with eosinophilia, negative allergy testing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anatomic (septal deviation, polyps)</strong></td>
+                        <td>Unilateral symptoms, persistent obstruction</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Treatment →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Treatment -->
+        <div class="section" id="section-4">
+            <div class="card">
+                <h2>💊 Treatment</h2>
+                
+                <h3>Treatment Ladder (ARIA-Based)</h3>
+                <div class="treatment-ladder">
+                    <div class="treatment-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Allergen Avoidance</strong> - Foundation for all patients
+                            <p style="font-size: 0.9em; color: #666;">Dust mite encasings, HEPA filters, pet avoidance if relevant</p>
+                        </div>
+                    </div>
+                    <div class="treatment-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Mild Intermittent:</strong> Oral or intranasal antihistamine PRN
+                            <p style="font-size: 0.9em; color: #666;">2nd-gen oral (cetirizine, loratadine, fexofenadine) or intranasal (azelastine)</p>
+                        </div>
+                    </div>
+                    <div class="treatment-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Moderate-Severe or Persistent:</strong> Intranasal corticosteroid (INCS)
+                            <p style="font-size: 0.9em; color: #666;">Most effective single agent! Fluticasone, mometasone, budesonide</p>
+                        </div>
+                    </div>
+                    <div class="treatment-step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <strong>Inadequate response:</strong> Combination INCS + intranasal antihistamine
+                            <p style="font-size: 0.9em; color: #666;">Dymista (azelastine/fluticasone) - synergistic effect</p>
+                        </div>
+                    </div>
+                    <div class="treatment-step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <strong>Refractory:</strong> Consider allergen immunotherapy (AIT)
+                            <p style="font-size: 0.9em; color: #666;">SCIT or SLIT - disease-modifying, prevents asthma progression</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Medication Comparison</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Medication Class</th>
+                        <th>Sneezing/Itch</th>
+                        <th>Rhinorrhea</th>
+                        <th>Congestion</th>
+                        <th>Eye Symptoms</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Oral antihistamine</strong></td>
+                        <td>+++</td>
+                        <td>++</td>
+                        <td>+</td>
+                        <td>++</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intranasal antihistamine</strong></td>
+                        <td>+++</td>
+                        <td>++</td>
+                        <td>++</td>
+                        <td>+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intranasal corticosteroid</strong></td>
+                        <td>+++</td>
+                        <td>+++</td>
+                        <td>+++</td>
+                        <td>++</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Leukotriene antagonist</strong></td>
+                        <td>+</td>
+                        <td>+</td>
+                        <td>++</td>
+                        <td>+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Decongestant</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>+++</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> INCS is the most effective single therapy for moderate-severe AR! It takes 1-2 weeks for full effect, so counsel patients on consistent daily use, not PRN.
+                </div>
+
+                <h3>Allergen Immunotherapy (AIT)</h3>
+                <div class="mechanism-box">
+                    <h4>When to Consider</h4>
+                    <ul class="symptom-list">
+                        <li>Inadequate response to pharmacotherapy</li>
+                        <li>Significant side effects from medications</li>
+                        <li>Patient preference to avoid long-term medications</li>
+                        <li>Comorbid asthma (may prevent progression)</li>
+                    </ul>
+                    
+                    <h4>SCIT vs SLIT</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Feature</th>
+                            <th>SCIT (Shots)</th>
+                            <th>SLIT (Tablets/Drops)</th>
+                        </tr>
+                        <tr>
+                            <td>Administration</td>
+                            <td>Office-based injections</td>
+                            <td>Home-based sublingual</td>
+                        </tr>
+                        <tr>
+                            <td>Frequency</td>
+                            <td>Weekly → monthly</td>
+                            <td>Daily</td>
+                        </tr>
+                        <tr>
+                            <td>Efficacy</td>
+                            <td>+++</td>
+                            <td>++ (FDA tablets for grass, ragweed, dust mite)</td>
+                        </tr>
+                        <tr>
+                            <td>Systemic reaction risk</td>
+                            <td>Higher (rare)</td>
+                            <td>Lower</td>
+                        </tr>
+                        <tr>
+                            <td>Duration</td>
+                            <td>3-5 years</td>
+                            <td>3-5 years</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> AIT is DISEASE-MODIFYING! Unlike medications that only control symptoms, AIT can induce long-term tolerance and may prevent allergic rhinitis from progressing to asthma in children.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Quiz →</button>
+            </div>
+        </div>
+
+        <!-- Section 5: Quiz -->
+        <div class="section" id="section-5">
+            <div class="card">
+                <h2>📝 Knowledge Check</h2>
+                
+                <div class="quiz-section">
+                    <p class="quiz-question">1. A 25-year-old woman has year-round nasal congestion worse in the morning. Skin testing shows sensitivity to dust mites. What is the MOST effective pharmacotherapy?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Oral cetirizine daily</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Oral pseudoephedrine PRN</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Intranasal fluticasone daily</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Oral montelukast daily</div>
+                    </div>
+                    <div class="feedback" id="feedback-1">
+                        <strong>Correct!</strong> Intranasal corticosteroids are the MOST effective single agent for moderate-severe and persistent allergic rhinitis. They address all symptoms including congestion (which antihistamines do poorly). For perennial symptoms with dust mite sensitivity, daily INCS is first-line.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">2. Which mediator is primarily responsible for the LATE-PHASE nasal congestion in allergic rhinitis?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Histamine</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Leukotrienes and eosinophil recruitment</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Bradykinin</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Substance P</div>
+                    </div>
+                    <div class="feedback" id="feedback-2">
+                        <strong>Correct!</strong> The late phase (4-8 hours) is driven by cytokines (IL-4, IL-5, IL-13), leukotriene release, and eosinophil recruitment causing tissue inflammation and persistent congestion. Histamine is the key early-phase mediator (sneezing, itching). This explains why antihistamines help itch/sneeze but not congestion.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">3. A patient has a positive skin test to cat dander but reports no symptoms around cats. What is the correct interpretation?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. The test is a false positive and should be repeated</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. The patient has cat allergy and should avoid all cats</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. The patient is sensitized but not clinically allergic; no avoidance needed</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. The patient needs immunotherapy to prevent future reactions</div>
+                    </div>
+                    <div class="feedback" id="feedback-3">
+                        <strong>Correct!</strong> A positive skin test indicates SENSITIZATION (presence of specific IgE), not necessarily clinical allergy. Up to 50% of sensitized individuals have no symptoms on exposure. Always correlate test results with clinical history. No avoidance or treatment is needed for asymptomatic sensitization.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">4. What is the PRIMARY advantage of allergen immunotherapy over pharmacotherapy?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Faster symptom relief</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Disease modification with potential long-term tolerance</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Lower cost</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Fewer office visits</div>
+                    </div>
+                    <div class="feedback" id="feedback-4">
+                        <strong>Correct!</strong> AIT is the only DISEASE-MODIFYING treatment for allergic rhinitis. It induces immunologic tolerance that can persist after treatment ends (3-5 years). It may also prevent new sensitizations and progression from rhinitis to asthma in children. Medications only control symptoms while being taken.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">5. Which physical exam finding is MOST specific for allergic rhinitis?</p>
+                    <div class="quiz-options" data-correct="0">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Pale, boggy, bluish turbinates</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Purulent nasal discharge</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Deviated nasal septum</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Erythematous turbinates</div>
+                    </div>
+                    <div class="feedback" id="feedback-5">
+                        <strong>Correct!</strong> Pale, boggy, bluish-gray turbinates are classic for allergic rhinitis. Erythematous (red) turbinates suggest infectious or inflammatory rhinitis. Purulent discharge suggests infection. The pale/boggy appearance results from edema and venous congestion from the allergic inflammatory response.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Key Takeaways</h2>
+                <ul class="symptom-list">
+                    <li>AR has EARLY (histamine → itch/sneeze) and LATE (leukotrienes/eosinophils → congestion) phases</li>
+                    <li>INCS is the MOST effective single agent for moderate-severe AR</li>
+                    <li>Positive allergy test = sensitization, NOT necessarily clinical allergy</li>
+                    <li>AIT is DISEASE-MODIFYING and may prevent asthma progression</li>
+                    <li>Always assess for comorbid asthma (unified airway)</li>
+                </ul>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="location.reload()">🔄 Restart Module</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        const totalSections = 6;
+
+        function updateProgress() {
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index < currentSection) dot.classList.add('completed');
+                if (index === currentSection) dot.classList.add('active');
+            });
+        }
+
+        function showSection(index) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(`section-${index}`).classList.add('active');
+            currentSection = index;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections - 1) showSection(currentSection + 1);
+        }
+
+        function prevSection() {
+            if (currentSection > 0) showSection(currentSection - 1);
+        }
+
+        function checkAnswer(element, selectedIndex) {
+            const options = element.parentElement;
+            const correctIndex = parseInt(options.dataset.correct);
+            const feedbackId = 'feedback-' + options.closest('.quiz-section').querySelector('.quiz-question').textContent.charAt(0);
+            
+            if (options.querySelector('.correct, .incorrect')) return;
+            
+            options.querySelectorAll('.quiz-option').forEach((opt, idx) => {
+                if (idx === correctIndex) opt.classList.add('correct');
+                else if (idx === selectedIndex) opt.classList.add('incorrect');
+            });
+            
+            const feedback = options.nextElementSibling;
+            feedback.classList.add('show');
+            if (selectedIndex === correctIndex) {
+                feedback.classList.add('correct');
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.innerHTML = '<strong>Incorrect.</strong> ' + feedback.innerHTML.replace('<strong>Correct!</strong> ', '');
+            }
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Allergic Rhinitis"
+         data-key-points="📚 Overview & Epidemiology, 🔬 Pathophysiology, 🌿 Common Allergens & Patterns, 🔍 Diagnosis, 💊 Treatment, 📝 Knowledge Check, 🎯 Key Takeaways, Key Facts, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

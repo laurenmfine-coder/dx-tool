@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Abdominal Wall Defects</title>
+  <style>
+    :root{--primary:#8B5CF6;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(139,92,246,0.1);border-radius:1rem;border:1px solid rgba(139,92,246,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(139,92,246,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(139,92,246,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.case-box{background:rgba(8,145,178,0.15);border:1px solid var(--secondary);border-radius:0.75rem;padding:1.25rem;margin:1.5rem 0}.decision-btn{display:inline-block;padding:0.5rem 1rem;margin:0.25rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.decision-btn:hover{background:var(--primary)}.decision-btn.selected{background:var(--primary)}.feedback{padding:1rem;border-radius:0.5rem;margin-top:1rem;display:none}.feedback.correct{background:rgba(16,185,129,0.2);border:1px solid var(--success);display:block}.feedback.incorrect{background:rgba(239,68,68,0.2);border:1px solid var(--danger);display:block}.hidden{display:none}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧬 Abdominal Wall Defects</h1>
+      <p style="color:#9CA3AF">Omphalocele vs Gastroschisis • Embryology • Clinical Management</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('embryology')">Embryology</div>
+      <div class="nav-tab" onclick="showTab('comparison')">Comparison</div>
+      <div class="nav-tab" onclick="showTab('management')">Management</div>
+      <div class="nav-tab" onclick="showTab('crt')">Case Trainer</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- EMBRYOLOGY -->
+    <div id="embryology" class="tab-content active">
+      <div class="section">
+        <h2>🔬 Normal Abdominal Wall Development</h2>
+        
+        <div class="key-box">
+          <strong>Timeline:</strong>
+          <ul>
+            <li><strong>Week 6:</strong> Rapid midgut growth → physiologic herniation into umbilical cord</li>
+            <li><strong>Week 10:</strong> Midgut returns to abdomen with 270° counterclockwise rotation</li>
+            <li><strong>Week 12:</strong> Abdominal wall closure complete</li>
+          </ul>
+        </div>
+
+        <h3>Lateral Body Fold Development</h3>
+        <p>The ventral body wall forms from 4 embryonic folds that fuse at the umbilicus:</p>
+        <ul>
+          <li>Cephalic fold (head)</li>
+          <li>Caudal fold (tail)</li>
+          <li>Two lateral folds (sides)</li>
+        </ul>
+
+        <h3>Omphalocele - Embryologic Basis</h3>
+        <div class="info-box">
+          <strong>Mechanism:</strong> Failure of lateral body folds to fuse → midline defect<br>
+          <strong>Result:</strong> Abdominal contents remain in umbilical cord base, covered by peritoneum and amnion (membrane/sac)<br>
+          <strong>Timing:</strong> Defect occurs during weeks 3-4 of development
+        </div>
+
+        <h3>Gastroschisis - Embryologic Basis</h3>
+        <div class="info-box">
+          <strong>Mechanism:</strong> Vascular accident - disruption of omphalomesenteric artery (right) OR involution of right umbilical vein<br>
+          <strong>Result:</strong> Paraumbilical defect (usually RIGHT of umbilicus), bowel herniates into amniotic cavity with NO membrane covering<br>
+          <strong>Timing:</strong> Occurs after body wall closure (later than omphalocele)
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div id="comparison" class="tab-content">
+      <div class="section">
+        <h2>⚖️ Omphalocele vs Gastroschisis</h2>
+
+        <div class="mnemonic">
+          <strong>"GASTRO-schisis = Goes to the RIGHT, no sac, Gut matted"</strong><br>
+          <strong>"OMPHALO-cele = O = central (at umbilicus), sac present"</strong>
+        </div>
+
+        <table>
+          <tr><th>Feature</th><th>Omphalocele</th><th>Gastroschisis</th></tr>
+          <tr>
+            <td><strong>Location</strong></td>
+            <td>Central (AT umbilicus)</td>
+            <td>Paraumbilical (RIGHT of umbilicus)</td>
+          </tr>
+          <tr>
+            <td><strong>Covering</strong></td>
+            <td>SAC present (peritoneum + amnion)</td>
+            <td>NO SAC - exposed bowel</td>
+          </tr>
+          <tr>
+            <td><strong>Umbilical cord</strong></td>
+            <td>Inserts INTO the sac</td>
+            <td>Normal insertion (defect is lateral)</td>
+          </tr>
+          <tr>
+            <td><strong>Bowel appearance</strong></td>
+            <td>Normal (protected by sac)</td>
+            <td>Matted, thickened, edematous (chemical peritonitis from amniotic fluid)</td>
+          </tr>
+          <tr>
+            <td><strong>Contents</strong></td>
+            <td>Bowel ± liver, spleen</td>
+            <td>Usually bowel only (small defect)</td>
+          </tr>
+          <tr>
+            <td><strong>Defect size</strong></td>
+            <td>Variable (can be large)</td>
+            <td>Usually small (2-4 cm)</td>
+          </tr>
+          <tr>
+            <td><strong>Associated anomalies</strong></td>
+            <td><strong>50-70%</strong> - cardiac, chromosomal (trisomy 13, 18, 21), Beckwith-Wiedemann</td>
+            <td><strong>10-15%</strong> - mostly GI (atresia, stenosis)</td>
+          </tr>
+          <tr>
+            <td><strong>Chromosomal abnormalities</strong></td>
+            <td><strong>HIGH</strong> (30-40%)</td>
+            <td><strong>LOW</strong> (<1%)</td>
+          </tr>
+          <tr>
+            <td><strong>Maternal age</strong></td>
+            <td>Older mothers</td>
+            <td>Young mothers (<20 years)</td>
+          </tr>
+          <tr>
+            <td><strong>Risk factors</strong></td>
+            <td>Advanced maternal age</td>
+            <td>Young age, smoking, vasoactive drugs</td>
+          </tr>
+          <tr>
+            <td><strong>Prognosis</strong></td>
+            <td>Depends on associated anomalies</td>
+            <td>Generally good (90%+ survival)</td>
+          </tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>Key Distinction:</strong> Omphalocele has HIGH rate of chromosomal/cardiac anomalies. Gastroschisis is usually isolated with excellent prognosis. Always get echo and karyotype for omphalocele!
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGEMENT -->
+    <div id="management" class="tab-content">
+      <div class="section">
+        <h2>🏥 Clinical Management</h2>
+
+        <h3>Prenatal Diagnosis</h3>
+        <div class="info-box">
+          <strong>Ultrasound findings:</strong>
+          <ul>
+            <li>Omphalocele: Central defect with sac, cord insertion into sac, may see liver</li>
+            <li>Gastroschisis: Right paraumbilical defect, free-floating bowel loops, no sac</li>
+          </ul>
+          <strong>Additional workup for omphalocele:</strong>
+          <ul>
+            <li>Fetal echocardiogram (50% cardiac defects)</li>
+            <li>Amniocentesis for karyotype</li>
+            <li>Detailed anomaly scan</li>
+          </ul>
+        </div>
+
+        <h3>Delivery Planning</h3>
+        <table>
+          <tr><th>Aspect</th><th>Omphalocele</th><th>Gastroschisis</th></tr>
+          <tr><td>Delivery mode</td><td>C-section if giant/liver-containing</td><td>Vaginal usually safe</td></tr>
+          <tr><td>Timing</td><td>Term if isolated</td><td>Often 37-38 weeks (monitor bowel)</td></tr>
+          <tr><td>Location</td><td>Tertiary center with pediatric surgery</td><td>Tertiary center with pediatric surgery</td></tr>
+        </table>
+
+        <h3>Immediate Postnatal Care</h3>
+        <div class="success-box">
+          <strong>Both defects:</strong>
+          <ul>
+            <li>Keep bowel moist and warm (saline-soaked gauze, bowel bag)</li>
+            <li>Position infant on side to prevent kinking of mesentery</li>
+            <li>NG decompression (NPO)</li>
+            <li>IV fluids (increased losses - may need 150-200 mL/kg/day)</li>
+            <li>Temperature regulation</li>
+            <li>Broad-spectrum antibiotics</li>
+          </ul>
+        </div>
+
+        <h3>Surgical Options</h3>
+        <table>
+          <tr><th>Option</th><th>Indication</th><th>Description</th></tr>
+          <tr>
+            <td><strong>Primary closure</strong></td>
+            <td>Small defect, adequate abdominal domain</td>
+            <td>Single-stage repair; reduce contents, close fascia</td>
+          </tr>
+          <tr>
+            <td><strong>Staged closure (silo)</strong></td>
+            <td>Large defect, viscero-abdominal disproportion</td>
+            <td>Spring-loaded silo; gradual reduction over 5-7 days</td>
+          </tr>
+          <tr>
+            <td><strong>Paint and wait</strong></td>
+            <td>Giant omphalocele with liver</td>
+            <td>Apply silver sulfadiazine; allow epithelialization; delayed repair</td>
+          </tr>
+        </table>
+
+        <h3>Complications</h3>
+        <ul>
+          <li><strong>Abdominal compartment syndrome</strong> - from tight closure</li>
+          <li><strong>Intestinal atresia/stenosis</strong> - especially gastroschisis</li>
+          <li><strong>Necrotizing enterocolitis</strong></li>
+          <li><strong>Prolonged ileus</strong> - weeks in gastroschisis</li>
+          <li><strong>Short bowel syndrome</strong> - if bowel loss</li>
+          <li><strong>Ventral hernia</strong> - long-term</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CRT -->
+    <div id="crt" class="tab-content">
+      <div class="section">
+        <h2>🎯 Clinical Reasoning Trainer</h2>
+
+        <div class="case-box">
+          <h4>Case: Prenatal Ultrasound Finding</h4>
+          <p>A 19-year-old G1P0 at 20 weeks presents for anatomy scan. Ultrasound shows free-floating bowel loops in the amniotic fluid to the right of the umbilical cord insertion. There is no visible membrane covering the bowel. The bowel appears slightly thickened and matted.</p>
+
+          <div id="crt1">
+            <p><strong>What is the most likely diagnosis?</strong></p>
+            <div class="decision-btn" onclick="crtAnswer(1,'a')">Omphalocele</div>
+            <div class="decision-btn" onclick="crtAnswer(1,'b')">Gastroschisis</div>
+            <div class="decision-btn" onclick="crtAnswer(1,'c')">Umbilical hernia</div>
+            <div class="decision-btn" onclick="crtAnswer(1,'d')">Bladder exstrophy</div>
+            <div class="feedback" id="crt1-fb"></div>
+          </div>
+
+          <div id="crt2" class="hidden">
+            <p><strong>What additional workup is MOST important for this condition?</strong></p>
+            <div class="decision-btn" onclick="crtAnswer(2,'a')">Fetal echocardiogram and amniocentesis</div>
+            <div class="decision-btn" onclick="crtAnswer(2,'b')">Serial growth ultrasounds and bowel monitoring</div>
+            <div class="decision-btn" onclick="crtAnswer(2,'c')">MRI of fetal brain</div>
+            <div class="decision-btn" onclick="crtAnswer(2,'d')">Maternal glucose tolerance test</div>
+            <div class="feedback" id="crt2-fb"></div>
+          </div>
+
+          <div id="crt3" class="hidden">
+            <p><strong>What is the expected prognosis?</strong></p>
+            <div class="decision-btn" onclick="crtAnswer(3,'a')">Poor due to high rate of chromosomal abnormalities</div>
+            <div class="decision-btn" onclick="crtAnswer(3,'b')">Generally excellent (>90% survival) as this is usually an isolated defect</div>
+            <div class="decision-btn" onclick="crtAnswer(3,'c')">Depends entirely on liver involvement</div>
+            <div class="feedback" id="crt3-fb"></div>
+          </div>
+
+          <div id="crt-summary" class="hidden">
+            <div class="success-box">
+              <strong>Summary:</strong> This is gastroschisis - right paraumbilical defect, no sac, matted bowel, young mother. Unlike omphalocele, gastroschisis has LOW rate of chromosomal abnormalities (<1%) and is usually isolated. Main concerns are bowel complications (atresia, prolonged ileus). Prognosis is excellent with >90% survival. Monitor with serial ultrasounds for bowel dilation and plan delivery at tertiary center.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK526055/" target="_blank">🔗 NCBI - Gastroschisis</a>
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK563262/" target="_blank">🔗 NCBI - Omphalocele</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on NCBI resources.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Which feature distinguishes omphalocele from gastroschisis?</p>
+          <div class="quiz-option" onclick="check(this,true,'q1')">A. Omphalocele has a peritoneal sac covering</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">B. Omphalocele is located to the right of the umbilicus</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Omphalocele has lower risk of chromosomal abnormalities</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Omphalocele bowel appears matted and inflamed</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: A.</strong> Omphalocele has a sac (peritoneum + amnion) covering the herniated contents. Gastroschisis has NO covering - the bowel is exposed to amniotic fluid.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> A prenatal ultrasound shows a central abdominal wall defect with liver herniation into a membrane-covered sac. What additional testing is essential?</p>
+          <div class="quiz-option" onclick="check(this,false,'q2')">A. No additional testing needed</div>
+          <div class="quiz-option" onclick="check(this,true,'q2')">B. Fetal echocardiogram and karyotype</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Maternal serum AFP only</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Fetal MRI</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: B.</strong> This is omphalocele. 50-70% have associated anomalies, especially cardiac (50%) and chromosomal (30-40%). Fetal echo and karyotype are essential.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Which maternal demographic is classically associated with gastroschisis?</p>
+          <div class="quiz-option" onclick="check(this,true,'q3')">A. Young mothers (<20 years)</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Advanced maternal age (>35 years)</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Diabetic mothers</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. Mothers with prior chromosomal abnormality</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: A.</strong> Gastroschisis is associated with young maternal age (<20), smoking, and vasoactive drug use. Omphalocele is associated with advanced maternal age.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> What is the embryologic mechanism of gastroschisis?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Failure of lateral body folds to fuse</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Vascular accident (omphalomesenteric artery or right umbilical vein)</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Persistence of physiologic herniation</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Failure of midgut rotation</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> Gastroschisis results from a vascular accident - disruption of the omphalomesenteric artery or involution of the right umbilical vein, causing a paraumbilical defect (usually right-sided).</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> What is the "paint and wait" technique used for?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. All gastroschisis cases</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">B. Giant omphalocele with liver involvement</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Ruptured omphalocele sac</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Small omphalocele without anomalies</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: B.</strong> "Paint and wait" involves applying silver sulfadiazine to the omphalocele sac, allowing epithelialization, with delayed repair later. It's used for giant omphaloceles where primary closure would cause abdominal compartment syndrome.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+    const crtAns={1:{correct:'b',fb:{a:'Omphalocele would have a SAC and be at the umbilicus, not to the right.',b:'Correct! Right paraumbilical defect + no sac + matted bowel + young mother = classic gastroschisis.',c:'Umbilical hernia is covered and contains only fat/omentum.',d:'Bladder exstrophy is a lower midline defect.'}},2:{correct:'b',fb:{a:'Echo and amnio are essential for OMPHALOCELE, not gastroschisis.',b:'Correct! Gastroschisis has <1% chromosomal abnormality rate. Main concern is bowel - monitor for dilation, wall thickening, polyhydramnios.',c:'Brain MRI not routinely indicated.',d:'GDM screening is routine but not specific to this condition.'}},3:{correct:'b',fb:{a:'That describes omphalocele, which has high chromosomal abnormality rate.',b:'Correct! Gastroschisis is usually isolated with excellent prognosis (>90% survival). Main issues are feeding difficulties and prolonged ileus.',c:'Liver involvement is a concern for omphalocele, not gastroschisis.'}}};
+    function crtAnswer(q,ans){const data=crtAns[q];const fb=document.getElementById('crt'+q+'-fb');event.target.classList.add('selected');fb.innerHTML=data.fb[ans];fb.className='feedback '+(ans===data.correct?'correct':'incorrect');if(ans===data.correct){setTimeout(()=>{if(q<3){document.getElementById('crt'+(q+1)).classList.remove('hidden')}else{document.getElementById('crt-summary').classList.remove('hidden')}},1000)}}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Abdominal Wall Defects"
+         data-key-points="🔬 Normal Abdominal Wall Development, ⚖️ Omphalocele vs Gastroschisis, 🏥 Clinical Management, 🎯 Clinical Reasoning Trainer, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Lateral Body Fold Development, Omphalocele - Embryologic Basis, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

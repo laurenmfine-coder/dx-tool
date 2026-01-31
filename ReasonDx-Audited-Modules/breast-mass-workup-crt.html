@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Breast Mass Workup</title>
+  <style>
+    :root { --primary: #EC4899; --secondary: #0891B2; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; --purple: #8B5CF6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #0a1a1a 0%, #1a2e2e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(236, 72, 153, 0.1); border-radius: 1rem; border: 1px solid rgba(236, 72, 153, 0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; transition: all 0.2s; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+    .key-box { background: rgba(236, 72, 153, 0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(236, 72, 153, 0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.25rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(139, 92, 246, 0.15); border: 2px dashed var(--purple); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .algorithm-step { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1.25rem; margin: 1rem 0; border-left: 4px solid var(--secondary); }
+    .algorithm-step h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .birads-card { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1rem; margin: 0.5rem 0; }
+    .birads-card.cat0 { border-left: 4px solid #9CA3AF; }
+    .birads-card.cat1 { border-left: 4px solid var(--success); }
+    .birads-card.cat2 { border-left: 4px solid var(--success); }
+    .birads-card.cat3 { border-left: 4px solid var(--accent); }
+    .birads-card.cat4 { border-left: 4px solid #F97316; }
+    .birads-card.cat5 { border-left: 4px solid var(--danger); }
+    .birads-card.cat6 { border-left: 4px solid var(--danger); }
+    .case-box { background: rgba(8, 145, 178, 0.15); border: 1px solid var(--secondary); border-radius: 0.75rem; padding: 1.25rem; margin: 1.5rem 0; }
+    .case-box h4 { color: var(--secondary); margin-bottom: 0.75rem; }
+    .step-indicator { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .step { padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.1); border-radius: 1rem; font-size: 0.8rem; }
+    .step.active { background: var(--primary); color: white; }
+    .decision-btn { display: inline-block; padding: 0.5rem 1rem; margin: 0.25rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+    .decision-btn:hover { background: var(--primary); }
+    .decision-btn.selected { background: var(--primary); border-color: var(--primary); }
+    .feedback { padding: 1rem; border-radius: 0.5rem; margin-top: 1rem; display: none; }
+    .feedback.correct { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--success); display: block; }
+    .feedback.incorrect { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--danger); display: block; }
+    .hidden { display: none; }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.6rem; margin: 0.4rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+    .quiz-option:hover { background: rgba(236, 72, 153, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.85rem; }
+    .age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 600px) { .age-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎀 Breast Mass Workup</h1>
+      <p style="color: #9CA3AF;">Triple Assessment • BI-RADS • Age-Based Approach • Clinical Trainer</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('algorithm')">Algorithm</div>
+      <div class="nav-tab" onclick="showTab('birads')">BI-RADS</div>
+      <div class="nav-tab" onclick="showTab('differentials')">Differentials</div>
+      <div class="nav-tab" onclick="showTab('crt')">Clinical Trainer</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Triple Assessment</h2>
+        
+        <div class="key-box">
+          <strong>The gold standard for breast mass evaluation requires THREE components:</strong>
+          <ol>
+            <li><strong>Clinical examination</strong> - History + physical exam</li>
+            <li><strong>Imaging</strong> - Mammography and/or ultrasound</li>
+            <li><strong>Tissue sampling</strong> - FNA, core biopsy, or excisional biopsy</li>
+          </ol>
+          <p><em>All three must be concordant. If any component is discordant or suspicious, further workup is needed.</em></p>
+        </div>
+
+        <h3>History Red Flags</h3>
+        <table>
+          <tr><th>Finding</th><th>Concern</th></tr>
+          <tr><td>Rapidly growing mass</td><td>Malignancy (or phyllodes tumor)</td></tr>
+          <tr><td>Bloody nipple discharge</td><td>Intraductal papilloma or carcinoma</td></tr>
+          <tr><td>Unilateral nipple retraction (new)</td><td>Underlying carcinoma</td></tr>
+          <tr><td>Skin changes (peau d'orange)</td><td>Inflammatory breast cancer</td></tr>
+          <tr><td>Fixed mass to chest wall/skin</td><td>Advanced malignancy</td></tr>
+          <tr><td>Strong family history (BRCA)</td><td>Hereditary breast cancer risk</td></tr>
+        </table>
+
+        <h3>Physical Exam Features</h3>
+        <table>
+          <tr><th>Feature</th><th>More Likely Benign</th><th>More Concerning</th></tr>
+          <tr><td>Borders</td><td>Well-circumscribed, smooth</td><td>Irregular, poorly defined</td></tr>
+          <tr><td>Consistency</td><td>Soft, rubbery</td><td>Hard, firm</td></tr>
+          <tr><td>Mobility</td><td>Mobile</td><td>Fixed to skin or chest wall</td></tr>
+          <tr><td>Pain</td><td>Tender (often cyclic)</td><td>Usually painless</td></tr>
+          <tr><td>Skin changes</td><td>None</td><td>Dimpling, retraction, erythema</td></tr>
+          <tr><td>Nipple</td><td>Normal</td><td>Retracted, bloody discharge</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>⚠️ Never assume a mass is benign based on clinical features alone!</strong><br>
+          Up to 10% of breast cancers feel "benign" on exam. Triple assessment is required for ALL palpable masses.
+        </div>
+      </div>
+    </div>
+
+    <!-- ALGORITHM -->
+    <div id="algorithm" class="tab-content">
+      <div class="section">
+        <h2>📋 Age-Based Workup Algorithm</h2>
+        
+        <div class="mnemonic">
+          <strong>Key Principle:</strong> Age determines first-line imaging<br>
+          <strong>&lt;30:</strong> Ultrasound first (dense breast tissue, low cancer risk)<br>
+          <strong>≥30:</strong> Mammogram first (better for fatty tissue, higher cancer risk)
+        </div>
+
+        <div class="age-grid">
+          <div class="algorithm-step">
+            <h4>Age &lt;30 Years</h4>
+            <ol>
+              <li><strong>Clinical exam</strong></li>
+              <li><strong>Ultrasound</strong> - First-line imaging
+                <ul>
+                  <li>Simple cyst → Reassure, follow</li>
+                  <li>Complex cyst → Aspirate or biopsy</li>
+                  <li>Solid mass → Core biopsy</li>
+                </ul>
+              </li>
+              <li>Add mammogram if US suspicious</li>
+              <li>Biopsy any concerning finding</li>
+            </ol>
+            <div class="info-box">
+              <strong>Why US first?</strong> Young patients have dense breast tissue that limits mammogram sensitivity. US also avoids radiation exposure.
+            </div>
+          </div>
+
+          <div class="algorithm-step">
+            <h4>Age ≥30 Years</h4>
+            <ol>
+              <li><strong>Clinical exam</strong></li>
+              <li><strong>Diagnostic mammogram</strong> - First-line imaging
+                <ul>
+                  <li>BI-RADS 1-2 → Low concern, may add US</li>
+                  <li>BI-RADS 3 → Short-interval follow-up or biopsy</li>
+                  <li>BI-RADS 4-5 → Biopsy required</li>
+                </ul>
+              </li>
+              <li><strong>Ultrasound</strong> - Adjunct/targeted</li>
+              <li>Biopsy per BI-RADS category</li>
+            </ol>
+            <div class="info-box">
+              <strong>Why mammogram first?</strong> Better sensitivity in less-dense tissue, can detect microcalcifications, and higher cancer prevalence in this age group.
+            </div>
+          </div>
+        </div>
+
+        <h3>Biopsy Options</h3>
+        <table>
+          <tr><th>Method</th><th>Best For</th><th>Limitations</th></tr>
+          <tr><td><strong>FNA (Fine Needle Aspiration)</strong></td><td>Cyst aspiration, cytology if mass</td><td>Cannot distinguish invasive from in situ; high inadequate rate</td></tr>
+          <tr><td><strong>Core Needle Biopsy</strong></td><td>Solid masses, image-guided</td><td>Gold standard; provides architecture for histology</td></tr>
+          <tr><td><strong>Vacuum-Assisted Biopsy</strong></td><td>Calcifications, larger sample needed</td><td>More tissue; good for small lesions</td></tr>
+          <tr><td><strong>Excisional Biopsy</strong></td><td>Discordant results, high-risk lesions</td><td>Surgical procedure; may be diagnostic + therapeutic</td></tr>
+        </table>
+
+        <h3>Special Considerations</h3>
+        <div class="key-box">
+          <strong>Palpable mass with negative imaging:</strong>
+          <ul>
+            <li>A palpable mass requires biopsy even if mammogram/US are negative</li>
+            <li>Imaging has false negatives (especially in dense breasts)</li>
+            <li>Consider MRI if clinical concern persists</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- BI-RADS -->
+    <div id="birads" class="tab-content">
+      <div class="section">
+        <h2>📊 BI-RADS Classification</h2>
+        
+        <div class="info-box">
+          <strong>BI-RADS (Breast Imaging Reporting and Data System)</strong> standardizes mammography reporting and guides management based on malignancy risk.
+        </div>
+
+        <div class="birads-card cat0">
+          <strong>Category 0: Incomplete</strong><br>
+          <em>Malignancy risk: N/A</em><br>
+          Need additional imaging (spot compression, US, prior films)<br>
+          <strong>Action:</strong> Additional workup before assigning final category
+        </div>
+
+        <div class="birads-card cat1">
+          <strong>Category 1: Negative</strong><br>
+          <em>Malignancy risk: ~0%</em><br>
+          No abnormality detected<br>
+          <strong>Action:</strong> Routine screening
+        </div>
+
+        <div class="birads-card cat2">
+          <strong>Category 2: Benign</strong><br>
+          <em>Malignancy risk: ~0%</em><br>
+          Definitely benign finding (calcified fibroadenoma, oil cyst, lipoma)<br>
+          <strong>Action:</strong> Routine screening
+        </div>
+
+        <div class="birads-card cat3">
+          <strong>Category 3: Probably Benign</strong><br>
+          <em>Malignancy risk: ≤2%</em><br>
+          Expected benign (non-calcified circumscribed solid mass, focal asymmetry, cluster of punctate calcifications)<br>
+          <strong>Action:</strong> Short-interval follow-up (6 months) OR biopsy if patient prefers
+        </div>
+
+        <div class="birads-card cat4">
+          <strong>Category 4: Suspicious</strong><br>
+          <em>Malignancy risk: 2-95%</em><br>
+          Subdivided into:
+          <ul>
+            <li>4A: Low suspicion (2-10%) - e.g., palpable solid mass with some benign features</li>
+            <li>4B: Moderate suspicion (10-50%) - e.g., indistinct margins</li>
+            <li>4C: High suspicion (50-95%) - e.g., irregular spiculated mass</li>
+          </ul>
+          <strong>Action:</strong> Tissue diagnosis recommended (biopsy)
+        </div>
+
+        <div class="birads-card cat5">
+          <strong>Category 5: Highly Suggestive of Malignancy</strong><br>
+          <em>Malignancy risk: ≥95%</em><br>
+          Classic malignant features (spiculated mass, fine linear branching calcifications)<br>
+          <strong>Action:</strong> Biopsy required; may proceed with definitive treatment planning
+        </div>
+
+        <div class="birads-card cat6">
+          <strong>Category 6: Known Malignancy</strong><br>
+          <em>Malignancy risk: 100%</em><br>
+          Biopsy-proven cancer, imaging done for extent of disease or treatment monitoring<br>
+          <strong>Action:</strong> Appropriate treatment
+        </div>
+
+        <h3>Key Mammographic Findings</h3>
+        <table>
+          <tr><th>Finding</th><th>Description</th><th>Concern Level</th></tr>
+          <tr><td>Spiculated mass</td><td>Radiating lines from central mass</td><td>Highly suspicious</td></tr>
+          <tr><td>Irregular shape</td><td>Non-round, non-oval</td><td>Suspicious</td></tr>
+          <tr><td>Indistinct margins</td><td>Cannot see where mass ends</td><td>Suspicious</td></tr>
+          <tr><td>Pleomorphic calcifications</td><td>Varying sizes/shapes</td><td>Suspicious</td></tr>
+          <tr><td>Linear/branching calcifications</td><td>Casting pattern in ducts</td><td>Highly suspicious (DCIS)</td></tr>
+          <tr><td>Architectural distortion</td><td>No mass but disrupted tissue</td><td>Suspicious</td></tr>
+          <tr><td>Circumscribed mass</td><td>Well-defined round/oval</td><td>Likely benign</td></tr>
+          <tr><td>Coarse "popcorn" calcifications</td><td>Large, chunky</td><td>Benign (fibroadenoma)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- DIFFERENTIALS -->
+    <div id="differentials" class="tab-content">
+      <div class="section">
+        <h2>📚 Breast Mass Differentials</h2>
+
+        <h3>Benign Conditions</h3>
+        <table>
+          <tr><th>Condition</th><th>Age</th><th>Features</th><th>Management</th></tr>
+          <tr>
+            <td><strong>Fibroadenoma</strong></td>
+            <td>15-35</td>
+            <td>Rubbery, mobile ("breast mouse"), well-circumscribed, painless</td>
+            <td>Observe if <2cm and classic features; excise if growing or >2cm</td>
+          </tr>
+          <tr>
+            <td><strong>Fibrocystic changes</strong></td>
+            <td>30-50</td>
+            <td>Bilateral, lumpy, cyclic pain, improves after menses</td>
+            <td>Reassurance, supportive bra, evening primrose oil</td>
+          </tr>
+          <tr>
+            <td><strong>Simple cyst</strong></td>
+            <td>35-50</td>
+            <td>Round, mobile, may be tender, anechoic on US</td>
+            <td>Aspiration if symptomatic; observe if not</td>
+          </tr>
+          <tr>
+            <td><strong>Fat necrosis</strong></td>
+            <td>Any</td>
+            <td>History of trauma/surgery, may have skin retraction</td>
+            <td>Can mimic cancer; biopsy if uncertain</td>
+          </tr>
+          <tr>
+            <td><strong>Intraductal papilloma</strong></td>
+            <td>40-50</td>
+            <td>Bloody/serous nipple discharge, subareolar</td>
+            <td>Excision (small cancer risk)</td>
+          </tr>
+          <tr>
+            <td><strong>Breast abscess</strong></td>
+            <td>Lactating or smokers</td>
+            <td>Painful, erythema, fever, fluctuant</td>
+            <td>Antibiotics ± aspiration/I&D</td>
+          </tr>
+        </table>
+
+        <h3>High-Risk Lesions</h3>
+        <div class="danger-box">
+          These are not cancer but increase future cancer risk and usually require excision:
+          <ul>
+            <li><strong>Atypical ductal hyperplasia (ADH)</strong> - 4-5x increased risk</li>
+            <li><strong>Atypical lobular hyperplasia (ALH)</strong> - 4x increased risk</li>
+            <li><strong>Lobular carcinoma in situ (LCIS)</strong> - Risk marker (8-10x), not precursor</li>
+            <li><strong>Phyllodes tumor</strong> - Can be benign, borderline, or malignant; requires excision</li>
+          </ul>
+        </div>
+
+        <h3>Malignant Conditions</h3>
+        <table>
+          <tr><th>Type</th><th>Features</th><th>Key Points</th></tr>
+          <tr>
+            <td><strong>Invasive ductal carcinoma (IDC)</strong></td>
+            <td>Hard, irregular, fixed, may have skin changes</td>
+            <td>Most common (70-80%)</td>
+          </tr>
+          <tr>
+            <td><strong>Invasive lobular carcinoma (ILC)</strong></td>
+            <td>Subtle thickening, often missed on mammogram</td>
+            <td>Second most common (10-15%); often multifocal/bilateral</td>
+          </tr>
+          <tr>
+            <td><strong>DCIS</strong></td>
+            <td>Usually non-palpable, detected by calcifications</td>
+            <td>Pre-invasive; variable progression risk</td>
+          </tr>
+          <tr>
+            <td><strong>Inflammatory breast cancer</strong></td>
+            <td>Erythema, peau d'orange, warm, no discrete mass</td>
+            <td>Aggressive; dermal lymphatic invasion</td>
+          </tr>
+          <tr>
+            <td><strong>Paget disease of nipple</strong></td>
+            <td>Eczematous nipple changes, scaling, erosion</td>
+            <td>Associated with underlying DCIS or invasive cancer</td>
+          </tr>
+        </table>
+
+        <h3>Nipple Discharge</h3>
+        <div class="key-box">
+          <strong>Concerning features (require workup):</strong>
+          <ul>
+            <li>Spontaneous (not expressed)</li>
+            <li>Unilateral</li>
+            <li>Single duct</li>
+            <li>Bloody or serous</li>
+          </ul>
+          <strong>Usually benign:</strong> Bilateral, milky, multiduct, with expression only
+        </div>
+      </div>
+    </div>
+
+    <!-- CLINICAL REASONING TRAINER -->
+    <div id="crt" class="tab-content">
+      <div class="section">
+        <h2>🎯 Clinical Reasoning Trainer</h2>
+
+        <div class="case-box" id="case1">
+          <h4>Case 1: 25-year-old with Breast Lump</h4>
+          <p>A 25-year-old woman presents with a 2cm lump in her right breast that she noticed 1 month ago. It is mobile, rubbery, and non-tender. No nipple discharge, no skin changes. No family history of breast cancer.</p>
+          
+          <div class="step-indicator">
+            <span class="step active" id="c1s1">1. First Test</span>
+            <span class="step" id="c1s2">2. US Result</span>
+            <span class="step" id="c1s3">3. Next Step</span>
+            <span class="step" id="c1s4">4. Management</span>
+          </div>
+
+          <div id="c1q1">
+            <p><strong>What is the most appropriate first imaging study?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c1', 1, 'a')">Mammogram</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 1, 'b')">Breast ultrasound</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 1, 'c')">Breast MRI</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 1, 'd')">No imaging needed - clinical features are benign</div>
+            <div class="feedback" id="c1q1-fb"></div>
+          </div>
+
+          <div id="c1q2" class="hidden">
+            <p><strong>Ultrasound shows a 2cm well-circumscribed, oval, homogeneous solid mass with smooth margins and parallel orientation. What does this most likely represent?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c1', 2, 'a')">Fibroadenoma</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 2, 'b')">Invasive ductal carcinoma</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 2, 'c')">Phyllodes tumor</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 2, 'd')">Breast cyst</div>
+            <div class="feedback" id="c1q2-fb"></div>
+          </div>
+
+          <div id="c1q3" class="hidden">
+            <p><strong>The imaging is reassuring but what should be the next step?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c1', 3, 'b')">Reassurance and routine follow-up</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 3, 'a')">Core needle biopsy</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 3, 'c')">Excisional biopsy</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 3, 'd')">FNA only</div>
+            <div class="feedback" id="c1q3-fb"></div>
+          </div>
+
+          <div id="c1q4" class="hidden">
+            <p><strong>Core biopsy confirms fibroadenoma. Patient asks about next steps. What do you recommend?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c1', 4, 'a')">Observation with follow-up US in 6-12 months</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 4, 'b')">Immediate surgical excision</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 4, 'c')">Start tamoxifen</div>
+            <div class="decision-btn" onclick="selectCRT('c1', 4, 'd')">Radiation therapy</div>
+            <div class="feedback" id="c1q4-fb"></div>
+          </div>
+
+          <div id="c1-summary" class="hidden">
+            <div class="success-box">
+              <strong>Case Summary:</strong> This is a classic presentation of fibroadenoma - the most common breast mass in young women. Key features: young age, mobile, rubbery, well-circumscribed on US. Despite reassuring features, triple assessment (exam + imaging + biopsy) is standard for palpable masses. Small fibroadenomas (<2cm) with benign biopsy can be observed; excision is offered if growing, symptomatic, or patient preference.
+            </div>
+          </div>
+        </div>
+
+        <div class="case-box" id="case2" style="margin-top: 2rem;">
+          <h4>Case 2: 58-year-old with Mammographic Abnormality</h4>
+          <p>A 58-year-old woman's screening mammogram shows a 1.5cm spiculated mass with associated pleomorphic calcifications in the upper outer quadrant. No palpable mass on exam. No symptoms.</p>
+          
+          <div class="step-indicator">
+            <span class="step active" id="c2s1">1. BI-RADS</span>
+            <span class="step" id="c2s2">2. Next Step</span>
+            <span class="step" id="c2s3">3. Biopsy Result</span>
+          </div>
+
+          <div id="c2q1">
+            <p><strong>What BI-RADS category should this be assigned?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c2', 1, 'd')">BI-RADS 3 - Probably benign</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 1, 'c')">BI-RADS 4 - Suspicious</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 1, 'a')">BI-RADS 5 - Highly suspicious for malignancy</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 1, 'b')">BI-RADS 0 - Need more information</div>
+            <div class="feedback" id="c2q1-fb"></div>
+          </div>
+
+          <div id="c2q2" class="hidden">
+            <p><strong>What is the most appropriate next step?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c2', 2, 'a')">Image-guided core needle biopsy</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 2, 'b')">Follow-up mammogram in 6 months</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 2, 'c')">Proceed directly to lumpectomy</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 2, 'd')">Breast MRI</div>
+            <div class="feedback" id="c2q2-fb"></div>
+          </div>
+
+          <div id="c2q3" class="hidden">
+            <p><strong>Core biopsy returns: Invasive ductal carcinoma, ER+/PR+, HER2-negative. What additional workup is needed before treatment planning?</strong></p>
+            <div class="decision-btn" onclick="selectCRT('c2', 3, 'a')">Breast MRI, oncotype testing, surgical consultation</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 3, 'b')">Immediate mastectomy</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 3, 'c')">PET scan</div>
+            <div class="decision-btn" onclick="selectCRT('c2', 3, 'd')">No additional workup - begin chemotherapy</div>
+            <div class="feedback" id="c2q3-fb"></div>
+          </div>
+
+          <div id="c2-summary" class="hidden">
+            <div class="success-box">
+              <strong>Case Summary:</strong> This is a classic presentation of breast cancer found on screening - spiculated mass + pleomorphic calcifications are highly suspicious (BI-RADS 5). Biopsy is required before treatment. Once IDC is confirmed, additional workup includes breast MRI (to assess extent of disease, look for multifocality), receptor testing (already done), genetic testing if indicated, and oncotype (for ER+ early-stage to guide chemotherapy decision). Treatment involves multidisciplinary planning.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.acr.org/Clinical-Resources/Reporting-and-Data-Systems/Bi-Rads" target="_blank">🔗 ACR BI-RADS</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK470216/" target="_blank">🔗 NCBI - Breast Mass Evaluation</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ACR guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> A 28-year-old woman presents with a palpable breast mass. What is the most appropriate first imaging study?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">A. Mammography</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q1')">B. Breast ultrasound</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">C. Breast MRI</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">D. PET scan</div>
+          <div class="explanation" id="q1-exp">
+            <strong>Correct: B.</strong> In patients <30, ultrasound is first-line imaging. Young women have dense breast tissue that limits mammogram sensitivity, and they have lower breast cancer risk. US is also radiation-free.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> BI-RADS 4 indicates:</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">A. Negative mammogram</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">B. Probably benign - recommend 6-month follow-up</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q2')">C. Suspicious - biopsy recommended</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">D. Known malignancy</div>
+          <div class="explanation" id="q2-exp">
+            <strong>Correct: C.</strong> BI-RADS 4 = Suspicious abnormality with 2-95% malignancy risk (subdivided into 4A, 4B, 4C). Biopsy is indicated. BI-RADS 3 is probably benign (short-interval follow-up), and BI-RADS 5 is highly suspicious (≥95% risk).
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Which finding on mammogram is most suspicious for malignancy?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q3')">A. Spiculated mass with fine linear branching calcifications</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">B. Well-circumscribed oval mass</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">C. Coarse "popcorn" calcifications</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">D. Oil cyst</div>
+          <div class="explanation" id="q3-exp">
+            <strong>Correct: A.</strong> Spiculated mass + fine linear branching calcifications (suggesting DCIS) are classic for malignancy. Circumscribed masses are usually benign. Popcorn calcifications are typical of fibroadenomas. Oil cysts are definitely benign.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> A 45-year-old has a palpable breast mass but mammogram and ultrasound are negative. What should be done?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">A. Reassurance - imaging rules out cancer</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q4')">B. Proceed with biopsy despite negative imaging</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">C. Follow-up mammogram in 1 year</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">D. Breast MRI only if family history positive</div>
+          <div class="explanation" id="q4-exp">
+            <strong>Correct: B.</strong> A palpable mass requires biopsy regardless of imaging results. Imaging has false negatives, especially in dense breast tissue. Triple assessment (clinical + imaging + tissue) must be concordant; if any component is concerning (palpable mass), proceed with biopsy.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which type of nipple discharge is most concerning for malignancy?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">A. Bilateral milky discharge in a lactating woman</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q5')">B. Unilateral spontaneous bloody discharge from a single duct</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">C. Bilateral green discharge with expression</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">D. Clear discharge from multiple ducts bilaterally</div>
+          <div class="explanation" id="q5-exp">
+            <strong>Correct: B.</strong> Concerning discharge is: Spontaneous, Unilateral, Single-duct, and Bloody or serous. This requires workup for intraductal papilloma or carcinoma. Bilateral, milky, multiduct discharge is usually physiologic or related to medications.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function checkAnswer(el, correct, qId) {
+      if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (correct) document.getElementById(qId + '-exp').style.display = 'block';
+    }
+
+    const crtData = {
+      'c1': {
+        1: { correct: 'b', feedback: {
+          'a': 'Mammogram is not first-line in patients <30 due to dense breast tissue and low yield.',
+          'b': 'Correct! Ultrasound is first-line imaging for patients <30 with a breast mass. Dense breast tissue limits mammogram sensitivity.',
+          'c': 'MRI is not first-line; it\'s used for high-risk screening or assessing extent of known cancer.',
+          'd': 'Incorrect - all palpable masses require triple assessment regardless of clinical features.'
+        }},
+        2: { correct: 'a', feedback: {
+          'a': 'Correct! Well-circumscribed, oval, homogeneous solid mass with smooth margins is classic for fibroadenoma.',
+          'b': 'IDC would typically show irregular margins, spiculation, or suspicious features.',
+          'c': 'Phyllodes tumors can look similar but are less common; biopsy will differentiate.',
+          'd': 'A cyst would be anechoic (black) on ultrasound, not solid.'
+        }},
+        3: { correct: 'a', feedback: {
+          'a': 'Correct! Despite reassuring imaging, triple assessment requires tissue diagnosis for all palpable masses. Core biopsy provides histology.',
+          'b': 'Cannot reassure without tissue diagnosis even if imaging appears benign.',
+          'c': 'Excisional biopsy is more invasive than necessary for initial diagnosis.',
+          'd': 'FNA provides only cytology; core biopsy is preferred for solid masses.'
+        }},
+        4: { correct: 'a', feedback: {
+          'a': 'Correct! Small fibroadenomas (<2-3cm) with benign biopsy can be observed with follow-up imaging to monitor for growth.',
+          'b': 'Excision is not mandatory for small stable fibroadenomas; it\'s offered if growing, large, or patient desires.',
+          'c': 'Tamoxifen is not indicated for fibroadenoma.',
+          'd': 'Radiation has no role in benign fibroadenoma.'
+        }}
+      },
+      'c2': {
+        1: { correct: 'a', feedback: {
+          'a': 'Correct! Spiculated mass + pleomorphic calcifications have ≥95% malignancy risk = BI-RADS 5.',
+          'b': 'BI-RADS 0 is used when additional imaging is needed before characterization.',
+          'c': 'BI-RADS 4 is suspicious but these findings are highly suspicious, warranting BI-RADS 5.',
+          'd': 'BI-RADS 3 is for probably benign findings; these features are clearly malignant-appearing.'
+        }},
+        2: { correct: 'a', feedback: {
+          'a': 'Correct! Tissue diagnosis with image-guided core biopsy is required before treatment. This confirms diagnosis and provides receptor status.',
+          'b': 'Follow-up is inappropriate for BI-RADS 5; biopsy is mandatory.',
+          'c': 'Never proceed to surgery without tissue diagnosis first.',
+          'd': 'MRI may be useful for staging but biopsy comes first.'
+        }},
+        3: { correct: 'a', feedback: {
+          'a': 'Correct! For newly diagnosed breast cancer: breast MRI (extent of disease), receptor/oncotype testing (guide systemic therapy), and surgical consultation for treatment planning.',
+          'b': 'Surgery requires proper workup and multidisciplinary planning first.',
+          'c': 'PET scan is not routine for early-stage breast cancer.',
+          'd': 'Chemotherapy decision depends on tumor characteristics; surgery is often first for early-stage.'
+        }}
+      }
+    };
+
+    function selectCRT(caseId, qNum, answer) {
+      const data = crtData[caseId][qNum];
+      const feedbackDiv = document.getElementById(`${caseId}q${qNum}-fb`);
+      const isCorrect = answer === data.correct;
+      
+      event.target.classList.add('selected');
+      feedbackDiv.innerHTML = data.feedback[answer];
+      feedbackDiv.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+
+      if (isCorrect) {
+        const totalQs = caseId === 'c1' ? 4 : 3;
+        if (qNum < totalQs) {
+          setTimeout(() => {
+            document.getElementById(`${caseId}q${qNum + 1}`).classList.remove('hidden');
+            document.getElementById(`${caseId}s${qNum + 1}`).classList.add('active');
+          }, 1000);
+        } else {
+          setTimeout(() => {
+            document.getElementById(`${caseId}-summary`).classList.remove('hidden');
+          }, 1000);
+        }
+      }
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Breast Mass Workup"
+         data-key-points="🎯 Triple Assessment, 📋 Age-Based Workup Algorithm, 📊 BI-RADS Classification, 📚 Breast Mass Differentials, 🎯 Clinical Reasoning Trainer, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, History Red Flags, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

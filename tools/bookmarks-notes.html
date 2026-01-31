@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookmarks & Notes | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); padding: 24px; color: white; }
+        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-size: 24px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .search-box { display: flex; gap: 8px; }
+        .search-box input { padding: 10px 16px; border: none; border-radius: 8px; width: 250px; font-size: 14px; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+        .tab { padding: 8px 16px; border: none; background: none; font-size: 14px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-radius: 6px; }
+        .tab:hover { background: #f1f5f9; }
+        .tab.active { background: var(--primary); color: white; }
+        .view { display: none; }
+        .view.active { display: block; }
+        .empty-state { text-align: center; padding: 48px; color: var(--text-secondary); }
+        .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
+        .bookmark-list { display: grid; gap: 12px; }
+        .bookmark-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; gap: 16px; cursor: pointer; transition: all 0.2s; }
+        .bookmark-card:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .bookmark-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .bookmark-icon.micro { background: #dcfce7; }
+        .bookmark-icon.pharm { background: #dbeafe; }
+        .bookmark-icon.cardio { background: #fee2e2; }
+        .bookmark-icon.renal { background: #fef3c7; }
+        .bookmark-content { flex: 1; min-width: 0; }
+        .bookmark-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+        .bookmark-module { font-size: 13px; color: var(--text-secondary); }
+        .bookmark-note { font-size: 13px; color: var(--text-secondary); margin-top: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 6px; }
+        .bookmark-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+        .bookmark-actions { display: flex; gap: 8px; align-items: flex-start; }
+        .action-btn { padding: 8px; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-radius: 6px; }
+        .action-btn:hover { background: #f1f5f9; }
+        .tag { display: inline-block; padding: 2px 8px; background: #f1f5f9; border-radius: 4px; font-size: 11px; color: var(--text-secondary); margin-right: 4px; }
+        .tag.red { background: #fee2e2; color: #991b1b; }
+        .tag.yellow { background: #fef3c7; color: #92400e; }
+        .tag.green { background: #dcfce7; color: #166534; }
+        .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .filter-btn { padding: 6px 14px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 20px; font-size: 13px; cursor: pointer; }
+        .filter-btn:hover { border-color: var(--primary); }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .note-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+        .note-card h3 { font-size: 16px; margin-bottom: 8px; }
+        .note-card p { font-size: 14px; color: var(--text-secondary); white-space: pre-wrap; }
+        .note-card .meta { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; }
+        .add-note-btn { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3); }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
+        .modal.show { display: flex; }
+        .modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; width: 90%; max-width: 500px; }
+        .modal-content h2 { margin-bottom: 16px; }
+        .modal-content .form-group { margin-bottom: 16px; }
+        .modal-content label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-secondary); }
+        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
+        .modal-content textarea { min-height: 120px; resize: vertical; }
+        .modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+        .btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-secondary { background: #f1f5f9; color: var(--text-primary); }
+        .btn-primary { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div>
+                <h1>📌 Bookmarks & Notes</h1>
+                <p>Save concepts to revisit and add personal notes</p>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search bookmarks..." id="search-input" oninput="filterItems()">
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('bookmarks')">📚 Bookmarks (8)</button>
+            <button class="tab" onclick="switchTab('notes')">📝 Notes (5)</button>
+            <button class="tab" onclick="switchTab('flagged')">🚩 Flagged for Review (3)</button>
+        </div>
+
+        <div class="view active" id="bookmarks">
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterCategory(this, 'all')">All</button>
+                <button class="filter-btn" onclick="filterCategory(this, 'micro')">🦠 Microbiology</button>
+                <button class="filter-btn" onclick="filterCategory(this, 'pharm')">💊 Pharmacology</button>
+                <button class="filter-btn" onclick="filterCategory(this, 'renal')">🧪 Renal</button>
+                <button class="filter-btn" onclick="filterCategory(this, 'cardio')">❤️ Cardiology</button>
+            </div>
+            <div class="bookmark-list" id="bookmark-list">
+                <div class="bookmark-card" data-category="micro">
+                    <div class="bookmark-icon micro">🦠</div>
+                    <div class="bookmark-content">
+                        <div class="bookmark-title">Aspergillus vs Mucor Morphology</div>
+                        <div class="bookmark-module">Microbiology → Aspergillus</div>
+                        <div class="bookmark-note">45° septate (Aspergillus) vs 90° pauciseptate (Mucor) — HIGH YIELD!</div>
+                        <div class="bookmark-meta">
+                            <span class="tag green">High-Yield</span>
+                            <span>Saved 2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Remove">🗑️</button>
+                    </div>
+                </div>
+                <div class="bookmark-card" data-category="renal">
+                    <div class="bookmark-icon renal">🧪</div>
+                    <div class="bookmark-content">
+                        <div class="bookmark-title">FENa Interpretation</div>
+                        <div class="bookmark-module">Renal → AKI</div>
+                        <div class="bookmark-note">Pre-renal: &lt;1% | ATN: &gt;2% | Use FEUrea if on diuretics</div>
+                        <div class="bookmark-meta">
+                            <span class="tag yellow">Review Again</span>
+                            <span>Saved 3 days ago</span>
+                        </div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Remove">🗑️</button>
+                    </div>
+                </div>
+                <div class="bookmark-card" data-category="pharm">
+                    <div class="bookmark-icon pharm">💊</div>
+                    <div class="bookmark-content">
+                        <div class="bookmark-title">Anti-TB Drug Toxicities</div>
+                        <div class="bookmark-module">Pharmacology → Anti-TB Drugs</div>
+                        <div class="bookmark-note">RIPE: Rifampin (CYP inducer, orange), INH (neuropathy→B6), PZA (gout), Ethambutol (eyes)</div>
+                        <div class="bookmark-meta">
+                            <span class="tag green">High-Yield</span>
+                            <span>Saved 1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Remove">🗑️</button>
+                    </div>
+                </div>
+                <div class="bookmark-card" data-category="renal">
+                    <div class="bookmark-icon renal">🧪</div>
+                    <div class="bookmark-content">
+                        <div class="bookmark-title">Winter's Formula</div>
+                        <div class="bookmark-module">Renal → Acid-Base</div>
+                        <div class="bookmark-note">Expected pCO2 = 1.5 × HCO3 + 8 (±2)</div>
+                        <div class="bookmark-meta">
+                            <span>Saved 1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Remove">🗑️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view" id="notes">
+            <div class="note-card">
+                <h3>My Approach to Acid-Base Problems</h3>
+                <p>1. Look at pH (acidemia vs alkalemia)
+2. Identify primary disorder (CO2 or HCO3)
+3. Check compensation (Winter's formula for met acidosis)
+4. Calculate anion gap if met acidosis
+5. Calculate delta-delta if AG elevated</p>
+                <div class="meta">
+                    <span>📅 Created Jan 28, 2026</span>
+                    <span>🔗 Linked to: Acid-Base Module</span>
+                </div>
+            </div>
+            <div class="note-card">
+                <h3>Fungi Memory Tricks</h3>
+                <p>"45° = Aspergillus" (septate, acute angle)
+"90° = Mucor" (pauciseptate, right angle)
+
+Endemic mycoses geography:
+- Histo = Ohio/Mississippi (bat caves)
+- Cocci = Desert Southwest (spherules)
+- Blasto = Great Lakes (broad-based budding)</p>
+                <div class="meta">
+                    <span>📅 Created Jan 25, 2026</span>
+                    <span>🔗 Linked to: Microbiology</span>
+                </div>
+            </div>
+            <div class="note-card">
+                <h3>Electrolyte Relationships</h3>
+                <p>If hypoK or hypoCa won't correct → CHECK MAGNESIUM!
+
+Mg is the "silent" electrolyte that makes others refractory.
+
+Also remember: High phosphate → Low calcium (inverse relationship)</p>
+                <div class="meta">
+                    <span>📅 Created Jan 22, 2026</span>
+                    <span>🔗 Linked to: Electrolytes Module</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="view" id="flagged">
+            <div class="bookmark-list">
+                <div class="bookmark-card" data-category="renal">
+                    <div class="bookmark-icon renal">🚩</div>
+                    <div class="bookmark-content">
+                        <div class="bookmark-title">RTA Types - Still Confused</div>
+                        <div class="bookmark-module">Renal → Acid-Base</div>
+                        <div class="bookmark-note">Need to review: Type 1 vs 2 vs 4, especially the K+ differences</div>
+                        <div class="bookmark-meta">
+                            <span class="tag red">Needs Work</span>
+                            <span>Flagged 2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bookmark-card" data-category="micro">
+                    <div class="bookmark-icon micro">🚩</div>
+                    <div class="bookmark-content">
+                        <div class="bookmark-title">Malaria Species Differences</div>
+                        <div class="bookmark-module">Microbiology → Malaria</div>
+                        <div class="bookmark-note">Keep mixing up P. vivax vs ovale hypnozoites, need more practice</div>
+                        <div class="bookmark-meta">
+                            <span class="tag red">Needs Work</span>
+                            <span>Flagged 4 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button class="add-note-btn" onclick="openModal()">+</button>
+
+    <div class="modal" id="note-modal">
+        <div class="modal-content">
+            <h2>Add New Note</h2>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="note-title" placeholder="Give your note a title...">
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea id="note-content" placeholder="Write your note..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Link to Module (optional)</label>
+                <select id="note-module">
+                    <option value="">-- Select module --</option>
+                    <option>Microbiology</option>
+                    <option>Pharmacology</option>
+                    <option>Acid-Base</option>
+                    <option>Electrolytes</option>
+                    <option>AKI</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tags</label>
+                <input type="text" id="note-tags" placeholder="e.g., high-yield, review-again">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveNote()">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function filterCategory(btn, category) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            document.querySelectorAll('.bookmark-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterItems() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            document.querySelectorAll('.bookmark-card, .note-card').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        function openModal() {
+            document.getElementById('note-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('note-modal').classList.remove('show');
+        }
+
+        function saveNote() {
+            const title = document.getElementById('note-title').value;
+            const content = document.getElementById('note-content').value;
+            if (title && content) {
+                alert('Note saved!');
+                closeModal();
+                document.getElementById('note-title').value = '';
+                document.getElementById('note-content').value = '';
+            }
+        }
+
+        // Close modal on outside click
+        document.getElementById('note-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'note-modal') closeModal();
+        });
+    </script>
+</body>
+</html>

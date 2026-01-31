@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postpartum Hemorrhage | ReasonDx CRT</title>
+  <style>
+    :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #E91E63; --success: #10B981; --danger: #DC2626; --warning: #F59E0B; --info: #3B82F6; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    .header { background: linear-gradient(135deg, #B71C1C, #E91E63); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; }
+    .header-title { font-size: 1.1rem; font-weight: 600; }
+    .badge { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; margin-left: 8px; }
+    .stats { display: flex; gap: 12px; }
+    .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 8px; }
+    .stat-value { font-size: 1rem; font-weight: 700; font-family: monospace; }
+    .stat-label { font-size: 0.6rem; opacity: 0.8; }
+    .main { max-width: 900px; margin: 0 auto; padding: 20px; }
+    .progress-bar { height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 16px; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+    .card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+    .card-phase { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+    .card-title { font-size: 1.2rem; font-weight: 700; margin-top: 3px; }
+    .card-body { padding: 18px; }
+    .narrative { background: linear-gradient(135deg, rgba(233,30,99,0.1), rgba(183,28,28,0.1)); border-left: 4px solid var(--accent); padding: 14px; border-radius: 0 10px 10px 0; margin-bottom: 14px; font-size: 0.95rem; }
+    .hl { background: rgba(233,30,99,0.3); padding: 2px 5px; border-radius: 4px; font-weight: 500; }
+    .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin: 14px 0; }
+    .vital { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; text-align: center; }
+    .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+    .vital-label { font-size: 0.65rem; color: var(--muted); }
+    .vital-value { font-size: 1rem; font-weight: 600; font-family: monospace; }
+    .choices { display: grid; gap: 8px; margin-top: 14px; }
+    .choice { background: var(--card); border: 2px solid var(--border); padding: 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; font-size: 0.9rem; }
+    .choice:hover { border-color: var(--accent); transform: translateX(3px); }
+    .choice.correct { border-color: var(--success); background: rgba(16,185,129,0.2); }
+    .choice.wrong { border-color: var(--danger); background: rgba(220,38,38,0.2); }
+    .choice-icon { font-size: 1.3rem; }
+    .choice-title { font-weight: 600; }
+    .choice-desc { font-size: 0.8rem; color: var(--muted); }
+    .feedback { display: none; margin-top: 12px; padding: 12px; border-radius: 10px; font-size: 0.9rem; }
+    .feedback.show { display: block; }
+    .feedback.good { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+    .feedback.bad { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+    .teaching { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 12px; margin: 14px 0; font-size: 0.9rem; }
+    .teaching h4 { color: var(--info); margin-bottom: 6px; font-size: 0.95rem; }
+    .hidden { display: none !important; }
+    .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: white; }
+    .outcome { text-align: center; padding: 20px; }
+    .outcome-icon { font-size: 3rem; }
+    .outcome-title { font-size: 1.4rem; font-weight: 700; color: var(--success); margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">🩸 Postpartum Hemorrhage<span class="badge">OB EMERGENCY</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="stage">1/7</div><div class="stat-label">Stage</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 14%"></div></div>
+
+    <!-- STAGE 1 -->
+    <div id="s1" class="stage">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 1 of 7</div><div class="card-title">🚨 Immediate Postpartum</div></div>
+        <div class="card-body">
+          <div class="narrative">A 32-year-old G3P3 just delivered a 4200g baby after an 18-hour labor with oxytocin augmentation. Within 10 minutes of placental delivery, the nurse calls you urgently. The patient is <span class="hl">pale and anxious</span> with <span class="hl">heavy vaginal bleeding</span>. You estimate <span class="hl">800 mL blood loss</span> already.</div>
+          <div class="vitals">
+            <div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">118</div></div>
+            <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">92/58</div></div>
+            <div class="vital"><div class="vital-label">EBL</div><div class="vital-value">800 mL</div></div>
+            <div class="vital"><div class="vital-label">Baby</div><div class="vital-value">4200g</div></div>
+          </div>
+          <p style="margin-bottom:12px;font-weight:600;">What is your FIRST action?</p>
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🤲</div><div><div class="choice-title">Bimanual uterine massage</div><div class="choice-desc">Assess tone and stimulate contraction</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🔬</div><div><div class="choice-title">Send labs</div><div class="choice-desc">CBC, coagulation studies</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🏃</div><div><div class="choice-title">Call for OR</div><div class="choice-desc">Prepare for surgery</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">💉</div><div><div class="choice-title">Transfuse blood</div><div class="choice-desc">Give PRBCs</div></div></div>
+          </div>
+          <div class="feedback" id="f1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="s2" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 2 of 7</div><div class="card-title">🔍 Assessment</div></div>
+        <div class="card-body">
+          <div class="narrative">On bimanual exam, the uterus feels <span class="hl">soft and boggy</span>. With massage, you expel several large clots and the bleeding continues briskly.</div>
+          <div class="teaching">
+            <h4>💡 The 4 T's of PPH</h4>
+            <p><strong>T</strong>one (atony - 70-80%) • <strong>T</strong>rauma (lacerations) • <strong>T</strong>issue (retained placenta) • <strong>T</strong>hrombin (coagulopathy)</p>
+          </div>
+          <p style="margin-bottom:12px;font-weight:600;">Based on exam, what is the most likely cause?</p>
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">💪</div><div><div class="choice-title">Uterine atony</div><div class="choice-desc">Boggy uterus - most common cause of PPH</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🩹</div><div><div class="choice-title">Genital tract laceration</div><div class="choice-desc">Would have firm uterus with continued bleeding</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🧩</div><div><div class="choice-title">Retained placenta</div><div class="choice-desc">Placenta was delivered complete</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🩸</div><div><div class="choice-title">Coagulopathy</div><div class="choice-desc">Less likely primary cause, may develop</div></div></div>
+          </div>
+          <div class="feedback" id="f2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div id="s3" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 3 of 7</div><div class="card-title">💊 First-Line Medical Management</div></div>
+        <div class="card-body">
+          <div class="narrative">You continue fundal massage. The nurse has established two large-bore IVs and is running crystalloid. You need to administer uterotonics.</div>
+          <p style="margin-bottom:12px;font-weight:600;">What is your FIRST uterotonic agent?</p>
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">1️⃣</div><div><div class="choice-title">Oxytocin (Pitocin)</div><div class="choice-desc">First-line; 10-40 units in IV fluids</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">2️⃣</div><div><div class="choice-title">Methylergonovine (Methergine)</div><div class="choice-desc">Second-line; contraindicated in hypertension</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">3️⃣</div><div><div class="choice-title">Carboprost (Hemabate)</div><div class="choice-desc">Second-line; contraindicated in asthma</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">4️⃣</div><div><div class="choice-title">Misoprostol</div><div class="choice-desc">Usually added if other agents fail</div></div></div>
+          </div>
+          <div class="feedback" id="f3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div id="s4" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 4 of 7</div><div class="card-title">⚠️ Escalation</div></div>
+        <div class="card-body">
+          <div class="narrative">Despite oxytocin infusion and continued massage, bleeding persists. EBL now <span class="hl">1200 mL</span>. BP is 88/52, HR 128. The patient is becoming more confused.</div>
+          <div class="vitals">
+            <div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">128</div></div>
+            <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">88/52</div></div>
+            <div class="vital critical"><div class="vital-label">EBL</div><div class="vital-value">1200 mL</div></div>
+          </div>
+          <p style="margin-bottom:12px;font-weight:600;">What is your next step?</p>
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">💉</div><div><div class="choice-title">Add second-line uterotonics + tranexamic acid + blood products</div><div class="choice-desc">Multi-modal approach for refractory atony</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">⏳</div><div><div class="choice-title">Continue oxytocin alone</div><div class="choice-desc">Already failing; need escalation</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🔪</div><div><div class="choice-title">Immediate hysterectomy</div><div class="choice-desc">Premature; medical options remain</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">💧</div><div><div class="choice-title">More crystalloid only</div><div class="choice-desc">Will worsen dilutional coagulopathy</div></div></div>
+          </div>
+          <div class="feedback" id="f4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div id="s5" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 5 of 7</div><div class="card-title">🎈 Mechanical Intervention</div></div>
+        <div class="card-body">
+          <div class="narrative">You've given methylergonovine (BP was not elevated), carboprost, TXA 1g IV, and initiated massive transfusion. Bleeding continues. EBL now <span class="hl">1800 mL</span>.</div>
+          <div class="teaching">
+            <h4>💡 Uterotonic Contraindications</h4>
+            <p><strong>Methergine:</strong> Hypertension (causes vasoconstriction)</p>
+            <p><strong>Hemabate:</strong> Asthma (bronchoconstriction)</p>
+          </div>
+          <p style="margin-bottom:12px;font-weight:600;">Before OR, what temporizing measure should you try?</p>
+          <div class="choices" id="c5">
+            <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">🎈</div><div><div class="choice-title">Intrauterine balloon tamponade (Bakri)</div><div class="choice-desc">Provides tamponade while preparing for surgery</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🧊</div><div><div class="choice-title">Ice packs to abdomen</div><div class="choice-desc">Ineffective for uterine bleeding</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">⬇️</div><div><div class="choice-title">Trendelenburg position</div><div class="choice-desc">Doesn't address hemorrhage source</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🩹</div><div><div class="choice-title">Vaginal packing</div><div class="choice-desc">For vaginal bleeding, not uterine atony</div></div></div>
+          </div>
+          <div class="feedback" id="f5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 6 -->
+    <div id="s6" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 6 of 7</div><div class="card-title">🔪 Surgical Options</div></div>
+        <div class="card-body">
+          <div class="narrative">Bakri balloon is placed with 500 mL saline. Bleeding slows but patient remains unstable. You're now in the OR. What surgical options exist?</div>
+          <div class="teaching">
+            <h4>💡 Surgical Interventions (escalating)</h4>
+            <ul>
+              <li><strong>B-Lynch suture:</strong> Compression suture</li>
+              <li><strong>Uterine artery ligation:</strong> Bilateral</li>
+              <li><strong>Internal iliac ligation:</strong> Reduces pulse pressure</li>
+              <li><strong>Hysterectomy:</strong> Definitive, life-saving</li>
+            </ul>
+          </div>
+          <p style="margin-bottom:12px;font-weight:600;">With ongoing hemorrhage despite balloon, what is MOST appropriate?</p>
+          <div class="choices" id="c6">
+            <div class="choice" onclick="check(6,this,true)"><div class="choice-icon">✂️</div><div><div class="choice-title">B-Lynch suture or proceed to hysterectomy</div><div class="choice-desc">Surgical intervention now required</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">⏳</div><div><div class="choice-title">Wait and transfuse more</div><div class="choice-desc">Dangerous delay; source control needed</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">💊</div><div><div class="choice-title">More uterotonics</div><div class="choice-desc">Already failed maximum medical therapy</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">📞</div><div><div class="choice-title">Transfer to another facility</div><div class="choice-desc">Patient too unstable to transfer</div></div></div>
+          </div>
+          <div class="feedback" id="f6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 7 - OUTCOME -->
+    <div id="s7" class="stage hidden">
+      <div class="card">
+        <div class="card-header"><div class="card-phase">Stage 7 of 7</div><div class="card-title">🎓 Case Complete</div></div>
+        <div class="card-body">
+          <div class="outcome">
+            <div class="outcome-icon">🎉</div>
+            <div class="outcome-title">Patient Stabilized!</div>
+            <p style="color:var(--muted);">B-Lynch suture was successful. Final EBL 2400 mL. Received 4 units PRBCs, 2 FFP, 1 platelets.</p>
+          </div>
+          <div class="teaching">
+            <h4>🔑 Key Learning Points</h4>
+            <ul>
+              <li><strong>4 T's:</strong> Tone (atony) is most common (70-80%)</li>
+              <li><strong>Risk factors for atony:</strong> Prolonged labor, macrosomia, oxytocin use, overdistension</li>
+              <li><strong>Step-wise approach:</strong> Massage → Uterotonics → TXA → Balloon → Surgery</li>
+              <li><strong>Oxytocin first-line,</strong> then methylergonovine (avoid in HTN), carboprost (avoid in asthma)</li>
+              <li><strong>TXA 1g IV</strong> within 3 hours of delivery reduces death from bleeding</li>
+              <li><strong>Massive transfusion:</strong> 1:1:1 ratio (PRBC:FFP:platelets)</li>
+              <li><strong>Don't delay surgery</strong> for refractory hemorrhage</li>
+            </ul>
+          </div>
+          <div style="text-align:center;margin-top:16px;">
+            <p style="color:var(--success);font-weight:700;font-size:1.1rem;">Final Score: <span id="final">0</span>/600</p>
+            <button class="btn btn-primary" onclick="location.reload()" style="margin-top:12px;">🔄 Try Again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    const fb = {
+      1: { y: "Correct! Bimanual uterine massage is the immediate first step - assess uterine tone and stimulate contraction. Simultaneously call for help and establish IV access.", n: "Bimanual massage is FIRST - you need to immediately assess and treat the most common cause (atony) while mobilizing resources." },
+      2: { y: "Correct! Boggy uterus = uterine atony. This is the #1 cause of PPH (70-80%). Risk factors here: prolonged labor, oxytocin use, macrosomia.", n: "The boggy, soft uterus indicates atony. A firm uterus with continued bleeding suggests laceration or retained products." },
+      3: { y: "Correct! Oxytocin is first-line for atony. Give 10-40 units in IV fluids. It can be given to all patients without contraindications.", n: "Oxytocin (Pitocin) is first-line. Methergine and Hemabate are second-line with specific contraindications." },
+      4: { y: "Correct! Multi-modal approach: add second-line uterotonics, give TXA (within 3h), activate massive transfusion. Don't rely on crystalloid alone.", n: "With 1200 mL loss and hemodynamic instability, you need escalation: second-line uterotonics, TXA, and blood products." },
+      5: { y: "Correct! Bakri balloon provides uterine tamponade and can temporize while preparing for surgery. Fill with 300-500 mL saline.", n: "Intrauterine balloon tamponade is the appropriate temporizing measure before surgical intervention." },
+      6: { y: "Correct! With failed medical therapy and balloon tamponade, surgical intervention is required. B-Lynch suture, uterine artery ligation, or hysterectomy may be needed.", n: "When medical therapy and balloon fail, surgery is required. Don't delay - proceed with B-Lynch, vessel ligation, or hysterectomy as needed." }
+    };
+    function check(n, el, ok) {
+      document.querySelectorAll(`#c${n} .choice`).forEach(c => { c.style.pointerEvents = 'none'; if (c.onclick.toString().includes('true')) c.classList.add('correct'); });
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if (ok) score += 100;
+      document.getElementById('score').textContent = score;
+      const f = document.getElementById(`f${n}`);
+      f.className = `feedback show ${ok ? 'good' : 'bad'}`;
+      f.innerHTML = `<strong>${ok ? '✅ +100' : '❌'}</strong> ${ok ? fb[n].y : fb[n].n}`;
+      setTimeout(() => {
+        document.getElementById(`s${n}`).classList.add('hidden');
+        document.getElementById(`s${n+1}`).classList.remove('hidden');
+        document.getElementById('stage').textContent = `${n+1}/7`;
+        document.getElementById('progress').style.width = `${((n+1)/7)*100}%`;
+        if (n+1 === 7) document.getElementById('final').textContent = score;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }, 2000);
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Postpartum Hemorrhage"
+         data-key-points="clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

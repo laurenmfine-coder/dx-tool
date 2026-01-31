@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Acute Abdomen Algorithm</title>
+  <style>
+    :root { --primary: #059669; --secondary: #0891B2; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; --purple: #8B5CF6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #0a1a1a 0%, #1a2e2e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 1rem; border: 1px solid rgba(239, 68, 68, 0.3); }
+    header h1 { font-size: 2rem; color: var(--danger); }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; transition: all 0.2s; }
+    .nav-tab:hover, .nav-tab.active { background: var(--danger); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--danger); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+    .key-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .warning-box { background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--accent); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    ul, ol { padding-left: 1.25rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(139, 92, 246, 0.15); border: 2px dashed var(--purple); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .decision-tree { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1.5rem; margin: 1rem 0; }
+    .decision-node { background: rgba(239, 68, 68, 0.2); border: 2px solid var(--danger); border-radius: 0.75rem; padding: 1rem; margin: 0.75rem 0; text-align: center; cursor: pointer; transition: all 0.3s; }
+    .decision-node:hover { transform: scale(1.02); background: rgba(239, 68, 68, 0.3); }
+    .decision-node.selected { border-color: var(--success); background: rgba(16, 185, 129, 0.2); }
+    .branch { display: none; margin-left: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--secondary); }
+    .branch.visible { display: block; }
+    .outcome { background: rgba(16, 185, 129, 0.2); border: 2px solid var(--success); border-radius: 0.5rem; padding: 0.75rem; margin: 0.5rem 0; }
+    .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .quadrant { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1rem; border: 1px solid rgba(255,255,255,0.1); }
+    .quadrant h4 { color: var(--secondary); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.6rem; margin: 0.4rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+    .quiz-option:hover { background: rgba(239, 68, 68, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.85rem; }
+    .reset-btn { background: var(--secondary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; margin-top: 1rem; }
+    .reset-btn:hover { opacity: 0.9; }
+    .arrow { color: var(--accent); font-size: 1.2rem; text-align: center; margin: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚨 Acute Abdomen Algorithm</h1>
+      <p style="color: #9CA3AF;">Surgical Emergency Recognition • Decision Tree • Pain Patterns</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('algorithm')">Decision Tree</div>
+      <div class="nav-tab" onclick="showTab('quadrants')">By Location</div>
+      <div class="nav-tab" onclick="showTab('peritonitis')">Peritonitis</div>
+      <div class="nav-tab" onclick="showTab('imaging')">Imaging</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 What is an Acute Abdomen?</h2>
+        <div class="key-box">
+          <strong>Definition:</strong> Sudden onset of severe abdominal pain requiring urgent evaluation for potential surgical intervention. Time-sensitive diagnosis is critical.
+        </div>
+        
+        <h3>The Critical Question</h3>
+        <p>Every acute abdomen evaluation asks: <strong>"Does this patient need surgery NOW?"</strong></p>
+        
+        <div class="mnemonic">
+          <strong>🔴 Surgical Emergencies - "PIVO"</strong><br>
+          <strong>P</strong>erforation (free air) • <strong>I</strong>schemia (mesenteric, strangulated hernia)<br>
+          <strong>V</strong>ascular catastrophe (AAA rupture) • <strong>O</strong>bstruction (complete, with signs of strangulation)
+        </div>
+
+        <h3>History Red Flags</h3>
+        <table>
+          <tr><th>Finding</th><th>Concern</th></tr>
+          <tr><td>Sudden, severe "worst pain of my life"</td><td>Perforation, AAA rupture, mesenteric ischemia</td></tr>
+          <tr><td>Pain out of proportion to exam</td><td>Mesenteric ischemia</td></tr>
+          <tr><td>Obstipation (no gas or stool)</td><td>Complete bowel obstruction</td></tr>
+          <tr><td>Bloody diarrhea with pain</td><td>Ischemic colitis, mesenteric ischemia</td></tr>
+          <tr><td>Syncope with abdominal pain</td><td>Ruptured AAA, ruptured ectopic</td></tr>
+          <tr><td>Recent abdominal surgery</td><td>Anastomotic leak, adhesive SBO</td></tr>
+        </table>
+
+        <h3>Physical Exam Red Flags</h3>
+        <table>
+          <tr><th>Finding</th><th>Implication</th></tr>
+          <tr><td>Rigid "board-like" abdomen</td><td>Diffuse peritonitis - likely perforation</td></tr>
+          <tr><td>Involuntary guarding</td><td>Peritoneal irritation</td></tr>
+          <tr><td>Rebound tenderness</td><td>Peritoneal inflammation</td></tr>
+          <tr><td>Absent bowel sounds</td><td>Ileus or late obstruction</td></tr>
+          <tr><td>Pulsatile abdominal mass</td><td>AAA - do NOT palpate aggressively</td></tr>
+          <tr><td>Femoral/inguinal bulge</td><td>Incarcerated hernia</td></tr>
+          <tr><td>Periumbilical ecchymosis (Cullen)</td><td>Retroperitoneal hemorrhage</td></tr>
+          <tr><td>Flank ecchymosis (Grey Turner)</td><td>Retroperitoneal hemorrhage</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- DECISION TREE -->
+    <div id="algorithm" class="tab-content">
+      <div class="section">
+        <h2>🌳 Interactive Decision Tree</h2>
+        <p>Click through the decision nodes to work through the acute abdomen algorithm:</p>
+        
+        <div class="decision-tree" id="mainTree">
+          <div class="decision-node" onclick="selectNode(this, 'unstable')">
+            <strong>Step 1: Is the patient hemodynamically UNSTABLE?</strong><br>
+            <small>(Hypotension, tachycardia, altered mental status, signs of shock)</small>
+          </div>
+          
+          <div class="branch" id="unstable-yes">
+            <div class="key-box">
+              <strong>🚨 UNSTABLE PATIENT - Immediate Action Required</strong>
+              <ul>
+                <li>Large bore IV access x2, fluid resuscitation</li>
+                <li>Type & crossmatch, activate massive transfusion if needed</li>
+                <li>Bedside FAST exam or portable imaging ONLY</li>
+                <li>Emergent surgical consultation</li>
+              </ul>
+            </div>
+            <div class="decision-node" onclick="selectNode(this, 'unstable-cause')">
+              <strong>Most Likely Unstable Etiologies?</strong>
+            </div>
+            <div class="branch" id="unstable-cause-yes">
+              <div class="outcome">
+                <strong>Top Diagnoses in Unstable Acute Abdomen:</strong>
+                <ul>
+                  <li><strong>Ruptured AAA</strong> - pulsatile mass, back/flank pain, elderly</li>
+                  <li><strong>Mesenteric ischemia</strong> - pain out of proportion, AF history</li>
+                  <li><strong>Perforated viscus</strong> - rigid abdomen, free air</li>
+                  <li><strong>Ruptured ectopic</strong> - female, positive pregnancy test</li>
+                  <li><strong>Splenic rupture</strong> - trauma, LUQ pain, Kehr sign</li>
+                </ul>
+                <p><em>→ OR without delay for confirmed surgical emergency</em></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="branch" id="unstable-no">
+            <div class="arrow">↓ Stable Patient</div>
+            <div class="decision-node" onclick="selectNode(this, 'peritonitis')">
+              <strong>Step 2: Signs of PERITONITIS?</strong><br>
+              <small>(Rigid abdomen, involuntary guarding, rebound, patient lying still)</small>
+            </div>
+            
+            <div class="branch" id="peritonitis-yes">
+              <div class="key-box">
+                <strong>⚠️ Peritonitis Present - Urgent Surgical Evaluation</strong>
+              </div>
+              <div class="decision-node" onclick="selectNode(this, 'freeair')">
+                <strong>Get Upright CXR or CT: Free Air?</strong>
+              </div>
+              <div class="branch" id="freeair-yes">
+                <div class="outcome">
+                  <strong>FREE AIR = Perforated Viscus</strong><br>
+                  Most common: Perforated peptic ulcer, diverticulitis, appendicitis<br>
+                  <em>→ NPO, IV fluids, antibiotics, emergent surgery</em>
+                </div>
+              </div>
+              <div class="branch" id="freeair-no">
+                <div class="outcome">
+                  <strong>No Free Air but Peritonitis:</strong><br>
+                  Consider: Appendicitis, cholecystitis, pancreatitis, strangulated hernia<br>
+                  <em>→ CT abdomen/pelvis with contrast for diagnosis</em>
+                </div>
+              </div>
+            </div>
+            
+            <div class="branch" id="peritonitis-no">
+              <div class="arrow">↓ No Peritonitis</div>
+              <div class="decision-node" onclick="selectNode(this, 'obstruction')">
+                <strong>Step 3: Signs of OBSTRUCTION?</strong><br>
+                <small>(Distension, vomiting, obstipation, high-pitched bowel sounds)</small>
+              </div>
+              
+              <div class="branch" id="obstruction-yes">
+                <div class="info-box">
+                  <strong>Bowel Obstruction Workup</strong>
+                </div>
+                <div class="decision-node" onclick="selectNode(this, 'sbo-vs-lbo')">
+                  <strong>Small Bowel vs Large Bowel Obstruction?</strong>
+                </div>
+                <div class="branch" id="sbo-vs-lbo-yes">
+                  <table>
+                    <tr><th>Feature</th><th>SBO</th><th>LBO</th></tr>
+                    <tr><td>Vomiting</td><td>Early, bilious</td><td>Late, feculent</td></tr>
+                    <tr><td>Distension</td><td>Moderate</td><td>Marked</td></tr>
+                    <tr><td>Pain</td><td>Colicky, periumbilical</td><td>Colicky, lower</td></tr>
+                    <tr><td>Common cause</td><td>Adhesions, hernia</td><td>Cancer, volvulus</td></tr>
+                  </table>
+                  <div class="warning-box">
+                    <strong>Signs of STRANGULATION (emergency):</strong> Fever, tachycardia, localized tenderness, peritoneal signs, leukocytosis, acidosis
+                  </div>
+                </div>
+              </div>
+              
+              <div class="branch" id="obstruction-no">
+                <div class="arrow">↓ No Obstruction</div>
+                <div class="decision-node" onclick="selectNode(this, 'localize')">
+                  <strong>Step 4: LOCALIZE the Pain</strong><br>
+                  <small>Use quadrant-based differential (see Quadrants tab)</small>
+                </div>
+                <div class="branch" id="localize-yes">
+                  <div class="success-box">
+                    <strong>Proceed with focused workup based on location:</strong>
+                    <ul>
+                      <li>RUQ → RUQ ultrasound (biliary)</li>
+                      <li>RLQ → CT A/P (appendicitis)</li>
+                      <li>LLQ → CT A/P (diverticulitis)</li>
+                      <li>Epigastric → Lipase, consider CT</li>
+                      <li>Suprapubic → UA, pelvic exam, US</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="reset-btn" onclick="resetTree()">Reset Decision Tree</button>
+      </div>
+    </div>
+
+    <!-- QUADRANTS -->
+    <div id="quadrants" class="tab-content">
+      <div class="section">
+        <h2>📍 Pain by Location</h2>
+        
+        <div class="quadrant-grid">
+          <div class="quadrant">
+            <h4>Right Upper Quadrant (RUQ)</h4>
+            <ul>
+              <li><strong>Biliary colic</strong> - postprandial, colicky</li>
+              <li><strong>Acute cholecystitis</strong> - Murphy sign +</li>
+              <li><strong>Cholangitis</strong> - Charcot triad (fever, jaundice, RUQ pain)</li>
+              <li><strong>Hepatitis</strong> - tender hepatomegaly</li>
+              <li><strong>Hepatic abscess</strong></li>
+              <li><strong>Perforated duodenal ulcer</strong></li>
+              <li><strong>Right lower lobe pneumonia</strong></li>
+              <li><strong>Fitz-Hugh-Curtis</strong> - perihepatitis</li>
+            </ul>
+            <p><em>First test: RUQ ultrasound</em></p>
+          </div>
+          
+          <div class="quadrant">
+            <h4>Left Upper Quadrant (LUQ)</h4>
+            <ul>
+              <li><strong>Splenic pathology</strong> - rupture, infarct, abscess</li>
+              <li><strong>Gastric ulcer</strong></li>
+              <li><strong>Pancreatitis</strong> - radiates to back</li>
+              <li><strong>Left lower lobe pneumonia</strong></li>
+              <li><strong>MI</strong> - inferior wall</li>
+            </ul>
+            <p><em>Kehr sign (referred shoulder pain) = splenic pathology</em></p>
+          </div>
+          
+          <div class="quadrant">
+            <h4>Right Lower Quadrant (RLQ)</h4>
+            <ul>
+              <li><strong>Acute appendicitis</strong> - McBurney point, Rovsing, psoas, obturator signs</li>
+              <li><strong>Mesenteric adenitis</strong> - children, post-viral</li>
+              <li><strong>Meckel diverticulitis</strong></li>
+              <li><strong>Cecal diverticulitis</strong></li>
+              <li><strong>Crohn disease</strong> - terminal ileum</li>
+              <li><strong>Ovarian pathology</strong> - torsion, cyst rupture, ectopic</li>
+              <li><strong>Inguinal hernia</strong></li>
+            </ul>
+            <p><em>Classic: Periumbilical → RLQ migration = appendicitis</em></p>
+          </div>
+          
+          <div class="quadrant">
+            <h4>Left Lower Quadrant (LLQ)</h4>
+            <ul>
+              <li><strong>Diverticulitis</strong> - "left-sided appendicitis"</li>
+              <li><strong>Sigmoid volvulus</strong></li>
+              <li><strong>Ovarian pathology</strong></li>
+              <li><strong>Inguinal hernia</strong></li>
+              <li><strong>Constipation/fecal impaction</strong></li>
+              <li><strong>IBD flare</strong></li>
+            </ul>
+            <p><em>Diverticulitis: elderly, fever, leukocytosis</em></p>
+          </div>
+        </div>
+
+        <h3>Special Locations</h3>
+        <div class="quadrant-grid">
+          <div class="quadrant">
+            <h4>Epigastric</h4>
+            <ul>
+              <li><strong>Peptic ulcer disease</strong></li>
+              <li><strong>Gastritis</strong></li>
+              <li><strong>Pancreatitis</strong></li>
+              <li><strong>AAA</strong></li>
+              <li><strong>MI</strong> - inferior</li>
+              <li><strong>Early appendicitis</strong></li>
+            </ul>
+          </div>
+          
+          <div class="quadrant">
+            <h4>Periumbilical</h4>
+            <ul>
+              <li><strong>Early appendicitis</strong></li>
+              <li><strong>Small bowel obstruction</strong></li>
+              <li><strong>Mesenteric ischemia</strong></li>
+              <li><strong>AAA</strong></li>
+              <li><strong>Gastroenteritis</strong></li>
+            </ul>
+          </div>
+          
+          <div class="quadrant">
+            <h4>Suprapubic/Pelvic</h4>
+            <ul>
+              <li><strong>Cystitis</strong></li>
+              <li><strong>Urinary retention</strong></li>
+              <li><strong>PID</strong></li>
+              <li><strong>Ectopic pregnancy</strong></li>
+              <li><strong>Ovarian torsion</strong></li>
+            </ul>
+          </div>
+          
+          <div class="quadrant">
+            <h4>Flank/Back</h4>
+            <ul>
+              <li><strong>Nephrolithiasis</strong></li>
+              <li><strong>Pyelonephritis</strong></li>
+              <li><strong>AAA</strong></li>
+              <li><strong>Pancreatitis</strong></li>
+              <li><strong>Retroperitoneal bleed</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERITONITIS -->
+    <div id="peritonitis" class="tab-content">
+      <div class="section">
+        <h2>⚠️ Recognizing Peritonitis</h2>
+        
+        <div class="key-box">
+          <strong>Peritonitis = Inflammation of the peritoneal lining</strong><br>
+          Can be localized (early appendicitis) or generalized (perforated viscus)
+        </div>
+
+        <h3>Clinical Signs</h3>
+        <table>
+          <tr><th>Sign</th><th>Description</th><th>Technique</th></tr>
+          <tr><td><strong>Involuntary guarding</strong></td><td>Reflex muscle contraction</td><td>Palpate while patient distracted</td></tr>
+          <tr><td><strong>Rigidity</strong></td><td>"Board-like" abdomen</td><td>Cannot indent abdominal wall</td></tr>
+          <tr><td><strong>Rebound tenderness</strong></td><td>Pain worse on release</td><td>Press slowly, release quickly</td></tr>
+          <tr><td><strong>Percussion tenderness</strong></td><td>Pain with light percussion</td><td>Gentle tapping causes pain</td></tr>
+          <tr><td><strong>Cough test</strong></td><td>Pain with coughing</td><td>Ask patient to cough</td></tr>
+        </table>
+
+        <div class="warning-box">
+          <strong>The Still Patient:</strong> Patients with peritonitis lie very still because any movement worsens pain. They avoid coughing, breathing deeply, or being jostled (unlike renal colic patients who writhe in pain).
+        </div>
+
+        <h3>Types of Peritonitis</h3>
+        <table>
+          <tr><th>Type</th><th>Cause</th><th>Examples</th></tr>
+          <tr><td><strong>Primary (spontaneous)</strong></td><td>Bacterial seeding without perforation</td><td>SBP in cirrhosis, PD catheter infection</td></tr>
+          <tr><td><strong>Secondary</strong></td><td>Visceral perforation or leak</td><td>Perforated appendicitis, diverticulitis, ulcer</td></tr>
+          <tr><td><strong>Tertiary</strong></td><td>Persistent infection post-treatment</td><td>Failed source control, immunocompromised</td></tr>
+          <tr><td><strong>Chemical</strong></td><td>Sterile irritation</td><td>Early perforated ulcer (gastric acid), pancreatitis</td></tr>
+        </table>
+
+        <h3>Causes of Free Air (Pneumoperitoneum)</h3>
+        <div class="mnemonic">
+          <strong>Surgical causes of free air - most to least common:</strong><br>
+          Perforated peptic ulcer > Perforated diverticulitis > Perforated appendix > Trauma > Bowel ischemia
+        </div>
+        
+        <div class="info-box">
+          <strong>Non-surgical causes of free air (don't always need OR):</strong>
+          <ul>
+            <li>Recent abdominal surgery (normal up to 7 days post-op)</li>
+            <li>Recent endoscopy with perforation</li>
+            <li>Peritoneal dialysis</li>
+            <li>Pneumatosis intestinalis (may be benign)</li>
+            <li>Barotrauma from mechanical ventilation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGING -->
+    <div id="imaging" class="tab-content">
+      <div class="section">
+        <h2>🔍 Imaging in Acute Abdomen</h2>
+
+        <h3>First-Line Imaging by Suspected Diagnosis</h3>
+        <table>
+          <tr><th>Suspected Diagnosis</th><th>First-Line Imaging</th><th>Key Findings</th></tr>
+          <tr><td>Biliary disease</td><td><strong>RUQ Ultrasound</strong></td><td>Gallstones, wall thickening, pericholecystic fluid, CBD dilation</td></tr>
+          <tr><td>Appendicitis</td><td><strong>CT A/P with contrast</strong></td><td>Dilated appendix >6mm, periappendiceal fat stranding, appendicolith</td></tr>
+          <tr><td>Diverticulitis</td><td><strong>CT A/P with contrast</strong></td><td>Colonic wall thickening, pericolic fat stranding, diverticula</td></tr>
+          <tr><td>Bowel obstruction</td><td><strong>CT A/P with contrast</strong></td><td>Dilated proximal bowel, transition point, "small bowel feces" sign</td></tr>
+          <tr><td>Perforation</td><td><strong>Upright CXR</strong> then CT</td><td>Free air under diaphragm (upright CXR 80% sensitive)</td></tr>
+          <tr><td>AAA</td><td><strong>CT angiography</strong></td><td>Aneurysm >3cm, mural thrombus, rupture signs</td></tr>
+          <tr><td>Kidney stone</td><td><strong>CT without contrast</strong></td><td>Ureteral stone, hydronephrosis</td></tr>
+          <tr><td>Gynecologic</td><td><strong>Transvaginal US</strong></td><td>Adnexal mass, free fluid, absent Doppler flow (torsion)</td></tr>
+          <tr><td>Mesenteric ischemia</td><td><strong>CT angiography</strong></td><td>SMA/SMV thrombus, bowel wall thickening, pneumatosis</td></tr>
+        </table>
+
+        <h3>When to Skip CT and Go to OR</h3>
+        <div class="key-box">
+          <ul>
+            <li>Hemodynamically unstable with obvious surgical abdomen</li>
+            <li>Free air on upright CXR with peritonitis</li>
+            <li>Incarcerated/strangulated hernia</li>
+            <li>Ruptured AAA (confirmed by bedside US)</li>
+            <li>Gunshot wound to abdomen</li>
+          </ul>
+        </div>
+
+        <h3>CT Findings You Must Know</h3>
+        <div class="quadrant-grid">
+          <div class="quadrant">
+            <h4>Bowel Obstruction</h4>
+            <ul>
+              <li>Dilated proximal loops (>3cm small bowel)</li>
+              <li>Decompressed distal loops</li>
+              <li>Transition point</li>
+              <li>"Small bowel feces" sign</li>
+              <li>Strangulation: poor enhancement, mesenteric haziness</li>
+            </ul>
+          </div>
+          <div class="quadrant">
+            <h4>Appendicitis</h4>
+            <ul>
+              <li>Appendix >6mm diameter</li>
+              <li>Wall enhancement</li>
+              <li>Periappendiceal fat stranding</li>
+              <li>Appendicolith (25%)</li>
+              <li>Perforation: abscess, extraluminal air</li>
+            </ul>
+          </div>
+          <div class="quadrant">
+            <h4>Mesenteric Ischemia</h4>
+            <ul>
+              <li>Bowel wall thickening or paper-thin</li>
+              <li>Pneumatosis intestinalis</li>
+              <li>Portal venous gas</li>
+              <li>SMA/SMV thrombus</li>
+              <li>Mesenteric fat stranding</li>
+            </ul>
+          </div>
+          <div class="quadrant">
+            <h4>Perforation</h4>
+            <ul>
+              <li>Free intraperitoneal air</li>
+              <li>Extraluminal contrast</li>
+              <li>Focal bowel wall defect</li>
+              <li>Adjacent inflammatory changes</li>
+              <li>Free fluid</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7186076/" target="_blank">🔗 WSES Jerusalem Guidelines - Appendicitis (PMC7186076)</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK459328/" target="_blank">🔗 NCBI Bookshelf - Acute Abdomen</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on WSES guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Case 1:</strong> A 68-year-old man with atrial fibrillation presents with severe diffuse abdominal pain for 6 hours. He rates it 10/10. On exam, his abdomen is soft with minimal tenderness. Labs show WBC 18,000 and lactate 4.2. What is the most likely diagnosis?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q1')">A. Mesenteric ischemia</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">B. Small bowel obstruction</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">C. Acute pancreatitis</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">D. Perforated peptic ulcer</div>
+          <div class="explanation" id="q1-exp">
+            <strong>Correct: A.</strong> Classic mesenteric ischemia presentation: "Pain out of proportion to physical exam" - severe pain but minimal findings. AF is a major risk factor for arterial embolism to SMA. Elevated lactate confirms tissue ischemia.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Case 2:</strong> A 45-year-old woman presents with sudden-onset severe epigastric pain radiating to her back. She is lying very still and has a rigid abdomen with diffuse guarding. Upright CXR shows air under the diaphragm. What is the most likely diagnosis?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">A. Acute pancreatitis</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q2')">B. Perforated peptic ulcer</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">C. Acute cholecystitis</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">D. Ruptured AAA</div>
+          <div class="explanation" id="q2-exp">
+            <strong>Correct: B.</strong> Free air under diaphragm = perforated viscus. Epigastric location + rigid abdomen + radiating to back is classic for perforated peptic ulcer. She needs emergent surgery. Pancreatitis does NOT cause free air.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Case 3:</strong> A 72-year-old man with history of diverticulosis presents with LLQ pain, fever, and leukocytosis. CT shows sigmoid wall thickening with pericolic fat stranding but no free air or abscess. What is the appropriate initial management?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">A. Emergent sigmoid colectomy</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q3')">B. IV antibiotics, bowel rest, serial exams</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">C. Colonoscopy to rule out malignancy</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">D. CT-guided drainage</div>
+          <div class="explanation" id="q3-exp">
+            <strong>Correct: B.</strong> This is uncomplicated diverticulitis (no abscess, perforation, or fistula). Initial management is conservative: NPO/clear liquids, IV antibiotics covering gram-negatives and anaerobes, and close monitoring. Surgery reserved for complications or recurrence. Colonoscopy done 6-8 weeks later to rule out malignancy.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Case 4:</strong> Which physical exam finding is MOST specific for peritonitis?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">A. Voluntary guarding</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q4')">B. Involuntary guarding</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">C. Hyperactive bowel sounds</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">D. Abdominal distension</div>
+          <div class="explanation" id="q4-exp">
+            <strong>Correct: B.</strong> Involuntary guarding (reflex muscle contraction that the patient cannot suppress) is the most specific sign of peritoneal irritation. Voluntary guarding can occur with anxiety or anticipation of pain. Hyperactive bowel sounds suggest early obstruction. Distension is nonspecific.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Case 5:</strong> A 25-year-old woman presents with RLQ pain, nausea, and anorexia. Her pain started periumbilically 12 hours ago and has now localized to the RLQ. Pregnancy test is negative. This pain migration pattern is most consistent with:</p>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q5')">A. Acute appendicitis</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">B. Ovarian torsion</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">C. Ruptured ovarian cyst</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">D. Mesenteric adenitis</div>
+          <div class="explanation" id="q5-exp">
+            <strong>Correct: A.</strong> The classic pain migration from periumbilical (visceral pain from appendix distension) to RLQ (parietal pain from peritoneal irritation as inflammation progresses) is highly suggestive of appendicitis. Ovarian pathology typically presents with sudden-onset localized pain without migration.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function selectNode(node, branchBase) {
+      node.classList.toggle('selected');
+      const yesBranch = document.getElementById(branchBase + '-yes');
+      const noBranch = document.getElementById(branchBase + '-no');
+      
+      if (node.classList.contains('selected')) {
+        if (yesBranch) yesBranch.classList.add('visible');
+        if (noBranch) noBranch.classList.add('visible');
+      } else {
+        if (yesBranch) yesBranch.classList.remove('visible');
+        if (noBranch) noBranch.classList.remove('visible');
+      }
+    }
+
+    function resetTree() {
+      document.querySelectorAll('.decision-node').forEach(n => n.classList.remove('selected'));
+      document.querySelectorAll('.branch').forEach(b => b.classList.remove('visible'));
+    }
+
+    function checkAnswer(el, correct, qId) {
+      if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+      
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (correct) {
+        document.getElementById(qId + '-exp').style.display = 'block';
+      }
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Acute Abdomen Algorithm"
+         data-key-points="🎯 What is an Acute Abdomen?, 🌳 Interactive Decision Tree, 📍 Pain by Location, ⚠️ Recognizing Peritonitis, 🔍 Imaging in Acute Abdomen, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, The Critical Question, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

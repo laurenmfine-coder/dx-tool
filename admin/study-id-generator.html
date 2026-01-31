@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study ID Generator | Research Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e40af; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; padding: 32px; }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        h1 { font-size: 28px; margin-bottom: 8px; color: #1e293b; }
+        .subtitle { color: #64748b; margin-bottom: 32px; }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: #334155; }
+        
+        .form-row { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+        .form-group { flex: 1; min-width: 200px; }
+        .form-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #475569; }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #1e3a8a; }
+        .btn-secondary { background: #f1f5f9; color: #475569; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        
+        .study-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .study-group {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+        .study-group.selected { border-color: var(--primary); background: #eff6ff; }
+        .study-group h3 { font-size: 16px; margin-bottom: 4px; }
+        .study-group p { font-size: 13px; color: #64748b; }
+        .study-group label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+        
+        .output-area {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .id-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .id-item {
+            padding: 8px 12px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            text-align: center;
+        }
+        .id-item.group-a { background: #dbeafe; color: #1e40af; }
+        .id-item.group-b { background: #dcfce7; color: #166534; }
+        .id-item.group-c { background: #fef3c7; color: #92400e; }
+        
+        .stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: #64748b; }
+        
+        .actions { display: flex; gap: 12px; margin-top: 20px; }
+        
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Study ID Generator</h1>
+        <p class="subtitle">Generate anonymous participant IDs for your research study</p>
+        
+        <div class="card">
+            <h2>Study Configuration</h2>
+            
+            <div class="info-box">
+                <strong>How it works:</strong> Study IDs are formatted as PREFIX-GROUPNUMBER (e.g., DX01-A001). 
+                The prefix identifies your study, the letter indicates the study arm/group, and the number is the participant ID.
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Study Prefix (4 characters)</label>
+                    <input type="text" id="prefix" class="form-input" value="DX01" maxlength="4" style="text-transform: uppercase;">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Participants</label>
+                    <input type="number" id="totalParticipants" class="form-input" value="240" min="1" max="1000">
+                </div>
+            </div>
+            
+            <h3 style="font-size: 15px; margin: 20px 0 12px; color: #475569;">Study Groups/Arms</h3>
+            <div class="study-groups">
+                <div class="study-group selected">
+                    <label>
+                        <input type="checkbox" id="groupA" checked>
+                        <div>
+                            <h3>Group A - Interactive Cases</h3>
+                            <p>Standard interactive case-based learning</p>
+                        </div>
+                    </label>
+                </div>
+                <div class="study-group selected">
+                    <label>
+                        <input type="checkbox" id="groupB" checked>
+                        <div>
+                            <h3>Group B - AI Enhanced</h3>
+                            <p>Case learning with AI tutor support</p>
+                        </div>
+                    </label>
+                </div>
+                <div class="study-group">
+                    <label>
+                        <input type="checkbox" id="groupC">
+                        <div>
+                            <h3>Group C - Control</h3>
+                            <p>Traditional study materials only</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Distribution</label>
+                    <select id="distribution" class="form-select">
+                        <option value="equal">Equal across groups</option>
+                        <option value="custom">Custom ratio</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Randomize Order</label>
+                    <select id="randomize" class="form-select">
+                        <option value="yes">Yes - Shuffle IDs</option>
+                        <option value="no">No - Sequential</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="generateIds()">Generate Study IDs</button>
+        </div>
+        
+        <div class="card" id="resultsCard" style="display: none;">
+            <h2>Generated Study IDs</h2>
+            
+            <div class="stats" id="stats"></div>
+            
+            <div id="idDisplay"></div>
+            
+            <div class="actions">
+                <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy All IDs</button>
+                <button class="btn btn-secondary" onclick="downloadCSV()">📥 Download CSV</button>
+                <button class="btn btn-secondary" onclick="downloadJSON()">📥 Download JSON</button>
+                <button class="btn btn-secondary" onclick="copyForCode()">📋 Copy as JS Array</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Generated Code for study-access.html</h2>
+            <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">
+                Copy this code and paste it into the VALID_STUDY_IDS array in study-access.html
+            </p>
+            <div class="output-area" id="codeOutput">
+                // Generate IDs above to see the code here
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let generatedIds = [];
+        
+        function generateIds() {
+            const prefix = document.getElementById('prefix').value.toUpperCase().substring(0, 4).padEnd(4, '0');
+            const total = parseInt(document.getElementById('totalParticipants').value) || 240;
+            const randomize = document.getElementById('randomize').value === 'yes';
+            
+            // Get selected groups
+            const groups = [];
+            if (document.getElementById('groupA').checked) groups.push('A');
+            if (document.getElementById('groupB').checked) groups.push('B');
+            if (document.getElementById('groupC').checked) groups.push('C');
+            
+            if (groups.length === 0) {
+                alert('Please select at least one group');
+                return;
+            }
+            
+            // Calculate IDs per group
+            const perGroup = Math.floor(total / groups.length);
+            const remainder = total % groups.length;
+            
+            generatedIds = [];
+            
+            groups.forEach((group, index) => {
+                const count = perGroup + (index < remainder ? 1 : 0);
+                for (let i = 1; i <= count; i++) {
+                    const num = String(i).padStart(3, '0');
+                    generatedIds.push(`${prefix}-${group}${num}`);
+                }
+            });
+            
+            // Randomize if requested
+            if (randomize) {
+                for (let i = generatedIds.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [generatedIds[i], generatedIds[j]] = [generatedIds[j], generatedIds[i]];
+                }
+            }
+            
+            displayResults(groups, perGroup);
+        }
+        
+        function displayResults(groups, perGroup) {
+            document.getElementById('resultsCard').style.display = 'block';
+            
+            // Stats
+            const statsHtml = `
+                <div class="stat">
+                    <div class="stat-value">${generatedIds.length}</div>
+                    <div class="stat-label">Total IDs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">${groups.length}</div>
+                    <div class="stat-label">Groups</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">~${Math.ceil(generatedIds.length / groups.length)}</div>
+                    <div class="stat-label">Per Group</div>
+                </div>
+            `;
+            document.getElementById('stats').innerHTML = statsHtml;
+            
+            // ID list
+            const idListHtml = generatedIds.map(id => {
+                const group = id.split('-')[1].charAt(0).toLowerCase();
+                return `<div class="id-item group-${group}">${id}</div>`;
+            }).join('');
+            document.getElementById('idDisplay').innerHTML = `<div class="id-list">${idListHtml}</div>`;
+            
+            // Code output
+            const codeLines = generatedIds.map(id => `    '${id}'`).join(',\n');
+            document.getElementById('codeOutput').textContent = `const VALID_STUDY_IDS = [\n${codeLines}\n];`;
+        }
+        
+        function copyToClipboard() {
+            navigator.clipboard.writeText(generatedIds.join('\n'));
+            alert('Copied ' + generatedIds.length + ' IDs to clipboard!');
+        }
+        
+        function copyForCode() {
+            const code = `const VALID_STUDY_IDS = [\n${generatedIds.map(id => `    '${id}'`).join(',\n')}\n];`;
+            navigator.clipboard.writeText(code);
+            alert('Copied JavaScript array to clipboard!');
+        }
+        
+        function downloadCSV() {
+            const csv = 'study_id,group,number\n' + generatedIds.map(id => {
+                const parts = id.split('-');
+                const group = parts[1].charAt(0);
+                const num = parts[1].substring(1);
+                return `${id},${group},${num}`;
+            }).join('\n');
+            
+            downloadFile(csv, 'study-ids.csv', 'text/csv');
+        }
+        
+        function downloadJSON() {
+            const json = JSON.stringify({
+                study_prefix: document.getElementById('prefix').value.toUpperCase(),
+                generated_at: new Date().toISOString(),
+                total_ids: generatedIds.length,
+                ids: generatedIds.map(id => ({
+                    id: id,
+                    group: id.split('-')[1].charAt(0),
+                    number: parseInt(id.split('-')[1].substring(1))
+                }))
+            }, null, 2);
+            
+            downloadFile(json, 'study-ids.json', 'application/json');
+        }
+        
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Toggle group selection styling
+        document.querySelectorAll('.study-group input').forEach(input => {
+            input.addEventListener('change', function() {
+                this.closest('.study-group').classList.toggle('selected', this.checked);
+            });
+        });
+    </script>
+</body>
+</html>

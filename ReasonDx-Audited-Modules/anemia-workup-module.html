@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Anemia Workup</title>
+  <style>
+    :root{--primary:#B91C1C;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(185,28,28,0.1);border-radius:1rem;border:1px solid rgba(185,28,28,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(185,28,28,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(185,28,28,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(185,28,28,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🩸 Anemia Workup</h1>
+      <p style="color:#9CA3AF">MCV-Based Approach • Reticulocyte Count • Peripheral Smear</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('approach')">Approach</div>
+      <div class="nav-tab" onclick="showTab('microcytic')">Microcytic</div>
+      <div class="nav-tab" onclick="showTab('normocytic')">Normocytic</div>
+      <div class="nav-tab" onclick="showTab('macrocytic')">Macrocytic</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- APPROACH -->
+    <div id="approach" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Systematic Approach</h2>
+        
+        <div class="key-box">
+          <strong>Step 1: Confirm anemia</strong><br>
+          Hgb <13 g/dL (men) or <12 g/dL (women)<br><br>
+          <strong>Step 2: Look at MCV</strong><br>
+          <ul>
+            <li>MCV <80: Microcytic</li>
+            <li>MCV 80-100: Normocytic</li>
+            <li>MCV >100: Macrocytic</li>
+          </ul>
+        </div>
+
+        <h3>Reticulocyte Count</h3>
+        <div class="info-box">
+          <strong>Reticulocyte Index (RI):</strong><br>
+          RI = Retic % × (Patient Hct / Normal Hct) × (1/Maturation factor)<br><br>
+          <strong>Interpretation:</strong>
+          <ul>
+            <li>RI > 2%: Appropriate response (hemolysis or blood loss)</li>
+            <li>RI < 2%: Inadequate response (production problem)</li>
+          </ul>
+        </div>
+
+        <h3>Key Labs for Workup</h3>
+        <table>
+          <tr><th>Test</th><th>Helps Distinguish</th></tr>
+          <tr><td>Reticulocyte count</td><td>Production vs destruction/loss</td></tr>
+          <tr><td>Iron studies</td><td>Iron deficiency vs anemia of chronic disease</td></tr>
+          <tr><td>B12, folate</td><td>Megaloblastic anemias</td></tr>
+          <tr><td>LDH, haptoglobin, bilirubin</td><td>Hemolysis</td></tr>
+          <tr><td>Peripheral smear</td><td>RBC morphology clues</td></tr>
+          <tr><td>Direct Coombs</td><td>Autoimmune hemolysis</td></tr>
+        </table>
+
+        <h3>MCV-Based Algorithm</h3>
+        <div class="mnemonic">
+          <strong>Microcytic: "TAILS"</strong><br>
+          <strong>T</strong>halassemia • <strong>A</strong>nemia of chronic disease • <strong>I</strong>ron deficiency<br>
+          <strong>L</strong>ead poisoning • <strong>S</strong>ideroblastic<br><br>
+          <strong>Macrocytic:</strong> B12/Folate, Liver disease, Alcohol, Drugs, MDS, Reticulocytosis
+        </div>
+      </div>
+    </div>
+
+    <!-- MICROCYTIC -->
+    <div id="microcytic" class="tab-content">
+      <div class="section">
+        <h2>🔴 Microcytic Anemia (MCV <80)</h2>
+
+        <table>
+          <tr><th>Cause</th><th>Iron</th><th>TIBC</th><th>Ferritin</th><th>Other</th></tr>
+          <tr><td><strong>Iron Deficiency</strong></td><td>↓</td><td>↑</td><td>↓</td><td>RDW ↑, low retic</td></tr>
+          <tr><td><strong>Anemia Chronic Disease</strong></td><td>↓</td><td>↓</td><td>↑ or normal</td><td>Inflammatory markers ↑</td></tr>
+          <tr><td><strong>Thalassemia trait</strong></td><td>Normal</td><td>Normal</td><td>Normal</td><td>Target cells, RDW normal, Mentzer <13</td></tr>
+          <tr><td><strong>Sideroblastic</strong></td><td>↑</td><td>Normal</td><td>↑</td><td>Ringed sideroblasts on BM</td></tr>
+          <tr><td><strong>Lead Poisoning</strong></td><td>Normal</td><td>Normal</td><td>Normal</td><td>Basophilic stippling</td></tr>
+        </table>
+
+        <h3>Iron Deficiency Anemia</h3>
+        <div class="key-box">
+          <strong>Most common cause of anemia worldwide</strong><br>
+          <strong>Causes:</strong>
+          <ul>
+            <li>Blood loss (GI most common in adults - must rule out malignancy!)</li>
+            <li>Menstrual loss (premenopausal women)</li>
+            <li>Decreased absorption (celiac, gastric bypass)</li>
+            <li>Increased demand (pregnancy, growth)</li>
+            <li>Poor dietary intake</li>
+          </ul>
+          <strong>Treatment:</strong> Oral iron (ferrous sulfate 325mg TID) × 3-6 months; address underlying cause
+        </div>
+
+        <h3>Thalassemia vs Iron Deficiency</h3>
+        <div class="info-box">
+          <strong>Mentzer Index = MCV / RBC count</strong><br>
+          <ul>
+            <li>> 13 suggests iron deficiency</li>
+            <li>< 13 suggests thalassemia</li>
+          </ul>
+          <strong>RDW:</strong> Elevated in iron deficiency, normal in thalassemia<br>
+          <strong>Hemoglobin electrophoresis:</strong> Confirms thalassemia (↑HbA2 in beta-thal trait)
+        </div>
+      </div>
+    </div>
+
+    <!-- NORMOCYTIC -->
+    <div id="normocytic" class="tab-content">
+      <div class="section">
+        <h2>⭕ Normocytic Anemia (MCV 80-100)</h2>
+
+        <div class="key-box">
+          <strong>First question:</strong> What's the reticulocyte count?<br>
+          <ul>
+            <li>High retics → Hemolysis or acute blood loss</li>
+            <li>Low retics → Production problem</li>
+          </ul>
+        </div>
+
+        <h3>Low Reticulocyte Count (Underproduction)</h3>
+        <table>
+          <tr><th>Cause</th><th>Features</th></tr>
+          <tr><td><strong>Anemia of chronic disease</strong></td><td>Most common; inflammation, infection, malignancy</td></tr>
+          <tr><td><strong>Chronic kidney disease</strong></td><td>↓ EPO; treat with ESA</td></tr>
+          <tr><td><strong>Bone marrow failure</strong></td><td>Aplastic anemia, MDS, infiltration</td></tr>
+          <tr><td><strong>Early iron/B12/folate deficiency</strong></td><td>MCV may be normal initially</td></tr>
+          <tr><td><strong>Endocrine</strong></td><td>Hypothyroidism, adrenal insufficiency</td></tr>
+        </table>
+
+        <h3>High Reticulocyte Count (Destruction/Loss)</h3>
+        <div class="danger-box">
+          <strong>Hemolysis labs:</strong>
+          <ul>
+            <li>↑ LDH, ↑ indirect bilirubin</li>
+            <li>↓ Haptoglobin (consumed)</li>
+            <li>↑ Reticulocytes</li>
+            <li>Peripheral smear: schistocytes, spherocytes, etc.</li>
+          </ul>
+        </div>
+
+        <table>
+          <tr><th>Type</th><th>Coombs</th><th>Examples</th></tr>
+          <tr><td><strong>Immune (autoimmune)</strong></td><td>Positive</td><td>Warm AIHA, cold agglutinin, drug-induced</td></tr>
+          <tr><td><strong>Non-immune</strong></td><td>Negative</td><td>TTP/HUS, DIC, mechanical valves, PNH, G6PD, sickle cell</td></tr>
+        </table>
+
+        <h3>Peripheral Smear Findings</h3>
+        <table>
+          <tr><th>Finding</th><th>Suggests</th></tr>
+          <tr><td>Spherocytes</td><td>Hereditary spherocytosis, AIHA</td></tr>
+          <tr><td>Schistocytes</td><td>MAHA (TTP, HUS, DIC), mechanical valve</td></tr>
+          <tr><td>Sickle cells</td><td>Sickle cell disease</td></tr>
+          <tr><td>Bite cells</td><td>G6PD deficiency</td></tr>
+          <tr><td>Target cells</td><td>Thalassemia, liver disease, hemoglobin C</td></tr>
+          <tr><td>Rouleaux</td><td>Multiple myeloma</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MACROCYTIC -->
+    <div id="macrocytic" class="tab-content">
+      <div class="section">
+        <h2>🟣 Macrocytic Anemia (MCV >100)</h2>
+
+        <h3>Megaloblastic vs Non-Megaloblastic</h3>
+        <table>
+          <tr><th>Megaloblastic</th><th>Non-Megaloblastic</th></tr>
+          <tr>
+            <td>B12 deficiency<br>Folate deficiency<br>Drugs (methotrexate, hydroxyurea)</td>
+            <td>Alcohol<br>Liver disease<br>Hypothyroidism<br>MDS<br>Reticulocytosis</td>
+          </tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Megaloblastic:</strong> Impaired DNA synthesis → hypersegmented neutrophils (≥5 lobes)
+        </div>
+
+        <h3>B12 Deficiency</h3>
+        <div class="key-box">
+          <strong>Causes:</strong>
+          <ul>
+            <li>Pernicious anemia (most common) - autoimmune gastritis</li>
+            <li>Gastrectomy, gastric bypass</li>
+            <li>Terminal ileum disease (Crohn's)</li>
+            <li>Strict vegan diet (rare)</li>
+            <li>Metformin, PPIs (mild)</li>
+          </ul>
+          <strong>Neurologic findings:</strong> Subacute combined degeneration (dorsal columns + corticospinal)<br>
+          Paresthesias, ataxia, dementia - MAY BE IRREVERSIBLE<br><br>
+          <strong>Treatment:</strong> IM B12 (cyanocobalamin) or high-dose oral
+        </div>
+
+        <h3>Folate Deficiency</h3>
+        <div class="info-box">
+          <strong>Causes:</strong>
+          <ul>
+            <li>Poor dietary intake (alcoholics, elderly)</li>
+            <li>Malabsorption (celiac, tropical sprue)</li>
+            <li>Increased demand (pregnancy, hemolysis)</li>
+            <li>Drugs (methotrexate, phenytoin, trimethoprim)</li>
+          </ul>
+          <strong>NO neurologic findings</strong> (distinguishes from B12)<br>
+          <strong>Treatment:</strong> Oral folic acid 1-5mg daily
+        </div>
+
+        <div class="danger-box">
+          <strong>Warning:</strong> If B12 deficiency, do NOT give folate alone - it can worsen neurologic damage!<br>
+          Always check B12 before treating with folate.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.hematology.org/education/clinicians/guidelines-and-quality-care" target="_blank">🔗 ASH Clinical Guidelines</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.nhlbi.nih.gov/health-topics/anemia" target="_blank">🔗 NIH NHLBI Anemia Information</a>
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK499994/" target="_blank">🔗 NCBI Bookshelf - Anemia</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ASH guidelines and standard hematology principles.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> A patient has microcytic anemia with low iron, high TIBC, and low ferritin. What's the diagnosis?</p>
+          <div class="quiz-option" onclick="check(this,true,'q1')">A. Iron deficiency anemia</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">B. Anemia of chronic disease</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Thalassemia</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Sideroblastic anemia</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: A.</strong> Iron deficiency shows ↓iron, ↑TIBC, ↓ferritin. ACD shows ↓iron, ↓TIBC, ↑ferritin. Thalassemia has normal iron studies.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What peripheral smear finding indicates microangiopathic hemolytic anemia?</p>
+          <div class="quiz-option" onclick="check(this,false,'q2')">A. Spherocytes</div>
+          <div class="quiz-option" onclick="check(this,true,'q2')">B. Schistocytes</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Target cells</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Rouleaux</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: B.</strong> Schistocytes (fragmented RBCs) indicate MAHA - seen in TTP, HUS, DIC, and mechanical heart valves.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Which deficiency causes neurologic symptoms (subacute combined degeneration)?</p>
+          <div class="quiz-option" onclick="check(this,true,'q3')">A. B12</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Folate</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Iron</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. B6</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: A.</strong> B12 deficiency causes subacute combined degeneration of the spinal cord. Folate deficiency does NOT cause neurologic symptoms - this helps distinguish them.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> An alcoholic patient has macrocytic anemia. What lab would suggest megaloblastic cause?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Low reticulocyte count</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Hypersegmented neutrophils</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Target cells</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Elevated LDH</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> Hypersegmented neutrophils (≥5 lobes) indicate megaloblastic anemia (B12 or folate deficiency), not just alcohol-related macrocytosis.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> A patient has normocytic anemia with elevated reticulocytes, elevated LDH, and low haptoglobin. What's happening?</p>
+          <div class="quiz-option" onclick="check(this,true,'q5')">A. Hemolysis</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Iron deficiency</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. B12 deficiency</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Anemia of chronic disease</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: A.</strong> High retics + high LDH + low haptoglobin = hemolysis. The reticulocyte response and hemolysis markers are classic.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Anemia Workup"
+         data-key-points="🎯 Systematic Approach, ⭕ Normocytic Anemia (MCV 80-100), 🟣 Macrocytic Anemia (MCV >100), 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Reticulocyte Count, Key Labs for Workup, MCV-Based Algorithm, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Gestational Diabetes - Screening, Diagnosis & Management</title>
+  <style>
+    :root { --primary: #9C27B0; --secondary: #E91E63; --accent: #FF9800; --success: #4CAF50; --danger: #F44336; --info: #2196F3; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(156, 39, 176, 0.15); border-radius: 1rem; border: 1px solid rgba(156, 39, 176, 0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .subtitle { color: #9CA3AF; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.85rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem; font-size: 1rem; }
+    .key-box { background: rgba(156, 39, 176, 0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(244, 67, 54, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(76, 175, 80, 0.15); border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(33, 150, 243, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(156, 39, 176, 0.2); color: var(--primary); }
+    ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .criteria-card { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
+    .quiz-section { background: rgba(76, 175, 80, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1rem; margin-top: 1.5rem; }
+    .quiz-option { display: block; padding: 0.5rem 1rem; margin: 0.3rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(156, 39, 176, 0.2); }
+    .quiz-option.correct { background: rgba(76, 175, 80, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(244, 67, 54, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.5rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🩺 Gestational Diabetes Mellitus</h1>
+      <p class="subtitle">Screening • Diagnosis • Management • Fetal/Maternal Complications</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('screening')">Screening</div>
+      <div class="nav-tab" onclick="showTab('management')">Management</div>
+      <div class="nav-tab" onclick="showTab('complications')">Complications</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>📚 Overview</h2>
+        <div class="key-box">
+          <strong>Gestational Diabetes Mellitus (GDM)</strong> is glucose intolerance first recognized during pregnancy. It affects 6-9% of pregnancies and increases risks for both mother and fetus.
+        </div>
+
+        <h3>Pathophysiology</h3>
+        <ul>
+          <li>Pregnancy = state of insulin resistance (hPL, cortisol, progesterone)</li>
+          <li>Normal: β-cells compensate with ↑ insulin secretion</li>
+          <li>GDM: Inadequate compensation → hyperglycemia</li>
+          <li>Peak insulin resistance: 24-28 weeks (hence screening timing)</li>
+        </ul>
+
+        <h3>Risk Factors</h3>
+        <table>
+          <tr><th>High Risk</th><th>Moderate Risk</th></tr>
+          <tr><td>Prior GDM</td><td>Age ≥25</td></tr>
+          <tr><td>BMI ≥30</td><td>Family history of DM</td></tr>
+          <tr><td>Prior macrosomic infant (>4000g)</td><td>High-risk ethnicity</td></tr>
+          <tr><td>Polycystic ovary syndrome</td><td>Previous unexplained stillbirth</td></tr>
+          <tr><td>Glycosuria</td><td>Previous infant with anomaly</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCREENING -->
+    <div id="screening" class="tab-content">
+      <div class="section">
+        <h2>🔬 Screening & Diagnosis</h2>
+
+        <h3>Universal Screening: 24-28 Weeks</h3>
+        <p>Two approaches are accepted:</p>
+
+        <div class="criteria-card">
+          <h4 style="color: var(--accent);">One-Step Approach (IADPSG/WHO)</h4>
+          <p><strong>75g OGTT</strong> - Fasting, then glucose load</p>
+          <p><strong>Diagnosis:</strong> ONE abnormal value:</p>
+          <ul>
+            <li>Fasting ≥92 mg/dL</li>
+            <li>1-hour ≥180 mg/dL</li>
+            <li>2-hour ≥153 mg/dL</li>
+          </ul>
+        </div>
+
+        <div class="criteria-card">
+          <h4 style="color: var(--accent);">Two-Step Approach (ACOG Preferred)</h4>
+          <p><strong>Step 1:</strong> 50g glucose challenge test (GCT) - non-fasting</p>
+          <ul>
+            <li>1-hour glucose ≥130-140 mg/dL → proceed to Step 2</li>
+          </ul>
+          <p><strong>Step 2:</strong> 100g OGTT (fasting)</p>
+          <p><strong>Diagnosis:</strong> TWO abnormal values (Carpenter-Coustan):</p>
+          <ul>
+            <li>Fasting ≥95 mg/dL</li>
+            <li>1-hour ≥180 mg/dL</li>
+            <li>2-hour ≥155 mg/dL</li>
+            <li>3-hour ≥140 mg/dL</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <strong>🔵 Early Screening (First Trimester):</strong> Test high-risk patients at first prenatal visit using standard diabetes criteria (FPG ≥126 or A1c ≥6.5% = overt diabetes, not GDM).
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGEMENT -->
+    <div id="management" class="tab-content">
+      <div class="section">
+        <h2>⚕️ Management</h2>
+
+        <h3>Glycemic Targets</h3>
+        <table>
+          <tr><th>Timing</th><th>Target</th></tr>
+          <tr><td>Fasting</td><td>&lt;95 mg/dL</td></tr>
+          <tr><td>1-hour postprandial</td><td>&lt;140 mg/dL</td></tr>
+          <tr><td>2-hour postprandial</td><td>&lt;120 mg/dL</td></tr>
+        </table>
+
+        <h3>Step 1: Medical Nutrition Therapy</h3>
+        <div class="success-box">
+          <ul>
+            <li>Carbohydrate-controlled diet (3 meals + 2-3 snacks)</li>
+            <li>~40% carbs, 20% protein, 40% fat</li>
+            <li>Avoid simple sugars, emphasize complex carbs</li>
+            <li>85-90% achieve control with diet alone</li>
+          </ul>
+        </div>
+
+        <h3>Step 2: Pharmacotherapy (if diet fails)</h3>
+        <div class="info-box">
+          <strong>Insulin (Preferred)</strong>
+          <ul>
+            <li>Doesn't cross placenta</li>
+            <li>Start if >20% glucose values above target after 1-2 weeks diet</li>
+            <li>Common regimens: NPH + rapid-acting (lispro/aspart)</li>
+          </ul>
+        </div>
+
+        <div class="criteria-card">
+          <strong>Oral Agents</strong>
+          <ul>
+            <li><strong>Metformin:</strong> Crosses placenta, long-term effects unknown</li>
+            <li><strong>Glyburide:</strong> Higher macrosomia/hypoglycemia rates vs insulin</li>
+            <li>Use if patient refuses insulin after counseling</li>
+          </ul>
+        </div>
+
+        <h3>Fetal Surveillance</h3>
+        <ul>
+          <li>Growth ultrasound q4 weeks in 3rd trimester</li>
+          <li>Diet-controlled, well-controlled: Routine care</li>
+          <li>Medication-requiring or poorly controlled: NST/BPP starting 32 weeks</li>
+        </ul>
+
+        <h3>Timing of Delivery</h3>
+        <table>
+          <tr><th>GDM Type</th><th>Recommended Delivery</th></tr>
+          <tr><td>Diet-controlled, well-controlled</td><td>Expectant management to 40+6 weeks</td></tr>
+          <tr><td>Medication-controlled, well-controlled</td><td>39+0 to 39+6 weeks</td></tr>
+          <tr><td>Poorly controlled</td><td>Individualized, typically 37-39 weeks</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- COMPLICATIONS -->
+    <div id="complications" class="tab-content">
+      <div class="section">
+        <h2>⚠️ Complications</h2>
+
+        <h3>Fetal/Neonatal Complications</h3>
+        <div class="danger-box">
+          <ul>
+            <li><strong>Macrosomia:</strong> Fetal hyperinsulinism → ↑ growth, shoulder dystocia risk</li>
+            <li><strong>Neonatal hypoglycemia:</strong> Check glucose after birth</li>
+            <li><strong>Respiratory distress syndrome:</strong> Delayed lung maturity</li>
+            <li><strong>Hyperbilirubinemia</strong></li>
+            <li><strong>Hypocalcemia, polycythemia</strong></li>
+            <li><strong>Stillbirth:</strong> Risk with poor control</li>
+          </ul>
+        </div>
+
+        <h3>Maternal Complications</h3>
+        <ul>
+          <li>Preeclampsia (2-4x increased risk)</li>
+          <li>Cesarean delivery (due to macrosomia)</li>
+          <li>Birth trauma</li>
+          <li>Polyhydramnios</li>
+        </ul>
+
+        <h3>Long-Term Risks</h3>
+        <div class="key-box">
+          <strong>50% of women with GDM develop Type 2 DM within 5-10 years</strong>
+          <ul>
+            <li>Postpartum: 75g OGTT at 4-12 weeks</li>
+            <li>Then screen every 1-3 years lifelong</li>
+            <li>Lifestyle modification reduces progression</li>
+            <li>Offspring: Increased risk of obesity, DM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2018/02/gestational-diabetes-mellitus" target="_blank">🔗 ACOG GDM Practice Bulletin</a>
+          <a class="resource-link" href="https://diabetesjournals.org/care/issue/47/Supplement_1" target="_blank">🔗 ADA Standards of Care</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.cdc.gov/diabetes/basics/gestational.html" target="_blank">🔗 CDC Gestational Diabetes</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ACOG and ADA guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>📝 Quiz</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Universal GDM screening is performed at what gestational age?</p>
+          <div class="quiz-option" onclick="checkQ('q1',this,true)">A. 24-28 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">B. 12-16 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">C. 32-36 weeks</div>
+          <div id="exp-q1" class="explanation">24-28 weeks - peak insulin resistance occurs at this time.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> In the two-step approach, how many abnormal values on 100g OGTT diagnose GDM?</p>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">A. One</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,true)">B. Two</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">C. Three</div>
+          <div id="exp-q2" class="explanation">Two abnormal values on the 100g OGTT (two-step approach). One-step 75g OGTT requires only one abnormal value.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> The fasting glucose target in GDM is:</p>
+          <div class="quiz-option" onclick="checkQ('q3',this,true)">A. &lt;95 mg/dL</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">B. &lt;110 mg/dL</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">C. &lt;126 mg/dL</div>
+          <div id="exp-q3" class="explanation">Fasting &lt;95, 1-hr postprandial &lt;140, 2-hr postprandial &lt;120 mg/dL.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> What percentage of women with GDM develop Type 2 DM within 5-10 years?</p>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">A. 10%</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">B. 25%</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,true)">C. 50%</div>
+          <div id="exp-q4" class="explanation">~50% develop Type 2 DM. Postpartum OGTT at 4-12 weeks then screen every 1-3 years lifelong.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(id, el, correct) {
+      const s = el.closest('.quiz-section');
+      s.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) s.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      document.getElementById('exp-' + id).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Gestational Diabetes"
+         data-key-points="📚 Overview, 🔬 Screening & Diagnosis, ⚕️ Management, ⚠️ Complications, 📚 Open-Access Learning Resources, 📝 Quiz, Pathophysiology, Risk Factors, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

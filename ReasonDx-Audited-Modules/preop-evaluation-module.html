@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Pre-Operative Evaluation</title>
+  <style>
+    :root { --primary: #059669; --secondary: #0891B2; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #0a1a1a 0%, #1a2e2e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(5, 150, 105, 0.1); border-radius: 1rem; border: 1px solid rgba(5, 150, 105, 0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+    .key-box { background: rgba(5, 150, 105, 0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(5, 150, 105, 0.2); color: var(--primary); }
+    ul { padding-left: 1.25rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .risk-card { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1rem; margin: 0.75rem 0; }
+    .risk-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.5rem; margin: 0.3rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; }
+    .quiz-option:hover { background: rgba(5, 150, 105, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏥 Pre-Operative Evaluation</h1>
+      <p style="color: #9CA3AF;">Cardiac Risk • Pulmonary • Medication Management • Testing</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('cardiac')">Cardiac Risk</div>
+      <div class="nav-tab" onclick="showTab('pulm')">Pulmonary</div>
+      <div class="nav-tab" onclick="showTab('meds')">Medications</div>
+      <div class="nav-tab" onclick="showTab('labs')">Testing</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- CARDIAC -->
+    <div id="cardiac" class="tab-content active">
+      <div class="section">
+        <h2>❤️ Cardiac Risk Assessment</h2>
+        <div class="key-box">
+          Use the <strong>Revised Cardiac Risk Index (RCRI)</strong> for non-cardiac surgery risk stratification.
+        </div>
+        <h3>RCRI Criteria (1 point each)</h3>
+        <table>
+          <tr><th>Risk Factor</th><th>Definition</th></tr>
+          <tr><td>High-risk surgery</td><td>Intraperitoneal, intrathoracic, suprainguinal vascular</td></tr>
+          <tr><td>Ischemic heart disease</td><td>History of MI, positive stress test, angina, nitrate use, Q waves</td></tr>
+          <tr><td>Heart failure</td><td>History of CHF, pulmonary edema, S3, bilateral rales, CXR with edema</td></tr>
+          <tr><td>Cerebrovascular disease</td><td>History of TIA or stroke</td></tr>
+          <tr><td>Diabetes on insulin</td><td>Currently on insulin therapy</td></tr>
+          <tr><td>Creatinine >2 mg/dL</td><td>Preoperative renal insufficiency</td></tr>
+        </table>
+        <h3>RCRI Risk Interpretation</h3>
+        <table>
+          <tr><th>Score</th><th>Major Cardiac Event Risk</th></tr>
+          <tr><td>0</td><td>0.4%</td></tr>
+          <tr><td>1</td><td>0.9%</td></tr>
+          <tr><td>2</td><td>6.6%</td></tr>
+          <tr><td>≥3</td><td>11%</td></tr>
+        </table>
+        <h3>When to Get Cardiac Testing</h3>
+        <div class="info-box">
+          <strong>Stepwise Approach:</strong>
+          <ol>
+            <li>Is it emergency surgery? → Proceed, optimize perioperatively</li>
+            <li>Does patient have ACS? → Delay elective surgery, treat ACS</li>
+            <li>Low-risk surgery? → Proceed without testing</li>
+            <li>Can patient do ≥4 METs? → Proceed without testing</li>
+            <li>If poor/unknown functional capacity + elevated risk → Consider stress testing</li>
+          </ol>
+        </div>
+        <div class="risk-card">
+          <h4>Functional Capacity (METs)</h4>
+          <ul>
+            <li><strong>1-4 METs:</strong> Eating, dressing, walking indoors</li>
+            <li><strong>4-10 METs:</strong> Climbing stairs, walking 4 mph, heavy housework</li>
+            <li><strong>>10 METs:</strong> Strenuous sports</li>
+          </ul>
+          <p><strong>≥4 METs = Good functional capacity</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PULMONARY -->
+    <div id="pulm" class="tab-content">
+      <div class="section">
+        <h2>🫁 Pulmonary Risk Assessment</h2>
+        <h3>Risk Factors for Pulmonary Complications</h3>
+        <table>
+          <tr><th>Patient Factors</th><th>Procedure Factors</th></tr>
+          <tr><td>Age >60</td><td>Thoracic/upper abdominal surgery</td></tr>
+          <tr><td>COPD</td><td>Surgery >3 hours</td></tr>
+          <tr><td>ASA class ≥2</td><td>General anesthesia</td></tr>
+          <tr><td>CHF</td><td>Emergency surgery</td></tr>
+          <tr><td>Functional dependence</td><td>Prolonged immobilization</td></tr>
+          <tr><td>Smoking</td><td>—</td></tr>
+          <tr><td>OSA</td><td>—</td></tr>
+        </table>
+        <h3>Risk Reduction Strategies</h3>
+        <div class="info-box">
+          <ul>
+            <li><strong>Smoking cessation:</strong> Ideally ≥8 weeks preop (even 24h helps)</li>
+            <li><strong>COPD optimization:</strong> Continue bronchodilators, steroids if needed</li>
+            <li><strong>OSA:</strong> Bring CPAP, consider monitored bed postop</li>
+            <li><strong>Lung expansion:</strong> Incentive spirometry, early mobilization</li>
+          </ul>
+        </div>
+        <div class="danger-box">
+          <strong>⚠️ PFTs are NOT routine!</strong> Only indicated for: unexplained dyspnea, uncharacterized COPD, lung resection surgery.
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICATIONS -->
+    <div id="meds" class="tab-content">
+      <div class="section">
+        <h2>💊 Perioperative Medication Management</h2>
+        <h3>Continue These Medications</h3>
+        <table>
+          <tr><th>Medication</th><th>Notes</th></tr>
+          <tr><td>Beta-blockers</td><td>Continue if already on; do NOT start new</td></tr>
+          <tr><td>Statins</td><td>Continue; may reduce cardiac risk</td></tr>
+          <tr><td>Thyroid medications</td><td>Continue</td></tr>
+          <tr><td>Chronic steroids</td><td>Continue; may need stress-dose</td></tr>
+          <tr><td>Inhalers</td><td>Continue bronchodilators</td></tr>
+          <tr><td>Antiepileptics</td><td>Continue</td></tr>
+        </table>
+        <h3>Hold These Medications</h3>
+        <table>
+          <tr><th>Medication</th><th>When to Hold</th><th>When to Resume</th></tr>
+          <tr><td><strong>Metformin</strong></td><td>Day of surgery</td><td>48h post if renal function OK</td></tr>
+          <tr><td><strong>ACEi/ARB</strong></td><td>Day before or day of</td><td>When hemodynamically stable</td></tr>
+          <tr><td><strong>Diuretics</strong></td><td>Day of surgery</td><td>When taking PO</td></tr>
+          <tr><td><strong>SGLT2 inhibitors</strong></td><td>3-4 days before</td><td>When eating normally</td></tr>
+          <tr><td><strong>NSAIDs</strong></td><td>1-3 days before</td><td>Variable</td></tr>
+        </table>
+        <h3>Anticoagulation Management</h3>
+        <div class="risk-card">
+          <h4>Warfarin</h4>
+          <ul>
+            <li>Hold 5 days before surgery (INR <1.5)</li>
+            <li><strong>Bridge with LMWH if:</strong> Mechanical mitral valve, recent VTE (<3 mo), high-risk AF</li>
+            <li>Most patients do NOT need bridging</li>
+          </ul>
+        </div>
+        <div class="risk-card">
+          <h4>DOACs</h4>
+          <ul>
+            <li><strong>Low bleeding risk:</strong> Hold 24-48 hours</li>
+            <li><strong>High bleeding risk:</strong> Hold 48-72 hours</li>
+            <li>Adjust for renal function (especially dabigatran)</li>
+          </ul>
+        </div>
+        <div class="risk-card">
+          <h4>Aspirin</h4>
+          <ul>
+            <li><strong>Recent stent (<6 wks BMS, <6 mo DES):</strong> Continue</li>
+            <li><strong>Primary prevention:</strong> Hold 7 days</li>
+            <li><strong>Secondary prevention:</strong> Usually continue</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LABS -->
+    <div id="labs" class="tab-content">
+      <div class="section">
+        <h2>🧪 Pre-Operative Testing</h2>
+        <div class="key-box">
+          <strong>Routine testing is NOT recommended.</strong> Order tests based on patient conditions and surgical risk.
+        </div>
+        <h3>When to Order</h3>
+        <table>
+          <tr><th>Test</th><th>Indications</th></tr>
+          <tr><td><strong>CBC</strong></td><td>Expected blood loss, anemia symptoms, hematologic disease</td></tr>
+          <tr><td><strong>BMP/Cr</strong></td><td>Renal disease, DM, HTN, heart failure, diuretics, ACEi/ARB</td></tr>
+          <tr><td><strong>Coagulation</strong></td><td>Anticoagulant use, liver disease, bleeding history</td></tr>
+          <tr><td><strong>ECG</strong></td><td>Known CAD, arrhythmia, structural heart disease, vascular surgery</td></tr>
+          <tr><td><strong>CXR</strong></td><td>New/unstable cardiopulmonary symptoms, thoracic surgery</td></tr>
+          <tr><td><strong>Pregnancy test</strong></td><td>Women of childbearing potential</td></tr>
+        </table>
+        <div class="danger-box">
+          <strong>⚠️ Avoid Routine Testing:</strong>
+          <ul>
+            <li>Routine CXR in healthy patients</li>
+            <li>Routine PFTs (unless lung resection)</li>
+            <li>Routine ECG in low-risk patients</li>
+            <li>Routine coagulation studies without indication</li>
+          </ul>
+        </div>
+        <h3>ASA Physical Status Classification</h3>
+        <table>
+          <tr><th>Class</th><th>Definition</th></tr>
+          <tr><td>I</td><td>Healthy patient</td></tr>
+          <tr><td>II</td><td>Mild systemic disease</td></tr>
+          <tr><td>III</td><td>Severe systemic disease</td></tr>
+          <tr><td>IV</td><td>Severe disease, constant threat to life</td></tr>
+          <tr><td>V</td><td>Moribund, not expected to survive without surgery</td></tr>
+          <tr><td>VI</td><td>Brain-dead organ donor</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000106" target="_blank">🔗 2014 ACC/AHA Perioperative CV Guidelines</a>
+          <div class="citation">Fleisher LA, et al. Circulation. 2014;130:e278-e333</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK537290/" target="_blank">🔗 NCBI Bookshelf - Preoperative Assessment</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ACC/AHA perioperative guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>📝 Quiz</h2>
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> A patient can climb 2 flights of stairs without symptoms. This suggests:</p>
+          <div class="quiz-option" onclick="checkQ('q1',this,true)">A. Functional capacity ≥4 METs - can proceed without stress testing</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">B. Low functional capacity - needs stress testing</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">C. Should get echocardiogram</div>
+          <div id="exp-q1" class="explanation">Climbing 2 flights of stairs = ≥4 METs = good functional capacity. Can proceed without cardiac testing even if elevated RCRI.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> Beta-blockers in a patient already on them preoperatively should be:</p>
+          <div class="quiz-option" onclick="checkQ('q2',this,true)">A. Continued perioperatively</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">B. Held the day of surgery</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">C. Held 1 week before surgery</div>
+          <div id="exp-q2" class="explanation">Continue beta-blockers if already on them - abrupt withdrawal increases MI risk. Do NOT start new beta-blockers day of surgery.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Metformin should be held perioperatively primarily due to risk of:</p>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">A. Hypoglycemia</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,true)">B. Lactic acidosis (if renal function impaired)</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">C. Hyperglycemia</div>
+          <div id="exp-q3" class="explanation">Metformin is held due to risk of lactic acidosis, especially if contrast used or renal function impaired. Resume 48h post if Cr stable.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> Most patients on warfarin for atrial fibrillation:</p>
+          <div class="quiz-option" onclick="checkQ('q4',this,true)">A. Do NOT need bridging anticoagulation</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">B. Always need bridging with LMWH</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">C. Should not undergo elective surgery</div>
+          <div id="exp-q4" class="explanation">BRIDGE trial showed most AF patients do NOT need bridging - bridging increases bleeding without reducing thromboembolism. Bridge only high-risk (mechanical mitral valve, recent VTE).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(id, el, correct) {
+      const s = el.closest('.quiz-section');
+      s.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) s.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      document.getElementById('exp-' + id).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Pre"
+         data-key-points="❤️ Cardiac Risk Assessment, 🫁 Pulmonary Risk Assessment, 💊 Perioperative Medication Management, 🧪 Pre-Operative Testing, 📚 Open-Access Learning Resources, 📝 Quiz, RCRI Criteria (1 point each), RCRI Risk Interpretation, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

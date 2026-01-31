@@ -40,7 +40,6 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
-    <link rel="stylesheet" href="dx-case-banner-fix.css">
 </head>
 <body class="bg-gradient-to-br from-amber-50 to-yellow-50 min-h-screen">
     <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
@@ -434,5 +433,13 @@ window.rdxShowDebrief = function() {
 
     <script src="dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="AKI Workup"
+         data-key-points="${stage.title}, 📊 Complete! ${pct}%, 📊 Performance Summary, 🔗 ${stage.whyChain.title}, ⚙️ ${stage.mechanism.title}, Your Decision Path:, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
 </body>
 </html>

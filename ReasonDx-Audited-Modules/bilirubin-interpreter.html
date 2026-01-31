@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilirubin Interpreter | Neonatal Jaundice Lab Tool</title>
+  <style>
+    :root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--yellow:#F59E0B;--green:#10B981;--red:#EF4444;--blue:#3B82F6;--purple:#8B5CF6}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
+    .container{max-width:900px;margin:0 auto}
+    header{text-align:center;padding:20px;margin-bottom:20px;background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(239,68,68,0.1));border-radius:16px;border:1px solid rgba(245,158,11,0.3)}
+    h1{font-size:1.8rem;color:var(--yellow);margin-bottom:5px}
+    .subtitle{color:var(--muted);font-size:0.95rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+    .card h2{color:var(--yellow);font-size:1.1rem;margin-bottom:15px;display:flex;align-items:center;gap:8px}
+    .input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+    .input-group{display:flex;flex-direction:column;gap:5px}
+    .input-group label{font-size:0.85rem;color:var(--muted)}
+    .input-group input,.input-group select{padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:1rem}
+    .input-group input:focus,.input-group select:focus{outline:none;border-color:var(--yellow)}
+    .btn{padding:12px 24px;border-radius:8px;border:none;font-weight:600;cursor:pointer;font-size:1rem;transition:all 0.2s}
+    .btn-primary{background:var(--yellow);color:#1F2937}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(245,158,11,0.3)}
+    .results{display:none}
+    .results.show{display:block}
+    .result-box{padding:15px;border-radius:10px;margin-bottom:15px}
+    .result-box.normal{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+    .result-box.warning{background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3)}
+    .result-box.critical{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3)}
+    .result-box h3{font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .result-box.normal h3{color:var(--green)}
+    .result-box.warning h3{color:var(--yellow)}
+    .result-box.critical h3{color:var(--red)}
+    .result-box p,.result-box li{font-size:0.9rem;color:var(--text);margin:5px 0}
+    .result-box ul{padding-left:20px}
+    .interpretation{background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);padding:15px;border-radius:10px;margin-top:15px}
+    .interpretation h3{color:var(--purple);margin-bottom:10px}
+    .nomogram{background:var(--bg);border-radius:10px;padding:15px;margin-top:15px}
+    .nomogram h4{color:var(--blue);margin-bottom:10px;font-size:0.95rem}
+    .risk-zone{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.85rem;font-weight:600}
+    .risk-low{background:rgba(16,185,129,0.2);color:var(--green)}
+    .risk-intermediate{background:rgba(245,158,11,0.2);color:var(--yellow)}
+    .risk-high{background:rgba(239,68,68,0.2);color:var(--red)}
+    .action-box{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);padding:15px;border-radius:10px;margin-top:15px}
+    .action-box h3{color:var(--blue);margin-bottom:10px}
+    table{width:100%;border-collapse:collapse;font-size:0.85rem;margin:10px 0}
+    th,td{padding:8px;text-align:left;border-bottom:1px solid var(--border)}
+    th{color:var(--yellow)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧪 Bilirubin Lab Interpreter</h1>
+      <p class="subtitle">Neonatal Jaundice Workup Tool</p>
+    </header>
+
+    <div class="card">
+      <h2>📋 Patient Information</h2>
+      <div class="input-grid">
+        <div class="input-group">
+          <label>Age (hours)</label>
+          <input type="number" id="age" placeholder="e.g., 48" min="0" max="720">
+        </div>
+        <div class="input-group">
+          <label>Gestational Age (weeks)</label>
+          <input type="number" id="ga" placeholder="e.g., 38" min="24" max="42">
+        </div>
+        <div class="input-group">
+          <label>Birth Weight (grams)</label>
+          <input type="number" id="weight" placeholder="e.g., 3200" min="500" max="5500">
+        </div>
+        <div class="input-group">
+          <label>Feeding Method</label>
+          <select id="feeding">
+            <option value="breast">Breastfeeding</option>
+            <option value="formula">Formula</option>
+            <option value="mixed">Mixed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🧫 Bilirubin Values</h2>
+      <div class="input-grid">
+        <div class="input-group">
+          <label>Total Bilirubin (mg/dL)</label>
+          <input type="number" id="tbili" placeholder="e.g., 12.5" step="0.1" min="0" max="40">
+        </div>
+        <div class="input-group">
+          <label>Direct (Conjugated) Bilirubin (mg/dL)</label>
+          <input type="number" id="dbili" placeholder="e.g., 0.3" step="0.1" min="0" max="20">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🔬 Additional Labs (if available)</h2>
+      <div class="input-grid">
+        <div class="input-group">
+          <label>Hemoglobin (g/dL)</label>
+          <input type="number" id="hgb" placeholder="e.g., 15" step="0.1">
+        </div>
+        <div class="input-group">
+          <label>Reticulocyte Count (%)</label>
+          <input type="number" id="retic" placeholder="e.g., 5" step="0.1">
+        </div>
+        <div class="input-group">
+          <label>Direct Coombs (DAT)</label>
+          <select id="coombs">
+            <option value="">Not done</option>
+            <option value="negative">Negative</option>
+            <option value="positive">Positive</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Blood Type Incompatibility</label>
+          <select id="incomp">
+            <option value="">Unknown</option>
+            <option value="none">None</option>
+            <option value="abo">ABO</option>
+            <option value="rh">Rh</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:20px 0">
+      <button class="btn btn-primary" onclick="analyze()">🔍 Analyze Bilirubin</button>
+    </div>
+
+    <div id="results" class="results">
+      <div class="card">
+        <h2>📊 Analysis Results</h2>
+        <div id="bili-interpretation"></div>
+        <div id="risk-assessment"></div>
+        <div id="workup-recommendations"></div>
+        <div id="treatment-recommendations"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function analyze() {
+      const age = parseFloat(document.getElementById('age').value);
+      const ga = parseFloat(document.getElementById('ga').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const tbili = parseFloat(document.getElementById('tbili').value);
+      const dbili = parseFloat(document.getElementById('dbili').value) || 0;
+      const hgb = parseFloat(document.getElementById('hgb').value);
+      const retic = parseFloat(document.getElementById('retic').value);
+      const coombs = document.getElementById('coombs').value;
+      const incomp = document.getElementById('incomp').value;
+      const feeding = document.getElementById('feeding').value;
+
+      if (!age || !tbili) {
+        alert('Please enter at least age and total bilirubin');
+        return;
+      }
+
+      const ubili = tbili - dbili;
+      const directPercent = (dbili / tbili) * 100;
+      
+      let results = '';
+      
+      // Bilirubin Type Interpretation
+      let biliClass = 'normal';
+      let biliInterpretation = '';
+      
+      if (dbili > 1 || directPercent > 20) {
+        biliClass = 'critical';
+        biliInterpretation = `
+          <div class="result-box critical">
+            <h3>⚠️ CONJUGATED HYPERBILIRUBINEMIA</h3>
+            <p><strong>Direct bilirubin: ${dbili} mg/dL (${directPercent.toFixed(1)}% of total)</strong></p>
+            <p>This is <strong>ALWAYS PATHOLOGIC</strong>. Indicates hepatobiliary disease.</p>
+            <ul>
+              <li>Total: ${tbili} mg/dL</li>
+              <li>Direct (conjugated): ${dbili} mg/dL</li>
+              <li>Indirect (unconjugated): ${ubili.toFixed(1)} mg/dL</li>
+            </ul>
+          </div>
+        `;
+      } else if (age < 24 && tbili > 5) {
+        biliClass = 'critical';
+        biliInterpretation = `
+          <div class="result-box critical">
+            <h3>🚨 PATHOLOGIC - Jaundice in First 24 Hours</h3>
+            <p>Jaundice appearing <24 hours is <strong>NEVER physiologic</strong>.</p>
+            <p>Most likely: <strong>Hemolytic disease</strong> (ABO, Rh, G6PD)</p>
+            <ul>
+              <li>Total: ${tbili} mg/dL at ${age} hours</li>
+              <li>Indirect (unconjugated): ${ubili.toFixed(1)} mg/dL</li>
+            </ul>
+          </div>
+        `;
+      } else {
+        biliInterpretation = `
+          <div class="result-box ${tbili > 15 ? 'warning' : 'normal'}">
+            <h3>${tbili > 15 ? '⚠️ Elevated' : '✅'} Unconjugated Hyperbilirubinemia</h3>
+            <ul>
+              <li>Total: ${tbili} mg/dL</li>
+              <li>Direct (conjugated): ${dbili} mg/dL (${directPercent.toFixed(1)}%)</li>
+              <li>Indirect (unconjugated): ${ubili.toFixed(1)} mg/dL</li>
+            </ul>
+          </div>
+        `;
+      }
+      
+      document.getElementById('bili-interpretation').innerHTML = biliInterpretation;
+
+      // Risk Zone Assessment (Bhutani-based)
+      let riskZone = '';
+      let photoThreshold = 0;
+      let exchangeThreshold = 0;
+      
+      // Simplified Bhutani thresholds
+      if (ga >= 38) {
+        if (age <= 24) { photoThreshold = 8; exchangeThreshold = 19; }
+        else if (age <= 48) { photoThreshold = 12; exchangeThreshold = 22; }
+        else if (age <= 72) { photoThreshold = 15; exchangeThreshold = 24; }
+        else { photoThreshold = 17; exchangeThreshold = 25; }
+      } else if (ga >= 35) {
+        if (age <= 24) { photoThreshold = 6; exchangeThreshold = 17; }
+        else if (age <= 48) { photoThreshold = 10; exchangeThreshold = 20; }
+        else if (age <= 72) { photoThreshold = 13; exchangeThreshold = 22; }
+        else { photoThreshold = 15; exchangeThreshold = 23; }
+      } else {
+        photoThreshold = 5;
+        exchangeThreshold = 15;
+      }
+
+      // Risk factors lower threshold
+      let riskFactors = [];
+      if (coombs === 'positive') riskFactors.push('Positive Coombs');
+      if (incomp === 'abo' || incomp === 'rh') riskFactors.push('Blood type incompatibility');
+      if (ga < 38) riskFactors.push('Late preterm');
+      if (feeding === 'breast') riskFactors.push('Exclusive breastfeeding');
+      
+      if (riskFactors.length > 0) {
+        photoThreshold -= 2;
+      }
+
+      let riskClass = '';
+      if (tbili >= exchangeThreshold) {
+        riskZone = 'HIGH - Exchange Zone';
+        riskClass = 'risk-high';
+      } else if (tbili >= photoThreshold) {
+        riskZone = 'INTERMEDIATE-HIGH - Phototherapy Zone';
+        riskClass = 'risk-intermediate';
+      } else if (tbili >= photoThreshold - 3) {
+        riskZone = 'INTERMEDIATE - Close Monitoring';
+        riskClass = 'risk-intermediate';
+      } else {
+        riskZone = 'LOW RISK';
+        riskClass = 'risk-low';
+      }
+
+      document.getElementById('risk-assessment').innerHTML = `
+        <div class="nomogram">
+          <h4>📈 Risk Zone Assessment (Age: ${age}h, GA: ${ga || '≥38'}wk)</h4>
+          <p>Risk Zone: <span class="risk-zone ${riskClass}">${riskZone}</span></p>
+          <p style="font-size:0.85rem;color:var(--muted);margin-top:10px">
+            Phototherapy threshold: ~${photoThreshold} mg/dL | Exchange threshold: ~${exchangeThreshold} mg/dL
+          </p>
+          ${riskFactors.length > 0 ? `<p style="font-size:0.85rem;color:var(--yellow);margin-top:5px">Risk factors present: ${riskFactors.join(', ')}</p>` : ''}
+        </div>
+      `;
+
+      // Workup Recommendations
+      let workup = '<div class="interpretation"><h3>🔬 Recommended Workup</h3><ul>';
+      
+      if (dbili > 1 || directPercent > 20) {
+        workup += `
+          <li><strong>URGENT:</strong> Conjugated hyperbili workup</li>
+          <li>Liver ultrasound (look for biliary atresia - triangular cord sign)</li>
+          <li>HIDA scan</li>
+          <li>TORCH titers</li>
+          <li>Urine culture</li>
+          <li>Metabolic screen, α1-antitrypsin</li>
+          <li>Consider GI/hepatology consult</li>
+        `;
+      } else {
+        workup += `<li>Confirm blood type (mother and baby)</li>`;
+        if (!coombs) workup += `<li>Direct Coombs (DAT)</li>`;
+        if (age < 24 || tbili > 15 || coombs === 'positive') {
+          workup += `
+            <li>CBC with smear</li>
+            <li>Reticulocyte count</li>
+            <li>G6PD level</li>
+          `;
+        }
+        if (retic > 6 || coombs === 'positive') {
+          workup += `<li>Peripheral smear for hemolysis</li>`;
+        }
+      }
+      workup += '</ul></div>';
+      document.getElementById('workup-recommendations').innerHTML = workup;
+
+      // Treatment Recommendations
+      let treatment = '<div class="action-box"><h3>💡 Treatment Recommendations</h3>';
+      
+      if (tbili >= exchangeThreshold) {
+        treatment += `
+          <p style="color:var(--red);font-weight:600">🚨 EXCHANGE TRANSFUSION MAY BE NEEDED</p>
+          <ul>
+            <li>Initiate INTENSIVE phototherapy immediately</li>
+            <li>Prepare for possible exchange transfusion</li>
+            <li>NICU consult/transfer</li>
+            <li>Recheck bili in 2-4 hours</li>
+            ${incomp ? '<li>Consider IVIG if isoimmune hemolysis</li>' : ''}
+          </ul>
+        `;
+      } else if (tbili >= photoThreshold) {
+        treatment += `
+          <p style="color:var(--yellow);font-weight:600">☀️ PHOTOTHERAPY INDICATED</p>
+          <ul>
+            <li>Initiate phototherapy</li>
+            <li>Maximize skin exposure, eye shields</li>
+            <li>Increase fluids</li>
+            <li>Recheck bili in 4-6 hours</li>
+            <li>Continue/encourage feeding</li>
+          </ul>
+        `;
+      } else if (tbili >= photoThreshold - 3) {
+        treatment += `
+          <p style="color:var(--blue);font-weight:600">👁️ CLOSE MONITORING</p>
+          <ul>
+            <li>Recheck bilirubin in 6-12 hours</li>
+            <li>Ensure adequate feeding</li>
+            <li>Watch for clinical jaundice progression</li>
+            <li>Educate parents on warning signs</li>
+          </ul>
+        `;
+      } else {
+        treatment += `
+          <p style="color:var(--green);font-weight:600">✅ ROUTINE CARE</p>
+          <ul>
+            <li>Continue routine newborn care</li>
+            <li>Encourage frequent feeding</li>
+            <li>Follow up per routine schedule</li>
+            <li>Parent education on jaundice</li>
+          </ul>
+        `;
+      }
+      treatment += '</div>';
+      document.getElementById('treatment-recommendations').innerHTML = treatment;
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({behavior: 'smooth'});
+    }
+  </script>
+
+  <div class="card" style="margin-top:20px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3)">
+    <h2 style="color:#818CF8">📚 Open-Access Learning Resources</h2>
+    
+    <p style="margin:10px 0;font-size:0.9rem"><strong>Clinical Guidelines:</strong></p>
+    <ul style="padding-left:20px;font-size:0.85rem">
+      <li><a href="https://publications.aap.org/pediatrics/article/150/3/e2022058859/188614" target="_blank" style="color:#60A5FA">AAP Hyperbilirubinemia Guidelines 2022</a></li>
+      <li><a href="https://bilitool.org/" target="_blank" style="color:#60A5FA">BiliTool - Phototherapy Calculator</a></li>
+    </ul>
+    <p style="margin-top:10px;font-size:0.8rem;color:#94A3B8"><em>Content based on AAP 2022 guidelines for neonatal hyperbilirubinemia.</em></p>
+
+  </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Bilirubin Interpreter"
+         data-key-points="📋 Patient Information, 🧫 Bilirubin Values, 🔬 Additional Labs (if available), 📊 Analysis Results, 📚 Open-Access Learning Resources, ⚠️ CONJUGATED HYPERBILIRUBINEMIA, 🚨 PATHOLOGIC - Jaundice in First 24 Hours, 🔬 Recommended Workup, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

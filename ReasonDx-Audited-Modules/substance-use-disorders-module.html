@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Substance Use Disorders</title>
+  <style>
+    :root{--primary:#6366F1;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6;--purple:#8B5CF6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0a1a1a,#1a2e2e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(99,102,241,0.1);border-radius:1rem;border:1px solid rgba(99,102,241,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(99,102,241,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(99,102,241,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--purple);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍷 Substance Use Disorders</h1>
+      <p style="color:#9CA3AF">Intoxication • Withdrawal • Treatment • Pharmacotherapy</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('alcohol')">Alcohol</div>
+      <div class="nav-tab" onclick="showTab('opioids')">Opioids</div>
+      <div class="nav-tab" onclick="showTab('stimulants')">Stimulants</div>
+      <div class="nav-tab" onclick="showTab('other')">Other Substances</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 DSM-5 Substance Use Disorder Criteria</h2>
+        <div class="key-box">
+          <strong>SUD diagnosis requires ≥2 criteria in past 12 months:</strong><br>
+          <strong>Mild:</strong> 2-3 criteria | <strong>Moderate:</strong> 4-5 criteria | <strong>Severe:</strong> ≥6 criteria
+        </div>
+
+        <div class="mnemonic">
+          <strong>SUD Criteria: "WITHDRAWALS"</strong><br>
+          <strong>W</strong>ithdrawal • <strong>I</strong>mpaired control (larger/longer than intended)<br>
+          <strong>T</strong>olerance • <strong>H</strong>azardous use • <strong>D</strong>esire to cut down (unsuccessful)<br>
+          <strong>R</strong>ole obligations neglected • <strong>A</strong>ctivities given up<br>
+          <strong>W</strong>ork/time spent obtaining/using/recovering • <strong>A</strong>mplified craving<br>
+          <strong>L</strong>egal problems* • <strong>S</strong>ocial/interpersonal problems
+        </div>
+        <p><em>*Legal problems removed in DSM-5; craving added</em></p>
+
+        <h3>Screening Tools</h3>
+        <table>
+          <tr><th>Tool</th><th>Use</th><th>Cutoff</th></tr>
+          <tr><td><strong>CAGE</strong></td><td>Alcohol (quick screen)</td><td>≥2 positive = likely AUD</td></tr>
+          <tr><td><strong>AUDIT</strong></td><td>Alcohol (comprehensive)</td><td>≥8 = hazardous use</td></tr>
+          <tr><td><strong>AUDIT-C</strong></td><td>Alcohol (3-question)</td><td>≥4 men, ≥3 women</td></tr>
+          <tr><td><strong>DAST</strong></td><td>Drug use</td><td>≥6 = significant problem</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>CAGE Questions:</strong><br>
+          <strong>C</strong>ut down - Have you ever felt you should cut down?<br>
+          <strong>A</strong>nnoyed - Have people annoyed you by criticizing your drinking?<br>
+          <strong>G</strong>uilty - Have you ever felt guilty about drinking?<br>
+          <strong>E</strong>ye-opener - Have you ever had a drink first thing in the morning?
+        </div>
+      </div>
+    </div>
+
+    <!-- ALCOHOL -->
+    <div id="alcohol" class="tab-content">
+      <div class="section">
+        <h2>🍺 Alcohol Use Disorder</h2>
+
+        <h3>Intoxication</h3>
+        <table>
+          <tr><th>BAL (mg/dL)</th><th>Effects</th></tr>
+          <tr><td>20-50</td><td>Relaxation, mild sedation</td></tr>
+          <tr><td>50-100</td><td>Impaired coordination, judgment</td></tr>
+          <tr><td>100-200</td><td>Ataxia, slurred speech, nystagmus</td></tr>
+          <tr><td>200-300</td><td>Confusion, vomiting, stupor</td></tr>
+          <tr><td>300-400</td><td>Coma, respiratory depression</td></tr>
+          <tr><td>>400</td><td>Death</td></tr>
+        </table>
+        <p><strong>Treatment:</strong> Supportive care, thiamine before glucose, monitor airway</p>
+
+        <h3>Withdrawal Timeline</h3>
+        <div class="danger-box">
+          <strong>Alcohol withdrawal can be LIFE-THREATENING!</strong>
+          <table>
+            <tr><th>Time After Last Drink</th><th>Symptoms</th></tr>
+            <tr><td><strong>6-12 hours</strong></td><td>Tremor, anxiety, tachycardia, hypertension, diaphoresis, insomnia</td></tr>
+            <tr><td><strong>12-24 hours</strong></td><td>Alcoholic hallucinosis (visual/tactile/auditory hallucinations with intact sensorium)</td></tr>
+            <tr><td><strong>24-48 hours</strong></td><td>Withdrawal seizures (tonic-clonic, brief, may cluster)</td></tr>
+            <tr><td><strong>48-96 hours</strong></td><td><strong>Delirium tremens (DTs)</strong> - confusion, agitation, hallucinations, fever, autonomic instability</td></tr>
+          </table>
+        </div>
+
+        <h3>CIWA-Ar Score</h3>
+        <div class="info-box">
+          <strong>Clinical Institute Withdrawal Assessment for Alcohol</strong> - guides treatment<br>
+          Scores: Nausea/vomiting, tremor, paroxysmal sweats, anxiety, agitation, tactile/auditory/visual disturbances, headache, orientation<br><br>
+          <strong>&lt;10:</strong> Mild, may not need meds<br>
+          <strong>10-18:</strong> Moderate withdrawal<br>
+          <strong>&gt;18:</strong> Severe - high risk for DTs/seizures
+        </div>
+
+        <h3>Treatment</h3>
+        <div class="success-box">
+          <strong>Acute Withdrawal:</strong>
+          <ul>
+            <li><strong>Benzodiazepines</strong> - first-line (chlordiazepoxide, diazepam, lorazepam)</li>
+            <li>Symptom-triggered dosing (CIWA-guided) preferred over fixed-schedule</li>
+            <li>Lorazepam preferred in liver failure (no hepatic metabolism)</li>
+            <li><strong>Thiamine</strong> - give BEFORE glucose (prevent Wernicke's)</li>
+            <li><strong>Folate, multivitamins</strong></li>
+            <li>Correct electrolytes (especially Mg, K, phos)</li>
+          </ul>
+        </div>
+
+        <h3>Medications for AUD (Maintenance)</h3>
+        <table>
+          <tr><th>Medication</th><th>Mechanism</th><th>Key Points</th></tr>
+          <tr><td><strong>Naltrexone</strong></td><td>Opioid antagonist</td><td>Reduces craving/reward; oral or monthly IM (Vivitrol); check LFTs</td></tr>
+          <tr><td><strong>Acamprosate</strong></td><td>GABA/glutamate modulation</td><td>Reduces craving; safe in liver disease; requires TID dosing; avoid if CrCl &lt;30</td></tr>
+          <tr><td><strong>Disulfiram</strong></td><td>Aldehyde dehydrogenase inhibitor</td><td>Causes severe reaction if drink (flushing, vomiting, hypotension); requires motivation/supervision</td></tr>
+        </table>
+
+        <h3>Wernicke-Korsakoff</h3>
+        <div class="danger-box">
+          <strong>Wernicke encephalopathy</strong> (acute, reversible with treatment):<br>
+          Classic triad: <strong>C</strong>onfusion, <strong>A</strong>taxia, <strong>O</strong>phthalmoplegia (nystagmus, CN VI palsy)<br>
+          Treatment: <strong>High-dose IV thiamine</strong> BEFORE glucose<br><br>
+          <strong>Korsakoff syndrome</strong> (chronic, often irreversible):<br>
+          Anterograde/retrograde amnesia, confabulation
+        </div>
+      </div>
+    </div>
+
+    <!-- OPIOIDS -->
+    <div id="opioids" class="tab-content">
+      <div class="section">
+        <h2>💊 Opioid Use Disorder</h2>
+
+        <h3>Intoxication</h3>
+        <div class="danger-box">
+          <strong>Classic Triad:</strong> Miosis (pinpoint pupils), respiratory depression, CNS depression<br><br>
+          <strong>Other signs:</strong> Euphoria, drowsiness, constipation, hypotension, bradycardia<br><br>
+          <strong>Overdose treatment:</strong>
+          <ul>
+            <li><strong>Naloxone</strong> (Narcan) - opioid antagonist; 0.4-2mg IV/IM/IN, repeat q2-3min</li>
+            <li>Titrate to respiratory status (not consciousness)</li>
+            <li>May precipitate withdrawal - start low</li>
+            <li>Half-life shorter than most opioids - may need repeat dosing or infusion</li>
+          </ul>
+        </div>
+
+        <h3>Withdrawal</h3>
+        <div class="info-box">
+          <strong>NOT life-threatening</strong> but extremely uncomfortable ("flu-like")<br><br>
+          <strong>Timeline:</strong> Starts 8-24 hours after last use (shorter-acting = faster onset)<br>
+          <strong>Peak:</strong> 36-72 hours<br>
+          <strong>Duration:</strong> 5-10 days<br><br>
+          <strong>Symptoms:</strong> Anxiety, restlessness, myalgias, lacrimation, rhinorrhea, yawning, piloerection ("gooseflesh"), dilated pupils, nausea/vomiting, diarrhea, abdominal cramps
+        </div>
+
+        <div class="mnemonic">
+          <strong>Opioid Withdrawal: "YAWNS"</strong><br>
+          <strong>Y</strong>awning • <strong>A</strong>ches (muscle) • <strong>W</strong>atery eyes/nose<br>
+          <strong>N</strong>ausea/vomiting • <strong>S</strong>weating, stomach cramps
+        </div>
+
+        <h3>Medication-Assisted Treatment (MAT)</h3>
+        <table>
+          <tr><th>Medication</th><th>Type</th><th>Key Points</th></tr>
+          <tr>
+            <td><strong>Methadone</strong></td>
+            <td>Full agonist</td>
+            <td>Daily dispensing at specialized clinic; QTc prolongation risk; best retention rates</td>
+          </tr>
+          <tr>
+            <td><strong>Buprenorphine</strong><br>(Suboxone = bup/naloxone)</td>
+            <td>Partial agonist</td>
+            <td>Office-based prescribing; ceiling effect (safer); must be in withdrawal before starting (precipitated withdrawal if not)</td>
+          </tr>
+          <tr>
+            <td><strong>Naltrexone</strong><br>(Vivitrol = monthly IM)</td>
+            <td>Antagonist</td>
+            <td>Must be opioid-free 7-10 days before starting; blocks effects if relapse; no abuse potential</td>
+          </tr>
+        </table>
+
+        <h3>Symptomatic Treatment of Withdrawal</h3>
+        <table>
+          <tr><th>Symptom</th><th>Treatment</th></tr>
+          <tr><td>Anxiety, autonomic symptoms</td><td>Clonidine (α2-agonist)</td></tr>
+          <tr><td>Muscle aches</td><td>NSAIDs, heating pad</td></tr>
+          <tr><td>Insomnia</td><td>Trazodone, hydroxyzine</td></tr>
+          <tr><td>Nausea/vomiting</td><td>Ondansetron, promethazine</td></tr>
+          <tr><td>Diarrhea</td><td>Loperamide</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- STIMULANTS -->
+    <div id="stimulants" class="tab-content">
+      <div class="section">
+        <h2>⚡ Stimulant Use Disorders</h2>
+
+        <h3>Cocaine</h3>
+        <table>
+          <tr><th>Intoxication</th><th>Withdrawal</th></tr>
+          <tr>
+            <td>
+              Euphoria, hypervigilance, agitation<br>
+              Dilated pupils, tachycardia, hypertension<br>
+              Hyperthermia, diaphoresis<br>
+              Chest pain (coronary vasospasm)<br>
+              Seizures, arrhythmias, MI, stroke
+            </td>
+            <td>
+              "Crash" - fatigue, depression<br>
+              Increased appetite, hypersomnia<br>
+              Vivid unpleasant dreams<br>
+              Psychomotor retardation<br>
+              NOT life-threatening
+            </td>
+          </tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>Cocaine Chest Pain:</strong>
+          <ul>
+            <li>Causes coronary vasospasm and accelerated atherosclerosis</li>
+            <li><strong>Avoid beta-blockers</strong> (unopposed alpha stimulation → worse vasospasm)</li>
+            <li>Treatment: Benzodiazepines, nitrates, aspirin, CCBs if needed</li>
+            <li>Consider phentolamine for refractory hypertension</li>
+          </ul>
+        </div>
+
+        <h3>Amphetamines/Methamphetamine</h3>
+        <div class="info-box">
+          Similar to cocaine but <strong>longer duration</strong> (hours vs minutes)<br><br>
+          <strong>Intoxication:</strong> Same as cocaine + bruxism, formication ("meth mites")<br>
+          <strong>Chronic use:</strong> "Meth mouth" (dental decay), skin picking, weight loss, paranoia<br>
+          <strong>Withdrawal:</strong> Same as cocaine - crash, depression, fatigue, hyperphagia<br>
+          <strong>Treatment:</strong> Supportive; no FDA-approved medications for stimulant use disorder
+        </div>
+
+        <h3>Stimulant Intoxication Treatment</h3>
+        <div class="success-box">
+          <ul>
+            <li><strong>Benzodiazepines</strong> - first-line for agitation, seizures, cardiovascular symptoms</li>
+            <li>Cooling measures for hyperthermia</li>
+            <li>Antipsychotics for severe psychosis (careful - lower seizure threshold)</li>
+            <li><strong>Avoid beta-blockers</strong> in cocaine intoxication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER -->
+    <div id="other" class="tab-content">
+      <div class="section">
+        <h2>🌿 Other Substances</h2>
+
+        <h3>Benzodiazepines</h3>
+        <table>
+          <tr><th>Intoxication</th><th>Withdrawal</th></tr>
+          <tr>
+            <td>Sedation, slurred speech, ataxia, amnesia<br>Respiratory depression (especially with opioids)<br><strong>Antidote:</strong> Flumazenil (use cautiously - can precipitate seizures)</td>
+            <td><strong>Similar to alcohol withdrawal - can be FATAL</strong><br>Anxiety, insomnia, tremor, seizures<br>Treat with long-acting benzo taper</td>
+          </tr>
+        </table>
+
+        <h3>Cannabis</h3>
+        <table>
+          <tr><th>Intoxication</th><th>Withdrawal</th></tr>
+          <tr>
+            <td>Euphoria, relaxation, increased appetite<br>Conjunctival injection, dry mouth<br>Impaired coordination, time perception<br>Paranoia, anxiety (high doses)</td>
+            <td>Irritability, anxiety, insomnia<br>Decreased appetite, restlessness<br>Depressed mood<br>Not life-threatening</td>
+          </tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Cannabinoid Hyperemesis Syndrome:</strong> Cyclic vomiting in chronic heavy users; relieved by hot showers; treatment is cessation.
+        </div>
+
+        <h3>Hallucinogens (LSD, Psilocybin)</h3>
+        <table>
+          <tr><th>Intoxication</th><th>Notes</th></tr>
+          <tr>
+            <td>Perceptual disturbances (visual, auditory)<br>Synesthesia, depersonalization<br>Dilated pupils, tachycardia<br>Anxiety, paranoia ("bad trip")</td>
+            <td>No physical dependence/withdrawal<br>Treatment: Reassurance, quiet environment<br>Benzodiazepines for severe anxiety<br>Avoid antipsychotics (may intensify experience)</td>
+          </tr>
+        </table>
+
+        <h3>PCP (Phencyclidine)</h3>
+        <div class="danger-box">
+          <strong>Intoxication:</strong> Violent agitation, analgesia (pain insensitivity)<br>
+          Nystagmus (vertical and horizontal), hypertension, tachycardia<br>
+          Psychosis, bizarre behavior, superhuman strength<br><br>
+          <strong>Treatment:</strong> Benzodiazepines for agitation; avoid physical restraints if possible; quiet dark room; may need antipsychotics for persistent psychosis
+        </div>
+
+        <h3>Quick Reference: Pupil Size</h3>
+        <table>
+          <tr><th>Miosis (Constricted)</th><th>Mydriasis (Dilated)</th></tr>
+          <tr>
+            <td>Opioids<br>Clonidine<br>Organophosphates</td>
+            <td>Cocaine, amphetamines<br>LSD, cannabis<br>Anticholinergics<br>Withdrawal (opioids, alcohol)</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.asam.org/quality-care/clinical-guidelines" target="_blank">🔗 ASAM Clinical Guidelines</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.samhsa.gov/find-help/national-helpline" target="_blank">🔗 SAMHSA Resources</a>
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK424859/" target="_blank">🔗 NCBI Bookshelf - SUDs</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ASAM guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> A chronic heavy drinker presents 48 hours after his last drink with confusion, visual hallucinations, tremor, fever, and tachycardia. What is the diagnosis?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Alcoholic hallucinosis</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Delirium tremens</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Wernicke encephalopathy</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Korsakoff syndrome</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Delirium tremens occurs 48-96 hours after last drink and includes confusion (delirium), hallucinations, autonomic instability (fever, tachycardia), and agitation. This is a medical emergency with 5-15% mortality if untreated.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What should be given BEFORE glucose in a patient with suspected alcohol use disorder?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Thiamine</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. Folate</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Naloxone</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Flumazenil</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Glucose can precipitate or worsen Wernicke encephalopathy in thiamine-deficient patients by depleting remaining thiamine stores. Always give thiamine before (or with) glucose.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> A patient on cocaine presents with chest pain. What should you AVOID?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. Benzodiazepines</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Aspirin</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">C. Beta-blockers</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. Nitroglycerin</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: C.</strong> Beta-blockers are contraindicated in cocaine-induced chest pain because they cause unopposed alpha-adrenergic stimulation, worsening coronary vasoconstriction and hypertension.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> Which medication for opioid use disorder is a partial agonist that can be prescribed in an office setting?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Methadone</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Buprenorphine</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Naltrexone</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Naloxone</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> Buprenorphine is a partial opioid agonist that can be prescribed in office settings. Methadone (full agonist) requires daily dispensing at specialized clinics. Naltrexone is an antagonist.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which withdrawal syndrome is NOT life-threatening?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. Alcohol withdrawal</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Benzodiazepine withdrawal</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">C. Opioid withdrawal</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Barbiturate withdrawal</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: C.</strong> Opioid withdrawal is extremely uncomfortable but NOT life-threatening (unlike alcohol, benzodiazepine, and barbiturate withdrawal which can cause fatal seizures). However, opioid withdrawal can lead to relapse and overdose.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Substance Use Disorders"
+         data-key-points="🎯 DSM-5 Substance Use Disorder Criteria, 🍺 Alcohol Use Disorder, 💊 Opioid Use Disorder, ⚡ Stimulant Use Disorders, 🌿 Other Substances, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Screening Tools, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

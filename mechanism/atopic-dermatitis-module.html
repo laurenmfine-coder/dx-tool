@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atopic Dermatitis - MechanismDx</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: white; text-align: center; margin-bottom: 10px; font-size: 2.2em; }
+        .subtitle { color: rgba(255,255,255,0.9); text-align: center; margin-bottom: 30px; }
+        .card { background: white; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .card h2 { color: #c05621; margin-bottom: 15px; border-bottom: 2px solid #feebc8; padding-bottom: 10px; }
+        .card h3 { color: #9c4221; margin: 20px 0 10px 0; }
+        .mechanism-box { background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%); border-left: 4px solid #ed8936; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border-bottom: 1px solid #feebc8; }
+        .comparison-table th { background: #ed8936; color: white; }
+        .comparison-table tr:nth-child(even) { background: #fffaf0; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .symptom-list { list-style: none; padding: 0; }
+        .symptom-list li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .symptom-list li::before { content: "•"; color: #ed8936; font-size: 1.5em; position: absolute; left: 0; top: 5px; }
+        .quiz-section { background: #fffaf0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .quiz-question { font-weight: 600; color: #9c4221; margin-bottom: 15px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 12px 15px; background: white; border: 2px solid #fbd38d; border-radius: 8px; cursor: pointer; }
+        .quiz-option.correct { background: #c6f6d5; border-color: #48bb78; }
+        .quiz-option.incorrect { background: #fed7d7; border-color: #f56565; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #c6f6d5; color: #276749; }
+        .feedback.incorrect { background: #fed7d7; color: #c53030; }
+        .age-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0; }
+        .age-card { background: #fffaf0; border-radius: 8px; padding: 15px; border-left: 4px solid #ed8936; }
+        .age-card h4 { color: #9c4221; margin-bottom: 10px; }
+        .treatment-box { background: #f0fff4; border: 2px solid #48bb78; border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        .nav-btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; }
+        .nav-btn.primary { background: #ed8936; color: white; }
+        .nav-btn.secondary { background: #feebc8; color: #9c4221; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .progress-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+        .progress-dot.active { background: white; transform: scale(1.3); }
+        .progress-dot.completed { background: #48bb78; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧴 Atopic Dermatitis</h1>
+        <p class="subtitle">MechanismDx Module - Pathophysiology, Diagnosis & Modern Management</p>
+        
+        <div class="progress-bar">
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+        </div>
+
+        <div class="section active" id="section-0">
+            <div class="card">
+                <h2>📚 Overview & Epidemiology</h2>
+                <p>Atopic dermatitis (AD) is a <strong>chronic, relapsing inflammatory skin disease</strong> characterized by intense pruritus, xerosis, and eczematous lesions with age-specific distribution patterns.</p>
+                
+                <div class="mechanism-box">
+                    <h3>Key Epidemiologic Facts</h3>
+                    <ul class="symptom-list">
+                        <li><strong>Prevalence:</strong> 15-20% of children, 7-10% of adults</li>
+                        <li><strong>Onset:</strong> 60% by age 1, 90% by age 5</li>
+                        <li><strong>Natural history:</strong> ~70% remit by adolescence; 30% persist to adulthood</li>
+                        <li><strong>Atopic march:</strong> AD → allergic rhinitis → asthma in ~30%</li>
+                    </ul>
+                </div>
+
+                <h3>The Atopic March</h3>
+                <p>AD is often the first manifestation of atopy, followed sequentially by food allergy, allergic rhinitis, and asthma. Early AD treatment may modify this progression.</p>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> The "itch that rashes" - pruritus is the hallmark! AD is one of the most pruritic conditions in dermatology. No itch = question the diagnosis.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" disabled>← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Pathophysiology →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-1">
+            <div class="card">
+                <h2>🔬 Pathophysiology: The Two-Hit Model</h2>
+                
+                <h3>1. Skin Barrier Dysfunction</h3>
+                <div class="mechanism-box">
+                    <h4>Filaggrin (FLG) Mutations</h4>
+                    <ul class="symptom-list">
+                        <li>Present in 20-50% of AD patients (vs 10% general population)</li>
+                        <li>Filaggrin aggregates keratin filaments → cornified envelope integrity</li>
+                        <li>Breakdown products (NMF) → hydration, acidic pH</li>
+                        <li>FLG deficiency → dry skin, increased allergen penetration, elevated pH</li>
+                    </ul>
+                </div>
+
+                <h3>2. Type 2 Immune Dysregulation</h3>
+                <div class="mechanism-box">
+                    <h4>The Th2 Cytokine Axis</h4>
+                    <table class="comparison-table">
+                        <tr><th>Cytokine</th><th>Source</th><th>Effect</th></tr>
+                        <tr><td><strong>IL-4</strong></td><td>Th2 cells, ILC2s</td><td>IgE class switch, barrier dysfunction</td></tr>
+                        <tr><td><strong>IL-13</strong></td><td>Th2 cells, ILC2s</td><td>Barrier dysfunction, fibrosis, pruritus</td></tr>
+                        <tr><td><strong>IL-31</strong></td><td>Th2 cells</td><td>"Itch cytokine" - major pruritogen</td></tr>
+                        <tr><td><strong>IL-5</strong></td><td>Th2 cells</td><td>Eosinophil recruitment</td></tr>
+                        <tr><td><strong>TSLP</strong></td><td>Keratinocytes</td><td>Initiates Th2 response</td></tr>
+                    </table>
+                </div>
+
+                <h3>The Itch-Scratch Cycle</h3>
+                <p>IL-31 activates sensory neurons → pruritus → scratching → barrier damage → more inflammation → more IL-31</p>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> Understanding IL-4/IL-13 as central drivers led to dupilumab (anti-IL-4Rα). Understanding IL-31 led to nemolizumab (anti-IL-31RA). Pathophysiology drives therapeutics!
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Clinical Features →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-2">
+            <div class="card">
+                <h2>🩺 Clinical Features & Diagnosis</h2>
+                
+                <h3>Age-Specific Distribution</h3>
+                <div class="age-grid">
+                    <div class="age-card">
+                        <h4>👶 Infantile (0-2 years)</h4>
+                        <ul><li>Face, scalp, cheeks</li><li>Extensor surfaces</li><li>Spares diaper area</li><li>Often weepy/crusted</li></ul>
+                    </div>
+                    <div class="age-card">
+                        <h4>🧒 Childhood (2-12 years)</h4>
+                        <ul><li>Flexural involvement (antecubital, popliteal)</li><li>Wrists, ankles</li><li>Lichenification develops</li></ul>
+                    </div>
+                    <div class="age-card">
+                        <h4>🧑 Adolescent/Adult</h4>
+                        <ul><li>Flexures persist</li><li>Hands, eyelids, face</li><li>Lichenification prominent</li><li>Prurigo nodularis variant</li></ul>
+                    </div>
+                </div>
+
+                <h3>Hanifin & Rajka Diagnostic Criteria</h3>
+                <div class="mechanism-box">
+                    <p><strong>Must have ≥3 Major + ≥3 Minor criteria:</strong></p>
+                    <h4>Major (must have 3+):</h4>
+                    <ul class="symptom-list">
+                        <li>Pruritus</li>
+                        <li>Typical morphology and distribution</li>
+                        <li>Chronic/relapsing course</li>
+                        <li>Personal or family history of atopy</li>
+                    </ul>
+                    <h4>Minor (examples):</h4>
+                    <p>Xerosis, keratosis pilaris, palmar hyperlinearity, Dennie-Morgan lines, white dermatographism, elevated IgE, early age of onset, food/wool intolerance</p>
+                </div>
+
+                <h3>Associated Features</h3>
+                <table class="comparison-table">
+                    <tr><th>Finding</th><th>Description</th></tr>
+                    <tr><td><strong>Dennie-Morgan lines</strong></td><td>Extra eyelid creases</td></tr>
+                    <tr><td><strong>Allergic shiners</strong></td><td>Periorbital darkening</td></tr>
+                    <tr><td><strong>Hertoghe sign</strong></td><td>Lateral eyebrow thinning (from rubbing)</td></tr>
+                    <tr><td><strong>Keratosis pilaris</strong></td><td>"Chicken skin" on upper arms/thighs</td></tr>
+                    <tr><td><strong>White dermatographism</strong></td><td>White line when skin stroked (vs red in urticaria)</td></tr>
+                </table>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Treatment →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-3">
+            <div class="card">
+                <h2>💊 Treatment Approach</h2>
+                
+                <h3>Step-Wise Management</h3>
+                <div class="treatment-box">
+                    <h4>Step 1: ALL Patients - Foundation</h4>
+                    <ul class="symptom-list">
+                        <li><strong>Emollients:</strong> Apply liberally, immediately after bathing ("soak and seal")</li>
+                        <li><strong>Trigger avoidance:</strong> Irritants (wool, fragrances), allergens if relevant</li>
+                        <li><strong>Bathing:</strong> Lukewarm, short duration, gentle cleansers</li>
+                    </ul>
+                </div>
+
+                <div class="treatment-box">
+                    <h4>Step 2: Mild-Moderate - Topical Therapy</h4>
+                    <ul class="symptom-list">
+                        <li><strong>Topical corticosteroids:</strong> Mainstay of flare treatment</li>
+                        <li><strong>Topical calcineurin inhibitors:</strong> Tacrolimus, pimecrolimus - steroid-sparing, safe for face</li>
+                        <li><strong>Crisaborole:</strong> PDE4 inhibitor - mild disease, safe for face</li>
+                        <li><strong>Ruxolitinib:</strong> Topical JAK inhibitor - newest option</li>
+                    </ul>
+                </div>
+
+                <div class="treatment-box">
+                    <h4>Step 3: Moderate-Severe - Systemic Therapy</h4>
+                    <table class="comparison-table">
+                        <tr><th>Agent</th><th>Mechanism</th><th>Key Points</th></tr>
+                        <tr><td><strong>Dupilumab</strong></td><td>Anti-IL-4Rα</td><td>First-line biologic; blocks IL-4 and IL-13; conjunctivitis side effect</td></tr>
+                        <tr><td><strong>Tralokinumab</strong></td><td>Anti-IL-13</td><td>Alternative to dupilumab</td></tr>
+                        <tr><td><strong>JAK inhibitors</strong></td><td>Abrocitinib, upadacitinib</td><td>Oral; rapid onset; monitor labs (CBC, lipids)</td></tr>
+                        <tr><td><strong>Nemolizumab</strong></td><td>Anti-IL-31RA</td><td>Targets itch pathway specifically</td></tr>
+                        <tr><td><strong>Cyclosporine</strong></td><td>Calcineurin inhibitor</td><td>Older option; renal toxicity limits long-term use</td></tr>
+                    </table>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> Dupilumab revolutionized AD treatment! It's injectable every 2 weeks, highly effective, and well-tolerated. Main side effect is conjunctivitis (10-20%) - manageable with eye drops.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Quiz →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-4">
+            <div class="card">
+                <h2>📝 Knowledge Check</h2>
+                
+                <div class="quiz-section">
+                    <p class="quiz-question">1. A 3-year-old has itchy rash in the antecubital and popliteal fossae. Mom has asthma. What genetic defect is most commonly associated?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Collagen VII mutation</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Filaggrin (FLG) loss-of-function mutation</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Keratin 5 mutation</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Connexin 26 mutation</div>
+                    </div>
+                    <div class="feedback">Filaggrin mutations are the strongest genetic risk factor for AD, present in 20-50% of patients. FLG is essential for skin barrier integrity and natural moisturizing factor production.</div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">2. Which cytokine is primarily responsible for the intense pruritus in AD?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. IL-4</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. IL-13</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. IL-31</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. IL-5</div>
+                    </div>
+                    <div class="feedback">IL-31 is known as the "itch cytokine" because it directly stimulates sensory neurons expressing IL-31RA. This is why nemolizumab (anti-IL-31RA) specifically targets pruritus in AD.</div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">3. What is the most common side effect of dupilumab?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Hepatotoxicity</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Conjunctivitis</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Neutropenia</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Renal insufficiency</div>
+                    </div>
+                    <div class="feedback">Conjunctivitis occurs in 10-20% of dupilumab-treated patients. It's usually manageable with lubricating eye drops or topical tacrolimus. The mechanism may involve altered ocular surface immunity.</div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">4. Which area is typically SPARED in infantile AD?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Cheeks</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Scalp</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Diaper area</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Extensor surfaces</div>
+                    </div>
+                    <div class="feedback">The diaper area is characteristically SPARED in infantile AD - the moist, occluded environment is actually protective. Diaper dermatitis with AD involvement suggests irritant or candidal component.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Key Takeaways</h2>
+                <ul class="symptom-list">
+                    <li>AD = barrier dysfunction (filaggrin) + Th2 immune dysregulation (IL-4, IL-13, IL-31)</li>
+                    <li>Distribution changes with age: face/extensors (infant) → flexures (child/adult)</li>
+                    <li>Foundation: emollients for ALL patients ("soak and seal")</li>
+                    <li>Dupilumab (anti-IL-4Rα) is first-line biologic for moderate-severe AD</li>
+                    <li>IL-31 drives pruritus → nemolizumab targets this specifically</li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="location.reload()">🔄 Restart Module</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        function updateProgress() {
+            document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                dot.classList.remove('active', 'completed');
+                if (i < currentSection) dot.classList.add('completed');
+                if (i === currentSection) dot.classList.add('active');
+            });
+        }
+        function showSection(idx) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + idx).classList.add('active');
+            currentSection = idx;
+            updateProgress();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        function nextSection() { if (currentSection < 4) showSection(currentSection + 1); }
+        function prevSection() { if (currentSection > 0) showSection(currentSection - 1); }
+        function checkAnswer(el, idx) {
+            const opts = el.parentElement;
+            const correct = parseInt(opts.dataset.correct);
+            if (opts.querySelector('.correct')) return;
+            opts.querySelectorAll('.quiz-option').forEach((o, i) => {
+                if (i === correct) o.classList.add('correct');
+                else if (i === idx) o.classList.add('incorrect');
+            });
+            const fb = opts.nextElementSibling;
+            fb.classList.add('show', idx === correct ? 'correct' : 'incorrect');
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Atopic Dermatitis"
+         data-key-points="📚 Overview & Epidemiology, 🔬 Pathophysiology: The Two-Hit Model, 🩺 Clinical Features & Diagnosis, 💊 Treatment Approach, 📝 Knowledge Check, 🎯 Key Takeaways, Key Epidemiologic Facts, The Atopic March, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

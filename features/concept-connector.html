@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Connector | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        
+        .layout { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+        @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+        
+        .main-content { padding: 32px; }
+        .main-content h1 { font-size: 28px; margin-bottom: 8px; }
+        .main-content .subtitle { color: #64748b; margin-bottom: 24px; }
+        
+        .module-preview {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .module-preview h2 { font-size: 24px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .module-preview p { color: #52525b; line-height: 1.7; margin-bottom: 16px; }
+        
+        /* CONCEPT CONNECTOR SIDEBAR */
+        .connector-sidebar {
+            background: white;
+            border-left: 1px solid #e2e8f0;
+            padding: 24px;
+            overflow-y: auto;
+        }
+        
+        .connector-section {
+            margin-bottom: 28px;
+        }
+        .connector-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .connector-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .connector-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .connector-item:hover {
+            background: #f0fdf4;
+            border-color: #a7f3d0;
+        }
+        
+        .connector-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .connector-icon.prereq { background: #fef3c7; }
+        .connector-icon.related { background: #dbeafe; }
+        .connector-icon.clinical { background: #dcfce7; }
+        .connector-icon.case { background: #f3e8ff; }
+        
+        .connector-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .connector-info p {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        
+        .connector-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .connector-badge.recommended { background: #dcfce7; color: #166534; }
+        .connector-badge.review { background: #fef3c7; color: #92400e; }
+        
+        .strength-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .strength-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+        .strength-fill.strong { background: #059669; width: 90%; }
+        .strength-fill.medium { background: #f59e0b; width: 60%; }
+        .strength-fill.weak { background: #ef4444; width: 30%; }
+        
+        .pathway-visual {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .pathway-visual h4 {
+            font-size: 12px;
+            color: #166534;
+            margin-bottom: 12px;
+        }
+        .pathway-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+        .pathway-step {
+            text-align: center;
+            flex: 1;
+        }
+        .pathway-step .icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 4px;
+            font-size: 14px;
+            border: 2px solid #a7f3d0;
+        }
+        .pathway-step.current .icon {
+            background: #059669;
+            border-color: #059669;
+        }
+        .pathway-step.completed .icon {
+            background: #dcfce7;
+            border-color: #059669;
+        }
+        .pathway-arrow {
+            color: #a7f3d0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <main class="main-content">
+            <h1>🧪 Acute Kidney Injury</h1>
+            <p class="subtitle">MechanismDx Module — Renal</p>
+            
+            <div class="module-preview">
+                <h2>🔬 Pathophysiology</h2>
+                <p>Acute Kidney Injury (AKI) represents a rapid decline in kidney function over hours to days. Understanding the mechanisms helps guide both diagnosis and treatment.</p>
+                <p>The classic division into <strong>pre-renal</strong>, <strong>intrinsic</strong>, and <strong>post-renal</strong> causes maps directly to the underlying pathophysiology...</p>
+                <p style="color: #94a3b8; font-style: italic;">[Module content continues...]</p>
+            </div>
+        </main>
+        
+        <!-- CONCEPT CONNECTOR SIDEBAR -->
+        <aside class="connector-sidebar">
+            <div class="pathway-visual">
+                <h4>📍 Your Learning Path</h4>
+                <div class="pathway-steps">
+                    <div class="pathway-step completed">
+                        <div class="icon">✓</div>
+                        <span>Electrolytes</span>
+                    </div>
+                    <span class="pathway-arrow">→</span>
+                    <div class="pathway-step current">
+                        <div class="icon">📍</div>
+                        <span>AKI</span>
+                    </div>
+                    <span class="pathway-arrow">→</span>
+                    <div class="pathway-step">
+                        <div class="icon">🎯</div>
+                        <span>CKD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector-section">
+                <div class="connector-title">🔙 This Builds On</div>
+                <div class="connector-list">
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon prereq">🧪</div>
+                        <div class="connector-info">
+                            <h4>Electrolyte Physiology</h4>
+                            <p>Na/K balance, tubular function</p>
+                            <div class="strength-bar"><div class="strength-fill strong"></div></div>
+                        </div>
+                    </a>
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon prereq">💧</div>
+                        <div class="connector-info">
+                            <h4>Renal Blood Flow</h4>
+                            <p>GFR, autoregulation, RAS</p>
+                            <span class="connector-badge review">Review suggested</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="connector-section">
+                <div class="connector-title">🔗 Connects To</div>
+                <div class="connector-list">
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon related">⚖️</div>
+                        <div class="connector-info">
+                            <h4>Acid-Base Disorders</h4>
+                            <p>Metabolic acidosis in AKI</p>
+                        </div>
+                    </a>
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon related">💊</div>
+                        <div class="connector-info">
+                            <h4>Nephrotoxic Drugs</h4>
+                            <p>NSAIDs, aminoglycosides, contrast</p>
+                        </div>
+                    </a>
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon related">🦠</div>
+                        <div class="connector-info">
+                            <h4>Sepsis</h4>
+                            <p>Sepsis-associated AKI</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="connector-section">
+                <div class="connector-title">🏥 You'll Use This In</div>
+                <div class="connector-list">
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon case">🎯</div>
+                        <div class="connector-info">
+                            <h4>ICU Oliguria Case</h4>
+                            <p>Post-op patient with rising Cr</p>
+                            <span class="connector-badge recommended">Recommended</span>
+                        </div>
+                    </a>
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon case">🎯</div>
+                        <div class="connector-info">
+                            <h4>Contrast Nephropathy</h4>
+                            <p>Post-cath AKI prevention</p>
+                        </div>
+                    </a>
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon clinical">🧮</div>
+                        <div class="connector-info">
+                            <h4>FENa Calculator</h4>
+                            <p>Pre-renal vs ATN differentiation</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="connector-section">
+                <div class="connector-title">📚 After This, Learn</div>
+                <div class="connector-list">
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon related">🔄</div>
+                        <div class="connector-info">
+                            <h4>Chronic Kidney Disease</h4>
+                            <p>AKI → CKD progression</p>
+                            <span class="connector-badge recommended">Next up</span>
+                        </div>
+                    </a>
+                    <a href="#" class="connector-item">
+                        <div class="connector-icon related">🩺</div>
+                        <div class="connector-info">
+                            <h4>Dialysis Indications</h4>
+                            <p>AEIOU emergencies</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

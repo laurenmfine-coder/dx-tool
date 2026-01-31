@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSV (Respiratory Syncytial Virus) | MicrobiologyDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-bg: #ecfdf5;
+            --secondary: #7c3aed;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; }
+        .nav-link:hover { background: var(--border); }
+        
+        .header { background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); padding: 40px 24px; }
+        .header-inner { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 36px; color: white; margin-bottom: 8px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); }
+        .header-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+        .header-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: white; }
+        
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        
+        .quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+        .fact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .fact-label { font-size: 12px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px; }
+        .fact-value { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+        .fact-value.virus { color: #0d9488; }
+        
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
+        .section h2 { font-size: 22px; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 { font-size: 18px; color: var(--primary-dark); margin: 24px 0 12px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+        .feature-card { background: #ccfbf1; border: 1px solid #5eead4; border-radius: 10px; padding: 16px; }
+        .feature-card h4 { color: #0f766e; font-size: 14px; margin-bottom: 8px; }
+        .feature-card p { color: #115e59; font-size: 13px; margin: 0; }
+        .feature-card.danger { background: #fee2e2; border-color: #fca5a5; }
+        .feature-card.danger h4 { color: #991b1b; }
+        .feature-card.danger p { color: #7f1d1d; }
+        .feature-card.pediatric { background: #fce7f3; border-color: #f9a8d4; }
+        .feature-card.pediatric h4 { color: #9d174d; }
+        .feature-card.pediatric p { color: #831843; }
+        
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .comparison-table th { background: #ccfbf1; color: #0f766e; font-weight: 600; font-size: 13px; }
+        .comparison-table td { font-size: 14px; }
+        .comparison-table tr:hover { background: #f8fafc; }
+        
+        .treatment-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .treatment-box h4 { color: #1e40af; margin-bottom: 16px; }
+        .treatment-box ul { margin-left: 20px; color: #1e3a8a; }
+        .treatment-box li { margin-bottom: 8px; }
+        
+        .key-point { background: #ecfdf5; border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: var(--primary-dark); }
+        
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl strong { color: #92400e; }
+        
+        .warning-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .warning-box h4 { color: #991b1b; margin-bottom: 12px; }
+        .warning-box ul { margin-left: 20px; color: #7f1d1d; }
+        .warning-box li { margin-bottom: 8px; }
+        
+        .prevention-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .prevention-box h4 { color: #166534; margin-bottom: 16px; }
+        .prevention-box ul { margin-left: 20px; color: #15803d; }
+        .prevention-box li { margin-bottom: 8px; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">🦠 MicrobiologyDx</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link">All Organisms</a>
+                <a href="../pharmacology/antivirals.html" class="nav-link">Antivirals</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="index.html">MicrobiologyDx</a> → Viruses</div>
+            <h1>RSV (Respiratory Syncytial Virus)</h1>
+            <p class="header-subtitle">#1 Cause of Bronchiolitis and Viral Pneumonia in Infants</p>
+            <div class="header-tags">
+                <span class="header-tag">RNA Virus</span>
+                <span class="header-tag">Paramyxovirus</span>
+                <span class="header-tag">Bronchiolitis</span>
+                <span class="header-tag">Infants</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="quick-facts">
+            <div class="fact-card">
+                <div class="fact-label">Family</div>
+                <div class="fact-value virus">Paramyxoviridae</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Genome</div>
+                <div class="fact-value">(-) ssRNA, non-segmented</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Peak Age</div>
+                <div class="fact-value">2-6 months</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Treatment</div>
+                <div class="fact-value">Supportive care</div>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2>🔬 Virology</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🧬 Structure</h4>
+                    <p>Enveloped virus with non-segmented negative-sense ssRNA. Fusion (F) protein and attachment (G) protein on surface. F protein causes cell fusion → syncytia (hence the name).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📅 Seasonality</h4>
+                    <p>Temperate climates: November-April (peaks January-February). Tropical: year-round or rainy season. Highly predictable annual epidemics.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Reinfection</h4>
+                    <p>Does NOT provide lasting immunity. Reinfection common throughout life. Subsequent infections usually milder. By age 2, nearly all children infected.</p>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <strong>Board Pearl:</strong> RSV = Paramyxovirus family (along with parainfluenza, measles, mumps). Causes <strong>syncytia</strong> (multinucleated giant cells) from F protein fusion — this is why it's called "syncytial" virus.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🏥 Clinical Syndromes</h2>
+            
+            <h3>Pediatric Disease</h3>
+            <div class="feature-grid">
+                <div class="feature-card pediatric">
+                    <h4>👶 Bronchiolitis</h4>
+                    <p><strong>#1 cause in infants.</strong> Peak 2-6 months. URI prodrome → wheezing, tachypnea, retractions, hypoxia. Small airway inflammation and mucus plugging.</p>
+                </div>
+                <div class="feature-card pediatric">
+                    <h4>🫁 Viral Pneumonia</h4>
+                    <p>More common in very young infants and immunocompromised. Can overlap with bronchiolitis. CXR: hyperinflation, perihilar infiltrates, atelectasis.</p>
+                </div>
+                <div class="feature-card pediatric">
+                    <h4>🤧 URI / Otitis Media</h4>
+                    <p>Older children: usually just cold symptoms. RSV is common cause of acute otitis media with effusion. Less severe than infant disease.</p>
+                </div>
+            </div>
+
+            <h3>Risk Factors for Severe Pediatric Disease</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Risk Factor</th>
+                        <th>Why It Matters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Prematurity (&lt;35 weeks)</strong></td>
+                        <td>Immature lungs, less maternal antibody transfer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Age &lt;6 months</strong></td>
+                        <td>Small airways, immature immune system</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Congenital heart disease</strong></td>
+                        <td>Especially hemodynamically significant CHD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chronic lung disease (BPD)</strong></td>
+                        <td>Pre-existing respiratory compromise</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Immunodeficiency</strong></td>
+                        <td>Prolonged viral shedding, severe disease</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Neuromuscular disease</strong></td>
+                        <td>Impaired cough, secretion clearance</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Adult Disease</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>👴 Elderly Adults</h4>
+                    <p>Increasingly recognized as serious pathogen in ≥65 years. Causes pneumonia, COPD/asthma exacerbations. Hospitalization and mortality similar to influenza in this age group.</p>
+                </div>
+                <div class="feature-card danger">
+                    <h4>🏥 Immunocompromised</h4>
+                    <p>HSCT recipients at highest risk. Can progress to severe LRTI, ARDS, death. Upper tract infection → lower tract in ~50%. Requires aggressive early treatment.</p>
+                </div>
+            </div>
+
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Don't forget RSV in adults! In elderly and immunocompromised, RSV causes significant morbidity/mortality comparable to flu. Test respiratory panels, not just flu.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧪 Diagnosis</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Turnaround</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RT-PCR (molecular)</strong></td>
+                        <td>Hours</td>
+                        <td>Gold standard. High sensitivity/specificity. Part of respiratory pathogen panels.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rapid antigen detection</strong></td>
+                        <td>15-30 min</td>
+                        <td>Good in infants (high viral load). Lower sensitivity in adults/immunocompromised. Negative doesn't rule out.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DFA (direct fluorescent antibody)</strong></td>
+                        <td>Hours</td>
+                        <td>Moderate sensitivity. Requires adequate specimen and skilled technician.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Viral culture</strong></td>
+                        <td>Days</td>
+                        <td>Not used for clinical care. Research and surveillance.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-point">
+                <strong>When to Test:</strong> Testing generally changes management only in hospitalized patients, immunocompromised (where antivirals may be used), or for infection control purposes. In typical outpatient bronchiolitis, clinical diagnosis is usually sufficient.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>💊 Treatment</h2>
+            
+            <div class="treatment-box">
+                <h4>Bronchiolitis in Infants — Supportive Care</h4>
+                <ul>
+                    <li><strong>Supplemental oxygen:</strong> Maintain SpO₂ ≥90% (some guidelines say ≥92%)</li>
+                    <li><strong>Hydration:</strong> IV or NG if not tolerating oral; avoid overhydration (SIADH risk)</li>
+                    <li><strong>Nasal suctioning:</strong> Gentle bulb suction PRN for nasal congestion</li>
+                    <li><strong>Monitoring:</strong> Apnea monitoring in high-risk infants (preterm, young age)</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ What NOT to Do in Bronchiolitis (AAP Guidelines)</h4>
+                <ul>
+                    <li><strong>Bronchodilators:</strong> Not routinely recommended (no proven benefit)</li>
+                    <li><strong>Corticosteroids:</strong> Not recommended (don't reduce hospitalizations)</li>
+                    <li><strong>Antibiotics:</strong> Not indicated unless bacterial superinfection</li>
+                    <li><strong>Chest physiotherapy:</strong> Not recommended</li>
+                    <li><strong>Nebulized hypertonic saline:</strong> May consider in hospitalized, not for ED/outpatient</li>
+                </ul>
+            </div>
+
+            <div class="treatment-box">
+                <h4>Ribavirin — Limited Indications</h4>
+                <ul>
+                    <li><strong>Mechanism:</strong> Nucleoside analog; inhibits viral RNA synthesis</li>
+                    <li><strong>Formulations:</strong> Inhaled (aerosol) or oral</li>
+                    <li><strong>Indications:</strong> Consider in HSCT recipients with RSV LRTI; not routine for bronchiolitis</li>
+                    <li><strong>Concerns:</strong> Teratogenic, expensive, difficult to administer (aerosol), limited efficacy data</li>
+                </ul>
+            </div>
+
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> For HSCT patients with RSV, early treatment before progression to LRTI improves outcomes. Once lower tract involved, mortality is high despite treatment.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🛡️ Prevention</h2>
+            
+            <div class="prevention-box">
+                <h4>RSV Immunization — Recent Advances (2023-2024)</h4>
+                <ul>
+                    <li><strong>Nirsevimab (Beyfortus):</strong> Long-acting monoclonal antibody for infants; single dose provides season-long protection; recommended for all infants &lt;8 months entering first RSV season</li>
+                    <li><strong>Palivizumab (Synagis):</strong> Monthly injections during RSV season; now largely replaced by nirsevimab except in specific high-risk groups</li>
+                    <li><strong>Maternal RSV vaccine (Abrysvo):</strong> Given during pregnancy (32-36 weeks); passive antibody transfer protects newborn</li>
+                    <li><strong>Adult RSV vaccines:</strong> Abrysvo and Arexvy approved for adults ≥60 years</li>
+                </ul>
+            </div>
+
+            <div class="prevention-box">
+                <h4>Infection Control</h4>
+                <ul>
+                    <li><strong>Transmission:</strong> Contact and large droplet (not truly airborne)</li>
+                    <li><strong>Precautions:</strong> Contact + droplet precautions for hospitalized patients</li>
+                    <li><strong>Hand hygiene:</strong> Most important intervention; virus survives on hands ~25 min</li>
+                    <li><strong>Environmental:</strong> Survives on surfaces for hours; cleaning important</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <strong>2024 Update:</strong> Nirsevimab has transformed RSV prevention — one dose protects infants for entire RSV season. Maternal vaccination is alternative if nirsevimab unavailable. Both options NOT both needed.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📝 High-Yield Summary</h2>
+            <ul style="margin-left: 20px;">
+                <li><strong>ID:</strong> Paramyxovirus, (-) ssRNA, non-segmented, F protein causes syncytia</li>
+                <li><strong>Epidemiology:</strong> #1 cause of bronchiolitis and infant pneumonia; peak 2-6 months; November-April</li>
+                <li><strong>Bronchiolitis:</strong> URI → wheezing, tachypnea, retractions, hypoxia; supportive care only</li>
+                <li><strong>High-risk:</strong> Premature, &lt;6 months, CHD, CLD, immunocompromised, elderly</li>
+                <li><strong>DON'T use:</strong> Bronchodilators, steroids, antibiotics in typical bronchiolitis</li>
+                <li><strong>Adults:</strong> Significant cause of pneumonia in elderly and immunocompromised</li>
+                <li><strong>Diagnosis:</strong> RT-PCR best; rapid antigen OK in infants</li>
+                <li><strong>Prevention:</strong> Nirsevimab (infants), maternal vaccine, adult vaccines (≥60)</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>📚 Sources & Guidelines</h2>
+            <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li><strong>AAP Bronchiolitis Guidelines (2014, reaffirmed).</strong> <a href="https://publications.aap.org/pediatrics/article/134/5/e1474/32990/Clinical-Practice-Guideline-The-Diagnosis" target="_blank" style="color: #059669;">AAP Bronchiolitis Guidelines</a></li>
+                <li><strong>NCBI Bookshelf - RSV.</strong> <a href="https://www.ncbi.nlm.nih.gov/books/NBK459215/" target="_blank" style="color: #059669;">StatPearls: RSV</a></li>
+                <li><strong>CDC RSV Information.</strong> <a href="https://www.cdc.gov/rsv/" target="_blank" style="color: #059669;">CDC RSV</a></li>
+                <li><strong>CDC RSV Immunization Recommendations.</strong> <a href="https://www.cdc.gov/rsv/vaccines/" target="_blank" style="color: #059669;">CDC RSV Vaccines</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="RSV - Respiratory Syncytial Virus"
+         data-key-points="paramyxovirus, bronchiolitis infants, syncytia F protein, supportive care only, no bronchodilators steroids, nirsevimab prevention, elderly immunocompromised"
+         data-objectives="Identify RSV epidemiology and clinical features, manage bronchiolitis appropriately, understand prevention strategies"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

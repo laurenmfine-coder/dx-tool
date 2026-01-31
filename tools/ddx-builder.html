@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDx Builder | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 24px; color: white; text-align: center; }
+        .header h1 { font-size: 24px; margin-bottom: 4px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .input-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .input-section h2 { font-size: 18px; margin-bottom: 16px; }
+        .symptom-input { display: flex; gap: 12px; margin-bottom: 16px; }
+        .symptom-input input { flex: 1; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-size: 16px; }
+        .symptom-input input:focus { outline: none; border-color: var(--primary); }
+        .symptom-input button { padding: 14px 24px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .symptom-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+        .symptom-tag { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: #dbeafe; color: #1d4ed8; border-radius: 20px; font-size: 14px; }
+        .symptom-tag button { background: none; border: none; cursor: pointer; font-size: 16px; color: #1d4ed8; }
+        .quick-symptoms { display: flex; flex-wrap: wrap; gap: 8px; }
+        .quick-symptom { padding: 6px 12px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 16px; font-size: 13px; cursor: pointer; }
+        .quick-symptom:hover { background: #e2e8f0; }
+        .results-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+        .results-section h2 { font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .ddx-list { display: grid; gap: 12px; }
+        .ddx-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .ddx-header { display: flex; align-items: center; gap: 12px; padding: 16px; cursor: pointer; }
+        .ddx-header:hover { background: #f8fafc; }
+        .ddx-rank { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+        .ddx-rank.high { background: #dcfce7; color: #166534; }
+        .ddx-rank.medium { background: #fef3c7; color: #92400e; }
+        .ddx-rank.low { background: #f1f5f9; color: #6b7280; }
+        .ddx-info { flex: 1; }
+        .ddx-name { font-weight: 600; font-size: 16px; }
+        .ddx-category { font-size: 13px; color: var(--text-secondary); }
+        .ddx-probability { font-size: 14px; font-weight: 600; }
+        .ddx-probability.high { color: #166534; }
+        .ddx-probability.medium { color: #92400e; }
+        .ddx-probability.low { color: #6b7280; }
+        .ddx-expand { color: var(--text-secondary); }
+        .ddx-details { display: none; padding: 16px; background: #f8fafc; border-top: 1px solid var(--border); }
+        .ddx-details.show { display: block; }
+        .ddx-details h4 { font-size: 13px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; margin-top: 16px; }
+        .ddx-details h4:first-child { margin-top: 0; }
+        .ddx-details ul { margin-left: 20px; font-size: 14px; color: var(--text-secondary); }
+        .ddx-details .match { color: #166534; font-weight: 500; }
+        .ddx-details .workup-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+        .ddx-details .workup-item:last-child { border-bottom: none; }
+        .empty-state { text-align: center; padding: 48px; color: var(--text-secondary); }
+        .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🔍 Differential Diagnosis Builder</h1>
+        <p>Enter symptoms to generate a ranked differential diagnosis</p>
+    </header>
+
+    <main class="content">
+        <div class="input-section">
+            <h2>📝 Enter Presenting Symptoms</h2>
+            <div class="symptom-input">
+                <input type="text" id="symptom-input" placeholder="Type a symptom and press Enter or click Add..." onkeypress="if(event.key==='Enter')addSymptom()">
+                <button onclick="addSymptom()">Add</button>
+            </div>
+            <div class="symptom-tags" id="symptom-tags"></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">Quick add:</p>
+            <div class="quick-symptoms">
+                <span class="quick-symptom" onclick="quickAdd('Fever')">Fever</span>
+                <span class="quick-symptom" onclick="quickAdd('Cough')">Cough</span>
+                <span class="quick-symptom" onclick="quickAdd('Dyspnea')">Dyspnea</span>
+                <span class="quick-symptom" onclick="quickAdd('Chest pain')">Chest pain</span>
+                <span class="quick-symptom" onclick="quickAdd('Headache')">Headache</span>
+                <span class="quick-symptom" onclick="quickAdd('Abdominal pain')">Abdominal pain</span>
+                <span class="quick-symptom" onclick="quickAdd('Altered mental status')">Altered mental status</span>
+                <span class="quick-symptom" onclick="quickAdd('Hypotension')">Hypotension</span>
+                <span class="quick-symptom" onclick="quickAdd('Tachycardia')">Tachycardia</span>
+                <span class="quick-symptom" onclick="quickAdd('Rash')">Rash</span>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>📋 Differential Diagnosis</h2>
+            <div id="ddx-results">
+                <div class="empty-state">
+                    <div class="emoji">🩺</div>
+                    <p>Add symptoms above to generate differential diagnosis</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let symptoms = [];
+
+        // DDx database
+        const ddxDatabase = {
+            'Sepsis': {
+                category: 'Infectious',
+                symptoms: ['Fever', 'Tachycardia', 'Hypotension', 'Altered mental status', 'Dyspnea'],
+                findings: ['Leukocytosis or leukopenia', 'Elevated lactate', 'Positive cultures'],
+                workup: ['Blood cultures × 2', 'CBC, BMP, lactate', 'Urinalysis + culture', 'Chest X-ray', 'Procalcitonin']
+            },
+            'Pneumonia': {
+                category: 'Pulmonary/Infectious',
+                symptoms: ['Fever', 'Cough', 'Dyspnea', 'Chest pain'],
+                findings: ['Productive cough', 'Crackles on exam', 'Hypoxia', 'Consolidation on CXR'],
+                workup: ['Chest X-ray', 'Sputum culture', 'Blood cultures if severe', 'Procalcitonin', 'Respiratory viral panel']
+            },
+            'Pulmonary Embolism': {
+                category: 'Pulmonary/Vascular',
+                symptoms: ['Dyspnea', 'Chest pain', 'Tachycardia', 'Hypotension'],
+                findings: ['Sudden onset', 'Pleuritic chest pain', 'Hypoxia', 'DVT risk factors'],
+                workup: ['D-dimer', 'CT pulmonary angiography', 'ECG', 'Lower extremity Doppler', 'BNP/troponin']
+            },
+            'Acute Coronary Syndrome': {
+                category: 'Cardiovascular',
+                symptoms: ['Chest pain', 'Dyspnea', 'Diaphoresis', 'Nausea'],
+                findings: ['Substernal pressure', 'Radiation to arm/jaw', 'ECG changes', 'Elevated troponin'],
+                workup: ['ECG', 'Serial troponins', 'Chest X-ray', 'BNP', 'Echocardiogram']
+            },
+            'Meningitis': {
+                category: 'Infectious/Neurologic',
+                symptoms: ['Fever', 'Headache', 'Altered mental status', 'Neck stiffness'],
+                findings: ['Photophobia', 'Kernig/Brudzinski signs', 'Petechial rash (meningococcal)'],
+                workup: ['Lumbar puncture', 'Blood cultures', 'Head CT if focal deficits', 'CBC, BMP']
+            },
+            'Diabetic Ketoacidosis': {
+                category: 'Endocrine',
+                symptoms: ['Altered mental status', 'Abdominal pain', 'Nausea', 'Dyspnea'],
+                findings: ['Kussmaul respirations', 'Fruity breath', 'Hyperglycemia', 'Anion gap acidosis'],
+                workup: ['BMP', 'ABG/VBG', 'Serum ketones', 'Urinalysis', 'HbA1c']
+            },
+            'Heart Failure Exacerbation': {
+                category: 'Cardiovascular',
+                symptoms: ['Dyspnea', 'Orthopnea', 'Lower extremity edema', 'Fatigue'],
+                findings: ['JVD', 'Crackles', 'S3 gallop', 'Cardiomegaly on CXR'],
+                workup: ['BNP/NT-proBNP', 'Chest X-ray', 'ECG', 'Echocardiogram', 'BMP']
+            },
+            'COPD Exacerbation': {
+                category: 'Pulmonary',
+                symptoms: ['Dyspnea', 'Cough', 'Wheezing', 'Increased sputum'],
+                findings: ['Known COPD history', 'Barrel chest', 'Prolonged expiration', 'Hypoxia'],
+                workup: ['Chest X-ray', 'ABG', 'Sputum culture', 'Respiratory viral panel', 'BNP to rule out CHF']
+            }
+        };
+
+        function addSymptom() {
+            const input = document.getElementById('symptom-input');
+            const symptom = input.value.trim();
+            if (symptom && !symptoms.includes(symptom)) {
+                symptoms.push(symptom);
+                renderSymptoms();
+                generateDDx();
+            }
+            input.value = '';
+        }
+
+        function quickAdd(symptom) {
+            if (!symptoms.includes(symptom)) {
+                symptoms.push(symptom);
+                renderSymptoms();
+                generateDDx();
+            }
+        }
+
+        function removeSymptom(symptom) {
+            symptoms = symptoms.filter(s => s !== symptom);
+            renderSymptoms();
+            generateDDx();
+        }
+
+        function renderSymptoms() {
+            const container = document.getElementById('symptom-tags');
+            container.innerHTML = symptoms.map(s => 
+                `<span class="symptom-tag">${s}<button onclick="removeSymptom('${s}')">×</button></span>`
+            ).join('');
+        }
+
+        function generateDDx() {
+            const container = document.getElementById('ddx-results');
+            
+            if (symptoms.length === 0) {
+                container.innerHTML = `<div class="empty-state"><div class="emoji">🩺</div><p>Add symptoms above to generate differential diagnosis</p></div>`;
+                return;
+            }
+
+            // Score each diagnosis
+            const scored = Object.entries(ddxDatabase).map(([name, data]) => {
+                const matches = symptoms.filter(s => 
+                    data.symptoms.some(ds => ds.toLowerCase().includes(s.toLowerCase()) || s.toLowerCase().includes(ds.toLowerCase()))
+                );
+                const score = matches.length / data.symptoms.length;
+                return { name, ...data, matches, score };
+            }).filter(d => d.score > 0).sort((a, b) => b.score - a.score);
+
+            if (scored.length === 0) {
+                container.innerHTML = `<div class="empty-state"><div class="emoji">🤔</div><p>No matching diagnoses found. Try different symptoms.</p></div>`;
+                return;
+            }
+
+            container.innerHTML = `<div class="ddx-list">${scored.map((dx, i) => {
+                const rankClass = dx.score >= 0.5 ? 'high' : dx.score >= 0.25 ? 'medium' : 'low';
+                const probText = dx.score >= 0.5 ? 'High' : dx.score >= 0.25 ? 'Medium' : 'Low';
+                
+                return `
+                    <div class="ddx-item">
+                        <div class="ddx-header" onclick="toggleDetails(${i})">
+                            <div class="ddx-rank ${rankClass}">${i + 1}</div>
+                            <div class="ddx-info">
+                                <div class="ddx-name">${dx.name}</div>
+                                <div class="ddx-category">${dx.category}</div>
+                            </div>
+                            <div class="ddx-probability ${rankClass}">${probText}</div>
+                            <span class="ddx-expand">▼</span>
+                        </div>
+                        <div class="ddx-details" id="details-${i}">
+                            <h4>Matching Symptoms</h4>
+                            <ul>${dx.matches.map(m => `<li class="match">✓ ${m}</li>`).join('')}</ul>
+                            
+                            <h4>Classic Findings</h4>
+                            <ul>${dx.findings.map(f => `<li>${f}</li>`).join('')}</ul>
+                            
+                            <h4>Recommended Workup</h4>
+                            ${dx.workup.map(w => `<div class="workup-item">🔬 ${w}</div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('')}</div>`;
+        }
+
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            details.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

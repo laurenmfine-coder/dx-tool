@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudomonas aeruginosa | MicrobiologyDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-bg: #ecfdf5;
+            --secondary: #7c3aed;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
+        
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 40px 24px; }
+        .header-inner { max-width: 1000px; margin: 0 auto; }
+        .header h1 { font-size: 36px; color: white; margin-bottom: 8px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); }
+        .header-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+        .header-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: white; }
+        
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        
+        .quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 40px; }
+        .fact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .fact-label { font-size: 12px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px; }
+        .fact-value { font-size: 18px; font-weight: 600; color: var(--primary); }
+        
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
+        .section h2 { font-size: 22px; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { font-size: 18px; color: var(--primary-dark); margin: 24px 0 12px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .pigment-box { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+        .pigment-card { flex: 1; min-width: 200px; padding: 16px; border-radius: 12px; text-align: center; }
+        .pigment-card.pyocyanin { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; }
+        .pigment-card.pyoverdine { background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%); color: white; }
+        .pigment-card h4 { margin-bottom: 8px; }
+        .pigment-card p { font-size: 13px; margin: 0; opacity: 0.9; }
+        
+        .virulence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+        .virulence-card { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 16px; }
+        .virulence-card h4 { color: #92400e; font-size: 14px; margin-bottom: 8px; }
+        .virulence-card p { color: #78350f; font-size: 13px; margin: 0; }
+        
+        .disease-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .disease-table th, .disease-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .disease-table th { background: var(--primary-bg); color: var(--primary-dark); font-weight: 600; font-size: 13px; }
+        .disease-table td { font-size: 14px; }
+        
+        .treatment-box { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .treatment-box h4 { color: #047857; margin-bottom: 16px; }
+        .treatment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .treatment-item { background: white; padding: 12px; border-radius: 8px; }
+        .treatment-item h5 { color: #059669; font-size: 13px; margin-bottom: 4px; }
+        .treatment-item p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+        
+        .resistance-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .resistance-box h4 { color: #991b1b; margin-bottom: 12px; }
+        .resistance-box ul { margin-left: 20px; color: #7f1d1d; }
+        
+        .mcat-tip { background: #fef3c7; border-left: 4px solid var(--warning); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .mcat-tip::before { content: '🎯 High Yield: '; font-weight: 600; color: #92400e; }
+        
+        .clinical-pearl { background: #ecfdf5; border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl::before { content: '🏥 Clinical Pearl: '; font-weight: 600; color: #047857; }
+        
+        .mnemonic-box { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-radius: 12px; padding: 24px; margin: 20px 0; text-align: center; }
+        .mnemonic-box h4 { color: #1e40af; margin-bottom: 12px; }
+        .mnemonic-phrase { font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 8px; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">🦠 MicrobiologyDx</a>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-inner">
+            <h1>Pseudomonas aeruginosa</h1>
+            <p class="header-subtitle">The "Blue-Green Pus" Pathogen - Opportunistic Nosocomial Terror</p>
+            <div class="header-tags">
+                <span class="header-tag">Gram-Negative Rod</span>
+                <span class="header-tag">Oxidase Positive</span>
+                <span class="header-tag">Non-Lactose Fermenter</span>
+                <span class="header-tag">Obligate Aerobe</span>
+                <span class="header-tag">Grape-like Odor</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Quick Facts -->
+        <div class="quick-facts">
+            <div class="fact-card">
+                <div class="fact-label">Gram Stain</div>
+                <div class="fact-value">Gram-Negative Rod</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Oxidase</div>
+                <div class="fact-value">POSITIVE ✓</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Lactose</div>
+                <div class="fact-value">Non-Fermenter</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Oxygen</div>
+                <div class="fact-value">Obligate Aerobe</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Odor</div>
+                <div class="fact-value">Grape-like (Fruity)</div>
+            </div>
+        </div>
+
+        <!-- Overview -->
+        <section class="section">
+            <h2>🔬 Organism Overview</h2>
+            <p><strong>Pseudomonas aeruginosa</strong> is the quintessential opportunistic pathogen - it rarely causes disease in healthy individuals but is a nightmare in hospitalized and immunocompromised patients. It's notorious for its intrinsic antibiotic resistance and ability to form biofilms.</p>
+            
+            <p>Key identifying features: <strong>oxidase-positive</strong> (distinguishes from Enterobacteriaceae), produces blue-green pigments, fruity grape-like odor, and grows at 42°C (helps distinguish from other Pseudomonas species).</p>
+
+            <div class="mcat-tip">
+                Pseudomonas is OXIDASE POSITIVE - this is a key distinguishing feature! Most Enterobacteriaceae (E. coli, Klebsiella, etc.) are oxidase-negative. Think: "Pseudo-positive for oxidase."
+            </div>
+        </section>
+
+        <!-- Pigments -->
+        <section class="section">
+            <h2>🎨 Characteristic Pigments</h2>
+            <p>P. aeruginosa produces several pigments that give its colonies and infected tissues a distinctive blue-green color:</p>
+            
+            <div class="pigment-box">
+                <div class="pigment-card pyocyanin">
+                    <h4>Pyocyanin (Blue)</h4>
+                    <p>Generates reactive oxygen species → tissue damage. Also inhibits ciliary function and causes oxidative stress.</p>
+                </div>
+                <div class="pigment-card pyoverdine">
+                    <h4>Pyoverdine (Green-Yellow)</h4>
+                    <p>Siderophore - steals iron from host. Essential for virulence. Fluoresces under UV light!</p>
+                </div>
+            </div>
+            
+            <p>Together, these pigments produce the classic <strong>"blue-green pus"</strong> seen in Pseudomonas infections. The combination also creates the distinctive grape-like odor.</p>
+        </section>
+
+        <!-- Virulence Factors -->
+        <section class="section">
+            <h2>⚡ Virulence Factors</h2>
+            
+            <div class="virulence-grid">
+                <div class="virulence-card">
+                    <h4>Exotoxin A</h4>
+                    <p>Inactivates EF-2 (like diphtheria toxin) → inhibits protein synthesis → cell death. Most important toxin for systemic disease.</p>
+                </div>
+                <div class="virulence-card">
+                    <h4>Phospholipase C</h4>
+                    <p>Degrades phospholipids → tissue destruction. Contributes to lung damage in CF patients.</p>
+                </div>
+                <div class="virulence-card">
+                    <h4>Elastase (LasA, LasB)</h4>
+                    <p>Degrades elastin and collagen → tissue invasion. Damages blood vessel walls → hemorrhage.</p>
+                </div>
+                <div class="virulence-card">
+                    <h4>Alginate (Mucoid Capsule)</h4>
+                    <p>Biofilm formation in CF lungs. Protects against phagocytosis and antibiotics. "Mucoid" phenotype.</p>
+                </div>
+                <div class="virulence-card">
+                    <h4>Endotoxin (LPS)</h4>
+                    <p>Lipid A triggers septic shock pathway. Fever, hypotension, DIC in bacteremia.</p>
+                </div>
+                <div class="virulence-card">
+                    <h4>Type III Secretion System</h4>
+                    <p>"Molecular syringe" - injects toxins directly into host cells. ExoS, ExoT, ExoU, ExoY.</p>
+                </div>
+            </div>
+
+            <div class="mcat-tip">
+                Exotoxin A mechanism is HIGH YIELD: It ADP-ribosylates EF-2, inhibiting protein synthesis - SAME mechanism as diphtheria toxin! (Both target EF-2, just different cell entry.)
+            </div>
+        </section>
+
+        <!-- Clinical Syndromes -->
+        <section class="section">
+            <h2>🏥 Clinical Syndromes</h2>
+            
+            <table class="disease-table">
+                <thead>
+                    <tr>
+                        <th>Syndrome</th>
+                        <th>Risk Factors</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pneumonia (VAP)</strong></td>
+                        <td>Mechanical ventilation, ICU, prior antibiotics</td>
+                        <td>#1 cause of ventilator-associated pneumonia. High mortality (30-40%). Often necrotizing.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CF Lung Infection</strong></td>
+                        <td>Cystic fibrosis</td>
+                        <td>Chronic colonization, mucoid phenotype (alginate). Leading cause of death in CF.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Burn Wound Infection</strong></td>
+                        <td>Burns, wounds</td>
+                        <td>Blue-green discharge, rapid tissue invasion. Can lead to sepsis.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Otitis Externa</strong></td>
+                        <td>Swimming ("swimmer's ear"), diabetes</td>
+                        <td>Ear pain, discharge. Malignant (necrotizing) otitis externa in diabetics - EMERGENCY!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UTI</strong></td>
+                        <td>Catheters, instrumentation</td>
+                        <td>Catheter-associated UTI. Often hospital-acquired.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Keratitis</strong></td>
+                        <td>Contact lens wear</td>
+                        <td>Rapidly progressive corneal ulcer. Can perforate in 24-48 hours! Ophthalmologic emergency.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ecthyma Gangrenosum</strong></td>
+                        <td>Neutropenia, sepsis</td>
+                        <td>Pathognomonic skin lesion: necrotic ulcer with black eschar. Indicates bacteremia.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Osteomyelitis</strong></td>
+                        <td>Diabetic foot, puncture wounds</td>
+                        <td>Foot osteomyelitis from puncture through sneaker (nail through rubber sole).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Endocarditis</strong></td>
+                        <td>IV drug use</td>
+                        <td>Right-sided endocarditis in IVDU. Tricuspid valve involvement.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hot Tub Folliculitis</strong></td>
+                        <td>Hot tubs, whirlpools</td>
+                        <td>Pruritic papulopustular rash in swimsuit distribution. Self-limited.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mnemonic-box">
+                <h4>🧠 Pseudomonas Infections Mnemonic</h4>
+                <div class="mnemonic-phrase">BE PSEUDO</div>
+                <p><strong>B</strong>urns • <strong>E</strong>ar (otitis externa) • <strong>P</strong>neumonia (VAP, CF) • <strong>S</strong>kin (ecthyma) • <strong>E</strong>ndocarditis (IVDU) • <strong>U</strong>TI (catheter) • <strong>D</strong>iabetic foot • <strong>O</strong>cular (keratitis)</p>
+            </div>
+
+            <div class="clinical-pearl">
+                <strong>Malignant otitis externa</strong> in diabetics is a life-threatening emergency! It starts as otitis externa but invades skull base → osteomyelitis → cranial nerve palsies (CN VII first). Requires weeks of IV anti-pseudomonal antibiotics. "Malignant" refers to aggressive behavior, not cancer.
+            </div>
+        </section>
+
+        <!-- Treatment -->
+        <section class="section">
+            <h2>💊 Treatment</h2>
+            
+            <div class="treatment-box">
+                <h4>Anti-Pseudomonal Antibiotics</h4>
+                <div class="treatment-grid">
+                    <div class="treatment-item">
+                        <h5>β-Lactams</h5>
+                        <p>Piperacillin-tazobactam, Ceftazidime, Cefepime, Aztreonam, Meropenem (not ertapenem!)</p>
+                    </div>
+                    <div class="treatment-item">
+                        <h5>Fluoroquinolones</h5>
+                        <p>Ciprofloxacin (best), Levofloxacin. Good lung penetration.</p>
+                    </div>
+                    <div class="treatment-item">
+                        <h5>Aminoglycosides</h5>
+                        <p>Tobramycin (inhaled for CF), Amikacin. Often used in combination.</p>
+                    </div>
+                    <div class="treatment-item">
+                        <h5>Polymyxins</h5>
+                        <p>Colistin (polymyxin E). Last resort for MDR strains.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resistance-box">
+                <h4>⚠️ Intrinsic & Acquired Resistance</h4>
+                <ul>
+                    <li><strong>Intrinsic resistance:</strong> Outer membrane barrier (reduced permeability), AmpC β-lactamase, efflux pumps (MexAB-OprM)</li>
+                    <li><strong>NOT active:</strong> 1st/2nd gen cephalosporins, ertapenem, most penicillins, TMP-SMX</li>
+                    <li><strong>Acquired:</strong> ESBLs, metallo-β-lactamases (MBL), porin mutations, upregulated efflux</li>
+                    <li><strong>Biofilms:</strong> 100-1000x more resistant than planktonic cells!</li>
+                </ul>
+            </div>
+
+            <div class="clinical-pearl">
+                For serious Pseudomonas infections, <strong>combination therapy</strong> (β-lactam + aminoglycoside or fluoroquinolone) is often used empirically to prevent resistance emergence. Once susceptibilities return, can often de-escalate to monotherapy.
+            </div>
+        </section>
+
+        <!-- Special Populations -->
+        <section class="section">
+            <h2>👥 Special Populations</h2>
+            
+            <h3>Cystic Fibrosis</h3>
+            <p>P. aeruginosa is the most important pathogen in CF lung disease. Over time, strains convert to a <strong>mucoid phenotype</strong> (alginate overproduction) that forms biofilms resistant to antibiotics and immune clearance. This chronic infection drives progressive lung destruction.</p>
+            <ul style="margin-left: 20px;">
+                <li>Inhaled tobramycin (TOBI) for chronic suppression</li>
+                <li>Azithromycin has anti-inflammatory effects on biofilms</li>
+                <li>Aggressive IV therapy for exacerbations</li>
+            </ul>
+
+            <h3>Neutropenic Patients</h3>
+            <p>Pseudomonas bacteremia in neutropenic patients has 30-50% mortality. Look for <strong>ecthyma gangrenosum</strong> - necrotic skin lesions pathognomonic for Pseudomonas sepsis. Requires immediate broad-spectrum anti-pseudomonal coverage.</p>
+        </section>
+
+        <!-- Summary -->
+        <section class="section" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-color: var(--primary);">
+            <h2>📝 High-Yield Summary</h2>
+            <ul style="margin-left: 20px;">
+                <li><strong>ID:</strong> Gram-negative rod, OXIDASE POSITIVE, non-lactose fermenter, obligate aerobe, grows at 42°C</li>
+                <li><strong>Pigments:</strong> Pyocyanin (blue) + pyoverdine (green) = blue-green pus, grape-like odor</li>
+                <li><strong>Exotoxin A:</strong> ADP-ribosylates EF-2 (same as diphtheria toxin) → inhibits protein synthesis</li>
+                <li><strong>Key infections:</strong> VAP (#1), CF lungs (mucoid), burns, malignant otitis externa (diabetics), contact lens keratitis, ecthyma gangrenosum (neutropenia), puncture wound osteomyelitis</li>
+                <li><strong>Treatment:</strong> Anti-pseudomonal β-lactams (pip-tazo, ceftazidime, cefepime, meropenem), ciprofloxacin, aminoglycosides</li>
+                <li><strong>NOT effective:</strong> 1st/2nd gen cephalosporins, ertapenem, ampicillin, TMP-SMX</li>
+                <li><strong>Resistance:</strong> Intrinsic (AmpC, efflux, permeability) + acquired. Biofilms are huge problem.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>📚 Sources & Guidelines</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Content verified against current open-access guidelines:</p>
+            <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li><strong>IDSA HAP/VAP Guidelines (2016).</strong> Kalil AC, et al. <a href="https://academic.oup.com/cid/article/63/5/e61/2237650" target="_blank" style="color: #059669;">Clin Infect Dis 2016;63:e61-e111</a> [Anti-pseudomonal coverage for VAP]</li>
+                <li><strong>Cystic Fibrosis Foundation Guidelines.</strong> <a href="https://www.cff.org" target="_blank" style="color: #059669;">cff.org</a> [P. aeruginosa management in CF, inhaled tobramycin]</li>
+                <li><strong>CDC Antibiotic Resistance Threats (2019).</strong> <a href="https://www.cdc.gov/drugresistance/biggest-threats.html" target="_blank" style="color: #059669;">cdc.gov</a> [MDR Pseudomonas as urgent threat]</li>
+                <li><strong>IDSA Febrile Neutropenia Guidelines.</strong> Freifeld AG, et al. Clin Infect Dis 2011;52:e56-e93. [Ecthyma gangrenosum, empiric Pseudomonas coverage]</li>
+                <li><strong>NCBI Bookshelf - Medical Microbiology, Ch 27: Pseudomonas.</strong> <a href="https://www.ncbi.nlm.nih.gov/books/NBK8086/" target="_blank" style="color: #059669;">NCBI</a> [Exotoxin A mechanism, biofilms]</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Pseudomonas aeruginosa"
+         data-key-points="🔬 Organism Overview, 🎨 Characteristic Pigments, ⚡ Virulence Factors, 🏥 Clinical Syndromes, 💊 Treatment, 👥 Special Populations, 📝 High-Yield Summary, 📚 Sources & Guidelines, microbiology, pathogenesis, virulence factors, clinical syndromes, antibiotic treatment, resistance"
+         data-objectives="Identify organism characteristics, understand disease mechanisms, select appropriate therapy"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

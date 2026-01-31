@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Tools | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; --primary-dark: #047857; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        
+        .nav { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 8px; }
+        .nav-link { padding: 8px 16px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.2s; }
+        .nav-link:hover { background: #f1f5f9; color: var(--text-primary); }
+        .nav-link.active { background: var(--primary); color: white; }
+
+        .header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 48px 24px; text-align: center; color: white; }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { font-size: 16px; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .content { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        
+        .quick-access { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .quick-access h2 { font-size: 18px; margin-bottom: 16px; color: #166534; }
+        .quick-links { display: flex; flex-wrap: wrap; gap: 12px; }
+        .quick-link { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border-radius: 10px; text-decoration: none; color: var(--text-primary); font-size: 14px; font-weight: 500; border: 1px solid #a7f3d0; }
+        .quick-link:hover { background: #f0fdf4; }
+        
+        .section-title { font-size: 18px; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 48px; }
+        
+        .tool-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; cursor: pointer; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+        .tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-color: var(--primary); }
+        .tool-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px; }
+        .tool-card h3 { font-size: 18px; margin-bottom: 8px; }
+        .tool-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+        .tool-tag { display: inline-block; padding: 4px 10px; background: #f1f5f9; border-radius: 12px; font-size: 11px; color: var(--text-secondary); margin-right: 4px; }
+        .tool-tag.new { background: #dcfce7; color: #166534; }
+        
+        .icon-blue { background: #dbeafe; }
+        .icon-green { background: #dcfce7; }
+        .icon-purple { background: #f3e8ff; }
+        .icon-orange { background: #ffedd5; }
+        .icon-pink { background: #fce7f3; }
+        .icon-cyan { background: #cffafe; }
+        .icon-yellow { background: #fef3c7; }
+        .icon-red { background: #fee2e2; }
+        /* Tour System Styles */
+        .dx-tour-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9998; }
+        .dx-tour-overlay.active { display: block; }
+        .dx-tour-spotlight { position: absolute; box-shadow: 0 0 0 9999px rgba(0,0,0,0.6); border-radius: 12px; z-index: 9999; pointer-events: none; transition: all 0.4s ease; display: none; }
+        .dx-tour-tooltip { display: none; position: fixed; width: 340px; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 10000; overflow: hidden; animation: tooltipIn 0.3s ease; }
+        .dx-tour-tooltip.active { display: block; }
+        @keyframes tooltipIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .dx-tour-tooltip-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; padding: 16px 20px; }
+        .dx-tour-step { font-size: 11px; opacity: 0.8; margin-bottom: 4px; }
+        .dx-tour-title { font-size: 18px; font-weight: 700; }
+        .dx-tour-tooltip-body { padding: 20px; }
+        .dx-tour-tooltip-body p { font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 16px; }
+        .dx-tour-tip { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #f0fdf4; border-radius: 10px; font-size: 13px; color: #166534; }
+        .dx-tour-tooltip-footer { padding: 16px 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .dx-tour-progress { display: flex; gap: 6px; }
+        .dx-tour-dot { width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0; }
+        .dx-tour-dot.active { background: var(--primary); }
+        .dx-tour-dot.completed { background: #a7f3d0; }
+        .dx-tour-buttons { display: flex; gap: 8px; }
+        .dx-tour-btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
+        .dx-tour-btn-back { background: #f1f5f9; color: #64748b; }
+        .dx-tour-btn-next { background: var(--primary); color: white; }
+        .dx-tour-skip { display: none; position: fixed; bottom: 24px; left: 24px; padding: 10px 20px; background: rgba(255,255,255,0.95); border: none; border-radius: 8px; font-size: 13px; color: #64748b; cursor: pointer; z-index: 10001; }
+        .dx-tour-skip.active { display: block; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">🩺 DxSuite</a>
+            <div class="nav-links">
+                <a href="../mechanism/index.html" class="nav-link">Learn</a>
+                <a href="index.html" class="nav-link active">Tools</a>
+                <a href="../ReasonDx/training.html" class="nav-link">Practice</a>
+                <a href="learning-dashboard.html" class="nav-link">My Progress</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>🛠️ Learning Tools</h1>
+        <p>Everything you need to study smarter and track your progress</p>
+    </header>
+
+    <main class="content">
+        <div class="quick-access">
+            <h2>⚡ Quick Access</h2>
+            <div class="quick-links">
+                <a href="learning-dashboard.html" class="quick-link">📊 My Dashboard</a>
+                <a href="calculator-hub.html" class="quick-link">🧮 Calculators</a>
+                <a href="flashcard-studio.html" class="quick-link">🎴 Flashcards</a>
+                <a href="study-planner.html" class="quick-link">📅 Study Planner</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">📊 Progress & Organization</h2>
+        <div class="tools-grid">
+            <a href="learning-dashboard.html" class="tool-card">
+                <div class="tool-icon icon-blue">📊</div>
+                <h3>Personal Dashboard</h3>
+                <p>Track progress, see weak areas, get personalized recommendations</p>
+                <span class="tool-tag">Progress</span>
+            </a>
+            <a href="study-planner.html" class="tool-card">
+                <div class="tool-icon icon-purple">📅</div>
+                <h3>Study Planner</h3>
+                <p>Create a personalized schedule based on your exam date</p>
+                <span class="tool-tag">Planning</span>
+            </a>
+            <a href="bookmarks-notes.html" class="tool-card">
+                <div class="tool-icon icon-pink">📌</div>
+                <h3>Bookmarks & Notes</h3>
+                <p>Save concepts, add personal notes, flag for review</p>
+                <span class="tool-tag">Organization</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">🧠 Active Learning</h2>
+        <div class="tools-grid">
+            <a href="flashcard-studio.html" class="tool-card">
+                <div class="tool-icon icon-orange">🎴</div>
+                <h3>Flashcard Studio</h3>
+                <p>Study with spaced repetition and create custom cards</p>
+                <span class="tool-tag new">Spaced Rep</span>
+            </a>
+            <a href="ddx-builder.html" class="tool-card">
+                <div class="tool-icon icon-cyan">🔍</div>
+                <h3>DDx Builder</h3>
+                <p>Enter symptoms to generate ranked differentials</p>
+                <span class="tool-tag">Reasoning</span>
+            </a>
+            <a href="sbar-trainer.html" class="tool-card">
+                <div class="tool-icon icon-yellow">💬</div>
+                <h3>SBAR Trainer</h3>
+                <p>Practice clinical communication skills</p>
+                <span class="tool-tag">Communication</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">🧮 Clinical Reference</h2>
+        <div class="tools-grid">
+            <a href="calculator-hub.html" class="tool-card">
+                <div class="tool-icon icon-green">🧮</div>
+                <h3>Clinical Calculator Hub</h3>
+                <p>18 essential formulas: CrCl, FENa, anion gap, A-a gradient, QTc, MELD</p>
+                <span class="tool-tag">18 Calculators</span>
+            </a>
+            <a href="abg-analyzer.html" class="tool-card">
+                <div class="tool-icon icon-red">🫁</div>
+                <h3>ABG Analyzer</h3>
+                <p>Step-by-step acid-base interpretation</p>
+                <span class="tool-tag">Analysis</span>
+            </a>
+            <a href="ecg-integration.html" class="tool-card">
+                <div class="tool-icon icon-red">❤️</div>
+                <h3>ECG Trainer</h3>
+                <p>Practice ECG interpretation</p>
+                <span class="tool-tag">Cardiology</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">📝 Clinical Practice</h2>
+        <div class="tools-grid">
+            <a href="emr-simulator.html" class="tool-card">
+                <div class="tool-icon icon-blue">🖥️</div>
+                <h3>EMR Simulator</h3>
+                <p>Practice navigating electronic medical records</p>
+                <span class="tool-tag">Simulation</span>
+            </a>
+            <a href="referral-letter-generator.html" class="tool-card">
+                <div class="tool-icon icon-purple">✉️</div>
+                <h3>Referral Letter Generator</h3>
+                <p>Create professional referral letters</p>
+                <span class="tool-tag">Documentation</span>
+            </a>
+        </div>
+
+        <div style="text-align: center; padding: 32px; color: var(--text-secondary); font-size: 14px;">
+            <p>💡 Tip: All tools are accessible from anywhere in the platform via the top navigation</p>
+            <p style="margin-top: 8px;"><a href="#" onclick="startTour(); return false;" style="color: var(--primary);">Take the Tools Tour</a></p>
+        </div>
+    </main>
+
+    <!-- Tour Elements -->
+    <div class="dx-tour-overlay" id="tourOverlay"></div>
+    <div class="dx-tour-spotlight" id="tourSpotlight"></div>
+    <div class="dx-tour-tooltip" id="tourTooltip">
+        <div class="dx-tour-tooltip-header">
+            <div class="dx-tour-step" id="tourStep"></div>
+            <div class="dx-tour-title" id="tourTitle"></div>
+        </div>
+        <div class="dx-tour-tooltip-body">
+            <p id="tourDesc"></p>
+            <div class="dx-tour-tip"><span>💡</span><span id="tourTip"></span></div>
+        </div>
+        <div class="dx-tour-tooltip-footer">
+            <div class="dx-tour-progress" id="tourProgress"></div>
+            <div class="dx-tour-buttons">
+                <button class="dx-tour-btn dx-tour-btn-back" id="tourBack" onclick="prevStep()">Back</button>
+                <button class="dx-tour-btn dx-tour-btn-next" id="tourNext" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+    </div>
+    <button class="dx-tour-skip" id="tourSkip" onclick="endTour()">✕ Skip Tour</button>
+
+    <script>
+        // Add IDs to tool cards for tour targeting
+        document.querySelectorAll('.tool-card')[0].id = 'tour-dashboard';
+        document.querySelectorAll('.tool-card')[1].id = 'tour-planner';
+        document.querySelectorAll('.tool-card')[3].id = 'tour-flashcards';
+        document.querySelectorAll('.tool-card')[4].id = 'tour-ddx';
+        document.querySelectorAll('.tool-card')[6].id = 'tour-calculator';
+        document.querySelector('.quick-access').id = 'tour-quickaccess';
+
+        const tourSteps = [
+            { target: 'tour-quickaccess', title: '⚡ Quick Access Bar', desc: 'Your most-used tools are always one click away. Dashboard, calculators, flashcards, and study planner.', tip: 'Bookmark this page for fast access to all tools.', pos: 'bottom' },
+            { target: 'tour-dashboard', title: '📊 Personal Dashboard', desc: 'Track your progress across all modules. See your strengths, identify weak areas, and get AI-powered recommendations.', tip: 'Check your dashboard weekly to stay on track.', pos: 'right' },
+            { target: 'tour-planner', title: '📅 Study Planner', desc: 'Enter your exam date and get a personalized day-by-day study schedule. Adapts based on your progress.', tip: 'Start by setting your target exam date.', pos: 'left' },
+            { target: 'tour-flashcards', title: '🎴 Flashcard Studio', desc: 'Spaced repetition flashcards that adapt to your performance. Create custom decks or use pre-built ones.', tip: 'Even 10 minutes of flashcards daily makes a huge difference.', pos: 'right' },
+            { target: 'tour-ddx', title: '🔍 DDx Builder', desc: 'Enter symptoms to generate a ranked differential diagnosis. Great for practicing clinical reasoning.', tip: 'Use this after seeing a patient to reinforce learning.', pos: 'left' },
+            { target: 'tour-calculator', title: '🧮 Calculator Hub', desc: '18 essential clinical calculators: CrCl, FENa, anion gap, A-a gradient, corrected calcium, and more.', tip: 'These are the same formulas you\'ll use on rotations.', pos: 'right' }
+        ];
+
+        let currentStep = 0, tourActive = false;
+
+        function startTour() {
+            currentStep = 0; tourActive = true;
+            document.getElementById('tourOverlay').classList.add('active');
+            document.getElementById('tourTooltip').classList.add('active');
+            document.getElementById('tourSkip').classList.add('active');
+            showStep(0);
+        }
+
+        function endTour() {
+            tourActive = false;
+            document.getElementById('tourOverlay').classList.remove('active');
+            document.getElementById('tourTooltip').classList.remove('active');
+            document.getElementById('tourSkip').classList.remove('active');
+            document.getElementById('tourSpotlight').style.display = 'none';
+            localStorage.setItem('dxsuite-tools-tour', 'done');
+        }
+
+        function showStep(i) {
+            const step = tourSteps[i], target = document.getElementById(step.target);
+            if (!target) return;
+            const rect = target.getBoundingClientRect();
+            
+            document.getElementById('tourStep').textContent = `Step ${i+1} of ${tourSteps.length}`;
+            document.getElementById('tourTitle').textContent = step.title;
+            document.getElementById('tourDesc').textContent = step.desc;
+            document.getElementById('tourTip').textContent = step.tip;
+            
+            document.getElementById('tourProgress').innerHTML = tourSteps.map((_,j) => 
+                `<span class="dx-tour-dot ${j<i?'completed':''} ${j===i?'active':''}"></span>`
+            ).join('');
+            
+            document.getElementById('tourBack').style.display = i === 0 ? 'none' : 'block';
+            document.getElementById('tourNext').textContent = i === tourSteps.length - 1 ? 'Finish' : 'Next';
+            
+            const spot = document.getElementById('tourSpotlight');
+            spot.style.cssText = `display:block;top:${rect.top+window.scrollY-8}px;left:${rect.left-8}px;width:${rect.width+16}px;height:${rect.height+16}px;`;
+            
+            const tooltip = document.getElementById('tourTooltip');
+            let top = rect.top + window.scrollY, left = step.pos === 'right' ? rect.right + 20 : rect.left - 360;
+            if (step.pos === 'bottom') { top = rect.bottom + window.scrollY + 20; left = rect.left; }
+            tooltip.style.top = top + 'px';
+            tooltip.style.left = Math.max(20, Math.min(left, window.innerWidth - 360)) + 'px';
+            
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function nextStep() { if (currentStep < tourSteps.length - 1) { currentStep++; showStep(currentStep); } else endTour(); }
+        function prevStep() { if (currentStep > 0) { currentStep--; showStep(currentStep); } }
+        
+        document.addEventListener('keydown', e => {
+            if (!tourActive) return;
+            if (e.key === 'ArrowRight' || e.key === 'Enter') nextStep();
+            else if (e.key === 'ArrowLeft') prevStep();
+            else if (e.key === 'Escape') endTour();
+        });
+
+        // Auto-start on first visit
+        if (!localStorage.getItem('dxsuite-tools-tour')) setTimeout(startTour, 800);
+    </script>
+</body>
+</html>

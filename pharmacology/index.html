@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmacologyDx | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-bg: #eff6ff;
+            --secondary: #059669;
+            --tertiary: #7c3aed;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; }
+        .nav-link:hover { background: var(--border); }
+        .nav-link.active { background: var(--primary); color: white; }
+        
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 60px 24px; text-align: center; }
+        .hero h1 { font-size: 42px; color: white; margin-bottom: 12px; }
+        .hero p { font-size: 18px; color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 24px; }
+        .hero-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .hero-badge { background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 13px; color: white; }
+        
+        .content { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        
+        .stats-bar { display: flex; justify-content: center; gap: 32px; padding: 24px; background: var(--bg-card); border-radius: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: var(--text-secondary); }
+        
+        .category-section { margin-bottom: 48px; }
+        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .category-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .category-icon.antimicrobial { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+        .category-icon.cardio { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+        .category-icon.neuro { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+        .category-icon.endo { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+        .category-icon.tox { background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); }
+        .category-title h2 { font-size: 24px; color: var(--text-primary); }
+        .category-title p { font-size: 14px; color: var(--text-secondary); }
+        
+        .drug-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .drug-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: all 0.2s; text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+        .drug-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .drug-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+        .drug-card.antimicrobial::before { background: var(--secondary); }
+        .drug-card.cardio::before { background: var(--danger); }
+        .drug-card.neuro::before { background: var(--tertiary); }
+        .drug-card.endo::before { background: var(--warning); }
+        .drug-card.tox::before { background: var(--primary); }
+        
+        .drug-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .drug-subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+        .drug-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .drug-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: #f4f4f5; color: var(--text-secondary); }
+        .drug-tag.high-yield { background: #fef3c7; color: #92400e; }
+        .drug-tag.mcat { background: #dbeafe; color: #1e40af; }
+        .drug-tag.step1 { background: #ede9fe; color: #5b21b6; }
+        .drug-mechanism { font-size: 12px; color: var(--text-secondary); }
+        
+        .coming-soon { opacity: 0.6; pointer-events: none; }
+        .coming-soon::after { content: 'Coming Soon'; position: absolute; top: 10px; right: 10px; font-size: 10px; background: var(--border); padding: 2px 8px; border-radius: 4px; }
+        
+        .principles-section { background: linear-gradient(135deg, var(--primary-bg) 0%, #dbeafe 100%); border-radius: 16px; padding: 32px; margin-bottom: 48px; }
+        .principles-section h2 { color: var(--primary); margin-bottom: 8px; }
+        .principles-section > p { color: var(--primary-dark); margin-bottom: 20px; }
+        .principles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .principle-card { background: white; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; border: 1px solid #bfdbfe; transition: all 0.2s; }
+        .principle-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .principle-card h4 { color: var(--primary); font-size: 14px; margin-bottom: 4px; }
+        .principle-card p { font-size: 12px; color: #3b82f6; margin: 0; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .stats-bar { gap: 20px; }
+            .stat-value { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">💊 PharmacologyDx</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">DxSuite Home</a>
+                <a href="../microbiology/index.html" class="nav-link">Microbiology</a>
+                <a href="index.html" class="nav-link active">Pharmacology</a>
+                <a href="../CoachDx/index.html" class="nav-link">CoachDx</a>
+                <a href="../ReasonDx/index.html" class="nav-link">ReasonDx</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>💊 PharmacologyDx</h1>
+        <p>Drug mechanisms, clinical applications, and toxicity. Learn pharmacology by mechanism - the way it makes sense.</p>
+        <div class="hero-badges">
+            <span class="hero-badge">📚 MCAT Prep</span>
+            <span class="hero-badge">🎓 Pre-Med & Masters</span>
+            <span class="hero-badge">⚕️ Step 1 & 2</span>
+            <span class="hero-badge">🏥 Clinical Rotations</span>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Drug Classes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">15</div>
+                <div class="stat-label">Mechanism Categories</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Clinical Pearls</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Micro Links</div>
+            </div>
+        </div>
+
+        <!-- Core Principles -->
+        <section class="principles-section">
+            <h2>🧬 Core Pharmacology Principles</h2>
+            <p>Foundational concepts for MCAT and beyond - master these first</p>
+            <div class="principles-grid">
+                <a href="principles/pharmacokinetics.html" class="principle-card">
+                    <h4>Pharmacokinetics (ADME)</h4>
+                    <p>Absorption, Distribution, Metabolism, Excretion</p>
+                </a>
+                <a href="principles/pharmacodynamics.html" class="principle-card">
+                    <h4>Pharmacodynamics</h4>
+                    <p>Receptors, dose-response, agonists/antagonists</p>
+                </a>
+                <a href="principles/drug-metabolism.html" class="principle-card">
+                    <h4>Drug Metabolism</h4>
+                    <p>CYP450, Phase I/II reactions, interactions</p>
+                </a>
+                <a href="principles/autonomic-pharmacology.html" class="principle-card">
+                    <h4>Autonomic Pharmacology</h4>
+                    <p>Sympathetic vs parasympathetic drugs</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Antimicrobials -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon antimicrobial">🦠</div>
+                <div class="category-title">
+                    <h2>Antimicrobials</h2>
+                    <p>Antibacterials, antivirals, antifungals, antiparasitics</p>
+                </div>
+            </div>
+            <div class="drug-grid">
+                <a href="beta-lactams.html" class="drug-card antimicrobial">
+                    <div class="drug-name">Beta-Lactam Antibiotics</div>
+                    <div class="drug-subtitle">Penicillins, Cephalosporins, Carbapenems</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag mcat">MCAT</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Inhibit PBPs → prevent cell wall synthesis</div>
+                </a>
+                <a href="vancomycin.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Vancomycin & Glycopeptides</div>
+                    <div class="drug-subtitle">Cell wall synthesis inhibitors</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Bind D-ala-D-ala → block transglycosylation</div>
+                </a>
+                <a href="aminoglycosides.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Aminoglycosides</div>
+                    <div class="drug-subtitle">Gentamicin, Tobramycin, Amikacin</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag mcat">MCAT</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Bind 30S ribosome → bactericidal</div>
+                </a>
+                <a href="fluoroquinolones.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Fluoroquinolones</div>
+                    <div class="drug-subtitle">Ciprofloxacin, Levofloxacin, Moxifloxacin</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Inhibit DNA gyrase & topoisomerase IV</div>
+                </a>
+                <a href="macrolides.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Macrolides</div>
+                    <div class="drug-subtitle">Azithromycin, Clarithromycin, Erythromycin</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag mcat">MCAT</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Bind 50S ribosome → bacteriostatic</div>
+                </a>
+                <a href="tetracyclines.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Tetracyclines</div>
+                    <div class="drug-subtitle">Doxycycline, Minocycline, Tigecycline</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag mcat">MCAT</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Bind 30S ribosome → bacteriostatic</div>
+                </a>
+                <a href="antifungals.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Antifungal Agents</div>
+                    <div class="drug-subtitle">Azoles, Echinocandins, Amphotericin B</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Target ergosterol or cell wall</div>
+                </a>
+                <a href="antivirals.html" class="drug-card antimicrobial coming-soon">
+                    <div class="drug-name">Antiviral Agents</div>
+                    <div class="drug-subtitle">Acyclovir, Oseltamivir, HIV drugs</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Target viral replication steps</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Cardiovascular -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon cardio">❤️</div>
+                <div class="category-title">
+                    <h2>Cardiovascular Pharmacology</h2>
+                    <p>Antihypertensives, antiarrhythmics, anticoagulants, heart failure drugs</p>
+                </div>
+            </div>
+            <div class="drug-grid">
+                <a href="ace-inhibitors-arbs.html" class="drug-card cardio coming-soon">
+                    <div class="drug-name">ACE Inhibitors & ARBs</div>
+                    <div class="drug-subtitle">Lisinopril, Losartan</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag mcat">MCAT</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Block RAAS system</div>
+                </a>
+                <a href="beta-blockers.html" class="drug-card cardio coming-soon">
+                    <div class="drug-name">Beta-Blockers</div>
+                    <div class="drug-subtitle">Metoprolol, Carvedilol, Atenolol</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag mcat">MCAT</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Block β-adrenergic receptors</div>
+                </a>
+                <a href="calcium-channel-blockers.html" class="drug-card cardio coming-soon">
+                    <div class="drug-name">Calcium Channel Blockers</div>
+                    <div class="drug-subtitle">Amlodipine, Diltiazem, Verapamil</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag mcat">MCAT</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Block L-type Ca²⁺ channels</div>
+                </a>
+                <a href="diuretics.html" class="drug-card cardio coming-soon">
+                    <div class="drug-name">Diuretics</div>
+                    <div class="drug-subtitle">Loop, Thiazide, K⁺-sparing</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag mcat">MCAT</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Inhibit renal Na⁺ reabsorption</div>
+                </a>
+                <a href="anticoagulants.html" class="drug-card cardio coming-soon">
+                    <div class="drug-name">Anticoagulants</div>
+                    <div class="drug-subtitle">Warfarin, Heparin, DOACs</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Inhibit clotting cascade</div>
+                </a>
+                <a href="antiarrhythmics.html" class="drug-card cardio coming-soon">
+                    <div class="drug-name">Antiarrhythmics</div>
+                    <div class="drug-subtitle">Vaughan-Williams Classification</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Alter cardiac ion channels</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Neuropsychiatric -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon neuro">🧠</div>
+                <div class="category-title">
+                    <h2>Neuropsychiatric Pharmacology</h2>
+                    <p>Antidepressants, antipsychotics, anxiolytics, anticonvulsants</p>
+                </div>
+            </div>
+            <div class="drug-grid">
+                <a href="antidepressants.html" class="drug-card neuro coming-soon">
+                    <div class="drug-name">Antidepressants</div>
+                    <div class="drug-subtitle">SSRIs, SNRIs, TCAs, MAOIs</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Modulate serotonin/NE signaling</div>
+                </a>
+                <a href="antipsychotics.html" class="drug-card neuro coming-soon">
+                    <div class="drug-name">Antipsychotics</div>
+                    <div class="drug-subtitle">Typical vs Atypical</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Block D2 receptors (± 5-HT2A)</div>
+                </a>
+                <a href="anxiolytics-sedatives.html" class="drug-card neuro coming-soon">
+                    <div class="drug-name">Anxiolytics & Sedatives</div>
+                    <div class="drug-subtitle">Benzodiazepines, Buspirone</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag mcat">MCAT</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Enhance GABA-A signaling</div>
+                </a>
+                <a href="anticonvulsants.html" class="drug-card neuro coming-soon">
+                    <div class="drug-name">Anticonvulsants</div>
+                    <div class="drug-subtitle">Mechanism-based selection</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Na⁺ channels, GABA, Ca²⁺, SV2A</div>
+                </a>
+                <a href="parkinsons-drugs.html" class="drug-card neuro coming-soon">
+                    <div class="drug-name">Parkinson's Drugs</div>
+                    <div class="drug-subtitle">Levodopa, dopamine agonists</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Mechanism: Restore dopamine signaling</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Toxicology -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon tox">☠️</div>
+                <div class="category-title">
+                    <h2>Toxicology & Antidotes</h2>
+                    <p>Toxidromes, overdoses, and their specific antidotes</p>
+                </div>
+            </div>
+            <div class="drug-grid">
+                <a href="antidotes.html" class="drug-card tox coming-soon">
+                    <div class="drug-name">Antidotes</div>
+                    <div class="drug-subtitle">NAC, Flumazenil, Naloxone, etc.</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Poison → Antidote matching</div>
+                </a>
+                <a href="toxidromes.html" class="drug-card tox coming-soon">
+                    <div class="drug-name">Toxidromes</div>
+                    <div class="drug-subtitle">Recognition patterns</div>
+                    <div class="drug-tags">
+                        <span class="drug-tag high-yield">High Yield</span>
+                        <span class="drug-tag step1">Step 1</span>
+                    </div>
+                    <div class="drug-mechanism">Anticholinergic, cholinergic, sympathomimetic, opioid</div>
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

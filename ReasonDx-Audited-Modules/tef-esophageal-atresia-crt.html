@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Drooling Newborn | TEF/EA | ReasonDx CRT</title>
+  <style>
+    :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #0EA5E9; --success: #10B981; --danger: #DC2626; --info: #A855F7; --warning: #F59E0B; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    .header { background: linear-gradient(135deg, #0369A1, #0EA5E9); padding: 14px 20px; position: sticky; top: 0; z-index: 100; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; }
+    .header-title { font-size: 1.15rem; font-weight: 600; }
+    .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 6px; font-size: 0.7rem; margin-left: 10px; }
+    .stats { display: flex; gap: 14px; }
+    .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+    .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+    .stat-label { font-size: 0.6rem; opacity: 0.8; }
+    .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+    .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+    .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+    .card-title { font-size: 1.4rem; font-weight: 700; margin-top: 4px; }
+    .card-body { padding: 24px; }
+    .narrative { background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(6,182,212,0.1)); border-left: 4px solid var(--accent); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px; }
+    .hl { background: rgba(14,165,233,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+    .findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 20px 0; }
+    .finding { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+    .finding.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+    .finding-label { font-size: 0.7rem; color: var(--muted); }
+    .finding-value { font-size: 1.1rem; font-weight: 600; font-family: monospace; }
+    .choices { display: grid; gap: 12px; margin-top: 20px; }
+    .choice { background: var(--card); border: 2px solid var(--border); padding: 16px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
+    .choice:hover { border-color: var(--accent); transform: translateX(4px); }
+    .choice.correct { border-color: var(--success); background: rgba(16,185,129,0.2); }
+    .choice.wrong { border-color: var(--danger); background: rgba(220,38,38,0.2); }
+    .choice-icon { font-size: 1.5rem; }
+    .choice-title { font-weight: 600; }
+    .choice-desc { font-size: 0.85rem; color: var(--muted); }
+    .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 12px; }
+    .feedback.show { display: block; }
+    .feedback.good { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+    .feedback.bad { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+    .teaching { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 16px; margin: 20px 0; }
+    .teaching h4 { color: var(--info); margin-bottom: 8px; }
+    .alert { padding: 16px; border-radius: 12px; margin: 20px 0; display: flex; gap: 12px; }
+    .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+    .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+    .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+    .alert-icon { font-size: 1.5rem; }
+    .hidden { display: none !important; }
+    .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+    .btn-primary { background: var(--accent); color: white; }
+    .outcome { text-align: center; padding: 30px; }
+    .outcome-icon { font-size: 4rem; }
+    .outcome-title { font-size: 1.8rem; font-weight: 700; color: var(--success); margin: 12px 0; }
+    .xray-box { background: #000; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; font-family: monospace; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">🤤 The Drooling Newborn<span class="badge">SURGICAL EMERGENCY</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="stage">1/7</div><div class="stat-label">Stage</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 14%"></div></div>
+
+    <!-- STAGE 1 -->
+    <div id="s1" class="stage">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 1 of 7</div>
+          <div class="card-title">🚨 Delivery Room</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            You're called to attend a delivery for a mother with <span class="hl">polyhydramnios</span> noted on prenatal ultrasound. Baby is born at 38 weeks. Within minutes, the nurse notes the infant has <span class="hl">excessive drooling</span> and appears to be <span class="hl">"foaming at the mouth."</span>
+          </div>
+          
+          <div class="findings">
+            <div class="finding critical"><div class="finding-label">Drooling</div><div class="finding-value">Excessive</div></div>
+            <div class="finding critical"><div class="finding-label">Prenatal</div><div class="finding-value">Polyhydramnios</div></div>
+            <div class="finding"><div class="finding-label">Gestational Age</div><div class="finding-value">38 weeks</div></div>
+          </div>
+
+          <div class="alert warning">
+            <div class="alert-icon">💡</div>
+            <div>
+              <div class="alert-title">Key Connection</div>
+              <div class="alert-desc">Why would polyhydramnios and excessive drooling occur together?</div>
+            </div>
+          </div>
+
+          <p style="margin-bottom:16px;font-weight:600;">What is your leading diagnosis?</p>
+
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🔴</div><div><div class="choice-title">Esophageal atresia ± TEF</div><div class="choice-desc">Can't swallow → polyhydramnios; saliva pools → drooling</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🫁</div><div><div class="choice-title">Congenital diaphragmatic hernia</div><div class="choice-desc">Would cause respiratory distress, scaphoid abdomen</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🧠</div><div><div class="choice-title">Neurologic injury</div><div class="choice-desc">Would expect other signs (hypotonia, seizures)</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">💧</div><div><div class="choice-title">Cleft palate</div><div class="choice-desc">Would be visible on exam; doesn't explain polyhydramnios fully</div></div></div>
+          </div>
+          <div class="feedback" id="f1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="s2" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 2 of 7</div>
+          <div class="card-title">🔬 Understanding the Embryology</div>
+        </div>
+        <div class="card-body">
+          <div class="teaching">
+            <h4>💡 Tracheoesophageal Septum</h4>
+            <p>During week 4, the foregut divides into ventral (respiratory) and dorsal (esophageal) portions via the <strong>tracheoesophageal septum</strong>. Abnormal septation causes TEF/EA.</p>
+          </div>
+
+          <p style="margin-bottom:16px">The MOST COMMON type of TEF/EA (85%) has which configuration?</p>
+          
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">1️⃣</div><div><div class="choice-title">Pure EA without fistula</div><div class="choice-desc">No connection between esophagus and trachea</div></div></div>
+            <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">2️⃣</div><div><div class="choice-title">Proximal EA + distal TEF</div><div class="choice-desc">Blind proximal pouch; distal esophagus connects to trachea</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">3️⃣</div><div><div class="choice-title">H-type TEF (no atresia)</div><div class="choice-desc">Both esophagus and trachea are patent with connecting fistula</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">4️⃣</div><div><div class="choice-title">Proximal TEF + distal EA</div><div class="choice-desc">Proximal esophagus connects to trachea</div></div></div>
+          </div>
+          <div class="feedback" id="f2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div id="s3" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 3 of 7</div>
+          <div class="card-title">🩺 First Feed Attempt</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            The nurse attempts the first feed. After a few sucks, the baby immediately <span class="hl">coughs, chokes, and turns cyanotic</span>. Oxygen saturation drops to 75%. Suctioning the mouth produces copious secretions but baby recovers once feeding is stopped.
+          </div>
+
+          <div class="alert danger">
+            <div class="alert-icon">⚠️</div>
+            <div>
+              <div class="alert-title">Classic Presentation</div>
+              <div class="alert-desc">The "3 C's" of TEF/EA: Coughing, Choking, Cyanosis with feeding</div>
+            </div>
+          </div>
+
+          <p style="margin-bottom:16px;font-weight:600;">What is your next diagnostic step?</p>
+
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">🔧</div><div><div class="choice-title">Attempt to pass NG/OG tube</div><div class="choice-desc">Quick bedside test - will coil in blind pouch</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🥛</div><div><div class="choice-title">Try smaller, slower feeds</div><div class="choice-desc">Dangerous - aspiration risk</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">📷</div><div><div class="choice-title">Go straight to CT scan</div><div class="choice-desc">Unnecessary radiation; diagnosis can be made more simply</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🩻</div><div><div class="choice-title">Barium swallow study</div><div class="choice-desc">Aspiration risk; contraindicated before confirming anatomy</div></div></div>
+          </div>
+          <div class="feedback" id="f3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div id="s4" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 4 of 7</div>
+          <div class="card-title">📷 Imaging Findings</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            You attempt to pass a 10Fr OG tube. It meets resistance and <span class="hl">cannot advance past 10cm</span>. Chest X-ray is obtained.
+          </div>
+
+          <div class="xray-box">
+            <p style="margin-bottom: 10px;">📋 CHEST X-RAY FINDINGS:</p>
+            <p>• OG tube coiled in upper esophagus (blind pouch)</p>
+            <p>• Gas present in stomach and bowel</p>
+            <p>• No other obvious abnormalities</p>
+          </div>
+
+          <p style="margin-bottom:16px;font-weight:600;">Gas in the stomach confirms which TEF type?</p>
+
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🚫</div><div><div class="choice-title">Pure EA without fistula</div><div class="choice-desc">Would have gasless abdomen</div></div></div>
+            <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">✅</div><div><div class="choice-title">EA with distal TEF</div><div class="choice-desc">Air enters stomach via fistula from trachea</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">📏</div><div><div class="choice-title">H-type fistula</div><div class="choice-desc">Would not have blind pouch (tube would pass)</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">❓</div><div><div class="choice-title">Cannot determine from this information</div><div class="choice-desc">Presence of gas is diagnostic</div></div></div>
+          </div>
+          <div class="feedback" id="f4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div id="s5" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 5 of 7</div>
+          <div class="card-title">🔍 VACTERL Workup</div>
+        </div>
+        <div class="card-body">
+          <div class="teaching">
+            <h4>💡 VACTERL Association</h4>
+            <p>TEF/EA is associated with other midline defects. Must evaluate for:</p>
+            <ul style="margin-top: 8px; margin-left: 20px;">
+              <li><strong>V</strong>ertebral anomalies</li>
+              <li><strong>A</strong>norectal malformations</li>
+              <li><strong>C</strong>ardiac defects</li>
+              <li><strong>T</strong>racheo<strong>E</strong>sophageal fistula (index finding)</li>
+              <li><strong>R</strong>enal anomalies</li>
+              <li><strong>L</strong>imb defects (radial ray)</li>
+            </ul>
+          </div>
+
+          <p style="margin-bottom:16px;font-weight:600;">Which additional workup is MOST IMPORTANT before surgical repair?</p>
+
+          <div class="choices" id="c5">
+            <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">❤️</div><div><div class="choice-title">Echocardiogram</div><div class="choice-desc">Cardiac defects in 30-40%; affects surgical approach</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🦴</div><div><div class="choice-title">Spine X-ray</div><div class="choice-desc">Important but less urgent than cardiac</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🧬</div><div><div class="choice-title">Chromosomal analysis</div><div class="choice-desc">Can be done but shouldn't delay surgery</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🧠</div><div><div class="choice-title">Brain MRI</div><div class="choice-desc">Not part of VACTERL workup</div></div></div>
+          </div>
+          <div class="feedback" id="f5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 6 -->
+    <div id="s6" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 6 of 7</div>
+          <div class="card-title">⚕️ Pre-Operative Management</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            Echo shows a small VSD. Renal ultrasound is normal. The surgical team is preparing for repair. What is the KEY pre-operative management?
+          </div>
+
+          <p style="margin-bottom:16px;font-weight:600;">Which position and intervention prevents aspiration?</p>
+
+          <div class="choices" id="c6">
+            <div class="choice" onclick="check(6,this,true)"><div class="choice-icon">📐</div><div><div class="choice-title">Head elevated + continuous suction of upper pouch</div><div class="choice-desc">Prevents pooled secretions from overflowing into airway</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">⬇️</div><div><div class="choice-title">Head down (Trendelenburg)</div><div class="choice-desc">Would worsen aspiration risk</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">🍼</div><div><div class="choice-title">Small trial feeds</div><div class="choice-desc">Absolutely contraindicated - aspiration</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">💨</div><div><div class="choice-title">High-flow oxygen via mask</div><div class="choice-desc">May distend stomach via fistula; doesn't address secretions</div></div></div>
+          </div>
+          <div class="feedback" id="f6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 7 -->
+    <div id="s7" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 7 of 7</div>
+          <div class="card-title">🎓 Case Complete</div>
+        </div>
+        <div class="card-body">
+          <div class="outcome">
+            <div class="outcome-icon">🎉</div>
+            <div class="outcome-title">Excellent Work!</div>
+            <p style="color:var(--muted);">You correctly diagnosed and managed TEF/EA.</p>
+          </div>
+
+          <div class="teaching">
+            <h4>🔑 Key Learning Points</h4>
+            <ul style="margin: 10px 0 0 20px;">
+              <li><strong>Embryology:</strong> Failure of tracheoesophageal septum formation (week 4)</li>
+              <li><strong>Most common type (85%):</strong> Proximal EA + distal TEF</li>
+              <li><strong>Prenatal clue:</strong> Polyhydramnios (can't swallow amniotic fluid)</li>
+              <li><strong>Clinical triad:</strong> Drooling, choking/coughing with feeds, cyanosis</li>
+              <li><strong>Diagnosis:</strong> Unable to pass NG tube → coiled on X-ray</li>
+              <li><strong>Gas in stomach:</strong> Confirms distal TEF (air enters via fistula)</li>
+              <li><strong>VACTERL workup:</strong> Echo most important (30-40% cardiac defects)</li>
+              <li><strong>Management:</strong> NPO, head up, continuous suction of upper pouch</li>
+              <li><strong>Surgery:</strong> Fistula ligation + esophageal anastomosis</li>
+            </ul>
+          </div>
+
+          <div class="teaching" style="background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.3);">
+            <h4 style="color: var(--warning);">⚠️ Complications to Know</h4>
+            <ul style="margin: 10px 0 0 20px;">
+              <li><strong>Anastomotic leak:</strong> Most serious early complication</li>
+              <li><strong>Stricture:</strong> May require dilation</li>
+              <li><strong>Recurrent fistula:</strong> Rare but serious</li>
+              <li><strong>Tracheomalacia:</strong> Common; usually improves</li>
+              <li><strong>GERD:</strong> Very common; dysmotility persists</li>
+            </ul>
+          </div>
+
+          <div class="alert success">
+            <div class="alert-icon">📊</div>
+            <div><div class="alert-title">Final Score: <span id="final">0</span>/600</div></div>
+          </div>
+
+          <div style="text-align:center;margin-top:24px;">
+            <button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    const fb = {
+      1: { y: "Correct! Polyhydramnios + excessive drooling is classic for esophageal atresia. The fetus can't swallow amniotic fluid (→ polyhydramnios) and after birth, saliva pools in the blind pouch and overflows (→ drooling/foaming).", n: "The combination of polyhydramnios and excessive drooling strongly suggests esophageal atresia. The fetus couldn't swallow amniotic fluid in utero, and now saliva pools in a blind esophageal pouch." },
+      2: { y: "Correct! Proximal EA with distal TEF accounts for ~85% of cases. The proximal esophagus ends in a blind pouch, while the distal esophagus connects to the trachea. This allows air into the stomach but prevents swallowing.", n: "The most common type (85%) is proximal EA with distal TEF. Pure EA without fistula is only ~8%. H-type (fistula without atresia) is ~4% and presents later with recurrent pneumonia." },
+      3: { y: "Correct! Attempting to pass an NG/OG tube is the key diagnostic test. In EA, the tube will meet resistance and coil in the blind proximal pouch. X-ray confirms the coiled tube position.", n: "Passing an NG/OG tube is the quickest and safest diagnostic test. It will coil in the blind pouch. Never attempt feeds or contrast studies until anatomy is confirmed." },
+      4: { y: "Correct! Gas in the stomach/bowel confirms a distal TEF. Air enters the GI tract via the fistula between the distal esophagus and trachea. Pure EA without fistula would show a gasless abdomen.", n: "Gas in the stomach means air is entering via a distal TEF. In pure EA without fistula, the abdomen would be gasless. This distinction affects surgical planning." },
+      5: { y: "Correct! Echocardiogram is most important - cardiac defects occur in 30-40% and may affect surgical approach (especially aortic arch sidedness). All VACTERL components should be evaluated, but cardiac is prioritized.", n: "Cardiac defects are the most common VACTERL association (30-40%) and most impact surgical planning. Echo should be done before repair. Other workup (renal US, spine films) is also needed but less urgent." },
+      6: { y: "Correct! Head-elevated position + continuous suction (Replogle tube) of the upper pouch prevents secretions from overflowing into the airway. This is critical management while awaiting surgery.", n: "Key pre-op management: Head elevated to prevent aspiration, continuous suction of upper pouch to remove pooling secretions. NPO is essential - no feeds until surgical repair." }
+    };
+
+    function check(n, el, ok) {
+      document.querySelectorAll(`#c${n} .choice`).forEach(c => {
+        c.style.pointerEvents = 'none';
+        if (c.onclick.toString().includes('true')) c.classList.add('correct');
+      });
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if (ok) score += 100;
+      document.getElementById('score').textContent = score;
+      const f = document.getElementById(`f${n}`);
+      f.className = `feedback show ${ok ? 'good' : 'bad'}`;
+      f.innerHTML = `<strong>${ok ? '✅ Correct! +100' : '❌ Not quite'}</strong><br><br>${ok ? fb[n].y : fb[n].n}`;
+      setTimeout(() => {
+        document.getElementById(`s${n}`).classList.add('hidden');
+        document.getElementById(`s${n+1}`).classList.remove('hidden');
+        document.getElementById('stage').textContent = `${n+1}/7`;
+        document.getElementById('progress').style.width = `${((n+1)/7)*100}%`;
+        if (n+1 === 7) document.getElementById('final').textContent = score;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }, 2500);
+    }
+  </script>
+
+    <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK535361/" target="_blank">🔗 NCBI - Esophageal Atresia</a>
+          <a class="resource-link" href="https://rarediseases.info.nih.gov/diseases/6382/esophageal-atresia" target="_blank">🔗 NIH GARD - EA/TEF</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on NCBI and NIH resources.</div>
+      </div>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="The Drooling Newborn"
+         data-key-points="📚 Open-Access Learning Resources, Educational Resources, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

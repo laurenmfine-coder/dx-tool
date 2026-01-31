@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Yellow Baby | Neonatal Jaundice | ReasonDx CRT</title>
+  <style>
+    :root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F59E0B;--success:#10B981;--danger:#DC2626;--info:#3B82F6}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+    .header{background:linear-gradient(135deg,#92400E,#F59E0B);padding:14px 20px;position:sticky;top:0;z-index:100}
+    .header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
+    .header-title{font-size:1.1rem;font-weight:600;color:#1F2937}
+    .badge{background:rgba(0,0,0,0.2);padding:4px 10px;border-radius:6px;font-size:0.7rem;margin-left:8px;color:#1F2937}
+    .stats{display:flex;gap:12px}
+    .stat{text-align:center;background:rgba(0,0,0,0.2);padding:5px 12px;border-radius:8px}
+    .stat-value{font-size:1rem;font-weight:700;font-family:monospace;color:#1F2937}
+    .stat-label{font-size:0.6rem;color:#1F2937}
+    .main{max-width:900px;margin:0 auto;padding:20px}
+    .progress-bar{height:5px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:16px}
+    .progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.3s}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:16px}
+    .card-header{padding:16px 20px;border-bottom:1px solid var(--border)}
+    .card-phase{font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
+    .card-title{font-size:1.25rem;font-weight:700;margin-top:4px}
+    .card-body{padding:20px}
+    .narrative{background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(234,88,12,0.1));border-left:4px solid var(--accent);padding:16px;border-radius:0 10px 10px 0;margin-bottom:16px;font-size:0.95rem}
+    .hl{background:rgba(245,158,11,0.3);padding:2px 5px;border-radius:4px;font-weight:500}
+    .findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:16px 0}
+    .finding{background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;text-align:center}
+    .finding.critical{background:rgba(220,38,38,0.2);border:1px solid rgba(220,38,38,0.4)}
+    .finding.warning{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4)}
+    .finding-label{font-size:0.65rem;color:var(--muted)}
+    .finding-value{font-size:0.95rem;font-weight:600}
+    .choices{display:grid;gap:10px;margin-top:16px}
+    .choice{background:var(--card);border:2px solid var(--border);padding:14px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s}
+    .choice:hover{border-color:var(--accent);transform:translateX(3px)}
+    .choice.correct{border-color:var(--success);background:rgba(16,185,129,0.2)}
+    .choice.wrong{border-color:var(--danger);background:rgba(220,38,38,0.2)}
+    .choice-icon{font-size:1.3rem}
+    .choice-title{font-weight:600;font-size:0.95rem}
+    .choice-desc{font-size:0.8rem;color:var(--muted)}
+    .feedback{display:none;margin-top:14px;padding:14px;border-radius:10px;font-size:0.9rem}
+    .feedback.show{display:block}
+    .feedback.good{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+    .feedback.bad{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+    .teaching{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);border-radius:10px;padding:14px;margin:16px 0;font-size:0.9rem}
+    .teaching h4{color:var(--info);margin-bottom:6px;font-size:0.95rem}
+    .alert{padding:14px;border-radius:10px;margin:16px 0;display:flex;gap:10px;font-size:0.9rem}
+    .alert.danger{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+    .alert.success{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+    .hidden{display:none!important}
+    .btn{padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;border:none;font-size:0.95rem}
+    .btn-primary{background:var(--accent);color:#1F2937}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">🟡 The Yellow Baby<span class="badge">JAUNDICE</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="stage">1/7</div><div class="stat-label">Stage</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:14%"></div></div>
+
+    <!-- STAGE 1 -->
+    <div id="s1" class="stage">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 1 of 7</div>
+          <div class="card-title">🏥 Newborn Nursery - Day 2</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">A 36-hour-old term male infant is noted to have <span class="hl">yellowing of the skin</span>. He was born via SVD, birth weight 3.4 kg. Mom is <span class="hl">O positive</span>, baby is <span class="hl">A positive</span>. Baby is breastfeeding but had a <span class="hl">slow start</span> with poor latch.</div>
+          <div class="findings">
+            <div class="finding warning"><div class="finding-label">Age</div><div class="finding-value">36 hours</div></div>
+            <div class="finding warning"><div class="finding-label">Jaundice</div><div class="finding-value">Face/Chest</div></div>
+            <div class="finding"><div class="finding-label">Mom</div><div class="finding-value">O+</div></div>
+            <div class="finding"><div class="finding-label">Baby</div><div class="finding-value">A+</div></div>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.95rem">What is the most concerning aspect of this case?</p>
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🩸</div><div><div class="choice-title">ABO incompatibility (Mom O, Baby A)</div><div class="choice-desc">Sets up for hemolysis</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🍼</div><div><div class="choice-title">Breastfeeding difficulties</div><div class="choice-desc">Can cause jaundice but less urgent</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">📅</div><div><div class="choice-title">Onset at 36 hours is concerning</div><div class="choice-desc">This is actually within physiologic range</div></div></div>
+            <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">👶</div><div><div class="choice-title">Male sex</div><div class="choice-desc">Not a major risk factor</div></div></div>
+          </div>
+          <div class="feedback" id="f1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="s2" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 2 of 7</div>
+          <div class="card-title">🧪 Initial Labs</div>
+        </div>
+        <div class="card-body">
+          <div class="findings">
+            <div class="finding warning"><div class="finding-label">Total Bili</div><div class="finding-value">14.2</div></div>
+            <div class="finding"><div class="finding-label">Direct Bili</div><div class="finding-value">0.4</div></div>
+            <div class="finding warning"><div class="finding-label">Hgb</div><div class="finding-value">13.8 ↓</div></div>
+            <div class="finding critical"><div class="finding-label">Retics</div><div class="finding-value">8.2% ↑</div></div>
+          </div>
+          <div class="teaching">
+            <h4>💡 Lab Interpretation</h4>
+            <p>Low Hgb + High reticulocytes = <strong>hemolysis with compensation</strong>. The unconjugated hyperbilirubinemia (indirect >> direct) confirms increased RBC breakdown.</p>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.95rem">What test will confirm isoimmune hemolysis?</p>
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">🔬</div><div><div class="choice-title">Direct Coombs test (DAT)</div><div class="choice-desc">Detects antibodies on baby's RBCs</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🩸</div><div><div class="choice-title">Indirect Coombs</div><div class="choice-desc">Tests for antibodies in serum</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🧬</div><div><div class="choice-title">G6PD level</div><div class="choice-desc">Tests for enzyme deficiency</div></div></div>
+            <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🔍</div><div><div class="choice-title">Peripheral smear only</div><div class="choice-desc">Supportive but not confirmatory</div></div></div>
+          </div>
+          <div class="feedback" id="f2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div id="s3" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 3 of 7</div>
+          <div class="card-title">✅ Coombs Returns Positive</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">Direct Coombs (DAT) is <span class="hl">POSITIVE</span>. Peripheral smear shows <span class="hl">spherocytes</span> and <span class="hl">polychromasia</span> (reticulocytes).</div>
+          <div class="teaching">
+            <h4>💡 ABO Hemolytic Disease</h4>
+            <p>Mom's anti-A IgG antibodies cross placenta and attack baby's A-antigen RBCs. Unlike Rh disease, ABO HDN can occur in <strong>first pregnancy</strong> because anti-A/B antibodies exist naturally.</p>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.95rem">You plot the bilirubin on the Bhutani nomogram. At 36 hours with bili 14.2, the baby is in the "high-intermediate risk zone." What's your next step?</p>
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">👀</div><div><div class="choice-title">Observe and recheck in 24 hours</div><div class="choice-desc">Too long to wait</div></div></div>
+            <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">☀️</div><div><div class="choice-title">Start phototherapy</div><div class="choice-desc">High-intermediate + risk factors = treat</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🔄</div><div><div class="choice-title">Exchange transfusion</div><div class="choice-desc">Not at this level yet</div></div></div>
+            <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🏠</div><div><div class="choice-title">Discharge with follow-up</div><div class="choice-desc">Not safe with these risk factors</div></div></div>
+          </div>
+          <div class="feedback" id="f3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div id="s4" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 4 of 7</div>
+          <div class="card-title">☀️ Phototherapy Started</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">Baby is placed under phototherapy. You ensure <span class="hl">maximum skin exposure</span>, <span class="hl">eye shields</span> are applied, and <span class="hl">feeds are increased</span>.</div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.95rem">How does phototherapy work?</p>
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🔥</div><div><div class="choice-title">Destroys bilirubin molecules</div><div class="choice-desc">Not the mechanism</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">⚡</div><div><div class="choice-title">Stimulates liver UGT1A1 enzyme</div><div class="choice-desc">That's phenobarbital's mechanism</div></div></div>
+            <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">💧</div><div><div class="choice-title">Converts bili to water-soluble isomers</div><div class="choice-desc">Lumirubin can be excreted without conjugation</div></div></div>
+            <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🧲</div><div><div class="choice-title">Increases albumin binding</div><div class="choice-desc">Doesn't affect binding</div></div></div>
+          </div>
+          <div class="feedback" id="f4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div id="s5" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 5 of 7</div>
+          <div class="card-title">📈 Bilirubin Rising</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">Despite 6 hours of phototherapy, repeat bilirubin is now <span class="hl">18.5 mg/dL</span>. The baby is now 42 hours old. Hgb has dropped to <span class="hl">12.1 g/dL</span>.</div>
+          <div class="alert danger"><div style="font-size:1.3rem">⚠️</div><div><strong>Rapid rise despite phototherapy!</strong> This suggests ongoing significant hemolysis.</div></div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.95rem">What intervention should you add?</p>
+          <div class="choices" id="c5">
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">☀️</div><div><div class="choice-title">Add a second phototherapy light</div><div class="choice-desc">Good but insufficient alone</div></div></div>
+            <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">💉</div><div><div class="choice-title">IVIG (intravenous immunoglobulin)</div><div class="choice-desc">Blocks antibody-mediated hemolysis</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">💊</div><div><div class="choice-title">Phenobarbital</div><div class="choice-desc">Too slow to work acutely</div></div></div>
+            <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🛑</div><div><div class="choice-title">Stop breastfeeding</div><div class="choice-desc">Not the issue here</div></div></div>
+          </div>
+          <div class="feedback" id="f5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 6 -->
+    <div id="s6" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 6 of 7</div>
+          <div class="card-title">🧠 Watching for Kernicterus</div>
+        </div>
+        <div class="card-body">
+          <div class="teaching">
+            <h4>💡 Kernicterus Warning Signs</h4>
+            <p>Acute bilirubin encephalopathy progresses: <strong>Lethargy → Hypotonia → Poor feeding → High-pitched cry → Hypertonia/opisthotonus → Seizures</strong></p>
+          </div>
+          <p style="margin-bottom:14px;font-weight:600;font-size:0.95rem">Which brain structures are most affected in kernicterus?</p>
+          <div class="choices" id="c6">
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">🧠</div><div><div class="choice-title">Frontal cortex</div><div class="choice-desc">Relatively spared</div></div></div>
+            <div class="choice" onclick="check(6,this,true)"><div class="choice-icon">🎯</div><div><div class="choice-title">Basal ganglia and brainstem</div><div class="choice-desc">Globus pallidus, subthalamic nuclei, CN nuclei</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">🔄</div><div><div class="choice-title">Cerebellum</div><div class="choice-desc">Not primarily affected</div></div></div>
+            <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">📍</div><div><div class="choice-title">Spinal cord</div><div class="choice-desc">Not affected</div></div></div>
+          </div>
+          <div class="feedback" id="f6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 7 - SUMMARY -->
+    <div id="s7" class="stage hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Stage 7 of 7</div>
+          <div class="card-title">🎓 Case Resolution</div>
+        </div>
+        <div class="card-body">
+          <div class="alert success"><div style="font-size:1.3rem">✅</div><div>With intensive phototherapy + IVIG, bili peaked at 19.2 and began declining. Baby avoided exchange transfusion and was discharged on day 5 with outpatient follow-up.</div></div>
+          
+          <div class="teaching">
+            <h4>🔑 Key Takeaways</h4>
+            <ul style="margin:8px 0 0 16px;font-size:0.9rem">
+              <li><strong>ABO incompatibility:</strong> Mom O + Baby A or B = risk for hemolysis</li>
+              <li><strong>Can occur first pregnancy</strong> (unlike Rh disease)</li>
+              <li><strong>Positive DAT</strong> confirms isoimmune hemolysis</li>
+              <li><strong>Phototherapy:</strong> Converts bili to water-soluble lumirubin</li>
+              <li><strong>IVIG:</strong> Blocks hemolysis, reduces need for exchange</li>
+              <li><strong>Kernicterus:</strong> Basal ganglia → choreoathetoid CP, hearing loss</li>
+            </ul>
+          </div>
+
+          <div class="teaching" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.3)">
+            <h4 style="color:var(--accent)">📊 When to Worry</h4>
+            <ul style="margin:8px 0 0 16px;font-size:0.9rem">
+              <li>Jaundice <24 hours = ALWAYS pathologic</li>
+              <li>Bili rising >0.2 mg/dL/hour</li>
+              <li>Bili >95th percentile on nomogram</li>
+              <li>Direct bili >1 mg/dL = hepatobiliary disease</li>
+              <li>Jaundice >2 weeks = needs workup</li>
+            </ul>
+          </div>
+
+          <div class="alert success" style="margin-top:16px"><div style="font-size:1.3rem">📊</div><div><strong>Final Score: <span id="final">0</span>/600</strong></div></div>
+          <div style="text-align:center;margin-top:20px"><button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score=0;
+    const fb={
+      1:{y:"Correct! ABO incompatibility (O mom, A or B baby) is the #1 cause of hemolytic disease of the newborn. Mom's naturally-occurring anti-A IgG crosses the placenta and attacks baby's RBCs. Unlike Rh disease, this can happen in the FIRST pregnancy.",n:"ABO incompatibility is the key concern here. Mom is O (has anti-A and anti-B antibodies) and baby is A. The maternal IgG can cross the placenta and cause hemolysis."},
+      2:{y:"Correct! Direct Coombs (DAT) detects antibodies already bound to the baby's RBCs. A positive DAT confirms that maternal antibodies have attached to baby's cells, causing immune-mediated hemolysis.",n:"Direct Coombs (DAT) is the test - it detects antibodies ON the baby's RBCs. Indirect Coombs tests serum for free antibodies. G6PD tests for a different cause of hemolysis."},
+      3:{y:"Correct! With a positive Coombs and high-intermediate zone, this baby needs phototherapy. Risk factors (hemolysis, prematurity, poor feeding) lower the treatment threshold. Don't wait for levels to get worse!",n:"This baby needs phototherapy NOW. High-intermediate risk zone PLUS positive Coombs (hemolysis) = treatment indicated. Observation is too risky; exchange isn't needed yet."},
+      4:{y:"Correct! Phototherapy converts unconjugated bilirubin to structural isomers (mainly lumirubin) that are water-soluble and can be excreted in bile and urine WITHOUT requiring liver conjugation.",n:"Phototherapy works by photoisomerization - blue light converts lipid-soluble unconjugated bili to water-soluble lumirubin that can be excreted without conjugation."},
+      5:{y:"Correct! IVIG blocks the Fc receptors on macrophages, reducing antibody-mediated destruction of RBCs. It can reduce the need for exchange transfusion in isoimmune hemolytic disease.",n:"IVIG is indicated for isoimmune hemolysis (positive Coombs) with rapidly rising bili despite phototherapy. It blocks RBC destruction and can prevent exchange transfusion."},
+      6:{y:"Correct! Bilirubin has affinity for the basal ganglia (especially globus pallidus), subthalamic nuclei, and brainstem nuclei. This causes the classic tetrad: choreoathetoid CP, hearing loss, upward gaze palsy, dental enamel dysplasia.",n:"Kernicterus affects BASAL GANGLIA (globus pallidus) and brainstem nuclei. This causes choreoathetoid (not spastic) cerebral palsy and sensorineural hearing loss."}
+    };
+    function check(n,el,ok){
+      document.querySelectorAll(`#c${n} .choice`).forEach(c=>{c.style.pointerEvents='none';if(c.onclick.toString().includes('true'))c.classList.add('correct')});
+      el.classList.add(ok?'correct':'wrong');
+      if(ok)score+=100;
+      document.getElementById('score').textContent=score;
+      const f=document.getElementById(`f${n}`);
+      f.className=`feedback show ${ok?'good':'bad'}`;
+      f.innerHTML=`<strong>${ok?'✅ +100':'❌'}</strong> ${ok?fb[n].y:fb[n].n}`;
+      setTimeout(()=>{
+        document.getElementById(`s${n}`).classList.add('hidden');
+        document.getElementById(`s${n+1}`).classList.remove('hidden');
+        document.getElementById('stage').textContent=`${n+1}/7`;
+        document.getElementById('progress').style.width=`${((n+1)/7)*100}%`;
+        if(n+1===7)document.getElementById('final').textContent=score;
+        window.scrollTo({top:0,behavior:'smooth'});
+      },2200);
+    }
+  </script>
+
+    <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://publications.aap.org/pediatrics/article/150/3/e2022058859/188614" target="_blank">🔗 AAP Hyperbilirubinemia Guidelines 2022</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK532930/" target="_blank">🔗 NCBI - Neonatal Jaundice</a>
+          <a class="resource-link" href="https://bilitool.org/" target="_blank">🔗 BiliTool Calculator</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on AAP 2022 guidelines.</div>
+      </div>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="The Yellow Baby"
+         data-key-points="📚 Open-Access Learning Resources, Clinical Guidelines, Educational Resources, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

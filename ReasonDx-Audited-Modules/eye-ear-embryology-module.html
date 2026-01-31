@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Eye & Ear Embryology - Sensory Development</title>
+  <style>
+    :root{--primary:#6366F1;--secondary:#EC4899;--accent:#8B5CF6;--success:#10B981;--danger:#EF4444;--info:#0EA5E9}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#E5E7EB;min-height:100vh;line-height:1.6}
+    .container{max-width:950px;margin:0 auto;padding:2rem}
+    header{text-align:center;margin-bottom:2rem;padding:2rem;background:rgba(99,102,241,0.1);border-radius:1rem;border:1px solid rgba(99,102,241,0.3)}
+    header h1{font-size:2.5rem;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem}
+    .subtitle{color:#9CA3AF;font-size:1.1rem}
+    .nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}
+    .nav-tab{padding:0.6rem 1.2rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;transition:all 0.2s;font-size:0.9rem}
+    .nav-tab:hover,.nav-tab.active{background:var(--primary);color:white;border-color:var(--primary)}
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+    .module-section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:2rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}
+    .module-section h2{color:var(--primary);margin-bottom:1rem}
+    .module-section h3{color:var(--accent);margin:1.5rem 0 0.75rem 0;font-size:1.1rem}
+    .key-concept{background:rgba(99,102,241,0.15);border-left:4px solid var(--primary);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}
+    .danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}
+    .success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}
+    .clinical-pearl{background:rgba(139,92,246,0.15);border-left:4px solid var(--accent);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}
+    .info-box{background:rgba(14,165,233,0.15);border-left:4px solid var(--info);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}
+    table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem}
+    th,td{padding:0.75rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}
+    th{background:rgba(99,102,241,0.2);color:var(--primary)}
+    tr:hover{background:rgba(255,255,255,0.03)}
+    ul,ol{padding-left:1.5rem;margin:0.5rem 0}
+    li{margin:0.5rem 0}
+    .mnemonic{background:rgba(16,185,129,0.15);border:2px dashed var(--success);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}
+    .mnemonic strong{color:var(--success);font-size:1.1rem}
+    .dev-card{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);padding:1.25rem;border-radius:0.75rem;margin:1rem 0}
+    .dev-card h4{color:var(--secondary);margin-bottom:0.75rem;font-size:1.1rem}
+    .pathway-box{background:rgba(0,0,0,0.3);border-radius:0.5rem;padding:1rem;font-family:'Monaco','Consolas',monospace;font-size:0.85rem;line-height:1.8;margin:1rem 0;white-space:pre-wrap}
+    .quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:1rem;padding:1.5rem;margin-top:2rem}
+    .quiz-section h3{color:var(--success);margin-bottom:1rem}
+    .quiz-option{display:block;padding:0.75rem 1rem;margin:0.5rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;transition:all 0.3s}
+    .quiz-option:hover{background:rgba(99,102,241,0.2)}
+    .quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}
+    .quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}
+    .explanation{display:none;margin-top:1rem;padding:1rem;background:rgba(255,255,255,0.05);border-radius:0.5rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:700px){.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>👁️ 👂 Eye & Ear Embryology</h1>
+      <p class="subtitle">Sensory Development, Congenital Anomalies & CHARGE Syndrome</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('eye')">Eye Development</div>
+      <div class="nav-tab" onclick="showTab('ear')">Ear Development</div>
+      <div class="nav-tab" onclick="showTab('anomalies')">Anomalies</div>
+      <div class="nav-tab" onclick="showTab('syndromes')">Syndromes</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Sensory Development Overview</h2>
+        <div class="key-concept">
+          Eye and ear development involves complex interactions between <strong>surface ectoderm</strong>, <strong>neuroectoderm</strong>, <strong>neural crest</strong>, and <strong>mesoderm</strong>. Both organs require precise inductive signaling - disruption causes characteristic congenital anomalies.
+        </div>
+
+        <h3>Embryonic Origins Summary</h3>
+        <div class="two-col">
+          <div class="dev-card">
+            <h4>👁️ Eye Origins</h4>
+            <table style="font-size:0.85rem">
+              <tr><td>Retina, optic nerve</td><td>Neuroectoderm (diencephalon)</td></tr>
+              <tr><td>Lens, corneal epithelium</td><td>Surface ectoderm</td></tr>
+              <tr><td>Choroid, sclera, corneal stroma</td><td>Neural crest + mesoderm</td></tr>
+              <tr><td>Extraocular muscles</td><td>Mesoderm</td></tr>
+            </table>
+          </div>
+          <div class="dev-card">
+            <h4>👂 Ear Origins</h4>
+            <table style="font-size:0.85rem">
+              <tr><td>Inner ear (labyrinth)</td><td>Surface ectoderm (otic placode)</td></tr>
+              <tr><td>Middle ear ossicles</td><td>Neural crest (1st & 2nd arches)</td></tr>
+              <tr><td>External ear</td><td>1st & 2nd pharyngeal arches</td></tr>
+              <tr><td>Eustachian tube</td><td>1st pharyngeal pouch</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <h3>Timeline</h3>
+        <table>
+          <tr><th>Week</th><th>Eye Development</th><th>Ear Development</th></tr>
+          <tr><td>3-4</td><td>Optic vesicle forms from diencephalon</td><td>Otic placode appears</td></tr>
+          <tr><td>4-5</td><td>Optic cup forms; lens placode induced</td><td>Otic vesicle (otocyst) forms</td></tr>
+          <tr><td>5-6</td><td>Lens vesicle; optic fissure present</td><td>Semicircular canals begin</td></tr>
+          <tr><td>6-7</td><td>Optic fissure closes</td><td>Cochlea begins coiling</td></tr>
+          <tr><td>7-8</td><td>Eyelids form and fuse</td><td>Ossicles begin forming</td></tr>
+          <tr><td>8-20</td><td>Retinal layers differentiate</td><td>Inner ear matures; cochlea completes 2.5 turns</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- EYE TAB -->
+    <div id="eye" class="tab-content">
+      <div class="module-section">
+        <h2>👁️ Eye Development</h2>
+
+        <div class="key-concept">
+          Eye development demonstrates <strong>inductive signaling</strong>: the optic vesicle (neuroectoderm) induces the overlying surface ectoderm to form the lens placode. The lens then induces cornea formation. Disruption at any step causes specific defects.
+        </div>
+
+        <h3>Step-by-Step Development</h3>
+        <div class="dev-card">
+          <h4>Step 1: Optic Vesicle (Week 4)</h4>
+          <p>Lateral outgrowths from diencephalon (forebrain) form optic vesicles. These push toward surface ectoderm.</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>Step 2: Lens Induction (Week 4-5)</h4>
+          <p>Optic vesicle contacts surface ectoderm → induces <strong>lens placode</strong>. This is a classic example of embryonic induction. PAX6 gene is critical.</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>Step 3: Optic Cup Formation (Week 5)</h4>
+          <p>Optic vesicle invaginates to form double-walled <strong>optic cup</strong>:</p>
+          <ul>
+            <li><strong>Outer layer</strong> → Retinal pigment epithelium (RPE)</li>
+            <li><strong>Inner layer</strong> → Neural retina (photoreceptors, etc.)</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>Step 4: Optic Fissure (Week 5-7)</h4>
+          <p>Groove on ventral surface of optic cup and stalk. Allows hyaloid vessels to enter. Must close by week 7.</p>
+          <div class="danger-box" style="margin-top:0.5rem;padding:0.5rem">
+            <strong>Failure to close = COLOBOMA</strong> (keyhole-shaped defect in iris, retina, or optic nerve)
+          </div>
+        </div>
+
+        <div class="dev-card">
+          <h4>Step 5: Lens Development</h4>
+          <p>Lens placode → lens pit → <strong>lens vesicle</strong> (detaches from surface ectoderm)</p>
+          <ul>
+            <li>Posterior cells elongate → primary lens fibers</li>
+            <li>Anterior cells remain as lens epithelium</li>
+            <li>Secondary fibers added throughout life</li>
+          </ul>
+        </div>
+
+        <h3>Adult Eye Structures by Origin</h3>
+        <table>
+          <tr><th>Structure</th><th>Embryonic Origin</th></tr>
+          <tr><td>Neural retina</td><td>Inner layer of optic cup (neuroectoderm)</td></tr>
+          <tr><td>Retinal pigment epithelium</td><td>Outer layer of optic cup (neuroectoderm)</td></tr>
+          <tr><td>Optic nerve</td><td>Optic stalk (neuroectoderm)</td></tr>
+          <tr><td>Lens</td><td>Surface ectoderm (lens vesicle)</td></tr>
+          <tr><td>Corneal epithelium</td><td>Surface ectoderm</td></tr>
+          <tr><td>Corneal stroma & endothelium</td><td>Neural crest</td></tr>
+          <tr><td>Sclera, choroid</td><td>Neural crest + mesoderm</td></tr>
+          <tr><td>Ciliary body, iris stroma</td><td>Neural crest</td></tr>
+          <tr><td>Iris muscles</td><td>Neuroectoderm (optic cup)</td></tr>
+          <tr><td>Extraocular muscles</td><td>Mesoderm</td></tr>
+          <tr><td>Vitreous</td><td>Mesoderm + neuroectoderm</td></tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>🎯 PAX6:</strong> Master regulator of eye development. Mutations cause aniridia (absent iris), Peters anomaly, and other defects. PAX6 is so conserved that mouse Pax6 can induce ectopic eyes in Drosophila!
+        </div>
+      </div>
+    </div>
+
+    <!-- EAR TAB -->
+    <div id="ear" class="tab-content">
+      <div class="module-section">
+        <h2>👂 Ear Development</h2>
+
+        <div class="key-concept">
+          The ear has THREE embryologically distinct parts: <strong>inner ear</strong> (otic placode → membranous labyrinth), <strong>middle ear</strong> (1st pharyngeal pouch + neural crest ossicles), and <strong>outer ear</strong> (1st pharyngeal cleft + auricular hillocks).
+        </div>
+
+        <h3>Inner Ear Development</h3>
+        <div class="dev-card">
+          <h4>Otic Placode → Otocyst → Membranous Labyrinth</h4>
+          <ol>
+            <li><strong>Week 4:</strong> Otic placode appears (thickening of surface ectoderm near hindbrain)</li>
+            <li><strong>Week 4-5:</strong> Placode invaginates → otic pit → <strong>otic vesicle (otocyst)</strong></li>
+            <li><strong>Week 5+:</strong> Otocyst divides:
+              <ul>
+                <li><strong>Dorsal:</strong> Utricle + semicircular canals (vestibular)</li>
+                <li><strong>Ventral:</strong> Saccule + cochlea (auditory)</li>
+              </ul>
+            </li>
+            <li><strong>Week 8:</strong> Cochlea completes 2.5 turns</li>
+          </ol>
+        </div>
+
+        <div class="info-box">
+          <strong>Membranous vs Bony Labyrinth:</strong> The membranous labyrinth (from otic vesicle) is surrounded by the bony labyrinth (from mesenchyme that undergoes endochondral ossification).
+        </div>
+
+        <h3>Middle Ear Development</h3>
+        <div class="dev-card">
+          <h4>Pharyngeal Apparatus Contributions</h4>
+          <table style="font-size:0.85rem">
+            <tr><th>Structure</th><th>Origin</th></tr>
+            <tr><td>Eustachian tube, middle ear cavity</td><td><strong>1st pharyngeal pouch</strong> (tubotympanic recess)</td></tr>
+            <tr><td>Malleus, incus</td><td><strong>1st arch</strong> cartilage (Meckel's)</td></tr>
+            <tr><td>Stapes</td><td><strong>2nd arch</strong> cartilage (Reichert's)</td></tr>
+            <tr><td>Tympanic membrane</td><td>All 3 germ layers (1st cleft, 1st pouch, mesoderm)</td></tr>
+          </table>
+        </div>
+
+        <div class="mnemonic">
+          <strong>Ossicle Origins: "MIS-12"</strong><br>
+          <strong>M</strong>alleus & <strong>I</strong>ncus = <strong>1</strong>st arch | <strong>S</strong>tapes = <strong>2</strong>nd arch
+        </div>
+
+        <h3>External Ear Development</h3>
+        <div class="dev-card">
+          <h4>Auricular Hillocks</h4>
+          <p>6 mesenchymal swellings (auricular hillocks) around 1st pharyngeal cleft:</p>
+          <ul>
+            <li>Hillocks 1-3: From 1st arch (mandibular) → tragus, anterior helix</li>
+            <li>Hillocks 4-6: From 2nd arch (hyoid) → antihelix, antitragus, lobule</li>
+          </ul>
+          <p>External auditory canal: 1st pharyngeal cleft (ectoderm-lined)</p>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> Auricular abnormalities (preauricular pits, tags, microtia) may indicate underlying renal anomalies because kidneys and ears develop at the same time (weeks 4-8). Always check renal ultrasound!
+        </div>
+      </div>
+    </div>
+
+    <!-- ANOMALIES TAB -->
+    <div id="anomalies" class="tab-content">
+      <div class="module-section">
+        <h2>🔴 Congenital Anomalies</h2>
+
+        <h3>Eye Anomalies</h3>
+        <div class="dev-card">
+          <h4>Coloboma</h4>
+          <p><strong>Defect:</strong> Failure of optic fissure to close (week 7)</p>
+          <p><strong>Appearance:</strong> Keyhole-shaped defect, typically INFERIOR (6 o'clock position)</p>
+          <p><strong>Can affect:</strong> Iris, ciliary body, retina, choroid, optic nerve</p>
+          <p><strong>Associations:</strong> CHARGE syndrome, COACH syndrome, Cat-eye syndrome</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>Congenital Cataracts</h4>
+          <p><strong>Defect:</strong> Opacification of lens</p>
+          <p><strong>Causes:</strong></p>
+          <ul>
+            <li><strong>TORCH:</strong> Rubella (#1 infectious), CMV, toxoplasmosis, HSV</li>
+            <li><strong>Metabolic:</strong> Galactosemia ("oil droplet"), hypocalcemia</li>
+            <li><strong>Genetic:</strong> Down syndrome, Lowe syndrome, NF2</li>
+          </ul>
+          <p><strong>Red reflex:</strong> Absent or white (leukocoria) - always investigate!</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>Aniridia</h4>
+          <p><strong>Defect:</strong> Absence of iris (partial or complete)</p>
+          <p><strong>Cause:</strong> PAX6 mutation (autosomal dominant)</p>
+          <p><strong>Association:</strong> WAGR syndrome (Wilms tumor, Aniridia, GU anomalies, intellectual disability) - 11p13 deletion</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>Persistent Hyperplastic Primary Vitreous (PHPV)</h4>
+          <p><strong>Defect:</strong> Failure of hyaloid artery/primary vitreous to regress</p>
+          <p><strong>Presentation:</strong> Unilateral leukocoria, microphthalmos</p>
+        </div>
+
+        <h3>Ear Anomalies</h3>
+        <div class="dev-card">
+          <h4>Congenital Hearing Loss</h4>
+          <table style="font-size:0.85rem">
+            <tr><th>Type</th><th>Defect Location</th><th>Causes</th></tr>
+            <tr><td>Sensorineural</td><td>Inner ear / CN VIII</td><td>CMV (#1), rubella, genetic (connexin 26), aminoglycosides</td></tr>
+            <tr><td>Conductive</td><td>Outer/middle ear</td><td>Ossicular malformation, middle ear effusion, atresia</td></tr>
+          </table>
+        </div>
+
+        <div class="dev-card">
+          <h4>Preauricular Pits & Tags</h4>
+          <p><strong>Defect:</strong> Abnormal fusion of auricular hillocks</p>
+          <p><strong>Associations:</strong> Branchio-oto-renal syndrome (check renal US!)</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>Microtia / Anotia</h4>
+          <p><strong>Defect:</strong> Underdevelopment or absence of external ear</p>
+          <p><strong>Associations:</strong> Hemifacial microsomia, Treacher Collins, thalidomide exposure</p>
+        </div>
+
+        <div class="danger-box">
+          <strong>⚠️ CMV is #1 infectious cause of congenital hearing loss</strong> - often progressive and may not be detected at newborn screening. Rubella causes cataracts + deafness + cardiac defects.
+        </div>
+      </div>
+    </div>
+
+    <!-- SYNDROMES TAB -->
+    <div id="syndromes" class="tab-content">
+      <div class="module-section">
+        <h2>🧬 Associated Syndromes</h2>
+
+        <div class="dev-card" style="background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.3)">
+          <h4 style="color:var(--danger)">CHARGE Syndrome ⭐⭐</h4>
+          <p><strong>Cause:</strong> CHD7 gene mutation (autosomal dominant)</p>
+          <div class="mnemonic" style="margin:0.75rem 0">
+            <strong>C</strong>oloboma<br>
+            <strong>H</strong>eart defects (conotruncal)<br>
+            <strong>A</strong>tresia choanae<br>
+            <strong>R</strong>etardation of growth/development<br>
+            <strong>G</strong>enital hypoplasia<br>
+            <strong>E</strong>ar anomalies (hearing loss, abnormal shape)
+          </div>
+          <p><strong>Key features:</strong> Coloboma + choanal atresia = highly suggestive. Also: CN dysfunction (especially facial), semicircular canal hypoplasia, cleft lip/palate</p>
+        </div>
+
+        <div class="dev-card">
+          <h4>WAGR Syndrome</h4>
+          <p><strong>Cause:</strong> 11p13 deletion (includes PAX6 and WT1 genes)</p>
+          <ul>
+            <li><strong>W</strong>ilms tumor (screen with serial US)</li>
+            <li><strong>A</strong>niridia</li>
+            <li><strong>G</strong>enitourinary anomalies</li>
+            <li><strong>R</strong>etardation (intellectual disability)</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>Branchio-Oto-Renal (BOR) Syndrome</h4>
+          <p><strong>Cause:</strong> EYA1 gene mutation</p>
+          <ul>
+            <li><strong>Branchial:</strong> Cleft anomalies, fistulae, cysts</li>
+            <li><strong>Oto:</strong> Hearing loss, preauricular pits, malformed ears</li>
+            <li><strong>Renal:</strong> Hypoplasia, dysplasia, agenesis</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>Treacher Collins Syndrome</h4>
+          <p><strong>Cause:</strong> TCOF1 mutation (autosomal dominant)</p>
+          <p><strong>Features:</strong> Bilateral, symmetric abnormalities from 1st and 2nd arch:</p>
+          <ul>
+            <li>Downslanting palpebral fissures, coloboma of lower eyelid</li>
+            <li>Malar and mandibular hypoplasia</li>
+            <li>Microtia, conductive hearing loss</li>
+            <li>Normal intelligence</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>Goldenhar Syndrome (Hemifacial Microsomia)</h4>
+          <p><strong>Features:</strong> UNILATERAL underdevelopment of 1st and 2nd arch derivatives:</p>
+          <ul>
+            <li>Hemifacial microsomia, mandibular hypoplasia</li>
+            <li>Microtia, preauricular tags</li>
+            <li>Epibulbar dermoid (eye)</li>
+            <li>Vertebral anomalies</li>
+          </ul>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Board Pearl:</strong> Treacher Collins = bilateral, symmetric. Goldenhar = unilateral, asymmetric. Both involve 1st/2nd arch structures.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>🎯 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>The lens of the eye develops from which embryonic tissue?</p>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">A. Neuroectoderm</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,true)">B. Surface ectoderm</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">C. Neural crest</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">D. Mesoderm</div>
+          <div id="exp-q1" class="explanation"><strong>Answer: B.</strong> The lens develops from surface ectoderm. The optic vesicle (neuroectoderm) induces the overlying surface ectoderm to form the lens placode, which invaginates to become the lens vesicle.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>A newborn has a keyhole-shaped defect in the inferior iris. This is caused by failure of which structure to close?</p>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">A. Lens vesicle</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,true)">B. Optic fissure</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">C. Optic cup</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">D. Neural tube</div>
+          <div id="exp-q2" class="explanation"><strong>Answer: B.</strong> Coloboma results from failure of the optic fissure to close (normally by week 7). The defect is typically inferior because the optic fissure is located on the ventral/inferior aspect of the developing eye.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>Which ossicle derives from the 2nd pharyngeal arch?</p>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">A. Malleus</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">B. Incus</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,true)">C. Stapes</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">D. All three</div>
+          <div id="exp-q3" class="explanation"><strong>Answer: C.</strong> Remember "MIS-12": Malleus and Incus from 1st arch (Meckel's cartilage), Stapes from 2nd arch (Reichert's cartilage).</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>A child has coloboma, choanal atresia, and abnormal ears. What gene is most likely mutated?</p>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">A. PAX6</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,true)">B. CHD7</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">C. EYA1</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">D. TCOF1</div>
+          <div id="exp-q4" class="explanation"><strong>Answer: B.</strong> This describes CHARGE syndrome (Coloboma, Heart, Atresia choanae, Retardation, Genital, Ear). It's caused by CHD7 mutation. PAX6 = aniridia; EYA1 = BOR syndrome; TCOF1 = Treacher Collins.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>What is the #1 infectious cause of congenital sensorineural hearing loss?</p>
+          <div class="quiz-option" onclick="checkQ('q5',this,true)">A. CMV</div>
+          <div class="quiz-option" onclick="checkQ('q5',this,false)">B. Rubella</div>
+          <div class="quiz-option" onclick="checkQ('q5',this,false)">C. Toxoplasmosis</div>
+          <div class="quiz-option" onclick="checkQ('q5',this,false)">D. HSV</div>
+          <div id="exp-q5" class="explanation"><strong>Answer: A.</strong> CMV is the #1 infectious cause of congenital hearing loss. It can be progressive and may not be detected at birth. Rubella causes the triad of cataracts, cardiac defects, and deafness.</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="module-section" style="margin-top:1.5rem;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.3)">
+      <h2 style="color:#93c5fd">📖 References</h2>
+      <ul style="font-size:0.95rem;list-style:none;padding-left:0">
+        <li style="margin:0.75rem 0;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0">📖</span><a href="https://www.ncbi.nlm.nih.gov/books/NBK538174/" target="_blank" style="color:#93c5fd">StatPearls: Embryology, Eye</a></li>
+        <li style="margin:0.75rem 0;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0">📖</span><a href="https://www.ncbi.nlm.nih.gov/books/NBK526014/" target="_blank" style="color:#93c5fd">StatPearls: Embryology, Ear</a></li>
+        <li style="margin:0.75rem 0;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0">📖</span><a href="https://www.ncbi.nlm.nih.gov/books/NBK559199/" target="_blank" style="color:#93c5fd">StatPearls: CHARGE Syndrome</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    function showTab(t){document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(n=>n.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
+    function checkQ(q,el,ok){const s=el.closest('.quiz-section');s.querySelectorAll('.quiz-option').forEach(o=>{o.style.pointerEvents='none';if(o.onclick.toString().includes('true'))o.classList.add('correct')});el.classList.add(ok?'correct':'incorrect');document.getElementById('exp-'+q).style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Eye & Ear Embryology"
+         data-key-points="📚 Sensory Development Overview, 👁️ Eye Development, 👂 Ear Development, 🔴 Congenital Anomalies, 🧬 Associated Syndromes, 🎯 Test Your Knowledge, 📖 References, Embryonic Origins Summary, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

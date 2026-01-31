@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Teratology - Critical Periods & Teratogens</title>
+  <style>
+    :root { --primary: #E11D48; --primary-dark: #BE123C; --secondary: #F59E0B; --accent: #8B5CF6; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(225, 29, 72, 0.1); border-radius: 1rem; border: 1px solid rgba(225, 29, 72, 0.3); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background: rgba(225, 29, 72, 0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(139, 92, 246, 0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .warning-box { background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--secondary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(225, 29, 72, 0.2); color: var(--primary); }
+    tr:hover { background: rgba(255,255,255,0.03); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .teratogen-card { background: rgba(225, 29, 72, 0.1); border: 1px solid rgba(225, 29, 72, 0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .teratogen-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .timeline-chart { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+    .timeline-row { display: flex; align-items: center; margin: 0.5rem 0; }
+    .timeline-label { width: 120px; font-size: 0.85rem; flex-shrink: 0; }
+    .timeline-bar { flex: 1; height: 24px; display: flex; position: relative; }
+    .timeline-segment { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; }
+    .seg-sensitive { background: var(--danger); }
+    .seg-moderate { background: var(--secondary); }
+    .seg-low { background: var(--success); }
+    .seg-none { background: rgba(255,255,255,0.1); }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option:hover { background: rgba(225, 29, 72, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚠️ Teratology</h1>
+      <p class="subtitle">Critical Periods, TORCH Infections & Medication Teratogens</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('principles')">Principles</div>
+      <div class="nav-tab" onclick="showTab('critical')">Critical Periods</div>
+      <div class="nav-tab" onclick="showTab('torch')">TORCH Infections</div>
+      <div class="nav-tab" onclick="showTab('medications')">Medications</div>
+      <div class="nav-tab" onclick="showTab('substances')">Substances</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- PRINCIPLES TAB -->
+    <div id="principles" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Principles of Teratology</h2>
+
+        <div class="key-concept">
+          A <strong>teratogen</strong> is any agent that can cause abnormal development. The effects depend on: <strong>timing of exposure</strong> (critical period), <strong>dose</strong>, <strong>duration</strong>, and <strong>genetic susceptibility</strong> of the fetus.
+        </div>
+
+        <h3>Wilson's Six Principles of Teratology</h3>
+        <ol>
+          <li><strong>Susceptibility depends on genotype</strong> - both maternal and fetal genetics affect response</li>
+          <li><strong>Susceptibility varies with developmental stage</strong> - critical periods exist for each organ system</li>
+          <li><strong>Teratogenic agents act in specific ways</strong> - mechanisms include cell death, altered growth, disrupted differentiation</li>
+          <li><strong>Final manifestations are death, malformation, growth restriction, or functional deficit</strong></li>
+          <li><strong>Access of agent to developing tissue depends on placental transfer</strong></li>
+          <li><strong>Dose-response relationship exists</strong> - threshold below which no effect, increasing severity with dose</li>
+        </ol>
+
+        <h3>Timing of Exposure - The Key Concept</h3>
+        <div class="info-box">
+          <strong>Pre-implantation (Weeks 1-2):</strong> "All or none" period
+          <ul>
+            <li>Exposure either kills the embryo (spontaneous abortion) or has no effect</li>
+            <li>Surviving cells can compensate - no malformations</li>
+          </ul>
+        </div>
+
+        <div class="danger-box">
+          <strong>Embryonic Period (Weeks 3-8):</strong> MAXIMUM SENSITIVITY
+          <ul>
+            <li>Organogenesis - all major organs forming</li>
+            <li>Exposure causes STRUCTURAL malformations</li>
+            <li>Most critical time - often before pregnancy is recognized!</li>
+          </ul>
+        </div>
+
+        <div class="warning-box">
+          <strong>Fetal Period (Week 9 - Birth):</strong> Continued vulnerability
+          <ul>
+            <li>Major structures formed, but growth and maturation continue</li>
+            <li>Brain, eyes, teeth, genitalia still developing</li>
+            <li>Exposure causes FUNCTIONAL deficits and growth restriction</li>
+          </ul>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> The most vulnerable period is weeks 3-8, when organogenesis occurs. Most women don't know they're pregnant until 4-6 weeks. This is why pre-conception counseling and avoiding teratogens when trying to conceive is crucial.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRITICAL PERIODS TAB -->
+    <div id="critical" class="tab-content">
+      <div class="module-section">
+        <h2>📅 Critical Periods by Organ System</h2>
+
+        <div class="key-concept">
+          Each organ system has a specific window during which it is most susceptible to teratogens. This corresponds to the period of active organogenesis for that structure.
+        </div>
+
+        <h3>Visual Timeline</h3>
+        <div class="timeline-chart">
+          <div style="display:flex; margin-bottom:10px; font-size:0.75rem; color:var(--muted);">
+            <div style="width:120px;"></div>
+            <div style="flex:1; display:flex; justify-content:space-between; padding:0 5px;">
+              <span>Wk 3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>12</span><span>16</span><span>38</span>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">CNS/Brain</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-sensitive" style="width:35%">HIGHLY SENSITIVE</div>
+              <div class="timeline-segment seg-moderate" style="width:65%">Functional deficits</div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Heart</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-sensitive" style="width:25%">HIGHLY SENSITIVE</div>
+              <div class="timeline-segment seg-moderate" style="width:10%"></div>
+              <div class="timeline-segment seg-low" style="width:65%"></div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Limbs</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-none" style="width:8%"></div>
+              <div class="timeline-segment seg-sensitive" style="width:22%">HIGHLY SENSITIVE</div>
+              <div class="timeline-segment seg-low" style="width:70%"></div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Eyes</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-sensitive" style="width:30%">HIGHLY SENSITIVE</div>
+              <div class="timeline-segment seg-moderate" style="width:70%">Cataracts, etc.</div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Ears</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-none" style="width:8%"></div>
+              <div class="timeline-segment seg-sensitive" style="width:22%">HIGHLY SENSITIVE</div>
+              <div class="timeline-segment seg-moderate" style="width:70%"></div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Teeth</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-none" style="width:15%"></div>
+              <div class="timeline-segment seg-sensitive" style="width:20%">SENS</div>
+              <div class="timeline-segment seg-moderate" style="width:65%">Enamel hypoplasia</div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Palate</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-none" style="width:15%"></div>
+              <div class="timeline-segment seg-sensitive" style="width:15%">SENS</div>
+              <div class="timeline-segment seg-low" style="width:70%"></div>
+            </div>
+          </div>
+          
+          <div class="timeline-row">
+            <div class="timeline-label">Genitalia</div>
+            <div class="timeline-bar">
+              <div class="timeline-segment seg-none" style="width:20%"></div>
+              <div class="timeline-segment seg-sensitive" style="width:15%">SENS</div>
+              <div class="timeline-segment seg-moderate" style="width:65%">Masculinization/etc</div>
+            </div>
+          </div>
+        </div>
+        
+        <p style="font-size:0.8rem; color:var(--muted); text-align:center;">
+          🔴 Highly sensitive (major malformations) | 🟠 Moderate (functional deficits) | 🟢 Lower sensitivity
+        </p>
+
+        <h3>Key Critical Period Facts</h3>
+        <table>
+          <tr><th>Structure</th><th>Critical Period</th><th>Teratogen Example</th></tr>
+          <tr><td>Neural tube</td><td>Weeks 3-4</td><td>Valproate → spina bifida</td></tr>
+          <tr><td>Heart</td><td>Weeks 3-6</td><td>Lithium → Ebstein anomaly</td></tr>
+          <tr><td>Limbs</td><td>Weeks 4-7</td><td>Thalidomide → phocomelia</td></tr>
+          <tr><td>Palate</td><td>Weeks 6-9</td><td>Phenytoin → cleft palate</td></tr>
+          <tr><td>Teeth</td><td>Weeks 6 - birth</td><td>Tetracycline → enamel hypoplasia</td></tr>
+          <tr><td>External genitalia</td><td>Weeks 7-12</td><td>Androgens → virilization</td></tr>
+          <tr><td>Brain (growth)</td><td>Week 8 - birth</td><td>Alcohol → microcephaly</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TORCH TAB -->
+    <div id="torch" class="tab-content">
+      <div class="module-section">
+        <h2>🦠 TORCH Infections</h2>
+
+        <div class="mnemonic">
+          <strong>T</strong>oxoplasmosis, <strong>O</strong>ther (Syphilis, VZV, Parvovirus), <strong>R</strong>ubella, <strong>C</strong>MV, <strong>H</strong>erpes/HIV
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🐱 Toxoplasmosis</h4>
+          <p><strong>Source:</strong> Cat feces, undercooked meat</p>
+          <p><strong>Classic Triad:</strong> Chorioretinitis, hydrocephalus, intracranial calcifications (diffuse)</p>
+          <p><strong>Other features:</strong> Seizures, hepatosplenomegaly, jaundice</p>
+          <p><strong>Prevention:</strong> Avoid cat litter, cook meat thoroughly</p>
+          <div class="clinical-pearl" style="margin-top:0.5rem; padding:0.5rem;">
+            <strong>Memory tip:</strong> Toxo = "Trio" = 3 findings. Calcifications are DIFFUSE (scattered throughout brain).
+          </div>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🌀 Syphilis (Treponema pallidum)</h4>
+          <p><strong>Early congenital:</strong> Hepatosplenomegaly, snuffles (bloody rhinitis), rash, osteochondritis</p>
+          <p><strong>Late congenital:</strong> Hutchinson teeth, mulberry molars, saddle nose, saber shins, deafness</p>
+          <p><strong>Treatment:</strong> Penicillin (safe in pregnancy)</p>
+          <div class="clinical-pearl" style="margin-top:0.5rem; padding:0.5rem;">
+            <strong>Hutchinson's triad:</strong> Notched incisors + interstitial keratitis + CN VIII deafness
+          </div>
+        </div>
+
+        <div class="teratogen-card" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3);">
+          <h4 style="color: var(--danger);">💉 Rubella (German Measles) ⭐</h4>
+          <p><strong>Highest risk:</strong> First trimester exposure (up to 85% affected if infected &lt;11 weeks)</p>
+          <p><strong>Classic Triad:</strong> <strong>C</strong>ataracts, <strong>C</strong>ardiac defects (PDA, PS), <strong>C</strong>ochlear deafness</p>
+          <p><strong>Other:</strong> "Blueberry muffin" rash (extramedullary hematopoiesis), microcephaly, intellectual disability</p>
+          <p><strong>Prevention:</strong> MMR vaccine BEFORE pregnancy (live vaccine - contraindicated in pregnancy)</p>
+          <div class="danger-box" style="margin-top:0.5rem; padding:0.5rem;">
+            <strong>HIGH-YIELD:</strong> The 3 C's of rubella - Cataracts, Cardiac, Cochlear deafness
+          </div>
+        </div>
+
+        <div class="teratogen-card" style="background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3);">
+          <h4 style="color: var(--info);">🧬 CMV (Cytomegalovirus) ⭐</h4>
+          <p><strong>Most common congenital infection</strong> (~1% of newborns)</p>
+          <p><strong>Classic features:</strong> Periventricular calcifications, microcephaly, chorioretinitis, hearing loss</p>
+          <p><strong>Other:</strong> Hepatosplenomegaly, thrombocytopenia, "blueberry muffin" rash, ventriculomegaly</p>
+          <p><strong>Outcome:</strong> #1 infectious cause of congenital hearing loss and intellectual disability</p>
+          <div class="info-box" style="margin-top:0.5rem; padding:0.5rem;">
+            <strong>CMV vs Toxo calcifications:</strong> CMV = PERIVENTRICULAR | Toxo = DIFFUSE/scattered
+          </div>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🔥 Herpes Simplex Virus (HSV)</h4>
+          <p><strong>Transmission:</strong> Usually during delivery (passing through infected birth canal)</p>
+          <p><strong>Features:</strong> Skin vesicles, encephalitis, disseminated disease</p>
+          <p><strong>Prevention:</strong> C-section if active genital lesions at time of labor</p>
+          <p><strong>Note:</strong> Rarely causes congenital malformations; mainly neonatal infection</p>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🩸 Parvovirus B19 (Fifth Disease)</h4>
+          <p><strong>Risk:</strong> Fetal anemia → hydrops fetalis (2nd trimester highest risk)</p>
+          <p><strong>Mechanism:</strong> Infects erythroid precursors → aplastic crisis in fetus</p>
+          <p><strong>Management:</strong> Monitor with serial ultrasounds, intrauterine transfusion if severe</p>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>💧 Varicella Zoster (Chickenpox)</h4>
+          <p><strong>Congenital varicella syndrome:</strong> Limb hypoplasia, cutaneous scars, eye abnormalities</p>
+          <p><strong>Risk period:</strong> First 20 weeks (rare after this)</p>
+          <p><strong>Prevention:</strong> Varicella vaccine before pregnancy (live vaccine)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICATIONS TAB -->
+    <div id="medications" class="tab-content">
+      <div class="module-section">
+        <h2>💊 Medication Teratogens</h2>
+
+        <div class="key-concept">
+          Always weigh benefits vs risks. Some conditions (epilepsy, bipolar disorder) require treatment during pregnancy, and uncontrolled disease may be more harmful than medication. Use lowest effective dose.
+        </div>
+
+        <div class="teratogen-card" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5);">
+          <h4 style="color: #FCA5A5;">🔴 ABSOLUTE CONTRAINDICATIONS</h4>
+          <table style="font-size:0.85rem;">
+            <tr><th>Drug</th><th>Effects</th><th>Memory Aid</th></tr>
+            <tr><td><strong>Isotretinoin (Accutane)</strong></td><td>CNS, cardiac, craniofacial defects; extremely teratogenic</td><td>MOST teratogenic medication</td></tr>
+            <tr><td><strong>Thalidomide</strong></td><td>Phocomelia, limb reduction defects</td><td>The original teratogen scandal</td></tr>
+            <tr><td><strong>Methotrexate</strong></td><td>CNS defects, limb abnormalities, cleft palate</td><td>Folate antagonist</td></tr>
+            <tr><td><strong>Warfarin</strong></td><td>Nasal hypoplasia, stippled epiphyses, CNS abnormalities</td><td>"Warfarin embryopathy"</td></tr>
+            <tr><td><strong>ACE inhibitors</strong></td><td>Renal dysgenesis, oligohydramnios, skull hypoplasia (2nd/3rd tri)</td><td>Affect fetal kidney</td></tr>
+            <tr><td><strong>Statins</strong></td><td>Limb and CNS defects</td><td>Cholesterol needed for development</td></tr>
+          </table>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>⚠️ Antiepileptics</h4>
+          <table style="font-size:0.85rem;">
+            <tr><th>Drug</th><th>Effects</th><th>Notes</th></tr>
+            <tr><td><strong>Valproic acid</strong></td><td>Neural tube defects (1-2%), facial dysmorphism, cardiac defects, cognitive impairment</td><td>Highest risk AED; avoid if possible</td></tr>
+            <tr><td><strong>Phenytoin</strong></td><td>Fetal hydantoin syndrome: facial dysmorphism, nail/digit hypoplasia, cleft lip/palate</td><td>High-dose folate helps</td></tr>
+            <tr><td><strong>Carbamazepine</strong></td><td>Neural tube defects (lower risk than valproate), facial dysmorphism</td><td>Safer than valproate</td></tr>
+            <tr><td><strong>Lamotrigine</strong></td><td>Possibly cleft palate (dose-dependent)</td><td>Often preferred in pregnancy</td></tr>
+            <tr><td><strong>Levetiracetam</strong></td><td>Limited data, appears lower risk</td><td>Often preferred in pregnancy</td></tr>
+          </table>
+          <div class="clinical-pearl" style="margin-top:0.75rem; padding:0.5rem;">
+            <strong>All women on AEDs need high-dose folic acid (4mg/day) starting before conception!</strong>
+          </div>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🧠 Psychiatric Medications</h4>
+          <table style="font-size:0.85rem;">
+            <tr><th>Drug</th><th>Effects</th><th>Notes</th></tr>
+            <tr><td><strong>Lithium</strong></td><td>Ebstein anomaly (tricuspid valve), cardiac defects</td><td>Risk lower than previously thought (~1:1000)</td></tr>
+            <tr><td><strong>SSRIs (3rd tri)</strong></td><td>Neonatal withdrawal, PPHN</td><td>Benefits often outweigh risks; don't stop abruptly</td></tr>
+            <tr><td><strong>Benzodiazepines</strong></td><td>Neonatal withdrawal, "floppy baby"</td><td>Avoid chronic use</td></tr>
+          </table>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🦠 Antibiotics</h4>
+          <table style="font-size:0.85rem;">
+            <tr><th>Drug</th><th>Effects</th><th>Notes</th></tr>
+            <tr><td><strong>Tetracyclines</strong></td><td>Tooth discoloration, enamel hypoplasia, bone growth inhibition</td><td>Avoid after 1st trimester</td></tr>
+            <tr><td><strong>Aminoglycosides</strong></td><td>CN VIII toxicity (hearing loss)</td><td>Use only if necessary</td></tr>
+            <tr><td><strong>Fluoroquinolones</strong></td><td>Cartilage damage (theoretical in humans)</td><td>Avoid if alternatives exist</td></tr>
+            <tr><td><strong>Trimethoprim</strong></td><td>Folate antagonist → neural tube defects</td><td>Avoid in 1st trimester</td></tr>
+            <tr><td style="color:var(--success);">Penicillins, Cephalosporins</td><td>Safe</td><td>First-line choices</td></tr>
+          </table>
+        </div>
+
+        <div class="success-box">
+          <h4 style="color: var(--success); margin-bottom: 0.5rem;">✅ Generally Safe Medications</h4>
+          <ul>
+            <li><strong>Acetaminophen</strong> - analgesic of choice</li>
+            <li><strong>Penicillins, Cephalosporins, Erythromycin</strong> - antibiotics of choice</li>
+            <li><strong>Insulin</strong> - does not cross placenta</li>
+            <li><strong>Heparin/LMWH</strong> - does not cross placenta (unlike warfarin)</li>
+            <li><strong>Levothyroxine</strong> - essential for fetal brain development</li>
+            <li><strong>Prenatal vitamins with folic acid</strong> - protective!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSTANCES TAB -->
+    <div id="substances" class="tab-content">
+      <div class="module-section">
+        <h2>🍺 Substances & Environmental Teratogens</h2>
+
+        <div class="teratogen-card" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5);">
+          <h4 style="color: #FCA5A5;">🍷 Fetal Alcohol Spectrum Disorder (FASD) ⭐⭐</h4>
+          <p><strong>#1 preventable cause of intellectual disability</strong></p>
+          <p><strong>Features of Fetal Alcohol Syndrome (FAS):</strong></p>
+          <ul>
+            <li><strong>Facial:</strong> Smooth philtrum, thin vermilion border, short palpebral fissures</li>
+            <li><strong>Growth:</strong> Pre- and postnatal growth restriction</li>
+            <li><strong>CNS:</strong> Microcephaly, intellectual disability, behavioral problems</li>
+            <li><strong>Cardiac:</strong> VSD, ASD</li>
+          </ul>
+          <p><strong>Safe amount of alcohol in pregnancy:</strong> NONE. No safe threshold established.</p>
+          <div class="mnemonic" style="margin-top:0.75rem;">
+            <strong>FAS Face: "Smooth Thin Short"</strong><br>
+            Smooth philtrum, Thin upper lip, Short palpebral fissures
+          </div>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🚬 Tobacco</h4>
+          <p><strong>Effects:</strong></p>
+          <ul>
+            <li>Intrauterine growth restriction (IUGR)</li>
+            <li>Preterm birth</li>
+            <li>Placental abruption, placenta previa</li>
+            <li>SIDS risk increased</li>
+            <li>Orofacial clefts (modest association)</li>
+          </ul>
+          <p><strong>Mechanism:</strong> Nicotine causes vasoconstriction; CO reduces oxygen delivery</p>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>💉 Cocaine</h4>
+          <p><strong>Effects:</strong></p>
+          <ul>
+            <li>Placental abruption (vasoconstriction)</li>
+            <li>IUGR, preterm birth</li>
+            <li>Limb reduction defects (vascular disruption)</li>
+            <li>GU abnormalities</li>
+            <li>Neurobehavioral effects</li>
+          </ul>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>☢️ Radiation</h4>
+          <p><strong>Threshold:</strong> &gt;10 rad (100 mGy) associated with teratogenicity</p>
+          <p><strong>Most sensitive:</strong> Weeks 8-15 (CNS development)</p>
+          <p><strong>Effects:</strong> Microcephaly, intellectual disability, growth restriction</p>
+          <p><strong>Diagnostic imaging:</strong> Chest X-ray, CT of extremities = low risk. Avoid CT abdomen/pelvis if possible.</p>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>♨️ Hyperthermia</h4>
+          <p><strong>Source:</strong> Fever, hot tubs, saunas</p>
+          <p><strong>Effects:</strong> Neural tube defects (especially weeks 3-4)</p>
+          <p><strong>Prevention:</strong> Treat fevers with acetaminophen; avoid prolonged hot tub use</p>
+        </div>
+
+        <div class="teratogen-card">
+          <h4>🩺 Maternal Conditions</h4>
+          <table style="font-size:0.85rem;">
+            <tr><th>Condition</th><th>Fetal Effects</th></tr>
+            <tr><td><strong>Diabetes (poorly controlled)</strong></td><td>Caudal regression syndrome, cardiac defects, macrosomia, NTDs</td></tr>
+            <tr><td><strong>Phenylketonuria (untreated)</strong></td><td>Microcephaly, cardiac defects, intellectual disability</td></tr>
+            <tr><td><strong>Hyperthyroidism</strong></td><td>Fetal goiter, IUGR (if untreated)</td></tr>
+            <tr><td><strong>SLE with anti-Ro/SSA</strong></td><td>Neonatal lupus, congenital heart block</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>🎯 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>A pregnant woman is found to have periventricular calcifications on fetal ultrasound. Which TORCH infection is most likely?</p>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">A. Toxoplasmosis</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, true)">B. CMV</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">C. Rubella</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">D. Herpes simplex</div>
+          <div id="exp-q1" class="explanation">
+            <strong>Answer: B.</strong> CMV causes PERIVENTRICULAR calcifications. Toxoplasmosis causes DIFFUSE/scattered intracranial calcifications. This is a classic board distinction!
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>A newborn has smooth philtrum, thin upper lip, and short palpebral fissures. What is the diagnosis?</p>
+          <div class="quiz-option" onclick="checkQ('q2', this, true)">A. Fetal alcohol syndrome</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">B. Fetal hydantoin syndrome</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">C. Congenital rubella</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">D. Congenital CMV</div>
+          <div id="exp-q2" class="explanation">
+            <strong>Answer: A.</strong> The classic FAS facial features are: smooth philtrum, thin vermilion border (upper lip), and short palpebral fissures. FAS is the #1 preventable cause of intellectual disability.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>Which antiepileptic drug has the HIGHEST risk of neural tube defects?</p>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">A. Lamotrigine</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, true)">B. Valproic acid</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">C. Levetiracetam</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">D. Carbamazepine</div>
+          <div id="exp-q3" class="explanation">
+            <strong>Answer: B.</strong> Valproic acid has the highest risk of neural tube defects (1-2%) among AEDs. It should be avoided in pregnancy if possible, especially in the first trimester. High-dose folic acid (4mg) is recommended for all women on AEDs.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>The "classic triad" of congenital rubella syndrome includes all EXCEPT:</p>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">A. Cataracts</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">B. Sensorineural deafness</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, true)">C. Periventricular calcifications</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">D. Cardiac defects (PDA)</div>
+          <div id="exp-q4" class="explanation">
+            <strong>Answer: C.</strong> The rubella triad is Cataracts, Cardiac defects (PDA, pulmonary stenosis), and Cochlear/sensorineural deafness (the 3 C's). PERIVENTRICULAR calcifications are associated with CMV, not rubella.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>During which period is a teratogen exposure most likely to cause major structural malformations?</p>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">A. Pre-implantation (weeks 1-2)</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, true)">B. Embryonic period (weeks 3-8)</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">C. Early fetal period (weeks 9-16)</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">D. Late fetal period (weeks 17-38)</div>
+          <div id="exp-q5" class="explanation">
+            <strong>Answer: B.</strong> The embryonic period (weeks 3-8) is when organogenesis occurs and is the time of MAXIMUM sensitivity for structural malformations. Pre-implantation is "all or none" (death or no effect). Fetal period exposures cause functional deficits and growth restriction.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFERENCES -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #93c5fd;">📖 References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK559119/" target="_blank" style="color: #93c5fd;">StatPearls: Teratogenic Medications</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK482128/" target="_blank" style="color: #93c5fd;">StatPearls: TORCH Complex</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK448178/" target="_blank" style="color: #93c5fd;">StatPearls: Fetal Alcohol Syndrome</a>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(qId, el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = 'none';
+      });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) {
+        section.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+        });
+      }
+      document.getElementById('exp-' + qId).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Teratology"
+         data-key-points="📚 Principles of Teratology, 📅 Critical Periods by Organ System, 🦠 TORCH Infections, 💊 Medication Teratogens, 🍺 Substances & Environmental Teratogens, 🎯 Test Your Knowledge, 📖 References, Wilson's Six Principles of Teratology, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

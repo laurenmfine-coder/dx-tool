@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neonatal Surgical Emergencies | ReasonDx CRT</title>
+  <style>
+    :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EC4899; --success: #10B981; --danger: #DC2626; --info: #8B5CF6; --warning: #F59E0B; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    .header { background: linear-gradient(135deg, #831843, #EC4899); padding: 16px 20px; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; flex-wrap: wrap; gap: 12px; }
+    .header-title { font-size: 1.2rem; font-weight: 700; }
+    .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; margin-left: 10px; }
+    .stats { display: flex; gap: 16px; }
+    .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 10px; }
+    .stat-value { font-size: 1.2rem; font-weight: 700; font-family: monospace; }
+    .stat-label { font-size: 0.65rem; opacity: 0.8; text-transform: uppercase; }
+    .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .scenario-nav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .scenario-btn { padding: 10px 16px; background: var(--card); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; color: var(--text); }
+    .scenario-btn:hover { border-color: var(--accent); }
+    .scenario-btn.active { background: var(--accent); border-color: var(--accent); }
+    .scenario-btn.completed { border-color: var(--success); }
+    .scenario-btn.completed::after { content: " ✓"; color: var(--success); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; }
+    .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+    .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+    .card-title { font-size: 1.4rem; font-weight: 700; margin-top: 4px; }
+    .card-body { padding: 24px; }
+    .narrative { background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(219,39,119,0.1)); border-left: 4px solid var(--accent); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px; }
+    .hl { background: rgba(236,72,153,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+    .findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+    .finding { background: rgba(0,0,0,0.2); padding: 14px; border-radius: 10px; }
+    .finding-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+    .finding-value { font-weight: 600; }
+    .finding.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+    .choices { display: grid; gap: 12px; margin-top: 20px; }
+    .choice { background: var(--card); border: 2px solid var(--border); padding: 16px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
+    .choice:hover { border-color: var(--accent); transform: translateX(4px); }
+    .choice.correct { border-color: var(--success); background: rgba(16,185,129,0.2); pointer-events: none; }
+    .choice.wrong { border-color: var(--danger); background: rgba(220,38,38,0.2); pointer-events: none; }
+    .choice-icon { font-size: 1.5rem; }
+    .choice-title { font-weight: 600; }
+    .choice-desc { font-size: 0.85rem; color: var(--muted); }
+    .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 12px; }
+    .feedback.show { display: block; }
+    .feedback.good { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+    .feedback.bad { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+    .teaching { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 16px; margin: 20px 0; }
+    .teaching h4 { color: var(--info); margin-bottom: 8px; }
+    .alert { padding: 16px; border-radius: 12px; margin: 20px 0; display: flex; gap: 12px; }
+    .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+    .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+    .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+    .alert-icon { font-size: 1.5rem; }
+    .alert-title { font-weight: 600; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+    .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    .comparison-table th { background: rgba(236,72,153,0.2); color: var(--accent); }
+    .hidden { display: none !important; }
+    .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin: 20px 0; }
+    .summary-card { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; }
+    .summary-card h4 { color: var(--accent); margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-row">
+      <div class="header-title">👶 Neonatal Surgical Emergencies<span class="badge">4 SCENARIOS</span></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+        <div class="stat"><div class="stat-value" id="completed">0/4</div><div class="stat-label">Complete</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="scenario-nav">
+      <button class="scenario-btn active" onclick="showScenario(1)">1. Respiratory Distress</button>
+      <button class="scenario-btn" onclick="showScenario(2)">2. Drooling Newborn</button>
+      <button class="scenario-btn" onclick="showScenario(3)">3. Abdominal Wall Defect</button>
+      <button class="scenario-btn" onclick="showScenario(4)">4. Double Bubble</button>
+    </div>
+
+    <!-- SCENARIO 1: CDH -->
+    <div id="scenario1" class="scenario">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Scenario 1: Congenital Diaphragmatic Hernia</div>
+          <div class="card-title">🫁 Newborn with Respiratory Distress</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            A full-term infant is born with immediate <span class="hl">severe respiratory distress</span>. The abdomen appears <span class="hl">scaphoid (sunken)</span>. Breath sounds are diminished on the LEFT with <span class="hl">bowel sounds heard in the chest</span>. Heart sounds are shifted to the right.
+          </div>
+
+          <div class="findings">
+            <div class="finding critical"><div class="finding-label">SpO2</div><div class="finding-value">70% on 100% O2</div></div>
+            <div class="finding"><div class="finding-label">Abdomen</div><div class="finding-value">Scaphoid</div></div>
+            <div class="finding critical"><div class="finding-label">Left Chest</div><div class="finding-value">Bowel sounds</div></div>
+            <div class="finding"><div class="finding-label">Heart</div><div class="finding-value">Shifted right</div></div>
+          </div>
+
+          <div class="teaching">
+            <h4>💡 Embryology Connection</h4>
+            <p><strong>CDH</strong> occurs when the <strong>pleuroperitoneal membrane</strong> fails to close (usually LEFT side - Bochdalek hernia). Abdominal organs herniate into the chest during development, preventing normal lung growth → <strong>pulmonary hypoplasia</strong>.</p>
+          </div>
+
+          <p style="margin-bottom: 16px; font-weight: 600;">What is the CRITICAL first action?</p>
+
+          <div class="choices" id="c1">
+            <div class="choice" onclick="check(1, this, false)">
+              <div class="choice-icon">🎭</div>
+              <div><div class="choice-title">Bag-mask ventilation</div><div class="choice-desc">Support breathing</div></div>
+            </div>
+            <div class="choice" onclick="check(1, this, true)">
+              <div class="choice-icon">🔧</div>
+              <div><div class="choice-title">Immediate intubation - NO bag-mask</div><div class="choice-desc">Bag-mask pushes air into herniated bowel, worsening compression</div></div>
+            </div>
+            <div class="choice" onclick="check(1, this, false)">
+              <div class="choice-icon">📷</div>
+              <div><div class="choice-title">Get chest X-ray first</div><div class="choice-desc">Confirm diagnosis before acting</div></div>
+            </div>
+            <div class="choice" onclick="check(1, this, false)">
+              <div class="choice-icon">🔪</div>
+              <div><div class="choice-title">Emergent surgery</div><div class="choice-desc">Repair the defect immediately</div></div>
+            </div>
+          </div>
+          <div class="feedback" id="f1"></div>
+
+          <div id="s1-complete" class="hidden" style="margin-top: 20px;">
+            <div class="alert success">
+              <div class="alert-icon">✅</div>
+              <div>
+                <div class="alert-title">Key Points - CDH</div>
+                <div>• Scaphoid abdomen + respiratory distress + bowel sounds in chest = CDH<br>
+                • Do NOT bag-mask (inflates herniated bowel)<br>
+                • Intubate immediately, NG to decompress stomach<br>
+                • Stabilize before surgery (may need ECMO)<br>
+                • LEFT-sided Bochdalek (90%) >> RIGHT or anterior Morgagni</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="showScenario(2)">Next Scenario →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO 2: TEF -->
+    <div id="scenario2" class="scenario hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Scenario 2: Tracheoesophageal Fistula</div>
+          <div class="card-title">🤤 The Drooling Newborn</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            A newborn has <span class="hl">excessive drooling</span> and <span class="hl">choking/coughing with the first feeding attempt</span>. The nurse cannot pass an NG tube - it <span class="hl">coils in the upper esophagus</span>. Prenatal history notable for <span class="hl">polyhydramnios</span>.
+          </div>
+
+          <div class="findings">
+            <div class="finding"><div class="finding-label">Drooling</div><div class="finding-value">Excessive, "bubbly"</div></div>
+            <div class="finding critical"><div class="finding-label">NG Tube</div><div class="finding-value">Cannot pass</div></div>
+            <div class="finding"><div class="finding-label">Prenatal</div><div class="finding-value">Polyhydramnios</div></div>
+            <div class="finding"><div class="finding-label">Feeding</div><div class="finding-value">Chokes/coughs</div></div>
+          </div>
+
+          <div class="teaching">
+            <h4>💡 Embryology Connection</h4>
+            <p><strong>TEF/Esophageal Atresia</strong> occurs when the <strong>tracheoesophageal septum</strong> fails to properly divide the foregut into trachea (ventral) and esophagus (dorsal). Most common type (85%): esophageal atresia with DISTAL TEF.</p>
+          </div>
+
+          <p style="margin-bottom: 16px; font-weight: 600;">CXR shows NG tube coiled in upper chest and GAS IN THE STOMACH. What does this indicate?</p>
+
+          <div class="choices" id="c2">
+            <div class="choice" onclick="check(2, this, false)">
+              <div class="choice-icon">🅰️</div>
+              <div><div class="choice-title">Pure esophageal atresia (Type A)</div><div class="choice-desc">No fistula connection</div></div>
+            </div>
+            <div class="choice" onclick="check(2, this, true)">
+              <div class="choice-icon">🅲</div>
+              <div><div class="choice-title">Esophageal atresia with DISTAL TEF (Type C)</div><div class="choice-desc">Most common (85%) - air reaches stomach via fistula</div></div>
+            </div>
+            <div class="choice" onclick="check(2, this, false)">
+              <div class="choice-icon">🅴</div>
+              <div><div class="choice-title">H-type TEF alone (Type E)</div><div class="choice-desc">No atresia, just fistula</div></div>
+            </div>
+            <div class="choice" onclick="check(2, this, false)">
+              <div class="choice-icon">❓</div>
+              <div><div class="choice-title">Cannot determine from this information</div><div class="choice-desc">Need more testing</div></div>
+            </div>
+          </div>
+          <div class="feedback" id="f2"></div>
+
+          <div id="s2-complete" class="hidden" style="margin-top: 20px;">
+            <div class="alert success">
+              <div class="alert-icon">✅</div>
+              <div>
+                <div class="alert-title">Key Points - TEF</div>
+                <div>• Can't pass NG + drooling + choking = esophageal atresia until proven otherwise<br>
+                • Gas in stomach = fistula below the atresia (Type C, 85%)<br>
+                • NO gas in stomach = pure atresia (Type A) or proximal fistula<br>
+                • Association: <strong>VACTERL</strong> (Vertebral, Anorectal, Cardiac, TE, Renal, Limb)<br>
+                • Polyhydramnios because fetus can't swallow amniotic fluid</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="showScenario(3)">Next Scenario →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO 3: Abdominal Wall Defects -->
+    <div id="scenario3" class="scenario hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Scenario 3: Abdominal Wall Defects</div>
+          <div class="card-title">🔴 Bowel Outside the Belly</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            Two babies are born with abdominal wall defects. Baby A has bowel <span class="hl">covered by a membrane</span>, herniating through the <span class="hl">umbilical ring</span>. Baby B has <span class="hl">exposed, matted bowel</span> herniating through a defect to the <span class="hl">RIGHT of the umbilicus</span>.
+          </div>
+
+          <table class="comparison-table">
+            <tr><th>Feature</th><th>Baby A</th><th>Baby B</th></tr>
+            <tr><td>Location</td><td>Through umbilicus</td><td>Right of umbilicus</td></tr>
+            <tr><td>Covering</td><td>Membrane present</td><td>No membrane - exposed</td></tr>
+            <tr><td>Bowel appearance</td><td>Normal</td><td>Matted, thickened</td></tr>
+            <tr><td>Umbilical cord</td><td>Inserts into sac</td><td>Normal insertion</td></tr>
+          </table>
+
+          <div class="teaching">
+            <h4>💡 Embryology Connection</h4>
+            <p><strong>Omphalocele:</strong> Failure of midgut to return from umbilical cord to abdomen (normally returns by week 10). Contents covered by peritoneum/amnion.<br>
+            <strong>Gastroschisis:</strong> Vascular accident causes defect in abdominal wall, bowel extrudes and is exposed to amniotic fluid → inflammation.</p>
+          </div>
+
+          <p style="margin-bottom: 16px; font-weight: 600;">Which baby is more likely to have associated anomalies (cardiac, chromosomal)?</p>
+
+          <div class="choices" id="c3">
+            <div class="choice" onclick="check(3, this, true)">
+              <div class="choice-icon">🅰️</div>
+              <div><div class="choice-title">Baby A (membrane-covered, through umbilicus)</div><div class="choice-desc">This is omphalocele - 50-70% have associated anomalies</div></div>
+            </div>
+            <div class="choice" onclick="check(3, this, false)">
+              <div class="choice-icon">🅱️</div>
+              <div><div class="choice-title">Baby B (exposed bowel, right of umbilicus)</div><div class="choice-desc">This is gastroschisis</div></div>
+            </div>
+            <div class="choice" onclick="check(3, this, false)">
+              <div class="choice-icon">🟰</div>
+              <div><div class="choice-title">Equal risk</div><div class="choice-desc">Both have similar association rates</div></div>
+            </div>
+            <div class="choice" onclick="check(3, this, false)">
+              <div class="choice-icon">❌</div>
+              <div><div class="choice-title">Neither typically has anomalies</div><div class="choice-desc">These are isolated defects</div></div>
+            </div>
+          </div>
+          <div class="feedback" id="f3"></div>
+
+          <div id="s3-complete" class="hidden" style="margin-top: 20px;">
+            <div class="alert success">
+              <div class="alert-icon">✅</div>
+              <div>
+                <div class="alert-title">Key Points - Omphalocele vs Gastroschisis</div>
+                <div>
+                <table class="comparison-table" style="margin-top:10px; font-size: 0.85rem;">
+                  <tr><th></th><th>Omphalocele</th><th>Gastroschisis</th></tr>
+                  <tr><td>Location</td><td>Through umbilicus</td><td>Right of umbilicus</td></tr>
+                  <tr><td>Covering</td><td>Membrane (peritoneum/amnion)</td><td>None - exposed</td></tr>
+                  <tr><td>Bowel</td><td>Normal appearance</td><td>Matted, inflamed</td></tr>
+                  <tr><td>Anomalies</td><td>50-70% (cardiac, Beckwith-Wiedemann, trisomies)</td><td>~10% (usually intestinal)</td></tr>
+                  <tr><td>Embryology</td><td>Failure of gut return</td><td>Vascular accident</td></tr>
+                </table>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="showScenario(4)">Next Scenario →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO 4: Duodenal Atresia -->
+    <div id="scenario4" class="scenario hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Scenario 4: Duodenal Atresia</div>
+          <div class="card-title">🫧 The Double Bubble</div>
+        </div>
+        <div class="card-body">
+          <div class="narrative">
+            A newborn with <span class="hl">Down syndrome</span> begins vomiting shortly after birth. The vomit is <span class="hl">bilious (green)</span>. Abdominal X-ray shows the classic <span class="hl">"double bubble" sign</span> with no distal bowel gas.
+          </div>
+
+          <div class="findings">
+            <div class="finding"><div class="finding-label">Syndrome</div><div class="finding-value">Trisomy 21</div></div>
+            <div class="finding critical"><div class="finding-label">Vomiting</div><div class="finding-value">Bilious</div></div>
+            <div class="finding"><div class="finding-label">X-ray</div><div class="finding-value">Double bubble</div></div>
+            <div class="finding"><div class="finding-label">Distal Gas</div><div class="finding-value">None</div></div>
+          </div>
+
+          <div class="teaching">
+            <h4>💡 Embryology Connection</h4>
+            <p><strong>Duodenal atresia</strong> results from failure of <strong>recanalization</strong>. The duodenum initially becomes solid (week 5-6), then recanalization creates the lumen. Failure → obstruction. 30% associated with <strong>Down syndrome</strong>.</p>
+            <p style="margin-top:8px;">Double bubble = dilated stomach + dilated proximal duodenum. No distal gas means COMPLETE obstruction.</p>
+          </div>
+
+          <p style="margin-bottom: 16px; font-weight: 600;">The vomiting is BILIOUS. What does this tell you about the location of the obstruction?</p>
+
+          <div class="choices" id="c4">
+            <div class="choice" onclick="check(4, this, false)">
+              <div class="choice-icon">⬆️</div>
+              <div><div class="choice-title">Proximal to the ampulla of Vater</div><div class="choice-desc">Above where bile enters</div></div>
+            </div>
+            <div class="choice" onclick="check(4, this, true)">
+              <div class="choice-icon">⬇️</div>
+              <div><div class="choice-title">Distal to the ampulla of Vater</div><div class="choice-desc">Below where bile enters - bile backs up</div></div>
+            </div>
+            <div class="choice" onclick="check(4, this, false)">
+              <div class="choice-icon">🟰</div>
+              <div><div class="choice-title">At the ampulla of Vater</div><div class="choice-desc">Exactly at the bile duct</div></div>
+            </div>
+            <div class="choice" onclick="check(4, this, false)">
+              <div class="choice-icon">❓</div>
+              <div><div class="choice-title">Cannot tell from vomit color</div><div class="choice-desc">Need imaging to localize</div></div>
+            </div>
+          </div>
+          <div class="feedback" id="f4"></div>
+
+          <div id="s4-complete" class="hidden" style="margin-top: 20px;">
+            <div class="alert success">
+              <div class="alert-icon">✅</div>
+              <div>
+                <div class="alert-title">Key Points - Duodenal Atresia</div>
+                <div>• Double bubble + no distal gas = complete duodenal obstruction<br>
+                • Bilious vomiting = obstruction DISTAL to ampulla of Vater (D2-D3)<br>
+                • Non-bilious = obstruction PROXIMAL to ampulla (pylorus, D1)<br>
+                • 30% associated with Trisomy 21<br>
+                • Also associated with annular pancreas, malrotation<br>
+                • Failure of recanalization (different from malrotation which is rotation failure)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL SUMMARY -->
+    <div id="summary" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-phase">Complete!</div>
+          <div class="card-title">🎓 Neonatal Surgical Emergencies Summary</div>
+        </div>
+        <div class="card-body">
+          <div class="alert success">
+            <div class="alert-icon">🎉</div>
+            <div>
+              <div class="alert-title">Final Score: <span id="final-score">0</span>/400</div>
+              <div>You've completed all 4 neonatal surgical emergency scenarios!</div>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-card">
+              <h4>🫁 CDH</h4>
+              <p>Pleuroperitoneal membrane failure → bowel in chest → pulmonary hypoplasia. Scaphoid abdomen. NO bag-mask!</p>
+            </div>
+            <div class="summary-card">
+              <h4>🤤 TEF</h4>
+              <p>Tracheoesophageal septum failure. Can't pass NG, drooling, choking. Type C (85%) = atresia + distal fistula. VACTERL.</p>
+            </div>
+            <div class="summary-card">
+              <h4>🔴 Abdominal Wall</h4>
+              <p>Omphalocele (through umbilicus, membrane, anomalies) vs Gastroschisis (right of umbilicus, exposed, isolated).</p>
+            </div>
+            <div class="summary-card">
+              <h4>🫧 Duodenal Atresia</h4>
+              <p>Recanalization failure. Double bubble. 30% Trisomy 21. Bilious = distal to ampulla.</p>
+            </div>
+          </div>
+
+          <div class="teaching">
+            <h4>🔑 Universal Principle</h4>
+            <p><strong>BILIOUS VOMITING in a newborn = surgical emergency until proven otherwise.</strong> It indicates obstruction distal to where bile enters (ampulla of Vater). Must rule out malrotation with volvulus (can cause midgut death in hours).</p>
+          </div>
+
+          <div style="text-align: center; margin-top: 24px;">
+            <button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button>
+            <button class="btn btn-secondary" style="margin-left: 12px;" onclick="window.location.href='gi-embryology-malrotation-crt.html'">📚 Malrotation CRT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    let completed = [false, false, false, false];
+    
+    const feedback = {
+      1: {
+        y: "Correct! In CDH, bag-mask ventilation pushes air into the herniated stomach/bowel in the chest, further compressing the hypoplastic lungs. Intubate immediately and place NG to decompress. Surgery is NOT emergent - stabilize first (may need ECMO for severe cases).",
+        n: "In CDH, do NOT use bag-mask ventilation! It inflates the herniated bowel, worsening lung compression. Immediate intubation and NG decompression are critical. Surgery comes after stabilization."
+      },
+      2: {
+        y: "Correct! Type C (esophageal atresia + distal TEF) is the most common type (85%). The NG tube coils because of the blind upper pouch, but GAS reaches the stomach because air passes through the trachea → distal fistula → stomach. In pure atresia (Type A), there would be NO gas in the stomach.",
+        n: "Gas in the stomach with esophageal atresia means there's a fistula connection below the atresia (Type C - most common at 85%). Air travels: trachea → fistula → distal esophagus → stomach. No gas would mean pure atresia without fistula."
+      },
+      3: {
+        y: "Correct! OMPHALOCELE (Baby A) has 50-70% associated anomalies including cardiac defects, Beckwith-Wiedemann syndrome, and chromosomal abnormalities (trisomies). GASTROSCHISIS (Baby B) is usually isolated with only ~10% having associated anomalies (usually intestinal like atresia).",
+        n: "Omphalocele (membrane-covered, through umbilicus) has MUCH higher rate of associated anomalies (50-70%) than gastroschisis (~10%). Think: Omphalocele = Other anomalies."
+      },
+      4: {
+        y: "Correct! BILIOUS (green) vomiting means bile is present, which means the obstruction is DISTAL to the ampulla of Vater (where the common bile duct enters the duodenum at the D2 level). Proximal obstruction (like pyloric stenosis) causes NON-bilious vomiting because bile hasn't entered yet.",
+        n: "Bilious vomiting = obstruction BELOW the ampulla of Vater. Bile enters at D2, so obstruction at D2/D3 or beyond allows bile to back up. Non-bilious vomiting = obstruction ABOVE the ampulla (pylorus, D1)."
+      }
+    };
+
+    function check(n, el, correct) {
+      document.querySelectorAll(`#c${n} .choice`).forEach(c => {
+        c.style.pointerEvents = 'none';
+        if (c.onclick.toString().includes('true')) c.classList.add('correct');
+      });
+      el.classList.add(correct ? 'correct' : 'wrong');
+      
+      const fb = document.getElementById(`f${n}`);
+      fb.className = `feedback show ${correct ? 'good' : 'bad'}`;
+      fb.innerHTML = `<strong>${correct ? '✅ Correct! +100' : '❌ Not quite'}</strong><br><br>${correct ? feedback[n].y : feedback[n].n}`;
+      
+      if (correct) score += 100;
+      document.getElementById('score').textContent = score;
+      
+      completed[n-1] = true;
+      document.querySelectorAll('.scenario-btn')[n-1].classList.add('completed');
+      document.getElementById(`s${n}-complete`).classList.remove('hidden');
+      
+      const completedCount = completed.filter(Boolean).length;
+      document.getElementById('completed').textContent = `${completedCount}/4`;
+      
+      if (completedCount === 4) {
+        document.getElementById('final-score').textContent = score;
+        document.getElementById('summary').classList.remove('hidden');
+      }
+    }
+
+    function showScenario(n) {
+      document.querySelectorAll('.scenario').forEach(s => s.classList.add('hidden'));
+      document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`scenario${n}`).classList.remove('hidden');
+      document.querySelectorAll('.scenario-btn')[n-1].classList.add('active');
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Neonatal Surgical Emergencies"
+         data-key-points="clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

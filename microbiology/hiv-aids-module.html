@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIV/AIDS | MicrobiologyDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #dc2626; --primary-dark: #b91c1c; --primary-bg: #fef2f2;
+            --secondary: #059669; --warning: #f59e0b;
+            --text-primary: #18181b; --text-secondary: #52525b;
+            --bg-main: #fafafa; --bg-card: #ffffff; --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 40px 24px; }
+        .header-inner { max-width: 1000px; margin: 0 auto; }
+        .header h1 { font-size: 36px; color: white; margin-bottom: 8px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); }
+        .header-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+        .header-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: white; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
+        .section h2 { font-size: 22px; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { font-size: 18px; color: var(--primary-dark); margin: 24px 0 12px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .lifecycle-step { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+        .step-num { width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .step-content h4 { color: var(--primary-dark); margin-bottom: 4px; }
+        .step-content p { margin: 0; font-size: 14px; }
+        .step-drug { background: #dcfce7; padding: 4px 8px; border-radius: 4px; font-size: 12px; color: #166534; display: inline-block; margin-top: 4px; }
+        .cd4-row { display: flex; align-items: center; margin-bottom: 8px; }
+        .cd4-bar { height: 24px; border-radius: 4px; margin-right: 12px; display: flex; align-items: center; padding-left: 8px; color: white; font-size: 12px; font-weight: 600; }
+        .cd4-label { font-size: 13px; color: var(--text-secondary); }
+        .oi-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+        .oi-table th, .oi-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        .oi-table th { background: var(--primary-bg); color: var(--primary-dark); font-weight: 600; }
+        .drug-class-box { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .drug-class-box h4 { color: #047857; margin-bottom: 12px; }
+        .drug-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .drug-pill { background: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #059669; border: 1px solid #86efac; }
+        .mcat-tip { background: #fef3c7; border-left: 4px solid var(--warning); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .mcat-tip::before { content: '🎯 High Yield: '; font-weight: 600; color: #92400e; }
+        .clinical-pearl { background: #ecfdf5; border-left: 4px solid var(--secondary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl::before { content: '🏥 Clinical: '; font-weight: 600; color: #047857; }
+        .key-point { background: var(--primary-bg); border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body>
+    <nav class="nav"><div class="nav-inner"><a href="../index.html" class="nav-brand">🦠 MicrobiologyDx</a></div></nav>
+
+    <header class="header">
+        <div class="header-inner">
+            <h1>HIV / AIDS</h1>
+            <p class="header-subtitle">Human Immunodeficiency Virus - The CD4+ T Cell Destroyer</p>
+            <div class="header-tags">
+                <span class="header-tag">Retrovirus</span>
+                <span class="header-tag">Lentivirus</span>
+                <span class="header-tag">+ssRNA → dsDNA</span>
+                <span class="header-tag">Reverse Transcriptase</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="section">
+            <h2>🔬 Virology Overview</h2>
+            <p><strong>HIV</strong> is a retrovirus that infects and depletes CD4+ T cells, leading to profound immunodeficiency. Key features:</p>
+            <ul style="margin-left: 20px;">
+                <li><strong>Genome:</strong> Two copies of (+) ssRNA (diploid)</li>
+                <li><strong>Envelope:</strong> gp120 (binds CD4) and gp41 (fusion)</li>
+                <li><strong>Capsid:</strong> p24 antigen (used in diagnostics)</li>
+                <li><strong>Enzymes:</strong> Reverse transcriptase, integrase, protease - all drug targets!</li>
+            </ul>
+            <div class="mcat-tip">HIV is a RETROVIRUS with REVERSE TRANSCRIPTASE that converts RNA → DNA. This reverses the central dogma, hence "retro-virus."</div>
+        </section>
+
+        <section class="section">
+            <h2>🔄 HIV Life Cycle & Drug Targets</h2>
+            <div class="lifecycle-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>Attachment & Entry</h4>
+                    <p>gp120 binds CD4 → then CCR5/CXCR4 coreceptor → gp41 mediates fusion</p>
+                    <span class="step-drug">Maraviroc (CCR5 blocker) • Enfuvirtide (fusion inhibitor)</span>
+                </div>
+            </div>
+            <div class="lifecycle-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Reverse Transcription</h4>
+                    <p>Viral RNA → DNA by reverse transcriptase (error-prone → high mutation rate!)</p>
+                    <span class="step-drug">NRTIs (tenofovir, emtricitabine) • NNRTIs (efavirenz)</span>
+                </div>
+            </div>
+            <div class="lifecycle-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Integration</h4>
+                    <p>Viral DNA enters nucleus → integrase inserts into host chromosome (provirus)</p>
+                    <span class="step-drug">Integrase inhibitors (dolutegravir, bictegravir)</span>
+                </div>
+            </div>
+            <div class="lifecycle-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h4>Assembly & Maturation</h4>
+                    <p>Polyproteins cleaved by protease → mature virions bud from cell</p>
+                    <span class="step-drug">Protease inhibitors (darunavir)</span>
+                </div>
+            </div>
+            <div class="key-point"><strong>Why combination therapy?</strong> HIV RT is error-prone → rapid mutations. Using 3+ drugs prevents resistance emergence.</div>
+        </section>
+
+        <section class="section">
+            <h2>🦠 CD4 Count & Opportunistic Infections</h2>
+            <p>As CD4 falls, different OIs emerge. Know the thresholds!</p>
+            <div style="margin: 20px 0;">
+                <div class="cd4-row"><div class="cd4-bar" style="width: 100%; background: #22c55e;">CD4 >500</div><div class="cd4-label">Normal function</div></div>
+                <div class="cd4-row"><div class="cd4-bar" style="width: 80%; background: #84cc16;">200-500</div><div class="cd4-label">Thrush, Kaposi, TB, Shingles</div></div>
+                <div class="cd4-row"><div class="cd4-bar" style="width: 40%; background: #f59e0b;"><200</div><div class="cd4-label">PCP, Toxoplasma, Histo</div></div>
+                <div class="cd4-row"><div class="cd4-bar" style="width: 20%; background: #ef4444;"><100</div><div class="cd4-label">Cryptococcus, CMV</div></div>
+                <div class="cd4-row"><div class="cd4-bar" style="width: 10%; background: #991b1b;"><50</div><div class="cd4-label">MAC, CMV retinitis, PML</div></div>
+            </div>
+            <table class="oi-table">
+                <thead><tr><th>CD4</th><th>Infection</th><th>Presentation</th><th>Prophylaxis</th></tr></thead>
+                <tbody>
+                    <tr><td><strong><200</strong></td><td>PCP</td><td>Bilateral infiltrates, ↑LDH, hypoxemia</td><td>TMP-SMX</td></tr>
+                    <tr><td><strong><200</strong></td><td>Toxoplasma</td><td>Ring-enhancing brain lesions (multiple)</td><td>TMP-SMX (if IgG+)</td></tr>
+                    <tr><td><strong><100</strong></td><td>Cryptococcus</td><td>Meningitis, ↑ICP, India ink+</td><td>None routine</td></tr>
+                    <tr><td><strong><50</strong></td><td>MAC</td><td>Fever, weight loss, cytopenias</td><td>Azithromycin</td></tr>
+                    <tr><td><strong><50</strong></td><td>CMV retinitis</td><td>Floaters → blindness</td><td>None routine</td></tr>
+                </tbody>
+            </table>
+            <div class="clinical-pearl">TMP-SMX prophylaxis when CD4 <200 covers BOTH PCP and Toxoplasma!</div>
+        </section>
+
+        <section class="section">
+            <h2>🔬 Diagnosis</h2>
+            <h3>Screening Algorithm</h3>
+            <ol style="margin-left: 20px;">
+                <li><strong>4th gen test:</strong> Detects HIV-1/2 antibodies AND p24 antigen (earlier detection!)</li>
+                <li><strong>If positive →</strong> HIV-1/HIV-2 differentiation assay</li>
+                <li><strong>If indeterminate →</strong> HIV-1 RNA viral load</li>
+            </ol>
+            <div class="mcat-tip">4th gen tests detect p24 antigen + antibodies, narrowing the "window period" to ~2-4 weeks. RNA can detect even earlier.</div>
+        </section>
+
+        <section class="section">
+            <h2>💊 Antiretroviral Therapy (ART)</h2>
+            <p><strong>Start ART in ALL patients regardless of CD4.</strong> Typical regimen = 2 NRTIs + integrase inhibitor.</p>
+            
+            <div class="drug-class-box">
+                <h4>NRTIs (Nucleoside RTIs)</h4>
+                <div class="drug-list">
+                    <span class="drug-pill">Tenofovir (TDF/TAF)</span>
+                    <span class="drug-pill">Emtricitabine (FTC)</span>
+                    <span class="drug-pill">Abacavir</span>
+                    <span class="drug-pill">Lamivudine</span>
+                </div>
+                <p style="font-size: 13px; color: #047857;">Chain terminators - incorporate into DNA, lack 3'-OH → stop elongation</p>
+            </div>
+            
+            <div class="drug-class-box">
+                <h4>Integrase Inhibitors (INSTIs) ⭐ Preferred</h4>
+                <div class="drug-list">
+                    <span class="drug-pill">Dolutegravir ⭐</span>
+                    <span class="drug-pill">Bictegravir ⭐</span>
+                    <span class="drug-pill">Raltegravir</span>
+                </div>
+                <p style="font-size: 13px; color: #047857;">Block integrase → prevent viral DNA insertion. High barrier to resistance, well-tolerated.</p>
+            </div>
+
+            <h3>Preferred Initial Regimens</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Biktarvy</strong> (bictegravir/TAF/FTC) - single tablet daily</li>
+                <li><strong>Dolutegravir + TDF/FTC</strong></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>🛡️ Prevention: PrEP and PEP</h2>
+            <h3>PrEP (Pre-Exposure Prophylaxis)</h3>
+            <p>Daily antiretrovirals for high-risk HIV-negative individuals. >99% effective!</p>
+            <ul style="margin-left: 20px;"><li>TDF/FTC (Truvada) or TAF/FTC (Descovy) daily</li><li>Cabotegravir injectable every 2 months</li></ul>
+            
+            <h3>PEP (Post-Exposure Prophylaxis)</h3>
+            <p>Within 72 hours of exposure, continue 28 days. TDF/FTC + dolutegravir.</p>
+        </section>
+
+        <section class="section" style="background: linear-gradient(135deg, var(--primary-bg) 0%, #fee2e2 100%);">
+            <h2>📝 High-Yield Summary</h2>
+            <ul style="margin-left: 20px;">
+                <li><strong>Virus:</strong> Retrovirus, reverse transcriptase, (+)ssRNA → dsDNA → integrates</li>
+                <li><strong>Target:</strong> CD4+ T cells via CD4 receptor + CCR5/CXCR4 coreceptor</li>
+                <li><strong>Diagnosis:</strong> 4th gen Ag/Ab test (p24 + antibodies)</li>
+                <li><strong>AIDS:</strong> CD4 <200 OR AIDS-defining illness</li>
+                <li><strong>OI thresholds:</strong> <200 = PCP/toxo; <100 = crypto; <50 = MAC/PML</li>
+                <li><strong>Prophylaxis:</strong> TMP-SMX when CD4 <200 (covers PCP + toxo)</li>
+                <li><strong>ART:</strong> 2 NRTIs + integrase inhibitor (dolutegravir/bictegravir preferred)</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>📚 Sources & Guidelines</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Content verified against current open-access guidelines:</p>
+            <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li><strong>NIH Guidelines for Antiretroviral Agents in Adults and Adolescents with HIV.</strong> DHHS. <a href="https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-arv" target="_blank" style="color: #dc2626;">clinicalinfo.hiv.gov</a> [ART recommendations, drug selection]</li>
+                <li><strong>NIH Guidelines for Prevention and Treatment of Opportunistic Infections.</strong> <a href="https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections" target="_blank" style="color: #dc2626;">clinicalinfo.hiv.gov/oi</a> [CD4 thresholds, prophylaxis]</li>
+                <li><strong>CDC HIV Testing.</strong> <a href="https://www.cdc.gov/hiv/testing" target="_blank" style="color: #dc2626;">cdc.gov/hiv/testing</a> [4th generation testing algorithm]</li>
+                <li><strong>CDC PrEP Guidelines.</strong> <a href="https://www.cdc.gov/hiv/risk/prep" target="_blank" style="color: #dc2626;">cdc.gov/hiv/risk/prep</a> [PrEP indications]</li>
+                <li><strong>NCBI Bookshelf - Medical Microbiology, Ch 62: Retroviruses.</strong> <a href="https://www.ncbi.nlm.nih.gov/books/NBK8538/" target="_blank" style="color: #dc2626;">NCBI</a> [Virology, lifecycle]</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="HIV/AIDS"
+         data-key-points="🔬 Virology Overview, 🔄 HIV Life Cycle & Drug Targets, 🦠 CD4 Count & Opportunistic Infections, 🔬 Diagnosis, 💊 Antiretroviral Therapy (ART), 🛡️ Prevention: PrEP and PEP, 📝 High-Yield Summary, 📚 Sources & Guidelines, microbiology, pathogenesis, virulence factors, clinical syndromes, antibiotic treatment, resistance"
+         data-objectives="Identify organism characteristics, understand disease mechanisms, select appropriate therapy"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Surgical Nutrition</title>
+  <style>
+    :root { --primary: #059669; --secondary: #0891B2; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; --purple: #8B5CF6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #0a1a1a 0%, #1a2e2e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(5, 150, 105, 0.1); border-radius: 1rem; border: 1px solid rgba(5, 150, 105, 0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; transition: all 0.2s; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+    .key-box { background: rgba(5, 150, 105, 0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .warning-box { background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--accent); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(5, 150, 105, 0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.25rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(139, 92, 246, 0.15); border: 2px dashed var(--purple); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 700px) { .comparison-grid { grid-template-columns: 1fr; } }
+    .comparison-card { background: rgba(0,0,0,0.3); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,0.1); }
+    .comparison-card h4 { color: var(--secondary); margin-bottom: 0.75rem; }
+    .formula-box { background: rgba(139, 92, 246, 0.1); border: 1px solid var(--purple); border-radius: 0.5rem; padding: 1rem; margin: 1rem 0; font-family: monospace; }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.6rem; margin: 0.4rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+    .quiz-option:hover { background: rgba(5, 150, 105, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🥗 Surgical Nutrition</h1>
+      <p style="color: #9CA3AF;">Enteral vs Parenteral • TPN Formulation • Tube Feeds • Refeeding Syndrome</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('enteral')">Enteral Nutrition</div>
+      <div class="nav-tab" onclick="showTab('parenteral')">TPN</div>
+      <div class="nav-tab" onclick="showTab('monitoring')">Monitoring</div>
+      <div class="nav-tab" onclick="showTab('complications')">Complications</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Nutrition Assessment</h2>
+        
+        <div class="key-box">
+          <strong>The Golden Rule:</strong> "If the gut works, use it!"<br>
+          Enteral nutrition is ALWAYS preferred over parenteral when possible.
+        </div>
+
+        <h3>Why Enteral is Preferred</h3>
+        <table>
+          <tr><th>Enteral Advantage</th><th>Explanation</th></tr>
+          <tr><td>Maintains gut integrity</td><td>Prevents bacterial translocation</td></tr>
+          <tr><td>Fewer infectious complications</td><td>No central line needed</td></tr>
+          <tr><td>Less expensive</td><td>Lower cost of formulas and delivery</td></tr>
+          <tr><td>More physiologic</td><td>First-pass hepatic metabolism, gut hormones</td></tr>
+          <tr><td>Preserves gut immune function</td><td>Maintains IgA, GALT</td></tr>
+        </table>
+
+        <h3>Nutrition Screening</h3>
+        <div class="info-box">
+          <strong>Markers suggesting malnutrition:</strong>
+          <ul>
+            <li>Unintentional weight loss >10% in 6 months or >5% in 1 month</li>
+            <li>BMI <18.5 kg/m²</li>
+            <li>Albumin <3.0 g/dL (reflects chronic status, not acute)</li>
+            <li>Prealbumin <15 mg/dL (better for acute changes, t½ ~2 days)</li>
+            <li>Poor oral intake for ≥5-7 days</li>
+          </ul>
+        </div>
+
+        <h3>Caloric Requirements</h3>
+        <div class="formula-box">
+          <strong>Quick Estimate:</strong> 25-30 kcal/kg/day<br><br>
+          <strong>Harris-Benedict Equation (BEE):</strong><br>
+          Men: 66 + (13.7 × wt kg) + (5 × ht cm) - (6.8 × age)<br>
+          Women: 655 + (9.6 × wt kg) + (1.8 × ht cm) - (4.7 × age)<br><br>
+          <strong>Total Energy = BEE × Activity Factor × Stress Factor</strong>
+        </div>
+
+        <table>
+          <tr><th>Stress Factor</th><th>Multiplier</th></tr>
+          <tr><td>Minor surgery</td><td>1.1-1.2</td></tr>
+          <tr><td>Major surgery</td><td>1.2-1.4</td></tr>
+          <tr><td>Sepsis</td><td>1.3-1.5</td></tr>
+          <tr><td>Burns (per % TBSA)</td><td>1.5-2.0+</td></tr>
+          <tr><td>Trauma</td><td>1.3-1.5</td></tr>
+        </table>
+
+        <h3>Protein Requirements</h3>
+        <table>
+          <tr><th>Patient Status</th><th>Protein Goal</th></tr>
+          <tr><td>Normal/Maintenance</td><td>0.8-1.0 g/kg/day</td></tr>
+          <tr><td>Mild-moderate stress</td><td>1.2-1.5 g/kg/day</td></tr>
+          <tr><td>Severe stress/burns/trauma</td><td>1.5-2.0 g/kg/day</td></tr>
+          <tr><td>Renal failure (non-dialysis)</td><td>0.6-0.8 g/kg/day (restrict)</td></tr>
+          <tr><td>Hemodialysis</td><td>1.2-1.4 g/kg/day</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ENTERAL -->
+    <div id="enteral" class="tab-content">
+      <div class="section">
+        <h2>🥤 Enteral Nutrition</h2>
+
+        <h3>Access Routes</h3>
+        <table>
+          <tr><th>Route</th><th>Indication</th><th>Duration</th><th>Notes</th></tr>
+          <tr>
+            <td><strong>Nasogastric (NG)</strong></td>
+            <td>Short-term, functional stomach</td>
+            <td>&lt;4-6 weeks</td>
+            <td>Easy placement; aspiration risk</td>
+          </tr>
+          <tr>
+            <td><strong>Nasoduodenal/Nasojejunal</strong></td>
+            <td>High aspiration risk, gastroparesis</td>
+            <td>&lt;4-6 weeks</td>
+            <td>Post-pyloric reduces aspiration</td>
+          </tr>
+          <tr>
+            <td><strong>PEG (Percutaneous Endoscopic Gastrostomy)</strong></td>
+            <td>Long-term, functional stomach</td>
+            <td>&gt;4-6 weeks</td>
+            <td>Endoscopic placement; can bolus feed</td>
+          </tr>
+          <tr>
+            <td><strong>PEJ / J-tube</strong></td>
+            <td>Long-term, high aspiration risk, post-gastric surgery</td>
+            <td>&gt;4-6 weeks</td>
+            <td>Requires continuous infusion; placed surgically or endoscopically</td>
+          </tr>
+        </table>
+
+        <h3>Formula Types</h3>
+        <table>
+          <tr><th>Type</th><th>Description</th><th>Indication</th></tr>
+          <tr>
+            <td><strong>Standard (polymeric)</strong></td>
+            <td>Intact protein, complex carbs, fat; 1-1.2 kcal/mL</td>
+            <td>Most patients with functional GI tract</td>
+          </tr>
+          <tr>
+            <td><strong>High-protein</strong></td>
+            <td>Increased protein ratio</td>
+            <td>Wound healing, critical illness, burns</td>
+          </tr>
+          <tr>
+            <td><strong>Semi-elemental</strong></td>
+            <td>Partially hydrolyzed protein, MCT oil</td>
+            <td>Impaired digestion/absorption, pancreatitis</td>
+          </tr>
+          <tr>
+            <td><strong>Elemental</strong></td>
+            <td>Free amino acids, simple sugars</td>
+            <td>Severe malabsorption, short gut</td>
+          </tr>
+          <tr>
+            <td><strong>Renal</strong></td>
+            <td>Low protein, phosphorus, potassium; concentrated</td>
+            <td>CKD not on dialysis; fluid restriction</td>
+          </tr>
+          <tr>
+            <td><strong>Hepatic</strong></td>
+            <td>Branched-chain amino acids, low aromatic AAs</td>
+            <td>Hepatic encephalopathy</td>
+          </tr>
+          <tr>
+            <td><strong>Diabetic</strong></td>
+            <td>Lower carb, higher fat, fiber</td>
+            <td>Diabetes with glucose intolerance</td>
+          </tr>
+          <tr>
+            <td><strong>Pulmonary</strong></td>
+            <td>Higher fat, lower carb</td>
+            <td>CO2 retention (RQ: fat < carb)</td>
+          </tr>
+          <tr>
+            <td><strong>Immune-enhancing</strong></td>
+            <td>Arginine, glutamine, omega-3, nucleotides</td>
+            <td>Surgical ICU patients (controversial)</td>
+          </tr>
+        </table>
+
+        <h3>Initiation and Advancement</h3>
+        <div class="key-box">
+          <strong>Starting Tube Feeds:</strong>
+          <ol>
+            <li>Confirm tube position (X-ray for post-pyloric; pH or auscultation for NG)</li>
+            <li>Elevate HOB ≥30-45°</li>
+            <li>Start at 20-25 mL/hr (or full rate if hemodynamically stable)</li>
+            <li>Advance by 10-25 mL/hr every 4-8 hours as tolerated</li>
+            <li>Goal: full rate within 24-48 hours</li>
+          </ol>
+        </div>
+
+        <h3>Gastric vs Post-pyloric</h3>
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <h4>Gastric (NG, PEG)</h4>
+            <ul>
+              <li>Can bolus feed</li>
+              <li>More physiologic</li>
+              <li>Easier access</li>
+              <li>Higher aspiration risk</li>
+              <li>Check residuals (controversial)</li>
+            </ul>
+          </div>
+          <div class="comparison-card">
+            <h4>Post-pyloric (NJ, PEJ)</h4>
+            <ul>
+              <li>MUST be continuous</li>
+              <li>Lower aspiration risk</li>
+              <li>Use if gastroparesis</li>
+              <li>More difficult placement</li>
+              <li>Can feed with ileus (small bowel works)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>Clinical Pearl:</strong> "The small bowel always works!" Even with gastric ileus, post-pyloric feeding is often tolerated because small bowel motility recovers first (usually within 24 hours).
+        </div>
+      </div>
+    </div>
+
+    <!-- PARENTERAL -->
+    <div id="parenteral" class="tab-content">
+      <div class="section">
+        <h2>💉 Total Parenteral Nutrition (TPN)</h2>
+
+        <div class="warning-box">
+          <strong>TPN Indications (when gut cannot be used):</strong>
+          <ul>
+            <li>Bowel obstruction</li>
+            <li>Severe ileus</li>
+            <li>High-output fistula (>500 mL/day)</li>
+            <li>Short bowel syndrome</li>
+            <li>Severe malabsorption</li>
+            <li>Bowel ischemia</li>
+            <li>Severe mucositis/GI toxicity</li>
+          </ul>
+        </div>
+
+        <h3>TPN Components</h3>
+        <table>
+          <tr><th>Component</th><th>Caloric Value</th><th>Notes</th></tr>
+          <tr><td><strong>Dextrose</strong></td><td>3.4 kcal/g</td><td>Primary carb source; hyperglycemia risk</td></tr>
+          <tr><td><strong>Amino acids</strong></td><td>4 kcal/g</td><td>Usually 10-15% of TPN; protein equivalent</td></tr>
+          <tr><td><strong>Lipids</strong></td><td>9 kcal/g (10 kcal/mL for 20%)</td><td>Essential fatty acids; limit if triglycerides elevated</td></tr>
+        </table>
+
+        <h3>TPN Formulation</h3>
+        <div class="formula-box">
+          <strong>Quick TPN Calculation:</strong><br><br>
+          Goal: ~25-30 kcal/kg/day, 1.5 g protein/kg/day<br><br>
+          Example: 70 kg patient<br>
+          • Calories: 70 × 25 = 1750 kcal/day<br>
+          • Protein: 70 × 1.5 = 105 g amino acids/day<br>
+          • Dextrose: ~60% of non-protein calories<br>
+          • Lipids: ~30-40% of total calories (max 1g/kg/day)<br>
+          • + electrolytes, vitamins, trace elements
+        </div>
+
+        <h3>Lipid Emulsions</h3>
+        <table>
+          <tr><th>Formulation</th><th>Concentration</th><th>Notes</th></tr>
+          <tr><td>10% lipid</td><td>1.1 kcal/mL</td><td>More volume</td></tr>
+          <tr><td>20% lipid</td><td>2 kcal/mL</td><td>Most common; less volume</td></tr>
+          <tr><td>30% lipid</td><td>3 kcal/mL</td><td>Only for 3-in-1 admixtures</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>Lipid Restrictions:</strong>
+          <ul>
+            <li>Hold if triglycerides >400 mg/dL</li>
+            <li>Limit to 1 g/kg/day (2.5 g/kg/day max)</li>
+            <li>Essential fatty acid deficiency if withheld >2 weeks</li>
+          </ul>
+        </div>
+
+        <h3>Central vs Peripheral</h3>
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <h4>Central TPN</h4>
+            <ul>
+              <li>Via central line (PICC, subclavian, IJ)</li>
+              <li>Can use hypertonic solutions (&gt;900 mOsm)</li>
+              <li>Higher dextrose concentrations (15-25%)</li>
+              <li>Preferred for long-term use</li>
+              <li>Line infection risk</li>
+            </ul>
+          </div>
+          <div class="comparison-card">
+            <h4>Peripheral Parenteral (PPN)</h4>
+            <ul>
+              <li>Via peripheral IV</li>
+              <li>Must be ≤900 mOsm (avoid phlebitis)</li>
+              <li>Limited dextrose (≤10%)</li>
+              <li>Short-term only (&lt;2 weeks)</li>
+              <li>Cannot meet full caloric needs</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>TPN Additives</h3>
+        <table>
+          <tr><th>Additive</th><th>Standard Daily Amount</th></tr>
+          <tr><td>Sodium</td><td>1-2 mEq/kg</td></tr>
+          <tr><td>Potassium</td><td>1-2 mEq/kg</td></tr>
+          <tr><td>Calcium</td><td>10-15 mEq</td></tr>
+          <tr><td>Magnesium</td><td>8-20 mEq</td></tr>
+          <tr><td>Phosphorus</td><td>20-40 mmol</td></tr>
+          <tr><td>Multivitamins</td><td>Daily</td></tr>
+          <tr><td>Trace elements (Zn, Cu, Mn, Cr, Se)</td><td>Daily</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MONITORING -->
+    <div id="monitoring" class="tab-content">
+      <div class="section">
+        <h2>📊 Monitoring Nutrition Support</h2>
+
+        <h3>Laboratory Monitoring</h3>
+        <table>
+          <tr><th>Test</th><th>Frequency (Initial)</th><th>Purpose</th></tr>
+          <tr><td><strong>Glucose</strong></td><td>Every 6 hours → daily</td><td>Hyperglycemia management</td></tr>
+          <tr><td><strong>Electrolytes</strong></td><td>Daily → twice weekly</td><td>K, Mg, Phos especially</td></tr>
+          <tr><td><strong>BUN/Creatinine</strong></td><td>Daily → twice weekly</td><td>Renal function, hydration</td></tr>
+          <tr><td><strong>LFTs</strong></td><td>Weekly</td><td>TPN-associated liver dysfunction</td></tr>
+          <tr><td><strong>Triglycerides</strong></td><td>Weekly (if on lipids)</td><td>Hold lipids if &gt;400</td></tr>
+          <tr><td><strong>Prealbumin</strong></td><td>Weekly</td><td>Nutrition response (t½ 2 days)</td></tr>
+        </table>
+
+        <h3>Glucose Management</h3>
+        <div class="key-box">
+          <strong>Target glucose:</strong> 140-180 mg/dL in critically ill<br><br>
+          <strong>Managing hyperglycemia:</strong>
+          <ul>
+            <li>First: Add insulin to TPN bag (start ~0.1 units/g dextrose)</li>
+            <li>If severe: Separate insulin drip</li>
+            <li>If persistent: Reduce dextrose concentration</li>
+          </ul>
+        </div>
+
+        <h3>Nitrogen Balance</h3>
+        <div class="formula-box">
+          <strong>Nitrogen Balance = Nitrogen In - Nitrogen Out</strong><br><br>
+          Nitrogen In = Protein intake (g) ÷ 6.25<br>
+          Nitrogen Out = 24-hour urine urea nitrogen + 4 (insensible losses)<br><br>
+          <strong>Goal:</strong> Positive balance (+2 to +4 g/day) for anabolism
+        </div>
+
+        <h3>Markers of Nutritional Status</h3>
+        <table>
+          <tr><th>Marker</th><th>Half-life</th><th>Interpretation</th></tr>
+          <tr><td><strong>Albumin</strong></td><td>~20 days</td><td>Chronic status; affected by inflammation, hydration</td></tr>
+          <tr><td><strong>Prealbumin (Transthyretin)</strong></td><td>~2 days</td><td>Better for acute changes; affected by inflammation, renal function</td></tr>
+          <tr><td><strong>Transferrin</strong></td><td>~8 days</td><td>Intermediate marker; affected by iron status</td></tr>
+          <tr><td><strong>Retinol-binding protein</strong></td><td>~12 hours</td><td>Most sensitive but impractical</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Clinical Pearl:</strong> Prealbumin and albumin are "negative acute phase reactants" - they decrease with inflammation/infection regardless of nutrition. Don't rely on them alone in acute illness.
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLICATIONS -->
+    <div id="complications" class="tab-content">
+      <div class="section">
+        <h2>⚠️ Complications of Nutrition Support</h2>
+
+        <h3>Refeeding Syndrome</h3>
+        <div class="danger-box">
+          <strong>Definition:</strong> Metabolic derangements when nutrition is restarted after prolonged starvation<br><br>
+          <strong>High-risk patients:</strong>
+          <ul>
+            <li>BMI <16</li>
+            <li>>10% weight loss in 3-6 months</li>
+            <li>Little/no intake for >10 days</li>
+            <li>Alcoholism, anorexia nervosa</li>
+            <li>Low K, Mg, or Phos before feeding</li>
+          </ul>
+        </div>
+
+        <div class="mnemonic">
+          <strong>Refeeding Syndrome Key Features:</strong><br>
+          <strong>↓ Phosphorus</strong> (most important) - cardiac dysfunction, respiratory failure<br>
+          <strong>↓ Potassium</strong> - arrhythmias<br>
+          <strong>↓ Magnesium</strong> - arrhythmias, seizures<br>
+          <strong>Fluid retention</strong> - edema, CHF
+        </div>
+
+        <div class="success-box">
+          <strong>Prevention:</strong>
+          <ul>
+            <li>Start LOW, go SLOW (10-20 kcal/kg/day)</li>
+            <li>Replete electrolytes BEFORE starting feeds</li>
+            <li>Supplement thiamine (prevent Wernicke's)</li>
+            <li>Monitor electrolytes closely (daily)</li>
+            <li>Advance slowly over 4-7 days</li>
+          </ul>
+        </div>
+
+        <h3>Enteral Nutrition Complications</h3>
+        <table>
+          <tr><th>Complication</th><th>Cause</th><th>Management</th></tr>
+          <tr><td><strong>Aspiration</strong></td><td>Gastric distension, poor GE junction</td><td>HOB ≥30°, post-pyloric, check residuals</td></tr>
+          <tr><td><strong>Diarrhea</strong></td><td>Osmotic, bacterial, Cdiff, medications</td><td>Rule out Cdiff, consider fiber, slow rate</td></tr>
+          <tr><td><strong>Tube clogging</strong></td><td>Medications, formula, inadequate flushing</td><td>Flush with water; pancreatic enzymes if clogged</td></tr>
+          <tr><td><strong>Tube dislodgement</strong></td><td>Patient manipulation, inadequate securing</td><td>Confirm position before restarting</td></tr>
+          <tr><td><strong>High residuals</strong></td><td>Gastroparesis, ileus</td><td>Prokinetics (metoclopramide, erythromycin); post-pyloric</td></tr>
+        </table>
+
+        <h3>TPN Complications</h3>
+        <table>
+          <tr><th>Complication</th><th>Mechanism</th><th>Prevention/Treatment</th></tr>
+          <tr><td><strong>Hyperglycemia</strong></td><td>Dextrose load, stress</td><td>Insulin in TPN, reduce dextrose</td></tr>
+          <tr><td><strong>Line infection</strong></td><td>Central line contamination</td><td>Strict aseptic technique, dedicated port</td></tr>
+          <tr><td><strong>Liver dysfunction</strong></td><td>Steatosis, cholestasis</td><td>Cycle TPN (not 24hr), reduce dextrose, use lipids, start enteral</td></tr>
+          <tr><td><strong>Essential fatty acid deficiency</strong></td><td>No lipids for >2 weeks</td><td>Ensure lipids at least 2-3x/week</td></tr>
+          <tr><td><strong>Metabolic bone disease</strong></td><td>Aluminum, vitamin D issues</td><td>Monitor calcium, vitamin D, avoid aluminum</td></tr>
+          <tr><td><strong>Gallbladder sludge/stones</strong></td><td>Biliary stasis</td><td>Enteral if possible, CCK</td></tr>
+        </table>
+
+        <h3>TPN-Associated Liver Disease</h3>
+        <div class="warning-box">
+          <strong>Pattern:</strong> Elevated LFTs (AST, ALT, Alk phos, bilirubin)<br><br>
+          <strong>Prevention:</strong>
+          <ul>
+            <li>Use enteral nutrition when possible (even trophic feeds help)</li>
+            <li>Cycle TPN (run over 12-18 hours, off overnight)</li>
+            <li>Avoid overfeeding (especially dextrose)</li>
+            <li>Include lipids (essential fatty acids)</li>
+            <li>Fish oil-based lipids (Omegaven) in severe cases</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.nutritioncare.org/Guidelines_and_Clinical_Resources/" target="_blank">🔗 ASPEN Clinical Guidelines</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK436014/" target="_blank">🔗 NCBI Bookshelf - Nutritional Assessment</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ASPEN guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> A patient has a complete small bowel obstruction and needs nutrition support. What is the most appropriate route?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">A. Nasogastric tube feeding</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">B. Nasojejunal tube feeding</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q1')">C. Total parenteral nutrition</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">D. PEG tube</div>
+          <div class="explanation" id="q1-exp">
+            <strong>Correct: C.</strong> Complete bowel obstruction is an absolute contraindication to enteral nutrition. The gut cannot be used, so TPN is required until the obstruction is resolved.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> Which electrolyte abnormality is MOST characteristic of refeeding syndrome?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">A. Hyperkalemia</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q2')">B. Hypophosphatemia</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">C. Hypernatremia</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">D. Hypercalcemia</div>
+          <div class="explanation" id="q2-exp">
+            <strong>Correct: B.</strong> Hypophosphatemia is the hallmark of refeeding syndrome. When carbohydrates are reintroduced, insulin drives glucose (and phosphorus) into cells for ATP production, causing severe hypophosphatemia. This can cause cardiac dysfunction, respiratory failure, and death.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> A patient on TPN develops elevated triglycerides to 550 mg/dL. What should you do with the lipid emulsion?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q3')">A. Hold lipids until triglycerides decrease</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">B. Double the lipid dose</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">C. Continue lipids unchanged</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q3')">D. Switch to 10% lipid emulsion</div>
+          <div class="explanation" id="q3-exp">
+            <strong>Correct: A.</strong> Hold IV lipids when triglycerides exceed 400 mg/dL to avoid pancreatitis and fat overload syndrome. Resume at lower dose once triglycerides normalize. Can supplement essential fatty acids topically if needed.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> Why is enteral nutrition preferred over TPN?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">A. Enteral provides more calories</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q4')">B. Enteral maintains gut integrity and reduces infections</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">C. Enteral causes less diarrhea</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">D. Enteral is easier to calculate</div>
+          <div class="explanation" id="q4-exp">
+            <strong>Correct: B.</strong> Enteral nutrition maintains gut mucosal integrity, prevents bacterial translocation, preserves gut immune function (GALT), and has fewer infectious complications (no central line). "If the gut works, use it!"
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which serum protein is BEST for monitoring short-term response to nutrition therapy?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">A. Albumin (half-life ~20 days)</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q5')">B. Prealbumin (half-life ~2 days)</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">C. Transferrin (half-life ~8 days)</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">D. Hemoglobin</div>
+          <div class="explanation" id="q5-exp">
+            <strong>Correct: B.</strong> Prealbumin (transthyretin) has a short half-life of ~2 days, making it responsive to recent nutritional changes. Albumin's 20-day half-life makes it better for chronic status. Note: Both are negative acute phase reactants and decrease with inflammation.
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q6:</strong> A patient with gastroparesis needs long-term tube feeding. What is the best access?</p>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q6')">A. Nasogastric tube</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q6')">B. PEG (gastrostomy)</div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 'q6')">C. PEJ (jejunostomy)</div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 'q6')">D. Peripheral TPN</div>
+          <div class="explanation" id="q6-exp">
+            <strong>Correct: C.</strong> Post-pyloric feeding (PEJ/J-tube) bypasses the poorly functioning stomach and reduces aspiration risk. For long-term use (>4-6 weeks), a surgical/endoscopic tube is preferred over nasal tubes. Gastric feeding would pool in the atonic stomach.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function checkAnswer(el, correct, qId) {
+      if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (correct) document.getElementById(qId + '-exp').style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Surgical Nutrition"
+         data-key-points="🎯 Nutrition Assessment, 🥤 Enteral Nutrition, 💉 Total Parenteral Nutrition (TPN), 📊 Monitoring Nutrition Support, ⚠️ Complications of Nutrition Support, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Why Enteral is Preferred, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

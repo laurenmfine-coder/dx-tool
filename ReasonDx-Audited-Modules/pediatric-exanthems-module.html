@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Pediatric Exanthems</title>
+  <style>
+    :root{--primary:#F472B6;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(244,114,182,0.1);border-radius:1rem;border:1px solid rgba(244,114,182,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(244,114,182,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(244,114,182,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(244,114,182,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.disease-card{background:rgba(255,255,255,0.03);border-radius:0.75rem;padding:1.25rem;margin:1rem 0;border:1px solid rgba(255,255,255,0.1)}.disease-card h4{color:var(--accent);margin-bottom:0.75rem}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔴 Pediatric Exanthems</h1>
+      <p style="color:#9CA3AF">Classic Childhood Rashes • Viral vs Bacterial • Management</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('viral')">Viral Exanthems</div>
+      <div class="nav-tab" onclick="showTab('bacterial')">Bacterial</div>
+      <div class="nav-tab" onclick="showTab('other')">Other Rashes</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Classic Numbered Exanthems</h2>
+        
+        <table>
+          <tr><th>#</th><th>Disease</th><th>Cause</th><th>Key Feature</th></tr>
+          <tr><td>1st</td><td><strong>Measles</strong> (Rubeola)</td><td>Measles virus</td><td>Koplik spots, 3 C's</td></tr>
+          <tr><td>2nd</td><td><strong>Scarlet Fever</strong></td><td>Group A Strep</td><td>Sandpaper rash, strawberry tongue</td></tr>
+          <tr><td>3rd</td><td><strong>Rubella</strong> (German measles)</td><td>Rubella virus</td><td>Posterior auricular lymphadenopathy</td></tr>
+          <tr><td>4th</td><td><strong>Duke's Disease</strong></td><td>(No longer recognized)</td><td>-</td></tr>
+          <tr><td>5th</td><td><strong>Erythema Infectiosum</strong></td><td>Parvovirus B19</td><td>"Slapped cheek"</td></tr>
+          <tr><td>6th</td><td><strong>Roseola</strong></td><td>HHV-6</td><td>Fever then rash</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>"Really Sick Children Must See Physician"</strong><br>
+          <strong>R</strong>ubeola (Measles) • <strong>S</strong>carlet Fever • <strong>C</strong>hildhood Rubella<br>
+          <strong>M</strong>issing (4th) • <strong>S</strong>lapped cheek (5th) • <strong>P</strong>ost-fever rash (6th)
+        </div>
+
+        <h3>Quick Rash Identification</h3>
+        <div class="key-box">
+          <strong>Key Questions:</strong>
+          <ul>
+            <li>Fever BEFORE or AFTER rash?</li>
+            <li>Where did rash START? (face vs trunk)</li>
+            <li>Rash BLANCHING or NON-BLANCHING?</li>
+            <li>Mucosal involvement?</li>
+            <li>Lymphadenopathy location?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIRAL -->
+    <div id="viral" class="tab-content">
+      <div class="section">
+        <h2>🦠 Viral Exanthems</h2>
+
+        <div class="disease-card">
+          <h4>Measles (Rubeola) - 1st Disease</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Measles virus (Paramyxovirus)</td></tr>
+            <tr><td><strong>Prodrome</strong></td><td><strong>3 C's: Cough, Coryza, Conjunctivitis</strong> + high fever</td></tr>
+            <tr><td><strong>Pathognomonic</strong></td><td><strong>Koplik spots</strong> (white spots on buccal mucosa) - appear BEFORE rash</td></tr>
+            <tr><td><strong>Rash</strong></td><td>Maculopapular, starts at hairline/face → spreads downward (cephalocaudal)</td></tr>
+            <tr><td><strong>Complications</strong></td><td>Otitis media, pneumonia, encephalitis, SSPE (late)</td></tr>
+            <tr><td><strong>Treatment</strong></td><td>Supportive, Vitamin A (reduces mortality)</td></tr>
+          </table>
+          <div class="danger-box">
+            <strong>Highly contagious!</strong> Airborne transmission. Reportable disease. Isolate patient.
+          </div>
+        </div>
+
+        <div class="disease-card">
+          <h4>Rubella (German Measles) - 3rd Disease</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Rubella virus (Togavirus)</td></tr>
+            <tr><td><strong>Prodrome</strong></td><td>Mild - low-grade fever, malaise</td></tr>
+            <tr><td><strong>Key finding</strong></td><td><strong>Posterior auricular & suboccipital lymphadenopathy</strong></td></tr>
+            <tr><td><strong>Rash</strong></td><td>Pink maculopapular, face → body (faster spread than measles, 3 days)</td></tr>
+            <tr><td><strong>Complication</strong></td><td><strong>Congenital Rubella Syndrome</strong> if in pregnancy (cataracts, deafness, heart defects)</td></tr>
+          </table>
+        </div>
+
+        <div class="disease-card">
+          <h4>Erythema Infectiosum (Fifth Disease)</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Parvovirus B19</td></tr>
+            <tr><td><strong>Prodrome</strong></td><td>Mild URI symptoms, then afebrile when rash appears</td></tr>
+            <tr><td><strong>Classic rash</strong></td><td><strong>"Slapped cheek"</strong> appearance on face, then lacy/reticular rash on trunk and extremities</td></tr>
+            <tr><td><strong>Course</strong></td><td>Rash may wax/wane with sun, heat, bathing for weeks</td></tr>
+            <tr><td><strong>Complications</strong></td><td>Aplastic crisis (sickle cell), hydrops fetalis (pregnancy)</td></tr>
+          </table>
+          <div class="info-box">
+            <strong>Not contagious once rash appears.</strong> Most infectious during prodrome.
+          </div>
+        </div>
+
+        <div class="disease-card">
+          <h4>Roseola (Exanthem Subitum) - 6th Disease</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>HHV-6 (Human Herpesvirus 6)</td></tr>
+            <tr><td><strong>Age</strong></td><td>6 months - 2 years (classic)</td></tr>
+            <tr><td><strong>Key pattern</strong></td><td><strong>HIGH fever (up to 40°C) for 3-5 days → fever breaks → rash appears</strong></td></tr>
+            <tr><td><strong>Rash</strong></td><td>Rose-pink macules on trunk → spreads outward, fades in 1-2 days</td></tr>
+            <tr><td><strong>Complication</strong></td><td>Febrile seizures (during fever phase)</td></tr>
+          </table>
+          <div class="mnemonic">
+            <strong>"Roseola = Rash ON the way Out of fever"</strong>
+          </div>
+        </div>
+
+        <div class="disease-card">
+          <h4>Varicella (Chickenpox)</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Varicella-Zoster Virus (VZV)</td></tr>
+            <tr><td><strong>Prodrome</strong></td><td>Fever, malaise 1-2 days before rash</td></tr>
+            <tr><td><strong>Rash</strong></td><td><strong>"Dew drops on rose petal"</strong> - vesicles on erythematous base; starts on trunk</td></tr>
+            <tr><td><strong>Key feature</strong></td><td><strong>Lesions in all stages</strong> (macules, papules, vesicles, crusts simultaneously)</td></tr>
+            <tr><td><strong>Contagious</strong></td><td>Until all lesions crusted</td></tr>
+            <tr><td><strong>Complications</strong></td><td>Secondary bacterial infection, pneumonia, encephalitis, Reye syndrome (if aspirin)</td></tr>
+          </table>
+        </div>
+
+        <div class="disease-card">
+          <h4>Hand-Foot-Mouth Disease</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Coxsackievirus A16 (most common), Enterovirus 71</td></tr>
+            <tr><td><strong>Age</strong></td><td><5 years typically</td></tr>
+            <tr><td><strong>Findings</strong></td><td>Oral ulcers (painful) + vesicles on palms, soles, buttocks</td></tr>
+            <tr><td><strong>Course</strong></td><td>Self-limited, 7-10 days</td></tr>
+            <tr><td><strong>Treatment</strong></td><td>Supportive - pain control, hydration</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACTERIAL -->
+    <div id="bacterial" class="tab-content">
+      <div class="section">
+        <h2>🔬 Bacterial Rashes</h2>
+
+        <div class="disease-card">
+          <h4>Scarlet Fever - 2nd Disease</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Group A Streptococcus (erythrogenic toxin)</td></tr>
+            <tr><td><strong>Presentation</strong></td><td>Pharyngitis + fever + rash</td></tr>
+            <tr><td><strong>Rash</strong></td><td><strong>"Sandpaper" texture</strong>, starts neck/axilla → generalizes, spares face</td></tr>
+            <tr><td><strong>Key findings</strong></td><td><strong>Strawberry tongue</strong>, circumoral pallor, Pastia lines (creases)</td></tr>
+            <tr><td><strong>Desquamation</strong></td><td>Peeling of fingertips/toes 1-2 weeks later</td></tr>
+            <tr><td><strong>Treatment</strong></td><td><strong>Penicillin</strong> or amoxicillin × 10 days</td></tr>
+          </table>
+          <div class="danger-box">
+            <strong>Treat to prevent:</strong> Rheumatic fever, post-strep glomerulonephritis
+          </div>
+        </div>
+
+        <div class="disease-card">
+          <h4>Impetigo</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Staph aureus (bullous), Group A Strep (non-bullous)</td></tr>
+            <tr><td><strong>Non-bullous</strong></td><td>Vesicles → <strong>"honey-crusted" lesions</strong>, often perioral/nasal</td></tr>
+            <tr><td><strong>Bullous</strong></td><td>Flaccid bullae with clear fluid → rupture leaving thin brown crust</td></tr>
+            <tr><td><strong>Treatment</strong></td><td>Topical mupirocin (localized) or oral antibiotics (extensive)</td></tr>
+          </table>
+        </div>
+
+        <div class="disease-card">
+          <h4>Staphylococcal Scalded Skin Syndrome (SSSS)</h4>
+          <table>
+            <tr><td><strong>Cause</strong></td><td>Staph aureus exfoliative toxin</td></tr>
+            <tr><td><strong>Age</strong></td><td>Neonates and young children</td></tr>
+            <tr><td><strong>Presentation</strong></td><td>Fever, irritability → diffuse erythema → superficial skin sloughing</td></tr>
+            <tr><td><strong>Key finding</strong></td><td><strong>Positive Nikolsky sign</strong> (skin sloughs with gentle pressure)</td></tr>
+            <tr><td><strong>vs TEN</strong></td><td>SSSS = superficial split (granular layer), mucous membranes SPARED</td></tr>
+            <tr><td><strong>Treatment</strong></td><td>IV anti-staphylococcal antibiotics, wound care</td></tr>
+          </table>
+        </div>
+
+        <div class="disease-card">
+          <h4>Meningococcemia</h4>
+          <div class="danger-box">
+            <strong>Medical Emergency!</strong>
+            <table>
+              <tr><td><strong>Cause</strong></td><td>Neisseria meningitidis</td></tr>
+              <tr><td><strong>Rash</strong></td><td><strong>Petechiae/purpura</strong> - NON-BLANCHING</td></tr>
+              <tr><td><strong>Features</strong></td><td>Rapid progression, fever, toxic appearance, hypotension</td></tr>
+              <tr><td><strong>Complication</strong></td><td>Purpura fulminans, DIC, Waterhouse-Friderichsen (adrenal hemorrhage)</td></tr>
+              <tr><td><strong>Treatment</strong></td><td>Immediate IV ceftriaxone, supportive care</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER -->
+    <div id="other" class="tab-content">
+      <div class="section">
+        <h2>🔍 Other Important Rashes</h2>
+
+        <div class="disease-card">
+          <h4>Kawasaki Disease</h4>
+          <div class="danger-box">
+            <strong>Must diagnose to prevent coronary artery aneurysms!</strong>
+          </div>
+          <table>
+            <tr><td><strong>Criteria</strong></td><td>Fever ≥5 days + 4 of 5 criteria:</td></tr>
+          </table>
+          <div class="mnemonic">
+            <strong>"CRASH and Burn"</strong><br>
+            <strong>C</strong>onjunctivitis (bilateral, non-purulent)<br>
+            <strong>R</strong>ash (polymorphous, trunk/extremities)<br>
+            <strong>A</strong>denopathy (cervical, >1.5cm, usually unilateral)<br>
+            <strong>S</strong>trawberry tongue / lip changes (red, cracked lips)<br>
+            <strong>H</strong>and/foot changes (edema, erythema → desquamation)
+          </div>
+          <table>
+            <tr><td><strong>Treatment</strong></td><td>IVIG + high-dose aspirin → low-dose aspirin</td></tr>
+            <tr><td><strong>Workup</strong></td><td>Echocardiogram for coronary aneurysms</td></tr>
+          </table>
+        </div>
+
+        <div class="disease-card">
+          <h4>Henoch-Schönlein Purpura (IgA Vasculitis)</h4>
+          <table>
+            <tr><td><strong>Age</strong></td><td>3-15 years, often after URI</td></tr>
+            <tr><td><strong>Classic tetrad</strong></td><td>Palpable purpura (buttocks/legs) + arthritis + abdominal pain + renal involvement</td></tr>
+            <tr><td><strong>Rash</strong></td><td><strong>Palpable purpura</strong> on buttocks, lower extremities (gravity-dependent)</td></tr>
+            <tr><td><strong>Complications</strong></td><td>Intussusception, nephritis</td></tr>
+            <tr><td><strong>Treatment</strong></td><td>Supportive; steroids for severe GI/renal involvement</td></tr>
+          </table>
+        </div>
+
+        <div class="disease-card">
+          <h4>Erythema Multiforme</h4>
+          <table>
+            <tr><td><strong>Triggers</strong></td><td>HSV (most common), Mycoplasma, drugs</td></tr>
+            <tr><td><strong>Rash</strong></td><td><strong>Target lesions</strong> (3 zones) - acral distribution (hands, feet)</td></tr>
+            <tr><td><strong>vs SJS/TEN</strong></td><td>EM minor = limited skin, no mucosa; EM major = mucosal involvement but less severe</td></tr>
+            <tr><td><strong>Treatment</strong></td><td>Treat underlying cause; supportive</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.cdc.gov/vaccines/pubs/pinkbook/index.html" target="_blank">🔗 CDC Pink Book (Vaccine-Preventable Diseases)</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK470363/" target="_blank">🔗 NCBI Bookshelf - Pediatric Rashes</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on CDC resources and standard pediatric teaching.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> A child has high fever for 4 days, then the fever breaks and a rose-pink rash appears on the trunk. What is the diagnosis?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Measles</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Roseola</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Rubella</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Fifth disease</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Roseola (HHV-6) has the classic pattern of HIGH fever for 3-5 days, then fever breaks and rash appears. "Rash ON the way Out of fever."</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What are Koplik spots pathognomonic for?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Measles</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. Rubella</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Scarlet fever</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Kawasaki disease</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Koplik spots (white spots on buccal mucosa) are pathognomonic for measles and appear BEFORE the rash.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> A child with pharyngitis develops a sandpaper-textured rash with circumoral pallor. What is the treatment?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. Acyclovir</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. Penicillin</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Supportive care only</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. IVIG</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> This is scarlet fever (GAS). Treatment with penicillin or amoxicillin prevents rheumatic fever and post-strep glomerulonephritis.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> A child with fever for 6 days has bilateral conjunctivitis, cracked lips, and a polymorphous rash. What complication must you screen for?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Renal failure</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Coronary artery aneurysms</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Encephalitis</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Hepatitis</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> This is Kawasaki disease. The major complication is coronary artery aneurysms. All patients need echocardiogram. Treatment is IVIG + aspirin.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> A febrile child develops petechiae that don't blanch with pressure and appears toxic. What is your immediate action?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. Observe and recheck in 24 hours</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Oral antibiotics and discharge</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">C. Immediate IV antibiotics (ceftriaxone)</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Dermatology consult</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: C.</strong> Non-blanching petechiae/purpura + fever + toxic appearance = meningococcemia until proven otherwise. This is a medical emergency requiring immediate IV antibiotics.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Pediatric Exanthems"
+         data-key-points="🎯 Classic Numbered Exanthems, 🦠 Viral Exanthems, 🔬 Bacterial Rashes, 🔍 Other Important Rashes, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Quick Rash Identification, Clinical Guidelines, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

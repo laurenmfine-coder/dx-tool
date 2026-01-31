@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom → Learning Path | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; min-height: 100vh; }
+        
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 48px 24px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; max-width: 500px; margin: 0 auto; }
+        
+        .content { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+        
+        .search-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 32px;
+        }
+        .search-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+        .search-box {
+            display: flex;
+            gap: 12px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus { border-color: var(--primary); }
+        .search-btn {
+            padding: 16px 32px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .suggestion {
+            padding: 8px 14px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .suggestion:hover { background: #e2e8f0; }
+        
+        .results { display: none; }
+        .results.show { display: block; }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .result-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .result-title h2 { font-size: 22px; margin-bottom: 4px; }
+        .result-title p { color: #64748b; font-size: 14px; }
+        
+        .path-section {
+            margin-bottom: 32px;
+        }
+        .path-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .module-list { display: flex; flex-direction: column; gap: 12px; }
+        .module-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        .module-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .module-card .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        .module-card .icon.mechanism { background: #dbeafe; }
+        .module-card .icon.case { background: #fef3c7; }
+        .module-card .icon.tool { background: #dcfce7; }
+        .module-card .icon.micro { background: #fee2e2; }
+        .module-card .icon.pharm { background: #f3e8ff; }
+        
+        .module-card .info { flex: 1; }
+        .module-card .info h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .module-card .info p { font-size: 13px; color: #64748b; }
+        
+        .module-card .meta {
+            text-align: right;
+        }
+        .module-card .time { font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
+        .module-card .badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge.start { background: #dcfce7; color: #166534; }
+        .badge.important { background: #fee2e2; color: #991b1b; }
+        .badge.recommended { background: #dbeafe; color: #1d4ed8; }
+        
+        .ddx-preview {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .ddx-preview h4 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #64748b;
+        }
+        .ddx-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .ddx-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .ddx-rank {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .ddx-item .category {
+            margin-left: auto;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        
+        .add-to-plan {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🔍 Symptom → Learning Path</h1>
+        <p>Enter a symptom or chief complaint you encountered. Get a personalized learning path.</p>
+    </header>
+    
+    <main class="content">
+        <div class="search-card">
+            <div class="search-label">What did you see today?</div>
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="e.g., chest pain, altered mental status, dyspnea...">
+                <button class="search-btn" onclick="search()">Generate Path</button>
+            </div>
+            <div class="suggestions">
+                <button class="suggestion" onclick="setSearch('chest pain')">Chest pain</button>
+                <button class="suggestion" onclick="setSearch('dyspnea')">Dyspnea</button>
+                <button class="suggestion" onclick="setSearch('altered mental status')">Altered mental status</button>
+                <button class="suggestion" onclick="setSearch('abdominal pain')">Abdominal pain</button>
+                <button class="suggestion" onclick="setSearch('syncope')">Syncope</button>
+                <button class="suggestion" onclick="setSearch('fever')">Fever</button>
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="result-header">
+                <div class="result-icon">💔</div>
+                <div class="result-title">
+                    <h2>Chest Pain Learning Path</h2>
+                    <p>15 modules • 3 cases • 4 tools • ~3 hours total</p>
+                </div>
+            </div>
+            
+            <div class="ddx-preview">
+                <h4>🧠 Key Differentials to Master</h4>
+                <div class="ddx-list">
+                    <div class="ddx-item">
+                        <span class="ddx-rank">1</span>
+                        <span>Acute Coronary Syndrome</span>
+                        <span class="category">Cardiac</span>
+                    </div>
+                    <div class="ddx-item">
+                        <span class="ddx-rank">2</span>
+                        <span>Pulmonary Embolism</span>
+                        <span class="category">Pulmonary</span>
+                    </div>
+                    <div class="ddx-item">
+                        <span class="ddx-rank">3</span>
+                        <span>Aortic Dissection</span>
+                        <span class="category">Vascular</span>
+                    </div>
+                    <div class="ddx-item">
+                        <span class="ddx-rank">4</span>
+                        <span>Tension Pneumothorax</span>
+                        <span class="category">Pulmonary</span>
+                    </div>
+                    <div class="ddx-item">
+                        <span class="ddx-rank">5</span>
+                        <span>Pericarditis / Tamponade</span>
+                        <span class="category">Cardiac</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="path-section">
+                <h3>📚 Step 1: Understand the Mechanisms</h3>
+                <div class="module-list">
+                    <a href="#" class="module-card">
+                        <div class="icon mechanism">⚙️</div>
+                        <div class="info">
+                            <h4>Acute Coronary Syndrome</h4>
+                            <p>Plaque rupture, thrombosis, STEMI vs NSTEMI</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~35 min</div>
+                            <span class="badge start">Start Here</span>
+                        </div>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="icon mechanism">⚙️</div>
+                        <div class="info">
+                            <h4>Pulmonary Embolism</h4>
+                            <p>Virchow's triad, V/Q mismatch, hemodynamics</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~30 min</div>
+                            <span class="badge important">High-yield</span>
+                        </div>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="icon mechanism">⚙️</div>
+                        <div class="info">
+                            <h4>Aortic Dissection</h4>
+                            <p>Stanford classification, complications, management</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~25 min</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="path-section">
+                <h3>🎯 Step 2: Practice Cases</h3>
+                <div class="module-list">
+                    <a href="#" class="module-card">
+                        <div class="icon case">🎯</div>
+                        <div class="info">
+                            <h4>Chest Pain in a 55-year-old Smoker</h4>
+                            <p>Work through ACS presentation and management</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~20 min</div>
+                            <span class="badge recommended">Recommended</span>
+                        </div>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="icon case">🎯</div>
+                        <div class="info">
+                            <h4>Post-operative Dyspnea</h4>
+                            <p>PE workup and anticoagulation decisions</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~20 min</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="path-section">
+                <h3>🧮 Step 3: Use These Tools</h3>
+                <div class="module-list">
+                    <a href="#" class="module-card">
+                        <div class="icon tool">🧮</div>
+                        <div class="info">
+                            <h4>HEART Score Calculator</h4>
+                            <p>Risk stratify chest pain in the ED</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~5 min</div>
+                        </div>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="icon tool">🧮</div>
+                        <div class="info">
+                            <h4>Wells' Criteria for PE</h4>
+                            <p>Pre-test probability assessment</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~5 min</div>
+                        </div>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="icon tool">❤️</div>
+                        <div class="info">
+                            <h4>ECG Trainer: ACS Patterns</h4>
+                            <p>STEMI recognition, reciprocal changes</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~15 min</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="path-section">
+                <h3>💊 Step 4: Know the Drugs</h3>
+                <div class="module-list">
+                    <a href="#" class="module-card">
+                        <div class="icon pharm">💊</div>
+                        <div class="info">
+                            <h4>Antiplatelet Therapy</h4>
+                            <p>Aspirin, P2Y12 inhibitors, timing of DAPT</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~20 min</div>
+                        </div>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="icon pharm">💊</div>
+                        <div class="info">
+                            <h4>Anticoagulation for PE</h4>
+                            <p>Heparin, DOACs, thrombolytics</p>
+                        </div>
+                        <div class="meta">
+                            <div class="time">~25 min</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <button class="add-to-plan" onclick="addToPlan()">
+                📥 Add Entire Path to My Study Plan
+            </button>
+        </div>
+    </main>
+    
+    <script>
+        function setSearch(term) {
+            document.getElementById('searchInput').value = term;
+            search();
+        }
+        
+        function search() {
+            const term = document.getElementById('searchInput').value;
+            if (term) {
+                document.getElementById('results').classList.add('show');
+                window.scrollTo({ top: 300, behavior: 'smooth' });
+            }
+        }
+        
+        function addToPlan() {
+            alert('Learning path added to your study plan! Check your dashboard.');
+        }
+        
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') search();
+        });
+    </script>
+</body>
+</html>

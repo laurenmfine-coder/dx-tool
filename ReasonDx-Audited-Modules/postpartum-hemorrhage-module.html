@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Postpartum Hemorrhage - Causes & Management</title>
+  <style>
+    :root { --primary: #F44336; --secondary: #E91E63; --accent: #FF9800; --success: #4CAF50; --danger: #D32F2F; --info: #2196F3; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(244, 67, 54, 0.15); border-radius: 1rem; border: 1px solid rgba(244, 67, 54, 0.3); }
+    header h1 { font-size: 2.2rem; color: var(--primary); }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.75rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.25rem 0 0.6rem 0; font-size: 1.05rem; }
+    .key-concept { background: rgba(244, 67, 54, 0.15); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(211, 47, 47, 0.2); border-left: 4px solid var(--danger); padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(76, 175, 80, 0.15); border-left: 4px solid var(--success); padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(255, 152, 0, 0.15); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(33, 150, 243, 0.15); border-left: 4px solid var(--info); padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.65rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(244, 67, 54, 0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.4rem 0; }
+    .mnemonic { background: rgba(76, 175, 80, 0.15); border: 2px dashed var(--success); padding: 1.25rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; font-size: 1.1rem; }
+    .step-box { background: linear-gradient(135deg, rgba(244,67,54,0.1), rgba(233,30,99,0.1)); border: 1px solid rgba(244,67,54,0.3); border-radius: 0.75rem; padding: 1.25rem; margin: 1rem 0; }
+    .step-box h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .med-card { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; margin: 0.75rem 0; }
+    .med-card h5 { color: var(--info); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(76, 175, 80, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.25rem; margin-top: 1.5rem; }
+    .quiz-option { display: block; padding: 0.65rem 1rem; margin: 0.4rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(244, 67, 54, 0.2); }
+    .quiz-option.correct { background: rgba(76, 175, 80, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(244, 67, 54, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🩸 Postpartum Hemorrhage</h1>
+      <p class="subtitle">The 4 T's • Stepwise Management • Uterotonics • Surgical Options</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('causes')">4 T's</div>
+      <div class="nav-tab" onclick="showTab('management')">Management</div>
+      <div class="nav-tab" onclick="showTab('medications')">Medications</div>
+      <div class="nav-tab" onclick="showTab('surgical')">Surgical</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Overview</h2>
+
+        <div class="key-concept">
+          <strong>Postpartum Hemorrhage (PPH)</strong> is the leading cause of maternal mortality worldwide. Defined as blood loss ≥1000 mL OR blood loss with signs/symptoms of hypovolemia within 24 hours of delivery (regardless of delivery route).
+        </div>
+
+        <h3>Definitions</h3>
+        <table>
+          <tr><th>Term</th><th>Definition</th></tr>
+          <tr><td><strong>Primary PPH</strong></td><td>Within 24 hours of delivery</td></tr>
+          <tr><td><strong>Secondary PPH</strong></td><td>24 hours to 12 weeks postpartum</td></tr>
+          <tr><td><strong>Severe PPH</strong></td><td>≥1500 mL blood loss</td></tr>
+        </table>
+
+        <h3>Risk Factors</h3>
+        <table>
+          <tr><th>Category</th><th>Risk Factors</th></tr>
+          <tr><td><strong>Uterine</strong></td><td>Overdistension (twins, polyhydramnios, macrosomia), prolonged labor, chorioamnionitis, high parity</td></tr>
+          <tr><td><strong>Placental</strong></td><td>Placenta previa, accreta spectrum, abruption, retained placenta</td></tr>
+          <tr><td><strong>Trauma</strong></td><td>Operative vaginal delivery, episiotomy, cesarean, precipitous labor</td></tr>
+          <tr><td><strong>Coagulation</strong></td><td>Preexisting disorders, anticoagulation, DIC, massive transfusion</td></tr>
+          <tr><td><strong>History</strong></td><td>Prior PPH (recurrence risk 10-15%)</td></tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Key Point:</strong> Visual estimation of blood loss is notoriously inaccurate (underestimates by 30-50%). Use quantitative blood loss (QBL) measurement - weigh blood-soaked materials: 1 gram = 1 mL blood.
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 T's -->
+    <div id="causes" class="tab-content">
+      <div class="module-section">
+        <h2>🔍 Causes: The 4 T's</h2>
+
+        <div class="mnemonic">
+          <strong>💡 "4 T's" of PPH</strong><br><br>
+          <strong style="color: #F44336;">T</strong>one (70%) → <strong style="color: #E91E63;">T</strong>rauma (20%) → <strong style="color: #9C27B0;">T</strong>issue (10%) → <strong style="color: #673AB7;">T</strong>hrombin (&lt;1%)
+        </div>
+
+        <div class="step-box">
+          <h4>🔴 TONE - Uterine Atony (70%)</h4>
+          <p><strong>Most common cause!</strong> Failure of uterus to contract after placental delivery.</p>
+          <p><strong>Risk factors:</strong></p>
+          <ul>
+            <li>Uterine overdistension (multiples, polyhydramnios, macrosomia)</li>
+            <li>Prolonged labor or very rapid labor</li>
+            <li>Chorioamnionitis</li>
+            <li>High parity (≥5)</li>
+            <li>Magnesium sulfate, tocolytics</li>
+            <li>General anesthesia (halogenated agents)</li>
+          </ul>
+          <p><strong>Clinical finding:</strong> Soft, "boggy" uterus on palpation</p>
+        </div>
+
+        <div class="step-box">
+          <h4>🟠 TRAUMA - Genital Tract Injury (20%)</h4>
+          <ul>
+            <li><strong>Lacerations:</strong> Vaginal, cervical, perineal (1st-4th degree)</li>
+            <li><strong>Hematomas:</strong> Vulvar, vaginal, retroperitoneal</li>
+            <li><strong>Uterine rupture:</strong> Prior cesarean, obstructed labor</li>
+            <li><strong>Uterine inversion:</strong> Rare but dramatic</li>
+          </ul>
+          <p><strong>Clinical finding:</strong> Firm uterus but continued bleeding → suspect laceration</p>
+        </div>
+
+        <div class="step-box">
+          <h4>🟣 TISSUE - Retained Products (10%)</h4>
+          <ul>
+            <li>Retained placental fragments</li>
+            <li>Retained membranes</li>
+            <li>Placenta accreta spectrum (abnormal adherence)</li>
+            <li>Succenturiate lobe (accessory lobe)</li>
+          </ul>
+          <p><strong>Clinical finding:</strong> Incomplete placenta on inspection, uterus doesn't fully contract</p>
+        </div>
+
+        <div class="step-box">
+          <h4>🔵 THROMBIN - Coagulopathy (&lt;1%)</h4>
+          <ul>
+            <li>Pre-existing: von Willebrand disease, hemophilia carrier, thrombocytopenia</li>
+            <li>Acquired: DIC, massive transfusion, amniotic fluid embolism, severe preeclampsia/HELLP, placental abruption</li>
+            <li>Iatrogenic: Anticoagulation</li>
+          </ul>
+          <p><strong>Clinical finding:</strong> Diffuse oozing, bleeding from IV sites, no clot formation</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGEMENT -->
+    <div id="management" class="tab-content">
+      <div class="module-section">
+        <h2>⚕️ Stepwise Management</h2>
+
+        <div class="danger-box">
+          <strong>🚨 IMMEDIATE ACTIONS - Do Simultaneously:</strong>
+          <ol>
+            <li>Call for help (activate hemorrhage protocol)</li>
+            <li>Massage the uterus</li>
+            <li>Establish large-bore IV access (2 x 16-18 gauge)</li>
+            <li>Type and crossmatch, CBC, coags, fibrinogen</li>
+            <li>Administer uterotonics</li>
+            <li>Empty bladder (Foley catheter)</li>
+          </ol>
+        </div>
+
+        <h3>Systematic Approach</h3>
+        <div class="step-box">
+          <h4>Step 1: Assess & Resuscitate</h4>
+          <ul>
+            <li>Quantify blood loss</li>
+            <li>Crystalloid bolus (warm fluids)</li>
+            <li>Activate massive transfusion protocol if needed</li>
+            <li>Target: MAP >65, HR <100, UOP >0.5 mL/kg/hr</li>
+          </ul>
+        </div>
+
+        <div class="step-box">
+          <h4>Step 2: Identify Cause (4 T's)</h4>
+          <ul>
+            <li><strong>Tone:</strong> Bimanual uterine massage</li>
+            <li><strong>Trauma:</strong> Inspect cervix and vagina systematically</li>
+            <li><strong>Tissue:</strong> Examine placenta, consider manual exploration/ultrasound</li>
+            <li><strong>Thrombin:</strong> Check labs, observe for oozing</li>
+          </ul>
+        </div>
+
+        <div class="step-box">
+          <h4>Step 3: Uterotonics (for Atony)</h4>
+          <ul>
+            <li>Oxytocin (first-line)</li>
+            <li>Methylergonovine (Methergine)</li>
+            <li>Carboprost (Hemabate/PGF2α)</li>
+            <li>Misoprostol</li>
+          </ul>
+        </div>
+
+        <div class="step-box">
+          <h4>Step 4: Tamponade</h4>
+          <ul>
+            <li>Intrauterine balloon (Bakri, Ebb, Foley)</li>
+            <li>Uterine packing</li>
+          </ul>
+        </div>
+
+        <div class="step-box">
+          <h4>Step 5: Surgical Intervention</h4>
+          <ul>
+            <li>Compression sutures (B-Lynch)</li>
+            <li>Uterine artery ligation</li>
+            <li>Hypogastric artery ligation</li>
+            <li>Uterine artery embolization</li>
+            <li>Hysterectomy (definitive)</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <strong>🔵 Tranexamic Acid (TXA)</strong>
+          <ul>
+            <li>1 g IV over 10 minutes</li>
+            <li>Give within 3 hours of delivery</li>
+            <li>Can repeat once after 30 minutes if bleeding continues</li>
+            <li>Antifibrinolytic - stabilizes clots</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICATIONS -->
+    <div id="medications" class="tab-content">
+      <div class="module-section">
+        <h2>💊 Uterotonics</h2>
+
+        <div class="med-card">
+          <h5>OXYTOCIN (Pitocin) - First Line</h5>
+          <table>
+            <tr><td><strong>Dose</strong></td><td>10-40 units in 1L NS, run wide open; or 10 units IM</td></tr>
+            <tr><td><strong>Onset</strong></td><td>Immediate IV, 3-5 min IM</td></tr>
+            <tr><td><strong>Side effects</strong></td><td>Water intoxication (high doses), hypotension (bolus)</td></tr>
+            <tr><td><strong>Contraindications</strong></td><td>None absolute</td></tr>
+          </table>
+        </div>
+
+        <div class="med-card">
+          <h5>METHYLERGONOVINE (Methergine)</h5>
+          <table>
+            <tr><td><strong>Dose</strong></td><td>0.2 mg IM q2-4h (can give IV slowly in emergency)</td></tr>
+            <tr><td><strong>Onset</strong></td><td>2-5 minutes</td></tr>
+            <tr><td><strong>Side effects</strong></td><td>Hypertension, nausea, vasoconstriction</td></tr>
+            <tr><td><strong>Contraindications</strong></td><td style="color: #F44336;"><strong>HYPERTENSION, preeclampsia</strong></td></tr>
+          </table>
+        </div>
+
+        <div class="med-card">
+          <h5>CARBOPROST (Hemabate, 15-methyl PGF2α)</h5>
+          <table>
+            <tr><td><strong>Dose</strong></td><td>250 mcg IM q15-90 min (max 8 doses / 2 mg)</td></tr>
+            <tr><td><strong>Onset</strong></td><td>Minutes</td></tr>
+            <tr><td><strong>Side effects</strong></td><td>Bronchospasm, diarrhea, fever, hypertension</td></tr>
+            <tr><td><strong>Contraindications</strong></td><td style="color: #F44336;"><strong>ASTHMA</strong>, active pulmonary/cardiac/hepatic disease</td></tr>
+          </table>
+        </div>
+
+        <div class="med-card">
+          <h5>MISOPROSTOL (Cytotec, PGE1)</h5>
+          <table>
+            <tr><td><strong>Dose</strong></td><td>800-1000 mcg PR or SL</td></tr>
+            <tr><td><strong>Onset</strong></td><td>~20 minutes</td></tr>
+            <tr><td><strong>Side effects</strong></td><td>Fever, chills, diarrhea</td></tr>
+            <tr><td><strong>Contraindications</strong></td><td>None absolute; useful when others contraindicated</td></tr>
+          </table>
+        </div>
+
+        <div class="mnemonic">
+          <strong>💡 Uterotonic Contraindications Memory Aid:</strong><br><br>
+          <strong>M</strong>ethergine = No <strong>M</strong>ountain-high BP (hypertension)<br>
+          <strong>H</strong>emabate = No <strong>H</strong>acking/wheezing (asthma)
+        </div>
+      </div>
+    </div>
+
+    <!-- SURGICAL -->
+    <div id="surgical" class="tab-content">
+      <div class="module-section">
+        <h2>🔪 Surgical & Interventional Options</h2>
+
+        <h3>Intrauterine Balloon Tamponade</h3>
+        <div class="info-box">
+          <ul>
+            <li><strong>Bakri balloon:</strong> Specifically designed for PPH</li>
+            <li><strong>Foley catheter:</strong> Inflate bulb with 60-80 mL</li>
+            <li><strong>Technique:</strong> Insert into uterine cavity, inflate with saline until bleeding stops</li>
+            <li><strong>Positive tamponade test:</strong> Bleeding stops with inflation</li>
+            <li>Can leave 12-24 hours; give antibiotics</li>
+          </ul>
+        </div>
+
+        <h3>Compression Sutures</h3>
+        <div class="step-box">
+          <h4>B-Lynch Suture</h4>
+          <p>Compresses the uterus like a brace. Requires laparotomy.</p>
+          <ul>
+            <li>Preserves fertility in most cases</li>
+            <li>Can combine with balloon tamponade</li>
+            <li>Complications: Uterine necrosis (rare), pyometra</li>
+          </ul>
+        </div>
+
+        <h3>Vascular Ligation</h3>
+        <div class="step-box">
+          <h4>Uterine Artery Ligation</h4>
+          <ul>
+            <li>O'Leary stitch - bilateral ligation</li>
+            <li>Reduces pulse pressure to uterus</li>
+            <li>90% success rate</li>
+          </ul>
+        </div>
+
+        <div class="step-box">
+          <h4>Internal Iliac (Hypogastric) Artery Ligation</h4>
+          <ul>
+            <li>Reduces pulse pressure by 85%</li>
+            <li>More difficult, risk of ureteral injury</li>
+            <li>Collateral flow usually preserves fertility</li>
+          </ul>
+        </div>
+
+        <h3>Uterine Artery Embolization</h3>
+        <div class="info-box">
+          <ul>
+            <li>Performed by interventional radiology</li>
+            <li>90% success rate</li>
+            <li>Requires hemodynamic stability for transport</li>
+            <li>Preserves fertility</li>
+          </ul>
+        </div>
+
+        <h3>Hysterectomy</h3>
+        <div class="danger-box">
+          <strong>Definitive treatment - do not delay if bleeding uncontrolled!</strong>
+          <ul>
+            <li>Indications: Failed conservative measures, placenta accreta spectrum, uterine rupture</li>
+            <li>Usually subtotal (supracervical) - faster, less blood loss</li>
+            <li>Total if cervical bleeding or accreta involving cervix</li>
+          </ul>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Key Principle:</strong> Do not delay hysterectomy while waiting for other interventions to work. The decision to proceed with hysterectomy should be made early rather than after multiple failed attempts and worsening coagulopathy.
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2017/10/postpartum-hemorrhage" target="_blank">🔗 ACOG PPH Practice Bulletin</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://safehealthcareforeverywoman.org/patient-safety-bundles/obstetric-hemorrhage/" target="_blank">🔗 Alliance for Innovation - PPH Bundle</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ACOG guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>The most common cause of primary postpartum hemorrhage is:</p>
+          <div class="quiz-option" onclick="checkQ('q1', this, true)">A. Uterine atony</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">B. Genital tract laceration</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">C. Retained placenta</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">D. Coagulopathy</div>
+          <div id="exp-q1" class="explanation"><strong>Answer: A.</strong> Uterine atony accounts for ~70% of PPH cases. The first clinical finding is a soft, "boggy" uterus.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>Which uterotonic is contraindicated in a patient with asthma?</p>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">A. Oxytocin</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">B. Methylergonovine</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, true)">C. Carboprost (Hemabate)</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">D. Misoprostol</div>
+          <div id="exp-q2" class="explanation"><strong>Answer: C.</strong> Carboprost (Hemabate/PGF2α) causes bronchospasm and is contraindicated in asthma. Methylergonovine is contraindicated in hypertension.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>A patient has a firm uterus but continues to bleed heavily after vaginal delivery. The most likely cause is:</p>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">A. Uterine atony</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, true)">B. Genital tract laceration</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">C. Uterine inversion</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">D. Placenta accreta</div>
+          <div id="exp-q3" class="explanation"><strong>Answer: B.</strong> A firm uterus with ongoing bleeding suggests the source is NOT the uterus - inspect for cervical, vaginal, and perineal lacerations.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>Tranexamic acid for PPH should be given within what time frame?</p>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">A. 1 hour</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, true)">B. 3 hours</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">C. 6 hours</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">D. 12 hours</div>
+          <div id="exp-q4" class="explanation"><strong>Answer: B.</strong> TXA 1g IV should be given within 3 hours of delivery for maximum benefit. Can repeat once after 30 minutes if bleeding continues.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>The "positive tamponade test" refers to:</p>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">A. Bleeding that worsens with balloon inflation</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, true)">B. Bleeding that stops with balloon inflation</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">C. Uterine rupture with balloon placement</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">D. Balloon expulsion from uterus</div>
+          <div id="exp-q5" class="explanation"><strong>Answer: B.</strong> A positive tamponade test = bleeding stops when the balloon is inflated, suggesting tamponade will be effective for controlling hemorrhage.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(qId, el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct', 'incorrect'); opt.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('exp-' + qId).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Postpartum Hemorrhage"
+         data-key-points="📚 Overview, 🔍 Causes: The 4 T's, ⚕️ Stepwise Management, 💊 Uterotonics, 🔪 Surgical & Interventional Options, 📚 Open-Access Learning Resources, 📝 Test Your Knowledge, Definitions, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

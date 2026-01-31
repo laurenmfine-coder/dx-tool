@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Altered Mental Status</title>
+  <style>
+    :root{--primary:#EF4444;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6;--purple:#8B5CF6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0a1a1a,#1a2e2e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(239,68,68,0.1);border-radius:1rem;border:1px solid rgba(239,68,68,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(239,68,68,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--purple);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧠 Altered Mental Status</h1>
+      <p style="color:#9CA3AF">Delirium vs Dementia • Differential • Workup Algorithm</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('causes')">Causes</div>
+      <div class="nav-tab" onclick="showTab('workup')">Workup</div>
+      <div class="nav-tab" onclick="showTab('delirium')">Delirium</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Approach to AMS</h2>
+        
+        <div class="key-box">
+          <strong>Altered Mental Status</strong> = Any change from baseline cognitive function, including confusion, decreased consciousness, agitation, or personality change.
+        </div>
+
+        <div class="mnemonic">
+          <strong>AMS Differential: "AEIOU TIPS"</strong><br>
+          <strong>A</strong>lcohol • <strong>E</strong>pilepsy/electrolytes/encephalopathy • <strong>I</strong>nfection/insulin<br>
+          <strong>O</strong>verdose/oxygen • <strong>U</strong>remia<br>
+          <strong>T</strong>rauma/temperature • <strong>I</strong>nfection • <strong>P</strong>sychiatric/poison • <strong>S</strong>troke/shock
+        </div>
+
+        <h3>Delirium vs Dementia vs Depression</h3>
+        <table>
+          <tr><th>Feature</th><th>Delirium</th><th>Dementia</th><th>Depression</th></tr>
+          <tr><td><strong>Onset</strong></td><td>Acute (hours-days)</td><td>Insidious (months-years)</td><td>Weeks-months</td></tr>
+          <tr><td><strong>Course</strong></td><td>Fluctuating</td><td>Progressive</td><td>Persistent</td></tr>
+          <tr><td><strong>Attention</strong></td><td>IMPAIRED (hallmark)</td><td>Normal early</td><td>Variable</td></tr>
+          <tr><td><strong>Consciousness</strong></td><td>Altered (↓ or ↑)</td><td>Clear until late</td><td>Clear</td></tr>
+          <tr><td><strong>Hallucinations</strong></td><td>Visual (common)</td><td>Less common</td><td>Rare</td></tr>
+          <tr><td><strong>Sleep-wake</strong></td><td>Disrupted</td><td>Often normal</td><td>Disrupted</td></tr>
+          <tr><td><strong>Reversibility</strong></td><td>Often reversible</td><td>Irreversible</td><td>Treatable</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>Delirium is a medical emergency!</strong> It indicates underlying illness and carries high mortality if untreated. Always look for the cause.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAUSES -->
+    <div id="causes" class="tab-content">
+      <div class="section">
+        <h2>📋 Causes of AMS</h2>
+
+        <h3>Metabolic/Toxic</h3>
+        <table>
+          <tr><th>Category</th><th>Examples</th></tr>
+          <tr><td><strong>Glucose</strong></td><td>Hypoglycemia, DKA, HHS</td></tr>
+          <tr><td><strong>Electrolytes</strong></td><td>Na (hypo/hyper), Ca, Mg</td></tr>
+          <tr><td><strong>Organ failure</strong></td><td>Uremia, hepatic encephalopathy, CO2 narcosis</td></tr>
+          <tr><td><strong>Endocrine</strong></td><td>Thyroid (myxedema coma, thyroid storm), adrenal crisis</td></tr>
+          <tr><td><strong>Hypoxia</strong></td><td>Respiratory failure, severe anemia, CO poisoning</td></tr>
+          <tr><td><strong>Medications</strong></td><td>Anticholinergics, opioids, benzos, steroids, digoxin</td></tr>
+          <tr><td><strong>Substances</strong></td><td>Intoxication, withdrawal (alcohol, benzos)</td></tr>
+          <tr><td><strong>Nutritional</strong></td><td>Thiamine (Wernicke's), B12</td></tr>
+        </table>
+
+        <h3>Infectious</h3>
+        <table>
+          <tr><th>Location</th><th>Examples</th></tr>
+          <tr><td><strong>CNS</strong></td><td>Meningitis, encephalitis, brain abscess</td></tr>
+          <tr><td><strong>Systemic</strong></td><td>Sepsis (any source), UTI (elderly), pneumonia</td></tr>
+        </table>
+
+        <h3>Structural/Neurologic</h3>
+        <table>
+          <tr><th>Category</th><th>Examples</th></tr>
+          <tr><td><strong>Vascular</strong></td><td>Stroke, ICH, SAH, hypertensive encephalopathy</td></tr>
+          <tr><td><strong>Mass effect</strong></td><td>Tumor, abscess, subdural hematoma</td></tr>
+          <tr><td><strong>Seizure</strong></td><td>Postictal state, nonconvulsive status epilepticus</td></tr>
+          <tr><td><strong>Trauma</strong></td><td>TBI, diffuse axonal injury</td></tr>
+          <tr><td><strong>Increased ICP</strong></td><td>Hydrocephalus, mass effect</td></tr>
+        </table>
+
+        <h3>Other</h3>
+        <table>
+          <tr><th>Category</th><th>Examples</th></tr>
+          <tr><td><strong>Temperature</strong></td><td>Hypothermia, hyperthermia/heat stroke</td></tr>
+          <tr><td><strong>Psychiatric</strong></td><td>Severe depression, psychosis, catatonia</td></tr>
+          <tr><td><strong>Environmental</strong></td><td>ICU delirium, sleep deprivation</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>In the elderly, common causes are:</strong>
+          <ul>
+            <li>UTI (even without urinary symptoms)</li>
+            <li>Medications (especially new ones or polypharmacy)</li>
+            <li>Dehydration</li>
+            <li>Constipation/urinary retention</li>
+            <li>Pain</li>
+            <li>Infection anywhere</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKUP -->
+    <div id="workup" class="tab-content">
+      <div class="section">
+        <h2>🔬 AMS Workup</h2>
+
+        <h3>Immediate Assessment</h3>
+        <div class="danger-box">
+          <strong>Check immediately:</strong>
+          <ul>
+            <li><strong>Fingerstick glucose</strong> (rule out hypoglycemia)</li>
+            <li><strong>Vitals</strong> including temperature and O2 sat</li>
+            <li><strong>Airway, breathing, circulation</strong></li>
+            <li><strong>Pupils</strong> (miosis, mydriasis, asymmetry)</li>
+            <li><strong>Signs of trauma</strong></li>
+          </ul>
+        </div>
+
+        <h3>History (from family/caregivers)</h3>
+        <ul>
+          <li>Baseline cognitive function</li>
+          <li>Timeline of changes</li>
+          <li>Recent illness, fever, falls</li>
+          <li>Medications (new, stopped, overdose potential)</li>
+          <li>Substance use</li>
+          <li>Recent surgery/procedures</li>
+        </ul>
+
+        <h3>Physical Exam Focus</h3>
+        <table>
+          <tr><th>Finding</th><th>Suggests</th></tr>
+          <tr><td>Fever</td><td>Infection, NMS, serotonin syndrome, thyroid storm</td></tr>
+          <tr><td>Hypothermia</td><td>Sepsis, hypothyroidism, environmental</td></tr>
+          <tr><td>Focal neuro signs</td><td>Stroke, mass lesion, abscess</td></tr>
+          <tr><td>Meningismus</td><td>Meningitis, SAH</td></tr>
+          <tr><td>Asterixis</td><td>Hepatic/uremic encephalopathy</td></tr>
+          <tr><td>Pinpoint pupils</td><td>Opioid overdose, pontine lesion</td></tr>
+          <tr><td>Dilated pupils</td><td>Anticholinergics, sympathomimetics</td></tr>
+          <tr><td>Dry mucous membranes</td><td>Dehydration, anticholinergic</td></tr>
+        </table>
+
+        <h3>Initial Labs</h3>
+        <div class="success-box">
+          <strong>Standard workup:</strong>
+          <ul>
+            <li>Glucose (already checked)</li>
+            <li>CBC</li>
+            <li>BMP (electrolytes, BUN/Cr, glucose)</li>
+            <li>Urinalysis</li>
+            <li>LFTs, ammonia (if hepatic encephalopathy suspected)</li>
+            <li>TSH</li>
+            <li>Urine drug screen</li>
+            <li>Blood alcohol level</li>
+            <li>ABG/VBG if respiratory concerns</li>
+          </ul>
+        </div>
+
+        <h3>Additional Testing</h3>
+        <table>
+          <tr><th>Test</th><th>Indication</th></tr>
+          <tr><td><strong>CT head</strong></td><td>Focal signs, trauma, papilledema, new AMS without clear cause</td></tr>
+          <tr><td><strong>LP</strong></td><td>Fever + AMS, meningismus, immunocompromised, encephalitis suspected</td></tr>
+          <tr><td><strong>EEG</strong></td><td>Suspected seizures, nonconvulsive status epilepticus</td></tr>
+          <tr><td><strong>MRI brain</strong></td><td>Encephalitis, stroke, posterior reversible encephalopathy</td></tr>
+          <tr><td><strong>Blood/urine cultures</strong></td><td>Suspected sepsis</td></tr>
+          <tr><td><strong>Chest X-ray</strong></td><td>Pneumonia as source</td></tr>
+          <tr><td><strong>Specific drug levels</strong></td><td>Lithium, digoxin, theophylline, anticonvulsants</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- DELIRIUM -->
+    <div id="delirium" class="tab-content">
+      <div class="section">
+        <h2>🔥 Delirium Management</h2>
+
+        <h3>CAM Criteria (Confusion Assessment Method)</h3>
+        <div class="key-box">
+          <strong>Delirium diagnosis requires:</strong><br>
+          1. Acute onset AND fluctuating course<br>
+          2. Inattention<br>
+          <strong>AND EITHER:</strong><br>
+          3. Disorganized thinking OR<br>
+          4. Altered level of consciousness
+        </div>
+
+        <h3>Delirium Subtypes</h3>
+        <table>
+          <tr><th>Type</th><th>Features</th><th>Causes</th></tr>
+          <tr><td><strong>Hyperactive</strong></td><td>Agitation, restlessness, hallucinations</td><td>Alcohol withdrawal, stimulants, anticholinergics</td></tr>
+          <tr><td><strong>Hypoactive</strong></td><td>Lethargy, decreased activity, quiet confusion</td><td>Metabolic, organ failure, sedatives (often missed!)</td></tr>
+          <tr><td><strong>Mixed</strong></td><td>Fluctuates between hyper and hypo</td><td>Most common</td></tr>
+        </table>
+
+        <h3>Non-Pharmacologic Management</h3>
+        <div class="success-box">
+          <strong>First-line interventions:</strong>
+          <ul>
+            <li>Treat underlying cause</li>
+            <li>Reorientation (clock, calendar, family photos)</li>
+            <li>Normalize sleep-wake cycle (lights on during day)</li>
+            <li>Minimize tethers (Foley, IVs, restraints)</li>
+            <li>Ensure glasses/hearing aids available</li>
+            <li>Early mobilization</li>
+            <li>Avoid anticholinergic medications</li>
+            <li>Avoid benzodiazepines (except alcohol/benzo withdrawal)</li>
+            <li>Pain control</li>
+            <li>Prevent constipation/urinary retention</li>
+          </ul>
+        </div>
+
+        <h3>Pharmacologic Management (if needed)</h3>
+        <div class="info-box">
+          <strong>For severe agitation when non-pharmacologic measures fail:</strong>
+          <ul>
+            <li><strong>Antipsychotics:</strong> Haloperidol 0.5-1mg, quetiapine, olanzapine</li>
+            <li>Use lowest effective dose, shortest duration</li>
+            <li>Monitor QTc with haloperidol</li>
+            <li>Avoid in Parkinson's/DLB (use quetiapine if needed)</li>
+          </ul>
+          <strong>For alcohol/benzo withdrawal:</strong> Benzodiazepines (symptom-triggered)
+        </div>
+
+        <h3>Risk Factors for Delirium</h3>
+        <table>
+          <tr><th>Predisposing</th><th>Precipitating</th></tr>
+          <tr>
+            <td>Advanced age<br>Dementia<br>Sensory impairment<br>Multiple comorbidities<br>Polypharmacy<br>History of delirium</td>
+            <td>Infection/sepsis<br>Surgery (esp hip fracture)<br>Medications<br>Dehydration<br>Hypoxia<br>Pain<br>Urinary retention/constipation<br>ICU environment</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK441973/" target="_blank">🔗 NCBI Bookshelf - Altered Mental Status</a>
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK430711/" target="_blank">🔗 NCBI Bookshelf - Delirium</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on standard emergency medicine approach and NCBI resources.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> What is the hallmark distinguishing feature of delirium from dementia?</p>
+          <div class="quiz-option" onclick="check(this,true,'q1')">A. Impaired attention</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">B. Memory loss</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Hallucinations</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Progressive course</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: A.</strong> Impaired attention is the hallmark of delirium. Patients cannot focus or sustain attention. In dementia, attention is relatively preserved early. Delirium also has acute onset and fluctuating course.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> An 80-year-old nursing home patient is "just not acting right" per staff. What should you check FIRST?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Fingerstick glucose</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. CT head</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Lumbar puncture</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. EEG</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Hypoglycemia is immediately life-threatening and easily treatable. Always check fingerstick glucose first in any patient with altered mental status.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Visual hallucinations in an altered patient suggest:</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. Schizophrenia</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. Delirium or organic cause</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Major depression</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. Anxiety disorder</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> Visual hallucinations suggest an organic/medical cause such as delirium, substance intoxication/withdrawal, or neurological disease. Primary psychiatric conditions like schizophrenia more commonly cause auditory hallucinations.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> What is the FIRST-LINE treatment for delirium?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Haloperidol</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">B. Lorazepam</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">C. Treat underlying cause + non-pharmacologic measures</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Physical restraints</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: C.</strong> The cornerstone of delirium treatment is identifying and treating the underlying cause, plus non-pharmacologic interventions (reorientation, sleep hygiene, early mobilization). Medications are reserved for severe agitation when needed for safety.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which finding suggests hepatic encephalopathy?</p>
+          <div class="quiz-option" onclick="check(this,true,'q5')">A. Asterixis</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Pinpoint pupils</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Neck stiffness</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Unilateral weakness</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: A.</strong> Asterixis (flapping tremor) is characteristic of metabolic encephalopathies, especially hepatic and uremic encephalopathy. It's elicited by having the patient hold their arms outstretched with wrists dorsiflexed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Altered Mental Status"
+         data-key-points="🎯 Approach to AMS, 📋 Causes of AMS, 🔬 AMS Workup, 🔥 Delirium Management, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Delirium vs Dementia vs Depression, Metabolic/Toxic, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

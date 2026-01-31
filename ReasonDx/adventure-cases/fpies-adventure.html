@@ -61,5 +61,13 @@ function next(){currentScene++;if(currentScene>=scenes.length)complete();else{re
 function complete(){document.getElementById('scene-container').style.display='none';const q=scenes.filter(s=>s.question).length;document.getElementById('completion').innerHTML='<div class="score-card"><h2>🎉 Complete!</h2><p>Score: '+score+'/'+q+'</p></div><div class="nav-row" style="justify-content:center;margin-top:1rem;"><a href="../adventure-hub.html" class="btn btn-primary">← Back</a></div>';document.getElementById('completion').style.display='block';}
 renderScene();
     </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="FPIES"
+         data-key-points="🎉 Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
 </body>
 </html>

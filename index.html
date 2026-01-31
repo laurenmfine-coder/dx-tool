@@ -3,788 +3,792 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dx Learning Ecosystem | Clinical Education Platform</title>
+    <title>DxSuite | Clinical Learning Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
-        
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            padding: 48px 24px 64px;
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        .nav-link {
+            padding: 8px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .nav-link:hover {
+            background: #f1f5f9;
+            color: var(--text-primary);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            padding: 64px 24px;
             text-align: center;
             color: white;
         }
-        .header h1 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
             letter-spacing: -1px;
         }
-        .header p {
+        .hero p {
             font-size: 18px;
-            color: var(--text-muted);
+            opacity: 0.9;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 24px;
         }
-        .tagline {
-            font-family: Georgia, 'Times New Roman', serif;
+        .hero-tagline {
+            font-family: Georgia, serif;
             font-style: italic;
-            color: #cbd5e1;
-            margin-top: 16px;
             font-size: 16px;
+            opacity: 0.8;
         }
-        
-        /* Search Bar in Header */
-        .header-search {
-            max-width: 600px;
-            margin: 24px auto 0;
+
+        /* Main Content */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 700px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            display: block;
             position: relative;
         }
-        .header-search-input {
-            width: 100%;
-            padding: 16px 24px 16px 52px;
-            border: 2px solid rgba(255,255,255,0.2);
+        .main-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            border-color: var(--primary);
+        }
+        .card-icon {
+            width: 64px;
+            height: 64px;
             border-radius: 16px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
         }
-        .header-search-input::placeholder { color: rgba(255,255,255,0.6); }
-        .header-search-input:focus {
-            outline: none;
-            border-color: rgba(255,255,255,0.5);
-            background: rgba(255,255,255,0.15);
-        }
-        .header-search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.25rem;
-            opacity: 0.7;
-        }
-        .header-search-btn {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 8px 20px;
-            background: var(--primary);
-            border: none;
+        .card-icon.learn { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+        .card-icon.tools { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+        .card-icon.practice { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+        .card-icon.progress { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); }
+
+        .main-card h2 { font-size: 22px; margin-bottom: 8px; }
+        .main-card p { color: var(--text-secondary); font-size: 15px; margin-bottom: 16px; }
+        .card-stats { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); }
+        .card-cta { margin-top: 16px; color: var(--primary); font-weight: 600; font-size: 14px; }
+
+        /* Quick Links */
+        .quick-section { margin-top: 48px; }
+        .quick-section h3 { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .quick-links { display: flex; flex-wrap: wrap; gap: 12px; }
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: white;
+            border: 1px solid var(--border);
             border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .quick-link:hover { border-color: var(--primary); background: #f0fdf4; }
+
+        /* ============================================
+           GUIDED TOUR SYSTEM - Core Styles
+           ============================================ */
+        
+        /* Overlay */
+        .tour-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9998;
+            transition: opacity 0.3s;
+        }
+        .tour-overlay.active { display: block; }
+        
+        /* Spotlight - highlights the current element */
+        .tour-spotlight {
+            position: absolute;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            z-index: 9999;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+        
+        /* Tooltip */
+        .tour-tooltip {
+            display: none;
+            position: fixed;
+            width: 340px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            z-index: 10000;
+            overflow: hidden;
+            animation: tooltipIn 0.3s ease;
+        }
+        .tour-tooltip.active { display: block; }
+        
+        @keyframes tooltipIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tour-tooltip-header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
             color: white;
+            padding: 16px 20px;
+        }
+        .tour-tooltip-step {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+        .tour-tooltip-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .tour-tooltip-body {
+            padding: 20px;
+        }
+        .tour-tooltip-body p {
+            font-size: 14px;
+            color: #52525b;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .tour-tooltip-tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: #f0fdf4;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #166534;
+        }
+        .tour-tooltip-tip .icon { font-size: 18px; }
+        
+        .tour-tooltip-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tour-progress {
+            display: flex;
+            gap: 6px;
+        }
+        .tour-progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e2e8f0;
+        }
+        .tour-progress-dot.active { background: var(--primary); }
+        .tour-progress-dot.completed { background: #a7f3d0; }
+        
+        .tour-buttons { display: flex; gap: 8px; }
+        .tour-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .header-search-btn:hover { background: var(--primary-dark); }
+        .tour-btn-secondary {
+            background: #f1f5f9;
+            border: none;
+            color: #64748b;
+        }
+        .tour-btn-secondary:hover { background: #e2e8f0; }
+        .tour-btn-primary {
+            background: var(--primary);
+            border: none;
+            color: white;
+        }
+        .tour-btn-primary:hover { background: var(--primary-dark); }
         
-        /* Platform Cards */
-        .platforms {
-            max-width: 1100px;
-            margin: -40px auto 64px;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+        /* Skip tour button */
+        .tour-skip {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #64748b;
+            cursor: pointer;
+            z-index: 10001;
+            display: none;
+        }
+        .tour-skip.active { display: block; }
+        
+        /* Welcome Modal */
+        .tour-welcome {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 10002;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .tour-welcome.active { display: flex; }
+        
+        .tour-welcome-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            overflow: hidden;
+            animation: welcomeIn 0.4s ease;
+        }
+        @keyframes welcomeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         
-        .platform-card {
-            background: var(--bg-card);
-            border-radius: 20px;
+        .tour-welcome-header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            padding: 40px 32px;
+            text-align: center;
+            color: white;
+        }
+        .tour-welcome-header .emoji { font-size: 64px; margin-bottom: 16px; }
+        .tour-welcome-header h2 { font-size: 28px; margin-bottom: 8px; }
+        .tour-welcome-header p { opacity: 0.9; }
+        
+        .tour-welcome-body {
             padding: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+        }
+        .tour-welcome-features {
             display: flex;
             flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        .platform-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-        }
-        
-        .platform-card.reason { border-color: var(--primary); }
-        .platform-card.reason:hover { background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); }
-        
-        .platform-card.mechanism { border-color: var(--primary); }
-        .platform-card.mechanism:hover { background: linear-gradient(135deg, var(--primary-bg) 0%, #fff 100%); }
-        
-        .platform-card.coach { border-color: #8b5cf6; }
-        .platform-card.coach:hover { background: linear-gradient(135deg, #f5f3ff 0%, #fff 100%); }
-        
-        .platform-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        .platform-name {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
+        .tour-welcome-feature {
             display: flex;
             align-items: center;
+            gap: 16px;
+        }
+        .tour-welcome-feature .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .tour-welcome-feature .icon.blue { background: #dbeafe; }
+        .tour-welcome-feature .icon.green { background: #dcfce7; }
+        .tour-welcome-feature .icon.orange { background: #fef3c7; }
+        .tour-welcome-feature h4 { font-size: 15px; margin-bottom: 2px; }
+        .tour-welcome-feature p { font-size: 13px; color: #64748b; }
+        
+        .tour-welcome-actions {
+            display: flex;
+            flex-direction: column;
             gap: 12px;
         }
-        .platform-name .badge {
-            font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        .platform-card.reason .badge { background: var(--primary-bg); color: var(--primary-dark); }
-        .platform-card.mechanism .badge { background: #d1fae5; color: #047857; }
-        .platform-card.coach .badge { background: #ede9fe; color: #6d28d9; }
-        
-        .platform-subtitle {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-        .platform-desc {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            flex-grow: 1;
-        }
-        .platform-stats {
-            display: flex;
-            gap: 24px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-        }
-        .platform-stat {
-            text-align: center;
-        }
-        .platform-stat-value {
-            font-size: 20px;
+        .tour-start-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 700;
-            color: var(--text-primary);
+            cursor: pointer;
         }
-        .platform-stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .tour-skip-btn {
+            width: 100%;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 14px;
+            cursor: pointer;
         }
         
-        .enter-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
+        /* Highlight pulse animation for tour targets */
+        .tour-highlight {
+            position: relative;
         }
-        .platform-card.reason .enter-btn { background: var(--primary); color: white; }
-        .platform-card.reason .enter-btn:hover { background: var(--primary-dark); }
-        .platform-card.mechanism .enter-btn { background: var(--primary); color: white; }
-        .platform-card.mechanism .enter-btn:hover { background: var(--primary-dark); }
-        .platform-card.coach .enter-btn { background: #8b5cf6; color: white; }
-        .platform-card.coach .enter-btn:hover { background: #7c3aed; }
-        
-        /* Quick Links */
-        .quick-links {
-            max-width: 1100px;
-            margin: 0 auto 64px;
-            padding: 0 24px;
+        .tour-highlight::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 3px solid var(--primary);
+            border-radius: 16px;
+            animation: pulse 2s infinite;
         }
-        .quick-links h2 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            text-align: center;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.02); }
         }
-        .quick-links-grid {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .quick-link {
-            padding: 10px 20px;
-            background: var(--bg-card);
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .quick-link:hover {
-            background: var(--bg-main);
-            border-color: #cbd5e1;
-            color: var(--text-primary);
-        }
-        
+
         /* Footer */
         .footer {
-            background: var(--bg-card);
-            border-top: 1px solid #e5e7eb;
-            padding: 32px 24px;
             text-align: center;
-            color: var(--text-muted);
-            font-size: 13px;
+            padding: 32px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--border);
+            margin-top: 48px;
         }
-    
-
-/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
-:root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --text-muted: #94a3b8;
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-nav: #ffffff;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
-    --nav-text: #1e293b;
-    --nav-link: #64748b;
-    --nav-active-bg: #10b981;
-    --nav-active-text: #ffffff;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
-    --radius: 12px;
-    --transition: all 0.2s ease;
-}
-
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
-
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
-
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
-
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
-
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
-
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
-
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
-
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
-
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
-}
-
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
-
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
-
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
-
-/* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
-.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
-.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
-.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
-.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-/* Theme Modal */
-.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-.dx-theme-modal.open { display: flex; }
-.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
-.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
-.dx-theme-section { margin-bottom: 20px; }
-.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
-.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
-.dx-theme-option:hover { border-color: var(--primary); }
-.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
-.dx-theme-preview-nav { width: 30%; }
-.dx-theme-preview-main { width: 70%; }
-.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
-.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
-
-/* Body theming */
-body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
-
-@media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
-    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
     </style>
 </head>
 <body>
-
-    <!-- UNIFIED DX NAVIGATION -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand" id="tourTarget-brand">
+                <span>🩺</span> DxSuite
             </a>
-            <div class="dx-nav-links">
-                <a href="index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="EPASystem/epa-dashboard.html" class="dx-nav-link ">📋 EPA Tracker</a>
-                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            <div class="nav-links" id="tourTarget-nav">
+                <a href="mechanism/index.html" class="nav-link" id="tourTarget-learn">Learn</a>
+                <a href="tools/index.html" class="nav-link" id="tourTarget-tools">Tools</a>
+                <a href="ReasonDx/training.html" class="nav-link" id="tourTarget-practice">Practice</a>
+                <a href="tools/learning-dashboard.html" class="nav-link" id="tourTarget-progress">My Progress</a>
+                <a href="auth/register.html" class="nav-link" style="background: #059669; color: white; margin-left: 8px;">Sign In</a>
             </div>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="header">
-        <h1>Dx Learning Ecosystem</h1>
-        <p>A comprehensive clinical education platform integrating reasoning, pathophysiology, and AI-powered coaching.</p>
-        <div class="tagline">Asking the right questions can change everything.</div>
-        <div class="header-search">
-            <span class="header-search-icon">🔍</span>
-            <input type="text" class="header-search-input" id="mainSearchInput" placeholder="Search any topic, disease, or symptom...">
-            <button class="header-search-btn" onclick="goToSearch()">Search</button>
-        </div>
+    <!-- Hero -->
+    <header class="hero" id="tourTarget-hero">
+        <h1>Master Clinical Reasoning</h1>
+        <p>Learn pathophysiology, practice cases, and track your progress — all in one place.</p>
+        <div class="hero-tagline">Asking the right questions can change everything.</div>
     </header>
-    
-    <script>
-        function goToSearch() {
-            const query = document.getElementById('mainSearchInput').value;
-            window.location.href = 'search.html' + (query ? '?q=' + encodeURIComponent(query) : '');
-        }
-        document.getElementById('mainSearchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') goToSearch();
-        });
-    </script>
-    
-    <!-- Platform Cards -->
-    <section class="platforms">
-        <!-- ReasonDx -->
-        <a href="ReasonDx/index.html" class="platform-card reason">
-            <div class="platform-icon">🔬</div>
-            <h2 class="platform-name">
-                ReasonDx
-                <span class="badge">Core Platform</span>
-            </h2>
-            <div class="platform-subtitle">Clinical Reasoning Trainer</div>
-            <p class="platform-desc">
-                Work through realistic patient cases, build differential diagnoses, order tests strategically, and develop the diagnostic thinking that defines expert clinicians.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">3,137</div>
-                    <div class="platform-stat-label">Cases</div>
+
+    <!-- Main Content -->
+    <main class="content">
+        <div class="cards-grid">
+            <a href="mechanism/index.html" class="main-card" id="tourTarget-learnCard">
+                <div class="card-icon learn">📚</div>
+                <h2>Learn</h2>
+                <p>Master pathophysiology with interactive modules covering mechanisms, microbiology, and pharmacology.</p>
+                <div class="card-stats">
+                    <span>📖 262 Modules</span>
+                    <span>🧠 AI Tutor</span>
                 </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">22</div>
-                    <div class="platform-stat-label">Specialties</div>
+                <div class="card-cta">Start Learning →</div>
+            </a>
+
+            <a href="tools/index.html" class="main-card" id="tourTarget-toolsCard">
+                <div class="card-icon tools">🛠️</div>
+                <h2>Tools</h2>
+                <p>Calculators, flashcards, study planner, and everything you need to study smarter.</p>
+                <div class="card-stats">
+                    <span>🧮 18 Calculators</span>
+                    <span>🎴 Flashcards</span>
                 </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">7</div>
-                    <div class="platform-stat-label">Modes</div>
+                <div class="card-cta">Open Tools →</div>
+            </a>
+
+            <a href="ReasonDx/training.html" class="main-card" id="tourTarget-practiceCard">
+                <div class="card-icon practice">🎯</div>
+                <h2>Practice Cases</h2>
+                <p>Work through realistic clinical scenarios, build differentials, and develop expert diagnostic thinking.</p>
+                <div class="card-stats">
+                    <span>🏥 200+ Cases</span>
+                    <span>⚡ Interactive</span>
                 </div>
-            </div>
-            <div class="enter-btn">Enter ReasonDx →</div>
-        </a>
-        
-        <!-- MechanismDx -->
-        <a href="mechanism/index.html" class="platform-card mechanism">
-            <div class="platform-icon">⚙️</div>
-            <h2 class="platform-name">
-                MechanismDx
-                <span class="badge">Pathophysiology</span>
-            </h2>
-            <div class="platform-subtitle">Disease Mechanism Mastery</div>
-            <p class="platform-desc">
-                Master the "why" behind diseases. Interactive modules connect pathophysiology to clinical presentation, helping you understand mechanisms that drive symptoms and guide treatment.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">54</div>
-                    <div class="platform-stat-label">Modules</div>
+                <div class="card-cta">Start Practicing →</div>
+            </a>
+
+            <a href="tools/learning-dashboard.html" class="main-card" id="tourTarget-progressCard">
+                <div class="card-icon progress">📊</div>
+                <h2>My Progress</h2>
+                <p>Track your learning, identify weak areas, and get personalized recommendations.</p>
+                <div class="card-stats">
+                    <span>📈 Analytics</span>
+                    <span>🎯 Goals</span>
                 </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">450+</div>
-                    <div class="platform-stat-label">MCQs</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">14</div>
-                    <div class="platform-stat-label">A/I Complete</div>
-                </div>
-            </div>
-            <div class="enter-btn">Enter MechanismDx →</div>
-        </a>
-        
-        <!-- CoachDx -->
-        <a href="CoachDx/index.html" class="platform-card coach">
-            <div class="platform-icon">💬</div>
-            <h2 class="platform-name">
-                CoachDx
-                <span class="badge">AI Coaching</span>
-            </h2>
-            <div class="platform-subtitle">Socratic Learning Partner</div>
-            <p class="platform-desc">
-                Learn through dialogue with an AI mentor that asks probing questions, challenges assumptions, and guides you to deeper understanding—just like a great attending.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">200+</div>
-                    <div class="platform-stat-label">Cases</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">12</div>
-                    <div class="platform-stat-label">Specialties</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">24/7</div>
-                    <div class="platform-stat-label">Available</div>
-                </div>
-            </div>
-            <div class="enter-btn">Enter CoachDx →</div>
-        </a>
-    </section>
-    
-    <!-- Clinical Skills Section -->
-    <section class="platforms" style="margin-top: 0;">
-        <div style="grid-column: 1 / -1; margin-bottom: 8px;">
-            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); text-align: center;">Clinical Skills &amp; Competency Tracking</h2>
+                <div class="card-cta">View Progress →</div>
+            </a>
         </div>
-        
-        <!-- EPA System -->
-        <a href="EPASystem/epa-dashboard.html" class="platform-card" style="border-color: #0ea5e9;">
-            <div class="platform-icon">📋</div>
-            <h2 class="platform-name">
-                EPA Tracker
-                <span class="badge" style="background: #e0f2fe; color: #0369a1;">NEW</span>
-            </h2>
-            <div class="platform-subtitle">Competency Progress Dashboard</div>
-            <p class="platform-desc">
-                Track your progress across all 13 Core EPAs and LCME Foundational Competencies. Supports MD and DO programs with developmental feedback aligned to AAMC standards.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">13</div>
-                    <div class="platform-stat-label">Core EPAs</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">49</div>
-                    <div class="platform-stat-label">Competencies</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">MD/DO</div>
-                    <div class="platform-stat-label">Compatible</div>
-                </div>
+
+        <div class="quick-section" id="tourTarget-quickLinks">
+            <h3>Quick Access</h3>
+            <div class="quick-links">
+                <a href="tools/calculator-hub.html" class="quick-link">🧮 Calculators</a>
+                <a href="tools/flashcard-studio.html" class="quick-link">🎴 Flashcards</a>
+                <a href="microbiology/index.html" class="quick-link">🦠 Microbiology</a>
+                <a href="pharmacology/index.html" class="quick-link">💊 Pharmacology</a>
+                <a href="tools/ddx-builder.html" class="quick-link">🔍 DDx Builder</a>
+                <a href="features/index.html" class="quick-link">✨ New Features</a>
             </div>
-            <div class="enter-btn" style="background: #0ea5e9;">View EPA Dashboard →</div>
-        </a>
-        
-        <!-- ProcedureDx -->
-        <a href="ProcedureDx/proceduredx-main.html" class="platform-card" style="border-color: #f97316;">
-            <div class="platform-icon">🩺</div>
-            <h2 class="platform-name">
-                ProcedureDx
-                <span class="badge" style="background: #ffedd5; color: #c2410c;">EPA 12</span>
-            </h2>
-            <div class="platform-subtitle">Procedural Skills Training</div>
-            <p class="platform-desc">
-                Master essential procedures through equipment selection, step sequencing, and complication management. Aligned with EPA 12 entrustment criteria.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">25+</div>
-                    <div class="platform-stat-label">Procedures</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">3</div>
-                    <div class="platform-stat-label">Skill Modes</div>
-                </div>
-            </div>
-            <div class="enter-btn" style="background: #f97316;">Enter ProcedureDx →</div>
-        </a>
-        
-        <!-- ConsentDx -->
-        <a href="ConsentDx/consentdx-main.html" class="platform-card" style="border-color: #a855f7;">
-            <div class="platform-icon">📝</div>
-            <h2 class="platform-name">
-                ConsentDx
-                <span class="badge" style="background: #f3e8ff; color: #7e22ce;">EPA 11</span>
-            </h2>
-            <div class="platform-subtitle">Informed Consent Simulation</div>
-            <p class="platform-desc">
-                Practice informed consent conversations with simulated patients. Develop communication skills with empathy and clarity scoring aligned to EPA 11.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">15+</div>
-                    <div class="platform-stat-label">Scenarios</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">4</div>
-                    <div class="platform-stat-label">Patient Types</div>
-                </div>
-            </div>
-            <div class="enter-btn" style="background: #a855f7;">Enter ConsentDx →</div>
-        </a>
-        
-        <!-- SystemsDx -->
-        <a href="SystemsDx/systemsdx-main.html" class="platform-card" style="border-color: #ec4899;">
-            <div class="platform-icon">🏥</div>
-            <h2 class="platform-name">
-                SystemsDx
-                <span class="badge" style="background: #fce7f3; color: #be185d;">SBP</span>
-            </h2>
-            <div class="platform-subtitle">Systems-Based Practice</div>
-            <p class="platform-desc">
-                Learn patient safety through Root Cause Analysis, Swiss Cheese Model, and Just Culture. Develop systems thinking for quality improvement.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">4</div>
-                    <div class="platform-stat-label">Modules</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">EPA 13</div>
-                    <div class="platform-stat-label">Aligned</div>
-                </div>
-            </div>
-            <div class="enter-btn" style="background: #ec4899;">Enter SystemsDx →</div>
-        </a>
-        
-        <!-- TeamDx -->
-        <a href="TeamDx/teamdx-main.html" class="platform-card" style="border-color: #14b8a6;">
-            <div class="platform-icon">👥</div>
-            <h2 class="platform-name">
-                TeamDx
-                <span class="badge" style="background: #ccfbf1; color: #0f766e;">IPC</span>
-            </h2>
-            <div class="platform-subtitle">Interprofessional Collaboration</div>
-            <p class="platform-desc">
-                Practice team communication with ICU rounding, handoff scenarios, and interprofessional collaboration. Develop skills aligned with EPA 9.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">10+</div>
-                    <div class="platform-stat-label">Scenarios</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">5</div>
-                    <div class="platform-stat-label">Roles</div>
-                </div>
-            </div>
-            <div class="enter-btn" style="background: #14b8a6;">Enter TeamDx →</div>
-        </a>
-    </section>
-    
-    <!-- Quick Links -->
-    <section class="quick-links">
-        <h2>Quick Access</h2>
-        <div class="quick-links-grid">
-            <a href="ReasonDx/training.html" class="quick-link">🎯 Start Training</a>
-            <a href="CoachDx/index.html" class="quick-link">📚 Case Library</a>
-            <a href="EPASystem/epa-dashboard.html" class="quick-link">📋 EPA Progress</a>
-            <a href="EPASystem/portfolio-export.html" class="quick-link">📄 Portfolio Export</a>
-            <a href="fingerprint-dashboard.html" class="quick-link">🧬 Learning Fingerprint</a>
-            <a href="unified-scoreboard.html" class="quick-link">🏆 Scoreboard</a>
-            <a href="EPASystem/epa-user-guide.html" class="quick-link">❓ EPA User Guide</a>
         </div>
-    </section>
-    
-    <!-- Footer -->
+    </main>
+
     <footer class="footer">
-        <p>Dx Learning Ecosystem — Built for medical education</p>
-        <p style="margin-top: 8px; font-size: 12px; color: var(--text-secondary);">© 2025-2026 · Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+        <p>DxSuite Clinical Learning Platform | Built for medical education</p>
+        <p style="margin-top: 8px;"><a href="#" onclick="startTour(); return false;" style="color: var(--primary);">Take the Tour Again</a></p>
     </footer>
 
-    <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+    <!-- ============================================
+         GUIDED TOUR SYSTEM - HTML Elements
+         ============================================ -->
+    
+    <!-- Welcome Modal -->
+    <div class="tour-welcome" id="tourWelcome">
+        <div class="tour-welcome-content">
+            <div class="tour-welcome-header">
+                <div class="emoji">👋</div>
+                <h2>Welcome to DxSuite!</h2>
+                <p>Let's take a quick 60-second tour</p>
             </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
-                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+            <div class="tour-welcome-body">
+                <div class="tour-welcome-features">
+                    <div class="tour-welcome-feature">
+                        <div class="icon blue">📚</div>
+                        <div>
+                            <h4>262+ Learning Modules</h4>
+                            <p>Pathophysiology, microbiology, pharmacology</p>
+                        </div>
                     </div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
-                        <div class="dx-theme-name">Deeper Teal</div>
+                    <div class="tour-welcome-feature">
+                        <div class="icon green">🛠️</div>
+                        <div>
+                            <h4>12 Powerful Tools</h4>
+                            <p>Calculators, flashcards, study planner</p>
+                        </div>
                     </div>
-                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
-                        <div class="dx-theme-name">Eucalyptus</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
-                        <div class="dx-theme-name">Teal on Cream</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
-                        <div class="dx-theme-name">Steel Blue</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
-                        <div class="dx-theme-name">Muted Sage</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
-                        <div class="dx-theme-name">Muted Lavender</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
-                        <div class="dx-theme-name">Slate + Teal</div>
+                    <div class="tour-welcome-feature">
+                        <div class="icon orange">🎯</div>
+                        <div>
+                            <h4>200+ Clinical Cases</h4>
+                            <p>Practice diagnostic reasoning</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Dark Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
-                        <div class="dx-theme-name">Ocean Dark</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
-                        <div class="dx-theme-name">Midnight Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
-                        <div class="dx-theme-name">Purple Night</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
-                        <div class="dx-theme-name">Forest Night</div>
-                    </div>
+                <div class="tour-welcome-actions">
+                    <button class="tour-start-btn" onclick="beginTour()">🚀 Start Quick Tour</button>
+                    <button class="tour-skip-btn" onclick="skipTour()">I'll explore on my own</button>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Tour Overlay & Spotlight -->
+    <div class="tour-overlay" id="tourOverlay"></div>
+    <div class="tour-spotlight" id="tourSpotlight"></div>
+    
+    <!-- Tour Tooltip -->
+    <div class="tour-tooltip" id="tourTooltip">
+        <div class="tour-tooltip-header">
+            <div class="tour-tooltip-step" id="tooltipStep">Step 1 of 5</div>
+            <div class="tour-tooltip-title" id="tooltipTitle">Welcome!</div>
+        </div>
+        <div class="tour-tooltip-body">
+            <p id="tooltipDescription">Description goes here</p>
+            <div class="tour-tooltip-tip" id="tooltipTip">
+                <span class="icon">💡</span>
+                <span id="tooltipTipText">Tip text goes here</span>
+            </div>
+        </div>
+        <div class="tour-tooltip-footer">
+            <div class="tour-progress" id="tourProgress"></div>
+            <div class="tour-buttons">
+                <button class="tour-btn tour-btn-secondary" id="tourPrevBtn" onclick="prevStep()">Back</button>
+                <button class="tour-btn tour-btn-primary" id="tourNextBtn" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Skip Button -->
+    <button class="tour-skip" id="tourSkipBtn" onclick="endTour()">✕ Skip Tour</button>
 
+    <!-- ============================================
+         GUIDED TOUR SYSTEM - JavaScript
+         ============================================ -->
     <script>
-    // Theme System
-    (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
-        document.addEventListener('DOMContentLoaded', updateThemeOptions);
-    })();
-    
-    function setDxTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('dx-theme', theme);
-        updateThemeOptions();
-        closeDxThemeModal();
-    }
-    
-    function updateThemeOptions() {
-        const current = document.body.getAttribute('data-theme');
-        document.querySelectorAll('.dx-theme-option').forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.theme === current);
+        // Tour configuration
+        const tourSteps = [
+            {
+                target: 'tourTarget-learnCard',
+                title: '📚 Learn',
+                description: 'Start here! Over 262 interactive modules covering pathophysiology, microbiology, and pharmacology. Each module includes an AI tutor to answer your questions.',
+                tip: 'Try the "Why Does This Matter?" cards at the start of each module to see real clinical applications.',
+                position: 'right'
+            },
+            {
+                target: 'tourTarget-toolsCard',
+                title: '🛠️ Tools',
+                description: '12 powerful study tools in one place: clinical calculators, flashcard studio, DDx builder, study planner, and more.',
+                tip: 'The Clinical Calculator Hub has 18 essential formulas you\'ll use daily on rotations.',
+                position: 'left'
+            },
+            {
+                target: 'tourTarget-practiceCard',
+                title: '🎯 Practice Cases',
+                description: 'Over 200 interactive clinical cases. Work through realistic scenarios, build differentials, and develop expert diagnostic thinking.',
+                tip: 'Try "Case of the Day" for a daily habit that ensures broad exposure.',
+                position: 'right'
+            },
+            {
+                target: 'tourTarget-progressCard',
+                title: '📊 Track Progress',
+                description: 'Your personal dashboard shows strengths, weak areas, and personalized recommendations. Set goals and track your streak.',
+                tip: 'Take the "Knowledge Gap Diagnostic" to identify exactly where to focus.',
+                position: 'left'
+            },
+            {
+                target: 'tourTarget-quickLinks',
+                title: '⚡ Quick Access',
+                description: 'Jump directly to the most-used features. Calculators, flashcards, specialty modules — all one click away.',
+                tip: 'Check out "New Features" to see the 12 tools we just added!',
+                position: 'top'
+            }
+        ];
+        
+        let currentStep = 0;
+        let tourActive = false;
+        
+        // Check if first visit
+        function checkFirstVisit() {
+            const hasVisited = localStorage.getItem('dxsuite-tour-completed');
+            if (!hasVisited) {
+                setTimeout(() => {
+                    document.getElementById('tourWelcome').classList.add('active');
+                }, 1000);
+            }
+        }
+        
+        // Start tour from welcome modal
+        function beginTour() {
+            document.getElementById('tourWelcome').classList.remove('active');
+            startTour();
+        }
+        
+        // Skip tour from welcome modal
+        function skipTour() {
+            document.getElementById('tourWelcome').classList.remove('active');
+            localStorage.setItem('dxsuite-tour-completed', 'true');
+        }
+        
+        // Start the tour
+        function startTour() {
+            currentStep = 0;
+            tourActive = true;
+            document.getElementById('tourOverlay').classList.add('active');
+            document.getElementById('tourTooltip').classList.add('active');
+            document.getElementById('tourSkipBtn').classList.add('active');
+            showStep(currentStep);
+        }
+        
+        // End the tour
+        function endTour() {
+            tourActive = false;
+            document.getElementById('tourOverlay').classList.remove('active');
+            document.getElementById('tourTooltip').classList.remove('active');
+            document.getElementById('tourSkipBtn').classList.remove('active');
+            document.getElementById('tourSpotlight').style.display = 'none';
+            localStorage.setItem('dxsuite-tour-completed', 'true');
+        }
+        
+        // Show a specific step
+        function showStep(stepIndex) {
+            const step = tourSteps[stepIndex];
+            const target = document.getElementById(step.target);
+            
+            if (!target) {
+                console.error('Tour target not found:', step.target);
+                return;
+            }
+            
+            // Update tooltip content
+            document.getElementById('tooltipStep').textContent = `Step ${stepIndex + 1} of ${tourSteps.length}`;
+            document.getElementById('tooltipTitle').textContent = step.title;
+            document.getElementById('tooltipDescription').textContent = step.description;
+            document.getElementById('tooltipTipText').textContent = step.tip;
+            
+            // Update progress dots
+            const progressDiv = document.getElementById('tourProgress');
+            progressDiv.innerHTML = tourSteps.map((_, i) => {
+                let className = 'tour-progress-dot';
+                if (i < stepIndex) className += ' completed';
+                if (i === stepIndex) className += ' active';
+                return `<div class="${className}"></div>`;
+            }).join('');
+            
+            // Update buttons
+            document.getElementById('tourPrevBtn').style.display = stepIndex === 0 ? 'none' : 'block';
+            document.getElementById('tourNextBtn').textContent = stepIndex === tourSteps.length - 1 ? 'Finish' : 'Next';
+            
+            // Position spotlight
+            const rect = target.getBoundingClientRect();
+            const spotlight = document.getElementById('tourSpotlight');
+            spotlight.style.display = 'block';
+            spotlight.style.top = (rect.top + window.scrollY - 8) + 'px';
+            spotlight.style.left = (rect.left - 8) + 'px';
+            spotlight.style.width = (rect.width + 16) + 'px';
+            spotlight.style.height = (rect.height + 16) + 'px';
+            
+            // Position tooltip
+            const tooltip = document.getElementById('tourTooltip');
+            const tooltipRect = tooltip.getBoundingClientRect();
+            
+            let tooltipTop, tooltipLeft;
+            
+            switch (step.position) {
+                case 'right':
+                    tooltipTop = rect.top + window.scrollY;
+                    tooltipLeft = rect.right + 20;
+                    if (tooltipLeft + 340 > window.innerWidth) {
+                        tooltipLeft = rect.left - 360;
+                    }
+                    break;
+                case 'left':
+                    tooltipTop = rect.top + window.scrollY;
+                    tooltipLeft = rect.left - 360;
+                    if (tooltipLeft < 20) {
+                        tooltipLeft = rect.right + 20;
+                    }
+                    break;
+                case 'top':
+                    tooltipTop = rect.top + window.scrollY - tooltipRect.height - 20;
+                    tooltipLeft = rect.left + (rect.width / 2) - 170;
+                    break;
+                case 'bottom':
+                default:
+                    tooltipTop = rect.bottom + window.scrollY + 20;
+                    tooltipLeft = rect.left + (rect.width / 2) - 170;
+            }
+            
+            // Keep tooltip in viewport
+            tooltipLeft = Math.max(20, Math.min(tooltipLeft, window.innerWidth - 360));
+            
+            tooltip.style.top = tooltipTop + 'px';
+            tooltip.style.left = tooltipLeft + 'px';
+            
+            // Scroll into view if needed
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Next step
+        function nextStep() {
+            if (currentStep < tourSteps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                endTour();
+            }
+        }
+        
+        // Previous step
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!tourActive) return;
+            
+            if (e.key === 'ArrowRight' || e.key === 'Enter') {
+                nextStep();
+            } else if (e.key === 'ArrowLeft') {
+                prevStep();
+            } else if (e.key === 'Escape') {
+                endTour();
+            }
         });
-    }
-    
-    function openDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.add('open');
-    }
-    
-    function closeDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.remove('open');
-    }
-    
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeDxThemeModal();
-    });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (tourActive) {
+                showStep(currentStep);
+            }
+        });
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', checkFirstVisit);
     </script>
-
 </body>
 </html>

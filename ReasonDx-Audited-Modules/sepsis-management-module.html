@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Sepsis Management</title>
+  <style>
+    :root{--primary:#059669;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(5,150,105,0.1);border-radius:1rem;border:1px solid rgba(5,150,105,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(5,150,105,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(5,150,105,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(5,150,105,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🦠 Sepsis Management</h1>
+      <p style="color:#9CA3AF">Sepsis-3 Criteria • Hour-1 Bundle • Vasopressors</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('definitions')">Definitions</div>
+      <div class="nav-tab" onclick="showTab('bundle')">Hour-1 Bundle</div>
+      <div class="nav-tab" onclick="showTab('fluids')">Fluid & Vasopressors</div>
+      <div class="nav-tab" onclick="showTab('antibiotics')">Antibiotics</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+    </div>
+
+    <div id="definitions" class="tab-content active">
+      <div class="section">
+        <h2>📋 Sepsis-3 Definitions</h2>
+        
+        <div class="key-box">
+          <strong>Sepsis =</strong> Life-threatening organ dysfunction caused by dysregulated host response to infection<br><br>
+          <strong>Operationalized as:</strong> Suspected infection + SOFA score increase ≥2
+        </div>
+
+        <h3>qSOFA (Quick SOFA) - Screening</h3>
+        <div class="mnemonic">
+          <strong>≥2 of 3 = high risk for poor outcome:</strong><br>
+          • Respiratory rate ≥22<br>
+          • Altered mental status (GCS <15)<br>
+          • Systolic BP ≤100 mmHg
+        </div>
+        <p><em>Note: qSOFA is for screening outside ICU; SOFA used for diagnosis</em></p>
+
+        <h3>SOFA Score Components</h3>
+        <table>
+          <tr><th>System</th><th>Parameter</th></tr>
+          <tr><td>Respiratory</td><td>PaO2/FiO2 ratio</td></tr>
+          <tr><td>Coagulation</td><td>Platelets</td></tr>
+          <tr><td>Liver</td><td>Bilirubin</td></tr>
+          <tr><td>Cardiovascular</td><td>MAP and vasopressor requirement</td></tr>
+          <tr><td>CNS</td><td>Glasgow Coma Scale</td></tr>
+          <tr><td>Renal</td><td>Creatinine or urine output</td></tr>
+        </table>
+
+        <h3>Septic Shock</h3>
+        <div class="danger-box">
+          <strong>Sepsis + BOTH:</strong>
+          <ul>
+            <li>Vasopressors needed to maintain MAP ≥65 mmHg</li>
+            <li>Lactate >2 mmol/L despite adequate fluid resuscitation</li>
+          </ul>
+          <strong>Mortality: ~40%</strong>
+        </div>
+      </div>
+    </div>
+
+    <div id="bundle" class="tab-content">
+      <div class="section">
+        <h2>⏱️ Hour-1 Bundle</h2>
+
+        <div class="danger-box">
+          <strong>Start within 1 HOUR of recognition:</strong><br>
+          Every hour of antibiotic delay increases mortality
+        </div>
+
+        <div class="key-box">
+          <strong>Hour-1 Bundle Elements:</strong>
+          <ol>
+            <li><strong>Measure lactate</strong> (remeasure if >2)</li>
+            <li><strong>Obtain blood cultures</strong> before antibiotics</li>
+            <li><strong>Administer broad-spectrum antibiotics</strong></li>
+            <li><strong>Begin fluid resuscitation</strong> (30 mL/kg crystalloid for hypotension or lactate ≥4)</li>
+            <li><strong>Apply vasopressors</strong> if hypotensive during or after fluid resuscitation (MAP target ≥65)</li>
+          </ol>
+        </div>
+
+        <h3>Lactate Goals</h3>
+        <table>
+          <tr><th>Lactate Level</th><th>Significance</th></tr>
+          <tr><td><2 mmol/L</td><td>Normal</td></tr>
+          <tr><td>2-4 mmol/L</td><td>Intermediate risk; guide resuscitation</td></tr>
+          <tr><td>>4 mmol/L</td><td>High risk; aggressive resuscitation needed</td></tr>
+        </table>
+        <div class="info-box">
+          <strong>Goal:</strong> Normalize lactate or decrease by ≥10% in first 2-4 hours<br>
+          Serial lactate monitoring guides adequacy of resuscitation
+        </div>
+      </div>
+    </div>
+
+    <div id="fluids" class="tab-content">
+      <div class="section">
+        <h2>💧 Fluid Resuscitation & Vasopressors</h2>
+
+        <h3>Initial Fluid Resuscitation</h3>
+        <div class="key-box">
+          <strong>30 mL/kg crystalloid</strong> within first 3 hours<br>
+          (for hypotension or lactate ≥4 mmol/L)<br><br>
+          <strong>Crystalloid choice:</strong> Balanced solutions (LR, Plasmalyte) preferred over NS
+        </div>
+
+        <h3>Fluid Responsiveness Assessment</h3>
+        <ul>
+          <li>Passive leg raise test</li>
+          <li>Pulse pressure variation (if on vent)</li>
+          <li>IVC ultrasound (collapsibility)</li>
+          <li>Fluid challenge with reassessment</li>
+        </ul>
+
+        <h3>Vasopressors</h3>
+        <div class="danger-box">
+          <strong>Start vasopressors if MAP <65 despite initial fluids</strong><br>
+          Don't delay - can run peripherally initially while getting central access
+        </div>
+
+        <table>
+          <tr><th>Agent</th><th>Mechanism</th><th>Notes</th></tr>
+          <tr><td><strong>Norepinephrine</strong></td><td>α1 > β1</td><td><strong>FIRST LINE</strong>; potent vasoconstriction with some inotropy</td></tr>
+          <tr><td><strong>Vasopressin</strong></td><td>V1 receptor</td><td><strong>ADD to norepi</strong> (max 0.03-0.04 U/min); catecholamine-sparing</td></tr>
+          <tr><td><strong>Epinephrine</strong></td><td>α + β1 + β2</td><td>Add if refractory; increases HR, lactate</td></tr>
+          <tr><td><strong>Dopamine</strong></td><td>Dose-dependent</td><td>NOT preferred - more arrhythmias; consider only in bradycardia</td></tr>
+          <tr><td><strong>Phenylephrine</strong></td><td>Pure α1</td><td>Only if tachyarrhythmia limits other agents</td></tr>
+        </table>
+
+        <h3>Refractory Shock</h3>
+        <div class="info-box">
+          Consider:
+          <ul>
+            <li>Hydrocortisone 200mg/day (stress-dose steroids)</li>
+            <li>Inotrope (dobutamine) if cardiac dysfunction</li>
+            <li>Source control (drain abscess, remove line)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="antibiotics" class="tab-content">
+      <div class="section">
+        <h2>💊 Antibiotic Selection</h2>
+
+        <div class="danger-box">
+          <strong>Give within 1 hour!</strong><br>
+          Broad-spectrum, then de-escalate based on cultures
+        </div>
+
+        <h3>Empiric Regimens by Source</h3>
+        <table>
+          <tr><th>Source</th><th>Common Pathogens</th><th>Empiric Coverage</th></tr>
+          <tr>
+            <td><strong>Pulmonary (CAP)</strong></td>
+            <td>Strep pneumo, H. flu, atypicals, Legionella</td>
+            <td>Ceftriaxone + azithromycin (or respiratory FQ)</td>
+          </tr>
+          <tr>
+            <td><strong>Pulmonary (HAP/VAP)</strong></td>
+            <td>Pseudomonas, MRSA, GNRs</td>
+            <td>Anti-pseudomonal β-lactam + vanc ± aminoglycoside</td>
+          </tr>
+          <tr>
+            <td><strong>UTI/Urosepsis</strong></td>
+            <td>E. coli, Klebsiella, Enterococcus</td>
+            <td>Ceftriaxone or FQ; add vanc if concern for Enterococcus</td>
+          </tr>
+          <tr>
+            <td><strong>Intra-abdominal</strong></td>
+            <td>GNRs, anaerobes, Enterococcus</td>
+            <td>Pip-tazo OR ceftriaxone + metronidazole</td>
+          </tr>
+          <tr>
+            <td><strong>Skin/Soft tissue</strong></td>
+            <td>Strep, Staph (MSSA/MRSA)</td>
+            <td>Vancomycin + pip-tazo (if necrotizing)</td>
+          </tr>
+          <tr>
+            <td><strong>Unknown source</strong></td>
+            <td>Broad coverage</td>
+            <td>Vancomycin + pip-tazo (or meropenem)</td>
+          </tr>
+        </table>
+
+        <h3>Special Considerations</h3>
+        <ul>
+          <li><strong>MRSA risk:</strong> Add vancomycin (prior MRSA, HD, recent hospitalization)</li>
+          <li><strong>Pseudomonas risk:</strong> Anti-pseudomonal β-lactam (CF, bronchiectasis, recent antibiotics)</li>
+          <li><strong>ESBL risk:</strong> Consider carbapenem</li>
+          <li><strong>Fungal risk:</strong> Add echinocandin (TPN, immunosuppression, prior antibiotics)</li>
+        </ul>
+
+        <h3>De-escalation</h3>
+        <div class="success-box">
+          <strong>Once cultures return:</strong> Narrow antibiotics to targeted therapy<br>
+          <strong>Duration:</strong> Typically 7-10 days (shorter courses emerging for some infections)
+        </div>
+      </div>
+    </div>
+
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines (Free Full Text)</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486643/" target="_blank">🔗 Surviving Sepsis Campaign 2021 Guidelines (PMC8486643)</a>
+          <div class="citation">Evans L, et al. Intensive Care Med. 2021;47:1181-1247. PMID: 34599691</div>
+        </div>
+        <h3>Key Trials (PMC Open Access)</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4101700/" target="_blank">ProCESS Trial - PMC4101700</a>
+          <div class="citation">ProCESS Investigators. N Engl J Med. 2014;370:1683-93</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.sccm.org/SurvivingSepsisCampaign/Home" target="_blank">🔗 Surviving Sepsis Campaign</a>
+          <a class="resource-link" href="https://www.cdc.gov/sepsis/index.html" target="_blank">🔗 CDC Sepsis Resources</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on SSC 2021 Guidelines and Sepsis-3 definitions.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> What defines septic shock per Sepsis-3?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Sepsis with hypotension</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Sepsis requiring vasopressors for MAP ≥65 AND lactate >2 despite fluids</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Sepsis with organ dysfunction</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Septic shock requires BOTH: vasopressors to maintain MAP ≥65 AND lactate >2 mmol/L despite adequate fluid resuscitation.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What is the first-line vasopressor for septic shock?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Norepinephrine</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. Dopamine</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Vasopressin</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Epinephrine</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Norepinephrine is first-line. Vasopressin is added second (catecholamine-sparing). Dopamine is NOT preferred due to more arrhythmias.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> How much crystalloid should be given in initial resuscitation?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. 10 mL/kg</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. 30 mL/kg</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. 50 mL/kg</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> Initial resuscitation is 30 mL/kg crystalloid for hypotension or lactate ≥4 mmol/L, given within first 3 hours.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> What are the qSOFA criteria?</p>
+          <div class="quiz-option" onclick="check(this,true,'q4')">A. RR ≥22, altered mental status, SBP ≤100</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">B. Temp >38, WBC >12k, HR >90</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Lactate >4, creatinine >2, bilirubin >2</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: A.</strong> qSOFA: RR ≥22, altered mental status (GCS <15), SBP ≤100. ≥2 points suggests high risk of poor outcome.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> When should antibiotics be given in sepsis?</p>
+          <div class="quiz-option" onclick="check(this,true,'q5')">A. Within 1 hour of recognition</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. After blood cultures return</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Within 6 hours</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: A.</strong> Antibiotics within 1 hour! Obtain cultures first if possible, but don't delay antibiotics. Every hour of delay increases mortality.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Sepsis Management"
+         data-key-points="📋 Sepsis-3 Definitions, ⏱️ Hour-1 Bundle, 💧 Fluid Resuscitation & Vasopressors, 💊 Antibiotic Selection, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, qSOFA (Quick SOFA) - Screening, SOFA Score Components, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+/**
+ * DxSuite Guided Tour System - Styles
+ * Include this CSS file to style the tour components
+ */
+
+/* ============================================
+   TOUR OVERLAY
+   ============================================ */
+.dx-tour-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    transition: opacity 0.3s ease;
+}
+
+.dx-tour-overlay.active {
+    display: block;
+}
+
+/* ============================================
+   SPOTLIGHT - Highlights current element
+   ============================================ */
+.dx-tour-spotlight {
+    position: absolute;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    display: none;
+}
+
+/* ============================================
+   TOOLTIP
+   ============================================ */
+.dx-tour-tooltip {
+    display: none;
+    position: fixed;
+    width: 340px;
+    max-width: calc(100vw - 40px);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    overflow: hidden;
+    animation: dx-tour-tooltip-in 0.3s ease;
+}
+
+.dx-tour-tooltip.active {
+    display: block;
+}
+
+@keyframes dx-tour-tooltip-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tooltip Header */
+.dx-tour-tooltip-header {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: white;
+    padding: 16px 20px;
+}
+
+.dx-tour-step-indicator {
+    display: block;
+    font-size: 11px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dx-tour-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Tooltip Body */
+.dx-tour-tooltip-body {
+    padding: 20px;
+}
+
+.dx-tour-description {
+    font-size: 14px;
+    color: #52525b;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+}
+
+.dx-tour-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: #f0fdf4;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #166534;
+}
+
+.dx-tour-tip-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* Tooltip Footer */
+.dx-tour-tooltip-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Progress Dots */
+.dx-tour-progress {
+    display: flex;
+    gap: 6px;
+}
+
+.dx-tour-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    transition: background 0.2s ease;
+}
+
+.dx-tour-dot.active {
+    background: #059669;
+}
+
+.dx-tour-dot.completed {
+    background: #a7f3d0;
+}
+
+/* Buttons */
+.dx-tour-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.dx-tour-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-family: inherit;
+}
+
+.dx-tour-btn-back {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.dx-tour-btn-back:hover {
+    background: #e2e8f0;
+}
+
+.dx-tour-btn-next {
+    background: #059669;
+    color: white;
+}
+
+.dx-tour-btn-next:hover {
+    background: #047857;
+}
+
+/* ============================================
+   SKIP BUTTON
+   ============================================ */
+.dx-tour-skip {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #64748b;
+    cursor: pointer;
+    z-index: 10001;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.dx-tour-skip.active {
+    display: block;
+}
+
+.dx-tour-skip:hover {
+    background: #ffffff;
+    color: #18181b;
+}
+
+/* ============================================
+   WELCOME MODAL (Optional)
+   ============================================ */
+.dx-tour-welcome {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10002;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.dx-tour-welcome.active {
+    display: flex;
+}
+
+.dx-tour-welcome-content {
+    background: white;
+    border-radius: 24px;
+    max-width: 480px;
+    width: 100%;
+    overflow: hidden;
+    animation: dx-tour-welcome-in 0.4s ease;
+}
+
+@keyframes dx-tour-welcome-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.dx-tour-welcome-header {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    padding: 40px 32px;
+    text-align: center;
+    color: white;
+}
+
+.dx-tour-welcome-header .emoji {
+    font-size: 64px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.dx-tour-welcome-header h2 {
+    font-size: 28px;
+    margin: 0 0 8px 0;
+}
+
+.dx-tour-welcome-header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.dx-tour-welcome-body {
+    padding: 32px;
+}
+
+.dx-tour-welcome-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dx-tour-start-btn {
+    width: 100%;
+    padding: 16px;
+    background: #059669;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+
+.dx-tour-start-btn:hover {
+    background: #047857;
+}
+
+.dx-tour-skip-welcome {
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.dx-tour-skip-welcome:hover {
+    color: #18181b;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+@media (max-width: 600px) {
+    .dx-tour-tooltip {
+        width: calc(100vw - 32px);
+        left: 16px !important;
+        right: 16px;
+    }
+    
+    .dx-tour-skip {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        text-align: center;
+    }
+    
+    .dx-tour-welcome-content {
+        margin: 16px;
+    }
+    
+    .dx-tour-welcome-header {
+        padding: 32px 24px;
+    }
+    
+    .dx-tour-welcome-body {
+        padding: 24px;
+    }
+}
+
+/* ============================================
+   THEME VARIANTS
+   ============================================ */
+
+/* Dark Theme */
+.dx-tour-theme-dark .dx-tour-tooltip {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+.dx-tour-theme-dark .dx-tour-description {
+    color: #a1a1aa;
+}
+
+.dx-tour-theme-dark .dx-tour-tooltip-footer {
+    border-top-color: #3f3f46;
+}
+
+.dx-tour-theme-dark .dx-tour-btn-back {
+    background: #3f3f46;
+    color: #a1a1aa;
+}
+
+.dx-tour-theme-dark .dx-tour-tip {
+    background: #022c22;
+    color: #4ade80;
+}
+
+/* Blue Theme */
+.dx-tour-theme-blue .dx-tour-tooltip-header {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.dx-tour-theme-blue .dx-tour-btn-next {
+    background: #2563eb;
+}
+
+.dx-tour-theme-blue .dx-tour-btn-next:hover {
+    background: #1d4ed8;
+}
+
+.dx-tour-theme-blue .dx-tour-dot.active {
+    background: #2563eb;
+}
+
+.dx-tour-theme-blue .dx-tour-tip {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+/* Purple Theme */
+.dx-tour-theme-purple .dx-tour-tooltip-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+.dx-tour-theme-purple .dx-tour-btn-next {
+    background: #7c3aed;
+}
+
+.dx-tour-theme-purple .dx-tour-btn-next:hover {
+    background: #6d28d9;
+}
+
+.dx-tour-theme-purple .dx-tour-dot.active {
+    background: #7c3aed;
+}
+
+.dx-tour-theme-purple .dx-tour-tip {
+    background: #f5f3ff;
+    color: #6d28d9;
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Coagulation Cascade</title>
+  <style>
+    :root{--primary:#DC2626;--secondary:#7C3AED;--accent:#F59E0B;--success:#10B981;--info:#3B82F6}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}
+    .container{max-width:950px;margin:0 auto;padding:2rem}
+    header{text-align:center;padding:1.5rem;margin-bottom:1.5rem;background:rgba(220,38,38,0.1);border-radius:1rem;border:1px solid rgba(220,38,38,0.3)}
+    h1{font-size:2rem;color:var(--primary)}
+    .tabs{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem}
+    .tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}
+    .tab:hover,.tab.active{background:var(--primary);color:white}
+    .content{display:none}.content.active{display:block}
+    .card{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}
+    .card h2{color:var(--primary);margin-bottom:1rem}
+    .card h3{color:var(--secondary);margin:1rem 0 0.5rem}
+    .box{padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}
+    .box.key{background:rgba(220,38,38,0.15);border-left:4px solid var(--primary)}
+    .box.pearl{background:rgba(124,58,237,0.15);border-left:4px solid var(--secondary)}
+    .box.info{background:rgba(59,130,246,0.15);border-left:4px solid var(--info)}
+    .box.success{background:rgba(16,185,129,0.15);border-left:4px solid var(--success)}
+    table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.85rem}
+    th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}
+    th{background:rgba(220,38,38,0.2);color:var(--primary)}
+    ul{padding-left:1.5rem}li{margin:0.3rem 0}
+    .path{background:#0a0a15;border-radius:0.5rem;padding:1rem;font-family:monospace;font-size:0.75rem;margin:1rem 0;white-space:pre;overflow-x:auto}
+    .mnem{background:rgba(16,185,129,0.15);border:2px dashed var(--success);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}
+    .quiz{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:1rem;padding:1rem;margin-top:1rem}
+    .opt{display:block;padding:0.5rem;margin:0.3rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer}
+    .opt:hover{background:rgba(220,38,38,0.2)}
+    .opt.correct{background:rgba(16,185,129,0.3)}
+    .opt.wrong{background:rgba(239,68,68,0.3)}
+    .exp{display:none;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;margin-top:0.5rem}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header><h1>🩸 Coagulation Cascade</h1><p style="color:#9CA3AF">Hemostasis • Factors • Labs • Anticoagulants</p></header>
+  
+  <div class="tabs">
+    <div class="tab active" onclick="show('t1')">Overview</div>
+    <div class="tab" onclick="show('t2')">Cascade</div>
+    <div class="tab" onclick="show('t3')">Factors</div>
+    <div class="tab" onclick="show('t4')">PT/PTT</div>
+    <div class="tab" onclick="show('t5')">Anticoag</div>
+    <div class="tab" onclick="show('t6')">Disorders</div>
+    <div class="tab" onclick="show('t7')">Quiz</div>
+  </div>
+
+  <div id="t1" class="content active">
+    <div class="card">
+      <h2>📚 Overview</h2>
+      <div class="box key"><strong>3 Phases:</strong> Primary hemostasis (platelet plug) → Secondary (fibrin clot) → Fibrinolysis (breakdown)</div>
+      <table>
+        <tr><th>Phase</th><th>Players</th><th>Defect Pattern</th></tr>
+        <tr><td>Primary</td><td>Platelets, vWF</td><td>Mucosal bleeding, petechiae</td></tr>
+        <tr><td>Secondary</td><td>Clotting factors</td><td>Deep bleeding, hemarthrosis</td></tr>
+        <tr><td>Fibrinolysis</td><td>Plasmin</td><td>Thrombosis if ↓</td></tr>
+      </table>
+      <div class="box pearl"><strong>Pattern Recognition:</strong><br>Platelet problem = petechiae, mucosal, immediate<br>Factor problem = deep tissue, joints, delayed</div>
+    </div>
+  </div>
+
+  <div id="t2" class="content">
+    <div class="card">
+      <h2>⚡ The Cascade</h2>
+      <div class="path">INTRINSIC (PTT)          EXTRINSIC (PT)
+XII→XIIa                  TF + VII→VIIa
+  ↓                            ↓
+XI→XIa                         ↓
+  ↓                            ↓
+IX→IXa ←───────────────────────┘
+  ↓
+IXa + VIIIa + Ca + PL
+  ↓
+═══════ COMMON PATHWAY ═══════
+        X → Xa
+           ↓
+    Xa + Va + Ca + PL
+           ↓
+  Prothrombin(II)→Thrombin(IIa)
+           ↓
+  Fibrinogen(I) → Fibrin
+           ↓
+       XIII → Cross-linked</div>
+      <h3>Key Concepts</h3>
+      <ul>
+        <li><strong>Intrinsic:</strong> XII, XI, IX, VIII (all "in" the blood)</li>
+        <li><strong>Extrinsic:</strong> VII + Tissue Factor (from "outside")</li>
+        <li><strong>Common:</strong> X, V, II, I (fibrinogen), XIII</li>
+        <li><strong>Vitamin K-dependent:</strong> II, VII, IX, X (+ Protein C, S)</li>
+      </ul>
+      <div class="mnem"><strong>"1972"</strong> = Vit K factors: 10, 9, 7, 2</div>
+    </div>
+  </div>
+
+  <div id="t3" class="content">
+    <div class="card">
+      <h2>🧬 Clotting Factors</h2>
+      <table>
+        <tr><th>Factor</th><th>Name</th><th>Pathway</th><th>Notes</th></tr>
+        <tr><td>I</td><td>Fibrinogen</td><td>Common</td><td>→ Fibrin clot</td></tr>
+        <tr><td>II</td><td>Prothrombin</td><td>Common</td><td>Vit K dep</td></tr>
+        <tr><td>III</td><td>Tissue Factor</td><td>Extrinsic</td><td>Starts extrinsic</td></tr>
+        <tr><td>IV</td><td>Calcium</td><td>All</td><td>Required cofactor</td></tr>
+        <tr><td>V</td><td>Proaccelerin</td><td>Common</td><td>Cofactor for Xa</td></tr>
+        <tr><td>VII</td><td>Proconvertin</td><td>Extrinsic</td><td>Vit K, shortest t½</td></tr>
+        <tr><td>VIII</td><td>Antihemophilic A</td><td>Intrinsic</td><td>Hemophilia A if ↓</td></tr>
+        <tr><td>IX</td><td>Christmas</td><td>Intrinsic</td><td>Vit K, Hemo B if ↓</td></tr>
+        <tr><td>X</td><td>Stuart-Prower</td><td>Common</td><td>Vit K dep</td></tr>
+        <tr><td>XI</td><td>PTA</td><td>Intrinsic</td><td>Hemophilia C if ↓</td></tr>
+        <tr><td>XII</td><td>Hageman</td><td>Intrinsic</td><td>No bleeding if ↓!</td></tr>
+        <tr><td>XIII</td><td>Fibrin stabilizing</td><td>-</td><td>Cross-links fibrin</td></tr>
+      </table>
+      <div class="box info"><strong>Factor XII paradox:</strong> Deficiency prolongs PTT but does NOT cause bleeding! (XII more important for fibrinolysis)</div>
+    </div>
+  </div>
+
+  <div id="t4" class="content">
+    <div class="card">
+      <h2>🧪 Lab Interpretation</h2>
+      <table>
+        <tr><th>Test</th><th>Pathway</th><th>Factors Tested</th></tr>
+        <tr><td><strong>PT</strong></td><td>Extrinsic + Common</td><td>VII, X, V, II, I</td></tr>
+        <tr><td><strong>PTT</strong></td><td>Intrinsic + Common</td><td>XII, XI, IX, VIII, X, V, II, I</td></tr>
+        <tr><td><strong>INR</strong></td><td>Standardized PT</td><td>For warfarin monitoring</td></tr>
+        <tr><td><strong>TT</strong></td><td>Fibrinogen→Fibrin</td><td>Fibrinogen function</td></tr>
+      </table>
+      <h3>Pattern Recognition</h3>
+      <table>
+        <tr><th>PT</th><th>PTT</th><th>Think...</th></tr>
+        <tr><td>↑</td><td>Normal</td><td>Factor VII def, early warfarin, early liver dz</td></tr>
+        <tr><td>Normal</td><td>↑</td><td>VIII, IX, XI, XII def; heparin; vWD; lupus anticoag</td></tr>
+        <tr><td>↑</td><td>↑</td><td>Common pathway (X,V,II,I); warfarin; liver dz; DIC; vit K def</td></tr>
+        <tr><td>Normal</td><td>Normal</td><td>Factor XIII def; platelet disorder; vWD (some)</td></tr>
+      </table>
+      <div class="box pearl"><strong>Mixing Study:</strong> If prolonged PTT corrects with 1:1 mix = factor deficiency. If doesn't correct = inhibitor (antibody)</div>
+    </div>
+  </div>
+
+  <div id="t5" class="content">
+    <div class="card">
+      <h2>💊 Anticoagulants</h2>
+      <table>
+        <tr><th>Drug</th><th>Target</th><th>Monitor</th><th>Reverse</th></tr>
+        <tr><td>Heparin (UFH)</td><td>AT→IIa, Xa</td><td>PTT</td><td>Protamine</td></tr>
+        <tr><td>LMWH</td><td>AT→Xa</td><td>Anti-Xa</td><td>Protamine (partial)</td></tr>
+        <tr><td>Warfarin</td><td>Vit K epoxide reductase</td><td>INR</td><td>Vit K, FFP, PCC</td></tr>
+        <tr><td>Rivaroxaban</td><td>Direct Xa</td><td>None routine</td><td>Andexanet alfa</td></tr>
+        <tr><td>Apixaban</td><td>Direct Xa</td><td>None routine</td><td>Andexanet alfa</td></tr>
+        <tr><td>Dabigatran</td><td>Direct IIa</td><td>None routine</td><td>Idarucizumab</td></tr>
+      </table>
+      <div class="box key"><strong>Warfarin mechanism:</strong> Inhibits vitamin K epoxide reductase → ↓ II, VII, IX, X AND Protein C, S. Initial hypercoagulable state possible (C, S drop first)</div>
+      <div class="box info"><strong>HIT (Heparin-Induced Thrombocytopenia):</strong> Antibodies to PF4-heparin complex → platelet activation → THROMBOSIS (not bleeding). Stop heparin, start direct thrombin inhibitor.</div>
+    </div>
+  </div>
+
+  <div id="t6" class="content">
+    <div class="card">
+      <h2>🏥 Bleeding Disorders</h2>
+      <table>
+        <tr><th>Disorder</th><th>Defect</th><th>Labs</th><th>Inheritance</th></tr>
+        <tr><td>Hemophilia A</td><td>Factor VIII</td><td>↑PTT, normal PT</td><td>X-linked</td></tr>
+        <tr><td>Hemophilia B</td><td>Factor IX</td><td>↑PTT, normal PT</td><td>X-linked</td></tr>
+        <tr><td>vWD Type 1</td><td>↓vWF quantity</td><td>↑PTT, ↑BT</td><td>AD</td></tr>
+        <tr><td>vWD Type 2</td><td>Dysfunctional vWF</td><td>Variable</td><td>AD</td></tr>
+        <tr><td>vWD Type 3</td><td>Absent vWF</td><td>↑PTT, ↑↑BT</td><td>AR</td></tr>
+        <tr><td>DIC</td><td>Consumption</td><td>↑PT, ↑PTT, ↓plt, ↓fib</td><td>Acquired</td></tr>
+      </table>
+      <div class="box pearl"><strong>vWF functions:</strong> 1) Platelet adhesion to collagen 2) Carries Factor VIII. So vWD = both platelet-type AND factor-type bleeding</div>
+      <h3>DIC - Key Points</h3>
+      <ul>
+        <li>Widespread activation → consume factors AND platelets</li>
+        <li>Causes: Sepsis, trauma, malignancy, obstetric complications</li>
+        <li>Labs: ↑PT, ↑PTT, ↓platelets, ↓fibrinogen, ↑D-dimer, schistocytes</li>
+        <li>Treat underlying cause; support with products if bleeding</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="t7" class="content">
+    <div class="card">
+      <h2>🎯 Quiz</h2>
+      <div class="quiz">
+        <p><strong>Q1:</strong> Which factors are vitamin K-dependent?</p>
+        <div class="opt" onclick="chk('q1',this,false)">A. V, VIII, XI, XII</div>
+        <div class="opt" onclick="chk('q1',this,true)">B. II, VII, IX, X</div>
+        <div class="opt" onclick="chk('q1',this,false)">C. I, V, VIII, XIII</div>
+        <div id="e1" class="exp"><strong>B.</strong> "1972" = 10, 9, 7, 2. Also Protein C and S.</div>
+      </div>
+      <div class="quiz">
+        <p><strong>Q2:</strong> Patient has ↑PTT, normal PT. Mixing study corrects. Most likely?</p>
+        <div class="opt" onclick="chk('q2',this,true)">A. Factor VIII deficiency</div>
+        <div class="opt" onclick="chk('q2',this,false)">B. Lupus anticoagulant</div>
+        <div class="opt" onclick="chk('q2',this,false)">C. Factor VII deficiency</div>
+        <div id="e2" class="exp"><strong>A.</strong> Isolated ↑PTT = intrinsic pathway. Mixing corrects = deficiency (not inhibitor). VIII def = Hemophilia A.</div>
+      </div>
+      <div class="quiz">
+        <p><strong>Q3:</strong> Which anticoagulant is reversed with idarucizumab?</p>
+        <div class="opt" onclick="chk('q3',this,false)">A. Warfarin</div>
+        <div class="opt" onclick="chk('q3',this,false)">B. Rivaroxaban</div>
+        <div class="opt" onclick="chk('q3',this,true)">C. Dabigatran</div>
+        <div id="e3" class="exp"><strong>C.</strong> Idarucizumab reverses dabigatran (direct thrombin inhibitor). Andexanet reverses Xa inhibitors.</div>
+      </div>
+      <div class="quiz">
+        <p><strong>Q4:</strong> HIT causes:</p>
+        <div class="opt" onclick="chk('q4',this,false)">A. Severe bleeding</div>
+        <div class="opt" onclick="chk('q4',this,true)">B. Thrombosis</div>
+        <div class="opt" onclick="chk('q4',this,false)">C. Only low platelets</div>
+        <div id="e4" class="exp"><strong>B.</strong> HIT = antibodies activate platelets → THROMBOSIS despite low count. Stop heparin, anticoagulate with non-heparin agent.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.3)">
+    <h2 style="color:#93c5fd">📖 References</h2>
+    <p style="font-size:0.85rem"><a href="https://www.ncbi.nlm.nih.gov/books/NBK507850/" style="color:#93c5fd">StatPearls: Coagulation Cascade</a></p>
+  </div>
+</div>
+<script>
+function show(id){document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+function chk(q,el,ok){const p=el.parentElement;p.querySelectorAll('.opt').forEach(o=>{o.style.pointerEvents='none';if(o.onclick.toString().includes('true'))o.classList.add('correct')});el.classList.add(ok?'correct':'wrong');document.getElementById('e'+q[1]).style.display='block'}
+</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Coagulation Cascade"
+         data-key-points="📚 Overview, ⚡ The Cascade, 🧬 Clotting Factors, 🧪 Lab Interpretation, 💊 Anticoagulants, 🏥 Bleeding Disorders, 🎯 Quiz, 📖 References, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

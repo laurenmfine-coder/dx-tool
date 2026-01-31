@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrations Hub | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; --primary-dark: #047857; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; }
+        
+        .nav { background: white; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            padding: 64px 24px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+        .header p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .content { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+        
+        .philosophy-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 48px;
+            border: 1px solid #a7f3d0;
+        }
+        .philosophy-card h2 { color: #166534; font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .philosophy-card p { color: #15803d; font-size: 16px; line-height: 1.7; }
+        
+        .section-title { font-size: 14px; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
+        
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        
+        .integration-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .integration-header {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .integration-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .integration-logo.amboss { background: #00d4aa; color: white; }
+        .integration-logo.anki { background: #235390; color: white; }
+        .integration-logo.osmosis { background: #6366f1; color: white; }
+        .integration-logo.uworld { background: #1e3a5f; color: white; }
+        .integration-logo.notion { background: #000; color: white; }
+        .integration-logo.quizlet { background: #4255ff; color: white; }
+        
+        .integration-info h3 { font-size: 20px; margin-bottom: 4px; }
+        .integration-info p { font-size: 13px; color: #64748b; }
+        
+        .integration-body { padding: 24px; }
+        .integration-body > p { font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 20px; }
+        
+        .integration-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .integration-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        .integration-feature .icon { font-size: 18px; }
+        .integration-feature .text strong { color: var(--primary); }
+        
+        .integration-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .integration-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .integration-btn.primary { background: var(--primary); color: white; border: none; }
+        .integration-btn.primary:hover { background: var(--primary-dark); }
+        .integration-btn.secondary { background: white; color: #64748b; border: 1px solid #e2e8f0; }
+        .integration-btn.secondary:hover { background: #f8fafc; }
+        
+        .coming-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        /* Export Tools Section */
+        .export-section {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 48px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .export-section h2 { font-size: 22px; margin-bottom: 8px; }
+        .export-section > p { color: #64748b; margin-bottom: 24px; }
+        
+        .export-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .export-card {
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .export-card:hover { border-color: var(--primary); background: #f0fdf4; }
+        .export-card .icon { font-size: 32px; margin-bottom: 12px; }
+        .export-card h4 { font-size: 15px; margin-bottom: 4px; }
+        .export-card p { font-size: 12px; color: #64748b; }
+        
+        /* Workflow Examples */
+        .workflow-section { margin-bottom: 48px; }
+        .workflow-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        .workflow-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .workflow-header .icon { font-size: 24px; }
+        .workflow-header h3 { font-size: 18px; }
+        
+        .workflow-steps {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+        .workflow-step .platform { font-weight: 600; color: var(--primary); }
+        .workflow-arrow { color: #94a3b8; font-size: 18px; }
+        
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: #64748b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">🩺 DxSuite</a>
+        </div>
+    </nav>
+    
+    <header class="header">
+        <h1>🔗 Integrations Hub</h1>
+        <p>DxSuite works alongside your favorite learning tools — not against them</p>
+    </header>
+    
+    <main class="content">
+        <div class="philosophy-card">
+            <h2>🤝 Our Philosophy: Augment, Don't Replace</h2>
+            <p>You already have tools that work for you. DxSuite is designed to fill the gaps — providing the clinical reasoning, pathophysiology depth, and case-based practice that complement your existing workflow. Export, import, and integrate freely.</p>
+        </div>
+        
+        <div class="section-title">🔌 Platform Integrations</div>
+        <div class="integrations-grid">
+            <!-- AMBOSS -->
+            <div class="integration-card">
+                <div class="integration-header">
+                    <div class="integration-logo amboss">A</div>
+                    <div class="integration-info">
+                        <h3>AMBOSS</h3>
+                        <p>Medical knowledge library</p>
+                    </div>
+                </div>
+                <div class="integration-body">
+                    <p>AMBOSS excels at comprehensive medical references. DxSuite adds interactive case reasoning and pathophysiology mechanisms.</p>
+                    <div class="integration-features">
+                        <div class="integration-feature">
+                            <span class="icon">🔗</span>
+                            <span class="text"><strong>Deep links:</strong> Our modules link to relevant AMBOSS articles for deeper reading</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🧠</span>
+                            <span class="text"><strong>Complementary focus:</strong> Read AMBOSS for facts, use DxSuite to practice applying them</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">📊</span>
+                            <span class="text"><strong>Gap filling:</strong> DxSuite's cases test what AMBOSS teaches</span>
+                        </div>
+                    </div>
+                    <div class="integration-actions">
+                        <a href="#" class="integration-btn primary">View Linked Content</a>
+                        <a href="#" class="integration-btn secondary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anki -->
+            <div class="integration-card">
+                <div class="integration-header">
+                    <div class="integration-logo anki">花</div>
+                    <div class="integration-info">
+                        <h3>Anki</h3>
+                        <p>Spaced repetition flashcards</p>
+                    </div>
+                </div>
+                <div class="integration-body">
+                    <p>Anki is the gold standard for memorization. DxSuite exports cards that complement popular decks like AnKing.</p>
+                    <div class="integration-features">
+                        <div class="integration-feature">
+                            <span class="icon">📤</span>
+                            <span class="text"><strong>Export to Anki:</strong> Convert any DxSuite module to Anki-compatible .apkg format</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🏷️</span>
+                            <span class="text"><strong>Smart tagging:</strong> Cards tagged by system, topic, and difficulty for easy organization</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🔄</span>
+                            <span class="text"><strong>Mechanism cards:</strong> Export pathophysiology flowcharts as image-based cards</span>
+                        </div>
+                    </div>
+                    <div class="integration-actions">
+                        <button class="integration-btn primary" onclick="exportAnki()">Export to Anki</button>
+                        <a href="#" class="integration-btn secondary">Setup Guide</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Osmosis -->
+            <div class="integration-card">
+                <div class="integration-header">
+                    <div class="integration-logo osmosis">O</div>
+                    <div class="integration-info">
+                        <h3>Osmosis</h3>
+                        <p>Video-based learning</p>
+                    </div>
+                </div>
+                <div class="integration-body">
+                    <p>Osmosis videos are great for initial learning. DxSuite provides the active practice to cement that knowledge.</p>
+                    <div class="integration-features">
+                        <div class="integration-feature">
+                            <span class="icon">🎬</span>
+                            <span class="text"><strong>Video links:</strong> Relevant Osmosis videos linked from DxSuite modules</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">📝</span>
+                            <span class="text"><strong>Watch → Practice:</strong> Watch the video, then practice cases in DxSuite</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🎯</span>
+                            <span class="text"><strong>Active recall:</strong> DxSuite quizzes reinforce Osmosis content</span>
+                        </div>
+                    </div>
+                    <div class="integration-actions">
+                        <a href="#" class="integration-btn primary">View Video Links</a>
+                        <a href="#" class="integration-btn secondary">Workflow Guide</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- UWorld -->
+            <div class="integration-card">
+                <div class="integration-header">
+                    <div class="integration-logo uworld">U</div>
+                    <div class="integration-info">
+                        <h3>UWorld</h3>
+                        <p>Board-style questions</p>
+                    </div>
+                </div>
+                <div class="integration-body">
+                    <p>UWorld is essential for board prep. DxSuite builds the foundational reasoning that makes UWorld questions easier.</p>
+                    <div class="integration-features">
+                        <div class="integration-feature">
+                            <span class="icon">🏗️</span>
+                            <span class="text"><strong>Foundation first:</strong> Master mechanisms in DxSuite, then tackle UWorld</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">📈</span>
+                            <span class="text"><strong>Weak area targeting:</strong> Use UWorld analytics to focus DxSuite studying</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🔍</span>
+                            <span class="text"><strong>Concept review:</strong> Missed a UWorld question? Review the mechanism here</span>
+                        </div>
+                    </div>
+                    <div class="integration-actions">
+                        <a href="#" class="integration-btn primary">Study Workflow</a>
+                        <a href="#" class="integration-btn secondary">Topic Mapping</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notion -->
+            <div class="integration-card">
+                <div class="integration-header">
+                    <div class="integration-logo notion">N</div>
+                    <div class="integration-info">
+                        <h3>Notion</h3>
+                        <p>Notes & organization</p>
+                    </div>
+                </div>
+                <div class="integration-body">
+                    <p>Many students use Notion for notes. Export DxSuite content to your Notion workspace.</p>
+                    <div class="integration-features">
+                        <div class="integration-feature">
+                            <span class="icon">📋</span>
+                            <span class="text"><strong>Export to Notion:</strong> Module summaries in Notion-compatible markdown</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🗂️</span>
+                            <span class="text"><strong>Templates:</strong> Pre-built Notion templates for medical studying</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">🔗</span>
+                            <span class="text"><strong>Embed links:</strong> Embed DxSuite modules directly in Notion pages</span>
+                        </div>
+                    </div>
+                    <div class="integration-actions">
+                        <button class="integration-btn primary" onclick="exportNotion()">Export to Notion</button>
+                        <a href="#" class="integration-btn secondary">Get Templates</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quizlet -->
+            <div class="integration-card">
+                <div class="integration-header">
+                    <div class="integration-logo quizlet">Q</div>
+                    <div class="integration-info">
+                        <h3>Quizlet</h3>
+                        <p>Flashcard sharing</p>
+                    </div>
+                </div>
+                <div class="integration-body">
+                    <p>Prefer Quizlet over Anki? Export DxSuite flashcards to Quizlet format for easy sharing with classmates.</p>
+                    <div class="integration-features">
+                        <div class="integration-feature">
+                            <span class="icon">📤</span>
+                            <span class="text"><strong>CSV export:</strong> Export cards in Quizlet-compatible CSV format</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">👥</span>
+                            <span class="text"><strong>Shareable:</strong> Create class-wide Quizlet sets from DxSuite content</span>
+                        </div>
+                        <div class="integration-feature">
+                            <span class="icon">📱</span>
+                            <span class="text"><strong>Mobile friendly:</strong> Study on-the-go with Quizlet's mobile app</span>
+                        </div>
+                    </div>
+                    <div class="integration-actions">
+                        <button class="integration-btn primary" onclick="exportQuizlet()">Export to Quizlet</button>
+                        <a href="#" class="integration-btn secondary">Import Guide</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Export Tools -->
+        <div class="export-section">
+            <h2>📤 Export Your Learning</h2>
+            <p>Take your DxSuite content anywhere. All exports are free and unlimited.</p>
+            <div class="export-grid">
+                <div class="export-card" onclick="exportAnki()">
+                    <div class="icon">🃏</div>
+                    <h4>Anki Deck (.apkg)</h4>
+                    <p>Spaced repetition cards</p>
+                </div>
+                <div class="export-card" onclick="exportCSV()">
+                    <div class="icon">📊</div>
+                    <h4>CSV / Quizlet</h4>
+                    <p>Spreadsheet format</p>
+                </div>
+                <div class="export-card" onclick="exportMarkdown()">
+                    <div class="icon">📝</div>
+                    <h4>Markdown</h4>
+                    <p>Notion, Obsidian, etc.</p>
+                </div>
+                <div class="export-card" onclick="exportPDF()">
+                    <div class="icon">📄</div>
+                    <h4>PDF Summary</h4>
+                    <p>Print-friendly notes</p>
+                </div>
+                <div class="export-card" onclick="exportJSON()">
+                    <div class="icon">🔧</div>
+                    <h4>JSON Data</h4>
+                    <p>For developers</p>
+                </div>
+                <div class="export-card">
+                    <div class="icon">🖼️</div>
+                    <h4>Mechanism Images</h4>
+                    <p>High-res flowcharts</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recommended Workflows -->
+        <div class="workflow-section">
+            <div class="section-title">📚 Recommended Study Workflows</div>
+            
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <span class="icon">🎯</span>
+                    <h3>Pre-Clinical Years (M1/M2)</h3>
+                </div>
+                <div class="workflow-steps">
+                    <div class="workflow-step"><span class="platform">Osmosis</span> Watch video</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">DxSuite</span> Learn mechanism</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">Anki</span> Memorize facts</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">DxSuite</span> Practice cases</div>
+                </div>
+            </div>
+            
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <span class="icon">🏥</span>
+                    <h3>Clinical Years (M3/M4)</h3>
+                </div>
+                <div class="workflow-steps">
+                    <div class="workflow-step"><span class="platform">Clinic</span> See patient</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">DxSuite</span> Review mechanism</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">AMBOSS</span> Deep reading</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">UWorld</span> Test yourself</div>
+                </div>
+            </div>
+            
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <span class="icon">📋</span>
+                    <h3>Board Prep (Step 1/2)</h3>
+                </div>
+                <div class="workflow-steps">
+                    <div class="workflow-step"><span class="platform">UWorld</span> Identify weakness</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">DxSuite</span> Master mechanism</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">Anki</span> Retain facts</div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step"><span class="platform">UWorld</span> Re-test</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="philosophy-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-color: #93c5fd;">
+            <h2 style="color: #1d4ed8;">💡 Integration Requests?</h2>
+            <p style="color: #1e40af;">Want DxSuite to integrate with another platform? Let us know! We're committed to fitting into your workflow, not forcing you into ours. Email us at <strong>integrations@dxsuite.edu</strong></p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>DxSuite Integrations Hub | Work smarter, not harder</p>
+    </footer>
+    
+    <script>
+        function exportAnki() {
+            alert('Anki Export\n\nThis will generate an .apkg file with:\n• Mechanism flashcards\n• Clinical pearls\n• Tagged by system & topic\n\nSelect modules to export from the Learn section.');
+        }
+        
+        function exportCSV() {
+            alert('CSV Export\n\nThis will generate a CSV file compatible with:\n• Quizlet\n• Google Sheets\n• Excel\n\nFormat: Question | Answer | Tags');
+        }
+        
+        function exportMarkdown() {
+            alert('Markdown Export\n\nThis will generate .md files compatible with:\n• Notion\n• Obsidian\n• Roam Research\n• Any markdown editor\n\nIncludes headers, bullet points, and embedded images.');
+        }
+        
+        function exportPDF() {
+            alert('PDF Export\n\nThis will generate a print-friendly PDF with:\n• Module summaries\n• Key mechanisms\n• Clinical pearls\n• Quick reference tables');
+        }
+        
+        function exportJSON() {
+            alert('JSON Export\n\nFor developers and power users:\n• Full module data\n• Structured content\n• API-ready format\n\nGreat for custom integrations.');
+        }
+        
+        function exportNotion() {
+            alert('Notion Export\n\nThis will generate Notion-compatible content:\n• Markdown files\n• Toggle blocks for mechanisms\n• Linked databases\n• Ready-to-import format');
+        }
+        
+        function exportQuizlet() {
+            alert('Quizlet Export\n\nThis will generate a Quizlet-compatible file:\n• Tab-separated format\n• Ready for import\n• Shareable with classmates');
+        }
+    </script>
+</body>
+</html>

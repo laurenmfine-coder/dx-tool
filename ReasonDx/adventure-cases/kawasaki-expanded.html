@@ -107,7 +107,6 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
-    <link rel="stylesheet" href="dx-case-banner-fix.css">
 </head>
 <body>
     <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">80</span></div></div>
@@ -116,8 +115,8 @@
         <div class="references-panel">
             <div class="references-header" onclick="toggleRefs()">📚 Open-Access References ▼</div>
             <div class="references-content" id="refsContent">
-                <a href="https://www.ncbi.nlm.nih.gov/books/NBK537122/" target="_blank">StatPearls: Kawasaki</a>
-                <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001295" target="_blank">AHA Guidelines 2024</a>
+                <a href="https://www.statpearls.com/articlelibrary/viewarticle/24025/" target="_blank">StatPearls: Kawasaki</a>
+                <a href="https://www.aap.org/en/patient-care/kawasaki-disease/" target="_blank">AAP Guidelines</a>
                 <a href="https://www.heart.org/en/health-topics/kawasaki-disease" target="_blank">AHA: Kawasaki</a>
             </div>
         </div>
@@ -139,7 +138,7 @@
                     <div class="mcq-option" onclick="checkAnswer(1,'D',false)"><span class="option-letter">D</span><span>Cannot diagnose without echo</span></div>
                 </div>
                 <div class="feedback" id="feedback1"></div>
-                <div class="teaching-point" id="teaching1"><strong>Classic KD Criteria (unchanged in 2024):</strong> Fever ≥5 days + ≥4 of 5: Conjunctivitis, Oral changes, Rash, Extremity changes, Lymphadenopathy. <strong>"CRASH and Burn"</strong> mnemonic. Mia has 4 criteria = <span class="highlight">CLASSIC KAWASAKI</span><br><br><strong>2024 High-Risk Criteria:</strong> Age &lt;6 months, CA Z-score ≥2.5 at diagnosis, or Kawasaki Disease Shock Syndrome (KDSS). These patients benefit from intensified initial therapy.</div>
+                <div class="teaching-point" id="teaching1"><strong>Classic KD Criteria:</strong> Fever ≥5 days + ≥4 of 5: Conjunctivitis, Oral changes, Rash, Extremity changes, Lymphadenopathy. <strong>"CRASH and Burn"</strong> mnemonic. Mia has 4 criteria = <span class="highlight">CLASSIC KAWASAKI</span></div>
             </div>
             <button class="btn" id="btn1" onclick="nextStage(2)">Continue →</button>
         </div>
@@ -180,7 +179,7 @@
                     <div class="mcq-option" onclick="checkAnswer(3,'D',false)"><span class="option-letter">D</span><span>Infliximab + aspirin</span></div>
                 </div>
                 <div class="feedback" id="feedback3"></div>
-                <div class="teaching-point" id="teaching3"><strong>IVIG 2g/kg SINGLE dose</strong> over 10-12 hours + <strong>Aspirin</strong>: High-dose initially → Low-dose (3-5mg/kg) when afebrile. Treat within 10 days of fever onset!<br><br><strong>2024 Update:</strong> For high-risk patients (Z-score ≥2.5, age &lt;6 mo, KDSS), consider primary adjunctive therapy with corticosteroids OR infliximab (<strong>10 mg/kg</strong> - updated dose) in addition to IVIG.</div>
+                <div class="teaching-point" id="teaching3"><strong>IVIG 2g/kg SINGLE dose</strong> over 10-12 hours + <strong>Aspirin</strong>: High-dose initially → Low-dose (3-5mg/kg) when afebrile. Treat within 10 days of fever onset!</div>
             </div>
             <button class="btn" id="btn3" onclick="nextStage(4)">Continue →</button>
         </div>
@@ -303,12 +302,12 @@
             </div>
             <div class="decision-path" id="decisionPath"><h3>📊 Your Decision Path</h3></div>
             <div class="debrief-summary">
-                <h4>📝 Key Learning Points (Updated 2024)</h4>
+                <h4>📝 Key Learning Points</h4>
                 <ul>
                     <li><strong>Classic KD:</strong> Fever ≥5 days + ≥4/5 criteria (CRASH and Burn)</li>
                     <li><strong>IVIG 2g/kg</strong> within 10 days reduces aneurysm risk 25%→4-5%</li>
-                    <li><strong>High-Risk (2024):</strong> Z-score ≥2.5, age &lt;6 mo, or KDSS → consider adjunctive therapy</li>
-                    <li><strong>Infliximab dose:</strong> 10 mg/kg IV (updated from 5 mg/kg)</li>
+                    <li><strong>Incomplete KD:</strong> AHA algorithm with supplemental labs</li>
+                    <li><strong>Infants <6 months:</strong> HIGHEST aneurysm risk</li>
                     <li><strong>Vaccines:</strong> Delay MMR/varicella 11 months; give flu vaccine</li>
                 </ul>
             </div>
@@ -402,5 +401,13 @@
     </script>
     <script src="dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Kawasaki Disease"
+         data-key-points="📊 Your Decision Path, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
 </body>
 </html>

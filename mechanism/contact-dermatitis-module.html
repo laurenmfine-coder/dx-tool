@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Dermatitis - MechanismDx</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #38a169 0%, #276749 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: white; text-align: center; margin-bottom: 10px; font-size: 2.2em; }
+        .subtitle { color: rgba(255,255,255,0.9); text-align: center; margin-bottom: 30px; }
+        .card { background: white; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .card h2 { color: #276749; margin-bottom: 15px; border-bottom: 2px solid #c6f6d5; padding-bottom: 10px; }
+        .card h3 { color: #22543d; margin: 20px 0 10px 0; }
+        .mechanism-box { background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border-left: 4px solid #38a169; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border-bottom: 1px solid #c6f6d5; }
+        .comparison-table th { background: #38a169; color: white; }
+        .comparison-table tr:nth-child(even) { background: #f0fff4; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .symptom-list { list-style: none; padding: 0; }
+        .symptom-list li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .symptom-list li::before { content: "•"; color: #38a169; font-size: 1.5em; position: absolute; left: 0; top: 5px; }
+        .quiz-section { background: #f0fff4; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .quiz-question { font-weight: 600; color: #22543d; margin-bottom: 15px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 12px 15px; background: white; border: 2px solid #9ae6b4; border-radius: 8px; cursor: pointer; }
+        .quiz-option.correct { background: #c6f6d5; border-color: #38a169; }
+        .quiz-option.incorrect { background: #fed7d7; border-color: #f56565; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #c6f6d5; color: #276749; }
+        .feedback.incorrect { background: #fed7d7; color: #c53030; }
+        .allergen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0; }
+        .allergen-card { background: #f0fff4; border-radius: 8px; padding: 15px; border-left: 4px solid #38a169; }
+        .allergen-card h4 { color: #22543d; margin-bottom: 8px; }
+        .danger-box { background: #fff5f5; border: 2px solid #e53e3e; border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        .nav-btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; }
+        .nav-btn.primary { background: #38a169; color: white; }
+        .nav-btn.secondary { background: #c6f6d5; color: #22543d; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .progress-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+        .progress-dot.active { background: white; transform: scale(1.3); }
+        .progress-dot.completed { background: #48bb78; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Contact Dermatitis</h1>
+        <p class="subtitle">MechanismDx Module - Allergic vs Irritant, Patch Testing & Management</p>
+        
+        <div class="progress-bar">
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+        </div>
+
+        <div class="section active" id="section-0">
+            <div class="card">
+                <h2>📚 Overview: Two Types of Contact Dermatitis</h2>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Feature</th>
+                        <th>Irritant Contact Dermatitis (ICD)</th>
+                        <th>Allergic Contact Dermatitis (ACD)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Mechanism</strong></td>
+                        <td>Direct cytotoxic damage (non-immune)</td>
+                        <td>Type IV delayed hypersensitivity (T-cell mediated)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prevalence</strong></td>
+                        <td>80% of contact dermatitis</td>
+                        <td>20% of contact dermatitis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prior sensitization</strong></td>
+                        <td>Not required</td>
+                        <td>REQUIRED (prior exposure)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Onset after exposure</strong></td>
+                        <td>Minutes to hours</td>
+                        <td>24-72 hours (delayed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dose-dependent</strong></td>
+                        <td>Yes - concentration matters</td>
+                        <td>No - even tiny amounts trigger</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anyone can develop</strong></td>
+                        <td>Yes - anyone with enough exposure</td>
+                        <td>No - only sensitized individuals</td>
+                    </tr>
+                </table>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> The key distinction is MECHANISM. ICD is toxic damage to skin (like a chemical burn). ACD is an immune response requiring prior sensitization. Both can look identical clinically!
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" disabled>← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: ACD Pathophysiology →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-1">
+            <div class="card">
+                <h2>🔬 Allergic Contact Dermatitis: Pathophysiology</h2>
+                
+                <h3>Phase 1: Sensitization (Afferent Phase)</h3>
+                <div class="mechanism-box">
+                    <ul class="symptom-list">
+                        <li>Hapten (small chemical) penetrates skin</li>
+                        <li>Binds to carrier protein → becomes immunogenic</li>
+                        <li>Langerhans cells (dendritic cells) capture antigen</li>
+                        <li>Migrate to lymph nodes → present to T cells</li>
+                        <li>Generate allergen-specific memory T cells (Th1/Tc1)</li>
+                        <li><strong>Takes 10-14 days</strong> - patient is now SENSITIZED</li>
+                    </ul>
+                </div>
+
+                <h3>Phase 2: Elicitation (Efferent Phase)</h3>
+                <div class="mechanism-box">
+                    <ul class="symptom-list">
+                        <li>Re-exposure to same allergen</li>
+                        <li>Memory T cells activated within hours</li>
+                        <li>Cytokine release (IFN-γ, TNF-α)</li>
+                        <li>Inflammation at contact site</li>
+                        <li><strong>Clinical reaction: 24-72 hours</strong></li>
+                    </ul>
+                </div>
+
+                <h3>Why "Delayed" Hypersensitivity?</h3>
+                <p>Unlike IgE-mediated reactions (minutes), Type IV reactions require T-cell trafficking and cytokine cascades, taking 1-3 days to manifest clinically.</p>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> First exposure NEVER causes ACD! Sensitization takes time. If a patient reacts to a product "immediately" on first use, it's likely ICD, not ACD.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Common Allergens →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-2">
+            <div class="card">
+                <h2>🧴 Common Contact Allergens</h2>
+                
+                <h3>Top Contact Allergens (NACDG Data)</h3>
+                <div class="allergen-grid">
+                    <div class="allergen-card">
+                        <h4>🥇 Nickel Sulfate</h4>
+                        <p>Jewelry, belt buckles, snaps</p>
+                        <p><em>#1 allergen worldwide</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🧴 Fragrance Mix</h4>
+                        <p>Cosmetics, soaps, lotions</p>
+                        <p><em>Often hidden as "parfum"</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🌿 Balsam of Peru</h4>
+                        <p>Cosmetics, flavorings, medications</p>
+                        <p><em>Cross-reacts with cinnamon, vanilla</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>💊 Neomycin</h4>
+                        <p>Topical antibiotics (Neosporin)</p>
+                        <p><em>Cross-reacts with gentamicin</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🧪 Formaldehyde releasers</h4>
+                        <p>Cosmetics, shampoos, adhesives</p>
+                        <p><em>Quaternium-15, DMDM hydantoin</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🖤 PPD (Paraphenylenediamine)</h4>
+                        <p>Hair dye, black henna tattoos</p>
+                        <p><em>Severe reactions common</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🧤 Rubber (Thiuram mix)</h4>
+                        <p>Gloves, elastic bands</p>
+                        <p><em>Occupational exposure common</em></p>
+                    </div>
+                    <div class="allergen-card">
+                        <h4>🌳 Urushiol</h4>
+                        <p>Poison ivy/oak/sumac</p>
+                        <p><em>Most common cause in US</em></p>
+                    </div>
+                </div>
+
+                <h3>Distribution Clues to Allergen</h3>
+                <table class="comparison-table">
+                    <tr><th>Location</th><th>Think of...</th></tr>
+                    <tr><td>Earlobes, wrist, neck</td><td>Nickel (jewelry)</td></tr>
+                    <tr><td>Periorbital</td><td>Nail polish (transfer), cosmetics</td></tr>
+                    <tr><td>Scalp margin, ears, neck</td><td>Hair dye (PPD)</td></tr>
+                    <tr><td>Hands (dorsal > palmar)</td><td>Occupational, rubber gloves</td></tr>
+                    <tr><td>Feet (dorsal)</td><td>Shoe components (rubber, chromate)</td></tr>
+                    <tr><td>Exposed areas (streaky)</td><td>Plant dermatitis (poison ivy)</td></tr>
+                    <tr><td>Axillae</td><td>Deodorant, fragrance</td></tr>
+                </table>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> Eyelid dermatitis with nail involvement? Think nail polish! Patients touch their eyelids with their fingers, transferring wet polish before it dries.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Diagnosis & Treatment →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-3">
+            <div class="card">
+                <h2>🔍 Diagnosis & Treatment</h2>
+                
+                <h3>Patch Testing - The Gold Standard for ACD</h3>
+                <div class="mechanism-box">
+                    <h4>Procedure:</h4>
+                    <ul class="symptom-list">
+                        <li><strong>Day 0:</strong> Allergens applied to back under occlusion (Finn chambers or T.R.U.E. test)</li>
+                        <li><strong>Day 2 (48h):</strong> Patches removed, initial reading</li>
+                        <li><strong>Day 4-7:</strong> Delayed reading (ESSENTIAL - some reactions appear late)</li>
+                    </ul>
+                    <h4>Reading Scale:</h4>
+                    <ul class="symptom-list">
+                        <li><strong>Negative:</strong> No reaction</li>
+                        <li><strong>+:</strong> Erythema only</li>
+                        <li><strong>++:</strong> Erythema, papules, vesicles</li>
+                        <li><strong>+++:</strong> Intense vesicles, bullae</li>
+                        <li><strong>IR:</strong> Irritant reaction (not allergy)</li>
+                    </ul>
+                </div>
+
+                <div class="danger-box">
+                    <h4>⚠️ Patch Test Pitfalls</h4>
+                    <ul class="symptom-list">
+                        <li><strong>False negatives:</strong> On systemic steroids, recent UV exposure, wrong allergen concentration</li>
+                        <li><strong>False positives:</strong> Irritant reactions (sharp borders, pustules), "angry back" syndrome</li>
+                        <li><strong>Must read at 96+ hours:</strong> Many positives appear on delayed reading</li>
+                    </ul>
+                </div>
+
+                <h3>Management</h3>
+                <table class="comparison-table">
+                    <tr><th>Intervention</th><th>Details</th></tr>
+                    <tr><td><strong>Allergen avoidance</strong></td><td>Primary treatment! Identify and eliminate exposure</td></tr>
+                    <tr><td><strong>Topical steroids</strong></td><td>Mid-high potency for body; low potency for face/folds</td></tr>
+                    <tr><td><strong>Emollients</strong></td><td>Restore barrier function</td></tr>
+                    <tr><td><strong>Wet wraps</strong></td><td>For severe, weeping dermatitis</td></tr>
+                    <tr><td><strong>Systemic steroids</strong></td><td>Short course for severe/widespread (poison ivy)</td></tr>
+                    <tr><td><strong>Phototherapy</strong></td><td>For chronic hand dermatitis</td></tr>
+                </table>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> For poison ivy, use at least 2-3 weeks of systemic steroids if needed! Shorter courses cause rebound when stopped (the allergen is still in the skin).
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Quiz →</button>
+            </div>
+        </div>
+
+        <div class="section" id="section-4">
+            <div class="card">
+                <h2>📝 Knowledge Check</h2>
+                
+                <div class="quiz-section">
+                    <p class="quiz-question">1. A patient develops a rash within hours of using a new harsh cleaning product without gloves. This is most likely:</p>
+                    <div class="quiz-options" data-correct="0">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Irritant contact dermatitis</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Allergic contact dermatitis</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Contact urticaria</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Atopic dermatitis flare</div>
+                    </div>
+                    <div class="feedback">ICD occurs rapidly after exposure to irritating substances and does NOT require prior sensitization. ACD requires prior exposure and has a delayed onset of 24-72 hours.</div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">2. A 25-year-old woman presents with bilateral eyelid dermatitis but no hand involvement. What should you ask about?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. New eye drops</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. New mascara</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. New nail polish</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. New face wash</div>
+                    </div>
+                    <div class="feedback">Nail polish dermatitis classically causes eyelid (and face/neck) dermatitis WITHOUT hand involvement! Wet polish transfers to the thin eyelid skin before drying. The thicker palmar skin is resistant.</div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">3. Patch test readings are typically performed at which time points?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. 24 hours only</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. 48 hours AND 96+ hours</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. 15 minutes and 48 hours</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. One week only</div>
+                    </div>
+                    <div class="feedback">Standard patch testing requires readings at BOTH 48 hours (when patches are removed) AND a delayed reading at 96+ hours. Many true allergic reactions only appear on delayed reading!</div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">4. Which is the most common contact allergen worldwide?</p>
+                    <div class="quiz-options" data-correct="0">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Nickel</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Fragrance</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Neomycin</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Formaldehyde</div>
+                    </div>
+                    <div class="feedback">Nickel is the #1 contact allergen worldwide. Sources include jewelry (especially costume), belt buckles, snaps, watches, and metal tools. Prevalence is higher in women due to ear piercing.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Key Takeaways</h2>
+                <ul class="symptom-list">
+                    <li>ICD (80%) = toxic damage; ACD (20%) = Type IV hypersensitivity requiring prior sensitization</li>
+                    <li>ACD has delayed onset (24-72h) because it's T-cell mediated</li>
+                    <li>Patch testing is gold standard - read at 48h AND 96+h</li>
+                    <li>Distribution pattern often suggests the allergen (eyelids→nail polish, ears→nickel)</li>
+                    <li>Primary treatment is allergen avoidance; steroids are supportive</li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="location.reload()">🔄 Restart Module</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        function updateProgress() {
+            document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                dot.classList.remove('active', 'completed');
+                if (i < currentSection) dot.classList.add('completed');
+                if (i === currentSection) dot.classList.add('active');
+            });
+        }
+        function showSection(idx) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + idx).classList.add('active');
+            currentSection = idx;
+            updateProgress();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        function nextSection() { if (currentSection < 4) showSection(currentSection + 1); }
+        function prevSection() { if (currentSection > 0) showSection(currentSection - 1); }
+        function checkAnswer(el, idx) {
+            const opts = el.parentElement;
+            const correct = parseInt(opts.dataset.correct);
+            if (opts.querySelector('.correct')) return;
+            opts.querySelectorAll('.quiz-option').forEach((o, i) => {
+                if (i === correct) o.classList.add('correct');
+                else if (i === idx) o.classList.add('incorrect');
+            });
+            const fb = opts.nextElementSibling;
+            fb.classList.add('show', idx === correct ? 'correct' : 'incorrect');
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Contact Dermatitis"
+         data-key-points="📚 Overview: Two Types of Contact Dermatitis, 🔬 Allergic Contact Dermatitis: Pathophysiology, 🧴 Common Contact Allergens, 🔍 Diagnosis & Treatment, 📝 Knowledge Check, 🎯 Key Takeaways, Phase 1: Sensitization (Afferent Phase), Phase 2: Elicitation (Efferent Phase), pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

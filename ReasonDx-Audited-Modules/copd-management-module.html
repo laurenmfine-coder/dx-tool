@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: COPD Management</title>
+  <style>
+    :root{--primary:#0EA5E9;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(14,165,233,0.1);border-radius:1rem;border:1px solid rgba(14,165,233,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(14,165,233,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(14,165,233,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(14,165,233,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🫁 COPD Management</h1>
+      <p style="color:#9CA3AF">GOLD Classification • Inhaler Therapy • Exacerbation Management</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('diagnosis')">Diagnosis</div>
+      <div class="nav-tab" onclick="showTab('stable')">Stable COPD</div>
+      <div class="nav-tab" onclick="showTab('exacerbation')">Exacerbation</div>
+      <div class="nav-tab" onclick="showTab('oxygen')">O2 & Advanced</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <div id="diagnosis" class="tab-content active">
+      <div class="section">
+        <h2>📋 Diagnosis & Classification</h2>
+        
+        <div class="key-box">
+          <strong>COPD Definition:</strong> Persistent respiratory symptoms + airflow limitation due to airway/alveolar abnormalities caused by significant noxious exposure (usually smoking)
+        </div>
+
+        <h3>Spirometry Criteria</h3>
+        <div class="info-box">
+          <strong>Post-bronchodilator FEV1/FVC <0.70</strong> confirms airflow limitation<br><br>
+          <em>Note: Fixed ratio may over-diagnose in elderly; LLN (lower limit of normal) may be more accurate</em>
+        </div>
+
+        <h3>GOLD Spirometric Classification</h3>
+        <table>
+          <tr><th>Grade</th><th>Severity</th><th>FEV1 (% predicted)</th></tr>
+          <tr><td>GOLD 1</td><td>Mild</td><td>≥80%</td></tr>
+          <tr><td>GOLD 2</td><td>Moderate</td><td>50-79%</td></tr>
+          <tr><td>GOLD 3</td><td>Severe</td><td>30-49%</td></tr>
+          <tr><td>GOLD 4</td><td>Very Severe</td><td><30%</td></tr>
+        </table>
+
+        <h3>GOLD ABE Assessment (Current)</h3>
+        <div class="key-box">
+          Based on <strong>symptoms</strong> and <strong>exacerbation history</strong>:
+          <table>
+            <tr><th>Group</th><th>Exacerbations</th><th>Symptoms (mMRC/CAT)</th></tr>
+            <tr><td><strong>A</strong></td><td>0-1 (no hospitalization)</td><td>Low symptoms (mMRC 0-1, CAT <10)</td></tr>
+            <tr><td><strong>B</strong></td><td>0-1 (no hospitalization)</td><td>More symptoms (mMRC ≥2, CAT ≥10)</td></tr>
+            <tr><td><strong>E</strong></td><td>≥2 moderate OR ≥1 hospitalization</td><td>Any symptom level</td></tr>
+          </table>
+        </div>
+
+        <h3>COPD vs Asthma</h3>
+        <table>
+          <tr><th>Feature</th><th>COPD</th><th>Asthma</th></tr>
+          <tr><td>Age of onset</td><td>>40 years</td><td>Childhood/young adult</td></tr>
+          <tr><td>Smoking</td><td>Usually significant history</td><td>Variable</td></tr>
+          <tr><td>Symptoms</td><td>Persistent, progressive</td><td>Variable, often nocturnal</td></tr>
+          <tr><td>Reversibility</td><td>Partial or none</td><td>Usually significant</td></tr>
+          <tr><td>Airway inflammation</td><td>Neutrophilic</td><td>Eosinophilic</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="stable" class="tab-content">
+      <div class="section">
+        <h2>💊 Stable COPD Management</h2>
+
+        <h3>Non-Pharmacologic Interventions</h3>
+        <div class="success-box">
+          <strong>Most important:</strong>
+          <ul>
+            <li><strong>Smoking cessation</strong> - ONLY intervention proven to slow FEV1 decline</li>
+            <li><strong>Pulmonary rehabilitation</strong> - improves exercise capacity, QOL</li>
+            <li><strong>Vaccinations:</strong> Influenza (yearly), Pneumococcal, COVID-19, Tdap, Zoster</li>
+          </ul>
+        </div>
+
+        <h3>Initial Pharmacotherapy by Group</h3>
+        <table>
+          <tr><th>Group</th><th>Initial Therapy</th></tr>
+          <tr><td><strong>Group A</strong></td><td>Bronchodilator (SABA, SAMA, LABA, or LAMA)</td></tr>
+          <tr><td><strong>Group B</strong></td><td>LABA + LAMA combination</td></tr>
+          <tr><td><strong>Group E</strong></td><td>LABA + LAMA (consider + ICS if eos ≥300)</td></tr>
+        </table>
+
+        <h3>Inhaler Classes</h3>
+        <table>
+          <tr><th>Class</th><th>Examples</th><th>Notes</th></tr>
+          <tr><td><strong>SABA</strong></td><td>Albuterol</td><td>Rescue; quick onset</td></tr>
+          <tr><td><strong>SAMA</strong></td><td>Ipratropium</td><td>Rescue; often combined with SABA</td></tr>
+          <tr><td><strong>LABA</strong></td><td>Salmeterol, Formoterol, Vilanterol</td><td>Maintenance; 12-24hr duration</td></tr>
+          <tr><td><strong>LAMA</strong></td><td>Tiotropium, Umeclidinium</td><td>Preferred maintenance monotherapy</td></tr>
+          <tr><td><strong>ICS</strong></td><td>Fluticasone, Budesonide</td><td>Add if frequent exacerbations + eosinophilia</td></tr>
+          <tr><td><strong>LABA/LAMA</strong></td><td>Umeclidinium/Vilanterol</td><td>Dual bronchodilation</td></tr>
+          <tr><td><strong>Triple</strong></td><td>Fluticasone/Umeclidinium/Vilanterol</td><td>ICS/LAMA/LABA in one inhaler</td></tr>
+        </table>
+
+        <h3>When to Add ICS?</h3>
+        <div class="key-box">
+          <strong>Consider ICS if:</strong>
+          <ul>
+            <li>Eosinophils ≥300 cells/μL</li>
+            <li>History of asthma or asthma-COPD overlap</li>
+            <li>≥2 moderate exacerbations or 1 hospitalization despite LABA/LAMA</li>
+          </ul>
+          <strong>Avoid ICS if:</strong>
+          <ul>
+            <li>Repeated pneumonias</li>
+            <li>Eosinophils <100</li>
+            <li>History of mycobacterial infection</li>
+          </ul>
+        </div>
+
+        <h3>Other Medications</h3>
+        <ul>
+          <li><strong>Roflumilast:</strong> PDE4 inhibitor for severe COPD with chronic bronchitis and frequent exacerbations</li>
+          <li><strong>Azithromycin:</strong> Prophylactic for frequent exacerbators (not current smokers)</li>
+          <li><strong>Mucolytics:</strong> Limited benefit; may reduce exacerbations in some</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="exacerbation" class="tab-content">
+      <div class="section">
+        <h2>🚨 COPD Exacerbation</h2>
+
+        <div class="danger-box">
+          <strong>Definition:</strong> Acute worsening of respiratory symptoms requiring additional therapy<br>
+          <strong>Triggers:</strong> Viral/bacterial infection (most common), air pollution, PE, cardiac events
+        </div>
+
+        <h3>Classification</h3>
+        <table>
+          <tr><th>Severity</th><th>Definition</th><th>Management</th></tr>
+          <tr><td><strong>Mild</strong></td><td>Treated with SABDs only</td><td>Outpatient</td></tr>
+          <tr><td><strong>Moderate</strong></td><td>SABDs + antibiotics and/or steroids</td><td>Outpatient or short admission</td></tr>
+          <tr><td><strong>Severe</strong></td><td>Requires hospitalization or ED visit</td><td>Inpatient</td></tr>
+        </table>
+
+        <h3>Treatment - "ABC"</h3>
+        <div class="mnemonic">
+          <strong>A</strong>ntibiotics<br>
+          <strong>B</strong>ronchodilators<br>
+          <strong>C</strong>orticosteroids
+        </div>
+
+        <h3>Bronchodilators</h3>
+        <ul>
+          <li><strong>SABA ± SAMA</strong> via nebulizer or MDI with spacer</li>
+          <li>Increase frequency (q1-4h as needed)</li>
+        </ul>
+
+        <h3>Systemic Corticosteroids</h3>
+        <div class="key-box">
+          <strong>Prednisone 40mg daily × 5 days</strong><br>
+          (No taper needed; longer courses not more effective)
+        </div>
+
+        <h3>Antibiotics</h3>
+        <div class="info-box">
+          <strong>Indications:</strong>
+          <ul>
+            <li>Increased sputum purulence PLUS increased dyspnea or sputum volume</li>
+            <li>Requires mechanical ventilation</li>
+          </ul>
+          <strong>Choices:</strong>
+          <ul>
+            <li><strong>Uncomplicated:</strong> Azithromycin, doxycycline, or amoxicillin</li>
+            <li><strong>Risk for resistant organisms:</strong> Amox-clav, respiratory FQ (levofloxacin)</li>
+          </ul>
+          <strong>Duration:</strong> 5-7 days
+        </div>
+
+        <h3>Oxygen Therapy in Exacerbation</h3>
+        <div class="danger-box">
+          <strong>Target SpO2: 88-92%</strong><br>
+          Over-oxygenation can cause CO2 retention (lose hypoxic drive, V/Q mismatch)
+        </div>
+
+        <h3>Non-Invasive Ventilation (NIV/BiPAP)</h3>
+        <div class="success-box">
+          <strong>Indications for NIV:</strong>
+          <ul>
+            <li>Respiratory acidosis (pH <7.35, PaCO2 >45)</li>
+            <li>Severe dyspnea with accessory muscle use</li>
+            <li>Persistent hypoxemia despite O2</li>
+          </ul>
+          <strong>Reduces:</strong> Intubation rate, mortality, length of stay
+        </div>
+      </div>
+    </div>
+
+    <div id="oxygen" class="tab-content">
+      <div class="section">
+        <h2>💨 Oxygen & Advanced Therapies</h2>
+
+        <h3>Long-Term Oxygen Therapy (LTOT)</h3>
+        <div class="key-box">
+          <strong>Indications (improves mortality!):</strong>
+          <ul>
+            <li>PaO2 ≤55 mmHg or SpO2 ≤88% at rest</li>
+            <li>PaO2 56-59 mmHg with cor pulmonale, polycythemia, or RHF</li>
+          </ul>
+          <strong>Goal:</strong> SpO2 ≥90%, use ≥15 hours/day<br>
+          <strong>Reassess:</strong> 60-90 days after initiation
+        </div>
+
+        <h3>Surgical/Interventional Options</h3>
+        <table>
+          <tr><th>Option</th><th>Indication</th></tr>
+          <tr><td><strong>Lung volume reduction surgery (LVRS)</strong></td><td>Upper lobe predominant emphysema, low exercise capacity</td></tr>
+          <tr><td><strong>Bronchoscopic lung volume reduction</strong></td><td>Alternative to LVRS; endobronchial valves</td></tr>
+          <tr><td><strong>Bullectomy</strong></td><td>Large bullae compressing lung</td></tr>
+          <tr><td><strong>Lung transplant</strong></td><td>End-stage, BODE index 7-10, age appropriate</td></tr>
+        </table>
+
+        <h3>Palliative Care</h3>
+        <ul>
+          <li>Address dyspnea with opioids (low-dose morphine)</li>
+          <li>Advance care planning</li>
+          <li>Hospice referral when appropriate</li>
+        </ul>
+
+        <h3>Prognosis - BODE Index</h3>
+        <table>
+          <tr><th>Variable</th><th>What it measures</th></tr>
+          <tr><td><strong>B</strong></td><td>BMI</td></tr>
+          <tr><td><strong>O</strong></td><td>Airflow Obstruction (FEV1)</td></tr>
+          <tr><td><strong>D</strong></td><td>Dyspnea (mMRC scale)</td></tr>
+          <tr><td><strong>E</strong></td><td>Exercise capacity (6-minute walk)</td></tr>
+        </table>
+        <p>Score 0-10; higher = worse prognosis</p>
+      </div>
+    </div>
+
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines (Free Download)</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://goldcopd.org/2024-gold-report/" target="_blank">🔗 GOLD 2024 COPD Report</a>
+          <div class="citation">Global Initiative for Chronic Obstructive Lung Disease. 2024.</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.nhlbi.nih.gov/health-topics/copd" target="_blank">🔗 NIH NHLBI COPD Information</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on GOLD 2024 Report.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> What spirometry finding confirms COPD?</p>
+          <div class="quiz-option" onclick="check(this,true,'q1')">A. Post-bronchodilator FEV1/FVC <0.70</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">B. FEV1 <80% predicted</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Positive bronchodilator response</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: A.</strong> Post-bronchodilator FEV1/FVC <0.70 confirms airflow limitation consistent with COPD. FEV1 alone determines severity grade.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What is the ONLY intervention proven to slow FEV1 decline in COPD?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Smoking cessation</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. Inhaled corticosteroids</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Long-acting bronchodilators</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Smoking cessation is the only intervention that slows the accelerated decline in FEV1. Medications improve symptoms and reduce exacerbations but don't change disease progression.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Target SpO2 in COPD exacerbation?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. 94-98%</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. 88-92%</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. >98%</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> Target 88-92% in COPD. Over-oxygenation can cause CO2 retention due to loss of hypoxic drive and worsening V/Q mismatch.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> What is the steroid dose for COPD exacerbation?</p>
+          <div class="quiz-option" onclick="check(this,true,'q4')">A. Prednisone 40mg × 5 days</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">B. Prednisone 60mg × 14 days with taper</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Methylprednisolone 125mg × 3 days</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: A.</strong> Prednisone 40mg daily for 5 days is standard. Longer courses and higher doses are not more effective and increase side effects.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> When is NIV (BiPAP) indicated in COPD exacerbation?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. All patients with exacerbation</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">B. Respiratory acidosis (pH <7.35, elevated CO2)</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Only after intubation fails</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: B.</strong> NIV is indicated for respiratory acidosis (pH <7.35, PaCO2 >45), severe dyspnea, or persistent hypoxemia. It reduces intubation and mortality.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: COPD Management"
+         data-key-points="📋 Diagnosis & Classification, 💊 Stable COPD Management, 🚨 COPD Exacerbation, 💨 Oxygen & Advanced Therapies, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Spirometry Criteria, GOLD Spirometric Classification, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

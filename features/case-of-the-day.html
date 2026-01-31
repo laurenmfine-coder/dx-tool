@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case of the Day | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; }
+        
+        .header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            padding: 32px 24px;
+            color: white;
+        }
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 24px; display: flex; align-items: center; gap: 10px; }
+        .header-date { text-align: right; }
+        .header-date .day { font-size: 32px; font-weight: 700; }
+        .header-date .month { font-size: 14px; opacity: 0.9; }
+        
+        .content { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+        
+        .streak-banner {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .streak-info { display: flex; align-items: center; gap: 12px; }
+        .streak-info .fire { font-size: 32px; }
+        .streak-info h3 { color: #166534; font-size: 18px; }
+        .streak-info p { color: #15803d; font-size: 13px; }
+        .streak-days {
+            display: flex;
+            gap: 6px;
+        }
+        .streak-day {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            background: white;
+            color: #166534;
+            font-weight: 600;
+        }
+        .streak-day.completed { background: #166534; color: white; }
+        .streak-day.today { border: 2px solid #f59e0b; }
+        
+        .case-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .case-header {
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .case-tags { display: flex; gap: 8px; margin-bottom: 12px; }
+        .case-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .case-tag.difficulty { background: #fef3c7; color: #92400e; }
+        .case-tag.category { background: #dbeafe; color: #1d4ed8; }
+        .case-tag.time { background: #f1f5f9; color: #475569; }
+        
+        .case-title { font-size: 24px; margin-bottom: 8px; }
+        .case-subtitle { color: #64748b; font-size: 14px; }
+        
+        .case-body { padding: 24px; }
+        
+        .vignette {
+            background: #f8fafc;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+        }
+        .vignette p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #334155;
+        }
+        
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .vital-box {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        .vital-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+        .vital-value { font-size: 18px; font-weight: 700; }
+        .vital-value.abnormal { color: #dc2626; }
+        
+        .question-section { margin-bottom: 24px; }
+        .question-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option {
+            padding: 16px 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .option:hover { border-color: var(--primary); background: #f0fdf4; }
+        .option.selected { border-color: #3b82f6; background: #eff6ff; }
+        .option.correct { border-color: #059669; background: #dcfce7; }
+        .option.incorrect { border-color: #dc2626; background: #fee2e2; }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .explanation {
+            display: none;
+            margin-top: 24px;
+            padding: 20px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            border: 1px solid #a7f3d0;
+        }
+        .explanation.show { display: block; }
+        .explanation h4 { color: #166534; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .explanation p { color: #15803d; line-height: 1.7; font-size: 14px; }
+        .explanation ul { margin: 12px 0 12px 20px; color: #15803d; font-size: 14px; }
+        
+        .related-modules {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+        .related-modules h4 { font-size: 14px; margin-bottom: 12px; color: #64748b; }
+        .related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .related-link {
+            padding: 8px 14px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .related-link:hover { background: #f0fdf4; }
+        
+        .case-footer {
+            padding: 20px 24px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .share-btns { display: flex; gap: 8px; }
+        .share-btn {
+            padding: 8px 16px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .share-btn:hover { background: #e2e8f0; }
+        
+        .archive-link { color: var(--primary); text-decoration: none; font-size: 14px; }
+        
+        /* Archive Section */
+        .archive-section {
+            margin-top: 48px;
+        }
+        .archive-section h2 { font-size: 20px; margin-bottom: 20px; }
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+        }
+        .archive-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        .archive-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .archive-date { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+        .archive-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .archive-category { font-size: 12px; color: var(--primary); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <h1>🏆 Case of the Day</h1>
+            <div class="header-date">
+                <div class="day" id="currentDay">30</div>
+                <div class="month" id="currentMonth">January 2026</div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="content">
+        <div class="streak-banner">
+            <div class="streak-info">
+                <span class="fire">🔥</span>
+                <div>
+                    <h3>7 Day Streak!</h3>
+                    <p>You're on fire! Keep it going.</p>
+                </div>
+            </div>
+            <div class="streak-days">
+                <div class="streak-day completed">M</div>
+                <div class="streak-day completed">T</div>
+                <div class="streak-day completed">W</div>
+                <div class="streak-day completed">T</div>
+                <div class="streak-day completed">F</div>
+                <div class="streak-day completed">S</div>
+                <div class="streak-day today">S</div>
+            </div>
+        </div>
+        
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-tags">
+                    <span class="case-tag difficulty">⭐ Intermediate</span>
+                    <span class="case-tag category">Cardiology</span>
+                    <span class="case-tag time">⏱️ 5-8 min</span>
+                </div>
+                <h2 class="case-title">The Breathless Banker</h2>
+                <p class="case-subtitle">A 58-year-old executive with progressive dyspnea</p>
+            </div>
+            
+            <div class="case-body">
+                <div class="vignette">
+                    <p>A 58-year-old male investment banker presents to the ED with progressive shortness of breath over the past 3 weeks. He reports orthopnea (sleeps on 3 pillows) and wakes up gasping at night. He's also noticed swelling in his ankles. His medical history includes hypertension and hyperlipidemia. He takes lisinopril and atorvastatin. He drinks 2-3 glasses of wine nightly and quit smoking 10 years ago.</p>
+                </div>
+                
+                <div class="vitals-grid">
+                    <div class="vital-box">
+                        <div class="vital-label">BP</div>
+                        <div class="vital-value">158/94</div>
+                    </div>
+                    <div class="vital-box">
+                        <div class="vital-label">HR</div>
+                        <div class="vital-value abnormal">112</div>
+                    </div>
+                    <div class="vital-box">
+                        <div class="vital-label">RR</div>
+                        <div class="vital-value abnormal">24</div>
+                    </div>
+                    <div class="vital-box">
+                        <div class="vital-label">SpO2</div>
+                        <div class="vital-value abnormal">91%</div>
+                    </div>
+                    <div class="vital-box">
+                        <div class="vital-label">Temp</div>
+                        <div class="vital-value">98.6°F</div>
+                    </div>
+                </div>
+                
+                <div class="question-section">
+                    <h3>❓ Question 1 of 3</h3>
+                    <p style="margin-bottom: 16px; color: #52525b;">Based on this presentation, which physical exam finding would you most expect?</p>
+                    
+                    <div class="options" id="options">
+                        <button class="option" onclick="selectOption(this, 0)">A. Pericardial friction rub</button>
+                        <button class="option" onclick="selectOption(this, 1)">B. Bibasilar crackles and elevated JVP</button>
+                        <button class="option" onclick="selectOption(this, 2)">C. Unilateral leg swelling with calf tenderness</button>
+                        <button class="option" onclick="selectOption(this, 3)">D. Barrel chest with hyperresonance to percussion</button>
+                    </div>
+                    
+                    <button class="submit-btn" id="submitBtn" disabled onclick="submitAnswer()">Check Answer</button>
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <h4>✅ Correct! Bibasilar crackles and elevated JVP</h4>
+                    <p>This presentation is classic for <strong>acute decompensated heart failure (ADHF)</strong>:</p>
+                    <ul>
+                        <li><strong>Orthopnea + PND</strong> = left-sided failure (pulmonary congestion)</li>
+                        <li><strong>Peripheral edema</strong> = right-sided failure (systemic congestion)</li>
+                        <li><strong>Bibasilar crackles</strong> = pulmonary edema</li>
+                        <li><strong>Elevated JVP</strong> = volume overload / right heart pressure</li>
+                    </ul>
+                    <p style="margin-top: 12px;">The tachycardia and hypoxia indicate the body's compensatory response to reduced cardiac output and pulmonary congestion.</p>
+                    
+                    <div class="related-modules">
+                        <h4>📚 Deepen Your Understanding</h4>
+                        <div class="related-links">
+                            <a href="#" class="related-link">Heart Failure Mechanisms</a>
+                            <a href="#" class="related-link">JVP Assessment</a>
+                            <a href="#" class="related-link">Diuretic Therapy</a>
+                            <a href="#" class="related-link">BNP Interpretation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-footer">
+                <div class="share-btns">
+                    <button class="share-btn" onclick="share()">📤 Share</button>
+                    <button class="share-btn" onclick="discuss()">💬 Discuss</button>
+                    <button class="share-btn" onclick="bookmark()">🔖 Save</button>
+                </div>
+                <a href="#archive" class="archive-link">View Past Cases →</a>
+            </div>
+        </div>
+        
+        <section class="archive-section" id="archive">
+            <h2>📅 Recent Cases</h2>
+            <div class="archive-grid">
+                <a href="#" class="archive-card">
+                    <div class="archive-date">January 29, 2026</div>
+                    <div class="archive-title">The Confused Gardener</div>
+                    <div class="archive-category">Infectious Disease</div>
+                </a>
+                <a href="#" class="archive-card">
+                    <div class="archive-date">January 28, 2026</div>
+                    <div class="archive-title">Abdominal Pain After Travel</div>
+                    <div class="archive-category">GI / Hepatology</div>
+                </a>
+                <a href="#" class="archive-card">
+                    <div class="archive-date">January 27, 2026</div>
+                    <div class="archive-title">The Dizzy Teacher</div>
+                    <div class="archive-category">Neurology</div>
+                </a>
+                <a href="#" class="archive-card">
+                    <div class="archive-date">January 26, 2026</div>
+                    <div class="archive-title">Rash After Hiking</div>
+                    <div class="archive-category">Dermatology / ID</div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        let selectedOption = -1;
+        const correctAnswer = 1;
+        
+        // Set current date
+        const now = new Date();
+        document.getElementById('currentDay').textContent = now.getDate();
+        document.getElementById('currentMonth').textContent = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        
+        function selectOption(btn, index) {
+            document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedOption = index;
+            document.getElementById('submitBtn').disabled = false;
+        }
+        
+        function submitAnswer() {
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === correctAnswer) opt.classList.add('correct');
+                else if (i === selectedOption && i !== correctAnswer) opt.classList.add('incorrect');
+            });
+            
+            document.getElementById('explanation').classList.add('show');
+            document.getElementById('submitBtn').textContent = 'Next Question →';
+            document.getElementById('submitBtn').onclick = () => alert('Continue to Question 2...');
+        }
+        
+        function share() { alert('Share link copied!'); }
+        function discuss() { alert('Opening discussion forum...'); }
+        function bookmark() { alert('Case saved to your bookmarks!'); }
+    </script>
+</body>
+</html>

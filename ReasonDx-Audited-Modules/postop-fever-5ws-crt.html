@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRT: The Febrile Post-Op Patient | ReasonDx</title>
+  <style>
+    :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --primary: #43A047; --success: #4CAF50; --danger: #F44336; --warning: #FF9800; --info: #2196F3; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: #F1F5F9; min-height: 100vh; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+    header { text-align: center; padding: 1.5rem; background: linear-gradient(135deg, rgba(67,160,71,0.2), rgba(76,175,80,0.2)); border-radius: 1rem; margin-bottom: 1.5rem; border: 1px solid rgba(67,160,71,0.3); }
+    header h1 { color: var(--primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #94A3B8; font-size: 0.95rem; }
+    .score-bar { display: flex; justify-content: space-between; background: var(--card); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    .score-item { text-align: center; }
+    .score-value { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .score-label { font-size: 0.75rem; color: #94A3B8; }
+    .stage { display: none; }
+    .stage.active { display: block; }
+    .stage-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; }
+    .stage-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .stage-num { background: var(--primary); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .stage-title { font-size: 1.1rem; color: var(--primary); }
+    .scenario { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; line-height: 1.6; }
+    .question { font-weight: 500; margin-bottom: 1rem; color: var(--warning); }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .option { padding: 0.75rem 1rem; background: rgba(255,255,255,0.05); border: 2px solid var(--border); border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .option:hover:not(.disabled) { border-color: var(--primary); background: rgba(67,160,71,0.1); }
+    .option.correct { border-color: var(--success); background: rgba(76,175,80,0.2); }
+    .option.incorrect { border-color: var(--danger); background: rgba(244,67,54,0.2); }
+    .option.disabled { cursor: default; opacity: 0.7; }
+    .option-pts { float: right; font-size: 0.8rem; color: #94A3B8; }
+    .feedback { margin-top: 1rem; padding: 1rem; border-radius: 0.5rem; display: none; }
+    .feedback.show { display: block; }
+    .feedback.correct { background: rgba(76,175,80,0.15); border: 1px solid var(--success); }
+    .feedback.incorrect { background: rgba(244,67,54,0.15); border: 1px solid var(--danger); }
+    .teaching-point { background: rgba(33,150,243,0.15); border-left: 4px solid var(--info); padding: 1rem; margin-top: 1rem; border-radius: 0 0.5rem 0.5rem 0; }
+    .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #388E3C; }
+    .mnemonic { background: rgba(76,175,80,0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .hidden { display: none; }
+    .summary { background: linear-gradient(135deg, rgba(76,175,80,0.1), rgba(33,150,243,0.1)); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏥 Clinical Reasoning Trainer</h1>
+      <p class="subtitle">The Febrile Post-Op Patient - The 5 W's</p>
+    </header>
+
+    <div class="score-bar">
+      <div class="score-item"><div class="score-value" id="currentScore">0</div><div class="score-label">POINTS</div></div>
+      <div class="score-item"><div class="score-value" id="currentStage">1</div><div class="score-label">STAGE</div></div>
+      <div class="score-item"><div class="score-value" id="maxScore">500</div><div class="score-label">POSSIBLE</div></div>
+    </div>
+
+    <!-- STAGE 1 -->
+    <div class="stage active" id="stage1">
+      <div class="stage-card">
+        <div class="stage-header"><div class="stage-num">1</div><div class="stage-title">Introduction: The 5 W's</div></div>
+        <div class="scenario">
+          A 58-year-old woman is post-operative day 3 after open cholecystectomy. The nurse calls you because she has developed a temperature of 38.6°C (101.5°F).
+        </div>
+        <div class="mnemonic">
+          <strong>💡 The 5 W's of Post-Op Fever (by POD):</strong><br><br>
+          <strong>W</strong>ind (POD 1-2) - Atelectasis<br>
+          <strong>W</strong>ater (POD 3-5) - UTI (especially if catheter)<br>
+          <strong>W</strong>ound (POD 5-7) - Surgical site infection<br>
+          <strong>W</strong>alking (POD 5+) - DVT/PE<br>
+          <strong>W</strong>onder drugs (Any time) - Drug fever, C. diff
+        </div>
+        <div class="question">Based on timing (POD 3), which cause is MOST likely?</div>
+        <div class="options" id="options1">
+          <div class="option" onclick="selectOption(1, this, 'a', 40)">A. Atelectasis (Wind) <span class="option-pts">+40</span></div>
+          <div class="option" onclick="selectOption(1, this, 'b', 100)">B. Urinary tract infection (Water) <span class="option-pts">+100</span></div>
+          <div class="option" onclick="selectOption(1, this, 'c', 30)">C. Surgical site infection (Wound) <span class="option-pts">+30</span></div>
+          <div class="option" onclick="selectOption(1, this, 'd', 20)">D. DVT/PE (Walking) <span class="option-pts">+20</span></div>
+        </div>
+        <div class="feedback" id="feedback1"></div>
+        <button class="btn btn-primary hidden" id="next1" onclick="nextStage(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div class="stage" id="stage2">
+      <div class="stage-card">
+        <div class="stage-header"><div class="stage-num">2</div><div class="stage-title">Gathering Information</div></div>
+        <div class="scenario">
+          You go to evaluate the patient. She reports mild dysuria and lower abdominal discomfort. She had a Foley catheter for the first 2 days post-op. On exam, her abdomen is soft with appropriate healing incision. Lungs are clear.
+        </div>
+        <div class="question">What is your next best step?</div>
+        <div class="options" id="options2">
+          <div class="option" onclick="selectOption(2, this, 'a', 100)">A. Urinalysis and urine culture <span class="option-pts">+100</span></div>
+          <div class="option" onclick="selectOption(2, this, 'b', 40)">B. CT abdomen to rule out abscess <span class="option-pts">+40</span></div>
+          <div class="option" onclick="selectOption(2, this, 'c', 60)">C. Chest X-ray <span class="option-pts">+60</span></div>
+          <div class="option" onclick="selectOption(2, this, 'd', 30)">D. Blood cultures only <span class="option-pts">+30</span></div>
+        </div>
+        <div class="feedback" id="feedback2"></div>
+        <button class="btn btn-primary hidden" id="next2" onclick="nextStage(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div class="stage" id="stage3">
+      <div class="stage-card">
+        <div class="stage-header"><div class="stage-num">3</div><div class="stage-title">Diagnosis Confirmed</div></div>
+        <div class="scenario">
+          <strong>Urinalysis results:</strong><br>
+          Leukocyte esterase: Positive<br>
+          Nitrites: Positive<br>
+          WBC: >50/hpf<br>
+          Bacteria: Many
+        </div>
+        <div class="question">These findings are most consistent with:</div>
+        <div class="options" id="options3">
+          <div class="option" onclick="selectOption(3, this, 'a', 100)">A. Urinary tract infection <span class="option-pts">+100</span></div>
+          <div class="option" onclick="selectOption(3, this, 'b', 20)">B. Contaminated specimen <span class="option-pts">+20</span></div>
+          <div class="option" onclick="selectOption(3, this, 'c', 30)">C. Asymptomatic bacteriuria <span class="option-pts">+30</span></div>
+          <div class="option" onclick="selectOption(3, this, 'd', 20)">D. Interstitial cystitis <span class="option-pts">+20</span></div>
+        </div>
+        <div class="feedback" id="feedback3"></div>
+        <button class="btn btn-primary hidden" id="next3" onclick="nextStage(4)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div class="stage" id="stage4">
+      <div class="stage-card">
+        <div class="stage-header"><div class="stage-num">4</div><div class="stage-title">Management</div></div>
+        <div class="scenario">
+          You diagnose catheter-associated UTI (CAUTI). The patient is hemodynamically stable with normal renal function.
+        </div>
+        <div class="question">What is appropriate initial empiric antibiotic therapy?</div>
+        <div class="options" id="options4">
+          <div class="option" onclick="selectOption(4, this, 'a', 40)">A. IV vancomycin <span class="option-pts">+40</span></div>
+          <div class="option" onclick="selectOption(4, this, 'b', 100)">B. Oral fluoroquinolone (ciprofloxacin or levofloxacin) <span class="option-pts">+100</span></div>
+          <div class="option" onclick="selectOption(4, this, 'c', 60)">C. IV piperacillin-tazobactam <span class="option-pts">+60</span></div>
+          <div class="option" onclick="selectOption(4, this, 'd', 30)">D. Oral nitrofurantoin <span class="option-pts">+30</span></div>
+        </div>
+        <div class="feedback" id="feedback4"></div>
+        <button class="btn btn-primary hidden" id="next4" onclick="nextStage(5)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div class="stage" id="stage5">
+      <div class="stage-card">
+        <div class="stage-header"><div class="stage-num">5</div><div class="stage-title">Prevention</div></div>
+        <div class="scenario">
+          The patient improves with antibiotics. Culture grows E. coli sensitive to your chosen antibiotic.
+        </div>
+        <div class="question">The most important measure to prevent CAUTI in post-op patients is:</div>
+        <div class="options" id="options5">
+          <div class="option" onclick="selectOption(5, this, 'a', 40)">A. Prophylactic antibiotics while catheterized <span class="option-pts">+40</span></div>
+          <div class="option" onclick="selectOption(5, this, 'b', 100)">B. Early catheter removal <span class="option-pts">+100</span></div>
+          <div class="option" onclick="selectOption(5, this, 'c', 30)">C. Silver-coated catheters <span class="option-pts">+30</span></div>
+          <div class="option" onclick="selectOption(5, this, 'd', 60)">D. Bladder irrigation with antiseptic <span class="option-pts">+60</span></div>
+        </div>
+        <div class="feedback" id="feedback5"></div>
+        <button class="btn btn-primary hidden" id="next5" onclick="showSummary()">View Summary →</button>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="stage" id="summary">
+      <div class="summary">
+        <h2 style="color: var(--success); margin-bottom: 1rem;">🎉 Case Complete!</h2>
+        <div style="font-size: 2rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem;">
+          Final Score: <span id="finalScore">0</span> / 500
+        </div>
+        
+        <h3 style="color: var(--warning); margin: 1.5rem 0 1rem;">📚 Key Learning Points</h3>
+        <div class="mnemonic">
+          <strong>The 5 W's of Post-Op Fever:</strong><br>
+          Wind (POD 1-2) • Water (POD 3-5) • Wound (POD 5-7) • Walking (POD 5+) • Wonder drugs (anytime)
+        </div>
+        <ul style="padding-left: 1.5rem; line-height: 1.8;">
+          <li><strong>POD 1-2 (Wind):</strong> Atelectasis - most common early fever, encourage incentive spirometry</li>
+          <li><strong>POD 3-5 (Water):</strong> UTI, especially with Foley catheter - UA/Urine culture</li>
+          <li><strong>POD 5-7 (Wound):</strong> Surgical site infection - examine incision</li>
+          <li><strong>POD 5+ (Walking):</strong> DVT/PE - consider if immobile, prophylaxis important</li>
+          <li><strong>Any time (Wonder drugs):</strong> Drug fever, C. diff (especially with antibiotic use)</li>
+        </ul>
+        <div class="teaching-point" style="margin-top: 1.5rem;">
+          <strong>🎯 CAUTI Prevention:</strong> Early catheter removal is the single most important intervention. Each day with a catheter increases UTI risk by 3-7%.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    const feedbackData = {
+      1: {
+        a: { correct: false, text: "Atelectasis typically causes fever on POD 1-2, not POD 3. It's due to shallow breathing post-anesthesia." },
+        b: { correct: true, text: "Correct! POD 3-5 is classic timing for 'Water' - UTI, especially with recent Foley catheter use." },
+        c: { correct: false, text: "Wound infections typically present POD 5-7 when bacteria have had time to proliferate." },
+        d: { correct: false, text: "DVT/PE usually presents POD 5+, though PE can occur earlier." }
+      },
+      2: {
+        a: { correct: true, text: "Correct! Given dysuria, history of catheter, and POD 3 timing, UA and urine culture are the best first step." },
+        b: { correct: false, text: "CT is premature without clinical signs of intra-abdominal pathology. Wound looks good, abdomen is soft." },
+        c: { correct: false, text: "CXR would be appropriate for suspected atelectasis/pneumonia, but lungs are clear and her symptoms point to UTI." },
+        d: { correct: false, text: "Blood cultures may be needed if she develops signs of urosepsis, but UA should come first." }
+      },
+      3: {
+        a: { correct: true, text: "Correct! Positive leukocyte esterase, nitrites, pyuria, and bacteriuria with symptoms (fever, dysuria) = UTI." },
+        b: { correct: false, text: "This pattern is too consistent across multiple markers to be contamination." },
+        c: { correct: false, text: "Asymptomatic bacteriuria has no symptoms. She has fever and dysuria." },
+        d: { correct: false, text: "Interstitial cystitis doesn't cause positive nitrites or bacteriuria." }
+      },
+      4: {
+        a: { correct: false, text: "Vancomycin covers gram-positive organisms; UTIs are predominantly gram-negative." },
+        b: { correct: true, text: "Correct! For stable patients with complicated UTI (CAUTI), oral fluoroquinolones provide good coverage and achieve high urinary concentrations." },
+        c: { correct: false, text: "Pip-tazo is appropriate for severe/septic UTI, but this stable patient can be managed with oral therapy." },
+        d: { correct: false, text: "Nitrofurantoin only achieves therapeutic levels in the bladder - not appropriate for upper tract or complicated UTI." }
+      },
+      5: {
+        a: { correct: false, text: "Prophylactic antibiotics are NOT recommended and promote resistance." },
+        b: { correct: true, text: "Correct! Early catheter removal is the #1 intervention. Each additional catheter day increases UTI risk 3-7%." },
+        c: { correct: false, text: "Silver-coated catheters have limited evidence and are not standard of care." },
+        d: { correct: false, text: "Bladder irrigation is not recommended for CAUTI prevention." }
+      }
+    };
+
+    function selectOption(stage, el, choice, pts) {
+      const options = document.querySelectorAll(`#options${stage} .option`);
+      options.forEach(o => o.classList.add('disabled'));
+      const data = feedbackData[stage][choice];
+      if (data.correct) { el.classList.add('correct'); score += pts; }
+      else { el.classList.add('incorrect'); score += pts; options.forEach(o => { const c = o.onclick.toString().match(/'([a-d])'/)[1]; if (feedbackData[stage][c].correct) o.classList.add('correct'); }); }
+      document.getElementById('currentScore').textContent = score;
+      const fb = document.getElementById(`feedback${stage}`);
+      fb.textContent = data.text;
+      fb.className = `feedback show ${data.correct ? 'correct' : 'incorrect'}`;
+      document.getElementById(`next${stage}`).classList.remove('hidden');
+    }
+    function nextStage(num) { document.querySelectorAll('.stage').forEach(s => s.classList.remove('active')); document.getElementById(`stage${num}`).classList.add('active'); document.getElementById('currentStage').textContent = num; }
+    function showSummary() { document.querySelectorAll('.stage').forEach(s => s.classList.remove('active')); document.getElementById('summary').classList.add('active'); document.getElementById('finalScore').textContent = score; }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="CRT: The Febrile Post"
+         data-key-points="🎉 Case Complete!, 📚 Key Learning Points, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

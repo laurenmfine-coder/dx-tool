@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: ECG Interpretation</title>
+  <style>
+    :root{--primary:#DC2626;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(220,38,38,0.1);border-radius:1rem;border:1px solid rgba(220,38,38,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(220,38,38,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(220,38,38,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(220,38,38,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💓 ECG Interpretation</h1>
+      <p style="color:#9CA3AF">Systematic Approach • Rhythms • Ischemia • Blocks</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('basics')">Basics</div>
+      <div class="nav-tab" onclick="showTab('rhythms')">Rhythms</div>
+      <div class="nav-tab" onclick="showTab('ischemia')">Ischemia</div>
+      <div class="nav-tab" onclick="showTab('blocks')">Blocks</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <div id="basics" class="tab-content active">
+      <div class="section">
+        <h2>📋 Systematic Approach</h2>
+        
+        <div class="mnemonic">
+          <strong>Rate → Rhythm → Axis → Intervals → Hypertrophy → Ischemia</strong>
+        </div>
+
+        <h3>1. Rate</h3>
+        <div class="key-box">
+          <strong>Methods:</strong>
+          <ul>
+            <li><strong>300 Rule:</strong> 300 ÷ (# large boxes between R waves)</li>
+            <li><strong>1500 Rule:</strong> 1500 ÷ (# small boxes between R waves)</li>
+            <li><strong>6-second strip:</strong> Count QRS complexes × 10</li>
+          </ul>
+          <strong>Normal:</strong> 60-100 bpm
+        </div>
+
+        <h3>2. Rhythm</h3>
+        <ul>
+          <li>Is it regular or irregular?</li>
+          <li>Are P waves present and upright in II?</li>
+          <li>Is there a P wave before every QRS?</li>
+          <li>Is there a QRS after every P wave?</li>
+        </ul>
+
+        <h3>3. Axis</h3>
+        <div class="info-box">
+          <strong>Quick method using leads I and aVF:</strong>
+          <table>
+            <tr><th>Lead I</th><th>aVF</th><th>Axis</th></tr>
+            <tr><td>+ (up)</td><td>+ (up)</td><td><strong>Normal</strong> (0° to +90°)</td></tr>
+            <tr><td>+ (up)</td><td>− (down)</td><td><strong>Left axis deviation</strong> (0° to −90°)</td></tr>
+            <tr><td>− (down)</td><td>+ (up)</td><td><strong>Right axis deviation</strong> (+90° to +180°)</td></tr>
+            <tr><td>− (down)</td><td>− (down)</td><td><strong>Extreme/Northwest</strong></td></tr>
+          </table>
+        </div>
+
+        <h3>Causes of Axis Deviation</h3>
+        <table>
+          <tr><th>Left Axis Deviation</th><th>Right Axis Deviation</th></tr>
+          <tr>
+            <td>Left anterior fascicular block<br>LVH<br>Inferior MI<br>WPW (some patterns)</td>
+            <td>Right ventricular hypertrophy<br>Pulmonary embolism<br>COPD<br>Lateral MI<br>Left posterior fascicular block</td>
+          </tr>
+        </table>
+
+        <h3>4. Intervals</h3>
+        <table>
+          <tr><th>Interval</th><th>Normal</th><th>Significance</th></tr>
+          <tr><td><strong>PR</strong></td><td>120-200 ms (3-5 small boxes)</td><td>Short: WPW, junctional; Long: AV block</td></tr>
+          <tr><td><strong>QRS</strong></td><td><120 ms (<3 small boxes)</td><td>Wide: bundle branch block, ventricular origin</td></tr>
+          <tr><td><strong>QTc</strong></td><td><450 ms (men), <460 ms (women)</td><td>Long: drug effect, electrolytes, congenital</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="rhythms" class="tab-content">
+      <div class="section">
+        <h2>💗 Cardiac Rhythms</h2>
+
+        <h3>Sinus Rhythms</h3>
+        <table>
+          <tr><th>Rhythm</th><th>Rate</th><th>Features</th></tr>
+          <tr><td><strong>Normal sinus</strong></td><td>60-100</td><td>Regular, upright P in II, P before every QRS</td></tr>
+          <tr><td><strong>Sinus bradycardia</strong></td><td><60</td><td>Same as above, just slower</td></tr>
+          <tr><td><strong>Sinus tachycardia</strong></td><td>>100</td><td>Same as above, just faster</td></tr>
+          <tr><td><strong>Sinus arrhythmia</strong></td><td>Variable</td><td>Rate varies with respiration (normal variant)</td></tr>
+        </table>
+
+        <h3>Atrial Rhythms</h3>
+        <table>
+          <tr><th>Rhythm</th><th>Features</th></tr>
+          <tr><td><strong>Atrial fibrillation</strong></td><td>Irregularly irregular, no P waves, fibrillatory baseline</td></tr>
+          <tr><td><strong>Atrial flutter</strong></td><td>Regular (usually), sawtooth flutter waves (rate ~300), commonly 2:1 block → ventricular rate ~150</td></tr>
+          <tr><td><strong>Multifocal atrial tachycardia</strong></td><td>Irregular, ≥3 different P wave morphologies, rate >100</td></tr>
+          <tr><td><strong>PACs</strong></td><td>Premature beat with abnormal P wave, narrow QRS</td></tr>
+        </table>
+
+        <h3>Junctional Rhythms</h3>
+        <div class="info-box">
+          <strong>Features:</strong> No P wave OR inverted P in II (retrograde), narrow QRS<br>
+          <ul>
+            <li>Junctional escape: 40-60 bpm</li>
+            <li>Accelerated junctional: 60-100 bpm</li>
+            <li>Junctional tachycardia: >100 bpm</li>
+          </ul>
+        </div>
+
+        <h3>Ventricular Rhythms</h3>
+        <div class="danger-box">
+          <table>
+            <tr><th>Rhythm</th><th>Features</th><th>Action</th></tr>
+            <tr><td><strong>PVCs</strong></td><td>Wide QRS, no preceding P wave, compensatory pause</td><td>Usually benign if isolated</td></tr>
+            <tr><td><strong>Ventricular tachycardia</strong></td><td>Wide complex, regular, rate >100, AV dissociation</td><td>Stable: amiodarone; Unstable: cardiovert</td></tr>
+            <tr><td><strong>Ventricular fibrillation</strong></td><td>Chaotic, no organized QRS</td><td><strong>Immediate defibrillation!</strong></td></tr>
+            <tr><td><strong>Torsades de pointes</strong></td><td>Polymorphic VT, "twisting" around baseline, long QT</td><td>Magnesium, defibrillation</td></tr>
+          </table>
+        </div>
+
+        <h3>Supraventricular Tachycardia (SVT)</h3>
+        <div class="key-box">
+          <strong>Narrow complex, regular, rate 150-250</strong><br>
+          Types: AVNRT (most common), AVRT (WPW), atrial tachycardia<br><br>
+          <strong>Treatment:</strong>
+          <ol>
+            <li>Vagal maneuvers (Valsalva, carotid massage)</li>
+            <li>Adenosine 6mg IV push → 12mg → 12mg</li>
+            <li>If unstable: synchronized cardioversion</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div id="ischemia" class="tab-content">
+      <div class="section">
+        <h2>🫀 Ischemia & Infarction</h2>
+
+        <h3>ST Elevation MI (STEMI)</h3>
+        <div class="danger-box">
+          <strong>ST elevation ≥1mm in 2 contiguous leads</strong> (≥2mm in V2-V3 for men)<br>
+          Convex ("tombstone") or horizontal ST elevation<br><br>
+          <strong>Action:</strong> Emergent reperfusion (PCI preferred, or thrombolytics)
+        </div>
+
+        <h3>Localization by Leads</h3>
+        <table>
+          <tr><th>Leads</th><th>Territory</th><th>Artery</th></tr>
+          <tr><td>V1-V4</td><td><strong>Anterior/Septal</strong></td><td>LAD</td></tr>
+          <tr><td>V5-V6, I, aVL</td><td><strong>Lateral</strong></td><td>LCx</td></tr>
+          <tr><td>II, III, aVF</td><td><strong>Inferior</strong></td><td>RCA (80%) or LCx</td></tr>
+          <tr><td>V1-V2 (ST depression) + tall R</td><td><strong>Posterior</strong></td><td>RCA or LCx</td></tr>
+          <tr><td>V1, V4R</td><td><strong>Right ventricular</strong></td><td>Proximal RCA</td></tr>
+        </table>
+
+        <h3>Reciprocal Changes</h3>
+        <div class="info-box">
+          ST depression in leads opposite to ST elevation<br>
+          Example: Inferior STEMI (II, III, aVF elevation) → reciprocal depression in I, aVL<br>
+          <strong>Reciprocal changes increase specificity for STEMI</strong>
+        </div>
+
+        <h3>NSTEMI / Unstable Angina</h3>
+        <ul>
+          <li>ST depression</li>
+          <li>T wave inversion</li>
+          <li>Dynamic changes</li>
+          <li>Differentiate by troponin (elevated in NSTEMI)</li>
+        </ul>
+
+        <h3>Wellens Syndrome</h3>
+        <div class="danger-box">
+          <strong>Critical LAD stenosis!</strong><br>
+          Biphasic or deeply inverted T waves in V2-V3<br>
+          Patient is often pain-FREE when ECG taken<br>
+          <strong>Do NOT stress test - high risk of anterior MI</strong>
+        </div>
+
+        <h3>De Winter T Waves</h3>
+        <div class="danger-box">
+          <strong>LAD occlusion equivalent!</strong><br>
+          Upsloping ST depression at J-point with tall, symmetric T waves in precordial leads<br>
+          Treat as STEMI equivalent
+        </div>
+
+        <h3>STEMI Mimics</h3>
+        <table>
+          <tr><th>Condition</th><th>Features</th></tr>
+          <tr><td>Early repolarization</td><td>Concave ST elevation, notched J-point, young healthy patient</td></tr>
+          <tr><td>Pericarditis</td><td>Diffuse ST elevation, PR depression, no reciprocal changes</td></tr>
+          <tr><td>LVH</td><td>ST changes in lateral leads with voltage criteria</td></tr>
+          <tr><td>LBBB</td><td>Use Sgarbossa criteria</td></tr>
+          <tr><td>Hyperkalemia</td><td>Peaked T waves, wide QRS</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="blocks" class="tab-content">
+      <div class="section">
+        <h2>🚧 Conduction Blocks</h2>
+
+        <h3>AV Blocks</h3>
+        <table>
+          <tr><th>Type</th><th>PR Interval</th><th>Dropped Beats</th><th>Treatment</th></tr>
+          <tr><td><strong>1st degree</strong></td><td>>200ms (constant)</td><td>None</td><td>None (benign)</td></tr>
+          <tr><td><strong>2nd degree Type I (Wenckebach)</strong></td><td>Progressive lengthening</td><td>Yes (pattern)</td><td>Usually none</td></tr>
+          <tr><td><strong>2nd degree Type II</strong></td><td>Constant</td><td>Yes (sudden)</td><td><strong>Pacemaker</strong></td></tr>
+          <tr><td><strong>3rd degree (Complete)</strong></td><td>Variable (AV dissociation)</td><td>Complete</td><td><strong>Pacemaker</strong></td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>High-grade AV block (Type II, 3rd degree):</strong><br>
+          Risk of asystole - needs pacemaker!<br>
+          If unstable: atropine, transcutaneous pacing
+        </div>
+
+        <h3>Bundle Branch Blocks</h3>
+        <div class="key-box">
+          <strong>QRS >120ms</strong><br><br>
+          <strong>RBBB:</strong>
+          <ul>
+            <li>RSR' pattern in V1-V2 ("rabbit ears")</li>
+            <li>Wide S wave in I, V6</li>
+            <li>Often benign; consider PE, RV strain</li>
+          </ul>
+          <strong>LBBB:</strong>
+          <ul>
+            <li>Broad notched R in I, V5-V6</li>
+            <li>Deep S in V1-V2</li>
+            <li>New LBBB with chest pain = STEMI equivalent</li>
+          </ul>
+        </div>
+
+        <div class="mnemonic">
+          <strong>WiLLiaM MaRRoW</strong><br>
+          LBBB: W in V1, M in V6<br>
+          RBBB: M in V1, W in V6
+        </div>
+
+        <h3>Fascicular Blocks</h3>
+        <table>
+          <tr><th>Block</th><th>Axis</th><th>Features</th></tr>
+          <tr><td>Left anterior (LAFB)</td><td>Left axis deviation (−45° to −90°)</td><td>Small Q in I, aVL; small R in II, III, aVF</td></tr>
+          <tr><td>Left posterior (LPFB)</td><td>Right axis deviation</td><td>Small R in I, aVL; small Q in II, III, aVF</td></tr>
+        </table>
+
+        <h3>Bifascicular & Trifascicular Block</h3>
+        <div class="info-box">
+          <strong>Bifascicular:</strong> RBBB + LAFB or LPFB<br>
+          <strong>Trifascicular:</strong> Bifascicular + 1st degree AV block<br>
+          <em>Risk of progression to complete heart block</em>
+        </div>
+      </div>
+    </div>
+
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000617" target="_blank">🔗 Fourth Universal Definition of MI</a>
+          <div class="citation">Thygesen K, et al. Circulation. 2018;138:e618-e651</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://litfl.com/ecg-library/" target="_blank">🔗 LITFL ECG Library (CC-BY-NC-SA)</a>
+          <a class="resource-link" href="https://ecgwaves.com/" target="_blank">🔗 ECG Waves (Educational)</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on AHA/ACC Guidelines and Universal MI Definition.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> ST elevation in leads II, III, aVF indicates infarction in which territory?</p>
+          <div class="quiz-option" onclick="check(this,true,'q1')">A. Inferior</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">B. Anterior</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Lateral</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: A.</strong> Leads II, III, aVF represent the inferior wall, supplied by the RCA (80%) or LCx.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What is the ventricular rate in atrial flutter with 2:1 block?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. ~150 bpm</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. ~300 bpm</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. ~75 bpm</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Atrial flutter has an atrial rate of ~300; with 2:1 AV block, the ventricular rate is ~150 bpm.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> "RSR' pattern in V1" is characteristic of:</p>
+          <div class="quiz-option" onclick="check(this,true,'q3')">A. Right bundle branch block</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Left bundle branch block</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. First degree AV block</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: A.</strong> RBBB shows RSR' ("rabbit ears") in V1-V2. LBBB shows W pattern in V1 and M pattern in V6.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> First-line treatment for stable SVT?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Amiodarone</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Vagal maneuvers, then adenosine</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Defibrillation</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> Start with vagal maneuvers (Valsalva), then adenosine 6mg rapid IV push. Defibrillation is for VF; cardioversion for unstable SVT.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Progressively lengthening PR interval before a dropped beat describes:</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. Second degree Type II</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">B. Second degree Type I (Wenckebach)</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Third degree (complete)</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: B.</strong> Mobitz Type I (Wenckebach) has progressive PR lengthening until a QRS is dropped. Type II has constant PR with sudden dropped beats.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: ECG Interpretation"
+         data-key-points="📋 Systematic Approach, 💗 Cardiac Rhythms, 🫀 Ischemia & Infarction, 🚧 Conduction Blocks, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, 1. Rate, 2. Rhythm, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

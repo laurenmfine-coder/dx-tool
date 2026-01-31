@@ -1,0 +1,195 @@
+/**
+ * DxSuite Mobile Enhanced Styles
+ * Optimized for iPhone 15/14/13, SE, and Android devices
+ * Add to any page: <link rel="stylesheet" href="/dx-mobile-enhanced.css">
+ */
+
+/* ============================================
+   SAFE AREA INSETS (iPhone Notch/Dynamic Island)
+   ============================================ */
+:root {
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-left: env(safe-area-inset-left, 0px);
+    --safe-area-right: env(safe-area-inset-right, 0px);
+}
+
+body {
+    padding-top: var(--safe-area-top);
+    padding-bottom: var(--safe-area-bottom);
+    padding-left: var(--safe-area-left);
+    padding-right: var(--safe-area-right);
+}
+
+/* Fixed headers need safe area */
+.nav, .header, [class*="nav"], [class*="header"] {
+    padding-top: max(1rem, var(--safe-area-top));
+}
+
+/* Fixed footers need safe area */
+.footer, [class*="footer"], .nav-row {
+    padding-bottom: max(1rem, var(--safe-area-bottom));
+}
+
+/* ============================================
+   TOUCH-FRIENDLY TAP TARGETS (44px minimum)
+   ============================================ */
+button, 
+.btn, 
+.option, 
+a.card,
+.nav-link,
+input[type="button"],
+input[type="submit"],
+[onclick] {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Larger tap targets for options in quizzes */
+.option, .answer-option, .choice {
+    padding: 1rem !important;
+    margin-bottom: 0.75rem;
+}
+
+/* ============================================
+   PREVENT iOS INPUT ZOOM (16px minimum)
+   ============================================ */
+input, textarea, select {
+    font-size: 16px !important;
+}
+
+/* ============================================
+   MOBILE BREAKPOINTS
+   ============================================ */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .container, .main, [class*="container"] {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Stack grids vertically */
+    .vitals, .grid, .cards, [class*="grid"] {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    }
+    
+    /* Larger text for readability */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .container, .main {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    
+    /* Single column layout */
+    .vitals, .grid, .cards {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Full width buttons */
+    .btn, button {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    /* Smaller headers */
+    .header h1, h1 {
+        font-size: 1.5rem;
+    }
+    
+    /* Hide secondary navigation on mobile */
+    .nav-secondary, .breadcrumb {
+        display: none;
+    }
+    
+    /* Stack navigation */
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* iPhone SE (375px) */
+@media (max-width: 375px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .option {
+        font-size: 0.9rem;
+        padding: 0.875rem !important;
+    }
+    
+    .vital {
+        padding: 0.5rem;
+    }
+    
+    .vital-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* ============================================
+   LANDSCAPE MODE FIXES
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        padding: 0.75rem;
+    }
+    
+    .hero, [class*="hero"] {
+        padding: 1rem;
+        min-height: auto;
+    }
+}
+
+/* ============================================
+   DARK MODE SUPPORT (iOS/Android)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-main: #121212;
+        --bg-card: #1e1e1e;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --border: #333333;
+    }
+}
+
+/* ============================================
+   REDUCE MOTION (Accessibility)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   PRINT STYLES (Hide interactive elements)
+   ============================================ */
+@media print {
+    .nav, .btn, button, .toggle, .peds-toggle {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: black;
+        background: white;
+    }
+}

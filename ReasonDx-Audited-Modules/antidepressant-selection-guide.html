@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Antidepressant Selection Guide</title>
+  <style>
+    :root{--primary:#6366F1;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6;--purple:#8B5CF6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0a1a1a,#1a2e2e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1050px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(99,102,241,0.1);border-radius:1rem;border:1px solid rgba(99,102,241,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(99,102,241,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(99,102,241,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--purple);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.med-card{background:rgba(0,0,0,0.3);border-radius:0.75rem;padding:1rem;margin:0.75rem 0;border-left:4px solid var(--secondary)}.med-card h4{color:var(--secondary);margin-bottom:0.5rem}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💊 Antidepressant Selection Guide</h1>
+      <p style="color:#9CA3AF">Classes • Side Effects • Special Populations • Decision Tool</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('ssri')">SSRIs</div>
+      <div class="nav-tab" onclick="showTab('other')">Other Classes</div>
+      <div class="nav-tab" onclick="showTab('selection')">Selection Guide</div>
+      <div class="nav-tab" onclick="showTab('safety')">Safety</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Antidepressant Classes</h2>
+        <div class="key-box">
+          <strong>First-line agents:</strong> SSRIs and SNRIs<br>
+          <strong>Response time:</strong> 2-4 weeks for initial effect; 6-8 weeks for full effect<br>
+          <strong>Adequate trial:</strong> Therapeutic dose for ≥6-8 weeks before declaring failure
+        </div>
+
+        <table>
+          <tr><th>Class</th><th>Mechanism</th><th>Examples</th></tr>
+          <tr><td><strong>SSRIs</strong></td><td>Selective serotonin reuptake inhibition</td><td>Sertraline, fluoxetine, escitalopram, paroxetine, citalopram</td></tr>
+          <tr><td><strong>SNRIs</strong></td><td>Serotonin + norepinephrine reuptake inhibition</td><td>Venlafaxine, duloxetine, desvenlafaxine</td></tr>
+          <tr><td><strong>Atypical</strong></td><td>Various mechanisms</td><td>Bupropion (NDRI), mirtazapine (α2 antagonist), trazodone</td></tr>
+          <tr><td><strong>TCAs</strong></td><td>NE + serotonin reuptake + receptor blockade</td><td>Amitriptyline, nortriptyline, imipramine</td></tr>
+          <tr><td><strong>MAOIs</strong></td><td>Monoamine oxidase inhibition</td><td>Phenelzine, tranylcypromine, selegiline patch</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>SSRI Side Effects: "SGAS"</strong><br>
+          <strong>S</strong>exual dysfunction • <strong>G</strong>I upset (nausea) • <strong>A</strong>ctivation (anxiety, insomnia) • <strong>S</strong>erotonin syndrome risk
+        </div>
+      </div>
+    </div>
+
+    <!-- SSRI -->
+    <div id="ssri" class="tab-content">
+      <div class="section">
+        <h2>💙 SSRIs - First Line</h2>
+        
+        <table>
+          <tr><th>Drug</th><th>Unique Features</th><th>Considerations</th></tr>
+          <tr>
+            <td><strong>Sertraline (Zoloft)</strong></td>
+            <td>Safest in cardiac disease; mild dopamine effect</td>
+            <td>Good first choice; can cause more GI upset initially</td>
+          </tr>
+          <tr>
+            <td><strong>Escitalopram (Lexapro)</strong></td>
+            <td>Most selective SSRI; fewest drug interactions</td>
+            <td>QTc prolongation at higher doses; citalopram has more QT risk</td>
+          </tr>
+          <tr>
+            <td><strong>Fluoxetine (Prozac)</strong></td>
+            <td>Long half-life (no taper needed); most activating</td>
+            <td>Strong CYP2D6 inhibitor (many drug interactions)</td>
+          </tr>
+          <tr>
+            <td><strong>Paroxetine (Paxil)</strong></td>
+            <td>Most anticholinergic SSRI; most sedating</td>
+            <td>Worst withdrawal; avoid in pregnancy (cardiac defects); weight gain</td>
+          </tr>
+          <tr>
+            <td><strong>Citalopram (Celexa)</strong></td>
+            <td>Clean pharmacology</td>
+            <td>QTc prolongation; max 40mg (20mg in elderly, hepatic impairment)</td>
+          </tr>
+          <tr>
+            <td><strong>Fluvoxamine (Luvox)</strong></td>
+            <td>Primarily for OCD</td>
+            <td>Many CYP interactions</td>
+          </tr>
+        </table>
+
+        <h3>SSRI Class Side Effects</h3>
+        <table>
+          <tr><th>Side Effect</th><th>Management</th></tr>
+          <tr><td><strong>Sexual dysfunction</strong></td><td>Switch agents, add bupropion, sildenafil, reduce dose, drug holiday</td></tr>
+          <tr><td><strong>GI upset</strong></td><td>Take with food; usually improves in 1-2 weeks</td></tr>
+          <tr><td><strong>Insomnia/activation</strong></td><td>Take in morning; may need short-term sleep aid</td></tr>
+          <tr><td><strong>Weight gain</strong></td><td>Switch to more weight-neutral agent (bupropion)</td></tr>
+          <tr><td><strong>Bleeding risk</strong></td><td>Caution with anticoagulants, NSAIDs</td></tr>
+          <tr><td><strong>Hyponatremia</strong></td><td>Check Na+ if elderly, diuretic use, symptoms</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>Discontinuation Syndrome:</strong> Flu-like symptoms, dizziness, paresthesias ("brain zaps"), irritability, insomnia. <strong>Worst with paroxetine (shortest half-life)</strong>. Prevent by tapering over 2-4 weeks. Fluoxetine rarely causes this (long half-life).
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER CLASSES -->
+    <div id="other" class="tab-content">
+      <div class="section">
+        <h2>📚 Other Antidepressant Classes</h2>
+
+        <div class="med-card">
+          <h4>SNRIs</h4>
+          <table>
+            <tr><th>Drug</th><th>Unique Features</th><th>Good For</th></tr>
+            <tr><td><strong>Venlafaxine (Effexor)</strong></td><td>SSRI at low dose, SNRI at higher dose; can increase BP</td><td>Depression + anxiety; chronic pain</td></tr>
+            <tr><td><strong>Duloxetine (Cymbalta)</strong></td><td>FDA approved for pain conditions</td><td>Depression + diabetic neuropathy, fibromyalgia, chronic pain</td></tr>
+            <tr><td><strong>Desvenlafaxine (Pristiq)</strong></td><td>Active metabolite of venlafaxine; fewer drug interactions</td><td>Depression</td></tr>
+          </table>
+        </div>
+
+        <div class="med-card">
+          <h4>Atypical Antidepressants</h4>
+          <table>
+            <tr><th>Drug</th><th>Mechanism</th><th>Key Points</th></tr>
+            <tr><td><strong>Bupropion (Wellbutrin)</strong></td><td>NDRI (norepinephrine-dopamine)</td><td>NO sexual dysfunction, NO weight gain; helps smoking cessation; LOWERS seizure threshold; avoid in eating disorders</td></tr>
+            <tr><td><strong>Mirtazapine (Remeron)</strong></td><td>α2 antagonist, 5-HT2/3 antagonist, H1 antagonist</td><td>SEDATING, increases appetite/weight; good for insomnia, elderly, poor appetite</td></tr>
+            <tr><td><strong>Trazodone</strong></td><td>Serotonin antagonist/reuptake inhibitor</td><td>Very sedating; used primarily for insomnia at low doses; priapism risk</td></tr>
+            <tr><td><strong>Vilazodone, Vortioxetine</strong></td><td>Serotonin modulation</td><td>Newer agents; possibly less sexual dysfunction</td></tr>
+          </table>
+        </div>
+
+        <div class="med-card">
+          <h4>TCAs (Tricyclic Antidepressants)</h4>
+          <p><strong>Examples:</strong> Amitriptyline, nortriptyline, imipramine, desipramine</p>
+          <p><strong>Side effects:</strong> Anticholinergic (dry mouth, constipation, urinary retention, confusion), orthostatic hypotension, cardiac conduction abnormalities, sedation, weight gain</p>
+          <div class="danger-box">
+            <strong>TCAs are lethal in overdose!</strong> Cardiac arrhythmias, seizures. Avoid in patients with suicide risk. Treatment: sodium bicarbonate for QRS widening.
+          </div>
+          <p><strong>Current uses:</strong> Neuropathic pain, migraine prophylaxis, insomnia, treatment-resistant depression</p>
+        </div>
+
+        <div class="med-card">
+          <h4>MAOIs</h4>
+          <p><strong>Examples:</strong> Phenelzine, tranylcypromine, selegiline patch</p>
+          <div class="danger-box">
+            <strong>Dietary restrictions:</strong> Must avoid tyramine-containing foods (aged cheese, cured meats, tap beer, soy sauce) → Hypertensive crisis<br>
+            <strong>Drug interactions:</strong> Serotonergic drugs → Serotonin syndrome; sympathomimetics → Hypertensive crisis<br>
+            <strong>Washout periods required</strong> when switching from/to other antidepressants
+          </div>
+          <p><strong>Current uses:</strong> Treatment-resistant depression, atypical depression</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELECTION -->
+    <div id="selection" class="tab-content">
+      <div class="section">
+        <h2>🎯 Selection by Patient Factors</h2>
+
+        <table>
+          <tr><th>Clinical Scenario</th><th>Preferred Agent(s)</th><th>Rationale</th></tr>
+          <tr><td>First episode, uncomplicated</td><td>Sertraline, escitalopram</td><td>Best tolerability, efficacy, safety profile</td></tr>
+          <tr><td>Comorbid anxiety</td><td>SSRIs, SNRIs</td><td>Dual indication</td></tr>
+          <tr><td>Chronic pain, neuropathy</td><td>Duloxetine, venlafaxine, TCAs</td><td>Noradrenergic effect helps pain</td></tr>
+          <tr><td>Insomnia prominent</td><td>Mirtazapine, trazodone (adjunct)</td><td>Sedating properties</td></tr>
+          <tr><td>Weight concerns</td><td>Bupropion</td><td>Weight-neutral or causes weight loss</td></tr>
+          <tr><td>Sexual dysfunction concerns</td><td>Bupropion, mirtazapine</td><td>Lower rates of sexual side effects</td></tr>
+          <tr><td>Fatigue/low energy</td><td>Bupropion, fluoxetine</td><td>Activating properties</td></tr>
+          <tr><td>Smoking cessation</td><td>Bupropion</td><td>FDA approved for both</td></tr>
+          <tr><td>Cardiac disease</td><td>Sertraline</td><td>Best cardiac safety data</td></tr>
+          <tr><td>Elderly</td><td>Sertraline, escitalopram, mirtazapine</td><td>Fewer interactions, well tolerated</td></tr>
+          <tr><td>Pregnancy</td><td>Sertraline</td><td>Most safety data; avoid paroxetine</td></tr>
+          <tr><td>Poor appetite/weight loss</td><td>Mirtazapine</td><td>Increases appetite</td></tr>
+          <tr><td>Seizure disorder</td><td>Avoid bupropion</td><td>Lowers seizure threshold</td></tr>
+          <tr><td>Eating disorder</td><td>Avoid bupropion</td><td>Increased seizure risk in purging</td></tr>
+          <tr><td>Bipolar depression</td><td>Use mood stabilizer first; add with caution</td><td>Antidepressants can trigger mania</td></tr>
+        </table>
+
+        <h3>After First Agent Fails</h3>
+        <div class="info-box">
+          <strong>Options after inadequate response:</strong>
+          <ol>
+            <li><strong>Optimize:</strong> Ensure adequate dose and duration</li>
+            <li><strong>Switch:</strong> To different SSRI or different class</li>
+            <li><strong>Augment:</strong> Add second agent (aripiprazole, lithium, bupropion, thyroid, atypical antipsychotic)</li>
+            <li><strong>Combine:</strong> Add second antidepressant (e.g., SSRI + bupropion or mirtazapine)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAFETY -->
+    <div id="safety" class="tab-content">
+      <div class="section">
+        <h2>⚠️ Safety Concerns</h2>
+
+        <div class="danger-box">
+          <strong>Serotonin Syndrome</strong><br>
+          <strong>Cause:</strong> Excess serotonergic activity (usually from drug combinations)<br>
+          <strong>Triad:</strong> Mental status changes + Autonomic instability + Neuromuscular abnormalities<br>
+          <strong>Features:</strong> Agitation, hyperthermia, diaphoresis, tachycardia, hypertension, tremor, hyperreflexia, clonus, rigidity<br>
+          <strong>Treatment:</strong> Stop offending agents, supportive care, cyproheptadine, benzodiazepines for agitation
+        </div>
+
+        <h3>Black Box Warning</h3>
+        <div class="key-box">
+          <strong>All antidepressants carry FDA black box warning:</strong><br>
+          Increased risk of suicidal thinking and behavior in children, adolescents, and young adults (≤24 years) during initial treatment.<br><br>
+          <strong>Monitor closely:</strong> Weekly for first 4 weeks, then biweekly for next 4 weeks, then at 12 weeks.
+        </div>
+
+        <h3>Drug Interactions</h3>
+        <table>
+          <tr><th>Combination</th><th>Risk</th></tr>
+          <tr><td>SSRI/SNRI + MAOI</td><td>Serotonin syndrome (contraindicated)</td></tr>
+          <tr><td>SSRI + triptans</td><td>Serotonin syndrome (use cautiously)</td></tr>
+          <tr><td>SSRI + tramadol</td><td>Serotonin syndrome; seizures</td></tr>
+          <tr><td>SSRI + anticoagulants/NSAIDs</td><td>Increased bleeding risk</td></tr>
+          <tr><td>Fluoxetine/paroxetine + CYP2D6 substrates</td><td>Increased drug levels (strong inhibitors)</td></tr>
+          <tr><td>Bupropion + stimulants</td><td>Increased seizure risk</td></tr>
+        </table>
+
+        <h3>Pregnancy Considerations</h3>
+        <div class="info-box">
+          <strong>Safest options:</strong> Sertraline (most data)<br>
+          <strong>Avoid:</strong> Paroxetine (cardiac defects)<br>
+          <strong>Third trimester exposure:</strong> Risk of neonatal adaptation syndrome (jitteriness, irritability, respiratory issues)
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://psychiatry.org/psychiatrists/practice/clinical-practice-guidelines" target="_blank">🔗 APA Depression Guidelines</a>
+        </div>
+        <h3>Key Trials</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3495145/" target="_blank">🔗 STAR*D Trial - PMC3495145</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.nimh.nih.gov/health/topics/mental-health-medications" target="_blank">🔗 NIMH Mental Health Medications</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on APA guidelines and STAR*D trial.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Which antidepressant is BEST for a patient with depression, chronic pain, and diabetic neuropathy?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Bupropion</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Duloxetine</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Fluoxetine</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Mirtazapine</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Duloxetine (SNRI) is FDA-approved for depression, diabetic neuropathy, fibromyalgia, and chronic pain. The noradrenergic component helps with pain conditions.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> A patient on an SSRI develops sexual dysfunction. Which switch would most likely resolve this?</p>
+          <div class="quiz-option" onclick="check(this,true,'q2')">A. Bupropion</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">B. Paroxetine</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Venlafaxine</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Citalopram</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: A.</strong> Bupropion has the lowest rate of sexual dysfunction among antidepressants (it's not serotonergic). It works via norepinephrine and dopamine. Paroxetine has the highest rate of sexual side effects.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> Which antidepressant should be AVOIDED in a patient with an eating disorder and purging behavior?</p>
+          <div class="quiz-option" onclick="check(this,true,'q3')">A. Bupropion</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Sertraline</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Escitalopram</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. Mirtazapine</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: A.</strong> Bupropion lowers the seizure threshold and is contraindicated in patients with bulimia/purging behaviors due to increased seizure risk from electrolyte abnormalities.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> A patient on phenelzine (MAOI) eats aged cheese and develops severe hypertension, headache, and diaphoresis. What happened?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Serotonin syndrome</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. Tyramine reaction (hypertensive crisis)</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Allergic reaction</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Drug overdose</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> MAOIs prevent tyramine breakdown. Tyramine in aged foods causes norepinephrine release → severe hypertension. This is why strict dietary restrictions are required with MAOIs.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which SSRI has the longest half-life and typically does NOT require tapering?</p>
+          <div class="quiz-option" onclick="check(this,true,'q5')">A. Fluoxetine</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Paroxetine</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Sertraline</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. Escitalopram</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: A.</strong> Fluoxetine has a half-life of 4-6 days (active metabolite even longer). This means it self-tapers and rarely causes discontinuation syndrome. Paroxetine has the shortest half-life and worst discontinuation syndrome.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Antidepressant Selection Guide"
+         data-key-points="🎯 Antidepressant Classes, 💙 SSRIs - First Line, 📚 Other Antidepressant Classes, 🎯 Selection by Patient Factors, ⚠️ Safety Concerns, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, SSRI Class Side Effects, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

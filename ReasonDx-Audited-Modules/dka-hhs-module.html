@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: DKA vs HHS</title>
+  <style>
+    :root{--primary:#9333EA;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(147,51,234,0.1);border-radius:1rem;border:1px solid rgba(147,51,234,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(147,51,234,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(147,51,234,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(147,51,234,0.15);border:2px dashed var(--primary);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🩺 DKA vs HHS</h1>
+      <p style="color:#9CA3AF">Diabetic Emergencies • Fluid Resuscitation • Insulin Protocol</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('comparison')">DKA vs HHS</div>
+      <div class="nav-tab" onclick="showTab('fluids')">Fluid Management</div>
+      <div class="nav-tab" onclick="showTab('insulin')">Insulin & K+</div>
+      <div class="nav-tab" onclick="showTab('resolution')">Resolution</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <div id="comparison" class="tab-content active">
+      <div class="section">
+        <h2>⚖️ DKA vs HHS Comparison</h2>
+        
+        <table>
+          <tr><th>Feature</th><th>DKA</th><th>HHS</th></tr>
+          <tr><td><strong>Patient type</strong></td><td>Type 1 (or Type 2 in stress)</td><td>Type 2 (elderly)</td></tr>
+          <tr><td><strong>Glucose</strong></td><td>>250 mg/dL</td><td>>600 mg/dL</td></tr>
+          <tr><td><strong>pH</strong></td><td><7.3</td><td>>7.3</td></tr>
+          <tr><td><strong>Bicarbonate</strong></td><td><18 mEq/L</td><td>>18 mEq/L</td></tr>
+          <tr><td><strong>Ketones</strong></td><td>Positive (moderate-large)</td><td>None or trace</td></tr>
+          <tr><td><strong>Anion gap</strong></td><td>Elevated (>12)</td><td>Normal or mildly elevated</td></tr>
+          <tr><td><strong>Osmolality</strong></td><td>Variable</td><td>>320 mOsm/kg</td></tr>
+          <tr><td><strong>Mental status</strong></td><td>Alert to stupor</td><td>Often obtunded/coma</td></tr>
+          <tr><td><strong>Dehydration</strong></td><td>3-6 L deficit</td><td>8-10 L deficit</td></tr>
+          <tr><td><strong>Mortality</strong></td><td><1% (with treatment)</td><td>5-20%</td></tr>
+        </table>
+
+        <div class="key-box">
+          <strong>Key distinction:</strong><br>
+          DKA = Ketoacidosis (insulin deficiency → lipolysis → ketones)<br>
+          HHS = Hyperosmolar state (enough insulin to prevent ketosis, not enough to prevent hyperglycemia)
+        </div>
+
+        <h3>DKA Severity</h3>
+        <table>
+          <tr><th>Severity</th><th>pH</th><th>HCO3</th><th>Mental Status</th></tr>
+          <tr><td>Mild</td><td>7.25-7.30</td><td>15-18</td><td>Alert</td></tr>
+          <tr><td>Moderate</td><td>7.00-7.24</td><td>10-14</td><td>Drowsy</td></tr>
+          <tr><td>Severe</td><td><7.00</td><td><10</td><td>Stupor/Coma</td></tr>
+        </table>
+
+        <h3>Common Precipitants (5 I's)</h3>
+        <div class="mnemonic">
+          <strong>I</strong>nfection (most common - UTI, pneumonia)<br>
+          <strong>I</strong>nsulin non-compliance/insufficiency<br>
+          <strong>I</strong>nfarction (MI, stroke)<br>
+          <strong>I</strong>ntoxication (cocaine, alcohol)<br>
+          <strong>I</strong>atrogenic (steroids, SGLT2i in DKA)
+        </div>
+      </div>
+    </div>
+
+    <div id="fluids" class="tab-content">
+      <div class="section">
+        <h2>💧 Fluid Management</h2>
+
+        <div class="danger-box">
+          <strong>Fluids are the FIRST priority!</strong><br>
+          Start IV fluids immediately - don't wait for labs
+        </div>
+
+        <h3>Initial Resuscitation</h3>
+        <div class="key-box">
+          <strong>Step 1:</strong> 0.9% NS bolus 1-1.5 L in first hour<br>
+          <strong>Then assess:</strong> Corrected Na and volume status
+        </div>
+
+        <h3>Subsequent Fluids (250-500 mL/hr)</h3>
+        <table>
+          <tr><th>Corrected Na</th><th>Fluid Choice</th></tr>
+          <tr><td>Low or normal</td><td>0.9% NS</td></tr>
+          <tr><td>High (>145)</td><td>0.45% NS</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Corrected Na = Measured Na + 1.6 × [(Glucose - 100)/100]</strong><br>
+          (Add 1.6 mEq/L to Na for every 100 mg/dL glucose above 100)
+        </div>
+
+        <h3>When Glucose reaches 200-250 (DKA) or 300 (HHS)</h3>
+        <div class="success-box">
+          Switch to <strong>D5 + 0.45% NS</strong> to prevent hypoglycemia while continuing insulin
+        </div>
+
+        <h3>Fluid Deficit Estimates</h3>
+        <table>
+          <tr><th>Condition</th><th>Typical Deficit</th></tr>
+          <tr><td>DKA</td><td>3-6 liters (~100 mL/kg)</td></tr>
+          <tr><td>HHS</td><td>8-10 liters (~100-200 mL/kg)</td></tr>
+        </table>
+        <p>Replace 50% in first 8-12 hours, remainder over 24 hours</p>
+      </div>
+    </div>
+
+    <div id="insulin" class="tab-content">
+      <div class="section">
+        <h2>💉 Insulin & Potassium</h2>
+
+        <h3>Insulin Protocol</h3>
+        <div class="key-box">
+          <strong>Regular insulin IV infusion:</strong><br>
+          Bolus: 0.1 units/kg IV<br>
+          Drip: 0.1 units/kg/hr (or 0.14 units/kg/hr without bolus)<br><br>
+          <strong>Goal:</strong> Glucose decrease 50-70 mg/dL per hour
+        </div>
+
+        <table>
+          <tr><th>Glucose Drop</th><th>Action</th></tr>
+          <tr><td><50 mg/dL/hr</td><td>Double insulin rate</td></tr>
+          <tr><td>50-70 mg/dL/hr</td><td>Continue same rate</td></tr>
+          <tr><td>>70 mg/dL/hr</td><td>Decrease rate by half</td></tr>
+        </table>
+
+        <h3>Potassium Management</h3>
+        <div class="danger-box">
+          <strong>CHECK K+ BEFORE INSULIN!</strong><br>
+          Insulin drives K+ into cells → can cause fatal hypokalemia
+        </div>
+
+        <table>
+          <tr><th>Serum K+</th><th>Action</th></tr>
+          <tr><td><strong><3.3 mEq/L</strong></td><td>HOLD insulin, give 20-40 mEq K+/hr until K+ >3.3</td></tr>
+          <tr><td><strong>3.3-5.3 mEq/L</strong></td><td>Give insulin + 20-40 mEq K+ per liter of fluid</td></tr>
+          <tr><td><strong>>5.3 mEq/L</strong></td><td>Give insulin, hold K+, recheck q2h</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Remember:</strong> Initial K+ may be normal or high despite total body K+ depletion (acidosis shifts K+ out of cells)
+        </div>
+
+        <h3>Bicarbonate</h3>
+        <div class="key-box">
+          <strong>Only give if pH <6.9</strong><br>
+          100 mEq NaHCO3 in 400 mL water over 2 hours<br>
+          Routine bicarb is NOT recommended (may worsen outcomes)
+        </div>
+      </div>
+    </div>
+
+    <div id="resolution" class="tab-content">
+      <div class="section">
+        <h2>✅ Resolution Criteria</h2>
+
+        <h3>DKA Resolution (need ALL)</h3>
+        <div class="success-box">
+          <ul>
+            <li>Glucose <200 mg/dL</li>
+            <li>pH >7.3</li>
+            <li>Bicarbonate ≥15 mEq/L</li>
+            <li>Anion gap ≤12</li>
+          </ul>
+        </div>
+
+        <h3>HHS Resolution</h3>
+        <div class="success-box">
+          <ul>
+            <li>Osmolality <315 mOsm/kg</li>
+            <li>Patient alert and oriented</li>
+            <li>Glucose <300 mg/dL</li>
+          </ul>
+        </div>
+
+        <h3>Transition to Subcutaneous Insulin</h3>
+        <div class="key-box">
+          <strong>When resolved and eating:</strong>
+          <ol>
+            <li>Give subcutaneous basal insulin</li>
+            <li>Continue IV insulin for 1-2 hours AFTER subQ dose (overlap)</li>
+            <li>Then discontinue IV drip</li>
+          </ol>
+          <strong>Dose:</strong> ~0.5-0.8 units/kg/day total; 50% basal, 50% bolus
+        </div>
+
+        <h3>Complications to Monitor</h3>
+        <table>
+          <tr><th>Complication</th><th>Prevention/Management</th></tr>
+          <tr><td><strong>Hypokalemia</strong></td><td>Replace K+ aggressively; monitor q2-4h</td></tr>
+          <tr><td><strong>Hypoglycemia</strong></td><td>Add D5 when glucose 200-250</td></tr>
+          <tr><td><strong>Cerebral edema</strong></td><td>Avoid rapid osmolality changes (more common in children)</td></tr>
+          <tr><td><strong>Pulmonary edema</strong></td><td>Monitor for fluid overload, especially in elderly/HF</td></tr>
+          <tr><td><strong>Hyperchloremic acidosis</strong></td><td>From NS; may persist after gap closes - monitor</td></tr>
+        </table>
+      </div>
+    </div>
+
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines (PMC Full Text)</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2699725/" target="_blank">🔗 ADA Hyperglycemic Crises Consensus (PMC2699725)</a>
+          <div class="citation">Kitabchi AE, et al. Diabetes Care. 2009;32:1335-43</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://diabetes.org/" target="_blank">🔗 American Diabetes Association</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ADA Consensus Statement.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Patient has glucose 850, pH 7.35, HCO3 22, minimal ketones. Diagnosis?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. DKA</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. HHS</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Alcoholic ketoacidosis</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> HHS has very high glucose (>600), normal pH (>7.3), normal bicarb (>18), and minimal ketones. DKA would have acidosis and significant ketones.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> Initial K+ is 2.9 mEq/L in DKA. What should you do?</p>
+          <div class="quiz-option" onclick="check(this,false,'q2')">A. Start insulin immediately</div>
+          <div class="quiz-option" onclick="check(this,true,'q2')">B. Hold insulin, give K+ until >3.3</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Give insulin and K+ together</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: B.</strong> If K+ <3.3, HOLD insulin and replace potassium first. Insulin will drive K+ into cells and can cause fatal hypokalemia.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> When should you add dextrose to IV fluids in DKA?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. Immediately</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. When glucose reaches 200-250 mg/dL</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. When DKA resolves</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> Add D5 when glucose reaches 200-250 to prevent hypoglycemia while continuing insulin to resolve ketoacidosis.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> What is the target rate of glucose decline in DKA?</p>
+          <div class="quiz-option" onclick="check(this,true,'q4')">A. 50-70 mg/dL per hour</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">B. 100-150 mg/dL per hour</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. <50 mg/dL per hour</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: A.</strong> Goal is 50-70 mg/dL/hr. If dropping <50, increase insulin; if >70, decrease insulin.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> When transitioning from IV to subQ insulin, what's critical?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. Stop IV insulin immediately when giving subQ</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">B. Overlap IV and subQ insulin for 1-2 hours</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Give subQ insulin only at mealtimes</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: B.</strong> Continue IV insulin for 1-2 hours AFTER giving subQ basal insulin to allow overlap. Stopping IV too soon causes rebound DKA.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: DKA vs HHS"
+         data-key-points="⚖️ DKA vs HHS Comparison, 💧 Fluid Management, 💉 Insulin & Potassium, ✅ Resolution Criteria, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, DKA Severity, Common Precipitants (5 I's), clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

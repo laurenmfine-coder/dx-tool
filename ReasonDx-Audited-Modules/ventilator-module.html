@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Ventilator Management</title>
+  <style>
+    :root { --primary: #0891B2; --secondary: #6366F1; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #0a1a2e 0%, #1a2e3e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(8, 145, 178, 0.1); border-radius: 1rem; border: 1px solid rgba(8, 145, 178, 0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; font-size: 0.85rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .section h3 { color: var(--accent); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+    .key-box { background: rgba(8, 145, 178, 0.15); border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(8, 145, 178, 0.2); color: var(--primary); }
+    ul { padding-left: 1.25rem; margin: 0.5rem 0; }
+    li { margin: 0.3rem 0; }
+    .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mode-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(8,145,178,0.3); border-radius: 0.75rem; padding: 1rem; margin: 0.75rem 0; }
+    .mode-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; }
+    .quiz-option { display: block; padding: 0.5rem; margin: 0.3rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; }
+    .quiz-option:hover { background: rgba(8, 145, 178, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🫁 Ventilator Management</h1>
+      <p style="color: #9CA3AF;">Modes • Initial Settings • Troubleshooting • Weaning</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('basics')">Basics</div>
+      <div class="nav-tab" onclick="showTab('modes')">Modes</div>
+      <div class="nav-tab" onclick="showTab('settings')">Initial Settings</div>
+      <div class="nav-tab" onclick="showTab('trouble')">Troubleshooting</div>
+      <div class="nav-tab" onclick="showTab('weaning')">Weaning</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- BASICS -->
+    <div id="basics" class="tab-content active">
+      <div class="section">
+        <h2>📚 Ventilator Basics</h2>
+        <div class="key-box">
+          <strong>Two Key Variables:</strong><br>
+          <strong>Oxygenation</strong> (PaO2/SpO2) → Controlled by FiO2 and PEEP<br>
+          <strong>Ventilation</strong> (PaCO2) → Controlled by Minute Ventilation (RR × Vt)
+        </div>
+        <h3>Key Parameters</h3>
+        <table>
+          <tr><th>Parameter</th><th>Definition</th><th>Typical Range</th></tr>
+          <tr><td><strong>Tidal Volume (Vt)</strong></td><td>Volume per breath</td><td>6-8 mL/kg IBW</td></tr>
+          <tr><td><strong>Respiratory Rate (RR)</strong></td><td>Breaths per minute</td><td>12-20/min</td></tr>
+          <tr><td><strong>FiO2</strong></td><td>Fraction of inspired oxygen</td><td>21-100%</td></tr>
+          <tr><td><strong>PEEP</strong></td><td>Positive end-expiratory pressure</td><td>5-20 cmH2O</td></tr>
+          <tr><td><strong>Peak Pressure</strong></td><td>Maximum airway pressure</td><td><35 cmH2O</td></tr>
+          <tr><td><strong>Plateau Pressure</strong></td><td>Pressure at end-inspiration (no flow)</td><td><30 cmH2O</td></tr>
+        </table>
+        <h3>Ideal Body Weight Calculation</h3>
+        <div class="info-box">
+          <strong>Male:</strong> 50 + 2.3 × (height in inches - 60)<br>
+          <strong>Female:</strong> 45.5 + 2.3 × (height in inches - 60)<br>
+          <em>Use IBW for Vt calculations, NOT actual weight!</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODES -->
+    <div id="modes" class="tab-content">
+      <div class="section">
+        <h2>⚙️ Ventilator Modes</h2>
+        
+        <div class="mode-card">
+          <h4>AC/VC (Assist-Control / Volume Control)</h4>
+          <ul>
+            <li><strong>Set:</strong> Vt, RR, FiO2, PEEP</li>
+            <li>Delivers set Vt with each breath</li>
+            <li>Patient can trigger additional breaths (all get full Vt)</li>
+            <li><strong>Pro:</strong> Guaranteed minute ventilation</li>
+            <li><strong>Con:</strong> Variable pressures; risk of breath stacking</li>
+          </ul>
+        </div>
+
+        <div class="mode-card">
+          <h4>AC/PC (Assist-Control / Pressure Control)</h4>
+          <ul>
+            <li><strong>Set:</strong> Inspiratory pressure, RR, FiO2, PEEP, I-time</li>
+            <li>Delivers set pressure; Vt varies with compliance</li>
+            <li><strong>Pro:</strong> Limits airway pressure</li>
+            <li><strong>Con:</strong> Variable Vt; need to monitor closely</li>
+          </ul>
+        </div>
+
+        <div class="mode-card">
+          <h4>SIMV (Synchronized Intermittent Mandatory Ventilation)</h4>
+          <ul>
+            <li>Set number of mandatory breaths; patient can take spontaneous breaths between</li>
+            <li>Spontaneous breaths only get pressure support (if set)</li>
+            <li><strong>Use:</strong> Sometimes for weaning (less common now)</li>
+          </ul>
+        </div>
+
+        <div class="mode-card">
+          <h4>PSV (Pressure Support Ventilation)</h4>
+          <ul>
+            <li><strong>Set:</strong> Pressure support level, PEEP, FiO2</li>
+            <li>Patient initiates ALL breaths (no backup rate)</li>
+            <li>Each breath gets pressure boost</li>
+            <li><strong>Use:</strong> Weaning, spontaneous breathing trials</li>
+            <li><strong>Caution:</strong> Requires intact respiratory drive</li>
+          </ul>
+        </div>
+
+        <div class="mode-card">
+          <h4>PRVC (Pressure-Regulated Volume Control)</h4>
+          <ul>
+            <li>Hybrid mode: Targets Vt by adjusting pressure breath-to-breath</li>
+            <li>Combines benefits of volume and pressure control</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settings" class="tab-content">
+      <div class="section">
+        <h2>📊 Initial Settings</h2>
+
+        <h3>Standard Initial Settings</h3>
+        <table>
+          <tr><th>Parameter</th><th>Initial Setting</th></tr>
+          <tr><td>Mode</td><td>AC/VC (most common starting point)</td></tr>
+          <tr><td>Tidal Volume</td><td>6-8 mL/kg IBW</td></tr>
+          <tr><td>Rate</td><td>14-16 breaths/min</td></tr>
+          <tr><td>FiO2</td><td>100% initially, wean to SpO2 92-96%</td></tr>
+          <tr><td>PEEP</td><td>5 cmH2O (higher in ARDS)</td></tr>
+          <tr><td>I:E ratio</td><td>1:2 or 1:3</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <h3 style="color: #f87171;">🫁 ARDS - Lung Protective Ventilation</h3>
+          <ul>
+            <li><strong>Low Vt:</strong> 4-6 mL/kg IBW</li>
+            <li><strong>Plateau pressure:</strong> ≤30 cmH2O</li>
+            <li><strong>Higher PEEP:</strong> Use ARDSNet tables</li>
+            <li><strong>Permissive hypercapnia:</strong> Accept pH ≥7.20</li>
+            <li><strong>Consider proning</strong> if P/F ratio <150</li>
+          </ul>
+        </div>
+
+        <h3>Adjusting Based on ABG</h3>
+        <table>
+          <tr><th>Problem</th><th>Solution</th></tr>
+          <tr><td>PaO2 too low</td><td>↑ FiO2 or ↑ PEEP</td></tr>
+          <tr><td>PaO2 too high</td><td>↓ FiO2 first, then ↓ PEEP</td></tr>
+          <tr><td>PaCO2 too high (acidosis)</td><td>↑ RR or ↑ Vt</td></tr>
+          <tr><td>PaCO2 too low (alkalosis)</td><td>↓ RR or ↓ Vt</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>💡 "Oxygenation = FiO2 & PEEP | Ventilation = RR & Vt"</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <div id="trouble" class="tab-content">
+      <div class="section">
+        <h2>⚠️ Troubleshooting</h2>
+
+        <div class="danger-box">
+          <h3 style="color: #f87171;">🚨 High Peak Pressure Alarm</h3>
+          <p><strong>Peak - Plateau spread tells you where the problem is:</strong></p>
+          <ul>
+            <li><strong>High Peak, Normal Plateau:</strong> Airway resistance problem
+              <ul>
+                <li>Kinked/obstructed ETT</li>
+                <li>Bronchospasm</li>
+                <li>Secretions</li>
+                <li>Biting on tube</li>
+              </ul>
+            </li>
+            <li><strong>High Peak AND High Plateau:</strong> Compliance problem
+              <ul>
+                <li>Pneumothorax</li>
+                <li>Mainstem intubation</li>
+                <li>Pulmonary edema</li>
+                <li>ARDS progression</li>
+                <li>Abdominal distension</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mnemonic">
+          <strong>💡 "DOPE" - Sudden Deterioration</strong><br>
+          <strong>D</strong>isplacement (of ETT) • <strong>O</strong>bstruction (secretions, kink)<br>
+          <strong>P</strong>neumothorax • <strong>E</strong>quipment failure
+        </div>
+
+        <h3>Low Minute Ventilation Alarm</h3>
+        <ul>
+          <li>Patient not triggering (over-sedated, weak)</li>
+          <li>Large cuff leak</li>
+          <li>Circuit disconnect</li>
+        </ul>
+
+        <h3>Auto-PEEP (Breath Stacking)</h3>
+        <div class="info-box">
+          <strong>Cause:</strong> Incomplete exhalation (COPD, asthma, high RR)<br>
+          <strong>Signs:</strong> High peak pressure, hemodynamic instability<br>
+          <strong>Treatment:</strong> ↓ RR, ↓ Vt, ↑ expiratory time, treat bronchospasm
+        </div>
+      </div>
+    </div>
+
+    <!-- WEANING -->
+    <div id="weaning" class="tab-content">
+      <div class="section">
+        <h2>🔓 Liberation from Ventilator</h2>
+
+        <h3>Readiness Criteria</h3>
+        <div class="success-box">
+          <ul>
+            <li>Underlying cause improving/resolved</li>
+            <li>FiO2 ≤40%, PEEP ≤8</li>
+            <li>Hemodynamically stable (minimal vasopressors)</li>
+            <li>Adequate mental status (follows commands)</li>
+            <li>Able to protect airway</li>
+            <li>Manageable secretions</li>
+          </ul>
+        </div>
+
+        <h3>Spontaneous Breathing Trial (SBT)</h3>
+        <div class="info-box">
+          <strong>Methods:</strong>
+          <ul>
+            <li>T-piece trial (no vent support)</li>
+            <li>Low PSV (5-8 cmH2O) + PEEP 5</li>
+            <li>CPAP only</li>
+          </ul>
+          <strong>Duration:</strong> 30-120 minutes<br>
+          <strong>Pass criteria:</strong> Tolerates without distress, RR <35, SpO2 >90%, stable HR/BP
+        </div>
+
+        <h3>Rapid Shallow Breathing Index (RSBI)</h3>
+        <div class="key-box">
+          <strong>RSBI = RR / Vt (in liters)</strong><br>
+          <ul>
+            <li><strong><105:</strong> Likely to wean successfully</li>
+            <li><strong>>105:</strong> High risk of weaning failure</li>
+          </ul>
+        </div>
+
+        <h3>SBT Failure Signs</h3>
+        <ul>
+          <li>RR >35 or <8</li>
+          <li>SpO2 <90%</li>
+          <li>HR increase >20% or >140</li>
+          <li>Systolic BP <90 or >180</li>
+          <li>Anxiety, diaphoresis, accessory muscle use</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Key Trials</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4424163/" target="_blank">🔗 ARDSNet Low Tidal Volume Strategy</a>
+          <div class="citation">ARDS Network. N Engl J Med. 2000;342:1301-8</div>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK448186/" target="_blank">🔗 NCBI Bookshelf - Mechanical Ventilation</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on ARDSNet protocols and critical care standards.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>📝 Quiz</h2>
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> To improve oxygenation, you should adjust:</p>
+          <div class="quiz-option" onclick="checkQ('q1',this,true)">A. FiO2 and PEEP</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">B. RR and Vt</div>
+          <div class="quiz-option" onclick="checkQ('q1',this,false)">C. I:E ratio only</div>
+          <div id="exp-q1" class="explanation">Oxygenation = FiO2 + PEEP. Ventilation (CO2) = RR × Vt (minute ventilation).</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> In ARDS, target tidal volume is:</p>
+          <div class="quiz-option" onclick="checkQ('q2',this,true)">A. 4-6 mL/kg IBW (lung protective)</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">B. 8-10 mL/kg IBW</div>
+          <div class="quiz-option" onclick="checkQ('q2',this,false)">C. 10-12 mL/kg actual body weight</div>
+          <div id="exp-q2" class="explanation">ARDS requires lung-protective ventilation: Vt 4-6 mL/kg IBW, plateau pressure ≤30. Higher volumes cause VILI.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> High peak pressure with NORMAL plateau pressure suggests:</p>
+          <div class="quiz-option" onclick="checkQ('q3',this,true)">A. Airway resistance (secretions, bronchospasm, kinked tube)</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">B. Decreased lung compliance (pneumothorax, ARDS)</div>
+          <div class="quiz-option" onclick="checkQ('q3',this,false)">C. Ventilator malfunction</div>
+          <div id="exp-q3" class="explanation">Peak-plateau gradient = airway resistance. High peak + high plateau = compliance problem. Suction, check ETT, treat bronchospasm.</div>
+        </div>
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> An RSBI <105 suggests:</p>
+          <div class="quiz-option" onclick="checkQ('q4',this,true)">A. Likely successful extubation</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">B. High risk of weaning failure</div>
+          <div class="quiz-option" onclick="checkQ('q4',this,false)">C. Need for tracheostomy</div>
+          <div id="exp-q4" class="explanation">RSBI (RR/Vt) <105 predicts successful weaning. >105 suggests high risk of failure.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(id, el, correct) {
+      const s = el.closest('.quiz-section');
+      s.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) s.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      document.getElementById('exp-' + id).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Ventilator Management"
+         data-key-points="📚 Ventilator Basics, ⚙️ Ventilator Modes, 📊 Initial Settings, ⚠️ Troubleshooting, 🔓 Liberation from Ventilator, 📚 Open-Access Learning Resources, 📝 Quiz, Key Parameters, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

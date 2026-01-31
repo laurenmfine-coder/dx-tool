@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FHR Tracing Interpreter | ReasonDx Interactive Tool</title>
+  <style>
+    :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --primary: #E91E63; --success: #4CAF50; --danger: #F44336; --warning: #FF9800; --info: #2196F3; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(233,30,99,0.2), rgba(156,39,176,0.2)); border-radius: 1rem; border: 1px solid rgba(233,30,99,0.3); }
+    header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .panel h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem; }
+    .panel h3 { color: var(--warning); margin: 1rem 0 0.5rem; font-size: 1rem; }
+    .input-group { margin-bottom: 1rem; }
+    .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--muted); }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .radio-option { padding: 0.6rem 1rem; background: rgba(255,255,255,0.05); border: 2px solid var(--border); border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
+    .radio-option:hover { border-color: var(--primary); }
+    .radio-option.selected { border-color: var(--primary); background: rgba(233,30,99,0.2); }
+    .radio-option input { display: none; }
+    .result-panel { background: linear-gradient(135deg, rgba(33,150,243,0.1), rgba(156,39,176,0.1)); border: 2px solid var(--info); border-radius: 1rem; padding: 1.5rem; margin-top: 1.5rem; }
+    .result-panel.cat1 { border-color: var(--success); background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(76,175,80,0.05)); }
+    .result-panel.cat2 { border-color: var(--warning); background: linear-gradient(135deg, rgba(255,152,0,0.15), rgba(255,152,0,0.05)); }
+    .result-panel.cat3 { border-color: var(--danger); background: linear-gradient(135deg, rgba(244,67,54,0.15), rgba(244,67,54,0.05)); }
+    .category-badge { display: inline-block; padding: 0.5rem 1.5rem; border-radius: 2rem; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; }
+    .cat1 .category-badge { background: var(--success); color: white; }
+    .cat2 .category-badge { background: var(--warning); color: black; }
+    .cat3 .category-badge { background: var(--danger); color: white; }
+    .management-box { background: rgba(0,0,0,0.2); border-radius: 0.5rem; padding: 1rem; margin-top: 1rem; }
+    .management-box h4 { color: var(--info); margin-bottom: 0.5rem; }
+    ul { padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; }
+    .teaching-panel { background: rgba(156,39,176,0.1); border: 1px solid rgba(156,39,176,0.3); border-radius: 1rem; padding: 1.5rem; margin-top: 1.5rem; }
+    .teaching-panel h3 { color: #CE93D8; margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: rgba(233,30,99,0.2); color: var(--primary); }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #C2185B; }
+    .hidden { display: none; }
+    .key-box { background: rgba(255,152,0,0.15); border-left: 4px solid var(--warning); padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; margin: 1rem 0; }
+    .danger-box { background: rgba(244,67,54,0.15); border-left: 4px solid var(--danger); padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Fetal Heart Rate Tracing Interpreter</h1>
+      <p class="subtitle">NICHD 3-Tier Classification System</p>
+    </header>
+
+    <!-- TEACHING SECTION -->
+    <div class="teaching-panel">
+      <h3>📚 Quick Reference: FHR Components</h3>
+      <table>
+        <tr><th>Component</th><th>Normal</th><th>Abnormal</th></tr>
+        <tr><td><strong>Baseline</strong></td><td>110-160 bpm</td><td>&lt;110 (bradycardia), &gt;160 (tachycardia)</td></tr>
+        <tr><td><strong>Variability</strong></td><td>Moderate (6-25 bpm)</td><td>Absent (0), Minimal (≤5), Marked (&gt;25)</td></tr>
+        <tr><td><strong>Accelerations</strong></td><td>Present (≥15 bpm x 15 sec)</td><td>Absent</td></tr>
+        <tr><td><strong>Decelerations</strong></td><td>Early or none</td><td>Variable, Late, Prolonged</td></tr>
+      </table>
+    </div>
+
+    <!-- INPUT PANEL -->
+    <div class="panel">
+      <h2>📝 Enter FHR Tracing Characteristics</h2>
+
+      <div class="input-group">
+        <label>Baseline Heart Rate</label>
+        <div class="radio-group" id="baseline">
+          <label class="radio-option"><input type="radio" name="baseline" value="normal">110-160 bpm (Normal)</label>
+          <label class="radio-option"><input type="radio" name="baseline" value="tachy">&gt;160 bpm (Tachycardia)</label>
+          <label class="radio-option"><input type="radio" name="baseline" value="brady">&lt;110 bpm (Bradycardia)</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Baseline Variability</label>
+        <div class="radio-group" id="variability">
+          <label class="radio-option"><input type="radio" name="variability" value="moderate">Moderate (6-25 bpm)</label>
+          <label class="radio-option"><input type="radio" name="variability" value="minimal">Minimal (≤5 bpm)</label>
+          <label class="radio-option"><input type="radio" name="variability" value="absent">Absent (undetectable)</label>
+          <label class="radio-option"><input type="radio" name="variability" value="marked">Marked (&gt;25 bpm)</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Accelerations</label>
+        <div class="radio-group" id="accels">
+          <label class="radio-option"><input type="radio" name="accels" value="present">Present</label>
+          <label class="radio-option"><input type="radio" name="accels" value="absent">Absent</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Decelerations</label>
+        <div class="radio-group" id="decels">
+          <label class="radio-option"><input type="radio" name="decels" value="none">None</label>
+          <label class="radio-option"><input type="radio" name="decels" value="early">Early (mirror contractions)</label>
+          <label class="radio-option"><input type="radio" name="decels" value="variable">Variable (abrupt, V-shaped)</label>
+          <label class="radio-option"><input type="radio" name="decels" value="late">Late (after contraction peak)</label>
+          <label class="radio-option"><input type="radio" name="decels" value="prolonged">Prolonged (&gt;2 min)</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>If Decelerations Present - Recovery?</label>
+        <div class="radio-group" id="recovery">
+          <label class="radio-option"><input type="radio" name="recovery" value="na">N/A (no decels)</label>
+          <label class="radio-option"><input type="radio" name="recovery" value="good">Quick return to baseline</label>
+          <label class="radio-option"><input type="radio" name="recovery" value="slow">Slow return / overshoots</label>
+          <label class="radio-option"><input type="radio" name="recovery" value="none">No recovery / recurrent</label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="interpretFHR()" style="margin-top: 1rem;">🔍 Interpret Tracing</button>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div id="result" class="result-panel hidden">
+      <div class="category-badge" id="categoryBadge">Category I</div>
+      <h3 id="categoryTitle">Normal</h3>
+      <p id="categoryDesc"></p>
+      
+      <div class="management-box">
+        <h4>📋 Management</h4>
+        <ul id="managementList"></ul>
+      </div>
+    </div>
+
+    <!-- DECELERATION TEACHING -->
+    <div class="panel" style="margin-top: 2rem;">
+      <h2>📖 Deceleration Types</h2>
+      
+      <div class="key-box">
+        <strong>Early Decelerations</strong> - Head compression
+        <ul>
+          <li>Gradual onset, mirrors contraction</li>
+          <li>Nadir at peak of contraction</li>
+          <li>Benign - vagal response to head compression</li>
+          <li>No intervention needed</li>
+        </ul>
+      </div>
+
+      <div class="key-box">
+        <strong>Variable Decelerations</strong> - Cord compression
+        <ul>
+          <li>Abrupt onset (&lt;30 sec to nadir)</li>
+          <li>Variable timing, V or W shaped</li>
+          <li>Shoulders = initial acceleration before/after</li>
+          <li>Management: Position changes, amnioinfusion if recurrent</li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>Late Decelerations</strong> - Uteroplacental insufficiency ⚠️
+        <ul>
+          <li>Gradual onset, nadir AFTER contraction peak</li>
+          <li>Indicates fetal hypoxia</li>
+          <li>Concerning even if shallow</li>
+          <li>Management: Left lateral, O2, IV fluids, stop oxytocin, consider delivery</li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>Prolonged Decelerations</strong> - Multiple causes ⚠️
+        <ul>
+          <li>≥2 minutes but &lt;10 minutes</li>
+          <li>Causes: Cord prolapse, uterine rupture, abruption, hypotension</li>
+          <li>&gt;10 minutes = baseline change</li>
+          <li>Management: Intrauterine resuscitation, prepare for emergent delivery</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CATEGORY DEFINITIONS -->
+    <div class="panel">
+      <h2>📊 NICHD 3-Tier Classification</h2>
+      
+      <h3 style="color: var(--success);">Category I (Normal)</h3>
+      <ul>
+        <li>Baseline 110-160 bpm</li>
+        <li>Moderate variability</li>
+        <li>No late or variable decelerations</li>
+        <li>Early decelerations present or absent</li>
+        <li>Accelerations present or absent</li>
+      </ul>
+      <p><strong>→ Strongly predictive of normal fetal acid-base status</strong></p>
+
+      <h3 style="color: var(--warning);">Category II (Indeterminate)</h3>
+      <ul>
+        <li>Everything NOT Category I or III</li>
+        <li>Examples: Tachycardia, minimal variability, variable decels, absence of accels</li>
+        <li>Requires evaluation, surveillance, and possible intervention</li>
+      </ul>
+      <p><strong>→ Not predictive of abnormal acid-base status but requires monitoring</strong></p>
+
+      <h3 style="color: var(--danger);">Category III (Abnormal)</h3>
+      <ul>
+        <li>Absent variability WITH any of:
+          <ul>
+            <li>Recurrent late decelerations</li>
+            <li>Recurrent variable decelerations</li>
+            <li>Bradycardia</li>
+          </ul>
+        </li>
+        <li>OR sinusoidal pattern</li>
+      </ul>
+      <p><strong>→ Abnormal fetal acid-base status - requires IMMEDIATE intervention</strong></p>
+    </div>
+  </div>
+
+  <script>
+    // Handle radio selection styling
+    document.querySelectorAll('.radio-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const group = this.closest('.radio-group');
+        group.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    function interpretFHR() {
+      const baseline = document.querySelector('input[name="baseline"]:checked')?.value;
+      const variability = document.querySelector('input[name="variability"]:checked')?.value;
+      const accels = document.querySelector('input[name="accels"]:checked')?.value;
+      const decels = document.querySelector('input[name="decels"]:checked')?.value;
+      const recovery = document.querySelector('input[name="recovery"]:checked')?.value;
+
+      if (!baseline || !variability || !accels || !decels) {
+        alert('Please complete all fields');
+        return;
+      }
+
+      let category, title, desc, management;
+
+      // Category III: Absent variability + recurrent late/variable decels or bradycardia
+      if (variability === 'absent' && (decels === 'late' || (decels === 'variable' && recovery === 'none') || baseline === 'brady')) {
+        category = 3;
+        title = 'ABNORMAL - Immediate Action Required';
+        desc = 'Absent variability with recurrent decelerations or bradycardia indicates abnormal fetal acid-base status.';
+        management = [
+          'STOP oxytocin immediately',
+          'Left lateral positioning',
+          'IV fluid bolus',
+          'Supplemental oxygen',
+          'Notify attending physician STAT',
+          'Prepare for emergent delivery',
+          'Consider: vaginal exam (cord prolapse?), terbutaline for tachysystole'
+        ];
+      }
+      // Category I: Normal
+      else if (baseline === 'normal' && variability === 'moderate' && (decels === 'none' || decels === 'early')) {
+        category = 1;
+        title = 'Normal';
+        desc = 'This tracing is strongly predictive of normal fetal acid-base status at the time of observation.';
+        management = [
+          'Continue routine monitoring',
+          'No immediate intervention required',
+          'Reassess with any change in clinical status'
+        ];
+      }
+      // Category II: Everything else
+      else {
+        category = 2;
+        title = 'Indeterminate - Requires Evaluation';
+        desc = 'This tracing is not predictive of abnormal fetal acid-base status but requires continued surveillance and evaluation.';
+        
+        management = ['Continuous monitoring', 'Evaluate for reversible causes'];
+        
+        if (baseline === 'tachy') {
+          management.push('Evaluate for: maternal fever, chorioamnionitis, dehydration, medications');
+        }
+        if (variability === 'minimal' || variability === 'absent') {
+          management.push('Consider: fetal sleep cycle, medications (opioids, Mg), fetal acidemia');
+          management.push('Acoustic/vibroacoustic stimulation to elicit accelerations');
+        }
+        if (decels === 'variable') {
+          management.push('Position changes (left lateral, right lateral, hands-knees)');
+          management.push('Consider amnioinfusion if recurrent and membranes ruptured');
+        }
+        if (decels === 'late') {
+          management.push('LEFT LATERAL positioning');
+          management.push('IV fluid bolus');
+          management.push('Reduce/stop oxytocin');
+          management.push('Supplemental oxygen');
+          management.push('If persistent, consider expedited delivery');
+        }
+        if (decels === 'prolonged') {
+          management.push('Rule out: cord prolapse, uterine rupture, abruption');
+          management.push('Vaginal exam to assess for cord');
+          management.push('Prepare for possible emergent delivery');
+        }
+      }
+
+      // Display result
+      const resultPanel = document.getElementById('result');
+      resultPanel.className = `result-panel cat${category}`;
+      resultPanel.classList.remove('hidden');
+      
+      document.getElementById('categoryBadge').textContent = `Category ${category === 1 ? 'I' : category === 2 ? 'II' : 'III'}`;
+      document.getElementById('categoryTitle').textContent = title;
+      document.getElementById('categoryDesc').textContent = desc;
+      
+      const mgmtList = document.getElementById('managementList');
+      mgmtList.innerHTML = management.map(m => `<li>${m}</li>`).join('');
+      
+      resultPanel.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+  <div class="card" style="margin-top:20px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3)">
+    <h2 style="color:#818CF8">📚 Open-Access Learning Resources</h2>
+    
+    <p style="margin:10px 0;font-size:0.9rem"><strong>Clinical Guidelines:</strong></p>
+    <ul style="padding-left:20px;font-size:0.85rem">
+      <li><a href="https://www.acog.org/clinical/clinical-guidance/practice-bulletin" target="_blank" style="color:#60A5FA">ACOG Intrapartum Fetal Heart Rate Monitoring</a></li>
+      <li><a href="https://www.nichd.nih.gov/" target="_blank" style="color:#60A5FA">NICHD FHR Nomenclature</a></li>
+    </ul>
+    <p style="margin-top:10px;font-size:0.8rem;color:#94A3B8"><em>Content based on ACOG/NICHD FHR classification system.</em></p>
+
+  </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="FHR Tracing Interpreter"
+         data-key-points="📝 Enter FHR Tracing Characteristics, 📖 Deceleration Types, 📊 NICHD 3-Tier Classification, 📚 Open-Access Learning Resources, 📚 Quick Reference: FHR Components, Normal, Category I (Normal), Category II (Indeterminate), clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Psychosis Workup</title>
+  <style>
+    :root{--primary:#6366F1;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6;--purple:#8B5CF6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0a1a1a,#1a2e2e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(99,102,241,0.1);border-radius:1rem;border:1px solid rgba(99,102,241,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(99,102,241,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.85rem}th,td{padding:0.6rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(99,102,241,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--purple);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.case-box{background:rgba(8,145,178,0.15);border:1px solid var(--secondary);border-radius:0.75rem;padding:1.25rem;margin:1.5rem 0}.case-box h4{color:var(--secondary);margin-bottom:0.75rem}.step{display:inline-block;padding:0.3rem 0.75rem;background:rgba(255,255,255,0.1);border-radius:1rem;font-size:0.8rem;margin-right:0.5rem}.step.active{background:var(--primary);color:white}.decision-btn{display:inline-block;padding:0.5rem 1rem;margin:0.25rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.decision-btn:hover,.decision-btn.selected{background:var(--primary)}.feedback{padding:1rem;border-radius:0.5rem;margin-top:1rem;display:none}.feedback.correct{background:rgba(16,185,129,0.2);border:1px solid var(--success);display:block}.feedback.incorrect{background:rgba(239,68,68,0.2);border:1px solid var(--danger);display:block}.hidden{display:none}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option:hover{background:rgba(99,102,241,0.2)}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔮 Psychosis Workup</h1>
+      <p style="color:#9CA3AF">Differential Diagnosis • Medical Causes • First Episode Workup • Treatment</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('differential')">Differential</div>
+      <div class="nav-tab" onclick="showTab('workup')">Workup</div>
+      <div class="nav-tab" onclick="showTab('treatment')">Treatment</div>
+      <div class="nav-tab" onclick="showTab('crt')">Case Trainer</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Defining Psychosis</h2>
+        <div class="key-box">
+          <strong>Psychosis</strong> = Loss of contact with reality, characterized by:<br>
+          • <strong>Delusions</strong> - Fixed false beliefs<br>
+          • <strong>Hallucinations</strong> - Perceptions without external stimuli<br>
+          • <strong>Disorganized thinking/speech</strong><br>
+          • <strong>Grossly disorganized or catatonic behavior</strong>
+        </div>
+
+        <h3>Types of Delusions</h3>
+        <table>
+          <tr><th>Type</th><th>Description</th><th>Common In</th></tr>
+          <tr><td><strong>Paranoid/persecutory</strong></td><td>Being followed, plotted against</td><td>Schizophrenia, delusional disorder</td></tr>
+          <tr><td><strong>Grandiose</strong></td><td>Special powers, identity, or relationship</td><td>Mania, schizophrenia</td></tr>
+          <tr><td><strong>Erotomanic</strong></td><td>Someone famous is in love with them</td><td>Delusional disorder</td></tr>
+          <tr><td><strong>Somatic</strong></td><td>Body is diseased, infested, or abnormal</td><td>Delusional disorder, depression</td></tr>
+          <tr><td><strong>Nihilistic</strong></td><td>Self/world doesn't exist or is dying</td><td>Severe depression (Cotard syndrome)</td></tr>
+          <tr><td><strong>Ideas of reference</strong></td><td>Events have personal significance</td><td>Schizophrenia</td></tr>
+        </table>
+
+        <h3>Hallucination Types</h3>
+        <div class="info-box">
+          <strong>Rule of thumb:</strong><br>
+          <strong>Auditory hallucinations</strong> → Think PRIMARY psychiatric (schizophrenia, severe mood disorders)<br>
+          <strong>Visual hallucinations</strong> → Think SECONDARY/organic (delirium, substances, dementia, seizures)
+        </div>
+        <table>
+          <tr><th>Type</th><th>Description</th><th>Most Suggestive Of</th></tr>
+          <tr><td>Auditory</td><td>Voices (commenting, commanding, conversing)</td><td>Schizophrenia, psychotic depression</td></tr>
+          <tr><td>Visual</td><td>Seeing things not there</td><td>Delirium, substances, DLB</td></tr>
+          <tr><td>Tactile</td><td>Feeling things on/under skin</td><td>Alcohol/stimulant withdrawal, delusional parasitosis</td></tr>
+          <tr><td>Olfactory</td><td>Smelling things not there</td><td>Temporal lobe epilepsy, brain tumor</td></tr>
+          <tr><td>Gustatory</td><td>Tasting things not there</td><td>Temporal lobe epilepsy</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- DIFFERENTIAL -->
+    <div id="differential" class="tab-content">
+      <div class="section">
+        <h2>📋 Differential Diagnosis</h2>
+        
+        <div class="mnemonic">
+          <strong>Psychosis Differential: "MIND TIPS"</strong><br>
+          <strong>M</strong>edical conditions • <strong>I</strong>ntoxication/withdrawal • <strong>N</strong>eurological • <strong>D</strong>elirium<br>
+          <strong>T</strong>hought disorders (schizophrenia) • <strong>I</strong>nfection • <strong>P</strong>sychotic mood disorders • <strong>S</strong>ubstances
+        </div>
+
+        <h3>Primary Psychiatric Causes</h3>
+        <table>
+          <tr><th>Disorder</th><th>Key Features</th><th>Duration Criteria</th></tr>
+          <tr><td><strong>Schizophrenia</strong></td><td>Hallucinations, delusions, disorganization, negative symptoms</td><td>≥6 months (1 month active)</td></tr>
+          <tr><td><strong>Schizophreniform</strong></td><td>Same as schizophrenia</td><td>1-6 months</td></tr>
+          <tr><td><strong>Brief psychotic disorder</strong></td><td>Often triggered by stress</td><td>&lt;1 month, full recovery</td></tr>
+          <tr><td><strong>Schizoaffective</strong></td><td>Psychosis + mood episodes; psychosis exists independently</td><td>Psychosis present ≥2 weeks without mood symptoms</td></tr>
+          <tr><td><strong>Delusional disorder</strong></td><td>Non-bizarre delusions, no other psychotic symptoms</td><td>≥1 month</td></tr>
+          <tr><td><strong>Psychotic depression</strong></td><td>MDD + mood-congruent delusions (guilt, worthlessness)</td><td>Psychosis only during mood episode</td></tr>
+          <tr><td><strong>Bipolar with psychosis</strong></td><td>Mania/depression + psychotic features</td><td>Psychosis only during mood episode</td></tr>
+        </table>
+
+        <h3>Secondary (Organic) Causes</h3>
+        <div class="danger-box">
+          <strong>ALWAYS rule out medical causes, especially in:</strong>
+          <ul>
+            <li>First episode psychosis</li>
+            <li>Age >40 at onset (late-onset)</li>
+            <li>Visual hallucinations predominate</li>
+            <li>Acute onset (hours to days)</li>
+            <li>Fluctuating course</li>
+            <li>Abnormal vital signs</li>
+            <li>No psychiatric history</li>
+          </ul>
+        </div>
+
+        <table>
+          <tr><th>Category</th><th>Examples</th></tr>
+          <tr><td><strong>Substances</strong></td><td>Intoxication: stimulants, cannabis, PCP, hallucinogens<br>Withdrawal: alcohol, benzos, barbiturates</td></tr>
+          <tr><td><strong>Medications</strong></td><td>Steroids, anticholinergics, dopamine agonists, anticonvulsants</td></tr>
+          <tr><td><strong>Neurological</strong></td><td>Dementia (esp DLB), Parkinson's, Huntington's, seizures, stroke, MS, brain tumor</td></tr>
+          <tr><td><strong>Infectious</strong></td><td>Encephalitis (HSV, HIV), neurosyphilis, prion disease, UTI (elderly)</td></tr>
+          <tr><td><strong>Autoimmune</strong></td><td>Anti-NMDA receptor encephalitis, SLE cerebritis</td></tr>
+          <tr><td><strong>Metabolic</strong></td><td>Hepatic encephalopathy, uremia, electrolyte disturbances, hypoglycemia</td></tr>
+          <tr><td><strong>Endocrine</strong></td><td>Thyroid disease, Cushing's, Addison's, hyperparathyroidism</td></tr>
+          <tr><td><strong>Nutritional</strong></td><td>B12 deficiency, thiamine (Wernicke's), niacin (pellagra)</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Anti-NMDA Receptor Encephalitis</strong> - Young woman with psychiatric symptoms + movement disorder + autonomic instability + seizures. Associated with ovarian teratoma. Check anti-NMDA antibodies!
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKUP -->
+    <div id="workup" class="tab-content">
+      <div class="section">
+        <h2>🔬 First Episode Psychosis Workup</h2>
+
+        <div class="key-box">
+          <strong>Goals:</strong>
+          <ol>
+            <li>Rule out medical/organic causes</li>
+            <li>Ensure patient safety</li>
+            <li>Establish baseline before treatment</li>
+            <li>Begin appropriate treatment</li>
+          </ol>
+        </div>
+
+        <h3>Recommended Studies</h3>
+        <table>
+          <tr><th>Test</th><th>Rationale</th></tr>
+          <tr><td><strong>CBC</strong></td><td>Infection, anemia (B12), baseline for meds</td></tr>
+          <tr><td><strong>CMP</strong></td><td>Electrolytes, glucose, renal/liver function</td></tr>
+          <tr><td><strong>TSH</strong></td><td>Thyroid dysfunction</td></tr>
+          <tr><td><strong>Urine drug screen</strong></td><td>Substance-induced psychosis</td></tr>
+          <tr><td><strong>Urinalysis</strong></td><td>UTI (delirium in elderly)</td></tr>
+          <tr><td><strong>RPR/VDRL</strong></td><td>Neurosyphilis (especially if risk factors)</td></tr>
+          <tr><td><strong>HIV</strong></td><td>HIV-associated neurocognitive disorder</td></tr>
+          <tr><td><strong>B12, folate</strong></td><td>Deficiency causing psychiatric symptoms</td></tr>
+          <tr><td><strong>Pregnancy test</strong></td><td>Women of childbearing age (affects treatment)</td></tr>
+        </table>
+
+        <h3>Additional Studies When Indicated</h3>
+        <table>
+          <tr><th>Test</th><th>When to Order</th></tr>
+          <tr><td><strong>Brain MRI</strong></td><td>First episode, focal neuro findings, late onset, atypical features</td></tr>
+          <tr><td><strong>EEG</strong></td><td>Suspected seizures, catatonia, encephalitis</td></tr>
+          <tr><td><strong>Lumbar puncture</strong></td><td>Suspected encephalitis, autoimmune, neurosyphilis</td></tr>
+          <tr><td><strong>Anti-NMDA antibodies</strong></td><td>Young female, movement disorder, autonomic instability</td></tr>
+          <tr><td><strong>Ceruloplasmin</strong></td><td>Suspected Wilson's disease (young + movement disorder)</td></tr>
+          <tr><td><strong>Heavy metals</strong></td><td>Occupational exposure, specific symptoms</td></tr>
+          <tr><td><strong>ANA, ESR</strong></td><td>Suspected autoimmune (SLE cerebritis)</td></tr>
+          <tr><td><strong>Ammonia</strong></td><td>Suspected hepatic encephalopathy</td></tr>
+        </table>
+
+        <h3>Pre-Antipsychotic Baseline</h3>
+        <div class="success-box">
+          <strong>Before starting antipsychotics, document:</strong>
+          <ul>
+            <li>Weight, BMI, waist circumference</li>
+            <li>Fasting glucose or HbA1c</li>
+            <li>Fasting lipid panel</li>
+            <li>Blood pressure, heart rate</li>
+            <li>ECG (QTc) for certain medications</li>
+            <li>Prolactin (optional baseline)</li>
+            <li>AIMS exam (baseline for tardive dyskinesia)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TREATMENT -->
+    <div id="treatment" class="tab-content">
+      <div class="section">
+        <h2>💊 Treatment Approach</h2>
+
+        <h3>Acute Management</h3>
+        <div class="danger-box">
+          <strong>Safety First:</strong>
+          <ul>
+            <li>Assess for danger to self/others</li>
+            <li>Consider 1:1 observation</li>
+            <li>Remove dangerous items from environment</li>
+            <li>May need involuntary hold if danger present</li>
+          </ul>
+        </div>
+
+        <h3>Pharmacotherapy</h3>
+        <table>
+          <tr><th>Agent</th><th>Key Points</th></tr>
+          <tr><td><strong>Second-generation (atypical)</strong></td><td>First-line for most patients; less EPS risk<br>Examples: risperidone, olanzapine, quetiapine, aripiprazole, ziprasidone</td></tr>
+          <tr><td><strong>First-generation (typical)</strong></td><td>Effective but more EPS; haloperidol useful acutely (IM available)</td></tr>
+          <tr><td><strong>Clozapine</strong></td><td>Reserved for treatment-resistant schizophrenia; risk of agranulocytosis (requires monitoring)</td></tr>
+          <tr><td><strong>Long-acting injectables (LAI)</strong></td><td>For adherence issues; monthly or longer dosing</td></tr>
+        </table>
+
+        <h3>Acute Agitation</h3>
+        <div class="info-box">
+          <strong>First try:</strong> Verbal de-escalation, calm environment, oral medications<br><br>
+          <strong>If needed:</strong>
+          <ul>
+            <li><strong>Oral:</strong> Olanzapine 5-10mg, risperidone 2mg, haloperidol 5mg + lorazepam 2mg</li>
+            <li><strong>IM:</strong> Haloperidol 5mg + lorazepam 2mg + diphenhydramine 50mg ("B52")<br>
+            OR olanzapine 10mg IM (don't combine with IM benzos - respiratory depression)</li>
+            <li><strong>Avoid:</strong> IM olanzapine + IM benzodiazepines together</li>
+          </ul>
+        </div>
+
+        <h3>Treatment-Resistant Schizophrenia</h3>
+        <div class="key-box">
+          <strong>Definition:</strong> Failed adequate trials of ≥2 different antipsychotics (including at least one atypical) at adequate dose for adequate duration (≥6 weeks each)<br><br>
+          <strong>Treatment:</strong> Clozapine - most effective antipsychotic<br>
+          <strong>Monitoring required:</strong> Weekly CBC × 6 months, then biweekly × 6 months, then monthly (agranulocytosis risk)
+        </div>
+      </div>
+    </div>
+
+    <!-- CRT -->
+    <div id="crt" class="tab-content">
+      <div class="section">
+        <h2>🎯 Clinical Reasoning Trainer</h2>
+
+        <div class="case-box" id="case1">
+          <h4>Case: 22-year-old Male with Strange Behavior</h4>
+          <p>A 22-year-old man is brought by his parents for evaluation. Over the past 8 months, he has become increasingly isolated, quit his job, and believes his neighbors are spying on him. He reports hearing voices commenting on his actions. No prior psychiatric history. No substance use.</p>
+          
+          <div style="margin-bottom:1rem">
+            <span class="step active" id="s1">1. Diagnosis</span>
+            <span class="step" id="s2">2. Workup</span>
+            <span class="step" id="s3">3. Treatment</span>
+          </div>
+
+          <div id="q1">
+            <p><strong>Based on 8 months of symptoms including delusions, hallucinations, and functional decline, what is the most likely diagnosis?</strong></p>
+            <div class="decision-btn" onclick="answer('case1',1,'a')">Brief psychotic disorder</div>
+            <div class="decision-btn" onclick="answer('case1',1,'b')">Schizophreniform disorder</div>
+            <div class="decision-btn" onclick="answer('case1',1,'c')">Schizophrenia</div>
+            <div class="decision-btn" onclick="answer('case1',1,'d')">Delusional disorder</div>
+            <div class="feedback" id="f1"></div>
+          </div>
+
+          <div id="q2" class="hidden">
+            <p><strong>This is a first episode of psychosis. What workup is essential?</strong></p>
+            <div class="decision-btn" onclick="answer('case1',2,'a')">Just start antipsychotics immediately</div>
+            <div class="decision-btn" onclick="answer('case1',2,'b')">CBC, CMP, TSH, urine drug screen, RPR, HIV, B12</div>
+            <div class="decision-btn" onclick="answer('case1',2,'c')">Brain biopsy</div>
+            <div class="decision-btn" onclick="answer('case1',2,'d')">Only urine drug screen needed</div>
+            <div class="feedback" id="f2"></div>
+          </div>
+
+          <div id="q3" class="hidden">
+            <p><strong>Workup is unremarkable. What is the first-line pharmacologic treatment?</strong></p>
+            <div class="decision-btn" onclick="answer('case1',3,'a')">Clozapine</div>
+            <div class="decision-btn" onclick="answer('case1',3,'b')">Benzodiazepines alone</div>
+            <div class="decision-btn" onclick="answer('case1',3,'c')">Second-generation antipsychotic (e.g., risperidone)</div>
+            <div class="decision-btn" onclick="answer('case1',3,'d')">Lithium</div>
+            <div class="feedback" id="f3"></div>
+          </div>
+
+          <div id="summary" class="hidden">
+            <div class="success-box">
+              <strong>Summary:</strong> This young man has schizophrenia (>6 months of symptoms including delusions, hallucinations, and functional decline). First episode psychosis requires comprehensive medical workup to rule out organic causes. First-line treatment is a second-generation antipsychotic. Clozapine is reserved for treatment-resistant cases.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Clinical Guidelines</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://psychiatry.org/psychiatrists/practice/clinical-practice-guidelines/schizophrenia" target="_blank">🔗 APA Schizophrenia Guidelines</a>
+        </div>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK539864/" target="_blank">🔗 NCBI Bookshelf - Psychosis</a>
+          <a class="resource-link" href="https://www.nimh.nih.gov/health/topics/schizophrenia" target="_blank">🔗 NIMH Schizophrenia</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on APA guidelines.</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> Visual hallucinations are most suggestive of which etiology?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Schizophrenia</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Organic/medical cause (delirium, substances)</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Major depression</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Delusional disorder</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Visual hallucinations suggest an organic cause such as delirium, substance intoxication/withdrawal, or neurological disease. Primary psychiatric disorders like schizophrenia more commonly cause auditory hallucinations.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> What duration of symptoms distinguishes schizophreniform disorder from schizophrenia?</p>
+          <div class="quiz-option" onclick="check(this,false,'q2')">A. 2 weeks vs 1 month</div>
+          <div class="quiz-option" onclick="check(this,true,'q2')">B. 1-6 months vs >6 months</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. 1 month vs 3 months</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. There is no time distinction</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: B.</strong> Schizophreniform: 1-6 months total duration. Schizophrenia: >6 months total duration (with at least 1 month of active-phase symptoms).</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> A young woman presents with acute psychosis, seizures, movement abnormalities, and autonomic instability. What should you test for?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. Urine drug screen only</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">B. Anti-NMDA receptor antibodies</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">C. Thyroid function only</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. HIV only</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: B.</strong> This presentation (psychiatric symptoms + movement disorder + seizures + autonomic instability in a young woman) is classic for anti-NMDA receptor encephalitis. Check for antibodies and image ovaries for teratoma.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> Which antipsychotic is reserved for treatment-resistant schizophrenia and requires regular blood monitoring?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Risperidone</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">B. Haloperidol</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">C. Clozapine</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. Quetiapine</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: C.</strong> Clozapine is the most effective antipsychotic but reserved for treatment-resistant cases due to risk of agranulocytosis. Requires weekly CBC monitoring initially.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> Which combination should be AVOIDED when treating acute agitation?</p>
+          <div class="quiz-option" onclick="check(this,false,'q5')">A. IM haloperidol + IM lorazepam</div>
+          <div class="quiz-option" onclick="check(this,true,'q5')">B. IM olanzapine + IM lorazepam</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Oral risperidone + oral lorazepam</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. IM haloperidol + IM diphenhydramine</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: B.</strong> IM olanzapine + IM benzodiazepines can cause severe respiratory depression and hypotension. If olanzapine IM is given, wait at least 1 hour before giving IM benzos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+    const answers={1:{correct:'c',fb:{a:'Brief psychotic disorder is <1 month.',b:'Schizophreniform is 1-6 months; this patient has 8 months.',c:'Correct! >6 months of psychotic symptoms with functional decline = schizophrenia.',d:'Delusional disorder has delusions only, no hallucinations or disorganization.'}},2:{correct:'b',fb:{a:'Must rule out organic causes first!',b:'Correct! First episode psychosis requires comprehensive workup to rule out medical causes.',c:'Not indicated; this is a standard workup.',d:'Need comprehensive labs, not just UDS.'}},3:{correct:'c',fb:{a:'Clozapine is reserved for treatment-resistant cases.',b:'Benzos alone do not treat psychosis.',c:'Correct! Second-generation antipsychotics are first-line for schizophrenia.',d:'Lithium is for bipolar, not primary schizophrenia.'}}};
+    function answer(caseId,qNum,ans){const data=answers[qNum];const fb=document.getElementById('f'+qNum);event.target.classList.add('selected');fb.innerHTML=data.fb[ans];fb.className='feedback '+(ans===data.correct?'correct':'incorrect');if(ans===data.correct){setTimeout(()=>{if(qNum<3){document.getElementById('q'+(qNum+1)).classList.remove('hidden');document.getElementById('s'+(qNum+1)).classList.add('active')}else{document.getElementById('summary').classList.remove('hidden')}},1000)}}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Psychosis Workup"
+         data-key-points="🎯 Defining Psychosis, 📋 Differential Diagnosis, 🔬 First Episode Psychosis Workup, 💊 Treatment Approach, 🎯 Clinical Reasoning Trainer, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Types of Delusions, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

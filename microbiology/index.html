@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicrobiologyDx | DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-bg: #ecfdf5;
+            --secondary: #7c3aed;
+            --tertiary: #1e40af;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .nav-link:hover { background: var(--border); color: var(--text-primary); }
+        .nav-link.active { background: var(--primary); color: white; }
+        
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #065f46 100%); padding: 60px 24px; text-align: center; }
+        .hero h1 { font-size: 42px; color: white; margin-bottom: 12px; }
+        .hero p { font-size: 18px; color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 24px; }
+        .hero-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .hero-badge { background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 13px; color: white; display: flex; align-items: center; gap: 6px; }
+        
+        .content { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        
+        .level-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; justify-content: center; }
+        .level-tab { padding: 12px 24px; border-radius: 10px; border: 2px solid var(--border); background: var(--bg-card); cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .level-tab:hover { border-color: var(--primary); }
+        .level-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .level-tab .level-icon { margin-right: 8px; }
+        
+        .category-section { margin-bottom: 48px; }
+        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .category-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .category-icon.gram-pos { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+        .category-icon.gram-neg { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+        .category-icon.virus { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+        .category-icon.fungus { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+        .category-icon.parasite { background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); }
+        .category-title h2 { font-size: 24px; color: var(--text-primary); }
+        .category-title p { font-size: 14px; color: var(--text-secondary); }
+        
+        .organism-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .organism-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: all 0.2s; text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+        .organism-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .organism-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+        .organism-card.gram-pos::before { background: var(--secondary); }
+        .organism-card.gram-neg::before { background: var(--primary); }
+        .organism-card.virus::before { background: var(--warning); }
+        .organism-card.fungus::before { background: var(--danger); }
+        .organism-card.parasite::before { background: var(--tertiary); }
+        
+        .organism-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .organism-name em { font-style: italic; }
+        .organism-subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+        .organism-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .organism-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: #f4f4f5; color: var(--text-secondary); }
+        .organism-tag.high-yield { background: #fef3c7; color: #92400e; }
+        .organism-tag.mcat { background: #dbeafe; color: #1e40af; }
+        .organism-tag.step1 { background: #ede9fe; color: #5b21b6; }
+        .organism-diseases { font-size: 12px; color: var(--text-secondary); }
+        
+        .coming-soon { opacity: 0.6; pointer-events: none; }
+        .coming-soon::after { content: 'Coming Soon'; position: absolute; top: 10px; right: 10px; font-size: 10px; background: var(--border); padding: 2px 8px; border-radius: 4px; }
+        
+        .foundations-section { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 16px; padding: 32px; margin-bottom: 48px; }
+        .foundations-section h2 { color: #1e40af; margin-bottom: 8px; }
+        .foundations-section > p { color: #1e3a8a; margin-bottom: 20px; }
+        .foundations-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .foundation-card { background: white; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; border: 1px solid #bfdbfe; transition: all 0.2s; }
+        .foundation-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .foundation-card h4 { color: #1e40af; font-size: 14px; margin-bottom: 4px; }
+        .foundation-card p { font-size: 12px; color: #3b82f6; margin: 0; }
+        
+        .stats-bar { display: flex; justify-content: center; gap: 32px; padding: 24px; background: var(--bg-card); border-radius: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: var(--text-secondary); }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .stats-bar { gap: 20px; }
+            .stat-value { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">🦠 MicrobiologyDx</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">DxSuite Home</a>
+                <a href="../mechanism/index.html" class="nav-link">MechanismDx</a>
+                <a href="../CoachDx/index.html" class="nav-link">CoachDx</a>
+                <a href="../ReasonDx/index.html" class="nav-link">ReasonDx</a>
+                <a href="index.html" class="nav-link active">Microbiology</a>
+                <a href="../pharmacology/index.html" class="nav-link">Pharmacology</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>🦠 MicrobiologyDx</h1>
+        <p>From organisms to clinical syndromes to treatment. Integrated learning connecting basic science to bedside medicine.</p>
+        <div class="hero-badges">
+            <span class="hero-badge">📚 MCAT Prep</span>
+            <span class="hero-badge">🎓 Pre-Med & Masters</span>
+            <span class="hero-badge">⚕️ Medical Students</span>
+            <span class="hero-badge">🏥 Clinical Rotations</span>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Level Selector -->
+        <div class="level-tabs">
+            <button class="level-tab active" data-level="all">
+                <span class="level-icon">📖</span> All Content
+            </button>
+            <button class="level-tab" data-level="mcat">
+                <span class="level-icon">🎯</span> MCAT Focus
+            </button>
+            <button class="level-tab" data-level="premed">
+                <span class="level-icon">🔬</span> Pre-Med/Masters
+            </button>
+            <button class="level-tab" data-level="clinical">
+                <span class="level-icon">🏥</span> Clinical/Step 1
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Organisms</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Clinical Syndromes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">30+</div>
+                <div class="stat-label">Antimicrobials</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Cross-Links</div>
+            </div>
+        </div>
+
+        <!-- Foundational Sciences Section (MCAT/Pre-Med) -->
+        <section class="foundations-section">
+            <h2>🧬 Foundational Sciences</h2>
+            <p>Core concepts for MCAT and pre-med coursework - the building blocks of microbiology and infectious disease</p>
+            <div class="foundations-grid">
+                <a href="foundations/bacterial-structure.html" class="foundation-card">
+                    <h4>Bacterial Cell Structure</h4>
+                    <p>Cell wall, membrane, ribosomes</p>
+                </a>
+                <a href="foundations/gram-stain.html" class="foundation-card">
+                    <h4>Gram Staining</h4>
+                    <p>Mechanism and interpretation</p>
+                </a>
+                <a href="foundations/bacterial-genetics.html" class="foundation-card">
+                    <h4>Bacterial Genetics</h4>
+                    <p>Transformation, transduction, conjugation</p>
+                </a>
+                <a href="foundations/viral-structure.html" class="foundation-card">
+                    <h4>Viral Structure & Replication</h4>
+                    <p>DNA vs RNA, lytic vs lysogenic</p>
+                </a>
+                <a href="foundations/immune-response.html" class="foundation-card">
+                    <h4>Innate vs Adaptive Immunity</h4>
+                    <p>How we fight infection</p>
+                </a>
+                <a href="foundations/antimicrobial-mechanisms.html" class="foundation-card">
+                    <h4>Antibiotic Mechanisms</h4>
+                    <p>Targets: wall, ribosome, DNA</p>
+                </a>
+                <a href="foundations/resistance-mechanisms.html" class="foundation-card">
+                    <h4>Resistance Mechanisms</h4>
+                    <p>Beta-lactamase, efflux pumps</p>
+                </a>
+                <a href="foundations/toxins-virulence.html" class="foundation-card">
+                    <h4>Toxins & Virulence</h4>
+                    <p>Exotoxins, endotoxins, superantigens</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Gram-Positive Bacteria -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon gram-pos">🟣</div>
+                <div class="category-title">
+                    <h2>Gram-Positive Bacteria</h2>
+                    <p>Thick peptidoglycan wall, retain crystal violet stain</p>
+                </div>
+            </div>
+            <div class="organism-grid">
+                <a href="s-aureus-module.html" class="organism-card gram-pos">
+                    <div class="organism-name"><em>Staphylococcus aureus</em></div>
+                    <div class="organism-subtitle">The "Golden Staph" - MSSA & MRSA</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Skin infections, bacteremia, endocarditis, osteomyelitis, TSS</div>
+                </a>
+                <a href="s-pneumoniae-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Streptococcus pneumoniae</em></div>
+                    <div class="organism-subtitle">The Pneumococcus</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">CAP, meningitis, otitis media, sinusitis</div>
+                </a>
+                <a href="s-pyogenes-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Streptococcus pyogenes</em> (GAS)</div>
+                    <div class="organism-subtitle">Group A Strep</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">Pharyngitis, cellulitis, nec fasc, rheumatic fever, PSGN</div>
+                </a>
+                <a href="s-agalactiae-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Streptococcus agalactiae</em> (GBS)</div>
+                    <div class="organism-subtitle">Group B Strep</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Neonatal meningitis, sepsis, chorioamnionitis</div>
+                </a>
+                <a href="enterococcus-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Enterococcus</em> species</div>
+                    <div class="organism-subtitle">Including VRE</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">UTI, endocarditis, biliary infections</div>
+                </a>
+                <a href="listeria-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Listeria monocytogenes</em></div>
+                    <div class="organism-subtitle">The "Tumbling" Motility Bug</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Meningitis (elderly, immunocompromised, pregnant)</div>
+                </a>
+                <a href="c-difficile-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Clostridioides difficile</em></div>
+                    <div class="organism-subtitle">Antibiotic-Associated Colitis</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Pseudomembranous colitis, toxic megacolon</div>
+                </a>
+                <a href="c-perfringens-module.html" class="organism-card gram-pos coming-soon">
+                    <div class="organism-name"><em>Clostridium perfringens</em></div>
+                    <div class="organism-subtitle">Gas Gangrene</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">Gas gangrene, food poisoning</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Gram-Negative Bacteria -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon gram-neg">🟢</div>
+                <div class="category-title">
+                    <h2>Gram-Negative Bacteria</h2>
+                    <p>Thin peptidoglycan, outer membrane with LPS (endotoxin)</p>
+                </div>
+            </div>
+            <div class="organism-grid">
+                <a href="e-coli-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Escherichia coli</em></div>
+                    <div class="organism-subtitle">The Model Organism</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">UTI, bacteremia, meningitis (neonatal), diarrhea (EHEC, ETEC)</div>
+                </a>
+                <a href="klebsiella-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Klebsiella pneumoniae</em></div>
+                    <div class="organism-subtitle">Currant Jelly Sputum</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">HAP/VAP, UTI, liver abscess</div>
+                </a>
+                <a href="pseudomonas-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Pseudomonas aeruginosa</em></div>
+                    <div class="organism-subtitle">Blue-Green Pigment</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">HAP/VAP, CF, burns, malignant otitis externa</div>
+                </a>
+                <a href="n-meningitidis-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Neisseria meningitidis</em></div>
+                    <div class="organism-subtitle">The Meningococcus</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">Meningitis, meningococcemia, Waterhouse-Friderichsen</div>
+                </a>
+                <a href="n-gonorrhoeae-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Neisseria gonorrhoeae</em></div>
+                    <div class="organism-subtitle">The Gonococcus</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Urethritis, cervicitis, PID, DGI</div>
+                </a>
+                <a href="h-influenzae-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Haemophilus influenzae</em></div>
+                    <div class="organism-subtitle">Requires X & V Factors</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Otitis media, sinusitis, COPD exacerbation, epiglottitis</div>
+                </a>
+                <a href="salmonella-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Salmonella</em> species</div>
+                    <div class="organism-subtitle">Typhi & Non-typhoidal</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">Gastroenteritis, typhoid fever, bacteremia</div>
+                </a>
+                <a href="campylobacter-module.html" class="organism-card gram-neg coming-soon">
+                    <div class="organism-name"><em>Campylobacter jejuni</em></div>
+                    <div class="organism-subtitle">Comma-Shaped, Guillain-Barré</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Bloody diarrhea, Guillain-Barré syndrome</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Viruses -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon virus">🟡</div>
+                <div class="category-title">
+                    <h2>Viruses</h2>
+                    <p>Obligate intracellular pathogens - DNA vs RNA, enveloped vs non-enveloped</p>
+                </div>
+            </div>
+            <div class="organism-grid">
+                <a href="hsv-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">Herpes Simplex Virus (HSV)</div>
+                    <div class="organism-subtitle">HSV-1 & HSV-2</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">Oral/genital herpes, encephalitis, keratitis</div>
+                </a>
+                <a href="vzv-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">Varicella-Zoster Virus (VZV)</div>
+                    <div class="organism-subtitle">Chickenpox & Shingles</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                    </div>
+                    <div class="organism-diseases">Varicella (chickenpox), herpes zoster (shingles)</div>
+                </a>
+                <a href="ebv-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">Epstein-Barr Virus (EBV)</div>
+                    <div class="organism-subtitle">Infectious Mononucleosis</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Mono, Burkitt lymphoma, nasopharyngeal carcinoma</div>
+                </a>
+                <a href="cmv-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">Cytomegalovirus (CMV)</div>
+                    <div class="organism-subtitle">Owl's Eye Inclusions</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Congenital CMV, retinitis, colitis (immunocompromised)</div>
+                </a>
+                <a href="hepatitis-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">Hepatitis Viruses (A-E)</div>
+                    <div class="organism-subtitle">Liver Inflammation</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Acute hepatitis, chronic hepatitis, cirrhosis, HCC</div>
+                </a>
+                <a href="hiv-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">HIV</div>
+                    <div class="organism-subtitle">Human Immunodeficiency Virus</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Acute retroviral syndrome, opportunistic infections, AIDS</div>
+                </a>
+                <a href="influenza-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">Influenza</div>
+                    <div class="organism-subtitle">Antigenic Drift & Shift</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Influenza, viral pneumonia, secondary bacterial pneumonia</div>
+                </a>
+                <a href="rsv-module.html" class="organism-card virus coming-soon">
+                    <div class="organism-name">RSV</div>
+                    <div class="organism-subtitle">Respiratory Syncytial Virus</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Bronchiolitis, pneumonia in infants</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Fungi -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-icon fungus">🔴</div>
+                <div class="category-title">
+                    <h2>Fungi</h2>
+                    <p>Eukaryotic organisms - yeasts vs molds, cell wall with chitin and ergosterol</p>
+                </div>
+            </div>
+            <div class="organism-grid">
+                <a href="candida-module.html" class="organism-card fungus coming-soon">
+                    <div class="organism-name"><em>Candida</em> species</div>
+                    <div class="organism-subtitle">Opportunistic Yeast</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Thrush, esophagitis, vulvovaginitis, candidemia</div>
+                </a>
+                <a href="aspergillus-module.html" class="organism-card fungus coming-soon">
+                    <div class="organism-name"><em>Aspergillus</em></div>
+                    <div class="organism-subtitle">Septate Hyphae, 45° Branching</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Invasive aspergillosis, aspergilloma, ABPA</div>
+                </a>
+                <a href="cryptococcus-module.html" class="organism-card fungus coming-soon">
+                    <div class="organism-name"><em>Cryptococcus neoformans</em></div>
+                    <div class="organism-subtitle">Encapsulated Yeast</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Meningitis in HIV/AIDS</div>
+                </a>
+                <a href="pcp-module.html" class="organism-card fungus coming-soon">
+                    <div class="organism-name"><em>Pneumocystis jirovecii</em></div>
+                    <div class="organism-subtitle">PCP - AIDS-Defining</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag high-yield">High Yield</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">PCP pneumonia in HIV/immunocompromised</div>
+                </a>
+                <a href="histoplasma-module.html" class="organism-card fungus coming-soon">
+                    <div class="organism-name"><em>Histoplasma capsulatum</em></div>
+                    <div class="organism-subtitle">Ohio/Mississippi River Valley</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag mcat">MCAT</span>
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Pulmonary histoplasmosis, disseminated disease</div>
+                </a>
+                <a href="coccidioides-module.html" class="organism-card fungus coming-soon">
+                    <div class="organism-name"><em>Coccidioides immitis</em></div>
+                    <div class="organism-subtitle">Southwest US, "Valley Fever"</div>
+                    <div class="organism-tags">
+                        <span class="organism-tag step1">Step 1</span>
+                    </div>
+                    <div class="organism-diseases">Valley fever, pulmonary/disseminated coccidioidomycosis</div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Level tab filtering
+        document.querySelectorAll('.level-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                // Future: Filter cards based on data-level
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Fever of Unknown Origin</title>
+  <style>
+    :root{--primary:#EF4444;--secondary:#0891B2;--accent:#F59E0B;--success:#10B981;--danger:#EF4444;--info:#3B82F6;--purple:#8B5CF6}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0a1a1a,#1a2e2e);color:#E5E7EB;min-height:100vh;line-height:1.6}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:rgba(239,68,68,0.1);border-radius:1rem;border:1px solid rgba(239,68,68,0.3)}header h1{font-size:2rem;color:var(--primary)}.nav-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}.nav-tab{padding:0.5rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;cursor:pointer;color:#9CA3AF;font-size:0.85rem}.nav-tab:hover,.nav-tab.active{background:var(--primary);color:white}.tab-content{display:none}.tab-content.active{display:block}.section{background:rgba(255,255,255,0.05);border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1)}.section h2{color:var(--primary);margin-bottom:1rem}.section h3{color:var(--accent);margin:1rem 0 0.5rem;font-size:1rem}.key-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--primary);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.danger-box{background:rgba(239,68,68,0.15);border-left:4px solid var(--danger);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.info-box{background:rgba(59,130,246,0.15);border-left:4px solid var(--info);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}.success-box{background:rgba(16,185,129,0.15);border-left:4px solid var(--success);padding:1rem;margin:1rem 0;border-radius:0 0.5rem 0.5rem 0}table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}th,td{padding:0.5rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)}th{background:rgba(239,68,68,0.2);color:var(--primary)}ul,ol{padding-left:1.25rem;margin:0.5rem 0}li{margin:0.3rem 0}.mnemonic{background:rgba(139,92,246,0.15);border:2px dashed var(--purple);padding:1rem;border-radius:0.5rem;margin:1rem 0;text-align:center}.quiz-section{background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:0.75rem;padding:1rem;margin-top:1rem}.quiz-option{display:block;padding:0.6rem;margin:0.4rem 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:0.5rem;cursor:pointer;font-size:0.85rem}.quiz-option.correct{background:rgba(16,185,129,0.3);border-color:var(--success)}.quiz-option.incorrect{background:rgba(239,68,68,0.3);border-color:var(--danger)}.explanation{display:none;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.05);border-radius:0.5rem;font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🌡️ Fever of Unknown Origin</h1>
+      <p style="color:#9CA3AF">Definition • Differential • Systematic Workup</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('causes')">Causes</div>
+      <div class="nav-tab" onclick="showTab('workup')">Workup</div>
+      <div class="nav-tab" onclick="showTab('special')">Special Types</div>
+      <div class="nav-tab" onclick="showTab('resources')">📚 Resources</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="section">
+        <h2>🎯 Definition</h2>
+        
+        <div class="key-box">
+          <strong>Classic FUO Definition (Petersdorf & Beeson):</strong>
+          <ul>
+            <li>Temperature >38.3°C (101°F) on several occasions</li>
+            <li>Duration >3 weeks</li>
+            <li>No diagnosis after 1 week of inpatient investigation<br>
+            OR 3+ outpatient visits OR 3 days in hospital</li>
+          </ul>
+        </div>
+
+        <h3>Categories of FUO</h3>
+        <div class="mnemonic">
+          <strong>FUO Categories: "MINI"</strong><br>
+          <strong>M</strong>alignancy (~20%)<br>
+          <strong>I</strong>nfection (~30%)<br>
+          <strong>N</strong>oninfectious inflammatory (autoimmune/rheumatologic) (~25%)<br>
+          <strong>I</strong>diopathic/undiagnosed (~15-20%)
+        </div>
+
+        <table>
+          <tr><th>Category</th><th>% of FUO</th><th>Common Examples</th></tr>
+          <tr><td><strong>Infection</strong></td><td>~30%</td><td>TB, endocarditis, abscess, osteomyelitis, CMV/EBV</td></tr>
+          <tr><td><strong>Malignancy</strong></td><td>~20%</td><td>Lymphoma, leukemia, renal cell carcinoma, hepatoma</td></tr>
+          <tr><td><strong>Autoimmune/Inflammatory</strong></td><td>~25%</td><td>Adult Still's disease, giant cell arteritis, SLE, vasculitis</td></tr>
+          <tr><td><strong>Miscellaneous</strong></td><td>~10%</td><td>Drug fever, DVT/PE, factitious, thyroiditis</td></tr>
+          <tr><td><strong>Undiagnosed</strong></td><td>~15-20%</td><td>Often resolve spontaneously; good prognosis</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAUSES -->
+    <div id="causes" class="tab-content">
+      <div class="section">
+        <h2>📋 Common Causes of FUO</h2>
+
+        <h3>Infections</h3>
+        <table>
+          <tr><th>Category</th><th>Examples</th><th>Clues</th></tr>
+          <tr><td><strong>Bacterial</strong></td><td>Endocarditis, TB, abscess (intra-abdominal, dental), osteomyelitis, prostatitis</td><td>New murmur, risk factors, localized pain</td></tr>
+          <tr><td><strong>Viral</strong></td><td>CMV, EBV, HIV</td><td>Lymphadenopathy, atypical lymphocytes</td></tr>
+          <tr><td><strong>Fungal</strong></td><td>Histoplasmosis, coccidioidomycosis</td><td>Endemic area exposure, immunocompromised</td></tr>
+          <tr><td><strong>Parasitic</strong></td><td>Malaria, amebiasis</td><td>Travel history</td></tr>
+        </table>
+
+        <h3>Malignancies</h3>
+        <table>
+          <tr><th>Type</th><th>Clues</th></tr>
+          <tr><td><strong>Lymphoma</strong> (most common)</td><td>B symptoms (night sweats, weight loss), lymphadenopathy</td></tr>
+          <tr><td><strong>Leukemia</strong></td><td>Cytopenias, splenomegaly</td></tr>
+          <tr><td><strong>Renal cell carcinoma</strong></td><td>Hematuria, flank mass</td></tr>
+          <tr><td><strong>Hepatoma</strong></td><td>Hepatomegaly, cirrhosis history, elevated AFP</td></tr>
+          <tr><td><strong>Atrial myxoma</strong></td><td>Embolic phenomena, positional symptoms</td></tr>
+        </table>
+
+        <h3>Autoimmune/Inflammatory</h3>
+        <table>
+          <tr><th>Condition</th><th>Key Features</th></tr>
+          <tr><td><strong>Adult Still's disease</strong></td><td>Quotidian fever (spikes daily then normalizes), salmon rash, arthritis, ferritin >10,000</td></tr>
+          <tr><td><strong>Giant cell arteritis</strong></td><td>Age >50, headache, jaw claudication, elevated ESR/CRP, vision changes</td></tr>
+          <tr><td><strong>SLE</strong></td><td>Young women, rash, arthritis, serositis, cytopenias</td></tr>
+          <tr><td><strong>Vasculitis (PAN, GPA)</strong></td><td>Multi-system involvement, skin findings, renal</td></tr>
+          <tr><td><strong>Inflammatory bowel disease</strong></td><td>GI symptoms, extraintestinal manifestations</td></tr>
+          <tr><td><strong>Sarcoidosis</strong></td><td>Bilateral hilar adenopathy, skin/eye involvement</td></tr>
+        </table>
+
+        <h3>Miscellaneous</h3>
+        <table>
+          <tr><th>Cause</th><th>Features</th></tr>
+          <tr><td><strong>Drug fever</strong></td><td>Timing with new medication; patient appears "too well"</td></tr>
+          <tr><td><strong>DVT/PE</strong></td><td>Risk factors, leg swelling, dyspnea</td></tr>
+          <tr><td><strong>Thyroiditis</strong></td><td>Neck pain/tenderness, thyroid symptoms</td></tr>
+          <tr><td><strong>Factitious fever</strong></td><td>Healthcare worker, discrepancy between temp and pulse</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>Drug Fever:</strong> Common offenders include antibiotics (beta-lactams, sulfonamides), anticonvulsants (phenytoin), and allopurinol. Fever typically appears 7-10 days after starting drug. "Relatively well" appearance despite fever. May have eosinophilia.
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKUP -->
+    <div id="workup" class="tab-content">
+      <div class="section">
+        <h2>🔬 Systematic Workup</h2>
+
+        <h3>Step 1: Thorough History</h3>
+        <div class="key-box">
+          <strong>Critical history elements:</strong>
+          <ul>
+            <li>Travel (endemic infections)</li>
+            <li>Animal/pet exposure (zoonoses)</li>
+            <li>Occupational exposures</li>
+            <li>Sexual history, HIV risk factors</li>
+            <li>Medication list (drug fever)</li>
+            <li>Family history (Mediterranean fever, inflammatory conditions)</li>
+            <li>Dental procedures (endocarditis)</li>
+            <li>Prosthetic devices, recent surgery</li>
+            <li>TB exposure, prior PPD status</li>
+          </ul>
+        </div>
+
+        <h3>Step 2: Physical Exam (Repeated!)</h3>
+        <ul>
+          <li>Lymph nodes (all stations)</li>
+          <li>Cardiac (new murmurs)</li>
+          <li>Abdominal (hepatosplenomegaly, masses)</li>
+          <li>Skin (rashes, embolic phenomena, nodules)</li>
+          <li>Joints</li>
+          <li>Temporal arteries (if >50)</li>
+          <li>Teeth/gums</li>
+          <li>Fundoscopic exam (Roth spots)</li>
+        </ul>
+
+        <h3>Step 3: Initial Labs</h3>
+        <table>
+          <tr><th>Test</th><th>Looking For</th></tr>
+          <tr><td>CBC with differential</td><td>Leukemia, lymphoma, infection</td></tr>
+          <tr><td>CMP</td><td>Hepatic disease, renal disease</td></tr>
+          <tr><td>ESR, CRP</td><td>Inflammation (very elevated in GCA, Still's)</td></tr>
+          <tr><td>Ferritin</td><td>Still's disease (often >10,000)</td></tr>
+          <tr><td>LDH</td><td>Lymphoma, hemolysis</td></tr>
+          <tr><td>Blood cultures (×3)</td><td>Endocarditis, bacteremia</td></tr>
+          <tr><td>Urinalysis + culture</td><td>UTI, renal abscess</td></tr>
+          <tr><td>HIV</td><td>Immunocompromise, opportunistic infections</td></tr>
+          <tr><td>ANA, RF</td><td>Autoimmune disease</td></tr>
+          <tr><td>Quantiferon/PPD</td><td>Tuberculosis</td></tr>
+        </table>
+
+        <h3>Step 4: Imaging</h3>
+        <table>
+          <tr><th>Test</th><th>Indication</th></tr>
+          <tr><td><strong>Chest X-ray</strong></td><td>All patients - TB, lymphoma, sarcoid</td></tr>
+          <tr><td><strong>CT chest/abdomen/pelvis</strong></td><td>Search for abscess, lymphadenopathy, malignancy</td></tr>
+          <tr><td><strong>Echocardiogram</strong></td><td>Suspected endocarditis (TEE > TTE)</td></tr>
+          <tr><td><strong>PET-CT</strong></td><td>Occult malignancy, vasculitis, infection focus</td></tr>
+          <tr><td><strong>Temporal artery ultrasound</strong></td><td>Giant cell arteritis (>50 with elevated ESR)</td></tr>
+        </table>
+
+        <h3>Step 5: Consider Biopsy</h3>
+        <ul>
+          <li>Lymph node biopsy (adenopathy)</li>
+          <li>Bone marrow biopsy (cytopenias, disseminated infection)</li>
+          <li>Liver biopsy (hepatomegaly, granulomatous disease)</li>
+          <li>Temporal artery biopsy (suspected GCA)</li>
+        </ul>
+
+        <div class="success-box">
+          <strong>High-yield FUO tests:</strong>
+          <ul>
+            <li>PET-CT (localizes occult infection, malignancy, vasculitis)</li>
+            <li>TEE (endocarditis)</li>
+            <li>Temporal artery biopsy (GCA in elderly)</li>
+            <li>Bone marrow biopsy (hematologic malignancy, granulomatous disease)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIAL -->
+    <div id="special" class="tab-content">
+      <div class="section">
+        <h2>🔍 Special FUO Types</h2>
+
+        <h3>Nosocomial FUO</h3>
+        <div class="info-box">
+          <strong>Definition:</strong> Fever developing after ≥3 days in hospital<br><br>
+          <strong>Common causes:</strong>
+          <ul>
+            <li>C. difficile colitis</li>
+            <li>Catheter-related infection (line, Foley)</li>
+            <li>Surgical site infection</li>
+            <li>Drug fever</li>
+            <li>DVT/PE</li>
+            <li>Sinusitis (intubated patients)</li>
+            <li>Transfusion reaction</li>
+          </ul>
+        </div>
+
+        <h3>Neutropenic FUO</h3>
+        <div class="danger-box">
+          <strong>Definition:</strong> Fever in patient with ANC <500<br><br>
+          <strong>Key points:</strong>
+          <ul>
+            <li>Medical emergency - start empiric antibiotics IMMEDIATELY</li>
+            <li>Often no source identified (bacteria from GI translocation)</li>
+            <li>Gram-negative coverage essential (Pseudomonas)</li>
+            <li>Consider fungal infection if persistent fever >5-7 days on antibiotics</li>
+          </ul>
+        </div>
+
+        <h3>HIV-Associated FUO</h3>
+        <div class="info-box">
+          <strong>Consider:</strong>
+          <ul>
+            <li>Mycobacterium avium complex (MAC) - CD4 <50</li>
+            <li>TB</li>
+            <li>Pneumocystis jirovecii (PJP)</li>
+            <li>CMV</li>
+            <li>Lymphoma</li>
+            <li>Cryptococcosis</li>
+            <li>Histoplasmosis</li>
+          </ul>
+        </div>
+
+        <h3>Periodic Fever Syndromes</h3>
+        <table>
+          <tr><th>Syndrome</th><th>Features</th></tr>
+          <tr><td><strong>Familial Mediterranean Fever</strong></td><td>Mediterranean descent, recurrent serositis, colchicine responsive</td></tr>
+          <tr><td><strong>Adult Still's Disease</strong></td><td>Quotidian fever, salmon rash, arthritis, ferritin >10,000</td></tr>
+          <tr><td><strong>PFAPA</strong></td><td>Periodic fever, aphthous stomatitis, pharyngitis, adenitis (children)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+        <div id="resources" class="tab-content">
+      <div class="section">
+        <h2>📚 Open-Access Learning Resources</h2>
+        <h3>Educational Resources</h3>
+        <div class="resource-box">
+          <a class="resource-link" href="https://www.ncbi.nlm.nih.gov/books/NBK532265/" target="_blank">🔗 NCBI - Fever of Unknown Origin</a>
+        </div>
+        <div class="info-box" style="margin-top:1rem"><strong>Content Verification:</strong> Based on FUO definitions (Petersdorf-Beeson criteria).</div>
+      </div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <div class="section">
+        <h2>🧠 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <p><strong>Q1:</strong> What is the classic definition of FUO?</p>
+          <div class="quiz-option" onclick="check(this,false,'q1')">A. Any unexplained fever</div>
+          <div class="quiz-option" onclick="check(this,true,'q1')">B. Fever >38.3°C for >3 weeks without diagnosis after adequate investigation</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">C. Fever lasting >1 week</div>
+          <div class="quiz-option" onclick="check(this,false,'q1')">D. Recurrent fevers of any duration</div>
+          <div class="explanation" id="q1-exp"><strong>Correct: B.</strong> Classic FUO requires temperature >38.3°C (101°F), duration >3 weeks, and no diagnosis after adequate investigation (1 week inpatient or 3 outpatient visits/3 hospital days).</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q2:</strong> A 65-year-old woman with FUO has severe headache, jaw claudication, and ESR of 95. What diagnosis should you suspect?</p>
+          <div class="quiz-option" onclick="check(this,false,'q2')">A. Adult Still's disease</div>
+          <div class="quiz-option" onclick="check(this,true,'q2')">B. Giant cell arteritis</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">C. Lymphoma</div>
+          <div class="quiz-option" onclick="check(this,false,'q2')">D. Endocarditis</div>
+          <div class="explanation" id="q2-exp"><strong>Correct: B.</strong> Age >50 + headache + jaw claudication + very elevated ESR = classic for giant cell arteritis. This requires urgent treatment to prevent blindness. Get temporal artery biopsy (don't delay treatment for biopsy).</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q3:</strong> What lab finding is characteristic of Adult Still's disease?</p>
+          <div class="quiz-option" onclick="check(this,false,'q3')">A. Positive ANA</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">B. Positive rheumatoid factor</div>
+          <div class="quiz-option" onclick="check(this,true,'q3')">C. Very elevated ferritin (often >10,000)</div>
+          <div class="quiz-option" onclick="check(this,false,'q3')">D. Elevated uric acid</div>
+          <div class="explanation" id="q3-exp"><strong>Correct: C.</strong> Adult Still's disease is characterized by quotidian fever, salmon-colored rash, arthritis, and markedly elevated ferritin (often >10,000 ng/mL). ANA and RF are typically negative.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q4:</strong> Which imaging modality is most helpful in localizing occult infection or malignancy in FUO?</p>
+          <div class="quiz-option" onclick="check(this,false,'q4')">A. Chest X-ray</div>
+          <div class="quiz-option" onclick="check(this,true,'q4')">B. PET-CT</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">C. Abdominal ultrasound</div>
+          <div class="quiz-option" onclick="check(this,false,'q4')">D. MRI brain</div>
+          <div class="explanation" id="q4-exp"><strong>Correct: B.</strong> PET-CT is highly useful in FUO workup. It can identify occult infections (abscesses, osteomyelitis), malignancies (lymphoma), and vasculitis by detecting areas of increased metabolic activity.</div>
+        </div>
+
+        <div class="quiz-section">
+          <p><strong>Q5:</strong> A patient develops fever 5 days after starting a new antibiotic. They appear well despite temperature of 39°C. What should you suspect?</p>
+          <div class="quiz-option" onclick="check(this,true,'q5')">A. Drug fever</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">B. Treatment failure</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">C. Superinfection</div>
+          <div class="quiz-option" onclick="check(this,false,'q5')">D. C. difficile colitis</div>
+          <div class="explanation" id="q5-exp"><strong>Correct: A.</strong> Drug fever classically appears 7-10 days after starting a medication. The patient often appears "too well" for the degree of fever. Common culprits include beta-lactams, sulfonamides, and anticonvulsants. May have eosinophilia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active')}
+    function check(el,correct,qId){if(el.classList.contains('correct')||el.classList.contains('incorrect'))return;el.classList.add(correct?'correct':'incorrect');if(correct)document.getElementById(qId+'-exp').style.display='block'}
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Fever of Unknown Origin"
+         data-key-points="🎯 Definition, 📋 Common Causes of FUO, 🔬 Systematic Workup, 🔍 Special FUO Types, 📚 Open-Access Learning Resources, 🧠 Test Your Knowledge, Categories of FUO, Infections, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

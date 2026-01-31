@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histoplasma capsulatum | MicrobiologyDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-bg: #ecfdf5;
+            --secondary: #7c3aed;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e4e4e7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        
+        .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; }
+        .nav-link:hover { background: var(--border); }
+        
+        .header { background: linear-gradient(135deg, #854d0e 0%, #713f12 100%); padding: 40px 24px; }
+        .header-inner { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 36px; color: white; margin-bottom: 8px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); }
+        .header-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+        .header-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: white; }
+        
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        
+        .quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+        .fact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .fact-label { font-size: 12px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px; }
+        .fact-value { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+        .fact-value.fungus { color: #854d0e; }
+        
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
+        .section h2 { font-size: 22px; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 { font-size: 18px; color: var(--primary-dark); margin: 24px 0 12px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+        .feature-card { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 16px; }
+        .feature-card h4 { color: #854d0e; font-size: 14px; margin-bottom: 8px; }
+        .feature-card p { color: #78350f; font-size: 13px; margin: 0; }
+        .feature-card.danger { background: #fee2e2; border-color: #fca5a5; }
+        .feature-card.danger h4 { color: #991b1b; }
+        .feature-card.danger p { color: #7f1d1d; }
+        
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .comparison-table th { background: #fef3c7; color: #854d0e; font-weight: 600; font-size: 13px; }
+        .comparison-table td { font-size: 14px; }
+        .comparison-table tr:hover { background: #f8fafc; }
+        
+        .treatment-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .treatment-box h4 { color: #1e40af; margin-bottom: 16px; }
+        .treatment-box ul { margin-left: 20px; color: #1e3a8a; }
+        .treatment-box li { margin-bottom: 8px; }
+        
+        .key-point { background: #ecfdf5; border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: var(--primary-dark); }
+        
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl strong { color: #92400e; }
+        
+        .warning-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .warning-box h4 { color: #991b1b; margin-bottom: 12px; }
+        .warning-box ul { margin-left: 20px; color: #7f1d1d; }
+        .warning-box li { margin-bottom: 8px; }
+        
+        .geography-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .geography-box h4 { color: #854d0e; margin-bottom: 12px; }
+        .geography-box p { color: #78350f; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">🦠 MicrobiologyDx</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link">All Organisms</a>
+                <a href="../pharmacology/antifungals.html" class="nav-link">Antifungals</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="index.html">MicrobiologyDx</a> → Endemic Fungi</div>
+            <h1>Histoplasma capsulatum</h1>
+            <p class="header-subtitle">Ohio/Mississippi River Valleys — The "Cave Disease"</p>
+            <div class="header-tags">
+                <span class="header-tag">Dimorphic Fungus</span>
+                <span class="header-tag">Endemic Mycosis</span>
+                <span class="header-tag">Intracellular</span>
+                <span class="header-tag">Bat/Bird Droppings</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="quick-facts">
+            <div class="fact-card">
+                <div class="fact-label">Classification</div>
+                <div class="fact-value fungus">Dimorphic Fungus</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Endemic Region</div>
+                <div class="fact-value">Ohio/Mississippi Valleys</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Source</div>
+                <div class="fact-value">Bat/bird droppings</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Treatment</div>
+                <div class="fact-value">Itraconazole/AmB</div>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2>🔬 Organism Overview</h2>
+            
+            <p>Histoplasma capsulatum is a dimorphic fungus endemic to the Ohio and Mississippi River valleys. It's the most common endemic mycosis in the US. Despite its name, it does NOT have a capsule — the name is a misnomer from early microscopy.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🌡️ Dimorphism</h4>
+                    <p><strong>Mold at 25°C</strong> (environment): septate hyphae with tuberculate macroconidia. <strong>Yeast at 37°C</strong> (body): small oval budding yeast INSIDE macrophages.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🦇 Environmental Source</h4>
+                    <p>Soil enriched with <strong>bat or bird droppings</strong> (nitrogen source). Caves, chicken coops, old buildings, under bridges. Infection from inhaling microconidia.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🦠 Intracellular Pathogen</h4>
+                    <p>Like TB, lives inside macrophages. Cell-mediated immunity (T cells) essential for control. Immunocompromised at risk for disseminated disease.</p>
+                </div>
+            </div>
+
+            <div class="geography-box">
+                <h4>🗺️ Geographic Distribution</h4>
+                <p><strong>Highly endemic:</strong> Ohio River Valley, Mississippi River Valley, Central America, parts of South America, Africa, Southeast Asia. In US, extends from Texas to New York along river valleys. ~80% of people in endemic areas have been exposed (positive skin test). Most infections asymptomatic or mild.</p>
+            </div>
+
+            <div class="key-point">
+                <strong>Board Pearl:</strong> "Mold in the cold, yeast in the beast" — Dimorphic fungi (Histoplasma, Blastomyces, Coccidioides) are mold in environment (cold), yeast in body (warm). This is high-yield!
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📊 Clinical Syndromes</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Syndrome</th>
+                        <th>Host</th>
+                        <th>Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Asymptomatic/Subclinical</strong></td>
+                        <td>Most (>90%)</td>
+                        <td>No symptoms; may have calcified granulomas on CXR later</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Acute Pulmonary</strong></td>
+                        <td>Immunocompetent, heavy exposure</td>
+                        <td>Flu-like: fever, cough, chest pain, myalgias. Self-limited 2-4 weeks. CXR: infiltrates ± hilar LAD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chronic Pulmonary</strong></td>
+                        <td>COPD, emphysema</td>
+                        <td>Mimics TB: upper lobe cavitary disease, weight loss, cough. Progressive if untreated.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Disseminated</strong></td>
+                        <td>AIDS (CD4 &lt;150), immunosuppressed</td>
+                        <td>Fever, weight loss, hepatosplenomegaly, pancytopenia, mucocutaneous lesions. Can be fatal.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mediastinal</strong></td>
+                        <td>Any</td>
+                        <td>Granulomatous: enlarged nodes, can cause compression. Fibrosing: rare, progressive fibrosis.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Disseminated Histoplasmosis (High-Yield for AIDS)</h3>
+            <div class="feature-grid">
+                <div class="feature-card danger">
+                    <h4>🎯 Risk: CD4 &lt;150</h4>
+                    <p>AIDS-defining illness. Often presents with fever of unknown origin, weight loss, fatigue. Can be rapidly fatal without treatment.</p>
+                </div>
+                <div class="feature-card danger">
+                    <h4>📋 Clinical Features</h4>
+                    <p>Hepatosplenomegaly (90%), pancytopenia, elevated LFTs, skin/mucosal ulcers, GI involvement, adrenal insufficiency.</p>
+                </div>
+                <div class="feature-card danger">
+                    <h4">🩺 Physical Findings</h4>
+                    <p>Oral/skin ulcers, lymphadenopathy, hepatosplenomegaly. Can mimic disseminated TB or lymphoma.</p>
+                </div>
+            </div>
+
+            <div class="clinical-pearl">
+                <strong>Classic Board Vignette:</strong> Patient from Ohio River Valley + spelunking (cave exploration) or cleaning chicken coop + flu-like illness ± hilar lymphadenopathy = Think Histoplasmosis!
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧪 Diagnosis</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Best For</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Urine/Serum Antigen</strong></td>
+                        <td>Disseminated, acute pulmonary (severe)</td>
+                        <td>Sensitivity 90%+ in disseminated. Cross-reacts with Blastomyces. Best rapid test.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Serology (antibody)</strong></td>
+                        <td>Subacute/chronic, immunocompetent</td>
+                        <td>Complement fixation, immunodiffusion. Takes 4-8 weeks to develop. May be negative in immunocompromised.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Culture</strong></td>
+                        <td>Definitive diagnosis</td>
+                        <td>Gold standard but slow (2-4 weeks). Requires special handling (BSL-3). Mold form is hazardous!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Histopathology</strong></td>
+                        <td>Tissue diagnosis</td>
+                        <td>Small (2-4 μm) oval yeasts INSIDE macrophages. GMS or PAS stain. Looks like "dots" in cells.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bone Marrow Biopsy</strong></td>
+                        <td>Disseminated with pancytopenia</td>
+                        <td>High yield in disseminated disease. Shows intracellular yeasts.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-point">
+                <strong>Diagnostic Approach:</strong> For disseminated or severe acute → urine/serum antigen (fast, sensitive). For chronic/subacute in immunocompetent → serology. For definitive → culture or histopath showing intracellular yeasts.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>💊 Treatment</h2>
+            
+            <div class="treatment-box">
+                <h4>Mild-Moderate Acute Pulmonary (&lt;4 weeks symptoms)</h4>
+                <ul>
+                    <li>Usually <strong>no treatment needed</strong> — self-limited in immunocompetent</li>
+                    <li>If symptomatic >4 weeks or immunocompromised: <strong>Itraconazole</strong> 200mg TID × 3 days, then 200mg BID × 6-12 weeks</li>
+                </ul>
+            </div>
+
+            <div class="treatment-box">
+                <h4>Moderate-Severe Acute or Chronic Pulmonary</h4>
+                <ul>
+                    <li><strong>Liposomal Amphotericin B</strong> 3-5 mg/kg/day × 1-2 weeks (induction)</li>
+                    <li>Then <strong>Itraconazole</strong> 200mg BID × 12 months (consolidation)</li>
+                </ul>
+            </div>
+
+            <div class="treatment-box">
+                <h4>Disseminated Histoplasmosis</h4>
+                <ul>
+                    <li><strong>Induction:</strong> Liposomal Amphotericin B 3 mg/kg/day × 1-2 weeks (until clinical improvement)</li>
+                    <li><strong>Consolidation:</strong> Itraconazole 200mg BID × ≥12 months</li>
+                    <li><strong>AIDS patients:</strong> Continue itraconazole as secondary prophylaxis until CD4 >150 × 6 months on ART</li>
+                    <li><strong>Monitor:</strong> Urine antigen to assess response</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Itraconazole Considerations</h4>
+                <ul>
+                    <li>Requires acidic environment for absorption — take with food, avoid PPIs/H2 blockers</li>
+                    <li>Use <strong>solution</strong> formulation if capsules not absorbing (better bioavailability)</li>
+                    <li>Check itraconazole levels (goal trough >1 μg/mL)</li>
+                    <li>Drug interactions: CYP3A4 inhibitor — check all medications!</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📝 High-Yield Summary</h2>
+            <ul style="margin-left: 20px;">
+                <li><strong>ID:</strong> Dimorphic fungus — mold in environment, yeast in body (inside macrophages)</li>
+                <li><strong>Geography:</strong> Ohio/Mississippi River Valleys; bat/bird droppings (caves, chicken coops)</li>
+                <li><strong>Acute:</strong> Flu-like illness, usually self-limited; may see hilar lymphadenopathy</li>
+                <li><strong>Chronic:</strong> Mimics TB — upper lobe cavitary disease in COPD patients</li>
+                <li><strong>Disseminated:</strong> AIDS (CD4 &lt;150) — fever, hepatosplenomegaly, pancytopenia, skin lesions</li>
+                <li><strong>Diagnosis:</strong> Urine antigen (disseminated), serology (chronic), histopath shows intracellular yeasts</li>
+                <li><strong>Treatment:</strong> Mild = observation or itraconazole; Severe/disseminated = AmB → itraconazole</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>📚 Sources & Guidelines</h2>
+            <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li><strong>IDSA Histoplasmosis Guidelines (2007).</strong> <a href="https://academic.oup.com/cid/article/45/7/807/344589" target="_blank" style="color: #059669;">IDSA Histoplasmosis Guidelines</a></li>
+                <li><strong>NCBI Bookshelf - Histoplasmosis.</strong> <a href="https://www.ncbi.nlm.nih.gov/books/NBK448185/" target="_blank" style="color: #059669;">StatPearls: Histoplasmosis</a></li>
+                <li><strong>CDC Histoplasmosis.</strong> <a href="https://www.cdc.gov/histoplasmosis/" target="_blank" style="color: #059669;">CDC Histoplasmosis Information</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Histoplasma capsulatum"
+         data-key-points="dimorphic fungus, Ohio Mississippi River valleys, bat bird droppings caves, intracellular macrophages, disseminated AIDS CD4 under 150, urine antigen, itraconazole amphotericin"
+         data-objectives="Identify histoplasmosis risk factors and geography, distinguish clinical syndromes, select appropriate antifungal therapy"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>
