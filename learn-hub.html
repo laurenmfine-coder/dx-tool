@@ -24,15 +24,32 @@
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
         
         /* Navigation */
-        .nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--primary); font-size: 1.5rem; font-weight: 700; }
-        .nav-brand svg { height: 32px; }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-        .nav-link:hover, .nav-link.active { color: var(--primary); }
-        .btn-signin { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
-        .btn-signin:hover { background: var(--primary-dark); }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-link { padding: 8px 16px; color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 14px; border-radius: 8px; transition: all 0.2s; }
+        .nav-link:hover { background: #f1f5f9; color: var(--text); }
+        .nav-link.active { color: var(--primary); }
+        .nav-signin { background: var(--primary) !important; color: white !important; margin-left: 8px; }
+        .nav-signin:hover { background: var(--primary-dark) !important; }
+        
+        /* Dropdown Navigation */
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-content {
+            position: absolute; top: 100%; left: 0; min-width: 280px;
+            background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12); opacity: 0; visibility: hidden;
+            transform: translateY(8px); transition: all 0.2s ease; padding: 8px; z-index: 1000; margin-top: 4px;
+        }
+        .nav-dropdown:hover .nav-dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-decoration: none; color: #1e293b; border-radius: 8px; transition: background 0.15s; }
+        .dropdown-item:hover { background: #f0fdf4; }
+        .dropdown-icon { font-size: 1.25rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; flex-shrink: 0; }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { font-size: 0.9rem; font-weight: 600; }
+        .dropdown-text small { font-size: 0.75rem; color: #64748b; }
+        .dropdown-divider { height: 1px; background: #e2e8f0; margin: 8px 0; }
         
         /* Hero */
         .hero { background: linear-gradient(135deg, #059669 0%, #0891b2 100%); padding: 60px 24px; text-align: center; color: white; }
@@ -123,10 +140,75 @@
                 DxSuite
             </a>
             <div class="nav-links">
-                <a href="learn-hub.html" class="nav-link active">Learn</a>
-                <a href="tools/index.html" class="nav-link">Tools</a>
-                <a href="ReasonDx/index.html" class="nav-link">Practice</a>
-                <a href="auth/register.html" class="btn-signin">Sign In</a>
+                <!-- Learn Dropdown -->
+                <div class="nav-dropdown">
+                    <a href="learn-hub.html" class="nav-link active">Learn ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="mechanism/index.html" class="dropdown-item">
+                            <span class="dropdown-icon">⚙️</span>
+                            <div class="dropdown-text"><strong>MechanismDx</strong><small>Pathophysiology modules</small></div>
+                        </a>
+                        <a href="microbiology/index.html" class="dropdown-item">
+                            <span class="dropdown-icon">🦠</span>
+                            <div class="dropdown-text"><strong>Microbiology</strong><small>Bacteria, viruses, fungi</small></div>
+                        </a>
+                        <a href="pharmacology/index.html" class="dropdown-item">
+                            <span class="dropdown-icon">💊</span>
+                            <div class="dropdown-text"><strong>Pharmacology</strong><small>Drug mechanisms & uses</small></div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="learn-hub.html" class="dropdown-item">
+                            <span class="dropdown-icon">📚</span>
+                            <div class="dropdown-text"><strong>View All Learning Options</strong><small>Compare all platforms</small></div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Practice Dropdown -->
+                <div class="nav-dropdown">
+                    <a href="ReasonDx/index.html" class="nav-link">Practice ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="ReasonDx/index.html" class="dropdown-item">
+                            <span class="dropdown-icon">🩺</span>
+                            <div class="dropdown-text"><strong>ReasonDx</strong><small>Clinical reasoning cases</small></div>
+                        </a>
+                        <a href="CoachDx/index.html" class="dropdown-item">
+                            <span class="dropdown-icon">🗣️</span>
+                            <div class="dropdown-text"><strong>CoachDx</strong><small>AI attending sessions</small></div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="ReasonDx/ecg/ecg-quiz.html" class="dropdown-item">
+                            <span class="dropdown-icon">💓</span>
+                            <div class="dropdown-text"><strong>ECG Practice</strong><small>Rhythm interpretation</small></div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Tools Dropdown -->
+                <div class="nav-dropdown">
+                    <a href="tools/index.html" class="nav-link">Tools ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="tools/calculator-hub.html" class="dropdown-item">
+                            <span class="dropdown-icon">🧮</span>
+                            <div class="dropdown-text"><strong>Calculators</strong><small>Clinical calculators</small></div>
+                        </a>
+                        <a href="tools/flashcard-studio.html" class="dropdown-item">
+                            <span class="dropdown-icon">🎴</span>
+                            <div class="dropdown-text"><strong>Flashcards</strong><small>Spaced repetition</small></div>
+                        </a>
+                        <a href="tools/ddx-builder.html" class="dropdown-item">
+                            <span class="dropdown-icon">🔍</span>
+                            <div class="dropdown-text"><strong>DDx Builder</strong><small>Differential diagnosis</small></div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="tools/index.html" class="dropdown-item">
+                            <span class="dropdown-icon">🛠️</span>
+                            <div class="dropdown-text"><strong>All Tools</strong><small>View complete toolkit</small></div>
+                        </a>
+                    </div>
+                </div>
+                
+                <a href="auth/register.html" class="nav-link nav-signin">Sign In</a>
             </div>
         </div>
     </nav>
