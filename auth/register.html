@@ -618,28 +618,36 @@
             btn.textContent = 'Verifying...';
             btn.disabled = true;
             
-            // Call Google Sheets API to validate unique code
-            fetch(CONFIG.GOOGLE_SHEETS_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'validateCode',
-                    code: code,
-                    type: state.researchType
-                })
+            // Use GET request with URL parameters to avoid CORS issues
+            const params = new URLSearchParams({
+                action: 'validateCode',
+                code: code,
+                type: state.researchType || 'student'
+            });
+            
+            fetch(`${CONFIG.GOOGLE_SHEETS_URL}?${params.toString()}`, {
+                method: 'GET',
+                redirect: 'follow'
             })
-            .then(response => response.json())
-            .then(result => {
+            .then(response => response.text())
+            .then(text => {
                 btn.textContent = originalText;
                 btn.disabled = false;
                 
-                if (result.success && result.valid) {
-                    state.verifiedConsentCode = code;
-                    errorEl.textContent = '✓ Code verified!';
-                    errorEl.className = 'message success';
-                    setTimeout(() => nextSection(), 500);
-                } else {
-                    errorEl.textContent = result.error || 'Invalid code. Please check and try again.';
+                try {
+                    const result = JSON.parse(text);
+                    if (result.success && result.valid) {
+                        state.verifiedConsentCode = code;
+                        errorEl.textContent = '✓ Code verified!';
+                        errorEl.className = 'message success';
+                        setTimeout(() => nextSection(), 500);
+                    } else {
+                        errorEl.textContent = result.error || 'Invalid code. Please check and try again.';
+                        errorEl.className = 'message error';
+                    }
+                } catch (e) {
+                    console.log('Parse error:', e, 'Response:', text);
+                    errorEl.textContent = 'Unable to verify code. Please try again later.';
                     errorEl.className = 'message error';
                 }
             })
