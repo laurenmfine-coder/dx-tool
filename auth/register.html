@@ -841,6 +841,25 @@
             if (state.selectedPlan === 'research') {
                 const idNum = Math.floor(1000 + Math.random() * 9000);
                 studyId = `${CONFIG.STUDY_PREFIX}-R${idNum}`;
+                
+                // Mark consent code as used
+                if (state.verifiedConsentCode) {
+                    const params = new URLSearchParams({
+                        action: 'markCodeUsed',
+                        code: state.verifiedConsentCode,
+                        email: state.verifiedEmail || '',
+                        studyId: studyId
+                    });
+                    
+                    try {
+                        await fetch(`${CONFIG.GOOGLE_SHEETS_URL}?${params.toString()}`, {
+                            method: 'GET',
+                            redirect: 'follow'
+                        });
+                    } catch (e) {
+                        console.log('Error marking code as used:', e);
+                    }
+                }
             }
             
             await sendToSheets({
