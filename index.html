@@ -2,794 +2,563 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DxSuite | Clinical Learning Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ReasonDx | Clinical Reasoning Trainer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #059669;
-            --primary-dark: #047857;
-            --text-primary: #18181b;
-            --text-secondary: #52525b;
-            --bg-main: #f8fafc;
-            --bg-card: #ffffff;
-            --border: #e4e4e7;
+            --primary: #1e3a5f; --primary-dark: #0f2744; --primary-light: #2d5a8a;
+            --accent: #0891b2; --accent-dark: #0e7490; --accent-light: #22d3ee;
+            --purple: #7c3aed; --purple-light: #a78bfa;
+            --success: #059669; --warning: #d97706; --danger: #dc2626;
+            --bg: #f0f4f8; --card: #ffffff; --border: #e2e8f0;
+            --text: #0f172a; --text-secondary: #475569; --muted: #64748b;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
-
+        [data-theme="dark"] {
+            --bg: #0c1524; --card: #1a2744; --border: #2d4a6f;
+            --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3); --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.4);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        
         /* Navigation */
-        .nav {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-brand {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-        .nav-link {
-            padding: 8px 16px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.2s;
-            position: relative;
-        }
-        .nav-link:hover {
-            background: #f1f5f9;
-            color: var(--text-primary);
-        }
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            padding: 64px 24px;
-            text-align: center;
-            color: white;
-        }
-        .hero h1 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-        }
-        .hero p {
-            font-size: 18px;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 24px;
-        }
-        .hero-tagline {
-            font-family: Georgia, serif;
-            font-style: italic;
-            font-size: 16px;
-            opacity: 0.8;
-        }
-
+        .dx-nav { background: var(--primary-dark); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000; }
+        .dx-nav-inner { max-width: 1400px; margin: 0 auto; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .dx-nav-brand { display: flex; align-items: center; text-decoration: none; color: white; }
+        .dx-nav-brand svg { height: 32px; }
+        .dx-nav-links { display: flex; gap: 8px; align-items: center; }
+        .dx-nav-link { color: rgba(255,255,255,0.8); text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+        .dx-nav-link:hover { background: rgba(255,255,255,0.1); color: white; }
+        .dx-nav-link.active { background: rgba(255,255,255,0.15); color: white; }
+        @media (max-width: 768px) { .dx-nav-links { display: none; } }
+        
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent-dark) 100%); padding: 0; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 60%; height: 200%; background: radial-gradient(ellipse, rgba(8,145,178,0.3) 0%, transparent 70%); pointer-events: none; }
+        .header-inner { max-width: 1400px; margin: 0 auto; padding: 48px 24px 56px; position: relative; z-index: 1; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .logo { display: flex; align-items: center; gap: 12px; color: white; text-decoration: none; }
+        .logo-icon { width: 48px; height: 48px; background: rgba(255,255,255,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; backdrop-filter: blur(10px); }
+        .logo-text { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+        .logo-badge { font-size: 0.65rem; background: var(--accent-light); color: var(--primary-dark); padding: 2px 8px; border-radius: 20px; margin-left: 8px; font-weight: 600; }
+        .header-actions { display: flex; gap: 12px; align-items: center; }
+        .btn-ghost { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; backdrop-filter: blur(10px); text-decoration: none; }
+        .btn-ghost:hover { background: rgba(255,255,255,0.2); }
+        .hero-content { text-align: center; color: white; }
+        .hero-title { font-size: 2.75rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -1px; }
+        .hero-subtitle { font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; }
+        
+        /* Stats Strip */
+        .stats-strip { background: var(--card); border-bottom: 1px solid var(--border); }
+        .stats-inner { max-width: 1400px; margin: 0 auto; padding: 20px 24px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--accent-dark); }
+        [data-theme="dark"] .stat-value { color: var(--accent-light); }
+        .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        
         /* Main Content */
-        .content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 48px 24px;
-        }
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-        @media (max-width: 700px) {
-            .cards-grid { grid-template-columns: 1fr; }
-        }
-
-        .main-card {
-            background: white;
-            border-radius: 20px;
-            padding: 32px;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            border: 2px solid transparent;
-            transition: all 0.3s;
-            display: block;
-            position: relative;
-        }
-        .main-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-            border-color: var(--primary);
-        }
-        .card-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .card-icon.learn { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
-        .card-icon.tools { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
-        .card-icon.practice { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
-        .card-icon.progress { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); }
-
-        .main-card h2 { font-size: 22px; margin-bottom: 8px; }
-        .main-card p { color: var(--text-secondary); font-size: 15px; margin-bottom: 16px; }
-        .card-stats { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); }
-        .card-cta { margin-top: 16px; color: var(--primary); font-weight: 600; font-size: 14px; }
-
-        /* Quick Links */
-        .quick-section { margin-top: 48px; }
-        .quick-section h3 { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .quick-links { display: flex; flex-wrap: wrap; gap: 12px; }
-        .quick-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .quick-link:hover { border-color: var(--primary); background: #f0fdf4; }
-
-        /* ============================================
-           GUIDED TOUR SYSTEM - Core Styles
-           ============================================ */
+        .main { max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
         
-        /* Overlay */
-        .tour-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 9998;
-            transition: opacity 0.3s;
-        }
-        .tour-overlay.active { display: block; }
+        /* Section Headers */
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .section-title { font-size: 1.35rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
+        .section-title-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; }
+        .section-link { color: var(--accent-dark); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .section-link:hover { text-decoration: underline; }
         
-        /* Spotlight - highlights the current element */
-        .tour-spotlight {
-            display: none;
-            position: absolute;
-            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
-            border-radius: 12px;
-            z-index: 9999;
-            pointer-events: none;
-            transition: all 0.4s ease;
-        }
+        /* Mode Cards - Featured Learning Modes */
+        .modes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 48px; }
+        .mode-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; text-decoration: none; color: var(--text); transition: all 0.25s ease; position: relative; }
+        .mode-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        .mode-card-accent { height: 4px; }
+        .mode-card-accent.blue { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+        .mode-card-accent.green { background: linear-gradient(90deg, var(--success), #10b981); }
+        .mode-card-accent.purple { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+        .mode-card-accent.orange { background: linear-gradient(90deg, var(--warning), #f59e0b); }
+        .mode-card-body { padding: 24px; }
+        .mode-card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px; }
+        .mode-card-icon.blue { background: rgba(8,145,178,0.1); }
+        .mode-card-icon.green { background: rgba(5,150,105,0.1); }
+        .mode-card-icon.purple { background: rgba(124,58,237,0.1); }
+        .mode-card-icon.orange { background: rgba(217,119,6,0.1); }
+        .mode-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+        .mode-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; }
+        .mode-card-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+        .mode-tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+        .mode-tag.blue { background: rgba(8,145,178,0.1); color: var(--accent-dark); }
+        .mode-tag.green { background: rgba(5,150,105,0.1); color: var(--success); }
+        .mode-tag.purple { background: rgba(124,58,237,0.1); color: var(--purple); }
         
-        /* Tooltip */
-        .tour-tooltip {
-            display: none;
-            position: fixed;
-            width: 340px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            z-index: 10000;
-            overflow: hidden;
-            animation: tooltipIn 0.3s ease;
-        }
-        .tour-tooltip.active { display: block; }
+        /* Quick Tools */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 48px; }
+        .tool-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; text-decoration: none; color: var(--text); text-align: center; transition: all 0.2s; }
+        .tool-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+        .tool-icon { font-size: 1.75rem; margin-bottom: 8px; }
+        .tool-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+        .tool-desc { font-size: 0.75rem; color: var(--muted); }
         
-        @keyframes tooltipIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Case Library */
+        .filter-bar { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+        .filter-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text-secondary); cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .filter-search { flex: 1; min-width: 200px; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 0.9rem; }
+        .filter-search:focus { outline: none; border-color: var(--accent); }
         
-        .tour-tooltip-header {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            padding: 16px 20px;
-        }
-        .tour-tooltip-step {
-            font-size: 11px;
-            opacity: 0.8;
-            margin-bottom: 4px;
-        }
-        .tour-tooltip-title {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        /* Category Sections */
+        .category { margin-bottom: 36px; }
+        .category-header { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
+        .category-icon { font-size: 1.25rem; }
+        .category-name { font-size: 1.1rem; font-weight: 700; flex: 1; }
+        .category-count { font-size: 0.8rem; color: var(--muted); background: var(--bg); padding: 4px 12px; border-radius: 20px; }
+        [data-theme="dark"] .category-count { background: var(--primary-dark); }
         
-        .tour-tooltip-body {
-            padding: 20px;
-        }
-        .tour-tooltip-body p {
-            font-size: 14px;
-            color: #52525b;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-        .tour-tooltip-tip {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 12px;
-            background: #f0fdf4;
-            border-radius: 10px;
-            font-size: 13px;
-            color: #166534;
-        }
-        .tour-tooltip-tip .icon { font-size: 18px; }
+        /* Case Cards */
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .case-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-decoration: none; color: var(--text); transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .case-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+        .case-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .case-icon.adventure { background: rgba(8,145,178,0.1); }
+        .case-icon.standard { background: rgba(5,150,105,0.1); }
+        .case-icon.dual { background: rgba(124,58,237,0.1); }
+        .case-info { flex: 1; min-width: 0; }
+        .case-name { font-weight: 600; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-type { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .tour-tooltip-footer {
-            padding: 16px 20px;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .tour-progress {
-            display: flex;
-            gap: 6px;
-        }
-        .tour-progress-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #e2e8f0;
-        }
-        .tour-progress-dot.active { background: var(--primary); }
-        .tour-progress-dot.completed { background: #a7f3d0; }
-        
-        .tour-buttons { display: flex; gap: 8px; }
-        .tour-btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .tour-btn-secondary {
-            background: #f1f5f9;
-            border: none;
-            color: #64748b;
-        }
-        .tour-btn-secondary:hover { background: #e2e8f0; }
-        .tour-btn-primary {
-            background: var(--primary);
-            border: none;
-            color: white;
-        }
-        .tour-btn-primary:hover { background: var(--primary-dark); }
-        
-        /* Skip tour button */
-        .tour-skip {
-            position: fixed;
-            bottom: 24px;
-            left: 24px;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.9);
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #64748b;
-            cursor: pointer;
-            z-index: 10001;
-            display: none;
-        }
-        .tour-skip.active { display: block; }
-        
-        /* Welcome Modal */
-        .tour-welcome {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 10002;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-        }
-        .tour-welcome.active { display: flex; }
-        
-        .tour-welcome-content {
-            background: white;
-            border-radius: 24px;
-            max-width: 480px;
-            width: 100%;
-            overflow: hidden;
-            animation: welcomeIn 0.4s ease;
-        }
-        @keyframes welcomeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .tour-welcome-header {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            padding: 40px 32px;
-            text-align: center;
-            color: white;
-        }
-        .tour-welcome-header .emoji { font-size: 64px; margin-bottom: 16px; }
-        .tour-welcome-header h2 { font-size: 28px; margin-bottom: 8px; }
-        .tour-welcome-header p { opacity: 0.9; }
-        
-        .tour-welcome-body {
-            padding: 32px;
-        }
-        .tour-welcome-features {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .tour-welcome-feature {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .tour-welcome-feature .icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        .tour-welcome-feature .icon.blue { background: #dbeafe; }
-        .tour-welcome-feature .icon.green { background: #dcfce7; }
-        .tour-welcome-feature .icon.orange { background: #fef3c7; }
-        .tour-welcome-feature h4 { font-size: 15px; margin-bottom: 2px; }
-        .tour-welcome-feature p { font-size: 13px; color: #64748b; }
-        
-        .tour-welcome-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .tour-start-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .tour-skip-btn {
-            width: 100%;
-            padding: 12px;
-            background: none;
-            border: none;
-            color: #64748b;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        /* Highlight pulse animation for tour targets */
-        .tour-highlight {
-            position: relative;
-        }
-        .tour-highlight::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border: 3px solid var(--primary);
-            border-radius: 16px;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.02); }
-        }
-
         /* Footer */
-        .footer {
-            text-align: center;
-            padding: 32px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            border-top: 1px solid var(--border);
-            margin-top: 48px;
+        .footer { background: var(--card); border-top: 1px solid var(--border); padding: 32px 24px; margin-top: 48px; }
+        .footer-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-brand { display: flex; align-items: center; gap: 10px; }
+        .footer-logo { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; }
+        .footer-text { color: var(--muted); font-size: 0.85rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-link { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; }
+        .footer-link:hover { color: var(--accent); }
+        
+        /* View Toggle */
+        .view-toggle { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 4px; }
+        .view-btn { background: none; border: none; color: rgba(255,255,255,0.6); padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+        .view-btn.active { background: rgba(255,255,255,0.2); color: white; }
+        .view-btn:hover:not(.active) { color: rgba(255,255,255,0.9); }
+        
+        /* Mobile View Mode - Simplified UI */
+        [data-view="mobile"] .mode-card-body { padding: 16px; }
+        [data-view="mobile"] .mode-card h3 { font-size: 1rem; }
+        [data-view="mobile"] .mode-card p { font-size: 0.8rem; margin-bottom: 10px; }
+        [data-view="mobile"] .modes-grid { grid-template-columns: 1fr; gap: 12px; }
+        [data-view="mobile"] .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        [data-view="mobile"] .tool-card { padding: 14px 10px; }
+        [data-view="mobile"] .tool-icon { font-size: 1.4rem; }
+        [data-view="mobile"] .tool-name { font-size: 0.8rem; }
+        [data-view="mobile"] .cases-grid { grid-template-columns: 1fr; gap: 8px; }
+        [data-view="mobile"] .case-card { padding: 12px; }
+        [data-view="mobile"] .category-header { padding-bottom: 8px; margin-bottom: 12px; }
+        [data-view="mobile"] .section-header { margin-bottom: 12px; }
+        [data-view="mobile"] .section-title { font-size: 1.1rem; }
+        [data-view="mobile"] .stats-inner { gap: 12px; flex-wrap: wrap; justify-content: space-around; }
+        [data-view="mobile"] .stat { min-width: 70px; }
+        [data-view="mobile"] .stat-value { font-size: 1.4rem; }
+        [data-view="mobile"] .stat-label { font-size: 0.65rem; }
+        [data-view="mobile"] .header-inner { padding: 24px 12px 32px; }
+        [data-view="mobile"] .hero-title { font-size: 1.6rem; }
+        [data-view="mobile"] .hero-subtitle { font-size: 0.9rem; }
+        [data-view="mobile"] .main { padding: 20px 12px; }
+        [data-view="mobile"] .filter-bar { flex-direction: column; gap: 8px; }
+        [data-view="mobile"] .filter-btn { padding: 10px 14px; font-size: 0.9rem; }
+        [data-view="mobile"] .filter-search { width: 100%; padding: 12px 14px; }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-inner { padding: 32px 16px 40px; }
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .stats-inner { gap: 24px; }
+            .modes-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .header-actions { flex-wrap: wrap; justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .header-top { flex-direction: column; gap: 16px; }
+            .hero-title { font-size: 1.75rem; }
+            .stats-inner { gap: 16px; }
+            .stat-value { font-size: 1.5rem; }
+            .main { padding: 24px 16px; }
+            .tools-grid { grid-template-columns: repeat(2, 1fr); }
+            .cases-grid { grid-template-columns: 1fr; }
+            .filter-bar { flex-direction: column; }
+            .filter-search { width: 100%; }
+            .btn-ghost { padding: 8px 12px; font-size: 0.8rem; }
+        }
+        @supports (padding: max(0px)) {
+            body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand" id="tourTarget-brand">
-                <span>🩺</span> DxSuite
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+                    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="white">D</text>
+                    <line x1="38" y1="30" x2="52" y2="46" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="white"/>
+                    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="white"/>
+                    <circle cx="48" cy="67" r="5" fill="none" stroke="white" stroke-width="1.8"/>
+                    <circle cx="48" cy="67" r="2.5" fill="white"/>
+                    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="white" letter-spacing="-1">Suite</text>
+                </svg>
             </a>
-            <div class="nav-links" id="tourTarget-nav">
-                <a href="mechanism/index.html" class="nav-link" id="tourTarget-learn">Learn</a>
-                <a href="tools/index.html" class="nav-link" id="tourTarget-tools">Tools</a>
-                <a href="ReasonDx/training.html" class="nav-link" id="tourTarget-practice">Practice</a>
-                <a href="tools/learning-dashboard.html" class="nav-link" id="tourTarget-progress">My Progress</a>
-                <a href="auth/register.html" class="nav-link" style="background: #059669; color: white; margin-left: 8px;">Sign In</a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link">⚙️ MechanismDx</a>
+                <a href="index.html" class="dx-nav-link active">🩺 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link">🗣️ CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link">📊 Dashboard</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <header class="hero" id="tourTarget-hero">
-        <h1>Master Clinical Reasoning</h1>
-        <p>Learn pathophysiology, practice cases, and track your progress — all in one place.</p>
-        <div class="hero-tagline">Asking the right questions can change everything.</div>
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-top">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">🩺</div>
+                    <span class="logo-text">ReasonDx<span class="logo-badge">BETA</span></span>
+                </a>
+                <div class="header-actions">
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setView('desktop')" title="Desktop View">🖥️</button>
+                        <button class="view-btn" onclick="setView('mobile')" title="Mobile View">📱</button>
+                    </div>
+                    <a href="adventure-cases/epa-dashboard.html" class="btn-ghost">📊 EPA Dashboard</a>
+                    <button class="btn-ghost" onclick="toggleTheme()">🌙</button>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">Master Clinical Reasoning</h1>
+                <p class="hero-subtitle">200+ interactive cases designed to build diagnostic expertise through deliberate practice and immediate feedback</p>
+            </div>
+        </div>
     </header>
-
-    <!-- Main Content -->
-    <main class="content">
-        <div class="cards-grid">
-            <a href="mechanism/index.html" class="main-card" id="tourTarget-learnCard">
-                <div class="card-icon learn">📚</div>
-                <h2>Learn</h2>
-                <p>Master pathophysiology with interactive modules covering mechanisms, microbiology, and pharmacology.</p>
-                <div class="card-stats">
-                    <span>📖 262 Modules</span>
-                    <span>🧠 AI Tutor</span>
+    
+    <div class="stats-strip">
+        <div class="stats-inner">
+            <div class="stat"><div class="stat-value">3,160</div><div class="stat-label">Trainer Cases</div></div>
+            <div class="stat"><div class="stat-value">112</div><div class="stat-label">Socratic Cases</div></div>
+            <div class="stat"><div class="stat-value">30</div><div class="stat-label">Adventures</div></div>
+            <div class="stat"><div class="stat-value">97</div><div class="stat-label">Deep Dives</div></div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <!-- Learning Modes -->
+        <div class="section-header">
+            <h2 class="section-title"><span class="section-title-icon">🎯</span> Learning Modes</h2>
+        </div>
+        <div class="modes-grid">
+            <a href="adventure-hub.html" class="mode-card">
+                <div class="mode-card-accent blue"></div>
+                <div class="mode-card-body">
+                    <div class="mode-card-icon blue">🎮</div>
+                    <h3>Branching Scenarios</h3>
+                    <p>Interactive narratives where your decisions shape patient outcomes with immediate feedback</p>
+                    <div class="mode-card-meta"><span class="mode-tag blue">30 Adventures</span><span class="mode-tag purple">Choice-Based</span></div>
                 </div>
-                <div class="card-cta">Start Learning →</div>
             </a>
-
-            <a href="tools/index.html" class="main-card" id="tourTarget-toolsCard">
-                <div class="card-icon tools">🛠️</div>
-                <h2>Tools</h2>
-                <p>Calculators, flashcards, study planner, and everything you need to study smarter.</p>
-                <div class="card-stats">
-                    <span>🧮 18 Calculators</span>
-                    <span>🎴 Flashcards</span>
+            <a href="training.html" class="mode-card">
+                <div class="mode-card-accent green"></div>
+                <div class="mode-card-body">
+                    <div class="mode-card-icon green">🧠</div>
+                    <h3>Clinical Reasoning Trainer</h3>
+                    <p>Build differential diagnoses step-by-step through 3,160 clinical cases with real-time feedback</p>
+                    <div class="mode-card-meta"><span class="mode-tag green">3,160 Cases</span><span class="mode-tag green">24 Specialties</span></div>
                 </div>
-                <div class="card-cta">Open Tools →</div>
             </a>
-
-            <a href="ReasonDx/training.html" class="main-card" id="tourTarget-practiceCard">
-                <div class="card-icon practice">🎯</div>
-                <h2>Practice Cases</h2>
-                <p>Work through realistic clinical scenarios, build differentials, and develop expert diagnostic thinking.</p>
-                <div class="card-stats">
-                    <span>🏥 200+ Cases</span>
-                    <span>⚡ Interactive</span>
+            <a href="adventure-cases/board-prep.html" class="mode-card">
+                <div class="mode-card-accent purple"></div>
+                <div class="mode-card-body">
+                    <div class="mode-card-icon purple">📚</div>
+                    <h3>Board Review</h3>
+                    <p>High-yield cases organized for USMLE, COMLEX, and shelf exam preparation</p>
+                    <div class="mode-card-meta"><span class="mode-tag purple">High-Yield</span><span class="mode-tag purple">Step 2 CK</span></div>
                 </div>
-                <div class="card-cta">Start Practicing →</div>
             </a>
-
-            <a href="tools/learning-dashboard.html" class="main-card" id="tourTarget-progressCard">
-                <div class="card-icon progress">📊</div>
-                <h2>My Progress</h2>
-                <p>Track your learning, identify weak areas, and get personalized recommendations.</p>
-                <div class="card-stats">
-                    <span>📈 Analytics</span>
-                    <span>🎯 Goals</span>
+            <a href="adventure-cases/deep-dive-hub.html" class="mode-card">
+                <div class="mode-card-accent orange"></div>
+                <div class="mode-card-body">
+                    <div class="mode-card-icon orange">🔬</div>
+                    <h3>Deep Dive</h3>
+                    <p>Pathophysiology modules with mechanism-based learning</p>
+                    <div class="mode-card-meta"><span class="mode-tag blue">82 Deep Dives</span></div>
                 </div>
-                <div class="card-cta">View Progress →</div>
+            </a>
+            <a href="#cases" class="mode-card" onclick="setTimeout(() => filterCases('standard'), 100)">
+                <div class="mode-card-accent purple"></div>
+                <div class="mode-card-body">
+                    <div class="mode-card-icon purple">📖</div>
+                    <h3>Socratic Cases</h3>
+                    <p>Question-and-answer format with detailed teaching points after each response</p>
+                    <div class="mode-card-meta"><span class="mode-tag purple">91 Cases</span><span class="mode-tag purple">Q&A Format</span></div>
+                </div>
             </a>
         </div>
-
-        <div class="quick-section" id="tourTarget-quickLinks">
-            <h3>Quick Access</h3>
-            <div class="quick-links">
-                <a href="tools/calculator-hub.html" class="quick-link">🧮 Calculators</a>
-                <a href="tools/flashcard-studio.html" class="quick-link">🎴 Flashcards</a>
-                <a href="microbiology/index.html" class="quick-link">🦠 Microbiology</a>
-                <a href="pharmacology/index.html" class="quick-link">💊 Pharmacology</a>
-                <a href="tools/ddx-builder.html" class="quick-link">🔍 DDx Builder</a>
-                <a href="features/index.html" class="quick-link">✨ New Features</a>
+        
+        <!-- Quick Tools -->
+        <div class="section-header">
+            <h2 class="section-title"><span class="section-title-icon">🛠️</span> Quick Tools</h2>
+        </div>
+        <div class="tools-grid">
+            <a href="adventure-cases/ecg-quiz.html" class="tool-card"><div class="tool-icon">💓</div><div class="tool-name">ECG Quiz</div><div class="tool-desc">Rhythm practice</div></a>
+            <a href="adventure-cases/reasondx-learn-hub.html" class="tool-card"><div class="tool-icon">📖</div><div class="tool-name">Learn Hub</div><div class="tool-desc">Guided paths</div></a>
+            <a href="adventure-cases/epa-dashboard.html" class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">EPA Dashboard</div><div class="tool-desc">Competency tracking</div></a>
+            <a href="adventure-cases/ecg-generator.html" class="tool-card"><div class="tool-icon">📈</div><div class="tool-name">ECG Lab</div><div class="tool-desc">Generate rhythms</div></a>
+        </div>
+        
+        <!-- Case Library -->
+        <div class="section-header" id="cases">
+            <h2 class="section-title"><span class="section-title-icon">📋</span> Case Library</h2>
+            <a href="adventure-hub.html" class="section-link">View All Adventures →</a>
+        </div>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterCases('all')">All Cases</button>
+            <button class="filter-btn" onclick="filterCases('adventure')">Adventures</button>
+            <button class="filter-btn" onclick="filterCases('standard')">Standard</button>
+            <input type="text" class="filter-search" placeholder="Search cases..." oninput="searchCases(this.value)">
+        </div>
+        
+        <!-- Cardiology -->
+        <div class="category" data-category="cardiology">
+            <div class="category-header"><span class="category-icon">❤️</span><span class="category-name">Cardiology</span><span class="category-count">12 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/acs-expanded-adventure.html" class="case-card" data-type="adventure" data-name="acs acute coronary syndrome"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Acute Coronary Syndrome</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/acs-expanded.html" class="case-card" data-type="standard" data-name="acs acute coronary syndrome"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">ACS - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/afib-expanded-adventure.html" class="case-card" data-type="adventure" data-name="atrial fibrillation afib"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Atrial Fibrillation</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/afib-expanded.html" class="case-card" data-type="standard" data-name="atrial fibrillation afib"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">AFib - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/heart-failure-expanded-adventure.html" class="case-card" data-type="adventure" data-name="heart failure chf hfref"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Heart Failure</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/heart-failure-expanded.html" class="case-card" data-type="standard" data-name="heart failure chf"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Heart Failure - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/svt-wpw-expanded.html" class="case-card" data-type="standard" data-name="svt wpw tachycardia"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">SVT & WPW</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/acls-rhythms-expanded.html" class="case-card" data-type="standard" data-name="acls rhythms cardiac arrest"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">ACLS Rhythms</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/syncope-expanded.html" class="case-card" data-type="standard" data-name="syncope fainting"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Syncope</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/aortic-dissection-expanded.html" class="case-card" data-type="standard" data-name="aortic dissection"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Aortic Dissection</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/htn-emergency-expanded-adventure.html" class="case-card" data-type="adventure" data-name="hypertensive emergency htn crisis"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">HTN Emergency</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/htn-emergency-expanded.html" class="case-card" data-type="standard" data-name="hypertensive emergency"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">HTN Emergency - Standard</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Critical Care -->
+        <div class="category" data-category="critical">
+            <div class="category-header"><span class="category-icon">🚨</span><span class="category-name">Critical Care & Emergency</span><span class="category-count">15 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/sepsis-expanded-dual-adventure.html" class="case-card" data-type="dual" data-name="sepsis shock"><div class="case-icon dual">⚡</div><div class="case-info"><div class="case-name">Sepsis & Shock</div><div class="case-type">Dual-Mode</div></div></a>
+                <a href="adventure-cases/sepsis-expanded-adventure.html" class="case-card" data-type="adventure" data-name="sepsis"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Sepsis - Adventure</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/sepsis-expanded.html" class="case-card" data-type="standard" data-name="sepsis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Sepsis - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/shock-expanded.html" class="case-card" data-type="standard" data-name="shock cardiogenic hypovolemic distributive"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Shock (All Types)</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/aki-expanded-adventure.html" class="case-card" data-type="adventure" data-name="aki acute kidney injury"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Acute Kidney Injury</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/aki-expanded.html" class="case-card" data-type="standard" data-name="aki acute kidney injury"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">AKI - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/dka-expanded-adventure.html" class="case-card" data-type="adventure" data-name="dka diabetic ketoacidosis"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">DKA</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/dka-expanded.html" class="case-card" data-type="standard" data-name="dka diabetic ketoacidosis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">DKA - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/hyperkalemia-expanded.html" class="case-card" data-type="standard" data-name="hyperkalemia potassium"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Hyperkalemia</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/hyponatremia-expanded.html" class="case-card" data-type="standard" data-name="hyponatremia sodium"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Hyponatremia</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/toxidromes-expanded.html" class="case-card" data-type="standard" data-name="toxidromes poisoning overdose"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Toxidromes</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/apap-overdose-expanded.html" class="case-card" data-type="standard" data-name="acetaminophen tylenol overdose"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">APAP Overdose</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Allergy/Immunology -->
+        <div class="category" data-category="allergy">
+            <div class="category-header"><span class="category-icon">🦠</span><span class="category-name">Allergy & Immunology</span><span class="category-count">18 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/anaphylaxis-expanded-dual-adventure.html" class="case-card" data-type="dual" data-name="anaphylaxis allergic reaction"><div class="case-icon dual">⚡</div><div class="case-info"><div class="case-name">Anaphylaxis</div><div class="case-type">Dual-Mode</div></div></a>
+                <a href="adventure-cases/anaphylaxis-expanded-adventure.html" class="case-card" data-type="adventure" data-name="anaphylaxis"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Anaphylaxis - Adventure</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/anaphylaxis-expanded.html" class="case-card" data-type="standard" data-name="anaphylaxis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Anaphylaxis - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/drug-allergy-expanded-adventure.html" class="case-card" data-type="adventure" data-name="drug allergy penicillin"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Drug Allergy</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/drug-allergy-expanded.html" class="case-card" data-type="standard" data-name="drug allergy"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Drug Allergy - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/food-allergy-expanded-adventure.html" class="case-card" data-type="adventure" data-name="food allergy peanut"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Food Allergy</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/food-allergy-expanded.html" class="case-card" data-type="standard" data-name="food allergy"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Food Allergy - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/venom-allergy-expanded-adventure.html" class="case-card" data-type="adventure" data-name="venom allergy bee sting"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Venom Allergy</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/venom-allergy-expanded.html" class="case-card" data-type="standard" data-name="venom allergy"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Venom Allergy - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/urticaria-angioedema-expanded.html" class="case-card" data-type="standard" data-name="urticaria hives angioedema"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Urticaria/Angioedema</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/hae-expanded.html" class="case-card" data-type="standard" data-name="hereditary angioedema hae"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Hereditary Angioedema</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/asthma-phenotyping-expanded.html" class="case-card" data-type="standard" data-name="asthma phenotyping biologics"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Asthma Phenotyping</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/immunodeficiency-expanded.html" class="case-card" data-type="standard" data-name="immunodeficiency pidd"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Immunodeficiency</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/eosinophilia-expanded.html" class="case-card" data-type="standard" data-name="eosinophilia"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Eosinophilia</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/mast-cell-expanded.html" class="case-card" data-type="standard" data-name="mast cell mastocytosis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Mast Cell Disorders</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Neurology -->
+        <div class="category" data-category="neuro">
+            <div class="category-header"><span class="category-icon">🧠</span><span class="category-name">Neurology</span><span class="category-count">10 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/stroke-expanded-adventure.html" class="case-card" data-type="adventure" data-name="stroke cva tpa"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Stroke</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/stroke-expanded.html" class="case-card" data-type="standard" data-name="stroke cva"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Stroke - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/meningitis-expanded-dual-adventure.html" class="case-card" data-type="dual" data-name="meningitis"><div class="case-icon dual">⚡</div><div class="case-info"><div class="case-name">Meningitis</div><div class="case-type">Dual-Mode</div></div></a>
+                <a href="adventure-cases/meningitis-expanded.html" class="case-card" data-type="standard" data-name="meningitis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Meningitis - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/status-epilepticus-expanded.html" class="case-card" data-type="standard" data-name="status epilepticus seizure"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Status Epilepticus</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/sah-expanded.html" class="case-card" data-type="standard" data-name="subarachnoid hemorrhage sah"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">SAH</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/delirium-expanded.html" class="case-card" data-type="standard" data-name="delirium altered mental status"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Delirium</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/tbi-icp-expanded.html" class="case-card" data-type="standard" data-name="tbi traumatic brain injury icp"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">TBI & ICP</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Pulmonary -->
+        <div class="category" data-category="pulm">
+            <div class="category-header"><span class="category-icon">🫁</span><span class="category-name">Pulmonary</span><span class="category-count">7 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/pe-expanded-adventure.html" class="case-card" data-type="adventure" data-name="pe pulmonary embolism"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">Pulmonary Embolism</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/pe-expanded.html" class="case-card" data-type="standard" data-name="pe pulmonary embolism"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">PE - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/copd-expanded-adventure.html" class="case-card" data-type="adventure" data-name="copd exacerbation"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">COPD Exacerbation</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/copd-exacerbation-expanded.html" class="case-card" data-type="standard" data-name="copd exacerbation"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">COPD - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/asthma-exacerbation-expanded.html" class="case-card" data-type="standard" data-name="asthma exacerbation"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Asthma Exacerbation</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/pneumonia-expanded.html" class="case-card" data-type="standard" data-name="pneumonia cap hap"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Pneumonia</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/tension-ptx-expanded.html" class="case-card" data-type="standard" data-name="tension pneumothorax"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Tension Pneumothorax</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- GI -->
+        <div class="category" data-category="gi">
+            <div class="category-header"><span class="category-icon">🏥</span><span class="category-name">GI / Abdominal</span><span class="category-count">10 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/gi-bleed-expanded-adventure.html" class="case-card" data-type="adventure" data-name="gi bleed ugib lgib"><div class="case-icon adventure">🎮</div><div class="case-info"><div class="case-name">GI Bleed</div><div class="case-type">Adventure</div></div></a>
+                <a href="adventure-cases/gi-bleed-expanded.html" class="case-card" data-type="standard" data-name="gi bleed"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">GI Bleed - Standard</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/acute-abdomen-expanded.html" class="case-card" data-type="standard" data-name="acute abdomen abdominal pain"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Acute Abdomen</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/appendicitis-expanded.html" class="case-card" data-type="standard" data-name="appendicitis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Appendicitis</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/cholecystitis-expanded.html" class="case-card" data-type="standard" data-name="cholecystitis gallbladder"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Cholecystitis</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/pancreatitis-expanded.html" class="case-card" data-type="standard" data-name="pancreatitis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Pancreatitis</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/sbo-expanded.html" class="case-card" data-type="standard" data-name="sbo small bowel obstruction"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Small Bowel Obstruction</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/alf-expanded.html" class="case-card" data-type="standard" data-name="acute liver failure alf"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Acute Liver Failure</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Pediatrics -->
+        <div class="category" data-category="peds">
+            <div class="category-header"><span class="category-icon">👶</span><span class="category-name">Pediatrics</span><span class="category-count">7 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/bronchiolitis-expanded.html" class="case-card" data-type="standard" data-name="bronchiolitis rsv"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Bronchiolitis</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/croup-expanded.html" class="case-card" data-type="standard" data-name="croup laryngotracheitis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Croup</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/kawasaki-expanded.html" class="case-card" data-type="standard" data-name="kawasaki disease"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Kawasaki Disease</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/intussusception-expanded.html" class="case-card" data-type="standard" data-name="intussusception"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Intussusception</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/pyloric-stenosis-expanded.html" class="case-card" data-type="standard" data-name="pyloric stenosis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Pyloric Stenosis</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/febrile-seizure-expanded.html" class="case-card" data-type="standard" data-name="febrile seizure"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Febrile Seizure</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/peds-dka-expanded.html" class="case-card" data-type="standard" data-name="pediatric dka"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Pediatric DKA</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- OB/GYN -->
+        <div class="category" data-category="obgyn">
+            <div class="category-header"><span class="category-icon">🤰</span><span class="category-name">OB/GYN</span><span class="category-count">6 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/ectopic-pregnancy-expanded.html" class="case-card" data-type="standard" data-name="ectopic pregnancy"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Ectopic Pregnancy</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/preeclampsia-expanded.html" class="case-card" data-type="standard" data-name="preeclampsia eclampsia"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Preeclampsia</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/placental-abruption-expanded.html" class="case-card" data-type="standard" data-name="placental abruption"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Placental Abruption</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/pph-expanded.html" class="case-card" data-type="standard" data-name="postpartum hemorrhage pph"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Postpartum Hemorrhage</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/ovarian-torsion-expanded.html" class="case-card" data-type="standard" data-name="ovarian torsion"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Ovarian Torsion</div><div class="case-type">Standard</div></div></a>
+                <a href="adventure-cases/pid-toa-expanded.html" class="case-card" data-type="standard" data-name="pid pelvic inflammatory disease toa"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">PID & TOA</div><div class="case-type">Standard</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Urology (NEW) -->
+        <div class="category" data-category="urology">
+            <div class="category-header"><span class="category-icon">🩺</span><span class="category-name">Urology</span><span class="category-count">16 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/testicular-torsion-crt.html" class="case-card" data-type="standard" data-name="testicular torsion scrotal pain"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Testicular Torsion</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/kidney-stones-crt.html" class="case-card" data-type="standard" data-name="kidney stones nephrolithiasis renal colic"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Kidney Stones</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/bph-crt.html" class="case-card" data-type="standard" data-name="bph benign prostatic hyperplasia luts"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">BPH</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/prostate-cancer-crt.html" class="case-card" data-type="standard" data-name="prostate cancer psa"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Prostate Cancer</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/hematuria-crt.html" class="case-card" data-type="standard" data-name="hematuria blood urine"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Hematuria Workup</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/rcc-crt.html" class="case-card" data-type="standard" data-name="rcc renal cell carcinoma kidney cancer"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Renal Cell Carcinoma</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/testicular-cancer-crt.html" class="case-card" data-type="standard" data-name="testicular cancer gct"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Testicular Cancer</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/cryptorchidism-crt.html" class="case-card" data-type="standard" data-name="cryptorchidism undescended testis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Cryptorchidism</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/hypospadias-crt.html" class="case-card" data-type="standard" data-name="hypospadias congenital"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Hypospadias</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/puv-crt.html" class="case-card" data-type="standard" data-name="puv posterior urethral valves"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Posterior Urethral Valves</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/vur-crt.html" class="case-card" data-type="standard" data-name="vur vesicoureteral reflux"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">VUR</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/upj-obstruction-crt.html" class="case-card" data-type="standard" data-name="upj obstruction hydronephrosis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">UPJ Obstruction</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/wilms-tumor-crt.html" class="case-card" data-type="standard" data-name="wilms tumor nephroblastoma"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Wilms Tumor</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/neurogenic-bladder-crt.html" class="case-card" data-type="standard" data-name="neurogenic bladder retention"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Neurogenic Bladder</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/urinary-incontinence-crt.html" class="case-card" data-type="standard" data-name="urinary incontinence sui oab"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Urinary Incontinence</div><div class="case-type">CRT Case</div></div></a>
+            </div>
+        </div>
+        
+        <!-- Craniofacial & ENT (NEW) -->
+        <div class="category" data-category="craniofacial">
+            <div class="category-header"><span class="category-icon">👶</span><span class="category-name">Craniofacial & ENT</span><span class="category-count">7 cases</span></div>
+            <div class="cases-grid">
+                <a href="adventure-cases/cleft-lip-palate-crt.html" class="case-card" data-type="standard" data-name="cleft lip palate orofacial"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Cleft Lip & Palate</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/pierre-robin-crt.html" class="case-card" data-type="standard" data-name="pierre robin sequence micrognathia glossoptosis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Pierre Robin Sequence</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/treacher-collins-crt.html" class="case-card" data-type="standard" data-name="treacher collins mandibulofacial dysostosis"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Treacher Collins</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/craniosynostosis-crt.html" class="case-card" data-type="standard" data-name="craniosynostosis skull suture"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Craniosynostosis</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/hemifacial-microsomia-crt.html" class="case-card" data-type="standard" data-name="hemifacial microsomia goldenhar"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Hemifacial Microsomia</div><div class="case-type">CRT Case</div></div></a>
+                <a href="adventure-cases/branchial-cleft-crt.html" class="case-card" data-type="standard" data-name="branchial cleft cyst fistula"><div class="case-icon standard">📚</div><div class="case-info"><div class="case-name">Branchial Cleft Anomaly</div><div class="case-type">CRT Case</div></div></a>
             </div>
         </div>
     </main>
-
+    
     <footer class="footer">
-        <p>DxSuite Clinical Learning Platform | Built for medical education</p>
-        <p style="margin-top: 8px;"><a href="#" onclick="startTour(); return false;" style="color: var(--primary);">Take the Tour Again</a></p>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="footer-logo">🩺</div>
+                <span class="footer-text">ReasonDx Clinical Reasoning Trainer • Updated January 2026</span>
+            </div>
+            <div class="footer-links">
+                <a href="adventure-cases/data-governance.html" class="footer-link">Data Governance</a>
+                <a href="adventure-cases/validation-roadmap.html" class="footer-link">Validation</a>
+                <a href="adventure-hub.html" class="footer-link">Adventure Hub</a>
+            </div>
+        </div>
     </footer>
-
-    <!-- ============================================
-         GUIDED TOUR SYSTEM - HTML Elements
-         ============================================ -->
     
-    <!-- Welcome Modal -->
-    <div class="tour-welcome" id="tourWelcome">
-        <div class="tour-welcome-content">
-            <div class="tour-welcome-header">
-                <div class="emoji">👋</div>
-                <h2>Welcome to DxSuite!</h2>
-                <p>Let's take a quick 60-second tour</p>
-            </div>
-            <div class="tour-welcome-body">
-                <div class="tour-welcome-features">
-                    <div class="tour-welcome-feature">
-                        <div class="icon blue">📚</div>
-                        <div>
-                            <h4>262+ Learning Modules</h4>
-                            <p>Pathophysiology, microbiology, pharmacology</p>
-                        </div>
-                    </div>
-                    <div class="tour-welcome-feature">
-                        <div class="icon green">🛠️</div>
-                        <div>
-                            <h4>12 Powerful Tools</h4>
-                            <p>Calculators, flashcards, study planner</p>
-                        </div>
-                    </div>
-                    <div class="tour-welcome-feature">
-                        <div class="icon orange">🎯</div>
-                        <div>
-                            <h4>200+ Clinical Cases</h4>
-                            <p>Practice diagnostic reasoning</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tour-welcome-actions">
-                    <button class="tour-start-btn" onclick="beginTour()">🚀 Start Quick Tour</button>
-                    <button class="tour-skip-btn" onclick="skipTour()">I'll explore on my own</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Tour Overlay & Spotlight -->
-    <div class="tour-overlay" id="tourOverlay"></div>
-    <div class="tour-spotlight" id="tourSpotlight"></div>
-    
-    <!-- Tour Tooltip -->
-    <div class="tour-tooltip" id="tourTooltip">
-        <div class="tour-tooltip-header">
-            <div class="tour-tooltip-step" id="tooltipStep">Step 1 of 5</div>
-            <div class="tour-tooltip-title" id="tooltipTitle">Welcome!</div>
-        </div>
-        <div class="tour-tooltip-body">
-            <p id="tooltipDescription">Description goes here</p>
-            <div class="tour-tooltip-tip" id="tooltipTip">
-                <span class="icon">💡</span>
-                <span id="tooltipTipText">Tip text goes here</span>
-            </div>
-        </div>
-        <div class="tour-tooltip-footer">
-            <div class="tour-progress" id="tourProgress"></div>
-            <div class="tour-buttons">
-                <button class="tour-btn tour-btn-secondary" id="tourPrevBtn" onclick="prevStep()">Back</button>
-                <button class="tour-btn tour-btn-primary" id="tourNextBtn" onclick="nextStep()">Next</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Skip Button -->
-    <button class="tour-skip" id="tourSkipBtn" onclick="endTour()">✕ Skip Tour</button>
-
-    <!-- ============================================
-         GUIDED TOUR SYSTEM - JavaScript
-         ============================================ -->
     <script>
-        // Tour configuration
-        const tourSteps = [
-            {
-                target: 'tourTarget-learnCard',
-                title: '📚 Learn',
-                description: 'Start here! Over 262 interactive modules covering pathophysiology, microbiology, and pharmacology. Each module includes an AI tutor to answer your questions.',
-                tip: 'Try the "Why Does This Matter?" cards at the start of each module to see real clinical applications.',
-                position: 'right'
-            },
-            {
-                target: 'tourTarget-toolsCard',
-                title: '🛠️ Tools',
-                description: '12 powerful study tools in one place: clinical calculators, flashcard studio, DDx builder, study planner, and more.',
-                tip: 'The Clinical Calculator Hub has 18 essential formulas you\'ll use daily on rotations.',
-                position: 'left'
-            },
-            {
-                target: 'tourTarget-practiceCard',
-                title: '🎯 Practice Cases',
-                description: 'Over 200 interactive clinical cases. Work through realistic scenarios, build differentials, and develop expert diagnostic thinking.',
-                tip: 'Try "Case of the Day" for a daily habit that ensures broad exposure.',
-                position: 'right'
-            },
-            {
-                target: 'tourTarget-progressCard',
-                title: '📊 Track Progress',
-                description: 'Your personal dashboard shows strengths, weak areas, and personalized recommendations. Set goals and track your streak.',
-                tip: 'Take the "Knowledge Gap Diagnostic" to identify exactly where to focus.',
-                position: 'left'
-            },
-            {
-                target: 'tourTarget-quickLinks',
-                title: '⚡ Quick Access',
-                description: 'Jump directly to the most-used features. Calculators, flashcards, specialty modules — all one click away.',
-                tip: 'Check out "New Features" to see the 12 tools we just added!',
-                position: 'top'
-            }
-        ];
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? '' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
         
-        let currentStep = 0;
-        let tourActive = false;
+        function filterCases(type) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.case-card').forEach(c => {
+                const t = c.getAttribute('data-type');
+                c.style.display = (type === 'all' || t === type || (type === 'adventure' && t === 'dual')) ? 'flex' : 'none';
+            });
+        }
         
-        // Check if first visit
-        function checkFirstVisit() {
-            const hasVisited = localStorage.getItem('dxsuite-tour-completed');
-            if (!hasVisited) {
-                setTimeout(() => {
-                    document.getElementById('tourWelcome').classList.add('active');
-                }, 1000);
+        function searchCases(query) {
+            const q = query.toLowerCase();
+            document.querySelectorAll('.case-card').forEach(c => {
+                const name = c.getAttribute('data-name') || '';
+                c.style.display = name.includes(q) ? 'flex' : 'none';
+            });
+        }
+        
+        function setView(mode) {
+            document.body.setAttribute('data-view', mode);
+            localStorage.setItem('viewMode', mode);
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.view-btn[onclick*="${mode}"]`).classList.add('active');
+        }
+        
+        function detectAndSetView() {
+            const savedView = localStorage.getItem('viewMode');
+            if (savedView) {
+                setView(savedView);
+            } else if (window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                setView('mobile');
             }
         }
         
-        // Start tour from welcome modal
-        function beginTour() {
-            document.getElementById('tourWelcome').classList.remove('active');
-            startTour();
-        }
-        
-        // Skip tour from welcome modal
-        function skipTour() {
-            document.getElementById('tourWelcome').classList.remove('active');
-            localStorage.setItem('dxsuite-tour-completed', 'true');
-        }
-        
-        // Start the tour
-        function startTour() {
-            currentStep = 0;
-            tourActive = true;
-            document.getElementById('tourOverlay').classList.add('active');
-            document.getElementById('tourTooltip').classList.add('active');
-            document.getElementById('tourSkipBtn').classList.add('active');
-            showStep(currentStep);
-        }
-        
-        // End the tour
-        function endTour() {
-            tourActive = false;
-            document.getElementById('tourOverlay').classList.remove('active');
-            document.getElementById('tourTooltip').classList.remove('active');
-            document.getElementById('tourSkipBtn').classList.remove('active');
-            document.getElementById('tourSpotlight').style.display = 'none';
-            localStorage.setItem('dxsuite-tour-completed', 'true');
-        }
-        
-        // Show a specific step
-        function showStep(stepIndex) {
-            const step = tourSteps[stepIndex];
-            const target = document.getElementById(step.target);
-            
-            if (!target) {
-                console.error('Tour target not found:', step.target);
-                return;
-            }
-            
-            // Update tooltip content
-            document.getElementById('tooltipStep').textContent = `Step ${stepIndex + 1} of ${tourSteps.length}`;
-            document.getElementById('tooltipTitle').textContent = step.title;
-            document.getElementById('tooltipDescription').textContent = step.description;
-            document.getElementById('tooltipTipText').textContent = step.tip;
-            
-            // Update progress dots
-            const progressDiv = document.getElementById('tourProgress');
-            progressDiv.innerHTML = tourSteps.map((_, i) => {
-                let className = 'tour-progress-dot';
-                if (i < stepIndex) className += ' completed';
-                if (i === stepIndex) className += ' active';
-                return `<div class="${className}"></div>`;
-            }).join('');
-            
-            // Update buttons
-            document.getElementById('tourPrevBtn').style.display = stepIndex === 0 ? 'none' : 'block';
-            document.getElementById('tourNextBtn').textContent = stepIndex === tourSteps.length - 1 ? 'Finish' : 'Next';
-            
-            // Position spotlight
-            const rect = target.getBoundingClientRect();
-            const spotlight = document.getElementById('tourSpotlight');
-            spotlight.style.display = 'block';
-            spotlight.style.top = (rect.top + window.scrollY - 8) + 'px';
-            spotlight.style.left = (rect.left - 8) + 'px';
-            spotlight.style.width = (rect.width + 16) + 'px';
-            spotlight.style.height = (rect.height + 16) + 'px';
-            
-            // Position tooltip
-            const tooltip = document.getElementById('tourTooltip');
-            const tooltipRect = tooltip.getBoundingClientRect();
-            
-            let tooltipTop, tooltipLeft;
-            
-            switch (step.position) {
-                case 'right':
-                    tooltipTop = rect.top + window.scrollY;
-                    tooltipLeft = rect.right + 20;
-                    if (tooltipLeft + 340 > window.innerWidth) {
-                        tooltipLeft = rect.left - 360;
-                    }
-                    break;
-                case 'left':
-                    tooltipTop = rect.top + window.scrollY;
-                    tooltipLeft = rect.left - 360;
-                    if (tooltipLeft < 20) {
-                        tooltipLeft = rect.right + 20;
-                    }
-                    break;
-                case 'top':
-                    tooltipTop = rect.top + window.scrollY - tooltipRect.height - 20;
-                    tooltipLeft = rect.left + (rect.width / 2) - 170;
-                    break;
-                case 'bottom':
-                default:
-                    tooltipTop = rect.bottom + window.scrollY + 20;
-                    tooltipLeft = rect.left + (rect.width / 2) - 170;
-            }
-            
-            // Keep tooltip in viewport
-            tooltipLeft = Math.max(20, Math.min(tooltipLeft, window.innerWidth - 360));
-            
-            tooltip.style.top = tooltipTop + 'px';
-            tooltip.style.left = tooltipLeft + 'px';
-            
-            // Scroll into view if needed
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        
-        // Next step
-        function nextStep() {
-            if (currentStep < tourSteps.length - 1) {
-                currentStep++;
-                showStep(currentStep);
-            } else {
-                endTour();
-            }
-        }
-        
-        // Previous step
-        function prevStep() {
-            if (currentStep > 0) {
-                currentStep--;
-                showStep(currentStep);
-            }
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!tourActive) return;
-            
-            if (e.key === 'ArrowRight' || e.key === 'Enter') {
-                nextStep();
-            } else if (e.key === 'ArrowLeft') {
-                prevStep();
-            } else if (e.key === 'Escape') {
-                endTour();
-            }
-        });
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (tourActive) {
-                showStep(currentStep);
-            }
-        });
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', checkFirstVisit);
+        if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
+        detectAndSetView();
     </script>
 </body>
 </html>

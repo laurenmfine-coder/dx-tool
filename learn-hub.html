@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn | ReasonDx Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #10b981;
+            --accent: #0891b2;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        /* Navigation */
+        .nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--primary); font-size: 1.5rem; font-weight: 700; }
+        .nav-brand svg { height: 32px; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary); }
+        .btn-signin { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+        .btn-signin:hover { background: var(--primary-dark); }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #059669 0%, #0891b2 100%); padding: 60px 24px; text-align: center; color: white; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 12px; }
+        .hero p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        /* Main Content */
+        .main { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+        
+        /* Section Header */
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 8px; }
+        .section-header p { color: var(--text-secondary); font-size: 1.05rem; }
+        
+        /* Platform Cards */
+        .platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-bottom: 48px; }
+        
+        .platform-card { background: var(--card); border: 2px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; text-decoration: none; color: var(--text); }
+        .platform-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        
+        .platform-header { padding: 24px 24px 0; }
+        .platform-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 16px; }
+        .platform-icon.green { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+        .platform-icon.blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+        .platform-icon.purple { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); }
+        
+        .platform-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .platform-card .tagline { color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 12px; }
+        .platform-card .description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        
+        .platform-body { padding: 20px 24px; }
+        
+        .platform-features { list-style: none; margin-bottom: 20px; }
+        .platform-features li { padding: 8px 0; display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
+        .platform-features li::before { content: "✓"; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+        
+        .platform-stats { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+        .platform-stat { text-align: center; }
+        .platform-stat-value { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+        .platform-stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+        
+        .platform-footer { padding: 16px 24px; background: #f8fafc; border-top: 1px solid var(--border); }
+        .platform-cta { display: flex; align-items: center; justify-content: space-between; }
+        .platform-cta span { font-weight: 600; color: var(--primary); }
+        .platform-cta .arrow { font-size: 1.25rem; color: var(--primary); transition: transform 0.2s; }
+        .platform-card:hover .arrow { transform: translateX(4px); }
+        
+        /* Best For Badges */
+        .best-for { display: inline-block; background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+        
+        /* Comparison Section */
+        .comparison { background: var(--card); border-radius: 16px; padding: 32px; margin-top: 48px; border: 1px solid var(--border); }
+        .comparison h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; text-align: center; }
+        .comparison-table { width: 100%; border-collapse: collapse; }
+        .comparison-table th, .comparison-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .comparison-table th { background: #f8fafc; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: var(--text-secondary); }
+        .comparison-table td { font-size: 0.9rem; }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        
+        /* CTA Section */
+        .cta-section { text-align: center; padding: 48px 24px; margin-top: 48px; background: linear-gradient(135deg, #f0fdf4, #ecfeff); border-radius: 16px; }
+        .cta-section h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 24px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { background: var(--primary); color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background: white; color: var(--primary); padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; border: 2px solid var(--primary); transition: all 0.2s; }
+        .btn-secondary:hover { background: #f0fdf4; }
+        
+        @media (max-width: 768px) {
+            .platforms-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 1.75rem; }
+            .comparison { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="#059669"/>
+                    <path d="M12 28V12h6c4.4 0 7 2.6 7 6s-2.6 6-7 6h-3v4h-3z" fill="white"/>
+                    <circle cx="28" cy="26" r="6" fill="#10b981"/>
+                    <path d="M26 26l2 2 3-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                DxSuite
+            </a>
+            <div class="nav-links">
+                <a href="learn-hub.html" class="nav-link active">Learn</a>
+                <a href="tools/index.html" class="nav-link">Tools</a>
+                <a href="ReasonDx/index.html" class="nav-link">Practice</a>
+                <a href="auth/register.html" class="btn-signin">Sign In</a>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>Choose Your Learning Path</h1>
+        <p>Three powerful platforms designed to build clinical expertise from foundational knowledge to expert reasoning</p>
+    </header>
+    
+    <main class="main">
+        <div class="section-header">
+            <h2>Which Platform Is Right for You?</h2>
+            <p>Each platform targets a different aspect of clinical mastery</p>
+        </div>
+        
+        <div class="platforms-grid">
+            <!-- MechanismDx -->
+            <a href="mechanism/index.html" class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon green">⚙️</div>
+                    <span class="best-for">Best for: Building Foundations</span>
+                    <h3>MechanismDx</h3>
+                    <p class="tagline">Understand the "Why" Behind Disease</p>
+                    <p class="description">Master pathophysiology through interactive modules that connect symptoms to mechanisms. Learn why diseases present the way they do, not just what to look for.</p>
+                </div>
+                <div class="platform-body">
+                    <ul class="platform-features">
+                        <li>Interactive pathophysiology diagrams</li>
+                        <li>Mechanism-to-symptom mapping</li>
+                        <li>Built-in knowledge checks</li>
+                        <li>AI tutor for explanations</li>
+                    </ul>
+                    <div class="platform-stats">
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">195+</div>
+                            <div class="platform-stat-label">Modules</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">24</div>
+                            <div class="platform-stat-label">Systems</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">AI</div>
+                            <div class="platform-stat-label">Tutor</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-footer">
+                    <div class="platform-cta">
+                        <span>Start Learning Mechanisms</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- ReasonDx -->
+            <a href="ReasonDx/index.html" class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon blue">🩺</div>
+                    <span class="best-for">Best for: Applying Knowledge</span>
+                    <h3>ReasonDx</h3>
+                    <p class="tagline">Practice Clinical Reasoning</p>
+                    <p class="description">Work through realistic patient cases to build differential diagnosis skills. Practice the cognitive process experts use—hypothesis generation, data gathering, and diagnostic refinement.</p>
+                </div>
+                <div class="platform-body">
+                    <ul class="platform-features">
+                        <li>200+ interactive clinical cases</li>
+                        <li>Branching adventure scenarios</li>
+                        <li>Deep dive pathophysiology reviews</li>
+                        <li>Board-style questions</li>
+                    </ul>
+                    <div class="platform-stats">
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">331</div>
+                            <div class="platform-stat-label">Cases</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">30</div>
+                            <div class="platform-stat-label">Adventures</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">97</div>
+                            <div class="platform-stat-label">Deep Dives</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-footer">
+                    <div class="platform-cta">
+                        <span>Start Practicing Cases</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- CoachDx -->
+            <a href="CoachDx/index.html" class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon purple">🗣️</div>
+                    <span class="best-for">Best for: Clinical Communication</span>
+                    <h3>CoachDx</h3>
+                    <p class="tagline">Train with an AI Attending</p>
+                    <p class="description">Practice presenting cases and defending your clinical reasoning with an AI attending physician. Get real-time feedback on your thought process, communication, and decision-making.</p>
+                </div>
+                <div class="platform-body">
+                    <ul class="platform-features">
+                        <li>AI attending simulations</li>
+                        <li>Case presentation practice</li>
+                        <li>SBAR communication training</li>
+                        <li>Interprofessional scenarios</li>
+                    </ul>
+                    <div class="platform-stats">
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">50+</div>
+                            <div class="platform-stat-label">Scenarios</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">12</div>
+                            <div class="platform-stat-label">Specialties</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">AI</div>
+                            <div class="platform-stat-label">Feedback</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-footer">
+                    <div class="platform-cta">
+                        <span>Start Coaching Sessions</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Comparison Table -->
+        <div class="comparison">
+            <h3>Quick Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>MechanismDx</th>
+                        <th>ReasonDx</th>
+                        <th>CoachDx</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary Focus</strong></td>
+                        <td>Pathophysiology</td>
+                        <td>Clinical Cases</td>
+                        <td>Communication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Learning Style</strong></td>
+                        <td>Read & Explore</td>
+                        <td>Solve & Practice</td>
+                        <td>Present & Discuss</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>Pre-clinical, Step 1</td>
+                        <td>Clerkships, Step 2</td>
+                        <td>Clinical Rotations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Features</strong></td>
+                        <td>AI Tutor explains concepts</td>
+                        <td>AI feedback on reasoning</td>
+                        <td>AI attending interaction</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Recommended Path -->
+        <div class="cta-section">
+            <h3>Recommended Learning Path</h3>
+            <p>Start with MechanismDx to build your foundation, then apply your knowledge in ReasonDx cases, and refine your clinical communication with CoachDx.</p>
+            <div class="cta-buttons">
+                <a href="auth/register.html" class="btn-primary">Create Free Account</a>
+                <a href="index.html" class="btn-secondary">Back to Home</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
