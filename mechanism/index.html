@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoachDx - Communication Trainer</title>
+    <title>MechanismDx - Pathophysiology Modules</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --primary: #f97316; --primary-bg: #fff7ed; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff; --bg-nav: #1e293b; --border: #e2e8f0; --nav-link: #94a3b8; --nav-active-bg: #f97316; --nav-active-text: #fff; --transition: all 0.3s; }
-        [data-theme="ocean-dark"] { --primary: #fb923c; --primary-bg: #431407; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b; --bg-nav: #0f172a; --border: #334155; }
+        :root { --primary: #14b8a6; --primary-bg: #f0fdfa; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff; --bg-nav: #1e293b; --border: #e2e8f0; --nav-link: #94a3b8; --nav-active-bg: #14b8a6; --nav-active-text: #fff; --transition: all 0.3s; }
+        [data-theme="ocean-dark"] { --primary: #2dd4bf; --primary-bg: #134e4a; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b; --bg-nav: #0f172a; --border: #334155; }
         [data-theme="midnight-teal"] { --primary: #5eead4; --primary-bg: #0d3d3b; --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b; --bg-nav: #022c22; --border: #115e59; --nav-link: #86efac; --nav-active-bg: #5eead4; --nav-active-text: #052e16; }
-        [data-theme="muted-teal"] { --primary: #ea580c; --primary-bg: #fff7ed; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #fff; --bg-nav: #f7fafa; --border: #d5e5e3; --nav-link: #64748b; }
+        [data-theme="muted-teal"] { --primary: #4a9a8e; --primary-bg: #e8f2f0; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #fff; --bg-nav: #f7fafa; --border: #d5e5e3; --nav-link: #64748b; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg-main); color: var(--text-primary); min-height: 100vh; transition: var(--transition); }
         .nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -26,24 +26,20 @@
         .stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; text-align: center; }
         .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
         .stat-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
-        .main { max-width: 800px; margin: 0 auto; padding: 0 24px 48px; }
+        .main { max-width: 900px; margin: 0 auto; padding: 0 24px 48px; }
         .section-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 14px; }
-        .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 28px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-decoration: none; color: inherit; transition: var(--transition); }
+        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; transition: var(--transition); }
         .card:hover { transform: translateY(-2px); border-color: var(--primary); }
-        .card-icon { font-size: 1.8rem; margin-bottom: 6px; }
-        .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
-        .card-desc { font-size: 0.8rem; color: var(--text-secondary); }
-        .sbar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 28px; }
-        .sbar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
-        .sbar-letter { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
-        .sbar-title { font-size: 0.85rem; font-weight: 600; }
-        .sbar-desc { font-size: 0.7rem; color: var(--text-secondary); }
-        .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-bottom: 28px; }
-        .cat-link { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; text-decoration: none; color: inherit; transition: var(--transition); }
-        .cat-link:hover { border-color: var(--primary); }
-        .cat-icon { font-size: 1.2rem; }
-        .cat-name { font-size: 0.7rem; font-weight: 500; }
+        .card-icon { font-size: 1.5rem; margin-bottom: 6px; }
+        .card-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+        .card-desc { font-size: 0.75rem; color: var(--text-secondary); }
+        .sys-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; margin-bottom: 28px; }
+        .sys-link { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; text-decoration: none; color: inherit; transition: var(--transition); }
+        .sys-link:hover { border-color: var(--primary); }
+        .sys-icon { font-size: 1.2rem; }
+        .sys-name { font-size: 0.75rem; font-weight: 500; }
+        .sys-count { font-size: 0.65rem; color: var(--text-secondary); }
         .theme-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
         .theme-modal.open { display: flex; }
         .theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 380px; width: 90%; }
@@ -55,7 +51,7 @@
         .theme-option:hover, .theme-option.selected { border-color: var(--primary); }
         .theme-preview { height: 32px; border-radius: 4px; margin-bottom: 6px; }
         .theme-name { font-size: 0.8rem; }
-        @media (max-width: 768px) { .nav-links { display: none; } .sbar-grid { grid-template-columns: repeat(2, 1fr); } .cards { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .cards { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body data-theme="ocean-dark">
@@ -64,9 +60,9 @@
             <a href="../index.html" class="nav-brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text><line x1="68" y1="42" x2="92" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="currentColor"/><path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="currentColor"/><circle cx="86" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="86" cy="108" r="5" fill="currentColor"/><text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Suite</text></svg></a>
             <div class="nav-links">
                 <a href="../index.html" class="nav-link">🏠 Home</a>
-                <a href="../mechanism/index.html" class="nav-link">⚙️ MechanismDx</a>
+                <a href="index.html" class="nav-link active">⚙️ MechanismDx</a>
                 <a href="../ReasonDx/index.html" class="nav-link">🩺 ReasonDx</a>
-                <a href="index.html" class="nav-link active">🗣️ CoachDx</a>
+                <a href="../CoachDx/index.html" class="nav-link">🗣️ CoachDx</a>
                 <a href="../ReasonDx/analytics-dashboard.html" class="nav-link">📊 Dashboard</a>
                 <button class="theme-btn" onclick="openThemeModal()">🎨</button>
             </div>
@@ -74,45 +70,44 @@
     </nav>
 
     <header class="header">
-        <div class="header-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">CoachD</text><line x1="218" y1="42" x2="242" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="currentColor"/><path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="currentColor"/><circle cx="236" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="236" cy="108" r="5" fill="currentColor"/></svg></div>
-        <p>Clinical Communication Trainer</p>
+        <div class="header-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">MechanismD</text><line x1="355" y1="42" x2="379" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="currentColor"/><path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="currentColor"/><circle cx="373" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="373" cy="108" r="5" fill="currentColor"/></svg></div>
+        <p>Interactive Pathophysiology Modules</p>
         <div class="stats">
-            <div class="stat"><div class="stat-value">50+</div><div class="stat-label">Scenarios</div></div>
-            <div class="stat"><div class="stat-value">AI</div><div class="stat-label">Mentor</div></div>
+            <div class="stat"><div class="stat-value">84</div><div class="stat-label">Modules</div></div>
+            <div class="stat"><div class="stat-value">15</div><div class="stat-label">Systems</div></div>
         </div>
     </header>
 
     <main class="main">
-        <h2 class="section-title">Start Training</h2>
+        <h2 class="section-title">Core Modules</h2>
         <div class="cards">
-            <a href="mentor-chat.html" class="card"><div class="card-icon">💬</div><div class="card-title">AI Mentor</div><div class="card-desc">Practice SBAR with real-time feedback.</div></a>
-            <a href="case-library.html" class="card"><div class="card-icon">📚</div><div class="card-title">Case Library</div><div class="card-desc">Browse all scenarios by category.</div></a>
+            <a href="sepsis-shock-module.html" class="card"><div class="card-icon">🔥</div><div class="card-title">Sepsis & Shock</div><div class="card-desc">SIRS, shock types, vasopressors</div></a>
+            <a href="acs-module.html" class="card"><div class="card-icon">❤️</div><div class="card-title">ACS</div><div class="card-desc">STEMI/NSTEMI, troponins</div></a>
+            <a href="stroke-module.html" class="card"><div class="card-icon">🧠</div><div class="card-title">Stroke</div><div class="card-desc">Ischemic vs hemorrhagic</div></a>
+            <a href="aki-module.html" class="card"><div class="card-icon">🫘</div><div class="card-title">AKI</div><div class="card-desc">Pre-renal/intrinsic/post</div></a>
+            <a href="diabetes-dka-module.html" class="card"><div class="card-icon">🦋</div><div class="card-title">DKA & HHS</div><div class="card-desc">Anion gap, fluids</div></a>
+            <a href="anaphylaxis-module.html" class="card"><div class="card-icon">⚠️</div><div class="card-title">Anaphylaxis</div><div class="card-desc">IgE cascade, epi</div></a>
         </div>
 
-        <h2 class="section-title">The SBAR Framework</h2>
-        <div class="sbar-grid">
-            <div class="sbar-card" style="border-left: 3px solid #3b82f6;"><div class="sbar-letter">S</div><div class="sbar-title">Situation</div><div class="sbar-desc">What's happening?</div></div>
-            <div class="sbar-card" style="border-left: 3px solid #10b981;"><div class="sbar-letter">B</div><div class="sbar-title">Background</div><div class="sbar-desc">Clinical context</div></div>
-            <div class="sbar-card" style="border-left: 3px solid #f59e0b;"><div class="sbar-letter">A</div><div class="sbar-title">Assessment</div><div class="sbar-desc">Your impression</div></div>
-            <div class="sbar-card" style="border-left: 3px solid #ef4444;"><div class="sbar-letter">R</div><div class="sbar-title">Recommendation</div><div class="sbar-desc">What you need</div></div>
+        <h2 class="section-title">By System</h2>
+        <div class="sys-grid">
+            <a href="pulmonary.html" class="sys-link"><div class="sys-icon">🫁</div><div class="sys-name">Pulmonary</div><div class="sys-count">12</div></a>
+            <a href="heart-failure.html" class="sys-link"><div class="sys-icon">❤️</div><div class="sys-name">Cardio</div><div class="sys-count">10</div></a>
+            <a href="gi-hepatology.html" class="sys-link"><div class="sys-icon">🍽️</div><div class="sys-name">GI/Hepat</div><div class="sys-count">8</div></a>
+            <a href="neurology.html" class="sys-link"><div class="sys-icon">🧠</div><div class="sys-name">Neuro</div><div class="sys-count">7</div></a>
+            <a href="infectious-disease.html" class="sys-link"><div class="sys-icon">🦠</div><div class="sys-name">ID</div><div class="sys-count">8</div></a>
+            <a href="electrolytes-acidbase.html" class="sys-link"><div class="sys-icon">⚗️</div><div class="sys-name">Lytes</div><div class="sys-count">6</div></a>
+            <a href="endocrine-emergencies.html" class="sys-link"><div class="sys-icon">🦋</div><div class="sys-name">Endo</div><div class="sys-count">5</div></a>
+            <a href="hematology.html" class="sys-link"><div class="sys-icon">🩸</div><div class="sys-name">Heme</div><div class="sys-count">6</div></a>
+            <a href="allergy-immunology.html" class="sys-link"><div class="sys-icon">🌸</div><div class="sys-name">A/I</div><div class="sys-count">8</div></a>
+            <a href="toxicology.html" class="sys-link"><div class="sys-icon">☠️</div><div class="sys-name">Tox</div><div class="sys-count">5</div></a>
         </div>
 
-        <h2 class="section-title">By Category</h2>
-        <div class="cat-grid">
-            <a href="mentor-chat.html?category=critical" class="cat-link"><div class="cat-icon">🚨</div><div class="cat-name">Critical</div></a>
-            <a href="mentor-chat.html?category=cardiology" class="cat-link"><div class="cat-icon">❤️</div><div class="cat-name">Cardio</div></a>
-            <a href="mentor-chat.html?category=pulmonary" class="cat-link"><div class="cat-icon">🫁</div><div class="cat-name">Pulm</div></a>
-            <a href="mentor-chat.html?category=neuro" class="cat-link"><div class="cat-icon">🧠</div><div class="cat-name">Neuro</div></a>
-            <a href="mentor-chat.html?category=gi" class="cat-link"><div class="cat-icon">🍽️</div><div class="cat-name">GI</div></a>
-            <a href="mentor-chat.html?category=infectious" class="cat-link"><div class="cat-icon">🦠</div><div class="cat-name">ID</div></a>
-            <a href="mentor-chat.html?category=hematology" class="cat-link"><div class="cat-icon">🩸</div><div class="cat-name">Heme</div></a>
-            <a href="mentor-chat.html?category=allergy" class="cat-link"><div class="cat-icon">🌸</div><div class="cat-name">Allergy</div></a>
-        </div>
-
-        <h2 class="section-title">For Instructors</h2>
+        <h2 class="section-title">Tools</h2>
         <div class="cards">
-            <a href="instructor-dashboard.html" class="card"><div class="card-icon">📊</div><div class="card-title">Dashboard</div><div class="card-desc">View student progress.</div></a>
-            <a href="sbar-trainer.html" class="card"><div class="card-icon">✍️</div><div class="card-title">Guided Trainer</div><div class="card-desc">Step-by-step builder.</div></a>
+            <a href="abg-analyzer.html" class="card"><div class="card-icon">🧪</div><div class="card-title">ABG Analyzer</div><div class="card-desc">Step-by-step interpretation</div></a>
+            <a href="ecg-patterns.html" class="card"><div class="card-icon">📈</div><div class="card-title">ECG Patterns</div><div class="card-desc">Visual guide</div></a>
+            <a href="fingerprint-dashboard.html" class="card"><div class="card-icon">🔬</div><div class="card-title">Lab Fingerprints</div><div class="card-desc">Disease patterns</div></a>
         </div>
     </main>
 
