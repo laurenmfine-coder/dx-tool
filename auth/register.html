@@ -141,7 +141,7 @@
                     <div class="plan-price">
                         <span class="amount">$14.99</span>
                         <span class="period">/month</span>
-                        <div class="annual">or $99/year (save 45%)</div>
+                        <div class="annual">or $99/year (save $80!)</div>
                     </div>
                     <ul class="plan-features">
                         <li>All 195+ MechanismDx modules</li>
@@ -189,7 +189,7 @@
                 <div class="steps" id="stepIndicator"></div>
                 
                 <div class="section" id="sectionConsent">
-                    <div class="info-box purple"><span class="icon">📋</span><div><strong>Research Study Participation</strong><br>Complete the consent form to get free Pro access.</div></div>
+                    <div class="info-box purple"><span class="icon">📋</span><div><strong>Research Study Participation</strong><br>Complete the consent form to receive your unique access code.</div></div>
                     <div id="consentError" class="message"></div>
                     
                     <!-- Student/Faculty Selection -->
@@ -202,15 +202,15 @@
                     </div>
                     
                     <div style="text-align: center; margin-bottom: 24px;">
-                        <p style="color: #475569; margin-bottom: 16px;" id="consentInstructions">Complete the consent form, then return here with your code.</p>
+                        <p style="color: #475569; margin-bottom: 16px;" id="consentInstructions">Complete the consent form, then email <strong>lfine1@nova.edu</strong> to receive your unique code.</p>
                         <a href="#" target="_blank" id="consentFormLink" style="display: inline-block; background: #7c3aed; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-bottom: 16px;">📝 Complete Consent Form</a>
                         <p style="font-size: 13px; color: #94a3b8;">Opens in a new tab</p>
                     </div>
                     <div style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
                         <div class="form-group">
-                            <label class="form-label">Enter Your Consent Code</label>
-                            <input type="text" id="consentCode" class="form-input" placeholder="CONSENT-XXXXX" style="text-align: center; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;">
-                            <p class="form-hint" id="consentCodeHint">You'll receive this code after completing the consent form</p>
+                            <label class="form-label">Enter Your Unique Consent Code</label>
+                            <input type="text" id="consentCode" class="form-input" placeholder="DX-XXXXXX" style="text-align: center; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;">
+                            <p class="form-hint" id="consentCodeHint">Your unique code will be emailed to you (e.g., DX-A7K9M2)</p>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="verifyConsentCode()">Verify Consent Code</button>
                     </div>
@@ -285,32 +285,33 @@
                 <div class="section" id="sectionPayment">
                     <div class="info-box blue"><span class="icon">💳</span><div><strong>Complete your Pro subscription</strong><br>Secure payment via Stripe</div></div>
                     <div id="paymentError" class="message"></div>
+                    
                     <div style="text-align: center; margin-bottom: 24px;">
                         <div class="pricing-toggle">
                             <button onclick="setBilling('monthly')" id="billingMonthly" class="active">Monthly</button>
-                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save 45%</span></button>
+                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save $80!</span></button>
                         </div>
                     </div>
                     
-                    <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
+                    <div style="background: #f8fafc; border-radius: 12px; padding: 24px; margin-bottom: 24px; text-align: center;">
                         <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">You'll be charged</div>
-                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
+                        <div style="font-size: 42px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
                         <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="form-label">Card Information</label>
-                        <div id="card-element" style="padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: white;">
-                            <p style="color: #94a3b8; font-size: 14px;">Card input will appear here when Stripe is configured</p>
-                        </div>
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+                        <p style="color: #166534; font-size: 14px; margin: 0; text-align: center;">
+                            ✓ Unlimited clinical cases &nbsp;•&nbsp; ✓ All pathophysiology modules<br>
+                            ✓ Advanced analytics &nbsp;•&nbsp; ✓ Priority support
+                        </p>
                     </div>
                     
-                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">
-                        Subscribe — $14.99/month
+                    <button type="button" class="btn btn-primary" onclick="redirectToStripe()" id="payBtn">
+                        Continue to Payment →
                     </button>
                     
                     <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">
-                        🔒 Secure payment · Cancel anytime · 30-day money-back guarantee
+                        🔒 Secure payment via Stripe · Cancel anytime
                     </p>
                 </div>
                 
@@ -375,15 +376,20 @@
         // CONFIGURATION
         // ============================================
         const CONFIG = {
-            GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
-            CONSENT_FORM_URL: 'YOUR_MICROSOFT_FORMS_URL_HERE',
-            STRIPE_PUBLIC_KEY: 'YOUR_STRIPE_PUBLIC_KEY_HERE',
+            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec',
+            STUDENT_CONSENT_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
+            FACULTY_CONSENT_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUNkdHME1VNVlSNDg2TUgyUkI5S1pUVUpXSy4u',
+            CONSENT_FORM_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
+            STRIPE_MONTHLY_URL: 'https://buy.stripe.com/fZu9ATaL57g77Ud0Rt5AQ00',
+            STRIPE_ANNUAL_URL: 'https://buy.stripe.com/3cI7sLbP9eIz5M557J5AQ01',
             STUDY_PREFIX: 'DX01',
-            DEMO_MODE: true,
+            DEMO_MODE: false,
             MONTHLY_PRICE: 14.99,
             ANNUAL_PRICE: 99,
-            VALID_CONSENT_CODES: ['CONSENT-DXSUITE-2026', 'CONSENT-2026'],
-            USE_ALGORITHMIC_VALIDATION: true
+            STUDENT_CONSENT_CODE: 'CONSENT-REASONDX-2026',
+            FACULTY_CONSENT_CODE: 'CONSENT-FACULTY-2026',
+            ADMIN_EMAIL: 'lfine1@nova.edu',
+            ADMIN_PASSWORD: 'DxAdmin2026!'
         };
         
         // ============================================
@@ -396,8 +402,43 @@
             verifiedConsentCode: null,
             generatedCode: null,
             billingPeriod: 'monthly',
-            resendCountdown: 0
+            resendCountdown: 0,
+            researchType: 'student'
         };
+        
+        // ============================================
+        // RESEARCH TYPE SELECTION
+        // ============================================
+        function selectResearchType(type) {
+            state.researchType = type;
+            const btnStudent = document.getElementById('btnStudent');
+            const btnFaculty = document.getElementById('btnFaculty');
+            const consentLink = document.getElementById('consentFormLink');
+            const instructions = document.getElementById('consentInstructions');
+            const codeHint = document.getElementById('consentCodeHint');
+            
+            if (type === 'student') {
+                btnStudent.style.background = '#7c3aed';
+                btnStudent.style.color = 'white';
+                btnStudent.style.borderColor = '#7c3aed';
+                btnFaculty.style.background = 'white';
+                btnFaculty.style.color = '#475569';
+                btnFaculty.style.borderColor = '#e2e8f0';
+                if (consentLink) consentLink.href = CONFIG.STUDENT_CONSENT_URL;
+                if (instructions) instructions.innerHTML = 'Complete the consent form, then email <strong>lfine1@nova.edu</strong> to receive your unique code.';
+                if (codeHint) codeHint.textContent = 'Your unique code will be emailed to you (e.g., DX-A7K9M2)';
+            } else {
+                btnFaculty.style.background = '#7c3aed';
+                btnFaculty.style.color = 'white';
+                btnFaculty.style.borderColor = '#7c3aed';
+                btnStudent.style.background = 'white';
+                btnStudent.style.color = '#475569';
+                btnStudent.style.borderColor = '#e2e8f0';
+                if (consentLink) consentLink.href = CONFIG.FACULTY_CONSENT_URL;
+                if (instructions) instructions.innerHTML = 'Complete the faculty consent form, then email <strong>lfine1@nova.edu</strong> to receive your unique code.';
+                if (codeHint) codeHint.textContent = 'Your unique code will be emailed to you (e.g., DX-B3P5Q8)';
+            }
+        }
         
         // ============================================
         // PLAN SELECTION
@@ -518,26 +559,52 @@
             const errorEl = document.getElementById('consentError');
             
             errorEl.className = 'message';
+            errorEl.textContent = '';
             
-            if (!code) {
+            if (!code || code.length < 6) {
                 errorEl.textContent = 'Please enter your consent code.';
                 errorEl.className = 'message error';
                 return;
             }
             
-            let isValid = CONFIG.USE_ALGORITHMIC_VALIDATION 
-                ? code.startsWith('CONSENT-') && code.length >= 12
-                : CONFIG.VALID_CONSENT_CODES.includes(code);
+            // Show loading state
+            const btn = document.querySelector('#sectionConsent .btn-primary');
+            const originalText = btn.textContent;
+            btn.textContent = 'Verifying...';
+            btn.disabled = true;
             
-            if (!isValid) {
-                errorEl.textContent = 'Invalid consent code. Please complete the consent form to receive a valid code.';
+            // Call Google Sheets API to validate unique code
+            fetch(CONFIG.GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'validateCode',
+                    code: code,
+                    type: state.researchType
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                
+                if (result.success && result.valid) {
+                    state.verifiedConsentCode = code;
+                    errorEl.textContent = '✓ Code verified!';
+                    errorEl.className = 'message success';
+                    setTimeout(() => nextSection(), 500);
+                } else {
+                    errorEl.textContent = result.error || 'Invalid code. Please check and try again.';
+                    errorEl.className = 'message error';
+                }
+            })
+            .catch(error => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                console.log('API error:', error);
+                errorEl.textContent = 'Unable to verify code. Please try again later.';
                 errorEl.className = 'message error';
-                return;
-            }
-            
-            state.verifiedConsentCode = code;
-            sendToSheets({ action: 'consent_verified', consent_code: code, timestamp: new Date().toISOString() });
-            nextSection();
+            });
         }
         
         // ============================================
@@ -726,7 +793,7 @@
         }
         
         // ============================================
-        // PAYMENT
+        // PAYMENT - Stripe Integration
         // ============================================
         function setBilling(period) {
             state.billingPeriod = period;
@@ -736,27 +803,38 @@
             if (period === 'monthly') {
                 document.getElementById('paymentAmount').textContent = '$' + CONFIG.MONTHLY_PRICE.toFixed(2);
                 document.getElementById('paymentPeriod').textContent = 'per month';
-                document.getElementById('payBtn').textContent = `Subscribe — $${CONFIG.MONTHLY_PRICE.toFixed(2)}/month`;
             } else {
                 document.getElementById('paymentAmount').textContent = '$' + CONFIG.ANNUAL_PRICE;
                 document.getElementById('paymentPeriod').textContent = 'per year';
-                document.getElementById('payBtn').textContent = `Subscribe — $${CONFIG.ANNUAL_PRICE}/year`;
             }
+            document.getElementById('payBtn').textContent = 'Continue to Payment →';
+        }
+        
+        function redirectToStripe() {
+            // Save user info to localStorage before redirecting
+            const userInfo = {
+                email: state.verifiedEmail,
+                firstName: document.getElementById('firstName')?.value?.trim() || '',
+                lastName: document.getElementById('lastName')?.value?.trim() || '',
+                role: document.getElementById('userRole')?.value || '',
+                institution: document.getElementById('institution')?.value?.trim() || '',
+                plan: 'pro',
+                billingPeriod: state.billingPeriod,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('reasondx_pending_pro', JSON.stringify(userInfo));
+            
+            // Redirect to appropriate Stripe payment link
+            const stripeUrl = state.billingPeriod === 'monthly' 
+                ? CONFIG.STRIPE_MONTHLY_URL 
+                : CONFIG.STRIPE_ANNUAL_URL;
+            
+            window.location.href = stripeUrl;
         }
         
         async function processPayment() {
-            if (CONFIG.DEMO_MODE) {
-                alert('Demo Mode: Payment would be processed here via Stripe.\n\nSimulating successful payment...');
-                await finalizeAccount({
-                    firstName: document.getElementById('firstName').value.trim(),
-                    lastName: document.getElementById('lastName').value.trim(),
-                    role: document.getElementById('userRole').value,
-                    institution: document.getElementById('institution').value.trim()
-                });
-            } else {
-                document.getElementById('paymentError').textContent = 'Payment processing is not yet configured.';
-                document.getElementById('paymentError').className = 'message error';
-            }
+            // Legacy function - now redirects to Stripe
+            redirectToStripe();
         }
         
         // ============================================
@@ -775,7 +853,7 @@
         }
         
         function login() {
-            const email = document.getElementById('loginEmail').value.trim();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
             
             if (!email || !password) {
@@ -784,10 +862,21 @@
                 return;
             }
             
-            if (CONFIG.DEMO_MODE) {
-                alert('Demo Mode: Login would be verified here.\n\nRedirecting to dashboard...');
+            // Admin bypass
+            if (email === CONFIG.ADMIN_EMAIL.toLowerCase() && password === CONFIG.ADMIN_PASSWORD) {
+                localStorage.setItem('reasondx_user', JSON.stringify({ 
+                    email: email, 
+                    name: 'Admin', 
+                    plan: 'admin', 
+                    isAdmin: true 
+                }));
                 window.location.href = '../index.html';
+                return;
             }
+            
+            // Regular login (would verify against database in production)
+            document.getElementById('loginError').textContent = 'Invalid email or password.';
+            document.getElementById('loginError').className = 'message error';
         }
         
         function showForgotPassword() { alert('Password reset functionality coming soon!'); }
@@ -813,240 +902,8 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('consentFormLink').href = CONFIG.CONSENT_FORM_URL;
-        });
-    </script>
-</body>
-</html>>
-                    <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
-                        <div style="font-size: 14px; color: #64748b;">You'll be charged</div>
-                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
-                        <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
-                    </div>
-                    <div class="form-group"><label class="form-label">Card Information</label><div id="card-element" style="padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px;"><p style="color: #94a3b8; font-size: 14px;">Stripe card input loads here</p></div></div>
-                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $14.99/month</button>
-                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure · Cancel anytime · 30-day guarantee</p>
-                </div>
-                
-                <div class="section" id="sectionSuccess">
-                    <div class="success-screen">
-                        <div class="success-icon">🎉</div>
-                        <h3>Welcome to ReasonDx!</h3>
-                        <p id="successMessage">Your account has been created.</p>
-                        <div class="study-id-display hidden" id="studyIdDisplay">
-                            <div class="label">Your Study ID</div>
-                            <div class="id" id="studyIdValue">DX01-R0001</div>
-                        </div>
-                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">Start Learning →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-card hidden" id="loginForm">
-            <div class="form-header"><h2>Welcome Back</h2><p>Sign in to ReasonDx</p></div>
-            <div class="form-body">
-                <div id="loginError" class="message"></div>
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" class="form-input" placeholder="you@email.com"></div>
-                <div class="form-group"><label class="form-label">Password</label><input type="password" id="loginPassword" class="form-input" placeholder="Your password"></div>
-                <button type="button" class="btn btn-primary" onclick="login()">Sign In</button>
-                <button type="button" class="btn btn-link" onclick="alert('Password reset coming soon!')">Forgot password?</button>
-                <div class="login-prompt">Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a></div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        const CONFIG = { 
-            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec', 
-            STUDENT_CONSENT_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
-            FACULTY_CONSENT_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUNkdHME1VNVlSNDg2TUgyUkI5S1pUVUpXSy4u',
-            CONSENT_FORM_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
-            STUDY_PREFIX: 'DX01', 
-            DEMO_MODE: true, 
-            MONTHLY_PRICE: 14.99, 
-            ANNUAL_PRICE: 99,
-            STUDENT_CONSENT_CODE: 'CONSENT-REASONDX-2026',
-            FACULTY_CONSENT_CODE: 'CONSENT-FACULTY-2026',
-            ADMIN_EMAIL: 'lfine1@nova.edu',
-            ADMIN_PASSWORD: 'DxAdmin2026!'
-        };
-        let state = { selectedPlan: null, currentSection: 0, verifiedEmail: null, verifiedConsentCode: null, generatedCode: null, billingPeriod: 'monthly', researchType: 'student' };
-        
-        function selectResearchType(type) {
-            state.researchType = type;
-            const btnStudent = document.getElementById('btnStudent');
-            const btnFaculty = document.getElementById('btnFaculty');
-            const consentLink = document.getElementById('consentFormLink');
-            const instructions = document.getElementById('consentInstructions');
-            const codeHint = document.getElementById('consentCodeHint');
-            
-            if (type === 'student') {
-                btnStudent.style.background = '#7c3aed';
-                btnStudent.style.color = 'white';
-                btnStudent.style.borderColor = '#7c3aed';
-                btnFaculty.style.background = 'white';
-                btnFaculty.style.color = '#475569';
-                btnFaculty.style.borderColor = '#e2e8f0';
-                consentLink.href = CONFIG.STUDENT_CONSENT_URL;
-                instructions.textContent = 'Complete the student consent form and pre-study survey, then return here with your code.';
-                codeHint.textContent = 'Student code: CONSENT-REASONDX-2026';
-            } else {
-                btnFaculty.style.background = '#7c3aed';
-                btnFaculty.style.color = 'white';
-                btnFaculty.style.borderColor = '#7c3aed';
-                btnStudent.style.background = 'white';
-                btnStudent.style.color = '#475569';
-                btnStudent.style.borderColor = '#e2e8f0';
-                consentLink.href = CONFIG.FACULTY_CONSENT_URL;
-                instructions.textContent = 'Complete the faculty consent form and survey, then return here with your code.';
-                codeHint.textContent = 'Faculty code: CONSENT-FACULTY-2026';
-            }
-        }
-        
-        function selectPlan(plan) {
-            state.selectedPlan = plan;
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-            document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
-            setTimeout(() => {
-                document.getElementById('planSelection').classList.add('hidden');
-                document.getElementById('registrationForm').classList.remove('hidden');
-                document.getElementById('registrationForm').className = 'form-card ' + plan;
-                document.getElementById('formHeader').className = 'form-header ' + plan;
-                const titles = { free: ['Create Free Account', 'Free Plan'], pro: ['Start Pro Subscription', 'Pro — $14.99/mo'], research: ['Join Research Study', 'Free Pro Access'] };
-                document.getElementById('formTitle').textContent = titles[plan][0];
-                document.getElementById('formSubtitle').textContent = titles[plan][1];
-                setupSteps(plan);
-            }, 200);
-        }
-        
-        function setupSteps(plan) {
-            const si = document.getElementById('stepIndicator');
-            const numSteps = plan === 'research' ? 4 : plan === 'pro' ? 4 : 3;
-            si.innerHTML = Array(numSteps).fill(0).map((_, i) => '<div class="step' + (i === 0 ? ' active' : '') + '" data-step="' + i + '"></div>').join('');
-            showSection(plan === 'research' ? 'sectionConsent' : 'sectionEmail');
-            document.getElementById('emailInfoText').innerHTML = plan === 'research' ? '<strong>Academic email required</strong><br>You need a .edu email.' : '<strong>Enter your email</strong><br>We\'ll send a verification code.';
-            document.getElementById('emailHint').textContent = plan === 'research' ? 'Must be a .edu email' : 'Any email works';
-            document.getElementById('researchConsentBox').classList.toggle('hidden', plan !== 'research');
-        }
-        
-        function backToPlanSelection() { document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); state.selectedPlan = null; }
-        
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            const order = getSectionOrder();
-            const idx = order.indexOf(id);
-            document.querySelectorAll('.step').forEach((s, i) => { s.classList.remove('active', 'completed'); if (i === idx) s.classList.add('active'); else if (i < idx) s.classList.add('completed'); });
-            state.currentSection = idx;
-        }
-        
-        function getSectionOrder() {
-            if (state.selectedPlan === 'research') return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
-            if (state.selectedPlan === 'pro') return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
-            return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
-        }
-        
-        function nextSection() { const o = getSectionOrder(); if (state.currentSection + 1 < o.length) showSection(o[state.currentSection + 1]); }
-        
-        function verifyConsentCode() {
-            const code = document.getElementById('consentCode').value.toUpperCase().trim();
-            const err = document.getElementById('consentError');
-            err.className = 'message';
-            if (!code || !code.startsWith('CONSENT-') || code.length < 12) { err.textContent = 'Invalid consent code.'; err.className = 'message error'; return; }
-            state.verifiedConsentCode = code;
-            nextSection();
-        }
-        
-        function sendVerificationCode() {
-            const email = document.getElementById('emailInput').value.trim().toLowerCase();
-            const err = document.getElementById('emailError');
-            err.className = 'message';
-            const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            if (!valid || (state.selectedPlan === 'research' && !email.endsWith('.edu'))) { err.textContent = state.selectedPlan === 'research' ? 'Please enter a valid .edu email.' : 'Please enter a valid email.'; err.className = 'message error'; return; }
-            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            state.verifiedEmail = email;
-            if (CONFIG.DEMO_MODE) alert('Demo: Your code is ' + state.generatedCode);
-            document.getElementById('sentToEmail').textContent = email;
-            nextSection();
-        }
-        
-        function handleCodeInput(input) { input.value = input.value.replace(/[^0-9]/g, ''); if (input.value && input.dataset.index < 5) document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) + 1) + '"]')?.focus(); checkCodeComplete(); }
-        function handleCodeKeydown(e, input) { if (e.key === 'Backspace' && !input.value && input.dataset.index > 0) { const prev = document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) - 1) + '"]'); if (prev) { prev.focus(); prev.value = ''; } } }
-        function checkCodeComplete() { const code = Array.from(document.querySelectorAll('.code-input')).map(i => i.value).join(''); document.getElementById('verifyCodeBtn').disabled = code.length !== 6; }
-        
-        function verifyEmailCode() {
-            const code = Array.from(document.querySelectorAll('.code-input')).map(i => i.value).join('');
-            if (code === state.generatedCode) nextSection();
-            else { document.getElementById('verifyError').textContent = 'Invalid code.'; document.getElementById('verifyError').className = 'message error'; document.querySelectorAll('.code-input').forEach(i => i.value = ''); document.querySelector('.code-input').focus(); }
-        }
-        
-        function resendCode() { state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString(); if (CONFIG.DEMO_MODE) alert('Demo: New code is ' + state.generatedCode); }
-        
-        function checkPasswordStrength() {
-            const pw = document.getElementById('password').value;
-            let s = 0; if (pw.length >= 8) s++; if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++; if (/[0-9]/.test(pw)) s++; if (/[^a-zA-Z0-9]/.test(pw)) s++;
-            ['strengthBar1','strengthBar2','strengthBar3','strengthBar4'].forEach((id, i) => { const b = document.getElementById(id); b.className = 'bar'; if (i < s) b.classList.add(s <= 1 ? 'weak' : s <= 2 ? 'medium' : 'strong'); });
-        }
-        
-        function createAccount() {
-            const fn = document.getElementById('firstName').value.trim(), ln = document.getElementById('lastName').value.trim(), role = document.getElementById('userRole').value, pw = document.getElementById('password').value, cpw = document.getElementById('confirmPassword').value, terms = document.getElementById('agreeTerms').checked;
-            const err = document.getElementById('profileError'); err.className = 'message';
-            if (!fn || !ln) { err.textContent = 'Enter your name.'; err.className = 'message error'; return; }
-            if (!role) { err.textContent = 'Select your role.'; err.className = 'message error'; return; }
-            if (pw.length < 8) { err.textContent = 'Password must be 8+ characters.'; err.className = 'message error'; return; }
-            if (pw !== cpw) { err.textContent = 'Passwords don\'t match.'; err.className = 'message error'; return; }
-            if (!terms) { err.textContent = 'Please agree to terms.'; err.className = 'message error'; return; }
-            if (state.selectedPlan === 'pro') { nextSection(); return; }
-            finalize({ firstName: fn, lastName: ln, role, institution: document.getElementById('institution').value.trim() });
-        }
-        
-        function finalize(profile) {
-            let studyId = null;
-            if (state.selectedPlan === 'research') { studyId = CONFIG.STUDY_PREFIX + '-R' + Math.floor(1000 + Math.random() * 9000); }
-            localStorage.setItem('reasondx_user', JSON.stringify({ email: state.verifiedEmail, name: profile.firstName + ' ' + profile.lastName, plan: state.selectedPlan, studyId }));
-            if (studyId) { document.getElementById('studyIdDisplay').classList.remove('hidden'); document.getElementById('studyIdValue').textContent = studyId; document.getElementById('successMessage').textContent = 'Thank you for joining our research study!'; }
-            else if (state.selectedPlan === 'free') document.getElementById('successMessage').textContent = 'Your free account is ready!';
-            else document.getElementById('successMessage').textContent = 'Your Pro subscription is active!';
-            showSection('sectionSuccess');
-        }
-        
-        function setBilling(period) {
-            state.billingPeriod = period;
-            document.getElementById('billingMonthly').classList.toggle('active', period === 'monthly');
-            document.getElementById('billingAnnual').classList.toggle('active', period === 'annual');
-            document.getElementById('paymentAmount').textContent = period === 'monthly' ? '$14.99' : '$99';
-            document.getElementById('paymentPeriod').textContent = period === 'monthly' ? 'per month' : 'per year';
-            document.getElementById('payBtn').textContent = period === 'monthly' ? 'Subscribe — $14.99/month' : 'Subscribe — $99/year';
-        }
-        
-        function processPayment() {
-            if (CONFIG.DEMO_MODE) { alert('Demo: Payment processed!'); finalize({ firstName: document.getElementById('firstName').value.trim(), lastName: document.getElementById('lastName').value.trim(), role: document.getElementById('userRole').value, institution: document.getElementById('institution').value.trim() }); }
-        }
-        
-        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
-        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
-        function login() { 
-            const email = document.getElementById('loginEmail').value.trim().toLowerCase(); 
-            const pw = document.getElementById('loginPassword').value; 
-            if (!email || !pw) { 
-                document.getElementById('loginError').textContent = 'Enter email and password.'; 
-                document.getElementById('loginError').className = 'message error'; 
-                return; 
-            }
-            if (email === CONFIG.ADMIN_EMAIL.toLowerCase() && pw === CONFIG.ADMIN_PASSWORD) {
-                localStorage.setItem('reasondx_user', JSON.stringify({ email: email, name: 'Admin', plan: 'admin', isAdmin: true }));
-                window.location.href = '../index.html';
-                return;
-            }
-            if (CONFIG.DEMO_MODE) { 
-                alert('Demo: Logged in!'); 
-                window.location.href = '../index.html'; 
-            } 
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => { 
-            document.getElementById('consentFormLink').href = CONFIG.STUDENT_CONSENT_URL; 
+            document.getElementById('consentFormLink').href = CONFIG.STUDENT_CONSENT_URL;
+            // Initialize student/faculty selection
             selectResearchType('student');
         });
     </script>
