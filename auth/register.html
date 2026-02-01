@@ -472,6 +472,7 @@
         
         function setupStepsForPlan(plan) {
             const stepIndicator = document.getElementById('stepIndicator');
+            const emailBtn = document.querySelector('#sectionEmail .btn-primary');
             
             if (plan === 'research') {
                 stepIndicator.innerHTML = `
@@ -483,16 +484,18 @@
                 showSection('sectionConsent');
                 document.getElementById('emailInfoText').innerHTML = '<strong>Academic email required</strong><br>You\'ll need a .edu email address.';
                 document.getElementById('emailHint').textContent = 'Must be a .edu email address';
+                if (emailBtn) emailBtn.textContent = 'Send Verification Code';
             } else if (plan === 'pro') {
+                // Pro has 3 steps: Email → Profile → Payment (no verification)
                 stepIndicator.innerHTML = `
                     <div class="step active" data-step="0"></div>
                     <div class="step" data-step="1"></div>
                     <div class="step" data-step="2"></div>
-                    <div class="step" data-step="3"></div>
                 `;
                 showSection('sectionEmail');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send you a verification code.';
+                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll use this to set up your account.';
                 document.getElementById('emailHint').textContent = 'Any email address works';
+                if (emailBtn) emailBtn.textContent = 'Continue';
             } else {
                 stepIndicator.innerHTML = `
                     <div class="step active" data-step="0"></div>
@@ -502,6 +505,7 @@
                 showSection('sectionEmail');
                 document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send you a verification code.';
                 document.getElementById('emailHint').textContent = 'Any email address works';
+                if (emailBtn) emailBtn.textContent = 'Send Verification Code';
             }
             
             document.getElementById('researchConsentBox').classList.toggle('hidden', plan !== 'research');
@@ -537,8 +541,10 @@
             if (state.selectedPlan === 'research') {
                 return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
             } else if (state.selectedPlan === 'pro') {
-                return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
+                // Skip email verification for Pro - Stripe will verify email at checkout
+                return ['sectionEmail', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
             } else {
+                // Free plan still requires email verification
                 return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
             }
         }
@@ -632,8 +638,17 @@
                 return;
             }
             
-            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             state.verifiedEmail = email;
+            
+            // For Pro plan, skip verification - just save email and continue
+            if (state.selectedPlan === 'pro') {
+                sendToSheets({ action: 'pro_signup_email', email: email, plan: 'pro', timestamp: new Date().toISOString() });
+                nextSection();
+                return;
+            }
+            
+            // For other plans, generate verification code
+            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             
             if (CONFIG.DEMO_MODE) {
                 alert('Demo Mode - Your verification code is: ' + state.generatedCode);
