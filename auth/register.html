@@ -249,6 +249,12 @@
                 
                 <div class="section" id="sectionProfile">
                     <div id="profileError" class="message"></div>
+                    <!-- Email field for Research users (shown only for research plan) -->
+                    <div class="form-group" id="profileEmailGroup" style="display: none;">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="profileEmail" class="form-input" placeholder="your.email@university.edu">
+                        <p class="form-hint">.edu email required for research participants</p>
+                    </div>
                     <div class="form-row">
                         <div class="form-group"><label class="form-label">First Name</label><input type="text" id="firstName" class="form-input" placeholder="Jane"></div>
                         <div class="form-group"><label class="form-label">Last Name</label><input type="text" id="lastName" class="form-input" placeholder="Doe"></div>
@@ -514,16 +520,14 @@
             const emailBtn = document.querySelector('#sectionEmail .btn-primary');
             
             if (plan === 'research') {
+                // Research has 2 steps: Consent Code → Profile (email already verified via consent process)
                 stepIndicator.innerHTML = `
                     <div class="step active" data-step="0"></div>
                     <div class="step" data-step="1"></div>
-                    <div class="step" data-step="2"></div>
-                    <div class="step" data-step="3"></div>
                 `;
                 showSection('sectionConsent');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Academic email required</strong><br>You\'ll need a .edu email address.';
-                document.getElementById('emailHint').textContent = 'Must be a .edu email address';
-                if (emailBtn) emailBtn.textContent = 'Send Verification Code';
+                // Show email field in profile section for research users
+                document.getElementById('profileEmailGroup').style.display = 'block';
             } else if (plan === 'pro') {
                 // Pro has 3 steps: Email → Profile → Payment (no verification)
                 stepIndicator.innerHTML = `
@@ -578,7 +582,8 @@
         
         function getSectionOrder() {
             if (state.selectedPlan === 'research') {
-                return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
+                // Skip email verification for Research - they're already verified via consent code
+                return ['sectionConsent', 'sectionProfile', 'sectionSuccess'];
             } else if (state.selectedPlan === 'pro') {
                 // Skip email verification for Pro - Stripe will verify email at checkout
                 return ['sectionEmail', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
@@ -803,6 +808,22 @@
             const errorEl = document.getElementById('profileError');
             
             errorEl.className = 'message';
+            
+            // For research users, get email from profile section
+            if (state.selectedPlan === 'research') {
+                const profileEmail = document.getElementById('profileEmail').value.trim().toLowerCase();
+                if (!profileEmail || !profileEmail.includes('@')) {
+                    errorEl.textContent = 'Please enter a valid email address.';
+                    errorEl.className = 'message error';
+                    return;
+                }
+                if (!profileEmail.endsWith('.edu')) {
+                    errorEl.textContent = 'Research participants must use a .edu email address.';
+                    errorEl.className = 'message error';
+                    return;
+                }
+                state.verifiedEmail = profileEmail;
+            }
             
             if (!firstName || !lastName) { errorEl.textContent = 'Please enter your full name.'; errorEl.className = 'message error'; return; }
             if (!role) { errorEl.textContent = 'Please select your role.'; errorEl.className = 'message error'; return; }
