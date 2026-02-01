@@ -43,18 +43,18 @@ const DxCaseNav = {
         // Add body class for padding
         document.body.classList.add('has-dx-nav');
         
-        // Setup event listeners
-        this.setupEventListeners();
-        
         // Create quick nav if enabled
         if (this.config.showQuickNav) {
             this.createQuickNav();
         }
         
-        // Create exit modal
+        // Create exit modal BEFORE setting up event listeners
         if (this.config.confirmExit) {
             this.createExitModal();
         }
+        
+        // Setup event listeners (after all elements are created)
+        this.setupEventListeners();
     },
 
     detectPageType() {
