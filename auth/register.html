@@ -277,7 +277,7 @@
                         <div class="password-strength"><div class="bar" id="strengthBar1"></div><div class="bar" id="strengthBar2"></div><div class="bar" id="strengthBar3"></div><div class="bar" id="strengthBar4"></div></div>
                     </div>
                     <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter password"></div>
-                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label></div>
+                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the <a href="#" onclick="showTermsModal(); return false;" style="color: #2563eb; text-decoration: underline;">Terms of Service</a></label></div>
                     <div class="checkbox-group hidden" id="researchConsentBox"><input type="checkbox" id="agreeResearch" checked><label for="agreeResearch">I understand my anonymized data will be used for research</label></div>
                     <button type="button" class="btn btn-primary" onclick="createAccount()">Create Account</button>
                 </div>
@@ -367,6 +367,45 @@
                 <div class="login-prompt">
                     Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 16px; max-width: 600px; width: 90%; max-height: 80vh; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+            <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="color: white; margin: 0; font-size: 18px;">Terms of Service</h3>
+                <button onclick="closeTermsModal()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 0; line-height: 1;">&times;</button>
+            </div>
+            <div style="padding: 24px; overflow-y: auto; max-height: calc(80vh - 140px); font-size: 14px; color: #334155; line-height: 1.6;">
+                <h4 style="color: #1e3a5f; margin: 0 0 12px;">ReasonDx Pro Subscription Terms</h4>
+                
+                <p><strong>What You Get:</strong></p>
+                <ul style="margin: 8px 0 16px 20px;">
+                    <li>Immediate access to all ReasonDx clinical reasoning modules</li>
+                    <li>Unlimited case studies and pathophysiology content</li>
+                    <li>Advanced analytics and progress tracking</li>
+                    <li>New content added regularly</li>
+                </ul>
+                
+                <p><strong>Cancellation:</strong></p>
+                <p style="margin: 8px 0 16px;">Cancel anytime from your Stripe billing portal. Access continues until the end of your billing period.</p>
+                
+                <p><strong>Refunds:</strong></p>
+                <p style="margin: 8px 0 16px;">All sales are final. No refunds. You may cancel anytime to prevent future charges.</p>
+                
+                <p><strong>Delivery:</strong></p>
+                <p style="margin: 8px 0 16px;">Access granted within 24 hours of payment. Welcome email sent with login instructions. Access the platform at reasondx.com.</p>
+                
+                <p><strong>License:</strong></p>
+                <p style="margin: 8px 0 16px;">Personal, non-transferable educational license. For individual learning use only. Do not share login credentials.</p>
+                
+                <p><strong>Contact:</strong></p>
+                <p style="margin: 8px 0 0;">Questions? Email <a href="mailto:ReasonDxEducation@gmail.com" style="color: #2563eb;">ReasonDxEducation@gmail.com</a></p>
+            </div>
+            <div style="padding: 16px 24px; border-top: 1px solid #e2e8f0; text-align: right;">
+                <button onclick="closeTermsModal()" style="background: #2563eb; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">Close</button>
             </div>
         </div>
     </div>
@@ -895,6 +934,20 @@
         }
         
         function showForgotPassword() { alert('Password reset functionality coming soon!'); }
+        
+        // Terms Modal
+        function showTermsModal() {
+            document.getElementById('termsModal').style.display = 'flex';
+        }
+        
+        function closeTermsModal() {
+            document.getElementById('termsModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('termsModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeTermsModal();
+        });
         
         // ============================================
         // GOOGLE SHEETS
