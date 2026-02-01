@@ -859,28 +859,20 @@
     <script>
         const CONFIG = { 
             GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec', 
-            // Consent forms for research track
             STUDENT_CONSENT_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
             FACULTY_CONSENT_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUNkdHME1VNVlSNDg2TUgyUkI5S1pUVUpXSy4u',
-            // Post-study surveys (for reference)
-            STUDENT_POST_SURVEY_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUM1NSVkRSSDNXSk42NEZZVzMxTTFHNFhOTy4u',
-            FACULTY_POST_SURVEY_URL: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=MS0rLD4u8U21cfs3wEL_G6SUbndcDQVHjwfpKLVqyNZUMDdETkRRSUM3VFlaQkJINU1OT0JORUQ0Ri4u',
-            // Legacy - keep for backwards compatibility
             CONSENT_FORM_URL: 'https://forms.cloud.microsoft/r/B0czM7NJ0F',
             STUDY_PREFIX: 'DX01', 
             DEMO_MODE: true, 
             MONTHLY_PRICE: 14.99, 
             ANNUAL_PRICE: 99,
-            // Consent codes - must match what's in MS Forms completion messages
             STUDENT_CONSENT_CODE: 'CONSENT-REASONDX-2026',
             FACULTY_CONSENT_CODE: 'CONSENT-FACULTY-2026',
-            // Admin credentials - CHANGE THESE before going live!
             ADMIN_EMAIL: 'lfine1@nova.edu',
             ADMIN_PASSWORD: 'DxAdmin2026!'
         };
         let state = { selectedPlan: null, currentSection: 0, verifiedEmail: null, verifiedConsentCode: null, generatedCode: null, billingPeriod: 'monthly', researchType: 'student' };
         
-        // Research type selection (student vs faculty)
         function selectResearchType(type) {
             state.researchType = type;
             const btnStudent = document.getElementById('btnStudent');
@@ -1042,14 +1034,8 @@
                 document.getElementById('loginError').className = 'message error'; 
                 return; 
             }
-            // Admin/Owner bypass
             if (email === CONFIG.ADMIN_EMAIL.toLowerCase() && pw === CONFIG.ADMIN_PASSWORD) {
-                localStorage.setItem('reasondx_user', JSON.stringify({ 
-                    email: email, 
-                    name: 'Admin', 
-                    plan: 'admin', 
-                    isAdmin: true 
-                }));
+                localStorage.setItem('reasondx_user', JSON.stringify({ email: email, name: 'Admin', plan: 'admin', isAdmin: true }));
                 window.location.href = '../index.html';
                 return;
             }
