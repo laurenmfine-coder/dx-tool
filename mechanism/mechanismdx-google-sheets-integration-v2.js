@@ -3,7 +3,7 @@
  * Updated: January 2026
  * 
  * Now includes all 13 body systems for comprehensive data collection
- * Automatically sends learning data to Google Sheets for IRB-approved research
+ * Automatically sends learning data to Google Sheets for analytics
  */
 
 (function() {

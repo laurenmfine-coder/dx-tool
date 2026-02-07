@@ -1,252 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tension Pneumothorax | MechanismDx</title>
-    <style>
-        :root { --primary: #0891b2; --primary-dark: #0e7490; --primary-light: #ecfeff; --text: #1e293b; --text-secondary: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 16px 24px; color: white; }
-        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .header-brand { font-size: 18px; font-weight: 600; text-decoration: none; color: white; }
-        .header-nav { display: flex; gap: 8px; }
-        .header-link { padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
-        .header-link:hover { background: rgba(255,255,255,0.15); color: white; }
-        .hero { background: linear-gradient(135deg, #0e7490 0%, #164e63 100%); padding: 40px 24px; color: white; }
-        .hero-inner { max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
-        .hero-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
-        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
-        .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-        .concept-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .concept-box h4 { font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
-        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .danger-box h4 { font-weight: 600; margin-bottom: 8px; color: #991b1b; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
-        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-        .card-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
-        .flow-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
-        .flow-step-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
-        .table-wrap { overflow-x: auto; margin: 16px 0; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--bg); font-weight: 600; }
-        .integration-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-top: 24px; }
-        .integration-box h3 { color: #166534; margin-bottom: 12px; }
-        .integration-links { display: flex; flex-wrap: wrap; gap: 10px; }
-        .integration-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1px solid #86efac; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; }
-        .integration-link:hover { background: #f0fdf4; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        .procedure-box { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 16px; margin: 16px 0; }
-        .procedure-box h4 { color: #92400e; margin-bottom: 8px; }
-        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } .hero h1 { font-size: 24px; } }
-    </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
-</head>
-<body>
-    <header class="header">
-        <div class="header-inner">
-            <a href="../index.html" class="header-brand">🩺 Dx Suite</a>
-            <nav class="header-nav">
-                <a href="index.html" class="header-link">MechanismDx</a>
-                <a href="../ReasonDx/index.html" class="header-link">ReasonDx</a>
-                <a href="../CoachDx/index.html" class="header-link">CoachDx</a>
-            </nav>
-        </div>
-    </header>
+<!DOCTYPE html><html lang="en"><head><script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Tension Pneumothorax | ReasonDx</title><style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--danger:#DC2626;--info:#F59E0B;--warning:#F97316}*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}.header{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600;color:#fff}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}.stats{display:flex;gap:12px}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px;color:#fff}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.4rem;font-weight:700;margin-top:4px}.card-body{padding:24px}.pearl{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(168,85,247,.15));border-left:4px solid var(--accent);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.danger{background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.15));border-left:4px solid var(--danger);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.compare-table{width:100%;border-collapse:collapse;margin:16px 0}.compare-table th{background:rgba(139,92,246,.2);padding:10px;text-align:left;font-size:.85rem;border:1px solid var(--border)}.compare-table td{padding:10px;border:1px solid var(--border);font-size:.85rem}.choices{display:grid;gap:12px;margin-top:16px}.choice{background:var(--card);border:2px solid var(--border);padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.15);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.15);pointer-events:none}.choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.choice-title{font-weight:600;font-size:.95rem}.hidden{display:none!important}.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}.cross-link{padding:14px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;text-decoration:none;color:var(--text)}.cross-link:hover{border-color:var(--accent)}.cross-link-title{font-weight:600;font-size:.9rem}h3{color:var(--accent);margin:20px 0 12px;font-size:1.1rem}@media(max-width:480px){.main{padding:12px}.card-body{padding:16px}}
+</style></head><body>
+<div class="header"><div class="header-row"><div class="header-title">🎈 Tension Pneumothorax<span class="badge">PULMONARY</span></div><div class="stats"><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">XP</div></div><div class="stat"><div class="stat-value">8</div><div class="stat-label">MCQs</div></div></div></div></div>
+<div class="main"><div class="card"><div class="card-header"><div class="card-phase">MECHANISM</div><div class="card-title">Pathophysiology</div></div><div class="card-body"><p>Tension PTX = one-way valve mechanism: air enters pleural space on inspiration but cannot exit → progressive air accumulation → lung collapse + mediastinal shift → impaired venous return → obstructive shock → cardiac arrest.</p>
+<table class="compare-table"><tr><th>Type</th><th>Cause</th><th>Key Features</th></tr>
+<tr><td><strong>Primary spontaneous</strong></td><td>Rupture of apical blebs. Tall, thin young males, smokers</td><td>Sudden pleuritic chest pain + dyspnea. Usually small, often resolves</td></tr>
+<tr><td><strong>Secondary spontaneous</strong></td><td>Underlying lung disease (COPD, CF, Marfan, TB)</td><td>Higher morbidity due to limited pulmonary reserve</td></tr>
+<tr><td><strong>Traumatic</strong></td><td>Penetrating/blunt trauma, iatrogenic (central line, thoracentesis, mechanical ventilation/barotrauma)</td><td>Most common cause of tension PTX</td></tr>
+<tr><td><strong>Tension</strong></td><td>Any PTX can become tension if one-way valve develops</td><td>CLINICAL DIAGNOSIS — do NOT wait for imaging. Hemodynamic compromise</td></tr></table></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">CLINICAL</div><div class="card-title">Diagnosis &amp; Presentation</div></div><div class="card-body"><div class="danger"><strong>⚠️ Tension PTX = CLINICAL DIAGNOSIS:</strong><br>
+• Absent breath sounds on affected side<br>
+• Tracheal deviation AWAY from affected side<br>
+• JVD (impaired venous return)<br>
+• Hypotension + tachycardia (obstructive shock)<br>
+• Hyperresonance to percussion on affected side<br>
+• DO NOT delay treatment for CXR — immediate needle decompression</div>
+<h3>Simple vs Tension</h3>
+<table class="compare-table"><tr><th>Feature</th><th>Simple</th><th>Tension</th></tr>
+<tr><td>Hemodynamics</td><td>Stable</td><td>Hypotension, shock</td></tr>
+<tr><td>Trachea</td><td>Midline</td><td>Deviated AWAY</td></tr>
+<tr><td>Neck veins</td><td>Normal</td><td>Distended (JVD)</td></tr>
+<tr><td>Treatment urgency</td><td>Can confirm with CXR first</td><td>Immediate intervention — clinical diagnosis</td></tr></table></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">TREATMENT</div><div class="card-title">Management</div></div><div class="card-body"><table class="compare-table"><tr><th>Scenario</th><th>Treatment</th></tr>
+<tr><td><strong>Tension PTX</strong></td><td><strong>Needle decompression</strong>: 14-16G needle, 2nd ICS MCL (or 5th ICS MAL). Converts tension to simple PTX. Then chest tube</td></tr>
+<tr><td><strong>Large simple PTX (>2 cm)</strong></td><td>Chest tube (tube thoracostomy): 4th-5th ICS MAL (safe triangle)</td></tr>
+<tr><td><strong>Small simple PTX (<2 cm, stable)</strong></td><td>Observation + supplemental O2 (accelerates reabsorption by 4x) + serial CXR</td></tr>
+<tr><td><strong>Recurrent PTX</strong></td><td>VATS (video-assisted thoracoscopic surgery) with pleurodesis or bleb resection</td></tr></table>
+<div class="pearl"><strong>🔑 Needle Decompression:</strong> 2nd intercostal space, midclavicular line, on affected side. Insert over SUPERIOR border of rib (NVB runs along inferior border). Rush of air confirms diagnosis. Always follow with definitive chest tube placement.</div></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body"><div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">Tension PTX is a:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Tension PTX is clinical — waiting for CXR risks cardiac arrest." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Radiographic diagnosis — always get CXR first</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Absent breath sounds + tracheal deviation + JVD + hypotension = immediate needle decompression. Do NOT delay for CXR. Every second of delay worsens obstructive shock. CXR can confirm SIMPLE PTX but tension requires immediate intervention." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Clinical diagnosis — treat immediately without imaging</div></div></div>
+<div class="choice" data-correct="false" data-fb="Classic findings make it a positive clinical diagnosis, not exclusion." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Diagnosis of exclusion</div></div></div>
+<div class="choice" data-correct="false" data-fb="CT is unnecessary and dangerous to obtain during hemodynamic compromise." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">CT-only diagnosis</div></div></div>
+</div><div id="mcqFb0" class="hidden" style="margin-top:16px"><div id="mcqFbText0" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">Needle decompression site for tension PTX?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="That&#x27;s the chest tube insertion site, not needle decompression." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">4th ICS, anterior axillary line</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! 14-16G needle at 2nd ICS MCL on affected side. Insert OVER the superior border of the 3rd rib (avoids intercostal NVB along inferior border of 2nd rib). Rush of air confirms tension PTX. Always follow with definitive chest tube at 4th-5th ICS MAL." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">2nd ICS, midclavicular line</div></div></div>
+<div class="choice" data-correct="false" data-fb="Too posterior for needle decompression." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">5th ICS, posterior axillary line</div></div></div>
+<div class="choice" data-correct="false" data-fb="Subxiphoid approach is for pericardiocentesis, not PTX." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Subxiphoid</div></div></div>
+</div><div id="mcqFb1" class="hidden" style="margin-top:16px"><div id="mcqFbText1" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">Primary spontaneous PTX typical patient?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="That&#x27;s secondary spontaneous PTX from underlying lung disease." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">Obese elderly woman with COPD</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Primary spontaneous PTX: rupture of subpleural apical blebs. Tall, thin males (15-35 years). Smoking increases risk 20x. Presents with sudden pleuritic chest pain and dyspnea. Recurrence ~30% within 1 year (higher with continued smoking)." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">Tall, thin young male, often a smoker</div></div></div>
+<div class="choice" data-correct="false" data-fb="That&#x27;s iatrogenic (traumatic) PTX." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">Middle-aged woman after thoracentesis</div></div></div>
+<div class="choice" data-correct="false" data-fb="Neonatal PTX exists but primary spontaneous PTX refers to adolescents/young adults." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Neonate immediately after birth</div></div></div>
+</div><div id="mcqFb2" class="hidden" style="margin-top:16px"><div id="mcqFbText2" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">Tracheal deviation in tension PTX is AWAY from the affected side because:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="In simple atelectasis, the trachea deviates TOWARD the collapsed side. Tension is opposite." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">The collapsed lung pulls the trachea toward it</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Tension = progressive air accumulation under pressure → pushes mediastinum (including trachea) AWAY from the affected side. This distinguishes tension from simple PTX (midline trachea) and atelectasis (trachea deviates TOWARD the lesion due to volume loss)." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Increasing pressure pushes the mediastinum to the contralateral side</div></div></div>
+<div class="choice" data-correct="false" data-fb="JVD is from impaired venous return, not the cause of tracheal deviation." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">JVD causes tracheal deviation</div></div></div>
+<div class="choice" data-correct="false" data-fb="The mediastinal shift is from pressure, not a compensatory mechanism." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">The heart shifts to decompress the affected lung</div></div></div>
+</div><div id="mcqFb3" class="hidden" style="margin-top:16px"><div id="mcqFbText3" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">Supplemental O2 accelerates PTX reabsorption by approximately:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="The acceleration factor is higher." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">2 times</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Supplemental O2 replaces nitrogen in the pleural space with oxygen, which is absorbed much more rapidly. Increases reabsorption rate ~4x (from ~1.25%/day to ~5%/day). Useful for small, stable pneumothoraces managed with observation." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">4 times</div></div></div>
+<div class="choice" data-correct="false" data-fb="Overestimates the acceleration." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">10 times</div></div></div>
+<div class="choice" data-correct="false" data-fb="O2 significantly accelerates reabsorption." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">It doesn&#x27;t — O2 has no effect on reabsorption</div></div></div>
+</div><div id="mcqFb4" class="hidden" style="margin-top:16px"><div id="mcqFbText4" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">Iatrogenic PTX most commonly results from:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Bronchoscopy rarely causes PTX." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">Bronchoscopy</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Subclavian vein catheterization is the most common cause of iatrogenic PTX (needle can puncture lung apex). Thoracentesis, pleural biopsy, and mechanical ventilation (barotrauma) are other common causes. Always obtain post-procedure CXR." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Central venous catheter placement (subclavian/IJ) or thoracentesis</div></div></div>
+<div class="choice" data-correct="false" data-fb="LP does not involve the thoracic cavity." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">Lumbar puncture</div></div></div>
+<div class="choice" data-correct="false" data-fb="Intubation itself doesn&#x27;t cause PTX (though positive pressure ventilation can)." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Intubation</div></div></div>
+</div><div id="mcqFb5" class="hidden" style="margin-top:16px"><div id="mcqFbText5" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">Recurrent pneumothorax prevention?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Chest tubes are temporary drainage devices." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Lifetime chest tube</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Video-assisted thoracoscopic surgery (VATS): resect blebs + mechanical/chemical pleurodesis (creates adhesions between visceral and parietal pleura preventing recurrence). Indicated after 2nd ipsilateral PTX, bilateral PTX, or persistent air leak &gt;5-7 days. Reduces recurrence to &lt;5%." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">VATS with pleurodesis or bleb resection</div></div></div>
+<div class="choice" data-correct="false" data-fb="Antibiotics don&#x27;t prevent PTX recurrence." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Prophylactic antibiotics</div></div></div>
+<div class="choice" data-correct="false" data-fb="Spirometry monitors lung function but doesn&#x27;t prevent PTX." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Daily spirometry</div></div></div>
+</div><div id="mcqFb6" class="hidden" style="margin-top:16px"><div id="mcqFbText6" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">Tension PTX causes obstructive shock by:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Tension PTX typically affects one hemithorax." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Collapsing both lungs simultaneously</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Progressive intrapleural pressure → mediastinal shift → compresses SVC/IVC and right heart → decreased venous return → decreased preload → decreased cardiac output → obstructive shock. Mechanism is similar to cardiac tamponade (both = impaired cardiac filling). Treatment: relieve the pressure." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Compressing the vena cava/heart → impaired venous return → decreased cardiac output</div></div></div>
+<div class="choice" data-correct="false" data-fb="Hemorrhage is not the primary mechanism in tension PTX." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">Causing massive pulmonary hemorrhage</div></div></div>
+<div class="choice" data-correct="false" data-fb="While vagal responses can occur, the primary mechanism is mechanical obstruction." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Triggering a vagal response</div></div></div>
+</div><div id="mcqFb7" class="hidden" style="margin-top:16px"><div id="mcqFbText7" style="padding:12px;border-radius:8px"></div></div></div></div></div></div>
+<div class="card"><div class="card-header"><div class="card-title">📚 References</div></div><div class="card-body"><div class="cross-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK559090/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Tension PTX - StatPearls</div></a><a href="https://www.ncbi.nlm.nih.gov/books/NBK441885/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Pneumothorax</div></a></div></div></div>
+</div>
 
-    <section class="hero">
-        <div class="hero-inner">
-            <h1>🫁 Tension Pneumothorax</h1>
-            <p>A clinical diagnosis requiring immediate intervention. Understand the pressure dynamics, recognize the signs, and master the life-saving decompression technique.</p>
-            <div class="hero-meta">
-                <span>⏱️ 15 min</span>
-                <span>📊 Critical</span>
-                <span>🎯 Emergency/Trauma</span>
-            </div>
-        </div>
-    </section>
-
-    <main class="main">
-        <div class="section">
-            <h2 class="section-title">📋 Overview</h2>
-            <p>Tension pneumothorax occurs when air enters the pleural space through a one-way valve mechanism, progressively accumulating with each breath. Unlike simple pneumothorax, the trapped air compresses the mediastinum, impairs venous return, and causes cardiovascular collapse.</p>
-            
-            <div class="danger-box">
-                <h4>⚠️ Critical Point: Clinical Diagnosis</h4>
-                <p>Tension pneumothorax is a CLINICAL diagnosis. Do NOT delay treatment for imaging. If suspected in an unstable patient, decompress immediately!</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">🔬 Pathophysiology</h2>
-            
-            <div class="flow-step">
-                <span class="flow-step-num">1</span>
-                <div><strong>One-Way Valve Formation</strong><br>Air enters pleural space during inspiration but cannot escape during expiration (tissue acts as flap valve)</div>
-            </div>
-            <div class="flow-step">
-                <span class="flow-step-num">2</span>
-                <div><strong>Progressive Air Accumulation</strong><br>Each breath adds more air → intrapleural pressure becomes positive (normally negative)</div>
-            </div>
-            <div class="flow-step">
-                <span class="flow-step-num">3</span>
-                <div><strong>Mediastinal Shift</strong><br>Rising pressure pushes mediastinum to contralateral side → kinks great vessels</div>
-            </div>
-            <div class="flow-step">
-                <span class="flow-step-num">4</span>
-                <div><strong>Cardiovascular Collapse</strong><br>Decreased venous return → decreased preload → decreased cardiac output → obstructive shock</div>
-            </div>
-
-            <div class="concept-box">
-                <h4>🎯 Why Obstructive Shock?</h4>
-                <p>The heart can only pump what it receives. When positive intrathoracic pressure kinks the vena cava and compresses the heart, venous return drops dramatically. This is why patients have distended neck veins (blood can't get into the thorax) and hypotension (heart has nothing to pump out).</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">🩺 Clinical Presentation</h2>
-            
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-title">🔍 Classic Findings</div>
-                    <ul>
-                        <li>Severe respiratory distress</li>
-                        <li>Hypotension / tachycardia</li>
-                        <li>Tracheal deviation (AWAY from affected side)</li>
-                        <li>Distended neck veins (JVD)</li>
-                        <li>Absent breath sounds on affected side</li>
-                        <li>Hyperresonance to percussion</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">⚠️ Causes</div>
-                    <ul>
-                        <li>Penetrating chest trauma</li>
-                        <li>Blunt chest trauma with rib fractures</li>
-                        <li>Barotrauma (mechanical ventilation)</li>
-                        <li>Central line placement (subclavian, IJ)</li>
-                        <li>Thoracentesis complication</li>
-                        <li>Spontaneous (rupture of bleb in tall, thin males)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="table-wrap">
-                <table>
-                    <tr>
-                        <th>Finding</th>
-                        <th>Simple Pneumothorax</th>
-                        <th>Tension Pneumothorax</th>
-                    </tr>
-                    <tr>
-                        <td>Hemodynamics</td>
-                        <td>Stable</td>
-                        <td style="background:#fef2f2"><strong>Unstable - shock</strong></td>
-                    </tr>
-                    <tr>
-                        <td>JVD</td>
-                        <td>Absent</td>
-                        <td style="background:#fef2f2"><strong>Present (distended)</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Tracheal Deviation</td>
-                        <td>Midline</td>
-                        <td style="background:#fef2f2"><strong>Deviated away</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Treatment Urgency</td>
-                        <td>Can wait for imaging</td>
-                        <td style="background:#fef2f2"><strong>Immediate decompression</strong></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">💊 Management</h2>
-            
-            <div class="procedure-box">
-                <h4>🎯 Needle Decompression Technique</h4>
-                <p><strong>Site:</strong> 2nd intercostal space, midclavicular line (or 4th/5th ICS, anterior axillary line)</p>
-                <p><strong>Needle:</strong> 14-16 gauge, at least 5cm long (longer in obese patients)</p>
-                <p><strong>Direction:</strong> Perpendicular to chest wall, just ABOVE the rib (avoid neurovascular bundle)</p>
-                <p><strong>Confirmation:</strong> Rush of air indicates successful decompression</p>
-                <p><strong>Next step:</strong> ALWAYS follow with chest tube (needle is temporizing only)</p>
-            </div>
-
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-title">🚨 Immediate Actions</div>
-                    <ul>
-                        <li>High-flow oxygen</li>
-                        <li>Needle decompression if unstable</li>
-                        <li>Chest tube placement (definitive)</li>
-                        <li>Volume resuscitation if hypotensive</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">📋 Chest Tube Placement</div>
-                    <ul>
-                        <li>4th-5th ICS, anterior axillary line</li>
-                        <li>28-32 Fr for trauma</li>
-                        <li>Connect to water seal/suction</li>
-                        <li>Confirm placement with CXR</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="integration-box">
-            <h3>🔗 Continue Your Learning</h3>
-            <div class="integration-links">
-                <a href="../ReasonDx/tension-ptx-adventure.html" class="integration-link">🎮 <strong>ReasonDx:</strong> Tension PTX Case</a>
-                <a href="../CoachDx/mentor-chat.html?case=tension-ptx" class="integration-link">🗣️ <strong>CoachDx:</strong> Tension PTX SBAR</a>
-                <a href="trauma-emergency.html" class="integration-link">📚 <strong>Related:</strong> Trauma Module</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">📝 Key Takeaways</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-title">🎯 Must Know</div>
-                    <ul>
-                        <li>Clinical diagnosis - don't wait for imaging</li>
-                        <li>Obstructive shock mechanism</li>
-                        <li>JVD + hypotension + absent breath sounds = tension</li>
-                        <li>Tracheal deviation is a LATE sign</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">💊 Treatment Pearls</div>
-                    <ul>
-                        <li>Needle decompression is temporizing</li>
-                        <li>Chest tube is definitive treatment</li>
-                        <li>2nd ICS midclavicular or 4th ICS anterior axillary</li>
-                        <li>Use long enough needle (5cm+)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script src="dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
-
-    <!-- DxSuite AI Tutor Integration -->
-    <div data-dx-tutor
-         data-module-title="Tension Pneumothorax"
-         data-key-points="📋 Overview, 🔬 Pathophysiology, 🩺 Clinical Presentation, 💊 Management, 📝 Key Takeaways, 🔗 Continue Your Learning, pathophysiology, clinical presentation, diagnosis, management, complications"
-         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
-         style="display:none;"></div>
-    <script src="dx-ai-tutor.js"></script>
-</body>
-</html>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=tension-pneumothorax-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/tension-ptx-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body></html>

@@ -78,7 +78,7 @@ const COACHDX_CRITICAL_CARE_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Sepsis & Septic Shock Module', link: '../mechanism/sepsis-shock-module.html', reason: 'Understand cytokine storm and hemodynamic collapse' },
         { type: 'reasondx', title: 'Sepsis Adventure Case', link: '../ReasonDx/adventure-cases/sepsis-expanded.html', reason: 'Practice sepsis workup and management decisions' },
-        { type: 'reasondx', title: 'Sepsis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=sepsis-deep-dive', reason: 'SSC guidelines and bundle compliance' },
+        { type: 'reasondx', title: 'Sepsis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=sepsis-deep-dive', reason: 'SSC guidelines and bundle compliance' },
         { type: 'parallel', title: 'Sepsis-Pneumonia Case', link: 'mentor-chat.html?case=sepsis-pneumonia', reason: 'Compare with sepsis without shock' }
     ],
     evidenceBase: {
@@ -154,7 +154,7 @@ const COACHDX_CRITICAL_CARE_CASES = {
     },
     relatedContent: [
         { type: 'mechanism', title: 'ARDS Module', link: '../mechanism/ards-module.html', reason: 'Understand alveolar damage and ventilator-induced lung injury' },
-        { type: 'reasondx', title: 'ARDS Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=ards-deep-dive', reason: 'Berlin criteria and management strategies' },
+        { type: 'reasondx', title: 'ARDS Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=ards-deep-dive', reason: 'Berlin criteria and management strategies' },
         { type: 'parallel', title: 'COPD Exacerbation', link: 'mentor-chat.html?case=copd-exacerbation', reason: 'Compare obstructive vs restrictive respiratory failure' }
     ],
     evidenceBase: {
@@ -230,7 +230,7 @@ const COACHDX_CRITICAL_CARE_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'VTE/PE Module', link: '../mechanism/vte-pe-module.html', reason: 'Understand clot pathophysiology and hemodynamic effects' },
         { type: 'reasondx', title: 'PE Adventure Case', link: '../ReasonDx/adventure-cases/pe-expanded.html', reason: 'Practice PE workup and risk stratification' },
-        { type: 'reasondx', title: 'PE Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=pe-deep-dive', reason: 'ESC guidelines and reperfusion strategies' }
+        { type: 'reasondx', title: 'PE Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=pe-deep-dive', reason: 'ESC guidelines and reperfusion strategies' }
     ],
     evidenceBase: {
         guidelines: [
@@ -305,7 +305,7 @@ const COACHDX_CRITICAL_CARE_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Stroke Module', link: '../mechanism/stroke-module.html', reason: 'Understand ischemic penumbra and reperfusion' },
         { type: 'reasondx', title: 'Stroke Adventure Case', link: '../ReasonDx/adventure-cases/stroke-expanded.html', reason: 'Practice stroke workup and tPA decisions' },
-        { type: 'reasondx', title: 'Stroke Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=stroke-deep-dive', reason: 'AHA/ASA guidelines and thrombectomy trials' }
+        { type: 'reasondx', title: 'Stroke Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=stroke-deep-dive', reason: 'AHA/ASA guidelines and thrombectomy trials' }
     ],
     evidenceBase: {
         guidelines: [

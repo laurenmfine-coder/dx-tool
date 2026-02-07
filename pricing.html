@@ -2,223 +2,101 @@
 <html lang="en">
 <head>
 <script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing | DxSuite</title>
+    <title>Pricing | DxSuite — Board Prep & Clinical Reasoning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #059669; --primary-dark: #047857; }
+        :root { --primary: #059669; --primary-dark: #047857; --beta: #d97706; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; }
-        
         .nav { background: white; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
         .nav-links { display: flex; gap: 24px; }
         .nav-link { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
         .nav-link:hover { color: #18181b; }
-        
-        .header {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            padding: 80px 24px;
-            text-align: center;
-            color: white;
-        }
+        .header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 80px 24px; text-align: center; color: white; }
         .header h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
-        .header p { font-size: 20px; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-        
+        .header p { font-size: 20px; opacity: 0.9; max-width: 600px; margin: 0 auto 20px; }
+        .header .board-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .header .board-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.2); color: white; }
         .content { max-width: 1100px; margin: 0 auto; padding: 64px 24px; }
-        
-        /* Toggle */
-        .billing-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 48px;
-        }
+        .billing-toggle { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 48px; }
         .billing-option { font-size: 16px; font-weight: 500; color: #64748b; cursor: pointer; }
         .billing-option.active { color: #18181b; }
-        .toggle-switch {
-            width: 56px; height: 32px;
-            background: #e2e8f0;
-            border-radius: 16px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+        .toggle-switch { width: 56px; height: 32px; background: #e2e8f0; border-radius: 16px; position: relative; cursor: pointer; transition: background 0.3s; }
         .toggle-switch.annual { background: var(--primary); }
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 4px; left: 4px;
-            width: 24px; height: 24px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
+        .toggle-switch::after { content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: transform 0.3s; }
         .toggle-switch.annual::after { transform: translateX(24px); }
-        .save-badge {
-            padding: 4px 12px;
-            background: #dcfce7;
-            color: #166534;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        /* Pricing Cards */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            align-items: start;
-        }
+        .save-badge { padding: 4px 12px; background: #dcfce7; color: #166534; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
         @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
-        
-        .pricing-card {
-            background: white;
-            border-radius: 24px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 2px solid transparent;
-            transition: all 0.3s;
-            position: relative;
-        }
+        .pricing-card { background: white; border-radius: 24px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s; position: relative; }
         .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
         .pricing-card.featured { border-color: var(--primary); transform: scale(1.02); }
         .pricing-card.featured:hover { transform: scale(1.02) translateY(-4px); }
-        
-        .popular-badge {
-            position: absolute;
-            top: -12px; left: 50%;
-            transform: translateX(-50%);
-            padding: 6px 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        .pricing-header {
-            text-align: center;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 24px;
-        }
+        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 6px 20px; background: var(--primary); color: white; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .beta-pop-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 6px 20px; background: var(--beta); color: white; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .pricing-header { text-align: center; padding-bottom: 24px; border-bottom: 1px solid #e2e8f0; margin-bottom: 24px; }
         .pricing-icon { font-size: 48px; margin-bottom: 16px; }
         .pricing-name { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
         .pricing-desc { color: #64748b; font-size: 14px; }
-        
         .pricing-price { text-align: center; margin-bottom: 24px; }
         .price-amount { font-size: 48px; font-weight: 800; color: #18181b; }
         .price-amount .currency { font-size: 24px; vertical-align: top; margin-right: 4px; }
         .price-period { color: #64748b; font-size: 14px; }
         .price-savings { display: none; font-size: 14px; color: #166534; margin-top: 8px; }
-        
         .pricing-features { margin-bottom: 32px; }
-        .pricing-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px 0;
-            font-size: 14px;
-        }
+        .pricing-feature { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; font-size: 14px; }
         .pricing-feature .icon { color: var(--primary); font-size: 18px; flex-shrink: 0; }
         .pricing-feature.disabled { color: #94a3b8; }
         .pricing-feature.disabled .icon { color: #cbd5e1; }
-        
-        .pricing-cta {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-        }
+        .pricing-cta { width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; text-decoration: none; display: block; }
         .pricing-cta.primary { background: var(--primary); color: white; border: none; }
         .pricing-cta.primary:hover { background: var(--primary-dark); }
         .pricing-cta.secondary { background: white; color: #334155; border: 2px solid #e2e8f0; }
         .pricing-cta.secondary:hover { background: #f8fafc; }
-        
-        /* Comparison Table */
+        .pricing-cta.beta { background: var(--beta); color: white; border: none; }
+        .pricing-cta.beta:hover { background: #b45309; }
+        .exam-tags-pricing { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin: 12px 0; }
+        .exam-tag-p { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .exam-tag-p.s1 { background: #dbeafe; color: #1d4ed8; }
+        .exam-tag-p.s2 { background: #dcfce7; color: #166534; }
+        .exam-tag-p.shelf { background: #fef3c7; color: #92400e; }
         .comparison-section { margin-top: 80px; }
         .comparison-section h2 { font-size: 32px; text-align: center; margin-bottom: 40px; }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        .comparison-table th, .comparison-table td {
-            padding: 16px 20px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
+        .comparison-table { width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .comparison-table th, .comparison-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid #e2e8f0; }
         .comparison-table th { background: #f8fafc; font-weight: 600; }
         .comparison-table th:not(:first-child), .comparison-table td:not(:first-child) { text-align: center; }
         .comparison-table tr:last-child td { border-bottom: none; }
         .check { color: var(--primary); font-size: 18px; }
         .cross { color: #cbd5e1; font-size: 18px; }
-        
-        /* FAQ Section */
+        .referral-section { margin-top: 64px; padding: 40px; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 20px; text-align: center; border: 1px solid #a7f3d0; }
+        .referral-section h3 { font-size: 24px; margin-bottom: 8px; color: #166534; }
+        .referral-section p { color: #15803d; margin-bottom: 20px; }
+        .referral-tiers { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .referral-tier { background: white; border-radius: 12px; padding: 20px; min-width: 160px; flex: 1; max-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .referral-tier .num { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+        .referral-tier .reward { font-size: 14px; color: #475569; }
         .faq-section { margin-top: 80px; text-align: center; }
         .faq-section h2 { font-size: 32px; margin-bottom: 40px; }
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            text-align: left;
-        }
+        .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; text-align: left; }
         @media (max-width: 700px) { .faq-grid { grid-template-columns: 1fr; } }
         .faq-item { background: white; border-radius: 16px; padding: 24px; }
         .faq-item h3 { font-size: 16px; margin-bottom: 8px; }
         .faq-item p { color: #64748b; font-size: 14px; line-height: 1.6; }
-        
-        /* Guarantee */
-        .guarantee {
-            margin-top: 64px;
-            padding: 32px;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid #a7f3d0;
-        }
-        .guarantee .icon { font-size: 48px; margin-bottom: 16px; }
+        .guarantee { margin-top: 64px; padding: 32px; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 20px; text-align: center; border: 1px solid #a7f3d0; }
+        .guarantee .gicon { font-size: 48px; margin-bottom: 16px; }
         .guarantee h3 { font-size: 24px; margin-bottom: 8px; color: #166534; }
         .guarantee p { color: #15803d; max-width: 500px; margin: 0 auto; }
-        
-        /* Institution */
-        .institution-section {
-            margin-top: 64px;
-            padding: 40px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid #93c5fd;
-        }
+        .institution-section { margin-top: 64px; padding: 40px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 20px; text-align: center; border: 1px solid #93c5fd; }
         .institution-section h3 { font-size: 24px; margin-bottom: 8px; color: #1d4ed8; }
         .institution-section p { color: #1e40af; margin-bottom: 20px; }
-        .institution-section a {
-            display: inline-block;
-            padding: 14px 32px;
-            background: #1d4ed8;
-            color: white;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
+        .institution-section a { display: inline-block; padding: 14px 32px; background: #1d4ed8; color: white; border-radius: 10px; text-decoration: none; font-weight: 600; }
         .footer { text-align: center; padding: 48px 24px; color: #64748b; font-size: 14px; }
     </style>
 </head>
@@ -228,17 +106,24 @@
             <a href="index.html" class="nav-brand">🩺 DxSuite</a>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
+                <a href="board-prep.html" class="nav-link" style="color: #2563eb; font-weight: 600;">📝 Board Prep</a>
+                <a href="reasonlab.html" class="nav-link" style="color: #7c3aed; font-weight: 600;">🧬 ReasonLab</a>
+                <a href="reasonlab.html" class="nav-link" style="color: #7c3aed; font-weight: 600;">🧬 ReasonLab</a>
                 <a href="features/index.html" class="nav-link">Features</a>
-                <a href="auth/login.html" class="nav-link">Sign In</a>
+                <a href="auth/register.html" class="nav-link">Sign In</a>
             </div>
         </div>
     </nav>
-    
     <header class="header">
         <h1>Simple, Transparent Pricing</h1>
-        <p>Start free, upgrade when you're ready. No hidden fees, cancel anytime.</p>
+        <p>Board prep that teaches you to think, not just memorize. Start free, upgrade when you're ready.</p>
+        <div class="board-tags">
+            <span class="board-tag">138 Step 1 Topics</span>
+            <span class="board-tag">153 Step 2 CK Topics</span>
+            <span class="board-tag">7 Shelf Exam Tracks</span>
+            <span class="board-tag">323+ Clinical Cases</span>
+        </div>
     </header>
-    
     <main class="content">
         <div class="billing-toggle">
             <span class="billing-option active" id="monthlyLabel">Monthly</span>
@@ -246,252 +131,212 @@
             <span class="billing-option" id="annualLabel">Annual</span>
             <span class="save-badge">Save 33%</span>
         </div>
-        
         <div class="pricing-grid">
-            <!-- Free Tier -->
             <div class="pricing-card">
                 <div class="pricing-header">
                     <div class="pricing-icon">🌱</div>
                     <h2 class="pricing-name">Free</h2>
-                    <p class="pricing-desc">Get started with core features</p>
+                    <p class="pricing-desc">Start building clinical reasoning</p>
                 </div>
                 <div class="pricing-price">
                     <div class="price-amount"><span class="currency">$</span>0</div>
                     <div class="price-period">forever free</div>
                 </div>
-                <div class="pricing-features">
-                    <div class="pricing-feature"><span class="icon">✓</span> 20 learning modules</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> 10 clinical cases</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Basic calculators</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Progress tracking</div>
-                    <div class="pricing-feature disabled"><span class="icon">✗</span> AI Tutor</div>
-                    <div class="pricing-feature disabled"><span class="icon">✗</span> Export to Anki</div>
-                    <div class="pricing-feature disabled"><span class="icon">✗</span> Advanced analytics</div>
+                <div class="exam-tags-pricing">
+                    <span class="exam-tag-p s1">Step 1</span>
+                    <span class="exam-tag-p s2">Step 2</span>
                 </div>
-                <a href="auth/login.html" class="pricing-cta secondary">Get Started Free</a>
+                <div class="pricing-features">
+                    <div class="pricing-feature"><span class="icon">✓</span> 5 learning modules</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> 3 clinical cases/week</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> 20 board-style MCQs</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Clinical calculators</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Basic progress tracking</div>
+                    <div class="pricing-feature disabled"><span class="icon">✗</span> AI Tutor</div>
+                    <div class="pricing-feature disabled"><span class="icon">✗</span> Full module library</div>
+                    <div class="pricing-feature disabled"><span class="icon">✗</span> Export to Anki</div>
+                </div>
+                <a href="auth/register.html" class="pricing-cta secondary">Get Started Free</a>
             </div>
-            
-            <!-- Premium Tier -->
             <div class="pricing-card featured">
                 <div class="popular-badge">Most Popular</div>
                 <div class="pricing-header">
                     <div class="pricing-icon">🚀</div>
-                    <h2 class="pricing-name">Premium</h2>
-                    <p class="pricing-desc">Everything you need to excel</p>
+                    <h2 class="pricing-name">Pro</h2>
+                    <p class="pricing-desc">Everything you need to crush boards</p>
                 </div>
                 <div class="pricing-price">
                     <div class="price-amount" id="premiumPrice"><span class="currency">$</span>9.99</div>
                     <div class="price-period" id="premiumPeriod">/month</div>
                     <div class="price-savings" id="premiumSavings">Save $40/year with annual billing</div>
                 </div>
-                <div class="pricing-features">
-                    <div class="pricing-feature"><span class="icon">✓</span> <strong>All 262+ modules</strong></div>
-                    <div class="pricing-feature"><span class="icon">✓</span> <strong>All 200+ cases</strong></div>
-                    <div class="pricing-feature"><span class="icon">✓</span> AI Tutor unlimited</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> All calculators & tools</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Export to Anki/Quizlet</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Advanced analytics</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Priority support</div>
+                <div class="exam-tags-pricing">
+                    <span class="exam-tag-p s1">Step 1</span>
+                    <span class="exam-tag-p s2">Step 2 CK</span>
+                    <span class="exam-tag-p shelf">All Shelf Exams</span>
                 </div>
-                <a href="auth/login.html?plan=premium" class="pricing-cta primary" id="premiumCta">Start 7-Day Free Trial</a>
+                <div class="pricing-features">
+                    <div class="pricing-feature"><span class="icon">✓</span> <strong>All 244 topics, 26 specialties</strong></div>
+                    <div class="pricing-feature"><span class="icon">✓</span> <strong>323+ cases with MCQs</strong></div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Board-prep mode (Step 1/2/Shelf)</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> AI Tutor unlimited</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> 244 case adventures</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> 211 deep dive modules</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Reasoning pathway fingerprinting</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Spaced repetition + analytics</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Export to Anki/Quizlet</div>
+                </div>
+                <a href="auth/register.html?plan=pro" class="pricing-cta primary" id="premiumCta">Start Pro</a>
             </div>
-            
-            <!-- Team Tier -->
             <div class="pricing-card">
+                <div class="beta-pop-badge">Limited Spots</div>
                 <div class="pricing-header">
-                    <div class="pricing-icon">🏫</div>
-                    <h2 class="pricing-name">Team</h2>
-                    <p class="pricing-desc">For study groups & classes</p>
+                    <div class="pricing-icon">🧪</div>
+                    <h2 class="pricing-name">Beta Tester</h2>
+                    <p class="pricing-desc">Full access, half price, help us improve</p>
                 </div>
                 <div class="pricing-price">
-                    <div class="price-amount" id="teamPrice"><span class="currency">$</span>6.99</div>
-                    <div class="price-period" id="teamPeriod">/user/month</div>
-                    <div class="price-savings" id="teamSavings">Min 5 users • Billed annually</div>
+                    <div class="price-amount" id="betaPrice"><span class="currency">$</span>4.99</div>
+                    <div class="price-period" id="betaPeriod">/month</div>
+                    <div class="price-savings" id="betaSavings" style="display:block; color: #d97706;">50% off Pro pricing</div>
+                </div>
+                <div class="exam-tags-pricing">
+                    <span class="exam-tag-p s1">Step 1</span>
+                    <span class="exam-tag-p s2">Step 2 CK</span>
+                    <span class="exam-tag-p shelf">All Shelf Exams</span>
                 </div>
                 <div class="pricing-features">
-                    <div class="pricing-feature"><span class="icon">✓</span> Everything in Premium</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Team dashboard</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Shared study sessions</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Group analytics</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Admin controls</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Bulk user management</div>
-                    <div class="pricing-feature"><span class="icon">✓</span> Dedicated support</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Everything in Pro</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Requires .edu email</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Monthly feedback survey (~5 min)</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Early access to new features</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Beta tester badge</div>
+                    <div class="pricing-feature"><span class="icon">✓</span> Lock in beta pricing at renewal</div>
                 </div>
-                <a href="mailto:teams@dxsuite.com" class="pricing-cta secondary">Contact Sales</a>
+                <a href="auth/register.html?plan=beta" class="pricing-cta beta">Apply for Beta</a>
             </div>
         </div>
-        
+
         <!-- Comparison Table -->
         <div class="comparison-section">
             <h2>Compare Plans</h2>
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Free</th>
-                        <th>Premium</th>
-                        <th>Team</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Feature</th><th>Free</th><th>Pro</th><th>Beta Tester</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td>Learning Modules</td>
-                        <td>20</td>
-                        <td>262+</td>
-                        <td>262+</td>
-                    </tr>
-                    <tr>
-                        <td>Clinical Cases</td>
-                        <td>10</td>
-                        <td>200+</td>
-                        <td>200+</td>
-                    </tr>
-                    <tr>
-                        <td>AI Tutor</td>
-                        <td><span class="cross">✗</span></td>
-                        <td><span class="check">✓</span> Unlimited</td>
-                        <td><span class="check">✓</span> Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>Clinical Calculators</td>
-                        <td>5 basic</td>
-                        <td>18 full</td>
-                        <td>18 full</td>
-                    </tr>
-                    <tr>
-                        <td>Export (Anki, Quizlet)</td>
-                        <td><span class="cross">✗</span></td>
-                        <td><span class="check">✓</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Progress Analytics</td>
-                        <td>Basic</td>
-                        <td>Advanced</td>
-                        <td>Advanced + Team</td>
-                    </tr>
-                    <tr>
-                        <td>Study Planner</td>
-                        <td><span class="cross">✗</span></td>
-                        <td><span class="check">✓</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Case of the Day</td>
-                        <td><span class="check">✓</span></td>
-                        <td><span class="check">✓</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Team Features</td>
-                        <td><span class="cross">✗</span></td>
-                        <td><span class="cross">✗</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Support</td>
-                        <td>Community</td>
-                        <td>Priority Email</td>
-                        <td>Dedicated</td>
-                    </tr>
+                    <tr><td>Learning Modules</td><td>5</td><td>244</td><td>244</td></tr>
+                    <tr><td>Clinical Cases</td><td>3/week</td><td>323+ unlimited</td><td>323+ unlimited</td></tr>
+                    <tr><td>Board-Style MCQs</td><td>20</td><td>All</td><td>All</td></tr>
+                    <tr><td>Board-Prep Mode (Step 1/2/Shelf)</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>AI Tutor</td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Unlimited</td><td><span class="check">✓</span> Unlimited</td></tr>
+                    <tr><td>Case Adventures</td><td><span class="cross">✗</span></td><td>244</td><td>244</td></tr>
+                    <tr><td>Deep Dives</td><td><span class="cross">✗</span></td><td>211</td><td>211</td></tr>
+                    <tr><td>Reasoning Fingerprinting</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Spaced Repetition</td><td>Basic</td><td>Advanced</td><td>Advanced</td></tr>
+                    <tr><td>Export (Anki/Quizlet)</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Clinical Calculators</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Monthly Feedback Required</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Price (monthly)</td><td>$0</td><td>$9.99</td><td>$4.99</td></tr>
+                    <tr><td>Price (annual)</td><td>$0</td><td>$79.99</td><td>$39.99</td></tr>
                 </tbody>
             </table>
         </div>
-        
+
+        <!-- Referral Program -->
+        <div class="referral-section">
+            <div style="font-size: 36px; margin-bottom: 12px;">🎁</div>
+            <h3>Refer Friends, Earn Free Months</h3>
+            <p>Every Pro and Beta member gets a unique referral code. Share it with classmates — you both win.</p>
+            <div class="referral-tiers">
+                <div class="referral-tier">
+                    <div class="num" style="color: #059669;">1</div>
+                    <div class="reward"><strong>1 referral</strong><br>Free month for both of you</div>
+                </div>
+                <div class="referral-tier">
+                    <div class="num" style="color: #2563eb;">3</div>
+                    <div class="reward"><strong>3 referrals</strong><br>Free semester (4 months)</div>
+                </div>
+                <div class="referral-tier">
+                    <div class="num" style="color: #d97706;">5</div>
+                    <div class="reward"><strong>5 referrals</strong><br>Free year of Pro</div>
+                </div>
+            </div>
+        </div>
+
         <!-- FAQ -->
         <div class="faq-section">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-grid">
                 <div class="faq-item">
-                    <h3>Can I try Premium before paying?</h3>
-                    <p>Yes! Every Premium subscription starts with a 7-day free trial. No credit card required to start. Cancel anytime during the trial and you won't be charged.</p>
+                    <h3>How is this different from UWorld or Anki?</h3>
+                    <p>UWorld tests recall; we teach the reasoning process. Our cases build hypothesis-driven thinking and identify your cognitive blind spots through reasoning pathway fingerprinting. Use our Anki export to complement your existing deck.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Can I cancel anytime?</h3>
-                    <p>Absolutely. There are no long-term contracts. Cancel your subscription anytime from your account settings. You'll retain access until the end of your billing period.</p>
+                    <p>Absolutely. No long-term contracts. Cancel from your account settings anytime and keep access through the end of your billing period.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Do you offer student discounts?</h3>
-                    <p>Our pricing is already designed to be affordable for students. The annual plan offers 33% savings. We also offer institutional licenses for medical schools.</p>
+                    <h3>What's the Beta Tester program?</h3>
+                    <p>Beta testers get full Pro access at 50% off in exchange for completing a brief monthly feedback survey (~5 min). You help shape the platform and lock in discounted pricing. Requires a .edu email.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>What payment methods do you accept?</h3>
-                    <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover) through our secure payment processor, Stripe.</p>
+                    <h3>How does the referral program work?</h3>
+                    <p>After signing up, you get a unique referral code. When a friend joins Pro or Beta with your code, you both get a free month. Refer 3 friends for a free semester, 5 for a free year. Credits are applied automatically to your Stripe subscription.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Can I switch plans later?</h3>
-                    <p>Yes! You can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle.</p>
+                    <h3>Is this good for Step 1 prep?</h3>
+                    <p>Yes. 138 topics are tagged Step 1-relevant, covering the pathophysiology, embryology, and mechanisms that Step 1 tests. Our approach builds the understanding behind the answer, not just pattern recognition.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Is my data secure?</h3>
-                    <p>Yes. We use industry-standard encryption and security practices. Your data is stored securely and we never share it with third parties. See our Privacy Policy for details.</p>
+                    <h3>What about shelf exams and rotations?</h3>
+                    <p>We have dedicated tracks for all 7 core shelf exams (IM, Surgery, Pediatrics, OB/GYN, Psychiatry, Neurology, Family Medicine). Cases are organized by rotation so you can study what you're seeing in clinic.</p>
                 </div>
             </div>
         </div>
-        
+
         <!-- Guarantee -->
         <div class="guarantee">
-            <div class="icon">🛡️</div>
+            <div class="gicon">🛡️</div>
             <h3>30-Day Money-Back Guarantee</h3>
-            <p>Not satisfied? Get a full refund within 30 days of your first payment, no questions asked. We're confident you'll love DxSuite.</p>
+            <p>Not satisfied? Get a full refund within 30 days of your first payment, no questions asked.</p>
         </div>
-        
+
         <!-- Institution -->
         <div class="institution-section">
-            <h3>🏛️ Medical School or Institution?</h3>
-            <p>We offer custom enterprise plans with LMS integration, dedicated support, and volume discounts for medical schools, residency programs, and healthcare organizations.</p>
+            <h3>🏛️ Medical School or Residency Program?</h3>
+            <p>We offer institutional licenses with LMS integration, cohort analytics, and volume discounts for medical schools, residency programs, and clerkship directors.</p>
             <a href="mailto:institutions@dxsuite.com">Request Institutional Pricing</a>
         </div>
     </main>
-    
     <footer class="footer">
         <p>Questions? Email us at support@dxsuite.com</p>
         <p style="margin-top: 8px;">© 2026 DxSuite. All rights reserved.</p>
     </footer>
-    
     <script>
-        let isAnnual = false;
-        
+        var isAnnual = false;
         function toggleBilling() {
             isAnnual = !isAnnual;
-            
-            const toggle = document.getElementById('billingToggle');
-            const monthlyLabel = document.getElementById('monthlyLabel');
-            const annualLabel = document.getElementById('annualLabel');
-            
-            toggle.classList.toggle('annual', isAnnual);
-            monthlyLabel.classList.toggle('active', !isAnnual);
-            annualLabel.classList.toggle('active', isAnnual);
-            
-            // Update Premium pricing
-            const premiumPrice = document.getElementById('premiumPrice');
-            const premiumPeriod = document.getElementById('premiumPeriod');
-            const premiumSavings = document.getElementById('premiumSavings');
-            
+            document.getElementById('billingToggle').classList.toggle('annual', isAnnual);
+            document.getElementById('monthlyLabel').classList.toggle('active', !isAnnual);
+            document.getElementById('annualLabel').classList.toggle('active', isAnnual);
+            var pp = document.getElementById('premiumPrice');
+            var ppr = document.getElementById('premiumPeriod');
+            var ps = document.getElementById('premiumSavings');
+            var bp = document.getElementById('betaPrice');
+            var bpr = document.getElementById('betaPeriod');
+            var bs = document.getElementById('betaSavings');
             if (isAnnual) {
-                premiumPrice.innerHTML = '<span class="currency">$</span>6.67';
-                premiumPeriod.textContent = '/month, billed annually';
-                premiumSavings.style.display = 'block';
-                premiumSavings.textContent = '$79.99/year (Save $40!)';
+                pp.innerHTML = '<span class="currency">$</span>6.67'; ppr.textContent = '/month, billed annually';
+                ps.style.display = 'block'; ps.textContent = '$79.99/year (Save $40)';
+                bp.innerHTML = '<span class="currency">$</span>3.33'; bpr.textContent = '/month, billed annually';
+                bs.textContent = '$39.99/year — 50% off Pro annual';
             } else {
-                premiumPrice.innerHTML = '<span class="currency">$</span>9.99';
-                premiumPeriod.textContent = '/month';
-                premiumSavings.style.display = 'block';
-                premiumSavings.textContent = 'Save $40/year with annual billing';
-            }
-            
-            // Update Team pricing
-            const teamPrice = document.getElementById('teamPrice');
-            const teamPeriod = document.getElementById('teamPeriod');
-            
-            if (isAnnual) {
-                teamPrice.innerHTML = '<span class="currency">$</span>4.99';
-                teamPeriod.textContent = '/user/month, billed annually';
-            } else {
-                teamPrice.innerHTML = '<span class="currency">$</span>6.99';
-                teamPeriod.textContent = '/user/month';
+                pp.innerHTML = '<span class="currency">$</span>9.99'; ppr.textContent = '/month';
+                ps.style.display = 'block'; ps.textContent = 'Save $40/year with annual billing';
+                bp.innerHTML = '<span class="currency">$</span>4.99'; bpr.textContent = '/month';
+                bs.textContent = '50% off Pro pricing';
             }
         }
     </script>
+<script src="dx-progress.js"></script>
 </body>
 </html>

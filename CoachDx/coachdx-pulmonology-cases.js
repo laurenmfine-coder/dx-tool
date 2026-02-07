@@ -72,7 +72,7 @@ const COACHDX_PULMONOLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'COPD Module', link: '../mechanism/copd-module.html', reason: 'Understand obstructive physiology' },
         { type: 'reasondx', title: 'COPD Adventure', link: '../ReasonDx/adventure-cases/copd-exacerbation-expanded.html', reason: 'Practice AECOPD management' },
-        { type: 'reasondx', title: 'COPD Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=copd-exacerbation-deep-dive', reason: 'GOLD guidelines and NIV evidence' }
+        { type: 'reasondx', title: 'COPD Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=copd-exacerbation-deep-dive', reason: 'GOLD guidelines and NIV evidence' }
     ],
     evidenceBase: {
         guidelines: [
@@ -147,7 +147,7 @@ const COACHDX_PULMONOLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Asthma Module', link: '../mechanism/asthma-module.html', reason: 'Understand airway inflammation and bronchospasm' },
         { type: 'reasondx', title: 'Asthma Adventure', link: '../ReasonDx/adventure-cases/asthma-exacerbation-expanded.html', reason: 'Practice asthma management' },
-        { type: 'reasondx', title: 'Asthma Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=asthma-exacerbation-deep-dive', reason: 'Severity assessment and escalation' }
+        { type: 'reasondx', title: 'Asthma Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=asthma-exacerbation-deep-dive', reason: 'Severity assessment and escalation' }
     ],
     evidenceBase: {
         guidelines: [

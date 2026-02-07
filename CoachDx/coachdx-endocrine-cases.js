@@ -252,7 +252,7 @@ const COACHDX_ENDOCRINE_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Thyroid Module', link: '../mechanism/thyroid-module.html', reason: 'Understand thyroid physiology' },
         { type: 'reasondx', title: 'Myxedema Coma Adventure', link: '../ReasonDx/adventure-cases/myxedema-coma-adventure.html', reason: 'Practice myxedema management' },
-        { type: 'reasondx', title: 'Myxedema Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=myxedema-coma-deep-dive', reason: 'Treatment algorithms' }
+        { type: 'reasondx', title: 'Myxedema Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=myxedema-coma-deep-dive', reason: 'Treatment algorithms' }
     ],
     evidenceBase: {
         guidelines: [
@@ -327,7 +327,7 @@ const COACHDX_ENDOCRINE_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Adrenal Crisis Module', link: '../mechanism/adrenal-crisis-module.html', reason: 'Understand HPA axis and crisis physiology' },
         { type: 'reasondx', title: 'Adrenal Crisis Adventure', link: '../ReasonDx/adventure-cases/adrenal-crisis-adventure.html', reason: 'Practice adrenal crisis management' },
-        { type: 'reasondx', title: 'Adrenal Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=adrenal-crisis-deep-dive', reason: 'Diagnosis and treatment algorithms' }
+        { type: 'reasondx', title: 'Adrenal Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=adrenal-crisis-deep-dive', reason: 'Diagnosis and treatment algorithms' }
     ],
     evidenceBase: {
         guidelines: [
@@ -372,7 +372,7 @@ if (typeof COACHDX_CASES !== 'undefined') {
     relatedContent: [
         { type: 'mechanism', title: 'Thyroid Module', link: '../mechanism/thyroid-module.html', reason: 'Understand hypothyroidism pathophysiology' },
         { type: 'reasondx', title: 'Myxedema Coma Adventure', link: '../ReasonDx/adventure-cases/myxedema-coma-adventure.html', reason: 'Practice myxedema management' },
-        { type: 'reasondx', title: 'Myxedema Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=myxedema-coma-deep-dive', reason: 'Treatment algorithms' }
+        { type: 'reasondx', title: 'Myxedema Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=myxedema-coma-deep-dive', reason: 'Treatment algorithms' }
     ],
     evidenceBase: {
         guidelines: [
@@ -447,7 +447,7 @@ if (typeof COACHDX_CASES !== 'undefined') {
     relatedContent: [
         { type: 'mechanism', title: 'Adrenal Crisis Module', link: '../mechanism/adrenal-crisis-module.html', reason: 'Understand HPA axis and cortisol physiology' },
         { type: 'reasondx', title: 'Adrenal Crisis Adventure', link: '../ReasonDx/adventure-cases/adrenal-crisis-adventure.html', reason: 'Practice adrenal crisis management' },
-        { type: 'reasondx', title: 'Adrenal Crisis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=adrenal-crisis-deep-dive', reason: 'Primary vs secondary, stress dosing' }
+        { type: 'reasondx', title: 'Adrenal Crisis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=adrenal-crisis-deep-dive', reason: 'Primary vs secondary, stress dosing' }
     ],
     evidenceBase: {
         guidelines: [

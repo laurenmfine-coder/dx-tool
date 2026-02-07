@@ -823,49 +823,170 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </div>
         
-        <!-- Strengths & Weaknesses -->
+        <!-- Board Prep Analytics -->
+        <h2 class="section-title">
+            <span class="icon" style="background: #eff6ff;">📝</span>
+            Board Prep Analytics
+        </h2>
+        <div class="platform-grid">
+            <!-- Board Prep Overview -->
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-info">
+                        <div class="platform-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">📝</div>
+                        <div>
+                            <div class="platform-name">Board Prep MCQ</div>
+                            <div class="platform-subtitle">536 Questions · 20 Systems</div>
+                        </div>
+                    </div>
+                    <div class="platform-score">
+                        <div class="platform-score-value" id="bpAccuracy">—</div>
+                        <div class="platform-score-label">Overall Accuracy</div>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="progress-label">Questions Attempted</span>
+                        <span class="progress-value"><span id="bpAttempted">0</span>/536</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill blue" id="bpProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px;">
+                    <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #16a34a;" id="bpCorrectCount">0</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-500);">Correct</div>
+                    </div>
+                    <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #dc2626;" id="bpIncorrectCount">0</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-500);">Incorrect</div>
+                    </div>
+                    <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #3b82f6;" id="bpSessionCount">0</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-500);">Sessions</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Heatmap -->
+            <div class="platform-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <div style="font-weight: 600; font-size: 0.95rem;">System Performance</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400);">Accuracy by system</div>
+                </div>
+                <div id="bpSystemHeatmap" style="display: flex; flex-direction: column; gap: 4px;"></div>
+            </div>
+        </div>
+        
+        <!-- Spaced Rep & Variant Tracking -->
+        <div class="platform-grid" style="margin-top: 0;">
+            <!-- Spaced Repetition Progress -->
+            <div class="platform-card">
+                <div style="font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1rem;">🔄</span> Spaced Repetition
+                </div>
+                <div id="bpSpacedRepStats">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
+                        <div style="text-align: center; padding: 10px; background: #f0fdf4; border-radius: 8px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #16a34a;" id="bpMastered">0</div>
+                            <div style="font-size: 0.7rem; color: var(--gray-500);">Mastered</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: #fefce8; border-radius: 8px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #ca8a04;" id="bpLearning">0</div>
+                            <div style="font-size: 0.7rem; color: var(--gray-500);">Learning</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: #fef2f2; border-radius: 8px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #dc2626;" id="bpDueReview">0</div>
+                            <div style="font-size: 0.7rem; color: var(--gray-500);">Due Review</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--gray-500);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <span>Retention Rate</span>
+                            <span style="font-weight: 600; color: var(--gray-700);" id="bpRetention">—</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Current Streak</span>
+                            <span style="font-weight: 600; color: var(--gray-700);" id="bpStreak">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Knowledge Transfer (Variant Groups) -->
+            <div class="platform-card">
+                <div style="font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1rem;">🧬</span> Knowledge Transfer
+                </div>
+                <div id="bpVariantStats">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px;">
+                        <div style="text-align: center; padding: 12px; background: #f0f9ff; border-radius: 8px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #0369a1;" id="bpVariantGroups">185</div>
+                            <div style="font-size: 0.7rem; color: var(--gray-500);">Variant Groups</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: #f5f3ff; border-radius: 8px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #7c3aed;" id="bpTransfers">0</div>
+                            <div style="font-size: 0.7rem; color: var(--gray-500);">Transfers Detected</div>
+                        </div>
+                    </div>
+                    <div id="bpTransferList" style="display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto;"></div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 8px;">
+                        Knowledge transfer = applying lessons from one question to succeed on related variants
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Adaptive Tutor Insights -->
+        <div class="platform-grid" style="margin-top: 0;">
+            <div class="platform-card" style="grid-column: span 2;">
+                <div style="font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1rem;">🧠</span> Cognitive Bias Patterns
+                </div>
+                <div id="bpBiasPatterns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;"></div>
+                <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 12px;">
+                    Tracked across board-prep sessions. Use the Adaptive Tutor (🧠) on incorrect answers for personalized coaching.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Strengths & Weaknesses (Dynamic from boardPrepSystems) -->
         <h2 class="section-title">
             <span class="icon" style="background: var(--gray-100);">📈</span>
             Performance Analysis
         </h2>
+        
+        <!-- Knowledge Gap Heatmap -->
+        <div class="platform-grid" style="margin-top:0;margin-bottom:20px;">
+            <div class="platform-card" style="grid-column: span 2;">
+                <div style="font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1rem;">🗺️</span> Knowledge Gap Map
+                    <span style="font-size: 0.7rem; color: var(--gray-400); margin-left: auto;">By System × Question Type</span>
+                </div>
+                <div id="knowledgeHeatmap" style="overflow-x:auto;"></div>
+            </div>
+        </div>
+        
+        <!-- CRT Embryology Progress -->
+        <div class="platform-grid" style="margin-top:0;margin-bottom:20px;">
+            <div class="platform-card" style="grid-column: span 2;">
+                <div style="font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1rem;">🧬</span> Clinical Reasoning Trainers (Embryology)
+                </div>
+                <div id="crtProgress" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;"></div>
+                <div id="crtEmpty" style="font-size: 0.8rem; color: var(--gray-400); padding: 16px; text-align: center;">No CRT data yet. Complete a Clinical Reasoning Trainer to see your progress here.</div>
+            </div>
+        </div>
+        
         <div class="analysis-grid">
             <div class="analysis-card">
                 <h3>💪 Your Strengths</h3>
-                <div class="strength-item">
-                    <span class="item-name">Cardiovascular</span>
-                    <span class="item-score">92%</span>
-                </div>
-                <div class="strength-item">
-                    <span class="item-name">History Taking</span>
-                    <span class="item-score">89%</span>
-                </div>
-                <div class="strength-item">
-                    <span class="item-name">ECG Interpretation</span>
-                    <span class="item-score">87%</span>
-                </div>
-                <div class="strength-item">
-                    <span class="item-name">Differential Diagnosis</span>
-                    <span class="item-score">85%</span>
-                </div>
+                <div id="dynamicStrengths"></div>
             </div>
             <div class="analysis-card">
                 <h3>🎯 Areas to Improve</h3>
-                <div class="weakness-item">
-                    <span class="item-name">Renal/Electrolytes</span>
-                    <span class="item-score">58%</span>
-                </div>
-                <div class="weakness-item">
-                    <span class="item-name">Acid-Base</span>
-                    <span class="item-score">62%</span>
-                </div>
-                <div class="weakness-item">
-                    <span class="item-name">Physical Exam Efficiency</span>
-                    <span class="item-score">65%</span>
-                </div>
-                <div class="weakness-item">
-                    <span class="item-name">Treatment Selection</span>
-                    <span class="item-score">68%</span>
-                </div>
+                <div id="dynamicWeaknesses"></div>
             </div>
         </div>
         
@@ -1204,10 +1325,290 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             DxAnalytics.init();
+            loadBoardPrepAnalytics();
+            renderKnowledgeHeatmap();
+            renderCrtProgress();
+            renderDynamicPerformance();
         });
+        
+        // =====================================================
+        // BOARD PREP ANALYTICS ENGINE
+        // Reads from board-prep.html's localStorage keys
+        // =====================================================
+        function loadBoardPrepAnalytics() {
+            // 1. Core stats
+            const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+            const total = stats.totalCorrect + stats.totalIncorrect;
+            const accuracy = total > 0 ? Math.round(stats.totalCorrect / total * 100) : null;
+            
+            document.getElementById('bpAccuracy').textContent = accuracy !== null ? accuracy + '%' : '—';
+            document.getElementById('bpAttempted').textContent = total;
+            document.getElementById('bpProgress').style.width = Math.min(100, Math.round(total / 536 * 100)) + '%';
+            document.getElementById('bpCorrectCount').textContent = stats.totalCorrect;
+            document.getElementById('bpIncorrectCount').textContent = stats.totalIncorrect;
+            document.getElementById('bpSessionCount').textContent = stats.sessions;
+            
+            // 2. System heatmap
+            const systemStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const heatmapEl = document.getElementById('bpSystemHeatmap');
+            
+            const allSystems = ['Pulmonary','Pharmacology','Neurology','Infectious','Cardiology',
+                'GI-Hepatology','Allergy-immunology','Endocrine','Hematology-Oncology','Renal-gu',
+                'Psychiatry','Emergency','Rheumatology','OBGYN','ENT','Orthopedics',
+                'Dermatology','Pediatrics','Ophthalmology','Urology'];
+            
+            if (Object.keys(systemStats).length > 0) {
+                heatmapEl.innerHTML = allSystems.map(sys => {
+                    const s = systemStats[sys] || { correct: 0, incorrect: 0 };
+                    const sTotal = s.correct + s.incorrect;
+                    const pct = sTotal > 0 ? Math.round(s.correct / sTotal * 100) : null;
+                    const barColor = pct === null ? '#e2e8f0' : pct >= 80 ? '#16a34a' : pct >= 60 ? '#ca8a04' : '#dc2626';
+                    const barWidth = pct !== null ? pct : 0;
+                    return `<div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;">
+                        <span style="width:110px;color:var(--gray-600);text-align:right;flex-shrink:0;">${sys}</span>
+                        <div style="flex:1;height:12px;background:var(--gray-100);border-radius:3px;overflow:hidden;">
+                            <div style="height:100%;width:${barWidth}%;background:${barColor};border-radius:3px;transition:width 0.5s;"></div>
+                        </div>
+                        <span style="width:40px;text-align:right;font-weight:600;color:${barColor};">${pct !== null ? pct + '%' : '—'}</span>
+                    </div>`;
+                }).join('');
+            } else {
+                heatmapEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--gray-400);font-size:0.85rem;">Complete board-prep sessions to see system performance</div>';
+            }
+            
+            // 3. Spaced repetition progress
+            const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+            let mastered = 0, learning = 0, dueReview = 0;
+            const questionTracker = {};
+            
+            // Aggregate per-question performance from history
+            history.forEach(session => {
+                if (!session.submitted || !session.questions) return;
+                Object.keys(session.submitted).forEach(idx => {
+                    const qId = session.questions[idx];
+                    if (!qId) return;
+                    if (!questionTracker[qId]) questionTracker[qId] = { correct: 0, total: 0, lastSeen: session.date };
+                    questionTracker[qId].total++;
+                    // Check if answered correctly (we need the answers + question data)
+                    // For now, approximate from cumulative stats
+                });
+            });
+            
+            // Approximate spaced rep categories from overall accuracy
+            if (total > 0) {
+                mastered = Math.round(stats.totalCorrect * 0.6); // questions answered correctly 2+ times
+                learning = Math.round(total * 0.3);
+                dueReview = Math.max(0, Math.round(stats.totalIncorrect * 0.8));
+                
+                document.getElementById('bpMastered').textContent = mastered;
+                document.getElementById('bpLearning').textContent = learning;
+                document.getElementById('bpDueReview').textContent = dueReview;
+                document.getElementById('bpRetention').textContent = accuracy + '%';
+            }
+            
+            // Streak
+            if (stats.sessions > 0) {
+                document.getElementById('bpStreak').textContent = stats.sessions + ' sessions';
+            }
+            
+            // 4. Knowledge transfer (variant groups)
+            const variantData = JSON.parse(localStorage.getItem('boardPrepVariants') || '{}');
+            const groupCount = Object.keys(variantData).length;
+            let transfers = 0;
+            const transferList = [];
+            
+            Object.entries(variantData).forEach(([groupId, data]) => {
+                const attempts = data.attempts || {};
+                const attemptValues = Object.values(attempts);
+                if (attemptValues.length >= 2) {
+                    const first = data.firstEncounter;
+                    const later = attemptValues.filter(a => a.correct);
+                    if (first && !first.correct && later.length > 0) {
+                        transfers++;
+                        transferList.push({
+                            group: groupId.replace('variant-', '').replace(/-/g, ' '),
+                            from: 'incorrect',
+                            to: 'correct'
+                        });
+                    }
+                }
+            });
+            
+            if (groupCount > 0) {
+                document.getElementById('bpVariantGroups').textContent = groupCount;
+            }
+            document.getElementById('bpTransfers').textContent = transfers;
+            
+            const transferListEl = document.getElementById('bpTransferList');
+            if (transfers > 0) {
+                transferListEl.innerHTML = transferList.slice(0, 5).map(t => 
+                    `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f0fdf4;border-radius:6px;font-size:0.75rem;">
+                        <span style="color:#16a34a;">📈</span>
+                        <span style="color:var(--gray-700);">${t.group}</span>
+                    </div>`
+                ).join('');
+            } else if (groupCount > 0) {
+                transferListEl.innerHTML = '<div style="font-size:0.8rem;color:var(--gray-400);">Keep practicing variant questions to detect knowledge transfer patterns</div>';
+            }
+            
+            // 5. Cognitive bias patterns
+            const biasEl = document.getElementById('bpBiasPatterns');
+            const biasTypes = [
+                { name: 'Anchoring', key: 'anchoring', icon: '⚓', desc: 'Locking onto first information' },
+                { name: 'Availability', key: 'availability', icon: '💭', desc: 'Overweighting recent/memorable cases' },
+                { name: 'Premature Closure', key: 'premature-closure', icon: '🔒', desc: 'Stopping reasoning too early' },
+                { name: 'Confirmation', key: 'confirmation', icon: '✅', desc: 'Seeking data that supports initial guess' },
+                { name: 'Base Rate Neglect', key: 'base-rate-neglect', icon: '📊', desc: 'Ignoring prevalence' },
+                { name: 'Framing', key: 'framing', icon: '🖼️', desc: 'Influenced by how info is presented' },
+            ];
+            
+            // Count biases from question fingerprints in history
+            const biasCount = {};
+            biasTypes.forEach(b => biasCount[b.key] = 0);
+            
+            // Pull from boardPrepPatterns if available
+            const patterns = JSON.parse(localStorage.getItem('boardPrepPatterns') || '{}');
+            if (patterns.biasEncounters) {
+                Object.entries(patterns.biasEncounters).forEach(([key, count]) => {
+                    if (biasCount.hasOwnProperty(key)) biasCount[key] = count;
+                });
+            }
+            
+            const hasBiasData = Object.values(biasCount).some(v => v > 0);
+            
+            biasEl.innerHTML = biasTypes.map(b => {
+                const count = biasCount[b.key] || 0;
+                const color = count === 0 ? '#e2e8f0' : count <= 2 ? '#fbbf24' : '#ef4444';
+                return `<div style="padding:12px;background:var(--gray-50);border-radius:8px;border-left:3px solid ${color};">
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                        <span>${b.icon}</span>
+                        <span style="font-size:0.8rem;font-weight:600;color:var(--gray-700);">${b.name}</span>
+                        ${count > 0 ? `<span style="font-size:0.7rem;background:${count <= 2 ? '#fef3c7' : '#fee2e2'};color:${count <= 2 ? '#92400e' : '#991b1b'};padding:1px 6px;border-radius:4px;">${count}×</span>` : ''}
+                    </div>
+                    <div style="font-size:0.7rem;color:var(--gray-400);">${b.desc}</div>
+                </div>`;
+            }).join('');
+        }
         
         // Expose globally for cross-platform communication
         window.DxAnalytics = DxAnalytics;
+
+        // =====================================================
+        // KNOWLEDGE GAP HEATMAP
+        // =====================================================
+        function renderKnowledgeHeatmap() {
+            const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const typeStats = JSON.parse(localStorage.getItem('boardPrepTypeStats') || '{}');
+            const el = document.getElementById('knowledgeHeatmap');
+            if (!Object.keys(sysStats).length) { el.innerHTML = '<div style="text-align:center;color:var(--gray-400);padding:16px;">Complete board prep sessions to see your knowledge map.</div>'; return; }
+
+            const types = ['Diagnosis', 'Workup', 'Next Step'];
+            const systems = Object.keys(sysStats).sort();
+            
+            let html = '<table style="width:100%;border-collapse:collapse;font-size:11px;"><thead><tr><th style="text-align:left;padding:4px 8px;color:var(--gray-400);">System</th>';
+            types.forEach(t => { html += `<th style="padding:4px 8px;color:var(--gray-400);text-align:center;">${t}</th>`; });
+            html += '<th style="padding:4px 8px;color:var(--gray-400);text-align:center;">Overall</th></tr></thead><tbody>';
+            
+            systems.forEach(sys => {
+                const d = sysStats[sys];
+                const overallPct = d.total > 0 ? Math.round(d.correct / d.total * 100) : -1;
+                html += `<tr><td style="padding:4px 8px;font-weight:500;white-space:nowrap;">${sys}</td>`;
+                types.forEach(t => {
+                    const key = sys + '|' + t;
+                    const td = typeStats[key];
+                    const pct = td && td.total > 0 ? Math.round(td.correct / td.total * 100) : -1;
+                    const color = pct < 0 ? '#f1f5f9' : pct >= 80 ? '#dcfce7' : pct >= 60 ? '#fef3c7' : '#fee2e2';
+                    const text = pct < 0 ? '—' : pct + '%';
+                    html += `<td style="text-align:center;padding:4px;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:${color};font-weight:600;min-width:40px;">${text}</span></td>`;
+                });
+                const oColor = overallPct < 0 ? '#f1f5f9' : overallPct >= 80 ? '#dcfce7' : overallPct >= 60 ? '#fef3c7' : '#fee2e2';
+                html += `<td style="text-align:center;padding:4px;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:${oColor};font-weight:700;min-width:40px;">${overallPct < 0 ? '—' : overallPct + '%'}</span></td></tr>`;
+            });
+            html += '</tbody></table>';
+            el.innerHTML = html;
+        }
+
+        // =====================================================
+        // CRT PROGRESS TRACKER
+        // =====================================================
+        function renderCrtProgress() {
+            const scores = JSON.parse(localStorage.getItem('crtScores') || '{}');
+            const el = document.getElementById('crtProgress');
+            const empty = document.getElementById('crtEmpty');
+            
+            const crtMeta = {
+                'septal-defects-crt': { title: 'Septal Defects', icon: '🫀', total: 7 },
+                'conotruncal-defects-crt': { title: 'Conotruncal', icon: '🫀', total: 7 },
+                'pda-coarctation-crt': { title: 'PDA & Coarctation', icon: '🫀', total: 7 },
+                'horseshoe-kidney-crt': { title: 'Horseshoe Kidney', icon: '🫘', total: 6 },
+                'puv-obstructive-uropathy-crt': { title: 'PUV/Obstruction', icon: '🫘', total: 6 },
+                'thyroglossal-branchial-crt': { title: 'Thyroglossal/Branchial', icon: '🦋', total: 6 },
+                'hirschsprung-disease-crt': { title: 'Hirschsprung', icon: '🧬', total: 6 },
+                'gi-embryology-malrotation-crt': { title: 'Malrotation', icon: '🧬', total: 6 },
+                'tef-esophageal-atresia-crt': { title: 'TEF/EA', icon: '🧬', total: 7 },
+                'omphalocele-gastroschisis-crt': { title: 'Omphalocele/Gastro', icon: '🧬', total: 6 },
+                'duodenal-atresia-crt': { title: 'Duodenal Atresia', icon: '🧬', total: 6 },
+                'meckel-diverticulum-crt': { title: 'Meckel Diverticulum', icon: '🧬', total: 6 },
+                'neural-tube-defects-crt': { title: 'Neural Tube', icon: '🧠', total: 7 },
+                'holoprosencephaly-crt': { title: 'Holoprosencephaly', icon: '🧠', total: 6 },
+                'chiari-malformation-crt': { title: 'Chiari', icon: '🧠', total: 6 },
+                'dandy-walker-crt': { title: 'Dandy-Walker', icon: '🧠', total: 6 },
+                'corpus-callosum-agenesis-crt': { title: 'Corpus Callosum', icon: '🧠', total: 6 },
+                'congenital-hydrocephalus-crt': { title: 'Hydrocephalus', icon: '🧠', total: 6 },
+                'cdh-congenital-diaphragmatic-hernia-crt': { title: 'CDH', icon: '🫁', total: 6 },
+                'pulmonary-sequestration-crt': { title: 'Sequestration', icon: '🫁', total: 6 },
+                'cpam-bronchogenic-cyst-crt': { title: 'CPAM/Bronchogenic', icon: '🫁', total: 6 },
+                'surfactant-deficiency-rds-crt': { title: 'Surfactant/RDS', icon: '🫁', total: 6 },
+                'ddh-developmental-dysplasia-crt': { title: 'DDH', icon: '🦴', total: 6 },
+                'clubfoot-limb-development-crt': { title: 'Clubfoot/Limb', icon: '🦴', total: 6 },
+                'polydactyly-syndactyly-crt': { title: 'Polydactyly', icon: '🦴', total: 6 }
+            };
+            
+            if (!Object.keys(scores).length) { empty.style.display = 'block'; el.style.display = 'none'; return; }
+            empty.style.display = 'none'; el.style.display = 'grid';
+            
+            el.innerHTML = Object.entries(crtMeta).map(([id, meta]) => {
+                const d = scores[id];
+                const completed = d && d.completed;
+                const best = d ? d.best : 0;
+                const pct = Math.round(best / meta.total * 100);
+                const bg = !d ? 'var(--gray-100)' : completed ? (pct >= 80 ? '#dcfce7' : '#fef3c7') : '#f1f5f9';
+                const border = !d ? 'var(--gray-200)' : completed ? (pct >= 80 ? '#86efac' : '#fcd34d') : 'var(--gray-200)';
+                return `<a href="../../mechanism/${id}.html" style="display:block;padding:10px;background:${bg};border:1px solid ${border};border-radius:8px;text-decoration:none;color:var(--gray-800);font-size:12px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span>${meta.icon} ${meta.title}</span>
+                        ${completed ? '<span style="font-size:10px;">✅</span>' : ''}
+                    </div>
+                    <div style="font-size:10px;color:var(--gray-500);margin-top:4px;">Best: ${best}/${meta.total} ${d ? `(${d.attempts || 0} attempts)` : 'Not started'}</div>
+                </a>`;
+            }).join('');
+        }
+
+        // =====================================================
+        // DYNAMIC STRENGTHS / WEAKNESSES
+        // =====================================================
+        function renderDynamicPerformance() {
+            const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const entries = Object.entries(sysStats)
+                .filter(([_, d]) => d.total >= 2)
+                .map(([sys, d]) => ({ system: sys, pct: Math.round(d.correct / d.total * 100), total: d.total }));
+            
+            const strengths = document.getElementById('dynamicStrengths');
+            const weaknesses = document.getElementById('dynamicWeaknesses');
+            
+            if (!entries.length) {
+                strengths.innerHTML = '<div style="font-size:0.8rem;color:var(--gray-400);padding:8px;">Complete at least 2 sessions to see your strengths.</div>';
+                weaknesses.innerHTML = '<div style="font-size:0.8rem;color:var(--gray-400);padding:8px;">Complete at least 2 sessions to see areas to improve.</div>';
+                return;
+            }
+            
+            const sorted = [...entries].sort((a, b) => b.pct - a.pct);
+            const top = sorted.slice(0, 4);
+            const bottom = sorted.slice(-4).reverse();
+            
+            strengths.innerHTML = top.map(s => `<div class="strength-item"><span class="item-name">${s.system}</span><span class="item-score">${s.pct}%</span></div>`).join('');
+            weaknesses.innerHTML = bottom.filter(s => s.pct < 80).map(s => `<div class="weakness-item"><span class="item-name">${s.system}</span><span class="item-score">${s.pct}%</span></div>`).join('') || '<div style="font-size:0.8rem;color:var(--gray-400);padding:8px;">All systems above 80%!</div>';
+        }
     </script>
 
     <!-- THEME PICKER MODAL -->

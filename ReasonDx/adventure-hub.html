@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adventure Hub - ReasonDx Clinical Reasoning Trainer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(135deg,#0c4a6e,#0ea5e9);min-height:100vh;padding:20px;color:#f8fafc}
+.hub-header{text-align:center;padding:40px 20px 30px;max-width:900px;margin:0 auto}
+.hub-header h1{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#bae6fd,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.hub-header p{color:#7dd3fc;font-size:1.1rem}
+.hub-stats{display:flex;gap:16px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.stat{background:rgba(0,0,0,0.3);padding:12px 24px;border-radius:10px;text-align:center}
+.stat-value{font-size:1.8rem;font-weight:700;color:#4ade80}
+.stat-label{font-size:0.8rem;color:#94a3b8}
+.search-bar{max-width:600px;margin:20px auto;position:relative}
+.search-bar input{width:100%;padding:14px 20px 14px 44px;border-radius:12px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.1);color:#f8fafc;font-size:1rem;outline:none}
+.search-bar input::placeholder{color:#7dd3fc}
+.search-bar input:focus{border-color:rgba(14,165,233,0.6)}
+.search-bar .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.2rem}
+.section-divider{max-width:1200px;margin:30px auto 10px;padding:0 10px}
+.section-divider h2{color:#fbbf24;font-size:1.1rem;font-weight:600;border-bottom:1px solid rgba(251,191,36,0.3);padding-bottom:8px}
+.categories{max-width:1200px;margin:10px auto 30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;padding:0 10px}
+.category-card{background:rgba(255,255,255,0.08);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,0.1);transition:transform 0.2s}
+.category-card:hover{transform:translateY(-2px)}
+.category-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.category-icon{font-size:1.5rem}
+.category-header h2{font-size:1.15rem;font-weight:700;color:#bae6fd}
+.count{font-size:0.85rem;font-weight:400;color:#7dd3fc}
+.adventure-list{display:flex;flex-direction:column;gap:6px;max-height:400px;overflow-y:auto}
+.adventure-link{display:block;padding:10px 14px;border-radius:8px;text-decoration:none;color:#e2e8f0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);transition:all 0.2s;font-size:0.9rem}
+.adventure-link:hover{background:rgba(14,165,233,0.2);border-color:rgba(14,165,233,0.4);transform:translateX(4px)}
+.back-nav{max-width:1200px;margin:0 auto 10px;padding:0 10px}
+.back-link{color:#7dd3fc;text-decoration:none;font-size:0.9rem}
+.back-link:hover{color:#bae6fd}
+.adventure-list::-webkit-scrollbar{width:6px}
+.adventure-list::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);border-radius:3px}
+.adventure-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:3px}
+@media(max-width:480px){.categories{grid-template-columns:1fr}.hub-header h1{font-size:1.6rem}.stat{flex:1;min-width:80px}}
+</style>
+</head>
+<body>
+<div class="back-nav"><a href="index.html" class="back-link">← Back to ReasonDx</a></div>
+<div class="hub-header">
+<h1>🗺️ Adventure Hub</h1>
+<p>Interactive clinical reasoning scenarios across all specialties</p>
+<div class="hub-stats">
+<div class="stat"><div class="stat-value">244</div><div class="stat-label">Adventures</div></div>
+<div class="stat"><div class="stat-value">26</div><div class="stat-label">Specialties</div></div>
+<div class="stat"><div class="stat-value">100%</div><div class="stat-label">Coverage</div></div>
+</div>
+</div>
+<div class="search-bar"><span class="icon">🔍</span><input type="text" id="search" placeholder="Search adventures by name or specialty..." oninput="filterAdventures(this.value)"></div>
+<div class="categories" id="categories">
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🛡️</span><h2>Allergy/Immunology <span class="count">(21)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/immunotherapy-allergy-expanded-adventure.html" class="adventure-link">Allergen Immunotherapy</a><a href="adventure-cases/allergic-rhinitis-expanded.html" class="adventure-link">Allergic Rhinitis</a><a href="adventure-cases/allergy-testing-expanded-adventure.html" class="adventure-link">Allergy Testing</a><a href="adventure-cases/anaphylaxis-expanded-adventure.html" class="adventure-link">Anaphylaxis</a><a href="adventure-cases/asthma-phenotyping-expanded.html" class="adventure-link">Asthma Phenotyping</a><a href="adventure-cases/atopic-dermatitis-expanded.html" class="adventure-link">Atopic Dermatitis</a><a href="adventure-cases/contact-dermatitis-expanded.html" class="adventure-link">Contact Dermatitis</a><a href="adventure-cases/dress-scar-expanded.html" class="adventure-link">Dress Sjs</a><a href="adventure-cases/drug-allergy-expanded-adventure.html" class="adventure-link">Drug Allergy</a><a href="adventure-cases/eosinophilia-expanded.html" class="adventure-link">Eosinophilia</a><a href="adventure-cases/epinephrine-expanded-adventure.html" class="adventure-link">Epinephrine in Allergy</a><a href="adventure-cases/food-allergy-expanded-adventure.html" class="adventure-link">Food Allergy</a><a href="adventure-cases/fpies-adventure.html" class="adventure-link">Fpies</a><a href="adventure-cases/hae-expanded.html" class="adventure-link">Hereditary Angioedema</a><a href="adventure-cases/ivig-scig-expanded-adventure.html" class="adventure-link">IVIG & SCIG Therapy</a><a href="adventure-cases/immunodeficiency-expanded.html" class="adventure-link">Immunodeficiency</a><a href="adventure-cases/asthma-exacerbation-expanded.html" class="adventure-link">Inhaler & Spacer Technique</a><a href="adventure-cases/mast-cell-expanded.html" class="adventure-link">Mast Cell</a><a href="adventure-cases/mast-cell-expanded.html" class="adventure-link">Mast Cell Disorders</a><a href="adventure-cases/urticaria-expanded-adventure.html" class="adventure-link">Urticaria & Angioedema</a><a href="adventure-cases/venom-allergy-expanded-adventure.html" class="adventure-link">Venom Allergy</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">❤️</span><h2>Cardiology <span class="count">(12)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/acls-rhythms-expanded.html" class="adventure-link">Acls Rhythms</a><a href="adventure-cases/acs-expanded-adventure.html" class="adventure-link">Acute Coronary Syndrome</a><a href="adventure-cases/aortic-dissection-expanded.html" class="adventure-link">Aortic Dissection</a><a href="adventure-cases/afib-expanded-adventure.html" class="adventure-link">Atrial Fibrillation</a><a href="adventure-cases/cardiac-tamponade-adventure.html" class="adventure-link">Cardiac Tamponade</a><a href="adventure-cases/ekg-expanded-adventure.html" class="adventure-link">EKG Interpretation</a><a href="adventure-cases/heart-failure-expanded-adventure.html" class="adventure-link">Heart Failure</a><a href="adventure-cases/htn-emergency-expanded-adventure.html" class="adventure-link">Hypertensive Emergency</a><a href="adventure-cases/pe-expanded-adventure.html" class="adventure-link">Hypertensive Emergency</a><a href="adventure-cases/infective-endocarditis-adventure.html" class="adventure-link">Infective Endocarditis</a><a href="adventure-cases/syncope-expanded.html" class="adventure-link">Syncope</a><a href="adventure-cases/valvular-disease-expanded-adventure.html" class="adventure-link">Valvular Heart Disease</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🩹</span><h2>Dermatology <span class="count">(2)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/cellulitis-necfasc-expanded.html" class="adventure-link">Cellulitis</a><a href="adventure-cases/rheum-emergencies-expanded.html" class="adventure-link">Derm Emergencies</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🚑</span><h2>Emergency Medicine <span class="count">(3)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/ards-adventure.html" class="adventure-link">ARDS</a><a href="adventure-cases/sepsis-adventure.html" class="adventure-link">Sepsis & Septic Shock</a><a href="adventure-cases/shock-expanded.html" class="adventure-link">Shock</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">⚡</span><h2>Endocrine <span class="count">(10)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/adrenal-crisis-adventure.html" class="adventure-link">Adrenal Crisis</a><a href="adventure-cases/adrenal-crisis-adventure.html" class="adventure-link">Adrenal Disorders</a><a href="adventure-cases/bipolar-disorder-expanded.html" class="adventure-link">Calcium & Parathyroid</a><a href="adventure-cases/dka-expanded-adventure.html" class="adventure-link">DKA vs HHS</a><a href="adventure-cases/dka-expanded-adventure.html" class="adventure-link">Diabetic Ketoacidosis</a><a href="adventure-cases/hypoglycemia-expanded.html" class="adventure-link">Hypoglycemia</a><a href="adventure-cases/myxedema-coma-adventure.html" class="adventure-link">Myxedema Coma</a><a href="adventure-cases/bipolar-disorder-expanded.html" class="adventure-link">Pituitary Disorders</a><a href="adventure-cases/thyroid-storm-adventure.html" class="adventure-link">Thyroid Disorders</a><a href="adventure-cases/thyroid-storm-adventure.html" class="adventure-link">Thyroid Storm</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">👂</span><h2>ENT <span class="count">(2)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/ent-emergencies-expanded.html" class="adventure-link">Ent Emergencies</a><a href="adventure-cases/sinusitis-adventure.html" class="adventure-link">Sinusitis</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🫁</span><h2>Gastroenterology <span class="count">(10)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/cdiff-expanded.html" class="adventure-link">C. difficile & Infectious Diarrhea</a><a href="adventure-cases/celiac-expanded-adventure.html" class="adventure-link">Celiac Disease & Malabsorption</a><a href="adventure-cases/alf-expanded.html" class="adventure-link">Chronic Liver Disease</a><a href="adventure-cases/psychosis-expanded.html" class="adventure-link">Cirrhosis & Portal Hypertension</a><a href="adventure-cases/gerd-pud-expanded-adventure.html" class="adventure-link">GERD & Peptic Ulcer Disease</a><a href="adventure-cases/gi-bleed-expanded-adventure.html" class="adventure-link">GI Bleeding</a><a href="adventure-cases/encephalitis-adventure.html" class="adventure-link">Hepatitis</a><a href="adventure-cases/ibd-expanded-adventure.html" class="adventure-link">Inflammatory Bowel Disease</a><a href="adventure-cases/alf-expanded.html" class="adventure-link">Liver Cirrhosis</a><a href="adventure-cases/pancreatitis-expanded.html" class="adventure-link">Pancreatitis</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🩸</span><h2>Hematology <span class="count">(13)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/acute-leukemia-expanded-adventure.html" class="adventure-link">Acute Leukemia: ALL vs AML</a><a href="adventure-cases/pneumonia-expanded.html" class="adventure-link">Anemia</a><a href="adventure-cases/dvt-expanded.html" class="adventure-link">DVT & Pulmonary Embolism</a><a href="adventure-cases/dvt-expanded.html" class="adventure-link">Deep Vein Thrombosis</a><a href="adventure-cases/dic-expanded.html" class="adventure-link">Disseminated Intravascular Coagulation</a><a href="adventure-cases/hypercalcemia-malignancy-adventure.html" class="adventure-link">Hypercalcemia of Malignancy</a><a href="adventure-cases/pe-expanded-adventure.html" class="adventure-link">ITP, TTP, HUS & DIC</a><a href="adventure-cases/neutropenic-fever-expanded.html" class="adventure-link">Neutropenic Fever</a><a href="adventure-cases/mast-cell-expanded.html" class="adventure-link">Sickle Cell Disease</a><a href="adventure-cases/sickle-cell-disease-expanded-adventure.html" class="adventure-link">Sickle Cell Disease</a><a href="adventure-cases/ttp-hus-expanded.html" class="adventure-link">TTP/HUS</a><a href="adventure-cases/dic-expanded.html" class="adventure-link">Transfusion Medicine</a><a href="adventure-cases/tumor-lysis-syndrome-adventure.html" class="adventure-link">Tumor Lysis Syndrome</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🦠</span><h2>Infectious Disease <span class="count">(5)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/dfi-expanded.html" class="adventure-link">Dfi</a><a href="adventure-cases/hiv-aids-expanded-adventure.html" class="adventure-link">HIV/AIDS</a><a href="adventure-cases/osteomyelitis-adventure.html" class="adventure-link">Osteomyelitis</a><a href="adventure-cases/tuberculosis-expanded-adventure.html" class="adventure-link">Tuberculosis</a><a href="adventure-cases/pyelonephritis-expanded.html" class="adventure-link">UTI & Pyelonephritis</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🩺</span><h2>Internal Medicine <span class="count">(3)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/acs-expanded-adventure.html" class="adventure-link">Altered Mental Status Algorithm</a><a href="adventure-cases/chest-pain-expanded.html" class="adventure-link">Chest Pain Algorithm</a><a href="adventure-cases/fuo-expanded-adventure.html" class="adventure-link">Fever of Unknown Origin</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🫘</span><h2>Nephrology <span class="count">(8)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/acid-base-expanded.html" class="adventure-link">Acid Base</a><a href="adventure-cases/aki-expanded-adventure.html" class="adventure-link">Acute Kidney Injury</a><a href="adventure-cases/electrolyte-emergencies-expanded.html" class="adventure-link">Electrolyte Disorders</a><a href="adventure-cases/hyperkalemia-expanded.html" class="adventure-link">Hyperkalemia</a><a href="adventure-cases/hyperkalemia-expanded.html" class="adventure-link">Hyperkalemia Management</a><a href="adventure-cases/hyponatremia-expanded.html" class="adventure-link">Hyponatremia</a><a href="adventure-cases/kidney-stones-crt.html" class="adventure-link">Kidney Stones</a><a href="adventure-cases/rhabdomyolysis-expanded.html" class="adventure-link">Rhabdomyolysis</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🧠</span><h2>Neurology <span class="count">(18)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/gbs-expanded-adventure.html" class="adventure-link">Guillain-Barré Syndrome</a><a href="adventure-cases/guillain-barre-adventure.html" class="adventure-link">Guillain-Barré Syndrome</a><a href="adventure-cases/headache-expanded-adventure.html" class="adventure-link">Headache</a><a href="adventure-cases/headache-icp-expanded-adventure.html" class="adventure-link">Headache & Intracranial Pressure</a><a href="adventure-cases/dic-expanded.html" class="adventure-link">Intracerebral Hemorrhage</a><a href="adventure-cases/encephalitis-adventure.html" class="adventure-link">Meningitis & Encephalitis</a><a href="adventure-cases/multiple-sclerosis-expanded-adventure.html" class="adventure-link">Multiple Sclerosis</a><a href="adventure-cases/acls-rhythms-expanded.html" class="adventure-link">Multiple Sclerosis (Variant)</a><a href="adventure-cases/myasthenic-crisis-adventure.html" class="adventure-link">Myasthenia Gravis</a><a href="adventure-cases/myasthenic-crisis-adventure.html" class="adventure-link">Myasthenic Crisis</a><a href="adventure-cases/nms-adventure.html" class="adventure-link">Neuroleptic Malignant Syndrome</a><a href="adventure-cases/parkinson-expanded-adventure.html" class="adventure-link">Parkinson Disease</a><a href="adventure-cases/kidney-stones-crt.html" class="adventure-link">Parkinsons Disease (Variant)</a><a href="adventure-cases/bipolar-disorder-expanded.html" class="adventure-link">Seizure Disorders</a><a href="adventure-cases/spinal-cord-compression-expanded.html" class="adventure-link">Spinal Cord</a><a href="adventure-cases/status-epilepticus-adventure.html" class="adventure-link">Status Epilepticus</a><a href="adventure-cases/stroke-expanded-adventure.html" class="adventure-link">Stroke</a><a href="adventure-cases/tbi-icp-expanded.html" class="adventure-link">Tbi Icp</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🤰</span><h2>OB/GYN <span class="count">(12)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/aub-expanded-adventure.html" class="adventure-link">Abnormal Uterine Bleeding</a><a href="adventure-cases/intussusception-expanded.html" class="adventure-link">Contraception</a><a href="adventure-cases/ectopic-pregnancy-expanded.html" class="adventure-link">Ectopic Pregnancy</a><a href="adventure-cases/gyn-oncology-expanded-adventure.html" class="adventure-link">Gynecologic Oncology</a><a href="adventure-cases/labor-delivery-expanded-adventure.html" class="adventure-link">Labor & Delivery</a><a href="adventure-cases/ovarian-torsion-expanded.html" class="adventure-link">Ovarian Torsion</a><a href="adventure-cases/pid-toa-expanded.html" class="adventure-link">Pid Toa</a><a href="adventure-cases/placental-abruption-expanded.html" class="adventure-link">Placental Abruption</a><a href="adventure-cases/bipolar-disorder-expanded.html" class="adventure-link">Placental Disorders</a><a href="adventure-cases/pph-expanded.html" class="adventure-link">Postpartum Hemorrhage</a><a href="adventure-cases/preeclampsia-expanded.html" class="adventure-link">Preeclampsia & Eclampsia</a><a href="adventure-cases/pph-expanded.html" class="adventure-link">Stages of Labor</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">👁️</span><h2>Ophthalmology <span class="count">(1)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/eye-emergencies-expanded.html" class="adventure-link">Eye Emergencies</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">👶</span><h2>Pediatrics <span class="count">(10)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/bronchiolitis-expanded.html" class="adventure-link">Bronchiolitis</a><a href="adventure-cases/croup-expanded.html" class="adventure-link">Croup</a><a href="adventure-cases/developmental-milestones-expanded-adventure.html" class="adventure-link">Developmental Milestones</a><a href="adventure-cases/febrile-seizure-expanded.html" class="adventure-link">Febrile Seizure</a><a href="adventure-cases/intussusception-expanded.html" class="adventure-link">Intussusception</a><a href="adventure-cases/kawasaki-expanded.html" class="adventure-link">Kawasaki</a><a href="adventure-cases/pyloric-stenosis-expanded.html" class="adventure-link">Newborn Screening & Neonatal Conditions</a><a href="adventure-cases/pe-expanded-adventure.html" class="adventure-link">Pediatric Emergencies</a><a href="adventure-cases/pyloric-stenosis-expanded.html" class="adventure-link">Pyloric Stenosis</a><a href="adventure-cases/wilms-tumor-crt.html" class="adventure-link">Wilms Tumor</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">💭</span><h2>Psychiatry <span class="count">(13)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/depression-expanded.html" class="adventure-link">Antidepressant Pharmacology</a><a href="adventure-cases/psychosis-expanded.html" class="adventure-link">Antipsychotic Pharmacology</a><a href="adventure-cases/anxiety-expanded-adventure.html" class="adventure-link">Anxiety Disorders</a><a href="adventure-cases/bipolar-disorder-expanded.html" class="adventure-link">Bipolar Disorder</a><a href="adventure-cases/capacity-expanded-adventure.html" class="adventure-link">Decision-Making Capacity</a><a href="adventure-cases/delirium-expanded.html" class="adventure-link">Delirium</a><a href="adventure-cases/depression-expanded.html" class="adventure-link">Major Depressive Disorder</a><a href="adventure-cases/acls-rhythms-expanded.html" class="adventure-link">Mental Status Examination</a><a href="adventure-cases/pe-expanded-adventure.html" class="adventure-link">Personality Disorders</a><a href="adventure-cases/psychopharmacology-expanded-adventure.html" class="adventure-link">Psychopharmacology</a><a href="adventure-cases/psychosis-expanded.html" class="adventure-link">Psychosis</a><a href="adventure-cases/schizophrenia-expanded-adventure.html" class="adventure-link">Schizophrenia</a><a href="adventure-cases/substance-use-expanded-adventure.html" class="adventure-link">Substance Use Disorders</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🫁</span><h2>Pulmonary <span class="count">(8)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/asthma-biologics-expanded.html" class="adventure-link">Asthma Exacerbation</a><a href="adventure-cases/copd-expanded-adventure.html" class="adventure-link">COPD Exacerbation</a><a href="adventure-cases/copd-exacerbation-expanded.html" class="adventure-link">PFT Interpretation</a><a href="adventure-cases/pleural-effusion-expanded-adventure.html" class="adventure-link">Pleural Effusion</a><a href="adventure-cases/pneumonia-expanded.html" class="adventure-link">Pneumonia</a><a href="adventure-cases/pe-expanded-adventure.html" class="adventure-link">Pulmonary Embolism</a><a href="adventure-cases/respiratory-pft-expanded-adventure.html" class="adventure-link">Respiratory PFTs</a><a href="adventure-cases/tension-ptx-expanded.html" class="adventure-link">Tension Pneumothorax</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🦋</span><h2>Rheumatology <span class="count">(9)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/antiphospholipid-syndrome-expanded-adventure.html" class="adventure-link">Antiphospholipid Syndrome</a><a href="adventure-cases/gout-pseudogout-expanded-adventure.html" class="adventure-link">Gout & Pseudogout</a><a href="adventure-cases/inflammatory-myopathy-expanded-adventure.html" class="adventure-link">Inflammatory Myopathies</a><a href="adventure-cases/rheum-emergencies-expanded.html" class="adventure-link">Rheum Emergencies</a><a href="adventure-cases/rheumatoid-arthritis-expanded-adventure.html" class="adventure-link">Rheumatoid Arthritis</a><a href="adventure-cases/scleroderma-expanded-adventure.html" class="adventure-link">Scleroderma (Systemic Sclerosis)</a><a href="adventure-cases/spondyloarthropathy-expanded-adventure.html" class="adventure-link">Spondyloarthropathies</a><a href="adventure-cases/sle-expanded-adventure.html" class="adventure-link">Systemic Lupus Erythematosus</a><a href="adventure-cases/sinusitis-adventure.html" class="adventure-link">Vasculitis</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🏥</span><h2>Surgery <span class="count">(13)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/acute-abdomen-expanded.html" class="adventure-link">Acute Abdomen</a><a href="adventure-cases/appendicitis-expanded.html" class="adventure-link">Acute Appendicitis</a><a href="adventure-cases/bipolar-disorder-expanded.html" class="adventure-link">Biliary Disease</a><a href="adventure-cases/upj-obstruction-crt.html" class="adventure-link">Bowel Obstruction</a><a href="adventure-cases/breast-mass-expanded-adventure.html" class="adventure-link">Breast Disease</a><a href="adventure-cases/burns-expanded-adventure.html" class="adventure-link">Burns</a><a href="adventure-cases/cholecystitis-expanded.html" class="adventure-link">Cholecystitis & Cholelithiasis</a><a href="adventure-cases/hematuria-crt.html" class="adventure-link">Hernias</a><a href="adventure-cases/malignant-hyperthermia-adventure.html" class="adventure-link">Malignant Hyperthermia</a><a href="adventure-cases/preop-postop-expanded-adventure.html" class="adventure-link">Pre/Post-Operative Management</a><a href="adventure-cases/sbo-expanded.html" class="adventure-link">Small Bowel Obstruction</a><a href="adventure-cases/trauma-expanded-adventure.html" class="adventure-link">Trauma Management</a><a href="adventure-cases/wound-healing-expanded-adventure.html" class="adventure-link">Wound Healing & Surgical Nutrition</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">☠️</span><h2>Toxicology <span class="count">(9)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/apap-overdose-expanded.html" class="adventure-link">Acetaminophen Overdose</a><a href="adventure-cases/alcohol-withdrawal-expanded.html" class="adventure-link">Alcohol Withdrawal</a><a href="adventure-cases/carbon-monoxide-expanded-adventure.html" class="adventure-link">Carbon Monoxide Poisoning</a><a href="adventure-cases/opioid-overdose-expanded.html" class="adventure-link">Opioid Overdose</a><a href="adventure-cases/organophosphate-expanded-adventure.html" class="adventure-link">Organophosphate Poisoning</a><a href="adventure-cases/salicylate-expanded-adventure.html" class="adventure-link">Salicylate Poisoning</a><a href="adventure-cases/serotonin-syndrome-adventure.html" class="adventure-link">Serotonin Syndrome</a><a href="adventure-cases/toxic-alcohols-expanded-adventure.html" class="adventure-link">Toxic Alcohol Ingestion</a><a href="adventure-cases/toxidromes-expanded.html" class="adventure-link">Toxidromes</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🫘</span><h2>Urology <span class="count">(14)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/testicular-cancer-crt.html" class="adventure-link">Bladder Cancer</a><a href="adventure-cases/bph-crt.html" class="adventure-link">Bph</a><a href="adventure-cases/cryptorchidism-crt.html" class="adventure-link">Cryptorchidism</a><a href="adventure-cases/hypospadias-crt.html" class="adventure-link">Hypospadias</a><a href="adventure-cases/neurogenic-bladder-crt.html" class="adventure-link">Neurogenic Bladder</a><a href="adventure-cases/pediatric-urology-sbar.html" class="adventure-link">Pediatric Urology</a><a href="adventure-cases/prostate-cancer-crt.html" class="adventure-link">Prostate Cancer</a><a href="adventure-cases/puv-crt.html" class="adventure-link">Puv</a><a href="adventure-cases/rcc-crt.html" class="adventure-link">Rcc</a><a href="adventure-cases/testicular-cancer-crt.html" class="adventure-link">Testicular Cancer</a><a href="adventure-cases/testicular-torsion-crt.html" class="adventure-link">Testicular Torsion</a><a href="adventure-cases/upj-obstruction-crt.html" class="adventure-link">Upj Obstruction</a><a href="adventure-cases/urinary-incontinence-crt.html" class="adventure-link">Urinary Incontinence</a><a href="adventure-cases/vur-crt.html" class="adventure-link">Vur</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🧬</span><h2>Embryology <span class="count">(15)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/branchial-cleft-crt.html" class="adventure-link">Branchial Cleft</a><a href="adventure-cases/branchial-cleft-crt.html" class="adventure-link">Branchial Cleft Anomalies</a><a href="adventure-cases/pediatric-urology-sbar.html" class="adventure-link">Cardiac Embryology</a><a href="adventure-cases/cleft-lip-palate-crt.html" class="adventure-link">Cleft Lip Palate</a><a href="adventure-cases/endocrine-embryology-expanded-adventure.html" class="adventure-link">Endocrine Embryology</a><a href="adventure-cases/gi-embryology-expanded-adventure.html" class="adventure-link">GI Embryology</a><a href="adventure-cases/gu-embryology-expanded-adventure.html" class="adventure-link">GU Embryology</a><a href="adventure-cases/hemifacial-microsomia-crt.html" class="adventure-link">Hemifacial Microsomia</a><a href="adventure-cases/msk-embryology-expanded-adventure.html" class="adventure-link">MSK Embryology</a><a href="adventure-cases/clinical-reasoning-trainer-v2.html" class="adventure-link">Neuro Embryology</a><a href="adventure-cases/pharyngeal-apparatus-expanded-adventure.html" class="adventure-link">Pharyngeal Apparatus</a><a href="adventure-cases/pierre-robin-crt.html" class="adventure-link">Pierre Robin</a><a href="adventure-cases/renal-embryology-expanded-adventure.html" class="adventure-link">Renal Embryology</a><a href="adventure-cases/pediatric-urology-sbar.html" class="adventure-link">Respiratory Embryology</a><a href="adventure-cases/treacher-collins-crt.html" class="adventure-link">Treacher Collins</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🧬</span><h2>GI Embryology <span class="count">(15)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/alf-expanded.html" class="adventure-link">Anorectal Malformations</a><a href="adventure-cases/septal-defects-expanded-adventure.html" class="adventure-link">Atrial & Ventricular Septal Defects</a><a href="adventure-cases/cdh-congenital-diaphragmatic-hernia-expanded-adventure.html" class="adventure-link">Congenital Diaphragmatic Hernia</a><a href="adventure-cases/conotruncal-defects-expanded-adventure.html" class="adventure-link">Conotruncal Defects</a><a href="adventure-cases/adrenal-crisis-adventure.html" class="adventure-link">Duodenal Atresia</a><a href="adventure-cases/hirschsprung-disease-expanded-adventure.html" class="adventure-link">Hirschsprung Disease</a><a href="adventure-cases/horseshoe-kidney-expanded-adventure.html" class="adventure-link">Horseshoe Kidney</a><a href="adventure-cases/gi-embryology-malrotation-expanded-adventure.html" class="adventure-link">Intestinal Malrotation & Volvulus</a><a href="adventure-cases/jejunal-ileal-atresia-expanded-adventure.html" class="adventure-link">Jejunal/Ileal Atresia</a><a href="adventure-cases/meckel-diverticulum-expanded-adventure.html" class="adventure-link">Meckel Diverticulum</a><a href="adventure-cases/omphalocele-gastroschisis-expanded-adventure.html" class="adventure-link">Omphalocele & Gastroschisis</a><a href="adventure-cases/copd-exacerbation-expanded.html" class="adventure-link">PDA & Coarctation of the Aorta</a><a href="adventure-cases/puv-crt.html" class="adventure-link">Posterior Urethral Valves</a><a href="adventure-cases/tef-esophageal-atresia-expanded-adventure.html" class="adventure-link">TEF & Esophageal Atresia</a><a href="adventure-cases/thyroglossal-branchial-expanded-adventure.html" class="adventure-link">Thyroglossal & Branchial Cleft Anomalies</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🦴</span><h2>MSK Embryology <span class="count">(5)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/amniotic-band-expanded-adventure.html" class="adventure-link">Amniotic Band Syndrome</a><a href="adventure-cases/clubfoot-limb-development-expanded-adventure.html" class="adventure-link">Clubfoot & Limb Development</a><a href="adventure-cases/ddh-developmental-dysplasia-expanded-adventure.html" class="adventure-link">Developmental Dysplasia of the Hip</a><a href="adventure-cases/polydactyly-syndactyly-expanded-adventure.html" class="adventure-link">Polydactyly & Syndactyly</a><a href="adventure-cases/skeletal-dysplasia-expanded-adventure.html" class="adventure-link">Skeletal Dysplasia & Bone Formation</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🧠</span><h2>Neuro Embryology <span class="count">(8)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/corpus-callosum-agenesis-expanded-adventure.html" class="adventure-link">Agenesis of Corpus Callosum</a><a href="adventure-cases/alf-expanded.html" class="adventure-link">Chiari Malformation</a><a href="adventure-cases/congenital-hydrocephalus-expanded-adventure.html" class="adventure-link">Congenital Hydrocephalus</a><a href="adventure-cases/craniosynostosis-crt.html" class="adventure-link">Craniosynostosis</a><a href="adventure-cases/dandy-walker-expanded-adventure.html" class="adventure-link">Dandy-Walker Malformation</a><a href="adventure-cases/holoprosencephaly-expanded-adventure.html" class="adventure-link">Holoprosencephaly</a><a href="adventure-cases/neural-tube-defects-expanded-adventure.html" class="adventure-link">Neural Tube Defects</a><a href="adventure-cases/neuronal-migration-expanded-adventure.html" class="adventure-link">Neuronal Migration Disorders</a></div>
+</div>
+<div class="category-card">
+    <div class="category-header"><span class="category-icon">🫁</span><h2>Respiratory Embryology <span class="count">(5)</span></h2></div>
+    <div class="adventure-list"><a href="adventure-cases/cpam-bronchogenic-cyst-expanded-adventure.html" class="adventure-link">CPAM & Bronchogenic Cyst</a><a href="adventure-cases/congenital-lobar-emphysema-expanded-adventure.html" class="adventure-link">Congenital Lobar Emphysema</a><a href="adventure-cases/laryngotracheal-development-expanded-adventure.html" class="adventure-link">Laryngotracheal Development</a><a href="adventure-cases/pulmonary-sequestration-expanded-adventure.html" class="adventure-link">Pulmonary Sequestration</a><a href="adventure-cases/surfactant-deficiency-rds-expanded-adventure.html" class="adventure-link">Surfactant Deficiency & RDS</a></div>
+</div>
+</div>
+<script>
+function filterAdventures(q){
+q=q.toLowerCase();
+document.querySelectorAll('.adventure-link').forEach(a=>{
+a.style.display=a.textContent.toLowerCase().includes(q)?'block':'none';
+});
+document.querySelectorAll('.category-card').forEach(c=>{
+let any=false;
+c.querySelectorAll('.adventure-link').forEach(a=>{if(a.style.display!=='none')any=true});
+c.style.display=q===''||any?'block':'none';
+});
+}
+</script>
+</body>
+</html>

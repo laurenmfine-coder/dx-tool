@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CRT Hub | Clinical Reasoning Trainers</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#059669;--amber:#f59e0b;--purple:#8b5cf6;--bg:#0f172a;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+
+.nav{background:#1e293b;border-bottom:1px solid var(--border);padding:14px 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.nav-brand{font-size:22px;font-weight:700;color:var(--amber);text-decoration:none}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.nav-link{padding:7px 14px;color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;border-radius:8px;transition:all .2s}
+.nav-link:hover{background:rgba(255,255,255,.08);color:var(--text)}
+.nav-link.active{background:rgba(245,158,11,.15);color:var(--amber)}
+
+.hero{background:linear-gradient(135deg,#1e293b 0%,#0f172a 50%,#1a1a2e 100%);padding:48px 24px;text-align:center;border-bottom:1px solid var(--border)}
+.hero h1{font-size:36px;font-weight:800;margin-bottom:8px;color:var(--text)}
+.hero h1 span{color:var(--amber)}
+.hero p{font-size:16px;color:var(--text2);max-width:700px;margin:0 auto 24px}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.hs{text-align:center;background:rgba(245,158,11,.08);padding:12px 24px;border-radius:12px;border:1px solid rgba(245,158,11,.15)}
+.hs-num{font-size:28px;font-weight:800;color:var(--amber)}
+.hs-label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+
+.controls{max-width:1200px;margin:0 auto;padding:24px 24px 0;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.search-box{flex:1;min-width:250px;position:relative}
+.search-box input{width:100%;padding:12px 16px 12px 42px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--card);color:var(--text);transition:border .2s;outline:none}
+.search-box input:focus{border-color:var(--amber)}
+.search-box input::placeholder{color:var(--text2)}
+.search-box::before{content:'🔍';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px}
+.sys-filters{display:flex;gap:6px;flex-wrap:wrap}
+.sys-btn{padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.sys-btn:hover{border-color:var(--amber);color:var(--amber)}
+.sys-btn.active{background:var(--amber);color:#000;border-color:var(--amber)}
+
+.main{max-width:1200px;margin:0 auto;padding:24px}
+.results-info{color:var(--text2);font-size:13px;margin-bottom:16px}
+
+.crt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+
+.crt-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .25s;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.crt-card:hover{border-color:var(--amber);box-shadow:0 8px 32px rgba(245,158,11,.15);transform:translateY(-3px)}
+.crt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--purple));opacity:0;transition:opacity .3s}
+.crt-card:hover::before{opacity:1}
+
+.crt-sys{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.crt-sys.gi{background:rgba(16,185,129,.15);color:#10b981}
+.crt-sys.neuro{background:rgba(139,92,246,.15);color:#8b5cf6}
+.crt-sys.cardio{background:rgba(239,68,68,.15);color:#ef4444}
+.crt-sys.resp{background:rgba(59,130,246,.15);color:#3b82f6}
+.crt-sys.msk{background:rgba(245,158,11,.15);color:#f59e0b}
+.crt-sys.renal{background:rgba(20,184,166,.15);color:#14b8a6}
+.crt-sys.ent{background:rgba(236,72,153,.15);color:#ec4899}
+.crt-sys.general{background:rgba(148,163,184,.15);color:#94a3b8}
+
+.crt-title{font-size:17px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.crt-desc{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5}
+.crt-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text2)}
+.crt-meta-item{display:flex;align-items:center;gap:4px}
+
+.crt-score{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.crt-score.none{border:2px dashed var(--border);color:var(--text2)}
+.crt-score.partial{border:2px solid var(--amber);color:var(--amber)}
+.crt-score.done{border:2px solid #10b981;color:#10b981;background:rgba(16,185,129,.1)}
+
+.crt-concepts{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.crt-concept{font-size:10px;background:rgba(139,92,246,.1);color:var(--purple);padding:2px 8px;border-radius:4px;border:1px solid rgba(139,92,246,.2)}
+
+.empty{text-align:center;padding:60px 24px;color:var(--text2)}
+.empty-icon{font-size:48px;margin-bottom:12px}
+
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--text2);font-size:12px;background:var(--card)}
+footer a{color:var(--amber);text-decoration:none}
+
+@media(max-width:640px){
+.hero h1{font-size:24px}
+.crt-grid{grid-template-columns:1fr}
+.controls{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+<a href="index.html" class="nav-brand">🧠 CRT Hub</a>
+<div class="nav-links">
+<a href="learn-hub.html" class="nav-link">Learn</a>
+<a href="module-catalog.html" class="nav-link">Catalog</a>
+<a href="crt-hub.html" class="nav-link active">CRT Hub</a>
+<a href="quiz-engine.html" class="nav-link">Quiz</a>
+<a href="tools/learning-dashboard.html" class="nav-link">Dashboard</a>
+</div>
+</div>
+</nav>
+
+<div class="hero">
+<h1>Clinical Reasoning <span>Trainers</span></h1>
+<p>Multi-stage interactive cases that build clinical reasoning through embryology, pathophysiology, and mechanism-based thinking. Each CRT guides you through 5-6 clinical stages.</p>
+<div class="hero-stats">
+<div class="hs"><div class="hs-num" id="crtTotal">33</div><div class="hs-label">Trainers</div></div>
+<div class="hs"><div class="hs-num" id="crtSystems">—</div><div class="hs-label">Systems</div></div>
+<div class="hs"><div class="hs-num" id="crtCompleted">—</div><div class="hs-label">Completed</div></div>
+<div class="hs"><div class="hs-num" id="crtQuestions">~165</div><div class="hs-label">Questions</div></div>
+</div>
+</div>
+
+<div class="controls">
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search CRTs by name, system, or concept..." oninput="filterCRTs()">
+</div>
+<div class="sys-filters" id="sysFilters"></div>
+</div>
+
+<div class="main">
+<div class="results-info" id="resultsInfo"></div>
+<div class="crt-grid" id="crtGrid"></div>
+</div>
+
+<footer>
+<a href="index.html">ReasonDx</a> · Clinical Reasoning Trainers · Embryology-Based Learning
+</footer>
+
+<script>
+const CRT_DATA = [
+    // GI
+    {file:"anorectal-malformations-crt.html",title:"Anorectal Malformations",system:"GI",concepts:["urorectal septum","cloaca division","VACTERL","ARM classification","PSARP"],stages:6,difficulty:"Advanced"},
+    {file:"duodenal-atresia-crt.html",title:"Duodenal Atresia",system:"GI",concepts:["foregut development","double bubble","annular pancreas","Down syndrome","bilious vomiting"],stages:6,difficulty:"Intermediate"},
+    {file:"gi-embryology-malrotation-crt.html",title:"Intestinal Malrotation",system:"GI",concepts:["midgut rotation","Ladd bands","volvulus","SMA axis","upper GI series"],stages:6,difficulty:"Intermediate"},
+    {file:"hirschsprung-disease-crt.html",title:"Hirschsprung Disease",system:"GI",concepts:["neural crest migration","aganglionosis","transition zone","suction biopsy","enterocolitis"],stages:6,difficulty:"Advanced"},
+    {file:"jejunal-ileal-atresia-crt.html",title:"Jejunal-Ileal Atresia",system:"GI",concepts:["vascular accident","apple peel deformity","microcolon","short bowel syndrome"],stages:6,difficulty:"Intermediate"},
+    {file:"meckel-diverticulum-crt.html",title:"Meckel Diverticulum",system:"GI",concepts:["vitelline duct","rule of 2s","ectopic gastric mucosa","Meckel scan","painless bleeding"],stages:6,difficulty:"Intermediate"},
+    {file:"omphalocele-gastroschisis-crt.html",title:"Omphalocele vs Gastroschisis",system:"GI",concepts:["ventral wall closure","sac vs no sac","associated anomalies","silo placement"],stages:6,difficulty:"Intermediate"},
+    {file:"tef-esophageal-atresia-crt.html",title:"TEF & Esophageal Atresia",system:"GI",concepts:["foregut separation","H-type fistula","VACTERL","coil sign","Repogle tube"],stages:6,difficulty:"Advanced"},
+
+    // Cardio
+    {file:"conotruncal-defects-crt.html",title:"Conotruncal Defects",system:"Cardio",concepts:["neural crest","aorticopulmonary septum","truncus arteriosus","TGA","Tetralogy of Fallot","DiGeorge"],stages:6,difficulty:"Advanced"},
+    {file:"pda-coarctation-crt.html",title:"PDA & Coarctation",system:"Cardio",concepts:["ductus arteriosus","aortic arch","indomethacin vs PGE1","Turner syndrome","rib notching"],stages:6,difficulty:"Intermediate"},
+    {file:"septal-defects-crt.html",title:"Septal Defects (ASD/VSD)",system:"Cardio",concepts:["septum primum/secundum","endocardial cushion","Eisenmenger","shunt physiology"],stages:6,difficulty:"Intermediate"},
+
+    // Neuro
+    {file:"chiari-malformation-crt.html",title:"Chiari Malformation",system:"Neuro",concepts:["posterior fossa","tonsillar herniation","syringomyelia","myelomeningocele"],stages:6,difficulty:"Advanced"},
+    {file:"congenital-hydrocephalus-crt.html",title:"Congenital Hydrocephalus",system:"Neuro",concepts:["CSF circulation","aqueductal stenosis","communicating vs obstructive","VP shunt"],stages:6,difficulty:"Intermediate"},
+    {file:"corpus-callosum-agenesis-crt.html",title:"Corpus Callosum Agenesis",system:"Neuro",concepts:["commissural development","Probst bundles","colpocephaly","Aicardi syndrome"],stages:6,difficulty:"Advanced"},
+    {file:"craniosynostosis-crt.html",title:"Craniosynostosis",system:"Neuro",concepts:["intramembranous ossification","Virchow's law","suture-shape patterns","FGFR2","Apert/Crouzon"],stages:6,difficulty:"Advanced"},
+    {file:"dandy-walker-crt.html",title:"Dandy-Walker Malformation",system:"Neuro",concepts:["cerebellar development","vermis hypoplasia","posterior fossa cyst","hydrocephalus"],stages:6,difficulty:"Intermediate"},
+    {file:"holoprosencephaly-crt.html",title:"Holoprosencephaly",system:"Neuro",concepts:["prosencephalon cleavage","SHH signaling","trisomy 13","cyclopia","lobar vs alobar"],stages:6,difficulty:"Advanced"},
+    {file:"neural-tube-defects-crt.html",title:"Neural Tube Defects",system:"Neuro",concepts:["neurulation","folate","anencephaly","myelomeningocele","AFP screening"],stages:6,difficulty:"Intermediate"},
+    {file:"neuronal-migration-crt.html",title:"Neuronal Migration Disorders",system:"Neuro",concepts:["radial glial fibers","LIS1/DCX","lissencephaly","heterotopia","polymicrogyria"],stages:6,difficulty:"Advanced"},
+
+    // Renal
+    {file:"horseshoe-kidney-crt.html",title:"Horseshoe Kidney",system:"Renal",concepts:["mesonephric duct","IMA","Turner syndrome","renal fusion","ureteral obstruction"],stages:6,difficulty:"Intermediate"},
+    {file:"puv-obstructive-uropathy-crt.html",title:"PUV & Obstructive Uropathy",system:"Renal",concepts:["posterior urethral valves","oligohydramnios","bilateral hydronephrosis","Potter sequence"],stages:6,difficulty:"Intermediate"},
+
+    // Respiratory
+    {file:"cdh-congenital-diaphragmatic-hernia-crt.html",title:"Congenital Diaphragmatic Hernia",system:"Resp",concepts:["pleuroperitoneal folds","Bochdalek hernia","pulmonary hypoplasia","scaphoid abdomen"],stages:6,difficulty:"Advanced"},
+    {file:"congenital-lobar-emphysema-crt.html",title:"Congenital Lobar Emphysema",system:"Resp",concepts:["branching morphogenesis","bronchial cartilage","CLE vs CPAM","lung development stages"],stages:6,difficulty:"Intermediate"},
+    {file:"cpam-bronchogenic-cyst-crt.html",title:"CPAM & Bronchogenic Cyst",system:"Resp",concepts:["foregut budding","adenomatoid malformation","prenatal ultrasound","fetal hydrops"],stages:6,difficulty:"Intermediate"},
+    {file:"laryngotracheal-development-crt.html",title:"Laryngotracheal Development",system:"Resp",concepts:["pharyngeal arches 4/6","laryngomalacia","RLN anatomy","subglottic stenosis"],stages:6,difficulty:"Advanced"},
+    {file:"pulmonary-sequestration-crt.html",title:"Pulmonary Sequestration",system:"Resp",concepts:["accessory lung bud","intralobar vs extralobar","systemic arterial supply","recurrent pneumonia"],stages:6,difficulty:"Intermediate"},
+    {file:"surfactant-deficiency-rds-crt.html",title:"Surfactant Deficiency / RDS",system:"Resp",concepts:["type II pneumocytes","surfactant","ground-glass opacity","antenatal steroids","CPAP"],stages:6,difficulty:"Intermediate"},
+
+    // MSK
+    {file:"amniotic-band-crt.html",title:"Amniotic Band Syndrome",system:"MSK",concepts:["amnion rupture","constriction rings","Z-plasty","malformation vs disruption"],stages:6,difficulty:"Intermediate"},
+    {file:"clubfoot-limb-development-crt.html",title:"Clubfoot & Limb Development",system:"MSK",concepts:["limb bud patterning","AER","ZPA/SHH","Ponseti method","talipes equinovarus"],stages:6,difficulty:"Intermediate"},
+    {file:"ddh-developmental-dysplasia-crt.html",title:"Developmental Dysplasia of Hip",system:"MSK",concepts:["acetabular development","Ortolani/Barlow","hip ultrasound","Pavlik harness"],stages:6,difficulty:"Intermediate"},
+    {file:"polydactyly-syndactyly-crt.html",title:"Polydactyly & Syndactyly",system:"MSK",concepts:["digit formation","BMP signaling","apoptosis","web spaces","surgical timing"],stages:6,difficulty:"Intermediate"},
+    {file:"skeletal-dysplasia-crt.html",title:"Skeletal Dysplasia",system:"MSK",concepts:["endochondral ossification","growth plate zones","FGFR3","achondroplasia","OI collagen"],stages:6,difficulty:"Advanced"},
+    {file:"thyroglossal-branchial-crt.html",title:"Thyroglossal & Branchial Anomalies",system:"ENT",concepts:["pharyngeal arches/pouches","foramen cecum","thyroglossal duct cyst","branchial cleft","Sistrunk procedure"],stages:6,difficulty:"Intermediate"},
+];
+
+const SYS_COLORS = {GI:"gi",Cardio:"cardio",Neuro:"neuro",Renal:"renal",Resp:"resp",MSK:"msk",ENT:"ent"};
+const SYS_ICONS = {GI:"🔬",Cardio:"❤️",Neuro:"🧠",Renal:"🫘",Resp:"🫁",MSK:"🦴",ENT:"👂"};
+
+let activeSystem = 'all';
+
+function init() {
+    // Build system filters
+    const systems = [...new Set(CRT_DATA.map(c=>c.system))];
+    const sysFilters = document.getElementById('sysFilters');
+    let html = '<button class="sys-btn active" onclick="setSystem(\'all\',this)">All</button>';
+    systems.forEach(s => {
+        const count = CRT_DATA.filter(c=>c.system===s).length;
+        html += '<button class="sys-btn" onclick="setSystem(\'' + s + '\',this)">' + (SYS_ICONS[s]||'📚') + ' ' + s + ' (' + count + ')</button>';
+    });
+    sysFilters.innerHTML = html;
+    
+    // Stats
+    document.getElementById('crtTotal').textContent = CRT_DATA.length;
+    document.getElementById('crtSystems').textContent = systems.length;
+    
+    let completed = 0;
+    CRT_DATA.forEach(c => {
+        try {
+            const k = c.file.replace('.html','');
+            const s = localStorage.getItem('crt-score-' + k) || localStorage.getItem('moduleScore_' + k);
+            if (s && parseInt(s) > 0) completed++;
+        } catch(e) {}
+    });
+    document.getElementById('crtCompleted').textContent = completed;
+    
+    filterCRTs();
+}
+
+function setSystem(sys, btn) {
+    activeSystem = sys;
+    document.querySelectorAll('.sys-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    filterCRTs();
+}
+
+function filterCRTs() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    let filtered = CRT_DATA;
+    
+    if (activeSystem !== 'all') {
+        filtered = filtered.filter(c => c.system === activeSystem);
+    }
+    
+    if (query) {
+        filtered = filtered.filter(c => {
+            const searchable = (c.title + ' ' + c.system + ' ' + c.concepts.join(' ')).toLowerCase();
+            return query.split(/\s+/).every(t => searchable.includes(t));
+        });
+    }
+    
+    document.getElementById('resultsInfo').textContent = filtered.length + ' of ' + CRT_DATA.length + ' CRTs';
+    
+    const grid = document.getElementById('crtGrid');
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><p>No CRTs match your search.</p></div>';
+        return;
+    }
+    
+    grid.innerHTML = filtered.map(c => {
+        const sysClass = SYS_COLORS[c.system] || 'general';
+        const sysIcon = SYS_ICONS[c.system] || '📚';
+        
+        // Check completion
+        let scoreClass = 'none', scoreText = '—';
+        try {
+            const k = c.file.replace('.html','');
+            const s = localStorage.getItem('crt-score-' + k) || localStorage.getItem('moduleScore_' + k);
+            if (s) {
+                const sv = parseInt(s);
+                if (sv > 0) { scoreClass = 'done'; scoreText = sv; }
+            }
+        } catch(e) {}
+        
+        const diffColor = c.difficulty === 'Advanced' ? 'color:#ef4444' : 'color:#f59e0b';
+        
+        return '<a href="mechanism/' + c.file + '" class="crt-card">' +
+            '<div class="crt-score ' + scoreClass + '">' + scoreText + '</div>' +
+            '<span class="crt-sys ' + sysClass + '">' + sysIcon + ' ' + c.system + '</span>' +
+            '<div class="crt-title">' + c.title + '</div>' +
+            '<div class="crt-meta">' +
+                '<span class="crt-meta-item">📊 ' + c.stages + ' stages</span>' +
+                '<span class="crt-meta-item" style="' + diffColor + '">⚡ ' + c.difficulty + '</span>' +
+            '</div>' +
+            '<div class="crt-concepts">' + c.concepts.map(k => '<span class="crt-concept">' + k + '</span>').join('') + '</div>' +
+            '</a>';
+    }).join('');
+}
+
+init();
+</script>
+<script src="dx-progress.js"></script>
+</body>
+</html>

@@ -75,7 +75,7 @@ const COACHDX_NEPHROLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'AKI Module', link: '../mechanism/aki-module.html', reason: 'Understand prerenal vs intrinsic vs postrenal' },
         { type: 'reasondx', title: 'AKI Adventure Case', link: '../ReasonDx/adventure-cases/aki-expanded.html', reason: 'Practice AKI workup and staging' },
-        { type: 'reasondx', title: 'AKI Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=aki-deep-dive', reason: 'KDIGO guidelines and management' }
+        { type: 'reasondx', title: 'AKI Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=aki-deep-dive', reason: 'KDIGO guidelines and management' }
     ],
     evidenceBase: {
         guidelines: [

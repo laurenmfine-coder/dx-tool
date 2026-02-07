@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet & Dangerous | ENDOCRINE Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #C2410C; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #7C2D12 0%, #C2410C 50%, #EA580C 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .choice-btn { display: block; width: 100%; text-align: left; padding: 16px 20px; margin: 10px 0; background: var(--card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; color: var(--text); transition: all 0.2s; font-family: inherit; font-size: inherit; }
+        .choice-btn:hover { border-color: var(--accent); transform: translateX(4px); }
+        .choice-label { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .choice-detail { font-size: 0.85rem; color: var(--muted); }
+        .alert { display: flex; gap: 16px; padding: 16px 20px; border-radius: 12px; margin: 16px 0; align-items: flex-start; }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 700; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+        .tracker { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .tracker-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .tracker-items { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tracker-item { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: var(--muted); }
+        .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+        @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🎮 Sweet & Dangerous <span class="badge">ENDOCRINE</span></div>
+            <div class="header-stats">
+                <div class="stat"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
+                <div class="stat"><div class="stat-value" id="stepCount">1/4</div><div class="stat-label">Progress</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="tracker">
+            <div class="tracker-title">DKA Bundle</div>
+            <div class="tracker-items" id="trackerItems">
+                <span class="tracker-item" id="track_0">Fluids</span> <span class="tracker-item" id="track_1">Insulin</span> <span class="tracker-item" id="track_2">K+ Check</span> <span class="tracker-item" id="track_3">Anion Gap</span> <span class="tracker-item" id="track_4">Bicarb Monitor</span> <span class="tracker-item" id="track_5">Transition</span>
+            </div>
+        </div>
+
+        <!-- Incoming Patient Card -->
+        <div class="card" id="stage_intro">
+            <div class="card-header">
+                <div class="card-phase">Incoming Patient</div>
+                <div class="card-title">🚨 EMS Radio Call</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">
+                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">19-year-old female</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">nausea, vomiting, abdominal pain, and confusion for 12 hours</span>. Known Type 1 diabetic. Ran out of insulin 3 days ago. Roommate found her lethargic with fruity breath odor. Kussmaul respirations noted."
+                </div>
+                <div class="vitals-grid">
+                    <div class="vital "><div class="vital-label">Temp</div><div class="vital-value">97.8°F</div></div><div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">128</div></div><div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">92/58</div></div><div class="vital critical"><div class="vital-label">RR</div><div class="vital-value">32</div></div><div class="vital "><div class="vital-label">SpO2</div><div class="vital-value">99%</div></div>
+                </div>
+                <div class="alert warning">
+                    <span class="alert-icon">⚠️</span>
+                    <div>
+                        <div class="alert-title">Clinical Decision Point</div>
+                        <div class="alert-desc">Classic DKA presentation: Type 1 DM, insulin non-compliance, Kussmaul breathing, fruity breath, altered mental status. What's your first priority?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="stage_arrival" class="card">
+            <div class="card-header">
+                <div class="card-phase">DECISION 1</div>
+                <div class="card-title">Resuscitation</div>
+            </div>
+            <div class="card-body">
+                
+                
+                <div id="choices_arrival">
+                    <button class="choice-btn" onclick="choose('arrival', 'fluids_first')">
+                <div class="choice-label">💧 Aggressive IV NS (1-1.5L/hr) + stat labs</div>
+                <div class="choice-detail">Volume resuscitation is priority #1 in DKA</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'insulin_first')">
+                <div class="choice-label">💉 Insulin drip immediately</div>
+                <div class="choice-detail">Start insulin to correct the hyperglycemia and acidosis</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'bicarb')">
+                <div class="choice-label">💊 IV sodium bicarbonate for acidosis</div>
+                <div class="choice-detail">Correct the metabolic acidosis directly</div>
+            </button>
+                </div>
+                <div id="fb_arrival_fluids_first" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! DKA patients are profoundly volume-depleted (average 6-9L deficit). NS at 15-20 mL/kg/hr (1-1.5L in first hour) restores perfusion and improves insulin sensitivity. DO NOT start insulin before fluids — insulin drives potassium intracellularly, and hypovolemia worsens this shift.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('labs_back')" style="margin-top:16px">Continue →</button></div><div id="fb_arrival_insulin_first" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Never start insulin before checking potassium and giving fluids! Insulin shifts K+ intracellularly. If K+ is <3.3, insulin can cause fatal hypokalemia and cardiac arrest. Fluid resuscitation must come first.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div><div id="fb_arrival_bicarb" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Bicarbonate is NOT recommended unless pH <6.9. DKA acidosis corrects with insulin (stops ketogenesis) and fluids. Bicarbonate can cause paradoxical CNS acidosis, hypokalemia, and rebound alkalosis. The gap will close with proper DKA management.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_labs_back" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 2</div>
+                <div class="card-title">Initial Labs</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">Labs confirm severe DKA: glucose 542, pH 7.12, bicarb 8, anion gap 28. K+ is 5.8 (total body potassium is actually DEPLETED despite the high serum level). You've started IV NS.</div>
+                <div class="vitals-grid"><div class="vital critical"><div class="vital-label">Glucose</div><div class="vital-value">542 mg/dL</div></div><div class="vital critical"><div class="vital-label">pH</div><div class="vital-value">7.12</div></div><div class="vital critical"><div class="vital-label">Bicarb</div><div class="vital-value">8 mEq/L</div></div><div class="vital warning"><div class="vital-label">K+</div><div class="vital-value">5.8 mEq/L</div></div><div class="vital critical"><div class="vital-label">Anion Gap</div><div class="vital-value">28</div></div><div class="vital critical"><div class="vital-label">Beta-HB</div><div class="vital-value">6.2 mmol/L</div></div></div>
+                <div id="choices_labs_back">
+                    <button class="choice-btn" onclick="choose('labs_back', 'insulin_drip')">
+                <div class="choice-label">💉 Start insulin drip 0.1 U/kg/hr + add K+ to fluids</div>
+                <div class="choice-detail">K+ is >5.3, so start insulin; add 20-30 mEq KCl to each liter since total body K+ is depleted</div>
+            </button><button class="choice-btn" onclick="choose('labs_back', 'correct_k_first')">
+                <div class="choice-label">⏸️ Hold insulin until K+ normalizes</div>
+                <div class="choice-detail">K+ is high — treat hyperkalemia first</div>
+            </button><button class="choice-btn" onclick="choose('labs_back', 'subq_insulin')">
+                <div class="choice-label">💊 Give subQ insulin lispro</div>
+                <div class="choice-detail">Rapid-acting insulin subcutaneously</div>
+            </button>
+                </div>
+                <div id="fb_labs_back_insulin_drip" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! K+ >5.3 means safe to start insulin. Despite the elevated serum K+, total body potassium is severely depleted (osmotic diuresis + vomiting). Add 20-30 mEq KCl per liter of IV fluids. Monitor K+ every 1-2 hours. Insulin dose: 0.14 U/kg bolus then 0.1 U/kg/hr OR just 0.1 U/kg/hr continuous.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('treatment_ongoing')" style="margin-top:16px">Continue →</button></div><div id="fb_labs_back_correct_k_first" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">The K+ of 5.8 is actually pseudo-hyperkalemia from acidosis and insulin deficiency. The TOTAL BODY potassium is depleted. Insulin will shift K+ back intracellularly, so you need to REPLACE it in the fluids, not treat it as hyperkalemia. Insulin is safe to start when K+ >3.3.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('labs_back')" style="margin-top:16px">Try Again</button></div><div id="fb_labs_back_subq_insulin" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">IV insulin drip is standard for DKA (better titration, predictable absorption). SubQ absorption is unreliable in severely dehydrated patients with poor perfusion. SubQ rapid-acting insulin protocols exist for mild DKA but not appropriate for pH 7.12 with hemodynamic instability.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('labs_back')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_treatment_ongoing" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 3</div>
+                <div class="card-title">4 Hours Later</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">Glucose has dropped to 280, pH improved to 7.24, bicarb is 14, anion gap is 18. K+ is now 4.0. The patient is more alert. Glucose is approaching 200.</div>
+                
+                <div id="choices_treatment_ongoing">
+                    <button class="choice-btn" onclick="choose('treatment_ongoing', 'switch_d5')">
+                <div class="choice-label">🔄 Add D5 to IV fluids + continue insulin drip</div>
+                <div class="choice-detail">Prevent hypoglycemia while continuing to close the anion gap</div>
+            </button><button class="choice-btn" onclick="choose('treatment_ongoing', 'stop_insulin')">
+                <div class="choice-label">🛑 Stop insulin drip — glucose is near goal</div>
+                <div class="choice-detail">Glucose is improving, stop the drip</div>
+            </button><button class="choice-btn" onclick="choose('treatment_ongoing', 'transition_subq')">
+                <div class="choice-label">💉 Switch to subQ insulin now</div>
+                <div class="choice-detail">Transition to subcutaneous insulin protocol</div>
+            </button>
+                </div>
+                <div id="fb_treatment_ongoing_switch_d5" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! When glucose reaches 200-250, add dextrose (D5 in half-NS) but CONTINUE the insulin drip. The goal is to close the anion gap, not just normalize glucose. Reducing the insulin rate to 0.02-0.05 U/kg/hr while adding dextrose prevents hypoglycemia while clearing ketoacidosis.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('resolution')" style="margin-top:16px">Continue →</button></div><div id="fb_treatment_ongoing_stop_insulin" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">NEVER stop insulin while the anion gap is still open (gap = 18, still elevated). Stopping insulin allows ketogenesis to resume and the patient will re-acidose. Continue insulin to clear ketones, and add dextrose to prevent hypoglycemia.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('treatment_ongoing')" style="margin-top:16px">Try Again</button></div><div id="fb_treatment_ongoing_transition_subq" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Too early to transition! Criteria for IV-to-subQ transition: anion gap closed (<12), pH >7.3, bicarb >15, patient eating. Her gap is still 18 and pH 7.24. Premature transition risks DKA recurrence — the #1 cause of DKA bounce-back.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('treatment_ongoing')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_resolution" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">RESOLUTION</div>
+                <div class="card-title">Resolution</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">By hour 12: glucose 165 on D5 fluids, pH 7.38, bicarb 22, anion gap 10, K+ 4.2. Patient is eating breakfast and her home insulin regimen has been resumed with overlap.</div>
+                
+                <div id="choices_resolution">
+                    <button class="choice-btn" onclick="choose('resolution', 'good_outcome')">
+                <div class="choice-label">📋 Transition to subQ + endocrine follow-up</div>
+                <div class="choice-detail">Anion gap closed, safe to transition</div>
+            </button>
+                </div>
+                <div id="fb_resolution_good_outcome" class="hidden">
+                        <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
+                        <div class="narrative">Excellent DKA management! Key transition rule: give subQ long-acting insulin (glargine) 2 hours BEFORE stopping the insulin drip to prevent rebound hyperglycemia. Address the root cause (ran out of insulin — ensure prescription access, education, social work consult). Endocrinology follow-up within 1 week.</div>
+                        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+                            <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
+                            <button class="choice-btn" onclick="location.href='dka-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
+                        </div></div></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    let currentStep = 0;
+    const totalSteps = 4;
+    let timerInterval;
+    let seconds = 0;
+
+    // Start timer
+    timerInterval = setInterval(() => {
+        seconds++;
+        const m = String(Math.floor(seconds/60)).padStart(2,'0');
+        const s = String(seconds%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m + ':' + s;
+    }, 1000);
+
+    function choose(stage, choice) {
+        // Hide choices
+        const choicesDiv = document.getElementById('choices_' + stage);
+        if (choicesDiv) choicesDiv.classList.add('hidden');
+
+        // Show feedback
+        const fb = document.getElementById('fb_' + stage + '_' + choice);
+        if (fb) fb.classList.remove('hidden');
+
+        // Update tracker
+        if (currentStep < totalSteps) {
+            const trackEl = document.getElementById('track_' + currentStep);
+            if (trackEl) trackEl.classList.add('done');
+        }
+    }
+
+    function goTo(stageId) {
+        // Hide all stages
+        document.querySelectorAll('[id^="stage_"]').forEach(el => el.classList.add('hidden'));
+
+        // Show target stage
+        const target = document.getElementById('stage_' + stageId);
+        if (target) {
+            target.classList.remove('hidden');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        currentStep++;
+        document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
+    }
+    </script>
+</body>
+</html>

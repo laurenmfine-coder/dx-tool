@@ -2,8 +2,45 @@
 <html lang="en">
 <head>
 <script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+// Auth Guard - Check both localStorage and allow Supabase to handle auth
+(function(){
+    var AUTH_KEY = "reasondx-user";
+    var OLD_AUTH_KEY = "reasondx-user";
+    
+    function getAuthPath() {
+        var d = (location.pathname.match(/\//g) || []).length - 1;
+        var p = "";
+        for (var i = 0; i < d; i++) p += "../";
+        return p + "auth/login.html";
+    }
+    
+    function isAuth() {
+        try {
+            // Check new key
+            var u = localStorage.getItem(AUTH_KEY);
+            if (u) {
+                var j = JSON.parse(u);
+                if (j && j.email) return true;
+            }
+            // Check old key for backward compatibility
+            var oldU = localStorage.getItem(OLD_AUTH_KEY);
+            if (oldU) {
+                var oldJ = JSON.parse(oldU);
+                if (oldJ && oldJ.email && oldJ.name) return true;
+            }
+            // Check for Supabase session
+            var sbKey = Object.keys(localStorage).find(k => k.startsWith('sb-') && k.endsWith('-auth-token'));
+            if (sbKey && localStorage.getItem(sbKey)) return true;
+        } catch(e) {}
+        return false;
+    }
+    
+    if (!isAuth()) {
+        sessionStorage.setItem("reasondx-redirect", location.href);
+        location.replace(getAuthPath());
+    }
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ReasonDx Board Prep</title>
@@ -109,6 +146,14 @@ body { transition: background 0.3s, color 0.3s; }
         .filter-group { margin-bottom: 16px; }
         .filter-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
         .filter-select { width: 100%; padding: 6px 8px; font-size: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
+        .gap-row { display:flex; align-items:center; gap:6px; font-size:11px; }
+        .gap-label { width:100px; text-align:right; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .gap-bar-bg { flex:1; height:14px; background:var(--bg-subtle); border-radius:3px; overflow:hidden; position:relative; }
+        .gap-bar-fill { height:100%; border-radius:3px; transition:width .3s; }
+        .gap-pct { width:36px; font-weight:600; font-family:'JetBrains Mono',monospace; font-size:10px; }
+        .gap-count { width:40px; font-size:10px; color:var(--text-muted); }
+        .crt-cross-link { display:inline-flex; align-items:center; gap:6px; padding:8px 12px; background:rgba(139,92,246,.1); border:1px solid rgba(139,92,246,.3); border-radius:8px; text-decoration:none; color:var(--text); font-size:12px; margin:4px; transition:all .2s; }
+        .crt-cross-link:hover { border-color:rgba(139,92,246,.6); background:rgba(139,92,246,.2); }
 
         .content { flex: 1; padding: 32px 40px; max-width: 800px; overflow-y: auto; }
         .question-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 12px; flex-wrap: wrap; }
@@ -256,7 +301,30 @@ body { transition: background 0.3s, color 0.3s; }
 
         .loading { display: flex; align-items: center; justify-content: center; padding: 60px; color: var(--text-muted); }
 
-        @media (max-width: 900px) { .sidebar { display: none; } .content { padding: 24px; max-width: 100%; } .header { padding: 0 16px; } }
+        /* Adaptive Tutor Chat Panel */
+        .tutor-panel { position: fixed; right: -420px; top: 56px; width: 400px; height: calc(100vh - 56px); background: var(--bg-card); border-left: 1px solid var(--border); box-shadow: -4px 0 20px rgba(0,0,0,0.1); z-index: 200; display: flex; flex-direction: column; transition: right 0.3s ease; }
+        .tutor-panel.open { right: 0; }
+        .tutor-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--accent-light); }
+        .tutor-title { font-size: 13px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+        .tutor-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-muted); padding: 4px; }
+        .tutor-context { padding: 10px 18px; font-size: 11px; color: var(--text-muted); border-bottom: 1px solid var(--border); background: var(--bg-subtle); }
+        .tutor-context .context-tag { display: inline-block; padding: 2px 6px; background: var(--danger-light); border-radius: 3px; font-size: 10px; color: var(--incorrect); margin-right: 4px; }
+        .tutor-messages { flex: 1; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+        .tutor-msg { max-width: 90%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+        .tutor-msg.assistant { background: var(--bg-subtle); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .tutor-msg.user { background: var(--accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .tutor-msg.loading { color: var(--text-muted); font-style: italic; }
+        .tutor-input-area { padding: 12px 18px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+        .tutor-input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; font-family: inherit; resize: none; background: var(--bg-card); color: var(--text); }
+        .tutor-input:focus { outline: none; border-color: var(--accent); }
+        .tutor-send { padding: 10px 14px; background: var(--accent); color: white; border: none; border-radius: var(--radius); font-size: 13px; font-weight: 500; cursor: pointer; }
+        .tutor-send:hover { opacity: 0.9; }
+        .tutor-send:disabled { opacity: 0.5; cursor: default; }
+        .tutor-trigger { display: none; margin-top: 12px; padding: 10px 16px; background: var(--accent-light); border: 1px solid var(--accent); border-radius: var(--radius); cursor: pointer; font-size: 12px; color: var(--accent); font-weight: 500; transition: all 0.15s; }
+        .tutor-trigger:hover { background: var(--accent); color: white; }
+        .tutor-trigger.show { display: inline-flex; align-items: center; gap: 6px; }
+
+        @media (max-width: 900px) { .sidebar { display: none; } .content { padding: 24px; max-width: 100%; } .header { padding: 0 16px; } .tutor-panel { width: 100%; right: -100%; } }
         @media (max-width: 600px) { .mode-options { grid-template-columns: 1fr; } .illness-script { grid-template-columns: 1fr; } .script-item.full { grid-column: span 1; } .start-card { padding: 28px 20px; } .results-grid { grid-template-columns: repeat(2, 1fr); } }
     
 
@@ -487,11 +555,22 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="mode-option" data-mode="tutor"><div class="mode-name">Tutor Mode</div><div class="mode-desc">Untimed · Immediate feedback</div></div>
                 <div class="mode-option" data-mode="quick"><div class="mode-name">Quick Practice</div><div class="mode-desc">10 questions · 15 min</div></div>
                 <div class="mode-option" data-mode="review"><div class="mode-name">Review Missed</div><div class="mode-desc">Previously incorrect</div></div>
+                <div class="mode-option" data-mode="custom"><div class="mode-name">Custom Block</div><div class="mode-desc">Choose # of questions</div></div>
+                <div class="mode-option" data-mode="weak"><div class="mode-name">Focus: Weak Areas</div><div class="mode-desc">Auto-targets low scores</div></div>
             </div>
             <div class="settings-group">
                 <div class="setting-row"><span class="setting-label">System</span><select class="setting-select" id="systemSelect"><option value="all">All Systems</option></select></div>
                 <div class="setting-row"><span class="setting-label">Question Type</span><select class="setting-select" id="typeSelect"><option value="all">All Types</option><option value="Diagnosis">Diagnosis</option><option value="Next Step">Next Step</option><option value="Workup">Workup</option></select></div>
                 <div class="setting-row"><span class="setting-label">Difficulty</span><select class="setting-select" id="difficultySelect"><option value="all">All Difficulties</option><option value="foundational">Foundational</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
+            </div>
+            <div id="customCountSection" class="settings-group" style="display:none;">
+                <div class="setting-row"><span class="setting-label">Questions</span><div style="display:flex;align-items:center;gap:8px;"><input type="range" id="customCount" min="5" max="100" value="20" oninput="document.getElementById('customCountVal').textContent=this.value" style="flex:1;"><span id="customCountVal" style="font-weight:600;min-width:28px;text-align:center;">20</span></div></div>
+                <div class="setting-row"><span class="setting-label">Timer</span><select class="setting-select" id="customTimer"><option value="none">No Timer</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></div>
+            </div>
+            <div id="knowledgeGap" class="settings-group" style="margin-top:12px;">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:600;">YOUR PERFORMANCE BY SYSTEM</div>
+                <div id="gapChart" style="display:grid;grid-template-columns:1fr;gap:4px;max-height:240px;overflow-y:auto;"></div>
+                <div id="gapEmpty" style="font-size:12px;color:var(--text-muted);padding:12px;text-align:center;">Complete a session to see your performance breakdown.</div>
             </div>
             <button class="btn btn-primary btn-lg btn-start" onclick="startQuiz()" id="startBtn" disabled>Loading Questions...</button>
         </div>
@@ -517,8 +596,14 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="question-stem" id="questionStem"></div>
                 <div class="options" id="optionsContainer"></div>
                 <div class="explanation" id="explanationPanel">
-                    <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div></div>
+                    <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div><button class="tutor-trigger" id="tutorTriggerBtn">🧠 Get Help From Tutor</button></div>
                     <!-- Unified Navigation -->
+                    <div class="explanation-nav">
+                        <div class="exp-tab active" data-tab="answer">Answer</div>
+                        <div class="exp-tab" data-tab="script">Illness Script</div>
+                        <div class="exp-tab" data-tab="distractors">Distractors</div>
+                        <div class="exp-tab" data-tab="resources">Resources</div>
+                    </div>
     <div class="explanation-body">
                         <div class="exp-panel active" id="panelAnswer"></div>
                         <div class="exp-panel" id="panelScript"></div>
@@ -542,6 +627,20 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="results-grid"><div class="result-card"><div class="result-value correct" id="totalCorrect">31</div><div class="result-label">Correct</div></div><div class="result-card"><div class="result-value incorrect" id="totalIncorrect">9</div><div class="result-label">Incorrect</div></div><div class="result-card"><div class="result-value" id="timeSpent">45:23</div><div class="result-label">Time</div></div></div>
                 <div class="modal-actions"><button class="btn" onclick="reviewQuestions()">Review Answers</button><button class="btn btn-primary" onclick="startNewBlock()">New Session</button></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Adaptive Tutor Chat Panel -->
+    <div class="tutor-panel" id="tutorPanel">
+        <div class="tutor-header">
+            <div class="tutor-title">🧠 Adaptive Tutor</div>
+            <button class="tutor-close" onclick="closeTutor()">×</button>
+        </div>
+        <div class="tutor-context" id="tutorContext"></div>
+        <div class="tutor-messages" id="tutorMessages"></div>
+        <div class="tutor-input-area">
+            <textarea class="tutor-input" id="tutorInput" placeholder="Ask about this question..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendTutorMessage()}"></textarea>
+            <button class="tutor-send" id="tutorSendBtn" onclick="sendTutorMessage()">Send</button>
         </div>
     </div>
 
@@ -620,7 +719,77 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             // Enable start button
             document.getElementById('startBtn').textContent = 'Begin Session';
             document.getElementById('startBtn').disabled = false;
+
+            // Mode toggle: show/hide custom count
+            document.querySelectorAll('.mode-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    const cs = document.getElementById('customCountSection');
+                    cs.style.display = opt.dataset.mode === 'custom' ? 'block' : 'none';
+                });
+            });
+
+            // Render knowledge gap chart
+            renderGapChart(systems);
         }
+
+        function renderGapChart(systems) {
+            const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const chart = document.getElementById('gapChart');
+            const empty = document.getElementById('gapEmpty');
+            if (!Object.keys(sysStats).length) { empty.style.display = 'block'; chart.style.display = 'none'; return; }
+            empty.style.display = 'none'; chart.style.display = 'grid';
+            
+            const rows = systems.map(s => {
+                const d = sysStats[s] || { correct: 0, total: 0 };
+                const pct = d.total > 0 ? Math.round(d.correct / d.total * 100) : 0;
+                return { system: s, pct, correct: d.correct, total: d.total };
+            }).sort((a, b) => a.pct - b.pct);
+
+            chart.innerHTML = rows.map(r => {
+                const color = r.pct >= 80 ? 'var(--success)' : r.pct >= 60 ? 'var(--warning)' : 'var(--danger)';
+                return `<div class="gap-row"><span class="gap-label" title="${r.system}">${r.system}</span><div class="gap-bar-bg"><div class="gap-bar-fill" style="width:${r.pct}%;background:${color};"></div></div><span class="gap-pct" style="color:${color}">${r.pct}%</span><span class="gap-count">${r.correct}/${r.total}</span></div>`;
+            }).join('');
+        }
+
+        // CRT ↔ MCQ Cross-Link Mapping
+        const crtMcqMap = {
+            'septal-defects-crt': { title: '🫀 The Hole in the Heart', system: 'Cardiac', mcqs: ['kawasaki-DX','kawasaki-disease-TX','neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'conotruncal-defects-crt': { title: '🫀 The Blue Baby', system: 'Cardiac', mcqs: ['kawasaki-disease-TX','neonatal-jaundice-WU','pediatric-dka-TX'] },
+            'pda-coarctation-crt': { title: '🫀 The Duct That Stayed Open', system: 'Cardiac', mcqs: ['kawasaki-disease-TX','neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'horseshoe-kidney-crt': { title: '🫘 The Trapped Kidney', system: 'Renal', mcqs: ['neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'puv-obstructive-uropathy-crt': { title: '🫘 The Blocked Outlet', system: 'Renal', mcqs: ['neonatal-sepsis-workup-WU'] },
+            'thyroglossal-branchial-crt': { title: '🦋 The Misplaced Gland', system: 'Endocrine', mcqs: [] },
+            'hirschsprung-disease-crt': { title: '🧬 The Missing Ganglia', system: 'GI', mcqs: ['intussusception-DX','intussusception-DX-v2','intussusception-TX','pyloric-stenosis-DX','pyloric-stenosis-WU'] },
+            'gi-embryology-malrotation-crt': { title: '🧬 The Twisted Gut', system: 'GI', mcqs: ['intussusception-DX','intussusception-DX-v2','intussusception-TX','pyloric-stenosis-DX'] },
+            'tef-esophageal-atresia-crt': { title: '🧬 The Broken Pipe', system: 'GI', mcqs: ['neonatal-sepsis-workup-WU','neonatal-meningitis-TX'] },
+            'omphalocele-gastroschisis-crt': { title: '🧬 The Open Wall', system: 'GI', mcqs: ['neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'duodenal-atresia-crt': { title: '🧬 The Double Bubble', system: 'GI', mcqs: ['pyloric-stenosis-DX','pyloric-stenosis-WU'] },
+            'meckel-diverticulum-crt': { title: '🧬 The Hidden Remnant', system: 'GI', mcqs: ['intussusception-DX','intussusception-DX-v2'] },
+            'neural-tube-defects-crt': { title: '🧠 The Open Spine', system: 'Neuro', mcqs: ['febrile-seizure-DX','febrile-seizure-WU','febrile-seizure-TX'] },
+            'holoprosencephaly-crt': { title: '🧠 The Undivided Brain', system: 'Neuro', mcqs: [] },
+            'chiari-malformation-crt': { title: '🧠 The Crowded Foramen', system: 'Neuro', mcqs: ['febrile-seizure-DX'] },
+            'dandy-walker-crt': { title: '🧠 The Missing Vermis', system: 'Neuro', mcqs: [] },
+            'corpus-callosum-agenesis-crt': { title: '🧠 The Disconnected Hemispheres', system: 'Neuro', mcqs: [] },
+            'congenital-hydrocephalus-crt': { title: '🧠 The Blocked Flow', system: 'Neuro', mcqs: ['febrile-seizure-DX','neonatal-meningitis-TX'] },
+            'cdh-congenital-diaphragmatic-hernia-crt': { title: '🫁 The Misplaced Organs', system: 'Respiratory', mcqs: ['croup-TX','croup-DX','croup-vs-epiglottitis-DX','bronchiolitis-TX'] },
+            'pulmonary-sequestration-crt': { title: '🫁 The Rogue Lobe', system: 'Respiratory', mcqs: ['bronchiolitis-TX'] },
+            'cpam-bronchogenic-cyst-crt': { title: '🫁 The Abnormal Airway', system: 'Respiratory', mcqs: ['croup-TX','bronchiolitis-TX'] },
+            'surfactant-deficiency-rds-crt': { title: '🫁 The Premature Breath', system: 'Respiratory', mcqs: ['neonatal-jaundice-WU','neonatal-jaundice-WU-v2','neonatal-sepsis-workup-WU'] },
+            'ddh-developmental-dysplasia-crt': { title: '🦴 The Unstable Hip', system: 'MSK', mcqs: ['pediatric-exanthems-DX'] },
+            'clubfoot-limb-development-crt': { title: '🦴 The Twisted Foot', system: 'MSK', mcqs: [] },
+            'polydactyly-syndactyly-crt': { title: '🦴 The Extra Digit', system: 'MSK', mcqs: [] }
+        };
+
+        // Reverse map: MCQ ID → relevant CRTs
+        const mcqToCrt = {};
+        Object.entries(crtMcqMap).forEach(([crtFile, data]) => {
+            data.mcqs.forEach(mcqId => {
+                if (!mcqToCrt[mcqId]) mcqToCrt[mcqId] = [];
+                mcqToCrt[mcqId].push({ file: crtFile, title: data.title, system: data.system });
+            });
+        });
 
         function getFilteredQuestions() {
             const system = document.getElementById('systemSelect').value;
@@ -645,6 +814,38 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 return;
             }
 
+            // Weak areas mode: prioritize low-performing systems
+            if (mode === 'weak') {
+                const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+                const weakSystems = Object.entries(sysStats)
+                    .filter(([_, d]) => d.total >= 2)
+                    .sort((a, b) => (a[1].correct / a[1].total) - (b[1].correct / b[1].total))
+                    .slice(0, 5)
+                    .map(([s]) => s);
+                
+                if (weakSystems.length > 0) {
+                    const weakQs = filtered.filter(q => weakSystems.includes(q.system));
+                    if (weakQs.length >= 5) filtered = weakQs;
+                }
+            }
+
+            // Review missed mode: pull from history
+            if (mode === 'review') {
+                const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+                const missedIds = new Set();
+                history.forEach(session => {
+                    if (!session.questions || !session.answers) return;
+                    session.questions.forEach((qId, i) => {
+                        const q = questionBank.find(x => x.id === qId);
+                        if (!q) return;
+                        const correctIdx = q.options.findIndex(o => o.correct);
+                        if (session.answers[i] !== undefined && session.answers[i] !== correctIdx) missedIds.add(qId);
+                    });
+                });
+                const missed = filtered.filter(q => missedIds.has(q.id));
+                if (missed.length > 0) filtered = missed;
+            }
+
             // Shuffle
             filtered = filtered.sort(() => Math.random() - 0.5);
 
@@ -655,6 +856,14 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             } else if (mode === 'timed') {
                 state.questions = filtered.slice(0, Math.min(40, filtered.length));
                 state.timeRemaining = 3600;
+            } else if (mode === 'custom') {
+                const count = parseInt(document.getElementById('customCount').value) || 20;
+                const timerVal = document.getElementById('customTimer').value;
+                state.questions = filtered.slice(0, Math.min(count, filtered.length));
+                state.timeRemaining = timerVal === 'none' ? null : parseInt(timerVal) * 60;
+            } else if (mode === 'weak') {
+                state.questions = filtered.slice(0, Math.min(20, filtered.length));
+                state.timeRemaining = null;
             } else {
                 state.questions = filtered.slice(0, Math.min(40, filtered.length));
                 state.timeRemaining = null;
@@ -666,6 +875,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             state.flagged = new Set();
             state.submitted = {};
             state.startTime = Date.now();
+            state.questionStartTime = Date.now(); // Track individual question timing
 
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('quizScreen').style.display = 'block';
@@ -765,6 +975,15 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             document.getElementById('resultText').className = 'result-text ' + (isCorrect ? 'correct' : 'incorrect');
             document.getElementById('resultText').textContent = isCorrect ? 'Correct' : `Incorrect — Answer: ${q.options[correctIdx].letter}`;
 
+            // Show/hide adaptive tutor button
+            const tutorBtn = document.getElementById('tutorTriggerBtn');
+            if (!isCorrect && tutorBtn) {
+                tutorBtn.classList.add('show');
+                tutorBtn.onclick = () => openTutor(q, selectedIdx);
+            } else if (tutorBtn) {
+                tutorBtn.classList.remove('show');
+            }
+
             // Answer panel
             let answerHTML = '';
             if (q.teaching) {
@@ -835,6 +1054,15 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 }
             }
             document.getElementById('panelResources').innerHTML = resourcesHTML || '<p>No additional resources.</p>';
+
+            // Inject CRT cross-links if available
+            const relatedCrts = mcqToCrt[q.id] || [];
+            if (relatedCrts.length > 0) {
+                const crtHTML = `<div class="resources-section" style="margin-top:12px;"><div class="resources-title">🧬 Related Embryology CRTs</div><div style="display:flex;flex-wrap:wrap;gap:4px;">${relatedCrts.map(c => 
+                    `<a href="../../mechanism/${c.file}.html" class="crt-cross-link">🧬 ${c.title}</a>`
+                ).join('')}</div></div>`;
+                document.getElementById('panelResources').innerHTML += crtHTML;
+            }
         }
 
         function selectOption(i) {
@@ -860,11 +1088,22 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     return;
                 }
                 state.submitted[i] = true;
+                
+                // Track for RPFS and variant analysis
+                const q = state.questions[i];
+                const correctIdx = q.options.findIndex(o => o.correct);
+                const isCorrect = state.answers[i] === correctIdx;
+                const timeSpent = Math.floor((Date.now() - (state.questionStartTime || state.startTime)) / 1000);
+                
+                trackQuestionForRPFS(q, state.answers[i], isCorrect, timeSpent);
+                trackVariantPerformance(q.id, isCorrect);
+                
                 saveProgress();
                 loadQuestion(i);
                 updateStats();
             } else {
                 if (i < state.questions.length - 1) {
+                    state.questionStartTime = Date.now(); // Track time per question
                     loadQuestion(i + 1);
                 } else {
                     showResults();
@@ -1142,13 +1381,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <script src="dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
 
-    <!-- DxSuite AI Tutor Integration -->
-    <div data-dx-tutor
-         data-module-title="ReasonDx Board Prep"
-         data-key-points="Session Complete, 🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
-         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+    <!-- DxSuite Adaptive AI Tutor Integration with ReasonLab Features -->
+    <div data-dx-adaptive-tutor
+         data-case-title="ReasonDx Board Prep"
+         data-key-points="Session Complete, 🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts, isomorphic variants, knowledge transfer"
+         data-objectives="Develop systematic clinical reasoning, master illness scripts, detect cognitive biases"
+         data-specialty="Board Prep"
          style="display:none;"></div>
-    <script src="dx-ai-tutor.js"></script>
 </body>
 </html>
 
@@ -1156,15 +1395,435 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 // System tracking for dashboard
 function trackSystemPerformance() {
     const stats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+    const typeStats = JSON.parse(localStorage.getItem('boardPrepTypeStats') || '{}');
     state.questions.forEach((q, i) => {
         if (state.submitted[i]) {
             const system = q.system || 'General';
-            if (!stats[system]) stats[system] = { correct: 0, incorrect: 0 };
+            if (!stats[system]) stats[system] = { correct: 0, incorrect: 0, total: 0 };
             const correctIdx = q.options.findIndex(o => o.correct);
-            if (state.answers[i] === correctIdx) stats[system].correct++;
+            const isCorrect = state.answers[i] === correctIdx;
+            if (isCorrect) stats[system].correct++;
             else stats[system].incorrect++;
+            stats[system].total = stats[system].correct + stats[system].incorrect;
+            
+            // Per system×type tracking
+            const typeKey = system + '|' + (q.type || 'Unknown');
+            if (!typeStats[typeKey]) typeStats[typeKey] = { correct: 0, total: 0 };
+            typeStats[typeKey].total++;
+            if (isCorrect) typeStats[typeKey].correct++;
         }
     });
     localStorage.setItem('boardPrepSystems', JSON.stringify(stats));
+    localStorage.setItem('boardPrepTypeStats', JSON.stringify(typeStats));
+}
+
+// =====================================================
+// RPFS Integration for Board Prep
+// =====================================================
+
+// Track question performance for RPFS
+function trackQuestionForRPFS(question, selectedIdx, isCorrect, timeSpent) {
+    if (typeof DxReasonLabFeatures === 'undefined') return;
+    
+    // Record decision for pathway analysis
+    DxReasonLabFeatures.recordDecision({
+        type: isCorrect ? 'correct_answer' : 'incorrect_answer',
+        action: 'question_submit',
+        data: {
+            questionId: question.id,
+            system: question.system,
+            type: question.type,
+            difficulty: question.difficulty,
+            selectedOption: question.options[selectedIdx]?.letter,
+            correctOption: question.options.find(o => o.correct)?.letter,
+            timeSpent: timeSpent,
+            concepts: question.fingerprint?.concepts || []
+        }
+    });
+    
+    // Check for cognitive bias patterns
+    analyzeBoardPrepBiases(question, selectedIdx, isCorrect);
+}
+
+// Analyze for cognitive biases in board prep context
+function analyzeBoardPrepBiases(question, selectedIdx, isCorrect) {
+    if (typeof DxReasonLabFeatures === 'undefined') return;
+    
+    const profile = DxReasonLabFeatures.getProfile();
+    if (!profile) return;
+    
+    // Track if first option selected (potential anchoring)
+    if (selectedIdx === 0 && !isCorrect) {
+        // First option bias - may indicate anchoring
+        const firstOptionStats = profile.boardPrepPatterns?.firstOptionBias || 0;
+        if (!profile.boardPrepPatterns) profile.boardPrepPatterns = {};
+        profile.boardPrepPatterns.firstOptionBias = firstOptionStats + 1;
+    }
+    
+    // Track system-specific weaknesses
+    if (!isCorrect) {
+        if (!profile.boardPrepPatterns) profile.boardPrepPatterns = {};
+        if (!profile.boardPrepPatterns.systemWeaknesses) profile.boardPrepPatterns.systemWeaknesses = {};
+        const system = question.system || 'Unknown';
+        profile.boardPrepPatterns.systemWeaknesses[system] = 
+            (profile.boardPrepPatterns.systemWeaknesses[system] || 0) + 1;
+    }
+}
+
+// Variant group tracking for knowledge transfer detection
+let variantManifest = null;
+
+async function loadVariantManifest() {
+    try {
+        const response = await fetch('data/board-prep-manifest.json');
+        if (response.ok) {
+            variantManifest = await response.json();
+            console.log('✓ Loaded variant manifest with', variantManifest.variantGroups?.length || 0, 'groups');
+        }
+    } catch (e) {
+        console.log('Variant manifest not available');
+    }
+}
+
+function getVariantGroup(questionId) {
+    if (!variantManifest?.variantGroups) return null;
+    return variantManifest.variantGroups.find(g => g.members.includes(questionId));
+}
+
+// Track variant performance for knowledge transfer detection
+function trackVariantPerformance(questionId, isCorrect) {
+    const group = getVariantGroup(questionId);
+    if (!group) return;
+    
+    const variantStats = JSON.parse(localStorage.getItem('boardPrepVariants') || '{}');
+    if (!variantStats[group.groupId]) {
+        variantStats[group.groupId] = { attempts: {}, firstEncounter: null };
+    }
+    
+    const groupStats = variantStats[group.groupId];
+    if (!groupStats.firstEncounter) {
+        groupStats.firstEncounter = { questionId, correct: isCorrect, date: new Date().toISOString() };
+    }
+    
+    groupStats.attempts[questionId] = {
+        correct: isCorrect,
+        date: new Date().toISOString()
+    };
+    
+    // Detect knowledge transfer pattern
+    const attempts = Object.values(groupStats.attempts);
+    if (attempts.length >= 2) {
+        const first = groupStats.firstEncounter;
+        const latest = groupStats.attempts[questionId];
+        
+        if (!first.correct && latest.correct) {
+            console.log('📈 Knowledge transfer detected for:', group.groupId);
+            // Could trigger badge or notification here
+        } else if (first.correct && !latest.correct) {
+            console.log('⚠️ Knowledge regression for:', group.groupId);
+        }
+    }
+    
+    localStorage.setItem('boardPrepVariants', JSON.stringify(variantStats));
+}
+
+// Initialize variant tracking on load
+document.addEventListener('DOMContentLoaded', loadVariantManifest);
+
+// =====================================================
+// ADAPTIVE TUTOR INTEGRATION
+// Calls Cloudflare worker v5 with type: "adaptive-tutor"
+// Builds performance-aware system prompts dynamically
+// =====================================================
+
+const TUTOR_WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+let tutorConversation = [];
+let tutorCurrentQuestion = null;
+
+// Get cumulative performance stats for prompt building
+function getPerformanceContext() {
+    const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+    const systemStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+    
+    // Current session stats
+    let sessionCorrect = 0, sessionIncorrect = 0, sessionStreak = 0, currentStreak = 0;
+    const systemPerf = {};
+    
+    state.questions.forEach((q, i) => {
+        if (state.submitted[i]) {
+            const correctIdx = q.options.findIndex(o => o.correct);
+            const wasCorrect = state.answers[i] === correctIdx;
+            const sys = q.system || 'General';
+            
+            if (!systemPerf[sys]) systemPerf[sys] = { correct: 0, total: 0 };
+            systemPerf[sys].total++;
+            
+            if (wasCorrect) {
+                sessionCorrect++;
+                systemPerf[sys].correct++;
+                currentStreak++;
+            } else {
+                sessionIncorrect++;
+                currentStreak = 0;
+            }
+        }
+    });
+    
+    // Find weak systems (below 60% accuracy)
+    const weakSystems = [];
+    const strongSystems = [];
+    for (const [sys, data] of Object.entries(systemPerf)) {
+        const pct = data.total > 0 ? Math.round(data.correct / data.total * 100) : 0;
+        if (pct < 60 && data.total >= 2) weakSystems.push(`${sys} (${pct}%)`);
+        if (pct >= 80 && data.total >= 2) strongSystems.push(`${sys} (${pct}%)`);
+    }
+    
+    // Recent question history (last 5)
+    const recentHistory = [];
+    const startIdx = Math.max(0, state.currentQuestion - 4);
+    for (let i = startIdx; i <= state.currentQuestion; i++) {
+        if (state.submitted[i]) {
+            const q = state.questions[i];
+            const correctIdx = q.options.findIndex(o => o.correct);
+            recentHistory.push({
+                system: q.system,
+                type: q.type,
+                correct: state.answers[i] === correctIdx
+            });
+        }
+    }
+    
+    return {
+        sessionAccuracy: sessionCorrect + sessionIncorrect > 0 
+            ? Math.round(sessionCorrect / (sessionCorrect + sessionIncorrect) * 100) : null,
+        sessionCorrect,
+        sessionIncorrect,
+        currentStreak,
+        weakSystems,
+        strongSystems,
+        cumulativeAccuracy: stats.totalCorrect + stats.totalIncorrect > 0
+            ? Math.round(stats.totalCorrect / (stats.totalCorrect + stats.totalIncorrect) * 100) : null,
+        totalSessions: stats.sessions,
+        recentHistory
+    };
+}
+
+// Build the adaptive system prompt dynamically
+function buildAdaptivePrompt(question, selectedIdx) {
+    const perf = getPerformanceContext();
+    const correctIdx = question.options.findIndex(o => o.correct);
+    const selectedOption = question.options[selectedIdx];
+    const correctOption = question.options[correctIdx];
+    
+    // Get tutorDx context from question crossLinks
+    let promptContext = null;
+    if (question.crossLinks?.tutorDx) {
+        const adaptive = question.crossLinks.tutorDx.find(t => t.requestType === 'adaptive-tutor');
+        if (adaptive) promptContext = adaptive.promptContext;
+    }
+    
+    let prompt = `You are an adaptive clinical reasoning tutor. A medical student just answered a board-prep question INCORRECTLY. Your job is to help them understand WHY they were wrong and guide them to the correct reasoning — using Socratic questioning, not by simply telling them the answer.
+
+QUESTION CONTEXT:
+- System: ${question.system}
+- Type: ${question.type}
+- Difficulty: ${question.difficulty}
+- The student selected: "${selectedOption?.letter}. ${selectedOption?.text}"
+- The correct answer was: "${correctOption?.letter}. ${correctOption?.text}"`;
+
+    if (promptContext) {
+        prompt += `
+
+TEACHING CONTEXT:
+- Key Point: ${promptContext.teachingKeyPoint}
+- Reasoning: ${promptContext.teachingReasoning || 'Not available'}
+- Knowledge Atoms: ${(promptContext.knowledgeAtoms || []).join(', ')}
+- Cognitive Traps: ${(promptContext.cognitiveTraps || []).join(', ') || 'None flagged'}
+- Reasoning Domains: ${(promptContext.reasoningDomains || []).join(', ')}`;
+
+        if (promptContext.distractorRationales && promptContext.distractorRationales[selectedOption?.letter]) {
+            prompt += `
+- Why their answer was wrong: ${promptContext.distractorRationales[selectedOption.letter]}`;
+        }
+        
+        if (promptContext.illnessScript) {
+            const is = promptContext.illnessScript;
+            prompt += `
+
+ILLNESS SCRIPT:
+- Epidemiology: ${is.epidemiology || 'N/A'}
+- Pathophysiology: ${is.pathophysiology || 'N/A'}
+- Key Features: ${is.keyFeatures || 'N/A'}`;
+        }
+    }
+
+    // Add performance context for adaptive difficulty
+    prompt += `
+
+STUDENT PERFORMANCE CONTEXT:`;
+    if (perf.sessionAccuracy !== null) {
+        prompt += `
+- Session accuracy: ${perf.sessionAccuracy}% (${perf.sessionCorrect} correct, ${perf.sessionIncorrect} incorrect)`;
+    }
+    if (perf.cumulativeAccuracy !== null) {
+        prompt += `
+- Cumulative accuracy: ${perf.cumulativeAccuracy}% across ${perf.totalSessions} sessions`;
+    }
+    if (perf.weakSystems.length > 0) {
+        prompt += `
+- WEAK SYSTEMS: ${perf.weakSystems.join(', ')}`;
+    }
+    if (perf.currentStreak > 3) {
+        prompt += `
+- Student had a ${perf.currentStreak}-question correct streak before this miss`;
+    }
+
+    // Adapt coaching style based on performance
+    if (perf.sessionAccuracy !== null && perf.sessionAccuracy < 50) {
+        prompt += `
+
+COACHING APPROACH: This student is struggling (below 50%). Be MORE supportive and scaffolding-heavy. Break concepts into smaller steps. Use concrete analogies. Build confidence while correcting the reasoning.`;
+    } else if (perf.sessionAccuracy !== null && perf.sessionAccuracy >= 75) {
+        prompt += `
+
+COACHING APPROACH: This student is performing well (${perf.sessionAccuracy}%). This was likely a knowledge gap or tricky distractor. Be more challenging — probe deeper, ask about edge cases, connect to broader concepts.`;
+    } else {
+        prompt += `
+
+COACHING APPROACH: Standard Socratic questioning. Guide through the reasoning step by step. Ask what they were thinking, identify the gap, help them reach the answer themselves.`;
+    }
+
+    prompt += `
+
+RESPONSE RULES:
+- Start by asking what drew them to their answer (don't lecture immediately)
+- Keep responses to 2-4 sentences
+- NEVER give the full explanation unprompted — guide them to discover it
+- Use the illness script and teaching points to inform your questions, not to dump information
+- If they're close, acknowledge what's right before redirecting
+- If they seem frustrated, offer a hint rather than more questions`;
+
+    return prompt;
+}
+
+// Open the tutor panel for a specific question
+function openTutor(question, selectedIdx) {
+    tutorCurrentQuestion = question;
+    tutorConversation = [];
+    
+    const correctIdx = question.options.findIndex(o => o.correct);
+    const selectedOption = question.options[selectedIdx];
+    const correctOption = question.options[correctIdx];
+    const perf = getPerformanceContext();
+    
+    // Set context display
+    const contextDiv = document.getElementById('tutorContext');
+    contextDiv.innerHTML = `
+        <span class="context-tag">✗ Incorrect</span>
+        <strong>${question.system}</strong> · ${question.type} · ${question.difficulty}
+        ${perf.weakSystems.some(ws => ws.startsWith(question.system)) ? '<span class="context-tag">Weak Area</span>' : ''}
+    `;
+    
+    // Clear messages and add opening
+    const messagesDiv = document.getElementById('tutorMessages');
+    messagesDiv.innerHTML = '';
+    
+    // Build the system prompt
+    const systemPrompt = buildAdaptivePrompt(question, selectedIdx);
+    
+    // Send initial message to get the tutor started
+    const initialMessage = `I just got this question wrong. I picked "${selectedOption?.letter}. ${selectedOption?.text}" but the correct answer was "${correctOption?.letter}."`;
+    
+    addTutorMessage('user', initialMessage);
+    sendToWorker(systemPrompt, initialMessage);
+    
+    // Open panel
+    document.getElementById('tutorPanel').classList.add('open');
+    document.getElementById('tutorInput').focus();
+}
+
+function closeTutor() {
+    document.getElementById('tutorPanel').classList.remove('open');
+}
+
+function addTutorMessage(role, text) {
+    const messagesDiv = document.getElementById('tutorMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `tutor-msg ${role}`;
+    msgDiv.textContent = text;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    
+    tutorConversation.push({ role, content: text });
+}
+
+function addLoadingMessage() {
+    const messagesDiv = document.getElementById('tutorMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'tutor-msg assistant loading';
+    msgDiv.id = 'tutorLoading';
+    msgDiv.textContent = 'Thinking...';
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function removeLoadingMessage() {
+    const el = document.getElementById('tutorLoading');
+    if (el) el.remove();
+}
+
+async function sendToWorker(systemPrompt, message) {
+    addLoadingMessage();
+    document.getElementById('tutorSendBtn').disabled = true;
+    
+    try {
+        const response = await fetch(TUTOR_WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'adaptive-tutor',
+                message: message,
+                systemPrompt: systemPrompt,
+                conversationHistory: tutorConversation.filter(m => m.role !== 'system').map(m => ({
+                    role: m.role === 'user' ? 'user' : 'assistant',
+                    content: m.content
+                })).slice(0, -1) // exclude the message we just added (it's sent as `message`)
+            })
+        });
+        
+        if (!response.ok) throw new Error(`Worker returned ${response.status}`);
+        
+        const data = await response.json();
+        removeLoadingMessage();
+        
+        if (data.response) {
+            addTutorMessage('assistant', data.response);
+        } else if (data.error) {
+            addTutorMessage('assistant', 'Sorry, I had trouble connecting. Try again in a moment.');
+            console.error('Tutor error:', data.error);
+        }
+    } catch (err) {
+        removeLoadingMessage();
+        addTutorMessage('assistant', 'Connection issue. Please try again.');
+        console.error('Tutor fetch error:', err);
+    }
+    
+    document.getElementById('tutorSendBtn').disabled = false;
+}
+
+function sendTutorMessage() {
+    const input = document.getElementById('tutorInput');
+    const text = input.value.trim();
+    if (!text) return;
+    
+    input.value = '';
+    addTutorMessage('user', text);
+    
+    // Rebuild prompt with latest performance context
+    const q = tutorCurrentQuestion;
+    const selectedIdx = state.answers[state.currentQuestion];
+    const systemPrompt = buildAdaptivePrompt(q, selectedIdx);
+    
+    sendToWorker(systemPrompt, text);
 }
 </script>

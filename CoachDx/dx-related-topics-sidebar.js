@@ -35,7 +35,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Chest Pain Workup', link: '../ReasonDx/adventure-cases/chest-pain-expanded.html', description: 'Differentiate chest pain' }
             ],
             deepDive: [
-                { title: 'ACS Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=acs-deep-dive-complete', description: 'Complete ACS algorithms' }
+                { title: 'ACS Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=acs-deep-dive-complete', description: 'Complete ACS algorithms' }
             ],
             coachdx: ['stemi-cath-activation'],
             tools: [
@@ -53,7 +53,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'HF Adventure', link: '../ReasonDx/adventure-cases/heart-failure-expanded-adventure.html', description: 'Manage acute decompensation' }
             ],
             deepDive: [
-                { title: 'HF Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=heart-failure-deep-dive', description: 'Treatment algorithms' }
+                { title: 'HF Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=heart-failure-deep-dive', description: 'Treatment algorithms' }
             ],
             coachdx: ['flash-pulmonary-edema'],
             tools: []
@@ -69,7 +69,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'AFib Adventure', link: '../ReasonDx/adventure-cases/afib-expanded-adventure.html', description: 'Rate vs rhythm control decisions' }
             ],
             deepDive: [
-                { title: 'AFib Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=afib-deep-dive', description: 'CHA2DS2-VASc and management' }
+                { title: 'AFib Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=afib-deep-dive', description: 'CHA2DS2-VASc and management' }
             ],
             coachdx: [],
             tools: []
@@ -85,7 +85,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Dissection Adventure', link: '../ReasonDx/adventure-cases/aortic-dissection-expanded.html', description: 'Recognize and manage' }
             ],
             deepDive: [
-                { title: 'Dissection Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=aortic-dissection-deep-dive', description: 'Surgical vs medical management' }
+                { title: 'Dissection Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=aortic-dissection-deep-dive', description: 'Surgical vs medical management' }
             ],
             coachdx: ['aortic-dissection-type-a'],
             tools: []
@@ -101,7 +101,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Tamponade Adventure', link: '../ReasonDx/adventure-cases/cardiac-tamponade-adventure.html', description: 'Diagnose and manage' }
             ],
             deepDive: [
-                { title: 'Tamponade Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=cardiac-tamponade-deep-dive', description: 'Echo findings and treatment' }
+                { title: 'Tamponade Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=cardiac-tamponade-deep-dive', description: 'Echo findings and treatment' }
             ],
             coachdx: ['cardiac-tamponade-becks'],
             tools: []
@@ -118,7 +118,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'PE Adventure', link: '../ReasonDx/adventure-cases/pe-expanded-adventure.html', description: 'PE workup and management' }
             ],
             deepDive: [
-                { title: 'PE Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=pe-deep-dive', description: 'Wells, PERC, treatment' }
+                { title: 'PE Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=pe-deep-dive', description: 'Wells, PERC, treatment' }
             ],
             coachdx: ['pe-massive'],
             tools: []
@@ -134,7 +134,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'COPD Adventure', link: '../ReasonDx/adventure-cases/copd-expanded-adventure.html', description: 'Manage exacerbation' }
             ],
             deepDive: [
-                { title: 'COPD Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=copd-exacerbation-deep-dive', description: 'GOLD guidelines' }
+                { title: 'COPD Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=copd-exacerbation-deep-dive', description: 'GOLD guidelines' }
             ],
             coachdx: ['copd-niv-failure'],
             tools: []
@@ -150,7 +150,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Asthma Adventure', link: '../ReasonDx/adventure-cases/asthma-exacerbation-expanded.html', description: 'Manage exacerbation' }
             ],
             deepDive: [
-                { title: 'Asthma Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=asthma-exacerbation-deep-dive', description: 'GINA guidelines' }
+                { title: 'Asthma Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=asthma-exacerbation-deep-dive', description: 'GINA guidelines' }
             ],
             coachdx: ['status-asthmaticus'],
             tools: []
@@ -166,7 +166,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'ARDS Adventure', link: '../ReasonDx/adventure-cases/ards-adventure.html', description: 'Manage ARDS' }
             ],
             deepDive: [
-                { title: 'ARDS Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=ards-deep-dive', description: 'Ventilator management' }
+                { title: 'ARDS Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=ards-deep-dive', description: 'Ventilator management' }
             ],
             coachdx: ['ards-refractory'],
             tools: []
@@ -183,7 +183,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Stroke Adventure', link: '../ReasonDx/adventure-cases/stroke-expanded-adventure.html', description: 'Stroke workup' }
             ],
             deepDive: [
-                { title: 'Stroke Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=stroke-deep-dive', description: 'tPA criteria and management' }
+                { title: 'Stroke Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=stroke-deep-dive', description: 'tPA criteria and management' }
             ],
             coachdx: ['lvo-stroke'],
             tools: []
@@ -199,7 +199,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Status Adventure', link: '../ReasonDx/adventure-cases/status-epilepticus-adventure.html', description: 'Manage status' }
             ],
             deepDive: [
-                { title: 'Status Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=status-epilepticus-deep-dive', description: 'Treatment algorithm' }
+                { title: 'Status Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=status-epilepticus-deep-dive', description: 'Treatment algorithm' }
             ],
             coachdx: ['status-epilepticus'],
             tools: []
@@ -215,7 +215,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Meningitis Adventure', link: '../ReasonDx/adventure-cases/meningitis-expanded-adventure.html', description: 'Meningitis workup' }
             ],
             deepDive: [
-                { title: 'Meningitis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=meningitis-deep-dive', description: 'CSF interpretation' }
+                { title: 'Meningitis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=meningitis-deep-dive', description: 'CSF interpretation' }
             ],
             coachdx: ['bacterial-meningitis'],
             tools: []
@@ -232,7 +232,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'DKA Adventure', link: '../ReasonDx/adventure-cases/dka-expanded-adventure.html', description: 'Manage DKA' }
             ],
             deepDive: [
-                { title: 'DKA Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=dka-deep-dive', description: 'Insulin and fluid management' }
+                { title: 'DKA Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=dka-deep-dive', description: 'Insulin and fluid management' }
             ],
             coachdx: ['dka-severe', 'hhs-hyperosmolar'],
             tools: []
@@ -248,7 +248,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Thyroid Storm Adventure', link: '../ReasonDx/adventure-cases/thyroid-storm-expanded.html', description: 'Manage thyroid storm' }
             ],
             deepDive: [
-                { title: 'Thyroid Storm Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=thyroid-storm-deep-dive', description: 'Burch-Wartofsky and treatment' }
+                { title: 'Thyroid Storm Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=thyroid-storm-deep-dive', description: 'Burch-Wartofsky and treatment' }
             ],
             coachdx: ['thyroid-storm'],
             tools: []
@@ -264,7 +264,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Adrenal Crisis Adventure', link: '../ReasonDx/adventure-cases/adrenal-crisis-adventure.html', description: 'Manage adrenal crisis' }
             ],
             deepDive: [
-                { title: 'Adrenal Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=adrenal-crisis-deep-dive', description: 'Steroid dosing' }
+                { title: 'Adrenal Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=adrenal-crisis-deep-dive', description: 'Steroid dosing' }
             ],
             coachdx: ['adrenal-crisis'],
             tools: []
@@ -281,7 +281,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'AKI Adventure', link: '../ReasonDx/adventure-cases/aki-expanded-adventure.html', description: 'AKI workup' }
             ],
             deepDive: [
-                { title: 'AKI Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=aki-deep-dive', description: 'Pre/intra/post renal' }
+                { title: 'AKI Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=aki-deep-dive', description: 'Pre/intra/post renal' }
             ],
             coachdx: ['aki-workup', 'contrast-nephropathy'],
             tools: []
@@ -297,7 +297,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Hyperkalemia Adventure', link: '../ReasonDx/adventure-cases/hyperkalemia-expanded.html', description: 'Manage hyperkalemia' }
             ],
             deepDive: [
-                { title: 'Hyperkalemia Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=hyperkalemia-deep-dive', description: 'Treatment algorithm' }
+                { title: 'Hyperkalemia Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=hyperkalemia-deep-dive', description: 'Treatment algorithm' }
             ],
             coachdx: ['hyperkalemia-emergency'],
             tools: []
@@ -314,7 +314,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'DIC Adventure', link: '../ReasonDx/adventure-cases/dic-expanded.html', description: 'Manage DIC' }
             ],
             deepDive: [
-                { title: 'DIC Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=dic-deep-dive', description: 'Diagnosis and treatment' }
+                { title: 'DIC Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=dic-deep-dive', description: 'Diagnosis and treatment' }
             ],
             coachdx: ['dic-sepsis'],
             tools: []
@@ -330,7 +330,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'TTP Adventure', link: '../ReasonDx/adventure-cases/ttp-hus-expanded.html', description: 'TTP workup' }
             ],
             deepDive: [
-                { title: 'TTP Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=ttp-hus-deep-dive', description: 'PLASMIC score, plasmapheresis' }
+                { title: 'TTP Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=ttp-hus-deep-dive', description: 'PLASMIC score, plasmapheresis' }
             ],
             coachdx: ['ttp-plasmic'],
             tools: []
@@ -347,7 +347,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Sepsis Adventure', link: '../ReasonDx/adventure-cases/sepsis-expanded-adventure.html', description: 'Sepsis management' }
             ],
             deepDive: [
-                { title: 'Sepsis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=sepsis-deep-dive', description: 'Hour-1 bundle' }
+                { title: 'Sepsis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=sepsis-deep-dive', description: 'Hour-1 bundle' }
             ],
             coachdx: ['septic-shock-source'],
             tools: []
@@ -364,7 +364,7 @@ const DxRelatedTopicsSidebar = {
                 { title: 'Anaphylaxis Adventure', link: '../ReasonDx/adventure-cases/anaphylaxis-expanded-adventure.html', description: 'Manage anaphylaxis' }
             ],
             deepDive: [
-                { title: 'Anaphylaxis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=anaphylaxis-deep-dive', description: 'Epinephrine dosing' }
+                { title: 'Anaphylaxis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=anaphylaxis-deep-dive', description: 'Epinephrine dosing' }
             ],
             coachdx: [],
             tools: []

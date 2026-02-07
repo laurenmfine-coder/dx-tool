@@ -182,7 +182,7 @@ function auditConnections() {
         'ReasonDx/index.html',
         'ReasonDx/training.html',
         'ReasonDx/adventure-hub.html',
-        'ReasonDx/deep-dive-player-integrated.html',
+        'ReasonDx/deep-dive-player.html',
         'mechanism/index.html',
         'CoachDx/index.html',
         'ConsentDx/consentdx-main.html',

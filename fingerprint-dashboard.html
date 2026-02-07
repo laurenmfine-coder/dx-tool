@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reasoning Fingerprint — ReasonDx</title>
+    <link rel="icon" href="favicon.svg">
+    <script src="mechanism/js/rdx-patent-innovations.js"></script>
+    <style>
+        :root {
+            --primary: #1E3A5F; --primary-light: #2E5090; --accent: #8B5CF6;
+            --green: #10B981; --amber: #F59E0B; --red: #EF4444; --cyan: #06B6D4;
+            --bg: #F1F5F9; --card: #FFFFFF; --text: #1E293B; --muted: #64748B;
+            --border: #E2E8F0; --radius: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 28px 32px; }
+        .header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+        .header p { opacity: 0.85; font-size: 0.95rem; }
+        .header-nav { margin-top: 12px; display: flex; gap: 12px; }
+        .header-nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; }
+        .header-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .card { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+        .card-title { font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .full-width { grid-column: 1 / -1; }
+        .score-big { font-size: 3rem; font-weight: 700; line-height: 1; }
+        .score-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .badge-green { background: #ECFDF5; color: #065F46; }
+        .badge-amber { background: #FFFBEB; color: #92400E; }
+        .badge-red { background: #FEF2F2; color: #991B1B; }
+        .badge-purple { background: #F5F3FF; color: #5B21B6; }
+        canvas { width: 100% !important; max-height: 300px; }
+        .bias-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .bias-bar .label { width: 140px; font-size: 0.82rem; color: var(--muted); flex-shrink: 0; }
+        .bias-bar .track { flex: 1; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+        .bias-bar .fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
+        .bias-bar .value { width: 40px; text-align: right; font-size: 0.82rem; font-weight: 600; }
+        .mastery-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .mastery-row:last-child { border-bottom: none; }
+        .mastery-name { flex: 1; font-size: 0.85rem; }
+        .mastery-bar { width: 120px; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .mastery-bar .fill { height: 100%; border-radius: 4px; }
+        .empty-state { text-align: center; padding: 48px 24px; color: var(--muted); }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+        .empty-state h3 { color: var(--text); margin-bottom: 8px; }
+        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-row .val { font-weight: 600; }
+        .review-item { padding: 10px 14px; margin-bottom: 8px; border-radius: 10px; background: #FFFBEB; border-left: 3px solid var(--amber); }
+        .review-item.urgent { background: #FEF2F2; border-left-color: var(--red); }
+        .review-item .case { font-weight: 600; font-size: 0.88rem; }
+        .review-item .meta { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 My Reasoning Fingerprint</h1>
+        <p>RPFS — Reasoning Pathway Fingerprinting System</p>
+        <div class="header-nav">
+            <a href="index.html">← Home</a>
+            <a href="mechanism/training.html">Case Trainer</a>
+            <a href="mechanism/instructor-dashboard.html">Instructor View</a>
+        </div>
+    </div>
+    <div class="container" id="app">
+        <div class="empty-state" id="emptyState">
+            <div class="icon">🧬</div>
+            <h3>No Reasoning Data Yet</h3>
+            <p>Complete clinical cases to build your reasoning fingerprint. Every adventure and case trainer session contributes to your RPFS profile.</p>
+            <div style="margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                <a href="ReasonDx/adventure-hub.html" style="padding:10px 20px; background:var(--accent, #3b82f6); color:white; border-radius:10px; text-decoration:none; font-weight:600;">🗺️ Start an Adventure</a>
+                <a href="mechanism/training.html" style="padding:10px 20px; background:#8b5cf6; color:white; border-radius:10px; text-decoration:none; font-weight:600;">🧠 Case Trainer</a>
+                <a href="reasonlab.html" style="padding:10px 20px; background:#059669; color:white; border-radius:10px; text-decoration:none; font-weight:600;">🔬 ReasonLab</a>
+            </div>
+        </div>
+        <div id="dashContent" style="display:none">
+            <!-- Top Score Cards -->
+            <div class="grid-3" style="margin-bottom:20px">
+                <div class="card" style="text-align:center">
+                    <div class="score-big" id="overallScore" style="color:var(--accent)">—</div>
+                    <div class="score-label">Overall Reasoning Quality</div>
+                </div>
+                <div class="card" style="text-align:center">
+                    <div class="score-big" id="totalSessions" style="color:var(--primary)">—</div>
+                    <div class="score-label">Cases Completed</div>
+                </div>
+                <div class="card" style="text-align:center">
+                    <div class="score-big" id="topicsCount" style="color:var(--green)">—</div>
+                    <div class="score-label">Topics Covered</div>
+                </div>
+            </div>
+
+            <!-- Radar + Bias Profile -->
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="card">
+                    <div class="card-title">🧬 Reasoning Fingerprint</div>
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <div class="card">
+                    <div class="card-title">🧠 Cognitive Bias Profile</div>
+                    <div id="biasProfile"></div>
+                    <p style="font-size:0.75rem;color:var(--muted);margin-top:12px">Lower bias scores = stronger clinical reasoning. Flexibility is a positive metric.</p>
+                </div>
+            </div>
+
+            <!-- Trend + Growth -->
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="card">
+                    <div class="card-title">📈 Reasoning Quality Trend</div>
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="card">
+                    <div class="card-title">🌱 LRDT Growth Curves</div>
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Topic Mastery + Recommended Review -->
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="card">
+                    <div class="card-title">🎯 Topic Mastery</div>
+                    <div id="topicMastery"></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔄 Recommended Review</div>
+                    <div id="reviewList"></div>
+                </div>
+            </div>
+
+            <!-- Session Stats -->
+            <div class="card full-width" style="margin-bottom:20px">
+                <div class="card-title">📊 Session Statistics</div>
+                <div class="grid-3" id="sessionStats"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dx-progress.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!window.RdxPatent) {
+            console.warn('Patent innovations library not loaded');
+            return;
+        }
+
+        const { RPFS, LRDT } = window.RdxPatent;
+        const agg = RPFS.getAggregate();
+        const fingerprint = RPFS.generateFingerprint();
+        const mastery = LRDT.getTopicMastery();
+        const curves = LRDT.getGrowthCurves();
+        const reviews = LRDT.getRecommendedReview();
+        const sessions = RPFS.getSessions();
+
+        if (!agg || agg.totalSessions === 0) return; // Show empty state
+        document.getElementById('emptyState').style.display = 'none';
+        document.getElementById('dashContent').style.display = 'block';
+
+        // Score cards
+        document.getElementById('overallScore').textContent = agg.avgReasoningScore;
+        document.getElementById('totalSessions').textContent = agg.totalSessions;
+        document.getElementById('topicsCount').textContent = Object.keys(mastery).length;
+
+        // Radar chart
+        if (fingerprint) {
+            new Chart(document.getElementById('radarChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Thoroughness', 'Flexibility', 'Evidence Use', 'Adaptability', 'Momentum Control', 'Metacognition', 'Overall Quality'],
+                    datasets: [{
+                        label: 'Your Fingerprint',
+                        data: [fingerprint.thoroughness, fingerprint.flexibility, fingerprint.evidenceUse,
+                               fingerprint.adaptability, fingerprint.momentum, fingerprint.metacognition, fingerprint.overallQuality],
+                        backgroundColor: 'rgba(139, 92, 246, 0.15)',
+                        borderColor: '#8B5CF6',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#8B5CF6',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { r: { beginAtZero: true, max: 100, ticks: { stepSize: 20, display: false }, grid: { color: '#E2E8F0' }, pointLabels: { font: { size: 11 } } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // Bias profile bars
+        const biasEl = document.getElementById('biasProfile');
+        const bp = agg.biasProfile;
+        const biases = [
+            { label: 'Premature Closure', val: bp.prematureClosure, color: '#EF4444', positive: false },
+            { label: 'Anchoring', val: bp.anchoring, color: '#F59E0B', positive: false },
+            { label: 'Diag. Momentum', val: bp.diagnosticMomentum, color: '#F97316', positive: false },
+            { label: 'Confirmation Bias', val: bp.confirmationBias, color: '#EC4899', positive: false },
+            { label: 'Flexibility', val: bp.hypothesisFlexibility, color: '#10B981', positive: true }
+        ];
+        biasEl.innerHTML = biases.map(b => `
+            <div class="bias-bar">
+                <div class="label">${b.label}</div>
+                <div class="track"><div class="fill" style="width:${Math.min(100,b.val)}%;background:${b.color}"></div></div>
+                <div class="value" style="color:${b.color}">${b.val}</div>
+            </div>
+        `).join('');
+
+        // Reasoning quality trend
+        if (agg.reasoningScoreTrend && agg.reasoningScoreTrend.length > 1) {
+            const trendData = agg.reasoningScoreTrend;
+            new Chart(document.getElementById('trendChart'), {
+                type: 'line',
+                data: {
+                    labels: trendData.map((_, i) => `#${i+1}`),
+                    datasets: [{
+                        label: 'Reasoning Score',
+                        data: trendData.map(t => t.score),
+                        borderColor: '#8B5CF6', backgroundColor: 'rgba(139,92,246,0.08)',
+                        fill: true, tension: 0.3, pointRadius: 3, borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true, max: 100, grid: { color: '#F1F5F9' } }, x: { grid: { display: false } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // LRDT Growth curves
+        if (curves && curves.reasoningQuality && curves.reasoningQuality.length > 1) {
+            new Chart(document.getElementById('growthChart'), {
+                type: 'line',
+                data: {
+                    labels: curves.reasoningQuality.map((_, i) => `#${i+1}`),
+                    datasets: [
+                        { label: 'Reasoning', data: curves.reasoningQuality.map(p => p.value), borderColor: '#8B5CF6', tension: 0.3, borderWidth: 2, pointRadius: 2 },
+                        { label: 'Bias-Free', data: curves.biasReduction.map(p => p.value), borderColor: '#10B981', tension: 0.3, borderWidth: 2, pointRadius: 2 },
+                        { label: 'Metacognition', data: curves.metacognition.map(p => p.value), borderColor: '#06B6D4', tension: 0.3, borderWidth: 2, pointRadius: 2 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true, max: 100, grid: { color: '#F1F5F9' } }, x: { grid: { display: false } } },
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+                }
+            });
+        }
+
+        // Topic mastery
+        const masteryEl = document.getElementById('topicMastery');
+        const topics = Object.entries(mastery).sort((a, b) => b[1].currentMastery - a[1].currentMastery);
+        if (topics.length === 0) {
+            masteryEl.innerHTML = '<p style="color:var(--muted);font-size:0.88rem">No topic data yet.</p>';
+        } else {
+            const levelColors = { expert: '#10B981', proficient: '#06B6D4', competent: '#8B5CF6', developing: '#F59E0B', novice: '#EF4444' };
+            masteryEl.innerHTML = topics.slice(0, 15).map(([caseId, t]) => `
+                <div class="mastery-row">
+                    <div class="mastery-name">${caseId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</div>
+                    <span class="badge" style="background:${levelColors[t.masteryLevel]}22;color:${levelColors[t.masteryLevel]}">${t.masteryLevel}</span>
+                    <div class="mastery-bar"><div class="fill" style="width:${t.currentMastery}%;background:${levelColors[t.masteryLevel]}"></div></div>
+                    <span style="font-size:0.82rem;font-weight:600;width:30px;text-align:right">${t.currentMastery}</span>
+                </div>
+            `).join('');
+        }
+
+        // Recommended review
+        const reviewEl = document.getElementById('reviewList');
+        if (reviews.length === 0) {
+            reviewEl.innerHTML = '<p style="color:var(--muted);font-size:0.88rem">All caught up — no reviews needed right now!</p>';
+        } else {
+            reviewEl.innerHTML = reviews.slice(0, 8).map(r => `
+                <div class="review-item ${r.urgency === 'high' ? 'urgent' : ''}">
+                    <div class="case">${r.caseId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</div>
+                    <div class="meta">${r.daysSinceReview} days since review · ${r.masteryLevel} · Score: ${r.currentMastery}</div>
+                </div>
+            `).join('');
+        }
+
+        // Session stats
+        const statsEl = document.getElementById('sessionStats');
+        const avgMin = Math.round(agg.avgSessionDuration / 60);
+        statsEl.innerHTML = `
+            <div><div class="stat-row"><span>Avg Duration</span><span class="val">${avgMin} min</span></div>
+                 <div class="stat-row"><span>Avg Pivot Points</span><span class="val">${agg.avgPivotPoints}</span></div>
+                 <div class="stat-row"><span>Avg Data Actions</span><span class="val">${agg.avgDataActions}</span></div></div>
+            <div><div class="stat-row"><span>Avg Differential Size</span><span class="val">${agg.avgDifferentialSize}</span></div>
+                 <div class="stat-row"><span>Avg Metacog Moments</span><span class="val">${agg.avgMetacogMoments}</span></div>
+                 <div class="stat-row"><span>Reasoning Score</span><span class="val">${agg.avgReasoningScore}/100</span></div></div>
+            <div><div class="stat-row"><span>Best Case</span><span class="val">${getBestCase()}</span></div>
+                 <div class="stat-row"><span>Needs Work</span><span class="val">${getWeakestCase()}</span></div>
+                 <div class="stat-row"><span>Sessions</span><span class="val">${agg.totalSessions}</span></div></div>
+        `;
+
+        function getBestCase() {
+            const cp = agg.casePerformance || {};
+            let best = '', bestScore = 0;
+            for (const [k, v] of Object.entries(cp)) { if (v.avgScore > bestScore) { bestScore = v.avgScore; best = k; } }
+            return best ? best.replace(/-/g, ' ').substring(0, 18) : '—';
+        }
+        function getWeakestCase() {
+            const cp = agg.casePerformance || {};
+            let worst = '', worstScore = 100;
+            for (const [k, v] of Object.entries(cp)) { if (v.avgScore < worstScore && v.attempts > 0) { worstScore = v.avgScore; worst = k; } }
+            return worst ? worst.replace(/-/g, ' ').substring(0, 18) : '—';
+        }
+    });
+    </script>
+<script src="dx-epa-integration.js"></script>
+</body>
+</html>

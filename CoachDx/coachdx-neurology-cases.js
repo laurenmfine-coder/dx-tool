@@ -72,7 +72,7 @@ const COACHDX_NEUROLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Status Epilepticus Module', link: '../mechanism/status-epilepticus-module.html', reason: 'Understand seizure pathophysiology' },
         { type: 'reasondx', title: 'Status Epilepticus Adventure', link: '../ReasonDx/adventure-cases/status-epilepticus-adventure.html', reason: 'Practice SE management' },
-        { type: 'reasondx', title: 'Status Epilepticus Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=status-epilepticus-deep-dive', reason: 'AES guidelines and algorithms' }
+        { type: 'reasondx', title: 'Status Epilepticus Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=status-epilepticus-deep-dive', reason: 'AES guidelines and algorithms' }
     ],
     evidenceBase: {
         guidelines: [
@@ -147,7 +147,7 @@ const COACHDX_NEUROLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'SAH Module', link: '../mechanism/sah-module.html', reason: 'Understand aneurysm pathophysiology' },
         { type: 'reasondx', title: 'SAH Adventure', link: '../ReasonDx/adventure-cases/sah-expanded.html', reason: 'Practice SAH workup' },
-        { type: 'reasondx', title: 'Headache Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=headache-deep-dive', reason: 'Dangerous headache red flags' }
+        { type: 'reasondx', title: 'Headache Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=headache-deep-dive', reason: 'Dangerous headache red flags' }
     ],
     evidenceBase: {
         guidelines: [
@@ -372,7 +372,7 @@ const COACHDX_NEUROLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Spinal Cord Module', link: '../mechanism/spinal-cord-module.html', reason: 'Understand cord anatomy and compression' },
         { type: 'reasondx', title: 'Spinal Cord Compression Adventure', link: '../ReasonDx/adventure-cases/spinal-cord-compression-expanded.html', reason: 'Practice SCC workup' },
-        { type: 'reasondx', title: 'Oncologic Emergencies', link: '../ReasonDx/deep-dive-player-integrated.html?module=oncologic-emergencies-deep-dive', reason: 'Broader onc emergency context' }
+        { type: 'reasondx', title: 'Oncologic Emergencies', link: '../ReasonDx/deep-dive-player.html?module=oncologic-emergencies-deep-dive', reason: 'Broader onc emergency context' }
     ],
     evidenceBase: {
         guidelines: [

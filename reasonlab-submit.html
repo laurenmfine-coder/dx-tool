@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Case | ReasonLab — DxSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --lab: #7c3aed; --lab-dark: #6d28d9; --lab-light: #ede9fe; --primary: #059669; --bg: #f8fafc; --text: #18181b; --muted: #64748b; --border: #e4e4e7; --success: #059669; --danger: #dc2626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+        .nav { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-link { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav-link:hover { color: var(--text); }
+        .nav-link.active { color: var(--lab); font-weight: 600; }
+        .page-header { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 48px 24px; color: white; }
+        .page-header-inner { max-width: 800px; margin: 0 auto; }
+        .breadcrumb { font-size: 14px; opacity: 0.7; margin-bottom: 16px; }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .page-header h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+        .page-header p { font-size: 16px; opacity: 0.9; line-height: 1.6; }
+        .form-container { max-width: 800px; margin: -32px auto 48px; padding: 0 24px; position: relative; z-index: 10; }
+        .progress-bar { background: white; border-radius: 16px; padding: 24px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; }
+        .steps { display: flex; justify-content: space-between; position: relative; }
+        .steps::before { content: ''; position: absolute; top: 20px; left: 40px; right: 40px; height: 3px; background: #e2e8f0; }
+        .step { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; flex: 1; }
+        .step-circle { width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: var(--muted); transition: all 0.3s; }
+        .step.active .step-circle { background: var(--lab); color: white; }
+        .step.completed .step-circle { background: var(--success); color: white; }
+        .step-label { font-size: 12px; margin-top: 8px; color: var(--muted); font-weight: 600; }
+        .step.active .step-label { color: var(--lab); }
+        .step.completed .step-label { color: var(--success); }
+        .form-section { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 24px; display: none; }
+        .form-section.active { display: block; }
+        .form-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .section-desc { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        label .required { color: var(--danger); }
+        label .optional { color: var(--muted); font-weight: 400; font-size: 12px; }
+        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; font-family: inherit; background: white; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--lab); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+        textarea { resize: vertical; min-height: 100px; }
+        .char-count { font-size: 12px; color: var(--muted); text-align: right; margin-top: 4px; }
+        .help-text { font-size: 13px; color: var(--muted); margin-top: 4px; }
+        .deident-warning { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; display: flex; gap: 12px; }
+        .deident-warning .icon { font-size: 24px; flex-shrink: 0; }
+        .deident-warning h4 { font-size: 14px; font-weight: 700; color: #92400e; margin-bottom: 4px; }
+        .deident-warning p, .deident-warning ul { font-size: 13px; color: #92400e; line-height: 1.6; }
+        .deident-warning ul { margin: 8px 0 0 16px; }
+        .dynamic-item { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+        .dynamic-item input { flex: 1; }
+        .dynamic-item select { width: 140px; flex-shrink: 0; }
+        .remove-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #fee2e2; background: #fef2f2; color: var(--danger); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .add-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1.5px dashed var(--lab); border-radius: 8px; background: transparent; color: var(--lab); font-weight: 600; font-size: 13px; cursor: pointer; margin-top: 4px; }
+        .add-btn:hover { background: var(--lab-light); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .vital-input { display: flex; align-items: center; gap: 8px; }
+        .vital-input label { margin: 0; font-size: 13px; white-space: nowrap; min-width: 50px; }
+        .vital-input input { flex: 1; padding: 10px 12px; }
+        .vital-unit { font-size: 12px; color: var(--muted); }
+        .pe-systems { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .pe-system { border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; }
+        .pe-system-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .pe-system-header label { margin: 0; font-size: 14px; }
+        .pe-status button { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: white; font-size: 12px; cursor: pointer; margin-left: 4px; }
+        .pe-status button.active-normal { background: #dcfce7; border-color: #86efac; color: #166534; }
+        .pe-status button.active-abnormal { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+        .pe-findings { display: none; }
+        .pe-findings.visible { display: block; margin-top: 8px; }
+        .diagnosis-card { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .diagnosis-card h3 { color: #166534; font-size: 18px; margin-bottom: 12px; }
+        .ddx-item { display: grid; grid-template-columns: 40px 1fr 1fr; gap: 8px; align-items: center; margin-bottom: 8px; }
+        .ddx-rank { width: 36px; height: 36px; background: var(--lab-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--lab); font-size: 14px; }
+        .form-actions { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--border); }
+        .btn-back { padding: 12px 24px; border: 1.5px solid var(--border); border-radius: 10px; background: white; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--muted); }
+        .btn-next { padding: 12px 32px; background: var(--lab); color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .btn-next:hover { background: var(--lab-dark); }
+        .btn-submit { padding: 14px 40px; background: linear-gradient(135deg, var(--lab), #2563eb); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; }
+        .review-block { background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .review-block h4 { font-size: 15px; font-weight: 600; color: var(--lab); margin-bottom: 12px; }
+        .review-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .review-row:last-child { border: none; }
+        .review-label { color: var(--muted); }
+        .review-value { font-weight: 600; max-width: 60%; text-align: right; }
+        .consent-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .consent-box label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; margin: 0; }
+        .consent-box input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; accent-color: var(--lab); }
+        .success-state { text-align: center; padding: 60px 24px; }
+        .success-icon { font-size: 72px; margin-bottom: 16px; }
+        .success-state h2 { font-size: 28px; font-weight: 800; color: var(--success); margin-bottom: 12px; }
+        .success-state p { color: var(--muted); max-width: 500px; margin: 0 auto 32px; line-height: 1.6; }
+        @media (max-width: 768px) { .form-row, .vitals-grid, .pe-systems { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+    <a href="index.html" class="nav-brand">DxSuite</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="board-prep.html" class="nav-link">Board Prep</a>
+        <a href="reasonlab.html" class="nav-link active">ReasonLab</a>
+        <a href="learn-hub.html" class="nav-link">Learn</a>
+        <a href="crt-hub.html" class="nav-link">Reasoning</a>
+        <a href="tools/learning-dashboard.html" class="nav-link">My Progress</a>
+    </div>
+</div></nav>
+
+<div class="page-header"><div class="page-header-inner">
+    <div class="breadcrumb"><a href="reasonlab.html">ReasonLab</a> → Submit a Case</div>
+    <h1>📋 Submit a Case</h1>
+    <p>Share a de-identified case from your clinical experience. It becomes a diagnostic reasoning challenge for the community, generating expert-vs-novice pathway data through RPFS.</p>
+</div></div>
+
+<div class="form-container">
+    <div class="progress-bar"><div class="steps">
+        <div class="step active" id="step-ind-1"><div class="step-circle">1</div><div class="step-label">Patient Info</div></div>
+        <div class="step" id="step-ind-2"><div class="step-circle">2</div><div class="step-label">History</div></div>
+        <div class="step" id="step-ind-3"><div class="step-circle">3</div><div class="step-label">Exam & Workup</div></div>
+        <div class="step" id="step-ind-4"><div class="step-circle">4</div><div class="step-label">Diagnosis</div></div>
+        <div class="step" id="step-ind-5"><div class="step-circle">5</div><div class="step-label">Review</div></div>
+    </div></div>
+
+    <!-- STEP 1: Patient Info -->
+    <div class="form-section active" id="section-1">
+        <h2>👤 Patient Information & Presentation</h2>
+        <div class="section-desc">De-identified demographics and chief complaint. This is what solvers will see first.</div>
+        <div class="deident-warning"><div class="icon">⚠️</div><div>
+            <h4>De-Identification Required (HIPAA Safe Harbor)</h4>
+            <p>All cases must be fully de-identified before submission:</p>
+            <ul><li>No names, initials, or personal identifiers</li><li>No dates more specific than year</li><li>No geographic data smaller than state</li><li>Use "90+" for ages over 89</li><li>No MRNs, device IDs, URLs, or photographs</li></ul>
+        </div></div>
+        <div class="form-group"><label>Case Title <span class="required">*</span></label><input type="text" id="caseTitle" placeholder="e.g., The Breathless Runner — intriguing, non-revealing" maxlength="80"><div class="char-count"><span id="titleCount">0</span>/80</div></div>
+        <div class="form-row">
+            <div class="form-group"><label>Patient Age <span class="required">*</span></label><input type="number" id="patientAge" placeholder="42" min="0" max="120"><div class="help-text">Use "90" for patients 90+</div></div>
+            <div class="form-group"><label>Sex/Gender <span class="required">*</span></label><select id="patientGender"><option value="">Select...</option><option>Male</option><option>Female</option><option>Non-binary</option><option>Other</option></select></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Primary Specialty <span class="required">*</span></label><select id="caseSpecialty"><option value="">Select...</option><option value="allergy">Allergy/Immunology</option><option value="cardiology">Cardiology</option><option value="dermatology">Dermatology</option><option value="emergency">Emergency Medicine</option><option value="endocrine">Endocrine</option><option value="gi">Gastroenterology</option><option value="heme-onc">Hematology/Oncology</option><option value="infectious-disease">Infectious Disease</option><option value="nephrology">Nephrology</option><option value="neurology">Neurology</option><option value="obgyn">OB/GYN</option><option value="pediatrics">Pediatrics</option><option value="psychiatry">Psychiatry</option><option value="pulmonary">Pulmonary/Critical Care</option><option value="rheumatology">Rheumatology</option><option value="surgery">Surgery</option></select></div>
+            <div class="form-group"><label>Difficulty <span class="required">*</span></label><select id="caseDifficulty"><option value="">Select...</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option><option value="expert">Expert Challenge</option></select></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Clinical Setting <span class="required">*</span></label><select id="caseSetting"><option value="">Select...</option><option>Emergency Department</option><option>Inpatient Ward</option><option>ICU</option><option>Outpatient Clinic</option><option>Urgent Care</option></select></div>
+            <div class="form-group"><label>Urgency <span class="required">*</span></label><select id="caseUrgency"><option value="">Select...</option><option value="emergent">Emergent</option><option value="urgent">Urgent</option><option value="semi-urgent">Semi-Urgent</option><option value="routine">Routine</option></select></div>
+        </div>
+        <div class="form-group"><label>Chief Complaint <span class="required">*</span></label><textarea id="chiefComplaint" placeholder="1-2 sentences as documented clinically. This is the first thing solvers see." maxlength="300"></textarea><div class="char-count"><span id="ccCount">0</span>/300</div></div>
+        <div class="form-group"><label>Why This Case Is Interesting <span class="optional">(for reviewers only, not shown to solvers)</span></label><textarea id="caseContext" placeholder="What made this case challenging or educational?" maxlength="500" style="min-height:80px;"></textarea></div>
+        <div class="form-actions"><div></div><button class="btn-next" onclick="goStep(2)">Continue to History →</button></div>
+    </div>
+
+    <!-- STEP 2: History -->
+    <div class="form-section" id="section-2">
+        <h2>📝 Clinical History</h2>
+        <div class="section-desc">HPI, past medical history, medications, and relevant social/family history.</div>
+        <div class="form-group"><label>History of Present Illness <span class="required">*</span></label><textarea id="hpi" placeholder="Write the HPI as for a clinical note. Include onset, duration, character, associated symptoms, aggravating/alleviating factors." style="min-height:160px;" maxlength="2000"></textarea><div class="char-count"><span id="hpiCount">0</span>/2000</div></div>
+        <div class="form-group"><label>Associated Symptoms</label><div id="symptomList"><div class="dynamic-item"><input type="text" placeholder="e.g., Fever 101.2°F"><select><option>Present</option><option>Absent</option><option>Pertinent Negative</option></select><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button></div></div><button class="add-btn" onclick="addDynamic('symptomList','Symptom','Present|Absent|Pertinent Negative')">+ Add Symptom</button></div>
+        <div class="form-group"><label>Past Medical History <span class="required">*</span></label><textarea id="pmh" placeholder="Significant past conditions, surgeries, hospitalizations" style="min-height:80px;"></textarea></div>
+        <div class="form-row">
+            <div class="form-group"><label>Medications <span class="required">*</span></label><textarea id="medications" placeholder="Current medications with doses. 'None' if applicable." style="min-height:80px;"></textarea></div>
+            <div class="form-group"><label>Allergies</label><textarea id="allergies" placeholder="Drug allergies and reactions. 'NKDA' if none." style="min-height:80px;"></textarea></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Family History <span class="optional">(relevant)</span></label><textarea id="familyHx" placeholder="Relevant family history only" style="min-height:80px;"></textarea></div>
+            <div class="form-group"><label>Social History <span class="optional">(relevant)</span></label><textarea id="socialHx" placeholder="Occupation, substances, exposures (de-identified)" style="min-height:80px;"></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn-back" onclick="goStep(1)">← Back</button><button class="btn-next" onclick="goStep(3)">Continue to Exam →</button></div>
+    </div>
+
+    <!-- STEP 3: Exam & Workup -->
+    <div class="form-section" id="section-3">
+        <h2>🩺 Physical Exam & Workup</h2>
+        <div class="section-desc">Vitals, PE findings, and results of studies actually performed.</div>
+        <div class="form-group"><label>Vital Signs <span class="required">*</span></label>
+            <div class="vitals-grid">
+                <div class="vital-input"><label>HR</label><input type="text" id="vs-hr" placeholder="82"><span class="vital-unit">bpm</span></div>
+                <div class="vital-input"><label>BP</label><input type="text" id="vs-bp" placeholder="128/82"><span class="vital-unit">mmHg</span></div>
+                <div class="vital-input"><label>RR</label><input type="text" id="vs-rr" placeholder="18"><span class="vital-unit">/min</span></div>
+                <div class="vital-input"><label>Temp</label><input type="text" id="vs-temp" placeholder="98.6"><span class="vital-unit">°F</span></div>
+                <div class="vital-input"><label>SpO2</label><input type="text" id="vs-spo2" placeholder="97"><span class="vital-unit">%</span></div>
+                <div class="vital-input"><label>Wt</label><input type="text" id="vs-wt" placeholder="75"><span class="vital-unit">kg</span></div>
+            </div>
+        </div>
+        <div class="form-group"><label>Physical Examination <span class="required">*</span></label><div class="help-text" style="margin-bottom:12px;">Mark each system normal or abnormal. Describe abnormal findings.</div><div class="pe-systems" id="peGrid"></div></div>
+        <div class="form-group"><label>Lab Results</label><div id="labList"><div class="dynamic-item"><input type="text" placeholder="Test (e.g., CBC, BMP)" style="flex:0.8"><input type="text" placeholder="Result with units" style="flex:1.2"><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button></div></div><button class="add-btn" onclick="addPair('labList','Test name','Result with units')">+ Add Lab</button></div>
+        <div class="form-group"><label>Imaging</label><div id="imgList"><div class="dynamic-item"><input type="text" placeholder="Study (e.g., CXR, CT)" style="flex:0.7"><input type="text" placeholder="Key findings" style="flex:1.3"><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button></div></div><button class="add-btn" onclick="addPair('imgList','Study type','Key findings')">+ Add Imaging</button></div>
+        <div class="form-group"><label>Other Studies / Procedures</label><div id="otherList"><div class="dynamic-item"><input type="text" placeholder="Study/Procedure" style="flex:0.7"><input type="text" placeholder="Key findings" style="flex:1.3"><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button></div></div><button class="add-btn" onclick="addPair('otherList','Study/Procedure','Key findings')">+ Add Study</button></div>
+        <div class="form-actions"><button class="btn-back" onclick="goStep(2)">← Back</button><button class="btn-next" onclick="goStep(4)">Continue to Diagnosis →</button></div>
+    </div>
+
+    <!-- STEP 4: Diagnosis -->
+    <div class="form-section" id="section-4">
+        <h2>🎯 Diagnosis & Teaching Points</h2>
+        <div class="section-desc">Hidden from solvers until they complete the case.</div>
+        <div class="diagnosis-card">
+            <h3>✅ Confirmed Diagnosis</h3>
+            <div class="form-group" style="margin-bottom:12px;"><label>Diagnosis <span class="required">*</span></label><input type="text" id="finalDx" placeholder="e.g., Pulmonary embolism with right heart strain"></div>
+            <div class="form-group" style="margin-bottom:0;"><label>How Confirmed <span class="required">*</span></label><input type="text" id="dxConfirm" placeholder="e.g., CT-PA showing bilateral PE, elevated troponin"></div>
+        </div>
+        <div class="form-group"><label>Differential Diagnosis (Ranked) <span class="required">*</span></label>
+            <div class="help-text" style="margin-bottom:12px;">Top differentials as they should be reasoned through — this becomes the expert pathway benchmark.</div>
+            <div id="ddxList">
+                <div class="ddx-item"><div class="ddx-rank">1</div><input type="text" placeholder="Primary diagnosis"><input type="text" placeholder="Key distinguishing feature"></div>
+                <div class="ddx-item"><div class="ddx-rank">2</div><input type="text" placeholder="Second differential"><input type="text" placeholder="Key distinguishing feature"></div>
+                <div class="ddx-item"><div class="ddx-rank">3</div><input type="text" placeholder="Third differential"><input type="text" placeholder="Key distinguishing feature"></div>
+            </div>
+            <button class="add-btn" onclick="addDdx()" style="margin-top:8px;">+ Add Differential</button>
+        </div>
+        <div class="form-group"><label>Common Pitfalls / Cognitive Traps</label><textarea id="pitfalls" placeholder="What makes this case tricky? What biases does it expose?" style="min-height:100px;" maxlength="1000"></textarea></div>
+        <div class="form-group"><label>Key Teaching Points <span class="required">*</span></label><div id="teachList"><div class="dynamic-item"><textarea placeholder="Teaching point #1" style="min-height:60px;flex:1;"></textarea><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()" style="align-self:flex-start;margin-top:4px;">×</button></div></div><button class="add-btn" onclick="addTeach()">+ Add Teaching Point</button></div>
+        <div class="form-group"><label>What Happens If Missed?</label><textarea id="missedConseq" placeholder="Consequences of delay or misdiagnosis" style="min-height:80px;" maxlength="500"></textarea></div>
+        <div class="form-group"><label>References <span class="optional">(open-access only)</span></label><div id="refList"><div class="dynamic-item"><input type="text" placeholder="e.g., StatPearls: Pulmonary Embolism (PMID: 28613684)" style="flex:1"><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button></div></div><button class="add-btn" onclick="addRef()">+ Add Reference</button></div>
+        <div class="form-actions"><button class="btn-back" onclick="goStep(3)">← Back</button><button class="btn-next" onclick="goStep(5)">Review & Submit →</button></div>
+    </div>
+
+    <!-- STEP 5: Review -->
+    <div class="form-section" id="section-5">
+        <h2>✅ Review & Submit</h2>
+        <div class="section-desc">Review your case before submitting for community review.</div>
+        <div id="reviewContent"></div>
+        <div class="form-group" style="margin-top:24px;"><label>Your Training Level <span class="required">*</span></label>
+            <select id="submitterLevel"><option value="">Select...</option><option>MS-1</option><option>MS-2</option><option>MS-3</option><option>MS-4</option><option>PGY-1</option><option>PGY-2</option><option>PGY-3</option><option>PGY-4</option><option>PGY-5+ (Fellow)</option><option>Attending</option><option>PA</option><option>NP</option><option>Faculty</option><option>Other</option></select>
+        </div>
+        <div class="form-group"><label>Display Name <span class="required">*</span></label><input type="text" id="displayName" placeholder="e.g., AllergyFellow_NSU (pseudonym — NOT your real name)"><div class="help-text">This appears publicly on the case card.</div></div>
+        <div class="consent-box"><label><input type="checkbox" id="consentCheck"><div><strong>I confirm this case is fully de-identified</strong> per HIPAA Safe Harbor standards. I understand it will be shared with the ReasonLab community and pathway data may be used for aggregate educational research.</div></label></div>
+        <div class="consent-box"><label><input type="checkbox" id="researchConsent"><div><strong>Research Contribution (Optional):</strong> I consent to my case and associated pathway data being included in aggregate, de-identified research studying diagnostic reasoning patterns.</div></label></div>
+        <div class="form-actions"><button class="btn-back" onclick="goStep(4)">← Back</button><button class="btn-submit" onclick="submitCase()" id="submitBtn" disabled>📋 Submit Case for Review</button></div>
+    </div>
+
+    <!-- Success -->
+    <div class="form-section" id="section-success" style="display:none;">
+        <div class="success-state">
+            <div class="success-icon">🎉</div>
+            <h2>Case Submitted!</h2>
+            <p>Your case is now in the faculty review queue. Once approved, it goes live on ReasonLab where community members solve it blind while RPFS captures every decision pathway.</p>
+            <div style="background:#f0fdf4;border-radius:12px;padding:20px;margin:24px auto;max-width:400px;text-align:left;">
+                <div style="font-weight:600;color:#166534;margin-bottom:8px;">What Happens Next:</div>
+                <div style="font-size:14px;color:#166534;line-height:1.8;">1. Faculty reviews (24-72 hrs)<br>2. Case goes live on ReasonLab<br>3. Solvers work through it blind<br>4. RPFS captures every pathway<br>5. You see expert-novice comparison data</div>
+            </div>
+            <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+                <a href="reasonlab.html" class="btn-next" style="text-decoration:none;">← Back to ReasonLab</a>
+                <button class="btn-next" style="background:var(--success);" onclick="location.reload()">Submit Another Case</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const PE = ['General','HEENT','Cardiovascular','Pulmonary','Abdomen','Extremities/MSK','Neurological','Skin','Psychiatric','Lymphatic'];
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('peGrid').innerHTML = PE.map((s,i) => `<div class="pe-system"><div class="pe-system-header"><label>${s}</label><div class="pe-status"><button onclick="setPE(${i},'n',this)" class="active-normal">Normal</button><button onclick="setPE(${i},'a',this)">Abnormal</button></div></div><div class="pe-findings" id="pef-${i}"><textarea placeholder="Describe abnormal findings..." style="min-height:60px;width:100%;"></textarea></div></div>`).join('');
+    ['caseTitle','chiefComplaint','hpi'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('input', () => { const c = document.getElementById(id.replace('caseTitle','title').replace('chiefComplaint','cc').replace('hpi','hpi')+'Count'); if(c) c.textContent = el.value.length; });
+    });
+    document.getElementById('consentCheck').addEventListener('change', function(){ document.getElementById('submitBtn').disabled = !this.checked; });
+});
+function setPE(i,status,btn){
+    btn.closest('.pe-system').querySelectorAll('.pe-status button').forEach(b=>{b.classList.remove('active-normal','active-abnormal');});
+    btn.classList.add(status==='n'?'active-normal':'active-abnormal');
+    document.getElementById('pef-'+i).classList.toggle('visible',status==='a');
+}
+function addDynamic(listId,ph,opts){ const d=document.createElement('div'); d.className='dynamic-item'; d.innerHTML=`<input type="text" placeholder="${ph}"><select>${opts.split('|').map(o=>`<option>${o}</option>`).join('')}</select><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button>`; document.getElementById(listId).appendChild(d); }
+function addPair(listId,ph1,ph2){ const d=document.createElement('div'); d.className='dynamic-item'; d.innerHTML=`<input type="text" placeholder="${ph1}" style="flex:0.8"><input type="text" placeholder="${ph2}" style="flex:1.2"><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button>`; document.getElementById(listId).appendChild(d); }
+function addDdx(){ const l=document.getElementById('ddxList'); const n=l.children.length+1; const d=document.createElement('div'); d.className='ddx-item'; d.innerHTML=`<div class="ddx-rank">${n}</div><input type="text" placeholder="Diagnosis"><input type="text" placeholder="Key distinguishing feature">`; l.appendChild(d); }
+function addTeach(){ const d=document.createElement('div'); d.className='dynamic-item'; d.innerHTML=`<textarea placeholder="Teaching point" style="min-height:60px;flex:1;"></textarea><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()" style="align-self:flex-start;margin-top:4px;">×</button>`; document.getElementById('teachList').appendChild(d); }
+function addRef(){ const d=document.createElement('div'); d.className='dynamic-item'; d.innerHTML=`<input type="text" placeholder="Open-access reference" style="flex:1"><button class="remove-btn" onclick="this.closest('.dynamic-item').remove()">×</button>`; document.getElementById('refList').appendChild(d); }
+let curStep=1;
+function goStep(s){
+    document.getElementById('section-'+curStep).classList.remove('active');
+    document.getElementById('step-ind-'+curStep).classList.remove('active');
+    if(s>curStep) document.getElementById('step-ind-'+curStep).classList.add('completed');
+    curStep=s;
+    document.getElementById('section-'+s).classList.add('active');
+    document.getElementById('step-ind-'+s).classList.add('active');
+    for(let i=s;i<=5;i++) if(i>s) document.getElementById('step-ind-'+i).classList.remove('completed','active');
+    if(s===5) buildReview();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+function buildReview(){
+    const v=id=>document.getElementById(id)?.value?.trim()||'—';
+    document.getElementById('reviewContent').innerHTML=`
+        <div class="review-block"><h4>👤 Patient & Presentation</h4>
+            <div class="review-row"><span class="review-label">Title</span><span class="review-value">${v('caseTitle')}</span></div>
+            <div class="review-row"><span class="review-label">Age / Sex</span><span class="review-value">${v('patientAge')} / ${v('patientGender')}</span></div>
+            <div class="review-row"><span class="review-label">Specialty</span><span class="review-value">${v('caseSpecialty')}</span></div>
+            <div class="review-row"><span class="review-label">Chief Complaint</span><span class="review-value">${v('chiefComplaint')}</span></div></div>
+        <div class="review-block"><h4>📝 History</h4>
+            <div class="review-row"><span class="review-label">HPI</span><span class="review-value" style="max-width:70%;text-align:left">${v('hpi').substring(0,200)}${v('hpi').length>200?'...':''}</span></div>
+            <div class="review-row"><span class="review-label">PMH</span><span class="review-value">${v('pmh').substring(0,100)}</span></div></div>
+        <div class="review-block"><h4>🩺 Exam & Workup</h4>
+            <div class="review-row"><span class="review-label">Vitals</span><span class="review-value">HR:${v('vs-hr')} BP:${v('vs-bp')} RR:${v('vs-rr')} T:${v('vs-temp')} SpO2:${v('vs-spo2')}</span></div></div>
+        <div class="review-block"><h4>🎯 Diagnosis</h4>
+            <div class="review-row"><span class="review-label">Final Diagnosis</span><span class="review-value" style="color:#059669;font-weight:700;">${v('finalDx')}</span></div>
+            <div class="review-row"><span class="review-label">Differentials</span><span class="review-value">${document.querySelectorAll('#ddxList .ddx-item').length} listed</span></div></div>`;
+}
+function submitCase(){
+    if(!document.getElementById('consentCheck').checked){alert('Please confirm de-identification.');return;}
+    const data={id:'rl-'+Date.now(),title:document.getElementById('caseTitle').value,specialty:document.getElementById('caseSpecialty').value,difficulty:document.getElementById('caseDifficulty').value,diagnosis:document.getElementById('finalDx').value,submitter:{name:document.getElementById('displayName').value,level:document.getElementById('submitterLevel').value},submitted:new Date().toISOString(),status:'pending_review'};
+    const s=JSON.parse(localStorage.getItem('reasonlab-submissions')||'[]');s.push(data);localStorage.setItem('reasonlab-submissions',JSON.stringify(s));
+    document.getElementById('section-5').style.display='none';document.getElementById('section-success').style.display='block';
+    document.querySelectorAll('.step').forEach(s=>s.classList.add('completed'));
+}
+</script>
+</body>
+</html>

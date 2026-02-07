@@ -304,7 +304,7 @@
                 </div>
                 
                 <a href="../reference-library.html" class="dx-nav-link">📚 References</a>
-                <a href="../auth/register.html" class="dx-nav-link dx-nav-signin">Sign In</a>
+                <a href="../auth/login.html" class="dx-nav-link dx-nav-signin">Sign In</a>
             </div>
         </div>
     </nav>
@@ -321,7 +321,7 @@
                         <button class="view-btn active" onclick="setView('desktop')" title="Desktop View">🖥️</button>
                         <button class="view-btn" onclick="setView('mobile')" title="Mobile View">📱</button>
                     </div>
-                    <a href="adventure-cases/epa-dashboard.html" class="btn-ghost">📊 EPA Dashboard</a>
+                    <a href="../EPASystem/epa-dashboard.html" class="btn-ghost">📊 EPA Dashboard</a>
                     <button class="btn-ghost" onclick="toggleTheme()">🌙</button>
                 </div>
             </div>
@@ -365,7 +365,7 @@
                     <div class="mode-card-meta"><span class="mode-tag green">3,160 Cases</span><span class="mode-tag green">24 Specialties</span></div>
                 </div>
             </a>
-            <a href="adventure-cases/board-prep.html" class="mode-card">
+            <a href="board-prep.html" class="mode-card">
                 <div class="mode-card-accent purple"></div>
                 <div class="mode-card-body">
                     <div class="mode-card-icon purple">📚</div>
@@ -374,7 +374,7 @@
                     <div class="mode-card-meta"><span class="mode-tag purple">High-Yield</span><span class="mode-tag purple">Step 2 CK</span></div>
                 </div>
             </a>
-            <a href="adventure-cases/deep-dive-hub.html" class="mode-card">
+            <a href="deep-dive-hub.html" class="mode-card">
                 <div class="mode-card-accent orange"></div>
                 <div class="mode-card-body">
                     <div class="mode-card-icon orange">🔬</div>
@@ -399,10 +399,10 @@
             <h2 class="section-title"><span class="section-title-icon">🛠️</span> Quick Tools</h2>
         </div>
         <div class="tools-grid">
-            <a href="adventure-cases/ecg-quiz.html" class="tool-card"><div class="tool-icon">💓</div><div class="tool-name">ECG Quiz</div><div class="tool-desc">Rhythm practice</div></a>
-            <a href="adventure-cases/reasondx-learn-hub.html" class="tool-card"><div class="tool-icon">📖</div><div class="tool-name">Learn Hub</div><div class="tool-desc">Guided paths</div></a>
-            <a href="adventure-cases/epa-dashboard.html" class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">EPA Dashboard</div><div class="tool-desc">Competency tracking</div></a>
-            <a href="adventure-cases/ecg-generator.html" class="tool-card"><div class="tool-icon">📈</div><div class="tool-name">ECG Lab</div><div class="tool-desc">Generate rhythms</div></a>
+            <a href="ecg/ecg-quiz.html" class="tool-card"><div class="tool-icon">💓</div><div class="tool-name">ECG Quiz</div><div class="tool-desc">Rhythm practice</div></a>
+            <a href="../learn-hub.html" class="tool-card"><div class="tool-icon">📖</div><div class="tool-name">Learn Hub</div><div class="tool-desc">Guided paths</div></a>
+            <a href="../EPASystem/epa-dashboard.html" class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">EPA Dashboard</div><div class="tool-desc">Competency tracking</div></a>
+            <a href="ecg/ecg-generator.html" class="tool-card"><div class="tool-icon">📈</div><div class="tool-name">ECG Lab</div><div class="tool-desc">Generate rhythms</div></a>
         </div>
         
         <!-- Case Library -->
@@ -592,8 +592,8 @@
                 <span class="footer-text">ReasonDx Clinical Reasoning Trainer • Updated January 2026</span>
             </div>
             <div class="footer-links">
-                <a href="adventure-cases/data-governance.html" class="footer-link">Data Governance</a>
-                <a href="adventure-cases/validation-roadmap.html" class="footer-link">Validation</a>
+                <a href="#" class="footer-link">Data Governance</a>
+                <a href="#" class="footer-link">Validation</a>
                 <a href="adventure-hub.html" class="footer-link">Adventure Hub</a>
             </div>
         </div>
@@ -642,6 +642,66 @@
         
         if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
         detectAndSetView();
+    </script>
+    
+    <!-- Supabase Auth -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../auth/auth-system.js"></script>
+    <script>
+        // Sync Supabase auth with localStorage for backward compatibility
+        window.addEventListener('dxsuite-auth-change', (e) => {
+            if (e.detail.user && e.detail.profile) {
+                // User is logged in via Supabase - sync to localStorage
+                localStorage.setItem('reasondx-user', JSON.stringify({
+                    email: e.detail.user.email,
+                    name: e.detail.profile.full_name || e.detail.user.email.split('@')[0],
+                    plan: e.detail.profile.subscription_tier || 'free',
+                    isAdmin: e.detail.profile.subscription_tier === 'admin'
+                }));
+                updateNavForUser(e.detail.profile);
+            } else if (e.detail.event === 'SIGNED_OUT') {
+                localStorage.removeItem('reasondx-user');
+                updateNavForGuest();
+            }
+        });
+        
+        function updateNavForUser(profile) {
+            const navLinks = document.querySelector('.dx-nav-links');
+            if (!navLinks) return;
+            
+            // Remove sign in button if exists
+            const signInBtn = navLinks.querySelector('.dx-nav-signin');
+            if (signInBtn) {
+                signInBtn.textContent = profile.full_name || 'Account';
+                signInBtn.href = '../auth/account.html';
+                signInBtn.classList.remove('dx-nav-signin');
+                signInBtn.classList.add('dx-nav-account');
+            }
+        }
+        
+        function updateNavForGuest() {
+            const navLinks = document.querySelector('.dx-nav-links');
+            if (!navLinks) return;
+            
+            const accountBtn = navLinks.querySelector('.dx-nav-account');
+            if (accountBtn) {
+                accountBtn.textContent = 'Sign In';
+                accountBtn.href = '../auth/login.html';
+                accountBtn.classList.remove('dx-nav-account');
+                accountBtn.classList.add('dx-nav-signin');
+            }
+        }
+        
+        // Check localStorage on load for backward compatibility
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('reasondx-user');
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    updateNavForUser({ full_name: user.name });
+                } catch(e) {}
+            }
+        });
     </script>
 </body>
 </html>

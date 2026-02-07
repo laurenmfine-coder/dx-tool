@@ -393,6 +393,131 @@ const CROSS_PLATFORM_MAP = {
         { name: "IWGDF Guidelines 2023", url: "https://iwgdfguidelines.org/guidelines-2023/" },
         { name: "ACFAS Heel Pain Guidelines", url: "https://www.acfas.org/clinical-practice-guidelines/" }
     ]
+},
+
+// ============================================================================
+// PHARMACOLOGY TOPIC CLUSTER
+// ============================================================================
+"pharmacology": {
+    topicName: "Pharmacology",
+    icon: "💊",
+    
+    reasondx: [],
+    
+    mechanismdx: [
+        { id: "beta-lactams", file: "../pharmacology/beta-lactams.html", title: "Beta-Lactam Antibiotics", concepts: ["penicillins", "cephalosporins", "carbapenems", "cell wall inhibition"] },
+        { id: "vancomycin", file: "../pharmacology/vancomycin.html", title: "Vancomycin", concepts: ["glycopeptides", "trough levels", "MRSA", "red man syndrome"] },
+        { id: "aminoglycosides", file: "../pharmacology/aminoglycosides.html", title: "Aminoglycosides", concepts: ["nephrotoxicity", "ototoxicity", "30S ribosome", "concentration-dependent"] },
+        { id: "fluoroquinolones", file: "../pharmacology/fluoroquinolones.html", title: "Fluoroquinolones", concepts: ["DNA gyrase", "topoisomerase IV", "tendinopathy", "QT prolongation"] },
+        { id: "macrolides", file: "../pharmacology/macrolides.html", title: "Macrolides", concepts: ["50S ribosome", "azithromycin", "CYP450 inhibition"] },
+        { id: "anti-tb-drugs", file: "../pharmacology/anti-tb-drugs.html", title: "Anti-TB Drugs", concepts: ["RIPE therapy", "isoniazid hepatotoxicity", "rifampin CYP induction"] },
+        { id: "antifungals", file: "../pharmacology/antifungals.html", title: "Antifungal Agents", concepts: ["azoles", "amphotericin B", "echinocandins", "ergosterol"] },
+        { id: "antivirals", file: "../pharmacology/antivirals.html", title: "Antiviral Agents", concepts: ["reverse transcriptase", "protease inhibitors", "HAART", "acyclovir"] },
+        { id: "antiparasitics", file: "../pharmacology/antiparasitics.html", title: "Antiparasitic Agents", concepts: ["chloroquine", "metronidazole", "ivermectin", "artemisinin"] },
+        { id: "tmp-smx", file: "../pharmacology/tmp-smx.html", title: "TMP-SMX", concepts: ["folate synthesis", "PCP prophylaxis", "hyperkalemia"] },
+        { id: "metronidazole", file: "../pharmacology/metronidazole.html", title: "Metronidazole", concepts: ["anaerobes", "C. diff", "disulfiram-like reaction"] },
+        { id: "tetracyclines", file: "../pharmacology/tetracyclines.html", title: "Tetracyclines", concepts: ["30S ribosome", "doxycycline", "photosensitivity", "tooth discoloration"] },
+        { id: "clindamycin", file: "../pharmacology/clindamycin.html", title: "Clindamycin", concepts: ["50S ribosome", "C. diff risk", "anaerobic coverage"] },
+        { id: "linezolid-daptomycin", file: "../pharmacology/linezolid-daptomycin.html", title: "Linezolid & Daptomycin", concepts: ["VRE", "MRSA", "serotonin syndrome", "CPK monitoring"] },
+        { id: "uti-agents", file: "../pharmacology/uti-agents.html", title: "UTI Agents", concepts: ["nitrofurantoin", "fosfomycin", "empiric therapy"] }
+    ],
+    
+    coachdx: [
+        { id: "antibiotic-stewardship", title: "Antibiotic Stewardship", coach: "PharmD Coach" },
+        { id: "drug-interactions", title: "Drug Interaction Case", coach: "PharmD Coach" }
+    ],
+    
+    learningPath: {
+        beginner: ["mechanismdx:beta-lactams", "mechanismdx:vancomycin", "mechanismdx:tmp-smx"],
+        intermediate: ["mechanismdx:fluoroquinolones", "mechanismdx:aminoglycosides", "mechanismdx:macrolides", "mechanismdx:antifungals"],
+        advanced: ["mechanismdx:anti-tb-drugs", "mechanismdx:antivirals", "mechanismdx:linezolid-daptomycin"]
+    },
+    
+    guidelines: [
+        { name: "IDSA Antimicrobial Stewardship Guidelines", url: "https://www.idsociety.org/practice-guideline/antimicrobial-stewardship/" },
+        { name: "Sanford Guide (Open Access Portions)", url: "https://www.sanfordguide.com/" }
+    ]
+},
+
+// ============================================================================
+// MICROBIOLOGY TOPIC CLUSTER
+// ============================================================================
+"microbiology": {
+    topicName: "Microbiology",
+    icon: "🦠",
+    
+    reasondx: [],
+    
+    mechanismdx: [
+        // Gram-Positive Bacteria
+        { id: "s-aureus", file: "../microbiology/s-aureus-module.html", title: "Staphylococcus aureus", concepts: ["MSSA vs MRSA", "coagulase positive", "toxic shock", "endocarditis"] },
+        { id: "s-pneumoniae", file: "../microbiology/s-pneumoniae-module.html", title: "Streptococcus pneumoniae", concepts: ["pneumonia", "meningitis", "capsule", "optochin sensitive"] },
+        { id: "gas", file: "../microbiology/gas-spyogenes-module.html", title: "Group A Strep", concepts: ["pharyngitis", "necrotizing fasciitis", "rheumatic fever", "M protein"] },
+        { id: "gbs", file: "../microbiology/gbs-sagalactiae-module.html", title: "Group B Strep", concepts: ["neonatal meningitis", "intrapartum prophylaxis", "CAMP test"] },
+        { id: "enterococcus", file: "../microbiology/enterococcus-module.html", title: "Enterococcus", concepts: ["VRE", "endocarditis", "UTI", "bile esculin"] },
+        { id: "clostridium", file: "../microbiology/clostridium-module.html", title: "Clostridium species", concepts: ["tetanus", "botulism", "gas gangrene", "anaerobes"] },
+        { id: "cdiff", file: "../microbiology/cdiff-module.html", title: "C. difficile", concepts: ["pseudomembranous colitis", "toxin A/B", "fidaxomicin", "fecal transplant"] },
+        { id: "listeria", file: "../microbiology/listeria-module.html", title: "Listeria monocytogenes", concepts: ["neonatal meningitis", "cold growth", "deli meats", "ampicillin"] },
+
+        // Gram-Negative Bacteria
+        { id: "e-coli", file: "../microbiology/e-coli-module.html", title: "E. coli", concepts: ["UTI", "EHEC", "HUS", "traveler's diarrhea"] },
+        { id: "klebsiella", file: "../microbiology/klebsiella-module.html", title: "Klebsiella pneumoniae", concepts: ["currant jelly sputum", "ESBL", "liver abscess", "nosocomial"] },
+        { id: "pseudomonas", file: "../microbiology/pseudomonas-module.html", title: "Pseudomonas aeruginosa", concepts: ["burn wounds", "CF lung", "blue-green pigment", "anti-pseudomonal"] },
+        { id: "neisseria", file: "../microbiology/neisseria-module.html", title: "Neisseria species", concepts: ["meningitidis", "gonorrhoeae", "complement deficiency", "chocolate agar"] },
+        { id: "haemophilus", file: "../microbiology/haemophilus-module.html", title: "Haemophilus influenzae", concepts: ["epiglottitis", "otitis media", "Hib vaccine", "factor V/X"] },
+        { id: "salmonella-shigella", file: "../microbiology/salmonella-shigella-module.html", title: "Salmonella & Shigella", concepts: ["enteric fever", "bloody diarrhea", "osteomyelitis sickle cell"] },
+        { id: "legionella", file: "../microbiology/legionella-module.html", title: "Legionella pneumophila", concepts: ["atypical pneumonia", "urine antigen", "hyponatremia", "cooling towers"] },
+        { id: "bordetella", file: "../microbiology/bordetella-module.html", title: "Bordetella pertussis", concepts: ["whooping cough", "lymphocytosis", "DTaP/Tdap", "100-day cough"] },
+        { id: "hpylori", file: "../microbiology/hpylori-campylobacter-module.html", title: "H. pylori & Campylobacter", concepts: ["peptic ulcer", "gastric cancer", "triple therapy", "Guillain-Barré"] },
+
+        // Atypical Bacteria
+        { id: "mycoplasma", file: "../microbiology/mycoplasma-module.html", title: "Mycoplasma pneumoniae", concepts: ["walking pneumonia", "no cell wall", "cold agglutinins", "macrolides"] },
+        { id: "chlamydia", file: "../microbiology/chlamydia-module.html", title: "Chlamydia species", concepts: ["STI", "trachoma", "atypical pneumonia", "intracellular"] },
+        { id: "rickettsia", file: "../microbiology/rickettsia-module.html", title: "Rickettsia species", concepts: ["RMSF", "tick-borne", "Weil-Felix", "doxycycline"] },
+        { id: "lyme", file: "../microbiology/lyme-module.html", title: "Lyme Disease (Borrelia)", concepts: ["erythema migrans", "Ixodes tick", "Bell palsy", "heart block"] },
+        { id: "syphilis", file: "../microbiology/syphilis-module.html", title: "Treponema pallidum", concepts: ["chancre", "condylomata lata", "FTA-ABS", "penicillin G"] },
+        { id: "tuberculosis", file: "../microbiology/tuberculosis-module.html", title: "Mycobacterium tuberculosis", concepts: ["AFB stain", "Ghon complex", "RIPE therapy", "PPD/IGRA"] },
+
+        // Fungi
+        { id: "candida", file: "../microbiology/candida-module.html", title: "Candida species", concepts: ["thrush", "vulvovaginitis", "catheter infections", "echinocandins"] },
+        { id: "aspergillus", file: "../microbiology/aspergillus-module.html", title: "Aspergillus", concepts: ["invasive aspergillosis", "ABPA", "aspergilloma", "voriconazole"] },
+        { id: "cryptococcus", file: "../microbiology/cryptoccocus-module.html", title: "Cryptococcus", concepts: ["meningitis", "India ink", "HIV/AIDS", "latex agglutination"] },
+        { id: "histoplasma", file: "../microbiology/histoplasma-module.html", title: "Histoplasma capsulatum", concepts: ["Ohio/Mississippi Valley", "bat/bird droppings", "granulomas"] },
+        { id: "coccidioides", file: "../microbiology/coccidioides-module.html", title: "Coccidioides immitis", concepts: ["Valley fever", "Southwest US", "spherules", "erythema nodosum"] },
+        { id: "blastomyces", file: "../microbiology/blastomyces-module.html", title: "Blastomyces", concepts: ["Great Lakes region", "broad-based budding", "skin and lung"] },
+        { id: "pcp", file: "../microbiology/pcp-module.html", title: "Pneumocystis jirovecii", concepts: ["PCP pneumonia", "HIV/AIDS", "TMP-SMX prophylaxis", "ground glass"] },
+        { id: "mucor", file: "../microbiology/mucor-module.html", title: "Mucor/Rhizopus", concepts: ["rhinocerebral", "DKA", "non-septate hyphae", "amphotericin B"] },
+
+        // Viruses
+        { id: "hiv", file: "../microbiology/hiv-aids-module.html", title: "HIV/AIDS", concepts: ["CD4 count", "HAART", "opportunistic infections", "window period"] },
+        { id: "hepatitis", file: "../microbiology/hepatitis-viruses-module.html", title: "Hepatitis Viruses", concepts: ["Hep A/B/C", "serology", "chronic infection", "vaccination"] },
+        { id: "herpes", file: "../microbiology/herpes-viruses-module.html", title: "Herpes Viruses", concepts: ["HSV", "VZV", "EBV", "CMV", "latency"] },
+        { id: "influenza", file: "../microbiology/influenza-module.html", title: "Influenza", concepts: ["antigenic drift/shift", "oseltamivir", "H and N types"] },
+        { id: "rsv", file: "../microbiology/rsv-module.html", title: "RSV", concepts: ["bronchiolitis", "infants", "palivizumab", "syncytial cells"] },
+
+        // Parasites
+        { id: "malaria", file: "../microbiology/malaria-module.html", title: "Plasmodium (Malaria)", concepts: ["Anopheles mosquito", "P. falciparum", "cyclic fevers", "chloroquine"] },
+        { id: "toxoplasma", file: "../microbiology/toxoplasma-module.html", title: "Toxoplasma gondii", concepts: ["ring-enhancing lesions", "cats", "pregnancy", "pyrimethamine"] },
+        { id: "giardia", file: "../microbiology/giardia-module.html", title: "Giardia lamblia", concepts: ["backpackers", "fatty stool", "trophozoites", "metronidazole"] }
+    ],
+    
+    coachdx: [
+        { id: "sepsis-id", title: "Sepsis - Infectious Disease", coach: "ID Coach" },
+        { id: "meningitis", title: "Meningitis Workup", coach: "ID Coach" },
+        { id: "pneumonia-id", title: "Community-Acquired Pneumonia", coach: "ID Coach" }
+    ],
+    
+    learningPath: {
+        beginner: ["mechanismdx:s-aureus", "mechanismdx:e-coli", "mechanismdx:s-pneumoniae", "mechanismdx:candida"],
+        intermediate: ["mechanismdx:pseudomonas", "mechanismdx:cdiff", "mechanismdx:tuberculosis", "mechanismdx:hiv", "mechanismdx:hepatitis"],
+        advanced: ["mechanismdx:aspergillus", "mechanismdx:malaria", "mechanismdx:pcp", "mechanismdx:rickettsia", "mechanismdx:lyme"]
+    },
+    
+    guidelines: [
+        { name: "IDSA Practice Guidelines", url: "https://www.idsociety.org/practice-guideline/practice-guidelines/" },
+        { name: "CDC Antibiotic Prescribing Guidelines", url: "https://www.cdc.gov/antibiotic-use/" },
+        { name: "WHO Essential Medicines List", url: "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2023.02" }
+    ]
 }
 
 };

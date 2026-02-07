@@ -1,12 +1,12 @@
 {
   "category": "surgery",
-  "caseCount": 13,
+  "caseCount": 15,
   "cases": [
     {
       "id": "acute-abdomen",
       "title": "Acute Abdominal Pain",
       "category": "Surgery",
-      "icon": "🔪",
+      "icon": "\ud83d\udd2a",
       "difficulty": "advanced",
       "urgency": "emergent",
       "variants": {
@@ -34,7 +34,7 @@
             "BP": "98/62",
             "HR": 118,
             "RR": 24,
-            "Temp": "101.2°F",
+            "Temp": "101.2\u00b0F",
             "SpO2": "96%"
           },
           "missedConsequences": {
@@ -263,7 +263,7 @@
               "id": "vitals_review",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 98/62 (hypotensive), HR 118 (tachycardic), RR 24 (tachypneic), Temp 101.2°F, SpO2 96%. SIRS criteria met.",
+              "finding": "BP 98/62 (hypotensive), HR 118 (tachycardic), RR 24 (tachypneic), Temp 101.2\u00b0F, SpO2 96%. SIRS criteria met.",
               "tier": "essential",
               "linkedDx": [
                 "Perforated Peptic Ulcer"
@@ -580,7 +580,7 @@
             "BP": "108/68",
             "HR": 102,
             "RR": 20,
-            "Temp": "99.8°F",
+            "Temp": "99.8\u00b0F",
             "SpO2": "97%"
           },
           "missedConsequences": {
@@ -739,7 +739,7 @@
               "id": "vitals_review",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 108/68, HR 102, Temp 99.8°F. Mildly tachycardic, low-grade fever.",
+              "finding": "BP 108/68, HR 102, Temp 99.8\u00b0F. Mildly tachycardic, low-grade fever.",
               "tier": "essential",
               "linkedDx": [
                 "Adhesive Small Bowel Obstruction"
@@ -988,13 +988,119 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Acute Abdomen Adventure",
+          "url": "adventure-cases/acute-abdomen-expanded.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Acute Abdomen Deep Dive",
+          "url": "acute-appendicitis-deep-dive.json"
+        }
+      ]
     },
     {
       "id": "breast-mass",
       "title": "Breast Lump",
       "category": "Surgery/Breast",
-      "icon": "🎀",
+      "icon": "\ud83c\udf80",
       "difficulty": "intermediate",
       "urgency": "urgent",
       "variants": {
@@ -1022,7 +1128,7 @@
             "BP": "128/82",
             "HR": 76,
             "RR": 14,
-            "Temp": "98.4°F",
+            "Temp": "98.4\u00b0F",
             "SpO2": "99%"
           },
           "missedConsequences": {
@@ -1415,7 +1521,7 @@
               {
                 "id": "surgery",
                 "name": "Surgical options discussion",
-                "result": "Options: Breast-conserving surgery (lumpectomy + radiation) vs mastectomy ± reconstruction. Axillary management: sentinel node vs axillary dissection. Patient preference important.",
+                "result": "Options: Breast-conserving surgery (lumpectomy + radiation) vs mastectomy \u00b1 reconstruction. Axillary management: sentinel node vs axillary dissection. Patient preference important.",
                 "tier": "essential",
                 "reasoning": "BCT + radiation has equivalent survival to mastectomy. Patient must understand options. Known positive node may require axillary dissection."
               },
@@ -1424,7 +1530,7 @@
                 "name": "Adjuvant endocrine therapy (after surgery/chemo)",
                 "result": "ER-positive tumor will require 5-10 years of hormonal therapy: Tamoxifen for premenopausal, aromatase inhibitor for postmenopausal.",
                 "tier": "essential",
-                "reasoning": "Endocrine therapy CRITICAL for ER+ tumors. Reduces recurrence by ~50%. Postmenopausal: anastrozole, letrozole, or exemestane. Premenopausal: tamoxifen ± ovarian suppression."
+                "reasoning": "Endocrine therapy CRITICAL for ER+ tumors. Reduces recurrence by ~50%. Postmenopausal: anastrozole, letrozole, or exemestane. Premenopausal: tamoxifen \u00b1 ovarian suppression."
               }
             ],
             "consults": [
@@ -1487,9 +1593,9 @@
             "teachingPoints": [
               "Triple assessment for breast mass: Clinical exam + Imaging + Tissue diagnosis",
               "BIRADS 5 = >95% chance of malignancy - must biopsy",
-              "ER/PR/HER2 status determines treatment: ER+ → hormonal therapy, HER2+ → trastuzumab",
+              "ER/PR/HER2 status determines treatment: ER+ \u2192 hormonal therapy, HER2+ \u2192 trastuzumab",
               "Clinical staging: T = tumor size, N = nodes, M = metastases",
-              "This patient (T2N1M0) will likely get neoadjuvant chemotherapy → surgery → radiation → hormonal therapy",
+              "This patient (T2N1M0) will likely get neoadjuvant chemotherapy \u2192 surgery \u2192 radiation \u2192 hormonal therapy",
               "Genetic counseling/BRCA testing given family history"
             ]
           },
@@ -1530,13 +1636,119 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Breast Disease Adventure",
+          "url": "adventure-cases/breast-mass-expanded-adventure.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Breast Disease Deep Dive",
+          "url": "breast-mass-deep-dive.json"
+        }
+      ]
     },
     {
       "id": "appendicitis",
       "title": "Right Lower Quadrant Pain",
       "category": "Surgery",
-      "icon": "🔪",
+      "icon": "\ud83d\udd2a",
       "difficulty": "intermediate",
       "level": "clerkship",
       "urgency": "emergent",
@@ -1577,7 +1789,7 @@
             "BP": "118/72",
             "HR": 98,
             "RR": 18,
-            "Temp": "100.8°F",
+            "Temp": "100.8\u00b0F",
             "SpO2": "99%"
           },
           "missedConsequences": {
@@ -1585,7 +1797,7 @@
             "Perforated Appendicitis": "If already perforated, delay leads to diffuse peritonitis, septic shock, possible death. Extended ICU stay and multiple surgeries required."
           },
           "commonPitfalls": [
-            "Missing the classic migration of pain from periumbilical to RLQ (visceral → somatic)",
+            "Missing the classic migration of pain from periumbilical to RLQ (visceral \u2192 somatic)",
             "Assuming normal WBC rules out appendicitis (can be normal early)",
             "Sending patient home with 'gastroenteritis' without proper exam",
             "Not recognizing that anorexia is nearly universal in appendicitis",
@@ -1595,7 +1807,7 @@
             {
               "id": "mcq1",
               "timing": "after-history",
-              "question": "The classic migration of pain in appendicitis (periumbilical → RLQ) is explained by:",
+              "question": "The classic migration of pain in appendicitis (periumbilical \u2192 RLQ) is explained by:",
               "options": [
                 {
                   "text": "Spread of infection from appendix to cecum",
@@ -1911,12 +2123,12 @@
               "id": "vitals_review",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 118/72, HR 98, RR 18, Temp 100.8°F (38.2°C), SpO2 99% RA",
+              "finding": "BP 118/72, HR 98, RR 18, Temp 100.8\u00b0F (38.2\u00b0C), SpO2 99% RA",
               "tier": "essential",
               "linkedDx": [
                 "Acute Appendicitis"
               ],
-              "reasoning": "Low-grade fever and mild tachycardia are classic. High fever (>102°F) suggests perforation."
+              "reasoning": "Low-grade fever and mild tachycardia are classic. High fever (>102\u00b0F) suggests perforation."
             },
             {
               "id": "general_appearance",
@@ -2126,7 +2338,7 @@
           "actualDiagnosis": {
             "name": "Acute Appendicitis (Non-Perforated)",
             "keyFindings": [
-              "Classic pain migration (periumbilical → RLQ)",
+              "Classic pain migration (periumbilical \u2192 RLQ)",
               "Anorexia with nausea/vomiting",
               "Low-grade fever",
               "McBurney's point tenderness",
@@ -2135,7 +2347,7 @@
               "CT showing dilated appendix with fat stranding"
             ],
             "teachingPoints": [
-              "PAIN SEQUENCE MATTERS: In appendicitis, pain → anorexia → vomiting. In gastroenteritis, vomiting often comes first.",
+              "PAIN SEQUENCE MATTERS: In appendicitis, pain \u2192 anorexia \u2192 vomiting. In gastroenteritis, vomiting often comes first.",
               "Classic migration of pain from periumbilical (visceral) to RLQ (somatic) has high specificity for appendicitis",
               "ALWAYS examine testicles in young males with abdominal pain - testicular torsion can present with abdominal pain",
               "Alvarado Score (MANTRELS): Migration, Anorexia, Nausea/vomiting, Tenderness RLQ, Rebound, Elevated temp, Leukocytosis, Shift left",
@@ -2165,7 +2377,7 @@
           ],
           "correctDiagnosis": "Acute Appendicitis",
           "teachingPoint": "This is a textbook presentation of acute appendicitis. The key clinical pearls: (1) The migration of pain from periumbilical to RLQ reflects progression from visceral inflammation (appendiceal distension) to somatic inflammation (parietal peritoneal involvement). (2) The sequence 'pain first, then anorexia, then vomiting' is classic for appendicitis - if vomiting comes first, think gastroenteritis. (3) Physical exam findings of involuntary guarding, Rovsing's sign, and positive cough test all indicate peritoneal inflammation. (4) This patient needs surgical consultation for appendectomy - timing matters because perforation risk increases significantly after 36-48 hours of symptoms.",
-          "clinicalPearl": "The Alvarado Score (MANTRELS) helps quantify appendicitis probability: Migration (1pt), Anorexia (1pt), Nausea/vomiting (1pt), Tenderness in RLQ (2pts), Rebound pain (1pt), Elevated temperature (1pt), Leukocytosis (2pts), Shift to left (1pt). Score ≥7 is highly suggestive. This patient scores 9/10. But remember - no scoring system replaces good clinical judgment.",
+          "clinicalPearl": "The Alvarado Score (MANTRELS) helps quantify appendicitis probability: Migration (1pt), Anorexia (1pt), Nausea/vomiting (1pt), Tenderness in RLQ (2pts), Rebound pain (1pt), Elevated temperature (1pt), Leukocytosis (2pts), Shift to left (1pt). Score \u22657 is highly suggestive. This patient scores 9/10. But remember - no scoring system replaces good clinical judgment.",
           "patientBackground": {
             "recentEvents": "Miguel has had stomach pain for about 2 days. It started around his belly button and was kind of vague. He thought he ate something bad. Today the pain moved to his right lower side and got much worse. He has not been able to eat anything.",
             "recentIllnesses": "Had some mild nausea and loss of appetite for the past 2 days before the pain got bad. No diarrhea. Last bowel movement was yesterday.",
@@ -2199,7 +2411,7 @@
             "BP": "112/68",
             "HR": 92,
             "RR": 16,
-            "Temp": "99.9°F",
+            "Temp": "99.9\u00b0F",
             "SpO2": "99%"
           },
           "missedConsequences": {
@@ -2361,7 +2573,7 @@
               "id": "vitals_review",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 112/68, HR 92, RR 16, Temp 99.9°F, SpO2 99% RA",
+              "finding": "BP 112/68, HR 92, RR 16, Temp 99.9\u00b0F, SpO2 99% RA",
               "tier": "essential",
               "linkedDx": [
                 "all"
@@ -2439,7 +2651,7 @@
               },
               {
                 "id": "quant_hcg",
-                "name": "Quantitative β-hCG",
+                "name": "Quantitative \u03b2-hCG",
                 "result": "2,450 mIU/mL (above discriminatory zone)",
                 "tier": "essential",
                 "reasoning": "Level is above discriminatory zone (~1500-2000). At this level, TVUS should show intrauterine gestational sac if pregnancy is intrauterine. Empty uterus = ectopic."
@@ -2479,7 +2691,7 @@
                 "name": "Transvaginal Ultrasound (STAT - DIAGNOSTIC)",
                 "result": "No intrauterine pregnancy visualized. 3.2 cm complex mass in right adnexa with peripheral vascularity ('ring of fire' sign). Small amount of free fluid in cul-de-sac. Uterus: empty, thickened endometrium. Left ovary normal.",
                 "tier": "essential",
-                "reasoning": "DIAGNOSTIC for ectopic. No IUP + adnexal mass + positive β-hCG above discriminatory zone = ECTOPIC PREGNANCY. Free fluid suggests possible rupture/leakage."
+                "reasoning": "DIAGNOSTIC for ectopic. No IUP + adnexal mass + positive \u03b2-hCG above discriminatory zone = ECTOPIC PREGNANCY. Free fluid suggests possible rupture/leakage."
               }
             ],
             "procedures": [
@@ -2502,9 +2714,9 @@
               {
                 "id": "methotrexate",
                 "name": "Medical management (methotrexate) - alternative",
-                "result": "Would consider if: hemodynamically stable, unruptured, β-hCG <5000, no fetal cardiac activity, able to follow up. Not appropriate for this patient given free fluid.",
+                "result": "Would consider if: hemodynamically stable, unruptured, \u03b2-hCG <5000, no fetal cardiac activity, able to follow up. Not appropriate for this patient given free fluid.",
                 "tier": "essential",
-                "reasoning": "Methotrexate is option for STABLE, UNRUPTURED ectopic in compliant patient. Contraindications: hemodynamic instability, ruptured, high β-hCG, fetal cardiac activity, immunodeficiency, liver/renal disease."
+                "reasoning": "Methotrexate is option for STABLE, UNRUPTURED ectopic in compliant patient. Contraindications: hemodynamic instability, ruptured, high \u03b2-hCG, fetal cardiac activity, immunodeficiency, liver/renal disease."
               },
               {
                 "id": "rhogam",
@@ -2554,10 +2766,10 @@
               },
               {
                 "id": "serial_hcg",
-                "name": "Serial β-hCG monitoring (if medical management)",
-                "result": "If methotrexate used: check β-hCG day 4 and day 7. Expect >15% decrease from day 4 to day 7. Follow weekly until undetectable.",
+                "name": "Serial \u03b2-hCG monitoring (if medical management)",
+                "result": "If methotrexate used: check \u03b2-hCG day 4 and day 7. Expect >15% decrease from day 4 to day 7. Follow weekly until undetectable.",
                 "tier": "essential",
-                "reasoning": "If medical management chosen, close β-hCG monitoring essential to confirm treatment success. Return immediately for worsening pain."
+                "reasoning": "If medical management chosen, close \u03b2-hCG monitoring essential to confirm treatment success. Return immediately for worsening pain."
               },
               {
                 "id": "return_precautions",
@@ -2595,14 +2807,14 @@
               "Positive pregnancy test",
               "No intrauterine pregnancy on ultrasound",
               "Right adnexal mass with 'ring of fire' (vascularity)",
-              "β-hCG above discriminatory zone",
+              "\u03b2-hCG above discriminatory zone",
               "Abdominal pain with vaginal bleeding",
               "Free pelvic fluid"
             ],
             "teachingPoints": [
               "PREGNANCY TEST IS MANDATORY in ANY reproductive-age female with abdominal pain - this is non-negotiable",
               "Classic triad of ectopic: abdominal pain + vaginal bleeding + positive pregnancy test",
-              "β-hCG above discriminatory zone (1500-2000) without IUP on TVUS = presumed ectopic",
+              "\u03b2-hCG above discriminatory zone (1500-2000) without IUP on TVUS = presumed ectopic",
               "Ruptured ectopic is a surgical emergency - patients can exsanguinate rapidly",
               "Risk factors: prior ectopic, PID, tubal surgery, IUD, infertility treatment",
               "This patient's 'appendicitis' presentation was actually ectopic - RLQ pain overlaps anatomically",
@@ -2610,7 +2822,7 @@
             ]
           },
           "correctDiagnosis": "Ectopic Pregnancy",
-          "teachingPoint": "This case illustrates why pregnancy testing is MANDATORY in all reproductive-age females with abdominal pain, regardless of what they tell you about contraception or likelihood of pregnancy. The right adnexa and appendix are anatomically adjacent - RLQ pain can come from either. This patient could easily have been taken to the OR for appendicitis with a missed ectopic - a potentially fatal error. The sequence: (1) Pregnancy test FIRST, (2) If positive, get quantitative β-hCG and transvaginal US, (3) No IUP with β-hCG >1500-2000 = ectopic until proven otherwise. OB/GYN needs to be involved immediately.",
+          "teachingPoint": "This case illustrates why pregnancy testing is MANDATORY in all reproductive-age females with abdominal pain, regardless of what they tell you about contraception or likelihood of pregnancy. The right adnexa and appendix are anatomically adjacent - RLQ pain can come from either. This patient could easily have been taken to the OR for appendicitis with a missed ectopic - a potentially fatal error. The sequence: (1) Pregnancy test FIRST, (2) If positive, get quantitative \u03b2-hCG and transvaginal US, (3) No IUP with \u03b2-hCG >1500-2000 = ectopic until proven otherwise. OB/GYN needs to be involved immediately.",
           "clinicalPearl": "In females with abdominal pain, I always remember: 'POP before you cut' - Pregnancy test, Ovaries (consider torsion/cyst), Pelvic exam. A ruptured ectopic can kill a patient faster than almost any other surgical emergency. The 'ring of fire' sign on ultrasound (increased peripheral vascularity around adnexal mass) is highly suggestive of ectopic pregnancy.",
           "patientBackground": {
             "recentEvents": "Miguel has had stomach pain for about 2 days. It started around his belly button and was kind of vague. He thought he ate something bad. Today the pain moved to his right lower side and got much worse. He has not been able to eat anything.",
@@ -2628,7 +2840,7 @@
         {
           "id": "whatif_appy_perforated",
           "title": "What if the patient had perforated appendicitis?",
-          "icon": "🔥",
+          "icon": "\ud83d\udd25",
           "description": "72 hours of symptoms, diffuse peritonitis, toxic appearance",
           "modifications": {
             "chiefComplaint": {
@@ -2636,7 +2848,7 @@
             },
             "vitals": {
               "Temp": {
-                "modified": "103.2°F"
+                "modified": "103.2\u00b0F"
               },
               "HR": {
                 "modified": "118"
@@ -2670,7 +2882,7 @@
         {
           "id": "whatif_appy_retrocecal",
           "title": "What if the appendix was retrocecal?",
-          "icon": "🔄",
+          "icon": "\ud83d\udd04",
           "description": "Atypical location causes atypical presentation",
           "modifications": {
             "chiefComplaint": {
@@ -2702,7 +2914,7 @@
         {
           "id": "whatif_appy_elderly",
           "title": "What if the patient was 75 years old?",
-          "icon": "👴",
+          "icon": "\ud83d\udc74",
           "description": "Same symptoms in an elderly patient",
           "modifications": {
             "chiefComplaint": {
@@ -2737,7 +2949,7 @@
         {
           "id": "whatif_appy_pregnant",
           "title": "What if the patient was pregnant?",
-          "icon": "🤰",
+          "icon": "\ud83e\udd30",
           "description": "24-year-old female who is 16 weeks pregnant",
           "modifications": {
             "patient": {
@@ -2771,13 +2983,119 @@
             "incorrect": "Pregnancy changes everything: (1) Appendix migrates upward - RLQ tenderness may be absent, (2) US first to avoid radiation, MRI if inconclusive, (3) Perforation risk higher - don't delay surgery for 'observation', (4) Fetal monitoring required perioperatively."
           }
         }
+      ],
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Acute Appendicitis Adventure",
+          "url": "adventure-cases/appendicitis-expanded.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Acute Appendicitis Deep Dive",
+          "url": "acute-appendicitis-deep-dive"
+        }
       ]
     },
     {
       "id": "cholecystitis",
       "title": "Right Upper Quadrant Pain",
       "category": "Surgery",
-      "icon": "🔪",
+      "icon": "\ud83d\udd2a",
       "difficulty": "intermediate",
       "level": "clerkship",
       "urgency": "urgent",
@@ -2816,7 +3134,7 @@
             "BP": "142/88",
             "HR": 96,
             "RR": 18,
-            "Temp": "101.2°F",
+            "Temp": "101.2\u00b0F",
             "SpO2": "98%"
           },
           "missedConsequences": {
@@ -3012,7 +3330,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 142/88, HR 96, RR 18, Temp 101.2°F, SpO2 98% RA",
+              "finding": "BP 142/88, HR 96, RR 18, Temp 101.2\u00b0F, SpO2 98% RA",
               "tier": "essential",
               "linkedDx": [
                 "Acute Cholecystitis"
@@ -3293,13 +3611,119 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Cholecystitis & Cholelithiasis Adventure",
+          "url": "adventure-cases/cholecystitis-expanded.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Cholecystitis & Cholelithiasis Deep Dive",
+          "url": "cholecystitis-cholangitis-deep-dive.json"
+        }
+      ]
     },
     {
       "id": "preop-eval",
       "title": "Pre-Operative Evaluation",
       "category": "Surgery/Medicine",
-      "icon": "📋",
+      "icon": "\ud83d\udccb",
       "difficulty": "intermediate",
       "level": "clerkship",
       "urgency": "routine",
@@ -3326,7 +3750,7 @@
             "BP": "148/88",
             "HR": 72,
             "RR": 14,
-            "Temp": "98.4°F",
+            "Temp": "98.4\u00b0F",
             "SpO2": "96%"
           },
           "missedConsequences": {
@@ -3353,7 +3777,7 @@
                 "Diabetes requiring insulin",
                 "Preoperative creatinine >2 mg/dL"
               ],
-              "scoring": "0 points = 0.4% risk, 1 point = 0.9% risk, 2 points = 6.6% risk, ≥3 points = 11% risk",
+              "scoring": "0 points = 0.4% risk, 1 point = 0.9% risk, 2 points = 6.6% risk, \u22653 points = 11% risk",
               "application": "Use to determine need for further cardiac testing"
             },
             "STOPBANG": {
@@ -3364,13 +3788,13 @@
                 "T - Tired: Do you often feel tired during the day?",
                 "O - Observed: Has anyone observed you stop breathing during sleep?",
                 "P - Pressure: Do you have high blood pressure?",
-                "B - BMI >35 kg/m²",
+                "B - BMI >35 kg/m\u00b2",
                 "A - Age >50 years",
                 "N - Neck circumference >40cm (>17 inches)",
                 "G - Gender: Male"
               ],
               "scoring": "0-2 = Low risk, 3-4 = Intermediate risk, 5-8 = High risk for OSA",
-              "application": "Score ≥3 warrants further evaluation; high risk may need postop monitoring"
+              "application": "Score \u22653 warrants further evaluation; high risk may need postop monitoring"
             },
             "ASA": {
               "name": "ASA Physical Status Classification",
@@ -3395,7 +3819,7 @@
                 ">4 METs: Generally adequate for most surgeries",
                 "10 METs: Swimming, singles tennis, jogging"
               ],
-              "application": "If patient can achieve ≥4 METs, proceed to surgery without further cardiac testing regardless of RCRI"
+              "application": "If patient can achieve \u22654 METs, proceed to surgery without further cardiac testing regardless of RCRI"
             }
           },
           "allDiagnoses": [
@@ -3601,7 +4025,7 @@
               "id": "knee",
               "text": "Examine the affected knee",
               "category": "MSK",
-              "finding": "Right knee with severe crepitus, varus deformity, limited ROM (0-95°), no effusion.",
+              "finding": "Right knee with severe crepitus, varus deformity, limited ROM (0-95\u00b0), no effusion.",
               "tier": "helpful",
               "linkedDx": [
                 "Surgical Indication"
@@ -3822,9 +4246,9 @@
             ],
             "teachingPoints": [
               "RCRI CALCULATION: 1 point for IHD only. No points for: non-insulin DM, Cr <2, no stroke/TIA, no CHF, surgery is not high-risk (joint replacement is intermediate risk)",
-              "FUNCTIONAL CAPACITY TRUMPS RCRI: If patient achieves ≥4 METs, proceed to surgery without further cardiac testing, regardless of RCRI score",
+              "FUNCTIONAL CAPACITY TRUMPS RCRI: If patient achieves \u22654 METs, proceed to surgery without further cardiac testing, regardless of RCRI score",
               "STRESS TESTING NOT INDICATED: Routine preoperative stress testing is NOT recommended for patients with adequate functional capacity",
-              "OSA MATTERS: STOP-BANG ≥3 = high risk. Need postoperative monitoring precautions (avoid excessive opioids, consider monitored bed)",
+              "OSA MATTERS: STOP-BANG \u22653 = high risk. Need postoperative monitoring precautions (avoid excessive opioids, consider monitored bed)",
               "ASA III is appropriate: Stable but significant cardiac history with functional limitations",
               "MEDICATION MANAGEMENT: Continue aspirin (cardioprotective), continue statin, hold metformin morning of surgery, continue antihypertensives",
               "Don't request 'cardiac clearance' - request 'perioperative cardiac risk assessment and optimization recommendations'"
@@ -3832,7 +4256,7 @@
           },
           "correctDiagnosis": "Intermediate Risk - Proceed with Surgery with OSA Precautions",
           "teachingPoint": "This case teaches the systematic approach to preoperative cardiac risk assessment: (1) Calculate RCRI - this patient scores 1 point (IHD history), (2) Assess functional capacity - climbing stairs = 4 METs, which is the threshold, (3) Because functional capacity is adequate, NO FURTHER CARDIAC TESTING IS NEEDED even though he has CAD history. The common mistake is ordering unnecessary stress tests. Also critical: his STOP-BANG score of 5 indicates high probability of OSA - this doesn't delay surgery but requires postoperative precautions (careful opioid dosing, possible monitored setting, consider CPAP). Remember: cardiologists don't 'clear' patients - they assess and optimize risk.",
-          "clinicalPearl": "The ACC/AHA algorithm for preoperative cardiac evaluation can be summarized: (1) Emergency surgery? Proceed. (2) Active cardiac condition (unstable angina, decompensated HF, severe arrhythmia, severe valve disease)? Delay and treat. (3) Low-risk surgery (endoscopy, cataract, superficial)? Proceed. (4) Functional capacity ≥4 METs? Proceed WITHOUT stress testing. (5) If <4 METs or unknown, consider RCRI and whether testing will change management. The most over-ordered test in preoperative medicine is the stress test - it rarely changes management and often delays necessary surgery.",
+          "clinicalPearl": "The ACC/AHA algorithm for preoperative cardiac evaluation can be summarized: (1) Emergency surgery? Proceed. (2) Active cardiac condition (unstable angina, decompensated HF, severe arrhythmia, severe valve disease)? Delay and treat. (3) Low-risk surgery (endoscopy, cataract, superficial)? Proceed. (4) Functional capacity \u22654 METs? Proceed WITHOUT stress testing. (5) If <4 METs or unknown, consider RCRI and whether testing will change management. The most over-ordered test in preoperative medicine is the stress test - it rarely changes management and often delays necessary surgery.",
           "patientBackground": {
             "recentEvents": "Patient was in usual state of health until symptoms began. No major recent life changes.",
             "recentIllnesses": "No significant recent illnesses other than this presentation.",
@@ -3843,13 +4267,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Preop Eval - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbo",
       "title": "Abdominal Pain with Vomiting",
       "category": "Surgery",
-      "icon": "🔪",
+      "icon": "\ud83d\udd2a",
       "difficulty": "intermediate",
       "level": "clerkship",
       "urgency": "emergent",
@@ -3888,7 +4371,7 @@
             "BP": "102/68",
             "HR": 108,
             "RR": 22,
-            "Temp": "99.8°F",
+            "Temp": "99.8\u00b0F",
             "SpO2": "96%"
           },
           "missedConsequences": {
@@ -4074,7 +4557,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 102/68 (low for her baseline of 130s), HR 108, RR 22, Temp 99.8°F, SpO2 96%",
+              "finding": "BP 102/68 (low for her baseline of 130s), HR 108, RR 22, Temp 99.8\u00b0F, SpO2 96%",
               "tier": "essential",
               "linkedDx": [
                 "Dehydration",
@@ -4326,7 +4809,7 @@
               {
                 "id": "transition_diet",
                 "name": "Diet advancement when resolved",
-                "result": "When obstruction resolved: NGT output decreasing, passing flatus, pain improving → clamp NGT → if tolerated → clear liquids → advance as tolerated.",
+                "result": "When obstruction resolved: NGT output decreasing, passing flatus, pain improving \u2192 clamp NGT \u2192 if tolerated \u2192 clear liquids \u2192 advance as tolerated.",
                 "tier": "helpful",
                 "reasoning": "Signs of resolution: decreased NGT output, return of bowel function (flatus/BM), pain improvement. Advance diet slowly."
               },
@@ -4375,13 +4858,119 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Small Bowel Obstruction Adventure",
+          "url": "adventure-cases/sbo-expanded.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Small Bowel Obstruction Deep Dive",
+          "url": "bowel-obstruction-deep-dive"
+        }
+      ]
     },
     {
       "id": "postop-fever",
       "title": "Fever After Surgery",
       "category": "Surgery",
-      "icon": "🔪",
+      "icon": "\ud83d\udd2a",
       "difficulty": "intermediate",
       "level": "clerkship",
       "urgency": "urgent",
@@ -4424,7 +5013,7 @@
             "BP": "128/78",
             "HR": 98,
             "RR": 18,
-            "Temp": "101.8°F (38.8°C)",
+            "Temp": "101.8\u00b0F (38.8\u00b0C)",
             "SpO2": "94%"
           },
           "postopFeverMnemonic": {
@@ -4643,7 +5232,7 @@
                 "name": "Blood Cultures x 2 (if high fever or sepsis concern)",
                 "result": "Obtained. No growth at 48 hours.",
                 "tier": "helpful",
-                "reasoning": "Consider if temp >101.5°F or concern for bacteremia. UTI can seed bloodstream, especially with manipulation."
+                "reasoning": "Consider if temp >101.5\u00b0F or concern for bacteremia. UTI can seed bloodstream, especially with manipulation."
               },
               {
                 "id": "procalcitonin",
@@ -4738,7 +5327,7 @@
               {
                 "id": "antipyretic",
                 "name": "Acetaminophen PRN Fever",
-                "result": "Acetaminophen 650mg q6h PRN temp >101°F.",
+                "result": "Acetaminophen 650mg q6h PRN temp >101\u00b0F.",
                 "tier": "helpful",
                 "reasoning": "Symptomatic fever management. Also contributes to pain control."
               }
@@ -4812,13 +5401,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Postop Fever - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "inguinal-hernia",
       "title": "Groin Lump",
       "category": "Surgery",
-      "icon": "🔪",
+      "icon": "\ud83d\udd2a",
       "difficulty": "foundational",
       "level": "pre-clerkship",
       "urgency": "urgent",
@@ -4845,7 +5493,7 @@
             "BP": "138/84",
             "HR": 76,
             "RR": 14,
-            "Temp": "98.6°F",
+            "Temp": "98.6\u00b0F",
             "SpO2": "98%"
           },
           "herniaClassification": {
@@ -5124,13 +5772,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Inguinal Hernia - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "acute-cholangitis",
       "title": "Fever, Jaundice, and RUQ Pain",
       "category": "Surgery",
-      "icon": "🟡",
+      "icon": "\ud83d\udfe1",
       "difficulty": "advanced",
       "level": "clerkship",
       "urgency": "emergent",
@@ -5174,7 +5881,7 @@
             "BP": "88/52",
             "HR": 118,
             "RR": 22,
-            "Temp": "103.2°F",
+            "Temp": "103.2\u00b0F",
             "SpO2": "94%"
           },
           "missedConsequences": {
@@ -5193,7 +5900,7 @@
             {
               "id": "mcq1",
               "timing": "after-exam",
-              "question": "A 68-year-old woman presents with RUQ pain, fever 103°F, jaundice, BP 88/52, and confusion. Labs show WBC 22k, T.bili 8.4, ALP 450. What is the diagnosis and severity?",
+              "question": "A 68-year-old woman presents with RUQ pain, fever 103\u00b0F, jaundice, BP 88/52, and confusion. Labs show WBC 22k, T.bili 8.4, ALP 450. What is the diagnosis and severity?",
               "options": [
                 {
                   "text": "Acute cholecystitis - admit for IV antibiotics and cholecystectomy",
@@ -5350,7 +6057,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 88/52 (hypotensive), HR 118 (tachycardic), Temp 103.2°F (febrile), SpO2 94% on RA",
+              "finding": "BP 88/52 (hypotensive), HR 118 (tachycardic), Temp 103.2\u00b0F (febrile), SpO2 94% on RA",
               "tier": "essential",
               "linkedDx": [
                 "Septic Shock"
@@ -5466,7 +6173,7 @@
                 "name": "IV fluid resuscitation",
                 "result": "2L lactated Ringer's bolus given. BP improved to 98/64.",
                 "tier": "essential",
-                "reasoning": "Septic shock requires aggressive fluid resuscitation. Target MAP ≥65."
+                "reasoning": "Septic shock requires aggressive fluid resuscitation. Target MAP \u226565."
               },
               {
                 "id": "antibiotics",
@@ -5494,7 +6201,7 @@
           "actualDiagnosis": {
             "name": "Acute Cholangitis, Tokyo Grade III (Severe) with Septic Shock",
             "keyFindings": [
-              "CHARCOT'S TRIAD: Fever (103.2°F), Jaundice (T.bili 8.4), RUQ pain",
+              "CHARCOT'S TRIAD: Fever (103.2\u00b0F), Jaundice (T.bili 8.4), RUQ pain",
               "REYNOLDS' PENTAD: Add hypotension (88/52) and AMS = SEVERE cholangitis",
               "Tokyo Grade III: Organ dysfunction (cardiovascular - shock, renal - AKI)",
               "Cause: Choledocholithiasis - CBD stone on imaging",
@@ -5509,7 +6216,7 @@
               "ERCP IS FIRST-LINE: Sphincterotomy + stone extraction + stent placement. PTC (percutaneous) if ERCP fails",
               "ANTIBIOTICS: Cover gram-negatives (E. coli, Klebsiella), Enterococcus, and anaerobes (Bacteroides)",
               "COMMON REGIMENS: Pip-tazo, Ampicillin-sulbactam, or Cipro + metronidazole",
-              "CHOLANGITIS ≠ CHOLECYSTITIS: Cholangitis is DUCT infection (obstruction), cholecystitis is GALLBLADDER infection",
+              "CHOLANGITIS \u2260 CHOLECYSTITIS: Cholangitis is DUCT infection (obstruction), cholecystitis is GALLBLADDER infection",
               "COMPLICATIONS: Hepatic abscess, septic shock, secondary biliary cirrhosis if untreated"
             ],
             "evidenceBasedPearls": [
@@ -5550,13 +6257,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Acute Cholangitis - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "perforated-viscus",
       "title": "Sudden Severe Abdominal Pain with Rigidity",
       "category": "Surgery",
-      "icon": "⚠️",
+      "icon": "\u26a0\ufe0f",
       "difficulty": "advanced",
       "level": "clerkship",
       "urgency": "emergent",
@@ -5599,7 +6365,7 @@
             "BP": "92/58",
             "HR": 122,
             "RR": 26,
-            "Temp": "101.4°F",
+            "Temp": "101.4\u00b0F",
             "SpO2": "94%"
           },
           "missedConsequences": {
@@ -5743,7 +6509,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 92/58 (hypotensive), HR 122 (tachycardic), RR 26 (tachypneic), Temp 101.4°F",
+              "finding": "BP 92/58 (hypotensive), HR 122 (tachycardic), RR 26 (tachypneic), Temp 101.4\u00b0F",
               "tier": "essential",
               "linkedDx": [
                 "Sepsis from Peritonitis"
@@ -5912,13 +6678,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Perforated Viscus - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "incarcerated-hernia",
       "title": "Painful Irreducible Groin Lump with Vomiting",
       "category": "Surgery",
-      "icon": "🔴",
+      "icon": "\ud83d\udd34",
       "difficulty": "intermediate",
       "level": "clerkship",
       "urgency": "emergent",
@@ -5961,7 +6786,7 @@
             "BP": "108/72",
             "HR": 108,
             "RR": 20,
-            "Temp": "100.8°F",
+            "Temp": "100.8\u00b0F",
             "SpO2": "96%"
           },
           "missedConsequences": {
@@ -6122,7 +6947,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 108/72, HR 108 (tachycardic), Temp 100.8°F (low-grade fever)",
+              "finding": "BP 108/72, HR 108 (tachycardic), Temp 100.8\u00b0F (low-grade fever)",
               "tier": "essential",
               "linkedDx": [
                 "Strangulation"
@@ -6275,13 +7100,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Incarcerated Hernia - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mesenteric-ischemia",
       "title": "Severe Abdominal Pain Out of Proportion to Exam",
       "category": "Surgery",
-      "icon": "🩸",
+      "icon": "\ud83e\ude78",
       "difficulty": "advanced",
       "level": "clerkship",
       "urgency": "emergent",
@@ -6325,7 +7209,7 @@
             "BP": "148/88",
             "HR": 112,
             "RR": 22,
-            "Temp": "98.8°F",
+            "Temp": "98.8\u00b0F",
             "SpO2": "95%"
           },
           "missedConsequences": {
@@ -6491,7 +7375,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 148/88, HR 112 irregular (AF), RR 22, Temp 98.8°F",
+              "finding": "BP 148/88, HR 112 irregular (AF), RR 22, Temp 98.8\u00b0F",
               "tier": "essential",
               "linkedDx": [
                 "Atrial Fibrillation"
@@ -6674,13 +7558,72 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Mesenteric Ischemia - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "fourniers-gangrene",
       "title": "Severe Perineal Pain with Swelling and Fever",
       "category": "Surgery",
-      "icon": "☠️",
+      "icon": "\u2620\ufe0f",
       "difficulty": "advanced",
       "level": "clerkship",
       "urgency": "emergent",
@@ -6724,7 +7667,7 @@
             "BP": "88/52",
             "HR": 128,
             "RR": 26,
-            "Temp": "103.8°F",
+            "Temp": "103.8\u00b0F",
             "SpO2": "92%"
           },
           "missedConsequences": {
@@ -6885,7 +7828,7 @@
               "id": "vitals",
               "text": "Review vital signs",
               "category": "Vitals",
-              "finding": "BP 88/52 (SHOCK), HR 128, RR 26, Temp 103.8°F, SpO2 92% - patient is septic",
+              "finding": "BP 88/52 (SHOCK), HR 128, RR 26, Temp 103.8\u00b0F, SpO2 92% - patient is septic",
               "tier": "essential",
               "linkedDx": [
                 "Septic Shock"
@@ -6954,7 +7897,7 @@
                 "name": "LRINEC Score",
                 "result": "Score = 10 (high risk for NSTI): WBC>25 (4pts), Hgb<11 (2pts), Na<135 (2pts), Cr>1.6 (2pts)",
                 "tier": "helpful",
-                "reasoning": "LRINEC ≥6 = high suspicion for NSTI. But clinical diagnosis shouldn't wait for score."
+                "reasoning": "LRINEC \u22656 = high suspicion for NSTI. But clinical diagnosis shouldn't wait for score."
               }
             ],
             "imaging": [
@@ -7017,7 +7960,7 @@
               "POLYMICROBIAL: Mixed aerobic + anaerobic bacteria. Requires broad coverage.",
               "ANTIBIOTICS + SURGERY: Antibiotics alone will NOT work. Must debride all necrotic tissue.",
               "REPEAT DEBRIDEMENTS: Usually need multiple trips to OR (second-look at 24-48h)",
-              "LRINEC SCORE: WBC, Hgb, Na, Glucose, Creatinine, CRP. ≥6 = high suspicion. But clinical diagnosis paramount."
+              "LRINEC SCORE: WBC, Hgb, Na, Glucose, Creatinine, CRP. \u22656 = high suspicion. But clinical diagnosis paramount."
             ],
             "evidenceBasedPearls": [
               {
@@ -7030,11 +7973,11 @@
               },
               {
                 "topic": "LRINEC Score Validation",
-                "keyFinding": "LRINEC ≥6 has PPV 92% and NPV 96% for necrotizing fasciitis",
+                "keyFinding": "LRINEC \u22656 has PPV 92% and NPV 96% for necrotizing fasciitis",
                 "source": "Wong CH et al., Crit Care Med 2004",
                 "clinicalImplication": "LRINEC helps identify NSTI but clinical suspicion should drive decision, not score",
                 "level": "Level B evidence",
-                "statistic": "LRINEC: ≥6 = high risk, 6-7 = intermediate, ≥8 = strongly suggestive of NSTI"
+                "statistic": "LRINEC: \u22656 = high risk, 6-7 = intermediate, \u22658 = strongly suggestive of NSTI"
               },
               {
                 "topic": "Fournier's Severity Index",
@@ -7057,7 +8000,384 @@
             "previousERVisits": "Uses healthcare appropriately. No excessive ER utilization."
           }
         }
-      }
+      },
+      "references": [
+        {
+          "title": "Fourniers Gangrene - StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/",
+          "source": "NCBI Bookshelf"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wound-healing",
+      "title": "The Non-Healing Wound",
+      "category": "Surgery",
+      "icon": "\ud83e\ude79",
+      "difficulty": "intermediate",
+      "urgency": "routine",
+      "variants": {
+        "wound-healing-primary": {
+          "name": "Patient",
+          "chiefComplaint": "Diabetic patient with chronic foot wound not healing",
+          "variantDescription": "Phases of wound healing, primary vs secondary vs tertiary intention, factors impairing healing",
+          "vitalSigns": {
+            "BP": "120/80",
+            "HR": 82,
+            "RR": 16,
+            "Temp": "98.6\u00b0F",
+            "SpO2": "98%"
+          },
+          "keyFindings": [
+            "Phases: Hemostasis (minutes) \u2192 Inflammation (days 1-4) \u2192 Proliferation (days 4-21, collagen deposition) \u2192 Remodeling (weeks-months)",
+            "Primary intention: clean wound edges approximated (surgical closure)",
+            "Secondary intention: wound left open to granulate (contaminated/infected wounds)",
+            "Tertiary (delayed primary): wound left open initially, closed after infection controlled"
+          ],
+          "correctDx": "Wound Healing & Surgical Nutrition",
+          "commonPitfalls": [
+            "Not recognizing key features of Wound Healing & Surgical Nutrition",
+            "Delayed diagnosis",
+            "Inadequate workup"
+          ],
+          "mcqs": [
+            {
+              "id": "mcq1",
+              "timing": "after-history",
+              "question": "What is the most important consideration in this case?",
+              "options": [
+                {
+                  "text": "Phases: Hemostasis (minutes) \u2192 Inflammation (days 1-4) \u2192 Proliferation (days 4-21, collagen deposition) \u2192 Remodeling (weeks-months)",
+                  "correct": true,
+                  "explanation": "This is the key concept."
+                },
+                {
+                  "text": "No further workup needed",
+                  "correct": false,
+                  "explanation": "Further evaluation is warranted."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Wound Healing & Surgical Nutrition Adventure",
+          "url": "adventure-cases/wound-healing-expanded-adventure.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Wound Healing & Surgical Nutrition Deep Dive",
+          "url": "wound-healing-deep-dive.json"
+        }
+      ]
+    },
+    {
+      "id": "preop-postop",
+      "title": "The Pre-Op Clearance",
+      "category": "Surgery",
+      "icon": "\ud83c\udfe5",
+      "difficulty": "intermediate",
+      "urgency": "routine",
+      "variants": {
+        "preop-postop-primary": {
+          "name": "Patient",
+          "chiefComplaint": "Patient with cardiac history needing non-cardiac surgery clearance",
+          "variantDescription": "Cardiac risk assessment, medication management perioperatively, VTE prophylaxis, post-op fever timing",
+          "vitalSigns": {
+            "BP": "120/80",
+            "HR": 82,
+            "RR": 16,
+            "Temp": "98.6\u00b0F",
+            "SpO2": "98%"
+          },
+          "keyFindings": [
+            "Revised Cardiac Risk Index (RCRI/Lee Index): 6 risk factors (IHD, CHF, CVD, DM on insulin, CKD, high-risk surgery)",
+            "Continue: beta-blockers, statins, antihypertensives (most); HOLD: ACEi/ARBs on day of surgery, anticoagulants per protocol",
+            "VTE prophylaxis: SCDs \u00b1 pharmacologic (heparin/enoxaparin) based on risk",
+            "Post-op fever timing: Wind (atelectasis, POD 1-2) \u2192 Water (UTI, POD 3-5) \u2192 Wound (SSI, POD 5-7) \u2192 Walking (DVT/PE, POD 5+) \u2192 Wonder drugs (drug fever)"
+          ],
+          "correctDx": "Pre/Post-Operative Management",
+          "commonPitfalls": [
+            "Not recognizing key features of Pre/Post-Operative Management",
+            "Delayed diagnosis",
+            "Inadequate workup"
+          ],
+          "mcqs": [
+            {
+              "id": "mcq1",
+              "timing": "after-history",
+              "question": "What is the most important consideration in this case?",
+              "options": [
+                {
+                  "text": "Revised Cardiac Risk Index (RCRI/Lee Index): 6 risk factors (IHD, CHF, CVD, DM on insulin, CKD, high-risk surgery)",
+                  "correct": true,
+                  "explanation": "This is the key concept."
+                },
+                {
+                  "text": "No further workup needed",
+                  "correct": false,
+                  "explanation": "Further evaluation is warranted."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "references": [
+        {
+          "title": "ATLS Guidelines - Trauma Management",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "ACS Wound Healing Guidelines",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/",
+          "source": "StatPearls"
+        },
+        {
+          "title": "Appendicitis Diagnosis - NCBI",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+          "source": "StatPearls"
+        }
+      ],
+      "questions": [
+        {
+          "stem": "Based on the clinical presentation, which is the MOST appropriate next step?",
+          "options": [
+            {
+              "text": "Systematic history and focused physical examination",
+              "correct": true,
+              "explanation": "A targeted history and physical exam is the essential first step in clinical reasoning, guiding hypothesis generation and differential diagnosis."
+            },
+            {
+              "text": "Immediate empiric broad-spectrum treatment",
+              "correct": false,
+              "explanation": "Empiric treatment before adequate evaluation risks missing the correct diagnosis and may cause harm."
+            },
+            {
+              "text": "Comprehensive laboratory panel and imaging",
+              "correct": false,
+              "explanation": "Diagnostic testing should be hypothesis-driven, not shotgun; targeted tests based on clinical reasoning yield better outcomes."
+            },
+            {
+              "text": "Urgent subspecialty consultation",
+              "correct": false,
+              "explanation": "Consultation may be appropriate later but should follow initial clinical assessment and diagnostic reasoning."
+            }
+          ]
+        },
+        {
+          "stem": "Which cognitive bias poses the greatest risk in this clinical scenario?",
+          "options": [
+            {
+              "text": "Availability bias",
+              "correct": false,
+              "explanation": "Availability bias (overweighting recent experiences) is common but not the most frequent source of error in this scenario."
+            },
+            {
+              "text": "Anchoring bias",
+              "correct": false,
+              "explanation": "Anchoring (fixating on initial impression) is a risk but can be mitigated by systematic differential generation."
+            },
+            {
+              "text": "Premature closure",
+              "correct": true,
+              "explanation": "Premature closure \u2014 accepting a diagnosis before it is fully verified \u2014 is the single most common cognitive error in clinical reasoning across all settings."
+            },
+            {
+              "text": "Confirmation bias",
+              "correct": false,
+              "explanation": "Confirmation bias (seeking only supporting evidence) contributes to error but often follows from premature closure."
+            }
+          ]
+        },
+        {
+          "stem": "A 25-year-old male arrives after a motorcycle accident with distended neck veins, hypotension, and absent breath sounds on the left. What is the most appropriate immediate intervention?",
+          "options": [
+            {
+              "text": "Needle decompression at the 2nd intercostal space, midclavicular line, left side",
+              "correct": true,
+              "explanation": "This classic triad (JVD, hypotension, absent breath sounds) is tension pneumothorax \u2014 a clinical diagnosis requiring IMMEDIATE needle decompression before imaging. Per ATLS, insert a 14-gauge needle at the 2nd ICS midclavicular line (or 5th ICS anterior axillary line) followed by tube thoracostomy."
+            },
+            {
+              "text": "Obtain a portable chest X-ray to confirm the diagnosis",
+              "correct": false,
+              "explanation": "Tension pneumothorax is a CLINICAL diagnosis. Waiting for imaging delays life-saving treatment and can result in cardiovascular collapse and death. Treat first, image after."
+            },
+            {
+              "text": "Perform emergent pericardiocentesis",
+              "correct": false,
+              "explanation": "While Beck's triad (JVD, hypotension, muffled heart sounds) suggests cardiac tamponade, the ABSENT BREATH SOUNDS distinguish tension pneumothorax. Tamponade does not cause absent breath sounds."
+            },
+            {
+              "text": "Intubate and start positive pressure ventilation",
+              "correct": false,
+              "explanation": "Positive pressure ventilation in an undecompressed tension pneumothorax will worsen the condition by forcing more air into the pleural space, accelerating cardiovascular collapse."
+            }
+          ]
+        }
+      ],
+      "platformLinks": [
+        {
+          "type": "adventure",
+          "text": "\ud83d\uddfa\ufe0f Pre/Post-Operative Management Adventure",
+          "url": "adventure-cases/preop-postop-expanded-adventure.html"
+        },
+        {
+          "type": "deepDive",
+          "text": "\ud83d\udcda Pre/Post-Operative Management Deep Dive",
+          "url": "preop-postop-deep-dive.json"
+        }
+      ]
     }
   ]
 }

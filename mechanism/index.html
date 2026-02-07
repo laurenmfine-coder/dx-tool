@@ -338,6 +338,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 
                 <a href="../reference-library.html" class="nav-link">📚 References</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+                <a href="../module-catalog.html" class="nav-link">📚 Catalog</a>
+                <a href="../crt-hub.html" class="nav-link">🧠 CRT Hub</a>
+                <a href="../quiz-engine.html" class="nav-link">🎯 Quiz</a>
                 <a href="../auth/register.html" class="nav-link nav-signin">Sign In</a>
             </div>
         </div>
@@ -367,7 +370,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <section style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%); padding: 48px 24px; border-bottom: 1px solid #e2e8f0;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <h2 style="text-align: center; font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 8px;">All Learning Content</h2>
-            <p style="text-align: center; color: #64748b; margin-bottom: 32px;">251 interactive modules across three areas</p>
+            <p style="text-align: center; color: #64748b; margin-bottom: 32px;">279 interactive modules across three areas</p>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 <!-- Pathophysiology Card -->
@@ -376,7 +379,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                         <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">⚙️</div>
                         <div>
                             <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Pathophysiology</h3>
-                            <span style="background: #059669; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">195 modules</span>
+                            <span style="background: #059669; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">312 modules</span>
                         </div>
                     </div>
                     <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Master disease mechanisms across all organ systems. Understand the "why" behind clinical presentations.</p>
@@ -388,7 +391,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                         <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">🦠</div>
                         <div>
                             <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Microbiology</h3>
-                            <span style="background: #d97706; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">40 modules</span>
+                            <span style="background: #d97706; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">312 modules</span>
                         </div>
                     </div>
                     <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Bacteria, viruses, fungi, and parasites. Clinical correlations and antimicrobial considerations.</p>
@@ -400,7 +403,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                         <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">💊</div>
                         <div>
                             <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Pharmacology</h3>
-                            <span style="background: #2563eb; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">16 modules</span>
+                            <span style="background: #2563eb; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">312 modules</span>
                         </div>
                     </div>
                     <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Drug mechanisms, pharmacokinetics, and clinical applications. Focus on antimicrobials and key drug classes.</p>
@@ -412,256 +415,238 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <!-- Pathophysiology Section Header -->
     <div id="pathophysiology" style="background: #059669; color: white; padding: 24px; text-align: center; margin-top: 0;">
         <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0;">⚙️ Pathophysiology Modules</h2>
-        <p style="opacity: 0.9; margin: 8px 0 0 0;">195 interactive modules organized by system</p>
+        <p style="opacity: 0.9; margin: 8px 0 0 0;">279 interactive modules + 33 embryology CRTs organized by system</p>
     </div>
     
     <main class="main">
-        <!-- Critical Care -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🚨</span>
-                <span class="category-title">Critical Care</span>
-                <span class="category-count">1 module</span>
+        <!-- Dynamic Search & Filter Controls -->
+        <div style="margin-bottom:32px;">
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+                <div style="flex:1;min-width:250px;position:relative;">
+                    <input type="text" id="mechSearch" placeholder="Search modules by name, topic, or keyword..."
+                        style="width:100%;padding:12px 16px 12px 42px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--bg-card);color:var(--text-primary);outline:none;transition:border .2s;"
+                        oninput="filterModules()" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+                    <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;">🔍</span>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;" id="viewToggle">
+                    <button onclick="setMechView('grid')" id="gridViewBtn" class="view-toggle-btn active" style="padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:var(--primary);color:white;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;">▦ Grid</button>
+                    <button onclick="setMechView('list')" id="listViewBtn" class="view-toggle-btn" style="padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text-secondary);cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;">☰ List</button>
+                </div>
             </div>
-            <div class="module-grid">
-                <a href="sepsis-shock-module.html" class="module-card">
-                    <div class="module-icon">🚨</div>
-                    <div class="module-title">Sepsis & Shock</div>
-                    <div class="module-desc">Sepsis-3 definitions, shock classification, Hour-1 bundle, vasopressor selection, lactate physiology, and resuscitation targets.</div>
-                    <div class="module-meta"><span>📚 18 concepts</span><span>❓ 15 MCQs</span></div>
-                </a>
+            <div id="categoryFilters" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
+            <div id="resultsInfo" style="font-size:13px;color:var(--text-secondary);"></div>
+        </div>
+
+        <!-- Dynamic Module Container -->
+        <div id="modulesContainer">
+            <div style="text-align:center;padding:60px;color:var(--text-secondary);">
+                <div style="font-size:32px;margin-bottom:8px;">⏳</div>
+                <p>Loading modules...</p>
             </div>
         </div>
-        
-        <!-- Cardiovascular -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">❤️</span>
-                <span class="category-title">Cardiovascular</span>
-                <span class="category-count">4 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="acs-module.html" class="module-card">
-                    <div class="module-icon">🫀</div>
-                    <div class="module-title">Acute Coronary Syndrome</div>
-                    <div class="module-desc">Plaque rupture to reperfusion. STEMI vs NSTEMI pathophysiology, troponin dynamics, and time-critical interventions.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-                <a href="hf-module.html" class="module-card">
-                    <div class="module-icon">💔</div>
-                    <div class="module-title">Heart Failure</div>
-                    <div class="module-desc">HFrEF vs HFpEF mechanisms, neurohormonal activation, GDMT pillars, and hemodynamic profiles.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="syncope-arrhythmia-module.html" class="module-card">
-                    <div class="module-icon">💓</div>
-                    <div class="module-title">Syncope & Arrhythmias</div>
-                    <div class="module-desc">Risk stratification, tachyarrhythmia vs bradyarrhythmia mechanisms, and ECG pattern recognition.</div>
-                    <div class="module-meta"><span>📚 16 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="vte-pe-module.html" class="module-card">
-                    <div class="module-icon">🩸</div>
-                    <div class="module-title">VTE & Pulmonary Embolism</div>
-                    <div class="module-desc">Virchow's triad, Wells criteria, risk stratification, and anticoagulation selection.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Pulmonary -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🫁</span>
-                <span class="category-title">Pulmonary</span>
-                <span class="category-count">4 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="pulmonary-physiology-foundations.html" class="module-card">
-                    <div class="module-icon">📐</div>
-                    <div class="module-title">Pulmonary Physiology Foundations</div>
-                    <div class="module-desc">Lung volumes, ventilation-perfusion, gas exchange, respiratory mechanics, and control of breathing.</div>
-                    <div class="module-meta"><span>📚 20 concepts</span><span>❓ Foundation</span></div>
-                </a>
-                <a href="obstructive-lung-module.html" class="module-card">
-                    <div class="module-icon">🌬️</div>
-                    <div class="module-title">Obstructive Lung Disease</div>
-                    <div class="module-desc">COPD vs asthma, EIB pathophysiology, EILO differential, spirometry interpretation, and inhaler selection.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="pft-interpretation-module.html" class="module-card">
-                    <div class="module-icon">📊</div>
-                    <div class="module-title">PFT Interpretation</div>
-                    <div class="module-desc">Spirometry patterns, flow-volume loops, DLCO interpretation, and interactive diagnostic tool.</div>
-                    <div class="module-meta"><span>🔧 Interactive tool</span><span>❓ EBRS MCQs</span></div>
-                </a>
-                <a href="pneumonia-module.html" class="module-card">
-                    <div class="module-icon">🦠</div>
-                    <div class="module-title">Pneumonia & Respiratory Infections</div>
-                    <div class="module-desc">CAP vs HAP/VAP, pathogen clues, CURB-65 severity, and evidence-based antibiotic selection.</div>
-                    <div class="module-meta"><span>📚 16 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Allergy/Immunology -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🔬</span>
-                <span class="category-title">Allergy/Immunology</span>
-                <span class="category-count">1 module</span>
-            </div>
-            <div class="module-grid">
-                <a href="mast-cell-module.html" class="module-card">
-                    <div class="module-icon">🔬</div>
-                    <div class="module-title">Mast Cell Disorders</div>
-                    <div class="module-desc">MCAS diagnostic criteria, tryptase interpretation, mastocytosis classification, and treatment ladder.</div>
-                    <div class="module-meta"><span>🔧 Tryptase calculator</span><span>❓ EBRS MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Renal & Electrolytes -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🫘</span>
-                <span class="category-title">Renal & Electrolytes</span>
-                <span class="category-count">4 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="aki-module.html" class="module-card">
-                    <div class="module-icon">💧</div>
-                    <div class="module-title">Acute Kidney Injury</div>
-                    <div class="module-desc">Pre-renal, intrinsic, and post-renal mechanisms. FENa, urinary indices, and ATN vs AIN.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-                <a href="hyponatremia-module.html" class="module-card">
-                    <div class="module-icon">🧂</div>
-                    <div class="module-title">Hyponatremia</div>
-                    <div class="module-desc">Osmolality-based approach, volume status assessment, SIADH diagnosis, and safe correction rates.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-                <a href="potassium-module.html" class="module-card">
-                    <div class="module-icon">⚡</div>
-                    <div class="module-title">Potassium Disorders</div>
-                    <div class="module-desc">Hypo/hyperkalemia mechanisms, ECG changes, emergency management, and the magnesium connection.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="acid-base-module.html" class="module-card">
-                    <div class="module-icon">⚗️</div>
-                    <div class="module-title">Acid-Base Disorders</div>
-                    <div class="module-desc">5-step ABG interpretation, anion gap, delta-delta, Winter's formula, and mixed disorders.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Neurology -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🧠</span>
-                <span class="category-title">Neurology</span>
-                <span class="category-count">1 module</span>
-            </div>
-            <div class="module-grid">
-                <a href="stroke-module.html" class="module-card">
-                    <div class="module-icon">⚡</div>
-                    <div class="module-title">Stroke</div>
-                    <div class="module-desc">Ischemic vs hemorrhagic, vascular territories, tPA windows, thrombectomy criteria, and secondary prevention.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Endocrine -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🦋</span>
-                <span class="category-title">Endocrine</span>
-                <span class="category-count">3 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="diabetes-dka-module.html" class="module-card">
-                    <div class="module-icon">🍬</div>
-                    <div class="module-title">Diabetes & DKA</div>
-                    <div class="module-desc">Insulin deficiency cascade, DKA vs HHS, anion gap closure, and glucose management protocols.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="thyroid-module.html" class="module-card">
-                    <div class="module-icon">🦋</div>
-                    <div class="module-title">Thyroid Disorders</div>
-                    <div class="module-desc">HPT axis, TSH interpretation, Graves vs Hashimoto, thyroid storm, and myxedema coma.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-                <a href="endocrine-emergencies.html" class="module-card">
-                    <div class="module-icon">🚨</div>
-                    <div class="module-title">Endocrine Emergencies</div>
-                    <div class="module-desc">Adrenal crisis, myxedema coma, thyroid storm, hypercalcemic crisis, and pheochromocytoma crisis.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- GI & Hematology -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🩺</span>
-                <span class="category-title">GI & Hematology</span>
-                <span class="category-count">3 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="gi-bleeding-module.html" class="module-card">
-                    <div class="module-icon">🩸</div>
-                    <div class="module-title">GI Bleeding</div>
-                    <div class="module-desc">Upper vs lower GI bleed, hemodynamic assessment, risk scores, PPI timing, and variceal management.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-                <a href="liver-cirrhosis-module.html" class="module-card">
-                    <div class="module-icon">🫁</div>
-                    <div class="module-title">Liver Disease & Cirrhosis</div>
-                    <div class="module-desc">Portal hypertension, ascites management, hepatic encephalopathy, and hepatorenal syndrome.</div>
-                    <div class="module-meta"><span>📚 16 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="anemia-module.html" class="module-card">
-                    <div class="module-icon">🔴</div>
-                    <div class="module-title">Anemia</div>
-                    <div class="module-desc">MCV-based approach, iron studies interpretation, hemolysis workup, and transfusion thresholds.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Platform Tools -->
+
+        <!-- Platform Tools (preserved) -->
         <div class="tools-section">
             <h2 class="section-title">🛠️ Platform Tools</h2>
             <p class="section-subtitle">Cross-platform integration with the Dx Learning Ecosystem</p>
             <div class="tools-grid">
-                <a href="../ReasonDx/index.html" class="tool-card">
-                    <div class="tool-icon">🏥</div>
-                    <div class="tool-name">ReasonDx Cases</div>
-                </a>
-                <a href="../CoachDx/index.html" class="tool-card">
-                    <div class="tool-icon">💬</div>
-                    <div class="tool-name">CoachDx AI Coach</div>
-                </a>
-                <a href="../unified-scoreboard.html" class="tool-card">
-                    <div class="tool-icon">📊</div>
-                    <div class="tool-name">Unified Scoreboard</div>
-                </a>
-                <a href="../fingerprint-dashboard.html" class="tool-card">
-                    <div class="tool-icon">🔬</div>
-                    <div class="tool-name">Learning Fingerprint</div>
-                </a>
-                <a href="challenges.html" class="tool-card">
-                    <div class="tool-icon">🎯</div>
-                    <div class="tool-name">Challenges</div>
-                </a>
-                <a href="case-library.html" class="tool-card">
-                    <div class="tool-icon">📚</div>
-                    <div class="tool-name">Case Library</div>
-                </a>
+                <a href="../module-catalog.html" class="tool-card"><div class="tool-icon">📚</div><div class="tool-name">Full Catalog</div></a>
+                <a href="../crt-hub.html" class="tool-card"><div class="tool-icon">🧠</div><div class="tool-name">CRT Hub</div></a>
+                <a href="../quiz-engine.html" class="tool-card"><div class="tool-icon">🎯</div><div class="tool-name">Quiz Engine</div></a>
+                <a href="../ReasonDx/index.html" class="tool-card"><div class="tool-icon">🏥</div><div class="tool-name">ReasonDx Cases</div></a>
+                <a href="../CoachDx/index.html" class="tool-card"><div class="tool-icon">💬</div><div class="tool-name">CoachDx AI Coach</div></a>
+                <a href="../unified-scoreboard.html" class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">Unified Scoreboard</div></a>
+                <a href="../fingerprint-dashboard.html" class="tool-card"><div class="tool-icon">🔬</div><div class="tool-name">Learning Fingerprint</div></a>
+                <a href="challenges.html" class="tool-card"><div class="tool-icon">🏆</div><div class="tool-name">Challenges</div></a>
+                <a href="case-library.html" class="tool-card"><div class="tool-icon">📖</div><div class="tool-name">Case Library</div></a>
             </div>
         </div>
-    </main>
+
+    <script>
+    // ============================================================
+    // DYNAMIC MODULE LOADER - reads topic-map.json
+    // ============================================================
+    const CAT_ICONS = {
+        "Cardiology":"\u2764\ufe0f","Pulmonology":"\ud83e\udec1","Pulmonary":"\ud83e\udec1","Neurology":"\ud83e\udde0","Nephrology":"\ud83e\udeb8",
+        "Gastroenterology":"\ud83d\udd2c","Endocrinology":"\u26a1","Endocrine":"\u26a1","Endocrine Emergency":"\ud83d\udea8",
+        "Hematology":"\ud83e\ude78","Hematology/Oncology":"\ud83d\udd2c","Oncology":"\ud83c\udf97\ufe0f",
+        "Infectious Disease":"\ud83e\udda0","Allergy/Immunology":"\ud83d\udee1\ufe0f","Dermatology":"\ud83e\ude79","Psychiatry":"\ud83e\udde9",
+        "OB/GYN":"\ud83d\udc76","Pediatrics":"\ud83c\udf7c","Emergency Medicine":"\ud83d\udea8","Surgery":"\ud83d\udd2a",
+        "Toxicology":"\u2620\ufe0f","Anesthesiology":"\ud83d\udc89","Critical Care":"\ud83c\udfe5",
+        "GI Embryology":"\ud83e\uddec","Neuro Embryology":"\ud83e\uddec","MSK Embryology":"\ud83e\uddec",
+        "Respiratory Embryology":"\ud83e\uddec","Internal Medicine":"\ud83d\udccb","General":"\ud83d\udcda",
+        "Embryology":"\ud83e\uddec"
+    };
+
+    var MERGE_CATS = {
+        "GI Embryology":"Embryology","Neuro Embryology":"Embryology",
+        "MSK Embryology":"Embryology","Respiratory Embryology":"Embryology"
+    };
+
+    var allMechModules = [];
+    var mechView = 'grid';
+    var mechFilter = 'all';
+
+    async function loadMechModules() {
+        try {
+            var resp = await fetch('../data/topic-map.json');
+            var tm = await resp.json();
+            var topics = tm.topics || {};
+
+            allMechModules = [];
+            for (var key in topics) {
+                var val = topics[key];
+                if (!val.mechanism) continue;
+                var isCRT = val.mechanism.indexOf('-crt') >= 0;
+                var rawCat = val.category || 'General';
+                var displayCat = MERGE_CATS[rawCat] || rawCat;
+                var words = (val.displayName || key).replace(/-/g, ' ').split(' ');
+                for (var w = 0; w < words.length; w++) {
+                    if (words[w].length > 0) words[w] = words[w][0].toUpperCase() + words[w].slice(1);
+                }
+                allMechModules.push({
+                    id: key,
+                    title: val.displayName || words.join(' '),
+                    category: displayCat,
+                    rawCategory: rawCat,
+                    file: val.mechanism,
+                    keywords: val.keywords || [],
+                    isCRT: isCRT,
+                    status: val.status || 'complete'
+                });
+            }
+
+            allMechModules.sort(function(a,b) { return a.title.localeCompare(b.title); });
+            buildMechFilters();
+            filterModules();
+        } catch(e) {
+            document.getElementById('modulesContainer').innerHTML =
+                '<div style="text-align:center;padding:60px;color:var(--text-secondary);">' +
+                '<div style="font-size:32px;margin-bottom:8px;">\u26a0\ufe0f</div>' +
+                '<p>Failed to load modules. <a href="javascript:loadMechModules()">Retry</a></p></div>';
+        }
+    }
+
+    function buildMechFilters() {
+        var counts = {};
+        allMechModules.forEach(function(m) { counts[m.category] = (counts[m.category]||0)+1; });
+        var el = document.getElementById('categoryFilters');
+        var crtCount = allMechModules.filter(function(m){return m.isCRT;}).length;
+        var modCount = allMechModules.length - crtCount;
+
+        var btns = [];
+        btns.push(makeFBtn('all', 'All (' + allMechModules.length + ')', true));
+        btns.push(makeFBtn('modules', 'Modules (' + modCount + ')', false));
+        btns.push(makeFBtn('crts', 'CRTs (' + crtCount + ')', false));
+
+        var sorted = Object.entries(counts).sort(function(a,b){return b[1]-a[1];});
+        sorted.forEach(function(pair) {
+            var cat = pair[0], count = pair[1];
+            var icon = CAT_ICONS[cat] || '\ud83d\udcda';
+            btns.push(makeFBtn(cat, icon + ' ' + cat + ' (' + count + ')', false));
+        });
+        el.innerHTML = btns.join('');
+    }
+
+    function makeFBtn(val, label, active) {
+        var bg = active ? 'var(--primary)' : 'var(--bg-card)';
+        var fg = active ? 'white' : 'var(--text-secondary)';
+        var cls = active ? 'cat-filter active' : 'cat-filter';
+        return '<button class="' + cls + '" data-val="' + val.replace(/"/g,'&quot;') + '" onclick="setMechFilter(this.getAttribute(\'data-val\'),this)" style="padding:7px 14px;border:1px solid var(--border);border-radius:8px;background:' + bg + ';color:' + fg + ';cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;white-space:nowrap;">' + label + '</button>';
+    }
+
+    function setMechFilter(filter, btn) {
+        mechFilter = filter;
+        document.querySelectorAll('.cat-filter').forEach(function(b) {
+            b.style.background = 'var(--bg-card)';
+            b.style.color = 'var(--text-secondary)';
+            b.classList.remove('active');
+        });
+        if (btn) { btn.style.background = 'var(--primary)'; btn.style.color = 'white'; btn.classList.add('active'); }
+        filterModules();
+    }
+
+    function setMechView(view) {
+        mechView = view;
+        document.getElementById('gridViewBtn').style.background = view==='grid' ? 'var(--primary)' : 'var(--bg-card)';
+        document.getElementById('gridViewBtn').style.color = view==='grid' ? 'white' : 'var(--text-secondary)';
+        document.getElementById('listViewBtn').style.background = view==='list' ? 'var(--primary)' : 'var(--bg-card)';
+        document.getElementById('listViewBtn').style.color = view==='list' ? 'white' : 'var(--text-secondary)';
+        filterModules();
+    }
+
+    function filterModules() {
+        var query = (document.getElementById('mechSearch').value || '').toLowerCase().trim();
+        var filtered = allMechModules.slice();
+
+        if (mechFilter === 'modules') filtered = filtered.filter(function(m){return !m.isCRT;});
+        else if (mechFilter === 'crts') filtered = filtered.filter(function(m){return m.isCRT;});
+        else if (mechFilter !== 'all') filtered = filtered.filter(function(m){return m.category === mechFilter;});
+
+        if (query) {
+            var terms = query.split(/\s+/);
+            filtered = filtered.filter(function(m) {
+                var s = (m.title + ' ' + m.category + ' ' + m.keywords.join(' ') + ' ' + m.id).toLowerCase();
+                return terms.every(function(t){return s.indexOf(t)>=0;});
+            });
+        }
+
+        document.getElementById('resultsInfo').textContent = filtered.length + ' of ' + allMechModules.length + ' modules';
+        renderMechModules(filtered);
+    }
+
+    function renderMechModules(modules) {
+        var container = document.getElementById('modulesContainer');
+
+        if (modules.length === 0) {
+            container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-secondary);"><div style="font-size:32px;margin-bottom:8px;">\ud83d\udd0d</div><p>No modules match your search.</p></div>';
+            return;
+        }
+
+        var groups = {};
+        modules.forEach(function(m) { groups[m.category] = groups[m.category] || []; groups[m.category].push(m); });
+        var sortedCats = Object.keys(groups).sort();
+
+        var html = '';
+        sortedCats.forEach(function(cat) {
+            var icon = CAT_ICONS[cat] || '\ud83d\udcda';
+            var count = groups[cat].length;
+            html += '<div class="category-section">';
+            html += '<div class="category-header"><span class="category-icon">' + icon + '</span><span class="category-title">' + cat + '</span><span class="category-count">' + count + (count === 1 ? ' module' : ' modules') + '</span></div>';
+
+            if (mechView === 'grid') {
+                html += '<div class="module-grid">';
+                groups[cat].forEach(function(m) {
+                    var typeTag = m.isCRT ? ' <span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;vertical-align:middle;">CRT</span>' : '';
+                    var kw = m.keywords.length > 0 ? m.keywords.slice(0,5).join(' \u00b7 ') : '';
+                    html += '<a href="' + m.file + '" class="module-card">' +
+                        '<div class="module-icon">' + icon + '</div>' +
+                        '<div class="module-title">' + m.title + typeTag + '</div>' +
+                        '<div class="module-desc" style="color:var(--text-secondary);font-size:13px;">' + kw + '</div>' +
+                        '</a>';
+                });
+                html += '</div>';
+            } else {
+                html += '<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:32px;">';
+                groups[cat].forEach(function(m) {
+                    var typeTag = m.isCRT ? ' <span style="background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;">CRT</span>' : '';
+                    var kw = m.keywords.length > 0 ? m.keywords.slice(0,3).join(', ') : '';
+                    html += '<a href="' + m.file + '" style="display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:inherit;transition:all .2s;" onmouseover="this.style.borderColor=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\'">' +
+                        '<span style="font-size:20px;">' + icon + '</span>' +
+                        '<span style="font-weight:600;font-size:14px;color:var(--text-primary);">' + m.title + typeTag + '</span>' +
+                        '<span style="margin-left:auto;font-size:12px;color:var(--text-secondary);">' + kw + '</span>' +
+                        '</a>';
+                });
+                html += '</div>';
+            }
+            html += '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    loadMechModules();
+    </script>
+</main>
     
     <footer class="footer">
         <div class="footer-links">

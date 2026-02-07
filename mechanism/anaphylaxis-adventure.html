@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapid Response | ALLERGY/IMMUNOLOGY Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #9A3412; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #7C2D12 0%, #9A3412 50%, #C2410C 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .choice-btn { display: block; width: 100%; text-align: left; padding: 16px 20px; margin: 10px 0; background: var(--card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; color: var(--text); transition: all 0.2s; font-family: inherit; font-size: inherit; }
+        .choice-btn:hover { border-color: var(--accent); transform: translateX(4px); }
+        .choice-label { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .choice-detail { font-size: 0.85rem; color: var(--muted); }
+        .alert { display: flex; gap: 16px; padding: 16px 20px; border-radius: 12px; margin: 16px 0; align-items: flex-start; }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 700; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+        .tracker { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .tracker-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .tracker-items { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tracker-item { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: var(--muted); }
+        .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+        @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🎮 Rapid Response <span class="badge">ALLERGY/IMMUNOLOGY</span></div>
+            <div class="header-stats">
+                <div class="stat"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
+                <div class="stat"><div class="stat-value" id="stepCount">1/4</div><div class="stat-label">Progress</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="tracker">
+            <div class="tracker-title">Anaphylaxis</div>
+            <div class="tracker-items" id="trackerItems">
+                <span class="tracker-item" id="track_0">Epinephrine</span> <span class="tracker-item" id="track_1">Airway</span> <span class="tracker-item" id="track_2">IV Access</span> <span class="tracker-item" id="track_3">Fluids</span> <span class="tracker-item" id="track_4">Monitoring</span> <span class="tracker-item" id="track_5">Disposition</span>
+            </div>
+        </div>
+
+        <!-- Incoming Patient Card -->
+        <div class="card" id="stage_intro">
+            <div class="card-header">
+                <div class="card-phase">Incoming Patient</div>
+                <div class="card-title">🚨 EMS Radio Call</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">
+                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">8-year-old male</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">generalized hives, lip swelling, and difficulty breathing after eating at a birthday party 20 minutes ago</span>. Mom reports he ate a cookie that may have contained peanuts. Has known peanut allergy but forgot his EpiPen at home. Rapidly developing facial swelling and wheezing."
+                </div>
+                <div class="vitals-grid">
+                    <div class="vital "><div class="vital-label">Temp</div><div class="vital-value">98.6°F</div></div><div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">142</div></div><div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">78/42</div></div><div class="vital critical"><div class="vital-label">RR</div><div class="vital-value">34</div></div><div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">89%</div></div>
+                </div>
+                <div class="alert warning">
+                    <span class="alert-icon">⚠️</span>
+                    <div>
+                        <div class="alert-title">Clinical Decision Point</div>
+                        <div class="alert-desc">Anaphylaxis: multisystem involvement (skin + respiratory + cardiovascular). Hypotensive and hypoxic. This is immediately life-threatening. What is the FIRST intervention?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="stage_arrival" class="card">
+            <div class="card-header">
+                <div class="card-phase">DECISION 1</div>
+                <div class="card-title">Immediate Action</div>
+            </div>
+            <div class="card-body">
+                
+                
+                <div id="choices_arrival">
+                    <button class="choice-btn" onclick="choose('arrival', 'epi_im')">
+                <div class="choice-label">💉 IM Epinephrine 0.01 mg/kg (thigh) NOW</div>
+                <div class="choice-detail">Epinephrine is FIRST-LINE and should be given immediately</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'benadryl')">
+                <div class="choice-label">💊 IV diphenhydramine + albuterol</div>
+                <div class="choice-detail">Antihistamine + bronchodilator for the allergic reaction</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'steroids')">
+                <div class="choice-label">💊 IV methylprednisolone</div>
+                <div class="choice-detail">High-dose steroids to suppress the immune response</div>
+            </button>
+                </div>
+                <div id="fb_arrival_epi_im" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! IM epinephrine is ALWAYS the first treatment in anaphylaxis. For this ~25kg child: 0.15mg auto-injector dose (or 0.25mg of 1:1000 IM). Give in the anterolateral thigh. It reverses bronchospasm, increases BP, and reduces angioedema. Delay in epinephrine is the #1 cause of anaphylaxis death.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('epi_given')" style="margin-top:16px">Continue →</button></div><div id="fb_arrival_benadryl" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Diphenhydramine treats hives but does NOT reverse bronchospasm, hypotension, or airway edema. Albuterol helps wheezing but doesn't address cardiovascular collapse. These are adjuncts AFTER epinephrine. Giving antihistamines instead of epinephrine is the most common error in anaphylaxis management and increases mortality.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div><div id="fb_arrival_steroids" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Steroids take 4-6 hours to work and do NOTHING for acute anaphylaxis. They may prevent biphasic reactions but are never first-line. This child is in anaphylactic shock — he needs epinephrine NOW, not a medication that takes hours to act.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_epi_given" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 2</div>
+                <div class="card-title">Post-Epinephrine</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">IM epinephrine given. Within 3 minutes, wheezing improves slightly but <strong>BP remains 82/48 and SpO2 is 91%</strong>. Lip and tongue swelling is worsening.</div>
+                <div class="vitals-grid"><div class="vital "><div class="vital-label">Tryptase</div><div class="vital-value">Ordered (send within 1-2h)</div></div><div class="vital warning"><div class="vital-label">CBC</div><div class="vital-value">WBC 14.2</div></div><div class="vital "><div class="vital-label">BMP</div><div class="vital-value">Normal</div></div><div class="vital warning"><div class="vital-label">Lactate</div><div class="vital-value">3.2 mmol/L</div></div></div>
+                <div id="choices_epi_given">
+                    <button class="choice-btn" onclick="choose('epi_given', 'repeat_epi_fluids')">
+                <div class="choice-label">💉 Repeat IM epi in 5 min + NS bolus 20mL/kg + prepare epi drip</div>
+                <div class="choice-detail">Second dose epi, aggressive fluids for distributive shock, escalation plan</div>
+            </button><button class="choice-btn" onclick="choose('epi_given', 'vasopressin')">
+                <div class="choice-label">💊 Start vasopressin drip</div>
+                <div class="choice-detail">Vasopressor for refractory shock</div>
+            </button><button class="choice-btn" onclick="choose('epi_given', 'intubate_now')">
+                <div class="choice-label">🫁 Immediate intubation</div>
+                <div class="choice-detail">Secure airway before it closes</div>
+            </button>
+                </div>
+                <div id="fb_epi_given_repeat_epi_fluids" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Epinephrine can be repeated every 5-15 minutes. 35% of anaphylaxis requires a second dose. NS bolus 20 mL/kg for distributive shock (may need 40-60 mL/kg total). If refractory after 2-3 IM doses, start IV epinephrine drip (0.1-1 mcg/kg/min). Also: place patient supine with legs elevated, high-flow O2, and prepare for intubation.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('improving')" style="margin-top:16px">Continue →</button></div><div id="fb_epi_given_vasopressin" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">While vasopressin can be used in refractory anaphylactic shock, it should not replace repeat epinephrine doses. Epinephrine has unique benefits in anaphylaxis: bronchodilation (β2), vasoconstriction (α1), and mast cell stabilization. Repeat IM epi first, then escalate to IV epi drip if needed. Vasopressin is third-line.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('epi_given')" style="margin-top:16px">Try Again</button></div><div id="fb_epi_given_intubate_now" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Airway management is critical, but repeat epinephrine + fluids may resolve the angioedema and avoid intubation. If the airway IS closing (stridor, inability to phonate), then early intubation is appropriate — but use a smaller tube (edema narrows the airway). The priority sequence is: epi → fluids → airway if needed.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('epi_given')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_improving" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 3</div>
+                <div class="card-title">Response</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">After second IM epi + 500mL NS bolus: BP 96/62, HR 118, SpO2 95% on high-flow O2. Wheezing resolved. Facial swelling stabilizing. The child is more alert and less anxious.</div>
+                
+                <div id="choices_improving">
+                    <button class="choice-btn" onclick="choose('improving', 'observe_biphasic')">
+                <div class="choice-label">📋 Adjunct meds + observe 6-8 hours for biphasic reaction</div>
+                <div class="choice-detail">Diphenhydramine, ranitidine, dexamethasone now; monitor for recurrence</div>
+            </button><button class="choice-btn" onclick="choose('improving', 'discharge_epipen')">
+                <div class="choice-label">✅ Symptoms resolving — discharge with EpiPen</div>
+                <div class="choice-detail">He's better, send home with prescriptions</div>
+            </button><button class="choice-btn" onclick="choose('improving', 'more_epi')">
+                <div class="choice-label">💉 Third dose of epinephrine</div>
+                <div class="choice-detail">He's still tachycardic and mildly hypotensive</div>
+            </button>
+                </div>
+                <div id="fb_improving_observe_biphasic" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Now give adjuncts: diphenhydramine (H1), ranitidine/famotidine (H2), dexamethasone (prevents biphasic reaction in ~20% of cases). Observe minimum 4-8 hours (some guidelines say 24h for severe cases). Biphasic reaction occurs in 1-20% of cases, typically within 8-12 hours.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('resolution')" style="margin-top:16px">Continue →</button></div><div id="fb_improving_discharge_epipen" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">NEVER discharge immediately after anaphylaxis treatment! Biphasic reactions occur in up to 20% of cases and can be fatal. Minimum observation is 4-6 hours, with 8-24 hours for severe cases. He needs monitoring, adjunct medications, and formal allergy follow-up planning.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('improving')" style="margin-top:16px">Try Again</button></div><div id="fb_improving_more_epi" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">His vitals are improving — tachycardia and mild hypotension are expected as the epinephrine wears off and the reaction resolves. A third dose isn't indicated when symptoms are clearly trending better. Continue IV fluids and give adjunct medications. Reserve further epi for clinical worsening.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('improving')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_resolution" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">RESOLUTION</div>
+                <div class="card-title">Disposition</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">After 6 hours of observation: vitals normalized, no biphasic reaction. Child is eating and playing. Facial swelling resolved.</div>
+                
+                <div id="choices_resolution">
+                    <button class="choice-btn" onclick="choose('resolution', 'good_outcome')">
+                <div class="choice-label">📋 Discharge with anaphylaxis action plan</div>
+                <div class="choice-detail">EpiPen prescription, allergy referral, education</div>
+            </button>
+                </div>
+                <div id="fb_resolution_good_outcome" class="hidden">
+                        <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
+                        <div class="narrative">Excellent anaphylaxis management! Discharge essentials: EpiPen auto-injector prescription (two-pack), written anaphylaxis action plan, medical alert bracelet recommendation, allergy/immunology referral within 4-6 weeks for confirmatory testing and possible oral immunotherapy, school 504 plan. Emphasize: ALWAYS carry EpiPen and use it FIRST — antihistamines are not a substitute.</div>
+                        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+                            <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
+                            <button class="choice-btn" onclick="location.href='anaphylaxis-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
+                        </div></div></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    let currentStep = 0;
+    const totalSteps = 4;
+    let timerInterval;
+    let seconds = 0;
+
+    // Start timer
+    timerInterval = setInterval(() => {
+        seconds++;
+        const m = String(Math.floor(seconds/60)).padStart(2,'0');
+        const s = String(seconds%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m + ':' + s;
+    }, 1000);
+
+    function choose(stage, choice) {
+        // Hide choices
+        const choicesDiv = document.getElementById('choices_' + stage);
+        if (choicesDiv) choicesDiv.classList.add('hidden');
+
+        // Show feedback
+        const fb = document.getElementById('fb_' + stage + '_' + choice);
+        if (fb) fb.classList.remove('hidden');
+
+        // Update tracker
+        if (currentStep < totalSteps) {
+            const trackEl = document.getElementById('track_' + currentStep);
+            if (trackEl) trackEl.classList.add('done');
+        }
+    }
+
+    function goTo(stageId) {
+        // Hide all stages
+        document.querySelectorAll('[id^="stage_"]').forEach(el => el.classList.add('hidden'));
+
+        // Show target stage
+        const target = document.getElementById('stage_' + stageId);
+        if (target) {
+            target.classList.remove('hidden');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        currentStep++;
+        document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
+    }
+    </script>
+</body>
+</html>

@@ -1507,6 +1507,297 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </script>
 
     <script src="dx-case-nav.js"></script>
+    <script src="js/rdx-patent-innovations.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "CoachDx", platformRoot: "../" }); });</script>
+
+<!-- ============================================================ -->
+<!-- PATENT FEATURES: RPFS / CRDA / LRDT / MMD Analytics Panels   -->
+<!-- ============================================================ -->
+<style>
+.patent-section { max-width: 1400px; margin: 0 auto; padding: 0 30px 30px; }
+.patent-divider { border: none; border-top: 2px solid var(--purple, #8B5CF6); margin: 40px 0 24px; }
+.patent-heading { font-size: 1.3rem; font-weight: 700; color: var(--purple, #8B5CF6); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.patent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px; }
+.p-card { background: var(--card-bg, #fff); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border, #E5E7EB); }
+.p-card-title { font-size: 0.92rem; font-weight: 600; color: var(--purple, #8B5CF6); margin-bottom: 14px; }
+.p-metric { font-size: 2.2rem; font-weight: 700; color: var(--text, #1F2937); }
+.p-metric-label { font-size: 0.78rem; color: var(--text-light, #6B7280); }
+.p-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.p-table th { text-align: left; padding: 8px; border-bottom: 2px solid var(--border); color: var(--text-light); font-weight: 600; }
+.p-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+.p-bar { height: 8px; border-radius: 4px; background: #E5E7EB; overflow: hidden; }
+.p-bar .fill { height: 100%; border-radius: 4px; }
+.p-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+.crda-prompt { background: #F5F3FF; border-left: 3px solid var(--purple, #8B5CF6); padding: 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px; font-size: 0.85rem; }
+.crda-prompt .type { font-weight: 600; color: var(--purple); font-size: 0.78rem; margin-bottom: 4px; }
+.p-empty { text-align: center; padding: 32px; color: var(--text-light); }
+</style>
+
+<div class="patent-section">
+    <hr class="patent-divider">
+    <div class="patent-heading">🧬 Patent Innovation Analytics (RPFS · CRDA · LRDT · MMD)</div>
+
+    <!-- RPFS Cohort Overview -->
+    <div class="patent-grid" id="rpfsPanel">
+        <div class="p-card">
+            <div class="p-card-title">🧬 RPFS — Cohort Fingerprint</div>
+            <div id="rpfsCohortStats" class="p-empty">Loading RPFS data...</div>
+        </div>
+        <div class="p-card">
+            <div class="p-card-title">🧠 Cohort Bias Profile</div>
+            <div id="rpfsCohortBias"></div>
+        </div>
+        <div class="p-card">
+            <div class="p-card-title">📊 MMD — Metacognitive Events</div>
+            <div id="mmdPanel"></div>
+        </div>
+    </div>
+
+    <!-- CRDA Panel -->
+    <div class="patent-grid">
+        <div class="p-card" style="grid-column: 1 / -1;">
+            <div class="p-card-title">🔀 CRDA — Collaborative Reasoning Divergence Analysis</div>
+            <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:14px">
+                Compare two student sessions on the same case to identify reasoning divergence points and generate pedagogical prompts.
+            </p>
+            <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+                <select id="crdaSessionA" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;flex:1;min-width:200px">
+                    <option value="">Select Student A session...</option>
+                </select>
+                <select id="crdaSessionB" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);font-size:0.85rem;flex:1;min-width:200px">
+                    <option value="">Select Student B session...</option>
+                </select>
+                <button onclick="runCRDA()" style="padding:8px 20px;border-radius:8px;background:var(--purple,#8B5CF6);color:white;border:none;cursor:pointer;font-weight:600;font-size:0.85rem">Analyze Divergence</button>
+            </div>
+            <div id="crdaResults"></div>
+        </div>
+    </div>
+
+    <!-- LRDT Panel -->
+    <div class="patent-grid">
+        <div class="p-card">
+            <div class="p-card-title">🌱 LRDT — Mastery Distribution</div>
+            <div id="lrdtMastery"></div>
+        </div>
+        <div class="p-card">
+            <div class="p-card-title">📈 LRDT — Learning Rate</div>
+            <div id="lrdtRate"></div>
+        </div>
+        <div class="p-card">
+            <div class="p-card-title">🔄 Spaced Repetition — Due for Review</div>
+            <div id="lrdtReview"></div>
+        </div>
+    </div>
+
+    <!-- EPE Panel -->
+    <div class="patent-grid">
+        <div class="p-card" style="grid-column: 1 / -1;">
+            <div class="p-card-title">🎓 EPE — Expert Pathway Library</div>
+            <div id="epePanel"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    if (!window.RdxPatent) return;
+    const { RPFS, CRDA, LRDT, MMD, EPE } = window.RdxPatent;
+
+    // ---- RPFS Cohort ----
+    const agg = RPFS.getAggregate();
+    const sessions = RPFS.getSessions();
+    const rpfsStatsEl = document.getElementById('rpfsCohortStats');
+    const rpfsBiasEl = document.getElementById('rpfsCohortBias');
+
+    if (agg && agg.totalSessions > 0) {
+        rpfsStatsEl.innerHTML = `
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                <div><div class="p-metric">${agg.totalSessions}</div><div class="p-metric-label">Total Sessions</div></div>
+                <div><div class="p-metric">${agg.avgReasoningScore}</div><div class="p-metric-label">Avg Reasoning Score</div></div>
+                <div><div class="p-metric">${Math.round(agg.avgSessionDuration/60)}m</div><div class="p-metric-label">Avg Duration</div></div>
+                <div><div class="p-metric">${agg.avgPivotPoints}</div><div class="p-metric-label">Avg Pivots/Case</div></div>
+            </div>
+        `;
+        const bp = agg.biasProfile;
+        const biasItems = [
+            { label: 'Premature Closure', val: bp.prematureClosure, color: '#EF4444' },
+            { label: 'Anchoring', val: bp.anchoring, color: '#F59E0B' },
+            { label: 'Diagnostic Momentum', val: bp.diagnosticMomentum, color: '#F97316' },
+            { label: 'Confirmation Bias', val: bp.confirmationBias, color: '#EC4899' },
+            { label: 'Hypothesis Flexibility', val: bp.hypothesisFlexibility, color: '#10B981' }
+        ];
+        rpfsBiasEl.innerHTML = biasItems.map(b => `
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <span style="width:130px;font-size:0.8rem;color:var(--text-light)">${b.label}</span>
+                <div class="p-bar" style="flex:1"><div class="fill" style="width:${Math.min(100,b.val)}%;background:${b.color}"></div></div>
+                <span style="width:30px;text-align:right;font-size:0.82rem;font-weight:600">${b.val}</span>
+            </div>
+        `).join('');
+    } else {
+        rpfsStatsEl.innerHTML = '<div class="p-empty">No RPFS session data yet. Data populates as students complete cases.</div>';
+        rpfsBiasEl.innerHTML = '<div class="p-empty">—</div>';
+    }
+
+    // ---- MMD ----
+    const mmdEl = document.getElementById('mmdPanel');
+    const mmdEvents = MMD.getEvents();
+    if (mmdEvents.length > 0) {
+        const types = {};
+        mmdEvents.forEach(e => { types[e.type] = (types[e.type] || 0) + 1; });
+        mmdEl.innerHTML = `
+            <div style="margin-bottom:12px"><span class="p-metric" style="font-size:1.8rem">${mmdEvents.length}</span> <span class="p-metric-label">total moments detected</span></div>
+            <table class="p-table"><thead><tr><th>Type</th><th>Count</th></tr></thead><tbody>
+            ${Object.entries(types).sort((a,b) => b[1]-a[1]).map(([t,c]) => `<tr><td>${t.replace(/_/g,' ')}</td><td><strong>${c}</strong></td></tr>`).join('')}
+            </tbody></table>
+        `;
+    } else {
+        mmdEl.innerHTML = '<div class="p-empty">No metacognitive moments detected yet.</div>';
+    }
+
+    // ---- CRDA ----
+    const crdaSelA = document.getElementById('crdaSessionA');
+    const crdaSelB = document.getElementById('crdaSessionB');
+    sessions.forEach((s, i) => {
+        const label = `#${i+1} — ${s.session?.caseId || 'unknown'} (Score: ${s.reasoningQualityScore || '?'})`;
+        crdaSelA.innerHTML += `<option value="${i}">${label}</option>`;
+        crdaSelB.innerHTML += `<option value="${i}">${label}</option>`;
+    });
+
+    window.runCRDA = function() {
+        const idxA = parseInt(crdaSelA.value);
+        const idxB = parseInt(crdaSelB.value);
+        const resEl = document.getElementById('crdaResults');
+        if (isNaN(idxA) || isNaN(idxB)) { resEl.innerHTML = '<p style="color:var(--danger)">Please select two sessions to compare.</p>'; return; }
+        if (idxA === idxB) { resEl.innerHTML = '<p style="color:var(--danger)">Select two different sessions.</p>'; return; }
+
+        const result = CRDA.analyzeDivergence(sessions[idxA], sessions[idxB]);
+        if (!result) { resEl.innerHTML = '<p>Analysis failed.</p>'; return; }
+
+        let html = `
+            <div style="display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap">
+                <div><strong>Divergence Score:</strong> <span style="font-size:1.3rem;font-weight:700;color:${result.divergenceScore > 50 ? 'var(--danger)' : result.divergenceScore > 25 ? 'var(--warning)' : 'var(--purple)'}">${result.divergenceScore}/100</span></div>
+                <div><strong>Divergence Points:</strong> ${result.divergencePoints.length}</div>
+                <div><strong>Convergence Points:</strong> ${result.convergencePoints.length}</div>
+            </div>
+        `;
+
+        if (result.divergencePoints.length > 0) {
+            html += '<h4 style="font-size:0.88rem;margin-bottom:10px">🔀 Divergence Points</h4>';
+            html += '<table class="p-table"><thead><tr><th>Type</th><th>Details</th><th>Significance</th></tr></thead><tbody>';
+            result.divergencePoints.forEach(dp => {
+                let details = '';
+                if (dp.type === 'hypothesis_divergence') details = `A: ${dp.studentA_top} vs B: ${dp.studentB_top} (${dp.stage})`;
+                else if (dp.type === 'data_gathering_divergence') details = `Overlap: ${Math.round(dp.overlapRatio*100)}%`;
+                else if (dp.type === 'confidence_divergence') details = `A: ${dp.studentA_final}% vs B: ${dp.studentB_final}%`;
+                else if (dp.type === 'cognitive_pattern_divergence') details = `${dp.pattern}: A=${dp.studentA} vs B=${dp.studentB}`;
+                const sigColor = dp.significance === 'high' ? '#EF4444' : '#F59E0B';
+                html += `<tr><td>${dp.type.replace(/_/g,' ')}</td><td>${details}</td><td><span class="p-badge" style="background:${sigColor}22;color:${sigColor}">${dp.significance}</span></td></tr>`;
+            });
+            html += '</tbody></table>';
+        }
+
+        if (result.pedagogicalPrompts.length > 0) {
+            html += '<h4 style="font-size:0.88rem;margin:16px 0 10px">💡 Pedagogical Prompts</h4>';
+            result.pedagogicalPrompts.forEach(p => {
+                html += `<div class="crda-prompt"><div class="type">${p.type.replace(/_/g,' ').toUpperCase()}</div>${p.prompt}<div style="font-size:0.75rem;color:var(--text-light);margin-top:6px">Learning objective: ${p.learningObjective}</div></div>`;
+            });
+        }
+
+        if (result.influenceOpportunities.length > 0) {
+            html += '<h4 style="font-size:0.88rem;margin:16px 0 10px">🤝 Peer Learning Opportunities</h4>';
+            result.influenceOpportunities.forEach(o => {
+                html += `<div style="padding:10px;background:#ECFDF5;border-radius:8px;font-size:0.85rem;margin-bottom:8px">${o.recommendation}</div>`;
+            });
+        }
+
+        resEl.innerHTML = html;
+    };
+
+    // ---- LRDT ----
+    const mastery = LRDT.getTopicMastery();
+    const report = LRDT.generateInstructorReport();
+    const masteryEl = document.getElementById('lrdtMastery');
+    const rateEl = document.getElementById('lrdtRate');
+    const reviewEl = document.getElementById('lrdtReview');
+
+    if (report.topicsCovered > 0) {
+        const md = report.masteryDistribution;
+        const levelData = [
+            { label: 'Expert', count: md.expert, color: '#10B981' },
+            { label: 'Proficient', count: md.proficient, color: '#06B6D4' },
+            { label: 'Competent', count: md.competent, color: '#8B5CF6' },
+            { label: 'Developing', count: md.developing, color: '#F59E0B' },
+            { label: 'Novice', count: md.novice, color: '#EF4444' }
+        ];
+        const maxCount = Math.max(...levelData.map(l => l.count), 1);
+        masteryEl.innerHTML = `
+            <div style="margin-bottom:12px"><span class="p-metric" style="font-size:1.8rem">${report.topicsCovered}</span> <span class="p-metric-label">topics tracked</span></div>
+            ${levelData.map(l => `
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                    <span style="width:80px;font-size:0.8rem">${l.label}</span>
+                    <div class="p-bar" style="flex:1"><div class="fill" style="width:${(l.count/maxCount)*100}%;background:${l.color}"></div></div>
+                    <span style="width:24px;text-align:right;font-size:0.82rem;font-weight:600">${l.count}</span>
+                </div>
+            `).join('')}
+        `;
+
+        // Learning rate
+        const lr = report.overallLearningRate;
+        if (lr) {
+            const trendIcon = lr.trend === 'improving' ? '📈' : lr.trend === 'stable' ? '➡️' : '📉';
+            const trendColor = lr.trend === 'improving' ? '#10B981' : lr.trend === 'stable' ? '#F59E0B' : '#EF4444';
+            rateEl.innerHTML = `
+                <div style="text-align:center;margin-bottom:16px">
+                    <div style="font-size:2rem">${trendIcon}</div>
+                    <div class="p-metric" style="color:${trendColor}">${lr.improvement > 0 ? '+' : ''}${lr.improvement}</div>
+                    <div class="p-metric-label">Score improvement (first → last quarter)</div>
+                    <div style="margin-top:4px"><span class="p-badge" style="background:${trendColor}22;color:${trendColor}">${lr.trend} (${lr.percentChange > 0 ? '+' : ''}${lr.percentChange}%)</span></div>
+                </div>
+                <div style="font-size:0.82rem;color:var(--text-light)">Based on ${report.totalSessions} sessions across ${report.topicsCovered} topics.</div>
+            `;
+        } else {
+            rateEl.innerHTML = '<div class="p-empty">Need 4+ sessions to calculate learning rate.</div>';
+        }
+
+        // Recommended review
+        const reviews = report.recommendedReview;
+        if (reviews.length > 0) {
+            reviewEl.innerHTML = reviews.slice(0, 6).map(r => `
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+                    <span style="font-size:0.85rem;flex:1">${r.caseId.replace(/-/g,' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+                    <span class="p-badge" style="background:${r.urgency==='high'?'#FEF2F2':'#FFFBEB'};color:${r.urgency==='high'?'#991B1B':'#92400E'}">${r.daysSinceReview}d overdue</span>
+                </div>
+            `).join('');
+        } else {
+            reviewEl.innerHTML = '<div class="p-empty">No reviews currently due.</div>';
+        }
+    } else {
+        masteryEl.innerHTML = '<div class="p-empty">No LRDT data yet.</div>';
+        rateEl.innerHTML = '<div class="p-empty">—</div>';
+        reviewEl.innerHTML = '<div class="p-empty">—</div>';
+    }
+
+    // ---- EPE ----
+    const epeEl = document.getElementById('epePanel');
+    const expertPaths = EPE.getExpertPathways();
+    if (expertPaths.length > 0) {
+        epeEl.innerHTML = `
+            <p style="font-size:0.85rem;margin-bottom:12px"><strong>${expertPaths.length}</strong> expert pathway(s) captured.</p>
+            <table class="p-table"><thead><tr><th>Case</th><th>Expert Code</th><th>Expertise</th><th>Confidence</th><th>Decision Points</th><th>Date</th></tr></thead><tbody>
+            ${expertPaths.map(p => `<tr>
+                <td>${p.caseId || '—'}</td>
+                <td>${p.expertCode || '—'}</td>
+                <td>${'★'.repeat(p.expertiseRating||0)}${'☆'.repeat(5-(p.expertiseRating||0))}</td>
+                <td>${'★'.repeat(p.confidenceRating||0)}${'☆'.repeat(5-(p.confidenceRating||0))}</td>
+                <td>${(p.keyDecisionPoints||[]).length}</td>
+                <td>${new Date(p.timestamp||p._savedAt).toLocaleDateString()}</td>
+            </tr>`).join('')}
+            </tbody></table>
+        `;
+    } else {
+        epeEl.innerHTML = '<div class="p-empty">No expert pathways captured yet. Faculty can submit pathways during case completion in the Clinical Reasoning Trainer.</div>';
+    }
+})();
+</script>
 </body>
 </html>

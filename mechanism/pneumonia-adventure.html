@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Infiltrate | PULMONARY Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #0891B2; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #164E63 0%, #0891B2 50%, #22D3EE 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .choice-btn { display: block; width: 100%; text-align: left; padding: 16px 20px; margin: 10px 0; background: var(--card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; color: var(--text); transition: all 0.2s; font-family: inherit; font-size: inherit; }
+        .choice-btn:hover { border-color: var(--accent); transform: translateX(4px); }
+        .choice-label { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .choice-detail { font-size: 0.85rem; color: var(--muted); }
+        .alert { display: flex; gap: 16px; padding: 16px 20px; border-radius: 12px; margin: 16px 0; align-items: flex-start; }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 700; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+        .tracker { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .tracker-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .tracker-items { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tracker-item { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: var(--muted); }
+        .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+        @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🎮 Silent Infiltrate <span class="badge">PULMONARY</span></div>
+            <div class="header-stats">
+                <div class="stat"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
+                <div class="stat"><div class="stat-value" id="stepCount">1/4</div><div class="stat-label">Progress</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="tracker">
+            <div class="tracker-title">CAP Bundle</div>
+            <div class="tracker-items" id="trackerItems">
+                <span class="tracker-item" id="track_0">Cultures</span> <span class="tracker-item" id="track_1">Antibiotics</span> <span class="tracker-item" id="track_2">O2 Therapy</span> <span class="tracker-item" id="track_3">Risk Score</span> <span class="tracker-item" id="track_4">Reassess</span> <span class="tracker-item" id="track_5">Disposition</span>
+            </div>
+        </div>
+
+        <!-- Incoming Patient Card -->
+        <div class="card" id="stage_intro">
+            <div class="card-header">
+                <div class="card-phase">Incoming Patient</div>
+                <div class="card-title">🚨 EMS Radio Call</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">
+                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">68-year-old male</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">productive cough with rust-colored sputum, fever, and dyspnea for 3 days</span>. Lives independently. History of COPD and moderate alcohol use. Temp 102.8°F at home. Increasing confusion per neighbor who called 911."
+                </div>
+                <div class="vitals-grid">
+                    <div class="vital critical"><div class="vital-label">Temp</div><div class="vital-value">103.2°F</div></div><div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">108</div></div><div class="vital warning"><div class="vital-label">BP</div><div class="vital-value">98/62</div></div><div class="vital warning"><div class="vital-label">RR</div><div class="vital-value">28</div></div><div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">88%</div></div>
+                </div>
+                <div class="alert warning">
+                    <span class="alert-icon">⚠️</span>
+                    <div>
+                        <div class="alert-title">Clinical Decision Point</div>
+                        <div class="alert-desc">Community-acquired pneumonia with CURB-65 risk factors present: Confusion, Urea (pending), RR ≥30, BP systolic <90. This patient needs urgent assessment and likely ICU-level care.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="stage_arrival" class="card">
+            <div class="card-header">
+                <div class="card-phase">DECISION 1</div>
+                <div class="card-title">Initial Management</div>
+            </div>
+            <div class="card-body">
+                
+                
+                <div id="choices_arrival">
+                    <button class="choice-btn" onclick="choose('arrival', 'cultures_abx')">
+                <div class="choice-label">🦠 Blood cultures + sputum Cx → empiric IV antibiotics</div>
+                <div class="choice-detail">Obtain cultures then start ceftriaxone + azithromycin + fluids</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'oral_abx')">
+                <div class="choice-label">💊 Oral azithromycin Z-pack</div>
+                <div class="choice-detail">Standard outpatient pneumonia treatment</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'ct_first')">
+                <div class="choice-label">📷 CT chest before treatment</div>
+                <div class="choice-detail">Better imaging to characterize the infiltrate</div>
+            </button>
+                </div>
+                <div id="fb_arrival_cultures_abx" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Obtain blood cultures (×2) and sputum culture BEFORE antibiotics, but don't delay treatment. Empiric severe CAP: IV ceftriaxone (or ampicillin-sulbactam) PLUS azithromycin (or respiratory fluoroquinolone). Add MRSA coverage (vancomycin) if risk factors present. Start NS bolus for hypotension.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('workup_done')" style="margin-top:16px">Continue →</button></div><div id="fb_arrival_oral_abx" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">This is NOT an outpatient presentation. Hypoxia (SpO2 88%), hypotension, confusion, and high fever indicate severe pneumonia requiring IV antibiotics and hospital admission. Oral monotherapy has unacceptable mortality for severe CAP.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div><div id="fb_arrival_ct_first" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">A chest X-ray is sufficient initially. CT can be done later if needed (empyema, abscess, non-resolving). Delaying antibiotics for imaging increases mortality — every hour of antibiotic delay in severe pneumonia increases mortality by 3-4%.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_workup_done" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 2</div>
+                <div class="card-title">Results</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">CXR confirms right lower lobe consolidation. CURB-65 score is 4 (Confusion + BUN >19 + RR ≥30 + BP <90 + age ≥65). Procalcitonin strongly suggests bacterial etiology. Lactate is elevated.</div>
+                <div class="vitals-grid"><div class="vital "><div class="vital-label">CXR</div><div class="vital-value">RLL consolidation</div></div><div class="vital critical"><div class="vital-label">WBC</div><div class="vital-value">22,400</div></div><div class="vital critical"><div class="vital-label">Procalcitonin</div><div class="vital-value">8.4 ng/mL</div></div><div class="vital warning"><div class="vital-label">BUN</div><div class="vital-value">38 mg/dL</div></div><div class="vital warning"><div class="vital-label">Lactate</div><div class="vital-value">3.6 mmol/L</div></div><div class="vital warning"><div class="vital-label">Creatinine</div><div class="vital-value">1.8 mg/dL</div></div></div>
+                <div id="choices_workup_done">
+                    <button class="choice-btn" onclick="choose('workup_done', 'icu_admit')">
+                <div class="choice-label">🏥 ICU admission + continue broad-spectrum ABx + fluid resuscitation</div>
+                <div class="choice-detail">CURB-65 ≥3 and 2 major criteria suggest ICU level care</div>
+            </button><button class="choice-btn" onclick="choose('workup_done', 'floor_admit')">
+                <div class="choice-label">📋 General medicine floor admission</div>
+                <div class="choice-detail">Start treatment and monitor</div>
+            </button><button class="choice-btn" onclick="choose('workup_done', 'abx_adjust')">
+                <div class="choice-label">🔄 Change to fluoroquinolone monotherapy</div>
+                <div class="choice-detail">Levofloxacin covers atypicals too</div>
+            </button>
+                </div>
+                <div id="fb_workup_done_icu_admit" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! CURB-65 score of 4 predicts ~30% mortality and mandates ICU consideration. ATS/IDSA major criteria for severe CAP: requiring mechanical ventilation OR septic shock. Minor criteria include RR ≥30, PaO2/FiO2 ≤250, multilobar infiltrates, confusion, BUN ≥20, hypotension. He meets ≥3 minor criteria = ICU admission.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('icu_course')" style="margin-top:16px">Continue →</button></div><div id="fb_workup_done_floor_admit" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">CURB-65 of 4 carries ~30% mortality. Floor-level monitoring is insufficient for this severity. He needs ICU or step-down for close respiratory monitoring, potential for intubation, vasopressor access, and aggressive fluid management.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('workup_done')" style="margin-top:16px">Try Again</button></div><div id="fb_workup_done_abx_adjust" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">While respiratory fluoroquinolones are an option for severe CAP, monotherapy is inferior to combination therapy (beta-lactam + macrolide) in severe disease. Meta-analyses show combination therapy reduces mortality in severe CAP. Additionally, fluoroquinolone resistance is rising.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('workup_done')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_icu_course" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 3</div>
+                <div class="card-title">ICU Day 2</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">Despite antibiotics and 4L NS, patient develops worsening hypoxia requiring <strong>6L high-flow nasal cannula</strong>. Blood culture grows <strong>Streptococcus pneumoniae</strong>. Repeat CXR shows developing right-sided pleural effusion.</div>
+                
+                <div id="choices_icu_course">
+                    <button class="choice-btn" onclick="choose('icu_course', 'tap_effusion')">
+                <div class="choice-label">🫁 Diagnostic thoracentesis + narrow antibiotics</div>
+                <div class="choice-detail">Sample the effusion (rule out empyema) and de-escalate to penicillin</div>
+            </button><button class="choice-btn" onclick="choose('icu_course', 'ignore_effusion')">
+                <div class="choice-label">📋 Continue current antibiotics, effusion will resolve</div>
+                <div class="choice-detail">Simple parapneumonic effusions are common</div>
+            </button><button class="choice-btn" onclick="choose('icu_course', 'broaden_abx')">
+                <div class="choice-label">💉 Broaden antibiotics further</div>
+                <div class="choice-detail">Add vancomycin and piperacillin-tazobactam</div>
+            </button>
+                </div>
+                <div id="fb_icu_course_tap_effusion" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! New pleural effusion in pneumonia = must rule out empyema/complicated parapneumonic effusion. Thoracentesis criteria: pH, glucose, LDH, protein, cell count, Gram stain, culture. If pH <7.2, glucose <60, or frank pus → chest tube drainage. Blood cultures grew S. pneumoniae → narrow to IV penicillin or ceftriaxone monotherapy.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('resolution')" style="margin-top:16px">Continue →</button></div><div id="fb_icu_course_ignore_effusion" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">While simple parapneumonic effusions do resolve with antibiotics, you cannot distinguish simple from complicated (or empyema) without sampling. Untreated empyema has high mortality and morbidity. Any significant pneumonia-associated effusion should be sampled.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('icu_course')" style="margin-top:16px">Try Again</button></div><div id="fb_icu_course_broaden_abx" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">You already have the organism — S. pneumoniae from blood cultures. Broadening is the wrong direction. De-escalate based on culture and sensitivity. Adding unnecessary antibiotics increases C. difficile risk, cost, and antimicrobial resistance without benefit.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('icu_course')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_resolution" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">RESOLUTION</div>
+                <div class="card-title">Recovery</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">Thoracentesis shows simple parapneumonic effusion (pH 7.35, glucose 68). Narrowed to IV penicillin. By day 5, patient is afebrile, off supplemental O2, and eating. Effusion resolving.</div>
+                
+                <div id="choices_resolution">
+                    <button class="choice-btn" onclick="choose('resolution', 'good_outcome')">
+                <div class="choice-label">📋 Transition to oral amoxicillin + discharge planning</div>
+                <div class="choice-detail">Complete 5-7 day total course, follow-up CXR</div>
+            </button>
+                </div>
+                <div id="fb_resolution_good_outcome" class="hidden">
+                        <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
+                        <div class="narrative">Excellent management! ATS/IDSA 2019 guidelines: 5-day minimum antibiotic course (can extend to 7 for severe CAP), patient should be afebrile 48h before stopping. Transition IV→oral when improving and tolerating PO. Follow-up CXR at 6-8 weeks to document resolution (especially important in smokers to rule out underlying malignancy). Pneumococcal and influenza vaccination if not up to date.</div>
+                        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+                            <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
+                            <button class="choice-btn" onclick="location.href='pneumonia-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
+                        </div></div></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    let currentStep = 0;
+    const totalSteps = 4;
+    let timerInterval;
+    let seconds = 0;
+
+    // Start timer
+    timerInterval = setInterval(() => {
+        seconds++;
+        const m = String(Math.floor(seconds/60)).padStart(2,'0');
+        const s = String(seconds%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m + ':' + s;
+    }, 1000);
+
+    function choose(stage, choice) {
+        // Hide choices
+        const choicesDiv = document.getElementById('choices_' + stage);
+        if (choicesDiv) choicesDiv.classList.add('hidden');
+
+        // Show feedback
+        const fb = document.getElementById('fb_' + stage + '_' + choice);
+        if (fb) fb.classList.remove('hidden');
+
+        // Update tracker
+        if (currentStep < totalSteps) {
+            const trackEl = document.getElementById('track_' + currentStep);
+            if (trackEl) trackEl.classList.add('done');
+        }
+    }
+
+    function goTo(stageId) {
+        // Hide all stages
+        document.querySelectorAll('[id^="stage_"]').forEach(el => el.classList.add('hidden'));
+
+        // Show target stage
+        const target = document.getElementById('stage_' + stageId);
+        if (target) {
+            target.classList.remove('hidden');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        currentStep++;
+        document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
+    }
+    </script>
+</body>
+</html>

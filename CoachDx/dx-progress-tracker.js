@@ -692,7 +692,7 @@ const DxProgressTracker = (function() {
                     </div>
                     
                     <div class="reg-form-group">
-                        <label>Student ID (optional - for research study)</label>
+                        <label>Student ID (optional)</label>
                         <input type="text" id="regStudentId" placeholder="Your student ID number">
                     </div>
                     

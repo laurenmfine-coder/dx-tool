@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quiz Engine | ReasonDx Board Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#283548;--border:#334155;--text:#f1f5f9;--text2:#94a3b8;--accent:#3b82f6;--green:#10b981;--red:#ef4444;--amber:#f59e0b;--purple:#8b5cf6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+
+.nav{background:var(--card);border-bottom:1px solid var(--border);padding:14px 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.nav-brand{font-size:20px;font-weight:700;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:6px}
+.nav-link{padding:7px 14px;color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;border-radius:8px;transition:all .2s}
+.nav-link:hover{background:rgba(255,255,255,.08);color:var(--text)}
+.nav-link.active{background:rgba(59,130,246,.15);color:var(--accent)}
+
+.main{max-width:900px;margin:0 auto;padding:24px}
+
+/* SETUP SCREEN */
+.setup{text-align:center;padding:40px 0}
+.setup h1{font-size:32px;font-weight:800;margin-bottom:8px}
+.setup h1 span{color:var(--accent)}
+.setup p{color:var(--text2);margin-bottom:32px;font-size:15px}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;text-align:left;margin-bottom:32px}
+.setup-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.setup-section h3{font-size:15px;font-weight:700;margin-bottom:16px;color:var(--accent)}
+.cat-option{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background .15s;font-size:14px}
+.cat-option:hover{background:rgba(59,130,246,.08)}
+.cat-option input{accent-color:var(--accent);width:16px;height:16px}
+.cat-option .cat-count{margin-left:auto;font-size:12px;color:var(--text2)}
+.num-slider{margin-top:8px}
+.num-slider input[type=range]{width:100%;accent-color:var(--accent);margin:12px 0}
+.num-display{text-align:center;font-size:28px;font-weight:800;color:var(--accent)}
+.mode-options{display:flex;gap:8px;flex-wrap:wrap}
+.mode-btn{flex:1;padding:14px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);cursor:pointer;text-align:center;transition:all .2s;min-width:120px}
+.mode-btn:hover{border-color:var(--accent)}
+.mode-btn.active{border-color:var(--accent);background:rgba(59,130,246,.1)}
+.mode-btn h4{font-size:14px;margin-bottom:4px}
+.mode-btn p{font-size:12px;color:var(--text2);margin:0}
+.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:8px}
+.start-btn:hover{background:#2563eb;transform:scale(1.02)}
+.start-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* QUIZ SCREEN */
+.quiz-header{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.quiz-progress{flex:1;min-width:200px}
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.progress-text{font-size:13px;color:var(--text2)}
+.quiz-stats{display:flex;gap:16px;font-size:13px;font-weight:600}
+.qs{display:flex;align-items:center;gap:4px}
+.qs.correct{color:var(--green)}
+.qs.wrong{color:var(--red)}
+.qs.timer{color:var(--amber)}
+
+.question-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px}
+.q-number{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:8px}
+.q-source{font-size:12px;color:var(--text2);margin-bottom:12px}
+.q-stem{font-size:17px;font-weight:600;line-height:1.6;margin-bottom:24px}
+
+.options{display:flex;flex-direction:column;gap:10px}
+.option{display:flex;align-items:flex-start;gap:14px;padding:16px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;font-size:15px}
+.option:hover:not(.locked){border-color:var(--accent);background:rgba(59,130,246,.05)}
+.option.locked{cursor:default}
+.option.selected.correct{border-color:var(--green);background:rgba(16,185,129,.1)}
+.option.selected.wrong{border-color:var(--red);background:rgba(239,68,68,.1)}
+.option.show-correct{border-color:var(--green);background:rgba(16,185,129,.05)}
+.opt-letter{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;background:var(--card2);border:1px solid var(--border);flex-shrink:0}
+.option.selected.correct .opt-letter{background:var(--green);color:#fff;border-color:var(--green)}
+.option.selected.wrong .opt-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.option.show-correct .opt-letter{background:rgba(16,185,129,.2);color:var(--green);border-color:var(--green)}
+
+.feedback-box{margin-top:16px;padding:16px;border-radius:12px;font-size:14px;line-height:1.6;display:none}
+.feedback-box.show{display:block}
+.feedback-box.correct{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+.feedback-box.wrong{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+
+.nav-buttons{display:flex;justify-content:flex-end;gap:12px;margin-top:20px}
+.nav-btn{padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;border:none}
+.nav-btn.next{background:var(--accent);color:#fff}
+.nav-btn.next:hover{background:#2563eb}
+.nav-btn.skip{background:var(--card);color:var(--text2);border:1px solid var(--border)}
+.nav-btn.skip:hover{border-color:var(--text2)}
+
+/* RESULTS SCREEN */
+.results{text-align:center;padding:40px 0}
+.results h2{font-size:28px;font-weight:800;margin-bottom:8px}
+.results h2 span{color:var(--accent)}
+.score-circle{width:140px;height:140px;border-radius:50%;margin:24px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:36px;font-weight:800}
+.score-circle.high{border:4px solid var(--green);color:var(--green);background:rgba(16,185,129,.08)}
+.score-circle.mid{border:4px solid var(--amber);color:var(--amber);background:rgba(245,158,11,.08)}
+.score-circle.low{border:4px solid var(--red);color:var(--red);background:rgba(239,68,68,.08)}
+.score-circle small{font-size:13px;font-weight:500;color:var(--text2)}
+.results-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:500px;margin:24px auto;text-align:center}
+.rb-item{background:var(--card);padding:16px;border-radius:12px;border:1px solid var(--border)}
+.rb-num{font-size:24px;font-weight:800}
+.rb-label{font-size:12px;color:var(--text2)}
+.results-actions{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.review-list{text-align:left;max-width:700px;margin:32px auto 0}
+.review-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px}
+.review-item.wrong{border-left:4px solid var(--red)}
+.review-item.right{border-left:4px solid var(--green)}
+.ri-stem{font-size:14px;font-weight:600;margin-bottom:8px}
+.ri-answer{font-size:13px;color:var(--text2)}
+.ri-answer span{font-weight:600}
+
+.hidden{display:none!important}
+
+@media(max-width:640px){
+.setup-grid{grid-template-columns:1fr}
+.results-breakdown{grid-template-columns:1fr}
+.quiz-header{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+<a href="index.html" class="nav-brand">🎯 Quiz Engine</a>
+<div class="nav-links">
+<a href="module-catalog.html" class="nav-link">Catalog</a>
+<a href="crt-hub.html" class="nav-link">CRT Hub</a>
+<a href="quiz-engine.html" class="nav-link active">Quiz</a>
+<a href="tools/learning-dashboard.html" class="nav-link">Dashboard</a>
+</div>
+</div>
+</nav>
+
+<div class="main">
+<!-- SETUP SCREEN -->
+<div id="setupScreen" class="setup">
+<h1>Board Prep <span>Quiz Engine</span></h1>
+<p>Cross-module practice questions to test your clinical reasoning across specialties.</p>
+
+<div class="setup-grid">
+<div class="setup-section">
+<h3>📂 Select Categories</h3>
+<div id="categoryList"></div>
+</div>
+<div class="setup-section">
+<h3>⚙️ Quiz Settings</h3>
+<div class="num-slider">
+<label style="font-size:13px;color:var(--text2)">Number of Questions</label>
+<div class="num-display" id="numDisplay">10</div>
+<input type="range" id="numQuestions" min="5" max="50" value="10" step="5" oninput="document.getElementById('numDisplay').textContent=this.value">
+</div>
+<div style="margin-top:24px">
+<label style="font-size:13px;color:var(--text2);display:block;margin-bottom:8px">Question Order</label>
+<div class="mode-options">
+<div class="mode-btn active" onclick="setMode('random',this)"><h4>🎲 Random</h4><p>Shuffled order</p></div>
+<div class="mode-btn" onclick="setMode('sequential',this)"><h4>📋 Sequential</h4><p>By category</p></div>
+</div>
+</div>
+<div style="margin-top:24px">
+<label style="font-size:13px;color:var(--text2);display:block;margin-bottom:8px">Feedback Mode</label>
+<div class="mode-options">
+<div class="mode-btn active" onclick="setFeedback('immediate',this)"><h4>💬 Immediate</h4><p>After each Q</p></div>
+<div class="mode-btn" onclick="setFeedback('end',this)"><h4>📊 At End</h4><p>Timed exam style</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<button class="start-btn" id="startBtn" onclick="startQuiz()">Start Quiz →</button>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quizScreen" class="hidden">
+<div class="quiz-header">
+<div class="quiz-progress">
+<div class="progress-text">Question <span id="qCurrent">1</span> of <span id="qTotal">10</span></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+<div class="quiz-stats">
+<span class="qs correct">✅ <span id="correctCount">0</span></span>
+<span class="qs wrong">❌ <span id="wrongCount">0</span></span>
+<span class="qs timer">⏱ <span id="timer">0:00</span></span>
+</div>
+</div>
+
+<div class="question-card">
+<div class="q-number" id="qLabel">QUESTION 1</div>
+<div class="q-source" id="qSource"></div>
+<div class="q-stem" id="qStem"></div>
+<div class="options" id="optionsContainer"></div>
+<div class="feedback-box" id="feedbackBox"></div>
+</div>
+
+<div class="nav-buttons">
+<button class="nav-btn skip" id="skipBtn" onclick="skipQuestion()">Skip</button>
+<button class="nav-btn next hidden" id="nextBtn" onclick="nextQuestion()">Next →</button>
+</div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="resultsScreen" class="hidden"></div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let quizBank = null;
+let quizQuestions = [];
+let currentIdx = 0;
+let correctTotal = 0;
+let wrongTotal = 0;
+let skippedTotal = 0;
+let answers = [];
+let quizMode = 'random';
+let feedbackMode = 'immediate';
+let timerInterval = null;
+let elapsedSeconds = 0;
+
+// ============================================================
+// LOAD
+// ============================================================
+async function loadQuizBank() {
+    try {
+        const resp = await fetch('data/quiz-bank.json');
+        quizBank = await resp.json();
+        buildCategoryList();
+    } catch(e) {
+        console.error('Failed to load quiz bank:', e);
+        document.getElementById('categoryList').innerHTML = '<p style="color:var(--red)">Failed to load quiz bank.</p>';
+    }
+}
+
+function buildCategoryList() {
+    const cats = quizBank.categories;
+    const el = document.getElementById('categoryList');
+    
+    let html = '<div class="cat-option" onclick="toggleCat(this)"><input type="checkbox" checked data-cat="all"><span>All Categories</span><span class="cat-count">' + quizBank.questions.length + '</span></div>';
+    
+    for (const [cat, count] of Object.entries(cats).sort((a,b) => b[1]-a[1])) {
+        html += '<div class="cat-option" onclick="toggleCat(this)"><input type="checkbox" checked data-cat="' + cat + '"><span>' + cat + '</span><span class="cat-count">' + count + '</span></div>';
+    }
+    el.innerHTML = html;
+    updateStartBtn();
+}
+
+function toggleCat(el) {
+    const cb = el.querySelector('input');
+    cb.checked = !cb.checked;
+    
+    if (cb.dataset.cat === 'all') {
+        document.querySelectorAll('.cat-option input:not([data-cat=all])').forEach(c => c.checked = cb.checked);
+    } else {
+        const allCb = document.querySelector('input[data-cat=all]');
+        const others = document.querySelectorAll('.cat-option input:not([data-cat=all])');
+        const allChecked = [...others].every(c => c.checked);
+        allCb.checked = allChecked;
+    }
+    updateStartBtn();
+}
+
+function updateStartBtn() {
+    const selected = getSelectedCategories();
+    const available = quizBank ? quizBank.questions.filter(q => selected.includes(q.category)).length : 0;
+    const btn = document.getElementById('startBtn');
+    btn.disabled = available === 0;
+    btn.textContent = available > 0 ? 'Start Quiz (' + available + ' questions available) →' : 'Select at least one category';
+}
+
+function getSelectedCategories() {
+    return [...document.querySelectorAll('.cat-option input:checked:not([data-cat=all])')].map(c => c.dataset.cat);
+}
+
+function setMode(mode, btn) {
+    quizMode = mode;
+    btn.parentElement.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+
+function setFeedback(mode, btn) {
+    feedbackMode = mode;
+    btn.parentElement.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+
+// ============================================================
+// START QUIZ
+// ============================================================
+function startQuiz() {
+    const cats = getSelectedCategories();
+    const numQ = parseInt(document.getElementById('numQuestions').value);
+    
+    let pool = quizBank.questions.filter(q => cats.includes(q.category));
+    
+    if (quizMode === 'random') {
+        pool.sort(() => Math.random() - 0.5);
+    }
+    
+    quizQuestions = pool.slice(0, Math.min(numQ, pool.length));
+    currentIdx = 0;
+    correctTotal = 0;
+    wrongTotal = 0;
+    skippedTotal = 0;
+    answers = new Array(quizQuestions.length).fill(null);
+    elapsedSeconds = 0;
+    
+    document.getElementById('qTotal').textContent = quizQuestions.length;
+    
+    document.getElementById('setupScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    document.getElementById('resultsScreen').classList.add('hidden');
+    
+    timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        const m = Math.floor(elapsedSeconds / 60);
+        const s = elapsedSeconds % 60;
+        document.getElementById('timer').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+    
+    showQuestion();
+}
+
+// ============================================================
+// SHOW QUESTION
+// ============================================================
+function showQuestion() {
+    if (currentIdx >= quizQuestions.length) {
+        showResults();
+        return;
+    }
+    
+    const q = quizQuestions[currentIdx];
+    document.getElementById('qCurrent').textContent = currentIdx + 1;
+    document.getElementById('qLabel').textContent = 'QUESTION ' + (currentIdx + 1) + ' OF ' + quizQuestions.length;
+    document.getElementById('qSource').textContent = 'Source: ' + q.sourceTitle + (q.isCRT ? ' (CRT)' : '');
+    document.getElementById('qStem').textContent = q.stem;
+    
+    const pct = ((currentIdx) / quizQuestions.length * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    
+    const opts = document.getElementById('optionsContainer');
+    const letters = ['A','B','C','D','E'];
+    opts.innerHTML = q.options.map((opt, i) => 
+        '<div class="option" data-idx="' + i + '" data-correct="' + opt.correct + '" onclick="selectOption(this)">' +
+        '<div class="opt-letter">' + letters[i] + '</div>' +
+        '<div>' + opt.text + '</div></div>'
+    ).join('');
+    
+    const fb = document.getElementById('feedbackBox');
+    fb.classList.remove('show','correct','wrong');
+    fb.style.display = 'none';
+    
+    document.getElementById('nextBtn').classList.add('hidden');
+    document.getElementById('skipBtn').classList.remove('hidden');
+    
+    document.getElementById('correctCount').textContent = correctTotal;
+    document.getElementById('wrongCount').textContent = wrongTotal;
+}
+
+function selectOption(el) {
+    if (el.classList.contains('locked')) return;
+    
+    const q = quizQuestions[currentIdx];
+    const idx = parseInt(el.dataset.idx);
+    const isCorrect = el.dataset.correct === 'true';
+    
+    // Lock all options
+    document.querySelectorAll('.option').forEach(o => o.classList.add('locked'));
+    
+    el.classList.add('selected', isCorrect ? 'correct' : 'wrong');
+    
+    if (!isCorrect) {
+        document.querySelectorAll('.option').forEach(o => {
+            if (o.dataset.correct === 'true') o.classList.add('show-correct');
+        });
+    }
+    
+    answers[currentIdx] = { selected: idx, correct: isCorrect };
+    
+    if (isCorrect) correctTotal++;
+    else wrongTotal++;
+    
+    document.getElementById('correctCount').textContent = correctTotal;
+    document.getElementById('wrongCount').textContent = wrongTotal;
+    
+    if (feedbackMode === 'immediate') {
+        const fb = document.getElementById('feedbackBox');
+        const opt = q.options[idx];
+        const correctOpt = q.options.find(o => o.correct);
+        let fbText = isCorrect ? '✅ Correct! ' : '❌ Incorrect. ';
+        if (opt.feedback) fbText += opt.feedback;
+        else if (!isCorrect && correctOpt) fbText += 'The correct answer is: ' + correctOpt.text;
+        fb.innerHTML = fbText;
+        fb.className = 'feedback-box show ' + (isCorrect ? 'correct' : 'wrong');
+    }
+    
+    document.getElementById('skipBtn').classList.add('hidden');
+    document.getElementById('nextBtn').classList.remove('hidden');
+    document.getElementById('nextBtn').textContent = currentIdx === quizQuestions.length - 1 ? 'See Results →' : 'Next →';
+}
+
+function skipQuestion() {
+    answers[currentIdx] = { selected: -1, correct: false, skipped: true };
+    skippedTotal++;
+    currentIdx++;
+    showQuestion();
+}
+
+function nextQuestion() {
+    currentIdx++;
+    showQuestion();
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function showResults() {
+    clearInterval(timerInterval);
+    
+    document.getElementById('quizScreen').classList.add('hidden');
+    const screen = document.getElementById('resultsScreen');
+    screen.classList.remove('hidden');
+    
+    const pct = quizQuestions.length > 0 ? Math.round(correctTotal / quizQuestions.length * 100) : 0;
+    const scoreClass = pct >= 80 ? 'high' : pct >= 60 ? 'mid' : 'low';
+    const m = Math.floor(elapsedSeconds / 60);
+    const s = elapsedSeconds % 60;
+    
+    // Record quiz results in DxProgress
+    if (window.DxProgress) {
+        const cats = getSelectedCategories();
+        quizQuestions.forEach((q, i) => {
+            const a = answers[i];
+            if (!a || a.skipped) return;
+            // Derive topicId from category name
+            const topicId = q.category.toLowerCase().replace(/[\s\/&]+/g, '-').replace(/[^a-z0-9-]/g, '');
+            DxProgress.recordCompletion(topicId, 'quiz', null, {});
+            // Store individual question result
+            try {
+                const progress = JSON.parse(localStorage.getItem('dx-progress') || '{}');
+                if (!progress.topics) progress.topics = {};
+                if (!progress.topics[topicId]) progress.topics[topicId] = {};
+                if (!progress.topics[topicId].quiz) progress.topics[topicId].quiz = [];
+                progress.topics[topicId].quiz.push({
+                    qId: q.id || `q-${i}`,
+                    correct: !!a.correct,
+                    date: new Date().toISOString(),
+                    category: q.category,
+                    examType: q.isCRT ? 'crt' : 'mcq'
+                });
+                localStorage.setItem('dx-progress', JSON.stringify(progress));
+            } catch(e) {}
+        });
+    }
+    
+    let reviewHtml = '';
+    quizQuestions.forEach((q, i) => {
+        const a = answers[i];
+        if (!a || a.skipped) return;
+        const cls = a.correct ? 'right' : 'wrong';
+        const correctOpt = q.options.find(o => o.correct);
+        const selectedOpt = a.selected >= 0 ? q.options[a.selected] : null;
+        reviewHtml += '<div class="review-item ' + cls + '">' +
+            '<div class="ri-stem">Q' + (i+1) + '. ' + q.stem + '</div>' +
+            '<div class="ri-answer">' + (a.correct ? '✅ Correct' : '❌ Your answer: <span style="color:var(--red)">' + (selectedOpt ? selectedOpt.text : 'N/A') + '</span>') +
+            (!a.correct && correctOpt ? '<br>✅ Correct: <span style="color:var(--green)">' + correctOpt.text + '</span>' : '') +
+            '</div></div>';
+    });
+    
+    screen.innerHTML = '<div class="results">' +
+        '<h2>Quiz <span>Complete!</span></h2>' +
+        '<div class="score-circle ' + scoreClass + '">' + pct + '%<small>Score</small></div>' +
+        '<div class="results-breakdown">' +
+            '<div class="rb-item"><div class="rb-num" style="color:var(--green)">' + correctTotal + '</div><div class="rb-label">Correct</div></div>' +
+            '<div class="rb-item"><div class="rb-num" style="color:var(--red)">' + wrongTotal + '</div><div class="rb-label">Wrong</div></div>' +
+            '<div class="rb-item"><div class="rb-num" style="color:var(--amber)">' + m + ':' + (s<10?'0':'') + s + '</div><div class="rb-label">Time</div></div>' +
+        '</div>' +
+        '<div class="results-actions">' +
+            '<button class="start-btn" onclick="retryQuiz()">🔄 Try Again</button>' +
+            '<button class="nav-btn skip" onclick="newQuiz()" style="padding:16px 32px;font-size:16px">📋 New Quiz</button>' +
+            '<a href="tools/learning-dashboard.html" style="display:inline-block;padding:16px 32px;font-size:16px;background:#059669;color:white;text-decoration:none;border-radius:12px;font-weight:600;">📊 My Progress</a>' +
+        '</div>' +
+        (reviewHtml ? '<div class="review-list"><h3 style="margin-bottom:16px;color:var(--accent)">📝 Question Review</h3>' + reviewHtml + '</div>' : '') +
+        '</div>';
+}
+
+function retryQuiz() {
+    currentIdx = 0;
+    correctTotal = 0;
+    wrongTotal = 0;
+    skippedTotal = 0;
+    answers = new Array(quizQuestions.length).fill(null);
+    elapsedSeconds = 0;
+    
+    // Re-shuffle if random mode
+    if (quizMode === 'random') {
+        quizQuestions.sort(() => Math.random() - 0.5);
+    }
+    
+    document.getElementById('resultsScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    
+    timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        const m = Math.floor(elapsedSeconds / 60);
+        const s = elapsedSeconds % 60;
+        document.getElementById('timer').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+    
+    showQuestion();
+}
+
+function newQuiz() {
+    document.getElementById('resultsScreen').classList.add('hidden');
+    document.getElementById('setupScreen').classList.remove('hidden');
+}
+
+// ============================================================
+// URL PARAMETER HANDLING
+// Supports: ?topic=cardiology&mode=board-prep&n=40&timed=true&feedback=end
+// ============================================================
+function handleUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const topic = params.get('topic') || params.get('category') || params.get('subject');
+    const mode = params.get('mode');
+    const n = parseInt(params.get('n') || params.get('count'));
+    const feedback = params.get('feedback');
+    const timed = params.get('timed');
+    const autoStart = params.get('start') === 'true' || mode === 'board-prep' || mode === 'qbank';
+
+    // Wait for quiz bank to load, then apply params
+    const waitForBank = setInterval(() => {
+        if (!quizBank) return;
+        clearInterval(waitForBank);
+
+        // Auto-select topic/category
+        if (topic) {
+            // Uncheck all first
+            document.querySelectorAll('.cat-option input').forEach(cb => cb.checked = false);
+            // Check matching categories
+            const topicLower = topic.toLowerCase();
+            document.querySelectorAll('.cat-option input').forEach(cb => {
+                const cat = cb.dataset.cat.toLowerCase();
+                if (cat === topicLower || cat.includes(topicLower) || topicLower.includes(cat)) {
+                    cb.checked = true;
+                }
+            });
+            updateStartBtn();
+        }
+
+        // Set question count
+        if (n && !isNaN(n)) {
+            document.getElementById('numQuestions').value = Math.min(n, 100);
+        }
+
+        // Board prep mode: random, feedback at end, 40 questions
+        if (mode === 'board-prep' || mode === 'qbank') {
+            quizMode = 'random';
+            feedbackMode = 'end';
+            if (!n) document.getElementById('numQuestions').value = 40;
+            document.querySelectorAll('.mode-btn').forEach(b => {
+                if (b.textContent.includes('Random')) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+        }
+
+        // Set feedback mode
+        if (feedback === 'end') feedbackMode = 'end';
+        else if (feedback === 'immediate') feedbackMode = 'immediate';
+
+        // Timed mode from board-prep
+        if (timed === 'true') {
+            feedbackMode = 'end';
+        }
+
+        // Auto-start if requested
+        if (autoStart) {
+            setTimeout(() => startQuiz(), 300);
+        }
+    }, 100);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+loadQuizBank();
+handleUrlParams();
+</script>
+<script src="dx-progress.js"></script>
+</body>
+</html>

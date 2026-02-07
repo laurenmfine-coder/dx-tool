@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Prep | DxSuite — Step 1, Step 2 CK, Shelf Exams</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #059669; --primary-dark: #047857; --step1: #2563eb; --step2: #059669; --shelf: #d97706; --rotation: #7c3aed; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; }
+        
+        /* Navigation */
+        .nav { background: white; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-link { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav-link:hover { color: #18181b; }
+        .nav-link.active { color: var(--primary); font-weight: 600; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); padding: 80px 24px; text-align: center; color: white; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
+        .hero h1 span { color: #4ade80; }
+        .hero p { font-size: 20px; opacity: 0.9; max-width: 700px; margin: 0 auto 24px; line-height: 1.6; }
+        .hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 36px; font-weight: 800; color: #4ade80; }
+        .hero-stat .label { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+        
+        /* Dual Value Proposition */
+        .dual-value { max-width: 1100px; margin: -40px auto 0; padding: 0 24px; position: relative; z-index: 10; }
+        .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 768px) { .value-grid { grid-template-columns: 1fr; } }
+        .value-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid; }
+        .value-card.board { border-color: var(--step1); }
+        .value-card.reasoning { border-color: var(--primary); }
+        .value-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        .value-card p { color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+        .value-card .features { list-style: none; }
+        .value-card .features li { padding: 8px 0; font-size: 14px; color: #475569; display: flex; gap: 10px; align-items: flex-start; }
+        .value-card .features li .icon { font-size: 16px; flex-shrink: 0; }
+        
+        /* Mode Cards */
+        .content { max-width: 1100px; margin: 0 auto; padding: 64px 24px; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-header h2 { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+        .section-header p { font-size: 18px; color: #64748b; }
+        
+        .modes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 64px; }
+        @media (max-width: 768px) { .modes-grid { grid-template-columns: 1fr; } }
+        
+        .mode-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+        .mode-card.step1 { border-left: 6px solid var(--step1); }
+        .mode-card.step2 { border-left: 6px solid var(--step2); }
+        .mode-card.shelf { border-left: 6px solid var(--shelf); }
+        .mode-card.rotation { border-left: 6px solid var(--rotation); }
+        
+        .mode-icon { font-size: 48px; margin-bottom: 16px; }
+        .mode-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .mode-desc { color: #64748b; font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+        .mode-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+        .mode-stat { background: #f8fafc; padding: 8px 14px; border-radius: 10px; font-size: 13px; }
+        .mode-stat strong { color: #18181b; }
+        .mode-cta { display: inline-block; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; color: white; transition: all 0.2s; }
+        .mode-cta.step1 { background: var(--step1); }
+        .mode-cta.step2 { background: var(--step2); }
+        .mode-cta.shelf { background: var(--shelf); }
+        .mode-cta.rotation { background: var(--rotation); }
+        .mode-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        /* QBank Section */
+        .qbank-section { background: white; border-radius: 20px; padding: 48px 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 64px; }
+        .qbank-header { display: flex; align-items: center; gap: 24px; margin-bottom: 32px; }
+        .qbank-header h2 { font-size: 28px; font-weight: 700; }
+        .qbank-header p { color: #64748b; font-size: 16px; }
+        .qbank-controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+        .qbank-btn { padding: 10px 20px; border-radius: 10px; border: 2px solid #e2e8f0; background: white; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .qbank-btn:hover { background: #f8fafc; }
+        .qbank-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .qbank-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        @media (max-width: 768px) { .qbank-options { grid-template-columns: 1fr; } }
+        .qbank-option { background: #f8fafc; border-radius: 12px; padding: 20px; text-align: center; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
+        .qbank-option:hover { border-color: var(--primary); background: #f0fdf4; }
+        .qbank-option .count { font-size: 28px; font-weight: 800; color: var(--primary); }
+        .qbank-option .name { font-size: 14px; color: #475569; margin-top: 4px; }
+        .qbank-start { display: block; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; background: var(--primary); color: white; border: none; margin-top: 24px; transition: all 0.2s; }
+        .qbank-start:hover { background: var(--primary-dark); }
+        
+        /* Shelf Exam Tracks */
+        .shelf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 64px; }
+        .shelf-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); border-top: 4px solid var(--shelf); transition: all 0.3s; cursor: pointer; }
+        .shelf-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .shelf-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .shelf-info { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+        .shelf-progress { background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+        .shelf-progress-bar { height: 100%; background: var(--shelf); border-radius: 3px; transition: width 0.3s; }
+        .shelf-topics { display: flex; flex-wrap: wrap; gap: 6px; }
+        .shelf-topic { padding: 3px 10px; border-radius: 8px; font-size: 12px; background: #fef3c7; color: #92400e; }
+        
+        /* Study Plan Builder */
+        .plan-builder { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 20px; padding: 48px 40px; margin-bottom: 64px; border: 1px solid #93c5fd; }
+        .plan-builder h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #1e40af; }
+        .plan-builder p { color: #3b82f6; margin-bottom: 24px; }
+        .plan-form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 16px; align-items: end; }
+        @media (max-width: 768px) { .plan-form { grid-template-columns: 1fr; } }
+        .plan-form label { font-size: 14px; font-weight: 500; color: #1e40af; display: block; margin-bottom: 6px; }
+        .plan-form select, .plan-form input { padding: 12px 16px; border-radius: 10px; border: 2px solid #93c5fd; font-size: 14px; background: white; width: 100%; }
+        .plan-form button { padding: 12px 24px; border-radius: 10px; background: #2563eb; color: white; border: none; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .plan-form button:hover { background: #1d4ed8; }
+        
+        /* Rotation Companion */
+        .rotation-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .rotation-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); border-left: 6px solid var(--rotation); transition: all 0.3s; cursor: pointer; }
+        .rotation-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .rotation-icon { font-size: 36px; margin-bottom: 12px; }
+        .rotation-name { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .rotation-detail { color: #64748b; font-size: 14px; }
+        .rotation-detail strong { color: #18181b; }
+        
+        /* Differentiator */
+        .differentiator { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 20px; padding: 48px 40px; margin-top: 64px; border: 1px solid #a7f3d0; text-align: center; }
+        .differentiator h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; color: #166534; }
+        .differentiator p { color: #15803d; font-size: 16px; max-width: 700px; margin: 0 auto 32px; line-height: 1.6; }
+        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+        @media (max-width: 768px) { .diff-grid { grid-template-columns: 1fr; } }
+        .diff-item { background: white; border-radius: 16px; padding: 24px; }
+        .diff-item .icon { font-size: 32px; margin-bottom: 12px; }
+        .diff-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .diff-item p { color: #475569; font-size: 14px; line-height: 1.5; }
+        
+        .footer { text-align: center; padding: 48px 24px; color: #64748b; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">🩺 DxSuite</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="board-prep.html" class="nav-link active">Board Prep</a>
+                <a href="reasonlab.html" class="nav-link" style="color: #7c3aed;">ReasonLab</a>
+                <a href="reasonlab.html" class="nav-link">ReasonLab</a>
+                <a href="learn-hub.html" class="nav-link">Learn</a>
+                <a href="crt-hub.html" class="nav-link">Reasoning</a>
+                <a href="quiz-engine.html" class="nav-link">Quiz</a>
+                <a href="tools/learning-dashboard.html" class="nav-link">My Progress</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <h1>Board Prep That <span>Teaches You to Think</span></h1>
+        <p>Other QBanks tell you the right answer. DxSuite teaches you how to reason your way there — so you can handle questions you've never seen before.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="num">2,000+</div><div class="label">Board-Style MCQs</div></div>
+            <div class="hero-stat"><div class="num">244</div><div class="label">Topics</div></div>
+            <div class="hero-stat"><div class="num">323</div><div class="label">Clinical Cases</div></div>
+            <div class="hero-stat"><div class="num">7</div><div class="label">Shelf Exam Tracks</div></div>
+        </div>
+    </header>
+
+    <!-- DUAL VALUE PROPOSITION -->
+    <div class="dual-value">
+        <div class="value-grid">
+            <div class="value-card board">
+                <h2>📝 Board Prep</h2>
+                <p>Targeted question practice organized by exam, subject, and difficulty. Timed blocks, score tracking, and analytics.</p>
+                <ul class="features">
+                    <li><span class="icon">🎯</span> QBank mode with timed blocks of 40 questions</li>
+                    <li><span class="icon">📊</span> Performance analytics by subject and organ system</li>
+                    <li><span class="icon">📋</span> Shelf exam tracks aligned to each clerkship</li>
+                    <li><span class="icon">📈</span> Spaced repetition targets your weak areas</li>
+                </ul>
+            </div>
+            <div class="value-card reasoning">
+                <h2>🧠 Clinical Reasoning</h2>
+                <p>Understand the "why" behind every answer. Interactive cases that build the diagnostic thinking patterns examiners test for.</p>
+                <ul class="features">
+                    <li><span class="icon">⚙️</span> MechanismDx — visualize pathophysiology</li>
+                    <li><span class="icon">🩺</span> ReasonDx — work through full clinical cases</li>
+                    <li><span class="icon">🗺️</span> CaseFrame maps — see how diagnoses connect</li>
+                    <li><span class="icon">🤖</span> AI Tutor explains your reasoning errors</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <main class="content">
+        <!-- STUDY MODES -->
+        <div class="section-header">
+            <h2>Choose Your Study Mode</h2>
+            <p>Four ways to prepare, all building on the same deep content</p>
+        </div>
+
+        <div class="modes-grid">
+            <!-- QBank Mode -->
+            <div class="mode-card step1" onclick="scrollToSection('qbank')">
+                <div class="mode-icon">🎯</div>
+                <div class="mode-title">QBank Mode</div>
+                <div class="mode-desc">Timed blocks of board-style MCQs organized by subject, system, or random mix. Full explanations with reasoning pathways for every question.</div>
+                <div class="mode-stats">
+                    <div class="mode-stat"><strong>2,000+</strong> MCQs</div>
+                    <div class="mode-stat"><strong>40-Q</strong> timed blocks</div>
+                    <div class="mode-stat"><strong>26</strong> subjects</div>
+                </div>
+                <a href="#qbank" class="mode-cta step1">Start QBank →</a>
+            </div>
+
+            <!-- Shelf Exam Tracks -->
+            <div class="mode-card shelf" onclick="scrollToSection('shelf')">
+                <div class="mode-icon">📋</div>
+                <div class="mode-title">Shelf Exam Prep</div>
+                <div class="mode-desc">Curated tracks for each clerkship shelf exam. Content filtered to exactly what you need for Surgery, Medicine, Peds, OB/GYN, Psych, Neuro, and FM.</div>
+                <div class="mode-stats">
+                    <div class="mode-stat"><strong>7</strong> shelf tracks</div>
+                    <div class="mode-stat"><strong>78</strong> IM topics</div>
+                    <div class="mode-stat"><strong>58</strong> Peds topics</div>
+                </div>
+                <a href="#shelf" class="mode-cta shelf">Browse Shelf Tracks →</a>
+            </div>
+
+            <!-- Step Study Plans -->
+            <div class="mode-card step2" onclick="scrollToSection('study-plans')">
+                <div class="mode-icon">📈</div>
+                <div class="mode-title">Step 1 / Step 2 CK Study Plans</div>
+                <div class="mode-desc">Structured study plans with daily targets, progress milestones, and adaptive review. Tell us your exam date and we'll build your schedule.</div>
+                <div class="mode-stats">
+                    <div class="mode-stat"><strong>138</strong> Step 1 topics</div>
+                    <div class="mode-stat"><strong>153</strong> Step 2 topics</div>
+                    <div class="mode-stat"><strong>Adaptive</strong> pacing</div>
+                </div>
+                <a href="#study-plans" class="mode-cta step2">Build Study Plan →</a>
+            </div>
+
+            <!-- Clinical Rotation Companion -->
+            <div class="mode-card rotation" onclick="scrollToSection('rotations')">
+                <div class="mode-icon">🏥</div>
+                <div class="mode-title">Rotation Companion</div>
+                <div class="mode-desc">Cases and reasoning modules matched to your current clerkship. Review before rounds, prep for pimp questions, understand what you're seeing on the wards.</div>
+                <div class="mode-stats">
+                    <div class="mode-stat"><strong>323</strong> cases</div>
+                    <div class="mode-stat"><strong>244</strong> adventures</div>
+                    <div class="mode-stat"><strong>6</strong> clerkships</div>
+                </div>
+                <a href="#rotations" class="mode-cta rotation">Pick Your Rotation →</a>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- QBANK SECTION                               -->
+        <!-- ============================================ -->
+        <div id="qbank" class="qbank-section">
+            <div class="qbank-header">
+                <div>
+                    <h2>🎯 QBank Mode</h2>
+                    <p>Timed, scored question blocks — just like the real exam</p>
+                </div>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>Filter by subject:</strong></p>
+                <div class="qbank-controls" id="subjectFilters">
+                    <button class="qbank-btn active" onclick="filterQbank('all')">All Subjects</button>
+                    <button class="qbank-btn" onclick="filterQbank('cardiology')">Cardiology</button>
+                    <button class="qbank-btn" onclick="filterQbank('gi')">GI</button>
+                    <button class="qbank-btn" onclick="filterQbank('neuro')">Neurology</button>
+                    <button class="qbank-btn" onclick="filterQbank('pulm')">Pulmonary</button>
+                    <button class="qbank-btn" onclick="filterQbank('endo')">Endocrine</button>
+                    <button class="qbank-btn" onclick="filterQbank('renal')">Nephrology</button>
+                    <button class="qbank-btn" onclick="filterQbank('heme')">Hematology</button>
+                    <button class="qbank-btn" onclick="filterQbank('id')">Infectious Disease</button>
+                    <button class="qbank-btn" onclick="filterQbank('rheum')">Rheumatology</button>
+                    <button class="qbank-btn" onclick="filterQbank('psych')">Psychiatry</button>
+                    <button class="qbank-btn" onclick="filterQbank('obgyn')">OB/GYN</button>
+                    <button class="qbank-btn" onclick="filterQbank('peds')">Pediatrics</button>
+                    <button class="qbank-btn" onclick="filterQbank('surgery')">Surgery</button>
+                    <button class="qbank-btn" onclick="filterQbank('embryo')">Embryology</button>
+                </div>
+            </div>
+            <div class="qbank-options">
+                <div class="qbank-option" onclick="startQbank(10)">
+                    <div class="count">10</div>
+                    <div class="name">Quick Review<br><small style="color:#94a3b8;">~12 minutes</small></div>
+                </div>
+                <div class="qbank-option" onclick="startQbank(20)">
+                    <div class="count">20</div>
+                    <div class="name">Practice Block<br><small style="color:#94a3b8;">~25 minutes</small></div>
+                </div>
+                <div class="qbank-option" onclick="startQbank(40)">
+                    <div class="count">40</div>
+                    <div class="name">Exam Simulation<br><small style="color:#94a3b8;">~50 minutes</small></div>
+                </div>
+            </div>
+            <button class="qbank-start" onclick="startQbank(40)">Start 40-Question Block — Timed Mode 🕐</button>
+            <p style="text-align: center; margin-top: 12px; font-size: 13px; color: #94a3b8;">Every question includes a full explanation + reasoning pathway breakdown</p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- SHELF EXAM TRACKS                           -->
+        <!-- ============================================ -->
+        <div id="shelf">
+            <div class="section-header">
+                <h2>📋 Shelf Exam Tracks</h2>
+                <p>Content curated for each clerkship — cases, MCQs, deep dives, and reasoning modules</p>
+            </div>
+            <div class="shelf-grid">
+                <div class="shelf-card" onclick="openShelfTrack('im')">
+                    <div class="shelf-name">🫀 Internal Medicine</div>
+                    <div class="shelf-info"><strong>78 topics</strong> · 9 organ systems · Most comprehensive</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Cardiology</span>
+                        <span class="shelf-topic">GI</span>
+                        <span class="shelf-topic">Pulm</span>
+                        <span class="shelf-topic">Renal</span>
+                        <span class="shelf-topic">Heme</span>
+                        <span class="shelf-topic">Endo</span>
+                        <span class="shelf-topic">Rheum</span>
+                        <span class="shelf-topic">ID</span>
+                    </div>
+                </div>
+                <div class="shelf-card" onclick="openShelfTrack('surgery')">
+                    <div class="shelf-name">🔪 Surgery</div>
+                    <div class="shelf-info"><strong>25 topics</strong> · Trauma, acute abdomen, emergencies</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Trauma</span>
+                        <span class="shelf-topic">Acute Abdomen</span>
+                        <span class="shelf-topic">Emergency</span>
+                        <span class="shelf-topic">Toxicology</span>
+                    </div>
+                </div>
+                <div class="shelf-card" onclick="openShelfTrack('peds')">
+                    <div class="shelf-name">👶 Pediatrics</div>
+                    <div class="shelf-info"><strong>58 topics</strong> · Includes developmental & embryology</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Development</span>
+                        <span class="shelf-topic">Embryology</span>
+                        <span class="shelf-topic">CCHD</span>
+                        <span class="shelf-topic">Neonatology</span>
+                    </div>
+                </div>
+                <div class="shelf-card" onclick="openShelfTrack('obgyn')">
+                    <div class="shelf-name">🤰 OB/GYN</div>
+                    <div class="shelf-info"><strong>12 topics</strong> · Pregnancy, labor, gynecologic emergencies</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Placenta Previa</span>
+                        <span class="shelf-topic">Preeclampsia</span>
+                        <span class="shelf-topic">Ectopic</span>
+                    </div>
+                </div>
+                <div class="shelf-card" onclick="openShelfTrack('psych')">
+                    <div class="shelf-name">🧠 Psychiatry</div>
+                    <div class="shelf-info"><strong>13 topics</strong> · DSM-5 criteria, psychopharmacology</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Mood Disorders</span>
+                        <span class="shelf-topic">Psychosis</span>
+                        <span class="shelf-topic">Anxiety</span>
+                    </div>
+                </div>
+                <div class="shelf-card" onclick="openShelfTrack('neuro')">
+                    <div class="shelf-name">⚡ Neurology</div>
+                    <div class="shelf-info"><strong>26 topics</strong> · Stroke, seizure, demyelination</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Stroke</span>
+                        <span class="shelf-topic">MS</span>
+                        <span class="shelf-topic">Seizure</span>
+                        <span class="shelf-topic">Neuro Embryo</span>
+                    </div>
+                </div>
+                <div class="shelf-card" onclick="openShelfTrack('fm')">
+                    <div class="shelf-name">🏠 Family Medicine</div>
+                    <div class="shelf-info"><strong>40 topics</strong> · Broad coverage across systems</div>
+                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
+                    <div class="shelf-topics">
+                        <span class="shelf-topic">Preventive</span>
+                        <span class="shelf-topic">Chronic Disease</span>
+                        <span class="shelf-topic">MSK</span>
+                        <span class="shelf-topic">Derm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- STEP STUDY PLAN BUILDER                     -->
+        <!-- ============================================ -->
+        <div id="study-plans" class="plan-builder">
+            <h2>📈 Build Your Study Plan</h2>
+            <p>Tell us your exam and target date — we'll build a personalized schedule with daily topics, question goals, and progress milestones.</p>
+            <div class="plan-form">
+                <div>
+                    <label for="examSelect">Which exam?</label>
+                    <select id="examSelect">
+                        <option value="">Select exam...</option>
+                        <option value="step1">USMLE Step 1</option>
+                        <option value="step2ck">USMLE Step 2 CK</option>
+                        <option value="comlex1">COMLEX Level 1</option>
+                        <option value="comlex2">COMLEX Level 2</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="examDate">Target exam date</label>
+                    <input type="date" id="examDate">
+                </div>
+                <div>
+                    <label for="hoursPerDay">Study hours/day</label>
+                    <select id="hoursPerDay">
+                        <option value="4">4 hours/day</option>
+                        <option value="6" selected>6 hours/day</option>
+                        <option value="8">8 hours/day</option>
+                        <option value="10">10 hours/day (dedicated)</option>
+                    </select>
+                </div>
+                <div>
+                    <button onclick="generateStudyPlan()">Generate Plan →</button>
+                </div>
+            </div>
+            <div id="studyPlanResult" style="margin-top: 24px; display: none;">
+                <!-- Generated study plan appears here -->
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ROTATION COMPANION                          -->
+        <!-- ============================================ -->
+        <div id="rotations">
+            <div class="section-header">
+                <h2>🏥 Rotation Companion</h2>
+                <p>Cases and reasoning modules matched to your current clerkship</p>
+            </div>
+            <div class="rotation-grid">
+                <div class="rotation-card" onclick="openRotation('im')">
+                    <div class="rotation-icon">🫀</div>
+                    <div class="rotation-name">Internal Medicine</div>
+                    <div class="rotation-detail"><strong>78 topics</strong> · Ward-ready cases · Morning report prep</div>
+                </div>
+                <div class="rotation-card" onclick="openRotation('surgery')">
+                    <div class="rotation-icon">🔪</div>
+                    <div class="rotation-name">Surgery</div>
+                    <div class="rotation-detail"><strong>25 topics</strong> · Pre-op assessment · OR prep</div>
+                </div>
+                <div class="rotation-card" onclick="openRotation('peds')">
+                    <div class="rotation-icon">👶</div>
+                    <div class="rotation-name">Pediatrics</div>
+                    <div class="rotation-detail"><strong>58 topics</strong> · Well-child · NICU · ED cases</div>
+                </div>
+                <div class="rotation-card" onclick="openRotation('obgyn')">
+                    <div class="rotation-icon">🤰</div>
+                    <div class="rotation-name">OB/GYN</div>
+                    <div class="rotation-detail"><strong>12 topics</strong> · L&D cases · Emergencies</div>
+                </div>
+                <div class="rotation-card" onclick="openRotation('psych')">
+                    <div class="rotation-icon">🧠</div>
+                    <div class="rotation-name">Psychiatry</div>
+                    <div class="rotation-detail"><strong>13 topics</strong> · DSM-5 frameworks · Acute presentations</div>
+                </div>
+                <div class="rotation-card" onclick="openRotation('neuro')">
+                    <div class="rotation-icon">⚡</div>
+                    <div class="rotation-name">Neurology</div>
+                    <div class="rotation-detail"><strong>26 topics</strong> · Localization · Stroke protocols</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- DIFFERENTIATOR                              -->
+        <!-- ============================================ -->
+        <div class="differentiator">
+            <h2>Why DxSuite is Different</h2>
+            <p>Most QBanks teach you to recognize patterns. We teach you to reason through problems — which is what the examiners are actually testing.</p>
+            <div class="diff-grid">
+                <div class="diff-item">
+                    <div class="icon">🧩</div>
+                    <h3>Understand, Don't Memorize</h3>
+                    <p>Every MCQ links to a pathophysiology module that explains the mechanism. When you understand why, you can figure out questions you've never seen.</p>
+                </div>
+                <div class="diff-item">
+                    <div class="icon">🔍</div>
+                    <h3>Reasoning Pathway Fingerprinting</h3>
+                    <p>We track how you think, not just what you answer. Identify and correct reasoning errors before exam day.</p>
+                </div>
+                <div class="diff-item">
+                    <div class="icon">🎓</div>
+                    <h3>Built by Medical Educators</h3>
+                    <p>Created by clinical skills faculty who teach clinical reasoning at the medical school level. This is the curriculum they wish they had.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>DxSuite — Board prep that teaches you to think, not just memorize.</p>
+        <p style="margin-top: 8px;"><a href="pricing.html" style="color: var(--primary);">View Pricing</a> · <a href="auth/register.html" style="color: var(--primary);">Sign Up</a></p>
+    </footer>
+
+    <script>
+        // ============================================
+        // QBANK CONTROLS
+        // ============================================
+        let selectedSubject = 'all';
+        
+        function filterQbank(subject) {
+            selectedSubject = subject;
+            document.querySelectorAll('.qbank-controls .qbank-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function startQbank(numQuestions) {
+            // Navigate to quiz engine with params
+            const params = new URLSearchParams({
+                mode: 'qbank',
+                count: numQuestions,
+                subject: selectedSubject,
+                timed: 'true'
+            });
+            window.location.href = `quiz-engine.html?${params.toString()}`;
+        }
+        
+        // ============================================
+        // SHELF EXAM TRACKS
+        // ============================================
+        function openShelfTrack(shelf) {
+            window.location.href = `module-catalog.html?filter=shelf-${shelf}`;
+        }
+        
+        // ============================================
+        // STUDY PLAN BUILDER
+        // ============================================
+        function generateStudyPlan() {
+            const exam = document.getElementById('examSelect').value;
+            const date = document.getElementById('examDate').value;
+            const hours = document.getElementById('hoursPerDay').value;
+            
+            if (!exam || !date) {
+                alert('Please select your exam and target date.');
+                return;
+            }
+            
+            const examDate = new Date(date);
+            const today = new Date();
+            const daysUntilExam = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
+            
+            if (daysUntilExam < 7) {
+                alert('Please select a date at least one week from now.');
+                return;
+            }
+            
+            const totalTopics = exam.includes('step1') ? 138 : 153;
+            const topicsPerDay = Math.max(1, Math.ceil(totalTopics / (daysUntilExam * 0.7))); // 70% new, 30% review
+            const questionsPerDay = Math.round(hours * 8); // ~8 questions per study hour
+            const weeksUntilExam = Math.ceil(daysUntilExam / 7);
+            
+            const result = document.getElementById('studyPlanResult');
+            result.style.display = 'block';
+            result.innerHTML = `
+                <div style="background: white; border-radius: 16px; padding: 24px; margin-top: 16px;">
+                    <h3 style="font-size: 20px; margin-bottom: 16px; color: #1e40af;">Your ${exam === 'step1' ? 'Step 1' : 'Step 2 CK'} Study Plan</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+                        <div style="text-align: center; padding: 16px; background: #eff6ff; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: 800; color: #2563eb;">${daysUntilExam}</div>
+                            <div style="font-size: 13px; color: #64748b;">Days to exam</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #f0fdf4; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: 800; color: #059669;">${topicsPerDay}</div>
+                            <div style="font-size: 13px; color: #64748b;">Topics/day</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #fef3c7; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: 800; color: #d97706;">${questionsPerDay}</div>
+                            <div style="font-size: 13px; color: #64748b;">MCQs/day</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #ede9fe; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: 800; color: #7c3aed;">${weeksUntilExam}</div>
+                            <div style="font-size: 13px; color: #64748b;">Weeks total</div>
+                        </div>
+                    </div>
+                    <div style="background: #f8fafc; border-radius: 12px; padding: 16px;">
+                        <p style="font-size: 14px; color: #475569; line-height: 1.6;">
+                            <strong>Week 1–${Math.ceil(weeksUntilExam * 0.6)}:</strong> New content — ${topicsPerDay} topics/day with mechanism modules + ${questionsPerDay} MCQs<br>
+                            <strong>Week ${Math.ceil(weeksUntilExam * 0.6) + 1}–${weeksUntilExam - 1}:</strong> Mixed review — revisit weak areas + timed blocks<br>
+                            <strong>Final week:</strong> Full-length practice exams + high-yield rapid review
+                        </p>
+                    </div>
+                    <button onclick="window.location.href='module-catalog.html?filter=${exam}'" style="margin-top: 16px; padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%;">
+                        Start Day 1 →
+                    </button>
+                </div>
+            `;
+        }
+        
+        // ============================================
+        // ROTATION COMPANION
+        // ============================================
+        function openRotation(rotation) {
+            window.location.href = `features/rotation-packs.html?rotation=${rotation}`;
+        }
+        
+        // ============================================
+        // SCROLL NAVIGATION
+        // ============================================
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // ============================================
+        // LOAD PROGRESS DATA
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved progress for shelf cards
+            try {
+                const progress = JSON.parse(localStorage.getItem('reasondx-progress') || '{}');
+                // Update shelf progress bars based on stored data
+                if (progress.shelf) {
+                    Object.entries(progress.shelf).forEach(([shelf, pct]) => {
+                        const card = document.querySelector(`.shelf-card[onclick*="${shelf}"] .shelf-progress-bar`);
+                        if (card) card.style.width = `${pct}%`;
+                    });
+                }
+            } catch (e) { /* fresh user */ }
+            
+            // Set default exam date to 12 weeks from now
+            const defaultDate = new Date();
+            defaultDate.setDate(defaultDate.getDate() + 84);
+            document.getElementById('examDate').value = defaultDate.toISOString().split('T')[0];
+        });
+    </script>
+<script src="dx-progress.js"></script>
+<script src="dx-recommendations.js"></script>
+</body>
+</html>

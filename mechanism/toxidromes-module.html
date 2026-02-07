@@ -1,108 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toxidromes: Pathophysiology | MechanismDx</title>
-    <style>
-        :root{--primary:#0891b2;--primary-dark:#0e7490;--primary-bg:#ecfeff;--bg:#f8fafc;--card:#fff;--border:#e2e8f0;--text:#1e293b}
-        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-        .header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);padding:32px 24px;color:#fff}
-        .header-inner{max-width:900px;margin:0 auto}.breadcrumb{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:12px}
-        .breadcrumb a{color:rgba(255,255,255,0.9);text-decoration:none}.header h1{font-size:28px;font-weight:700;margin-bottom:8px}
-        .content{max-width:900px;margin:0 auto;padding:32px 24px}
-        .objectives{background:linear-gradient(135deg,var(--primary-bg) 0%,#d1fae5 100%);border:1px solid var(--primary);border-radius:16px;padding:24px;margin-bottom:32px}
-        .objectives h2{color:#047857;font-size:16px;margin-bottom:12px}.objectives ul{margin-left:24px;color:#065f46}
-        .section{background:var(--card);border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-        .section h2{color:var(--primary-dark);font-size:1.25rem;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--primary-bg)}
-        .section h3{color:var(--text);font-size:1rem;margin:16px 0 8px}.section p{margin-bottom:12px}
-        .pathway-box{background:#fef3c7;border:1px solid #f59e0b;border-radius:12px;padding:16px;margin:16px 0}
-        .pathway-box h4{color:#92400e;font-size:0.9rem;margin-bottom:8px}
-        .pathway-steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-        .pathway-step{background:#fff;border:1px solid #fbbf24;padding:8px 14px;border-radius:8px;font-size:0.85rem}
-        .pathway-arrow{color:#f59e0b;font-weight:bold}
-        .clinical-box{background:#f0fdf4;border:1px solid #22c55e;border-radius:12px;padding:16px;margin:16px 0}
-        .clinical-box h4{color:#166534;font-size:0.9rem;margin-bottom:8px}
-        .key-point{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0}
-        .mcq-container{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:20px;margin:20px 0}
-        .mcq-question{font-weight:600;margin-bottom:16px}.mcq-options{display:flex;flex-direction:column;gap:8px}
-        .mcq-option{padding:12px 16px;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s}
-        .mcq-option:hover{border-color:var(--primary);background:var(--primary-bg)}
-        .mcq-option.correct{border-color:#22c55e;background:#f0fdf4}.mcq-option.incorrect{border-color:#ef4444;background:#fef2f2}
-        .mcq-feedback{margin-top:12px;padding:12px;border-radius:8px;display:none}.mcq-feedback.show{display:block}
-        .mcq-feedback.correct{background:#f0fdf4;color:#166534}.mcq-feedback.incorrect{background:#fef2f2;color:#991b1b}
-        .nav-links{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-        .nav-link{padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.9rem}
-        .nav-link.back{background:var(--card);border:1px solid var(--border);color:var(--text)}
-        .nav-link.adventure{background:var(--primary);color:#fff}
-        .warning-box{background:#fef2f2;border:1px solid #ef4444;border-radius:12px;padding:16px;margin:16px 0}
-        .warning-box h4{color:#991b1b;font-size:0.9rem;margin-bottom:8px}
-        .comparison-table{width:100%;border-collapse:collapse;margin:16px 0}
-        .comparison-table th,.comparison-table td{border:1px solid var(--border);padding:10px;text-align:left;font-size:0.9rem}
-        .comparison-table th{background:var(--primary-bg);color:var(--primary-dark)}
-    </style>
-</head>
-<body>
-    <header class="header"><div class="header-inner">
-        <div class="breadcrumb"><a href="../index.html">DxSuite</a> → <a href="index.html">MechanismDx</a> → Toxidromes</div>
-        <h1>⚙️ Toxidromes</h1>
-        <div style="font-size:15px;color:rgba(255,255,255,0.85)">Pathophysiology | Toxicology</div>
-    </div></header>
-    <div class="content">
-        <div class="objectives"><h2>🎯 Learning Objectives</h2><ul><li>Sympathomimetic vs Anticholinergic: WET vs DRY skin</li><li>Opioid triad: CNS depression, respiratory depression, miosis</li><li>Cholinergic (SLUDGE): atropine + pralidoxime</li><li>Know the antidotes: naloxone (opioid), flumazenil (benzo), physostigmine (anticholinergic)</li><li>Serotonin syndrome: clonus + hyperthermia + AMS → cyproheptadine</li></ul></div>
-        <div class="section"><h2>🔬 Core Pathophysiology</h2>
-<h3>Sympathomimetic</h3><p>Excess catecholamine activity.</p>
-<div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">↑ NE/dopamine release or reuptake inhibition</span><span class="pathway-arrow">→</span><span class="pathway-step">CNS stimulation</span><span class="pathway-arrow">→</span><span class="pathway-step">Tachycardia, HTN, hyperthermia</span><span class="pathway-arrow">→</span><span class="pathway-step">Mydriasis, DIAPHORESIS</span><span class="pathway-arrow">→</span><span class="pathway-step">Agitation, seizures</span></div></div>
-<h3>Anticholinergic</h3><p>Muscarinic receptor blockade.</p>
-<div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">ACh receptor blockade</span><span class="pathway-arrow">→</span><span class="pathway-step">Loss of parasympathetic tone</span><span class="pathway-arrow">→</span><span class="pathway-step">Tachycardia, DRY skin</span><span class="pathway-arrow">→</span><span class="pathway-step">Mydriasis, urinary retention</span><span class="pathway-arrow">→</span><span class="pathway-step">Hyperthermia, delirium</span></div></div>
-<h3>Cholinergic (SLUDGE/DUMBELS)</h3><p>Excess acetylcholine activity.</p>
-<div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">AChE inhibition</span><span class="pathway-arrow">→</span><span class="pathway-step">ACh accumulation</span><span class="pathway-arrow">→</span><span class="pathway-step">SLUDGE: Salivation, Lacrimation, Urination, Defecation, GI upset, Emesis</span><span class="pathway-arrow">→</span><span class="pathway-step">Bradycardia, miosis</span><span class="pathway-arrow">→</span><span class="pathway-step">Bronchorrhea, bronchospasm</span></div></div>
-<h3>Opioid</h3><p>Mu-receptor agonism.</p>
-<div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">Mu-receptor activation</span><span class="pathway-arrow">→</span><span class="pathway-step">CNS depression</span><span class="pathway-arrow">→</span><span class="pathway-step">Respiratory depression</span><span class="pathway-arrow">→</span><span class="pathway-step">Miosis (pinpoint pupils)</span><span class="pathway-arrow">→</span><span class="pathway-step">Decreased GI motility</span></div></div>
-<h3>Sedative-Hypnotic</h3><p>GABA enhancement.</p>
-<div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">GABA-A potentiation</span><span class="pathway-arrow">→</span><span class="pathway-step">CNS depression</span><span class="pathway-arrow">→</span><span class="pathway-step">Respiratory depression</span><span class="pathway-arrow">→</span><span class="pathway-step">Normal pupils</span><span class="pathway-arrow">→</span><span class="pathway-step">Hypothermia</span></div></div>
-<table class="comparison-table">
-<tr><th>Toxidrome</th><th>Pupils</th><th>Skin</th><th>Vitals</th><th>Key Feature</th></tr>
-<tr><td>Sympathomimetic</td><td>Dilated</td><td>Diaphoretic</td><td>↑HR, ↑BP, ↑Temp</td><td>WET + agitated</td></tr>
-<tr><td>Anticholinergic</td><td>Dilated</td><td>DRY, flushed</td><td>↑HR, ↑Temp</td><td>DRY + delirious</td></tr>
-<tr><td>Cholinergic</td><td>Constricted</td><td>Diaphoretic</td><td>↓HR (or ↑)</td><td>SLUDGE</td></tr>
-<tr><td>Opioid</td><td>Pinpoint</td><td>Normal</td><td>↓HR, ↓RR</td><td>Resp depression</td></tr>
-<tr><td>Sedative-Hypnotic</td><td>Normal/small</td><td>Normal</td><td>↓RR, ↓Temp</td><td>CNS depression</td></tr>
-</table></div>
-        <div class="section"><h2>🏥 Clinical Correlations</h2>
-<div class="clinical-box"><h4>Wet vs Dry skin</h4><p><strong>Mechanism:</strong> Sympathomimetic = diaphoresis; Anticholinergic = dry</p><p><strong>Significance:</strong> KEY differentiator between these similar-appearing toxidromes</p></div>
-<div class="clinical-box"><h4>Pinpoint pupils + respiratory depression</h4><p><strong>Mechanism:</strong> Mu-receptor activation</p><p><strong>Significance:</strong> Pathognomonic for opioid toxicity</p></div>
-<div class="clinical-box"><h4>SLUDGE symptoms</h4><p><strong>Mechanism:</strong> Cholinergic excess from organophosphate/nerve agent</p><p><strong>Significance:</strong> Treat with atropine (muscarinic blocker) + pralidoxime</p></div></div>
-        <div class="section"><h2>📝 Knowledge Check</h2>
-<div class="mcq-container" id="mcq0"><div class="mcq-question">1. A patient has tachycardia, dilated pupils, hyperthermia, and DRY skin. Toxidrome?</div>
-<div class="mcq-options"><div class="mcq-option" onclick="check(0,0,false)">A. Sympathomimetic</div><div class="mcq-option" onclick="check(0,1,true)">B. Anticholinergic</div><div class="mcq-option" onclick="check(0,2,false)">C. Serotonin syndrome</div><div class="mcq-option" onclick="check(0,3,false)">D. Opioid</div></div>
-<div class="mcq-feedback" id="fb0"></div></div>
-<div class="mcq-container" id="mcq1"><div class="mcq-question">2. Antidote for organophosphate poisoning?</div>
-<div class="mcq-options"><div class="mcq-option" onclick="check(1,0,false)">A. Naloxone</div><div class="mcq-option" onclick="check(1,1,false)">B. Flumazenil</div><div class="mcq-option" onclick="check(1,2,true)">C. Atropine + Pralidoxime</div><div class="mcq-option" onclick="check(1,3,false)">D. Physostigmine</div></div>
-<div class="mcq-feedback" id="fb1"></div></div></div>
-        <div class="section"><h2>🔑 Key Takeaways</h2><div class="key-point"><strong>✓</strong> Sympathomimetic vs Anticholinergic: WET vs DRY skin</div>
-<div class="key-point"><strong>✓</strong> Opioid triad: CNS depression, respiratory depression, miosis</div>
-<div class="key-point"><strong>✓</strong> Cholinergic (SLUDGE): atropine + pralidoxime</div>
-<div class="key-point"><strong>✓</strong> Know the antidotes: naloxone (opioid), flumazenil (benzo), physostigmine (anticholinergic)</div>
-<div class="key-point"><strong>✓</strong> Serotonin syndrome: clonus + hyperthermia + AMS → cyproheptadine</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../ReasonDx/adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
-    </div>
-    <script>
-const fb=[{"c":"DRY skin is the key! Anticholinergic = \"Blind as a bat, Dry as a bone, Red as a beet, Mad as a hatter, Hot as a hare.\" Sympathomimetic looks similar but has DIAPHORESIS (wet).","i":"The DRY skin distinguishes anticholinergic from sympathomimetic toxidrome."},{"c":"Atropine blocks muscarinic effects (SLUDGE). Pralidoxime (2-PAM) reactivates AChE if given early (before \"aging\"). Physostigmine is an AChE INHIBITOR - it would make this worse!","i":"Organophosphates need atropine (blocks ACh effects) and pralidoxime (reactivates AChE)."}];
-function check(q,o,correct){const c=document.getElementById('mcq'+q);const opts=c.querySelectorAll('.mcq-option');const f=document.getElementById('fb'+q);
-opts.forEach((e,i)=>{e.style.pointerEvents='none';if(i===o)e.classList.add(correct?'correct':'incorrect');});
-f.className='mcq-feedback show '+(correct?'correct':'incorrect');f.innerHTML='<strong>'+(correct?'✓ Correct!':'✗ Not quite')+'</strong><br>'+(correct?fb[q].c:fb[q].i);}
-    </script>
+<!DOCTYPE html><html lang="en"><head><script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Toxidromes | ReasonDx</title><style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--danger:#DC2626;--info:#F59E0B;--warning:#F97316}*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}.header{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600;color:#fff}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}.stats{display:flex;gap:12px}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px;color:#fff}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.4rem;font-weight:700;margin-top:4px}.card-body{padding:24px}.pearl{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(168,85,247,.15));border-left:4px solid var(--accent);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.danger{background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.15));border-left:4px solid var(--danger);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.compare-table{width:100%;border-collapse:collapse;margin:16px 0}.compare-table th{background:rgba(139,92,246,.2);padding:10px;text-align:left;font-size:.85rem;border:1px solid var(--border)}.compare-table td{padding:10px;border:1px solid var(--border);font-size:.85rem}.choices{display:grid;gap:12px;margin-top:16px}.choice{background:var(--card);border:2px solid var(--border);padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.15);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.15);pointer-events:none}.choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.choice-title{font-weight:600;font-size:.95rem}.hidden{display:none!important}.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}.cross-link{padding:14px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;text-decoration:none;color:var(--text)}.cross-link:hover{border-color:var(--accent)}.cross-link-title{font-weight:600;font-size:.9rem}h3{color:var(--accent);margin:20px 0 12px;font-size:1.1rem}@media(max-width:480px){.main{padding:12px}.card-body{padding:16px}}
+</style></head><body>
+<div class="header"><div class="header-row"><div class="header-title">☠️ Toxidromes<span class="badge">TOXICOLOGY</span></div><div class="stats"><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">XP</div></div><div class="stat"><div class="stat-value">8</div><div class="stat-label">MCQs</div></div></div></div></div>
+<div class="main"><div class="card"><div class="card-header"><div class="card-phase">MECHANISM</div><div class="card-title">Pattern Recognition</div></div><div class="card-body"><p>A <strong>toxidrome</strong> is a syndrome of signs/symptoms suggesting a specific class of poisoning. Pattern recognition allows rapid identification and targeted treatment.</p>
+<table class="compare-table"><tr><th>Toxidrome</th><th>Vitals</th><th>Pupils</th><th>Skin</th><th>Key Features</th><th>Agents</th></tr>
+<tr><td><strong>Sympathomimetic</strong></td><td>↑HR, ↑BP, ↑Temp</td><td>Mydriasis</td><td>Diaphoretic</td><td>Agitation, seizures, chest pain</td><td>Cocaine, amphetamines, PCP</td></tr>
+<tr><td><strong>Anticholinergic</strong></td><td>↑HR, ↑Temp</td><td>Mydriasis</td><td>DRY, flushed, hot</td><td>"Blind as a bat, dry as a bone, red as a beet, mad as a hatter, hot as a hare"</td><td>Diphenhydramine, atropine, TCAs, jimsonweed</td></tr>
+<tr><td><strong>Cholinergic</strong></td><td>↓HR (or ↑HR), ↓BP</td><td>Miosis</td><td>Diaphoretic</td><td>DUMBBELSS: Diarrhea, Urination, Miosis, Bronchospasm, Bradycardia, Emesis, Lacrimation, Salivation, Sweating</td><td>Organophosphates, carbamates, nerve agents</td></tr>
+<tr><td><strong>Opioid</strong></td><td>↓HR, ↓BP, ↓RR</td><td>Miosis (pinpoint)</td><td>Cool</td><td>CNS/respiratory depression, pinpoint pupils</td><td>Heroin, morphine, fentanyl, methadone</td></tr>
+<tr><td><strong>Sedative-hypnotic</strong></td><td>↓HR, ↓BP, ↓RR</td><td>Normal/small</td><td>Normal</td><td>CNS depression, normal pupils (vs opioid = miosis)</td><td>Benzodiazepines, barbiturates, ethanol, GHB</td></tr></table></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">CLINICAL</div><div class="card-title">Distinguishing Similar Toxidromes</div></div><div class="card-body"><div class="pearl"><strong>🔑 Sympathomimetic vs Anticholinergic:</strong> Both have mydriasis, tachycardia, agitation. Key distinction: <strong>SKIN</strong>. Sympathomimetic = DIAPHORETIC (wet). Anticholinergic = DRY. "Dry as a bone" = anticholinergic. "Sweating profusely" = sympathomimetic.</div>
+<div class="pearl"><strong>🔑 Opioid vs Sedative-Hypnotic:</strong> Both have CNS depression. Key distinction: <strong>PUPILS</strong>. Opioid = pinpoint miosis. Sedative-hypnotic = normal or mildly small pupils. Give naloxone trial if unsure.</div>
+<h3>Additional Important Toxidromes</h3>
+<table class="compare-table"><tr><th>Toxidrome</th><th>Features</th><th>Agents</th></tr>
+<tr><td><strong>Serotonin syndrome</strong></td><td>Hyperthermia, clonus (lower > upper), hyperreflexia, agitation, diaphoresis</td><td>SSRIs + MAOIs, triptans + SSRIs, tramadol</td></tr>
+<tr><td><strong>NMS</strong></td><td>Lead-pipe rigidity, hyperthermia, AMS, autonomic instability. SLOW onset (days)</td><td>Antipsychotics, dopamine antagonists</td></tr></table></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">TREATMENT</div><div class="card-title">General Approach &amp; Antidotes</div></div><div class="card-body"><h3>Initial Management of Any Poisoning</h3>
+<p>ABCs → decontamination (activated charcoal within 1-2h if safe) → specific antidote if available → supportive care.</p>
+<table class="compare-table"><tr><th>Poison</th><th>Antidote</th></tr>
+<tr><td>Acetaminophen</td><td>N-acetylcysteine (NAC)</td></tr>
+<tr><td>Opioids</td><td>Naloxone</td></tr>
+<tr><td>Benzodiazepines</td><td>Flumazenil (use cautiously — seizure risk)</td></tr>
+<tr><td>Organophosphates</td><td>Atropine + pralidoxime (2-PAM)</td></tr>
+<tr><td>Methanol/ethylene glycol</td><td>Fomepizole (alcohol dehydrogenase inhibitor)</td></tr>
+<tr><td>TCAs</td><td>Sodium bicarbonate</td></tr>
+<tr><td>β-blockers</td><td>Glucagon</td></tr>
+<tr><td>CCBs</td><td>Calcium, glucagon, high-dose insulin</td></tr>
+<tr><td>Warfarin</td><td>Vitamin K + PCC (4-factor)</td></tr>
+<tr><td>Digoxin</td><td>Digoxin-specific Fab antibodies (Digibind)</td></tr>
+<tr><td>Iron</td><td>Deferoxamine</td></tr>
+<tr><td>Carbon monoxide</td><td>100% O2 ± hyperbaric</td></tr>
+<tr><td>Cyanide</td><td>Hydroxocobalamin or nitrite/thiosulfate kit</td></tr></table></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body"><div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">Sympathomimetic and anticholinergic toxidromes are distinguished by:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Both have mydriasis (dilated pupils)." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Pupil size</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Both: tachycardia, hypertension, mydriasis, agitation. Key difference: sympathomimetic = DIAPHORETIC (wet/sweating). Anticholinergic = DRY (&#x27;dry as a bone&#x27;). This is the single most reliable distinguishing feature and extremely high-yield." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Skin moisture (diaphoretic vs dry)</div></div></div>
+<div class="choice" data-correct="false" data-fb="Both cause tachycardia." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Heart rate</div></div></div>
+<div class="choice" data-correct="false" data-fb="Both can cause agitation and altered mental status." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Mental status</div></div></div>
+</div><div id="mcqFb0" class="hidden" style="margin-top:16px"><div id="mcqFbText0" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">Pinpoint pupils + respiratory depression + CNS depression =</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Anticholinergic has DILATED pupils and dry skin." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Anticholinergic toxidrome</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Classic opioid triad: miosis (pinpoint pupils) + respiratory depression + CNS depression. Treat with naloxone (0.4-2 mg IV, titrate to respiratory effort). Distinguish from sedative-hypnotic (normal/mildly small pupils, no miosis)." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">Opioid toxidrome</div></div></div>
+<div class="choice" data-correct="false" data-fb="Sympathomimetic has dilated pupils, tachycardia, hypertension." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Sympathomimetic toxidrome</div></div></div>
+<div class="choice" data-correct="false" data-fb="Serotonin syndrome has clonus, hyperreflexia, hyperthermia, mydriasis." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Serotonin syndrome</div></div></div>
+</div><div id="mcqFb1" class="hidden" style="margin-top:16px"><div id="mcqFbText1" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">DUMBBELSS mnemonic describes which toxidrome?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Anticholinergic is the OPPOSITE (dry, not DUMBBELSS)." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">Anticholinergic</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! DUMBBELSS: Diarrhea, Urination, Miosis, Bronchospasm, Bradycardia, Emesis, Lacrimation, Salivation, Sweating. Caused by: organophosphates, carbamates, nerve agents, excess pyridostigmine. Treatment: atropine (muscarinic antagonist) + pralidoxime (reactivates acetylcholinesterase)." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">Cholinergic (muscarinic excess)</div></div></div>
+<div class="choice" data-correct="false" data-fb="Opioid toxidrome: miosis + CNS/respiratory depression. No DUMBBELSS." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">Opioid</div></div></div>
+<div class="choice" data-correct="false" data-fb="Sympathomimetic causes the opposite of most DUMBBELSS features." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Sympathomimetic</div></div></div>
+</div><div id="mcqFb2" class="hidden" style="margin-top:16px"><div id="mcqFbText2" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">Antidote for TCA overdose?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Flumazenil reverses benzodiazepines. Contraindicated in TCA overdose (seizure risk)." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">Flumazenil</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! TCA overdose: wide QRS (&gt;100ms), seizures, hypotension, anticholinergic effects. Sodium bicarb: alkalinizes blood → increases protein binding of TCA, overcomes sodium channel blockade → narrows QRS. Give bolus 1-2 mEq/kg IV for QRS &gt;100ms. Target pH 7.50-7.55." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Sodium bicarbonate</div></div></div>
+<div class="choice" data-correct="false" data-fb="NAC is the antidote for acetaminophen." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">N-acetylcysteine</div></div></div>
+<div class="choice" data-correct="false" data-fb="Atropine treats cholinergic toxicity, not anticholinergic/TCA." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">Atropine</div></div></div>
+</div><div id="mcqFb3" class="hidden" style="margin-top:16px"><div id="mcqFbText3" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">Antidote for β-blocker overdose?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Calcium is first-line for CCB overdose, not beta-blockers." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Calcium gluconate</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Glucagon bypasses the beta-receptor → activates adenylyl cyclase directly → increases cAMP → positive inotropy and chronotropy. Dose: 3-5 mg IV bolus, then infusion. For beta-blocker overdose causing severe bradycardia and hypotension refractory to atropine. Also: high-dose insulin for refractory cases." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">Glucagon</div></div></div>
+<div class="choice" data-correct="false" data-fb="Fab fragments are for digoxin toxicity." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">Digoxin-specific Fab</div></div></div>
+<div class="choice" data-correct="false" data-fb="Naloxone reverses opioids, not beta-blockers." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">Naloxone</div></div></div>
+</div><div id="mcqFb4" class="hidden" style="margin-top:16px"><div id="mcqFbText4" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">Fomepizole is the antidote for:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="NAC is for acetaminophen." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">Acetaminophen overdose</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Fomepizole inhibits alcohol dehydrogenase, preventing metabolism of methanol/ethylene glycol into toxic metabolites (formic acid from methanol → blindness; oxalic acid from ethylene glycol → renal failure). Give early — before toxic metabolites accumulate. Also: hemodialysis for severe cases." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Methanol and ethylene glycol poisoning</div></div></div>
+<div class="choice" data-correct="false" data-fb="Isopropyl alcohol is metabolized to acetone (not as toxic). Supportive care usually sufficient." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">Isopropyl alcohol ingestion</div></div></div>
+<div class="choice" data-correct="false" data-fb="Ethanol intoxication is treated supportively, not with fomepizole." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Ethanol intoxication</div></div></div>
+</div><div id="mcqFb5" class="hidden" style="margin-top:16px"><div id="mcqFbText5" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">Activated charcoal is most effective when given:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Efficacy drops dramatically after 1-2 hours." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Up to 24 hours after ingestion</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Activated charcoal adsorbs most drugs in the GI tract but must be given early (within 1-2h, ideally &lt;1h). Contraindicated: altered mental status without protected airway (aspiration risk), caustic/acid ingestion, hydrocarbons. Does NOT adsorb: metals (iron, lithium, lead), alcohols, acids/alkalis. Single dose for most ingestions." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Within 1-2 hours of ingestion</div></div></div>
+<div class="choice" data-correct="false" data-fb="Inducing emesis is no longer recommended." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Only after the patient vomits</div></div></div>
+<div class="choice" data-correct="false" data-fb="After 2 hours, most ingested material has left the stomach." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Regardless of timing after ingestion</div></div></div>
+</div><div id="mcqFb6" class="hidden" style="margin-top:16px"><div id="mcqFbText6" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">Digoxin toxicity is treated with:</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Calcium is generally AVOIDED in digoxin toxicity (may worsen cardiac toxicity — &#x27;stone heart&#x27; phenomenon, though evidence is debated)." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Calcium infusion</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Digoxin-specific Fab fragments bind free digoxin → rapid reversal. Indications: life-threatening arrhythmias, hyperkalemia (K &gt;5), hemodynamic instability. Also correct: treat hyperkalemia (but avoid calcium), atropine for bradycardia, do NOT cardiovert (may precipitate VF). Classic findings: &#x27;scooped&#x27; ST segments, any arrhythmia (especially bidirectional VT, accelerated junctional rhythm with AV block)." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Digoxin-specific Fab antibodies (Digibind/DigiFab)</div></div></div>
+<div class="choice" data-correct="false" data-fb="High-dose insulin is for CCB/BB overdose, not digoxin." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">High-dose insulin</div></div></div>
+<div class="choice" data-correct="false" data-fb="Bicarb is for TCA and salicylate overdose, not digoxin." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Sodium bicarbonate</div></div></div>
+</div><div id="mcqFb7" class="hidden" style="margin-top:16px"><div id="mcqFbText7" style="padding:12px;border-radius:8px"></div></div></div></div></div></div>
+<div class="card"><div class="card-header"><div class="card-title">📚 References</div></div><div class="card-body"><div class="cross-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK482479/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Toxidromes - StatPearls</div></a><a href="https://www.ncbi.nlm.nih.gov/books/NBK499854/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Antidotes</div></a></div></div></div>
+</div>
 
-    <!-- DxSuite AI Tutor Integration -->
-    <div data-dx-tutor
-         data-module-title="Toxidromes: Pathophysiology"
-         data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Sympathomimetic, Anticholinergic, Cholinergic (SLUDGE/DUMBELS), pathophysiology, clinical presentation, diagnosis, management, complications"
-         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
-         style="display:none;"></div>
-    <script src="dx-ai-tutor.js"></script>
-</body>
-</html>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=toxidromes-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/toxidromes-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body></html>

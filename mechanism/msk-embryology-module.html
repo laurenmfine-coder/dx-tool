@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: MSK Embryology - Somites, Limbs & Anomalies</title>
+  <style>
+    :root { --primary: #F97316; --secondary: #84CC16; --accent: #A855F7; --success: #10B981; --danger: #EF4444; --info: #3B82F6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #2d1f3d 100%); color: var(--text-primary, #E5E7EB); min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(249, 115, 22, 0.1); border-radius: 1rem; border: 1px solid rgba(249, 115, 22, 0.3); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background: rgba(249, 115, 22, 0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(168, 85, 247, 0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(249, 115, 22, 0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .dev-card { background: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .condition-link { display: inline-block; background: rgba(249,115,22,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem; font-size: 0.85rem; color: #fdba74; text-decoration: none; }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(249, 115, 22, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+  
+    /* DxSuite Theme System Override */
+    body { background: var(--bg-main) !important; color: var(--text-primary) !important; transition: background 0.3s, color 0.3s; }
+    .container { background: transparent; }
+    .module-section { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); }
+    header { background: var(--primary-bg, rgba(245,158,11,0.1)); border-color: var(--primary, rgba(245,158,11,0.3)); }
+    header h1 { -webkit-text-fill-color: var(--primary, unset); }
+    .nav-tab { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); color: var(--text-secondary, #9CA3AF); }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: var(--nav-active-text, white); border-color: var(--primary); }
+    table th { background: var(--primary-bg, rgba(245,158,11,0.2)); color: var(--primary); }
+    table td { border-color: var(--border, rgba(255,255,255,0.1)); }
+    .quiz-option { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border); color: var(--text-primary); }
+    .quiz-option:hover { background: var(--primary-bg); }
+    .pathway-box { background: var(--bg-card, rgba(0,0,0,0.3)); color: var(--text-primary); }
+    /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    
+</style>
+</head>
+<body>
+<!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/index.html" class="dx-nav-link">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../ReasonDx/reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../ReasonDx/analytics-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+  <div class="container">
+    <header>
+      <h1>🦴 MSK Embryology</h1>
+      <p class="subtitle">Somites • Vertebrae • Limb Development • Ossification • Anomalies</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('somites')">Somites</div>
+      <div class="nav-tab" onclick="showTab('limbs')">Limbs</div>
+      <div class="nav-tab" onclick="showTab('ossification')">Ossification</div>
+      <div class="nav-tab" onclick="showTab('anomalies')">Anomalies</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 MSK Development Overview</h2>
+        <div class="key-concept">
+          The MSK system develops from <strong>mesoderm</strong>: paraxial mesoderm (somites → axial skeleton, muscles), lateral plate mesoderm (limb bones), and neural crest (craniofacial skeleton).
+        </div>
+        <h3>Mesodermal Contributions</h3>
+        <table>
+          <tr><th>Source</th><th>Derivatives</th></tr>
+          <tr><td><strong>Paraxial mesoderm (somites)</strong></td><td>Vertebrae, ribs, skeletal muscles, dermis of back</td></tr>
+          <tr><td><strong>Lateral plate mesoderm</strong></td><td>Limb bones, sternum, body wall</td></tr>
+          <tr><td><strong>Neural crest</strong></td><td>Craniofacial bones and cartilage</td></tr>
+        </table>
+        <div class="mnemonic">
+          <strong>💡 Somite Derivatives: "Somites Make Dermis, Muscles, Skeleton"</strong><br>
+          Sclerotome → Skeleton | Myotome → Muscles | Dermatome → Dermis
+        </div>
+      </div>
+    </div>
+
+    <!-- SOMITES -->
+    <div id="somites" class="tab-content">
+      <div class="module-section">
+        <h2>🔶 Somite Development</h2>
+        <div class="key-concept">
+          <strong>Somites</strong> (42-44 pairs) form from paraxial mesoderm and differentiate into sclerotome (vertebrae), myotome (muscle), and dermatome (dermis).
+        </div>
+        <h3>Somite Differentiation</h3>
+        <div class="pathway-box">SOMITE
+  ├── SCLEROTOME (ventromedial) → Vertebrae, ribs [SHH from notochord]
+  └── DERMOMYOTOME (dorsolateral)
+        ├── DERMATOME → Dermis of back
+        └── MYOTOME → Skeletal muscles
+              ├── Epimere → Back extensors
+              └── Hypomere → Body wall, limb muscles</div>
+        <h3>Resegmentation</h3>
+        <p>Each sclerotome splits; caudal portion fuses with cranial portion of next somite. Result: each vertebra derives from <strong>two adjacent somites</strong>, allowing nerves to exit between vertebrae.</p>
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> Failure of resegmentation → fusion anomalies (Klippel-Feil syndrome, block vertebrae).
+        </div>
+      </div>
+    </div>
+
+    <!-- LIMBS -->
+    <div id="limbs" class="tab-content">
+      <div class="module-section">
+        <h2>🦵 Limb Development</h2>
+        <div class="key-concept">
+          Limbs develop from limb buds with three signaling centers: <strong>AER</strong> (proximal-distal via FGFs), <strong>ZPA</strong> (anterior-posterior via SHH), <strong>dorsal ectoderm</strong> (dorsal-ventral via Wnt7a).
+        </div>
+        <h3>Timeline</h3>
+        <ul>
+          <li><strong>Day 24:</strong> Upper limb buds appear</li>
+          <li><strong>Day 28:</strong> Lower limb buds appear</li>
+          <li><strong>Week 7:</strong> Digital rays visible</li>
+          <li><strong>Week 8:</strong> Digits separate (interdigital apoptosis)</li>
+        </ul>
+        <h3>Signaling Centers</h3>
+        <table>
+          <tr><th>Center</th><th>Signal</th><th>Axis</th></tr>
+          <tr><td><strong>AER</strong></td><td>FGFs</td><td>Proximal-Distal (shoulder→finger)</td></tr>
+          <tr><td><strong>ZPA</strong></td><td>SHH</td><td>Anterior-Posterior (thumb→pinky)</td></tr>
+          <tr><td><strong>Dorsal ectoderm</strong></td><td>Wnt7a</td><td>Dorsal-Ventral</td></tr>
+        </table>
+        <div class="dev-card">
+          <h4>📍 ZPA and Digit Identity</h4>
+          <p>SHH gradient: high posterior (digit 5) → low anterior (digit 1). Extra ZPA → polydactyly.</p>
+        </div>
+        <h3>Limb Rotation</h3>
+        <ul>
+          <li><strong>Upper limb:</strong> 90° lateral rotation</li>
+          <li><strong>Lower limb:</strong> 90° medial rotation</li>
+        </ul>
+        <p>This explains why elbow and knee flex in opposite directions!</p>
+      </div>
+    </div>
+
+    <!-- OSSIFICATION -->
+    <div id="ossification" class="tab-content">
+      <div class="module-section">
+        <h2>💀 Bone Formation</h2>
+        <div class="key-concept">
+          <strong>Intramembranous:</strong> Mesenchyme → bone directly (flat skull bones, clavicle).<br>
+          <strong>Endochondral:</strong> Mesenchyme → cartilage → bone (most bones).
+        </div>
+        <h3>Growth Plate Zones</h3>
+        <table>
+          <tr><th>Zone</th><th>Activity</th></tr>
+          <tr><td>Reserve</td><td>Quiescent chondrocytes</td></tr>
+          <tr><td>Proliferative</td><td>Dividing chondrocytes in columns</td></tr>
+          <tr><td>Hypertrophic</td><td>Enlarged cells, matrix calcification</td></tr>
+          <tr><td>Ossification</td><td>Bone deposition</td></tr>
+        </table>
+        <div class="mnemonic">
+          <strong>💡 "Really Powerful Hormones Ossify"</strong><br>
+          Reserve → Proliferative → Hypertrophic → Ossification
+        </div>
+        <div class="danger-box">
+          <strong>⚠️ Skeletal Dysplasias</strong>
+          <ul>
+            <li><strong>Achondroplasia:</strong> FGFR3 gain-of-function → rhizomelic shortening</li>
+            <li><strong>Osteogenesis imperfecta:</strong> Collagen I defect → fragile bones, blue sclerae</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANOMALIES -->
+    <div id="anomalies" class="tab-content">
+      <div class="module-section">
+        <h2>⚠️ Congenital MSK Anomalies</h2>
+        <h3>Digit Anomalies</h3>
+        <div class="dev-card">
+          <h4>📍 Polydactyly</h4>
+          <ul>
+            <li><strong>Preaxial:</strong> Extra thumb side (SHH/ZPA issue)</li>
+            <li><strong>Postaxial:</strong> Extra pinky side (more common)</li>
+          </ul>
+        </div>
+        <div class="dev-card">
+          <h4>📍 Syndactyly</h4>
+          <p>Failure of interdigital apoptosis → fused digits.</p>
+        </div>
+        <h3>Hip & Foot</h3>
+        <div class="danger-box">
+          <strong>⚠️ DDH (Developmental Dysplasia of Hip)</strong><br>
+          Risk: female, breech, firstborn, family history. Screen with Ortolani/Barlow. Treat with Pavlik harness.
+        </div>
+        <div class="dev-card">
+          <h4>📍 Clubfoot (CAVE)</h4>
+          <p>Cavus, Adductus, Varus, Equinus. Treat with Ponseti casting.</p>
+        </div>
+        <h3>Vertebral</h3>
+        <div class="info-box">
+          <strong>VACTERL Association:</strong> Vertebral, Anorectal, Cardiac, TE fistula, Renal, Limb (radial ray)
+        </div>
+        <table>
+          <tr><th>Finding</th><th>Think...</th></tr>
+          <tr><td>Radial ray defects</td><td>VACTERL, Fanconi, Holt-Oram</td></tr>
+          <tr><td>Short limbs + normal trunk</td><td>Achondroplasia</td></tr>
+          <tr><td>Blue sclerae + fractures</td><td>Osteogenesis imperfecta</td></tr>
+          <tr><td>Phocomelia</td><td>Thalidomide</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>Vertebrae and ribs derive from which somite portion?</p>
+          <div class="quiz-option" onclick="checkQ('q1', this, true)">A. Sclerotome</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">B. Myotome</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">C. Dermatome</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">D. Lateral plate</div>
+          <div id="exp-q1" class="explanation"><strong>Answer: A.</strong> Sclerotome (ventromedial somite) → vertebrae, ribs. Induced by SHH from notochord.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>Which signaling center establishes thumb-to-pinky axis?</p>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">A. AER</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, true)">B. ZPA</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">C. Dorsal ectoderm</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">D. Notochord</div>
+          <div id="exp-q2" class="explanation"><strong>Answer: B.</strong> ZPA produces SHH gradient → digit identity. Extra ZPA → polydactyly.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>Syndactyly results from failure of:</p>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">A. AER signaling</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, true)">B. Interdigital apoptosis</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">C. ZPA signaling</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">D. Limb rotation</div>
+          <div id="exp-q3" class="explanation"><strong>Answer: B.</strong> Digits separate via programmed cell death. Failure → syndactyly.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>Flat skull bones form via which ossification?</p>
+          <div class="quiz-option" onclick="checkQ('q4', this, true)">A. Intramembranous</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">B. Endochondral</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">C. Perichondral</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">D. Periosteal</div>
+          <div id="exp-q4" class="explanation"><strong>Answer: A.</strong> Intramembranous = direct (no cartilage). Forms flat skull bones, facial bones, clavicle.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>Absent thumb and radius suggests evaluation for:</p>
+          <div class="quiz-option" onclick="checkQ('q5', this, true)">A. VACTERL</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">B. Down syndrome</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">C. Achondroplasia</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">D. Marfan</div>
+          <div id="exp-q5" class="explanation"><strong>Answer: A.</strong> Radial ray defects = "L" in VACTERL. Also Fanconi anemia, Holt-Oram, TAR.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFERENCES -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #93c5fd;">📖 References</h2>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK539840/" target="_blank" style="color: #93c5fd;">StatPearls: Embryology, Bone Ossification</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK544363/" target="_blank" style="color: #93c5fd;">StatPearls: Embryology, Limb</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK534272/" target="_blank" style="color: #93c5fd;">StatPearls: Developmental Dysplasia of Hip</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK430910/" target="_blank" style="color: #93c5fd;">StatPearls: Clubfoot</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://radiopaedia.org/articles/vacterl-association" target="_blank" style="color: #93c5fd;">Radiopaedia: VACTERL</a></li>
+      </ul>
+    </section>
+
+    <!-- CROSS-LINKS -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Modules</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+        <a href="neuro-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Neuro Embryology</a>
+        <a href="gi-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">GI Embryology</a>
+        <a href="cardiac-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Cardiac Embryology</a>
+        <a href="respiratory-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Respiratory Embryology</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(qId, el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct', 'incorrect'); opt.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('exp-' + qId).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: MSK Embryology"
+         data-key-points="📚 MSK Development Overview, 🔶 Somite Development, 🦵 Limb Development, 💀 Bone Formation, ⚠️ Congenital MSK Anomalies, 📝 Test Your Knowledge, 📖 References, 🔗 Related Modules, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+    <!-- Cross-Platform Links -->
+    <div style="max-width:950px;margin:2rem auto;padding:0 2rem;">
+        <div style="background:var(--bg-card,rgba(255,255,255,0.05));border:1px solid var(--border,rgba(255,255,255,0.1));border-radius:1rem;padding:1.5rem;">
+            <h3 style="color:var(--primary);margin-bottom:1rem;">📚 Related Platform Content</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+                <a href="../ReasonDx/board-prep.html" style="padding:12px;background:var(--primary-bg,rgba(59,130,246,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">📝 Board Prep MCQs</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">Test your embryology knowledge</div>
+                </a>
+                <a href="../ReasonDx/training.html" style="padding:12px;background:var(--primary-bg,rgba(16,185,129,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">🩺 Clinical Cases</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">Apply concepts in clinical scenarios</div>
+                </a>
+                <a href="../CoachDx/case-library.html" style="padding:12px;background:var(--primary-bg,rgba(139,92,246,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">💬 CoachDx Sessions</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">AI-guided case discussion</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+<!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+
+<script>
+(function() {
+    const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+    document.body.setAttribute('data-theme', saved);
+    document.addEventListener('DOMContentLoaded', updateThemeOptions);
+})();
+
+function setDxTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('dx-theme', theme);
+    updateThemeOptions();
+    closeDxThemeModal();
+}
+
+function updateThemeOptions() {
+    const current = document.body.getAttribute('data-theme');
+    document.querySelectorAll('.dx-theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === current);
+    });
+}
+
+function openDxThemeModal() {
+    document.getElementById('dxThemeModal')?.classList.add('open');
+}
+
+function closeDxThemeModal() {
+    document.getElementById('dxThemeModal')?.classList.remove('open');
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDxThemeModal();
+});
+</script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">Limb buds appear during which week of development, and what drives their outgrowth?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Week 2 is far too early — the embryo is still a bilaminar disc." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Week 2; driven by Wnt signaling from the notochord</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Limb buds appear weeks 4-5 (upper before lower). The AER at the distal tip produces FGFs (FGF8, FGF10) → maintain underlying mesenchyme proliferation → proximal-to-distal limb outgrowth. AER removal → truncated limb. Zone of polarizing activity (ZPA, posterior) produces SHH → anterior-posterior patterning (digit identity)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Week 4-5; driven by FGF signaling from the apical ectodermal ridge (AER)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="By week 8, limb morphogenesis is well advanced. Testosterone drives male genital development, not limb outgrowth." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Week 8; driven by testosterone</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="By week 12, digits are fully separated and limb structure is established." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Week 12; driven by mechanical forces</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Thalidomide exposure during weeks 4-8 causes limb malformations because it disrupts:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="While thalidomide may affect some neural crest functions, the primary limb defect mechanism involves angiogenesis and AER function." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Neural crest migration</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Thalidomide: anti-angiogenic → disrupts blood vessel formation in developing limb buds → phocomelia (proximal limb segments absent, hands/feet attached near trunk) and amelia (complete absence). Critical window is weeks 4-8 when limb buds are actively growing. Now used for multiple myeloma and leprosy with strict pregnancy prevention (REMS program)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Angiogenesis and limb bud vasculature, leading to phocomelia (shortened/absent limbs)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Ossification defects cause osteogenesis imperfecta and skeletal dysplasias, not phocomelia." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Ossification of the diaphysis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Myoblast migration is not the primary target of thalidomide&#x27;s teratogenic effect on limbs." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Myoblast differentiation from somites</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">The vertebral column develops from which embryonic structure?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The neural tube becomes the CNS (brain and spinal cord), not the vertebral column." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Neural tube</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Somites differentiate into: Sclerotome (medioventral) → vertebrae, ribs, and intervertebral discs; Dermatome (dorsolateral) → dermis; Myotome (between) → skeletal muscle. Sclerotome cells migrate medially around the notochord and neural tube. Each vertebra forms from the caudal half of one sclerotome + cranial half of the next (resegmentation). The notochord remnant becomes the nucleus pulposus." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Sclerotome portion of the somites</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Lateral plate mesoderm forms the body wall (somatic layer) and gut wall (splanchnic layer), not the axial skeleton." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Lateral plate mesoderm</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest forms craniofacial skeleton but NOT the vertebral column (which is somite-derived)." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Neural crest cells</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Syndactyly (fused digits) results from failure of which developmental process?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="AER signaling drives overall limb outgrowth. Digit separation is a different process." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">AER signaling</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Digits form within the hand/foot plate → BMP-mediated apoptosis in the interdigital mesenchyme removes tissue between developing digits (weeks 6-8). Failure → syndactyly (cutaneous or osseous). Occurs in isolation or as part of syndromes (Apert syndrome = craniosynostosis + syndactyly, FGFR2 mutation)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Programmed cell death (apoptosis) in the interdigital spaces</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chondrification forms the cartilaginous bone models. Digit separation is an apoptotic process, not a chondrification one." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Chondrification of phalangeal templates</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Limb rotation determines the adult orientation (upper limb laterally, lower limb medially) but doesn&#x27;t affect digit separation." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Rotation of the limb bud</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Cranial bones develop through two distinct ossification processes. The flat bones of the calvarium form by:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Endochondral ossification forms the bones of the base of the skull and most long bones — NOT the flat calvarial bones." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Endochondral ossification (cartilage template)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Intramembranous ossification: mesenchyme → bone directly (no cartilage intermediate). Forms the flat calvarial bones (frontal, parietal, occipital squamous, temporal squamous). Skull base forms by endochondral ossification. Sutures between calvarial bones allow brain growth — premature suture fusion = craniosynostosis." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Intramembranous ossification (direct bone formation from mesenchyme)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Periosteal growth is a mechanism of bone thickening, not the primary formation process for calvarial bones." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Periosteal appositional growth only</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The nasal capsule contributes to the ethmoid and nasal bones through endochondral ossification, not the calvarium." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Transformation of cartilaginous nasal capsule</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Achondroplasia, the most common skeletal dysplasia, is caused by:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Type I collagen mutations cause osteogenesis imperfecta, not achondroplasia." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Defective type I collagen (COL1A1)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Achondroplasia: gain-of-function FGFR3 mutation → constitutively active receptor → INHIBITS chondrocyte proliferation at the growth plate → impaired endochondral ossification → short limbs (rhizomelic shortening), normal trunk, macrocephaly, frontal bossing. Autosomal dominant, ~80% new mutations. Intramembranous ossification is unaffected (hence normal-sized skull vault)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Gain-of-function mutation in FGFR3 that inhibits endochondral ossification at growth plates</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SHOX deficiency causes Léri-Weill dyschondrosteosis and contributes to short stature in Turner syndrome, not achondroplasia." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Loss of SHOX gene on the X chromosome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Vitamin D receptor defects cause hereditary vitamin D-resistant rickets, not achondroplasia." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Defective vitamin D receptor</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Skeletal muscle of the limbs derives from which embryonic precursor?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest forms craniofacial connective tissue and smooth muscle of arteries, not skeletal muscle." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Neural crest cells</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Limb skeletal muscle: myoblasts from the hypaxial myotome of somites delaminate and migrate into the limb buds, guided by HGF/c-MET signaling. PAX3 is essential for this migration (PAX3 mutations → Waardenburg syndrome with limb muscle defects in severe forms). Limb connective tissue and bones derive from lateral plate mesoderm." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Myotome of the somites (hypaxial domain migrating into limb buds)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Lateral plate mesoderm forms the limb skeleton and connective tissue, but NOT the muscle (which comes from somites)." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Lateral plate mesoderm</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Endoderm forms the lining of the gut and respiratory tract, not skeletal muscle." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Endoderm</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Clubfoot (talipes equinovarus) involves which deformities?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="This is the opposite of clubfoot. Clubfoot involves plantarflexion and inversion." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Dorsiflexion and eversion of the foot</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Clubfoot: fixed equinovarus deformity — foot is plantarflexed, inverted, adducted with increased medial arch (cavus). Incidence ~1/1000. Multifactorial etiology (genetic + environmental). Treatment: Ponseti method (serial casting → percutaneous Achilles tenotomy → abduction brace) — &gt;95% success rate. Surgical release reserved for recalcitrant cases." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Plantarflexion (equinus), inversion (varus), adduction, and cavus</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes hallux valgus (bunion), an adult acquired deformity, not clubfoot." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Lateral deviation of the great toe with bunion</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Pes planus is a different deformity. Clubfoot actually has increased arch (cavus), not flat foot." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Pes planus (flat foot) with heel valgus</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="craniosynostosis-crt.html" class="cross-link"><div class="cross-link-title">🧪 Craniosynostosis CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="clubfoot-limb-development-crt.html" class="cross-link"><div class="cross-link-title">🧪 Clubfoot & Limb Development CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="ddh-developmental-dysplasia-crt.html" class="cross-link"><div class="cross-link-title">🧪 DDH CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="polydactyly-syndactyly-crt.html" class="cross-link"><div class="cross-link-title">🧪 Polydactyly & Syndactyly CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="skeletal-dysplasia-crt.html" class="cross-link"><div class="cross-link-title">🧪 Skeletal Dysplasia CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="amniotic-band-crt.html" class="cross-link"><div class="cross-link-title">🧪 Amniotic Band CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="craniosynostosis-module.html" class="cross-link"><div class="cross-link-title">📘 Craniosynostosis</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="cleft-lip-palate-module.html" class="cross-link"><div class="cross-link-title">📘 Cleft Lip & Palate</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="pharyngeal-apparatus-module.html" class="cross-link"><div class="cross-link-title">📘 Pharyngeal Apparatus</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body>
+</html>

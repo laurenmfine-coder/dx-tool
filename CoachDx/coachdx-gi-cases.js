@@ -376,7 +376,7 @@ const COACHDX_GI_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Liver Cirrhosis Module', link: '../mechanism/liver-cirrhosis-module.html', reason: 'Understand portal hypertension' },
         { type: 'reasondx', title: 'GI Bleed Adventure', link: '../ReasonDx/adventure-cases/gi-bleed-expanded.html', reason: 'Practice GI bleed management' },
-        { type: 'reasondx', title: 'GI Bleed Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=gi-bleed-deep-dive', reason: 'Variceal vs non-variceal comparison' }
+        { type: 'reasondx', title: 'GI Bleed Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=gi-bleed-deep-dive', reason: 'Variceal vs non-variceal comparison' }
     ],
     evidenceBase: {
         guidelines: [

@@ -1,142 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIC - Disseminated Intravascular Coagulation | MechanismDx</title>
-    <style>
-        :root { --primary: #dc2626; --primary-dark: #b91c1c; --primary-light: #fef2f2; --text: #1e293b; --text-secondary: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); padding: 16px 24px; color: white; }
-        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .header-brand { font-size: 18px; font-weight: 600; text-decoration: none; color: white; }
-        .header-nav { display: flex; gap: 8px; }
-        .header-link { padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
-        .hero { background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%); padding: 40px 24px; color: white; }
-        .hero-inner { max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
-        .hero-meta { display: flex; gap: 20px; font-size: 14px; opacity: 0.85; }
-        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
-        .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
-        .concept-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .concept-box h4 { font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
-        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-        .card-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
-        .flow-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
-        .flow-step-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
-        .table-wrap { overflow-x: auto; margin: 16px 0; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--bg); font-weight: 600; }
-        .integration-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-top: 24px; }
-        .integration-box h3 { color: #166534; margin-bottom: 12px; }
-        .integration-links { display: flex; flex-wrap: wrap; gap: 10px; }
-        .integration-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1px solid #86efac; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; }
-        ul { padding-left: 20px; } li { margin-bottom: 8px; }
-    </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
-</head>
-<body>
-    <header class="header"><div class="header-inner"><a href="../index.html" class="header-brand">🩺 Dx Suite</a><nav class="header-nav"><a href="index.html" class="header-link">MechanismDx</a><a href="../ReasonDx/index.html" class="header-link">ReasonDx</a><a href="../CoachDx/index.html" class="header-link">CoachDx</a></nav></div></header>
+<!DOCTYPE html><html lang="en"><head><script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Disseminated Intravascular Coagulation | ReasonDx</title><style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--danger:#DC2626;--info:#F59E0B;--warning:#F97316}*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}.header{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600;color:#fff}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}.stats{display:flex;gap:12px}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px;color:#fff}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.4rem;font-weight:700;margin-top:4px}.card-body{padding:24px}.pearl{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(168,85,247,.15));border-left:4px solid var(--accent);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.danger{background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.15));border-left:4px solid var(--danger);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.compare-table{width:100%;border-collapse:collapse;margin:16px 0}.compare-table th{background:rgba(139,92,246,.2);padding:10px;text-align:left;font-size:.85rem;border:1px solid var(--border)}.compare-table td{padding:10px;border:1px solid var(--border);font-size:.85rem}.choices{display:grid;gap:12px;margin-top:16px}.choice{background:var(--card);border:2px solid var(--border);padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.15);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.15);pointer-events:none}.choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.choice-title{font-weight:600;font-size:.95rem}.hidden{display:none!important}.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}.cross-link{padding:14px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;text-decoration:none;color:var(--text)}.cross-link:hover{border-color:var(--accent)}.cross-link-title{font-weight:600;font-size:.9rem}h3{color:var(--accent);margin:20px 0 12px;font-size:1.1rem}@media(max-width:480px){.main{padding:12px}.card-body{padding:16px}}
+</style></head><body>
+<div class="header"><div class="header-row"><div class="header-title">🩸 Disseminated Intravascular Coagulation<span class="badge">HEMATOLOGY</span></div><div class="stats"><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">XP</div></div><div class="stat"><div class="stat-value">8</div><div class="stat-label">MCQs</div></div></div></div></div>
+<div class="main"><div class="card"><div class="card-header"><div class="card-phase">MECHANISM</div><div class="card-title">Pathophysiology</div></div><div class="card-body"><p>DIC is a <strong>consumptive coagulopathy</strong> characterized by widespread activation of the coagulation cascade → diffuse microvascular thrombosis → consumption of clotting factors and platelets → paradoxical bleeding. It is always <strong>secondary</strong> to an underlying condition.</p>
+<div class="pearl"><strong>🔑 Key Concept:</strong> DIC causes BOTH <strong>thrombosis AND bleeding simultaneously</strong>. Microvascular thrombi occlude small vessels (organ damage) while consumption of factors/platelets causes hemorrhage. Think of it as "using up all the clotting material on inappropriate clots."</div>
+<h3>Common Triggers</h3>
+<table class="compare-table"><tr><th>Category</th><th>Causes</th><th>Mechanism</th></tr>
+<tr><td><strong>Sepsis</strong></td><td>Gram-negative (most common), meningococcemia</td><td>Endotoxin/cytokine-mediated tissue factor release</td></tr>
+<tr><td><strong>Obstetric</strong></td><td>Placental abruption, amniotic fluid embolism, HELLP, retained dead fetus</td><td>Thromboplastin release from placental/fetal tissue</td></tr>
+<tr><td><strong>Malignancy</strong></td><td>Acute promyelocytic leukemia (APL), mucin-secreting adenocarcinomas</td><td>Tumor procoagulant release; APL granules contain tissue factor</td></tr>
+<tr><td><strong>Trauma</strong></td><td>Massive tissue injury, burns, crush injury</td><td>Tissue factor release from damaged tissues</td></tr>
+<tr><td><strong>Other</strong></td><td>Transfusion reaction, snake envenomation, pancreatitis</td><td>Various procoagulant triggers</td></tr></table>
+<div class="danger"><strong>⚠️ APL + DIC:</strong> Acute promyelocytic leukemia (t(15;17), PML-RARA) almost always presents with DIC. Start <strong>all-trans retinoic acid (ATRA)</strong> immediately upon suspicion — don't wait for confirmatory testing. ATRA differentiates the promyelocytes and resolves DIC.</div></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">CLINICAL</div><div class="card-title">Diagnosis</div></div><div class="card-body"><h3>Lab Findings (ISTH DIC Score)</h3>
+<table class="compare-table"><tr><th>Lab</th><th>Expected</th><th>Why</th></tr>
+<tr><td><strong>Platelets</strong></td><td>↓↓ Low</td><td>Consumed in microvascular thrombi</td></tr>
+<tr><td><strong>PT/INR</strong></td><td>↑↑ Prolonged</td><td>Consumption of clotting factors</td></tr>
+<tr><td><strong>PTT</strong></td><td>↑↑ Prolonged</td><td>Consumption of clotting factors</td></tr>
+<tr><td><strong>Fibrinogen</strong></td><td>↓↓ Low</td><td>Consumed (may be normal early — acute phase reactant)</td></tr>
+<tr><td><strong>D-dimer / FDP</strong></td><td>↑↑↑ Very high</td><td>Fibrinolysis of widespread clots</td></tr>
+<tr><td><strong>Peripheral smear</strong></td><td><strong>Schistocytes</strong></td><td>RBCs sheared by fibrin strands in microvasculature (MAHA)</td></tr></table>
+<div class="pearl"><strong>🔑 DIC vs TTP:</strong> Both show schistocytes and thrombocytopenia. Key differences: DIC has <strong>prolonged PT/PTT and low fibrinogen</strong>; TTP has <strong>normal PT/PTT and normal fibrinogen</strong>. DIC = coagulation problem; TTP = platelet problem.</div>
+<h3>Clinical Manifestations</h3>
+<p><strong>Acute DIC:</strong> Bleeding predominates — oozing from IV sites, mucosal bleeding, purpura, petechiae. <strong>Chronic DIC:</strong> Thrombosis predominates — seen with malignancy (Trousseau syndrome — migratory thrombophlebitis).</p></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">TREATMENT</div><div class="card-title">Management</div></div><div class="card-body"><h3>Treatment Principles</h3>
+<table class="compare-table"><tr><th>Priority</th><th>Action</th></tr>
+<tr><td><strong>#1 Treat underlying cause</strong></td><td>This is THE most important step. Antibiotics for sepsis, delivery for obstetric causes, ATRA for APL</td></tr>
+<tr><td><strong>Supportive — if bleeding</strong></td><td>Platelets (if <10K or active bleeding), FFP (replaces factors), cryoprecipitate (if fibrinogen <100)</td></tr>
+<tr><td><strong>Anticoagulation</strong></td><td>Consider heparin ONLY in chronic/thrombotic DIC (Trousseau). Contraindicated in acute bleeding DIC</td></tr></table>
+<div class="danger"><strong>⚠️ Do NOT give heparin in acute bleeding DIC.</strong> Heparin is only appropriate for chronic, thrombosis-predominant DIC (e.g., cancer-associated). In acute DIC with hemorrhage, heparin worsens bleeding.</div></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body"><div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">Which lab profile is MOST consistent with acute DIC?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Normal PT and fibrinogen suggest TTP/HUS rather than DIC, where coagulation factors are consumed." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Low platelets, normal PT, normal fibrinogen</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! The classic DIC lab profile: thrombocytopenia + prolonged PT/PTT + low fibrinogen + markedly elevated D-dimer/FDPs + schistocytes on smear. All reflect simultaneous consumption and fibrinolysis." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Low platelets, prolonged PT, low fibrinogen, elevated D-dimer</div></div></div>
+<div class="choice" data-correct="false" data-fb="Normal platelets and D-dimer argue against DIC. Isolated prolonged PTT suggests a factor deficiency or inhibitor." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Normal platelets, prolonged PTT, normal D-dimer</div></div></div>
+<div class="choice" data-correct="false" data-fb="Elevated fibrinogen argues against DIC (where it&#x27;s consumed). This pattern might suggest reactive thrombocytopenia with acute inflammation." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Low platelets, normal PT, elevated fibrinogen</div></div></div>
+</div><div id="mcqFb0" class="hidden" style="margin-top:16px"><div id="mcqFbText0" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">What is the MOST IMPORTANT step in treating DIC?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Supportive transfusions address symptoms but won&#x27;t resolve DIC without treating the cause." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Platelet transfusion</div></div></div>
+<div class="choice" data-correct="false" data-fb="Heparin is only used in chronic thrombotic DIC. It worsens bleeding in acute DIC." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">Heparin infusion</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! The cornerstone of DIC management is treating the trigger: antibiotics for sepsis, delivery for obstetric causes, ATRA for APL, etc. Without removing the trigger, supportive measures alone cannot resolve the consumptive process." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Treat the underlying cause</div></div></div>
+<div class="choice" data-correct="false" data-fb="FFP replaces consumed clotting factors but is supportive, not definitive treatment." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Fresh frozen plasma</div></div></div>
+</div><div id="mcqFb1" class="hidden" style="margin-top:16px"><div id="mcqFbText1" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">A patient with APL (acute promyelocytic leukemia) presents with DIC. What should be started IMMEDIATELY?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Thrombolytics would worsen the bleeding component of DIC catastrophically." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">Systemic thrombolytics</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! ATRA induces differentiation of malignant promyelocytes and resolves the DIC triggered by their granule contents. Start immediately upon clinical suspicion of APL — do not wait for cytogenetic confirmation. APL + DIC is a hematologic emergency." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">All-trans retinoic acid (ATRA)</div></div></div>
+<div class="choice" data-correct="false" data-fb="Steroids treat differentiation syndrome from ATRA but are not the primary treatment for APL-associated DIC." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">High-dose dexamethasone</div></div></div>
+<div class="choice" data-correct="false" data-fb="Leukapheresis is used for hyperleukocytosis in other leukemias but is not the priority in APL with DIC." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Emergent leukapheresis</div></div></div>
+</div><div id="mcqFb2" class="hidden" style="margin-top:16px"><div id="mcqFbText2" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">How does DIC differ from TTP on laboratory testing?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="This is backwards. DIC consumes clotting factors (prolonging PT/PTT); TTP does not." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">DIC has normal PT/PTT; TTP has prolonged PT/PTT</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Both show thrombocytopenia and schistocytes (MAHA). The key distinction: DIC involves the coagulation cascade (prolonged PT/PTT, low fibrinogen, elevated D-dimer) while TTP is a platelet microangiopathy (normal coagulation studies, normal fibrinogen). TTP pentad: MAHA, thrombocytopenia, renal failure, neuro changes, fever." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">DIC has prolonged PT/PTT and low fibrinogen; TTP has normal PT/PTT</div></div></div>
+<div class="choice" data-correct="false" data-fb="D-dimer is characteristically elevated in DIC, not TTP." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">TTP has elevated D-dimer; DIC does not</div></div></div>
+<div class="choice" data-correct="false" data-fb="PT/PTT and fibrinogen reliably distinguish DIC from TTP." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">There is no reliable lab distinction</div></div></div>
+</div><div id="mcqFb3" class="hidden" style="margin-top:16px"><div id="mcqFbText3" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">When is heparin appropriate in DIC?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Heparin worsens bleeding in acute hemorrhagic DIC and is not universally appropriate." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Always — heparin is first-line for all DIC</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Chronic DIC (typically cancer-associated) presents with thrombosis rather than bleeding — Trousseau syndrome (migratory thrombophlebitis). Low-dose heparin can be considered. In acute hemorrhagic DIC, heparin is contraindicated." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">Chronic DIC with thrombosis predominance</div></div></div>
+<div class="choice" data-correct="false" data-fb="Absolutely contraindicated — heparin worsens active bleeding in acute DIC." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">Acute DIC with active hemorrhage</div></div></div>
+<div class="choice" data-correct="false" data-fb="Heparin has a role in chronic, thrombosis-predominant DIC." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">Heparin is never appropriate in DIC</div></div></div>
+</div><div id="mcqFb4" class="hidden" style="margin-top:16px"><div id="mcqFbText4" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">Which obstetric condition is MOST commonly associated with DIC?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Gestational diabetes does not trigger DIC." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">Gestational diabetes</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Placental abruption is the most common obstetric cause of DIC. Separation of the placenta releases thromboplastin into maternal circulation, triggering widespread coagulation. Other obstetric causes: amniotic fluid embolism (most fulminant), HELLP syndrome, retained dead fetus, eclampsia." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Placental abruption</div></div></div>
+<div class="choice" data-correct="false" data-fb="Placenta previa causes bleeding from abnormal placental position but does not typically trigger DIC." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">Placenta previa</div></div></div>
+<div class="choice" data-correct="false" data-fb="Hyperemesis does not trigger coagulation cascade activation." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Hyperemesis gravidarum</div></div></div>
+</div><div id="mcqFb5" class="hidden" style="margin-top:16px"><div id="mcqFbText5" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">On peripheral blood smear, which finding is characteristic of DIC?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Rouleaux suggests elevated proteins (multiple myeloma, inflammation), not DIC." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Rouleaux formation</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Schistocytes (fragmented RBCs) are the hallmark of microangiopathic hemolytic anemia (MAHA) in DIC. RBCs are mechanically sheared as they pass through fibrin strands deposited in the microvasculature. Also seen in TTP/HUS, mechanical heart valves." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Schistocytes</div></div></div>
+<div class="choice" data-correct="false" data-fb="Hypersegmented neutrophils indicate megaloblastic anemia (B12/folate deficiency)." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Hypersegmented neutrophils</div></div></div>
+<div class="choice" data-correct="false" data-fb="Target cells are seen in liver disease, thalassemia, and hemoglobin C disease — not DIC." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Target cells</div></div></div>
+</div><div id="mcqFb6" class="hidden" style="margin-top:16px"><div id="mcqFbText6" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">What is the fibrinogen replacement threshold in acute DIC with bleeding?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="200 mg/dL is within normal range; replacement is not yet indicated." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Below 200 mg/dL</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Cryoprecipitate is indicated when fibrinogen drops below 100 mg/dL in bleeding DIC. Each unit of cryoprecipitate raises fibrinogen by ~5-10 mg/dL. A typical dose is 10 units. FFP also contains fibrinogen but in lower concentration." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Below 100 mg/dL</div></div></div>
+<div class="choice" data-correct="false" data-fb="Waiting until 50 mg/dL risks catastrophic hemorrhage. The threshold for replacement is 100 mg/dL." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">Below 50 mg/dL</div></div></div>
+<div class="choice" data-correct="false" data-fb="Fibrinogen replacement with cryoprecipitate is a key supportive measure in hemorrhagic DIC." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Fibrinogen replacement is never indicated in DIC</div></div></div>
+</div><div id="mcqFb7" class="hidden" style="margin-top:16px"><div id="mcqFbText7" style="padding:12px;border-radius:8px"></div></div></div></div></div></div>
+<div class="card"><div class="card-header"><div class="card-title">📚 References</div></div><div class="card-body"><div class="cross-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK500050/" target="_blank" class="cross-link"><div class="cross-link-title">📄 DIC - StatPearls</div></a><a href="https://onlinelibrary.wiley.com/doi/10.1111/jth.14935" target="_blank" class="cross-link"><div class="cross-link-title">📄 ISTH DIC Guidelines</div></a></div></div></div>
+</div>
 
-    <section class="hero"><div class="hero-inner"><h1>🩸 Disseminated Intravascular Coagulation (DIC)</h1><p>A consumptive coagulopathy where the body simultaneously clots AND bleeds. Understanding the paradox is key to management.</p><div class="hero-meta"><span>⏱️ 20 min</span><span>📊 Critical</span><span>🎯 Hematology/Critical Care</span></div></div></section>
-
-    <main class="main">
-        <div class="section">
-            <h2 class="section-title">📋 The DIC Paradox</h2>
-            <div class="concept-box">
-                <h4>🎯 Clotting AND Bleeding Simultaneously</h4>
-                <p>DIC activates coagulation system systemically → consumes clotting factors AND platelets → leads to both microvascular thrombosis AND hemorrhage. The patient bleeds because they've clotted too much!</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">🔬 Pathophysiology</h2>
-            <div class="flow-step"><span class="flow-step-num">1</span><div><strong>Triggering Event</strong><br>Sepsis, trauma, malignancy, obstetric complications → release of tissue factor</div></div>
-            <div class="flow-step"><span class="flow-step-num">2</span><div><strong>Systemic Thrombin Generation</strong><br>Tissue factor activates coagulation cascade → widespread thrombin generation</div></div>
-            <div class="flow-step"><span class="flow-step-num">3</span><div><strong>Microvascular Thrombosis</strong><br>Fibrin deposition in microvasculature → end-organ ischemia, MAHA (schistocytes)</div></div>
-            <div class="flow-step"><span class="flow-step-num">4</span><div><strong>Consumptive Coagulopathy</strong><br>Platelets and clotting factors consumed → ↑PT/PTT, ↓fibrinogen, ↓platelets → BLEEDING</div></div>
-
-            <h3 style="margin: 20px 0 12px;">Common Causes</h3>
-            <div class="grid-2">
-                <div class="card"><div class="card-title">🦠 Infection</div><ul><li>Sepsis (most common cause)</li><li>Gram-negative bacteremia</li><li>Meningococcemia</li></ul></div>
-                <div class="card"><div class="card-title">🩺 Obstetric</div><ul><li>Placental abruption</li><li>Amniotic fluid embolism</li><li>HELLP syndrome</li></ul></div>
-                <div class="card"><div class="card-title">🎗️ Malignancy</div><ul><li>Acute promyelocytic leukemia (APL)</li><li>Mucin-secreting adenocarcinoma</li></ul></div>
-                <div class="card"><div class="card-title">⚡ Trauma/Other</div><ul><li>Massive trauma</li><li>Burns</li><li>Snake envenomation</li></ul></div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">🔎 Diagnosis: ISTH DIC Score</h2>
-            <div class="table-wrap">
-                <table>
-                    <tr><th>Parameter</th><th>Score</th></tr>
-                    <tr><td>Platelet count: &gt;100k / 50-100k / &lt;50k</td><td>0 / 1 / 2</td></tr>
-                    <tr><td>D-dimer: Normal / Moderate ↑ / Strong ↑</td><td>0 / 2 / 3</td></tr>
-                    <tr><td>PT prolongation: &lt;3s / 3-6s / &gt;6s</td><td>0 / 1 / 2</td></tr>
-                    <tr><td>Fibrinogen: &gt;100 / &lt;100</td><td>0 / 1</td></tr>
-                    <tr style="background:#fef3c7"><td><strong>Score ≥5 = Overt DIC</strong></td><td></td></tr>
-                </table>
-            </div>
-
-            <h3 style="margin: 20px 0 12px;">TTP vs DIC Differentiation</h3>
-            <div class="table-wrap">
-                <table>
-                    <tr><th>Feature</th><th>TTP</th><th>DIC</th></tr>
-                    <tr><td>PT/PTT</td><td style="background:#f0fdf4">Normal</td><td style="background:#fef2f2">Prolonged</td></tr>
-                    <tr><td>Fibrinogen</td><td style="background:#f0fdf4">Normal</td><td style="background:#fef2f2">Low</td></tr>
-                    <tr><td>D-dimer</td><td>Mild ↑</td><td>Markedly ↑</td></tr>
-                    <tr><td>Primary issue</td><td>Thrombosis</td><td>Both clotting and bleeding</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">💊 Treatment</h2>
-            <div class="concept-box">
-                <h4>🎯 Treat the Underlying Cause!</h4>
-                <p>DIC is always secondary. The most important intervention is treating the trigger (antibiotics for sepsis, delivery for obstetric causes, chemotherapy for APL). Supportive therapy alone won't stop DIC.</p>
-            </div>
-            <div class="grid-2">
-                <div class="card"><div class="card-title">🩸 Blood Products (if bleeding)</div><ul><li>Platelets: Target &gt;50k if bleeding</li><li>FFP: For ↑PT/PTT with bleeding</li><li>Cryoprecipitate: For fibrinogen &lt;100</li><li>PRBCs: For anemia</li></ul></div>
-                <div class="card"><div class="card-title">💊 Other Considerations</div><ul><li>Heparin: Controversial - consider if thrombosis predominates</li><li>Antithrombin: Not routinely recommended</li><li>TXA: For severe bleeding (limited data)</li></ul></div>
-            </div>
-        </div>
-
-        <div class="integration-box">
-            <h3>🔗 Continue Your Learning</h3>
-            <div class="integration-links">
-                <a href="../ReasonDx/dic-adventure.html" class="integration-link">🎮 <strong>ReasonDx:</strong> DIC Case</a>
-                <a href="../CoachDx/mentor-chat.html?case=dic" class="integration-link">🗣️ <strong>CoachDx:</strong> DIC SBAR</a>
-                <a href="ttp-module.html" class="integration-link">📚 <strong>Related:</strong> TTP Module</a>
-                <a href="sepsis-shock-module.html" class="integration-link">📚 <strong>Related:</strong> Sepsis Module</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">📝 Key Takeaways</h2>
-            <div class="grid-2">
-                <div class="card"><div class="card-title">🎯 Must Know</div><ul><li>Always secondary - find the cause</li><li>↑PT/PTT, ↓fibrinogen, ↓platelets, ↑D-dimer</li><li>Clotting AND bleeding simultaneously</li><li>ISTH Score ≥5 = overt DIC</li></ul></div>
-                <div class="card"><div class="card-title">💊 Treatment Pearls</div><ul><li>Treat underlying cause FIRST</li><li>Blood products only if actively bleeding</li><li>Different from TTP (PT/PTT abnormal)</li><li>Heparin controversial</li></ul></div>
-            </div>
-        </div>
-    </main>
-    <script src="dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
-
-    <!-- DxSuite AI Tutor Integration -->
-    <div data-dx-tutor
-         data-module-title="DIC"
-         data-key-points="📋 The DIC Paradox, 🔬 Pathophysiology, 🔎 Diagnosis: ISTH DIC Score, 💊 Treatment, 📝 Key Takeaways, Common Causes, TTP vs DIC Differentiation, 🔗 Continue Your Learning, pathophysiology, clinical presentation, diagnosis, management, complications"
-         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
-         style="display:none;"></div>
-    <script src="dx-ai-tutor.js"></script>
-</body>
-</html>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=dic-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/dic-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body></html>

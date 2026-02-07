@@ -498,6 +498,23 @@
                     </div>
                 </div>
 
+                <!-- What Should I Study Next? -->
+                <div class="card" id="recommendationsCard">
+                    <div id="recommendationsContainer">
+                        <div style="text-align: center; padding: 24px; color: #94a3b8;">
+                            <div style="font-size: 1.5rem; margin-bottom: 8px;">🎯</div>
+                            <p>Loading recommendations...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spaced Repetition Review Queue -->
+                <div class="card" id="spacedRepCard" style="display: none;">
+                    <h2>🔄 Due for Review</h2>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 12px;">Topics that need reinforcement based on your performance</p>
+                    <div id="spacedRepContainer"></div>
+                </div>
+
                 <!-- Recent Activity -->
                 <div class="card">
                     <h2>🕐 Recent Activity</h2>
@@ -536,6 +553,8 @@
         </div>
     </main>
 
+    <script src="../dx-progress.js"></script>
+    <script src="../dx-recommendations.js"></script>
     <script>
         // Generate Heat Map
         const topics = [
@@ -576,25 +595,95 @@
             calendar.appendChild(day);
         }
 
-        // Load saved data from localStorage
+        // Load saved data from DxProgress unified engine
         function loadProgress() {
-            const data = localStorage.getItem('reasondx-progress');
-            if (data) {
-                const progress = JSON.parse(data);
-                document.getElementById('modules-completed').textContent = progress.modulesCompleted || 47;
-                document.getElementById('hours-studied').textContent = progress.hoursStudied || 23.5;
-                document.getElementById('avg-score').textContent = (progress.avgScore || 78) + '%';
-                document.getElementById('streak-count').textContent = progress.streak || 7;
+            if (window.DxProgress) {
+                const summary = DxProgress.getDashboardSummary();
+                document.getElementById('modules-completed').textContent = summary.modulesCompleted || 0;
+                document.getElementById('hours-studied').textContent = summary.hoursStudied || 0;
+                document.getElementById('avg-score').textContent = (summary.quizAccuracy || 0) + '%';
+                document.getElementById('streak-count').textContent = summary.currentStreak || 0;
+
+                // Update activity calendar with real data
+                const calendarEl = document.getElementById('calendar');
+                if (calendarEl && summary.activityCalendar) {
+                    const dayLabels = calendarEl.querySelectorAll('.calendar-day-label');
+                    const existingDays = calendarEl.querySelectorAll('.calendar-day');
+                    existingDays.forEach(d => d.remove());
+                    summary.activityCalendar.forEach(day => {
+                        const dayEl = document.createElement('div');
+                        dayEl.className = 'calendar-day';
+                        if (day.active) dayEl.classList.add('active');
+                        if (day.isToday) dayEl.classList.add('today');
+                        dayEl.textContent = new Date(day.date).getDate();
+                        calendarEl.appendChild(dayEl);
+                    });
+                }
+            } else {
+                // Fallback to legacy localStorage
+                const data = localStorage.getItem('reasondx-progress');
+                if (data) {
+                    const progress = JSON.parse(data);
+                    document.getElementById('modules-completed').textContent = progress.modulesCompleted || 0;
+                    document.getElementById('hours-studied').textContent = progress.hoursStudied || 0;
+                    document.getElementById('avg-score').textContent = (progress.avgScore || 0) + '%';
+                    document.getElementById('streak-count').textContent = progress.streak || 0;
+                }
             }
         }
 
         function saveProgress(key, value) {
+            // Write through DxProgress if available
+            if (window.DxProgress && key && value) {
+                // Map legacy keys to DxProgress API
+                console.log('DxProgress: legacy saveProgress call', key, value);
+            }
+            // Also maintain legacy key for backward compatibility
             let data = JSON.parse(localStorage.getItem('reasondx-progress') || '{}');
             data[key] = value;
             localStorage.setItem('reasondx-progress', JSON.stringify(data));
         }
 
+        // Listen for real-time progress updates
+        window.addEventListener('dx-progress-update', function() { loadProgress(); });
+
+        // Render personalized recommendations
+        if (window.DxRecommend) {
+            DxRecommend.render('#recommendationsContainer', { maxItems: 5, showHeader: true });
+        }
+
+        // Render spaced repetition review queue
+        function renderSpacedRep() {
+            if (!window.DxProgress) return;
+            const dueTopics = DxProgress.getDueForReview();
+            if (dueTopics.length === 0) return;
+
+            document.getElementById('spacedRepCard').style.display = 'block';
+            const container = document.getElementById('spacedRepContainer');
+            const urgencyStyles = {
+                high: { bg: '#FEF2F2', border: '#EF4444', label: 'Overdue', color: '#991B1B' },
+                medium: { bg: '#FFFBEB', border: '#F59E0B', label: 'Due soon', color: '#92400E' },
+                low: { bg: '#F0FDF4', border: '#10B981', label: 'Due', color: '#065F46' }
+            };
+
+            container.innerHTML = dueTopics.slice(0, 8).map(item => {
+                const style = urgencyStyles[item.urgency] || urgencyStyles.low;
+                const name = item.topicId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                return `
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin-bottom: 6px; border-radius: 10px; background: ${style.bg}; border-left: 3px solid ${style.border};">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 0.88rem; color: #1E293B;">${name}</div>
+                            <div style="font-size: 0.75rem; color: #64748b;">${item.daysPast} day${item.daysPast !== 1 ? 's' : ''} overdue · Interval: ${item.interval}d</div>
+                        </div>
+                        <span style="font-size: 0.7rem; padding: 3px 8px; border-radius: 10px; background: ${style.border}22; color: ${style.color}; font-weight: 600;">${style.label}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        renderSpacedRep();
+
         loadProgress();
     </script>
+<script src="../dx-epa-integration.js"></script>
 </body>
 </html>

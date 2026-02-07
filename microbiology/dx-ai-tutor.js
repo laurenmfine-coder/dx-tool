@@ -2,7 +2,7 @@
 // DxSuite AI Tutor - Clinical Reasoning Assistant
 // =====================================================
 // Uses Cloudflare Worker proxy - no student API keys needed
-// Designed for ReasonDx research study (January 2026)
+// ReasonDx AI Clinical Reasoning Tutor
 
 const DxAITutor = (function() {
     'use strict';

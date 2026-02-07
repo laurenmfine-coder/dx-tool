@@ -147,7 +147,7 @@ const COACHDX_CARDIOLOGY_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Heart Failure Module', link: '../mechanism/hf-module.html', reason: 'Understand HF pathophysiology' },
         { type: 'reasondx', title: 'Heart Failure Adventure', link: '../ReasonDx/adventure-cases/heart-failure-expanded.html', reason: 'Practice HF management' },
-        { type: 'reasondx', title: 'Heart Failure Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=heart-failure-deep-dive', reason: 'ACC/AHA HF guidelines' }
+        { type: 'reasondx', title: 'Heart Failure Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=heart-failure-deep-dive', reason: 'ACC/AHA HF guidelines' }
     ],
     evidenceBase: {
         guidelines: [

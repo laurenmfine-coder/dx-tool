@@ -63,7 +63,7 @@ const COACHDX_ID_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Meningitis Module', link: '../mechanism/meningitis-module.html', reason: 'CSF analysis and pathophysiology' },
         { type: 'reasondx', title: 'Meningitis Adventure', link: '../ReasonDx/adventure-cases/meningitis-expanded.html', reason: 'Practice meningitis workup' },
-        { type: 'reasondx', title: 'Meningitis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=meningitis-deep-dive', reason: 'CSF interpretation' }
+        { type: 'reasondx', title: 'Meningitis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=meningitis-deep-dive', reason: 'CSF interpretation' }
     ],
     evidenceBase: {
         guidelines: ["IDSA Bacterial Meningitis Guidelines 2017", "Surviving Sepsis Campaign 2021"],
@@ -199,7 +199,7 @@ const COACHDX_ID_CASES = {
     relatedContent: [
         { type: 'mechanism', title: 'Cholecystitis Module', link: '../mechanism/cholecystitis-module.html', reason: 'Biliary pathophysiology' },
         { type: 'reasondx', title: 'Cholecystitis Adventure', link: '../ReasonDx/adventure-cases/cholecystitis-expanded.html', reason: 'Biliary disease workup' },
-        { type: 'reasondx', title: 'Sepsis Deep Dive', link: '../ReasonDx/deep-dive-player-integrated.html?module=sepsis-deep-dive', reason: 'Sepsis bundles and source control' }
+        { type: 'reasondx', title: 'Sepsis Deep Dive', link: '../ReasonDx/deep-dive-player.html?module=sepsis-deep-dive', reason: 'Sepsis bundles and source control' }
     ],
     evidenceBase: {
         guidelines: ["Tokyo Guidelines 2018 for Acute Cholangitis", "Surviving Sepsis Campaign 2021"],

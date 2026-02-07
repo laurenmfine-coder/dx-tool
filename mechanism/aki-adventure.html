@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rising Creatinine | NEPHROLOGY Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #65A30D; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #3F6212 0%, #65A30D 50%, #84CC16 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .choice-btn { display: block; width: 100%; text-align: left; padding: 16px 20px; margin: 10px 0; background: var(--card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; color: var(--text); transition: all 0.2s; font-family: inherit; font-size: inherit; }
+        .choice-btn:hover { border-color: var(--accent); transform: translateX(4px); }
+        .choice-label { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .choice-detail { font-size: 0.85rem; color: var(--muted); }
+        .alert { display: flex; gap: 16px; padding: 16px 20px; border-radius: 12px; margin: 16px 0; align-items: flex-start; }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 700; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+        .tracker { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .tracker-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .tracker-items { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tracker-item { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: var(--muted); }
+        .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+        @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🎮 Rising Creatinine <span class="badge">NEPHROLOGY</span></div>
+            <div class="header-stats">
+                <div class="stat"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
+                <div class="stat"><div class="stat-value" id="stepCount">1/3</div><div class="stat-label">Progress</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="tracker">
+            <div class="tracker-title">AKI Workup</div>
+            <div class="tracker-items" id="trackerItems">
+                <span class="tracker-item" id="track_0">Classify</span> <span class="tracker-item" id="track_1">Urinalysis</span> <span class="tracker-item" id="track_2">Imaging</span> <span class="tracker-item" id="track_3">Volume Status</span> <span class="tracker-item" id="track_4">Remove Offenders</span> <span class="tracker-item" id="track_5">Monitor</span>
+            </div>
+        </div>
+
+        <!-- Incoming Patient Card -->
+        <div class="card" id="stage_intro">
+            <div class="card-header">
+                <div class="card-phase">Incoming Patient</div>
+                <div class="card-title">🚨 EMS Radio Call</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">
+                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">58-year-old male</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">decreased urine output for 2 days, fatigue, and nausea</span>. PMH: Type 2 DM, HTN, CKD stage 3 (baseline Cr 1.8). Started ibuprofen 5 days ago for back pain. Also taking lisinopril and metformin. No urine output since yesterday morning."
+                </div>
+                <div class="vitals-grid">
+                    <div class="vital "><div class="vital-label">Temp</div><div class="vital-value">98.4°F</div></div><div class="vital "><div class="vital-label">HR</div><div class="vital-value">92</div></div><div class="vital warning"><div class="vital-label">BP</div><div class="vital-value">104/68</div></div><div class="vital warning"><div class="vital-label">RR</div><div class="vital-value">22</div></div><div class="vital "><div class="vital-label">SpO2</div><div class="vital-value">96%</div></div>
+                </div>
+                <div class="alert warning">
+                    <span class="alert-icon">⚠️</span>
+                    <div>
+                        <div class="alert-title">Clinical Decision Point</div>
+                        <div class="alert-desc">Acute kidney injury on CKD: known CKD 3 patient with new anuria, likely precipitated by NSAIDs + ACEi combination in setting of volume depletion. Evaluate prerenal vs intrinsic vs postrenal.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="stage_arrival" class="card">
+            <div class="card-header">
+                <div class="card-phase">DECISION 1</div>
+                <div class="card-title">Initial Assessment</div>
+            </div>
+            <div class="card-body">
+                
+                
+                <div id="choices_arrival">
+                    <button class="choice-btn" onclick="choose('arrival', 'systematic_workup')">
+                <div class="choice-label">🔍 Renal panel + UA + bladder scan + stop nephrotoxins</div>
+                <div class="choice-detail">Systematic AKI workup: labs, urine, rule out obstruction, remove offending agents</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'fluids_only')">
+                <div class="choice-label">💧 Aggressive IV fluids — it's prerenal</div>
+                <div class="choice-detail">He's probably just dehydrated</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'dialysis')">
+                <div class="choice-label">🏥 Emergent dialysis consult</div>
+                <div class="choice-detail">Anuria for >24 hours requires dialysis</div>
+            </button>
+                </div>
+                <div id="fb_arrival_systematic_workup" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! AKI workup: (1) Stop nephrotoxins — discontinue ibuprofen (afferent arteriole vasodilation blocked) AND hold lisinopril (efferent vasodilation blocked) AND hold metformin (accumulation risk). (2) Bladder scan to rule out obstruction. (3) BMP, UA with microscopy, FENa. (4) Renal ultrasound if obstruction suspected.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('labs_back')" style="margin-top:16px">Continue →</button></div><div id="fb_arrival_fluids_only" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">While prerenal AKI is likely contributing, blind fluid loading without assessment can be dangerous, especially in CKD patients who may have impaired fluid handling. He needs the full workup first: check volume status, rule out obstruction with bladder scan, and get urinalysis. The combination of NSAID + ACEi suggests a hemodynamic prerenal cause, but you need to confirm.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div><div id="fb_arrival_dialysis" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Dialysis is reserved for specific indications (mnemonic AEIOU): Acidosis (refractory), Electrolytes (refractory hyperkalemia), Intoxication, Overload (refractory pulmonary edema), Uremia (pericarditis, encephalopathy). Duration of anuria alone is not an indication. The cause may be reversible — evaluate first.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_labs_back" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 2</div>
+                <div class="card-title">Results</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">Creatinine 5.2 (from baseline 1.8), K+ 6.1, FENa 0.4% (prerenal pattern), bland UA (no ATN casts, no glomerulonephritis). Bladder scan shows empty bladder (not obstructed). This is <strong>prerenal AKI</strong> from the NSAID + ACEi combination.</div>
+                <div class="vitals-grid"><div class="vital critical"><div class="vital-label">Creatinine</div><div class="vital-value">5.2 mg/dL (baseline 1.8)</div></div><div class="vital critical"><div class="vital-label">BUN</div><div class="vital-value">68 mg/dL</div></div><div class="vital critical"><div class="vital-label">K+</div><div class="vital-value">6.1 mEq/L</div></div><div class="vital warning"><div class="vital-label">Bicarb</div><div class="vital-value">18 mEq/L</div></div><div class="vital "><div class="vital-label">FENa</div><div class="vital-value">0.4%</div></div><div class="vital "><div class="vital-label">Bladder scan</div><div class="vital-value">50 mL</div></div><div class="vital "><div class="vital-label">UA</div><div class="vital-value">Bland — no casts, no protein</div></div></div>
+                <div id="choices_labs_back">
+                    <button class="choice-btn" onclick="choose('labs_back', 'fluids_monitor_k')">
+                <div class="choice-label">💧 IV NS carefully + treat hyperkalemia + hold nephrotoxins</div>
+                <div class="choice-detail">Volume resuscitation, calcium gluconate + insulin/glucose for K+ 6.1, monitor closely</div>
+            </button><button class="choice-btn" onclick="choose('labs_back', 'add_bicarb')">
+                <div class="choice-label">💊 Sodium bicarbonate drip for acidosis</div>
+                <div class="choice-detail">Bicarb is 18, needs correction</div>
+            </button><button class="choice-btn" onclick="choose('labs_back', 'renal_biopsy')">
+                <div class="choice-label">🔬 Renal biopsy</div>
+                <div class="choice-detail">Need tissue diagnosis for the acute decline</div>
+            </button>
+                </div>
+                <div id="fb_labs_back_fluids_monitor_k" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Prerenal AKI management: (1) Volume repletion with NS (careful in CKD — monitor for overload). (2) K+ 6.1 needs treatment: calcium gluconate 1g IV for membrane stabilization, then insulin 10U + D50 to shift K+ intracellularly, and consider kayexalate or patiromer. (3) Already stopped offending meds. (4) Monitor Cr and urine output q6h. EKG for hyperkalemia changes.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('improving')" style="margin-top:16px">Continue →</button></div><div id="fb_labs_back_add_bicarb" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Bicarb of 18 is a mild non-anion gap metabolic acidosis from renal failure — it does not need direct correction. Treating the underlying AKI (volume repletion, removing nephrotoxins) will correct the acidosis as kidney function recovers. Sodium bicarbonate can cause volume overload and does not address the root cause.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('labs_back')" style="margin-top:16px">Try Again</button></div><div id="fb_labs_back_renal_biopsy" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Renal biopsy is not indicated here. The UA is bland (no active sediment suggesting glomerulonephritis or interstitial nephritis), FENa is prerenal, and there's a clear precipitant (NSAID + ACEi). Biopsy is reserved for unexplained AKI with active sediment, nephrotic syndrome, or suspected glomerulonephritis.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('labs_back')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_improving" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">RESOLUTION</div>
+                <div class="card-title">48 Hours Later</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">After 2L NS and stopping nephrotoxins: urine output recovered to 60 mL/hr. Cr trending down: 5.2 → 3.8 → 2.6. K+ normalized to 4.4 after treatment. Patient feeling much better, eating and drinking.</div>
+                
+                <div id="choices_improving">
+                    <button class="choice-btn" onclick="choose('improving', 'good_outcome')">
+                <div class="choice-label">📋 Resume safe medications + renal follow-up</div>
+                <div class="choice-detail">Restart lisinopril when Cr at baseline, avoid NSAIDs permanently, recheck in 1 week</div>
+            </button>
+                </div>
+                <div id="fb_improving_good_outcome" class="hidden">
+                        <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
+                        <div class="narrative">Excellent AKI management! Key discharge points: (1) NEVER use NSAIDs again — document allergy/intolerance. (2) Restart lisinopril only after Cr returns to within 30% of baseline — ACEi/ARB provides long-term renal protection but must be held during acute injury. (3) Hold metformin until Cr <1.5 (or eGFR >30). (4) Recheck BMP in 5-7 days. (5) Nephrology follow-up — this AKI episode may accelerate CKD progression.</div>
+                        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+                            <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
+                            <button class="choice-btn" onclick="location.href='aki-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
+                        </div></div></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    let currentStep = 0;
+    const totalSteps = 3;
+    let timerInterval;
+    let seconds = 0;
+
+    // Start timer
+    timerInterval = setInterval(() => {
+        seconds++;
+        const m = String(Math.floor(seconds/60)).padStart(2,'0');
+        const s = String(seconds%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m + ':' + s;
+    }, 1000);
+
+    function choose(stage, choice) {
+        // Hide choices
+        const choicesDiv = document.getElementById('choices_' + stage);
+        if (choicesDiv) choicesDiv.classList.add('hidden');
+
+        // Show feedback
+        const fb = document.getElementById('fb_' + stage + '_' + choice);
+        if (fb) fb.classList.remove('hidden');
+
+        // Update tracker
+        if (currentStep < totalSteps) {
+            const trackEl = document.getElementById('track_' + currentStep);
+            if (trackEl) trackEl.classList.add('done');
+        }
+    }
+
+    function goTo(stageId) {
+        // Hide all stages
+        document.querySelectorAll('[id^="stage_"]').forEach(el => el.classList.add('hidden'));
+
+        // Show target stage
+        const target = document.getElementById('stage_' + stageId);
+        if (target) {
+            target.classList.remove('hidden');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        currentStep++;
+        document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
+    }
+    </script>
+</body>
+</html>

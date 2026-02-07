@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join ReasonDx | Clinical Reasoning Education Platform</title>
+    <title>Join ReasonDx | Board-Ready Clinical Reasoning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #059669; --primary-dark: #047857; --pro: #2563eb; --pro-dark: #1d4ed8; --research: #7c3aed; --research-dark: #6d28d9; }
+        :root { --primary: #059669; --primary-dark: #047857; --pro: #2563eb; --pro-dark: #1d4ed8; --beta: #d97706; --beta-dark: #b45309; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%); min-height: 100vh; padding: 24px; }
         .page-container { max-width: 1000px; margin: 0 auto; }
         .page-header { text-align: center; margin-bottom: 40px; }
         .page-header h1 { font-size: 36px; font-weight: 800; color: #1e3a5f; margin-bottom: 8px; }
         .page-header p { font-size: 18px; color: #64748b; }
+        .page-header .board-tags { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+        .board-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .board-tag.step1 { background: #dbeafe; color: #1d4ed8; }
+        .board-tag.step2 { background: #dcfce7; color: #166534; }
+        .board-tag.shelf { background: #fef3c7; color: #92400e; }
+        .board-tag.rotation { background: #ede9fe; color: #6d28d9; }
         .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
         @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } }
         .plan-card { background: white; border-radius: 20px; padding: 32px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 3px solid transparent; cursor: pointer; transition: all 0.3s; position: relative; }
         .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
         .plan-card.selected { border-color: var(--primary); }
         .plan-card.selected.pro { border-color: var(--pro); }
-        .plan-card.selected.research { border-color: var(--research); }
-        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--pro); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .plan-card.selected.beta { border-color: var(--beta); }
+        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--pro); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+        .plan-badge.beta-badge { background: var(--beta); }
         .plan-icon { font-size: 48px; margin-bottom: 16px; text-align: center; }
         .plan-name { font-size: 24px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; text-align: center; }
         .plan-price { text-align: center; margin-bottom: 20px; }
@@ -29,157 +36,211 @@
         .plan-price .annual { font-size: 13px; color: #059669; margin-top: 4px; }
         .plan-features { list-style: none; margin-bottom: 24px; }
         .plan-features li { padding: 8px 0; font-size: 14px; color: #475569; display: flex; align-items: flex-start; gap: 10px; }
-        .plan-features li::before { content: "✓"; color: var(--primary); font-weight: 700; }
-        .plan-features li.limited::before { content: "○"; color: #94a3b8; }
+        .plan-features li::before { content: "\2713"; color: var(--primary); font-weight: 700; }
         .plan-features li.excluded { color: #94a3b8; text-decoration: line-through; }
-        .plan-features li.excluded::before { content: "✗"; color: #dc2626; }
+        .plan-features li.excluded::before { content: "\2717"; color: #dc2626; }
         .plan-select-btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: 2px solid #e2e8f0; background: white; color: #475569; transition: all 0.2s; }
         .plan-card.selected .plan-select-btn { background: var(--primary); color: white; border-color: var(--primary); }
         .plan-card.selected.pro .plan-select-btn { background: var(--pro); border-color: var(--pro); }
-        .plan-card.selected.research .plan-select-btn { background: var(--research); border-color: var(--research); }
-        .form-card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow: hidden; max-width: 520px; margin: 0 auto; }
-        .form-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 32px; text-align: center; color: white; }
+        .plan-card.selected.beta .plan-select-btn { background: var(--beta); border-color: var(--beta); }
+        .hidden { display: none !important; }
+        .form-card { background: white; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); overflow: hidden; max-width: 500px; margin: 0 auto; }
+        .form-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 24px; text-align: center; color: white; }
         .form-header.pro { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
-        .form-header.research { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
-        .form-header h2 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
-        .form-header p { opacity: 0.9; font-size: 14px; }
+        .form-header.beta { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
         .form-body { padding: 32px; }
-        .steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
-        .step { width: 10px; height: 10px; border-radius: 50%; background: #e2e8f0; transition: all 0.3s; }
-        .step.active { background: var(--primary); width: 32px; border-radius: 5px; }
+        .steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
+        .step { width: 40px; height: 4px; background: #e2e8f0; border-radius: 2px; transition: all 0.3s; }
+        .step.active { background: var(--primary); }
         .step.completed { background: var(--primary); }
         .form-card.pro .step.active, .form-card.pro .step.completed { background: var(--pro); }
-        .form-card.research .step.active, .form-card.research .step.completed { background: var(--research); }
+        .form-card.beta .step.active, .form-card.beta .step.completed { background: var(--beta); }
         .section { display: none; }
         .section.active { display: block; }
         .form-group { margin-bottom: 20px; }
-        .form-label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155; }
-        .form-label .optional { font-weight: 400; color: #94a3b8; }
-        .form-input, .form-select { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; outline: none; transition: all 0.2s; font-family: inherit; }
-        .form-input:focus, .form-select:focus { border-color: var(--primary); }
-        .form-card.pro .form-input:focus { border-color: var(--pro); }
-        .form-card.research .form-input:focus { border-color: var(--research); }
-        .form-hint { font-size: 12px; color: #64748b; margin-top: 6px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .code-input-group { display: flex; gap: 8px; justify-content: center; }
-        .code-input { width: 48px; height: 56px; text-align: center; font-size: 24px; font-weight: 700; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; }
-        .code-input:focus { border-color: var(--primary); }
-        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; margin-bottom: 16px; }
-        .checkbox-group input { margin-top: 3px; width: 18px; height: 18px; flex-shrink: 0; }
-        .checkbox-group label { font-size: 14px; color: #475569; line-height: 1.5; cursor: pointer; }
-        .password-strength { display: flex; gap: 4px; margin-top: 8px; }
-        .password-strength .bar { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; }
-        .password-strength .bar.weak { background: #dc2626; }
-        .password-strength .bar.medium { background: #f59e0b; }
-        .password-strength .bar.strong { background: #059669; }
-        .btn { width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .form-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #334155; }
+        .form-input { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; transition: all 0.2s; outline: none; }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(5,150,105,0.1); }
+        .form-card.pro .form-input:focus { border-color: var(--pro); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-card.beta .form-input:focus { border-color: var(--beta); box-shadow: 0 0 0 3px rgba(217,119,6,0.1); }
+        .form-select { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; background: white; }
+        .form-hint { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .optional { color: #94a3b8; font-weight: 400; }
+        .btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--primary-dark); }
-        .btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
         .form-card.pro .btn-primary { background: var(--pro); }
         .form-card.pro .btn-primary:hover { background: var(--pro-dark); }
-        .form-card.research .btn-primary { background: var(--research); }
-        .form-card.research .btn-primary:hover { background: var(--research-dark); }
-        .btn-link { background: none; color: var(--primary); padding: 8px; font-size: 14px; width: auto; }
-        .btn-link:hover { text-decoration: underline; }
-        .info-box { padding: 14px 16px; border-radius: 12px; font-size: 14px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
-        .info-box.blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
-        .info-box.green { background: #f0fdf4; border: 1px solid #a7f3d0; color: #166534; }
-        .info-box.purple { background: #f5f3ff; border: 1px solid #c4b5fd; color: #5b21b6; }
-        .info-box .icon { font-size: 20px; flex-shrink: 0; }
-        .message { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-bottom: 20px; display: none; }
-        .message.error { background: #fee2e2; color: #991b1b; display: block; }
-        .message.success { background: #dcfce7; color: #166534; display: block; }
-        .success-screen { text-align: center; padding: 20px 0; }
-        .success-icon { font-size: 64px; margin-bottom: 16px; }
-        .success-screen h3 { font-size: 24px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
-        .success-screen p { color: #64748b; margin-bottom: 24px; }
-        .study-id-display { background: #f5f3ff; border: 2px solid #c4b5fd; border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .study-id-display .label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-        .study-id-display .id { font-size: 28px; font-weight: 700; color: #7c3aed; font-family: monospace; }
-        .login-prompt { text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e2e8f0; font-size: 14px; color: #64748b; }
+        .form-card.beta .btn-primary { background: var(--beta); }
+        .form-card.beta .btn-primary:hover { background: var(--beta-dark); }
+        .btn-link { background: none; color: #64748b; font-size: 14px; border: none; cursor: pointer; padding: 10px; }
+        .login-prompt { text-align: center; margin-top: 16px; font-size: 14px; color: #64748b; }
         .login-prompt a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .message { padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; display: none; }
+        .message.error { display: block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .message.success { display: block; background: #f0fdf4; color: #166534; border: 1px solid #a7f3d0; }
+        .info-box { display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .info-box.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+        .info-box.green { background: #f0fdf4; border: 1px solid #a7f3d0; }
+        .info-box.amber { background: #fffbeb; border: 1px solid #fde68a; }
+        .info-box .icon { font-size: 20px; flex-shrink: 0; }
+        .info-box strong { display: block; margin-bottom: 2px; }
+        .code-input-group { display: flex; gap: 8px; justify-content: center; }
+        .code-input { width: 48px; height: 56px; text-align: center; font-size: 24px; font-weight: 700; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; }
+        .code-input:focus { border-color: var(--primary); }
+        .form-card.pro .code-input:focus { border-color: var(--pro); }
+        .password-strength { display: flex; gap: 4px; margin-top: 8px; }
+        .bar { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; transition: all 0.3s; }
+        .bar.weak { background: #ef4444; }
+        .bar.medium { background: #f59e0b; }
+        .bar.strong { background: #22c55e; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 14px; color: #475569; }
+        .checkbox-group input { width: 18px; height: 18px; accent-color: var(--primary); }
         .pricing-toggle { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; }
         .pricing-toggle button { padding: 8px 20px; border-radius: 20px; border: 2px solid #e2e8f0; background: white; font-size: 14px; font-weight: 500; cursor: pointer; }
         .pricing-toggle button.active { background: var(--pro); color: white; border-color: var(--pro); }
-        .savings-badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 6px; }
-        .hidden { display: none !important; }
+        .savings-badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 4px; }
+        .success-screen { text-align: center; }
+        .success-icon { font-size: 64px; margin-bottom: 16px; }
+        .referral-display { background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .referral-display .label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+        .referral-display .code { font-size: 24px; font-weight: 700; color: #059669; font-family: monospace; letter-spacing: 2px; }
+        .share-row { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+        .share-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0; background: white; font-size: 13px; cursor: pointer; font-weight: 500; }
+        .share-btn:hover { background: #f8fafc; }
+        .exam-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 16px; }
+        .exam-tag { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .exam-tag.s1 { background: #dbeafe; color: #1d4ed8; }
+        .exam-tag.s2 { background: #dcfce7; color: #166534; }
+        .exam-tag.shelf { background: #fef3c7; color: #92400e; }
+        .beta-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 13px; color: #92400e; text-align: center; }
     </style>
 </head>
 <body>
     <div class="page-container">
-        <header class="page-header">
-            <h1>🩺 Join ReasonDx</h1>
-            <p>Master clinical reasoning with interactive pathophysiology</p>
-        </header>
-        
+        <div class="page-header">
+            <h1>🩺 ReasonDx</h1>
+            <p>Master clinical reasoning. Crush your boards.</p>
+            <div class="board-tags">
+                <span class="board-tag step1">Step 1 Ready</span>
+                <span class="board-tag step2">Step 2 CK</span>
+                <span class="board-tag shelf">Shelf Exams</span>
+                <span class="board-tag rotation">Clinical Rotations</span>
+            </div>
+        </div>
+
         <div id="planSelection">
             <div class="plans-grid">
                 <div class="plan-card" onclick="selectPlan('free')" id="planFree">
-                    <div class="plan-icon">🆓</div>
+                    <div class="plan-icon">🌱</div>
                     <div class="plan-name">Free</div>
                     <div class="plan-price">
                         <span class="amount">$0</span>
                         <span class="period">/forever</span>
                     </div>
+                    <div class="exam-tags">
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2</span>
+                    </div>
                     <ul class="plan-features">
-                        <li>5 sample MechanismDx modules</li>
+                        <li>5 MechanismDx learning modules</li>
                         <li>3 clinical cases per week</li>
+                        <li>20 board-style MCQs</li>
                         <li>Basic progress tracking</li>
-                        <li>All clinical tools</li>
-                        <li class="excluded">Full module library (195+)</li>
-                        <li class="excluded">Unlimited cases</li>
+                        <li>All clinical calculators</li>
+                        <li class="excluded">Full module library (244 topics)</li>
+                        <li class="excluded">Unlimited cases &amp; MCQs</li>
                         <li class="excluded">Deep dive content</li>
+                        <li class="excluded">AI Tutor</li>
                     </ul>
                     <button class="plan-select-btn">Get Started Free</button>
                 </div>
-                
+
                 <div class="plan-card pro" onclick="selectPlan('pro')" id="planPro">
                     <div class="plan-badge">Most Popular</div>
-                    <div class="plan-icon">⭐</div>
+                    <div class="plan-icon">🚀</div>
                     <div class="plan-name">Pro</div>
                     <div class="plan-price">
-                        <span class="amount">$14.99</span>
+                        <span class="amount">$9.99</span>
                         <span class="period">/month</span>
-                        <div class="annual">or $99/year (save 45%)</div>
+                        <div class="annual">or $79.99/year (save 33%)</div>
+                    </div>
+                    <div class="exam-tags">
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2 CK</span>
+                        <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>All 195+ MechanismDx modules</li>
-                        <li>Unlimited clinical cases</li>
-                        <li>Full case adventures library</li>
-                        <li>Deep dive content</li>
-                        <li>Advanced analytics</li>
+                        <li>All 244 topics across 26 specialties</li>
+                        <li>323+ clinical cases with MCQs</li>
+                        <li>244 interactive case adventures</li>
+                        <li>211 deep dive modules</li>
+                        <li>Board-prep mode (Step 1, Step 2, Shelf)</li>
+                        <li>Reasoning pathway fingerprinting</li>
                         <li>AI Tutor (unlimited)</li>
-                        <li>Completion certificates</li>
+                        <li>Spaced repetition &amp; analytics</li>
+                        <li>Anki/Quizlet export</li>
                     </ul>
                     <button class="plan-select-btn">Start Pro</button>
                 </div>
-                
-                <div class="plan-card research" onclick="selectPlan('research')" id="planResearch">
-                    <div class="plan-icon">🎓</div>
-                    <div class="plan-name">Research</div>
+
+                <div class="plan-card beta" onclick="selectPlan('beta')" id="planBeta">
+                    <div class="plan-badge beta-badge">Limited Spots</div>
+                    <div class="plan-icon">🧪</div>
+                    <div class="plan-name">Beta Tester</div>
                     <div class="plan-price">
-                        <span class="amount">Free</span>
-                        <span class="period">with consent</span>
-                        <div class="annual" style="color: #7c3aed;">Full Pro access</div>
+                        <span class="amount">50% off</span>
+                        <span class="period">Pro pricing</span>
+                        <div class="annual" style="color: #d97706;">$4.99/mo or $39.99/yr</div>
+                    </div>
+                    <div class="exam-tags">
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2 CK</span>
+                        <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>Everything in Pro — FREE</li>
+                        <li>Everything in Pro — half price</li>
                         <li>Requires .edu email</li>
-                        <li>Consent to research</li>
-                        <li>Anonymous data collected</li>
-                        <li>Help improve medical education</li>
-                        <li>Contribute to research</li>
-                        <li class="limited">IRB-approved study</li>
+                        <li>Monthly feedback survey (5 min)</li>
+                        <li>Help shape the platform</li>
+                        <li>Early access to new features</li>
+                        <li>Beta tester badge on profile</li>
+                        <li>Lock in beta pricing at renewal</li>
                     </ul>
-                    <button class="plan-select-btn">Join Research Study</button>
+                    <button class="plan-select-btn">Apply for Beta</button>
+                    <div class="beta-note">📋 Beta testers provide structured feedback monthly to help improve the platform for all students.</div>
                 </div>
             </div>
+
+            <!-- REFERRAL CALLOUT -->
+            <div style="max-width: 600px; margin: 0 auto 30px; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center;">
+                <div style="font-size: 28px; margin-bottom: 8px;">🎁</div>
+                <h3 style="font-size: 18px; color: #1e3a5f; margin-bottom: 8px;">Refer a Friend, Get Rewarded</h3>
+                <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Share your referral code after signup. For each friend who joins Pro or Beta:</p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <div style="background: #f0fdf4; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
+                        <div style="font-size: 20px; font-weight: 700; color: #059669;">1 referral</div>
+                        <div style="font-size: 13px; color: #64748b;">Free month for both of you</div>
+                    </div>
+                    <div style="background: #eff6ff; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
+                        <div style="font-size: 20px; font-weight: 700; color: #2563eb;">3 referrals</div>
+                        <div style="font-size: 13px; color: #64748b;">Free semester (4 months)</div>
+                    </div>
+                    <div style="background: #fef3c7; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
+                        <div style="font-size: 20px; font-weight: 700; color: #d97706;">5 referrals</div>
+                        <div style="font-size: 13px; color: #64748b;">Free year of Pro</div>
+                    </div>
+                </div>
+            </div>
+
             <div style="text-align: center; margin-top: 16px;">
                 <p style="color: #64748b; font-size: 14px;">Already have an account? <a href="#" onclick="showLogin()" style="color: var(--primary); font-weight: 600;">Sign in</a></p>
+                <p style="color: #94a3b8; font-size: 13px; margin-top: 8px;">Have a referral code? You'll enter it during signup.</p>
             </div>
         </div>
-        
+
+        <!-- REGISTRATION FORM -->
         <div class="form-card hidden" id="registrationForm">
             <div class="form-header" id="formHeader">
                 <h2 id="formTitle">Create Your Account</h2>
@@ -187,25 +248,49 @@
             </div>
             <div class="form-body">
                 <div class="steps" id="stepIndicator"></div>
-                
-                <div class="section" id="sectionConsent">
-                    <div class="info-box purple"><span class="icon">📋</span><div><strong>Research Study Participation</strong><br>Complete the consent form first.</div></div>
-                    <div id="consentError" class="message"></div>
-                    <div style="text-align: center; margin-bottom: 24px;">
-                        <p style="color: #475569; margin-bottom: 16px;">Have you completed the consent form?</p>
-                        <a href="#" target="_blank" id="consentFormLink" style="display: inline-block; background: #7c3aed; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-bottom: 16px;">📝 Complete Consent Form</a>
-                        <p style="font-size: 13px; color: #94a3b8;">Opens in a new tab</p>
+
+                <!-- BETA APPLICATION -->
+                <div class="section" id="sectionBetaApp">
+                    <div class="info-box amber"><span class="icon">🧪</span><div><strong>Beta Tester Application</strong><br>Tell us about yourself so we can match you with the right feedback cohort.</div></div>
+                    <div id="betaError" class="message"></div>
+                    <div class="form-group">
+                        <label class="form-label">Why do you want to be a beta tester?</label>
+                        <select id="betaMotivation" class="form-select">
+                            <option value="">Select one...</option>
+                            <option value="board-prep">Preparing for board exams (Step 1/2)</option>
+                            <option value="shelf-prep">Studying for shelf exams</option>
+                            <option value="rotation">Currently on clinical rotations</option>
+                            <option value="improve-reasoning">Want to improve clinical reasoning</option>
+                            <option value="curious">Curious about the platform</option>
+                        </select>
                     </div>
-                    <div style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
-                        <div class="form-group">
-                            <label class="form-label">Enter Your Consent Code</label>
-                            <input type="text" id="consentCode" class="form-input" placeholder="CONSENT-XXXXX" style="text-align: center; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;">
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="verifyConsentCode()">Verify Consent Code</button>
+                    <div class="form-group">
+                        <label class="form-label">Which exam are you preparing for? <span class="optional">(optional)</span></label>
+                        <select id="betaExam" class="form-select">
+                            <option value="">Select if applicable...</option>
+                            <option value="step1">USMLE Step 1</option>
+                            <option value="step2ck">USMLE Step 2 CK</option>
+                            <option value="comlex1">COMLEX Level 1</option>
+                            <option value="comlex2">COMLEX Level 2</option>
+                            <option value="shelf-im">IM Shelf</option>
+                            <option value="shelf-surgery">Surgery Shelf</option>
+                            <option value="shelf-peds">Pediatrics Shelf</option>
+                            <option value="shelf-obgyn">OB/GYN Shelf</option>
+                            <option value="shelf-psych">Psychiatry Shelf</option>
+                            <option value="shelf-neuro">Neurology Shelf</option>
+                            <option value="shelf-fm">Family Medicine Shelf</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreeBetaFeedback">
+                        <label for="agreeBetaFeedback">I agree to complete a brief feedback survey each month (~5 min)</label>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="submitBetaApp()">Continue to Registration →</button>
                     <div class="login-prompt"><a href="#" onclick="backToPlanSelection()">← Choose a different plan</a></div>
                 </div>
-                
+
+                <!-- EMAIL -->
                 <div class="section" id="sectionEmail">
                     <div class="info-box blue" id="emailInfoBox"><span class="icon">📧</span><div id="emailInfoText"><strong>Enter your email</strong><br>We'll send a verification code.</div></div>
                     <div id="emailError" class="message"></div>
@@ -214,10 +299,16 @@
                         <input type="email" id="emailInput" class="form-input" placeholder="you@email.com">
                         <p class="form-hint" id="emailHint">Any email address works</p>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Referral Code <span class="optional">(optional)</span></label>
+                        <input type="text" id="referralCodeInput" class="form-input" placeholder="e.g. REF-JD7842" style="text-transform: uppercase; letter-spacing: 1px;">
+                        <p class="form-hint">Got a code from a friend? Enter it for a free month.</p>
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="sendVerificationCode()">Send Verification Code</button>
                     <div class="login-prompt"><a href="#" onclick="backToPlanSelection()">← Choose a different plan</a></div>
                 </div>
-                
+
+                <!-- VERIFY -->
                 <div class="section" id="sectionVerify">
                     <div class="info-box green"><span class="icon">📧</span><div><strong>Check your email</strong><br>Code sent to <strong id="sentToEmail"></strong></div></div>
                     <div id="verifyError" class="message"></div>
@@ -235,7 +326,8 @@
                     <button type="button" class="btn btn-primary" id="verifyCodeBtn" onclick="verifyEmailCode()" disabled>Verify Code</button>
                     <button type="button" class="btn btn-link" onclick="resendCode()">Resend code</button>
                 </div>
-                
+
+                <!-- PROFILE -->
                 <div class="section" id="sectionProfile">
                     <div id="profileError" class="message"></div>
                     <div class="form-row">
@@ -245,21 +337,80 @@
                     <div class="form-group">
                         <label class="form-label">I am a...</label>
                         <select id="userRole" class="form-select">
-                            <option value="">Select your role</option>
-                            <option value="ms1">Medical Student - MS1</option>
-                            <option value="ms2">Medical Student - MS2</option>
-                            <option value="ms3">Medical Student - MS3</option>
-                            <option value="ms4">Medical Student - MS4</option>
-                            <option value="resident">Resident</option>
+                            <option value="">Select your training level</option>
+                            <option value="ms1">Medical Student — MS-1</option>
+                            <option value="ms2">Medical Student — MS-2</option>
+                            <option value="ms3">Medical Student — MS-3 (Clinical Rotations)</option>
+                            <option value="ms4">Medical Student — MS-4</option>
+                            <option value="do_student">DO Student</option>
+                            <option value="pgy1">Resident — PGY-1</option>
+                            <option value="pgy2">Resident — PGY-2</option>
+                            <option value="pgy3">Resident — PGY-3</option>
+                            <option value="pgy4">Resident — PGY-4</option>
+                            <option value="pgy5">Resident — PGY-5</option>
+                            <option value="pgy6">Resident — PGY-6</option>
+                            <option value="pgy7">Resident — PGY-7</option>
                             <option value="fellow">Fellow</option>
+                            <option value="attending">Attending Physician</option>
                             <option value="pa_student">PA Student</option>
+                            <option value="pa">Physician Assistant</option>
                             <option value="np_student">NP Student</option>
-                            <option value="physician">Attending Physician</option>
+                            <option value="np">Nurse Practitioner</option>
                             <option value="educator">Medical Educator</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital"></div>
+                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital" list="institutionList"><datalist id="institutionList"><option value="Harvard Medical School"><option value="Johns Hopkins School of Medicine"><option value="Stanford University School of Medicine"><option value="UCSF School of Medicine"><option value="Columbia Vagelos College of Physicians and Surgeons"><option value="University of Michigan Medical School"><option value="Perelman School of Medicine (Penn)"><option value="Washington University in St. Louis"><option value="Duke University School of Medicine"><option value="NYU Grossman School of Medicine"><option value="Vanderbilt University School of Medicine"><option value="Baylor College of Medicine"><option value="Emory University School of Medicine"><option value="Northwestern Feinberg School of Medicine"><option value="UCLA David Geffen School of Medicine"><option value="University of Pittsburgh School of Medicine"><option value="Mayo Clinic Alix School of Medicine"><option value="Yale School of Medicine"><option value="Icahn School of Medicine at Mount Sinai"><option value="Weill Cornell Medicine"><option value="University of Virginia School of Medicine"><option value="University of Wisconsin School of Medicine"><option value="Oregon Health & Science University"><option value="Nova Southeastern University Kiran Patel COM"><option value="University of Central Florida COM"><option value="Florida International University Wertheim COM"><option value="Florida Atlantic University Schmidt COM"><option value="University of South Florida Morsani COM"><option value="University of Florida COM"><option value="University of Miami Miller School of Medicine"><option value="Other"></datalist></div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Primary Specialty Interest <span class="optional">(optional)</span></label>
+                            <select id="specialtyInterest" class="form-select">
+                                <option value="">Select specialty...</option>
+                                <option value="internal-medicine">Internal Medicine</option>
+                                <option value="surgery">Surgery</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="ob-gyn">OB/GYN</option>
+                                <option value="family-medicine">Family Medicine</option>
+                                <option value="emergency-medicine">Emergency Medicine</option>
+                                <option value="psychiatry">Psychiatry</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="radiology">Radiology</option>
+                                <option value="anesthesiology">Anesthesiology</option>
+                                <option value="pathology">Pathology</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="pulmonology">Pulmonology</option>
+                                <option value="allergy-immunology">Allergy/Immunology</option>
+                                <option value="undecided">Undecided</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Expected Graduation Year <span class="optional">(optional)</span></label>
+                            <select id="gradYear" class="form-select">
+                                <option value="">Select year...</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                                <option value="2032">2032</option>
+                                <option value="already-graduated">Already graduated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Why are you here? <span class="optional">(optional)</span></label>
+                        <select id="studyGoal" class="form-select">
+                            <option value="">Select your main goal...</option>
+                            <option value="board-prep">Board Prep (Step 1, Step 2, or Shelf)</option>
+                            <option value="clinical-reasoning">Improve Clinical Reasoning</option>
+                            <option value="both">Both Board Prep & Clinical Reasoning</option>
+                            <option value="exploring">Just Exploring</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label class="form-label">Create Password</label>
                         <input type="password" id="password" class="form-input" placeholder="At least 8 characters" oninput="checkPasswordStrength()">
@@ -267,114 +418,91 @@
                     </div>
                     <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter password"></div>
                     <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label></div>
-                    <div class="checkbox-group hidden" id="researchConsentBox"><input type="checkbox" id="agreeResearch" checked><label for="agreeResearch">I understand my anonymized data will be used for research</label></div>
                     <button type="button" class="btn btn-primary" onclick="createAccount()">Create Account</button>
                 </div>
-                
+
+                <!-- PAYMENT -->
                 <div class="section" id="sectionPayment">
-                    <div class="info-box blue"><span class="icon">💳</span><div><strong>Complete your Pro subscription</strong><br>Secure payment via Stripe</div></div>
+                    <div class="info-box blue"><span class="icon">💳</span><div><strong id="paymentTitle">Complete your subscription</strong><br>Secure payment via Stripe</div></div>
                     <div id="paymentError" class="message"></div>
                     <div style="text-align: center; margin-bottom: 24px;">
                         <div class="pricing-toggle">
                             <button onclick="setBilling('monthly')" id="billingMonthly" class="active">Monthly</button>
-                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save 45%</span></button>
+                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save 33%</span></button>
                         </div>
                     </div>
-                    
                     <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
-                        <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">You'll be charged</div>
-                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
+                        <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;" id="paymentLabel">You'll be charged</div>
+                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$9.99</div>
                         <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
+                        <div style="font-size: 13px; color: #059669; margin-top: 4px;" id="referralCredit" class="hidden">🎁 Your friend gets a free month too!</div>
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label">Card Information</label>
                         <div id="card-element" style="padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: white;">
                             <p style="color: #94a3b8; font-size: 14px;">Card input will appear here when Stripe is configured</p>
                         </div>
                     </div>
-                    
-                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">
-                        Subscribe — $14.99/month
-                    </button>
-                    
-                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">
-                        🔒 Secure payment · Cancel anytime · 30-day money-back guarantee
-                    </p>
+                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $9.99/month</button>
+                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure payment · Cancel anytime · 30-day money-back guarantee</p>
                 </div>
-                
-                <!-- SECTION: SUCCESS -->
+
+                <!-- SUCCESS -->
                 <div class="section" id="sectionSuccess">
                     <div class="success-screen">
                         <div class="success-icon">🎉</div>
-                        <h3>Welcome to ReasonDx!</h3>
+                        <h3 id="successTitle">Welcome to ReasonDx!</h3>
                         <p id="successMessage">Your account has been created successfully.</p>
-                        
-                        <div class="study-id-display hidden" id="studyIdDisplay">
-                            <div class="label">Your Study ID</div>
-                            <div class="id" id="studyIdValue">DX01-R0001</div>
-                            <p style="font-size: 12px; color: #64748b; margin-top: 8px;">Save this ID for your records</p>
+                        <div class="referral-display" id="referralDisplay">
+                            <div class="label">Your Referral Code</div>
+                            <div class="code" id="referralCodeValue">REF-XX0000</div>
+                            <p style="font-size: 13px; color: #64748b; margin-top: 8px;">Share this code — earn free months for every friend who joins!</p>
+                            <div class="share-row">
+                                <button class="share-btn" onclick="copyReferral()">📋 Copy Code</button>
+                                <button class="share-btn" onclick="copyReferralLink()">🔗 Copy Link</button>
+                            </div>
                         </div>
-                        
-                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">
-                            Start Learning →
-                        </a>
+                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">Start Studying →</a>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Login Form -->
+
+        <!-- LOGIN -->
         <div class="form-card hidden" id="loginForm">
-            <div class="form-header">
-                <h2>Welcome Back</h2>
-                <p>Sign in to your ReasonDx account</p>
-            </div>
-            
+            <div class="form-header"><h2>Welcome Back</h2><p>Sign in to your ReasonDx account</p></div>
             <div class="form-body">
                 <div id="loginError" class="message"></div>
-                
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" id="loginEmail" class="form-input" placeholder="you@email.com">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" id="loginPassword" class="form-input" placeholder="Your password">
-                </div>
-                
-                <button type="button" class="btn btn-primary" onclick="login()">
-                    Sign In
-                </button>
-                
-                <button type="button" class="btn btn-link" onclick="showForgotPassword()">
-                    Forgot password?
-                </button>
-                
-                <div class="login-prompt">
-                    Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a>
-                </div>
+                <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" class="form-input" placeholder="you@email.com"></div>
+                <div class="form-group"><label class="form-label">Password</label><input type="password" id="loginPassword" class="form-input" placeholder="Your password"></div>
+                <button type="button" class="btn btn-primary" onclick="login()">Sign In</button>
+                <button type="button" class="btn btn-link" onclick="showForgotPassword()">Forgot password?</button>
+                <div class="login-prompt">Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a></div>
             </div>
         </div>
     </div>
-    
+
+    <script src="../dx-progress.js"></script>
     <script>
         // ============================================
         // CONFIGURATION
         // ============================================
         const CONFIG = {
             GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
-            CONSENT_FORM_URL: 'YOUR_MICROSOFT_FORMS_URL_HERE',
             STRIPE_PUBLIC_KEY: 'YOUR_STRIPE_PUBLIC_KEY_HERE',
-            STUDY_PREFIX: 'DX01',
             DEMO_MODE: true,
-            MONTHLY_PRICE: 14.99,
-            ANNUAL_PRICE: 99,
-            VALID_CONSENT_CODES: ['CONSENT-DXSUITE-2026', 'CONSENT-2026'],
-            USE_ALGORITHMIC_VALIDATION: true
+            PRO_MONTHLY: 9.99,
+            PRO_ANNUAL: 79.99,
+            BETA_MONTHLY: 4.99,
+            BETA_ANNUAL: 39.99,
+            // Referral reward tiers: { minReferrals: freeMonths }
+            // When Stripe is live, each tier triggers a Stripe coupon via the backend:
+            //   POST /api/referral/apply → creates coupon with duration_in_months
+            //   Applied to referrer's subscription as a credit balance or coupon
+            REFERRAL_REWARDS: { 1: 1, 3: 4, 5: 12 },
+            REFERRAL_NEW_USER_BONUS: 1
         };
-        
+
         // ============================================
         // STATE
         // ============================================
@@ -382,338 +510,242 @@
             selectedPlan: null,
             currentSection: 0,
             verifiedEmail: null,
-            verifiedConsentCode: null,
             generatedCode: null,
             billingPeriod: 'monthly',
-            resendCountdown: 0
+            referralCode: null,
+            generatedReferral: null,
+            betaMotivation: null,
+            betaExam: null
         };
-        
+
+        // ============================================
+        // REFERRAL SYSTEM
+        // ============================================
+        function generateReferralCode(firstName, lastName) {
+            const initials = (firstName[0] + lastName[0]).toUpperCase();
+            const num = Math.floor(1000 + Math.random() * 9000);
+            return 'REF-' + initials + num;
+        }
+
+        function validateReferralCode(code) {
+            return /^REF-[A-Z]{2}\d{4}$/.test(code);
+        }
+
+        function copyReferral() {
+            var code = state.generatedReferral || document.getElementById('referralCodeValue').textContent;
+            if (navigator.clipboard) navigator.clipboard.writeText(code);
+            var btn = event.target;
+            btn.textContent = '✅ Copied!';
+            setTimeout(function(){ btn.textContent = '📋 Copy Code'; }, 2000);
+        }
+
+        function copyReferralLink() {
+            var code = state.generatedReferral || document.getElementById('referralCodeValue').textContent;
+            var link = window.location.origin + window.location.pathname + '?ref=' + code;
+            if (navigator.clipboard) navigator.clipboard.writeText(link);
+            var btn = event.target;
+            btn.textContent = '✅ Copied!';
+            setTimeout(function(){ btn.textContent = '🔗 Copy Link'; }, 2000);
+        }
+
         // ============================================
         // PLAN SELECTION
         // ============================================
         function selectPlan(plan) {
             state.selectedPlan = plan;
-            
-            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('.plan-card').forEach(function(c){ c.classList.remove('selected'); });
             document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
-            
-            setTimeout(() => {
+            setTimeout(function(){
                 document.getElementById('planSelection').classList.add('hidden');
                 document.getElementById('registrationForm').classList.remove('hidden');
-                
-                const formCard = document.getElementById('registrationForm');
-                const formHeader = document.getElementById('formHeader');
-                formCard.className = 'form-card ' + plan;
-                formHeader.className = 'form-header ' + plan;
-                
-                const titles = {
-                    free: ['Create Free Account', 'Free Plan'],
-                    pro: ['Start Your Pro Subscription', 'Pro Plan — $14.99/month'],
-                    research: ['Join Research Study', 'Research Participant — Free Pro Access']
+                document.getElementById('registrationForm').className = 'form-card ' + plan;
+                document.getElementById('formHeader').className = 'form-header ' + plan;
+                var titles = {
+                    free:  ['Create Free Account', 'Free Plan — Board Prep Starter'],
+                    pro:   ['Start Pro Subscription', 'Pro — Full Board Prep Access'],
+                    beta:  ['Apply for Beta Program', 'Beta Tester — 50% Off Pro']
                 };
                 document.getElementById('formTitle').textContent = titles[plan][0];
                 document.getElementById('formSubtitle').textContent = titles[plan][1];
-                
                 setupStepsForPlan(plan);
             }, 200);
         }
-        
+
         function setupStepsForPlan(plan) {
-            const stepIndicator = document.getElementById('stepIndicator');
-            
-            if (plan === 'research') {
-                stepIndicator.innerHTML = `
-                    <div class="step active" data-step="0"></div>
-                    <div class="step" data-step="1"></div>
-                    <div class="step" data-step="2"></div>
-                    <div class="step" data-step="3"></div>
-                `;
-                showSection('sectionConsent');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Academic email required</strong><br>You\'ll need a .edu email address.';
+            var si = document.getElementById('stepIndicator');
+            var numSteps = (plan === 'beta') ? 5 : (plan === 'pro') ? 5 : 4;
+            si.innerHTML = Array(numSteps).fill(0).map(function(_, i){
+                return '<div class="step' + (i === 0 ? ' active' : '') + '" data-step="' + i + '"></div>';
+            }).join('');
+            if (plan === 'beta') {
+                showSection('sectionBetaApp');
+                document.getElementById('emailInfoText').innerHTML = '<strong>Academic email required</strong><br>Beta program requires a .edu email.';
                 document.getElementById('emailHint').textContent = 'Must be a .edu email address';
-            } else if (plan === 'pro') {
-                stepIndicator.innerHTML = `
-                    <div class="step active" data-step="0"></div>
-                    <div class="step" data-step="1"></div>
-                    <div class="step" data-step="2"></div>
-                    <div class="step" data-step="3"></div>
-                `;
-                showSection('sectionEmail');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send you a verification code.';
-                document.getElementById('emailHint').textContent = 'Any email address works';
             } else {
-                stepIndicator.innerHTML = `
-                    <div class="step active" data-step="0"></div>
-                    <div class="step" data-step="1"></div>
-                    <div class="step" data-step="2"></div>
-                `;
                 showSection('sectionEmail');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send you a verification code.';
+                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send a verification code.';
                 document.getElementById('emailHint').textContent = 'Any email address works';
             }
-            
-            document.getElementById('researchConsentBox').classList.toggle('hidden', plan !== 'research');
         }
-        
+
         function backToPlanSelection() {
             document.getElementById('registrationForm').classList.add('hidden');
             document.getElementById('planSelection').classList.remove('hidden');
             state.selectedPlan = null;
             state.currentSection = 0;
         }
-        
+
         // ============================================
-        // SECTION NAVIGATION
+        // NAVIGATION
         // ============================================
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            
-            const sectionOrder = getSectionOrder();
-            const currentIndex = sectionOrder.indexOf(sectionId);
-            
-            document.querySelectorAll('.step').forEach((step, index) => {
-                step.classList.remove('active', 'completed');
-                if (index === currentIndex) step.classList.add('active');
-                else if (index < currentIndex) step.classList.add('completed');
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+            document.getElementById(id).classList.add('active');
+            var order = getSectionOrder();
+            var idx = order.indexOf(id);
+            document.querySelectorAll('.step').forEach(function(s, i){
+                s.classList.remove('active', 'completed');
+                if (i === idx) s.classList.add('active');
+                else if (i < idx) s.classList.add('completed');
             });
-            
-            state.currentSection = currentIndex;
+            state.currentSection = idx;
         }
-        
+
         function getSectionOrder() {
-            if (state.selectedPlan === 'research') {
-                return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
-            } else if (state.selectedPlan === 'pro') {
-                return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
-            } else {
-                return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
-            }
+            if (state.selectedPlan === 'beta') return ['sectionBetaApp', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
+            if (state.selectedPlan === 'pro') return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
+            return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
         }
-        
+
         function nextSection() {
-            const order = getSectionOrder();
-            const nextIndex = state.currentSection + 1;
-            if (nextIndex < order.length) {
-                showSection(order[nextIndex]);
-            }
+            var order = getSectionOrder();
+            if (state.currentSection + 1 < order.length) showSection(order[state.currentSection + 1]);
         }
-        
+
         // ============================================
-        // CONSENT CODE VERIFICATION
+        // BETA APPLICATION
         // ============================================
-        function verifyConsentCode() {
-            const code = document.getElementById('consentCode').value.toUpperCase().trim();
-            const errorEl = document.getElementById('consentError');
-            
-            errorEl.className = 'message';
-            
-            if (!code) {
-                errorEl.textContent = 'Please enter your consent code.';
-                errorEl.className = 'message error';
-                return;
-            }
-            
-            let isValid = CONFIG.USE_ALGORITHMIC_VALIDATION 
-                ? code.startsWith('CONSENT-') && code.length >= 12
-                : CONFIG.VALID_CONSENT_CODES.includes(code);
-            
-            if (!isValid) {
-                errorEl.textContent = 'Invalid consent code. Please complete the consent form to receive a valid code.';
-                errorEl.className = 'message error';
-                return;
-            }
-            
-            state.verifiedConsentCode = code;
-            sendToSheets({ action: 'consent_verified', consent_code: code, timestamp: new Date().toISOString() });
+        function submitBetaApp() {
+            var mot = document.getElementById('betaMotivation').value;
+            var fb = document.getElementById('agreeBetaFeedback').checked;
+            var err = document.getElementById('betaError');
+            err.className = 'message';
+            if (!mot) { err.textContent = 'Please tell us why you want to join the beta.'; err.className = 'message error'; return; }
+            if (!fb) { err.textContent = 'Beta testers need to agree to provide monthly feedback.'; err.className = 'message error'; return; }
+            state.betaMotivation = mot;
+            state.betaExam = document.getElementById('betaExam').value;
             nextSection();
         }
-        
+
         // ============================================
         // EMAIL VERIFICATION
         // ============================================
-        function validateEmail(email) {
-            const basicValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            if (state.selectedPlan === 'research') {
-                return basicValid && email.toLowerCase().endsWith('.edu');
-            }
-            return basicValid;
-        }
-        
         function sendVerificationCode() {
-            const email = document.getElementById('emailInput').value.trim().toLowerCase();
-            const errorEl = document.getElementById('emailError');
-            
-            errorEl.className = 'message';
-            
-            if (!validateEmail(email)) {
-                errorEl.textContent = state.selectedPlan === 'research' 
-                    ? 'Please enter a valid .edu email address.'
-                    : 'Please enter a valid email address.';
-                errorEl.className = 'message error';
-                return;
+            var email = document.getElementById('emailInput').value.trim().toLowerCase();
+            var err = document.getElementById('emailError');
+            err.className = 'message';
+            var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            if (!valid || (state.selectedPlan === 'beta' && !email.endsWith('.edu'))) {
+                err.textContent = state.selectedPlan === 'beta' ? 'Please enter a valid .edu email address.' : 'Please enter a valid email address.';
+                err.className = 'message error'; return;
             }
-            
+            var ref = document.getElementById('referralCodeInput').value.trim().toUpperCase();
+            if (ref && validateReferralCode(ref)) { state.referralCode = ref; }
+            else if (ref) { err.textContent = 'That referral code doesn\'t look right. Format: REF-XX0000. Leave blank to skip.'; err.className = 'message error'; return; }
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             state.verifiedEmail = email;
-            
-            if (CONFIG.DEMO_MODE) {
-                alert('Demo Mode - Your verification code is: ' + state.generatedCode);
-            }
-            
-            sendToSheets({ action: 'verification_sent', email: email, plan: state.selectedPlan, timestamp: new Date().toISOString() });
+            if (CONFIG.DEMO_MODE) alert('Demo Mode: Your verification code is ' + state.generatedCode);
             document.getElementById('sentToEmail').textContent = email;
             nextSection();
         }
-        
-        // ============================================
-        // CODE INPUT HANDLING
-        // ============================================
+
         function handleCodeInput(input) {
-            const value = input.value.replace(/[^0-9]/g, '');
-            input.value = value;
-            
-            if (value && input.dataset.index < 5) {
-                const nextInput = document.querySelector(`.code-input[data-index="${parseInt(input.dataset.index) + 1}"]`);
-                if (nextInput) nextInput.focus();
-            }
+            input.value = input.value.replace(/[^0-9]/g, '');
+            if (input.value && input.dataset.index < 5) document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) + 1) + '"]').focus();
             checkCodeComplete();
         }
-        
-        function handleCodeKeydown(event, input) {
-            if (event.key === 'Backspace' && !input.value && input.dataset.index > 0) {
-                const prevInput = document.querySelector(`.code-input[data-index="${parseInt(input.dataset.index) - 1}"]`);
-                if (prevInput) { prevInput.focus(); prevInput.value = ''; }
+        function handleCodeKeydown(e, input) {
+            if (e.key === 'Backspace' && !input.value && input.dataset.index > 0) {
+                var prev = document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) - 1) + '"]');
+                if (prev) { prev.focus(); prev.value = ''; }
             }
         }
-        
         function checkCodeComplete() {
-            const inputs = document.querySelectorAll('.code-input');
-            const code = Array.from(inputs).map(i => i.value).join('');
+            var code = Array.from(document.querySelectorAll('.code-input')).map(function(i){ return i.value; }).join('');
             document.getElementById('verifyCodeBtn').disabled = code.length !== 6;
         }
-        
         function verifyEmailCode() {
-            const inputs = document.querySelectorAll('.code-input');
-            const enteredCode = Array.from(inputs).map(i => i.value).join('');
-            const errorEl = document.getElementById('verifyError');
-            
-            if (enteredCode === state.generatedCode) {
-                sendToSheets({ action: 'email_verified', email: state.verifiedEmail, plan: state.selectedPlan, timestamp: new Date().toISOString() });
-                nextSection();
-            } else {
-                errorEl.textContent = 'Invalid code. Please try again.';
-                errorEl.className = 'message error';
-                inputs.forEach(i => i.value = '');
-                inputs[0].focus();
+            var code = Array.from(document.querySelectorAll('.code-input')).map(function(i){ return i.value; }).join('');
+            if (code === state.generatedCode) { nextSection(); }
+            else {
+                document.getElementById('verifyError').textContent = 'Invalid code. Please try again.';
+                document.getElementById('verifyError').className = 'message error';
+                document.querySelectorAll('.code-input').forEach(function(i){ i.value = ''; });
+                document.querySelector('.code-input').focus();
             }
         }
-        
         function resendCode() {
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            if (CONFIG.DEMO_MODE) alert('Demo Mode - Your new verification code is: ' + state.generatedCode);
-            
-            state.resendCountdown = 60;
-            const resendBtn = document.getElementById('resendBtn');
-            resendBtn.disabled = true;
-            
-            const interval = setInterval(() => {
-                state.resendCountdown--;
-                resendBtn.textContent = `Resend code (${state.resendCountdown}s)`;
-                if (state.resendCountdown <= 0) {
-                    clearInterval(interval);
-                    resendBtn.disabled = false;
-                    resendBtn.textContent = 'Resend code';
-                }
-            }, 1000);
+            if (CONFIG.DEMO_MODE) alert('Demo: New code is ' + state.generatedCode);
         }
-        
+
         // ============================================
-        // PASSWORD STRENGTH
+        // PASSWORD
         // ============================================
         function checkPasswordStrength() {
-            const password = document.getElementById('password').value;
-            const bars = ['strengthBar1', 'strengthBar2', 'strengthBar3', 'strengthBar4'].map(id => document.getElementById(id));
-            
-            let strength = 0;
-            if (password.length >= 8) strength++;
-            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-            if (/[0-9]/.test(password)) strength++;
-            if (/[^a-zA-Z0-9]/.test(password)) strength++;
-            
-            bars.forEach((bar, index) => {
-                bar.className = 'bar';
-                if (index < strength) {
-                    bar.classList.add(strength <= 1 ? 'weak' : strength <= 2 ? 'medium' : 'strong');
-                }
+            var pw = document.getElementById('password').value;
+            var s = 0;
+            if (pw.length >= 8) s++;
+            if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
+            if (/[0-9]/.test(pw)) s++;
+            if (/[^a-zA-Z0-9]/.test(pw)) s++;
+            ['strengthBar1','strengthBar2','strengthBar3','strengthBar4'].forEach(function(id, i){
+                var b = document.getElementById(id); b.className = 'bar';
+                if (i < s) b.classList.add(s <= 1 ? 'weak' : s <= 2 ? 'medium' : 'strong');
             });
         }
-        
+
         // ============================================
         // ACCOUNT CREATION
         // ============================================
-        async function createAccount() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const role = document.getElementById('userRole').value;
-            const institution = document.getElementById('institution').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const agreeTerms = document.getElementById('agreeTerms').checked;
-            const errorEl = document.getElementById('profileError');
-            
-            errorEl.className = 'message';
-            
-            if (!firstName || !lastName) { errorEl.textContent = 'Please enter your full name.'; errorEl.className = 'message error'; return; }
-            if (!role) { errorEl.textContent = 'Please select your role.'; errorEl.className = 'message error'; return; }
-            if (password.length < 8) { errorEl.textContent = 'Password must be at least 8 characters.'; errorEl.className = 'message error'; return; }
-            if (password !== confirmPassword) { errorEl.textContent = 'Passwords do not match.'; errorEl.className = 'message error'; return; }
-            if (!agreeTerms) { errorEl.textContent = 'Please agree to the Terms of Service.'; errorEl.className = 'message error'; return; }
-            
-            if (state.selectedPlan === 'pro') { nextSection(); return; }
-            
-            await finalizeAccount({ firstName, lastName, role, institution });
+        function createAccount() {
+            var fn = document.getElementById('firstName').value.trim();
+            var ln = document.getElementById('lastName').value.trim();
+            var role = document.getElementById('userRole').value;
+            var pw = document.getElementById('password').value;
+            var cpw = document.getElementById('confirmPassword').value;
+            var terms = document.getElementById('agreeTerms').checked;
+            var err = document.getElementById('profileError');
+            err.className = 'message';
+            if (!fn || !ln) { err.textContent = 'Please enter your full name.'; err.className = 'message error'; return; }
+            if (!role) { err.textContent = 'Please select your training level.'; err.className = 'message error'; return; }
+            if (pw.length < 8) { err.textContent = 'Password must be at least 8 characters.'; err.className = 'message error'; return; }
+            if (pw !== cpw) { err.textContent = 'Passwords do not match.'; err.className = 'message error'; return; }
+            if (!terms) { err.textContent = 'Please agree to the Terms of Service.'; err.className = 'message error'; return; }
+            state.generatedReferral = generateReferralCode(fn, ln);
+            var profileData = {
+                firstName: fn,
+                lastName: ln,
+                role: role,
+                institution: document.getElementById('institution').value.trim(),
+                specialty: document.getElementById('specialtyInterest').value,
+                graduationYear: document.getElementById('gradYear').value,
+                studyGoal: document.getElementById('studyGoal').value
+            };
+            if (state.selectedPlan === 'pro' || state.selectedPlan === 'beta') { setupPaymentSection(); nextSection(); return; }
+            finalizeAccount(profileData);
         }
-        
-        async function finalizeAccount(profileData) {
-            let studyId = null;
-            if (state.selectedPlan === 'research') {
-                const idNum = Math.floor(1000 + Math.random() * 9000);
-                studyId = `${CONFIG.STUDY_PREFIX}-R${idNum}`;
+
+        function setupPaymentSection() {
+            var isBeta = state.selectedPlan === 'beta';
+            document.getElementById('paymentTitle').textContent = isBeta ? 'Complete your Beta subscription (50% off)' : 'Complete your Pro subscription';
+            if (state.referralCode) {
+                document.getElementById('referralCredit').classList.remove('hidden');
+                document.getElementById('paymentLabel').textContent = 'First month free with referral! Then:';
             }
-            
-            await sendToSheets({
-                action: 'registration',
-                plan: state.selectedPlan,
-                study_id: studyId,
-                email: state.verifiedEmail,
-                consent_code: state.verifiedConsentCode,
-                full_name: `${profileData.firstName} ${profileData.lastName}`,
-                role: profileData.role,
-                institution: profileData.institution,
-                timestamp: new Date().toISOString()
-            });
-            
-            localStorage.setItem('reasondx_user', JSON.stringify({
-                email: state.verifiedEmail,
-                name: `${profileData.firstName} ${profileData.lastName}`,
-                plan: state.selectedPlan,
-                studyId: studyId
-            }));
-            
-            if (state.selectedPlan === 'research' && studyId) {
-                document.getElementById('studyIdDisplay').classList.remove('hidden');
-                document.getElementById('studyIdValue').textContent = studyId;
-                document.getElementById('successMessage').textContent = 'Thank you for joining our research study!';
-            } else if (state.selectedPlan === 'free') {
-                document.getElementById('successMessage').textContent = 'Your free account is ready. Start exploring!';
-            } else {
-                document.getElementById('successMessage').textContent = 'Your Pro subscription is active. Enjoy unlimited access!';
-            }
-            
-            showSection('sectionSuccess');
+            setBilling('monthly');
         }
-        
+
         // ============================================
         // PAYMENT
         // ============================================
@@ -721,259 +753,139 @@
             state.billingPeriod = period;
             document.getElementById('billingMonthly').classList.toggle('active', period === 'monthly');
             document.getElementById('billingAnnual').classList.toggle('active', period === 'annual');
-            
+            var isBeta = state.selectedPlan === 'beta';
+            var mo = isBeta ? CONFIG.BETA_MONTHLY : CONFIG.PRO_MONTHLY;
+            var yr = isBeta ? CONFIG.BETA_ANNUAL : CONFIG.PRO_ANNUAL;
             if (period === 'monthly') {
-                document.getElementById('paymentAmount').textContent = '$' + CONFIG.MONTHLY_PRICE.toFixed(2);
+                document.getElementById('paymentAmount').textContent = '$' + mo.toFixed(2);
                 document.getElementById('paymentPeriod').textContent = 'per month';
-                document.getElementById('payBtn').textContent = `Subscribe — $${CONFIG.MONTHLY_PRICE.toFixed(2)}/month`;
+                document.getElementById('payBtn').textContent = 'Subscribe — $' + mo.toFixed(2) + '/month';
             } else {
-                document.getElementById('paymentAmount').textContent = '$' + CONFIG.ANNUAL_PRICE;
+                document.getElementById('paymentAmount').textContent = '$' + yr.toFixed(2);
                 document.getElementById('paymentPeriod').textContent = 'per year';
-                document.getElementById('payBtn').textContent = `Subscribe — $${CONFIG.ANNUAL_PRICE}/year`;
+                document.getElementById('payBtn').textContent = 'Subscribe — $' + yr.toFixed(2) + '/year';
             }
         }
-        
-        async function processPayment() {
+
+        function processPayment() {
             if (CONFIG.DEMO_MODE) {
-                alert('Demo Mode: Payment would be processed here via Stripe.\n\nSimulating successful payment...');
-                await finalizeAccount({
+                var isBeta = state.selectedPlan === 'beta';
+                var price = state.billingPeriod === 'monthly' ? (isBeta ? CONFIG.BETA_MONTHLY : CONFIG.PRO_MONTHLY) : (isBeta ? CONFIG.BETA_ANNUAL : CONFIG.PRO_ANNUAL);
+                alert('Demo Mode: Would charge $' + price.toFixed(2) + ' via Stripe.' +
+                      (state.referralCode ? '\nReferral code "' + state.referralCode + '" applied — first month free!' : '') +
+                      (isBeta ? '\nBeta tester discount applied (50% off).' : '') +
+                      '\n\nSimulating successful payment...');
+                finalizeAccount({
                     firstName: document.getElementById('firstName').value.trim(),
                     lastName: document.getElementById('lastName').value.trim(),
                     role: document.getElementById('userRole').value,
-                    institution: document.getElementById('institution').value.trim()
+                    institution: document.getElementById('institution').value.trim(),
+                    specialty: document.getElementById('specialtyInterest').value,
+                    graduationYear: document.getElementById('gradYear').value,
+                    studyGoal: document.getElementById('studyGoal').value
                 });
             } else {
-                document.getElementById('paymentError').textContent = 'Payment processing is not yet configured.';
+                document.getElementById('paymentError').textContent = 'Payment processing requires Stripe configuration.';
                 document.getElementById('paymentError').className = 'message error';
             }
         }
-        
+
         // ============================================
-        // LOGIN
+        // FINALIZE
         // ============================================
-        function showLogin() {
-            document.getElementById('planSelection').classList.add('hidden');
-            document.getElementById('registrationForm').classList.add('hidden');
-            document.getElementById('loginForm').classList.remove('hidden');
-        }
-        
-        function showPlanSelection() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registrationForm').classList.add('hidden');
-            document.getElementById('planSelection').classList.remove('hidden');
-        }
-        
-        function login() {
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!email || !password) {
-                document.getElementById('loginError').textContent = 'Please enter your email and password.';
-                document.getElementById('loginError').className = 'message error';
-                return;
+        function finalizeAccount(profile) {
+            var userData = {
+                email: state.verifiedEmail,
+                name: profile.firstName + ' ' + profile.lastName,
+                plan: state.selectedPlan,
+                trainingLevel: profile.role,
+                specialty: profile.specialty || '',
+                institution: profile.institution || '',
+                graduationYear: profile.graduationYear || '',
+                studyGoal: profile.studyGoal || '',
+                referralCode: state.generatedReferral,
+                referredBy: state.referralCode || null,
+                referralCount: 0,
+                referralCredits: 0,
+                createdAt: new Date().toISOString()
+            };
+            if (state.selectedPlan === 'beta') {
+                userData.betaTester = true;
+                userData.betaMotivation = state.betaMotivation;
+                userData.betaExam = state.betaExam;
             }
-            
-            if (CONFIG.DEMO_MODE) {
-                alert('Demo Mode: Login would be verified here.\n\nRedirecting to dashboard...');
-                window.location.href = '../index.html';
+            localStorage.setItem('reasondx-user', JSON.stringify(userData));
+
+            // Initialize the unified progress engine with profile data
+            if (window.DxProgress) {
+                window.DxProgress.syncProfile();
             }
+
+            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, betaTester: userData.betaTester || false, betaMotivation: state.betaMotivation, betaExam: state.betaExam, timestamp: new Date().toISOString() });
+
+            // Log referral for the referrer (Stripe hook)
+            if (state.referralCode) {
+                sendToSheets({ action: 'referral_completed', referrerCode: state.referralCode, newUserEmail: state.verifiedEmail, newUserPlan: state.selectedPlan, timestamp: new Date().toISOString() });
+                // STRIPE PRODUCTION HOOK:
+                // POST /api/referral/apply → { referrerCode, newUserStripeId }
+                // Backend: (1) Look up referrer by code in DB
+                //          (2) Increment referrer's referralCount
+                //          (3) Check against REFERRAL_REWARDS tiers
+                //          (4) If new tier reached, create Stripe coupon:
+                //              stripe.coupons.create({ percent_off: 100, duration: 'repeating', duration_in_months: rewardMonths })
+                //          (5) Apply coupon to referrer's subscription:
+                //              stripe.subscriptions.update(subId, { coupon: couponId })
+                //          (6) Apply 1-month coupon to new user's first invoice:
+                //              stripe.invoiceItems.create({ customer: newCustId, coupon: newUserCouponId })
+                console.log('REFERRAL: Code ' + state.referralCode + ' used. Stripe coupon hook ready.');
+            }
+
+            document.getElementById('referralCodeValue').textContent = state.generatedReferral;
+            if (state.selectedPlan === 'beta') {
+                document.getElementById('successTitle').textContent = 'Welcome to the Beta Program! 🧪';
+                document.getElementById('successMessage').textContent = 'Your beta tester account is active. First feedback survey arrives in 30 days.';
+            } else if (state.selectedPlan === 'pro') {
+                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro! 🚀';
+                document.getElementById('successMessage').textContent = 'Full access to all 244 topics, 323 cases, and AI tutor is now unlocked.';
+            } else {
+                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx! 🌱';
+                document.getElementById('successMessage').textContent = 'Your free account is ready. Explore board-prep content and upgrade anytime.';
+            }
+            showSection('sectionSuccess');
         }
-        
-        function showForgotPassword() { alert('Password reset functionality coming soon!'); }
-        
+
         // ============================================
         // GOOGLE SHEETS
         // ============================================
-        async function sendToSheets(data) {
-            if (CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                console.log('Google Sheets not configured. Data:', data);
-                return;
-            }
-            try {
-                await fetch(CONFIG.GOOGLE_SHEETS_URL, {
-                    method: 'POST', mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-            } catch (error) { console.error('Error sending to sheets:', error); }
+        function sendToSheets(data) {
+            if (CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') { console.log('Sheets not configured. Data:', JSON.stringify(data, null, 2)); return; }
+            try { fetch(CONFIG.GOOGLE_SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); }
+            catch (e) { console.error('Sheets error:', e); }
         }
-        
+
+        // ============================================
+        // LOGIN
+        // ============================================
+        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
+        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
+        function login() {
+            var email = document.getElementById('loginEmail').value.trim();
+            var pw = document.getElementById('loginPassword').value;
+            if (!email || !pw) { document.getElementById('loginError').textContent = 'Please enter your email and password.'; document.getElementById('loginError').className = 'message error'; return; }
+            if (CONFIG.DEMO_MODE) { localStorage.setItem('reasondx-user', JSON.stringify({ email: email, name: 'Demo User', plan: 'pro' })); window.location.href = '../index.html'; }
+        }
+        function showForgotPassword() { alert('Password reset coming soon.'); }
+
         // ============================================
         // INIT
         // ============================================
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('consentFormLink').href = CONFIG.CONSENT_FORM_URL;
+        document.addEventListener('DOMContentLoaded', function() {
+            var params = new URLSearchParams(window.location.search);
+            var ref = params.get('ref');
+            if (ref && validateReferralCode(ref.toUpperCase())) {
+                setTimeout(function(){ var inp = document.getElementById('referralCodeInput'); if (inp) inp.value = ref.toUpperCase(); }, 500);
+            }
         });
-    </script>
-</body>
-</html>>
-                    <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
-                        <div style="font-size: 14px; color: #64748b;">You'll be charged</div>
-                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
-                        <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
-                    </div>
-                    <div class="form-group"><label class="form-label">Card Information</label><div id="card-element" style="padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px;"><p style="color: #94a3b8; font-size: 14px;">Stripe card input loads here</p></div></div>
-                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $14.99/month</button>
-                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure · Cancel anytime · 30-day guarantee</p>
-                </div>
-                
-                <div class="section" id="sectionSuccess">
-                    <div class="success-screen">
-                        <div class="success-icon">🎉</div>
-                        <h3>Welcome to ReasonDx!</h3>
-                        <p id="successMessage">Your account has been created.</p>
-                        <div class="study-id-display hidden" id="studyIdDisplay">
-                            <div class="label">Your Study ID</div>
-                            <div class="id" id="studyIdValue">DX01-R0001</div>
-                        </div>
-                        <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">Start Learning →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-card hidden" id="loginForm">
-            <div class="form-header"><h2>Welcome Back</h2><p>Sign in to ReasonDx</p></div>
-            <div class="form-body">
-                <div id="loginError" class="message"></div>
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" class="form-input" placeholder="you@email.com"></div>
-                <div class="form-group"><label class="form-label">Password</label><input type="password" id="loginPassword" class="form-input" placeholder="Your password"></div>
-                <button type="button" class="btn btn-primary" onclick="login()">Sign In</button>
-                <button type="button" class="btn btn-link" onclick="alert('Password reset coming soon!')">Forgot password?</button>
-                <div class="login-prompt">Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a></div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        const CONFIG = { GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE', CONSENT_FORM_URL: 'YOUR_MICROSOFT_FORMS_URL_HERE', STUDY_PREFIX: 'DX01', DEMO_MODE: true, MONTHLY_PRICE: 14.99, ANNUAL_PRICE: 99 };
-        let state = { selectedPlan: null, currentSection: 0, verifiedEmail: null, verifiedConsentCode: null, generatedCode: null, billingPeriod: 'monthly' };
-        
-        function selectPlan(plan) {
-            state.selectedPlan = plan;
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-            document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
-            setTimeout(() => {
-                document.getElementById('planSelection').classList.add('hidden');
-                document.getElementById('registrationForm').classList.remove('hidden');
-                document.getElementById('registrationForm').className = 'form-card ' + plan;
-                document.getElementById('formHeader').className = 'form-header ' + plan;
-                const titles = { free: ['Create Free Account', 'Free Plan'], pro: ['Start Pro Subscription', 'Pro — $14.99/mo'], research: ['Join Research Study', 'Free Pro Access'] };
-                document.getElementById('formTitle').textContent = titles[plan][0];
-                document.getElementById('formSubtitle').textContent = titles[plan][1];
-                setupSteps(plan);
-            }, 200);
-        }
-        
-        function setupSteps(plan) {
-            const si = document.getElementById('stepIndicator');
-            const numSteps = plan === 'research' ? 4 : plan === 'pro' ? 4 : 3;
-            si.innerHTML = Array(numSteps).fill(0).map((_, i) => '<div class="step' + (i === 0 ? ' active' : '') + '" data-step="' + i + '"></div>').join('');
-            showSection(plan === 'research' ? 'sectionConsent' : 'sectionEmail');
-            document.getElementById('emailInfoText').innerHTML = plan === 'research' ? '<strong>Academic email required</strong><br>You need a .edu email.' : '<strong>Enter your email</strong><br>We\'ll send a verification code.';
-            document.getElementById('emailHint').textContent = plan === 'research' ? 'Must be a .edu email' : 'Any email works';
-            document.getElementById('researchConsentBox').classList.toggle('hidden', plan !== 'research');
-        }
-        
-        function backToPlanSelection() { document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); state.selectedPlan = null; }
-        
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            const order = getSectionOrder();
-            const idx = order.indexOf(id);
-            document.querySelectorAll('.step').forEach((s, i) => { s.classList.remove('active', 'completed'); if (i === idx) s.classList.add('active'); else if (i < idx) s.classList.add('completed'); });
-            state.currentSection = idx;
-        }
-        
-        function getSectionOrder() {
-            if (state.selectedPlan === 'research') return ['sectionConsent', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
-            if (state.selectedPlan === 'pro') return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
-            return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
-        }
-        
-        function nextSection() { const o = getSectionOrder(); if (state.currentSection + 1 < o.length) showSection(o[state.currentSection + 1]); }
-        
-        function verifyConsentCode() {
-            const code = document.getElementById('consentCode').value.toUpperCase().trim();
-            const err = document.getElementById('consentError');
-            err.className = 'message';
-            if (!code || !code.startsWith('CONSENT-') || code.length < 12) { err.textContent = 'Invalid consent code.'; err.className = 'message error'; return; }
-            state.verifiedConsentCode = code;
-            nextSection();
-        }
-        
-        function sendVerificationCode() {
-            const email = document.getElementById('emailInput').value.trim().toLowerCase();
-            const err = document.getElementById('emailError');
-            err.className = 'message';
-            const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            if (!valid || (state.selectedPlan === 'research' && !email.endsWith('.edu'))) { err.textContent = state.selectedPlan === 'research' ? 'Please enter a valid .edu email.' : 'Please enter a valid email.'; err.className = 'message error'; return; }
-            state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            state.verifiedEmail = email;
-            if (CONFIG.DEMO_MODE) alert('Demo: Your code is ' + state.generatedCode);
-            document.getElementById('sentToEmail').textContent = email;
-            nextSection();
-        }
-        
-        function handleCodeInput(input) { input.value = input.value.replace(/[^0-9]/g, ''); if (input.value && input.dataset.index < 5) document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) + 1) + '"]')?.focus(); checkCodeComplete(); }
-        function handleCodeKeydown(e, input) { if (e.key === 'Backspace' && !input.value && input.dataset.index > 0) { const prev = document.querySelector('.code-input[data-index="' + (parseInt(input.dataset.index) - 1) + '"]'); if (prev) { prev.focus(); prev.value = ''; } } }
-        function checkCodeComplete() { const code = Array.from(document.querySelectorAll('.code-input')).map(i => i.value).join(''); document.getElementById('verifyCodeBtn').disabled = code.length !== 6; }
-        
-        function verifyEmailCode() {
-            const code = Array.from(document.querySelectorAll('.code-input')).map(i => i.value).join('');
-            if (code === state.generatedCode) nextSection();
-            else { document.getElementById('verifyError').textContent = 'Invalid code.'; document.getElementById('verifyError').className = 'message error'; document.querySelectorAll('.code-input').forEach(i => i.value = ''); document.querySelector('.code-input').focus(); }
-        }
-        
-        function resendCode() { state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString(); if (CONFIG.DEMO_MODE) alert('Demo: New code is ' + state.generatedCode); }
-        
-        function checkPasswordStrength() {
-            const pw = document.getElementById('password').value;
-            let s = 0; if (pw.length >= 8) s++; if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++; if (/[0-9]/.test(pw)) s++; if (/[^a-zA-Z0-9]/.test(pw)) s++;
-            ['strengthBar1','strengthBar2','strengthBar3','strengthBar4'].forEach((id, i) => { const b = document.getElementById(id); b.className = 'bar'; if (i < s) b.classList.add(s <= 1 ? 'weak' : s <= 2 ? 'medium' : 'strong'); });
-        }
-        
-        function createAccount() {
-            const fn = document.getElementById('firstName').value.trim(), ln = document.getElementById('lastName').value.trim(), role = document.getElementById('userRole').value, pw = document.getElementById('password').value, cpw = document.getElementById('confirmPassword').value, terms = document.getElementById('agreeTerms').checked;
-            const err = document.getElementById('profileError'); err.className = 'message';
-            if (!fn || !ln) { err.textContent = 'Enter your name.'; err.className = 'message error'; return; }
-            if (!role) { err.textContent = 'Select your role.'; err.className = 'message error'; return; }
-            if (pw.length < 8) { err.textContent = 'Password must be 8+ characters.'; err.className = 'message error'; return; }
-            if (pw !== cpw) { err.textContent = 'Passwords don\'t match.'; err.className = 'message error'; return; }
-            if (!terms) { err.textContent = 'Please agree to terms.'; err.className = 'message error'; return; }
-            if (state.selectedPlan === 'pro') { nextSection(); return; }
-            finalize({ firstName: fn, lastName: ln, role, institution: document.getElementById('institution').value.trim() });
-        }
-        
-        function finalize(profile) {
-            let studyId = null;
-            if (state.selectedPlan === 'research') { studyId = CONFIG.STUDY_PREFIX + '-R' + Math.floor(1000 + Math.random() * 9000); }
-            localStorage.setItem('reasondx_user', JSON.stringify({ email: state.verifiedEmail, name: profile.firstName + ' ' + profile.lastName, plan: state.selectedPlan, studyId }));
-            if (studyId) { document.getElementById('studyIdDisplay').classList.remove('hidden'); document.getElementById('studyIdValue').textContent = studyId; document.getElementById('successMessage').textContent = 'Thank you for joining our research study!'; }
-            else if (state.selectedPlan === 'free') document.getElementById('successMessage').textContent = 'Your free account is ready!';
-            else document.getElementById('successMessage').textContent = 'Your Pro subscription is active!';
-            showSection('sectionSuccess');
-        }
-        
-        function setBilling(period) {
-            state.billingPeriod = period;
-            document.getElementById('billingMonthly').classList.toggle('active', period === 'monthly');
-            document.getElementById('billingAnnual').classList.toggle('active', period === 'annual');
-            document.getElementById('paymentAmount').textContent = period === 'monthly' ? '$14.99' : '$99';
-            document.getElementById('paymentPeriod').textContent = period === 'monthly' ? 'per month' : 'per year';
-            document.getElementById('payBtn').textContent = period === 'monthly' ? 'Subscribe — $14.99/month' : 'Subscribe — $99/year';
-        }
-        
-        function processPayment() {
-            if (CONFIG.DEMO_MODE) { alert('Demo: Payment processed!'); finalize({ firstName: document.getElementById('firstName').value.trim(), lastName: document.getElementById('lastName').value.trim(), role: document.getElementById('userRole').value, institution: document.getElementById('institution').value.trim() }); }
-        }
-        
-        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
-        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
-        function login() { const email = document.getElementById('loginEmail').value, pw = document.getElementById('loginPassword').value; if (!email || !pw) { document.getElementById('loginError').textContent = 'Enter email and password.'; document.getElementById('loginError').className = 'message error'; return; } if (CONFIG.DEMO_MODE) { alert('Demo: Logged in!'); window.location.href = '../index.html'; } }
-        
-        document.addEventListener('DOMContentLoaded', () => { document.getElementById('consentFormLink').href = CONFIG.CONSENT_FORM_URL; });
     </script>
 </body>
 </html>

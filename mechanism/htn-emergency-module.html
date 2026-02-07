@@ -1,431 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hypertensive Emergency | MechanismDx</title>
-    <style>
-        :root { --primary: #7c3aed; --primary-dark: #5b21b6; --primary-light: #f5f3ff; --text: #1e293b; --text-secondary: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 16px 24px; color: white; }
-        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .header-brand { font-size: 18px; font-weight: 600; text-decoration: none; color: white; }
-        .header-nav { display: flex; gap: 8px; }
-        .header-link { padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
-        .header-link:hover { background: rgba(255,255,255,0.15); color: white; }
-        .hero { background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); padding: 40px 24px; color: white; }
-        .hero-inner { max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
-        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
-        .hero-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
-        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
-        .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-        .concept-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .concept-box h4 { font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
-        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-        .card-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .card p { font-size: 14px; color: var(--text-secondary); margin: 0; }
-        .tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; margin: 2px; }
-        .tag-red { background: #fef2f2; color: #dc2626; }
-        .tag-blue { background: #eff6ff; color: #2563eb; }
-        .tag-green { background: #f0fdf4; color: #16a34a; }
-        .tag-purple { background: #faf5ff; color: #9333ea; }
-        .tag-amber { background: #fffbeb; color: #d97706; }
-        .flow-diagram { background: var(--bg); border-radius: 10px; padding: 20px; margin: 16px 0; }
-        .flow-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
-        .flow-step-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
-        .table-wrap { overflow-x: auto; margin: 16px 0; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--bg); font-weight: 600; }
-        .highlight { background: #fef3c7; }
-        .danger { background: #fef2f2; }
-        .integration-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-top: 24px; }
-        .integration-box h3 { color: #166534; margin-bottom: 12px; }
-        .integration-links { display: flex; flex-wrap: wrap; gap: 10px; }
-        .integration-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1px solid #86efac; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; }
-        .integration-link:hover { background: #f0fdf4; border-color: #22c55e; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        .organ-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
-        .organ-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
-        .organ-icon { font-size: 28px; margin-bottom: 8px; }
-        .organ-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
-        .organ-finding { font-size: 13px; color: var(--text-secondary); }
-        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } .hero h1 { font-size: 24px; } }
-    </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
-</head>
-<body>
-    <header class="header">
-        <div class="header-inner">
-            <a href="../index.html" class="header-brand">🩺 Dx Suite</a>
-            <nav class="header-nav">
-                <a href="index.html" class="header-link">MechanismDx</a>
-                <a href="../ReasonDx/index.html" class="header-link">ReasonDx</a>
-                <a href="../CoachDx/index.html" class="header-link">CoachDx</a>
-            </nav>
-        </div>
-    </header>
+<!DOCTYPE html><html lang="en"><head><script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Hypertensive Emergency | ReasonDx</title><style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--danger:#DC2626;--info:#F59E0B;--warning:#F97316}*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}.header{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600;color:#fff}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}.stats{display:flex;gap:12px}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px;color:#fff}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.4rem;font-weight:700;margin-top:4px}.card-body{padding:24px}.pearl{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(168,85,247,.15));border-left:4px solid var(--accent);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.danger{background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.15));border-left:4px solid var(--danger);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.compare-table{width:100%;border-collapse:collapse;margin:16px 0}.compare-table th{background:rgba(139,92,246,.2);padding:10px;text-align:left;font-size:.85rem;border:1px solid var(--border)}.compare-table td{padding:10px;border:1px solid var(--border);font-size:.85rem}.choices{display:grid;gap:12px;margin-top:16px}.choice{background:var(--card);border:2px solid var(--border);padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.15);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.15);pointer-events:none}.choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.choice-title{font-weight:600;font-size:.95rem}.hidden{display:none!important}.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}.cross-link{padding:14px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;text-decoration:none;color:var(--text)}.cross-link:hover{border-color:var(--accent)}.cross-link-title{font-weight:600;font-size:.9rem}h3{color:var(--accent);margin:20px 0 12px;font-size:1.1rem}@media(max-width:480px){.main{padding:12px}.card-body{padding:16px}}
+</style></head><body>
+<div class="header"><div class="header-row"><div class="header-title">❤️ Hypertensive Emergency<span class="badge">CARDIOLOGY</span></div><div class="stats"><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">XP</div></div><div class="stat"><div class="stat-value">8</div><div class="stat-label">MCQs</div></div></div></div></div>
+<div class="main"><div class="card"><div class="card-header"><div class="card-phase">MECHANISM</div><div class="card-title">Pathophysiology</div></div><div class="card-body"><p><strong>Hypertensive emergency</strong> = severely elevated BP (typically >180/120) WITH <strong>acute end-organ damage</strong> (brain, heart, kidneys, eyes, aorta). <strong>Hypertensive urgency</strong> = severe BP WITHOUT end-organ damage — managed with oral medications and outpatient follow-up.</p>
+<div class="pearl"><strong>🔑 The distinction is END-ORGAN DAMAGE, not the BP number.</strong> A patient with BP 200/120 and no symptoms may be urgency. A patient with BP 170/110 and pulmonary edema is an emergency. Always assess for target organ damage.</div>
+<h3>End-Organ Damage Patterns</h3>
+<table class="compare-table"><tr><th>Target Organ</th><th>Manifestation</th><th>Key Findings</th></tr>
+<tr><td><strong>Brain</strong></td><td>Hypertensive encephalopathy, hemorrhagic stroke, PRES</td><td>Headache, AMS, seizures, focal deficits</td></tr>
+<tr><td><strong>Heart</strong></td><td>Acute HF/pulmonary edema, ACS, aortic dissection</td><td>Dyspnea, chest pain, S3 gallop, pulmonary crackles</td></tr>
+<tr><td><strong>Kidneys</strong></td><td>Acute renal failure</td><td>Elevated creatinine, hematuria, proteinuria</td></tr>
+<tr><td><strong>Eyes</strong></td><td>Hypertensive retinopathy</td><td>Papilledema, flame hemorrhages, cotton-wool spots</td></tr>
+<tr><td><strong>Vasculature</strong></td><td>Aortic dissection</td><td>Tearing chest/back pain, BP differential between arms</td></tr>
+<tr><td><strong>Pregnancy</strong></td><td>Eclampsia, HELLP syndrome</td><td>Seizures, elevated LFTs, thrombocytopenia</td></tr></table>
+<div class="danger"><strong>⚠️ BP Reduction Speed:</strong> Reduce MAP by no more than <strong>25% in the first hour</strong>, then to 160/100 over 2-6 hours. Overly aggressive reduction causes watershed infarcts (brain, kidney). Exception: <strong>aortic dissection</strong> — target SBP <120 within 20 minutes.</div></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">CLINICAL</div><div class="card-title">Evaluation</div></div><div class="card-body"><h3>Workup for Suspected Hypertensive Emergency</h3>
+<p>CBC, BMP (creatinine, K+), UA (protein, RBCs), troponin, BNP, LDH/haptoglobin (MAHA screen), chest X-ray, ECG, head CT (if neuro symptoms), fundoscopy.</p>
+<div class="pearl"><strong>🔑 Malignant Hypertension:</strong> Severe HTN + <strong>microangiopathic hemolytic anemia</strong> (schistocytes) + AKI + papilledema. The endothelial damage from extreme BP causes fibrinoid necrosis of arterioles, leading to MAHA — can mimic TTP/HUS on labs.</div></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">TREATMENT</div><div class="card-title">Management</div></div><div class="card-body"><h3>IV Antihypertensives by Indication</h3>
+<table class="compare-table"><tr><th>Scenario</th><th>Preferred Agent</th><th>Rationale</th></tr>
+<tr><td><strong>General hypertensive emergency</strong></td><td>Nicardipine or clevidipine (IV CCB)</td><td>Predictable, titratable, safe in most contexts</td></tr>
+<tr><td><strong>Aortic dissection</strong></td><td><strong>IV esmolol</strong> (then add nitroprusside if needed)</td><td>β-blocker FIRST to reduce shear stress (dP/dt). Target SBP <120, HR <60</td></tr>
+<tr><td><strong>Acute pulmonary edema</strong></td><td>IV nitroglycerin or nitroprusside + furosemide</td><td>Venous and arterial dilation reduces preload and afterload</td></tr>
+<tr><td><strong>Eclampsia</strong></td><td>IV labetalol or hydralazine + magnesium sulfate (for seizures)</td><td>Safe in pregnancy. Avoid ACE-I/ARBs (teratogenic) and nitroprusside (cyanide risk to fetus)</td></tr>
+<tr><td><strong>Pheochromocytoma crisis</strong></td><td>Phentolamine (α-blocker)</td><td>α-blockade before β-blockade — unopposed α-stimulation with β-blocker causes worsening HTN</td></tr>
+<tr><td><strong>Sympathomimetic (cocaine)</strong></td><td>Benzodiazepines + nicardipine/phentolamine</td><td>Avoid β-blockers (unopposed α-stimulation). Benzodiazepines first-line</td></tr></table>
+<div class="danger"><strong>⚠️ Aortic Dissection Protocol:</strong> β-blocker MUST be started FIRST before any vasodilator. Vasodilators alone cause reflex tachycardia → increased aortic shear stress → propagation of dissection. Esmolol IV is ideal (short-acting, titratable).</div></div></div>
+<div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body"><div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">What defines a hypertensive EMERGENCY vs urgency?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="The distinction is based on end-organ damage, not specific BP thresholds." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">BP >200/120 = emergency; 180-200/110-120 = urgency</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Hypertensive emergency = severe BP + acute target organ damage (encephalopathy, ACS, pulmonary edema, aortic dissection, AKI, eclampsia). Urgency = severe BP without end-organ damage. Treatment approach differs significantly." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Presence of acute end-organ damage</div></div></div>
+<div class="choice" data-correct="false" data-fb="Symptoms like headache don&#x27;t define emergency — specific organ damage does." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Patient symptoms — symptomatic = emergency</div></div></div>
+<div class="choice" data-correct="false" data-fb="Duration is not the defining criterion." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Duration of elevated BP</div></div></div>
+</div><div id="mcqFb0" class="hidden" style="margin-top:16px"><div id="mcqFbText0" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">What is the target BP reduction in the FIRST HOUR of a hypertensive emergency (general)?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Dropping to normal too quickly causes watershed infarcts from impaired autoregulation." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Normal BP (<120/80)</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Reduce MAP by ≤25% in the first hour, then gradually to 160/100 over 2-6 hours. Cerebral autoregulation is shifted right in chronic hypertension — abrupt normalization causes ischemia." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">Reduce MAP by no more than 25%</div></div></div>
+<div class="choice" data-correct="false" data-fb="This is too aggressive and risks hypoperfusion injury." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">SBP <140 within 30 minutes</div></div></div>
+<div class="choice" data-correct="false" data-fb="A 50% reduction is excessive and dangerous." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Reduce by 50% in 2 hours</div></div></div>
+</div><div id="mcqFb1" class="hidden" style="margin-top:16px"><div id="mcqFbText1" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">In aortic dissection, what class of antihypertensive must be given FIRST?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="CCBs can cause reflex tachycardia, worsening aortic shear stress if given without a β-blocker." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">Calcium channel blocker</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! IV β-blocker (esmolol preferred) must be initiated first to reduce heart rate and dP/dt (rate of aortic pressure rise). Target SBP &lt;120 and HR &lt;60. Only after β-blockade is established should a vasodilator (nitroprusside, nicardipine) be added if BP remains elevated." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">β-blocker (esmolol)</div></div></div>
+<div class="choice" data-correct="false" data-fb="Nitroprusside alone causes reflex tachycardia → propagation of dissection." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">Nitroprusside</div></div></div>
+<div class="choice" data-correct="false" data-fb="Hydralazine causes reflex tachycardia and is contraindicated as monotherapy in dissection." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Hydralazine</div></div></div>
+</div><div id="mcqFb2" class="hidden" style="margin-top:16px"><div id="mcqFbText2" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">Why should β-blockers be AVOIDED in cocaine-induced hypertensive emergency?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="This is not the mechanism of concern." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">β-blockers are metabolized by the same pathway as cocaine</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Cocaine causes both α and β adrenergic stimulation. Blocking β-receptors leaves α-receptors unopposed → severe vasoconstriction, coronary spasm, and paradoxical worsening of hypertension. Use benzodiazepines first, then phentolamine or nicardipine." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Unopposed α-adrenergic stimulation worsens vasoconstriction and hypertension</div></div></div>
+<div class="choice" data-correct="false" data-fb="Seizure risk is not the primary concern with β-blockers in cocaine toxicity." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">β-blockers cause seizures with cocaine</div></div></div>
+<div class="choice" data-correct="false" data-fb="β-blockers are specifically problematic with cocaine due to the α-stimulation concern." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">β-blockers are contraindicated with all stimulants</div></div></div>
+</div><div id="mcqFb3" class="hidden" style="margin-top:16px"><div id="mcqFbText3" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">A pregnant woman at 36 weeks has BP 180/115 with seizures. What TWO treatments are most appropriate?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Phenytoin is not first-line for eclamptic seizures. Esmolol is second-line in pregnancy." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Esmolol + phenytoin</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Eclampsia treatment: Magnesium sulfate is the ONLY proven agent for eclamptic seizure prevention and treatment (not phenytoin or diazepam). IV labetalol or hydralazine are the preferred antihypertensives in pregnancy. Avoid ACE-I/ARBs (teratogenic) and nitroprusside (fetal cyanide risk)." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">IV labetalol + IV magnesium sulfate</div></div></div>
+<div class="choice" data-correct="false" data-fb="Nitroprusside risks cyanide toxicity in the fetus. Diazepam is not first-line for eclamptic seizures." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">Nitroprusside + diazepam</div></div></div>
+<div class="choice" data-correct="false" data-fb="ACE inhibitors are absolutely contraindicated in pregnancy." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">Lisinopril + lorazepam</div></div></div>
+</div><div id="mcqFb4" class="hidden" style="margin-top:16px"><div id="mcqFbText4" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">Which IV antihypertensive is MOST commonly used as first-line for general hypertensive emergencies?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Nitroprusside is effective but carries cyanide toxicity risk with prolonged use. It&#x27;s no longer considered first-line." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">Nitroprusside</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! IV nicardipine (or clevidipine) is the most widely recommended first-line agent for most hypertensive emergencies. It&#x27;s a dihydropyridine CCB with predictable pharmacokinetics, easy titration, no significant reflex tachycardia (unlike other vasodilators), and broad safety profile." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Nicardipine</div></div></div>
+<div class="choice" data-correct="false" data-fb="IV metoprolol is useful but not ideal as sole first-line (less titratable than nicardipine)." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">IV metoprolol</div></div></div>
+<div class="choice" data-correct="false" data-fb="Hydralazine has unpredictable pharmacokinetics and causes reflex tachycardia — not ideal for most emergencies." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Hydralazine</div></div></div>
+</div><div id="mcqFb5" class="hidden" style="margin-top:16px"><div id="mcqFbText5" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">What finding on fundoscopic exam indicates a hypertensive emergency?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="Drusen are associated with age-related macular degeneration, not hypertension." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Drusen</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Papilledema (optic disc swelling) indicates severely elevated intracranial or intraocular pressure from malignant hypertension. Other findings: flame-shaped hemorrhages, cotton-wool spots (retinal ischemia), hard exudates, and arteriolar narrowing with AV nicking." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Papilledema</div></div></div>
+<div class="choice" data-correct="false" data-fb="Cherry-red spot suggests central retinal artery occlusion, not hypertensive emergency." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Cherry-red spot</div></div></div>
+<div class="choice" data-correct="false" data-fb="Retinal detachment is not a hallmark of hypertensive emergency." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Retinal detachment</div></div></div>
+</div><div id="mcqFb6" class="hidden" style="margin-top:16px"><div id="mcqFbText6" style="padding:12px;border-radius:8px"></div></div></div></div><div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">In pheochromocytoma crisis, α-blockade must be established BEFORE β-blockade. Why?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="false" data-fb="This is not relevant to pheochromocytoma management." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">β-blockers are metabolized by phenylalanine hydroxylase</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Pheochromocytoma releases catecholamines that stimulate both α and β receptors. β-blockade removes the β₂-mediated vasodilation, leaving α-mediated vasoconstriction unopposed → severe hypertension and potential stroke/MI. Always α-block first (phenoxybenzamine or phentolamine), then add β-blocker for tachycardia." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">β-blockade without α-blockade causes unopposed α-stimulation → hypertensive crisis</div></div></div>
+<div class="choice" data-correct="false" data-fb="The timing is about safety, not pharmacokinetics." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">α-blockers take longer to work and need a head start</div></div></div>
+<div class="choice" data-correct="false" data-fb="β-blockers are used in pheochromocytoma management, just after α-blockade." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">β-blockers are contraindicated in adrenal tumors</div></div></div>
+</div><div id="mcqFb7" class="hidden" style="margin-top:16px"><div id="mcqFbText7" style="padding:12px;border-radius:8px"></div></div></div></div></div></div>
+<div class="card"><div class="card-header"><div class="card-title">📚 References</div></div><div class="card-body"><div class="cross-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK539800/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Hypertensive Emergency - StatPearls</div></a><a href="https://www.acc.org/latest-in-cardiology" target="_blank" class="cross-link"><div class="cross-link-title">📄 ACC/AHA Hypertension Guidelines</div></a></div></div></div>
+</div>
 
-    <section class="hero">
-        <div class="hero-inner">
-            <h1>🔴 Hypertensive Emergency</h1>
-            <p>Master the pathophysiology of end-organ damage, recognize clinical presentations, and understand evidence-based BP targets for this critical diagnosis.</p>
-            <div class="hero-meta">
-                <span>⏱️ 20 min</span>
-                <span>📊 High Yield</span>
-                <span>🎯 Emergency Medicine</span>
-            </div>
-        </div>
-    </section>
-
-    <main class="main">
-        <!-- Definitions -->
-        <div class="section">
-            <h2 class="section-title">📋 Definitions: Emergency vs Urgency</h2>
-            
-            <div class="grid-2">
-                <div class="card" style="border-left: 4px solid #dc2626;">
-                    <div class="card-title">🚨 Hypertensive Emergency</div>
-                    <p><strong>Definition:</strong> Severely elevated BP WITH acute end-organ damage</p>
-                    <p style="margin-top: 8px;"><strong>Management:</strong> IV antihypertensives, ICU admission, controlled BP reduction</p>
-                    <p style="margin-top: 8px;"><span class="tag tag-red">Requires immediate treatment</span></p>
-                </div>
-                <div class="card" style="border-left: 4px solid #f59e0b;">
-                    <div class="card-title">⚠️ Hypertensive Urgency</div>
-                    <p><strong>Definition:</strong> Severely elevated BP WITHOUT acute end-organ damage</p>
-                    <p style="margin-top: 8px;"><strong>Management:</strong> Oral antihypertensives, outpatient follow-up, gradual reduction</p>
-                    <p style="margin-top: 8px;"><span class="tag tag-amber">Less time-sensitive</span></p>
-                </div>
-            </div>
-
-            <div class="concept-box">
-                <h4>🎯 Key Distinction</h4>
-                <p>The absolute BP number matters less than the presence of end-organ damage. A patient with BP 220/120 and no symptoms may be urgency, while BP 180/110 with pulmonary edema is an emergency. Always assess for end-organ damage!</p>
-            </div>
-        </div>
-
-        <!-- Pathophysiology -->
-        <div class="section">
-            <h2 class="section-title">🔬 Pathophysiology</h2>
-            
-            <div class="flow-diagram">
-                <div class="flow-step">
-                    <span class="flow-step-num">1</span>
-                    <div><strong>Failure of Autoregulation</strong>
-                        <br>Normally, cerebral and renal vessels autoregulate to maintain constant blood flow despite BP changes. In hypertensive emergency, BP exceeds the autoregulatory range.</div>
-                </div>
-                <div class="flow-step">
-                    <span class="flow-step-num">2</span>
-                    <div><strong>Endothelial Dysfunction</strong>
-                        <br>Mechanical stress damages endothelium → loss of vasodilatory capacity → further vasoconstriction → vicious cycle of worsening hypertension.</div>
-                </div>
-                <div class="flow-step">
-                    <span class="flow-step-num">3</span>
-                    <div><strong>Fibrinoid Necrosis</strong>
-                        <br>Severe pressure damages arteriolar walls → plasma proteins leak into vessel wall → "onion-skinning" appearance on histology.</div>
-                </div>
-                <div class="flow-step">
-                    <span class="flow-step-num">4</span>
-                    <div><strong>End-Organ Ischemia</strong>
-                        <br>Tissue hypoperfusion despite high BP due to microvascular damage → organ dysfunction manifests clinically.</div>
-                </div>
-            </div>
-
-            <div class="concept-box">
-                <h4>⚠️ The Autoregulation Curve Shifts</h4>
-                <p>In chronic hypertension, the autoregulation curve shifts rightward. These patients tolerate higher BPs but are vulnerable to hypoperfusion if BP is lowered too quickly. This is why we target 10-20% reduction in the first hour, not normalization!</p>
-            </div>
-        </div>
-
-        <!-- End-Organ Damage -->
-        <div class="section">
-            <h2 class="section-title">🎯 End-Organ Damage Manifestations</h2>
-            
-            <div class="organ-grid">
-                <div class="organ-card">
-                    <div class="organ-icon">🧠</div>
-                    <div class="organ-name">Brain</div>
-                    <div class="organ-finding">Encephalopathy, stroke, PRES</div>
-                </div>
-                <div class="organ-card">
-                    <div class="organ-icon">👁️</div>
-                    <div class="organ-name">Eyes</div>
-                    <div class="organ-finding">Papilledema, hemorrhages, exudates</div>
-                </div>
-                <div class="organ-card">
-                    <div class="organ-icon">❤️</div>
-                    <div class="organ-name">Heart</div>
-                    <div class="organ-finding">ACS, acute HF, pulmonary edema</div>
-                </div>
-                <div class="organ-card">
-                    <div class="organ-icon">🫁</div>
-                    <div class="organ-name">Lungs</div>
-                    <div class="organ-finding">Flash pulmonary edema</div>
-                </div>
-                <div class="organ-card">
-                    <div class="organ-icon">🫘</div>
-                    <div class="organ-name">Kidneys</div>
-                    <div class="organ-finding">AKI, hematuria, proteinuria</div>
-                </div>
-                <div class="organ-card">
-                    <div class="organ-icon">🩸</div>
-                    <div class="organ-name">Vessels</div>
-                    <div class="organ-finding">Aortic dissection, MAHA</div>
-                </div>
-            </div>
-
-            <div class="table-wrap">
-                <table>
-                    <tr>
-                        <th>Target Organ</th>
-                        <th>Clinical Syndrome</th>
-                        <th>Key Findings</th>
-                        <th>Workup</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Brain</strong></td>
-                        <td>Hypertensive encephalopathy</td>
-                        <td>Headache, confusion, seizures, visual changes</td>
-                        <td>CT/MRI (PRES pattern)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Brain</strong></td>
-                        <td>Hemorrhagic stroke</td>
-                        <td>Focal deficits, decreased LOC</td>
-                        <td>CT head (stat)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Heart</strong></td>
-                        <td>Acute coronary syndrome</td>
-                        <td>Chest pain, dyspnea, diaphoresis</td>
-                        <td>ECG, troponin</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Heart</strong></td>
-                        <td>Acute heart failure</td>
-                        <td>Dyspnea, orthopnea, crackles, JVD</td>
-                        <td>CXR, BNP, echo</td>
-                    </tr>
-                    <tr class="danger">
-                        <td><strong>Aorta</strong></td>
-                        <td>Aortic dissection</td>
-                        <td>Tearing pain, BP differential, pulse deficit</td>
-                        <td>CTA chest</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kidneys</strong></td>
-                        <td>Acute kidney injury</td>
-                        <td>Oliguria, elevated Cr, hematuria</td>
-                        <td>BMP, UA, renal US</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Eyes</strong></td>
-                        <td>Hypertensive retinopathy</td>
-                        <td>Blurred vision, visual field cuts</td>
-                        <td>Fundoscopy</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Blood</strong></td>
-                        <td>MAHA (microangiopathic hemolytic anemia)</td>
-                        <td>Schistocytes, ↑LDH, ↓haptoglobin</td>
-                        <td>Smear, hemolysis labs</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- Management -->
-        <div class="section">
-            <h2 class="section-title">💊 Management Principles</h2>
-            
-            <div class="concept-box">
-                <h4>🎯 BP Reduction Targets</h4>
-                <p><strong>General rule:</strong> Reduce MAP by 10-20% in the first hour, then gradually to 160/100-110 over the next 2-6 hours. Avoid rapid normalization which risks watershed infarction!</p>
-            </div>
-
-            <h3 style="margin: 20px 0 12px;">Condition-Specific Targets</h3>
-            <div class="table-wrap">
-                <table>
-                    <tr>
-                        <th>Condition</th>
-                        <th>Initial Target</th>
-                        <th>Preferred Agent</th>
-                        <th>Notes</th>
-                    </tr>
-                    <tr class="highlight">
-                        <td><strong>Aortic Dissection</strong></td>
-                        <td>SBP &lt;120, HR &lt;60</td>
-                        <td>Esmolol + Nitroprusside</td>
-                        <td>BB first to prevent reflex tachy</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Acute Ischemic Stroke</strong></td>
-                        <td>&lt;185/110 if tPA candidate</td>
-                        <td>Nicardipine, Labetalol</td>
-                        <td>Don't treat if not tPA candidate unless &gt;220/120</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hemorrhagic Stroke</strong></td>
-                        <td>SBP 140 (per INTERACT2)</td>
-                        <td>Nicardipine, Labetalol</td>
-                        <td>More aggressive than ischemic</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Acute Pulmonary Edema</strong></td>
-                        <td>Symptom-guided</td>
-                        <td>Nitroprusside, Nitroglycerin</td>
-                        <td>Afterload reduction key</td>
-                    </tr>
-                    <tr>
-                        <td><strong>ACS</strong></td>
-                        <td>Symptom-guided</td>
-                        <td>Nitroglycerin, BB</td>
-                        <td>Reduce O2 demand</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Eclampsia/Preeclampsia</strong></td>
-                        <td>SBP &lt;160, DBP &lt;110</td>
-                        <td>Hydralazine, Labetalol</td>
-                        <td>Give MgSO4 for seizure prophylaxis</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Pheochromocytoma</strong></td>
-                        <td>Gradual reduction</td>
-                        <td>Phentolamine</td>
-                        <td>Never BB alone (unopposed alpha)</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h3 style="margin: 20px 0 12px;">IV Antihypertensive Agents</h3>
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-title">💉 Nicardipine</div>
-                    <ul>
-                        <li>CCB - vasodilator</li>
-                        <li>Predictable, titratable</li>
-                        <li>Good for most indications</li>
-                        <li>Start 5 mg/hr, titrate by 2.5 mg/hr</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">💉 Labetalol</div>
-                    <ul>
-                        <li>Combined α/β blocker</li>
-                        <li>No reflex tachycardia</li>
-                        <li>Good for dissection, pregnancy</li>
-                        <li>Bolus 20mg or infusion</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">💉 Esmolol</div>
-                    <ul>
-                        <li>Ultra-short acting β1 blocker</li>
-                        <li>Ideal for dissection (rate control)</li>
-                        <li>Highly titratable</li>
-                        <li>Load 500 mcg/kg, infuse 50-200</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">💉 Nitroprusside</div>
-                    <ul>
-                        <li>Arterial + venous dilator</li>
-                        <li>Most potent, fastest onset</li>
-                        <li>Cyanide toxicity risk</li>
-                        <li>Requires A-line monitoring</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Special Populations -->
-        <div class="section">
-            <h2 class="section-title">👥 Special Considerations</h2>
-            
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-title">🤰 Pregnancy (Eclampsia)</div>
-                    <ul>
-                        <li>Labetalol or hydralazine first-line</li>
-                        <li>MgSO4 for seizure prophylaxis</li>
-                        <li>Avoid ACEi, ARBs, nitroprusside</li>
-                        <li>Definitive treatment = delivery</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">💊 Cocaine/Sympathomimetics</div>
-                    <ul>
-                        <li>Benzodiazepines first!</li>
-                        <li>Avoid pure beta-blockers (unopposed alpha)</li>
-                        <li>Phentolamine for refractory HTN</li>
-                        <li>Nicardipine is safe</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Integration Box -->
-        <div class="integration-box">
-            <h3>🔗 Continue Your Learning</h3>
-            <p>Master hypertensive emergencies across all three platforms:</p>
-            <div class="integration-links">
-                <a href="../ReasonDx/htn-emergency-adventure.html" class="integration-link">
-                    🎮 <strong>ReasonDx:</strong> HTN Emergency Case
-                </a>
-                <a href="../CoachDx/mentor-chat.html?case=htn-emergency" class="integration-link">
-                    🗣️ <strong>CoachDx:</strong> HTN Emergency SBAR
-                </a>
-                <a href="aortic-dissection-module.html" class="integration-link">
-                    📚 <strong>Related:</strong> Aortic Dissection
-                </a>
-                <a href="stroke-module.html" class="integration-link">
-                    📚 <strong>Related:</strong> Stroke Module
-                </a>
-            </div>
-        </div>
-
-        <!-- Summary -->
-        <div class="section">
-            <h2 class="section-title">📝 Key Takeaways</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-title">🎯 Must Know</div>
-                    <ul>
-                        <li>Emergency = elevated BP + end-organ damage</li>
-                        <li>Urgency = elevated BP alone</li>
-                        <li>Always look for target organ damage</li>
-                        <li>The BP number alone doesn't define it</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-title">💊 Treatment Pearls</div>
-                    <ul>
-                        <li>Reduce MAP 10-20% in first hour</li>
-                        <li>Avoid rapid normalization</li>
-                        <li>Condition-specific targets matter</li>
-                        <li>Nicardipine is versatile first-line</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script src="dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
-
-    <!-- DxSuite AI Tutor Integration -->
-    <div data-dx-tutor
-         data-module-title="Hypertensive Emergency"
-         data-key-points="📋 Definitions: Emergency vs Urgency, 🔬 Pathophysiology, 🎯 End-Organ Damage Manifestations, 💊 Management Principles, 👥 Special Considerations, 📝 Key Takeaways, Condition-Specific Targets, IV Antihypertensive Agents, pathophysiology, clinical presentation, diagnosis, management, complications"
-         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
-         style="display:none;"></div>
-    <script src="dx-ai-tutor.js"></script>
-</body>
-</html>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=hypertensive-emergency-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/htn-emergency-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body></html>

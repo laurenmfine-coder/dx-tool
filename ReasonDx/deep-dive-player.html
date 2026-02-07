@@ -1366,15 +1366,56 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         }
 
         async function loadDeepDiveData() {
-            // In production, this would fetch from a JSON file
-            // For now, using embedded sample data
+            // Read topic from URL parameter: ?module=sepsis or ?topic=sepsis
+            const params = new URLSearchParams(window.location.search);
+            const moduleId = params.get('module') || params.get('topic') || null;
+            
+            if (moduleId) {
+                // Construct JSON path from the module ID
+                // Try multiple naming conventions
+                const paths = [
+                    `data/deep-dives/${moduleId}-deep-dive.json`,
+                    `data/deep-dives/${moduleId}-deep-dive-complete.json`,
+                    `data/deep-dives/${moduleId}.json`
+                ];
+                
+                for (const path of paths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            const data = await response.json();
+                            // Update page title with topic name
+                            if (data.title) {
+                                document.title = `${data.title} — ReasonDx Deep Dive`;
+                            }
+                            // Record in DxProgress when loaded
+                            if (window.DxProgress) {
+                                window._deepDiveTopicId = moduleId;
+                                window._deepDiveStartTime = Date.now();
+                            }
+                            return data;
+                        }
+                    } catch (e) {
+                        continue; // Try next path
+                    }
+                }
+                console.warn('Deep dive not found for module:', moduleId, '— falling back to ACS');
+            }
+            
+            // Fallback: load ACS deep dive (original behavior)
             try {
                 const response = await fetch('data/deep-dives/acs-deep-dive-complete.json');
-                return await response.json();
+                if (response.ok) {
+                    if (window.DxProgress) {
+                        window._deepDiveTopicId = 'acs';
+                        window._deepDiveStartTime = Date.now();
+                    }
+                    return await response.json();
+                }
             } catch (e) {
-                // Fallback to embedded sample
-                return getSampleData();
+                // Final fallback to embedded sample
             }
+            return getSampleData();
         }
 
         function getSampleData() {
@@ -1865,6 +1906,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             document.getElementById('questionCard').style.display = 'none';
             document.getElementById('explanationPanel').classList.remove('visible');
             
+            const accuracy = totalAnswered > 0 ? Math.round((score/totalAnswered)*100) : 0;
+            const timeSpent = window._deepDiveStartTime ? Date.now() - window._deepDiveStartTime : 0;
+            
+            // Record completion in DxProgress
+            if (window.DxProgress && window._deepDiveTopicId) {
+                DxProgress.recordCompletion(window._deepDiveTopicId, 'deepDive', accuracy, {
+                    timeSpent: timeSpent,
+                    sectionsViewed: deepDiveData.layers ? deepDiveData.layers.length : 0
+                });
+            }
+            
             const screen = document.getElementById('completionScreen');
             screen.classList.add('visible');
             screen.innerHTML = `
@@ -1877,13 +1929,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                         <div class="completion-stat-label">Correct Answers</div>
                     </div>
                     <div class="completion-stat">
-                        <div class="completion-stat-value">${Math.round((score/totalAnswered)*100)}%</div>
+                        <div class="completion-stat-value">${accuracy}%</div>
                         <div class="completion-stat-label">Accuracy</div>
                     </div>
                     <div class="completion-stat">
                         <div class="completion-stat-value">${document.getElementById('timerDisplay').textContent}</div>
                         <div class="completion-stat-label">Total Time</div>
                     </div>
+                </div>
+                <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <a href="deep-dive-hub.html" style="padding: 12px 24px; background: var(--accent, #3b82f6); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">← Back to Deep Dives</a>
+                    <a href="../tools/learning-dashboard.html" style="padding: 12px 24px; background: var(--success, #22c55e); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">📊 My Progress</a>
                 </div>
             `;
             clearInterval(timerInterval);
@@ -2014,5 +2070,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
 </body>
 </html>
