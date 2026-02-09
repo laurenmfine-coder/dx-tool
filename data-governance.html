@@ -34,17 +34,17 @@ table{width:100%;border-collapse:collapse;background:var(--card);border-radius:1
 <div class="section" style="text-align:center;padding:2rem 0;color:var(--muted);font-size:.85rem"><div class="stamp" style="margin:0 auto">✓ Open-access sources only — no proprietary content</div><p style="margin-top:.8rem">Last audit: February 8, 2026 · StatPearls NCBI verified</p></div>
 <script>
 async function load(){
-  const [qb,tm]=await Promise.all([fetch('data/quiz-bank.json').then(r=>r.json()).catch(()=>({questions:[]})),fetch('data/topic-map.json').then(r=>r.json()).catch(()=>({topics:{}}))]);
+  const [qb,tm]=await Promise.all([fetch('data/quiz-bank-index.json').then(r=>r.json()).catch(()=>({questions:[]})),fetch('data/topic-map.json').then(r=>r.json()).catch(()=>({topics:{}}))]);
   const qs=qb.questions||[],topics=tm.topics||{};
-  const T=qs.length,E=qs.filter(q=>q.explanation).length;
-  const F=qs.filter(q=>(q.feedback&&typeof q.feedback==='object'&&q.feedback.correct)||(Array.isArray(q.choices)&&q.choices.some(c=>typeof c==='object'&&c.feedback))).length;
-  const V=qs.filter(q=>q.verificationStamp&&q.verificationStamp.status==='verified').length;
+  const T=qs.length,E=qs.filter(q=>q.hasExplanation).length;
+  const F=qs.filter(q=>q.hasFeedback).length;
+  const V=qs.filter(q=>q.vs&&q.vs.status==='verified').length;
   const M=qs.filter(q=>q.topicId).length;
   const ta=Object.entries(topics).filter(([k,v])=>typeof v==='object'&&v.displayName),TT=ta.length;
   const DD=ta.filter(([k,v])=>v.deepDive||v.deepDiveUrl).length,SR=ta.filter(([k,v])=>v.spacedRepId).length,MC=ta.filter(([k,v])=>v.mechanism||v.mechanismUrl).length,AV=ta.filter(([k,v])=>v.adventure).length,EX=ta.filter(([k,v])=>v.examRelevance&&v.examRelevance.length).length;
   const tm2={};qs.forEach(q=>{if(q.topicId)tm2[q.topicId]=(tm2[q.topicId]||0)+1});
   const FL=ta.filter(([k,v])=>(tm2[k]||0)>=3&&v.adventure&&(v.mechanism||v.mechanismUrl)).length;
-  const nbk=new Set();qs.forEach(q=>{if(q.verificationStamp&&q.verificationStamp.nbkId)nbk.add(q.verificationStamp.nbkId)});
+  const nbk=new Set();qs.forEach(q=>{if(q.vs&&q.vs.nbkId)nbk.add(q.vs.nbkId)});
   const pct=n=>Math.round(n*100)+'%';
   document.getElementById('kpi-grid').innerHTML=[
     {t:'Total Questions',s:T.toLocaleString(),b:100,c:'blue',l:TT+' topics covered'},

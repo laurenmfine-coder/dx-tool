@@ -36,7 +36,7 @@
 <div class="exam-legend"><h3>Exam Relevance Mapping</h3><div class="exam-grid" id="exam-grid"></div></div>
 <script>
 async function load(){
-  const [qb,tm]=await Promise.all([fetch('data/quiz-bank.json').then(r=>r.json()).catch(()=>({questions:[]})),fetch('data/topic-map.json').then(r=>r.json()).catch(()=>({topics:{}}))]);
+  const [qb,tm]=await Promise.all([fetch('data/quiz-bank-index.json').then(r=>r.json()).catch(()=>({questions:[]})),fetch('data/topic-map.json').then(r=>r.json()).catch(()=>({topics:{}}))]);
   const qs=qb.questions||[],topics=tm.topics||{};
   const ta=Object.entries(topics).filter(([k,v])=>typeof v==='object'&&v.displayName);
   const TT=ta.length,TQ=qs.length;

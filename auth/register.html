@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join ReasonDx | Board-Ready Clinical Reasoning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="../dx-sanitize.js"></script>
     <style>
         :root { --primary: #059669; --primary-dark: #047857; --pro: #2563eb; --pro-dark: #1d4ed8; --beta: #d97706; --beta-dark: #b45309; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -371,13 +373,12 @@
                         <div style="font-size: 13px; color: #059669; margin-top: 4px;" id="referralCredit" class="hidden">🎁 Your friend gets a free month too!</div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Card Information</label>
-                        <div id="card-element" style="padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: white;">
-                            <p style="color: #94a3b8; font-size: 14px;">Card input will appear here when Stripe is configured</p>
+                        <div id="card-element" style="padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; text-align: center;">
+                            <p style="color: #475569; font-size: 14px; margin: 0;">🔒 You'll be securely redirected to Stripe to complete payment</p>
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $14.99/month</button>
-                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure payment · Cancel anytime · 30-day money-back guarantee</p>
+                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure payment via Stripe · Cancel anytime · 30-day money-back guarantee</p>
                 </div>
 
                 <!-- SUCCESS -->
@@ -423,7 +424,9 @@
         // ============================================
         const CONFIG = {
             GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
-            STRIPE_PUBLIC_KEY: 'YOUR_STRIPE_PUBLIC_KEY_HERE',
+            STRIPE_PUBLIC_KEY: 'pk_live_51SbAuvDEGaZdouAQBZQjWwMc449xCuIMfYjqWBRHm30OQDQ73omSpXgBrtPMbBtLaNUFVJuIaFVYFdDzAk5beHqX000iJ04kjk',
+            STRIPE_PRICE_MONTHLY: 'price_1SvpACDEGaZdouAQ6l2xx5D4',
+            STRIPE_PRICE_ANNUAL: 'price_1SynQRDEGaZdouAQ4ggXuvpj',
             DEMO_MODE: false,
             PRO_MONTHLY: 14.99,
             PRO_ANNUAL: 99.00,
@@ -673,7 +676,7 @@
             }
         }
 
-        function processPayment() {
+        async function processPayment() {
             if (CONFIG.DEMO_MODE) {
                 var price = state.billingPeriod === 'monthly' ? CONFIG.PRO_MONTHLY : CONFIG.PRO_ANNUAL;
                 alert('Demo Mode: Would charge $' + price.toFixed(2) + ' via Stripe.' +
@@ -688,9 +691,70 @@
                     graduationYear: document.getElementById('gradYear').value,
                     studyGoal: document.getElementById('studyGoal').value
                 });
-            } else {
-                document.getElementById('paymentError').textContent = 'Payment processing requires Stripe configuration.';
-                document.getElementById('paymentError').className = 'message error';
+                return;
+            }
+
+            var payBtn = document.getElementById('payBtn');
+            var errEl = document.getElementById('paymentError');
+            errEl.className = 'message';
+            errEl.textContent = '';
+
+            // Disable button and show loading
+            payBtn.disabled = true;
+            payBtn.textContent = 'Redirecting to Stripe...';
+
+            // Save profile data to sessionStorage before redirect
+            sessionStorage.setItem('reasondx-pending-profile', JSON.stringify({
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                role: document.getElementById('userRole').value,
+                institution: document.getElementById('institution').value.trim(),
+                specialty: document.getElementById('specialtyInterest').value,
+                graduationYear: document.getElementById('gradYear').value,
+                studyGoal: document.getElementById('studyGoal').value
+            }));
+            sessionStorage.setItem('reasondx-pending-state', JSON.stringify({
+                verifiedEmail: state.verifiedEmail,
+                selectedPlan: state.selectedPlan,
+                billingPeriod: state.billingPeriod,
+                referralCode: state.referralCode,
+                generatedReferral: state.generatedReferral,
+                password: state.password
+            }));
+
+            try {
+                var priceId = state.billingPeriod === 'monthly'
+                    ? CONFIG.STRIPE_PRICE_MONTHLY
+                    : CONFIG.STRIPE_PRICE_ANNUAL;
+
+                var baseUrl = window.location.origin + window.location.pathname;
+
+                var response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        priceId: priceId,
+                        customerEmail: state.verifiedEmail,
+                        successUrl: baseUrl + '?checkout=success&session_id={CHECKOUT_SESSION_ID}',
+                        cancelUrl: baseUrl + '?checkout=cancelled'
+                    })
+                });
+
+                var data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to create checkout session');
+                }
+
+                // Redirect to Stripe Checkout
+                window.location.href = data.url;
+
+            } catch (error) {
+                console.error('Checkout error:', error);
+                errEl.textContent = 'Unable to start checkout. Please try again or contact support.';
+                errEl.className = 'message error';
+                payBtn.disabled = false;
+                setBilling(state.billingPeriod); // Reset button text
             }
         }
 
@@ -866,6 +930,63 @@
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             var params = new URLSearchParams(window.location.search);
+
+            // Handle Stripe Checkout return
+            var checkoutStatus = params.get('checkout');
+            if (checkoutStatus === 'success') {
+                // Restore state from sessionStorage
+                try {
+                    var pendingProfile = JSON.parse(sessionStorage.getItem('reasondx-pending-profile'));
+                    var pendingState = JSON.parse(sessionStorage.getItem('reasondx-pending-state'));
+                    if (pendingProfile && pendingState) {
+                        state.verifiedEmail = pendingState.verifiedEmail;
+                        state.selectedPlan = pendingState.selectedPlan || 'pro';
+                        state.billingPeriod = pendingState.billingPeriod;
+                        state.referralCode = pendingState.referralCode;
+                        state.generatedReferral = pendingState.generatedReferral;
+                        state.password = pendingState.password;
+                        finalizeAccount(pendingProfile);
+                        // Clean up
+                        sessionStorage.removeItem('reasondx-pending-profile');
+                        sessionStorage.removeItem('reasondx-pending-state');
+                        // Clean URL
+                        window.history.replaceState({}, '', window.location.pathname);
+                    } else {
+                        // No pending data — show success anyway (payment went through)
+                        document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+                        document.getElementById('sectionSuccess').classList.add('active');
+                        document.getElementById('successTitle').textContent = 'Payment Successful! 🎉';
+                        document.getElementById('successMessage').textContent = 'Your Pro subscription is active. Please sign in to access your account.';
+                    }
+                } catch(e) {
+                    console.error('Error restoring checkout state:', e);
+                }
+                return; // Skip normal init
+            }
+
+            if (checkoutStatus === 'cancelled') {
+                // User cancelled at Stripe — show payment section with message
+                try {
+                    var pendingState2 = JSON.parse(sessionStorage.getItem('reasondx-pending-state'));
+                    if (pendingState2) {
+                        state.verifiedEmail = pendingState2.verifiedEmail;
+                        state.selectedPlan = pendingState2.selectedPlan || 'pro';
+                        state.billingPeriod = pendingState2.billingPeriod;
+                        state.referralCode = pendingState2.referralCode;
+                        state.generatedReferral = pendingState2.generatedReferral;
+                        state.password = pendingState2.password;
+                    }
+                } catch(e) {}
+                document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+                document.getElementById('sectionPayment').classList.add('active');
+                document.getElementById('paymentError').textContent = 'Checkout was cancelled. You can try again whenever you\'re ready.';
+                document.getElementById('paymentError').className = 'message error';
+                setupPaymentSection();
+                // Clean URL
+                window.history.replaceState({}, '', window.location.pathname);
+                return;
+            }
+
             var ref = params.get('ref');
             if (ref && validateReferralCode(ref.toUpperCase())) {
                 setTimeout(function(){ var inp = document.getElementById('referralCodeInput'); if (inp) inp.value = ref.toUpperCase(); }, 500);
