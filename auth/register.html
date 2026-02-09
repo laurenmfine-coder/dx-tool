@@ -492,7 +492,7 @@
         const CONFIG = {
             GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
             STRIPE_PUBLIC_KEY: 'YOUR_STRIPE_PUBLIC_KEY_HERE',
-            DEMO_MODE: true,
+            DEMO_MODE: false,
             PRO_MONTHLY: 9.99,
             PRO_ANNUAL: 79.99,
             BETA_MONTHLY: 4.99,
@@ -959,8 +959,10 @@
                 });
             } catch(e) {
                 if (loginBtn) { loginBtn.disabled = false; loginBtn.textContent = 'Sign In'; }
-                // Supabase SDK not available - use demo mode fallback
-                if (CONFIG.DEMO_MODE) { localStorage.setItem('reasondx-user', JSON.stringify({ email: email, name: email.split('@')[0], plan: 'pro' })); window.location.href = '../index.html'; }
+                // Supabase SDK not available - show error
+                console.error('Auth SDK error:', e);
+                document.getElementById('loginError').textContent = 'Authentication service unavailable. Please refresh and try again.';
+                document.getElementById('loginError').className = 'message error';
             }
         }
         function showForgotPassword() { alert('Password reset coming soon.'); }

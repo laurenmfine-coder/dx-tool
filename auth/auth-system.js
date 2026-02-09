@@ -1,5 +1,5 @@
 /**
- * DxSuite Authentication System
+ * ReasonDx Authentication System
  * Powered by Supabase
  */
 (function() {

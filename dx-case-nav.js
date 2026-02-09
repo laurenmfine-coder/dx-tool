@@ -1,5 +1,5 @@
 /**
- * DxSuite Case Navigation System
+ * ReasonDx Case Navigation System
  * Provides consistent navigation for adventure cases and content pages
  * 
  * Usage: Include this script and call DxCaseNav.init() with config options
@@ -159,7 +159,7 @@ const DxCaseNav = {
         const crumbs = [];
         
         // Platform root
-        crumbs.push(`<a href="${this.config.platformRoot}index.html">DxSuite</a>`);
+        crumbs.push(`<a href="${this.config.platformRoot}index.html">ReasonDx</a>`);
         
         // Section based on page type
         if (this.pageType === 'adventure-case') {
