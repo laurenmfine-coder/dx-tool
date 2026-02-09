@@ -234,6 +234,7 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
+<script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
     <div class="auth-layout">
@@ -318,7 +319,7 @@
                             <div class="form-error" id="passwordMatchError">Passwords don't match</div>
                         </div>
                         <div class="form-helper">
-                            <label><input type="checkbox" id="termsAgree" required> I agree to the <a href="/terms.html">Terms</a> & <a href="/privacy.html">Privacy Policy</a></label>
+                            <label><input type="checkbox" id="termsAgree" required> I agree to the <a href="terms.html">Terms</a> & <a href="privacy.html">Privacy Policy</a></label>
                         </div>
                         <button type="submit" class="btn-primary" id="signupBtn">Create Free Account</button>
                     </form>
@@ -411,8 +412,23 @@
             setLoading('loginBtn', false);
             
             if (result.success) {
-                // Redirect to home or previous page
-                const redirect = sessionStorage.getItem('dxsuite-redirect-after-login') || '../index.html';
+                // Bridge Supabase auth → localStorage for inline auth guards
+                const user = DxAuth.user;
+                const profile = DxAuth.profile;
+                const fullName = profile?.full_name || user?.user_metadata?.full_name || email.split('@')[0];
+                localStorage.setItem('reasondx-user', JSON.stringify({
+                    email: user?.email || email,
+                    name: fullName,
+                    plan: profile?.subscription_tier || 'free',
+                    supabaseId: user?.id,
+                    createdAt: user?.created_at || new Date().toISOString()
+                }));
+
+                // Check both redirect keys (inline guard uses 'reasondx-redirect', DxAuth uses 'dxsuite-redirect-after-login')
+                const redirect = sessionStorage.getItem('reasondx-redirect') 
+                    || sessionStorage.getItem('dxsuite-redirect-after-login') 
+                    || '../index.html';
+                sessionStorage.removeItem('reasondx-redirect');
                 sessionStorage.removeItem('dxsuite-redirect-after-login');
                 window.location.href = redirect;
             } else {
@@ -474,11 +490,27 @@
         // Check if already logged in
         window.addEventListener('dxsuite-auth-change', (e) => {
             if (e.detail.event === 'SIGNED_IN') {
-                const redirect = sessionStorage.getItem('dxsuite-redirect-after-login') || '../index.html';
+                // Bridge to localStorage
+                const user = e.detail.user;
+                const profile = e.detail.profile;
+                if (user) {
+                    const fullName = profile?.full_name || user?.user_metadata?.full_name || user?.email?.split('@')[0];
+                    localStorage.setItem('reasondx-user', JSON.stringify({
+                        email: user.email,
+                        name: fullName,
+                        plan: profile?.subscription_tier || 'free',
+                        supabaseId: user.id
+                    }));
+                }
+                const redirect = sessionStorage.getItem('reasondx-redirect')
+                    || sessionStorage.getItem('dxsuite-redirect-after-login') 
+                    || '../index.html';
+                sessionStorage.removeItem('reasondx-redirect');
                 sessionStorage.removeItem('dxsuite-redirect-after-login');
                 window.location.href = redirect;
             }
         });
     </script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

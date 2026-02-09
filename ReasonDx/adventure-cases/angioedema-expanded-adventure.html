@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Angioedema - ReasonDx Socratic Case</title>
@@ -497,7 +498,7 @@ const stages = [
                 "correct": "ACE inhibitor angioedema is bradykinin-mediated, so standard allergic treatments (epinephrine, antihistamines, steroids) have limited efficacy. Management: 1) Stop ACE inhibitor permanently, 2) Airway monitoring (can be life-threatening), 3) Consider bradykinin-targeted therapy (icatibant, C1-INH concentrate, or FFP as last resort).",
                 "incorrect": "Bradykinin-mediated angioedema does NOT respond well to epinephrine, antihistamines, or corticosteroids - these target histamine pathways. Specific treatments include icatibant (bradykinin B2 receptor antagonist) or C1-INH concentrate. FFP may help but carries risks."
             },
-            "teaching": "<h4>\ud83d\udcda Treatment of ACE-I Angioedema</h4>\n                    <p><strong>Essential steps:</strong></p>\n                    <ul>\n                        <li>Discontinue ACE inhibitor permanently</li>\n                        <li>Close airway monitoring - can progress to life-threatening</li>\n                        <li>Prepare for emergent airway management</li>\n                    </ul>\n                    <p><strong>Pharmacotherapy:</strong></p>\n                    <table>\n                        <tr><th>Agent</th><th>Mechanism</th><th>Notes</th></tr>\n                        <tr><td>Icatibant</td><td>Bradykinin B2 antagonist</td><td>FDA approved for HAE; used off-label</td></tr>\n                        <tr><td>C1-INH concentrate</td><td>Replaces C1-INH</td><td>Reduces bradykinin generation</td></tr>\n                        <tr><td>FFP</td><td>Contains ACE</td><td>Last resort; infection/volume risk</td></tr>\n                    </table>\n                    <p><em>Epinephrine/antihistamines/steroids: May be given but unlikely to help bradykinin-mediated swelling</em></p>",
+            "teaching": "<h4>\ud83d\udcda Treatment of ACE-I Angioedema</h4>\n                    <p><strong>Essential steps:</strong></p>\n                    <ul>\n                        <li>Discontinue ACE inhibitor permanently</li>\n                        <li>Close airway monitoring - can progress to life-threatening</li>\n                        <li>Prepare for emergent airway management</li>\n                    </ul>\n                    <p><strong>Pharmacotherapy:</strong></p>\n                    <table>\n                        <tr><th>Agent</th><th>Mechanism</th><th>Notes</th></tr>\n                        <tr><td>Icatibant</td><td>Bradykinin B2 antagonist</td><td>indicated for HAE; used off-label</td></tr>\n                        <tr><td>C1-INH concentrate</td><td>Replaces C1-INH</td><td>Reduces bradykinin generation</td></tr>\n                        <tr><td>FFP</td><td>Contains ACE</td><td>Last resort; infection/volume risk</td></tr>\n                    </table>\n                    <p><em>Epinephrine/antihistamines/steroids: May be given but unlikely to help bradykinin-mediated swelling</em></p>",
             "points": 15
         }
     },
@@ -1005,5 +1006,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

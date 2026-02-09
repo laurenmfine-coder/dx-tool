@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MechanismDx | Pathophysiology Mastery</title>
@@ -231,7 +232,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 }
 
     </style>
-        <link rel="stylesheet" href="dx-case-nav.css">
+        <link rel="stylesheet" href="../dx-dashboard.html">
 </head>
 <body>
 
@@ -345,7 +346,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <span class="category-count">4 modules</span>
             </div>
             <div class="module-grid">
-                <a href="pulmonary-physiology-foundations.html" class="module-card">
+                <a href="../dx-dashboard.html" class="module-card">
                     <div class="module-icon">📐</div>
                     <div class="module-title">Pulmonary Physiology Foundations</div>
                     <div class="module-desc">Lung volumes, ventilation-perfusion, gas exchange, respiratory mechanics, and control of breathing.</div>
@@ -461,7 +462,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <div class="module-desc">HPT axis, TSH interpretation, Graves vs Hashimoto, thyroid storm, and myxedema coma.</div>
                     <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
                 </a>
-                <a href="endocrine-emergencies.html" class="module-card">
+                <a href="../dx-dashboard.html" class="module-card">
                     <div class="module-icon">🚨</div>
                     <div class="module-title">Endocrine Emergencies</div>
                     <div class="module-desc">Adrenal crisis, myxedema coma, thyroid storm, hypercalcemic crisis, and pheochromocytoma crisis.</div>
@@ -520,11 +521,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <div class="tool-icon">🔬</div>
                     <div class="tool-name">Learning Fingerprint</div>
                 </a>
-                <a href="challenges.html" class="tool-card">
+                <a href="../dx-dashboard.html" class="tool-card">
                     <div class="tool-icon">🎯</div>
                     <div class="tool-name">Challenges</div>
                 </a>
-                <a href="case-library.html" class="tool-card">
+                <a href="../dx-dashboard.html" class="tool-card">
                     <div class="tool-icon">📚</div>
                     <div class="tool-name">Case Library</div>
                 </a>
@@ -658,5 +659,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

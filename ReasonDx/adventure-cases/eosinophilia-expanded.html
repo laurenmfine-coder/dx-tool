@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Eosinophilia - ReasonDx Socratic Case</title>
@@ -195,7 +196,7 @@ options:[{text:"Antibiotics (penicillins, sulfonamides, quinolones), NSAIDs, ant
 {text:"Steroids cause eosinophilia",correct:false},
 {text:"Drug-induced eosinophilia is rare",correct:false}],
 explanation:{correct:"Drug-induced eosinophilia is VERY common. Major culprits: antibiotics (beta-lactams, sulfonamides), NSAIDs, anticonvulsants, allopurinol. Can be benign or part of DRESS syndrome (Drug Reaction with Eosinophilia and Systemic Symptoms). Always review ALL medications including supplements.",incorrect:"Drug-induced eosinophilia is one of the most common causes in developed countries. Steroids actually DECREASE eosinophils. Always suspect medications in any patient with new eosinophilia."},
-teaching:`<h4>Drug-Induced Eosinophilia</h4><p><strong>Antibiotics:</strong> Penicillins, cephalosporins, sulfonamides, quinolones</p><p><strong>Anticonvulsants:</strong> Phenytoin, carbamazepine, lamotrigine</p><p><strong>Others:</strong> NSAIDs, allopurinol, ranitidine, supplements</p><p><strong>Severe:</strong> DRESS syndrome (eosinophilia + rash + organ involvement)</p>`,
+teaching:`<h4>Drug-Induced Eosinophilia</h4><p><strong>Antibiotics:</strong> Penicillins, cephalosporins, sulfonamides, quinolones</p><p><strong>Anticonvulsants:</strong> Phenytoin, carbamazepine, lamotrigine</p><p><strong>Others:</strong> NSAIDs, allopurinol, famotidine, supplements</p><p><strong>Severe:</strong> DRESS syndrome (eosinophilia + rash + organ involvement)</p>`,
 why_chain:[{q:"How long after starting a drug does eosinophilia appear?",a:"Typically 2-8 weeks after starting the medication. DRESS syndrome is characteristically delayed (2-8 weeks). This delayed onset can make the connection less obvious - always ask about medications started in the past 2-3 months."}],points:10}},
 
 {title:"Parasitic Causes",content:`<div class="narrative"><p>Patient denies recent travel but ate sushi regularly. Consider parasitic causes of eosinophilia.</p></div><div class="socratic-prompt"><h4>Parasites and Eosinophilia</h4><p>Which parasites cause eosinophilia, and which don't?</p></div>`,
@@ -239,7 +240,7 @@ options:[{text:"Triad of asthma (often severe/late-onset) + eosinophilia + vascu
 {text:"EGPA never has asthma",correct:false},
 {text:"All EGPA is ANCA positive",correct:false}],
 explanation:{correct:"EGPA (formerly Churg-Strauss): adult-onset or worsening asthma + eosinophilia (often >1,500, can be very high) + vasculitis affecting multiple organs (mononeuritis multiplex, cardiac, skin purpura, sinusitis). ~40% ANCA positive (MPO/p-ANCA pattern). ANCA-negative EGPA tends to have more cardiac involvement.",incorrect:"EGPA is a systemic vasculitis, not just lung disease. The combination of asthma, eosinophilia, and multisystem involvement is the key. Negative ANCA doesn't rule out EGPA."},
-teaching:`<h4>EGPA (Churg-Strauss)</h4><p><strong>Triad:</strong> Asthma + eosinophilia + vasculitis</p><p><strong>Organs:</strong> Nerves (mononeuritis multiplex), heart, skin, sinuses, lungs</p><p><strong>ANCA:</strong> ~40% positive (MPO/p-ANCA)</p><p><strong>Treatment:</strong> Steroids ± cyclophosphamide; mepolizumab FDA-approved</p>`,
+teaching:`<h4>EGPA (Churg-Strauss)</h4><p><strong>Triad:</strong> Asthma + eosinophilia + vasculitis</p><p><strong>Organs:</strong> Nerves (mononeuritis multiplex), heart, skin, sinuses, lungs</p><p><strong>ANCA:</strong> ~40% positive (MPO/p-ANCA)</p><p><strong>Treatment:</strong> Steroids ± cyclophosphamide; mepolizumab approved</p>`,
 why_chain:[{q:"Why is cardiac involvement critical in EGPA?",a:"Cardiac involvement (myocarditis, coronary arteritis, pericarditis) is the leading cause of death in EGPA. It's more common in ANCA-negative patients. Screen with echo and cardiac MRI if suspected. Early aggressive treatment is critical."}],points:10}},
 
 {title:"Case Synthesis",content:`<div class="narrative"><p>Our patient's eosinophilia was attributed to the new supplement (stopped) plus underlying atopic disease. AEC normalized after supplement discontinuation. No organ involvement identified.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the essential principles of eosinophilia evaluation?</p></div>`,
@@ -384,5 +385,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

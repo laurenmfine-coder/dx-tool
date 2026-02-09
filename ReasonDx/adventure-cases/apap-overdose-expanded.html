@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Acetaminophen Overdose - ReasonDx Socratic Case</title>
@@ -165,7 +166,7 @@ let currentStage = 0, score = 0, difficulty = 'standard';
     const stages = [
     {
         title: "The Intentional Ingestion",
-        content: `<div class="narrative"><p>A <span class="highlight">22-year-old woman</span> presents 6 hours after ingesting <span class="critical">"a whole bottle of Tylenol"</span> following an argument with her boyfriend. She estimates ~30 extra-strength tablets (500mg each = ~15g total).</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 88, BP 118/72, T 98.6°F<br><strong>Exam:</strong> Mild nausea, otherwise appears well<br><strong>Labs pending:</strong> APAP level, LFTs, INR, BMP</p></div>
+        content: `<div class="narrative"><p>A <span class="highlight">22-year-old woman</span> presents 6 hours after ingesting <span class="critical">"a whole bottle of acetaminophen (Tylenol)"</span> following an argument with her boyfriend. She estimates ~30 extra-strength tablets (500mg each = ~15g total).</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 88, BP 118/72, T 98.6°F<br><strong>Exam:</strong> Mild nausea, otherwise appears well<br><strong>Labs pending:</strong> APAP level, LFTs, INR, BMP</p></div>
         <div class="alert-box"><div class="alert-title">🚨 Patients Look WELL Early!</div><p>APAP toxicity is insidious. Patients are often asymptomatic in the first 24 hours despite ongoing hepatic damage. Don't be falsely reassured!</p></div>
         <div class="socratic-prompt"><h4>Initial Assessment</h4><p>Why is this presentation concerning despite the patient looking well?</p></div>`,
         hint_beginner: "APAP toxicity has a deceptive 'honeymoon' period where patients feel fine.",
@@ -189,7 +190,7 @@ let currentStage = 0, score = 0, difficulty = 'standard';
 This patient: 15g ingested = TOXIC RANGE
 
 Remember: Many products contain APAP!
-• Vicodin, Percocet (opioid combinations)
+• hydrocodone-acetaminophen (Vicodin), oxycodone-acetaminophen (Percocet) (opioid combinations)
 • NyQuil, Excedrin, cold medicines
 • Always ask specifically about ALL products</div></div>`,
             why_chain: [{q: "Why do patients feel fine initially?", a: "In Stage I (0-24 hours), the liver is being damaged but hasn't failed yet. Symptoms are nonspecific (nausea, malaise) or absent. This is the critical window for treatment."}, {q: "What's the maximum recommended daily dose?", a: "4g/day in healthy adults, 3g/day in chronic alcohol users or those with liver disease. Exceeding this repeatedly can cause chronic toxicity."}],
@@ -314,7 +315,7 @@ Patient's level (180) > treatment line (100)
     },
     {
         title: "Chronic/Repeated Ingestion",
-        content: `<div class="narrative"><p>A different patient presents with 3 days of taking "extra Tylenol" for back pain - about 6-8 tablets every 4-6 hours (~8-12g/day). She has chronic alcoholism.</p></div>
+        content: `<div class="narrative"><p>A different patient presents with 3 days of taking "extra acetaminophen (Tylenol)" for back pain - about 6-8 tablets every 4-6 hours (~8-12g/day). She has chronic alcoholism.</p></div>
         <div class="alert-box"><div class="alert-title">🚨 Nomogram Does NOT Apply!</div><p>Rumack-Matthew nomogram is only for single acute ingestion. Chronic/repeated supratherapeutic ingestion requires a different approach.</p></div>
         <div class="socratic-prompt"><h4>Special Populations</h4><p>When do you treat chronic APAP ingestion, and who is at highest risk?</p></div>`,
         hint_beginner: "Treat if any detectable APAP + elevated LFTs, or if total dose exceeds thresholds.",
@@ -592,5 +593,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Food Allergy - ReasonDx Socratic Case</title>
@@ -646,7 +647,7 @@ const stages = [
                         "correct": "Respiratory symptoms (throat tightness, stridor, wheezing, dyspnea, voice changes) indicate anaphylaxis requiring immediate epinephrine. Don't wait - antihistamines cannot reverse airway obstruction or cardiovascular collapse.",
                         "incorrect": "Isolated mild skin symptoms or single GI symptoms typically don't require epinephrine. The key is multi-system involvement OR respiratory/cardiovascular compromise = anaphylaxis = epinephrine immediately."
                 },
-                "teaching": "<h4>\ud83d\udc89 Epinephrine Indications</h4><p><strong>Give IMMEDIATELY for:</strong></p><ul><li>Respiratory: stridor, wheeze, throat tightness, hoarse voice</li><li>Cardiovascular: hypotension, syncope, severe dizziness</li><li>Multi-system involvement with rapid progression</li></ul><p style=\"margin-top:12px;\"><strong>Dosing:</strong> 0.01 mg/kg IM (max 0.5mg adult, 0.3mg child)<br>EpiPen Jr (0.15mg): 10-25 kg<br>EpiPen (0.3mg): >25 kg</p>",
+                "teaching": "<h4>\ud83d\udc89 Epinephrine Indications</h4><p><strong>Give IMMEDIATELY for:</strong></p><ul><li>Respiratory: stridor, wheeze, throat tightness, hoarse voice</li><li>Cardiovascular: hypotension, syncope, severe dizziness</li><li>Multi-system involvement with rapid progression</li></ul><p style=\"margin-top:12px;\"><strong>Dosing:</strong> 0.01 mg/kg IM (max 0.5mg adult, 0.3mg child)<br>epinephrine auto-injector (EpiPen) Jr (0.15mg): 10-25 kg<br>epinephrine auto-injector (EpiPen) (0.3mg): >25 kg</p>",
                 "points": 10
         }
 },
@@ -1152,5 +1153,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

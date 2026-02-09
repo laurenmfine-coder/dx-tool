@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Validation Roadmap | ReasonDx</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--bg2:#1e293b;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;--accent:#3b82f6;--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--purple:#8b5cf6;--teal:#14b8a6}
+[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#2563eb;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem}
+.header{text-align:center;margin-bottom:2.5rem}.header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--purple),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}.header p{color:var(--muted);font-size:.95rem}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:1.5rem}.back-link:hover{text-decoration:underline}
+.timeline{max-width:800px;margin:0 auto;position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:3px;background:var(--border);border-radius:2px}
+.phase{position:relative;margin-bottom:2rem;padding-left:2rem}
+.phase::before{content:'';position:absolute;left:-1.3rem;top:.3rem;width:16px;height:16px;border-radius:50%;border:3px solid var(--border);background:var(--bg)}
+.phase.done::before{background:var(--success);border-color:var(--success)}
+.phase.active::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(59,130,246,.3)}
+.phase.pending::before{background:var(--bg2);border-color:var(--muted)}
+.phase-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem}
+.phase.done .phase-card{border-color:var(--success);border-left:3px solid var(--success)}
+.phase.active .phase-card{border-color:var(--accent);border-left:3px solid var(--accent)}
+.phase-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.phase-title{font-size:1.05rem;font-weight:700}.phase-date{font-size:.8rem;color:var(--muted)}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.72rem;font-weight:600}
+.badge-done{background:var(--success-light);color:var(--success)}.badge-active{background:rgba(59,130,246,.15);color:var(--accent)}.badge-pending{background:rgba(148,163,184,.15);color:var(--muted)}
+.tasks{margin-top:.6rem;list-style:none;padding:0}.tasks li{font-size:.88rem;color:var(--text2);padding:.25rem 0;display:flex;align-items:center;gap:.4rem}
+.tasks li::before{font-size:.85rem}
+.tasks li.done::before{content:'✓';color:var(--success)}.tasks li.active::before{content:'◉';color:var(--accent)}.tasks li.pending::before{content:'○';color:var(--muted)}
+.progress-overview{max-width:800px;margin:0 auto 2.5rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;text-align:center}
+.prog-item .num{font-size:1.8rem;font-weight:800}.prog-item .label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.bar-full{background:var(--border);border-radius:6px;height:10px;overflow:hidden;max-width:800px;margin:0 auto 2.5rem}.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--success),var(--accent),var(--purple));transition:width 1s}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← Back to ReasonDx</a>
+<div class="header"><h1>🗺️ Validation Roadmap</h1><p>Content quality milestones and development phases</p></div>
+<div class="bar-full"><div class="bar-fill" id="overall-bar" style="width:0"></div></div>
+<div class="progress-overview" id="prog-overview"></div>
+<div class="timeline" id="timeline"></div>
+<script>
+const phases = [
+  {title:'Priority 1: Explanation Coverage',status:'done',date:'Feb 7–8, 2026',tasks:[
+    {t:'Write 1,877 explanations (programmatic + manual)',s:'done'},{t:'100% explanation fill rate achieved',s:'done'},{t:'Recovery after container crash: 116 microbiology restored',s:'done'}]},
+  {title:'Priority 2: Reinforcement Loops',status:'done',date:'Feb 7, 2026',tasks:[
+    {t:'Generate 60 sister questions across 12 specialties',s:'done'},{t:'Coverage: 50% → 75% full loops (183/244 topics)',s:'done'},{t:'3 questions per topic minimum for 20 high-impact topics',s:'done'}]},
+  {title:'Priority 3: Topic Mapping',status:'done',date:'Feb 8, 2026',tasks:[
+    {t:'Build 403-keyword → topicId dictionary',s:'done'},{t:'Map 2,094 questions to 296 topic IDs',s:'done'},{t:'Correct invalid/variant topic IDs',s:'done'},{t:'Achieve 100% mapping (2,094/2,094)',s:'done'}]},
+  {title:'Priority 4: Thin Topic Coverage',status:'done',date:'Feb 8, 2026',tasks:[
+    {t:'Generate 170 sister questions across 55 topics',s:'done'},{t:'Eliminate all 39 zero-MCQ topics',s:'done'},{t:'Eliminate all thin 1-2 MCQ topics',s:'done'},{t:'All 296 topic IDs at 3+ MCQs (100%)',s:'done'},{t:'Final quiz bank: 2,441 questions',s:'done'}]},
+  {title:'Priority 5: Platform Enhancements',status:'done',date:'Feb 8, 2026',tasks:[
+    {t:'Data Governance dashboard (live data)',s:'done'},{t:'Validation Roadmap page',s:'done'},{t:'SpacedRep wiring (244/244 topics — 100%)',s:'done'},{t:'GuidelinesAudit interface (30 guidelines tracked)',s:'done'},{t:'Board Prep coverage dashboard',s:'done'},{t:'Deep Dive links verified (244/244)',s:'done'},{t:'Mechanism modules verified (244/244)',s:'done'}]},
+  {title:'Phase 2: Expert Review',status:'pending',date:'Target: Q2 2026',tasks:[
+    {t:'Subject matter expert review of 220 new questions',s:'pending'},{t:'Clinical accuracy verification by specialty',s:'pending'},{t:'Guideline concordance check (AHA/IDSA/ACOG)',s:'pending'}]},
+  {title:'Phase 3: Learner Analytics',status:'pending',date:'Target: Q3 2026',tasks:[
+    {t:'Item difficulty calibration from learner performance',s:'pending'},{t:'Discrimination index calculation',s:'pending'},{t:'Adaptive question selection algorithm',s:'pending'},{t:'Learning analytics dashboard for educators',s:'pending'}]}
+];
+const done=phases.filter(p=>p.status==='done').length,active=phases.filter(p=>p.status==='active').length;
+const allTasks=phases.flatMap(p=>p.tasks),doneTasks=allTasks.filter(t=>t.s==='done').length;
+const pct=Math.round(doneTasks/allTasks.length*100);
+document.getElementById('overall-bar').style.width=pct+'%';
+document.getElementById('prog-overview').innerHTML=[
+  {n:pct+'%',l:'Overall Progress'},{n:done+'/'+phases.length,l:'Phases Complete'},{n:doneTasks,l:'Tasks Done'},{n:allTasks.length-doneTasks,l:'Remaining'}
+].map(i=>'<div class="prog-item"><div class="num">'+i.n+'</div><div class="label">'+i.l+'</div></div>').join('');
+document.getElementById('timeline').innerHTML=phases.map(p=>'<div class="phase '+p.status+'"><div class="phase-card"><div class="phase-header"><span class="phase-title">'+p.title+'</span><span class="badge badge-'+p.status+'">'+p.status.toUpperCase()+'</span></div><div class="phase-date">'+p.date+'</div><ul class="tasks">'+p.tasks.map(t=>'<li class="'+t.s+'">'+t.t+'</li>').join('')+'</ul></div></div>').join('');
+</script>
+<script src="../data/rdx-persist.js"></script>
+</body></html>

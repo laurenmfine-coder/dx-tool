@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Referral Letter Generator | Interprofessional Communication</title>
@@ -426,7 +427,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 }
 
     </style>
-        <link rel="stylesheet" href="dx-case-nav.css">
+        <link rel="stylesheet" href="../dx-case-nav.css">
 </head>
 <body>
 
@@ -447,11 +448,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </a>
             <div class="dx-nav-links">
                 <a href="index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../index.html#mechanism" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -881,7 +882,7 @@ Email: [Email Address]
                     diagnosis: 'Multiple food allergies with suspected EoE',
                     reason: 'Requesting EGD with esophageal biopsies to evaluate for eosinophilic esophagitis. Patient with known IgE-mediated food allergies now with dysphagia and food impaction symptoms.',
                     history: '• Known IgE-mediated allergies: peanut, tree nuts, egg\n• History of eczema (controlled) and allergic rhinitis\n• 6 months progressive dysphagia\n• Describes food "getting stuck" - drinks water to help\n• One episode of food impaction (resolved spontaneously)\n• Avoids certain textures\n• No weight loss, adequate growth',
-                    management: '• Strict allergen avoidance for known IgE-mediated allergies\n• EpiPen for anaphylaxis risk\n• Cetirizine 10mg daily for rhinitis\n• No current GI-directed therapy',
+                    management: '• Strict allergen avoidance for known IgE-mediated allergies\n• epinephrine auto-injector (EpiPen) for anaphylaxis risk\n• Cetirizine 10mg daily for rhinitis\n• No current GI-directed therapy',
                     questions: '1. Please perform EGD with biopsies (proximal and distal esophagus)\n2. If EoE confirmed, should we trial PPI before dietary elimination?\n3. Would you recommend testing-directed vs empiric elimination diet?\n4. How should we coordinate follow-up and co-management?'
                 },
                 vcd: {
@@ -907,8 +908,8 @@ Email: [Email Address]
                     diagnosis: 'Peanut Anaphylaxis - requires 504 Plan',
                     reason: 'Request for 504 Plan accommodations for student with life-threatening peanut allergy and history of anaphylaxis.',
                     history: '• Confirmed peanut allergy (IgE 45 kU/L, Ara h 2 positive)\n• History of anaphylaxis at school (required EpiPen)\n• Symptoms: hives, facial swelling, vomiting within 15 minutes\n• No other food allergies identified\n• No asthma',
-                    management: '• Strict peanut avoidance\n• EpiPens prescribed (2) - one for school, one for home\n• Emergency Action Plan provided\n• Parents trained on EpiPen administration\n• Medical alert bracelet worn',
-                    questions: '504 ACCOMMODATIONS REQUESTED:\n1. Peanut-free table in cafeteria\n2. No peanut products in classroom\n3. EpiPen stored in nurse\'s office AND classroom\n4. Trained staff on field trips\n5. Communication plan for substitute teachers\n6. Permission to carry backup EpiPen'
+                    management: '• Strict peanut avoidance\n• EpiPens prescribed (2) - one for school, one for home\n• Emergency Action Plan provided\n• Parents trained on epinephrine auto-injector (EpiPen) administration\n• Medical alert bracelet worn',
+                    questions: '504 ACCOMMODATIONS REQUESTED:\n1. Peanut-free table in cafeteria\n2. No peanut products in classroom\n3. epinephrine auto-injector (EpiPen) stored in nurse\'s office AND classroom\n4. Trained staff on field trips\n5. Communication plan for substitute teachers\n6. Permission to carry backup epinephrine auto-injector (EpiPen)'
                 }
             };
             
@@ -1041,5 +1042,6 @@ Email: [Email Address]
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "Home", platformRoot: "" }); });</script>
 <script src="../dx-progress.js"></script>
 <script src="dx-tools-integration.js"></script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

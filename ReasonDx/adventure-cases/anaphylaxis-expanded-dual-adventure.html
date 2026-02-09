@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Anaphylaxis | Dual-Mode Clinical Case</title>
@@ -158,8 +159,8 @@
             title: "Pediatric Anaphylaxis Recognition",
             narrative: `A <span class="highlight">4-year-old boy</span> develops <span class="critical">hives, facial swelling, and vomiting</span> after eating a peanut butter cookie.<br><br><strong>Vitals:</strong> HR 150, BP 70/40, RR 32<br><strong>Exam:</strong> Diffuse urticaria, periorbital edema, drooling<br><strong>Weight:</strong> 18 kg`,
             question: "What is the correct epinephrine dose for this child?",
-            options: [{text:"0.01 mg/kg IM (max 0.3 mg) = 0.18 mg for this 18 kg child",correct:true,points:10},{text:"0.5 mg IM like adults",correct:false,points:2},{text:"0.01 mg/kg IV push",correct:false,points:3},{text:"Benadryl first, then epinephrine if no improvement",correct:false,points:0}],
-            teaching: `<h4>Pediatric Epinephrine Dosing</h4><ul><li><strong>0.01 mg/kg IM</strong> (1:1000 concentration)</li><li>Maximum 0.3 mg in children, 0.5 mg in adolescents/adults</li><li>EpiPen Jr (0.15 mg) for 15-30 kg</li><li>EpiPen (0.3 mg) for > 30 kg</li><li>Anterolateral thigh is preferred site</li></ul>`
+            options: [{text:"0.01 mg/kg IM (max 0.3 mg) = 0.18 mg for this 18 kg child",correct:true,points:10},{text:"0.5 mg IM like adults",correct:false,points:2},{text:"0.01 mg/kg IV push",correct:false,points:3},{text:"diphenhydramine (Benadryl) first, then epinephrine if no improvement",correct:false,points:0}],
+            teaching: `<h4>Pediatric Epinephrine Dosing</h4><ul><li><strong>0.01 mg/kg IM</strong> (1:1000 concentration)</li><li>Maximum 0.3 mg in children, 0.5 mg in adolescents/adults</li><li>epinephrine auto-injector (EpiPen) Jr (0.15 mg) for 15-30 kg</li><li>epinephrine auto-injector (EpiPen) (0.3 mg) for > 30 kg</li><li>Anterolateral thigh is preferred site</li></ul>`
         },{
             title: "Pediatric Adjunctive Treatment",
             narrative: `Epinephrine given. Child still has some hives but breathing improved.`,
@@ -182,8 +183,8 @@
             title: "Pediatric Discharge Planning",
             narrative: `Child stable and ready for discharge.`,
             question: "What is essential for pediatric discharge after anaphylaxis?",
-            options: [{text:"EpiPen Jr or EpiPen (weight-based) × 2, school/daycare action plan, allergy referral",correct:true,points:10},{text:"Benadryl prescription only",correct:false,points:2},{text:"Verbal instructions sufficient",correct:false,points:1},{text:"No specific requirements",correct:false,points:0}],
-            teaching: `<h4>Pediatric Discharge Essentials</h4><ul><li><strong>EpiPen Jr</strong> (0.15 mg) for 15-30 kg</li><li><strong>EpiPen</strong> (0.3 mg) for > 30 kg</li><li>School/daycare anaphylaxis action plan</li><li>Caregiver education on auto-injector use</li><li>Allergy referral for testing</li></ul>`
+            options: [{text:"epinephrine auto-injector (EpiPen) Jr or epinephrine auto-injector (EpiPen) (weight-based) × 2, school/daycare action plan, allergy referral",correct:true,points:10},{text:"diphenhydramine (Benadryl) prescription only",correct:false,points:2},{text:"Verbal instructions sufficient",correct:false,points:1},{text:"No specific requirements",correct:false,points:0}],
+            teaching: `<h4>Pediatric Discharge Essentials</h4><ul><li><strong>epinephrine auto-injector (EpiPen) Jr</strong> (0.15 mg) for 15-30 kg</li><li><strong>epinephrine auto-injector (EpiPen)</strong> (0.3 mg) for > 30 kg</li><li>School/daycare anaphylaxis action plan</li><li>Caregiver education on auto-injector use</li><li>Allergy referral for testing</li></ul>`
         },{
             title: "Pediatric Long-term Management",
             narrative: `Planning for follow-up care.`,
@@ -332,5 +333,6 @@
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

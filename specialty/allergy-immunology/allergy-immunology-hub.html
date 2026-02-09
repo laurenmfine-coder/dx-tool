@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allergy & Immunology Learning Hub | Dx Learning Ecosystem</title>
@@ -542,14 +543,14 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 }
 
     </style>
-        <link rel="stylesheet" href="dx-case-nav.css">
+        <link rel="stylesheet" href="../../dx-case-nav.css">
 </head>
 <body>
 
     <!-- UNIFIED DX NAVIGATION -->
     <nav class="dx-nav">
         <div class="dx-nav-inner">
-            <a href="index.html" class="dx-nav-brand">
+            <a href="../../index.html" class="dx-nav-brand">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
     <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
     <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
@@ -562,12 +563,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </svg>
             </a>
             <div class="dx-nav-links">
-                <a href="index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../../index.html#mechanism" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -575,7 +576,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <!-- Header -->
     <header class="header">
-        <a href="CoachDx/index.html" class="logo">
+        <a href="../../CoachDx/index.html" class="logo">
             <span class="logo-icon">🧬</span>
             <div>
                 <div class="logo-text">Allergy & Immunology Hub</div>
@@ -613,7 +614,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     
     <!-- Platform Cards -->
     <section class="platforms">
-        <a href="CoachDx/index.html" class="platform-card">
+        <a href="../../CoachDx/index.html" class="platform-card">
             <div class="platform-icon">💬</div>
             <div class="platform-name">CoachDx A/I Cases</div>
             <div class="platform-desc">Socratic coaching through A/I clinical scenarios. AI mentor guides your diagnostic reasoning with questions tailored to your level.</div>
@@ -625,7 +626,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </a>
         
-        <a href="mechanism/type1-hypersensitivity.html" class="platform-card">
+        <a href="https://www.ncbi.nlm.nih.gov/books/?term=type1+hypersensitivity" target="_blank" title="Learn more via StatPearls" class="platform-card">
             <div class="platform-icon">🔬</div>
             <div class="platform-name">MechanismDx Modules</div>
             <div class="platform-desc">Interactive pathophysiology learning. Understand the mechanisms behind allergic and immunologic diseases.</div>
@@ -636,7 +637,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </a>
         
-        <a href="CoachDx/sbar-trainer.html" class="platform-card">
+        <a href="../../CoachDx/sbar-trainer.html" class="platform-card">
             <div class="platform-icon">📞</div>
             <div class="platform-name">SBAR Trainer</div>
             <div class="platform-desc">Practice urgent A/I communications. Anaphylaxis calls, drug allergy consults, and biologic reaction reporting.</div>
@@ -658,7 +659,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </a>
         
-        <a href="referral-letter-generator.html" class="platform-card">
+        <a href="../../tools/referral-letter-generator.html" class="platform-card">
             <div class="platform-icon">✉️</div>
             <div class="platform-name">Referral Letter Generator</div>
             <div class="platform-desc">Practice writing professional consultation requests and referral letters to and from A/I specialists.</div>
@@ -669,7 +670,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </a>
         
-        <a href="emr-simulator.html" class="platform-card">
+        <a href="../../tools/emr-simulator.html" class="platform-card">
             <div class="platform-icon">🧪</div>
             <div class="platform-name">PredictLabs A/I</div>
             <div class="platform-desc">Interactive lab interpretation for allergy and immunology. IgE panels, tryptase, complement, and immunoglobulin levels.</div>
@@ -852,10 +853,10 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         <h2>Start Your A/I Learning Journey</h2>
         <p>Select your role and dive into specialty-focused cases</p>
         <div class="cta-buttons">
-            <a href="CoachDx/index.html" class="btn btn-primary">
+            <a href="../../CoachDx/index.html" class="btn btn-primary">
                 📚 Browse A/I Cases
             </a>
-            <a href="CoachDx/mentor-chat.html" class="btn btn-secondary">
+            <a href="../../CoachDx/mentor-chat.html" class="btn btn-secondary">
                 💬 Start First Case
             </a>
         </div>
@@ -863,7 +864,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     
     <!-- Footer -->
     <footer class="footer">
-        <p>Allergy & Immunology Hub — Part of the <a href="CoachDx/index.html">Dx Learning Ecosystem</a></p>
+        <p>Allergy & Immunology Hub — Part of the <a href="../../CoachDx/index.html">Dx Learning Ecosystem</a></p>
         <p style="margin-top: 8px;">Created for medical education</p>
     </footer>
     
@@ -987,7 +988,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <!-- DxSuite AI Tutor Integration -->
     <div data-dx-tutor
-         data-module-title="Allergy </body> Immunology Learning Hub"
+         data-module-title="Allergy <script src="../../data/rdx-persist.js"></script>
+</body> Immunology Learning Hub"
          data-key-points="clinical education, patient care, evidence-based practice"
          data-objectives="Apply clinical knowledge, improve patient outcomes"
          style="display:none;"></div>

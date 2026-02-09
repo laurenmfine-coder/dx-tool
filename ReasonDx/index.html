@@ -217,6 +217,7 @@
             body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
         }
     </style>
+<script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -243,11 +244,11 @@
                             <span class="dropdown-icon">⚙️</span>
                             <div class="dropdown-text"><strong>MechanismDx</strong><small>Pathophysiology modules</small></div>
                         </a>
-                        <a href="../microbiology/index.html" class="dropdown-item">
+                        <a href="../quickref-hub.html#microbiology" class="dropdown-item">
                             <span class="dropdown-icon">🦠</span>
                             <div class="dropdown-text"><strong>Microbiology</strong><small>Bacteria, viruses, fungi</small></div>
                         </a>
-                        <a href="../pharmacology/index.html" class="dropdown-item">
+                        <a href="../quickref-hub.html#pharmacology" class="dropdown-item">
                             <span class="dropdown-icon">💊</span>
                             <div class="dropdown-text"><strong>Pharmacology</strong><small>Drug mechanisms & uses</small></div>
                         </a>
@@ -403,6 +404,10 @@
             <a href="../learn-hub.html" class="tool-card"><div class="tool-icon">📖</div><div class="tool-name">Learn Hub</div><div class="tool-desc">Guided paths</div></a>
             <a href="../EPASystem/epa-dashboard.html" class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">EPA Dashboard</div><div class="tool-desc">Competency tracking</div></a>
             <a href="ecg/ecg-generator.html" class="tool-card"><div class="tool-icon">📈</div><div class="tool-name">ECG Lab</div><div class="tool-desc">Generate rhythms</div></a>
+            <a href="data-governance.html" class="tool-card"><div class="tool-icon">🛡️</div><div class="tool-name">Data Governance</div><div class="tool-desc">Content integrity</div></a>
+            <a href="board-prep-coverage.html" class="tool-card"><div class="tool-icon">🎯</div><div class="tool-name">Board Coverage</div><div class="tool-desc">Specialty mastery</div></a>
+            <a href="guidelines-audit.html" class="tool-card"><div class="tool-icon">📋</div><div class="tool-name">Guidelines Audit</div><div class="tool-desc">Update tracker</div></a>
+            <a href="validation-roadmap.html" class="tool-card"><div class="tool-icon">🗺️</div><div class="tool-name">Roadmap</div><div class="tool-desc">Quality milestones</div></a>
         </div>
         
         <!-- Case Library -->
@@ -660,7 +665,10 @@
                 }));
                 updateNavForUser(e.detail.profile);
             } else if (e.detail.event === 'SIGNED_OUT') {
-                localStorage.removeItem('reasondx-user');
+                // Only clear if explicit sign-out, not session-not-found
+                if (window._dxExplicitSignOut) {
+                    localStorage.removeItem('reasondx-user');
+                }
                 updateNavForGuest();
             }
         });
@@ -703,5 +711,6 @@
             }
         });
     </script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

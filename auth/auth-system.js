@@ -141,11 +141,15 @@
 
     async function signOut() {
         try {
+            // Flag so handleSignedOut knows to clear localStorage
+            window._dxExplicitSignOut = true;
+            localStorage.removeItem('reasondx-user');
             const { error } = await supabaseClient.auth.signOut();
             if (error) throw error;
             return { success: true };
         } catch (error) {
             console.error('Sign out error:', error);
+            window._dxExplicitSignOut = false;
             return { success: false, error: error.message };
         }
     }
@@ -243,6 +247,9 @@
         return userProfile?.subscription_tier || null;
     }
 
+    // Standardized redirect key (auth-guard.js and inline guards both use this)
+    var REDIRECT_KEY = 'reasondx-redirect';
+
     function requireAuth(redirectUrl = window.location.href) {
         if (!isLoggedIn()) {
             sessionStorage.setItem('dxsuite-redirect-after-login', redirectUrl);
@@ -300,14 +307,40 @@
     }
 
     function handleSignedOut() {
+        // Only clear localStorage if user explicitly signed out (not on session-not-found at page load)
+        // The _explicitSignOut flag is set by the signOut() function
+        if (window._dxExplicitSignOut) {
+            localStorage.removeItem('reasondx-user');
+            window._dxExplicitSignOut = false;
+        }
+        
         if (document.body.hasAttribute('data-require-auth')) {
             window.location.href = '/auth/login.html';
         }
     }
 
     function handleSignedIn() {
-        const redirectUrl = sessionStorage.getItem('dxsuite-redirect-after-login');
+        // Bridge Supabase auth → reasondx-user localStorage (used by 769 inline guards)
+        if (currentUser) {
+            const fullName = userProfile?.full_name 
+                || currentUser?.user_metadata?.full_name 
+                || currentUser?.email?.split('@')[0] || 'Student';
+            const existing = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+            localStorage.setItem('reasondx-user', JSON.stringify({
+                ...existing,
+                email: currentUser.email,
+                name: fullName,
+                plan: userProfile?.subscription_tier || existing.plan || 'free',
+                supabaseId: currentUser.id,
+                lastLogin: new Date().toISOString()
+            }));
+        }
+
+        // Handle post-login redirect (check both key names)
+        const redirectUrl = sessionStorage.getItem('reasondx-redirect')
+            || sessionStorage.getItem('dxsuite-redirect-after-login');
         if (redirectUrl) {
+            sessionStorage.removeItem('reasondx-redirect');
             sessionStorage.removeItem('dxsuite-redirect-after-login');
             window.location.href = redirectUrl;
         }

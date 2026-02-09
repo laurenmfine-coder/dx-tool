@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Toxidromes | Dual-Mode Clinical Adventure</title>
@@ -152,7 +153,7 @@
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the evidence level for the standard treatment?</p>
-                </div><div class="boards-tip"><div class="boards-tip-title">📚 "Mad as a Hatter, Blind as a Bat..."</div><table class="comparison-table"><tr><th>Mnemonic</th><th>Finding</th></tr><tr><td>Blind as a bat</td><td>Mydriasis, blurred vision</td></tr><tr><td>Red as a beet</td><td>Flushed skin</td></tr><tr><td>Hot as a hare</td><td>Hyperthermia</td></tr><tr><td>Dry as a bone</td><td>Dry skin, mucous membranes</td></tr><tr><td>Mad as a hatter</td><td>Delirium, hallucinations</td></tr><tr><td>Full as a flask</td><td>Urinary retention</td></tr><tr><td>Tachy as a...</td><td>Tachycardia</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Causes & Treatment</div><div class="pathway"><strong>Causes:</strong><br>• Antihistamines (diphenhydramine!)<br>• TCAs, antipsychotics<br>• Jimson weed, deadly nightshade<br>• Atropine, scopolamine<br><br><strong>Key distinction from sympathomimetic:</strong><br>DRY skin (no sweating)<br><br><strong>Antidote:</strong> Physostigmine<br>(use carefully - can cause seizures, bradycardia)${state.mode === 'peds' ? '<br><br><strong>Peds:</strong> Benadryl OD very common!' : ''}</div></div><button class="btn" onclick="nextStage()">Cholinergic →</button></div></div>`;
+                </div><div class="boards-tip"><div class="boards-tip-title">📚 "Mad as a Hatter, Blind as a Bat..."</div><table class="comparison-table"><tr><th>Mnemonic</th><th>Finding</th></tr><tr><td>Blind as a bat</td><td>Mydriasis, blurred vision</td></tr><tr><td>Red as a beet</td><td>Flushed skin</td></tr><tr><td>Hot as a hare</td><td>Hyperthermia</td></tr><tr><td>Dry as a bone</td><td>Dry skin, mucous membranes</td></tr><tr><td>Mad as a hatter</td><td>Delirium, hallucinations</td></tr><tr><td>Full as a flask</td><td>Urinary retention</td></tr><tr><td>Tachy as a...</td><td>Tachycardia</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Causes & Treatment</div><div class="pathway"><strong>Causes:</strong><br>• Antihistamines (diphenhydramine!)<br>• TCAs, antipsychotics<br>• Jimson weed, deadly nightshade<br>• Atropine, scopolamine<br><br><strong>Key distinction from sympathomimetic:</strong><br>DRY skin (no sweating)<br><br><strong>Antidote:</strong> Physostigmine<br>(use carefully - can cause seizures, bradycardia)${state.mode === 'peds' ? '<br><br><strong>Peds:</strong> diphenhydramine (Benadryl) OD very common!' : ''}</div></div><button class="btn" onclick="nextStage()">Cholinergic →</button></div></div>`;
     };
 
     window.render_cholinergic = function() {
@@ -549,5 +550,6 @@
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

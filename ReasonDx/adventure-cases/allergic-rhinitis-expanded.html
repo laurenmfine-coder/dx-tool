@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Allergic Rhinitis - Expanded Deep Dive Adventure</title>
@@ -199,7 +200,7 @@
                     { id: "D", text: "Yes, but only if she develops asthma", outcome: "Too restrictive", feedback: "Waiting for asthma is unnecessary. In fact, immunotherapy for AR may PREVENT asthma development. It's appropriate for AR alone.", points: 4, isOptimal: false }
                 ],
                 whyChain: { title: "WHY consider immunotherapy?", steps: ["Only treatment that modifies the underlying allergic disease", "Can reduce symptoms and medication requirements long-term", "Effects persist after treatment completion (disease remission)", "May prevent progression to asthma", "May prevent development of new sensitizations"] },
-                mechanism: { title: "Allergen Immunotherapy", content: "MECHANISM:\n• Induces tolerance to allergens\n• Shifts immune response from Th2 to Th1\n• Induces regulatory T cells\n• Increases blocking IgG4 antibodies\n• Decreases IgE over time\n\nINDICATIONS:\n• Confirmed IgE-mediated rhinitis\n• Symptoms despite pharmacotherapy\n• Desire to reduce long-term medications\n• Allergen avoidance not possible\n• Motivated, compliant patient\n\nROUTES:\n\nSubcutaneous (SCIT):\n• Weekly shots during buildup (3-6 months)\n• Monthly maintenance shots (3-5 years)\n• Must be given in medical office\n• Small risk of systemic reactions\n\nSublingual (SLIT):\n• Daily tablet or drops under tongue\n• Can be taken at home after first dose\n• FDA-approved tablets for grass, ragweed, dust mite\n• Lower risk of anaphylaxis\n\nEFFICACY:\n• 30-40% symptom reduction\n• Reduced medication use\n• Effects may persist years after stopping" },
+                mechanism: { title: "Allergen Immunotherapy", content: "MECHANISM:\n• Induces tolerance to allergens\n• Shifts immune response from Th2 to Th1\n• Induces regulatory T cells\n• Increases blocking IgG4 antibodies\n• Decreases IgE over time\n\nINDICATIONS:\n• Confirmed IgE-mediated rhinitis\n• Symptoms despite pharmacotherapy\n• Desire to reduce long-term medications\n• Allergen avoidance not possible\n• Motivated, compliant patient\n\nROUTES:\n\nSubcutaneous (SCIT):\n• Weekly shots during buildup (3-6 months)\n• Monthly maintenance shots (3-5 years)\n• Must be given in medical office\n• Small risk of systemic reactions\n\nSublingual (SLIT):\n• Daily tablet or drops under tongue\n• Can be taken at home after first dose\n• approved tablets for grass, ragweed, dust mite\n• Lower risk of anaphylaxis\n\nEFFICACY:\n• 30-40% symptom reduction\n• Reduced medication use\n• Effects may persist years after stopping" },
                 pearl: "Immunotherapy is the only treatment that can modify the natural history of allergic disease - it's not just symptom control, it's disease modification.",
                 pitfall: "Immunotherapy requires commitment: SCIT is 3-5 years of shots; SLIT is daily tablets for 3-5 years. Ensure patient is motivated before starting."
             },
@@ -685,5 +686,6 @@
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

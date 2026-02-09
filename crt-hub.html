@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <script>
-(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -86,6 +86,7 @@ footer a{color:var(--amber);text-decoration:none}
 .controls{flex-direction:column}
 }
 </style>
+<script src="dx-user-bar.js" defer></script>
 </head>
 <body>
 
@@ -273,5 +274,6 @@ function filterCRTs() {
 init();
 </script>
 <script src="dx-progress.js"></script>
+<script src="data/rdx-persist.js"></script>
 </body>
 </html>

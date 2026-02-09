@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Integrations Hub | DxSuite</title>
@@ -227,29 +228,29 @@
         
         <div class="section-title">🔌 Platform Integrations</div>
         <div class="integrations-grid">
-            <!-- AMBOSS -->
+            <!-- traditional reference platforms -->
             <div class="integration-card">
                 <div class="integration-header">
                     <div class="integration-logo amboss">A</div>
                     <div class="integration-info">
-                        <h3>AMBOSS</h3>
+                        <h3>traditional reference platforms</h3>
                         <p>Medical knowledge library</p>
                     </div>
                 </div>
                 <div class="integration-body">
-                    <p>AMBOSS excels at comprehensive medical references. DxSuite adds interactive case reasoning and pathophysiology mechanisms.</p>
+                    <p>traditional reference platforms excels at comprehensive medical references. DxSuite adds interactive case reasoning and pathophysiology mechanisms.</p>
                     <div class="integration-features">
                         <div class="integration-feature">
                             <span class="icon">🔗</span>
-                            <span class="text"><strong>Deep links:</strong> Our modules link to relevant AMBOSS articles for deeper reading</span>
+                            <span class="text"><strong>Deep links:</strong> Our modules link to relevant traditional reference platforms articles for deeper reading</span>
                         </div>
                         <div class="integration-feature">
                             <span class="icon">🧠</span>
-                            <span class="text"><strong>Complementary focus:</strong> Read AMBOSS for facts, use DxSuite to practice applying them</span>
+                            <span class="text"><strong>Complementary focus:</strong> Read traditional reference platforms for facts, use DxSuite to practice applying them</span>
                         </div>
                         <div class="integration-feature">
                             <span class="icon">📊</span>
-                            <span class="text"><strong>Gap filling:</strong> DxSuite's cases test what AMBOSS teaches</span>
+                            <span class="text"><strong>Gap filling:</strong> DxSuite's cases test what traditional reference platforms teaches</span>
                         </div>
                     </div>
                     <div class="integration-actions">
@@ -488,7 +489,7 @@
                     <span class="workflow-arrow">→</span>
                     <div class="workflow-step"><span class="platform">DxSuite</span> Review mechanism</div>
                     <span class="workflow-arrow">→</span>
-                    <div class="workflow-step"><span class="platform">AMBOSS</span> Deep reading</div>
+                    <div class="workflow-step"><span class="platform">traditional reference platforms</span> Deep reading</div>
                     <span class="workflow-arrow">→</span>
                     <div class="workflow-step"><span class="platform">UWorld</span> Test yourself</div>
                 </div>
@@ -550,5 +551,6 @@
             alert('Quizlet Export\n\nThis will generate a Quizlet-compatible file:\n• Tab-separated format\n• Ready for import\n• Shareable with classmates');
         }
     </script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

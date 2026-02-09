@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Asthma Phenotyping - Expanded Deep Dive Adventure</title>
@@ -215,7 +216,7 @@
                     { id: "D", text: "Eosinophilic granulomatosis with polyangiitis - check ANCA", outcome: "No systemic features", feedback: "EGPA (Churg-Strauss) involves systemic vasculitis features (neuropathy, skin lesions, cardiac involvement). This patient has classic AERD triad without systemic features.", points: 4, isOptimal: false }
                 ],
                 whyChain: { title: "WHY aspirin desensitization for AERD?", steps: ["AERD caused by COX-1 inhibition → leukotriene surge", "Desensitization induces tolerance to COX-1 inhibition", "Reduces nasal polyp regrowth", "Decreases sinus surgeries", "Improves asthma control and reduces OCS"] },
-                mechanism: { title: "AERD (Samter's Triad)", content: "TRIAD:\n1. Asthma (often severe)\n2. Nasal polyps (recurrent)\n3. NSAID/aspirin sensitivity\n\nPATHOPHYSIOLOGY:\n• COX-1 inhibition → arachidonic acid shunted to LOX\n• Overproduction of cysteinyl leukotrienes\n• NOT IgE-mediated (not true allergy)\n\nASPIRIN DESENSITIZATION:\n• Done in monitored setting over 2 days\n• Induces tolerance to COX-1 inhibition\n• Maintenance: aspirin 650-1300mg daily\n• Benefits: Fewer surgeries, less steroids, better smell\n\nBIOLOGICS FOR AERD:\n• Dupilumab: FDA-approved for CRSwNP, helps asthma\n• Mepolizumab: May help eosinophilic component\n• Omalizumab: Less effective (not IgE-driven)\n\nAVOIDANCE:\n• All NSAIDs (except COX-2 selective)\n• Acetaminophen usually safe" },
+                mechanism: { title: "AERD (Samter's Triad)", content: "TRIAD:\n1. Asthma (often severe)\n2. Nasal polyps (recurrent)\n3. NSAID/aspirin sensitivity\n\nPATHOPHYSIOLOGY:\n• COX-1 inhibition → arachidonic acid shunted to LOX\n• Overproduction of cysteinyl leukotrienes\n• NOT IgE-mediated (not true allergy)\n\nASPIRIN DESENSITIZATION:\n• Done in monitored setting over 2 days\n• Induces tolerance to COX-1 inhibition\n• Maintenance: aspirin 650-1300mg daily\n• Benefits: Fewer surgeries, less steroids, better smell\n\nBIOLOGICS FOR AERD:\n• Dupilumab: indicated for CRSwNP, helps asthma\n• Mepolizumab: May help eosinophilic component\n• Omalizumab: Less effective (not IgE-driven)\n\nAVOIDANCE:\n• All NSAIDs (except COX-2 selective)\n• Acetaminophen usually safe" },
                 pearl: "If a patient with nasal polyps reports 'ibuprofen doesn't work for my headaches,' probe deeper - they may be describing AERD symptoms, not lack of efficacy.",
                 pitfall: "Don't attempt aspirin desensitization in unstable asthma - patients must be optimized first with FEV1 >70% and no recent exacerbation."
             },
@@ -597,5 +598,6 @@ window.rdxShowDebrief = function() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

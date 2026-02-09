@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Contact Dermatitis - Expanded Deep Dive Adventure</title>
@@ -98,7 +99,7 @@
                     { id: "D", text: "Skin biopsy is required to confirm the diagnosis", outcome: "Not routinely needed", feedback: "Biopsy shows spongiotic dermatitis in ACD but doesn't identify the causative allergen. Patch testing identifies specific triggers for avoidance counseling.", points: 3, isOptimal: false }
                 ],
                 whyChain: { title: "WHY is patch testing read at 48 AND 96 hours?", steps: ["Type IV hypersensitivity is a DELAYED reaction", "Some reactions take 72-96 hours to develop fully", "Early reading only may miss positive reactions", "Irritant reactions may fade by 96 hours (helps distinguish)", "Some allergens (steroids, neomycin) classically have late reactions"] },
-                mechanism: { title: "Patch Testing", content: "PROCEDURE:\n1. Apply allergens to skin (usually back)\n2. Cover with occlusive patches\n3. Patient keeps dry for 48 hours\n4. Remove patches at 48 hours, mark sites\n5. First reading at 48 hours\n6. Second reading at 96 hours (or 72-168h)\n\nREADING RESULTS:\n• Negative: No reaction\n• 1+: Erythema, slight infiltration\n• 2+: Papules, vesicles, edema\n• 3+: Spreading, bullae, ulceration\n• IR: Irritant reaction (not allergy)\n\nSTANDARD SERIES:\n• TRUE Test (FDA approved) - 36 allergens\n• North American Standard Series - 80+ allergens\n• Supplemental series (cosmetics, metals, etc.)\n\nCONTRAINDICATIONS:\n• Active dermatitis on testing area\n• Recent immunosuppression\n• Recent UV exposure\n• Pregnancy (relative)" },
+                mechanism: { title: "Patch Testing", content: "PROCEDURE:\n1. Apply allergens to skin (usually back)\n2. Cover with occlusive patches\n3. Patient keeps dry for 48 hours\n4. Remove patches at 48 hours, mark sites\n5. First reading at 48 hours\n6. Second reading at 96 hours (or 72-168h)\n\nREADING RESULTS:\n• Negative: No reaction\n• 1+: Erythema, slight infiltration\n• 2+: Papules, vesicles, edema\n• 3+: Spreading, bullae, ulceration\n• IR: Irritant reaction (not allergy)\n\nSTANDARD SERIES:\n• TRUE Test (approved) - 36 allergens\n• North American Standard Series - 80+ allergens\n• Supplemental series (cosmetics, metals, etc.)\n\nCONTRAINDICATIONS:\n• Active dermatitis on testing area\n• Recent immunosuppression\n• Recent UV exposure\n• Pregnancy (relative)" },
                 pearl: "Patch testing requires TWO readings - reactions may not appear until 96+ hours. Patients should return for late reading even if first reading is negative.",
                 pitfall: "Skin prick testing and specific IgE testing are WRONG tests for contact dermatitis - they detect Type I (IgE) reactions, not Type IV (T-cell) reactions."
             },
@@ -559,5 +560,6 @@
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

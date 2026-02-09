@@ -75,7 +75,7 @@ Tryptase: 5.2 ng/mL (normal)`,
 - Recurrent polyps despite adequate surgery
 - Elevated IgE with aeroallergen sensitization
 
-FDA-approved biologics for CRSwNP:
+approved biologics for CRSwNP:
 1. **Dupilumab (Dupixent)**: Anti-IL-4Rα; also approved for his asthma. Would treat BOTH conditions with one drug.
 2. **Omalizumab (Xolair)**: Anti-IgE; his IgE qualifies. Also helps asthma.
 3. **Mepolizumab (Nucala)**: Anti-IL-5; approved for CRSwNP and severe eosinophilic asthma.
@@ -102,7 +102,7 @@ Many ENTs now start biologics before revision surgery or use them to maintain re
         'CRSwNP with asthma strongly suggests Type 2 (eosinophilic) inflammation',
         'Always consider AERD in patients with nasal polyps + asthma, even without known NSAID reactions',
         'Blood eosinophils >150-300 and total IgE help identify patients likely to respond to biologics',
-        'Dupilumab, omalizumab, and mepolizumab are all FDA-approved for CRSwNP',
+        'Dupilumab, omalizumab, and mepolizumab are all indicated for CRSwNP',
         'Biologics and surgery are complementary—not mutually exclusive',
         'Quality of life measures (smell, congestion, sleep) are important endpoints for polyp treatment'
     ],

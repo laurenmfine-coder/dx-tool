@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>C. difficile Colitis - ReasonDx Socratic Case</title>
@@ -151,7 +152,7 @@ let currentStage = 0, score = 0;
 2. If needed, use lowest-risk options
 3. Shortest effective duration</div></div>`,why_chain:[],points:10}},
         {title:"Response Assessment",content:`<div class="narrative"><p><strong>Day 3:</strong> Diarrhea 5-6/day (was 10-12), WBC 14,200 (was 18,500), Cr 1.3 (was 1.6). Still loose stools.</p></div>`,question:{prompt:"How do you interpret this?",options:[{text:"Treatment failure - switch therapy",correct:false},{text:"Appropriate response - continue vancomycin",correct:true},{text:"Order repeat C. diff testing",correct:false},{text:"Add IV metronidazole",correct:false}],explanation:{correct:"Correct! This IS appropriate response. Day 3-5 is when improvement starts. NEVER retest during treatment.",incorrect:"Patient is responding! Don't abandon effective therapy. NEVER repeat testing - stays positive for weeks."},teaching:`<div class="alert-box"><div class="alert-title">🚨 NEVER Retest!</div><p>PCR positive for weeks even with success. Test only for NEW symptoms after completing therapy.</p></div>`,why_chain:[],points:10}},
-        {title:"Recurrence Prevention",content:`<div class="narrative"><p>Day 10: Treatment complete. Diarrhea resolved. She asks about recurrence.</p></div>`,question:{prompt:"What is the recurrence risk?",options:[{text:"Very low - she completed treatment",correct:false},{text:"15-30%; consider bezlotoxumab for high-risk",correct:true},{text:"Take probiotics indefinitely",correct:false},{text:"Monthly vancomycin prophylaxis",correct:false}],explanation:{correct:"Correct! 15-30% recurrence after first episode. Bezlotoxumab reduces recurrence in high-risk patients.",incorrect:"Recurrence is common (15-30%). Probiotics have weak evidence. Bezlotoxumab is FDA-approved for high-risk."},teaching:`<div class="mechanism-box"><div class="mechanism-title">Prevention</div><div class="pathway">First episode: Bezlotoxumab if high-risk
+        {title:"Recurrence Prevention",content:`<div class="narrative"><p>Day 10: Treatment complete. Diarrhea resolved. She asks about recurrence.</p></div>`,question:{prompt:"What is the recurrence risk?",options:[{text:"Very low - she completed treatment",correct:false},{text:"15-30%; consider bezlotoxumab for high-risk",correct:true},{text:"Take probiotics indefinitely",correct:false},{text:"Monthly vancomycin prophylaxis",correct:false}],explanation:{correct:"Correct! 15-30% recurrence after first episode. Bezlotoxumab reduces recurrence in high-risk patients.",incorrect:"Recurrence is common (15-30%). Probiotics have weak evidence. Bezlotoxumab is indicated for high-risk."},teaching:`<div class="mechanism-box"><div class="mechanism-title">Prevention</div><div class="pathway">First episode: Bezlotoxumab if high-risk
 First recurrence: Fidaxomicin (lower recurrence)
 Multiple recurrences: FMT (85-90% success!)</div></div>`,why_chain:[{q:"What is bezlotoxumab?",a:"Anti-toxin B antibody. Single IV dose during treatment. Reduces recurrence ~40%."}],points:10}},
         {title:"Case Resolution",content:`<div class="narrative"><p>Bezlotoxumab given. PPI discontinued. At 3-month follow-up: No recurrence.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 CDI Summary</div><div class="pathway">Testing: Multi-step (GDH/toxin or NAAT/toxin)
@@ -262,5 +263,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

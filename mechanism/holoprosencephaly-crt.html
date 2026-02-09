@@ -4,6 +4,7 @@
 <script>
 (function(){var AUTH_KEY="reasondx-user";var OLD_AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1;var p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);if(j&&j.email)return true}var oldU=localStorage.getItem(OLD_AUTH_KEY);if(oldU){var oldJ=JSON.parse(oldU);if(oldJ&&oldJ.email&&oldJ.name)return true}var sbKey=Object.keys(localStorage).find(function(k){return k.startsWith('sb-')&&k.endsWith('-auth-token')});if(sbKey&&localStorage.getItem(sbKey))return true}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
 </script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>The Undivided Brain | Neuro Embryology | ReasonDx CRT</title>
 <style>
@@ -136,4 +137,5 @@ function next(n){
 </script>
 
 <div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="holoprosencephaly-crt.html" class="cross-link"><div class="cross-link-title">🧪 Clinical Reasoning Trainer</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a></div></div></div>
+<script src="../data/rdx-persist.js"></script>
 </body></html>

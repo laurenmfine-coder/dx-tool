@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testicular Cancer - Clinical Reasoning Case</title>
@@ -81,7 +82,7 @@
     
     function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=10;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}document.getElementById('teaching').classList.add('show');document.getElementById('next-btn').classList.add('show');}
     
-    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:#94a3b8;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/70</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:10px;border:1px solid rgba(59,130,246,0.3);"><p style="color:#93c5fd;margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="testicular-cancer-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 MechanismDx</a><a href="testicular-cancer-deepdive.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563159/" target="_blank" style="color:#93c5fd;font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Testicular Cancer!</p><p style="margin-top:15px;color:#fbbf24;">Remember: Painless mass = cancer until proven otherwise!</p></div>';}}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:#94a3b8;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/70</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:10px;border:1px solid rgba(59,130,246,0.3);"><p style="color:#93c5fd;margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../../mechanism/testicular-cancer-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 MechanismDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=testicular+cancer" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563159/" target="_blank" style="color:#93c5fd;font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Testicular Cancer!</p><p style="margin-top:15px;color:#fbbf24;">Remember: Painless mass = cancer until proven otherwise!</p></div>';}}
     
     renderStage();
     </script>
@@ -96,5 +97,6 @@
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

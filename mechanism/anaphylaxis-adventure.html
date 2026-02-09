@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <script>
-(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,6 +56,7 @@
         .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
         @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
     </style>
+<script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -83,7 +84,7 @@
             </div>
             <div class="card-body">
                 <div class="narrative">
-                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">8-year-old male</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">generalized hives, lip swelling, and difficulty breathing after eating at a birthday party 20 minutes ago</span>. Mom reports he ate a cookie that may have contained peanuts. Has known peanut allergy but forgot his EpiPen at home. Rapidly developing facial swelling and wheezing."
+                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">8-year-old male</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">generalized hives, lip swelling, and difficulty breathing after eating at a birthday party 20 minutes ago</span>. Mom reports he ate a cookie that may have contained peanuts. Has known peanut allergy but forgot his epinephrine auto-injector (EpiPen) at home. Rapidly developing facial swelling and wheezing."
                 </div>
                 <div class="vitals-grid">
                     <div class="vital "><div class="vital-label">Temp</div><div class="vital-value">98.6°F</div></div><div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">142</div></div><div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">78/42</div></div><div class="vital critical"><div class="vital-label">RR</div><div class="vital-value">34</div></div><div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">89%</div></div>
@@ -168,9 +169,9 @@
                 <div id="choices_improving">
                     <button class="choice-btn" onclick="choose('improving', 'observe_biphasic')">
                 <div class="choice-label">📋 Adjunct meds + observe 6-8 hours for biphasic reaction</div>
-                <div class="choice-detail">Diphenhydramine, ranitidine, dexamethasone now; monitor for recurrence</div>
+                <div class="choice-detail">Diphenhydramine, famotidine, dexamethasone now; monitor for recurrence</div>
             </button><button class="choice-btn" onclick="choose('improving', 'discharge_epipen')">
-                <div class="choice-label">✅ Symptoms resolving — discharge with EpiPen</div>
+                <div class="choice-label">✅ Symptoms resolving — discharge with epinephrine auto-injector (EpiPen)</div>
                 <div class="choice-detail">He's better, send home with prescriptions</div>
             </button><button class="choice-btn" onclick="choose('improving', 'more_epi')">
                 <div class="choice-label">💉 Third dose of epinephrine</div>
@@ -178,7 +179,7 @@
             </button>
                 </div>
                 <div id="fb_improving_observe_biphasic" class="hidden">
-                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Now give adjuncts: diphenhydramine (H1), ranitidine/famotidine (H2), dexamethasone (prevents biphasic reaction in ~20% of cases). Observe minimum 4-8 hours (some guidelines say 24h for severe cases). Biphasic reaction occurs in 1-20% of cases, typically within 8-12 hours.</div></div></div>
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Now give adjuncts: diphenhydramine (H1), famotidine (H2), dexamethasone (prevents biphasic reaction in ~20% of cases). Observe minimum 4-8 hours (some guidelines say 24h for severe cases). Biphasic reaction occurs in 1-20% of cases, typically within 8-12 hours.</div></div></div>
                         <button class="choice-btn" onclick="goTo('resolution')" style="margin-top:16px">Continue →</button></div><div id="fb_improving_discharge_epipen" class="hidden">
                     <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">NEVER discharge immediately after anaphylaxis treatment! Biphasic reactions occur in up to 20% of cases and can be fatal. Minimum observation is 4-6 hours, with 8-24 hours for severe cases. He needs monitoring, adjunct medications, and formal allergy follow-up planning.</div></div></div>
                     <button class="choice-btn" onclick="goTo('improving')" style="margin-top:16px">Try Again</button></div><div id="fb_improving_more_epi" class="hidden">
@@ -197,12 +198,12 @@
                 <div id="choices_resolution">
                     <button class="choice-btn" onclick="choose('resolution', 'good_outcome')">
                 <div class="choice-label">📋 Discharge with anaphylaxis action plan</div>
-                <div class="choice-detail">EpiPen prescription, allergy referral, education</div>
+                <div class="choice-detail">epinephrine auto-injector (EpiPen) prescription, allergy referral, education</div>
             </button>
                 </div>
                 <div id="fb_resolution_good_outcome" class="hidden">
                         <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
-                        <div class="narrative">Excellent anaphylaxis management! Discharge essentials: EpiPen auto-injector prescription (two-pack), written anaphylaxis action plan, medical alert bracelet recommendation, allergy/immunology referral within 4-6 weeks for confirmatory testing and possible oral immunotherapy, school 504 plan. Emphasize: ALWAYS carry EpiPen and use it FIRST — antihistamines are not a substitute.</div>
+                        <div class="narrative">Excellent anaphylaxis management! Discharge essentials: epinephrine auto-injector (EpiPen) auto-injector prescription (two-pack), written anaphylaxis action plan, medical alert bracelet recommendation, allergy/immunology referral within 4-6 weeks for confirmatory testing and possible oral immunotherapy, school 504 plan. Emphasize: ALWAYS carry epinephrine auto-injector (EpiPen) and use it FIRST — antihistamines are not a substitute.</div>
                         <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
                             <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
                             <button class="choice-btn" onclick="location.href='anaphylaxis-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
@@ -256,5 +257,6 @@
         document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
     }
     </script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

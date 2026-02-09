@@ -116,6 +116,7 @@
         .exam-tag.shelf { background: #fef3c7; color: #92400e; }
         .beta-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 13px; color: #92400e; text-align: center; }
     </style>
+<script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
     <div class="page-container">
@@ -482,6 +483,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../dx-progress.js"></script>
     <script>
         // ============================================
@@ -723,6 +725,7 @@
             if (pw !== cpw) { err.textContent = 'Passwords do not match.'; err.className = 'message error'; return; }
             if (!terms) { err.textContent = 'Please agree to the Terms of Service.'; err.className = 'message error'; return; }
             state.generatedReferral = generateReferralCode(fn, ln);
+            state.password = pw;
             var profileData = {
                 firstName: fn,
                 lastName: ln,
@@ -816,6 +819,27 @@
             }
             localStorage.setItem('reasondx-user', JSON.stringify(userData));
 
+            // Create Supabase account in background (for consistent auth sessions)
+            try {
+                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+                if (window.supabase && state.password) {
+                    var sb = window.supabase.createClient(sbUrl, sbKey);
+                    sb.auth.signUp({
+                        email: state.verifiedEmail,
+                        password: state.password,
+                        options: { data: { full_name: userData.name } }
+                    }).then(function(result) {
+                        if (result.data && result.data.user) {
+                            console.log('Supabase account created:', result.data.user.id);
+                            userData.supabaseId = result.data.user.id;
+                            localStorage.setItem('reasondx-user', JSON.stringify(userData));
+                        }
+                    }).catch(function(e) { console.log('Supabase signup background error:', e); });
+                    state.password = null; // Clear password from memory
+                }
+            } catch(e) { console.log('Supabase not available, localStorage auth only'); }
+
             // Initialize the unified progress engine with profile data
             if (window.DxProgress) {
                 window.DxProgress.syncProfile();
@@ -872,7 +896,72 @@
             var email = document.getElementById('loginEmail').value.trim();
             var pw = document.getElementById('loginPassword').value;
             if (!email || !pw) { document.getElementById('loginError').textContent = 'Please enter your email and password.'; document.getElementById('loginError').className = 'message error'; return; }
-            if (CONFIG.DEMO_MODE) { localStorage.setItem('reasondx-user', JSON.stringify({ email: email, name: 'Demo User', plan: 'pro' })); window.location.href = '../index.html'; }
+            
+            // Show loading state
+            var loginBtn = document.querySelector('#loginForm .btn-primary');
+            if (loginBtn) { loginBtn.disabled = true; loginBtn.textContent = 'Signing in...'; }
+            
+            // Try Supabase auth first
+            var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+            var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+            
+            try {
+                var sb = window.supabase.createClient(sbUrl, sbKey);
+                sb.auth.signInWithPassword({ email: email, password: pw }).then(function(result) {
+                    if (loginBtn) { loginBtn.disabled = false; loginBtn.textContent = 'Sign In'; }
+                    
+                    if (result.error) {
+                        // Supabase auth failed - show error
+                        document.getElementById('loginError').textContent = result.error.message || 'Invalid email or password.';
+                        document.getElementById('loginError').className = 'message error';
+                        return;
+                    }
+                    
+                    // Success - get user name from Supabase profile
+                    var user = result.data.user;
+                    var fullName = (user.user_metadata && user.user_metadata.full_name) || email.split('@')[0];
+                    
+                    // Try to get name from profiles table
+                    sb.from('profiles').select('full_name, subscription_tier').eq('id', user.id).single().then(function(profileResult) {
+                        var profile = profileResult.data;
+                        var displayName = (profile && profile.full_name) || fullName;
+                        var plan = (profile && profile.subscription_tier) || 'free';
+                        
+                        localStorage.setItem('reasondx-user', JSON.stringify({
+                            email: user.email,
+                            name: displayName,
+                            plan: plan,
+                            supabaseId: user.id,
+                            createdAt: user.created_at || new Date().toISOString()
+                        }));
+                        
+                        // Redirect to saved page or home
+                        var redirect = sessionStorage.getItem('reasondx-redirect') || '../index.html';
+                        sessionStorage.removeItem('reasondx-redirect');
+                        sessionStorage.removeItem('dxsuite-redirect-after-login');
+                        window.location.href = redirect;
+                    }).catch(function() {
+                        // Profile fetch failed but auth succeeded - use metadata name
+                        localStorage.setItem('reasondx-user', JSON.stringify({
+                            email: user.email,
+                            name: fullName,
+                            plan: 'free',
+                            supabaseId: user.id
+                        }));
+                        var redirect = sessionStorage.getItem('reasondx-redirect') || '../index.html';
+                        sessionStorage.removeItem('reasondx-redirect');
+                        window.location.href = redirect;
+                    });
+                }).catch(function(err) {
+                    if (loginBtn) { loginBtn.disabled = false; loginBtn.textContent = 'Sign In'; }
+                    document.getElementById('loginError').textContent = 'Sign in failed. Please try again.';
+                    document.getElementById('loginError').className = 'message error';
+                });
+            } catch(e) {
+                if (loginBtn) { loginBtn.disabled = false; loginBtn.textContent = 'Sign In'; }
+                // Supabase SDK not available - use demo mode fallback
+                if (CONFIG.DEMO_MODE) { localStorage.setItem('reasondx-user', JSON.stringify({ email: email, name: email.split('@')[0], plan: 'pro' })); window.location.href = '../index.html'; }
+            }
         }
         function showForgotPassword() { alert('Password reset coming soon.'); }
 
@@ -887,5 +976,6 @@
             }
         });
     </script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

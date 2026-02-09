@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>DxSuite Dashboard</title><style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}.header{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600;color:#fff}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px;padding:24px}.card h2{font-size:1.3rem;margin-bottom:16px;color:var(--accent)}.card h3{font-size:1.1rem;margin:20px 0 12px;color:var(--accent)}.card p{margin-bottom:12px;color:var(--muted)}.pearl{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(168,85,247,.15));border-left:4px solid var(--accent);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.danger{background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.15));border-left:4px solid var(--danger);padding:16px;border-radius:0 12px 12px 0;margin:16px 0}.compare-table{width:100%;border-collapse:collapse;margin:16px 0}.compare-table th{background:rgba(139,92,246,.2);padding:10px;text-align:left;font-size:.85rem;border:1px solid var(--border)}.compare-table td{padding:10px;border:1px solid var(--border);font-size:.85rem}ul{margin-left:20px;color:var(--muted)}li{margin-bottom:8px}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:24px 0}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}
+.dash-card h3{color:var(--accent);margin-bottom:8px}
+.dash-value{font-size:2rem;font-weight:700;color:var(--text);font-family:monospace}
+.dash-label{font-size:.8rem;color:var(--muted)}
+.module-list{list-style:none;padding:0}
+.module-list li{padding:12px;border-bottom:1px solid var(--border)}
+.module-list a{color:var(--accent);text-decoration:none}
+.module-list a:hover{text-decoration:underline}
+</style></head><body>
+<div class="header"><div class="header-row"><div class="header-title">📊 DxSuite Dashboard</div></div></div>
+<div class="main">
+<div class="dashboard-grid">
+<div class="dash-card"><h3>📖 Modules</h3><div class="dash-value" id="moduleCount">-</div><div class="dash-label">MechanismDx Modules</div></div>
+<div class="dash-card"><h3>❓ Questions</h3><div class="dash-value" id="questionCount">-</div><div class="dash-label">Quiz Bank Items</div></div>
+<div class="dash-card"><h3>🎮 Adventures</h3><div class="dash-value" id="adventureCount">-</div><div class="dash-label">Clinical Cases</div></div>
+<div class="dash-card"><h3>📊 Your Progress</h3><div class="dash-value" id="progressPct">0%</div><div class="dash-label">Completion</div></div>
+</div>
+<div class="card"><h2>Quick Links</h2>
+<ul class="module-list">
+<li><a href="mechanism/index.html">🧬 MechanismDx Modules</a></li>
+<li><a href="quickref-hub.html#pharmacology">💊 PharmacologyDx</a></li>
+<li><a href="quickref-hub.html#microbiology">🦠 MicrobiologyDx</a></li>
+<li><a href="ReasonDx/training.html">🎯 Clinical Reasoning Trainer</a></li>
+<li><a href="board-prep.html">📝 Board Prep</a></li>
+</ul></div>
+</div>
+<script>
+try{
+  document.getElementById("moduleCount").textContent = document.querySelectorAll?'150+':'—';
+  document.getElementById("questionCount").textContent = '2,994';
+  document.getElementById("adventureCount").textContent = '50+';
+  var p=localStorage.getItem("dx-progress");
+  if(p){var d=JSON.parse(p);var pct=Math.round((Object.keys(d).length/150)*100);document.getElementById("progressPct").textContent=pct+"%"}
+}catch(e){}
+</script><script src="data/rdx-persist.js"></script>
+</body></html>

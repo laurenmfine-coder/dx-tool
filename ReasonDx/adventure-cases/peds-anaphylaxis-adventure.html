@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pediatric Anaphylaxis Adventure | ReasonDx</title>
@@ -126,9 +127,9 @@
             </div>
             <table class="dose-table">
                 <tr><th>Weight Range</th><th>Epinephrine Dose</th><th>Auto-injector</th></tr>
-                <tr><td>7.5-15 kg</td><td>0.075-0.15 mg</td><td>EpiPen Jr (0.15 mg)</td></tr>
-                <tr><td class="dose-highlight">15-30 kg</td><td class="dose-highlight">0.15-0.3 mg</td><td class="dose-highlight">EpiPen Jr (0.15 mg)</td></tr>
-                <tr><td>>30 kg</td><td>0.3-0.5 mg</td><td>EpiPen (0.3 mg)</td></tr>
+                <tr><td>7.5-15 kg</td><td>0.075-0.15 mg</td><td>epinephrine auto-injector (EpiPen) Jr (0.15 mg)</td></tr>
+                <tr><td class="dose-highlight">15-30 kg</td><td class="dose-highlight">0.15-0.3 mg</td><td class="dose-highlight">epinephrine auto-injector (EpiPen) Jr (0.15 mg)</td></tr>
+                <tr><td>>30 kg</td><td>0.3-0.5 mg</td><td>epinephrine auto-injector (EpiPen) (0.3 mg)</td></tr>
             </table>
             <p style="margin-bottom: 20px; font-weight: 600;">What is the correct epinephrine dose for this 22 kg child?</p>
             <div class="choices">
@@ -233,8 +234,8 @@
             </div>
             <p style="margin-bottom: 20px; font-weight: 600;">Which auto-injector for this 22 kg child?</p>
             <div class="choices">
-                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 6)"><span class="choice-letter">A</span><span class="choice-text">EpiPen Jr (0.15 mg) - prescribe 2</span></button>
-                <button class="choice-btn" onclick="checkAnswer(this, 6)"><span class="choice-letter">B</span><span class="choice-text">EpiPen (0.3 mg) - adult dose is safer</span></button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 6)"><span class="choice-letter">A</span><span class="choice-text">epinephrine auto-injector (EpiPen) Jr (0.15 mg) - prescribe 2</span></button>
+                <button class="choice-btn" onclick="checkAnswer(this, 6)"><span class="choice-letter">B</span><span class="choice-text">epinephrine auto-injector (EpiPen) (0.3 mg) - adult dose is safer</span></button>
                 <button class="choice-btn" onclick="checkAnswer(this, 6)"><span class="choice-letter">C</span><span class="choice-text">No auto-injector needed</span></button>
                 <button class="choice-btn" onclick="checkAnswer(this, 6)"><span class="choice-letter">D</span><span class="choice-text">Injectable epinephrine vials</span></button>
             </div>
@@ -275,7 +276,7 @@
             3: { correct: "Correct! Give all adjuncts: IV fluids, H1/H2 blockers, steroids, albuterol for wheezing.", incorrect: "All adjuncts work together but never replace epinephrine." },
             4: { correct: "Correct! After 2 IM doses, switch to IV epinephrine INFUSION (0.1-1 mcg/kg/min).", incorrect: "Refractory anaphylaxis requires IV epinephrine infusion, not more IM doses." },
             5: { correct: "Correct! Minimum 4-6 hours observation. Severe reactions warrant overnight admission.", incorrect: "Biphasic reactions occur in 5-20% - need 4-6 hours minimum observation." },
-            6: { correct: "Correct! EpiPen Jr (0.15 mg) for 15-30 kg. Always prescribe 2 devices.", incorrect: "EpiPen Jr is correct for 22 kg. Adult EpiPen is for >30 kg." }
+            6: { correct: "Correct! epinephrine auto-injector (EpiPen) Jr (0.15 mg) for 15-30 kg. Always prescribe 2 devices.", incorrect: "epinephrine auto-injector (EpiPen) Jr is correct for 22 kg. Adult epinephrine auto-injector (EpiPen) is for >30 kg." }
         };
         
         function checkAnswer(btn, scene) {
@@ -326,5 +327,6 @@
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

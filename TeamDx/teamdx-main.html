@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeamDx - Interprofessional Collaboration</title>
@@ -360,7 +361,7 @@
                         options: [
                             { text: "Mrs. Chen decompensated suddenly—hypoxic to 82% on NC, now on BiPAP at 88%. Lungs wet bilaterally. We're giving IV furosemide. Thinking flash pulmonary edema vs PE.", quality: 'good', feedback: "Excellent SBAR-style update: concise, current status, interventions, differential." },
                             { text: "She got really sick really fast. We put her on BiPAP.", quality: 'poor', feedback: "Too vague. Senior needs vitals, exam findings, interventions, and your assessment." },
-                            { text: "I think she's having a CHF exacerbation. Her O2 sat dropped and we started BiPAP and Lasix.", quality: 'moderate', feedback: "Good but missing key data points—current vitals, exam findings, timeline." }
+                            { text: "I think she's having a CHF exacerbation. Her O2 sat dropped and we started BiPAP and furosemide (Lasix).", quality: 'moderate', feedback: "Good but missing key data points—current vitals, exam findings, timeline." }
                         ]
                     },
                     {
@@ -596,5 +597,6 @@
 <link rel="stylesheet" href="dx-case-nav.css">
 <script src="dx-case-nav.js"></script>
 <script>document.addEventListener('DOMContentLoaded', function() { DxCaseNav.init({ parentPage: 'index.html', parentName: 'TeamDx', platformRoot: '../' }); });</script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

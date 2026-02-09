@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Food Allergy - ReasonDx Socratic Case</title>
@@ -202,12 +203,12 @@ why_chain:[{q:"Why two epinephrine devices?",a:"~20% of anaphylaxis requires a s
 {title:"Oral Immunotherapy",content:`<div class="narrative"><p>Mother asks about "peanut allergy treatment" she heard about.</p></div><div class="socratic-prompt"><h4>Disease Modification</h4><p>What is oral immunotherapy (OIT) for food allergy?</p></div>`,
 hint_beginner:"Gradually increasing doses to build tolerance",hint_advanced:"What's the difference between desensitization and tolerance?",
 question:{prompt:"What is oral immunotherapy for peanut allergy?",
-options:[{text:"FDA-approved treatment (Palforzia) involving gradual ingestion of increasing peanut protein doses; achieves desensitization (protection while on therapy), NOT cure; requires continued maintenance dosing; reactions common during therapy",correct:true},
+options:[{text:"approved treatment (Palforzia) involving gradual ingestion of increasing peanut protein doses; achieves desensitization (protection while on therapy), NOT cure; requires continued maintenance dosing; reactions common during therapy",correct:true},
 {text:"Cures peanut allergy permanently",correct:false},
 {text:"Works by avoidance",correct:false},
 {text:"No treatments exist for food allergy",correct:false}],
 explanation:{correct:"OIT (Palforzia for peanut): gradual dose escalation over months. Goal is desensitization - raised reaction threshold while on therapy. NOT a cure - stopping often leads to loss of protection. Reactions during treatment are common. Requires commitment to daily dosing.",incorrect:"OIT provides desensitization (temporary protection while dosing), not permanent cure. Must continue maintenance. Allergic reactions during treatment are expected and managed."},
-teaching:`<h4>Oral Immunotherapy (OIT)</h4><p><strong>Mechanism:</strong> Gradual exposure → desensitization</p><p><strong>Goal:</strong> Raise reaction threshold (protect against accidental exposure)</p><p><strong>Not a cure:</strong> Must continue maintenance dosing</p><p><strong>Side effects:</strong> GI symptoms, allergic reactions common</p><p><strong>FDA approved:</strong> Palforzia (peanut) for ages 4-17</p>`,
+teaching:`<h4>Oral Immunotherapy (OIT)</h4><p><strong>Mechanism:</strong> Gradual exposure → desensitization</p><p><strong>Goal:</strong> Raise reaction threshold (protect against accidental exposure)</p><p><strong>Not a cure:</strong> Must continue maintenance dosing</p><p><strong>Side effects:</strong> GI symptoms, allergic reactions common</p><p><strong>approved:</strong> Palforzia (peanut) for ages 4-17</p>`,
 why_chain:[{q:"What's the difference between desensitization and sustained unresponsiveness?",a:"Desensitization = protection while on therapy. Sustained unresponsiveness (true tolerance) = continued protection after stopping therapy. OIT reliably achieves desensitization; sustained unresponsiveness is less predictable."}],points:10}},
 
 {title:"FPIES",content:`<div class="narrative"><p>Different patient: 6-month-old infant with repetitive vomiting 2 hours after first rice cereal feeding. No hives, no respiratory symptoms. Becomes pale and lethargic.</p></div><div class="socratic-prompt"><h4>Non-IgE Food Reactions</h4><p>What is this presentation, and how does it differ from IgE-mediated allergy?</p></div>`,
@@ -374,5 +375,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

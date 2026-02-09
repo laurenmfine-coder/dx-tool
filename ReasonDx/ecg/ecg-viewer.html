@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ECG Integrated Viewer - Dx Ecosystem</title>
@@ -404,7 +405,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
                 <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
                 <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../../reference-library.html" class="dx-nav-link ">📚 References</a>
                 <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
@@ -958,5 +959,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

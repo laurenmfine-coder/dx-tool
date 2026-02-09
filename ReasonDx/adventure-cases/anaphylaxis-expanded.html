@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Anaphylaxis - ReasonDx Socratic Case</title>
@@ -263,7 +264,7 @@ const stages = [
                 correct: "EPINEPHRINE IM is THE treatment for anaphylaxis. There are NO absolute contraindications. Give 0.3-0.5mg (0.01mg/kg in children) IM in the anterolateral thigh. Can repeat every 5-15 minutes. Delayed epinephrine = increased mortality.",
                 incorrect: "Antihistamines, steroids, and fluids are all ADJUNCTS - they do NOT treat the life-threatening features of anaphylaxis. Only epinephrine reverses hypotension, bronchospasm, and angioedema."
             },
-            teaching: `<h4>Epinephrine Dosing</h4><table class="comparison-table"><tr><th>Route</th><th>Dose</th><th>Notes</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>IM (thigh)</strong></td><td>0.3-0.5mg (1:1000)</td><td>FIRST LINE - repeat q5-15min</td></tr><tr><td>Autoinjector</td><td>0.3mg or 0.15mg</td><td>EpiPen, Auvi-Q</td></tr><tr><td>IV (refractory)</td><td>0.1mg slow push</td><td>Only if IM fails</td></tr><tr><td>IV infusion</td><td>1-10 mcg/min</td><td>Titrate to effect</td></tr></table><div class="alert-box"><div class="alert-title">Common Mistake</div><p>Giving antihistamines instead of epinephrine. Diphenhydramine only treats itching - it does NOT reverse hypotension or airway edema.</p></div>`,
+            teaching: `<h4>Epinephrine Dosing</h4><table class="comparison-table"><tr><th>Route</th><th>Dose</th><th>Notes</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>IM (thigh)</strong></td><td>0.3-0.5mg (1:1000)</td><td>FIRST LINE - repeat q5-15min</td></tr><tr><td>Autoinjector</td><td>0.3mg or 0.15mg</td><td>epinephrine auto-injector (EpiPen), Auvi-Q</td></tr><tr><td>IV (refractory)</td><td>0.1mg slow push</td><td>Only if IM fails</td></tr><tr><td>IV infusion</td><td>1-10 mcg/min</td><td>Titrate to effect</td></tr></table><div class="alert-box"><div class="alert-title">Common Mistake</div><p>Giving antihistamines instead of epinephrine. Diphenhydramine only treats itching - it does NOT reverse hypotension or airway edema.</p></div>`,
             why_chain: [{q: "Why IM and not subcutaneous?", a: "IM injection into the thigh has faster, more reliable absorption due to better blood flow to muscle. SQ absorption is slower and more variable, especially in hypotensive patients with poor peripheral perfusion."}, {q: "Why the thigh specifically?", a: "The vastus lateralis has excellent blood supply and large muscle mass. Deltoid is acceptable but has slower absorption. Never inject into buttock (risk of sciatic nerve injury, slower absorption)."}],
             points: 15
         }
@@ -457,7 +458,7 @@ const stages = [
     },
     {
         title: "Case Resolution",
-        content: `<div class="narrative"><p>The patient is discharged with:<ul style="margin-top:8px;"><li>EpiPen 2-pack with demonstrated technique</li><li>Written action plan</li><li>Allergist appointment in 3 weeks</li><li>Instructions to avoid shellfish pending testing</li></ul></p><p style="margin-top:12px;">At follow-up, skin testing confirms shrimp allergy. She carries her EpiPens everywhere and has had no further reactions.</p></div>
+        content: `<div class="narrative"><p>The patient is discharged with:<ul style="margin-top:8px;"><li>epinephrine auto-injector (EpiPen) 2-pack with demonstrated technique</li><li>Written action plan</li><li>Allergist appointment in 3 weeks</li><li>Instructions to avoid shellfish pending testing</li></ul></p><p style="margin-top:12px;">At follow-up, skin testing confirms shrimp allergy. She carries her EpiPens everywhere and has had no further reactions.</p></div>
         <div class="socratic-prompt"><h4>Synthesis</h4><p>Reflect on the critical decision points in this case. What would have happened if epinephrine had been delayed or withheld?</p></div>`,
         hint_beginner: "Think about: recognition → epinephrine → positioning → adjuncts → monitoring → discharge",
         hint_advanced: "What is the mortality rate of untreated anaphylaxis vs appropriately treated?",
@@ -616,5 +617,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>

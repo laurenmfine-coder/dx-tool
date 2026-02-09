@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMR Simulator | Allergy/Immunology Lab Predictor</title>
@@ -662,7 +663,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 }
 
     </style>
-        <link rel="stylesheet" href="dx-case-nav.css">
+        <link rel="stylesheet" href="../dx-case-nav.css">
 </head>
 <body>
 
@@ -683,11 +684,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </a>
             <div class="dx-nav-links">
                 <a href="index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../index.html#mechanism" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -875,7 +876,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 age: '8 yo M',
                 mrn: 'MRN: 847291',
                 avatar: 'TM',
-                chiefComplaint: 'Post-anaphylaxis evaluation. Had reaction to cookie at school last week - hives, facial swelling, vomiting. EpiPen administered by school nurse.',
+                chiefComplaint: 'Post-anaphylaxis evaluation. Had reaction to cookie at school last week - hives, facial swelling, vomiting. epinephrine auto-injector (EpiPen) administered by school nurse.',
                 allergies: [
                     { name: 'Peanut (confirmed)', severity: 'high' },
                     { name: 'Tree nuts (avoids)', severity: 'moderate' }
@@ -883,7 +884,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 vitals: { bp: '98/62', hr: '88', rr: '18', spo2: '99' },
                 history: 'Previously healthy. First known anaphylactic reaction. Family history of atopy (mother has asthma). No prior allergy testing.',
                 question: 'What labs confirm the diagnosis and identify the trigger?',
-                alerts: ['Anaphylaxis Risk', 'EpiPen Required'],
+                alerts: ['Anaphylaxis Risk', 'epinephrine auto-injector (EpiPen) Required'],
                 
                 labs: {
                     tryptase: { value: 2.1, unit: 'ng/mL', range: '< 11.4', status: 'normal', timing: 'Baseline (2 weeks post-reaction)' },
@@ -1667,5 +1668,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <script src="../dx-progress.js"></script>
 <script src="../dx-recommendations.js"></script>
 <script src="dx-tools-integration.js"></script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

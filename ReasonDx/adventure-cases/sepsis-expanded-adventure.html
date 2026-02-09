@@ -3,7 +3,8 @@
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sepsis & Septic Shock - ReasonDx Socratic Case</title>
@@ -643,7 +644,7 @@ const stages = [
                 }
             ],
             "explanation": {
-                "correct": "Cefepime is the best choice. It covers gram-negatives including Pseudomonas (important in complicated UTI). Her childhood rash is a low-risk penicillin allergy with <1% cephalosporin cross-reactivity. Pip-tazo contains penicillin (contraindicated). Cipro has high resistance after recent use. Ceftriaxone lacks Pseudomonas coverage. Meropenem is unnecessarily broad.",
+                "correct": "Cefepime is the best choice. It covers gram-negatives including Pseudomonas (important in complicated UTI). Her childhood rash is a low-risk penicillin allergy with <1% cephalosporin cross-reactivity. Pip-tazo contains penicillin (contraindicated). ciprofloxacin (Cipro) has high resistance after recent use. Ceftriaxone lacks Pseudomonas coverage. Meropenem is unnecessarily broad.",
                 "incorrect": "Key considerations: 1) Need Pseudomonas coverage (complicated UTI, nursing home), 2) Pip-tazo contains penicillin - cannot use, 3) Recent fluoroquinolone use increases resistance risk, 4) Ceftriaxone lacks Pseudomonas coverage. Cefepime provides appropriate coverage with minimal cross-reactivity risk for her low-risk penicillin allergy."
             },
             "teaching": "<h4>\ud83d\udcda Antibiotic Selection in Urosepsis</h4>\n                    <p><strong>Must cover:</strong> E. coli, Klebsiella, Proteus, Pseudomonas (if complicated), Enterococcus</p>\n                    <table>\n                        <tr><th>Option</th><th>Issue for This Patient</th></tr>\n                        <tr><td>Pip-tazo</td><td>Contains penicillin - allergic</td></tr>\n                        <tr><td>Ciprofloxacin</td><td>Recent use \u2192 resistance risk</td></tr>\n                        <tr><td>Ceftriaxone</td><td>No Pseudomonas coverage</td></tr>\n                        <tr><td>Meropenem</td><td>Unnecessarily broad, stewardship concern</td></tr>\n                        <tr><td><strong>Cefepime \u2713</strong></td><td>Covers Pseudomonas, safe in low-risk PCN allergy</td></tr>\n                    </table>\n                    <p><em>Low-risk penicillin allergy (childhood rash): &lt;1% cephalosporin cross-reactivity</em></p>",
@@ -1079,5 +1080,6 @@ function toggleReferences() {
 <script src="../../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
 <script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 </body>
 </html>
