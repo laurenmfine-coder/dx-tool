@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypospadias - Clinical Reasoning Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .header h1 { font-size: 1.5rem; color: #e9d5ff; }
+        .score-display { display: flex; gap: 20px; font-size: 0.9rem; margin-top: 10px; }
+        .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #e9d5ff, #fbbf24); border-radius: 3px; transition: width 0.3s; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-phase { font-size: 0.85rem; color: #e9d5ff; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #faf5ff; margin-top: 4px; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a855f7; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(251,191,36,0.2)); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #faf5ff; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.2) !important; }
+        .option-letter { width: 28px; height: 28px; background: rgba(168,85,247,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; }
+        .feedback.show { display: block; }
+        .correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { display: none; margin-top: 20px; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .mechanism-title { color: #e9d5ff; font-weight: 600; margin-bottom: 10px; }
+        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #a855f7, #fbbf24); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Hypospadias</h1>
+            <div class="score-display">
+                <div class="score-item">Score: <strong id="score">0</strong>/<span id="maxScore">60</span></div>
+                <div class="score-item">Stage: <span id="stageNum">1</span>/6</div>
+            </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 16%"></div></div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let currentStage = 0, score = 0;
+    const stages = [
+        {title:"Newborn Exam",content:'<div class="narrative"><p>You are examining a <span class="highlight">term male newborn</span> in the nursery. On genital exam, you notice the <span class="critical">urethral meatus is located on the ventral surface of the penile shaft</span> rather than at the tip of the glans. The <span class="highlight">foreskin appears incomplete</span> - present dorsally but absent ventrally, giving a "hooded" appearance. You also notice some <span class="highlight">ventral curvature</span> of the penis.</p></div>',question:{prompt:"What is this constellation of findings called?",options:[{text:"Epispadias",correct:false},{text:"Hypospadias",correct:true},{text:"Phimosis",correct:false},{text:"Buried penis",correct:false}],explanation:{correct:"Correct! The classic triad of hypospadias includes: 1) Ventrally displaced urethral meatus, 2) Dorsal hooded foreskin (incomplete ventrally), and 3) Ventral curvature (chordee). This is the most common penile anomaly.",incorrect:"This is hypospadias - ventral meatus + hooded foreskin + chordee. Epispadias has a DORSAL meatus (much rarer)."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Hypospadias Triad</div><div class="pathway">CLASSIC TRIAD:\n1. Ventral urethral meatus\n   (proximal to normal position)\n2. Dorsal hooded foreskin\n   (incomplete ventrally)\n3. Chordee (ventral curvature)\n\nINCIDENCE: 1 in 200-300 males\n(Most common penile anomaly)\n\nCLASSIFICATION BY MEATUS:\n• Distal (70%): Glanular, coronal,\n  distal shaft\n• Middle (15%): Mid-shaft\n• Proximal (15%): Proximal shaft,\n  penoscrotal, scrotal, perineal</div></div>',points:10}},
+        
+        {title:"Embryology",content:'<div class="narrative"><p>The parents ask why this happened. You explain the embryologic basis of hypospadias.</p></div>',question:{prompt:"Hypospadias results from incomplete fusion of which embryologic structure?",options:[{text:"Labioscrotal folds",correct:false},{text:"Urethral folds",correct:true},{text:"Genital tubercle",correct:false},{text:"Müllerian ducts",correct:false}],explanation:{correct:"Correct! Hypospadias results from incomplete fusion of the urethral (urogenital) folds. Normally, these folds fuse in a proximal-to-distal direction to form the penile urethra. Failure of fusion leaves the meatus at a more proximal location.",incorrect:"The urethral folds normally fuse to form the penile urethra. Incomplete fusion = hypospadias. The more proximal the fusion failure, the more severe the hypospadias."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Embryology of Hypospadias</div><div class="pathway">NORMAL DEVELOPMENT (Week 8-14):\nGenital tubercle elongates\n→ Urethral folds fuse ventral midline\n→ Proximal to distal fusion\n→ Forms penile urethra\n→ Glanular urethra canalizes\n\nHYPOSPADIAS:\nIncomplete urethral fold fusion\n→ Meatus opens proximal to glans\n→ More proximal = more severe\n\nDEPENDENT ON:\n• Testosterone\n• DHT (via 5α-reductase)\n• Androgen receptor function\n\nFuses: Weeks 8-14\n(Window of susceptibility)</div></div>',points:10}},
+
+        {title:"Critical Counseling",content:'<div class="narrative"><p>The parents mention they planned to have their son circumcised. The pediatrician asks for your recommendation.</p></div>',question:{prompt:"What is the CRITICAL counseling point regarding circumcision?",options:[{text:"Circumcision should be done before discharge",correct:false},{text:"Circumcision can be done at the 2-week visit",correct:false},{text:"DO NOT circumcise - foreskin may be needed for repair",correct:true},{text:"Circumcision makes hypospadias repair easier",correct:false}],explanation:{correct:"Correct! NEVER circumcise a baby with hypospadias! The foreskin tissue is often used in surgical repair (as a flap or graft). Removing it eliminates a valuable tissue source and can complicate reconstruction.",incorrect:"CRITICAL: No circumcision with hypospadias! The foreskin tissue may be needed for surgical repair."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Critical Points</div><div class="pathway">⚠️ DO NOT CIRCUMCISE!\n\nWHY?\n• Foreskin used in many repairs:\n  - Inner preputial flap\n  - Preputial island flap\n  - Onlay grafts\n• Removing it limits surgical options\n• Makes repair more difficult\n\nALSO IMPORTANT:\n• Urology referral before discharge\n• Parental reassurance\n• No immediate treatment needed\n• Surgery typically at 6-18 months\n\nDOCUMENT clearly:\n"No circumcision - hypospadias present"</div></div>',points:10}},
+
+        {title:"Associated Findings",content:'<div class="narrative"><p>You examine the baby more thoroughly. Both testes are palpable in the scrotum. There are no other obvious anomalies.</p></div>',question:{prompt:"When should you consider DSD (Disorder of Sex Development) workup in a baby with hypospadias?",options:[{text:"All cases of hypospadias",correct:false},{text:"Proximal hypospadias with undescended testis or bifid scrotum",correct:true},{text:"Only if family history positive",correct:false},{text:"Never - hypospadias is not associated with DSD",correct:false}],explanation:{correct:"Correct! DSD workup (karyotype, hormones) should be considered when hypospadias is associated with: cryptorchidism (especially bilateral), bifid scrotum, micropenis, or penoscrotal transposition. These features suggest possible intersex condition.",incorrect:"Proximal hypospadias + cryptorchidism or other genital anomalies = consider DSD workup. Could be virilized female (CAH) or mixed gonadal dysgenesis."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 When to Consider DSD</div><div class="pathway">RED FLAGS FOR DSD:\n• Proximal/severe hypospadias\n• Cryptorchidism (uni or bilateral)\n• Bifid scrotum\n• Micropenis\n• Penoscrotal transposition\n\nWORKUP INCLUDES:\n• Karyotype\n• Testosterone, DHT\n• 17-OH progesterone (CAH)\n• LH, FSH\n• Imaging (ultrasound for gonads)\n\nPOSSIBLE DIAGNOSES:\n• Congenital adrenal hyperplasia\n• Mixed gonadal dysgenesis\n• Partial androgen insensitivity\n• 5α-reductase deficiency</div></div>',points:10}},
+
+        {title:"Surgical Planning",content:'<div class="narrative"><p>This baby has mid-shaft hypospadias with moderate chordee. Both testes are descended. No DSD workup needed. You discuss surgical timing with the parents.</p></div>',question:{prompt:"What is the OPTIMAL age for hypospadias repair?",options:[{text:"Immediately at birth",correct:false},{text:"6-18 months of age",correct:true},{text:"3-5 years (before school)",correct:false},{text:"Puberty (when penis is larger)",correct:false}],explanation:{correct:"Correct! Current guidelines recommend repair between 6-18 months. Earlier repair (6-12 months) is favored because: adequate penile size for surgery, completed before toilet training, less psychological impact, and good tissue healing in infants.",incorrect:"Optimal timing: 6-18 months. Early enough for good healing, late enough for adequate penile size, before toilet training and psychological awareness."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Surgical Timing & Goals</div><div class="pathway">OPTIMAL AGE: 6-18 months\n\nWHY THIS TIMING?\n• Adequate penile size for surgery\n• Before toilet training (2-3 yrs)\n• Before body image awareness\n• Excellent tissue healing\n• Lower complication rates\n\nSURGICAL GOALS:\n1. Straight penis (correct chordee)\n2. Meatus at tip of glans\n3. Slit-like meatus (cosmesis)\n4. Forward-directed stream\n5. Normal appearance\n\nUSUAL APPROACH:\n• Single-stage repair for most\n• Staged repair for severe/redo</div></div>',points:10}},
+
+        {title:"Complications",content:'<div class="narrative"><p>The parents ask about potential complications of surgery.</p></div>',question:{prompt:"What is the MOST COMMON complication after hypospadias repair?",options:[{text:"Complete breakdown of repair",correct:false},{text:"Urethrocutaneous fistula",correct:true},{text:"Meatal stenosis",correct:false},{text:"Erectile dysfunction",correct:false}],explanation:{correct:"Correct! Urethrocutaneous fistula (abnormal connection between urethra and skin) is the most common complication, occurring in 5-15% of repairs. It presents as a second urinary stream and usually requires surgical closure.",incorrect:"Urethrocutaneous fistula is most common (5-15%). It presents as a second stream from the ventral penis and needs repair if persistent."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Complications</div><div class="pathway">URETHROCUTANEOUS FISTULA (5-15%):\n• Most common complication\n• Second stream from ventral penis\n• Wait 6 months before repair\n• May close spontaneously if small\n\nOTHER COMPLICATIONS:\n• Meatal stenosis (2-10%)\n  → Dilation or meatotomy\n• Urethral stricture\n  → Dilation or urethroplasty\n• Glans dehiscence\n• Diverticulum\n• Recurrent chordee\n\nLONG-TERM OUTCOMES:\n• Generally excellent\n• Normal voiding function\n• Normal sexual function\n• Fertility preserved\n• May need touch-up procedures</div></div>',points:10}}
+    ];
+    
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('stageNum').textContent=currentStage+1;document.getElementById('maxScore').textContent=stages.length*10;}
+    
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><strong>✓ Correct!</strong> '+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><strong>✗ Not quite.</strong> '+stage.question.explanation.incorrect+'</div><div class="teaching-point" id="teaching">'+stage.question.teaching+'</div><button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=10;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}document.getElementById('teaching').classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:#e9d5ff;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/60</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:10px;border:1px solid rgba(59,130,246,0.3);"><p style="color:#93c5fd;margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../../mechanism/hypospadias-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 MechanismDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=pediatric+urology" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK482122/" target="_blank" style="color:#93c5fd;font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Hypospadias!</p><p style="margin-top:15px;color:#fbbf24;">Remember: NO circumcision!</p></div>';}}
+    
+    renderStage();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Hypospadias"
+         data-key-points="🎉 Case Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

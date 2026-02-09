@@ -1,0 +1,658 @@
+{
+  "id": "ards-deep-dive",
+  "title": "Acute Respiratory Distress Syndrome (ARDS)",
+  "version": "1.0",
+  "totalQuestions": 28,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents",
+  "category": "Pulmonary/Critical Care",
+  "icon": "\ud83e\udec1",
+  "objectives": [
+    "Apply Berlin criteria to diagnose and classify ARDS severity",
+    "Understand pathophysiology of diffuse alveolar damage",
+    "Implement lung-protective ventilation strategies",
+    "Recognize indications for prone positioning and neuromuscular blockade",
+    "Manage fluid balance and hemodynamics in ARDS"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "Berlin Definition of ARDS",
+      "citation": "ARDS Definition Task Force. JAMA. 2012;307(23):2526-2533",
+      "url": "https://jamanetwork.com/journals/jama/fullarticle/1160659"
+    },
+    {
+      "name": "ARDSNet Low Tidal Volume Protocol",
+      "citation": "ARDS Network. NEJM. 2000;342:1301-1308",
+      "url": "https://www.nejm.org/doi/full/10.1056/nejm200005043421801"
+    }
+  ],
+  "vignette": {
+    "text": "A 58-year-old man was admitted 3 days ago for community-acquired pneumonia. Over the past 24 hours, he has deteriorated rapidly despite appropriate antibiotics. He is now intubated and mechanically ventilated with SpO2 82% on FiO2 80%, PEEP 10.",
+    "vitals": {
+      "BP": "92/58 mmHg (on norepinephrine)",
+      "HR": "112 bpm",
+      "RR": "24/min",
+      "SpO2": "82% on FiO2 80%, PEEP 10"
+    },
+    "labs": {
+      "ABG": "pH 7.28, pCO2 52 mmHg, pO2 58 mmHg",
+      "PFratio": "72.5 (severe ARDS)"
+    }
+  },
+  "layers": [
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis & Classification",
+      "icon": "\ud83d\udccb",
+      "questions": [
+        {
+          "id": "dx-1",
+          "stem": "You are applying the Berlin criteria to this patient.",
+          "question": "The P/F ratio (PaO2/FiO2) of 72.5 classifies this as:",
+          "options": [
+            "A. Severe ARDS (P/F \u2264100)",
+            "B. Moderate ARDS (P/F 100-200)",
+            "C. Mild ARDS (P/F 200-300)",
+            "D. Not ARDS - requires additional criteria"
+          ],
+          "correctIndex": 0,
+          "explanation": "P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality.",
+          "whyChain": [
+            {
+              "why": "Why use P/F ratio?",
+              "answer": "It standardizes hypoxemia assessment regardless of FiO2 level. SpO2 82% on room air is very different from SpO2 82% on 80% FiO2.",
+              "source": "Berlin Definition, JAMA 2012",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "dx-2",
+          "stem": "The Berlin criteria require all of the following EXCEPT:",
+          "question": "Which is NOT part of the Berlin definition?",
+          "options": [
+            "A. Not fully explained by cardiac failure",
+            "B. Pulmonary artery wedge pressure <18 mmHg",
+            "C. Bilateral opacities on chest imaging",
+            "D. Acute onset within 1 week of known insult"
+          ],
+          "correctIndex": 1,
+          "explanation": "The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is not the primary cause, using echo, BNP, and clinical assessment rather than mandatory PA catheter.",
+          "whyChain": [
+            {
+              "why": "Why was PAWP removed?",
+              "answer": "PA catheters are rarely placed now, and ARDS/cardiac failure often coexist. Clinical judgment with echo/biomarkers is more practical and equally accurate.",
+              "source": "Berlin Definition, JAMA 2012",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "\ud83d\udd2c",
+      "questions": [
+        {
+          "id": "path-1",
+          "stem": "You are explaining the pathophysiology to a medical student.",
+          "question": "The hallmark histopathological finding in ARDS is:",
+          "options": [
+            "A. Bronchiolar fibrosis",
+            "B. Diffuse alveolar damage with hyaline membranes",
+            "C. Granulomatous inflammation",
+            "D. Alveolar hemorrhage only"
+          ],
+          "correctIndex": 1,
+          "explanation": "Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline membrane formation (protein-rich fluid lining denuded alveoli). Later, proliferative phase shows type II pneumocyte proliferation and potential fibrosis.",
+          "whyChain": [
+            {
+              "why": "What causes hyaline membranes?",
+              "answer": "Protein-rich edema fluid from increased alveolar-capillary permeability coagulates on denuded alveolar surfaces, forming the characteristic pink, acellular hyaline membranes.",
+              "source": "Ware LB, Matthay MA. NEJM 2000",
+              "sourceUrl": null
+            },
+            {
+              "why": "Why does this cause hypoxemia?",
+              "answer": "Flooded and collapsed alveoli cannot participate in gas exchange. Blood perfusing these areas creates shunt (V/Q = 0), which does not improve with supplemental oxygen alone.",
+              "source": "OpenStax A&P 2e, Chapter 22 (Respiratory System)",
+              "sourceUrl": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "path-2",
+          "stem": "The patient's CXR shows bilateral infiltrates but some areas appear more affected than others.",
+          "question": "The concept of 'baby lung' in ARDS refers to:",
+          "options": [
+            "A. The small volume of normally aerated lung available for ventilation",
+            "B. The need to ventilate patients like neonates",
+            "C. The immature immune response in ARDS",
+            "D. The pulmonary hypoplasia seen in survivors"
+          ],
+          "correctIndex": 0,
+          "explanation": "CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. This 'baby lung' (often only 200-500 mL) must receive all the tidal volume, explaining why normal tidal volumes cause overdistension and injury.",
+          "whyChain": [
+            {
+              "why": "How does this inform ventilator management?",
+              "answer": "If only 25-30% of lung is aerated, delivering a normal 500 mL tidal volume means that small region receives all of it - massive overdistension causing ventilator-induced lung injury (VILI).",
+              "source": "Gattinoni L, Pesenti A. Intensive Care Med. 2005;31(6):776-84. PMID: 15812622",
+              "sourceUrl": null
+            },
+            {
+              "why": "Where is the 'baby lung' typically located?",
+              "answer": "In supine patients, dependent (posterior) lung is typically consolidated/collapsed while anterior lung remains aerated. This is why prone positioning helps - it redistributes perfusion to aerated regions.",
+              "source": "Gattinoni L, Pesenti A. Intensive Care Med. 2005;31(6):776-84. PMID: 15812622",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventilator-management",
+      "title": "Ventilator Management",
+      "icon": "\ud83e\udec1",
+      "questions": [
+        {
+          "id": "vent-1",
+          "stem": "You are adjusting ventilator settings. Current: TV 500 mL (6.4 mL/kg IBW), plateau pressure 32 cmH2O.",
+          "question": "According to ARDSNet protocol, the target tidal volume is:",
+          "options": [
+            "A. 10 mL/kg actual body weight",
+            "B. 6 mL/kg predicted body weight",
+            "C. 4 mL/kg predicted body weight",
+            "D. 8 mL/kg predicted body weight"
+          ],
+          "correctIndex": 1,
+          "explanation": "ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is the single most important intervention in ARDS management.",
+          "whyChain": [
+            {
+              "why": "Why use predicted body weight?",
+              "answer": "Lung size correlates with height and sex, not actual weight. An obese patient has the same lung size as a normal-weight person of the same height. Using actual weight overestimates safe tidal volume.",
+              "source": "ARDSNet. NEJM 2000",
+              "sourceUrl": null
+            },
+            {
+              "why": "How is PBW calculated?",
+              "answer": "Male: 50 + 2.3(height in inches - 60). Female: 45.5 + 2.3(height in inches - 60). Must measure height - don't guess.",
+              "source": "ARDSNet Protocol",
+              "sourceUrl": null
+            },
+            {
+              "why": "What if CO2 rises with low TV?",
+              "answer": "Permissive hypercapnia is acceptable (pH >7.15). Increase respiratory rate up to 35 before increasing TV. The mortality benefit of low TV outweighs hypercapnia risks.",
+              "source": "ARDSNet. NEJM 2000",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "vent-2",
+          "stem": "The plateau pressure is 32 cmH2O.",
+          "question": "What is the target plateau pressure in ARDS?",
+          "options": [
+            "A. Peak pressure is more important than plateau",
+            "B. \u226430 cmH2O",
+            "C. \u226440 cmH2O",
+            "D. \u226420 cmH2O"
+          ],
+          "correctIndex": 1,
+          "explanation": "Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal volume (down to 4 mL/kg if needed). Peak pressure includes airway resistance and is less predictive of lung injury.",
+          "whyChain": [
+            {
+              "why": "What is driving pressure?",
+              "answer": "Driving pressure = Plateau pressure - PEEP. Represents actual tidal stretch. Emerging evidence suggests driving pressure <15 cmH2O may be most predictive of survival.",
+              "source": "Amato MBP. NEJM 2015",
+              "sourceUrl": null
+            },
+            {
+              "why": "This patient has Pplat 32. What should you do?",
+              "answer": "Reduce tidal volume from 6 to 5 or even 4 mL/kg PBW. Increase RR to maintain minute ventilation. Accept permissive hypercapnia if needed.",
+              "source": "ARDSNet Protocol",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "vent-3",
+          "stem": "You are titrating PEEP. Current SpO2 82% on PEEP 10, FiO2 80%.",
+          "question": "The primary benefit of PEEP in ARDS is:",
+          "options": [
+            "A. Recruiting collapsed alveoli and maintaining their patency",
+            "B. Reducing pulmonary vascular resistance",
+            "C. Improving cardiac output",
+            "D. Reducing work of breathing"
+          ],
+          "correctIndex": 0,
+          "explanation": "PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cycle, reducing cyclic atelectasis (repeated open-collapse causing shear injury). This improves V/Q matching and oxygenation.",
+          "whyChain": [
+            {
+              "why": "How high should PEEP go?",
+              "answer": "ARDSNet studied high vs low PEEP tables. For severe ARDS, higher PEEP (12-24) may be beneficial. Titrate to oxygenation while watching hemodynamics and plateau pressure.",
+              "source": "Briel M. JAMA 2010 Meta-analysis",
+              "sourceUrl": null
+            },
+            {
+              "why": "What are the risks of high PEEP?",
+              "answer": "Overdistension of already-aerated lung, decreased venous return and cardiac output, and increased dead space. Must balance recruitment benefit against these risks.",
+              "source": "Gattinoni L, Pesenti A. Intensive Care Med. 2005;31(6):776-84. PMID: 15812622",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adjunctive-therapies",
+      "title": "Adjunctive Therapies",
+      "icon": "\ud83d\udc8a",
+      "questions": [
+        {
+          "id": "adj-1",
+          "stem": "Despite optimized ventilator settings (TV 4.5 mL/kg, PEEP 14, FiO2 100%), P/F ratio remains 65.",
+          "question": "What intervention has the strongest evidence for mortality benefit in severe ARDS?",
+          "options": [
+            "A. High-frequency oscillatory ventilation",
+            "B. Inhaled nitric oxide",
+            "C. Prone positioning for \u226516 hours/day",
+            "D. Extracorporeal membrane oxygenation (ECMO)"
+          ],
+          "correctIndex": 2,
+          "explanation": "PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It should be initiated early in severe ARDS, not as a rescue therapy after everything else fails.",
+          "whyChain": [
+            {
+              "why": "How does prone positioning work?",
+              "answer": "Redistributes ventilation to dorsal (better perfused) lung regions, improves V/Q matching, promotes secretion drainage, and reduces compression of lung by heart and abdomen.",
+              "source": "Gu\u00e9rin C. NEJM 2013 (PROSEVA)",
+              "sourceUrl": null
+            },
+            {
+              "why": "When should it be initiated?",
+              "answer": "PROSEVA enrolled patients within 12-24 hours of meeting severe ARDS criteria. Early proning is key - don't wait until refractory hypoxemia. Criteria: P/F <150 with PEEP \u22655 and FiO2 \u22650.6.",
+              "source": "Gu\u00e9rin C. NEJM 2013 (PROSEVA)",
+              "sourceUrl": null
+            },
+            {
+              "why": "What about the other options?",
+              "answer": "Inhaled NO improves oxygenation but no mortality benefit. HFOV may increase mortality in adults (OSCILLATE trial). ECMO is reserved for refractory cases (EOLIA trial showed trend but not significant mortality benefit).",
+              "source": "Multiple Randomized Controlled Trials",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "adj-2",
+          "stem": "You are considering neuromuscular blockade.",
+          "question": "Early neuromuscular blockade in severe ARDS:",
+          "options": [
+            "A. Only helps by reducing oxygen consumption",
+            "B. Is contraindicated due to ICU-acquired weakness risk",
+            "C. May improve outcomes by eliminating patient-ventilator dyssynchrony",
+            "D. Should be given to all mechanically ventilated patients"
+          ],
+          "correctIndex": 2,
+          "explanation": "ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different sedation practices. Mechanism: eliminates dyssynchrony, prevents patient-generated high transpulmonary pressures, and may have anti-inflammatory effects.",
+          "whyChain": [
+            {
+              "why": "What is the current recommendation?",
+              "answer": "Consider early NMB (first 48 hours) in severe ARDS, especially with dyssynchrony or difficulty achieving lung-protective ventilation. Use continuous infusion, not bolus.",
+              "source": "ACURASYS/ROSE Trials",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "adj-3",
+          "stem": "The patient has septic shock requiring norepinephrine. CVP is 12 mmHg.",
+          "question": "Fluid management in ARDS should aim for:",
+          "options": [
+            "A. Liberal fluids to maintain renal perfusion",
+            "B. Conservative fluid strategy once hemodynamically stable",
+            "C. Albumin infusions to raise oncotic pressure",
+            "D. Continuous diuresis regardless of hemodynamics"
+          ],
+          "correctIndex": 1,
+          "explanation": "FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal failure. However, this is AFTER initial resuscitation - don't withhold fluids from actively hypotensive/shock patients.",
+          "whyChain": [
+            {
+              "why": "Why does conservative fluid help?",
+              "answer": "In ARDS, capillary permeability is increased. Excess fluid accumulates in lungs worsening edema. Lower hydrostatic pressure reduces fluid leak across damaged alveolar-capillary membrane.",
+              "source": "NHLBI FACTT Trial. NEJM 2006",
+              "sourceUrl": null
+            },
+            {
+              "why": "When to initiate conservative strategy?",
+              "answer": "Once off vasopressors or stable on low dose, target negative fluid balance. Not during active resuscitation for shock - patients still need adequate perfusion.",
+              "source": "NHLBI FACTT Trial. NEJM 2006",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "adj-4",
+          "stem": "You are asked about corticosteroids for ARDS.",
+          "question": "Current evidence regarding corticosteroids in ARDS suggests:",
+          "options": [
+            "A. Steroids only help if started after day 14",
+            "B. Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days and mortality",
+            "C. Steroids are contraindicated in ARDS",
+            "D. High-dose methylprednisolone should be given to all ARDS patients"
+          ],
+          "correctIndex": 1,
+          "explanation": "The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe ARDS. CoDEX trial in COVID ARDS confirmed benefit. Start early (within first 2-3 days), not late.",
+          "whyChain": [
+            {
+              "why": "Why might steroids help in ARDS?",
+              "answer": "ARDS involves intense inflammation with cytokine storm. Steroids reduce inflammatory response, may prevent progression to fibroproliferative phase, and reduce ventilator-induced inflammation.",
+              "source": "Villar J. Lancet Respir Med 2020 (DEXA-ARDS)",
+              "sourceUrl": null
+            },
+            {
+              "why": "What about starting steroids late (after day 14)?",
+              "answer": "Late steroid initiation (>14 days) showed potential harm in older studies. Start early or not at all. Late fibroproliferative ARDS may have different biology.",
+              "source": "Meduri GU. Chest 2007",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complications-prognosis",
+      "title": "Complications & Prognosis",
+      "icon": "\u26a0\ufe0f",
+      "questions": [
+        {
+          "id": "comp-1",
+          "stem": "On day 5, the patient suddenly desaturates to 70%. You note asymmetric chest movement.",
+          "question": "The most important immediate step is:",
+          "options": [
+            "A. Stat CXR to evaluate for pneumothorax",
+            "B. Disconnect from ventilator and hand-bag to assess compliance",
+            "C. Emergency bronchoscopy",
+            "D. Increase FiO2 to 100% and PEEP to 20"
+          ],
+          "correctIndex": 1,
+          "explanation": "DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging suggests pneumothorax or equipment issue; difficult bagging suggests tube problem or bronchospasm. Barotrauma/pneumothorax is common in ARDS from high airway pressures.",
+          "whyChain": [
+            {
+              "why": "Why is pneumothorax common in ARDS?",
+              "answer": "High airway pressures + diseased lung = barotrauma. Overdistended alveoli can rupture causing pneumothorax, pneumomediastinum, or subcutaneous emphysema.",
+              "source": "Anzueto A. Crit Care Med",
+              "sourceUrl": null
+            },
+            {
+              "why": "If pneumothorax suspected, what's next?",
+              "answer": "If tension pneumothorax with hemodynamic instability, needle decompression BEFORE imaging. If stable, rapid CXR. Low threshold for bedside ultrasound (absence of lung sliding).",
+              "source": "ATLS Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        },
+        {
+          "id": "comp-2",
+          "stem": "After 2 weeks of mechanical ventilation, the patient is improving. You are discussing long-term outcomes.",
+          "question": "ARDS survivors commonly experience all of the following EXCEPT:",
+          "options": [
+            "A. Muscle weakness and functional limitation",
+            "B. Depression and reduced quality of life",
+            "C. Complete return to baseline lung function in most survivors",
+            "D. Cognitive impairment and PTSD"
+          ],
+          "correctIndex": 2,
+          "explanation": "ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. While pulmonary function often improves significantly, many survivors have persistent exercise limitation. The morbidity is substantial even when they 'survive.'",
+          "whyChain": [
+            {
+              "why": "What is PICS?",
+              "answer": "Post-Intensive Care Syndrome: new or worsening impairments in physical, cognitive, or mental health arising after critical illness and persisting beyond hospitalization.",
+              "source": "Needham DM. Crit Care Med 2012",
+              "sourceUrl": null
+            },
+            {
+              "why": "What improves outcomes for survivors?",
+              "answer": "Early mobilization in ICU, minimizing sedation, delirium prevention, pulmonary rehabilitation post-discharge, and psychological support.",
+              "source": "Schweickert WD. Lancet 2009",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "\ud83e\udde9",
+      "questions": [
+        {
+          "id": "synth-1",
+          "stem": "Integrating all the information about this patient with severe ARDS...",
+          "question": "The rationale for low tidal volume ventilation connects to:",
+          "options": [
+            "A. Preventing oxygen toxicity from high FiO2",
+            "B. Preventing carbon dioxide retention",
+            "C. Reducing work of breathing for the patient",
+            "D. The 'baby lung' concept - only a small portion of lung is available to receive the tidal volume"
+          ],
+          "correctIndex": 3,
+          "explanation": "This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated into this small volume causes overdistension and VILI. Low TV respects the functional lung size and prevents further injury.",
+          "whyChain": [
+            {
+              "why": "How does this connect to PEEP strategy?",
+              "answer": "PEEP recruits collapsed alveoli, effectively making the 'baby lung' bigger. More lung available means same TV distributed over larger volume = less overdistension.",
+              "source": "Gattinoni L, Pesenti A. Intensive Care Med. 2005;31(6):776-84. PMID: 15812622",
+              "sourceUrl": null
+            },
+            {
+              "why": "How does this connect to prone positioning?",
+              "answer": "Prone positioning recruits dorsal lung (collapsed when supine) and reduces compression. This increases the size of aerated lung, improving V/Q matching and allowing more homogeneous ventilation.",
+              "source": "Gu\u00e9rin C. NEJM 2013",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ACLS Algorithm - AHA",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33081529/",
+      "source": "Circulation 2020"
+    },
+    {
+      "title": "Shock Management - NCBI",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK531492/",
+      "source": "StatPearls"
+    }
+  ],
+  "platformLinks": [
+    {
+      "type": "adventure",
+      "text": "\ud83d\uddfa\ufe0f ARDS Adventure",
+      "url": "adventure-cases/ards-adventure.html"
+    },
+    {
+      "type": "deepDive",
+      "text": "\ud83d\udcda ARDS Deep Dive",
+      "url": "ards-deep-dive.json"
+    }
+  ],
+  "mcqs": [
+    {
+      "stem": "Which of the following is the MOST important initial step in evaluating a patient with suspected ards?",
+      "options": [
+        {
+          "text": "Obtain a thorough history and physical examination",
+          "correct": true,
+          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in ards. It guides all subsequent diagnostic and management decisions."
+        },
+        {
+          "text": "Order advanced imaging immediately",
+          "correct": false,
+          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively."
+        },
+        {
+          "text": "Start empiric treatment before evaluation",
+          "correct": false,
+          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable."
+        },
+        {
+          "text": "Consult a specialist before any workup",
+          "correct": false,
+          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings."
+        }
+      ]
+    },
+    {
+      "stem": "A patient presents with classic features of ards. Which clinical reasoning principle is MOST important in avoiding diagnostic error?",
+      "options": [
+        {
+          "text": "Search satisficing - stop looking after the first diagnosis",
+          "correct": false,
+          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses."
+        },
+        {
+          "text": "Consider the differential diagnosis systematically",
+          "correct": true,
+          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+        },
+        {
+          "text": "Rely primarily on pattern recognition",
+          "correct": false,
+          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases."
+        },
+        {
+          "text": "Order every available test to rule out all possibilities",
+          "correct": false,
+          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy."
+        }
+      ]
+    },
+    {
+      "stem": "When managing ards, which approach best supports evidence-based practice?",
+      "options": [
+        {
+          "text": "Follow institutional protocols regardless of patient factors",
+          "correct": false,
+          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances."
+        },
+        {
+          "text": "Base decisions solely on clinical experience",
+          "correct": false,
+          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence."
+        },
+        {
+          "text": "Integrate current best evidence with clinical expertise and patient values",
+          "correct": true,
+          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+        },
+        {
+          "text": "Always defer to the most recent published study",
+          "correct": false,
+          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "content": "Comprehensive review of ARDS."
+    },
+    {
+      "title": "Clinical Approach",
+      "content": "Systematic approach to ARDS including recognition, diagnosis, and management."
+    },
+    {
+      "title": "Key Points",
+      "content": "Evidence-based clinical pearls for ARDS."
+    }
+  ]
+}

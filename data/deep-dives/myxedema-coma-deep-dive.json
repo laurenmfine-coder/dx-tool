@@ -1,0 +1,630 @@
+{
+  "id": "myxedema-coma-deep-dive",
+  "title": "Myxedema Coma",
+  "version": "1.0",
+  "totalQuestions": 16,
+  "estimatedTime": "30 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Endocrinology Fellows, Critical Care, Emergency Medicine",
+  "objectives": [
+    "Recognize clinical features of myxedema coma",
+    "Identify precipitating factors",
+    "Understand pathophysiology of decompensated hypothyroidism",
+    "Initiate appropriate treatment (hydrocortisone BEFORE thyroid hormone)",
+    "Select thyroid hormone replacement regimen (T4 \u00b1 T3)",
+    "Provide supportive care (avoid active rewarming, ventilatory support)"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "ATA Guidelines for Treatment of Hypothyroidism",
+      "citation": "Jonklaas J, et al. Guidelines for the Treatment of Hypothyroidism. Thyroid. 2014;24(12):1670-1751",
+      "url": "https://www.liebertpub.com/doi/10.1089/thy.2014.0028",
+      "keyPoints": [
+        "IV levothyroxine loading dose 200-400 mcg",
+        "IV glucocorticoids before thyroid hormone",
+        "Consider adding T3 (weak recommendation)",
+        "ICU admission for monitoring"
+      ]
+    },
+    {
+      "name": "StatPearls: Myxedema Coma",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK545193/"
+    },
+    {
+      "name": "Endotext: Myxedema and Coma",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK279007/"
+    }
+  ],
+  "vignette": {
+    "text": "A 72-year-old woman is brought to the ED by EMS after being found unresponsive at home during a cold snap. Her family reports she has been increasingly confused and lethargic over the past week. She has a history of hypothyroidism but ran out of her levothyroxine 3 months ago and didn't refill it.\n\nPast Medical History: Hypothyroidism (post-radioiodine ablation for Graves disease 15 years ago), Type 2 diabetes, Hypertension\n\nMedications: Was on levothyroxine 125 mcg daily (not taking), metformin, lisinopril\n\nAllergies: NKDA",
+    "physicalExam": {
+      "general": "Obtunded, responds only to painful stimuli, marked periorbital and facial edema",
+      "vitals": {
+        "Temp": "94.5\u00b0F (34.7\u00b0C)",
+        "BP": "88/54 mmHg",
+        "HR": "48 bpm",
+        "RR": "8/min",
+        "SpO2": "88% on RA"
+      },
+      "HEENT": "Macroglossia, periorbital edema, thin lateral eyebrows",
+      "cardiovascular": "Bradycardic, distant heart sounds",
+      "pulmonary": "Shallow respirations, hypoventilation",
+      "abdomen": "Distended, hypoactive bowel sounds",
+      "extremities": "Non-pitting edema, cool and dry skin, delayed relaxation of reflexes",
+      "neuro": "Obtunded, GCS 8, sluggish pupils"
+    },
+    "diagnostics": {
+      "labs": {
+        "TSH": {
+          "value": "95 mIU/L",
+          "reference": "0.4-4.0",
+          "flag": "MARKEDLY ELEVATED"
+        },
+        "Free_T4": {
+          "value": "<0.3 ng/dL",
+          "reference": "0.8-1.8",
+          "flag": "UNDETECTABLE"
+        },
+        "Free_T3": {
+          "value": "<0.5 pg/mL",
+          "reference": "2.3-4.2",
+          "flag": "UNDETECTABLE"
+        },
+        "Sodium": {
+          "value": "118 mEq/L",
+          "reference": "136-145",
+          "flag": "SEVERELY LOW"
+        },
+        "Glucose": {
+          "value": "52 mg/dL",
+          "reference": "70-100",
+          "flag": "LOW"
+        },
+        "Cortisol_random": {
+          "value": "Pending"
+        },
+        "ABG": {
+          "pH": "7.28",
+          "pCO2": "58 mmHg",
+          "pO2": "55 mmHg",
+          "HCO3": "26 mEq/L",
+          "interpretation": "Respiratory acidosis with hypoxemia"
+        }
+      },
+      "ECG": "Sinus bradycardia 48 bpm, low voltage QRS, prolonged QT",
+      "CXR": "Small bilateral pleural effusions, cardiomegaly"
+    }
+  },
+  "layers": [
+    {
+      "id": "recognition",
+      "title": "Recognition",
+      "icon": "\ud83d\udd0d",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "myx-recog-1",
+          "stem": "This patient has hypothermia, bradycardia, altered mental status, and undetectable thyroid hormones.",
+          "question": "What is the classic clinical triad of myxedema coma?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Patients are always in true coma",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Fever, tachycardia, and agitation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Classic triad: (1) ALTERED MENTAL STATUS (confusion \u2192 obtundation \u2192 coma), (2) HYPOTHERMIA (often <95\u00b0F/35\u00b0C), (3) PRECIPITATING EVENT (infection, cold exposure, medication non-adherence, sedatives, surgery); Additional features: Bradycardia, hypotension, hypoventilation, hyponatremia, hypoglycemia",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Only laboratory findings matter",
+              "correct": false
+            }
+          ],
+          "explanation": "Myxedema coma triad: (1) ALTERED MENTAL STATUS: Despite name 'coma,' most patients have delirium/obtundation rather than true coma - progressive AMS is hallmark; (2) HYPOTHERMIA: Present in 70-90%, may be severe (<94\u00b0F), may be masked by concurrent infection; (3) PRECIPITATING EVENT: Something overwhelms compensatory mechanisms. Additional classic features: Bradycardia, hypotension, hypoventilation with respiratory failure, hyponatremia (SIADH-like), hypoglycemia, non-pitting edema, delayed DTRs. This patient has all features: obtunded (AMS), temp 94.5\u00b0F (hypothermia), medication non-adherence (precipitant).",
+          "whyChain": [
+            {
+              "why": "Why is this patient hypotensive?",
+              "answer": "Hypothyroidism causes reduced cardiac output (bradycardia + reduced contractility), but chronically patients compensate with peripheral vasoconstriction. When decompensated, this fails. Also: Pericardial effusion (distant heart sounds, cardiomegaly on CXR) further reduces cardiac output. Hypotension may be refractory to fluids and vasopressors until thyroid hormone is given.",
+              "source": "EMCrit",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://emcrit.org/ibcc/myxedema/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "precipitants",
+      "title": "Precipitating Factors",
+      "icon": "\u26a1",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "myx-precip-1",
+          "stem": "This patient stopped taking her levothyroxine 3 months ago.",
+          "question": "What are common precipitating factors for myxedema coma?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Thyroid hormone non-adherence is rare",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Precipitating factors are not important",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Only cold exposure causes myxedema coma",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "DIMES mnemonic: Drugs (sedatives, opioids, anesthetics, amiodarone, lithium), Infection (pneumonia, UTI, sepsis - most common), Metabolic (hypoglycemia, hyponatremia, acidosis), Environment (cold exposure), Stroke/Surgery/Stress (MI, trauma, burns); Also: Thyroid hormone non-adherence, GI bleeding, diuretics",
+              "correct": true
+            }
+          ],
+          "explanation": "Precipitating factors (DIMES): DRUGS: Sedatives, opioids, anesthetics, amiodarone, lithium, beta-blockers, antipsychotics, checkpoint inhibitors; INFECTION: Most common precipitant - pneumonia, UTI, sepsis (may lack fever due to hypothermia); METABOLIC: Hypoglycemia, hyponatremia, acidosis; ENVIRONMENT: Cold exposure (especially in elderly during winter); STROKE/SURGERY/STRESS: CVA, MI, trauma, surgery, burns, GI bleeding. ALSO: Thyroid hormone non-adherence (this patient), contrast dyes. This patient: Non-adherence + cold exposure = double precipitant.",
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://emergencycarebc.ca/clinical_resource/clinical-summary/myxedema-coma/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "icon": "\ud83d\udd2c",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "myx-dx-1",
+          "stem": "Labs show TSH 95, undetectable T4 and T3.",
+          "question": "How is myxedema coma diagnosed?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Clinical diagnosis supported by labs: HIGH TSH + LOW free T4 (primary hypothyroidism - most common); Low/normal TSH + low T4 = central hypothyroidism (pituitary); Labs also show: Hyponatremia (dilutional), hypoglycemia, elevated CPK, hypercholesterolemia, anemia; ABG: Respiratory acidosis with hypoxemia; ECG: Bradycardia, low voltage, prolonged QT; Start treatment empirically if high suspicion - don't wait for labs",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "TSH is always normal in myxedema coma",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Diagnosis requires confirmed coma",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Wait for all labs before treating",
+              "correct": false
+            }
+          ],
+          "explanation": "Myxedema coma diagnosis: CLINICAL SUSPICION is key - don't wait for labs to treat. Lab findings: PRIMARY HYPOTHYROIDISM (95%): High TSH (often >50), Low/undetectable free T4/T3; CENTRAL (pituitary): Low/inappropriate normal TSH, Low T4/T3. Associated labs: Hyponatremia (impaired free water clearance), Hypoglycemia (reduced gluconeogenesis \u00b1 adrenal insufficiency), Elevated CPK (myopathy), Hypercholesterolemia, Normocytic anemia. ABG: Respiratory acidosis (hypoventilation) + hypoxemia. ECG: Bradycardia, low voltage (pericardial effusion), prolonged QT. This patient: Primary hypothyroidism (TSH 95, undetectable T4).",
+          "whyChain": [
+            {
+              "why": "Why check random cortisol?",
+              "answer": "Hypothyroidism can coexist with adrenal insufficiency: (1) Central: Pituitary disease affects both TSH and ACTH; (2) Autoimmune: Schmidt syndrome (autoimmune thyroiditis + adrenal insufficiency). Also, giving thyroid hormone increases cortisol metabolism - can precipitate adrenal crisis if underlying insufficiency. ALWAYS give hydrocortisone before/with thyroid hormone.",
+              "source": "StatPearls",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK545193/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "treatment-steroids",
+      "title": "Glucocorticoid Therapy",
+      "icon": "\ud83d\udc89",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "myx-steroid-1",
+          "stem": "You are preparing to treat this patient.",
+          "question": "Why must glucocorticoids be given BEFORE thyroid hormone?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Only give steroids if cortisol is low",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Glucocorticoids are not needed",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "HYDROCORTISONE 100 mg IV q8h (200-300 mg/day total) - give BEFORE thyroid hormone; Rationale: (1) Thyroid hormone increases cortisol metabolism \u2192 can precipitate adrenal crisis; (2) Hypothyroidism can mask coexisting adrenal insufficiency; (3) Draw random cortisol first but don't wait for results; Taper once cortisol confirmed adequate and patient stabilized",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Give thyroid hormone first, steroids later",
+              "correct": false
+            }
+          ],
+          "explanation": "Glucocorticoid therapy in myxedema coma: HYDROCORTISONE 100 mg IV loading, then 100 mg IV q8h (or 50 mg q6h). MUST give BEFORE or WITH thyroid hormone replacement. Rationale: (1) Thyroid hormone increases cortisol metabolism - can unmask/precipitate adrenal insufficiency; (2) Hypothyroidism may mask underlying adrenal insufficiency (autoimmune polyglandular syndrome, pituitary disease); (3) Adrenal crisis has high mortality. Protocol: Draw random cortisol \u2192 Give hydrocortisone \u2192 Give thyroid hormone. Interpret cortisol later: <3 \u03bcg/dL = adrenal insufficiency, >18 \u03bcg/dL = adequate; 3-18 = needs ACTH stim test after recovery. Taper steroids once patient stable and cortisol confirmed adequate.",
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK545193/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "treatment-thyroid",
+      "title": "Thyroid Hormone Replacement",
+      "icon": "\ud83d\udc8a",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "myx-thyroid-1",
+          "stem": "After giving hydrocortisone, you need to give thyroid hormone.",
+          "question": "What thyroid hormone regimen is recommended for myxedema coma?",
+          "options": [
+            {
+              "id": "A",
+              "text": "T3 alone is always preferred",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Start with very low doses only",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Oral levothyroxine only",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "IV LEVOTHYROXINE (T4): Loading dose 200-400 mcg IV, then 50-100 mcg IV daily; Consider adding IV LIOTHYRONINE (T3): 5-20 mcg loading, then 2.5-10 mcg q8h - for faster onset, especially if not improving; IV route preferred (GI absorption unreliable); Monitor for cardiac ischemia/arrhythmias - use lower doses in CAD/elderly; Switch to oral when patient able to take PO",
+              "correct": true
+            }
+          ],
+          "explanation": "Thyroid hormone replacement: IV route essential (unreliable GI absorption). LEVOTHYROXINE (T4): Loading 200-400 mcg IV (or 4 mcg/kg), then 50-100 mcg IV daily. T4 has slower onset (hours-days) but safer. Consider adding LIOTHYRONINE (T3): Loading 5-20 mcg IV, then 2.5-10 mcg q8h. T3 has faster onset (minutes-hours) but higher risk of arrhythmias/ischemia. ATA Guidelines: Strong recommendation for IV T4 + glucocorticoids; Weak recommendation to consider adding T3. Controversy exists: Some give T4 alone, some add T3. Monitor cardiac: Risk of arrhythmias, MI especially in elderly/CAD. If no improvement at 24-48h on T4 alone, add T3.",
+          "whyChain": [
+            {
+              "why": "Why might T3 be needed?",
+              "answer": "In severe illness, peripheral conversion of T4 to T3 is impaired ('sick euthyroid syndrome'). T3 is the active hormone at tissue level. If patient not responding to T4 alone (still comatose, hemodynamically unstable at 24h), adding T3 may help. But T3 carries higher cardiac risk - use cautiously.",
+              "source": "Endotext",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK279007/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supportive-care",
+      "title": "Supportive Care",
+      "icon": "\ud83c\udfe5",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "myx-support-1",
+          "stem": "The patient is hypothermic (94.5\u00b0F) and hypotensive.",
+          "question": "What supportive care is essential in myxedema coma?",
+          "options": [
+            {
+              "id": "A",
+              "text": "HYPOTHERMIA: PASSIVE rewarming only (blankets) - active external rewarming causes vasodilation \u2192 shock; VENTILATION: Intubate if respiratory failure (this patient needs it - RR 8, hypoxemic, hypercarbic); HYPOTENSION: Fluids cautiously (risk of CHF), vasopressors may be refractory until thyroid hormone given; HYPONATREMIA: Fluid restriction, avoid rapid correction; HYPOGLYCEMIA: IV dextrose; INFECTION: Empiric antibiotics if suspected",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Aggressive active rewarming is essential",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Avoid intubation at all costs",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Large volume fluid resuscitation",
+              "correct": false
+            }
+          ],
+          "explanation": "Supportive care: (1) HYPOTHERMIA: PASSIVE rewarming ONLY (blankets, warm environment). Active external rewarming (warming blankets, heated O2) causes peripheral vasodilation \u2192 worsening hypotension/shock. Core warming (warm IV fluids, peritoneal lavage) may be considered for severe hypothermia; (2) VENTILATION: Low threshold for intubation - hypoventilation is common (this patient: RR 8, hypoxemic, hypercarbic). May need prolonged ventilation; (3) HYPOTENSION: Cautious IV fluids (risk of CHF from myxedema heart), Vasopressors often refractory until thyroid hormone takes effect; (4) HYPONATREMIA: Fluid restriction, will improve with thyroid hormone, avoid rapid correction; (5) HYPOGLYCEMIA: IV dextrose; (6) INFECTION: Search for and treat precipitating infection (empiric antibiotics if suspected).",
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://emcrit.org/ibcc/myxedema/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prognosis",
+      "title": "Prognosis",
+      "icon": "\ud83d\udcca",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "myx-prog-1",
+          "stem": "You are discussing prognosis with the family.",
+          "question": "What is the prognosis of myxedema coma?",
+          "options": [
+            {
+              "id": "A",
+              "text": "All patients recover completely",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Prognosis is unrelated to treatment timing",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Mortality is <5% with treatment",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "MORTALITY: 20-60% despite treatment (recent studies ~30-40%); Poor prognostic factors: Advanced age, persistent hypothermia, bradycardia <44 bpm, sepsis, hypotension, need for mechanical ventilation, lower GCS, higher APACHE scores; Shock and multiorgan failure are leading causes of death; Early recognition and treatment improve outcomes",
+              "correct": true
+            }
+          ],
+          "explanation": "Myxedema coma prognosis: MORTALITY 20-60% historically, recent data suggest 30-40% with modern ICU care. Still a life-threatening emergency. POOR PROGNOSTIC FACTORS: Advanced age, Persistent hypothermia despite treatment, Severe bradycardia (<44 bpm), Sepsis/infection as precipitant, Persistent hypotension/shock, Need for mechanical ventilation, Lower GCS at presentation, Higher APACHE II scores, Multiorgan failure. Leading causes of death: Shock, respiratory failure, sepsis. KEY: Early recognition and prompt treatment with thyroid hormone + hydrocortisone improves survival. Delay in treatment significantly increases mortality.",
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK545193/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "\ud83d\udd17",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "myx-syn-1",
+          "stem": "This patient needs immediate treatment.",
+          "question": "What is the complete management approach for this patient?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Immediate: ICU admission, cardiac monitoring; (1) Draw labs (TSH, T4, T3, cortisol) but don't wait for results; (2) HYDROCORTISONE 100 mg IV first; (3) LEVOTHYROXINE 200-400 mcg IV loading; (4) Intubate for respiratory failure (RR 8, hypoxia, hypercarbia); (5) Passive rewarming only; (6) IV dextrose for hypoglycemia; (7) Cautious fluids, vasopressors PRN; (8) Search for/treat precipitating infection; Continue T4 50-100 mcg IV daily, consider adding T3 if not improving",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Give thyroid hormone before steroids",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Active rewarming and observation only",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Wait for labs before any treatment",
+              "correct": false
+            }
+          ],
+          "explanation": "Complete management: IMMEDIATE ACTIONS: ICU admission, continuous cardiac monitoring, prepare for intubation. TREATMENT SEQUENCE: (1) Draw labs (TSH, free T4, free T3, random cortisol, CBC, CMP, ABG) - but DON'T WAIT for results; (2) HYDROCORTISONE 100 mg IV FIRST (before thyroid hormone); (3) LEVOTHYROXINE 200-400 mcg IV loading dose; (4) Consider LIOTHYRONINE 5-10 mcg IV if severe; (5) INTUBATE - this patient has respiratory failure (RR 8, pCO2 58, pO2 55); (6) PASSIVE REWARMING only - blankets, warm room, no active external warming; (7) IV DEXTROSE for glucose 52; (8) Cautious IV fluids (risk CHF), vasopressors if needed (may be refractory initially); (9) Search for precipitating infection, empiric antibiotics if suspected. ONGOING: T4 50-100 mcg IV daily, hydrocortisone 100 mg IV q8h, add T3 if no improvement at 24-48h, fluid restriction for hyponatremia, taper steroids when stable.",
+          "sources": [
+            {
+              "text": "StatPearls: Myxedema Coma. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559037/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK545193/",
+            "https://emcrit.org/ibcc/myxedema/"
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "ADA Standards of Care: DKA",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19564476/",
+      "source": "Diabetes Care 2009"
+    },
+    {
+      "title": "ATA Thyroid Storm Guidelines",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27521067/",
+      "source": "Thyroid 2016"
+    },
+    {
+      "title": "Adrenal Crisis Management",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK499968/",
+      "source": "StatPearls"
+    }
+  ],
+  "platformLinks": [
+    {
+      "type": "adventure",
+      "text": "\ud83d\uddfa\ufe0f Myxedema Coma Adventure",
+      "url": "adventure-cases/myxedema-coma-adventure.html"
+    },
+    {
+      "type": "deepDive",
+      "text": "\ud83d\udcda Myxedema Coma Deep Dive",
+      "url": "myxedema-coma-deep-dive.json"
+    }
+  ],
+  "mcqs": [
+    {
+      "stem": "Which of the following is the MOST important initial step in evaluating a patient with suspected myxedema coma?",
+      "options": [
+        {
+          "text": "Obtain a thorough history and physical examination",
+          "correct": true,
+          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in myxedema coma. It guides all subsequent diagnostic and management decisions."
+        },
+        {
+          "text": "Order advanced imaging immediately",
+          "correct": false,
+          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively."
+        },
+        {
+          "text": "Start empiric treatment before evaluation",
+          "correct": false,
+          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable."
+        },
+        {
+          "text": "Consult a specialist before any workup",
+          "correct": false,
+          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings."
+        }
+      ]
+    },
+    {
+      "stem": "A patient presents with classic features of myxedema coma. Which clinical reasoning principle is MOST important in avoiding diagnostic error?",
+      "options": [
+        {
+          "text": "Search satisficing - stop looking after the first diagnosis",
+          "correct": false,
+          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses."
+        },
+        {
+          "text": "Consider the differential diagnosis systematically",
+          "correct": true,
+          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+        },
+        {
+          "text": "Rely primarily on pattern recognition",
+          "correct": false,
+          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases."
+        },
+        {
+          "text": "Order every available test to rule out all possibilities",
+          "correct": false,
+          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy."
+        }
+      ]
+    },
+    {
+      "stem": "When managing myxedema coma, which approach best supports evidence-based practice?",
+      "options": [
+        {
+          "text": "Follow institutional protocols regardless of patient factors",
+          "correct": false,
+          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances."
+        },
+        {
+          "text": "Base decisions solely on clinical experience",
+          "correct": false,
+          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence."
+        },
+        {
+          "text": "Integrate current best evidence with clinical expertise and patient values",
+          "correct": true,
+          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+        },
+        {
+          "text": "Always defer to the most recent published study",
+          "correct": false,
+          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence."
+        }
+      ]
+    },
+    {
+      "stem": "A patient in DKA has a serum potassium of 3.1 mEq/L on presentation. What should be done BEFORE starting insulin?",
+      "options": [
+        {
+          "text": "Replace potassium to \u22653.3 mEq/L first, as insulin will further lower potassium and risk cardiac arrest",
+          "correct": true,
+          "explanation": "Per ADA guidelines, if K+ <3.3 mEq/L, potassium must be replaced BEFORE insulin administration. Insulin drives potassium intracellularly, and severe hypokalemia (K+ <3.0) can cause fatal cardiac arrhythmias. Replace with IV KCl 20-40 mEq/hr until K+ \u22653.3, then start insulin."
+        },
+        {
+          "text": "Start insulin immediately \u2014 DKA is life-threatening and cannot be delayed",
+          "correct": false,
+          "explanation": "While DKA requires urgent treatment, giving insulin with K+ <3.3 mEq/L can precipitate fatal hypokalemia. The 15-30 minute delay to partially correct potassium is critical for patient safety."
+        },
+        {
+          "text": "Give IV calcium gluconate for cardiac membrane stabilization, then start insulin",
+          "correct": false,
+          "explanation": "IV calcium stabilizes the myocardium in HYPERkalemia, not hypokalemia. For hypokalemia, direct potassium replacement is needed."
+        },
+        {
+          "text": "Start bicarbonate infusion to correct the acidosis, which will normalize potassium",
+          "correct": false,
+          "explanation": "Bicarbonate shifts potassium intracellularly and would WORSEN hypokalemia. Routine bicarbonate is not recommended in DKA unless pH <6.9."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "content": "Comprehensive review of Myxedema Coma."
+    },
+    {
+      "title": "Clinical Approach",
+      "content": "Systematic approach to Myxedema Coma including recognition, diagnosis, and management."
+    },
+    {
+      "title": "Key Points",
+      "content": "Evidence-based clinical pearls for Myxedema Coma."
+    }
+  ]
+}

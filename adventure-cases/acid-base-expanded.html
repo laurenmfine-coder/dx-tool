@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Acid-Base Disorders - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #7dd3fc; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #bae6fd; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #0ea5e9; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(14,165,233,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(14,165,233,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #bae6fd; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(14,165,233,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #0ea5e9, #0369a1); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0ea5e9, #7dd3fc); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #0ea5e9; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #7dd3fc; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:#475569;margin-bottom:8px;font-weight:600">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK536919/" target="_blank" rel="noopener">ABG Interpretation - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/31/anion-gap" target="_blank" rel="noopener">Anion Gap Calculator (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0, difficulty = 'standard';
+    const stages = [
+    {
+        title: "The Systematic Approach",
+        content: `<div class="narrative"><p>A <span class="highlight">55-year-old diabetic man</span> presents obtunded. His ABG shows:</p><p style="margin-top:12px;font-family:monospace;background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;"><strong>pH 7.22</strong> | PaCO₂ 24 | HCO₃ 10 | Na 140 | Cl 100 | K 5.8 | Glucose 450</p></div>
+        <div class="socratic-prompt"><h4>Step-by-Step Analysis</h4><p>What is the systematic approach to interpreting an ABG, and what is the primary disorder here?</p></div>`,
+        hint_beginner: "Step 1: Look at pH (<7.35 = acidemia, >7.45 = alkalemia).",
+        hint_advanced: "After identifying the primary disorder, always check if compensation is appropriate.",
+        question: {
+            prompt: "What is the FIRST step in acid-base interpretation?",
+            options: [
+                { text: "Calculate the anion gap", correct: false },
+                { text: "Look at the pH to determine acidemia or alkalemia", correct: true },
+                { text: "Check the PaCO₂", correct: false },
+                { text: "Calculate the delta-delta ratio", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Step 1: Look at pH. This patient has pH 7.22 = acidemia. Then determine if it's metabolic (look at HCO₃) or respiratory (look at PaCO₂) as the primary process.",
+                incorrect: "Always start with pH. It tells you acidemia (<7.35) or alkalemia (>7.45). Then identify the primary disorder. Anion gap and delta-delta come later."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Systematic ABG Interpretation</div><div class="pathway">STEP 1: pH → Acidemia or Alkalemia?
+  • pH < 7.35 = Acidemia
+  • pH > 7.45 = Alkalemia
+
+STEP 2: Primary disorder?
+  • Low HCO₃ + acidemia = Metabolic acidosis
+  • High PaCO₂ + acidemia = Respiratory acidosis
+  • High HCO₃ + alkalemia = Metabolic alkalosis
+  • Low PaCO₂ + alkalemia = Respiratory alkalosis
+
+STEP 3: Is compensation appropriate?
+
+STEP 4: If metabolic acidosis → Calculate AG
+
+STEP 5: If elevated AG → Calculate delta-delta</div></div>`,
+            why_chain: [{q: "Why is pH the first step?", a: "pH tells you the net effect of all acid-base processes. Even if you have two opposing disorders, the pH tells you which one is 'winning' or if they're balanced."}, {q: "Can pH be normal with an acid-base disorder?", a: "Yes! Mixed disorders can result in normal pH. That's why you must look at HCO₃ and PaCO₂ even when pH is normal."}],
+            points: 10
+        }
+    },
+    {
+        title: "Metabolic Acidosis: Calculate the Anion Gap",
+        content: `<div class="narrative"><p>You've identified <span class="highlight">metabolic acidosis</span> (pH 7.22, HCO₃ 10). Now calculate the anion gap.</p><p style="margin-top:12px;font-family:monospace;">Na 140 | Cl 100 | HCO₃ 10</p></div>
+        <div class="socratic-prompt"><h4>Anion Gap</h4><p>What is the anion gap formula, and what does an elevated AG indicate?</p></div>`,
+        hint_beginner: "AG = Na - (Cl + HCO₃). Normal is 8-12.",
+        hint_advanced: "Remember to adjust AG for albumin: for each 1 g/dL albumin below 4, add 2.5 to the AG.",
+        question: {
+            prompt: "This patient's anion gap is 30 (140 - 100 - 10). What does an elevated anion gap indicate?",
+            options: [
+                { text: "Loss of bicarbonate from the GI tract", correct: false },
+                { text: "Accumulation of an unmeasured acid", correct: true },
+                { text: "Renal tubular acidosis", correct: false },
+                { text: "Dilutional acidosis from saline", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Elevated AG indicates an unmeasured anion (acid) has accumulated. The acid's H⁺ consumes HCO₃, and its anion remains, increasing the gap. Use MUDPILES to identify the cause.",
+                incorrect: "Elevated AG = unmeasured acid accumulation. The added acid consumes bicarbonate (lowering it) while its anion replaces HCO₃ (widening the gap). GI losses and RTA cause non-AG acidosis."
+            },
+            teaching: `<h4>MUDPILES: Causes of Anion Gap Metabolic Acidosis</h4><table class="comparison-table"><tr><th>Letter</th><th>Cause</th><th>Clues</th></tr><tr><td><strong>M</strong></td><td>Methanol</td><td>Osmol gap, visual changes</td></tr><tr><td><strong>U</strong></td><td>Uremia</td><td>Elevated BUN/Cr</td></tr><tr style="background:rgba(251,191,36,0.2);"><td><strong>D</strong></td><td>DKA</td><td>Hyperglycemia, ketones</td></tr><tr><td><strong>P</strong></td><td>Propylene glycol</td><td>IV lorazepam infusion</td></tr><tr><td><strong>I</strong></td><td>INH, Iron</td><td>History of ingestion</td></tr><tr style="background:rgba(251,191,36,0.2);"><td><strong>L</strong></td><td>Lactic acidosis</td><td>Shock, sepsis, metformin</td></tr><tr><td><strong>E</strong></td><td>Ethylene glycol</td><td>Osmol gap, oxalate crystals</td></tr><tr><td><strong>S</strong></td><td>Salicylates</td><td>Tinnitus, mixed disorder</td></tr></table>`,
+            why_chain: [{q: "Why does AG increase with added acid?", a: "Acid = H⁺ + anion. The H⁺ is buffered by HCO₃ (consuming it). The anion remains and replaces the lost HCO₃. Since Na and Cl stay the same, the gap widens."}, {q: "What is a normal AG?", a: "Traditionally 12 ± 4. Modern analyzers give 6-10. Always know your lab's normal range. An AG >20 is almost always pathologic."}],
+            points: 10
+        }
+    },
+    {
+        title: "Compensation: Is It Appropriate?",
+        content: `<div class="narrative"><p>This patient has metabolic acidosis with HCO₃ of 10. The PaCO₂ is 24. Is the respiratory compensation appropriate?</p></div>
+        <div class="socratic-prompt"><h4>Expected Compensation</h4><p>How do you calculate expected PaCO₂ in metabolic acidosis?</p></div>`,
+        hint_beginner: "Winter's formula: Expected PaCO₂ = 1.5 × [HCO₃] + 8 (±2).",
+        hint_advanced: "If actual PaCO₂ is higher than expected, there's a concomitant respiratory acidosis.",
+        question: {
+            prompt: "Using Winter's formula, the expected PaCO₂ for HCO₃ of 10 is approximately:",
+            options: [
+                { text: "30-34 mmHg", correct: false },
+                { text: "21-25 mmHg", correct: true },
+                { text: "15-19 mmHg", correct: false },
+                { text: "35-40 mmHg", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Winter's formula: 1.5 × 10 + 8 = 23 (±2), so expected range is 21-25. Patient's PaCO₂ of 24 is within range = appropriate compensation = pure metabolic acidosis.",
+                incorrect: "Winter's formula: Expected PaCO₂ = 1.5 × [HCO₃] + 8 (±2) = 1.5 × 10 + 8 = 23 ± 2 = 21-25 mmHg. This patient's PaCO₂ of 24 shows appropriate compensation."
+            },
+            teaching: `<h4>Compensation Formulas</h4><table class="comparison-table"><tr><th>Disorder</th><th>Expected Compensation</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Metabolic acidosis</strong></td><td>PaCO₂ = 1.5 × [HCO₃] + 8 (±2) - Winter's</td></tr><tr><td><strong>Metabolic alkalosis</strong></td><td>PaCO₂ = 0.7 × [HCO₃] + 21 (±2)</td></tr><tr><td><strong>Acute resp acidosis</strong></td><td>HCO₃ ↑ 1 per 10 ↑ PaCO₂</td></tr><tr><td><strong>Chronic resp acidosis</strong></td><td>HCO₃ ↑ 3.5 per 10 ↑ PaCO₂</td></tr><tr><td><strong>Acute resp alkalosis</strong></td><td>HCO₃ ↓ 2 per 10 ↓ PaCO₂</td></tr><tr><td><strong>Chronic resp alkalosis</strong></td><td>HCO₃ ↓ 5 per 10 ↓ PaCO₂</td></tr></table>`,
+            why_chain: [{q: "Why can't compensation fully normalize pH?", a: "Compensation is a physiologic response, not a pathologic process. The body will not overcompensate. If pH is normal with significantly abnormal values, suspect a mixed disorder."}, {q: "What if compensation is inadequate?", a: "If PaCO₃ is higher than expected, there's also a respiratory acidosis. If lower than expected, there's also a respiratory alkalosis."}],
+            points: 10
+        }
+    },
+    {
+        title: "Delta-Delta: Unmasking Hidden Disorders",
+        content: `<div class="narrative"><p>You've confirmed an anion gap metabolic acidosis with appropriate respiratory compensation. But is there another metabolic disorder hiding?</p><p style="margin-top:12px;">AG = 30 | HCO₃ = 10</p></div>
+        <div class="alert-box"><div class="alert-title">🔑 HIGH-YIELD: The Delta-Delta Ratio</div><p>The delta-delta reveals additional metabolic disorders hiding behind an anion gap acidosis.</p></div>
+        <div class="socratic-prompt"><h4>Delta-Delta Analysis</h4><p>How do you calculate and interpret the delta-delta ratio?</p></div>`,
+        hint_beginner: "ΔAG = AG - 12; ΔHCO₃ = 24 - measured HCO₃. Ratio = ΔAG/ΔHCO₃.",
+        hint_advanced: "Ratio <1 suggests concurrent non-AG acidosis; ratio >2 suggests concurrent metabolic alkalosis.",
+        question: {
+            prompt: "This patient's delta-delta ratio is: ΔAG (30-12=18) / ΔHCO₃ (24-10=14) = 1.3. This indicates:",
+            options: [
+                { text: "Pure anion gap metabolic acidosis", correct: true },
+                { text: "AGMA plus non-anion gap metabolic acidosis", correct: false },
+                { text: "AGMA plus metabolic alkalosis", correct: false },
+                { text: "Non-anion gap metabolic acidosis alone", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Delta-delta ratio of 1-2 indicates pure AGMA. The rise in AG matches the fall in HCO₃ (1:1 relationship expected when an acid is added).",
+                incorrect: "Ratio 1-2 = pure AGMA. Ratio <1 = AGMA + non-AG acidosis (extra HCO₃ loss). Ratio >2 = AGMA + metabolic alkalosis (something raising HCO₃)."
+            },
+            teaching: `<h4>Interpreting Delta-Delta</h4><table class="comparison-table"><tr><th>Ratio</th><th>Interpretation</th><th>Example</th></tr><tr><td><strong><1</strong></td><td>AGMA + Non-AG acidosis</td><td>DKA + diarrhea</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>1-2</strong></td><td>Pure AGMA</td><td>DKA alone</td></tr><tr><td><strong>>2</strong></td><td>AGMA + Metabolic alkalosis</td><td>DKA + vomiting</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">🧬 Why Does This Work?</div><div class="pathway">For every H⁺ added, one HCO₃⁻ is consumed (1:1)
+The anion from the acid replaces the lost HCO₃
+
+If ΔAG = ΔHCO₃ → pure AGMA (ratio ~1)
+
+If ratio ≠ 1 → something else affects HCO₃:
+• <1: Extra HCO₃ loss (diarrhea, RTA)
+• >2: HCO₃ being generated (vomiting, diuretics)</div></div>`,
+            why_chain: [{q: "Clinical example of ratio >2?", a: "DKA patient with vomiting: AG 28, HCO₃ 18. ΔAG=16, ΔHCO₃=6. Ratio=2.7. The vomiting causes metabolic alkalosis, raising HCO₃ higher than expected for the AG."}, {q: "Clinical example of ratio <1?", a: "DKA patient with concurrent diarrhea: AG 24, HCO₃ 8. ΔAG=12, ΔHCO₃=16. Ratio=0.75. Diarrhea causes additional non-AG acidosis (HCO₃ loss)."}],
+            points: 10
+        }
+    },
+    {
+        title: "Non-Anion Gap Metabolic Acidosis",
+        content: `<div class="narrative"><p>A different patient presents with metabolic acidosis but a <span class="highlight">normal anion gap (AG = 10)</span>. This is a non-anion gap (hyperchloremic) metabolic acidosis.</p><p style="margin-top:12px;">pH 7.28 | HCO₃ 14 | Na 140 | Cl 116 | AG 10</p></div>
+        <div class="socratic-prompt"><h4>Non-AG Acidosis</h4><p>What causes metabolic acidosis WITHOUT an elevated anion gap?</p></div>`,
+        hint_beginner: "Think of bicarbonate LOSS (GI or renal) rather than acid ADDITION.",
+        hint_advanced: "Use urine anion gap to distinguish renal from GI causes.",
+        question: {
+            prompt: "What is the MOST common cause of non-anion gap metabolic acidosis?",
+            options: [
+                { text: "Diabetic ketoacidosis", correct: false },
+                { text: "Diarrhea", correct: true },
+                { text: "Lactic acidosis", correct: false },
+                { text: "Methanol ingestion", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Diarrhea causes direct bicarbonate loss from the GI tract. Chloride is retained to maintain electroneutrality, hence 'hyperchloremic' acidosis. No unmeasured anion is added.",
+                incorrect: "Diarrhea is the most common cause - direct GI bicarbonate loss. DKA, lactic acidosis, and methanol all cause ANION GAP acidosis because they add unmeasured acids."
+            },
+            teaching: `<h4>HARDASS: Non-Anion Gap Acidosis Causes</h4><table class="comparison-table"><tr><th>Letter</th><th>Cause</th></tr><tr><td><strong>H</strong></td><td>Hyperalimentation (TPN)</td></tr><tr><td><strong>A</strong></td><td>Addison's disease</td></tr><tr><td><strong>R</strong></td><td>Renal tubular acidosis</td></tr><tr style="background:rgba(251,191,36,0.2);"><td><strong>D</strong></td><td>Diarrhea (most common!)</td></tr><tr><td><strong>A</strong></td><td>Acetazolamide</td></tr><tr><td><strong>S</strong></td><td>Saline infusion (dilutional)</td></tr><tr><td><strong>S</strong></td><td>Spironolactone</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">📋 Urine Anion Gap</div><div class="pathway">UAG = Urine Na + Urine K - Urine Cl
+
+NEGATIVE UAG: GI loss (appropriate renal response)
+• Kidneys excreting NH₄⁺ with Cl⁻
+• Diarrhea is the cause
+
+POSITIVE UAG: Renal cause (RTA)
+• Kidneys NOT excreting acid appropriately
+• Look for RTA types</div></div>`,
+            why_chain: [{q: "Why is it called hyperchloremic?", a: "When HCO₃ is lost, Cl is retained to maintain electroneutrality. The gap stays normal because Cl replaces HCO₃ (both are measured anions)."}, {q: "What are the RTA types?", a: "Type 1 (distal): Can't secrete H⁺, urine pH >5.5, hypokalemia. Type 2 (proximal): Can't reabsorb HCO₃, urine pH variable. Type 4: Hypoaldosteronism, hyperkalemia."}],
+            points: 10
+        }
+    },
+    {
+        title: "Metabolic Alkalosis",
+        content: `<div class="narrative"><p>A patient with persistent vomiting presents with:</p><p style="margin-top:12px;font-family:monospace;">pH 7.52 | PaCO₂ 48 | HCO₃ 38 | Cl 88 | K 2.8</p></div>
+        <div class="socratic-prompt"><h4>Alkalosis Workup</h4><p>How do you classify and treat metabolic alkalosis?</p></div>`,
+        hint_beginner: "Check urine chloride: <20 = chloride-responsive (give saline); >20 = chloride-resistant.",
+        hint_advanced: "Why does vomiting cause alkalosis? (Loss of H⁺ and Cl⁻, volume contraction)",
+        question: {
+            prompt: "This patient's urine chloride is <10 mEq/L. This indicates:",
+            options: [
+                { text: "Chloride-resistant alkalosis - won't respond to saline", correct: false },
+                { text: "Chloride-responsive alkalosis - will respond to saline", correct: true },
+                { text: "Primary hyperaldosteronism", correct: false },
+                { text: "Bartter syndrome", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Urine Cl <20 = chloride-responsive. The kidneys are avidly retaining chloride due to volume depletion. Give NS and the alkalosis will resolve. Vomiting and diuretic use (remote) are classic causes.",
+                incorrect: "Urine Cl <20 indicates chloride-responsive alkalosis. The kidneys are holding onto Cl due to volume depletion. NS will fix it. Urine Cl >20 indicates chloride-resistant causes."
+            },
+            teaching: `<h4>Metabolic Alkalosis Classification</h4><table class="comparison-table"><tr><th>Urine Cl</th><th>Type</th><th>Causes</th><th>Treatment</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong><20</strong></td><td>Chloride-responsive</td><td>Vomiting, NG suction, diuretics (late), post-hypercapnia</td><td>Normal saline</td></tr><tr><td><strong>>20</strong></td><td>Chloride-resistant</td><td>Hyperaldosteronism, Cushing's, severe hypoK, Bartter/Gitelman</td><td>Treat underlying cause</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">🧬 Why Vomiting Causes Alkalosis</div><div class="pathway">Vomiting loses H⁺ and Cl⁻ (gastric HCl)
+    ↓
+Volume depletion activates RAAS
+    ↓
+Aldosterone → Na reabsorption, K/H secretion
+    ↓
+Kidney generates HCO₃ to replace lost Cl
+    ↓
+Hypokalemia → more H⁺ secretion
+    ↓
+METABOLIC ALKALOSIS maintained</div></div>`,
+            why_chain: [{q: "What is contraction alkalosis?", a: "Volume loss concentrates existing HCO₃. Also, decreased GFR means less HCO₃ is filtered and excreted. Volume repletion fixes it."}, {q: "Why does hypokalemia perpetuate alkalosis?", a: "When K⁺ is low, cells exchange intracellular K⁺ for extracellular H⁺. In the kidney, H⁺ is secreted instead of K⁺ to preserve potassium, regenerating HCO₃."}],
+            points: 10
+        }
+    },
+    {
+        title: "Respiratory Acid-Base Disorders",
+        content: `<div class="narrative"><p>A COPD patient presents with:</p><p style="margin-top:12px;font-family:monospace;">pH 7.32 | PaCO₂ 65 | HCO₃ 32</p><p>He has chronic respiratory acidosis with metabolic compensation.</p></div>
+        <div class="socratic-prompt"><h4>Respiratory Disorders</h4><p>How do you distinguish acute from chronic respiratory disorders?</p></div>`,
+        hint_beginner: "Renal compensation takes 3-5 days. Acute = minimal HCO₃ change; Chronic = significant HCO₃ change.",
+        hint_advanced: "Calculate expected HCO₃ for acute vs chronic to determine if compensation is appropriate.",
+        question: {
+            prompt: "How can you tell this is CHRONIC rather than acute respiratory acidosis?",
+            options: [
+                { text: "The pH is not severely low", correct: false },
+                { text: "The degree of HCO₃ elevation indicates renal compensation (days)", correct: true },
+                { text: "The PaCO₂ is very elevated", correct: false },
+                { text: "The patient has COPD", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! In chronic respiratory acidosis, HCO₃ rises 3.5 mEq/L per 10 mmHg rise in PaCO₂. For PaCO₂ of 65 (25 above normal): 2.5 × 3.5 = 8.75 → HCO₃ ~33. This patient's HCO₃ of 32 matches chronic compensation.",
+                incorrect: "The HCO₃ level reveals chronicity. Acute: HCO₃ rises only 1 per 10 ↑PaCO₂. Chronic: rises 3.5 per 10. This patient's elevated HCO₃ of 32 indicates the kidneys have had time to compensate."
+            },
+            teaching: `<h4>Acute vs Chronic Compensation</h4><table class="comparison-table"><tr><th>Disorder</th><th>Acute</th><th>Chronic</th></tr><tr><td><strong>Respiratory acidosis</strong></td><td>HCO₃ ↑ 1 per 10 ↑CO₂</td><td>HCO₃ ↑ 3.5 per 10 ↑CO₂</td></tr><tr><td><strong>Respiratory alkalosis</strong></td><td>HCO₃ ↓ 2 per 10 ↓CO₂</td><td>HCO₃ ↓ 5 per 10 ↓CO₂</td></tr></table>
+<div class="alert-box"><div class="alert-title">⏱️ Time Course</div><p>Renal compensation takes <strong>3-5 days</strong> to fully develop. If HCO₃ is significantly altered in a patient with acute respiratory symptoms, consider a mixed disorder!</p></div>`,
+            why_chain: [{q: "Why is chronic compensation greater?", a: "Acute: only buffering by hemoglobin and proteins (limited capacity). Chronic: kidneys upregulate H⁺ excretion and HCO₃ reabsorption, which takes days to reach maximum."}, {q: "What is acute-on-chronic?", a: "A patient with chronic respiratory acidosis (e.g., COPD) develops an acute exacerbation. The pH drops more than expected because baseline is already compensated. Common scenario!"}],
+            points: 10
+        }
+    },
+    {
+        title: "Mixed Disorders: The Triple Threat",
+        content: `<div class="narrative"><p>An alcoholic patient presents obtunded after several days of binge drinking and vomiting:</p><p style="margin-top:12px;font-family:monospace;">pH 7.40 | PaCO₂ 25 | HCO₃ 15 | AG 25</p><p><span class="critical">Normal pH with very abnormal values = mixed disorder!</span></p></div>
+        <div class="socratic-prompt"><h4>Mixed Disorders</h4><p>What are the clues that this is a triple acid-base disorder?</p></div>`,
+        hint_beginner: "Normal pH + abnormal CO₂ and HCO₃ = opposing disorders. Calculate AG and delta-delta.",
+        hint_advanced: "This patient has AGMA + metabolic alkalosis + respiratory alkalosis - a classic triple disorder.",
+        question: {
+            prompt: "This patient has all THREE of the following EXCEPT:",
+            options: [
+                { text: "Anion gap metabolic acidosis (from alcoholic ketoacidosis)", correct: false },
+                { text: "Metabolic alkalosis (from vomiting)", correct: false },
+                { text: "Respiratory alkalosis (from hepatic encephalopathy/withdrawal)", correct: false },
+                { text: "Respiratory acidosis (from CNS depression)", correct: true }
+            ],
+            explanation: {
+                correct: "Correct! This is a triple disorder: (1) AGMA from ketoacidosis, (2) Metabolic alkalosis from vomiting (delta-delta >2), (3) Respiratory alkalosis (low CO₃ inappropriate for HCO₃). The near-normal pH results from opposing forces.",
+                incorrect: "The patient has AGMA + met alkalosis + resp alkalosis. The low PaCO₂ indicates respiratory alkalosis (not acidosis). Liver disease and alcohol withdrawal both cause respiratory alkalosis."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Identifying This Triple Disorder</div><div class="pathway">Step 1: pH 7.40 - near normal (suspicious!)
+Step 2: Low HCO₃ (15) + Low PaCO₂ (25) - something wrong
+Step 3: AG = 25 - elevated → AGMA present
+Step 4: ΔAG = 13, ΔHCO₃ = 9, ratio = 1.4
+        Wait - ratio should show more alkalosis given vomiting
+Step 5: Is CO₂ appropriate for HCO₃ 15?
+        Winter's: 1.5(15) + 8 = 30.5 ± 2
+        Actual CO₂ = 25 (LOWER than expected!)
+        → Additional respiratory alkalosis
+
+TRIPLE DISORDER:
+1. AGMA (alcoholic ketoacidosis)
+2. Metabolic alkalosis (vomiting)
+3. Respiratory alkalosis (liver/withdrawal)</div></div>`,
+            why_chain: [{q: "Why do alcoholics develop respiratory alkalosis?", a: "Multiple reasons: hepatic encephalopathy stimulates respiratory center, alcohol withdrawal causes hyperventilation, and early sepsis (common in alcoholics) causes respiratory alkalosis."}, {q: "How do the disorders 'cancel out'?", a: "AGMA lowers pH, met alkalosis raises pH, resp alkalosis raises pH. The net effect can be near-normal pH, but each individual disorder is still present and may need treatment."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Resolution",
+        content: `<div class="narrative"><p>Returning to our original patient (DKA with AG 30, appropriate compensation, pure AGMA):</p><p style="margin-top:12px;">Treatment: IV fluids, insulin, electrolyte replacement. Monitor AG and HCO₃ for resolution.</p></div>
+        <div class="mechanism-box"><div class="mechanism-title">📚 Complete ABG Interpretation Algorithm</div><div class="pathway">1. pH → Acidemia or Alkalemia?
+          ↓
+2. Primary disorder? (HCO₃ or PaCO₂)
+          ↓
+3. Calculate expected compensation
+   • If appropriate → single disorder
+   • If not → additional respiratory disorder
+          ↓
+4. If metabolic acidosis → Calculate AG
+   • Normal AG → HARDASS
+   • Elevated AG → MUDPILES
+          ↓
+5. If elevated AG → Calculate delta-delta
+   • <1 → concurrent non-AG acidosis
+   • 1-2 → pure AGMA
+   • >2 → concurrent metabolic alkalosis</div></div>`,
+        question: {
+            prompt: "What is the MOST important principle in acid-base interpretation?",
+            options: [
+                { text: "Always calculate the anion gap first", correct: false },
+                { text: "Use a systematic step-by-step approach", correct: true },
+                { text: "Focus only on the pH value", correct: false },
+                { text: "Treat the numbers, not the patient", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! A systematic approach ensures you don't miss disorders. pH → Primary disorder → Compensation → AG (if met acidosis) → Delta-delta (if elevated AG). Clinical context always matters!",
+                incorrect: "Systematic approach is key. Going step-by-step ensures you identify all disorders. And always correlate with clinical picture - treat the patient, not just the numbers."
+            },
+            teaching: `<h4>Key Takeaways</h4>
+<ul style="line-height:2;margin-left:20px;">
+<li><strong>Step 1:</strong> pH determines acidemia vs alkalemia</li>
+<li><strong>Step 2:</strong> Identify primary disorder (metabolic vs respiratory)</li>
+<li><strong>Step 3:</strong> Check compensation with formulas</li>
+<li><strong>Step 4:</strong> Calculate AG for metabolic acidosis (MUDPILES vs HARDASS)</li>
+<li><strong>Step 5:</strong> Delta-delta reveals hidden disorders in AGMA</li>
+<li><strong>Urine Cl:</strong> Classifies metabolic alkalosis (responsive vs resistant)</li>
+<li><strong>Mixed disorders:</strong> Normal pH + abnormal values = suspicious</li>
+</ul>`,
+            why_chain: [],
+            points: 10
+        }
+    }
+];
+    function setDifficulty(d, btn) {
+        difficulty = d;
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.hint-beginner').forEach(h => h.style.display = d === 'beginner' ? 'block' : 'none');
+        document.querySelectorAll('.hint-advanced').forEach(h => h.style.display = d === 'advanced' ? 'block' : 'none');
+    }
+    function updateProgress() {
+        document.getElementById('progress').style.width = ((currentStage + 1) / stages.length * 100) + '%';
+        document.getElementById('maxScore').textContent = stages.length * 10;
+    }
+    function renderStage() {
+        const stage = stages[currentStage];
+        const container = document.getElementById('scene-container');
+        let html = `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>`;
+        if (stage.hint_beginner) html += `<div class="hint-beginner" style="display:${difficulty === 'beginner' ? 'block' : 'none'}">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+        if (stage.hint_advanced) html += `<div class="hint-advanced" style="display:${difficulty === 'advanced' ? 'block' : 'none'}">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+        html += stage.content;
+        if (stage.question) {
+            html += `<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;
+            stage.question.options.forEach((opt, i) => {
+                html += `<div class="mcq-option" onclick="checkAnswer(${i}, ${opt.correct})"><div class="option-letter">${String.fromCharCode(65 + i)}</div><div>${opt.text}</div></div>`;
+            });
+            html += `</div><div class="feedback correct-feedback" id="fb-correct"><div class="feedback-title">✓ Correct!</div>${stage.question.explanation.correct}</div>`;
+            html += `<div class="feedback incorrect-feedback" id="fb-incorrect"><div class="feedback-title">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;
+            if (stage.question.teaching) html += `<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;
+            if (stage.question.why_chain && stage.question.why_chain.length > 0) {
+                html += `<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain - Dig Deeper</h4>`;
+                stage.question.why_chain.forEach(w => {
+                    html += `<div class="why-item"><div class="why-q">${w.q}</div><div class="why-a">${w.a}</div></div>`;
+                });
+                html += `</div>`;
+            }
+            html += `<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;
+        }
+        html += `</div>`;
+        container.innerHTML = html;
+        updateProgress();
+    }
+    function checkAnswer(idx, correct) {
+        const options = document.querySelectorAll('.mcq-option');
+        if (options[0].classList.contains('disabled')) return;
+        options.forEach((opt, i) => {
+            opt.classList.add('disabled');
+            if (stages[currentStage].question.options[i].correct) opt.classList.add('correct');
+            else if (i === idx && !correct) opt.classList.add('incorrect');
+        });
+        if (correct) {
+            document.getElementById('fb-correct').classList.add('show');
+            score += stages[currentStage].question.points;
+            document.getElementById('score').textContent = score;
+        } else {
+            document.getElementById('fb-incorrect').classList.add('show');
+        }
+        const teaching = document.getElementById('teaching');
+        if (teaching) teaching.classList.add('show');
+        const whyChain = document.getElementById('why-chain');
+        if (whyChain) whyChain.classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    function nextStage() {
+        if (currentStage < stages.length - 1) { currentStage++; renderStage(); window.scrollTo(0, 0); }
+        else {
+            document.getElementById('scene-container').innerHTML = `<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length * 10}</p><p style="margin-bottom:30px;">You've mastered Acid-Base Disorders!</p><div style="text-align:left;max-width:500px;margin:0 auto;"><h4 style="color:#7dd3fc;margin-bottom:12px;">Key Points:</h4><ul style="line-height:2;"><li>Start with pH (acidemia vs alkalemia)</li><li>MUDPILES = AG acidosis causes</li><li>HARDASS = non-AG acidosis causes</li><li>Delta-delta reveals hidden disorders</li><li>Urine Cl classifies met alkalosis</li></ul></div></div>`;
+        }
+    }
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Acid"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

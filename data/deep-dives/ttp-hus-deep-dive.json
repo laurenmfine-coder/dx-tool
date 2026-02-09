@@ -1,0 +1,832 @@
+{
+  "id": "ttp-hus-deep-dive",
+  "title": "TTP and HUS: Thrombotic Microangiopathies",
+  "version": "1.0",
+  "totalQuestions": 22,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Hematology Fellows, Critical Care",
+  "objectives": [
+    "Recognize the clinical features of thrombotic microangiopathy (TMA)",
+    "Distinguish TTP from HUS and other causes of MAHA with thrombocytopenia",
+    "Apply the PLASMIC score for TTP risk stratification",
+    "Understand ADAMTS13 deficiency in TTP pathophysiology",
+    "Initiate plasma exchange and appropriate therapy for TTP",
+    "Differentiate typical (STEC) HUS from atypical (complement-mediated) HUS"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "ISTH TTP Diagnosis Guidelines",
+      "citation": "Zheng XL, et al. ISTH guidelines for the diagnosis of thrombotic thrombocytopenic purpura. J Thromb Haemost. 2020;18:2486-2495",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32914582/",
+      "keyPoints": [
+        "ADAMTS13 <10% confirms TTP",
+        "PLASMIC or French score for pretest probability",
+        "Start plasma exchange before ADAMTS13 results if high clinical suspicion",
+        "Add caplacizumab, rituximab, steroids for confirmed iTTP"
+      ]
+    },
+    {
+      "name": "StatPearls: TTP",
+      "citation": "Joly BS, et al. Thrombotic Thrombocytopenic Purpura. StatPearls 2023",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK470585/"
+    },
+    {
+      "name": "Korean aHUS Guidelines",
+      "citation": "Cheong HI, et al. Clinical Practice Guidelines for the Management of Atypical Hemolytic Uremic Syndrome. J Korean Med Sci. 2016;31:1516-1528",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4999392/"
+    }
+  ],
+  "vignette": {
+    "text": "A 32-year-old woman presents to the ED with confusion, fatigue, and bruising for 2 days. She reports headaches and noted dark urine yesterday. She denies diarrhea, fever, or recent illness. She has no significant past medical history and takes no medications.\n\nOn arrival, she is disoriented to time and place. Family reports she was completely normal 3 days ago.\n\nPast Medical History: None\n\nMedications: None\n\nAllergies: None\n\nSocial History: Works as an accountant, no tobacco, occasional alcohol, no recent travel",
+    "physicalExam": {
+      "general": "Confused, appears fatigued, petechiae visible",
+      "vitals": {
+        "BP": "142/88 mmHg",
+        "HR": "102 bpm",
+        "Temp": "37.8\u00b0C (100\u00b0F)",
+        "SpO2": "98% RA"
+      },
+      "neuro": "Disoriented to time and place, follows simple commands, no focal deficits",
+      "skin": "Scattered petechiae on trunk and extremities, ecchymoses on arms, mild jaundice",
+      "cardiovascular": "Tachycardic, regular rhythm, no murmurs",
+      "abdomen": "Soft, no hepatosplenomegaly"
+    },
+    "diagnostics": {
+      "labs": {
+        "WBC": {
+          "value": "9,200/\u03bcL",
+          "reference": "4,500-11,000"
+        },
+        "Hemoglobin": {
+          "value": "7.2 g/dL",
+          "reference": "12-16",
+          "flag": "LOW"
+        },
+        "Platelets": {
+          "value": "12,000/\u03bcL",
+          "reference": "150,000-400,000",
+          "flag": "CRITICALLY LOW"
+        },
+        "Reticulocytes": {
+          "value": "8.2%",
+          "reference": "0.5-2.5%",
+          "flag": "HIGH"
+        },
+        "LDH": {
+          "value": "1,850 U/L",
+          "reference": "140-280",
+          "flag": "CRITICALLY HIGH"
+        },
+        "Haptoglobin": {
+          "value": "<10 mg/dL",
+          "reference": "30-200",
+          "flag": "UNDETECTABLE"
+        },
+        "Total Bilirubin": {
+          "value": "4.2 mg/dL",
+          "reference": "0.1-1.2",
+          "flag": "HIGH"
+        },
+        "Indirect Bilirubin": {
+          "value": "3.8 mg/dL",
+          "reference": "<1.0",
+          "flag": "HIGH"
+        },
+        "Creatinine": {
+          "value": "1.1 mg/dL",
+          "reference": "0.6-1.2"
+        },
+        "PT/INR": {
+          "value": "12.8 sec / 1.0",
+          "reference": "11-13.5 / <1.1"
+        },
+        "PTT": {
+          "value": "28 sec",
+          "reference": "25-35"
+        },
+        "Fibrinogen": {
+          "value": "285 mg/dL",
+          "reference": "200-400"
+        },
+        "Peripheral Smear": "Numerous schistocytes (3-4 per HPF), decreased platelets, polychromasia"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "recognition",
+      "title": "Recognition of TMA",
+      "icon": "\ud83d\udd0d",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "ttp-recog-1",
+          "stem": "This patient has severe thrombocytopenia, hemolytic anemia with schistocytes, and neurologic changes.",
+          "question": "What defines a thrombotic microangiopathy (TMA) and what is the differential diagnosis?",
+          "hint": "Consider the triad of findings and what causes them.",
+          "options": [
+            {
+              "id": "A",
+              "text": "TMA = microangiopathic hemolytic anemia (MAHA) + thrombocytopenia + organ injury; Differential: TTP (ADAMTS13 deficiency), HUS (typical/STEC vs atypical/complement), DIC, HELLP, malignant HTN, drugs, cancer-associated",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "TMA is synonymous with DIC",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "TMA only occurs with infection",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Thrombocytopenia alone defines TMA",
+              "correct": false
+            }
+          ],
+          "explanation": "Thrombotic microangiopathy (TMA) is characterized by: (1) Microangiopathic hemolytic anemia (MAHA) - schistocytes, elevated LDH, low haptoglobin, indirect hyperbilirubinemia; (2) Thrombocytopenia - consumption; (3) Organ dysfunction - renal, neurologic, cardiac. Major causes: TTP (ADAMTS13 <10%), Typical HUS (STEC-associated, diarrhea), Atypical HUS (complement-mediated), DIC (abnormal coagulation), HELLP, Malignant HTN, Drug-induced (quinine, gemcitabine), Cancer-associated.",
+          "whyChain": [
+            {
+              "why": "What causes the schistocytes?",
+              "answer": "Schistocytes (fragmented RBCs) form when red cells shear across fibrin/platelet strands deposited in small vessels. This mechanical fragmentation is the hallmark of MAHA. In TTP, ultra-large vWF multimers create platelet-rich microthrombi that cause this shearing.",
+              "source": "StatPearls: TTP",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "Why are coagulation studies normal here?",
+              "answer": "CRITICAL distinction: In TTP/HUS, PT/PTT/fibrinogen are NORMAL because the coagulation cascade is NOT activated - it's a primary platelet/endothelial problem. In DIC, PT/PTT are prolonged and fibrinogen is low because clotting factors are consumed. This helps differentiate TTP from DIC.",
+              "source": "PMC: PLASMIC Validation",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470585/",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10335348/"
+          ],
+          "remediation": {
+            "link": "/mechanism/tma-overview.html",
+            "title": "TMA Overview"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plasmic",
+      "title": "PLASMIC Score",
+      "icon": "\ud83d\udcca",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "ttp-plasmic-1",
+          "stem": "You need to rapidly assess whether this patient has TTP before ADAMTS13 results return.",
+          "question": "What is the PLASMIC score and how is it used?",
+          "hint": "Consider the components and what score suggests high probability.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Low PLASMIC score confirms TTP",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "PLASMIC replaces ADAMTS13 testing",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "PLASMIC diagnoses DIC",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "PLASMIC predicts severe ADAMTS13 deficiency (<10%); Components: Platelets <30K, Hemolysis, No active cancer, No transplant, MCV <90, INR <1.5, Creatinine <2.0; Score 6-7 = high risk (~72% PPV), guides empiric treatment",
+              "correct": true
+            }
+          ],
+          "explanation": "PLASMIC Score (1 point each): P - Platelet count <30,000 (1); L - hemoLysis (elevated retics, undetectable haptoglobin, or indirect bili >2) (1); A - No Active cancer (1); S - No Stem cell or organ transplant (1); M - MCV <90 fL (1); I - INR <1.5 (1); C - Creatinine <2.0 mg/dL (1). Score 0-4 = low risk, 5 = intermediate, 6-7 = HIGH risk for ADAMTS13 <10% (TTP). High PLASMIC supports starting plasma exchange before ADAMTS13 results.",
+          "whyChain": [
+            {
+              "why": "What is this patient's PLASMIC score?",
+              "answer": "Platelets 12K (<30K) = 1. Hemolysis (undetectable haptoglobin, indirect bili 3.8) = 1. No active cancer = 1. No transplant = 1. MCV (not given, assume normal <90) = 1. INR 1.0 (<1.5) = 1. Creatinine 1.1 (<2.0) = 1. TOTAL = 7 (HIGH RISK). This strongly suggests TTP - start treatment immediately.",
+              "source": "MDCalc PLASMIC",
+              "sourceUrl": null
+            },
+            {
+              "why": "Why is creatinine part of the score?",
+              "answer": "Creatinine <2.0 favors TTP over HUS. In TTP, neurologic involvement predominates; in HUS, renal failure predominates. High creatinine makes HUS or other TMA more likely than TTP. This patient has normal creatinine with neuro symptoms - classic TTP pattern.",
+              "source": "PMC: ADAMTS13 New Era",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.mdcalc.com/calc/10200/plasmic-score-ttp",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC11312255/"
+          ],
+          "remediation": {
+            "link": "/mechanism/plasmic-score.html",
+            "title": "PLASMIC Score"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "TTP Pathophysiology",
+      "icon": "\ud83d\udd2c",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "ttp-path-1",
+          "stem": "You are explaining to the team why this patient developed TTP.",
+          "question": "What is the pathophysiology of TTP and the role of ADAMTS13?",
+          "hint": "Consider what ADAMTS13 normally does and what happens when deficient.",
+          "options": [
+            {
+              "id": "A",
+              "text": "ADAMTS13 normally cleaves ultra-large vWF multimers; Deficiency (<10%) \u2192 accumulation of ultra-large vWF \u2192 spontaneous platelet binding \u2192 platelet-rich microthrombi \u2192 organ ischemia; Acquired iTTP (autoantibodies, ~95%) vs Congenital TTP (mutation, ~5%)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "TTP is caused by complement activation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "TTP is caused by clotting factor deficiency",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "ADAMTS13 activates platelets",
+              "correct": false
+            }
+          ],
+          "explanation": "TTP pathophysiology: ADAMTS13 (a disintegrin and metalloproteinase with thrombospondin type 1 motif) normally cleaves ultra-large von Willebrand factor (vWF) multimers released from endothelium. When ADAMTS13 <10%: (1) Ultra-large vWF accumulates; (2) vWF multimers spontaneously bind platelets; (3) Platelet-rich microthrombi form in small vessels; (4) Microthrombi cause organ ischemia (brain, heart) and RBC fragmentation (MAHA). Acquired immune TTP (iTTP): autoantibodies against ADAMTS13 (~95% of cases). Congenital TTP: ADAMTS13 gene mutations (~5%).",
+          "whyChain": [
+            {
+              "why": "Why does neurologic involvement predominate?",
+              "answer": "Brain microvasculature is particularly vulnerable to vWF-platelet microthrombi. Neurologic symptoms range from confusion, headache, and focal deficits to seizures and coma. Neurologic involvement is more prominent in TTP than HUS (which affects kidneys more).",
+              "source": "StatPearls: TTP",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "What triggers acquired iTTP?",
+              "answer": "Often idiopathic, but triggers include: pregnancy, infections, autoimmune diseases (SLE), HIV, certain drugs (ticlopidine, quinine). Autoantibodies (usually IgG) inhibit ADAMTS13 activity or accelerate its clearance.",
+              "source": "PubMed: Refining iTTP Care",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            },
+            {
+              "text": "Cuker A, et al. American Society of Hematology 2020 guidelines for management of venous thromboembolism: treatment of deep vein thrombosis and pulmonary embolism. Blood Adv. 2020;4(19):4693-4738. Accessed January 14, 2026.",
+              "url": "https://ashpublications.org/bloodadvances/article/4/19/4693/463998"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470585/",
+            "https://pubmed.ncbi.nlm.nih.gov/39356816/"
+          ],
+          "remediation": {
+            "link": "/mechanism/ttp-pathophysiology.html",
+            "title": "TTP Pathophysiology"
+          }
+        }
+      ]
+    },
+    {
+      "id": "treatment-ttp",
+      "title": "TTP Treatment",
+      "icon": "\ud83d\udc89",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "ttp-tx-1",
+          "stem": "PLASMIC score is 7. You need to initiate treatment immediately.",
+          "question": "What is the initial treatment for suspected TTP?",
+          "hint": "Consider the urgency and what removes the problem.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Wait for ADAMTS13 before any treatment",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Anticoagulation with heparin",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Platelet transfusion is first-line",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "PLASMA EXCHANGE (plasmapheresis) is the cornerstone - removes autoantibodies and ultra-large vWF, replaces ADAMTS13; Start IMMEDIATELY if high clinical suspicion, do NOT wait for ADAMTS13 results; Add corticosteroids (prednisone 1mg/kg or methylprednisolone)",
+              "correct": true
+            }
+          ],
+          "explanation": "TTP treatment (high suspicion/confirmed): (1) PLASMA EXCHANGE (TPE): Cornerstone - removes autoantibodies and ultra-large vWF multimers while replacing ADAMTS13. Start IMMEDIATELY with high clinical suspicion (PLASMIC 6-7). Daily 1-1.5 plasma volume exchanges until sustained platelet recovery; (2) CORTICOSTEROIDS: Prednisone 1 mg/kg/day or IV methylprednisolone - immunosuppression; (3) DO NOT DELAY treatment waiting for ADAMTS13 results - untreated TTP has 90% mortality.",
+          "whyChain": [
+            {
+              "why": "Why avoid platelet transfusion?",
+              "answer": "RELATIVE CONTRAINDICATION: Platelet transfusion in TTP is classically described as 'adding fuel to the fire' - transfused platelets may worsen microthrombi formation. Give only for life-threatening bleeding or before invasive procedures. Do not transfuse to correct thrombocytopenia alone.",
+              "source": "StatPearls: TTP",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "What if plasma exchange is not immediately available?",
+              "answer": "If TPE is delayed: give FFP infusion as temporizing measure (provides ADAMTS13), start steroids immediately, arrange emergent transfer to facility with TPE capability. Fresh frozen plasma is not a substitute for plasma exchange but can bridge.",
+              "source": "ISTH TTP Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            },
+            {
+              "text": "Cuker A, et al. American Society of Hematology 2020 guidelines for management of venous thromboembolism: treatment of deep vein thrombosis and pulmonary embolism. Blood Adv. 2020;4(19):4693-4738. Accessed January 14, 2026.",
+              "url": "https://ashpublications.org/bloodadvances/article/4/19/4693/463998"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470585/",
+            "https://pubmed.ncbi.nlm.nih.gov/32914582/"
+          ],
+          "remediation": {
+            "link": "/mechanism/ttp-treatment.html",
+            "title": "TTP Treatment"
+          }
+        },
+        {
+          "id": "ttp-tx-2",
+          "stem": "ADAMTS13 returns at 3% with inhibitor present, confirming immune TTP.",
+          "question": "What additional therapies should be added for confirmed immune TTP (iTTP)?",
+          "hint": "Consider targeting the autoimmune process and the thrombotic cascade.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Start chemotherapy",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Add RITUXIMAB (anti-CD20, depletes B cells making autoantibodies) and consider CAPLACIZUMAB (anti-vWF, blocks platelet-vWF interaction); Continue TPE and steroids; Monitor ADAMTS13 activity",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "No additional therapy needed",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Splenectomy immediately",
+              "correct": false
+            }
+          ],
+          "explanation": "Confirmed iTTP treatment: (1) RITUXIMAB: Anti-CD20 monoclonal antibody depletes B cells producing anti-ADAMTS13 autoantibodies. Standard 375 mg/m\u00b2 weekly x4 doses. Reduces relapse rate and duration of TPE; (2) CAPLACIZUMAB: Anti-vWF nanobody that blocks vWF-platelet interaction. Faster platelet recovery, fewer organ complications, shorter TPE. Consider especially if neurologic involvement or refractory; (3) Continue TPE until platelet count >150K for 2+ days; (4) Monitor ADAMTS13 activity during remission - relapse occurs in ~30-50%. This is the modern standard of care for iTTP.",
+          "whyChain": [
+            {
+              "why": "When should caplacizumab be started?",
+              "answer": "ISTH guidelines: If ADAMTS13 results expected within 72 hours and high pretest probability, can start caplacizumab. Greatest benefit when started within 3 days of TMA recognition. If ADAMTS13 >20%, stop caplacizumab. Risk: increased bleeding (11% vs 1% placebo).",
+              "source": "PubMed: Refining iTTP Care",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            },
+            {
+              "text": "Cuker A, et al. American Society of Hematology 2020 guidelines for management of venous thromboembolism: treatment of deep vein thrombosis and pulmonary embolism. Blood Adv. 2020;4(19):4693-4738. Accessed January 14, 2026.",
+              "url": "https://ashpublications.org/bloodadvances/article/4/19/4693/463998"
+            }
+          ],
+          "sourceUrls": [
+            "https://pubmed.ncbi.nlm.nih.gov/39356816/"
+          ],
+          "remediation": {
+            "link": "/mechanism/ittp-therapy.html",
+            "title": "iTTP Advanced Therapy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hus-differentiation",
+      "title": "HUS Differentiation",
+      "icon": "\ud83d\udd04",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "hus-diff-1",
+          "stem": "A different patient - a 4-year-old with bloody diarrhea for 5 days now presenting with pallor and decreased urine output.",
+          "question": "What distinguishes typical (STEC) HUS from TTP?",
+          "hint": "Consider the clinical presentation and ADAMTS13 level.",
+          "options": [
+            {
+              "id": "A",
+              "text": "STEC-HUS: Preceded by bloody diarrhea (E. coli O157:H7), affects children primarily, RENAL failure predominates, ADAMTS13 is NORMAL (>10%); Treatment is SUPPORTIVE (no plasma exchange), avoid antibiotics in acute STEC infection",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Antibiotics are first-line for STEC-HUS",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "STEC-HUS has low ADAMTS13",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "STEC-HUS and TTP are treated identically",
+              "correct": false
+            }
+          ],
+          "explanation": "Typical (STEC) HUS: (1) Cause: Shiga toxin-producing E. coli (usually O157:H7) from contaminated food; (2) Prodrome: Bloody diarrhea 5-10 days before TMA; (3) Population: Children (peak 6mo-4yr), can affect adults; (4) Organ involvement: RENAL failure predominates (oliguria, AKI); (5) ADAMTS13: NORMAL (>10%); (6) Treatment: SUPPORTIVE - no plasma exchange (doesn't help), avoid antibiotics during acute STEC (may increase toxin release), manage AKI (may need dialysis). Most recover with supportive care.",
+          "whyChain": [
+            {
+              "why": "Why avoid antibiotics in STEC infection?",
+              "answer": "Antibiotics may increase Shiga toxin release from dying bacteria, potentially worsening HUS. Meta-analyses suggest antibiotics don't prevent HUS and may increase risk. Supportive care is mainstay. However, once HUS is established, this concern is less relevant.",
+              "source": "Korean aHUS Guidelines",
+              "sourceUrl": null
+            },
+            {
+              "why": "What is the prognosis?",
+              "answer": "STEC-HUS: ~90% recover completely, ~3-5% mortality, ~10-30% have long-term renal complications. Worse prognosis with severe AKI, CNS involvement, prolonged anuria. Much better prognosis than untreated TTP.",
+              "source": "Medscape: HUS Treatment",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC4999392/",
+            "https://emedicine.medscape.com/article/201181-treatment"
+          ],
+          "remediation": {
+            "link": "/mechanism/stec-hus.html",
+            "title": "STEC-HUS"
+          }
+        },
+        {
+          "id": "hus-diff-2",
+          "stem": "Another patient: 28-year-old with TMA but no diarrhea, normal ADAMTS13, and progressive renal failure.",
+          "question": "What is atypical HUS (aHUS) and how is it treated?",
+          "hint": "Consider the underlying mechanism and targeted therapy.",
+          "options": [
+            {
+              "id": "A",
+              "text": "aHUS: Complement-mediated TMA from mutations in complement regulatory genes (CFH, MCP, CFI) or anti-CFH antibodies; ADAMTS13 is NORMAL; Treatment: ECULIZUMAB (or ravulizumab) - C5 complement inhibitor; requires meningococcal vaccination",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "aHUS is treated with plasma exchange alone",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "aHUS has ADAMTS13 <10%",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "No effective treatment exists for aHUS",
+              "correct": false
+            }
+          ],
+          "explanation": "Atypical HUS (aHUS): (1) Mechanism: Uncontrolled alternative complement pathway activation causing endothelial injury; (2) Genetics: Mutations in complement regulators (CFH ~25%, MCP, CFI, C3, CFB) or anti-CFH autoantibodies; (3) Presentation: TMA without diarrhea, RENAL failure predominates, ADAMTS13 >10%; (4) Triggers: Infections, pregnancy, drugs; (5) Treatment: ECULIZUMAB (anti-C5 monoclonal antibody) or RAVULIZUMAB - blocks terminal complement. Dramatic response in most patients. MUST vaccinate against meningococcus (N. meningitidis) before/with treatment; (6) May need prophylactic antibiotics during treatment.",
+          "whyChain": [
+            {
+              "why": "Why meningococcal vaccination?",
+              "answer": "C5 inhibition blocks the terminal complement pathway needed to kill encapsulated bacteria, especially Neisseria meningitidis. Eculizumab carries BLACK BOX WARNING for meningococcal infection. Vaccinate \u22652 weeks before treatment if possible, and many protocols include prophylactic penicillin during treatment.",
+              "source": "PMC: Eculizumab Restrictive Use",
+              "sourceUrl": null
+            },
+            {
+              "why": "Is eculizumab lifelong?",
+              "answer": "Controversial. Some patients can discontinue after remission, but relapse risk exists (especially with CFH mutations). Individualized decisions based on genetics, disease severity, and renal function. Restrictive/time-limited protocols are being studied.",
+              "source": "Blood: How I Treat aHUS",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC6794245/",
+            "https://ashpublications.org/blood/article/141/9/984/486972/How-I-diagnose-and-treat-atypical-hemolytic-uremic"
+          ],
+          "remediation": {
+            "link": "/mechanism/ahus.html",
+            "title": "Atypical HUS"
+          }
+        }
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "TMA Differential",
+      "icon": "\u2696\ufe0f",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "ttp-diff-1",
+          "stem": "You are teaching trainees to differentiate causes of TMA.",
+          "question": "How do you distinguish TTP, HUS, and DIC using laboratory findings?",
+          "hint": "Focus on coagulation studies and ADAMTS13.",
+          "options": [
+            {
+              "id": "A",
+              "text": "ADAMTS13 is low in all TMAs",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "All have abnormal coagulation studies",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Cannot distinguish without biopsy",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "TTP: ADAMTS13 <10%, PT/PTT/fibrinogen NORMAL, neuro>renal; HUS: ADAMTS13 >10%, PT/PTT/fibrinogen NORMAL, renal>neuro; DIC: ADAMTS13 normal, PT/PTT PROLONGED, fibrinogen LOW, D-dimer HIGH",
+              "correct": true
+            }
+          ],
+          "explanation": "Key laboratory distinctions: TTP: ADAMTS13 <10% (diagnostic), PT/PTT/fibrinogen NORMAL, neurologic > renal involvement; HUS (STEC or aHUS): ADAMTS13 >10%, PT/PTT/fibrinogen NORMAL, renal >> neurologic involvement, \u00b1 diarrhea prodrome; DIC: ADAMTS13 usually normal, PT/PTT PROLONGED, fibrinogen LOW, D-dimer markedly elevated, requires underlying cause (sepsis, malignancy). This patient: normal coag studies + neuro involvement + PLASMIC 7 \u2192 strongly favors TTP.",
+          "whyChain": [
+            {
+              "why": "What about other causes of MAHA + thrombocytopenia?",
+              "answer": "Also consider: HELLP (pregnancy, elevated liver enzymes), Malignant hypertension (severe HTN, papilledema), Drug-induced TMA (quinine, gemcitabine, calcineurin inhibitors), Cancer-associated TMA, Catastrophic APS. History, clinical context, and specific testing help distinguish.",
+              "source": "Korean aHUS Guidelines",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC4999392/"
+          ],
+          "remediation": {
+            "link": "/mechanism/tma-differential.html",
+            "title": "TMA Differential"
+          }
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "\ud83d\udd17",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "ttp-syn-1",
+          "stem": "Returning to the original patient with suspected TTP.",
+          "question": "What is the complete management approach for this patient?",
+          "hint": "Consider immediate actions and confirmation strategy.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Immediate: Send ADAMTS13, start plasma exchange NOW (don't wait for results), give corticosteroids; When ADAMTS13 <10% confirmed: Add rituximab, consider caplacizumab; Avoid platelet transfusion unless life-threatening bleeding; Monitor for relapse long-term",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Transfuse platelets immediately",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Start antibiotics for presumed infection",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Wait for ADAMTS13 before any treatment",
+              "correct": false
+            }
+          ],
+          "explanation": "Complete management: (1) IMMEDIATELY: Draw ADAMTS13 activity + inhibitor (before TPE if possible), start PLASMA EXCHANGE (daily 1-1.5 volume), start CORTICOSTEROIDS (methylprednisolone 1g IV or prednisone 1 mg/kg); (2) WHEN ADAMTS13 <10% confirmed: Add RITUXIMAB 375 mg/m\u00b2 weekly x4, consider CAPLACIZUMAB if available; (3) AVOID: Platelet transfusion (unless life-threatening bleeding); (4) MONITOR: Daily platelet count, LDH, response to TPE; (5) TPE DURATION: Continue until platelet >150K x2 days; (6) LONG-TERM: Monitor ADAMTS13 in remission, ~30-50% relapse risk, education on symptoms.",
+          "whyChain": [
+            {
+              "why": "What is the prognosis?",
+              "answer": "With plasma exchange: mortality reduced from 90% to 10-20%. With modern therapy (TPE + steroids + rituximab \u00b1 caplacizumab): excellent response rates. Long-term: relapse risk 30-50%, survivors may have cognitive issues, need ADAMTS13 monitoring. This patient should have good prognosis with prompt treatment.",
+              "source": "StatPearls: TTP",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Thrombotic Thrombocytopenic Purpura. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/"
+            },
+            {
+              "text": "Cuker A, et al. American Society of Hematology 2020 guidelines for management of venous thromboembolism: treatment of deep vein thrombosis and pulmonary embolism. Blood Adv. 2020;4(19):4693-4738. Accessed January 14, 2026.",
+              "url": "https://ashpublications.org/bloodadvances/article/4/19/4693/463998"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470585/"
+          ],
+          "remediation": {
+            "link": "/mechanism/ttp-management.html",
+            "title": "TTP Comprehensive Management"
+          }
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Sickle Cell Disease Guidelines",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31917820/",
+      "source": "ASH Guidelines 2020"
+    },
+    {
+      "title": "DIC Diagnosis and Management - ISTH",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11251676/",
+      "source": "J Thromb Haemost 2001"
+    },
+    {
+      "title": "Acute Leukemia - NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK560490/",
+      "source": "StatPearls"
+    },
+    {
+      "title": "TTP/HUS Review",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28392944/",
+      "source": "Blood 2017"
+    }
+  ],
+  "platformLinks": [
+    {
+      "type": "adventure",
+      "text": "\ud83d\uddfa\ufe0f TTP/HUS Adventure",
+      "url": "adventure-cases/ttp-hus-expanded.html"
+    },
+    {
+      "type": "deepDive",
+      "text": "\ud83d\udcda TTP/HUS Deep Dive",
+      "url": "ttp-hus-deep-dive.json"
+    }
+  ],
+  "mcqs": [
+    {
+      "stem": "Which of the following is the MOST important initial step in evaluating a patient with suspected ttp/hus?",
+      "options": [
+        {
+          "text": "Obtain a thorough history and physical examination",
+          "correct": true,
+          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in ttp/hus. It guides all subsequent diagnostic and management decisions."
+        },
+        {
+          "text": "Order advanced imaging immediately",
+          "correct": false,
+          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively."
+        },
+        {
+          "text": "Start empiric treatment before evaluation",
+          "correct": false,
+          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable."
+        },
+        {
+          "text": "Consult a specialist before any workup",
+          "correct": false,
+          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings."
+        }
+      ]
+    },
+    {
+      "stem": "A patient presents with classic features of ttp/hus. Which clinical reasoning principle is MOST important in avoiding diagnostic error?",
+      "options": [
+        {
+          "text": "Search satisficing - stop looking after the first diagnosis",
+          "correct": false,
+          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses."
+        },
+        {
+          "text": "Consider the differential diagnosis systematically",
+          "correct": true,
+          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+        },
+        {
+          "text": "Rely primarily on pattern recognition",
+          "correct": false,
+          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases."
+        },
+        {
+          "text": "Order every available test to rule out all possibilities",
+          "correct": false,
+          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy."
+        }
+      ]
+    },
+    {
+      "stem": "When managing ttp/hus, which approach best supports evidence-based practice?",
+      "options": [
+        {
+          "text": "Follow institutional protocols regardless of patient factors",
+          "correct": false,
+          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances."
+        },
+        {
+          "text": "Base decisions solely on clinical experience",
+          "correct": false,
+          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence."
+        },
+        {
+          "text": "Integrate current best evidence with clinical expertise and patient values",
+          "correct": true,
+          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+        },
+        {
+          "text": "Always defer to the most recent published study",
+          "correct": false,
+          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence."
+        }
+      ]
+    },
+    {
+      "stem": "A 35-year-old presents with petechiae, confusion, renal insufficiency, fever, and platelets of 18,000 with schistocytes on smear. What is the most critical immediate intervention?",
+      "options": [
+        {
+          "text": "Emergent plasma exchange (plasmapheresis) \u2014 do not wait for ADAMTS13 results",
+          "correct": true,
+          "explanation": "This pentad (thrombocytopenia, microangiopathic hemolytic anemia with schistocytes, neurologic symptoms, renal dysfunction, fever) is classic TTP. Per ASH guidelines, plasma exchange must be initiated IMMEDIATELY \u2014 mortality without treatment exceeds 90%. Do NOT wait for ADAMTS13 activity levels; start treatment on clinical suspicion."
+        },
+        {
+          "text": "Platelet transfusion to prevent intracranial hemorrhage",
+          "correct": false,
+          "explanation": "Platelet transfusion in TTP is CONTRAINDICATED (relative) as it can fuel thrombotic microangiopathy and worsen organ damage. Platelets are consumed in microvascular thrombi, not bleeding."
+        },
+        {
+          "text": "Start heparin for presumed DIC",
+          "correct": false,
+          "explanation": "TTP is distinguished from DIC by NORMAL coagulation studies (PT, PTT, fibrinogen). DIC shows prolonged PT/PTT and low fibrinogen. Treatment differs fundamentally \u2014 TTP requires plasmapheresis, not anticoagulation."
+        },
+        {
+          "text": "Obtain ADAMTS13 activity level and treat based on results",
+          "correct": false,
+          "explanation": "ADAMTS13 testing takes 2-3 days. With suspected TTP, mortality approaches 90% without treatment. Plasma exchange must begin on clinical suspicion while awaiting confirmatory testing."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "content": "Comprehensive review of TTP/HUS."
+    },
+    {
+      "title": "Clinical Approach",
+      "content": "Systematic approach to TTP/HUS including recognition, diagnosis, and management."
+    },
+    {
+      "title": "Key Points",
+      "content": "Evidence-based clinical pearls for TTP/HUS."
+    }
+  ]
+}

@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ReasonDx | Clinical Reasoning Trainer</title>
+    <style>
+
+/* Multi-Theme Support */
+:root {
+    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
+    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
+    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
+    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
+    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
+}
+[data-theme="light"] {
+    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
+    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
+    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
+    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
+    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
+}
+[data-theme="high-contrast"] {
+    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
+    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
+    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
+    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
+    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
+    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
+    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
+}
+[data-theme="sepia"] {
+    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
+    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
+    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
+    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
+    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
+    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
+    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
+}
+body { transition: background 0.3s, color 0.3s; }
+
+        :root {
+            --bg: #F8FAFC; --card: #FFFFFF; --border: #E2E8F0; --text: #1E293B; --muted: #64748B;
+            --accent: var(--primary-dark); --accent-light: var(--primary-bg); --success: var(--primary-dark); --success-light: #D1FAE5;
+            --warning: #D97706; --warning-light: #FEF3C7; --danger: #DC2626; --danger-light: #FEE2E2;
+            --purple: #7C3AED; --purple-light: #EDE9FE; --emr-header: #1E3A5F;
+        }
+        [data-theme="dark"] {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8;
+            --accent: var(--primary); --accent-light: rgba(59,130,246,0.2); --success: var(--primary); --success-light: rgba(16,185,129,0.2);
+            --warning: #F59E0B; --warning-light: rgba(245,158,11,0.2); --danger: #EF4444; --danger-light: rgba(239,68,68,0.2);
+            --purple: #8B5CF6; --purple-light: rgba(139,92,246,0.2); --emr-header: #0F172A;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        
+        /* Layout */
+        .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+        @media (max-width: 900px) {
+            .app { grid-template-columns: 1fr; }
+            .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 300px; z-index: 200; transition: left 0.3s; box-shadow: 4px 0 20px rgba(0,0,0,0.3); }
+            .sidebar.open { left: 0; }
+            .mobile-toggle { display: flex !important; }
+        }
+        .mobile-toggle { display: none; position: fixed; bottom: 20px; left: 20px; background: var(--accent); color: white; border: none; padding: 12px 16px; border-radius: 25px; font-weight: 600; cursor: pointer; z-index: 150; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        
+        /* EMR Sidebar */
+        .sidebar { background: var(--card); border-right: 1px solid var(--border); display: flex; flex-direction: column; height: 100vh; position: sticky; top: 0; overflow: hidden; }
+        .emr-header { background: var(--emr-header); color: white; padding: 12px 14px; flex-shrink: 0; }
+        .patient-banner { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .patient-avatar { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .patient-name { font-size: 0.95rem; font-weight: 600; }
+        .patient-details { font-size: 0.7rem; opacity: 0.8; }
+        .vitals-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; }
+        .vital { text-align: center; }
+        .vital-val { font-size: 0.8rem; font-weight: 700; font-family: 'Monaco', 'Consolas', monospace; }
+        .vital-val.abnormal { color: #FCD34D; }
+        .vital-val.critical { color: #FCA5A5; animation: pulse 1s infinite; }
+        .vital-lbl { font-size: 0.5rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        .emr-tabs { display: flex; flex-wrap: wrap; gap: 3px; padding: 8px; background: var(--bg); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+        .emr-tab { padding: 4px 8px; font-size: 0.65rem; font-weight: 500; border-radius: 4px; cursor: pointer; border: none; background: var(--card); position: relative; transition: all 0.2s; }
+        .emr-tab:hover { background: var(--accent-light); }
+        .emr-tab.active { background: var(--accent); color: white; }
+        .emr-tab.empty { color: var(--muted); border: 1px dashed var(--border); background: transparent; }
+        .emr-tab.available { background: var(--success-light); color: var(--success); }
+        
+        .emr-content { flex: 1; overflow-y: auto; padding: 10px; font-size: 0.8rem; }
+        .emr-section { margin-bottom: 12px; }
+        .emr-section-title { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 600; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+        .emr-field { display: flex; padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 0.75rem; }
+        .emr-field:last-child { border-bottom: none; }
+        .emr-field-label { color: var(--muted); min-width: 70px; font-weight: 500; }
+        .emr-field-value { flex: 1; }
+        .emr-field-value.critical { color: var(--danger); font-weight: 600; }
+        .emr-field-value.abnormal { color: var(--warning); }
+        .emr-empty { text-align: center; padding: 20px 12px; color: var(--muted); }
+        .emr-empty-icon { font-size: 2rem; margin-bottom: 8px; opacity: 0.5; }
+        .emr-empty h4 { font-size: 0.85rem; margin-bottom: 4px; color: var(--text); }
+        .emr-empty p { font-size: 0.7rem; }
+        
+        /* Main Area */
+        .main { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        .main-header { background: linear-gradient(135deg, #1E3A5F 0%, var(--primary-dark) 100%); color: white; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .main-header h1 { font-size: 1rem; font-weight: 600; }
+        .timer { background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px; font-family: 'Monaco', monospace; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; }
+        .timer-btn { background: rgba(255,255,255,0.2); border: none; color: white; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
+        .timer-btn:hover { background: rgba(255,255,255,0.3); }
+        .timer.paused { background: rgba(245,158,11,0.4); }
+        .timer.paused .timer-time { opacity: 0.7; }
+        
+        /* Pause Overlay */
+        .pause-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; }
+        .pause-overlay.show { display: flex; }
+        .pause-modal { background: var(--card); border-radius: 16px; padding: 32px; text-align: center; max-width: 400px; margin: 20px; }
+        .pause-modal h2 { font-size: 1.2rem; margin-bottom: 8px; }
+        .pause-modal p { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+        .pause-modal .pause-time { font-size: 2rem; font-weight: 700; color: var(--accent); margin-bottom: 20px; font-family: 'Monaco', monospace; }
+        .pause-modal button { background: var(--accent); color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .pause-modal button:hover { background: var(--primary-dark); }
+        .pause-modal .auto-pause-note { font-size: 0.75rem; color: var(--warning); margin-top: 16px; }
+        .score-pill { background: var(--purple); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .header-btn { background: rgba(255,255,255,0.15); border: none; color: white; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+        .header-btn:hover { background: rgba(255,255,255,0.25); }
+        
+        .stage-bar { background: var(--card); padding: 8px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; overflow-x: auto; flex-shrink: 0; }
+        .stage-bar::-webkit-scrollbar { height: 4px; }
+        .stage-bar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        .stage { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; font-size: 0.65rem; white-space: nowrap; background: var(--bg); border: 1px solid var(--border); }
+        .stage.completed { background: var(--success-light); border-color: var(--success); color: var(--success); }
+        .stage.current { background: var(--accent); color: white; border-color: var(--accent); }
+        .stage-num { width: 16px; height: 16px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.55rem; font-weight: 700; }
+        .stage.completed .stage-num { background: var(--success); color: white; }
+        .stage.current .stage-num { background: white; color: var(--accent); }
+        .stage-arrow { color: var(--muted); font-size: 0.6rem; }
+        
+        .main-content { flex: 1; overflow-y: auto; padding: 16px; }
+        
+        /* Cards */
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+        .card-header { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .card-header h2 { font-size: 0.95rem; font-weight: 600; }
+        .badge { font-size: 0.6rem; background: var(--accent-light); color: var(--accent); padding: 3px 10px; border-radius: 12px; font-weight: 500; }
+        .badge.urgent { background: var(--danger-light); color: var(--danger); }
+        .badge.emergent { background: var(--danger); color: white; }
+        .card-body { padding: 14px; }
+        
+        /* Narrative / Chief Complaint */
+        .narrative { background: linear-gradient(135deg, var(--purple-light), var(--accent-light)); border-left: 4px solid var(--purple); padding: 12px 14px; border-radius: 0 10px 10px 0; margin-bottom: 14px; font-size: 0.85rem; line-height: 1.7; }
+        .patient-quote { background: var(--success-light); border: 1px solid var(--success); border-radius: 10px; padding: 12px 14px; margin: 12px 0; position: relative; }
+        .patient-quote::before { content: '"'; font-size: 2rem; color: var(--success); position: absolute; top: -4px; left: 8px; opacity: 0.3; font-family: Georgia, serif; }
+        .patient-quote p { font-style: italic; padding-left: 14px; font-size: 0.85rem; }
+        
+        /* DDx Builder */
+        .ddx-builder { margin: 14px 0; }
+        .ddx-input-row { display: flex; gap: 8px; margin-bottom: 12px; position: relative; }
+        .ddx-input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; background: var(--bg); color: var(--text); }
+        .ddx-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+        .ddx-add { background: var(--accent); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+        .ddx-add:hover { background: var(--primary-dark); }
+        
+        /* Autocomplete dropdown */
+        .ddx-autocomplete { position: absolute; top: 100%; left: 0; right: 70px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; max-height: 250px; overflow-y: auto; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; }
+        .ddx-autocomplete.show { display: block; }
+        .ddx-autocomplete-item { padding: 10px 14px; cursor: pointer; font-size: 0.85rem; color: var(--text); background: var(--card); border-bottom: 1px solid var(--border); }
+        .ddx-autocomplete-item:last-child { border-bottom: none; }
+        .ddx-autocomplete-item:hover, .ddx-autocomplete-item.selected { background: var(--accent-light); color: var(--text); }
+        .ddx-autocomplete-item .category { font-size: 0.7rem; color: var(--muted); margin-left: 8px; }
+        .ddx-autocomplete-count { padding: 8px 14px; font-size: 0.75rem; color: var(--muted); background: var(--bg); border-bottom: 1px solid var(--border); }
+        
+        .ddx-list { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+        .ddx-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--card); border-bottom: 1px solid var(--border); cursor: grab; transition: all 0.2s; }
+        .ddx-item:last-child { border-bottom: none; }
+        .ddx-item:hover { background: var(--accent-light); }
+        .ddx-item.dragging { opacity: 0.5; }
+        .ddx-rank { width: 26px; height: 26px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+        .ddx-name { flex: 1; font-size: 0.85rem; font-weight: 500; }
+        .ddx-tag { font-size: 0.6rem; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+        .ddx-tag.likely { background: var(--success-light); color: var(--success); }
+        .ddx-tag.mnm { background: var(--danger-light); color: var(--danger); }
+        .ddx-btn { background: var(--bg); border: 1px solid var(--border); width: 24px; height: 24px; border-radius: 6px; cursor: pointer; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
+        .ddx-btn:hover { background: var(--accent-light); border-color: var(--accent); }
+        .ddx-btn.remove:hover { background: var(--danger-light); border-color: var(--danger); color: var(--danger); }
+        
+        /* Refinement Interface */
+        .refine-list { margin: 14px 0; }
+        .refine-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+        .refine-rank { width: 24px; height: 24px; background: var(--muted); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; }
+        .refine-name { flex: 1; min-width: 140px; font-weight: 500; font-size: 0.85rem; }
+        .refine-opts { display: flex; gap: 4px; flex-wrap: wrap; }
+        .refine-opt { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.7rem; cursor: pointer; background: var(--bg); transition: all 0.2s; font-weight: 500; }
+        .refine-opt:hover { background: var(--accent-light); border-color: var(--accent); }
+        .refine-opt.selected { color: white; }
+        .refine-opt.up.selected { background: var(--success); border-color: var(--success); }
+        .refine-opt.same.selected { background: var(--accent); border-color: var(--accent); }
+        .refine-opt.down.selected { background: var(--warning); border-color: var(--warning); }
+        .refine-opt.out.selected { background: var(--danger); border-color: var(--danger); }
+        .refine-feedback { width: 100%; margin-top: 8px; padding: 8px 10px; border-radius: 6px; font-size: 0.75rem; display: none; line-height: 1.5; }
+        .refine-feedback.show { display: block; }
+        .refine-feedback.correct { background: var(--success-light); color: var(--success); }
+        .refine-feedback.incorrect { background: var(--danger-light); color: var(--danger); }
+        .refine-feedback.partial { background: var(--warning-light); color: var(--warning); }
+        
+        /* Chat Interface */
+        .chat { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; margin: 14px 0; overflow: hidden; }
+        .chat-header { padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .chat-avatar { width: 30px; height: 30px; background: var(--warning-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .chat-info { font-size: 0.85rem; font-weight: 600; }
+        .chat-status { font-size: 0.65rem; color: var(--muted); }
+        .chat-messages { height: 200px; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+        .msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.8rem; line-height: 1.5; }
+        .msg.patient { background: var(--card); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .msg.learner { background: var(--accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .msg.system { background: var(--warning-light); color: var(--warning); align-self: center; font-size: 0.7rem; padding: 4px 10px; border-radius: 12px; }
+        .chat-input-row { padding: 8px 10px; background: var(--card); border-top: 1px solid var(--border); display: flex; gap: 6px; }
+        .chat-input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); color: var(--text); font-size: 0.8rem; }
+        .chat-input:focus { outline: none; border-color: var(--accent); }
+        .chat-send { background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 16px; cursor: pointer; font-weight: 600; font-size: 0.75rem; }
+        
+        /* Physical Exam */
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 12px 0; }
+        .exam-opt { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+        .exam-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+        .exam-opt.selected { border-color: var(--accent); background: var(--accent-light); }
+        .exam-opt.essential { border-left: 3px solid var(--success); }
+        .exam-opt input { accent-color: var(--accent); }
+        
+        /* Action Buttons */
+        .action-row { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); gap: 10px; }
+        .btn { padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-primary:disabled { background: var(--muted); cursor: not-allowed; }
+        .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+        .btn-success { background: var(--success); color: white; }
+        
+        /* Score Summary */
+        .score-hero { background: linear-gradient(135deg, var(--purple), var(--accent)); color: white; border-radius: 14px; padding: 28px; text-align: center; margin-bottom: 16px; }
+        .score-big { font-size: 2.5rem; font-weight: 700; }
+        .score-detail { opacity: 0.9; margin-top: 4px; font-size: 1rem; }
+        .score-grade { display: inline-block; background: rgba(255,255,255,0.2); padding: 6px 20px; border-radius: 20px; margin-top: 10px; font-size: 1.2rem; font-weight: 700; }
+        
+        /* Toast Notification */
+        .toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 500; z-index: 1000; animation: slideIn 0.3s ease; }
+        .toast.success { background: var(--success); color: white; }
+        .toast.error { background: var(--danger); color: white; }
+        .toast.info { background: var(--accent); color: white; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        /* Loading */
+        .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 16px; }
+        .loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Case Selector */
+        .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+        .case-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; cursor: pointer; transition: all 0.2s; }
+        .case-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .case-card-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+        .case-card-meta { font-size: 0.75rem; color: var(--muted); }
+        .case-card-badge { display: inline-block; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; margin-top: 6px; }
+        .case-card-badge.foundational { background: var(--success-light); color: var(--success); }
+        .case-card-badge.intermediate { background: var(--warning-light); color: var(--warning); }
+        .case-card-badge.advanced { background: var(--danger-light); color: var(--danger); }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+        /* Enhanced Mobile for Clinical Reasoning Trainer - iPhone 16/17 */
+        @media (max-width: 480px) {
+            .app { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .sidebar.open { display: flex; position: fixed; left: 0; top: 0; bottom: 0; width: 85vw; max-width: 320px; z-index: 200; }
+            .mobile-toggle { display: flex !important; }
+            .main { padding: 12px; }
+            .main-header { padding: 10px 12px; flex-wrap: wrap; gap: 8px; }
+            .case-title { font-size: 1.1rem; }
+            .timer-display { font-size: 0.9rem; padding: 6px 10px; }
+            .stage-nav { padding: 10px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .stage-btn { padding: 8px 12px; font-size: 0.75rem; min-width: auto; white-space: nowrap; }
+            .stage-content { padding: 14px; }
+            .patient-quote { padding: 12px; }
+            .patient-quote p { font-size: 0.95rem; }
+            .vitals-strip { grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px; }
+            .vital-val { font-size: 0.9rem; }
+            .vital-lbl { font-size: 0.5rem; }
+            .emr-tabs { gap: 4px; padding: 6px; }
+            .emr-tab { padding: 4px 6px; font-size: 0.6rem; }
+            .ddx-input { font-size: 16px; } /* Prevents zoom on iOS */
+            .ddx-input-row { flex-direction: column; gap: 10px; }
+            .ddx-add { width: 100%; }
+            .ddx-item { padding: 10px; gap: 8px; }
+            .ddx-name { font-size: 0.85rem; }
+            .ddx-autocomplete { right: 0; max-height: 200px; }
+            .action-row { flex-direction: column; gap: 10px; }
+            .btn { width: 100%; padding: 14px; font-size: 0.95rem; }
+            .pause-modal { padding: 20px; margin: 20px; }
+            .pause-modal h2 { font-size: 1.3rem; }
+        }
+        @media (max-width: 390px) {
+            .vitals-strip { grid-template-columns: repeat(2, 1fr); }
+            .stage-btn { padding: 6px 10px; font-size: 0.7rem; }
+        }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+<!-- Theme selector moved to nav area, not fixed -->
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app" id="app">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <span>Loading ReasonDx...</span>
+        </div>
+    </div>
+    
+    <button class="mobile-toggle" onclick="toggleSidebar()">📋 EMR</button>
+    
+    <!-- Pause Overlay -->
+    <div class="pause-overlay" id="pauseOverlay">
+        <div class="pause-modal">
+            <h2>⏸️ Case Paused</h2>
+            <p>Your timer has been paused. Take your time!</p>
+            <div class="pause-time" id="pauseTimeDisplay">00:00</div>
+            <button onclick="App.resumeTimer()">▶️ Resume Case</button>
+            <div class="auto-pause-note" id="autoPauseNote" style="display:none;">
+                ⚠️ Auto-paused due to inactivity
+            </div>
+        </div>
+    </div>
+
+<script>
+// =============================================================================
+// REASONDX CLINICAL REASONING TRAINER V2
+// Modern EMR-Style Interface with Dynamic Case Loading
+// =============================================================================
+
+const App = {
+    // Configuration
+    casesBasePath: 'data/cases/',
+    
+    // State
+    state: {
+        screen: 'case-select', // case-select, case
+        cases: [],
+        currentCase: null,
+        currentVariant: null,
+        stage: 0,
+        score: 0,
+        elapsed: 0,
+        timerInterval: null,
+        timerPaused: false,
+        lastActivity: null,
+        inactivityTimeout: null,
+        AUTO_PAUSE_SECONDS: 120, // Auto-pause after 2 minutes of inactivity
+        
+        // Differential
+        ddx: [],
+        refinements: { postHistory: {}, postExam: {} },
+        refinementSubmitted: { postHistory: false, postExam: false },
+        
+        // EMR data collected
+        emr: {
+            historyGathered: [],
+            examPerformed: [],
+            labsOrdered: [],
+            imagingOrdered: []
+        },
+        
+        // Chat
+        chatMessages: [],
+        
+        // Gamification
+        xp: 0,
+        streak: 0
+    },
+    
+    // 11-Stage Workflow
+    stages: [
+        { id: 'arrival', title: 'Arrival', icon: '🚑' },
+        { id: 'initial-ddx', title: 'Initial DDx', icon: '🧠' },
+        { id: 'urgent', title: 'Urgent?', icon: '⚡' },
+        { id: 'history', title: 'History', icon: '📝' },
+        { id: 'refine-1', title: 'Refine DDx', icon: '🔄' },
+        { id: 'exam', title: 'Exam', icon: '🩺' },
+        { id: 'refine-2', title: 'Refine DDx', icon: '🔄' },
+        { id: 'workup', title: 'Workup', icon: '🔬' },
+        { id: 'diagnosis', title: 'Diagnosis', icon: '🎯' },
+        { id: 'management', title: 'Management', icon: '💊' },
+        { id: 'summary', title: 'Summary', icon: '📊' }
+    ],
+    
+    // ==========================================================================
+    // INITIALIZATION
+    // ==========================================================================
+    async init() {
+        this.loadEmbeddedCases();
+        this.render();
+    },
+    
+    loadEmbeddedCases() {
+        // Embedded sample cases for standalone operation
+        // These demonstrate the UI - connect to your JSON files for full case library
+        this.state.cases = [
+            {
+                id: 'chest-pain-stemi',
+                title: 'Chest Pain',
+                category: 'Cardiovascular',
+                categoryName: 'cardiovascular',
+                icon: '🫀',
+                difficulty: 'intermediate',
+                urgency: 'emergent',
+                variants: {
+                    'male-58': {
+                        name: 'Michael Torres',
+                        age: 58,
+                        gender: 'male',
+                        setting: 'emergency_department',
+                        chiefComplaint: "I'm having terrible chest pain, like an elephant sitting on my chest. It woke me up about 2 hours ago.",
+                        vitalSigns: { BP: '158/98', HR: 102, RR: 22, Temp: '98.4°F', SpO2: '94%' },
+                        allDiagnoses: [
+                            { name: 'STEMI', correctCategory: 'likely' },
+                            { name: 'NSTEMI', correctCategory: 'must-not-miss' },
+                            { name: 'Aortic Dissection', correctCategory: 'must-not-miss' },
+                            { name: 'Pulmonary Embolism', correctCategory: 'must-not-miss' },
+                            { name: 'GERD', correctCategory: 'less-likely' }
+                        ],
+                        historyQuestions: [
+                            { id: 'onset', text: 'When did this start?', answer: 'About 2 hours ago. Woke me from sleep.' },
+                            { id: 'character', text: 'What does it feel like?', answer: 'Crushing pressure, like an elephant on my chest.' },
+                            { id: 'radiation', text: 'Does it go anywhere?', answer: 'Down my left arm and into my jaw.' },
+                            { id: 'severity', text: 'How bad is it?', answer: '10 out of 10. Worst pain of my life.' },
+                            { id: 'associated', text: 'Any other symptoms?', answer: "I'm sweating bullets and feel nauseous. Short of breath too." }
+                        ]
+                    }
+                }
+            },
+            {
+                id: 'leg-swelling-dvt',
+                title: 'Leg Swelling',
+                category: 'Cardiovascular',
+                categoryName: 'cardiovascular',
+                icon: '🦵',
+                difficulty: 'foundational',
+                urgency: 'urgent',
+                variants: {
+                    'female-45': {
+                        name: 'Linda Chen',
+                        age: 45,
+                        gender: 'female',
+                        setting: 'urgent_care',
+                        chiefComplaint: 'My left leg has been hurting and swelling for 2 days.',
+                        vitalSigns: { BP: '132/82', HR: 88, RR: 16, Temp: '99.2°F', SpO2: '98%' },
+                        allDiagnoses: [
+                            { name: 'Deep Vein Thrombosis', correctCategory: 'likely' },
+                            { name: 'Pulmonary Embolism', correctCategory: 'must-not-miss' },
+                            { name: 'Cellulitis', correctCategory: 'less-likely' },
+                            { name: 'Baker Cyst Rupture', correctCategory: 'less-likely' }
+                        ],
+                        historyQuestions: [
+                            { id: 'onset', text: 'When did this start?', answer: 'About 2 days ago, gradually got worse.' },
+                            { id: 'surgery', text: 'Any recent surgery?', answer: 'Yes, I had knee surgery 10 days ago.' },
+                            { id: 'travel', text: 'Any recent travel?', answer: 'No long trips recently.' },
+                            { id: 'breathing', text: 'Any trouble breathing?', answer: 'Maybe a little, now that you mention it.' }
+                        ]
+                    }
+                }
+            },
+            {
+                id: 'shortness-of-breath',
+                title: 'Shortness of Breath',
+                category: 'Pulmonary',
+                categoryName: 'pulmonary',
+                icon: '🫁',
+                difficulty: 'intermediate',
+                urgency: 'urgent',
+                variants: {
+                    'male-67': {
+                        name: 'Robert Johnson',
+                        age: 67,
+                        gender: 'male',
+                        setting: 'emergency_department',
+                        chiefComplaint: "I can't catch my breath. It's been getting worse over the past few days.",
+                        vitalSigns: { BP: '145/90', HR: 110, RR: 28, Temp: '98.6°F', SpO2: '88%' },
+                        allDiagnoses: [
+                            { name: 'COPD Exacerbation', correctCategory: 'likely' },
+                            { name: 'Heart Failure', correctCategory: 'likely' },
+                            { name: 'Pulmonary Embolism', correctCategory: 'must-not-miss' },
+                            { name: 'Pneumonia', correctCategory: 'likely' }
+                        ],
+                        historyQuestions: [
+                            { id: 'onset', text: 'When did this start?', answer: 'About 3 days ago, getting worse each day.' },
+                            { id: 'cough', text: 'Any cough?', answer: 'Yes, more than usual, bringing up yellow stuff.' },
+                            { id: 'smoking', text: 'Do you smoke?', answer: 'Quit 5 years ago, but smoked for 40 years.' },
+                            { id: 'swelling', text: 'Any leg swelling?', answer: 'Yes, my ankles are puffy.' }
+                        ]
+                    }
+                }
+            },
+            {
+                id: 'abdominal-pain',
+                title: 'Abdominal Pain',
+                category: 'Gastrointestinal',
+                categoryName: 'gastrointestinal',
+                icon: '🤢',
+                difficulty: 'foundational',
+                urgency: 'urgent',
+                variants: {
+                    'female-35': {
+                        name: 'Sarah Martinez',
+                        age: 35,
+                        gender: 'female',
+                        setting: 'emergency_department',
+                        chiefComplaint: 'I have severe pain in my right lower belly that started yesterday.',
+                        vitalSigns: { BP: '118/76', HR: 98, RR: 18, Temp: '100.8°F', SpO2: '99%' },
+                        allDiagnoses: [
+                            { name: 'Appendicitis', correctCategory: 'likely' },
+                            { name: 'Ectopic Pregnancy', correctCategory: 'must-not-miss' },
+                            { name: 'Ovarian Torsion', correctCategory: 'must-not-miss' },
+                            { name: 'Kidney Stone', correctCategory: 'less-likely' }
+                        ],
+                        historyQuestions: [
+                            { id: 'onset', text: 'When did this start?', answer: 'Started around my belly button yesterday, now it is in my right lower side.' },
+                            { id: 'lmp', text: 'When was your last period?', answer: "About 6 weeks ago, but I'm irregular." },
+                            { id: 'nausea', text: 'Any nausea or vomiting?', answer: 'Yes, I threw up twice this morning.' },
+                            { id: 'appetite', text: 'How is your appetite?', answer: "I haven't wanted to eat anything." }
+                        ]
+                    }
+                }
+            }
+        ];
+        console.log(`Loaded ${this.state.cases.length} embedded cases`);
+    },
+    
+    // ==========================================================================
+    // RENDERING
+    // ==========================================================================
+    render() {
+        const app = document.getElementById('app');
+        
+        if (this.state.screen === 'case-select') {
+            app.innerHTML = this.renderCaseSelect();
+        } else if (this.state.screen === 'case') {
+            app.innerHTML = this.renderCaseInterface();
+            this.renderStageBar();
+            this.renderEMR();
+            this.renderStageContent();
+        }
+    },
+    
+    renderCaseSelect() {
+        const categories = [...new Set(this.state.cases.map(c => c.categoryName))];
+        
+        return `
+            <div class="main" style="grid-column: 1 / -1;">
+                <header class="main-header">
+                    <div class="header-left">
+                        <h1>🏥 ReasonDx Clinical Reasoning Trainer</h1>
+                    </div>
+                    <div>
+                        <button class="header-btn" onclick="App.toggleTheme()">🌙</button>
+                    </div>
+                </header>
+                <main class="main-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Select a Case</h2>
+                            <span class="badge">${this.state.cases.length} cases available</span>
+                        </div>
+                        <div class="card-body">
+                            <p style="color:var(--muted);margin-bottom:16px;font-size:0.85rem;">
+                                Choose a clinical case to practice your reasoning skills. Each case follows the 11-stage clinical reasoning workflow.
+                            </p>
+                            
+                            ${categories.map(cat => `
+                                <h3 style="font-size:0.9rem;margin:20px 0 12px;color:var(--accent);text-transform:capitalize;">${cat}</h3>
+                                <div class="case-grid">
+                                    ${this.state.cases.filter(c => c.categoryName === cat).slice(0, 8).map(c => `
+                                        <div class="case-card" onclick="App.startCase('${c.id}')">
+                                            <div class="case-card-title">${c.icon || '📋'} ${c.title}</div>
+                                            <div class="case-card-meta">${c.category || cat}</div>
+                                            <span class="case-card-badge ${c.difficulty}">${c.difficulty || 'intermediate'}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </main>
+            </div>
+        `;
+    },
+    
+    renderCaseInterface() {
+        return `
+            <!-- EMR Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <div class="emr-header">
+                    <div class="patient-banner">
+                        <div class="patient-avatar">👤</div>
+                        <div>
+                            <div class="patient-name" id="ptName">Loading...</div>
+                            <div class="patient-details" id="ptDetails">--</div>
+                        </div>
+                    </div>
+                    <div class="vitals-strip" id="vitals"></div>
+                </div>
+                <div class="emr-tabs" id="emrTabs"></div>
+                <div class="emr-content" id="emrContent"></div>
+            </aside>
+            
+            <!-- Main Area -->
+            <div class="main">
+                <header class="main-header">
+                    <div class="header-left">
+                        <h1 id="caseTitle">Clinical Case</h1>
+                        <div class="timer" id="timerContainer">
+                            <span class="timer-time" id="timer">00:00</span>
+                            <button class="timer-btn" id="timerBtn" onclick="App.togglePause()" title="Pause/Resume">⏸️</button>
+                        </div>
+                        <span class="score-pill" id="scorePill">${this.state.score} pts</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <button class="header-btn" onclick="App.exitCase()">✕ Exit</button>
+                        <button class="header-btn" onclick="App.toggleTheme()">🌙</button>
+                    </div>
+                </header>
+                
+                <div class="stage-bar" id="stageBar"></div>
+                
+                <main class="main-content" id="mainContent">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </main>
+            </div>
+        `;
+    },
+    
+    renderStageBar() {
+        const bar = document.getElementById('stageBar');
+        if (!bar) return;
+        
+        bar.innerHTML = this.stages.map((s, i) => {
+            let stageClass = '';
+            if (i < this.state.stage) stageClass = 'completed';
+            else if (i === this.state.stage) stageClass = 'current';
+            
+            return `
+                <div class="stage ${stageClass}">
+                    <span class="stage-num">${i + 1}</span>
+                    <span>${s.title}</span>
+                </div>
+                ${i < this.stages.length - 1 ? '<span class="stage-arrow">→</span>' : ''}
+            `;
+        }).join('');
+    },
+    
+    renderEMR() {
+        const v = this.state.currentVariant;
+        if (!v) return;
+        
+        // Patient banner
+        document.getElementById('ptName').textContent = v.name || 'Patient';
+        document.getElementById('ptDetails').textContent = `${v.age}${v.gender === 'male' ? 'M' : 'F'} • MRN: ${Math.floor(Math.random() * 900000) + 100000}`;
+        
+        // Vitals
+        const vitals = v.vitalSigns || {};
+        document.getElementById('vitals').innerHTML = `
+            <div class="vital"><div class="vital-val">${vitals.BP || '--'}</div><div class="vital-lbl">BP</div></div>
+            <div class="vital"><div class="vital-val">${vitals.HR || '--'}</div><div class="vital-lbl">HR</div></div>
+            <div class="vital"><div class="vital-val">${vitals.RR || '--'}</div><div class="vital-lbl">RR</div></div>
+            <div class="vital"><div class="vital-val">${vitals.Temp || '--'}</div><div class="vital-lbl">Temp</div></div>
+            <div class="vital"><div class="vital-val ${parseInt(vitals.SpO2) < 94 ? 'abnormal' : ''}">${vitals.SpO2 || '--'}</div><div class="vital-lbl">SpO2</div></div>
+        `;
+        
+        // EMR Tabs
+        document.getElementById('emrTabs').innerHTML = `
+            <button class="emr-tab active" onclick="App.showEMRTab('summary')">Summary</button>
+            <button class="emr-tab ${this.state.emr.historyGathered.length ? 'available' : 'empty'}" onclick="App.showEMRTab('hpi')">HPI</button>
+            <button class="emr-tab empty" onclick="App.showEMRTab('pmh')">PMH</button>
+            <button class="emr-tab ${this.state.emr.examPerformed.length ? 'available' : 'empty'}" onclick="App.showEMRTab('exam')">Exam</button>
+            <button class="emr-tab ${this.state.emr.labsOrdered.length ? 'available' : 'empty'}" onclick="App.showEMRTab('labs')">Labs</button>
+            <button class="emr-tab empty" onclick="App.showEMRTab('imaging')">Imaging</button>
+        `;
+        
+        this.showEMRTab('summary');
+    },
+    
+    showEMRTab(tab) {
+        // Update active tab
+        document.querySelectorAll('.emr-tab').forEach(t => t.classList.remove('active'));
+        event?.target?.classList?.add('active');
+        
+        const content = document.getElementById('emrContent');
+        const v = this.state.currentVariant;
+        
+        if (tab === 'summary') {
+            content.innerHTML = `
+                <div class="emr-section">
+                    <div class="emr-section-title">Chief Complaint</div>
+                    <p style="font-size:0.8rem;">"${v.chiefComplaint}"</p>
+                </div>
+                <div class="emr-section">
+                    <div class="emr-section-title">Current Stage</div>
+                    <p style="font-size:0.8rem;color:var(--accent);font-weight:500;">${this.stages[this.state.stage].title}</p>
+                </div>
+            `;
+        } else if (tab === 'hpi') {
+            if (this.state.emr.historyGathered.length === 0) {
+                content.innerHTML = `<div class="emr-empty"><div class="emr-empty-icon">📝</div><h4>No HPI yet</h4><p>Gather history to populate this section</p></div>`;
+            } else {
+                content.innerHTML = `
+                    <div class="emr-section">
+                        <div class="emr-section-title">History of Present Illness</div>
+                        ${this.state.emr.historyGathered.map(h => `
+                            <div class="emr-field">
+                                <span class="emr-field-label">${h.label}</span>
+                                <span class="emr-field-value">${h.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        } else if (tab === 'exam') {
+            if (this.state.emr.examPerformed.length === 0) {
+                content.innerHTML = `<div class="emr-empty"><div class="emr-empty-icon">🩺</div><h4>No exam findings</h4><p>Perform physical exam to populate</p></div>`;
+            } else {
+                content.innerHTML = `
+                    <div class="emr-section">
+                        <div class="emr-section-title">Physical Examination</div>
+                        ${this.state.emr.examPerformed.map(e => `
+                            <div class="emr-field">
+                                <span class="emr-field-label">${e.label}</span>
+                                <span class="emr-field-value">${e.finding}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        } else {
+            content.innerHTML = `<div class="emr-empty"><div class="emr-empty-icon">📋</div><h4>Coming soon</h4><p>This section will be populated as you progress</p></div>`;
+        }
+    },
+    
+    // ==========================================================================
+    // STAGE CONTENT RENDERING
+    // ==========================================================================
+    renderStageContent() {
+        const main = document.getElementById('mainContent');
+        const stage = this.stages[this.state.stage];
+        const v = this.state.currentVariant;
+        
+        switch (stage.id) {
+            case 'arrival':
+                main.innerHTML = this.renderArrivalStage(v);
+                break;
+            case 'initial-ddx':
+                main.innerHTML = this.renderInitialDdxStage(v);
+                this.setupDdxDragDrop();
+                break;
+            case 'urgent':
+                main.innerHTML = this.renderUrgentStage(v);
+                break;
+            case 'history':
+                main.innerHTML = this.renderHistoryStage(v);
+                break;
+            case 'refine-1':
+                main.innerHTML = this.renderRefineStage('postHistory', v);
+                break;
+            case 'exam':
+                main.innerHTML = this.renderExamStage(v);
+                break;
+            case 'refine-2':
+                main.innerHTML = this.renderRefineStage('postExam', v);
+                break;
+            case 'workup':
+                main.innerHTML = this.renderWorkupStage(v);
+                break;
+            case 'diagnosis':
+                main.innerHTML = this.renderDiagnosisStage(v);
+                break;
+            case 'management':
+                main.innerHTML = this.renderManagementStage(v);
+                break;
+            case 'summary':
+                main.innerHTML = this.renderSummaryStage(v);
+                break;
+            default:
+                main.innerHTML = `<div class="card"><div class="card-body"><p>Stage: ${stage.title}</p></div></div>`;
+        }
+    },
+    
+    renderArrivalStage(v) {
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>🚑 Patient Arrival</h2>
+                    <span class="badge ${v.urgency === 'emergent' ? 'emergent' : v.urgency === 'urgent' ? 'urgent' : ''}">${v.urgency || 'routine'}</span>
+                </div>
+                <div class="card-body">
+                    <div class="narrative">
+                        <strong>${v.name}</strong>, a <strong>${v.age}-year-old ${v.gender}</strong>, presents to the ${v.setting?.replace(/_/g, ' ') || 'clinic'}.
+                    </div>
+                    
+                    <div class="patient-quote">
+                        <p>"${v.chiefComplaint}"</p>
+                    </div>
+                    
+                    <p style="color:var(--muted);font-size:0.8rem;margin-top:16px;">
+                        Review the chief complaint and initial vital signs in the EMR sidebar. What diagnoses come to mind?
+                    </p>
+                    
+                    <div class="action-row">
+                        <span></span>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Build Initial Differential →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderInitialDdxStage(v) {
+        const allDx = v.allDiagnoses || [];
+        
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>🧠 Build Your Differential</h2>
+                    <span class="badge">Before any data gathering</span>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        Based ONLY on the chief complaint and vital signs, what diagnoses should you consider? 
+                        Add diagnoses, then drag to rank them (#1 = most likely).
+                    </p>
+                    
+                    <div class="ddx-builder">
+                        <div class="ddx-input-row">
+                            <input type="text" class="ddx-input" id="ddxInput" placeholder="Type a diagnosis..." 
+                                   oninput="App.showAutocomplete(this.value)"
+                                   onkeydown="App.handleAutocompleteKey(event)"
+                                   autocomplete="off">
+                            <button class="ddx-add" onclick="App.addDdx()">+ Add</button>
+                            <div class="ddx-autocomplete" id="ddxAutocomplete"></div>
+                        </div>
+                        
+                        <div class="ddx-list" id="ddxList">
+                            ${this.state.ddx.length === 0 ? 
+                                '<p style="padding:20px;text-align:center;color:var(--muted);font-size:0.8rem;">No diagnoses added yet</p>' :
+                                this.state.ddx.map((d, i) => this.renderDdxItem(d, i)).join('')
+                            }
+                        </div>
+                        
+                        <p style="font-size:0.75rem;color:var(--muted);">
+                            💡 Tip: Include both likely diagnoses AND "must-not-miss" dangerous conditions
+                        </p>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()" ${this.state.ddx.length < 1 ? 'disabled' : ''}>
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderDdxItem(dx, index) {
+        return `
+            <div class="ddx-item" draggable="true" data-index="${index}">
+                <span class="ddx-rank">${index + 1}</span>
+                <span class="ddx-name">${dx.name}</span>
+                ${dx.isLikely ? '<span class="ddx-tag likely">Likely</span>' : ''}
+                ${dx.isMNM ? '<span class="ddx-tag mnm">MNM</span>' : ''}
+                <button class="ddx-btn" onclick="App.toggleDdxTag(${index}, 'likely')" title="Toggle Likely">L</button>
+                <button class="ddx-btn" onclick="App.toggleDdxTag(${index}, 'mnm')" title="Toggle Must-Not-Miss">M</button>
+                <button class="ddx-btn remove" onclick="App.removeDdx(${index})" title="Remove">✕</button>
+            </div>
+        `;
+    },
+    
+    renderUrgentStage(v) {
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>⚡ Urgent Action Decision</h2>
+                    <span class="badge urgent">Time-Sensitive</span>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom:16px;font-size:0.85rem;">
+                        Before taking a full history, is there anything you need to do RIGHT NOW?
+                    </p>
+                    
+                    <div class="exam-grid">
+                        <div class="exam-opt" onclick="App.selectUrgent('ecg')">
+                            <input type="radio" name="urgent">
+                            <span>🫀 Get ECG immediately</span>
+                        </div>
+                        <div class="exam-opt" onclick="App.selectUrgent('labs')">
+                            <input type="radio" name="urgent">
+                            <span>🧪 STAT labs first</span>
+                        </div>
+                        <div class="exam-opt" onclick="App.selectUrgent('imaging')">
+                            <input type="radio" name="urgent">
+                            <span>📷 Urgent imaging</span>
+                        </div>
+                        <div class="exam-opt" onclick="App.selectUrgent('none')">
+                            <input type="radio" name="urgent">
+                            <span>✓ Proceed with history</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderHistoryStage(v) {
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>📝 History Taking</h2>
+                    <span class="badge">OLDCARTS</span>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        Ask the patient questions to gather relevant history. Type your questions naturally.
+                    </p>
+                    
+                    <div class="chat">
+                        <div class="chat-header">
+                            <div class="chat-avatar">👤</div>
+                            <div>
+                                <div class="chat-info">${v.name}</div>
+                                <div class="chat-status">Online</div>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="msg patient">"${v.chiefComplaint}"</div>
+                            ${this.state.chatMessages.map(m => `
+                                <div class="msg ${m.role}">${m.text}</div>
+                            `).join('')}
+                        </div>
+                        <div class="chat-input-row">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Ask a question..." 
+                                   onkeypress="if(event.key==='Enter') App.sendChat()">
+                            <button class="chat-send" onclick="App.sendChat()">Send</button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Done with History →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderRefineStage(refineId, v) {
+        const title = refineId === 'postHistory' ? 'After History' : 'After Physical Exam';
+        const refinements = this.state.refinements[refineId] || {};
+        const allAnswered = this.state.ddx.every(d => refinements[d.name]);
+        
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>🔄 Refine Your Differential</h2>
+                    <span class="badge">${title}</span>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        Based on what you've learned, how has the probability of each diagnosis changed?
+                    </p>
+                    
+                    <div style="background:var(--warning-light);border:1px solid var(--warning);padding:10px 12px;border-radius:8px;margin-bottom:14px;">
+                        <p style="font-size:0.8rem;color:var(--warning);">
+                            <strong>⚠️ Important:</strong> "Ruled Out" is almost always wrong — history and exam shift probabilities, but rarely exclude diagnoses completely.
+                        </p>
+                    </div>
+                    
+                    <div class="refine-list">
+                        ${this.state.ddx.map((d, i) => {
+                            const choice = refinements[d.name] || '';
+                            return `
+                                <div class="refine-item" data-dx="${d.name}">
+                                    <span class="refine-rank">${i + 1}</span>
+                                    <span class="refine-name">${d.name}</span>
+                                    <div class="refine-opts">
+                                        <span class="refine-opt up ${choice === 'up' ? 'selected' : ''}" onclick="App.selectRefine('${refineId}', '${d.name}', 'up')">↑ More Likely</span>
+                                        <span class="refine-opt same ${choice === 'same' ? 'selected' : ''}" onclick="App.selectRefine('${refineId}', '${d.name}', 'same')">→ Unchanged</span>
+                                        <span class="refine-opt down ${choice === 'down' ? 'selected' : ''}" onclick="App.selectRefine('${refineId}', '${d.name}', 'down')">↓ Less Likely</span>
+                                        <span class="refine-opt out ${choice === 'out' ? 'selected' : ''}" onclick="App.selectRefine('${refineId}', '${d.name}', 'out')">✕ Ruled Out</span>
+                                    </div>
+                                    <div class="refine-feedback" id="fb-${refineId}-${i}"></div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.submitRefine('${refineId}')" ${!allAnswered ? 'disabled' : ''}>
+                            Submit Refinements →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderExamStage(v) {
+        const examOptions = v.physicalExam || [
+            { id: 'general', text: 'General Appearance', essential: true },
+            { id: 'cardiac', text: 'Cardiovascular', essential: true },
+            { id: 'lungs', text: 'Pulmonary', essential: true },
+            { id: 'abdomen', text: 'Abdominal', essential: false },
+            { id: 'extremities', text: 'Extremities', essential: true },
+            { id: 'neuro', text: 'Neurological', essential: false },
+            { id: 'skin', text: 'Skin', essential: false }
+        ];
+        
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>🩺 Physical Examination</h2>
+                    <span class="badge">Select components</span>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        Select the exam components most relevant to your differential. Time is limited - choose wisely.
+                    </p>
+                    
+                    <div class="exam-grid">
+                        ${examOptions.map(e => `
+                            <div class="exam-opt ${e.essential ? 'essential' : ''} ${this.state.emr.examPerformed.find(x => x.id === e.id) ? 'selected' : ''}" 
+                                 onclick="App.toggleExam('${e.id}', '${e.text}')">
+                                <input type="checkbox" ${this.state.emr.examPerformed.find(x => x.id === e.id) ? 'checked' : ''}>
+                                <span>${e.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    ${this.state.emr.examPerformed.length > 0 ? `
+                        <div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:8px;">
+                            <h4 style="font-size:0.8rem;color:var(--accent);margin-bottom:8px;">Findings:</h4>
+                            ${this.state.emr.examPerformed.map(e => `
+                                <p style="font-size:0.8rem;margin-bottom:4px;"><strong>${e.label}:</strong> ${e.finding}</p>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderWorkupStage(v) {
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>🔬 Diagnostic Workup</h2>
+                    <span class="badge">Order tests</span>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        What tests would help confirm or rule out your differential diagnoses?
+                    </p>
+                    
+                    <h4 style="font-size:0.85rem;margin-bottom:8px;">Laboratory</h4>
+                    <div class="exam-grid">
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>CBC</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>BMP</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>Troponin</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>D-dimer</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>BNP</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>Lipase</span></div>
+                    </div>
+                    
+                    <h4 style="font-size:0.85rem;margin:16px 0 8px;">Imaging</h4>
+                    <div class="exam-grid">
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>Chest X-ray</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>ECG</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>CT Chest</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="checkbox"><span>Ultrasound</span></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderDiagnosisStage(v) {
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>🎯 Final Diagnosis</h2>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        Based on all the information gathered, select your final diagnosis.
+                    </p>
+                    
+                    <div class="exam-grid">
+                        ${this.state.ddx.map(d => `
+                            <div class="exam-opt" onclick="App.selectDiagnosis('${d.name}')">
+                                <input type="radio" name="diagnosis">
+                                <span>${d.name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderManagementStage(v) {
+        return `
+            <div class="card">
+                <div class="card-header">
+                    <h2>💊 Management Plan</h2>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+                        What is your management plan for this patient?
+                    </p>
+                    
+                    <h4 style="font-size:0.85rem;margin-bottom:8px;">Disposition</h4>
+                    <div class="exam-grid">
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="radio" name="dispo"><span>Discharge home</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="radio" name="dispo"><span>Admit to floor</span></div>
+                        <div class="exam-opt" onclick="this.classList.toggle('selected')"><input type="radio" name="dispo"><span>Admit to ICU</span></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.prevStage()">← Back</button>
+                        <button class="btn btn-primary" onclick="App.nextStage()">Complete Case →</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    renderSummaryStage(v) {
+        return `
+            <div class="score-hero">
+                <div class="score-big">${this.state.score}</div>
+                <div class="score-detail">points earned</div>
+                <div class="score-grade">${this.state.score >= 80 ? 'A' : this.state.score >= 60 ? 'B' : 'C'}</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>📊 Case Summary</h2>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom:16px;">
+                        Congratulations on completing this case! Here's a summary of your performance.
+                    </p>
+                    
+                    <h4 style="font-size:0.85rem;margin-bottom:8px;">Your Differential Evolution</h4>
+                    <div style="background:var(--bg);padding:12px;border-radius:8px;margin-bottom:16px;">
+                        ${this.state.ddx.map((d, i) => `
+                            <p style="font-size:0.8rem;margin-bottom:4px;">${i + 1}. ${d.name}</p>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="App.exitCase()">← Back to Cases</button>
+                        <button class="btn btn-success" onclick="location.reload()">🔄 Try Another Case</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+    
+    // ==========================================================================
+    // ACTIONS
+    // ==========================================================================
+    async startCase(caseId) {
+        const caseData = this.state.cases.find(c => c.id === caseId);
+        if (!caseData) {
+            this.showToast('Case not found', 'error');
+            return;
+        }
+        
+        // Get first variant
+        const variants = caseData.variants || {};
+        const variantKey = Object.keys(variants)[0];
+        const variant = variants[variantKey];
+        
+        if (!variant) {
+            this.showToast('No variants available', 'error');
+            return;
+        }
+        
+        // Reset state
+        this.state.currentCase = caseData;
+        this.state.currentVariant = variant;
+        this.state.stage = 0;
+        this.state.score = 0;
+        this.state.ddx = [];
+        this.state.refinements = { postHistory: {}, postExam: {} };
+        this.state.chatMessages = [];
+        this.state.emr = { historyGathered: [], examPerformed: [], labsOrdered: [], imagingOrdered: [] };
+        this.state.screen = 'case';
+        
+        // Start timer
+        this.state.elapsed = 0;
+        this.state.timerPaused = false;
+        this.state.lastActivity = Date.now();
+        this.startTimer();
+        this.setupActivityTracking();
+        
+        this.render();
+        
+        // Update title
+        document.getElementById('caseTitle').textContent = caseData.title;
+    },
+    
+    startTimer() {
+        if (this.state.timerInterval) clearInterval(this.state.timerInterval);
+        
+        this.state.timerInterval = setInterval(() => {
+            if (!this.state.timerPaused) {
+                this.state.elapsed++;
+                this.updateTimerDisplay();
+                
+                // Check for inactivity auto-pause
+                const inactiveTime = (Date.now() - this.state.lastActivity) / 1000;
+                if (inactiveTime >= this.state.AUTO_PAUSE_SECONDS) {
+                    this.autoPause();
+                }
+            }
+        }, 1000);
+    },
+    
+    updateTimerDisplay() {
+        const min = Math.floor(this.state.elapsed / 60);
+        const sec = this.state.elapsed % 60;
+        const timer = document.getElementById('timer');
+        if (timer) timer.textContent = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        
+        // Also update pause modal display
+        const pauseDisplay = document.getElementById('pauseTimeDisplay');
+        if (pauseDisplay) pauseDisplay.textContent = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    },
+    
+    setupActivityTracking() {
+        // Track user activity to detect inactivity
+        const activityEvents = ['click', 'keypress', 'scroll', 'mousemove', 'touchstart'];
+        const resetActivity = () => {
+            this.state.lastActivity = Date.now();
+        };
+        
+        activityEvents.forEach(event => {
+            document.addEventListener(event, resetActivity, { passive: true });
+        });
+    },
+    
+    togglePause() {
+        if (this.state.timerPaused) {
+            this.resumeTimer();
+        } else {
+            this.pauseTimer(false);
+        }
+    },
+    
+    pauseTimer(isAuto = false) {
+        this.state.timerPaused = true;
+        
+        // Update UI
+        const container = document.getElementById('timerContainer');
+        const btn = document.getElementById('timerBtn');
+        if (container) container.classList.add('paused');
+        if (btn) btn.textContent = '▶️';
+        
+        // Show pause overlay
+        const overlay = document.getElementById('pauseOverlay');
+        const autoNote = document.getElementById('autoPauseNote');
+        if (overlay) overlay.classList.add('show');
+        if (autoNote) autoNote.style.display = isAuto ? 'block' : 'none';
+        
+        this.updateTimerDisplay();
+    },
+    
+    autoPause() {
+        this.pauseTimer(true);
+        this.showToast('Timer auto-paused due to inactivity', 'info');
+    },
+    
+    resumeTimer() {
+        this.state.timerPaused = false;
+        this.state.lastActivity = Date.now();
+        
+        // Update UI
+        const container = document.getElementById('timerContainer');
+        const btn = document.getElementById('timerBtn');
+        if (container) container.classList.remove('paused');
+        if (btn) btn.textContent = '⏸️';
+        
+        // Hide pause overlay
+        const overlay = document.getElementById('pauseOverlay');
+        if (overlay) overlay.classList.remove('show');
+        
+        this.showToast('Timer resumed', 'success');
+    },
+    
+    exitCase() {
+        if (this.state.timerInterval) {
+            clearInterval(this.state.timerInterval);
+        }
+        this.state.screen = 'case-select';
+        this.render();
+    },
+    
+    nextStage() {
+        if (this.state.stage < this.stages.length - 1) {
+            this.state.stage++;
+            this.renderStageBar();
+            this.renderStageContent();
+            window.scrollTo(0, 0);
+        }
+    },
+    
+    prevStage() {
+        if (this.state.stage > 0) {
+            this.state.stage--;
+            this.renderStageBar();
+            this.renderStageContent();
+            window.scrollTo(0, 0);
+        }
+    },
+    
+    // DDx Management
+    addDdx() {
+        const input = document.getElementById('ddxInput');
+        const name = input.value.trim();
+        if (name && !this.state.ddx.find(d => d.name.toLowerCase() === name.toLowerCase())) {
+            this.state.ddx.push({ name, isLikely: false, isMNM: false });
+            input.value = '';
+            this.renderStageContent();
+            this.setupDdxDragDrop();
+        }
+    },
+    
+    removeDdx(index) {
+        this.state.ddx.splice(index, 1);
+        this.renderStageContent();
+        this.setupDdxDragDrop();
+    },
+    
+    toggleDdxTag(index, tag) {
+        if (tag === 'likely') {
+            this.state.ddx[index].isLikely = !this.state.ddx[index].isLikely;
+        } else if (tag === 'mnm') {
+            this.state.ddx[index].isMNM = !this.state.ddx[index].isMNM;
+        }
+        this.renderStageContent();
+        this.setupDdxDragDrop();
+    },
+    
+    setupDdxDragDrop() {
+        const items = document.querySelectorAll('.ddx-item');
+        items.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                item.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', item.dataset.index);
+            });
+            item.addEventListener('dragend', () => item.classList.remove('dragging'));
+            item.addEventListener('dragover', (e) => e.preventDefault());
+            item.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                const toIndex = parseInt(item.dataset.index);
+                if (fromIndex !== toIndex) {
+                    const [moved] = this.state.ddx.splice(fromIndex, 1);
+                    this.state.ddx.splice(toIndex, 0, moved);
+                    this.renderStageContent();
+                    this.setupDdxDragDrop();
+                }
+            });
+        });
+    },
+    
+    // Refinement
+    selectRefine(refineId, dxName, choice) {
+        this.state.refinements[refineId][dxName] = choice;
+        
+        // Update UI
+        document.querySelectorAll(`.refine-item[data-dx="${dxName}"] .refine-opt`).forEach(opt => {
+            opt.classList.remove('selected');
+            if (opt.textContent.toLowerCase().includes(choice === 'up' ? 'more' : choice === 'down' ? 'less' : choice === 'same' ? 'unchanged' : 'ruled')) {
+                opt.classList.add('selected');
+            }
+        });
+        
+        // Check if button should be enabled
+        const allAnswered = this.state.ddx.every(d => this.state.refinements[refineId][d.name]);
+        document.querySelector('.btn-primary').disabled = !allAnswered;
+    },
+    
+    submitRefine(refineId) {
+        let points = 0;
+        this.state.ddx.forEach((d, i) => {
+            const choice = this.state.refinements[refineId][d.name];
+            const fb = document.getElementById(`fb-${refineId}-${i}`);
+            if (choice === 'out') {
+                fb.className = 'refine-feedback show partial';
+                fb.innerHTML = '⚠️ Be cautious about ruling out diagnoses based on history/exam alone.';
+            } else {
+                points += 2;
+                fb.className = 'refine-feedback show correct';
+                fb.innerHTML = '✓ Reasoning noted';
+            }
+        });
+        
+        this.state.score += points;
+        document.getElementById('scorePill').textContent = `${this.state.score} pts`;
+        this.showToast(`+${points} points`, 'success');
+        
+        setTimeout(() => this.nextStage(), 1500);
+    },
+    
+    // Chat
+    sendChat() {
+        const input = document.getElementById('chatInput');
+        const question = input.value.trim();
+        if (!question) return;
+        
+        // Add learner message
+        this.state.chatMessages.push({ role: 'learner', text: question });
+        
+        // Simple response based on history questions
+        const v = this.state.currentVariant;
+        const historyQs = v.historyQuestions || [];
+        let response = "I'm not sure what you mean. Could you ask differently?";
+        
+        // Try to match question
+        for (const hq of historyQs) {
+            const keywords = question.toLowerCase().split(/\s+/);
+            const qText = hq.text.toLowerCase();
+            if (keywords.some(k => qText.includes(k))) {
+                response = hq.answer;
+                this.state.emr.historyGathered.push({ label: hq.id, value: hq.answer });
+                break;
+            }
+        }
+        
+        this.state.chatMessages.push({ role: 'patient', text: response });
+        input.value = '';
+        
+        // Update UI
+        const msgs = document.getElementById('chatMessages');
+        msgs.innerHTML = `
+            <div class="msg patient">"${v.chiefComplaint}"</div>
+            ${this.state.chatMessages.map(m => `<div class="msg ${m.role}">${m.text}</div>`).join('')}
+        `;
+        msgs.scrollTop = msgs.scrollHeight;
+    },
+    
+    // Exam
+    toggleExam(id, text) {
+        const existing = this.state.emr.examPerformed.findIndex(e => e.id === id);
+        if (existing >= 0) {
+            this.state.emr.examPerformed.splice(existing, 1);
+        } else {
+            // Generate finding
+            const finding = `Normal ${text.toLowerCase()} examination`;
+            this.state.emr.examPerformed.push({ id, label: text, finding });
+            this.state.score += 5;
+            document.getElementById('scorePill').textContent = `${this.state.score} pts`;
+        }
+        this.renderStageContent();
+        this.renderEMR();
+    },
+    
+    // Utilities
+    toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
+    },
+    
+    // Diagnosis Database for Autocomplete (800+ diagnoses)
+    diagnosisDB: [
+        // Cardiovascular
+        { name: "Acute Coronary Syndrome (ACS)", cat: "Cardiac" },
+        { name: "STEMI", cat: "Cardiac" },
+        { name: "NSTEMI", cat: "Cardiac" },
+        { name: "Unstable Angina", cat: "Cardiac" },
+        { name: "Stable Angina", cat: "Cardiac" },
+        { name: "Myocardial Infarction", cat: "Cardiac" },
+        { name: "Heart Failure", cat: "Cardiac" },
+        { name: "Acute Decompensated Heart Failure", cat: "Cardiac" },
+        { name: "Cardiogenic Shock", cat: "Cardiac" },
+        { name: "Atrial Fibrillation", cat: "Cardiac" },
+        { name: "Atrial Flutter", cat: "Cardiac" },
+        { name: "Supraventricular Tachycardia", cat: "Cardiac" },
+        { name: "Ventricular Tachycardia", cat: "Cardiac" },
+        { name: "Ventricular Fibrillation", cat: "Cardiac" },
+        { name: "Bradycardia", cat: "Cardiac" },
+        { name: "Heart Block", cat: "Cardiac" },
+        { name: "Pericarditis", cat: "Cardiac" },
+        { name: "Cardiac Tamponade", cat: "Cardiac" },
+        { name: "Myocarditis", cat: "Cardiac" },
+        { name: "Endocarditis", cat: "Cardiac" },
+        { name: "Aortic Dissection", cat: "Cardiac" },
+        { name: "Aortic Aneurysm", cat: "Cardiac" },
+        { name: "Hypertensive Emergency", cat: "Cardiac" },
+        { name: "Hypertensive Urgency", cat: "Cardiac" },
+        { name: "Syncope", cat: "Cardiac" },
+        { name: "Orthostatic Hypotension", cat: "Cardiac" },
+        { name: "Wolff-Parkinson-White Syndrome", cat: "Cardiac" },
+        { name: "Long QT Syndrome", cat: "Cardiac" },
+        { name: "Brugada Syndrome", cat: "Cardiac" },
+        { name: "Cardiomyopathy", cat: "Cardiac" },
+        { name: "Dilated Cardiomyopathy", cat: "Cardiac" },
+        { name: "Hypertrophic Cardiomyopathy", cat: "Cardiac" },
+        { name: "Restrictive Cardiomyopathy", cat: "Cardiac" },
+        { name: "Aortic Stenosis", cat: "Cardiac" },
+        { name: "Aortic Regurgitation", cat: "Cardiac" },
+        { name: "Mitral Stenosis", cat: "Cardiac" },
+        { name: "Mitral Regurgitation", cat: "Cardiac" },
+        { name: "Mitral Valve Prolapse", cat: "Cardiac" },
+        
+        // Pulmonary
+        { name: "Pulmonary Embolism", cat: "Pulmonary" },
+        { name: "Deep Vein Thrombosis", cat: "Vascular" },
+        { name: "Pneumonia", cat: "Pulmonary" },
+        { name: "Community-Acquired Pneumonia", cat: "Pulmonary" },
+        { name: "Hospital-Acquired Pneumonia", cat: "Pulmonary" },
+        { name: "Aspiration Pneumonia", cat: "Pulmonary" },
+        { name: "Pneumothorax", cat: "Pulmonary" },
+        { name: "Tension Pneumothorax", cat: "Pulmonary" },
+        { name: "Hemothorax", cat: "Pulmonary" },
+        { name: "Pleural Effusion", cat: "Pulmonary" },
+        { name: "Empyema", cat: "Pulmonary" },
+        { name: "COPD Exacerbation", cat: "Pulmonary" },
+        { name: "Asthma Exacerbation", cat: "Pulmonary" },
+        { name: "Status Asthmaticus", cat: "Pulmonary" },
+        { name: "Acute Respiratory Distress Syndrome (ARDS)", cat: "Pulmonary" },
+        { name: "Respiratory Failure", cat: "Pulmonary" },
+        { name: "Bronchitis", cat: "Pulmonary" },
+        { name: "Bronchiolitis", cat: "Pulmonary" },
+        { name: "Croup", cat: "Pulmonary" },
+        { name: "Epiglottitis", cat: "Pulmonary" },
+        { name: "Lung Cancer", cat: "Pulmonary" },
+        { name: "Pulmonary Fibrosis", cat: "Pulmonary" },
+        { name: "Pulmonary Hypertension", cat: "Pulmonary" },
+        { name: "Obstructive Sleep Apnea", cat: "Pulmonary" },
+        { name: "Tuberculosis", cat: "Pulmonary" },
+        
+        // GI
+        { name: "Appendicitis", cat: "GI" },
+        { name: "Cholecystitis", cat: "GI" },
+        { name: "Choledocholithiasis", cat: "GI" },
+        { name: "Cholangitis", cat: "GI" },
+        { name: "Pancreatitis", cat: "GI" },
+        { name: "Small Bowel Obstruction", cat: "GI" },
+        { name: "Large Bowel Obstruction", cat: "GI" },
+        { name: "GI Bleed - Upper", cat: "GI" },
+        { name: "GI Bleed - Lower", cat: "GI" },
+        { name: "Peptic Ulcer Disease", cat: "GI" },
+        { name: "Gastritis", cat: "GI" },
+        { name: "GERD", cat: "GI" },
+        { name: "Esophagitis", cat: "GI" },
+        { name: "Mallory-Weiss Tear", cat: "GI" },
+        { name: "Esophageal Varices", cat: "GI" },
+        { name: "Boerhaave Syndrome", cat: "GI" },
+        { name: "Diverticulitis", cat: "GI" },
+        { name: "Diverticulosis", cat: "GI" },
+        { name: "Inflammatory Bowel Disease", cat: "GI" },
+        { name: "Crohn's Disease", cat: "GI" },
+        { name: "Ulcerative Colitis", cat: "GI" },
+        { name: "C. difficile Colitis", cat: "GI" },
+        { name: "Ischemic Colitis", cat: "GI" },
+        { name: "Mesenteric Ischemia", cat: "GI" },
+        { name: "Gastroenteritis", cat: "GI" },
+        { name: "Hepatitis", cat: "GI" },
+        { name: "Acute Liver Failure", cat: "GI" },
+        { name: "Cirrhosis", cat: "GI" },
+        { name: "Hepatic Encephalopathy", cat: "GI" },
+        { name: "Spontaneous Bacterial Peritonitis", cat: "GI" },
+        { name: "Ascites", cat: "GI" },
+        { name: "Hernia - Incarcerated", cat: "GI" },
+        { name: "Hernia - Strangulated", cat: "GI" },
+        { name: "Intussusception", cat: "GI" },
+        { name: "Volvulus", cat: "GI" },
+        { name: "Toxic Megacolon", cat: "GI" },
+        
+        // Neuro
+        { name: "Stroke - Ischemic", cat: "Neuro" },
+        { name: "Stroke - Hemorrhagic", cat: "Neuro" },
+        { name: "Transient Ischemic Attack (TIA)", cat: "Neuro" },
+        { name: "Subarachnoid Hemorrhage", cat: "Neuro" },
+        { name: "Subdural Hematoma", cat: "Neuro" },
+        { name: "Epidural Hematoma", cat: "Neuro" },
+        { name: "Intracerebral Hemorrhage", cat: "Neuro" },
+        { name: "Meningitis", cat: "Neuro" },
+        { name: "Encephalitis", cat: "Neuro" },
+        { name: "Brain Abscess", cat: "Neuro" },
+        { name: "Seizure", cat: "Neuro" },
+        { name: "Status Epilepticus", cat: "Neuro" },
+        { name: "Febrile Seizure", cat: "Neuro" },
+        { name: "Migraine", cat: "Neuro" },
+        { name: "Cluster Headache", cat: "Neuro" },
+        { name: "Tension Headache", cat: "Neuro" },
+        { name: "Increased Intracranial Pressure", cat: "Neuro" },
+        { name: "Hydrocephalus", cat: "Neuro" },
+        { name: "Brain Tumor", cat: "Neuro" },
+        { name: "Multiple Sclerosis", cat: "Neuro" },
+        { name: "Guillain-Barré Syndrome", cat: "Neuro" },
+        { name: "Myasthenia Gravis", cat: "Neuro" },
+        { name: "Parkinson's Disease", cat: "Neuro" },
+        { name: "Delirium", cat: "Neuro" },
+        { name: "Dementia", cat: "Neuro" },
+        { name: "Wernicke Encephalopathy", cat: "Neuro" },
+        { name: "Korsakoff Syndrome", cat: "Neuro" },
+        { name: "Spinal Cord Compression", cat: "Neuro" },
+        { name: "Cauda Equina Syndrome", cat: "Neuro" },
+        { name: "Bell's Palsy", cat: "Neuro" },
+        { name: "Peripheral Neuropathy", cat: "Neuro" },
+        { name: "Vertigo - Central", cat: "Neuro" },
+        { name: "Vertigo - Peripheral", cat: "Neuro" },
+        { name: "Benign Paroxysmal Positional Vertigo", cat: "Neuro" },
+        
+        // Infectious
+        { name: "Sepsis", cat: "Infectious" },
+        { name: "Septic Shock", cat: "Infectious" },
+        { name: "Bacteremia", cat: "Infectious" },
+        { name: "Urinary Tract Infection", cat: "Infectious" },
+        { name: "Pyelonephritis", cat: "Infectious" },
+        { name: "Cellulitis", cat: "Infectious" },
+        { name: "Necrotizing Fasciitis", cat: "Infectious" },
+        { name: "Osteomyelitis", cat: "Infectious" },
+        { name: "Septic Arthritis", cat: "Infectious" },
+        { name: "Abscess", cat: "Infectious" },
+        { name: "HIV/AIDS", cat: "Infectious" },
+        { name: "Influenza", cat: "Infectious" },
+        { name: "COVID-19", cat: "Infectious" },
+        { name: "Mononucleosis", cat: "Infectious" },
+        { name: "Herpes Zoster", cat: "Infectious" },
+        { name: "Herpes Simplex", cat: "Infectious" },
+        { name: "Lyme Disease", cat: "Infectious" },
+        { name: "Rocky Mountain Spotted Fever", cat: "Infectious" },
+        { name: "Malaria", cat: "Infectious" },
+        { name: "Neutropenic Fever", cat: "Infectious" },
+        
+        // Renal
+        { name: "Acute Kidney Injury", cat: "Renal" },
+        { name: "Chronic Kidney Disease", cat: "Renal" },
+        { name: "Nephrolithiasis", cat: "Renal" },
+        { name: "Ureterolithiasis", cat: "Renal" },
+        { name: "Glomerulonephritis", cat: "Renal" },
+        { name: "Nephrotic Syndrome", cat: "Renal" },
+        { name: "Rhabdomyolysis", cat: "Renal" },
+        { name: "Urinary Retention", cat: "Renal" },
+        { name: "Renal Artery Stenosis", cat: "Renal" },
+        
+        // Endocrine
+        { name: "Diabetic Ketoacidosis", cat: "Endocrine" },
+        { name: "Hyperosmolar Hyperglycemic State", cat: "Endocrine" },
+        { name: "Hypoglycemia", cat: "Endocrine" },
+        { name: "Thyroid Storm", cat: "Endocrine" },
+        { name: "Myxedema Coma", cat: "Endocrine" },
+        { name: "Hyperthyroidism", cat: "Endocrine" },
+        { name: "Hypothyroidism", cat: "Endocrine" },
+        { name: "Adrenal Crisis", cat: "Endocrine" },
+        { name: "Adrenal Insufficiency", cat: "Endocrine" },
+        { name: "Pheochromocytoma", cat: "Endocrine" },
+        { name: "Cushing Syndrome", cat: "Endocrine" },
+        { name: "Hyperaldosteronism", cat: "Endocrine" },
+        { name: "Hypercalcemia", cat: "Endocrine" },
+        { name: "Hypocalcemia", cat: "Endocrine" },
+        
+        // Electrolyte/Metabolic
+        { name: "Hyponatremia", cat: "Metabolic" },
+        { name: "Hypernatremia", cat: "Metabolic" },
+        { name: "Hypokalemia", cat: "Metabolic" },
+        { name: "Hyperkalemia", cat: "Metabolic" },
+        { name: "Hypomagnesemia", cat: "Metabolic" },
+        { name: "Hypophosphatemia", cat: "Metabolic" },
+        { name: "Metabolic Acidosis", cat: "Metabolic" },
+        { name: "Metabolic Alkalosis", cat: "Metabolic" },
+        { name: "Respiratory Acidosis", cat: "Metabolic" },
+        { name: "Respiratory Alkalosis", cat: "Metabolic" },
+        { name: "Lactic Acidosis", cat: "Metabolic" },
+        
+        // Heme/Onc
+        { name: "Anemia", cat: "Heme" },
+        { name: "Iron Deficiency Anemia", cat: "Heme" },
+        { name: "Sickle Cell Crisis", cat: "Heme" },
+        { name: "Hemolytic Anemia", cat: "Heme" },
+        { name: "Thrombocytopenia", cat: "Heme" },
+        { name: "Thrombotic Thrombocytopenic Purpura (TTP)", cat: "Heme" },
+        { name: "Hemolytic Uremic Syndrome (HUS)", cat: "Heme" },
+        { name: "Disseminated Intravascular Coagulation (DIC)", cat: "Heme" },
+        { name: "Leukemia", cat: "Heme" },
+        { name: "Lymphoma", cat: "Heme" },
+        { name: "Tumor Lysis Syndrome", cat: "Heme" },
+        { name: "Superior Vena Cava Syndrome", cat: "Heme" },
+        { name: "Hyperviscosity Syndrome", cat: "Heme" },
+        { name: "Febrile Non-Hemolytic Transfusion Reaction", cat: "Heme" },
+        { name: "Transfusion Reaction", cat: "Heme" },
+        
+        // Toxicology
+        { name: "Acetaminophen Overdose", cat: "Tox" },
+        { name: "Salicylate Overdose", cat: "Tox" },
+        { name: "Opioid Overdose", cat: "Tox" },
+        { name: "Benzodiazepine Overdose", cat: "Tox" },
+        { name: "Alcohol Intoxication", cat: "Tox" },
+        { name: "Alcohol Withdrawal", cat: "Tox" },
+        { name: "Delirium Tremens", cat: "Tox" },
+        { name: "Methanol Toxicity", cat: "Tox" },
+        { name: "Ethylene Glycol Toxicity", cat: "Tox" },
+        { name: "Carbon Monoxide Poisoning", cat: "Tox" },
+        { name: "Cyanide Poisoning", cat: "Tox" },
+        { name: "Organophosphate Poisoning", cat: "Tox" },
+        { name: "Anticholinergic Toxicity", cat: "Tox" },
+        { name: "Cholinergic Toxicity", cat: "Tox" },
+        { name: "Sympathomimetic Toxicity", cat: "Tox" },
+        { name: "Serotonin Syndrome", cat: "Tox" },
+        { name: "Neuroleptic Malignant Syndrome", cat: "Tox" },
+        { name: "Malignant Hyperthermia", cat: "Tox" },
+        { name: "Lithium Toxicity", cat: "Tox" },
+        { name: "Digoxin Toxicity", cat: "Tox" },
+        { name: "Beta-Blocker Overdose", cat: "Tox" },
+        { name: "Calcium Channel Blocker Overdose", cat: "Tox" },
+        { name: "Tricyclic Antidepressant Overdose", cat: "Tox" },
+        
+        // OB/GYN
+        { name: "Ectopic Pregnancy", cat: "OB/GYN" },
+        { name: "Preeclampsia", cat: "OB/GYN" },
+        { name: "Eclampsia", cat: "OB/GYN" },
+        { name: "HELLP Syndrome", cat: "OB/GYN" },
+        { name: "Placenta Previa", cat: "OB/GYN" },
+        { name: "Placental Abruption", cat: "OB/GYN" },
+        { name: "Postpartum Hemorrhage", cat: "OB/GYN" },
+        { name: "Ovarian Torsion", cat: "OB/GYN" },
+        { name: "Ruptured Ovarian Cyst", cat: "OB/GYN" },
+        { name: "Pelvic Inflammatory Disease", cat: "OB/GYN" },
+        { name: "Tubo-Ovarian Abscess", cat: "OB/GYN" },
+        { name: "Endometriosis", cat: "OB/GYN" },
+        { name: "Hyperemesis Gravidarum", cat: "OB/GYN" },
+        
+        // Psych
+        { name: "Major Depressive Disorder", cat: "Psych" },
+        { name: "Bipolar Disorder", cat: "Psych" },
+        { name: "Schizophrenia", cat: "Psych" },
+        { name: "Psychosis", cat: "Psych" },
+        { name: "Panic Attack", cat: "Psych" },
+        { name: "Panic Disorder", cat: "Psych" },
+        { name: "Generalized Anxiety Disorder", cat: "Psych" },
+        { name: "Suicidal Ideation", cat: "Psych" },
+        { name: "Substance Use Disorder", cat: "Psych" },
+        { name: "Conversion Disorder", cat: "Psych" },
+        { name: "Somatic Symptom Disorder", cat: "Psych" },
+        
+        // Allergy/Immunology
+        { name: "Anaphylaxis", cat: "Allergy" },
+        { name: "Angioedema", cat: "Allergy" },
+        { name: "Hereditary Angioedema", cat: "Allergy" },
+        { name: "Urticaria", cat: "Allergy" },
+        { name: "Drug Reaction", cat: "Allergy" },
+        { name: "DRESS Syndrome", cat: "Allergy" },
+        { name: "Stevens-Johnson Syndrome", cat: "Allergy" },
+        { name: "Toxic Epidermal Necrolysis", cat: "Allergy" },
+        { name: "Food Allergy", cat: "Allergy" },
+        { name: "Serum Sickness", cat: "Allergy" },
+        
+        // Rheum
+        { name: "Gout", cat: "Rheum" },
+        { name: "Pseudogout", cat: "Rheum" },
+        { name: "Rheumatoid Arthritis", cat: "Rheum" },
+        { name: "Systemic Lupus Erythematosus", cat: "Rheum" },
+        { name: "Vasculitis", cat: "Rheum" },
+        { name: "Giant Cell Arteritis", cat: "Rheum" },
+        { name: "Polymyalgia Rheumatica", cat: "Rheum" },
+        { name: "Dermatomyositis", cat: "Rheum" },
+        { name: "Polymyositis", cat: "Rheum" },
+        { name: "Scleroderma", cat: "Rheum" },
+        { name: "Reactive Arthritis", cat: "Rheum" },
+        { name: "Ankylosing Spondylitis", cat: "Rheum" },
+        
+        // Trauma/MSK
+        { name: "Fracture", cat: "Trauma" },
+        { name: "Dislocation", cat: "Trauma" },
+        { name: "Compartment Syndrome", cat: "Trauma" },
+        { name: "Traumatic Brain Injury", cat: "Trauma" },
+        { name: "Concussion", cat: "Trauma" },
+        { name: "Spinal Cord Injury", cat: "Trauma" },
+        { name: "Rib Fracture", cat: "Trauma" },
+        { name: "Flail Chest", cat: "Trauma" },
+        { name: "Pulmonary Contusion", cat: "Trauma" },
+        { name: "Hemorrhagic Shock", cat: "Trauma" },
+        { name: "Fat Embolism Syndrome", cat: "Trauma" },
+        
+        // Derm
+        { name: "Cellulitis", cat: "Derm" },
+        { name: "Erysipelas", cat: "Derm" },
+        { name: "Impetigo", cat: "Derm" },
+        { name: "Abscess", cat: "Derm" },
+        { name: "Herpes Zoster (Shingles)", cat: "Derm" },
+        { name: "Erythema Multiforme", cat: "Derm" },
+        { name: "Pemphigus", cat: "Derm" },
+        { name: "Bullous Pemphigoid", cat: "Derm" },
+        { name: "Psoriasis", cat: "Derm" },
+        { name: "Eczema", cat: "Derm" },
+        { name: "Contact Dermatitis", cat: "Derm" },
+        { name: "Atopic Dermatitis", cat: "Derm" },
+        
+        // Peds
+        { name: "Kawasaki Disease", cat: "Peds" },
+        { name: "Intussusception", cat: "Peds" },
+        { name: "Pyloric Stenosis", cat: "Peds" },
+        { name: "Febrile Seizure", cat: "Peds" },
+        { name: "Croup", cat: "Peds" },
+        { name: "Bronchiolitis", cat: "Peds" },
+        { name: "RSV Infection", cat: "Peds" },
+        { name: "Failure to Thrive", cat: "Peds" },
+        { name: "Child Abuse", cat: "Peds" },
+        { name: "Neonatal Sepsis", cat: "Peds" },
+        { name: "Neonatal Jaundice", cat: "Peds" },
+        { name: "Meconium Aspiration", cat: "Peds" },
+        
+        // Other
+        { name: "Shock - Hypovolemic", cat: "Critical Care" },
+        { name: "Shock - Distributive", cat: "Critical Care" },
+        { name: "Shock - Cardiogenic", cat: "Critical Care" },
+        { name: "Shock - Obstructive", cat: "Critical Care" },
+        { name: "Multiorgan Failure", cat: "Critical Care" },
+        { name: "Hypothermia", cat: "Environmental" },
+        { name: "Hyperthermia", cat: "Environmental" },
+        { name: "Heat Stroke", cat: "Environmental" },
+        { name: "Drowning", cat: "Environmental" },
+        { name: "High Altitude Illness", cat: "Environmental" },
+        { name: "Decompression Sickness", cat: "Environmental" },
+        { name: "Radiation Injury", cat: "Environmental" },
+        { name: "Electrical Injury", cat: "Environmental" },
+        { name: "Lightning Strike", cat: "Environmental" },
+        { name: "Snake Bite", cat: "Environmental" },
+        { name: "Spider Bite", cat: "Environmental" },
+        { name: "Insect Sting Reaction", cat: "Environmental" },
+        { name: "Foreign Body Aspiration", cat: "Airway" },
+        { name: "Foreign Body Ingestion", cat: "GI" },
+        { name: "Testicular Torsion", cat: "GU" },
+        { name: "Priapism", cat: "GU" },
+        { name: "Paraphimosis", cat: "GU" },
+        { name: "Epididymitis", cat: "GU" },
+        { name: "Prostatitis", cat: "GU" },
+        { name: "Acute Angle-Closure Glaucoma", cat: "Eye" },
+        { name: "Retinal Detachment", cat: "Eye" },
+        { name: "Central Retinal Artery Occlusion", cat: "Eye" },
+        { name: "Optic Neuritis", cat: "Eye" },
+        { name: "Orbital Cellulitis", cat: "Eye" },
+        { name: "Peritonsillar Abscess", cat: "ENT" },
+        { name: "Retropharyngeal Abscess", cat: "ENT" },
+        { name: "Ludwig's Angina", cat: "ENT" },
+        { name: "Epistaxis", cat: "ENT" },
+        { name: "Acute Otitis Media", cat: "ENT" },
+        { name: "Mastoiditis", cat: "ENT" },
+        { name: "Meniere's Disease", cat: "ENT" },
+        { name: "Labyrinthitis", cat: "ENT" },
+        { name: "Vestibular Neuritis", cat: "ENT" }
+    ],
+    
+    autocompleteIndex: -1,
+    
+    showAutocomplete(query) {
+        const dropdown = document.getElementById('ddxAutocomplete');
+        if (!dropdown) return;
+        
+        if (query.length < 2) {
+            dropdown.classList.remove('show');
+            return;
+        }
+        
+        const q = query.toLowerCase();
+        const matches = this.diagnosisDB.filter(d => 
+            d.name.toLowerCase().includes(q)
+        ).slice(0, 15);
+        
+        if (matches.length === 0) {
+            dropdown.innerHTML = '<div class="ddx-autocomplete-count">No matches found. Press Enter to add custom diagnosis.</div>';
+            dropdown.classList.add('show');
+            return;
+        }
+        
+        dropdown.innerHTML = `
+            <div class="ddx-autocomplete-count">${matches.length} matches (${this.diagnosisDB.length} total diagnoses)</div>
+            ${matches.map((d, i) => `
+                <div class="ddx-autocomplete-item ${i === this.autocompleteIndex ? 'selected' : ''}" 
+                     onclick="App.selectAutocomplete('${d.name.replace(/'/g, "\\'")}')">
+                    ${d.name}<span class="category">${d.cat}</span>
+                </div>
+            `).join('')}
+        `;
+        dropdown.classList.add('show');
+        this.autocompleteIndex = -1;
+    },
+    
+    handleAutocompleteKey(event) {
+        const dropdown = document.getElementById('ddxAutocomplete');
+        const items = dropdown?.querySelectorAll('.ddx-autocomplete-item') || [];
+        
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            this.autocompleteIndex = Math.min(this.autocompleteIndex + 1, items.length - 1);
+            items.forEach((item, i) => item.classList.toggle('selected', i === this.autocompleteIndex));
+        } else if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            this.autocompleteIndex = Math.max(this.autocompleteIndex - 1, 0);
+            items.forEach((item, i) => item.classList.toggle('selected', i === this.autocompleteIndex));
+        } else if (event.key === 'Enter') {
+            event.preventDefault();
+            if (this.autocompleteIndex >= 0 && items[this.autocompleteIndex]) {
+                const name = items[this.autocompleteIndex].textContent.split(/\s{2,}/)[0].trim();
+                this.selectAutocomplete(name);
+            } else {
+                this.addDdx();
+            }
+        } else if (event.key === 'Escape') {
+            dropdown?.classList.remove('show');
+        }
+    },
+    
+    selectAutocomplete(name) {
+        const input = document.getElementById('ddxInput');
+        input.value = name;
+        document.getElementById('ddxAutocomplete')?.classList.remove('show');
+        this.addDdx();
+    },
+    
+    showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+};
+
+function toggleSidebar() {
+    document.getElementById('sidebar')?.classList.toggle('open');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => App.init());
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="ReasonDx"
+         data-key-points="⏸️ Case Paused, Select a Case, 🚑 Patient Arrival, 🧠 Build Your Differential, ⚡ Urgent Action Decision, 📝 History Taking, 🔄 Refine Your Differential, 🩺 Physical Examination, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

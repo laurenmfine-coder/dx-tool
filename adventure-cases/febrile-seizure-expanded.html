@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Febrile Seizure - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fde68a; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fef3c7; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #f59e0b; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fef3c7; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(245,158,11,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #f59e0b, #b45309); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #fde68a); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fde68a; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://publications.aap.org/pediatrics/article/127/2/389/30081/Febrile-Seizures-Clinical-Practice-Guideline-for" target="_blank" rel="noopener">Febrile Seizures - AAP (AAP)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK448123/" target="_blank" rel="noopener">Febrile Seizures - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Seizing Febrile Child",content:'<div class="narrative"><p>A <span class="highlight">18-month-old girl</span> had a <span class="critical">generalized tonic-clonic seizure</span> at home lasting 2 minutes. She has a fever of 39.5°C with URI symptoms. She is now alert and back to baseline. No seizure history. Vaccinations UTD.</p></div>',question:{prompt:"What is the age range for febrile seizures?",options:[{text:"1 month to 3 years",correct:false},{text:"6 months to 5 years",correct:true},{text:"Any age with fever",correct:false},{text:"3-10 years",correct:false}],explanation:{correct:"Correct! Febrile seizures occur in children 6 months to 5 years (some say 6 months to 6 years). Peak incidence is 12-18 months. Outside this range, consider other causes.",incorrect:"Febrile seizures: 6 months to 5 years. Peak at 12-18 months. Outside this range = different diagnosis."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Febrile Seizure Basics</div><div class="pathway">DEFINITION:\nSeizure + fever in child 6mo-5yr\nwithout CNS infection or other cause\n\nPEAK AGE: 12-18 months\n\nPREVALENCE: 2-5% of children\n\nRISK FACTORS:\n• Family history of febrile seizures\n• Daycare attendance\n• Developmental delay\n• Viral infections (HHV-6, influenza)</div></div>',why_chain:[],points:10}},
+        {title:"Simple vs Complex",content:'<div class="narrative"><p>This seizure was generalized, lasted 2 minutes, and occurred once. The child is back to baseline.</p></div>',question:{prompt:"What makes a febrile seizure SIMPLE (vs complex)?",options:[{text:"Any seizure with high fever",correct:false},{text:"Generalized, <15 min, single episode in 24h, no postictal focal deficits",correct:true},{text:"Focal onset seizure",correct:false},{text:"Multiple seizures in 24 hours",correct:false}],explanation:{correct:"Correct! Simple febrile seizure: generalized, <15 minutes, only one in 24 hours, no postictal focal deficits, returns to baseline. Complex = any feature that doesn\'t meet these criteria.",incorrect:"Simple = generalized + <15 min + single in 24h + no focal deficits. Complex = anything else."},teaching:'<h4>Simple vs Complex Febrile Seizures</h4><table class="comparison-table"><tr><th>Feature</th><th>Simple</th><th>Complex</th></tr><tr><td>Type</td><td>Generalized</td><td>Focal or generalized</td></tr><tr><td>Duration</td><td><15 minutes</td><td>≥15 minutes</td></tr><tr><td>Frequency</td><td>Single in 24h</td><td>Multiple in 24h</td></tr><tr><td>Postictal</td><td>No focal deficits</td><td>Focal deficits (Todd\'s)</td></tr><tr><td>Recurrence risk</td><td>~30%</td><td>Higher</td></tr><tr><td>Epilepsy risk</td><td>~1-2%</td><td>Higher (~4-6%)</td></tr></table>',why_chain:[],points:10}},
+        {title:"Workup: Do We Need Labs?",content:'<div class="narrative"><p>Parents want to know what tests are needed. The child is alert, well-appearing, with a clear URI as the fever source.</p></div>',question:{prompt:"For a SIMPLE febrile seizure in a well-appearing child with clear fever source, what workup is needed?",options:[{text:"CBC, CMP, blood cultures, LP",correct:false},{text:"EEG and MRI brain",correct:false},{text:"No routine workup required if well-appearing with identified fever source",correct:true},{text:"CT head required",correct:false}],explanation:{correct:"Correct! Simple febrile seizure in a well-appearing child with identified fever source needs NO routine workup. No labs, LP, EEG, or imaging required. Evaluate/treat the fever source.",incorrect:"Simple febrile seizure + well-appearing + clear source = no routine workup. Focus on treating the fever source."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Workup Guidelines</div><div class="pathway">SIMPLE FEBRILE SEIZURE:\n• Well-appearing + clear fever source\n• NO routine labs, LP, EEG, or imaging!\n• Treat the fever source\n\nCONSIDER LP IF:\n• <12 months (especially if unvaccinated)\n• Meningeal signs\n• Already on antibiotics\n• Complex seizure features\n• Not returning to baseline\n\nEEG/IMAGING:\n• Not indicated for simple FS\n• Consider for complex or recurrent</div></div>',why_chain:[],points:10}},
+        {title:"Lumbar Puncture Decision",content:'<div class="narrative"><p>When should you consider LP in a child with febrile seizure?</p></div>',question:{prompt:"In which scenario is LP MOST indicated after febrile seizure?",options:[{text:"All first febrile seizures",correct:false},{text:"Child <12 months with incomplete Hib/pneumococcal vaccination",correct:true},{text:"Temperature >40°C",correct:false},{text:"Family history of febrile seizures",correct:false}],explanation:{correct:"Correct! Consider LP in: age <12 months (especially unvaccinated), meningeal signs, pretreated with antibiotics, not returning to baseline. Meningitis can present as seizure + fever.",incorrect:"LP if: <12 months + incomplete vaccination, meningeal signs, on antibiotics, not back to baseline."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 LP Considerations</div><div class="pathway">STRONGLY CONSIDER LP:\n• Age <12 months\n  (especially incomplete Hib/PCV)\n• Meningeal signs present\n• Pretreated with antibiotics\n  (may mask meningitis signs)\n• Not returning to baseline\n• Prolonged postictal period\n\nLP NOT ROUTINELY NEEDED:\n• Simple FS, age >12 mo\n• Fully vaccinated\n• Well-appearing, back to baseline\n• Clear fever source identified</div></div>',why_chain:[],points:10}},
+        {title:"Prognosis and Recurrence",content:'<div class="narrative"><p>Parents are worried: "Will this happen again? Will she have epilepsy?"</p></div>',question:{prompt:"What is the approximate recurrence risk after a first simple febrile seizure?",options:[{text:"5%",correct:false},{text:"30%",correct:true},{text:"70%",correct:false},{text:"90%",correct:false}],explanation:{correct:"Correct! ~30% will have another febrile seizure. Risk factors for recurrence: young age at first seizure, family history, lower temperature at seizure, shorter duration of fever before seizure.",incorrect:"~30% recurrence risk. Higher if: young age, family history, lower temp at seizure, short fever duration before seizure."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Prognosis</div><div class="pathway">RECURRENCE RISK: ~30%\n\nRECURRENCE RISK FACTORS:\n• Age <18 months at first seizure\n• Family history of febrile seizures\n• Lower temperature at seizure\n• Shorter fever duration before seizure\n\nEPILEPSY RISK:\n• Simple FS: ~1-2% (vs 1% general)\n• Complex FS: ~4-6%\n• Multiple complex features: higher\n\nDEVELOPMENT:\n• NO increased risk of intellectual disability\n• Reassure parents!</div></div>',why_chain:[],points:10}},
+        {title:"Management and Counseling",content:'<div class="narrative"><p>What do you tell the parents about management?</p></div>',question:{prompt:"What is the role of prophylactic anticonvulsants in simple febrile seizures?",options:[{text:"All children should receive them",correct:false},{text:"Not recommended routinely due to side effects outweighing benefits",correct:true},{text:"Only phenobarbital is effective",correct:false},{text:"Required after second seizure",correct:false}],explanation:{correct:"Correct! Prophylactic anticonvulsants are NOT recommended for simple febrile seizures. Risks (sedation, behavioral effects) outweigh benefits. Antipyretics don\'t prevent febrile seizures either.",incorrect:"Prophylactic anticonvulsants NOT recommended. Side effects > benefits. Antipyretics don\'t prevent FS either."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Management</div><div class="pathway">ACUTE:\n• Most stop spontaneously (<5 min)\n• Benzodiazepine if prolonged (>5 min)\n• Treat fever source\n\nPROPHYLAXIS:\n• NOT recommended for simple FS\n• Anticonvulsants have side effects\n• Antipyretics DON\'T prevent FS\n\nCOUNSELING:\n• Reassure (benign condition)\n• ~30% recurrence - that\'s okay\n• Low epilepsy risk\n• Seizure first aid education\n• When to call 911 (>5 min, breathing issues)</div></div>',why_chain:[],points:10}},
+        {title:"Case Resolution",content:'<div class="narrative"><p>You diagnose simple febrile seizure secondary to viral URI. No labs or imaging needed. Parents are counseled about recurrence risk, reassured about excellent prognosis, and given seizure first aid education. Follow-up with pediatrician arranged.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 Febrile Seizure Summary</div><div class="pathway">DEFINITION: Seizure + fever, age 6mo-5yr\n\nSIMPLE: Generalized, <15min, single, no focal\nCOMPLEX: Focal, ≥15min, multiple, or focal deficits\n\nWORKUP:\n• Simple + well + clear source = none\n• Consider LP if <12mo, unvaccinated, meningeal signs\n\nPROGNOSIS:\n• Recurrence ~30%\n• Epilepsy risk 1-2% (simple)\n• Normal development expected\n\nNO PROPHYLACTIC ANTICONVULSANTS\nAntipyretics don\'t prevent FS</div></div>',question:{prompt:"A well-appearing 2-year-old has a 3-minute generalized seizure with fever from otitis media. Next step?",options:[{text:"CT head and LP",correct:false},{text:"Start phenobarbital prophylaxis",correct:false},{text:"Treat otitis media, educate parents, no further workup needed",correct:true},{text:"EEG before discharge",correct:false}],explanation:{correct:"Correct! Simple febrile seizure with clear source (otitis) = treat the source, educate parents, no further workup. This is a benign condition with excellent prognosis.",incorrect:"Simple FS + clear source = treat source, educate, no further workup."},teaching:'<h4>Key Takeaways</h4><ul style="line-height:2;margin-left:20px;"><li>Febrile seizures: 6 months to 5 years</li><li>Simple = generalized, <15min, single, no focal</li><li>Simple FS + well-appearing = no routine workup</li><li>LP if <12mo unvaccinated, meningeal signs</li><li>~30% recurrence, ~1-2% epilepsy risk</li><li>No prophylactic anticonvulsants</li><li>Reassure parents!</li></ul>',why_chain:[],points:10}},
+        {title:"Clinical Integration",content:'<div class="narrative"><p>You synthesize all the clinical information to ensure optimal patient care.</p></div>',question:{prompt:"What principle is MOST important for excellent clinical outcomes?",options:[{text:"Integrating clinical presentation with evidence-based guidelines while reassessing response to treatment",correct:true},{text:"Following protocols exactly without clinical judgment",correct:false},{text:"Ordering comprehensive testing to avoid any missed diagnoses",correct:false},{text:"Making a diagnosis quickly and committing to it without reconsideration",correct:false}],explanation:{correct:"Excellent clinical care combines systematic assessment, evidence-based treatment, and ongoing reassessment. Guidelines inform but don't replace clinical reasoning.",incorrect:"Good clinical care requires flexibility, reassessment, and integration of guidelines with patient-specific factors."},teaching:'<h4>Clinical Reasoning</h4><ul><li>Systematic data gathering</li><li>Evidence-based management</li><li>Regular reassessment</li><li>Patient-centered communication</li></ul>',why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><p>You mastered Febrile Seizures!</p></div>';}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Febrile Seizure"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

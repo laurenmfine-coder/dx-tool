@@ -15,8 +15,19 @@
     const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
 
-    // Initialize Supabase client
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Initialize Supabase client (with graceful fallback if CDN fails)
+    let supabaseClient = null;
+    let supabaseAvailable = false;
+    try {
+        if (window.supabase && window.supabase.createClient) {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            supabaseAvailable = true;
+        } else {
+            console.warn('DxAuth: Supabase SDK not loaded — auth features limited');
+        }
+    } catch(e) {
+        console.warn('DxAuth: Supabase init failed —', e.message);
+    }
 
     // ============================================
     // AUTH STATE MANAGEMENT
@@ -25,6 +36,23 @@
     let userProfile = null;
 
     async function initAuth() {
+        if (!supabaseAvailable) {
+            // No Supabase — check if user has stored credentials from a previous session
+            const stored = localStorage.getItem('reasondx-user');
+            if (stored) {
+                try {
+                    const userData = JSON.parse(stored);
+                    if (userData && userData.email) {
+                        currentUser = { email: userData.email, id: userData.supabaseId || 'local' };
+                        onAuthStateChange('SIGNED_IN', null);
+                        return;
+                    }
+                } catch(e) {}
+            }
+            onAuthStateChange('SIGNED_OUT', null);
+            return;
+        }
+
         try {
             const { data: { session } } = await supabaseClient.auth.getSession();
             
@@ -52,6 +80,7 @@
 
     async function loadUserProfile() {
         if (!currentUser) return null;
+        if (!supabaseAvailable) return null;
         
         try {
             const { data, error } = await supabaseClient
@@ -100,6 +129,9 @@
     // AUTHENTICATION FUNCTIONS
     // ============================================
     async function signUp(email, password, fullName = '') {
+        if (!supabaseAvailable) {
+            return { success: false, error: 'Authentication service unavailable. Please refresh and try again.' };
+        }
         try {
             const { data, error } = await supabaseClient.auth.signUp({
                 email,
@@ -124,6 +156,9 @@
     }
 
     async function signIn(email, password) {
+        if (!supabaseAvailable) {
+            return { success: false, error: 'Authentication service unavailable. Please refresh and try again.' };
+        }
         try {
             const { data, error } = await supabaseClient.auth.signInWithPassword({
                 email,

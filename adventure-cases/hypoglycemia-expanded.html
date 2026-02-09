@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hypoglycemia - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #7c2d12 0%, #f59e0b 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fcd34d; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fffbeb; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #f59e0b; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #fcd34d); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #f59e0b; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK534841/" target="_blank" rel="noopener">Hypoglycemia - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Confused Diabetic",content:`<div class="narrative"><p>62-year-old man with type 2 diabetes on insulin found confused at home by family. He took his usual insulin but missed lunch.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 102, BP 158/92, RR 18, T 98.6F<br><strong>Exam:</strong> Diaphoretic, tremulous, confused, GCS 13<br><strong>Fingerstick glucose:</strong> 38 mg/dL<br><strong>Meds:</strong> Glargine 40 units nightly, lispro with meals, metformin</p></div><div class="socratic-prompt"><h4>Recognize and Treat</h4><p>What defines hypoglycemia, and what is the FIRST treatment priority?</p></div>`,
+hint_beginner:"Whipple's triad: low glucose + symptoms + resolution with treatment",hint_advanced:"What glucose level defines hypoglycemia in diabetics vs non-diabetics?",
+question:{prompt:"Glucose 38, confused, diaphoretic. What is the FIRST treatment?",
+options:[{text:"IV dextrose (D50 25-50mL or D10 infusion) if IV access; oral glucose/juice if alert enough to swallow safely; glucagon IM if no IV access",correct:true},
+{text:"Wait for confirmatory lab glucose",correct:false},
+{text:"Give insulin to prevent rebound",correct:false},
+{text:"Order CT head first",correct:false}],
+explanation:{correct:"Treat hypoglycemia IMMEDIATELY - don't wait for lab confirmation. IV dextrose is fastest (D50 25-50mL). If no IV and patient can swallow, give oral glucose (15-20g). If no IV and can't swallow, give glucagon 1mg IM. Recheck in 15 minutes.",incorrect:"Hypoglycemia is a medical emergency. Treat first based on fingerstick - don't wait for lab confirmation. Delayed treatment can cause permanent brain injury."},
+teaching:`<h4>Hypoglycemia Treatment</h4><p><strong>IV access:</strong> D50 25-50mL (12.5-25g dextrose) or D10 infusion</p><p><strong>Oral (if alert):</strong> 15-20g fast-acting carbs (juice, glucose tabs)</p><p><strong>No IV, can't swallow:</strong> Glucagon 1mg IM/SQ</p><p><strong>Recheck:</strong> Glucose in 15 minutes, repeat treatment if needed</p>`,
+why_chain:[{q:"Why D50 vs D10?",a:"D50 (50% dextrose) provides rapid correction but can cause rebound hyperglycemia and phlebitis. D10 (10% dextrose) infusion is gentler and preferred for ongoing management. D50 for emergent correction, then switch to D10."}],points:15}},
+
+{title:"Whipple's Triad",content:`<div class="narrative"><p>Patient receives D50, glucose rises to 142, and mental status normalizes. This confirms the diagnosis.</p></div><div class="socratic-prompt"><h4>Diagnostic Criteria</h4><p>What is Whipple's triad for hypoglycemia diagnosis?</p></div>`,
+hint_beginner:"Three criteria must be present to diagnose hypoglycemia",hint_advanced:"What glucose threshold is used?",
+question:{prompt:"What confirms hypoglycemia as the cause of symptoms?",
+options:[{text:"Whipple's triad: (1) Low plasma glucose, (2) Symptoms consistent with hypoglycemia, (3) Resolution of symptoms when glucose is raised",correct:true},
+{text:"Low glucose alone is sufficient",correct:false},
+{text:"Symptoms alone confirm diagnosis",correct:false},
+{text:"Only needed in non-diabetics",correct:false}],
+explanation:{correct:"Whipple's triad requires ALL THREE: documented low glucose (<70 mg/dL in diabetics, <55 in non-diabetics for workup), symptoms compatible with hypoglycemia, and resolution of symptoms with glucose correction. All three needed to attribute symptoms to hypoglycemia.",incorrect:"Low glucose alone doesn't confirm hypoglycemia caused symptoms - some people tolerate low glucose asymptomatically. Need all three components of Whipple's triad."},
+teaching:`<h4>Whipple's Triad</h4><p><strong>1. Low glucose:</strong> <70 mg/dL (diabetics), <55 (non-diabetics for workup)</p><p><strong>2. Compatible symptoms:</strong> Adrenergic or neuroglycopenic</p><p><strong>3. Symptom resolution:</strong> When glucose corrected</p><p><strong>All three required</strong> to diagnose hypoglycemia</p>`,
+why_chain:[{q:"Why different thresholds for diabetics vs non-diabetics?",a:"Diabetics have impaired counter-regulatory responses and may not sense hypoglycemia until much lower levels. For workup of unexplained hypoglycemia in non-diabetics, <55 mg/dL is used to avoid false positives from normal postprandial dips."}],points:10}},
+
+{title:"Recognize the Symptoms",content:`<div class="narrative"><p>Review the symptom categories of hypoglycemia.</p></div><div class="socratic-prompt"><h4>Symptom Patterns</h4><p>What are the two categories of hypoglycemia symptoms?</p></div>`,
+hint_beginner:"Adrenergic (autonomic) vs neuroglycopenic (brain)",hint_advanced:"Which symptoms appear first?",
+question:{prompt:"What are adrenergic vs neuroglycopenic symptoms?",
+options:[{text:"Adrenergic (early): tremor, palpitations, sweating, anxiety, hunger. Neuroglycopenic (later/severe): confusion, seizure, coma, focal deficits. Adrenergic symptoms warn of impending neuroglycopenia",correct:true},
+{text:"All symptoms are the same severity",correct:false},
+{text:"Neuroglycopenic symptoms occur first",correct:false},
+{text:"Only diabetics have adrenergic symptoms",correct:false}],
+explanation:{correct:"Adrenergic symptoms (epinephrine release) are early warning: tremor, sweating, palpitations, anxiety, hunger. Neuroglycopenic symptoms (brain glucose deprivation) are more severe: confusion, behavioral changes, seizures, coma, focal deficits that can mimic stroke.",incorrect:"Adrenergic symptoms typically occur first as a warning. Neuroglycopenic symptoms indicate brain glucose deprivation and are more dangerous. Some patients lose adrenergic awareness (hypoglycemia unawareness)."},
+teaching:`<h4>Hypoglycemia Symptoms</h4><p><strong>Adrenergic (early, ~60-70 mg/dL):</strong> Tremor, palpitations, sweating, anxiety, hunger</p><p><strong>Neuroglycopenic (later, <50-55):</strong> Confusion, behavioral changes, seizure, coma, focal deficits</p><p><strong>Hypoglycemia unawareness:</strong> Loss of adrenergic warning symptoms</p>`,
+why_chain:[{q:"What is hypoglycemia unawareness?",a:"Loss of adrenergic warning symptoms due to repeated hypoglycemia (counter-regulatory failure). Patient goes directly to neuroglycopenic symptoms without warning. Very dangerous - can cause sudden confusion, seizure, or loss of consciousness."}],points:10}},
+
+{title:"Identify the Cause - Diabetic",content:`<div class="narrative"><p>This patient's hypoglycemia was clearly caused by insulin + missed meal. Review causes in diabetics.</p></div><div class="socratic-prompt"><h4>Diabetic Hypoglycemia</h4><p>What are the common causes of hypoglycemia in diabetics?</p></div>`,
+hint_beginner:"Insulin/sulfonylurea excess relative to food intake or activity",hint_advanced:"Which oral agents cause hypoglycemia?",
+question:{prompt:"What causes hypoglycemia in diabetics?",
+options:[{text:"Insulin or sulfonylurea excess (most common), missed/delayed meals, increased exercise, decreased renal clearance (insulin accumulation), alcohol",correct:true},
+{text:"Metformin is the most common cause",correct:false},
+{text:"Only insulin causes hypoglycemia",correct:false},
+{text:"Diet alone in diabetics",correct:false}],
+explanation:{correct:"Insulin and sulfonylureas (glyburide, glipizide, glimepiride) cause hypoglycemia by increasing insulin independent of glucose. Metformin, GLP-1 agonists, SGLT2 inhibitors rarely cause hypoglycemia alone. Common precipitants: missed meals, excess insulin, exercise, alcohol, renal impairment.",incorrect:"Sulfonylureas and insulin are the main culprits. Metformin does NOT cause hypoglycemia as monotherapy - it works by decreasing hepatic glucose production and improving insulin sensitivity, not by increasing insulin."},
+teaching:`<h4>Causes in Diabetics</h4><p><strong>High risk:</strong> Insulin, sulfonylureas (stimulate insulin release)</p><p><strong>Low risk:</strong> Metformin, GLP-1 agonists, SGLT2i, DPP-4i</p><p><strong>Precipitants:</strong> Missed meals, excess medication, exercise, alcohol, renal failure</p>`,
+why_chain:[{q:"Why does alcohol cause hypoglycemia?",a:"Alcohol inhibits hepatic gluconeogenesis. The liver is busy metabolizing alcohol and can't produce glucose. Combined with fasting or insulin/sulfonylureas, this causes hypoglycemia. Can occur many hours after drinking."}],points:10}},
+
+{title:"Non-Diabetic Hypoglycemia",content:`<div class="narrative"><p>Different scenario: 45-year-old non-diabetic woman found unconscious, glucose 32. No diabetes medications in the home.</p></div><div class="socratic-prompt"><h4>Unexplained Hypoglycemia</h4><p>What causes hypoglycemia in non-diabetics, and what workup is needed?</p></div>`,
+hint_beginner:"Think: medications, critical illness, hormones, tumors",hint_advanced:"What labs are drawn DURING hypoglycemia?",
+question:{prompt:"Hypoglycemia in a non-diabetic. What is the differential?",
+options:[{text:"Medications (surreptitious insulin, sulfonylureas, alcohol), critical illness (sepsis, liver failure, renal failure), hormone deficiency (adrenal, growth hormone), insulinoma, non-islet cell tumors",correct:true},
+{text:"Only insulinoma causes this",correct:false},
+{text:"Non-diabetics can't have hypoglycemia",correct:false},
+{text:"Always factitious",correct:false}],
+explanation:{correct:"Non-diabetic hypoglycemia differential: medications (including surreptitious), critical illness (sepsis, hepatic failure), hormone deficiency (cortisol, GH), insulinoma, non-islet cell tumors (produce IGF-II), autoimmune insulin syndrome. Must obtain critical labs DURING hypoglycemia.",incorrect:"Multiple causes exist. Insulinoma is rare (~4 per million). Must rule out medications, critical illness, and hormone deficiency first. Labs during hypoglycemia are essential."},
+teaching:`<h4>Non-Diabetic Hypoglycemia Causes</h4><p><strong>Drugs:</strong> Insulin, sulfonylureas (surreptitious), alcohol, others</p><p><strong>Critical illness:</strong> Sepsis, liver failure, renal failure</p><p><strong>Hormones:</strong> Adrenal insufficiency, GH deficiency</p><p><strong>Tumors:</strong> Insulinoma, non-islet cell (IGF-II producing)</p><p><strong>Autoimmune:</strong> Insulin autoimmune syndrome</p>`,
+why_chain:[{q:"What labs during hypoglycemia?",a:"Critical sample when glucose <55: insulin, C-peptide, proinsulin, beta-hydroxybutyrate, sulfonylurea/meglitinide screen. Pattern distinguishes endogenous hyperinsulinism (insulinoma) from exogenous insulin from other causes."}],points:15}},
+
+{title:"Critical Sample Interpretation",content:`<div class="narrative"><p>Labs drawn when glucose was 32: Insulin 45 µU/mL (high), C-peptide 4.2 ng/mL (high), beta-hydroxybutyrate 0.8 (low/suppressed), sulfonylurea screen negative.</p></div><div class="socratic-prompt"><h4>Pattern Recognition</h4><p>What does high insulin with high C-peptide indicate?</p></div>`,
+hint_beginner:"C-peptide is secreted with endogenous insulin, not with injected insulin",hint_advanced:"How do you distinguish insulinoma from factitious hypoglycemia?",
+question:{prompt:"High insulin, high C-peptide, suppressed ketones, negative sulfonylurea screen. Diagnosis?",
+options:[{text:"Endogenous hyperinsulinism (insulinoma most likely) - high C-peptide indicates pancreatic insulin secretion; exogenous insulin would have LOW C-peptide",correct:true},
+{text:"Exogenous insulin administration",correct:false},
+{text:"Adrenal insufficiency",correct:false},
+{text:"Alcohol-induced hypoglycemia",correct:false}],
+explanation:{correct:"Pattern: High insulin + high C-peptide = endogenous hyperinsulinism (insulinoma or nesidioblastosis). Exogenous insulin would have high insulin but LOW C-peptide (injected insulin has no C-peptide). Sulfonylurea screen negative rules out drug-induced. Suppressed ketones confirms insulin action.",incorrect:"C-peptide is cleaved from proinsulin during endogenous insulin secretion. Injected insulin (exogenous) doesn't contain C-peptide. High C-peptide = pancreas is making the insulin."},
+teaching:`<h4>Critical Sample Patterns</h4><p><strong>Insulinoma:</strong> High insulin, high C-peptide, low ketones, neg screen</p><p><strong>Exogenous insulin:</strong> High insulin, LOW C-peptide, low ketones</p><p><strong>Sulfonylurea:</strong> High insulin, high C-peptide, positive screen</p><p><strong>Other causes:</strong> Low insulin, low C-peptide, elevated ketones</p>`,
+why_chain:[{q:"Why check beta-hydroxybutyrate?",a:"Insulin suppresses ketogenesis. Low ketones during hypoglycemia confirms inappropriate insulin action. If ketones are elevated, insulin is appropriately suppressed - look for other causes (cortisol deficiency, liver failure, etc.)."}],points:15}},
+
+{title:"Insulinoma Localization",content:`<div class="narrative"><p>Suspected insulinoma. How do you localize it?</p></div><div class="socratic-prompt"><h4>Find the Tumor</h4><p>What imaging is used to localize an insulinoma?</p></div>`,
+hint_beginner:"CT/MRI first, then endoscopic ultrasound if not seen",hint_advanced:"What is the sensitivity of each modality?",
+question:{prompt:"How do you localize an insulinoma?",
+options:[{text:"CT or MRI abdomen first (60-80% sensitivity); if negative, endoscopic ultrasound (EUS) has highest sensitivity (>90%); may need intraoperative ultrasound",correct:true},
+{text:"PET scan is first-line",correct:false},
+{text:"Imaging not needed - just operate",correct:false},
+{text:"Only angiography can find insulinomas",correct:false}],
+explanation:{correct:"CT or MRI first - detects 60-80% of insulinomas. If negative, EUS has >90% sensitivity (insulinomas are often small, <2cm). Some require intraoperative ultrasound. 68Ga-DOTATATE PET increasingly used. Surgery is curative in >95% of benign insulinomas.",incorrect:"Start with CT/MRI. EUS is most sensitive for small pancreatic tumors. Don't operate without localization - need to guide surgical approach."},
+teaching:`<h4>Insulinoma Localization</h4><p><strong>First-line:</strong> CT or MRI (60-80% sensitivity)</p><p><strong>If negative:</strong> Endoscopic ultrasound (>90% sensitivity)</p><p><strong>Advanced:</strong> 68Ga-DOTATATE PET, selective arterial calcium stimulation</p><p><strong>Intraoperative:</strong> Ultrasound + palpation</p>`,
+why_chain:[{q:"Why are insulinomas hard to find?",a:"Often very small (<2cm), solitary, and benign (90%). Small size limits CT/MRI sensitivity. EUS provides close-range, high-resolution imaging of the pancreas. 10% are malignant, 10% are multiple (MEN1 syndrome)."}],points:10}},
+
+{title:"Prevention in Diabetics",content:`<div class="narrative"><p>Back to our original diabetic patient. How do you prevent recurrent hypoglycemia?</p></div><div class="socratic-prompt"><h4>Prevention Strategies</h4><p>How do you prevent hypoglycemia in diabetics on insulin?</p></div>`,
+hint_beginner:"Education, monitoring, medication adjustment, meal consistency",hint_advanced:"What is the role of CGM?",
+question:{prompt:"What strategies prevent hypoglycemia in diabetics?",
+options:[{text:"Patient education, consistent meals, adjust insulin to activity/intake, blood glucose monitoring (CGM ideal), recognize early symptoms, carry fast-acting glucose, glucagon prescription for severe episodes",correct:true},
+{text:"Just reduce all insulin doses",correct:false},
+{text:"Eat more to prevent lows",correct:false},
+{text:"Stop insulin entirely",correct:false}],
+explanation:{correct:"Prevention is multifactorial: education about symptoms and treatment, consistent carbohydrate intake, insulin adjustment for meals/activity, frequent monitoring (CGM provides real-time data and alarms), always carry glucose, glucagon prescription for caregivers to use in severe episodes.",incorrect:"Don't just cut insulin - leads to hyperglycemia. Individualize based on patterns. CGM with alerts has revolutionized prevention by detecting trends before severe hypoglycemia occurs."},
+teaching:`<h4>Hypoglycemia Prevention</h4><p><strong>Education:</strong> Recognize symptoms, know treatment</p><p><strong>Monitoring:</strong> Frequent SMBG, CGM with alarms</p><p><strong>Medication:</strong> Adjust insulin to meals/activity</p><p><strong>Preparedness:</strong> Carry glucose, glucagon prescription</p><p><strong>Goals:</strong> Individualize A1c targets in high-risk patients</p>`,
+why_chain:[{q:"How does CGM help?",a:"Continuous glucose monitoring shows trends (rising, falling), provides low glucose alarms before severe hypoglycemia, and reveals overnight and asymptomatic lows. Some systems suspend insulin delivery when lows predicted."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Original patient educated on hypoglycemia prevention, given glucagon prescription, CGM initiated. Non-diabetic patient with insulinoma underwent successful surgical resection.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the essential principles of hypoglycemia management?</p></div>`,
+hint_beginner:"Treat first, then investigate cause",hint_advanced:"What's the mortality of severe hypoglycemia?",
+question:{prompt:"What are the key hypoglycemia management principles?",
+options:[{text:"Treat immediately (don't wait for lab), confirm with Whipple's triad, identify cause (diabetic: medications/meals vs non-diabetic: full workup with critical sample), prevent recurrence, educate patient",correct:true},
+{text:"Lab confirmation always required before treatment",correct:false},
+{text:"All hypoglycemia is from diabetes medications",correct:false},
+{text:"Mild hypoglycemia doesn't need treatment",correct:false}],
+explanation:{correct:"Key principles: 1) Treat immediately based on fingerstick, 2) Confirm diagnosis with Whipple's triad, 3) Identify cause (different approach for diabetics vs non-diabetics), 4) Obtain critical sample during hypoglycemia in non-diabetics, 5) Prevent recurrence, 6) Educate patient and caregivers.",incorrect:"Immediate treatment is critical - brain injury can occur in minutes. Investigate cause after stabilization. Diabetic hypoglycemia is usually medication-related; non-diabetic hypoglycemia requires full workup."},
+teaching:`<h4>Hypoglycemia Summary</h4><p>1. Treat immediately (D50, oral glucose, or glucagon)</p><p>2. Confirm Whipple's triad</p><p>3. Identify cause</p><p>4. Diabetic: medication/meal adjustment</p><p>5. Non-diabetic: critical sample, full workup</p><p>6. Prevent recurrence, educate patient</p>`,
+why_chain:[{q:"What's the significance of severe hypoglycemia?",a:"Severe hypoglycemia (requiring assistance) increases mortality 2-4x in diabetics. Associated with cognitive decline, dementia, falls, fractures, arrhythmias, and cardiovascular events. Prevention is a major therapeutic goal."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent hypoglycemia management!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp. Review critical sample interpretation.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on diabetic vs non-diabetic causes.';}
+else{g='Keep Learning';clr='#ef4444';m='Review Whipple\'s triad and treatment priorities.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Hypoglycemia"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx SBAR: Pediatric Urology</title>
+    <style>
+        :root { --primary: #8b5cf6; --secondary: #ec4899; --accent: #f59e0b; --success: #10b981; --danger: #ef4444; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%); min-height: 100vh; color: #f8fafc; }
+        .container { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+        header { text-align: center; padding: 2rem 1rem; }
+        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #ddd6fe; font-size: 1.1rem; }
+        .case-selector { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; }
+        .case-btn { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); color: white; padding: 0.6rem 1.2rem; border-radius: 25px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+        .case-btn:hover, .case-btn.active { background: white; color: #4c1d95; border-color: white; }
+        .sbar-container { background: rgba(255,255,255,0.1); border-radius: 1rem; overflow: hidden; }
+        .sbar-section { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sbar-section:last-child { border-bottom: none; }
+        .sbar-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .sbar-letter { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; }
+        .sbar-letter.s { background: #ef4444; }
+        .sbar-letter.b { background: #f59e0b; }
+        .sbar-letter.a { background: #10b981; }
+        .sbar-letter.r { background: #ec4899; }
+        .sbar-title { font-size: 1.25rem; font-weight: 600; }
+        .sbar-content { padding-left: 66px; line-height: 1.7; }
+        .sbar-content ul { padding-left: 1.25rem; }
+        .sbar-content li { margin: 0.5rem 0; }
+        .highlight { color: #fcd34d; font-weight: 600; }
+        .critical { color: #fca5a5; font-weight: 600; }
+        .key-point { background: rgba(16,185,129,0.2); border-left: 3px solid #10b981; padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+        .teaching-note { background: rgba(236,72,153,0.2); border-radius: 0.5rem; padding: 1rem; margin-top: 1rem; font-size: 0.95rem; }
+        @media (max-width: 600px) {
+            .sbar-content { padding-left: 0; margin-top: 1rem; }
+            .sbar-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👶 CoachDx SBAR</h1>
+            <p class="subtitle">Pediatric Urology Scenarios</p>
+        </header>
+        
+        <div class="case-selector">
+            <button class="case-btn active" onclick="showCase(0)">Prenatal Hydronephrosis</button>
+            <button class="case-btn" onclick="showCase(1)">Hypospadias Consult</button>
+            <button class="case-btn" onclick="showCase(2)">Febrile UTI/VUR</button>
+            <button class="case-btn" onclick="showCase(3)">Newborn PUV</button>
+            <button class="case-btn" onclick="showCase(4)">Undescended Testis</button>
+            <button class="case-btn" onclick="showCase(5)">Abdominal Mass</button>
+        </div>
+
+        <div class="sbar-container" id="sbar-display"></div>
+    </div>
+
+    <script>
+    const cases = [
+        {
+            title: "Prenatal Bilateral Hydronephrosis",
+            situation: {
+                text: "I'm calling from MFM about a <span class='highlight'>20-week fetus</span> with <span class='critical'>bilateral hydronephrosis and a distended bladder</span> seen on anatomy scan.",
+                details: ["Male fetus", "Bilateral moderate hydronephrosis", "Markedly distended, thick-walled bladder", "'Keyhole sign' appearance", "Decreased amniotic fluid"]
+            },
+            background: {
+                text: "This is a 32-year-old G2P1 with uncomplicated pregnancy until this finding.",
+                details: ["No family history of renal anomalies", "No teratogen exposure", "First trimester screening was low-risk", "Anatomy scan otherwise normal"]
+            },
+            assessment: {
+                text: "The <span class='critical'>'keyhole sign'</span> with bilateral hydronephrosis and oligohydramnios in a male fetus is highly concerning for <span class='critical'>posterior urethral valves</span>.",
+                details: ["Bladder appears thick-walled", "Both kidneys show pelvic dilation", "Amniotic fluid index is low", "No other structural anomalies seen"],
+                keyFinding: "The 'keyhole sign' (dilated bladder + dilated posterior urethra) is pathognomonic for PUV."
+            },
+            recommendation: {
+                text: "This likely represents <span class='critical'>posterior urethral valves</span>, the #1 cause of pediatric ESRD from congenital causes.",
+                requests: ["Would you be willing to counsel the family with us about prognosis and options?", "Serial ultrasounds for amniotic fluid and renal echogenicity needed", "Should we discuss fetal intervention if oligohydramnios worsens?"],
+                teaching: "Prognosis depends on amniotic fluid volume and renal appearance. Severe oligohydramnios carries risk of pulmonary hypoplasia. Delivery planning should include pediatric urology involvement."
+            }
+        },
+        {
+            title: "Newborn with Hypospadias",
+            situation: {
+                text: "I'm calling from the newborn nursery about a <span class='highlight'>term male infant</span> with <span class='highlight'>hypospadias</span> noted on exam.",
+                details: ["Full-term male, born today", "Urethral meatus on ventral shaft of penis", "Hooded foreskin (dorsal only)", "Mild chordee noted", "Both testes palpable in scrotum"]
+            },
+            background: {
+                text: "Uncomplicated pregnancy and delivery.",
+                details: ["Normal prenatal care", "No family history of hypospadias", "No gestational diabetes", "Parents requesting circumcision"]
+            },
+            assessment: {
+                text: "This appears to be <span class='highlight'>mid-shaft hypospadias</span> with incomplete foreskin and mild ventral curvature.",
+                details: ["Meatus located on mid-penile shaft", "Hooded foreskin present dorsally", "Glans has ventral groove", "Mild chordee", "Both testes descended and normal"],
+                keyFinding: "The foreskin should be preserved - it may be needed for surgical repair."
+            },
+            recommendation: {
+                text: "The parents are asking about circumcision, but I need to <span class='critical'>counsel them NOT to circumcise</span>.",
+                requests: ["Can you see this baby before discharge to counsel the family?", "The foreskin may be needed for repair - please confirm no circumcision", "When should surgical repair be scheduled?"],
+                teaching: "NEVER circumcise a baby with hypospadias! The foreskin tissue may be used for urethroplasty. Repair is typically done at 6-18 months of age."
+            }
+        },
+        {
+            title: "Febrile UTI in Infant",
+            situation: {
+                text: "I'm calling about a <span class='highlight'>4-month-old female</span> admitted with <span class='critical'>febrile UTI</span>. This is her second infection.",
+                details: ["Fever to 39.5°C", "Irritability, poor feeding", "UA positive, culture growing E. coli >100,000", "This is her SECOND febrile UTI", "First UTI was at 6 weeks of age"]
+            },
+            background: {
+                text: "History of one prior febrile UTI at 6 weeks of age.",
+                details: ["First UTI treated with antibiotics", "No imaging was done at that time", "Otherwise healthy, term infant", "No family history of VUR or renal problems"]
+            },
+            assessment: {
+                text: "Recurrent febrile UTI in a young infant raises concern for underlying <span class='critical'>vesicoureteral reflux</span> or anatomic abnormality.",
+                details: ["Currently on IV antibiotics, improving", "Afebrile now for 24 hours", "Renal ultrasound shows mild left hydronephrosis", "No abscess or other complication"],
+                keyFinding: "Two febrile UTIs under 6 months of age warrants VCUG to evaluate for VUR."
+            },
+            recommendation: {
+                text: "She needs <span class='critical'>VCUG to evaluate for vesicoureteral reflux</span> after this infection clears.",
+                requests: ["Can you help arrange VCUG as outpatient after treatment?", "Should she be on antibiotic prophylaxis?", "If VUR is found, when would you like to see her in clinic?"],
+                teaching: "Recurrent febrile UTIs in infants suggest VUR until proven otherwise. VCUG should be done 4-6 weeks after UTI treatment. Antibiotic prophylaxis may be indicated while awaiting workup."
+            }
+        },
+        {
+            title: "Newborn with Suspected PUV",
+            situation: {
+                text: "I'm calling from the NICU about a <span class='highlight'>newborn male</span> with <span class='critical'>bilateral hydronephrosis and a palpable bladder</span>. He's having respiratory distress.",
+                details: ["36-week male, prenatal suspicion for PUV", "Respiratory distress requiring CPAP", "Palpable distended bladder", "Only producing small amounts of urine", "Bilateral flank masses palpable"]
+            },
+            background: {
+                text: "Prenatal diagnosis of bilateral hydronephrosis with keyhole sign and oligohydramnios.",
+                details: ["Known prenatal findings concerning for PUV", "Oligohydramnios documented", "Parents counseled prenatally", "Delivered early due to concern for pulmonary hypoplasia"]
+            },
+            assessment: {
+                text: "This newborn has clinical findings consistent with <span class='critical'>posterior urethral valves with respiratory compromise</span>.",
+                details: ["Respiratory distress - concerning for pulmonary hypoplasia", "Palpable bladder and kidneys", "Minimal urine output", "Creatinine 1.4 (still reflects maternal)"],
+                keyFinding: "Immediate bladder decompression is needed. Respiratory status is the immediate concern."
+            },
+            recommendation: {
+                text: "He needs <span class='critical'>immediate bladder drainage</span> with a catheter while we stabilize his respiratory status.",
+                requests: ["I'm going to place a 5Fr feeding tube into the bladder now", "Can you come evaluate for possible early valve ablation?", "Will need post-natal renal ultrasound and VCUG when stable"],
+                teaching: "Initial management is bladder drainage - use a small feeding tube (5-6Fr) if a Foley won't pass. VCUG confirms diagnosis. Valve ablation is definitive treatment when baby is stable enough."
+            }
+        },
+        {
+            title: "9-Month-Old with Undescended Testis",
+            situation: {
+                text: "I'm calling from pediatric clinic about a <span class='highlight'>9-month-old male</span> with <span class='critical'>right undescended testis</span>.",
+                details: ["Right testis not palpable in scrotum", "Parents noted it at birth but were told to 'wait and see'", "Left testis normal position", "Normal penile exam, meatus at tip"]
+            },
+            background: {
+                text: "Born at term, otherwise healthy.",
+                details: ["Term delivery, no complications", "UDT noted at birth", "Was told it might descend on its own", "No other medical problems", "Normal development"]
+            },
+            assessment: {
+                text: "On exam, the <span class='critical'>right testis is palpable in the inguinal canal</span> but cannot be brought to the scrotum and stay there.",
+                details: ["Right testis felt in inguinal canal", "Can milk it to upper scrotum but it springs back", "Left testis normal in scrotum", "No inguinal hernia appreciated"],
+                keyFinding: "This is a true undescended testis (not retractile) - it springs back when released. At 9 months, spontaneous descent is very unlikely."
+            },
+            recommendation: {
+                text: "He's now 9 months old and needs <span class='critical'>orchiopexy soon</span> - guidelines recommend surgery by 6-12 months.",
+                requests: ["Can you schedule him for right orchiopexy?", "Should this be done in the next 1-2 months given his age?", "Any additional workup needed beforehand?"],
+                teaching: "Orchiopexy should be done by 6-12 months (complete by 18 months). Earlier surgery optimizes fertility potential. Germ cell deterioration begins by 6-12 months of age."
+            }
+        },
+        {
+            title: "3-Year-Old with Abdominal Mass",
+            situation: {
+                text: "I'm calling about a <span class='highlight'>3-year-old girl</span> whose mother noticed an <span class='critical'>abdominal mass</span> during bath time.",
+                details: ["Mother felt a 'lump' in the abdomen", "Child has been well, no symptoms", "No pain, no hematuria, no fever", "Eating and playing normally"]
+            },
+            background: {
+                text: "Previously healthy 3-year-old.",
+                details: ["Normal development", "No significant medical history", "No family history of childhood cancers", "Up to date on vaccinations"]
+            },
+            assessment: {
+                text: "On exam, there is a <span class='critical'>firm, smooth, non-tender left flank mass</span> that does not cross the midline.",
+                details: ["Mass in left flank/abdomen", "Smooth, firm, non-tender", "Does NOT cross midline", "No hepatosplenomegaly", "Blood pressure 125/80 (elevated for age)"],
+                keyFinding: "Asymptomatic abdominal mass in a 3-year-old with hypertension is concerning for Wilms tumor."
+            },
+            recommendation: {
+                text: "This is highly concerning for <span class='critical'>Wilms tumor</span> and needs urgent imaging.",
+                requests: ["I've ordered a stat renal ultrasound", "She'll need CT chest/abdomen/pelvis for staging", "Can you see her urgently? She may need surgical planning soon"],
+                teaching: "Don't vigorously palpate - Wilms tumor is friable and can rupture with manipulation, which upstages the disease. Wilms tumor is the most common renal malignancy in children with excellent prognosis (>90% survival) with treatment."
+            }
+        }
+    ];
+
+    function showCase(index) {
+        document.querySelectorAll('.case-btn').forEach((btn, i) => {
+            btn.classList.toggle('active', i === index);
+        });
+        
+        const c = cases[index];
+        document.getElementById('sbar-display').innerHTML = `
+            <div class="sbar-section">
+                <div class="sbar-header">
+                    <div class="sbar-letter s">S</div>
+                    <div class="sbar-title">Situation</div>
+                </div>
+                <div class="sbar-content">
+                    <p>${c.situation.text}</p>
+                    <ul>${c.situation.details.map(d => `<li>${d}</li>`).join('')}</ul>
+                </div>
+            </div>
+            <div class="sbar-section">
+                <div class="sbar-header">
+                    <div class="sbar-letter b">B</div>
+                    <div class="sbar-title">Background</div>
+                </div>
+                <div class="sbar-content">
+                    <p>${c.background.text}</p>
+                    <ul>${c.background.details.map(d => `<li>${d}</li>`).join('')}</ul>
+                </div>
+            </div>
+            <div class="sbar-section">
+                <div class="sbar-header">
+                    <div class="sbar-letter a">A</div>
+                    <div class="sbar-title">Assessment</div>
+                </div>
+                <div class="sbar-content">
+                    <p>${c.assessment.text}</p>
+                    <ul>${c.assessment.details.map(d => `<li>${d}</li>`).join('')}</ul>
+                    <div class="key-point"><strong>Key Finding:</strong> ${c.assessment.keyFinding}</div>
+                </div>
+            </div>
+            <div class="sbar-section">
+                <div class="sbar-header">
+                    <div class="sbar-letter r">R</div>
+                    <div class="sbar-title">Recommendation</div>
+                </div>
+                <div class="sbar-content">
+                    <p>${c.recommendation.text}</p>
+                    <ul>${c.recommendation.requests.map(d => `<li>${d}</li>`).join('')}</ul>
+                    <div class="teaching-note"><strong>💡 Teaching Point:</strong> ${c.recommendation.teaching}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    showCase(0);
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="CoachDx SBAR: Pediatric Urology"
+         data-key-points="clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" style="color:#7dd3fc">Pediatric Urology Sbar - StatPearls/NCBI</a> — NCBI Bookshelf</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

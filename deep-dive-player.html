@@ -50,6 +50,56 @@
 }
 body { transition: background 0.3s, color 0.3s; }
 
+/* Sync --color-* variables with theme selection */
+[data-theme="light"] .question-card,
+[data-theme="light"] .question-body,
+[data-theme="light"] .question-stem,
+[data-theme="light"] .question-text,
+[data-theme="light"] .option,
+[data-theme="light"] .option-text,
+[data-theme="light"] .explanation-panel,
+[data-theme="light"] .vignette-modal {
+    color: #0f172a;
+}
+[data-theme="light"] .question-stem {
+    color: #334155;
+    background: rgba(0,0,0,0.03);
+}
+[data-theme="light"] .question-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+[data-theme="light"] .option {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+[data-theme="light"] .option:hover {
+    background: #f1f5f9;
+}
+[data-theme="light"] .question-number {
+    color: #64748b;
+}
+[data-theme="sepia"] .question-card,
+[data-theme="sepia"] .question-body,
+[data-theme="sepia"] .question-stem,
+[data-theme="sepia"] .question-text,
+[data-theme="sepia"] .option,
+[data-theme="sepia"] .option-text {
+    color: #3d3425;
+}
+[data-theme="sepia"] .question-stem {
+    color: #5c4f3a;
+    background: rgba(0,0,0,0.03);
+}
+[data-theme="sepia"] .question-card {
+    background: #faf6eb;
+    border-color: #d4c4a8;
+}
+[data-theme="sepia"] .option {
+    background: #f4ecd8;
+    border-color: #d4c4a8;
+}
+
         :root {
             /* Core palette - Deep medical blue with warm accents */
             --color-bg: #0a0f1a;
@@ -425,7 +475,7 @@ body { transition: background 0.3s, color 0.3s; }
 
         /* Question Card */
         .question-card {
-            background: var(--color-bg-card);
+            background: var(--color-bg-card, #1a2332);
             border-radius: var(--radius-xl);
             border: 1px solid rgba(255,255,255,0.06);
             overflow: hidden;
@@ -472,7 +522,7 @@ body { transition: background 0.3s, color 0.3s; }
         .question-stem {
             font-family: var(--font-display);
             font-size: 1.05rem;
-            color: var(--color-text-secondary);
+            color: var(--color-text-secondary, #94a3b8);
             margin-bottom: var(--space-lg);
             padding: var(--space-md) var(--space-lg);
             background: rgba(255,255,255,0.02);
@@ -484,7 +534,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-family: var(--font-display);
             font-size: 1.35rem;
             font-weight: 600;
-            color: var(--color-text);
+            color: var(--color-text, #f1f5f9);
             line-height: 1.4;
             margin-bottom: var(--space-xl);
         }
@@ -563,7 +613,7 @@ body { transition: background 0.3s, color 0.3s; }
 
         .option-text {
             font-size: 1rem;
-            color: var(--color-text);
+            color: var(--color-text, #f1f5f9);
             padding-top: 4px;
         }
 
@@ -804,7 +854,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
 
         .modal-content {
-            background: var(--color-bg-card);
+            background: var(--color-bg-card, #1a2332);
+            color: var(--color-text, #f1f5f9);
             border-radius: var(--radius-xl);
             max-width: 800px;
             max-height: 80vh;
@@ -847,7 +898,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-family: var(--font-display);
             font-size: 1.05rem;
             line-height: 1.8;
-            color: var(--color-text);
+            color: var(--color-text, #f1f5f9);
             white-space: pre-line;
         }
 
@@ -1143,16 +1194,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <nav class="dx-nav">
         <div class="dx-nav-inner">
             <a href="../index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
+                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;color:#0f172a;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
             </a>
             <div class="dx-nav-links">
                 <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
@@ -2071,8 +2113,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../dx-progress.js"></script>
-<script src="../dx-cross-links.js"></script>
-<script src="../data/rdx-persist.js"></script>
+<script src="dx-progress.js"></script>
+<script src="dx-cross-links.js"></script>
+<script src="data/rdx-persist.js"></script>
 </body>
 </html>

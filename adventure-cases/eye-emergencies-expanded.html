@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Eye Emergencies - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-sky-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">👁️ Eye Emergencies</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-sky-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-sky-500 to-blue-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "Eye Emergencies",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "Acute Painless Vision Loss",
+            scenario: "A 68-year-old man presents with sudden, painless vision loss in his right eye that started 2 hours ago. He describes it as a 'curtain coming down' from above.\n\nPMH: Atrial fibrillation (on warfarin, INR therapeutic), HTN, hyperlipidemia, Type 2 DM\nVitals: BP 158/92, HR 82 irregular, afebrile\n\nExam:\n• Right eye: Visual acuity = counting fingers at 3 feet\n• Left eye: Visual acuity = 20/30\n• Right pupil: Sluggish reaction, relative afferent pupillary defect (RAPD) present\n• Fundoscopy right eye: Pale retina with 'cherry red spot' at macula\n• Left eye fundoscopy: Normal",
+            question: "What is the diagnosis and how urgent is treatment?",
+            options: [
+                { id: "A", text: "Retinal detachment - urgent but can wait for morning ophthalmology", outcome: "Wrong diagnosis", feedback: "Retinal detachment presents with flashes, floaters, and 'curtain' but the fundoscopy would show elevated retina, not pale retina with cherry red spot. This fundus appearance is pathognomonic for something else.", points: 2, isOptimal: false },
+                { id: "B", text: "Central retinal artery occlusion (CRAO) - ophthalmologic emergency, minutes matter", outcome: "Correct diagnosis and urgency", feedback: "Excellent! This is CRAO: sudden painless vision loss, RAPD, pale retina with cherry red spot (fovea appears red because it's supplied by choroidal circulation, while surrounding retina is ischemic). Treatment window is ~90-100 minutes for any chance of recovery.", points: 10, isOptimal: true },
+                { id: "C", text: "Central retinal vein occlusion (CRVO) - urgent referral within 24 hours", outcome: "Wrong fundoscopic findings", feedback: "CRVO causes 'blood and thunder' fundus with diffuse hemorrhages, not pale retina with cherry red spot. CRVO is also less time-critical than CRAO.", points: 3, isOptimal: false },
+                { id: "D", text: "Optic neuritis - start IV steroids empirically", outcome: "Wrong presentation", feedback: "Optic neuritis typically causes painful vision loss (especially with eye movement) in younger patients, often associated with MS. This patient has painless loss with classic CRAO findings.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is CRAO so time-critical?", steps: ["Retina is neural tissue with very high metabolic demand", "Central retinal artery is an end-artery with no collaterals", "Retinal ischemia causes irreversible damage within 90-100 minutes", "After 4 hours, virtually no chance of visual recovery", "This is 'stroke of the eye' - same urgency as cerebral stroke"] },
+            mechanism: { title: "CRAO Pathophysiology", content: "MECHANISM:\n• Embolic occlusion of central retinal artery\n• Sources: Carotid plaque (most common), cardiac (AFib, valve)\n• Complete retinal ischemia ensues\n\nCLASSIC FINDINGS:\n• Sudden, painless, profound vision loss\n• RAPD (Marcus Gunn pupil)\n• Pale/whitened retina (ischemic)\n• Cherry red spot (fovea - supplied by choroid, appears red against pale background)\n• 'Boxcarring' of retinal vessels (segmented blood column)\n\nTIME WINDOWS:\n• 0-90 minutes: Some chance of recovery with treatment\n• 90-240 minutes: Minimal chance\n• >4 hours: Essentially no chance\n\nTREATMENT OPTIONS:\n• Ocular massage (intermittent pressure to dislodge embolus)\n• Anterior chamber paracentesis (lowers IOP, may improve perfusion)\n• IV acetazolamide (lowers IOP)\n• Hyperbaric oxygen (if available quickly)\n• tPA (controversial, not standard)\n\nWORKUP:\n• Echo (cardioembolic source)\n• Carotid imaging (atherosclerotic source)\n• Hypercoagulability workup in young patients" },
+            pearl: "CRAO is a 'stroke equivalent' - these patients need full stroke workup. 25% have concurrent or subsequent cerebral stroke. Think of CRAO as TIA of the eye requiring secondary prevention.",
+            pitfall: "Don't spend time on extensive workup before treatment. If CRAO suspected, immediate ophthalmology consultation and treatment attempts should begin. Workup can happen after."
+        },
+        {
+            id: 2,
+            title: "Acute Angle-Closure Glaucoma",
+            scenario: "A 62-year-old Asian woman presents with severe right eye pain, headache, nausea, and blurred vision that started 3 hours ago after watching a movie in a dark theater.\n\nPMH: Hyperopia (farsightedness), recently started oxybutynin for overactive bladder\n\nExam:\n• Appears uncomfortable, nauseated\n• Right eye: Red, tearing, visual acuity 20/200\n• Right pupil: Mid-dilated (4-5mm), fixed, non-reactive\n• Right cornea: Hazy/steamy appearance\n• IOP (tonometry): Right 58 mmHg, Left 16 mmHg (normal <21)\n• Left eye: Normal",
+            question: "What is the diagnosis and immediate management?",
+            options: [
+                { id: "A", text: "Acute angle-closure glaucoma - lower IOP immediately with topical and systemic agents", outcome: "Correct diagnosis and management", feedback: "Correct! This is acute angle-closure crisis: severe eye pain, fixed mid-dilated pupil, hazy cornea, IOP >40 (hers is 58). Risk factors: hyperopia, Asian descent, dark environment, anticholinergic medication (oxybutynin). Immediate IOP-lowering is critical.", points: 10, isOptimal: true },
+                { id: "B", text: "Acute iritis - start topical steroids and cycloplegics", outcome: "Wrong pupil finding", feedback: "Acute iritis (anterior uveitis) causes a SMALL/constricted pupil, not mid-dilated fixed pupil. The cornea isn't hazy in iritis, and IOP is usually normal or low, not 58 mmHg.", points: 3, isOptimal: false },
+                { id: "C", text: "Migraine with aura - treat with antiemetics and triptans", outcome: "Misses ocular emergency", feedback: "While she has headache and nausea, the fixed mid-dilated pupil, hazy cornea, and IOP of 58 are not explained by migraine. This is an ocular emergency, not a headache syndrome.", points: 0, isOptimal: false },
+                { id: "D", text: "Conjunctivitis - prescribe antibiotic eye drops", outcome: "Completely wrong diagnosis", feedback: "Conjunctivitis doesn't cause pupil abnormalities, elevated IOP, or corneal haziness. The severe pain and visual loss also don't fit simple conjunctivitis.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY did this happen?", steps: ["Hyperopic (farsighted) eyes have shorter axial length and shallow anterior chambers", "Pupil dilation in dark environment moves iris anteriorly", "Anticholinergic (oxybutynin) causes mydriasis and relaxes iris", "Iris blocks trabecular meshwork, obstructing aqueous outflow", "Aqueous fluid accumulates rapidly → IOP spikes → optic nerve damage"] },
+            mechanism: { title: "Acute Angle-Closure Glaucoma", content: "RISK FACTORS:\n• Hyperopia (farsightedness)\n• Asian or Inuit descent\n• Female sex\n• Age >40\n• Family history\n• Shallow anterior chamber\n• Medications: anticholinergics, adrenergics, sulfonamides\n\nTRIGGERS:\n• Dim lighting (pupil dilates)\n• Mydriatic drops\n• Anticholinergic medications\n• Stress, excitement\n\nCLASSIC PRESENTATION:\n• Severe eye pain, often with headache\n• Nausea/vomiting (vagal response to pain)\n• Blurred vision with halos around lights\n• Red eye\n• Fixed, mid-dilated pupil (4-6mm)\n• Hazy/steamy cornea (edema from high IOP)\n• Rock-hard eye on palpation\n• IOP usually 40-80 mmHg\n\nIMMEDIATE TREATMENT:\n1. Topical beta-blocker (timolol 0.5%)\n2. Topical alpha-agonist (apraclonidine or brimonidine)\n3. Topical pilocarpine 1-2% (constricts pupil, opens angle)\n4. IV acetazolamide 500mg (decreases aqueous production)\n5. IV mannitol (osmotic diuresis if refractory)\n6. Lie patient supine (gravity pulls lens back)\n\nDEFINITIVE TREATMENT:\n• Laser peripheral iridotomy (creates bypass hole in iris)" },
+            pearl: "The movie theater is a classic trigger! Dark environment → pupil dilates → iris bunches up at angle → blocks outflow. Always ask about recent activities in suspected angle-closure.",
+            pitfall: "Don't give pilocarpine until IOP starts to come down with other agents. At very high IOP, the iris sphincter may be ischemic and pilocarpine won't work until pressure is partially reduced."
+        },
+        {
+            id: 3,
+            title: "Chemical Eye Injury",
+            scenario: "A 35-year-old construction worker rushes in after cement splashed into both eyes 15 minutes ago. He's in severe pain, can barely open his eyes, and his coworkers have been rinsing his eyes with bottled water on the way.\n\nExam (difficult due to blepharospasm):\n• Severe conjunctival injection bilaterally\n• Corneal haziness visible\n• Particulate matter visible in fornices\n• pH paper on eye surface: Right 11, Left 10.5 (normal ~7.4)\n\nHe asks: 'Shouldn't you check my vision first?'",
+            question: "What is the IMMEDIATE priority?",
+            options: [
+                { id: "A", text: "Check visual acuity before any treatment - need baseline", outcome: "Delays critical treatment", feedback: "NO! In chemical burns, irrigation is the absolute first priority - before visual acuity, before exam, before anything. Every second of exposure worsens injury. Visual acuity can be checked after irrigation.", points: 0, isOptimal: false },
+                { id: "B", text: "Immediate copious irrigation until pH normalizes (7.0-7.4), continue for minimum 30 minutes", outcome: "Correct immediate priority", feedback: "Correct! IRRIGATE FIRST, ASK QUESTIONS LATER. Alkali burns (cement = calcium hydroxide, pH >11) are especially damaging because they cause liquefactive necrosis and penetrate deeply. Irrigate until pH normalizes and for at least 30 minutes.", points: 10, isOptimal: true },
+                { id: "C", text: "Remove particulate matter carefully first, then irrigate", outcome: "Wrong order", feedback: "Start irrigation IMMEDIATELY - don't delay to pick out particles. The irrigation itself will help wash out particles. Copious flow takes priority over particulate removal.", points: 4, isOptimal: false },
+                { id: "D", text: "Apply topical anesthetic then neutralizing solution", outcome: "Don't use neutralizing agents", feedback: "Topical anesthetic for comfort during irrigation is fine, but NEVER use 'neutralizing' solutions - the acid-base reaction generates heat and causes additional thermal injury. Use only water or saline.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is alkali worse than acid?", steps: ["Acids cause coagulative necrosis - proteins coagulate and form barrier", "This barrier limits further penetration of acid", "Alkalis cause liquefactive necrosis - they dissolve proteins", "No barrier forms, so alkali keeps penetrating deeper", "Alkali can penetrate full thickness of cornea and into anterior chamber"] },
+            mechanism: { title: "Chemical Eye Burns", content: "IMMEDIATE ACTION:\n• IRRIGATE - before anything else\n• Use whatever water is available (tap, saline, LR)\n• Morgan lens ideal if available\n• Continue minimum 30 minutes\n• Check pH after irrigation - continue until pH 7.0-7.4\n• Recheck pH at 5-10 min - alkali can leach back\n\nIRRIGATION TECHNIQUE:\n• Topical anesthetic helps patient cooperate\n• Evert lids to irrigate fornices\n• Sweep fornices to remove particulate matter\n• Use 2+ liters of fluid\n\nALKALI BURNS (worse prognosis):\n• Cement (calcium hydroxide)\n• Lye (sodium hydroxide)\n• Ammonia\n• Causes liquefactive necrosis - penetrates deeply\n\nACID BURNS (generally better prognosis):\n• Battery acid (sulfuric)\n• Vinegar, citrus (mild)\n• Causes coagulative necrosis - self-limiting\n• Exception: Hydrofluoric acid (penetrates like alkali)\n\nAFTER IRRIGATION:\n• Check visual acuity\n• Slit lamp exam - assess corneal clarity, limbal ischemia\n• Document degree of burn\n• Cycloplegic for comfort\n• Topical antibiotics\n• Ophthalmology consultation\n\nPROGNOSTIC FACTORS:\n• Limbal ischemia (blanching) - poor prognosis\n• Corneal opacification extent\n• IOP (may be elevated or low)" },
+            pearl: "Limbal ischemia (white/blanched limbus) indicates severe damage to stem cells and blood supply - this is a grave prognostic sign for corneal healing. Document clock hours of limbal involvement.",
+            pitfall: "Don't assume one pH check is enough. Alkali can leach from tissue back onto surface after initial irrigation. Recheck pH at 5-10 minutes and re-irrigate if elevated."
+        },
+        {
+            id: 4,
+            title: "Orbital Cellulitis vs Preseptal Cellulitis",
+            scenario: "A 7-year-old boy presents with right eye swelling for 2 days. He had a cold with runny nose for a week before this started. Now he has fever and significant periorbital swelling.\n\nVitals: Temp 102.5°F, HR 110, BP 100/65\n\nExam:\n• Right eye: Significant periorbital edema and erythema\n• Difficulty opening right eye due to swelling\n• When you manage to examine the eye:\n  - Proptosis noted\n  - Limited extraocular movements - painful to look laterally\n  - Visual acuity: 20/40 right (20/20 left)\n• Left eye: Normal",
+            question: "Is this preseptal or orbital cellulitis, and what is the management?",
+            options: [
+                { id: "A", text: "Preseptal cellulitis - oral antibiotics and outpatient follow-up", outcome: "Misses danger signs", feedback: "This is NOT preseptal! Preseptal is ANTERIOR to the orbital septum and doesn't cause proptosis, EOM limitation, or vision changes. This patient has all three - this is orbital cellulitis.", points: 0, isOptimal: false },
+                { id: "B", text: "Orbital cellulitis - admission, IV antibiotics, CT orbits, ophthalmology and ENT consultation", outcome: "Correct diagnosis and management", feedback: "Correct! The triad of proptosis, ophthalmoplegia (EOM limitation), and vision change indicates infection POSTERIOR to the orbital septum (true orbital cellulitis). This is a sight- and potentially life-threatening emergency requiring admission and CT.", points: 10, isOptimal: true },
+                { id: "C", text: "Allergic reaction - give antihistamines and steroids", outcome: "Dangerous misdiagnosis", feedback: "Allergic periorbital edema is bilateral, non-tender, without fever, and without proptosis/EOM limitation. This child has unilateral swelling with fever and orbital signs - this is infection, not allergy.", points: 0, isOptimal: false },
+                { id: "D", text: "Viral conjunctivitis with lid edema - supportive care", outcome: "Misses serious infection", feedback: "Viral conjunctivitis doesn't cause proptosis, fever of 102.5°F, or limitation of eye movements. This is a serious bacterial infection that could spread intracranially.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is orbital cellulitis dangerous?", steps: ["Orbit connects to cavernous sinus via valveless veins", "Infection can spread to cavernous sinus (cavernous sinus thrombosis)", "From there, can spread to meninges, brain", "Optic nerve compression causes vision loss", "Can progress rapidly to blindness and death if untreated"] },
+            mechanism: { title: "Preseptal vs Orbital Cellulitis", content: "ORBITAL SEPTUM:\n• Fibrous tissue extending from periosteum to eyelids\n• Barrier between superficial lid structures and orbit\n• Infection anterior = preseptal; posterior = orbital\n\nPRESEPTAL CELLULITIS:\n• Infection anterior to septum (eyelid)\n• Causes: Local trauma, insect bites, skin infection\n• Signs: Lid swelling, erythema, tenderness\n• ABSENT: Proptosis, EOM limitation, vision change, pain with eye movement\n• Treatment: Usually oral antibiotics outpatient\n\nORBITAL CELLULITIS:\n• Infection posterior to septum (true orbit)\n• Causes: Sinusitis extension (most common - usually ethmoid), trauma, dental infection\n• Signs: PROPTOSIS, OPHTHALMOPLEGIA, VISION CHANGE, pain with eye movement, chemosis\n• May have relative afferent pupillary defect\n• Treatment: Admission, IV antibiotics, CT scan\n\nIMAGING:\n• CT orbits and sinuses with contrast\n• Look for: Subperiosteal abscess, orbital abscess, sinus opacification\n\nANTIBIOTICS (Orbital):\n• Vancomycin + ceftriaxone OR\n• Ampicillin-sulbactam\n• Add metronidazole if dental source\n\nSURGERY:\n• Indicated for abscess, vision deterioration, no improvement on IV abx" },
+            pearl: "The ethmoid sinus is separated from the orbit by only a paper-thin bone (lamina papyracea). Ethmoid sinusitis is the most common source of orbital cellulitis in children.",
+            pitfall: "Don't send orbital cellulitis home on oral antibiotics. This needs IV antibiotics, CT imaging, and close monitoring for vision changes or need for surgical drainage."
+        },
+        {
+            id: 5,
+            title: "Retinal Detachment",
+            scenario: "A 55-year-old highly myopic (-8.00 diopters) man presents with 2 days of 'flashing lights' in his left eye, followed by 'a shower of floaters' yesterday, and today a 'gray curtain' blocking his lower visual field.\n\nPMH: High myopia since childhood, LASIK 10 years ago\n\nExam:\n• Visual acuity: Right 20/20, Left 20/60\n• Pupils: Normal, no RAPD yet\n• Anterior segment: Normal\n• Dilated fundoscopy left eye: Upper temporal retinal detachment visible with subretinal fluid tracking toward macula",
+            question: "What is the urgency and management of this retinal detachment?",
+            options: [
+                { id: "A", text: "Routine ophthalmology referral within 1 week", outcome: "Too slow - vision at risk", feedback: "This is not routine! The detachment is tracking toward the macula. Once the macula detaches, central vision prognosis worsens significantly. This needs URGENT surgical intervention.", points: 2, isOptimal: false },
+                { id: "B", text: "Emergent ophthalmology consultation - macula-threatening detachment requires surgery within 24-48 hours", outcome: "Correct urgency assessment", feedback: "Correct! This is a macula-ON (or macula-threatening) retinal detachment - the macula is not yet involved but is at risk. Surgical repair within 24-48 hours offers best chance of preserving central vision.", points: 10, isOptimal: true },
+                { id: "C", text: "Laser treatment in office today", outcome: "Wrong treatment modality", feedback: "Laser can be used for retinal tears/holes to prevent detachment, but once a full detachment with subretinal fluid exists, surgical repair (vitrectomy, scleral buckle, pneumatic retinopexy) is needed, not just laser.", points: 3, isOptimal: false },
+                { id: "D", text: "Position patient upright and observe - many detachments resolve spontaneously", outcome: "Detachments don't self-resolve", feedback: "Rhegmatogenous retinal detachments do NOT resolve spontaneously - they typically progress. Without treatment, this will likely progress to total detachment and permanent vision loss.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY the classic symptom progression?", steps: ["Photopsias (flashes): Vitreous traction on retina stimulates photoreceptors", "Floaters (shower): Vitreous hemorrhage or pigment release when retina tears", "Visual field defect (curtain): Subretinal fluid accumulates, detaching retina", "Visual field loss is OPPOSITE to detachment location (upper detachment = lower field loss)", "Progression to macula = central vision loss"] },
+            mechanism: { title: "Retinal Detachment", content: "TYPES:\n1. Rhegmatogenous (most common):\n   • Break in retina allows fluid under retina\n   • Risk factors: High myopia, trauma, prior surgery, lattice degeneration\n\n2. Tractional:\n   • Scar tissue pulls retina off\n   • Causes: Diabetic retinopathy, trauma, ROP\n\n3. Exudative:\n   • Fluid leaks under retina without break\n   • Causes: Tumors, inflammation, hypertension\n\nCLASSIC SYMPTOMS:\n• Photopsias (flashes) - from vitreous traction\n• Floaters (sudden increase) - hemorrhage, pigment\n• Visual field defect - 'curtain' or 'shadow'\n• May have decreased central vision if macula involved\n\nRISK FACTORS:\n• High myopia (>6 diopters)\n• Prior cataract surgery\n• Trauma\n• Family history\n• Lattice degeneration\n\nURGENCY CATEGORIES:\n• Macula ON (not yet involved): Surgery within 24-48 hours\n• Macula OFF (recently detached <1 week): Surgery within a few days\n• Macula OFF (chronic): Less urgent, can schedule\n\nSURGICAL OPTIONS:\n• Pneumatic retinopexy (gas bubble injection + laser/cryo)\n• Scleral buckle\n• Pars plana vitrectomy\n\nPOSITIONING:\n• Position patient so detachment is dependent (e.g., if superior detachment, sit upright)\n• This may slow progression toward macula while awaiting surgery" },
+            pearl: "High myopes are at high risk - their elongated eyes have thinner retinas prone to breaks. -8 diopters means ~8x increased RD risk. Always take visual symptoms seriously in myopes.",
+            pitfall: "Don't dilate and examine without considering retinal detachment first. While you need dilated exam to see the detachment, document symptoms carefully - if RD is suspected, the patient needs urgent referral regardless."
+        },
+        {
+            id: 6,
+            title: "Central Retinal Vein Occlusion",
+            scenario: "A 72-year-old man with HTN and Type 2 DM presents with blurred vision in his left eye that he noticed this morning upon waking. He describes it as 'looking through a fog.' No pain, no flashes.\n\nExam:\n• Visual acuity: Right 20/25, Left 20/80\n• Pupils: Equal, reactive, subtle RAPD on left\n• Dilated fundoscopy left eye: Diffuse retinal hemorrhages in all quadrants (flame and dot-blot), dilated tortuous veins, cotton wool spots, macular edema\n• Right eye: Mild arteriolar narrowing, otherwise normal",
+            question: "What is the diagnosis and initial management?",
+            options: [
+                { id: "A", text: "Diabetic retinopathy - schedule routine retina follow-up", outcome: "Misses acute event", feedback: "While he has DM, this presentation is acute and unilateral with massive hemorrhage in ALL quadrants - this is not typical diabetic retinopathy. The 'blood and thunder' appearance is classic for CRVO.", points: 3, isOptimal: false },
+                { id: "B", text: "Central retinal vein occlusion (CRVO) - ophthalmology referral within 24-48 hours, workup for underlying causes", outcome: "Correct diagnosis and management", feedback: "Correct! This is CRVO with classic 'blood and thunder' fundus: diffuse hemorrhages, dilated veins, cotton wool spots, disc edema. Urgent (not emergent like CRAO) ophthalmology referral, and workup for glaucoma, hyperviscosity, and hypercoagulable states.", points: 10, isOptimal: true },
+                { id: "C", text: "Central retinal artery occlusion (CRAO) - immediate intervention needed", outcome: "Wrong type of occlusion", feedback: "CRAO causes PALE retina with cherry red spot, not hemorrhage. The 'blood and thunder' appearance with diffuse hemorrhages is venous occlusion (CRVO), not arterial.", points: 2, isOptimal: false },
+                { id: "D", text: "Hypertensive retinopathy - optimize blood pressure control", outcome: "Partial diagnosis", feedback: "While HTN contributes to CRVO risk, the acute presentation with massive hemorrhage indicates vein occlusion, not just chronic hypertensive changes. He needs specific CRVO management.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does CRVO cause hemorrhage while CRAO causes pallor?", steps: ["CRAO blocks arterial INFLOW → ischemia → pale retina", "CRVO blocks venous OUTFLOW → blood backs up → hemorrhage", "Venous congestion + arterial inflow continues = blood leaks from capillaries", "Think: CRAO = 'drained' (pale); CRVO = 'engorged' (hemorrhages)", "Both cause vision loss but by opposite mechanisms"] },
+            mechanism: { title: "Central Retinal Vein Occlusion", content: "PATHOPHYSIOLOGY:\n• Thrombosis at lamina cribrosa (where CRV exits)\n• Venous outflow blocked → congestion → hemorrhage\n• Often at artery-vein crossing points\n\nRISK FACTORS:\n• Hypertension (most common)\n• Glaucoma (elevated IOP compresses vein)\n• Diabetes\n• Hyperviscosity (polycythemia, Waldenström's)\n• Hypercoagulable states (especially if young)\n\nCLASSIC FINDINGS:\n• 'Blood and thunder' fundus\n• Diffuse retinal hemorrhages (flame and dot-blot)\n• Dilated, tortuous veins\n• Cotton wool spots\n• Disc swelling\n• Macular edema (main cause of vision loss)\n\nTYPES:\n• Non-ischemic (75%): Better prognosis, VA often >20/200\n• Ischemic (25%): Worse prognosis, VA often <20/200, risk of neovascular glaucoma\n\nWORKUP:\n• Check IOP (glaucoma?)\n• Blood pressure\n• CBC (polycythemia)\n• Glucose, HbA1c\n• Lipid panel\n• Consider hypercoagulable workup if young or recurrent\n\nTREATMENT:\n• Intravitreal anti-VEGF for macular edema (bevacizumab, ranibizumab, aflibercept)\n• Intravitreal steroids (alternative)\n• Pan-retinal photocoagulation if neovascularization develops\n• Treat underlying risk factors" },
+            pearl: "Branch retinal vein occlusion (BRVO) is more common than CRVO and involves only part of the retina. Look for hemorrhage in one quadrant/sector rather than diffusely.",
+            pitfall: "Don't forget glaucoma workup! Elevated IOP is a major risk factor for CRVO, and CRVO can lead to neovascular glaucoma weeks to months later ('90-day glaucoma'). Check IOP at presentation and at follow-up."
+        },
+        {
+            id: 7,
+            title: "Acute Anterior Uveitis",
+            scenario: "A 32-year-old man presents with left eye pain, redness, photophobia, and blurred vision for 2 days. He has a history of low back pain and stiffness that's worse in the morning.\n\nExam:\n• Left eye: Circumcorneal (ciliary) flush, visual acuity 20/40\n• Slit lamp: Cells and flare in anterior chamber, small/miotic pupil, keratic precipitates\n• IOP: 12 mmHg (normal)\n• Right eye: Normal\n\nNo history of trauma, contacts, or infection.",
+            question: "What is the diagnosis and what systemic association should you consider?",
+            options: [
+                { id: "A", text: "Bacterial conjunctivitis - start antibiotic drops", outcome: "Wrong diagnosis", feedback: "Conjunctivitis causes diffuse redness, discharge, and doesn't cause cells/flare in anterior chamber, photophobia, or miotic pupil. This is intraocular inflammation, not surface infection.", points: 0, isOptimal: false },
+                { id: "B", text: "Acute anterior uveitis - consider HLA-B27 associated spondyloarthropathy given back pain", outcome: "Correct diagnosis and association", feedback: "Excellent! This is acute anterior uveitis (iritis): unilateral, painful, photophobia, ciliary flush, miotic pupil, cells/flare. His morning stiffness and back pain suggest ankylosing spondylitis - HLA-B27 associated uveitis is a classic association.", points: 10, isOptimal: true },
+                { id: "C", text: "Acute angle-closure glaucoma - start IOP-lowering agents", outcome: "Wrong pupil finding and IOP", feedback: "Angle-closure causes DILATED fixed pupil and HIGH IOP. This patient has a SMALL pupil and normal IOP. The miotic pupil is characteristic of iritis.", points: 2, isOptimal: false },
+                { id: "D", text: "Viral keratitis - start topical antivirals", outcome: "Wrong location of inflammation", feedback: "Keratitis affects the cornea (epithelial defects, dendritic ulcers). This patient has anterior chamber inflammation (cells/flare) - the problem is inside the eye, not on the cornea.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is HLA-B27 linked to uveitis?", steps: ["HLA-B27 is associated with spondyloarthropathies (AS, reactive arthritis, psoriatic arthritis, IBD-associated)", "These conditions involve aberrant immune responses", "The uveal tract shares antigens with joint synovium and GI tract (molecular mimicry)", "~50% of acute anterior uveitis is HLA-B27 associated", "Testing for HLA-B27 and rheumatologic evaluation is important in recurrent cases"] },
+            mechanism: { title: "Acute Anterior Uveitis (Iritis)", content: "CLINICAL FEATURES:\n• Unilateral (usually)\n• Eye pain, photophobia\n• Ciliary (circumcorneal) flush\n• Small (miotic) pupil - iris sphincter spasm\n• Cells and flare in anterior chamber (Tyndall effect)\n• Keratic precipitates (inflammatory deposits on cornea)\n• Vision may be decreased\n• IOP variable (usually normal or low)\n\nHLA-B27 ASSOCIATED CONDITIONS:\n• Ankylosing spondylitis (most common)\n• Reactive arthritis (Reiter's syndrome)\n• Psoriatic arthritis\n• IBD-associated arthritis\n• May occur before systemic disease manifests!\n\nOTHER CAUSES:\n• Idiopathic (most common overall)\n• Sarcoidosis\n• Behçet's disease\n• Tuberculosis\n• Syphilis\n• Herpes viruses\n• Juvenile idiopathic arthritis (children)\n\nTREATMENT:\n• Topical corticosteroids (prednisolone acetate)\n• Cycloplegics (homatropine, cyclopentolate) - relieves pain, prevents synechiae\n• Treat underlying condition if identified\n\nWORKUP (recurrent or bilateral):\n• HLA-B27\n• ACE level, chest X-ray (sarcoidosis)\n• Syphilis serology\n• Consider TB testing\n• ANA (especially children - JIA)" },
+            pearl: "Acute anterior uveitis may be the FIRST manifestation of ankylosing spondylitis, appearing years before back symptoms are severe enough for diagnosis. Always ask about inflammatory back pain.",
+            pitfall: "Don't stop steroids too quickly - premature cessation causes rebound inflammation. Taper slowly and have ophthalmology follow-up to monitor for complete resolution."
+        },
+        {
+            id: 8,
+            title: "Optic Neuritis",
+            scenario: "A 28-year-old woman presents with pain behind her left eye that worsens with eye movement, accompanied by progressive vision loss over 3 days. She notes colors look 'washed out' in that eye.\n\nExam:\n• Visual acuity: Right 20/20, Left 20/100\n• Color vision: Dramatically reduced in left eye (can't identify Ishihara plates)\n• RAPD: Present in left eye\n• Visual field: Central scotoma left eye\n• Fundoscopy: Left optic disc appears normal (not swollen)\n• Neurological exam: Otherwise normal",
+            question: "What is the diagnosis and what condition does this put her at risk for?",
+            options: [
+                { id: "A", text: "CRAO - needs immediate intervention", outcome: "Wrong presentation", feedback: "CRAO causes sudden, painless vision loss with pale retina and cherry red spot. This patient has painful vision loss with normal-appearing disc (retrobulbar neuritis) - classic optic neuritis.", points: 2, isOptimal: false },
+                { id: "B", text: "Optic neuritis - high risk for developing multiple sclerosis; consider MRI and neurology referral", outcome: "Correct diagnosis and risk assessment", feedback: "Correct! This is classic optic neuritis: young woman, painful vision loss (worse with movement), dyschromatopsia (color desaturation), RAPD, central scotoma, normal disc (retrobulbar). MRI to assess MS risk - if brain lesions present, ~70% will develop MS.", points: 10, isOptimal: true },
+                { id: "C", text: "Giant cell arteritis - check ESR and start steroids empirically", outcome: "Wrong demographic", feedback: "GCA occurs in patients >50 years old (typically >70). This 28-year-old is far too young for GCA. Her presentation is classic for demyelinating optic neuritis.", points: 3, isOptimal: false },
+                { id: "D", text: "Papilledema from elevated ICP - urgent neuroimaging", outcome: "Different appearance", feedback: "Papilledema causes disc SWELLING, which would be visible on fundoscopy. Her disc appears NORMAL - this is retrobulbar optic neuritis (behind the eye, so disc looks normal early on).", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is MRI important for prognosis?", steps: ["Optic neuritis is often the first manifestation of MS", "MRI can reveal demyelinating lesions elsewhere in CNS", "Number of brain lesions predicts MS risk", "0 lesions: ~25% develop MS in 15 years", "≥1 lesion: ~70% develop MS in 15 years", "This guides discussion and potential early treatment"] },
+            mechanism: { title: "Optic Neuritis", content: "CLASSIC PRESENTATION:\n• Young adult (20-45), female predominance\n• Unilateral vision loss over days\n• Pain with eye movement (90%)\n• Dyschromatopsia (color desaturation) - often out of proportion to acuity loss\n• RAPD\n• Central or cecocentral scotoma\n• Disc may be normal (retrobulbar) or swollen (papillitis)\n\nASSOCIATED CONDITIONS:\n• Multiple sclerosis (most important)\n• Neuromyelitis optica (NMO) - more severe, bilateral, poor recovery\n• MOG-antibody disease\n• Sarcoidosis, SLE\n• Infectious (syphilis, Lyme, viral)\n\nWORKUP:\n• MRI brain and orbits with contrast\n• Consider: NMO-IgG (aquaporin-4 antibody), MOG antibody\n• Lumbar puncture if atypical features\n\nTREATMENT:\n• Optic Neuritis Treatment Trial (ONTT) guidance:\n• IV methylprednisolone (1g daily x 3 days) speeds recovery but doesn't change final outcome\n• Oral prednisone alone actually INCREASES recurrence - don't use\n• High-dose IV steroids if rapid recovery desired\n\nPROGNOSIS:\n• Most recover good vision (90% return to 20/40 or better)\n• May have residual RAPD, color deficits, contrast sensitivity issues\n• Recurrence in same or other eye possible" },
+            pearl: "Remember: 'The patient sees nothing (vision loss), and the doctor sees nothing (normal disc in retrobulbar neuritis).' Normal fundoscopy doesn't rule out optic neuritis!",
+            pitfall: "Don't give oral prednisone alone for optic neuritis - the ONTT showed this increases recurrence risk. Either give IV steroids (if you want to speed recovery) or no steroids at all."
+        },
+        {
+            id: 9,
+            title: "Giant Cell Arteritis",
+            scenario: "A 76-year-old woman presents with new severe headache, jaw pain while eating, and sudden vision loss in her right eye that started this morning. She's felt generally unwell with fatigue and shoulder stiffness for several weeks.\n\nExam:\n• Right eye: Visual acuity = no light perception\n• Right RAPD present\n• Fundoscopy right eye: Pale, swollen optic disc with small hemorrhages\n• Left eye: Visual acuity 20/25, normal\n• Tender, non-pulsatile temporal arteries bilaterally\n\nLabs: ESR 95 mm/hr, CRP 8.5 mg/dL (both elevated)",
+            question: "What is the diagnosis and IMMEDIATE management?",
+            options: [
+                { id: "A", text: "Optic neuritis - IV methylprednisolone and MRI brain", outcome: "Wrong demographic and presentation", feedback: "Optic neuritis affects young adults (20-45), causes painful vision loss over days, and has normal or mildly swollen disc. This 76-year-old has painless sudden loss with pale swollen disc - this is ischemic, not inflammatory.", points: 2, isOptimal: false },
+                { id: "B", text: "Giant cell arteritis with arteritic AION - start high-dose IV steroids IMMEDIATELY to protect the other eye", outcome: "Correct diagnosis and urgent treatment", feedback: "Correct! This is GCA with arteritic anterior ischemic optic neuropathy (AION). Classic presentation: age >50, jaw claudication, temporal artery tenderness, elevated ESR/CRP, pale swollen disc. START STEROIDS NOW to prevent fellow eye involvement (occurs in 50% if untreated).", points: 10, isOptimal: true },
+                { id: "C", text: "CRAO - attempt ocular massage and IOP-lowering", outcome: "Wrong location of ischemia", feedback: "While this is ischemic, the pale SWOLLEN disc indicates optic nerve ischemia (AION), not retinal artery occlusion. CRAO affects retina (cherry red spot, not disc swelling). More importantly, GCA needs steroids regardless.", points: 3, isOptimal: false },
+                { id: "D", text: "Wait for temporal artery biopsy results before starting steroids", outcome: "Dangerous delay", feedback: "NEVER wait for biopsy to start steroids in suspected GCA with vision loss! Steroids should be started IMMEDIATELY. Biopsy can be done within 1-2 weeks and will still show changes even after steroids started.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY the urgency for the fellow eye?", steps: ["GCA is systemic vasculitis affecting medium/large arteries", "Untreated, 50% lose vision in second eye within days to weeks", "Second eye involvement can happen within 24 hours", "Steroids rapidly suppress inflammation and prevent progression", "Vision lost is rarely recovered, but prevention is possible"] },
+            mechanism: { title: "Giant Cell Arteritis (Temporal Arteritis)", content: "DIAGNOSTIC CRITERIA (need 3 of 5):\n• Age ≥50\n• New headache\n• Temporal artery tenderness or decreased pulse\n• ESR ≥50 mm/hr\n• Positive temporal artery biopsy\n\nOCULAR MANIFESTATIONS:\n• Arteritic AION (most common cause of vision loss)\n• CRAO (less common)\n• Diplopia from cranial nerve ischemia\n• Amaurosis fugax (transient vision loss - WARNING sign)\n\nSYSTEMIC FEATURES:\n• Headache (temporal)\n• Jaw claudication (highly specific - 50%)\n• Scalp tenderness\n• Constitutional symptoms (fever, malaise, weight loss)\n• Polymyalgia rheumatica overlap (40-60%)\n\nDIAGNOSTIC WORKUP:\n• ESR and CRP (both elevated increases specificity)\n• CBC (normocytic anemia, thrombocytosis)\n• Temporal artery biopsy (gold standard but skip lesions can cause false negative)\n• Temporal artery ultrasound ('halo sign')\n\nTREATMENT:\n• Vision threatened: IV methylprednisolone 1g daily x 3 days, then high-dose oral\n• No vision symptoms: Oral prednisone 1mg/kg/day\n• Aspirin 81mg daily (reduces ischemic events)\n• Taper slowly over 1-2 years (relapses common)\n• Consider tocilizumab as steroid-sparing agent" },
+            pearl: "Jaw claudication (pain with chewing that resolves with rest) is highly specific for GCA. It's caused by ischemia of the masseter muscle from temporal artery involvement.",
+            pitfall: "Don't delay steroids for biopsy! Start treatment immediately. Biopsy can be positive up to 2 weeks after starting steroids. The risk of bilateral blindness far outweighs any diagnostic benefit of waiting."
+        },
+        {
+            id: 10,
+            title: "Putting It All Together",
+            scenario: "Review of eye emergencies:\n\n• Patient A: Sudden painless vision loss, pale retina, cherry red spot, RAPD\n• Patient B: Severe eye pain, mid-dilated fixed pupil, hazy cornea, IOP 55\n• Patient C: Flashes, floaters, curtain visual field defect, high myopia\n• Patient D: Painful vision loss with eye movement, color desaturation, young woman\n• Patient E: 78-year-old with sudden vision loss, jaw claudication, elevated ESR, pale swollen disc",
+            question: "Match the urgency and treatment priorities:",
+            options: [
+                { id: "A", text: "All are equally urgent and should be seen within 24 hours", outcome: "Misses critical time differences", feedback: "These emergencies have very different time windows. CRAO has minutes, angle-closure has hours, GCA needs same-day steroids. Treating them equally would mean losing salvageable vision.", points: 2, isOptimal: false },
+                { id: "B", text: "A and B are hyperacute (minutes-hours); C and E are acute (same day); D is urgent (24-48 hours)", outcome: "Correct prioritization", feedback: "Correct! CRAO (A) - 90-minute window; Angle-closure (B) - hours before permanent damage; RD (C) - macula-threatening needs same-day surgery; GCA (E) - same-day steroids to protect other eye; Optic neuritis (D) - urgent but treatment is optional.", points: 10, isOptimal: true },
+                { id: "C", text: "Only B is a true emergency; others can wait for ophthalmology clinic", outcome: "Misses critical emergencies", feedback: "CRAO is MORE time-critical than angle-closure! And GCA can blind the other eye within hours without steroids. Multiple conditions here are true emergencies.", points: 3, isOptimal: false },
+                { id: "D", text: "E is most urgent because of systemic disease involvement", outcome: "Partially correct but incomplete", feedback: "GCA is urgent, but CRAO is actually more time-critical (90 minutes vs same-day for GCA). The systemic nature of GCA makes it important but doesn't make it the MOST urgent.", points: 5, isOptimal: false }
+            ],
+            whyChain: { title: "WHY do time windows vary so much?", steps: ["CRAO: Retina has 90-minute ischemic tolerance (neural tissue)", "Angle-closure: IOP damages optic nerve over hours, but reversible if caught early", "RD: Progressive but macula involvement takes days if not imminent", "GCA: Fellow eye at risk but steroids work quickly once given", "Optic neuritis: Recovery usually good regardless of treatment timing"] },
+            mechanism: { title: "Eye Emergency Triage", content: "HYPERACUTE (<2 hours):\n• CRAO - 90-minute window for any intervention\n• Chemical burn - irrigate immediately\n• Acute angle-closure - IOP-lowering ASAP\n\nACUTE (same day):\n• Macula-threatening retinal detachment - surgery within 24-48h\n• GCA with vision loss - steroids immediately\n• Orbital cellulitis - admission, IV antibiotics\n• Ruptured globe - protect eye, urgent OR\n\nURGENT (24-48 hours):\n• Optic neuritis - steroids optional, MRI for prognosis\n• Macula-off retinal detachment - surgery within days\n• Non-ischemic CRVO - outpatient referral\n• Acute uveitis - start steroids, follow-up\n\nSEMI-URGENT (within 1 week):\n• Branch retinal vein occlusion\n• Non-threatening retinal tears\n• Chronic uveitis\n\nREMEMBER:\n• When in doubt, call ophthalmology\n• Document visual acuity in all eye complaints\n• RAPD indicates serious afferent pathway problem\n• Protect the fellow eye in bilateral threat conditions" },
+            pearl: "The 5 true eye emergencies that can't wait: CRAO, chemical burn, angle-closure glaucoma, GCA with vision loss, and ruptured globe. Know these cold.",
+            pitfall: "Don't let systemic stability fool you in eye emergencies. Patients with CRAO or GCA may look well systemically while their vision is being permanently damaged."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+function init() { caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); }); renderStage(currentStage); }
+function renderStage(stageNum) { const stage = caseData.stages[stageNum - 1]; if (!stage) { renderSummary(); return; } const answered = answeredStages[stageNum]; document.getElementById('gameContainer').innerHTML = `<div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden"><div class="bg-gradient-to-r from-sky-600 to-blue-600 text-white p-6"><span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span><h2 class="text-2xl font-bold mt-3">${stage.title}</h2></div><div class="p-6"><div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div><div class="bg-sky-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-sky-800 mb-2">🤔 Clinical Question</h3><p class="text-sky-900 font-medium">${stage.question}</p></div><div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-sky-300 hover:bg-sky-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div></button>`).join('')}</div>${answered ? renderFeedback(stage, answered) : ''}</div></div>`; updateProgress(); }
+function renderFeedback(stage, answered) { const selected = stage.options.find(o => o.id === answered.selected); const optimal = stage.options.find(o => o.isOptimal); return `<div class="mt-6 space-y-4"><div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5"><h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4><p class="text-gray-700">${selected.feedback}</p></div>${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}<div class="why-chain rounded-xl p-5"><h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div><div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div><div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div><button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button></div>`; }
+function selectOption(stageNum, optionId) { if (answeredStages[stageNum]) return; const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId); answeredStages[stageNum] = { selected: optionId, points: option.points }; totalScore += option.points; renderStage(stageNum); }
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() { const pct = Math.round(totalScore / maxPossibleScore * 100); document.getElementById('gameContainer').classList.add('hidden'); document.getElementById('summaryPanel').classList.remove('hidden'); document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-blue-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ CRAO: Pale retina, cherry red spot, 90-minute window - "stroke of the eye"</li><li>✓ Angle-closure: Fixed mid-dilated pupil, hazy cornea, high IOP - lower pressure ASAP</li><li>✓ Chemical burn: IRRIGATE FIRST - before anything else, 30+ minutes</li><li>✓ Orbital cellulitis: Proptosis + ophthalmoplegia = posterior to septum, need admission</li><li>✓ Retinal detachment: Flashes → floaters → curtain; macula-on needs surgery in 24-48h</li><li>✓ CRVO: "Blood and thunder" fundus; CRAO = pale retina</li><li>✓ Uveitis: Small pupil, cells/flare; consider HLA-B27 if back pain</li><li>✓ Optic neuritis: Young woman, painful vision loss with movement, MRI for MS risk</li><li>✓ GCA: Age >50, jaw claudication, start steroids IMMEDIATELY to protect other eye</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`; }
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Eye Emergencies</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="../adventure-hub.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK430685/" target="_blank" class="text-blue-600 hover:underline">StatPearls Medical Library</a> | <a href="https://www.merckmanuals.com/professional" target="_blank" class="text-blue-600 hover:underline">Merck Manual Professional</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Eye Emergencies Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Eye Emergencies"
+         data-key-points="${stage.title}, Case Complete!, 📋 Clinical Scenario, 🤔 Clinical Question, 📚 Key Learning Points, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

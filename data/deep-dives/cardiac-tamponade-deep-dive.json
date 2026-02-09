@@ -1,0 +1,1443 @@
+{
+  "id": "cardiac-tamponade-deep-dive",
+  "title": "Cardiac Tamponade",
+  "version": "1.0",
+  "totalQuestions": 26,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Intermediate-Advanced",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Recognize clinical features and risk factors for cardiac tamponade",
+    "Understand the pathophysiology of pericardial constraint and ventricular interdependence",
+    "Apply Beck's triad and identify pulsus paradoxus",
+    "Interpret echocardiographic findings of tamponade physiology",
+    "Perform emergency pericardiocentesis using appropriate technique",
+    "Differentiate traumatic from medical causes and select appropriate management"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "StatPearls: Cardiac Tamponade",
+      "citation": "Stashko E, Meer JM. Cardiac Tamponade. StatPearls [Internet]. 2023 Aug 7",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+      "keyPoints": [
+        "Beck's triad: hypotension, JVD, muffled heart sounds",
+        "Pulsus paradoxus: >10 mmHg drop in SBP with inspiration",
+        "Echocardiography is the best imaging modality",
+        "Treatment: pericardiocentesis or surgical drainage"
+      ]
+    },
+    {
+      "name": "ESC Guidelines on Pericardial Diseases",
+      "citation": "Adler Y, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26320112/"
+    },
+    {
+      "name": "EMCrit: Pericardial Tamponade",
+      "citation": "Farkas J. Pericardial Tamponade. Internet Book of Critical Care. 2024",
+      "url": "https://emcrit.org/ibcc/tamponade/"
+    }
+  ],
+  "vignette": {
+    "text": "A 45-year-old woman with metastatic breast cancer presents to the emergency department with progressive shortness of breath and chest discomfort over the past week. She reports that lying flat worsens her breathing. She received her last chemotherapy 3 weeks ago.\n\nPast Medical History: Stage IV breast cancer with lung metastases (diagnosed 18 months ago), hypertension, anxiety\n\nMedications: Tamoxifen, Lisinopril 10mg daily, Lorazepam PRN\n\nAllergies: Penicillin (rash)\n\nSocial History: Former smoker (quit 10 years ago), no alcohol use",
+    "physicalExam": {
+      "general": "Alert, anxious, sitting upright, using accessory muscles",
+      "vitals": {
+        "BP": "88/72 mmHg",
+        "HR": "118 bpm",
+        "RR": "26/min",
+        "Temp": "98.6\u00b0F (37\u00b0C)",
+        "SpO2": "94% on room air"
+      },
+      "cardiovascular": "Tachycardic, regular rhythm, distant/muffled heart sounds, JVP elevated to angle of jaw, pulsus paradoxus 18 mmHg",
+      "pulmonary": "Clear bilaterally, no wheezes or crackles",
+      "abdomen": "Soft, non-tender, liver edge palpable 3 cm below costal margin",
+      "extremities": "Cool, no edema"
+    },
+    "diagnostics": {
+      "labs": {
+        "WBC": {
+          "value": "8,200/\u03bcL",
+          "reference": "4,500-11,000",
+          "flag": "NORMAL"
+        },
+        "Hemoglobin": {
+          "value": "10.8 g/dL",
+          "reference": "12-16",
+          "flag": "LOW"
+        },
+        "Platelets": {
+          "value": "165,000/\u03bcL",
+          "reference": "150,000-400,000",
+          "flag": "NORMAL"
+        },
+        "BNP": {
+          "value": "420 pg/mL",
+          "reference": "<100",
+          "flag": "HIGH"
+        },
+        "Troponin I": {
+          "value": "0.04 ng/mL",
+          "reference": "<0.04",
+          "flag": "BORDERLINE"
+        },
+        "Creatinine": {
+          "value": "1.0 mg/dL",
+          "reference": "0.6-1.2",
+          "flag": "NORMAL"
+        }
+      },
+      "ecg": "Sinus tachycardia at 118 bpm, low voltage QRS complexes in limb leads, electrical alternans",
+      "imaging": {
+        "chestXray": "Enlarged cardiac silhouette ('water bottle' appearance), clear lung fields",
+        "echocardiogram": "Large circumferential pericardial effusion (2.5 cm posterior, 2.0 cm anterior), RV diastolic collapse present, RA systolic collapse >1/3 cardiac cycle, dilated IVC (2.4 cm) with <50% inspiratory collapse, >30% respiratory variation in mitral inflow velocity"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "\ud83e\udec0",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "tamp-anat-1",
+          "stem": "The echocardiogram shows fluid in the pericardial space surrounding the heart.",
+          "question": "The pericardium consists of two layers. Which layer is directly adherent to the heart surface?",
+          "hint": "Consider the relationship between the layers and the heart.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Mediastinal pleura",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Fibrous pericardium",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Parietal pericardium",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Visceral pericardium (epicardium)",
+              "correct": true
+            }
+          ],
+          "explanation": "The visceral pericardium (also called the epicardium) is the innermost layer that directly adheres to the heart surface. The parietal pericardium is the outer serous layer, and the fibrous pericardium is the tough outer fibrous sac. Pericardial fluid accumulates between the visceral and parietal layers.",
+          "whyChain": [
+            {
+              "why": "Why is the fibrous pericardium clinically important in tamponade?",
+              "answer": "The fibrous pericardium is relatively inelastic. In acute effusions, it cannot stretch quickly, so even small volumes (50-100 mL) can cause tamponade. In chronic effusions, gradual stretching allows larger volumes (up to 1-2 L) before tamponade develops.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "How much fluid is normally in the pericardial space?",
+              "answer": "The normal pericardial space contains 15-50 mL of serous fluid that lubricates the heart during contraction. This fluid is an ultrafiltrate of plasma produced by the mesothelial cells lining the pericardium.",
+              "source": "OpenStax Anatomy & Physiology 2e, Chapter 19",
+              "sourceUrl": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade - https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "text": "OpenStax A&P 2e, Chapter 19",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/cardiac-anatomy.html",
+            "title": "Pericardial Anatomy"
+          }
+        },
+        {
+          "id": "tamp-anat-2",
+          "stem": "During pericardiocentesis, the physician advances the needle from the subxiphoid approach.",
+          "question": "What is the anatomic rationale for the subxiphoid approach to pericardiocentesis?",
+          "hint": "Consider what structures are avoided with this approach.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The approach is extrapleural and avoids the lungs, internal mammary vessels, and coronary arteries",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "The pericardial space is largest at the apex",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "The diaphragm provides a stable backstop for the needle",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "The right ventricle is thickest in this area",
+              "correct": false
+            }
+          ],
+          "explanation": "The subxiphoid approach is extrapleural (avoids pneumothorax risk), stays below the internal mammary vessels, and aims toward the left shoulder to enter the pericardial space while avoiding the thin-walled right ventricle directly. The epicardial fat pad over the RV provides some margin of safety.",
+          "whyChain": [
+            {
+              "why": "What structures are at risk during pericardiocentesis?",
+              "answer": "Complications include puncture of the right ventricle, coronary vessels (especially the right coronary artery), internal mammary artery, and liver laceration. Ultrasound guidance significantly reduces these risks.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "Why is the apical approach sometimes used?",
+              "answer": "The apical (left parasternal) approach may provide better access to loculated effusions or when the subxiphoid window is limited. However, it carries higher risk of pneumothorax and internal mammary injury.",
+              "source": "EMCrit: Pericardial Tamponade",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://emcrit.org/ibcc/tamponade/"
+          ],
+          "remediation": {
+            "link": "/mechanism/pericardiocentesis-anatomy.html",
+            "title": "Anatomy for Pericardiocentesis"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "\ud83d\udd2c",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "tamp-path-1",
+          "stem": "The echocardiogram shows RV diastolic collapse and >30% respiratory variation in mitral inflow.",
+          "question": "What is the PRIMARY hemodynamic consequence of cardiac tamponade?",
+          "hint": "Consider what happens when the pericardium restricts cardiac filling.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Increased afterload from elevated systemic vascular resistance",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Impaired systolic contraction of the left ventricle",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Impaired diastolic filling of all cardiac chambers leading to decreased cardiac output",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Arrhythmia from direct myocardial compression",
+              "correct": false
+            }
+          ],
+          "explanation": "Cardiac tamponade is fundamentally a diastolic filling problem. As pericardial pressure rises, it compresses all cardiac chambers, preventing adequate diastolic filling. Since stroke volume = end-diastolic volume - end-systolic volume, reduced filling directly decreases stroke volume and cardiac output.",
+          "whyChain": [
+            {
+              "why": "Why does the right heart collapse before the left?",
+              "answer": "The right atrium and ventricle operate at lower pressures (RAP ~3-8 mmHg, RVDP ~4-8 mmHg) compared to the left (LAP ~8-12 mmHg, LVDP ~8-12 mmHg). Therefore, pericardial pressure overcomes right-sided filling pressures first.",
+              "source": "PMC: Echocardiographic Evaluation of Pericardial Effusion",
+              "sourceUrl": null
+            },
+            {
+              "why": "What compensatory mechanisms occur in tamponade?",
+              "answer": "The body compensates with tachycardia (to maintain cardiac output despite reduced stroke volume), peripheral vasoconstriction (to maintain blood pressure), and increased venous tone (to augment preload). These compensations eventually fail as pericardial pressure rises.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5401877/"
+          ],
+          "remediation": {
+            "link": "/mechanism/tamponade-hemodynamics.html",
+            "title": "Tamponade Hemodynamics"
+          }
+        },
+        {
+          "id": "tamp-path-2",
+          "stem": "The patient has a pulsus paradoxus of 18 mmHg (normally <10 mmHg).",
+          "question": "What is the mechanism of pulsus paradoxus in cardiac tamponade?",
+          "hint": "Consider ventricular interdependence and the effect of inspiration.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The diaphragm descends and pulls the heart inferiorly",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Inspiration compresses the pericardial fluid against the heart",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "During inspiration, increased RV filling shifts the septum leftward, further reducing LV filling within the constrained pericardium",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Decreased intrathoracic pressure causes LV afterload to increase",
+              "correct": false
+            }
+          ],
+          "explanation": "Pulsus paradoxus reflects exaggerated ventricular interdependence. Normally, inspiration increases venous return to the right heart. In tamponade, the total cardiac volume is fixed by the tense pericardium. When the RV fills during inspiration, the interventricular septum bows leftward, reducing LV volume and stroke volume, causing the inspiratory drop in systolic BP.",
+          "whyChain": [
+            {
+              "why": "Why is pulsus paradoxus 'paradoxical'?",
+              "answer": "Kussmaul named it 'paradoxical' in 1873 because heart sounds were audible during inspiration, yet the radial pulse disappeared - seeming contradictory. Actually, it's an exaggeration of normal physiology, not a true paradox.",
+              "source": "Deranged Physiology: Cardiac Tamponade",
+              "sourceUrl": null
+            },
+            {
+              "why": "When is pulsus paradoxus absent in tamponade?",
+              "answer": "Pulsus paradoxus may be absent or diminished with: atrial septal defect (ASD), severe aortic regurgitation, LV dysfunction with elevated filling pressures, loculated effusions, or positive pressure ventilation. The absence doesn't rule out tamponade.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://derangedphysiology.com/main/required-reading/cardiovascular-intensive-care/Chapter-114/cardiac-tamponade"
+          ],
+          "remediation": {
+            "link": "/mechanism/pulsus-paradoxus.html",
+            "title": "Pulsus Paradoxus Mechanism"
+          }
+        },
+        {
+          "id": "tamp-path-3",
+          "stem": "This patient developed tamponade over 1 week from malignant effusion, while a trauma patient might develop tamponade with only 150 mL of blood.",
+          "question": "What determines whether a pericardial effusion causes tamponade?",
+          "hint": "Consider the relationship between volume, rate of accumulation, and pericardial compliance.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The protein content of the pericardial fluid",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "The patient's baseline ejection fraction",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "The rate of fluid accumulation relative to pericardial stretch capacity",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "The absolute volume of pericardial fluid",
+              "correct": false
+            }
+          ],
+          "explanation": "Tamponade depends on the rate of fluid accumulation relative to pericardial compliance. Acute effusions (trauma, rupture) cause tamponade with small volumes (50-100 mL) because the fibrous pericardium cannot stretch quickly. Chronic effusions allow gradual pericardial stretching, tolerating 1-2 L before tamponade develops.",
+          "whyChain": [
+            {
+              "why": "What is the pericardial pressure-volume relationship?",
+              "answer": "The relationship is J-shaped (exponential). Initially, small volume increases cause minimal pressure rise. Beyond a critical point, the pericardium reaches its elastic limit, and further volume causes rapid pressure increase. This is why patients can decompensate suddenly.",
+              "source": "EMCrit: Pericardial Tamponade",
+              "sourceUrl": null
+            },
+            {
+              "why": "Why does removing even small volumes improve hemodynamics?",
+              "answer": "On the steep portion of the pressure-volume curve, removing 50-100 mL can dramatically reduce pericardial pressure, improving cardiac filling and output. This is why pericardiocentesis can be life-saving even with partial drainage.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://emcrit.org/ibcc/tamponade/"
+          ],
+          "remediation": {
+            "link": "/mechanism/pericardial-compliance.html",
+            "title": "Pericardial Pressure-Volume Relationship"
+          }
+        }
+      ]
+    },
+    {
+      "id": "clinical-presentation",
+      "title": "Clinical Presentation",
+      "icon": "\ud83e\ude7a",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "tamp-clin-1",
+          "stem": "The patient has hypotension, elevated JVP, and muffled heart sounds.",
+          "question": "This constellation of findings is known as:",
+          "hint": "Named after the American cardiothoracic surgeon who described it in 1935.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Charcot's triad",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Beck's triad",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Virchow's triad",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Cushing's triad",
+              "correct": false
+            }
+          ],
+          "explanation": "Beck's triad, described by Claude Beck in 1935, includes: (1) hypotension from decreased cardiac output, (2) elevated jugular venous pressure from impaired right heart filling, and (3) muffled/distant heart sounds from fluid between the heart and chest wall. However, the complete triad is present in only 10-40% of cases.",
+          "whyChain": [
+            {
+              "why": "Why is Beck's triad often incomplete?",
+              "answer": "The triad was originally described in surgical patients with acute traumatic tamponade. In medical causes with slower accumulation, patients may present before all three features develop. JVD may be absent in hypovolemic patients; heart sounds may not be muffled with small effusions.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "What other physical findings suggest tamponade?",
+              "answer": "Additional findings include: pulsus paradoxus (>10 mmHg), Kussmaul sign (paradoxical JVP rise with inspiration - more common in constrictive pericarditis), tachycardia, tachypnea, cool extremities, and Ewart sign (dullness at left base from compressed lung).",
+              "source": "StatPearls: Cardiac Tamponade [NBK431090]",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/becks-triad.html",
+            "title": "Beck's Triad"
+          }
+        },
+        {
+          "id": "tamp-clin-2",
+          "stem": "The physician measures pulsus paradoxus at the bedside.",
+          "question": "How is pulsus paradoxus measured?",
+          "hint": "Consider the technique using a manual blood pressure cuff.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Measure the difference between systolic and diastolic pressure",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Inflate BP cuff above systolic pressure, slowly deflate noting first Korotkoff sounds during expiration, then the pressure at which sounds are heard throughout respiratory cycle - difference is the pulsus",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Measure systolic BP in both arms and calculate the difference",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Calculate the difference between supine and standing blood pressure",
+              "correct": false
+            }
+          ],
+          "explanation": "To measure pulsus paradoxus: (1) Inflate BP cuff above systolic pressure; (2) Slowly deflate until you first hear Korotkoff sounds - these initially appear only during expiration; (3) Continue deflating until sounds are heard throughout the respiratory cycle; (4) The difference between these two pressures is the pulsus paradoxus (normally <10 mmHg).",
+          "whyChain": [
+            {
+              "why": "What conditions other than tamponade cause pulsus paradoxus?",
+              "answer": "Pulsus paradoxus can occur in severe asthma/COPD (large intrathoracic pressure swings), pulmonary embolism, hypovolemic shock, constrictive pericarditis, and obesity. It's not specific to tamponade but helps quantify severity.",
+              "source": "Hospital Handbook: Pericardial Effusion and Cardiac Tamponade",
+              "sourceUrl": null
+            },
+            {
+              "why": "Can pulsus paradoxus be assessed without a BP cuff?",
+              "answer": "Yes. Pulse oximetry waveform variation with respiration correlates with pulsus. On arterial line tracings, systolic variation >10 mmHg suggests pulsus paradoxus. Echocardiographic Doppler variation >30% in mitral inflow is the echo equivalent.",
+              "source": "EMCrit: Pericardial Tamponade",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://hospitalhandbook.ucsf.edu/11-pericardial-effusion-and-cardiac-tamponade/11-pericardial-effusion-and-cardiac-tamponade",
+            "https://emcrit.org/ibcc/tamponade/"
+          ],
+          "remediation": {
+            "link": "/mechanism/pulsus-measurement.html",
+            "title": "Measuring Pulsus Paradoxus"
+          }
+        },
+        {
+          "id": "tamp-clin-3",
+          "stem": "The patient reports that her breathing worsens when lying flat.",
+          "question": "What is the term for dyspnea that worsens in the supine position?",
+          "hint": "This is a common symptom in patients with pericardial effusion and heart failure.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Paroxysmal nocturnal dyspnea",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Platypnea",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Orthopnea",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Trepopnea",
+              "correct": false
+            }
+          ],
+          "explanation": "Orthopnea is dyspnea that worsens in the recumbent position and improves with sitting or standing. In tamponade, supine positioning increases venous return, further distending the already compromised heart. Patients often prefer sitting forward (tripod position).",
+          "whyChain": [
+            {
+              "why": "What are other common symptoms of pericardial effusion?",
+              "answer": "Symptoms include chest discomfort/pressure, dyspnea on exertion, cough (from bronchial compression), dysphagia (from esophageal compression), hoarseness (recurrent laryngeal nerve compression), and hiccups (phrenic nerve irritation).",
+              "source": "Cleveland Clinic: Cardiac Tamponade",
+              "sourceUrl": null
+            },
+            {
+              "why": "Can tamponade present without symptoms?",
+              "answer": "Yes, in slowly accumulating effusions. Patients may remain asymptomatic until tamponade physiology develops, then decompensate rapidly. This is why surveillance is important in patients with known effusions.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://my.clevelandclinic.org/health/diseases/21906-cardiac-tamponade",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/dyspnea-types.html",
+            "title": "Types of Dyspnea"
+          }
+        }
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis & Imaging",
+      "icon": "\ud83d\udd0d",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "tamp-dx-1",
+          "stem": "The ECG shows sinus tachycardia, low voltage QRS complexes, and electrical alternans.",
+          "question": "What causes electrical alternans in cardiac tamponade?",
+          "hint": "Consider the mechanical effect of a large effusion on the heart.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Ischemia affecting alternate heartbeats",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "The heart swings back and forth within the pericardial fluid, changing its position relative to the ECG electrodes",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Fluid conducting electricity between beats",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Alternating conduction through the AV node",
+              "correct": false
+            }
+          ],
+          "explanation": "Electrical alternans (alternating QRS amplitude/axis) occurs when the heart physically swings within a large pericardial effusion, changing its position relative to the ECG leads with each beat. It's most commonly seen with very large effusions and is relatively specific for tamponade but not sensitive (present in ~10-20%).",
+          "whyChain": [
+            {
+              "why": "What other ECG findings suggest pericardial effusion?",
+              "answer": "Low voltage (<5mm in limb leads, <10mm in precordial leads) due to fluid attenuating electrical signals. If pericarditis is the cause, diffuse ST elevation and PR depression may be seen. Sinus tachycardia is nearly universal in tamponade.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "Can ECG alone diagnose tamponade?",
+              "answer": "No. ECG findings are suggestive but neither sensitive nor specific. Sinus tachycardia is the most common finding but is nonspecific. ECG should prompt echocardiography in patients with suspected tamponade.",
+              "source": "StatPearls: Cardiac Tamponade [NBK431090]",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/ecg-tamponade.html",
+            "title": "ECG in Pericardial Effusion"
+          }
+        },
+        {
+          "id": "tamp-dx-2",
+          "stem": "The echocardiogram shows RV diastolic collapse, RA systolic collapse, and a dilated non-collapsing IVC.",
+          "question": "Which echocardiographic finding is the MOST SPECIFIC for cardiac tamponade?",
+          "hint": "Consider which finding indicates pericardial pressure exceeding intracardiac pressure.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Dilated IVC",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "RV diastolic collapse",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Pericardial effusion",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "RA systolic collapse",
+              "correct": false
+            }
+          ],
+          "explanation": "RV diastolic collapse (compression of the RV free wall during early diastole) is the most specific sign of tamponade (~100% specificity in some studies). It indicates pericardial pressure exceeds RV diastolic pressure. RA collapse is more sensitive (occurs earlier) but less specific. A dilated IVC indicates elevated RA pressure but is not specific to tamponade.",
+          "whyChain": [
+            {
+              "why": "What is the sensitivity of IVC plethora for tamponade?",
+              "answer": "IVC dilation (>2.1 cm) with <50% inspiratory collapse is ~92-97% sensitive for tamponade. However, it's not specific - seen in volume overload, RV failure, and positive pressure ventilation. A normal IVC makes tamponade unlikely.",
+              "source": "PMC: Echocardiographic Evaluation of Pericardial Effusion",
+              "sourceUrl": null
+            },
+            {
+              "why": "Why does RA collapse occur during systole and RV collapse during diastole?",
+              "answer": "Each chamber is most vulnerable to external compression when its internal pressure is lowest. RA pressure is lowest during ventricular systole (after ejection); RV pressure is lowest during early diastole (before filling begins).",
+              "source": "EMRA: Advanced Critical Care Ultrasound",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5401877/",
+            "https://www.emra.org/emresident/article/us-cardiac-tamponade"
+          ],
+          "remediation": {
+            "link": "/mechanism/echo-tamponade.html",
+            "title": "Echo Findings in Tamponade"
+          }
+        },
+        {
+          "id": "tamp-dx-3",
+          "stem": "The echocardiographer reports >30% respiratory variation in mitral inflow velocity.",
+          "question": "What does respiratory variation in mitral inflow velocity represent?",
+          "hint": "Consider how this relates to the clinical finding of pulsus paradoxus.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Atrial fibrillation",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Diastolic dysfunction",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "The echocardiographic equivalent of pulsus paradoxus - exaggerated ventricular interdependence",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Mitral valve stenosis",
+              "correct": false
+            }
+          ],
+          "explanation": "Respiratory variation in mitral inflow (>30% change in E-wave velocity with respiration) is the Doppler equivalent of pulsus paradoxus. During inspiration, increased RV filling in the constrained pericardium reduces LV filling, decreasing mitral inflow velocity. This correlates with the inspiratory drop in stroke volume and blood pressure.",
+          "whyChain": [
+            {
+              "why": "What is the normal respiratory variation in mitral inflow?",
+              "answer": "Normal mitral inflow varies <30% with respiration. Tricuspid inflow normally varies <60%. Values exceeding these cutoffs suggest tamponade physiology with exaggerated ventricular interdependence.",
+              "source": "EMCrit: Pericardial Tamponade",
+              "sourceUrl": null
+            },
+            {
+              "why": "How reliable is this finding?",
+              "answer": "Respiratory Doppler variation is less sensitive and specific than chamber collapse. It can be technically difficult to obtain accurately, especially in tachypneic patients. It's most useful as a supporting finding when other echo signs are present.",
+              "source": "ACEP: Cardiac Tamponade Evaluation",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://emcrit.org/ibcc/tamponade/",
+            "https://www.acep.org/emultrasound/newsroom/may-2024/cardiac-tamponade"
+          ],
+          "remediation": {
+            "link": "/mechanism/doppler-tamponade.html",
+            "title": "Doppler Assessment of Tamponade"
+          }
+        },
+        {
+          "id": "tamp-dx-4",
+          "stem": "The chest X-ray shows an enlarged cardiac silhouette with a 'water bottle' appearance.",
+          "question": "How much pericardial fluid must typically accumulate before the cardiac silhouette appears enlarged on chest X-ray?",
+          "hint": "Consider the sensitivity of CXR for pericardial effusion.",
+          "options": [
+            {
+              "id": "A",
+              "text": ">50 mL",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": ">200-250 mL",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": ">500 mL",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": ">1000 mL",
+              "correct": false
+            }
+          ],
+          "explanation": "Chest X-ray is insensitive for small effusions. Approximately 200-250 mL of fluid must accumulate before cardiomegaly is apparent. The classic 'water bottle' or 'flask-shaped' heart occurs with larger effusions. A normal CXR does not rule out tamponade, especially acute tamponade with small volumes.",
+          "whyChain": [
+            {
+              "why": "What is the imaging modality of choice for tamponade?",
+              "answer": "Echocardiography is the diagnostic modality of choice. It can be performed at bedside, detects small effusions, and identifies tamponade physiology (chamber collapse, IVC findings, Doppler changes). CT and MRI can characterize effusion but are not first-line.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "When might CT be useful?",
+              "answer": "CT helps identify loculated effusions not visible on echo, detect associated pathology (malignancy, aortic dissection), and guide drainage approach. It's particularly useful post-cardiac surgery when posterior loculated collections may not be visible on transthoracic echo.",
+              "source": "EMCrit: Pericardial Tamponade",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://emcrit.org/ibcc/tamponade/"
+          ],
+          "remediation": {
+            "link": "/mechanism/cxr-effusion.html",
+            "title": "CXR in Pericardial Effusion"
+          }
+        }
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "icon": "\ud83d\udc8a",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "tamp-tx-1",
+          "stem": "The patient is hypotensive with tamponade physiology on echocardiogram.",
+          "question": "What is the definitive treatment for cardiac tamponade?",
+          "hint": "Consider what will immediately relieve the pericardial pressure.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Intravenous diuretics",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Positive pressure ventilation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Inotropic support with dobutamine",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Removal of pericardial fluid via pericardiocentesis or surgical drainage",
+              "correct": true
+            }
+          ],
+          "explanation": "The definitive treatment for cardiac tamponade is drainage of pericardial fluid. This can be achieved by needle pericardiocentesis (usually with ultrasound guidance) or surgical approaches (pericardial window, pericardiectomy). Even removing small volumes can dramatically improve hemodynamics due to the steep pressure-volume relationship.",
+          "whyChain": [
+            {
+              "why": "What are temporizing measures while preparing for drainage?",
+              "answer": "IV fluid bolus (preload augmentation), vasopressors if needed to maintain perfusion, oxygen, and avoiding positive pressure ventilation. Bed rest with legs elevated increases venous return. These are bridges to definitive drainage, not alternatives.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "Why avoid positive pressure ventilation?",
+              "answer": "Positive pressure ventilation decreases venous return to the right heart, worsening preload in an already preload-dependent state. If intubation is necessary, use ketamine (maintains SVR) and minimize PEEP. Ideally, drain the pericardium before intubation.",
+              "source": "StatPearls: Cardiac Tamponade [NBK431090]",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/tamponade-treatment.html",
+            "title": "Treatment of Cardiac Tamponade"
+          }
+        },
+        {
+          "id": "tamp-tx-2",
+          "stem": "You are preparing to perform ultrasound-guided pericardiocentesis.",
+          "question": "What is the preferred approach for pericardiocentesis in a hemodynamically unstable patient with a large anterior and inferior effusion?",
+          "hint": "Consider safety and accessibility.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Apical approach at the point of maximal impulse",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Left parasternal approach at the 5th intercostal space",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Subxiphoid approach with ultrasound guidance, aiming toward the left shoulder",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Right parasternal approach",
+              "correct": false
+            }
+          ],
+          "explanation": "The subxiphoid approach is generally preferred because it is extrapleural (minimizes pneumothorax risk), avoids the internal mammary vessels, and provides a relatively safe trajectory. Ultrasound guidance allows real-time visualization of needle placement and reduces complications. The needle is directed toward the left shoulder at 30-45\u00b0 angle.",
+          "whyChain": [
+            {
+              "why": "How is ultrasound used to guide the procedure?",
+              "answer": "Ultrasound identifies the largest fluid pocket, determines optimal entry angle, and provides real-time needle visualization. The needle can be seen entering the pericardial space. Agitated saline injection confirms pericardial (not intracardiac) position.",
+              "source": "Hospital Handbook: Pericardial Effusion",
+              "sourceUrl": null
+            },
+            {
+              "why": "When is a different approach indicated?",
+              "answer": "Apical or parasternal approaches may be preferred for loculated effusions, when the subxiphoid window is inadequate, or based on where the largest fluid collection is visualized. CT or fluoroscopic guidance may be used for complex cases.",
+              "source": "EMCrit: Pericardial Tamponade",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://hospitalhandbook.ucsf.edu/11-pericardial-effusion-and-cardiac-tamponade/11-pericardial-effusion-and-cardiac-tamponade",
+            "https://emcrit.org/ibcc/tamponade/"
+          ],
+          "remediation": {
+            "link": "/mechanism/pericardiocentesis-technique.html",
+            "title": "Pericardiocentesis Technique"
+          }
+        },
+        {
+          "id": "tamp-tx-3",
+          "stem": "A trauma patient arrives in PEA arrest after a stab wound to the chest. FAST exam shows pericardial fluid.",
+          "question": "What is the appropriate intervention for traumatic cardiac tamponade in a pulseless patient?",
+          "hint": "Consider the nature of traumatic hemopericardium and need for definitive repair.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Needle pericardiocentesis",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Focused fluid resuscitation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Emergency department thoracotomy with pericardiotomy",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Continue CPR and transport to OR",
+              "correct": false
+            }
+          ],
+          "explanation": "In penetrating traumatic arrest with tamponade, emergency department thoracotomy (EDT) with pericardiotomy is the treatment of choice. Pericardiocentesis is inadequate because traumatic hemopericardium contains clotted blood that won't drain through a needle, and the underlying cardiac injury requires surgical repair. EDT allows direct cardiac massage and injury repair.",
+          "whyChain": [
+            {
+              "why": "Why is pericardiocentesis inadequate for traumatic tamponade?",
+              "answer": "Traumatic hemopericardium contains clotted blood that won't aspirate through a needle. The bleeding source (cardiac laceration) continues to hemorrhage. Surgical access is needed for repair. Pericardiocentesis is only a temporizing measure if surgery is not immediately available.",
+              "source": "PMC: Pericardial Tamponade in Trauma",
+              "sourceUrl": null
+            },
+            {
+              "why": "What about blunt traumatic tamponade?",
+              "answer": "Hemopericardium in blunt traumatic arrest (from ventricular rupture or aortic disruption) is generally considered non-survivable, and further resuscitation is often not warranted. Survival rates are dismal compared to penetrating trauma.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC12510441/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/traumatic-tamponade.html",
+            "title": "Traumatic Cardiac Tamponade"
+          }
+        },
+        {
+          "id": "tamp-tx-4",
+          "stem": "After successful pericardiocentesis, 450 mL of bloody fluid is removed. The patient's hemodynamics improve significantly.",
+          "question": "What should be done with the pericardial fluid?",
+          "hint": "Consider diagnostic evaluation and potential for reaccumulation.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Transfuse the bloody fluid back to the patient",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Send for cell count, protein, LDH, glucose, cytology, and cultures; leave drain catheter if reaccumulation expected",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Only culture the fluid",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Discard the fluid; diagnosis is already known",
+              "correct": false
+            }
+          ],
+          "explanation": "Pericardial fluid analysis helps determine etiology: cytology for malignancy, cultures and gram stain for infection, ADA for tuberculosis, cell count and chemistry for inflammatory conditions. In patients with expected reaccumulation (malignancy, infection), leaving a pigtail catheter allows continued drainage.",
+          "whyChain": [
+            {
+              "why": "What fluid characteristics suggest malignancy?",
+              "answer": "Malignant effusions are often bloody (serosanguineous), have high protein (>6 g/dL), elevated LDH, low glucose (<60 mg/dL), and positive cytology (sensitivity 60-90%). They frequently reaccumulate, requiring pericardial window or sclerotherapy.",
+              "source": "StatPearls: Cardiac Tamponade [NBK431090]",
+              "sourceUrl": null
+            },
+            {
+              "why": "When is surgical drainage preferred over pericardiocentesis?",
+              "answer": "Surgical drainage (pericardial window or pericardiectomy) is preferred for: recurrent effusions, loculated effusions, purulent pericarditis, traumatic tamponade, need for biopsy, or when pericardiocentesis fails or is high-risk.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/pericardial-fluid-analysis.html",
+            "title": "Pericardial Fluid Analysis"
+          }
+        }
+      ]
+    },
+    {
+      "id": "etiology",
+      "title": "Etiology & Differential",
+      "icon": "\ud83d\udd0e",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "tamp-etiol-1",
+          "stem": "This patient has metastatic breast cancer.",
+          "question": "What is the MOST COMMON cause of pericardial effusion with tamponade in non-traumatic cases?",
+          "hint": "Consider the most frequent medical causes.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Viral pericarditis",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Uremia",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Malignancy (lung, breast, lymphoma, leukemia)",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Autoimmune disease",
+              "correct": false
+            }
+          ],
+          "explanation": "Malignancy is the most common cause of tamponade in medical (non-traumatic) patients, accounting for 30-60% of cases. Lung cancer is most common overall, followed by breast cancer and hematologic malignancies. The effusion may be from direct pericardial involvement or radiation therapy.",
+          "whyChain": [
+            {
+              "why": "What other conditions cause pericardial effusion with potential tamponade?",
+              "answer": "Other causes include: viral or bacterial pericarditis, uremia (dialysis patients), hypothyroidism, autoimmune diseases (SLE, RA), post-MI (Dressler syndrome), aortic dissection (rupture into pericardium), and iatrogenic (post-cardiac surgery, cardiac catheterization).",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "What is the prognosis for malignant pericardial effusion?",
+              "answer": "Poor prognosis overall, with median survival of 2-4 months. However, drainage improves quality of life and symptoms. Pericardial window or sclerotherapy reduces reaccumulation. Treatment of underlying malignancy may prolong survival in responsive tumors.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade - https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/pericardial-effusion-causes.html",
+            "title": "Causes of Pericardial Effusion"
+          }
+        },
+        {
+          "id": "tamp-etiol-2",
+          "stem": "You are considering the differential diagnosis for this hypotensive patient with JVD.",
+          "question": "Which condition shares hemodynamic features with cardiac tamponade (elevated JVP, hypotension) but has different echocardiographic findings?",
+          "hint": "Consider other causes of obstructive shock with elevated right-sided pressures.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Septic shock",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Hypovolemic shock",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Massive pulmonary embolism",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Neurogenic shock",
+              "correct": false
+            }
+          ],
+          "explanation": "Massive PE can present similarly to tamponade: hypotension, elevated JVP, and shock. However, echo shows RV dilation and dysfunction with D-shaped septum (RV pressure overload), rather than RV/RA collapse with pericardial effusion. Both cause obstructive shock with elevated right-sided pressures.",
+          "whyChain": [
+            {
+              "why": "How does tension pneumothorax compare?",
+              "answer": "Tension pneumothorax also causes obstructive shock with JVD and hypotension. Key differences: unilateral absent breath sounds, tracheal deviation, hyperresonance to percussion. Treatment is needle decompression followed by chest tube, not pericardiocentesis.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "How does constrictive pericarditis differ from tamponade?",
+              "answer": "Both cause elevated JVP and impaired diastolic filling. In constrictive pericarditis, the pericardium is thickened/calcified (not fluid-filled), Kussmaul sign is more prominent, and the dip-plateau ('square root sign') pattern is seen on catheterization. Treatment is pericardiectomy, not pericardiocentesis.",
+              "source": "StatPearls: Cardiac Tamponade [NBK431090]",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/obstructive-shock-ddx.html",
+            "title": "Differential Diagnosis of Obstructive Shock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "\ud83d\udd17",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "tamp-syn-1",
+          "stem": "Integrating all the clinical information in this case.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "hint": "Connect the underlying condition to the pathophysiology and findings.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Malignant pericardial effusion from metastatic breast cancer causing cardiac tamponade with Beck's triad, pulsus paradoxus, and echocardiographic evidence of RV/RA collapse, requiring urgent pericardiocentesis",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Pulmonary embolism causing obstructive shock",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Acute viral pericarditis with mild effusion requiring NSAIDs",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Cardiogenic shock from chemotherapy-induced cardiomyopathy",
+              "correct": false
+            }
+          ],
+          "explanation": "This synthesis captures: (1) Etiology: malignant effusion from metastatic breast cancer; (2) Pathophysiology: pericardial fluid accumulation causing cardiac compression; (3) Clinical findings: Beck's triad (hypotension, JVD, muffled heart sounds), pulsus paradoxus (18 mmHg); (4) Echo findings: large effusion with RV diastolic and RA systolic collapse, plethoric IVC; (5) Management: urgent drainage.",
+          "whyChain": [
+            {
+              "why": "What is this patient's prognosis?",
+              "answer": "Malignant pericardial effusion carries a median survival of 2-4 months. However, drainage provides immediate hemodynamic benefit. Pericardial window may prevent reaccumulation. Prognosis depends on the underlying cancer's responsiveness to treatment.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/tamponade-synthesis.html",
+            "title": "Cardiac Tamponade Summary"
+          }
+        },
+        {
+          "id": "tamp-syn-2",
+          "stem": "You successfully perform pericardiocentesis, removing 500 mL of bloody fluid. The patient's blood pressure improves to 110/70 mmHg.",
+          "question": "What is the MOST IMPORTANT next step in management?",
+          "hint": "Consider prevention of reaccumulation and definitive management.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Leave pericardial drain catheter in place, send fluid for cytology, and consult oncology and cardiothoracic surgery for definitive management",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Perform immediate pericardiectomy",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Discharge home with outpatient follow-up",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Start empiric antibiotics",
+              "correct": false
+            }
+          ],
+          "explanation": "After initial stabilization with pericardiocentesis, a drainage catheter should remain to prevent reaccumulation. Fluid analysis (especially cytology) confirms malignant etiology. Multidisciplinary planning with oncology (treatment of underlying cancer) and cardiothoracic surgery (pericardial window if recurrent) determines definitive management.",
+          "whyChain": [
+            {
+              "why": "What are options for preventing recurrent malignant effusion?",
+              "answer": "Options include: extended catheter drainage, pericardial window (surgical creation of communication between pericardium and pleural space for continuous drainage), pericardiectomy, and intrapericardial sclerotherapy. Choice depends on prognosis, patient status, and local expertise.",
+              "source": "StatPearls: Cardiac Tamponade",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "why": "Should systemic chemotherapy be adjusted?",
+              "answer": "Pericardial involvement often indicates advanced disease, but effective systemic therapy can control pericardial disease. Oncology should reassess treatment options. Some chemotherapy agents (anthracyclines) can cause pericarditis, requiring evaluation.",
+              "source": "StatPearls: Cardiac Tamponade [NBK431090]",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Cardiac Tamponade. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+            }
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+          ],
+          "remediation": {
+            "link": "/mechanism/malignant-effusion-management.html",
+            "title": "Managing Malignant Pericardial Effusion"
+          }
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "AHA/ACC STEMI Guidelines",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23247304/",
+      "source": "Circulation 2013"
+    },
+    {
+      "title": "AHA/ACC Heart Failure Guidelines",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/",
+      "source": "Circulation 2022"
+    },
+    {
+      "title": "ACC/AHA Atrial Fibrillation Guidelines",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30686041/",
+      "source": "Circulation 2019"
+    },
+    {
+      "title": "ECG Interpretation - NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK549803/",
+      "source": "StatPearls"
+    }
+  ],
+  "platformLinks": [
+    {
+      "type": "adventure",
+      "text": "\ud83d\uddfa\ufe0f cardiac-tamponade Adventure",
+      "url": "adventure-cases/cardiac-tamponade-adventure.html"
+    },
+    {
+      "type": "deepDive",
+      "text": "\ud83d\udcda cardiac-tamponade Deep Dive",
+      "url": "cardiac-tamponade-deep-dive.json"
+    }
+  ],
+  "mcqs": [
+    {
+      "stem": "Which of the following is the MOST important initial step in evaluating a patient with suspected cardiac tamponade?",
+      "options": [
+        {
+          "text": "Obtain a thorough history and physical examination",
+          "correct": true,
+          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in cardiac tamponade. It guides all subsequent diagnostic and management decisions."
+        },
+        {
+          "text": "Order advanced imaging immediately",
+          "correct": false,
+          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively."
+        },
+        {
+          "text": "Start empiric treatment before evaluation",
+          "correct": false,
+          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable."
+        },
+        {
+          "text": "Consult a specialist before any workup",
+          "correct": false,
+          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings."
+        }
+      ]
+    },
+    {
+      "stem": "A patient presents with classic features of cardiac tamponade. Which clinical reasoning principle is MOST important in avoiding diagnostic error?",
+      "options": [
+        {
+          "text": "Search satisficing - stop looking after the first diagnosis",
+          "correct": false,
+          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses."
+        },
+        {
+          "text": "Consider the differential diagnosis systematically",
+          "correct": true,
+          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+        },
+        {
+          "text": "Rely primarily on pattern recognition",
+          "correct": false,
+          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases."
+        },
+        {
+          "text": "Order every available test to rule out all possibilities",
+          "correct": false,
+          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy."
+        }
+      ]
+    },
+    {
+      "stem": "When managing cardiac tamponade, which approach best supports evidence-based practice?",
+      "options": [
+        {
+          "text": "Follow institutional protocols regardless of patient factors",
+          "correct": false,
+          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances."
+        },
+        {
+          "text": "Base decisions solely on clinical experience",
+          "correct": false,
+          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence."
+        },
+        {
+          "text": "Integrate current best evidence with clinical expertise and patient values",
+          "correct": true,
+          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+        },
+        {
+          "text": "Always defer to the most recent published study",
+          "correct": false,
+          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence."
+        }
+      ]
+    },
+    {
+      "stem": "An ECG shows ST elevation in leads II, III, and aVF with reciprocal ST depression in I and aVL. Which coronary artery is most likely occluded?",
+      "options": [
+        {
+          "text": "Right coronary artery (RCA)",
+          "correct": true,
+          "explanation": "ST elevation in inferior leads (II, III, aVF) with reciprocal changes in lateral leads (I, aVL) localizes to an inferior STEMI, most commonly caused by RCA occlusion (~85% of cases). Check right-sided leads (V4R) to assess for RV involvement."
+        },
+        {
+          "text": "Left anterior descending (LAD)",
+          "correct": false,
+          "explanation": "LAD occlusion causes anterior STEMI with ST elevation in V1-V4 (\u00b1 V5-V6), not inferior leads."
+        },
+        {
+          "text": "Left circumflex (LCx)",
+          "correct": false,
+          "explanation": "LCx causes lateral STEMI (I, aVL, V5-V6). While LCx can cause inferior changes in ~15% of cases (dominant LCx), RCA is far more common."
+        },
+        {
+          "text": "Left main coronary artery",
+          "correct": false,
+          "explanation": "Left main occlusion causes widespread ST depression with ST elevation in aVR \u2014 a pattern of diffuse subendocardial ischemia, not isolated inferior STEMI."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "content": "Comprehensive review of Cardiac Tamponade."
+    },
+    {
+      "title": "Clinical Approach",
+      "content": "Systematic approach to Cardiac Tamponade including recognition, diagnosis, and management."
+    },
+    {
+      "title": "Key Points",
+      "content": "Evidence-based clinical pearls for Cardiac Tamponade."
+    }
+  ]
+}

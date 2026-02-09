@@ -1,0 +1,1541 @@
+{
+  "schema": "deep-dive-v1",
+  "id": "pe-deep-dive",
+  "title": "Pulmonary Embolism",
+  "subtitle": "From Virchow's Triad to Risk Stratification",
+  "category": "Pulmonary/Cardiovascular",
+  "icon": "\ud83e\udec1",
+  "difficulty": "intermediate",
+  "estimatedTime": "40-55 min",
+  "totalQuestions": 30,
+  "vignette": {
+    "title": "The Case",
+    "setting": "Emergency Department, 3:45 PM",
+    "text": "A 42-year-old woman presents with acute-onset shortness of breath and right-sided pleuritic chest pain that began suddenly 3 hours ago. The pain is sharp, worse with deep inspiration. She also reports feeling lightheaded and anxious.\n\nShe returned from a business trip to Tokyo 5 days ago (14-hour flight). During the flight, she remained seated most of the time due to turbulence.\n\nPMH: Obesity (BMI 34), PCOS\nMedications: Combined OCPs (ethinyl estradiol/norgestrel) for 3 years\nFHx: Mother had DVT at age 50 after hip surgery\nSocial: Non-smoker, marketing executive",
+    "physicalExam": {
+      "general": "Alert, mildly anxious, speaking in short sentences",
+      "cardiovascular": "Tachycardic, regular. Normal S1, loud P2. JVP 10 cm H2O",
+      "pulmonary": "Tachypneic. Clear. Diminished breath sounds at right base",
+      "extremities": "Right calf 2.5 cm larger than left with mild tenderness"
+    },
+    "diagnostics": {
+      "vitals": {
+        "BP": "118/78",
+        "HR": "112",
+        "RR": "24",
+        "SpO2": "91% RA",
+        "Temp": "99.1\u00b0F"
+      },
+      "ecg": {
+        "description": "Sinus tach 112. S1Q3T3. Right axis. Incomplete RBBB",
+        "interpretation": "Right heart strain"
+      },
+      "labs": {
+        "dDimer": {
+          "value": "4,850 ng/mL",
+          "reference": "<500",
+          "flag": "CRITICAL"
+        },
+        "troponinI": {
+          "value": "0.18 ng/mL",
+          "reference": "<0.04",
+          "flag": "HIGH"
+        },
+        "bnp": {
+          "value": "485 pg/mL",
+          "reference": "<100",
+          "flag": "HIGH"
+        },
+        "abg": {
+          "pH": "7.48",
+          "pCO2": "28",
+          "pO2": "62",
+          "interpretation": "Resp alkalosis, hypoxemia"
+        }
+      },
+      "imaging": {
+        "ctpa": "Filling defects in R main PA. RV:LV ratio 1.3",
+        "doppler": "DVT in R popliteal extending to femoral vein"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "\ud83e\udec1",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "pe-anat-1",
+          "stem": "CT-PA shows filling defects in the right main pulmonary artery.",
+          "question": "The pulmonary arteries carry deoxygenated blood from which cardiac chamber?",
+          "hint": "Trace the path: systemic veins \u2192 right atrium \u2192 ? \u2192 pulmonary arteries \u2192 lungs",
+          "options": [
+            {
+              "id": "A",
+              "text": "Left ventricle",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Right atrium",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Right ventricle",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Left atrium",
+              "correct": false
+            }
+          ],
+          "explanation": "The pulmonary arteries arise from the pulmonary trunk, which exits the right ventricle. When PE obstructs these arteries, it creates backpressure on the RV.",
+          "whyChain": [
+            {
+              "why": "Why does PE cause RV strain?",
+              "answer": "Clot obstruction increases pulmonary vascular resistance. The RV must pump against higher afterload, causing dilation (RV:LV >1.0).",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            },
+            {
+              "why": "Why is the RV vulnerable to acute pressure overload?",
+              "answer": "The RV is thin-walled (3-5mm vs LV 10-15mm), designed for low-pressure work. It cannot acutely adapt to high afterload.",
+              "source": "OpenStax A&P 2e",
+              "sourceUrl": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            }
+          ]
+        },
+        {
+          "id": "pe-anat-2",
+          "stem": "Doppler reveals DVT in the right popliteal vein extending to the femoral vein.",
+          "question": "Which venous pathway allows a DVT from the leg to reach the pulmonary arteries?",
+          "hint": "Trace: leg veins \u2192 femoral \u2192 iliac \u2192 ? \u2192 right heart \u2192 pulmonary arteries",
+          "options": [
+            {
+              "id": "A",
+              "text": "Portal vein \u2192 liver \u2192 hepatic vein \u2192 right atrium",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Superior vena cava \u2192 right atrium \u2192 right ventricle",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Inferior vena cava \u2192 right atrium \u2192 right ventricle \u2192 pulmonary trunk",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Azygos vein \u2192 superior vena cava \u2192 left atrium",
+              "correct": false
+            }
+          ],
+          "explanation": "Lower extremity DVTs travel via: femoral \u2192 external iliac \u2192 common iliac \u2192 IVC \u2192 right atrium \u2192 RV \u2192 pulmonary trunk \u2192 pulmonary arteries.",
+          "whyChain": [
+            {
+              "why": "Why do most PEs originate from proximal leg DVTs?",
+              "answer": "Proximal DVTs (popliteal and above) are larger and more likely to embolize. About 50% of untreated proximal DVTs lead to PE.",
+              "source": "StatPearls: PE",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 20.5",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Pulmonary Embolism",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "pe-anat-3",
+          "stem": "Physical exam reveals a loud P2 (pulmonic component of S2).",
+          "question": "The pulmonic valve is located between which structures?",
+          "hint": "The pulmonic valve guards the RV outflow tract.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Right atrium and right ventricle",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Pulmonary veins and left atrium",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Left ventricle and aorta",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Right ventricle and pulmonary trunk",
+              "correct": true
+            }
+          ],
+          "explanation": "The pulmonic valve sits at the RV outflow tract-pulmonary trunk junction. When pulmonary pressures rise, the valve closes with greater force, creating a loud P2.",
+          "whyChain": [
+            {
+              "why": "Why does increased pulmonary pressure cause a louder P2?",
+              "answer": "Higher pressure means the valve leaflets close against greater pressure, producing a more forceful closure sound.",
+              "source": "OpenStax A&P 2e",
+              "sourceUrl": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 19.1",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ]
+        },
+        {
+          "id": "pe-anat-4",
+          "stem": "The right calf is 2.5 cm larger than the left.",
+          "question": "The deep veins of the calf include all EXCEPT:",
+          "hint": "Deep veins run alongside arteries. The great saphenous is superficial.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Peroneal veins",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Great saphenous vein",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Posterior tibial veins",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Anterior tibial veins",
+              "correct": false
+            }
+          ],
+          "explanation": "The great saphenous vein is SUPERFICIAL (medial leg). Deep calf veins include anterior tibial, posterior tibial, and peroneal veins. DVT typically occurs in deep veins.",
+          "whyChain": [
+            {
+              "why": "Why is the deep vs superficial distinction important?",
+              "answer": "Superficial thrombophlebitis rarely causes PE because superficial veins drain into deep veins at specific junctions. DVT has direct access to central circulation.",
+              "source": "StatPearls: DVT",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 20.5",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: DVT",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "\u26a1",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "pe-phys-1",
+          "stem": "ABG shows pH 7.48, pCO2 28, pO2 62.",
+          "question": "What is the PRIMARY mechanism causing hypoxemia in acute PE?",
+          "hint": "Think about blood flow to unventilated lung areas (or vice versa).",
+          "options": [
+            {
+              "id": "A",
+              "text": "Ventilation-perfusion (V/Q) mismatch",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Hypoventilation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Diffusion impairment",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Decreased inspired O2",
+              "correct": false
+            }
+          ],
+          "explanation": "PE causes V/Q mismatch: (1) Dead space\u2014occluded vessels have ventilation but no perfusion. (2) Shunt\u2014blood diverts to non-occluded areas, overwhelming those regions.",
+          "whyChain": [
+            {
+              "why": "Why is pCO2 LOW (28) rather than high?",
+              "answer": "Hypoxemia triggers hyperventilation. CO2 diffuses 20x more easily than O2, so tachypnea effectively blows off CO2 (respiratory alkalosis).",
+              "source": "OpenStax A&P 2e",
+              "sourceUrl": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 22.4-22.5",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: PE",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        },
+        {
+          "id": "pe-phys-2",
+          "stem": "Her heart rate is 112 bpm with mild respiratory distress.",
+          "question": "What is the PRIMARY stimulus driving her tachycardia?",
+          "hint": "When O2 drops, what receptors detect this?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Fever-induced metabolic demand",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Direct cardiac irritation from the clot",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Central chemoreceptor response to elevated CO2",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Peripheral chemoreceptor activation by hypoxemia",
+              "correct": true
+            }
+          ],
+          "explanation": "Hypoxemia (PaO2 62) stimulates peripheral chemoreceptors in carotid/aortic bodies, triggering sympathetic activation \u2192 tachycardia and tachypnea.",
+          "whyChain": [
+            {
+              "why": "Is her tachycardia helpful or harmful?",
+              "answer": "Initially helpful (increases CO to maintain O2 delivery), but sustained tachycardia increases myocardial O2 demand while the strained RV has compromised perfusion.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            }
+          ]
+        },
+        {
+          "id": "pe-phys-3",
+          "stem": "JVP is elevated at 10 cm H2O and RV:LV ratio is 1.3 on CT.",
+          "question": "What physiologic principle explains why increased PVR causes RV failure?",
+          "hint": "What happens to a thin-walled chamber if afterload suddenly increases?",
+          "options": [
+            {
+              "id": "A",
+              "text": "The tricuspid valve becomes incompetent",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Coronary spasm reduces RV blood supply",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Pulmonary venous congestion backs up into the right heart",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "The thin-walled RV cannot generate sufficient pressure against increased afterload",
+              "correct": true
+            }
+          ],
+          "explanation": "The RV is designed for low-pressure work. When PE increases PVR, the thin-walled RV cannot generate enough pressure. It dilates, fails, and backs up into systemic venous circulation (elevated JVP).",
+          "whyChain": [
+            {
+              "why": "How does RV failure lead to systemic hypotension?",
+              "answer": "RV dilation causes: (1) decreased RV output \u2192 decreased LV filling, (2) septal shift compresses LV, (3) decreased coronary perfusion. All reduce systemic CO.",
+              "source": "AHA 2011",
+              "sourceUrl": "https://www.heart.org/en/health-topics"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax Anatomy and Physiology 2e. OpenStax, Rice University, 2022. Accessed January 14, 2026.",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            }
+          ]
+        },
+        {
+          "id": "pe-phys-4",
+          "stem": "Her A-a gradient is elevated at 44 mmHg (normal <15).",
+          "question": "An elevated A-a gradient indicates:",
+          "hint": "A-a gradient measures the alveolar-arterial O2 difference.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Hypoxemia due to decreased inspired oxygen",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Hypoxemia due to hypoventilation alone",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Hypoxemia due to anemia",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Hypoxemia due to V/Q mismatch, shunt, or diffusion impairment",
+              "correct": true
+            }
+          ],
+          "explanation": "An elevated A-a gradient means the lungs aren't efficiently transferring O2 from alveoli to blood. This occurs with V/Q mismatch, shunt, or diffusion problems. Pure hypoventilation has normal A-a gradient.",
+          "whyChain": [
+            {
+              "why": "Why does hypoventilation have normal A-a gradient?",
+              "answer": "In hypoventilation, both alveolar AND arterial O2 drop proportionally. The gradient stays normal because lung gas exchange is intact.",
+              "source": "OpenStax A&P 2e",
+              "sourceUrl": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ],
+          "sources": [
+            {
+              "text": "OpenStax A&P 2e, Chapter 22.4",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            },
+            {
+              "text": "StatPearls: Hypoxia",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "\ud83d\udd2c",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "pe-patho-1",
+          "stem": "Multiple risk factors: recent flight, OCPs, obesity, PCOS, family history.",
+          "question": "Which Virchow's triad component do OCPs primarily affect?",
+          "hint": "Estrogen affects hepatic production of clotting factors.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Venous stasis",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Hypercoagulability",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "All three equally",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Endothelial injury",
+              "correct": false
+            }
+          ],
+          "explanation": "Estrogen increases hepatic synthesis of procoagulant factors (fibrinogen, II, VII, VIII, X) while decreasing anticoagulants (antithrombin, protein S). OCP use increases VTE risk 3-4 fold.",
+          "whyChain": [
+            {
+              "why": "How do her other risk factors contribute?",
+              "answer": "Flight = stasis; Obesity = stasis + inflammation + increased estrogen; PCOS = metabolic syndrome. Multiple factors are multiplicative, not additive.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-patho-2",
+          "stem": "She remained seated for most of a 14-hour flight.",
+          "question": "Prolonged immobility primarily contributes to VTE through:",
+          "hint": "When sitting for long periods, what happens to leg blood flow?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Tissue factor activation from muscle damage",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Direct endothelial damage from pressure",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Dehydration-induced hemoconcentration",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Venous stasis in lower extremities",
+              "correct": true
+            }
+          ],
+          "explanation": "The calf muscles act as a 'venous pump.' Prolonged sitting eliminates this, causing blood to pool in leg veins. Stasis allows activated clotting factors to accumulate locally.",
+          "whyChain": [
+            {
+              "why": "Why do clots start in venous valve pockets?",
+              "answer": "Valve pockets are natural stasis areas where blood eddies form. This creates a hypoxic microenvironment where endothelial cells become prothrombotic.",
+              "source": "PMC4644109",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-patho-3",
+          "stem": "D-dimer is markedly elevated at 4,850 ng/mL.",
+          "question": "D-dimer is a degradation product of:",
+          "hint": "D-dimer comes from fibrin that has been cross-linked.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Platelets",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Prothrombin",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Fibrinogen",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Cross-linked fibrin",
+              "correct": true
+            }
+          ],
+          "explanation": "D-dimer forms when plasmin cleaves cross-linked fibrin. It indicates both clot formation AND fibrinolysis. High sensitivity (~95%) but low specificity for VTE.",
+          "whyChain": [
+            {
+              "why": "Why is D-dimer used to RULE OUT rather than rule in?",
+              "answer": "High sensitivity (95-97%) means a negative test reliably excludes PE in low-risk patients. Low specificity (40-50%) means positive results need imaging confirmation.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-patho-4",
+          "stem": "Her mother had DVT at age 50 after hip surgery.",
+          "question": "Which inherited thrombophilia is MOST common in Caucasians?",
+          "hint": "This mutation affects factor V, making it resistant to protein C.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Antithrombin deficiency",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Prothrombin G20210A",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Factor V Leiden mutation",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Protein C deficiency",
+              "correct": false
+            }
+          ],
+          "explanation": "Factor V Leiden is present in 5% of Caucasians. It causes activated protein C resistance. Heterozygotes have 5-10x increased VTE risk.",
+          "whyChain": [
+            {
+              "why": "Should she be tested for thrombophilia?",
+              "answer": "Acute testing is unreliable. Testing may be considered 3+ months after treatment. However, results rarely change management.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-patho-5",
+          "stem": "Troponin I is elevated at 0.18 ng/mL.",
+          "question": "What is the mechanism of troponin elevation in acute PE?",
+          "hint": "Troponin indicates myocardial injury. What stress is the RV under?",
+          "options": [
+            {
+              "id": "A",
+              "text": "RV strain and microinfarction from increased wall stress",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Direct toxic effect of thrombus",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Left coronary artery thrombosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Systemic hypoxemia causing global hypoxia",
+              "correct": false
+            }
+          ],
+          "explanation": "PE increases RV afterload. The dilated RV has increased wall tension (Laplace) and O2 demand, while coronary perfusion may be compromised. This supply-demand mismatch causes RV microinfarction.",
+          "whyChain": [
+            {
+              "why": "What does troponin elevation mean for prognosis?",
+              "answer": "Elevated troponin predicts worse outcomes. Combined with RV dilation, it identifies 'intermediate-high risk' patients who may need more aggressive therapy.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "\ud83d\udc8a",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "pe-pharm-1",
+          "stem": "Initial anticoagulation is ordered for this intermediate-high risk PE.",
+          "question": "Which anticoagulant should be initiated FIRST?",
+          "hint": "Think about onset of action. Which class works immediately?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Aspirin",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Parenteral anticoagulant (heparin or LMWH)",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Warfarin alone",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "DOAC without lead-in",
+              "correct": false
+            }
+          ],
+          "explanation": "Parenteral anticoagulation provides immediate effect. Warfarin takes 5-7 days and initially creates a prothrombotic state. DOACs require lead-in dosing.",
+          "whyChain": [
+            {
+              "why": "When would you choose UFH over LMWH?",
+              "answer": "UFH is preferred when: (1) thrombolysis may be needed (short half-life, reversible), (2) renal failure, (3) extreme obesity, (4) hemodynamic instability.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-pharm-2",
+          "stem": "She receives UFH with target aPTT 60-80 seconds.",
+          "question": "UFH exerts its anticoagulant effect primarily by:",
+          "hint": "Heparin works through an intermediary natural anticoagulant.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Potentiating antithrombin III activity",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Activating protein C",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Blocking vitamin K-dependent factor synthesis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Directly inhibiting thrombin's active site",
+              "correct": false
+            }
+          ],
+          "explanation": "Heparin binds to antithrombin III, increasing AT's ability to inhibit thrombin and factor Xa by 1000-fold.",
+          "whyChain": [
+            {
+              "why": "Why monitor UFH with aPTT but not LMWH?",
+              "answer": "UFH has unpredictable pharmacokinetics due to variable protein binding. LMWH has more predictable absorption and response.",
+              "source": "StatPearls: Heparin",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Heparin",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            },
+            {
+              "text": "OpenStax A&P 2e",
+              "url": "https://openstax.org/details/books/anatomy-and-physiology-2e"
+            }
+          ]
+        },
+        {
+          "id": "pe-pharm-3",
+          "stem": "The team discusses whether thrombolysis is indicated.",
+          "question": "Systemic thrombolysis (alteplase) works by:",
+          "hint": "The body has a natural clot-dissolving system.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Inhibiting further thrombin generation",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Directly cleaving fibrin cross-links",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Activating protein C",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Converting plasminogen to plasmin, which degrades fibrin",
+              "correct": true
+            }
+          ],
+          "explanation": "Alteplase (tPA) converts plasminogen to plasmin, which degrades fibrin. Pharmacologic doses achieve faster lysis than endogenous fibrinolysis.",
+          "whyChain": [
+            {
+              "why": "What are the indications for thrombolysis in PE?",
+              "answer": "Primary: Massive PE with hemodynamic instability. Controversial: Submassive PE with RV dysfunction\u2014consider if deteriorating.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-pharm-4",
+          "stem": "Plans are made for long-term anticoagulation.",
+          "question": "For this provoked PE (flight + OCPs), recommended anticoagulation duration is:",
+          "hint": "Provoked VTEs have different recurrence rates than unprovoked.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Lifelong",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "3 months",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "6 months",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "1 month",
+              "correct": false
+            }
+          ],
+          "explanation": "For PE provoked by major transient risk factors, 3 months is standard. After removing provoking factors (discontinue OCPs), recurrence risk is ~3%/year.",
+          "whyChain": [
+            {
+              "why": "Should she continue OCPs after treatment?",
+              "answer": "No! Estrogen-containing contraception is contraindicated after VTE. She should use progestin-only methods, copper IUD, or barrier methods.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "\ud83e\udde0",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "pe-clin-1",
+          "stem": "Before imaging, you need to assess pre-test probability.",
+          "question": "Based on Wells criteria, how should this patient be classified?",
+          "hint": "Wells includes: DVT signs, HR, immobilization, previous VTE, hemoptysis, cancer, clinical gestalt.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Wells criteria cannot be applied",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "PE Unlikely: Only tachycardia qualifies",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Intermediate probability requiring D-dimer first",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "PE Likely (Wells >4): DVT signs (3) + HR>100 (1.5) + immobilization (1.5) = 6 pts",
+              "correct": true
+            }
+          ],
+          "explanation": "Wells score = 6 points (>4 = 'PE likely'). This warrants CT-PA without D-dimer. A negative D-dimer in high-probability patients does NOT rule out PE.",
+          "whyChain": [
+            {
+              "why": "Why not get D-dimer on everyone?",
+              "answer": "In high pre-test probability, negative D-dimer still leaves ~15-20% PE chance. D-dimer only rules out PE in LOW probability patients.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-clin-2",
+          "stem": "CT-PA confirms PE. She's stable but has RV dilation and elevated biomarkers.",
+          "question": "How should she be risk-stratified according to ESC guidelines?",
+          "hint": "ESC stratification depends on hemodynamics, RV dysfunction, AND biomarkers.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Intermediate-high risk (stable + RV dysfunction + elevated biomarkers)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "High risk (massive PE)",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Intermediate-low risk",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Low risk",
+              "correct": false
+            }
+          ],
+          "explanation": "ESC: High-risk = hemodynamic instability. Intermediate-high = stable + RV dysfunction + elevated biomarkers (BOTH). She has BOTH, making her intermediate-high risk.",
+          "whyChain": [
+            {
+              "why": "Why does intermediate-high risk matter?",
+              "answer": "~5% will deteriorate. These patients need ICU monitoring with rescue thrombolysis ready.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-clin-3",
+          "stem": "You're considering differential diagnoses.",
+          "question": "Which finding BEST distinguishes PE from acute coronary syndrome?",
+          "hint": "Both cause chest pain, tachycardia, and elevated troponin. What's different about the pain?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Elevated troponin rules out PE",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Tachycardia confirms ACS",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Pleuritic chest pain (worse with inspiration) favors PE",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Normal CXR excludes PE",
+              "correct": false
+            }
+          ],
+          "explanation": "Pleuritic pain (sharp, worse with breathing) suggests pleural involvement\u2014classic for PE. ACS causes pressure pain unrelated to respiration.",
+          "whyChain": [
+            {
+              "why": "Why is PE pain pleuritic?",
+              "answer": "Peripheral emboli cause pulmonary infarction near the pleural surface. Inflamed visceral pleura irritates parietal pleura, causing sharp, respiratory-variant pain.",
+              "source": "StatPearls: PE",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-clin-4",
+          "stem": "ECG shows S1Q3T3 and incomplete RBBB.",
+          "question": "What is the sensitivity of S1Q3T3 for PE?",
+          "hint": "This classic finding is often taught but think about how often it appears.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Moderate (50-60%)",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Low (10-20%); most PEs have non-specific findings or sinus tach only",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "High (>80%); absence rules out PE",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "100% sensitive but not specific",
+              "correct": false
+            }
+          ],
+          "explanation": "S1Q3T3 is present in only 10-20% of PE. The most common ECG finding is sinus tachycardia. A normal ECG does NOT rule out PE.",
+          "whyChain": [
+            {
+              "why": "What does S1Q3T3 represent anatomically?",
+              "answer": "Acute RV dilation rotates the heart clockwise. S1 = increased rightward forces in lead I. Q3T3 = rightward axis shift in lead III.",
+              "source": "StatPearls: ECG",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "\u26a0\ufe0f",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "pe-comp-1",
+          "stem": "Six hours after admission, her BP drops to 84/52 despite IV fluids.",
+          "question": "What is the MOST likely cause of deterioration?",
+          "hint": "She was intermediate-high risk. What happens as RV function declines?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Heparin-induced thrombocytopenia",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Sepsis from pulmonary infarction",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Progressive RV failure with cardiogenic shock",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Internal bleeding from anticoagulation",
+              "correct": false
+            }
+          ],
+          "explanation": "Intermediate-high risk patients can deteriorate. The RV fails progressively: decreased output \u2192 LV underfilling \u2192 hypotension \u2192 coronary hypoperfusion \u2192 worsening RV ischemia ('death spiral').",
+          "whyChain": [
+            {
+              "why": "What should be done now?",
+              "answer": "She now meets criteria for high-risk (massive) PE. Primary reperfusion therapy (thrombolysis, catheter-directed therapy, or surgical embolectomy) is indicated.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-comp-2",
+          "stem": "Patient asks about long-term consequences of PE.",
+          "question": "What is chronic thromboembolic pulmonary hypertension (CTEPH)?",
+          "hint": "Some clots don't fully resolve. What if they become organized fibrous tissue?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Chronic hypoxemia requiring oxygen",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Recurrent acute PE episodes",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Heart failure from LV dysfunction post-PE",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Persistent pulmonary hypertension from organized thrombi that didn't resolve",
+              "correct": true
+            }
+          ],
+          "explanation": "CTEPH occurs in 2-4% of PE survivors when thrombi organize into fibrous obstructions rather than dissolving. Treatment includes pulmonary endarterectomy.",
+          "whyChain": [
+            {
+              "why": "How do you screen for CTEPH?",
+              "answer": "Follow up at 3-6 months. Persistent dyspnea should prompt echo and V/Q scan (more sensitive than CT for chronic disease).",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-comp-3",
+          "stem": "Her platelet count drops from 268,000 to 95,000 on day 7 of heparin.",
+          "question": "What is the 4T score used to assess?",
+          "hint": "Thrombocytopenia + Timing + Thrombosis + oTher causes.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Severity of bleeding risk",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Need for platelet transfusion",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Duration of anticoagulation needed",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Probability of heparin-induced thrombocytopenia (HIT)",
+              "correct": true
+            }
+          ],
+          "explanation": "The 4T score assesses HIT probability. If intermediate/high score, stop heparin and switch to non-heparin anticoagulant.",
+          "whyChain": [
+            {
+              "why": "Why is HIT prothrombotic despite low platelets?",
+              "answer": "HIT antibodies ACTIVATE platelets, causing aggregation and thrombin generation. Platelets are consumed in clots. It's a hypercoagulable state, not bleeding.",
+              "source": "StatPearls: HIT",
+              "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK560551/"
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "\ud83d\udd17",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "pe-syn-1",
+          "stem": "Reflecting on the case from presentation to management.",
+          "question": "Which combination was MOST critical for intermediate-high risk classification?",
+          "hint": "What separates intermediate-high from intermediate-low in ESC framework?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pleuritic pain + tachycardia + hypoxemia",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Positive D-dimer + DVT + family history",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "S1Q3T3 on ECG + Westermark sign on CXR",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "RV:LV ratio >1 + elevated troponin + elevated BNP",
+              "correct": true
+            }
+          ],
+          "explanation": "ESC intermediate-high requires: (1) Hemodynamically stable, (2) RV dysfunction on imaging (RV:LV >1), AND (3) Elevated biomarkers. This identifies patients at ~5% deterioration risk.",
+          "whyChain": [
+            {
+              "why": "What's the key lesson about risk stratification?",
+              "answer": "Diagnosis is step 1. Risk stratification determines management: High = immediate reperfusion; Intermediate-high = ICU + rescue ready; Intermediate-low = ward; Low = consider outpatient.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-syn-2",
+          "stem": "Connecting pathophysiology to clinical presentation.",
+          "question": "Which cascade BEST explains the connection between her risk factors and current status?",
+          "hint": "Map each risk factor to Virchow's triad, then trace to RV strain.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Endothelial injury (OCPs) \u2192 platelet activation \u2192 DVT \u2192 hypoxemia \u2192 tachycardia",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Stasis (flight) + hypercoagulability (OCPs) \u2192 DVT \u2192 embolization \u2192 increased PVR \u2192 RV strain",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Hypercoagulability (flight) + stasis (OCPs) \u2192 spontaneous pulmonary thrombosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Stasis (obesity) \u2192 local hypoxia \u2192 tissue factor release \u2192 left heart failure",
+              "correct": false
+            }
+          ],
+          "explanation": "Correct cascade: Immobility = stasis, OCPs = hypercoagulability \u2192 DVT \u2192 embolization through IVC \u2192 mechanical obstruction increases PVR \u2192 thin-walled RV struggles \u2192 dilation and strain.",
+          "whyChain": [
+            {
+              "why": "What's the most important intervention to prevent recurrence?",
+              "answer": "Stop estrogen-containing contraception. With VTE history, estrogen is absolutely contraindicated. This removes a major hypercoagulable risk factor.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        },
+        {
+          "id": "pe-syn-3",
+          "stem": "Counseling the patient before discharge.",
+          "question": "Which statement about her prognosis is MOST accurate?",
+          "hint": "Consider provoked vs unprovoked VTE recurrence rates.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Once anticoagulation stops, she has no increased risk vs general population",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "After 3 months of anticoagulation with OCP discontinuation, annual recurrence risk is ~3%",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Recurrence risk is the same whether or not she stops OCPs",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "She requires lifelong anticoagulation given PE severity",
+              "correct": false
+            }
+          ],
+          "explanation": "Her PE was provoked by transient factors. After 3 months of anticoagulation and removing provoking factors, annual recurrence is ~3%\u2014lower than unprovoked (~8%) but still elevated.",
+          "whyChain": [
+            {
+              "why": "What follow-up does she need?",
+              "answer": "3-6 month follow-up for CTEPH screening if dyspnea persists, contraception counseling, consider thrombophilia testing, lifestyle modifications.",
+              "source": "ESC PE Guidelines 2019",
+              "sourceUrl": null
+            }
+          ],
+          "sources": [
+            {
+              "text": "StatPearls: Pulmonary Embolism. NCBI Bookshelf. Accessed January 14, 2026.",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430934/"
+            },
+            {
+              "text": "Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. Accessed January 14, 2026.",
+              "url": "https://academic.oup.com/eurheartj/article/41/4/543/5556136"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "GINA Asthma Guidelines",
+      "url": "https://ginasthma.org/gina-reports/",
+      "source": "GINA 2023"
+    },
+    {
+      "title": "GOLD COPD Guidelines",
+      "url": "https://goldcopd.org/gold-reports/",
+      "source": "GOLD 2023"
+    },
+    {
+      "title": "ARDS Berlin Definition",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22797452/",
+      "source": "JAMA 2012"
+    },
+    {
+      "title": "Pulmonary Function Tests - NCBI",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK482339/",
+      "source": "StatPearls"
+    }
+  ],
+  "platformLinks": [
+    {
+      "type": "adventure",
+      "text": "\ud83d\uddfa\ufe0f Pulmonary Embolism Adventure",
+      "url": "adventure-cases/pe-expanded-adventure.html"
+    },
+    {
+      "type": "deepDive",
+      "text": "\ud83d\udcda Pulmonary Embolism Deep Dive",
+      "url": "pe-deep-dive.json"
+    }
+  ],
+  "mcqs": [
+    {
+      "stem": "Which of the following is the MOST important initial step in evaluating a patient with suspected pulmonary embolism?",
+      "options": [
+        {
+          "text": "Obtain a thorough history and physical examination",
+          "correct": true,
+          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in pulmonary embolism. It guides all subsequent diagnostic and management decisions."
+        },
+        {
+          "text": "Order advanced imaging immediately",
+          "correct": false,
+          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively."
+        },
+        {
+          "text": "Start empiric treatment before evaluation",
+          "correct": false,
+          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable."
+        },
+        {
+          "text": "Consult a specialist before any workup",
+          "correct": false,
+          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings."
+        }
+      ]
+    },
+    {
+      "stem": "A patient presents with classic features of pulmonary embolism. Which clinical reasoning principle is MOST important in avoiding diagnostic error?",
+      "options": [
+        {
+          "text": "Search satisficing - stop looking after the first diagnosis",
+          "correct": false,
+          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses."
+        },
+        {
+          "text": "Consider the differential diagnosis systematically",
+          "correct": true,
+          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+        },
+        {
+          "text": "Rely primarily on pattern recognition",
+          "correct": false,
+          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases."
+        },
+        {
+          "text": "Order every available test to rule out all possibilities",
+          "correct": false,
+          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy."
+        }
+      ]
+    },
+    {
+      "stem": "When managing pulmonary embolism, which approach best supports evidence-based practice?",
+      "options": [
+        {
+          "text": "Follow institutional protocols regardless of patient factors",
+          "correct": false,
+          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances."
+        },
+        {
+          "text": "Base decisions solely on clinical experience",
+          "correct": false,
+          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence."
+        },
+        {
+          "text": "Integrate current best evidence with clinical expertise and patient values",
+          "correct": true,
+          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+        },
+        {
+          "text": "Always defer to the most recent published study",
+          "correct": false,
+          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence."
+        }
+      ]
+    },
+    {
+      "stem": "Pulmonary function tests show: FEV1 55% predicted, FVC 90% predicted, FEV1/FVC ratio 0.61, significant bronchodilator response (+15% FEV1). What is the interpretation?",
+      "options": [
+        {
+          "text": "Moderate obstructive lung disease with reversibility, consistent with asthma",
+          "correct": true,
+          "explanation": "FEV1/FVC <0.70 confirms obstruction. FEV1 50-79% predicted = moderate severity (GOLD/GINA). Significant bronchodilator response (\u226512% AND \u2265200mL improvement in FEV1) suggests reversible airway obstruction characteristic of asthma. COPD typically shows less reversibility."
+        },
+        {
+          "text": "Restrictive lung disease based on reduced FEV1",
+          "correct": false,
+          "explanation": "Restrictive disease shows reduced FVC with PRESERVED or elevated FEV1/FVC ratio (\u22650.70). Here, FVC is 90% (normal) and FEV1/FVC is 0.61 (reduced), indicating obstruction, not restriction."
+        },
+        {
+          "text": "Normal spirometry \u2014 FVC is within normal limits",
+          "correct": false,
+          "explanation": "Normal FVC does not rule out obstructive disease. The FEV1/FVC ratio of 0.61 (<0.70 threshold) definitively identifies airflow obstruction."
+        },
+        {
+          "text": "Fixed airway obstruction consistent with COPD",
+          "correct": false,
+          "explanation": "A 15% bronchodilator response indicates significant REVERSIBILITY, which argues against fixed obstruction. COPD typically shows <12% improvement post-bronchodilator."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "content": "Comprehensive review of Pulmonary Embolism."
+    },
+    {
+      "title": "Clinical Approach",
+      "content": "Systematic approach to Pulmonary Embolism including recognition, diagnosis, and management."
+    },
+    {
+      "title": "Key Points",
+      "content": "Evidence-based clinical pearls for Pulmonary Embolism."
+    }
+  ]
+}

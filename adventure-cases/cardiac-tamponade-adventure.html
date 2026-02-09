@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiac Tamponade - Clinical Reasoning Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); min-height: 100vh; color: #e2e8f0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 5px; color: #f56565; }
+        .subtitle { text-align: center; color: #a0aec0; margin-bottom: 20px; }
+        .scene-card { background: #2d3748; border-radius: 12px; padding: 25px; margin-bottom: 20px; border-left: 4px solid #f56565; }
+        .scene-title { color: #f56565; font-size: 1.3em; margin-bottom: 15px; }
+        .narrative { background: #1a202c; padding: 15px; border-radius: 8px; margin-bottom: 20px; line-height: 1.7; }
+        .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; background: #1a202c; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .vital-item { text-align: center; }
+        .vital-label { font-size: 0.8em; color: #a0aec0; }
+        .vital-value { font-size: 1.2em; font-weight: bold; }
+        .vital-value.critical { color: #f56565; }
+        .vital-value.warning { color: #f6e05e; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { background: #4a5568; padding: 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
+        .option:hover { background: #5a6578; border-color: #f56565; }
+        .option.selected { border-color: #48bb78; background: #2f4f3f; }
+        .option.wrong { border-color: #f56565; background: #4f2f2f; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #2f4f3f; border-left: 4px solid #48bb78; }
+        .feedback.incorrect { background: #4f2f2f; border-left: 4px solid #f56565; }
+        .feedback.teaching { background: #2f3f4f; border-left: 4px solid #4299e1; }
+        .next-btn { background: #f56565; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; margin-top: 15px; }
+        .next-btn:hover { background: #e53e3e; }
+        .next-btn:disabled { background: #4a5568; cursor: not-allowed; }
+        .hidden { display: none; }
+        .clinical-finding { background: #1a202c; padding: 10px 15px; border-radius: 6px; margin: 5px 0; display: flex; align-items: center; gap: 10px; }
+        .finding-icon { font-size: 1.3em; }
+        .pearl-box { background: linear-gradient(135deg, #744210 0%, #975a16 100%); padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .pearl-box h4 { color: #faf089; margin-bottom: 8px; }
+        .progress-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .progress-dot { width: 10px; height: 10px; border-radius: 50%; background: #4a5568; }
+        .progress-dot.active { background: #f56565; }
+        .progress-dot.completed { background: #48bb78; }
+        .ecg-finding, .echo-finding { background: #1a202c; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #9f7aea; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❤️ Cardiac Tamponade</h1>
+        <p class="subtitle">Clinical Reasoning Adventure</p>
+        
+        <div class="progress-bar">
+            <div class="progress-dot active" id="dot-0"></div>
+            <div class="progress-dot" id="dot-1"></div>
+            <div class="progress-dot" id="dot-2"></div>
+            <div class="progress-dot" id="dot-3"></div>
+        </div>
+
+        <!-- Scene 1: Initial Presentation -->
+        <div class="scene-card" id="scene-0">
+            <div class="scene-title">Scene 1: The ED Call</div>
+            <div class="narrative">
+                <p>You're the senior resident in the ICU when the ED calls: "We have a 58-year-old man with progressive dyspnea over the past week. He had CABG 10 days ago. He looks really sick - blood pressure is tanking."</p>
+                <p style="margin-top: 15px;">You head to the ED and find an anxious, diaphoretic man sitting bolt upright.</p>
+            </div>
+            
+            <div class="vitals">
+                <div class="vital-item"><div class="vital-label">HR</div><div class="vital-value warning">118</div></div>
+                <div class="vital-item"><div class="vital-label">BP</div><div class="vital-value critical">82/68</div></div>
+                <div class="vital-item"><div class="vital-label">RR</div><div class="vital-value warning">28</div></div>
+                <div class="vital-item"><div class="vital-label">SpO2</div><div class="vital-value">94% RA</div></div>
+                <div class="vital-item"><div class="vital-label">Temp</div><div class="vital-value">37.1°C</div></div>
+            </div>
+
+            <p><strong>On exam, you note:</strong></p>
+            <div class="clinical-finding"><span class="finding-icon">👁️</span> JVP elevated to the angle of the jaw</div>
+            <div class="clinical-finding"><span class="finding-icon">🫁</span> Lungs clear bilaterally</div>
+            <div class="clinical-finding"><span class="finding-icon">💓</span> Heart sounds distant but regular</div>
+            <div class="clinical-finding"><span class="finding-icon">🩹</span> Midline sternotomy incision healing well</div>
+
+            <p style="margin-top: 20px;"><strong>What is your primary differential diagnosis?</strong></p>
+            <div class="options" id="options-0">
+                <div class="option" onclick="selectOption(0, 0)">A. Cardiogenic shock from post-operative MI</div>
+                <div class="option" onclick="selectOption(0, 1)">B. Cardiac tamponade from post-operative pericardial effusion</div>
+                <div class="option" onclick="selectOption(0, 2)">C. Pulmonary embolism</div>
+                <div class="option" onclick="selectOption(0, 3)">D. Septic shock from sternal wound infection</div>
+            </div>
+            <div class="feedback" id="feedback-0"></div>
+            <button class="next-btn hidden" id="next-0" onclick="nextScene(1)">Continue →</button>
+        </div>
+
+        <!-- Scene 2: Beck's Triad -->
+        <div class="scene-card hidden" id="scene-1">
+            <div class="scene-title">Scene 2: Recognizing the Triad</div>
+            <div class="narrative">
+                <p>You immediately think of <strong>Beck's Triad</strong>. Let's review what you're seeing:</p>
+            </div>
+
+            <div class="pearl-box">
+                <h4>💡 Beck's Triad for Tamponade</h4>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Hypotension</strong> (BP 82/68) ✓</li>
+                    <li><strong>Elevated JVP</strong> (JVP at angle of jaw) ✓</li>
+                    <li><strong>Muffled heart sounds</strong> (distant sounds) ✓</li>
+                </ol>
+            </div>
+
+            <div class="narrative">
+                <p>You ask the nurse to get the blood pressure in both arms while you continue your exam. You notice something as the patient breathes...</p>
+            </div>
+
+            <p><strong>What physical finding would MOST support your diagnosis?</strong></p>
+            <div class="options" id="options-1">
+                <div class="option" onclick="selectOption(1, 0)">A. S3 gallop</div>
+                <div class="option" onclick="selectOption(1, 1)">B. Pulsus paradoxus >10 mmHg</div>
+                <div class="option" onclick="selectOption(1, 2)">C. Friction rub</div>
+                <div class="option" onclick="selectOption(1, 3)">D. Peripheral edema</div>
+            </div>
+            <div class="feedback" id="feedback-1"></div>
+            <button class="next-btn hidden" id="next-1" onclick="nextScene(2)">Continue →</button>
+        </div>
+
+        <!-- Scene 3: ECG and Echo -->
+        <div class="scene-card hidden" id="scene-2">
+            <div class="scene-title">Scene 3: Confirming the Diagnosis</div>
+            <div class="narrative">
+                <p>The nurse measured the blood pressure with respiration:</p>
+                <ul style="margin: 15px 0 15px 20px;">
+                    <li>Inspiration: BP 68/52</li>
+                    <li>Expiration: BP 84/66</li>
+                    <li><strong>Pulsus paradoxus = 16 mmHg</strong> (>10 mmHg is significant)</li>
+                </ul>
+                <p>You order an ECG and bedside echo:</p>
+            </div>
+
+            <div class="ecg-finding">
+                <strong>ECG Shows:</strong>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>Sinus tachycardia at 118 bpm</li>
+                    <li>Low voltage QRS complexes in limb leads</li>
+                    <li>Electrical alternans (beat-to-beat QRS amplitude variation)</li>
+                </ul>
+            </div>
+
+            <div class="echo-finding">
+                <strong>Bedside Echo Shows:</strong>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>Large circumferential pericardial effusion</li>
+                    <li>Right atrial collapse during systole</li>
+                    <li>Right ventricular diastolic collapse</li>
+                    <li>"Swinging heart" motion</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>Which echo finding is the EARLIEST sign of tamponade physiology?</strong></p>
+            <div class="options" id="options-2">
+                <div class="option" onclick="selectOption(2, 0)">A. Right atrial collapse in late diastole/early systole</div>
+                <div class="option" onclick="selectOption(2, 1)">B. Right ventricular diastolic collapse</div>
+                <div class="option" onclick="selectOption(2, 2)">C. IVC plethora without respiratory variation</div>
+                <div class="option" onclick="selectOption(2, 3)">D. Left atrial collapse</div>
+            </div>
+            <div class="feedback" id="feedback-2"></div>
+            <button class="next-btn hidden" id="next-2" onclick="nextScene(3)">Continue →</button>
+        </div>
+
+        <!-- Scene 4: Management -->
+        <div class="scene-card hidden" id="scene-3">
+            <div class="scene-title">Scene 4: Definitive Management</div>
+            <div class="narrative">
+                <p>You have confirmed cardiac tamponade. The patient's blood pressure drops further to 76/58. He's becoming more confused.</p>
+            </div>
+
+            <div class="pearl-box">
+                <h4>⚠️ Tamponade is a CLINICAL DIAGNOSIS</h4>
+                <p>The size of the effusion doesn't determine tamponade - it's the RATE of accumulation. A rapidly accumulating 200mL can cause tamponade, while a chronic 1L effusion may be tolerated.</p>
+            </div>
+
+            <p><strong>What is the definitive treatment?</strong></p>
+            <div class="options" id="options-3">
+                <div class="option" onclick="selectOption(3, 0)">A. IV fluids and inotropes while preparing for surgery</div>
+                <div class="option" onclick="selectOption(3, 1)">B. Emergent pericardiocentesis</div>
+                <div class="option" onclick="selectOption(3, 2)">C. Diuretics to reduce preload</div>
+                <div class="option" onclick="selectOption(3, 3)">D. Intubation and mechanical ventilation</div>
+            </div>
+            <div class="feedback" id="feedback-3"></div>
+            
+            <div class="pearl-box hidden" id="final-pearl">
+                <h4>🎯 Key Takeaways</h4>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Beck's Triad:</strong> Hypotension + JVD + muffled heart sounds</li>
+                    <li><strong>Pulsus paradoxus:</strong> SBP drop >10 mmHg with inspiration</li>
+                    <li><strong>ECG clues:</strong> Low voltage + electrical alternans</li>
+                    <li><strong>Echo findings:</strong> RA collapse (earliest) → RV diastolic collapse → IVC plethora</li>
+                    <li><strong>Treatment:</strong> Pericardiocentesis (avoid diuretics/inotropes alone!)</li>
+                    <li><strong>Bridge:</strong> IV fluids maintain preload until drainage</li>
+                </ul>
+            </div>
+            <button class="next-btn hidden" id="next-3" onclick="location.reload()">🔄 Restart Case</button>
+        </div>
+    </div>
+
+    <script>
+        const answers = [1, 1, 0, 1];
+        const feedbackData = [
+            {
+                correct: "Excellent! Post-operative pericardial effusion causing tamponade is the most likely diagnosis. The triad of hypotension, elevated JVP with CLEAR lungs (no pulmonary edema), and distant heart sounds points directly to tamponade. Post-CABG patients are at risk for bleeding into the pericardial space.",
+                incorrect: "Consider the combination: hypotension + markedly elevated JVP + CLEAR lungs + distant heart sounds. In cardiogenic shock from MI, you'd expect pulmonary edema. PE typically has clear lungs but wouldn't have this JVP pattern. Sepsis would show signs of infection.",
+                teaching: "The key to tamponade is understanding that fluid in the pericardial space prevents the heart from filling. This causes backup (elevated JVP) without pulmonary congestion (clear lungs) because the left heart can't fill either."
+            },
+            {
+                correct: "Pulsus paradoxus is pathognomonic! It's an exaggerated drop in systolic BP during inspiration (>10 mmHg). In tamponade, inspiration increases venous return to the right heart, but the constrained pericardium causes the septum to bow into the left ventricle, reducing LV output.",
+                incorrect: "While friction rub suggests pericarditis and S3 suggests heart failure, pulsus paradoxus is the key clinical finding in tamponade. Peripheral edema is non-specific.",
+                teaching: "To measure pulsus paradoxus: inflate BP cuff above systolic, slowly deflate, note pressure when you FIRST hear sounds (only in expiration), continue deflating until sounds are heard throughout cycle. The difference is the pulsus."
+            },
+            {
+                correct: "Right atrial collapse is the EARLIEST echo sign because the RA has the lowest pressure and thinnest wall. It collapses when pericardial pressure exceeds RA pressure during late diastole/early systole. RV collapse follows and is MORE SPECIFIC for tamponade.",
+                incorrect: "While all these findings can occur in tamponade, RA collapse appears first because the RA is a low-pressure, thin-walled chamber. RV diastolic collapse is more specific but appears later.",
+                teaching: "Echo sensitivity increases with collapse duration: >1/3 of cardiac cycle for RA collapse and >1/3 of diastole for RV collapse have higher specificity for hemodynamically significant tamponade."
+            },
+            {
+                correct: "Emergent pericardiocentesis is life-saving! Even removing 50mL can dramatically improve hemodynamics by reducing pericardial pressure. IV fluids can temporarily support preload while arranging drainage, but the DEFINITIVE treatment is removing the fluid.",
+                incorrect: "Diuretics are CONTRAINDICATED - they reduce preload which is the only thing maintaining cardiac output. Inotropes alone won't help if the heart can't fill. Positive pressure ventilation can worsen tamponade by decreasing venous return.",
+                teaching: "In post-surgical tamponade with hemodynamic compromise, surgical drainage (pericardial window) may be preferred over percutaneous approach due to clot burden. Call cardiac surgery STAT!"
+            }
+        ];
+
+        function selectOption(scene, choice) {
+            const options = document.querySelectorAll(`#options-${scene} .option`);
+            const feedback = document.getElementById(`feedback-${scene}`);
+            const nextBtn = document.getElementById(`next-${scene}`);
+            
+            if (feedback.classList.contains('show')) return;
+            
+            options.forEach((opt, idx) => {
+                if (idx === answers[scene]) opt.classList.add('selected');
+                else if (idx === choice) opt.classList.add('wrong');
+            });
+            
+            const isCorrect = choice === answers[scene];
+            feedback.innerHTML = `<strong>${isCorrect ? '✓ Correct!' : '✗ Not quite.'}</strong><br><br>${isCorrect ? feedbackData[scene].correct : feedbackData[scene].incorrect}<br><br><em>${feedbackData[scene].teaching}</em>`;
+            feedback.className = `feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            nextBtn.classList.remove('hidden');
+            document.getElementById(`dot-${scene}`).classList.add('completed');
+            
+            if (scene === 3) {
+                document.getElementById('final-pearl').classList.remove('hidden');
+            }
+        }
+
+        function nextScene(sceneNum) {
+            document.getElementById(`scene-${sceneNum - 1}`).classList.add('hidden');
+            document.getElementById(`scene-${sceneNum}`).classList.remove('hidden');
+            document.getElementById(`dot-${sceneNum}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Cardiac Tamponade"
+         data-key-points="clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/23247304/" target="_blank" style="color:#7dd3fc">AHA/ACC STEMI Guidelines</a> — Circulation 2013</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/35363499/" target="_blank" style="color:#7dd3fc">AHA/ACC Heart Failure Guidelines</a> — Circulation 2022</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/30686041/" target="_blank" style="color:#7dd3fc">ACC/AHA Atrial Fibrillation Guidelines</a> — Circulation 2019</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>
