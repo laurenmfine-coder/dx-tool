@@ -2,641 +2,1830 @@
 <html lang="en">
 <head>
 <script>
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+// Auth Guard - Check both localStorage and allow Supabase to handle auth
+(function(){
+    var AUTH_KEY = "reasondx-user";
+    var OLD_AUTH_KEY = "reasondx-user";
+    
+    function getAuthPath() {
+        var d = (location.pathname.match(/\//g) || []).length - 1;
+        var p = "";
+        for (var i = 0; i < d; i++) p += "../";
+        return p + "auth/login.html";
+    }
+    
+    function isAuth() {
+        try {
+            // Check new key
+            var u = localStorage.getItem(AUTH_KEY);
+            if (u) {
+                var j = JSON.parse(u);
+                if (j && j.email) return true;
+            }
+            // Check old key for backward compatibility
+            var oldU = localStorage.getItem(OLD_AUTH_KEY);
+            if (oldU) {
+                var oldJ = JSON.parse(oldU);
+                if (oldJ && oldJ.email && oldJ.name) return true;
+            }
+            // Check for Supabase session
+            var sbKey = Object.keys(localStorage).find(k => k.startsWith('sb-') && k.endsWith('-auth-token'));
+            if (sbKey && localStorage.getItem(sbKey)) return true;
+        } catch(e) {}
+        return false;
+    }
+    
+    if (!isAuth()) {
+        sessionStorage.setItem("reasondx-redirect", location.href);
+        location.replace(getAuthPath());
+    }
+})();
 </script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Board Prep | DxSuite — Step 1, Step 2 CK, Shelf Exams</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ReasonDx Board Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #059669; --primary-dark: #047857; --step1: #2563eb; --step2: #059669; --shelf: #d97706; --rotation: #7c3aed; }
+
+/* Multi-Theme Support */
+:root {
+    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
+    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
+    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
+    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
+    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
+}
+[data-theme="light"] {
+    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
+    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
+    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
+    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
+    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
+}
+[data-theme="high-contrast"] {
+    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
+    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
+    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
+    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
+    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
+    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
+    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
+}
+[data-theme="sepia"] {
+    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
+    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
+    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
+    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
+    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
+    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
+    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
+}
+body { transition: background 0.3s, color 0.3s; }
+
+        :root {
+            --bg: #fafafa; --bg-card: #ffffff; --bg-subtle: #f5f5f5;
+            --text: #1a1a1a; --text-secondary: #525252; --text-muted: #737373;
+            --border: #e5e5e5; --border-strong: #d4d4d4;
+            --accent: #1e40af; --accent-light: var(--primary-bg);
+            --correct: #166534; --correct-bg: #dcfce7;
+            --incorrect: #991b1b; --incorrect-bg: #fee2e2;
+            --warning: #92400e;
+            --radius: 4px; --radius-lg: 8px;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #18181b; }
-        
-        /* Navigation */
-        .nav { background: white; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-link { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
-        .nav-link:hover { color: #18181b; }
-        .nav-link.active { color: var(--primary); font-weight: 600; }
-        
-        /* Hero */
-        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); padding: 80px 24px; text-align: center; color: white; }
-        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
-        .hero h1 span { color: #4ade80; }
-        .hero p { font-size: 20px; opacity: 0.9; max-width: 700px; margin: 0 auto 24px; line-height: 1.6; }
-        .hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
-        .hero-stat { text-align: center; }
-        .hero-stat .num { font-size: 36px; font-weight: 800; color: #4ade80; }
-        .hero-stat .label { font-size: 14px; opacity: 0.8; margin-top: 4px; }
-        
-        /* Dual Value Proposition */
-        .dual-value { max-width: 1100px; margin: -40px auto 0; padding: 0 24px; position: relative; z-index: 10; }
-        .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        @media (max-width: 768px) { .value-grid { grid-template-columns: 1fr; } }
-        .value-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid; }
-        .value-card.board { border-color: var(--step1); }
-        .value-card.reasoning { border-color: var(--primary); }
-        .value-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-        .value-card p { color: #64748b; margin-bottom: 16px; line-height: 1.6; }
-        .value-card .features { list-style: none; }
-        .value-card .features li { padding: 8px 0; font-size: 14px; color: #475569; display: flex; gap: 10px; align-items: flex-start; }
-        .value-card .features li .icon { font-size: 16px; flex-shrink: 0; }
-        
-        /* Mode Cards */
-        .content { max-width: 1100px; margin: 0 auto; padding: 64px 24px; }
-        .section-header { text-align: center; margin-bottom: 48px; }
-        .section-header h2 { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
-        .section-header p { font-size: 18px; color: #64748b; }
-        
-        .modes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 64px; }
-        @media (max-width: 768px) { .modes-grid { grid-template-columns: 1fr; } }
-        
-        .mode-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
-        .mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
-        .mode-card.step1 { border-left: 6px solid var(--step1); }
-        .mode-card.step2 { border-left: 6px solid var(--step2); }
-        .mode-card.shelf { border-left: 6px solid var(--shelf); }
-        .mode-card.rotation { border-left: 6px solid var(--rotation); }
-        
-        .mode-icon { font-size: 48px; margin-bottom: 16px; }
-        .mode-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-        .mode-desc { color: #64748b; font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
-        .mode-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
-        .mode-stat { background: #f8fafc; padding: 8px 14px; border-radius: 10px; font-size: 13px; }
-        .mode-stat strong { color: #18181b; }
-        .mode-cta { display: inline-block; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; color: white; transition: all 0.2s; }
-        .mode-cta.step1 { background: var(--step1); }
-        .mode-cta.step2 { background: var(--step2); }
-        .mode-cta.shelf { background: var(--shelf); }
-        .mode-cta.rotation { background: var(--rotation); }
-        .mode-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-        
-        /* QBank Section */
-        .qbank-section { background: white; border-radius: 20px; padding: 48px 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 64px; }
-        .qbank-header { display: flex; align-items: center; gap: 24px; margin-bottom: 32px; }
-        .qbank-header h2 { font-size: 28px; font-weight: 700; }
-        .qbank-header p { color: #64748b; font-size: 16px; }
-        .qbank-controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
-        .qbank-btn { padding: 10px 20px; border-radius: 10px; border: 2px solid #e2e8f0; background: white; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-        .qbank-btn:hover { background: #f8fafc; }
-        .qbank-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .qbank-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        @media (max-width: 768px) { .qbank-options { grid-template-columns: 1fr; } }
-        .qbank-option { background: #f8fafc; border-radius: 12px; padding: 20px; text-align: center; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
-        .qbank-option:hover { border-color: var(--primary); background: #f0fdf4; }
-        .qbank-option .count { font-size: 28px; font-weight: 800; color: var(--primary); }
-        .qbank-option .name { font-size: 14px; color: #475569; margin-top: 4px; }
-        .qbank-start { display: block; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; background: var(--primary); color: white; border: none; margin-top: 24px; transition: all 0.2s; }
-        .qbank-start:hover { background: var(--primary-dark); }
-        
-        /* Shelf Exam Tracks */
-        .shelf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 64px; }
-        .shelf-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); border-top: 4px solid var(--shelf); transition: all 0.3s; cursor: pointer; }
-        .shelf-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
-        .shelf-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-        .shelf-info { color: #64748b; font-size: 14px; margin-bottom: 12px; }
-        .shelf-progress { background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
-        .shelf-progress-bar { height: 100%; background: var(--shelf); border-radius: 3px; transition: width 0.3s; }
-        .shelf-topics { display: flex; flex-wrap: wrap; gap: 6px; }
-        .shelf-topic { padding: 3px 10px; border-radius: 8px; font-size: 12px; background: #fef3c7; color: #92400e; }
-        
-        /* Study Plan Builder */
-        .plan-builder { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 20px; padding: 48px 40px; margin-bottom: 64px; border: 1px solid #93c5fd; }
-        .plan-builder h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #1e40af; }
-        .plan-builder p { color: #3b82f6; margin-bottom: 24px; }
-        .plan-form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 16px; align-items: end; }
-        @media (max-width: 768px) { .plan-form { grid-template-columns: 1fr; } }
-        .plan-form label { font-size: 14px; font-weight: 500; color: #1e40af; display: block; margin-bottom: 6px; }
-        .plan-form select, .plan-form input { padding: 12px 16px; border-radius: 10px; border: 2px solid #93c5fd; font-size: 14px; background: white; width: 100%; }
-        .plan-form button { padding: 12px 24px; border-radius: 10px; background: #2563eb; color: white; border: none; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
-        .plan-form button:hover { background: #1d4ed8; }
-        
-        /* Rotation Companion */
-        .rotation-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-        .rotation-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); border-left: 6px solid var(--rotation); transition: all 0.3s; cursor: pointer; }
-        .rotation-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
-        .rotation-icon { font-size: 36px; margin-bottom: 12px; }
-        .rotation-name { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-        .rotation-detail { color: #64748b; font-size: 14px; }
-        .rotation-detail strong { color: #18181b; }
-        
-        /* Differentiator */
-        .differentiator { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 20px; padding: 48px 40px; margin-top: 64px; border: 1px solid #a7f3d0; text-align: center; }
-        .differentiator h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; color: #166534; }
-        .differentiator p { color: #15803d; font-size: 16px; max-width: 700px; margin: 0 auto 32px; line-height: 1.6; }
-        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
-        @media (max-width: 768px) { .diff-grid { grid-template-columns: 1fr; } }
-        .diff-item { background: white; border-radius: 16px; padding: 24px; }
-        .diff-item .icon { font-size: 32px; margin-bottom: 12px; }
-        .diff-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-        .diff-item p { color: #475569; font-size: 14px; line-height: 1.5; }
-        
-        .footer { text-align: center; padding: 48px 24px; color: #64748b; font-size: 14px; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .serif { font-family: 'Source Serif 4', Georgia, serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .header-left { display: flex; align-items: center; gap: 24px; }
+        .logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-mark { width: 24px; height: 24px; background: var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
+        .header-center { display: flex; align-items: center; gap: 32px; }
+        .timer { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-secondary); }
+        .timer.warning { color: var(--warning); }
+        .timer.danger { color: var(--incorrect); }
+        .progress-info { display: flex; align-items: center; gap: 12px; }
+        .progress-text { font-size: 13px; color: var(--text-muted); }
+        .progress-bar { width: 160px; height: 4px; background: var(--bg-subtle); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+
+        .btn { padding: 8px 14px; font-size: 13px; font-weight: 500; border-radius: var(--radius); cursor: pointer; transition: all 0.15s; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .btn:hover { background: var(--bg-subtle); border-color: var(--border-strong); color: var(--text); }
+        .btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+        .btn-primary:hover { background: #1e3a8a; border-color: #1e3a8a; color: white; }
+        .btn-lg { padding: 12px 20px; font-size: 14px; }
+        .btn-flag.active { background: #fef3c7; border-color: var(--warning); color: var(--warning); }
+
+        .main { display: flex; min-height: calc(100vh - 56px); }
+        .sidebar { width: 240px; background: var(--bg-card); border-right: 1px solid var(--border); padding: 20px 14px; flex-shrink: 0; overflow-y: auto; max-height: calc(100vh - 56px); }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .question-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+        .q-num { position: relative; aspect-ratio: 1; background: var(--bg-subtle); border: 1px solid transparent; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text-muted); cursor: pointer; }
+        .q-num:hover { background: #eee; }
+        .q-num.current { background: var(--accent); color: white; }
+        .q-num.answered { border-color: var(--border-strong); color: var(--text-secondary); }
+        .q-num.flagged::after { content: ''; position: absolute; top: 2px; right: 2px; width: 4px; height: 4px; background: var(--warning); border-radius: 50%; }
+        .q-num.correct { background: var(--correct-bg); color: var(--correct); }
+        .q-num.incorrect { background: var(--incorrect-bg); color: var(--incorrect); }
+
+        .stats-list { display: flex; flex-direction: column; gap: 6px; }
+        .stat-row { display: flex; justify-content: space-between; font-size: 12px; }
+        .stat-label { color: var(--text-muted); }
+        .stat-value { font-weight: 500; }
+        .stat-value.correct { color: var(--correct); }
+        .stat-value.flagged { color: var(--warning); }
+
+        .filter-group { margin-bottom: 16px; }
+        .filter-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+        .filter-select { width: 100%; padding: 6px 8px; font-size: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
+        .gap-row { display:flex; align-items:center; gap:6px; font-size:11px; }
+        .gap-label { width:100px; text-align:right; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .gap-bar-bg { flex:1; height:14px; background:var(--bg-subtle); border-radius:3px; overflow:hidden; position:relative; }
+        .gap-bar-fill { height:100%; border-radius:3px; transition:width .3s; }
+        .gap-pct { width:36px; font-weight:600; font-family:'JetBrains Mono',monospace; font-size:10px; }
+        .gap-count { width:40px; font-size:10px; color:var(--text-muted); }
+        .crt-cross-link { display:inline-flex; align-items:center; gap:6px; padding:8px 12px; background:rgba(139,92,246,.1); border:1px solid rgba(139,92,246,.3); border-radius:8px; text-decoration:none; color:var(--text); font-size:12px; margin:4px; transition:all .2s; }
+        .crt-cross-link:hover { border-color:rgba(139,92,246,.6); background:rgba(139,92,246,.2); }
+
+        .content { flex: 1; padding: 32px 40px; max-width: 800px; overflow-y: auto; }
+        .question-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 12px; flex-wrap: wrap; }
+        .question-id { font-weight: 600; color: var(--text-muted); }
+        .tag { padding: 2px 8px; background: var(--bg-subtle); border-radius: 3px; font-size: 11px; font-weight: 500; color: var(--text-secondary); }
+
+        .vignette { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; line-height: 1.8; margin-bottom: 24px; color: var(--text); }
+        .vignette p { margin-bottom: 12px; }
+        .clinical-data { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text-secondary); background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius); margin: 14px 0; }
+        .clinical-data .label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
+        .data-row { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+        .data-item { display: flex; gap: 4px; }
+        .data-name { color: var(--text-muted); }
+        .data-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+        .data-value.abnormal { color: var(--incorrect); font-weight: 500; }
+
+        .question-stem { font-size: 14px; font-weight: 500; margin-bottom: 16px; line-height: 1.5; }
+        .options { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+        .option { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all 0.1s; }
+        .option:hover:not(.disabled) { border-color: var(--border-strong); background: var(--bg-subtle); }
+        .option.selected { border-color: var(--accent); background: var(--accent-light); }
+        .option.correct { border-color: var(--correct); background: var(--correct-bg); }
+        .option.incorrect { border-color: var(--incorrect); background: var(--incorrect-bg); }
+        .option.disabled { cursor: default; }
+        .option.show-correct { border-color: var(--correct); background: var(--correct-bg); }
+        .option-letter { width: 22px; height: 22px; border: 1px solid var(--border-strong); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text-muted); flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter, .option.show-correct .option-letter { background: var(--correct); border-color: var(--correct); color: white; }
+        .option.incorrect .option-letter { background: var(--incorrect); border-color: var(--incorrect); color: white; }
+        .option-text { font-size: 13px; flex: 1; color: var(--text); }
+        .option-stats { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+        .stat-bar-mini { width: 60px; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; }
+        .stat-bar-fill { height: 100%; background: var(--text-muted); }
+        .option.correct .stat-bar-fill, .option.show-correct .stat-bar-fill { background: var(--correct); }
+        .stat-percent { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); }
+
+        .explanation { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); overflow: hidden; margin-bottom: 20px; display: none; }
+        .explanation.show { display: block; }
+        .explanation-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .explanation-header.correct { background: var(--correct-bg); }
+        .explanation-header.incorrect { background: var(--incorrect-bg); }
+        .result-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .result-icon.correct { background: var(--correct); color: white; }
+        .result-icon.incorrect { background: var(--incorrect); color: white; }
+        .result-text { font-size: 13px; font-weight: 600; }
+        .result-text.correct { color: var(--correct); }
+        .result-text.incorrect { color: var(--incorrect); }
+
+        .explanation-nav { display: flex; border-bottom: 1px solid var(--border); background: var(--bg-subtle); overflow-x: auto; }
+        .exp-tab { padding: 10px 16px; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+        .exp-tab:hover { color: var(--text-secondary); }
+        .exp-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: var(--bg-card); }
+
+        .explanation-body { padding: 20px; }
+        .exp-panel { display: none; }
+        .exp-panel.active { display: block; }
+
+        .section { margin-bottom: 20px; }
+        .section:last-child { margin-bottom: 0; }
+        .section-title { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .section-text { font-size: 13px; color: var(--text); line-height: 1.7; }
+        .section-text strong { font-weight: 600; }
+
+        .key-points { display: flex; flex-direction: column; gap: 6px; }
+        .key-point { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.5; }
+        .key-point::before { content: '→'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+        .evidence-card { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-top: 14px; }
+        .evidence-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+        .evidence-cite { font-size: 11px; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
+        .evidence-points { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-left: 14px; }
+        .evidence-points li { margin-bottom: 3px; }
+        .evidence-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--accent); text-decoration: none; margin-top: 10px; }
+        .evidence-link:hover { text-decoration: underline; }
+
+        .illness-script { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .script-item { background: var(--bg-subtle); border-radius: var(--radius); padding: 12px; }
+        .script-item.full { grid-column: span 2; }
+        .script-label { font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+        .script-value { font-size: 12px; color: var(--text); line-height: 1.5; }
+
+        .wrong-list { display: flex; flex-direction: column; gap: 10px; }
+        .wrong-item { padding: 12px; background: var(--bg-subtle); border-radius: var(--radius); border-left: 3px solid var(--border-strong); }
+        .wrong-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+        .wrong-letter { font-size: 11px; font-weight: 600; color: var(--text-muted); }
+        .wrong-name { font-size: 12px; color: var(--text-secondary); }
+        .wrong-explanation { font-size: 12px; color: var(--text); line-height: 1.5; }
+
+        .resources-section { margin-bottom: 16px; }
+        .resources-title { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .resource-list { display: flex; flex-direction: column; gap: 8px; }
+        .resource-link { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: all 0.1s; }
+        .resource-link:hover { border-color: var(--accent); background: var(--accent-light); }
+        .resource-icon { width: 32px; height: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .resource-info { flex: 1; }
+        .resource-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
+        .resource-desc { font-size: 11px; color: var(--text-muted); }
+        .resource-arrow { color: var(--text-muted); font-size: 12px; }
+        .resource-link:hover .resource-arrow { color: var(--accent); }
+
+        .action-bar { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border); }
+        .action-left, .action-right { display: flex; gap: 6px; }
+
+        .start-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px; }
+        .start-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; max-width: 520px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .start-header { text-align: center; margin-bottom: 28px; }
+        .start-logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; margin: 0 auto 16px; }
+        .start-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+        .start-subtitle { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .start-stats { display: flex; justify-content: center; gap: 24px; margin: 20px 0; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); }
+        .start-stat { text-align: center; }
+        .start-stat-value { font-size: 20px; font-weight: 600; color: var(--accent); }
+        .start-stat-label { font-size: 11px; color: var(--text-muted); }
+        .mode-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 24px; }
+        .mode-option { padding: 14px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all 0.1s; }
+        .mode-option:hover { border-color: var(--border-strong); }
+        .mode-option.selected { border-color: var(--accent); background: var(--accent-light); }
+        .mode-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+        .mode-desc { font-size: 11px; color: var(--text-muted); }
+        .settings-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+        .setting-row { display: flex; justify-content: space-between; align-items: center; }
+        .setting-label { font-size: 12px; color: var(--text-secondary); }
+        .setting-select { padding: 6px 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; min-width: 160px; }
+        .btn-start { width: 100%; justify-content: center; }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.2s; }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        .modal { background: var(--bg-card); border-radius: var(--radius-lg); width: 90%; max-width: 440px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .modal-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        .modal-title { font-size: 15px; font-weight: 600; }
+        .modal-close { width: 24px; height: 24px; background: transparent; border: none; color: var(--text-muted); cursor: pointer; border-radius: var(--radius); font-size: 16px; }
+        .modal-close:hover { background: var(--bg-subtle); }
+        .modal-body { padding: 20px; }
+        .results-score { text-align: center; padding: 20px 0; }
+        .score-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 600; color: var(--accent); }
+        .score-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+        .result-card { background: var(--bg-subtle); border-radius: var(--radius); padding: 14px; text-align: center; }
+        .result-value { font-size: 18px; font-weight: 600; }
+        .result-value.correct { color: var(--correct); }
+        .result-value.incorrect { color: var(--incorrect); }
+        .result-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+        .modal-actions .btn { flex: 1; justify-content: center; }
+
+        .loading { display: flex; align-items: center; justify-content: center; padding: 60px; color: var(--text-muted); }
+
+        /* Adaptive Tutor Chat Panel */
+        .tutor-panel { position: fixed; right: -420px; top: 56px; width: 400px; height: calc(100vh - 56px); background: var(--bg-card); border-left: 1px solid var(--border); box-shadow: -4px 0 20px rgba(0,0,0,0.1); z-index: 200; display: flex; flex-direction: column; transition: right 0.3s ease; }
+        .tutor-panel.open { right: 0; }
+        .tutor-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--accent-light); }
+        .tutor-title { font-size: 13px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+        .tutor-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-muted); padding: 4px; }
+        .tutor-context { padding: 10px 18px; font-size: 11px; color: var(--text-muted); border-bottom: 1px solid var(--border); background: var(--bg-subtle); }
+        .tutor-context .context-tag { display: inline-block; padding: 2px 6px; background: var(--danger-light); border-radius: 3px; font-size: 10px; color: var(--incorrect); margin-right: 4px; }
+        .tutor-messages { flex: 1; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+        .tutor-msg { max-width: 90%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+        .tutor-msg.assistant { background: var(--bg-subtle); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .tutor-msg.user { background: var(--accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .tutor-msg.loading { color: var(--text-muted); font-style: italic; }
+        .tutor-input-area { padding: 12px 18px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+        .tutor-input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; font-family: inherit; resize: none; background: var(--bg-card); color: var(--text); }
+        .tutor-input:focus { outline: none; border-color: var(--accent); }
+        .tutor-send { padding: 10px 14px; background: var(--accent); color: white; border: none; border-radius: var(--radius); font-size: 13px; font-weight: 500; cursor: pointer; }
+        .tutor-send:hover { opacity: 0.9; }
+        .tutor-send:disabled { opacity: 0.5; cursor: default; }
+        .tutor-trigger { display: none; margin-top: 12px; padding: 10px 16px; background: var(--accent-light); border: 1px solid var(--accent); border-radius: var(--radius); cursor: pointer; font-size: 12px; color: var(--accent); font-weight: 500; transition: all 0.15s; }
+        .tutor-trigger:hover { background: var(--accent); color: white; }
+        .tutor-trigger.show { display: inline-flex; align-items: center; gap: 6px; }
+
+        @media (max-width: 900px) { .sidebar { display: none; } .content { padding: 24px; max-width: 100%; } .header { padding: 0 16px; } .tutor-panel { width: 100%; right: -100%; } }
+        @media (max-width: 600px) { .mode-options { grid-template-columns: 1fr; } .illness-script { grid-template-columns: 1fr; } .script-item.full { grid-column: span 1; } .start-card { padding: 28px 20px; } .results-grid { grid-template-columns: repeat(2, 1fr); } }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
     </style>
+        <link rel="stylesheet" href="dx-case-nav.css">
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand">🩺 DxSuite</a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="board-prep.html" class="nav-link active">Board Prep</a>
-                <a href="reasonlab.html" class="nav-link" style="color: #7c3aed;">ReasonLab</a>
-                <a href="reasonlab.html" class="nav-link">ReasonLab</a>
-                <a href="learn-hub.html" class="nav-link">Learn</a>
-                <a href="crt-hub.html" class="nav-link">Reasoning</a>
-                <a href="quiz-engine.html" class="nav-link">Quiz</a>
-                <a href="tools/learning-dashboard.html" class="nav-link">My Progress</a>
+
+<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
+    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
+    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
+    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
+    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
+</div>
+
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../index.html#mechanism" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <header class="hero">
-        <h1>Board Prep That <span>Teaches You to Think</span></h1>
-        <p>Other QBanks tell you the right answer. DxSuite teaches you how to reason your way there — so you can handle questions you've never seen before.</p>
-        <div class="hero-stats">
-            <div class="hero-stat"><div class="num">2,000+</div><div class="label">Board-Style MCQs</div></div>
-            <div class="hero-stat"><div class="num">244</div><div class="label">Topics</div></div>
-            <div class="hero-stat"><div class="num">323</div><div class="label">Clinical Cases</div></div>
-            <div class="hero-stat"><div class="num">7</div><div class="label">Shelf Exam Tracks</div></div>
-        </div>
-    </header>
-
-    <!-- DUAL VALUE PROPOSITION -->
-    <div class="dual-value">
-        <div class="value-grid">
-            <div class="value-card board">
-                <h2>📝 Board Prep</h2>
-                <p>Targeted question practice organized by exam, subject, and difficulty. Timed blocks, score tracking, and analytics.</p>
-                <ul class="features">
-                    <li><span class="icon">🎯</span> QBank mode with timed blocks of 40 questions</li>
-                    <li><span class="icon">📊</span> Performance analytics by subject and organ system</li>
-                    <li><span class="icon">📋</span> Shelf exam tracks aligned to each clerkship</li>
-                    <li><span class="icon">📈</span> Spaced repetition targets your weak areas</li>
-                </ul>
+    <div id="startScreen" class="start-screen">
+        <div class="start-card">
+            <div class="start-header">
+                <div class="start-logo">Dx</div>
+                <h1 class="start-title">Board Prep</h1>
+                <p class="start-subtitle">Evidence-based Board-style questions with guideline citations and clinical reasoning.</p>
             </div>
-            <div class="value-card reasoning">
-                <h2>🧠 Clinical Reasoning</h2>
-                <p>Understand the "why" behind every answer. Interactive cases that build the diagnostic thinking patterns examiners test for.</p>
-                <ul class="features">
-                    <li><span class="icon">⚙️</span> MechanismDx — visualize pathophysiology</li>
-                    <li><span class="icon">🩺</span> ReasonDx — work through full clinical cases</li>
-                    <li><span class="icon">🗺️</span> CaseFrame maps — see how diagnoses connect</li>
-                    <li><span class="icon">🤖</span> AI Tutor explains your reasoning errors</li>
-                </ul>
+            <div class="start-stats">
+                <div class="start-stat"><div class="start-stat-value" id="totalQuestions">--</div><div class="start-stat-label">Questions</div></div>
+                <div class="start-stat"><div class="start-stat-value" id="totalSystems">--</div><div class="start-stat-label">Systems</div></div>
+                <div class="start-stat"><div class="start-stat-value" id="totalGuidelines">--</div><div class="start-stat-label">Guidelines</div></div>
+            </div>
+            <div class="mode-options">
+                <div class="mode-option selected" data-mode="timed"><div class="mode-name">Timed Block</div><div class="mode-desc">40 questions · 60 min</div></div>
+                <div class="mode-option" data-mode="tutor"><div class="mode-name">Tutor Mode</div><div class="mode-desc">Untimed · Immediate feedback</div></div>
+                <div class="mode-option" data-mode="quick"><div class="mode-name">Quick Practice</div><div class="mode-desc">10 questions · 15 min</div></div>
+                <div class="mode-option" data-mode="review"><div class="mode-name">Review Missed</div><div class="mode-desc">Previously incorrect</div></div>
+                <div class="mode-option" data-mode="custom"><div class="mode-name">Custom Block</div><div class="mode-desc">Choose # of questions</div></div>
+                <div class="mode-option" data-mode="weak"><div class="mode-name">Focus: Weak Areas</div><div class="mode-desc">Auto-targets low scores</div></div>
+            </div>
+            <div class="settings-group">
+                <div class="setting-row"><span class="setting-label">System</span><select class="setting-select" id="systemSelect"><option value="all">All Systems</option></select></div>
+                <div class="setting-row"><span class="setting-label">Question Type</span><select class="setting-select" id="typeSelect"><option value="all">All Types</option><option value="Diagnosis">Diagnosis</option><option value="Next Step">Next Step</option><option value="Workup">Workup</option></select></div>
+                <div class="setting-row"><span class="setting-label">Difficulty</span><select class="setting-select" id="difficultySelect"><option value="all">All Difficulties</option><option value="foundational">Foundational</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
+            </div>
+            <div id="customCountSection" class="settings-group" style="display:none;">
+                <div class="setting-row"><span class="setting-label">Questions</span><div style="display:flex;align-items:center;gap:8px;"><input type="range" id="customCount" min="5" max="100" value="20" oninput="document.getElementById('customCountVal').textContent=this.value" style="flex:1;"><span id="customCountVal" style="font-weight:600;min-width:28px;text-align:center;">20</span></div></div>
+                <div class="setting-row"><span class="setting-label">Timer</span><select class="setting-select" id="customTimer"><option value="none">No Timer</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></div>
+            </div>
+            <div id="knowledgeGap" class="settings-group" style="margin-top:12px;">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:600;">YOUR PERFORMANCE BY SYSTEM</div>
+                <div id="gapChart" style="display:grid;grid-template-columns:1fr;gap:4px;max-height:240px;overflow-y:auto;"></div>
+                <div id="gapEmpty" style="font-size:12px;color:var(--text-muted);padding:12px;text-align:center;">Complete a session to see your performance breakdown.</div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-start" onclick="startQuiz()" id="startBtn" disabled>Loading Questions...</button>
+        </div>
+    </div>
+
+    <div id="quizScreen" style="display: none;">
+        <header class="header">
+            <div class="header-left"><a href="../index.html" class="logo"><div class="logo-mark">Dx</div><span>Board Prep</span></a></div>
+            <div class="header-center">
+                <div class="timer" id="timer"><span id="timerDisplay">60:00</span></div>
+                <div class="progress-info"><span class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">40</span></span><div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 2.5%"></div></div></div>
+            </div>
+            <div class="header-right"><button class="btn" onclick="endQuiz()">End Session</button></div>
+        </header>
+        <main class="main">
+            <aside class="sidebar">
+                <div class="sidebar-section"><div class="sidebar-label">Questions</div><div class="question-grid" id="questionGrid"></div></div>
+                <div class="sidebar-section"><div class="sidebar-label">Progress</div><div class="stats-list"><div class="stat-row"><span class="stat-label">Answered</span><span class="stat-value" id="answeredCount">0 / 40</span></div><div class="stat-row"><span class="stat-label">Correct</span><span class="stat-value correct" id="correctCount">—</span></div><div class="stat-row"><span class="stat-label">Flagged</span><span class="stat-value flagged" id="flaggedCount">0</span></div></div></div>
+            </aside>
+            <div class="content">
+                <div class="question-meta"><span class="question-id">Question <span id="qNum">1</span></span><span class="tag" id="qType">Diagnosis</span><span class="tag" id="qSystem">Pulmonary</span><span class="tag" id="qDifficulty">Intermediate</span></div>
+                <div class="vignette" id="vignette"></div>
+                <div class="question-stem" id="questionStem"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="explanation" id="explanationPanel">
+                    <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div><button class="tutor-trigger" id="tutorTriggerBtn">🧠 Get Help From Tutor</button></div>
+                    <!-- Unified Navigation -->
+                    <div class="explanation-nav">
+                        <div class="exp-tab active" data-tab="answer">Answer</div>
+                        <div class="exp-tab" data-tab="script">Illness Script</div>
+                        <div class="exp-tab" data-tab="distractors">Distractors</div>
+                        <div class="exp-tab" data-tab="resources">Resources</div>
+                    </div>
+    <div class="explanation-body">
+                        <div class="exp-panel active" id="panelAnswer"></div>
+                        <div class="exp-panel" id="panelScript"></div>
+                        <div class="exp-panel" id="panelDistractors"></div>
+                        <div class="exp-panel" id="panelResources"></div>
+                    </div>
+                </div>
+                <div class="action-bar">
+                    <div class="action-left"><button class="btn btn-flag" id="flagBtn" onclick="toggleFlag()">Flag for Review</button></div>
+                    <div class="action-right"><button class="btn" onclick="prevQuestion()" id="prevBtn">← Previous</button><button class="btn btn-primary" onclick="submitOrNext()" id="submitBtn">Submit</button></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal">
+            <div class="modal-header"><h2 class="modal-title">Session Complete</h2><button class="modal-close" onclick="closeResults()">×</button></div>
+            <div class="modal-body">
+                <div class="results-score"><div class="score-number" id="finalScore">78%</div><div class="score-label">Overall Score</div></div>
+                <div class="results-grid"><div class="result-card"><div class="result-value correct" id="totalCorrect">31</div><div class="result-label">Correct</div></div><div class="result-card"><div class="result-value incorrect" id="totalIncorrect">9</div><div class="result-label">Incorrect</div></div><div class="result-card"><div class="result-value" id="timeSpent">45:23</div><div class="result-label">Time</div></div></div>
+                <div class="modal-actions"><button class="btn" onclick="reviewQuestions()">Review Answers</button><button class="btn btn-primary" onclick="startNewBlock()">New Session</button></div>
             </div>
         </div>
     </div>
 
-    <main class="content">
-        <!-- STUDY MODES -->
-        <div class="section-header">
-            <h2>Choose Your Study Mode</h2>
-            <p>Four ways to prepare, all building on the same deep content</p>
+    <!-- Adaptive Tutor Chat Panel -->
+    <div class="tutor-panel" id="tutorPanel">
+        <div class="tutor-header">
+            <div class="tutor-title">🧠 Adaptive Tutor</div>
+            <button class="tutor-close" onclick="closeTutor()">×</button>
         </div>
-
-        <div class="modes-grid">
-            <!-- QBank Mode -->
-            <div class="mode-card step1" onclick="scrollToSection('qbank')">
-                <div class="mode-icon">🎯</div>
-                <div class="mode-title">QBank Mode</div>
-                <div class="mode-desc">Timed blocks of board-style MCQs organized by subject, system, or random mix. Full explanations with reasoning pathways for every question.</div>
-                <div class="mode-stats">
-                    <div class="mode-stat"><strong>2,000+</strong> MCQs</div>
-                    <div class="mode-stat"><strong>40-Q</strong> timed blocks</div>
-                    <div class="mode-stat"><strong>26</strong> subjects</div>
-                </div>
-                <a href="#qbank" class="mode-cta step1">Start QBank →</a>
-            </div>
-
-            <!-- Shelf Exam Tracks -->
-            <div class="mode-card shelf" onclick="scrollToSection('shelf')">
-                <div class="mode-icon">📋</div>
-                <div class="mode-title">Shelf Exam Prep</div>
-                <div class="mode-desc">Curated tracks for each clerkship shelf exam. Content filtered to exactly what you need for Surgery, Medicine, Peds, OB/GYN, Psych, Neuro, and FM.</div>
-                <div class="mode-stats">
-                    <div class="mode-stat"><strong>7</strong> shelf tracks</div>
-                    <div class="mode-stat"><strong>78</strong> IM topics</div>
-                    <div class="mode-stat"><strong>58</strong> Peds topics</div>
-                </div>
-                <a href="#shelf" class="mode-cta shelf">Browse Shelf Tracks →</a>
-            </div>
-
-            <!-- Step Study Plans -->
-            <div class="mode-card step2" onclick="scrollToSection('study-plans')">
-                <div class="mode-icon">📈</div>
-                <div class="mode-title">Step 1 / Step 2 CK Study Plans</div>
-                <div class="mode-desc">Structured study plans with daily targets, progress milestones, and adaptive review. Tell us your exam date and we'll build your schedule.</div>
-                <div class="mode-stats">
-                    <div class="mode-stat"><strong>138</strong> Step 1 topics</div>
-                    <div class="mode-stat"><strong>153</strong> Step 2 topics</div>
-                    <div class="mode-stat"><strong>Adaptive</strong> pacing</div>
-                </div>
-                <a href="#study-plans" class="mode-cta step2">Build Study Plan →</a>
-            </div>
-
-            <!-- Clinical Rotation Companion -->
-            <div class="mode-card rotation" onclick="scrollToSection('rotations')">
-                <div class="mode-icon">🏥</div>
-                <div class="mode-title">Rotation Companion</div>
-                <div class="mode-desc">Cases and reasoning modules matched to your current clerkship. Review before rounds, prep for pimp questions, understand what you're seeing on the wards.</div>
-                <div class="mode-stats">
-                    <div class="mode-stat"><strong>323</strong> cases</div>
-                    <div class="mode-stat"><strong>244</strong> adventures</div>
-                    <div class="mode-stat"><strong>6</strong> clerkships</div>
-                </div>
-                <a href="#rotations" class="mode-cta rotation">Pick Your Rotation →</a>
-            </div>
+        <div class="tutor-context" id="tutorContext"></div>
+        <div class="tutor-messages" id="tutorMessages"></div>
+        <div class="tutor-input-area">
+            <textarea class="tutor-input" id="tutorInput" placeholder="Ask about this question..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendTutorMessage()}"></textarea>
+            <button class="tutor-send" id="tutorSendBtn" onclick="sendTutorMessage()">Send</button>
         </div>
-
-        <!-- ============================================ -->
-        <!-- QBANK SECTION                               -->
-        <!-- ============================================ -->
-        <div id="qbank" class="qbank-section">
-            <div class="qbank-header">
-                <div>
-                    <h2>🎯 QBank Mode</h2>
-                    <p>Timed, scored question blocks — just like the real exam</p>
-                </div>
-            </div>
-            <div style="margin-bottom: 24px;">
-                <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>Filter by subject:</strong></p>
-                <div class="qbank-controls" id="subjectFilters">
-                    <button class="qbank-btn active" onclick="filterQbank('all')">All Subjects</button>
-                    <button class="qbank-btn" onclick="filterQbank('cardiology')">Cardiology</button>
-                    <button class="qbank-btn" onclick="filterQbank('gi')">GI</button>
-                    <button class="qbank-btn" onclick="filterQbank('neuro')">Neurology</button>
-                    <button class="qbank-btn" onclick="filterQbank('pulm')">Pulmonary</button>
-                    <button class="qbank-btn" onclick="filterQbank('endo')">Endocrine</button>
-                    <button class="qbank-btn" onclick="filterQbank('renal')">Nephrology</button>
-                    <button class="qbank-btn" onclick="filterQbank('heme')">Hematology</button>
-                    <button class="qbank-btn" onclick="filterQbank('id')">Infectious Disease</button>
-                    <button class="qbank-btn" onclick="filterQbank('rheum')">Rheumatology</button>
-                    <button class="qbank-btn" onclick="filterQbank('psych')">Psychiatry</button>
-                    <button class="qbank-btn" onclick="filterQbank('obgyn')">OB/GYN</button>
-                    <button class="qbank-btn" onclick="filterQbank('peds')">Pediatrics</button>
-                    <button class="qbank-btn" onclick="filterQbank('surgery')">Surgery</button>
-                    <button class="qbank-btn" onclick="filterQbank('embryo')">Embryology</button>
-                </div>
-            </div>
-            <div class="qbank-options">
-                <div class="qbank-option" onclick="startQbank(10)">
-                    <div class="count">10</div>
-                    <div class="name">Quick Review<br><small style="color:#94a3b8;">~12 minutes</small></div>
-                </div>
-                <div class="qbank-option" onclick="startQbank(20)">
-                    <div class="count">20</div>
-                    <div class="name">Practice Block<br><small style="color:#94a3b8;">~25 minutes</small></div>
-                </div>
-                <div class="qbank-option" onclick="startQbank(40)">
-                    <div class="count">40</div>
-                    <div class="name">Exam Simulation<br><small style="color:#94a3b8;">~50 minutes</small></div>
-                </div>
-            </div>
-            <button class="qbank-start" onclick="startQbank(40)">Start 40-Question Block — Timed Mode 🕐</button>
-            <p style="text-align: center; margin-top: 12px; font-size: 13px; color: #94a3b8;">Every question includes a full explanation + reasoning pathway breakdown</p>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- SHELF EXAM TRACKS                           -->
-        <!-- ============================================ -->
-        <div id="shelf">
-            <div class="section-header">
-                <h2>📋 Shelf Exam Tracks</h2>
-                <p>Content curated for each clerkship — cases, MCQs, deep dives, and reasoning modules</p>
-            </div>
-            <div class="shelf-grid">
-                <div class="shelf-card" onclick="openShelfTrack('im')">
-                    <div class="shelf-name">🫀 Internal Medicine</div>
-                    <div class="shelf-info"><strong>78 topics</strong> · 9 organ systems · Most comprehensive</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Cardiology</span>
-                        <span class="shelf-topic">GI</span>
-                        <span class="shelf-topic">Pulm</span>
-                        <span class="shelf-topic">Renal</span>
-                        <span class="shelf-topic">Heme</span>
-                        <span class="shelf-topic">Endo</span>
-                        <span class="shelf-topic">Rheum</span>
-                        <span class="shelf-topic">ID</span>
-                    </div>
-                </div>
-                <div class="shelf-card" onclick="openShelfTrack('surgery')">
-                    <div class="shelf-name">🔪 Surgery</div>
-                    <div class="shelf-info"><strong>25 topics</strong> · Trauma, acute abdomen, emergencies</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Trauma</span>
-                        <span class="shelf-topic">Acute Abdomen</span>
-                        <span class="shelf-topic">Emergency</span>
-                        <span class="shelf-topic">Toxicology</span>
-                    </div>
-                </div>
-                <div class="shelf-card" onclick="openShelfTrack('peds')">
-                    <div class="shelf-name">👶 Pediatrics</div>
-                    <div class="shelf-info"><strong>58 topics</strong> · Includes developmental & embryology</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Development</span>
-                        <span class="shelf-topic">Embryology</span>
-                        <span class="shelf-topic">CCHD</span>
-                        <span class="shelf-topic">Neonatology</span>
-                    </div>
-                </div>
-                <div class="shelf-card" onclick="openShelfTrack('obgyn')">
-                    <div class="shelf-name">🤰 OB/GYN</div>
-                    <div class="shelf-info"><strong>12 topics</strong> · Pregnancy, labor, gynecologic emergencies</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Placenta Previa</span>
-                        <span class="shelf-topic">Preeclampsia</span>
-                        <span class="shelf-topic">Ectopic</span>
-                    </div>
-                </div>
-                <div class="shelf-card" onclick="openShelfTrack('psych')">
-                    <div class="shelf-name">🧠 Psychiatry</div>
-                    <div class="shelf-info"><strong>13 topics</strong> · DSM-5 criteria, psychopharmacology</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Mood Disorders</span>
-                        <span class="shelf-topic">Psychosis</span>
-                        <span class="shelf-topic">Anxiety</span>
-                    </div>
-                </div>
-                <div class="shelf-card" onclick="openShelfTrack('neuro')">
-                    <div class="shelf-name">⚡ Neurology</div>
-                    <div class="shelf-info"><strong>26 topics</strong> · Stroke, seizure, demyelination</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Stroke</span>
-                        <span class="shelf-topic">MS</span>
-                        <span class="shelf-topic">Seizure</span>
-                        <span class="shelf-topic">Neuro Embryo</span>
-                    </div>
-                </div>
-                <div class="shelf-card" onclick="openShelfTrack('fm')">
-                    <div class="shelf-name">🏠 Family Medicine</div>
-                    <div class="shelf-info"><strong>40 topics</strong> · Broad coverage across systems</div>
-                    <div class="shelf-progress"><div class="shelf-progress-bar" style="width: 0%;"></div></div>
-                    <div class="shelf-topics">
-                        <span class="shelf-topic">Preventive</span>
-                        <span class="shelf-topic">Chronic Disease</span>
-                        <span class="shelf-topic">MSK</span>
-                        <span class="shelf-topic">Derm</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- STEP STUDY PLAN BUILDER                     -->
-        <!-- ============================================ -->
-        <div id="study-plans" class="plan-builder">
-            <h2>📈 Build Your Study Plan</h2>
-            <p>Tell us your exam and target date — we'll build a personalized schedule with daily topics, question goals, and progress milestones.</p>
-            <div class="plan-form">
-                <div>
-                    <label for="examSelect">Which exam?</label>
-                    <select id="examSelect">
-                        <option value="">Select exam...</option>
-                        <option value="step1">USMLE Step 1</option>
-                        <option value="step2ck">USMLE Step 2 CK</option>
-                        <option value="comlex1">COMLEX Level 1</option>
-                        <option value="comlex2">COMLEX Level 2</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="examDate">Target exam date</label>
-                    <input type="date" id="examDate">
-                </div>
-                <div>
-                    <label for="hoursPerDay">Study hours/day</label>
-                    <select id="hoursPerDay">
-                        <option value="4">4 hours/day</option>
-                        <option value="6" selected>6 hours/day</option>
-                        <option value="8">8 hours/day</option>
-                        <option value="10">10 hours/day (dedicated)</option>
-                    </select>
-                </div>
-                <div>
-                    <button onclick="generateStudyPlan()">Generate Plan →</button>
-                </div>
-            </div>
-            <div id="studyPlanResult" style="margin-top: 24px; display: none;">
-                <!-- Generated study plan appears here -->
-            </div>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- ROTATION COMPANION                          -->
-        <!-- ============================================ -->
-        <div id="rotations">
-            <div class="section-header">
-                <h2>🏥 Rotation Companion</h2>
-                <p>Cases and reasoning modules matched to your current clerkship</p>
-            </div>
-            <div class="rotation-grid">
-                <div class="rotation-card" onclick="openRotation('im')">
-                    <div class="rotation-icon">🫀</div>
-                    <div class="rotation-name">Internal Medicine</div>
-                    <div class="rotation-detail"><strong>78 topics</strong> · Ward-ready cases · Morning report prep</div>
-                </div>
-                <div class="rotation-card" onclick="openRotation('surgery')">
-                    <div class="rotation-icon">🔪</div>
-                    <div class="rotation-name">Surgery</div>
-                    <div class="rotation-detail"><strong>25 topics</strong> · Pre-op assessment · OR prep</div>
-                </div>
-                <div class="rotation-card" onclick="openRotation('peds')">
-                    <div class="rotation-icon">👶</div>
-                    <div class="rotation-name">Pediatrics</div>
-                    <div class="rotation-detail"><strong>58 topics</strong> · Well-child · NICU · ED cases</div>
-                </div>
-                <div class="rotation-card" onclick="openRotation('obgyn')">
-                    <div class="rotation-icon">🤰</div>
-                    <div class="rotation-name">OB/GYN</div>
-                    <div class="rotation-detail"><strong>12 topics</strong> · L&D cases · Emergencies</div>
-                </div>
-                <div class="rotation-card" onclick="openRotation('psych')">
-                    <div class="rotation-icon">🧠</div>
-                    <div class="rotation-name">Psychiatry</div>
-                    <div class="rotation-detail"><strong>13 topics</strong> · DSM-5 frameworks · Acute presentations</div>
-                </div>
-                <div class="rotation-card" onclick="openRotation('neuro')">
-                    <div class="rotation-icon">⚡</div>
-                    <div class="rotation-name">Neurology</div>
-                    <div class="rotation-detail"><strong>26 topics</strong> · Localization · Stroke protocols</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- DIFFERENTIATOR                              -->
-        <!-- ============================================ -->
-        <div class="differentiator">
-            <h2>Why DxSuite is Different</h2>
-            <p>Most QBanks teach you to recognize patterns. We teach you to reason through problems — which is what the examiners are actually testing.</p>
-            <div class="diff-grid">
-                <div class="diff-item">
-                    <div class="icon">🧩</div>
-                    <h3>Understand, Don't Memorize</h3>
-                    <p>Every MCQ links to a pathophysiology module that explains the mechanism. When you understand why, you can figure out questions you've never seen.</p>
-                </div>
-                <div class="diff-item">
-                    <div class="icon">🔍</div>
-                    <h3>Reasoning Pathway Fingerprinting</h3>
-                    <p>We track how you think, not just what you answer. Identify and correct reasoning errors before exam day.</p>
-                </div>
-                <div class="diff-item">
-                    <div class="icon">🎓</div>
-                    <h3>Built by Medical Educators</h3>
-                    <p>Created by clinical skills faculty who teach clinical reasoning at the medical school level. This is the curriculum they wish they had.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <p>DxSuite — Board prep that teaches you to think, not just memorize.</p>
-        <p style="margin-top: 8px;"><a href="pricing.html" style="color: var(--primary);">View Pricing</a> · <a href="auth/register.html" style="color: var(--primary);">Sign Up</a></p>
-    </footer>
+    </div>
 
     <script>
-        // ============================================
-        // QBANK CONTROLS
-        // ============================================
-        let selectedSubject = 'all';
-        
-        function filterQbank(subject) {
-            selectedSubject = subject;
-            document.querySelectorAll('.qbank-controls .qbank-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-        
-        function startQbank(numQuestions) {
-            // Navigate to quiz engine with params
-            const params = new URLSearchParams({
-                mode: 'qbank',
-                count: numQuestions,
-                subject: selectedSubject,
-                timed: 'true'
-            });
-            window.location.href = `quiz-engine.html?${params.toString()}`;
-        }
-        
-        // ============================================
-        // SHELF EXAM TRACKS
-        // ============================================
-        function openShelfTrack(shelf) {
-            window.location.href = `module-catalog.html?filter=shelf-${shelf}`;
-        }
-        
-        // ============================================
-        // STUDY PLAN BUILDER
-        // ============================================
-        function generateStudyPlan() {
-            const exam = document.getElementById('examSelect').value;
-            const date = document.getElementById('examDate').value;
-            const hours = document.getElementById('hoursPerDay').value;
+        let questionBank = [];
+        let state = { mode: 'timed', currentQuestion: 0, questions: [], answers: {}, flagged: new Set(), startTime: null, timeRemaining: 3600, timerInterval: null, submitted: {}, tutorMode: false };
+
+        // Load questions from JSON
+        async function loadQuestions() {
+            // Try multiple paths to find the JSON file
+            const paths = [
+                'data/board-prep-questions.json',
+                './data/board-prep-questions.json',
+                '/ReasonDx/data/board-prep-questions.json',
+                '/data/board-prep-questions.json',
+                '../data/board-prep-questions.json',
+                'board-prep-questions.json'
+            ];
             
-            if (!exam || !date) {
-                alert('Please select your exam and target date.');
-                return;
-            }
-            
-            const examDate = new Date(date);
-            const today = new Date();
-            const daysUntilExam = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
-            
-            if (daysUntilExam < 7) {
-                alert('Please select a date at least one week from now.');
-                return;
-            }
-            
-            const totalTopics = exam.includes('step1') ? 138 : 153;
-            const topicsPerDay = Math.max(1, Math.ceil(totalTopics / (daysUntilExam * 0.7))); // 70% new, 30% review
-            const questionsPerDay = Math.round(hours * 8); // ~8 questions per study hour
-            const weeksUntilExam = Math.ceil(daysUntilExam / 7);
-            
-            const result = document.getElementById('studyPlanResult');
-            result.style.display = 'block';
-            result.innerHTML = `
-                <div style="background: white; border-radius: 16px; padding: 24px; margin-top: 16px;">
-                    <h3 style="font-size: 20px; margin-bottom: 16px; color: #1e40af;">Your ${exam === 'step1' ? 'Step 1' : 'Step 2 CK'} Study Plan</h3>
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
-                        <div style="text-align: center; padding: 16px; background: #eff6ff; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: 800; color: #2563eb;">${daysUntilExam}</div>
-                            <div style="font-size: 13px; color: #64748b;">Days to exam</div>
-                        </div>
-                        <div style="text-align: center; padding: 16px; background: #f0fdf4; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: 800; color: #059669;">${topicsPerDay}</div>
-                            <div style="font-size: 13px; color: #64748b;">Topics/day</div>
-                        </div>
-                        <div style="text-align: center; padding: 16px; background: #fef3c7; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: 800; color: #d97706;">${questionsPerDay}</div>
-                            <div style="font-size: 13px; color: #64748b;">MCQs/day</div>
-                        </div>
-                        <div style="text-align: center; padding: 16px; background: #ede9fe; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: 800; color: #7c3aed;">${weeksUntilExam}</div>
-                            <div style="font-size: 13px; color: #64748b;">Weeks total</div>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; border-radius: 12px; padding: 16px;">
-                        <p style="font-size: 14px; color: #475569; line-height: 1.6;">
-                            <strong>Week 1–${Math.ceil(weeksUntilExam * 0.6)}:</strong> New content — ${topicsPerDay} topics/day with mechanism modules + ${questionsPerDay} MCQs<br>
-                            <strong>Week ${Math.ceil(weeksUntilExam * 0.6) + 1}–${weeksUntilExam - 1}:</strong> Mixed review — revisit weak areas + timed blocks<br>
-                            <strong>Final week:</strong> Full-length practice exams + high-yield rapid review
-                        </p>
-                    </div>
-                    <button onclick="window.location.href='module-catalog.html?filter=${exam}'" style="margin-top: 16px; padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%;">
-                        Start Day 1 →
-                    </button>
-                </div>
-            `;
-        }
-        
-        // ============================================
-        // ROTATION COMPANION
-        // ============================================
-        function openRotation(rotation) {
-            window.location.href = `features/rotation-packs.html?rotation=${rotation}`;
-        }
-        
-        // ============================================
-        // SCROLL NAVIGATION
-        // ============================================
-        function scrollToSection(id) {
-            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        
-        // ============================================
-        // LOAD PROGRESS DATA
-        // ============================================
-        document.addEventListener('DOMContentLoaded', () => {
-            // Load saved progress for shelf cards
-            try {
-                const progress = JSON.parse(localStorage.getItem('reasondx-progress') || '{}');
-                // Update shelf progress bars based on stored data
-                if (progress.shelf) {
-                    Object.entries(progress.shelf).forEach(([shelf, pct]) => {
-                        const card = document.querySelector(`.shelf-card[onclick*="${shelf}"] .shelf-progress-bar`);
-                        if (card) card.style.width = `${pct}%`;
-                    });
+            const errors = [];
+            for (const path of paths) {
+                try {
+                    console.log('Trying to load from:', path);
+                    const response = await fetch(path);
+                    if (response.ok) {
+                        const text = await response.text();
+                        questionBank = JSON.parse(text);
+                        console.log('✓ Loaded', questionBank.length, 'questions from:', path);
+                        initializeUI();
+                        return;
+                    } else {
+                        errors.push(`${path}: HTTP ${response.status}`);
+                    }
+                } catch (err) {
+                    errors.push(`${path}: ${err.message}`);
                 }
-            } catch (e) { /* fresh user */ }
+            }
             
-            // Set default exam date to 12 weeks from now
-            const defaultDate = new Date();
-            defaultDate.setDate(defaultDate.getDate() + 84);
-            document.getElementById('examDate').value = defaultDate.toISOString().split('T')[0];
+            // All paths failed - show detailed error
+            console.error('All load attempts failed:', errors);
+            const btn = document.getElementById('startBtn');
+            btn.textContent = 'Error Loading Questions';
+            btn.style.background = '#dc2626';
+            
+            // Show help message
+            const helpDiv = document.createElement('div');
+            helpDiv.style.cssText = 'margin-top:16px;padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#991b1b;text-align:left;';
+            helpDiv.innerHTML = `
+                <strong>Could not load questions file.</strong><br><br>
+                Make sure <code>board-prep-questions.json</code> is in the <code>data/</code> folder.<br><br>
+                <strong>Expected structure:</strong><br>
+                <code>ReasonDx/board-prep.html</code><br>
+                <code>ReasonDx/data/board-prep-questions.json</code><br><br>
+                <details><summary>Technical details</summary><pre style="font-size:11px;margin-top:8px;">${errors.join('\n')}</pre></details>
+            `;
+            btn.parentNode.appendChild(helpDiv);
+        }
+
+        function initializeUI() {
+            // Update stats
+            document.getElementById('totalQuestions').textContent = questionBank.length;
+            const systems = [...new Set(questionBank.map(q => q.system))];
+            document.getElementById('totalSystems').textContent = systems.length;
+            const withGuidelines = questionBank.filter(q => q.teaching?.evidence).length;
+            document.getElementById('totalGuidelines').textContent = withGuidelines;
+
+            // Populate system filter
+            const systemSelect = document.getElementById('systemSelect');
+            systems.sort().forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s;
+                systemSelect.appendChild(opt);
+            });
+
+            // Enable start button
+            document.getElementById('startBtn').textContent = 'Begin Session';
+            document.getElementById('startBtn').disabled = false;
+
+            // Mode toggle: show/hide custom count
+            document.querySelectorAll('.mode-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    const cs = document.getElementById('customCountSection');
+                    cs.style.display = opt.dataset.mode === 'custom' ? 'block' : 'none';
+                });
+            });
+
+            // Render knowledge gap chart
+            renderGapChart(systems);
+        }
+
+        function renderGapChart(systems) {
+            const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const chart = document.getElementById('gapChart');
+            const empty = document.getElementById('gapEmpty');
+            if (!Object.keys(sysStats).length) { empty.style.display = 'block'; chart.style.display = 'none'; return; }
+            empty.style.display = 'none'; chart.style.display = 'grid';
+            
+            const rows = systems.map(s => {
+                const d = sysStats[s] || { correct: 0, total: 0 };
+                const pct = d.total > 0 ? Math.round(d.correct / d.total * 100) : 0;
+                return { system: s, pct, correct: d.correct, total: d.total };
+            }).sort((a, b) => a.pct - b.pct);
+
+            chart.innerHTML = rows.map(r => {
+                const color = r.pct >= 80 ? 'var(--success)' : r.pct >= 60 ? 'var(--warning)' : 'var(--danger)';
+                return `<div class="gap-row"><span class="gap-label" title="${r.system}">${r.system}</span><div class="gap-bar-bg"><div class="gap-bar-fill" style="width:${r.pct}%;background:${color};"></div></div><span class="gap-pct" style="color:${color}">${r.pct}%</span><span class="gap-count">${r.correct}/${r.total}</span></div>`;
+            }).join('');
+        }
+
+        // CRT ↔ MCQ Cross-Link Mapping
+        const crtMcqMap = {
+            'septal-defects-crt': { title: '🫀 The Hole in the Heart', system: 'Cardiac', mcqs: ['kawasaki-DX','kawasaki-disease-TX','neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'conotruncal-defects-crt': { title: '🫀 The Blue Baby', system: 'Cardiac', mcqs: ['kawasaki-disease-TX','neonatal-jaundice-WU','pediatric-dka-TX'] },
+            'pda-coarctation-crt': { title: '🫀 The Duct That Stayed Open', system: 'Cardiac', mcqs: ['kawasaki-disease-TX','neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'horseshoe-kidney-crt': { title: '🫘 The Trapped Kidney', system: 'Renal', mcqs: ['neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'puv-obstructive-uropathy-crt': { title: '🫘 The Blocked Outlet', system: 'Renal', mcqs: ['neonatal-sepsis-workup-WU'] },
+            'thyroglossal-branchial-crt': { title: '🦋 The Misplaced Gland', system: 'Endocrine', mcqs: [] },
+            'hirschsprung-disease-crt': { title: '🧬 The Missing Ganglia', system: 'GI', mcqs: ['intussusception-DX','intussusception-DX-v2','intussusception-TX','pyloric-stenosis-DX','pyloric-stenosis-WU'] },
+            'gi-embryology-malrotation-crt': { title: '🧬 The Twisted Gut', system: 'GI', mcqs: ['intussusception-DX','intussusception-DX-v2','intussusception-TX','pyloric-stenosis-DX'] },
+            'tef-esophageal-atresia-crt': { title: '🧬 The Broken Pipe', system: 'GI', mcqs: ['neonatal-sepsis-workup-WU','neonatal-meningitis-TX'] },
+            'omphalocele-gastroschisis-crt': { title: '🧬 The Open Wall', system: 'GI', mcqs: ['neonatal-jaundice-WU','neonatal-jaundice-WU-v2'] },
+            'duodenal-atresia-crt': { title: '🧬 The Double Bubble', system: 'GI', mcqs: ['pyloric-stenosis-DX','pyloric-stenosis-WU'] },
+            'meckel-diverticulum-crt': { title: '🧬 The Hidden Remnant', system: 'GI', mcqs: ['intussusception-DX','intussusception-DX-v2'] },
+            'neural-tube-defects-crt': { title: '🧠 The Open Spine', system: 'Neuro', mcqs: ['febrile-seizure-DX','febrile-seizure-WU','febrile-seizure-TX'] },
+            'holoprosencephaly-crt': { title: '🧠 The Undivided Brain', system: 'Neuro', mcqs: [] },
+            'chiari-malformation-crt': { title: '🧠 The Crowded Foramen', system: 'Neuro', mcqs: ['febrile-seizure-DX'] },
+            'dandy-walker-crt': { title: '🧠 The Missing Vermis', system: 'Neuro', mcqs: [] },
+            'corpus-callosum-agenesis-crt': { title: '🧠 The Disconnected Hemispheres', system: 'Neuro', mcqs: [] },
+            'congenital-hydrocephalus-crt': { title: '🧠 The Blocked Flow', system: 'Neuro', mcqs: ['febrile-seizure-DX','neonatal-meningitis-TX'] },
+            'cdh-congenital-diaphragmatic-hernia-crt': { title: '🫁 The Misplaced Organs', system: 'Respiratory', mcqs: ['croup-TX','croup-DX','croup-vs-epiglottitis-DX','bronchiolitis-TX'] },
+            'pulmonary-sequestration-crt': { title: '🫁 The Rogue Lobe', system: 'Respiratory', mcqs: ['bronchiolitis-TX'] },
+            'cpam-bronchogenic-cyst-crt': { title: '🫁 The Abnormal Airway', system: 'Respiratory', mcqs: ['croup-TX','bronchiolitis-TX'] },
+            'surfactant-deficiency-rds-crt': { title: '🫁 The Premature Breath', system: 'Respiratory', mcqs: ['neonatal-jaundice-WU','neonatal-jaundice-WU-v2','neonatal-sepsis-workup-WU'] },
+            'ddh-developmental-dysplasia-crt': { title: '🦴 The Unstable Hip', system: 'MSK', mcqs: ['pediatric-exanthems-DX'] },
+            'clubfoot-limb-development-crt': { title: '🦴 The Twisted Foot', system: 'MSK', mcqs: [] },
+            'polydactyly-syndactyly-crt': { title: '🦴 The Extra Digit', system: 'MSK', mcqs: [] }
+        };
+
+        // Reverse map: MCQ ID → relevant CRTs
+        const mcqToCrt = {};
+        Object.entries(crtMcqMap).forEach(([crtFile, data]) => {
+            data.mcqs.forEach(mcqId => {
+                if (!mcqToCrt[mcqId]) mcqToCrt[mcqId] = [];
+                mcqToCrt[mcqId].push({ file: crtFile, title: data.title, system: data.system });
+            });
         });
+
+        function getFilteredQuestions() {
+            const system = document.getElementById('systemSelect').value;
+            const type = document.getElementById('typeSelect').value;
+            const difficulty = document.getElementById('difficultySelect').value;
+
+            return questionBank.filter(q => {
+                if (system !== 'all' && q.system !== system) return false;
+                if (type !== 'all' && q.type !== type) return false;
+                if (difficulty !== 'all' && q.difficulty !== difficulty) return false;
+                return true;
+            });
+        }
+
+        function startQuiz() {
+            const mode = document.querySelector('.mode-option.selected')?.dataset.mode || 'timed';
+            state.mode = mode;
+            
+            let filtered = getFilteredQuestions();
+            if (filtered.length === 0) {
+                alert('No questions match your filters. Please adjust and try again.');
+                return;
+            }
+
+            // Weak areas mode: prioritize low-performing systems
+            if (mode === 'weak') {
+                const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+                const weakSystems = Object.entries(sysStats)
+                    .filter(([_, d]) => d.total >= 2)
+                    .sort((a, b) => (a[1].correct / a[1].total) - (b[1].correct / b[1].total))
+                    .slice(0, 5)
+                    .map(([s]) => s);
+                
+                if (weakSystems.length > 0) {
+                    const weakQs = filtered.filter(q => weakSystems.includes(q.system));
+                    if (weakQs.length >= 5) filtered = weakQs;
+                }
+            }
+
+            // Review missed mode: pull from history
+            if (mode === 'review') {
+                const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+                const missedIds = new Set();
+                history.forEach(session => {
+                    if (!session.questions || !session.answers) return;
+                    session.questions.forEach((qId, i) => {
+                        const q = questionBank.find(x => x.id === qId);
+                        if (!q) return;
+                        const correctIdx = q.options.findIndex(o => o.correct);
+                        if (session.answers[i] !== undefined && session.answers[i] !== correctIdx) missedIds.add(qId);
+                    });
+                });
+                const missed = filtered.filter(q => missedIds.has(q.id));
+                if (missed.length > 0) filtered = missed;
+            }
+
+            // Shuffle
+            filtered = filtered.sort(() => Math.random() - 0.5);
+
+            // Set count based on mode
+            if (mode === 'quick') {
+                state.questions = filtered.slice(0, Math.min(10, filtered.length));
+                state.timeRemaining = 900;
+            } else if (mode === 'timed') {
+                state.questions = filtered.slice(0, Math.min(40, filtered.length));
+                state.timeRemaining = 3600;
+            } else if (mode === 'custom') {
+                const count = parseInt(document.getElementById('customCount').value) || 20;
+                const timerVal = document.getElementById('customTimer').value;
+                state.questions = filtered.slice(0, Math.min(count, filtered.length));
+                state.timeRemaining = timerVal === 'none' ? null : parseInt(timerVal) * 60;
+            } else if (mode === 'weak') {
+                state.questions = filtered.slice(0, Math.min(20, filtered.length));
+                state.timeRemaining = null;
+            } else {
+                state.questions = filtered.slice(0, Math.min(40, filtered.length));
+                state.timeRemaining = null;
+            }
+
+            state.tutorMode = mode === 'tutor';
+            state.currentQuestion = 0;
+            state.answers = {};
+            state.flagged = new Set();
+            state.submitted = {};
+            state.startTime = Date.now();
+            state.questionStartTime = Date.now(); // Track individual question timing
+
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+
+            buildGrid();
+            loadQuestion(0);
+            updateStats();
+
+            if (!state.tutorMode && state.timeRemaining) {
+                startTimer();
+            } else {
+                document.getElementById('timer').style.display = 'none';
+            }
+
+            document.getElementById('totalQ').textContent = state.questions.length;
+        }
+
+        function buildGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = state.questions.map((_, i) => 
+                `<div class="q-num" onclick="goToQuestion(${i})">${i + 1}</div>`
+            ).join('');
+            updateGrid();
+        }
+
+        function updateGrid() {
+            document.querySelectorAll('.q-num').forEach((el, i) => {
+                el.className = 'q-num';
+                if (i === state.currentQuestion) el.classList.add('current');
+                if (state.answers[i] !== undefined) {
+                    el.classList.add('answered');
+                    if (state.submitted[i]) {
+                        const q = state.questions[i];
+                        const correctIdx = q.options.findIndex(o => o.correct);
+                        el.classList.add(state.answers[i] === correctIdx ? 'correct' : 'incorrect');
+                    }
+                }
+                if (state.flagged.has(i)) el.classList.add('flagged');
+            });
+        }
+
+        function loadQuestion(idx) {
+            const q = state.questions[idx];
+            state.currentQuestion = idx;
+
+            document.getElementById('qNum').textContent = idx + 1;
+            document.getElementById('currentQ').textContent = idx + 1;
+            document.getElementById('progressFill').style.width = ((idx + 1) / state.questions.length * 100) + '%';
+            document.getElementById('qType').textContent = q.type || 'Question';
+            document.getElementById('qSystem').textContent = q.system || 'General';
+            document.getElementById('qDifficulty').textContent = q.difficulty || 'Intermediate';
+            document.getElementById('vignette').innerHTML = q.vignette || '';
+            document.getElementById('questionStem').textContent = q.stem || '';
+
+            const isSubmitted = state.submitted[idx];
+            const correctIdx = q.options.findIndex(o => o.correct);
+
+            document.getElementById('optionsContainer').innerHTML = q.options.map((o, i) => {
+                let classes = 'option';
+                if (state.answers[idx] === i) classes += ' selected';
+                if (isSubmitted) {
+                    classes += ' disabled';
+                    if (o.correct) classes += ' show-correct';
+                    if (state.answers[idx] === i && !o.correct) classes += ' incorrect';
+                    if (state.answers[idx] === i && o.correct) classes = classes.replace('show-correct', 'correct');
+                }
+                return `<div class="${classes}" onclick="selectOption(${i})">
+                    <div class="option-letter">${o.letter}</div>
+                    <div class="option-text">${o.text}
+                        ${isSubmitted ? `<div class="option-stats"><div class="stat-bar-mini"><div class="stat-bar-fill" style="width:${o.stats || 25}%"></div></div><span class="stat-percent">${o.stats || 25}%</span></div>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+
+            const exp = document.getElementById('explanationPanel');
+            if (isSubmitted) {
+                showExplanation(q, state.answers[idx]);
+                exp.classList.add('show');
+            } else {
+                exp.classList.remove('show');
+            }
+
+            document.getElementById('flagBtn').classList.toggle('active', state.flagged.has(idx));
+            document.getElementById('submitBtn').textContent = isSubmitted ? (idx < state.questions.length - 1 ? 'Next →' : 'Finish') : 'Submit';
+            document.getElementById('prevBtn').disabled = idx === 0;
+
+            updateGrid();
+        }
+
+        function showExplanation(q, selectedIdx) {
+            const correctIdx = q.options.findIndex(o => o.correct);
+            const isCorrect = selectedIdx === correctIdx;
+
+            document.getElementById('explanationHeader').className = 'explanation-header ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('resultIcon').className = 'result-icon ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
+            document.getElementById('resultText').className = 'result-text ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('resultText').textContent = isCorrect ? 'Correct' : `Incorrect — Answer: ${q.options[correctIdx].letter}`;
+
+            // Show/hide adaptive tutor button
+            const tutorBtn = document.getElementById('tutorTriggerBtn');
+            if (!isCorrect && tutorBtn) {
+                tutorBtn.classList.add('show');
+                tutorBtn.onclick = () => openTutor(q, selectedIdx);
+            } else if (tutorBtn) {
+                tutorBtn.classList.remove('show');
+            }
+
+            // Answer panel
+            let answerHTML = '';
+            if (q.teaching) {
+                if (q.teaching.keyPoint) {
+                    answerHTML += `<div class="section"><div class="section-title">Key Point</div><div class="section-text">${q.teaching.keyPoint}</div></div>`;
+                }
+                if (q.teaching.reasoning && q.teaching.reasoning.length) {
+                    answerHTML += `<div class="section"><div class="section-title">Clinical Reasoning</div><div class="key-points">${q.teaching.reasoning.map(r => `<div class="key-point">${r}</div>`).join('')}</div></div>`;
+                }
+                if (q.teaching.evidence) {
+                    const e = q.teaching.evidence;
+                    answerHTML += `<div class="evidence-card">
+                        <div class="evidence-title">${e.title || 'Guidelines'}</div>
+                        <div class="evidence-cite">${e.cite || ''}</div>
+                        ${e.points && e.points.length ? `<ul class="evidence-points">${e.points.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}
+                        ${e.url && e.url !== '#' ? `<a href="${e.url}" target="_blank" class="evidence-link">View Full Guideline →</a>` : ''}
+                    </div>`;
+                }
+            }
+            document.getElementById('panelAnswer').innerHTML = answerHTML || '<p>No explanation available.</p>';
+
+            // Illness script panel
+            if (q.illnessScript) {
+                const s = q.illnessScript;
+                document.getElementById('panelScript').innerHTML = `<div class="illness-script">
+                    <div class="script-item"><div class="script-label">Epidemiology</div><div class="script-value">${s.epidemiology || '—'}</div></div>
+                    <div class="script-item"><div class="script-label">Pathophysiology</div><div class="script-value">${s.pathophysiology || '—'}</div></div>
+                    <div class="script-item"><div class="script-label">Key Features</div><div class="script-value">${s.keyFeatures || '—'}</div></div>
+                    <div class="script-item"><div class="script-label">Workup</div><div class="script-value">${s.workup || '—'}</div></div>
+                    <div class="script-item full"><div class="script-label">Treatment</div><div class="script-value">${s.treatment || '—'}</div></div>
+                </div>`;
+            } else {
+                document.getElementById('panelScript').innerHTML = '<p>No illness script available.</p>';
+            }
+
+            // Distractors panel
+            if (q.distractors && q.distractors.length) {
+                document.getElementById('panelDistractors').innerHTML = `<div class="wrong-list">${q.distractors.map(d => `
+                    <div class="wrong-item">
+                        <div class="wrong-header"><span class="wrong-name">${d.text}</span></div>
+                        <div class="wrong-explanation">${d.explanation || 'Not the best answer for this presentation.'}</div>
+                    </div>
+                `).join('')}</div>`;
+            } else {
+                document.getElementById('panelDistractors').innerHTML = '<p>No distractor analysis available.</p>';
+            }
+
+            // Resources panel
+            let resourcesHTML = '';
+            if (q.resources) {
+                if (q.resources.guidelines && q.resources.guidelines.length) {
+                    resourcesHTML += `<div class="resources-section"><div class="resources-title">Evidence & Guidelines</div><div class="resource-list">${q.resources.guidelines.map(g => `
+                        <a href="${g.url || '#'}" target="_blank" class="resource-link">
+                            <div class="resource-icon">📄</div>
+                            <div class="resource-info"><div class="resource-name">${g.title}</div><div class="resource-desc">${g.desc || ''}</div></div>
+                            <div class="resource-arrow">→</div>
+                        </a>
+                    `).join('')}</div></div>`;
+                }
+                if (q.resources.platform && q.resources.platform.length) {
+                    resourcesHTML += `<div class="resources-section"><div class="resources-title">Platform Resources</div><div class="resource-list">${q.resources.platform.map(p => `
+                        <a href="${p.url || '#'}" class="resource-link">
+                            <div class="resource-icon">${p.type === 'MechanismDx' ? '🧬' : '💬'}</div>
+                            <div class="resource-info"><div class="resource-name">${p.title}</div><div class="resource-desc">${p.type} · ${p.desc || ''}</div></div>
+                            <div class="resource-arrow">→</div>
+                        </a>
+                    `).join('')}</div></div>`;
+                }
+            }
+            document.getElementById('panelResources').innerHTML = resourcesHTML || '<p>No additional resources.</p>';
+
+            // Inject CRT cross-links if available
+            const relatedCrts = mcqToCrt[q.id] || [];
+            if (relatedCrts.length > 0) {
+                const crtHTML = `<div class="resources-section" style="margin-top:12px;"><div class="resources-title">🧬 Related Embryology CRTs</div><div style="display:flex;flex-wrap:wrap;gap:4px;">${relatedCrts.map(c => 
+                    `<a href="../../mechanism/${c.file}.html" class="crt-cross-link">🧬 ${c.title}</a>`
+                ).join('')}</div></div>`;
+                document.getElementById('panelResources').innerHTML += crtHTML;
+            }
+        }
+
+        function selectOption(i) {
+            if (state.submitted[state.currentQuestion]) return;
+            state.answers[state.currentQuestion] = i;
+            loadQuestion(state.currentQuestion);
+            updateStats();
+
+            // Auto-submit in tutor mode
+            if (state.tutorMode) {
+                state.submitted[state.currentQuestion] = true;
+                saveProgress();
+                loadQuestion(state.currentQuestion);
+                updateStats();
+            }
+        }
+
+        function submitOrNext() {
+            const i = state.currentQuestion;
+            if (!state.submitted[i]) {
+                if (state.answers[i] === undefined) {
+                    alert('Please select an answer.');
+                    return;
+                }
+                state.submitted[i] = true;
+                
+                // Track for RPFS and variant analysis
+                const q = state.questions[i];
+                const correctIdx = q.options.findIndex(o => o.correct);
+                const isCorrect = state.answers[i] === correctIdx;
+                const timeSpent = Math.floor((Date.now() - (state.questionStartTime || state.startTime)) / 1000);
+                
+                trackQuestionForRPFS(q, state.answers[i], isCorrect, timeSpent);
+                trackVariantPerformance(q.id, isCorrect);
+                
+                saveProgress();
+                loadQuestion(i);
+                updateStats();
+            } else {
+                if (i < state.questions.length - 1) {
+                    state.questionStartTime = Date.now(); // Track time per question
+                    loadQuestion(i + 1);
+                } else {
+                    showResults();
+                }
+            }
+        }
+
+        function prevQuestion() {
+            if (state.currentQuestion > 0) loadQuestion(state.currentQuestion - 1);
+        }
+
+        function goToQuestion(i) {
+            loadQuestion(i);
+        }
+
+        function toggleFlag() {
+            if (state.flagged.has(state.currentQuestion)) {
+                state.flagged.delete(state.currentQuestion);
+            } else {
+                state.flagged.add(state.currentQuestion);
+            }
+            loadQuestion(state.currentQuestion);
+            updateStats();
+        }
+
+        function startTimer() {
+            state.timerInterval = setInterval(() => {
+                state.timeRemaining--;
+                const m = Math.floor(state.timeRemaining / 60);
+                const s = state.timeRemaining % 60;
+                document.getElementById('timerDisplay').textContent = `${m}:${s.toString().padStart(2, '0')}`;
+                
+                const timerEl = document.getElementById('timer');
+                timerEl.classList.toggle('warning', state.timeRemaining <= 600 && state.timeRemaining > 300);
+                timerEl.classList.toggle('danger', state.timeRemaining <= 300);
+
+                if (state.timeRemaining <= 0) {
+                    clearInterval(state.timerInterval);
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function updateStats() {
+            document.getElementById('answeredCount').textContent = `${Object.keys(state.answers).length} / ${state.questions.length}`;
+            document.getElementById('flaggedCount').textContent = state.flagged.size;
+
+            const submittedCount = Object.keys(state.submitted).length;
+            if (submittedCount > 0) {
+                let correct = 0;
+                for (const i in state.submitted) {
+                    const q = state.questions[i];
+                    const correctIdx = q.options.findIndex(o => o.correct);
+                    if (state.answers[i] === correctIdx) correct++;
+                }
+                document.getElementById('correctCount').textContent = `${correct} / ${submittedCount}`;
+            }
+        }
+
+        function saveProgress() {
+            // Save to localStorage for review
+            const progressData = {
+                date: new Date().toISOString(),
+                mode: state.mode,
+                questions: state.questions.map(q => q.id),
+                answers: state.answers,
+                submitted: state.submitted,
+                flagged: [...state.flagged]
+            };
+            
+            const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+            history.unshift(progressData);
+            localStorage.setItem('boardPrepHistory', JSON.stringify(history.slice(0, 50)));
+        }
+
+        function showResults() {
+            if (state.timerInterval) clearInterval(state.timerInterval);
+
+            let correct = 0, incorrect = 0;
+            state.questions.forEach((q, i) => {
+                const correctIdx = q.options.findIndex(o => o.correct);
+                if (state.answers[i] === correctIdx) correct++;
+                else if (state.answers[i] !== undefined) incorrect++;
+            });
+
+            const elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+
+            document.getElementById('finalScore').textContent = Math.round(correct / state.questions.length * 100) + '%';
+            document.getElementById('totalCorrect').textContent = correct;
+            document.getElementById('totalIncorrect').textContent = incorrect;
+            document.getElementById('timeSpent').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+            document.getElementById('resultsModal').classList.add('show');
+
+            // Update cumulative stats
+            updateCumulativeStats(correct, incorrect);
+            trackSystemPerformance();
+        }
+
+        function updateCumulativeStats(correct, incorrect) {
+            const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+            stats.totalCorrect += correct;
+            stats.totalIncorrect += incorrect;
+            stats.sessions++;
+            stats.lastSession = new Date().toISOString();
+            localStorage.setItem('boardPrepStats', JSON.stringify(stats));
+        }
+
+        function closeResults() {
+            document.getElementById('resultsModal').classList.remove('show');
+        }
+
+        function reviewQuestions() {
+            closeResults();
+            loadQuestion(0);
+        }
+
+        function startNewBlock() {
+            closeResults();
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'flex';
+        }
+
+        function endQuiz() {
+            if (confirm('End this session? Your progress will be saved.')) {
+                showResults();
+            }
+        }
+
+        // Tab switching
+        document.querySelectorAll('.exp-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const panelId = {answer: 'panelAnswer', script: 'panelScript', distractors: 'panelDistractors', resources: 'panelResources'}[tab.dataset.tab];
+                document.getElementById(panelId).classList.add('active');
+            });
+        });
+
+        // Mode selection
+        document.querySelectorAll('.mode-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', e => {
+            if (document.getElementById('quizScreen').style.display === 'none') return;
+            const key = e.key.toUpperCase();
+            if ('ABCDE'.includes(key)) {
+                const idx = key.charCodeAt(0) - 65;
+                if (idx < state.questions[state.currentQuestion].options.length) selectOption(idx);
+            }
+            if (e.key === 'Enter') submitOrNext();
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight' && state.submitted[state.currentQuestion] && state.currentQuestion < state.questions.length - 1) loadQuestion(state.currentQuestion + 1);
+            if (e.key === 'f' || e.key === 'F') toggleFlag();
+        });
+
+        // Load on init
+        loadQuestions();
     </script>
-<script src="dx-progress.js"></script>
-<script src="dx-recommendations.js"></script>
-<script src="data/rdx-persist.js"></script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
+
+    <!-- ReasonDx Adaptive AI Tutor Integration with ReasonLab Features -->
+    <div data-dx-adaptive-tutor
+         data-case-title="ReasonDx Board Prep"
+         data-key-points="Session Complete, 🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts, isomorphic variants, knowledge transfer"
+         data-objectives="Develop systematic clinical reasoning, master illness scripts, detect cognitive biases"
+         data-specialty="Board Prep"
+         style="display:none;"></div>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>
+
+<script>
+// System tracking for dashboard
+function trackSystemPerformance() {
+    const stats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+    const typeStats = JSON.parse(localStorage.getItem('boardPrepTypeStats') || '{}');
+    state.questions.forEach((q, i) => {
+        if (state.submitted[i]) {
+            const system = q.system || 'General';
+            if (!stats[system]) stats[system] = { correct: 0, incorrect: 0, total: 0 };
+            const correctIdx = q.options.findIndex(o => o.correct);
+            const isCorrect = state.answers[i] === correctIdx;
+            if (isCorrect) stats[system].correct++;
+            else stats[system].incorrect++;
+            stats[system].total = stats[system].correct + stats[system].incorrect;
+            
+            // Per system×type tracking
+            const typeKey = system + '|' + (q.type || 'Unknown');
+            if (!typeStats[typeKey]) typeStats[typeKey] = { correct: 0, total: 0 };
+            typeStats[typeKey].total++;
+            if (isCorrect) typeStats[typeKey].correct++;
+        }
+    });
+    localStorage.setItem('boardPrepSystems', JSON.stringify(stats));
+    localStorage.setItem('boardPrepTypeStats', JSON.stringify(typeStats));
+}
+
+// =====================================================
+// RPFS Integration for Board Prep
+// =====================================================
+
+// Track question performance for RPFS
+function trackQuestionForRPFS(question, selectedIdx, isCorrect, timeSpent) {
+    if (typeof DxReasonLabFeatures === 'undefined') return;
+    
+    // Record decision for pathway analysis
+    DxReasonLabFeatures.recordDecision({
+        type: isCorrect ? 'correct_answer' : 'incorrect_answer',
+        action: 'question_submit',
+        data: {
+            questionId: question.id,
+            system: question.system,
+            type: question.type,
+            difficulty: question.difficulty,
+            selectedOption: question.options[selectedIdx]?.letter,
+            correctOption: question.options.find(o => o.correct)?.letter,
+            timeSpent: timeSpent,
+            concepts: question.fingerprint?.concepts || []
+        }
+    });
+    
+    // Check for cognitive bias patterns
+    analyzeBoardPrepBiases(question, selectedIdx, isCorrect);
+}
+
+// Analyze for cognitive biases in board prep context
+function analyzeBoardPrepBiases(question, selectedIdx, isCorrect) {
+    if (typeof DxReasonLabFeatures === 'undefined') return;
+    
+    const profile = DxReasonLabFeatures.getProfile();
+    if (!profile) return;
+    
+    // Track if first option selected (potential anchoring)
+    if (selectedIdx === 0 && !isCorrect) {
+        // First option bias - may indicate anchoring
+        const firstOptionStats = profile.boardPrepPatterns?.firstOptionBias || 0;
+        if (!profile.boardPrepPatterns) profile.boardPrepPatterns = {};
+        profile.boardPrepPatterns.firstOptionBias = firstOptionStats + 1;
+    }
+    
+    // Track system-specific weaknesses
+    if (!isCorrect) {
+        if (!profile.boardPrepPatterns) profile.boardPrepPatterns = {};
+        if (!profile.boardPrepPatterns.systemWeaknesses) profile.boardPrepPatterns.systemWeaknesses = {};
+        const system = question.system || 'Unknown';
+        profile.boardPrepPatterns.systemWeaknesses[system] = 
+            (profile.boardPrepPatterns.systemWeaknesses[system] || 0) + 1;
+    }
+}
+
+// Variant group tracking for knowledge transfer detection
+let variantManifest = null;
+
+async function loadVariantManifest() {
+    try {
+        const response = await fetch('data/board-prep-manifest.json');
+        if (response.ok) {
+            variantManifest = await response.json();
+            console.log('✓ Loaded variant manifest with', variantManifest.variantGroups?.length || 0, 'groups');
+        }
+    } catch (e) {
+        console.log('Variant manifest not available');
+    }
+}
+
+function getVariantGroup(questionId) {
+    if (!variantManifest?.variantGroups) return null;
+    return variantManifest.variantGroups.find(g => g.members.includes(questionId));
+}
+
+// Track variant performance for knowledge transfer detection
+function trackVariantPerformance(questionId, isCorrect) {
+    const group = getVariantGroup(questionId);
+    if (!group) return;
+    
+    const variantStats = JSON.parse(localStorage.getItem('boardPrepVariants') || '{}');
+    if (!variantStats[group.groupId]) {
+        variantStats[group.groupId] = { attempts: {}, firstEncounter: null };
+    }
+    
+    const groupStats = variantStats[group.groupId];
+    if (!groupStats.firstEncounter) {
+        groupStats.firstEncounter = { questionId, correct: isCorrect, date: new Date().toISOString() };
+    }
+    
+    groupStats.attempts[questionId] = {
+        correct: isCorrect,
+        date: new Date().toISOString()
+    };
+    
+    // Detect knowledge transfer pattern
+    const attempts = Object.values(groupStats.attempts);
+    if (attempts.length >= 2) {
+        const first = groupStats.firstEncounter;
+        const latest = groupStats.attempts[questionId];
+        
+        if (!first.correct && latest.correct) {
+            console.log('📈 Knowledge transfer detected for:', group.groupId);
+            // Could trigger badge or notification here
+        } else if (first.correct && !latest.correct) {
+            console.log('⚠️ Knowledge regression for:', group.groupId);
+        }
+    }
+    
+    localStorage.setItem('boardPrepVariants', JSON.stringify(variantStats));
+}
+
+// Initialize variant tracking on load
+document.addEventListener('DOMContentLoaded', loadVariantManifest);
+
+// =====================================================
+// ADAPTIVE TUTOR INTEGRATION
+// Calls Cloudflare worker v5 with type: "adaptive-tutor"
+// Builds performance-aware system prompts dynamically
+// =====================================================
+
+const TUTOR_WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+let tutorConversation = [];
+let tutorCurrentQuestion = null;
+
+// Get cumulative performance stats for prompt building
+function getPerformanceContext() {
+    const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+    const systemStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+    
+    // Current session stats
+    let sessionCorrect = 0, sessionIncorrect = 0, sessionStreak = 0, currentStreak = 0;
+    const systemPerf = {};
+    
+    state.questions.forEach((q, i) => {
+        if (state.submitted[i]) {
+            const correctIdx = q.options.findIndex(o => o.correct);
+            const wasCorrect = state.answers[i] === correctIdx;
+            const sys = q.system || 'General';
+            
+            if (!systemPerf[sys]) systemPerf[sys] = { correct: 0, total: 0 };
+            systemPerf[sys].total++;
+            
+            if (wasCorrect) {
+                sessionCorrect++;
+                systemPerf[sys].correct++;
+                currentStreak++;
+            } else {
+                sessionIncorrect++;
+                currentStreak = 0;
+            }
+        }
+    });
+    
+    // Find weak systems (below 60% accuracy)
+    const weakSystems = [];
+    const strongSystems = [];
+    for (const [sys, data] of Object.entries(systemPerf)) {
+        const pct = data.total > 0 ? Math.round(data.correct / data.total * 100) : 0;
+        if (pct < 60 && data.total >= 2) weakSystems.push(`${sys} (${pct}%)`);
+        if (pct >= 80 && data.total >= 2) strongSystems.push(`${sys} (${pct}%)`);
+    }
+    
+    // Recent question history (last 5)
+    const recentHistory = [];
+    const startIdx = Math.max(0, state.currentQuestion - 4);
+    for (let i = startIdx; i <= state.currentQuestion; i++) {
+        if (state.submitted[i]) {
+            const q = state.questions[i];
+            const correctIdx = q.options.findIndex(o => o.correct);
+            recentHistory.push({
+                system: q.system,
+                type: q.type,
+                correct: state.answers[i] === correctIdx
+            });
+        }
+    }
+    
+    return {
+        sessionAccuracy: sessionCorrect + sessionIncorrect > 0 
+            ? Math.round(sessionCorrect / (sessionCorrect + sessionIncorrect) * 100) : null,
+        sessionCorrect,
+        sessionIncorrect,
+        currentStreak,
+        weakSystems,
+        strongSystems,
+        cumulativeAccuracy: stats.totalCorrect + stats.totalIncorrect > 0
+            ? Math.round(stats.totalCorrect / (stats.totalCorrect + stats.totalIncorrect) * 100) : null,
+        totalSessions: stats.sessions,
+        recentHistory
+    };
+}
+
+// Build the adaptive system prompt dynamically
+function buildAdaptivePrompt(question, selectedIdx) {
+    const perf = getPerformanceContext();
+    const correctIdx = question.options.findIndex(o => o.correct);
+    const selectedOption = question.options[selectedIdx];
+    const correctOption = question.options[correctIdx];
+    
+    // Get tutorDx context from question crossLinks
+    let promptContext = null;
+    if (question.crossLinks?.tutorDx) {
+        const adaptive = question.crossLinks.tutorDx.find(t => t.requestType === 'adaptive-tutor');
+        if (adaptive) promptContext = adaptive.promptContext;
+    }
+    
+    let prompt = `You are an adaptive clinical reasoning tutor. A medical student just answered a board-prep question INCORRECTLY. Your job is to help them understand WHY they were wrong and guide them to the correct reasoning — using Socratic questioning, not by simply telling them the answer.
+
+QUESTION CONTEXT:
+- System: ${question.system}
+- Type: ${question.type}
+- Difficulty: ${question.difficulty}
+- The student selected: "${selectedOption?.letter}. ${selectedOption?.text}"
+- The correct answer was: "${correctOption?.letter}. ${correctOption?.text}"`;
+
+    if (promptContext) {
+        prompt += `
+
+TEACHING CONTEXT:
+- Key Point: ${promptContext.teachingKeyPoint}
+- Reasoning: ${promptContext.teachingReasoning || 'Not available'}
+- Knowledge Atoms: ${(promptContext.knowledgeAtoms || []).join(', ')}
+- Cognitive Traps: ${(promptContext.cognitiveTraps || []).join(', ') || 'None flagged'}
+- Reasoning Domains: ${(promptContext.reasoningDomains || []).join(', ')}`;
+
+        if (promptContext.distractorRationales && promptContext.distractorRationales[selectedOption?.letter]) {
+            prompt += `
+- Why their answer was wrong: ${promptContext.distractorRationales[selectedOption.letter]}`;
+        }
+        
+        if (promptContext.illnessScript) {
+            const is = promptContext.illnessScript;
+            prompt += `
+
+ILLNESS SCRIPT:
+- Epidemiology: ${is.epidemiology || 'N/A'}
+- Pathophysiology: ${is.pathophysiology || 'N/A'}
+- Key Features: ${is.keyFeatures || 'N/A'}`;
+        }
+    }
+
+    // Add performance context for adaptive difficulty
+    prompt += `
+
+STUDENT PERFORMANCE CONTEXT:`;
+    if (perf.sessionAccuracy !== null) {
+        prompt += `
+- Session accuracy: ${perf.sessionAccuracy}% (${perf.sessionCorrect} correct, ${perf.sessionIncorrect} incorrect)`;
+    }
+    if (perf.cumulativeAccuracy !== null) {
+        prompt += `
+- Cumulative accuracy: ${perf.cumulativeAccuracy}% across ${perf.totalSessions} sessions`;
+    }
+    if (perf.weakSystems.length > 0) {
+        prompt += `
+- WEAK SYSTEMS: ${perf.weakSystems.join(', ')}`;
+    }
+    if (perf.currentStreak > 3) {
+        prompt += `
+- Student had a ${perf.currentStreak}-question correct streak before this miss`;
+    }
+
+    // Adapt coaching style based on performance
+    if (perf.sessionAccuracy !== null && perf.sessionAccuracy < 50) {
+        prompt += `
+
+COACHING APPROACH: This student is struggling (below 50%). Be MORE supportive and scaffolding-heavy. Break concepts into smaller steps. Use concrete analogies. Build confidence while correcting the reasoning.`;
+    } else if (perf.sessionAccuracy !== null && perf.sessionAccuracy >= 75) {
+        prompt += `
+
+COACHING APPROACH: This student is performing well (${perf.sessionAccuracy}%). This was likely a knowledge gap or tricky distractor. Be more challenging — probe deeper, ask about edge cases, connect to broader concepts.`;
+    } else {
+        prompt += `
+
+COACHING APPROACH: Standard Socratic questioning. Guide through the reasoning step by step. Ask what they were thinking, identify the gap, help them reach the answer themselves.`;
+    }
+
+    prompt += `
+
+RESPONSE RULES:
+- Start by asking what drew them to their answer (don't lecture immediately)
+- Keep responses to 2-4 sentences
+- NEVER give the full explanation unprompted — guide them to discover it
+- Use the illness script and teaching points to inform your questions, not to dump information
+- If they're close, acknowledge what's right before redirecting
+- If they seem frustrated, offer a hint rather than more questions`;
+
+    return prompt;
+}
+
+// Open the tutor panel for a specific question
+function openTutor(question, selectedIdx) {
+    tutorCurrentQuestion = question;
+    tutorConversation = [];
+    
+    const correctIdx = question.options.findIndex(o => o.correct);
+    const selectedOption = question.options[selectedIdx];
+    const correctOption = question.options[correctIdx];
+    const perf = getPerformanceContext();
+    
+    // Set context display
+    const contextDiv = document.getElementById('tutorContext');
+    contextDiv.innerHTML = `
+        <span class="context-tag">✗ Incorrect</span>
+        <strong>${question.system}</strong> · ${question.type} · ${question.difficulty}
+        ${perf.weakSystems.some(ws => ws.startsWith(question.system)) ? '<span class="context-tag">Weak Area</span>' : ''}
+    `;
+    
+    // Clear messages and add opening
+    const messagesDiv = document.getElementById('tutorMessages');
+    messagesDiv.innerHTML = '';
+    
+    // Build the system prompt
+    const systemPrompt = buildAdaptivePrompt(question, selectedIdx);
+    
+    // Send initial message to get the tutor started
+    const initialMessage = `I just got this question wrong. I picked "${selectedOption?.letter}. ${selectedOption?.text}" but the correct answer was "${correctOption?.letter}."`;
+    
+    addTutorMessage('user', initialMessage);
+    sendToWorker(systemPrompt, initialMessage);
+    
+    // Open panel
+    document.getElementById('tutorPanel').classList.add('open');
+    document.getElementById('tutorInput').focus();
+}
+
+function closeTutor() {
+    document.getElementById('tutorPanel').classList.remove('open');
+}
+
+function addTutorMessage(role, text) {
+    const messagesDiv = document.getElementById('tutorMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `tutor-msg ${role}`;
+    msgDiv.textContent = text;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    
+    tutorConversation.push({ role, content: text });
+}
+
+function addLoadingMessage() {
+    const messagesDiv = document.getElementById('tutorMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'tutor-msg assistant loading';
+    msgDiv.id = 'tutorLoading';
+    msgDiv.textContent = 'Thinking...';
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function removeLoadingMessage() {
+    const el = document.getElementById('tutorLoading');
+    if (el) el.remove();
+}
+
+async function sendToWorker(systemPrompt, message) {
+    addLoadingMessage();
+    document.getElementById('tutorSendBtn').disabled = true;
+    
+    try {
+        const response = await fetch(TUTOR_WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'adaptive-tutor',
+                message: message,
+                systemPrompt: systemPrompt,
+                conversationHistory: tutorConversation.filter(m => m.role !== 'system').map(m => ({
+                    role: m.role === 'user' ? 'user' : 'assistant',
+                    content: m.content
+                })).slice(0, -1) // exclude the message we just added (it's sent as `message`)
+            })
+        });
+        
+        if (!response.ok) throw new Error(`Worker returned ${response.status}`);
+        
+        const data = await response.json();
+        removeLoadingMessage();
+        
+        if (data.response) {
+            addTutorMessage('assistant', data.response);
+        } else if (data.error) {
+            addTutorMessage('assistant', 'Sorry, I had trouble connecting. Try again in a moment.');
+            console.error('Tutor error:', data.error);
+        }
+    } catch (err) {
+        removeLoadingMessage();
+        addTutorMessage('assistant', 'Connection issue. Please try again.');
+        console.error('Tutor fetch error:', err);
+    }
+    
+    document.getElementById('tutorSendBtn').disabled = false;
+}
+
+function sendTutorMessage() {
+    const input = document.getElementById('tutorInput');
+    const text = input.value.trim();
+    if (!text) return;
+    
+    input.value = '';
+    addTutorMessage('user', text);
+    
+    // Rebuild prompt with latest performance context
+    const q = tutorCurrentQuestion;
+    const selectedIdx = state.answers[state.currentQuestion];
+    const systemPrompt = buildAdaptivePrompt(q, selectedIdx);
+    
+    sendToWorker(systemPrompt, text);
+}
+</script>

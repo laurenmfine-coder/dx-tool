@@ -9,17 +9,14 @@
  *
  * HOW TO USE IN HTML:
  *   <span data-rdx-stat="topics"></span>         → "297"
- *   <span data-rdx-stat="adventures"></span>     → "239"
+ *   <span data-rdx-stat="adventures"></span>     → "230+"
  *   <span data-rdx-stat="mcqs"></span>           → "2,900+"
- *   
- *   Or use the text-replace pattern for inline strings:
- *   <li data-rdx-stat-text="topics-inline">All {topics} topics across {specialties} specialties</li>
  */
 (function () {
     'use strict';
 
     const STATS = {
-        // ─── Core Content Counts ─────────────────────
+        // ─── Core Content Counts (raw) ───────────────
         topics:          297,
         specialties:     28,
         adventures:      239,
@@ -27,16 +24,21 @@
         mcqs:            2994,
         boardPrepQs:     615,
         calculators:     4,
+        trainerCases:    323,
 
         // ─── Formatted Display Strings ───────────────
-        // Use these for marketing-safe rounded numbers
-        get mcqsDisplay()        { return '2,900+'; },
-        get boardPrepQsDisplay() { return '600+'; },
-        get adventuresDisplay()  { return '230+'; },
-        get topicsDisplay()      { return '297'; },
-        get deepDivesDisplay()   { return '211'; },
-        get modulesDisplay()     { return '297'; },  // "modules" = topics
-        get casesDisplay()       { return '230+'; },  // "cases" = adventures
+        // Marketing-safe rounded numbers for UI
+        get mcqsDisplay()           { return '2,900+'; },
+        get boardPrepQsDisplay()    { return '600+'; },
+        get adventuresDisplay()     { return '230+'; },
+        get topicsDisplay()         { return '297'; },
+        get deepDivesDisplay()      { return '211'; },
+        get modulesDisplay()        { return '297'; },
+        get casesDisplay()          { return '230+'; },
+        get trainerCasesDisplay()   { return '323'; },
+        get specialtiesDisplay()    { return '28'; },
+        get calculatorsDisplay()    { return '4'; },
+        get totalContentDisplay()   { return '3,700+'; },
     };
 
     // ─── Auto-populate DOM elements ──────────────────
