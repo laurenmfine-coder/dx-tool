@@ -1,318 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+// Auth Guard
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Reasoning Fingerprint — ReasonDx</title>
-    <link rel="icon" href="favicon.svg">
-    <script src="mechanism/js/rdx-patent-innovations.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Your Reasoning Fingerprint — ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1E3A5F; --primary-light: #2E5090; --accent: #8B5CF6;
-            --green: #10B981; --amber: #F59E0B; --red: #EF4444; --cyan: #06B6D4;
-            --bg: #F1F5F9; --card: #FFFFFF; --text: #1E293B; --muted: #64748B;
-            --border: #E2E8F0; --radius: 14px;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 28px 32px; }
-        .header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
-        .header p { opacity: 0.85; font-size: 0.95rem; }
-        .header-nav { margin-top: 12px; display: flex; gap: 12px; }
-        .header-nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; }
-        .header-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 24px; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-        .card { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
-        .card-title { font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .full-width { grid-column: 1 / -1; }
-        .score-big { font-size: 3rem; font-weight: 700; line-height: 1; }
-        .score-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
-        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
-        .badge-green { background: #ECFDF5; color: #065F46; }
-        .badge-amber { background: #FFFBEB; color: #92400E; }
-        .badge-red { background: #FEF2F2; color: #991B1B; }
-        .badge-purple { background: #F5F3FF; color: #5B21B6; }
-        canvas { width: 100% !important; max-height: 300px; }
-        .bias-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-        .bias-bar .label { width: 140px; font-size: 0.82rem; color: var(--muted); flex-shrink: 0; }
-        .bias-bar .track { flex: 1; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
-        .bias-bar .fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
-        .bias-bar .value { width: 40px; text-align: right; font-size: 0.82rem; font-weight: 600; }
-        .mastery-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-        .mastery-row:last-child { border-bottom: none; }
-        .mastery-name { flex: 1; font-size: 0.85rem; }
-        .mastery-bar { width: 120px; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-        .mastery-bar .fill { height: 100%; border-radius: 4px; }
-        .empty-state { text-align: center; padding: 48px 24px; color: var(--muted); }
-        .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
-        .empty-state h3 { color: var(--text); margin-bottom: 8px; }
-        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
-        .stat-row:last-child { border-bottom: none; }
-        .stat-row .val { font-weight: 600; }
-        .review-item { padding: 10px 14px; margin-bottom: 8px; border-radius: 10px; background: #FFFBEB; border-left: 3px solid var(--amber); }
-        .review-item.urgent { background: #FEF2F2; border-left-color: var(--red); }
-        .review-item .case { font-weight: 600; font-size: 0.88rem; }
-        .review-item .meta { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
-        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+/* ─── Theme Variables (matches site) ─── */
+:root {
+    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
+    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
+    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
+    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
+    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
+    --font-display: 'Source Serif 4', serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+[data-theme="light"] {
+    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
+    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
+    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
+    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
+    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+
+/* ─── Layout ─── */
+.fp-container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
+.fp-back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 14px; margin-bottom: 20px; transition: color 0.2s; }
+.fp-back:hover { color: var(--accent); }
+
+/* ─── Hero ─── */
+.fp-hero { text-align: center; margin-bottom: 40px; }
+.fp-hero h1 { font-family: var(--font-display); font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.fp-hero h1 span { background: linear-gradient(135deg, var(--purple), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.fp-hero p { color: var(--text-secondary); font-size: 15px; max-width: 640px; margin: 0 auto; }
+
+/* ─── Cards ─── */
+.fp-grid { display: grid; gap: 20px; }
+.fp-grid-2 { grid-template-columns: 1fr 1fr; }
+.fp-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 768px) { .fp-grid-2, .fp-grid-3 { grid-template-columns: 1fr; } }
+
+.fp-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; transition: border-color 0.2s; }
+.fp-card:hover { border-color: var(--purple); }
+.fp-card h2 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.fp-card .fp-card-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+/* ─── Style Badge ─── */
+.fp-style-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 100px; font-size: 18px; font-weight: 700; font-family: var(--font-display); text-transform: capitalize; }
+.fp-style-badge.systematic { background: var(--accent-light); color: var(--accent); border: 2px solid var(--accent); }
+.fp-style-badge.intuitive { background: var(--warning-light); color: var(--warning); border: 2px solid var(--warning); }
+.fp-style-badge.analytical { background: var(--success-light); color: var(--success); border: 2px solid var(--success); }
+.fp-style-badge.exploratory { background: var(--purple-light); color: var(--purple); border: 2px solid var(--purple); }
+.fp-style-badge.anchored { background: var(--danger-light); color: var(--danger); border: 2px solid var(--danger); }
+.fp-style-badge.unclassified { background: rgba(148,163,184,0.1); color: var(--muted); border: 2px solid var(--muted); }
+
+.fp-confidence { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.fp-style-desc { font-size: 14px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6; }
+
+/* ─── Radar Chart (Canvas) ─── */
+.fp-radar-wrap { display: flex; justify-content: center; align-items: center; padding: 8px 0; }
+.fp-radar-wrap canvas { max-width: 100%; height: auto; }
+
+/* ─── Dimension Bars ─── */
+.fp-dim { margin-bottom: 10px; }
+.fp-dim-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+.fp-dim-label { font-size: 13px; color: var(--text-secondary); }
+.fp-dim-value { font-size: 13px; font-weight: 600; font-family: var(--font-mono); }
+.fp-dim-bar { height: 8px; border-radius: 4px; background: var(--bg-secondary); overflow: hidden; }
+.fp-dim-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
+
+/* ─── Bias Profile ─── */
+.fp-bias-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--card-border); }
+.fp-bias-item:last-child { border-bottom: none; }
+.fp-bias-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.fp-bias-info { flex: 1; }
+.fp-bias-name { font-size: 14px; font-weight: 600; }
+.fp-bias-detail { font-size: 12px; color: var(--muted); }
+.fp-bias-score { font-size: 20px; font-weight: 700; font-family: var(--font-mono); min-width: 48px; text-align: right; }
+
+/* ─── Trend Chart ─── */
+.fp-trend-wrap { height: 200px; position: relative; }
+.fp-trend-wrap canvas { width: 100% !important; height: 100% !important; }
+
+/* ─── Session History ─── */
+.fp-sessions { max-height: 360px; overflow-y: auto; }
+.fp-session-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--card-border); font-size: 13px; }
+.fp-session-row:last-child { border-bottom: none; }
+.fp-session-style { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.fp-session-case { flex: 1; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fp-session-score { font-family: var(--font-mono); font-weight: 600; }
+.fp-session-date { color: var(--muted); font-size: 12px; min-width: 80px; text-align: right; }
+
+/* ─── Empty State ─── */
+.fp-empty { text-align: center; padding: 60px 20px; }
+.fp-empty-icon { font-size: 64px; margin-bottom: 16px; opacity: 0.6; }
+.fp-empty h2 { font-family: var(--font-display); font-size: 24px; margin-bottom: 8px; }
+.fp-empty p { color: var(--text-secondary); max-width: 440px; margin: 0 auto 24px; font-size: 15px; }
+.fp-empty a { display: inline-flex; align-items: center; gap: 6px; padding: 12px 24px; background: var(--purple); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px; transition: opacity 0.2s; }
+.fp-empty a:hover { opacity: 0.9; }
+
+/* ─── Vector Display ─── */
+.fp-vector { font-family: var(--font-mono); font-size: 11px; color: var(--muted); background: var(--bg); border-radius: 8px; padding: 12px; margin-top: 12px; word-break: break-all; line-height: 1.8; }
+.fp-vector-label { font-family: var(--font-body); font-size: 12px; color: var(--muted); margin-bottom: 4px; }
     </style>
-<script src="dx-user-bar.js" defer></script>
 </head>
 <body>
-    <div class="header">
-        <h1>🧬 My Reasoning Fingerprint</h1>
-        <p>RPFS — Reasoning Pathway Fingerprinting System</p>
-        <div class="header-nav">
-            <a href="index.html">← Home</a>
-            <a href="mechanism/training.html">Case Trainer</a>
-            <a href="https://www.ncbi.nlm.nih.gov/books/?term=instructor+dashboard" target="_blank" title="Learn more via StatPearls">Instructor View</a>
-        </div>
-    </div>
-    <div class="container" id="app">
-        <div class="empty-state" id="emptyState">
-            <div class="icon">🧬</div>
-            <h3>No Reasoning Data Yet</h3>
-            <p>Complete clinical cases to build your reasoning fingerprint. Every adventure and case trainer session contributes to your RPFS profile.</p>
-            <div style="margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                <a href="ReasonDx/adventure-hub.html" style="padding:10px 20px; background:var(--accent, #3b82f6); color:white; border-radius:10px; text-decoration:none; font-weight:600;">🗺️ Start an Adventure</a>
-                <a href="mechanism/training.html" style="padding:10px 20px; background:#8b5cf6; color:white; border-radius:10px; text-decoration:none; font-weight:600;">🧠 Case Trainer</a>
-                <a href="reasonlab.html" style="padding:10px 20px; background:#059669; color:white; border-radius:10px; text-decoration:none; font-weight:600;">🔬 ReasonLab</a>
-            </div>
-        </div>
-        <div id="dashContent" style="display:none">
-            <!-- Top Score Cards -->
-            <div class="grid-3" style="margin-bottom:20px">
-                <div class="card" style="text-align:center">
-                    <div class="score-big" id="overallScore" style="color:var(--accent)">—</div>
-                    <div class="score-label">Overall Reasoning Quality</div>
-                </div>
-                <div class="card" style="text-align:center">
-                    <div class="score-big" id="totalSessions" style="color:var(--primary)">—</div>
-                    <div class="score-label">Cases Completed</div>
-                </div>
-                <div class="card" style="text-align:center">
-                    <div class="score-big" id="topicsCount" style="color:var(--green)">—</div>
-                    <div class="score-label">Topics Covered</div>
-                </div>
-            </div>
+    <div class="fp-container" id="app"></div>
 
-            <!-- Radar + Bias Profile -->
-            <div class="grid-2" style="margin-bottom:20px">
-                <div class="card">
-                    <div class="card-title">🧬 Reasoning Fingerprint</div>
-                    <canvas id="radarChart"></canvas>
-                </div>
-                <div class="card">
-                    <div class="card-title">🧠 Cognitive Bias Profile</div>
-                    <div id="biasProfile"></div>
-                    <p style="font-size:0.75rem;color:var(--muted);margin-top:12px">Lower bias scores = stronger clinical reasoning. Flexibility is a positive metric.</p>
-                </div>
-            </div>
-
-            <!-- Trend + Growth -->
-            <div class="grid-2" style="margin-bottom:20px">
-                <div class="card">
-                    <div class="card-title">📈 Reasoning Quality Trend</div>
-                    <canvas id="trendChart"></canvas>
-                </div>
-                <div class="card">
-                    <div class="card-title">🌱 LRDT Growth Curves</div>
-                    <canvas id="growthChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Topic Mastery + Recommended Review -->
-            <div class="grid-2" style="margin-bottom:20px">
-                <div class="card">
-                    <div class="card-title">🎯 Topic Mastery</div>
-                    <div id="topicMastery"></div>
-                </div>
-                <div class="card">
-                    <div class="card-title">🔄 Recommended Review</div>
-                    <div id="reviewList"></div>
-                </div>
-            </div>
-
-            <!-- Session Stats -->
-            <div class="card full-width" style="margin-bottom:20px">
-                <div class="card-title">📊 Session Statistics</div>
-                <div class="grid-3" id="sessionStats"></div>
-            </div>
-        </div>
-    </div>
-
-    <script src="dx-progress.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <!-- Patent Innovation Library -->
+    <script src="js/rdx-patent-innovations.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        if (!window.RdxPatent) {
-            console.warn('Patent innovations library not loaded');
-            return;
-        }
+    (function() {
+        'use strict';
 
-        const { RPFS, LRDT } = window.RdxPatent;
-        const agg = RPFS.getAggregate();
-        const fingerprint = RPFS.generateFingerprint();
-        const mastery = LRDT.getTopicMastery();
-        const curves = LRDT.getGrowthCurves();
-        const reviews = LRDT.getRecommendedReview();
-        const sessions = RPFS.getSessions();
+        const app = document.getElementById('app');
+        const RPFS = window.RdxPatent ? window.RdxPatent.RPFS : null;
 
-        if (!agg || agg.totalSessions === 0) return; // Show empty state
-        document.getElementById('emptyState').style.display = 'none';
-        document.getElementById('dashContent').style.display = 'block';
+        // ─── Reasoning Style Descriptions ─────────────
+        const STYLE_INFO = {
+            systematic: {
+                icon: '🔬', color: 'var(--accent)',
+                desc: 'You approach clinical problems methodically — gathering information broadly, resisting premature closure, and working through differentials in a structured, step-by-step manner. You rarely anchor on early impressions and tend to consider multiple hypotheses simultaneously.'
+            },
+            intuitive: {
+                icon: '⚡', color: 'var(--warning)',
+                desc: 'You rely on pattern recognition and clinical gestalt, often arriving at the correct diagnosis quickly. You front-load data gathering and trust your initial impressions. This can be highly efficient, but watch for anchoring bias on atypical presentations.'
+            },
+            analytical: {
+                icon: '📊', color: 'var(--success)',
+                desc: 'You excel at weighing evidence carefully, using data to systematically narrow your differential. You show strong deliberation — pausing to evaluate diagnostic significance before moving on. Your metacognitive awareness tends to be high.'
+            },
+            exploratory: {
+                icon: '🧭', color: 'var(--purple)',
+                desc: 'You cast a wide diagnostic net, exploring many possibilities before committing. You\'re flexible with hypotheses and frequently pivot when new information emerges. Your broad approach helps catch atypical diagnoses but may benefit from earlier prioritization.'
+            },
+            anchored: {
+                icon: '⚠️', color: 'var(--danger)',
+                desc: 'Your current pattern shows a tendency to lock onto initial impressions early and gather data that confirms rather than challenges them. This is common early in training — the adventure cases in ReasonDx are specifically designed to help you practice keeping your differential open.'
+            },
+            unclassified: {
+                icon: '🔍', color: 'var(--muted)',
+                desc: 'Not enough data yet to classify your reasoning style with confidence. Complete a few more cases and your fingerprint will become clearer.'
+            }
+        };
 
-        // Score cards
-        document.getElementById('overallScore').textContent = agg.avgReasoningScore;
-        document.getElementById('totalSessions').textContent = agg.totalSessions;
-        document.getElementById('topicsCount').textContent = Object.keys(mastery).length;
-
-        // Radar chart
-        if (fingerprint) {
-            new Chart(document.getElementById('radarChart'), {
-                type: 'radar',
-                data: {
-                    labels: ['Thoroughness', 'Flexibility', 'Evidence Use', 'Adaptability', 'Momentum Control', 'Metacognition', 'Overall Quality'],
-                    datasets: [{
-                        label: 'Your Fingerprint',
-                        data: [fingerprint.thoroughness, fingerprint.flexibility, fingerprint.evidenceUse,
-                               fingerprint.adaptability, fingerprint.momentum, fingerprint.metacognition, fingerprint.overallQuality],
-                        backgroundColor: 'rgba(139, 92, 246, 0.15)',
-                        borderColor: '#8B5CF6',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#8B5CF6',
-                        pointRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: { r: { beginAtZero: true, max: 100, ticks: { stepSize: 20, display: false }, grid: { color: '#E2E8F0' }, pointLabels: { font: { size: 11 } } } },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
-
-        // Bias profile bars
-        const biasEl = document.getElementById('biasProfile');
-        const bp = agg.biasProfile;
-        const biases = [
-            { label: 'Premature Closure', val: bp.prematureClosure, color: '#EF4444', positive: false },
-            { label: 'Anchoring', val: bp.anchoring, color: '#F59E0B', positive: false },
-            { label: 'Diag. Momentum', val: bp.diagnosticMomentum, color: '#F97316', positive: false },
-            { label: 'Confirmation Bias', val: bp.confirmationBias, color: '#EC4899', positive: false },
-            { label: 'Flexibility', val: bp.hypothesisFlexibility, color: '#10B981', positive: true }
+        const DIM_LABELS = [
+            'Resists Premature Closure', 'Resists Anchoring', 'Resists Dx Momentum',
+            'Resists Confirmation Bias', 'Hypothesis Flexibility',
+            'Front-Loading Efficiency', 'Temporal Consistency', 'Deliberation Ratio',
+            'Information Breadth', 'Gathering Efficiency', 'Systematic Coverage',
+            'Differential Appropriateness', 'Pivot Responsiveness',
+            'Metacognitive Density', 'Metacognitive Timing'
         ];
-        biasEl.innerHTML = biases.map(b => `
-            <div class="bias-bar">
-                <div class="label">${b.label}</div>
-                <div class="track"><div class="fill" style="width:${Math.min(100,b.val)}%;background:${b.color}"></div></div>
-                <div class="value" style="color:${b.color}">${b.val}</div>
-            </div>
-        `).join('');
 
-        // Reasoning quality trend
-        if (agg.reasoningScoreTrend && agg.reasoningScoreTrend.length > 1) {
-            const trendData = agg.reasoningScoreTrend;
-            new Chart(document.getElementById('trendChart'), {
-                type: 'line',
-                data: {
-                    labels: trendData.map((_, i) => `#${i+1}`),
-                    datasets: [{
-                        label: 'Reasoning Score',
-                        data: trendData.map(t => t.score),
-                        borderColor: '#8B5CF6', backgroundColor: 'rgba(139,92,246,0.08)',
-                        fill: true, tension: 0.3, pointRadius: 3, borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: { y: { beginAtZero: true, max: 100, grid: { color: '#F1F5F9' } }, x: { grid: { display: false } } },
-                    plugins: { legend: { display: false } }
-                }
-            });
+        const DIM_GROUPS = [
+            { name: 'Cognitive Bias Resistance', range: [0, 5], color: 'var(--accent)' },
+            { name: 'Temporal Reasoning', range: [5, 8], color: 'var(--warning)' },
+            { name: 'Information Gathering', range: [8, 11], color: 'var(--success)' },
+            { name: 'Hypothesis Management', range: [11, 13], color: 'var(--purple)' },
+            { name: 'Metacognition', range: [13, 15], color: '#e879f9' }
+        ];
+
+        // ─── Get Data ─────────────────────────────────
+        let fingerprint = null;
+        let aggregate = null;
+        let sessions = [];
+        if (RPFS) {
+            fingerprint = RPFS.generateFingerprint();
+            aggregate = RPFS.getAggregate();
+            sessions = RPFS.getSessions();
         }
 
-        // LRDT Growth curves
-        if (curves && curves.reasoningQuality && curves.reasoningQuality.length > 1) {
-            new Chart(document.getElementById('growthChart'), {
-                type: 'line',
-                data: {
-                    labels: curves.reasoningQuality.map((_, i) => `#${i+1}`),
-                    datasets: [
-                        { label: 'Reasoning', data: curves.reasoningQuality.map(p => p.value), borderColor: '#8B5CF6', tension: 0.3, borderWidth: 2, pointRadius: 2 },
-                        { label: 'Bias-Free', data: curves.biasReduction.map(p => p.value), borderColor: '#10B981', tension: 0.3, borderWidth: 2, pointRadius: 2 },
-                        { label: 'Metacognition', data: curves.metacognition.map(p => p.value), borderColor: '#06B6D4', tension: 0.3, borderWidth: 2, pointRadius: 2 }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: { y: { beginAtZero: true, max: 100, grid: { color: '#F1F5F9' } }, x: { grid: { display: false } } },
-                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
-                }
-            });
-        }
-
-        // Topic mastery
-        const masteryEl = document.getElementById('topicMastery');
-        const topics = Object.entries(mastery).sort((a, b) => b[1].currentMastery - a[1].currentMastery);
-        if (topics.length === 0) {
-            masteryEl.innerHTML = '<p style="color:var(--muted);font-size:0.88rem">No topic data yet.</p>';
+        // ─── Render ───────────────────────────────────
+        if (!fingerprint || !aggregate || aggregate.totalSessions < 1) {
+            renderEmpty();
         } else {
-            const levelColors = { expert: '#10B981', proficient: '#06B6D4', competent: '#8B5CF6', developing: '#F59E0B', novice: '#EF4444' };
-            masteryEl.innerHTML = topics.slice(0, 15).map(([caseId, t]) => `
-                <div class="mastery-row">
-                    <div class="mastery-name">${caseId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</div>
-                    <span class="badge" style="background:${levelColors[t.masteryLevel]}22;color:${levelColors[t.masteryLevel]}">${t.masteryLevel}</span>
-                    <div class="mastery-bar"><div class="fill" style="width:${t.currentMastery}%;background:${levelColors[t.masteryLevel]}"></div></div>
-                    <span style="font-size:0.82rem;font-weight:600;width:30px;text-align:right">${t.currentMastery}</span>
+            renderDashboard();
+        }
+
+        function renderEmpty() {
+            app.innerHTML = `
+                <a href="training.html" class="fp-back">← Back to Training</a>
+                <div class="fp-empty">
+                    <div class="fp-empty-icon">🧬</div>
+                    <h2>Your Reasoning Fingerprint</h2>
+                    <p>Complete your first clinical case to begin building your unique reasoning profile. Every case you work through adds another data point to your cognitive fingerprint.</p>
+                    <a href="training.html">Start a Case →</a>
                 </div>
-            `).join('');
+            `;
         }
 
-        // Recommended review
-        const reviewEl = document.getElementById('reviewList');
-        if (reviews.length === 0) {
-            reviewEl.innerHTML = '<p style="color:var(--muted);font-size:0.88rem">All caught up — no reviews needed right now!</p>';
-        } else {
-            reviewEl.innerHTML = reviews.slice(0, 8).map(r => `
-                <div class="review-item ${r.urgency === 'high' ? 'urgent' : ''}">
-                    <div class="case">${r.caseId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</div>
-                    <div class="meta">${r.daysSinceReview} days since review · ${r.masteryLevel} · Score: ${r.currentMastery}</div>
+        function renderDashboard() {
+            const style = fingerprint.reasoningStyle || 'unclassified';
+            const info = STYLE_INFO[style] || STYLE_INFO.unclassified;
+            const fp = fingerprint._rawVector || [];
+            const conf = fingerprint.styleConfidence || 0;
+
+            app.innerHTML = `
+                <a href="training.html" class="fp-back">← Back to Training</a>
+                <div class="fp-hero">
+                    <h1>Your <span>Reasoning Fingerprint</span></h1>
+                    <p>A 15-dimensional profile of how you think through clinical problems — built from ${aggregate.totalSessions} case${aggregate.totalSessions !== 1 ? 's' : ''}.</p>
                 </div>
-            `).join('');
+
+                <!-- Row 1: Style + Radar -->
+                <div class="fp-grid fp-grid-2" style="margin-bottom: 20px;">
+                    <div class="fp-card">
+                        <h2>Reasoning Style</h2>
+                        <div class="fp-card-sub">Your dominant clinical reasoning pattern</div>
+                        <div style="text-align:center; padding: 12px 0;">
+                            <div class="fp-style-badge ${style}">${info.icon} ${style}</div>
+                            <div class="fp-confidence">${Math.round(conf * 100)}% confidence · ${aggregate.totalSessions} session${aggregate.totalSessions !== 1 ? 's' : ''} analyzed</div>
+                        </div>
+                        <div class="fp-style-desc">${info.desc}</div>
+                    </div>
+                    <div class="fp-card">
+                        <h2>Fingerprint Radar</h2>
+                        <div class="fp-card-sub">Your 15-dimension cognitive profile at a glance</div>
+                        <div class="fp-radar-wrap">
+                            <canvas id="radarCanvas" width="380" height="380"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: All Dimensions -->
+                <div class="fp-card" style="margin-bottom: 20px;">
+                    <h2>Dimension Breakdown</h2>
+                    <div class="fp-card-sub">Each dimension scored 0–100. Higher is generally better (except where noted).</div>
+                    <div class="fp-grid fp-grid-3" style="gap: 24px; margin-top: 8px;" id="dimGrid"></div>
+                </div>
+
+                <!-- Row 3: Bias Profile + Trend -->
+                <div class="fp-grid fp-grid-2" style="margin-bottom: 20px;">
+                    <div class="fp-card">
+                        <h2>Cognitive Bias Profile</h2>
+                        <div class="fp-card-sub">Average bias resistance across sessions (higher = better resistance)</div>
+                        <div id="biasProfile"></div>
+                    </div>
+                    <div class="fp-card">
+                        <h2>Reasoning Quality Trend</h2>
+                        <div class="fp-card-sub">Your overall reasoning score over time</div>
+                        <div class="fp-trend-wrap">
+                            <canvas id="trendCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4: Recent Sessions -->
+                <div class="fp-card" style="margin-bottom: 20px;">
+                    <h2>Recent Sessions</h2>
+                    <div class="fp-card-sub">Your last ${Math.min(sessions.length, 20)} case reasoning reports</div>
+                    <div class="fp-sessions" id="sessionList"></div>
+                </div>
+
+                <!-- Row 5: Raw Vector -->
+                <div class="fp-card">
+                    <h2>Raw Fingerprint Vector</h2>
+                    <div class="fp-card-sub">Your 15-dimensional reasoning vector (used for style classification and comparison)</div>
+                    <div class="fp-vector-label">Aggregate fingerprint</div>
+                    <div class="fp-vector">[${fp.map(v => v.toFixed(4)).join(', ')}]</div>
+                </div>
+            `;
+
+            renderDimensions(fp);
+            renderBiasProfile();
+            renderRadar(fp);
+            renderTrend();
+            renderSessions();
         }
 
-        // Session stats
-        const statsEl = document.getElementById('sessionStats');
-        const avgMin = Math.round(agg.avgSessionDuration / 60);
-        statsEl.innerHTML = `
-            <div><div class="stat-row"><span>Avg Duration</span><span class="val">${avgMin} min</span></div>
-                 <div class="stat-row"><span>Avg Pivot Points</span><span class="val">${agg.avgPivotPoints}</span></div>
-                 <div class="stat-row"><span>Avg Data Actions</span><span class="val">${agg.avgDataActions}</span></div></div>
-            <div><div class="stat-row"><span>Avg Differential Size</span><span class="val">${agg.avgDifferentialSize}</span></div>
-                 <div class="stat-row"><span>Avg Metacog Moments</span><span class="val">${agg.avgMetacogMoments}</span></div>
-                 <div class="stat-row"><span>Reasoning Score</span><span class="val">${agg.avgReasoningScore}/100</span></div></div>
-            <div><div class="stat-row"><span>Best Case</span><span class="val">${getBestCase()}</span></div>
-                 <div class="stat-row"><span>Needs Work</span><span class="val">${getWeakestCase()}</span></div>
-                 <div class="stat-row"><span>Sessions</span><span class="val">${agg.totalSessions}</span></div></div>
-        `;
+        // ─── Dimension Bars ───────────────────────────
+        function renderDimensions(fp) {
+            const grid = document.getElementById('dimGrid');
+            if (!grid) return;
+            let html = '';
+            DIM_GROUPS.forEach(function(group) {
+                html += '<div>';
+                html += `<div style="font-size:13px;font-weight:600;color:${group.color};margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;">${group.name}</div>`;
+                for (let i = group.range[0]; i < group.range[1]; i++) {
+                    const pct = Math.round((fp[i] || 0) * 100);
+                    const barColor = pct >= 70 ? 'var(--success)' : pct >= 40 ? 'var(--warning)' : 'var(--danger)';
+                    html += `<div class="fp-dim">
+                        <div class="fp-dim-header">
+                            <span class="fp-dim-label">${DIM_LABELS[i]}</span>
+                            <span class="fp-dim-value" style="color:${barColor}">${pct}</span>
+                        </div>
+                        <div class="fp-dim-bar"><div class="fp-dim-fill" style="width:${pct}%;background:${barColor}"></div></div>
+                    </div>`;
+                }
+                html += '</div>';
+            });
+            grid.innerHTML = html;
+        }
 
-        function getBestCase() {
-            const cp = agg.casePerformance || {};
-            let best = '', bestScore = 0;
-            for (const [k, v] of Object.entries(cp)) { if (v.avgScore > bestScore) { bestScore = v.avgScore; best = k; } }
-            return best ? best.replace(/-/g, ' ').substring(0, 18) : '—';
+        // ─── Bias Profile ─────────────────────────────
+        function renderBiasProfile() {
+            const el = document.getElementById('biasProfile');
+            if (!el || !aggregate) return;
+            const bp = aggregate.biasProfile || {};
+            const biases = [
+                { key: 'prematureClosure', name: 'Premature Closure', icon: '🔒', desc: 'Tendency to diagnose before gathering enough info', bg: 'var(--danger-light)' },
+                { key: 'anchoring', name: 'Anchoring', icon: '⚓', desc: 'Over-reliance on first piece of information', bg: 'var(--warning-light)' },
+                { key: 'diagnosticMomentum', name: 'Diagnostic Momentum', icon: '🌊', desc: 'Sticking with a diagnosis once it has momentum', bg: 'var(--accent-light)' },
+                { key: 'confirmationBias', name: 'Confirmation Bias', icon: '🔍', desc: 'Seeking data that confirms rather than challenges', bg: 'var(--purple-light)' },
+                { key: 'hypothesisFlexibility', name: 'Hypothesis Flexibility', icon: '🔄', desc: 'Willingness to change your leading diagnosis', bg: 'var(--success-light)' },
+            ];
+            // Note: bias scores are *resistance* scores inverted by the fingerprint.
+            // The raw biasProfile from aggregate is the raw average of the bias *scores*.
+            // For premature closure, anchoring, momentum, confirmation: lower raw = better
+            // For flexibility: higher raw = better
+            el.innerHTML = biases.map(function(b) {
+                const raw = bp[b.key] || 0;
+                const isResistance = b.key !== 'hypothesisFlexibility';
+                const display = isResistance ? (100 - raw) : raw;  // flip to show resistance
+                const color = display >= 70 ? 'var(--success)' : display >= 40 ? 'var(--warning)' : 'var(--danger)';
+                return `<div class="fp-bias-item">
+                    <div class="fp-bias-icon" style="background:${b.bg}">${b.icon}</div>
+                    <div class="fp-bias-info">
+                        <div class="fp-bias-name">${b.name}</div>
+                        <div class="fp-bias-detail">${isResistance ? 'Resistance' : 'Score'}: ${b.desc}</div>
+                    </div>
+                    <div class="fp-bias-score" style="color:${color}">${display}</div>
+                </div>`;
+            }).join('');
         }
-        function getWeakestCase() {
-            const cp = agg.casePerformance || {};
-            let worst = '', worstScore = 100;
-            for (const [k, v] of Object.entries(cp)) { if (v.avgScore < worstScore && v.attempts > 0) { worstScore = v.avgScore; worst = k; } }
-            return worst ? worst.replace(/-/g, ' ').substring(0, 18) : '—';
+
+        // ─── Radar Chart (pure Canvas) ────────────────
+        function renderRadar(fp) {
+            const canvas = document.getElementById('radarCanvas');
+            if (!canvas || !fp || fp.length < 15) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const size = 380;
+            canvas.width = size * dpr;
+            canvas.height = size * dpr;
+            canvas.style.width = size + 'px';
+            canvas.style.height = size + 'px';
+            ctx.scale(dpr, dpr);
+
+            const cx = size / 2, cy = size / 2, radius = 140;
+            const n = 15;
+            const angleStep = (2 * Math.PI) / n;
+            const startAngle = -Math.PI / 2;
+
+            // Grid rings
+            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--card-border').trim() || '#334155';
+            ctx.lineWidth = 0.5;
+            [0.2, 0.4, 0.6, 0.8, 1.0].forEach(function(ring) {
+                ctx.beginPath();
+                for (let i = 0; i <= n; i++) {
+                    const angle = startAngle + i * angleStep;
+                    const x = cx + Math.cos(angle) * radius * ring;
+                    const y = cy + Math.sin(angle) * radius * ring;
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            });
+
+            // Axis lines
+            for (let i = 0; i < n; i++) {
+                const angle = startAngle + i * angleStep;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+                ctx.stroke();
+            }
+
+            // Data polygon — fill
+            ctx.beginPath();
+            for (let i = 0; i < n; i++) {
+                const angle = startAngle + i * angleStep;
+                const r = radius * (fp[i] || 0);
+                const x = cx + Math.cos(angle) * r;
+                const y = cy + Math.sin(angle) * r;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(139, 92, 246, 0.2)';
+            ctx.fill();
+            ctx.strokeStyle = '#8b5cf6';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Data points
+            for (let i = 0; i < n; i++) {
+                const angle = startAngle + i * angleStep;
+                const r = radius * (fp[i] || 0);
+                const x = cx + Math.cos(angle) * r;
+                const y = cy + Math.sin(angle) * r;
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.fillStyle = '#8b5cf6';
+                ctx.fill();
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#0f172a';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+
+            // Short labels around edge
+            const SHORT_LABELS = ['PC', 'AN', 'MO', 'CB', 'FL', 'FE', 'TC', 'DR', 'IB', 'GE', 'SC', 'DA', 'PR', 'MD', 'MT'];
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#94a3b8';
+            ctx.font = '10px "DM Sans", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (let i = 0; i < n; i++) {
+                const angle = startAngle + i * angleStep;
+                const lx = cx + Math.cos(angle) * (radius + 18);
+                const ly = cy + Math.sin(angle) * (radius + 18);
+                ctx.fillText(SHORT_LABELS[i], lx, ly);
+            }
         }
-    });
+
+        // ─── Trend Chart (pure Canvas) ────────────────
+        function renderTrend() {
+            const canvas = document.getElementById('trendCanvas');
+            if (!canvas || !aggregate || !aggregate.reasoningScoreTrend) return;
+            const data = aggregate.reasoningScoreTrend.filter(function(d) { return d.score != null; });
+            if (data.length < 2) {
+                canvas.parentElement.innerHTML = '<div style="text-align:center;color:var(--muted);padding:40px 0;font-size:14px;">Need at least 2 sessions to show trend</div>';
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const w = rect.width || 460, h = 200;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            ctx.scale(dpr, dpr);
+
+            const pad = { top: 20, right: 16, bottom: 28, left: 40 };
+            const chartW = w - pad.left - pad.right;
+            const chartH = h - pad.top - pad.bottom;
+
+            // Y axis
+            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--card-border').trim() || '#334155';
+            ctx.lineWidth = 0.5;
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#94a3b8';
+            ctx.font = '11px "DM Sans"';
+            ctx.textAlign = 'right';
+            for (let y = 0; y <= 100; y += 25) {
+                const py = pad.top + chartH - (y / 100) * chartH;
+                ctx.beginPath();
+                ctx.moveTo(pad.left, py);
+                ctx.lineTo(w - pad.right, py);
+                ctx.stroke();
+                ctx.fillText(y.toString(), pad.left - 8, py + 4);
+            }
+
+            // Data line
+            const maxSessions = data.length;
+            ctx.beginPath();
+            data.forEach(function(d, i) {
+                const px = pad.left + (i / (maxSessions - 1)) * chartW;
+                const py = pad.top + chartH - (d.score / 100) * chartH;
+                i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+            });
+            ctx.strokeStyle = '#8b5cf6';
+            ctx.lineWidth = 2.5;
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            // Gradient fill under line
+            ctx.beginPath();
+            data.forEach(function(d, i) {
+                const px = pad.left + (i / (maxSessions - 1)) * chartW;
+                const py = pad.top + chartH - (d.score / 100) * chartH;
+                i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+            });
+            ctx.lineTo(pad.left + chartW, pad.top + chartH);
+            ctx.lineTo(pad.left, pad.top + chartH);
+            ctx.closePath();
+            const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + chartH);
+            grad.addColorStop(0, 'rgba(139,92,246,0.25)');
+            grad.addColorStop(1, 'rgba(139,92,246,0.02)');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Data dots
+            data.forEach(function(d, i) {
+                const px = pad.left + (i / (maxSessions - 1)) * chartW;
+                const py = pad.top + chartH - (d.score / 100) * chartH;
+                ctx.beginPath();
+                ctx.arc(px, py, 3.5, 0, 2 * Math.PI);
+                ctx.fillStyle = '#8b5cf6';
+                ctx.fill();
+            });
+
+            // X axis labels
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#94a3b8';
+            ctx.textAlign = 'center';
+            ctx.font = '10px "DM Sans"';
+            const step = Math.max(1, Math.floor(maxSessions / 6));
+            for (let i = 0; i < maxSessions; i += step) {
+                const px = pad.left + (i / (maxSessions - 1)) * chartW;
+                ctx.fillText('#' + (i + 1), px, h - 6);
+            }
+        }
+
+        // ─── Session History ──────────────────────────
+        function renderSessions() {
+            const el = document.getElementById('sessionList');
+            if (!el || sessions.length === 0) return;
+            const recent = sessions.slice(-20).reverse();
+            const styleColors = {
+                systematic: 'var(--accent)', intuitive: 'var(--warning)',
+                analytical: 'var(--success)', exploratory: 'var(--purple)',
+                anchored: 'var(--danger)'
+            };
+            el.innerHTML = recent.map(function(s) {
+                const caseId = (s.session && s.session.caseId) || 'Unknown case';
+                const score = s.reasoningQualityScore != null ? s.reasoningQualityScore : '—';
+                const date = s._savedAt ? new Date(s._savedAt).toLocaleDateString() : '';
+                const fp = s._fingerprint;
+                let sStyle = 'unclassified';
+                if (fp && RPFS) {
+                    const result = RPFS._classifyReasoningStyle(fp);
+                    sStyle = result.label;
+                }
+                const dotColor = styleColors[sStyle] || 'var(--muted)';
+                const scoreColor = typeof score === 'number' ? (score >= 70 ? 'var(--success)' : score >= 40 ? 'var(--warning)' : 'var(--danger)') : 'var(--muted)';
+                return `<div class="fp-session-row">
+                    <div class="fp-session-style" style="background:${dotColor};" title="${sStyle}"></div>
+                    <div class="fp-session-case">${caseId}</div>
+                    <div class="fp-session-score" style="color:${scoreColor}">${score}</div>
+                    <div class="fp-session-date">${date}</div>
+                </div>`;
+            }).join('');
+        }
+
+        // ─── Theme Detection ──────────────────────────
+        (function detectTheme() {
+            const stored = localStorage.getItem('rdx-theme');
+            if (stored) document.documentElement.setAttribute('data-theme', stored);
+        })();
+
+    })();
     </script>
-<script src="dx-epa-integration.js"></script>
-<script src="data/rdx-persist.js"></script>
 </body>
 </html>

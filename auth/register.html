@@ -138,7 +138,7 @@
                     <div class="plan-name">Free</div>
                     <div class="plan-price">
                         <span class="amount">$0</span>
-                        <span class="period">/forever</span>
+                        <span class="period"></span>
                     </div>
                     <div class="exam-tags">
                         <span class="exam-tag s1">Step 1</span>
@@ -150,7 +150,7 @@
                         <li>20 board-style MCQs</li>
                         <li>Basic progress tracking</li>
                         <li>All clinical calculators</li>
-                        <li class="excluded">Full module library (244 topics)</li>
+                        <li class="excluded">Full module library (<span data-rdx-stat="topics"></span> topics)</li>
                         <li class="excluded">Unlimited cases &amp; MCQs</li>
                         <li class="excluded">Deep dive content</li>
                         <li class="excluded">AI Tutor</li>
@@ -163,9 +163,9 @@
                     <div class="plan-icon">🚀</div>
                     <div class="plan-name">Pro</div>
                     <div class="plan-price">
-                        <span class="amount">$9.99</span>
+                        <span class="amount">$14.99</span>
                         <span class="period">/month</span>
-                        <div class="annual">or $79.99/year (save 33%)</div>
+                        <div class="annual">or $99/year (save 45%)</div>
                     </div>
                     <div class="exam-tags">
                         <span class="exam-tag s1">Step 1</span>
@@ -173,52 +173,25 @@
                         <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>All 244 topics across 26 specialties</li>
-                        <li>323+ clinical cases with MCQs</li>
-                        <li>244 interactive case adventures</li>
-                        <li>211 deep dive modules</li>
+                        <li>All <span data-rdx-stat="topics"></span> topics across <span data-rdx-stat="specialties"></span> specialties</li>
+                        <li><span data-rdx-stat="mcqs"></span> board-style MCQs</li>
+                        <li><span data-rdx-stat="adventures"></span> interactive case adventures</li>
+                        <li><span data-rdx-stat="deepDives"></span> deep dive modules</li>
                         <li>Board-prep mode (Step 1, Step 2, Shelf)</li>
                         <li>Reasoning pathway fingerprinting</li>
                         <li>AI Tutor (unlimited)</li>
                         <li>Spaced repetition &amp; analytics</li>
-                        <li>Anki/Quizlet export</li>
                     </ul>
                     <button class="plan-select-btn">Start Pro</button>
                 </div>
 
-                <div class="plan-card beta" onclick="selectPlan('beta')" id="planBeta">
-                    <div class="plan-badge beta-badge">Limited Spots</div>
-                    <div class="plan-icon">🧪</div>
-                    <div class="plan-name">Beta Tester</div>
-                    <div class="plan-price">
-                        <span class="amount">50% off</span>
-                        <span class="period">Pro pricing</span>
-                        <div class="annual" style="color: #d97706;">$4.99/mo or $39.99/yr</div>
-                    </div>
-                    <div class="exam-tags">
-                        <span class="exam-tag s1">Step 1</span>
-                        <span class="exam-tag s2">Step 2 CK</span>
-                        <span class="exam-tag shelf">All Shelf Exams</span>
-                    </div>
-                    <ul class="plan-features">
-                        <li>Everything in Pro — half price</li>
-                        <li>Requires .edu email</li>
-                        <li>Monthly feedback survey (5 min)</li>
-                        <li>Help shape the platform</li>
-                        <li>Early access to new features</li>
-                        <li>Beta tester badge on profile</li>
-                        <li>Lock in beta pricing at renewal</li>
-                    </ul>
-                    <button class="plan-select-btn">Apply for Beta</button>
-                    <div class="beta-note">📋 Beta testers provide structured feedback monthly to help improve the platform for all students.</div>
-                </div>
             </div>
 
             <!-- REFERRAL CALLOUT -->
             <div style="max-width: 600px; margin: 0 auto 30px; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center;">
                 <div style="font-size: 28px; margin-bottom: 8px;">🎁</div>
                 <h3 style="font-size: 18px; color: #1e3a5f; margin-bottom: 8px;">Refer a Friend, Get Rewarded</h3>
-                <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Share your referral code after signup. For each friend who joins Pro or Beta:</p>
+                <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Share your referral code after signup. For each friend who joins Pro:</p>
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
                     <div style="background: #f0fdf4; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
                         <div style="font-size: 20px; font-weight: 700; color: #059669;">1 referral</div>
@@ -249,47 +222,6 @@
             </div>
             <div class="form-body">
                 <div class="steps" id="stepIndicator"></div>
-
-                <!-- BETA APPLICATION -->
-                <div class="section" id="sectionBetaApp">
-                    <div class="info-box amber"><span class="icon">🧪</span><div><strong>Beta Tester Application</strong><br>Tell us about yourself so we can match you with the right feedback cohort.</div></div>
-                    <div id="betaError" class="message"></div>
-                    <div class="form-group">
-                        <label class="form-label">Why do you want to be a beta tester?</label>
-                        <select id="betaMotivation" class="form-select">
-                            <option value="">Select one...</option>
-                            <option value="board-prep">Preparing for board exams (Step 1/2)</option>
-                            <option value="shelf-prep">Studying for shelf exams</option>
-                            <option value="rotation">Currently on clinical rotations</option>
-                            <option value="improve-reasoning">Want to improve clinical reasoning</option>
-                            <option value="curious">Curious about the platform</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Which exam are you preparing for? <span class="optional">(optional)</span></label>
-                        <select id="betaExam" class="form-select">
-                            <option value="">Select if applicable...</option>
-                            <option value="step1">USMLE Step 1</option>
-                            <option value="step2ck">USMLE Step 2 CK</option>
-                            <option value="comlex1">COMLEX Level 1</option>
-                            <option value="comlex2">COMLEX Level 2</option>
-                            <option value="shelf-im">IM Shelf</option>
-                            <option value="shelf-surgery">Surgery Shelf</option>
-                            <option value="shelf-peds">Pediatrics Shelf</option>
-                            <option value="shelf-obgyn">OB/GYN Shelf</option>
-                            <option value="shelf-psych">Psychiatry Shelf</option>
-                            <option value="shelf-neuro">Neurology Shelf</option>
-                            <option value="shelf-fm">Family Medicine Shelf</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="agreeBetaFeedback">
-                        <label for="agreeBetaFeedback">I agree to complete a brief feedback survey each month (~5 min)</label>
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="submitBetaApp()">Continue to Registration →</button>
-                    <div class="login-prompt"><a href="#" onclick="backToPlanSelection()">← Choose a different plan</a></div>
-                </div>
 
                 <!-- EMAIL -->
                 <div class="section" id="sectionEmail">
@@ -429,12 +361,12 @@
                     <div style="text-align: center; margin-bottom: 24px;">
                         <div class="pricing-toggle">
                             <button onclick="setBilling('monthly')" id="billingMonthly" class="active">Monthly</button>
-                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save 33%</span></button>
+                            <button onclick="setBilling('annual')" id="billingAnnual">Annual <span class="savings-badge">Save 45%</span></button>
                         </div>
                     </div>
                     <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
                         <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;" id="paymentLabel">You'll be charged</div>
-                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$9.99</div>
+                        <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
                         <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
                         <div style="font-size: 13px; color: #059669; margin-top: 4px;" id="referralCredit" class="hidden">🎁 Your friend gets a free month too!</div>
                     </div>
@@ -444,7 +376,7 @@
                             <p style="color: #94a3b8; font-size: 14px;">Card input will appear here when Stripe is configured</p>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $9.99/month</button>
+                    <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $14.99/month</button>
                     <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure payment · Cancel anytime · 30-day money-back guarantee</p>
                 </div>
 
@@ -493,10 +425,8 @@
             GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
             STRIPE_PUBLIC_KEY: 'YOUR_STRIPE_PUBLIC_KEY_HERE',
             DEMO_MODE: false,
-            PRO_MONTHLY: 9.99,
-            PRO_ANNUAL: 79.99,
-            BETA_MONTHLY: 4.99,
-            BETA_ANNUAL: 39.99,
+            PRO_MONTHLY: 14.99,
+            PRO_ANNUAL: 99.00,
             // Referral reward tiers: { minReferrals: freeMonths }
             // When Stripe is live, each tier triggers a Stripe coupon via the backend:
             //   POST /api/referral/apply → creates coupon with duration_in_months
@@ -515,9 +445,7 @@
             generatedCode: null,
             billingPeriod: 'monthly',
             referralCode: null,
-            generatedReferral: null,
-            betaMotivation: null,
-            betaExam: null
+            generatedReferral: null
         };
 
         // ============================================
@@ -564,8 +492,7 @@
                 document.getElementById('formHeader').className = 'form-header ' + plan;
                 var titles = {
                     free:  ['Create Free Account', 'Free Plan — Board Prep Starter'],
-                    pro:   ['Start Pro Subscription', 'Pro — Full Board Prep Access'],
-                    beta:  ['Apply for Beta Program', 'Beta Tester — 50% Off Pro']
+                    pro:   ['Start Pro Subscription', 'Pro — Full Board Prep Access']
                 };
                 document.getElementById('formTitle').textContent = titles[plan][0];
                 document.getElementById('formSubtitle').textContent = titles[plan][1];
@@ -575,19 +502,13 @@
 
         function setupStepsForPlan(plan) {
             var si = document.getElementById('stepIndicator');
-            var numSteps = (plan === 'beta') ? 5 : (plan === 'pro') ? 5 : 4;
+            var numSteps = (plan === 'pro') ? 5 : 4;
             si.innerHTML = Array(numSteps).fill(0).map(function(_, i){
                 return '<div class="step' + (i === 0 ? ' active' : '') + '" data-step="' + i + '"></div>';
             }).join('');
-            if (plan === 'beta') {
-                showSection('sectionBetaApp');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Academic email required</strong><br>Beta program requires a .edu email.';
-                document.getElementById('emailHint').textContent = 'Must be a .edu email address';
-            } else {
-                showSection('sectionEmail');
-                document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send a verification code.';
-                document.getElementById('emailHint').textContent = 'Any email address works';
-            }
+            showSection('sectionEmail');
+            document.getElementById('emailInfoText').innerHTML = '<strong>Enter your email</strong><br>We\'ll send a verification code.';
+            document.getElementById('emailHint').textContent = 'Any email address works';
         }
 
         function backToPlanSelection() {
@@ -614,7 +535,6 @@
         }
 
         function getSectionOrder() {
-            if (state.selectedPlan === 'beta') return ['sectionBetaApp', 'sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
             if (state.selectedPlan === 'pro') return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionPayment', 'sectionSuccess'];
             return ['sectionEmail', 'sectionVerify', 'sectionProfile', 'sectionSuccess'];
         }
@@ -625,21 +545,6 @@
         }
 
         // ============================================
-        // BETA APPLICATION
-        // ============================================
-        function submitBetaApp() {
-            var mot = document.getElementById('betaMotivation').value;
-            var fb = document.getElementById('agreeBetaFeedback').checked;
-            var err = document.getElementById('betaError');
-            err.className = 'message';
-            if (!mot) { err.textContent = 'Please tell us why you want to join the beta.'; err.className = 'message error'; return; }
-            if (!fb) { err.textContent = 'Beta testers need to agree to provide monthly feedback.'; err.className = 'message error'; return; }
-            state.betaMotivation = mot;
-            state.betaExam = document.getElementById('betaExam').value;
-            nextSection();
-        }
-
-        // ============================================
         // EMAIL VERIFICATION
         // ============================================
         function sendVerificationCode() {
@@ -647,8 +552,8 @@
             var err = document.getElementById('emailError');
             err.className = 'message';
             var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            if (!valid || (state.selectedPlan === 'beta' && !email.endsWith('.edu'))) {
-                err.textContent = state.selectedPlan === 'beta' ? 'Please enter a valid .edu email address.' : 'Please enter a valid email address.';
+            if (!valid) {
+                err.textContent = 'Please enter a valid email address.';
                 err.className = 'message error'; return;
             }
             var ref = document.getElementById('referralCodeInput').value.trim().toUpperCase();
@@ -735,13 +640,12 @@
                 graduationYear: document.getElementById('gradYear').value,
                 studyGoal: document.getElementById('studyGoal').value
             };
-            if (state.selectedPlan === 'pro' || state.selectedPlan === 'beta') { setupPaymentSection(); nextSection(); return; }
+            if (state.selectedPlan === 'pro') { setupPaymentSection(); nextSection(); return; }
             finalizeAccount(profileData);
         }
 
         function setupPaymentSection() {
-            var isBeta = state.selectedPlan === 'beta';
-            document.getElementById('paymentTitle').textContent = isBeta ? 'Complete your Beta subscription (50% off)' : 'Complete your Pro subscription';
+            document.getElementById('paymentTitle').textContent = 'Complete your Pro subscription';
             if (state.referralCode) {
                 document.getElementById('referralCredit').classList.remove('hidden');
                 document.getElementById('paymentLabel').textContent = 'First month free with referral! Then:';
@@ -756,9 +660,8 @@
             state.billingPeriod = period;
             document.getElementById('billingMonthly').classList.toggle('active', period === 'monthly');
             document.getElementById('billingAnnual').classList.toggle('active', period === 'annual');
-            var isBeta = state.selectedPlan === 'beta';
-            var mo = isBeta ? CONFIG.BETA_MONTHLY : CONFIG.PRO_MONTHLY;
-            var yr = isBeta ? CONFIG.BETA_ANNUAL : CONFIG.PRO_ANNUAL;
+            var mo = CONFIG.PRO_MONTHLY;
+            var yr = CONFIG.PRO_ANNUAL;
             if (period === 'monthly') {
                 document.getElementById('paymentAmount').textContent = '$' + mo.toFixed(2);
                 document.getElementById('paymentPeriod').textContent = 'per month';
@@ -772,11 +675,9 @@
 
         function processPayment() {
             if (CONFIG.DEMO_MODE) {
-                var isBeta = state.selectedPlan === 'beta';
-                var price = state.billingPeriod === 'monthly' ? (isBeta ? CONFIG.BETA_MONTHLY : CONFIG.PRO_MONTHLY) : (isBeta ? CONFIG.BETA_ANNUAL : CONFIG.PRO_ANNUAL);
+                var price = state.billingPeriod === 'monthly' ? CONFIG.PRO_MONTHLY : CONFIG.PRO_ANNUAL;
                 alert('Demo Mode: Would charge $' + price.toFixed(2) + ' via Stripe.' +
                       (state.referralCode ? '\nReferral code "' + state.referralCode + '" applied — first month free!' : '') +
-                      (isBeta ? '\nBeta tester discount applied (50% off).' : '') +
                       '\n\nSimulating successful payment...');
                 finalizeAccount({
                     firstName: document.getElementById('firstName').value.trim(),
@@ -812,11 +713,6 @@
                 referralCredits: 0,
                 createdAt: new Date().toISOString()
             };
-            if (state.selectedPlan === 'beta') {
-                userData.betaTester = true;
-                userData.betaMotivation = state.betaMotivation;
-                userData.betaExam = state.betaExam;
-            }
             localStorage.setItem('reasondx-user', JSON.stringify(userData));
 
             // Create Supabase account in background (for consistent auth sessions)
@@ -845,7 +741,7 @@
                 window.DxProgress.syncProfile();
             }
 
-            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, betaTester: userData.betaTester || false, betaMotivation: state.betaMotivation, betaExam: state.betaExam, timestamp: new Date().toISOString() });
+            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, timestamp: new Date().toISOString() });
 
             // Log referral for the referrer (Stripe hook)
             if (state.referralCode) {
@@ -865,12 +761,10 @@
             }
 
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
-            if (state.selectedPlan === 'beta') {
-                document.getElementById('successTitle').textContent = 'Welcome to the Beta Program! 🧪';
-                document.getElementById('successMessage').textContent = 'Your beta tester account is active. First feedback survey arrives in 30 days.';
-            } else if (state.selectedPlan === 'pro') {
+            if (state.selectedPlan === 'pro') {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro! 🚀';
-                document.getElementById('successMessage').textContent = 'Full access to all 244 topics, 323 cases, and AI tutor is now unlocked.';
+                var s = window.RdxSiteStats || {};
+                document.getElementById('successMessage').textContent = 'Full access to all ' + (s.topicsDisplay || '297') + ' topics, ' + (s.mcqsDisplay || '2,900+') + ' MCQs, and AI tutor is now unlocked.';
             } else {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx! 🌱';
                 document.getElementById('successMessage').textContent = 'Your free account is ready. Explore board-prep content and upgrade anytime.';
@@ -979,5 +873,6 @@
         });
     </script>
 <script src="../data/rdx-persist.js"></script>
+<script src="../rdx-site-stats.js"></script>
 </body>
 </html>
