@@ -1222,6 +1222,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
 
             <!-- Layer Navigation -->
+            <div id="layerList" class="layer-list"></div>
             <!-- Unified Navigation -->
     </aside>
 
@@ -1349,8 +1350,14 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             deepDiveData = await loadDeepDiveData();
             
             if (deepDiveData) {
+                // Normalize data from any format to the expected player format
+                deepDiveData = normalizeDeepDiveData(deepDiveData);
+                
                 document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
                 document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
+                
+                // Update patient card from vignette data
+                updatePatientCard(deepDiveData);
                 
                 renderLayerNav();
                 loadVignetteData();
@@ -1597,9 +1604,158 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
+        // ============ DATA NORMALIZATION ============
+        // Converts all deep dive formats to the expected player format
+        function normalizeDeepDiveData(data) {
+            if (!data) return data;
+
+            // --- FORMAT 1: Flat 'questions' array (our new format) ---
+            // Convert to single-layer structure
+            if (data.questions && !data.layers) {
+                const layerIcons = ['🔬', '⚙️', '🧠', '💊', '📋', '🫀'];
+                const layerColors = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4'];
+                
+                // Group questions into layers of ~5 each for navigation
+                const chunkSize = Math.max(5, Math.ceil(data.questions.length / 4));
+                const layers = [];
+                for (let i = 0; i < data.questions.length; i += chunkSize) {
+                    const chunk = data.questions.slice(i, i + chunkSize);
+                    const layerIdx = layers.length;
+                    layers.push({
+                        id: `section-${layerIdx + 1}`,
+                        title: `Section ${layerIdx + 1}`,
+                        icon: layerIcons[layerIdx % layerIcons.length],
+                        color: layerColors[layerIdx % layerColors.length],
+                        questions: chunk.map((q, qi) => {
+                            // Convert flat question format to player format
+                            const correct = q.correct_answer || 'A';
+                            const opts = q.options || {};
+                            const optionsArr = Object.entries(opts).map(([key, text]) => ({
+                                id: key,
+                                text: text,
+                                correct: key === correct
+                            }));
+                            return {
+                                id: q.id || `q-${i + qi + 1}`,
+                                stem: q.vignette || '',
+                                question: q.prompt || q.question || '',
+                                options: optionsArr,
+                                explanation: q.rationale?.correct?.explanation || q.explanation || '',
+                                whyChain: [{
+                                    why: 'Why is this the correct answer?',
+                                    answer: q.rationale?.correct?.mechanism || q.rationale?.correct?.explanation || '',
+                                    source: q.rationale?.correct?.citation || ''
+                                }],
+                                sources: [q.rationale?.correct?.citation || ''].filter(Boolean)
+                            };
+                        })
+                    });
+                }
+
+                data.layers = layers;
+                data.totalQuestions = data.questions.length;
+                
+                // Create a default vignette if missing
+                if (!data.vignette) {
+                    data.vignette = {
+                        text: data.description || `${data.topic || 'Deep Dive'} — ${data.total_questions || data.questions.length} questions covering key concepts.`,
+                        diagnostics: {}
+                    };
+                }
+            }
+
+            // --- FORMAT 2: Layers with string options (ARDS format) ---
+            if (data.layers) {
+                data.layers.forEach(layer => {
+                    if (!layer.questions) layer.questions = [];
+                    layer.questions.forEach(q => {
+                        // Convert string options to object options
+                        if (q.options && q.options.length > 0 && typeof q.options[0] === 'string') {
+                            const correctIdx = q.correctIndex ?? 0;
+                            q.options = q.options.map((optStr, idx) => {
+                                // Parse "A. Some text" format
+                                const match = optStr.match(/^([A-Z])\.\s*(.+)$/);
+                                return {
+                                    id: match ? match[1] : String.fromCharCode(65 + idx),
+                                    text: match ? match[2] : optStr,
+                                    correct: idx === correctIdx
+                                };
+                            });
+                        }
+                    });
+                });
+            }
+
+            // --- Normalize vignette ---
+            if (data.vignette) {
+                // If vignette has vitals/labs but not diagnostics, adapt
+                if (!data.vignette.diagnostics) {
+                    data.vignette.diagnostics = {};
+                    if (data.vignette.labs) {
+                        // Convert flat labs to the expected format
+                        const labEntries = {};
+                        for (const [key, val] of Object.entries(data.vignette.labs)) {
+                            if (typeof val === 'string') {
+                                labEntries[key] = { value: val, reference: '', flag: '' };
+                            } else {
+                                labEntries[key] = val;
+                            }
+                        }
+                        data.vignette.diagnostics.labs = labEntries;
+                    }
+                }
+            } else {
+                data.vignette = { text: 'Clinical scenario', diagnostics: {} };
+            }
+
+            // Ensure title exists
+            if (!data.title) data.title = data.topic || 'Deep Dive';
+            if (!data.totalQuestions) {
+                data.totalQuestions = (data.layers || []).reduce((sum, l) => sum + (l.questions?.length || 0), 0);
+            }
+
+            return data;
+        }
+
+        // Update patient card from vignette data
+        function updatePatientCard(data) {
+            const vignette = data.vignette;
+            if (!vignette) return;
+
+            // Extract patient info from vignette text
+            const text = vignette.text || '';
+            const ageMatch = text.match(/(\d+)-year-old\s+(male|female|man|woman|boy|girl|patient)/i);
+            const ccMatch = text.match(/(?:chief complaint|presents? with|brought.*(?:for|with)|complain(?:s|ing) of)\s*:?\s*([^.]+)/i);
+            
+            const patientInfo = document.querySelector('.patient-info');
+            if (patientInfo && ageMatch) {
+                const genderMap = { male: 'Male', female: 'Female', man: 'Male', woman: 'Female', boy: 'Male', girl: 'Female', patient: 'Patient' };
+                patientInfo.querySelector('h3').textContent = `${ageMatch[1]}-year-old ${genderMap[ageMatch[2].toLowerCase()] || ageMatch[2]}`;
+                if (ccMatch) {
+                    patientInfo.querySelector('p').textContent = `Chief Complaint: ${ccMatch[1].trim().substring(0, 60)}`;
+                }
+            }
+
+            // Update vitals if available
+            const vitals = vignette.vitals || {};
+            const vitalsMap = { BP: 0, HR: 1, RR: 2, SpO2: 3 };
+            const vitalEls = document.querySelectorAll('.vital');
+            for (const [key, idx] of Object.entries(vitalsMap)) {
+                if (vitals[key] && vitalEls[idx]) {
+                    const valEl = vitalEls[idx].querySelector('.vital-value');
+                    if (valEl) {
+                        // Clean up units for display
+                        let val = vitals[key].toString().replace(/\s*mmHg.*|\s*bpm.*|\/min.*/i, '');
+                        valEl.textContent = val;
+                    }
+                }
+            }
+        }
+
         // ============ LAYER NAVIGATION ============
         function renderLayerNav() {
             const container = document.getElementById('layerList');
+            if (!container) return; // Safety guard
             container.innerHTML = '';
 
             deepDiveData.layers.forEach((layer, index) => {
@@ -1648,29 +1804,44 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // ============ VIGNETTE ============
         function loadVignetteData() {
             const vignette = deepDiveData.vignette;
-            document.getElementById('vignetteText').textContent = vignette.text;
+            if (!vignette) return;
+            
+            const vignetteTextEl = document.getElementById('vignetteText');
+            if (vignetteTextEl) vignetteTextEl.textContent = vignette.text || '';
             
             if (vignette.diagnostics?.ecg) {
-                document.getElementById('ecgFindings').innerHTML = `
-                    <p><strong>Findings:</strong> ${vignette.diagnostics.ecg.description}</p>
-                    <p><strong>Interpretation:</strong> ${vignette.diagnostics.ecg.interpretation}</p>
-                `;
+                const ecgEl = document.getElementById('ecgFindings');
+                if (ecgEl) {
+                    ecgEl.innerHTML = `
+                        <p><strong>Findings:</strong> ${vignette.diagnostics.ecg.description}</p>
+                        <p><strong>Interpretation:</strong> ${vignette.diagnostics.ecg.interpretation}</p>
+                    `;
+                }
             }
 
             if (vignette.diagnostics?.labs) {
                 const labs = vignette.diagnostics.labs;
                 let labHtml = '<table style="width:100%;font-size:0.9rem;">';
                 for (const [key, val] of Object.entries(labs)) {
-                    const flagColor = val.flag === 'CRITICAL' ? 'var(--color-error)' : 
-                                     val.flag === 'HIGH' ? 'var(--color-warning)' : 'var(--color-text)';
-                    labHtml += `<tr>
-                        <td style="padding:4px 0;">${key}</td>
-                        <td style="color:${flagColor};font-weight:600;">${val.value}</td>
-                        <td style="color:var(--color-text-muted);">(ref: ${val.reference})</td>
-                    </tr>`;
+                    if (typeof val === 'object' && val !== null) {
+                        const flagColor = val.flag === 'CRITICAL' ? 'var(--color-error)' : 
+                                         val.flag === 'HIGH' ? 'var(--color-warning)' : 'var(--color-text)';
+                        labHtml += `<tr>
+                            <td style="padding:4px 0;">${key}</td>
+                            <td style="color:${flagColor};font-weight:600;">${val.value || ''}</td>
+                            <td style="color:var(--color-text-muted);">${val.reference ? '(ref: ' + val.reference + ')' : ''}</td>
+                        </tr>`;
+                    } else {
+                        labHtml += `<tr>
+                            <td style="padding:4px 0;">${key}</td>
+                            <td style="font-weight:600;">${val}</td>
+                            <td></td>
+                        </tr>`;
+                    }
                 }
                 labHtml += '</table>';
-                document.getElementById('labResults').innerHTML = labHtml;
+                const labEl = document.getElementById('labResults');
+                if (labEl) labEl.innerHTML = labHtml;
             }
         }
 

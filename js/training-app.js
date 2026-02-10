@@ -3000,6 +3000,8 @@ body { transition: background 0.3s, color 0.3s; }
         if (!FIREBASE_ENABLED || firebaseConfig.apiKey === "YOUR_API_KEY") {
             console.log('Firebase not configured - leaderboards disabled');
             authStateReady = true;
+            // Re-render now that auth state is ready (fixes Loading... stuck screen)
+            if (typeof render === 'function') render();
             return false;
         }
         
@@ -50504,15 +50506,25 @@ This patient's presentation details include everything from the history question
     window.submitAcceptChallenge = submitAcceptChallenge;
     window.closeChallengeModal = closeChallengeModal;
     window.copyChallengeCode = copyChallengeCode;
-    window.answerQuizQuestion = answerQuizQuestion;
-    window.exportStudyHubData = exportStudyHubData;
-    window.flipFlashcard = flipFlashcard;
-    window.goToFlashcard = goToFlashcard;
-    window.nextFlashcard = nextFlashcard;
-    window.nextQuizQuestion = nextQuizQuestion;
-    window.prevFlashcard = prevFlashcard;
-    window.prevQuizQuestion = prevQuizQuestion;
-    window.resetQuiz = resetQuiz;
+    // Study Hub quiz/flashcard stubs — referenced but not yet implemented
+    function _stubAnswerQuizQuestion() {}
+    function _stubExportStudyHubData() {}
+    function _stubFlipFlashcard() {}
+    function _stubGoToFlashcard() {}
+    function _stubNextFlashcard() {}
+    function _stubNextQuizQuestion() {}
+    function _stubPrevFlashcard() {}
+    function _stubPrevQuizQuestion() {}
+    function _stubResetQuiz() {}
+    window.answerQuizQuestion = _stubAnswerQuizQuestion;
+    window.exportStudyHubData = _stubExportStudyHubData;
+    window.flipFlashcard = _stubFlipFlashcard;
+    window.goToFlashcard = _stubGoToFlashcard;
+    window.nextFlashcard = _stubNextFlashcard;
+    window.nextQuizQuestion = _stubNextQuizQuestion;
+    window.prevFlashcard = _stubPrevFlashcard;
+    window.prevQuizQuestion = _stubPrevQuizQuestion;
+    window.resetQuiz = _stubResetQuiz;
     window.selectStudyChapter = selectStudyChapter;
     window.setStudyHubTab = setStudyHubTab;
     window.setStudyMaterialsSection = setStudyMaterialsSection;

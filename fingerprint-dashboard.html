@@ -179,15 +179,10 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--text);
         let fingerprint = null;
         let aggregate = null;
         let sessions = [];
-        if (window.RdxPatent) {
-            const data = window.RdxPatent.getFingerprints();
-            aggregate = data.aggregate || window.RdxPatent.getAggregate();
-            sessions = data.sessions || [];
-            fingerprint = aggregate; // Use aggregate as the primary fingerprint
-            // If we have an aggregate, ensure it has totalSessions
-            if (aggregate && !aggregate.totalSessions) {
-                aggregate.totalSessions = sessions.length;
-            }
+        if (RPFS) {
+            fingerprint = RPFS.generateFingerprint();
+            aggregate = RPFS.getAggregate();
+            sessions = RPFS.getSessions();
         }
 
         // ─── Render ───────────────────────────────────
@@ -537,7 +532,7 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--text);
                 const fp = s._fingerprint;
                 let sStyle = 'unclassified';
                 if (fp && RPFS) {
-                    const result = RPFS ? RPFS.classifyArchetype(fp.vector || fp) : 'unclassified';
+                    const result = RPFS._classifyReasoningStyle(fp);
                     sStyle = result.label;
                 }
                 const dotColor = styleColors[sStyle] || 'var(--muted)';
