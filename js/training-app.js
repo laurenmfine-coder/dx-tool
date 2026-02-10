@@ -326,7 +326,7 @@
                             See How It Works
                         </a>
                     </div>
-                    <p class="mt-6 text-sm text-zinc-500">Used by medical students nationwide</p>
+                    <p class="mt-6 text-sm text-zinc-500">275+ cases across 23 specialties · 5 learning modalities</p>
                 </section>
                 
                 <!-- Features Grid -->
@@ -435,27 +435,64 @@
                 </header>
                 
                 <main class="max-w-3xl mx-auto px-6 py-12">
-                    <h1 class="text-3xl font-bold text-zinc-900 mb-8">About ReasonDx</h1>
+                    <h1 class="text-3xl font-bold text-zinc-900 mb-3">About ReasonDx</h1>
+                    <p class="text-lg text-zinc-500 mb-10">A comprehensive clinical reasoning education platform</p>
                     
-                    <div class="prose prose-zinc max-w-none">
-                        <p class="text-lg text-zinc-600 mb-6">
+                    <div class="max-w-none">
+                        <p class="text-lg text-zinc-600 mb-8">
                             ReasonDx is a clinical reasoning training platform developed for medical education 
-                            to help medical students develop systematic diagnostic thinking skills.
+                            to help medical students develop systematic diagnostic thinking skills. It teaches 
+                            clinical reasoning through multiple interconnected learning modalities, each designed 
+                            to assess and reinforce knowledge from different angles.
                         </p>
                         
                         <h2 class="text-xl font-semibold text-zinc-900 mt-8 mb-4">Our Mission</h2>
                         <p class="text-zinc-600 mb-6">
-                            We believe that learning to ask the right questions can change everything. ReasonDx provides a safe environment 
+                            We believe that asking the right questions can change everything. ReasonDx provides a safe environment 
                             to practice clinical reasoning through realistic patient cases, immediate feedback, and evidence-based learning.
+                            Students who can demonstrate understanding across multiple contexts are achieving genuine mastery rather than pattern matching.
                         </p>
                         
                         <h2 class="text-xl font-semibold text-zinc-900 mt-8 mb-4">The ReasonDx Platform</h2>
-                        <p class="text-zinc-600 mb-4">ReasonDx is part of a comprehensive learning ecosystem:</p>
-                        <ul class="text-zinc-600 space-y-2 mb-6">
-                            <li><strong>ReasonDx:</strong> Work through diagnostic cases step-by-step</li>
-                            <li><strong>MechanismDx:</strong> Understand the pathophysiology behind diseases</li>
-                            <li><strong>CoachDx:</strong> Practice with an AI attending using Socratic teaching</li>
-                        </ul>
+                        <p class="text-zinc-600 mb-4">ReasonDx is a comprehensive learning ecosystem with five interconnected modalities:</p>
+                        
+                        <div class="space-y-3 mb-8">
+                            <div class="flex gap-4 p-4 bg-blue-50 rounded-xl">
+                                <span class="text-2xl flex-shrink-0">&#x1FA7A;</span>
+                                <div>
+                                    <div class="font-semibold text-blue-900">Clinical Reasoning Trainer (CRT)</div>
+                                    <div class="text-sm text-blue-700">Simulated patient encounters across 23+ specialties with history-taking, physical exam, workup, and diagnosis</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-teal-50 rounded-xl">
+                                <span class="text-2xl flex-shrink-0">&#x1F52C;</span>
+                                <div>
+                                    <div class="font-semibold text-teal-900">Deep Dives</div>
+                                    <div class="text-sm text-teal-700">Layered knowledge assessment with AI-powered coaching for wrong answers</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-amber-50 rounded-xl">
+                                <span class="text-2xl flex-shrink-0">&#x1F5FA;&#xFE0F;</span>
+                                <div>
+                                    <div class="font-semibold text-amber-900">Adventure Cases</div>
+                                    <div class="text-sm text-amber-700">Branching decision scenarios where choices drive clinical outcomes</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-purple-50 rounded-xl">
+                                <span class="text-2xl flex-shrink-0">&#x2699;&#xFE0F;</span>
+                                <div>
+                                    <div class="font-semibold text-purple-900">MechanismDx</div>
+                                    <div class="text-sm text-purple-700">Interactive pathophysiology explorations of disease mechanisms</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-rose-50 rounded-xl">
+                                <span class="text-2xl flex-shrink-0">&#x1F9D1;&#x200D;&#x2695;&#xFE0F;</span>
+                                <div>
+                                    <div class="font-semibold text-rose-900">CoachDx</div>
+                                    <div class="text-sm text-rose-700">AI Socratic coaching that transforms reasoning errors into learning opportunities</div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <h2 class="text-xl font-semibold text-zinc-900 mt-8 mb-4">Contact</h2>
                         <p class="text-zinc-600">
@@ -907,7 +944,10 @@ body { transition: background 0.3s, color 0.3s; }
     // Get current student's display name
     const getUserDisplayName = () => {
         if (!currentStudentData) return 'Student';
-        return currentStudentData.displayName || 'Student';
+        const name = currentStudentData.displayName;
+        // Don't show raw student codes (short alphanumeric like EBF89) as names
+        if (!name || /^[A-Z0-9]{3,8}$/i.test(name)) return 'Student';
+        return name;
     };
     
     // Get current student code
@@ -8106,7 +8146,7 @@ body { transition: background 0.3s, color 0.3s; }
                 <div class="flex items-start justify-between gap-4 flex-wrap">
                     <div>
                         <h1 class="text-2xl font-medium tracking-tight">
-                            Welcome back${playerData.displayName ? ', ' + playerData.displayName : ''}
+                            Welcome back${(playerData.displayName && !/^[A-Z0-9]{3,8}$/i.test(playerData.displayName)) ? ', ' + playerData.displayName : ''}
                         </h1>
                         <p class="mt-2 text-zinc-500 dark:text-zinc-400">
                             Choose a training mode to build your clinical reasoning skills
@@ -8568,7 +8608,7 @@ body { transition: background 0.3s, color 0.3s; }
             <footer class="border-t border-zinc-200 dark:border-zinc-800 mt-12">
                 <div class="max-w-3xl mx-auto px-6 py-6">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-zinc-400">
-                        <span>© 2025 ReasonDx · <a href="#" onclick="goToScreen('about'); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">About</a> · <a href="#" onclick="showTutorial(); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">Help</a></span>
+                        <span>© ${new Date().getFullYear()} ReasonDx · <a href="#" onclick="goToScreen('about'); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">About</a> · <a href="#" onclick="showTutorial(); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">Help</a></span>
                         ${currentStudentCode ? `
                         <div class="flex items-center gap-3">
                             <button onclick="showChangeDisplayNameModal()" class="text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 text-xs sm:text-sm truncate max-w-[200px]" title="Click to change display name">
@@ -8593,11 +8633,13 @@ body { transition: background 0.3s, color 0.3s; }
     // New User Menu (0-2 cases completed)
     function renderSimplifiedMenuNewUser() {
         const darkClass = playerData.darkMode ? 'dark' : '';
-        const displayName = playerData.displayName || currentStudentData?.displayName || 'there';
+        const rawName = playerData.displayName || currentStudentData?.displayName || '';
+        // Don't show raw student codes as names
+        const displayName = (rawName && !/^[A-Z0-9]{3,8}$/i.test(rawName)) ? rawName : 'there';
         
         return `
             <div class="${darkClass}">
-            <div class="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-zinc-900 dark:to-zinc-800">
+            <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-800">
                 
                 <!-- Simple Header -->
                 <header class="border-b border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
@@ -8623,23 +8665,43 @@ body { transition: background 0.3s, color 0.3s; }
                 <main class="max-w-2xl mx-auto px-6 py-12">
                     
                     <!-- Welcome Message -->
-                    <div class="text-center mb-10">
-                        <h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-3">
-                            Welcome, ${displayName}! 👋
-                        </h1>
-                        <p class="text-lg text-zinc-600 dark:text-zinc-400">
-                            Let's build your clinical reasoning skills together.
-                        </p>
+                    <div class="text-center mb-8">
+                        ${displayName === 'there' ? `
+                            <h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-3">
+                                Welcome to ReasonDx!
+                            </h1>
+                            <p class="text-lg text-zinc-500 dark:text-zinc-400 mb-6">
+                                Let's get you set up. What should we call you?
+                            </p>
+                            <div class="max-w-sm mx-auto mb-4">
+                                <input type="text" id="welcome-name-input" placeholder="Your first name or nickname" 
+                                    class="w-full px-4 py-3 text-center text-lg border-2 border-zinc-300 dark:border-zinc-600 rounded-xl focus:border-blue-500 focus:outline-none dark:bg-zinc-800 dark:text-zinc-100"
+                                    maxlength="30" onkeydown="if(event.key==='Enter')document.getElementById('welcome-name-btn').click()" />
+                                <button id="welcome-name-btn" onclick="(function(){ var n=document.getElementById('welcome-name-input'); if(n&&n.value.trim().length>=2){ playerData.displayName=n.value.trim(); if(currentStudentData)currentStudentData.displayName=n.value.trim(); try{if(typeof firebaseDB!=='undefined'&&currentStudentCode)firebaseDB.ref('studentCodes/'+currentStudentCode+'/displayName').set(n.value.trim())}catch(e){} render(); } else if(n){ n.style.borderColor='#ef4444'; n.placeholder='Please enter at least 2 characters'; } })()" 
+                                    class="mt-3 w-full py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold rounded-xl transition shadow-lg shadow-blue-200 dark:shadow-none">
+                                    Continue
+                                </button>
+                            </div>
+                        ` : `
+                            <h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-3">
+                                Welcome, ${displayName}!
+                            </h1>
+                            <p class="text-lg text-zinc-500 dark:text-zinc-400">
+                                Let's build your clinical reasoning skills together.
+                            </p>
+                        `}
                     </div>
                     
                     <!-- Primary Action - Start First Case -->
                     <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-200 dark:border-zinc-700 p-8 mb-6">
                         <div class="text-center">
-                            <div class="text-5xl mb-4">🩺</div>
+                            <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center">
+                                <span class="text-3xl">🩺</span>
+                            </div>
                             <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">Start Your First Case</h2>
                             <p class="text-zinc-600 dark:text-zinc-400 mb-6">
-                                Work through a patient case step-by-step. We'll guide you through building a differential, 
-                                taking history, and making a diagnosis.
+                                Work through a patient case step-by-step. You'll practice building a differential, 
+                                taking history, examining the patient, and arriving at a diagnosis.
                             </p>
                             <button onclick="startGuidedFirstCase()" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold rounded-xl transition shadow-lg shadow-blue-200 dark:shadow-none">
                                 🎯 Begin Learning Mode
@@ -8691,7 +8753,8 @@ body { transition: background 0.3s, color 0.3s; }
     // Intermediate User Menu (3-14 cases completed)
     function renderSimplifiedMenuIntermediate() {
         const darkClass = playerData.darkMode ? 'dark' : '';
-        const displayName = playerData.displayName || currentStudentData?.displayName || 'there';
+        const rawName2 = playerData.displayName || currentStudentData?.displayName || '';
+        const displayName = (rawName2 && !/^[A-Z0-9]{3,8}$/i.test(rawName2)) ? rawName2 : 'there';
         const casesCompleted = playerData.casesCompleted || 0;
         const totalXp = playerData.totalXp || 0;
         
@@ -8972,7 +9035,7 @@ body { transition: background 0.3s, color 0.3s; }
             <footer class="border-t border-zinc-200 dark:border-zinc-800 mt-12">
                 <div class="max-w-3xl mx-auto px-6 py-6">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-zinc-400">
-                        <span>© 2025 ReasonDx · <a href="#" onclick="goToScreen('about'); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">About</a> · <a href="#" onclick="showTutorial(); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">Help</a></span>
+                        <span>© ${new Date().getFullYear()} ReasonDx · <a href="#" onclick="goToScreen('about'); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">About</a> · <a href="#" onclick="showTutorial(); return false;" class="hover:text-zinc-600 dark:hover:text-zinc-300">Help</a></span>
                         ${currentStudentCode ? `
                         <div class="flex items-center gap-3">
                             <button onclick="showChangeDisplayNameModal()" class="text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 text-xs sm:text-sm truncate max-w-[200px]" title="Click to change display name">
@@ -8992,74 +9055,138 @@ body { transition: background 0.3s, color 0.3s; }
     
     // About Screen
     function renderAboutScreen() {
+        const totalCases = cases ? cases.length : 275;
+        const specialtyCount = Object.keys(cases ? cases.reduce((acc, c) => { acc[c.category || 'Other'] = true; return acc; }, {}) : {}).length || 23;
         const content = `
             <h1 class="text-2xl font-medium tracking-tight mb-2">
                 About ReasonDx
             </h1>
             <p class="text-zinc-500 dark:text-zinc-400 mb-10">
-                Clinical reasoning training for medical students
+                A comprehensive clinical reasoning education platform
             </p>
             
             <!-- What is ReasonDx -->
             <section class="mb-10">
                 <h2 class="font-medium mb-4">What is ReasonDx?</h2>
                 <p class="text-zinc-600 dark:text-zinc-400 mb-4">
-                    ReasonDx is a case-based clinical reasoning trainer designed to help medical students develop 
+                    ReasonDx is a clinical reasoning training platform designed to help medical students develop 
                     systematic diagnostic thinking. Rather than memorizing isolated facts, you'll learn to think 
                     through cases the way experienced clinicians do.
                 </p>
                 <p class="text-zinc-600 dark:text-zinc-400">
-                    With 175+ clinical scenarios across multiple specialties, you'll practice building differential 
-                    diagnoses, gathering targeted history, performing focused physical exams, and ordering appropriate workups.
+                    With ${totalCases}+ clinical cases across ${specialtyCount} specialties, you'll practice building differential 
+                    diagnoses, gathering targeted history, performing focused physical exams, and ordering appropriate workups. 
+                    Each case includes multiple patient presentations, so you learn to recognize the same diagnosis in different contexts.
                 </p>
+            </section>
+
+            <!-- Platform Ecosystem -->
+            <section class="border-t border-zinc-200 dark:border-zinc-800 pt-8 mb-10">
+                <h2 class="font-medium mb-4">The ReasonDx Ecosystem</h2>
+                <p class="text-zinc-600 dark:text-zinc-400 mb-4">
+                    ReasonDx teaches clinical reasoning through multiple interconnected learning modalities, 
+                    each designed to assess understanding from a different angle:
+                </p>
+                <div class="space-y-4">
+                    <div class="flex gap-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                        <span class="text-2xl">🩺</span>
+                        <div>
+                            <div class="font-medium text-blue-900 dark:text-blue-100">Clinical Reasoning Trainer (CRT)</div>
+                            <div class="text-sm text-blue-700 dark:text-blue-300">Simulated patient encounters: take a history, examine the patient, order workup, and arrive at a diagnosis</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-teal-50 dark:bg-teal-900/20 rounded-xl">
+                        <span class="text-2xl">🔬</span>
+                        <div>
+                            <div class="font-medium text-teal-900 dark:text-teal-100">Deep Dives</div>
+                            <div class="text-sm text-teal-700 dark:text-teal-300">Mechanism-based knowledge assessment with layered questions across Anatomy, Pathophysiology, Pharmacology, and Clinical Management</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
+                        <span class="text-2xl">🗺️</span>
+                        <div>
+                            <div class="font-medium text-amber-900 dark:text-amber-100">Adventure Cases</div>
+                            <div class="text-sm text-amber-700 dark:text-amber-300">Branching decision scenarios where your choices drive the outcome\u2014learn the consequences of clinical decisions in real time</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
+                        <span class="text-2xl">⚙️</span>
+                        <div>
+                            <div class="font-medium text-purple-900 dark:text-purple-100">MechanismDx</div>
+                            <div class="text-sm text-purple-700 dark:text-purple-300">Interactive pathophysiology explorations that build the foundational understanding behind clinical decisions</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-rose-50 dark:bg-rose-900/20 rounded-xl">
+                        <span class="text-2xl">🧑\u200D⚕️</span>
+                        <div>
+                            <div class="font-medium text-rose-900 dark:text-rose-100">CoachDx</div>
+                            <div class="text-sm text-rose-700 dark:text-rose-300">AI-powered Socratic coaching that guides you through reasoning errors with targeted questions, not just answers</div>
+                        </div>
+                    </div>
+                </div>
             </section>
             
             <!-- How It Works -->
             <section class="border-t border-zinc-200 dark:border-zinc-800 pt-8 mb-10">
-                <h2 class="font-medium mb-4">How It Works</h2>
+                <h2 class="font-medium mb-4">How the CRT Works</h2>
                 <div class="space-y-4">
                     <div class="flex gap-4">
-                        <span class="text-zinc-400 font-medium">1.</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300 text-sm font-bold">1</span>
                         <div>
                             <div class="font-medium">Create an initial differential</div>
                             <div class="text-sm text-zinc-500 dark:text-zinc-400">Based on the chief complaint, generate hypotheses before diving in</div>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-zinc-400 font-medium">2.</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300 text-sm font-bold">2</span>
                         <div>
                             <div class="font-medium">Gather targeted history</div>
                             <div class="text-sm text-zinc-500 dark:text-zinc-400">Ask hypothesis-driven questions using OLDCARTS framework</div>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-zinc-400 font-medium">3.</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300 text-sm font-bold">3</span>
                         <div>
                             <div class="font-medium">Perform focused physical exam</div>
                             <div class="text-sm text-zinc-500 dark:text-zinc-400">Select exam maneuvers that will help differentiate your diagnoses</div>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-zinc-400 font-medium">4.</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300 text-sm font-bold">4</span>
                         <div>
                             <div class="font-medium">Revise your differential</div>
                             <div class="text-sm text-zinc-500 dark:text-zinc-400">Update probabilities based on new information</div>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-zinc-400 font-medium">5.</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300 text-sm font-bold">5</span>
                         <div>
                             <div class="font-medium">Order workup and next steps</div>
-                            <div class="text-sm text-zinc-500 dark:text-zinc-400">Select appropriate tests and management</div>
+                            <div class="text-sm text-zinc-500 dark:text-zinc-400">Select appropriate tests, treatments, consults, and disposition</div>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-zinc-400 font-medium">6.</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300 text-sm font-bold">6</span>
                         <div>
                             <div class="font-medium">Review and learn</div>
-                            <div class="text-sm text-zinc-500 dark:text-zinc-400">See the final diagnosis and key teaching points</div>
+                            <div class="text-sm text-zinc-500 dark:text-zinc-400">See the final diagnosis, key teaching points, and clinical pearls</div>
                         </div>
                     </div>
+                </div>
+            </section>
+            
+            <!-- Philosophy -->
+            <section class="border-t border-zinc-200 dark:border-zinc-800 pt-8 mb-10">
+                <h2 class="font-medium mb-4">Our Philosophy</h2>
+                <div class="p-6 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                    <p class="text-zinc-700 dark:text-zinc-300 italic text-lg mb-3">
+                        "Asking the right questions can change everything."
+                    </p>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm">
+                        ReasonDx is built on the belief that clinical reasoning is a skill that can be systematically developed. 
+                        By practicing across multiple learning modalities\u2014simulated encounters, mechanism-based questions, and 
+                        branching decision scenarios\u2014students develop genuine mastery rather than surface-level pattern matching.
+                    </p>
                 </div>
             </section>
             
@@ -50516,6 +50643,7 @@ This patient's presentation details include everything from the history question
     function _stubPrevFlashcard() {}
     function _stubPrevQuizQuestion() {}
     function _stubResetQuiz() {}
+    function _stubSelectStudyChapter() {}
     window.answerQuizQuestion = _stubAnswerQuizQuestion;
     window.exportStudyHubData = _stubExportStudyHubData;
     window.flipFlashcard = _stubFlipFlashcard;
@@ -50525,7 +50653,7 @@ This patient's presentation details include everything from the history question
     window.prevFlashcard = _stubPrevFlashcard;
     window.prevQuizQuestion = _stubPrevQuizQuestion;
     window.resetQuiz = _stubResetQuiz;
-    window.selectStudyChapter = selectStudyChapter;
+    window.selectStudyChapter = _stubSelectStudyChapter;
     window.setStudyHubTab = setStudyHubTab;
     window.setStudyMaterialsSection = setStudyMaterialsSection;
     window.toggleFramework = toggleFramework;
