@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- SIMPLIFIED NAVIGATION VERSION: 4-item nav, hub pages, cleaner menu -->
+<!-- CLEANED: Removed duplicate nav/logo/theme-buttons; JS renders all UI inside #app -->
 <html lang="en">
 <head>
 <script>
@@ -22,50 +22,8 @@
     <script src="dx-sanitize.js"></script>
     <link href="css/training-styles.min.css" rel="stylesheet">
 </head>
-<body class="p-4 md:p-8" data-theme="light">
-
-<div style="position: fixed; top: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
-    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
-    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
-</div>
-
-
-    <!-- UNIFIED DX NAVIGATION -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
-            </a>
-            <div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link">🏠 Home</a>
-                <a href="../mechanism/index.html" class="dx-nav-link">⚙️ MechanismDx</a>
-                <a href="index.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../CoachDx/index.html" class="dx-nav-link">🧠 CoachDx</a>
-                <a href="../reference-library.html" class="dx-nav-link">📚 References</a>
-                <a href="../dx-dashboard.html" class="dx-nav-link">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
-
-    <header class="reasondx-logo-header">
-        <div class="reasondx-logo-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120">
-                <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">Reason</text>
-                <text x="200" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
-                <line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-                <ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/>
-                <path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                <ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/>
-                <circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-                <circle cx="266" cy="108" r="5" fill="#1a1a1a"/>
-            </svg>
-        </div>
-        <div class="reasondx-tagline">Asking the right questions can change everything.</div>
-    </header>
-    <div id="app" class="max-w-4xl mx-auto"></div>
+<body data-theme="light">
+    <div id="app"></div>
     
     <script src="js/training-app.min.js"></script>
     

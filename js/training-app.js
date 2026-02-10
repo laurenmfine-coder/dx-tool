@@ -411,7 +411,7 @@
                         <p class="mt-2">
                             <a href="#" onclick="goToScreen('about-public'); return false;" class="text-zinc-600 hover:text-zinc-900">About</a>
                             <span class="mx-2">·</span>
-                            <a href="mailto:lfine@nova.edu" class="text-zinc-600 hover:text-zinc-900">Contact</a>
+                            <a href="#" onclick="goToScreen('about-public'); return false;" class="text-zinc-600 hover:text-zinc-900">Contact</a>
                         </p>
                     </div>
                 </footer>
@@ -496,8 +496,7 @@
                         
                         <h2 class="text-xl font-semibold text-zinc-900 mt-8 mb-4">Contact</h2>
                         <p class="text-zinc-600">
-                            For questions or feedback, please contact:<br/>
-                            <a href="mailto:lfine@nova.edu" class="text-blue-600 hover:text-blue-800">lfine@nova.edu</a>
+                            For questions or feedback, please visit our website at <a href="https://www.reasondx.com" class="text-blue-600 hover:text-blue-800">reasondx.com</a>
                         </p>
                     </div>
                 </main>
@@ -8066,78 +8065,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="${darkClass}">
             <div class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
             
-            <!-- Logo Banner -->
-            <div class="bg-gradient-to-r from-slate-50 to-zinc-100 dark:from-slate-900 dark:to-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
-                <div class="max-w-3xl mx-auto px-6 py-6">
-                    <div class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 100px; width: auto;">
-                          <text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                          <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                          <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                          <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                          <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                        </svg>
-                        <p class="text-lg font-medium italic text-zinc-600 dark:text-zinc-400 ml-4 self-end pb-1">Asking the right questions<br/>can change everything.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Simplified Top Navigation - 4 Primary Items -->
-            <header class="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white dark:bg-zinc-900 z-50">
-                <div class="max-w-3xl mx-auto flex items-center justify-between px-6 py-3">
-                    <nav class="flex items-center gap-8 text-sm">
-                        <!-- Train: Cases and practice -->
-                        <a href="#" onclick="goToScreen('menu'); return false;" class="flex items-center gap-1.5 text-zinc-900 dark:text-zinc-100 no-underline font-medium hover:text-teal-600 dark:hover:text-teal-400 transition">
-                            <span>🎯</span> Train
-                        </a>
-                        
-                        <!-- Learn: Study and reference -->
-                        <a href="#" onclick="goToScreen('learn-hub'); return false;" class="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline transition">
-                            <span>📚</span> Learn
-                        </a>
-                        
-                        <!-- Progress: Stats and achievements -->
-                        <a href="#" onclick="goToScreen('progress-hub'); return false;" class="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline transition">
-                            <span>📊</span> Progress
-                        </a>
-                        
-                        <!-- More: Settings, about, help -->
-                        <div class="relative group">
-                            <button class="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition">
-                                <span>☰</span> More
-                            </button>
-                            <div class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-zinc-800 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <div class="py-2">
-                                    <a href="#" onclick="goToScreen('platform-guide'); return false;" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
-                                        <span>✨</span> Features Guide
-                                    </a>
-                                    <a href="../index.html#mechanism" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
-                                        <span>⚙️</span> MechanismDx
-                                    </a>
-                                    <a href="../CoachDx/case-library.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
-                                        <span>💬</span> CoachDx
-                                    </a>
-                                    <div class="border-t border-zinc-200 dark:border-zinc-700 my-2"></div>
-                                    <a href="#" onclick="goToScreen('about'); return false;" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
-                                        <span>ℹ️</span> About
-                                    </a>
-                                    <button onclick="showTutorial()" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 text-left">
-                                        <span>❓</span> Help & Tutorial
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                    <div class="flex items-center gap-2">
-                        <button onclick="toggleDarkMode()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">
-                            ${playerData.darkMode ? '☀️' : '🌙'}
-                        </button>
-                    </div>
-                </div>
-            </header>
+            ${renderUnifiedNav('menu')}
             
             <!-- Main Content -->
             <main class="max-w-3xl mx-auto px-6 py-12">
@@ -8612,7 +8540,7 @@ body { transition: background 0.3s, color 0.3s; }
                         ${currentStudentCode ? `
                         <div class="flex items-center gap-3">
                             <button onclick="showChangeDisplayNameModal()" class="text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 text-xs sm:text-sm truncate max-w-[200px]" title="Click to change display name">
-                                ${currentStudentData?.displayName || 'Student'} <span class="text-zinc-400">(${currentStudentCode})</span>
+                                ${(currentStudentData?.displayName && !/^[A-Z0-9]{3,8}$/i.test(currentStudentData.displayName)) ? currentStudentData.displayName : 'Student'}
                             </button>
                             <button onclick="handleSignOut()" class="text-zinc-400 hover:text-red-500 transition whitespace-nowrap">Sign out</button>
                         </div>
@@ -8623,6 +8551,83 @@ body { transition: background 0.3s, color 0.3s; }
             
             </div>
             </div>
+        `;
+    }
+    
+    // ============================================================
+    // SHARED NAVIGATION - Consistent across all menu screens
+    // ============================================================
+    
+    function renderUnifiedNav(activeItem) {
+        const navItems = [
+            { id: 'menu', label: 'Train', icon: '🎯', action: "goToScreen('menu'); return false;" },
+            { id: 'learn-hub', label: 'Learn', icon: '📚', action: "goToScreen('learn-hub'); return false;" },
+            { id: 'progress-hub', label: 'Progress', icon: '📊', action: "goToScreen('progress-hub'); return false;" }
+        ];
+        
+        return `
+            <header class="border-b border-zinc-200 dark:border-zinc-700 sticky top-0 bg-white dark:bg-zinc-900 z-50">
+                <div class="max-w-3xl mx-auto flex items-center justify-between px-6 py-3">
+                    <div class="flex items-center gap-6">
+                        <a href="#" onclick="goToScreen('menu'); return false;" class="flex items-center gap-2 no-underline" title="ReasonDx Home">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 32px; width: auto;">
+                                <text x="20" y="65" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Reason</text>
+                                <text x="200" y="65" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text>
+                                <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+                                <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
+                                <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                                <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
+                                <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                                <circle cx="266" cy="103" r="5" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <nav class="flex items-center gap-6 text-sm">
+                            ${navItems.map(item => `
+                                <a href="#" onclick="${item.action}" class="flex items-center gap-1.5 no-underline transition ${
+                                    item.id === activeItem 
+                                        ? 'text-zinc-900 dark:text-zinc-100 font-medium' 
+                                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'
+                                }">
+                                    <span>${item.icon}</span> ${item.label}
+                                </a>
+                            `).join('')}
+                            <div class="relative group">
+                                <button class="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition">
+                                    <span>☰</span> More
+                                </button>
+                                <div class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-zinc-800 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                    <div class="py-2">
+                                        <a href="#" onclick="goToScreen('platform-guide'); return false;" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
+                                            <span>✨</span> Features Guide
+                                        </a>
+                                        <a href="../mechanism/index.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
+                                            <span>⚙️</span> MechanismDx
+                                        </a>
+                                        <a href="../CoachDx/case-library.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
+                                            <span>💬</span> CoachDx
+                                        </a>
+                                        <div class="border-t border-zinc-200 dark:border-zinc-700 my-2"></div>
+                                        <a href="#" onclick="goToScreen('about'); return false;" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
+                                            <span>ℹ️</span> About
+                                        </a>
+                                        <button onclick="showTutorial()" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 text-left">
+                                            <span>❓</span> Help & Tutorial
+                                        </button>
+                                        <button onclick="openDxThemeModal()" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 text-left">
+                                            <span>🎨</span> Theme
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleDarkMode()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">
+                            ${playerData.darkMode ? '☀️' : '🌙'}
+                        </button>
+                    </div>
+                </div>
+            </header>
         `;
     }
     
@@ -8641,25 +8646,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="${darkClass}">
             <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-800">
                 
-                <!-- Simple Header -->
-                <header class="border-b border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
-                    <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-4">
-                        <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 40px; width: auto;">
-                                <text x="20" y="65" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Reason</text>
-                                <text x="200" y="65" font-family="Georgia, serif" font-size="58" fill="currentColor">Dx</text>
-                            </svg>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <button onclick="toggleDarkMode()" class="p-2 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
-                                ${playerData.darkMode ? '☀️' : '🌙'}
-                            </button>
-                            <button onclick="state.simplifiedMenu = false; render();" class="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">
-                                Advanced View
-                            </button>
-                        </div>
-                    </div>
-                </header>
+                ${renderUnifiedNav('menu')}
                 
                 <!-- Welcome Content -->
                 <main class="max-w-2xl mx-auto px-6 py-12">
@@ -8769,26 +8756,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="${darkClass}">
             <div class="min-h-screen bg-white dark:bg-zinc-900">
                 
-                <!-- Header -->
-                <header class="border-b border-zinc-200 dark:border-zinc-700 sticky top-0 bg-white dark:bg-zinc-900 z-50">
-                    <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-3">
-                        <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 36px; width: auto;">
-                                <text x="20" y="65" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Reason</text>
-                                <text x="200" y="65" font-family="Georgia, serif" font-size="58" fill="currentColor">Dx</text>
-                            </svg>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="text-right">
-                                <div class="text-sm font-medium text-zinc-900 dark:text-zinc-100">${totalXp} XP</div>
-                                <div class="text-xs text-zinc-500">${casesCompleted} cases</div>
-                            </div>
-                            <button onclick="toggleDarkMode()" class="p-2 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
-                                ${playerData.darkMode ? '☀️' : '🌙'}
-                            </button>
-                        </div>
-                    </div>
-                </header>
+                ${renderUnifiedNav('menu')}
                 
                 <!-- Main Content -->
                 <main class="max-w-2xl mx-auto px-6 py-8">
@@ -8955,76 +8923,21 @@ body { transition: background 0.3s, color 0.3s; }
             </div>
         ` : '';
         
+        // Map old activeNav names to unified nav items
+        const navMap = { 'train': 'menu', 'progress': 'progress-hub', 'about': 'menu', 'images': 'menu', 'reference': 'menu' };
+        const activeUnified = navMap[activeNav] || 'menu';
+        
+        // Safe display name for footer
+        const rawFooterName = currentStudentData?.displayName || '';
+        const footerName = (rawFooterName && !/^[A-Z0-9]{3,8}$/i.test(rawFooterName)) ? rawFooterName : 'Student';
+        
         return `
             <div class="${darkClass}">
             <div class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
             
             ${testingModeBanner}
             
-            <!-- Top Navigation -->
-            <header class="border-b border-zinc-200 dark:border-zinc-800">
-                <div class="max-w-3xl mx-auto flex items-center justify-between px-6 py-3">
-                    <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <nav class="hidden sm:flex items-center gap-6 text-sm">
-                        <a href="#" onclick="goToScreen('menu'); return false;" class="${activeNav === 'train' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">Train</a>
-                        <a href="#" onclick="goToScreen('stats'); return false;" class="${activeNav === 'progress' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">Progress</a>
-                        <a href="#" onclick="goToScreen('image-quiz-select'); return false;" class="${activeNav === 'images' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">Images</a>
-                        <a href="#" onclick="goToScreen('reference-cards'); return false;" class="${activeNav === 'reference' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">Reference</a>
-                        <a href="#" onclick="goToScreen('about'); return false;" class="${activeNav === 'about' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">About</a>
-                        
-                        <div class="dx-suite-dropdown">
-                            <button class="dx-suite-btn">🎯 ReasonDx ▾</button>
-                            <div class="dx-suite-menu">
-                                <a href="../index.html#mechanism" class="dx-menu-item mechanism">
-                                    <span class="item-icon">⚙️</span>
-                                    <span class="item-label">MechanismDx</span>
-                                </a>
-                                <a href="../CoachDx/case-library.html" class="dx-menu-item coach">
-                                    <span class="item-icon">💬</span>
-                                    <span class="item-label">CoachDx</span>
-                                </a>
-                                <div class="dx-menu-divider"></div>
-                                <a href="../mechanism/case-frame-predict-labs.html" class="dx-menu-item predict">
-                                    <span class="item-icon">🔮</span>
-                                    <span class="item-label">Predict Labs</span>
-                                </a>
-                                <a href="../fingerprint-dashboard.html" class="dx-menu-item fingerprint">
-                                    <span class="item-icon">🧬</span>
-                                    <span class="item-label">My Fingerprint</span>
-                                </a>
-                                <div class="dx-menu-divider"></div>
-                                <a href="../unified-scoreboard.html" class="dx-menu-item scoreboard">
-                                    <span class="item-icon">🏆</span>
-                                    <span class="item-label">Scoreboard</span>
-                                </a>
-                                <a href="../patent-innovation-showcase.html" class="dx-menu-item innovations">
-                                    <span class="item-icon">💡</span>
-                                    <span class="item-label">Innovations</span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                    <div class="flex items-center gap-3">
-                        <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
-                            ${playerData.darkMode ? '☀️' : '🌙'}
-                        </button>
-                        <button onclick="showTutorial()" class="text-sm px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition">
-                            Guide
-                        </button>
-                    </div>
-                </div>
-            </header>
+            ${renderUnifiedNav(activeUnified)}
             
             <!-- Main Content -->
             <main class="max-w-3xl mx-auto px-6 py-12">
@@ -9039,7 +8952,7 @@ body { transition: background 0.3s, color 0.3s; }
                         ${currentStudentCode ? `
                         <div class="flex items-center gap-3">
                             <button onclick="showChangeDisplayNameModal()" class="text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 text-xs sm:text-sm truncate max-w-[200px]" title="Click to change display name">
-                                ${currentStudentData?.displayName || 'Student'} <span class="text-zinc-400">(${currentStudentCode})</span>
+                                ${footerName}
                             </button>
                             <button onclick="handleSignOut()" class="text-zinc-400 hover:text-red-500 transition whitespace-nowrap">Sign out</button>
                         </div>
@@ -9239,7 +9152,7 @@ body { transition: background 0.3s, color 0.3s; }
                     <li>• Export data for curriculum assessment</li>
                 </ul>
                 <p class="text-zinc-600 dark:text-zinc-400 mt-4">
-                    Interested in institutional licensing? <a href="mailto:contact@reasondx.com" class="text-zinc-900 dark:text-zinc-100">Get in touch</a>
+                    Interested in institutional licensing? <a href="https://www.reasondx.com" class="text-zinc-900 dark:text-zinc-100">Visit our website</a>
                 </p>
             </section>
             
@@ -10481,64 +10394,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="${darkClass}">
             <div class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
             
-            <!-- Top Navigation -->
-            <header class="border-b border-zinc-200 dark:border-zinc-800">
-                <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
-                    <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <nav class="hidden sm:flex items-center gap-6 text-sm">
-                        <a href="#" onclick="goToScreen('menu'); return false;" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline">Train</a>
-                        <a href="#" onclick="goToScreen('study-hub'); return false;" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline">Study Hub</a>
-                        <a href="#" onclick="goToScreen('stats'); return false;" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline">Progress</a>
-                        <a href="#" onclick="goToScreen('insights-dashboard'); return false;" class="text-zinc-900 dark:text-zinc-100 no-underline">My Insights</a>
-                        
-                        <div class="dx-suite-dropdown">
-                            <button class="dx-suite-btn">🎯 ReasonDx ▾</button>
-                            <div class="dx-suite-menu">
-                                <a href="../index.html#mechanism" class="dx-menu-item mechanism">
-                                    <span class="item-icon">⚙️</span>
-                                    <span class="item-label">MechanismDx</span>
-                                </a>
-                                <a href="../CoachDx/case-library.html" class="dx-menu-item coach">
-                                    <span class="item-icon">💬</span>
-                                    <span class="item-label">CoachDx</span>
-                                </a>
-                                <div class="dx-menu-divider"></div>
-                                <a href="../mechanism/case-frame-predict-labs.html" class="dx-menu-item predict">
-                                    <span class="item-icon">🔮</span>
-                                    <span class="item-label">Predict Labs</span>
-                                </a>
-                                <a href="../fingerprint-dashboard.html" class="dx-menu-item fingerprint">
-                                    <span class="item-icon">🧬</span>
-                                    <span class="item-label">My Fingerprint</span>
-                                </a>
-                                <div class="dx-menu-divider"></div>
-                                <a href="../unified-scoreboard.html" class="dx-menu-item scoreboard">
-                                    <span class="item-icon">🏆</span>
-                                    <span class="item-label">Scoreboard</span>
-                                </a>
-                                <a href="../patent-innovation-showcase.html" class="dx-menu-item innovations">
-                                    <span class="item-icon">💡</span>
-                                    <span class="item-label">Innovations</span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                    <button onclick="goToScreen('menu')" class="text-sm px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition">
-                        ← Back
-                    </button>
-                </div>
-            </header>
+            ${renderUnifiedNav('progress-hub')}
             
             <!-- Dashboard Container -->
             <main class="max-w-5xl mx-auto px-6 py-8">
@@ -11230,27 +11086,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="${darkClass}">
             <div class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
             
-            <header class="border-b border-zinc-200 dark:border-zinc-800">
-                <div class="max-w-4xl mx-auto flex items-center justify-between px-6 py-3">
-                    <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <div class="flex items-center gap-3">
-                        <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
-                            ${playerData.darkMode ? '☀️' : '🌙'}
-                        </button>
-                    </div>
-                </div>
-            </header>
+            ${renderUnifiedNav('menu')}
             
             <main class="max-w-4xl mx-auto px-6 py-8">
                 <button onclick="goToScreen('menu')" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 mb-6 flex items-center gap-2 text-sm">
@@ -11512,27 +11348,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="${darkClass}">
             <div class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
             
-            <header class="border-b border-zinc-200 dark:border-zinc-800">
-                <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-                    <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <div class="flex items-center gap-3">
-                        <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
-                            ${playerData.darkMode ? '☀️' : '🌙'}
-                        </button>
-                    </div>
-                </div>
-            </header>
+            ${renderUnifiedNav('progress-hub')}
             
             <main class="max-w-6xl mx-auto px-6 py-8">
                 <button onclick="goToScreen('menu')" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 mb-6 flex items-center gap-2 text-sm">
