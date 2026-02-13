@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var AUTH_KEY="reasondx-user";var OLD_AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1;var p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);if(j&&j.email)return true}var oldU=localStorage.getItem(OLD_AUTH_KEY);if(oldU){var oldJ=JSON.parse(oldU);if(oldJ&&oldJ.email&&oldJ.name)return true}var sbKey=Object.keys(localStorage).find(function(k){return k.startsWith('sb-')&&k.endsWith('-auth-token')});if(sbKey&&localStorage.getItem(sbKey))return true}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Two Babies, Two Bellies | GI Embryology | ReasonDx CRT</title>
+<style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F59E0B;--success:#10B981;--danger:#DC2626;--info:#8B5CF6}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.header{background:linear-gradient(135deg,#78350F,#F59E0B);padding:12px 20px;position:sticky;top:0;z-index:100;color:#fff}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px}.stats{display:flex;gap:12px}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}
+.main{max-width:900px;margin:0 auto;padding:24px}.progress-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;margin-bottom:20px}.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.5rem;font-weight:700;margin-top:4px}.card-body{padding:24px}
+.narrative{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(251,191,36,.1));border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.hl{background:rgba(245,158,11,.3);padding:2px 6px;border-radius:4px;font-weight:500}
+.vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}
+.choices{display:grid;gap:12px;margin-top:20px}.choice{background:var(--card);border:2px solid var(--border);padding:16px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.2);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.2);pointer-events:none}.choice-icon{font-size:1.5rem}.choice-title{font-weight:600}.choice-desc{font-size:.85rem;color:var(--muted)}
+.teaching{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:16px;margin:20px 0}.teaching h4{color:var(--info);margin-bottom:8px}
+.alert{padding:16px;border-radius:12px;margin:20px 0;display:flex;gap:12px}.alert.info{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3)}.alert-icon{font-size:1.5rem}.alert-title{font-weight:600}
+.btn{padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;border:none;font-size:1rem}.btn-primary{background:var(--accent);color:#fff}.btn:hover{opacity:.9}.hidden{display:none!important}
+.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}.cross-link{padding:14px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;text-decoration:none;color:var(--text)}.cross-link:hover{border-color:var(--accent)}.cross-link-title{font-weight:600;font-size:.9rem}
+@media(max-width:480px){.main{padding:12px}.card-body{padding:16px}}
+</style>
+</head>
+<body>
+<div class="header"><div class="header-row">
+<div class="header-title">🔬 Two Babies, Two Bellies<span class="badge">NEONATAL SURGERY</span></div>
+<div class="stats"><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div><div class="stat"><div class="stat-value" id="stageNum">1/6</div><div class="stat-label">Stage</div></div></div>
+</div></div>
+<div class="main">
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:17%"></div></div>
+<div id="s1" class="stage"><div class="card"><div class="card-header"><div class="card-phase">Stage 1 of 6</div><div class="card-title">🏥 Two Prenatal Ultrasounds</div></div><div class="card-body">
+<div class="narrative">Two pregnant patients present the same day. <strong>Patient A</strong> (38 years old, 20 weeks): ultrasound shows abdominal wall defect with <span class='hl'>liver and bowel protruding in a membrane-covered sac</span> at the <span class='hl'>umbilicus</span>. <strong>Patient B</strong> (19 years old, 22 weeks): ultrasound shows <span class='hl'>free-floating bowel in amniotic fluid</span> with the defect <span class='hl'>to the right of the umbilicus</span>.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Patient A Age</div><div class="vital-value">38</div></div><div class="vital"><div class="vital-label">Patient A Defect</div><div class="vital-value">Central, covered</div></div><div class="vital"><div class="vital-label">Patient B Age</div><div class="vital-value">19</div></div><div class="vital"><div class="vital-label">Patient B Defect</div><div class="vital-value">Right, uncovered</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">Which diagnosis applies to each patient?</div></div></div>
+<div class="choices"><div class="choice" data-correct="true" data-fb="Correct! Omphalocele: midline defect AT the umbilicus, covered by a membrane (peritoneum + amnion), often contains liver. Gastroschisis: defect to the RIGHT of the umbilicus, NO covering membrane, bowel floating freely in amniotic fluid. Note the demographics: omphalocele is associated with advanced maternal age, gastroschisis with young mothers." onclick="pick(this,1)"><div class="choice-icon">🟢</div><div><div class="choice-title">A = Omphalocele, B = Gastroschisis</div><div class="choice-desc">Covered central vs. uncovered paraumbilical</div></div></div>
+<div class="choice" data-correct="false" data-fb="Reversed! The membrane-covered central defect = omphalocele. The uncovered paraumbilical defect = gastroschisis." onclick="pick(this,1)"><div class="choice-icon">🔴</div><div><div class="choice-title">A = Gastroschisis, B = Omphalocele</div><div class="choice-desc">Reversed diagnoses</div></div></div>
+<div class="choice" data-correct="false" data-fb="These are fundamentally different conditions with different embryology, associations, and outcomes." onclick="pick(this,1)"><div class="choice-icon">🔵</div><div><div class="choice-title">Both are omphaloceles of different sizes</div><div class="choice-desc">Small vs large omphalocele</div></div></div>
+<div class="choice" data-correct="false" data-fb="Umbilical hernia is a postnatal condition with intact skin coverage. Omphalocele is a congenital defect with a membranous sac, present at birth." onclick="pick(this,1)"><div class="choice-icon">🟡</div><div><div class="choice-title">A = Umbilical hernia, B = Gastroschisis</div><div class="choice-desc">Hernia vs anterior wall defect</div></div></div></div>
+<div id="fb1" class="hidden">
+<div id="fbText1" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>Key distinguishing features: OMPHALOCELE — AT umbilicus, membrane-covered, contains liver ± bowel, associated with chromosomal anomalies (Trisomy 13, 18, 21), Beckwith-Wiedemann syndrome, cardiac defects. GASTROSCHISIS — RIGHT of umbilicus, NO membrane, bowel only (no liver), associated with young maternal age, smoking, vasoactive drugs (NSAIDs, pseudoephedrine); chromosomal anomalies are RARE.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(2)">Continue →</button></div>
+</div></div></div></div>
+<div id="s2" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 2 of 6</div><div class="card-title">🔬 Embryology: Two Different Failures</div></div><div class="card-body">
+<div class="narrative">The genetics team explains the embryologic basis to the families. They note the conditions have <span class='hl'>completely different developmental mechanisms</span>.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Omphalocele</div><div class="vital-value">Failure of return</div></div><div class="vital"><div class="vital-label">Gastroschisis</div><div class="vital-value">Vascular accident</div></div><div class="vital"><div class="vital-label">Critical Period</div><div class="vital-value">Weeks 6-10</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">What is the embryologic mechanism of omphalocele?</div></div></div>
+<div class="choices"><div class="choice" data-correct="true" data-fb="Correct! During weeks 6-10, the midgut herniates into the umbilical cord (physiologic herniation) for growth and rotation. Omphalocele occurs when the gut FAILS TO RETURN to the abdominal cavity by week 10-12. The contents remain in the umbilical sac, covered by the membrane." onclick="pick(this,2)"><div class="choice-icon">🟢</div><div><div class="choice-title">Failure of midgut return to the abdomen</div><div class="choice-desc">Intestines never complete physiologic herniation reversal</div></div></div>
+<div class="choice" data-correct="false" data-fb="This is not the mechanism. The abdominal wall lateral folds (cephalic, caudal, lateral) fail to completely close, leaving the midline defect." onclick="pick(this,2)"><div class="choice-icon">🔴</div><div><div class="choice-title">Rupture of the umbilical ring</div><div class="choice-desc">Mechanical failure of the abdominal wall</div></div></div>
+<div class="choice" data-correct="false" data-fb="This is the proposed mechanism for GASTROSCHISIS, not omphalocele. Gastroschisis may result from right umbilical vein involution leading to ischemic weakness in the body wall." onclick="pick(this,2)"><div class="choice-icon">🔵</div><div><div class="choice-title">Involution of the right umbilical vein</div><div class="choice-desc">Vascular disruption causing wall ischemia</div></div></div>
+<div class="choice" data-correct="false" data-fb="Neural crest cells don&#39;t contribute to the anterior abdominal wall. They&#39;re relevant for heart, face, and enteric nervous system." onclick="pick(this,2)"><div class="choice-icon">🟡</div><div><div class="choice-title">Neural crest cell migration failure</div><div class="choice-desc">Absent mesenchymal contribution to the wall</div></div></div></div>
+<div id="fb2" class="hidden">
+<div id="fbText2" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>OMPHALOCELE embryology: Failure of the 4 body wall folds (cephalic, caudal, 2 lateral) to close → persistent communication between abdominal cavity and umbilical cord → contents remain in the herniated position. GASTROSCHISIS embryology: Leading theory is involution of the right umbilical vein → ischemic weakness in the paraumbilical body wall → rupture, typically to the RIGHT of the cord insertion. This explains why gastroschisis is always right-sided.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(3)">Continue →</button></div>
+</div></div></div></div>
+<div id="s3" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 3 of 6</div><div class="card-title">🧬 Genetic Screening</div></div><div class="card-body">
+<div class="narrative">Patient A (omphalocele) undergoes amniocentesis. Results show <span class='hl'>Trisomy 18</span>. Echocardiogram reveals a <span class='hl'>VSD</span>. Patient B (gastroschisis) declines genetic testing — she is counseled that chromosomal risk is low.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Patient A</div><div class="vital-value">Trisomy 18 + VSD</div></div><div class="vital"><div class="vital-label">Patient B</div><div class="vital-value">Low genetic risk</div></div><div class="vital"><div class="vital-label">Counseling</div><div class="vital-value">Complete</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">What percentage of omphaloceles have associated chromosomal anomalies?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="Much higher than 5%. This is the rate for gastroschisis." onclick="pick(this,3)"><div class="choice-icon">🔴</div><div><div class="choice-title">Less than 5%</div><div class="choice-desc">Rare genetic associations</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! 30-50% of omphaloceles have chromosomal anomalies (T13, T18, T21 most common). Additional associations: Beckwith-Wiedemann syndrome (omphalocele + macroglossia + macrosomia + hypoglycemia), pentalogy of Cantrell (midline defects), cardiac defects in 30-50%. This is why genetic workup is essential for omphalocele." onclick="pick(this,3)"><div class="choice-icon">🟢</div><div><div class="choice-title">30-50%</div><div class="choice-desc">High rate of chromosomal and syndromic associations</div></div></div>
+<div class="choice" data-correct="false" data-fb="The rate is higher. Combined chromosomal + syndromic associations approach 50%." onclick="pick(this,3)"><div class="choice-icon">🔵</div><div><div class="choice-title">10-15%</div><div class="choice-desc">Moderate genetic risk</div></div></div>
+<div class="choice" data-correct="false" data-fb="While the rate is high, it&#39;s not that high. About half of omphaloceles are isolated." onclick="pick(this,3)"><div class="choice-icon">🟡</div><div><div class="choice-title">75-90%</div><div class="choice-desc">Nearly all have genetic abnormalities</div></div></div></div>
+<div id="fb3" class="hidden">
+<div id="fbText3" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>Association comparison: OMPHALOCELE — chromosomal (30-50%), cardiac (30-50%), Beckwith-Wiedemann, pentalogy of Cantrell. Prognosis depends on associated anomalies more than the defect itself. GASTROSCHISIS — chromosomal anomalies RARE (<1%), intestinal atresia (10-15%) from vascular compromise, and short gut from bowel damage. Prognosis is generally better because it's usually an isolated defect.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(4)">Continue →</button></div>
+</div></div></div></div>
+<div id="s4" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 4 of 6</div><div class="card-title">👶 Delivery & Immediate Care</div></div><div class="card-body">
+<div class="narrative">Patient B (gastroschisis) delivers at 36 weeks. The exposed bowel appears <span class='hl'>matted, thickened, and covered in a fibrous peel</span> from prolonged amniotic fluid exposure. The bowel is placed in a <span class='hl'>sterile bowel bag</span> and the baby is kept warm.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">HR</div><div class="vital-value">155</div></div><div class="vital"><div class="vital-label">Temp</div><div class="vital-value">36.5°C</div></div><div class="vital"><div class="vital-label">Bowel</div><div class="vital-value">Matted, peel</div></div><div class="vital"><div class="vital-label">Fluid Loss</div><div class="vital-value">High</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">What is the immediate priority for exposed gastroschisis bowel?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="Immediate closure is rarely possible — the abdominal cavity is often too small for the edematous bowel. Staged reduction is usually needed." onclick="pick(this,4)"><div class="choice-icon">🔴</div><div><div class="choice-title">Immediate surgical closure</div><div class="choice-desc">Primary fascial closure in the delivery room</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! The exposed bowel loses massive fluid and heat. Priorities: (1) Place bowel in sterile plastic bag (silo/spring-loaded or improvised); (2) Position baby on right side to prevent mesenteric kinking; (3) IV fluids at 2-3× maintenance (insensible losses); (4) NG tube for decompression; (5) Broad-spectrum antibiotics." onclick="pick(this,4)"><div class="choice-icon">🟢</div><div><div class="choice-title">Wrap bowel in sterile bag, prevent heat/fluid loss</div><div class="choice-desc">Protective coverage + aggressive resuscitation</div></div></div>
+<div class="choice" data-correct="false" data-fb="Gauze is not ideal — a plastic bag/silo is preferred because it allows visualization, reduces evaporative losses more effectively, and doesn&#39;t adhere to the bowel." onclick="pick(this,4)"><div class="choice-icon">🔵</div><div><div class="choice-title">Cover with petroleum-soaked gauze</div><div class="choice-desc">Moist dressing to prevent desiccation</div></div></div>
+<div class="choice" data-correct="false" data-fb="The exposed, matted bowel is non-functional. The baby needs TPN until bowel function returns after repair (often weeks)." onclick="pick(this,4)"><div class="choice-icon">🟡</div><div><div class="choice-title">Begin enteral feeds through gastrostomy</div><div class="choice-desc">Maintain nutrition via the GI tract</div></div></div></div>
+<div id="fb4" class="hidden">
+<div id="fbText4" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>Gastroschisis bowel management: The fibrous peel on the bowel is caused by prolonged exposure to amniotic fluid (chemical peritonitis from fetal urine and meconium). This thickening impairs motility and may take weeks to resolve postoperatively. Staged reduction using a silo allows gravity-assisted return of bowel to the abdomen over 3-7 days, avoiding abdominal compartment syndrome.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(5)">Continue →</button></div>
+</div></div></div></div>
+<div id="s5" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 5 of 6</div><div class="card-title">🔧 Surgical Management</div></div><div class="card-body">
+<div class="narrative">A spring-loaded silo is placed at bedside. Over 5 days, the bowel is gradually reduced. <span class='hl'>Primary fascial closure</span> is achieved on day 6. Post-operatively, the baby has <span class='hl'>prolonged ileus</span> requiring TPN for 4 weeks.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Silo Days</div><div class="vital-value">5</div></div><div class="vital"><div class="vital-label">Closure</div><div class="vital-value">Primary</div></div><div class="vital"><div class="vital-label">Feeds</div><div class="vital-value">TPN × 4 wks</div></div><div class="vital"><div class="vital-label">Bowel Function</div><div class="vital-value">Delayed</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">What is the most common long-term GI complication of gastroschisis?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="While the bowel may not rotate normally, clinically significant volvulus after gastroschisis repair is uncommon." onclick="pick(this,5)"><div class="choice-icon">🔴</div><div><div class="choice-title">Malrotation with volvulus risk</div><div class="choice-desc">Abnormal intestinal rotation</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! The bowel&#39;s serosal damage from amniotic fluid exposure causes long-term dysmotility in many gastroschisis patients. Feeding intolerance, GERD, and need for prolonged TPN are common. About 10-15% develop intestinal atresia or short bowel syndrome requiring long-term nutritional support." onclick="pick(this,5)"><div class="choice-icon">🟢</div><div><div class="choice-title">Feeding intolerance and dysmotility</div><div class="choice-desc">Chronic bowel dysfunction from damaged serosa</div></div></div>
+<div class="choice" data-correct="false" data-fb="Incisional hernia can occur but is not the most common long-term complication." onclick="pick(this,5)"><div class="choice-icon">🔵</div><div><div class="choice-title">Recurrent abdominal wall herniation</div><div class="choice-desc">Fascial closure breakdown</div></div></div>
+<div class="choice" data-correct="false" data-fb="Adhesive bowel obstruction can occur but is less common than chronic dysmotility." onclick="pick(this,5)"><div class="choice-icon">🟡</div><div><div class="choice-title">Intussusception</div><div class="choice-desc">Lead point from surgical adhesions</div></div></div></div>
+<div id="fb5" class="hidden">
+<div id="fbText5" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>Gastroschisis outcomes: Overall survival >90%. Main morbidity is prolonged hospitalization (average 30-50 days) due to slow return of bowel function. The damaged serosa causes chronic dysmotility. TPN-associated liver disease is a concern with prolonged IV nutrition. Intestinal atresia (10-15%) occurs from mesenteric vascular compromise and worsens prognosis. 'Closing' gastroschisis (atretic bowel with very small defect) has the worst outcomes.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(6)">Continue →</button></div>
+</div></div></div></div>
+<div id="s6" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 6 of 6</div><div class="card-title">🎓 Integration & Key Takeaways</div></div><div class="card-body">
+<div class="narrative">Both families are followed long-term. The gastroschisis baby eventually feeds normally by 3 months. The omphalocele baby's course is dominated by the Trisomy 18 prognosis.</div>
+<h3 style="color:var(--accent);margin:20px 0 12px">Key Takeaways</h3><div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Omphalocele: AT umbilicus, membrane-covered, liver ± bowel, high genetic risk (30-50%)</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Gastroschisis: RIGHT of umbilicus, NO membrane, bowel only, low genetic risk (<1%)</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Omphalocele = failure of midgut return; Gastroschisis = vascular disruption (R umbilical vein)</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Omphalocele prognosis depends on associated anomalies; Gastroschisis >90% survival</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Gastroschisis: sterile bag/silo, aggressive fluids, staged reduction</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Prolonged dysmotility is the major gastroschisis morbidity (damaged serosa)</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Both are distinguishable on prenatal ultrasound</span></div>
+<h3 style="color:var(--info);margin:24px 0 12px">📚 References</h3><div class="cross-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK519011/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Omphalocele - StatPearls</div></a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK557894/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Gastroschisis - StatPearls</div></a></div>
+<div style="text-align:center;margin-top:30px"><div style="font-size:4rem">🎓</div><div style="font-size:2rem;font-weight:700;color:var(--success);margin:16px 0">Case Complete!</div>
+<p style="color:var(--muted);margin-bottom:20px">Score: <span id="finalScore">0</span> / 500</p>
+<button class="btn btn-primary" onclick="location.reload()">Restart</button></div></div></div></div>
+</div>
+<script>
+let score=0,total=6;const crtId='omphalocele-gastroschisis-crt';(function(){try{var s=JSON.parse(localStorage.getItem('crtScores')||'{}');if(s[crtId]){var d=s[crtId];document.title+=' (Best: '+d.best+'/'+total+')'}}catch(e){}})();
+function pick(el,sn){
+  const all=el.parentElement.querySelectorAll('.choice');
+  all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});
+  el.style.opacity='1';
+  const correct=el.dataset.correct==='true';
+  el.classList.add(correct?'correct':'wrong');
+  if(correct){score+=100;document.getElementById('score').textContent=score;try{var cs=JSON.parse(localStorage.getItem('crtScores')||'{}');if(!cs[crtId])cs[crtId]={attempts:0,best:0,last:null};cs[crtId].last=new Date().toISOString();var pts=score/100;if(pts>cs[crtId].best)cs[crtId].best=pts;localStorage.setItem('crtScores',JSON.stringify(cs))}catch(e){}}
+  if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}
+  const fbDiv=document.getElementById('fbText'+sn);
+  fbDiv.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';
+  fbDiv.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');
+  fbDiv.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;
+  document.getElementById('fb'+sn).classList.remove('hidden');
+}
+function next(n){
+  document.querySelectorAll('.stage').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('s'+n).classList.remove('hidden');
+  document.getElementById('stageNum').textContent=n+'/'+total;
+  document.getElementById('progress').style.width=Math.round(n/total*100)+'%';
+  window.scrollTo(0,0);
+  if(n===total){document.getElementById('finalScore').textContent=score;try{var cs=JSON.parse(localStorage.getItem('crtScores')||'{}')||{};if(!cs[crtId])cs[crtId]={attempts:0,best:0,last:null};cs[crtId].attempts++;cs[crtId].completed=true;cs[crtId].last=new Date().toISOString();var pts=score/100;if(pts>cs[crtId].best)cs[crtId].best=pts;localStorage.setItem('crtScores',JSON.stringify(cs))}catch(e){}};
+}
+</script>
+
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="omphalocele-gastroschisis-crt.html" class="cross-link"><div class="cross-link-title">🧪 Clinical Reasoning Trainer</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a></div></div></div>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body></html>

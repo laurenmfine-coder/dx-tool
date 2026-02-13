@@ -1,97 +1,18 @@
-/**
- * ReasonDx Adventure Case Responsive Overrides
- * For adventure cases that don't have inline @media queries.
- * Include via: <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
- */
-
-/* Mobile-first adjustments */
+/* rdx-adventure-responsive.css — Responsive layouts for adventure cases */
 @media (max-width: 768px) {
-    .container {
-        padding: 16px !important;
-        margin: 0 auto;
-    }
-
-    .scene-title {
-        font-size: 1.3rem !important;
-    }
-
-    .options {
-        gap: 10px !important;
-    }
-
-    .option {
-        padding: 14px 16px !important;
-        font-size: 0.95rem !important;
-        min-height: 44px;
-    }
-
-    .comparison-table {
-        font-size: 0.85rem !important;
-        overflow-x: auto;
-        display: block;
-    }
-
-    .comparison-table td,
-    .comparison-table th {
-        padding: 8px 10px !important;
-        white-space: normal !important;
-    }
-
-    .lab-box,
-    .pearl-box {
-        padding: 14px !important;
-    }
-
-    .vital-item {
-        font-size: 0.9rem !important;
-    }
-
-    /* Score tracker repositioning */
-    .score-tracker,
-    .difficulty-panel {
-        position: static !important;
-        display: inline-block !important;
-        margin: 0 12px 12px 0 !important;
-    }
+  .adventure-container { padding: 12px; }
+  .case-header { flex-direction: column; gap: 8px; }
+  .case-header h1 { font-size: 20px; }
+  .vitals-grid { grid-template-columns: repeat(2, 1fr); }
+  .choice-grid { grid-template-columns: 1fr; }
+  .lab-table { font-size: 13px; overflow-x: auto; }
+  .feedback-panel { padding: 16px; }
+  .dx-nav-links a span { display: none; }
 }
-
 @media (max-width: 480px) {
-    .container {
-        padding: 12px !important;
-    }
-
-    .scene-title {
-        font-size: 1.15rem !important;
-    }
-
-    .narrative {
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
-    }
-
-    .next-btn,
-    button {
-        width: 100% !important;
-        min-height: 48px !important;
-        font-size: 1rem !important;
-    }
-
-    .progress-bar {
-        gap: 4px !important;
-    }
-
-    .progress-dot {
-        width: 10px !important;
-        height: 10px !important;
-    }
+  .vitals-grid { grid-template-columns: 1fr; }
+  .case-progress { font-size: 11px; }
 }
-
-/* Touch-friendly targets */
-@media (pointer: coarse) {
-    .option,
-    .next-btn,
-    button,
-    .nav-btn {
-        min-height: 44px !important;
-    }
+@media (min-width: 1200px) {
+  .adventure-container { max-width: 1100px; margin: 0 auto; }
 }

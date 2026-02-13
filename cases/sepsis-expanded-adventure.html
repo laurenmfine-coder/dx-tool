@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sepsis & Septic Shock - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family:'Inter',sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #14b8a6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #2dd4bf; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #5eead4; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #14b8a6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #14b8a6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #5eead4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank" rel="noopener">Surviving Sepsis Campaign Guidelines (SCCM)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK537054/" target="_blank" rel="noopener">Sepsis - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/2654/qsofa-quick-sofa-score-sepsis" target="_blank" rel="noopener">qSOFA Calculator (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>You're the senior resident called to the ED for a <span class=\"highlight\">72-year-old woman</span> brought by EMS from her nursing home. The triage nurse pages you urgently.</p>\n                <p style=\"margin-top:12px;\"><strong>Chief Complaint:</strong> \"Found confused and not eating this morning\"</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Vital Signs</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">Temp</div><div class=\"vital-value abnormal\">102.8\u00b0F</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">118</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">82/54</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">RR</div><div class=\"vital-value abnormal\">26</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value abnormal\">91% RA</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">GCS</div><div class=\"vital-value abnormal\">13</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "Count the abnormal vital signs. What do they suggest when considered together rather than individually?",
+        "hint_advanced": "Calculate her shock index (HR/SBP) and MAP before proceeding. How do these correlate with mortality?",
+        "question": {
+            "prompt": "Based on the vital signs alone, what should be your FIRST consideration?",
+            "options": [
+                {
+                    "text": "This patient is in shock and requires immediate resuscitation regardless of the underlying cause",
+                    "correct": true
+                },
+                {
+                    "text": "The confusion suggests possible stroke; emergent CT head should be prioritized to rule out hemorrhage",
+                    "correct": false
+                },
+                {
+                    "text": "Given her nursing home residence, urinary tract infection is most likely and antibiotics should be started",
+                    "correct": false
+                },
+                {
+                    "text": "Blood cultures should be obtained immediately since fever indicates bacteremia until proven otherwise",
+                    "correct": false
+                },
+                {
+                    "text": "The hypoxia is most concerning; she likely needs intubation for airway protection given her mental status",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Correct! She has hypotension (82/54), tachycardia (118), tachypnea (26), fever, and altered mental status - this is shock. Her shock index is 1.44 (normal <0.7) and MAP is 63 mmHg. Recognizing and treating shock takes priority over identifying the specific cause.",
+                "incorrect": "While identifying the cause is important, the vital sign pattern (hypotension + tachycardia + tachypnea + altered mental status) indicates shock. Her shock index of 1.44 (HR/SBP) and MAP of 63 mmHg confirm hemodynamic instability requiring immediate resuscitation."
+            },
+            "teaching": "<h4>\ud83d\udcda Recognizing Shock at the Bedside</h4>\n                    <table>\n                        <tr><th>Parameter</th><th>This Patient</th><th>Significance</th></tr>\n                        <tr><td>Shock Index (HR/SBP)</td><td><strong>1.44</strong></td><td>Normal &lt;0.7; &gt;1.0 predicts mortality</td></tr>\n                        <tr><td>MAP</td><td><strong>63 mmHg</strong></td><td>Target \u226565 for organ perfusion</td></tr>\n                        <tr><td>Mental Status</td><td><strong>Altered</strong></td><td>Early sign of hypoperfusion</td></tr>\n                    </table>\n                    <p><em>Key principle: Treat the shock first, diagnose the cause simultaneously.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Focused Assessment",
+        "content": "<div class=\"narrative\">\n                <p>You recognize this patient is in shock and call for help. While your team prepares for resuscitation, you perform a rapid focused exam to identify the <strong>type and source</strong>.</p>\n                <p style=\"margin-top:12px;\"><strong>PMH:</strong> Type 2 diabetes, hypertension, recurrent UTIs, mild dementia at baseline</p>\n            </div>",
+        "hint_beginner": "What are the most common sources of sepsis in elderly nursing home patients? Focus your exam accordingly.",
+        "hint_advanced": "What physical findings would distinguish distributive (warm) shock from cardiogenic (cold) shock?",
+        "question": {
+            "prompt": "Which combination of physical exam findings would BEST support your suspected diagnosis?",
+            "options": [
+                {
+                    "text": "Warm extremities, bounding pulses, suprapubic tenderness, and costovertebral angle tenderness",
+                    "correct": true
+                },
+                {
+                    "text": "Cool extremities, weak pulses, elevated JVP, and bilateral crackles on lung auscultation",
+                    "correct": false
+                },
+                {
+                    "text": "Unilateral leg swelling, calf tenderness, and clear lungs with normal heart sounds",
+                    "correct": false
+                },
+                {
+                    "text": "Rigid abdomen with absent bowel sounds, guarding, and rebound tenderness diffusely",
+                    "correct": false
+                },
+                {
+                    "text": "Asymmetric pupils, facial droop, and right-sided hemiparesis with upgoing plantar reflex",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "These findings suggest septic (distributive) shock from a urinary source. Warm extremities and bounding pulses indicate the vasodilated state of early sepsis. CVA and suprapubic tenderness localize to the urinary tract - the most common sepsis source in nursing home patients.",
+                "incorrect": "The question asks what would support the suspected diagnosis of septic shock. Cool extremities suggest cardiogenic shock. Leg swelling suggests DVT/PE. Rigid abdomen suggests surgical emergency. Focal neuro deficits suggest stroke. The fever + nursing home setting + shock points to sepsis, likely urinary source."
+            },
+            "teaching": "<h4>\ud83d\udcda Shock Phenotypes on Physical Exam</h4>\n                    <table>\n                        <tr><th>Finding</th><th>Distributive (Septic)</th><th>Cardiogenic</th></tr>\n                        <tr><td>Extremities</td><td>Warm, well-perfused</td><td>Cool, mottled</td></tr>\n                        <tr><td>Pulses</td><td>Bounding (wide pulse pressure)</td><td>Weak, thready</td></tr>\n                        <tr><td>JVP</td><td>Low or normal</td><td>Elevated</td></tr>\n                        <tr><td>Lungs</td><td>Clear (unless pneumonia source)</td><td>Crackles/edema</td></tr>\n                    </table>\n                    <p><strong>Top 3 sepsis sources in nursing home patients:</strong> UTI, pneumonia, skin/soft tissue</p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Sepsis Recognition",
+        "content": "<div class=\"narrative\">\n                <p>Your exam reveals warm extremities, suprapubic tenderness, right CVA tenderness, and cloudy urine in the Foley bag. No crackles, no JVD, no focal neurologic deficits.</p>\n                <p style=\"margin-top:12px;\">The medical student asks: <em>\"How do we know this is sepsis and not just a UTI with dehydration?\"</em></p>\n            </div>",
+        "hint_beginner": "What distinguishes \"sepsis\" from \"infection\"? Think about what Sepsis-3 criteria require beyond infection.",
+        "hint_advanced": "Can you list the 6 organ systems in the SOFA score and identify which ones are affected in this patient?",
+        "question": {
+            "prompt": "According to current Sepsis-3 criteria, what defines this patient as having sepsis rather than uncomplicated infection?",
+            "options": [
+                {
+                    "text": "Suspected infection PLUS acute organ dysfunction as indicated by increase in SOFA score of 2 or more points",
+                    "correct": true
+                },
+                {
+                    "text": "Documented bacteremia with positive blood cultures plus at least two SIRS criteria present",
+                    "correct": false
+                },
+                {
+                    "text": "Clinical infection requiring hospital admission with temperature above 101\u00b0F or below 96\u00b0F",
+                    "correct": false
+                },
+                {
+                    "text": "Infection plus tachycardia, tachypnea, fever, and leukocytosis meeting SIRS criteria",
+                    "correct": false
+                },
+                {
+                    "text": "Any infection with lactate level greater than 2.0 mmol/L indicating tissue hypoperfusion",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Sepsis-3 (2016) defines sepsis as life-threatening organ dysfunction caused by dysregulated host response to infection. This is operationalized as infection + SOFA \u22652. This patient has infection (UTI) + organ dysfunction (AKI from baseline Cr, encephalopathy, hypotension requiring vasopressors).",
+                "incorrect": "Sepsis-3 moved away from SIRS criteria because they were too sensitive and non-specific. Bacteremia is not required. The current definition requires infection PLUS organ dysfunction (SOFA score increase \u22652). Lactate >2 with vasopressor need defines septic SHOCK, not sepsis."
+            },
+            "teaching": "<h4>\ud83d\udcda Sepsis-3 Definitions (2016)</h4>\n                    <table>\n                        <tr><th>Term</th><th>Definition</th></tr>\n                        <tr><td><strong>Sepsis</strong></td><td>Infection + SOFA score \u22652 (or increase of \u22652 from baseline)</td></tr>\n                        <tr><td><strong>Septic Shock</strong></td><td>Sepsis + vasopressors required for MAP \u226565 + lactate &gt;2 despite adequate fluid resuscitation</td></tr>\n                    </table>\n                    <p><strong>SOFA assesses 6 systems:</strong> Respiratory (P/F ratio), Coagulation (platelets), Liver (bilirubin), Cardiovascular (MAP/vasopressors), CNS (GCS), Renal (creatinine/UOP)</p>\n                    <p><em>SIRS criteria are no longer part of the sepsis definition.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\">\n                <p>You want to quickly communicate the severity to your team. The qSOFA score can help with bedside risk stratification without waiting for labs.</p>\n                <p style=\"margin-top:12px;\"><strong>Current status:</strong></p>\n                <ul>\n                    <li>Respiratory rate: 26 breaths/min</li>\n                    <li>Mental status: GCS 13 (confused, follows commands inconsistently)</li>\n                    <li>Systolic blood pressure: 82 mmHg</li>\n                </ul>\n            </div>",
+        "hint_beginner": "qSOFA has exactly 3 criteria, each worth 1 point. What is the threshold for each criterion?",
+        "hint_advanced": "What is the difference between qSOFA and SOFA? Why was qSOFA developed, and what are its limitations?",
+        "question": {
+            "prompt": "What is this patient's qSOFA score and how should it be interpreted?",
+            "options": [
+                {
+                    "text": "qSOFA = 3; this indicates high risk for poor outcomes and need for aggressive monitoring and intervention",
+                    "correct": true
+                },
+                {
+                    "text": "qSOFA = 3; this confirms the diagnosis of sepsis according to the Sepsis-3 consensus definition",
+                    "correct": false
+                },
+                {
+                    "text": "qSOFA = 2; she meets the threshold for ICU admission but not for sepsis diagnosis",
+                    "correct": false
+                },
+                {
+                    "text": "qSOFA = 2; this is moderate risk and she can be managed on a general medical floor initially",
+                    "correct": false
+                },
+                {
+                    "text": "qSOFA = 1; her altered mental status is likely baseline dementia and should not be counted",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "She scores 3/3: RR \u226522 (\u2713, she has 26), altered mental status (\u2713, GCS 13), SBP \u2264100 (\u2713, she has 82). qSOFA \u22652 predicts higher mortality (~10% vs 3%). IMPORTANT: qSOFA is a prognostic screening tool, NOT diagnostic criteria for sepsis.",
+                "incorrect": "Calculate each criterion: RR \u226522? Yes (26 = +1). Altered mental status? Yes (GCS 13 vs baseline = +1). SBP \u2264100? Yes (82 = +1). Total = 3. Remember that qSOFA is for RISK STRATIFICATION, not diagnosis. Her mental status change from baseline counts regardless of underlying dementia."
+            },
+            "teaching": "<h4>\ud83d\udcda qSOFA (Quick SOFA)</h4>\n                    <table>\n                        <tr><th>Criterion</th><th>Points</th><th>This Patient</th></tr>\n                        <tr><td>Respiratory rate \u2265 22/min</td><td>1</td><td>\u2713 (26)</td></tr>\n                        <tr><td>Altered mental status (GCS &lt;15)</td><td>1</td><td>\u2713 (13)</td></tr>\n                        <tr><td>Systolic BP \u2264 100 mmHg</td><td>1</td><td>\u2713 (82)</td></tr>\n                    </table>\n                    <p><strong>Interpretation:</strong></p>\n                    <ul>\n                        <li>Score 0-1: Lower risk (~3% mortality)</li>\n                        <li>Score \u22652: Higher risk (~10% mortality)</li>\n                    </ul>\n                    <p><em>qSOFA is for bedside screening/prognosis, NOT for diagnosing sepsis!</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Initial Resuscitation Priorities",
+        "content": "<div class=\"narrative\">\n                <p>It's been 12 minutes since the patient arrived. Your team is assembled. The nurse has one peripheral IV and asks what to prioritize.</p>\n                <p style=\"margin-top:12px;\">You need to initiate the <strong>Hour-1 Bundle</strong>, but resources are limited and you must prioritize.</p>\n            </div>",
+        "hint_beginner": "Which intervention in sepsis has the strongest evidence for mortality benefit when done early?",
+        "hint_advanced": "The classic teaching is \"cultures before antibiotics.\" What does the evidence actually show about delaying antibiotics to obtain cultures?",
+        "question": {
+            "prompt": "You can only ensure ONE intervention happens in the next 5 minutes. Which is MOST critical?",
+            "options": [
+                {
+                    "text": "Administer broad-spectrum intravenous antibiotics immediately",
+                    "correct": true
+                },
+                {
+                    "text": "Obtain two sets of blood cultures from separate peripheral sites",
+                    "correct": false
+                },
+                {
+                    "text": "Initiate 30 mL/kg crystalloid fluid bolus for volume resuscitation",
+                    "correct": false
+                },
+                {
+                    "text": "Draw serum lactate level to assess severity of tissue hypoperfusion",
+                    "correct": false
+                },
+                {
+                    "text": "Establish central venous access for vasopressor administration",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Antibiotics are the single most impactful early intervention. Kumar et al. demonstrated 7.6% increase in mortality for each hour of antibiotic delay in septic shock. While \"cultures before antibiotics\" is ideal, NEVER delay antibiotics to obtain cultures. Give antibiotics first, then get cultures (even minutes later is acceptable).",
+                "incorrect": "While all Hour-1 Bundle elements are important, antibiotics have the strongest mortality data. Kumar et al: 7.6% increased mortality per hour of delay. The guideline says obtain cultures \"before\" antibiotics but clarifies this should not delay antibiotic administration. The order should be: antibiotics \u2192 cultures \u2192 fluids \u2192 lactate \u2192 vasopressors."
+            },
+            "teaching": "<h4>\ud83d\udcda Surviving Sepsis Hour-1 Bundle (2021)</h4>\n                    <ol>\n                        <li>Measure lactate (repeat if >2 mmol/L)</li>\n                        <li>Obtain blood cultures <em>(but don't delay antibiotics!)</em></li>\n                        <li><strong>Administer broad-spectrum antibiotics \u2b50 HIGHEST PRIORITY</strong></li>\n                        <li>Begin 30 mL/kg crystalloid for hypotension or lactate \u22654</li>\n                        <li>Start vasopressors if hypotensive during or after fluid resuscitation</li>\n                    </ol>\n                    <p><strong>Key Evidence:</strong> Kumar et al. (2006) - Each hour of antibiotic delay in septic shock increases mortality by 7.6%</p>\n                    <p><em>\"Cultures before antibiotics\" should never delay antibiotic administration.</em></p>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Antibiotic Selection",
+        "content": "<div class=\"narrative\">\n                <p>You're ready to order antibiotics for presumed urosepsis. Before ordering, you review key information:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Allergies:</strong> Penicillin - \"rash as a child\"</li>\n                    <li><strong>Recent antibiotics:</strong> Ciprofloxacin x 7 days, completed 2 weeks ago</li>\n                    <li><strong>Labs returning:</strong> Cr 2.1 mg/dL (baseline 1.0), WBC 18.5</li>\n                </ul>\n            </div>",
+        "hint_beginner": "What organisms cause complicated UTI and urosepsis? What antibiotic class provides good gram-negative coverage including Pseudomonas?",
+        "hint_advanced": "How does her recent fluoroquinolone use affect your antibiotic choice? What is the cross-reactivity risk between penicillins and cephalosporins?",
+        "question": {
+            "prompt": "Which empiric antibiotic regimen is MOST appropriate for this patient?",
+            "options": [
+                {
+                    "text": "Cefepime 2g IV - provides broad gram-negative coverage including Pseudomonas with low penicillin cross-reactivity risk",
+                    "correct": true
+                },
+                {
+                    "text": "Piperacillin-tazobactam 4.5g IV - excellent urinary penetration and broad spectrum coverage for urosepsis",
+                    "correct": false
+                },
+                {
+                    "text": "Ciprofloxacin 400mg IV - first-line agent for complicated urinary tract infections with renal dosing",
+                    "correct": false
+                },
+                {
+                    "text": "Ceftriaxone 2g IV - adequate gram-negative coverage and safe in penicillin allergy",
+                    "correct": false
+                },
+                {
+                    "text": "Meropenem 1g IV - carbapenem provides broadest coverage and is safest in penicillin allergy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Cefepime is the best choice. It covers gram-negatives including Pseudomonas (important in complicated UTI). Her childhood rash is a low-risk penicillin allergy with <1% cephalosporin cross-reactivity. Pip-tazo contains penicillin (contraindicated). ciprofloxacin (Cipro) has high resistance after recent use. Ceftriaxone lacks Pseudomonas coverage. Meropenem is unnecessarily broad.",
+                "incorrect": "Key considerations: 1) Need Pseudomonas coverage (complicated UTI, nursing home), 2) Pip-tazo contains penicillin - cannot use, 3) Recent fluoroquinolone use increases resistance risk, 4) Ceftriaxone lacks Pseudomonas coverage. Cefepime provides appropriate coverage with minimal cross-reactivity risk for her low-risk penicillin allergy."
+            },
+            "teaching": "<h4>\ud83d\udcda Antibiotic Selection in Urosepsis</h4>\n                    <p><strong>Must cover:</strong> E. coli, Klebsiella, Proteus, Pseudomonas (if complicated), Enterococcus</p>\n                    <table>\n                        <tr><th>Option</th><th>Issue for This Patient</th></tr>\n                        <tr><td>Pip-tazo</td><td>Contains penicillin - allergic</td></tr>\n                        <tr><td>Ciprofloxacin</td><td>Recent use \u2192 resistance risk</td></tr>\n                        <tr><td>Ceftriaxone</td><td>No Pseudomonas coverage</td></tr>\n                        <tr><td>Meropenem</td><td>Unnecessarily broad, stewardship concern</td></tr>\n                        <tr><td><strong>Cefepime \u2713</strong></td><td>Covers Pseudomonas, safe in low-risk PCN allergy</td></tr>\n                    </table>\n                    <p><em>Low-risk penicillin allergy (childhood rash): &lt;1% cephalosporin cross-reactivity</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Fluid Resuscitation",
+        "content": "<div class=\"narrative\">\n                <p>Cefepime is infusing. Now you turn to fluid resuscitation.</p>\n                <div class=\"patient-card\">\n                    <h4>Current Status</h4>\n                    <div class=\"vitals-grid\">\n                        <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">84/56</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">116</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">Lactate</div><div class=\"vital-value abnormal\">4.8</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">Weight</div><div class=\"vital-value\">70 kg</div></div>\n                    </div>\n                </div>\n            </div>",
+        "hint_beginner": "What is the recommended initial fluid volume in sepsis? What type of crystalloid does current evidence favor?",
+        "hint_advanced": "What did the SMART trial show about balanced crystalloids vs normal saline? How might her AKI influence your fluid choice?",
+        "question": {
+            "prompt": "What is the most appropriate fluid resuscitation strategy?",
+            "options": [
+                {
+                    "text": "Lactated Ringer's 30 mL/kg (2.1 L) over the first 3 hours, reassessing response frequently",
+                    "correct": true
+                },
+                {
+                    "text": "Normal saline 500 mL bolus, then reassess before giving more to avoid fluid overload",
+                    "correct": false
+                },
+                {
+                    "text": "5% Albumin 30 mL/kg to maintain oncotic pressure and reduce third-spacing of crystalloid",
+                    "correct": false
+                },
+                {
+                    "text": "Normal saline 30 mL/kg rapidly, as it is the recommended fluid in sepsis guidelines",
+                    "correct": false
+                },
+                {
+                    "text": "Defer significant fluid resuscitation until central access for CVP-guided therapy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Guidelines recommend 30 mL/kg crystalloid for sepsis-induced hypotension or lactate \u22654 mmol/L. She meets both criteria. Balanced crystalloids (LR, Plasmalyte) are preferred over NS based on the SMART trial showing reduced major adverse kidney events. For this 70 kg patient: 30 \u00d7 70 = 2,100 mL.",
+                "incorrect": "Current guidelines: 30 mL/kg crystalloid within 3 hours for hypotension or lactate \u22654 (she has both). SMART trial demonstrated balanced crystalloids (LR) reduce kidney injury compared to NS. 500 mL is inadequate initial volume. Albumin is not first-line. CVP-guided therapy is outdated."
+            },
+            "teaching": "<h4>\ud83d\udcda Fluid Resuscitation in Sepsis</h4>\n                    <p><strong>Indications for 30 mL/kg crystalloid:</strong></p>\n                    <ul>\n                        <li>Sepsis-induced hypotension (SBP &lt;90 or MAP &lt;65), OR</li>\n                        <li>Lactate \u22654 mmol/L</li>\n                    </ul>\n                    <p><strong>Fluid choice:</strong></p>\n                    <table>\n                        <tr><th>Crystalloid</th><th>Evidence</th></tr>\n                        <tr><td><strong>Balanced (LR, Plasmalyte)</strong></td><td>SMART trial: \u2193 MAKE (death, RRT, persistent renal dysfunction)</td></tr>\n                        <tr><td>Normal saline</td><td>Acceptable but risk of hyperchloremic acidosis with large volumes</td></tr>\n                    </table>\n                    <p><em>This patient: 70 kg \u00d7 30 mL/kg = 2,100 mL LR</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Vasopressor Initiation",
+        "content": "<div class=\"narrative\">\n                <p>Two liters of LR have infused. You reassess:</p>\n                <div class=\"patient-card\">\n                    <h4>Post-Fluid Status</h4>\n                    <div class=\"vitals-grid\">\n                        <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">76/50</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">MAP</div><div class=\"vital-value abnormal\">59</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">122</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">Lactate</div><div class=\"vital-value abnormal\">5.2</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">UOP</div><div class=\"vital-value abnormal\">10 mL/hr</div></div>\n                    </div>\n                </div>\n                <p style=\"margin-top:12px;\">She's not responding adequately to fluids. Time to start vasopressors.</p>\n            </div>",
+        "hint_beginner": "What is the first-line vasopressor in septic shock according to guidelines?",
+        "hint_advanced": "What receptor does norepinephrine primarily act on? At what dose would you consider adding a second vasopressor, and which one?",
+        "question": {
+            "prompt": "Which vasopressor strategy is most appropriate to initiate?",
+            "options": [
+                {
+                    "text": "Norepinephrine starting at 0.1 mcg/kg/min via peripheral IV, titrating to MAP \u226565 mmHg",
+                    "correct": true
+                },
+                {
+                    "text": "Dopamine 5-10 mcg/kg/min via peripheral IV for combined inotropic and vasopressor effect",
+                    "correct": false
+                },
+                {
+                    "text": "Vasopressin 0.03 units/min as initial agent to spare catecholamines and their side effects",
+                    "correct": false
+                },
+                {
+                    "text": "Phenylephrine 100-200 mcg/min as a pure alpha-agonist to avoid tachycardia",
+                    "correct": false
+                },
+                {
+                    "text": "Epinephrine 0.1 mcg/kg/min for patients not responding to fluid resuscitation",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Norepinephrine is the first-line vasopressor per Surviving Sepsis guidelines. It provides potent \u03b11 vasoconstriction with modest \u03b21 inotropy. SOAP II trial showed dopamine had more arrhythmias with trend toward increased mortality in shock. Norepinephrine can be safely started through a well-functioning peripheral IV for up to several hours while central access is obtained.",
+                "incorrect": "Guidelines clearly recommend norepinephrine as first-line. Dopamine showed more arrhythmias in SOAP II trial. Vasopressin is second-line (add at NE ~0.25-0.5 mcg/kg/min). Phenylephrine may decrease cardiac output. Epinephrine is typically reserved for refractory shock or when inotropic support is specifically needed."
+            },
+            "teaching": "<h4>\ud83d\udcda Vasopressor Selection in Septic Shock</h4>\n                    <table>\n                        <tr><th>Line</th><th>Agent</th><th>Mechanism</th><th>Notes</th></tr>\n                        <tr><td><strong>1st</strong></td><td>Norepinephrine</td><td>\u03b11 >> \u03b21</td><td>Start 0.1-0.2 mcg/kg/min, target MAP \u226565</td></tr>\n                        <tr><td><strong>2nd</strong></td><td>Vasopressin</td><td>V1 receptor</td><td>Add at NE 0.25-0.5, fixed dose 0.03 U/min</td></tr>\n                        <tr><td><strong>3rd</strong></td><td>Epinephrine</td><td>\u03b11 + \u03b21 + \u03b22</td><td>Consider if cardiac dysfunction suspected</td></tr>\n                    </table>\n                    <p><strong>Why not dopamine?</strong> SOAP II trial: more arrhythmias, trend toward increased mortality in cardiogenic shock subgroup</p>\n                    <p><em>Peripheral norepinephrine is safe short-term through well-functioning IV while obtaining central access.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Lactate-Guided Resuscitation",
+        "content": "<div class=\"narrative\">\n                <p>Two hours into resuscitation. You reassess your patient:</p>\n                <div class=\"patient-card\">\n                    <h4>Current Status</h4>\n                    <div class=\"vitals-grid\">\n                        <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value normal\">98/62</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">MAP</div><div class=\"vital-value normal\">74</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">NE dose</div><div class=\"vital-value\">0.18 mcg/kg/min</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">Lactate</div><div class=\"vital-value abnormal\">3.2 \u2192 from 4.8</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">UOP</div><div class=\"vital-value abnormal\">25 mL/hr</div></div>\n                    </div>\n                </div>\n            </div>",
+        "hint_beginner": "What does a decreasing lactate indicate about response to resuscitation? What is the target?",
+        "hint_advanced": "What did the ANDROMEDA-SHOCK trial show about lactate-guided vs capillary refill-guided resuscitation?",
+        "question": {
+            "prompt": "How do you interpret the lactate trend and what is your next step?",
+            "options": [
+                {
+                    "text": "Lactate decreased 33% - continue current management and recheck lactate in 2-4 hours",
+                    "correct": true
+                },
+                {
+                    "text": "Lactate still elevated at 3.2 - escalate norepinephrine dose until lactate normalizes",
+                    "correct": false
+                },
+                {
+                    "text": "Lactate improving - begin weaning norepinephrine now to avoid prolonged vasopressor exposure",
+                    "correct": false
+                },
+                {
+                    "text": "Lactate clearance inadequate - administer additional 30 mL/kg fluid bolus",
+                    "correct": false
+                },
+                {
+                    "text": "Lactate still above 2 - add dobutamine for presumed sepsis-induced cardiomyopathy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Lactate decreased from 4.8 to 3.2 (33% reduction), indicating positive response to resuscitation. Guidelines recommend targeting lactate normalization OR decrease of \u226510% every 2 hours. She exceeds this target. Continue current management and recheck. No need to escalate or add agents if patient is responding.",
+                "incorrect": "A 33% lactate reduction (4.8\u21923.2) exceeds the recommended target of \u226510% decrease per 2 hours. This indicates successful resuscitation. Don't escalate therapy in a responding patient. Don't wean vasopressors yet while lactate is still elevated. Additional fluid or inotropes are not indicated with this positive response."
+            },
+            "teaching": "<h4>\ud83d\udcda Lactate-Guided Resuscitation</h4>\n                    <p><strong>Targets per Surviving Sepsis Campaign:</strong></p>\n                    <ul>\n                        <li>Normalize lactate, OR</li>\n                        <li>Decrease by \u226510% every 2 hours if not normalizing</li>\n                    </ul>\n                    <p><strong>This patient:</strong> 4.8 \u2192 3.2 = <strong>33% reduction \u2713</strong></p>\n                    <p><strong>ANDROMEDA-SHOCK:</strong> Capillary refill-guided resuscitation showed similar outcomes to lactate-guided with less fluid administration. Both are acceptable targets.</p>\n                    <p><em>Key principle: If the patient is responding, continue current therapy - don't chase numbers.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Corticosteroid Consideration",
+        "content": "<div class=\"narrative\">\n                <p>Six hours into management. Despite optimization, she remains on escalating vasopressor support:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li>Norepinephrine 0.4 mcg/kg/min</li>\n                    <li>Vasopressin 0.03 units/min (added 2 hours ago)</li>\n                    <li>MAP 64-68 mmHg</li>\n                    <li>Lactate 2.6 mmol/L (down from 3.2)</li>\n                </ul>\n                <p style=\"margin-top:12px;\">The fellow asks about corticosteroids.</p>\n            </div>",
+        "hint_beginner": "When are corticosteroids indicated in septic shock according to current guidelines?",
+        "hint_advanced": "What did the ADRENAL and APROCCHSS trials show about hydrocortisone in septic shock? Do we need to test for adrenal insufficiency first?",
+        "question": {
+            "prompt": "Should you initiate corticosteroid therapy in this patient?",
+            "options": [
+                {
+                    "text": "Yes - start hydrocortisone 200 mg/day IV for refractory shock despite adequate fluid resuscitation and vasopressors",
+                    "correct": true
+                },
+                {
+                    "text": "No - steroids only indicated after positive cosyntropin stimulation test confirms adrenal insufficiency",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - but use dexamethasone 4 mg IV because it provides better anti-inflammatory effect",
+                    "correct": false
+                },
+                {
+                    "text": "No - her lactate is improving so she does not meet criteria for refractory shock",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - but only if she has a history of chronic steroid use requiring stress-dose coverage",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Current guidelines suggest IV hydrocortisone 200 mg/day for adults with septic shock and ongoing vasopressor requirement. She qualifies: requiring NE >0.25 mcg/kg/min plus vasopressin to maintain MAP \u226565. No cosyntropin test needed - give empirically. ADRENAL and APROCCHSS showed faster shock reversal; APROCCHSS showed mortality benefit.",
+                "incorrect": "Guidelines recommend hydrocortisone 200 mg/day for septic shock with ongoing high-dose vasopressor requirement - no cosyntropin test needed. She meets criteria: NE 0.4 + vasopressin to maintain MAP. Dexamethasone lacks mineralocorticoid activity. Improving lactate doesn't preclude steroid use if still on high-dose pressors."
+            },
+            "teaching": "<h4>\ud83d\udcda Corticosteroids in Septic Shock</h4>\n                    <p><strong>Indication:</strong> Septic shock with ongoing requirement for vasopressor therapy (typically NE \u22650.25 mcg/kg/min or equivalent)</p>\n                    <p><strong>Regimen:</strong> Hydrocortisone 50 mg IV q6h or 200 mg/day continuous infusion</p>\n                    <table>\n                        <tr><th>Trial</th><th>Key Finding</th></tr>\n                        <tr><td>ADRENAL (2018)</td><td>Faster shock reversal, no mortality benefit</td></tr>\n                        <tr><td>APROCCHSS (2018)</td><td>Mortality benefit (HR 0.88) with hydrocortisone + fludrocortisone</td></tr>\n                    </table>\n                    <p><em>No cosyntropin stimulation test required - treat empirically based on clinical criteria.</em></p>",
+            "points": 10
+        }
+    }
+];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#14b8a6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 Sepsis Pathophysiology</a>
+<a href="shock-expanded.html" class="crossplatform-link">🎯 More Critical Care Cases</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Sepsis & Septic Shock"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

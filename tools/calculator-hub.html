@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -8,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinical Calculator Hub | ReasonDx</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #059669;
@@ -186,6 +187,7 @@
         <button class="nav-tab" data-section="electrolytes">Electrolytes</button>
         <button class="nav-tab" data-section="respiratory">Respiratory</button>
         <button class="nav-tab" data-section="cardio">Cardio</button>
+        <button class="nav-tab" data-section="scoring">Scoring</button>
         <button class="nav-tab" data-section="other">Other</button>
     </nav>
 
@@ -619,6 +621,117 @@
         </div>
 
         <!-- OTHER SECTION -->
+        <!-- SCORING SECTION -->
+        <div class="calc-section" id="scoring">
+            <!-- Wells Score PE -->
+            <div class="calc-card">
+                <h3>Wells Score for Pulmonary Embolism</h3>
+                <p class="subtitle">Estimates pretest probability of PE</p>
+                <div class="input-group"><label><input type="checkbox" id="wells-dvt" value="3"> Clinical signs/symptoms of DVT (+3)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="wells-alt" value="3"> PE is #1 diagnosis or equally likely (+3)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="wells-hr" value="1.5"> Heart rate > 100 (+1.5)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="wells-immob" value="1.5"> Immobilization ≥ 3 days or surgery in past 4 weeks (+1.5)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="wells-prevdvt" value="1.5"> Previous DVT/PE (+1.5)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="wells-hemop" value="1"> Hemoptysis (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="wells-malig" value="1"> Malignancy (treatment within 6 months or palliative) (+1)</label></div>
+                <button class="calc-btn" onclick="calcWellsPE()">Calculate Wells Score</button>
+                <div class="result-box" id="wells-pe-result">
+                    <div class="result-label">Wells Score (PE)</div>
+                    <div class="result-value"><span id="wells-pe-value"></span> points</div>
+                    <div class="result-interpretation" id="wells-pe-interp"></div>
+                </div>
+            </div>
+
+            <!-- CURB-65 -->
+            <div class="calc-card">
+                <h3>CURB-65 Score</h3>
+                <p class="subtitle">Severity assessment for community-acquired pneumonia</p>
+                <div class="input-group"><label><input type="checkbox" id="curb-c" value="1"> <strong>C</strong>onfusion (new disorientation) (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="curb-u" value="1"> <strong>U</strong>rea > 7 mmol/L (BUN > 19 mg/dL) (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="curb-r" value="1"> <strong>R</strong>espiratory rate ≥ 30 (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="curb-b" value="1"> <strong>B</strong>lood pressure: SBP < 90 or DBP ≤ 60 (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="curb-65" value="1"> Age ≥ <strong>65</strong> (+1)</label></div>
+                <button class="calc-btn" onclick="calcCURB65()">Calculate CURB-65</button>
+                <div class="result-box" id="curb65-result">
+                    <div class="result-label">CURB-65 Score</div>
+                    <div class="result-value"><span id="curb65-value"></span> / 5</div>
+                    <div class="result-interpretation" id="curb65-interp"></div>
+                </div>
+            </div>
+
+            <!-- CHA2DS2-VASc -->
+            <div class="calc-card">
+                <h3>CHA₂DS₂-VASc Score</h3>
+                <p class="subtitle">Stroke risk in non-valvular atrial fibrillation</p>
+                <div class="input-group"><label><input type="checkbox" id="chad-chf" value="1"> <strong>C</strong>ongestive heart failure (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-htn" value="1"> <strong>H</strong>ypertension (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-age75" value="2"> <strong>A</strong>ge ≥ 75 (+2)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-dm" value="1"> <strong>D</strong>iabetes mellitus (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-stroke" value="2"> <strong>S</strong>troke/TIA/thromboembolism (+2)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-vasc" value="1"> <strong>V</strong>ascular disease (MI, PAD, aortic plaque) (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-age65" value="1"> <strong>A</strong>ge 65–74 (+1)</label></div>
+                <div class="input-group"><label><input type="checkbox" id="chad-sex" value="1"> <strong>Sc</strong> = <strong>S</strong>ex category (female) (+1)</label></div>
+                <button class="calc-btn" onclick="calcCHADS()">Calculate CHA₂DS₂-VASc</button>
+                <div class="result-box" id="chads-result">
+                    <div class="result-label">CHA₂DS₂-VASc Score</div>
+                    <div class="result-value"><span id="chads-value"></span> / 9</div>
+                    <div class="result-interpretation" id="chads-interp"></div>
+                </div>
+            </div>
+
+            <!-- HEART Score -->
+            <div class="calc-card">
+                <h3>HEART Score</h3>
+                <p class="subtitle">Risk stratification for chest pain patients in the ED</p>
+                <div class="input-group">
+                    <label><strong>H</strong>istory</label>
+                    <select id="heart-h">
+                        <option value="0">0 — Slightly suspicious</option>
+                        <option value="1">1 — Moderately suspicious</option>
+                        <option value="2">2 — Highly suspicious</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label><strong>E</strong>CG</label>
+                    <select id="heart-e">
+                        <option value="0">0 — Normal</option>
+                        <option value="1">1 — Nonspecific repolarization changes</option>
+                        <option value="2">2 — Significant ST deviation</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label><strong>A</strong>ge</label>
+                    <select id="heart-a">
+                        <option value="0">0 — < 45 years</option>
+                        <option value="1">1 — 45–64 years</option>
+                        <option value="2">2 — ≥ 65 years</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label><strong>R</strong>isk factors</label>
+                    <select id="heart-r">
+                        <option value="0">0 — No known risk factors</option>
+                        <option value="1">1 — 1–2 risk factors</option>
+                        <option value="2">2 — ≥ 3 risk factors or known atherosclerotic disease</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label><strong>T</strong>roponin</label>
+                    <select id="heart-t">
+                        <option value="0">0 — ≤ normal limit</option>
+                        <option value="1">1 — 1–3× normal limit</option>
+                        <option value="2">2 — > 3× normal limit</option>
+                    </select>
+                </div>
+                <button class="calc-btn" onclick="calcHEART()">Calculate HEART Score</button>
+                <div class="result-box" id="heart-result">
+                    <div class="result-label">HEART Score</div>
+                    <div class="result-value"><span id="heart-value"></span> / 10</div>
+                    <div class="result-interpretation" id="heart-interp"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="calc-section" id="other">
             <!-- BMI -->
             <div class="calc-card">
@@ -1015,10 +1128,82 @@
             
             showResult('meld-result', Math.round(meld), interp);
         }
+
+        // ═══════════════════════════════════════════════
+        // INPUT VALIDATION
+        // ═══════════════════════════════════════════════
+        // Wrap showResult to validate inputs before displaying
+        const origShowResult = showResult;
+        // Add validation to all numeric inputs
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', function() {
+                const val = parseFloat(this.value);
+                if (this.value !== '' && isNaN(val)) {
+                    this.style.borderColor = '#ef4444';
+                } else if (this.value !== '' && val < 0) {
+                    this.style.borderColor = '#f59e0b';
+                } else {
+                    this.style.borderColor = '';
+                }
+            });
+        });
+
+        // ═══════════════════════════════════════════════
+        // SCORING CALCULATORS
+        // ═══════════════════════════════════════════════
+
+        function sumCheckboxes(ids) {
+            return ids.reduce((sum, id) => {
+                const el = document.getElementById(id);
+                return sum + (el && el.checked ? parseFloat(el.value) : 0);
+            }, 0);
+        }
+
+        function calcWellsPE() {
+            const score = sumCheckboxes(['wells-dvt', 'wells-alt', 'wells-hr', 'wells-immob', 'wells-prevdvt', 'wells-hemop', 'wells-malig']);
+            let interp = '';
+            if (score <= 1) interp = '✅ Low probability (~1.3% PE incidence)<br>→ Check D-dimer; if negative, PE excluded';
+            else if (score <= 4) interp = '⚠️ Moderate probability (~16.2% PE incidence)<br>→ Check D-dimer; if positive, proceed to CTPA';
+            else interp = '🔴 High probability (~37.5% PE incidence)<br>→ Proceed directly to CTPA (D-dimer not useful)';
+            showResult('wells-pe-result', score, interp);
+        }
+
+        function calcCURB65() {
+            const score = sumCheckboxes(['curb-c', 'curb-u', 'curb-r', 'curb-b', 'curb-65']);
+            let interp = '';
+            if (score === 0) interp = '✅ Low risk (0.7% mortality)<br>→ Consider outpatient treatment';
+            else if (score === 1) interp = '✅ Low risk (2.1% mortality)<br>→ Consider outpatient treatment';
+            else if (score === 2) interp = '⚠️ Moderate risk (9.2% mortality)<br>→ Consider short inpatient stay or close outpatient follow-up';
+            else interp = '🔴 High risk (≥14.5% mortality)<br>→ Hospitalize; consider ICU if score 4–5';
+            showResult('curb65-result', score, interp);
+        }
+
+        function calcCHADS() {
+            const score = sumCheckboxes(['chad-chf', 'chad-htn', 'chad-age75', 'chad-dm', 'chad-stroke', 'chad-vasc', 'chad-age65', 'chad-sex']);
+            const riskTable = { 0: '0%', 1: '1.3%', 2: '2.2%', 3: '3.2%', 4: '4.0%', 5: '6.7%', 6: '9.8%', 7: '9.6%', 8: '12.5%', 9: '15.2%' };
+            let interp = '';
+            const risk = riskTable[Math.min(score, 9)] || '>15%';
+            if (score === 0) interp = '✅ Low risk — annual stroke risk ' + risk + '<br>→ No anticoagulation recommended (male) or consider (female, where Sc alone = score 1)';
+            else if (score === 1) interp = '⚠️ Low-moderate risk — annual stroke risk ' + risk + '<br>→ Consider oral anticoagulation (OAC)';
+            else interp = '🔴 Moderate-high risk — annual stroke risk ' + risk + '<br>→ Oral anticoagulation recommended (DOAC preferred over warfarin)';
+            showResult('chads-result', score, interp);
+        }
+
+        function calcHEART() {
+            const score = parseInt(document.getElementById('heart-h').value) + parseInt(document.getElementById('heart-e').value) + parseInt(document.getElementById('heart-a').value) + parseInt(document.getElementById('heart-r').value) + parseInt(document.getElementById('heart-t').value);
+            let interp = '';
+            if (score <= 3) interp = '✅ Low risk (0.9–1.7% MACE at 6 weeks)<br>→ Consider early discharge with outpatient follow-up';
+            else if (score <= 6) interp = '⚠️ Moderate risk (12–16.6% MACE at 6 weeks)<br>→ Admit for observation, serial troponins, cardiology consult';
+            else interp = '🔴 High risk (50–65% MACE at 6 weeks)<br>→ Admit for urgent invasive management';
+            showResult('heart-result', score, interp);
+        }
     </script>
 <script src="../dx-progress.js"></script>
 <script src="../dx-recommendations.js"></script>
 <script src="dx-tools-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-cross-tools.js"></script>
+<script src="dx-tools-nav.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
 </body>
 </html>

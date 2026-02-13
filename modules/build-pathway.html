@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build the Pathway - MechanismDx Calibration</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family:'Inter',sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            min-height: 100vh; 
+            color: #f8fafc; 
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .exercise-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #22c55e;
+        }
+        .exercise-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #86efac;
+            margin-bottom: 16px;
+        }
+        .exercise-instruction {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .pathway-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .pathway-slot {
+            background: rgba(255,255,255,0.05);
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 16px;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .pathway-slot.filled {
+            border-style: solid;
+            border-color: rgba(34,197,94,0.5);
+            background: rgba(34,197,94,0.1);
+        }
+        .pathway-slot.correct {
+            border-color: #22c55e;
+            background: rgba(34,197,94,0.2);
+        }
+        .pathway-slot.incorrect {
+            border-color: #ef4444;
+            background: rgba(239,68,68,0.15);
+        }
+        .slot-number {
+            position: absolute;
+            left: 12px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+        .slot-arrow {
+            text-align: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 1.2rem;
+            padding: 4px 0;
+        }
+        
+        .options-bank {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .options-title {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 12px;
+        }
+        .options-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .option-item {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: grab;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .option-item:hover { background: rgba(255,255,255,0.15); }
+        .option-item.selected { 
+            border-color: #22c55e; 
+            background: rgba(34,197,94,0.2);
+        }
+        .option-item.used { 
+            opacity: 0.4; 
+            cursor: not-allowed;
+        }
+        .option-item.disabled { cursor: default; }
+        
+        .placed-item {
+            background: rgba(34,197,94,0.2);
+            border: 2px solid rgba(34,197,94,0.5);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            margin-top: 12px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            color: white;
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .results-panel {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        .results-panel.show { display: block; }
+        .results-panel.incorrect {
+            background: rgba(239,68,68,0.1);
+            border-color: rgba(239,68,68,0.3);
+        }
+        .results-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .correct-pathway {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .correct-pathway-title {
+            font-weight: 600;
+            color: #86efac;
+            margin-bottom: 12px;
+        }
+        .correct-step {
+            padding: 8px 0;
+            padding-left: 20px;
+            border-left: 3px solid rgba(34,197,94,0.5);
+            margin-bottom: 8px;
+        }
+        .correct-step strong { color: #fbbf24; }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #86efac);
+            border-radius: 3px;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧩 Build the Pathway</h1>
+            <p>Arrange the steps in the correct pathophysiologic sequence</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+        
+        <div id="exercise-container"></div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                title: 'DKA Pathophysiology',
+                system: 'endo',
+                instruction: 'Arrange these steps to show how insulin deficiency leads to the clinical picture of DKA:',
+                steps: [
+                    'Insulin deficiency',
+                    'Cells cannot uptake glucose',
+                    'Lipolysis → Free fatty acids released',
+                    'Hepatic ketogenesis (β-hydroxybutyrate, acetoacetate)',
+                    'Metabolic acidosis (anion gap)',
+                    'Kussmaul respirations (respiratory compensation)'
+                ],
+                explanation: 'Without insulin, glucose can\'t enter cells. The body turns to fat for energy, producing ketones. These ketones are acids, causing anion gap metabolic acidosis. The body compensates with deep, rapid breathing (Kussmaul) to blow off CO2.'
+            },
+            {
+                title: 'Pulmonary Embolism → Shock',
+                system: 'resp',
+                instruction: 'Arrange the pathophysiologic cascade from PE to obstructive shock:',
+                steps: [
+                    'Thrombus occludes pulmonary artery',
+                    'Increased pulmonary vascular resistance',
+                    'Right ventricular pressure overload',
+                    'RV dilation and dysfunction',
+                    'Interventricular septum bows into LV',
+                    'Decreased LV filling → Decreased cardiac output',
+                    'Obstructive shock'
+                ],
+                explanation: 'Massive PE causes mechanical obstruction + vasoconstriction → RV pressure overload → RV fails → septal bowing compromises LV filling → cardiogenic/obstructive shock. This is why we consider thrombolytics in massive PE.'
+            },
+            {
+                title: 'Sepsis → Shock',
+                system: 'id',
+                instruction: 'Build the pathway from infection to septic shock:',
+                steps: [
+                    'Bacterial infection releases PAMPs (e.g., endotoxin)',
+                    'Immune cells release inflammatory cytokines (TNF-α, IL-1, IL-6)',
+                    'Systemic vasodilation + increased capillary permeability',
+                    'Distributive shock: Low SVR, high cardiac output initially',
+                    'Third-spacing of fluids → Hypovolemia',
+                    'Myocardial depression (late)',
+                    'End-organ hypoperfusion → Multi-organ dysfunction'
+                ],
+                explanation: 'Sepsis triggers a dysregulated immune response. Cytokines cause vasodilation (low SVR) and capillary leak. Early septic shock is "warm" (high CO, low SVR). Late stage involves myocardial depression and organ failure.'
+            },
+            {
+                title: 'Heart Failure → Pulmonary Edema',
+                system: 'cardio',
+                instruction: 'Trace the pathway from LV failure to respiratory distress:',
+                steps: [
+                    'Left ventricular systolic or diastolic dysfunction',
+                    'Decreased forward flow + backup of blood',
+                    'Elevated left atrial pressure',
+                    'Elevated pulmonary venous pressure',
+                    'Increased pulmonary capillary hydrostatic pressure',
+                    'Fluid transudation into alveoli',
+                    'Pulmonary edema → Hypoxemia → Dyspnea'
+                ],
+                explanation: 'When the LV fails, blood backs up into the left atrium, pulmonary veins, and pulmonary capillaries. High hydrostatic pressure pushes fluid into alveoli (Starling forces). Result: cardiogenic pulmonary edema.'
+            },
+            {
+                title: 'Rhabdomyolysis → AKI',
+                system: 'renal',
+                instruction: 'Show how muscle breakdown leads to kidney injury:',
+                steps: [
+                    'Muscle cell injury/necrosis',
+                    'Release of intracellular contents (myoglobin, K+, phosphate, CK)',
+                    'Myoglobin filtered by glomerulus',
+                    'Myoglobin precipitates in acidic tubular fluid',
+                    'Tubular obstruction + direct tubular toxicity',
+                    'Intrinsic AKI (acute tubular necrosis)',
+                    'Hyperkalemia compounds the danger'
+                ],
+                explanation: 'Myoglobin released from damaged muscle is nephrotoxic. It precipitates in tubules (especially in acidic urine), causes direct oxidative injury, and obstructs flow. This is why aggressive IV fluids and alkalinization help prevent AKI.'
+            },
+            {
+                title: 'RAAS in Heart Failure',
+                system: 'cardio',
+                instruction: 'Build the pathway showing how RAAS activation worsens heart failure:',
+                steps: [
+                    'Decreased cardiac output',
+                    'Decreased renal perfusion',
+                    'Renin release from JG cells',
+                    'Angiotensin II formation',
+                    'Vasoconstriction + Aldosterone release',
+                    'Sodium and water retention',
+                    'Increased preload → Worsening congestion'
+                ],
+                explanation: 'The failing heart triggers compensatory RAAS activation. Initially helpful, sustained activation causes fluid retention, increased afterload, and cardiac remodeling - making HF worse. This is why ACEi/ARBs and aldosterone antagonists improve survival.'
+            },
+            {
+                title: 'Acute Coronary Syndrome',
+                system: 'cardio',
+                instruction: 'Arrange the cascade from plaque rupture to myocardial infarction:',
+                steps: [
+                    'Atherosclerotic plaque rupture',
+                    'Platelet adhesion and activation',
+                    'Platelet aggregation + fibrin deposition',
+                    'Thrombus formation',
+                    'Coronary artery occlusion',
+                    'Myocyte ischemia → Necrosis',
+                    'Troponin release into bloodstream'
+                ],
+                explanation: 'ACS begins with plaque rupture exposing thrombogenic material. Platelets aggregate and coagulation cascade activates, forming thrombus. Complete occlusion → STEMI; partial → NSTEMI/UA. Troponin release indicates myocyte death.'
+            },
+            {
+                title: 'Cirrhosis → Ascites',
+                system: 'gi',
+                instruction: 'Show how liver disease leads to fluid accumulation:',
+                steps: [
+                    'Hepatic fibrosis and cirrhosis',
+                    'Increased portal venous pressure',
+                    'Splanchnic arterial vasodilation',
+                    'Decreased effective circulating volume',
+                    'RAAS and ADH activation',
+                    'Sodium and water retention',
+                    'Ascites formation'
+                ],
+                explanation: 'Portal hypertension causes splanchnic vasodilation via nitric oxide. Despite total body volume overload, the kidneys sense "low" effective volume and retain more fluid. Low albumin also contributes to decreased oncotic pressure.'
+            },
+            {
+                title: 'Anaphylaxis Cascade',
+                system: 'immuno',
+                instruction: 'Build the pathway from allergen exposure to anaphylactic shock:',
+                steps: [
+                    'Allergen binds IgE on mast cells',
+                    'Mast cell degranulation',
+                    'Histamine and tryptase release',
+                    'Vasodilation + increased permeability',
+                    'Bronchospasm + laryngeal edema',
+                    'Distributive shock (hypotension)',
+                    'Cardiovascular collapse if untreated'
+                ],
+                explanation: 'Type I hypersensitivity: IgE cross-linking triggers mast cell degranulation. Histamine causes vasodilation and bronchospasm. Epinephrine is the treatment - it causes vasoconstriction and bronchodilation.'
+            },
+            {
+                title: 'Diabetic Nephropathy',
+                system: 'renal',
+                instruction: 'Show the progression from hyperglycemia to kidney failure:',
+                steps: [
+                    'Chronic hyperglycemia',
+                    'Glomerular hyperfiltration',
+                    'Mesangial expansion + GBM thickening',
+                    'Microalbuminuria develops',
+                    'Progressive proteinuria',
+                    'Glomerulosclerosis (Kimmelstiel-Wilson)',
+                    'ESRD requiring dialysis'
+                ],
+                explanation: 'Hyperglycemia causes hemodynamic and metabolic injury to glomeruli. Early hyperfiltration progresses to sclerosis. ACEi/ARBs slow progression by reducing intraglomerular pressure. Microalbuminuria is the earliest sign.'
+            },
+            {
+                title: 'Stroke → Brain Edema',
+                system: 'neuro',
+                instruction: 'Build the pathway from ischemia to herniation risk:',
+                steps: [
+                    'Arterial occlusion (embolus/thrombus)',
+                    'Cerebral ischemia',
+                    'ATP depletion → Ion pump failure',
+                    'Cytotoxic edema (cellular swelling)',
+                    'Blood-brain barrier breakdown',
+                    'Vasogenic edema (peaks 3-5 days)',
+                    'Mass effect → Risk of herniation'
+                ],
+                explanation: 'Ischemia causes two types of edema: cytotoxic (early, from ion pump failure) and vasogenic (later, from BBB breakdown). Large strokes can cause significant mass effect - osmotic therapy and decompressive craniectomy may be needed.'
+            },
+            {
+                title: 'Tumor Lysis Syndrome',
+                system: 'heme',
+                instruction: 'Show how rapid cell death causes metabolic crisis:',
+                steps: [
+                    'Chemotherapy kills tumor cells rapidly',
+                    'Release of intracellular contents',
+                    'Hyperkalemia (K+ released)',
+                    'Hyperphosphatemia (phosphate released)',
+                    'Hypocalcemia (Ca binds phosphate)',
+                    'Hyperuricemia (nucleic acid breakdown)',
+                    'AKI from uric acid/Ca-Phos precipitation'
+                ],
+                explanation: 'TLS is most common with high tumor burden (leukemias, Burkitt lymphoma). Prevention with IV fluids, allopurinol/rasburicase is key. Monitor labs closely after starting chemo. Treat hyperkalemia emergently.'
+            }
+        ];
+        
+        let currentIndex = 0;
+        let placedSteps = [];
+        let selectedOption = null;
+        
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+        
+        function renderExercise() {
+            const exercise = exercises[currentIndex];
+            placedSteps = new Array(exercise.steps.length).fill(null);
+            selectedOption = null;
+            
+            const shuffledOptions = shuffleArray(exercise.steps);
+            
+            const slotsHTML = exercise.steps.map((_, i) => `
+                <div class="pathway-slot" data-slot="${i}" onclick="placeStep(${i})">
+                    <span class="slot-number">${i + 1}</span>
+                    <span class="slot-content"></span>
+                </div>
+                ${i < exercise.steps.length - 1 ? '<div class="slot-arrow">↓</div>' : ''}
+            `).join('');
+            
+            const optionsHTML = shuffledOptions.map((step, i) => `
+                <div class="option-item" data-step="${step}" onclick="selectOption(this, '${step.replace(/'/g, "\\'")}')">
+                    ${step}
+                </div>
+            `).join('');
+            
+            document.getElementById('exercise-container').innerHTML = `
+                <div class="exercise-card">
+                    <div class="exercise-title">${exercise.title}</div>
+                    <div class="exercise-instruction">${exercise.instruction}</div>
+                    
+                    <div class="pathway-container" id="pathway">
+                        ${slotsHTML}
+                    </div>
+                    
+                    <div class="options-bank" id="options-bank">
+                        <div class="options-title">Available Steps (click to select, then click a slot to place):</div>
+                        <div class="options-grid" id="options-grid">
+                            ${optionsHTML}
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="resetExercise()">Reset</button>
+                    <button class="btn btn-primary" id="check-btn" onclick="checkAnswer()" disabled>Check My Pathway</button>
+                    
+                    <div class="results-panel" id="results-panel">
+                        <div class="results-header" id="results-header"></div>
+                        <div class="correct-pathway">
+                            <div class="correct-pathway-title">✅ Correct Pathway:</div>
+                            ${exercise.steps.map((step, i) => `
+                                <div class="correct-step"><strong>${i + 1}.</strong> ${step}</div>
+                            `).join('')}
+                        </div>
+                        <p style="margin-top:16px;opacity:0.9;line-height:1.7;">${exercise.explanation}</p>
+                        <button class="btn btn-primary" onclick="nextExercise()" style="margin-top:20px;">Next Pathway →</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('progress').style.width = `${((currentIndex + 1) / exercises.length) * 100}%`;
+        }
+        
+        function selectOption(element, step) {
+            if (element.classList.contains('used') || element.classList.contains('disabled')) return;
+            
+            document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedOption = step;
+        }
+        
+        function placeStep(slotIndex) {
+            if (!selectedOption) return;
+            
+            const slot = document.querySelector(`.pathway-slot[data-slot="${slotIndex}"]`);
+            if (slot.classList.contains('filled')) {
+                // Remove existing step
+                const existingStep = placedSteps[slotIndex];
+                if (existingStep) {
+                    document.querySelector(`.option-item[data-step="${existingStep}"]`).classList.remove('used');
+                }
+            }
+            
+            placedSteps[slotIndex] = selectedOption;
+            slot.classList.add('filled');
+            slot.querySelector('.slot-content').innerHTML = `<div class="placed-item">${selectedOption}</div>`;
+            
+            document.querySelector(`.option-item[data-step="${selectedOption}"]`).classList.add('used');
+            document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected'));
+            selectedOption = null;
+            
+            // Check if all slots filled
+            const allFilled = placedSteps.every(step => step !== null);
+            document.getElementById('check-btn').disabled = !allFilled;
+        }
+        
+        function resetExercise() {
+            renderExercise();
+        }
+        
+        function checkAnswer() {
+            const exercise = exercises[currentIndex];
+            let correct = 0;
+            
+            exercise.steps.forEach((correctStep, i) => {
+                const slot = document.querySelector(`.pathway-slot[data-slot="${i}"]`);
+                if (placedSteps[i] === correctStep) {
+                    slot.classList.add('correct');
+                    correct++;
+                } else {
+                    slot.classList.add('incorrect');
+                }
+            });
+            
+            document.querySelectorAll('.option-item').forEach(opt => opt.classList.add('disabled'));
+            
+            const resultsPanel = document.getElementById('results-panel');
+            const resultsHeader = document.getElementById('results-header');
+            
+            if (correct === exercise.steps.length) {
+                resultsHeader.innerHTML = '🎉 Perfect! You built the pathway correctly!';
+            } else {
+                resultsPanel.classList.add('incorrect');
+                resultsHeader.innerHTML = `📚 ${correct}/${exercise.steps.length} steps correct. Review the pathway below:`;
+            }
+            
+            resultsPanel.classList.add('show');
+            document.getElementById('check-btn').style.display = 'none';
+        }
+        
+        function nextExercise() {
+            currentIndex = (currentIndex + 1) % exercises.length;
+            renderExercise();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        renderExercise();
+    </script>
+    
+    <!-- Open-Access References -->
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; font-size: 0.85rem;">
+        <h3 style="color: #8b5cf6; margin-bottom: 12px;">📚 Evidence-Based References</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK430685/" target="_blank" style="color: #a78bfa;">StatPearls: Sepsis Pathophysiology</a> - Inflammatory cascade</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK482193/" target="_blank" style="color: #a78bfa;">StatPearls: Heart Failure</a> - Neurohormonal activation</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK499830/" target="_blank" style="color: #a78bfa;">StatPearls: Anaphylaxis</a> - Mast cell degranulation pathway</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK441977/" target="_blank" style="color: #a78bfa;">StatPearls: Shock</a> - Pathophysiology of shock types</li>
+        </ul>
+    </div>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

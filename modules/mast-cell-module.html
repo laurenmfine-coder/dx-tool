@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Mast Cell Disorders</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .dx-nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: #dc2626; color: #fff; }
+        .header { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); padding: 40px 24px; }
+        .header-inner { max-width: 1200px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); max-width: 700px; }
+        .module-meta-header { display: flex; flex-wrap: wrap; gap: 24px; padding: 16px 0; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 14px; }
+        .meta-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.85); }
+        .meta-icon { font-size: 16px; }
+        .meta-text { font-weight: 400; }
+        .main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 32px; max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
+        @media (max-width: 1024px) { .main-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+        .content { max-width: 100%; }
+        .objectives { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 1px solid #dc2626; border-radius: 16px; padding: 28px; margin-bottom: 40px; }
+        .objectives h2 { color: #b91c1c; font-size: 20px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #991b1b; }
+        .objectives li { margin-bottom: 10px; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--text-primary); font-size: 24px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; font-weight: 600; }
+        .section h4 { color: var(--text-secondary); font-size: 16px; margin: 20px 0 12px; font-weight: 600; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        .key-point { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-left: 4px solid #dc2626; padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
+        .key-point-title { color: #b91c1c; font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #991b1b; margin-bottom: 0; }
+        .pearl { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 1px solid #facc15; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        .warning-box { background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); border: 1px solid #d946ef; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .warning-title { color: #a21caf; font-weight: 600; margin-bottom: 10px; }
+        .warning-box p { color: #86198f; margin-bottom: 0; }
+        .danger-box { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 2px solid #ef4444; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .danger-title { color: #dc2626; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .danger-box p { color: #991b1b; margin-bottom: 0; }
+        .criteria-box { background: var(--bg-card); border: 2px solid #dc2626; border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .criteria-box h3 { color: #b91c1c; margin-bottom: 16px; margin-top: 0; }
+        .criteria-major { background: #fef2f2; padding: 16px; border-radius: 8px; margin-bottom: 16px; }
+        .criteria-minor { background: var(--bg-main); padding: 16px; border-radius: 8px; }
+        .criteria-label { font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .criteria-list { margin-left: 20px; }
+        .criteria-list li { margin-bottom: 8px; }
+        .algorithm-box { background: var(--bg-card); border: 2px solid #dc2626; border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .algorithm-box h3 { color: #b91c1c; margin-bottom: 20px; margin-top: 0; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; padding: 16px; background: var(--bg-main); border-radius: 8px; }
+        .step-number { width: 32px; height: 32px; background: #dc2626; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content strong { color: var(--text-primary); }
+        .step-branch { margin-left: 48px; padding: 12px 16px; background: #fee2e2; border-radius: 8px; margin-top: 8px; font-size: 14px; color: #991b1b; }
+        .treatment-ladder { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+        .ladder-step { display: flex; align-items: stretch; gap: 16px; }
+        .ladder-number { width: 48px; height: 48px; background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; flex-shrink: 0; }
+        .ladder-content { flex: 1; background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+        .ladder-title { font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .ladder-details { font-size: 14px; color: var(--text-secondary); }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 24px 0; }
+        .comparison-card { background: var(--bg-main); border-radius: 12px; padding: 24px; border: 2px solid var(--border); }
+        .comparison-card h4 { color: var(--text-primary); margin-bottom: 16px; font-size: 17px; }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.mcas { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+        .comparison-card.mastocytosis { border-color: #dc2626; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+        .tryptase-calculator { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .tryptase-calculator h3 { color: #065f46; margin-bottom: 16px; margin-top: 0; }
+        .calc-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .calc-group { display: flex; flex-direction: column; gap: 6px; }
+        .calc-group label { font-size: 13px; font-weight: 600; color: #065f46; }
+        .calc-group input { padding: 12px; border: 2px solid var(--primary-light); border-radius: 8px; font-size: 16px; }
+        .calc-group input:focus { outline: none; border-color: var(--primary); }
+        .calc-group .hint { font-size: 11px; color: var(--text-secondary); }
+        .calc-btn { padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .calc-btn:hover { transform: translateY(-1px); }
+        .calc-result { margin-top: 20px; padding: 16px; background: var(--bg-card); border-radius: 8px; display: none; }
+        .calc-result.show { display: block; }
+        .calc-result.positive { border: 2px solid #ef4444; }
+        .calc-result.negative { border: 2px solid #22c55e; }
+        .calc-result.indeterminate { border: 2px solid #f59e0b; }
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: var(--bg-card); border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+        .sidebar-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
+        .sidebar-link { display: block; padding: 10px 12px; color: #dc2626; text-decoration: none; font-size: 13px; border-radius: 6px; margin-bottom: 4px; transition: all 0.15s; }
+        .sidebar-link:hover { background: #fef2f2; }
+        .quick-facts { display: grid; gap: 12px; }
+        .quick-fact { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+        .quick-fact:last-child { border-bottom: none; }
+        .quick-fact-label { color: var(--text-secondary); }
+        .quick-fact-value { color: var(--text-primary); font-weight: 500; }
+        /* EBRS Styles */
+        .ebrs-section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); }
+        .ebrs-section h2 { color: var(--text-primary); font-size: 24px; margin-bottom: 24px; }
+        .ebrs-intro { background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); border: 2px solid #d946ef; border-radius: 12px; padding: 20px; margin-bottom: 32px; }
+        .ebrs-intro h4 { color: #a21caf; margin-bottom: 10px; }
+        .ebrs-intro p { color: #86198f; margin: 0; font-size: 14px; }
+        .ebrs-container { background: var(--bg-main); border-radius: 16px; padding: 24px; margin-bottom: 32px; border: 2px solid var(--border); }
+        .mcq-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+        .mcq-number { width: 40px; height: 40px; background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
+        .mcq-category { font-size: 12px; font-weight: 600; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px; background: #fef2f2; padding: 4px 12px; border-radius: 20px; }
+        .mcq-difficulty { margin-left: auto; font-size: 11px; padding: 4px 10px; border-radius: 20px; }
+        .difficulty-easy { background: #dcfce7; color: #166534; }
+        .difficulty-medium { background: #fef3c7; color: #92400e; }
+        .difficulty-hard { background: #fee2e2; color: #991b1b; }
+        .mcq-vignette { background: var(--bg-card); border-left: 4px solid #dc2626; padding: 20px; margin-bottom: 20px; border-radius: 0 12px 12px 0; }
+        .mcq-vignette p { color: var(--text-primary); margin: 0; line-height: 1.8; }
+        .mcq-question { font-weight: 600; color: var(--text-primary); margin-bottom: 20px; font-size: 16px; line-height: 1.6; }
+        .mcq-options { display: flex; flex-direction: column; gap: 12px; }
+        .mcq-option { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.2s; }
+        .mcq-option:hover { border-color: #dc2626; background: #fef2f2; }
+        .mcq-option.selected { border-color: #dc2626; background: #fef2f2; }
+        .mcq-option.correct { border-color: #22c55e; background: #dcfce7; }
+        .mcq-option.incorrect { border-color: #ef4444; background: #fee2e2; }
+        .mcq-option.disabled { pointer-events: none; opacity: 0.7; }
+        .option-letter { width: 36px; height: 36px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-secondary); flex-shrink: 0; }
+        .mcq-option.selected .option-letter { background: #dc2626; color: #fff; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: #fff; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: #fff; }
+        .option-text { color: var(--text-primary); flex: 1; line-height: 1.5; }
+        .explanation-phase { margin-top: 24px; padding: 24px; background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 2px solid #facc15; border-radius: 16px; display: none; }
+        .explanation-phase.show { display: block; }
+        .explanation-prompt h4 { color: #a16207; margin-bottom: 12px; }
+        .explanation-prompt p { color: #854d0e; margin-bottom: 12px; }
+        .explanation-prompt ul { margin-left: 20px; color: #854d0e; margin-bottom: 16px; }
+        .explanation-input { width: 100%; min-height: 150px; padding: 16px; border: 2px solid #fcd34d; border-radius: 12px; font-family: inherit; font-size: 14px; line-height: 1.7; resize: vertical; background: var(--bg-card); }
+        .explanation-input:focus { outline: none; border-color: #f59e0b; }
+        .char-count { font-size: 12px; color: #92400e; text-align: right; margin: 8px 0 16px; }
+        .char-count.low { color: #dc2626; }
+        .submit-explanation-btn { display: block; width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .submit-explanation-btn:hover { transform: translateY(-2px); }
+        .submit-explanation-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        /* Voice Recording */
+        .input-mode-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+        .mode-btn { flex: 1; padding: 12px 16px; border: 2px solid #fcd34d; background: var(--bg-card); border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; color: #92400e; }
+        .mode-btn:hover { background: #fef9c3; }
+        .mode-btn.active { background: #fcd34d; }
+        .mode-btn svg { width: 20px; height: 20px; }
+        .voice-input { display: none; }
+        .voice-input.show { display: block; }
+        .text-input { display: block; }
+        .text-input.hide { display: none; }
+        .voice-controls { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; background: var(--bg-card); border-radius: 12px; border: 2px solid #fcd34d; margin-bottom: 16px; }
+        .record-btn { width: 80px; height: 80px; border-radius: 50%; border: none; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .record-btn:hover { transform: scale(1.05); }
+        .record-btn.recording { animation: pulse 1.5s infinite; }
+        .record-btn svg { width: 32px; height: 32px; }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 50% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } }
+        .recording-status { font-size: 14px; color: var(--text-secondary); }
+        .recording-status.active { color: #dc2626; font-weight: 600; }
+        .recording-dot { width: 10px; height: 10px; background: #dc2626; border-radius: 50%; animation: blink 1s infinite; display: inline-block; margin-right: 8px; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .transcript-preview { width: 100%; min-height: 100px; padding: 16px; background: var(--bg-main); border-radius: 8px; border: 1px solid var(--border); font-size: 14px; color: var(--text-primary); line-height: 1.7; text-align: left; }
+        .transcript-preview.empty { color: var(--text-muted); font-style: italic; }
+        .clear-btn { padding: 8px 16px; background: var(--border-light); border: 1px solid var(--border); border-radius: 6px; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+        .browser-warning { display: none; padding: 12px 16px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; margin-bottom: 16px; font-size: 13px; color: #92400e; }
+        .browser-warning.show { display: block; }
+        /* Feedback */
+        .feedback-phase { margin-top: 24px; display: none; }
+        .feedback-phase.show { display: block; }
+        .answer-banner { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .answer-banner.correct { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+        .answer-banner.incorrect { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+        .answer-icon { font-size: 32px; }
+        .answer-text { font-size: 20px; font-weight: 700; }
+        .answer-banner.correct .answer-text { color: #166534; }
+        .answer-banner.incorrect .answer-text { color: #991b1b; }
+        .correct-answer { margin-left: auto; font-size: 14px; font-weight: 500; }
+        .score-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .score-card h4 { color: var(--text-primary); margin-bottom: 16px; }
+        .score-percentage { font-size: 36px; font-weight: 700; color: var(--text-primary); }
+        .score-label { font-size: 14px; color: var(--text-secondary); }
+        .score-bar { height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; margin: 16px 0 20px; }
+        .score-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 6px; transition: width 0.8s; }
+        .score-fill.medium { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .score-fill.low { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        .rubric-feedback { display: flex; flex-direction: column; gap: 10px; }
+        .rubric-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-radius: 10px; font-size: 14px; }
+        .rubric-item.met { background: #dcfce7; }
+        .rubric-item.not-met { background: #fef2f2; }
+        .rubric-icon { font-size: 18px; flex-shrink: 0; }
+        .rubric-content { flex: 1; }
+        .rubric-name { font-weight: 600; display: block; margin-bottom: 4px; }
+        .rubric-item.met .rubric-name { color: #166534; }
+        .rubric-item.not-met .rubric-name { color: #991b1b; }
+        .rubric-hint { font-size: 13px; color: var(--text-secondary); font-style: italic; }
+        .expert-card { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 2px solid #dc2626; border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .expert-card h4 { color: #b91c1c; margin-bottom: 16px; }
+        .expert-content { color: #991b1b; }
+        .expert-content p { margin-bottom: 16px; line-height: 1.7; }
+        .distractor-item { margin-bottom: 12px; padding-left: 16px; border-left: 3px solid #fca5a5; }
+        .distractor-letter { font-weight: 700; color: #dc2626; }
+        .resources-card { background: var(--bg-card); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; }
+        .resources-card h4 { color: #047857; margin-bottom: 8px; }
+        .resources-intro { color: #065f46; font-size: 14px; margin-bottom: 16px; }
+        .resource-links { display: flex; flex-direction: column; gap: 10px; }
+        .resource-link { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: var(--primary-bg); border-radius: 10px; text-decoration: none; color: #065f46; }
+        .resource-link:hover { background: #d1fae5; }
+        .resource-type { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; background: var(--primary); color: #fff; border-radius: 4px; }
+        .resource-title { flex: 1; font-weight: 500; }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+        <link rel="stylesheet" href="../js/dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Unified Navigation -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="index.html">MechanismDx</a> → <a href="allergy-immunology.html">Allergy/Immunology</a> → Mast Cell Disorders</div>
+            <h1>🔬 Mast Cell Disorders</h1>
+            <p class="header-subtitle">MCAS diagnostic criteria, tryptase interpretation, mastocytosis classification, and evidence-based treatment approach</p>
+        </div>
+        <div class="module-meta-header">
+            <div class="meta-item">
+                <span class="meta-icon">📅</span>
+                <span class="meta-text">Content last updated: January 9, 2026</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-icon">⏱️</span>
+                <span class="meta-text">~45 minutes</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-icon">👥</span>
+                <span class="meta-text">Healthcare Professionals</span>
+            </div>
+        </div>
+    </header>
+    <div class="main-layout">
+        <main class="content">
+            <div class="objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Apply the 2019 consensus diagnostic criteria for Mast Cell Activation Syndrome (MCAS)</li>
+                    <li>Interpret serum tryptase levels including the "20% + 2" rule for acute episodes</li>
+                    <li>Differentiate between MCAS, systemic mastocytosis, and other mast cell disorders</li>
+                    <li>Identify common triggers and clinical presentations of mast cell activation</li>
+                    <li>Implement stepwise pharmacotherapy for mast cell mediator symptoms</li>
+                    <li>Recognize indications for specialist referral and bone marrow biopsy</li>
+                </ul>
+            </div>
+            
+            <section class="section">
+                <h2>🔬 Mast Cell Biology & Pathophysiology</h2>
+                <p>Mast cells are tissue-resident immune cells derived from hematopoietic stem cells. They complete maturation in peripheral tissues under the influence of <strong>stem cell factor (SCF)</strong> binding to the <strong>KIT receptor (CD117)</strong>. Mast cells are strategically located at host-environment interfaces: skin, airways, GI tract, and around blood vessels.</p>
+                
+                <h3>Key Mast Cell Mediators</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Category</th><th>Mediators</th><th>Clinical Effects</th><th>Timing</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Preformed (granules)</strong></td>
+                                <td>Histamine, Tryptase, Heparin, Chymase, TNF-α</td>
+                                <td>Immediate: vasodilation, pruritus, bronchoconstriction, ↑vascular permeability</td>
+                                <td>Seconds to minutes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Newly synthesized lipids</strong></td>
+                                <td>PGD₂, LTC₄/D₄/E₄, PAF</td>
+                                <td>Bronchoconstriction, mucus secretion, vasodilation, hypotension</td>
+                                <td>Minutes to hours</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cytokines/Chemokines</strong></td>
+                                <td>IL-4, IL-5, IL-6, IL-13, TNF-α, VEGF</td>
+                                <td>Late-phase inflammation, tissue remodeling, recruitment of eosinophils</td>
+                                <td>Hours to days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pearl">
+                    <div class="pearl-title">🔑 Clinical Pearl: Why Tryptase?</div>
+                    <p><strong>Tryptase is relatively mast cell-specific</strong> (also in basophils but at much lower levels). It's stored preformed in granules and released during degranulation. Serum tryptase is the most useful biomarker for mast cell activation because: (1) it correlates with mast cell burden, (2) it elevates acutely during reactions, and (3) baseline levels help distinguish MCAS from mastocytosis.</p>
+                </div>
+                
+                <h3>Mast Cell Activation Triggers</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Category</th><th>Examples</th><th>Mechanism</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>IgE-mediated</strong></td><td>Foods, venoms, drugs, latex, aeroallergens</td><td>Crosslinking of FcεRI-bound IgE → degranulation</td></tr>
+                            <tr><td><strong>Direct (non-IgE)</strong></td><td>Opioids, vancomycin, radiocontrast, NSAIDs</td><td>Direct activation of MRGPRX2 receptor or COX inhibition</td></tr>
+                            <tr><td><strong>Physical</strong></td><td>Heat, cold, pressure, vibration, exercise</td><td>Mechanical or thermal activation</td></tr>
+                            <tr><td><strong>Complement</strong></td><td>C3a, C5a (anaphylatoxins)</td><td>Complement receptor activation</td></tr>
+                            <tr><td><strong>Infections</strong></td><td>Viral, bacterial, parasitic</td><td>TLR activation, direct pathogen interaction</td></tr>
+                            <tr><td><strong>Emotional stress</strong></td><td>Acute psychological stress</td><td>CRH, substance P, neurotensin → mast cell activation</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="warning-box">
+                    <div class="warning-title">⚠️ MRGPRX2: The "Pseudoallergy" Receptor</div>
+                    <p>The <strong>MRGPRX2 receptor</strong> on mast cells can be directly activated by certain drugs (fluoroquinolones, neuromuscular blockers, opioids, vancomycin) causing histamine release WITHOUT IgE involvement. This explains "anaphylactoid" reactions on first exposure to these drugs. It also explains why skin testing may be negative despite clinical reactivity.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>📋 MCAS Diagnostic Criteria (2019 Consensus)</h2>
+                <p>Mast Cell Activation Syndrome (MCAS) requires meeting <strong>ALL THREE</strong> criteria. This prevents overdiagnosis in patients with nonspecific symptoms.</p>
+                
+                <div class="criteria-box">
+                    <h3>MCAS Diagnostic Criteria - ALL 3 Required</h3>
+                    
+                    <div class="criteria-major">
+                        <div class="criteria-label">1️⃣ CLINICAL: Typical Mast Cell Mediator Symptoms</div>
+                        <p>Recurrent, episodic symptoms involving ≥2 organ systems:</p>
+                        <ul class="criteria-list">
+                            <li><strong>Skin:</strong> Flushing, pruritus, urticaria, angioedema</li>
+                            <li><strong>GI:</strong> Abdominal cramping, diarrhea, nausea/vomiting</li>
+                            <li><strong>Cardiovascular:</strong> Hypotension, tachycardia, presyncope/syncope</li>
+                            <li><strong>Respiratory:</strong> Wheezing, stridor, nasal congestion</li>
+                            <li><strong>Neurologic:</strong> Headache, cognitive dysfunction ("brain fog")</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="criteria-major">
+                        <div class="criteria-label">2️⃣ LABORATORY: Documented Mast Cell Mediator Elevation</div>
+                        <p>Increase in validated mast cell mediator during symptomatic episode:</p>
+                        <ul class="criteria-list">
+                            <li><strong>Serum tryptase:</strong> Increase ≥20% + 2 ng/mL above baseline</li>
+                            <li><strong>24-hr urine:</strong> N-methylhistamine, PGD₂ metabolites, or LTE₄ (alternative if tryptase unavailable)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="criteria-minor">
+                        <div class="criteria-label">3️⃣ RESPONSE: Improvement with Mast Cell-Targeted Therapy</div>
+                        <p>Clinical improvement with one or more of:</p>
+                        <ul class="criteria-list">
+                            <li>H1 antihistamines</li>
+                            <li>H2 antihistamines</li>
+                            <li>Mast cell stabilizers (cromolyn)</li>
+                            <li>Leukotriene modifiers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="key-point">
+                    <div class="key-point-title">💡 The "20% + 2" Rule</div>
+                    <p>Acute tryptase must rise to <strong>(1.2 × baseline) + 2 ng/mL</strong> to be considered diagnostic. Example: If baseline is 5 ng/mL, acute must be ≥ (1.2 × 5) + 2 = <strong>8 ng/mL</strong>. This accounts for both relative change and absolute threshold, reducing false positives from minor fluctuations.</p>
+                </div>
+            </section>
+            
+            <!-- Tryptase Calculator -->
+            <section class="section">
+                <div class="tryptase-calculator">
+                    <h3>🧮 Tryptase Interpretation Calculator</h3>
+                    <p style="color: #065f46; margin-bottom: 16px;">Enter baseline and acute tryptase values to determine if criteria are met:</p>
+                    <div class="calc-inputs">
+                        <div class="calc-group">
+                            <label>Baseline Tryptase (ng/mL)</label>
+                            <input type="number" id="baseline-tryptase" placeholder="e.g., 5" step="0.1" min="0">
+                            <span class="hint">Obtained when patient is asymptomatic</span>
+                        </div>
+                        <div class="calc-group">
+                            <label>Acute Tryptase (ng/mL)</label>
+                            <input type="number" id="acute-tryptase" placeholder="e.g., 12" step="0.1" min="0">
+                            <span class="hint">Drawn within 4 hours of symptom onset</span>
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calculateTryptase()">Calculate</button>
+                    <div class="calc-result" id="tryptase-result"></div>
+                </div>
+                
+                <h3>Tryptase Interpretation Guide</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Baseline Tryptase</th><th>Interpretation</th><th>Next Steps</th></tr></thead>
+                        <tbody>
+                            <tr><td>&lt;11.4 ng/mL</td><td>Normal</td><td>If MCAS suspected, obtain acute tryptase during episode</td></tr>
+                            <tr><td>11.4-20 ng/mL</td><td>Elevated - evaluate for mastocytosis</td><td>Consider bone marrow biopsy if persistent without cause</td></tr>
+                            <tr><td>&gt;20 ng/mL</td><td>Strongly suggests mastocytosis</td><td>Bone marrow biopsy indicated (WHO minor criterion)</td></tr>
+                            <tr><td>&gt;100-200 ng/mL</td><td>High mast cell burden</td><td>Evaluate for advanced systemic mastocytosis</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pearl">
+                    <div class="pearl-title">🔑 Timing Matters</div>
+                    <p><strong>Optimal tryptase timing:</strong> Draw within <strong>15 minutes to 4 hours</strong> of symptom onset. Tryptase peaks at 1-2 hours and returns to baseline within 6-12 hours. A "normal" tryptase drawn &gt;6 hours post-reaction does NOT rule out mast cell activation. Also obtain a <strong>baseline tryptase</strong> ≥24 hours after symptoms resolve.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>🔍 Mastocytosis Classification (WHO 2022)</h2>
+                <p>Mastocytosis is a clonal mast cell disorder characterized by abnormal mast cell accumulation in tissues. The <strong>KIT D816V mutation</strong> is present in &gt;90% of systemic mastocytosis cases.</p>
+                
+                <h3>WHO Classification</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Category</th><th>Features</th><th>Prognosis</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Cutaneous Mastocytosis</strong></td>
+                                <td>Skin only (urticaria pigmentosa, MPCM, DCM). No systemic involvement. Common in children.</td>
+                                <td>Excellent. Pediatric forms often resolve at puberty.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Indolent Systemic Mastocytosis (ISM)</strong></td>
+                                <td>Meets SM criteria. No B or C findings. Most common adult form.</td>
+                                <td>Near-normal life expectancy. Risk of anaphylaxis.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Smoldering SM (SSM)</strong></td>
+                                <td>2+ B-findings (high mast cell burden). No C-findings (organ damage).</td>
+                                <td>Risk of progression. Close monitoring needed.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SM with Associated Hematologic Neoplasm (SM-AHN)</strong></td>
+                                <td>SM + myeloid neoplasm (MDS, MPN, AML, etc.)</td>
+                                <td>Prognosis depends on associated neoplasm.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aggressive SM (ASM)</strong></td>
+                                <td>1+ C-findings (organ damage from mast cell infiltration)</td>
+                                <td>Median survival 3-5 years. Requires cytoreductive therapy.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mast Cell Leukemia (MCL)</strong></td>
+                                <td>≥20% mast cells in bone marrow aspirate smear</td>
+                                <td>Poor prognosis. Median survival &lt;1 year without treatment.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="criteria-box">
+                    <h3>WHO Criteria for Systemic Mastocytosis</h3>
+                    <p><strong>Diagnosis requires:</strong> 1 Major + 1 Minor criterion, OR 3 Minor criteria</p>
+                    
+                    <div class="criteria-major">
+                        <div class="criteria-label">MAJOR CRITERION</div>
+                        <p>Multifocal dense infiltrates of mast cells (≥15 cells in aggregates) in bone marrow or other extracutaneous organ</p>
+                    </div>
+                    
+                    <div class="criteria-minor">
+                        <div class="criteria-label">MINOR CRITERIA (need 1 with major, or 3 alone)</div>
+                        <ul class="criteria-list">
+                            <li>&gt;25% spindle-shaped or atypical mast cells in bone marrow or other tissue</li>
+                            <li>KIT D816V mutation in bone marrow, blood, or other extracutaneous tissue</li>
+                            <li>Mast cells expressing CD25 and/or CD2 (aberrant expression)</li>
+                            <li>Serum baseline tryptase persistently &gt;20 ng/mL (not applicable if associated myeloid neoplasm)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>B-Findings vs C-Findings</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-card mcas">
+                        <h4>B-Findings (Burden)</h4>
+                        <p style="color: #92400e; margin-bottom: 12px;">Indicate high mast cell burden but NO organ damage</p>
+                        <ul>
+                            <li>Bone marrow biopsy &gt;30% mast cell infiltration</li>
+                            <li>Serum tryptase &gt;200 ng/mL</li>
+                            <li>Hepatomegaly without impairment</li>
+                            <li>Splenomegaly without hypersplenism</li>
+                            <li>Lymphadenopathy (≥2 cm)</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card mastocytosis">
+                        <h4>C-Findings (organ damage)</h4>
+                        <p style="color: #991b1b; margin-bottom: 12px;">Indicate ORGAN DYSFUNCTION from mast cell infiltration</p>
+                        <ul>
+                            <li>Cytopenias: ANC &lt;1000, Hgb &lt;10, Plt &lt;100K</li>
+                            <li>Hepatomegaly WITH impaired function (ascites, elevated LFTs)</li>
+                            <li>Splenomegaly WITH hypersplenism</li>
+                            <li>Malabsorption with weight loss</li>
+                            <li>Osteolytic lesions with pathologic fractures</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>💊 Treatment: Stepwise Approach</h2>
+                <p>Treatment focuses on <strong>symptom control</strong> through mast cell mediator blockade. Cytoreductive therapy is reserved for advanced/aggressive forms.</p>
+                
+                <div class="treatment-ladder">
+                    <div class="ladder-step">
+                        <div class="ladder-number">1</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Trigger Avoidance + H1 Antihistamine</div>
+                            <div class="ladder-details">
+                                <strong>First-line for all patients.</strong> Identify and avoid triggers (foods, medications, physical factors). 
+                                Start with second-generation H1 blocker at standard dose (cetirizine 10mg, loratadine 10mg, fexofenadine 180mg daily).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-number">2</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Increase H1 + Add H2 Antihistamine</div>
+                            <div class="ladder-details">
+                                Escalate H1 antihistamine up to <strong>4× standard dose</strong> (e.g., cetirizine 10mg QID).
+                                Add H2 blocker (famotidine 20mg BID) for GI symptoms and enhanced histamine blockade.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-number">3</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Add Mast Cell Stabilizer</div>
+                            <div class="ladder-details">
+                                <strong>Cromolyn sodium</strong> (oral): 100-200mg QID, 30 min before meals. Works locally in GI tract.
+                                Particularly helpful for GI symptoms (cramping, diarrhea, nausea).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-number">4</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Add Leukotriene Modifier</div>
+                            <div class="ladder-details">
+                                <strong>Montelukast 10mg daily</strong> or zileuton 600mg QID.
+                                Blocks leukotriene pathway (LTC₄, LTD₄, LTE₄). Helpful for flushing, respiratory symptoms, and some patients with GI symptoms.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-number">5</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Add Aspirin (select patients)</div>
+                            <div class="ladder-details">
+                                Low-dose aspirin (81-325mg) can help with flushing by blocking PGD₂.
+                                <strong>Caution:</strong> May trigger symptoms in some patients - start with observed challenge.
+                                Contraindicated in NSAID-sensitive patients.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-number">6</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Omalizumab (Anti-IgE)</div>
+                            <div class="ladder-details">
+                                <strong>Omalizumab</strong> for refractory symptoms, especially recurrent anaphylaxis.
+                                May work even in non-IgE-mediated mast cell activation. Dosing: 150-300mg SC q2-4 weeks.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-number">7</div>
+                        <div class="ladder-content">
+                            <div class="ladder-title">Cytoreductive Therapy (Advanced SM only)</div>
+                            <div class="ladder-details">
+                                For aggressive SM, SM-AHN, or MCL: <strong>Midostaurin</strong> (KIT inhibitor), interferon-α, cladribine, or avapritinib.
+                                Referral to hematology/oncology required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="danger-box">
+                    <div class="danger-title">🚨 Anaphylaxis Preparedness</div>
+                    <p><strong>ALL patients with mastocytosis or MCAS should carry epinephrine auto-injectors.</strong> Risk of severe anaphylaxis is significantly elevated, especially with Hymenoptera stings (up to 30% risk in mastocytosis). Consider venom immunotherapy for all SM patients with venom allergy (regardless of skin test results). Medical alert bracelet recommended.</p>
+                </div>
+            </section>
+            
+            <!-- EBRS MCQ Section -->
+            <section class="ebrs-section" id="quiz">
+                <h2>📝 Knowledge Check: Explain Your Reasoning</h2>
+                <div class="ebrs-intro">
+                    <h4>🧠 Active Learning Mode</h4>
+                    <p>Select your answer, then explain WHY (type or voice) before seeing the correct answer.</p>
+                </div>
+                
+                <div class="browser-warning" id="voice-warning">⚠️ Voice recording requires Chrome, Edge, or Safari.</div>
+                
+                <!-- MCQ 1: MCAS Diagnosis -->
+                <div class="ebrs-container" id="mcq1">
+                    <div class="mcq-header">
+                        <div class="mcq-number">1</div>
+                        <span class="mcq-category">MCAS Diagnosis</span>
+                        <span class="mcq-difficulty difficulty-medium">Medium</span>
+                    </div>
+                    <div class="mcq-vignette">
+                        <p>A 34-year-old woman presents with 2-year history of recurrent episodes of flushing, abdominal cramping with diarrhea, and palpitations. Episodes occur 2-3 times per month, often without identifiable trigger. During her most recent episode in the ED, serum tryptase was 8.2 ng/mL. A baseline tryptase obtained 1 week later when asymptomatic is 4.1 ng/mL. She reports that cetirizine 10mg helps reduce symptom severity. Physical exam and CBC are normal.</p>
+                    </div>
+                    <p class="mcq-question">Does this patient meet diagnostic criteria for MCAS?</p>
+                    <div class="mcq-options">
+                        <div class="mcq-option" data-index="0" onclick="selectAnswer(this, 'mcq1')"><span class="option-letter">A</span><span class="option-text">Yes - she meets all three diagnostic criteria</span></div>
+                        <div class="mcq-option" data-index="1" onclick="selectAnswer(this, 'mcq1')"><span class="option-letter">B</span><span class="option-text">No - tryptase elevation does not meet the "20% + 2" threshold</span></div>
+                        <div class="mcq-option" data-index="2" onclick="selectAnswer(this, 'mcq1')"><span class="option-letter">C</span><span class="option-text">No - baseline tryptase is too low to diagnose MCAS</span></div>
+                        <div class="mcq-option" data-index="3" onclick="selectAnswer(this, 'mcq1')"><span class="option-letter">D</span><span class="option-text">Cannot determine - need bone marrow biopsy first</span></div>
+                    </div>
+                    <div class="explanation-phase" id="explain-mcq1">
+                        <div class="explanation-prompt">
+                            <h4>🎯 Explain your reasoning</h4>
+                            <ul>
+                                <li>What are the 3 criteria for MCAS diagnosis?</li>
+                                <li>Calculate whether tryptase meets the "20% + 2" rule</li>
+                                <li>Does she have response to therapy?</li>
+                            </ul>
+                        </div>
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" onclick="setInputMode('mcq1', 'text')" id="text-btn-mcq1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Type
+                            </button>
+                            <button class="mode-btn" onclick="setInputMode('mcq1', 'voice')" id="voice-btn-mcq1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg> Voice
+                            </button>
+                        </div>
+                        <div class="text-input" id="text-input-mcq1">
+                            <textarea class="explanation-input" id="input-mcq1" placeholder="Type your explanation..." oninput="updateCharCount('mcq1')"></textarea>
+                            <div class="char-count" id="count-mcq1">0 / 100 minimum characters</div>
+                        </div>
+                        <div class="voice-input" id="voice-input-mcq1">
+                            <div class="voice-controls">
+                                <button class="record-btn" id="record-btn-mcq1" onclick="toggleRecording('mcq1')">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
+                                </button>
+                                <div class="recording-status" id="status-mcq1">Click to start recording</div>
+                                <div class="transcript-preview empty" id="transcript-mcq1">Your explanation will appear here...</div>
+                                <button class="clear-btn" onclick="clearRecording('mcq1')">Clear & Start Over</button>
+                            </div>
+                        </div>
+                        <button class="submit-explanation-btn" id="btn-mcq1" onclick="submitExplanation('mcq1')" disabled>Submit & See Answer</button>
+                    </div>
+                    <div class="feedback-phase" id="feedback-mcq1"></div>
+                </div>
+                
+                <!-- MCQ 2: Mastocytosis Workup -->
+                <div class="ebrs-container" id="mcq2">
+                    <div class="mcq-header">
+                        <div class="mcq-number">2</div>
+                        <span class="mcq-category">Mastocytosis Workup</span>
+                        <span class="mcq-difficulty difficulty-hard">Hard</span>
+                    </div>
+                    <div class="mcq-vignette">
+                        <p>A 52-year-old man is referred after experiencing anaphylaxis to a bee sting requiring epinephrine and hospitalization. He has a history of recurrent flushing and "irritable bowel" symptoms for 5 years. Skin exam reveals scattered hyperpigmented macules on his trunk that urticates with stroking (positive Darier sign). Baseline serum tryptase is 28 ng/mL (repeated and confirmed). CBC and metabolic panel are normal.</p>
+                    </div>
+                    <p class="mcq-question">What is the most appropriate next step?</p>
+                    <div class="mcq-options">
+                        <div class="mcq-option" data-index="0" onclick="selectAnswer(this, 'mcq2')"><span class="option-letter">A</span><span class="option-text">Start high-dose antihistamines and observe</span></div>
+                        <div class="mcq-option" data-index="1" onclick="selectAnswer(this, 'mcq2')"><span class="option-letter">B</span><span class="option-text">Bone marrow biopsy with KIT D816V mutation testing</span></div>
+                        <div class="mcq-option" data-index="2" onclick="selectAnswer(this, 'mcq2')"><span class="option-letter">C</span><span class="option-text">Skin biopsy of the hyperpigmented lesions</span></div>
+                        <div class="mcq-option" data-index="3" onclick="selectAnswer(this, 'mcq2')"><span class="option-letter">D</span><span class="option-text">24-hour urine for histamine metabolites</span></div>
+                    </div>
+                    <div class="explanation-phase" id="explain-mcq2">
+                        <div class="explanation-prompt">
+                            <h4>🎯 Explain your reasoning</h4>
+                            <ul>
+                                <li>What findings suggest systemic mastocytosis?</li>
+                                <li>What is the significance of tryptase &gt;20 ng/mL?</li>
+                                <li>What WHO criteria does bone marrow help establish?</li>
+                            </ul>
+                        </div>
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" onclick="setInputMode('mcq2', 'text')" id="text-btn-mcq2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Type
+                            </button>
+                            <button class="mode-btn" onclick="setInputMode('mcq2', 'voice')" id="voice-btn-mcq2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg> Voice
+                            </button>
+                        </div>
+                        <div class="text-input" id="text-input-mcq2">
+                            <textarea class="explanation-input" id="input-mcq2" placeholder="Type your explanation..." oninput="updateCharCount('mcq2')"></textarea>
+                            <div class="char-count" id="count-mcq2">0 / 100 minimum characters</div>
+                        </div>
+                        <div class="voice-input" id="voice-input-mcq2">
+                            <div class="voice-controls">
+                                <button class="record-btn" id="record-btn-mcq2" onclick="toggleRecording('mcq2')">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
+                                </button>
+                                <div class="recording-status" id="status-mcq2">Click to start recording</div>
+                                <div class="transcript-preview empty" id="transcript-mcq2">Your explanation will appear here...</div>
+                                <button class="clear-btn" onclick="clearRecording('mcq2')">Clear & Start Over</button>
+                            </div>
+                        </div>
+                        <button class="submit-explanation-btn" id="btn-mcq2" onclick="submitExplanation('mcq2')" disabled>Submit & See Answer</button>
+                    </div>
+                    <div class="feedback-phase" id="feedback-mcq2"></div>
+                </div>
+                
+                <!-- MCQ 3: Treatment -->
+                <div class="ebrs-container" id="mcq3">
+                    <div class="mcq-header">
+                        <div class="mcq-number">3</div>
+                        <span class="mcq-category">Treatment</span>
+                        <span class="mcq-difficulty difficulty-medium">Medium</span>
+                    </div>
+                    <div class="mcq-vignette">
+                        <p>A 45-year-old woman with confirmed indolent systemic mastocytosis (ISM) continues to have flushing, pruritus, and abdominal cramping despite cetirizine 10mg QID and famotidine 20mg BID. She has tried cromolyn sodium 200mg QID with meals for 6 weeks without significant improvement in her GI symptoms.</p>
+                    </div>
+                    <p class="mcq-question">What is the most appropriate next step in her management?</p>
+                    <div class="mcq-options">
+                        <div class="mcq-option" data-index="0" onclick="selectAnswer(this, 'mcq3')"><span class="option-letter">A</span><span class="option-text">Add montelukast 10mg daily</span></div>
+                        <div class="mcq-option" data-index="1" onclick="selectAnswer(this, 'mcq3')"><span class="option-letter">B</span><span class="option-text">Start midostaurin (KIT inhibitor)</span></div>
+                        <div class="mcq-option" data-index="2" onclick="selectAnswer(this, 'mcq3')"><span class="option-letter">C</span><span class="option-text">Begin prednisone 40mg daily</span></div>
+                        <div class="mcq-option" data-index="3" onclick="selectAnswer(this, 'mcq3')"><span class="option-letter">D</span><span class="option-text">Refer for splenectomy</span></div>
+                    </div>
+                    <div class="explanation-phase" id="explain-mcq3">
+                        <div class="explanation-prompt">
+                            <h4>🎯 Explain your reasoning</h4>
+                            <ul>
+                                <li>What is the stepwise treatment approach for ISM?</li>
+                                <li>What mechanism does montelukast target?</li>
+                                <li>When is cytoreductive therapy (midostaurin) indicated?</li>
+                            </ul>
+                        </div>
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" onclick="setInputMode('mcq3', 'text')" id="text-btn-mcq3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Type
+                            </button>
+                            <button class="mode-btn" onclick="setInputMode('mcq3', 'voice')" id="voice-btn-mcq3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg> Voice
+                            </button>
+                        </div>
+                        <div class="text-input" id="text-input-mcq3">
+                            <textarea class="explanation-input" id="input-mcq3" placeholder="Type your explanation..." oninput="updateCharCount('mcq3')"></textarea>
+                            <div class="char-count" id="count-mcq3">0 / 100 minimum characters</div>
+                        </div>
+                        <div class="voice-input" id="voice-input-mcq3">
+                            <div class="voice-controls">
+                                <button class="record-btn" id="record-btn-mcq3" onclick="toggleRecording('mcq3')">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
+                                </button>
+                                <div class="recording-status" id="status-mcq3">Click to start recording</div>
+                                <div class="transcript-preview empty" id="transcript-mcq3">Your explanation will appear here...</div>
+                                <button class="clear-btn" onclick="clearRecording('mcq3')">Clear & Start Over</button>
+                            </div>
+                        </div>
+                        <button class="submit-explanation-btn" id="btn-mcq3" onclick="submitExplanation('mcq3')" disabled>Submit & See Answer</button>
+                    </div>
+                    <div class="feedback-phase" id="feedback-mcq3"></div>
+                </div>
+            </section>
+        
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Mast Cell Disorders with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=ai05" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../training.html?filter=mast-cell,flushing" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%);
+                          border: 1px solid #5eead4; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Mast Cell Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 2+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">📋 MCAS Criteria Quick Check</h3>
+                <div class="quick-facts">
+                    <div class="quick-fact"><span class="quick-fact-label">Criteria 1</span><span class="quick-fact-value">≥2 organ symptoms</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Criteria 2</span><span class="quick-fact-value">Tryptase: 20% + 2</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Criteria 3</span><span class="quick-fact-value">Response to Rx</span></div>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">🔬 Tryptase Thresholds</h3>
+                <div class="quick-facts">
+                    <div class="quick-fact"><span class="quick-fact-label">Normal</span><span class="quick-fact-value">&lt;11.4 ng/mL</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Elevated</span><span class="quick-fact-value">11.4-20</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">SM likely</span><span class="quick-fact-value">&gt;20 (WHO minor)</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Timing</span><span class="quick-fact-value">15 min - 4 hrs</span></div>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">💊 Treatment Ladder</h3>
+                <div class="quick-facts">
+                    <div class="quick-fact"><span class="quick-fact-label">Step 1</span><span class="quick-fact-value">H1 antihistamine</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Step 2</span><span class="quick-fact-value">↑H1 + add H2</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Step 3</span><span class="quick-fact-value">Cromolyn</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Step 4</span><span class="quick-fact-value">LTRA</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Step 5</span><span class="quick-fact-value">Aspirin (select)</span></div>
+                    <div class="quick-fact"><span class="quick-fact-label">Step 6</span><span class="quick-fact-value">Omalizumab</span></div>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">🔗 Related Modules</h3>
+                <a href="anaphylaxis-module.html" class="sidebar-link">Anaphylaxis</a>
+                <a href="type1-hypersensitivity.html" class="sidebar-link">Type I Hypersensitivity</a>
+                <a href="urticaria-angioedema-module.html" class="sidebar-link">Urticaria & Angioedema</a>
+                <a href="drug-allergy-module.html" class="sidebar-link">Drug Allergy</a>
+            </div>
+        </aside>
+    </div>
+ 'medium' : 'low';
+            document.getElementById('feedback-' + mcqId).innerHTML = `
+                <div class="answer-banner ${isCorrect ? 'correct' : 'incorrect'}">
+                    <span class="answer-icon">${isCorrect ? '✓' : '✗'}</span>
+                    <span class="answer-text">${isCorrect ? 'Correct!' : 'Incorrect'}</span>
+                    <span class="correct-answer">Answer: ${String.fromCharCode(65 + data.correctAnswer)}</span>
+                </div>
+                <div class="score-card">
+                    <h4>📊 Explanation Score</h4>
+                    <div class="score-percentage">${score.percentage}%</div>
+                    <div class="score-label">${score.score}/${score.maxScore} points</div>
+                    <div class="score-bar"><div class="score-fill ${scoreClass}" style="width:${score.percentage}%"></div></div>
+                    <div class="rubric-feedback">${score.feedback.map(f => `<div class="rubric-item ${f.met ? 'met' : 'not-met'}"><span class="rubric-icon">${f.met ? '✓' : '○'}</span><div class="rubric-content"><span class="rubric-name">${f.name}</span>${f.met ? '' : '<span class="rubric-hint">' + f.hint + '</span>'}</div></div>`).join('')}</div>
+                </div>
+                <div class="expert-card"><h4>📚 Expert Explanation</h4><div class="expert-content"><p>${data.explanations.correct}</p>${data.explanations.incorrect.map((e, i) => i === data.correctAnswer || !e ? '' : '<div class="distractor-item"><span class="distractor-letter">' + String.fromCharCode(65+i) + ':</span> ' + e + '</div>').join('')}</div></div>
+            `;
+            document.getElementById('feedback-' + mcqId).classList.add('show');
+            document.getElementById('feedback-' + mcqId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx"
+         data-key-points="🎯 Learning Objectives, 🔬 Mast Cell Biology & Pathophysiology, 📋 MCAS Diagnostic Criteria (2019 Consensus), 🔍 Mastocytosis Classification (WHO 2022), 💊 Treatment: Stepwise Approach, 📝 Knowledge Check: Explain Your Reasoning, Key Mast Cell Mediators, Mast Cell Activation Triggers, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 35-year-old woman has recurrent episodes of flushing, hypotension, abdominal cramping, and diarrhea. Serum tryptase during an episode is 42 ng/mL (baseline 18 ng/mL). What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Carcinoid causes flushing and diarrhea but is associated with elevated 5-HIAA, not tryptase. The persistently elevated baseline tryptase points to mast cell disease." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Carcinoid syndrome</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Persistently elevated baseline tryptase (&gt;20 ng/mL) with episodic mediator-release symptoms (flushing, hypotension, GI symptoms) is classic for systemic mastocytosis. The WHO major criterion is multifocal dense mast cell infiltrates in bone marrow biopsy. KIT D816V mutation is found in &gt;90% of cases." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Systemic mastocytosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Pheo causes episodic hypertension, headache, and diaphoresis — not hypotension and diarrhea. Elevated catecholamines, not tryptase." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Pheochromocytoma</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="MCAS has episodic symptoms and acute tryptase rise, but the BASELINE tryptase is normal (&lt;11.4). A baseline of 18 suggests increased mast cell burden → systemic mastocytosis." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Mast cell activation syndrome (MCAS)</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the MAJOR diagnostic criterion for systemic mastocytosis on bone marrow biopsy?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Scattered mast cells are normal. The major criterion requires dense AGGREGATES." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Scattered individual mast cells throughout the marrow</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="WHO major criterion: multifocal dense aggregates of ≥15 mast cells in bone marrow or other extracutaneous organ biopsy. Minor criteria (need ≥1 major + 1 minor, or 3 minor): &gt;25% spindle-shaped mast cells, KIT D816V mutation, CD25/CD2 expression on mast cells, baseline tryptase &gt;20 ng/mL." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Multifocal dense infiltrates of ≥15 mast cells in aggregates</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Eosinophilia can accompany mastocytosis but is not the diagnostic criterion." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Eosinophilic infiltration >10% of marrow cellularity</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Reed-Sternberg cells are pathognomonic for Hodgkin lymphoma, not mastocytosis." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Presence of Reed-Sternberg cells</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which mutation is found in >90% of systemic mastocytosis cases?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="JAK2 V617F is associated with polycythemia vera, essential thrombocythemia, and primary myelofibrosis — not mastocytosis." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">JAK2 V617F</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="KIT D816V: gain-of-function mutation in the receptor tyrosine kinase KIT (CD117) → constitutive activation → uncontrolled mast cell proliferation. Found in &gt;90% of systemic mastocytosis. Important therapeutically: D816V is resistant to imatinib but sensitive to midostaurin and avapritinib." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">KIT D816V</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="BRAF V600E is associated with melanoma and hairy cell leukemia, not mastocytosis." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">BRAF V600E</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="BCR-ABL is the Philadelphia chromosome translocation in CML, not mastocytosis." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">BCR-ABL fusion</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">What serum marker is MOST useful for monitoring mast cell burden and disease progression?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="IgE mediates allergic reactions but does not reflect mast cell burden in mastocytosis." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Serum IgE levels</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Serum tryptase is proportional to total body mast cell burden. Baseline tryptase &gt;20 ng/mL is a minor diagnostic criterion. Serial levels monitor disease progression — rising levels suggest transformation to advanced disease. Acutely elevated tryptase (&gt;baseline + 20% + 2) confirms mast cell activation episodes." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Serum tryptase</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Histamine is a mast cell mediator but has a very short half-life (minutes) and is not practical for routine monitoring." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Serum histamine</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chromogranin A is a marker for neuroendocrine tumors, not mast cell disease." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Serum chromogranin A</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">A patient with systemic mastocytosis develops recurrent anaphylaxis with Hymenoptera stings despite carrying epinephrine. What additional therapy is indicated?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Systemic steroids have significant long-term side effects and do not address the underlying venom allergy specifically." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Chronic oral corticosteroids</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Venom immunotherapy is critical in mastocytosis patients with Hymenoptera anaphylaxis — they have much higher risk of severe/fatal reactions than the general population. VIT should be continued LIFELONG (not stopped after 5 years as in non-mastocytosis patients) due to the persistent mast cell burden." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Venom immunotherapy (VIT) — lifelong</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Antihistamines help with baseline symptoms but do not prevent anaphylaxis to venom stings. VIT addresses the underlying sensitization." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Prophylactic antihistamines only</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Avoidance alone is insufficient. VIT provides active protection and is specifically indicated." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Avoidance of outdoor activities only</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">What is the MOST common skin manifestation of mastocytosis in adults?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Solitary mastocytomas are the most common form in young CHILDREN (&lt;3 years), not adults." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Solitary mastocytoma</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Urticaria pigmentosa: most common skin finding in adult mastocytosis. Red-brown macules/papules that urticate (wheal and flare) when stroked (positive Darier sign). Biopsy shows dermal mast cell infiltrates. In adults, UP should prompt evaluation for systemic mastocytosis (~15-30% have systemic disease)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Urticaria pigmentosa (maculopapular cutaneous mastocytosis)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Diffuse cutaneous mastocytosis is rare, primarily in infants, with generalized skin thickening and bullae." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Diffuse cutaneous mastocytosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="TMEP is an uncommon adult variant with telangiectatic macules rather than typical UP. Much less common overall." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Telangiectasia macularis eruptiva perstans (TMEP)</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Which of the following is a feature of ADVANCED systemic mastocytosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Skin-limited disease is cutaneous mastocytosis, the least advanced form." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Skin-limited disease with positive Darier sign</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Advanced SM includes aggressive SM (ASM) and mast cell leukemia. C-findings define organ damage: cytopenias from marrow infiltration, hepatomegaly with impaired function, splenomegaly with hypersplenism, osteolytic bone lesions with pathologic fractures, malabsorption from GI infiltration. Requires cytoreductive therapy (midostaurin, avapritinib, cladribine)." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Organ damage with cytopenias, hepatomegaly, or osteolytic lesions (C-findings)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Isolated tryptase elevation without other criteria may indicate hereditary alpha-tryptasemia, not advanced SM." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Isolated serum tryptase elevation without symptoms</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="These are common allergic conditions, not features of advanced mastocytosis." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Seasonal allergic rhinitis with mild urticaria</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">What medication should ALL patients with systemic mastocytosis carry for emergency use?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Oral steroids are too slow for anaphylaxis treatment. Injectable epinephrine is the emergency standard." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Oral prednisone tablets</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="All systemic mastocytosis patients should carry at least 2 epinephrine auto-injectors due to elevated risk of spontaneous or triggered anaphylaxis. Triggers include Hymenoptera stings, certain medications (NSAIDs, opioids, contrast), alcohol, temperature changes, stress. Many allergists recommend prescribing 2+ devices and training on use." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Epinephrine auto-injector</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Albuterol treats bronchospasm but does not address systemic anaphylaxis (hypotension, cardiovascular collapse)." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Inhaled albuterol</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Nitroglycerin would worsen hypotension during anaphylaxis. Epinephrine is the only appropriate emergency medication." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Sublingual nitroglycerin</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=mast-cell-disorders-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/mast-cell-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body>
+</html>

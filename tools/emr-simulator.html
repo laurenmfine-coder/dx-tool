@@ -41,7 +41,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family:'Inter',sans-serif;
             background: #1e293b;
             min-height: 100vh;
             color: #e2e8f0;
@@ -61,7 +61,7 @@
             align-items: center;
             gap: 10px;
             font-weight: 600;
-            color: #60a5fa;
+            color: #2dd4bf;
         }
         .emr-logo-icon {
             width: 32px;
@@ -274,7 +274,7 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid #4338ca;
+            border: 1px solid #0f766e;
         }
         .prediction-header {
             display: flex;
@@ -306,7 +306,7 @@
         }
         .prediction-question {
             font-size: 14px;
-            color: #e0e7ff;
+            color: #ccfbf1;
             margin-bottom: 12px;
         }
         .prediction-options {
@@ -325,11 +325,11 @@
         }
         .prediction-option:hover {
             background: rgba(255,255,255,0.15);
-            border-color: #818cf8;
+            border-color: #2dd4bf;
         }
         .prediction-option.selected {
-            background: #4f46e5;
-            border-color: #818cf8;
+            background: #0d9488;
+            border-color: #2dd4bf;
         }
         .prediction-option.correct {
             background: #166534;
@@ -341,7 +341,7 @@
         }
         .option-label {
             font-size: 12px;
-            color: #c7d2fe;
+            color: #99f6e4;
             margin-bottom: 4px;
         }
         .option-value {
@@ -352,7 +352,7 @@
         .submit-prediction {
             width: 100%;
             padding: 12px;
-            background: #6366f1;
+            background: #14b8a6;
             border: none;
             border-radius: 8px;
             color: white;
@@ -360,7 +360,7 @@
             cursor: pointer;
             margin-top: 12px;
         }
-        .submit-prediction:hover { background: #4f46e5; }
+        .submit-prediction:hover { background: #0d9488; }
         .submit-prediction:disabled { background: #475569; cursor: not-allowed; }
         
         /* Teaching Point */
@@ -862,7 +862,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             <div class="clinical-section">
                 <div class="clinical-section-title">🎯 Clinical Question</div>
                 <div class="clinical-card" style="background: #1e3a5f; border: 1px solid var(--primary);">
-                    <p id="clinicalQuestion" style="color: #93c5fd;">What labs would help with diagnosis and management?</p>
+                    <p id="clinicalQuestion" style="color: #5eead4;">What labs would help with diagnosis and management?</p>
                 </div>
             </div>
         </aside>
@@ -1220,12 +1220,16 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         
         function populateCaseGrid() {
             const grid = document.getElementById('caseGrid');
-            grid.innerHTML = Object.entries(aiCases).map(([id, c]) => `
-                <div class="case-option" onclick="selectCase('${id}')">
+            const history = emrGetCaseHistory();
+            grid.innerHTML = Object.entries(aiCases).map(([id, c]) => {
+                const done = history[id];
+                const badge = done ? `<div style="margin-top:6px;font-size:11px;color:#059669;font-weight:600;">✅ ${done.pct}% (${done.correct}/${done.total})</div>` : '';
+                return `<div class="case-option${done ? ' completed' : ''}" onclick="selectCase('${id}')" style="${done ? 'border-color:#a7f3d0;background:#f0fdf4;' : ''}">
                     <h4>${c.name}</h4>
                     <p>${c.age} - ${c.chiefComplaint.substring(0, 60)}...</p>
-                </div>
-            `).join('');
+                    ${badge}
+                </div>`;
+            }).join('');
         }
         
         function selectCase(caseId) {
@@ -1498,6 +1502,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             const pred = currentCase.predictions[currentPredictionIndex];
             const options = document.querySelectorAll('.prediction-option');
+            const isCorrect = selectedPrediction === pred.correct;
             
             options.forEach((opt, i) => {
                 opt.classList.remove('selected');
@@ -1508,6 +1513,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 }
             });
             
+            // Track prediction result
+            predictionsCompleted.push({ index: currentPredictionIndex, correct: isCorrect });
+            
             // Show teaching point
             document.getElementById('teachingPoint').classList.add('visible');
             
@@ -1517,8 +1525,42 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             btn.onclick = function() {
                 currentPredictionIndex++;
                 selectedPrediction = null;
+                if (currentPredictionIndex >= currentCase.predictions.length) {
+                    // Save completion to DxStorage
+                    emrSaveProgress();
+                }
                 loadPredictions();
             };
+        }
+        
+        // ═══════════════════════════════════════════════
+        // DXSTORAGE PERSISTENCE
+        // ═══════════════════════════════════════════════
+        function emrSaveProgress() {
+            if (typeof DxStorage === 'undefined' || !currentCase) return;
+            try {
+                const caseId = Object.keys(aiCases).find(k => aiCases[k] === currentCase);
+                if (!caseId) return;
+                const correctCount = predictionsCompleted.filter(p => p.correct).length;
+                const totalCount = predictionsCompleted.length;
+                
+                const history = DxStorage.load('emr', 'case-history') || {};
+                history[caseId] = {
+                    completedAt: new Date().toISOString(),
+                    correct: correctCount,
+                    total: totalCount,
+                    pct: Math.round((correctCount / totalCount) * 100)
+                };
+                DxStorage.save('emr', 'case-history', history);
+                
+                // Refresh case grid to show completion badges
+                populateCaseGrid();
+            } catch(e) { /* storage not available */ }
+        }
+        
+        function emrGetCaseHistory() {
+            if (typeof DxStorage === 'undefined') return {};
+            try { return DxStorage.load('emr', 'case-history') || {}; } catch(e) { return {}; }
         }
         
         function showSection(section) {
@@ -1665,9 +1707,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
          data-objectives="Apply clinical knowledge, improve patient outcomes"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
+<script src="dx-storage.js"></script>
 <script src="../dx-progress.js"></script>
 <script src="../dx-recommendations.js"></script>
 <script src="dx-tools-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-tools-nav.js"></script>
 </body>
 </html>

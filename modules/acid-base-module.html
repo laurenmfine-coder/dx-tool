@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acid-Base Disorders | MechanismDx</title>
+    <script src="../dx-scoring.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 40px 24px; text-align: center; color: #fff; }
+        .hero-inner { max-width: 900px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 12px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero p { font-size: 16px; opacity: 0.85; }
+        .hero-meta { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 14px; opacity: 0.75; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 32px; }
+        .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; width: 0%; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .concept-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .concept-card h3 { margin: 0 0 12px; font-size: 16px; }
+        .concept-card ul { margin-left: 20px; }
+        .concept-card li { margin-bottom: 8px; color: var(--text-secondary); }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+        .comparison-table th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; }
+        .comparison-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .comparison-table tr:hover { background: var(--border-light); }
+        .danger-box { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .danger-box h4 { color: #b91c1c; margin-bottom: 8px; }
+        .danger-box p { color: #991b1b; margin: 0; }
+        .quiz-section { background: var(--bg-card); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .quiz-section h3 { color: var(--primary-dark); margin-bottom: 16px; }
+        .quiz-question { margin-bottom: 24px; }
+        .quiz-question p { font-weight: 500; margin-bottom: 12px; }
+        .quiz-options { display: grid; gap: 8px; }
+        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
+        .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
+        .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.7; }
+        .quiz-feedback { margin-top: 8px; padding: 12px; border-radius: 8px; font-size: 13px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        @media (max-width: 640px) { .section { padding: 20px; } .hero h1 { font-size: 24px; } }
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
+</head>
+<body>
+
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">⚗️</div>
+            <h1>Acid-Base Disorders</h1>
+            <p>Systematic approach to ABG interpretation, anion gap, Winter formula, and mixed acid-base disorders.</p>
+            <div class="hero-meta">
+                <span>📚 2 Sections</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~30 min</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+        <section class="section">
+            <h2 class="section-title">📊 Systematic ABG Approach</h2>
+            <div class="concept-card">
+                <h3>5-Step ABG Interpretation</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Step</th><th>Question</th><th>How to Determine</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Primary disorder</td><td>Acidemia (pH <7.35) or Alkalemia (pH >7.45)?</td><td>Look at pH first</td></tr>
+                        <tr><td>2. Respiratory or metabolic?</td><td>Is the primary process respiratory (pCO2) or metabolic (HCO3)?</td><td>In acidosis: low HCO3 = metabolic, high pCO2 = respiratory. In alkalosis: high HCO3 = metabolic, low pCO2 = respiratory.</td></tr>
+                        <tr><td>3. Anion gap (if metabolic acidosis)</td><td>AG = Na - (Cl + HCO3). Normal = 12 ± 4</td><td>Elevated AG → MUDPILES causes. Normal AG → hyperchloremic (GI loss, RTA)</td></tr>
+                        <tr><td>4. Compensation adequate?</td><td>Is the body compensating appropriately?</td><td>Use compensation formulas (Winter formula for metabolic acidosis)</td></tr>
+                        <tr><td>5. Delta-delta (if AGMA)</td><td>Delta AG / Delta HCO3</td><td>Ratio 1-2 = pure AGMA. >2 = concurrent metabolic alkalosis. <1 = concurrent non-AG metabolic acidosis.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="concept-card">
+                <h3>Anion Gap Metabolic Acidosis: MUDPILES</h3>
+                <ul>
+                    <li><strong>M</strong>ethanol</li>
+                    <li><strong>U</strong>remia (renal failure)</li>
+                    <li><strong>D</strong>iabetic ketoacidosis (and alcoholic/starvation ketoacidosis)</li>
+                    <li><strong>P</strong>ropylene glycol, Paraldehyde</li>
+                    <li><strong>I</strong>soniazid, Iron</li>
+                    <li><strong>L</strong>actic acidosis (Type A: tissue hypoxia; Type B: medications like metformin)</li>
+                    <li><strong>E</strong>thylene glycol</li>
+                    <li><strong>S</strong>alicylates (aspirin toxicity — unique: causes AGMA + primary respiratory alkalosis)</li>
+                </ul>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="ab1">
+                <p>ABG: pH 7.28, pCO2 24, HCO3 11. Na 140, Cl 100, K 4.5. What is the primary disorder and anion gap?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ab1', this, false)">Respiratory acidosis, AG normal</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab1', this, true)">Anion gap metabolic acidosis, AG = 29</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab1', this, false)">Non-anion gap metabolic acidosis, AG = 12</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab1', this, false)">Mixed respiratory and metabolic acidosis</div>
+                </div>
+                <div class="quiz-feedback" id="ab1-feedback"></div>
+            </div>
+            <div class="quiz-question" id="ab2">
+                <p>A patient has AGMA with AG = 30, HCO3 = 20. What does the delta-delta ratio reveal?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ab2', this, false)">Pure anion gap metabolic acidosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab2', this, true)">Concurrent metabolic alkalosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab2', this, false)">Concurrent non-anion gap metabolic acidosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab2', this, false)">Adequately compensated AGMA</div>
+                </div>
+                <div class="quiz-feedback" id="ab2-feedback"></div>
+            </div>
+        </div>
+        <section class="section">
+            <h2 class="section-title">🔢 Compensation & Mixed Disorders</h2>
+            <div class="concept-card">
+                <h3>Compensation Formulas</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Primary Disorder</th><th>Expected Compensation</th><th>Formula</th></tr></thead>
+                    <tbody>
+                        <tr><td>Metabolic acidosis</td><td>Respiratory (↓pCO2)</td><td>Winter: pCO2 = 1.5 × [HCO3] + 8 (± 2)</td></tr>
+                        <tr><td>Metabolic alkalosis</td><td>Respiratory (↑pCO2)</td><td>pCO2 = 0.7 × [HCO3] + 21 (± 2). pCO2 rarely rises >55.</td></tr>
+                        <tr><td>Acute respiratory acidosis</td><td>Metabolic (↑HCO3)</td><td>HCO3 rises 1 per 10 rise in pCO2</td></tr>
+                        <tr><td>Chronic respiratory acidosis</td><td>Metabolic (↑HCO3)</td><td>HCO3 rises 3.5 per 10 rise in pCO2</td></tr>
+                        <tr><td>Acute respiratory alkalosis</td><td>Metabolic (↓HCO3)</td><td>HCO3 drops 2 per 10 drop in pCO2</td></tr>
+                        <tr><td>Chronic respiratory alkalosis</td><td>Metabolic (↓HCO3)</td><td>HCO3 drops 5 per 10 drop in pCO2</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="concept-card">
+                <h3>Delta-Delta Ratio</h3>
+                <ul>
+                    <li><strong>When to use:</strong> Only in anion gap metabolic acidosis (AGMA)</li>
+                    <li><strong>Formula:</strong> (AG - 12) / (24 - HCO3) = Delta AG / Delta HCO3</li>
+                    <li><strong>Ratio 1-2:</strong> Pure AGMA (all excess acid accounted for by AG rise)</li>
+                    <li><strong>Ratio >2:</strong> Concurrent metabolic ALKALOSIS (HCO3 higher than expected — some other process raising it)</li>
+                    <li><strong>Ratio <1:</strong> Concurrent non-AG metabolic acidosis (HCO3 lower than expected — additional non-AG acid present)</li>
+                </ul>
+            </div>
+            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #f59e0b; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #b45309; margin-bottom: 8px;">💎 Salicylate Toxicity = Mixed Disorder</h4>
+                <p style="color: #92400e; margin: 0;">ASA overdose uniquely causes BOTH primary respiratory alkalosis (direct medullary stimulation) AND anion gap metabolic acidosis (uncoupling oxidative phosphorylation). Finding both on ABG in a patient with altered mental status or tinnitus should prompt immediate salicylate level.</p>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="ab3">
+                <p>In metabolic acidosis with HCO3 of 15, what pCO2 does Winter's formula predict?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ab3', this, false)">25</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab3', this, true)">30.5 ± 2</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab3', this, false)">35</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab3', this, false)">40</div>
+                </div>
+                <div class="quiz-feedback" id="ab3-feedback"></div>
+            </div>
+            <div class="quiz-question" id="ab4">
+                <p>A patient with altered mental status has pH 7.50, pCO2 20, HCO3 15, and anion gap of 25. Salicylate level is markedly elevated. What acid-base disorders are present?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ab4', this, false)">Simple respiratory alkalosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab4', this, true)">Primary respiratory alkalosis + anion gap metabolic acidosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab4', this, false)">Metabolic alkalosis with respiratory compensation</div>
+                    <div class="quiz-option" onclick="checkAnswer('ab4', this, false)">Simple anion gap metabolic acidosis</div>
+                </div>
+                <div class="quiz-feedback" id="ab4-feedback"></div>
+            </div>
+        </div>
+
+        <div class="concept-card" style="background: linear-gradient(135deg, #fefce8, #fef08a); border-color: #facc15; text-align: center; padding: 32px;">
+            <h3 style="color: #a16207; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #ca8a04;" id="scoreDisplay">Score: 0/0 correct (4 remaining)</p>
+        </div>
+
+        <section style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 2px solid #a855f7; margin: 40px auto; max-width: 900px; padding: 30px; border-radius: 16px;">
+            <h2 style="color: #7c3aed; margin-bottom: 20px;">📚 Open-Access References</h2>
+            <div style="font-size: 14px;">
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>1. StatPearls: Acid-Base Disorders</strong><br>
+                    Hopkins E, et al. Acid Base Balance. StatPearls [Updated 2024].<br>
+                     | <a href="https://www.ncbi.nlm.nih.gov/books/NBK507807/" target="_blank" style="color: #7c3aed;">Free Full Text</a>
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>2. Approach to Acid-Base Problems</strong><br>
+                    Berend K, et al. Physiological approach to assessment of acid-base disturbances. NEJM. 2014;371(15):1434-45.<br>
+                    PMID: 25295502
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+        const totalQuestions = 4;
+        const feedbackText = {
+            ab1: { correct: "Correct! pH <7.35 = acidemia. Low HCO3 (11) = metabolic acidosis. AG = 140 - (100 + 11) = 29 (elevated). This is an AGMA. Now check Winter's: expected pCO2 = 1.5(11) + 8 = 24.5 ± 2 → actual 24 = appropriate compensation.", incorrect: "Low pH + low HCO3 = metabolic acidosis. AG = Na - (Cl + HCO3) = 140 - 111 = 29 = elevated. AGMA with appropriate respiratory compensation." },
+            ab2: { correct: "Correct! Delta AG = 30-12 = 18. Delta HCO3 = 24-20 = 4. Ratio = 18/4 = 4.5 (>2). HCO3 is higher than expected for the AG elevation → concurrent metabolic alkalosis (vomiting, diuretics, etc.).", incorrect: "Delta-delta = (30-12)/(24-20) = 18/4 = 4.5. Ratio >2 means HCO3 is higher than expected → concurrent metabolic alkalosis." },
+            ab3: { correct: "Correct! Winter's formula: pCO2 = 1.5(15) + 8 = 22.5 + 8 = 30.5 ± 2. Expected range: 28.5-32.5. If actual pCO2 < 28.5 → superimposed respiratory alkalosis. If > 32.5 → superimposed respiratory acidosis.", incorrect: "Winter's: 1.5 × HCO3 + 8 ± 2 = 1.5(15) + 8 = 30.5. Range 28.5-32.5." },
+            ab4: { correct: "Correct! pH 7.50 = alkalemia. Low pCO2 = respiratory alkalosis. But AG is 25 (elevated) = concurrent AGMA. This mixed pattern (respiratory alkalosis + AGMA) is CLASSIC for salicylate toxicity — ASA directly stimulates respiratory center AND causes metabolic acidosis.", incorrect: "Alkalemia with low pCO2 (respiratory alkalosis) PLUS elevated AG (AGMA) = classic salicylate toxicity mixed disorder." }
+        };
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => { opt.classList.add('disabled'); if (opt === element) opt.classList.add(isCorrect ? 'correct' : 'incorrect'); });
+            if (!isCorrect) options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) { correctAnswers++; if (typeof DxScoring !== 'undefined') DxScoring.addXP(25, 'MECH'); }
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / totalQuestions) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = 'Score: ' + correctAnswers + '/' + answeredQuestions.size + ' correct (' + (totalQuestions - answeredQuestions.size) + ' remaining)';
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div><div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div></div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div><div class="dx-theme-name">Deeper Teal</div></div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div><div class="dx-theme-name">Steel Blue</div></div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div><div class="dx-theme-name">Muted Sage</div></div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    function setDxTheme(theme) { document.body.setAttribute('data-theme', theme); localStorage.setItem('dx-theme', theme); updateThemeOptions(); closeDxThemeModal(); }
+    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
+    function openDxThemeModal() { document.getElementById('dxThemeModal')?.classList.add('open'); }
+    function closeDxThemeModal() { document.getElementById('dxThemeModal')?.classList.remove('open'); }
+    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
+    </script>
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <div data-dx-tutor data-module-title="Acid-Base Disorders" data-key-points="ABG interpretation, anion gap, MUDPILES, Winter formula, delta-delta, respiratory compensation, mixed disorders" style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body">
+<div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">A 45-year-old diabetic presents with Kussmaul respirations. ABG: pH 7.22, pCO2 26, HCO3 10. Na 142, Cl 102. What is the anion gap?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="AG = Na - (Cl + HCO3) = 142 - (102 + 10) = 30. This is markedly elevated, consistent with AGMA." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">12 (normal)</div></div></div><div class="choice" data-correct="true" data-fb="Correct! AG = 142 - (102 + 10) = 30. Normal AG is 12 ± 4. This elevated AG with metabolic acidosis = AGMA, likely DKA in this diabetic patient." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">30 (elevated)</div></div></div><div class="choice" data-fb="AG = Na - (Cl + HCO3) = 142 - (102 + 10) = 30, not 40." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">40 (elevated)</div></div></div><div class="choice" data-fb="AG = Na - (Cl + HCO3) = 142 - (102 + 10) = 30." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">20 (borderline)</div></div></div></div><div id="mcqFb0" class="hidden" style="margin-top:12px"><div id="mcqFbText0" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">In a patient with AGMA (AG = 28, HCO3 = 14), the delta-delta ratio is 1.6. What does this indicate?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="true" data-fb="Correct! Delta-delta = (28-12)/(24-14) = 16/10 = 1.6. A ratio of 1-2 indicates pure AGMA with no concurrent metabolic disorder." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Pure anion gap metabolic acidosis</div></div></div><div class="choice" data-fb="A delta-delta >2 suggests concurrent metabolic alkalosis. 1.6 is within the 1-2 range for pure AGMA." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">Concurrent metabolic alkalosis</div></div></div><div class="choice" data-fb="A delta-delta <1 suggests concurrent non-gap metabolic acidosis. 1.6 is within the normal 1-2 range." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Concurrent non-gap metabolic acidosis</div></div></div><div class="choice" data-fb="The delta-delta evaluates metabolic, not respiratory processes. Compensation adequacy uses Winter formula." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Respiratory alkalosis compensation</div></div></div></div><div id="mcqFb1" class="hidden" style="margin-top:12px"><div id="mcqFbText1" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">Which formula is used to assess compensation in metabolic acidosis?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="This is the compensation formula for metabolic ALKALOSIS, not metabolic acidosis." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">pCO2 = 0.7 × [HCO3] + 21</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Winter formula predicts expected pCO2 in metabolic acidosis. If actual pCO2 differs from predicted, a concurrent respiratory disorder exists." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">Winter formula: pCO2 = 1.5 × [HCO3] + 8 (± 2)</div></div></div><div class="choice" data-fb="This is the compensation formula for CHRONIC respiratory acidosis." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">HCO3 rises 3.5 per 10 rise in pCO2</div></div></div><div class="choice" data-fb="This is the compensation formula for ACUTE respiratory alkalosis." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">HCO3 drops 2 per 10 drop in pCO2</div></div></div></div><div id="mcqFb2" class="hidden" style="margin-top:12px"><div id="mcqFbText2" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">A patient with aspirin overdose presents with tachypnea and confusion. Which acid-base pattern is most characteristic?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Salicylate toxicity uniquely causes a MIXED disorder, not just metabolic acidosis." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">Pure metabolic acidosis</div></div></div><div class="choice" data-fb="While salicylates cause respiratory alkalosis early (direct medullary stimulation), they also cause AGMA." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Pure respiratory alkalosis</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Salicylate toxicity uniquely causes BOTH primary respiratory alkalosis (medullary stimulation) and AGMA (uncoupled oxidative phosphorylation, lactate). This mixed pattern is pathognomonic." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">Primary respiratory alkalosis AND anion gap metabolic acidosis</div></div></div><div class="choice" data-fb="Salicylate toxicity does not cause metabolic alkalosis." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">Metabolic alkalosis with respiratory compensation</div></div></div></div><div id="mcqFb3" class="hidden" style="margin-top:12px"><div id="mcqFbText3" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">A patient with severe diarrhea has pH 7.30, pCO2 30, HCO3 14, Na 140, Cl 116. What type of acidosis is present?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="AG = 140 - (116 + 14) = 10. Normal AG with metabolic acidosis = non-anion gap (hyperchloremic)." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Anion gap metabolic acidosis</div></div></div><div class="choice" data-correct="true" data-fb="Correct! AG = 10 (normal). The elevated chloride (116) replaces lost bicarbonate, maintaining electroneutrality. GI bicarbonate losses from diarrhea are a classic cause of NAGMA." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">Non-anion gap (hyperchloremic) metabolic acidosis</div></div></div><div class="choice" data-fb="pH is low with low HCO3 — this is metabolic acidosis. In respiratory acidosis, pCO2 would be elevated." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">Respiratory acidosis</div></div></div><div class="choice" data-fb="Using Winter formula: expected pCO2 = 1.5(14) + 8 = 29 ± 2. Actual pCO2 = 30. Compensation is appropriate, so this is a simple metabolic acidosis." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">Mixed metabolic and respiratory acidosis</div></div></div></div><div id="mcqFb4" class="hidden" style="margin-top:12px"><div id="mcqFbText4" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">In chronic respiratory acidosis, how much does HCO3 rise per 10 mmHg increase in pCO2?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="This is the compensation for ACUTE respiratory acidosis (1 per 10). Chronic compensation is more robust." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">1 mEq/L</div></div></div><div class="choice" data-fb="This is not the correct compensation factor for chronic respiratory acidosis." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">2 mEq/L</div></div></div><div class="choice" data-correct="true" data-fb="Correct! In chronic respiratory acidosis, renal compensation increases HCO3 by 3.5 mEq/L per 10 mmHg pCO2 rise. This takes 3-5 days to fully develop (vs 1 mEq/L per 10 in acute)." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">3.5 mEq/L</div></div></div><div class="choice" data-fb="5 per 10 is the compensation for chronic respiratory ALKALOSIS (HCO3 drops 5 per 10 pCO2 decrease)." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">5 mEq/L</div></div></div></div><div id="mcqFb5" class="hidden" style="margin-top:12px"><div id="mcqFbText5" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">Which of the following causes of anion gap metabolic acidosis is correctly matched with its mechanism?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Ethylene glycol is metabolized to glycolic and oxalic acid by alcohol dehydrogenase. The mechanism is toxic metabolite production, not direct acid." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Ethylene glycol — direct acid production</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Type A lactic acidosis results from tissue hypoxia (shock, severe anemia, CO poisoning). Type B is from medications (metformin) or metabolic causes without hypoxia." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Lactic acidosis Type A — tissue hypoxia</div></div></div><div class="choice" data-fb="Uremia causes AGMA through accumulation of organic acids (sulfates, phosphates, hippurate) that the kidney can no longer excrete, not bicarbonate wasting." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Uremia — bicarbonate wasting</div></div></div><div class="choice" data-fb="Isoniazid causes AGMA by inhibiting pyridoxine-dependent enzymes, leading to seizures and lactic acidosis — not RTA." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Isoniazid — direct renal tubular toxicity</div></div></div></div><div id="mcqFb6" class="hidden" style="margin-top:12px"><div id="mcqFbText6" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">A critically ill patient has pH 7.15, pCO2 60, HCO3 20. What is the primary disorder?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="In pure acute respiratory acidosis, HCO3 should be ~25 (rises 1 per 10 pCO2). Expected HCO3 for pCO2 of 60 would be ~26. Actual is 20, suggesting a concurrent process." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Acute respiratory acidosis</div></div></div><div class="choice" data-fb="In chronic respiratory acidosis, HCO3 would be even higher (~31 for pCO2 of 60). The low HCO3 argues against this." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Chronic respiratory acidosis</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Both pCO2 is elevated (respiratory acidosis) AND HCO3 is lower than expected for compensation (metabolic acidosis). Expected HCO3 in acute resp acidosis with pCO2 60 would be ~26; actual is 20." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">Mixed respiratory and metabolic acidosis</div></div></div><div class="choice" data-fb="The primary process is not just metabolic — pCO2 of 60 is too HIGH for compensation of metabolic acidosis (Winter formula with HCO3 20 predicts pCO2 ~38)." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Metabolic acidosis with inadequate compensation</div></div></div></div><div id="mcqFb7" class="hidden" style="margin-top:12px"><div id="mcqFbText7" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+</div></div>
+
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=metabolic-acidosis-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/acid-base-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body>
+</html>

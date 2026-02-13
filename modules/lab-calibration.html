@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Calibration - Predict the Labs</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family:'Inter',sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            min-height: 100vh; 
+            color: #f8fafc; 
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .system-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .system-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .system-tab:hover { background: rgba(255,255,255,0.2); }
+        .system-tab.active { background: #8b5cf6; border-color: #8b5cf6; }
+        
+        .scenario-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #8b5cf6;
+        }
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .scenario-system {
+            font-size: 0.8rem;
+            background: rgba(139,92,246,0.3);
+            padding: 4px 12px;
+            border-radius: 12px;
+            color: #c4b5fd;
+        }
+        .scenario-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #c4b5fd;
+            margin-bottom: 12px;
+        }
+        .scenario-text {
+            background: rgba(0,0,0,0.3);
+            padding: 16px;
+            border-radius: 10px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        
+        .prediction-section {
+            background: rgba(139,92,246,0.1);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .prediction-title {
+            font-weight: 600;
+            color: #c4b5fd;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        
+        .lab-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .lab-name {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .lab-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .lab-option {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .lab-option:hover:not(.disabled) { 
+            background: rgba(255,255,255,0.15); 
+            border-color: rgba(255,255,255,0.3);
+        }
+        .lab-option.selected { 
+            border-color: #8b5cf6; 
+            background: rgba(139,92,246,0.2); 
+        }
+        .lab-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important; 
+        }
+        .lab-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important; 
+        }
+        .lab-option.disabled { cursor: default; opacity: 0.7; }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 16px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .submit-btn:hover:not(:disabled) { transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .results-panel {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        .results-panel.show { display: block; }
+        .results-panel.incorrect-results {
+            background: rgba(239,68,68,0.1);
+            border-color: rgba(239,68,68,0.3);
+        }
+        .results-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .results-score {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 16px 0;
+        }
+        
+        .explanation-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .explanation-title {
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 12px;
+        }
+        .explanation-item {
+            margin-bottom: 12px;
+            padding-left: 16px;
+            border-left: 3px solid rgba(255,255,255,0.2);
+        }
+        .explanation-item strong { color: #c4b5fd; }
+        
+        .next-btn {
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 16px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #c4b5fd);
+            border-radius: 3px;
+            transition: width 0.5s;
+        }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-weight: 700; font-size: 1.2rem; color: #c4b5fd; }
+        .stat-label { font-size: 0.75rem; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Predict the Labs</h1>
+            <p>Use mechanism knowledge to predict labs BEFORE seeing them</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value" id="current-q">1</div>
+                <div class="stat-label">Question</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="correct-count">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="accuracy">--%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+        </div>
+        
+        <div class="system-tabs" id="system-tabs">
+            <div class="system-tab active" data-system="all">All Systems</div>
+            <div class="system-tab" data-system="endo">🦋 Endo</div>
+            <div class="system-tab" data-system="renal">🫘 Renal</div>
+            <div class="system-tab" data-system="resp">🫁 Resp</div>
+            <div class="system-tab" data-system="heme">🩸 Heme</div>
+            <div class="system-tab" data-system="gi">🍽️ GI</div>
+        </div>
+        
+        <div id="scenario-container"></div>
+    </div>
+
+    <script>
+        const scenarios = [
+            {
+                id: 'dka',
+                system: 'endo',
+                title: 'Diabetic Ketoacidosis',
+                text: 'A <span class="highlight">24-year-old with Type 1 diabetes</span> presents with nausea, vomiting, abdominal pain. Ran out of insulin 3 days ago. <span class="highlight">Kussmaul respirations, fruity breath</span>, altered mental status.',
+                labs: [
+                    { name: 'Glucose', options: ['Low (<70)', 'Normal (70-100)', 'High (>250)'], correct: 2 },
+                    { name: 'pH', options: ['Low (<7.35)', 'Normal (7.35-7.45)', 'High (>7.45)'], correct: 0 },
+                    { name: 'Bicarbonate', options: ['Low (<22)', 'Normal (22-28)', 'High (>28)'], correct: 0 },
+                    { name: 'Anion Gap', options: ['Normal (8-12)', 'Elevated (>12)'], correct: 1 },
+                    { name: 'Potassium', options: ['Low', 'Normal/High (often elevated despite total body depletion)'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'DKA Mechanism → Lab Pattern',
+                    points: [
+                        '<strong>Glucose HIGH:</strong> No insulin → cells can\'t uptake glucose → hyperglycemia',
+                        '<strong>pH LOW:</strong> Ketone body production (β-hydroxybutyrate, acetoacetate) → metabolic acidosis',
+                        '<strong>Bicarb LOW:</strong> Buffering the acid consumes HCO3-',
+                        '<strong>Anion Gap HIGH:</strong> Ketones are unmeasured anions',
+                        '<strong>K+ appears normal/high:</strong> Acidosis shifts K+ out of cells, but TOTAL BODY K+ is depleted from osmotic diuresis. Will drop rapidly with insulin!'
+                    ]
+                }
+            },
+            {
+                id: 'hf',
+                system: 'cardio',
+                title: 'Acute Heart Failure Exacerbation',
+                text: 'A <span class="highlight">68-year-old with heart failure (EF 25%)</span> has worsening dyspnea and leg swelling. Ate salty foods, <span class="highlight">missed medications</span> for a week.',
+                labs: [
+                    { name: 'BNP', options: ['Normal (<100)', 'Elevated (>400)'], correct: 1 },
+                    { name: 'Sodium', options: ['Low (<135)', 'Normal (135-145)', 'High (>145)'], correct: 0 },
+                    { name: 'Creatinine', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'Troponin', options: ['Normal', 'May be mildly elevated'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Heart Failure → Lab Pattern',
+                    points: [
+                        '<strong>BNP elevated:</strong> Released from stretched ventricles in response to volume/pressure overload',
+                        '<strong>Sodium LOW:</strong> ADH elevated from decreased effective volume → water retention > sodium → dilutional hyponatremia (poor prognostic sign!)',
+                        '<strong>Creatinine elevated:</strong> Cardiorenal syndrome - decreased cardiac output → decreased renal perfusion',
+                        '<strong>Troponin may be elevated:</strong> Demand ischemia from tachycardia and wall stress, even without ACS'
+                    ]
+                }
+            },
+            {
+                id: 'pe',
+                system: 'resp',
+                title: 'Pulmonary Embolism',
+                text: 'A <span class="highlight">45-year-old woman has sudden dyspnea and pleuritic chest pain</span> 10 days post knee surgery. <span class="highlight">HR 112, SpO2 89%</span> on room air.',
+                labs: [
+                    { name: 'D-dimer', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'PaO2', options: ['Normal (>80)', 'Low (<80)'], correct: 1 },
+                    { name: 'PaCO2', options: ['Low (<35)', 'Normal (35-45)', 'High (>45)'], correct: 0 },
+                    { name: 'A-a Gradient', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'Troponin', options: ['Normal', 'May be elevated (RV strain)'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'PE Pathophysiology → Labs',
+                    points: [
+                        '<strong>D-dimer elevated:</strong> Fibrin degradation from clot breakdown (sensitive but not specific)',
+                        '<strong>PaO2 LOW:</strong> V/Q mismatch from dead space ventilation',
+                        '<strong>PaCO2 LOW:</strong> Hypoxemia triggers hyperventilation → blowing off CO2 → respiratory alkalosis',
+                        '<strong>A-a gradient elevated:</strong> Indicates V/Q mismatch or shunt',
+                        '<strong>Troponin elevated:</strong> RV strain from acute pressure overload (indicates worse prognosis)'
+                    ]
+                }
+            },
+            {
+                id: 'aki_prerenal',
+                system: 'renal',
+                title: 'Pre-renal AKI',
+                text: 'A <span class="highlight">72-year-old recently started ACE inhibitor</span> for HTN. Takes <span class="highlight">NSAIDs daily</span> for arthritis. Now with decreased urine output.',
+                labs: [
+                    { name: 'Creatinine', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'BUN/Cr Ratio', options: ['<15 (intrinsic)', '>20 (pre-renal)'], correct: 1 },
+                    { name: 'FeNa', options: ['<1%', '>2%'], correct: 0 },
+                    { name: 'Urine Sodium', options: ['<20 (kidneys retaining)', '>40 (kidneys wasting)'], correct: 0 },
+                    { name: 'Potassium', options: ['Low', 'Normal', 'High'], correct: 2 }
+                ],
+                explanation: {
+                    title: 'Pre-renal AKI Mechanism',
+                    points: [
+                        '<strong>BUN/Cr >20:</strong> Urea is passively reabsorbed with sodium/water; creatinine is not → disproportionate BUN rise',
+                        '<strong>FeNa <1%:</strong> Kidneys avidly retain sodium to restore volume',
+                        '<strong>Urine Na <20:</strong> Same mechanism - kidneys holding onto sodium',
+                        '<strong>K+ HIGH:</strong> ACEi blocks aldosterone → K+ retention; decreased GFR also reduces K+ excretion',
+                        '<strong>Triple whammy:</strong> ACEi + NSAID + diuretic blocks all compensatory mechanisms!'
+                    ]
+                }
+            },
+            {
+                id: 'sepsis',
+                system: 'id',
+                title: 'Septic Shock',
+                text: 'A <span class="highlight">58-year-old has fever, confusion, hypotension</span>. Temp 39.2°C, HR 118, BP 78/45. <span class="highlight">Recent UTI symptoms</span>.',
+                labs: [
+                    { name: 'WBC', options: ['Low (<4)', 'Normal', 'High (>12)'], correct: 2 },
+                    { name: 'Lactate', options: ['Normal (<2)', 'Elevated (>2)'], correct: 1 },
+                    { name: 'Procalcitonin', options: ['Normal (<0.25)', 'Elevated (>0.5)'], correct: 1 },
+                    { name: 'Platelet trend', options: ['Increasing', 'Stable', 'Decreasing'], correct: 2 }
+                ],
+                explanation: {
+                    title: 'Sepsis → Lab Pattern',
+                    points: [
+                        '<strong>WBC elevated:</strong> Bone marrow response to infection (can also be LOW in severe sepsis - bad sign)',
+                        '<strong>Lactate elevated:</strong> Tissue hypoperfusion despite normal/high cardiac output (maldistribution)',
+                        '<strong>Procalcitonin elevated:</strong> Released from thyroid C-cells in bacterial infection; helps distinguish bacterial vs viral',
+                        '<strong>Platelets falling:</strong> Consumption in sepsis-induced coagulopathy/early DIC'
+                    ]
+                }
+            },
+            {
+                id: 'cirrhosis',
+                system: 'gi',
+                title: 'Decompensated Cirrhosis',
+                text: 'A <span class="highlight">55-year-old with alcoholic cirrhosis</span> has increasing abdominal distension. <span class="highlight">Spider angiomata, palmar erythema</span>, asterixis.',
+                labs: [
+                    { name: 'Albumin', options: ['Low (<3.5)', 'Normal (3.5-5)'], correct: 0 },
+                    { name: 'INR', options: ['Normal (<1.2)', 'Elevated (>1.5)'], correct: 1 },
+                    { name: 'Platelets', options: ['Low (<150k)', 'Normal', 'High'], correct: 0 },
+                    { name: 'Sodium', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Ammonia', options: ['Normal', 'Elevated'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Cirrhosis → Multiple Mechanisms',
+                    points: [
+                        '<strong>Albumin LOW:</strong> Decreased hepatic synthetic function',
+                        '<strong>INR elevated:</strong> Decreased clotting factor synthesis (II, VII, IX, X)',
+                        '<strong>Platelets LOW:</strong> Splenic sequestration from portal hypertension',
+                        '<strong>Sodium LOW:</strong> Splanchnic vasodilation → decreased effective volume → ADH → dilutional hyponatremia',
+                        '<strong>Ammonia elevated:</strong> Decreased hepatic clearance → hepatic encephalopathy'
+                    ]
+                }
+            },
+            {
+                id: 'mi',
+                system: 'cardio',
+                title: 'Acute MI - Early Presentation',
+                text: 'A <span class="highlight">62-year-old smoker with HTN</span> has crushing substernal chest pain radiating to left arm for <span class="highlight">1 hour</span>. Diaphoretic, BP 90/60.',
+                labs: [
+                    { name: 'Troponin (initial)', options: ['Normal', 'Elevated'], correct: 0 },
+                    { name: 'Troponin (6 hours)', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'CK-MB', options: ['Normal initially', 'Elevated at 4-6 hours'], correct: 0 },
+                    { name: 'BNP', options: ['Normal', 'May be elevated'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Acute MI Timeline',
+                    points: [
+                        '<strong>Troponin initially normal:</strong> Takes 3-6 hours to rise after myocyte necrosis begins',
+                        '<strong>Troponin at 6 hours:</strong> Now elevated - single negative does NOT rule out MI!',
+                        '<strong>CK-MB:</strong> Rises 4-6 hours, peaks 12-24 hours (less specific than troponin)',
+                        '<strong>BNP may be elevated:</strong> Wall stress and dysfunction release natriuretic peptides',
+                        '<strong>Key point:</strong> Don\'t wait for troponin to treat STEMI - treat based on ECG!'
+                    ]
+                }
+            },
+            {
+                id: 'addison',
+                system: 'endo',
+                title: 'Adrenal Insufficiency (Addison\'s)',
+                text: 'A <span class="highlight">35-year-old woman has fatigue, weight loss, hyperpigmentation</span>. BP 88/54, <span class="highlight">dark skin creases and gums</span>.',
+                labs: [
+                    { name: 'Cortisol (AM)', options: ['Low (<3)', 'Normal (10-20)', 'High'], correct: 0 },
+                    { name: 'ACTH', options: ['Low', 'Normal', 'High'], correct: 2 },
+                    { name: 'Sodium', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Potassium', options: ['Low', 'Normal', 'High'], correct: 2 },
+                    { name: 'Glucose', options: ['Low', 'Normal', 'High'], correct: 0 }
+                ],
+                explanation: {
+                    title: 'Primary Adrenal Insufficiency',
+                    points: [
+                        '<strong>Cortisol LOW:</strong> Adrenal gland destruction (autoimmune, infection, hemorrhage)',
+                        '<strong>ACTH HIGH:</strong> No negative feedback → pituitary releases more ACTH',
+                        '<strong>Sodium LOW:</strong> Aldosterone deficiency → sodium wasting',
+                        '<strong>Potassium HIGH:</strong> Aldosterone deficiency → potassium retention',
+                        '<strong>Hyperpigmentation:</strong> ACTH and MSH both from POMC - high ACTH = high MSH'
+                    ]
+                }
+            },
+            {
+                id: 'meningitis',
+                system: 'id',
+                title: 'Bacterial Meningitis',
+                text: 'A <span class="highlight">20-year-old college student</span> has severe headache, fever, <span class="highlight">neck stiffness, photophobia</span>. Petechial rash noted.',
+                labs: [
+                    { name: 'CSF WBC', options: ['Normal (<5)', 'Elevated (>1000, neutrophils)'], correct: 1 },
+                    { name: 'CSF Glucose', options: ['Low (<40)', 'Normal (>60)'], correct: 0 },
+                    { name: 'CSF Protein', options: ['Normal (<45)', 'Elevated (>100)'], correct: 1 },
+                    { name: 'CSF Gram Stain', options: ['Negative', 'Gram-negative diplococci'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Bacterial Meningitis CSF Pattern',
+                    points: [
+                        '<strong>WBC elevated (neutrophilic):</strong> PMN infiltration in response to bacteria',
+                        '<strong>Glucose LOW:</strong> Bacteria consume glucose; also impaired transport',
+                        '<strong>Protein HIGH:</strong> Inflammation disrupts blood-brain barrier → protein leak',
+                        '<strong>Gram-negative diplococci:</strong> Classic for N. meningitidis',
+                        '<strong>Petechiae:</strong> Meningococcemia with DIC - antibiotics IMMEDIATELY!'
+                    ]
+                }
+            },
+            {
+                id: 'hhs',
+                system: 'endo',
+                title: 'Hyperosmolar Hyperglycemic State',
+                text: 'An <span class="highlight">elderly nursing home patient with Type 2 diabetes</span> is found obtunded. Has had decreased oral intake for days. Extremely dry mucous membranes, <span class="highlight">no Kussmaul breathing, no fruity breath</span>.',
+                labs: [
+                    { name: 'Glucose', options: ['200-400', '400-600', '>600'], correct: 2 },
+                    { name: 'pH', options: ['Low (<7.3)', 'Normal or mildly low (>7.3)', 'High'], correct: 1 },
+                    { name: 'Serum Osmolality', options: ['Normal (275-295)', 'High (>320)'], correct: 1 },
+                    { name: 'Ketones', options: ['Strongly positive', 'Negative or trace'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'HHS vs DKA - Why the difference?',
+                    points: [
+                        '<strong>Glucose VERY HIGH (>600):</strong> More severe hyperglycemia than DKA',
+                        '<strong>pH normal/near-normal:</strong> Enough residual insulin to prevent ketogenesis',
+                        '<strong>Osmolality HIGH (>320):</strong> Severe dehydration + hyperglycemia = hyperosmolar state',
+                        '<strong>Ketones minimal:</strong> T2DM has some insulin → no significant ketone production',
+                        '<strong>Key distinction:</strong> HHS = profound dehydration & hyperosmolarity; DKA = ketoacidosis'
+                    ]
+                }
+            },
+            {
+                id: 'pyloric',
+                system: 'gi',
+                title: 'Pyloric Stenosis',
+                text: 'A <span class="highlight">4-week-old firstborn male</span> presents with <span class="highlight">projectile non-bilious vomiting</span> after feeds. Infant is hungry immediately after vomiting. Palpable "olive" in RUQ.',
+                labs: [
+                    { name: 'pH', options: ['Low (acidosis)', 'Normal', 'High (alkalosis)'], correct: 2 },
+                    { name: 'Chloride', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Potassium', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Bicarbonate', options: ['Low', 'Normal', 'High'], correct: 2 }
+                ],
+                explanation: {
+                    title: 'Vomiting Gastric Contents → Classic Pattern',
+                    points: [
+                        '<strong>pH HIGH (alkalosis):</strong> Losing gastric acid (H+) → metabolic alkalosis',
+                        '<strong>Chloride LOW:</strong> HCl is lost in vomit → hypochloremia',
+                        '<strong>Potassium LOW:</strong> Kidneys excrete K+ trying to retain H+ to correct alkalosis',
+                        '<strong>Bicarb HIGH:</strong> Loss of H+ shifts equation toward more HCO3-',
+                        '<strong>Classic triad:</strong> Hypochloremic, hypokalemic metabolic alkalosis'
+                    ]
+                }
+            },
+            {
+                id: 'ards',
+                system: 'resp',
+                title: 'ARDS',
+                text: 'A <span class="highlight">45-year-old with severe pneumonia</span> is intubated. Despite 100% FiO2, <span class="highlight">SpO2 is only 88%</span>. CXR shows bilateral infiltrates. No evidence of heart failure.',
+                labs: [
+                    { name: 'PaO2/FiO2 ratio', options: ['Normal (>300)', 'Mild impairment (200-300)', 'Severe (<100)'], correct: 2 },
+                    { name: 'PaCO2', options: ['Low (hyperventilation)', 'Normal', 'High (if fatiguing)'], correct: 0 },
+                    { name: 'A-a gradient', options: ['Normal', 'Elevated'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'ARDS Pathophysiology',
+                    points: [
+                        '<strong>P/F ratio <100:</strong> Severe ARDS definition. Refractory hypoxemia despite high FiO2.',
+                        '<strong>PaCO2 initially low:</strong> Patient hyperventilates to compensate for hypoxia (if not yet fatigued)',
+                        '<strong>A-a gradient elevated:</strong> V/Q mismatch and shunt physiology from fluid-filled alveoli',
+                        '<strong>Berlin Criteria:</strong> P/F <300 mild, <200 moderate, <100 severe ARDS'
+                    ]
+                }
+            },
+            {
+                id: 'rhabdo',
+                system: 'renal',
+                title: 'Rhabdomyolysis',
+                text: 'A <span class="highlight">22-year-old found down after overdose</span>, lying on hard floor for unknown hours. <span class="highlight">Swollen, tender thighs</span>. Dark brown urine.',
+                labs: [
+                    { name: 'CK', options: ['Normal (<200)', 'Mildly elevated (200-1000)', 'Markedly elevated (>10,000)'], correct: 2 },
+                    { name: 'Potassium', options: ['Low', 'Normal', 'High'], correct: 2 },
+                    { name: 'Calcium', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Urine myoglobin', options: ['Negative', 'Positive'], correct: 1 },
+                    { name: 'Creatinine', options: ['Normal', 'Elevated (AKI developing)'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Muscle Breakdown → Cellular Contents Released',
+                    points: [
+                        '<strong>CK markedly elevated:</strong> Released from damaged muscle (can be >100,000)',
+                        '<strong>Potassium HIGH:</strong> K+ released from lysed cells → dangerous hyperkalemia',
+                        '<strong>Calcium LOW:</strong> Ca2+ deposits in damaged muscle tissue',
+                        '<strong>Myoglobin positive:</strong> Causes tea/cola-colored urine; nephrotoxic',
+                        '<strong>Creatinine rising:</strong> Myoglobin causes AKI via tubular obstruction and direct toxicity'
+                    ]
+                }
+            },
+            {
+                id: 'tls',
+                system: 'heme',
+                title: 'Tumor Lysis Syndrome',
+                text: 'A patient with <span class="highlight">newly diagnosed Burkitt lymphoma</span> started chemotherapy yesterday. Now has <span class="highlight">muscle cramps, nausea, and oliguria</span>.',
+                labs: [
+                    { name: 'Potassium', options: ['Low', 'Normal', 'High'], correct: 2 },
+                    { name: 'Phosphorus', options: ['Low', 'Normal', 'High'], correct: 2 },
+                    { name: 'Calcium', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Uric Acid', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'Creatinine', options: ['Normal', 'Elevated'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Rapid Cell Death → Release of Intracellular Contents',
+                    points: [
+                        '<strong>Potassium HIGH:</strong> K+ released from lysed tumor cells',
+                        '<strong>Phosphorus HIGH:</strong> Released from cells; binds calcium',
+                        '<strong>Calcium LOW:</strong> Precipitates with phosphorus → hypocalcemia',
+                        '<strong>Uric Acid HIGH:</strong> Nucleic acid breakdown → uric acid → crystallizes in tubules',
+                        '<strong>Creatinine elevated:</strong> AKI from uric acid crystals + Ca-Phos precipitation'
+                    ]
+                }
+            },
+            {
+                id: 'adrenal_crisis',
+                system: 'endo',
+                title: 'Adrenal Crisis',
+                text: 'A patient on <span class="highlight">chronic prednisone for lupus</span> ran out of medication a week ago. Now presents with <span class="highlight">hypotension unresponsive to fluids</span>, severe fatigue, abdominal pain.',
+                labs: [
+                    { name: 'Sodium', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Potassium', options: ['Low', 'Normal', 'High (in primary)'], correct: 2 },
+                    { name: 'Glucose', options: ['Low', 'Normal', 'High'], correct: 0 },
+                    { name: 'Cortisol (random)', options: ['Low/inappropriately normal', 'High'], correct: 0 }
+                ],
+                explanation: {
+                    title: 'Loss of Cortisol & Aldosterone',
+                    points: [
+                        '<strong>Sodium LOW:</strong> Loss of aldosterone → Na+ wasting; cortisol loss → ↑ADH',
+                        '<strong>Potassium HIGH:</strong> Aldosterone deficiency → K+ retention (primary AI)',
+                        '<strong>Glucose LOW:</strong> Cortisol is needed for gluconeogenesis',
+                        '<strong>Cortisol LOW:</strong> Confirms diagnosis; don\'t wait for results to treat!',
+                        '<strong>Note:</strong> Secondary AI (pituitary) may have normal K+ (aldosterone preserved)'
+                    ]
+                }
+            },
+            {
+                id: 'gibleed',
+                system: 'gi',
+                title: 'Upper GI Bleed',
+                text: 'A <span class="highlight">65-year-old on aspirin and NSAIDs</span> has <span class="highlight">melena and lightheadedness</span>. HR 110, BP 95/60.',
+                labs: [
+                    { name: 'Hemoglobin (initial)', options: ['Low', 'May be normal initially'], correct: 1 },
+                    { name: 'BUN', options: ['Normal', 'Elevated'], correct: 1 },
+                    { name: 'BUN/Cr Ratio', options: ['<20', '>20'], correct: 1 },
+                    { name: 'MCV', options: ['Low (if chronic)', 'Normal (acute)'], correct: 1 }
+                ],
+                explanation: {
+                    title: 'Acute GI Bleed Lab Pattern',
+                    points: [
+                        '<strong>Hgb may be normal initially:</strong> Acute loss is whole blood; hemodilution takes hours',
+                        '<strong>BUN elevated:</strong> Digested blood protein is absorbed → increased urea production',
+                        '<strong>BUN/Cr >20:</strong> Classic for upper GI bleed (blood = protein load)',
+                        '<strong>MCV normal in acute:</strong> Not enough time for iron deficiency; low MCV suggests chronic bleeding'
+                    ]
+                }
+            },
+            {
+                id: 'stroke',
+                system: 'neuro',
+                title: 'Acute Ischemic Stroke',
+                text: 'A <span class="highlight">70-year-old with AFib (not anticoagulated)</span> has sudden left-sided weakness and facial droop. <span class="highlight">Last seen normal 2 hours ago</span>.',
+                labs: [
+                    { name: 'CT Head (initial)', options: ['Normal', 'Hypodense area'], correct: 0 },
+                    { name: 'CT Head (24 hrs)', options: ['Normal', 'Hypodense area'], correct: 1 },
+                    { name: 'Glucose', options: ['Must check immediately', 'Not urgent'], correct: 0 },
+                    { name: 'INR', options: ['Must check before tPA', 'Not important'], correct: 0 }
+                ],
+                explanation: {
+                    title: 'Acute Stroke Workup',
+                    points: [
+                        '<strong>Initial CT normal:</strong> Ischemic changes take 6-24 hours to appear',
+                        '<strong>Initial CT purpose:</strong> Rule OUT hemorrhage for tPA eligibility',
+                        '<strong>Glucose STAT:</strong> Hypoglycemia can mimic stroke - must rule out',
+                        '<strong>INR needed:</strong> tPA contraindicated if INR >1.7'
+                    ]
+                }
+            }
+        ];
+        
+        let currentIndex = 0;
+        let correctCount = 0;
+        let totalAnswered = 0;
+        let currentFilter = 'all';
+        let filteredScenarios = [...scenarios];
+        let userSelections = {};
+        
+        function filterScenarios(system) {
+            currentFilter = system;
+            if (system === 'all') {
+                filteredScenarios = [...scenarios];
+            } else {
+                filteredScenarios = scenarios.filter(s => s.system === system);
+            }
+            currentIndex = 0;
+            renderScenario();
+            
+            document.querySelectorAll('.system-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.system === system);
+            });
+        }
+        
+        function renderScenario() {
+            if (filteredScenarios.length === 0) {
+                document.getElementById('scenario-container').innerHTML = '<p style="text-align:center;opacity:0.7;">No scenarios for this system yet.</p>';
+                return;
+            }
+            
+            const scenario = filteredScenarios[currentIndex];
+            userSelections = {};
+            
+            const labsHTML = scenario.labs.map((lab, i) => `
+                <div class="lab-item" data-lab="${i}">
+                    <div class="lab-name">📊 ${lab.name}</div>
+                    <div class="lab-options">
+                        ${lab.options.map((opt, j) => `
+                            <div class="lab-option" data-lab="${i}" data-option="${j}" onclick="selectOption(${i}, ${j})">${opt}</div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('scenario-container').innerHTML = `
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <span class="scenario-system">${scenario.system.toUpperCase()}</span>
+                        <span style="opacity:0.6;font-size:0.85rem;">${currentIndex + 1}/${filteredScenarios.length}</span>
+                    </div>
+                    <div class="scenario-title">${scenario.title}</div>
+                    <div class="scenario-text">${scenario.text}</div>
+                    
+                    <div class="prediction-section">
+                        <div class="prediction-title">🎯 Predict the Labs</div>
+                        ${labsHTML}
+                    </div>
+                    
+                    <button class="submit-btn" id="submit-btn" onclick="checkAnswers()" disabled>
+                        Check My Predictions
+                    </button>
+                    
+                    <div class="results-panel" id="results-panel">
+                        <div class="results-header" id="results-header"></div>
+                        <div class="results-score" id="results-score"></div>
+                        <div class="explanation-box">
+                            <div class="explanation-title">${scenario.explanation.title}</div>
+                            ${scenario.explanation.points.map(p => `<div class="explanation-item">${p}</div>`).join('')}
+                        </div>
+                        <button class="next-btn" onclick="nextScenario()">Next Scenario →</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('progress').style.width = `${((currentIndex + 1) / filteredScenarios.length) * 100}%`;
+            document.getElementById('current-q').textContent = currentIndex + 1;
+        }
+        
+        function selectOption(labIndex, optionIndex) {
+            const labItem = document.querySelector(`.lab-item[data-lab="${labIndex}"]`);
+            if (labItem.classList.contains('answered')) return;
+            
+            labItem.querySelectorAll('.lab-option').forEach(opt => opt.classList.remove('selected'));
+            labItem.querySelector(`.lab-option[data-option="${optionIndex}"]`).classList.add('selected');
+            userSelections[labIndex] = optionIndex;
+            
+            const scenario = filteredScenarios[currentIndex];
+            const allSelected = scenario.labs.every((_, i) => userSelections[i] !== undefined);
+            document.getElementById('submit-btn').disabled = !allSelected;
+        }
+        
+        function checkAnswers() {
+            const scenario = filteredScenarios[currentIndex];
+            let correct = 0;
+            
+            scenario.labs.forEach((lab, i) => {
+                const labItem = document.querySelector(`.lab-item[data-lab="${i}"]`);
+                labItem.classList.add('answered');
+                
+                labItem.querySelectorAll('.lab-option').forEach(opt => {
+                    opt.classList.add('disabled');
+                    const optIndex = parseInt(opt.dataset.option);
+                    if (optIndex === lab.correct) {
+                        opt.classList.add('correct');
+                    } else if (optIndex === userSelections[i] && optIndex !== lab.correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+                
+                if (userSelections[i] === lab.correct) correct++;
+            });
+            
+            const percentage = Math.round((correct / scenario.labs.length) * 100);
+            totalAnswered++;
+            if (percentage >= 80) correctCount++;
+            
+            const resultsPanel = document.getElementById('results-panel');
+            const resultsHeader = document.getElementById('results-header');
+            const resultsScore = document.getElementById('results-score');
+            
+            if (percentage >= 80) {
+                resultsPanel.classList.remove('incorrect-results');
+                resultsHeader.innerHTML = '✅ Great prediction!';
+                resultsScore.innerHTML = `${correct}/${scenario.labs.length} correct (${percentage}%)`;
+            } else {
+                resultsPanel.classList.add('incorrect-results');
+                resultsHeader.innerHTML = '📚 Review the mechanism';
+                resultsScore.innerHTML = `${correct}/${scenario.labs.length} correct (${percentage}%)`;
+            }
+            
+            resultsPanel.classList.add('show');
+            document.getElementById('submit-btn').style.display = 'none';
+            
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('accuracy').textContent = totalAnswered > 0 ? 
+                Math.round((correctCount / totalAnswered) * 100) + '%' : '--%';
+        }
+        
+        function nextScenario() {
+            currentIndex++;
+            if (currentIndex >= filteredScenarios.length) {
+                currentIndex = 0;
+            }
+            renderScenario();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Initialize
+        document.querySelectorAll('.system-tab').forEach(tab => {
+            tab.addEventListener('click', () => filterScenarios(tab.dataset.system));
+        });
+        
+        renderScenario();
+    </script>
+    
+    <!-- Open-Access References -->
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; font-size: 0.85rem;">
+        <h3 style="color: #8b5cf6; margin-bottom: 12px;">📚 Evidence-Based References</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK482182/" target="_blank" style="color: #a78bfa;">StatPearls: Acid-Base Interpretation</a> - Anion gap, Winter's formula</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK470381/" target="_blank" style="color: #a78bfa;">StatPearls: Acute Kidney Injury</a> - BUN/Cr ratios, prerenal vs intrinsic</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK519070/" target="_blank" style="color: #a78bfa;">StatPearls: DKA</a> - Expected electrolyte changes</li>
+            <li style="margin-bottom: 8px;">• <a href="https://pubmed.ncbi.nlm.nih.gov/25295502/" target="_blank" style="color: #a78bfa;">NEJM 2014: Acid-Base Disturbances</a> - Compensation rules</li>
+        </ul>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Lab Calibration"
+         data-key-points="📚 Evidence-Based References, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

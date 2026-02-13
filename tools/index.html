@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Tools | DxSuite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root { --primary: #059669; --primary-dark: #047857; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,8 +41,12 @@
         .tool-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
         .tool-tag { display: inline-block; padding: 4px 10px; background: #f1f5f9; border-radius: 12px; font-size: 11px; color: var(--text-secondary); margin-right: 4px; }
         .tool-tag.new { background: #dcfce7; color: #166534; }
+        .tool-tag.soon { background: #fef3c7; color: #92400e; }
+        .tool-card.coming-soon { opacity: 0.7; position: relative; }
+        .tool-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); cursor: default; }
+        .tool-card.coming-soon::after { content: 'Coming Soon'; position: absolute; top: 16px; right: 16px; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 10px; }
         
-        .icon-blue { background: #dbeafe; }
+        .icon-blue { background: #ccfbf1; }
         .icon-green { background: #dcfce7; }
         .icon-purple { background: #f3e8ff; }
         .icon-orange { background: #ffedd5; }
@@ -100,8 +105,26 @@
             <div class="quick-links">
                 <a href="learning-dashboard.html" class="quick-link">📊 My Dashboard</a>
                 <a href="calculator-hub.html" class="quick-link">🧮 Calculators</a>
+                <a href="ddx-builder.html" class="quick-link">🔍 DDx Builder</a>
+                <a href="abg-analyzer.html" class="quick-link">🫁 ABG Analyzer</a>
                 <a href="flashcard-studio.html" class="quick-link">🎴 Flashcards</a>
-                <a href="study-planner.html" class="quick-link">📅 Study Planner</a>
+                <a href="sbar-trainer.html" class="quick-link">💬 SBAR Trainer</a>
+                <a href="bookmarks-notes.html" class="quick-link">📌 Bookmarks</a>
+            <!-- EPA Dashboard -->
+            <a href="epa-dashboard.html" class="tool-card">
+                <div class="tool-icon">📋</div>
+                <h3>EPA Dashboard</h3>
+                <p>Track entrustable professional activities and clinical milestones</p>
+                <span class="tool-tag">Clinical</span>
+            </a>
+
+            <!-- Scoreboard -->
+            <a href="scoreboard.html" class="tool-card">
+                <div class="tool-icon">🏆</div>
+                <h3>Scoreboard & Achievements</h3>
+                <p>Track your XP, level, achievements, and leaderboard position</p>
+                <span class="tool-tag">Gamification</span>
+            </a>
             </div>
         </div>
 
@@ -116,7 +139,7 @@
             <a href="study-planner.html" class="tool-card">
                 <div class="tool-icon icon-purple">📅</div>
                 <h3>Study Planner</h3>
-                <p>Create a personalized schedule based on your exam date</p>
+                <p>Create a personalized schedule based on your exam date and progress</p>
                 <span class="tool-tag">Planning</span>
             </a>
             <a href="bookmarks-notes.html" class="tool-card">
@@ -124,6 +147,7 @@
                 <h3>Bookmarks & Notes</h3>
                 <p>Save concepts, add personal notes, flag for review</p>
                 <span class="tool-tag">Organization</span>
+                <span class="tool-tag new">New</span>
             </a>
         </div>
 
@@ -132,14 +156,15 @@
             <a href="flashcard-studio.html" class="tool-card">
                 <div class="tool-icon icon-orange">🎴</div>
                 <h3>Flashcard Studio</h3>
-                <p>Study with spaced repetition and create custom cards</p>
-                <span class="tool-tag new">Spaced Rep</span>
+                <p>Spaced repetition flashcards with SM-2 algorithm and custom decks</p>
+                <span class="tool-tag new">SRS</span>
             </a>
             <a href="ddx-builder.html" class="tool-card">
                 <div class="tool-icon icon-cyan">🔍</div>
                 <h3>DDx Builder</h3>
-                <p>Enter symptoms to generate ranked differentials</p>
+                <p>Enter symptoms to generate ranked differentials across 62 diagnoses with synonym matching</p>
                 <span class="tool-tag">Reasoning</span>
+                <span class="tool-tag new">Expanded</span>
             </a>
             <a href="sbar-trainer.html" class="tool-card">
                 <div class="tool-icon icon-yellow">💬</div>
@@ -154,8 +179,8 @@
             <a href="calculator-hub.html" class="tool-card">
                 <div class="tool-icon icon-green">🧮</div>
                 <h3>Clinical Calculator Hub</h3>
-                <p>18 essential formulas: CrCl, FENa, anion gap, A-a gradient, QTc, MELD</p>
-                <span class="tool-tag">18 Calculators</span>
+                <p>22 calculators including CrCl, FENa, anion gap, A-a gradient, Wells PE, CURB-65, CHA₂DS₂-VASc, HEART</p>
+                <span class="tool-tag">22 Calculators</span>
             </a>
             <a href="abg-analyzer.html" class="tool-card">
                 <div class="tool-icon icon-red">🫁</div>
@@ -166,7 +191,7 @@
             <a href="ecg-integration.html" class="tool-card">
                 <div class="tool-icon icon-red">❤️</div>
                 <h3>ECG Trainer</h3>
-                <p>Practice ECG interpretation</p>
+                <p>20 patterns, quiz mode with scoring, teaching points</p>
                 <span class="tool-tag">Cardiology</span>
             </a>
         </div>
@@ -176,14 +201,8 @@
             <a href="emr-simulator.html" class="tool-card">
                 <div class="tool-icon icon-blue">🖥️</div>
                 <h3>EMR Simulator</h3>
-                <p>Practice navigating electronic medical records</p>
+                <p>A/I cases with lab predictions, progress tracking</p>
                 <span class="tool-tag">Simulation</span>
-            </a>
-            <a href="referral-letter-generator.html" class="tool-card">
-                <div class="tool-icon icon-purple">✉️</div>
-                <h3>Referral Letter Generator</h3>
-                <p>Create professional referral letters</p>
-                <span class="tool-tag">Documentation</span>
             </a>
         </div>
 
@@ -295,5 +314,6 @@
         if (!localStorage.getItem('dxsuite-tools-tour')) setTimeout(startTour, 800);
     </script>
 <script src="../data/rdx-persist.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
 </body>
 </html>

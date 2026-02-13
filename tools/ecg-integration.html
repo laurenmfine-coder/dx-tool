@@ -139,7 +139,7 @@
             padding: 12px 16px; background: var(--bg-main); border: 2px solid var(--border);
             border-radius: 10px; cursor: pointer; transition: all 0.15s; font-size: 0.9rem;
         }
-        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
         .quiz-option.correct { border-color: var(--success); background: #d1fae5; }
         .quiz-option.incorrect { border-color: var(--danger); background: #fee2e2; }
         
@@ -349,6 +349,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
             <div class="ecg-controls">
                 <button class="ecg-btn" onclick="ECGViewer.showTeaching()">💡 Teaching</button>
+                <button class="ecg-btn" onclick="ECGViewer.startQuizMode()" id="quizModeBtn" style="background:#059669;color:white;">🎯 Quiz Mode</button>
             </div>
         </div>
         
@@ -380,15 +381,59 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             <div class="quiz-options" id="quizOptions"></div>
         </div>
     </div>
+
+    <!-- QUIZ MODE OVERLAY -->
+    <div id="quizModeOverlay" style="display:none;position:fixed;inset:0;z-index:9500;background:#f8fafc;overflow-y:auto;">
+        <div style="max-width:900px;margin:0 auto;padding:24px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                <div>
+                    <h2 style="font-size:22px;margin-bottom:4px;">🎯 ECG Quiz Mode</h2>
+                    <p style="color:#6b7280;font-size:14px;">Identify the rhythm — <span id="qmProgress">1 of 10</span></p>
+                </div>
+                <div style="display:flex;gap:12px;align-items:center;">
+                    <div style="font-size:14px;color:#059669;font-weight:600;" id="qmScore">Score: 0/0</div>
+                    <button onclick="ECGViewer.exitQuizMode()" style="padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:white;cursor:pointer;font-size:13px;">✕ Exit</button>
+                </div>
+            </div>
+            <div style="background:white;border:1px solid #e4e4e7;border-radius:14px;padding:24px;margin-bottom:16px;">
+                <div id="qmEcgStrip" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:16px;"></div>
+                <div id="qmRhythmContainer">
+                    <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">Lead II Rhythm Strip</div>
+                    <canvas id="qmRhythmCanvas" style="width:100%;height:80px;border:1px solid #e4e4e7;border-radius:6px;"></canvas>
+                </div>
+            </div>
+            <div style="background:white;border:1px solid #e4e4e7;border-radius:14px;padding:24px;margin-bottom:16px;">
+                <p style="font-weight:600;font-size:15px;margin-bottom:16px;" id="qmQuestion">What is this rhythm?</p>
+                <div id="qmOptions" style="display:grid;gap:10px;"></div>
+            </div>
+            <div id="qmFeedback" style="display:none;background:white;border:1px solid #e4e4e7;border-radius:14px;padding:24px;margin-bottom:16px;">
+                <div id="qmFeedbackContent"></div>
+                <button onclick="ECGViewer.nextQuizQuestion()" style="margin-top:16px;padding:10px 24px;background:#059669;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;" id="qmNextBtn">Next Question →</button>
+            </div>
+            <div id="qmResults" style="display:none;background:white;border:1px solid #e4e4e7;border-radius:14px;padding:32px;text-align:center;">
+                <div style="font-size:48px;margin-bottom:12px;">🏆</div>
+                <h3 style="font-size:20px;margin-bottom:8px;">Quiz Complete!</h3>
+                <div style="font-size:36px;font-weight:700;color:#059669;margin-bottom:8px;" id="qmFinalScore"></div>
+                <p style="color:#6b7280;margin-bottom:20px;" id="qmFinalDetail"></p>
+                <div style="display:flex;gap:12px;justify-content:center;">
+                    <button onclick="ECGViewer.startQuizMode()" style="padding:10px 20px;background:#059669;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Try Again</button>
+                    <button onclick="ECGViewer.exitQuizMode()" style="padding:10px 20px;background:#f1f5f9;border:1px solid #e4e4e7;border-radius:8px;cursor:pointer;">Back to Library</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="pattern-browser">
-        <h3>📚 ECG Pattern Library</h3>
+        <h3>📚 ECG Pattern Library (<span id="patternCount">8</span> patterns)</h3>
         <div class="pattern-categories" id="patternCategories">
             <button class="category-btn active" data-category="all">All</button>
             <button class="category-btn" data-category="stemi">STEMI</button>
             <button class="category-btn" data-category="arrhythmia">Arrhythmias</button>
             <button class="category-btn" data-category="conduction">Conduction</button>
+            <button class="category-btn" data-category="ischemia">Ischemia</button>
+            <button class="category-btn" data-category="hypertrophy">Hypertrophy</button>
             <button class="category-btn" data-category="other">Other</button>
+            <button class="category-btn" data-category="normal">Normal</button>
         </div>
         <div class="pattern-grid" id="patternGrid"></div>
     </div>
@@ -582,6 +627,222 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     explanation: 'Normal ECG does not rule out ACS, PE, or many serious conditions.'
                 },
                 linkedCases: []
+            },
+            'svt': {
+                id: 'svt', name: 'Supraventricular Tachycardia', category: 'arrhythmia', urgency: 'urgent',
+                findings: [
+                    { text: 'Regular narrow complex tachycardia', abnormal: true },
+                    { text: 'Rate 150-250 bpm', abnormal: true },
+                    { text: 'P waves absent or buried in QRS', abnormal: true },
+                    { text: 'QRS <120ms', abnormal: false }
+                ],
+                interpretation: 'SVT. If stable, try vagal maneuvers then adenosine.',
+                teachingPoints: [
+                    'Regular narrow complex tachy = SVT until proven otherwise',
+                    'Most common: AVNRT > AVRT > Atrial tachycardia',
+                    'Vagal maneuvers first (Valsalva, carotid massage)',
+                    'Adenosine 6mg → 12mg → 12mg rapid push'
+                ],
+                quiz: { question: 'First-line treatment for stable SVT?', options: ['IV Amiodarone', 'Vagal maneuvers', 'Synchronized cardioversion', 'IV Metoprolol'], correct: 1, explanation: 'Vagal maneuvers (modified Valsalva) are first-line for stable SVT before adenosine.' },
+                linkedCases: ['palpitations']
+            },
+            'aflutter': {
+                id: 'aflutter', name: 'Atrial Flutter', category: 'arrhythmia', urgency: 'urgent',
+                findings: [
+                    { text: 'Sawtooth flutter waves (leads II, III, aVF)', abnormal: true },
+                    { text: 'Regular ventricular rate ~150 bpm (2:1 block)', abnormal: true },
+                    { text: 'Atrial rate ~300 bpm', abnormal: true },
+                    { text: 'Narrow QRS complexes', abnormal: false }
+                ],
+                interpretation: 'Typical atrial flutter with 2:1 conduction. Rate ~150 = think flutter.',
+                teachingPoints: [
+                    'Ventricular rate ~150 = always consider 2:1 flutter',
+                    'Sawtooth pattern best seen in II, III, aVF and V1',
+                    'Adenosine can unmask flutter waves (diagnostic)',
+                    'Anticoagulation rules same as AFib'
+                ],
+                quiz: { question: 'A regular rate of exactly 150 bpm should make you suspect what?', options: ['Sinus tachycardia', 'Atrial flutter with 2:1 block', 'SVT', 'VT'], correct: 1, explanation: 'A regular rate of exactly 150 should always raise suspicion for atrial flutter with 2:1 conduction (atrial rate 300/2).' },
+                linkedCases: ['palpitations']
+            },
+            'torsades': {
+                id: 'torsades', name: 'Torsades de Pointes', category: 'arrhythmia', urgency: 'critical',
+                findings: [
+                    { text: 'Polymorphic VT with "twisting" QRS axis', abnormal: true },
+                    { text: 'Preceding prolonged QT interval', abnormal: true },
+                    { text: 'Rate 150-300 bpm, irregular', abnormal: true },
+                    { text: 'May degenerate to ventricular fibrillation', abnormal: true }
+                ],
+                interpretation: 'Torsades de Pointes. IV magnesium is first-line treatment.',
+                teachingPoints: [
+                    'Polymorphic VT + long QT = Torsades',
+                    'IV Magnesium 2g is first-line (even with normal Mg)',
+                    'Avoid drugs that prolong QT (class IA/III antiarrhythmics)',
+                    'Isoproterenol or overdrive pacing for refractory cases'
+                ],
+                quiz: { question: 'First-line treatment for Torsades de Pointes?', options: ['IV Amiodarone', 'IV Magnesium', 'Defibrillation', 'IV Lidocaine'], correct: 1, explanation: 'IV Magnesium 2g is first-line for Torsades de Pointes, even with normal serum Mg levels.' },
+                linkedCases: ['syncope-arrhythmia']
+            },
+            'wpw': {
+                id: 'wpw', name: 'Wolff-Parkinson-White', category: 'conduction', urgency: 'evaluate',
+                findings: [
+                    { text: 'Short PR interval (<120ms)', abnormal: true },
+                    { text: 'Delta wave (slurred QRS upstroke)', abnormal: true },
+                    { text: 'Wide QRS (>120ms)', abnormal: true },
+                    { text: 'Secondary ST/T wave changes', abnormal: true }
+                ],
+                interpretation: 'WPW pattern. Accessory pathway present. Risk of pre-excited AFib.',
+                teachingPoints: [
+                    'Triad: Short PR + Delta wave + Wide QRS',
+                    'WPW + AFib = extremely dangerous (can degenerate to VFib)',
+                    'NEVER give AV nodal blockers (digoxin, verapamil, adenosine) in WPW + AFib',
+                    'Procainamide is drug of choice for pre-excited AFib'
+                ],
+                quiz: { question: 'Patient with WPW develops AFib with rapid rate. Which drug is CONTRAINDICATED?', options: ['Procainamide', 'Ibutilide', 'Verapamil', 'Flecainide'], correct: 2, explanation: 'AV nodal blockers (verapamil, diltiazem, digoxin, adenosine) are contraindicated in WPW+AFib as they can cause VFib.' },
+                linkedCases: ['palpitations']
+            },
+            'rbbb': {
+                id: 'rbbb', name: 'Right Bundle Branch Block', category: 'conduction', urgency: 'evaluate',
+                findings: [
+                    { text: 'QRS >120ms', abnormal: true },
+                    { text: "RSR' pattern in V1-V2 (\"M\" shape)", abnormal: true },
+                    { text: 'Wide S wave in I, aVL, V5-V6', abnormal: true },
+                    { text: 'Secondary T wave inversion in V1-V3', abnormal: true }
+                ],
+                interpretation: 'RBBB. Common finding. Check for underlying cause if new.',
+                teachingPoints: [
+                    "RSR' in V1 = \"MaRRoW\" (M in V1, W in V6)",
+                    'Can be normal variant or pathologic',
+                    'New RBBB: consider PE, MI, myocarditis',
+                    'RBBB does not interfere with STEMI diagnosis'
+                ],
+                quiz: { question: 'Which lead shows the classic RSR\' ("M-shaped") pattern in RBBB?', options: ['Lead I', 'Lead II', 'V1', 'V6'], correct: 2, explanation: "V1 shows the classic RSR' pattern in RBBB. Remember MaRRoW: M in V1, W in V6." },
+                linkedCases: ['pulmonary-embolism']
+            },
+            'avblock-1': {
+                id: 'avblock-1', name: '1st Degree AV Block', category: 'conduction', urgency: 'routine',
+                findings: [
+                    { text: 'PR interval >200ms (>1 large box)', abnormal: true },
+                    { text: 'Every P wave followed by QRS', abnormal: false },
+                    { text: 'Regular rhythm', abnormal: false },
+                    { text: 'Normal QRS duration', abnormal: false }
+                ],
+                interpretation: 'First degree AV block. Usually benign. Monitor if on nodal agents.',
+                teachingPoints: [
+                    'PR >200ms with 1:1 conduction',
+                    'Usually benign, especially in athletes',
+                    'Can be caused by beta-blockers, CCBs, digoxin',
+                    'No treatment needed if asymptomatic'
+                ],
+                quiz: { question: 'What defines 1st degree AV block?', options: ['Dropped QRS complexes', 'PR interval >200ms with 1:1 conduction', 'Progressive PR prolongation', 'Complete AV dissociation'], correct: 1, explanation: 'First degree AV block = PR >200ms with every P wave conducted (1:1). No dropped beats.' },
+                linkedCases: []
+            },
+            'avblock-2-1': {
+                id: 'avblock-2-1', name: '2nd Degree AV Block Type I (Wenckebach)', category: 'conduction', urgency: 'evaluate',
+                findings: [
+                    { text: 'Progressive PR prolongation', abnormal: true },
+                    { text: 'Dropped QRS after longest PR', abnormal: true },
+                    { text: 'Grouped beating pattern', abnormal: true },
+                    { text: 'Irregular rhythm', abnormal: true }
+                ],
+                interpretation: '2nd degree AV block Type I (Wenckebach). Usually benign at AV node level.',
+                teachingPoints: [
+                    'Progressive PR prolongation → dropped beat → cycle repeats',
+                    'Usually at AV node level (benign)',
+                    'Common in athletes and during sleep',
+                    'Generally does NOT require pacing'
+                ],
+                quiz: { question: 'What is the hallmark of Mobitz Type I (Wenckebach)?', options: ['Constant PR with dropped beats', 'Progressive PR prolongation with dropped beat', 'Complete AV dissociation', 'Irregular irregularity'], correct: 1, explanation: 'Wenckebach = progressive PR prolongation until a beat is dropped, then the cycle resets.' },
+                linkedCases: []
+            },
+            'avblock-3': {
+                id: 'avblock-3', name: '3rd Degree (Complete) AV Block', category: 'conduction', urgency: 'critical',
+                findings: [
+                    { text: 'Complete AV dissociation', abnormal: true },
+                    { text: 'P waves march through at own rate', abnormal: true },
+                    { text: 'Escape rhythm (junctional 40-60 or ventricular 20-40)', abnormal: true },
+                    { text: 'No relationship between P waves and QRS', abnormal: true }
+                ],
+                interpretation: 'Complete heart block. Pacemaker required. Transcutaneous pacing if unstable.',
+                teachingPoints: [
+                    'Atria and ventricles fire independently',
+                    'Escape rhythm determines QRS width',
+                    'Junctional escape = narrow QRS, rate 40-60',
+                    'Ventricular escape = wide QRS, rate 20-40'
+                ],
+                quiz: { question: 'Definitive treatment for symptomatic complete heart block?', options: ['Atropine', 'Temporary pacemaker only', 'Permanent pacemaker', 'Isoproterenol'], correct: 2, explanation: 'Complete heart block requires permanent pacemaker placement. Atropine/TCP are temporizing measures.' },
+                linkedCases: ['syncope-arrhythmia']
+            },
+            'brugada': {
+                id: 'brugada', name: 'Brugada Syndrome', category: 'other', urgency: 'critical',
+                findings: [
+                    { text: 'Coved ST elevation in V1-V2 (Type 1)', abnormal: true },
+                    { text: 'RBBB-like pattern', abnormal: true },
+                    { text: 'T wave inversion in V1-V2', abnormal: true },
+                    { text: 'Normal QTc', abnormal: false }
+                ],
+                interpretation: 'Brugada pattern (Type 1). High risk for VFib and sudden cardiac death.',
+                teachingPoints: [
+                    'Type 1 (coved) is diagnostic; Type 2 (saddleback) requires provocation',
+                    'Risk of VFib and sudden cardiac death',
+                    'ICD is only proven treatment',
+                    'Avoid fever, sodium channel blockers, Class I antiarrhythmics'
+                ],
+                quiz: { question: 'Brugada Type 1 pattern in V1-V2 with syncope. What treatment prevents sudden death?', options: ['Beta-blockers', 'Amiodarone', 'ICD implantation', 'Catheter ablation'], correct: 2, explanation: 'ICD is the only proven treatment for Brugada syndrome with high-risk features.' },
+                linkedCases: ['syncope-arrhythmia']
+            },
+            'pericarditis': {
+                id: 'pericarditis', name: 'Acute Pericarditis', category: 'ischemia', urgency: 'urgent',
+                findings: [
+                    { text: 'Diffuse ST elevation (concave up)', abnormal: true },
+                    { text: 'PR depression (especially in II)', abnormal: true },
+                    { text: 'PR elevation in aVR', abnormal: true },
+                    { text: 'No reciprocal ST changes', abnormal: true }
+                ],
+                interpretation: 'Acute pericarditis. Diffuse ST elevation without reciprocal changes.',
+                teachingPoints: [
+                    'Diffuse concave-up ST elevation = pericarditis',
+                    'PR depression is highly specific for pericarditis',
+                    'NO reciprocal changes (unlike STEMI)',
+                    'Treatment: NSAIDs + colchicine'
+                ],
+                quiz: { question: 'What distinguishes pericarditis ST elevation from STEMI?', options: ['Higher amplitude', 'Diffuse distribution without reciprocal changes', 'Peaked T waves', 'ST depression in aVR'], correct: 1, explanation: 'Pericarditis has diffuse ST elevation without reciprocal ST depression, unlike focal STEMI.' },
+                linkedCases: ['chest-pain']
+            },
+            'lvh': {
+                id: 'lvh', name: 'Left Ventricular Hypertrophy', category: 'hypertrophy', urgency: 'evaluate',
+                findings: [
+                    { text: 'Tall R waves in V5-V6 (>25mm)', abnormal: true },
+                    { text: 'Deep S waves in V1-V2', abnormal: true },
+                    { text: 'S(V1) + R(V5/V6) > 35mm (Sokolow-Lyon)', abnormal: true },
+                    { text: 'Left axis deviation', abnormal: true }
+                ],
+                interpretation: 'LVH by voltage criteria. Evaluate for hypertension, aortic stenosis.',
+                teachingPoints: [
+                    'Sokolow-Lyon: S(V1) + R(V5/V6) > 35mm',
+                    'Cornell: R(aVL) + S(V3) > 28mm (men) / 20mm (women)',
+                    'Strain pattern: ST depression + T inversion in lateral leads',
+                    'Common causes: HTN, aortic stenosis, HCM'
+                ],
+                quiz: { question: 'Sokolow-Lyon criteria for LVH is?', options: ['R(V5) > 25mm alone', 'S(V1) + R(V5/V6) > 35mm', 'R(aVL) > 11mm', 'QRS > 120ms'], correct: 1, explanation: 'Sokolow-Lyon: S wave in V1 + R wave in V5 or V6 > 35mm.' },
+                linkedCases: []
+            },
+            'longqt': {
+                id: 'longqt', name: 'Long QT Syndrome', category: 'other', urgency: 'urgent',
+                findings: [
+                    { text: 'QTc > 500ms', abnormal: true },
+                    { text: 'Abnormal T wave morphology', abnormal: true },
+                    { text: 'U waves may be present', abnormal: true },
+                    { text: 'Normal sinus rhythm otherwise', abnormal: false }
+                ],
+                interpretation: 'Prolonged QT. Risk of Torsades de Pointes. Review medications.',
+                teachingPoints: [
+                    'QTc > 500ms = high risk for Torsades',
+                    'Common drug culprits: antiarrhythmics, antibiotics (macrolides, fluoroquinolones), antipsychotics',
+                    'Correct electrolytes: Mg²⁺, K⁺, Ca²⁺',
+                    'Congenital forms: LQT1 (exercise), LQT2 (auditory), LQT3 (sleep)'
+                ],
+                quiz: { question: 'Which electrolyte abnormality most commonly prolongs QT?', options: ['Hyperkalemia', 'Hypomagnesemia', 'Hypernatremia', 'Hypercalcemia'], correct: 1, explanation: 'Hypomagnesemia and hypokalemia are common causes of QT prolongation. Always check and correct both.' },
+                linkedCases: ['syncope-arrhythmia']
             }
         },
         
@@ -589,6 +850,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             this.loadPattern(patternId);
             this.renderPatternLibrary();
             this.setupEventListeners();
+            const countEl = document.getElementById('patternCount');
+            if (countEl) countEl.textContent = Object.keys(this.patterns).length;
         },
         
         loadPattern(patternId) {
@@ -635,21 +898,92 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         },
         
         drawQRS(ctx, startX, baseline, width, pattern, lead) {
-            let stElev = 0;
-            if (pattern.id === 'stemi-anterior' && ['V1','V2','V3','V4'].includes(lead)) stElev = 15;
-            else if (pattern.id === 'stemi-anterior' && ['II','III','aVF'].includes(lead)) stElev = -8;
-            else if (pattern.id === 'stemi-inferior' && ['II','III','aVF'].includes(lead)) stElev = 15;
-            else if (pattern.id === 'stemi-inferior' && ['I','aVL'].includes(lead)) stElev = -8;
+            let stElev = 0, prLong = 0, qrsWide = 0, tPeaked = 0, deltaWave = false, irregular = false;
+            const pid = pattern.id;
+
+            // ST Elevation patterns
+            if (pid === 'stemi-anterior' && ['V1','V2','V3','V4'].includes(lead)) stElev = 15;
+            else if (pid === 'stemi-anterior' && ['II','III','aVF'].includes(lead)) stElev = -8;
+            else if (pid === 'stemi-inferior' && ['II','III','aVF'].includes(lead)) stElev = 15;
+            else if (pid === 'stemi-inferior' && ['I','aVL'].includes(lead)) stElev = -8;
+            else if (pid === 'pericarditis') stElev = 6; // Diffuse mild elevation
+            else if (pid === 'brugada' && ['V1','V2'].includes(lead)) stElev = 12;
             
+            // Wide QRS patterns
+            if (['lbbb', 'rbbb', 'wpw', 'vt', 'hyperkalemia'].includes(pid)) qrsWide = 1;
+            
+            // Peaked T waves
+            if (pid === 'hyperkalemia') tPeaked = 18;
+            else if (pid === 'longqt') tPeaked = -5; // Flattened/inverted
+            
+            // PR prolongation
+            if (pid === 'avblock-1' || pid === 'avblock-2-1') prLong = 1;
+            
+            // Delta wave (WPW)
+            if (pid === 'wpw') deltaWave = true;
+            
+            // Irregular spacing
+            if (['afib-rvr', 'torsades'].includes(pid)) irregular = true;
+            
+            // Adjust startX for irregular rhythms
+            if (irregular) startX += (Math.random() - 0.5) * width * 0.15;
+
+            // P wave (skip for AFib, flutter, VT)
             ctx.moveTo(startX, baseline);
-            ctx.quadraticCurveTo(startX + width*0.08, baseline-8, startX + width*0.15, baseline);
-            ctx.lineTo(startX + width*0.22, baseline);
-            ctx.lineTo(startX + width*0.25, baseline+5);
-            ctx.lineTo(startX + width*0.30, baseline-25);
-            ctx.lineTo(startX + width*0.35, baseline+10);
-            ctx.lineTo(startX + width*0.45, baseline-stElev);
-            ctx.quadraticCurveTo(startX + width*0.55, baseline-stElev-(pattern.category==='stemi'?20:12), startX + width*0.65, baseline-stElev*0.5);
-            ctx.lineTo(startX + width*0.85, baseline);
+            if (pid === 'afib-rvr') {
+                // Fibrillatory baseline
+                for (let x = 0; x < width * 0.2; x += 3) {
+                    ctx.lineTo(startX + x, baseline + (Math.random() - 0.5) * 4);
+                }
+            } else if (pid === 'aflutter') {
+                // Sawtooth flutter waves
+                for (let x = 0; x < width * 0.2; x += 8) {
+                    ctx.lineTo(startX + x + 4, baseline - 10);
+                    ctx.lineTo(startX + x + 8, baseline + 4);
+                }
+            } else if (pid === 'vt' || pid === 'torsades') {
+                ctx.lineTo(startX + width * 0.15, baseline);
+            } else {
+                // Normal P wave (adjusted for PR prolongation)
+                const pEnd = prLong ? width * 0.22 : width * 0.15;
+                ctx.quadraticCurveTo(startX + pEnd * 0.5, baseline - 8, startX + pEnd, baseline);
+                ctx.lineTo(startX + (prLong ? width * 0.28 : width * 0.22), baseline);
+            }
+
+            // Delta wave (WPW: slurred upstroke)
+            if (deltaWave) {
+                ctx.lineTo(startX + width * 0.24, baseline);
+                ctx.lineTo(startX + width * 0.30, baseline - 12); // Slurred delta
+                ctx.lineTo(startX + width * 0.33, baseline - 25);
+            } else {
+                // QRS complex
+                const qStart = prLong ? width * 0.28 : width * 0.22;
+                const qWidth = qrsWide ? 0.20 : 0.13;
+                ctx.lineTo(startX + qStart + width * 0.03, baseline + 5);
+                ctx.lineTo(startX + qStart + width * (qWidth * 0.4), baseline - 25 - (pid === 'lvh' && ['V5','V6'].includes(lead) ? 10 : 0));
+                ctx.lineTo(startX + qStart + width * qWidth, baseline + 10);
+            }
+
+            // ST segment
+            const stStart = qrsWide ? width * 0.45 : width * 0.38;
+            ctx.lineTo(startX + stStart, baseline - stElev);
+
+            // T wave
+            const tHeight = tPeaked !== 0 ? tPeaked : (pid === 'brugada' && ['V1','V2'].includes(lead) ? -12 : (pid === 'pericarditis' ? 8 : 12));
+            
+            if (pid === 'torsades') {
+                // Undulating "twisting" axis
+                const twist = Math.sin(startX * 0.05) * 15;
+                ctx.quadraticCurveTo(startX + width * 0.55, baseline - stElev - tHeight - twist, startX + width * 0.65, baseline);
+            } else if (pid === 'longqt') {
+                // Prolonged QT — T wave comes late
+                ctx.lineTo(startX + width * 0.55, baseline - stElev);
+                ctx.quadraticCurveTo(startX + width * 0.65, baseline - stElev - 10, startX + width * 0.78, baseline);
+            } else {
+                ctx.quadraticCurveTo(startX + width * 0.55, baseline - stElev - tHeight, startX + width * 0.65, baseline - stElev * 0.5);
+            }
+            
+            ctx.lineTo(startX + width * 0.85, baseline);
         },
         
         drawRhythmStrip(pattern) {
@@ -679,7 +1013,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <span>${f.text}</span>
                 </div>
             `).join('') + `
-                <div class="finding-item" style="background:#eff6ff;border-left-color:var(--primary);">
+                <div class="finding-item" style="background:#f0fdfa;border-left-color:var(--primary);">
                     <span class="finding-icon">📋</span>
                     <span><strong>Interpretation:</strong> ${pattern.interpretation}</span>
                 </div>
@@ -757,13 +1091,153 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // API for case integration
         getECGForCase(caseId) {
             const map = {
-                'chest-pain': ['stemi-anterior', 'stemi-inferior', 'lbbb', 'normal'],
-                'pulmonary-embolism': ['pe', 'normal'],
-                'syncope-arrhythmia': ['vt', 'afib-rvr'],
+                'chest-pain': ['stemi-anterior', 'stemi-inferior', 'lbbb', 'pericarditis', 'normal'],
+                'pulmonary-embolism': ['pe', 'rbbb', 'normal'],
+                'syncope-arrhythmia': ['vt', 'afib-rvr', 'avblock-3', 'brugada', 'longqt', 'torsades'],
                 'acute-kidney-injury': ['hyperkalemia'],
-                'palpitations': ['afib-rvr', 'vt', 'normal']
+                'palpitations': ['afib-rvr', 'aflutter', 'svt', 'vt', 'wpw', 'normal'],
+                'hypertension': ['lvh', 'normal'],
+                'heart-failure': ['lvh', 'lbbb', 'afib-rvr', 'normal']
             };
             return map[caseId] || ['normal'];
+        },
+
+        // ═══════════════════════════════════════════════
+        // QUIZ MODE
+        // ═══════════════════════════════════════════════
+        quizState: null,
+
+        startQuizMode() {
+            const allIds = Object.keys(this.patterns);
+            // Shuffle and pick 10
+            const shuffled = allIds.sort(() => Math.random() - 0.5).slice(0, Math.min(10, allIds.length));
+            this.quizState = { questions: shuffled, current: 0, correct: 0, total: shuffled.length, answers: [] };
+            document.getElementById('quizModeOverlay').style.display = 'block';
+            document.getElementById('qmResults').style.display = 'none';
+            this.loadQuizQuestion();
+        },
+
+        exitQuizMode() {
+            document.getElementById('quizModeOverlay').style.display = 'none';
+            this.quizState = null;
+        },
+
+        loadQuizQuestion() {
+            const qs = this.quizState;
+            if (qs.current >= qs.total) { this.showQuizResults(); return; }
+
+            const patternId = qs.questions[qs.current];
+            const pattern = this.patterns[patternId];
+            document.getElementById('qmProgress').textContent = (qs.current + 1) + ' of ' + qs.total;
+            document.getElementById('qmScore').textContent = 'Score: ' + qs.correct + '/' + qs.current;
+            document.getElementById('qmFeedback').style.display = 'none';
+
+            // Draw ECG in quiz area
+            const strip = document.getElementById('qmEcgStrip');
+            const leads = ['I','II','III','aVR','aVL','aVF','V1','V2','V3','V4','V5','V6'];
+            strip.innerHTML = leads.map(l => '<div style="text-align:center;"><div style="font-size:10px;color:#6b7280;margin-bottom:2px;">'+l+'</div><canvas id="qm-lead-'+l+'" width="180" height="70" style="border:1px solid #f1f5f9;border-radius:4px;"></canvas></div>').join('');
+            leads.forEach(l => {
+                const canvas = document.getElementById('qm-lead-' + l);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = '#1a1a1a'; ctx.lineWidth = 1.5; ctx.beginPath();
+                for (let c = 0; c < 3; c++) this.drawQRS(ctx, c * 60, 35, 60, pattern, l);
+                ctx.stroke();
+            });
+
+            // Rhythm strip
+            const rc = document.getElementById('qmRhythmCanvas');
+            rc.width = rc.offsetWidth || 800; rc.height = 80;
+            const rctx = rc.getContext('2d');
+            rctx.clearRect(0, 0, rc.width, rc.height);
+            rctx.strokeStyle = '#1a1a1a'; rctx.lineWidth = 1.5; rctx.beginPath();
+            for (let i = 0; i < Math.floor(rc.width/100); i++) this.drawQRS(rctx, i*100, 40, 100, pattern, 'II');
+            rctx.stroke();
+
+            // Generate 4 options: correct + 3 random wrong
+            const correctName = pattern.name;
+            const wrongNames = Object.values(this.patterns).filter(p => p.id !== patternId).sort(() => Math.random() - 0.5).slice(0, 3).map(p => p.name);
+            const options = [correctName, ...wrongNames].sort(() => Math.random() - 0.5);
+            const correctIdx = options.indexOf(correctName);
+
+            document.getElementById('qmQuestion').textContent = 'What is this ECG pattern?';
+            document.getElementById('qmOptions').innerHTML = options.map((opt, i) =>
+                '<button onclick="ECGViewer.answerQuiz(' + i + ',' + correctIdx + ')" style="text-align:left;padding:12px 16px;border:1px solid #e4e4e7;border-radius:10px;background:white;cursor:pointer;font-size:14px;transition:all 0.15s;" onmouseover="this.style.borderColor=\'#059669\'" onmouseout="this.style.borderColor=\'#e4e4e7\'">' +
+                    String.fromCharCode(65 + i) + '. ' + opt +
+                '</button>'
+            ).join('');
+
+            // Store for feedback
+            this.quizState._pattern = pattern;
+            this.quizState._correctIdx = correctIdx;
+        },
+
+        answerQuiz(selected, correct) {
+            const isCorrect = selected === correct;
+            if (isCorrect) this.quizState.correct++;
+            this.quizState.answers.push({ pattern: this.quizState._pattern.id, correct: isCorrect });
+
+            // Highlight options
+            const btns = document.getElementById('qmOptions').querySelectorAll('button');
+            btns.forEach((b, i) => {
+                b.disabled = true;
+                b.style.cursor = 'default';
+                if (i === correct) { b.style.background = '#dcfce7'; b.style.borderColor = '#22c55e'; b.style.fontWeight = '600'; }
+                else if (i === selected && !isCorrect) { b.style.background = '#fee2e2'; b.style.borderColor = '#ef4444'; }
+            });
+
+            // Show feedback
+            const pattern = this.quizState._pattern;
+            document.getElementById('qmFeedback').style.display = 'block';
+            document.getElementById('qmFeedbackContent').innerHTML =
+                '<div style="font-weight:600;font-size:15px;color:' + (isCorrect ? '#166534' : '#991b1b') + ';margin-bottom:8px;">' +
+                (isCorrect ? '✅ Correct!' : '❌ Incorrect — ' + pattern.name) + '</div>' +
+                '<p style="font-size:14px;color:#374151;margin-bottom:8px;">' + pattern.interpretation + '</p>' +
+                '<div style="font-size:13px;color:#6b7280;">' + pattern.teachingPoints.map(tp => '• ' + tp).join('<br>') + '</div>';
+
+            document.getElementById('qmScore').textContent = 'Score: ' + this.quizState.correct + '/' + (this.quizState.current + 1);
+
+            // If last question, change button text
+            if (this.quizState.current >= this.quizState.total - 1) {
+                document.getElementById('qmNextBtn').textContent = 'See Results →';
+            }
+        },
+
+        nextQuizQuestion() {
+            this.quizState.current++;
+            if (this.quizState.current >= this.quizState.total) {
+                this.showQuizResults();
+            } else {
+                this.loadQuizQuestion();
+            }
+        },
+
+        showQuizResults() {
+            document.getElementById('qmFeedback').style.display = 'none';
+            document.getElementById('qmOptions').innerHTML = '';
+            document.getElementById('qmQuestion').textContent = '';
+            document.getElementById('qmEcgStrip').innerHTML = '';
+            document.getElementById('qmResults').style.display = 'block';
+
+            const qs = this.quizState;
+            const pct = Math.round((qs.correct / qs.total) * 100);
+            document.getElementById('qmFinalScore').textContent = pct + '%';
+            document.getElementById('qmFinalDetail').textContent = qs.correct + ' of ' + qs.total + ' correct';
+
+            // Save to DxStorage if available
+            this.saveQuizScore(qs.correct, qs.total, pct);
+        },
+
+        saveQuizScore(correct, total, pct) {
+            if (typeof DxStorage === 'undefined') return;
+            try {
+                const history = DxStorage.load('ecg', 'quiz-history') || [];
+                history.push({ date: new Date().toISOString(), correct: correct, total: total, pct: pct });
+                // Keep last 50 attempts
+                if (history.length > 50) history.splice(0, history.length - 50);
+                DxStorage.save('ecg', 'quiz-history', history);
+            } catch(e) { /* storage not available */ }
         }
     };
     
@@ -887,8 +1361,10 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
          data-objectives="Apply clinical knowledge, improve patient outcomes"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
+<script src="dx-storage.js"></script>
 <script src="../dx-progress.js"></script>
 <script src="dx-tools-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-tools-nav.js"></script>
 </body>
 </html>

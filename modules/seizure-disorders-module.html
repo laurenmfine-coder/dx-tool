@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seizure Disorders & Epilepsy | MechanismDx</title>
+    <script src="../dx-scoring.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 40px 24px; text-align: center; color: #fff; }
+        .hero-inner { max-width: 900px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 12px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero p { font-size: 16px; opacity: 0.85; }
+        .hero-meta { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 14px; opacity: 0.75; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 32px; }
+        .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; width: 0%; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .concept-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .concept-card h3 { margin: 0 0 12px; font-size: 16px; }
+        .concept-card ul { margin-left: 20px; }
+        .concept-card li { margin-bottom: 8px; color: var(--text-secondary); }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+        .comparison-table th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; }
+        .comparison-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .comparison-table tr:hover { background: var(--border-light); }
+        .danger-box { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .danger-box h4 { color: #b91c1c; margin-bottom: 8px; }
+        .danger-box p { color: #991b1b; margin: 0; }
+        .quiz-section { background: var(--bg-card); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .quiz-section h3 { color: var(--primary-dark); margin-bottom: 16px; }
+        .quiz-question { margin-bottom: 24px; }
+        .quiz-question p { font-weight: 500; margin-bottom: 12px; }
+        .quiz-options { display: grid; gap: 8px; }
+        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
+        .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
+        .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.7; }
+        .quiz-feedback { margin-top: 8px; padding: 12px; border-radius: 8px; font-size: 13px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        @media (max-width: 640px) { .section { padding: 20px; } .hero h1 { font-size: 24px; } }
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
+</head>
+<body>
+
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">⚡</div>
+            <h1>Seizure Disorders & Epilepsy</h1>
+            <p>Seizure classification, status epilepticus management, AED selection, and first seizure evaluation.</p>
+            <div class="hero-meta">
+                <span>📚 2 Sections</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~30 min</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+        <section class="section">
+            <h2 class="section-title">📊 Classification & First Seizure</h2>
+            <div class="concept-card">
+                <h3>ILAE Seizure Classification (2017)</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Category</th><th>Types</th><th>Key Features</th></tr></thead>
+                    <tbody>
+                        <tr><td>Focal (partial)</td><td>Aware (simple) vs impaired awareness (complex)</td><td>Starts in one hemisphere. Aware = consciousness preserved. Impaired awareness = altered consciousness, automatisms. Can be motor or non-motor.</td></tr>
+                        <tr><td>Focal to bilateral tonic-clonic</td><td>Previously 'secondary generalized'</td><td>Starts focal → spreads to bilateral convulsive. Witness may only see GTC.</td></tr>
+                        <tr><td>Generalized</td><td>Absence, tonic-clonic, myoclonic, atonic, tonic, clonic</td><td>Both hemispheres from onset. Absence = staring + abrupt onset/offset, 3 Hz spike-wave on EEG.</td></tr>
+                        <tr><td>Unknown onset</td><td>When beginning is not witnessed</td><td>Classify when possible after further information/testing</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="concept-card">
+                <h3>First Seizure Evaluation</h3>
+                <ul>
+                    <li><strong>History:</strong> Witnesses, preceding events, aura, semiology, duration, post-ictal state, tongue biting, incontinence</li>
+                    <li><strong>Exam:</strong> Focal deficits (Todd paralysis), signs of head trauma, meningismus, papilledema</li>
+                    <li><strong>Labs:</strong> BMP (glucose, Na, Ca, Mg), CBC, toxicology screen, pregnancy test, prolactin (elevated 10-20 min post-GTC)</li>
+                    <li><strong>Imaging:</strong> MRI brain preferred (CT acutely if MRI unavailable or emergent)</li>
+                    <li><strong>EEG:</strong> Within 24-48 hours ideally. Epileptiform discharges increase recurrence risk.</li>
+                    <li><strong>When to treat after first seizure:</strong> If abnormal EEG, structural lesion, focal seizure, or family history of epilepsy → higher recurrence (~60-70%), favor starting AED.</li>
+                </ul>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="sz1">
+                <p>A patient has episodes of staring for 10-15 seconds with lip smacking and fumbling hand movements, followed by confusion for several minutes. What seizure type is this?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('sz1', this, false)">Absence seizure</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz1', this, true)">Focal seizure with impaired awareness</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz1', this, false)">Generalized tonic-clonic seizure</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz1', this, false)">Psychogenic nonepileptic seizure</div>
+                </div>
+                <div class="quiz-feedback" id="sz1-feedback"></div>
+            </div>
+            <div class="quiz-question" id="sz2">
+                <p>A child has episodes of brief staring (5-10 seconds) dozens of times per day, with immediate return to activity. EEG shows 3 Hz generalized spike-and-wave. Which AED can WORSEN this seizure type?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('sz2', this, false)">Ethosuximide</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz2', this, true)">Carbamazepine</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz2', this, false)">Valproate</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz2', this, false)">Lamotrigine</div>
+                </div>
+                <div class="quiz-feedback" id="sz2-feedback"></div>
+            </div>
+        </div>
+        <section class="section">
+            <h2 class="section-title">🚨 Status Epilepticus</h2>
+            <div class="concept-card">
+                <h3>Definition & Timeline</h3>
+                <ul>
+                    <li><strong>Definition:</strong> Seizure lasting >5 minutes OR ≥2 seizures without return to baseline between them</li>
+                    <li><strong>Refractory:</strong> Continues despite two appropriate AEDs (usually after benzodiazepine + second-line agent)</li>
+                    <li><strong>Super-refractory:</strong> Continues ≥24 hours despite anesthetic agents</li>
+                    <li><strong>Mortality:</strong> 20-30% if untreated. Neuronal injury begins after ~30 minutes of continuous seizure activity.</li>
+                </ul>
+            </div>
+            <div class="concept-card">
+                <h3>Stepwise Management Protocol</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Time</th><th>Stage</th><th>Treatment</th></tr></thead>
+                    <tbody>
+                        <tr><td>0-5 min</td><td>Stabilize</td><td>ABCs, O2, IV access, fingerstick glucose. Give thiamine + dextrose if hypoglycemic.</td></tr>
+                        <tr><td>5-20 min</td><td>First-line: Benzodiazepine</td><td>IV lorazepam 0.1 mg/kg (max 4 mg, repeat once) OR IM midazolam 10 mg (if no IV). Can also use rectal diazepam.</td></tr>
+                        <tr><td>20-40 min</td><td>Second-line: AED load</td><td>IV fosphenytoin 20 mg PE/kg OR IV levetiracetam 60 mg/kg OR IV valproate 40 mg/kg. Choose ONE.</td></tr>
+                        <tr><td>40-60 min</td><td>Refractory → RSI + anesthetic</td><td>Intubate. Propofol or midazolam drip. Continuous EEG monitoring. ICU admission.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="danger-box">
+                <h4>⚠️ Do NOT Wait</h4>
+                <p>Every minute of status epilepticus increases morbidity and resistance to treatment. Give benzodiazepines at 5 minutes — do not wait for IV access if unavailable (use IM midazolam, rectal diazepam, or intranasal midazolam). The RAMPART trial showed IM midazolam is noninferior to IV lorazepam.</p>
+            </div>
+            <div class="concept-card">
+                <h3>AED Selection for Epilepsy</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Seizure Type</th><th>First-Line AEDs</th><th>Important Notes</th></tr></thead>
+                    <tbody>
+                        <tr><td>Focal ± bilateral</td><td>Lamotrigine, levetiracetam, carbamazepine, oxcarbazepine</td><td>Most have focal seizures. Carbamazepine can worsen absence/myoclonic.</td></tr>
+                        <tr><td>Generalized tonic-clonic</td><td>Lamotrigine, levetiracetam, valproate</td><td>Valproate most effective but teratogenic — avoid in women of childbearing age.</td></tr>
+                        <tr><td>Absence</td><td>Ethosuximide (#1), valproate, lamotrigine</td><td>Ethosuximide ONLY works for absence. Carbamazepine/phenytoin WORSEN absence.</td></tr>
+                        <tr><td>Juvenile myoclonic epilepsy</td><td>Valproate, levetiracetam, lamotrigine</td><td>Lifelong treatment usually required. Carbamazepine/phenytoin WORSEN JME.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="sz3">
+                <p>A patient has been seizing continuously for 8 minutes. IV access has not been established. What is the BEST next step?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('sz3', this, false)">Continue attempting IV access for lorazepam</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz3', this, true)">IM midazolam 10 mg</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz3', this, false)">Oral levetiracetam loading dose</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz3', this, false)">Rectal valproate</div>
+                </div>
+                <div class="quiz-feedback" id="sz3-feedback"></div>
+            </div>
+            <div class="quiz-question" id="sz4">
+                <p>A patient with status epilepticus received lorazepam 4 mg IV twice and is still seizing at 25 minutes. What is the next step?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('sz4', this, false)">Give a third dose of lorazepam</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz4', this, true)">IV fosphenytoin 20 mg PE/kg (or levetiracetam or valproate)</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz4', this, false)">Intubate and start propofol immediately</div>
+                    <div class="quiz-option" onclick="checkAnswer('sz4', this, false)">CT head before further treatment</div>
+                </div>
+                <div class="quiz-feedback" id="sz4-feedback"></div>
+            </div>
+        </div>
+
+        <div class="concept-card" style="background: linear-gradient(135deg, #fefce8, #fef08a); border-color: #facc15; text-align: center; padding: 32px;">
+            <h3 style="color: #a16207; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #ca8a04;" id="scoreDisplay">Score: 0/0 correct (4 remaining)</p>
+        </div>
+
+        <section style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 2px solid #a855f7; margin: 40px auto; max-width: 900px; padding: 30px; border-radius: 16px;">
+            <h2 style="color: #7c3aed; margin-bottom: 20px;">📚 Open-Access References</h2>
+            <div style="font-size: 14px;">
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>1. ILAE 2017 Seizure Classification</strong><br>
+                    Fisher RS, et al. Operational classification of seizure types by the ILAE. Epilepsia. 2017;58(4):522-530.<br>
+                    PMID: 28276062
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>2. RAMPART Trial</strong><br>
+                    Silbergleit R, et al. IM vs IV midazolam for prehospital status epilepticus. NEJM. 2012;366(7):591-600.<br>
+                    PMID: 22335736 | <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3307101/" target="_blank" style="color: #7c3aed;">Free Full Text</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+        const totalQuestions = 4;
+        const feedbackText = {
+            sz1: { correct: "Correct! Staring + automatisms (lip smacking, fumbling) + post-ictal confusion = focal seizure with impaired awareness (formerly complex partial). Absence seizures are shorter (seconds), have abrupt onset/offset, no automatisms, and NO post-ictal confusion.", incorrect: "Automatisms + prolonged post-ictal confusion = focal with impaired awareness. Absence seizures have no post-ictal confusion and stop/start abruptly." },
+            sz2: { correct: "Correct! Carbamazepine and phenytoin WORSEN absence seizures. First-line for childhood absence: ethosuximide. Alternative: valproate or lamotrigine. Always match AED to seizure type.", incorrect: "Carbamazepine worsens absence seizures. First-line: ethosuximide. This is a classic board question." },
+            sz3: { correct: "Correct! RAMPART trial: IM midazolam is noninferior to IV lorazepam and eliminates IV access delay. At 5+ minutes of continuous seizure, give benzodiazepine by any available route (IM, intranasal, rectal) immediately.", incorrect: "Don't delay treatment for IV access. IM midazolam is evidence-based (RAMPART trial) and should be given immediately." },
+            sz4: { correct: "Correct! After failed first-line benzodiazepine, move to second-line AED loading: fosphenytoin, levetiracetam, or valproate IV. Do not repeat benzodiazepines beyond 2 doses — respiratory depression risk with diminishing seizure efficacy.", incorrect: "After 2 doses of benzodiazepine, escalate to second-line agent: fosphenytoin, levetiracetam, or valproate IV loading dose." }
+        };
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => { opt.classList.add('disabled'); if (opt === element) opt.classList.add(isCorrect ? 'correct' : 'incorrect'); });
+            if (!isCorrect) options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) { correctAnswers++; if (typeof DxScoring !== 'undefined') DxScoring.addXP(25, 'MECH'); }
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / totalQuestions) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = 'Score: ' + correctAnswers + '/' + answeredQuestions.size + ' correct (' + (totalQuestions - answeredQuestions.size) + ' remaining)';
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div><div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div></div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div><div class="dx-theme-name">Deeper Teal</div></div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div><div class="dx-theme-name">Steel Blue</div></div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div><div class="dx-theme-name">Muted Sage</div></div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    function setDxTheme(theme) { document.body.setAttribute('data-theme', theme); localStorage.setItem('dx-theme', theme); updateThemeOptions(); closeDxThemeModal(); }
+    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
+    function openDxThemeModal() { document.getElementById('dxThemeModal')?.classList.add('open'); }
+    function closeDxThemeModal() { document.getElementById('dxThemeModal')?.classList.remove('open'); }
+    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
+    </script>
+    <div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body">
+<div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">A 25-year-old presents with a witnessed episode of rhythmic jerking of all extremities lasting 90 seconds with post-ictal confusion. What type of seizure is this?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Focal aware seizures preserve consciousness and are typically limited to one body region." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Focal aware seizure</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Bilateral rhythmic jerking (clonic phase) with loss of consciousness and post-ictal confusion is classic for a generalized tonic-clonic (GTC) seizure." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Generalized tonic-clonic seizure</div></div></div><div class="choice" data-fb="Absence seizures feature brief staring spells (seconds) without post-ictal confusion, typically in children." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Absence seizure</div></div></div><div class="choice" data-fb="While possible, the classic presentation of rhythmic jerking with post-ictal confusion is most consistent with a true GTC seizure." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Psychogenic non-epileptic event</div></div></div></div><div id="mcqFb0" class="hidden" style="margin-top:12px"><div id="mcqFbText0" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">Which EEG pattern is pathognomonic for absence seizures?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Focal sharp waves suggest focal epilepsy, not absence seizures." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Focal sharp waves</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Generalized 3 Hz spike-and-wave is the hallmark EEG finding in childhood absence epilepsy. It is provoked by hyperventilation." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">3 Hz spike-and-wave discharges</div></div></div><div class="choice" data-fb="PLEDs are associated with acute structural lesions or herpes encephalitis, not absence epilepsy." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Periodic lateralized epileptiform discharges</div></div></div><div class="choice" data-fb="Burst suppression indicates severe diffuse cerebral dysfunction, often in coma or deep anesthesia." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Burst suppression</div></div></div></div><div id="mcqFb1" class="hidden" style="margin-top:12px"><div id="mcqFbText1" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">A patient with epilepsy on valproate is found to have elevated liver enzymes and thrombocytopenia. Which is the most appropriate next step?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Hepatotoxicity and thrombocytopenia are serious valproate side effects requiring intervention, not just monitoring." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">Continue valproate and monitor</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Valproate can cause dose-dependent hepatotoxicity and thrombocytopenia. Check the level, and if supratherapeutic or symptomatic, transition to an alternative AED." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">Check valproate level and consider switching medication</div></div></div><div class="choice" data-fb="Adding another AED is inappropriate when the current one is causing toxicity. Carbamazepine also has hepatic side effects." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">Add carbamazepine</div></div></div><div class="choice" data-fb="Liver biopsy is premature. The clinical picture of valproate-induced hepatotoxicity warrants level check and medication change first." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Obtain liver biopsy</div></div></div></div><div id="mcqFb2" class="hidden" style="margin-top:12px"><div id="mcqFbText2" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">Which antiepileptic drug is most appropriate for a woman of childbearing age with focal epilepsy?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Valproate is the MOST teratogenic AED (neural tube defects, cognitive effects). It should be avoided in women of childbearing age when possible." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">Valproate</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Lamotrigine has the best safety profile in pregnancy among AEDs. It is effective for focal seizures and has a relatively low teratogenic risk." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Lamotrigine</div></div></div><div class="choice" data-fb="Phenytoin has significant teratogenic risks (fetal hydantoin syndrome) and complex pharmacokinetics." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">Phenytoin</div></div></div><div class="choice" data-fb="Topiramate is associated with cleft lip/palate and is rated higher risk in pregnancy than lamotrigine." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">Topiramate</div></div></div></div><div id="mcqFb3" class="hidden" style="margin-top:12px"><div id="mcqFbText3" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">A first-time seizure in a 30-year-old with normal neuroimaging and EEG. What is the recommended management?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="After a single unprovoked seizure with normal workup, AED therapy is not mandatory. Recurrence risk is ~30-40% without treatment." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Start an antiepileptic drug immediately</div></div></div><div class="choice" data-correct="true" data-fb="Correct! After a single unprovoked seizure with normal MRI and EEG, observation is appropriate. Seizure precautions (driving restrictions, water safety) are advised. AED therapy is started after a second unprovoked seizure or if high-risk features exist." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">Observation with seizure precautions; AED if recurrence</div></div></div><div class="choice" data-fb="Surgical evaluation is for drug-resistant epilepsy, not a first-time seizure." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">Surgical evaluation</div></div></div><div class="choice" data-fb="While follow-up is reasonable, a 6-month delay without seizure precautions is not the standard of care." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">Repeat EEG in 6 months before any decision</div></div></div></div><div id="mcqFb4" class="hidden" style="margin-top:12px"><div id="mcqFbText4" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">Which seizure type is most commonly associated with temporal lobe epilepsy?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Absence seizures are a generalized seizure type, not associated with temporal lobe epilepsy." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">Absence seizures</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Temporal lobe epilepsy classically presents with focal seizures with impaired awareness, often preceded by an aura (déjà vu, epigastric rising sensation, olfactory hallucinations) and accompanied by automatisms." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Focal seizure with impaired awareness (complex partial)</div></div></div><div class="choice" data-fb="Myoclonic seizures are brief, shock-like jerks associated with generalized epilepsy syndromes like JME." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">Myoclonic seizures</div></div></div><div class="choice" data-fb="Tonic seizures are associated with Lennox-Gastaut syndrome, not temporal lobe epilepsy." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Tonic seizures</div></div></div></div><div id="mcqFb5" class="hidden" style="margin-top:12px"><div id="mcqFbText5" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">Phenytoin exhibits which type of pharmacokinetics that makes dosing particularly challenging?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Most drugs follow first-order kinetics. Phenytoin is unique in following zero-order kinetics at therapeutic levels." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">First-order kinetics</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Phenytoin follows zero-order kinetics at therapeutic levels — small dose increases can cause disproportionately large increases in serum levels, risking toxicity (nystagmus, ataxia, cardiac arrhythmias)." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Zero-order (saturation) kinetics</div></div></div><div class="choice" data-fb="Linear kinetics would make dosing predictable. Phenytoin is famously non-linear." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Linear kinetics</div></div></div><div class="choice" data-fb="Phenytoin has dose-DEPENDENT clearance, which is why it follows saturation kinetics." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Dose-independent clearance</div></div></div></div><div id="mcqFb6" class="hidden" style="margin-top:12px"><div id="mcqFbText6" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">What defines status epilepticus requiring emergent treatment?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="While prolonged seizures are concerning, the current definition of status epilepticus uses a 5-minute threshold for GTC seizures." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Any seizure lasting more than 30 seconds</div></div></div><div class="choice" data-correct="true" data-fb="Correct! The operational definition of GTC status epilepticus is continuous seizure ≥5 minutes (or ≥2 seizures without return to baseline). This threshold triggers benzodiazepine treatment because spontaneous termination becomes unlikely." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Continuous seizure activity ≥5 minutes or ≥2 seizures without return to baseline</div></div></div><div class="choice" data-fb="Multiple seizures in 24 hours (seizure cluster) is concerning but not the definition of status epilepticus." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">Three or more seizures in 24 hours</div></div></div><div class="choice" data-fb="Breakthrough seizures on AEDs do not constitute status epilepticus unless they meet the duration criteria." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Any seizure in a patient already on AEDs</div></div></div></div><div id="mcqFb7" class="hidden" style="margin-top:12px"><div id="mcqFbText7" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+</div></div>
+
+<script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <div data-dx-tutor data-module-title="Seizure Disorders & Epilepsy" data-key-points="Focal vs generalized, status epilepticus, AED selection, first seizure workup, driving restrictions, SUDEP" style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="status-epilepticus-module.html" class="cross-link"><div class="cross-link-title">📘 Status Epilepticus</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="stroke-module.html" class="cross-link"><div class="cross-link-title">📘 Stroke</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="nms-module.html" class="cross-link"><div class="cross-link-title">📘 Neuroleptic Malignant Syndrome</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="myasthenic-crisis-module.html" class="cross-link"><div class="cross-link-title">📘 Myasthenic Crisis</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="gbs-module.html" class="cross-link"><div class="cross-link-title">📘 Guillain-Barré Syndrome</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="myasthenia-gravis-module.html" class="cross-link"><div class="cross-link-title">📘 Myasthenia Gravis</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a><a href="../deep-dive-player.html?module=seizure-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/bipolar-disorder-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body>
+</html>

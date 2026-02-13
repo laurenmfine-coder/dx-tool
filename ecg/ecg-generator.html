@@ -14,7 +14,7 @@
 :root {
     --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
     --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
-    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -23,7 +23,7 @@
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
@@ -65,7 +65,7 @@ body { transition: background 0.3s, color 0.3s; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family:'Inter',sans-serif;
             background: var(--bg);
             min-height: 100vh;
             color: var(--text);
@@ -248,7 +248,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .btn-outline:hover {
-            background: #EEF2FF;
+            background: #f0fdfa;
         }
         
         /* ECG Display */
@@ -316,10 +316,10 @@ body { transition: background 0.3s, color 0.3s; }
         
         .diagnosis-badge.emergent { background: #FEE2E2; color: #991B1B; }
         .diagnosis-badge.urgent { background: #FEF3C7; color: #92400E; }
-        .diagnosis-badge.moderate { background: var(--primary-bg); color: #1E40AF; }
+        .diagnosis-badge.moderate { background: var(--primary-bg); color: #115e59; }
         .diagnosis-badge.low { background: #D1FAE5; color: #065F46; }
         .diagnosis-badge.none { background: #F3F4F6; color: #374151; }
-        .diagnosis-badge.evaluate { background: #E0E7FF; color: #3730A3; }
+        .diagnosis-badge.evaluate { background: #ccfbf1; color: #3730A3; }
         
         .ecg-interpretation {
             font-size: 1rem;
@@ -559,7 +559,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
 
     </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
 </head>
 <body>
 
@@ -575,15 +575,24 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <nav class="dx-nav">
         <div class="dx-nav-inner">
             <a href="../index.html" class="dx-nav-brand">
-                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
             </a>
             <div class="dx-nav-links">
-                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
                 <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -1473,16 +1482,16 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     });
     </script>
 
-    <script src="dx-case-nav.js"></script>
+    <script src="../js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "../training.html", parentName: "Training" }); });</script>
 
-    <!-- ReasonDx AI Tutor Integration -->
+    <!-- DxSuite AI Tutor Integration -->
     <div data-dx-tutor
          data-module-title="ECG Generator"
          data-key-points="🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../data/rdx-persist.js"></script>
 </body>
 </html>

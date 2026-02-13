@@ -1,150 +1,36 @@
-/**
- * ReasonDx Accessibility Stylesheet
- * Addresses: A-2 (focus outlines), A-3 (touch targets), base ARIA support
- * Include on all pages: <link href="css/rdx-a11y.css" rel="stylesheet">
- */
-
-/* ============================================
-   A-2: FOCUS INDICATORS
-   Restore visible focus for keyboard navigation.
-   Uses :focus-visible so mouse users aren't affected.
-   ============================================ */
-
-/* Global focus-visible ring for all interactive elements */
+/* rdx-a11y.css — Accessibility enhancements for ReasonDx */
+/* Focus indicators */
 *:focus-visible {
-    outline: 2px solid #3b82f6 !important;
-    outline-offset: 2px !important;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25) !important;
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
-
-/* Dark mode focus ring */
-body.dark-mode *:focus-visible,
-.dark *:focus-visible,
-[data-theme="dark"] *:focus-visible {
-    outline-color: #60a5fa !important;
-    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.3) !important;
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
 }
-
-/* Input/textarea: keep border change AND add ring */
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-    outline: 2px solid #3b82f6 !important;
-    outline-offset: -1px !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+/* Skip nav link */
+.skip-link {
+  position: absolute; top: -40px; left: 0; z-index: 10000;
+  background: #0d9488; color: #fff; padding: 8px 16px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
 }
-
-/* Buttons: slightly rounded ring */
-button:focus-visible,
-[role="button"]:focus-visible,
-.btn:focus-visible {
-    outline: 2px solid #3b82f6 !important;
-    outline-offset: 2px !important;
-    border-radius: inherit;
-}
-
-/* Skip link for keyboard users */
-.rdx-skip-link {
-    position: absolute;
-    top: -100%;
-    left: 16px;
-    z-index: 10000;
-    padding: 12px 24px;
-    background: #1e3a5f;
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 0 0 8px 8px;
-    text-decoration: none;
-    transition: top 0.2s;
-}
-
-.rdx-skip-link:focus {
-    top: 0;
-}
-
-/* ============================================
-   A-3: TOUCH TARGETS
-   Ensure minimum 44×44px touch targets per
-   WCAG 2.2 SC 2.5.8 and Apple/Material Design.
-   ============================================ */
-
-/* Theme toggle buttons and small icon buttons */
-.theme-toggle,
-.theme-switcher button,
-.sound-toggle,
-[class*="toggle-btn"],
-[class*="icon-btn"] {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-/* Nav tab items */
-.nav-tab,
-.tab-btn,
-[role="tab"] {
-    min-height: 44px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-/* Small close/dismiss buttons */
-.close-btn,
-[aria-label="Close"],
-[aria-label="Dismiss"] {
-    min-width: 44px !important;
-    min-height: 44px !important;
-}
-
-/* Checkbox and radio label wrappers */
-label:has(input[type="checkbox"]),
-label:has(input[type="radio"]) {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 0;
-}
-
-/* ============================================
-   A-4: REDUCED MOTION
-   Respect user's motion preferences.
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* ============================================
-   SCREEN READER UTILITIES
-   ============================================ */
+.skip-link:focus { top: 0; }
+/* Screen reader only */
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); border: 0;
 }
-
-.sr-only-focusable:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: inherit;
-    margin: inherit;
-    overflow: visible;
-    clip: auto;
-    white-space: inherit;
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .adventure-container { border: 2px solid currentColor; }
+  button, .btn { border: 2px solid currentColor; }
 }

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Bronchiolitis - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #155e75 0%, #22d3ee 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #a5f3fc; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #cffafe; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #22d3ee; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(34,211,238,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #cffafe; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(34,211,238,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #22d3ee, #155e75); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #22d3ee, #a5f3fc); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #a5f3fc; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #5eead4; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://publications.aap.org/pediatrics/article/134/5/e1474/32983/Clinical-Practice-Guideline-The-Diagnosis" target="_blank" rel="noopener">Bronchiolitis - AAP (AAP)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK519506/" target="_blank" rel="noopener">Bronchiolitis - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Wheezing Infant",content:'<div class="narrative"><p>A <span class="highlight">6-month-old infant</span> presents in January with <span class="critical">cough, wheezing, and difficulty feeding</span> for 2 days. Started with rhinorrhea and low-grade fever. Born at term, no prior wheezing episodes.</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 38.1°C, HR 150, RR 55, SpO2 93%<br><strong>Exam:</strong> Nasal flaring, subcostal retractions, diffuse wheezes and crackles</p></div>',question:{prompt:"What is the MOST common cause of bronchiolitis?",options:[{text:"Influenza virus",correct:false},{text:"Respiratory Syncytial Virus (RSV)",correct:true},{text:"Streptococcus pneumoniae",correct:false},{text:"Parainfluenza virus",correct:false}],explanation:{correct:"Correct! RSV causes 50-80% of bronchiolitis cases. Peak season is winter (November-March in Northern Hemisphere). Other causes: rhinovirus, parainfluenza, human metapneumovirus, adenovirus.",incorrect:"RSV is the #1 cause (50-80%). Peak in winter months. Bronchiolitis is viral, not bacterial."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Bronchiolitis Basics</div><div class="pathway">DEFINITION:\nLower respiratory infection in infants\nwith small airway inflammation/obstruction\n\nAGE: <2 years (peak 2-6 months)\n\nCAUSES:\n• RSV: 50-80% (most common)\n• Rhinovirus\n• Parainfluenza\n• Human metapneumovirus\n• Adenovirus\n\nSEASON: Winter (Nov-Mar in N. hemisphere)</div></div>',why_chain:[],points:10}},
+        {title:"Clinical Diagnosis",content:'<div class="narrative"><p>Bronchiolitis is a CLINICAL diagnosis. What findings support it?</p></div>',question:{prompt:"What is the typical clinical course of bronchiolitis?",options:[{text:"Sudden onset of high fever and toxic appearance",correct:false},{text:"URI prodrome followed by cough, wheezing, and respiratory distress",correct:true},{text:"Chronic cough for weeks without URI symptoms",correct:false},{text:"Stridor and barking cough",correct:false}],explanation:{correct:"Correct! Classic course: URI prodrome (rhinorrhea, cough, low fever) for 2-3 days → lower respiratory symptoms (wheezing, tachypnea, retractions). Peak severity days 3-5. Usually resolves in 1-2 weeks.",incorrect:"URI prodrome → wheezing/respiratory distress. Peak day 3-5. Resolves 1-2 weeks. Stridor = croup, not bronchiolitis."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Clinical Features</div><div class="pathway">TYPICAL COURSE:\nDay 1-3: URI prodrome\n  (rhinorrhea, cough, low fever)\nDay 3-5: Peak illness\n  (wheezing, tachypnea, poor feeding)\nDay 7-14: Gradual resolution\n\nEXAM FINDINGS:\n• Tachypnea\n• Nasal flaring, retractions\n• Wheezing and/or crackles\n• Prolonged expiratory phase\n• Hypoxia (if severe)</div></div>',why_chain:[],points:10}},
+        {title:"Testing: Less is More",content:'<div class="narrative"><p>Parents ask about testing. What workup is needed?</p></div>',question:{prompt:"For typical bronchiolitis, what testing is recommended?",options:[{text:"CXR, CBC, blood cultures in all cases",correct:false},{text:"No routine testing needed - clinical diagnosis",correct:true},{text:"RSV testing required for diagnosis",correct:false},{text:"CT chest to assess severity",correct:false}],explanation:{correct:"Correct! Bronchiolitis is a clinical diagnosis. No routine labs, CXR, or viral testing needed for typical cases. Testing may lead to unnecessary interventions. Consider testing only if atypical or considering other diagnoses.",incorrect:"No routine testing! Clinical diagnosis. CXR often shows nonspecific findings that don\'t change management."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 AAP Guidelines on Testing</div><div class="pathway">ROUTINE TESTING NOT RECOMMENDED:\n• Chest X-ray\n• Viral testing (RSV, etc.)\n• CBC, blood cultures\n• Blood gas\n\nWHY AVOID TESTING?\n• CXR often shows atelectasis\n  → mistaken for pneumonia\n  → unnecessary antibiotics\n• RSV result doesn\'t change management\n\nCONSIDER TESTING IF:\n• Atypical presentation\n• Severe/ICU-level illness\n• Immunocompromised\n• Ruling out other diagnoses</div></div>',why_chain:[],points:10}},
+        {title:"Treatment: Supportive Care",content:'<div class="narrative"><p>What treatments actually work for bronchiolitis?</p></div><div class="alert-box"><div class="alert-title">⚠️ Most Treatments Don\'t Help!</div><p>Supportive care is the mainstay. Many commonly used treatments are ineffective.</p></div>',question:{prompt:"What is the MAINSTAY of bronchiolitis treatment?",options:[{text:"Bronchodilators (albuterol)",correct:false},{text:"Systemic corticosteroids",correct:false},{text:"Supportive care: oxygen, hydration, nasal suctioning",correct:true},{text:"Antibiotics",correct:false}],explanation:{correct:"Correct! Supportive care only: supplemental O2 if needed, hydration (oral or IV), nasal suctioning for congestion. Bronchodilators, steroids, and antibiotics are NOT recommended.",incorrect:"Supportive care only! O2, hydration, suctioning. Albuterol, steroids, antibiotics do NOT help."},teaching:'<h4>What Works vs What Doesn\'t</h4><table class="comparison-table"><tr><th>Intervention</th><th>Recommended?</th></tr><tr style="background:rgba(34,197,94,0.2);"><td>Supplemental O2 (if SpO2 <90%)</td><td>YES</td></tr><tr style="background:rgba(34,197,94,0.2);"><td>Hydration (oral/NG/IV)</td><td>YES</td></tr><tr style="background:rgba(34,197,94,0.2);"><td>Nasal suctioning</td><td>YES</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Albuterol/bronchodilators</td><td>NO</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Systemic corticosteroids</td><td>NO</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Antibiotics</td><td>NO</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Chest physiotherapy</td><td>NO</td></tr></table>',why_chain:[],points:10}},
+        {title:"Admission Criteria",content:'<div class="narrative"><p>Your patient has SpO2 93% and moderate respiratory distress. Does she need admission?</p></div>',question:{prompt:"Which is an indication for hospitalization in bronchiolitis?",options:[{text:"Any infant with bronchiolitis",correct:false},{text:"Hypoxia (SpO2 <90-92%), severe distress, poor feeding, or high-risk infant",correct:true},{text:"Positive RSV test",correct:false},{text:"Wheezing on exam",correct:false}],explanation:{correct:"Correct! Admit for: hypoxia (SpO2 <90-92% on room air), severe respiratory distress, dehydration/unable to feed, apnea, or high-risk infant (premature, <12 weeks, comorbidities).",incorrect:"Admit for hypoxia, severe distress, poor feeding, apnea, or high-risk patients. Not all bronchiolitis needs admission."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Admission Criteria</div><div class="pathway">ADMIT IF:\n• SpO2 <90-92% on room air\n• Significant respiratory distress\n• Unable to maintain hydration\n• Apnea\n• Age <12 weeks\n• High-risk comorbidities\n  (prematurity, CHD, immunodeficiency)\n\nDISCHARGE IF:\n• SpO2 ≥90% on room air\n• Adequate oral intake\n• Mild respiratory distress\n• Reliable follow-up\n• Caregiver education complete</div></div>',why_chain:[],points:10}},
+        {title:"Prevention: Palivizumab",content:'<div class="narrative"><p>How can severe RSV bronchiolitis be prevented in high-risk infants?</p></div>',question:{prompt:"Who should receive palivizumab (RSV prophylaxis)?",options:[{text:"All infants during RSV season",correct:false},{text:"High-risk infants: premature (<29 weeks), certain CHD, chronic lung disease",correct:true},{text:"Any infant hospitalized with bronchiolitis",correct:false},{text:"Only term infants with siblings",correct:false}],explanation:{correct:"Correct! Palivizumab (monoclonal antibody) for high-risk infants: born <29 weeks in first RSV season, hemodynamically significant CHD, chronic lung disease of prematurity. Monthly injections during RSV season.",incorrect:"Palivizumab for high-risk: premature <29 weeks, certain CHD, chronic lung disease. Monthly during RSV season."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 RSV Prevention</div><div class="pathway">PALIVIZUMAB (Synagis):\n• Monoclonal antibody against RSV\n• Monthly IM injections during season\n• Reduces hospitalization ~50%\n\nINDICATIONS (AAP):\n• Premature <29 weeks (1st RSV season)\n• Chronic lung disease of prematurity\n• Hemodynamically significant CHD\n• Certain immunodeficiencies\n• Pulmonary/neuromuscular disease\n\nNEW: RSV maternal vaccine and\nnirsevimab (long-acting antibody)\nfor broader infant protection</div></div>',why_chain:[],points:10}},
+        {title:"Case Resolution",content:'<div class="narrative"><p>Your patient was admitted for supplemental oxygen and IV fluids. She gradually improved over 48 hours, maintaining SpO2 >92% on room air with adequate feeding. Discharged with return precautions.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 Bronchiolitis Summary</div><div class="pathway">CAUSE: RSV most common (50-80%)\nAGE: <2 years, peak 2-6 months\n\nDIAGNOSIS: Clinical (no routine testing!)\n\nCOURSE:\nURI prodrome → peak day 3-5 → resolves 1-2 wks\n\nTREATMENT: Supportive only\n• Oxygen if SpO2 <90%\n• Hydration\n• Nasal suctioning\n• NO albuterol, steroids, antibiotics\n\nADMIT: Hypoxia, severe distress, poor feeding\n\nPREVENTION: Palivizumab for high-risk</div></div>',question:{prompt:"A 4-month-old with bronchiolitis is given albuterol with no improvement. What should you do?",options:[{text:"Increase albuterol dose",correct:false},{text:"Add ipratropium",correct:false},{text:"Discontinue albuterol - it doesn\'t work in bronchiolitis",correct:true},{text:"Switch to epinephrine nebulizer",correct:false}],explanation:{correct:"Correct! Bronchodilators don\'t work in bronchiolitis. The wheezing is from inflammation and mucus, not bronchospasm. If given a trial with no response, discontinue. Don\'t continue ineffective treatments.",incorrect:"Albuterol doesn\'t work - discontinue if no response. Bronchiolitis wheezing isn\'t from bronchospasm."},teaching:'<h4>Key Takeaways</h4><ul style="line-height:2;margin-left:20px;"><li>RSV causes 50-80% of cases</li><li>Clinical diagnosis - no routine testing</li><li>Supportive care only</li><li>Albuterol, steroids, antibiotics don\'t help</li><li>Admit for hypoxia, severe distress, poor feeding</li><li>Palivizumab for high-risk infants</li></ul>',why_chain:[],points:10}},
+        {title:"Clinical Integration",content:'<div class="narrative"><p>You synthesize all the clinical information to ensure optimal patient care.</p></div>',question:{prompt:"What principle is MOST important for excellent clinical outcomes?",options:[{text:"Integrating clinical presentation with evidence-based guidelines while reassessing response to treatment",correct:true},{text:"Following protocols exactly without clinical judgment",correct:false},{text:"Ordering comprehensive testing to avoid any missed diagnoses",correct:false},{text:"Making a diagnosis quickly and committing to it without reconsideration",correct:false}],explanation:{correct:"Excellent clinical care combines systematic assessment, evidence-based treatment, and ongoing reassessment. Guidelines inform but don't replace clinical reasoning.",incorrect:"Good clinical care requires flexibility, reassessment, and integration of guidelines with patient-specific factors."},teaching:'<h4>Clinical Reasoning</h4><ul><li>Systematic data gathering</li><li>Evidence-based management</li><li>Regular reassessment</li><li>Patient-centered communication</li></ul>',why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><p>You mastered Bronchiolitis!</p></div>';}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Bronchiolitis"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+<div class="rdx-crossplatform-nav">
+    <h4>🎯 Continue Your Learning Journey</h4>
+    <div class="rdx-crossplatform-links">
+                <a href="../deep-dive-player.html?module=bronchiolitis" class="rdx-crossplatform-link">📚 Bronchiolitis Deep Dive</a>
+        <a href="../deep-dive-player.html?module=croup" class="rdx-crossplatform-link">🔬 Croup (Laryngotracheobronchitis)</a>
+        <a href="../deep-dive-player.html?module=febrile-seizure" class="rdx-crossplatform-link">🔬 Febrile Seizures</a>
+        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
+    </div>
+</div>
+
+</body>
+</html>

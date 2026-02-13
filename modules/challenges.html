@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechanismDx - Active Learning Challenges</title>
+<script src="dx-scoring.js"></script>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #f0fdfa; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #115e59; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #f0fdfa; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #5eead4;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+<header class="hdr">
+<div class="hdr-inner">
+<a href="index.html" class="logo">
+<svg viewBox="0 0 320 70"><text x="5" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">Mechanism</text><text x="213" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">D</text><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"><line x1="247" y1="24" x2="263" y2="45"/><path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68"/></g><ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/><ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/><circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="259" cy="68" r="3.5" fill="currentColor"/></svg>
+<span class="tagline">Active Learning Challenges</span>
+</a>
+<div class="hdr-stats">
+<a href="#" style="padding:6px 12px;background:#f4f4f5;border-radius:6px;text-decoration:none;color:#71717a;font-size:13px;font-weight:500;margin-right:8px">🎯 Scoreboard</a>
+<div class="streak" id="streak" style="display:none">🔥 <span id="streak-count">0</span></div>
+<div class="xp-badge">⚡ <span id="xp-count">0</span> XP</div>
+</div>
+</div>
+</header>
+<main>
+<div class="progress-section">
+<div class="progress-header">
+<span class="progress-title">Your Progress</span>
+<div class="progress-stats">
+<div class="progress-stat"><div class="progress-stat-value" id="completed-count">0</div><div class="progress-stat-label">Completed</div></div>
+<div class="progress-stat"><div class="progress-stat-value" id="accuracy-pct">--%</div><div class="progress-stat-label">Accuracy</div></div>
+<div class="progress-stat"><div class="progress-stat-value" id="calibration-score">--</div><div class="progress-stat-label">Calibration</div></div>
+</div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+<div class="calibration-summary" id="calibration-summary"></div>
+</div>
+<div class="system-filter">
+<button class="filter-btn active" onclick="filterSystem('all')">All Systems</button>
+<button class="filter-btn" onclick="filterSystem('cardio')">❤️ Cardio</button>
+<button class="filter-btn" onclick="filterSystem('resp')">🫁 Resp</button>
+<button class="filter-btn" onclick="filterSystem('renal')">🫘 Renal</button>
+<button class="filter-btn" onclick="filterSystem('gi')">🍽️ GI</button>
+<button class="filter-btn" onclick="filterSystem('neuro')">🧠 Neuro</button>
+<button class="filter-btn" onclick="filterSystem('endo')">🦋 Endo</button>
+<button class="filter-btn" onclick="filterSystem('heme')">🩸 Heme</button>
+<button class="filter-btn" onclick="filterSystem('id')">🦠 ID</button>
+</div>
+<div class="challenge-tabs">
+<div class="tab active" onclick="switchChallenge('predict')"><span class="tab-icon">🔬</span>Predict Labs<span class="tab-count" id="predict-count">15</span></div>
+<div class="tab" onclick="switchChallenge('pathway')"><span class="tab-icon">🧩</span>Build Pathway<span class="tab-count" id="pathway-count">12</span></div>
+<div class="tab" onclick="switchChallenge('connector')"><span class="tab-icon">🔗</span>What's the Link?<span class="tab-count" id="connector-count">10</span></div>
+<div class="tab" onclick="switchChallenge('whatif')"><span class="tab-icon">🎯</span>What If?<span class="tab-count" id="whatif-count">10</span></div>
+</div>
+<!-- PREDICT THE LABS -->
+<div class="challenge active" id="challenge-predict">
+<div class="challenge-header">
+<h2>🔬 Predict the Labs</h2>
+<p>Use mechanism knowledge to predict what the labs will show BEFORE seeing them</p>
+<div class="challenge-meta" id="predict-meta"></div>
+</div>
+<div class="scenario" id="predict-scenario">
+<div class="scenario-label">Clinical Scenario</div>
+<div class="scenario-text" id="predict-scenario-text">Loading...</div>
+</div>
+<div class="prediction-grid" id="prediction-grid"></div>
+<div class="confidence-section">
+<div class="confidence-label">How confident are you in your predictions?</div>
+<input type="range" class="confidence-slider" id="confidence-slider" min="0" max="100" value="50">
+<div class="confidence-value"><span id="confidence-value">50</span>%</div>
+<div class="confidence-hint">Tracked for calibration analysis (like ReasonDx CCTS)</div>
+</div>
+<button class="submit-btn" id="predict-submit" onclick="submitPrediction()">Check My Predictions</button>
+<div class="results" id="predict-results">
+<div class="results-header">
+<div class="results-icon" id="results-icon">✅</div>
+<div><div class="results-title" id="results-title">Great job!</div><div class="results-score" id="results-score">4/5 correct</div></div>
+</div>
+<div class="explanation" id="results-explanation">
+<div class="explanation-title">The Mechanism:</div>
+<div id="explanation-content"></div>
+</div>
+<div class="calibration" id="calibration-feedback" style="display:none">
+<div class="calibration-title">📊 Confidence Calibration</div>
+<div class="calibration-text" id="calibration-text"></div>
+</div>
+<a class="link-btn" id="module-link" href="#" style="display:none">📚 Review this topic in depth →</a>
+<button class="next-btn" onclick="nextPredictChallenge()">Next Challenge →</button>
+</div>
+</div>
+
+<!-- BUILD THE PATHWAY -->
+<div class="challenge" id="challenge-pathway">
+<div class="challenge-header">
+<h2>🧩 Build the Pathway</h2>
+<p>Arrange the mechanism steps in the correct order (click to place)</p>
+<div class="challenge-meta" id="pathway-meta"></div>
+</div>
+<div class="scenario" id="pathway-scenario">
+<div class="scenario-label">Build the pathway for:</div>
+<div class="scenario-text" id="pathway-prompt">Loading...</div>
+</div>
+<div class="pathway-workspace">
+<div class="available-nodes" id="available-nodes"></div>
+<div style="font-size:.85rem;color:var(--muted);margin-bottom:.75rem">Click nodes in order to build the pathway:</div>
+<div class="pathway-slots" id="pathway-slots"></div>
+</div>
+<button class="submit-btn" id="pathway-submit" onclick="submitPathway()">Check My Pathway</button>
+<div class="results" id="pathway-results">
+<div class="results-header">
+<div class="results-icon" id="pathway-results-icon">✅</div>
+<div><div class="results-title" id="pathway-results-title">Perfect!</div><div class="results-score" id="pathway-results-score">All steps correct</div></div>
+</div>
+<div class="explanation" id="pathway-explanation">
+<div class="explanation-title">Correct Pathway:</div>
+<div id="pathway-correct"></div>
+</div>
+<a class="link-btn" id="pathway-module-link" href="#" style="display:none">📚 Review this topic →</a>
+<button class="next-btn" onclick="nextPathwayChallenge()">Next Challenge →</button>
+</div>
+</div>
+
+<!-- WHAT'S THE LINK? -->
+<div class="challenge" id="challenge-connector">
+<div class="challenge-header">
+<h2>🔗 What's the Link?</h2>
+<p>Find the mechanistic connection between two seemingly unrelated findings</p>
+<div class="challenge-meta" id="connector-meta"></div>
+</div>
+<div class="connector-box">
+<div class="findings">
+<div class="finding"><div class="finding-label">Finding A</div><div class="finding-value" id="finding-a">Loading...</div></div>
+<div class="connector-symbol">↔</div>
+<div class="finding"><div class="finding-label">Finding B</div><div class="finding-value" id="finding-b">Loading...</div></div>
+</div>
+<textarea class="answer-input" id="connector-answer" placeholder="Explain the mechanistic link between these two findings..."></textarea>
+</div>
+<div class="confidence-section">
+<div class="confidence-label">How confident are you?</div>
+<input type="range" class="confidence-slider" id="connector-confidence" min="0" max="100" value="50">
+<div class="confidence-value"><span id="connector-confidence-value">50</span>%</div>
+</div>
+<button class="submit-btn" onclick="submitConnector()">Reveal the Connection</button>
+<div class="results" id="connector-results">
+<div class="results-header"><div class="results-icon">💡</div><div><div class="results-title">The Connection</div></div></div>
+<div class="explanation" id="connector-explanation">
+<div class="explanation-title">Mechanistic Link:</div>
+<div id="connector-answer-reveal"></div>
+</div>
+<div style="margin-top:1rem;padding:1rem;background:#f0fdfa;border-radius:8px">
+<div style="font-weight:600;margin-bottom:.5rem">Your Answer:</div>
+<div id="connector-user-answer" style="font-style:italic;color:var(--muted)"></div>
+</div>
+<a class="link-btn" id="connector-module-link" href="#" style="display:none">📚 Review this topic →</a>
+<button class="next-btn" onclick="nextConnectorChallenge()">Next Challenge →</button>
+</div>
+</div>
+
+<!-- WHAT IF? -->
+<div class="challenge" id="challenge-whatif">
+<div class="challenge-header">
+<h2>🎯 What Happens If?</h2>
+<p>Predict the physiological consequence of an intervention</p>
+<div class="challenge-meta" id="whatif-meta"></div>
+</div>
+<div class="whatif-scenario">
+<div class="whatif-baseline">
+<div style="font-weight:600;margin-bottom:.5rem">Baseline State:</div>
+<div id="whatif-baseline-text">Loading...</div>
+</div>
+<div class="whatif-intervention">
+<div class="whatif-intervention-label">Intervention</div>
+<div class="whatif-intervention-text" id="whatif-intervention-text">Loading...</div>
+</div>
+<div style="font-weight:600;margin-bottom:.75rem">What happens?</div>
+<div class="whatif-options" id="whatif-options"></div>
+</div>
+<div class="confidence-section">
+<div class="confidence-label">How confident are you?</div>
+<input type="range" class="confidence-slider" id="whatif-confidence" min="0" max="100" value="50">
+<div class="confidence-value"><span id="whatif-confidence-value">50</span>%</div>
+</div>
+<button class="submit-btn" onclick="submitWhatIf()">Check My Answer</button>
+<div class="results" id="whatif-results">
+<div class="results-header">
+<div class="results-icon" id="whatif-results-icon">✅</div>
+<div><div class="results-title" id="whatif-results-title">Correct!</div><div class="results-score" id="whatif-results-score"></div></div>
+</div>
+<div class="explanation">
+<div class="explanation-title">The Mechanism:</div>
+<div id="whatif-explanation"></div>
+</div>
+<button class="next-btn" onclick="nextWhatIfChallenge()">Next Challenge →</button>
+</div>
+</div>
+</main>
+<script>
+// CHALLENGE DATA - 47 total challenges
+const PREDICT_CHALLENGES = [
+{id:'dka1',system:'endo',module:'dka-hhs',scenario:'A 24-year-old with Type 1 diabetes presents with <span class="scenario-highlight">nausea, vomiting, abdominal pain</span>. Ran out of insulin. Kussmaul respirations, fruity breath.',predictions:[{label:'Glucose',options:['Low','Normal','High (>250)'],correct:2},{label:'pH',options:['Acidotic','Normal','Alkalotic'],correct:0},{label:'Potassium',options:['Low','Normal/High','Very low'],correct:1},{label:'Anion Gap',options:['Normal','Elevated'],correct:1},{label:'Bicarbonate',options:['Low','Normal','High'],correct:0}],explanation:{flow:['Insulin deficiency','↑Counter-regulatory hormones','Lipolysis → FFAs','Hepatic ketogenesis','Ketoacid accumulation','AG metabolic acidosis'],details:'<b>K+ appears normal/high despite total body depletion:</b> Acidosis shifts H+ INTO cells; K+ shifts OUT for electroneutrality. Once insulin given, K+ drops dramatically!'}},
+{id:'hf1',system:'cardio',module:'heart-failure',scenario:'A 68-year-old with <span class="scenario-highlight">heart failure EF 25%</span> has worsening dyspnea and leg swelling. Ate salty foods, missed medications.',predictions:[{label:'BNP',options:['Normal','Elevated (>400)'],correct:1},{label:'Sodium',options:['Low','Normal','High'],correct:0},{label:'Creatinine',options:['Normal','Elevated'],correct:1},{label:'Chest X-ray',options:['Clear','Pulmonary edema'],correct:1}],explanation:{flow:['↓Cardiac output','↓Renal perfusion','RAAS activation','Na+/H2O retention','↑Preload','Pulmonary congestion'],details:'<b>Why sodium is LOW:</b> ADH elevated from decreased effective volume → water retention > sodium → dilutional hyponatremia. Poor prognostic sign!'}},
+{id:'pe1',system:'resp',module:'pe-dvt',scenario:'A 45-year-old woman has <span class="scenario-highlight">sudden dyspnea and pleuritic chest pain</span> 10 days post knee surgery. HR 112, SpO2 89%.',predictions:[{label:'D-dimer',options:['Normal','Elevated'],correct:1},{label:'PaO2',options:['Normal','Low'],correct:1},{label:'PaCO2',options:['Low','Normal','High'],correct:0},{label:'A-a Gradient',options:['Normal','Elevated'],correct:1},{label:'Troponin',options:['Normal','May be elevated'],correct:1}],explanation:{flow:['Thrombus occludes PA','V/Q mismatch','Hypoxemia','Hyperventilation','↓PaCO2','RV strain if large'],details:'<b>Why PaCO2 is LOW:</b> Hypoxemia → hyperventilation → CO2 blown off → respiratory ALKALOSIS despite hypoxemia.'}},
+{id:'aki1',system:'renal',module:'aki',scenario:'A 72-year-old <span class="scenario-highlight">recently started ACE inhibitor</span> for HTN. Takes NSAIDs daily for arthritis.',predictions:[{label:'Creatinine',options:['Normal','Elevated'],correct:1},{label:'BUN/Cr Ratio',options:['<15 (intrinsic)','>20 (pre-renal)'],correct:1},{label:'Potassium',options:['Low','Normal','High'],correct:2},{label:'FeNa',options:['<1%','>2%'],correct:0}],explanation:{flow:['ACEi blocks Ang II','↓Efferent tone','NSAIDs block PGs','↓Afferent dilation','↓↓GFR','Pre-renal AKI'],details:'<b>Triple whammy:</b> ACEi + NSAID + diuretic is dangerous. Blocks both efferent constriction and afferent dilation → GFR crashes.'}},
+{id:'sepsis1',system:'id',module:'sepsis',scenario:'A 58-year-old has <span class="scenario-highlight">fever, confusion, hypotension</span>. Temp 39.2°C, HR 118, BP 78/45. Recent UTI.',predictions:[{label:'WBC',options:['Low','Normal','High'],correct:2},{label:'Lactate',options:['Normal','Elevated'],correct:1},{label:'Procalcitonin',options:['Normal','Elevated'],correct:1},{label:'SVR',options:['High','Low'],correct:1},{label:'Cardiac Output',options:['Low','High'],correct:1}],explanation:{flow:['Infection','Cytokine storm','Vasodilation','↓SVR','Compensatory ↑CO','Tissue hypoperfusion'],details:'<b>Why CO is HIGH but tissues hypoperfuse:</b> Distributive shock—vessels dilated and leaky, microcirculation deranged. Maldistribution despite high output.'}},
+{id:'cirrhosis1',system:'gi',module:'cirrhosis',scenario:'A 55-year-old with <span class="scenario-highlight">alcoholic cirrhosis</span> has increasing abdominal distension. Spider angiomata, palmar erythema.',predictions:[{label:'Albumin',options:['Low','Normal'],correct:0},{label:'INR',options:['Normal','Elevated'],correct:1},{label:'Platelets',options:['Low','Normal','High'],correct:0},{label:'Sodium',options:['Low','Normal','High'],correct:0},{label:'Ammonia',options:['Normal','Elevated'],correct:1}],explanation:{flow:['Hepatic fibrosis','Portal HTN','Splanchnic vasodilation','↓Effective volume','RAAS/ADH','Ascites + hyponatremia'],details:'<b>Multiple mechanisms:</b> Low albumin (↓synthesis), low platelets (splenomegaly), high INR (↓factors), low Na (dilutional), high ammonia (↓clearance).'}},
+{id:'mi1',system:'cardio',module:'acs',scenario:'A 62-year-old smoker with HTN has <span class="scenario-highlight">crushing substernal chest pain to left arm</span> for 1 hour. Diaphoretic, BP 90/60.',predictions:[{label:'Troponin (initial)',options:['Normal','Elevated'],correct:0},{label:'Troponin (6 hrs)',options:['Normal','Elevated'],correct:1},{label:'ECG',options:['Normal','ST changes'],correct:1},{label:'BNP',options:['Normal','May be elevated'],correct:1}],explanation:{flow:['Plaque rupture','Platelet aggregation','Thrombus','Coronary occlusion','Myocyte ischemia','Necrosis → troponin'],details:'<b>Why initial troponin may be normal:</b> Takes 3-6 hours to rise. Single negative does NOT rule out MI—recheck at 3-6 hours.'}},
+{id:'addison1',system:'endo',module:'adrenal',scenario:'A 35-year-old woman has <span class="scenario-highlight">fatigue, weight loss, hyperpigmentation</span>. BP 88/54, dark skin creases and gums.',predictions:[{label:'Cortisol',options:['Low','Normal','High'],correct:0},{label:'ACTH',options:['Low','Normal','High'],correct:2},{label:'Sodium',options:['Low','Normal','High'],correct:0},{label:'Potassium',options:['Low','Normal','High'],correct:2},{label:'Glucose',options:['Low','Normal','High'],correct:0}],explanation:{flow:['Adrenal destruction','↓Cortisol + ↓Aldosterone','↑ACTH (no feedback)','MSH co-secretion','Hyperpigmentation'],details:'<b>Why hyperpigmentation:</b> ACTH and MSH both from POMC. High ACTH = high MSH = skin darkening. Distinguishes primary from secondary.'}},
+{id:'pneumonia1',system:'resp',module:'pneumonia',scenario:'A 70-year-old nursing home resident has <span class="scenario-highlight">fever, productive cough, confusion</span>. RR 28, SpO2 88%, RLL crackles.',predictions:[{label:'WBC',options:['Low','Normal','High'],correct:2},{label:'PaO2',options:['Low','Normal'],correct:0},{label:'Chest X-ray',options:['Clear','Infiltrate'],correct:1},{label:'Procalcitonin',options:['Normal','Elevated'],correct:1},{label:'Lactate',options:['Normal','May be elevated'],correct:1}],explanation:{flow:['Bacterial invasion','Alveolar inflammation','Exudate fills alveoli','V/Q mismatch','Hypoxemia','Systemic response'],details:'<b>Why confusion in elderly:</b> AMS often the presenting sign of infection in elderly—may have minimal fever/cough. Always consider infection with AMS.'}},
+{id:'gibleed1',system:'gi',module:'gi-bleed',scenario:'A 65-year-old on aspirin and NSAIDs has <span class="scenario-highlight">melena and lightheadedness</span>. HR 110, BP 95/60.',predictions:[{label:'Hemoglobin',options:['Low','Normal initially'],correct:1},{label:'BUN',options:['Normal','Elevated'],correct:1},{label:'BUN/Cr Ratio',options:['<20','>20'],correct:1},{label:'MCV',options:['Low','Normal','High'],correct:1}],explanation:{flow:['NSAID → mucosal injury','Upper GI bleeding','Blood digested → melena','Protein load → ↑BUN','Volume loss → tachycardia'],details:'<b>Why Hgb may be normal initially:</b> Acute loss = whole blood. Hemodilution takes hours. BUN rises from digested blood protein.'}},
+{id:'hhs1',system:'endo',module:'dka-hhs',scenario:'A 75-year-old with T2DM is <span class="scenario-highlight">obtunded after days of polyuria</span>. Glucose 900, minimal ketones. Na 128.',predictions:[{label:'Serum Osm',options:['Normal','High (>320)'],correct:1},{label:'pH',options:['Acidotic','Normal/near-normal'],correct:1},{label:'Anion Gap',options:['Normal','Mildly elevated'],correct:1},{label:'Corrected Na',options:['Low','Normal/High'],correct:1}],explanation:{flow:['Relative insulin deficiency','Enough insulin to prevent ketosis','Severe hyperglycemia','Osmotic diuresis','Profound dehydration','Hyperosmolarity → AMS'],details:'<b>Corrected Na:</b> Add 1.6-2.4 per 100 glucose >100. Na 128 with glucose 900 → corrected ~140-145 (hypernatremic state).'}},
+{id:'meningitis1',system:'neuro',module:'meningitis',scenario:'A 20-year-old college student has <span class="scenario-highlight">severe headache, fever, neck stiffness, photophobia</span>. Petechial rash.',predictions:[{label:'CSF WBC',options:['Normal','Elevated'],correct:1},{label:'CSF Glucose',options:['Low','Normal'],correct:0},{label:'CSF Protein',options:['Normal','Elevated'],correct:1},{label:'Gram Stain',options:['Negative','Gram-neg diplococci'],correct:1}],explanation:{flow:['N. meningitidis invasion','Meningeal inflammation','PMN infiltration','Bacteria consume glucose','↓CSF glucose','Protein leak → ↑protein'],details:'<b>Petechial rash:</b> Pathognomonic for meningococcemia. DIC and endothelial damage. Medical emergency—antibiotics IMMEDIATELY.'}},
+{id:'thyroid1',system:'endo',module:'thyroid',scenario:'A 45-year-old woman has <span class="scenario-highlight">palpitations, weight loss, tremor, heat intolerance</span>. HR 120, diffuse goiter with bruit.',predictions:[{label:'TSH',options:['Low','Normal','High'],correct:0},{label:'Free T4',options:['Low','Normal','High'],correct:2},{label:'T3',options:['Low','Normal','High'],correct:2},{label:'TSI/TRAb',options:['Negative','Positive'],correct:1}],explanation:{flow:['TSI antibodies','Stimulate TSH receptor','↑T4/T3 production','Negative feedback','↓TSH','Hypermetabolic state'],details:'<b>Graves disease:</b> Antibodies STIMULATE TSH receptor. Unlike most autoimmune that destroy, these activate.'}},
+{id:'stroke1',system:'neuro',module:'stroke',scenario:'A 70-year-old with AFib (not anticoagulated) has <span class="scenario-highlight">sudden left-sided weakness and facial droop</span>. Last normal 2 hours ago.',predictions:[{label:'CT Head (initial)',options:['Normal','Hypodense area'],correct:0},{label:'CT Head (24 hrs)',options:['Normal','Hypodense area'],correct:1},{label:'ECG',options:['Normal','AFib'],correct:1},{label:'Glucose',options:['Must check','Not important'],correct:0}],explanation:{flow:['AFib → LA stasis','Thrombus forms','Embolus to MCA','Acute ischemia','Cytotoxic edema','Infarction'],details:'<b>Why initial CT may be normal:</b> Ischemic changes take 6-24 hours. Initial CT rules OUT hemorrhage for tPA eligibility.'}},
+{id:'ards1',system:'resp',module:'ards',scenario:'A 50-year-old with pancreatitis develops <span class="scenario-highlight">progressive hypoxemia despite 100% O2</span>. P/F ratio 85. Bilateral infiltrates.',predictions:[{label:'PaO2 on 100%',options:['Normal (>500)','Severely low'],correct:1},{label:'PCWP',options:['Normal','Elevated'],correct:0},{label:'Compliance',options:['Normal','Decreased'],correct:1},{label:'Shunt fraction',options:['Normal','Elevated (>20%)'],correct:1}],explanation:{flow:['Systemic inflammation','Capillary leak','Alveolar flooding','Surfactant dysfunction','Atelectasis','Intrapulmonary shunt'],details:'<b>Why O2 doesnt help:</b> Blood passes through non-ventilated alveoli (shunt). No O2 can reach blood that never contacts ventilated lung. Need PEEP.'}}
+];
+
+const PATHWAY_CHALLENGES = [
+{id:'raas',system:'cardio',module:'heart-failure',prompt:'Heart Failure → Fluid Retention',nodes:['↑Aldosterone','↓Cardiac output','RAAS activation','↓Renal perfusion','Na+/H2O retention','↑Angiotensin II'],correct:['↓Cardiac output','↓Renal perfusion','RAAS activation','↑Angiotensin II','↑Aldosterone','Na+/H2O retention']},
+{id:'dka',system:'endo',module:'dka-hhs',prompt:'Insulin Deficiency → Ketoacidosis',nodes:['AG acidosis','Insulin deficiency','Ketone production','↑Lipolysis','↑Counter-regulatory','FFAs to liver'],correct:['Insulin deficiency','↑Counter-regulatory','↑Lipolysis','FFAs to liver','Ketone production','AG acidosis']},
+{id:'mi',system:'cardio',module:'acs',prompt:'Plaque Rupture → Myocardial Infarction',nodes:['Myocyte necrosis','Plaque rupture','Coronary occlusion','Platelet aggregation','Troponin release','Thrombus'],correct:['Plaque rupture','Platelet aggregation','Thrombus','Coronary occlusion','Myocyte necrosis','Troponin release']},
+{id:'ards',system:'resp',module:'ards',prompt:'Sepsis → ARDS',nodes:['Inflammatory mediators','Alveolar flooding','Surfactant dysfunction','Capillary leak','V/Q mismatch','Refractory hypoxemia'],correct:['Inflammatory mediators','Capillary leak','Alveolar flooding','Surfactant dysfunction','V/Q mismatch','Refractory hypoxemia']},
+{id:'cirrhosis',system:'gi',module:'cirrhosis',prompt:'Cirrhosis → Ascites',nodes:['Portal HTN','Hepatic fibrosis','Splanchnic vasodilation','↓Effective volume','RAAS activation','Ascites'],correct:['Hepatic fibrosis','Portal HTN','Splanchnic vasodilation','↓Effective volume','RAAS activation','Ascites']},
+{id:'pe',system:'resp',module:'pe-dvt',prompt:'DVT → PE → Hypoxemia',nodes:['V/Q mismatch','Venous stasis','Thrombus formation','Embolization to PA','Dead space','Hypoxemia'],correct:['Venous stasis','Thrombus formation','Embolization to PA','Dead space','V/Q mismatch','Hypoxemia']},
+{id:'aki_prerenal',system:'renal',module:'aki',prompt:'Hypovolemia → Pre-renal AKI',nodes:['Volume depletion','↓Renal perfusion','↑Renin release','↑Aldosterone','↑Na reabsorption','↓GFR'],correct:['Volume depletion','↓Renal perfusion','↑Renin release','↑Aldosterone','↑Na reabsorption','↓GFR']},
+{id:'septic_shock',system:'id',module:'sepsis',prompt:'Infection → Septic Shock',nodes:['Bacterial infection','Cytokine release','Vasodilation','↓SVR','Hypotension','Tissue hypoperfusion'],correct:['Bacterial infection','Cytokine release','Vasodilation','↓SVR','Hypotension','Tissue hypoperfusion']},
+{id:'he',system:'gi',module:'cirrhosis',prompt:'Cirrhosis → Hepatic Encephalopathy',nodes:['Liver failure','Porto-systemic shunts','↓Ammonia clearance','↑Serum ammonia','Crosses BBB','Astrocyte swelling'],correct:['Liver failure','Porto-systemic shunts','↓Ammonia clearance','↑Serum ammonia','Crosses BBB','Astrocyte swelling']},
+{id:'hyponatremia',system:'renal',module:'electrolyte',prompt:'Heart Failure → Hyponatremia',nodes:['↓Cardiac output','↓Effective volume','Non-osmotic ADH','↑Water reabsorption','Dilutional hyponatremia'],correct:['↓Cardiac output','↓Effective volume','Non-osmotic ADH','↑Water reabsorption','Dilutional hyponatremia']},
+{id:'cushings',system:'endo',module:'adrenal',prompt:'Pituitary Adenoma → Cushing',nodes:['Pituitary adenoma','↑ACTH secretion','Adrenal stimulation','↑Cortisol','Central obesity','No feedback'],correct:['Pituitary adenoma','↑ACTH secretion','Adrenal stimulation','↑Cortisol','No feedback','Central obesity']},
+{id:'dic',system:'heme',module:'ttp-hus-dic',prompt:'Sepsis → DIC',nodes:['Systemic infection','Tissue factor release','Widespread coagulation','Factor consumption','Microthrombi + Bleeding','Organ damage'],correct:['Systemic infection','Tissue factor release','Widespread coagulation','Factor consumption','Microthrombi + Bleeding','Organ damage']}
+];
+
+const CONNECTOR_CHALLENGES = [
+{id:'k_acid',system:'renal',module:'acidbase',findingA:'Hyperkalemia',findingB:'Metabolic Acidosis',connection:'In acidosis, H+ moves INTO cells for buffering. K+ shifts OUT to maintain electroneutrality → hyperkalemia. Per 0.1 pH drop, K+ rises ~0.6. Total body K+ may be normal or low!',mechanism:['Acidosis (↑H+)','H+ enters cells','K+ exits cells','Plasma K+ rises']},
+{id:'hf_hyponat',system:'cardio',module:'heart-failure',findingA:'Heart Failure',findingB:'Hyponatremia',connection:'HF causes decreased effective circulating volume → ADH release (non-osmotic). ADH causes water retention disproportionate to sodium → dilutional hyponatremia. Indicates severe disease.',mechanism:['↓CO','↓Effective volume','↑ADH','Water retention','Dilution']},
+{id:'pe_trop',system:'cardio',module:'pe-dvt',findingA:'Pulmonary Embolism',findingB:'Elevated Troponin',connection:'Large PE increases pulmonary resistance → RV strain. RV dilates, wall tension increases → subendocardial ischemia → troponin release. NOT a coronary event! Worse prognosis.',mechanism:['Large PE','↑Pulmonary resistance','RV strain','RV ischemia','Troponin leak']},
+{id:'cirr_coag',system:'gi',module:'cirrhosis',findingA:'Cirrhosis',findingB:'Bleeding AND Clotting',connection:'Liver makes BOTH procoagulant (II,VII,IX,X) AND anticoagulant factors (Protein C,S). In cirrhosis, all reduced → rebalanced but fragile. Can bleed (varices) AND clot (portal vein thrombosis).',mechanism:['Liver failure','↓Pro + anticoagulants','Fragile balance','Both risks']},
+{id:'sepsis_hypo',system:'id',module:'sepsis',findingA:'Severe Sepsis',findingB:'Hypoglycemia',connection:'Severe sepsis causes hypoglycemia: increased glucose use by immune cells, hepatic dysfunction impairing gluconeogenesis, depleted glycogen. Hypoglycemia = poor prognosis (liver failure).',mechanism:['Severe infection','↑Glucose consumption','Hepatic dysfunction','↓Gluconeogenesis']},
+{id:'ckd_anemia',system:'renal',module:'aki',findingA:'Chronic Kidney Disease',findingB:'Anemia',connection:'Kidneys produce EPO in response to hypoxia. CKD = damaged kidneys produce less EPO → decreased RBC production → normocytic anemia. Why CKD patients need EPO.',mechanism:['Kidney damage','↓EPO production','↓RBC synthesis','Normocytic anemia']},
+{id:'hypothyroid_hyperlipid',system:'endo',module:'thyroid',findingA:'Hypothyroidism',findingB:'Hyperlipidemia',connection:'Thyroid hormone upregulates LDL receptors. In hypothyroidism, fewer LDL receptors → decreased LDL clearance → elevated LDL. Always check TSH in new hyperlipidemia!',mechanism:['↓T4/T3','↓LDL receptors','↓LDL clearance','↑Serum LDL']},
+{id:'panc_hypocalc',system:'gi',module:'pancreatitis',findingA:'Acute Pancreatitis',findingB:'Hypocalcemia',connection:'In pancreatitis, fat necrosis releases FFAs that bind calcium (saponification). Calcium sequestered in retroperitoneum → hypocalcemia. Severe hypocalcemia = poor prognosis.',mechanism:['Pancreatic lipase','Fat necrosis','FFAs bind Ca2+','Saponification']},
+{id:'afib_stroke',system:'neuro',module:'stroke',findingA:'Atrial Fibrillation',findingB:'Ischemic Stroke',connection:'In AFib, atria dont contract → blood stasis in LA appendage → thrombus. Thrombus embolizes to brain → stroke. Why anticoagulation is critical in AFib.',mechanism:['AFib','LA stasis','Thrombus forms','Embolization','Stroke']},
+{id:'dm_gastroparesis',system:'gi',module:'dka-hhs',findingA:'Diabetes Mellitus',findingB:'Gastroparesis',connection:'Chronic hyperglycemia causes autonomic neuropathy affecting vagus nerve → impaired gastric motility → gastroparesis. Early satiety, erratic glucose control.',mechanism:['Chronic hyperglycemia','Vagal neuropathy','↓Gastric motility','Delayed emptying']}
+];
+
+const WHATIF_CHALLENGES = [
+{id:'ace_k',system:'renal',module:'electrolyte',baseline:'Patient with HF has normal K+ (4.2) on furosemide.',intervention:'You ADD an ACE inhibitor',question:'Potassium level',options:['Decrease','Stay same','Increase'],correct:2,explanation:'ACEi blocks Ang II → decreased aldosterone → decreased K+ excretion → hyperkalemia. Monitor K+ when starting ACEi, especially with renal impairment.'},
+{id:'bicarb_k',system:'renal',module:'acidbase',baseline:'DKA patient has pH 7.1 and potassium 5.8 (appears elevated).',intervention:'You give sodium bicarbonate',question:'Potassium level',options:['Decrease (dramatically!)','Stay same','Increase'],correct:0,explanation:'Correcting acidosis: H+ exits cells, K+ enters → serum K+ drops. Despite high serum K+, total body K+ depleted in DKA. Rapid correction can cause life-threatening hypokalemia!'},
+{id:'beta_hf',system:'cardio',module:'heart-failure',baseline:'Decompensated HF with EF 20%, HR 110, BP 85/60.',intervention:'You START a beta-blocker',question:'Short-term cardiac output',options:['Decrease (may worsen)','Stay same','Increase'],correct:0,explanation:'Beta-blockers reduce HR and contractility. In acute decompensated HF, can worsen symptoms. Never START in decompensated HF—wait until euvolemic. CONTINUE if already on one.'},
+{id:'o2_copd',system:'resp',module:'copd-asthma',baseline:'COPD patient with chronic CO2 retention, SpO2 88%, comfortable.',intervention:'You give 100% O2 to reach SpO2 100%',question:'Ventilatory drive',options:['Decrease (danger!)','Stay same','Increase'],correct:0,explanation:'Chronic CO2 retainers rely on hypoxic drive. Too much O2 removes stimulus → hypoventilation → CO2 narcosis. Target SpO2 88-92% in COPD, not 100%!'},
+{id:'lasix_na',system:'renal',module:'electrolyte',baseline:'HF patient has sodium 130, volume overloaded.',intervention:'You give aggressive IV furosemide',question:'Sodium level',options:['Decrease further','Increase toward normal','Stay same'],correct:1,explanation:'Furosemide produces hypotonic urine (more water than sodium lost). As free water excreted, sodium concentration rises. Diuresis typically IMPROVES hyponatremia in hypervolemic states.'},
+{id:'insulin_k',system:'endo',module:'dka-hhs',baseline:'DKA patient has glucose 450, potassium 5.2.',intervention:'You start insulin WITHOUT K+ replacement',question:'Potassium in 2 hours',options:['Decrease (dangerous)','Stay same','Increase'],correct:0,explanation:'Insulin drives K+ into cells. Combined with volume and acidosis correction, K+ drops fast. Always replace K+ once <5.3 and urinating. Check every 2 hours!'},
+{id:'nitro_preload',system:'cardio',module:'heart-failure',baseline:'Acute pulmonary edema, elevated filling pressures, BP 160/100.',intervention:'You give IV nitroglycerin',question:'Preload (PCWP)',options:['Decrease','Stay same','Increase'],correct:0,explanation:'Nitroglycerin = venodilator → increased venous capacitance → decreased venous return → decreased preload. Rapidly reduces congestion in pulmonary edema.'},
+{id:'spiro_gynecomastia',system:'cardio',module:'heart-failure',baseline:'Male HF patient started on spironolactone for mortality benefit.',intervention:'After 3 months of therapy',question:'Risk of gynecomastia',options:['Decreased','Unchanged','Increased'],correct:2,explanation:'Spironolactone is non-selective aldosterone antagonist that also blocks androgen receptors → gynecomastia in ~10% men. Eplerenone is more selective, lower risk.'},
+{id:'heparin_plts',system:'heme',module:'coagulation',baseline:'Patient on heparin for DVT has platelets 180,000.',intervention:'Day 7: platelets drop to 70,000',question:'Risk of thrombosis',options:['Decreased','Unchanged','INCREASED (paradox!)'],correct:2,explanation:'HIT causes platelet activation and aggregation despite low counts. Its a PROthrombotic state! Stop ALL heparin, start alternative anticoagulation (argatroban, fondaparinux).'},
+{id:'albumin_calcium',system:'renal',module:'electrolyte',baseline:'Cirrhotic patient: total calcium 7.8, albumin 2.0.',intervention:'You calculate corrected calcium',question:'True calcium status',options:['Truly low','Actually normal','Cannot determine'],correct:1,explanation:'Corrected Ca = 7.8 + 0.8×(4-2) = 9.4 (normal). Low albumin = fewer binding sites → lower total but normal ionized calcium. Always correct for albumin!'}
+];
+
+// STATE
+let state = {currentChallenge:'predict',currentSystem:'all',predictIndex:0,pathwayIndex:0,connectorIndex:0,whatifIndex:0,completed:0,correct:0,streak:0,xp:0,calibrationData:[]};
+
+function loadState(){const s=localStorage.getItem('mechanismdx_state');if(s){state={...state,...JSON.parse(s)};updateUI();}}
+function saveState(){
+localStorage.setItem('mechanismdx_state',JSON.stringify(state));
+// Sync with unified scoring
+if(typeof DxScoring!=='undefined'){
+DxScoring.set(DxScoring.KEYS.MECH_XP,state.xp);
+DxScoring.set(DxScoring.KEYS.MECH_CHALLENGES,state.completed);
+DxScoring.set(DxScoring.KEYS.MECH_CORRECT,state.correct);
+DxScoring.set(DxScoring.KEYS.MECH_MCQS,state.completed);
+DxScoring.updateStreak();
+}
+}
+
+function updateUI(){
+document.getElementById('completed-count').textContent=state.completed;
+document.getElementById('xp-count').textContent=state.xp;
+const acc=state.completed>0?Math.round((state.correct/state.completed)*100):0;
+document.getElementById('accuracy-pct').textContent=acc+'%';
+document.getElementById('streak').style.display=state.streak>=3?'inline-flex':'none';
+document.getElementById('streak-count').textContent=state.streak;
+document.getElementById('progress-fill').style.width=Math.min((state.completed/50)*100,100)+'%';
+if(state.calibrationData.length>0){
+const avgC=state.calibrationData.reduce((a,b)=>a+b.confidence,0)/state.calibrationData.length;
+const avgA=state.calibrationData.reduce((a,b)=>a+b.accuracy,0)/state.calibrationData.length;
+const diff=Math.abs(avgC-avgA);
+document.getElementById('calibration-score').textContent=diff<10?'Excellent':diff>25?'Needs work':'Good';
+document.getElementById('calibration-summary').innerHTML='Avg confidence: '+Math.round(avgC)+'% | Avg accuracy: '+Math.round(avgA)+'% | '+(avgC>avgA+10?'⚠️ Overconfident':avgC<avgA-10?'💪 Underconfident':'✅ Well calibrated');
+}
+document.getElementById('predict-count').textContent=getFiltered(PREDICT_CHALLENGES).length;
+document.getElementById('pathway-count').textContent=getFiltered(PATHWAY_CHALLENGES).length;
+document.getElementById('connector-count').textContent=getFiltered(CONNECTOR_CHALLENGES).length;
+document.getElementById('whatif-count').textContent=getFiltered(WHATIF_CHALLENGES).length;
+}
+
+function getFiltered(arr){return state.currentSystem==='all'?arr:arr.filter(c=>c.system===state.currentSystem);}
+
+function filterSystem(sys){
+state.currentSystem=sys;
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+if(state.currentChallenge==='predict')loadPredictChallenge();
+else if(state.currentChallenge==='pathway')loadPathwayChallenge();
+else if(state.currentChallenge==='connector')loadConnectorChallenge();
+else if(state.currentChallenge==='whatif')loadWhatIfChallenge();
+updateUI();
+}
+
+function switchChallenge(type){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.challenge').forEach(c=>c.classList.remove('active'));
+event.target.closest('.tab').classList.add('active');
+document.getElementById('challenge-'+type).classList.add('active');
+state.currentChallenge=type;
+if(type==='predict')loadPredictChallenge();
+else if(type==='pathway')loadPathwayChallenge();
+else if(type==='connector')loadConnectorChallenge();
+else if(type==='whatif')loadWhatIfChallenge();
+}
+
+// PREDICT THE LABS
+function loadPredictChallenge(){
+const arr=getFiltered(PREDICT_CHALLENGES);
+if(!arr.length){document.getElementById('predict-scenario-text').textContent='No challenges for this system.';return;}
+const c=arr[state.predictIndex%arr.length];
+document.getElementById('predict-scenario-text').innerHTML=c.scenario;
+document.getElementById('predict-meta').innerHTML='<span class="meta-tag">'+c.system.toUpperCase()+'</span>';
+document.getElementById('prediction-grid').innerHTML=c.predictions.map((p,i)=>'<div class="prediction-item" data-index="'+i+'"><div class="prediction-label">📊 '+p.label+'</div><div class="prediction-options">'+p.options.map((o,j)=>'<div class="pred-option" data-value="'+j+'" onclick="selectPred('+i+','+j+')">'+o+'</div>').join('')+'</div></div>').join('');
+document.getElementById('confidence-slider').value=50;
+document.getElementById('confidence-value').textContent=50;
+document.getElementById('predict-results').classList.remove('show');
+document.getElementById('predict-submit').disabled=false;
+const link=document.getElementById('module-link');
+if(c.module){link.href='index.html#'+c.module;link.style.display='inline-block';}else{link.style.display='none';}
+}
+
+function selectPred(pi,oi){
+const item=document.querySelector('.prediction-item[data-index="'+pi+'"]');
+item.querySelectorAll('.pred-option').forEach(o=>o.classList.remove('selected'));
+item.querySelector('.pred-option[data-value="'+oi+'"]').classList.add('selected');
+}
+
+function submitPrediction(){
+const arr=getFiltered(PREDICT_CHALLENGES);
+const c=arr[state.predictIndex%arr.length];
+let correct=0;
+c.predictions.forEach((p,i)=>{
+const item=document.querySelector('.prediction-item[data-index="'+i+'"]');
+const sel=item.querySelector('.pred-option.selected');
+const corr=item.querySelector('.pred-option[data-value="'+p.correct+'"]');
+if(sel){
+if(parseInt(sel.dataset.value)===p.correct){sel.classList.add('correct');correct++;}
+else{sel.classList.add('incorrect');corr.classList.add('missed');}
+}else{corr.classList.add('missed');}
+});
+const total=c.predictions.length,pct=Math.round((correct/total)*100),conf=parseInt(document.getElementById('confidence-slider').value);
+document.getElementById('results-icon').textContent=pct>=80?'🎉':pct>=60?'👍':'📚';
+document.getElementById('results-title').textContent=pct>=80?'Excellent!':pct>=60?'Good job!':'Keep learning!';
+document.getElementById('results-score').textContent=correct+'/'+total+' correct ('+pct+'%)';
+document.getElementById('explanation-content').innerHTML='<div class="mech-flow">'+c.explanation.flow.map((s,i)=>'<span class="mech-step">'+s+'</span>'+(i<c.explanation.flow.length-1?'<span class="mech-arrow">→</span>':'')).join('')+'</div><p style="margin-top:1rem;font-size:.9rem">'+c.explanation.details+'</p>';
+const cal=document.getElementById('calibration-feedback'),calT=document.getElementById('calibration-text'),diff=Math.abs(conf-pct);
+cal.className='calibration';
+if(diff<=15){cal.classList.add('good');calT.textContent='Well calibrated! Confidence ('+conf+'%) matched performance ('+pct+'%).';}
+else if(conf>pct+15){cal.classList.add('over');calT.textContent='Overconfident: '+conf+'% predicted vs '+pct+'% actual.';}
+else{calT.textContent='Underconfident: '+conf+'% predicted vs '+pct+'% actual. Trust yourself!';}
+cal.style.display='block';
+state.calibrationData.push({confidence:conf,accuracy:pct});
+state.completed++;
+if(pct>=60){state.correct++;state.streak++;state.xp+=Math.round(10+(pct/10)+(state.streak*2));}
+else{state.streak=0;state.xp+=5;}
+document.getElementById('predict-results').classList.add('show');
+document.getElementById('predict-submit').disabled=true;
+updateUI();saveState();
+}
+
+function nextPredictChallenge(){state.predictIndex++;loadPredictChallenge();}
+
+// BUILD PATHWAY
+let pathwayState={placed:[]};
+function loadPathwayChallenge(){
+const arr=getFiltered(PATHWAY_CHALLENGES);
+if(!arr.length){document.getElementById('pathway-prompt').textContent='No challenges.';return;}
+const c=arr[state.pathwayIndex%arr.length];
+document.getElementById('pathway-prompt').textContent=c.prompt;
+document.getElementById('pathway-meta').innerHTML='<span class="meta-tag">'+c.system.toUpperCase()+'</span>';
+const shuffled=[...c.nodes].sort(()=>Math.random()-0.5);
+document.getElementById('available-nodes').innerHTML=shuffled.map(n=>'<div class="node" onclick="placeNode(this)">'+n+'</div>').join('');
+document.getElementById('pathway-slots').innerHTML=c.correct.map((_,i)=>'<div class="slot" data-slot="'+i+'" onclick="removeSlot('+i+')">Step '+(i+1)+'</div>'+(i<c.correct.length-1?'<span class="slot-arrow">→</span>':'')).join('');
+pathwayState={placed:new Array(c.correct.length).fill(null)};
+document.getElementById('pathway-results').classList.remove('show');
+document.getElementById('pathway-submit').disabled=false;
+const link=document.getElementById('pathway-module-link');
+if(c.module){link.href='index.html#'+c.module;link.style.display='inline-block';}
+}
+
+function placeNode(el){
+const txt=el.textContent;
+if(pathwayState.placed.includes(txt))return;
+const idx=pathwayState.placed.findIndex(p=>p===null);
+if(idx===-1)return;
+pathwayState.placed[idx]=txt;
+document.querySelector('.slot[data-slot="'+idx+'"]').textContent=txt;
+document.querySelector('.slot[data-slot="'+idx+'"]').classList.add('filled');
+el.classList.add('placed');
+}
+
+function removeSlot(idx){
+const txt=pathwayState.placed[idx];
+if(!txt)return;
+pathwayState.placed[idx]=null;
+const slot=document.querySelector('.slot[data-slot="'+idx+'"]');
+slot.textContent='Step '+(idx+1);
+slot.classList.remove('filled');
+document.querySelectorAll('.node').forEach(n=>{if(n.textContent===txt)n.classList.remove('placed');});
+}
+
+function submitPathway(){
+const arr=getFiltered(PATHWAY_CHALLENGES);
+const c=arr[state.pathwayIndex%arr.length];
+let correct=0;
+pathwayState.placed.forEach((p,i)=>{
+const slot=document.querySelector('.slot[data-slot="'+i+'"]');
+if(p===c.correct[i]){slot.classList.add('correct');correct++;}
+else{slot.classList.add('incorrect');}
+});
+const total=c.correct.length,pct=Math.round((correct/total)*100);
+document.getElementById('pathway-results-icon').textContent=pct===100?'🎉':pct>=80?'👍':'📚';
+document.getElementById('pathway-results-title').textContent=pct===100?'Perfect!':pct>=80?'Almost!':'Keep practicing!';
+document.getElementById('pathway-results-score').textContent=correct+'/'+total+' steps correct';
+document.getElementById('pathway-correct').innerHTML='<div class="mech-flow">'+c.correct.map((s,i)=>'<span class="mech-step">'+s+'</span>'+(i<c.correct.length-1?'<span class="mech-arrow">→</span>':'')).join('')+'</div>';
+state.completed++;
+if(pct>=80){state.correct++;state.streak++;state.xp+=15+(state.streak*2);}
+else{state.streak=0;state.xp+=5;}
+document.getElementById('pathway-results').classList.add('show');
+document.getElementById('pathway-submit').disabled=true;
+updateUI();saveState();
+}
+
+function nextPathwayChallenge(){state.pathwayIndex++;loadPathwayChallenge();}
+
+// CONNECTOR
+function loadConnectorChallenge(){
+const arr=getFiltered(CONNECTOR_CHALLENGES);
+if(!arr.length){document.getElementById('finding-a').textContent='No challenges';return;}
+const c=arr[state.connectorIndex%arr.length];
+document.getElementById('finding-a').textContent=c.findingA;
+document.getElementById('finding-b').textContent=c.findingB;
+document.getElementById('connector-meta').innerHTML='<span class="meta-tag">'+c.system.toUpperCase()+'</span>';
+document.getElementById('connector-answer').value='';
+document.getElementById('connector-confidence').value=50;
+document.getElementById('connector-confidence-value').textContent=50;
+document.getElementById('connector-results').classList.remove('show');
+const link=document.getElementById('connector-module-link');
+if(c.module){link.href='index.html#'+c.module;link.style.display='inline-block';}
+}
+
+function submitConnector(){
+const arr=getFiltered(CONNECTOR_CHALLENGES);
+const c=arr[state.connectorIndex%arr.length];
+const ans=document.getElementById('connector-answer').value;
+document.getElementById('connector-answer-reveal').innerHTML='<p style="margin-bottom:1rem">'+c.connection+'</p><div class="mech-flow">'+c.mechanism.map((s,i)=>'<span class="mech-step">'+s+'</span>'+(i<c.mechanism.length-1?'<span class="mech-arrow">→</span>':'')).join('')+'</div>';
+document.getElementById('connector-user-answer').textContent=ans||'(No answer)';
+document.getElementById('connector-results').classList.add('show');
+state.completed++;
+state.xp+=ans.length>30?15:5;
+if(ans.length>30)state.streak++;else state.streak=0;
+updateUI();saveState();
+}
+
+function nextConnectorChallenge(){state.connectorIndex++;loadConnectorChallenge();}
+
+// WHAT IF
+function loadWhatIfChallenge(){
+const arr=getFiltered(WHATIF_CHALLENGES);
+if(!arr.length){document.getElementById('whatif-baseline-text').textContent='No challenges';return;}
+const c=arr[state.whatifIndex%arr.length];
+document.getElementById('whatif-baseline-text').textContent=c.baseline;
+document.getElementById('whatif-intervention-text').textContent=c.intervention;
+document.getElementById('whatif-meta').innerHTML='<span class="meta-tag">'+c.system.toUpperCase()+'</span>';
+document.getElementById('whatif-options').innerHTML='<div style="font-weight:600;margin-bottom:.5rem;grid-column:1/-1">'+c.question+':</div>'+c.options.map((o,i)=>'<div class="whatif-option" data-value="'+i+'" onclick="selectWhatIf('+i+')">'+o+'</div>').join('');
+document.getElementById('whatif-confidence').value=50;
+document.getElementById('whatif-confidence-value').textContent=50;
+document.getElementById('whatif-results').classList.remove('show');
+}
+
+function selectWhatIf(idx){
+document.querySelectorAll('.whatif-option').forEach(o=>o.classList.remove('selected'));
+document.querySelector('.whatif-option[data-value="'+idx+'"]').classList.add('selected');
+}
+
+function submitWhatIf(){
+const arr=getFiltered(WHATIF_CHALLENGES);
+const c=arr[state.whatifIndex%arr.length];
+const sel=document.querySelector('.whatif-option.selected');
+const conf=parseInt(document.getElementById('whatif-confidence').value);
+if(!sel){alert('Please select an answer');return;}
+const selVal=parseInt(sel.dataset.value),isCorrect=selVal===c.correct;
+document.querySelectorAll('.whatif-option').forEach((o,i)=>{
+if(i===c.correct)o.classList.add('correct');
+else if(i===selVal&&!isCorrect)o.classList.add('incorrect');
+});
+document.getElementById('whatif-results-icon').textContent=isCorrect?'🎉':'📚';
+document.getElementById('whatif-results-title').textContent=isCorrect?'Correct!':'Not quite';
+document.getElementById('whatif-results-score').textContent=isCorrect?'+15 XP':'Review the mechanism';
+document.getElementById('whatif-explanation').innerHTML=c.explanation;
+state.calibrationData.push({confidence:conf,accuracy:isCorrect?100:0});
+state.completed++;
+if(isCorrect){state.correct++;state.streak++;state.xp+=15+(state.streak*2);}
+else{state.streak=0;state.xp+=5;}
+document.getElementById('whatif-results').classList.add('show');
+updateUI();saveState();
+}
+
+function nextWhatIfChallenge(){state.whatifIndex++;loadWhatIfChallenge();}
+
+// SLIDERS
+document.getElementById('confidence-slider').addEventListener('input',function(){document.getElementById('confidence-value').textContent=this.value;});
+document.getElementById('connector-confidence').addEventListener('input',function(){document.getElementById('connector-confidence-value').textContent=this.value;});
+document.getElementById('whatif-confidence').addEventListener('input',function(){document.getElementById('whatif-confidence-value').textContent=this.value;});
+
+// INIT
+loadState();
+loadPredictChallenge();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+</body>
+</html>

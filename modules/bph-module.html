@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Benign Prostatic Hyperplasia (BPH)</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #14b8a6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔵 Benign Prostatic Hyperplasia</h1>
+      <p class="subtitle">Anatomy, Pathophysiology & Medical/Surgical Management</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>BPH</strong> is the non-malignant enlargement of the prostate gland, primarily in the <strong>transition zone</strong>, causing lower urinary tract symptoms (LUTS) due to bladder outlet obstruction.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Age</th><th>Histologic BPH Prevalence</th></tr>
+        <tr><td>40-49 years</td><td>~25%</td></tr>
+        <tr><td>50-59 years</td><td>~50%</td></tr>
+        <tr><td>60-69 years</td><td>~65%</td></tr>
+        <tr><td>70-79 years</td><td>~80%</td></tr>
+        <tr><td>80+ years</td><td>>90%</td></tr>
+      </table>
+      <div class="info-box">
+        <strong>Key Distinction:</strong> Histologic BPH is nearly universal with age, but only ~50% of men with histologic BPH develop significant LUTS.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Prostate Anatomy</h2>
+      <h3>Prostate Zones (McNeal)</h3>
+      <table>
+        <tr><th>Zone</th><th>% of Gland</th><th>Clinical Significance</th></tr>
+        <tr><td><strong>Transition Zone</strong></td><td>5-10%</td><td><strong>BPH originates here!</strong></td></tr>
+        <tr><td><strong>Peripheral Zone</strong></td><td>70%</td><td>Where 70-80% of prostate CANCER arises</td></tr>
+        <tr><td><strong>Central Zone</strong></td><td>25%</td><td>Surrounds ejaculatory ducts; rare cancer site</td></tr>
+        <tr><td><strong>Anterior Fibromuscular Stroma</strong></td><td>Variable</td><td>No glandular tissue</td></tr>
+      </table>
+      <div class="clinical-pearl">
+        <strong>Why DRE Misses BPH:</strong> The transition zone (where BPH occurs) is anterior and can't be palpated on DRE. DRE assesses the peripheral zone (where cancer occurs). A normal DRE doesn't rule out BPH!
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Pathophysiology</h2>
+      <h3>Two-Component Model</h3>
+      <div class="pathway-box">LOWER URINARY TRACT SYMPTOMS IN BPH
+
+STATIC COMPONENT                DYNAMIC COMPONENT
+(Mechanical obstruction)        (Smooth muscle tone)
+        ↓                               ↓
+Enlarged prostate tissue        α1-adrenergic receptors
+compresses urethra              in prostate/bladder neck
+        ↓                               ↓
+Physical narrowing              Increased smooth muscle
+of prostatic urethra            contraction
+        ↓                               ↓
+Target: 5α-reductase            Target: α1-blockers
+inhibitors (shrink prostate)    (relax smooth muscle)</div>
+
+      <h3>Hormonal Basis</h3>
+      <div class="info-box">
+        <strong>DHT (Dihydrotestosterone)</strong> is the primary androgen driving prostatic growth.
+        <ul>
+          <li>Testosterone → DHT via <strong>5α-reductase</strong> (Type 2 in prostate)</li>
+          <li>DHT is 5x more potent than testosterone at androgen receptor</li>
+          <li>5α-reductase inhibitors block this conversion → prostate shrinkage</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Presentation (LUTS)</h2>
+      <h3>Storage (Irritative) Symptoms</h3>
+      <ul>
+        <li>Frequency</li>
+        <li>Urgency</li>
+        <li>Nocturia</li>
+        <li>Urge incontinence</li>
+      </ul>
+      <h3>Voiding (Obstructive) Symptoms</h3>
+      <ul>
+        <li>Weak stream</li>
+        <li>Hesitancy</li>
+        <li>Intermittency</li>
+        <li>Straining to void</li>
+        <li>Incomplete emptying</li>
+        <li>Post-void dribbling</li>
+      </ul>
+      <h3>IPSS (AUA Symptom Score)</h3>
+      <div class="info-box">
+        <strong>International Prostate Symptom Score:</strong> 7 questions scored 0-5 each (+ 1 QOL question)
+        <ul>
+          <li><strong>Mild:</strong> 0-7</li>
+          <li><strong>Moderate:</strong> 8-19</li>
+          <li><strong>Severe:</strong> 20-35</li>
+        </ul>
+        Use to assess severity and track treatment response.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Diagnostic Evaluation</h2>
+      <h3>Initial Evaluation</h3>
+      <table>
+        <tr><th>Test</th><th>Purpose</th></tr>
+        <tr><td><strong>History & IPSS</strong></td><td>Symptom severity assessment</td></tr>
+        <tr><td><strong>DRE</strong></td><td>Assess size, nodules (cancer), anal tone</td></tr>
+        <tr><td><strong>Urinalysis</strong></td><td>Rule out infection, hematuria</td></tr>
+        <tr><td><strong>PSA</strong></td><td>Baseline; if life expectancy >10 years</td></tr>
+        <tr><td><strong>Creatinine</strong></td><td>If suspecting renal impairment</td></tr>
+      </table>
+      <h3>Optional Studies</h3>
+      <table>
+        <tr><th>Test</th><th>When to Consider</th></tr>
+        <tr><td>Post-void residual (PVR)</td><td>Assess bladder emptying</td></tr>
+        <tr><td>Uroflowmetry</td><td>Objective flow measurement (Qmax)</td></tr>
+        <tr><td>Pressure-flow studies</td><td>Differentiate obstruction vs weak bladder</td></tr>
+        <tr><td>Cystoscopy</td><td>Hematuria workup; pre-surgical planning</td></tr>
+        <tr><td>Transrectal US</td><td>Prostate volume measurement</td></tr>
+      </table>
+      <div class="danger-box">
+        <strong>⚠️ Red Flags (Not Typical BPH):</strong>
+        <ul>
+          <li>Hematuria → rule out bladder cancer</li>
+          <li>Pain → consider prostatitis, cancer</li>
+          <li>Rapid symptom progression → evaluate further</li>
+          <li>Neurologic symptoms → neurogenic bladder</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Medical Management</h2>
+      <h3>First-Line Agents</h3>
+      <table>
+        <tr><th>Class</th><th>Drugs</th><th>Mechanism</th><th>Onset</th><th>Side Effects</th></tr>
+        <tr><td><strong>α1-Blockers</strong></td><td>Tamsulosin, Alfuzosin, Silodosin, Doxazosin, Terazosin</td><td>Relax prostatic smooth muscle (dynamic component)</td><td>Days to weeks</td><td>Orthostatic hypotension, dizziness, retrograde ejaculation, IFIS</td></tr>
+        <tr><td><strong>5α-Reductase Inhibitors</strong></td><td>Finasteride, Dutasteride</td><td>Block DHT production → shrink prostate (static)</td><td>3-6 months</td><td>↓ Libido, ED, gynecomastia, ↓ PSA by 50%</td></tr>
+      </table>
+
+      <h3>Other Agents</h3>
+      <table>
+        <tr><th>Class</th><th>Drugs</th><th>Role</th></tr>
+        <tr><td>PDE5 Inhibitors</td><td>Tadalafil 5mg daily</td><td>LUTS + ED; relaxes smooth muscle</td></tr>
+        <tr><td>Antimuscarinics</td><td>Tolterodine, Oxybutynin</td><td>Storage symptoms (with caution in BOO)</td></tr>
+        <tr><td>β3-agonists</td><td>Mirabegron</td><td>Storage symptoms; safer in BOO</td></tr>
+      </table>
+
+      <div class="clinical-pearl">
+        <strong>Combination Therapy:</strong> α-blocker + 5ARI (e.g., tamsulosin + dutasteride) for men with larger prostates (>40g) and moderate-severe symptoms. MTOPS/CombAT trials showed reduced progression.
+      </div>
+
+      <div class="danger-box">
+        <strong>⚠️ IFIS (Intraoperative Floppy Iris Syndrome):</strong> α-blockers (especially tamsulosin) can cause iris complications during cataract surgery. Inform ophthalmologist!
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔪 Surgical Management</h2>
+      <h3>Indications for Surgery</h3>
+      <ul>
+        <li>Refractory urinary retention</li>
+        <li>Recurrent UTIs due to BPH</li>
+        <li>Recurrent gross hematuria</li>
+        <li>Bladder stones</li>
+        <li>Renal insufficiency from obstruction</li>
+        <li>Failed medical therapy / patient preference</li>
+      </ul>
+
+      <h3>Surgical Options</h3>
+      <table>
+        <tr><th>Procedure</th><th>Description</th><th>Prostate Size</th></tr>
+        <tr><td><strong>TURP</strong></td><td>Transurethral resection - gold standard</td><td>&lt;80g</td></tr>
+        <tr><td><strong>Laser (HoLEP, PVP)</strong></td><td>Holmium enucleation or GreenLight vaporization</td><td>Any size</td></tr>
+        <tr><td><strong>Simple Prostatectomy</strong></td><td>Open or robotic enucleation</td><td>>80-100g</td></tr>
+        <tr><td><strong>UroLift</strong></td><td>Mechanical lifting with implants</td><td>&lt;80g, no middle lobe</td></tr>
+        <tr><td><strong>Rezūm</strong></td><td>Water vapor thermal therapy</td><td>30-80g</td></tr>
+        <tr><td><strong>Aquablation</strong></td><td>Robotic waterjet ablation</td><td>30-150g</td></tr>
+      </table>
+
+      <h3>TURP Complications</h3>
+      <ul>
+        <li><strong>TUR syndrome:</strong> Hyponatremia from irrigation fluid absorption (less common with bipolar)</li>
+        <li>Bleeding (may require transfusion)</li>
+        <li>Retrograde ejaculation (65-75%)</li>
+        <li>Urethral stricture</li>
+        <li>ED (5-10%)</li>
+        <li>Incontinence (rare, &lt;1%)</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📋 Key Clinical Pearls</h2>
+      <div class="success-box">
+        <strong>Summary Points:</strong>
+        <ul>
+          <li>BPH arises from <strong>transition zone</strong>; cancer from <strong>peripheral zone</strong></li>
+          <li>α-blockers work in days (dynamic); 5ARIs take months (static)</li>
+          <li>5ARIs reduce PSA by ~50% - double measured PSA when interpreting</li>
+          <li>TURP remains gold standard; newer minimally invasive options available</li>
+          <li>Always rule out cancer with PSA and DRE before attributing symptoms to BPH</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A 65-year-old man on tamsulosin for BPH is scheduled for cataract surgery. What should you inform the ophthalmologist about?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Increased bleeding risk</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Risk of intraoperative floppy iris syndrome (IFIS)</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Need to discontinue tamsulosin 2 weeks before</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. No concerns</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B</strong><br>α1-blockers, especially tamsulosin, are associated with IFIS - a condition where the iris becomes floppy and can prolapse during cataract surgery. The ophthalmologist should be informed so they can take precautions. Stopping the medication doesn't reliably prevent IFIS.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK558920/" target="_blank" style="color:var(--primary);">StatPearls: Benign Prostatic Hyperplasia</a></li>
+        <li><a href="https://www.auanet.org/guidelines-and-quality/guidelines/benign-prostatic-hyperplasia-(bph)-guideline" target="_blank" style="color:var(--primary);">AUA BPH Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #2dd4bf;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK558920/" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">StatPearls: Benign Prostatic Hyperplasia</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/benign-prostatic-hyperplasia-(bph)-guideline" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">AUA Guideline: BPH Management</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5027999/" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">NCBI PMC: Medical Therapy for BPH</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/benign-prostatic-hyperplasia" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">Radiopaedia: Prostatic Hyperplasia</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="bph-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="#" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+        <a href="urology-sbar-collection.html" style="display: block; padding: 1rem; background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.4); border-radius: 0.5rem; color: #f9a8d4; text-decoration: none; text-align: center;">
+          <strong>📞 SBAR Practice</strong><br><span style="font-size: 0.85rem; color: #fbcfe8;">Communication skills</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="prostate-cancer-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Prostate Cancer (differential)</a>
+        <a href="neurogenic-bladder-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Neurogenic Bladder</a>
+        <a href="urinary-incontinence-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Urinary Incontinence</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Benign Prostatic Hyperplasia (BPH)"
+         data-key-points="📚 Overview, 🔬 Prostate Anatomy, 🧬 Pathophysiology, 🔍 Clinical Presentation (LUTS), 🔬 Diagnostic Evaluation, 💊 Medical Management, 🔪 Surgical Management, 📋 Key Clinical Pearls, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 65-year-old man presents with urinary frequency, nocturia, weak stream, and hesitancy. DRE reveals a smooth, symmetrically enlarged prostate. PSA is 2.1 ng/mL. What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Prostate cancer typically presents with a firm, nodular, asymmetric gland on DRE. This smooth, symmetric enlargement with low PSA suggests BPH." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Prostate cancer</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Classic BPH: LUTS (frequency, nocturia, weak stream, hesitancy, incomplete emptying) + smooth, symmetric, rubbery enlargement on DRE + normal/mildly elevated PSA. The transition zone is the anatomic origin of BPH." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Benign prostatic hyperplasia (BPH)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Acute prostatitis presents with fever, dysuria, perineal pain, and an exquisitely TENDER prostate — not this chronic LUTS picture." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Acute bacterial prostatitis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neurogenic bladder would have neurological findings and typically an abnormal bladder rather than prostatic enlargement." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Neurogenic bladder</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Which anatomic zone of the prostate is the origin of BPH?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The peripheral zone is where ~70% of prostate CANCERS arise. BPH originates in the transition zone." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Peripheral zone</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="BPH arises from the periurethral transition zone → compresses the urethra → obstructive and irritative LUTS. The peripheral zone (70% of gland volume) is where most prostate cancers develop. Central zone surrounds the ejaculatory ducts." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Transition zone</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The central zone surrounds the ejaculatory ducts and is an uncommon site for both BPH and cancer." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Central zone</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The anterior fibromuscular stroma is non-glandular tissue and does not give rise to BPH." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Anterior fibromuscular stroma</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">What is the FIRST-LINE pharmacotherapy for moderate BPH symptoms?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Alpha-1 blockers (tamsulosin, alfuzosin, silodosin): first-line for BPH — relax smooth muscle in the prostate and bladder neck → rapid symptom improvement (days). Side effects: orthostatic hypotension, retrograde ejaculation. For large prostates, combine with 5-ARI." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Alpha-1 blocker (tamsulosin)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="5-ARIs shrink the prostate over 3-6 months but are slower acting. They are best for large prostates (&gt;40g) and are often combined with alpha-blockers rather than used alone first-line." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">5-alpha reductase inhibitor (finasteride) alone</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="BPH is not infectious. Antibiotics have no role in BPH management." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Antibiotics</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Exogenous testosterone can actually worsen BPH and LUTS by providing substrate for DHT production." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Oral testosterone supplementation</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Which medication reduces prostate size by blocking conversion of testosterone to dihydrotestosterone (DHT)?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Tamsulosin is an alpha-1 blocker — it relaxes smooth muscle but does NOT reduce prostate size." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Tamsulosin</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Finasteride (and dutasteride): 5-alpha reductase inhibitors → block testosterone → DHT conversion → prostate shrinkage (~25% over 6-12 months). Also reduces PSA by ~50% (must double PSA value for cancer screening). Reduces progression to retention and surgery." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Finasteride</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Oxybutynin is an anticholinergic for overactive bladder — it doesn&#x27;t affect prostate size." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Oxybutynin</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Doxazosin is a non-selective alpha-blocker. It relaxes smooth muscle but does not reduce prostate volume." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Doxazosin</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">The AUA Symptom Score (IPSS) is used to assess BPH severity. A score of 22 out of 35 indicates what severity?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Mild BPH: IPSS 0-7. This patient&#x27;s score of 22 is much higher." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Mild (0-7)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Moderate: IPSS 8-19. A score of 22 exceeds the moderate range." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Moderate (8-19)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="IPSS severity: Mild 0-7, Moderate 8-19, Severe 20-35. Score of 22 = severe symptoms. Severe symptoms warrant pharmacotherapy or surgical intervention (TURP, laser ablation, UroLift, or aquablation)." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Severe (20-35)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The IPSS is a validated self-administered questionnaire. A score of 22/35 directly classifies as severe." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cannot be determined without additional testing</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">What is the MOST common surgical procedure for BPH refractory to medical therapy?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Radical prostatectomy is for prostate CANCER — complete removal of the gland. Far too aggressive for BPH." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Radical prostatectomy</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="TURP: gold standard surgical treatment for BPH. Resects obstructing tissue via cystoscope. Effective for prostates &lt;80g. Risks: retrograde ejaculation (75%), TUR syndrome (hyponatremia from irrigation), bleeding. Alternatives: HoLEP, GreenLight laser, UroLift, Rezūm." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Transurethral resection of the prostate (TURP)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Open prostatectomy is reserved for very large prostates (&gt;80-100g) where TURP is impractical. TURP is the most common procedure overall." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Open simple prostatectomy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Suprapubic catheter is a temporizing measure for retention, not a definitive surgical treatment for BPH." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Suprapubic catheter placement</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A BPH patient on tamsulosin is scheduled for cataract surgery. What perioperative concern should be communicated?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Alpha-1 blockers (especially tamsulosin) → intraoperative floppy iris syndrome during cataract surgery: iris billows, prolapses through incisions, and constricts. Inform the ophthalmologist — modified surgical techniques can mitigate risk. Stopping tamsulosin preop may not fully prevent IFIS." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Risk of intraoperative floppy iris syndrome (IFIS)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Malignant hyperthermia is triggered by volatile anesthetics and succinylcholine, unrelated to alpha-blockers." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Risk of malignant hyperthermia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Stopping tamsulosin before cataract surgery is debated and may not prevent IFIS since the iris changes persist. The key is informing the ophthalmologist." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Need to stop all medications 2 weeks prior</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Alpha-blockers are not associated with retinal detachment. IFIS is the specific cataract surgery complication." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Increased risk of retinal detachment</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">What is the mechanism of BPH-related urinary obstruction?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="BPH compresses the urethra from within (transition zone growth), not the bladder externally." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">External compression of the bladder by enlarged prostate</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Two components: STATIC = physical tissue enlargement compressing the urethra (targeted by 5-ARIs), DYNAMIC = alpha-1 adrenergic smooth muscle contraction in prostate/bladder neck (targeted by alpha-blockers). Combined therapy addresses both." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Static (tissue bulk) and dynamic (smooth muscle tone) components compressing the prostatic urethra</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes prostate cancer invasion, not BPH. BPH is a benign hyperplastic process." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Infiltration of cancer cells into the urethral wall</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="BPH causes outlet obstruction, not detrusor paralysis. Over time, the detrusor can become overactive (causing frequency/urgency) or decompensated (causing retention)." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Detrusor muscle paralysis from nerve compression</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=bph-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/bph-crt.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hypertensive Emergency - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family:'Inter',sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #14b8a6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #2dd4bf; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #5eead4; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #14b8a6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #14b8a6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #5eead4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK470371/" target="_blank" rel="noopener">Hypertensive Emergency - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">54-year-old man</span> presents with severe headache, blurry vision, and chest discomfort. He ran out of his blood pressure medications 2 weeks ago.</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">228/134</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value normal\">88</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value normal\">97% RA</div></div>\n                </div>\n            </div>\n            <p style=\"margin-top:12px;\"><strong>Exam:</strong> Fundoscopy shows papilledema and flame hemorrhages</p>",
+        "hint_beginner": "What distinguishes hypertensive emergency from urgency?",
+        "hint_advanced": "What end-organ damage defines hypertensive emergency? What are the categories?",
+        "question": {
+            "prompt": "What is the key distinction that makes this a hypertensive emergency rather than urgency?",
+            "options": [
+                {
+                    "text": "Presence of end-organ damage (retinopathy with papilledema and hemorrhages) - emergency is defined by organ damage, not BP level alone",
+                    "correct": true
+                },
+                {
+                    "text": "Blood pressure greater than 180/120 defines emergency",
+                    "correct": false
+                },
+                {
+                    "text": "Symptoms like headache indicate emergency regardless of exam findings",
+                    "correct": false
+                },
+                {
+                    "text": "Non-compliance with medications makes this an emergency",
+                    "correct": false
+                },
+                {
+                    "text": "Any diastolic BP greater than 130 is automatically an emergency",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Hypertensive EMERGENCY = severely elevated BP + evidence of acute end-organ damage. The retinopathy (papilledema, hemorrhages) confirms end-organ damage. Hypertensive URGENCY = severely elevated BP without acute organ damage. The distinction guides treatment - emergency requires IV therapy and ICU admission.",
+                "incorrect": "The key distinction is END-ORGAN DAMAGE, not the BP number. Urgency (no damage) can be managed with oral agents over 24-48 hours. Emergency (organ damage) requires immediate IV therapy. His fundoscopic findings prove this is an emergency."
+            },
+            "teaching": "<h4>\ud83d\udcda Hypertensive Emergency vs Urgency</h4>\n                    <table>\n                        <tr><th>Feature</th><th>Emergency</th><th>Urgency</th></tr>\n                        <tr><td>BP</td><td>Severely elevated</td><td>Severely elevated</td></tr>\n                        <tr><td>End-organ damage</td><td><strong>Present</strong></td><td>Absent</td></tr>\n                        <tr><td>Treatment</td><td>IV therapy, ICU</td><td>Oral meds, outpatient</td></tr>\n                        <tr><td>BP reduction</td><td>Controlled reduction over hours</td><td>24-48 hours</td></tr>\n                    </table>\n                    <p><strong>End-organ damage examples:</strong></p>\n                    <ul>\n                        <li>Hypertensive encephalopathy</li>\n                        <li>Hypertensive retinopathy (hemorrhages, papilledema)</li>\n                        <li>Acute MI, aortic dissection</li>\n                        <li>Pulmonary edema</li>\n                        <li>Acute kidney injury</li>\n                        <li>Eclampsia</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Initial Management",
+        "content": "<div class=\"narrative\">\n                <p>You confirm hypertensive emergency with malignant hypertension (retinopathy). Additional workup:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Cr:</strong> 2.1 mg/dL (baseline 1.0)</li>\n                    <li><strong>Troponin:</strong> Negative</li>\n                    <li><strong>ECG:</strong> LVH, no ischemic changes</li>\n                    <li><strong>CXR:</strong> No pulmonary edema</li>\n                </ul>\n            </div>",
+        "hint_beginner": "How fast should you lower BP in hypertensive emergency?",
+        "hint_advanced": "Why is rapid BP lowering dangerous? What is cerebral autoregulation?",
+        "question": {
+            "prompt": "What is the appropriate BP reduction goal in the first hour?",
+            "options": [
+                {
+                    "text": "Reduce MAP by 20-25% in first hour, then gradually to 160/100-110 over next 2-6 hours; avoid rapid/excessive reduction to prevent ischemia",
+                    "correct": true
+                },
+                {
+                    "text": "Lower BP to normal (less than 140/90) within 1 hour",
+                    "correct": false
+                },
+                {
+                    "text": "Reduce systolic BP by 50% in first 30 minutes",
+                    "correct": false
+                },
+                {
+                    "text": "Any reduction is acceptable as long as it is gradual over 24 hours",
+                    "correct": false
+                },
+                {
+                    "text": "Target BP less than 180/110 immediately, then normal within 6 hours",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Standard goal: reduce MAP by 20-25% in first hour (or SBP by 10-20%), then gradually to 160/100-110 over 2-6 hours, then normal over 24-48 hours. In chronic hypertension, cerebral autoregulation is shifted rightward - rapid lowering can cause cerebral hypoperfusion/stroke.",
+                "incorrect": "Rapid BP reduction is dangerous! Chronically hypertensive patients have shifted cerebral autoregulation - they need higher BP to perfuse the brain. Reducing too fast can cause stroke or MI. Goal: 20-25% MAP reduction in first hour, then gradual."
+            },
+            "teaching": "<h4>\ud83d\udcda BP Reduction Goals</h4>\n                    <p><strong>General hypertensive emergency:</strong></p>\n                    <ul>\n                        <li>First hour: Reduce MAP by 20-25%</li>\n                        <li>2-6 hours: Gradually to ~160/100-110</li>\n                        <li>24-48 hours: Gradually to normal</li>\n                    </ul>\n                    <p><strong>Exceptions (faster reduction):</strong></p>\n                    <ul>\n                        <li>Aortic dissection: SBP less than 120 in 20 minutes</li>\n                        <li>Acute ischemic stroke (if giving tPA): less than 185/110</li>\n                    </ul>\n                    <p><em>Danger of rapid reduction: ischemic stroke, MI, blindness due to shifted autoregulation</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Medication Selection",
+        "content": "<div class=\"narrative\">\n                <p>You plan to start IV antihypertensive therapy.</p>\n                <p style=\"margin-top:12px;\"><strong>Setting:</strong> ICU with continuous BP monitoring</p>\n            </div>",
+        "hint_beginner": "What IV antihypertensives are commonly used in hypertensive emergency?",
+        "hint_advanced": "How do you choose between different agents based on the type of end-organ damage?",
+        "question": {
+            "prompt": "For this patient with malignant hypertension (no MI, no pulmonary edema), which is the most appropriate first-line agent?",
+            "options": [
+                {
+                    "text": "Nicardipine or clevidipine (IV calcium channel blocker) - easily titratable, safe in most hypertensive emergencies",
+                    "correct": true
+                },
+                {
+                    "text": "IV enalaprilat - ACE inhibitors are first-line for all hypertensive emergencies",
+                    "correct": false
+                },
+                {
+                    "text": "IV hydralazine - most commonly used agent",
+                    "correct": false
+                },
+                {
+                    "text": "Sublingual nifedipine for rapid BP control",
+                    "correct": false
+                },
+                {
+                    "text": "Oral clonidine loading for smooth BP reduction",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Nicardipine or clevidipine (IV dihydropyridine CCBs) are excellent first-line agents: easily titratable, no reflex tachycardia, predictable effect. Alternatives: labetalol (if no contraindication), nitroprusside (if no renal failure). Sublingual nifedipine is CONTRAINDICATED (unpredictable, rapid drops).",
+                "incorrect": "Titratable IV agents are required. Nicardipine/clevidipine or labetalol are most commonly used. Sublingual nifedipine is contraindicated (unpredictable, excessive drops causing strokes/MIs). Hydralazine is less ideal (unpredictable, reflex tachycardia). Oral agents not appropriate for emergency."
+            },
+            "teaching": "<h4>\ud83d\udcda IV Antihypertensives by Scenario</h4>\n                    <table>\n                        <tr><th>Clinical Scenario</th><th>Preferred Agent</th></tr>\n                        <tr><td>General/malignant HTN</td><td>Nicardipine, clevidipine, labetalol</td></tr>\n                        <tr><td>Aortic dissection</td><td>Esmolol + nitroprusside (beta-blocker first!)</td></tr>\n                        <tr><td>Acute pulmonary edema</td><td>Nitroglycerin, nitroprusside</td></tr>\n                        <tr><td>ACS</td><td>Nitroglycerin, labetalol, esmolol</td></tr>\n                        <tr><td>Eclampsia</td><td>Labetalol, hydralazine, magnesium</td></tr>\n                        <tr><td>Pheochromocytoma</td><td>Phentolamine, nicardipine</td></tr>\n                    </table>\n                    <p><em>AVOID: Sublingual nifedipine (unpredictable drops)</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Aortic Dissection Scenario",
+        "content": "<div class=\"narrative\">\n                <p>Different patient: <span class=\"highlight\">62-year-old man</span> with sudden severe chest pain radiating to back. BP 210/118, HR 98.</p>\n                <p style=\"margin-top:12px;\"><strong>CT angiogram:</strong> Type B aortic dissection</p>\n            </div>",
+        "hint_beginner": "What are the BP and HR targets in aortic dissection?",
+        "hint_advanced": "Why must you give beta-blocker before vasodilators?",
+        "question": {
+            "prompt": "What is the target BP/HR and why is the order of medications important?",
+            "options": [
+                {
+                    "text": "Target SBP less than 120 and HR less than 60; give beta-blocker FIRST (esmolol) to prevent reflex tachycardia before adding vasodilator (nitroprusside)",
+                    "correct": true
+                },
+                {
+                    "text": "Target SBP less than 140; start nitroprusside first for rapid BP control",
+                    "correct": false
+                },
+                {
+                    "text": "Target SBP less than 180; use nicardipine alone",
+                    "correct": false
+                },
+                {
+                    "text": "Target HR less than 60 only; BP is not as important as heart rate",
+                    "correct": false
+                },
+                {
+                    "text": "Standard 20-25% MAP reduction over 1 hour as in other emergencies",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Aortic dissection requires aggressive, rapid control: SBP <120, HR <60 within 20 minutes. Beta-blocker FIRST to blunt reflex tachycardia before vasodilator - tachycardia increases aortic wall stress (dP/dt) and can propagate dissection. Then add nitroprusside or nicardipine for BP.",
+                "incorrect": "Aortic dissection is an exception requiring RAPID aggressive control (SBP <120, HR <60). Order matters: beta-blocker first (reduces HR and dP/dt), then vasodilator. Giving vasodilator first causes reflex tachycardia which worsens dissection."
+            },
+            "teaching": "<h4>\ud83d\udcda Aortic Dissection Management</h4>\n                    <p><strong>Targets:</strong></p>\n                    <ul>\n                        <li>SBP less than 120 mmHg</li>\n                        <li>HR less than 60 bpm</li>\n                        <li>Achieve within 20 minutes</li>\n                    </ul>\n                    <p><strong>Medication order:</strong></p>\n                    <ol>\n                        <li><strong>Beta-blocker first:</strong> Esmolol or labetalol</li>\n                        <li><strong>Then vasodilator:</strong> Nitroprusside or nicardipine</li>\n                    </ol>\n                    <p><strong>Why order matters:</strong> Vasodilators cause reflex tachycardia \u2192 increased dP/dt \u2192 propagates dissection. Beta-blocker blunts this response.</p>",
+            "points": 15
+        }
+    }
+,
+{
+        "title": "Target Organ Assessment",
+        "content": "<div class=\"narrative\"><p>A <span class=\"highlight\">58-year-old man</span> presents with BP <span class=\"critical\">220/130 mmHg</span>, severe headache, and blurred vision.</p><p style=\"margin-top:12px;\">You must rapidly assess for <span class=\"critical\">acute target organ damage</span> to distinguish hypertensive emergency from urgency.</p></div>",
+        "hint_beginner": "Hypertensive emergency = elevated BP PLUS acute end-organ damage.",
+        "hint_advanced": "Which organs are most vulnerable? What specific findings define each type of end-organ damage?",
+        "question": {
+                "prompt": "Which finding would classify this as hypertensive EMERGENCY rather than urgency?",
+                "options": [
+                        {
+                                "text": "Papilledema on fundoscopic exam indicating hypertensive encephalopathy",
+                                "correct": true
+                        },
+                        {
+                                "text": "Blood pressure >180/120 mmHg alone",
+                                "correct": false
+                        },
+                        {
+                                "text": "Headache without focal neurologic findings",
+                                "correct": false
+                        },
+                        {
+                                "text": "History of poorly controlled chronic hypertension",
+                                "correct": false
+                        },
+                        {
+                                "text": "Anxiety and elevated heart rate",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Papilledema indicates increased intracranial pressure from hypertensive encephalopathy - this is acute end-organ damage that defines a hypertensive EMERGENCY. Blood pressure level alone does not distinguish emergency from urgency.",
+                        "incorrect": "Hypertensive emergency requires evidence of acute target organ damage (brain, heart, kidneys, eyes, aorta), not just elevated blood pressure numbers. The distinction drives completely different management approaches."
+                },
+                "teaching": "<h4>\ud83d\udea8 Emergency vs Urgency</h4><table class=\"comparison-table\"><tr><th>Feature</th><th>Emergency</th><th>Urgency</th></tr><tr><td>Definition</td><td>Elevated BP + organ damage</td><td>Elevated BP, no damage</td></tr><tr><td>Treatment</td><td>IV medications</td><td>Oral medications</td></tr><tr><td>Setting</td><td>ICU admission</td><td>Outpatient/observation</td></tr><tr><td>BP reduction</td><td>Controlled, gradual</td><td>Over 24-48 hours</td></tr></table>",
+                "points": 10
+        }
+},
+{
+        "title": "Identifying End-Organ Damage",
+        "content": "<div class=\"narrative\"><p>You examine the patient systematically for signs of target organ damage.</p><div class=\"patient-card\"><h4>Physical Exam Findings</h4><ul><li>Fundoscopy: Papilledema, flame hemorrhages, cotton-wool spots</li><li>Neuro: Confused, no focal deficits</li><li>Cardiac: S4 gallop, no murmurs</li><li>Lungs: Bibasilar crackles</li></ul></div></div>",
+        "hint_beginner": "Each finding points to damage in a specific organ system.",
+        "hint_advanced": "How do you prioritize workup based on these findings?",
+        "question": {
+                "prompt": "Which target organ shows the MOST concerning damage in this patient?",
+                "options": [
+                        {
+                                "text": "Brain - confusion plus papilledema indicates hypertensive encephalopathy with cerebral edema",
+                                "correct": true
+                        },
+                        {
+                                "text": "Heart - S4 gallop indicates diastolic dysfunction",
+                                "correct": false
+                        },
+                        {
+                                "text": "Lungs - crackles indicate pulmonary edema",
+                                "correct": false
+                        },
+                        {
+                                "text": "Eyes - retinopathy is most specific for chronic damage",
+                                "correct": false
+                        },
+                        {
+                                "text": "All findings are equally concerning",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Confusion plus papilledema indicates hypertensive encephalopathy - cerebral edema from failed autoregulation. This can progress to seizures, hemorrhage, and death. While all findings matter, CNS involvement is immediately life-threatening.",
+                        "incorrect": "While all findings indicate end-organ damage, hypertensive encephalopathy (confusion + papilledema) represents the most immediately life-threatening complication requiring urgent treatment."
+                },
+                "teaching": "<h4>\ud83c\udfaf Target Organ Damage Types</h4><ul><li><strong>Brain:</strong> Encephalopathy, stroke, hemorrhage</li><li><strong>Heart:</strong> ACS, acute heart failure, aortic dissection</li><li><strong>Kidneys:</strong> Acute kidney injury</li><li><strong>Eyes:</strong> Papilledema, hemorrhages, exudates</li><li><strong>Vessels:</strong> Aortic dissection</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Initial Workup",
+        "content": "<div class=\"narrative\"><p>You order stat labs and imaging to characterize the extent of damage and guide treatment.</p></div>",
+        "hint_beginner": "Target organs to assess: brain, heart, kidneys. What tests evaluate each?",
+        "hint_advanced": "Which imaging finding would change your BP target significantly?",
+        "question": {
+                "prompt": "Which test is MOST urgent in this patient with headache and confusion?",
+                "options": [
+                        {
+                                "text": "CT head without contrast to rule out intracranial hemorrhage",
+                                "correct": true
+                        },
+                        {
+                                "text": "Echocardiogram to assess cardiac function",
+                                "correct": false
+                        },
+                        {
+                                "text": "Renal ultrasound to evaluate kidney size",
+                                "correct": false
+                        },
+                        {
+                                "text": "24-hour urine catecholamines for pheochromocytoma",
+                                "correct": false
+                        },
+                        {
+                                "text": "MRI brain with contrast for detailed evaluation",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "With neurologic symptoms, intracranial hemorrhage must be ruled out BEFORE aggressive BP lowering. Finding a hemorrhagic stroke would change BP targets significantly (more aggressive reduction to prevent hematoma expansion).",
+                        "incorrect": "Neuroimaging is the priority with neurologic symptoms. Finding intracranial bleeding changes management significantly - different BP targets for hemorrhagic vs ischemic stroke."
+                },
+                "teaching": "<h4>\ud83d\udd2c Hypertensive Emergency Workup</h4><ul><li><strong>CT head:</strong> If any neurologic symptoms</li><li><strong>ECG + troponin:</strong> Chest pain, dyspnea, or any ACS concern</li><li><strong>BMP, UA:</strong> Renal function assessment</li><li><strong>CBC:</strong> Microangiopathic hemolysis (schistocytes)</li><li><strong>CXR:</strong> Pulmonary edema evaluation</li><li><strong>CT angiogram:</strong> If aortic dissection suspected</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "BP Reduction Strategy",
+        "content": "<div class=\"narrative\"><p>CT head shows no hemorrhage. The BP remains <span class=\"critical\">218/125 mmHg</span>.</p><p style=\"margin-top:12px;\">You need to lower the blood pressure, but how quickly?</p></div>",
+        "hint_beginner": "Rapid BP reduction can cause stroke from cerebral hypoperfusion.",
+        "hint_advanced": "What are the specific MAP reduction goals and timeframes? How does chronic HTN affect autoregulation?",
+        "question": {
+                "prompt": "What is the appropriate BP reduction goal for hypertensive encephalopathy?",
+                "options": [
+                        {
+                                "text": "Reduce MAP by no more than 25% in the first hour, then toward 160/100 over 2-6 hours",
+                                "correct": true
+                        },
+                        {
+                                "text": "Normalize BP to <140/90 within the first hour",
+                                "correct": false
+                        },
+                        {
+                                "text": "Reduce systolic by 50 mmHg in the first 30 minutes",
+                                "correct": false
+                        },
+                        {
+                                "text": "No reduction until the patient is transferred to the ICU",
+                                "correct": false
+                        },
+                        {
+                                "text": "Immediate reduction to <120/80 to prevent further damage",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "The general rule: reduce MAP by no more than 25% in the first hour, then gradually toward 160/100-110 over hours 2-6. Faster reduction risks cerebral hypoperfusion because autoregulation is shifted rightward in chronic hypertension.",
+                        "incorrect": "Overly rapid BP reduction is dangerous. The brain has adapted to higher perfusion pressures in chronic hypertension; acute normalization causes watershed infarcts from hypoperfusion."
+                },
+                "teaching": "<h4>\ud83d\udcc9 BP Reduction Targets</h4><table class=\"comparison-table\"><tr><th>Timeframe</th><th>Goal</th></tr><tr><td>First hour</td><td>\u2193 MAP by \u226425%</td></tr><tr><td>Hours 2-6</td><td>160/100-110</td></tr><tr><td>24-48 hours</td><td>Normalize gradually</td></tr></table><p style=\"margin-top:12px;\"><em>Exception: Aortic dissection requires faster reduction (SBP 100-120 in 20 min)</em></p>",
+                "points": 10
+        }
+},
+{
+        "title": "Medication Selection",
+        "content": "<div class=\"narrative\"><p>You need to select an IV antihypertensive for controlled BP reduction. Several options are available.</p></div>",
+        "hint_beginner": "IV medications allow precise, titratable control in emergencies.",
+        "hint_advanced": "How do you choose between nicardipine, labetalol, nitroprusside, and other agents?",
+        "question": {
+                "prompt": "For hypertensive encephalopathy, which IV agent is preferred first-line?",
+                "options": [
+                        {
+                                "text": "Nicardipine or labetalol - easily titratable with predictable dose-response",
+                                "correct": true
+                        },
+                        {
+                                "text": "Hydralazine - safe and effective first-line agent",
+                                "correct": false
+                        },
+                        {
+                                "text": "Nitroprusside - fastest acting agent available",
+                                "correct": false
+                        },
+                        {
+                                "text": "IV enalaprilat - ACE inhibitors are always best for hypertension",
+                                "correct": false
+                        },
+                        {
+                                "text": "Oral nifedipine - rapid onset and widely available",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Nicardipine and labetalol are preferred first-line agents - easily titratable infusions with predictable responses. Nitroprusside requires arterial line monitoring and has cyanide toxicity risk. Hydralazine has unpredictable, prolonged effects.",
+                        "incorrect": "Drug selection matters significantly. Hydralazine's response is unpredictable. Nitroprusside requires invasive monitoring and has toxicity concerns. Oral nifedipine causes unpredictable precipitous drops and is contraindicated."
+                },
+                "teaching": "<h4>\ud83d\udc8a IV Antihypertensive Agents</h4><table class=\"comparison-table\"><tr><th>Drug</th><th>Mechanism</th><th>Cautions</th></tr><tr><td>Nicardipine</td><td>CCB (arterial)</td><td>Reflex tachycardia</td></tr><tr><td>Labetalol</td><td>\u03b1/\u03b2 blocker</td><td>Avoid in cocaine, asthma</td></tr><tr><td>Nitroprusside</td><td>Vasodilator</td><td>Cyanide toxicity, needs A-line</td></tr><tr><td>Esmolol</td><td>\u03b21 selective</td><td>Short-acting, needs infusion</td></tr><tr><td>Hydralazine</td><td>Vasodilator</td><td>Unpredictable response</td></tr></table>",
+                "points": 10
+        }
+},
+{
+        "title": "Special Scenario: Aortic Dissection",
+        "content": "<div class=\"narrative\"><p><strong>Consider a different patient:</strong></p><p>55-year-old with sudden <span class=\"critical\">tearing chest pain radiating to back</span>, BP 210/120 with <span class=\"critical\">30 mmHg difference between arms</span>.</p></div>",
+        "hint_beginner": "Aortic dissection requires BOTH rate AND pressure control.",
+        "hint_advanced": "Why is the treatment sequence (beta-blocker first, then vasodilator) critical?",
+        "question": {
+                "prompt": "For suspected aortic dissection, what is the correct initial treatment approach?",
+                "options": [
+                        {
+                                "text": "IV beta-blocker FIRST (target HR <60), THEN add vasodilator to achieve SBP 100-120",
+                                "correct": true
+                        },
+                        {
+                                "text": "Vasodilator first to rapidly lower blood pressure",
+                                "correct": false
+                        },
+                        {
+                                "text": "Same approach as other hypertensive emergencies - reduce MAP 25% first hour",
+                                "correct": false
+                        },
+                        {
+                                "text": "Oral medications are adequate if the patient appears stable",
+                                "correct": false
+                        },
+                        {
+                                "text": "Pain control first, then blood pressure management",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "In aortic dissection, must give beta-blocker FIRST to reduce heart rate and dP/dt (the force of ventricular contraction/shear stress). Vasodilator alone causes reflex tachycardia which increases shear stress and dissection propagation risk.",
+                        "incorrect": "Treatment sequence is critical in dissection. Vasodilators alone are dangerous because reflex tachycardia increases aortic wall shear stress. Beta-blocker first is mandatory."
+                },
+                "teaching": "<h4>\ud83e\udec0 Aortic Dissection BP Goals</h4><ul><li><strong>Heart rate target:</strong> <60 bpm</li><li><strong>SBP target:</strong> 100-120 mmHg</li><li><strong>Sequence:</strong> \u03b2-blocker FIRST \u2192 then vasodilator</li><li><strong>Typical regimen:</strong> Esmolol + nicardipine (or nitroprusside)</li><li><strong>Timeline:</strong> Achieve goals within 20 minutes</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Monitoring and ICU Care",
+        "content": "<div class=\"narrative\"><p>Your patient's BP is now <span class=\"lab-value\">175/105</span> on nicardipine infusion. Confusion is improving. What level of monitoring is needed?</p></div>",
+        "hint_beginner": "Hypertensive emergencies require intensive monitoring.",
+        "hint_advanced": "When can you transition to oral medications? What complications require continued surveillance?",
+        "question": {
+                "prompt": "What is the appropriate disposition and monitoring?",
+                "options": [
+                        {
+                                "text": "ICU admission for continuous arterial BP monitoring, neurologic checks, and IV medication titration",
+                                "correct": true
+                        },
+                        {
+                                "text": "Observation unit for 6 hours, then discharge with oral medications",
+                                "correct": false
+                        },
+                        {
+                                "text": "Regular floor bed with BP checks every 4 hours",
+                                "correct": false
+                        },
+                        {
+                                "text": "Discharge home once BP is below 180/110",
+                                "correct": false
+                        },
+                        {
+                                "text": "Transfer to stroke unit only if new deficits develop",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Hypertensive emergencies require ICU-level care with continuous arterial BP monitoring, frequent neurologic assessments, IV infusion titration, and close observation for complications. Transition to oral medications occurs over 24-48 hours once stable.",
+                        "incorrect": "This is a life-threatening emergency requiring intensive monitoring. Non-ICU settings cannot provide the necessary continuous BP monitoring and rapid medication titration."
+                },
+                "teaching": "<h4>\ud83c\udfe5 ICU Management</h4><ul><li>Arterial line for continuous BP monitoring</li><li>Neurologic checks every 1-2 hours initially</li><li>Strict I/O monitoring, Foley catheter</li><li>Serial labs (renal function, troponin)</li><li>Transition to PO meds over 24-48 hours when stable</li><li>Identify and treat underlying cause</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Case Resolution",
+        "content": "<div class=\"narrative\"><p><strong>Hospital Course:</strong></p><p>After 24 hours of nicardipine infusion with gradual BP reduction, the patient's confusion completely resolves. Repeat fundoscopic exam shows improving papilledema.</p><p style=\"margin-top:12px;\">He is transitioned to oral amlodipine and lisinopril, with BP stable at 145/90. Discharged on day 3 with close outpatient follow-up arranged.</p></div>",
+        "hint_beginner": "What made this case successful?",
+        "hint_advanced": "What are the key teaching points about hypertensive emergencies?",
+        "question": {
+                "prompt": "What was the key to successful management of this hypertensive emergency?",
+                "options": [
+                        {
+                                "text": "Gradual BP reduction (MAP \u226425% first hour) with titratable IV agent and ICU-level monitoring",
+                                "correct": true
+                        },
+                        {
+                                "text": "Rapid BP normalization within the first hour prevented further organ damage",
+                                "correct": false
+                        },
+                        {
+                                "text": "Early transition to oral medications minimized hospital stay",
+                                "correct": false
+                        },
+                        {
+                                "text": "The specific choice of nicardipine over other agents",
+                                "correct": false
+                        },
+                        {
+                                "text": "Avoiding all BP reduction until CT was performed",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Controlled, gradual BP reduction following evidence-based targets prevented complications from cerebral hypoperfusion while treating the hypertensive encephalopathy. The rate of reduction matters more than the specific drug choice.",
+                        "incorrect": "Rapid normalization would have been dangerous due to impaired cerebral autoregulation. The measured, gradual approach following guidelines was the key to success."
+                },
+                "teaching": "<h4>\ud83c\udfaf Key Takeaways: Hypertensive Emergency</h4><ul><li>Emergency = elevated BP + acute end-organ damage</li><li>Rule out hemorrhagic stroke before aggressive treatment</li><li>Reduce MAP \u226425% in first hour (exception: dissection)</li><li>Preferred agents: nicardipine, labetalol (titratable)</li><li>Aortic dissection: \u03b2-blocker FIRST, then vasodilator</li><li>ICU admission for continuous monitoring</li><li>Gradual transition to oral meds over 24-48 hours</li></ul>",
+                "points": 10
+        }
+}];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#14b8a6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 HTN Crisis</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Hypertensive Emergency"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Bladder Cancer</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #14b8a6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔴 Bladder Cancer</h1>
+      <p class="subtitle">Hematuria Workup, Staging & BCG Therapy</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Bladder cancer</strong> is the most common malignancy of the urinary tract. ~90% are <strong>urothelial (transitional cell) carcinoma</strong>. Most present with <strong>painless gross hematuria</strong>.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Rank</td><td>6th most common cancer (4th in men)</td></tr>
+        <tr><td>Male:Female</td><td>3-4:1</td></tr>
+        <tr><td>Peak age</td><td>65-75 years</td></tr>
+        <tr><td>Non-muscle invasive at diagnosis</td><td>~75%</td></tr>
+        <tr><td>Muscle-invasive at diagnosis</td><td>~25%</td></tr>
+      </table>
+
+      <h3>Risk Factors</h3>
+      <table>
+        <tr><th>Risk Factor</th><th>Notes</th></tr>
+        <tr><td><strong>Smoking</strong></td><td>#1 risk factor; 50% of cases; 4x risk</td></tr>
+        <tr><td><strong>Occupational exposure</strong></td><td>Aromatic amines (dyes, rubber, leather, paint)</td></tr>
+        <tr><td><strong>Cyclophosphamide</strong></td><td>Metabolite acrolein is carcinogenic</td></tr>
+        <tr><td><strong>Pelvic radiation</strong></td><td>Prior radiation therapy</td></tr>
+        <tr><td><strong>Chronic irritation</strong></td><td>Catheters, stones → squamous cell carcinoma</td></tr>
+        <tr><td><strong>Schistosomiasis</strong></td><td>Squamous cell carcinoma (endemic areas)</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Histology</h2>
+      <table>
+        <tr><th>Type</th><th>Frequency</th><th>Notes</th></tr>
+        <tr><td><strong>Urothelial (TCC)</strong></td><td>90%</td><td>Can occur anywhere in urothelium (renal pelvis → urethra)</td></tr>
+        <tr><td><strong>Squamous cell</strong></td><td>3-5%</td><td>Chronic irritation, schistosomiasis</td></tr>
+        <tr><td><strong>Adenocarcinoma</strong></td><td>1-2%</td><td>Urachal remnant, exstrophy</td></tr>
+        <tr><td><strong>Small cell</strong></td><td><1%</td><td>Aggressive, neuroendocrine</td></tr>
+      </table>
+      <div class="clinical-pearl">
+        <strong>"Field defect" concept:</strong> The entire urothelium is exposed to carcinogens in urine. Patients with bladder TCC are at risk for upper tract TCC and vice versa. ~5% will develop upper tract tumors.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Presentation</h2>
+      <h3>Symptoms</h3>
+      <ul>
+        <li><strong>Painless gross hematuria</strong> - most common (85%); often intermittent</li>
+        <li>Microscopic hematuria</li>
+        <li>Irritative voiding symptoms (frequency, urgency) - especially CIS</li>
+        <li>Flank pain (if ureteral obstruction)</li>
+        <li>Advanced: weight loss, bone pain, pelvic mass</li>
+      </ul>
+      <div class="danger-box">
+        <strong>⚠️ Key Principle:</strong> Any patient with gross hematuria needs a complete urologic workup (cystoscopy + upper tract imaging) regardless of whether bleeding stops or other cause is found.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📷 Diagnosis</h2>
+      <h3>Hematuria Workup</h3>
+      <div class="pathway-box">HEMATURIA WORKUP
+        ↓
+Urinalysis (confirm RBCs, rule out infection)
+        ↓
+Imaging: CT urogram (upper tracts + bladder)
+        ↓
+Cystoscopy (direct visualization of bladder)
+        ↓
+If tumor seen → TURBT (transurethral resection)</div>
+
+      <h3>Cystoscopy Findings</h3>
+      <ul>
+        <li><strong>Papillary:</strong> Frond-like projections (most common appearance)</li>
+        <li><strong>Sessile:</strong> Broad-based, solid</li>
+        <li><strong>Flat (CIS):</strong> Velvety red patches; high-grade by definition</li>
+      </ul>
+
+      <h3>TURBT (Transurethral Resection of Bladder Tumor)</h3>
+      <div class="info-box">
+        <strong>TURBT is DIAGNOSTIC and THERAPEUTIC:</strong>
+        <ul>
+          <li>Resects visible tumor</li>
+          <li>Provides tissue for histology and staging</li>
+          <li>MUST include detrusor muscle to assess invasion</li>
+          <li>Repeat TURBT in 4-6 weeks for high-grade Ta, T1, or incomplete resection</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📍 Staging</h2>
+      <h3>TNM Staging</h3>
+      <table>
+        <tr><th>Stage</th><th>Description</th><th>Category</th></tr>
+        <tr><td><strong>Ta</strong></td><td>Papillary, confined to mucosa</td><td rowspan="3">Non-Muscle Invasive (NMIBC)</td></tr>
+        <tr><td><strong>Tis (CIS)</strong></td><td>Flat carcinoma in situ (HIGH GRADE)</td></tr>
+        <tr><td><strong>T1</strong></td><td>Invades lamina propria (submucosa)</td></tr>
+        <tr><td><strong>T2a</strong></td><td>Invades superficial muscle (inner half)</td><td rowspan="4">Muscle-Invasive (MIBC)</td></tr>
+        <tr><td><strong>T2b</strong></td><td>Invades deep muscle (outer half)</td></tr>
+        <tr><td><strong>T3</strong></td><td>Invades perivesical fat</td></tr>
+        <tr><td><strong>T4</strong></td><td>Invades prostate, uterus, vagina (T4a) or pelvic/abdominal wall (T4b)</td></tr>
+      </table>
+
+      <div class="clinical-pearl">
+        <strong>Key Distinction:</strong> Muscle invasion (T2+) changes management dramatically:
+        <ul>
+          <li>NMIBC (Ta, Tis, T1) → TURBT + intravesical therapy; bladder preserved</li>
+          <li>MIBC (T2+) → Radical cystectomy ± chemotherapy</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Treatment: Non-Muscle Invasive (NMIBC)</h2>
+      <h3>Risk Stratification</h3>
+      <table>
+        <tr><th>Risk</th><th>Features</th><th>Treatment</th></tr>
+        <tr><td><strong>Low</strong></td><td>Single, small, low-grade Ta</td><td>TURBT alone; surveillance</td></tr>
+        <tr><td><strong>Intermediate</strong></td><td>Multiple/recurrent low-grade Ta; large tumors</td><td>TURBT + intravesical chemo (mitomycin)</td></tr>
+        <tr><td><strong>High</strong></td><td>High-grade Ta, T1, CIS</td><td>TURBT + BCG induction + maintenance</td></tr>
+      </table>
+
+      <h3>Intravesical Therapies</h3>
+      <div class="info-box">
+        <strong>BCG (Bacillus Calmette-Guérin):</strong>
+        <ul>
+          <li>Live attenuated Mycobacterium bovis</li>
+          <li>Induces immune response against tumor</li>
+          <li>Most effective intravesical therapy for high-risk NMIBC</li>
+          <li>Induction: Weekly x6 weeks</li>
+          <li>Maintenance: Essential for efficacy (monthly → quarterly)</li>
+        </ul>
+        <strong>Side effects:</strong> Dysuria, frequency, flu-like symptoms, BCG sepsis (rare but serious)
+      </div>
+
+      <div class="info-box">
+        <strong>Mitomycin C:</strong>
+        <ul>
+          <li>Chemotherapy agent</li>
+          <li>Single dose post-TURBT reduces recurrence</li>
+          <li>Used for low/intermediate risk or BCG shortage</li>
+        </ul>
+      </div>
+
+      <div class="danger-box">
+        <strong>⚠️ BCG Contraindications:</strong>
+        <ul>
+          <li>Gross hematuria (risk of systemic absorption)</li>
+          <li>Traumatic catheterization</li>
+          <li>Active UTI</li>
+          <li>Immunocompromised patients</li>
+          <li>Within 2 weeks of TURBT</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔪 Treatment: Muscle-Invasive (MIBC)</h2>
+      <h3>Standard of Care</h3>
+      <div class="pathway-box">MUSCLE-INVASIVE BLADDER CANCER (T2+)
+        ↓
+Staging workup (CT chest/abd/pelvis, ± PET, ± bone scan)
+        ↓
+Neoadjuvant chemotherapy (cisplatin-based)
+        ↓
+RADICAL CYSTECTOMY
+• Men: Remove bladder, prostate, seminal vesicles
+• Women: Remove bladder, uterus, ovaries, anterior vagina
+• Pelvic lymph node dissection
+        ↓
+Urinary diversion:
+• Ileal conduit (most common)
+• Neobladder (orthotopic)
+• Continent cutaneous reservoir</div>
+
+      <h3>Why Neoadjuvant Chemotherapy?</h3>
+      <ul>
+        <li>5% absolute survival benefit</li>
+        <li>Treats micrometastatic disease</li>
+        <li>Better tolerated before surgery</li>
+        <li>Cisplatin-based (MVAC or gemcitabine/cisplatin)</li>
+      </ul>
+
+      <h3>Alternatives for Non-Surgical Candidates</h3>
+      <ul>
+        <li>Trimodal therapy: TURBT + radiation + chemotherapy</li>
+        <li>Bladder preservation option</li>
+        <li>Requires close surveillance</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📈 Surveillance</h2>
+      <h3>NMIBC Surveillance</h3>
+      <table>
+        <tr><th>Risk</th><th>Cystoscopy Schedule</th></tr>
+        <tr><td>Low risk</td><td>3 months, then yearly if negative</td></tr>
+        <tr><td>Intermediate</td><td>3 months x2 years, then 6-12 monthly</td></tr>
+        <tr><td>High risk</td><td>3 months x2 years, then 6 months x2 years, then yearly</td></tr>
+      </table>
+      <div class="clinical-pearl">
+        <strong>Recurrence rates:</strong> NMIBC has high recurrence rate (50-70%). Lifelong surveillance is required.
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A 65-year-old smoker presents with painless gross hematuria. Cystoscopy shows a papillary tumor. TURBT pathology shows high-grade urothelial carcinoma invading lamina propria with detrusor muscle present and uninvolved. What is the stage?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Ta</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. T1</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. T2</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Tis</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B - T1</strong><br>T1 invades the lamina propria (submucosa) but NOT the muscle. The presence of uninvolved detrusor muscle confirms adequate sampling and that there is no muscle invasion. This is high-risk NMIBC requiring BCG therapy.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK536923/" target="_blank" style="color:var(--primary);">StatPearls: Bladder Cancer</a></li>
+        <li><a href="https://www.auanet.org/guidelines-and-quality/guidelines/bladder-cancer" target="_blank" style="color:var(--primary);">AUA Bladder Cancer Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #2dd4bf;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK536923/" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">StatPearls: Bladder Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/bladder-cancer-non-muscle-invasive-guideline" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">AUA Guideline: Non-Muscle Invasive Bladder Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/bladder-cancer-muscle-invasive-guideline" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">AUA Guideline: Muscle-Invasive Bladder Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/urinary-bladder-cancer" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">Radiopaedia: Bladder Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5730407/" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">NCBI PMC: BCG Therapy Review</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="hematuria-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="#" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="hematuria-crt.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Hematuria Workup</a>
+        <a href="urinary-incontinence-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Urinary Incontinence</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Bladder Cancer"
+         data-key-points="📚 Overview, 🔬 Histology, 🔍 Clinical Presentation, 📷 Diagnosis, 📍 Staging, 💊 Treatment: Non-Muscle Invasive (NMIBC), 🔪 Treatment: Muscle-Invasive (MIBC), 📈 Surveillance, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 70-year-old male smoker presents with painless gross hematuria. Cystoscopy reveals a papillary bladder mass. What is the MOST likely histologic type?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Urothelial carcinoma: ~90% of bladder cancers. Risk factors: smoking (#1), occupational aromatic amine/benzidine exposure, cyclophosphamide, chronic irritation. Painless hematuria is the classic presentation. Papillary morphology is most common." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Urothelial (transitional cell) carcinoma</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCC: 3-5% in developed countries but more common with chronic irritation (stones, catheters) and Schistosoma haematobium infection (endemic in Middle East/Africa)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Squamous cell carcinoma</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bladder adenocarcinoma is rare (~2%). Associated with urachal remnants and bladder exstrophy." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Adenocarcinoma</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Small cell bladder cancer is extremely rare (&lt;1%) but aggressive, similar to small cell lung cancer." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Small cell carcinoma</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the MOST important modifiable risk factor for bladder cancer?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Alcohol is not a major risk factor for bladder cancer (unlike esophageal, liver, head/neck cancers)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Alcohol consumption</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Smoking: responsible for ~50% of bladder cancers. Aromatic amines in tobacco smoke are excreted in urine → prolonged urothelial contact. Smoking cessation reduces risk. Other risk factors: occupational chemical exposure (dyes, rubber, leather), prior pelvic radiation." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Cigarette smoking</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="High sodium is a risk factor for hypertension and gastric cancer, not bladder cancer." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">High-sodium diet</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Physical inactivity is linked to many cancers but smoking is the dominant modifiable risk factor for bladder cancer specifically." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Sedentary lifestyle</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Non-muscle-invasive bladder cancer (NMIBC) confined to the mucosa or lamina propria is BEST managed initially with:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Radical cystectomy is reserved for muscle-invasive (T2+) disease or high-risk NMIBC refractory to BCG. It&#x27;s overly aggressive for initial NMIBC management." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Radical cystectomy</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="TURBT: both diagnostic (staging/grading) and therapeutic for NMIBC. Follow with intravesical BCG (for high-risk: CIS, high-grade, T1) or intravesical chemotherapy (mitomycin C for lower-risk). BCG induces local immune response against residual tumor." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Transurethral resection of bladder tumor (TURBT) followed by intravesical therapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Systemic chemotherapy is for muscle-invasive (neoadjuvant) or metastatic disease, not NMIBC." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Systemic cisplatin-based chemotherapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Radiation alone is not standard for NMIBC. TURBT ± intravesical therapy is the standard approach." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">External beam radiation therapy</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Intravesical BCG (Bacillus Calmette-Guérin) for bladder cancer works through which mechanism?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="BCG is not directly cytotoxic. It&#x27;s an attenuated mycobacterium that stimulates local immunity." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Direct cytotoxic effect on tumor cells</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="BCG: attenuated Mycobacterium bovis instilled into bladder → activates local immune response (T cells, macrophages, cytokines) against tumor cells. Most effective intravesical agent for high-risk NMIBC and CIS. Requires maintenance schedule. Contraindicated in immunosuppressed patients." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Local immune stimulation against residual urothelial cancer cells</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="BCG is an immunostimulant, not an antibiotic. It can actually cause granulomatous cystitis as a side effect." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Prevention of bacterial superinfection</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Anti-angiogenic therapy is not the mechanism of BCG. BCG works through immune activation." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Inhibition of tumor angiogenesis</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">A patient with muscle-invasive bladder cancer (T2) is being considered for radical cystectomy. What NEOADJUVANT therapy improves survival?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="BCG is for non-muscle-invasive disease. Once tumor invades muscularis propria, systemic treatment is needed." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Intravesical BCG</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Neoadjuvant cisplatin-based chemotherapy (MVAC or gemcitabine/cisplatin) before radical cystectomy: ~5% absolute survival benefit at 5 years. Treats micrometastatic disease and can downstage the primary tumor. Standard of care for cisplatin-eligible patients with MIBC." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Cisplatin-based combination chemotherapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="ADT is for prostate cancer, not bladder cancer. Bladder cancer is not hormone-driven." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Androgen deprivation therapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="HER2-targeted therapy is standard in breast and gastric cancer but not the standard neoadjuvant approach for bladder cancer." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Targeted anti-HER2 therapy</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">After radical cystectomy, what is the MOST common form of urinary diversion?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Ileal conduit: most common urinary diversion — segment of ileum creates a conduit, ureters anastomosed to it, stoma on abdominal wall drains into external bag. Alternatives: orthotopic neobladder (continent, voids per urethra), continent cutaneous pouch (Indiana pouch). Choice depends on tumor location, patient factors, and preference." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Ileal conduit (incontinent diversion)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Nephrostomy tubes are temporary drainage, not a standard long-term diversion after cystectomy." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Permanent bilateral nephrostomy tubes</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Ureterosigmoidostomy (diverting urine into the sigmoid colon) is rarely performed today due to high complication rates (metabolic acidosis, recurrent infections, colon cancer risk)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Ureterosigmoidostomy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="In radical cystectomy, the bladder is completely removed. There is no residual bladder for catheterization." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Suprapubic catheter into residual bladder</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Which occupational exposure is classically associated with increased bladder cancer risk?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Asbestos is primarily associated with mesothelioma and lung cancer, not bladder cancer." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Asbestos</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Aromatic amines: classic occupational bladder carcinogens. Industries: dye manufacturing, rubber, leather, textile, painting, trucking (diesel exhaust). Latency period 15-40 years. Beta-naphthylamine and benzidine are the most potent. Now heavily regulated." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Aromatic amines (benzidine, 2-naphthylamine)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Silica exposure is linked to silicosis and lung cancer, not bladder cancer." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Silica dust</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Prior pelvic radiation IS a bladder cancer risk factor, but the question asks about occupational exposure specifically. Aromatic amines are the classic occupational carcinogen." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Ionizing radiation to the pelvis</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Carcinoma in situ (CIS) of the bladder appears on cystoscopy as:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Papillary tumors are exophytic and raised. CIS is characteristically flat — easily missed on cystoscopy." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">A large pedunculated papillary mass</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Bladder CIS: flat, high-grade, confined to urothelium. Appears as velvety red patches — can be subtle and easily missed. Despite being &#x27;in situ,&#x27; it carries high progression risk to invasive cancer (up to 50%). Diagnosed by biopsy + urine cytology (highly sensitive for CIS). Treat with BCG." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Flat, velvety, erythematous mucosa</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bladder stones appear as calcified densities, not mucosal changes." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Multiple small bladder stones</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CIS can be subtle but is not invisible — it typically shows velvety erythematous patches. Blue light cystoscopy with hexaminolevulinate improves detection." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Normal-appearing mucosa (always invisible)</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=bladder-cancer-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/testicular-cancer-crt.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

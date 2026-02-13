@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -8,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Learning Dashboard | ReasonDx</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #059669;
@@ -23,7 +24,7 @@
         body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
         
         .header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
             padding: 32px 24px;
             color: white;
         }
@@ -71,7 +72,7 @@
             font-size: 20px;
             margin-bottom: 12px;
         }
-        .stat-card .icon.blue { background: #dbeafe; }
+        .stat-card .icon.blue { background: #ccfbf1; }
         .stat-card .icon.green { background: #dcfce7; }
         .stat-card .icon.purple { background: #f3e8ff; }
         .stat-card .icon.orange { background: #ffedd5; }
@@ -128,7 +129,7 @@
             transition: width 0.5s ease;
         }
         .progress-fill.green { background: #10b981; }
-        .progress-fill.blue { background: #3b82f6; }
+        .progress-fill.blue { background: #14b8a6; }
         .progress-fill.purple { background: #8b5cf6; }
         .progress-fill.orange { background: #f59e0b; }
         
@@ -242,7 +243,7 @@
             color: white;
         }
         .calendar-day.today {
-            border: 2px solid #3b82f6;
+            border: 2px solid #14b8a6;
         }
         
         /* Recommendations */
@@ -326,6 +327,37 @@
     </header>
 
     <main class="content">
+        <!-- First-Run Welcome Panel -->
+        <div id="welcomePanel" style="display: none; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #d1fae5 100%); border: 2px solid #059669; border-radius: 16px; padding: 32px; margin-bottom: 24px; position: relative;">
+            <button onclick="dismissWelcome()" style="position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 18px; color: #6b7280; cursor: pointer;">✕</button>
+            <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                <div style="font-size: 48px;">👋</div>
+                <div style="flex: 1; min-width: 260px;">
+                    <h2 style="font-size: 22px; color: #166534; margin-bottom: 8px;">Welcome to Your Learning Dashboard!</h2>
+                    <p style="color: #15803d; font-size: 14px; margin-bottom: 16px;">This is your home base for tracking progress across all ReasonDx tools. Here's how to get started:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
+                        <a href="../mechanism/index.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: white; border-radius: 10px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🧠</span>
+                            <div><strong style="font-size: 13px;">1. Learn</strong><br><span style="font-size: 12px; color: #6b7280;">Start with MechanismDx modules</span></div>
+                        </a>
+                        <a href="../ReasonDx/training.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: white; border-radius: 10px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🩺</span>
+                            <div><strong style="font-size: 13px;">2. Practice</strong><br><span style="font-size: 12px; color: #6b7280;">Try a clinical reasoning case</span></div>
+                        </a>
+                        <a href="flashcard-studio.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: white; border-radius: 10px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🎴</span>
+                            <div><strong style="font-size: 13px;">3. Review</strong><br><span style="font-size: 12px; color: #6b7280;">Study with spaced repetition</span></div>
+                        </a>
+                        <a href="calculator-hub.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: white; border-radius: 10px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🧮</span>
+                            <div><strong style="font-size: 13px;">4. Calculate</strong><br><span style="font-size: 12px; color: #6b7280;">22 clinical calculators</span></div>
+                        </a>
+                    </div>
+                    <p style="margin-top: 14px; font-size: 12px; color: #6b7280;">Your progress will appear here as you explore the platform. Dashboard updates automatically.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Stats Grid -->
         <div class="stats-grid">
             <div class="stat-card">
@@ -421,7 +453,7 @@
                         <span class="arrow">→</span>
                     </div>
                     <div class="rec-item" onclick="alert('Opening module...')">
-                        <div class="icon" style="background: #dbeafe;">💊</div>
+                        <div class="icon" style="background: #ccfbf1;">💊</div>
                         <div class="info">
                             <div class="title">Anti-TB Drugs</div>
                             <div class="reason">Complete your pharmacology series</div>
@@ -648,6 +680,26 @@
         // Listen for real-time progress updates
         window.addEventListener('dx-progress-update', function() { loadProgress(); });
 
+        // ═══════════════════════════════════════════════
+        // FIRST-RUN WELCOME PANEL
+        // ═══════════════════════════════════════════════
+        function checkWelcomePanel() {
+            const dismissed = localStorage.getItem('dx-dashboard-welcome-dismissed');
+            if (dismissed) return;
+            // Show welcome if no meaningful progress exists
+            const progress = window.DxProgress ? window.DxProgress.getSummary() : null;
+            const hasProgress = progress && (progress.modulesCompleted > 0 || progress.hoursStudied > 0);
+            if (!hasProgress) {
+                document.getElementById('welcomePanel').style.display = 'block';
+            }
+        }
+        function dismissWelcome() {
+            document.getElementById('welcomePanel').style.display = 'none';
+            localStorage.setItem('dx-dashboard-welcome-dismissed', 'true');
+        }
+        window.dismissWelcome = dismissWelcome;
+        setTimeout(checkWelcomePanel, 300);
+
         // Render personalized recommendations
         if (window.DxRecommend) {
             DxRecommend.render('#recommendationsContainer', { maxItems: 5, showHeader: true });
@@ -687,5 +739,7 @@
     </script>
 <script src="../dx-epa-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-tools-nav.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
 </body>
 </html>

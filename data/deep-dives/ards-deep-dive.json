@@ -51,12 +51,27 @@
           "stem": "You are applying the Berlin criteria to this patient.",
           "question": "The P/F ratio (PaO2/FiO2) of 72.5 classifies this as:",
           "options": [
-            "A. Severe ARDS (P/F \u2264100)",
-            "B. Moderate ARDS (P/F 100-200)",
-            "C. Mild ARDS (P/F 200-300)",
-            "D. Not ARDS - requires additional criteria"
+            {
+              "id": "A",
+              "text": "Severe ARDS (P/F \u2264100)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Moderate ARDS (P/F 100-200)",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Mild ARDS (P/F 200-300)",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Not ARDS - requires additional criteria",
+              "correct": false
+            }
           ],
-          "correctIndex": 0,
           "explanation": "P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality.",
           "whyChain": [
             {
@@ -71,19 +86,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Severe ARDS (P/F \u2264100).",
+              "deeperWhy": "P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality.",
+              "clinicalPearl": "P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality."
+            },
+            "B": {
+              "misconception": "While moderate ards (p/f 100-200) may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality.",
+              "bridgeTo": "The correct answer is Severe ARDS (P/F \u2264100) because P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortal"
+            },
+            "C": {
+              "misconception": "While mild ards (p/f 200-300) may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality.",
+              "bridgeTo": "The correct answer is Severe ARDS (P/F \u2264100) because P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortal"
+            },
+            "D": {
+              "misconception": "While not ards - requires additional criteria may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortality.",
+              "bridgeTo": "The correct answer is Severe ARDS (P/F \u2264100) because P/F ratio = PaO2 \u00f7 FiO2 = 58 \u00f7 0.80 = 72.5. This is SEVERE ARDS (P/F \u2264100 with PEEP \u22655). Severe ARDS carries ~45% mortal"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "A"
         },
         {
           "id": "dx-2",
           "stem": "The Berlin criteria require all of the following EXCEPT:",
           "question": "Which is NOT part of the Berlin definition?",
           "options": [
-            "A. Not fully explained by cardiac failure",
-            "B. Pulmonary artery wedge pressure <18 mmHg",
-            "C. Bilateral opacities on chest imaging",
-            "D. Acute onset within 1 week of known insult"
+            {
+              "id": "A",
+              "text": "Not fully explained by cardiac failure",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Pulmonary artery wedge pressure <18 mmHg",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Acute onset within 1 week of known insult",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Bilateral opacities on chest imaging",
+              "correct": false
+            }
           ],
-          "correctIndex": 1,
           "explanation": "The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is not the primary cause, using echo, BNP, and clinical assessment rather than mandatory PA catheter.",
           "whyChain": [
             {
@@ -98,7 +158,37 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Pulmonary artery wedge pressure <18 mmHg.",
+              "deeperWhy": "The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is not the primary cause, using echo, BNP, and clinical",
+              "clinicalPearl": "The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is not the primary cause, using echo, BNP, and clinical"
+            },
+            "A": {
+              "misconception": "While not fully explained by cardiac failure may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is no",
+              "bridgeTo": "The correct answer is Pulmonary artery wedge pressure <18 mmHg because The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgm"
+            },
+            "C": {
+              "misconception": "While bilateral opacities on chest imaging may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is no",
+              "bridgeTo": "The correct answer is Pulmonary artery wedge pressure <18 mmHg because The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgm"
+            },
+            "D": {
+              "misconception": "While acute onset within 1 week of known insult may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgment that cardiac failure is no",
+              "bridgeTo": "The correct answer is Pulmonary artery wedge pressure <18 mmHg because The Berlin definition (2012) removed the PAWP requirement from the older AECC definition. Now it requires clinical judgm"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "B"
         }
       ]
     },
@@ -112,12 +202,27 @@
           "stem": "You are explaining the pathophysiology to a medical student.",
           "question": "The hallmark histopathological finding in ARDS is:",
           "options": [
-            "A. Bronchiolar fibrosis",
-            "B. Diffuse alveolar damage with hyaline membranes",
-            "C. Granulomatous inflammation",
-            "D. Alveolar hemorrhage only"
+            {
+              "id": "A",
+              "text": "Granulomatous inflammation",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Alveolar hemorrhage only",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Bronchiolar fibrosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Diffuse alveolar damage with hyaline membranes",
+              "correct": true
+            }
           ],
-          "correctIndex": 1,
           "explanation": "Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline membrane formation (protein-rich fluid lining denuded alveoli). Later, proliferative phase shows type II pneumocyte proliferation and potential fibrosis.",
           "whyChain": [
             {
@@ -138,19 +243,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Diffuse alveolar damage with hyaline membranes.",
+              "deeperWhy": "Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline membrane formation (protein-rich fluid lining denude",
+              "clinicalPearl": "Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline membrane formation (protein-rich fluid lining denude"
+            },
+            "A": {
+              "misconception": "While bronchiolar fibrosis may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline me",
+              "bridgeTo": "The correct answer is Diffuse alveolar damage with hyaline membranes because Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophi"
+            },
+            "C": {
+              "misconception": "While granulomatous inflammation may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline me",
+              "bridgeTo": "The correct answer is Diffuse alveolar damage with hyaline membranes because Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophi"
+            },
+            "D": {
+              "misconception": "While alveolar hemorrhage only may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophil infiltration, and hyaline me",
+              "bridgeTo": "The correct answer is Diffuse alveolar damage with hyaline membranes because Diffuse alveolar damage (DAD) is the pathological correlate of ARDS. The exudative phase shows alveolar edema, neutrophi"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "D"
         },
         {
           "id": "path-2",
           "stem": "The patient's CXR shows bilateral infiltrates but some areas appear more affected than others.",
           "question": "The concept of 'baby lung' in ARDS refers to:",
           "options": [
-            "A. The small volume of normally aerated lung available for ventilation",
-            "B. The need to ventilate patients like neonates",
-            "C. The immature immune response in ARDS",
-            "D. The pulmonary hypoplasia seen in survivors"
+            {
+              "id": "A",
+              "text": "The small volume of normally aerated lung available for ventilation",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "The immature immune response in ARDS",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "The pulmonary hypoplasia seen in survivors",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "The need to ventilate patients like neonates",
+              "correct": false
+            }
           ],
-          "correctIndex": 0,
           "explanation": "CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. This 'baby lung' (often only 200-500 mL) must receive all the tidal volume, explaining why normal tidal volumes cause overdistension and injury.",
           "whyChain": [
             {
@@ -171,7 +321,37 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! The small volume of normally aerated lung available for ventilation.",
+              "deeperWhy": "CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. This 'baby lung' (often only 200-500 mL) must receiv",
+              "clinicalPearl": "CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. This 'baby lung' (often only 200-500 mL) must receiv"
+            },
+            "B": {
+              "misconception": "While the need to ventilate patients like neonates may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. Th",
+              "bridgeTo": "The correct answer is The small volume of normally aerated lung available for ventilation because CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portio"
+            },
+            "C": {
+              "misconception": "While the immature immune response in ards may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. Th",
+              "bridgeTo": "The correct answer is The small volume of normally aerated lung available for ventilation because CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portio"
+            },
+            "D": {
+              "misconception": "While the pulmonary hypoplasia seen in survivors may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portion remains normally aerated. Th",
+              "bridgeTo": "The correct answer is The small volume of normally aerated lung available for ventilation because CT imaging revealed that ARDS is not homogeneous - some lung is consolidated, some is collapsed, and only a small portio"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "A"
         }
       ]
     },
@@ -185,12 +365,27 @@
           "stem": "You are adjusting ventilator settings. Current: TV 500 mL (6.4 mL/kg IBW), plateau pressure 32 cmH2O.",
           "question": "According to ARDSNet protocol, the target tidal volume is:",
           "options": [
-            "A. 10 mL/kg actual body weight",
-            "B. 6 mL/kg predicted body weight",
-            "C. 4 mL/kg predicted body weight",
-            "D. 8 mL/kg predicted body weight"
+            {
+              "id": "A",
+              "text": "10 mL/kg actual body weight",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "6 mL/kg predicted body weight",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "8 mL/kg predicted body weight",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "4 mL/kg predicted body weight",
+              "correct": false
+            }
           ],
-          "correctIndex": 1,
           "explanation": "ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is the single most important intervention in ARDS management.",
           "whyChain": [
             {
@@ -217,19 +412,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! 6 mL/kg predicted body weight.",
+              "deeperWhy": "ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is the single most important intervention in ARDS man",
+              "clinicalPearl": "ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is the single most important intervention in ARDS man"
+            },
+            "A": {
+              "misconception": "While 10 ml/kg actual body weight may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is ",
+              "bridgeTo": "The correct answer is 6 mL/kg predicted body weight because ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) "
+            },
+            "C": {
+              "misconception": "While 4 ml/kg predicted body weight may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is ",
+              "bridgeTo": "The correct answer is 6 mL/kg predicted body weight because ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) "
+            },
+            "D": {
+              "misconception": "While 8 ml/kg predicted body weight may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) compared to 12 mL/kg. This is ",
+              "bridgeTo": "The correct answer is 6 mL/kg predicted body weight because ARDSNet demonstrated 22% relative mortality reduction with 6 mL/kg PBW (predicted/ideal body weight, not actual weight) "
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "B"
         },
         {
           "id": "vent-2",
           "stem": "The plateau pressure is 32 cmH2O.",
           "question": "What is the target plateau pressure in ARDS?",
           "options": [
-            "A. Peak pressure is more important than plateau",
-            "B. \u226430 cmH2O",
-            "C. \u226440 cmH2O",
-            "D. \u226420 cmH2O"
+            {
+              "id": "A",
+              "text": "Peak pressure is more important than plateau",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "\u226440 cmH2O",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "\u226430 cmH2O",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "\u226420 cmH2O",
+              "correct": false
+            }
           ],
-          "correctIndex": 1,
           "explanation": "Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal volume (down to 4 mL/kg if needed). Peak pressure includes airway resistance and is less predictive of lung injury.",
           "whyChain": [
             {
@@ -250,19 +490,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! \u226430 cmH2O.",
+              "deeperWhy": "Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal volume (down to 4 mL/kg if needed). Peak pressure in",
+              "clinicalPearl": "Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal volume (down to 4 mL/kg if needed). Peak pressure in"
+            },
+            "A": {
+              "misconception": "While peak pressure is more important than plateau may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal vo",
+              "bridgeTo": "The correct answer is \u226430 cmH2O because Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk."
+            },
+            "C": {
+              "misconception": "While \u226440 cmh2o may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal vo",
+              "bridgeTo": "The correct answer is \u226430 cmH2O because Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk."
+            },
+            "D": {
+              "misconception": "While \u226420 cmh2o may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk. If Pplat >30, reduce tidal vo",
+              "bridgeTo": "The correct answer is \u226430 cmH2O because Target plateau pressure \u226430 cmH2O. Plateau pressure reflects alveolar distending pressure and correlates with VILI risk."
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "C"
         },
         {
           "id": "vent-3",
           "stem": "You are titrating PEEP. Current SpO2 82% on PEEP 10, FiO2 80%.",
           "question": "The primary benefit of PEEP in ARDS is:",
           "options": [
-            "A. Recruiting collapsed alveoli and maintaining their patency",
-            "B. Reducing pulmonary vascular resistance",
-            "C. Improving cardiac output",
-            "D. Reducing work of breathing"
+            {
+              "id": "A",
+              "text": "Reducing pulmonary vascular resistance",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Recruiting collapsed alveoli and maintaining their patency",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Reducing work of breathing",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Improving cardiac output",
+              "correct": false
+            }
           ],
-          "correctIndex": 0,
           "explanation": "PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cycle, reducing cyclic atelectasis (repeated open-collapse causing shear injury). This improves V/Q matching and oxygenation.",
           "whyChain": [
             {
@@ -283,7 +568,37 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Recruiting collapsed alveoli and maintaining their patency.",
+              "deeperWhy": "PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cycle, reducing cyclic atelectasis (repeated open-co",
+              "clinicalPearl": "PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cycle, reducing cyclic atelectasis (repeated open-co"
+            },
+            "B": {
+              "misconception": "While reducing pulmonary vascular resistance may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cy",
+              "bridgeTo": "The correct answer is Recruiting collapsed alveoli and maintaining their patency because PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open"
+            },
+            "C": {
+              "misconception": "While improving cardiac output may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cy",
+              "bridgeTo": "The correct answer is Recruiting collapsed alveoli and maintaining their patency because PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open"
+            },
+            "D": {
+              "misconception": "While reducing work of breathing may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open throughout the respiratory cy",
+              "bridgeTo": "The correct answer is Recruiting collapsed alveoli and maintaining their patency because PEEP recruits collapsed alveoli, increasing the functional lung volume available for gas exchange. It keeps alveoli open"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "B"
         }
       ]
     },
@@ -297,12 +612,27 @@
           "stem": "Despite optimized ventilator settings (TV 4.5 mL/kg, PEEP 14, FiO2 100%), P/F ratio remains 65.",
           "question": "What intervention has the strongest evidence for mortality benefit in severe ARDS?",
           "options": [
-            "A. High-frequency oscillatory ventilation",
-            "B. Inhaled nitric oxide",
-            "C. Prone positioning for \u226516 hours/day",
-            "D. Extracorporeal membrane oxygenation (ECMO)"
+            {
+              "id": "A",
+              "text": "Inhaled nitric oxide",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "High-frequency oscillatory ventilation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Extracorporeal membrane oxygenation (ECMO)",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Prone positioning for \u226516 hours/day",
+              "correct": true
+            }
           ],
-          "correctIndex": 2,
           "explanation": "PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It should be initiated early in severe ARDS, not as a rescue therapy after everything else fails.",
           "whyChain": [
             {
@@ -329,19 +659,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Prone positioning for \u226516 hours/day.",
+              "deeperWhy": "PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It should be initiated early in severe ARDS, not as ",
+              "clinicalPearl": "PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It should be initiated early in severe ARDS, not as "
+            },
+            "A": {
+              "misconception": "While high-frequency oscillatory ventilation may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It",
+              "bridgeTo": "The correct answer is Prone positioning for \u226516 hours/day because PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day"
+            },
+            "B": {
+              "misconception": "While inhaled nitric oxide may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It",
+              "bridgeTo": "The correct answer is Prone positioning for \u226516 hours/day because PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day"
+            },
+            "D": {
+              "misconception": "While extracorporeal membrane oxygenation (ecmo) may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day in severe ARDS (P/F <150). It",
+              "bridgeTo": "The correct answer is Prone positioning for \u226516 hours/day because PROSEVA trial demonstrated 50% relative mortality reduction (16% vs 33% at 28 days) with prone positioning \u226516 hours/day"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "D"
         },
         {
           "id": "adj-2",
           "stem": "You are considering neuromuscular blockade.",
           "question": "Early neuromuscular blockade in severe ARDS:",
           "options": [
-            "A. Only helps by reducing oxygen consumption",
-            "B. Is contraindicated due to ICU-acquired weakness risk",
-            "C. May improve outcomes by eliminating patient-ventilator dyssynchrony",
-            "D. Should be given to all mechanically ventilated patients"
+            {
+              "id": "A",
+              "text": "May improve outcomes by eliminating patient-ventilator dyssynchrony",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Only helps by reducing oxygen consumption",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Is contraindicated due to ICU-acquired weakness risk",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Should be given to all mechanically ventilated patients",
+              "correct": false
+            }
           ],
-          "correctIndex": 2,
           "explanation": "ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different sedation practices. Mechanism: eliminates dyssynchrony, prevents patient-generated high transpulmonary pressures, and may have anti-inflammatory effects.",
           "whyChain": [
             {
@@ -356,19 +731,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! May improve outcomes by eliminating patient-ventilator dyssynchrony.",
+              "deeperWhy": "ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different sedation practices. Mechanism: eliminates dyssynchrony",
+              "clinicalPearl": "ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different sedation practices. Mechanism: eliminates dyssynchrony"
+            },
+            "A": {
+              "misconception": "While only helps by reducing oxygen consumption may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different seda",
+              "bridgeTo": "The correct answer is May improve outcomes by eliminating patient-ventilator dyssynchrony because ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't repl"
+            },
+            "B": {
+              "misconception": "While is contraindicated due to icu-acquired weakness risk may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different seda",
+              "bridgeTo": "The correct answer is May improve outcomes by eliminating patient-ventilator dyssynchrony because ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't repl"
+            },
+            "D": {
+              "misconception": "While should be given to all mechanically ventilated patients may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't replicate this with different seda",
+              "bridgeTo": "The correct answer is May improve outcomes by eliminating patient-ventilator dyssynchrony because ACURASYS trial showed mortality benefit with early cisatracurium for 48 hours in severe ARDS. The ROSE trial didn't repl"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "A"
         },
         {
           "id": "adj-3",
           "stem": "The patient has septic shock requiring norepinephrine. CVP is 12 mmHg.",
           "question": "Fluid management in ARDS should aim for:",
           "options": [
-            "A. Liberal fluids to maintain renal perfusion",
-            "B. Conservative fluid strategy once hemodynamically stable",
-            "C. Albumin infusions to raise oncotic pressure",
-            "D. Continuous diuresis regardless of hemodynamics"
+            {
+              "id": "A",
+              "text": "Albumin infusions to raise oncotic pressure",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Liberal fluids to maintain renal perfusion",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Conservative fluid strategy once hemodynamically stable",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Continuous diuresis regardless of hemodynamics",
+              "correct": false
+            }
           ],
-          "correctIndex": 1,
           "explanation": "FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal failure. However, this is AFTER initial resuscitation - don't withhold fluids from actively hypotensive/shock patients.",
           "whyChain": [
             {
@@ -389,19 +809,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Conservative fluid strategy once hemodynamically stable.",
+              "deeperWhy": "FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal failure. However, this is AFTER initial resuscitatio",
+              "clinicalPearl": "FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal failure. However, this is AFTER initial resuscitatio"
+            },
+            "A": {
+              "misconception": "While liberal fluids to maintain renal perfusion may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal fa",
+              "bridgeTo": "The correct answer is Conservative fluid strategy once hemodynamically stable because FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free da"
+            },
+            "C": {
+              "misconception": "While albumin infusions to raise oncotic pressure may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal fa",
+              "bridgeTo": "The correct answer is Conservative fluid strategy once hemodynamically stable because FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free da"
+            },
+            "D": {
+              "misconception": "While continuous diuresis regardless of hemodynamics may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free days without increasing renal fa",
+              "bridgeTo": "The correct answer is Conservative fluid strategy once hemodynamically stable because FACTT trial showed conservative fluid strategy (targeting CVP <4 or PAWP <8) improved oxygenation and ventilator-free da"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "C"
         },
         {
           "id": "adj-4",
           "stem": "You are asked about corticosteroids for ARDS.",
           "question": "Current evidence regarding corticosteroids in ARDS suggests:",
           "options": [
-            "A. Steroids only help if started after day 14",
-            "B. Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days and mortality",
-            "C. Steroids are contraindicated in ARDS",
-            "D. High-dose methylprednisolone should be given to all ARDS patients"
+            {
+              "id": "A",
+              "text": "Steroids only help if started after day 14",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Steroids are contraindicated in ARDS",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days and mortality",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "High-dose methylprednisolone should be given to all ARDS patients",
+              "correct": false
+            }
           ],
-          "correctIndex": 1,
           "explanation": "The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe ARDS. CoDEX trial in COVID ARDS confirmed benefit. Start early (within first 2-3 days), not late.",
           "whyChain": [
             {
@@ -422,7 +887,37 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days and mortality.",
+              "deeperWhy": "The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe ARDS. CoDEX trial in COVID ARDS confirmed benefit. S",
+              "clinicalPearl": "The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe ARDS. CoDEX trial in COVID ARDS confirmed benefit. S"
+            },
+            "A": {
+              "misconception": "While steroids only help if started after day 14 may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe AR",
+              "bridgeTo": "The correct answer is Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days a because The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced m"
+            },
+            "C": {
+              "misconception": "While steroids are contraindicated in ards may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe AR",
+              "bridgeTo": "The correct answer is Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days a because The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced m"
+            },
+            "D": {
+              "misconception": "While high-dose methylprednisolone should be given to all ards patients may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced mortality in moderate-severe AR",
+              "bridgeTo": "The correct answer is Moderate-dose dexamethasone in moderate-severe ARDS may reduce ventilator days a because The DEXA-ARDS trial showed dexamethasone 20 mg x 5 days then 10 mg x 5 days increased ventilator-free days and reduced m"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "C"
         }
       ]
     },
@@ -436,12 +931,27 @@
           "stem": "On day 5, the patient suddenly desaturates to 70%. You note asymmetric chest movement.",
           "question": "The most important immediate step is:",
           "options": [
-            "A. Stat CXR to evaluate for pneumothorax",
-            "B. Disconnect from ventilator and hand-bag to assess compliance",
-            "C. Emergency bronchoscopy",
-            "D. Increase FiO2 to 100% and PEEP to 20"
+            {
+              "id": "A",
+              "text": "Increase FiO2 to 100% and PEEP to 20",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Disconnect from ventilator and hand-bag to assess compliance",
+              "correct": true
+            },
+            {
+              "id": "C",
+              "text": "Stat CXR to evaluate for pneumothorax",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Emergency bronchoscopy",
+              "correct": false
+            }
           ],
-          "correctIndex": 1,
           "explanation": "DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging suggests pneumothorax or equipment issue; difficult bagging suggests tube problem or bronchospasm. Barotrauma/pneumothorax is common in ARDS from high airway pressures.",
           "whyChain": [
             {
@@ -462,19 +972,64 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Disconnect from ventilator and hand-bag to assess compliance.",
+              "deeperWhy": "DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging suggests pneumothorax or equipment issue; difficult bag",
+              "clinicalPearl": "DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging suggests pneumothorax or equipment issue; difficult bag"
+            },
+            "A": {
+              "misconception": "While stat cxr to evaluate for pneumothorax may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging sugge",
+              "bridgeTo": "The correct answer is Disconnect from ventilator and hand-bag to assess compliance because DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag "
+            },
+            "C": {
+              "misconception": "While emergency bronchoscopy may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging sugge",
+              "bridgeTo": "The correct answer is Disconnect from ventilator and hand-bag to assess compliance because DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag "
+            },
+            "D": {
+              "misconception": "While increase fio2 to 100% and peep to 20 may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag to assess - easy bagging sugge",
+              "bridgeTo": "The correct answer is Disconnect from ventilator and hand-bag to assess compliance because DOPES mnemonic: Displacement of tube, Obstruction, Pneumothorax, Equipment failure, Stacked breaths. Disconnect and bag "
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "B"
         },
         {
           "id": "comp-2",
           "stem": "After 2 weeks of mechanical ventilation, the patient is improving. You are discussing long-term outcomes.",
           "question": "ARDS survivors commonly experience all of the following EXCEPT:",
           "options": [
-            "A. Muscle weakness and functional limitation",
-            "B. Depression and reduced quality of life",
-            "C. Complete return to baseline lung function in most survivors",
-            "D. Cognitive impairment and PTSD"
+            {
+              "id": "A",
+              "text": "Complete return to baseline lung function in most survivors",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Depression and reduced quality of life",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Muscle weakness and functional limitation",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Cognitive impairment and PTSD",
+              "correct": false
+            }
           ],
-          "correctIndex": 2,
           "explanation": "ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. While pulmonary function often improves significantly, many survivors have persistent exercise limitation. The morbidity is substantial even when they 'survive.'",
           "whyChain": [
             {
@@ -495,7 +1050,37 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! Complete return to baseline lung function in most survivors.",
+              "deeperWhy": "ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. While pulmonary function often improves significantly",
+              "clinicalPearl": "ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. While pulmonary function often improves significantly"
+            },
+            "A": {
+              "misconception": "While muscle weakness and functional limitation may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. Whi",
+              "bridgeTo": "The correct answer is Complete return to baseline lung function in most survivors because ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, an"
+            },
+            "B": {
+              "misconception": "While depression and reduced quality of life may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. Whi",
+              "bridgeTo": "The correct answer is Complete return to baseline lung function in most survivors because ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, an"
+            },
+            "D": {
+              "misconception": "While cognitive impairment and ptsd may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, and reduced quality of life. Whi",
+              "bridgeTo": "The correct answer is Complete return to baseline lung function in most survivors because ARDS survivors often have persistent morbidity: ICU-acquired weakness, cognitive impairment (PICS), PTSD, depression, an"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "A"
         }
       ]
     },
@@ -509,12 +1094,27 @@
           "stem": "Integrating all the information about this patient with severe ARDS...",
           "question": "The rationale for low tidal volume ventilation connects to:",
           "options": [
-            "A. Preventing oxygen toxicity from high FiO2",
-            "B. Preventing carbon dioxide retention",
-            "C. Reducing work of breathing for the patient",
-            "D. The 'baby lung' concept - only a small portion of lung is available to receive the tidal volume"
+            {
+              "id": "A",
+              "text": "Reducing work of breathing for the patient",
+              "correct": false
+            },
+            {
+              "id": "B",
+              "text": "Preventing oxygen toxicity from high FiO2",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "The 'baby lung' concept - only a small portion of lung is available to receive the tidal volume",
+              "correct": true
+            },
+            {
+              "id": "D",
+              "text": "Preventing carbon dioxide retention",
+              "correct": false
+            }
           ],
-          "correctIndex": 3,
           "explanation": "This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated into this small volume causes overdistension and VILI. Low TV respects the functional lung size and prevents further injury.",
           "whyChain": [
             {
@@ -535,7 +1135,37 @@
               "text": "StatPearls: ARDS. NCBI Bookshelf. Accessed January 14, 2026.",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK436002/"
             }
-          ]
+          ],
+          "coachDx": {
+            "correct": {
+              "reinforcement": "Correct! The 'baby lung' concept - only a small portion of lung is available to receive the tidal volume.",
+              "deeperWhy": "This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated into this small volume causes overdistension and V",
+              "clinicalPearl": "This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated into this small volume causes overdistension and V"
+            },
+            "A": {
+              "misconception": "While preventing oxygen toxicity from high fio2 may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated ",
+              "bridgeTo": "The correct answer is The 'baby lung' concept - only a small portion of lung is available to receive t because This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A nor"
+            },
+            "B": {
+              "misconception": "While preventing carbon dioxide retention may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated ",
+              "bridgeTo": "The correct answer is The 'baby lung' concept - only a small portion of lung is available to receive t because This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A nor"
+            },
+            "C": {
+              "misconception": "While reducing work of breathing for the patient may seem plausible, it does not match the clinical scenario.",
+              "guidance": "Consider: This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A normal 6-8 mL/kg TV concentrated ",
+              "bridgeTo": "The correct answer is The 'baby lung' concept - only a small portion of lung is available to receive t because This is the key concept: the small 'baby lung' (only 20-30% of lung is aerated) must receive all the tidal volume. A nor"
+            }
+          },
+          "rpfs": {
+            "knowledge_retrieval": 3,
+            "pattern_recognition": 3,
+            "causal_reasoning": 3,
+            "bayesian_updating": 2,
+            "metacognition": 2
+          },
+          "correct_answer": "C"
         }
       ]
     }
@@ -569,76 +1199,181 @@
       "stem": "Which of the following is the MOST important initial step in evaluating a patient with suspected ards?",
       "options": [
         {
-          "text": "Obtain a thorough history and physical examination",
-          "correct": true,
-          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in ards. It guides all subsequent diagnostic and management decisions."
-        },
-        {
           "text": "Order advanced imaging immediately",
           "correct": false,
-          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively."
+          "explanation": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively.",
+          "id": "A"
         },
         {
           "text": "Start empiric treatment before evaluation",
           "correct": false,
-          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable."
+          "explanation": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable.",
+          "id": "B"
+        },
+        {
+          "text": "Obtain a thorough history and physical examination",
+          "correct": true,
+          "explanation": "A comprehensive history and physical examination is the foundation of clinical reasoning in ards. It guides all subsequent diagnostic and management decisions.",
+          "id": "C"
         },
         {
           "text": "Consult a specialist before any workup",
           "correct": false,
-          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings."
+          "explanation": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings.",
+          "id": "D"
         }
-      ]
+      ],
+      "correct_answer": "C",
+      "rpfs": {
+        "pattern_recognition": 3,
+        "data_gathering": 2,
+        "hypothesis_generation": 4,
+        "hypothesis_evaluation": 3,
+        "therapeutic_reasoning": 2,
+        "metacognition": 2
+      },
+      "coachDx": {
+        "correct": {
+          "reinforcement": "Correct! Obtain a thorough history and physical examination.",
+          "deeperWhy": "A comprehensive history and physical examination is the foundation of clinical reasoning in ards. It guides all subsequent diagnostic and management decisions.",
+          "clinicalPearl": "A comprehensive history and physical examination is the foundation of clinical reasoning in ards. It guides all subsequent diagnostic and management decisions."
+        },
+        "A": {
+          "misconception": "Advanced imaging may be indicated but should be guided by clinical findings, not ordered reflexively.",
+          "guidance": "Consider why Obtain a thorough history and physical examination is the key concept. ",
+          "bridgeTo": "The correct answer is Obtain a thorough history and physical examination because it best fits the clinical scenario."
+        },
+        "B": {
+          "misconception": "Treatment should generally follow an appropriate diagnostic evaluation unless the patient is critically unstable.",
+          "guidance": "Consider why Obtain a thorough history and physical examination is the key concept. ",
+          "bridgeTo": "The correct answer is Obtain a thorough history and physical examination because it best fits the clinical scenario."
+        },
+        "D": {
+          "misconception": "Initial evaluation should be performed by the treating physician; specialist consultation follows based on findings.",
+          "guidance": "Consider why Obtain a thorough history and physical examination is the key concept. ",
+          "bridgeTo": "The correct answer is Obtain a thorough history and physical examination because it best fits the clinical scenario."
+        }
+      }
     },
     {
       "stem": "A patient presents with classic features of ards. Which clinical reasoning principle is MOST important in avoiding diagnostic error?",
       "options": [
         {
-          "text": "Search satisficing - stop looking after the first diagnosis",
+          "text": "Order every available test to rule out all possibilities",
           "correct": false,
-          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses."
+          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy.",
+          "id": "A"
         },
         {
           "text": "Consider the differential diagnosis systematically",
           "correct": true,
-          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+          "explanation": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias.",
+          "id": "B"
+        },
+        {
+          "text": "Search satisficing - stop looking after the first diagnosis",
+          "correct": false,
+          "explanation": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses.",
+          "id": "C"
         },
         {
           "text": "Rely primarily on pattern recognition",
           "correct": false,
-          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases."
-        },
-        {
-          "text": "Order every available test to rule out all possibilities",
-          "correct": false,
-          "explanation": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy."
+          "explanation": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases.",
+          "id": "D"
         }
-      ]
+      ],
+      "correct_answer": "B",
+      "rpfs": {
+        "pattern_recognition": 3,
+        "data_gathering": 4,
+        "hypothesis_generation": 3,
+        "hypothesis_evaluation": 3,
+        "therapeutic_reasoning": 2,
+        "metacognition": 2
+      },
+      "coachDx": {
+        "correct": {
+          "reinforcement": "Correct! Consider the differential diagnosis systematically.",
+          "deeperWhy": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias.",
+          "clinicalPearl": "Systematic consideration of differential diagnoses, including must-not-miss conditions, is essential for avoiding premature closure and anchoring bias."
+        },
+        "A": {
+          "misconception": "Indiscriminate testing leads to false positives, unnecessary procedures, and increased cost without improving diagnostic accuracy.",
+          "guidance": "Consider why Consider the differential diagnosis systematically is the key concept. ",
+          "bridgeTo": "The correct answer is Consider the differential diagnosis systematically because it best fits the clinical scenario."
+        },
+        "C": {
+          "misconception": "Premature closure (stopping the diagnostic process too early) is a common cognitive error that leads to missed diagnoses.",
+          "guidance": "Consider why Consider the differential diagnosis systematically is the key concept. ",
+          "bridgeTo": "The correct answer is Consider the differential diagnosis systematically because it best fits the clinical scenario."
+        },
+        "D": {
+          "misconception": "While pattern recognition (System 1 thinking) is useful, it should be balanced with analytical reasoning (System 2) to avoid cognitive biases.",
+          "guidance": "Consider why Consider the differential diagnosis systematically is the key concept. ",
+          "bridgeTo": "The correct answer is Consider the differential diagnosis systematically because it best fits the clinical scenario."
+        }
+      }
     },
     {
       "stem": "When managing ards, which approach best supports evidence-based practice?",
       "options": [
         {
-          "text": "Follow institutional protocols regardless of patient factors",
+          "text": "Always defer to the most recent published study",
           "correct": false,
-          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances."
+          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence.",
+          "id": "A"
         },
         {
-          "text": "Base decisions solely on clinical experience",
+          "text": "Follow institutional protocols regardless of patient factors",
           "correct": false,
-          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence."
+          "explanation": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances.",
+          "id": "B"
         },
         {
           "text": "Integrate current best evidence with clinical expertise and patient values",
           "correct": true,
-          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+          "explanation": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions.",
+          "id": "C"
         },
         {
-          "text": "Always defer to the most recent published study",
+          "text": "Base decisions solely on clinical experience",
           "correct": false,
-          "explanation": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence."
+          "explanation": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence.",
+          "id": "D"
         }
-      ]
+      ],
+      "correct_answer": "C",
+      "rpfs": {
+        "pattern_recognition": 3,
+        "data_gathering": 2,
+        "hypothesis_generation": 3,
+        "hypothesis_evaluation": 3,
+        "therapeutic_reasoning": 2,
+        "metacognition": 2
+      },
+      "coachDx": {
+        "correct": {
+          "reinforcement": "Correct! Integrate current best evidence with clinical expertise and patient values.",
+          "deeperWhy": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions.",
+          "clinicalPearl": "Evidence-based medicine is the conscientious integration of best research evidence, clinical expertise, and patient values in making clinical decisions."
+        },
+        "A": {
+          "misconception": "Individual studies should be appraised for quality and relevance; systematic reviews and guidelines generally provide stronger evidence.",
+          "guidance": "Consider why Integrate current best evidence with clinical expertise and patient values is the key concept. ",
+          "bridgeTo": "The correct answer is Integrate current best evidence with clinical expertise and patient values because it best fits the clinical scenario."
+        },
+        "B": {
+          "misconception": "Evidence-based practice integrates best evidence with clinical expertise AND patient values/circumstances.",
+          "guidance": "Consider why Integrate current best evidence with clinical expertise and patient values is the key concept. ",
+          "bridgeTo": "The correct answer is Integrate current best evidence with clinical expertise and patient values because it best fits the clinical scenario."
+        },
+        "D": {
+          "misconception": "Clinical experience is valuable but can introduce bias; it should be combined with current evidence.",
+          "guidance": "Consider why Integrate current best evidence with clinical expertise and patient values is the key concept. ",
+          "bridgeTo": "The correct answer is Integrate current best evidence with clinical expertise and patient values because it best fits the clinical scenario."
+        }
+      }
     }
   ],
   "sections": [

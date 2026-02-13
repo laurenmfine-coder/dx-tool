@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cleft Lip & Palate - ReasonDx Clinical Reasoning Case</title>
+    <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
+<link href="../css/rdx-a11y.css" rel="stylesheet">
+<style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .header h1 { font-size: 1.5rem; color: #fef3c7; }
+        .score-display { display: flex; gap: 20px; font-size: 0.9rem; }
+        .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #fbbf24); border-radius: 3px; transition: width 0.3s; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #e9d5ff; margin-top: 4px; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a78bfa; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.2)); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); border-color: rgba(168,85,247,0.5); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.2) !important; }
+        .option-letter { width: 28px; height: 28px; background: rgba(139,92,246,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; }
+        .feedback.show { display: block; }
+        .correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { display: none; margin-top: 20px; background: rgba(139,92,246,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .mechanism-title { color: #c4b5fd; font-weight: 600; font-size: 1rem; margin-bottom: 10px; }
+        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; color: #e2e8f0; }
+        .btn { background: linear-gradient(135deg, #a78bfa, #f472b6); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(167,139,250,0.4); }
+        .alert-box { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #fbbf24; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 40px; }
+        .ref-section { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
+        .ref-section a { color: #c4b5fd; }
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #5eead4; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍼 Cleft Lip & Palate</h1>
+            <div class="score-display">
+                <div class="score-item">Score: <strong id="score">0</strong>/<span id="maxScore">70</span></div>
+                <div class="score-item">Stage: <span id="stageNum">1</span>/7</div>
+            </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 14%"></div></div>
+        <div class="ref-section">
+            <strong>Open-Access Reference:</strong>
+            <a href="https://www.ncbi.nlm.nih.gov/books/NBK563128/" target="_blank">Cleft Lip - StatPearls</a> |
+            <a href="https://www.acpa-cpf.org/" target="_blank">ACPA Practice Parameters</a>
+        </div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Newborn with Feeding Difficulties",content:'<div class="narrative"><p>A <span class="highlight">2-day-old male</span> is having significant <span class="critical">difficulty breastfeeding</span>. The mother reports milk comes out of the baby\'s nose with every feed attempt. On examination, you note a <span class="highlight">complete unilateral left cleft lip</span> extending through the nasal floor and a <span class="highlight">wide cleft of the hard and soft palate</span>.</p><p style="margin-top:12px;"><strong>Birth History:</strong> Full-term, no prenatal diagnosis. Weight loss 12% from birth weight.</p></div>',question:{prompt:"What is the PRIMARY mechanism causing feeding difficulties in this infant?",options:[{text:"Weak suck reflex",correct:false},{text:"Inability to create negative pressure due to cleft palate",correct:true},{text:"Macroglossia obstructing the airway",correct:false},{text:"Gastroesophageal reflux",correct:false}],explanation:{correct:"Correct! The cleft palate prevents the infant from creating the negative intraoral pressure needed for effective sucking. The palate normally acts as a seal against the tongue to generate suction. Specialized bottles with one-way valves help compensate.",incorrect:"The cleft palate prevents creation of negative pressure needed for sucking. The oral-nasal communication breaks the seal required for effective feeding."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Cleft Palate & Feeding</div><div class="pathway">MECHANISM:\nNormal feeding requires:\n• Seal between tongue and palate\n• Negative intraoral pressure (suction)\n• Coordination of suck-swallow-breathe\n\nWith cleft palate:\n• No seal possible\n• Cannot generate suction\n• Milk regurgitates through nose\n\nSOLUTIONS:\n• Specialized bottles (Pigeon, Haberman, Mead Johnson)\n• One-way valves assist milk flow\n• Upright positioning\n• Feeding specialist consultation</div></div>',points:10}},
+        
+        {title:"Embryology",content:'<div class="narrative"><p>You explain to the parents how clefts develop during pregnancy. Understanding the embryology helps explain why cleft lip and cleft palate can occur together or separately.</p></div>',question:{prompt:"At what gestational age does the upper lip normally fuse?",options:[{text:"Week 4",correct:false},{text:"Week 6",correct:true},{text:"Week 10",correct:false},{text:"Week 14",correct:false}],explanation:{correct:"Correct! The upper lip fuses around week 6 (primary palate formation). The secondary palate (hard and soft palate) fuses later, between weeks 8-12. This timing explains why cleft lip can occur with or without cleft palate.",incorrect:"The lip fuses around week 6. The palate fuses later (weeks 8-12). Disruption at different times creates different cleft patterns."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Embryology Timeline</div><div class="pathway">WEEK 4-5:\n• Facial prominences form\n• Frontonasal, maxillary, mandibular\n\nWEEK 6:\n• LIP FUSION (primary palate)\n• Medial nasal + maxillary prominences\n• Failure → Cleft lip\n\nWEEKS 8-12:\n• PALATE FUSION (secondary palate)\n• Palatal shelves elevate and fuse\n• Failure → Cleft palate\n\nWHY CL ± CP?\n• Different timing = independent events\n• Lip failure (week 6) can disrupt palate\n• Palate can fail independently</div></div>',points:10}},
+
+        {title:"Classification",content:'<div class="narrative"><p>The craniofacial team uses a standardized classification system. This infant has a <span class="highlight">complete unilateral left cleft lip and palate</span>.</p></div>',question:{prompt:"In the LAHSHAL classification, what does 'complete' cleft mean?",options:[{text:"Involves only the lip vermilion",correct:false},{text:"Extends through the full thickness including the nasal floor/alveolus",correct:true},{text:"Is bilateral",correct:false},{text:"Involves only the soft palate",correct:false}],explanation:{correct:"Correct! 'Complete' means the cleft extends through the entire structure - for the lip, this includes through the nasal floor; for the palate, it extends through both hard and soft palate. 'Incomplete' spares part of the structure.",incorrect:"Complete = full thickness. For lip: through nasal floor/alveolus. For palate: through hard and soft palate."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 LAHSHAL Classification</div><div class="pathway">LAHSHAL represents (R to L):\nL - Lip (right)\nA - Alveolus (right)\nH - Hard palate (right)\nS - Soft palate\nH - Hard palate (left)\nA - Alveolus (left)\nL - Lip (left)\n\nEach position scored:\n• Blank = Normal\n• Lowercase = Incomplete\n• UPPERCASE = Complete\n\nEXAMPLE (this patient):\n_ _ h S H A L\n= Complete left CLP</div></div>',points:10}},
+
+        {title:"Syndromic Evaluation",content:'<div class="narrative"><p>You know that some clefts are associated with syndromes. About <span class="highlight">30% of cleft lip/palate</span> cases are syndromic, while <span class="highlight">50% of isolated cleft palate</span> cases are syndromic.</p></div>',question:{prompt:"A newborn has cleft palate, micrognathia, and a heart murmur. Which syndrome should you strongly suspect?",options:[{text:"Stickler syndrome",correct:false},{text:"Van der Woude syndrome",correct:false},{text:"22q11.2 deletion (Velocardiofacial syndrome)",correct:true},{text:"Treacher Collins syndrome",correct:false}],explanation:{correct:"Correct! 22q11.2 deletion (VCF/DiGeorge) presents with CATCH-22: Cardiac defects, Abnormal facies, Thymic hypoplasia, Cleft palate, Hypocalcemia. The combination of cleft palate + cardiac defect is highly suspicious.",incorrect:"Cleft palate + cardiac defect = think 22q11.2 deletion. This is the most common syndrome with isolated cleft palate (~10% of CP cases)."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Key Syndromes</div><div class="pathway">22q11.2 DELETION (VCF/DiGeorge):\n• CATCH-22 features\n• 10% of isolated CP\n• Order FISH/microarray\n\nVAN DER WOUDE:\n• Most common syndrome with CLP\n• Lower lip pits (pathognomonic)\n• IRF6 gene\n\nSTICKLER:\n• CP + severe myopia\n• Retinal detachment risk\n• COL2A1 gene\n\nPIERRE ROBIN:\n• Micrognathia + CP + glossoptosis\n• Actually a sequence, not syndrome\n• 60% have underlying syndrome</div></div>',points:10}},
+
+        {title:"Multidisciplinary Team",content:'<div class="narrative"><p>You refer the infant to your institution\'s craniofacial team. This team coordinates care across multiple specialists.</p></div>',question:{prompt:"Which specialist is MOST important to consult in the first few days of life?",options:[{text:"Orthodontist",correct:false},{text:"Speech pathologist",correct:false},{text:"Feeding specialist/Lactation consultant",correct:true},{text:"Oral surgeon",correct:false}],explanation:{correct:"Correct! The most urgent need is establishing adequate nutrition. A feeding specialist helps with specialized bottles and techniques. Other team members become important later (speech at 1-2 years, orthodontics later in childhood).",incorrect:"Feeding is the immediate priority in the first days of life. Specialized bottles and techniques prevent failure to thrive."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Craniofacial Team</div><div class="pathway">IMMEDIATE (Days-Weeks):\n• Feeding specialist ← PRIORITY\n• Plastic/Craniofacial surgery\n• Genetics\n• Pediatrics\n\nFIRST YEAR:\n• ENT (ears, hearing)\n• Audiology\n• Presurgical orthopedics (NAM)\n\nLATER CHILDHOOD:\n• Speech pathology (1-2+ years)\n• Orthodontics (mixed dentition)\n• Oral surgery (bone graft 8-12 yr)\n• Psychology\n\n10+ SPECIALISTS over 18+ years!</div></div>',points:10}},
+
+        {title:"Surgical Timing",content:'<div class="narrative"><p>The parents ask when their baby will have surgery. You explain the staged approach and the "Rule of 10s" guideline.</p></div>',question:{prompt:"According to standard timing, when is cleft lip typically repaired?",options:[{text:"Immediately at birth",correct:false},{text:"Around 3 months of age",correct:true},{text:"Around 12 months of age",correct:false},{text:"At 5 years of age",correct:false}],explanation:{correct:"Correct! Cleft lip repair is typically performed around 3 months (10-12 weeks). The traditional 'Rule of 10s' (10 weeks, 10 lbs, Hgb 10) is now a guideline rather than strict rule. Palate repair follows at 9-12 months.",incorrect:"Lip repair is typically at 3 months. Palate repair at 9-12 months. This allows adequate growth while optimizing speech development."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Surgical Timeline</div><div class="pathway">PRESURGICAL (0-3 months):\n• Nasoalveolar molding (NAM) if indicated\n• Feeding optimization\n\nLIP REPAIR: ~3 months\n• "Rule of 10s" (now guideline):\n  - 10 weeks old\n  - 10 pounds weight\n  - Hemoglobin 10 g/dL\n• Techniques: Millard, Tennison-Randall\n\nPALATE REPAIR: 9-12 months\n• Before speech development\n• Furlow, Von Langenbeck techniques\n\nLATER:\n• Speech surgery if VPI (4-6 yrs)\n• Alveolar bone graft (8-12 yrs)\n• Rhinoplasty (adolescence)</div></div>',points:10}},
+
+        {title:"Long-Term Outcomes",content:'<div class="narrative"><p>The parents are concerned about their child\'s future. You counsel them about expected outcomes and potential complications.</p></div><div class="alert-box"><div class="alert-title">⚠️ Key Complication to Monitor</div><p>Velopharyngeal insufficiency (VPI) occurs in 20-30% after palate repair. This causes hypernasal speech and requires speech therapy, possibly secondary surgery.</p></div>',question:{prompt:"What percentage of patients achieve normal speech after cleft palate repair with appropriate intervention?",options:[{text:"30-40%",correct:false},{text:"50-60%",correct:false},{text:"70-80%",correct:true},{text:"95-100%",correct:false}],explanation:{correct:"Correct! About 70-80% achieve normal or near-normal speech. The remaining 20-30% have some degree of VPI requiring additional intervention. Early palate repair (9-12 months) optimizes speech outcomes.",incorrect:"70-80% achieve normal speech. 20-30% develop VPI requiring further intervention. Early surgery and speech therapy are key."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Outcomes & Complications</div><div class="pathway">SPEECH:\n• 70-80% normal speech\n• 20-30% VPI requiring intervention\n\nVELOPHARYNGEAL INSUFFICIENCY:\n• Hypernasal speech\n• Nasal emission\n• Speech therapy first\n• Surgery if structural issue\n\nOTHER LONG-TERM:\n• Recurrent otitis media (90%+)\n• Hearing monitoring essential\n• Dental anomalies common\n• Midface hypoplasia (25-30%)\n• Multiple surgeries over years\n\nPROGNOSIS:\nExcellent with comprehensive care!</div></div>',points:10}}
+    ];
+    
+    function updateProgress(){
+        document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';
+        document.getElementById('stageNum').textContent=currentStage+1;
+        document.getElementById('maxScore').textContent=stages.length*10;
+    }
+    
+    function renderStage(){
+        const stage=stages[currentStage];
+        let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;
+        if(stage.question){
+            html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';
+            stage.question.options.forEach((opt,i)=>{
+                html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';
+            });
+            html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div>';
+            html+='<div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';
+            if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';
+            html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';
+        }
+        html+='</div>';
+        document.getElementById('scene-container').innerHTML=html;
+        updateProgress();
+    }
+    
+    function checkAnswer(idx,correct){
+        const options=document.querySelectorAll('.mcq-option');
+        if(options[0].classList.contains('disabled'))return;
+        options.forEach((opt,i)=>{
+            opt.classList.add('disabled');
+            if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');
+            else if(i===idx&&!correct)opt.classList.add('incorrect');
+        });
+        if(correct){
+            document.getElementById('fb-correct').classList.add('show');
+            score+=stages[currentStage].question.points;
+            document.getElementById('score').textContent=score;
+        }else{
+            document.getElementById('fb-incorrect').classList.add('show');
+        }
+        const t=document.getElementById('teaching');
+        if(t)t.classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    
+    function nextStage(){
+        if(currentStage<stages.length-1){
+            currentStage++;
+            renderStage();
+            window.scrollTo(0,0);
+        }else{
+            document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#a78bfa;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:10px;border:1px solid rgba(59,130,246,0.3);"><p style="color:#5eead4;margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../../mechanism/cleft-lip-palate-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 MechanismDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=cleft+lip+palate" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563128/" target="_blank" style="color:#5eead4;font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Cleft Lip & Palate clinical reasoning!</p><div style="margin-top:30px;text-align:left;background:rgba(0,0,0,0.2);padding:20px;border-radius:12px;"><h4 style="color:#c4b5fd;margin-bottom:12px;">Key Takeaways:</h4><ul style="line-height:2;margin-left:20px;"><li>Cleft palate prevents negative pressure for feeding</li><li>Lip fuses week 6, palate fuses weeks 8-12</li><li>30% CLP, 50% CP are syndromic</li><li>22q11.2 deletion: cleft + cardiac = suspect</li><li>Lip repair ~3 months, palate 9-12 months</li><li>70-80% achieve normal speech</li><li>Multidisciplinary team essential</li></ul></div></div>';
+        }
+    }
+    
+    renderStage();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Cleft Lip & Palate"
+         data-key-points="🎉 Case Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+<div class="rdx-crossplatform-nav">
+    <h4>🎯 Continue Your Learning Journey</h4>
+    <div class="rdx-crossplatform-links">
+                <a href="../deep-dive-player.html?module=cleft-lip-palate" class="rdx-crossplatform-link">📚 Cleft Lip and Palate: Comprehensive Management Deep Dive</a>
+        <a href="../deep-dive-player.html?module=gi-embryology" class="rdx-crossplatform-link">🔬 GI Embryology: A Systematic Approach</a>
+        <a href="../deep-dive-player.html?module=neuro-embryology" class="rdx-crossplatform-link">🔬 Neuro Embryology: A Systematic Approach</a>
+        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
+    </div>
+</div>
+
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

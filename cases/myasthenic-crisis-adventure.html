@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myasthenic Crisis Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --primary: #1e3a5f; --primary-dark: #0f2744; --accent: #dc2626;
+            --success: #059669; --warning: #d97706; --danger: #dc2626;
+            --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
+            --text: #1e293b; --text-secondary: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 32px 24px; border-radius: 16px; margin-bottom: 24px; }
+        .header h1 { font-size: 1.75rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 12px; }
+        .scene { background: var(--card); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        .scene-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .scene-icon { font-size: 1.5rem; }
+        .scene-title { font-size: 1.1rem; font-weight: 700; }
+        .scene-tag { background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-left: auto; }
+        .narrative { font-size: 1rem; color: var(--text); margin-bottom: 20px; padding: 16px; background: #f1f5f9; border-radius: 12px; border-left: 4px solid var(--primary); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 16px 0; }
+        .vital { background: #f8fafc; padding: 12px; border-radius: 10px; text-align: center; border: 1px solid var(--border); }
+        .vital-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        .vital-value.critical { color: var(--danger); }
+        .choices { display: flex; flex-direction: column; gap: 10px; }
+        .choice-btn { background: var(--card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn:hover { border-color: var(--primary); background: #f8fafc; }
+        .choice-btn.selected { border-color: var(--primary); background: #f0fdfa; }
+        .choice-btn.correct { border-color: var(--success); background: #ecfdf5; }
+        .choice-btn.incorrect { border-color: var(--danger); background: #fef2f2; }
+        .choice-letter { width: 28px; height: 28px; background: var(--primary); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+        .choice-text { flex: 1; font-size: 0.95rem; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #ecfdf5; border: 1px solid #059669; color: #065f46; }
+        .feedback.incorrect { background: #fef2f2; border: 1px solid #dc2626; color: #991b1b; }
+        .feedback h4 { font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .teaching-point { background: #fefce8; border: 1px solid #eab308; border-radius: 12px; padding: 16px; margin-top: 16px; }
+        .teaching-point h4 { color: #854d0e; font-size: 0.85rem; margin-bottom: 8px; }
+        .teaching-point p { color: #713f12; font-size: 0.9rem; }
+        .nav-btn { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; margin-top: 16px; }
+        .nav-btn:hover { background: var(--primary-dark); }
+        .nav-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+        .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s; }
+        .hidden { display: none !important; }
+        .labs-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        .labs-table th, .labs-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        .labs-table th { background: #f8fafc; font-weight: 600; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; }
+        .abnormal { color: var(--danger); font-weight: 600; }
+        .summary-card { background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%); border: 1px solid #059669; border-radius: 16px; padding: 24px; margin-top: 20px; }
+        .summary-card h3 { color: #065f46; margin-bottom: 16px; }
+        .key-points { list-style: none; }
+        .key-points li { padding: 8px 0; padding-left: 24px; position: relative; color: #047857; }
+        .key-points li::before { content: "✓"; position: absolute; left: 0; color: #059669; font-weight: bold; }
+        .timeline { margin: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; padding: 12px 0; border-left: 3px solid var(--primary); padding-left: 20px; margin-left: 8px; }
+        .timeline-time { font-weight: 700; color: var(--primary); min-width: 60px; }
+        .timeline-content { flex: 1; }
+        @media (max-width: 640px) {
+            .container { padding: 16px; }
+            .scene { padding: 20px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #5eead4; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
+        
+        <header class="header">
+            <h1>🚨 Myasthenic Crisis</h1>
+            <p>A 58-year-old woman with known myasthenia gravis presents with worsening weakness</p>
+            <span class="badge">⚡ Critical Care Scenario</span>
+        </header>
+
+        <!-- Scene 1: Initial Presentation -->
+        <div class="scene" id="scene1">
+            <div class="scene-header">
+                <span class="scene-icon">🏥</span>
+                <span class="scene-title">ED Presentation</span>
+                <span class="scene-tag">Scene 1 of 6</span>
+            </div>
+            <div class="narrative">
+                A 58-year-old woman with myasthenia gravis is brought to the ED by her husband. Over the past 3 days, she has had progressive difficulty swallowing and increasing shortness of breath. This morning she could barely lift her arms. She was recently started on azithromycin for bronchitis.
+            </div>
+            <div class="vitals-grid">
+                <div class="vital"><div class="vital-label">HR</div><div class="vital-value">112</div></div>
+                <div class="vital"><div class="vital-label">BP</div><div class="vital-value">148/92</div></div>
+                <div class="vital"><div class="vital-label">RR</div><div class="vital-value critical">28</div></div>
+                <div class="vital"><div class="vital-label">SpO2</div><div class="vital-value critical">88%</div></div>
+                <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">37.8°C</div></div>
+            </div>
+            <p style="margin: 16px 0; font-size: 0.95rem;"><strong>Exam:</strong> Anxious, using accessory muscles. Ptosis bilateral, dysarthric speech. Unable to hold head up. Paradoxical breathing pattern noted.</p>
+            <p style="margin-bottom: 20px; font-weight: 600;">What is your immediate priority?</p>
+            <div class="choices">
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Obtain bedside NIF and FVC, prepare for intubation</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Start IV methylprednisolone 1g immediately</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Order emergent CT chest to rule out thymoma</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Increase her pyridostigmine dose</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+            <button class="nav-btn hidden" id="next1" onclick="nextScene(2)">Continue →</button>
+        </div>
+
+        <!-- Scene 2: Respiratory Assessment -->
+        <div class="scene hidden" id="scene2">
+            <div class="scene-header">
+                <span class="scene-icon">🫁</span>
+                <span class="scene-title">Respiratory Assessment</span>
+                <span class="scene-tag">Scene 2 of 6</span>
+            </div>
+            <div class="narrative">
+                You obtain bedside pulmonary function tests and arterial blood gas. The patient is becoming more anxious and having difficulty counting in one breath.
+            </div>
+            <table class="labs-table">
+                <tr><th colspan="2">Pulmonary Function & ABG</th></tr>
+                <tr><td>NIF (Negative Inspiratory Force)</td><td class="abnormal">-18 cmH2O (normal > -30)</td></tr>
+                <tr><td>FVC (Forced Vital Capacity)</td><td class="abnormal">0.9 L (15 mL/kg target > 1.5L)</td></tr>
+                <tr><td>pH</td><td class="abnormal">7.28</td></tr>
+                <tr><td>PaCO2</td><td class="abnormal">58 mmHg</td></tr>
+                <tr><td>PaO2</td><td class="abnormal">62 mmHg on 6L NC</td></tr>
+                <tr><td>HCO3</td><td>24 mEq/L</td></tr>
+            </table>
+            <p style="margin-bottom: 20px; font-weight: 600;">Based on the "20/30/40 Rule," what do these values indicate?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Patient is stable for observation with BiPAP</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Immediate intubation indicated - all three criteria met</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Wait for repeat measurements in 2 hours</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Start CPAP and recheck in 1 hour</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+            <button class="nav-btn hidden" id="next2" onclick="nextScene(3)">Continue →</button>
+        </div>
+
+        <!-- Scene 3: Intubation -->
+        <div class="scene hidden" id="scene3">
+            <div class="scene-header">
+                <span class="scene-icon">🔧</span>
+                <span class="scene-title">Airway Management</span>
+                <span class="scene-tag">Scene 3 of 6</span>
+            </div>
+            <div class="narrative">
+                You decide to proceed with intubation. The patient is becoming increasingly fatigued. You need to select the appropriate medications for rapid sequence intubation in this patient with myasthenic crisis.
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">Which RSI medication combination is MOST appropriate?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Etomidate + Succinylcholine (standard RSI)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Ketamine + Succinylcholine</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Propofol or Etomidate + Rocuronium (reduced dose)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Midazolam + High-dose Rocuronium (1.2 mg/kg)</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+            <button class="nav-btn hidden" id="next3" onclick="nextScene(4)">Continue →</button>
+        </div>
+
+        <!-- Scene 4: Treatment -->
+        <div class="scene hidden" id="scene4">
+            <div class="scene-header">
+                <span class="scene-icon">💊</span>
+                <span class="scene-title">Definitive Treatment</span>
+                <span class="scene-tag">Scene 4 of 6</span>
+            </div>
+            <div class="narrative">
+                The patient is successfully intubated with reduced-dose rocuronium (0.6 mg/kg). She is now on mechanical ventilation in the ICU. Neurology has been consulted. You need to initiate definitive treatment for myasthenic crisis.
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">What is the FIRST-LINE treatment for myasthenic crisis?</p>
+            <div class="choices">
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Plasmapheresis (PLEX) or IVIG</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">High-dose IV corticosteroids alone</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Increase pyridostigmine to maximum dose</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Rituximab infusion</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+            <button class="nav-btn hidden" id="next4" onclick="nextScene(5)">Continue →</button>
+        </div>
+
+        <!-- Scene 5: Avoiding Precipitants -->
+        <div class="scene hidden" id="scene5">
+            <div class="scene-header">
+                <span class="scene-icon">⚠️</span>
+                <span class="scene-title">Medication Review</span>
+                <span class="scene-tag">Scene 5 of 6</span>
+            </div>
+            <div class="narrative">
+                The ICU team reviews all medications. The patient was recently started on azithromycin for bronchitis. The pharmacy calls to verify current medications and ask about the pyridostigmine she was taking at home.
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">What should you do regarding her current medications?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Continue azithromycin (she needs antibiotics) and restart pyridostigmine at her home dose</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Stop azithromycin, increase pyridostigmine dose</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Stop azithromycin (switch to safer antibiotic), hold pyridostigmine while intubated</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Continue all current medications unchanged</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback5"></div>
+            <button class="nav-btn hidden" id="next5" onclick="nextScene(6)">Continue →</button>
+        </div>
+
+        <!-- Scene 6: Summary -->
+        <div class="scene hidden" id="scene6">
+            <div class="scene-header">
+                <span class="scene-icon">🎓</span>
+                <span class="scene-title">Case Summary</span>
+                <span class="scene-tag">Scene 6 of 6</span>
+            </div>
+            <div class="narrative">
+                Day 5: After 5 sessions of plasmapheresis, the patient's strength has significantly improved. Her NIF is now -45 cmH2O and FVC is 2.1L. She was successfully extubated yesterday and is tolerating oral intake. Pyridostigmine was restarted with good effect.
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-time">Day 0</span>
+                    <div class="timeline-content">ED presentation with respiratory failure, emergent intubation</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">Day 1-4</span>
+                    <div class="timeline-content">ICU care, plasmapheresis x5 sessions, medication adjustments</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">Day 5</span>
+                    <div class="timeline-content">Successful extubation, beginning rehabilitation</div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <h3>🔑 Key Learning Points</h3>
+                <ul class="key-points">
+                    <li><strong>20/30/40 Rule:</strong> FVC < 20 mL/kg, NIF > -30 cmH2O, or PaCO2 > 40 indicates need for intubation</li>
+                    <li><strong>Avoid succinylcholine:</strong> MG patients are resistant (need higher doses) and have prolonged paralysis</li>
+                    <li><strong>Reduce NMBA doses:</strong> Use lower doses of non-depolarizing agents (increased sensitivity)</li>
+                    <li><strong>First-line treatment:</strong> PLEX or IVIG - faster onset than steroids which can initially worsen weakness</li>
+                    <li><strong>Avoid triggers:</strong> Macrolides, fluoroquinolones, aminoglycosides, beta-blockers, magnesium</li>
+                    <li><strong>Hold cholinesterase inhibitors:</strong> During crisis to avoid cholinergic crisis and excessive secretions</li>
+                </ul>
+            </div>
+            <div class="teaching-point">
+                <h4>📚 Myasthenic vs Cholinergic Crisis</h4>
+                <p><strong>Myasthenic Crisis:</strong> Weakness from inadequate treatment or precipitant - pupils normal/dilated, dry secretions<br>
+                <strong>Cholinergic Crisis:</strong> From excessive anticholinesterase - SLUDGE symptoms (Salivation, Lacrimation, Urination, Defecation, GI distress, Emesis), miosis, bradycardia</p>
+            </div>
+            <button class="nav-btn" onclick="location.href='../adventure-hub.html'">← Back to Adventures</button>
+            <button class="nav-btn" style="margin-left: 12px; background: var(--success);" onclick="location.href='../deep-dive-player.html?topic=myasthenia-crisis'">📖 Deep Dive</button>
+        </div>
+    </div>
+
+    <script>
+        let currentScene = 1;
+        const totalScenes = 6;
+        
+        function updateProgress() {
+            const progress = ((currentScene - 1) / (totalScenes - 1)) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        function checkAnswer(btn, scene) {
+            const choices = btn.parentElement.querySelectorAll('.choice-btn');
+            const isCorrect = btn.dataset.correct === 'true';
+            
+            choices.forEach(c => {
+                c.disabled = true;
+                if (c.dataset.correct === 'true') c.classList.add('correct');
+                else if (c === btn && !isCorrect) c.classList.add('incorrect');
+            });
+            
+            const feedback = document.getElementById('feedback' + scene);
+            feedback.classList.add('show');
+            
+            const feedbackContent = {
+                1: {
+                    correct: "Correct! Respiratory failure is the leading cause of death in myasthenic crisis. Bedside NIF and FVC are essential to guide intubation decisions using the '20/30/40 Rule.'",
+                    incorrect: "The immediate priority is assessing respiratory function. While steroids are part of treatment, they can initially worsen weakness. Imaging can wait, and increasing pyridostigmine could precipitate cholinergic crisis."
+                },
+                2: {
+                    correct: "Correct! The 20/30/40 Rule: Intubate if FVC < 20 mL/kg, NIF > -30 cmH2O, or PaCO2 > 40 mmHg. This patient meets ALL criteria with FVC 15 mL/kg, NIF -18, and PaCO2 58.",
+                    incorrect: "This patient meets all three criteria for intubation (20/30/40 Rule). BiPAP may be used as a bridge but is not definitive management. Waiting could lead to respiratory arrest."
+                },
+                3: {
+                    correct: "Correct! Avoid succinylcholine - MG patients are resistant and have prolonged paralysis. Use reduced-dose non-depolarizing agents (0.5-0.6 mg/kg rocuronium) due to increased sensitivity.",
+                    incorrect: "Succinylcholine is contraindicated in MG - patients are resistant and have prolonged paralysis. Non-depolarizing agents work but at REDUCED doses due to increased sensitivity."
+                },
+                4: {
+                    correct: "Correct! PLEX or IVIG are first-line for myasthenic crisis. They work faster than steroids (which can initially worsen weakness in the first 1-2 weeks). PLEX is slightly faster; IVIG if vascular access issues.",
+                    incorrect: "PLEX or IVIG are first-line treatments. High-dose steroids can initially worsen weakness. Increasing pyridostigmine won't address the underlying crisis and risks cholinergic crisis."
+                },
+                5: {
+                    correct: "Correct! Macrolides (azithromycin) can worsen MG and should be stopped. Pyridostigmine is typically held during crisis while intubated to avoid excessive secretions and allow PLEX/IVIG to work.",
+                    incorrect: "Azithromycin and other macrolides are MG triggers and should be stopped. During crisis with intubation, pyridostigmine is typically held to reduce secretions and avoid cholinergic crisis."
+                }
+            };
+            
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = `<h4>✓ Correct!</h4><p>${feedbackContent[scene].correct}</p>`;
+            } else {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = `<h4>✗ Not quite</h4><p>${feedbackContent[scene].incorrect}</p>`;
+            }
+            
+            document.getElementById('next' + scene).classList.remove('hidden');
+        }
+        
+        function nextScene(scene) {
+            document.getElementById('scene' + (scene - 1)).classList.add('hidden');
+            document.getElementById('scene' + scene).classList.remove('hidden');
+            currentScene = scene;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        updateProgress();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Myasthenic Crisis Adventure"
+         data-key-points="🔑 Key Learning Points, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" style="color:#7dd3fc">Myasthenic Crisis - StatPearls/NCBI</a> — NCBI Bookshelf</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+<div class="rdx-crossplatform-nav">
+    <h4>🎯 Continue Your Learning Journey</h4>
+    <div class="rdx-crossplatform-links">
+                <a href="../deep-dive-player.html?module=myasthenia-crisis" class="rdx-crossplatform-link">📚 Myasthenic Crisis Deep Dive</a>
+        <a href="../deep-dive-player.html?module=stroke" class="rdx-crossplatform-link">🔬 Acute Ischemic Stroke</a>
+        <a href="../deep-dive-player.html?module=meningitis" class="rdx-crossplatform-link">🔬 Bacterial Meningitis</a>
+        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
+    </div>
+</div>
+
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

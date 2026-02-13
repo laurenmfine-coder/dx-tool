@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhabdomyolysis: Pathophysiology | MechanismDx</title>
+    <style>
+        :root { --primary: #0891b2; --primary-dark: #0e7490; --primary-bg: #ecfeff; --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --text: #1e293b; --text-secondary: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 32px 24px; color: white; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .header-subtitle { font-size: 15px; color: rgba(255,255,255,0.85); }
+        .content { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .objectives { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border: 1px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .objectives h2 { color: #047857; font-size: 16px; margin-bottom: 12px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 6px; font-size: 0.95rem; }
+        .section { background: var(--card); border-radius: 16px; padding: 28px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--primary-dark); font-size: 1.25rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-bg); }
+        .section h3 { color: var(--text); font-size: 1rem; margin: 16px 0 8px; }
+        .section p { margin-bottom: 12px; }
+        .pathway-box { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .pathway-box h4 { color: #92400e; font-size: 0.9rem; margin-bottom: 8px; }
+        .pathway-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .pathway-step { background: white; border: 1px solid #fbbf24; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; }
+        .pathway-arrow { color: #f59e0b; font-weight: bold; }
+        .clinical-box { background: #f0fdf4; border: 1px solid #22c55e; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .clinical-box h4 { color: #166534; font-size: 0.9rem; margin-bottom: 8px; }
+        .key-point { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: #115e59; }
+        .mcq-container { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mcq-question { font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-option { padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .mcq-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .mcq-option.correct { border-color: #22c55e; background: #f0fdf4; }
+        .mcq-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .mcq-feedback { margin-top: 12px; padding: 12px; border-radius: 8px; display: none; }
+        .mcq-feedback.show { display: block; }
+        .mcq-feedback.correct { background: #f0fdf4; color: #166534; }
+        .mcq-feedback.incorrect { background: #fef2f2; color: #991b1b; }
+        .nav-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+        .nav-link { padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .nav-link.back { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+        .nav-link.adventure { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="../index.html">DxSuite</a> → <a href="index.html">MechanismDx</a> → Rhabdomyolysis</div>
+            <h1>⚙️ Rhabdomyolysis</h1>
+            <div class="header-subtitle">Pathophysiology & Clinical Correlations | Nephrology</div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul><li>CK >5x ULN (usually >10,000 for significant risk)</li><li>Aggressive IV fluids: target UOP >200-300 mL/hr</li><li>Monitor and treat hyperkalemia</li><li>Consider bicarbonate for urine alkalinization (controversial)</li></ul>
+        </div>
+        <div class="section">
+            <h2>🔬 Core Pathophysiology</h2>
+<h3>Myoglobin-Induced AKI</h3><p>Muscle breakdown releases myoglobin which is toxic to kidneys.</p>
+            <div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">Muscle injury (crush, exertion, drugs)</span><span class="pathway-arrow">→</span><span class="pathway-step">Myocyte death</span><span class="pathway-arrow">→</span><span class="pathway-step">Myoglobin release into circulation</span><span class="pathway-arrow">→</span><span class="pathway-step">Renal tubular obstruction + toxicity</span><span class="pathway-arrow">→</span><span class="pathway-step">Acute kidney injury</span></div></div>
+        </div>
+        <div class="section">
+            <h2>🏥 Clinical Correlations</h2>
+<div class="clinical-box"><h4>Tea/cola-colored urine</h4><p><strong>Mechanism:</strong> Myoglobin pigment in urine</p><p><strong>Clinical Significance:</strong> Dipstick positive for blood but no RBCs on microscopy</p></div>
+<div class="clinical-box"><h4>Hyperkalemia</h4><p><strong>Mechanism:</strong> Release of intracellular potassium from damaged myocytes</p><p><strong>Clinical Significance:</strong> Can be severe; cardiac monitoring required</p></div>
+<div class="clinical-box"><h4>CK >5x normal</h4><p><strong>Mechanism:</strong> Release of muscle enzymes</p><p><strong>Clinical Significance:</strong> Diagnostic criterion; peak 24-72 hours post-injury</p></div>
+        </div>
+        <div class="section">
+            <h2>📝 Knowledge Check</h2>
+<div class="mcq-container" id="mcq0"><div class="mcq-question">1. What is the target urine output for rhabdomyolysis treatment?</div><div class="mcq-options"><div class="mcq-option" onclick="checkMCQ(0,0,false)">A. 0.5 mL/kg/hr</div><div class="mcq-option" onclick="checkMCQ(0,1,false)">B. 1-2 mL/kg/hr</div><div class="mcq-option" onclick="checkMCQ(0,2,true)">C. >2-3 mL/kg/hr (200-300 mL/hr)</div><div class="mcq-option" onclick="checkMCQ(0,3,false)">D. 50 mL/hr</div></div><div class="mcq-feedback" id="feedback0"></div></div>
+        </div>
+        <div class="section">
+            <h2>🔑 Key Takeaways</h2>
+<div class="key-point"><strong>✓</strong> CK >5x ULN (usually >10,000 for significant risk)</div>
+<div class="key-point"><strong>✓</strong> Aggressive IV fluids: target UOP >200-300 mL/hr</div>
+<div class="key-point"><strong>✓</strong> Monitor and treat hyperkalemia</div>
+<div class="key-point"><strong>✓</strong> Consider bicarbonate for urine alkalinization (controversial)</div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link back">← Back to MechanismDx</a>
+            <a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a>
+        </div>
+    </div>
+    <script>
+        const mcqFeedback = [{"correct":"Aggressive IV fluids to achieve UOP 200-300 mL/hr (or >2-3 mL/kg/hr) prevents myoglobin precipitation in tubules. This high-volume resuscitation is the mainstay of treatment.","incorrect":"Higher urine output is needed to flush myoglobin and prevent tubular obstruction."}];
+        function checkMCQ(qIdx, optIdx, isCorrect) {
+            const container = document.getElementById('mcq' + qIdx);
+            const options = container.querySelectorAll('.mcq-option');
+            const feedback = document.getElementById('feedback' + qIdx);
+            options.forEach((opt, i) => { opt.style.pointerEvents = 'none'; if (i === optIdx) opt.classList.add(isCorrect ? 'correct' : 'incorrect'); });
+            feedback.className = 'mcq-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct!' : '✗ Not quite') + '</strong><br>' + (isCorrect ? mcqFeedback[qIdx].correct : mcqFeedback[qIdx].incorrect);
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Rhabdomyolysis: Pathophysiology"
+         data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Myoglobin-Induced AKI, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 25-year-old presents after intense exercise with severe muscle pain, dark brown urine, and CK of 45,000 U/L. What is the MOST critical complication to prevent?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="While AST may be elevated from muscle breakdown, hepatic failure is not the primary complication of rhabdomyolysis." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Hepatic failure</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Myoglobin released from damaged muscle is toxic to renal tubules → acute tubular necrosis → AKI (occurs in 15-33% of rhabdomyolysis). Prevention: aggressive IV fluid resuscitation (goal UOP 200-300 mL/hr). Myoglobin also causes dangerous hyperkalemia." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Acute kidney injury from myoglobin-induced tubular necrosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PE is not a direct complication of rhabdomyolysis. The primary targets of damage are the kidneys (myoglobin nephrotoxicity) and cardiac conduction (hyperkalemia)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Pulmonary embolism</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CFS is unrelated. The acute life-threatening complications are AKI, hyperkalemia, DIC, and compartment syndrome." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Chronic fatigue syndrome</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the CORNERSTONE of rhabdomyolysis treatment?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Aggressive IV NS (1-2 L/hr initially): dilutes myoglobin, increases renal perfusion, promotes myoglobin washout, and corrects hypovolemia (muscle sequesters massive fluid). Goal UOP 200-300 mL/hr. Start immediately — early fluid resuscitation is the single most important intervention." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Aggressive IV normal saline resuscitation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bicarbonate (to maintain urine pH &gt;6.5) may reduce myoglobin toxicity in the tubules, but evidence is mixed. It&#x27;s an adjunct, NOT the cornerstone. NS resuscitation is primary." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">IV sodium bicarbonate to alkalinize urine</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Dialysis is reserved for severe AKI (refractory hyperkalemia, volume overload, uremic symptoms). Most patients respond to aggressive IV fluids without needing dialysis." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Emergent hemodialysis for all patients</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Dantrolene treats malignant hyperthermia and NMS. It&#x27;s not part of standard rhabdomyolysis treatment unless these conditions are the underlying cause." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Oral dantrolene</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which electrolyte abnormality is MOST dangerous in the acute phase of rhabdomyolysis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Hypocalcemia occurs (calcium deposits in damaged muscle) but is usually asymptomatic. Do NOT aggressively replace calcium — it can worsen muscle calcium deposition and cause rebound hypercalcemia during recovery." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Hypocalcemia</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Massive K+ release from lysed muscle cells → life-threatening hyperkalemia (cardiac arrhythmias, arrest). Often the FIRST cause of death. Monitor K+ frequently, continuous cardiac monitoring, treat aggressively (calcium gluconate, insulin/dextrose, kayexalate, dialysis if needed)." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Hyperkalemia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hyponatremia is not a primary electrolyte disturbance of rhabdomyolysis. The major electrolyte concerns are hyperkalemia, hyperphosphatemia, hypocalcemia, and hyperuricemia." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hyponatremia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Magnesium abnormalities are not the primary dangerous electrolyte concern. Hyperkalemia from muscle breakdown is the most immediately life-threatening." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Hypomagnesemia</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">What CK level is generally considered diagnostic of rhabdomyolysis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="CK of 200 is mildly elevated and can occur with normal exercise. This is not diagnostic of rhabdomyolysis." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">CK >200 U/L</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Rhabdomyolysis: CK &gt;5× ULN (usually &gt;1,000 U/L). AKI risk increases significantly when CK &gt;5,000-10,000. Severe rhabdomyolysis can produce CK &gt;100,000. CK peaks at 24-72 hours and should be trended to monitor resolution." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">CK >5 times upper limit of normal (typically >1,000 U/L)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="All people have baseline CK levels (normal ~30-200 U/L). Rhabdomyolysis requires markedly elevated CK from muscle injury." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Any detectable CK level</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="While CK &gt;100,000 represents severe rhabdomyolysis, the diagnosis is made at much lower levels (&gt;5× ULN). Waiting for CK &gt;100,000 would miss many cases." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">CK >100,000 only</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">A patient with rhabdomyolysis has a swollen, tense anterior leg compartment. Passive dorsiflexion causes severe pain. What is the MOST likely complication?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="DVT causes calf swelling but not a tense compartment or pain with passive stretch. The tense compartment with passive stretch pain is pathognomonic for compartment syndrome." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">DVT of the popliteal vein</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Compartment syndrome: elevated pressure within a fascial compartment → compromised perfusion → ischemic necrosis. The 6 P&#x27;s: Pain (disproportionate, with passive stretch), Pressure, Paresthesia, Pallor, Paralysis, Pulselessness. Treatment: emergent fasciotomy. Can both cause and result from rhabdomyolysis." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Compartment syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Cellulitis causes warmth, erythema, and tenderness but not a tense compartment or pain specifically with passive stretch." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Cellulitis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="A tense compartment requiring measurement of compartment pressures is far beyond a simple strain. Compartment syndrome is a surgical emergency." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Muscle strain</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Which of the following is NOT a common cause of rhabdomyolysis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Crush injury is a classic cause — think earthquake victims, prolonged immobilization. Massive muscle necrosis releases myoglobin." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Crush injury or trauma</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Statins can cause myopathy and rhabdomyolysis (especially with drug interactions like CYP3A4 inhibitors). Risk is dose-dependent." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Statin medications</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="OCPs are not associated with rhabdomyolysis. Common causes: trauma/crush, extreme exertion, drugs/toxins (statins, alcohol, cocaine, amphetamines), NMS, malignant hyperthermia, seizures, heat stroke, infections, and metabolic myopathies." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Oral contraceptive pills</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Cocaine causes rhabdomyolysis through vasoconstriction → muscle ischemia, hyperthermia, agitation, and direct myotoxicity. Common cause in young adults." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cocaine use</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">During the recovery phase of rhabdomyolysis, which electrolyte rebound must be monitored?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="During acute phase, calcium deposits in damaged muscle (hypocalcemia). During recovery, this calcium is mobilized back → rebound hypercalcemia. This is why aggressive calcium replacement during the acute phase is discouraged — it worsens the rebound." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Rebound hypercalcemia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Potassium normalizes with treatment. The rebound phenomenon is specifically with calcium, not potassium." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Rebound hyperkalemia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Sodium rebound is not a recognized phenomenon of rhabdomyolysis recovery." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Rebound hypernatremia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Metabolic acidosis may be present acutely but resolves with treatment. The characteristic rebound is hypercalcemia from calcium remobilization." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Rebound metabolic acidosis</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Why does the urine dipstick test positive for "blood" in rhabdomyolysis even when there are no RBCs on microscopy?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="The urine dipstick heme pad detects the peroxidase activity of heme groups — present in BOTH hemoglobin AND myoglobin. Positive dipstick for blood + no RBCs on microscopy = myoglobinuria. This discordance is a classic clue to rhabdomyolysis." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">The dipstick is detecting myoglobin, which cross-reacts with the heme reagent</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This is not a malfunction — it&#x27;s the expected biochemical cross-reactivity. The dipstick is working correctly but cannot distinguish myoglobin from hemoglobin." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">The dipstick is malfunctioning</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Glomerulonephritis would show RBCs (especially dysmorphic) AND RBC casts on microscopy. The absence of RBCs with positive dipstick specifically points to myoglobinuria." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">The patient has concurrent glomerulonephritis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CK itself doesn&#x27;t cause false-positive dipstick. It&#x27;s the myoglobin (from the same muscle damage) that cross-reacts with the heme reagent on the dipstick." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Elevated CK causes a false-positive dipstick</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=rhabdomyolysis-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/rhabdomyolysis-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

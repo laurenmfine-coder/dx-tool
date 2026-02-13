@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -8,15 +10,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ReasonDx Deep Dive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link href="css/rdx-a11y.css" rel="stylesheet">
+    
     <style>
 
 /* Multi-Theme Support */
 :root {
     --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
     --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
-    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -25,7 +26,7 @@
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
@@ -64,7 +65,7 @@ body { transition: background 0.3s, color 0.3s; }
             --color-text-muted: #64748b;
             
             --color-primary: var(--primary);
-            --color-primary-light: #60a5fa;
+            --color-primary-light: #2dd4bf;
             --color-primary-dark: var(--primary-dark);
             
             --color-success: var(--primary);
@@ -81,7 +82,7 @@ body { transition: background 0.3s, color 0.3s; }
             --color-pharmacology: var(--primary);
             --color-clinical: var(--primary);
             --color-complications: #dc2626;
-            --color-synthesis: #6366f1;
+            --color-synthesis: #14b8a6;
             
             /* Typography */
             --font-display: 'Source Serif 4', Georgia, serif;
@@ -426,7 +427,7 @@ body { transition: background 0.3s, color 0.3s; }
 
         /* Question Card */
         .question-card {
-            background: var(--color-bg-card, #1a2332);
+            background: var(--color-bg-card);
             border-radius: var(--radius-xl);
             border: 1px solid rgba(255,255,255,0.06);
             overflow: hidden;
@@ -473,7 +474,7 @@ body { transition: background 0.3s, color 0.3s; }
         .question-stem {
             font-family: var(--font-display);
             font-size: 1.05rem;
-            color: var(--color-text-secondary, #94a3b8);
+            color: var(--color-text-secondary);
             margin-bottom: var(--space-lg);
             padding: var(--space-md) var(--space-lg);
             background: rgba(255,255,255,0.02);
@@ -485,7 +486,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-family: var(--font-display);
             font-size: 1.35rem;
             font-weight: 600;
-            color: var(--color-text, #f1f5f9);
+            color: var(--color-text);
             line-height: 1.4;
             margin-bottom: var(--space-xl);
         }
@@ -564,7 +565,7 @@ body { transition: background 0.3s, color 0.3s; }
 
         .option-text {
             font-size: 1rem;
-            color: var(--color-text, #f1f5f9);
+            color: var(--color-text);
             padding-top: 4px;
         }
 
@@ -805,8 +806,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
 
         .modal-content {
-            background: var(--color-bg-card, #1a2332);
-            color: var(--color-text, #f1f5f9);
+            background: var(--color-bg-card);
             border-radius: var(--radius-xl);
             max-width: 800px;
             max-height: 80vh;
@@ -849,7 +849,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-family: var(--font-display);
             font-size: 1.05rem;
             line-height: 1.8;
-            color: var(--color-text, #f1f5f9);
+            color: var(--color-text);
             white-space: pre-line;
         }
 
@@ -1129,7 +1129,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
 
     </style>
-        <link rel="stylesheet" href="dx-case-nav.css">
+        <link rel="stylesheet" href="js/dx-case-nav.css">
 </head>
 <body>
 
@@ -1144,16 +1144,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <!-- UNIFIED DX NAVIGATION -->
     <nav class="dx-nav">
         <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;color:#0f172a;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
+            <a href="index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
             </a>
             <div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="index.html" class="dx-nav-link ">🏠 Home</a>
                 <a href="../index.html#mechanism" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <a href="index.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
                 <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -1222,7 +1231,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
 
             <!-- Layer Navigation -->
-            <div id="layerList" class="layer-list"></div>
             <!-- Unified Navigation -->
     </aside>
 
@@ -1341,7 +1349,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             'pharmacology': 'var(--primary)',
             'clinical-reasoning': 'var(--primary)',
             'complications': '#dc2626',
-            'synthesis': '#6366f1'
+            'synthesis': '#14b8a6'
         };
 
         // ============ INITIALIZATION ============
@@ -1350,14 +1358,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             deepDiveData = await loadDeepDiveData();
             
             if (deepDiveData) {
-                // Normalize data from any format to the expected player format
-                deepDiveData = normalizeDeepDiveData(deepDiveData);
-                
                 document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
                 document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
-                
-                // Update patient card from vignette data
-                updatePatientCard(deepDiveData);
                 
                 renderLayerNav();
                 loadVignetteData();
@@ -1582,7 +1584,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                         "id": "synthesis",
                         "title": "Synthesis",
                         "icon": "🔗",
-                        "color": "#6366f1",
+                        "color": "#14b8a6",
                         "questions": []
                     }
                 ]
@@ -1604,158 +1606,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // ============ DATA NORMALIZATION ============
-        // Converts all deep dive formats to the expected player format
-        function normalizeDeepDiveData(data) {
-            if (!data) return data;
-
-            // --- FORMAT 1: Flat 'questions' array (our new format) ---
-            // Convert to single-layer structure
-            if (data.questions && !data.layers) {
-                const layerIcons = ['🔬', '⚙️', '🧠', '💊', '📋', '🫀'];
-                const layerColors = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4'];
-                
-                // Group questions into layers of ~5 each for navigation
-                const chunkSize = Math.max(5, Math.ceil(data.questions.length / 4));
-                const layers = [];
-                for (let i = 0; i < data.questions.length; i += chunkSize) {
-                    const chunk = data.questions.slice(i, i + chunkSize);
-                    const layerIdx = layers.length;
-                    layers.push({
-                        id: `section-${layerIdx + 1}`,
-                        title: `Section ${layerIdx + 1}`,
-                        icon: layerIcons[layerIdx % layerIcons.length],
-                        color: layerColors[layerIdx % layerColors.length],
-                        questions: chunk.map((q, qi) => {
-                            // Convert flat question format to player format
-                            const correct = q.correct_answer || 'A';
-                            const opts = q.options || {};
-                            const optionsArr = Object.entries(opts).map(([key, text]) => ({
-                                id: key,
-                                text: text,
-                                correct: key === correct
-                            }));
-                            return {
-                                id: q.id || `q-${i + qi + 1}`,
-                                stem: q.vignette || '',
-                                question: q.prompt || q.question || '',
-                                options: optionsArr,
-                                explanation: q.rationale?.correct?.explanation || q.explanation || '',
-                                whyChain: [{
-                                    why: 'Why is this the correct answer?',
-                                    answer: q.rationale?.correct?.mechanism || q.rationale?.correct?.explanation || '',
-                                    source: q.rationale?.correct?.citation || ''
-                                }],
-                                sources: [q.rationale?.correct?.citation || ''].filter(Boolean)
-                            };
-                        })
-                    });
-                }
-
-                data.layers = layers;
-                data.totalQuestions = data.questions.length;
-                
-                // Create a default vignette if missing
-                if (!data.vignette) {
-                    data.vignette = {
-                        text: data.description || `${data.topic || 'Deep Dive'} — ${data.total_questions || data.questions.length} questions covering key concepts.`,
-                        diagnostics: {}
-                    };
-                }
-            }
-
-            // --- FORMAT 2: Layers with string options (ARDS format) ---
-            if (data.layers) {
-                data.layers.forEach(layer => {
-                    if (!layer.questions) layer.questions = [];
-                    layer.questions.forEach(q => {
-                        // Convert string options to object options
-                        if (q.options && q.options.length > 0 && typeof q.options[0] === 'string') {
-                            const correctIdx = q.correctIndex ?? 0;
-                            q.options = q.options.map((optStr, idx) => {
-                                // Parse "A. Some text" format
-                                const match = optStr.match(/^([A-Z])\.\s*(.+)$/);
-                                return {
-                                    id: match ? match[1] : String.fromCharCode(65 + idx),
-                                    text: match ? match[2] : optStr,
-                                    correct: idx === correctIdx
-                                };
-                            });
-                        }
-                    });
-                });
-            }
-
-            // --- Normalize vignette ---
-            if (data.vignette) {
-                // If vignette has vitals/labs but not diagnostics, adapt
-                if (!data.vignette.diagnostics) {
-                    data.vignette.diagnostics = {};
-                    if (data.vignette.labs) {
-                        // Convert flat labs to the expected format
-                        const labEntries = {};
-                        for (const [key, val] of Object.entries(data.vignette.labs)) {
-                            if (typeof val === 'string') {
-                                labEntries[key] = { value: val, reference: '', flag: '' };
-                            } else {
-                                labEntries[key] = val;
-                            }
-                        }
-                        data.vignette.diagnostics.labs = labEntries;
-                    }
-                }
-            } else {
-                data.vignette = { text: 'Clinical scenario', diagnostics: {} };
-            }
-
-            // Ensure title exists
-            if (!data.title) data.title = data.topic || 'Deep Dive';
-            if (!data.totalQuestions) {
-                data.totalQuestions = (data.layers || []).reduce((sum, l) => sum + (l.questions?.length || 0), 0);
-            }
-
-            return data;
-        }
-
-        // Update patient card from vignette data
-        function updatePatientCard(data) {
-            const vignette = data.vignette;
-            if (!vignette) return;
-
-            // Extract patient info from vignette text
-            const text = vignette.text || '';
-            const ageMatch = text.match(/(\d+)-year-old\s+(male|female|man|woman|boy|girl|patient)/i);
-            const ccMatch = text.match(/(?:chief complaint|presents? with|brought.*(?:for|with)|complain(?:s|ing) of)\s*:?\s*([^.]+)/i);
-            
-            const patientInfo = document.querySelector('.patient-info');
-            if (patientInfo && ageMatch) {
-                const genderMap = { male: 'Male', female: 'Female', man: 'Male', woman: 'Female', boy: 'Male', girl: 'Female', patient: 'Patient' };
-                patientInfo.querySelector('h3').textContent = `${ageMatch[1]}-year-old ${genderMap[ageMatch[2].toLowerCase()] || ageMatch[2]}`;
-                if (ccMatch) {
-                    patientInfo.querySelector('p').textContent = `Chief Complaint: ${ccMatch[1].trim().substring(0, 60)}`;
-                }
-            }
-
-            // Update vitals if available
-            const vitals = vignette.vitals || {};
-            const vitalsMap = { BP: 0, HR: 1, RR: 2, SpO2: 3 };
-            const vitalEls = document.querySelectorAll('.vital');
-            for (const [key, idx] of Object.entries(vitalsMap)) {
-                if (vitals[key] && vitalEls[idx]) {
-                    const valEl = vitalEls[idx].querySelector('.vital-value');
-                    if (valEl) {
-                        // Clean up units for display
-                        let val = vitals[key].toString().replace(/\s*mmHg.*|\s*bpm.*|\/min.*/i, '');
-                        valEl.textContent = val;
-                    }
-                }
-            }
-        }
-
         // ============ LAYER NAVIGATION ============
         function renderLayerNav() {
             const container = document.getElementById('layerList');
-            if (!container) return; // Safety guard
             container.innerHTML = '';
 
             deepDiveData.layers.forEach((layer, index) => {
@@ -1804,44 +1657,29 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // ============ VIGNETTE ============
         function loadVignetteData() {
             const vignette = deepDiveData.vignette;
-            if (!vignette) return;
-            
-            const vignetteTextEl = document.getElementById('vignetteText');
-            if (vignetteTextEl) vignetteTextEl.textContent = vignette.text || '';
+            document.getElementById('vignetteText').textContent = vignette.text;
             
             if (vignette.diagnostics?.ecg) {
-                const ecgEl = document.getElementById('ecgFindings');
-                if (ecgEl) {
-                    ecgEl.innerHTML = `
-                        <p><strong>Findings:</strong> ${vignette.diagnostics.ecg.description}</p>
-                        <p><strong>Interpretation:</strong> ${vignette.diagnostics.ecg.interpretation}</p>
-                    `;
-                }
+                document.getElementById('ecgFindings').innerHTML = `
+                    <p><strong>Findings:</strong> ${vignette.diagnostics.ecg.description}</p>
+                    <p><strong>Interpretation:</strong> ${vignette.diagnostics.ecg.interpretation}</p>
+                `;
             }
 
             if (vignette.diagnostics?.labs) {
                 const labs = vignette.diagnostics.labs;
                 let labHtml = '<table style="width:100%;font-size:0.9rem;">';
                 for (const [key, val] of Object.entries(labs)) {
-                    if (typeof val === 'object' && val !== null) {
-                        const flagColor = val.flag === 'CRITICAL' ? 'var(--color-error)' : 
-                                         val.flag === 'HIGH' ? 'var(--color-warning)' : 'var(--color-text)';
-                        labHtml += `<tr>
-                            <td style="padding:4px 0;">${key}</td>
-                            <td style="color:${flagColor};font-weight:600;">${val.value || ''}</td>
-                            <td style="color:var(--color-text-muted);">${val.reference ? '(ref: ' + val.reference + ')' : ''}</td>
-                        </tr>`;
-                    } else {
-                        labHtml += `<tr>
-                            <td style="padding:4px 0;">${key}</td>
-                            <td style="font-weight:600;">${val}</td>
-                            <td></td>
-                        </tr>`;
-                    }
+                    const flagColor = val.flag === 'CRITICAL' ? 'var(--color-error)' : 
+                                     val.flag === 'HIGH' ? 'var(--color-warning)' : 'var(--color-text)';
+                    labHtml += `<tr>
+                        <td style="padding:4px 0;">${key}</td>
+                        <td style="color:${flagColor};font-weight:600;">${val.value}</td>
+                        <td style="color:var(--color-text-muted);">(ref: ${val.reference})</td>
+                    </tr>`;
                 }
                 labHtml += '</table>';
-                const labEl = document.getElementById('labResults');
-                if (labEl) labEl.innerHTML = labHtml;
+                document.getElementById('labResults').innerHTML = labHtml;
             }
         }
 
@@ -2103,8 +1941,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     </div>
                 </div>
                 <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                    <a href="deep-dive-hub.html" style="padding: 12px 24px; background: var(--accent, #3b82f6); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">← Back to Deep Dives</a>
-                    <a href="../tools/learning-dashboard.html" style="padding: 12px 24px; background: var(--success, #22c55e); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">📊 My Progress</a>
+                    <a href="deep-dive-hub.html" style="padding: 12px 24px; background: var(--accent, #14b8a6); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">← Back to Deep Dives</a>
+                    <a href="#" style="padding: 12px 24px; background: var(--success, #22c55e); color: white; text-decoration: none; border-radius: 10px; font-weight: 600;">📊 My Progress</a>
                 </div>
             `;
             clearInterval(timerInterval);
@@ -2225,18 +2063,18 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     });
     </script>
 
-    <script src="dx-case-nav.js"></script>
+    <script src="js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
 
-    <!-- ReasonDx AI Tutor Integration -->
+    <!-- DxSuite AI Tutor Integration -->
     <div data-dx-tutor
          data-module-title="ReasonDx Deep Dive"
          data-key-points="Layer Complete!, Deep Dive Complete!, 58-year-old Male, 📋 Full Patient Case, 🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../dx-progress.js"></script>
-<script src="../dx-cross-links.js"></script>
-<script src="../data/rdx-persist.js"></script>
+<script src="dx-progress.js"></script>
+<script src="dx-cross-links.js"></script>
+<script src="data/rdx-persist.js"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family:'Inter',sans-serif;
             background: var(--bg);
             min-height: 100vh;
             color: var(--text);
@@ -259,8 +259,8 @@
         
         /* Verbal Practice Section */
         .verbal-practice-section {
-            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
-            border: 2px solid #6366F1;
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            border: 2px solid #14b8a6;
             border-radius: 16px;
             padding: 25px;
             margin-top: 25px;
@@ -272,7 +272,7 @@
         }
         
         .verbal-practice-section h4 {
-            color: #4338CA;
+            color: #0f766e;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -280,7 +280,7 @@
         }
         
         .verbal-intro {
-            color: #4338CA;
+            color: #0f766e;
             margin-bottom: 20px;
             line-height: 1.6;
         }
@@ -407,7 +407,7 @@
         }
         
         .comparison-column.spoken {
-            border-left: 3px solid #6366F1;
+            border-left: 3px solid #14b8a6;
         }
         
         .delivery-tips {
@@ -630,8 +630,8 @@
         }
         
         .patient-badge {
-            background: linear-gradient(135deg, #EFF6FF 0%, var(--primary-bg) 100%);
-            border: 1px solid #93C5FD;
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border: 1px solid #5eead4;
             border-radius: 12px;
             padding: 15px 20px;
         }
@@ -1472,6 +1472,19 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     
                     <div class="feedback-section">
                         <h4>📊 SBAR Feedback</h4>
+                        <div id="rubricDisplay" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #a7f3d0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                            <div style="font-weight: 600; font-size: 14px; color: #166534; margin-bottom: 10px;">📋 Scoring Rubric — What We're Looking For:</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: #15803d;">
+                                <div><strong>S (Situation):</strong> Patient ID, location, specific concern, urgency</div>
+                                <div><strong>B (Background):</strong> Admission reason, relevant history, baseline status, recent changes</div>
+                                <div><strong>A (Assessment):</strong> YOUR clinical judgment — "I'm concerned about…", key data points supporting your concern</div>
+                                <div><strong>R (Recommendation):</strong> Specific ask — come evaluate, order labs/imaging, change treatment, call rapid response</div>
+                            </div>
+                        </div>
+                        <div id="scoreBar" style="display: none; margin-bottom: 16px; padding: 16px; border-radius: 12px; text-align: center;">
+                            <div style="font-size: 28px; font-weight: 700;" id="totalScore"></div>
+                            <div style="font-size: 13px; opacity: 0.8;" id="scoreLabel"></div>
+                        </div>
                         <div id="feedbackItems">
                             <!-- Feedback items will be generated -->
                         </div>
@@ -1510,9 +1523,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                                     <div style="font-size: 1.8rem; font-weight: 700; color: #166534;" id="finalDuration">0:00</div>
                                     <div style="font-size: 0.85rem; color: #15803d;">Duration</div>
                                 </div>
-                                <div style="background: #EEF2FF; padding: 15px 25px; border-radius: 10px; text-align: center;">
-                                    <div style="font-size: 1.8rem; font-weight: 700; color: #4338CA;">60-90s</div>
-                                    <div style="font-size: 0.85rem; color: #6366F1;">Target Range</div>
+                                <div style="background: #f0fdfa; padding: 15px 25px; border-radius: 10px; text-align: center;">
+                                    <div style="font-size: 1.8rem; font-weight: 700; color: #0f766e;">60-90s</div>
+                                    <div style="font-size: 0.85rem; color: #14b8a6;">Target Range</div>
                                 </div>
                             </div>
                             
@@ -2779,44 +2792,185 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const feedbackContainer = document.getElementById('feedbackItems');
             feedbackContainer.innerHTML = '';
             
+            // ═══════════════════════════════════════════════
+            // SYNONYM GROUPS for semantic matching
+            // ═══════════════════════════════════════════════
+            const synonymGroups = {
+                identification: ['name', 'patient', 'room', 'bed', 'unit', 'floor', 'calling about', 'calling regarding', 'this is'],
+                concern: ['concern', 'concerned', 'worried', 'think', 'suspect', 'believe', 'appears', 'seems', 'clinical impression', 'assessment is', 'my assessment', 'judgment', 'opinion', 'differential', 'likely'],
+                urgency: ['urgent', 'emergent', 'immediate', 'right away', 'stat', 'rapidly', 'acutely', 'deteriorat', 'decompens', 'worsening', 'declining', 'critical'],
+                vitals: ['vital', 'bp', 'blood pressure', 'heart rate', 'hr', 'pulse', 'temp', 'temperature', 'fever', 'febrile', 'respiratory rate', 'rr', 'spo2', 'sat', 'saturation', 'oxygen', 'o2'],
+                history: ['admitted', 'admission', 'history', 'pmh', 'past medical', 'comorbid', 'diabetes', 'hypertension', 'copd', 'chf', 'heart failure', 'renal', 'cad', 'baseline'],
+                timeline: ['since', 'started', 'began', 'hours ago', 'minutes ago', 'earlier today', 'overnight', 'this morning', 'last night', 'prior to', 'changed from', 'was previously', 'worsened'],
+                specificAsk: ['evaluate', 'come see', 'come assess', 'order', 'request', 'need', 'recommend', 'suggest', 'start', 'initiate', 'administer', 'give', 'bolus', 'transfer', 'icu'],
+                labsOrders: ['labs', 'cbc', 'bmp', 'cmp', 'troponin', 'lactate', 'cultures', 'blood culture', 'ecg', 'ekg', 'chest x-ray', 'cxr', 'ct', 'imaging', 'abg', 'ua', 'urinalysis'],
+                interventions: ['fluid', 'bolus', 'saline', 'antibiotic', 'oxygen', 'nebulizer', 'medication', 'iv', 'pressor', 'intubat', 'bipap', 'cpap', 'blood products', 'transfus'],
+                sepsis: ['sepsis', 'septic', 'infection', 'source', 'bacteremia', 'sirs', 'qsofa', 'lactate', 'cultures', 'antibiotic'],
+                respiratory: ['breathing', 'respiratory', 'oxygen', 'desaturat', 'hypox', 'intubat', 'bipap', 'work of breathing', 'accessory muscles', 'abg'],
+                cardiac: ['chest pain', 'cardiac', 'acs', 'stemi', 'mi', 'troponin', 'ecg', 'ekg', 'arrhythmia', 'st changes'],
+                neuro: ['neuro', 'stroke', 'nih', 'pupils', 'weakness', 'facial droop', 'speech', 'consciousness', 'gcs'],
+                bleeding: ['bleed', 'hemorrhag', 'blood', 'hemoglobin', 'hematocrit', 'transfus', 'guaiac', 'melena', 'hematemesis', 'hematochezia']
+            };
+
+            function matchesGroup(text, groupName) {
+                const terms = synonymGroups[groupName] || [];
+                const lower = text.toLowerCase();
+                return terms.filter(term => lower.includes(term));
+            }
+
+            function hasMatch(text, groupName) {
+                return matchesGroup(text, groupName).length > 0;
+            }
+
+            // ═══════════════════════════════════════════════
+            // EVALUATE EACH SBAR COMPONENT (0–3 scale each)
+            // ═══════════════════════════════════════════════
             const feedback = [];
+            let totalPoints = 0;
+            const maxPoints = 12; // 3 per section
+
+            // --- SITUATION (0–3) ---
+            let sScore = 0;
+            let sTips = [];
+            if (hasMatch(situation, 'identification')) { sScore++; } 
+            else { sTips.push('Include patient identification (name, room/bed, unit)'); }
+            if (situation.length > 30) { sScore++; } 
+            else { sTips.push('Be more specific about what is happening right now'); }
+            if (hasMatch(situation, 'urgency') || hasMatch(situation, 'vitals')) { sScore++; } 
+            else { sTips.push('Convey the urgency — mention key vital sign changes or acute onset'); }
             
-            // Situation feedback
-            if (situation.length > 30 && situation.includes(currentScenario.patient.name.split(' ')[1])) {
-                feedback.push({ good: true, text: 'Good situation statement - you identified the patient and the concern clearly.' });
-            } else if (situation.length < 20) {
-                feedback.push({ good: false, text: 'Your situation could be more specific. Include patient name, location, and the specific concern.' });
-            }
+            totalPoints += sScore;
+            feedback.push({
+                section: 'S — Situation',
+                score: sScore,
+                max: 3,
+                good: sScore >= 2,
+                matched: matchesGroup(situation, 'identification').concat(matchesGroup(situation, 'urgency')).concat(matchesGroup(situation, 'vitals')),
+                tips: sTips,
+                detail: sScore === 3 ? 'Excellent situation statement — clear identification, specific concern, and urgency conveyed.' :
+                        sScore === 2 ? 'Good situation statement. Consider adding more specificity.' :
+                        'Your situation needs more structure. Lead with: "I\'m calling about [patient] in [location] because [specific concern]."'
+            });
+
+            // --- BACKGROUND (0–3) ---
+            let bScore = 0;
+            let bTips = [];
+            if (hasMatch(background, 'history')) { bScore++; } 
+            else { bTips.push('Include why the patient was admitted and relevant medical history'); }
+            if (hasMatch(background, 'timeline')) { bScore++; } 
+            else { bTips.push('Add timeline context — when did symptoms start or change?'); }
+            if (background.length > 40) { bScore++; } 
+            else { bTips.push('Provide more clinical context — baseline status, recent treatments, changes from earlier'); }
             
-            // Background feedback
-            if (background.toLowerCase().includes('admitted') || background.toLowerCase().includes('history')) {
-                feedback.push({ good: true, text: 'Good background - you provided relevant context for the situation.' });
-            } else {
-                feedback.push({ good: false, text: 'Consider including why the patient is here and what their baseline is.' });
-            }
+            totalPoints += bScore;
+            feedback.push({
+                section: 'B — Background',
+                score: bScore,
+                max: 3,
+                good: bScore >= 2,
+                matched: matchesGroup(background, 'history').concat(matchesGroup(background, 'timeline')),
+                tips: bTips,
+                detail: bScore === 3 ? 'Strong background — relevant history, timeline, and context provided.' :
+                        bScore === 2 ? 'Good background. Adding timeline details would strengthen it.' :
+                        'Include: admission reason, relevant PMH, baseline status, and what has changed.'
+            });
+
+            // --- ASSESSMENT (0–3) ---
+            let aScore = 0;
+            let aTips = [];
+            if (hasMatch(assessment, 'concern')) { aScore++; } 
+            else { aTips.push('State YOUR clinical judgment — "I\'m concerned about..." or "I think this could be..."'); }
+            if (hasMatch(assessment, 'vitals') || hasMatch(assessment, 'labsOrders')) { aScore++; } 
+            else { aTips.push('Support your assessment with specific data (vitals, lab values, exam findings)'); }
+
+            // Scenario-specific bonus
+            const scenarioType = document.getElementById('clinicalScenario')?.value || '';
+            const scenarioMatch = (scenarioType.includes('sepsis') && hasMatch(assessment, 'sepsis')) ||
+                                  (scenarioType.includes('resp') && hasMatch(assessment, 'respiratory')) ||
+                                  (scenarioType.includes('chest') && hasMatch(assessment, 'cardiac')) ||
+                                  (scenarioType.includes('neuro') && hasMatch(assessment, 'neuro')) ||
+                                  (scenarioType.includes('bleed') && hasMatch(assessment, 'bleeding')) ||
+                                  assessment.length > 50;
+            if (scenarioMatch) { aScore++; } 
+            else { aTips.push('Try to name a specific clinical entity (e.g., "sepsis", "ACS", "stroke") rather than staying vague'); }
             
-            // Assessment feedback
-            if (assessment.toLowerCase().includes('concern') || assessment.toLowerCase().includes('think') || assessment.toLowerCase().includes('worried')) {
-                feedback.push({ good: true, text: 'Excellent! You stated your clinical assessment clearly. This helps the receiver understand your concern.' });
-            } else {
-                feedback.push({ good: false, text: 'Don\'t be afraid to state YOUR assessment. Saying "I\'m concerned about..." shows clinical reasoning.' });
-            }
+            totalPoints += aScore;
+            feedback.push({
+                section: 'A — Assessment',
+                score: aScore,
+                max: 3,
+                good: aScore >= 2,
+                matched: matchesGroup(assessment, 'concern').concat(matchesGroup(assessment, 'vitals')),
+                tips: aTips,
+                detail: aScore === 3 ? 'Excellent assessment! You stated your clinical impression clearly with supporting data.' :
+                        aScore === 2 ? 'Good assessment. Adding your specific differential would strengthen it.' :
+                        'This is where you share YOUR thinking. Don\'t just report data — interpret it. "I\'m concerned this could be sepsis because..."'
+            });
+
+            // --- RECOMMENDATION (0–3) ---
+            let rScore = 0;
+            let rTips = [];
+            if (hasMatch(recommendation, 'specificAsk')) { rScore++; } 
+            else { rTips.push('Make a specific ask — "I need you to come evaluate" or "Can we start..."'); }
+            if (hasMatch(recommendation, 'labsOrders') || hasMatch(recommendation, 'interventions')) { rScore++; } 
+            else { rTips.push('Suggest specific orders or interventions (labs, imaging, treatments)'); }
+            if (recommendation.length > 25) { rScore++; } 
+            else { rTips.push('Be more detailed in what you need — timing, specific tests, level of urgency'); }
             
-            // Recommendation feedback
-            if (recommendation.length > 20) {
-                feedback.push({ good: true, text: 'Good recommendation - you were specific about what you need.' });
-            } else {
-                feedback.push({ good: false, text: 'Be more specific in your recommendation. What exactly do you need? (Evaluate, order labs, etc.)' });
-            }
-            
-            // Render feedback
+            totalPoints += rScore;
+            feedback.push({
+                section: 'R — Recommendation',
+                score: rScore,
+                max: 3,
+                good: rScore >= 2,
+                matched: matchesGroup(recommendation, 'specificAsk').concat(matchesGroup(recommendation, 'labsOrders')).concat(matchesGroup(recommendation, 'interventions')),
+                tips: rTips,
+                detail: rScore === 3 ? 'Strong recommendation — specific, actionable, with clear orders/interventions.' :
+                        rScore === 2 ? 'Good recommendation. Adding more specific orders would make it stronger.' :
+                        'Don\'t end with "What do you want to do?" Instead: "I recommend [action]. Can we also order [specific tests]?"'
+            });
+
+            // ═══════════════════════════════════════════════
+            // RENDER SCORE BAR
+            // ═══════════════════════════════════════════════
+            const pct = Math.round((totalPoints / maxPoints) * 100);
+            const scoreBar = document.getElementById('scoreBar');
+            scoreBar.style.display = 'block';
+            scoreBar.style.background = pct >= 75 ? 'linear-gradient(135deg, #f0fdf4, #dcfce7)' :
+                                         pct >= 50 ? 'linear-gradient(135deg, #fefce8, #fef3c7)' :
+                                                     'linear-gradient(135deg, #fef2f2, #fee2e2)';
+            scoreBar.style.border = '1px solid ' + (pct >= 75 ? '#a7f3d0' : pct >= 50 ? '#fde68a' : '#fecaca');
+            document.getElementById('totalScore').textContent = totalPoints + ' / ' + maxPoints + ' (' + pct + '%)';
+            document.getElementById('totalScore').style.color = pct >= 75 ? '#166534' : pct >= 50 ? '#92400e' : '#991b1b';
+            document.getElementById('scoreLabel').textContent = pct >= 75 ? 'Strong SBAR — Ready for clinical practice' :
+                                                                  pct >= 50 ? 'Developing — Review the tips below to improve' :
+                                                                              'Needs work — Focus on the rubric criteria above';
+
+            // ═══════════════════════════════════════════════
+            // RENDER FEEDBACK ITEMS
+            // ═══════════════════════════════════════════════
             feedback.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'feedback-item';
-                div.innerHTML = `
-                    <span class="feedback-icon ${item.good ? 'good' : 'improve'}">${item.good ? '✓' : '!'}</span>
-                    <span class="feedback-text">${item.text}</span>
-                `;
+                div.style.cssText = 'border: 1px solid ' + (item.good ? '#a7f3d0' : '#fde68a') + '; border-radius: 10px; padding: 14px; margin-bottom: 10px; background: ' + (item.good ? '#f0fdf4' : '#fffbeb');
+                
+                let matchedHtml = '';
+                if (item.matched.length > 0) {
+                    const unique = [...new Set(item.matched)].slice(0, 5);
+                    matchedHtml = '<div style="margin-top: 6px; font-size: 11px; color: #6b7280;">Keywords detected: ' + unique.map(m => '<span style="background: #ccfbf1; color: #0f766e; padding: 2px 6px; border-radius: 4px; margin: 0 2px;">' + m + '</span>').join(' ') + '</div>';
+                }
+                
+                let tipsHtml = '';
+                if (item.tips.length > 0) {
+                    tipsHtml = '<div style="margin-top: 8px; font-size: 12px; color: #92400e;">' + item.tips.map(t => '💡 ' + t).join('<br>') + '</div>';
+                }
+                
+                div.innerHTML = '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">' +
+                    '<span style="font-weight: 600; font-size: 14px; color: ' + (item.good ? '#166534' : '#92400e') + ';">' + (item.good ? '✓' : '⚠') + ' ' + item.section + '</span>' +
+                    '<span style="font-size: 13px; font-weight: 600; color: ' + (item.score === 3 ? '#166534' : item.score === 2 ? '#92400e' : '#991b1b') + ';">' + item.score + '/' + item.max + '</span>' +
+                    '</div>' +
+                    '<div style="font-size: 13px; color: #374151;">' + item.detail + '</div>' +
+                    matchedHtml + tipsHtml;
+                
                 feedbackContainer.appendChild(div);
             });
         }
@@ -2935,17 +3089,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         function showCaseContextBanner(context) {
             const banner = document.createElement('div');
             banner.id = 'caseContextBanner';
-            banner.style.cssText = 'background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 25px;';
+            banner.style.cssText = 'background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 25px;';
             banner.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <div style="font-size: 2.5rem;">📋</div>
                     <div style="flex: 1;">
-                        <h3 style="color: #1e40af; margin: 0 0 5px 0; font-size: 1.1rem;">Continuing from: ${context.caseTitle}</h3>
+                        <h3 style="color: #115e59; margin: 0 0 5px 0; font-size: 1.1rem;">Continuing from: ${context.caseTitle}</h3>
                         <p style="color: #1e3a8a; margin: 0; font-size: 0.95rem;">
                             Use what you learned about <strong>${context.patient?.name || 'the patient'}</strong> to make your SBAR call.
                         </p>
                     </div>
-                    <button onclick="newScenario()" style="background: white; border: 1px solid var(--primary); color: #1e40af; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <button onclick="newScenario()" style="background: white; border: 1px solid var(--primary); color: #115e59; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
                         Choose Different Scenario
                     </button>
                 </div>
@@ -3288,5 +3442,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <script src="dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "CoachDx", platformRoot: "../" }); });</script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-cross-tools.js"></script>
+<script src="dx-tools-nav.js"></script>
 </body>
 </html>

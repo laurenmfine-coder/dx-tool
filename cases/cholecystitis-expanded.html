@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cholecystitis - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #78350f 0%, #d97706 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fcd34d; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fef3c7; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #d97706; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(217,119,6,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(217,119,6,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(217,119,6,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fef3c7; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(217,119,6,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #d97706, #78350f); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #d97706, #fcd34d); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #d97706; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #5eead4; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:#475569;margin-bottom:8px;font-weight:600">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK459171/" target="_blank" rel="noopener">Acute Cholecystitis - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
+
+const stages = [
+    {
+        title: "The Classic Presentation",
+        content: `<div class="narrative"><p>A <span class="highlight">45-year-old woman</span> presents with <span class="critical">6 hours of severe RUQ pain</span> radiating to her right shoulder. The pain started after eating fried chicken. She has nausea but no vomiting.</p><p>Vitals: T 38.4°C, HR 98, BP 142/88.</p></div>
+        <div class="socratic-prompt"><h4>Pattern Recognition</h4><p>The "4 F's" are a classic memory aid for cholecystitis risk factors. Why does pain radiate to the shoulder?</p></div>`,
+        hint_beginner: "4 F's: Female, Forty, Fat, Fertile. These are risk factors for gallstones.",
+        hint_advanced: "What's the pathophysiologic link between estrogen, obesity, and gallstone formation?",
+        question: {
+            prompt: "Why does pain from the gallbladder radiate to the RIGHT SHOULDER?",
+            options: [
+                { text: "Referred pain via phrenic nerve (C3-C5) - diaphragmatic irritation", correct: true },
+                { text: "Direct nerve connection between gallbladder and shoulder", correct: false },
+                { text: "Muscle spasm from guarding spreads to shoulder", correct: false },
+                { text: "Psychological association with eating", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! The gallbladder inflammation irritates the adjacent diaphragm, which shares C3-C5 innervation with the shoulder (phrenic nerve). This causes referred pain to the right shoulder/scapular region.",
+                incorrect: "Referred pain mechanism: Inflamed gallbladder irritates the diaphragm → phrenic nerve (C3-C5) carries the signal → brain misinterprets as shoulder pain (same spinal segments)."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Referred Pain Mechanism</div><div class="pathway">Inflamed gallbladder
+→ Irritates adjacent diaphragm
+→ Phrenic nerve afferents (C3-C5)
+→ Same spinal cord level as shoulder
+→ Brain misinterprets origin
+→ "Referred" right shoulder pain</div></div>`,
+            why_chain: [{q: "Why does fatty food trigger the pain?", a: "Fatty food → CCK release → gallbladder contraction → if stone obstructs cystic duct → sudden distension and pain."}, {q: "How does this differ from biliary colic?", a: "Biliary colic: transient obstruction, resolves in <6 hours, no fever. Cholecystitis: prolonged obstruction, inflammation, fever, peritoneal signs."}],
+            points: 10
+        }
+    },
+    {
+        title: "Physical Examination",
+        content: `<div class="narrative"><p>On exam, the patient guards her right upper quadrant. You place your hand below the right costal margin and ask her to take a deep breath.</p><p>She <span class="critical">stops breathing and winces in pain</span> when the inflamed gallbladder contacts your fingers.</p></div>
+        <div class="socratic-prompt"><h4>Clinical Sign</h4><p>What is this sign called, and why does it occur?</p></div>`,
+        hint_beginner: "Murphy's sign: inspiratory arrest during RUQ palpation.",
+        hint_advanced: "What's the sensitivity and specificity of Murphy's sign?",
+        question: {
+            prompt: "What is MURPHY'S SIGN?",
+            options: [
+                { text: "Inspiratory arrest during RUQ palpation due to inflamed gallbladder contacting examiner's hand", correct: true },
+                { text: "RLQ pain with LLQ palpation", correct: false },
+                { text: "Pain with hip extension", correct: false },
+                { text: "Rebound tenderness in the RUQ", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Murphy's sign: During deep inspiration, the diaphragm descends and pushes the inflamed gallbladder against the examiner's fingers under the costal margin. This causes sudden pain and inspiratory arrest.",
+                incorrect: "Murphy's sign = inspiratory arrest with RUQ palpation. The inflamed gallbladder descends with inspiration and contacts the examiner's hand, causing pain."
+            },
+            teaching: `<h4>Key Physical Exam Findings</h4><table class="comparison-table"><tr><th>Sign</th><th>Description</th><th>Notes</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Murphy's sign</strong></td><td>Inspiratory arrest with RUQ palpation</td><td>Sensitivity ~65%, Specificity ~87%</td></tr><tr><td><strong>RUQ tenderness</strong></td><td>Point tenderness under costal margin</td><td>Most common finding</td></tr><tr><td><strong>Palpable gallbladder</strong></td><td>Mass below costal margin</td><td>Uncommon but specific</td></tr></table>`,
+            why_chain: [{q: "What's the sonographic Murphy's sign?", a: "Same principle but using ultrasound probe. Press probe over gallbladder during imaging - maximal tenderness directly over the sonographically visualized gallbladder."}, {q: "When is Murphy's sign falsely positive?", a: "Hepatitis, peptic ulcer disease, pancreatitis, right lower lobe pneumonia."}],
+            points: 10
+        }
+    },
+    {
+        title: "Laboratory Evaluation",
+        content: `<div class="narrative"><p>Labs: WBC <span class="highlight">14,000</span>, AST 52, ALT 68, Alk Phos 145, Total bilirubin <span class="highlight">1.8</span>, Lipase normal.</p></div>
+        <div class="socratic-prompt"><h4>Lab Interpretation</h4><p>What additional diagnosis should you consider if bilirubin were significantly elevated (>4 mg/dL)?</p></div>`,
+        hint_beginner: "CBD stone (choledocholithiasis) causes obstructive jaundice pattern.",
+        hint_advanced: "What's the difference between cholecystitis, choledocholithiasis, and cholangitis lab patterns?",
+        question: {
+            prompt: "Which lab pattern suggests choledocholithiasis (CBD stone) rather than simple cholecystitis?",
+            options: [
+                { text: "Significantly elevated bilirubin (>4) with elevated Alk Phos and GGT", correct: true },
+                { text: "Elevated WBC with normal LFTs", correct: false },
+                { text: "Elevated lipase with normal bilirubin", correct: false },
+                { text: "Mildly elevated AST/ALT with normal bilirubin", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Choledocholithiasis (CBD stone) causes OBSTRUCTIVE pattern: significantly elevated bilirubin and alkaline phosphatase. Simple cholecystitis may have mildly elevated LFTs but bilirubin is usually <2-3.",
+                incorrect: "CBD stone = obstructive pattern with significantly elevated bilirubin (>4) and Alk Phos. Simple cholecystitis: WBC elevated, mild LFT elevation possible, but bilirubin usually <2-3."
+            },
+            teaching: `<h4>Biliary Lab Patterns</h4><table class="comparison-table"><tr><th>Condition</th><th>WBC</th><th>Bilirubin</th><th>Alk Phos</th></tr><tr><td><strong>Cholecystitis</strong></td><td>↑↑</td><td>Normal-mild ↑</td><td>Normal-mild ↑</td></tr><tr><td><strong>Choledocholithiasis</strong></td><td>Normal</td><td>↑↑↑</td><td>↑↑↑</td></tr><tr><td><strong>Cholangitis</strong></td><td>↑↑↑</td><td>↑↑↑</td><td>↑↑↑</td></tr></table>`,
+            why_chain: [{q: "What's Charcot's triad?", a: "Fever + RUQ pain + jaundice = cholangitis. CBD obstruction + infection."}, {q: "What's Reynolds' pentad?", a: "Charcot's triad + hypotension + altered mental status = severe cholangitis. Surgical emergency."}],
+            points: 10
+        }
+    },
+    {
+        title: "Imaging",
+        content: `<div class="narrative"><p>You order an imaging study to confirm the diagnosis.</p></div>
+        <div class="socratic-prompt"><h4>Imaging Choice</h4><p>What is the FIRST-LINE imaging study for suspected acute cholecystitis?</p></div>`,
+        hint_beginner: "Ultrasound is fast, cheap, no radiation, and highly accurate for gallbladder pathology.",
+        hint_advanced: "What are the specific ultrasound criteria for cholecystitis vs just gallstones?",
+        question: {
+            prompt: "What is the FIRST-LINE imaging study for acute cholecystitis?",
+            options: [
+                { text: "Right upper quadrant ultrasound", correct: true },
+                { text: "CT abdomen with contrast", correct: false },
+                { text: "HIDA scan (cholescintigraphy)", correct: false },
+                { text: "MRCP", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! RUQ ultrasound is first-line: fast, cheap, no radiation, >90% sensitive for cholecystitis. It shows gallstones, wall thickening, pericholecystic fluid, and sonographic Murphy's sign.",
+                incorrect: "Ultrasound is first-line. It's fast, cheap, no radiation, and >90% sensitive. CT is less sensitive for gallstones. HIDA is used when US is equivocal."
+            },
+            teaching: `<h4>Ultrasound Criteria for Cholecystitis</h4><table class="comparison-table"><tr><th>Finding</th><th>Description</th></tr><tr><td><strong>Gallstones</strong></td><td>Echogenic foci with posterior shadowing</td></tr><tr><td><strong>Wall thickening</strong></td><td>>3mm</td></tr><tr><td><strong>Pericholecystic fluid</strong></td><td>Fluid around gallbladder</td></tr><tr><td><strong>Sonographic Murphy's</strong></td><td>Maximal tenderness over gallbladder with probe</td></tr></table>`,
+            why_chain: [{q: "When would you order a HIDA scan?", a: "When ultrasound is equivocal or negative but clinical suspicion remains high. HIDA shows non-filling of the gallbladder with 95%+ sensitivity."}, {q: "When is CT useful?", a: "To evaluate complications (perforation, abscess, emphysematous cholecystitis) or if diagnosis is unclear."}],
+            points: 10
+        }
+    },
+    {
+        title: "Treatment Decision",
+        content: `<div class="narrative"><p>US shows: <span class="highlight">Multiple gallstones</span>, GB wall thickness <span class="critical">6mm</span>, pericholecystic fluid present, <span class="highlight">positive sonographic Murphy's sign</span>.</p><p>Diagnosis confirmed: <strong>Acute Cholecystitis</strong></p></div>
+        <div class="socratic-prompt"><h4>Management Decision</h4><p>What is the definitive treatment and preferred timing?</p></div>`,
+        hint_beginner: "Cholecystectomy (surgery) is the definitive treatment. Early surgery is now preferred.",
+        hint_advanced: "What's the evidence for early vs delayed cholecystectomy?",
+        question: {
+            prompt: "What is the PREFERRED timing of cholecystectomy for uncomplicated acute cholecystitis?",
+            options: [
+                { text: "Early cholecystectomy (within 72 hours of symptom onset)", correct: true },
+                { text: "Delayed cholecystectomy (6-8 weeks after antibiotics)", correct: false },
+                { text: "Immediate surgery within 6 hours", correct: false },
+                { text: "Medical management only, surgery not needed", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Early cholecystectomy (within 72 hours, ideally 24-48 hours) is now standard. Multiple RCTs show it's safe, reduces total hospital stay, and doesn't increase complications.",
+                incorrect: "Early cholecystectomy (within 72 hours) is preferred. The old practice of 'cooling off' with antibiotics then delayed surgery has been replaced by evidence showing early surgery is safe and more efficient."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Why Early Surgery?</div><div class="pathway"><strong>Early (within 72 hours):</strong>
+• Tissue planes still identifiable
+• Lower overall complication rate
+• Shorter total hospital stay
+
+<strong>Delayed (6-8 weeks):</strong>
+• 20-30% have recurrent symptoms while waiting
+• Scar tissue forms, making surgery harder
+• Two hospital admissions needed</div></div>`,
+            why_chain: [{q: "What if the patient has been symptomatic for >72 hours?", a: "Surgery can still be attempted but may be more difficult. Some surgeons prefer a trial; if too inflamed, convert to drainage and delayed surgery."}, {q: "What's percutaneous cholecystostomy?", a: "Tube drainage of the gallbladder for patients too sick for surgery. Temporizing measure."}],
+            points: 10
+        }
+    },
+    {
+        title: "Antibiotic Selection",
+        content: `<div class="narrative"><p>Surgery is planned for tomorrow. You need to start antibiotics.</p></div>
+        <div class="socratic-prompt"><h4>Antibiotic Coverage</h4><p>What organisms should empiric antibiotics cover in acute cholecystitis?</p></div>`,
+        hint_beginner: "Cover enteric gram-negatives and anaerobes.",
+        hint_advanced: "What's the appropriate antibiotic duration for uncomplicated vs complicated cholecystitis?",
+        question: {
+            prompt: "What organisms should empiric antibiotics cover in acute cholecystitis?",
+            options: [
+                { text: "Gram-negatives (E. coli, Klebsiella) and anaerobes (Bacteroides)", correct: true },
+                { text: "MRSA and Pseudomonas only", correct: false },
+                { text: "Gram-positives only (Streptococci, Staphylococci)", correct: false },
+                { text: "No antibiotics needed if surgery is planned", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Biliary infections are caused by enteric organisms: E. coli, Klebsiella, Enterococcus, and Bacteroides. Typical regimens: Ceftriaxone + metronidazole, pip-tazo, or a fluoroquinolone + metronidazole.",
+                incorrect: "Cover enteric gram-negatives (E. coli, Klebsiella) and anaerobes (Bacteroides). These are the biliary pathogens. MRSA coverage is not routinely needed."
+            },
+            teaching: `<h4>Preoperative Management</h4><table class="comparison-table"><tr><th>Intervention</th><th>Rationale</th></tr><tr><td><strong>NPO</strong></td><td>Prepare for surgery</td></tr><tr><td><strong>IV fluids</strong></td><td>Resuscitation</td></tr><tr><td><strong>Antibiotics</strong></td><td>Ceftriaxone + metronidazole OR pip-tazo</td></tr><tr><td><strong>Pain control</strong></td><td>Opioids; NSAIDs may help</td></tr></table>`,
+            why_chain: [{q: "How long should antibiotics continue after uncomplicated cholecystectomy?", a: "Antibiotics can be stopped within 24 hours after uncomplicated cholecystectomy. Longer courses needed for complicated cases."}, {q: "Is there a role for ursodeoxycholic acid?", a: "Not in acute cholecystitis. Ursodiol can help dissolve cholesterol stones in poor surgical candidates but takes months."}],
+            points: 10
+        }
+    },
+    {
+        title: "Emphysematous Cholecystitis",
+        content: `<div class="narrative"><p>A different patient: <span class="highlight">72-year-old diabetic male</span> with 4 days of RUQ pain. He's <span class="critical">confused, hypotensive</span>.</p><p>CT shows gallbladder wall defects and gas within the wall.</p></div>
+        <div class="socratic-prompt"><h4>Complicated Cholecystitis</h4><p>What complication is suggested by gas in the gallbladder wall?</p></div>`,
+        hint_beginner: "Gas in the gallbladder wall = emphysematous cholecystitis, a surgical emergency.",
+        hint_advanced: "What organisms cause emphysematous cholecystitis? Why is it more common in diabetics?",
+        question: {
+            prompt: "What is the diagnosis when CT shows GAS in the gallbladder wall?",
+            options: [
+                { text: "Emphysematous cholecystitis - surgical emergency", correct: true },
+                { text: "Simple cholecystitis - treat with antibiotics", correct: false },
+                { text: "Biliary colic - observation only", correct: false },
+                { text: "Normal variant - no treatment needed", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Emphysematous cholecystitis: gas-forming organisms (Clostridium, E. coli) cause gas in the gallbladder wall. Common in diabetics. High mortality - requires URGENT surgery.",
+                incorrect: "Gas in gallbladder wall = emphysematous cholecystitis. This is a surgical emergency with 15-25% mortality. More common in diabetic males. Urgent cholecystectomy required."
+            },
+            teaching: `<h4>Complicated Cholecystitis Types</h4><table class="comparison-table"><tr><th>Complication</th><th>Features</th><th>Management</th></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Emphysematous</strong></td><td>Gas in wall, diabetics</td><td>Urgent surgery</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Gangrenous</strong></td><td>Wall necrosis, sepsis</td><td>Urgent surgery</td></tr><tr><td><strong>Perforated</strong></td><td>Free fluid, peritonitis</td><td>Emergent surgery</td></tr></table>`,
+            why_chain: [{q: "Why are diabetics at higher risk?", a: "Diabetics have: (1) vascular compromise leading to ischemia, (2) impaired immunity, (3) higher rates of gas-forming bacterial colonization."}, {q: "What organisms cause emphysematous cholecystitis?", a: "Gas-forming bacteria: Clostridium perfringens (most common), E. coli, Klebsiella."}],
+            points: 10
+        }
+    },
+    {
+        title: "Acalculous Cholecystitis",
+        content: `<div class="narrative"><p>An <span class="highlight">ICU patient</span> on mechanical ventilation develops <span class="critical">fever and elevated bilirubin</span>. RUQ ultrasound shows gallbladder wall thickening but <span class="highlight">NO gallstones</span>.</p></div>
+        <div class="socratic-prompt"><h4>Stone-less Cholecystitis</h4><p>What is acalculous cholecystitis and who is at risk?</p></div>`,
+        hint_beginner: "Acalculous = no stones. Occurs in critically ill patients from gallbladder ischemia/stasis.",
+        hint_advanced: "What's the mortality rate? Why is percutaneous cholecystostomy often preferred?",
+        question: {
+            prompt: "What is the PRIMARY risk factor for acalculous cholecystitis?",
+            options: [
+                { text: "Critical illness (ICU, major surgery, sepsis, burns, TPN)", correct: true },
+                { text: "Female sex and obesity", correct: false },
+                { text: "Family history of gallstones", correct: false },
+                { text: "High cholesterol diet", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Acalculous cholecystitis occurs in critically ill patients: ICU, post-surgery, sepsis, burns, trauma, TPN. Mechanism: gallbladder ischemia + biliary stasis → inflammation without stones.",
+                incorrect: "Acalculous cholecystitis is a disease of the critically ill. Risk factors: ICU stay, major surgery, sepsis, burns, TPN. NOT related to the typical '4 F's' risk factors."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Acalculous Cholecystitis Mechanism</div><div class="pathway">Critical illness
+→ Splanchnic hypoperfusion
+→ Gallbladder ischemia
++
+NPO status / TPN / opioids
+→ Biliary stasis
+→ Inflammation WITHOUT stones
+
+Mortality: 30-50%
+Treatment: Percutaneous cholecystostomy
+(patients too sick for OR)</div></div>`,
+            why_chain: [{q: "How do you diagnose it without stones?", a: "Clinical suspicion + US showing wall thickening, pericholecystic fluid, sonographic Murphy's, but NO stones. HIDA scan can confirm."}, {q: "Why is cholecystostomy often preferred over surgery?", a: "These patients are critically ill and poor surgical candidates. Drainage provides source control while allowing stabilization."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Complete",
+        content: `<div class="completion">
+            <h2 style="font-size:2rem;margin-bottom:20px">🏆 Case Complete!</h2>
+            <p style="font-size:1.2rem;opacity:0.9;margin-bottom:30px">You successfully managed acute cholecystitis and its complications.</p>
+            <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:24px;text-align:left;max-width:500px;margin:0 auto;">
+                <h3 style="margin-bottom:16px;color:#fcd34d;">Key Takeaways</h3>
+                <ul style="line-height:2;margin-left:20px;">
+                    <li>RUQ pain + fever + Murphy's sign = cholecystitis</li>
+                    <li>Referred shoulder pain = phrenic nerve (C3-C5)</li>
+                    <li>RUQ ultrasound is first-line imaging</li>
+                    <li>Early cholecystectomy (within 72 hours) is preferred</li>
+                    <li>Cover gram-negatives + anaerobes with antibiotics</li>
+                    <li>Emphysematous cholecystitis = gas in wall = emergency</li>
+                    <li>Acalculous cholecystitis = critically ill patients</li>
+                </ul>
+            </div>
+        </div>`,
+        hint_beginner: "",
+        hint_advanced: "",
+        question: null
+    }
+];
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateHints();
+}
+
+function updateHints() {
+    document.querySelectorAll('.hint-beginner').forEach(h => h.style.display = difficulty === 'beginner' ? 'block' : 'none');
+    document.querySelectorAll('.hint-advanced').forEach(h => h.style.display = difficulty === 'advanced' ? 'block' : 'none');
+}
+
+function renderStage() {
+    const stage = stages[currentStage];
+    const progress = ((currentStage + 1) / stages.length) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+    
+    let html = `<div class="scene"><div class="scene-header">
+        <div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div>
+        <div class="scene-title">${stage.title}</div></div>`;
+    
+    if (stage.hint_beginner) {
+        html += `<div class="hint-beginner" style="display:${difficulty === 'beginner' ? 'block' : 'none'}">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+    }
+    if (stage.hint_advanced) {
+        html += `<div class="hint-advanced" style="display:${difficulty === 'advanced' ? 'block' : 'none'}">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+    }
+    
+    html += stage.content;
+    
+    if (stage.question) {
+        const qId = `q${currentStage}`;
+        const answered = answeredQuestions.has(qId);
+        html += `<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;
+        stage.question.options.forEach((opt, i) => {
+            const letter = String.fromCharCode(65 + i);
+            let classes = 'mcq-option';
+            if (answered) {
+                classes += ' disabled';
+                if (opt.correct) classes += ' correct';
+                else if (decisionPath[currentStage] === i && !opt.correct) classes += ' incorrect';
+            }
+            html += `<div class="${classes}" onclick="selectOption(${i}, ${opt.correct})">
+                <div class="option-letter">${letter}</div><div>${opt.text}</div></div>`;
+        });
+        html += '</div>';
+        
+        html += `<div class="feedback ${answered ? 'show' : ''} ${answered ? (stage.question.options[decisionPath[currentStage]]?.correct ? 'correct-feedback' : 'incorrect-feedback') : ''}">
+            <div class="feedback-title">${answered && stage.question.options[decisionPath[currentStage]]?.correct ? '✓ Correct!' : '✗ Not quite'}</div>
+            <p>${answered ? (stage.question.options[decisionPath[currentStage]]?.correct ? stage.question.explanation.correct : stage.question.explanation.incorrect) : ''}</p></div>`;
+        
+        if (stage.question.teaching) {
+            html += `<div class="teaching-point ${answered ? 'show' : ''}">${stage.question.teaching}</div>`;
+        }
+        
+        if (stage.question.why_chain) {
+            html += `<div class="why-chain ${answered ? 'show' : ''}"><h4>🔗 Why Chain - Deeper Understanding</h4>`;
+            stage.question.why_chain.forEach(item => {
+                html += `<div class="why-item"><div class="why-q">Q: ${item.q}</div><div class="why-a">${item.a}</div></div>`;
+            });
+            html += '</div>';
+        }
+        
+        html += `<button class="btn ${answered ? 'show' : ''}" onclick="nextStage()">Continue →</button></div>`;
+    } else {
+        html += `<div style="text-align:center;margin-top:24px;"><p style="font-size:1.2rem;">Final Score: <strong>${score}</strong> / ${maxScore}</p></div>`;
+    }
+    
+    html += '</div>';
+    document.getElementById('scene-container').innerHTML = html;
+}
+
+function selectOption(index, correct) {
+    const qId = `q${currentStage}`;
+    if (answeredQuestions.has(qId)) return;
+    
+    answeredQuestions.add(qId);
+    decisionPath[currentStage] = index;
+    
+    const stage = stages[currentStage];
+    maxScore += stage.question.points;
+    if (correct) score += stage.question.points;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    renderStage();
+}
+
+function nextStage() {
+    if (currentStage < stages.length - 1) {
+        currentStage++;
+        renderStage();
+        window.scrollTo(0, 0);
+    }
+}
+
+// Initialize
+stages.forEach(s => { if (s.question) maxScore += s.question.points; });
+maxScore = 0;
+document.getElementById('maxScore').textContent = '0';
+renderStage();
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Cholecystitis"
+         data-key-points="🏆 Case Complete!, Key Takeaways, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+<div class="rdx-crossplatform-nav">
+    <h4>🎯 Continue Your Learning Journey</h4>
+    <div class="rdx-crossplatform-links">
+                <a href="../deep-dive-player.html?module=cholecystitis-cholangitis" class="rdx-crossplatform-link">📚 Acute Cholecystitis & Cholangitis Deep Dive</a>
+        <a href="../deep-dive-player.html?module=gi-bleed" class="rdx-crossplatform-link">🔬 Upper GI Bleeding</a>
+        <a href="../deep-dive-player.html?module=pancreatitis" class="rdx-crossplatform-link">🔬 Acute Pancreatitis</a>
+        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
+    </div>
+</div>
+
+</body>
+</html>

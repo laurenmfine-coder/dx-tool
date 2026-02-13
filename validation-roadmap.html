@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <script>(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Validation Roadmap | ReasonDx</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#0f172a;--bg2:#1e293b;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;--accent:#3b82f6;--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--purple:#8b5cf6;--teal:#14b8a6}
-[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#2563eb;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1)}
+:root{--bg:#0f172a;--bg2:#1e293b;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;--accent:#14b8a6;--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--purple:#8b5cf6;--teal:#14b8a6}
+[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#0d9488;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1)}
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem}
 .header{text-align:center;margin-bottom:2.5rem}.header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--purple),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}.header p{color:var(--muted);font-size:.95rem}
 .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:1.5rem}.back-link:hover{text-decoration:underline}
@@ -65,5 +67,6 @@ document.getElementById('prog-overview').innerHTML=[
 ].map(i=>'<div class="prog-item"><div class="num">'+i.n+'</div><div class="label">'+i.l+'</div></div>').join('');
 document.getElementById('timeline').innerHTML=phases.map(p=>'<div class="phase '+p.status+'"><div class="phase-card"><div class="phase-header"><span class="phase-title">'+p.title+'</span><span class="badge badge-'+p.status+'">'+p.status.toUpperCase()+'</span></div><div class="phase-date">'+p.date+'</div><ul class="tasks">'+p.tasks.map(t=>'<li class="'+t.s+'">'+t.t+'</li>').join('')+'</ul></div></div>').join('');
 </script>
-<script src="../data/rdx-persist.js"></script>
+<script src="data/rdx-persist.js"></script>
+<script src="js/dx-universal-nav.js"></script>
 </body></html>

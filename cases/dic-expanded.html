@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DIC - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fca5a5; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fecaca; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #b91c1c; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(185,28,28,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(185,28,28,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fecaca; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(185,28,28,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #b91c1c, #7f1d1d); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #b91c1c, #fca5a5); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #5eead4; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK500050/" target="_blank" rel="noopener">DIC - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Bleeding Septic Patient",content:`<div class="narrative"><p>A <span class="highlight">58-year-old man</span> with urosepsis is in the ICU. He develops <span class="critical">oozing from IV sites</span>, petechiae, and gross hematuria.</p><p style="margin-top:12px;"><strong>Labs:</strong> Plt <span class="critical">35K</span>, PT 22s, PTT 55s, Fibrinogen <span class="critical">85</span>, D-dimer <span class="critical">>20</span></p></div>`,question:{prompt:"What is DIC?",options:[{text:"A primary clotting disorder",correct:false},{text:"Systemic coagulation activation triggered by an underlying condition",correct:true},{text:"A bleeding disorder from platelet dysfunction",correct:false},{text:"Isolated fibrinogen consumption",correct:false}],explanation:{correct:"Correct! DIC is always SECONDARY to an underlying trigger. Systemic coagulation leads to microthrombi, consuming platelets and factors, causing BOTH thrombosis AND bleeding.",incorrect:"DIC is always secondary - there's always a trigger (sepsis, trauma, malignancy). It's not a primary disorder."},teaching:`<div class="mechanism-box"><div class="mechanism-title">🧬 DIC Pathophysiology</div><div class="pathway">Underlying trigger → Tissue factor release
+→ Systemic thrombin generation
+→ Widespread microthrombi
+→ Consumption of platelets + factors
+→ PARADOX: Thrombosis AND Bleeding!</div></div>`,why_chain:[{q:"Why both thrombosis and bleeding?",a:"Microthrombi cause organ ischemia. But consuming all platelets/factors leaves nothing for normal hemostasis → bleeding."}],points:10}},
+        {title:"Common Triggers",content:`<div class="narrative"><p>DIC requires an underlying trigger. Identifying it is critical.</p></div>`,question:{prompt:"What is the MOST common cause of DIC?",options:[{text:"Trauma/burns",correct:false},{text:"Sepsis",correct:true},{text:"Malignancy",correct:false},{text:"Obstetric complications",correct:false}],explanation:{correct:"Correct! Sepsis accounts for 30-50% of DIC. Endotoxin triggers massive tissue factor release.",incorrect:"Sepsis is #1 (30-50%). Bacteria/endotoxin triggers tissue factor from monocytes and endothelium."},teaching:`<h4>DIC Triggers</h4><table class="comparison-table"><tr><th>Category</th><th>Examples</th></tr><tr style="background:rgba(251,191,36,0.2);"><td>Sepsis</td><td>Gram-negative, meningococcemia</td></tr><tr><td>Trauma</td><td>Major trauma, burns, head injury</td></tr><tr><td>Malignancy</td><td>APL (classic!), adenocarcinomas</td></tr><tr><td>Obstetric</td><td>Abruption, amniotic embolism, HELLP</td></tr></table>`,why_chain:[{q:"Why is APL classic?",a:"APL releases procoagulants from malignant promyelocytes. DIC in 80%+ at diagnosis. ATRA dramatically reduces DIC."}],points:10}},
+        {title:"The Classic Lab Pattern",content:`<div class="narrative"><p>Understanding the lab pattern distinguishes DIC from other coagulopathies.</p></div>`,question:{prompt:"Which lab pattern is CLASSIC for DIC?",options:[{text:"Low plt, normal PT/PTT, normal fibrinogen",correct:false},{text:"Low plt, prolonged PT/PTT, LOW fibrinogen, HIGH D-dimer",correct:true},{text:"Normal plt, prolonged PT, normal PTT",correct:false},{text:"Low plt, prolonged PTT only",correct:false}],explanation:{correct:"Correct! DIC = low plt + prolonged PT AND PTT + low fibrinogen + very high D-dimer. Everything consumed, D-dimer skyrockets from fibrinolysis.",incorrect:"Classic DIC: thrombocytopenia + prolonged PT/PTT + low fibrinogen + elevated D-dimer."},teaching:`<h4>DIC Lab Pattern</h4><table class="comparison-table"><tr><th>Test</th><th>Finding</th></tr><tr><td>Platelets</td><td>↓↓ Low</td></tr><tr><td>PT/PTT</td><td>↑ Prolonged</td></tr><tr style="background:rgba(251,191,36,0.2);"><td>Fibrinogen</td><td>↓↓ Low (<100)</td></tr><tr style="background:rgba(251,191,36,0.2);"><td>D-dimer</td><td>↑↑↑ Very high</td></tr></table><div class="alert-box"><div class="alert-title">⚠️</div><p>Fibrinogen is an acute phase reactant - may be "normal" even when depleted. Check the TREND!</p></div>`,why_chain:[],points:10}},
+        {title:"ISTH DIC Score",content:`<div class="narrative"><p>The ISTH score helps diagnose overt DIC.</p></div>`,question:{prompt:"What ISTH score indicates overt DIC?",options:[{text:"≥3",correct:false},{text:"≥5",correct:true},{text:"≥7",correct:false},{text:"Any positive",correct:false}],explanation:{correct:"Correct! Score ≥5 = overt DIC. Requires a known underlying disorder that can cause DIC.",incorrect:"Score ≥5 = overt DIC. <5 is suggestive - repeat daily."},teaching:`<h4>ISTH Score</h4><table class="comparison-table"><tr><th>Parameter</th><th>Points</th></tr><tr><td>Plt >100K/50-100K/<50K</td><td>0/1/2</td></tr><tr><td>D-dimer none/mod/strong</td><td>0/2/3</td></tr><tr><td>PT prolong <3s/3-6s/>6s</td><td>0/1/2</td></tr><tr><td>Fibrinogen >100/<100</td><td>0/1</td></tr></table><p><strong>≥5 = Overt DIC</strong></p>`,why_chain:[],points:10}},
+        {title:"Peripheral Smear",content:`<div class="narrative"><p>You order a smear to support diagnosis.</p></div>`,question:{prompt:"What is the characteristic smear finding in DIC?",options:[{text:"Spherocytes",correct:false},{text:"Schistocytes (fragmented RBCs)",correct:true},{text:"Target cells",correct:false},{text:"Rouleaux",correct:false}],explanation:{correct:"Correct! Schistocytes = RBC fragments from shearing by fibrin strands. This is MAHA (microangiopathic hemolytic anemia).",incorrect:"Schistocytes from mechanical shearing = MAHA, a hallmark of DIC."},teaching:`<h4>DIC vs TTP vs HUS</h4><table class="comparison-table"><tr><th>Condition</th><th>PT/PTT</th><th>Fibrinogen</th></tr><tr style="background:rgba(251,191,36,0.2);"><td>DIC</td><td>Prolonged</td><td>Low</td></tr><tr><td>TTP</td><td>Normal</td><td>Normal</td></tr><tr><td>HUS</td><td>Normal</td><td>Normal</td></tr></table>`,why_chain:[],points:10}},
+        {title:"Treatment Priority",content:`<div class="alert-box"><div class="alert-title">🚨 #1: Treat the Underlying Cause!</div><p>DIC won't resolve until the trigger is addressed.</p></div>`,question:{prompt:"Most important DIC treatment?",options:[{text:"FFP",correct:false},{text:"Platelet transfusion",correct:false},{text:"Treatment of underlying cause",correct:true},{text:"Heparin",correct:false}],explanation:{correct:"Correct! Treat the cause first! Antibiotics for sepsis, delivery for obstetric, ATRA for APL. Transfusions are supportive, not curative.",incorrect:"Treat the cause! Blood products support but won't fix DIC until trigger addressed."},teaching:`<div class="mechanism-box"><div class="mechanism-title">Treatment Priorities</div><div class="pathway">1. TREAT UNDERLYING CAUSE
+2. Supportive transfusion for bleeding:
+   • Plt if <20K or <50K + bleeding
+   • Cryo if fibrinogen <100-150
+   • FFP if bleeding + prolonged PT/PTT
+3. Heparin only if thrombosis predominates</div></div>`,why_chain:[],points:10}},
+        {title:"Blood Products",content:`<div class="narrative"><p>Your patient needs transfusion support.</p></div>`,question:{prompt:"Target fibrinogen in bleeding DIC?",options:[{text:">50 mg/dL",correct:false},{text:">100-150 mg/dL",correct:true},{text:">200 mg/dL",correct:false},{text:">300 mg/dL",correct:false}],explanation:{correct:"Correct! Target fibrinogen >100-150 with cryoprecipitate. Each unit raises fibrinogen ~5-10 mg/dL.",incorrect:"Target >100-150 mg/dL with cryo."},teaching:`<h4>Transfusion Goals</h4><table class="comparison-table"><tr><th>Product</th><th>Goal</th></tr><tr><td>Platelets</td><td>>50K if bleeding</td></tr><tr style="background:rgba(251,191,36,0.2);"><td>Cryoprecipitate</td><td>Fibrinogen >100-150</td></tr><tr><td>FFP</td><td>Control bleeding</td></tr></table>`,why_chain:[],points:10}},
+        {title:"Case Resolution",content:`<div class="narrative"><p>With antibiotics, source control, and transfusions, DIC resolves over 48-72 hours.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 Summary</div><div class="pathway">DIC: Secondary systemic coagulation
+
+Causes: Sepsis #1, trauma, malignancy, obstetric
+
+Labs: ↓Plt, ↑PT/PTT, ↓Fibrinogen, ↑↑D-dimer
+
+Smear: Schistocytes
+
+ISTH ≥5 = overt DIC
+
+Treatment: CAUSE FIRST, then transfuse</div></div>`,question:{prompt:"Heparin in DIC?",options:[{text:"Give to all",correct:false},{text:"Always contraindicated",correct:false},{text:"Only if thrombosis predominates",correct:true},{text:"High-dose is treatment of choice",correct:false}],explanation:{correct:"Correct! Heparin only for thrombosis-predominant DIC (purpura fulminans, acral ischemia). Never with active bleeding.",incorrect:"Heparin only for thrombosis-predominant DIC, not routine."},teaching:`<h4>Key Points</h4><ul style="line-height:2;margin-left:20px;"><li>DIC is always secondary</li><li>Sepsis is #1 trigger</li><li>↓plt, ↑PT/PTT, ↓fibrinogen, ↑↑D-dimer</li><li>ISTH ≥5 = overt DIC</li><li><strong>TREAT THE CAUSE FIRST!</strong></li></ul>`,why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage+1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>${stage.content}`;if(stage.question){html+=`<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;stage.question.options.forEach((opt,i)=>{html+=`<div class="mcq-option" onclick="checkAnswer(${i},${opt.correct})"><div class="option-letter">${String.fromCharCode(65+i)}</div><div>${opt.text}</div></div>`;});html+=`</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>${stage.question.explanation.correct}</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;if(stage.question.teaching)html+=`<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;if(stage.question.why_chain&&stage.question.why_chain.length>0){html+=`<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain</h4>`;stage.question.why_chain.forEach(w=>{html+=`<div style="margin-bottom:12px;padding-left:16px;border-left:2px solid rgba(251,191,36,0.5);"><div style="color:#fbbf24;font-weight:600;margin-bottom:4px;">${w.q}</div><div style="color:#e2e8f0;line-height:1.6;">${w.a}</div></div>`;});html+=`</div>`;}html+=`<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;}html+=`</div>`;document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');const w=document.getElementById('why-chain');if(w)w.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML=`<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length*10}</p><p>You've mastered DIC!</p></div>`;}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="DIC"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+<div class="rdx-crossplatform-nav">
+    <h4>🎯 Continue Your Learning Journey</h4>
+    <div class="rdx-crossplatform-links">
+                <a href="../deep-dive-player.html?module=dic" class="rdx-crossplatform-link">📚 Disseminated Intravascular Coagulation (DIC) Deep Dive</a>
+        <a href="../deep-dive-player.html?module=ttp-hus" class="rdx-crossplatform-link">🔬 TTP and HUS: Thrombotic Microangiopathies</a>
+        <a href="../deep-dive-player.html?module=tumor-lysis-syndrome" class="rdx-crossplatform-link">🔬 Tumor Lysis Syndrome</a>
+        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
+    </div>
+</div>
+
+</body>
+</html>

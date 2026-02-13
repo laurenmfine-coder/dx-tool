@@ -8,14 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Deep Dive Hub | ReasonDx</title>
-    <link href="css/rdx-a11y.css" rel="stylesheet">
     <style>
 
 /* Multi-Theme Support */
 :root {
     --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
     --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
-    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -24,7 +23,7 @@
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
@@ -78,7 +77,7 @@ body { transition: background 0.3s, color 0.3s; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:'Inter',sans-serif;
     background: var(--bg-main);
     color: var(--text-primary);
     min-height: 100vh;
@@ -363,7 +362,7 @@ body {
         @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
 
     </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
+    <link rel="stylesheet" href="js/dx-case-nav.css">
 </head>
 <body data-theme="muted-teal">
 
@@ -377,16 +376,25 @@ body {
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="../index.html" class="nav-brand">
-                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
+            <a href="index.html" class="nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+                    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#1a1a1a">D</text>
+                    <line x1="38" y1="30" x2="52" y2="46" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+                    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#1a1a1a"/>
+                    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#1a1a1a"/>
+                    <circle cx="48" cy="67" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.8"/>
+                    <circle cx="48" cy="67" r="2.5" fill="#1a1a1a"/>
+                    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+                </svg>
             </a>
             <div class="nav-links">
-                <a href="../index.html" class="nav-link">🏠 Home</a>
-                <a href="../index.html" class="nav-link">⚙️ MechanismDx</a>
-                <a href="../index.html" class="nav-link active">🔬 ReasonDx</a>
-                <a href="../index.html" class="nav-link">🧠 CoachDx</a>
-                <a href="../reference-library.html" class="nav-link">📚 References</a>
-                <a href="../index.html" class="nav-link">📊 Dashboard</a>
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="index.html" class="nav-link">⚙️ MechanismDx</a>
+                <a href="index.html" class="nav-link active">🔬 ReasonDx</a>
+                <a href="index.html" class="nav-link">🧠 CoachDx</a>
+                <a href="index.html" class="nav-link">📚 References</a>
+                <a href="index.html" class="nav-link">📊 Dashboard</a>
                 <button class="theme-btn" onclick="openDxThemeModal()">🎨</button>
             </div>
         </div>
@@ -409,7 +417,7 @@ body {
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
-        <a href="../index.html">Home</a> → <a href="../index.html">ReasonDx</a> → Deep Dive Hub
+        <a href="index.html">Home</a> → <a href="index.html">ReasonDx</a> → Deep Dive Hub
     </div>
 
     <!-- Tutorial -->
@@ -717,9 +725,9 @@ body {
         renderCases();
     });
     </script>
-    <script src="dx-case-nav.js"></script>
+    <script src="js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
-<script src="../dx-progress.js"></script>
-<script src="../data/rdx-persist.js"></script>
+<script src="dx-progress.js"></script>
+<script src="data/rdx-persist.js"></script>
 </body>
 </html>

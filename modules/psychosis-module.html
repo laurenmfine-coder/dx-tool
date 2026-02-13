@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychosis & Schizophrenia Spectrum | MechanismDx</title>
+    <script src="../dx-scoring.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 40px 24px; text-align: center; color: #fff; }
+        .hero-inner { max-width: 900px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 12px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero p { font-size: 16px; opacity: 0.85; }
+        .hero-meta { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 14px; opacity: 0.75; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 32px; }
+        .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; width: 0%; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .concept-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .concept-card h3 { margin: 0 0 12px; font-size: 16px; }
+        .concept-card ul { margin-left: 20px; }
+        .concept-card li { margin-bottom: 8px; color: var(--text-secondary); }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+        .comparison-table th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; }
+        .comparison-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .comparison-table tr:hover { background: var(--border-light); }
+        .danger-box { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .danger-box h4 { color: #b91c1c; margin-bottom: 8px; }
+        .danger-box p { color: #991b1b; margin: 0; }
+        .quiz-section { background: var(--bg-card); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .quiz-section h3 { color: var(--primary-dark); margin-bottom: 16px; }
+        .quiz-question { margin-bottom: 24px; }
+        .quiz-question p { font-weight: 500; margin-bottom: 12px; }
+        .quiz-options { display: grid; gap: 8px; }
+        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
+        .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
+        .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.7; }
+        .quiz-feedback { margin-top: 8px; padding: 12px; border-radius: 8px; font-size: 13px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        @media (max-width: 640px) { .section { padding: 20px; } .hero h1 { font-size: 24px; } }
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
+</head>
+<body>
+
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🔮</div>
+            <h1>Psychosis & Schizophrenia Spectrum</h1>
+            <p>Differential diagnosis of psychosis, schizophrenia criteria, positive vs negative symptoms, and first-episode management.</p>
+            <div class="hero-meta">
+                <span>📚 2 Sections</span>
+                <span>❓ 4 MCQs</span>
+                <span>⏱ ~30 min</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+        <section class="section">
+            <h2 class="section-title">🔍 Psychosis Differential</h2>
+            <div class="concept-card">
+                <h3>Causes of Psychosis</h3>
+                <ul>
+                    <li><strong>Primary psychiatric:</strong> Schizophrenia, schizoaffective, brief psychotic disorder, delusional disorder, bipolar with psychotic features, MDD with psychotic features</li>
+                    <li><strong>Substances:</strong> Stimulants (meth, cocaine), cannabis, hallucinogens, PCP, alcohol withdrawal (DTs), anticholinergics</li>
+                    <li><strong>Medical:</strong> Delirium (any cause), autoimmune encephalitis (anti-NMDA receptor), neurosyphilis, HIV, SLE cerebritis, Wilson disease, Huntington disease</li>
+                    <li><strong>Endocrine/Metabolic:</strong> Thyroid storm, Cushing syndrome, hepatic encephalopathy, uremia, porphyria</li>
+                    <li><strong>Key principle:</strong> ALWAYS rule out medical/substance causes before diagnosing primary psychotic disorder</li>
+                </ul>
+            </div>
+            <div class="concept-card">
+                <h3>Schizophrenia Spectrum Disorders</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Disorder</th><th>Duration</th><th>Key Feature</th></tr></thead>
+                    <tbody>
+                        <tr><td>Brief psychotic disorder</td><td>1 day - 1 month</td><td>Full recovery; often after stressor</td></tr>
+                        <tr><td>Schizophreniform</td><td>1-6 months</td><td>Same symptoms as schizophrenia but shorter duration</td></tr>
+                        <tr><td>Schizophrenia</td><td>>6 months</td><td>≥2 symptoms (≥1 must be hallucinations, delusions, or disorganized speech) for ≥1 month active + 6 months total</td></tr>
+                        <tr><td>Schizoaffective</td><td>Variable</td><td>Schizophrenia criteria + mood episode (major depression or mania) + ≥2 weeks of psychosis WITHOUT mood symptoms</td></tr>
+                        <tr><td>Delusional disorder</td><td>>1 month</td><td>Non-bizarre delusions WITHOUT other psychotic symptoms; functioning relatively preserved</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="ps1">
+                <p>A 22-year-old college student develops paranoid delusions and auditory hallucinations after a breakup. Symptoms resolve completely in 3 weeks without medication. What is the most likely diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ps1', this, false)">Schizophrenia</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps1', this, true)">Brief psychotic disorder</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps1', this, false)">Schizoaffective disorder</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps1', this, false)">Schizophreniform disorder</div>
+                </div>
+                <div class="quiz-feedback" id="ps1-feedback"></div>
+            </div>
+            <div class="quiz-question" id="ps2">
+                <p>A 35-year-old woman has had non-bizarre delusions (believes her neighbor is poisoning her food) for 2 years. She has no hallucinations, disorganized speech, or negative symptoms. She works and socializes normally apart from avoiding her neighbor. What is the diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ps2', this, false)">Schizophrenia</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps2', this, true)">Delusional disorder</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps2', this, false)">Brief psychotic disorder</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps2', this, false)">Paranoid personality disorder</div>
+                </div>
+                <div class="quiz-feedback" id="ps2-feedback"></div>
+            </div>
+        </div>
+        <section class="section">
+            <h2 class="section-title">🧠 Schizophrenia: Positive & Negative Symptoms</h2>
+            <div class="concept-card">
+                <h3>Positive vs Negative Symptoms</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Feature</th><th>Positive (excess)</th><th>Negative (deficit)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Nature</td><td>Added abnormal experiences</td><td>Lost normal functions</td></tr>
+                        <tr><td>Examples</td><td>Hallucinations, delusions, disorganized speech/behavior</td><td>Flat affect, alogia (poverty of speech), avolition, anhedonia, social withdrawal</td></tr>
+                        <tr><td>Treatment response</td><td>Respond well to antipsychotics</td><td>Poor response to typical antipsychotics; atypicals somewhat better</td></tr>
+                        <tr><td>Neurobiology</td><td>Mesolimbic dopamine excess</td><td>Mesocortical dopamine deficit; glutamate dysfunction</td></tr>
+                        <tr><td>Prognosis</td><td>Better prognostic indicator</td><td>Worse prognostic indicator (predicts functional decline)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="concept-card">
+                <h3>First-Episode Psychosis (FEP) Workup</h3>
+                <ul>
+                    <li><strong>Rule out medical causes:</strong> CBC, CMP, TSH, RPR/VDRL, HIV, UDS, B12, folate, UA</li>
+                    <li><strong>Brain imaging:</strong> MRI preferred (rule out structural lesion, tumor, demyelination)</li>
+                    <li><strong>Consider if young woman with new psychosis:</strong> Anti-NMDA receptor encephalitis panel (associated with ovarian teratoma)</li>
+                    <li><strong>Treatment:</strong> Low-dose atypical antipsychotic (risperidone, aripiprazole). Start low, go slow. FEP patients are more sensitive to side effects and respond to lower doses.</li>
+                    <li><strong>Critical window:</strong> Duration of untreated psychosis (DUP) predicts outcome — shorter DUP = better prognosis. Early treatment is essential.</li>
+                </ul>
+            </div>
+            <div class="concept-card">
+                <h3>Schneider's First-Rank Symptoms</h3>
+                <ul>
+                    <li><strong>Auditory hallucinations:</strong> Voices conversing with each other, running commentary on patient's actions, thought echo</li>
+                    <li><strong>Thought disorders:</strong> Thought insertion (thoughts placed by external force), thought withdrawal (thoughts removed), thought broadcasting (others can hear thoughts)</li>
+                    <li><strong>Passivity experiences:</strong> Made feelings, made impulses, made actions (controlled by external force)</li>
+                    <li><strong>Delusional perception:</strong> Normal perception given delusional significance</li>
+                    <li><strong>Note:</strong> Not pathognomonic for schizophrenia but highly suggestive. Can occur in bipolar mania with psychosis.</li>
+                </ul>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="ps3">
+                <p>Which schizophrenia symptom category carries the WORST prognosis and responds LEAST to typical antipsychotics?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ps3', this, false)">Positive symptoms</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps3', this, true)">Negative symptoms</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps3', this, false)">Cognitive symptoms</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps3', this, false)">Disorganized symptoms</div>
+                </div>
+                <div class="quiz-feedback" id="ps3-feedback"></div>
+            </div>
+            <div class="quiz-question" id="ps4">
+                <p>A 19-year-old woman presents with new-onset psychosis, seizures, and autonomic instability. Anti-NMDA receptor antibodies are positive. What associated finding should be investigated?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('ps4', this, false)">Pheochromocytoma</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps4', this, true)">Ovarian teratoma</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps4', this, false)">Paraneoplastic lung cancer</div>
+                    <div class="quiz-option" onclick="checkAnswer('ps4', this, false)">Thyroid carcinoma</div>
+                </div>
+                <div class="quiz-feedback" id="ps4-feedback"></div>
+            </div>
+        </div>
+
+        <div class="concept-card" style="background: linear-gradient(135deg, #fefce8, #fef08a); border-color: #facc15; text-align: center; padding: 32px;">
+            <h3 style="color: #a16207; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #ca8a04;" id="scoreDisplay">Score: 0/0 correct (4 remaining)</p>
+        </div>
+
+        <section style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 2px solid #a855f7; margin: 40px auto; max-width: 900px; padding: 30px; border-radius: 16px;">
+            <h2 style="color: #7c3aed; margin-bottom: 20px;">📚 Open-Access References</h2>
+            <div style="font-size: 14px;">
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>1. APA Schizophrenia Guidelines (2020)</strong><br>
+                    Keepers GA, et al. APA Practice Guidelines for Schizophrenia. Am J Psychiatry. 2020;177(9):868-872.<br>
+                    PMID: 32867516
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>2. StatPearls: Brief Psychotic Disorder</strong><br>
+                    Agrawal A, et al. Brief Psychotic Disorder. StatPearls [Updated 2024].<br>
+                     | <a href="https://www.ncbi.nlm.nih.gov/books/NBK539912/" target="_blank" style="color: #7c3aed;">Free Full Text</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+        const totalQuestions = 4;
+        const feedbackText = {
+            ps1: { correct: "Correct! Duration 1 day to 1 month + full recovery + clear stressor = brief psychotic disorder. If it lasted 1-6 months, it would be schizophreniform. >6 months with functional decline = schizophrenia.", incorrect: "Psychotic symptoms lasting <1 month with full recovery = brief psychotic disorder. Duration is the key distinguishing feature." },
+            ps2: { correct: "Correct! Non-bizarre delusions >1 month WITHOUT other psychotic symptoms + relatively preserved functioning = delusional disorder. Key: no hallucinations, no disorganization, no negative symptoms, no functional decline.", incorrect: "Non-bizarre delusions without other psychotic features + preserved functioning = delusional disorder." },
+            ps3: { correct: "Correct! Negative symptoms (flat affect, alogia, avolition, anhedonia, social withdrawal) predict worse functional outcomes and respond poorly to typical antipsychotics. Atypicals may offer modest benefit. Clozapine has the best evidence.", incorrect: "Negative symptoms (lost normal functions) carry worse prognosis and are harder to treat than positive symptoms." },
+            ps4: { correct: "Correct! Anti-NMDA receptor encephalitis in young women is strongly associated with ovarian teratoma. Treatment: tumor removal + immunotherapy (IVIG, steroids, rituximab). This is a treatable cause of psychosis — don't miss it!", incorrect: "Anti-NMDA receptor encephalitis is associated with ovarian teratoma, especially in young women. Tumor removal is part of treatment." }
+        };
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => { opt.classList.add('disabled'); if (opt === element) opt.classList.add(isCorrect ? 'correct' : 'incorrect'); });
+            if (!isCorrect) options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) { correctAnswers++; if (typeof DxScoring !== 'undefined') DxScoring.addXP(25, 'MECH'); }
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / totalQuestions) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = 'Score: ' + correctAnswers + '/' + answeredQuestions.size + ' correct (' + (totalQuestions - answeredQuestions.size) + ' remaining)';
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div><div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div></div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div><div class="dx-theme-name">Deeper Teal</div></div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div><div class="dx-theme-name">Steel Blue</div></div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div><div class="dx-theme-name">Muted Sage</div></div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    function setDxTheme(theme) { document.body.setAttribute('data-theme', theme); localStorage.setItem('dx-theme', theme); updateThemeOptions(); closeDxThemeModal(); }
+    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
+    function openDxThemeModal() { document.getElementById('dxThemeModal')?.classList.add('open'); }
+    function closeDxThemeModal() { document.getElementById('dxThemeModal')?.classList.remove('open'); }
+    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
+    </script>
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <div data-dx-tutor data-module-title="Psychosis & Schizophrenia Spectrum" data-key-points="Schizophrenia, schizoaffective, brief psychotic disorder, positive symptoms, negative symptoms, first-episode psychosis" style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 22-year-old college student presents with 3 weeks of auditory hallucinations, paranoid delusions, and social withdrawal after a stressful exam period. He has no prior psychiatric history. Which diagnosis is most appropriate at this time?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Schizophrenia requires ≥6 months of symptoms (including prodromal/residual). At 3 weeks, this presentation is too early for this diagnosis." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Schizophrenia</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Schizophreniform disorder: psychotic symptoms ≥1 month but &lt;6 months. At 3 weeks with active psychosis, this is the most appropriate working diagnosis pending duration criteria." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Schizophreniform disorder</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Brief psychotic disorder lasts 1 day to &lt;1 month. At 3 weeks, it&#x27;s still possible but if symptoms continue past 1 month, reclassify as schizophreniform." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Brief psychotic disorder</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Delusional disorder features non-bizarre delusions WITHOUT prominent hallucinations, disorganized speech, or negative symptoms. This patient has hallucinations." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Delusional disorder</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Which neurotransmitter pathway is most directly implicated in the POSITIVE symptoms of schizophrenia?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Mesocortical hypoactivity is associated with NEGATIVE and cognitive symptoms, not positive symptoms." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Mesocortical dopamine hypoactivity</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="The dopamine hypothesis: mesolimbic pathway hyperactivity → positive symptoms (hallucinations, delusions). This is the primary target of antipsychotic D2 blockade." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Mesolimbic dopamine hyperactivity</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The nigrostriatal pathway controls motor function. Blocking this pathway causes extrapyramidal side effects (EPS), not psychotic symptoms." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Nigrostriatal dopamine hyperactivity</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The tuberoinfundibular pathway regulates prolactin. Blocking it causes hyperprolactinemia — a side effect, not related to psychosis." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Tuberoinfundibular dopamine hyperactivity</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">A 19-year-old woman presents with acute psychosis, seizures, and autonomic instability. LP shows lymphocytic pleocytosis. What is the most important next diagnostic step?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="UDS is part of workup but doesn&#x27;t explain the combination of psychosis + seizures + autonomic instability + CSF pleocytosis — this triad points to autoimmune encephalitis." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Urine drug screen</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="MRI is important but often normal in anti-NMDA receptor encephalitis. The key diagnostic test is antibody testing." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Brain MRI with contrast</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Young woman + psychosis + seizures + autonomic instability + CSF pleocytosis = classic anti-NMDA receptor encephalitis. Check antibodies AND pelvic imaging for ovarian teratoma." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Anti-NMDA receptor antibody panel</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="EEG may show extreme delta brush pattern in anti-NMDA encephalitis but is supportive, not diagnostic. Antibody testing is the definitive step." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">EEG monitoring</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Which feature BEST distinguishes delusional disorder from schizophrenia?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Persecutory delusions occur in both conditions. The key distinction is the TYPE of symptoms present beyond the delusions." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Presence of persecutory delusions</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="In delusional disorder, functioning is NOT markedly impaired and behavior is not obviously bizarre apart from the delusion. Schizophrenia causes global functional decline." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Relatively preserved functioning apart from the delusion</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Both delusional disorder and schizophrenia can last &gt;6 months. Duration alone doesn&#x27;t distinguish them." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Duration greater than 6 months</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="While delusional disorder can present later, age of onset alone is insufficient to distinguish it from late-onset schizophrenia." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Age of onset after 40</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">A 25-year-old man with first-episode psychosis is started on risperidone. Which side effect should be monitored MOST closely early in treatment?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Tardive dyskinesia is a late side effect (months to years). In early treatment, acute EPS and metabolic effects are more pressing." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Tardive dyskinesia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Metabolic monitoring is crucial but more relevant with olanzapine and clozapine. For risperidone, the more acute early concern is hyperprolactinemia and EPS." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Metabolic syndrome</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Risperidone has the highest rate of hyperprolactinemia among atypicals (tight D2 binding). FEP patients are more sensitive to EPS — start low, go slow." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hyperprolactinemia and extrapyramidal symptoms</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="QTc prolongation is more concerning with ziprasidone and thioridazine. Risperidone has lower cardiac risk compared to prolactin/EPS risk." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">QTc prolongation</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">What is the significance of Duration of Untreated Psychosis (DUP) in first-episode psychosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="This is incorrect — DUP is one of the strongest modifiable predictors of outcome in psychotic disorders." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Longer DUP has no effect on outcome if treatment is eventually initiated</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Shorter DUP → better medication response, better cognitive outcomes, better social functioning. This underpins early intervention programs for psychosis." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Shorter DUP is associated with better treatment response and functional outcomes</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="DUP affects both positive and negative symptom outcomes, as well as cognitive function and overall quality of life." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">DUP only matters for negative symptoms</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="DUP doesn&#x27;t determine dosing. Its significance is prognostic — it predicts the overall trajectory of illness and functional recovery." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">DUP is primarily relevant for medication dosing decisions</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Which schizophrenia symptom category carries the WORST prognosis and responds LEAST to typical antipsychotic medications?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Positive symptoms generally respond WELL to antipsychotics, especially first-generation agents. They are not the worst prognostic indicator." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Positive symptoms (hallucinations, delusions)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Negative symptoms (the 5 A&#x27;s: affect flat, alogia, avolition, anhedonia, asociality) predict worse functional outcome and respond poorly to typical antipsychotics. Atypicals are somewhat better." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Negative symptoms (flat affect, avolition, alogia)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Cognitive symptoms are treatment-resistant but negative symptoms are classically cited as the worst prognostic category on board exams." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Cognitive symptoms (attention, working memory)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Disorganized symptoms (speech, behavior) are classified under positive symptoms and generally respond to antipsychotic treatment." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Disorganized symptoms (thought disorder)</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">A 30-year-old woman with treatment-resistant schizophrenia (failed 2 adequate antipsychotic trials) is started on clozapine. What is the most serious adverse effect requiring mandatory monitoring?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="While clozapine causes significant metabolic effects, these are manageable. The life-threatening risk requiring MANDATORY monitoring is hematologic." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Weight gain and diabetes</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Clozapine causes agranulocytosis in ~1% of patients. REMS program requires regular ANC monitoring: weekly × 6 months, then biweekly × 6 months, then monthly. Discontinue if ANC &lt;1000." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Agranulocytosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="NMS can occur with any antipsychotic but is not the reason for clozapine&#x27;s unique mandatory monitoring program." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Neuroleptic malignant syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Clozapine does lower seizure threshold (dose-dependent, ~5% at high doses), but this is managed with dose adjustment, not the mandatory monitoring program." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Seizures</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=psychosis-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/psychosis-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+</body>
+</html>

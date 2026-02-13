@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Prostate Cancer</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #14b8a6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .grade-card { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); padding: 1rem; border-radius: 0.5rem; margin: 0.5rem 0; }
+    .grade-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎗️ Prostate Cancer</h1>
+      <p class="subtitle">Screening, Gleason Grading, Staging & Treatment</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Prostate cancer</strong> is the most common non-skin cancer in men and second leading cause of cancer death. Most are <strong>adenocarcinomas</strong> arising from the <strong>peripheral zone</strong>.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Lifetime risk</td><td>~1 in 8 men</td></tr>
+        <tr><td>Median age at diagnosis</td><td>66 years</td></tr>
+        <tr><td>Location</td><td>70-80% peripheral zone</td></tr>
+        <tr><td>5-year survival (localized)</td><td>>99%</td></tr>
+        <tr><td>5-year survival (metastatic)</td><td>~30%</td></tr>
+      </table>
+
+      <h3>Risk Factors</h3>
+      <ul>
+        <li><strong>Age</strong> - risk increases significantly after 50</li>
+        <li><strong>Race</strong> - African American men have highest risk, earlier onset</li>
+        <li><strong>Family history</strong> - 2-3x risk with first-degree relative</li>
+        <li><strong>BRCA1/2 mutations</strong> - especially BRCA2</li>
+        <li><strong>Lynch syndrome</strong></li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Screening</h2>
+      <div class="clinical-pearl">
+        <strong>PSA Screening Controversy:</strong> Shared decision-making is recommended. Discuss risks (overdiagnosis, overtreatment) and benefits (early detection of aggressive cancer) with patients.
+      </div>
+
+      <h3>PSA (Prostate-Specific Antigen)</h3>
+      <div class="info-box">
+        <strong>PSA is organ-specific, NOT cancer-specific!</strong>
+        <p>Elevated PSA can be caused by:</p>
+        <ul>
+          <li>Prostate cancer</li>
+          <li>BPH</li>
+          <li>Prostatitis</li>
+          <li>Recent ejaculation</li>
+          <li>Urinary retention</li>
+          <li>Prostate manipulation (biopsy, cystoscopy)</li>
+        </ul>
+      </div>
+
+      <h3>PSA Interpretation</h3>
+      <table>
+        <tr><th>PSA Level</th><th>Cancer Probability</th></tr>
+        <tr><td>0-2.5 ng/mL</td><td>~10%</td></tr>
+        <tr><td>2.5-4 ng/mL</td><td>~15%</td></tr>
+        <tr><td>4-10 ng/mL</td><td>~25%</td></tr>
+        <tr><td>>10 ng/mL</td><td>~50%</td></tr>
+      </table>
+
+      <h3>PSA Refinements</h3>
+      <table>
+        <tr><th>Test</th><th>Use</th></tr>
+        <tr><td><strong>PSA velocity</strong></td><td>>0.75 ng/mL/year increase is concerning</td></tr>
+        <tr><td><strong>PSA density</strong></td><td>PSA/prostate volume; >0.15 is concerning</td></tr>
+        <tr><td><strong>Free PSA</strong></td><td>Low free:total ratio suggests cancer</td></tr>
+        <tr><td><strong>4Kscore, PHI</strong></td><td>Biomarker panels to improve specificity</td></tr>
+      </table>
+
+      <h3>Screening Guidelines (AUA 2023)</h3>
+      <ul>
+        <li><strong>Age 55-69:</strong> Shared decision-making; individualized</li>
+        <li><strong>Age 40-54:</strong> Consider in high-risk (African American, family history, BRCA)</li>
+        <li><strong>Age &lt;40:</strong> Not recommended</li>
+        <li><strong>Age &gt;70 or life expectancy &lt;10-15 years:</strong> Generally not recommended</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Diagnosis</h2>
+      <h3>Indications for Biopsy</h3>
+      <ul>
+        <li>Elevated/rising PSA</li>
+        <li>Abnormal DRE (nodule, asymmetry, induration)</li>
+        <li>Suspicious MRI findings</li>
+      </ul>
+
+      <h3>Biopsy Approaches</h3>
+      <table>
+        <tr><th>Approach</th><th>Description</th></tr>
+        <tr><td><strong>Transrectal US-guided (TRUS)</strong></td><td>Traditional 12-core systematic biopsy</td></tr>
+        <tr><td><strong>MRI-fusion biopsy</strong></td><td>Targets suspicious lesions on MRI; improving detection</td></tr>
+        <tr><td><strong>Transperineal</strong></td><td>Lower infection risk; gaining popularity</td></tr>
+      </table>
+
+      <h3>MRI (Multiparametric)</h3>
+      <div class="info-box">
+        <strong>PI-RADS Score (1-5):</strong>
+        <ul>
+          <li>1-2: Clinically significant cancer unlikely</li>
+          <li>3: Equivocal</li>
+          <li>4-5: Clinically significant cancer likely → target for biopsy</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📊 Gleason Grading</h2>
+      <div class="key-concept">
+        <strong>Gleason Score</strong> = Primary pattern (most common) + Secondary pattern (second most common). Each pattern graded 1-5 based on glandular differentiation.
+      </div>
+
+      <h3>Gleason Patterns</h3>
+      <table>
+        <tr><th>Pattern</th><th>Description</th></tr>
+        <tr><td><strong>1-2</strong></td><td>Well-differentiated (rarely assigned now)</td></tr>
+        <tr><td><strong>3</strong></td><td>Individual discrete glands; variable size</td></tr>
+        <tr><td><strong>4</strong></td><td>Fused/cribriform/poorly formed glands</td></tr>
+        <tr><td><strong>5</strong></td><td>No glandular differentiation; sheets, cords, necrosis</td></tr>
+      </table>
+
+      <h3>Grade Groups (ISUP 2014)</h3>
+      <div class="grade-card">
+        <h4>Grade Group 1 = Gleason 3+3=6</h4>
+        <p>Low risk; often managed with active surveillance</p>
+      </div>
+      <div class="grade-card">
+        <h4>Grade Group 2 = Gleason 3+4=7</h4>
+        <p>Favorable intermediate risk; predominantly pattern 3</p>
+      </div>
+      <div class="grade-card">
+        <h4>Grade Group 3 = Gleason 4+3=7</h4>
+        <p>Unfavorable intermediate risk; predominantly pattern 4</p>
+      </div>
+      <div class="grade-card">
+        <h4>Grade Group 4 = Gleason 8 (4+4, 3+5, 5+3)</h4>
+        <p>High risk</p>
+      </div>
+      <div class="grade-card">
+        <h4>Grade Group 5 = Gleason 9-10</h4>
+        <p>Very high risk; poor prognosis</p>
+      </div>
+
+      <div class="clinical-pearl">
+        <strong>Key Point:</strong> 3+4=7 vs 4+3=7 are NOT the same! 4+3 has more high-grade disease and worse prognosis. This is why Grade Groups were introduced.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📍 Staging (TNM)</h2>
+      <h3>T Stage (Primary Tumor)</h3>
+      <table>
+        <tr><th>Stage</th><th>Description</th></tr>
+        <tr><td>T1a</td><td>Incidental finding, &lt;5% of tissue</td></tr>
+        <tr><td>T1b</td><td>Incidental finding, &gt;5% of tissue</td></tr>
+        <tr><td>T1c</td><td>Detected by PSA (needle biopsy) - not palpable</td></tr>
+        <tr><td>T2a</td><td>≤half of one lobe</td></tr>
+        <tr><td>T2b</td><td>>half of one lobe</td></tr>
+        <tr><td>T2c</td><td>Both lobes</td></tr>
+        <tr><td>T3a</td><td>Extracapsular extension</td></tr>
+        <tr><td>T3b</td><td>Seminal vesicle invasion</td></tr>
+        <tr><td>T4</td><td>Invades adjacent structures (bladder, rectum)</td></tr>
+      </table>
+
+      <h3>Metastatic Sites</h3>
+      <ul>
+        <li><strong>Lymph nodes:</strong> Pelvic (obturator, iliac)</li>
+        <li><strong>Bone:</strong> Most common distant site; classically osteoBLASTIC</li>
+        <li><strong>Lung, liver:</strong> Less common</li>
+      </ul>
+
+      <div class="clinical-pearl">
+        <strong>Osteoblastic Metastases:</strong> Prostate cancer classically causes sclerotic (blastic) bone metastases, unlike most cancers which are osteolytic. Look for elevated alkaline phosphatase.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Treatment</h2>
+      <h3>Risk Stratification</h3>
+      <table>
+        <tr><th>Risk</th><th>Criteria</th><th>Options</th></tr>
+        <tr><td><strong>Low</strong></td><td>PSA &lt;10, Gleason 6, T1-T2a</td><td>Active surveillance preferred; radiation; surgery</td></tr>
+        <tr><td><strong>Intermediate</strong></td><td>PSA 10-20, Gleason 7, T2b-T2c</td><td>Surgery, radiation ± ADT</td></tr>
+        <tr><td><strong>High</strong></td><td>PSA &gt;20, Gleason 8-10, T3</td><td>Radiation + ADT (2-3 years); surgery (select cases)</td></tr>
+        <tr><td><strong>Metastatic</strong></td><td>N1 or M1</td><td>ADT ± chemotherapy ± novel agents</td></tr>
+      </table>
+
+      <h3>Treatment Modalities</h3>
+      <div class="info-box">
+        <strong>Active Surveillance:</strong>
+        <ul>
+          <li>For low-risk disease</li>
+          <li>Regular PSA, DRE, repeat biopsies</li>
+          <li>Avoids/delays treatment side effects</li>
+          <li>Intervention if progression</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Radical Prostatectomy:</strong>
+        <ul>
+          <li>Removes entire prostate + seminal vesicles</li>
+          <li>± Pelvic lymph node dissection</li>
+          <li>Risks: ED (30-70%), incontinence (5-20%)</li>
+          <li>Nerve-sparing when oncologically appropriate</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Radiation Therapy:</strong>
+        <ul>
+          <li>External beam (EBRT) or brachytherapy (seeds)</li>
+          <li>Often combined with ADT for intermediate/high risk</li>
+          <li>Risks: Radiation proctitis, cystitis, ED</li>
+        </ul>
+      </div>
+
+      <h3>Androgen Deprivation Therapy (ADT)</h3>
+      <div class="pathway-box">MECHANISM OF ADT:
+Prostate cancer is ANDROGEN-DEPENDENT
+
+Options:
+• GnRH agonists (leuprolide, goserelin)
+  - Initial testosterone flare, then suppression
+• GnRH antagonists (degarelix)
+  - No testosterone flare
+• Orchiectomy
+  - Surgical castration
+
+Side effects:
+• Hot flashes, loss of libido, ED
+• Osteoporosis, metabolic syndrome
+• Cognitive changes, fatigue
+• Gynecomastia</div>
+    </section>
+
+    <section class="module-section">
+      <h2>📈 Follow-up</h2>
+      <h3>Post-Treatment PSA Monitoring</h3>
+      <table>
+        <tr><th>After...</th><th>Expected PSA</th><th>Recurrence Definition</th></tr>
+        <tr><td>Radical prostatectomy</td><td>Undetectable (&lt;0.1)</td><td>Biochemical recurrence: PSA ≥0.2 and rising</td></tr>
+        <tr><td>Radiation</td><td>Nadir (lowest level)</td><td>Phoenix definition: Nadir + 2 ng/mL</td></tr>
+      </table>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A prostate biopsy shows adenocarcinoma with Gleason 4+3=7. What Grade Group is this?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Grade Group 2</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Grade Group 3</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Grade Group 4</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Grade Group 1</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B - Grade Group 3</strong><br>Gleason 4+3=7 is Grade Group 3 (unfavorable intermediate risk). This is different from 3+4=7, which is Grade Group 2 (favorable intermediate). The primary pattern 4 indicates more aggressive disease.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK556019/" target="_blank" style="color:var(--primary);">StatPearls: Prostate Cancer</a></li>
+        <li><a href="https://www.auanet.org/guidelines-and-quality/guidelines/early-detection-of-prostate-cancer" target="_blank" style="color:var(--primary);">AUA Prostate Cancer Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #2dd4bf;">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK556029/" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">StatPearls: Prostate Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/prostate-cancer-clinically-localized-guideline" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">AUA Guideline: Clinically Localized Prostate Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/advanced-prostate-cancer" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">AUA Guideline: Advanced Prostate Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1459" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">NCCN Guidelines (registration required)</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/prostate-cancer" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">Radiopaedia: Prostate Cancer</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6482912/" target="_blank" rel="noopener" style="color: #5eead4; text-decoration: none; border-bottom: 1px dotted #5eead4;">NCBI PMC: PSA Screening Review</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="prostate-cancer-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="#" style="display: block; padding: 1rem; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="bph-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">BPH (differential)</a>
+        <a href="hematuria-crt.html" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Hematuria Workup</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Prostate Cancer"
+         data-key-points="📚 Overview, 🔍 Screening, 🔬 Diagnosis, 📊 Gleason Grading, 📍 Staging (TNM), 💊 Treatment, 📈 Follow-up, 📚 References, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 68-year-old man has a PSA of 8.2 ng/mL and a firm nodule on DRE. What is the MOST appropriate next step?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="With both elevated PSA AND abnormal DRE, tissue diagnosis is needed now. Waiting risks missing clinically significant cancer." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Repeat PSA in 6 months</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Palpable nodule + elevated PSA warrants tissue diagnosis. MRI-fusion targeted biopsy is increasingly preferred — improves detection of clinically significant (Gleason ≥7) cancers while reducing detection of indolent disease." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">MRI-targeted or TRUS-guided prostate biopsy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Finasteride treats BPH but is not appropriate when cancer must be ruled out. Biopsy first." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Start finasteride and recheck in 1 year</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Imaging for staging comes AFTER histologic diagnosis. Biopsy first to confirm cancer and determine Gleason grade." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">CT abdomen/pelvis for staging</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What Gleason score pattern indicates the MOST aggressive prostate cancer?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Gleason 6 is low-grade, often managed with active surveillance. Rarely metastasizes." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Gleason 3+3 = 6 (Grade Group 1)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Intermediate-favorable. Dominant pattern 3 carries better prognosis than 4+3." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Gleason 3+4 = 7 (Grade Group 2)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Gleason 10: most aggressive. Pattern 5 = loss of glandular architecture, sheets/cords of cells. Highest metastatic potential and worst prognosis. Treatment: multimodal therapy." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Gleason 5+5 = 10 (Grade Group 5)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Intermediate-unfavorable — worse than 3+4 but not the most aggressive overall." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Gleason 4+3 = 7 (Grade Group 3)</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">A patient with localized low-risk prostate cancer (Gleason 3+3, PSA <10, T1c) is counseled. Which approach is MOST appropriate?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Surgery is an option but carries morbidity (incontinence, ED). For low-risk disease, active surveillance avoids overtreatment." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Immediate radical prostatectomy</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Active surveillance: preferred for low-risk prostate cancer (Gleason 6, PSA &lt;10, low volume). Serial PSA q3-6 months, repeat biopsy at 1-2 years, MRI monitoring. Intervention only if reclassification." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Active surveillance with serial PSA and repeat biopsies</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chemotherapy is reserved for metastatic castration-resistant disease, not localized low-risk cancer." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Chemotherapy with docetaxel</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Watchful waiting is for patients with limited life expectancy. Active surveillance is for those eligible for curative treatment if disease progresses." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Watchful waiting with palliative intent</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Where does prostate cancer MOST commonly metastasize?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Hepatic metastases occur but are far less common than bone, especially in early metastatic disease." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Liver</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Prostate cancer preferentially metastasizes to bone with OSTEOBLASTIC (sclerotic) lesions on imaging. Contrast with breast, lung, renal, thyroid cancers which tend to produce osteolytic lesions." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Bone (characteristically osteoblastic)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Brain metastases from prostate cancer are uncommon at initial presentation." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Brain</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Pulmonary metastases can occur but bone is overwhelmingly the most common site." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Lung parenchyma</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">What screening recommendation does the USPSTF provide for PSA-based prostate cancer screening in men ages 55-69?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Universal screening is not recommended. The decision should be individualized through shared decision-making." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Universal annual screening</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="USPSTF (2018): ages 55-69, individualized shared decision-making about PSA screening (Grade C). For men ≥70, recommends against screening (Grade D). Earlier screening may be appropriate for high-risk groups (Black men, family history)." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Shared decision-making (Grade C — offer selectively)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The 2012 Grade D recommendation was revised in 2018 to support shared decision-making for 55-69." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Against all screening at any age</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="No guideline recommends a single one-time screen. If screening is elected, it&#x27;s typically periodic." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">One-time screening at age 50 only</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">What is the mechanism of androgen deprivation therapy (ADT) with GnRH agonists like leuprolide?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="ADT is hormonal, not cytotoxic. It removes the growth stimulus." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Direct cytotoxic killing of cancer cells</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="GnRH agonists: initial LH/testosterone surge (flare) for 1-2 weeks, then receptor downregulation → LH suppression → testosterone falls to castrate levels (&lt;50 ng/dL). Use flare protection (antiandrogen) for first 2-4 weeks in metastatic disease." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Initial LH surge then downregulation, suppressing testosterone to castrate levels</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Androgen receptor blockers (enzalutamide, bicalutamide) work this way, not GnRH agonists. GnRH agonists suppress testosterone production centrally." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Competitive inhibition of androgen receptors only</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="5-alpha reductase inhibitors (finasteride, dutasteride) block conversion of testosterone to DHT. Different mechanism from GnRH agonists." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Inhibition of 5-alpha reductase enzyme</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Castration-resistant prostate cancer (CRPC) is defined by progression despite what condition?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Antibiotics are irrelevant to CRPC definition. CRPC relates to androgen deprivation." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Maximum-dose antibiotic therapy</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="CRPC: rising PSA or radiographic progression despite castrate testosterone levels (&lt;50 ng/dL) from surgical or medical castration. Cancer adapts to grow in low-androgen environment. Treatments: abiraterone, enzalutamide, docetaxel, PARP inhibitors (BRCA-mutated), radium-223." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Castrate testosterone levels (<50 ng/dL)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Post-radiation recurrence is biochemical recurrence, not specifically CRPC." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Maximum radiation therapy dose</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chemoresistance is a separate concept. CRPC specifically refers to progression despite androgen deprivation." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">First-line chemotherapy failure</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">A patient on leuprolide ADT should be monitored for which skeletal complication?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="ADT → hypogonadism → accelerated bone loss (up to 5% BMD loss/year) → osteoporosis and fractures. Monitor with DEXA scan. Prevent with weight-bearing exercise, calcium, vitamin D; treat osteoporosis with bisphosphonates or denosumab." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Osteoporosis and fragility fractures</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="ADT does not cause primary bone tumors. The skeletal risk is osteoporosis from hypogonadism." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Osteosarcoma</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Paget disease is unrelated to ADT. It&#x27;s a disorder of bone remodeling with a different etiology." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Paget disease</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="AVN is associated with corticosteroids, alcohol, and trauma — not ADT specifically." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Avascular necrosis</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=prostate-cancer-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/prostate-cancer-crt.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

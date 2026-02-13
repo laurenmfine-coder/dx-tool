@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Acute Coronary Syndrome - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family:'Inter',sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #14b8a6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #2dd4bf; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #5eead4; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #14b8a6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #14b8a6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #5eead4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.heart.org/en/health-topics/heart-attack/treatment-of-a-heart-attack" target="_blank" rel="noopener">ACS Guidelines (AHA)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK459157/" target="_blank" rel="noopener">Acute Coronary Syndrome - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/1752/heart-score-major-cardiac-events" target="_blank" rel="noopener">HEART Score (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">58-year-old man</span> with hypertension and diabetes presents to the ED with <span class=\"critical\">substernal chest pressure</span> radiating to his left arm that began 2 hours ago while watching television.</p>\n                <p style=\"margin-top:12px;\"><strong>Associated symptoms:</strong> Diaphoresis, nausea, mild dyspnea</p>\n                <p><strong>Severity:</strong> 8/10, constant, unrelieved by position changes</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Vital Signs</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">92</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">158/94</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">RR</div><div class=\"vital-value normal\">18</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value normal\">97% RA</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What features of this presentation increase your suspicion for ACS? Think about risk factors, quality of pain, and associated symptoms.",
+        "hint_advanced": "How would you risk-stratify this patient before seeing the ECG? Consider the HEART score components.",
+        "question": {
+            "prompt": "While the ECG is being obtained, what is your pre-test probability assessment for ACS?",
+            "options": [
+                {
+                    "text": "High probability - typical anginal symptoms with multiple cardiac risk factors warrant immediate ACS workup",
+                    "correct": true
+                },
+                {
+                    "text": "Moderate probability - need to see ECG and troponin before determining likelihood of ACS",
+                    "correct": false
+                },
+                {
+                    "text": "Low probability - chest pain at rest in the absence of exertion suggests non-cardiac etiology",
+                    "correct": false
+                },
+                {
+                    "text": "Uncertain - the differential is too broad to estimate probability without further testing",
+                    "correct": false
+                },
+                {
+                    "text": "Low probability - he is hemodynamically stable without signs of heart failure or arrhythmia",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "This is a high-probability presentation: typical anginal chest pain (substernal pressure, radiating to left arm, with diaphoresis and nausea) in a patient with multiple risk factors (male, 58yo, HTN, DM). Clinical gestalt should drive immediate ACS workup regardless of initial ECG or troponin.",
+                "incorrect": "This presentation has classic features of ACS: substernal pressure radiating to the left arm with diaphoresis and nausea in a man with HTN and DM. These features create high pre-test probability. Hemodynamic stability does not rule out ACS - many MIs present with normal vitals initially."
+            },
+            "teaching": "<h4>\ud83d\udcda Recognizing High-Risk Chest Pain</h4>\n                    <p><strong>Typical anginal features:</strong></p>\n                    <ul>\n                        <li>Substernal pressure/tightness (not sharp/pleuritic)</li>\n                        <li>Radiation to arm, jaw, or back</li>\n                        <li>Associated diaphoresis, nausea, dyspnea</li>\n                        <li>Duration >20 minutes</li>\n                    </ul>\n                    <p><strong>Major risk factors:</strong> Age, male sex, DM, HTN, smoking, dyslipidemia, family history</p>\n                    <p><em>Clinical gestalt is powerful - don't wait for tests to act on high-probability presentations.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "ECG Interpretation",
+        "content": "<div class=\"narrative\">\n                <p>The ECG is completed. You review it immediately:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li>Rate: 88 bpm, regular</li>\n                    <li>Axis: Normal</li>\n                    <li>PR interval: 160 ms</li>\n                    <li>QRS: 90 ms</li>\n                    <li><strong>ST segments: 3 mm elevation in leads II, III, aVF with reciprocal depression in I and aVL</strong></li>\n                    <li>No Q waves yet</li>\n                </ul>\n            </div>",
+        "hint_beginner": "Which coronary artery territory do leads II, III, and aVF represent?",
+        "hint_advanced": "What additional ECG leads should you obtain, and what complication are you specifically looking for?",
+        "question": {
+            "prompt": "Based on this ECG, what is your diagnosis and immediate next step?",
+            "options": [
+                {
+                    "text": "Inferior STEMI - activate the cardiac catheterization lab for emergent PCI and obtain right-sided ECG leads",
+                    "correct": true
+                },
+                {
+                    "text": "Inferior STEMI - administer thrombolytics immediately as this is faster than arranging catheterization",
+                    "correct": false
+                },
+                {
+                    "text": "NSTEMI with high-risk features - admit to CCU and plan catheterization within 24 hours",
+                    "correct": false
+                },
+                {
+                    "text": "Probable STEMI - wait for troponin results to confirm before activating the cath lab",
+                    "correct": false
+                },
+                {
+                    "text": "Inferior STEMI - start heparin and antiplatelet therapy while arranging urgent cardiology consultation",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "This is a clear inferior STEMI (\u22651mm ST elevation in 2+ contiguous inferior leads). Immediate cath lab activation is indicated - door-to-balloon goal is <90 minutes. Right-sided leads (V4R) should be obtained to evaluate for RV involvement, which occurs in up to 50% of inferior MIs and changes management.",
+                "incorrect": "ST elevation \u22651mm in II, III, aVF with reciprocal changes is diagnostic of inferior STEMI. This requires emergent reperfusion - do NOT wait for troponins. Primary PCI is preferred over thrombolytics when available within 120 minutes. Right-sided leads are essential to detect RV involvement."
+            },
+            "teaching": "<h4>\ud83d\udcda Inferior STEMI</h4>\n                    <table>\n                        <tr><th>Finding</th><th>Significance</th></tr>\n                        <tr><td>ST elevation II, III, aVF</td><td>Inferior wall (RCA or LCx territory)</td></tr>\n                        <tr><td>ST elevation III > II</td><td>Suggests RCA involvement</td></tr>\n                        <tr><td>Reciprocal depression I, aVL</td><td>Confirms acute injury pattern</td></tr>\n                    </table>\n                    <p><strong>Always obtain V4R!</strong> RV involvement occurs in ~50% of inferior STEMI and requires:</p>\n                    <ul>\n                        <li>Avoidance of nitrates and excessive preload reduction</li>\n                        <li>Fluid resuscitation if hypotensive</li>\n                    </ul>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Right Ventricular Assessment",
+        "content": "<div class=\"narrative\">\n                <p>You obtain right-sided leads. <strong>V4R shows 1.5 mm ST elevation.</strong></p>\n                <p style=\"margin-top:12px;\">The patient reports his chest pain is worsening. Current BP is 102/68, down from 158/94 on arrival.</p>\n                <p>The cath lab is activated with ETA of the interventional team in 25 minutes.</p>\n            </div>",
+        "hint_beginner": "What does RV involvement mean for your medical management while awaiting PCI?",
+        "hint_advanced": "The patient is becoming hypotensive. What is the mechanism, and what intervention might worsen it?",
+        "question": {
+            "prompt": "Given the confirmed RV involvement and dropping blood pressure, which management strategy is MOST appropriate?",
+            "options": [
+                {
+                    "text": "Administer 500 mL normal saline bolus - RV infarct causes preload-dependent hypotension",
+                    "correct": true
+                },
+                {
+                    "text": "Start nitroglycerin infusion to reduce preload and myocardial oxygen demand",
+                    "correct": false
+                },
+                {
+                    "text": "Give morphine 4 mg IV for pain control as this will also reduce preload beneficially",
+                    "correct": false
+                },
+                {
+                    "text": "Initiate norepinephrine drip for vasopressor support of blood pressure",
+                    "correct": false
+                },
+                {
+                    "text": "Administer furosemide 40 mg IV as the hypotension likely represents cardiogenic shock",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "RV infarction causes the RV to become stiff and preload-dependent. The hypotension is due to inadequate LV filling from poor RV output. Fluid resuscitation (not vasopressors or diuretics) is first-line. Nitrates and morphine reduce preload and can cause severe hypotension - they are relatively contraindicated in RV infarct.",
+                "incorrect": "In RV infarct, the RV is stiff and cannot maintain cardiac output without adequate preload. Nitroglycerin, morphine, and diuretics all reduce preload and can precipitate severe hypotension. Initial treatment is IV fluid. Vasopressors may be needed later but fluids come first."
+            },
+            "teaching": "<h4>\ud83d\udcda RV Infarct Management</h4>\n                    <p><strong>Key principle:</strong> The infarcted RV is preload-dependent</p>\n                    <table>\n                        <tr><th>DO</th><th>DON'T</th></tr>\n                        <tr><td>IV fluid boluses</td><td>Nitroglycerin</td></tr>\n                        <tr><td>Maintain preload</td><td>Morphine</td></tr>\n                        <tr><td>Consider inotropes if fluid-refractory</td><td>Diuretics</td></tr>\n                    </table>\n                    <p><strong>Mechanism:</strong> RV infarct \u2192 \u2193 RV compliance \u2192 need high filling pressure \u2192 preload reduction causes \u2193 CO \u2192 hypotension</p>\n                    <p><em>This is why V4R is essential in inferior STEMI!</em></p>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Antiplatelet Therapy",
+        "content": "<div class=\"narrative\">\n                <p>BP has improved to 118/74 after 1L of saline. The cath lab team is ready.</p>\n                <p style=\"margin-top:12px;\">You need to initiate antiplatelet therapy. The patient has no known allergies and no history of stroke or bleeding.</p>\n                <p><strong>Current medications:</strong> Metformin, lisinopril, aspirin 81 mg daily</p>\n            </div>",
+        "hint_beginner": "What two classes of antiplatelet agents are indicated in STEMI? What are the options for P2Y12 inhibitors?",
+        "hint_advanced": "How do ticagrelor and prasugrel compare in terms of efficacy and bleeding risk? What factors would influence your choice?",
+        "question": {
+            "prompt": "Which antiplatelet regimen is MOST appropriate for this patient going to primary PCI?",
+            "options": [
+                {
+                    "text": "Aspirin 325 mg (if not already on aspirin, or additional dose) plus ticagrelor 180 mg loading dose",
+                    "correct": true
+                },
+                {
+                    "text": "Continue aspirin 81 mg plus clopidogrel 600 mg loading dose as the standard of care",
+                    "correct": false
+                },
+                {
+                    "text": "Aspirin 325 mg only - defer P2Y12 inhibitor until coronary anatomy is known from angiography",
+                    "correct": false
+                },
+                {
+                    "text": "Aspirin 325 mg plus prasugrel 60 mg loading dose for maximum platelet inhibition",
+                    "correct": false
+                },
+                {
+                    "text": "Ticagrelor 180 mg alone - aspirin increases bleeding without improving outcomes",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "DAPT (aspirin + P2Y12 inhibitor) is standard for STEMI. Ticagrelor or prasugrel are preferred over clopidogrel based on PLATO and TRITON-TIMI 38 trials. Ticagrelor has a mortality benefit and is generally preferred unless contraindicated. Give loading doses promptly - don't wait for angiography.",
+                "incorrect": "DAPT with aspirin plus a potent P2Y12 inhibitor (ticagrelor or prasugrel) is preferred over clopidogrel for STEMI. Ticagrelor showed mortality benefit in PLATO trial. Prasugrel is contraindicated if prior stroke/TIA and has more bleeding in elderly or low body weight. Don't delay P2Y12 loading for angiography."
+            },
+            "teaching": "<h4>\ud83d\udcda Antiplatelet Therapy in STEMI</h4>\n                    <table>\n                        <tr><th>Agent</th><th>Loading</th><th>Key Points</th></tr>\n                        <tr><td>Aspirin</td><td>162-325 mg</td><td>Give to all unless true allergy</td></tr>\n                        <tr><td><strong>Ticagrelor</strong></td><td>180 mg</td><td>Preferred - mortality benefit (PLATO), reversible</td></tr>\n                        <tr><td>Prasugrel</td><td>60 mg</td><td>Potent, but CI if prior stroke/TIA, caution if elderly/low weight</td></tr>\n                        <tr><td>Clopidogrel</td><td>600 mg</td><td>If ticagrelor/prasugrel contraindicated or unavailable</td></tr>\n                    </table>\n                    <p><em>Give loading doses as early as possible - do not wait for angiography results.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Anticoagulation",
+        "content": "<div class=\"narrative\">\n                <p>Antiplatelet agents have been given. The patient is being wheeled to the cath lab.</p>\n                <p style=\"margin-top:12px;\">The interventional cardiologist asks for your anticoagulation plan.</p>\n                <p><strong>Additional info:</strong> Weight 85 kg, Cr 1.1 mg/dL, no history of HIT</p>\n            </div>",
+        "hint_beginner": "What anticoagulants are commonly used during PCI? What is the advantage of unfractionated heparin?",
+        "hint_advanced": "How does bivalirudin compare to heparin in contemporary practice? What did the HEAT-PPCI trial show?",
+        "question": {
+            "prompt": "Which anticoagulation strategy is MOST appropriate for this primary PCI?",
+            "options": [
+                {
+                    "text": "Unfractionated heparin weight-based bolus (typically 70-100 units/kg) with ACT monitoring during the procedure",
+                    "correct": true
+                },
+                {
+                    "text": "Enoxaparin 1 mg/kg subcutaneously as it provides more predictable anticoagulation than UFH",
+                    "correct": false
+                },
+                {
+                    "text": "Bivalirudin infusion as it has lower bleeding risk than heparin with equivalent efficacy",
+                    "correct": false
+                },
+                {
+                    "text": "Fondaparinux 2.5 mg subcutaneously as the preferred agent for ACS anticoagulation",
+                    "correct": false
+                },
+                {
+                    "text": "No anticoagulation during PCI - the antiplatelet therapy provides adequate protection",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "UFH is the most commonly used anticoagulant during primary PCI. It's titratable, reversible with protamine, and allows real-time monitoring with ACT. While bivalirudin was previously favored for lower bleeding, contemporary trials (HEAT-PPCI) with radial access and potent P2Y12 inhibitors show UFH has similar or better outcomes.",
+                "incorrect": "Anticoagulation during PCI is mandatory to prevent catheter thrombosis. UFH is preferred for primary PCI: titratable, reversible, and allows ACT monitoring. Enoxaparin is acceptable but less titratable. Fondaparinux requires UFH supplementation for PCI. Bivalirudin is an alternative but UFH is standard."
+            },
+            "teaching": "<h4>\ud83d\udcda Anticoagulation for Primary PCI</h4>\n                    <table>\n                        <tr><th>Agent</th><th>Dosing</th><th>Notes</th></tr>\n                        <tr><td><strong>UFH</strong></td><td>70-100 U/kg bolus</td><td>Target ACT 250-300s (or 200-250 with GP IIb/IIIa)</td></tr>\n                        <tr><td>Bivalirudin</td><td>0.75 mg/kg bolus + 1.75 mg/kg/hr</td><td>Alternative; may have higher acute stent thrombosis</td></tr>\n                        <tr><td>Enoxaparin</td><td>0.5 mg/kg IV</td><td>Acceptable if already given, less titratable</td></tr>\n                    </table>\n                    <p><strong>HEAT-PPCI:</strong> UFH non-inferior to bivalirudin with radial access; bivalirudin had more acute stent thrombosis</p>\n                    <p><em>UFH remains the standard anticoagulant for primary PCI in most centers.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Cath Lab Findings",
+        "content": "<div class=\"narrative\">\n                <p>The angiogram reveals:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Right coronary artery:</strong> 100% occlusion in the mid-segment (culprit lesion)</li>\n                    <li><strong>Left anterior descending:</strong> 70% stenosis in the proximal segment</li>\n                    <li><strong>Left circumflex:</strong> 40% stenosis, non-obstructive</li>\n                </ul>\n                <p style=\"margin-top:12px;\">The interventionalist successfully places a drug-eluting stent in the RCA with TIMI 3 flow restored.</p>\n                <p>She asks whether to treat the LAD lesion during this procedure.</p>\n            </div>",
+        "hint_beginner": "In STEMI, should you treat non-culprit lesions during the primary PCI or stage them for later?",
+        "hint_advanced": "What did the COMPLETE trial show about timing of complete revascularization in STEMI?",
+        "question": {
+            "prompt": "What is the most appropriate approach to the 70% LAD stenosis?",
+            "options": [
+                {
+                    "text": "Plan for staged PCI of the LAD during the index hospitalization or within 45 days as an elective procedure",
+                    "correct": true
+                },
+                {
+                    "text": "Treat the LAD now during the same procedure to achieve complete revascularization immediately",
+                    "correct": false
+                },
+                {
+                    "text": "Defer LAD intervention and manage medically unless he develops symptoms or positive stress test",
+                    "correct": false
+                },
+                {
+                    "text": "Refer for surgical evaluation given multivessel disease requiring CABG for complete revascularization",
+                    "correct": false
+                },
+                {
+                    "text": "Use fractional flow reserve (FFR) now to determine if the LAD lesion is hemodynamically significant",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "The COMPLETE trial showed that complete revascularization (treating non-culprit lesions) reduces cardiovascular death and MI compared to culprit-only PCI. However, staged PCI (not immediate same-sitting PCI) is preferred - it was the strategy used in COMPLETE and avoids additional contrast/procedure time during the acute event.",
+                "incorrect": "COMPLETE trial demonstrated benefit of complete revascularization in STEMI with multivessel disease. However, the trial used STAGED procedures (during hospitalization or within 45 days), not immediate same-sitting PCI. Culprit-only with medical management alone is inferior. FFR during STEMI is unreliable."
+            },
+            "teaching": "<h4>\ud83d\udcda Multivessel Disease in STEMI</h4>\n                    <p><strong>COMPLETE Trial (2019):</strong></p>\n                    <ul>\n                        <li>Complete revascularization vs culprit-only</li>\n                        <li>\u2193 CV death + MI with complete revascularization (HR 0.74)</li>\n                        <li>Staged PCI (not same-sitting) during hospitalization or within 45 days</li>\n                    </ul>\n                    <p><strong>Current recommendation:</strong> Staged complete revascularization for hemodynamically stable STEMI patients with multivessel disease</p>\n                    <p><em>Why staged? Avoids excess contrast, procedure time, and allows FFR assessment in non-acute setting if needed.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Post-PCI Assessment",
+        "content": "<div class=\"narrative\">\n                <p>The patient returns to the CCU after successful RCA stenting. He is chest pain-free.</p>\n                <div class=\"patient-card\">\n                    <h4>Post-Procedure Status</h4>\n                    <div class=\"vitals-grid\">\n                        <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value normal\">124/78</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value normal\">72</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value normal\">98% RA</div></div>\n                        <div class=\"vital-item\"><div class=\"vital-label\">Troponin</div><div class=\"vital-value abnormal\">28 ng/mL</div></div>\n                    </div>\n                </div>\n                <p style=\"margin-top:12px;\">Echocardiogram shows EF 45% with inferior wall hypokinesis. No significant valvular abnormalities.</p>\n            </div>",
+        "hint_beginner": "What medical therapies are indicated for secondary prevention after MI?",
+        "hint_advanced": "With EF 45%, which specific medications have mortality benefit in this patient?",
+        "question": {
+            "prompt": "Which combination of discharge medications is MOST appropriate for secondary prevention?",
+            "options": [
+                {
+                    "text": "Aspirin, ticagrelor, high-intensity statin, ACE inhibitor, and beta-blocker",
+                    "correct": true
+                },
+                {
+                    "text": "Aspirin, clopidogrel, moderate-intensity statin, and calcium channel blocker for rate control",
+                    "correct": false
+                },
+                {
+                    "text": "Aspirin, ticagrelor, high-intensity statin only - ACE-I and beta-blocker not needed if EF >40%",
+                    "correct": false
+                },
+                {
+                    "text": "Aspirin, prasugrel, high-intensity statin, ARB, and beta-blocker with spironolactone",
+                    "correct": false
+                },
+                {
+                    "text": "Aspirin, ticagrelor, high-intensity statin, and ARB - beta-blocker contraindicated post-inferior MI",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Post-MI secondary prevention includes: DAPT (aspirin + P2Y12 inhibitor, typically ticagrelor post-PCI), high-intensity statin (atorvastatin 80 or rosuvastatin 20-40), ACE-I (mortality benefit with LV dysfunction), and beta-blocker (mortality benefit post-MI). All five components are indicated for this patient with EF 45%.",
+                "incorrect": "Complete secondary prevention after STEMI includes: 1) DAPT with potent P2Y12 inhibitor (ticagrelor preferred), 2) High-intensity statin (not moderate), 3) ACE-I especially with reduced EF, 4) Beta-blocker (benefit post-MI regardless of location). Spironolactone indicated if EF \u226440% with symptoms or diabetes."
+            },
+            "teaching": "<h4>\ud83d\udcda Post-MI Secondary Prevention</h4>\n                    <table>\n                        <tr><th>Medication</th><th>Recommendation</th><th>Notes</th></tr>\n                        <tr><td>Aspirin</td><td>81 mg daily indefinitely</td><td>Lifelong unless contraindicated</td></tr>\n                        <tr><td>P2Y12 inhibitor</td><td>12 months after stent</td><td>Ticagrelor preferred; consider longer if high ischemic risk</td></tr>\n                        <tr><td>High-intensity statin</td><td>Atorvastatin 80mg or equivalent</td><td>Target LDL <70 (some say <55)</td></tr>\n                        <tr><td>ACE-I/ARB</td><td>Start within 24h if stable</td><td>Mortality benefit especially if EF reduced</td></tr>\n                        <tr><td>Beta-blocker</td><td>Continue \u22653 years</td><td>Mortality benefit post-MI</td></tr>\n                    </table>\n                    <p><em>Consider MRA (spironolactone/eplerenone) if EF \u226440% with HF symptoms or DM</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Risk Stratification Before Discharge",
+        "content": "<div class=\"narrative\">\n                <p>The patient has done well over 3 days. He is ambulating without symptoms. The LAD lesion will be addressed as a staged procedure next week.</p>\n                <p style=\"margin-top:12px;\">You're planning discharge. The patient asks about his prognosis and whether he can return to work as an accountant.</p>\n            </div>",
+        "hint_beginner": "What factors determine prognosis after MI? What is the role of repeat echocardiography?",
+        "hint_advanced": "Should this patient receive an ICD? What are the guidelines for primary prevention ICD after MI?",
+        "question": {
+            "prompt": "Regarding ICD implantation for primary prevention in this patient, what is the correct recommendation?",
+            "options": [
+                {
+                    "text": "Reassess LVEF at least 40 days post-MI; if EF remains \u226435% despite GDMT, ICD is indicated",
+                    "correct": true
+                },
+                {
+                    "text": "Implant ICD before discharge given EF <50% and recent MI with high arrhythmic risk",
+                    "correct": false
+                },
+                {
+                    "text": "ICD not indicated as EF is 45%, which is above the threshold for primary prevention",
+                    "correct": false
+                },
+                {
+                    "text": "Recommend wearable defibrillator for 90 days then reassess need for permanent ICD",
+                    "correct": false
+                },
+                {
+                    "text": "Refer for electrophysiology study to determine ICD eligibility based on inducible arrhythmias",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Guidelines recommend waiting at least 40 days post-MI before ICD implantation for primary prevention. LVEF may improve with revascularization and GDMT. If EF remains \u226435% (or \u226440% with NSVT and inducible VT on EPS) after this waiting period despite optimal medical therapy, ICD is indicated. Current EF of 45% is above the threshold.",
+                "incorrect": "ICD implantation immediately post-MI does not improve mortality (DINAMIT, IRIS trials). Guidelines require: 1) Waiting period of \u226540 days post-MI, 2) EF \u226435% despite \u22653 months of GDMT, 3) NYHA II-III symptoms (or EF \u226430% regardless of symptoms). His EF may improve with GDMT."
+            },
+            "teaching": "<h4>\ud83d\udcda ICD After MI - Primary Prevention</h4>\n                    <p><strong>Guidelines (simplified):</strong></p>\n                    <ul>\n                        <li>Wait \u226540 days post-MI and \u226590 days of GDMT</li>\n                        <li>Reassess LVEF with echo</li>\n                        <li>ICD if EF \u226435% despite optimal therapy</li>\n                    </ul>\n                    <p><strong>Why wait?</strong></p>\n                    <ul>\n                        <li>EF may improve with revascularization + medications</li>\n                        <li>DINAMIT/IRIS: Early ICD post-MI = no mortality benefit</li>\n                        <li>Arrhythmic risk highest early but non-arrhythmic death also high</li>\n                    </ul>\n                    <p><em>This patient needs GDMT optimization and repeat echo in 40+ days.</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Discharge Planning",
+        "content": "<div class=\"narrative\">\n                <p>You're completing discharge planning. The patient is eager to go home and wants to understand his follow-up plan.</p>\n                <p style=\"margin-top:12px;\"><strong>Discharge medications:</strong> Aspirin 81mg, ticagrelor 90mg BID, atorvastatin 80mg, lisinopril 5mg, metoprolol succinate 25mg, metformin (held pending renal function recheck)</p>\n            </div>",
+        "hint_beginner": "What are the key components of post-MI discharge education?",
+        "hint_advanced": "What are the guideline recommendations for driving restrictions and return to work after MI?",
+        "question": {
+            "prompt": "Which discharge instruction is MOST important to emphasize to this patient?",
+            "options": [
+                {
+                    "text": "Do not stop ticagrelor without speaking to cardiology first - premature discontinuation risks stent thrombosis",
+                    "correct": true
+                },
+                {
+                    "text": "Avoid all physical activity for 6 weeks to allow the heart muscle to heal completely",
+                    "correct": false
+                },
+                {
+                    "text": "Take sublingual nitroglycerin at the first sign of any chest discomfort before calling 911",
+                    "correct": false
+                },
+                {
+                    "text": "Blood pressure goal is <120/80; call if any reading is above this threshold",
+                    "correct": false
+                },
+                {
+                    "text": "You cannot return to work for at least 3 months after a heart attack per medical guidelines",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Premature discontinuation of P2Y12 inhibitor therapy is the strongest predictor of stent thrombosis, which has ~40% mortality. Patients must understand they cannot stop ticagrelor (or any DAPT component) without cardiology guidance, even for procedures. Other instructions are important but this is critical for preventing a catastrophic event.",
+                "incorrect": "While all discharge education is important, premature DAPT discontinuation is the #1 risk factor for stent thrombosis, a potentially fatal complication. Patients should gradually increase activity (cardiac rehab), not avoid it. Return to sedentary work is typically fine after 1-2 weeks if uncomplicated."
+            },
+            "teaching": "<h4>\ud83d\udcda Critical Discharge Education Post-Stent</h4>\n                    <p><strong>Most important message:</strong> Do NOT stop DAPT without cardiology guidance</p>\n                    <ul>\n                        <li>Stent thrombosis mortality: ~40%</li>\n                        <li>Highest risk: First 30 days, but remains elevated for 12 months</li>\n                        <li>Common scenario: Patient stops for dental procedure \u2192 stent thrombosis</li>\n                    </ul>\n                    <p><strong>Other key instructions:</strong></p>\n                    <ul>\n                        <li>Cardiac rehabilitation referral (Class I recommendation)</li>\n                        <li>Gradually increase activity; sedentary work in 1-2 weeks</li>\n                        <li>No driving for 1 week (state laws vary)</li>\n                        <li>Call 911 for recurrent chest pain (not just nitroglycerin)</li>\n                    </ul>",
+            "points": 10
+        }
+    }
+];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#14b8a6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 ACS Pathophysiology</a>
+<a href="chest-pain-expanded.html" class="crossplatform-link">🎯 Chest Pain DDx</a>
+<a href="../index.html" class="crossplatform-link">💊 Antiplatelet Therapy</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Acute Coronary Syndrome"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+</body>
+</html>

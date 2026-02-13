@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Intussusception</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #1a1a2e, #16213e); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .mechanism-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.5rem 0; }
+    .chain-step { background: rgba(139,92,246,0.2); padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid var(--primary); }
+    .chain-arrow { color: var(--accent); font-size: 1.5rem; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 0.5rem; }
+    .back-link { display: inline-block; margin-top: 2rem; padding: 0.75rem 1.5rem; background: var(--primary); color: white; text-decoration: none; border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔄 Intussusception</h1>
+      <p class="subtitle">Telescoping Bowel → Obstruction → Ischemia</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Core Definition</h2>
+      <div class="key-concept">
+        <strong>Intussusception = Telescoping of one segment of bowel (intussusceptum) into an adjacent distal segment (intussuscipiens)</strong>
+      </div>
+      <p><strong>Epidemiology:</strong></p>
+      <ul>
+        <li>Most common cause of intestinal obstruction in children 6 months to 3 years</li>
+        <li>Peak incidence: 5-9 months of age</li>
+        <li>Male:Female ratio = 3:1</li>
+        <li>Most common location: Ileocolic (ileum into colon)</li>
+        <li>~90% are idiopathic in children</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>⚙️ Pathophysiology</h2>
+      <div class="mechanism-chain">
+        <div class="chain-step">Lead point or peristalsis</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Bowel telescopes</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Mesentery dragged</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Venous congestion</div>
+        <span class="chain-arrow">→</span>
+        <div class="chain-step">Edema → ischemia</div>
+      </div>
+      <h3>Why "Currant Jelly" Stools?</h3>
+      <div class="key-concept">
+        Venous congestion → mucosal ischemia → sloughing → blood + mucus = "currant jelly" appearance. This is a LATE sign indicating bowel compromise.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Lead Points</h2>
+      <h3>Idiopathic (90% in children)</h3>
+      <p>Thought to be related to lymphoid hyperplasia (Peyer's patches) after viral infection (adenovirus, rotavirus)</p>
+      <h3>Pathologic Lead Points (10%)</h3>
+      <table>
+        <tr><th>Lead Point</th><th>Age Group</th></tr>
+        <tr><td>Meckel's diverticulum</td><td>Most common pathologic lead point</td></tr>
+        <tr><td>Polyps</td><td>Peutz-Jeghers syndrome</td></tr>
+        <tr><td>Lymphoma</td><td>Older children, adults</td></tr>
+        <tr><td>Henoch-Schönlein purpura</td><td>Any age</td></tr>
+        <tr><td>Duplications</td><td>Infants</td></tr>
+      </table>
+      <div class="clinical-pearl">
+        <strong>Clinical Pearl:</strong> If intussusception occurs outside typical age (>3 years) or recurs multiple times, search for a pathologic lead point.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🩺 Clinical Presentation</h2>
+      <div class="key-concept">
+        <strong>Classic Triad (present in <50%):</strong>
+        <ol>
+          <li>Intermittent colicky abdominal pain</li>
+          <li>Currant jelly stools</li>
+          <li>Palpable "sausage-shaped" mass</li>
+        </ol>
+      </div>
+      <h3>More Common Presentation:</h3>
+      <ul>
+        <li><strong>Episodic pain</strong> - Child screams, draws knees to chest for 10-20 min</li>
+        <li><strong>Pain-free intervals</strong> - Child may appear normal between episodes</li>
+        <li><strong>Vomiting</strong> - Initially non-bilious, may become bilious</li>
+        <li><strong>Lethargy</strong> - Between painful episodes ("altered mental status")</li>
+        <li><strong>Mass</strong> - RUQ "sausage-shaped," may have "Dance's sign" (empty RLQ)</li>
+      </ul>
+      <div class="danger-box">
+        <strong>Late/Ominous Signs:</strong>
+        <ul>
+          <li>Currant jelly stools (blood + mucus)</li>
+          <li>Bilious vomiting</li>
+          <li>Abdominal distension</li>
+          <li>Shock</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>🔬 Diagnosis</h2>
+      <h3>Ultrasound (Gold Standard)</h3>
+      <div class="success-box">
+        <strong>Classic Findings:</strong>
+        <ul>
+          <li>"Target sign" (transverse view) - Concentric rings</li>
+          <li>"Pseudokidney sign" (longitudinal view)</li>
+          <li>Sensitivity >95%</li>
+        </ul>
+      </div>
+      <h3>Abdominal X-ray:</h3>
+      <ul>
+        <li>May be normal early</li>
+        <li>Soft tissue mass in RUQ</li>
+        <li>Paucity of gas in RLQ</li>
+        <li>Signs of obstruction (air-fluid levels)</li>
+        <li>Free air = perforation</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Management</h2>
+      <h3>Initial Stabilization:</h3>
+      <ul>
+        <li>NPO status</li>
+        <li>IV fluid resuscitation</li>
+        <li>NG tube if vomiting</li>
+        <li>Surgical consultation</li>
+      </ul>
+      <h3>Non-Operative Reduction (First-Line)</h3>
+      <div class="success-box">
+        <strong>Air or Contrast Enema:</strong>
+        <ul>
+          <li>Air enema preferred (safer if perforation)</li>
+          <li>Success rate: 80-95%</li>
+          <li>Performed by radiologist with surgical backup</li>
+          <li>Reduction confirmed by free flow into terminal ileum</li>
+        </ul>
+      </div>
+      <h3>Contraindications to Enema Reduction:</h3>
+      <ul>
+        <li>Peritonitis</li>
+        <li>Perforation (free air on X-ray)</li>
+        <li>Shock unresponsive to resuscitation</li>
+        <li>Prolonged symptoms (>48 hours relative contraindication)</li>
+      </ul>
+      <h3>Surgical Reduction:</h3>
+      <p>Required if enema fails or contraindicated. May require bowel resection if necrosis present.</p>
+      <div class="clinical-pearl">
+        <strong>Recurrence:</strong> ~10% recurrence rate after enema reduction, usually within 72 hours. Each recurrence can be treated with repeat enema if no contraindications.
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Test Your Understanding</h3>
+      <p><strong>An 8-month-old infant presents with episodes of screaming and drawing knees to chest, followed by periods of lethargy. Ultrasound shows a "target sign" in the RUQ. The child is hemodynamically stable with soft abdomen. What is the next step?</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Emergency laparotomy</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. Air enema reduction</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Observation and serial exams</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. CT scan of abdomen</div>
+      <div class="explanation" id="explanation">
+        <strong>Correct Answer: B</strong><br><br>
+        This is a classic presentation of intussusception (episodic pain with lethargy between episodes, target sign on ultrasound). In a hemodynamically stable child without signs of perforation or peritonitis, air enema reduction is the first-line treatment with an 80-95% success rate. Surgery is reserved for failed reduction or when enema is contraindicated.
+      </div>
+    </section>
+
+    <a href="index.html" class="back-link">← Back to Modules</a>
+
+    <section class="module-section" style="margin-top: 2rem;">
+      <h2>📚 Open-Access References</h2>
+      <ul style="font-size: 0.9rem;">
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6033755/" target="_blank" style="color: var(--primary);">Edwards EA, et al. Management of Pediatric Intussusception. World J Surg 2017</a> - Comprehensive management review</li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/26117064/" target="_blank" style="color: var(--primary);">Jiang J, et al. Air versus liquid enema for intussusception reduction. Cochrane Review 2017</a> - Evidence for air enema</li>
+        <li><a href="https://radiopaedia.org/articles/intussusception" target="_blank" style="color: var(--primary);">Radiopaedia: Intussusception</a> - Imaging findings including target sign (free access)</li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK431078/" target="_blank" style="color: var(--primary);">StatPearls: Intussusception</a> - Open-access clinical review (updated regularly)</li>
+      </ul>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(o => { if(o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      document.getElementById('explanation').style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Intussusception"
+         data-key-points="📚 Core Definition, ⚙️ Pathophysiology, 🔍 Lead Points, 🩺 Clinical Presentation, 🔬 Diagnosis, 💊 Management, 📚 Open-Access References, Why &quot;Currant Jelly&quot; Stools?, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 10-month-old presents with episodic crying, drawing up legs, and "currant jelly" stool. Abdominal exam reveals a sausage-shaped mass in the RUQ. What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Pyloric stenosis presents at 3-6 weeks with projectile non-bilious vomiting, not colicky pain with bloody stool. The mass is an &quot;olive&quot; in the epigastrium." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Pyloric stenosis</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Classic triad: episodic colicky abdominal pain, vomiting, and currant jelly stool (blood + mucus). Sausage-shaped mass in RUQ. Peak age 6-36 months. Ileocolic type most common (90%). Most common cause of bowel obstruction in infants." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Intussusception</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Meckel diverticulum causes painless lower GI bleeding, not episodic colicky pain with a mass. Can serve as a lead point for intussusception though." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Meckel diverticulum</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Appendicitis in infants is rare and presents with periumbilical → RLQ pain, fever, and anorexia — not episodic colic with currant jelly stool." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Appendicitis</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the GOLD STANDARD diagnostic study for intussusception?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Plain X-ray may show a soft tissue mass, absence of cecal gas, or bowel obstruction pattern, but has low sensitivity (~50%). Not definitive." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Abdominal X-ray</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Ultrasound is the gold standard: &quot;target sign&quot; (bull&#x27;s eye) on transverse view and &quot;pseudokidney sign&quot; on longitudinal view. Sensitivity &gt;98%. Non-invasive, no radiation, readily available." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Abdominal ultrasound</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CT can diagnose intussusception but involves radiation and is unnecessary when ultrasound is so reliable, especially in children." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">CT abdomen with contrast</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Upper GI series evaluates the upper GI tract. Intussusception involves the ileocecal region — the relevant contrast study is an air/contrast enema (which is also therapeutic)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Upper GI series</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">What is the FIRST-LINE treatment for uncomplicated ileocolic intussusception?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Surgery is reserved for failed reduction, perforation, peritonitis, or hemodynamic instability. Non-operative reduction is first-line when no contraindications exist." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Emergent surgical exploration</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Air enema reduction: 80-95% success rate for uncomplicated cases. Performed by radiologist under fluoroscopy. Contraindications: peritonitis, perforation, hemodynamic instability. Can also use hydrostatic (saline) enema under ultrasound guidance." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Pneumatic (air) or hydrostatic enema reduction</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Antibiotics alone do not treat the mechanical obstruction. Without reduction, the intussusception can progress to bowel ischemia, necrosis, and perforation." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">IV antibiotics and observation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="NG decompression may be part of supportive care but does not reduce the intussusception. Active intervention (enema or surgery) is required." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">NG decompression and NPO for 48 hours</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">What is the MOST common type of intussusception in children?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Colocolic intussusception is rare in children and more concerning for a pathologic lead point (polyp, lymphoma)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Colocolic</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Ileocolic (ileum telescopes into colon through the ileocecal valve) accounts for ~90% of pediatric intussusception. Usually idiopathic, likely related to lymphoid hyperplasia (Peyer patches) often following viral illness." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Ileocolic</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Small bowel intussusception (jejunojejunal, ileoileal) is more common in adults and associated with pathologic lead points (tumors, adhesions)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Jejunojejunal</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Gastroduodenal intussusception is extremely rare and usually associated with gastric polyps or tumors." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Gastroduodenal</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which pathologic lead point should be considered in a child OLDER than 3 years with intussusception?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Peyer patch hyperplasia is the presumed cause of IDIOPATHIC intussusception in the typical age group (6-36 months), not a pathologic lead point in older children." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Enlarged Peyer patches</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="In children &gt;3 years, suspect a pathologic lead point: Meckel diverticulum (most common surgical lead point), lymphoma (especially Burkitt), polyps (Peutz-Jeghers), or Henoch-Schönlein purpura. These children often require surgical intervention." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Meckel diverticulum, lymphoma, or polyp</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Pyloric stenosis is a gastric outlet obstruction, not a lead point for intussusception. It occurs at 3-6 weeks of age." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Pyloric stenosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Meconium ileus is a neonatal condition associated with cystic fibrosis, not a lead point for intussusception in older children." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Meconium ileus</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">During air enema reduction of intussusception, which finding indicates perforation and requires IMMEDIATE surgical intervention?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Reflux of air into the small bowel confirms SUCCESSFUL reduction — the intussusception has been fully reduced. This is the desired outcome." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Successful reflux of air into the terminal ileum</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Free air during enema = bowel perforation. Emergent decompression (needle decompression or trocar) followed by surgical exploration. This is the most serious complication of enema reduction (~0.5-2.5% risk)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Free intraperitoneal air (tension pneumoperitoneum)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Partial reduction is common. Up to 3 attempts may be made (with rest periods). This is not a surgical emergency." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Partial reduction requiring a second attempt</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Some distension during air enema is expected and normal. Only free peritoneal air (not just bowel distension) indicates perforation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Mild distension during the procedure</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">What is the recurrence rate of intussusception after successful enema reduction?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Recurrence rate after non-operative reduction is approximately 5-10%. Most recurrences happen within 72 hours. Recurrent intussusception can be treated with repeat enema reduction. Multiple recurrences may warrant surgical exploration to evaluate for a lead point." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">~5-10%</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This underestimates the recurrence rate. Parents should be counseled about the ~5-10% recurrence risk and told to return if symptoms recur." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title"><1%</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This is far too high. While recurrence does occur, the majority of children have a single episode that resolves with enema reduction." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">50%</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Overestimated. If recurrence rates were this high, surgery would be recommended more often as initial treatment." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">30-40%</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">What classic ultrasound finding confirms the diagnosis of intussusception?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Double bubble sign is seen on X-ray in duodenal atresia (dilated stomach + proximal duodenum), not intussusception." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">"Double bubble" sign</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Target sign (also called &quot;bull&#x27;s eye&quot; or &quot;doughnut sign&quot;): concentric alternating rings of bowel wall and mesentery on transverse ultrasound. On longitudinal view, the &quot;pseudokidney sign&quot; is seen. Both are highly specific." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">"Target sign" (concentric rings on transverse view)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="String of pearls sign is seen in small bowel obstruction (air-fluid levels in dilated small bowel), not specifically intussusception." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">"String of pearls" sign</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="An olive-shaped mass is the palpable finding in pyloric stenosis, not intussusception. The intussusception mass is sausage-shaped in the RUQ." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">"Olive" mass in epigastrium</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=intussusception-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/intussusception-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body>
+</html>

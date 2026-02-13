@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infectious Disease - ReasonDx</title>
+
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #f0fdfa; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #115e59; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #f0fdfa; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #5eead4;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="../js/dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../index.html" class="dx-nav-link ">📚 References</a>
+                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+<aside class="sidebar">
+<div class="card"><div class="card-header"><span>📋 Clinical Snapshot</span><span class="card-badge" id="phaseBadge">Phase 1</span></div><div class="card-body" id="caseContent"></div></div>
+<div class="card"><div class="card-header"><span>🧬 Domain Fingerprint</span></div><div class="card-body"><div class="fp-box"><div class="fp-title">📊 Your Performance</div><div class="domain-bar"><span class="domain-label">Mechanism</span><div class="domain-track"><div class="domain-fill mech" id="fpMech" style="width:0%"></div></div><span class="domain-score" id="fpMechScore">0%</span></div><div class="domain-bar"><span class="domain-label">Pharm</span><div class="domain-track"><div class="domain-fill pharm" id="fpPharm" style="width:0%"></div></div><span class="domain-score" id="fpPharmScore">0%</span></div><div class="domain-bar"><span class="domain-label">Pattic</span><div class="domain-track"><div class="domain-fill patho" id="fpPatho" style="width:0%"></div></div><span class="domain-score" id="fpPathoScore">0%</span></div></div><div id="alertBox"></div></div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Infectious Disease with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=id01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../training.html?filter=infectious,fever,sepsis,pneumonia" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%);
+                          border: 1px solid #5eead4; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Infectious Disease Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 20+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+<aside class="insights">
+<div class="insight-card"><div class="insight-header">📊 Accuracy</div><div class="insight-body"><div class="acc-ring"><svg width="80" height="80" viewBox="0 0 80 80"><circle class="bg" cx="40" cy="40" r="36"/><circle class="prog" cx="40" cy="40" r="36" stroke-dasharray="226" stroke-dashoffset="226" id="accRing"/></svg><div class="acc-text" id="accText">--%</div></div></div></div>
+<div class="insight-card"><div class="insight-header">💡 Study Tip</div><div class="insight-body"><div class="tip"><div class="tip-title">IDSA Guidelines</div><div class="tip-text">CURB-65 for CAP: Confusion, Uremia (BUN>20), RR≥30, BP<90, age≥65. Score 0-1 outpatient, ≥3 ICU.</div></div></div></div>
+</aside>
+</div>
+<script>
+var phase=1,xp=0,streak=0,open={1:true,2:false,3:false,4:false},done={},state={};
+for(var i=1;i<=20;i++)state[i]={pick:null,conf:null,done:false,ok:false};
+var fp={mechanism:{c:0,t:0},pharmacology:{c:0,t:0},pathophysiology:{c:0,t:0}};
+var ans={1:'d',2:'b',3:'c',4:'c',5:'c',6:'d',7:'d',8:'b',9:'b',10:'d',11:'a',12:'b',13:'a',14:'c',15:'a',16:'a',17:'c',18:'b',19:'d',20:'a'};
+var vitals={
+1:{temp:'101.2°F',hr:'98',bp:'118/72',rr:'22'},
+2:{temp:'102.8°F',hr:'108',bp:'108/68',rr:'20'},
+3:{temp:'103.2°F',hr:'112',bp:'98/62',rr:'24'},
+4:{temp:'101.8°F',hr:'92',bp:'128/78',rr:'18'}
+};
+var cases={
+1:{name:'Maria Rodriguez',details:'45F • Productive cough, fever, RLL infiltrate',
+narrative:'<strong>Maria Rodriguez</strong>, 45, teacher, presents with <em>productive cough</em> with yellow sputum, <em>fever to 101.2°F</em>, and <em>right-sided pleuritic chest pain</em> for 3 days. No recent hospitalizations.',
+data1:[['Age','45'],['Onset','3 days'],['Cough','Productive, yellow'],['Fever','101.2°F']],
+data2:[['WBC','14,200','abnormal'],['CXR','RLL infiltrate','abnormal'],['Procal','1.8 ng/mL','abnormal'],['SpO2','94% RA','abnormal']],
+pearl:'CURB-65: Confusion, Uremia (BUN>20), RR≥30, BP<90 systolic, age≥65. Score 0-1 = outpatient, 2 = admit, ≥3 = ICU.',
+refs:[{t:'IDSA/ATS CAP Guidelines 2019',u:'https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST'}]},
+2:{name:'Sarah Thompson',details:'28F • Dysuria, flank pain, fever 102.8°F',
+narrative:'<strong>Sarah Thompson</strong>, 28, presents with <em>dysuria</em> and <em>frequency</em> for 2 days, now with <em>left flank pain</em> and <em>fever 102.8°F</em>. Sexually active, no prior UTIs.',
+data1:[['Age','28'],['Onset','2 days'],['Symptoms','Dysuria, frequency'],['Flank pain','Left+']],
+data2:[['WBC','15,800','abnormal'],['UA','Nitrite+, WBC>50','abnormal'],['Cr','0.9',''],['CVA','Tender left','abnormal']],
+pearl:'Pyelonephritis = fever + flank pain + CVA tenderness. Nitrofurantoin does NOT achieve adequate renal tissue levels - never use for pyelo!',
+refs:[{t:'IDSA UTI Guidelines 2010',u:'https://academic.oup.com/cid/article/52/5/e103/388285'}]},
+3:{name:'Michael Chen',details:'52M • Fever x2wks, new murmur, IVDU history',
+narrative:'<strong>Michael Chen</strong>, 52, with <em>IV drug use</em> history, presents with <em>persistent fever x2 weeks</em>, <em>new holosystolic murmur</em> at LLSB, and <em>splinter hemorrhages</em>.',
+data1:[['Age','52'],['Fever','2 weeks'],['IVDU','Yes'],['Murmur','New, holosystolic']],
+data2:[['WBC','18,400','abnormal'],['Blood Cx','2/2 GPC clusters','abnormal'],['TTE','TV vegetation','abnormal'],['ESR','85','abnormal']],
+pearl:'Duke Criteria: 2 major OR 1 major + 3 minor OR 5 minor = definite IE. S. aureus #1 in IVDU - typically right-sided (tricuspid).',
+refs:[{t:'AHA IE Guidelines 2015',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296'}]},
+4:{name:'James Wilson',details:'38M • Rapidly spreading erythema, cat scratch',
+narrative:'<strong>James Wilson</strong>, 38, with <em>diabetes</em>, presents with <em>rapidly expanding erythema</em> on forearm after cat scratch 2 days ago. Now with <em>fever 101.8°F</em> and chills.',
+data1:[['Age','38'],['PMH','Diabetes'],['Onset','2 days'],['Source','Cat scratch']],
+data2:[['WBC','12,600','abnormal'],['Glucose','186','abnormal'],['Wound','No fluctuance',''],['Lactate','1.2','']],
+pearl:'Non-purulent cellulitis: Cover Strep + MSSA. Purulent/abscess: Cover MRSA. Pain out of proportion + crepitus + rapid spread = necrotizing fasciitis!',
+refs:[{t:'IDSA SSTI Guidelines 2014',u:'https://academic.oup.com/cid/article/59/2/e10/2895845'}]}
+};
+var phases={
+1:{title:'Community-Acquired Pneumonia',icon:'🫁',desc:'Maria presents with classic CAP symptoms. Master diagnosis, severity scoring, and evidence-based treatment.',
+obj:['Classify pneumonia by clinical setting','Apply CURB-65 severity scoring','Select empiric antibiotics by risk stratification','Determine appropriate treatment duration'],
+refs:[{t:'IDSA/ATS CAP Guidelines 2019',u:'https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST'},{t:'CURB-65 Validation (Thorax)',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1746657/'}]},
+2:{title:'UTI & Pyelonephritis',icon:'🔥',desc:'Sarah progresses from cystitis to pyelonephritis. Learn to distinguish upper vs lower tract and choose appropriate therapy.',
+obj:['Distinguish cystitis from pyelonephritis','Select first-line cystitis antibiotics','Manage pyelonephritis appropriately','Recognize complicated UTI risk factors'],
+refs:[{t:'IDSA UTI Guidelines 2010',u:'https://academic.oup.com/cid/article/52/5/e103/388285'},{t:'Recurrent UTI (JAMA)',u:'https://jamanetwork.com/journals/jama/fullarticle/1889552'}]},
+3:{title:'Infective Endocarditis',icon:'❤️',desc:'Michael presents with classic IE in an IVDU. Apply Duke criteria and understand organism-based treatment.',
+obj:['Apply Modified Duke Criteria','Identify organisms by clinical setting','Select empiric antibiotic regimens','Recognize surgical indications'],
+refs:[{t:'AHA IE Guidelines 2015',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296'},{t:'Modified Duke Criteria',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7169723/'}]},
+4:{title:'Skin & Soft Tissue Infections',icon:'🩹',desc:'James has cellulitis progressing rapidly. Differentiate simple cellulitis from necrotizing fasciitis.',
+obj:['Differentiate purulent vs non-purulent SSTI','Select antibiotics based on MRSA risk','Recognize necrotizing fasciitis red flags','Understand I&D indications'],
+refs:[{t:'IDSA SSTI Guidelines 2014',u:'https://academic.oup.com/cid/article/59/2/e10/2895845'},{t:'Nec Fasc Review',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5198083/'}]}
+};
+var Qs={
+1:{type:'CAP Classification & Pathophysiology',isNBME:true,difficulty:'easy',domains:['pathophysiology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'45-year-old woman, teacher',hpi:'Productive cough, fever 101.2°F, right-sided pleuritic chest pain for 3 days. No recent hospitalizations.',pmh:'Hypertension',vitals:'T 101.2°F, HR 98, RR 22, BP 118/72, SpO2 94%',exam:'Crackles RLL, dullness to percussion',labs:'WBC 14,200, CXR: RLL infiltrate'},
+stem:'Based on the clinical presentation and setting, what type of pneumonia does this patient have?',
+opts:[['a','Community-acquired pneumonia (CAP)'],['b','Hospital-acquired pneumonia (HAP)'],['c','Ventilator-associated pneumonia (VAP)'],['d','Aspiration pneumonia']],
+exp:'<strong>Community-acquired pneumonia (CAP)</strong> is defined as pneumonia acquired outside the hospital in a patient without recent healthcare exposure. The classification matters because it predicts the likely pathogens and guides empiric therapy. HAP occurs ≥48h after hospital admission (colonization with hospital flora); VAP occurs ≥48h after intubation (bypassed upper airway defenses).',
+kp:'Classification determines pathogen prediction: CAP = community organisms (S. pneumoniae, atypicals); HAP/VAP = resistant organisms (MRSA, Pseudomonas) due to healthcare exposure and disrupted defenses.',
+dd:{pathophysiology:{title:'Pneumonia: Mechanism & Classification',content:'<h4>How Does Pneumonia Develop?</h4><p>Normal lung defenses include: (1) <strong>Mucociliary clearance</strong> - cilia beat upward to remove particles, (2) <strong>Cough reflex</strong> - expels large particles, (3) <strong>Alveolar macrophages</strong> - phagocytose organisms that reach alveoli, (4) <strong>IgA</strong> - mucosal immunity, (5) <strong>Surfactant proteins</strong> SP-A and SP-D - opsonize bacteria.</p><p><strong>Pneumonia occurs when:</strong> Pathogen virulence overwhelms host defenses OR defenses are impaired (smoking damages cilia, intubation bypasses upper airway, immunosuppression reduces macrophage function).</p><h4>Pathophysiology of Consolidation</h4><ol><li><strong>Congestion (Day 1-2):</strong> Bacteria reach alveoli → inflammatory response → vascular engorgement, serous exudate, bacterial proliferation</li><li><strong>Red Hepatization (Day 2-4):</strong> RBCs, fibrin, neutrophils fill alveoli → lung becomes firm, red (like liver)</li><li><strong>Gray Hepatization (Day 4-6):</strong> RBCs degrade, fibrin and neutrophils predominate → gray-brown appearance</li><li><strong>Resolution (Day 8+):</strong> Macrophages clear debris, enzymatic digestion of exudate, normal architecture restored</li></ol><h4>Why Classification Matters: The Microbiome Shift</h4><table class="drug-table"><tr><th>Setting</th><th>Colonizing Flora</th><th>Why?</th></tr><tr><td><strong>Community</strong></td><td>S. pneumoniae, H. flu, Moraxella, atypicals</td><td>Normal nasopharyngeal flora; atypicals from environmental exposure</td></tr><tr><td><strong>Hospital >48h</strong></td><td>MRSA, Pseudomonas, Acinetobacter, ESBL GNRs</td><td>Antibiotic pressure selects resistant organisms; healthcare worker transmission</td></tr><tr><td><strong>Ventilated</strong></td><td>MDR organisms, Pseudomonas</td><td>ETT bypasses glottis/cough; biofilm formation on tube; aspiration of colonized secretions</td></tr></table><h4>Clinical Correlation: Her Symptoms Explained</h4><ul><li><strong>Productive cough:</strong> Inflammatory exudate in airways triggers cough reflex</li><li><strong>Fever:</strong> IL-1, IL-6, TNF-α from macrophages → hypothalamic PGE2 → elevated set point</li><li><strong>Pleuritic chest pain:</strong> Inflammation extends to visceral pleura (parietal pleura has pain fibers)</li><li><strong>Crackles:</strong> Air bubbling through fluid-filled alveoli during inspiration</li><li><strong>Dullness to percussion:</strong> Consolidated (solid) lung transmits sound poorly vs. air-filled lung</li><li><strong>Hypoxemia (SpO2 94%):</strong> V/Q mismatch - perfused but poorly ventilated alveoli</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Lobar vs Bronchopneumonia:</strong> Lobar = entire lobe (typically S. pneumoniae); Bronchopneumonia = patchy, peribronchial (S. aureus, Klebsiella)</li><li>→ <strong>Sepsis:</strong> When pneumonia triggers systemic inflammatory response → see Sepsis module</li><li>→ <strong>ARDS:</strong> Severe pneumonia → diffuse alveolar damage → see Pulmonary module</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST" target="_blank">Metlay JP, et al. IDSA/ATS CAP Guidelines 2019</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK430749/" target="_blank">StatPearls: Community-Acquired Pneumonia</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK513321/" target="_blank">StatPearls: Lobar Pneumonia Pathology</a></li></ol></div>',bw:['Mucociliary clearance','Red/Gray hepatization','V/Q mismatch → hypoxemia','CAP = community flora','HAP/VAP = MDR organisms']}},
+dist:{b:'HAP requires ≥48h of hospitalization - allows time for colonization with hospital flora',c:'VAP requires mechanical ventilation ≥48h - ETT bypasses natural airway defenses',d:'No aspiration risk factors (no AMS, dysphagia, or aspiration event history)'},
+related:[2,3]},
+
+2:{type:'CAP Microbiology & Virulence',isNBME:false,difficulty:'easy',domains:['pathophysiology','mechanism'],tags:['Step1'],
+ctx:'Understanding microbiology and virulence mechanisms guides empiric antibiotic selection.',
+stem:'What are the most common pathogens causing community-acquired pneumonia, and WHY are they successful lung pathogens?',
+opts:[['a','Streptococcus pneumoniae, Haemophilus influenzae, Mycoplasma pneumoniae - each has specific virulence factors for respiratory colonization'],['b','Pseudomonas aeruginosa and MRSA'],['c','Klebsiella pneumoniae primarily'],['d','Aspergillus species']],
+exp:'<strong>S. pneumoniae</strong> remains #1 because its polysaccharide capsule evades phagocytosis and it produces pneumolysin (pore-forming toxin). <strong>H. influenzae</strong> uses IgA protease to evade mucosal immunity. <strong>Mycoplasma</strong> lacks a cell wall (evades β-lactams) and has specialized adhesins for respiratory epithelium.',
+kp:'Each CAP pathogen has evolved specific mechanisms to colonize and evade respiratory defenses - understanding these explains antibiotic selection and vaccine targets.',
+dd:{mechanism:{title:'CAP Pathogens: Virulence Mechanisms',content:'<h4>Streptococcus pneumoniae (The #1 Cause)</h4><table class="drug-table"><tr><th>Virulence Factor</th><th>Mechanism</th><th>Clinical Relevance</th></tr><tr><td><strong>Polysaccharide capsule</strong></td><td>Prevents C3b deposition → inhibits phagocytosis</td><td>93 serotypes; capsule = vaccine target (PCV13, PPSV23)</td></tr><tr><td><strong>Pneumolysin</strong></td><td>Cholesterol-dependent pore-forming toxin → cell lysis</td><td>Damages respiratory epithelium, activates complement</td></tr><tr><td><strong>IgA1 protease</strong></td><td>Cleaves secretory IgA</td><td>Evades mucosal immunity</td></tr><tr><td><strong>Autolysin (LytA)</strong></td><td>Cell wall degradation → releases pneumolysin and cell wall fragments</td><td>Fragments trigger inflammation</td></tr><tr><td><strong>Phosphorylcholine</strong></td><td>Mimics platelet-activating factor → binds PAF receptor on epithelium</td><td>Facilitates invasion across epithelium</td></tr></table><h4>Haemophilus influenzae</h4><table class="drug-table"><tr><th>Virulence Factor</th><th>Mechanism</th></tr><tr><td><strong>Capsule (type b)</strong></td><td>Anti-phagocytic (Hib vaccine target - now rare!)</td></tr><tr><td><strong>IgA1 protease</strong></td><td>Cleaves secretory IgA at hinge region</td></tr><tr><td><strong>Nontypeable strains</strong></td><td>No capsule but have adhesins; cause CAP in COPD</td></tr><tr><td><strong>β-lactamase</strong></td><td>~30% produce β-lactamase → amoxicillin resistance</td></tr></table><h4>Atypical Pathogens: Why "Atypical"?</h4><p>Called "atypical" because they: (1) Dont Gram stain well, (2) Dont grow on standard media, (3) Dont respond to β-lactams</p><table class="drug-table"><tr><th>Organism</th><th>Unique Feature</th><th>Virulence Mechanism</th></tr><tr><td><strong>Mycoplasma pneumoniae</strong></td><td>NO CELL WALL</td><td>P1 adhesin binds respiratory epithelium; β-lactams useless (no cell wall target)</td></tr><tr><td><strong>Chlamydia pneumoniae</strong></td><td>Obligate intracellular</td><td>Elementary body (infectious) → Reticulate body (replicates inside cell)</td></tr><tr><td><strong>Legionella pneumophila</strong></td><td>Intracellular in macrophages</td><td>Survives in amoebae in water systems; replicates inside alveolar macrophages</td></tr></table><h4>Why Do Atypicals Need Macrolides or Fluoroquinolones?</h4><ul><li><strong>Mycoplasma:</strong> No cell wall → β-lactams (target cell wall) useless → need protein synthesis inhibitors (macrolides, tetracyclines) or DNA gyrase inhibitors (FQs)</li><li><strong>Chlamydia/Legionella:</strong> Intracellular → need drugs that penetrate cells (macrolides concentrate 10-100x intracellularly; FQs also penetrate well)</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Pneumococcal vaccine:</strong> Targets capsule polysaccharides - why vaccination reduces invasive disease</li><li>→ <strong>COPD exacerbations:</strong> H. influenzae, Moraxella, S. pneumoniae - chronic colonization with acute flares</li><li>→ <strong>Legionnaires disease:</strong> Water exposure (cooling towers, hot tubs) - always ask about travel/exposure</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7152197/" target="_blank">Jain S, et al. CAP Requiring Hospitalization. NEJM 2015</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK470537/" target="_blank">StatPearls: Streptococcus pneumoniae</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3553279/" target="_blank">Pneumococcal Virulence Factors Review</a></li></ol></div>',bw:['Capsule = anti-phagocytic','Pneumolysin = pore-forming toxin','IgA protease = mucosal evasion','Mycoplasma = NO cell wall','Atypicals = intracellular → need macrolide/FQ']}},
+dist:{b:'Pseudomonas/MRSA are HAP/VAP pathogens - require healthcare exposure for colonization',c:'Klebsiella is classically associated with alcoholics and aspiration (currant jelly sputum)',d:'Fungal pneumonia rare in immunocompetent - consider if HIV, transplant, neutropenia'},
+related:[1,3,4]},
+
+3:{type:'CURB-65: Physiology of Severity Markers',isNBME:true,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'72-year-old man with COPD',hpi:'Cough with purulent sputum, fever, dyspnea for 3 days',pmh:'COPD on home O2, CKD stage 3',vitals:'T 102.4°F, HR 105, RR 28, BP 92/58, SpO2 88% on 2L',exam:'Confused, rhonchi bilateral bases',labs:'WBC 18,000, BUN 42, Cr 2.4, CXR: bilateral infiltrates'},
+stem:'Calculate this patients CURB-65 score. WHY does each component predict mortality?',
+opts:[['a','CURB-65 = 5 (all criteria) - each marker reflects systemic inflammation, organ dysfunction, or reduced physiologic reserve'],['b','CURB-65 = 2, consider hospital ward'],['c','CURB-65 = 1, outpatient treatment'],['d','CURB-65 not applicable to COPD']],
+exp:'<strong>CURB-65 = 5</strong>: Confusion (brain hypoperfusion/inflammation), Uremia BUN 42 (renal hypoperfusion OR pre-existing CKD reducing reserve), RR 28 (respiratory compensation for hypoxemia/acidosis), BP 92/58 (sepsis-induced vasodilation), age 72 (reduced physiologic reserve). Each component reflects either end-organ dysfunction or inability to compensate.',
+kp:'CURB-65 works because it captures both the severity of current illness (confusion, hypotension, tachypnea) AND the patients ability to compensate (age, renal function). Its simple but validated - correlates with 30-day mortality.',
+dd:{mechanism:{title:'CURB-65: The Physiology Behind Each Marker',content:'<h4>Understanding WHY Each Marker Predicts Death</h4><table class="drug-table"><tr><th>Marker</th><th>Threshold</th><th>Physiologic Meaning</th><th>Why It Predicts Mortality</th></tr><tr><td><strong>C</strong>onfusion</td><td>New disorientation</td><td>Cerebral hypoperfusion (MAP too low for brain autoregulation) OR direct CNS inflammation (cytokines cross BBB)</td><td>Brain dysfunction = severe systemic illness; loss of airway protection risk</td></tr><tr><td><strong>U</strong>remia</td><td>BUN >20</td><td>Either: (1) Prerenal azotemia from hypoperfusion, (2) Pre-existing CKD reducing reserve</td><td>Kidney = canary in coal mine for perfusion; also reduces drug clearance</td></tr><tr><td><strong>R</strong>espiratory rate</td><td>≥30/min</td><td>Compensatory hyperventilation: (1) Hypoxemia stimulates peripheral chemoreceptors, (2) Metabolic acidosis (lactate) triggers respiratory compensation</td><td>High RR = failing gas exchange OR metabolic crisis; also increases work of breathing → fatigue</td></tr><tr><td><strong>B</strong>lood pressure</td><td>SBP <90 or DBP ≤60</td><td>Sepsis-induced vasodilation: Cytokines → iNOS activation → NO → vasodilation. Also myocardial depression (TNF-α, IL-1β)</td><td>Hypotension = inadequate organ perfusion; heralds shock</td></tr><tr><td><strong>65</strong> years</td><td>Age ≥65</td><td>Reduced physiologic reserve: (1) Decreased cardiac output response to stress, (2) Reduced respiratory muscle strength, (3) Immune senescence, (4) Comorbidities</td><td>Less ability to compensate for acute illness</td></tr></table><h4>The Pathophysiology of Severe Pneumonia → SIRS → Sepsis</h4><ol><li><strong>Local infection:</strong> Bacteria in alveoli → alveolar macrophages release IL-1, IL-6, TNF-α</li><li><strong>Systemic spillover:</strong> Cytokines enter circulation → systemic inflammatory response</li><li><strong>Vasodilation:</strong> TNF-α/IL-1 → endothelial iNOS → NO → widespread vasodilation → ↓SVR → hypotension</li><li><strong>Capillary leak:</strong> Increased vascular permeability → third-spacing → ↓intravascular volume</li><li><strong>Myocardial depression:</strong> Cytokines directly depress cardiac contractility</li><li><strong>End-organ hypoperfusion:</strong> Brain (confusion), kidney (↑BUN), etc.</li></ol><h4>Why BUN and Not Creatinine?</h4><p>BUN is more sensitive to <strong>prerenal states</strong> because:</p><ul><li>BUN reabsorption is flow-dependent - low flow (hypoperfusion) → more passive reabsorption → ↑BUN</li><li>Creatinine is not significantly reabsorbed - less affected by flow</li><li>BUN/Cr ratio >20:1 suggests prerenal azotemia</li></ul><h4>This Patient: Step-by-Step Score Calculation</h4><ul><li>✓ <strong>C</strong>onfusion: Present (new disorientation) → +1</li><li>✓ <strong>U</strong>remia: BUN 42 >20 → +1</li><li>✓ <strong>R</strong>R: 28 is close to 30 (borderline, but the patient is on supplemental O2 suppressing respiratory drive) → +1</li><li>✓ <strong>B</strong>P: 92/58, SBP <90 cutoff missed but DBP ≤60 met → +1</li><li>✓ <strong>65</strong>: Age 72 → +1</li><li><strong>TOTAL: 5/5</strong> → 30-day mortality 15-40%, ICU admission recommended</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Sepsis-3 criteria:</strong> qSOFA (similar concept) - RR, BP, GCS for bedside screening</li><li>→ <strong>PSI/PORT score:</strong> More complex (20 variables) but better validated; CURB-65 simpler for bedside use</li><li>→ <strong>Lactate:</strong> Not in CURB-65 but another marker of tissue hypoperfusion</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1746657/" target="_blank">Lim WS, et al. CURB-65 Validation. Thorax 2003</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3471855/" target="_blank">Comparison of CAP Severity Scores</a></li><li><a href="https://www.mdcalc.com/calc/324/curb-65-score-pneumonia-severity" target="_blank">MDCalc: CURB-65 Calculator</a></li></ol></div>',bw:['Each marker = organ dysfunction OR reduced reserve','Confusion = brain hypoperfusion','BUN = renal perfusion marker','Hypotension = cytokine-mediated vasodilation','Score ≥3 = ICU consideration']}},
+dist:{b:'He has all 5 criteria met, not just 2',c:'Score is 5 - this patient is critically ill with high mortality risk',d:'CURB-65 applies to all CAP regardless of underlying lung disease'},
+related:[1,4,5]},
+
+4:{type:'CAP Antibiotics: Mechanism-Based Selection',isNBME:true,difficulty:'medium',domains:['pharmacology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'58-year-old woman with diabetes and COPD',hpi:'Productive cough, fever for 4 days. CURB-65 = 1.',pmh:'Type 2 DM, COPD on inhalers',vitals:'T 100.8°F, HR 88, RR 20, BP 132/78, SpO2 95%',exam:'Crackles LLL',labs:'WBC 12,500, CXR: LLL infiltrate'},
+stem:'What is the most appropriate empiric antibiotic regimen, and WHY does she need broader coverage than a healthy patient?',
+opts:[['a','Respiratory fluoroquinolone (levofloxacin/moxifloxacin) OR β-lactam + macrolide - comorbidities increase risk of resistant organisms and treatment failure'],['b','Azithromycin alone'],['c','Amoxicillin alone'],['d','TMP-SMX']],
+exp:'<strong>Comorbidities (DM, COPD)</strong> increase risk of: (1) Drug-resistant S. pneumoniae (prior antibiotic exposure), (2) H. influenzae (COPD colonization), (3) Gram-negatives (DM-related immune dysfunction), (4) Treatment failure (reduced physiologic reserve). Respiratory FQs cover all these PLUS atypicals with a single drug. β-lactam + macrolide achieves similar spectrum with two drugs.',
+kp:'The reason for broader coverage isnt different organisms per se - its increased RISK of resistant organisms and decreased margin for error in patients who cant tolerate treatment failure.',
+dd:{pharmacology:{title:'CAP Antibiotics: Understanding the Mechanisms',content:'<h4>Why Respiratory Fluoroquinolones?</h4><p><strong>Mechanism:</strong> Inhibit bacterial DNA gyrase (topoisomerase II) and topoisomerase IV → prevents DNA supercoiling and replication → bactericidal</p><table class="drug-table"><tr><th>Drug</th><th>Key Features</th><th>Spectrum</th></tr><tr><td><strong>Levofloxacin 750mg daily</strong></td><td>L-isomer of ofloxacin; excellent lung penetration</td><td>S. pneumoniae (including DRSP), H. flu, atypicals, many GNRs</td></tr><tr><td><strong>Moxifloxacin 400mg daily</strong></td><td>Best gram-positive activity of FQs; also covers anaerobes</td><td>Same + better Strep coverage + anaerobes</td></tr></table><p><strong>Why "respiratory" FQs?</strong> Older FQs (ciprofloxacin) have poor pneumococcal activity due to weak topoisomerase IV binding. Levofloxacin/moxifloxacin have enhanced binding → better Strep coverage.</p><h4>The β-Lactam + Macrolide Combination: Why Two Drugs?</h4><table class="drug-table"><tr><th>Drug Class</th><th>Mechanism</th><th>Covers</th><th>Misses</th></tr><tr><td><strong>β-Lactam</strong><br>(amox-clav, ceftriaxone)</td><td>Inhibits PBPs → blocks cell wall synthesis → osmotic lysis</td><td>S. pneumoniae, H. flu, MSSA</td><td>Atypicals (no cell wall or intracellular)</td></tr><tr><td><strong>Macrolide</strong><br>(azithromycin)</td><td>Binds 50S ribosome (23S rRNA) → inhibits protein synthesis; concentrates intracellularly</td><td>Atypicals (Mycoplasma, Chlamydia, Legionella)</td><td>~30% S. pneumoniae resistance in US</td></tr></table><p><strong>Together:</strong> β-lactam covers typical bacteria reliably; macrolide adds atypical coverage and may have immunomodulatory benefits.</p><h4>Why Comorbidities Change the Calculus</h4><table class="drug-table"><tr><th>Comorbidity</th><th>Why It Matters</th><th>Implications</th></tr><tr><td><strong>COPD</strong></td><td>Chronic colonization with H. flu, Moraxella; frequent antibiotic exposure → resistance</td><td>Need reliable H. flu coverage; ~30% produce β-lactamase</td></tr><tr><td><strong>Diabetes</strong></td><td>Impaired neutrophil function; microangiopathy reduces antibiotic delivery</td><td>Higher risk of treatment failure; may have atypical presentations</td></tr><tr><td><strong>Heart failure</strong></td><td>Pulmonary edema mimics/coexists with pneumonia; reduced cardiac reserve</td><td>Less tolerance for complications</td></tr><tr><td><strong>Prior antibiotics</strong></td><td>Selects for resistant organisms (DRSP, β-lactamase producers)</td><td>Need broader coverage</td></tr></table><h4>Healthy Patient vs. Comorbidities: Treatment Algorithm</h4><table class="drug-table"><tr><th>Patient Type</th><th>First-Line Options</th><th>Rationale</th></tr><tr><td>Healthy, no comorbidities, no recent antibiotics</td><td>Amoxicillin 1g TID<br>OR Doxycycline 100mg BID<br>OR Azithromycin (if local resistance <25%)</td><td>Low risk of resistant organisms; simple is better</td></tr><tr><td><strong>Comorbidities OR recent antibiotics</strong></td><td><strong>Respiratory FQ alone<br>OR β-lactam + macrolide</strong></td><td>Higher resistance risk; need reliable broad coverage</td></tr><tr><td>Inpatient, non-ICU</td><td>Respiratory FQ alone<br>OR β-lactam + macrolide</td><td>Sick enough to admit = treat seriously</td></tr><tr><td>ICU</td><td>β-lactam + (macrolide or FQ)<br>±MRSA/Pseudomonas coverage</td><td>Maximum coverage; no room for error</td></tr></table><h4>🔗 Connections</h4><ul><li>→ <strong>Drug-resistant S. pneumoniae (DRSP):</strong> Penicillin resistance = altered PBPs; high-dose amoxicillin or respiratory FQ overcomes</li><li>→ <strong>FQ adverse effects:</strong> Tendinopathy, QT prolongation, C. diff - use judiciously</li><li>→ <strong>Macrolide immunomodulation:</strong> Anti-inflammatory effects independent of antibacterial activity (used in bronchiectasis, CF)</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.atsjournals.org/doi/full/10.1164/rccm.201908-1581ST" target="_blank">IDSA/ATS CAP Guidelines 2019</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK470179/" target="_blank">StatPearls: Fluoroquinolones</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6613708/" target="_blank">Macrolide Immunomodulation Review</a></li></ol></div>',bw:['FQ = DNA gyrase inhibition','Macrolide = 50S ribosome','β-lactam = cell wall synthesis','Comorbidities = broader coverage','Respiratory FQ = enhanced Strep activity']}},
+dist:{b:'Macrolide alone only for healthy patients - 30% pneumococcal resistance and she has comorbidities',c:'Amoxicillin alone misses atypicals and she has COPD (H. flu risk) and DM (treatment failure risk)',d:'TMP-SMX has no activity against S. pneumoniae or atypicals - inappropriate for CAP'},
+related:[3,5,2]},
+
+5:{type:'CAP Duration: Biology of Resolution',isNBME:false,difficulty:'easy',domains:['pharmacology','mechanism'],tags:['Step2'],
+ctx:'Understanding why shorter courses work - and when they dont.',
+stem:'What is the recommended treatment duration for uncomplicated CAP, and what is the physiologic basis for clinical stability criteria?',
+opts:[['a','Minimum 5 days, until afebrile 48-72h and clinically stable - stability indicates infection control and resolution of systemic inflammation'],['b','14 days regardless of response'],['c','21 days standard'],['d','Until CXR clears']],
+exp:'<strong>Minimum 5 days</strong> reflects the time needed to achieve bacterial killing and clinical improvement. <strong>Clinical stability criteria</strong> (afebrile 48-72h, HR<100, RR<24, SBP>90, SpO2>90%, tolerating PO) indicate that the systemic inflammatory response has resolved and the patient can complete therapy safely.',
+kp:'Radiographic improvement lags clinical improvement by 4-12 weeks (takes time for inflammatory infiltrate to clear). Chasing CXR clearance leads to unnecessary prolonged antibiotic courses.',
+dd:{mechanism:{title:'Antibiotic Duration: The Science',content:'<h4>Why Does 5 Days Work?</h4><p>Landmark trials showed no difference in outcomes between 5-day and 7-10 day courses for uncomplicated CAP. The biology:</p><ol><li><strong>Rapid bacterial killing:</strong> Bactericidal antibiotics (β-lactams, FQs) achieve 99% kill within 24-48 hours</li><li><strong>Host defenses activated:</strong> Once bacterial load reduced, immune system controls remaining organisms</li><li><strong>Resolution cascade:</strong> As bacteria die, PAMPs decrease → cytokine production decreases → inflammation resolves</li></ol><h4>The Physiology of Clinical Stability Criteria</h4><table class="drug-table"><tr><th>Criterion</th><th>What It Measures</th><th>Why It Matters</th></tr><tr><td><strong>Afebrile 48-72h</strong></td><td>IL-1, IL-6, TNF-α decreasing → hypothalamic PGE2 decreasing → normal thermoregulation</td><td>Fever resolution = systemic inflammation resolving</td></tr><tr><td><strong>HR <100</strong></td><td>Decreased sympathetic drive; not compensating for fever/hypoxia</td><td>Cardiovascular stability</td></tr><tr><td><strong>RR <24</strong></td><td>Improved V/Q matching; not compensating for hypoxemia/acidosis</td><td>Respiratory stability</td></tr><tr><td><strong>SBP >90</strong></td><td>Resolution of sepsis-induced vasodilation</td><td>Hemodynamic stability</td></tr><tr><td><strong>SpO2 >90% on RA</strong></td><td>Resolving alveolar consolidation; improved gas exchange</td><td>Adequate oxygenation without support</td></tr><tr><td><strong>Tolerating PO</strong></td><td>GI function intact; can absorb oral antibiotics</td><td>Can complete course as outpatient</td></tr><tr><td><strong>Normal mentation</strong></td><td>Brain perfusion and inflammation resolved</td><td>Can safely manage self-care</td></tr></table><h4>Why CXR Lags Behind Clinical Improvement</h4><p>The timeline of radiographic resolution:</p><ul><li><strong>Day 0-3:</strong> Alveoli filled with inflammatory exudate (neutrophils, fibrin, bacteria)</li><li><strong>Day 3-7:</strong> Bacterial killing achieved, but exudate remains</li><li><strong>Week 1-4:</strong> Macrophages clear debris; fibroblasts repair damage</li><li><strong>Week 4-12:</strong> Complete radiographic resolution in most patients</li></ul><p><strong>Key point:</strong> Infiltrate represents the RESULT of inflammation, not active infection. Treating until CXR clears means treating inflammation, not infection.</p><h4>When Longer Duration IS Needed</h4><table class="drug-table"><tr><th>Condition</th><th>Duration</th><th>Rationale</th></tr><tr><td><strong>Legionella</strong></td><td>7-10 days (some say 14-21)</td><td>Intracellular organism; slower eradication</td></tr><tr><td><strong>Lung abscess</strong></td><td>4-6 weeks</td><td>Poor antibiotic penetration into cavity; need prolonged suppression</td></tr><tr><td><strong>Empyema</strong></td><td>2-4 weeks + drainage</td><td>Pleural space sanctuary; drainage essential</td></tr><tr><td><strong>Pseudomonas</strong></td><td>10-14 days</td><td>Higher relapse rate with short courses</td></tr><tr><td><strong>MRSA pneumonia</strong></td><td>7-21 days</td><td>Depends on severity; necrotizing pneumonia needs longer</td></tr></table><h4>🔗 Connections</h4><ul><li>→ <strong>Antibiotic stewardship:</strong> Shorter courses reduce resistance selection, C. diff risk, adverse effects</li><li>→ <strong>Procalcitonin-guided therapy:</strong> Biomarker to guide duration - falling PCT suggests resolution</li><li>→ <strong>Post-infectious cough:</strong> Can persist weeks after treatment - inflammation, airway hyperreactivity</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4893768/" target="_blank">Short-course vs Standard CAP Treatment - Meta-analysis</a></li><li><a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2536180" target="_blank">Antibiotic Duration in CAP. JAMA Intern Med 2016</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3067478/" target="_blank">Procalcitonin-Guided Antibiotic Therapy</a></li></ol></div>',bw:['Minimum 5 days','Clinical stability criteria','CXR lags 4-12 weeks','Legionella = longer','Abscess = 4-6 weeks']}},
+dist:{b:'14 days is unnecessarily long for uncomplicated CAP - increases C. diff and resistance risk',c:'21 days is far too long - no evidence of benefit, only harm',d:'CXR takes weeks to clear after clinical resolution - treating to CXR clearance means overtreatment'},
+related:[4,1]},
+6:{type:'UTI Pathophysiology: Upper vs Lower Tract',isNBME:false,difficulty:'easy',domains:['pathophysiology','mechanism'],tags:['Step2'],
+ctx:'Sarah presents with urinary symptoms - understanding anatomy explains the clinical distinction.',
+stem:'A 28-year-old healthy woman presents with 2 days of dysuria and frequency. Afebrile, no flank pain. WHY does the absence of fever and flank pain indicate lower tract infection?',
+opts:[['a','Uncomplicated cystitis - bladder infection triggers local inflammation without systemic response; kidney infection causes fever due to cytokine release into bloodstream'],['b','Pyelonephritis'],['c','Complicated UTI'],['d','Asymptomatic bacteriuria']],
+exp:'<strong>Cystitis</strong> (bladder) causes local symptoms (dysuria, frequency, urgency) because inflammation is confined to the bladder mucosa. <strong>Pyelonephritis</strong> (kidney) causes systemic symptoms (fever, chills) because renal parenchymal infection allows bacteria and cytokines to enter the bloodstream. Flank pain localizes to the kidney (T10-L1 dermatome).',
+kp:'The urinary tract is anatomically continuous. Ascending infection from bladder to kidney occurs via the ureters - bacteria with P fimbriae (E. coli) can ascend against urine flow and bind to renal epithelium.',
+dd:{mechanism:{title:'UTI: Anatomical and Pathophysiologic Basis',content:'<h4>Normal Urinary Tract Defense Mechanisms</h4><ol><li><strong>Urine flow:</strong> Continuous washout of bacteria (voiding ~4-6x/day)</li><li><strong>Urine composition:</strong> High osmolality, low pH, high urea - inhibit bacterial growth</li><li><strong>Urinary IgA:</strong> Mucosal immunity</li><li><strong>Uroepithelial cells:</strong> Secrete antimicrobial peptides; TLR4 recognizes LPS</li><li><strong>Tamm-Horsfall protein:</strong> Binds type 1 fimbriae, promotes bacterial clearance</li><li><strong>Vesicoureteral junction:</strong> One-way valve prevents reflux</li></ol><h4>How Bacteria Cause UTI: The Uropathogenic E. coli (UPEC) Story</h4><p>~80% of UTIs are caused by UPEC, which has evolved specific virulence factors:</p><table class="drug-table"><tr><th>Virulence Factor</th><th>Mechanism</th><th>Clinical Significance</th></tr><tr><td><strong>Type 1 fimbriae (FimH)</strong></td><td>Bind mannose on uroepithelial cells</td><td>Initial colonization of bladder; triggers cystitis</td></tr><tr><td><strong>P fimbriae (PapG)</strong></td><td>Bind Gal-Gal on kidney epithelium</td><td>Required for ASCENDING infection → pyelonephritis</td></tr><tr><td><strong>Hemolysin</strong></td><td>Pore-forming toxin → lyses RBCs and uroepithelial cells</td><td>Tissue damage; iron acquisition from hemoglobin</td></tr><tr><td><strong>Siderophores</strong></td><td>Iron chelators (aerobactin, enterobactin)</td><td>Acquire iron in iron-limited urinary tract</td></tr><tr><td><strong>Capsule (K antigen)</strong></td><td>Antiphagocytic</td><td>Evades host immune response</td></tr><tr><td><strong>LPS (O antigen)</strong></td><td>Triggers inflammatory response via TLR4</td><td>Fever, systemic symptoms when in bloodstream</td></tr></table><h4>Why Cystitis Is LOCAL and Pyelonephritis Is SYSTEMIC</h4><table class="drug-table"><tr><th>Feature</th><th>Cystitis (Bladder)</th><th>Pyelonephritis (Kidney)</th></tr><tr><td><strong>Anatomic location</strong></td><td>Bladder mucosa</td><td>Renal parenchyma (interstitium, tubules)</td></tr><tr><td><strong>Vascular access</strong></td><td>Minimal - bladder is a hollow viscus with limited blood supply to lumen</td><td>Highly vascular organ - bacteria/cytokines easily enter bloodstream</td></tr><tr><td><strong>Symptoms</strong></td><td>Dysuria, frequency, urgency, suprapubic pain</td><td>Fever, chills, flank pain, CVA tenderness ± lower tract symptoms</td></tr><tr><td><strong>Mechanism of symptoms</strong></td><td>Local inflammation: prostaglandins → pain; detrusor irritability → urgency</td><td>Systemic: IL-1/IL-6/TNF-α → hypothalamic fever; renal capsule stretch → flank pain</td></tr><tr><td><strong>Bacteremia risk</strong></td><td>Rare</td><td>Common (20-30%)</td></tr></table><h4>Why Women Get More UTIs Than Men</h4><ul><li><strong>Short urethra:</strong> ~4cm (vs 20cm in men) - shorter distance for bacteria to travel</li><li><strong>Proximity to rectum:</strong> Fecal flora (E. coli) easily colonize periurethral area</li><li><strong>No prostatic secretions:</strong> Prostate makes antibacterial zinc and proteins</li><li><strong>Sexual intercourse:</strong> Mechanical introduction of bacteria into urethra</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Vesicoureteral reflux:</strong> Allows bladder bacteria to reach kidney - important in pediatric UTIs</li><li>→ <strong>Pregnancy UTIs:</strong> Progesterone relaxes ureters → stasis → increased pyelonephritis risk</li><li>→ <strong>Urosepsis:</strong> Pyelonephritis → bacteremia → sepsis (→ see Sepsis module)</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://academic.oup.com/cid/article/52/5/e103/388285" target="_blank">Gupta K, et al. IDSA UTI Guidelines 2010</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4457377/" target="_blank">UPEC Virulence Factors Review</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK482435/" target="_blank">StatPearls: Urinary Tract Infection</a></li></ol></div>',bw:['Type 1 fimbriae = bladder','P fimbriae = kidney (ascending)','Cystitis = local','Pyelonephritis = systemic (fever)','Women: short urethra']}},
+dist:{b:'No fever or flank pain - absence of systemic symptoms indicates infection confined to bladder',c:'Healthy non-pregnant woman with typical symptoms = uncomplicated by definition',d:'She has symptoms (dysuria, frequency) - asymptomatic bacteriuria is bacteria WITHOUT symptoms'},
+related:[7,8,9]},
+
+7:{type:'Cystitis Treatment: Pharmacology Deep Dive',isNBME:true,difficulty:'medium',domains:['pharmacology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'28-year-old healthy woman',hpi:'Dysuria, frequency x2 days. No fever, no flank pain.',pmh:'None',allergies:'None',vitals:'Afebrile',exam:'Suprapubic tenderness, no CVA tenderness',labs:'UA: LE+, nitrite+, WBC 20-50'},
+stem:'What is first-line treatment, and HOW does each antibiotic work against urinary pathogens?',
+opts:[['a','Nitrofurantoin 100mg BID x5d (damages bacterial DNA/ribosomes) OR TMP-SMX (blocks folate synthesis) OR fosfomycin 3g x1 (inhibits cell wall synthesis)'],['b','Ciprofloxacin 500mg BID x7d'],['c','Amoxicillin 500mg TID x7d'],['d','Ceftriaxone 1g IV']],
+exp:'<strong>First-line agents</strong> are chosen for efficacy, low resistance, and minimal collateral damage. <strong>Nitrofurantoin</strong> is a prodrug activated by bacterial reductases → damages DNA, RNA, and proteins. <strong>TMP-SMX</strong> blocks sequential steps in folate synthesis (needed for DNA synthesis). <strong>Fosfomycin</strong> inhibits MurA → blocks early peptidoglycan synthesis.',
+kp:'Nitrofurantoin is "ecologically friendly" - concentrates in urine but not gut → less selection for resistant gut flora. This is why its preferred over FQs despite both being effective.',
+dd:{pharmacology:{title:'UTI Antibiotics: Mechanism by Mechanism',content:'<h4>Nitrofurantoin: A Unique Multi-Target Agent</h4><p><strong>Mechanism:</strong> A prodrug that requires bacterial nitroreductases for activation. Active metabolites attack multiple targets:</p><ul><li>DNA damage (strand breaks)</li><li>Ribosomal protein damage (inhibits protein synthesis)</li><li>Inhibits acetyl CoA enzymes (blocks cell wall synthesis)</li></ul><p><strong>Why its excellent for cystitis:</strong></p><ul><li>Concentrates in urine (renal excretion) → high urinary levels</li><li>Low serum levels → minimal gut exposure → less resistance selection</li><li>Multiple mechanisms → resistance is rare (requires multiple mutations)</li></ul><p><strong>Limitation:</strong> Does NOT achieve therapeutic tissue levels → NEVER for pyelonephritis!</p><h4>TMP-SMX: Sequential Folate Blockade</h4><p><strong>Mechanism:</strong> Dual blockade of tetrahydrofolate synthesis (required for thymidine → DNA):</p><table class="drug-table"><tr><th>Drug</th><th>Target</th><th>Pathway</th></tr><tr><td><strong>Sulfamethoxazole</strong></td><td>Dihydropteroate synthase</td><td>PABA → Dihydropteroic acid</td></tr><tr><td><strong>Trimethoprim</strong></td><td>Dihydrofolate reductase</td><td>Dihydrofolate → Tetrahydrofolate</td></tr></table><p><strong>Synergy:</strong> Blocking two sequential steps = bactericidal (vs bacteriostatic alone)</p><p><strong>Why resistance matters:</strong> ~20-30% E. coli resistance in many areas → check local antibiogram</p><h4>Fosfomycin: Cell Wall Synthesis Inhibitor</h4><p><strong>Mechanism:</strong> Inhibits MurA (UDP-N-acetylglucosamine enolpyruvyl transferase) → blocks first step of peptidoglycan synthesis</p><p><strong>Advantages:</strong></p><ul><li>Single 3g dose (excellent adherence)</li><li>Unique target → low cross-resistance</li><li>Concentrates in urine</li></ul><p><strong>Disadvantage:</strong> Slightly less efficacy than multi-day regimens in some studies</p><h4>Why NOT Fluoroquinolones for Uncomplicated Cystitis?</h4><table class="drug-table"><tr><th>Reason</th><th>Explanation</th></tr><tr><td><strong>FDA Black Box Warning</strong></td><td>Tendinopathy/rupture, peripheral neuropathy, CNS effects, aortic aneurysm</td></tr><tr><td><strong>Resistance selection</strong></td><td>Broad spectrum → selects for resistant organisms in gut</td></tr><tr><td><strong>Collateral damage</strong></td><td>High C. diff risk; disrupts gut microbiome</td></tr><tr><td><strong>Reserve for serious infections</strong></td><td>Save for pyelonephritis, complicated UTI where theyre needed</td></tr></table><p><strong>FQ mechanism (for reference):</strong> Inhibit DNA gyrase (GN) and topoisomerase IV (GP) → prevent DNA supercoiling → bactericidal</p><h4>Why NOT β-Lactams?</h4><p>β-lactams (amoxicillin, cephalosporins) have <strong>inferior efficacy</strong> in UTI:</p><ul><li>Short half-lives → dont maintain adequate urinary levels between doses</li><li>Higher relapse rates in clinical trials</li><li>Reserve for pregnancy (where nitrofurantoin/TMP-SMX have trimesters to avoid)</li></ul><h4>Urinalysis Interpretation</h4><table class="drug-table"><tr><th>Finding</th><th>What It Measures</th><th>Significance</th></tr><tr><td><strong>Leukocyte esterase (LE)</strong></td><td>Enzyme from WBCs (neutrophils)</td><td>Pyuria - inflammatory response to infection</td></tr><tr><td><strong>Nitrite</strong></td><td>Bacterial conversion of nitrate → nitrite</td><td>Indicates Enterobacteriaceae (E. coli, Klebsiella) - NOT all bacteria produce nitrite</td></tr><tr><td><strong>WBCs on microscopy</strong></td><td>Direct count</td><td>>5 WBC/hpf = pyuria</td></tr><tr><td><strong>Bacteria</strong></td><td>Direct visualization</td><td>Correlates with significant bacteriuria</td></tr></table><h4>🔗 Connections</h4><ul><li>→ <strong>Recurrent UTI prophylaxis:</strong> Post-coital nitrofurantoin or TMP-SMX</li><li>→ <strong>Pregnancy UTIs:</strong> Nitrofurantoin OK except near term; avoid TMP-SMX 1st/3rd trimester</li><li>→ <strong>Antibiotic stewardship:</strong> First-line agents preserve FQs for serious infections</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://academic.oup.com/cid/article/52/5/e103/388285" target="_blank">IDSA UTI Guidelines 2010</a></li><li><a href="https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-fda-updates-warnings-fluoroquinolone-antibiotics" target="_blank">FDA Fluoroquinolone Warning</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK470526/" target="_blank">StatPearls: Nitrofurantoin</a></li></ol></div>',bw:['Nitrofurantoin = multiple targets, urine only','TMP-SMX = folate synthesis block','Fosfomycin = MurA inhibition','FQ = DNA gyrase (save for pyelo)','LE+ = pyuria, Nitrite+ = Enterobacteriaceae']}},
+dist:{b:'FQs reserved for pyelonephritis - FDA black box warning for uncomplicated UTI; promotes resistance',c:'β-lactams have inferior efficacy for UTI - higher relapse rates',d:'IV therapy not needed for uncomplicated cystitis - oral agents achieve excellent urinary concentrations'},
+related:[6,8,9]},
+
+8:{type:'Pyelonephritis: Why Tissue Penetration Matters',isNBME:true,difficulty:'medium',domains:['pharmacology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'28-year-old woman',hpi:'Dysuria x3 days, now fever 102.8°F, left flank pain, nausea',pmh:'None',vitals:'T 102.8°F, HR 108, BP 108/68',exam:'Ill-appearing, left CVA tenderness',labs:'UA: WBC 50+, nitrite+; WBC 15,800'},
+stem:'Why does pyelonephritis require different antibiotics than cystitis?',
+opts:[['a','Pyelonephritis requires tissue-penetrating antibiotics (FQs, TMP-SMX) - nitrofurantoin achieves urinary but not renal parenchymal levels'],['b','Cystitis - nitrofurantoin x5d is adequate'],['c','Pyelonephritis - fosfomycin single dose works'],['d','All UTIs need IV antibiotics']],
+exp:'<strong>Pyelonephritis</strong> = infection of renal parenchyma (interstitium, tubules). Antibiotics must achieve adequate <strong>tissue concentrations</strong>, not just urinary levels. Nitrofurantoin is renally excreted → high urine but low tissue levels. FQs and TMP-SMX achieve excellent renal tissue penetration.',
+kp:'The pharmacokinetic principle: For bladder infection (cystitis), you need urinary levels. For kidney infection (pyelonephritis), you need TISSUE levels. Different drugs excel at each.',
+dd:{pharmacology:{title:'Pyelonephritis: Pharmacokinetic Considerations',content:'<h4>Why Nitrofurantoin Fails in Pyelonephritis</h4><p>Nitrofurantoin pharmacokinetics:</p><ul><li><strong>Rapid renal excretion</strong> → very HIGH urinary concentrations</li><li><strong>Minimal serum levels</strong> → very LOW tissue concentrations</li><li>For cystitis: High urinary levels = effective (bacteria in bladder lumen)</li><li>For pyelonephritis: Bacteria are in kidney TISSUE → need tissue penetration</li></ul><h4>Drug Penetration into Kidney Tissue</h4><table class="drug-table"><tr><th>Drug</th><th>Urinary Level</th><th>Tissue Level</th><th>Pyelonephritis Use</th></tr><tr><td><strong>Fluoroquinolones</strong></td><td>High</td><td><strong>High</strong> (lipophilic, excellent tissue penetration)</td><td>✅ First-line</td></tr><tr><td><strong>TMP-SMX</strong></td><td>High</td><td><strong>High</strong> (concentrates in renal interstitium)</td><td>✅ First-line</td></tr><tr><td><strong>Nitrofurantoin</strong></td><td>Very High</td><td><strong>Very Low</strong></td><td>❌ NEVER</td></tr><tr><td><strong>Fosfomycin</strong></td><td>High</td><td>Moderate</td><td>❌ Inadequate for tissue infection</td></tr><tr><td><strong>Ceftriaxone</strong></td><td>High</td><td><strong>High</strong></td><td>✅ Inpatient first-line</td></tr></table><h4>Pyelonephritis Treatment by Setting</h4><table class="drug-table"><tr><th>Setting</th><th>Treatment</th><th>Duration</th></tr><tr><td><strong>Outpatient</strong></td><td>Ciprofloxacin 500mg BID<br>OR Levofloxacin 750mg daily<br>OR TMP-SMX DS BID (if susceptible)</td><td>FQ: 5-7 days<br>TMP-SMX: 14 days</td></tr><tr><td><strong>Inpatient</strong></td><td>Ceftriaxone 1g IV daily<br>OR FQ IV<br>OR Aminoglycoside ± ampicillin</td><td>Until stable, then complete PO</td></tr></table><h4>When to Hospitalize</h4><ul><li><strong>Unable to tolerate PO:</strong> Vomiting → cant absorb oral antibiotics</li><li><strong>Hemodynamic instability:</strong> Signs of sepsis (hypotension, tachycardia)</li><li><strong>Obstruction suspected:</strong> Needs imaging and possible intervention</li><li><strong>Pregnancy:</strong> Higher risk of complications; need IV therapy and monitoring</li><li><strong>Failed outpatient therapy:</strong> Worsening after 48-72h of antibiotics</li></ul><h4>The Bacteremia Question</h4><p><strong>20-30% of pyelonephritis patients have bacteremia.</strong> Does this change management?</p><ul><li>Routine blood cultures: Not needed in uncomplicated cases (wont change management)</li><li>Obtain cultures if: Sepsis, immunocompromised, hospitalized, no improvement in 48h</li><li>Treatment duration: Same whether or not bacteremic (kidney is the source)</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Emphysematous pyelonephritis:</strong> Gas-forming infection (diabetics, obstruction) - surgical emergency</li><li>→ <strong>Renal abscess:</strong> May need drainage; prolonged antibiotics</li><li>→ <strong>Xanthogranulomatous pyelonephritis:</strong> Chronic, often with obstruction; may need nephrectomy</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.aafp.org/pubs/afp/issues/2011/0901/p519.html" target="_blank">Pyelonephritis Management AFP 2011</a></li><li><a href="https://academic.oup.com/cid/article/52/5/e103/388285" target="_blank">IDSA UTI Guidelines</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK519537/" target="_blank">StatPearls: Pyelonephritis</a></li></ol></div>',bw:['Nitrofurantoin = urine only, NO tissue','FQ/TMP-SMX = tissue penetration','Ceftriaxone = inpatient first-line','20-30% bacteremia','Admit if: vomiting, sepsis, obstruction, pregnancy']}},
+dist:{b:'Nitrofurantoin does NOT achieve renal tissue levels - completely inadequate for parenchymal infection',c:'Fosfomycin is inadequate for tissue infections - single dose cannot eradicate pyelonephritis',d:'Many pyelonephritis cases can be treated as outpatient with oral FQs if patient is stable and can tolerate PO'},
+related:[6,7,9,10]},
+
+9:{type:'Complicated UTI: Understanding Risk Factors',isNBME:false,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step2'],
+ctx:'Why do certain factors change UTI management?',
+stem:'Which factors make a UTI "complicated," and WHY does each increase treatment failure risk?',
+opts:[['a','Male sex (prostate sanctuary), pregnancy (ureteral stasis), catheter (biofilm), obstruction (impaired drainage), immunocompromised (reduced clearance)'],['b','Presence of dysuria'],['c','Young healthy female with first UTI'],['d','Positive nitrite on UA']],
+exp:'<strong>Complicated UTI</strong> = structural/functional abnormality OR host factor that impairs normal defenses. Each has a mechanism: Males have prostate (antibiotic sanctuary), pregnancy causes progesterone-mediated ureteral dilation (stasis), catheters form biofilms (1000x MIC increase), obstruction prevents washout.',
+kp:'Common theme: anything that impairs "wash-out" defense (urine flow) or creates antibiotic-inaccessible sites (biofilm, prostate, abscess) = complicated. Treat longer, broader, with culture guidance.',
+dd:{mechanism:{title:'Complicated UTI: Mechanism of Each Risk Factor',content:'<h4>Why Each Factor Complicates Treatment</h4><table class="drug-table"><tr><th>Factor</th><th>Pathophysiologic Mechanism</th><th>Management Implication</th></tr><tr><td><strong>Male sex</strong></td><td>Prostate = sanctuary site with poor antibiotic penetration; bacteria persist in prostatic tissue</td><td>All male UTIs complicated; FQs penetrate prostate; longer treatment</td></tr><tr><td><strong>Pregnancy</strong></td><td>Progesterone → ureteral smooth muscle relaxation → dilation and stasis; mechanical uterine compression</td><td>Screen/treat ASB (20-40% → pyelo without Rx); safe abx only</td></tr><tr><td><strong>Catheter</strong></td><td>Biofilm: bacteria adhere → secrete EPS matrix → 100-1000x MIC increase; metabolically dormant</td><td>MUST remove/replace catheter; biofilm antibiotics cant penetrate</td></tr><tr><td><strong>Obstruction</strong></td><td>Impaired drainage → stasis → bacterial proliferation; increased pressure → bacteremia risk</td><td>Relieve obstruction (stent, nephrostomy); antibiotics alone fail</td></tr><tr><td><strong>Immunocompromised</strong></td><td>Neutropenia, T-cell defects → impaired bacterial clearance; unusual organisms</td><td>Broader coverage; longer duration; watch for fungi</td></tr></table><h4>The Biofilm Problem</h4><p><strong>Biofilm formation on catheters:</strong></p><ol><li>Conditioning film (proteins) coats catheter (hours)</li><li>Planktonic bacteria adhere via fimbriae (day 1-3)</li><li>EPS matrix secretion creates protected community (day 3-7)</li><li>Mature biofilm: dormant bacteria, water channels, gene transfer</li></ol><p><strong>Why antibiotics fail:</strong> Poor matrix penetration, dormant bacteria not susceptible, altered pH/O2</p><h4>🔗 Connections</h4><ul><li>→ <strong>Chronic prostatitis:</strong> Same concept - prostate sanctuary requires FQ × 4-6 weeks</li><li>→ <strong>Pregnancy ASB:</strong> Only population where we treat asymptomatic bacteriuria (prevents pyelo)</li><li>→ <strong>Emphysematous pyelonephritis:</strong> DM + obstruction + gas-forming organisms = surgical emergency</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://academic.oup.com/cid/article/52/5/e103/388285" target="_blank">IDSA UTI Guidelines</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3708490/" target="_blank">Biofilm in CAUTI</a></li></ol></div>',bw:['Male = prostate sanctuary','Catheter = biofilm (1000x MIC)','Obstruction = drainage failure','Pregnancy = treat ASB','Always get culture']}},
+dist:{b:'Dysuria is a symptom, not a complicating factor',c:'Young healthy female = definition of UNcomplicated',d:'Nitrite just indicates Enterobacteriaceae present'},
+related:[6,8,10]},
+
+10:{type:'CAUTI: Source Control Principles',isNBME:false,difficulty:'medium',domains:['mechanism','pharmacology'],tags:['Step2'],
+ctx:'Managing catheter-associated UTI requires understanding biofilm.',
+stem:'Why must the catheter be removed/replaced in CAUTI management?',
+opts:[['a','Biofilm on catheter creates antibiotic-resistant bacterial sanctuary - source control principle; treat only symptomatic patients'],['b','Treat all positive cultures regardless of symptoms'],['c','Prophylactic antibiotics prevent CAUTI'],['d','Bacteriuria in catheterized patients is always pathologic']],
+exp:'<strong>Catheter removal/replacement</strong> is essential because biofilm bacteria are 100-1000x more resistant to antibiotics. This is the <strong>source control principle</strong>: remove the nidus of infection. Culturing through old catheter grows biofilm organisms, not necessarily the infecting strain.',
+kp:'Asymptomatic bacteriuria is UNIVERSAL in catheterized patients (100% by day 30). Treating ASB promotes resistance without benefit. Only treat SYMPTOMATIC CAUTI after catheter change.',
+dd:{mechanism:{title:'CAUTI: Biofilm and Source Control',content:'<h4>Why Source Control Matters</h4><p>The <strong>source control principle</strong>: When infection involves a foreign body or undrained collection, antibiotics alone fail. Must physically remove or drain the source.</p><table class="drug-table"><tr><th>Scenario</th><th>Source Control</th></tr><tr><td>Catheter UTI</td><td>Remove/replace catheter</td></tr><tr><td>Abscess</td><td>Incision & drainage</td></tr><tr><td>Empyema</td><td>Chest tube drainage</td></tr><tr><td>Cholangitis</td><td>Biliary decompression (ERCP)</td></tr><tr><td>Infected hardware</td><td>Remove prosthesis</td></tr></table><h4>Biofilm: The Antibiotic-Resistant Community</h4><p><strong>Structure:</strong> Bacteria embedded in extracellular polymeric substance (EPS) matrix</p><p><strong>Why antibiotics fail against biofilm:</strong></p><ul><li><strong>Penetration barrier:</strong> EPS matrix blocks antibiotic diffusion</li><li><strong>Metabolic dormancy:</strong> Persister cells in stationary phase - most antibiotics target growing bacteria</li><li><strong>Altered microenvironment:</strong> Low O2, acidic pH inactivate aminoglycosides, macrolides</li><li><strong>Resistance transfer:</strong> Horizontal gene transfer within biofilm community</li></ul><h4>Distinguishing Colonization from Infection</h4><table class="drug-table"><tr><th>Feature</th><th>Colonization (Dont Treat)</th><th>Infection (Treat)</th></tr><tr><td>Symptoms</td><td>None</td><td>Fever, rigors, flank pain, AMS, hematuria</td></tr><tr><td>UA findings</td><td>Bacteria, pyuria (expected)</td><td>Same (not helpful)</td></tr><tr><td>Management</td><td>Remove catheter when possible</td><td>Replace catheter + antibiotics</td></tr></table><p><strong>Key insight:</strong> Pyuria is universal in catheterized patients - it does NOT distinguish infection from colonization. Only SYMPTOMS matter.</p><h4>CAUTI Prevention</h4><ul><li>Avoid unnecessary catheters (biggest impact)</li><li>Remove catheters ASAP</li><li>Maintain closed drainage system</li><li>No routine catheter changes</li><li>NO antibiotic prophylaxis (promotes resistance)</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Sepsis source control:</strong> Same principle - must drain/remove infection source</li><li>→ <strong>Prosthetic joint infection:</strong> Often requires hardware removal</li><li>→ <strong>Central line infection:</strong> Line removal usually required</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2903040/" target="_blank">IDSA CAUTI Guidelines 2010</a></li><li><a href="https://www.cdc.gov/infection-control/hcp/cauti/index.html" target="_blank">CDC CAUTI Prevention</a></li></ol></div>',bw:['Source control = remove catheter','Biofilm = 100-1000x MIC','ASB universal by day 30','Treat only SYMPTOMATIC','Pyuria not helpful (always present)']}},
+dist:{b:'Treating colonization promotes resistance without clinical benefit',c:'Prophylaxis increases resistance and C. diff risk',d:'Bacteriuria is expected and universal in catheterized patients - not inherently pathologic'},
+related:[9,8]},
+11:{type:'Endocarditis Pathophysiology & Duke Criteria',isNBME:true,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'52-year-old man, IVDU',hpi:'Fever x2 weeks, malaise, night sweats',pmh:'IV heroin use',vitals:'T 103.2°F, HR 112, BP 98/62',exam:'New holosystolic murmur LLSB, splinter hemorrhages, Janeway lesions',labs:'Blood Cx: 2/2 S. aureus, TTE: 1.5cm tricuspid vegetation'},
+stem:'This patient has clinical findings of IE. What is the pathophysiologic basis for each finding, and does he meet Duke criteria?',
+opts:[['a','Yes - 2 major criteria (blood cultures + vegetation); murmur = turbulent flow past vegetation; embolic phenomena = septic emboli from friable vegetation'],['b','No - needs more minor criteria'],['c','Possible IE only'],['d','Duke criteria not applicable to IVDU']],
+exp:'<strong>Definite IE</strong> with 2 MAJOR criteria: (1) Blood cultures with typical organism, (2) Echo showing vegetation. His findings reflect IE pathophysiology: <strong>murmur</strong> = turbulent flow from vegetations/valve destruction; <strong>splinter hemorrhages</strong> = microemboli to nail bed capillaries; <strong>Janeway lesions</strong> = septic emboli to palms/soles (painLESS, unlike Oslers).',
+kp:'IVDU = right-sided IE (tricuspid) because venous blood carrying bacteria hits tricuspid valve first. Murmur at LLSB = tricuspid regurgitation. Right-sided IE has PULMONARY emboli (not stroke).',
+dd:{mechanism:{title:'Infective Endocarditis: Pathophysiology & Diagnosis',content:'<h4>How Does IE Develop?</h4><ol><li><strong>Endothelial damage:</strong> Turbulent flow (congenital defect, prosthetic valve) or direct trauma (IVDU, catheter) damages valve endothelium</li><li><strong>Sterile thrombus (NBTE):</strong> Platelets and fibrin deposit on damaged endothelium → nonbacterial thrombotic endocarditis</li><li><strong>Bacteremia:</strong> Transient bacteremia (dental work, IVDU, GI/GU procedures) seeds the NBTE</li><li><strong>Vegetation growth:</strong> Bacteria proliferate within fibrin-platelet matrix → protected from immune cells and some antibiotics</li><li><strong>Embolization:</strong> Friable vegetation fragments → septic emboli to brain, spleen, kidneys, lungs (right-sided)</li></ol><h4>Clinical Findings: Mechanism of Each</h4><table class="drug-table"><tr><th>Finding</th><th>Mechanism</th><th>Pathophysiology</th></tr><tr><td><strong>New murmur</strong></td><td>Turbulent flow</td><td>Vegetation causes obstruction; valve destruction causes regurgitation</td></tr><tr><td><strong>Fever</strong></td><td>Systemic inflammation</td><td>IL-1, IL-6, TNF-α from infected vegetation → hypothalamic PGE2</td></tr><tr><td><strong>Splinter hemorrhages</strong></td><td>Microemboli</td><td>Tiny septic emboli to nail bed capillaries → linear hemorrhages</td></tr><tr><td><strong>Janeway lesions</strong></td><td>Septic emboli</td><td>Emboli to palms/soles → microabscesses → painLESS erythematous macules</td></tr><tr><td><strong>Osler nodes</strong></td><td>Immune complex</td><td>Immune complexes deposit in fingertips → painFUL, raised nodules</td></tr><tr><td><strong>Roth spots</strong></td><td>Retinal emboli/immune</td><td>Retinal hemorrhages with pale centers (seen on fundoscopy)</td></tr><tr><td><strong>Glomerulonephritis</strong></td><td>Immune complex</td><td>Circulating immune complexes deposit in glomeruli → hematuria, RBC casts</td></tr></table><h4>Why IVDU = Right-Sided (Tricuspid)?</h4><p><strong>Anatomic flow:</strong> Venous blood (carrying injected bacteria) → right atrium → RIGHT VENTRICLE → hits <strong>tricuspid valve first</strong> → infection seeds there</p><p><strong>Clinical implications:</strong></p><ul><li>Murmur: Holosystolic at LLSB (tricuspid regurg) - increases with inspiration</li><li>Emboli: Go to LUNGS (pulmonary circulation) → septic pulmonary emboli, lung abscesses</li><li>No stroke: Brain is protected (left-sided emboli cause stroke)</li><li>Better prognosis: Tricuspid can be removed (surgically) if needed</li></ul><h4>Modified Duke Criteria: The Logic</h4><table class="drug-table"><tr><th>Category</th><th>Criteria</th><th>Rationale</th></tr><tr><td rowspan="2"><strong>MAJOR</strong></td><td>Blood cultures: typical organisms × 2 OR persistently positive</td><td>Continuous bacteremia from intravascular source</td></tr><tr><td>Echo: vegetation, abscess, new dehiscence, new regurgitation</td><td>Direct visualization of valvular infection</td></tr><tr><td rowspan="5"><strong>MINOR</strong></td><td>Predisposition (IVDU, valve disease)</td><td>Risk factor for seeding</td></tr><tr><td>Fever >38°C</td><td>Nonspecific but supportive</td></tr><tr><td>Vascular phenomena (emboli, Janeway, mycotic aneurysm)</td><td>Evidence of septic embolization</td></tr><tr><td>Immunologic (Osler nodes, Roth spots, GN, RF+)</td><td>Evidence of immune response</td></tr><tr><td>Suggestive micro/echo not meeting major</td><td>Supportive but not definitive</td></tr></table><p><strong>Diagnosis:</strong> 2 major OR 1 major + 3 minor OR 5 minor = <strong>DEFINITE IE</strong></p><h4>This Patients Score</h4><ul><li>✓ Major: Blood Cx 2/2 S. aureus</li><li>✓ Major: TTE vegetation</li><li>Also has: fever (minor), IVDU (minor), Janeway (minor), splinters (minor)</li><li><strong>= DEFINITE IE (2 major criteria alone sufficient)</strong></li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Culture-negative IE:</strong> HACEK organisms, Coxiella, Bartonella - need prolonged incubation or serology</li><li>→ <strong>S. bovis (gallolyticus):</strong> Associated with COLON CANCER - always get colonoscopy!</li><li>→ <strong>Prosthetic valve IE:</strong> Different organisms (coag-neg staph), worse prognosis</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296" target="_blank">AHA IE Guidelines 2015</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7169723/" target="_blank">Duke Criteria Review</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK557641/" target="_blank">StatPearls: Infective Endocarditis</a></li></ol></div>',bw:['NBTE → bacteremia → vegetation','IVDU = tricuspid (right-sided)','Janeway = painLESS emboli','Osler = painFUL immune','2 major = definite IE','S. bovis = colonoscopy!']}},
+dist:{b:'2 major criteria is sufficient for definite diagnosis - he exceeds requirements',c:'He meets definite criteria with 2 major; possible is only 1 major + 1 minor or 3 minor',d:'Duke criteria apply universally; IVDU is actually a minor criterion (predisposition)'},
+related:[12,13,14]},
+
+12:{type:'IE Microbiology: Organism-Specific Virulence',isNBME:false,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step1','Step2'],
+ctx:'Understanding which organisms cause IE in which settings guides empiric therapy.',
+stem:'What organisms most commonly cause native valve endocarditis, and WHY does each organism cause a different clinical syndrome?',
+opts:[['a','S. aureus (acute, destructive - coagulase/toxins), Viridans strep (subacute - low virulence, dental source), Enterococcus (subacute - GI/GU source, biofilm-former)'],['b','Pseudomonas primarily'],['c','Fungi predominantly'],['d','HACEK organisms only']],
+exp:'<strong>Organism virulence determines clinical presentation:</strong> S. aureus has aggressive toxins (coagulase, hemolysins) → rapid valve destruction, acute presentation. Viridans strep is low-virulence normal flora → slow growth, subacute course. Enterococcus forms biofilms and tolerates host defenses → indolent but difficult to eradicate.',
+kp:'ACUTE IE (days-weeks): S. aureus - destroys normal valves. SUBACUTE IE (weeks-months): Viridans strep, Enterococcus - usually on abnormal valves. The timeline reflects organism virulence.',
+dd:{mechanism:{title:'IE Organisms: Virulence and Clinical Correlations',content:'<h4>Why Organism Matters: Virulence Determines Presentation</h4><table class="drug-table"><tr><th>Organism</th><th>Virulence Level</th><th>Key Factors</th><th>Clinical Course</th><th>Valve</th></tr><tr><td><strong>S. aureus</strong></td><td>HIGH</td><td>Coagulase, protein A, hemolysins, PVL</td><td>ACUTE (days-weeks)</td><td>Normal or abnormal</td></tr><tr><td><strong>Viridans strep</strong></td><td>LOW</td><td>Dextran (adheres to damaged valves)</td><td>SUBACUTE (weeks-months)</td><td>Usually abnormal</td></tr><tr><td><strong>Enterococcus</strong></td><td>LOW-MODERATE</td><td>Biofilm, aggregation substance</td><td>SUBACUTE</td><td>Usually abnormal</td></tr><tr><td><strong>S. bovis</strong></td><td>LOW</td><td>Collagen-binding proteins</td><td>SUBACUTE</td><td>Associated with COLON CA</td></tr></table><h4>S. aureus: The Valve Destroyer</h4><table class="drug-table"><tr><th>Virulence Factor</th><th>Mechanism</th><th>Clinical Effect</th></tr><tr><td><strong>Coagulase</strong></td><td>Fibrinogen → fibrin</td><td>Creates vegetation matrix; protects bacteria</td></tr><tr><td><strong>Protein A</strong></td><td>Binds IgG Fc</td><td>Evades opsonization</td></tr><tr><td><strong>α-hemolysin</strong></td><td>Pore-forming toxin</td><td>Tissue destruction, valve perforation</td></tr><tr><td><strong>Proteases</strong></td><td>Degrade tissue</td><td>Rapid valve destruction, abscess formation</td></tr></table><p><strong>Clinical signature:</strong> Acute presentation (days), can infect NORMAL valves, rapid valve destruction, high embolic rate, abscess formation</p><h4>Viridans Streptococci: Low and Slow</h4><p><strong>Source:</strong> Normal oral flora → enter bloodstream during dental procedures or poor dental hygiene</p><p><strong>Why subacute:</strong></p><ul><li>Low virulence - dont produce tissue-destroying toxins</li><li>Produce dextran - sticky polysaccharide that helps adhere to damaged (not normal) valves</li><li>Slow growth within vegetation</li></ul><p><strong>Clinical signature:</strong> Weeks to months of malaise, low-grade fever, weight loss; usually on previously ABNORMAL valves</p><h4>Enterococcus: The Biofilm Former</h4><p><strong>Source:</strong> GI/GU flora → bacteremia from GI procedures, UTIs</p><p><strong>Why difficult to treat:</strong></p><ul><li>Intrinsic resistance to many antibiotics (cephalosporins, aminoglycosides alone)</li><li>Biofilm formation on valves</li><li>Tolerance (survives but doesnt die with bacteriostatic agents)</li></ul><p><strong>Treatment requires:</strong> Synergistic combination (ampicillin + gentamicin or ampicillin + ceftriaxone)</p><h4>Setting-Based Organism Prediction</h4><table class="drug-table"><tr><th>Clinical Setting</th><th>Most Likely Organism</th><th>Why</th></tr><tr><td>IVDU</td><td>S. aureus (MSSA often)</td><td>Skin flora introduced by injection</td></tr><tr><td>Poor dentition</td><td>Viridans streptococci</td><td>Oral flora bacteremia</td></tr><tr><td>GI/GU procedure</td><td>Enterococcus</td><td>Mucosal breach, enterococcal bacteremia</td></tr><tr><td>Healthcare-associated</td><td>S. aureus (MRSA), Enterococcus</td><td>Nosocomial organisms</td></tr><tr><td>Prosthetic valve (<1yr)</td><td>Coag-neg staph, S. aureus</td><td>Surgical contamination</td></tr><tr><td>Prosthetic valve (>1yr)</td><td>Same as native valve</td><td>Community acquisition</td></tr><tr><td>Colon cancer</td><td>S. bovis (gallolyticus)</td><td>GI translocation; ALWAYS scope!</td></tr></table><h4>Culture-Negative IE: The Diagnostic Challenge</h4><p>~10% of IE is culture-negative. Causes:</p><ul><li><strong>Prior antibiotics:</strong> Most common - always ask!</li><li><strong>HACEK:</strong> Slow-growing gram-negatives (hold cultures 2-3 weeks)</li><li><strong>Coxiella burnetii (Q fever):</strong> Serology required</li><li><strong>Bartonella:</strong> Cat exposure; serology</li><li><strong>Fungi:</strong> Immunocompromised, prosthetic valves</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Dental prophylaxis:</strong> Only for highest-risk patients (prosthetic valve, previous IE, congenital heart disease)</li><li>→ <strong>S. bovis → Colonoscopy:</strong> 25-80% have colonic lesions (polyps or cancer)</li><li>→ <strong>Enterococcal synergy:</strong> Cell wall agent (ampicillin) allows aminoglycoside entry → killing</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3278052/" target="_blank">IE Microbiology Review</a></li><li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296" target="_blank">AHA IE Guidelines 2015</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4040877/" target="_blank">S. bovis and Colorectal Cancer</a></li></ol></div>',bw:['S. aureus = acute, destroys valves','Viridans = subacute, dental, dextran','Enterococcus = GI/GU, biofilm, needs synergy','S. bovis = COLONOSCOPY!','HACEK = culture-negative']}},
+dist:{b:'Pseudomonas IE is rare - seen in IVDU but much less common than S. aureus',c:'Fungal IE is rare - mainly prosthetic valves, immunocompromised, central lines',d:'HACEK organisms cause ~5% of native valve IE - minority of cases'},
+related:[11,13,14]},
+
+13:{type:'IE Treatment: Pharmacology of Prolonged Therapy',isNBME:true,difficulty:'hard',domains:['pharmacology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'52-year-old IVDU with S. aureus tricuspid IE',hpi:'MSSA on susceptibilities',pmh:'IVDU, HIV negative',vitals:'Improving on current therapy',exam:'Vegetation stable at 1.5cm',labs:'Blood Cx cleared day 3'},
+stem:'Why does IE require 4-6 weeks of IV antibiotics, and why is nafcillin superior to vancomycin for MSSA?',
+opts:[['a','Vegetation creates protected sanctuary with high bacterial density (10^9-10 CFU/g); nafcillin is bactericidal and achieves higher kill rates than vancomycin for MSSA'],['b','Vancomycin is preferred regardless of susceptibility'],['c','Oral antibiotics for 2 weeks is adequate'],['d','Ceftriaxone alone is first-line for S. aureus']],
+exp:'<strong>Prolonged therapy rationale:</strong> Vegetations contain 10^9-10^10 bacteria/gram in a fibrin matrix, metabolically protected. Takes weeks of sustained bactericidal concentrations to sterilize. <strong>Nafcillin > vancomycin for MSSA:</strong> β-lactams are more rapidly bactericidal; vancomycin has slower killing kinetics and clinical outcomes are inferior.',
+kp:'The MIC doesnt tell the whole story - KILL RATE matters. Nafcillin kills MSSA faster than vancomycin even when MICs are similar. This is why we use the most effective agent available.',
+dd:{pharmacology:{title:'IE Antibiotic Therapy: Deep Dive',content:'<h4>Why 4-6 Weeks of IV Therapy?</h4><p><strong>The vegetation problem:</strong></p><ul><li>Bacterial density: 10^9-10^10 CFU/gram (highest in any infection)</li><li>Fibrin-platelet matrix protects bacteria from immune cells</li><li>Slow bacterial metabolism in vegetation core</li><li>No blood supply INTO vegetation - relies on diffusion</li></ul><p><strong>Pharmacokinetic challenge:</strong></p><ul><li>Need sustained bactericidal concentrations for weeks</li><li>Oral antibiotics: Variable absorption, lower peak levels</li><li>IV ensures reliable, high drug levels</li></ul><h4>Why Nafcillin/Oxacillin > Vancomycin for MSSA?</h4><table class="drug-table"><tr><th>Parameter</th><th>Nafcillin</th><th>Vancomycin</th></tr><tr><td><strong>Mechanism</strong></td><td>Inhibits PBPs → rapid cell wall disruption</td><td>Binds D-Ala-D-Ala → slower cell wall inhibition</td></tr><tr><td><strong>Killing kinetics</strong></td><td>Rapidly bactericidal (time-dependent)</td><td>Slowly bactericidal</td></tr><tr><td><strong>Clinical outcomes</strong></td><td>Lower mortality, faster cure</td><td>Higher mortality, more treatment failures</td></tr><tr><td><strong>Penetration</strong></td><td>Good tissue levels</td><td>Variable; needs monitoring</td></tr></table><p><strong>Bottom line:</strong> For MSSA, ALWAYS use nafcillin/oxacillin. Vancomycin only if true β-lactam allergy or MRSA.</p><h4>Treatment by Organism</h4><table class="drug-table"><tr><th>Organism</th><th>Treatment</th><th>Duration</th><th>Notes</th></tr><tr><td><strong>MSSA - native valve</strong></td><td>Nafcillin/Oxacillin 12g/day IV</td><td>6 weeks</td><td>May add gentamicin first 3-5 days</td></tr><tr><td><strong>MRSA - native valve</strong></td><td>Vancomycin (trough 15-20) OR Daptomycin 8-10mg/kg</td><td>6 weeks</td><td>Daptomycin NOT for left-sided (inactivated by surfactant)</td></tr><tr><td><strong>Viridans strep (penicillin-susceptible)</strong></td><td>Penicillin G OR Ceftriaxone</td><td>4 weeks</td><td>Can do 2-week course with gentamicin synergy</td></tr><tr><td><strong>Enterococcus</strong></td><td>Ampicillin + Gentamicin OR Ampicillin + Ceftriaxone</td><td>4-6 weeks</td><td>Need synergistic combination (cell wall + aminoglycoside)</td></tr><tr><td><strong>Prosthetic valve S. aureus</strong></td><td>Nafcillin + Rifampin + Gentamicin</td><td>≥6 weeks</td><td>Rifampin for biofilm; gentamicin first 2 weeks</td></tr></table><h4>The Enterococcal Synergy Problem</h4><p><strong>Why enterococci need combination therapy:</strong></p><ul><li>Intrinsically resistant to cephalosporins (low PBP affinity)</li><li>Aminoglycosides alone are bacteriostatic (dont enter cell)</li><li><strong>Synergy:</strong> Cell wall agent (ampicillin) damages cell wall → aminoglycoside enters → kills bacteria</li></ul><p><strong>Alternative synergy:</strong> Ampicillin + Ceftriaxone - double β-lactam saturates different PBPs; used if aminoglycoside resistance</p><h4>Right-Sided (Tricuspid) IE: Can We Shorten?</h4><p>In IVDU with uncomplicated right-sided S. aureus IE:</p><ul><li>2-week IV nafcillin may be adequate if: Vegetation <2cm, no extrapulmonary spread, no renal failure, good response</li><li>Rationale: Right heart tolerates some valve damage; pulmonary emboli less devastating than systemic</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Daptomycin</strong>: Lipopeptide - inserts into membrane → depolarization; inactivated by pulmonary surfactant (no left-sided IE)</li><li>→ <strong>Rifampin for prosthetic</strong>: Penetrates biofilm; must use with another agent (rapid resistance if monotherapy)</li><li>→ <strong>Aminoglycoside monitoring</strong>: Nephrotoxicity and ototoxicity - limit duration</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296" target="_blank">AHA IE Guidelines 2015</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3122637/" target="_blank">Nafcillin vs Vancomycin for MSSA</a></li><li><a href="https://academic.oup.com/cid/article/60/5/741/359515" target="_blank">Enterococcal IE Synergy</a></li></ol></div>',bw:['Vegetation = 10^9-10 CFU/g','Nafcillin > vancomycin for MSSA','6 weeks IV standard','Enterococcus needs synergy','Daptomycin inactivated by surfactant (no lungs)']}},
+dist:{b:'Vancomycin has inferior outcomes for MSSA - slower kill kinetics; reserve for MRSA or β-lactam allergy',c:'Oral therapy cannot reliably sterilize vegetations - need sustained high IV levels',d:'Ceftriaxone is first-line for streptococci, not staphylococci'},
+related:[11,12,14,15]},
+
+14:{type:'IE Complications: Pathophysiology of Emboli',isNBME:false,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step2'],
+ctx:'Understanding complications guides monitoring and surgical decision-making.',
+stem:'What are the major complications of IE, and what is the mechanism of each?',
+opts:[['a','Heart failure (valve destruction), embolic stroke (vegetation fragments), abscess (local invasion), mycotic aneurysm (septic emboli to arterial wall)'],['b','Fever is the only complication'],['c','Complications limited to the heart'],['d','IE is self-limiting with antibiotics']],
+exp:'<strong>IE complications</strong> result from three mechanisms: (1) <strong>Local valve destruction</strong> → regurgitation → heart failure; (2) <strong>Embolization</strong> → stroke, splenic infarct, septic pulmonary emboli; (3) <strong>Metastatic infection</strong> → abscess, mycotic aneurysm, osteomyelitis. Heart failure is #1 cause of death and most common surgical indication.',
+kp:'Left-sided IE → systemic emboli (brain, spleen, kidneys). Right-sided IE → pulmonary emboli. Embolic risk is highest in first 2 weeks and with large (>10mm), mobile vegetations.',
+dd:{mechanism:{title:'IE Complications: Mechanism-Based Understanding',content:'<h4>Three Pathways to Complications</h4><table class="drug-table"><tr><th>Mechanism</th><th>Complications</th><th>Clinical Features</th></tr><tr><td><strong>1. Local valve destruction</strong></td><td>Valve perforation, regurgitation, heart failure</td><td>New/changing murmur, pulmonary edema, hypotension</td></tr><tr><td><strong>2. Embolization</strong></td><td>Stroke, splenic/renal infarcts, pulmonary septic emboli</td><td>Focal neuro deficits, LUQ pain, pleuritic chest pain</td></tr><tr><td><strong>3. Metastatic infection</strong></td><td>Abscess (brain, spleen, spine), mycotic aneurysm, osteomyelitis</td><td>Persistent fever, back pain, new headache</td></tr></table><h4>Heart Failure: The #1 Killer</h4><p><strong>Mechanism:</strong></p><ol><li>Vegetation interferes with valve closure</li><li>Bacterial toxins and inflammation destroy valve tissue</li><li>Valve perforation or chordae rupture → acute severe regurgitation</li><li>Acute volume overload → pulmonary edema → cardiogenic shock</li></ol><p><strong>Aortic vs Mitral:</strong></p><ul><li>Aortic regurgitation: More likely to cause acute decompensation (LV not adapted)</li><li>Mitral regurgitation: May be more gradually tolerated</li></ul><h4>Embolic Complications by Valve</h4><table class="drug-table"><tr><th>Valve</th><th>Emboli Destination</th><th>Complications</th></tr><tr><td><strong>Left-sided (aortic, mitral)</strong></td><td>Systemic circulation</td><td>Stroke (20-40%!), splenic infarct/abscess, renal infarct, mesenteric ischemia, septic arthritis</td></tr><tr><td><strong>Right-sided (tricuspid)</strong></td><td>Pulmonary circulation</td><td>Septic pulmonary emboli, lung abscess, empyema (NOT stroke!)</td></tr></table><h4>Mycotic Aneurysm: A Feared Complication</h4><p><strong>Mechanism:</strong></p><ol><li>Septic emboli lodge in arterial vasa vasorum (small vessels supplying artery wall)</li><li>Infection weakens arterial wall</li><li>Aneurysm forms at points of weakness</li><li>Risk of rupture → hemorrhage (intracerebral, subarachnoid)</li></ol><p><strong>Locations:</strong> Cerebral (most feared), visceral, peripheral</p><p><strong>Management:</strong> May need neurosurgical/vascular intervention before cardiac surgery</p><h4>Perivalvular Abscess</h4><p><strong>Why it matters:</strong></p><ul><li>Extension of infection beyond valve into surrounding tissue</li><li>Aortic root abscess can → AV block (conduction tissue involvement)</li><li>Fistula formation (aortic root to RA, etc.)</li><li>Usually requires surgery - antibiotics cant sterilize</li></ul><p><strong>Suspect if:</strong> Persistent fever despite antibiotics, new conduction abnormalities (AV block), worsening heart failure</p><h4>🔗 Connections</h4><ul><li>→ <strong>Stroke in IE:</strong> Dont anticoagulate! (Hemorrhagic transformation risk from mycotic aneurysms)</li><li>→ <strong>Splenic abscess:</strong> May need splenectomy if not responding to antibiotics</li><li>→ <strong>Vertebral osteomyelitis:</strong> Back pain in IE patient = MRI spine</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4547570/" target="_blank">IE Complications Review</a></li><li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296" target="_blank">AHA IE Guidelines 2015</a></li></ol></div>',bw:['HF = #1 death cause','Left-sided = stroke (20-40%)','Right-sided = pulmonary emboli','Mycotic aneurysm = arterial wall infection','Abscess = surgery usually needed']}},
+dist:{b:'IE has multi-organ complications from embolization, local destruction, and metastatic spread',c:'Embolization causes brain, spleen, kidney, lung complications',d:'Even with antibiotics, vegetations can embolize and valves can be destroyed'},
+related:[13,15,11]},
+
+15:{type:'IE Surgery: Indications and Timing',isNBME:false,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+ctx:'Surgical intervention is often life-saving in IE.',
+stem:'When is surgery indicated for IE, and why should it not be delayed for active infection?',
+opts:[['a','Heart failure from valve dysfunction (#1), uncontrolled infection (abscess, persistent bacteremia), large mobile vegetation (>10mm, embolic risk) - active infection is NOT a contraindication'],['b','All IE requires surgery'],['c','Surgery only after completing full antibiotic course'],['d','Active infection is absolute contraindication to surgery']],
+exp:'<strong>Surgical indications</strong> are based on conditions where medical therapy alone has unacceptable outcomes. <strong>Active infection is NOT a contraindication</strong> - mortality is higher with delayed surgery when indications are present. The valve can be replaced/repaired even during active bacteremia with appropriate antibiotic coverage.',
+kp:'Dont wait for antibiotics to "sterilize" - if surgical indication exists, operate. Surgery + antibiotics saves more lives than antibiotics alone when indications are met.',
+dd:{mechanism:{title:'IE Surgery: Evidence-Based Indications',content:'<h4>Why Surgery During Active Infection?</h4><p><strong>The old thinking:</strong> "Sterilize the infection first with antibiotics, then operate"</p><p><strong>The evidence:</strong> In patients with surgical indications, early surgery (during initial hospitalization) has LOWER mortality than medical therapy with delayed surgery</p><p><strong>The logic:</strong></p><ul><li>Waiting allows ongoing valve destruction, emboli, and complications</li><li>New prosthetic valve in clean surgical field has low re-infection rate (2-3%)</li><li>Continuing IV antibiotics post-op addresses any residual infection</li></ul><h4>Class I Surgical Indications (Strongly Recommended)</h4><table class="drug-table"><tr><th>Indication</th><th>Mechanism/Rationale</th><th>Timing</th></tr><tr><td><strong>Heart failure from valve dysfunction</strong></td><td>Valve destruction → regurgitation → pulmonary edema; medical therapy cant fix mechanical problem</td><td>Emergency/Urgent</td></tr><tr><td><strong>Uncontrolled infection</strong><ul><li>Abscess/fistula</li><li>Persistent bacteremia >5-7 days</li><li>Enlarging vegetation on therapy</li></ul></td><td>Antibiotics cant penetrate abscess; source control needed</td><td>Urgent</td></tr><tr><td><strong>Fungal or highly resistant organism</strong></td><td>Medical cure rate very low; need debridement</td><td>Urgent</td></tr></table><h4>Class IIa Indications (Reasonable)</h4><table class="drug-table"><tr><th>Indication</th><th>Rationale</th></tr><tr><td><strong>Large vegetation >10mm + embolic event</strong></td><td>High re-embolization risk despite antibiotics</td></tr><tr><td><strong>Large vegetation >10mm + other high-risk features</strong></td><td>Severe regurgitation, prior emboli, mobile</td></tr><tr><td><strong>Mobile vegetation >10mm on anterior mitral leaflet</strong></td><td>Highest embolic risk location</td></tr><tr><td><strong>Recurrent emboli despite appropriate antibiotics</strong></td><td>Medical therapy failing to prevent embolization</td></tr></table><h4>The Vegetation Size Dilemma</h4><p><strong>>10mm = high risk</strong></p><ul><li>Embolic risk: Large vegetations more likely to fragment</li><li>Location matters: Mitral > Aortic; Mobile > Fixed</li><li>BUT: Surgery has risks too (operative mortality, prosthetic complications)</li></ul><p><strong>Decision factors:</strong> Vegetation size + mobility + prior emboli + valve involved + patient surgical risk</p><h4>Special Situations</h4><table class="drug-table"><tr><th>Situation</th><th>Considerations</th></tr><tr><td><strong>Recent stroke</strong></td><td>Delay surgery 2-4 weeks if possible (hemorrhagic transformation risk with bypass); urgent surgery if HF or uncontrolled infection</td></tr><tr><td><strong>Hemorrhagic stroke</strong></td><td>Delay surgery 4+ weeks if possible</td></tr><tr><td><strong>Mycotic aneurysm</strong></td><td>May need to address aneurysm before cardiac surgery</td></tr><tr><td><strong>Prosthetic valve IE</strong></td><td>Lower threshold for surgery (worse outcomes with medical therapy)</td></tr></table><h4>🔗 Connections</h4><ul><li>→ <strong>Source control in sepsis:</strong> Same principle - remove/drain infected source</li><li>→ <strong>Prosthetic valve IE:</strong> Higher surgical threshold but also higher surgical need</li><li>→ <strong>IVDU tricuspid IE:</strong> May remove tricuspid valve entirely (can live without it short-term)</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296" target="_blank">AHA IE Guidelines 2015</a></li><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1112422" target="_blank">Early Surgery vs Conventional Treatment in IE (EASE trial)</a></li></ol></div>',bw:['HF = #1 surgical indication','Active infection NOT contraindication','Abscess = surgery needed','>10mm vegetation = high emboli risk','Dont delay for antibiotic course']}},
+dist:{b:'Many IE cases resolve with medical therapy alone; surgery has its own risks',c:'Delaying surgery increases mortality when indications are present',d:'Operating during active infection is safe and often necessary - the evidence supports early surgery'},
+related:[13,14,11]},
+16:{type:'Cellulitis Pathophysiology',isNBME:true,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step1','Step2'],
+vig:{demo:'38-year-old man with diabetes',hpi:'Rapidly expanding erythema on forearm 2 days after cat scratch. Fever 101.8°F, chills.',pmh:'Type 2 DM (A1c 9.2%)',vitals:'T 101.8°F, HR 92, BP 128/78',exam:'10cm area of erythema, warmth, tenderness. No fluctuance, no crepitus, well-demarcated borders.',labs:'WBC 12,600, glucose 186'},
+stem:'What is the pathophysiology of cellulitis, and why does diabetes increase risk?',
+opts:[['a','Bacteria invade dermis/subcutaneous tissue via skin break → inflammatory cascade → erythema, warmth; diabetes impairs neutrophil function and microvascular flow'],['b','Viral infection of epidermis only'],['c','Allergic reaction to cat saliva'],['d','Autoimmune inflammation']],
+exp:'<strong>Cellulitis pathophysiology:</strong> Bacteria (usually Strep/Staph) enter through skin break → invade dermis and subcutaneous fat → trigger innate immune response → cytokine release (IL-1, IL-6, TNF-α) → vasodilation (erythema, warmth) + increased vascular permeability (edema) + neutrophil recruitment (tenderness). <strong>Diabetes impairs:</strong> (1) Neutrophil chemotaxis/phagocytosis (hyperglycemia), (2) Microvascular circulation (delays immune cell delivery), (3) Sensory neuropathy (unnoticed wounds).',
+kp:'The cardinal signs of inflammation (rubor, calor, tumor, dolor) directly reflect the pathophysiology: vasodilation → redness/warmth; permeability → swelling; mediators → pain.',
+dd:{mechanism:{title:'Cellulitis: Mechanism Deep Dive',content:'<h4>Step-by-Step Pathophysiology</h4><ol><li><strong>Portal of Entry:</strong> Skin break (trauma, bite, tinea pedis, ulcer) allows bacterial invasion past the epidermis</li><li><strong>Bacterial Invasion:</strong> Organisms spread through dermis and subcutaneous tissue via lymphatics and direct extension</li><li><strong>Innate Immune Activation:</strong><ul><li>Pattern recognition receptors (TLRs) on macrophages detect bacterial PAMPs</li><li>Cytokine release: IL-1β, IL-6, TNF-α</li><li>Complement activation → C3a, C5a (chemotaxis)</li></ul></li><li><strong>Vascular Response:</strong><ul><li>Histamine, bradykinin, prostaglandins → vasodilation (ERYTHEMA, WARMTH)</li><li>Increased vascular permeability → plasma leakage (EDEMA)</li><li>Endothelial activation → neutrophil rolling, adhesion, diapedesis</li></ul></li><li><strong>Neutrophil Recruitment:</strong> Chemotaxis to site → phagocytosis → oxidative burst → bacterial killing</li></ol><h4>Why Diabetes Increases Risk</h4><table class="drug-table"><tr><th>Defect</th><th>Mechanism</th><th>Clinical Impact</th></tr><tr><td>Neutrophil dysfunction</td><td>Hyperglycemia impairs chemotaxis, phagocytosis, oxidative burst</td><td>Delayed bacterial clearance</td></tr><tr><td>Microangiopathy</td><td>Thickened basement membrane, reduced capillary flow</td><td>Poor antibiotic/immune cell delivery</td></tr><tr><td>Neuropathy</td><td>Sensory loss</td><td>Unnoticed wounds → delayed treatment</td></tr><tr><td>Impaired wound healing</td><td>Reduced fibroblast function, collagen synthesis</td><td>Prolonged infection</td></tr></table><h4>Anatomical Considerations</h4><p><strong>Dermis vs Epidermis:</strong> Cellulitis involves the dermis (contains blood vessels, lymphatics, nerves) and subcutaneous fat. The epidermis (avascular, keratinized) provides barrier function. Once bacteria penetrate, they access the vascularized dermis where the inflammatory response occurs.</p><h4>🔗 Related Concepts</h4><ul><li>→ <strong>Erysipelas</strong>: More superficial (upper dermis), sharply demarcated, "orange peel" texture</li><li>→ <strong>Necrotizing fasciitis</strong>: Deep fascia involvement - see Q20</li><li>→ <strong>Sepsis</strong>: When local infection triggers systemic inflammatory response - link to Sepsis Module</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://academic.oup.com/cid/article/59/2/e10/2895845" target="_blank">Stevens DL, et al. IDSA SSTI Guidelines 2014</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK549770/" target="_blank">StatPearls: Cellulitis</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4587791/" target="_blank">Diabetes and Infection Risk - Mechanisms</a></li></ol></div>',bw:['Dermis + subcutaneous','IL-1, IL-6, TNF-α','Vasodilation = erythema','DM = neutrophil dysfunction']}},
+dist:{b:'Cellulitis is bacterial, not viral; involves dermis not just epidermis',c:'Cat-scratch disease is different (Bartonella); this is post-traumatic cellulitis',d:'Cellulitis is infectious, not autoimmune'},
+related:[17,18,20]},
+
+17:{type:'SSTI Microbiology & Mechanism',isNBME:false,difficulty:'medium',domains:['pathophysiology','mechanism'],tags:['Step1'],
+ctx:'Understanding which organisms cause which SSTI guides antibiotic selection.',
+stem:'Why do Group A Streptococcus and S. aureus dominate skin infections, and how do their virulence factors differ?',
+opts:[['a','GAS: M protein (antiphagocytic) + hyaluronidase (tissue spread) + streptolysins (cytotoxic); S. aureus: protein A + coagulase + toxins (PVL)'],['b','Both organisms are identical in virulence'],['c','GAS only causes pharyngitis'],['d','S. aureus cannot cause cellulitis']],
+exp:'<strong>GAS virulence:</strong> M protein evades phagocytosis, hyaluronidase breaks down connective tissue (spreading infection), streptolysins O/S lyse cells. <strong>S. aureus virulence:</strong> Protein A binds IgG Fc (prevents opsonization), coagulase creates fibrin shield, Panton-Valentine leukocidin (PVL) destroys neutrophils (associated with CA-MRSA abscesses).',
+kp:'PVL-producing S. aureus causes recurrent abscesses and necrotizing pneumonia. Hyaluronidase is why strep spreads diffusely while staph tends to localize (abscess).',
+dd:{mechanism:{title:'SSTI Microbiology: Virulence Mechanisms',content:'<h4>Group A Streptococcus (S. pyogenes)</h4><table class="drug-table"><tr><th>Virulence Factor</th><th>Mechanism</th><th>Clinical Effect</th></tr><tr><td><strong>M protein</strong></td><td>Inhibits complement C3b deposition → antiphagocytic</td><td>Evades immune clearance</td></tr><tr><td><strong>Hyaluronidase</strong></td><td>Degrades hyaluronic acid in connective tissue</td><td>Spreading infection (cellulitis, erysipelas)</td></tr><tr><td><strong>Streptokinase</strong></td><td>Activates plasminogen → plasmin → dissolves clots</td><td>Facilitates spread through tissue</td></tr><tr><td><strong>Streptolysins O & S</strong></td><td>Pore-forming toxins → cell lysis</td><td>Tissue destruction, hemolysis</td></tr><tr><td><strong>Pyrogenic exotoxins (SPE)</strong></td><td>Superantigens → massive T-cell activation</td><td>Streptococcal toxic shock syndrome</td></tr></table><h4>Staphylococcus aureus</h4><table class="drug-table"><tr><th>Virulence Factor</th><th>Mechanism</th><th>Clinical Effect</th></tr><tr><td><strong>Protein A</strong></td><td>Binds Fc portion of IgG → prevents opsonization</td><td>Evades antibody-mediated immunity</td></tr><tr><td><strong>Coagulase</strong></td><td>Converts fibrinogen → fibrin</td><td>Creates abscess wall (localizes infection)</td></tr><tr><td><strong>Panton-Valentine Leukocidin (PVL)</strong></td><td>Pore-forming toxin → neutrophil lysis</td><td>Recurrent abscesses, necrotizing pneumonia</td></tr><tr><td><strong>TSST-1</strong></td><td>Superantigen</td><td>Toxic shock syndrome</td></tr><tr><td><strong>Exfoliative toxins</strong></td><td>Cleave desmoglein-1</td><td>Scalded skin syndrome (bullous impetigo)</td></tr></table><h4>Clinical Pattern Recognition</h4><ul><li><strong>Spreading erythema without abscess</strong> → Think Streptococcus (hyaluronidase!)</li><li><strong>Localized abscess/furuncle</strong> → Think Staphylococcus (coagulase!)</li><li><strong>Recurrent boils, especially in young healthy patient</strong> → Think PVL+ CA-MRSA</li></ul><h4>🔗 Connections</h4><ul><li>→ Strep M protein molecular mimicry → <strong>Rheumatic fever</strong> (cross-reacts with cardiac myosin)</li><li>→ Strep immune complex → <strong>Post-streptococcal glomerulonephritis</strong></li><li>→ MRSA resistance mechanism → <strong>mecA gene encodes PBP2a</strong></li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK459242/" target="_blank">StatPearls: S. pyogenes</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3553451/" target="_blank">S. aureus Virulence Factors</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2865901/" target="_blank">PVL and CA-MRSA</a></li></ol></div>',bw:['M protein = antiphagocytic','Hyaluronidase = spreading','Coagulase = abscess','PVL = CA-MRSA abscesses']}},
+dist:{b:'Virulence mechanisms are quite different and explain clinical patterns',c:'GAS causes many infections including cellulitis, necrotizing fasciitis',d:'S. aureus is the #1 cause of purulent SSTI'},
+related:[16,18,19]},
+
+18:{type:'SSTI Treatment Rationale',isNBME:true,difficulty:'medium',domains:['pharmacology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'38-year-old man with non-purulent cellulitis',hpi:'Spreading erythema, no abscess or drainage',pmh:'No MRSA risk factors',vitals:'T 101.8°F',exam:'10cm erythema, no fluctuance, no purulent drainage',labs:'WBC 12,600'},
+stem:'What is first-line treatment for non-purulent cellulitis, and WHY do we choose these agents?',
+opts:[['a','Cephalexin or dicloxacillin - β-lactams inhibit cell wall synthesis, cover Strep + MSSA which cause non-purulent cellulitis'],['b','Vancomycin IV for all cases'],['c','TMP-SMX alone - covers MRSA'],['d','Topical mupirocin only']],
+exp:'<strong>Non-purulent cellulitis</strong> is usually Strep (GAS) or MSSA. <strong>β-lactams</strong> (cephalexin, dicloxacillin) inhibit penicillin-binding proteins (PBPs) → block peptidoglycan cross-linking → osmotic lysis. They provide excellent Strep/MSSA coverage. TMP-SMX has poor Strep coverage and shouldnt be used alone for non-purulent cellulitis.',
+kp:'Purulent = abscess/drainage → cover MRSA (TMP-SMX, doxy). Non-purulent = no pus → Strep-focused (β-lactam).',
+dd:{pharmacology:{title:'SSTI Antibiotic Selection: Mechanism-Based',content:'<h4>Why β-Lactams for Non-Purulent Cellulitis?</h4><p><strong>Mechanism of action:</strong> β-lactams are structural analogs of D-Ala-D-Ala terminus of peptidoglycan precursors. They covalently bind penicillin-binding proteins (PBPs), inhibiting transpeptidase activity → prevents cross-linking of peptidoglycan → weakened cell wall → osmotic lysis.</p><table class="drug-table"><tr><th>Drug</th><th>Spectrum</th><th>Why It Works Here</th></tr><tr><td><strong>Cephalexin</strong> (1st gen ceph)</td><td>Strep, MSSA, some GNR</td><td>Excellent Strep coverage, oral, well-tolerated</td></tr><tr><td><strong>Dicloxacillin</strong></td><td>Strep, MSSA (penicillinase-resistant)</td><td>Anti-staphylococcal penicillin</td></tr><tr><td>Amoxicillin-clavulanate</td><td>Broader (adds anaerobes, some GNR)</td><td>Use for bite wounds, diabetic foot</td></tr></table><h4>Why NOT TMP-SMX Alone?</h4><p><strong>TMP-SMX mechanism:</strong> Sequential blockade of folate synthesis - TMP inhibits dihydrofolate reductase, SMX inhibits dihydropteroate synthase. <strong>Problem:</strong> Group A Strep can use exogenous folate, bypassing the block → <strong>unreliable Strep coverage</strong>.</p><h4>Purulent vs Non-Purulent: Treatment Algorithm</h4><table class="drug-table"><tr><th>Type</th><th>Likely Organism</th><th>Treatment</th></tr><tr><td><strong>Non-purulent</strong> (no abscess)</td><td>Strep > MSSA</td><td>Cephalexin, dicloxacillin</td></tr><tr><td><strong>Purulent</strong> (abscess/drainage)</td><td>S. aureus (often MRSA)</td><td>I&D + TMP-SMX or doxycycline</td></tr><tr><td>Non-purulent + MRSA risk</td><td>Strep or MRSA</td><td>β-lactam + TMP-SMX or doxy</td></tr></table><h4>MRSA Resistance Mechanism</h4><p><strong>mecA gene</strong> encodes <strong>PBP2a</strong>, a modified penicillin-binding protein with low affinity for β-lactams → cell wall synthesis continues despite β-lactam presence. This is why MRSA requires vancomycin (different mechanism - binds D-Ala-D-Ala directly) or other agents.</p><h4>🔗 Connections</h4><ul><li>→ <strong>Vancomycin mechanism</strong>: Binds D-Ala-D-Ala terminus directly, preventing transglycosylation</li><li>→ <strong>Daptomycin</strong>: Inserts into membrane → depolarization (for MRSA bacteremia)</li><li>→ <strong>Linezolid</strong>: Binds 50S ribosome → inhibits protein synthesis (for MRSA pneumonia)</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://academic.oup.com/cid/article/59/2/e10/2895845" target="_blank">IDSA SSTI Guidelines 2014</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK551517/" target="_blank">StatPearls: β-Lactam Antibiotics</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4536159/" target="_blank">MRSA mecA Review</a></li></ol></div>',bw:['β-lactam = cell wall synthesis','Non-purulent = Strep (β-lactam)','Purulent = MRSA (TMP-SMX)','mecA = PBP2a = MRSA']}},
+dist:{b:'Vancomycin IV is overtreatment for uncomplicated cellulitis',c:'TMP-SMX has poor Strep coverage - inadequate for non-purulent cellulitis',d:'Topical therapy inadequate for cellulitis with systemic symptoms'},
+related:[16,17,19]},
+
+19:{type:'Abscess Management',isNBME:true,difficulty:'easy',domains:['mechanism','pharmacology'],tags:['Step2'],
+vig:{demo:'25-year-old healthy woman',hpi:'Painful bump on thigh x4 days, now draining pus',pmh:'None',vitals:'Afebrile',exam:'3cm fluctuant abscess with surrounding erythema 1cm, purulent drainage',labs:'Not obtained'},
+stem:'What is primary treatment for a skin abscess, and why is I&D so effective?',
+opts:[['a','Incision & drainage is definitive - removes necrotic tissue, drains pus, eliminates bacterial sanctuary; antibiotics adjunctive'],['b','Antibiotics alone without drainage'],['c','Warm compresses until spontaneous drainage'],['d','CT scan before any intervention']],
+exp:'<strong>I&D is definitive</strong> because abscesses create a localized collection where (1) antibiotics cant penetrate well (poor blood supply to cavity), (2) low pH/oxygen inactivates some antibiotics, (3) high bacterial burden. Drainage removes the bacterial load and necrotic material, allowing antibiotics to work on residual infection.',
+kp:'Antibiotics alone fail for abscesses because they cant reach adequate concentrations in the avascular cavity. "Ubi pus, ibi evacua" - where there is pus, evacuate it.',
+dd:{mechanism:{title:'Abscess: Why Drainage is Essential',content:'<h4>Abscess Formation (Pathophysiology)</h4><ol><li><strong>Initial infection:</strong> Bacteria (usually S. aureus) invade subcutaneous tissue</li><li><strong>Immune response:</strong> Neutrophils recruited → attempt to kill bacteria</li><li><strong>Staphylococcal coagulase:</strong> Converts fibrinogen → fibrin → creates abscess WALL</li><li><strong>Purulent center:</strong> Dead neutrophils + bacteria + necrotic tissue = PUS</li><li><strong>Liquefaction:</strong> Enzymatic breakdown creates fluid-filled cavity</li></ol><h4>Why Antibiotics Alone Fail</h4><table class="drug-table"><tr><th>Barrier</th><th>Mechanism</th></tr><tr><td><strong>No blood supply</strong></td><td>Abscess cavity is avascular → antibiotics cant reach</td></tr><tr><td><strong>Acidic pH</strong></td><td>pH ~5.5-6.5 in abscess → aminoglycosides, macrolides less active</td></tr><tr><td><strong>Anaerobic environment</strong></td><td>Low O2 → aminoglycosides require O2 for uptake</td></tr><tr><td><strong>High inoculum</strong></td><td>10^8-10^10 CFU/mL → stationary phase bacteria less susceptible</td></tr><tr><td><strong>Biofilm</strong></td><td>Bacteria in biofilm have 100-1000x higher MIC</td></tr></table><h4>When to Add Antibiotics to I&D</h4><ul><li>Surrounding cellulitis >5cm</li><li>Systemic symptoms (fever, tachycardia)</li><li>Immunocompromised</li><li>Multiple abscesses</li><li>Failed initial I&D</li><li>High-risk location (face, hand, genitals)</li></ul><h4>🔗 Connections</h4><ul><li>→ <strong>Empyema</strong>: Same principle - chest tube drainage essential (see Pulm module)</li><li>→ <strong>Septic arthritis</strong>: Joint drainage/washout mandatory</li><li>→ <strong>Cholangitis</strong>: Biliary drainage (ERCP) often needed</li><li>→ <strong>SOURCE CONTROL</strong> concept in sepsis</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMcp1607186" target="_blank">Skin Abscess Management. NEJM 2017</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5564025/" target="_blank">I&D + Antibiotics Trial</a></li></ol></div>',bw:['I&D = definitive','Coagulase = abscess wall','Avascular cavity','Ubi pus, ibi evacua']}},
+dist:{b:'Antibiotics alone fail - cant penetrate abscess cavity',c:'Delays definitive treatment, may worsen',d:'Clinical diagnosis - imaging rarely needed'},
+related:[17,18,20]},
+
+20:{type:'Necrotizing Fasciitis',isNBME:true,difficulty:'hard',domains:['pathophysiology','mechanism'],tags:['Step2','CK'],
+vig:{demo:'55-year-old man with diabetes',hpi:'Leg pain started yesterday, now severe pain "out of proportion" to exam. Rapidly spreading dusky discoloration.',pmh:'T2DM, peripheral vascular disease',vitals:'T 103.8°F, HR 128, BP 88/52, RR 26',exam:'Tense edema, dusky/purple skin, crepitus on palpation, hemorrhagic bullae. Pain severe but decreased sensation over center.',labs:'WBC 24,000 with 18% bands, Na 128, Cr 2.4, lactate 5.2, CK 1,850'},
+stem:'What are the pathognomonic features of necrotizing fasciitis, and why is emergent surgery critical?',
+opts:[['a','Pain out of proportion, rapid progression, crepitus, systemic toxicity - bacteria spread along fascial planes faster than antibiotics can penetrate; surgery removes necrotic tissue and source'],['b','Treat with antibiotics alone and observe'],['c','Pain always proportional to exam findings'],['d','MRI required before any surgical intervention']],
+exp:'<strong>Necrotizing fasciitis</strong> spreads along fascial planes at 2-3cm/hour. Fascia has poor blood supply → antibiotics dont reach infection → surgical debridement is ONLY definitive treatment. Classic features: pain out of proportion (nerve involvement), crepitus (gas-producing organisms), rapid spread, systemic toxicity (SIRS/sepsis), skin changes (dusky → necrotic).',
+kp:'Mortality increases 7-9% for each hour of surgical delay. "Pain out of proportion" is the earliest and most important clue. Loss of pain sensation = nerve necrosis = late/ominous sign.',
+dd:{pathophysiology:{title:'Necrotizing Fasciitis: Critical Concepts',content:'<h4>Anatomical Basis</h4><p><strong>Fascia</strong> is the connective tissue layer between subcutaneous fat and muscle. It has:</p><ul><li>Poor blood supply (watershed area)</li><li>Large potential space for spread</li><li>Minimal barriers to horizontal extension</li></ul><p>Infection spreads ALONG fascia much faster than through well-vascularized tissue.</p><h4>Types of Necrotizing Fasciitis</h4><table class="drug-table"><tr><th>Type</th><th>Organisms</th><th>Risk Factors</th><th>Features</th></tr><tr><td><strong>Type I</strong> (polymicrobial)</td><td>Mixed aerobic + anaerobic (Strep, Staph, GNR, Bacteroides, Clostridium)</td><td>DM, PVD, post-surgical</td><td>Often trunk, perineum (Fourniers)</td></tr><tr><td><strong>Type II</strong> (monomicrobial)</td><td>Group A Strep (most common), S. aureus</td><td>Healthy individuals, minor trauma</td><td>Extremities, toxic shock</td></tr><tr><td><strong>Type III</strong></td><td>Vibrio vulnificus</td><td>Cirrhosis, raw seafood/saltwater</td><td>Hemorrhagic bullae, rapid death</td></tr></table><h4>Pathophysiology: Why So Deadly?</h4><ol><li><strong>Bacterial spread:</strong> Organisms produce enzymes (hyaluronidase, collagenase, lipase) → tissue destruction → spread along fascia at 2-3 cm/hour</li><li><strong>Thrombosis:</strong> Bacteria induce vessel thrombosis → tissue ischemia → poor antibiotic penetration</li><li><strong>Toxin production:</strong> Superantigens (strep), α-toxin (clostridium) → systemic toxicity, shock</li><li><strong>Liquefactive necrosis:</strong> Fascia undergoes necrosis → "dishwater" pus, foul smell</li></ol><h4>Clinical Clues (The "Hard Signs")</h4><ul><li>🚨 <strong>Pain out of proportion</strong> to exam (earliest sign - nerves in fascia affected)</li><li>🚨 <strong>Rapid progression</strong> (mark borders with pen - spreading within hours)</li><li>🚨 <strong>Crepitus</strong> (gas in tissues - think Clostridium or polymicrobial)</li><li>🚨 <strong>Dusky/purple skin</strong> (thrombosis → ischemia)</li><li>🚨 <strong>Hemorrhagic bullae</strong> (vessel damage)</li><li>🚨 <strong>Systemic toxicity</strong> (fever, hypotension, tachycardia, AMS)</li><li>Late: <strong>Anesthesia</strong> over affected area (nerve necrosis - BAD sign)</li></ul><h4>Laboratory Clues: LRINEC Score</h4><table class="drug-table"><tr><th>Parameter</th><th>Value</th><th>Points</th></tr><tr><td>CRP (mg/L)</td><td>≥150</td><td>4</td></tr><tr><td>WBC (×10³)</td><td>15-25 / >25</td><td>1 / 2</td></tr><tr><td>Hemoglobin (g/dL)</td><td>11-13.5 / <11</td><td>1 / 2</td></tr><tr><td>Sodium (mEq/L)</td><td><135</td><td>2</td></tr><tr><td>Creatinine (mg/dL)</td><td>>1.6</td><td>2</td></tr><tr><td>Glucose (mg/dL)</td><td>>180</td><td>1</td></tr></table><p>Score ≥6: High suspicion. Score ≥8: Strongly predictive. <strong>But dont delay surgery for lab results!</strong></p><h4>Treatment: TIME IS TISSUE</h4><ol><li><strong>Emergent surgical debridement</strong> - ONLY definitive treatment<ul><li>Wide excision of all necrotic tissue</li><li>May require multiple debridements (Q24-48h)</li><li>Amputation may be necessary</li></ul></li><li><strong>Broad-spectrum antibiotics</strong> (adjunct, not definitive)<ul><li>Vancomycin (MRSA) + piperacillin-tazobactam (GNR, anaerobes) + clindamycin (toxin suppression)</li><li>Clindamycin inhibits ribosome → stops toxin production even when bacteria dying</li></ul></li><li><strong>ICU care</strong> - fluid resuscitation, vasopressors, close monitoring</li></ol><h4>Why Clindamycin?</h4><p>Beyond coverage, clindamycin <strong>suppresses toxin production</strong> by inhibiting protein synthesis. Even in dying bacteria, preformed toxins continue release. Clindamycin prevents NEW toxin synthesis, reducing systemic toxicity.</p><h4>🔗 Connections</h4><ul><li>→ <strong>Gas gangrene</strong>: Clostridium perfringens (α-toxin) - similar urgency</li><li>→ <strong>Fourniers gangrene</strong>: NF of perineum - urologic/colorectal emergency</li><li>→ <strong>Septic shock</strong>: Many NF patients develop distributive shock (→ Sepsis module)</li><li>→ <strong>Source control</strong>: Fundamental sepsis principle - remove infected tissue</li></ul><div class="dd-refs"><h5>📚 References</h5><ol><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5198083/" target="_blank">Necrotizing Soft Tissue Infections Review</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3025106/" target="_blank">LRINEC Score Validation</a></li><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMra1600673" target="_blank">Necrotizing Fasciitis. NEJM 2017</a></li><li><a href="https://academic.oup.com/cid/article/59/2/e10/2895845" target="_blank">IDSA SSTI Guidelines</a></li></ol></div>',bw:['Pain out of proportion','Fascial plane spread','Surgical emergency','7-9% mortality per hour delay','Clindamycin = toxin suppression']}},
+dist:{b:'Antibiotics alone = death. Surgery is ONLY definitive treatment.',c:'Pain out of proportion is the hallmark - exam looks "less bad" than patient feels',d:'Dont delay surgery for imaging. Clinical diagnosis. Operative findings confirm.'},
+related:[16,17,18]}
+};
+
+function render(){
+var c=cases[phase],p=phases[phase],v=vitals[phase];
+document.getElementById('patientName').textContent=c.name;
+document.getElementById('patientDetails').textContent=c.details;
+document.getElementById('vTemp').textContent=v.temp;
+document.getElementById('vHR').textContent=v.hr;
+document.getElementById('vBP').textContent=v.bp;
+document.getElementById('vRR').textContent=v.rr;
+document.getElementById('phaseBadge').textContent='Phase '+phase;
+
+var caseHTML='<div class="narrative">'+c.narrative+'</div>';
+caseHTML+='<div class="data-section"><div class="data-label">History</div><div class="data-grid">';
+c.data1.forEach(function(d){caseHTML+='<div class="data-item"><span>'+d[0]+'</span><span>'+d[1]+'</span></div>';});
+caseHTML+='</div></div>';
+caseHTML+='<div class="data-section"><div class="data-label">Studies</div><div class="data-grid">';
+c.data2.forEach(function(d){caseHTML+='<div class="data-item"><span>'+d[0]+'</span><span class="'+(d[2]||'')+'">'+d[1]+'</span></div>';});
+caseHTML+='</div></div>';
+caseHTML+='<div class="pearl"><div class="pearl-title">💎 Clinical Pearl</div><div class="pearl-text">'+c.pearl+'</div></div>';
+if(c.refs&&c.refs.length){
+caseHTML+='<div class="ref-box"><div class="ref-title">📚 Guidelines</div><div class="ref-list">';
+c.refs.forEach(function(r){caseHTML+='<div>• <a href="'+r.u+'" target="_blank">'+r.t+'</a></div>';});
+caseHTML+='</div></div>';
+}
+document.getElementById('caseContent').innerHTML=caseHTML;
+
+var qStart=(phase-1)*5+1,qEnd=phase*5;
+var qHTML='<div class="intro"><h2>'+p.icon+' '+p.title+'</h2><p>'+p.desc+'</p>';
+qHTML+='<div class="objectives"><div class="obj-title">🎯 Learning Objectives</div><ul class="obj-list">';
+p.obj.forEach(function(o){qHTML+='<li>'+o+'</li>';});
+qHTML+='</ul></div>';
+if(p.refs&&p.refs.length){
+qHTML+='<div class="ref-box"><div class="ref-title">📚 Evidence-Based Guidelines</div><div class="ref-list">';
+p.refs.forEach(function(r){qHTML+='<div>• <a href="'+r.u+'" target="_blank">'+r.t+'</a></div>';});
+qHTML+='</div></div>';
+}
+qHTML+='</div>';
+
+for(var i=qStart;i<=qEnd;i++){
+var q=Qs[i],s=state[i];
+var isNBME=q.isNBME;
+qHTML+='<div class="quiz'+(isNBME?' nbme':'')+'" id="q'+i+'">';
+qHTML+='<div class="quiz-header"><div style="display:flex;align-items:center"><div class="quiz-num'+(isNBME?' nbme':'')+'">'+i+'</div><span class="quiz-type">'+q.type+'</span></div>';
+qHTML+='<div class="quiz-meta">';
+q.domains.forEach(function(d){qHTML+='<span class="tag '+d+'">'+d.charAt(0).toUpperCase()+d.slice(1)+'</span>';});
+q.tags.forEach(function(t){qHTML+='<span class="tag '+(t.toLowerCase().includes('step1')?'step1':'step2')+'">'+t+'</span>';});
+qHTML+='<span class="diff '+q.difficulty+'">'+q.difficulty.toUpperCase()+'</span>';
+if(s.done)qHTML+='<span class="quiz-status '+(s.ok?'correct':'incorrect')+'">'+(s.ok?'✓':'✗')+'</span>';
+qHTML+='</div></div>';
+
+if(q.vig){
+qHTML+='<div class="vig"><div class="vig-demo">'+q.vig.demo+'</div>';
+if(q.vig.hpi)qHTML+='<div class="vig-row"><span class="vig-label">HPI:</span> '+q.vig.hpi+'</div>';
+if(q.vig.pmh)qHTML+='<div class="vig-row"><span class="vig-label">PMH:</span> '+q.vig.pmh+'</div>';
+if(q.vig.vitals)qHTML+='<div class="vig-row"><span class="vig-label">Vitals:</span> '+q.vig.vitals+'</div>';
+if(q.vig.exam)qHTML+='<div class="vig-row"><span class="vig-label">Exam:</span> '+q.vig.exam+'</div>';
+if(q.vig.labs)qHTML+='<div class="vig-row"><span class="vig-label">Labs:</span> '+q.vig.labs+'</div>';
+qHTML+='</div>';
+}else if(q.ctx){
+qHTML+='<div class="ctx"><strong>Clinical Context:</strong> '+q.ctx+'</div>';
+}
+
+qHTML+='<div class="quiz-body"><div class="stem">'+q.stem+'</div><div class="options">';
+q.opts.forEach(function(o){
+var letter=o[0],text=o[1];
+var cls='option';
+if(s.done){
+cls+=' disabled';
+if(letter===ans[i])cls+=' correct';
+else if(letter===s.pick)cls+=' incorrect';
+if(letter===ans[i]&&s.pick!==ans[i])cls+=' show-correct';
+}else if(s.pick===letter)cls+=' selected';
+qHTML+='<div class="'+cls+'" data-q="'+i+'" data-opt="'+letter+'" onclick="pick('+i+',\''+letter+'\')">';
+qHTML+='<div class="opt-letter">'+letter.toUpperCase()+'</div><div class="opt-text">'+text+'</div></div>';
+});
+qHTML+='</div>';
+
+if(!s.done){
+qHTML+='<div class="conf"><div class="conf-label"><span>Confidence Level</span><span style="color:var(--muted);font-size:11px">Calibrate your certainty</span></div><div class="conf-btns">';
+['guess','unsure','confident','certain'].forEach(function(c,idx){
+var emoji=['🎲','🤔','😊','💯'][idx];
+var pct=['33%','66%','90%','100%'][idx];
+qHTML+='<div class="conf-btn'+(s.conf===c?' selected':'')+'" onclick="setConf('+i+',\''+c+'\')">';
+qHTML+='<span class="conf-emoji">'+emoji+'</span>'+pct+'</div>';
+});
+qHTML+='</div></div>';
+qHTML+='<button class="submit" onclick="submit('+i+')" '+((!s.pick||!s.conf)?'disabled':'')+'>Submit Answer</button>';
+}
+
+var expCls='exp'+(s.done?' show':'')+(s.ok?' correct':' incorrect');
+qHTML+='<div class="'+expCls+'" id="exp'+i+'"><div class="exp-header"><span style="font-size:20px">'+(s.ok?'✓':'✗')+'</span><span>'+(s.ok?'Correct!':'Incorrect')+'</span></div>';
+qHTML+='<div class="exp-text">'+q.exp+'</div>';
+qHTML+='<div class="keypoint"><div class="kp-title">🔑 Key Point</div><div class="kp-text">'+q.kp+'</div></div>';
+
+qHTML+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD('+i+')">🔬 Deep Dive: Understanding the Mechanism <span>▼</span></button>';
+qHTML+='<div class="dd-content" id="dd'+i+'">';
+var domains=Object.keys(q.dd);
+if(domains.length>1){
+qHTML+='<div class="dd-tabs">';
+domains.forEach(function(d,idx){qHTML+='<div class="dd-tab'+(idx===0?' active':'')+'" onclick="switchTab('+i+',\''+d+'\')">'+d.charAt(0).toUpperCase()+d.slice(1)+'</div>';});
+qHTML+='</div>';
+}
+domains.forEach(function(d,idx){
+var dd=q.dd[d];
+qHTML+='<div class="dd-panel'+(idx===0?' active':'')+'" id="panel-'+i+'-'+d+'"><h4>'+dd.title+'</h4>'+dd.content;
+if(dd.bw){
+qHTML+='<div class="buzzwords"><div class="bw-title">📝 High-Yield Buzzwords</div><div class="bw-list">';
+dd.bw.forEach(function(b){qHTML+='<span class="bw-item">'+b+'</span>';});
+qHTML+='</div></div>';
+}
+qHTML+='</div>';
+});
+qHTML+='</div></div>';
+
+if(q.dist){
+qHTML+='<div class="dist"><div class="dist-title">❌ Why Other Options Are Wrong</div>';
+Object.keys(q.dist).forEach(function(k){
+if(k!==ans[i])qHTML+='<div class="dist-item"><span class="dist-letter">'+k.toUpperCase()+':</span> '+q.dist[k]+'</div>';
+});
+qHTML+='</div>';
+}
+if(q.related){
+qHTML+='<div class="related"><div class="related-title">🔗 Related Questions</div><div class="related-list">';
+q.related.forEach(function(r){qHTML+='<span class="related-item" onclick="goToQ('+r+')">Q'+r+': '+Qs[r].type+'</span>';});
+qHTML+='</div></div>';
+}
+qHTML+='</div></div></div>';
+}
+document.getElementById('questionsPanel').innerHTML=qHTML;
+updateProgress();
+updateFP();
+}
+
+function pick(q,o){if(state[q].done)return;state[q].pick=o;render();}
+function setConf(q,c){if(state[q].done)return;state[q].conf=c;render();}
+
+function submit(q){
+if(state[q].done)return;
+var s=state[q];
+s.done=true;
+s.ok=(s.pick===ans[q]);
+if(s.ok){
+var confMult={guess:1,unsure:1.5,confident:2,certain:3}[s.conf]||1;
+xp+=Math.round(10*confMult);
+streak++;
+}else{
+streak=0;
+}
+Qs[q].domains.forEach(function(d){
+fp[d].t++;
+if(s.ok)fp[d].c++;
+});
+render();
+checkPhaseComplete();
+}
+
+function toggleDD(q){
+var el=document.getElementById('dd'+q);
+el.classList.toggle('open');
+}
+
+function switchTab(q,domain){
+var panels=document.querySelectorAll('[id^="panel-'+q+'-"]');
+panels.forEach(function(p){p.classList.remove('active');});
+document.getElementById('panel-'+q+'-'+domain).classList.add('active');
+var tabs=document.querySelectorAll('#q'+q+' .dd-tab');
+tabs.forEach(function(t){t.classList.remove('active');if(t.textContent.toLowerCase()===domain)t.classList.add('active');});
+}
+
+function goToQ(q){
+var phase=Math.ceil(q/5);
+if(!open[phase])return;
+goPhase(phase);
+setTimeout(function(){document.getElementById('q'+q).scrollIntoView({behavior:'smooth'});},100);
+}
+
+function checkPhaseComplete(){
+var start=(phase-1)*5+1,end=phase*5,allDone=true;
+for(var i=start;i<=end;i++)if(!state[i].done)allDone=false;
+if(allDone){
+done[phase]=true;
+document.getElementById('status'+phase).textContent='✓ Complete';
+document.getElementById('status'+phase).className='phase-status done';
+document.querySelector('[data-phase="'+phase+'"]').classList.add('done');
+if(phase<4){
+open[phase+1]=true;
+document.querySelector('[data-phase="'+(phase+1)+'"]').classList.remove('locked');
+document.getElementById('status'+(phase+1)).textContent='Ready';
+}
+}
+}
+
+function goPhase(p){
+if(!open[p])return;
+phase=p;
+document.querySelectorAll('.phase').forEach(function(el){el.classList.remove('active');});
+document.querySelector('[data-phase="'+p+'"]').classList.add('active');
+render();
+window.scrollTo(0,0);
+}
+
+function updateProgress(){
+var total=0,answered=0;
+for(var i=1;i<=20;i++){total++;if(state[i].done)answered++;}
+document.getElementById('progressFill').style.width=(answered/total*100)+'%';
+document.getElementById('progressCount').textContent=answered+'/'+total;
+document.getElementById('xpCount').textContent=xp;
+document.getElementById('streakCount').textContent=streak;
+var correct=0;for(var i=1;i<=20;i++)if(state[i].done&&state[i].ok)correct++;
+var pct=answered>0?Math.round(correct/answered*100):0;
+document.getElementById('accText').textContent=pct+'%';
+var ring=document.getElementById('accRing');
+ring.style.strokeDashoffset=226-(226*pct/100);
+}
+
+function updateFP(){
+['mechanism','pharmacology','pathophysiology'].forEach(function(d){
+var data=fp[d];
+var pct=data.t>0?Math.round(data.c/data.t*100):0;
+document.getElementById('fp'+d.charAt(0).toUpperCase()+d.slice(1,4).charAt(0).toUpperCase()+d.slice(4,5)).style.width=pct+'%';
+document.getElementById('fp'+d.charAt(0).toUpperCase()+d.slice(1,4).charAt(0).toUpperCase()+d.slice(4,5)+'Score').textContent=pct+'%';
+});
+document.getElementById('fpMech').style.width=(fp.mechanism.t>0?Math.round(fp.mechanism.c/fp.mechanism.t*100):0)+'%';
+document.getElementById('fpMechScore').textContent=(fp.mechanism.t>0?Math.round(fp.mechanism.c/fp.mechanism.t*100):0)+'%';
+document.getElementById('fpPharm').style.width=(fp.pharmacology.t>0?Math.round(fp.pharmacology.c/fp.pharmacology.t*100):0)+'%';
+document.getElementById('fpPharmScore').textContent=(fp.pharmacology.t>0?Math.round(fp.pharmacology.c/fp.pharmacology.t*100):0)+'%';
+document.getElementById('fpPatho').style.width=(fp.pathophysiology.t>0?Math.round(fp.pathophysiology.c/fp.pathophysiology.t*100):0)+'%';
+document.getElementById('fpPathoScore').textContent=(fp.pathophysiology.t>0?Math.round(fp.pathophysiology.c/fp.pathophysiology.t*100):0)+'%';
+
+var weakest=null,weakPct=100;
+['mechanism','pharmacology','pathophysiology'].forEach(function(d){
+if(fp[d].t>=2){
+var p=Math.round(fp[d].c/fp[d].t*100);
+if(p<weakPct){weakPct=p;weakest=d;}
+}
+});
+var alertHTML='';
+if(weakest&&weakPct<60){
+alertHTML='<div class="alert-box weak"><strong>Focus Area:</strong> '+weakest.charAt(0).toUpperCase()+weakest.slice(1)+' ('+weakPct+'%)</div>';
+}
+document.getElementById('alertBox').innerHTML=alertHTML;
+}
+
+render();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Infectious Disease"
+         data-key-points="'+p.icon+' '+p.title+', 🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+</body>
+</html>

@@ -1,329 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bookmarks & Notes | ReasonDx</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Bookmarks & Notes | ReasonDx</title>
+    
     <style>
-        :root { --primary: #059669; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
+        :root { --primary: #059669; --primary-dark: #047857; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); padding: 24px; color: white; }
-        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .header h1 { font-size: 24px; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; padding-bottom: 60px; }
+        .header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 24px; color: white; text-align: center; }
+        .header h1 { font-size: 24px; margin-bottom: 4px; }
         .header p { opacity: 0.9; font-size: 14px; }
-        .search-box { display: flex; gap: 8px; }
-        .search-box input { padding: 10px 16px; border: none; border-radius: 8px; width: 250px; font-size: 14px; }
-        .content { max-width: 1000px; margin: 0 auto; padding: 24px; }
-        .tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-        .tab { padding: 8px 16px; border: none; background: none; font-size: 14px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-radius: 6px; }
-        .tab:hover { background: #f1f5f9; }
-        .tab.active { background: var(--primary); color: white; }
-        .view { display: none; }
-        .view.active { display: block; }
-        .empty-state { text-align: center; padding: 48px; color: var(--text-secondary); }
+        .header .stat-bar { display: flex; justify-content: center; gap: 24px; margin-top: 12px; font-size: 13px; opacity: 0.85; }
+        .content { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .tabs { display: flex; gap: 4px; margin-bottom: 24px; background: #f1f5f9; padding: 4px; border-radius: 12px; }
+        .tab { flex: 1; padding: 10px; text-align: center; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text-secondary); border: none; background: none; font-family: inherit; transition: all 0.2s; }
+        .tab.active { background: white; color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tab:hover:not(.active) { color: var(--text-primary); }
+        .toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .search-box { flex: 1; min-width: 200px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-family: inherit; }
+        .search-box:focus { outline: none; border-color: var(--primary); }
+        .add-btn { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px; white-space: nowrap; }
+        .add-btn:hover { background: var(--primary-dark); }
+        .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+        .pill { padding: 5px 12px; border: 1px solid var(--border); background: white; border-radius: 16px; font-size: 12px; cursor: pointer; font-family: inherit; color: var(--text-secondary); }
+        .pill:hover { border-color: var(--primary); }
+        .pill.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .item-list { display: grid; gap: 12px; }
+        .item-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: box-shadow 0.2s; }
+        .item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .item-card.flagged { border-left: 4px solid #f59e0b; }
+        .item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .item-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+        .item-meta { font-size: 12px; color: var(--text-secondary); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .item-tag { display: inline-block; padding: 2px 8px; background: #f1f5f9; border-radius: 8px; font-size: 11px; color: var(--text-secondary); }
+        .item-tag.type-deep-dive { background: #ccfbf1; color: #0f766e; }
+        .item-tag.type-crt-case { background: #dcfce7; color: #166534; }
+        .item-tag.type-mechanism { background: #fae8ff; color: #a21caf; }
+        .item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .icon-btn { width: 32px; height: 32px; border: 1px solid var(--border); background: white; border-radius: 8px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+        .icon-btn:hover { background: #f1f5f9; }
+        .icon-btn.flagged { background: #fef3c7; border-color: #fde68a; }
+        .note-content { margin-top: 8px; font-size: 14px; color: var(--text-secondary); white-space: pre-wrap; max-height: 120px; overflow: hidden; }
+        .note-content.expanded { max-height: none; }
+        .expand-btn { font-size: 12px; color: var(--primary); cursor: pointer; border: none; background: none; font-family: inherit; margin-top: 4px; }
+        .empty-state { text-align: center; padding: 60px 24px; color: var(--text-secondary); }
         .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
-        .bookmark-list { display: grid; gap: 12px; }
-        .bookmark-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; gap: 16px; cursor: pointer; transition: all 0.2s; }
-        .bookmark-card:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .bookmark-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-        .bookmark-icon.micro { background: #dcfce7; }
-        .bookmark-icon.pharm { background: #dbeafe; }
-        .bookmark-icon.cardio { background: #fee2e2; }
-        .bookmark-icon.renal { background: #fef3c7; }
-        .bookmark-content { flex: 1; min-width: 0; }
-        .bookmark-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
-        .bookmark-module { font-size: 13px; color: var(--text-secondary); }
-        .bookmark-note { font-size: 13px; color: var(--text-secondary); margin-top: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 6px; }
-        .bookmark-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
-        .bookmark-actions { display: flex; gap: 8px; align-items: flex-start; }
-        .action-btn { padding: 8px; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-radius: 6px; }
-        .action-btn:hover { background: #f1f5f9; }
-        .tag { display: inline-block; padding: 2px 8px; background: #f1f5f9; border-radius: 4px; font-size: 11px; color: var(--text-secondary); margin-right: 4px; }
-        .tag.red { background: #fee2e2; color: #991b1b; }
-        .tag.yellow { background: #fef3c7; color: #92400e; }
-        .tag.green { background: #dcfce7; color: #166534; }
-        .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .filter-btn { padding: 6px 14px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 20px; font-size: 13px; cursor: pointer; }
-        .filter-btn:hover { border-color: var(--primary); }
-        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .note-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; }
-        .note-card h3 { font-size: 16px; margin-bottom: 8px; }
-        .note-card p { font-size: 14px; color: var(--text-secondary); white-space: pre-wrap; }
-        .note-card .meta { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; }
-        .add-note-btn { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3); }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
-        .modal.show { display: flex; }
-        .modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; width: 90%; max-width: 500px; }
-        .modal-content h2 { margin-bottom: 16px; }
-        .modal-content .form-group { margin-bottom: 16px; }
-        .modal-content label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-secondary); }
-        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
-        .modal-content textarea { min-height: 120px; resize: vertical; }
-        .modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
-        .btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; }
-        .btn-secondary { background: #f1f5f9; color: var(--text-primary); }
-        .btn-primary { background: var(--primary); color: white; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: white; border-radius: 16px; width: 90%; max-width: 500px; padding: 24px; max-height: 90vh; overflow-y: auto; }
+        .modal h3 { font-size: 18px; margin-bottom: 16px; }
+        .modal label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; margin-top: 12px; }
+        .modal input, .modal textarea, .modal select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
+        .modal textarea { min-height: 120px; resize: vertical; }
+        .modal input:focus, .modal textarea:focus { outline: none; border-color: var(--primary); }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+        .modal-btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; font-family: inherit; }
+        .modal-btn.cancel { background: #f1f5f9; color: var(--text-secondary); }
+        .modal-btn.save { background: var(--primary); color: white; }
+        .modal-btn.delete { background: #fee2e2; color: #991b1b; }
+        .delete-confirm { font-size: 13px; color: #991b1b; margin-top: 8px; }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="header-inner">
-            <div>
-                <h1>📌 Bookmarks & Notes</h1>
-                <p>Save concepts to revisit and add personal notes</p>
-            </div>
-            <div class="search-box">
-                <input type="text" placeholder="Search bookmarks..." id="search-input" oninput="filterItems()">
-            </div>
+        <h1>📌 Bookmarks & Notes</h1>
+        <p>Save, organize, and review your learning</p>
+        <div class="stat-bar">
+            <span>🔖 <span id="bk-count">0</span> bookmarks</span>
+            <span>📝 <span id="note-count">0</span> notes</span>
+            <span>🚩 <span id="flag-count">0</span> flagged</span>
         </div>
     </header>
 
     <main class="content">
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('bookmarks')">📚 Bookmarks (8)</button>
-            <button class="tab" onclick="switchTab('notes')">📝 Notes (5)</button>
-            <button class="tab" onclick="switchTab('flagged')">🚩 Flagged for Review (3)</button>
+            <button class="tab active" onclick="switchTab('bookmarks')">🔖 Bookmarks</button>
+            <button class="tab" onclick="switchTab('notes')">📝 Notes</button>
+            <button class="tab" onclick="switchTab('flagged')">🚩 Flagged</button>
         </div>
 
-        <div class="view active" id="bookmarks">
-            <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterCategory(this, 'all')">All</button>
-                <button class="filter-btn" onclick="filterCategory(this, 'micro')">🦠 Microbiology</button>
-                <button class="filter-btn" onclick="filterCategory(this, 'pharm')">💊 Pharmacology</button>
-                <button class="filter-btn" onclick="filterCategory(this, 'renal')">🧪 Renal</button>
-                <button class="filter-btn" onclick="filterCategory(this, 'cardio')">❤️ Cardiology</button>
+        <!-- BOOKMARKS TAB -->
+        <div id="tab-bookmarks">
+            <div class="toolbar">
+                <input type="text" class="search-box" id="bk-search" placeholder="Search bookmarks..." oninput="renderBookmarks()">
+                <button class="add-btn" onclick="openBookmarkModal()">+ Add Bookmark</button>
             </div>
-            <div class="bookmark-list" id="bookmark-list">
-                <div class="bookmark-card" data-category="micro">
-                    <div class="bookmark-icon micro">🦠</div>
-                    <div class="bookmark-content">
-                        <div class="bookmark-title">Aspergillus vs Mucor Morphology</div>
-                        <div class="bookmark-module">Microbiology → Aspergillus</div>
-                        <div class="bookmark-note">45° septate (Aspergillus) vs 90° pauciseptate (Mucor) — HIGH YIELD!</div>
-                        <div class="bookmark-meta">
-                            <span class="tag green">High-Yield</span>
-                            <span>Saved 2 days ago</span>
-                        </div>
-                    </div>
-                    <div class="bookmark-actions">
-                        <button class="action-btn" title="Remove">🗑️</button>
-                    </div>
-                </div>
-                <div class="bookmark-card" data-category="renal">
-                    <div class="bookmark-icon renal">🧪</div>
-                    <div class="bookmark-content">
-                        <div class="bookmark-title">FENa Interpretation</div>
-                        <div class="bookmark-module">Renal → AKI</div>
-                        <div class="bookmark-note">Pre-renal: &lt;1% | ATN: &gt;2% | Use FEUrea if on diuretics</div>
-                        <div class="bookmark-meta">
-                            <span class="tag yellow">Review Again</span>
-                            <span>Saved 3 days ago</span>
-                        </div>
-                    </div>
-                    <div class="bookmark-actions">
-                        <button class="action-btn" title="Remove">🗑️</button>
-                    </div>
-                </div>
-                <div class="bookmark-card" data-category="pharm">
-                    <div class="bookmark-icon pharm">💊</div>
-                    <div class="bookmark-content">
-                        <div class="bookmark-title">Anti-TB Drug Toxicities</div>
-                        <div class="bookmark-module">Pharmacology → Anti-TB Drugs</div>
-                        <div class="bookmark-note">RIPE: Rifampin (CYP inducer, orange), INH (neuropathy→B6), PZA (gout), Ethambutol (eyes)</div>
-                        <div class="bookmark-meta">
-                            <span class="tag green">High-Yield</span>
-                            <span>Saved 1 week ago</span>
-                        </div>
-                    </div>
-                    <div class="bookmark-actions">
-                        <button class="action-btn" title="Remove">🗑️</button>
-                    </div>
-                </div>
-                <div class="bookmark-card" data-category="renal">
-                    <div class="bookmark-icon renal">🧪</div>
-                    <div class="bookmark-content">
-                        <div class="bookmark-title">Winter's Formula</div>
-                        <div class="bookmark-module">Renal → Acid-Base</div>
-                        <div class="bookmark-note">Expected pCO2 = 1.5 × HCO3 + 8 (±2)</div>
-                        <div class="bookmark-meta">
-                            <span>Saved 1 week ago</span>
-                        </div>
-                    </div>
-                    <div class="bookmark-actions">
-                        <button class="action-btn" title="Remove">🗑️</button>
-                    </div>
-                </div>
-            </div>
+            <div class="filter-pills" id="bk-filters"></div>
+            <div class="item-list" id="bk-list"></div>
         </div>
 
-        <div class="view" id="notes">
-            <div class="note-card">
-                <h3>My Approach to Acid-Base Problems</h3>
-                <p>1. Look at pH (acidemia vs alkalemia)
-2. Identify primary disorder (CO2 or HCO3)
-3. Check compensation (Winter's formula for met acidosis)
-4. Calculate anion gap if met acidosis
-5. Calculate delta-delta if AG elevated</p>
-                <div class="meta">
-                    <span>📅 Created Jan 28, 2026</span>
-                    <span>🔗 Linked to: Acid-Base Module</span>
-                </div>
+        <!-- NOTES TAB -->
+        <div id="tab-notes" style="display:none;">
+            <div class="toolbar">
+                <input type="text" class="search-box" id="note-search" placeholder="Search notes..." oninput="renderNotes()">
+                <button class="add-btn" onclick="openNoteModal()">+ New Note</button>
             </div>
-            <div class="note-card">
-                <h3>Fungi Memory Tricks</h3>
-                <p>"45° = Aspergillus" (septate, acute angle)
-"90° = Mucor" (pauciseptate, right angle)
-
-Endemic mycoses geography:
-- Histo = Ohio/Mississippi (bat caves)
-- Cocci = Desert Southwest (spherules)
-- Blasto = Great Lakes (broad-based budding)</p>
-                <div class="meta">
-                    <span>📅 Created Jan 25, 2026</span>
-                    <span>🔗 Linked to: Microbiology</span>
-                </div>
-            </div>
-            <div class="note-card">
-                <h3>Electrolyte Relationships</h3>
-                <p>If hypoK or hypoCa won't correct → CHECK MAGNESIUM!
-
-Mg is the "silent" electrolyte that makes others refractory.
-
-Also remember: High phosphate → Low calcium (inverse relationship)</p>
-                <div class="meta">
-                    <span>📅 Created Jan 22, 2026</span>
-                    <span>🔗 Linked to: Electrolytes Module</span>
-                </div>
-            </div>
+            <div class="item-list" id="note-list"></div>
         </div>
 
-        <div class="view" id="flagged">
-            <div class="bookmark-list">
-                <div class="bookmark-card" data-category="renal">
-                    <div class="bookmark-icon renal">🚩</div>
-                    <div class="bookmark-content">
-                        <div class="bookmark-title">RTA Types - Still Confused</div>
-                        <div class="bookmark-module">Renal → Acid-Base</div>
-                        <div class="bookmark-note">Need to review: Type 1 vs 2 vs 4, especially the K+ differences</div>
-                        <div class="bookmark-meta">
-                            <span class="tag red">Needs Work</span>
-                            <span>Flagged 2 days ago</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bookmark-card" data-category="micro">
-                    <div class="bookmark-icon micro">🚩</div>
-                    <div class="bookmark-content">
-                        <div class="bookmark-title">Malaria Species Differences</div>
-                        <div class="bookmark-module">Microbiology → Malaria</div>
-                        <div class="bookmark-note">Keep mixing up P. vivax vs ovale hypnozoites, need more practice</div>
-                        <div class="bookmark-meta">
-                            <span class="tag red">Needs Work</span>
-                            <span>Flagged 4 days ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- FLAGGED TAB -->
+        <div id="tab-flagged" style="display:none;">
+            <div class="item-list" id="flagged-list"></div>
         </div>
     </main>
 
-    <button class="add-note-btn" onclick="openModal()">+</button>
-
-    <div class="modal" id="note-modal">
-        <div class="modal-content">
-            <h2>Add New Note</h2>
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" id="note-title" placeholder="Give your note a title...">
-            </div>
-            <div class="form-group">
-                <label>Content</label>
-                <textarea id="note-content" placeholder="Write your note..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Link to Module (optional)</label>
-                <select id="note-module">
-                    <option value="">-- Select module --</option>
-                    <option>Microbiology</option>
-                    <option>Pharmacology</option>
-                    <option>Acid-Base</option>
-                    <option>Electrolytes</option>
-                    <option>AKI</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Tags</label>
-                <input type="text" id="note-tags" placeholder="e.g., high-yield, review-again">
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="saveNote()">Save Note</button>
+    <!-- Bookmark Modal -->
+    <div class="modal-overlay" id="bk-modal">
+        <div class="modal">
+            <h3 id="bk-modal-title">Add Bookmark</h3>
+            <input type="hidden" id="bk-edit-id">
+            <label>Title *</label>
+            <input type="text" id="bk-title" placeholder="e.g., AKI Deep Dive - FENa Question">
+            <label>Type</label>
+            <select id="bk-type">
+                <option value="general">General</option>
+                <option value="deep-dive">Deep Dive Question</option>
+                <option value="crt-case">CRT Case</option>
+                <option value="mechanism">MechanismDx Module</option>
+            </select>
+            <label>URL (optional)</label>
+            <input type="text" id="bk-url" placeholder="Link to the resource">
+            <label>Tags (comma-separated)</label>
+            <input type="text" id="bk-tags" placeholder="e.g., renal, AKI, high-yield">
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeModal('bk-modal')">Cancel</button>
+                <button class="modal-btn delete" id="bk-delete-btn" style="display:none;" onclick="deleteBookmark()">Delete</button>
+                <button class="modal-btn save" onclick="saveBookmark()">Save</button>
             </div>
         </div>
     </div>
 
+    <!-- Note Modal -->
+    <div class="modal-overlay" id="note-modal">
+        <div class="modal">
+            <h3 id="note-modal-title">New Note</h3>
+            <input type="hidden" id="note-edit-id">
+            <label>Title *</label>
+            <input type="text" id="note-title" placeholder="e.g., Key Points from DKA Case">
+            <label>Content</label>
+            <textarea id="note-content" placeholder="Write your notes here..."></textarea>
+            <label>Tags (comma-separated)</label>
+            <input type="text" id="note-tags" placeholder="e.g., endocrine, DKA, high-yield">
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeModal('note-modal')">Cancel</button>
+                <button class="modal-btn delete" id="note-delete-btn" style="display:none;" onclick="deleteNote()">Delete</button>
+                <button class="modal-btn save" onclick="saveNote()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dx-storage.js"></script>
     <script>
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            event.target.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+        let currentTab = 'bookmarks';
+        let bkFilter = 'all';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', (tab === 'bookmarks' && i === 0) || (tab === 'notes' && i === 1) || (tab === 'flagged' && i === 2));
+            });
+            document.getElementById('tab-bookmarks').style.display = tab === 'bookmarks' ? 'block' : 'none';
+            document.getElementById('tab-notes').style.display = tab === 'notes' ? 'block' : 'none';
+            document.getElementById('tab-flagged').style.display = tab === 'flagged' ? 'block' : 'none';
+            if (tab === 'bookmarks') renderBookmarks();
+            else if (tab === 'notes') renderNotes();
+            else renderFlagged();
         }
 
-        function filterCategory(btn, category) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        // ═══════════════════════════════════════════════
+        // BOOKMARKS
+        // ═══════════════════════════════════════════════
+        function renderBookmarks() {
+            const search = (document.getElementById('bk-search').value || '').toLowerCase();
+            let items = DxBookmarks.list();
             
-            document.querySelectorAll('.bookmark-card').forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            // Filter by search
+            if (search) {
+                items = items.filter(b => b.title.toLowerCase().includes(search) || (b.tags && b.tags.some(t => t.toLowerCase().includes(search))));
+            }
+            // Filter by type
+            if (bkFilter !== 'all') {
+                items = items.filter(b => b.type === bkFilter);
+            }
+            // Sort: flagged first, then by most recent
+            items.sort((a, b) => (b.flagged ? 1 : 0) - (a.flagged ? 1 : 0));
+
+            // Render filter pills
+            const types = ['all', ...new Set(DxBookmarks.list().map(b => b.type))];
+            const typeLabels = { all: 'All', general: 'General', 'deep-dive': 'Deep Dive', 'crt-case': 'CRT Case', mechanism: 'Mechanism' };
+            document.getElementById('bk-filters').innerHTML = types.map(t =>
+                '<button class="pill ' + (bkFilter === t ? 'active' : '') + '" onclick="bkFilter=\'' + t + '\';renderBookmarks()">' + (typeLabels[t] || t) + '</button>'
+            ).join('');
+
+            const container = document.getElementById('bk-list');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="emoji">🔖</div><p>' + (search ? 'No bookmarks match your search.' : 'No bookmarks yet. Add one to get started!') + '</p></div>';
+                return;
+            }
+
+            container.innerHTML = items.map(bk => {
+                const tagHtml = (bk.tags || []).map(t => '<span class="item-tag">' + t + '</span>').join(' ');
+                const typeTag = bk.type !== 'general' ? '<span class="item-tag type-' + bk.type + '">' + (bk.type === 'deep-dive' ? 'Deep Dive' : bk.type === 'crt-case' ? 'CRT Case' : 'Mechanism') + '</span>' : '';
+                return '<div class="item-card ' + (bk.flagged ? 'flagged' : '') + '">' +
+                    '<div class="item-top">' +
+                        '<div>' +
+                            '<div class="item-title">' + (bk.url ? '<a href="' + bk.url + '" style="color: inherit; text-decoration: none;">' + bk.title + '</a>' : bk.title) + '</div>' +
+                            '<div class="item-meta">' + typeTag + tagHtml + '</div>' +
+                        '</div>' +
+                        '<div class="item-actions">' +
+                            '<button class="icon-btn ' + (bk.flagged ? 'flagged' : '') + '" onclick="toggleFlag(\'' + bk.id + '\')" title="' + (bk.flagged ? 'Unflag' : 'Flag for review') + '">🚩</button>' +
+                            '<button class="icon-btn" onclick="editBookmark(\'' + bk.id + '\')" title="Edit">✏️</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
         }
 
-        function filterItems() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            document.querySelectorAll('.bookmark-card, .note-card').forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(query) ? '' : 'none';
-            });
+        function openBookmarkModal(id) {
+            document.getElementById('bk-modal-title').textContent = id ? 'Edit Bookmark' : 'Add Bookmark';
+            document.getElementById('bk-edit-id').value = id || '';
+            document.getElementById('bk-delete-btn').style.display = id ? 'inline-block' : 'none';
+            if (id) {
+                const bk = DxStorage.load('bookmarks', id);
+                document.getElementById('bk-title').value = bk.title || '';
+                document.getElementById('bk-type').value = bk.type || 'general';
+                document.getElementById('bk-url').value = bk.url || '';
+                document.getElementById('bk-tags').value = (bk.tags || []).join(', ');
+            } else {
+                document.getElementById('bk-title').value = '';
+                document.getElementById('bk-type').value = 'general';
+                document.getElementById('bk-url').value = '';
+                document.getElementById('bk-tags').value = '';
+            }
+            document.getElementById('bk-modal').classList.add('show');
         }
 
-        function openModal() {
-            document.getElementById('note-modal').classList.add('show');
+        function editBookmark(id) { openBookmarkModal(id); }
+
+        function saveBookmark() {
+            const title = document.getElementById('bk-title').value.trim();
+            if (!title) { alert('Title is required.'); return; }
+            const id = document.getElementById('bk-edit-id').value;
+            const tags = document.getElementById('bk-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+            
+            if (id) {
+                // Update existing
+                const existing = DxStorage.load('bookmarks', id);
+                existing.title = title;
+                existing.type = document.getElementById('bk-type').value;
+                existing.url = document.getElementById('bk-url').value.trim();
+                existing.tags = tags;
+                DxStorage.save('bookmarks', id, existing);
+            } else {
+                DxBookmarks.add({
+                    title: title,
+                    type: document.getElementById('bk-type').value,
+                    url: document.getElementById('bk-url').value.trim(),
+                    tags: tags
+                });
+            }
+            closeModal('bk-modal');
+            updateStats();
+            renderBookmarks();
         }
 
-        function closeModal() {
-            document.getElementById('note-modal').classList.remove('show');
-        }
-
-        function saveNote() {
-            const title = document.getElementById('note-title').value;
-            const content = document.getElementById('note-content').value;
-            if (title && content) {
-                alert('Note saved!');
-                closeModal();
-                document.getElementById('note-title').value = '';
-                document.getElementById('note-content').value = '';
+        function deleteBookmark() {
+            const id = document.getElementById('bk-edit-id').value;
+            if (id && confirm('Delete this bookmark?')) {
+                DxBookmarks.remove(id);
+                closeModal('bk-modal');
+                updateStats();
+                renderBookmarks();
             }
         }
 
-        // Close modal on outside click
-        document.getElementById('note-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'note-modal') closeModal();
+        function toggleFlag(id) {
+            DxBookmarks.toggleFlag(id);
+            updateStats();
+            renderBookmarks();
+            if (currentTab === 'flagged') renderFlagged();
+        }
+
+        // ═══════════════════════════════════════════════
+        // NOTES
+        // ═══════════════════════════════════════════════
+        function renderNotes() {
+            const search = (document.getElementById('note-search').value || '').toLowerCase();
+            let items = DxNotes.list();
+            if (search) {
+                items = items.filter(n => n.title.toLowerCase().includes(search) || n.content.toLowerCase().includes(search) || (n.tags && n.tags.some(t => t.toLowerCase().includes(search))));
+            }
+            // Sort newest first
+            items.sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || ''));
+
+            const container = document.getElementById('note-list');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="emoji">📝</div><p>' + (search ? 'No notes match your search.' : 'No notes yet. Create one to start capturing your learning!') + '</p></div>';
+                return;
+            }
+
+            container.innerHTML = items.map(note => {
+                const tagHtml = (note.tags || []).map(t => '<span class="item-tag">' + t + '</span>').join(' ');
+                const preview = note.content.length > 200 ? note.content.substring(0, 200) + '...' : note.content;
+                const dateStr = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
+                return '<div class="item-card">' +
+                    '<div class="item-top">' +
+                        '<div style="flex:1;min-width:0;">' +
+                            '<div class="item-title">' + note.title + '</div>' +
+                            '<div class="item-meta"><span>' + dateStr + '</span>' + tagHtml + '</div>' +
+                            (note.content ? '<div class="note-content">' + preview.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>' : '') +
+                        '</div>' +
+                        '<div class="item-actions">' +
+                            '<button class="icon-btn" onclick="editNote(\'' + note.id + '\')" title="Edit">✏️</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function openNoteModal(id) {
+            document.getElementById('note-modal-title').textContent = id ? 'Edit Note' : 'New Note';
+            document.getElementById('note-edit-id').value = id || '';
+            document.getElementById('note-delete-btn').style.display = id ? 'inline-block' : 'none';
+            if (id) {
+                const note = DxStorage.load('notes', id);
+                document.getElementById('note-title').value = note.title || '';
+                document.getElementById('note-content').value = note.content || '';
+                document.getElementById('note-tags').value = (note.tags || []).join(', ');
+            } else {
+                document.getElementById('note-title').value = '';
+                document.getElementById('note-content').value = '';
+                document.getElementById('note-tags').value = '';
+            }
+            document.getElementById('note-modal').classList.add('show');
+        }
+
+        function editNote(id) { openNoteModal(id); }
+
+        function saveNote() {
+            const title = document.getElementById('note-title').value.trim();
+            if (!title) { alert('Title is required.'); return; }
+            const id = document.getElementById('note-edit-id').value;
+            const tags = document.getElementById('note-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+            
+            if (id) {
+                DxNotes.update(id, {
+                    title: title,
+                    content: document.getElementById('note-content').value,
+                    tags: tags
+                });
+            } else {
+                DxNotes.add({
+                    title: title,
+                    content: document.getElementById('note-content').value,
+                    tags: tags
+                });
+            }
+            closeModal('note-modal');
+            updateStats();
+            renderNotes();
+        }
+
+        function deleteNote() {
+            const id = document.getElementById('note-edit-id').value;
+            if (id && confirm('Delete this note?')) {
+                DxNotes.remove(id);
+                closeModal('note-modal');
+                updateStats();
+                renderNotes();
+            }
+        }
+
+        // ═══════════════════════════════════════════════
+        // FLAGGED
+        // ═══════════════════════════════════════════════
+        function renderFlagged() {
+            const items = DxBookmarks.list().filter(b => b.flagged);
+            const container = document.getElementById('flagged-list');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="emoji">🚩</div><p>No flagged items. Flag bookmarks to prioritize them for review.</p></div>';
+                return;
+            }
+            container.innerHTML = items.map(bk => {
+                const typeTag = bk.type !== 'general' ? '<span class="item-tag type-' + bk.type + '">' + bk.type.replace('-', ' ') + '</span>' : '';
+                return '<div class="item-card flagged">' +
+                    '<div class="item-top">' +
+                        '<div><div class="item-title">' + bk.title + '</div><div class="item-meta">' + typeTag + '</div></div>' +
+                        '<div class="item-actions">' +
+                            '<button class="icon-btn flagged" onclick="toggleFlag(\'' + bk.id + '\')" title="Unflag">🚩</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        // ═══════════════════════════════════════════════
+        // UTILITIES
+        // ═══════════════════════════════════════════════
+        function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+        
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('show'); });
         });
+
+        function updateStats() {
+            document.getElementById('bk-count').textContent = DxBookmarks.count();
+            document.getElementById('note-count').textContent = DxNotes.count();
+            document.getElementById('flag-count').textContent = DxBookmarks.list().filter(b => b.flagged).length;
+        }
+
+        // ═══════════════════════════════════════════════
+        // INIT
+        // ═══════════════════════════════════════════════
+        updateStats();
+        renderBookmarks();
     </script>
 <script src="../dx-progress.js"></script>
 <script src="../dx-recommendations.js"></script>
 <script src="dx-tools-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-tools-nav.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
 </body>
 </html>

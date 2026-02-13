@@ -11,15 +11,15 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            font-family:'Inter',sans-serif;
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
             min-height: 100vh;
             color: var(--text-primary);
         }
         
         .header {
             background: white;
-            border-bottom: 1px solid #bfdbfe;
+            border-bottom: 1px solid #99f6e4;
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
@@ -34,7 +34,7 @@
         .logo-text {
             font-size: 20px;
             font-weight: 600;
-            color: #1e40af;
+            color: #115e59;
         }
         
         .main-content {
@@ -49,7 +49,7 @@
         }
         .hero h1 {
             font-size: 32px;
-            color: #1e40af;
+            color: #115e59;
             margin-bottom: 8px;
         }
         .hero p {
@@ -75,7 +75,7 @@
         }
         
         .panel h2 {
-            color: #1e40af;
+            color: #115e59;
             font-size: 18px;
             margin-bottom: 20px;
             padding-bottom: 12px;
@@ -624,8 +624,19 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <h2>📄 Generated Letter</h2>
                     <div class="output-actions">
                         <button class="action-btn copy-btn" onclick="copyLetter()">📋 Copy</button>
+                        <button class="action-btn template-btn" onclick="saveDraft()" id="saveDraftBtn">💾 Save</button>
+                        <button class="action-btn template-btn" onclick="toggleDraftsList()" id="loadDraftsBtn">📂 Drafts</button>
                         <button class="action-btn template-btn" onclick="clearLetter()">Clear</button>
                     </div>
+                </div>
+                
+                <!-- Saved Drafts Panel -->
+                <div id="draftsPanel" style="display:none;background:#f8fafc;border:1px solid #e4e4e7;border-radius:10px;padding:16px;margin-bottom:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <h3 style="font-size:14px;margin:0;">📂 Saved Drafts</h3>
+                        <button onclick="toggleDraftsList()" style="background:none;border:none;cursor:pointer;font-size:16px;">✕</button>
+                    </div>
+                    <div id="draftsList"></div>
                 </div>
                 
                 <div class="letter-output" id="letterOutput">
@@ -857,6 +868,93 @@ Email: [Email Address]
             document.querySelectorAll('input[type="text"], textarea').forEach(el => el.value = '');
         }
         
+        // ═══════════════════════════════════════════════
+        // DRAFT PERSISTENCE (DxStorage)
+        // ═══════════════════════════════════════════════
+        function saveDraft() {
+            if (typeof DxStorage === 'undefined') { alert('Storage not available'); return; }
+            const formData = {
+                letterType: document.getElementById('letterType').value,
+                fromService: document.getElementById('fromService').value,
+                toService: document.getElementById('toService').value,
+                urgency: document.getElementById('urgency').value,
+                patientName: document.getElementById('patientName').value,
+                patientAgeSex: document.getElementById('patientAgeSex').value,
+                diagnosis: document.getElementById('diagnosis').value,
+                reason: document.getElementById('reason').value,
+                history: document.getElementById('history').value,
+                management: document.getElementById('management').value,
+                questions: document.getElementById('questions').value
+            };
+            const label = formData.patientName || 'Untitled';
+            const id = DxStorage.generateId('draft');
+            DxStorage.save('referral', id, {
+                label: label,
+                savedAt: new Date().toISOString(),
+                form: formData,
+                letterText: document.getElementById('letterOutput').textContent
+            });
+            const btn = document.getElementById('saveDraftBtn');
+            btn.textContent = '✅ Saved!';
+            setTimeout(() => { btn.textContent = '💾 Save'; }, 2000);
+        }
+        
+        function toggleDraftsList() {
+            const panel = document.getElementById('draftsPanel');
+            const isShowing = panel.style.display !== 'none';
+            panel.style.display = isShowing ? 'none' : 'block';
+            if (!isShowing) renderDraftsList();
+        }
+        
+        function renderDraftsList() {
+            if (typeof DxStorage === 'undefined') { 
+                document.getElementById('draftsList').innerHTML = '<p style="color:#6b7280;font-size:13px;">Storage not available.</p>';
+                return;
+            }
+            const keys = DxStorage.list('referral');
+            if (!keys || keys.length === 0) {
+                document.getElementById('draftsList').innerHTML = '<p style="color:#6b7280;font-size:13px;">No saved drafts yet. Generate a letter and click Save.</p>';
+                return;
+            }
+            const drafts = keys.map(k => ({ key: k, data: DxStorage.load('referral', k) })).filter(d => d.data).sort((a, b) => (b.data.savedAt || '').localeCompare(a.data.savedAt || ''));
+            document.getElementById('draftsList').innerHTML = drafts.map(d => {
+                const date = d.data.savedAt ? new Date(d.data.savedAt).toLocaleDateString() : '';
+                return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:white;border:1px solid #e4e4e7;border-radius:8px;margin-bottom:6px;font-size:13px;">' +
+                    '<div style="cursor:pointer;flex:1;" onclick="loadDraft(\'' + d.key + '\')">' +
+                        '<strong>' + (d.data.label || 'Untitled') + '</strong>' +
+                        '<span style="color:#6b7280;margin-left:8px;">' + date + '</span>' +
+                    '</div>' +
+                    '<button onclick="deleteDraft(\'' + d.key + '\')" style="background:none;border:none;cursor:pointer;color:#ef4444;font-size:14px;" title="Delete">🗑️</button>' +
+                '</div>';
+            }).join('');
+        }
+        
+        function loadDraft(key) {
+            if (typeof DxStorage === 'undefined') return;
+            const draft = DxStorage.load('referral', key);
+            if (!draft || !draft.form) return;
+            const f = draft.form;
+            document.getElementById('letterType').value = f.letterType || '';
+            document.getElementById('fromService').value = f.fromService || '';
+            document.getElementById('toService').value = f.toService || '';
+            document.getElementById('urgency').value = f.urgency || '';
+            document.getElementById('patientName').value = f.patientName || '';
+            document.getElementById('patientAgeSex').value = f.patientAgeSex || '';
+            document.getElementById('diagnosis').value = f.diagnosis || '';
+            document.getElementById('reason').value = f.reason || '';
+            document.getElementById('history').value = f.history || '';
+            document.getElementById('management').value = f.management || '';
+            document.getElementById('questions').value = f.questions || '';
+            generateLetter();
+            document.getElementById('draftsPanel').style.display = 'none';
+        }
+        
+        function deleteDraft(key) {
+            if (typeof DxStorage === 'undefined') return;
+            DxStorage.remove('referral', key);
+            renderDraftsList();
+        }
+        
         function loadTemplate(template) {
             const templates = {
                 penicillin: {
@@ -1040,8 +1138,10 @@ Email: [Email Address]
 
     <script src="dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "Home", platformRoot: "" }); });</script>
+<script src="dx-storage.js"></script>
 <script src="../dx-progress.js"></script>
 <script src="dx-tools-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="dx-tools-nav.js"></script>
 </body>
 </html>

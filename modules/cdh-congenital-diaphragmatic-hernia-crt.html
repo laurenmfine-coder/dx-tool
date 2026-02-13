@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var AUTH_KEY="reasondx-user";var OLD_AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1;var p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);if(j&&j.email)return true}var oldU=localStorage.getItem(OLD_AUTH_KEY);if(oldU){var oldJ=JSON.parse(oldU);if(oldJ&&oldJ.email&&oldJ.name)return true}var sbKey=Object.keys(localStorage).find(function(k){return k.startsWith('sb-')&&k.endsWith('-auth-token')});if(sbKey&&localStorage.getItem(sbKey))return true}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Silent Left Chest | Respiratory Embryology | ReasonDx CRT</title>
+<style>
+:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F59E0B;--success:#10B981;--danger:#DC2626;--info:#8B5CF6}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.header{background:linear-gradient(135deg,#78350F,#F59E0B);padding:12px 20px;position:sticky;top:0;z-index:100;color:#fff}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto;flex-wrap:wrap;gap:8px}.header-title{font-size:1.1rem;font-weight:600}.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px}.stats{display:flex;gap:12px}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}
+.main{max-width:900px;margin:0 auto;padding:24px}.progress-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;margin-bottom:20px}.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.5rem;font-weight:700;margin-top:4px}.card-body{padding:24px}
+.narrative{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(251,191,36,.1));border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.hl{background:rgba(245,158,11,.3);padding:2px 6px;border-radius:4px;font-weight:500}
+.vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}
+.choices{display:grid;gap:12px;margin-top:20px}.choice{background:var(--card);border:2px solid var(--border);padding:16px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.2);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.2);pointer-events:none}.choice-icon{font-size:1.5rem}.choice-title{font-weight:600}.choice-desc{font-size:.85rem;color:var(--muted)}
+.teaching{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:16px;margin:20px 0}.teaching h4{color:var(--info);margin-bottom:8px}
+.alert{padding:16px;border-radius:12px;margin:20px 0;display:flex;gap:12px}.alert.info{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3)}.alert-icon{font-size:1.5rem}.alert-title{font-weight:600}
+.btn{padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;border:none;font-size:1rem}.btn-primary{background:var(--accent);color:#fff}.btn:hover{opacity:.9}.hidden{display:none!important}
+.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}.cross-link{padding:14px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;text-decoration:none;color:var(--text)}.cross-link:hover{border-color:var(--accent)}.cross-link-title{font-weight:600;font-size:.9rem}
+@media(max-width:480px){.main{padding:12px}.card-body{padding:16px}}
+</style>
+</head>
+<body>
+<div class="header"><div class="header-row">
+<div class="header-title">🫁 The Silent Left Chest<span class="badge">RESPIRATORY EMERGENCY</span></div>
+<div class="stats"><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div><div class="stat"><div class="stat-value" id="stageNum">1/6</div><div class="stat-label">Stage</div></div></div>
+</div></div>
+<div class="main">
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:17%"></div></div>
+<div id="s1" class="stage"><div class="card"><div class="card-header"><div class="card-phase">Stage 1 of 6</div><div class="card-title">🚨 Delivery Room Crisis</div></div><div class="card-body">
+<div class="narrative">A full-term newborn delivered by C-section becomes <span class='hl'>immediately cyanotic</span> despite vigorous stimulation. Bag-mask ventilation is ineffective. On exam, the abdomen is <span class='hl'>scaphoid (concave)</span> and breath sounds are <span class='hl'>absent on the left</span> with <span class='hl'>heart sounds displaced to the right</span>.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">HR</div><div class="vital-value">170</div></div><div class="vital"><div class="vital-label">RR</div><div class="vital-value">70</div></div><div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">65%</div></div><div class="vital"><div class="vital-label">Color</div><div class="vital-value">Cyanotic</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">What is the critical immediate intervention?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="Bag-mask ventilation worsens CDH by forcing air into herniated bowel in the chest, further compressing the lung. This is a key teaching point." onclick="pick(this,1)"><div class="choice-icon">🔴</div><div><div class="choice-title">Continue bag-mask ventilation</div><div class="choice-desc">Increase pressure and rate</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Immediate intubation is critical. Bag-mask ventilation is contraindicated because it inflates bowel in the chest, worsening pulmonary compression. Place an OG tube to decompress the stomach." onclick="pick(this,1)"><div class="choice-icon">🟢</div><div><div class="choice-title">Intubate immediately</div><div class="choice-desc">Secure airway, avoid bag-mask</div></div></div>
+<div class="choice" data-correct="false" data-fb="The findings suggest CDH, not pneumothorax. Needle decompression could injure herniated abdominal organs. The scaphoid abdomen is the key distinguishing feature." onclick="pick(this,1)"><div class="choice-icon">🔵</div><div><div class="choice-title">Needle decompression of left chest</div><div class="choice-desc">Treat suspected pneumothorax</div></div></div>
+<div class="choice" data-correct="false" data-fb="This is a full-term baby. The problem is mechanical (herniated bowel), not surfactant deficiency. The scaphoid abdomen + absent left breath sounds = CDH." onclick="pick(this,1)"><div class="choice-icon">🟡</div><div><div class="choice-title">Surfactant administration</div><div class="choice-desc">Treat suspected RDS</div></div></div></div>
+<div id="fb1" class="hidden">
+<div id="fbText1" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>Congenital diaphragmatic hernia (CDH) results from failure of the pleuroperitoneal folds to close (weeks 8-10). The most common type is left-sided Bochdalek hernia (80-85%) through the posterolateral diaphragm. Abdominal contents herniate into the thorax → pulmonary hypoplasia + pulmonary hypertension.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(2)">Continue →</button></div>
+</div></div></div></div>
+<div id="s2" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 2 of 6</div><div class="card-title">🔬 Embryology: Diaphragm Formation</div></div><div class="card-body">
+<div class="narrative">CXR confirms <span class='hl'>bowel loops in the left hemithorax</span> with mediastinal shift to the right. The baby is intubated on high-frequency oscillatory ventilation with <span class='hl'>inhaled nitric oxide</span>.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">82%</div></div><div class="vital"><div class="vital-label">Pre-ductal</div><div class="vital-value">88%</div></div><div class="vital"><div class="vital-label">Post-ductal</div><div class="vital-value">72%</div></div><div class="vital"><div class="vital-label">iNO</div><div class="vital-value">20 ppm</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">What embryologic structure fails to form in Bochdalek hernia?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="The septum transversum forms the central tendon (anterior diaphragm). Bochdalek hernias are POSTEROLATERAL." onclick="pick(this,2)"><div class="choice-icon">🔵</div><div><div class="choice-title">Septum transversum</div><div class="choice-desc">Anterior central tendon precursor</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! The pleuroperitoneal membranes close the posterolateral canals by week 8. Left closes later than right (explaining left-sided predominance). Failure → Bochdalek hernia. The diaphragm has 4 embryologic components: septum transversum, pleuroperitoneal membranes, body wall mesoderm, and esophageal mesentery." onclick="pick(this,2)"><div class="choice-icon">🟢</div><div><div class="choice-title">Pleuroperitoneal membrane</div><div class="choice-desc">Posterolateral diaphragm closure</div></div></div>
+<div class="choice" data-correct="false" data-fb="The esophageal mesentery forms the crura (posterior diaphragm around esophagus), not the posterolateral portion." onclick="pick(this,2)"><div class="choice-icon">🔴</div><div><div class="choice-title">Esophageal mesentery</div><div class="choice-desc">Dorsal mesoesophagus</div></div></div>
+<div class="choice" data-correct="false" data-fb="Body wall mesoderm contributes the peripheral muscular rim of the diaphragm, not the area where Bochdalek hernias occur." onclick="pick(this,2)"><div class="choice-icon">🟡</div><div><div class="choice-title">Body wall mesoderm</div><div class="choice-desc">Peripheral muscular rim</div></div></div></div>
+<div id="fb2" class="hidden">
+<div id="fbText2" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>4 components of the diaphragm: (1) Septum transversum → central tendon (anterior); (2) Pleuroperitoneal membranes → close posterolateral canals; (3) Body wall mesoderm → muscular rim; (4) Esophageal mesentery → crura. LEFT pleuroperitoneal membrane closes LATER → left Bochdalek hernias are more common (85%). Motor innervation: phrenic nerve (C3-C5, 'C3-4-5 keeps the diaphragm alive').</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(3)">Continue →</button></div>
+</div></div></div></div>
+<div id="s3" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 3 of 6</div><div class="card-title">⚡ Pulmonary Hypertension Crisis</div></div><div class="card-body">
+<div class="narrative">Despite ventilatory support and iNO, the pre-post ductal SpO2 gradient widens. Echocardiogram shows <span class='hl'>severe pulmonary hypertension</span> with right-to-left shunting through the PDA and PFO.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Pre-ductal</div><div class="vital-value">85%</div></div><div class="vital"><div class="vital-label">Post-ductal</div><div class="vital-value">60%</div></div><div class="vital"><div class="vital-label">PA Pressure</div><div class="vital-value">Suprasystemic</div></div><div class="vital"><div class="vital-label">PDA</div><div class="vital-value">R→L shunt</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">Why is pulmonary hypertension so severe in CDH?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="While the hypoplastic lung has reduced surfactant, the primary problem is the vascular bed." onclick="pick(this,3)"><div class="choice-icon">🔴</div><div><div class="choice-title">Surfactant deficiency only</div><div class="choice-desc">Immature type II pneumocytes</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! CDH causes: (1) fewer pulmonary arteries (hypoplasia); (2) thickened arterial walls with excessive smooth muscle (vascular remodeling); (3) increased vascular reactivity. This &#39;two-hit&#39; of fewer vessels + higher resistance creates severe, often refractory pulmonary hypertension." onclick="pick(this,3)"><div class="choice-icon">🟢</div><div><div class="choice-title">Pulmonary hypoplasia + abnormal vasculature</div><div class="choice-desc">Fewer vessels with increased muscularization</div></div></div>
+<div class="choice" data-correct="false" data-fb="There is mediastinal shift, but the primary driver of pulmonary hypertension is the abnormal pulmonary vascular bed, not cardiac compression." onclick="pick(this,3)"><div class="choice-icon">🔵</div><div><div class="choice-title">Mechanical compression of the heart</div><div class="choice-desc">Bowel compressing cardiac chambers</div></div></div>
+<div class="choice" data-correct="false" data-fb="While pulmonary vasoconstriction contributes, CDH pulmonary hypertension is primarily structural (fewer, thicker vessels), not just functional." onclick="pick(this,3)"><div class="choice-icon">🟡</div><div><div class="choice-title">Persistent fetal circulation from asphyxia</div><div class="choice-desc">Birth asphyxia causing vasoconstriction</div></div></div></div>
+<div id="fb3" class="hidden">
+<div id="fbText3" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>CDH pulmonary hypertension is the primary determinant of mortality (not the hernia itself). The lung develops in a compressed state → fewer alveoli, fewer arteries, and the arteries that form have excess smooth muscle. This is why surgery is NOT emergent — stabilizing the pulmonary hypertension takes priority. ECMO may be needed for refractory cases (20-30% of CDH patients).</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(4)">Continue →</button></div>
+</div></div></div></div>
+<div id="s4" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 4 of 6</div><div class="card-title">🔧 Surgical Timing</div></div><div class="card-body">
+<div class="narrative">After 48 hours of optimization, pulmonary hypertension improves. Pre-ductal SpO2 stabilizes above 90%. The team discusses <span class='hl'>timing of surgical repair</span>.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Pre-ductal</div><div class="vital-value">93%</div></div><div class="vital"><div class="vital-label">Post-ductal</div><div class="vital-value">88%</div></div><div class="vital"><div class="vital-label">iNO</div><div class="vital-value">Weaning</div></div><div class="vital"><div class="vital-label">Stable</div><div class="vital-value">48h</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">When should surgical repair be performed?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="This was the old approach. Current evidence shows delayed repair after physiologic stabilization improves survival." onclick="pick(this,4)"><div class="choice-icon">🔴</div><div><div class="choice-title">Immediately after birth</div><div class="choice-desc">Emergency surgery within hours</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Current practice is delayed repair (typically 24-96 hours or more) after pulmonary hypertension is managed. Surgery does not improve the pulmonary hypertension — the vascular bed is structurally abnormal. Operating on a hemodynamically unstable patient worsens outcomes." onclick="pick(this,4)"><div class="choice-icon">🟢</div><div><div class="choice-title">After hemodynamic stabilization</div><div class="choice-desc">Once pulmonary hypertension is controlled</div></div></div>
+<div class="choice" data-correct="false" data-fb="Waiting a full month is too long. Once stable, repair should proceed to allow the lung to expand and develop." onclick="pick(this,4)"><div class="choice-icon">🔵</div><div><div class="choice-title">At 1 month of age</div><div class="choice-desc">Allow maximal lung growth first</div></div></div>
+<div class="choice" data-correct="false" data-fb="Even patients requiring ECMO undergo repair — either on ECMO or shortly after decannulation." onclick="pick(this,4)"><div class="choice-icon">🟡</div><div><div class="choice-title">Only if ECMO is not needed</div><div class="choice-desc">Avoid surgery in severe cases</div></div></div></div>
+<div id="fb4" class="hidden">
+<div id="fbText4" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>CDH surgical repair is NOT a surgical emergency. Paradigm shift: the old approach of immediate repair led to worse outcomes because it destabilized fragile pulmonary hemodynamics. Modern approach: (1) Gentle ventilation strategies; (2) Pulmonary hypertension management (iNO, sildenafil); (3) ECMO if refractory; (4) Surgical repair only after stabilization. Repair: primary closure if possible, or patch (Gore-Tex) for large defects.</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(5)">Continue →</button></div>
+</div></div></div></div>
+<div id="s5" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 5 of 6</div><div class="card-title">📈 Prognostic Indicators</div></div><div class="card-body">
+<div class="narrative">Successful primary repair is performed. The herniated small bowel, spleen, and left colon are reduced into the abdomen. Postoperatively, the baby requires prolonged ventilatory support.</div>
+<div class="vitals"><div class="vital"><div class="vital-label">Post-Op Day</div><div class="vital-value">3</div></div><div class="vital"><div class="vital-label">Ventilator</div><div class="vital-value">Weaning</div></div><div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">94%</div></div><div class="vital"><div class="vital-label">Feeding</div><div class="vital-value">TPN</div></div></div>
+<div class="alert info"><div class="alert-icon">🤔</div><div><div class="alert-title">Which prenatal finding is the strongest predictor of CDH outcome?</div></div></div>
+<div class="choices"><div class="choice" data-correct="false" data-fb="Right-sided CDH can be more severe (liver herniation), but the strongest predictor is lung-to-head ratio." onclick="pick(this,5)"><div class="choice-icon">🔴</div><div><div class="choice-title">Side of the hernia (left vs right)</div><div class="choice-desc">Right-sided has worse prognosis</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! O/E LHR is the best prenatal predictor. Measured on ultrasound: contralateral lung area / head circumference, compared to expected. O/E LHR <25% = severe (survival ~15-20%). O/E LHR >45% = mild (survival >90%). Liver herniation into the chest is also a negative predictor." onclick="pick(this,5)"><div class="choice-icon">🟢</div><div><div class="choice-title">Observed/expected lung-to-head ratio</div><div class="choice-desc">O/E LHR measuring contralateral lung size</div></div></div>
+<div class="choice" data-correct="false" data-fb="Earlier detection may correlate with severity but is not the strongest quantitative predictor." onclick="pick(this,5)"><div class="choice-icon">🔵</div><div><div class="choice-title">Gestational age at diagnosis</div><div class="choice-desc">Earlier detection = worse prognosis</div></div></div>
+<div class="choice" data-correct="false" data-fb="Bowel volume matters less than the degree of lung hypoplasia, which is directly measured by LHR." onclick="pick(this,5)"><div class="choice-icon">🟡</div><div><div class="choice-title">Amount of bowel herniated</div><div class="choice-desc">More herniation = worse prognosis</div></div></div></div>
+<div id="fb5" class="hidden">
+<div id="fbText5" style="padding:12px;border-radius:8px;margin-bottom:12px"></div>
+<div class="teaching"><h4>📖 Teaching Point</h4><p>CDH prognostic indicators: O/E LHR is strongest predictor. Other negative prognosticators: liver herniation into chest, right-sided hernia, associated anomalies (cardiac defects), need for ECMO, low Apgar scores. Overall CDH survival is ~70-80% at specialized centers. Fetal intervention (FETO — fetoscopic endoluminal tracheal occlusion) is being studied for severe cases (O/E LHR <25%).</p></div>
+<div style="text-align:right;margin-top:16px"><button class="btn btn-primary" onclick="next(6)">Continue →</button></div>
+</div></div></div></div>
+<div id="s6" class="stage hidden"><div class="card"><div class="card-header"><div class="card-phase">Stage 6 of 6</div><div class="card-title">🎓 Integration & Key Takeaways</div></div><div class="card-body">
+<div class="narrative">The baby is discharged at 6 weeks on supplemental oxygen. At 1 year, she's breathing room air with mild exercise intolerance. Follow-up shows catch-up lung growth.</div>
+<h3 style="color:var(--accent);margin:20px 0 12px">Key Takeaways</h3><div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>CDH = failure of pleuroperitoneal membrane closure (weeks 8-10)</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Left Bochdalek hernia = 85% (left closes later embryologically)</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>4 diaphragm components: septum transversum, pleuroperitoneal membranes, body wall, esophageal mesentery</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Bag-mask ventilation is CONTRAINDICATED — intubate immediately</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Scaphoid abdomen + absent breath sounds + mediastinal shift = CDH triad</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Pulmonary hypertension (not the hernia) determines mortality</span></div>
+<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--success)">✓</span><span>Surgery is NOT emergent — stabilize hemodynamics first</span></div>
+<h3 style="color:var(--info);margin:24px 0 12px">📚 References</h3><div class="cross-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK526101/" target="_blank" class="cross-link"><div class="cross-link-title">📄 Congenital Diaphragmatic Hernia - StatPearls</div></a>
+<a href="https://radiopaedia.org/articles/bochdalek-hernia" target="_blank" class="cross-link"><div class="cross-link-title">📄 Bochdalek Hernia - Radiopaedia</div></a></div>
+<div style="text-align:center;margin-top:30px"><div style="font-size:4rem">🎓</div><div style="font-size:2rem;font-weight:700;color:var(--success);margin:16px 0">Case Complete!</div>
+<p style="color:var(--muted);margin-bottom:20px">Score: <span id="finalScore">0</span> / 500</p>
+<button class="btn btn-primary" onclick="location.reload()">Restart</button></div></div></div></div>
+</div>
+<script>
+let score=0,total=6;const crtId='cdh-congenital-diaphragmatic-hernia-crt';(function(){try{var s=JSON.parse(localStorage.getItem('crtScores')||'{}');if(s[crtId]){var d=s[crtId];document.title+=' (Best: '+d.best+'/'+total+')'}}catch(e){}})();
+function pick(el,sn){
+  const all=el.parentElement.querySelectorAll('.choice');
+  all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});
+  el.style.opacity='1';
+  const correct=el.dataset.correct==='true';
+  el.classList.add(correct?'correct':'wrong');
+  if(correct){score+=100;document.getElementById('score').textContent=score;try{var cs=JSON.parse(localStorage.getItem('crtScores')||'{}');if(!cs[crtId])cs[crtId]={attempts:0,best:0,last:null};cs[crtId].last=new Date().toISOString();var pts=score/100;if(pts>cs[crtId].best)cs[crtId].best=pts;localStorage.setItem('crtScores',JSON.stringify(cs))}catch(e){}}
+  if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}
+  const fbDiv=document.getElementById('fbText'+sn);
+  fbDiv.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';
+  fbDiv.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');
+  fbDiv.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;
+  document.getElementById('fb'+sn).classList.remove('hidden');
+}
+function next(n){
+  document.querySelectorAll('.stage').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('s'+n).classList.remove('hidden');
+  document.getElementById('stageNum').textContent=n+'/'+total;
+  document.getElementById('progress').style.width=Math.round(n/total*100)+'%';
+  window.scrollTo(0,0);
+  if(n===total){document.getElementById('finalScore').textContent=score;try{var cs=JSON.parse(localStorage.getItem('crtScores')||'{}')||{};if(!cs[crtId])cs[crtId]={attempts:0,best:0,last:null};cs[crtId].attempts++;cs[crtId].completed=true;cs[crtId].last=new Date().toISOString();var pts=score/100;if(pts>cs[crtId].best)cs[crtId].best=pts;localStorage.setItem('crtScores',JSON.stringify(cs))}catch(e){}};
+}
+</script>
+
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="cdh-congenital-diaphragmatic-hernia-crt.html" class="cross-link"><div class="cross-link-title">🧪 Clinical Reasoning Trainer</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a></div></div></div>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/dx-universal-nav.js"></script>
+</body></html>
