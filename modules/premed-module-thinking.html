@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Doctors Think | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
+.header{background:linear-gradient(135deg,var(--pm-sky),#0369a1);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.container{max-width:740px;margin:0 auto;padding:24px;}
+.progress{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;}
+.progress-bar{flex:1;height:8px;background:#e2e8f0;border-radius:4px;}
+.progress-fill{height:100%;background:var(--pm-sky);border-radius:4px;transition:.3s;}
+.progress-text{font-size:13px;font-weight:600;color:var(--pm-sky);min-width:70px;text-align:right;}
+.section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.section h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-sky);}
+.section h3{font-size:17px;margin:20px 0 10px;color:var(--pm-text);}
+.section p{font-size:15px;margin-bottom:14px;}
+.highlight{background:var(--pm-sky-50);border-left:4px solid var(--pm-sky);padding:16px;border-radius:0 10px 10px 0;margin:16px 0;font-size:14px;}
+.highlight strong{color:var(--pm-sky);}
+.scenario{background:#fefce8;border:1.5px solid #fde68a;border-radius:10px;padding:18px;margin:16px 0;}
+.scenario h4{color:#92400e;margin-bottom:8px;font-size:15px;}
+.scenario p{font-size:14px;color:#78350f;margin-bottom:8px;}
+.think-box{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:10px;padding:16px;margin:16px 0;}
+.think-box h4{color:var(--pm-teal);font-size:14px;margin-bottom:6px;}
+.think-box textarea{width:100%;padding:10px;border:1px solid var(--pm-border);border-radius:6px;font-family:inherit;font-size:14px;min-height:80px;resize:vertical;background:#fff;}
+.reveal-btn{background:var(--pm-sky);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s;margin-top:8px;}
+.reveal-btn:hover{background:#0369a1;}
+.reveal{display:none;background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:10px;padding:16px;margin-top:12px;}
+.reveal.show{display:block;}
+.reveal h4{color:#059669;margin-bottom:8px;}
+.bias-card{background:var(--pm-card);border:1.5px solid #fecdd3;border-radius:10px;padding:16px;margin:12px 0;}
+.bias-card h4{color:#e11d48;font-size:15px;margin-bottom:6px;}
+.bias-card p{font-size:14px;}
+.bias-card .example{font-style:italic;color:var(--pm-muted);margin-top:6px;}
+.nav-btns{display:flex;justify-content:space-between;margin-top:24px;}
+.nav-btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.nav-next{background:var(--pm-sky);color:#fff;}
+.nav-prev{background:var(--pm-card);color:var(--pm-sky);border:1.5px solid var(--pm-sky);}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-paths.html#explorer">← Explorer Path</a><h1>🤔 How Doctors Think</h1></div>
+<div class="container">
+  <div class="progress"><div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:20%"></div></div><span class="progress-text" id="prog-text">1 / 5</span></div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson" id="lesson-1">
+    <div class="section">
+      <h2>1. Two Systems of Thinking</h2>
+      <p>Every physician uses two cognitive systems — and the interplay between them is the foundation of clinical reasoning.</p>
+      <h3>System 1: Pattern Recognition (Fast)</h3>
+      <p>An experienced physician sees a patient clutching their chest, sweating, with jaw pain — and <em>immediately</em> thinks "heart attack." They didn't analyze each symptom. The pattern triggered an instant recognition. This is System 1: fast, automatic, pattern-based. It's what makes experienced physicians appear to "just know."</p>
+      <h3>System 2: Analytical Reasoning (Slow)</h3>
+      <p>A medical student sees the same patient and systematically works through: "Chest pain → cardiac vs pulmonary vs GI vs MSK. Risk factors: age, smoking, diabetes. EKG shows ST elevation → STEMI protocol." This is System 2: slow, deliberate, step-by-step. It's how students learn before building the pattern library that enables System 1.</p>
+      <div class="highlight"><strong>Key insight:</strong> Expertise isn't about being smarter — it's about having a larger library of patterns from experience. Every patient you see adds to your pattern library. That's why clinical exposure matters.</div>
+      <div class="think-box"><h4>🤔 Reflect</h4><p style="font-size:14px;color:var(--pm-teal);margin-bottom:8px;">Think about a time you recognized something instantly (a friend's voice, a song from the first note, a type of car). That's System 1. Now think about the first time you encountered that thing — you had to learn it deliberately (System 2) before it became automatic.</p><textarea placeholder="How does this apply to what you've observed in clinical settings?"></textarea></div>
+    </div>
+    <div class="nav-btns"><span></span><button class="nav-btn nav-next" onclick="goTo(2)">Next: The Differential →</button></div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson hidden" id="lesson-2">
+    <div class="section">
+      <h2>2. The Differential Diagnosis</h2>
+      <p>Physicians don't guess. They generate a <strong>list of possibilities</strong> — ranked by likelihood and danger — then systematically narrow it down. This list is the differential diagnosis.</p>
+      <div class="scenario"><h4>🏥 Try It Yourself</h4><p>A 25-year-old woman comes to the ED with acute right lower abdominal pain. Before reading further, what could this be?</p></div>
+      <div class="think-box"><h4>✏️ Write your differential</h4><textarea id="diff-attempt" placeholder="List as many possible diagnoses as you can think of..."></textarea><button class="reveal-btn" onclick="document.getElementById('diff-reveal').classList.add('show')">See the physician's differential →</button></div>
+      <div class="reveal" id="diff-reveal">
+        <h4>The Physician's Differential (ranked):</h4>
+        <p><strong>Must rule out (dangerous):</strong> Appendicitis, ectopic pregnancy, ovarian torsion</p>
+        <p><strong>Common:</strong> Ruptured ovarian cyst, UTI, kidney stone, gastroenteritis</p>
+        <p><strong>Less likely but possible:</strong> Inflammatory bowel disease, PID, mesenteric lymphadenitis</p>
+        <p style="margin-top:10px;">Notice the hierarchy: <em>dangerous causes first</em>, then common causes, then rare. The first pregnancy test isn't because pregnancy is the most likely — it's because ectopic pregnancy can kill in hours. <strong>Danger drives the workup, not probability alone.</strong></p>
+      </div>
+      <div class="highlight"><strong>The framework:</strong> For any chief complaint, physicians ask: (1) What could kill this patient? (2) What's most common? (3) What fits this specific patient's risk factors? This hierarchy — danger → probability → fit — is the engine of clinical reasoning.</div>
+    </div>
+    <div class="nav-btns"><button class="nav-btn nav-prev" onclick="goTo(1)">← Back</button><button class="nav-btn nav-next" onclick="goTo(3)">Next: Bayesian Thinking →</button></div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson hidden" id="lesson-3">
+    <div class="section">
+      <h2>3. Bayesian Thinking</h2>
+      <p>Every piece of data — a symptom, a test result, an exam finding — changes the probability of each diagnosis on your differential. This is Bayesian reasoning: updating your belief with each new piece of evidence.</p>
+      <div class="scenario"><h4>🏥 Watch It In Action</h4>
+        <p><strong>Before history:</strong> 25-year-old woman, RLQ pain → Appendicitis ~30%, Ectopic ~15%, Ovarian cyst ~20%, UTI ~15%, Other ~20%</p>
+        <p><strong>After history:</strong> Last period was 6 weeks ago, sexually active → Ectopic jumps to 40%, appendicitis drops</p>
+        <p><strong>After pregnancy test:</strong> Positive → Ectopic now 60-70%. Appendicitis nearly eliminated.</p>
+        <p><strong>After ultrasound:</strong> No intrauterine pregnancy + free fluid → Ectopic ~95%. Proceed to treatment.</p>
+      </div>
+      <div class="highlight"><strong>Each test changes the probabilities.</strong> The physician didn't randomly order tests — each one was chosen because it would maximally shift the differential. This is the art: choosing the test that gives you the most information for your specific clinical question.</div>
+      <div class="think-box"><h4>🤔 Why This Matters for You</h4><textarea placeholder="Next time you're shadowing, watch how the physician's thinking changes after each piece of new information. Can you track the probability shifts?"></textarea></div>
+    </div>
+    <div class="nav-btns"><button class="nav-btn nav-prev" onclick="goTo(2)">← Back</button><button class="nav-btn nav-next" onclick="goTo(4)">Next: Cognitive Biases →</button></div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson hidden" id="lesson-4">
+    <div class="section">
+      <h2>4. When Thinking Goes Wrong: Cognitive Biases</h2>
+      <p>The same System 1 that makes expert physicians fast also makes them vulnerable to errors. These are cognitive biases — systematic thinking mistakes that affect everyone, including the best physicians.</p>
+      <div class="bias-card"><h4>⚓ Anchoring Bias</h4><p>Locking onto the first diagnosis and not updating when new information contradicts it.</p><div class="example">"The ER doc diagnosed gastritis, so I didn't reconsider when the troponin came back elevated."</div></div>
+      <div class="bias-card"><h4>📊 Availability Bias</h4><p>Overweighting diagnoses you've seen recently or that are vivid in memory.</p><div class="example">"I just saw a PE last week, so now I'm ordering CT angiograms on every chest pain patient."</div></div>
+      <div class="bias-card"><h4>🏁 Premature Closure</h4><p>Stopping the diagnostic process too early — accepting a diagnosis before ruling out alternatives.</p><div class="example">"The patient has a UTI, which explains her confusion." (But the confusion was actually a stroke.)</div></div>
+      <div class="bias-card"><h4>🪞 Confirmation Bias</h4><p>Seeking information that supports your working diagnosis while ignoring contradictory evidence.</p><div class="example">"The X-ray is probably normal" — when you've already decided it's just a muscle strain.</div></div>
+      <div class="bias-card"><h4>🏷️ Diagnostic Momentum</h4><p>Once a label is applied, it sticks. Each subsequent physician accepts the previous one's diagnosis without questioning it.</p><div class="example">Patient labeled as "anxiety" in triage → every subsequent provider dismisses her tachycardia as anxiety → PE is missed.</div></div>
+      <div class="highlight"><strong>The antidote to bias:</strong> Deliberately ask "What else could this be?" and "What would I expect to see if my diagnosis is WRONG?" These two questions are the most powerful debiasing tools in medicine.</div>
+    </div>
+    <div class="nav-btns"><button class="nav-btn nav-prev" onclick="goTo(3)">← Back</button><button class="nav-btn nav-next" onclick="goTo(5)">Next: Putting It All Together →</button></div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson hidden" id="lesson-5">
+    <div class="section">
+      <h2>5. Your Clinical Reasoning Starter Kit</h2>
+      <p>You now understand the foundations of how physicians think. Here's how to apply this during your clinical experiences:</p>
+      <div class="highlight"><strong>Before the encounter:</strong> For the chief complaint, what are the dangerous diagnoses I should know about? What's common? (Use the Encounter Companion to prep.)</div>
+      <div class="highlight" style="border-color:#d97706;background:#fffbeb;"><strong>During the encounter:</strong> Watch the physician update their thinking. What questions changed the differential? What tests were chosen and why? Can you track the probability shifts?</div>
+      <div class="highlight" style="border-color:#059669;background:#ecfdf5;"><strong>After the encounter:</strong> Could I explain the reasoning? What would I have missed? Did I notice any cognitive biases? What question should I ask next time?</div>
+      <div class="scenario"><h4>🎯 Your Challenge</h4><p>For your next 5 clinical encounters, try this: before the physician gives their assessment, write down YOUR top 3 diagnoses. Then compare to theirs. Track your accuracy. You'll be surprised how quickly you improve.</p></div>
+      <div class="think-box"><h4>📝 Key Takeaways</h4><textarea placeholder="What's the single most important thing you learned from this module? How will it change how you observe during your next clinical experience?"></textarea></div>
+    </div>
+    <div style="text-align:center;margin-top:24px;padding:24px;background:var(--pm-sky-50);border-radius:14px;">
+      <p style="font-size:16px;font-weight:600;color:var(--pm-sky);margin-bottom:8px;">🎉 Module Complete!</p>
+      <p style="font-size:14px;color:var(--pm-muted);margin-bottom:16px;">You've completed "How Doctors Think" — the foundation of clinical reasoning.</p>
+      <a href="premed-paths.html#explorer" style="color:var(--pm-sky);font-weight:600;">← Back to Explorer Path</a>
+    </div>
+    <div class="nav-btns"><button class="nav-btn nav-prev" onclick="goTo(4)">← Back</button><span></span></div>
+  </div>
+</div>
+<script>
+let current=1;
+function goTo(n){
+  document.querySelectorAll('.lesson').forEach(l=>l.classList.add('hidden'));
+  document.getElementById('lesson-'+n).classList.remove('hidden');
+  current=n;
+  document.getElementById('prog-fill').style.width=(n/5*100)+'%';
+  document.getElementById('prog-text').textContent=n+' / 5';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

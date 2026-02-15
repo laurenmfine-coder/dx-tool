@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Paths | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;--pm-violet:#7c3aed;--pm-violet-50:#f5f3ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#0f766e,#0d9488,#7c3aed);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.container{max-width:860px;margin:0 auto;padding:24px;}
+.path-header{border-radius:16px;padding:32px;margin-bottom:32px;text-align:center;}
+.path-header h2{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;margin-bottom:8px;}
+.path-header p{font-size:15px;opacity:.85;max-width:540px;margin:0 auto;}
+.path-explorer .path-header{background:linear-gradient(135deg,var(--pm-sky-50),#e0f2fe);border:2px solid #bae6fd;color:#0c4a6e;}
+.path-foundation .path-header{background:linear-gradient(135deg,var(--pm-teal-50),#ccfbf1);border:2px solid #99f6e4;color:#134e4a;}
+.path-bridge .path-header{background:linear-gradient(135deg,var(--pm-violet-50),#ede9fe);border:2px solid #c4b5fd;color:#3b0764;}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:32px;}
+.module{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:20px;box-shadow:var(--pm-shadow);transition:.2s;}
+.module:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08);}
+.module-icon{font-size:28px;margin-bottom:8px;}
+.module-title{font-weight:700;font-size:15px;margin-bottom:6px;}
+.module-desc{font-size:13px;color:var(--pm-muted);line-height:1.5;margin-bottom:10px;}
+.module-prereq{font-size:11px;background:var(--pm-bg);padding:6px 10px;border-radius:6px;color:var(--pm-muted);}
+.module-prereq strong{color:var(--pm-text);}
+.prereq-section{margin-bottom:40px;}
+.prereq-section h3{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.path-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:32px;position:sticky;top:0;z-index:10;background:var(--pm-bg);padding:12px 0;}
+.path-btn{padding:12px 24px;border-radius:12px;border:2px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s;}
+.path-btn:hover{border-color:var(--pm-teal-light);}
+.path-btn.active{background:var(--pm-teal);color:#fff;border-color:var(--pm-teal);}
+.divider{height:1px;background:var(--pm-border);margin:40px 0;}
+.footer{text-align:center;padding:32px 24px;color:var(--pm-muted);font-size:13px;border-top:1px solid var(--pm-border);margin-top:40px;}
+.footer a{color:var(--pm-teal);text-decoration:none;}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>🗺️ Learning Paths</h1></div>
+<div class="container">
+  <div class="path-nav">
+    <button class="path-btn active" onclick="showPath('explorer',this)">🔭 Explorer</button>
+    <button class="path-btn" onclick="showPath('foundation',this)">🏗️ Foundation</button>
+    <button class="path-btn" onclick="showPath('bridge',this)">🌉 Bridge</button>
+  </div>
+
+  <!-- EXPLORER -->
+  <div id="path-explorer" class="path-explorer">
+    <div class="path-header">
+      <h2>🔭 Explorer Path</h2>
+      <p>For early premeds with prereqs in progress. Learn why doctors think differently — and start building that thinking yourself.</p>
+    </div>
+    <div class="prereq-section"><h3>🧬 Biology → Clinical Connections</h3>
+      <div class="module-grid">
+        <div class="module"><div class="module-icon">🫀</div><div class="module-title">Why Hearts Fail</div><div class="module-desc">Connect cardiac muscle physiology to why patients get short of breath climbing stairs. From sarcomeres to symptoms.</div><div class="module-prereq"><strong>Prereq:</strong> Bio — cardiac muscle, action potentials</div></div>
+        <div class="module"><div class="module-icon">🦠</div><div class="module-title">Infections: Why They Win</div><div class="module-desc">How bacteria evade the immune system. Why antibiotics work (and why resistance is terrifying). Microbiology meets the ICU.</div><div class="module-prereq"><strong>Prereq:</strong> Bio — microbiology, immune system basics</div></div>
+        <div class="module"><div class="module-icon">🧠</div><div class="module-title">The Brain Under Attack</div><div class="module-desc">From neurons to stroke: how a blood clot in an artery destroys brain tissue in minutes. Why time = brain.</div><div class="module-prereq"><strong>Prereq:</strong> Bio — neuroscience, cell biology</div></div>
+      </div>
+    </div>
+    <div class="prereq-section"><h3>⚗️ Chemistry → Clinical Connections</h3>
+      <div class="module-grid">
+        <div class="module"><div class="module-icon">🩸</div><div class="module-title">Blood Gas Basics</div><div class="module-desc">Acid-base chemistry is the foundation of emergency medicine. Learn why pH matters when a patient can't breathe.</div><div class="module-prereq"><strong>Prereq:</strong> Chem — acid-base, buffers, Henderson-Hasselbalch</div></div>
+        <div class="module"><div class="module-icon">💊</div><div class="module-title">How Drugs Work</div><div class="module-desc">Receptor binding, enzyme inhibition, pharmacokinetics — your organic chemistry knowledge IS pharmacology.</div><div class="module-prereq"><strong>Prereq:</strong> Chem/OChem — molecular interactions, kinetics</div></div>
+      </div>
+    </div>
+    <div class="prereq-section"><h3>🎯 Clinical Reasoning Foundations</h3>
+      <div class="module-grid">
+        <a href="premed-lesson-hdt.html" style="text-decoration:none;color:inherit;" class="module"><div class="module-icon">🤔</div><div class="module-title">How Doctors Think</div><div class="module-desc">Introduction to clinical reasoning: pattern recognition, hypothesis-driven thinking, Bayesian reasoning, and cognitive biases.</div><div class="module-prereq"><strong>Prereq:</strong> None — start here</div></div>
+        <div class="module"><div class="module-icon">🔍</div><div class="module-title">The Differential Diagnosis</div><div class="module-desc">Why physicians generate a list of possibilities, not one answer. The art and science of narrowing the differential.</div><div class="module-prereq"><strong>Prereq:</strong> How Doctors Think module</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOUNDATION -->
+  <div id="path-foundation" class="path-foundation hidden">
+    <div class="path-header">
+      <h2>🏗️ Foundation Path</h2>
+      <p>For post-prereqs students actively shadowing or preparing for the MCAT. Build mechanism-based thinking and connect physiology to pathophysiology.</p>
+    </div>
+    <div class="prereq-section"><h3>🔬 Mechanism-Based Thinking</h3>
+      <div class="module-grid">
+        <div class="module"><div class="module-icon">🫁</div><div class="module-title">Respiratory Mechanisms</div><div class="module-desc">V/Q mismatch, shunting, dead space — why some patients desaturate and others don't. MechanismDx: Respiratory module.</div><div class="module-prereq"><strong>Prereq:</strong> Physiology — gas exchange, ventilation</div></div>
+        <div class="module"><div class="module-icon">🩺</div><div class="module-title">Cardiovascular Mechanisms</div><div class="module-desc">Preload, afterload, contractility → heart failure. Atherosclerosis → ACS. From Starling curves to the cath lab.</div><div class="module-prereq"><strong>Prereq:</strong> Physiology — cardiac output, hemodynamics</div></div>
+        <div class="module"><div class="module-icon">🧪</div><div class="module-title">Renal Mechanisms</div><div class="module-desc">GFR, tubular function, electrolyte handling. Why kidneys are the body's master regulators — and what breaks.</div><div class="module-prereq"><strong>Prereq:</strong> Physiology — renal physiology, acid-base</div></div>
+        <div class="module"><div class="module-icon">🧬</div><div class="module-title">Endocrine Mechanisms</div><div class="module-desc">Feedback loops in action: thyroid, adrenal, glucose regulation. Why diabetes is a disease of failed homeostasis.</div><div class="module-prereq"><strong>Prereq:</strong> Biochemistry — hormones, receptor signaling</div></div>
+      </div>
+    </div>
+    <div class="prereq-section"><h3>📊 MCAT Clinical Bridge</h3>
+      <div class="module-grid">
+        <a href="premed-lesson-biostats.html" style="text-decoration:none;color:inherit;" class="module"><div class="module-icon">📈</div><div class="module-title">Biostatistics in Medicine</div><div class="module-desc">Sensitivity, specificity, PPV, NNT — the statistics that drive every medical decision. MCAT meets real clinical reasoning.</div><div class="module-prereq"><strong>Prereq:</strong> Stats — basic probability, distributions</div></div>
+        <div class="module"><div class="module-icon">⚖️</div><div class="module-title">Ethics in Clinical Practice</div><div class="module-desc">Autonomy, beneficence, justice, non-maleficence — how these play out in real patient scenarios, not just textbooks.</div><div class="module-prereq"><strong>Prereq:</strong> MCAT — behavioral sciences section</div></div>
+        <div class="module"><div class="module-icon">🧠</div><div class="module-title">Psych/Soc in Medicine</div><div class="module-desc">Health disparities, social determinants, behavioral change models — the psych/soc MCAT content you'll actually use.</div><div class="module-prereq"><strong>Prereq:</strong> MCAT — psychology, sociology foundations</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRIDGE -->
+  <div id="path-bridge" class="path-bridge hidden">
+    <div class="path-header">
+      <h2>🌉 Bridge Path</h2>
+      <p>For gap year, post-bac, or accepted students. Case-based clinical previews that build clerkship-ready frameworks. Get a head start on M1/M2 thinking.</p>
+    </div>
+    <div class="prereq-section"><h3>🏥 Case-Based Clinical Previews</h3>
+      <div class="module-grid">
+        <a href="premed-lesson-cp.html" style="text-decoration:none;color:inherit;" class="module"><div class="module-icon">💔</div><div class="module-title">Chest Pain: 5 Diagnoses</div><div class="module-desc">Work through a chest pain case and learn to differentiate ACS, PE, aortic dissection, GERD, and MSK pain. Your first clinical reasoning case.</div><div class="module-prereq"><strong>Links to:</strong> RadDx Cardiac Imaging, Cardiology CRT</div></div>
+        <div class="module"><div class="module-icon">🤕</div><div class="module-title">Abdominal Pain Framework</div><div class="module-desc">Localize by quadrant, characterize by pattern, and narrow by demographics. The approach you'll use every day in clerkships.</div><div class="module-prereq"><strong>Links to:</strong> RadDx Abdominal Imaging, GI CRT</div></div>
+        <div class="module"><div class="module-icon">😵</div><div class="module-title">Altered Mental Status</div><div class="module-desc">The undifferentiated confused patient: metabolic, infectious, structural, toxic, psychiatric. Learn the systematic approach.</div><div class="module-prereq"><strong>Links to:</strong> RadDx Neuroimaging, Neuro CRT</div></div>
+        <div class="module"><div class="module-icon">🤰</div><div class="module-title">The Pregnant Patient</div><div class="module-desc">How pregnancy changes EVERYTHING about clinical reasoning — physiology, imaging, medications, differentials all shift.</div><div class="module-prereq"><strong>Links to:</strong> RadDx OB/GYN Imaging</div></div>
+      </div>
+    </div>
+    <div class="prereq-section"><h3>📋 Clerkship-Ready Skills</h3>
+      <div class="module-grid">
+        <div class="module"><div class="module-icon">📝</div><div class="module-title">The Patient Presentation</div><div class="module-desc">Learn the format every medical student must master: 1-liner, HPI, ROS, PMH, meds, exam, assessment, plan. Practice now.</div><div class="module-prereq"><strong>Prereq:</strong> Explorer or Foundation path</div></div>
+        <div class="module"><div class="module-icon">📊</div><div class="module-title">Reading Labs Like a Clinician</div><div class="module-desc">CBC, BMP, LFTs, coags, urinalysis — what every lab value means clinically and when to worry.</div><div class="module-prereq"><strong>Prereq:</strong> Foundation — mechanism modules</div></div>
+        <div class="module"><div class="module-icon">🗣️</div><div class="module-title">Breaking Bad News</div><div class="module-desc">The SPIKES protocol for difficult conversations. One of the hardest and most important skills in medicine.</div><div class="module-prereq"><strong>Prereq:</strong> None — essential for all levels</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer"><a href="premed-encounter.html">📋 Log Encounter</a> · <a href="premed-challenges.html">🧩 Challenges</a> · <a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a></div>
+<script>
+function showPath(p,el){document.querySelectorAll('.path-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');['explorer','foundation','bridge'].forEach(x=>document.getElementById('path-'+x).classList.toggle('hidden',x!==p));}
+if(location.hash){const h=location.hash.slice(1);const btn=document.querySelector(`.path-btn[onclick*="${h}"]`);if(btn)showPath(h,btn);}
+</script>
+</body>
+</html>

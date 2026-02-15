@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -12,21 +12,21 @@
 <link href="../css/rdx-a11y.css" rel="stylesheet">
 <style>
         :root {
-            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
-            --muted: #94A3B8; --accent: #F59E0B; --success: #10B981;
-            --warning: #F59E0B; --danger: #DC2626; --info: #14b8a6;
+            --bg:var(--rdx-bg); --card:var(--rdx-bg-card); --border:var(--rdx-border); --text:var(--rdx-text);
+            --muted:var(--rdx-text-muted); --accent: #F59E0B; --success:var(--rdx-success);
+            --warning: #F59E0B; --danger:var(--rdx-danger); --info: #14b8a6;
             --header-bg: linear-gradient(135deg, #78350F 0%, #92400E 50%, #B45309 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        body { font-family:'DM Sans','Inter',sans-serif; background:var(--rdx-bg); color:var(--rdx-text); min-height: 100vh; line-height: 1.6; }
         
         /* Header */
-        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position:sticky;top:56px; z-index: 100; }
         .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
         .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
         .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
         .header-stats { display: flex; gap: 12px; }
-        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat { text-align: center; background:var(--rdx-bg-hover); padding: 6px 14px; border-radius: 8px; }
         .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
         .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
         
@@ -34,19 +34,19 @@
         .main { max-width: 900px; margin: 0 auto; padding: 24px; }
         
         /* Cards */
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card { background:var(--rdx-bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
         .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
         .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .card-title { font-size: 1.5rem; font-weight: 700; }
         .card-body { padding: 24px; }
         
         /* Narrative */
-        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left:4px solid var(--rdx-teal); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
         .narrative .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
         
         /* Vitals */
         .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
-        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital { background:var(--rdx-bg-hover); padding: 12px; border-radius: 10px; text-align: center; }
         .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
         .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
         .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
@@ -54,7 +54,7 @@
         
         /* Choices */
         .choices { display: grid; gap: 12px; margin-top: 24px; }
-        .choice-btn { background: var(--card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; text-align: left; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn { background:var(--rdx-bg-card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; text-align: left; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
         .choice-btn:hover { border-color: var(--accent); background: rgba(245,158,11,0.1); transform: translateX(4px); }
         .choice-icon { font-size: 1.5rem; }
         .choice-text { flex: 1; }
@@ -91,7 +91,7 @@
         .timer-critical { animation: pulse 1s infinite; color: var(--danger); }
         
         /* Lab Results */
-        .lab-results { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-results { background:var(--rdx-bg-hover); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .lab-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
         .lab-row:last-child { border-bottom: none; }
         .lab-name { color: var(--muted); }
@@ -117,6 +117,7 @@
 
 </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <header class="header">
@@ -708,7 +709,7 @@
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
 
-<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:var(--rdx-bg-hover);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
 <h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
 <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/33081529/" target="_blank" style="color:#7dd3fc">ACLS Algorithm - AHA</a> — Circulation 2020</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK531492/" target="_blank" style="color:#7dd3fc">Shock Management - NCBI</a> — StatPearls</li></ul>
 <p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
@@ -729,5 +730,6 @@
     </div>
 </div>
 
+<script src="../js/rdx-nav.js"></script>
 </body>
 </html>

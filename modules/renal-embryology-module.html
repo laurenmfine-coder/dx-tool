@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MechanismDx: Renal Embryology - Kidney Development & Congenital Anomalies</title>
   <style>
-    :root { --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #A78BFA; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #06B6D4; }
+    :root { --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #A78BFA; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info: #06B6D4; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #0f0a1a 0%, #1a1030 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #0f0a1a 0%, #1a1030 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
     .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
-    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border: 1px solid rgba(139,92,246,0.3); }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
     header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .subtitle { color: #9CA3AF; font-size: 1.1rem; }
     .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -23,10 +23,10 @@
     .module-section { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
     .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
     .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
-    .key-concept { background: rgba(139,92,246,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
     .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
     .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
-    .clinical-pearl { background: rgba(245,158,11,0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left:4px solid var(--rdx-teal); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
     .info-box { background: rgba(6,182,212,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
     table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
     th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -36,7 +36,7 @@
     li { margin: 0.5rem 0; }
     .mnemonic { background: rgba(16,185,129,0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
     .mnemonic strong { color: var(--success); font-size: 1.1rem; }
-    .dev-card { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card { background: rgba(139,92,246,0.1); border:1px solid var(--rdx-info); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
     .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
     .timeline-item { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative; }
     .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 2px solid #0f0a1a; }
@@ -56,6 +56,7 @@
     .flow-arrow { color: var(--accent); font-size: 1.2rem; font-weight: bold; }
     @media (max-width: 600px) { .container { padding: 1rem; } header h1 { font-size: 1.8rem; } }
   </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
   <div class="container">
@@ -539,7 +540,7 @@ Key: Everything from MM = excretory nephron (glomerulus through DCT)
       section.querySelector('.explanation').style.display = 'block';
     }
   </script>
-<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
 <div class="mcq-section">
 <div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
 <div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">Which of the three embryonic kidney systems persists as the definitive adult kidney?</div></div><div class="mcq-card-body"><div class="mcq-choices">
@@ -599,6 +600,6 @@ Key: Everything from MM = excretory nephron (glomerulus through DCT)
 <a href="electrolytes-module.html" class="cross-link"><div class="cross-link-title">📘 Electrolyte Disorders</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a></div></div></div>
 <script src="../dx-progress.js"></script>
 <script src="../dx-cross-links.js"></script>
-<script src="../js/dx-universal-nav.js"></script>
+<script src="../js/rdx-nav.js"></script>
 </body>
 </html>

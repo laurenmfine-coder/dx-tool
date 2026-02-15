@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RadDx — Imaging Reasoning Hub | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+body { font-family: 'DM Sans', sans-serif; background: var(--rdx-bg); color: var(--rdx-text); }
+
+.hero {
+  background: linear-gradient(135deg, #0f766e, #0d9488, #14b8a6);
+  padding: 48px 24px 40px;
+  text-align: center;
+  color: #fff;
+}
+.hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 5vw, 42px); font-weight: 400; margin-bottom: 8px; }
+.hero p { font-size: 16px; opacity: 0.9; max-width: 600px; margin: 0 auto 24px; }
+.hero-stats {
+  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+}
+.hero-stat { text-align: center; }
+.hero-stat-value { font-size: 28px; font-weight: 700; font-family: 'DM Sans', monospace; }
+.hero-stat-label { font-size: 12px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.framework {
+  max-width: 900px; margin: -32px auto 0; padding: 0 24px; position: relative; z-index: 2;
+}
+.framework-card {
+  background: var(--rdx-bg-card); border: 1px solid var(--rdx-border); border-radius: 16px;
+  padding: 32px; box-shadow: var(--rdx-shadow-lg);
+}
+.framework h2 {
+  font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--rdx-text);
+  margin-bottom: 16px; font-weight: 400;
+}
+.framework-steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;
+}
+.step {
+  text-align: center; padding: 20px 16px; background: var(--rdx-teal-50);
+  border-radius: 12px; border: 1px solid var(--rdx-border);
+}
+.step-num {
+  width: 36px; height: 36px; background: var(--rdx-teal); color: #fff;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; margin-bottom: 8px;
+}
+.step-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: var(--rdx-teal-dark); }
+.step-desc { font-size: 13px; color: var(--rdx-text-muted); line-height: 1.4; }
+
+.content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+.section-title {
+  font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--rdx-text);
+  margin-bottom: 20px; font-weight: 400; padding-top: 24px;
+  border-top: 1px solid var(--rdx-border);
+}
+
+.system-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;
+  margin-bottom: 40px;
+}
+.system-card {
+  background: var(--rdx-bg-card); border: 1px solid var(--rdx-border); border-radius: 12px;
+  padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s;
+  display: flex; flex-direction: column;
+}
+.system-card:hover {
+  border-color: var(--rdx-teal); box-shadow: var(--rdx-shadow-md); transform: translateY(-2px);
+}
+.system-icon { font-size: 28px; margin-bottom: 12px; }
+.system-name { font-weight: 700; font-size: 16px; color: var(--rdx-text); margin-bottom: 4px; }
+.system-modalities { font-size: 13px; color: var(--rdx-text-muted); margin-bottom: 12px; }
+.system-topics { font-size: 12px; color: var(--rdx-text-faint); }
+.system-count {
+  margin-top: auto; padding-top: 12px; font-size: 13px; font-weight: 600;
+  color: var(--rdx-teal); display: flex; align-items: center; gap: 4px;
+}
+
+.approach-section {
+  background: var(--rdx-bg-card); border: 1px solid var(--rdx-border); border-radius: 16px;
+  padding: 32px; margin-bottom: 24px;
+}
+.approach-section h3 {
+  font-size: 18px; font-weight: 700; color: var(--rdx-teal-dark); margin-bottom: 12px;
+}
+.approach-list {
+  list-style: none; padding: 0; display: grid; gap: 10px;
+}
+.approach-item {
+  padding: 12px 16px; background: var(--rdx-teal-50); border-radius: 8px;
+  font-size: 14px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.approach-item strong { color: var(--rdx-teal-dark); white-space: nowrap; }
+
+.radiopaedia-note {
+  background: var(--rdx-info-bg); border: 1px solid var(--rdx-info); border-radius: 12px;
+  padding: 20px 24px; margin: 32px 0; font-size: 14px; line-height: 1.6;
+}
+.radiopaedia-note h4 { color: var(--rdx-info); margin-bottom: 8px; }
+.radiopaedia-note a { color: var(--rdx-teal); }
+
+@media (max-width: 640px) {
+  .hero { padding: 32px 16px 28px; }
+  .framework { margin-top: -24px; padding: 0 16px; }
+  .framework-card { padding: 20px; }
+  .content { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>RadDx</h1>
+  <p>Master imaging reasoning — learn when to order, what to expect, and how findings change your clinical plan</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-value">13</div><div class="hero-stat-label">Body Systems</div></div>
+    <div class="hero-stat"><div class="hero-stat-value">67</div><div class="hero-stat-label">Imaging Scenarios</div></div>
+    <div class="hero-stat"><div class="hero-stat-value">5</div><div class="hero-stat-label">Reasoning Steps</div></div>
+  </div>
+</div>
+
+<div class="framework">
+  <div class="framework-card">
+    <h2>The RadDx Reasoning Framework</h2>
+    <div class="framework-steps">
+      <div class="step">
+        <div class="step-num" style="background:#d97706">🌍</div>
+        <div class="step-title">Context</div>
+        <div class="step-desc">What epidemiological, demographic, or exposure factors shift the differential before you order anything?</div>
+      </div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Order</div>
+        <div class="step-desc">What imaging study would you order and why? Modality selection based on clinical scenario.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Expect</div>
+        <div class="step-desc">What findings do you anticipate? Form a hypothesis before seeing results.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Interpret</div>
+        <div class="step-desc">Read systematically. Identify normal vs abnormal. Describe findings precisely.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Integrate</div>
+        <div class="step-desc">How do findings change your differential, management, or disposition?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <h2 class="section-title">Imaging by Body System</h2>
+  <div class="system-grid">
+
+    <a href="raddx-chest.html" class="system-card">
+      <div class="system-icon">🫁</div>
+      <div class="system-name">Chest Imaging</div>
+      <div class="system-modalities">CXR, CT Chest, CTPA, CT Angiography</div>
+      <div class="system-topics">Pneumonia, PE, pneumothorax, ARDS, TB, pleural effusion, lung masses, lung cancer screening (LDCT/Lung-RADS)</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 7 scenarios</div>
+    </a>
+
+    <a href="raddx-cardiac.html" class="system-card">
+      <div class="system-icon">❤️</div>
+      <div class="system-name">Cardiac Imaging</div>
+      <div class="system-modalities">ECG, Echocardiogram, CXR, Coronary Angiography</div>
+      <div class="system-topics">ACS, heart failure, tamponade, valvular disease, endocarditis, aortic dissection</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 6 scenarios</div>
+    </a>
+
+    <a href="raddx-abdominal.html" class="system-card">
+      <div class="system-icon">🩻</div>
+      <div class="system-name">Abdominal Imaging</div>
+      <div class="system-modalities">CT A/P, Ultrasound, HIDA, Contrast Studies</div>
+      <div class="system-topics">Appendicitis, cholecystitis, pancreatitis, SBO, perforation, liver masses, diverticulitis</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 7 scenarios</div>
+    </a>
+
+    <a href="raddx-neuro.html" class="system-card">
+      <div class="system-icon">🧠</div>
+      <div class="system-name">Neuroimaging</div>
+      <div class="system-modalities">CT Head, CTA, MRI Brain, CT Perfusion</div>
+      <div class="system-topics">Stroke, SAH, EDH/SDH, meningitis, IIH, neurocysticercosis, spinal cord compression</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 7 scenarios</div>
+    </a>
+
+    <a href="raddx-msk.html" class="system-card">
+      <div class="system-icon">🦴</div>
+      <div class="system-name">Musculoskeletal</div>
+      <div class="system-modalities">X-ray, MRI, CT, Bone Scan</div>
+      <div class="system-topics">Hip fracture, osteomyelitis, ankle fracture (Ottawa Rules), compartment syndrome, scaphoid fracture, cauda equina</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 6 scenarios</div>
+    </a>
+
+    <a href="raddx-renal-gu.html" class="system-card">
+      <div class="system-icon">🫘</div>
+      <div class="system-name">Renal & GU</div>
+      <div class="system-modalities">CT KUB, Ultrasound, Color Doppler, VCUG</div>
+      <div class="system-topics">Nephrolithiasis, renal mass/RCC, pediatric UTI/VUR, testicular torsion, urinary retention/BPH</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 5 scenarios</div>
+    </a>
+
+    <a href="raddx-peds.html" class="system-card">
+      <div class="system-icon">👶</div>
+      <div class="system-name">Pediatric Imaging</div>
+      <div class="system-modalities">Ultrasound, X-ray, UGI Series, Air Enema</div>
+      <div class="system-topics">Pyloric stenosis, intussusception, NAT, supracondylar fracture, volvulus, foreign body aspiration</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 6 scenarios</div>
+    </a>
+
+    <a href="raddx-ob.html" class="system-card">
+      <div class="system-icon">🤰</div>
+      <div class="system-name">OB/GYN Imaging</div>
+      <div class="system-modalities">Transvaginal US, Transabdominal US, Doppler</div>
+      <div class="system-topics">Ectopic pregnancy, placenta previa/accreta, ovarian torsion, molar pregnancy, placental abruption</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 5 scenarios</div>
+    </a>
+
+    <a href="raddx-vascular.html" class="system-card">
+      <div class="system-icon">🩸</div>
+      <div class="system-name">Vascular Imaging</div>
+      <div class="system-modalities">Compression US, CTA, Duplex Doppler, ABI</div>
+      <div class="system-topics">DVT, AAA screening, carotid stenosis, mesenteric ischemia, PAD/critical limb ischemia</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 5 scenarios</div>
+    </a>
+
+    <a href="raddx-breast.html" class="system-card">
+      <div class="system-icon">🎀</div>
+      <div class="system-name">Breast Imaging</div>
+      <div class="system-modalities">Mammography, Breast US, Breast MRI, Stereotactic Bx</div>
+      <div class="system-topics">BI-RADS classification, BRCA screening, triple assessment, microcalcifications/DCIS</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 4 scenarios</div>
+    </a>
+
+    <a href="raddx-ent.html" class="system-card">
+      <div class="system-icon">👂</div>
+      <div class="system-name">Head & Neck Imaging</div>
+      <div class="system-modalities">CT Neck, CT Orbits/Sinuses, Thyroid US, FNA</div>
+      <div class="system-topics">Peritonsillar abscess, orbital cellulitis, thyroid nodule/TI-RADS, neck mass SCC</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 4 scenarios</div>
+    </a>
+
+    <a href="raddx-environmental.html" class="system-card">
+      <div class="system-icon">🌍</div>
+      <div class="system-name">Environmental & Occupational</div>
+      <div class="system-modalities">CXR, HRCT, Abdominal X-ray, PFTs</div>
+      <div class="system-topics">Asbestosis/mesothelioma, silicosis, lead poisoning, hypersensitivity pneumonitis</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 4 scenarios</div>
+    </a>
+
+    <a href="raddx-trauma.html" class="system-card">
+      <div class="system-icon">🚑</div>
+      <div class="system-name">Trauma Imaging</div>
+      <div class="system-modalities">FAST/eFAST, CT Trauma, X-ray</div>
+      <div class="system-topics">FAST exam, hemorrhagic shock, damage control surgery, polytrauma</div>
+      <div class="system-count" style="color:var(--rdx-teal)">✓ 1 scenario</div>
+    </a>
+
+  </div>
+
+  <h2 class="section-title">Teaching Approach</h2>
+
+  <div class="approach-section">
+    <h3>What Makes RadDx Different</h3>
+    <ul class="approach-list">
+      <li class="approach-item"><strong>Reasoning First:</strong> Every scenario starts with a clinical vignette — you decide what to order before seeing any images. This builds the ordering reflex that matters in practice.</li>
+      <li class="approach-item"><strong>Hypothesis-Driven:</strong> Before viewing results, you predict what you expect to see. This primes pattern recognition and reduces anchoring bias.</li>
+      <li class="approach-item"><strong>Management Integration:</strong> Findings aren't endpoints — they change differentials, disposition, and treatment. Every scenario asks "now what?" after interpretation.</li>
+      <li class="approach-item"><strong>Modality Reasoning:</strong> Not just "get a CT" — learn WHY a specific modality (with or without contrast, specific protocol) is the right choice for the clinical question being asked.</li>
+      <li class="approach-item"><strong>Don't-Image Decisions:</strong> Some of the most important imaging decisions are knowing when NOT to image — compartment syndrome, tension pneumothorax, and clinical diagnoses that imaging delays.</li>
+    </ul>
+  </div>
+
+  <div class="approach-section">
+    <h3>How Imaging Integrates Across the Platform</h3>
+    <ul class="approach-list">
+      <li class="approach-item"><strong>Adventure Cases:</strong> Imaging decision nodes embedded at key clinical moments — order the wrong study and watch the patient's condition evolve while you wait.</li>
+      <li class="approach-item"><strong>Module MCQs:</strong> Questions test modality selection, expected findings, and management changes — not just pattern recognition from labeled images.</li>
+      <li class="approach-item"><strong>Deep Dives:</strong> Pathophysiology modules explain WHY imaging findings appear — consolidation on CXR because of alveolar filling, not just "white-out on X-ray."</li>
+      <li class="approach-item"><strong>Radiopaedia Links:</strong> Curated case links to Radiopaedia's staged-reveal format where you work through history → images → diagnosis yourself.</li>
+    </ul>
+  </div>
+
+  <div class="radiopaedia-note">
+    <h4>About Radiopaedia Integration</h4>
+    <p>RadDx links to <a href="https://radiopaedia.org" target="_blank" rel="noopener">Radiopaedia.org</a> case studies, which use a staged reveal format — you see clinical history first, then images, then the diagnosis. This avoids the problem of labeled images giving away the answer. We link to case pages (not static images) so you practice the full reasoning arc. Radiopaedia content is available under Creative Commons licensing and represents one of the world's largest open-access radiology education resources.</p>
+  </div>
+
+</div>
+
+<script src="../js/rdx-nav.js" defer></script>
+</body>
+</html>

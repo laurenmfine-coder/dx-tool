@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>DIC - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
         .container { max-width: 900px; margin: 0 auto; }
         .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
         .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -32,7 +32,7 @@
         .feedback.show { display: block; }
         .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
-        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(185,28,28,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
@@ -125,6 +125,7 @@
 
 </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
@@ -177,7 +178,7 @@ ISTH ≥5 = overt DIC
 Treatment: CAUSE FIRST, then transfuse</div></div>`,question:{prompt:"Heparin in DIC?",options:[{text:"Give to all",correct:false},{text:"Always contraindicated",correct:false},{text:"Only if thrombosis predominates",correct:true},{text:"High-dose is treatment of choice",correct:false}],explanation:{correct:"Correct! Heparin only for thrombosis-predominant DIC (purpura fulminans, acral ischemia). Never with active bleeding.",incorrect:"Heparin only for thrombosis-predominant DIC, not routine."},teaching:`<h4>Key Points</h4><ul style="line-height:2;margin-left:20px;"><li>DIC is always secondary</li><li>Sepsis is #1 trigger</li><li>↓plt, ↑PT/PTT, ↓fibrinogen, ↑↑D-dimer</li><li>ISTH ≥5 = overt DIC</li><li><strong>TREAT THE CAUSE FIRST!</strong></li></ul>`,why_chain:[],points:10}}
     ];
     function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
-    function renderStage(){const stage=stages[currentStage];let html=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage+1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>${stage.content}`;if(stage.question){html+=`<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;stage.question.options.forEach((opt,i)=>{html+=`<div class="mcq-option" onclick="checkAnswer(${i},${opt.correct})"><div class="option-letter">${String.fromCharCode(65+i)}</div><div>${opt.text}</div></div>`;});html+=`</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>${stage.question.explanation.correct}</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;if(stage.question.teaching)html+=`<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;if(stage.question.why_chain&&stage.question.why_chain.length>0){html+=`<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain</h4>`;stage.question.why_chain.forEach(w=>{html+=`<div style="margin-bottom:12px;padding-left:16px;border-left:2px solid rgba(251,191,36,0.5);"><div style="color:#fbbf24;font-weight:600;margin-bottom:4px;">${w.q}</div><div style="color:#e2e8f0;line-height:1.6;">${w.a}</div></div>`;});html+=`</div>`;}html+=`<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;}html+=`</div>`;document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function renderStage(){const stage=stages[currentStage];let html=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage+1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>${stage.content}`;if(stage.question){html+=`<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;stage.question.options.forEach((opt,i)=>{html+=`<div class="mcq-option" onclick="checkAnswer(${i},${opt.correct})"><div class="option-letter">${String.fromCharCode(65+i)}</div><div>${opt.text}</div></div>`;});html+=`</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>${stage.question.explanation.correct}</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;if(stage.question.teaching)html+=`<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;if(stage.question.why_chain&&stage.question.why_chain.length>0){html+=`<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain</h4>`;stage.question.why_chain.forEach(w=>{html+=`<div style="margin-bottom:12px;padding-left:16px;border-left:2px solid rgba(251,191,36,0.5);"><div style="color:#fbbf24;font-weight:600;margin-bottom:4px;">${w.q}</div><div style="color:var(--rdx-text);line-height:1.6;">${w.a}</div></div>`;});html+=`</div>`;}html+=`<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;}html+=`</div>`;document.getElementById('scene-container').innerHTML=html;updateProgress();}
     function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');const w=document.getElementById('why-chain');if(w)w.classList.add('show');document.getElementById('next-btn').classList.add('show');}
     function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML=`<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length*10}</p><p>You've mastered DIC!</p></div>`;}}
     renderStage();
@@ -289,5 +290,7 @@ function toggleReferences() {
     </div>
 </div>
 
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1111/jth.14462" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ISTH Guidance on DIC</a> — <em style="color:var(--rdx-text-muted,#64748b)">J Thromb Haemost</em></li></ul></div>
 </body>
 </html>

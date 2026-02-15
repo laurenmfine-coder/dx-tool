@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMI & Interview Practice | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-rose:#e11d48;--pm-rose-50:#fff1f2;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#e11d48,#be123c);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.container{max-width:720px;margin:0 auto;padding:24px;}
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
+.tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-rose);color:#fff;}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.cat-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.cat-btn{padding:8px 16px;border-radius:10px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.cat-btn:hover{border-color:var(--pm-rose);background:var(--pm-rose-50);}
+.cat-btn.active{background:var(--pm-rose);color:#fff;border-color:var(--pm-rose);}
+.scenario{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;overflow:hidden;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.scenario-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--pm-border);}
+.scenario-title{font-weight:700;font-size:15px;}
+.scenario-cat{padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:var(--pm-rose-50);color:var(--pm-rose);}
+.scenario-prompt{padding:20px;background:var(--pm-rose-50);font-size:14px;line-height:1.7;border-bottom:1px solid var(--pm-border);}
+.scenario-timer{padding:16px 20px;display:flex;align-items:center;gap:16px;}
+.timer-display{font-size:32px;font-weight:700;font-family:'DM Sans',monospace;color:var(--pm-rose);min-width:80px;}
+.timer-btn{padding:8px 20px;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.timer-start{background:var(--pm-rose);color:#fff;}
+.timer-reset{background:var(--pm-card);color:var(--pm-muted);border:1px solid var(--pm-border);}
+.scenario-response{padding:20px;display:none;}
+.scenario-response.show{display:block;}
+.scenario-response textarea{width:100%;min-height:120px;padding:12px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:14px;resize:vertical;}
+.rubric{padding:20px;background:#f0fdf4;border-top:2px solid #86efac;display:none;}
+.rubric.show{display:block;}
+.rubric h4{font-size:14px;color:#059669;margin-bottom:12px;}
+.rubric-item{padding:10px 14px;background:rgba(255,255,255,.7);border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.6;}
+.rubric-item strong{color:#065f46;display:block;margin-bottom:2px;}
+.tip-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;color:#78350f;}
+.tip-box strong{color:#92400e;}
+.stats{display:flex;gap:16px;margin-bottom:24px;}
+.stat{flex:1;text-align:center;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:16px;}
+.stat-val{font-size:24px;font-weight:700;color:var(--pm-rose);}
+.stat-lbl{font-size:11px;color:var(--pm-muted);text-transform:uppercase;}
+.guide-section{background:linear-gradient(135deg,var(--pm-rose-50),#ffe4e6);border:2px solid #fecdd3;border-radius:14px;padding:24px;margin-bottom:16px;}
+.guide-section h3{font-family:'DM Serif Display',serif;font-weight:400;color:#9f1239;margin-bottom:12px;}
+.guide-section p{font-size:14px;line-height:1.7;color:#881337;}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>🎤 MMI & Interview Practice</h1></div>
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('practice')">🎤 Practice</button>
+    <button class="tab" onclick="showTab('guide')">📖 Strategy Guide</button>
+    <button class="tab" onclick="showTab('history')">📊 My Sessions</button>
+  </div>
+
+  <div id="tab-practice">
+    <div class="cat-nav">
+      <button class="cat-btn active" onclick="setCat('all',this)">All</button>
+      <button class="cat-btn" onclick="setCat('ethics',this)">⚖️ Ethics</button>
+      <button class="cat-btn" onclick="setCat('communication',this)">🗣️ Communication</button>
+      <button class="cat-btn" onclick="setCat('teamwork',this)">👥 Teamwork</button>
+      <button class="cat-btn" onclick="setCat('policy',this)">🏛️ Policy</button>
+      <button class="cat-btn" onclick="setCat('personal',this)">💭 Personal</button>
+      <button class="cat-btn" onclick="setCat('scenario',this)">🎭 Scenario</button>
+    </div>
+    <div id="scenario-list"></div>
+  </div>
+
+  <div id="tab-guide" class="hidden">
+    <div class="guide-section">
+      <h3>The MMI Format</h3>
+      <p>Multiple Mini Interviews use 6-10 stations, each 8 minutes long. You read a prompt (2 min), then discuss with an interviewer (6 min). Each station is independent — a bad station doesn't ruin the others. Schools use MMIs because they're harder to fake than traditional interviews and better predict clinical performance.</p>
+    </div>
+    <div class="card"><h3>🎯 The STAR-E Framework for MMI Responses</h3>
+      <div class="tip-box"><strong>S — Stakeholders:</strong> Identify everyone affected by the situation. Don't just think about the obvious person — who else is impacted?</div>
+      <div class="tip-box"><strong>T — Tensions:</strong> Name the competing values or priorities. Most MMI prompts have no "right answer" — they want to see you recognize the tensions.</div>
+      <div class="tip-box"><strong>A — Actions:</strong> Propose what you would do. Be specific and practical, not abstract. "I would have a conversation with..." is better than "communication is important."</div>
+      <div class="tip-box"><strong>R — Reasoning:</strong> Explain WHY you chose this approach. Connect to principles (autonomy, beneficence, fairness, honesty).</div>
+      <div class="tip-box"><strong>E — Explore alternatives:</strong> Acknowledge what you might be wrong about. "However, someone could argue..." shows maturity and intellectual humility.</div>
+    </div>
+    <div class="card"><h3>🚫 Common MMI Mistakes</h3>
+      <p style="font-size:14px;line-height:2;">
+        → Jumping to a conclusion without exploring multiple perspectives<br>
+        → Being preachy or moralistic instead of thoughtful and nuanced<br>
+        → Forgetting to consider the patient's perspective and autonomy<br>
+        → Using medical jargon or trying to sound like a doctor already<br>
+        → Not managing time (spending 4 min on background, 2 min on your actual answer)<br>
+        → Giving a "safe" answer that says nothing — interviewers want to see genuine thinking<br>
+        → Forgetting to acknowledge uncertainty — "I'm not sure, but here's how I'd approach it" is STRONG
+      </p>
+    </div>
+  </div>
+
+  <div id="tab-history" class="hidden">
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="s-practiced">0</div><div class="stat-lbl">Practiced</div></div>
+      <div class="stat"><div class="stat-val" id="s-cats">0</div><div class="stat-lbl">Categories</div></div>
+      <div class="stat"><div class="stat-val" id="s-avgtime">—</div><div class="stat-lbl">Avg Time</div></div>
+    </div>
+    <div id="history-list"></div>
+  </div>
+</div>
+
+<script>
+const SCENARIOS = [
+  {id:1,cat:"ethics",title:"The Dishonest Classmate",prompt:"During a group project, you discover that a classmate has fabricated data in a lab report that your entire group will submit. Confronting them, they say: 'Everyone does it. The data would have come out this way anyway — I just didn't have time to redo the experiment. If you report me, the whole group fails.' What do you do?",rubric:[{label:"Stakeholders identified",desc:"You, the classmate, other group members, the professor, the institution, future patients who depend on honest science"},{label:"Ethical principles",desc:"Academic integrity, honesty, loyalty to friends vs institutional duty, consequences of normalized dishonesty in medicine"},{label:"Practical approach",desc:"Private conversation first, offer to help redo the experiment, explain why you can't submit fabricated data, escalate to professor if necessary"},{label:"Nuance shown",desc:"Acknowledges the difficulty of the situation, empathizes with the pressure the classmate is under, but holds firm on the principle"}]},
+  {id:2,cat:"ethics",title:"Patient Autonomy vs Safety",prompt:"A 78-year-old patient with early dementia wants to continue driving. Her daughter is begging the physician to revoke her license. The patient insists she drives fine and it's her only independence. You're shadowing and the physician asks your opinion after the visit. What factors would you consider?",rubric:[{label:"Autonomy vs safety",desc:"Patient's right to independence vs public safety and risk to self/others"},{label:"Multiple perspectives",desc:"Patient's quality of life, daughter's worry, legal requirements for reporting, cognitive testing options"},{label:"Practical middle ground",desc:"Formal driving evaluation, neuropsych testing, graduated restrictions, alternative transportation"},{label:"Systemic awareness",desc:"Rural vs urban (driving may be only transportation), reporting laws vary by state, physician's legal obligations"}]},
+  {id:3,cat:"ethics",title:"The Expensive Medication",prompt:"A patient with a chronic condition can't afford their medication ($800/month) and has been cutting pills in half to make them last. The generic version works almost as well but the brand has slightly better outcomes in clinical trials. The pharmaceutical company offers a patient assistance program but requires extensive paperwork. What issues does this raise?",rubric:[{label:"Access and equity",desc:"Healthcare affordability, medication adherence, socioeconomic determinants of health"},{label:"Clinical reasoning",desc:"Slightly better outcomes may not justify cost if patient can't afford and is non-adherent — adherence to generic > partial adherence to brand"},{label:"Systems thinking",desc:"Pharmaceutical pricing, assistance programs, role of insurance, policy implications"},{label:"Patient-centered",desc:"What does the patient value? Involve them in the decision rather than deciding for them"}]},
+  {id:4,cat:"ethics",title:"Confidentiality Dilemma",prompt:"You're volunteering at a free clinic. A 16-year-old patient confides that she's sexually active and wants birth control but doesn't want her parents to know. In your state, minors can consent to reproductive healthcare. Her mother is in the waiting room and asks you what the visit was about. How do you handle this?",rubric:[{label:"Legal framework",desc:"Minor consent laws for reproductive health, HIPAA protections, mature minor doctrine"},{label:"Ethical principles",desc:"Patient confidentiality, adolescent autonomy, parental rights, trust in healthcare system"},{label:"Communication approach",desc:"Respectfully redirect the mother's question, support the patient's legal rights, consider involving the physician"},{label:"Broader awareness",desc:"Why confidentiality matters for adolescent health — breaching trust discourages teens from seeking care"}]},
+  {id:5,cat:"communication",title:"Breaking Difficult News",prompt:"You're shadowing in a primary care office. A patient just received a cancer diagnosis over the phone while waiting for their appointment. They're crying when the physician walks in. The physician handles the situation, then asks you afterward: 'How would you approach a conversation like that?' What do you say?",rubric:[{label:"Empathy first",desc:"Acknowledge the emotional weight before talking about technique — 'That must have been incredibly difficult'"},{label:"Communication framework",desc:"Reference SPIKES or similar: Setting, Perception, Invitation, Knowledge, Emotions, Summary"},{label:"Specific techniques",desc:"Silence is okay, follow the patient's lead, ask what they understand, name the emotion"},{label:"Self-awareness",desc:"Acknowledge this is a skill that takes practice, express desire to learn, ask how the physician developed this ability"}]},
+  {id:6,cat:"communication",title:"The Angry Patient",prompt:"A patient has been waiting 90 minutes for a 15-minute appointment. When the physician enters, the patient says: 'This is ridiculous. I took off work for this. You doctors don't respect anyone's time.' The physician handles it well. Afterward, they ask you: how would you de-escalate an angry patient? What's your approach?",rubric:[{label:"Validation first",desc:"Don't defend or explain — first acknowledge their frustration is legitimate: 'You're right that your time matters'"},{label:"Active listening",desc:"Let them vent, don't interrupt, show you're hearing them"},{label:"Practical response",desc:"Apologize sincerely, explain what you can (without excuses), focus on making the remaining time count"},{label:"Systems awareness",desc:"Recognize that wait times reflect systemic issues (overbooking, understaffing) — it's not just this patient being difficult"}]},
+  {id:7,cat:"communication",title:"Language Barrier",prompt:"A non-English-speaking patient arrives at the clinic. Their 12-year-old child offers to interpret. The physician declines the child's help and calls for a professional interpreter, which will take 30 minutes. The patient seems frustrated by the delay. Why might the physician have made this choice?",rubric:[{label:"Accuracy concerns",desc:"Children may not understand medical terminology, may filter or soften information"},{label:"Power dynamics",desc:"Child shouldn't bear burden of interpreting serious medical information for a parent — role reversal"},{label:"Confidentiality",desc:"Patient may not disclose sensitive information (abuse, substance use, sexual health) through their child"},{label:"Professional standards",desc:"Federal law (Title VI) requires meaningful language access; using family members doesn't meet this standard"}]},
+  {id:8,cat:"teamwork",title:"The Dominating Group Member",prompt:"You're working on a group presentation for your premed seminar. One group member has taken over the entire project, dismissing others' ideas and rewriting their sections. The presentation is in two days. The work is good, but three group members feel marginalized and resentful. How do you handle this?",rubric:[{label:"Direct conversation",desc:"Address it privately with the dominating member — name the behavior, not the person"},{label:"Balance quality and process",desc:"Acknowledge their work is strong while explaining why inclusive process matters"},{label:"Team advocacy",desc:"Speak up for quieter members, create structured time for everyone's input"},{label:"Connection to medicine",desc:"Healthcare is team-based — a brilliant surgeon who can't collaborate is dangerous"}]},
+  {id:9,cat:"teamwork",title:"The Struggling Teammate",prompt:"During a volunteer shift, you notice another volunteer (also a premed) making mistakes — mislabeling supplies and giving patients incorrect directions. They seem distracted and overwhelmed. Last week they mentioned their parent was just diagnosed with cancer. What do you do?",rubric:[{label:"Compassion and safety",desc:"Both matter — you can be kind AND address the safety issue"},{label:"Private conversation",desc:"Check in privately: 'I noticed you seem overwhelmed — is everything okay?' before jumping to correction"},{label:"Practical support",desc:"Offer to help, suggest they take a break, consider whether to involve a supervisor (not punitively)"},{label:"Nuance",desc:"Don't diagnose their problem — your job is to be a supportive peer, not their therapist or manager"}]},
+  {id:10,cat:"policy",title:"Mandatory Vaccination",prompt:"A university is considering requiring COVID boosters for all students. Some students argue this violates their bodily autonomy. The university argues it protects vulnerable community members. You're asked to present both sides at a student government meeting. What are the strongest arguments on each side?",rubric:[{label:"Pro-mandate arguments",desc:"Community protection, vulnerable populations, precedent (MMR required for school), herd immunity"},{label:"Anti-mandate arguments",desc:"Bodily autonomy, individual risk assessment, religious/philosophical objections, trust concerns"},{label:"Balanced presentation",desc:"Present both sides fairly without straw-manning either position"},{label:"Policy nuance",desc:"Exemption policies, alternatives (testing), role of evidence in policy, difference between mandates and recommendations"}]},
+  {id:11,cat:"policy",title:"Rural Healthcare Crisis",prompt:"A small rural town's only hospital is closing due to financial losses. The nearest hospital will be 60 miles away. An emergency patient who currently has a 10-minute transport will now face a 90-minute ambulance ride. What are the ethical, practical, and policy dimensions of this problem?",rubric:[{label:"Access and equity",desc:"Geographic disparities in healthcare, disproportionate impact on elderly, low-income, and uninsured"},{label:"Economic realities",desc:"Rural hospitals lose money due to low volume, payer mix, staffing costs — it's not simple negligence"},{label:"Creative solutions",desc:"Telehealth, community health workers, freestanding EDs, mobile clinics, air transport agreements"},{label:"Systemic thinking",desc:"How reimbursement policy, workforce distribution, and market forces created this crisis"}]},
+  {id:12,cat:"policy",title:"AI in Medical Diagnosis",prompt:"A new AI system can diagnose skin cancer from photos with 95% accuracy — better than most dermatologists (87%). Should insurance companies be required to cover AI-based diagnosis? Should AI be allowed to diagnose without physician oversight? What are the implications?",rubric:[{label:"Benefits",desc:"Improved accuracy, increased access (rural areas without dermatologists), reduced cost, faster diagnosis"},{label:"Risks",desc:"Algorithmic bias (trained on certain skin tones), liability questions, loss of physician-patient relationship"},{label:"Nuance",desc:"AI as tool vs replacement — augmenting physician judgment vs substituting for it"},{label:"Equity lens",desc:"Could democratize access OR widen disparities depending on implementation and who has access"}]},
+  {id:13,cat:"personal",title:"Why Medicine?",prompt:"The interviewer asks: 'You could help people in many careers — teaching, social work, public health, engineering. Why specifically medicine? What is it about being a physician that you can't get elsewhere?'",rubric:[{label:"Specificity",desc:"Generic 'I want to help people' is weak — what specifically about the physician's role draws you?"},{label:"Personal experience",desc:"Connect to actual experiences (shadowing, volunteering, personal) not abstract ideas"},{label:"Intellectual honesty",desc:"Acknowledge what draws you beyond altruism — the intellectual challenge, the intimacy of the relationship, the privilege of trust"},{label:"Self-awareness",desc:"Show you understand what you're signing up for — the difficulty, the sacrifice, and why it's still worth it to you"}]},
+  {id:14,cat:"personal",title:"Your Biggest Failure",prompt:"'Tell me about a time you failed at something important to you. What happened, what did you learn, and how did it change your approach?'",rubric:[{label:"Genuine vulnerability",desc:"Pick a REAL failure, not a humble brag ('I worked too hard'). Admissions committees see through performative failures"},{label:"Accountability",desc:"Own it without excessive self-flagellation — 'Here's what happened. Here's what I did wrong.'"},{label:"Growth narrative",desc:"What specifically changed? Not just 'I learned to work harder' but a concrete behavioral change"},{label:"Connection forward",desc:"How does this failure make you a better future physician? What did it teach you about resilience, humility, or self-awareness?"}]},
+  {id:15,cat:"personal",title:"Handling Disagreement",prompt:"'Describe a time you strongly disagreed with someone in a position of authority. How did you handle it? What was the outcome?'",rubric:[{label:"Respect with courage",desc:"Show you can disagree respectfully without being either a pushover or confrontational"},{label:"Specific example",desc:"Real situation with real stakes — not hypothetical"},{label:"Communication skills",desc:"How did you express your disagreement? Timing, tone, approach matter"},{label:"Outcome and reflection",desc:"What happened? Did you change their mind, find a compromise, or learn you were wrong? All are valid"}]},
+  {id:16,cat:"scenario",title:"The Homeless Patient",prompt:"You're volunteering at a free clinic. A homeless patient with diabetes comes in with a foot infection. You know they need daily wound care, antibiotics that need refrigeration, and follow-up in a week. They have no phone, no address, no refrigerator, and no transportation. How do you approach their care?",rubric:[{label:"Social determinants",desc:"Recognize that standard medical advice is useless without considering the patient's actual circumstances"},{label:"Creative problem-solving",desc:"Room-temperature antibiotics, wound care education the patient can do themselves, drop-in clinic follow-up, shelter resources"},{label:"Dignity and respect",desc:"Don't make assumptions about why they're homeless — treat them as the expert on their own life"},{label:"Systems awareness",desc:"How does healthcare fail people without stable housing? What would need to change?"}]},
+  {id:17,cat:"scenario",title:"Physician Impairment",prompt:"During shadowing, you notice the physician you're working with seems unsteady and you smell alcohol on their breath at 10 AM. They're about to see patients. You're a premed student with no authority. What do you do?",rubric:[{label:"Patient safety first",desc:"This is a patient safety issue — it overrides social discomfort and hierarchy"},{label:"Practical steps",desc:"Don't confront alone — contact office manager, clinic supervisor, or another physician. Document what you observed"},{label:"Empathy for the physician",desc:"Impairment is often a disease (addiction) not a character flaw — they need help, not just punishment"},{label:"Courage under pressure",desc:"This tests whether you'll speak up when it's uncomfortable — essential quality for medicine"}]},
+  {id:18,cat:"scenario",title:"The Cultural Conflict",prompt:"A Jehovah's Witness patient is in a serious car accident and needs a blood transfusion to survive. They have a signed advance directive refusing blood products. Their adult daughter, crying, tells you: 'Please save my mother — she would want to live. She's not thinking clearly because of her religion.' What are the ethical considerations?",rubric:[{label:"Patient autonomy",desc:"A competent adult's advance directive must be respected — even if you disagree with their reasoning"},{label:"Religious respect",desc:"The patient's beliefs are not 'unclear thinking' — they represent a deeply held conviction that deserves respect"},{label:"Family distress",desc:"Acknowledge the daughter's anguish — she's experiencing anticipatory grief and fear"},{label:"Medical alternatives",desc:"Blood alternatives, volume expanders, cell salvage — explore what IS possible within the patient's values"},{label:"Legal framework",desc:"Advance directives are legally binding; overriding one without clear evidence of incapacity is assault"}]},
+  {id:19,cat:"ethics",title:"Social Media Dilemma",prompt:"A classmate posts a selfie on Instagram from a hospital volunteer shift with a patient visible in the background. The patient isn't identified by name, but you recognize them. Your classmate gets 200 likes and comments praising their volunteering. They didn't ask the patient's permission. What do you do?",rubric:[{label:"HIPAA awareness",desc:"Even without a name, identifiable images of patients violate privacy — this is a HIPAA issue"},{label:"Direct conversation",desc:"Private message first — assume ignorance not malice. 'Hey, I noticed a patient is visible in your photo...'"},{label:"Social media literacy",desc:"Good intentions don't prevent harm — the patient's privacy was violated regardless of the volunteer's motives"},{label:"Bigger picture",desc:"This reflects a broader issue of performative volunteering — is the goal helping patients or building your resume?"}]},
+  {id:20,cat:"ethics",title:"Research Ethics",prompt:"You're working in a research lab. The PI asks you to exclude three data points that don't fit the expected results, saying 'These are clearly outliers — they'll just confuse the reviewers.' The excluded data would weaken the study's conclusions. What do you do?",rubric:[{label:"Scientific integrity",desc:"Data exclusion requires pre-specified criteria, not post-hoc removal of inconvenient results"},{label:"Power dynamics",desc:"PI controls your recommendation letter and research career — acknowledge this is hard"},{label:"Practical approach",desc:"Ask for the statistical justification for exclusion, suggest transparent reporting of all data with sensitivity analyses"},{label:"Consequences",desc:"Research fraud harms patients (treatments based on false data), wastes resources, and erodes public trust in science"}]}
+];
+
+let currentCat = 'all';
+let sessions = JSON.parse(localStorage.getItem('rdx-mmi-sessions') || '[]');
+
+function showTab(t) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  ['practice','guide','history'].forEach(x => document.getElementById('tab-'+x).classList.toggle('hidden', x !== t));
+  if (t === 'history') renderHistory();
+}
+
+function setCat(c, el) {
+  currentCat = c;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderScenarios();
+}
+
+function renderScenarios() {
+  const filtered = currentCat === 'all' ? SCENARIOS : SCENARIOS.filter(s => s.cat === currentCat);
+  document.getElementById('scenario-list').innerHTML = filtered.map(s => `
+    <div class="scenario" id="sc-${s.id}">
+      <div class="scenario-header">
+        <span class="scenario-title">${s.title}</span>
+        <span class="scenario-cat">${s.cat}</span>
+      </div>
+      <div class="scenario-prompt">${s.prompt}</div>
+      <div class="scenario-timer">
+        <span class="timer-display" id="timer-${s.id}">8:00</span>
+        <button class="timer-btn timer-start" onclick="startTimer(${s.id})">▶ Start (8 min)</button>
+        <button class="timer-btn timer-reset" onclick="resetTimer(${s.id})">↺ Reset</button>
+        <button class="timer-btn" style="background:#f0fdf4;color:#059669;border:1px solid #86efac;margin-left:auto;" onclick="showRubric(${s.id})">📋 Rubric</button>
+      </div>
+      <div class="scenario-response" id="resp-${s.id}">
+        <textarea placeholder="Type your response here (optional — or practice out loud with the timer)..." onblur="saveResponse(${s.id}, this.value)"></textarea>
+      </div>
+      <div class="rubric" id="rubric-${s.id}">
+        <h4>📋 What Strong Answers Include</h4>
+        ${s.rubric.map(r => `<div class="rubric-item"><strong>${r.label}</strong>${r.desc}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+const timers = {};
+function startTimer(id) {
+  if (timers[id]) { clearInterval(timers[id].interval); }
+  let seconds = 480; // 8 minutes
+  const display = document.getElementById('timer-' + id);
+  document.getElementById('resp-' + id).classList.add('show');
+  timers[id] = { interval: setInterval(() => {
+    seconds--;
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    display.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    if (seconds <= 60) display.style.color = '#dc2626';
+    if (seconds <= 0) {
+      clearInterval(timers[id].interval);
+      display.textContent = "TIME";
+      sessions.push({ id, date: new Date().toISOString().split('T')[0], cat: SCENARIOS.find(s=>s.id===id).cat, timeUsed: 480 });
+      localStorage.setItem('rdx-mmi-sessions', JSON.stringify(sessions));
+    }
+  }, 1000) };
+}
+
+function resetTimer(id) {
+  if (timers[id]) clearInterval(timers[id].interval);
+  const display = document.getElementById('timer-' + id);
+  display.textContent = '8:00';
+  display.style.color = '';
+}
+
+function showRubric(id) {
+  document.getElementById('rubric-' + id).classList.toggle('show');
+}
+
+function saveResponse(id, text) {
+  if (!text.trim()) return;
+  const existing = sessions.find(s => s.id === id && s.date === new Date().toISOString().split('T')[0]);
+  if (!existing) {
+    sessions.push({ id, date: new Date().toISOString().split('T')[0], cat: SCENARIOS.find(s=>s.id===id).cat, response: text, timeUsed: 480 });
+    localStorage.setItem('rdx-mmi-sessions', JSON.stringify(sessions));
+  }
+}
+
+function renderHistory() {
+  const practiced = new Set(sessions.map(s => s.id)).size;
+  const cats = new Set(sessions.map(s => s.cat)).size;
+  document.getElementById('s-practiced').textContent = practiced;
+  document.getElementById('s-cats').textContent = cats;
+  document.getElementById('s-avgtime').textContent = sessions.length ? '8:00' : '—';
+  const list = document.getElementById('history-list');
+  if (!sessions.length) {
+    list.innerHTML = '<div style="text-align:center;padding:48px;color:var(--pm-muted);"><span style="font-size:48px;display:block;margin-bottom:12px;">🎤</span><p>No practice sessions yet.<br>Start with any scenario above!</p></div>';
+    return;
+  }
+  const byDate = {};
+  sessions.forEach(s => { if (!byDate[s.date]) byDate[s.date] = []; byDate[s.date].push(s); });
+  list.innerHTML = Object.entries(byDate).sort((a,b) => b[0].localeCompare(a[0])).map(([date, items]) =>
+    `<div class="card"><h3>📅 ${date}</h3>${items.map(i => {
+      const sc = SCENARIOS.find(s => s.id === i.id);
+      return `<div style="padding:8px 0;font-size:14px;border-bottom:1px solid var(--pm-border);"><strong>${sc?.title||'Unknown'}</strong> <span class="scenario-cat">${i.cat}</span></div>`;
+    }).join('')}</div>`
+  ).join('');
+}
+
+renderScenarios();
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -11,7 +11,7 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
-            font-family:'Inter',sans-serif;
+            font-family:'DM Sans','Inter',sans-serif;
             background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
             min-height: 100vh;
             padding: 20px;
@@ -59,7 +59,7 @@
         
         /* Patient info card */
         .patient-card {
-            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            background:var(--rdx-teal-50);
             border: 1px solid rgba(59,130,246,0.2);
             border-radius: 12px;
             padding: 16px 20px;
@@ -67,7 +67,7 @@
         }
         .patient-card h4 { color: #5eead4; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
-        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-item { background:var(--rdx-bg-hover); padding: 8px 12px; border-radius: 8px; text-align: center; }
         .vital-label { font-size: 0.75rem; color: #94a3b8; }
         .vital-value { font-size: 1.1rem; font-weight: 700; }
         .vital-value.abnormal { color: #f87171; }
@@ -84,7 +84,7 @@
         .question-prompt {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             margin-bottom: 16px;
             line-height: 1.5;
         }
@@ -159,14 +159,14 @@
         .feedback.correct-feedback .feedback-title { color: #4ade80; }
         .feedback.incorrect-feedback .feedback-title { color: #f87171; }
         .feedback-explanation {
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             line-height: 1.6;
         }
         
         /* Teaching point */
         .teaching-point {
-            background: rgba(139,92,246,0.15);
-            border: 1px solid rgba(139,92,246,0.3);
+            background:var(--rdx-info-bg);
+            border:1px solid var(--rdx-info);
             border-radius: 10px;
             padding: 16px;
             margin-top: 16px;
@@ -179,8 +179,8 @@
             font-size: 1rem;
         }
         .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
-        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
-        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color:var(--rdx-text); }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color:var(--rdx-text); }
         .teaching-point em { color: #94a3b8; }
         .teaching-point strong { color: #f1f5f9; }
         .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
@@ -385,6 +385,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="score-tracker">
@@ -1044,5 +1045,6 @@ function toggleReferences() {
 <script src="dx-adventure-tracker.js"></script>
 <script src="../dx-cross-links.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
 </body>
 </html>

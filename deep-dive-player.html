@@ -15,8 +15,8 @@
 
 /* Multi-Theme Support */
 :root {
-    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
-    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
+    --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
     --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
@@ -29,7 +29,7 @@
     --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
-    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
 [data-theme="high-contrast"] {
@@ -1040,9 +1040,9 @@ body { transition: background 0.3s, color 0.3s; }
 
 [data-theme="ocean-dark"] {
     --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
+    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
 }
 
 [data-theme="midnight-teal"] {
@@ -1130,11 +1130,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     </style>
         <link rel="stylesheet" href="js/dx-case-nav.css">
+<link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body>
 
 <div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
+    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
     <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
     <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
     <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
@@ -2005,7 +2006,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
                     <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
                     <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
@@ -2076,5 +2077,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <script src="dx-progress.js"></script>
 <script src="dx-cross-links.js"></script>
 <script src="data/rdx-persist.js"></script>
+<script src="./js/rdx-nav.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -11,18 +11,18 @@
     <style>
         :root {
             --primary: #1e3a5f; --primary-dark: #0f2744; --accent: #dc2626;
-            --success: #059669; --warning: #d97706; --danger: #dc2626;
+            --success: #059669; --warning: #d97706; --danger:var(--rdx-danger);
             --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
             --text: #1e293b; --text-secondary: #64748b;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        body { font-family: 'DM Sans', 'Inter', -apple-system, sans-serif; background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.6; min-height: 100vh; }
         .container { max-width: 900px; margin: 0 auto; padding: 24px; }
         .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 32px 24px; border-radius: 16px; margin-bottom: 24px; }
         .header h1 { font-size: 1.75rem; margin-bottom: 8px; }
         .header p { opacity: 0.9; font-size: 0.95rem; }
         .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 12px; }
-        .scene { background: var(--card); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        .scene { background:var(--rdx-bg-card); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); }
         .scene-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
         .scene-icon { font-size: 1.5rem; }
         .scene-title { font-size: 1.1rem; font-weight: 700; }
@@ -34,7 +34,7 @@
         .vital-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
         .vital-value.critical { color: var(--danger); }
         .choices { display: flex; flex-direction: column; gap: 10px; }
-        .choice-btn { background: var(--card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn { background:var(--rdx-bg-card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
         .choice-btn:hover { border-color: var(--primary); background: #f8fafc; }
         .choice-btn.selected { border-color: var(--primary); background: #f0fdfa; }
         .choice-btn.correct { border-color: var(--success); background: #ecfdf5; }
@@ -82,6 +82,7 @@
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -395,7 +396,7 @@
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
 
-<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:var(--rdx-bg-hover);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
 <h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
 <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" style="color:#7dd3fc">Myasthenic Crisis - StatPearls/NCBI</a> — NCBI Bookshelf</li></ul>
 <p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
@@ -416,6 +417,6 @@
     </div>
 </div>
 
-<script src="../js/dx-universal-nav.js"></script>
+<script src="../js/rdx-nav.js"></script>
 </body>
 </html>

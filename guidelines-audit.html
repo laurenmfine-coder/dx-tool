@@ -8,17 +8,17 @@
 <title>Guidelines Audit | ReasonDx</title>
 
 <style>
-:root{--bg:#0f172a;--bg2:#1e293b;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;--accent:#14b8a6;--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--danger-light:rgba(239,68,68,.15);--purple:#8b5cf6;--teal:#14b8a6}
-[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#0d9488;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1);--danger-light:rgba(220,38,38,.1)}
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem}
+:root{--bg:var(--rdx-bg);--bg2:#1e293b;--card:var(--rdx-bg-card);--border:var(--rdx-border);--text:var(--rdx-text);--text2:#cbd5e1;--muted:var(--rdx-text-muted);--accent:#14b8a6;--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--danger-light:rgba(239,68,68,.15);--purple:#8b5cf6;--teal:#14b8a6}
+[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#0d9488;--success:#16a34a;--warning:#d97706;--danger:var(--rdx-danger);--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1);--danger-light:rgba(220,38,38,.1)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--rdx-bg);color:var(--rdx-text);min-height:100vh;padding:1.5rem}
 .header{text-align:center;margin-bottom:2rem}.header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--warning),var(--danger));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}.header p{color:var(--muted);font-size:.95rem}
 .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:1.5rem}.back-link:hover{text-decoration:underline}
 .summary{max-width:1000px;margin:0 auto 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
-.sum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}.sum-card .num{font-size:2rem;font-weight:800}.sum-card .label{font-size:.8rem;color:var(--muted);margin-top:.3rem}
+.sum-card{background:var(--rdx-bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}.sum-card .num{font-size:2rem;font-weight:800}.sum-card .label{font-size:.8rem;color:var(--muted);margin-top:.3rem}
 .filters{max-width:1000px;margin:0 auto 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap}
 .filter-btn{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-size:.85rem;transition:.2s}.filter-btn:hover,.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .audit-table{max-width:1000px;margin:0 auto}
-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;background:var(--rdx-bg-card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
 th,td{padding:.65rem 1rem;text-align:left;border-bottom:1px solid var(--border)}th{background:var(--bg2);color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;position:sticky;top:0}td{font-size:.85rem;color:var(--text2)}tr:last-child td{border-bottom:none}
 .badge{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.72rem;font-weight:600}.badge-current{background:var(--success-light);color:var(--success)}.badge-review{background:var(--warning-light);color:var(--warning)}.badge-outdated{background:var(--danger-light);color:var(--danger)}
 .gl-name{font-weight:600;color:var(--text)}.gl-org{font-size:.78rem;color:var(--muted)}
@@ -26,6 +26,7 @@ th,td{padding:.65rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
 .search input{width:100%;padding:.65rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:.9rem;outline:none}
 .search input:focus{border-color:var(--accent)}
 </style>
+<link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body>
 <a href="index.html" class="back-link">← Back to ReasonDx</a>
@@ -90,5 +91,5 @@ document.getElementById('search').addEventListener('input',function(){
 });
 </script>
 <script src="data/rdx-persist.js"></script>
-<script src="js/dx-universal-nav.js"></script>
+<script src="./js/rdx-nav.js"></script>
 </body></html>

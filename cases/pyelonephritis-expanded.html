@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>Pyelonephritis - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background:linear-gradient(135deg,#0f766e,#14b8a6); min-height: 100vh; padding: 20px; color: #f8fafc; }
         .container { max-width: 900px; margin: 0 auto; }
         .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
         .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -37,7 +37,7 @@
         .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
         .feedback-title { font-weight: 700; margin-bottom: 8px; }
-        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; }
         .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
         .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
@@ -45,7 +45,7 @@
         .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
         .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
         .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
-        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
         .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
@@ -143,6 +143,7 @@
 
 </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
@@ -568,5 +569,18 @@ function toggleReferences() {
     </div>
 </div>
 
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1093/cid/ciq257" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">IDSA/ESCMID Guidelines for Urinary Tract Infections</a> — <em style="color:var(--rdx-text-muted,#64748b)">Clin Infect Dis</em></li></ul></div>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CT Abdomen/Pelvis with Contrast</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Wedge-shaped hypoperfusion, perinephric stranding, abscess, obstructing stone</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-renal-gu.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/acute-pyelonephritis" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
 </body>
 </html>

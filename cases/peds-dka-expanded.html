@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>The Sleepy Child | ReasonDx Pediatrics</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(30, 58, 95, 0.95); border-radius: 16px; margin-bottom: 20px; border: 1px solid rgba(96, 165, 250, 0.3); }
         .case-title { font-size: 1.2rem; font-weight: 700; }
@@ -39,11 +39,11 @@
         .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .mechanism-title { font-weight: 600; color: #a78bfa; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .mechanism-content { font-size: 0.95rem; line-height: 1.7; }
-        .pathway { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; margin: 10px 0; font-family: monospace; font-size: 0.9rem; }
+        .pathway { background:var(--rdx-bg-hover); border-radius: 8px; padding: 12px; margin: 10px 0; font-family: monospace; font-size: 0.9rem; }
         .pathway-arrow { color: #2dd4bf; }
         .boards-tip { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2)); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .boards-tip-title { font-weight: 600; color: #4ade80; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .dialogue { background: rgba(0,0,0,0.2); border-left: 4px solid #14b8a6; padding: 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+        .dialogue { background:var(--rdx-bg-hover); border-left: 4px solid #14b8a6; padding: 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
         .dialogue-speaker { font-weight: 600; color: #2dd4bf; margin-bottom: 4px; }
         .dialogue-text { font-style: italic; }
         .lab-results { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
@@ -86,18 +86,18 @@
         .alert-title { font-weight: 600; color: #f87171; margin-bottom: 8px; }
         .warning-box { background: rgba(251, 191, 36, 0.2); border: 1px solid rgba(251, 191, 36, 0.5); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .warning-title { font-weight: 600; color: #fbbf24; margin-bottom: 8px; }
-        .input-group { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .input-group { background:var(--rdx-bg-hover); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .input-title { font-weight: 600; color: #2dd4bf; margin-bottom: 12px; }
         .input-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
         .input-field { flex: 1; min-width: 140px; }
         .input-label { font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px; }
-        .input-select { width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #e2e8f0; font-size: 0.95rem; }
+        .input-select { width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color:var(--rdx-text); font-size: 0.95rem; }
         .input-select:focus { outline: none; border-color: #14b8a6; }
         .input-select option { background: #1e3a5f; }
-        .neuro-check { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .neuro-check { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .neuro-title { font-weight: 600; color: #a78bfa; margin-bottom: 12px; }
         .neuro-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .neuro-item { padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .neuro-item { padding: 10px; background:var(--rdx-bg-hover); border-radius: 8px; }
         .neuro-label { font-size: 0.8rem; color: #94a3b8; }
         .neuro-value { font-weight: 600; margin-top: 4px; }
         .debrief-section { background: rgba(0,0,0,0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
@@ -105,10 +105,10 @@
         .debrief-item { padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #64748b; }
         .debrief-item.excellent { border-left-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
         .debrief-item-title { font-weight: 600; margin-bottom: 6px; }
-        .debrief-item-detail { font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; }
-        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .debrief-item-detail { font-size: 0.9rem; color:var(--rdx-text-secondary); line-height: 1.6; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15)); border:1px solid var(--rdx-info); border-radius: 16px; padding: 24px; margin: 24px 0; }
         .why-chain-title { font-size: 1.2rem; font-weight: 600; color: #a78bfa; margin-bottom: 20px; }
-        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .why-item { background:var(--rdx-bg-hover); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
         .why-q { font-weight: 600; color: #c4b5fd; margin-bottom: 8px; }
         .why-a { line-height: 1.7; }
         .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
@@ -149,6 +149,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container" id="app"></div>
@@ -1324,5 +1325,6 @@
 <script src="dx-adventure-tracker.js"></script>
 <script src="../dx-cross-links.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>Croup (Laryngotracheobronchitis) - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
         .container { max-width: 900px; margin: 0 auto; }
         .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; display: none; }
         .scene.active { display: block; }
@@ -34,7 +34,7 @@
         .feedback.show { display: block; }
         .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
-        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(14,165,233,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
@@ -55,7 +55,7 @@
         .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .completion { text-align: center; padding: 60px 40px; }
         .difficulty-toggle { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 10px; z-index: 100; }
-        .difficulty-toggle select { background: #1e293b; color: white; border: 1px solid #475569; padding: 6px 12px; border-radius: 6px; }
+        .difficulty-toggle select { background:var(--rdx-bg-card); color: white; border: 1px solid #475569; padding: 6px 12px; border-radius: 6px; }
         
         /* Visual Debrief Styles */
         .debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
@@ -89,7 +89,7 @@
         .references-content a:hover { background: rgba(255,255,255,0.2); color: white; }
 
         /* Platform Panel */
-        .platform-panel { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+        .platform-panel { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border:1px solid var(--rdx-info); border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
         .platform-header { font-weight: 600; color: #c4b5fd; margin-bottom: 12px; }
         .platform-links { display: flex; flex-wrap: wrap; gap: 8px; }
         .platform-link { background: rgba(139,92,246,0.2); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; color: #e9d5ff; }
@@ -127,6 +127,7 @@
 
 </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="score-tracker">
@@ -873,5 +874,7 @@ Risk of "REBOUND" stridor when epi wears off
     </div>
 </div>
 
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1542/peds.2015-0382" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">AAP/CPS Practice Guideline: Croup Management</a> — <em style="color:var(--rdx-text-muted,#64748b)">Pediatrics</em></li></ul></div>
 </body>
 </html>

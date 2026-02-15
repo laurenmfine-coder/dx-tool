@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -12,7 +12,7 @@
 <link href="../css/rdx-a11y.css" rel="stylesheet">
 <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #0f172a 0%, #334155 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, var(--rdx-bg) 0%, #334155 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
         .header h1 { font-size: 1.5rem; color: #94a3b8; }
@@ -22,12 +22,12 @@
         .progress-fill { height: 100%; background: linear-gradient(90deg, #94a3b8, #fbbf24); border-radius: 3px; transition: width 0.3s; }
         .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
         .scene-phase { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; }
-        .scene-title { font-size: 1.5rem; font-weight: 700; color: #e2e8f0; margin-top: 4px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color:var(--rdx-text); margin-top: 4px; }
         .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #64748b; line-height: 1.7; }
         .highlight { color: #fbbf24; font-weight: 600; }
         .critical { color: #f87171; font-weight: 600; }
         .question-box { background: linear-gradient(135deg, rgba(100,116,139,0.2), rgba(251,191,36,0.2)); border: 1px solid rgba(100,116,139,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-bottom: 16px; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color:var(--rdx-text); margin-bottom: 16px; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
         .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
         .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
@@ -41,7 +41,7 @@
         .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
         .teaching-point { display: none; margin-top: 20px; background: rgba(100,116,139,0.15); border: 1px solid rgba(100,116,139,0.3); border-radius: 12px; padding: 20px; }
         .teaching-point.show { display: block; }
-        .mechanism-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .mechanism-box { background:var(--rdx-bg-hover); border-radius: 10px; padding: 16px; margin: 12px 0; }
         .mechanism-title { color: #94a3b8; font-weight: 600; margin-bottom: 10px; }
         .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; }
         .btn { background: linear-gradient(135deg, #64748b, #fbbf24); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
@@ -55,6 +55,7 @@
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -119,6 +120,17 @@
     </div>
 </div>
 
-<script src="../js/dx-universal-nav.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Ultrasound with Doppler</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Absent blood flow (torsion), intratesticular mass, hydrocele, epididymal changes</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-renal-gu.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/testicular-torsion" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
 </body>
 </html>

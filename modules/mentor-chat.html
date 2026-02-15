@@ -15,7 +15,7 @@
     <script src="voice-input.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; }
+        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; }
         
         .header { background: var(--bg-card); border-bottom: 1px solid #e4e4e7; padding: 12px 24px; flex-shrink: 0; }
         .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
@@ -239,6 +239,7 @@
         @media (max-width: 900px) { .concept-panel { display: none; } }
     </style>
         <link rel="stylesheet" href="../js/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 
@@ -940,9 +941,9 @@
 
 [data-theme="ocean-dark"] {
     --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
+    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
 }
 
 [data-theme="midnight-teal"] {
@@ -1423,7 +1424,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
                     <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
                     <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
@@ -1483,5 +1484,15 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <script src="../js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "CoachDx", platformRoot: "../" }); });</script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+<li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
+</ol>
+</div>
+
 </body>
 </html>

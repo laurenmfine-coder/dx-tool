@@ -1,0 +1,316 @@
+/* ============================================================
+   rdx-theme.css — ReasonDx Unified Design System
+   Light theme default. Dark toggle via [data-theme="dark"].
+   Matches the landing page (index.html) aesthetic.
+   ============================================================ */
+
+/* ---------- FONTS ---------- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- LIGHT TOKENS (default) ---------- */
+:root {
+  --rdx-bg:         #f8fafc;
+  --rdx-bg-card:    #ffffff;
+  --rdx-bg-hover:   #f1f5f9;
+  --rdx-bg-nav:     #ffffff;
+  --rdx-border:     #e2e8f0;
+  --rdx-border-hover:#cbd5e1;
+  --rdx-text:       #1e293b;
+  --rdx-text-secondary: #475569;
+  --rdx-text-muted: #64748b;
+  --rdx-text-faint: #94a3b8;
+  --rdx-teal:       #0d9488;
+  --rdx-teal-dark:  #0f766e;
+  --rdx-teal-light: #ccfbf1;
+  --rdx-teal-50:    #f0fdfa;
+  --rdx-purple:     #7c3aed;
+  --rdx-purple-bg:  #ede9fe;
+  --rdx-green:      #16a34a;
+  --rdx-green-bg:   #dcfce7;
+  --rdx-amber:      #d97706;
+  --rdx-amber-bg:   #fef3c7;
+  --rdx-rose:       #e11d48;
+  --rdx-rose-bg:    #ffe4e6;
+  --rdx-blue:       #2563eb;
+  --rdx-blue-bg:    #dbeafe;
+  --rdx-success:    #10b981;
+  --rdx-success-bg: rgba(16,185,129,0.12);
+  --rdx-danger:     #dc2626;
+  --rdx-danger-bg:  rgba(220,38,38,0.12);
+  --rdx-info:       #7c3aed;
+  --rdx-info-bg:    rgba(124,58,237,0.08);
+  --rdx-radius:     12px;
+  --rdx-radius-sm:  8px;
+  --rdx-radius-lg:  16px;
+  --rdx-shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
+  --rdx-shadow:     0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --rdx-shadow-md:  0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --rdx-shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+  --rdx-font:       'DM Sans', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  --rdx-font-serif: 'DM Serif Display', Georgia, serif;
+  /* Legacy compat — maps old dark-theme vars to light equivalents */
+  --bg:             var(--rdx-bg);
+  --card:           var(--rdx-bg-card);
+  --border:         var(--rdx-border);
+  --text:           var(--rdx-text);
+  --muted:          var(--rdx-text-muted);
+  --accent:         var(--rdx-teal);
+  --success:        var(--rdx-success);
+  --danger:         var(--rdx-danger);
+  --info:           var(--rdx-info);
+}
+
+/* ---------- DARK TOKENS ---------- */
+[data-theme="dark"] {
+  --rdx-bg:         #0f172a;
+  --rdx-bg-card:    #1e293b;
+  --rdx-bg-hover:   #334155;
+  --rdx-bg-nav:     #1e293b;
+  --rdx-border:     #334155;
+  --rdx-border-hover:#475569;
+  --rdx-text:       #f1f5f9;
+  --rdx-text-secondary: #cbd5e1;
+  --rdx-text-muted: #94a3b8;
+  --rdx-text-faint: #64748b;
+  --rdx-teal:       #14b8a6;
+  --rdx-teal-dark:  #2dd4bf;
+  --rdx-teal-light: rgba(20,184,166,0.15);
+  --rdx-teal-50:    rgba(20,184,166,0.08);
+  --rdx-purple:     #a78bfa;
+  --rdx-purple-bg:  rgba(167,139,250,0.15);
+  --rdx-green:      #4ade80;
+  --rdx-green-bg:   rgba(74,222,128,0.15);
+  --rdx-amber:      #fbbf24;
+  --rdx-amber-bg:   rgba(251,191,36,0.15);
+  --rdx-rose:       #fb7185;
+  --rdx-rose-bg:    rgba(251,113,133,0.15);
+  --rdx-blue:       #60a5fa;
+  --rdx-blue-bg:    rgba(96,165,250,0.15);
+  --rdx-success:    #34d399;
+  --rdx-success-bg: rgba(52,211,153,0.15);
+  --rdx-danger:     #f87171;
+  --rdx-danger-bg:  rgba(248,113,113,0.15);
+  --rdx-info:       #a78bfa;
+  --rdx-info-bg:    rgba(167,139,250,0.12);
+  --rdx-shadow-sm:  0 1px 2px rgba(0,0,0,0.3);
+  --rdx-shadow:     0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --rdx-shadow-md:  0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --rdx-shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -4px rgba(0,0,0,0.3);
+  --bg:             var(--rdx-bg);
+  --card:           var(--rdx-bg-card);
+  --border:         var(--rdx-border);
+  --text:           var(--rdx-text);
+  --muted:          var(--rdx-text-muted);
+  --accent:         var(--rdx-teal);
+  --success:        var(--rdx-success);
+  --danger:         var(--rdx-danger);
+  --info:           var(--rdx-info);
+}
+
+/* ---------- BASE RESETS ---------- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--rdx-font);
+  background: var(--rdx-bg);
+  color: var(--rdx-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s, color 0.25s;
+}
+
+a { color: var(--rdx-teal); }
+a:hover { color: var(--rdx-teal-dark); }
+
+/* ---------- COMMON COMPONENTS ---------- */
+
+/* Cards */
+.rdx-card, .card, .content-card {
+  background: var(--rdx-bg-card);
+  border: 1px solid var(--rdx-border);
+  border-radius: var(--rdx-radius);
+  transition: all 0.15s;
+}
+
+/* Teaching boxes */
+.teaching, .rdx-teaching {
+  background: var(--rdx-info-bg);
+  border: 1px solid var(--rdx-info);
+  border-radius: var(--rdx-radius);
+  padding: 16px;
+  margin: 16px 0;
+}
+.teaching h4, .rdx-teaching h4 {
+  color: var(--rdx-info);
+  margin-bottom: 8px;
+}
+
+/* Narrative boxes */
+.narrative, .rdx-narrative {
+  background: var(--rdx-teal-50);
+  border-left: 4px solid var(--rdx-teal);
+  padding: 20px;
+  border-radius: 0 var(--rdx-radius) var(--rdx-radius) 0;
+  margin-bottom: 20px;
+  color: var(--rdx-text);
+}
+
+/* Highlight spans */
+.hl {
+  background: var(--rdx-teal-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: var(--rdx-teal-dark);
+}
+
+/* Alerts */
+.alert.info {
+  background: var(--rdx-info-bg);
+  border: 1px solid var(--rdx-info);
+  padding: 16px;
+  border-radius: var(--rdx-radius);
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+  color: var(--rdx-text);
+}
+
+/* Buttons */
+.btn, .rdx-btn {
+  padding: 10px 20px;
+  border-radius: var(--rdx-radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-family: var(--rdx-font);
+  transition: all 0.15s;
+}
+.btn-primary, .rdx-btn-primary {
+  background: var(--rdx-teal);
+  color: #fff;
+}
+.btn-primary:hover, .rdx-btn-primary:hover {
+  background: var(--rdx-teal-dark);
+}
+
+/* Choice options */
+.choice {
+  background: var(--rdx-bg-card);
+  border: 2px solid var(--rdx-border);
+  padding: 16px;
+  border-radius: var(--rdx-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s;
+  color: var(--rdx-text);
+}
+.choice:hover {
+  border-color: var(--rdx-teal);
+  transform: translateX(4px);
+  background: var(--rdx-bg-hover);
+}
+.choice.correct {
+  border-color: var(--rdx-success);
+  background: var(--rdx-success-bg);
+  pointer-events: none;
+}
+.choice.wrong {
+  border-color: var(--rdx-danger);
+  background: var(--rdx-danger-bg);
+  pointer-events: none;
+}
+.choice-title { font-weight: 600; color: var(--rdx-text); }
+.choice-desc { font-size: 0.85rem; color: var(--rdx-text-muted); }
+
+/* Vitals grid */
+.vitals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.vital {
+  background: var(--rdx-bg-hover);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--rdx-border);
+}
+.vital-label { font-size: 0.7rem; color: var(--rdx-text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.vital-value { font-size: 1.3rem; font-weight: 700; font-family: 'DM Sans', monospace; color: var(--rdx-text); }
+
+/* Progress bar */
+.progress-bar {
+  height: 6px;
+  background: var(--rdx-border);
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--rdx-teal);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* Cross-links */
+.cross-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.cross-link {
+  padding: 14px;
+  background: var(--rdx-teal-50);
+  border: 1px solid var(--rdx-border);
+  border-radius: var(--rdx-radius-sm);
+  text-decoration: none;
+  color: var(--rdx-text);
+  transition: all 0.15s;
+}
+.cross-link:hover {
+  border-color: var(--rdx-teal);
+  box-shadow: var(--rdx-shadow);
+}
+.cross-link-title { font-weight: 600; font-size: 0.9rem; }
+
+/* References section */
+.rdx-references {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--rdx-bg-hover);
+  border: 1px solid var(--rdx-border);
+  border-radius: var(--rdx-radius);
+}
+.rdx-references h4 {
+  color: var(--rdx-text-secondary);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+.rdx-ref-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rdx-border);
+  font-size: 13px;
+}
+.rdx-ref-item:last-child { border-bottom: none; }
+.rdx-ref-item a {
+  color: var(--rdx-teal);
+  text-decoration: none;
+}
+.rdx-ref-item a:hover { text-decoration: underline; }
+
+/* Hidden utility */
+.hidden { display: none !important; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 640px) {
+  .main, .rdx-main { padding: 12px; }
+  .card-body, .rdx-card-body { padding: 16px; }
+}

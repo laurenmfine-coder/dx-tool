@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RadDx: Obstetric Imaging | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+body{font-family:'DM Sans',sans-serif;background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
+.header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 20px;position:sticky;top:56px;z-index:100}
+.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
+.header-title{font-size:1.1rem;font-weight:600;color:#fff}
+.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}
+.main{max-width:900px;margin:0 auto;padding:24px}
+.scenario{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:16px;margin-bottom:28px;overflow:hidden}
+.scenario-header{padding:20px 24px;border-bottom:1px solid var(--rdx-border);display:flex;align-items:center;gap:12px}
+.scenario-modality{background:var(--rdx-teal-50);color:var(--rdx-teal-dark);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+.scenario-title{font-size:1.2rem;font-weight:700}
+.scenario-body{padding:24px}
+.vignette{background:var(--rdx-bg-hover);border-left:4px solid var(--rdx-teal);padding:16px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;font-size:.95rem}
+.vignette-label{font-size:.75rem;font-weight:700;color:var(--rdx-teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.reasoning-steps{display:flex;flex-direction:column;gap:16px}
+.reasoning-step{border:1px solid var(--rdx-border);border-radius:12px;overflow:hidden}
+.step-trigger{width:100%;display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--rdx-bg-card);border:none;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;color:var(--rdx-text);text-align:left;transition:background .15s}
+.step-trigger:hover{background:var(--rdx-teal-50)}
+.step-num-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
+.step-1 .step-num-badge{background:#0d9488}.step-2 .step-num-badge{background:#0891b2}.step-3 .step-num-badge{background:#7c3aed}.step-4 .step-num-badge{background:#dc2626}
+.step-arrow{margin-left:auto;font-size:1.2rem;color:var(--rdx-text-muted);transition:transform .2s}
+.step-trigger[aria-expanded="true"] .step-arrow{transform:rotate(180deg)}
+.step-content{padding:0 20px 20px;display:none}.step-content.open{display:block}
+.choices{display:grid;gap:10px;margin:12px 0}
+.choice{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);padding:12px 16px;border-radius:10px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:all .2s;font-size:.9rem}
+.choice:hover{border-color:var(--rdx-teal);transform:translateX(3px)}
+.choice.correct{border-color:var(--rdx-success);background:rgba(34,197,94,.08);pointer-events:none}
+.choice.wrong{border-color:var(--rdx-danger);background:rgba(239,68,68,.08);pointer-events:none}
+.choice-letter{font-weight:700;min-width:20px;color:var(--rdx-teal)}
+.explanation{background:var(--rdx-teal-50);border:1px solid var(--rdx-teal);border-radius:10px;padding:16px;margin-top:12px;font-size:.9rem;display:none}.explanation.show{display:block}
+.explanation h5{color:var(--rdx-teal-dark);margin-bottom:6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+.pearl{background:linear-gradient(135deg,rgba(13,148,136,.1),rgba(20,184,166,.1));border-left:4px solid var(--rdx-teal);padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
+.pearl strong{color:var(--rdx-teal-dark)}
+.danger-box{background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(239,68,68,.08));border-left:4px solid var(--rdx-danger);padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
+.management-impact{background:var(--rdx-bg-hover);border-radius:10px;padding:16px;margin-top:12px}
+.management-impact h5{font-size:.85rem;font-weight:700;margin-bottom:8px}
+.management-impact ul{padding-left:18px;font-size:.9rem}.management-impact li{margin-bottom:4px}
+.radiopaedia-link{display:inline-flex;align-items:center;gap:8px;background:var(--rdx-bg-hover);border:1px solid var(--rdx-border);border-radius:8px;padding:10px 16px;margin-top:16px;text-decoration:none;color:var(--rdx-teal);font-size:.85rem;font-weight:600;transition:all .15s}
+.radiopaedia-link:hover{border-color:var(--rdx-teal);background:var(--rdx-teal-50)}
+.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.cross-link{padding:14px;background:var(--rdx-teal-50);border:1px solid var(--rdx-border);border-radius:10px;text-decoration:none;color:var(--rdx-text);transition:all .15s}
+.cross-link:hover{border-color:var(--rdx-teal)}
+.cross-link-title{font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="header"><div class="header-row"><div class="header-title">🤰 RadDx: Obstetric Imaging<span class="badge">RADIOLOGY</span></div></div></div>
+<div class="main">
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">Transvaginal Ultrasound</span><span class="scenario-title">Ectopic Pregnancy</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A 29-year-old woman with a history of PID presents with 6 weeks of amenorrhea, unilateral pelvic pain, and vaginal spotting. Beta-hCG is 2,800 mIU/mL. She is hemodynamically stable.</div>
+<div class="reasoning-steps">
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span> Transabdominal ultrasound</div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span> Transvaginal ultrasound</div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span> CT abdomen/pelvis</div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span> MRI pelvis</div></div><div class="explanation"><h5>Modality Reasoning</h5><p>TVUS is the study of choice when beta-hCG is above the discriminatory zone (1,500-2,000 mIU/mL). TVUS should identify an intrauterine pregnancy at this level — if uterus is empty = ectopic until proven otherwise. CT delivers unnecessary radiation to reproductive organs.</p></div></div></div>
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span> Normal intrauterine pregnancy</div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span> Empty uterus with adnexal mass ± free fluid in cul-de-sac</div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span> Molar pregnancy</div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span> Ovarian cyst only</div></div><div class="explanation"><h5>Expected Findings</h5><p>Empty uterus + hCG above discriminatory zone = ectopic pregnancy. May see: adnexal mass, "tubal ring" or "ring of fire" on Doppler, free fluid (hemoperitoneum if ruptured). An intrauterine pseudosac (decidual reaction) can mimic early IUP — look for yolk sac/fetal pole to confirm true IUP.</p><div class="pearl"><strong>Teaching Focus:</strong> Empty uterus with positive beta-hCG, adnexal mass, free fluid</div></div></div></div>
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>Systematic Interpretation & Resources</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="pearl"><strong>Key Findings to Identify:</strong> Empty uterus with positive beta-hCG, adnexal mass, free fluid</div>
+<a href="https://radiopaedia.org/articles/ectopic-pregnancy" target="_blank" rel="noopener" class="radiopaedia-link">📚 Radiopaedia: Ectopic Pregnancy Cases →</a>
+</div></div>
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How do findings change management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="management-impact"><h5>Management Integration</h5><p>Stable + &lt;3.5cm + no fetal heartbeat → methotrexate; ruptured/unstable → surgery</p></div>
+</div></div>
+</div></div></div>
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">Ultrasound</span><span class="scenario-title">Placental Abruption</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A 32-year-old woman at 34 weeks gestation presents after a motor vehicle accident with painful vaginal bleeding and a rigid, tender uterus. Fetal heart tracing shows recurrent late decelerations. BP 140/95.</div>
+<div class="reasoning-steps">
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span> CT abdomen</div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span> Transabdominal ultrasound</div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span> MRI pelvis</div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span> Clinical diagnosis — imaging should not delay delivery if fetal distress</div></div><div class="explanation"><h5>Modality Reasoning</h5><p>Abruption is primarily a CLINICAL diagnosis (painful bleeding + rigid uterus + fetal distress). US has LIMITED sensitivity (~25-50%) — a NORMAL US does NOT rule out abruption. With late decelerations and uterine rigidity at 34 weeks post-trauma → emergent delivery, not more imaging.</p></div></div></div>
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span> Retroplacental hematoma clearly visible</div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span> US may be normal — negative US does NOT exclude abruption</div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span> Placenta previa</div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span> Uterine rupture</div></div><div class="explanation"><h5>Expected Findings</h5><p>Critical teaching point: US sensitivity for abruption is only 25-50%. Fresh blood is isoechoic to placenta (same echogenicity = invisible). A "normal" US in the setting of painful bleeding + uterine rigidity + fetal distress does NOT change management. This is one of the most important "don't-trust-normal-imaging" scenarios in medicine.</p><div class="pearl"><strong>Teaching Focus:</strong> Retroplacental hematoma, placental edge separation; US may be NORMAL in abruption</div></div></div></div>
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>Systematic Interpretation & Resources</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="pearl"><strong>Key Findings to Identify:</strong> Retroplacental hematoma, placental edge separation; US may be NORMAL in abruption</div>
+<a href="https://radiopaedia.org/articles/placental-abruption" target="_blank" rel="noopener" class="radiopaedia-link">📚 Radiopaedia: Placental Abruption Cases →</a>
+</div></div>
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How do findings change management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="management-impact"><h5>Management Integration</h5><p>Severe = emergent delivery; mild with preterm = expectant management with monitoring</p></div>
+</div></div>
+</div></div></div>
+
+<div style="margin-top:32px"><h3 style="font-size:1rem;color:var(--rdx-teal);margin-bottom:12px">Related RadDx Modules</h3>
+<div class="cross-links"><a href="raddx-cardiac.html" class="cross-link"><div class="cross-link-title">❤️ Cardiac Imaging</div></a>
+<a href="raddx-abdominal.html" class="cross-link"><div class="cross-link-title">🩻 Abdominal Imaging</div></a>
+<a href="raddx-neuro.html" class="cross-link"><div class="cross-link-title">🧠 Neuroimaging</div></a>
+<a href="raddx-hub.html" class="cross-link"><div class="cross-link-title">← RadDx Hub</div></a>
+</div></div>
+</div>
+<script>
+function toggleStep(btn){const e=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',!e);btn.nextElementSibling.classList.toggle('open')}
+function selectChoice(el,letter){const c=el.closest('.choices'),correct=c.dataset.correct;c.querySelectorAll('.choice').forEach(ch=>{ch.style.pointerEvents='none';const l=ch.querySelector('.choice-letter').textContent.trim().replace('.','');if(l===correct)ch.classList.add('correct');else if(ch===el&&l!==correct)ch.classList.add('wrong')});const ex=c.nextElementSibling;if(ex&&ex.classList.contains('explanation'))ex.classList.add('show')}
+</script>
+<script src="../js/rdx-nav.js" defer></script>
+</body></html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specialty Explorer | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-emerald:#059669;--pm-emerald-50:#ecfdf5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#059669,#047857);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.container{max-width:860px;margin:0 auto;padding:24px;}
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
+.tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-emerald);color:#fff;}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.filter-btn{padding:8px 14px;border-radius:10px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;}
+.filter-btn:hover{border-color:var(--pm-emerald);}
+.filter-btn.active{background:var(--pm-emerald);color:#fff;border-color:var(--pm-emerald);}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.spec-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:20px;cursor:pointer;transition:.2s;box-shadow:var(--pm-shadow);}
+.spec-card:hover{transform:translateY(-2px);border-color:var(--pm-emerald);box-shadow:0 4px 16px rgba(0,0,0,.08);}
+.spec-icon{font-size:28px;margin-bottom:8px;}
+.spec-name{font-weight:700;font-size:16px;margin-bottom:4px;}
+.spec-type{font-size:12px;color:var(--pm-muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px;}
+.spec-brief{font-size:13px;color:var(--pm-muted);line-height:1.5;}
+.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;display:none;}
+.detail-overlay.show{display:flex;}
+.detail-panel{background:var(--pm-card);border-radius:16px;max-width:680px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.2);}
+.detail-header{padding:24px;border-bottom:1px solid var(--pm-border);display:flex;justify-content:space-between;align-items:flex-start;}
+.detail-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--pm-border);background:var(--pm-bg);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;}
+.detail-body{padding:24px;}
+.detail-section{margin-bottom:20px;}
+.detail-section h4{font-size:14px;font-weight:700;color:var(--pm-emerald);margin-bottom:8px;text-transform:uppercase;letter-spacing:.3px;}
+.detail-section p{font-size:14px;line-height:1.7;}
+.detail-bar{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.detail-bar-label{font-size:13px;min-width:140px;font-weight:600;}
+.detail-bar-track{flex:1;height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden;}
+.detail-bar-fill{height:100%;border-radius:5px;transition:.3s;}
+.detail-bar-val{font-size:12px;color:var(--pm-muted);min-width:30px;text-align:right;}
+.detail-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.detail-tag{padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600;background:var(--pm-emerald-50);color:var(--pm-emerald);}
+.match-card{background:linear-gradient(135deg,var(--pm-emerald-50),#d1fae5);border:2px solid #a7f3d0;border-radius:14px;padding:24px;margin-bottom:16px;}
+.match-card h3{font-family:'DM Serif Display',serif;font-weight:400;color:#065f46;margin-bottom:8px;}
+.match-card p{font-size:14px;color:#064e3b;}
+.match-result{display:flex;align-items:center;gap:16px;padding:14px;background:rgba(255,255,255,.7);border-radius:10px;margin-top:12px;}
+.match-score{font-size:24px;font-weight:700;color:var(--pm-emerald);min-width:48px;text-align:center;}
+.match-info .match-name{font-weight:700;font-size:15px;}
+.match-info .match-reason{font-size:13px;color:var(--pm-muted);}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>🔬 Specialty Explorer</h1></div>
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('browse')">🔬 Browse</button>
+    <button class="tab" onclick="showTab('match')">🎯 Match Me</button>
+  </div>
+
+  <div id="tab-browse">
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('primary',this)">Primary Care</button>
+      <button class="filter-btn" onclick="setFilter('surgical',this)">Surgical</button>
+      <button class="filter-btn" onclick="setFilter('medical',this)">Medical</button>
+      <button class="filter-btn" onclick="setFilter('diagnostic',this)">Diagnostic</button>
+      <button class="filter-btn" onclick="setFilter('lifestyle',this)">Lifestyle-Friendly</button>
+    </div>
+    <div class="spec-grid" id="spec-grid"></div>
+  </div>
+
+  <div id="tab-match" class="hidden">
+    <div class="match-card">
+      <h3>🎯 What Kind of Doctor Might You Be?</h3>
+      <p>Answer these questions based on your clinical experiences and preferences. We'll suggest specialties worth exploring.</p>
+    </div>
+    <div class="card" id="quiz-card">
+      <h3>📋 Quick Preference Quiz</h3>
+      <div id="quiz-questions"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+        <button style="padding:12px 24px;border:none;border-radius:10px;background:var(--pm-emerald);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;" onclick="runMatch()">🎯 See My Matches</button>
+      </div>
+    </div>
+    <div id="match-results" class="hidden"></div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detail-overlay" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-panel" id="detail-panel"></div>
+</div>
+
+<script>
+const SPECS = [
+  {id:"fm",name:"Family Medicine",icon:"🏥",type:"primary",brief:"The generalist who sees everyone — newborns to grandparents. Longitudinal relationships, broad knowledge.",
+   reasoning:"Pattern recognition across the broadest possible range. You must know a little about everything and recognize when to refer.",
+   training:"3-year residency. Options for fellowships in sports medicine, geriatrics, hospice.",
+   lifestyle:{hours:4,call:2,flexibility:5,income:2},
+   personality:["Enjoys variety","Values relationships","Comfortable with uncertainty","Likes continuity"],
+   dayInLife:"Morning: Well-child checks, diabetes follow-ups, depression screening. Afternoon: Sports physicals, joint injections, same-day acute visits (rash, UTI, sore throat). Some do prenatal care and deliveries.",
+   whyLove:"You get to know families across generations. The intellectual variety is unmatched — no two days are the same.",
+   whyHard:"Volume pressure can be intense. Managing complex patients in 15-minute visits. Compensation is lower than most specialties despite breadth of knowledge required.",
+   rdxLink:"Primary Care shadowing prompts, chronic disease modules"},
+  {id:"im",name:"Internal Medicine",icon:"🩺",type:"medical",brief:"The adult medicine expert. Deep diagnostic reasoning, complex multisystem disease, hospital and outpatient.",
+   reasoning:"Analytical and systematic. Internal medicine is the 'thinking specialty' — building a differential, ordering the right test, synthesizing complex data.",
+   training:"3-year residency. Many subspecialize: cardiology, GI, pulmonary, rheumatology, etc.",
+   lifestyle:{hours:3,call:3,flexibility:3,income:3},
+   personality:["Loves puzzles","Detail-oriented","Comfortable with complexity","Patient with chronic disease"],
+   dayInLife:"Hospitalist: Rounding on 15-18 patients, interpreting labs and imaging, coordinating with specialists, discharge planning. Outpatient: Complex chronic disease management, diagnostic workups, preventive care.",
+   whyLove:"The diagnostic challenge. Internal medicine attracts people who love figuring things out and can hold multiple problems in their head simultaneously.",
+   whyHard:"Hospital patients are sicker and more complex than ever. Documentation burden is heavy. If you subspecialize, add 2-3 more years of training.",
+   rdxLink:"Diagnostic challenges, MechanismDx modules"},
+  {id:"em",name:"Emergency Medicine",icon:"🚑",type:"medical",brief:"The first responder. Rapid triage, stabilization, ruling out emergencies. High-acuity, shift-based work.",
+   reasoning:"Rapid risk stratification. You don't need the final diagnosis — you need to know: is this patient dying right now? What's the worst thing this could be?",
+   training:"3-4 year residency. Fellowships: toxicology, ultrasound, critical care, sports medicine.",
+   lifestyle:{hours:3,call:1,flexibility:4,income:4},
+   personality:["Thrives under pressure","Decisive","Comfortable with incomplete information","Likes variety and unpredictability"],
+   dayInLife:"8-12 hour shifts. See 2-3 patients per hour: chest pain workup, laceration repair, sepsis resuscitation, psychiatric crisis, pediatric fever — all in the same shift. No continuity; you stabilize and hand off.",
+   whyLove:"The adrenaline. No clinic hours, no rounding, no follow-up. Your shift ends and you're done. You see the most dramatic presentations in medicine.",
+   whyHard:"Burnout rates are among the highest. Night shifts take a physical toll. No continuity means you rarely learn what happened to your patients.",
+   rdxLink:"RadDx Trauma module, ED shadowing prompts"},
+  {id:"peds",name:"Pediatrics",icon:"👶",type:"primary",brief:"Children's health from birth to young adulthood. Developmental milestones, growth monitoring, family-centered care.",
+   reasoning:"Age-stratified reasoning — the same symptom means different things at different ages. A fever in a neonate vs a toddler triggers completely different workups.",
+   training:"3-year residency. Subspecialties: cardiology, oncology, neonatology, critical care, etc.",
+   lifestyle:{hours:3,call:3,flexibility:4,income:2},
+   personality:["Loves kids","Patient with families","Comfortable with developmental spectrum","Optimistic"],
+   dayInLife:"Well-child visits (developmental screening, vaccines, anticipatory guidance), acute visits (ear infections, rashes, asthma), behavioral concerns, adolescent health. Hospitalists manage bronchiolitis, croup, dehydration.",
+   whyLove:"Kids are resilient — most get better. You advocate for the most vulnerable patients. The relationships with families are deeply rewarding.",
+   whyHard:"Dealing with seriously ill children is emotionally devastating. Parent dynamics add complexity. Compensation is among the lowest specialties.",
+   rdxLink:"RadDx Pediatric module, pediatric fever challenges"},
+  {id:"surg",name:"General Surgery",icon:"🔪",type:"surgical",brief:"Operative management of abdominal, skin, breast, and trauma pathology. Procedural skill meets diagnostic reasoning.",
+   reasoning:"Binary decision-making: does this patient need surgery or not? If yes, what approach? Anatomical reasoning dominates — you must visualize structures in 3D.",
+   training:"5-year residency (one of the longest). Fellowships: trauma, surgical oncology, minimally invasive, colorectal.",
+   lifestyle:{hours:1,call:1,flexibility:1,income:4},
+   personality:["Decisive","Action-oriented","Comfortable with risk","High stamina","Manual dexterity"],
+   dayInLife:"5:30 AM: Pre-rounds. 7:30 AM: OR cases (cholecystectomy, hernia repair, bowel resection). Afternoon: Clinic, consults from the ED, trauma calls. Call nights: emergency appendectomies, perforated ulcers, trauma.",
+   whyLove:"You fix the problem with your hands. The satisfaction of a technically perfect operation is unmatched. You see immediate results.",
+   whyHard:"Residency is brutal — 80+ hour weeks, intense hierarchy. Lifestyle improves after training but call is always part of the job.",
+   rdxLink:"RadDx Abdominal Imaging, OR shadowing prompts"},
+  {id:"ortho",name:"Orthopedic Surgery",icon:"🦴",type:"surgical",brief:"Musculoskeletal system — fractures, joint replacements, sports injuries, spine surgery.",
+   reasoning:"Mechanical reasoning — forces, biomechanics, and structural integrity. You think about the body as an engineering system.",
+   training:"5-year residency. Fellowships: sports, hand, spine, trauma, pediatric, oncology.",
+   lifestyle:{hours:2,call:2,flexibility:2,income:5},
+   personality:["Physically active","Competitive","Mechanical/spatial thinker","Action-oriented"],
+   dayInLife:"Morning OR: Total knee replacement, ACL reconstruction, fracture fixation. Afternoon clinic: Post-op checks, new injury evaluations, injection therapy. Call: Fracture reductions, open fractures, compartment syndrome.",
+   whyLove:"Incredibly satisfying — you take someone who can't walk and give them mobility back. Strong sports medicine connection. Active lifestyle culture.",
+   whyHard:"Extremely competitive to match. Physical demands (retraction, power tools). Call can be heavy. Long residency.",
+   rdxLink:"RadDx MSK Imaging, joint pain challenges"},
+  {id:"obgyn",name:"OB/GYN",icon:"🤰",type:"surgical",brief:"Women's reproductive health plus surgery. Unique blend of primary care, surgery, and emergency medicine.",
+   reasoning:"Dual reasoning: obstetric (is mom and baby safe?) and gynecologic (surgical decision-making). Unique because you have TWO patients simultaneously.",
+   training:"4-year residency. Fellowships: maternal-fetal medicine, GYN oncology, REI, urogynecology.",
+   lifestyle:{hours:2,call:2,flexibility:3,income:4},
+   personality:["Comfortable with high-stakes emergencies","Values women's health advocacy","Likes mix of medicine and surgery","Handles emotional intensity"],
+   dayInLife:"Clinic: Prenatal visits, pap smears, contraception counseling, menopause management. OR: C-sections, hysterectomies, laparoscopic surgery. L&D: Labor management, deliveries, emergency C-sections.",
+   whyLove:"Delivering babies is one of the most joyful moments in medicine. You get surgery AND longitudinal relationships. Strong advocacy component.",
+   whyHard:"Unpredictable call (babies come when they come). Malpractice premiums are among the highest. Emotional weight of bad outcomes in pregnancy.",
+   rdxLink:"RadDx OB/GYN Imaging, pelvic pain challenges"},
+  {id:"psych",name:"Psychiatry",icon:"🧠",type:"medical",brief:"Mental health diagnosis and treatment. Therapy, psychopharmacology, and the mind-brain connection.",
+   reasoning:"Formulation-based: bio-psycho-social model. You integrate neuroscience, psychology, and social context to understand each patient. Pattern recognition in behavior and affect.",
+   training:"4-year residency. Fellowships: child/adolescent, addiction, forensic, consultation-liaison, geriatric.",
+   lifestyle:{hours:5,call:4,flexibility:5,income:3},
+   personality:["Deeply curious about people","Comfortable with ambiguity","Patient listener","Tolerates slow progress","Resilient to emotional intensity"],
+   dayInLife:"Outpatient: 30-60 minute appointments for medication management and therapy. Inpatient: Acute stabilization of psychosis, mania, suicidality. Consultation: ED psychiatric evaluations, medical floor consults for delirium.",
+   whyLove:"You get TIME with patients — 30-60 minute visits, not 15. The intellectual framework is fascinating. Huge unmet need means job security everywhere.",
+   whyHard:"Progress is slow. Some patients don't get better despite your best efforts. Stigma against the field persists. Can be emotionally draining.",
+   rdxLink:"Anxiety/depression response engines, ethics MMI scenarios"},
+  {id:"derm",name:"Dermatology",icon:"🔍",type:"medical",brief:"Skin, hair, and nail conditions. Visual pattern recognition. Mix of medical and procedural.",
+   reasoning:"Purely visual pattern recognition — morphology, distribution, and evolution of lesions. You diagnose with your eyes first, then confirm with biopsy.",
+   training:"4-year residency (1 year preliminary + 3 derm). Extremely competitive.",
+   lifestyle:{hours:5,call:5,flexibility:5,income:5},
+   personality:["Visual/pattern thinker","Detail-oriented","Likes procedures","Values work-life balance"],
+   dayInLife:"Clinic: Full-body skin exams, acne management, psoriasis, eczema, skin cancer screenings. Procedures: biopsies, excisions, Mohs surgery (dermatologic surgery), cosmetic procedures.",
+   whyLove:"Best lifestyle in medicine — no call, no emergencies, clinic hours. Fascinating visual diagnosis. Mix of medical, surgical, and cosmetic.",
+   whyHard:"One of the most competitive specialties to match. Limited scope can feel narrow. Many patients have chronic conditions without cures.",
+   rdxLink:"Rash response engine, dermatology modules"},
+  {id:"rad",name:"Radiology",icon:"📡",type:"diagnostic",brief:"The doctor's doctor. Interpreting imaging to guide diagnosis and treatment across every specialty.",
+   reasoning:"Pure diagnostic reasoning applied to images. You correlate clinical history with imaging findings to narrow differentials. Pattern recognition at the highest level.",
+   training:"5-year residency (1 transitional + 4 radiology). Fellowships: neuroradiology, MSK, IR, breast.",
+   lifestyle:{hours:4,call:3,flexibility:4,income:5},
+   personality:["Visual thinker","Enjoys technology","Detail-oriented","Likes solving puzzles","Comfortable working independently"],
+   dayInLife:"Read 50-100+ studies per day: CTs, MRIs, X-rays, ultrasounds. Consult with clinical teams about findings. Interventional radiology: procedures (biopsies, drains, embolizations).",
+   whyLove:"You're involved in every patient in the hospital without the emotional weight of longitudinal relationships. Intellectual breadth is enormous. Technology-forward.",
+   whyHard:"Limited patient contact. Call can be heavy (overnight reads). Increasing volume pressure. AI concerns (though likely augmentation not replacement).",
+   rdxLink:"RadDx entire platform — this IS radiology reasoning"},
+  {id:"anes",name:"Anesthesiology",icon:"💉",type:"medical",brief:"Perioperative medicine, pain management, and critical care. You keep patients alive during surgery.",
+   reasoning:"Physiologic reasoning — managing ventilation, hemodynamics, and pharmacology in real-time. You're the master of physiology applied under stress.",
+   training:"4-year residency. Fellowships: cardiac, pediatric, pain medicine, critical care.",
+   lifestyle:{hours:3,call:2,flexibility:3,income:5},
+   personality:["Calm under pressure","Detail-oriented","Likes physiology","Comfortable with routine punctuated by crisis","Team player"],
+   dayInLife:"Pre-op: Assess patients, plan anesthetic. Intra-op: Intubation, maintaining anesthesia, monitoring vitals, managing crises. Post-op: Recovery room care. Call: Emergency cases, labor epidurals.",
+   whyLove:"You master physiology and pharmacology at the deepest level. The OR is a unique team environment. Pain medicine fellowship opens a growing field.",
+   whyHard:"Can feel isolated behind the drape. Substance abuse rates are historically higher in anesthesia. Call is demanding.",
+   rdxLink:"Respiratory/cardiac MechanismDx, OR shadowing prompts"},
+  {id:"neuro",name:"Neurology",icon:"🧩",type:"medical",brief:"Brain, spinal cord, and peripheral nerve disorders. The ultimate diagnostic specialty.",
+   reasoning:"Localization reasoning — where is the lesion? Is it cortical, subcortical, brainstem, spinal cord, peripheral nerve, or NMJ? The neurological exam is your most powerful tool.",
+   training:"4-year residency. Fellowships: stroke, epilepsy, movement disorders, neuromuscular, MS.",
+   lifestyle:{hours:3,call:3,flexibility:4,income:3},
+   personality:["Loves puzzles","Patient with complex reasoning","Fascinated by the brain","Comfortable with chronic disease","Detail-oriented exam skills"],
+   dayInLife:"Clinic: MS follow-ups, epilepsy management, headache evaluations, cognitive assessments. Hospital: Stroke alerts (time-critical), status epilepticus, AMS workups. EMG/NCS studies.",
+   whyLove:"The neurological exam is the most sophisticated diagnostic tool in medicine — you can localize a lesion with just a reflex hammer. Stroke treatment has revolutionized the field.",
+   whyHard:"Many neurological diseases are progressive without cure (ALS, Alzheimer's, Parkinson's). Emotional weight of devastating diagnoses. Compensation lower than procedural specialties.",
+   rdxLink:"RadDx Neuroimaging, headache/AMS challenges"},
+  {id:"allergy",name:"Allergy & Immunology",icon:"🤧",type:"medical",brief:"Immune system disorders — allergies, asthma, immunodeficiencies, autoimmune conditions. Growing field with expanding scope.",
+   reasoning:"Immunologic pathway reasoning — understanding which arm of the immune system is malfunctioning guides both diagnosis and treatment. Type I-IV hypersensitivity framework applied clinically.",
+   training:"Internal medicine or pediatrics residency + 2-year fellowship.",
+   lifestyle:{hours:5,call:5,flexibility:5,income:3},
+   personality:["Enjoys immunology","Likes longitudinal care","Values patient education","Detail-oriented with exposure histories"],
+   dayInLife:"Clinic: Allergy testing (skin pricks, patch testing), asthma management, food allergy evaluation, immunotherapy (allergy shots), drug allergy assessments, immunodeficiency workups.",
+   whyLove:"Excellent lifestyle — outpatient, minimal call. You dramatically improve quality of life (treating chronic allergies, preventing anaphylaxis). Immunotherapy is one of the few disease-modifying treatments in medicine.",
+   whyHard:"Can be perceived as a 'niche' specialty. Building a practice takes time. Some conditions are chronic without cure.",
+   rdxLink:"MechanismDx: Immune Hypersensitivity, environmental modules"}
+];
+
+const QUIZ = [
+  {q:"What type of patient interactions do you prefer?",opts:[{t:"Long-term relationships over years",tags:["fm","peds","psych","allergy"]},{t:"Intense, short encounters",tags:["em","surg","anes"]},{t:"Complex diagnostic puzzles",tags:["im","neuro","rad"]},{t:"Mix of procedures and clinic",tags:["derm","obgyn","ortho"]}]},
+  {q:"How do you feel about uncertainty?",opts:[{t:"I thrive in it — comfortable making decisions with incomplete info",tags:["em","fm","surg"]},{t:"I prefer to gather all the data first and think systematically",tags:["im","neuro","rad","allergy"]},{t:"I like definitive answers — cut it out or fix it",tags:["surg","ortho","obgyn"]},{t:"I'm comfortable sitting with ambiguity over time",tags:["psych","peds","fm"]}]},
+  {q:"What kind of reasoning energizes you?",opts:[{t:"Visual pattern recognition",tags:["derm","rad","neuro"]},{t:"Mechanism-based physiology",tags:["anes","im","allergy"]},{t:"Rapid risk stratification",tags:["em","surg"]},{t:"Bio-psycho-social formulation",tags:["psych","fm","peds"]}]},
+  {q:"Lifestyle priority?",opts:[{t:"Predictable schedule and minimal call",tags:["derm","allergy","psych","rad"]},{t:"I'll work hard for high compensation",tags:["ortho","surg","anes"]},{t:"Shift-based — when I'm off, I'm off",tags:["em"]},{t:"Flexibility matters more than money",tags:["fm","peds","psych"]}]},
+  {q:"Which clinical experience has excited you most?",opts:[{t:"Watching a surgeon operate",tags:["surg","ortho","obgyn"]},{t:"Seeing a physician figure out a tough diagnosis",tags:["im","neuro","rad"]},{t:"A meaningful conversation that changed a patient's perspective",tags:["psych","fm","peds"]},{t:"A fast-paced shift where every minute mattered",tags:["em","anes"]}]}
+];
+
+let currentFilter='all';
+let quizAnswers=[];
+
+function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');['browse','match'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==t));if(t==='match')renderQuiz();}
+function setFilter(f,el){currentFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderGrid();}
+
+function renderGrid(){
+  let filtered=SPECS;
+  if(currentFilter==='lifestyle')filtered=SPECS.filter(s=>s.lifestyle.hours>=4&&s.lifestyle.call>=4);
+  else if(currentFilter!=='all')filtered=SPECS.filter(s=>s.type===currentFilter);
+  document.getElementById('spec-grid').innerHTML=filtered.map(s=>`
+    <div class="spec-card" onclick="showDetail('${s.id}')">
+      <div class="spec-icon">${s.icon}</div>
+      <div class="spec-name">${s.name}</div>
+      <div class="spec-type">${s.type}</div>
+      <div class="spec-brief">${s.brief}</div>
+    </div>`).join('');
+}
+
+function showDetail(id){
+  const s=SPECS.find(x=>x.id===id);
+  const barColor=['#dc2626','#f97316','#eab308','#22c55e','#059669'];
+  function bar(label,val){
+    return `<div class="detail-bar"><span class="detail-bar-label">${label}</span><div class="detail-bar-track"><div class="detail-bar-fill" style="width:${val*20}%;background:${barColor[val-1]}"></div></div><span class="detail-bar-val">${val}/5</span></div>`;
+  }
+  document.getElementById('detail-panel').innerHTML=`
+    <div class="detail-header">
+      <div><div style="font-size:36px;margin-bottom:8px;">${s.icon}</div><div style="font-size:22px;font-weight:700;">${s.name}</div><div style="font-size:13px;color:var(--pm-muted);text-transform:uppercase;">${s.type}</div></div>
+      <button class="detail-close" onclick="closeDetail()">\u00d7</button>
+    </div>
+    <div class="detail-body">
+      <div class="detail-section"><h4>Clinical Reasoning Style</h4><p>${s.reasoning}</p></div>
+      <div class="detail-section"><h4>Training Path</h4><p>${s.training}</p></div>
+      <div class="detail-section"><h4>Lifestyle Metrics</h4>
+        ${bar("Schedule Control",s.lifestyle.hours)}
+        ${bar("Call Burden (less=more)",s.lifestyle.call)}
+        ${bar("Flexibility",s.lifestyle.flexibility)}
+        ${bar("Compensation",s.lifestyle.income)}
+      </div>
+      <div class="detail-section"><h4>Personality Fit</h4><div class="detail-tags">${s.personality.map(p=>`<span class="detail-tag">${p}</span>`).join('')}</div></div>
+      <div class="detail-section"><h4>A Day in the Life</h4><p>${s.dayInLife}</p></div>
+      <div class="detail-section"><h4>Why People Love It</h4><p>${s.whyLove}</p></div>
+      <div class="detail-section"><h4>Why It's Hard</h4><p>${s.whyHard}</p></div>
+      <div class="detail-section"><h4>ReasonDx Connections</h4><p style="color:var(--pm-emerald);font-weight:600;">\u2192 ${s.rdxLink}</p></div>
+    </div>`;
+  document.getElementById('detail-overlay').classList.add('show');
+}
+function closeDetail(){document.getElementById('detail-overlay').classList.remove('show');}
+
+function renderQuiz(){
+  document.getElementById('match-results').classList.add('hidden');
+  quizAnswers=new Array(QUIZ.length).fill(null);
+  document.getElementById('quiz-questions').innerHTML=QUIZ.map((q,qi)=>`
+    <div style="margin-bottom:20px;">
+      <p style="font-weight:700;font-size:14px;margin-bottom:8px;">${qi+1}. ${q.q}</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        ${q.opts.map((o,oi)=>`<button class="filter-btn" style="text-align:left;padding:10px 14px;font-size:13px;" onclick="pickQuiz(${qi},${oi},this)">${o.t}</button>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function pickQuiz(qi,oi,el){
+  quizAnswers[qi]=oi;
+  el.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function runMatch(){
+  if(quizAnswers.some(a=>a===null)){alert('Please answer all questions.');return;}
+  const scores={};
+  SPECS.forEach(s=>{scores[s.id]=0;});
+  quizAnswers.forEach((a,qi)=>{
+    const tags=QUIZ[qi].opts[a].tags;
+    tags.forEach(t=>{if(scores[t]!==undefined)scores[t]+=2;});
+  });
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const maxScore=sorted[0][1];
+  const top5=sorted.slice(0,5);
+  let html='<div class="match-card"><h3>\ud83c\udfaf Your Top Specialty Matches</h3><p>Based on your preferences and clinical interests:</p>';
+  top5.forEach(([id,score])=>{
+    const s=SPECS.find(x=>x.id===id);
+    const pct=Math.round(score/maxScore*100);
+    html+=`<div class="match-result" onclick="showDetail('${id}')" style="cursor:pointer;"><span class="match-score">${pct}%</span><div class="match-info"><div class="match-name">${s.icon} ${s.name}</div><div class="match-reason">${s.brief}</div></div></div>`;
+  });
+  html+='</div><div class="card"><h3>\ud83d\udca1 What This Means</h3><p style="font-size:14px;line-height:1.7;">This is a starting point for exploration, not a prescription. Many physicians change their specialty interest multiple times during medical school. Use these results to guide your shadowing and clinical experiences \u2014 try to observe in your top 3 matches and see how they feel in person. Click any match above to learn more.</p></div>';
+  document.getElementById('match-results').innerHTML=html;
+  document.getElementById('match-results').classList.remove('hidden');
+}
+
+renderGrid();
+</script>
+</body>
+</html>

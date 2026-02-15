@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>Opioid Overdose - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
         .container { max-width: 900px; margin: 0 auto; }
         .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
         .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -32,12 +32,12 @@
         .feedback.show { display: block; }
         .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
-        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(124,58,237,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
         .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
-        .btn { background: linear-gradient(135deg, #7c3aed, #4c1d95); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn { background:linear-gradient(135deg,#0f766e,#14b8a6); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #c4b5fd); border-radius: 3px; transition: width 0.5s; }
@@ -123,6 +123,7 @@
 
 </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
@@ -269,5 +270,7 @@ function toggleReferences() {
     </div>
 </div>
 
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1161/CIR.0000000000000609" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">AHA Opioid-Associated Emergency Guideline</a> — <em style="color:var(--rdx-text-muted,#64748b)">Circulation</em></li></ul></div>
 </body>
 </html>

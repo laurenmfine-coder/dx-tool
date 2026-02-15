@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>Hyponatremia - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
         .container { max-width: 900px; margin: 0 auto; }
         .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -38,7 +38,7 @@
         .feedback-title { font-weight: 700; margin-bottom: 8px; }
         .feedback.correct-feedback .feedback-title { color: #4ade80; }
         .feedback.incorrect-feedback .feedback-title { color: #f87171; }
-        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; }
         .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
         .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
@@ -46,7 +46,7 @@
         .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
         .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
         .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
-        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
         .btn { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
@@ -65,7 +65,7 @@
         .completion { text-align: center; padding: 40px 20px; }
         .completion-grade { font-size: 2.5rem; font-weight: 800; }
         .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
-        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .completion-breakdown { text-align: left; background:var(--rdx-bg-hover); border-radius: 12px; padding: 20px; margin: 24px 0; }
     
 /* Visual Debrief Styles */
 .debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
@@ -140,6 +140,7 @@
 
 </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -282,7 +283,7 @@ if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent hyponatremia management!';
 else if(p>=80){g='Great Work!';clr='#14b8a6';m='Strong grasp. Review correction rates.';}
 else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on volume assessment and ODS prevention.';}
 else{g='Keep Learning';clr='#ef4444';m='Review systematic approach and safe correction.';}
-document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:var(--rdx-text)">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
 document.getElementById('progress').style.width='100%';
 }
 document.addEventListener('DOMContentLoaded',()=>renderStage(0));
@@ -394,5 +395,7 @@ function toggleReferences() {
     </div>
 </div>
 
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1093/ndt/gfu040" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">European Guideline on Hyponatremia</a> — <em style="color:var(--rdx-text-muted,#64748b)">Nephrology Dialysis Transplant</em></li></ul></div>
 </body>
 </html>

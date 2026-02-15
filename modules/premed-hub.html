@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx Premed — Clinical Reasoning for Pre-Medical Students</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pm-teal: #0f766e; --pm-teal-light: #14b8a6; --pm-teal-50: #f0fdfa;
+  --pm-amber: #d97706; --pm-amber-50: #fffbeb;
+  --pm-violet: #7c3aed; --pm-violet-50: #f5f3ff;
+  --pm-rose: #e11d48; --pm-rose-50: #fff1f2;
+  --pm-sky: #0284c7; --pm-sky-50: #f0f9ff;
+  --pm-emerald: #059669; --pm-emerald-50: #ecfdf5;
+  --pm-bg: #fafbfc; --pm-card: #fff; --pm-text: #1e293b; --pm-muted: #64748b;
+  --pm-border: #e2e8f0; --pm-shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+  --pm-shadow-lg: 0 4px 24px rgba(0,0,0,.08);
+}
+* { margin:0; padding:0; box-sizing: border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm-text); line-height:1.6; }
+
+.hero {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 40%, #7c3aed 100%);
+  padding: 56px 24px 48px; text-align:center; color:#fff; position:relative; overflow:hidden;
+}
+.hero::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(124,58,237,.3), transparent 50%); }
+.hero * { position:relative; z-index:1; }
+.hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(28px,5vw,44px); font-weight:400; margin-bottom:8px; }
+.hero .subtitle { font-size:18px; opacity:.92; max-width:640px; margin:0 auto 28px; }
+.hero-stats { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+.hero-stat-value { font-size:30px; font-weight:700; }
+.hero-stat-label { font-size:12px; opacity:.8; text-transform:uppercase; letter-spacing:.5px; }
+
+.tagline {
+  max-width:800px; margin:-24px auto 0; padding:0 24px; position:relative; z-index:2;
+}
+.tagline-card {
+  background:var(--pm-card); border:1px solid var(--pm-border); border-radius:16px;
+  padding:28px 32px; box-shadow:var(--pm-shadow-lg); text-align:center;
+}
+.tagline-card h2 { font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:12px; font-weight:400; color:var(--pm-teal); }
+.cycle { display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin-top:16px; }
+.cycle-step {
+  background:var(--pm-teal-50); padding:10px 18px; border-radius:24px; font-weight:600;
+  font-size:14px; color:var(--pm-teal); border:1px solid #99f6e4;
+}
+.cycle-arrow { color:var(--pm-teal-light); font-size:20px; }
+
+.features { max-width:960px; margin:48px auto; padding:0 24px; }
+.features h2 { font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:24px; text-align:center; font-weight:400; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+.card {
+  background:var(--pm-card); border:1px solid var(--pm-border); border-radius:14px;
+  padding:28px 24px; box-shadow:var(--pm-shadow); text-decoration:none; color:inherit;
+  transition: transform .2s, box-shadow .2s; display:block;
+}
+.card:hover { transform:translateY(-3px); box-shadow:var(--pm-shadow-lg); }
+.card-icon { font-size:32px; margin-bottom:12px; display:block; }
+.card-name { font-weight:700; font-size:17px; margin-bottom:6px; }
+.card-desc { font-size:13.5px; color:var(--pm-muted); line-height:1.5; margin-bottom:12px; }
+.card-tag {
+  display:inline-block; padding:4px 12px; border-radius:12px; font-size:11px;
+  font-weight:600; text-transform:uppercase; letter-spacing:.4px;
+}
+.tag-core { background:var(--pm-teal-50); color:var(--pm-teal); }
+.tag-grow { background:var(--pm-violet-50); color:var(--pm-violet); }
+.tag-apply { background:var(--pm-amber-50); color:var(--pm-amber); }
+.tag-community { background:var(--pm-rose-50); color:var(--pm-rose); }
+
+.paths { max-width:960px; margin:48px auto; padding:0 24px; }
+.paths h2 { font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:8px; text-align:center; font-weight:400; }
+.paths .sub { text-align:center; color:var(--pm-muted); margin-bottom:28px; font-size:15px; }
+.path-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.path-card {
+  border-radius:14px; padding:28px 24px; border:2px solid transparent; text-decoration:none; color:inherit;
+  transition: transform .2s, box-shadow .2s; display:block;
+}
+.path-card:hover { transform:translateY(-3px); box-shadow:var(--pm-shadow-lg); }
+.path-explorer { background:var(--pm-sky-50); border-color:#bae6fd; }
+.path-foundation { background:var(--pm-teal-50); border-color:#99f6e4; }
+.path-bridge { background:var(--pm-violet-50); border-color:#c4b5fd; }
+.path-card h3 { font-size:18px; margin-bottom:4px; }
+.path-card .audience { font-size:13px; color:var(--pm-muted); margin-bottom:12px; }
+.path-card ul { list-style:none; padding:0; }
+.path-card li { font-size:13.5px; padding:4px 0; padding-left:20px; position:relative; }
+.path-card li::before { content:'→'; position:absolute; left:0; color:var(--pm-teal-light); font-weight:700; }
+
+.audience-section { max-width:960px; margin:48px auto; padding:0 24px; }
+.audience-section h2 { font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:24px; text-align:center; font-weight:400; }
+.audience-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media(max-width:640px){ .audience-grid { grid-template-columns:1fr; } }
+.audience-card {
+  border-radius:14px; padding:28px 24px; text-align:center;
+}
+.audience-shadower { background: linear-gradient(135deg, var(--pm-sky-50), #e0f2fe); border:1px solid #bae6fd; }
+.audience-ma { background: linear-gradient(135deg, var(--pm-emerald-50), #d1fae5); border:1px solid #a7f3d0; }
+.audience-card h3 { font-size:18px; margin-bottom:4px; }
+.audience-card .hook { font-size:14px; color:var(--pm-muted); font-style:italic; margin-bottom:12px; }
+.audience-card .shift { font-size:13px; background:rgba(255,255,255,.7); border-radius:8px; padding:10px; }
+
+.footer {
+  text-align:center; padding:32px 24px; color:var(--pm-muted); font-size:13px;
+  border-top:1px solid var(--pm-border); margin-top:48px;
+}
+.footer a { color:var(--pm-teal); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>ReasonDx Premed</h1>
+  <p class="subtitle">Transform passive clinical exposure into active clinical reasoning. The shadowing companion that helps you think like a doctor before you become one.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-value">11</div><div class="hero-stat-label">Platform Features</div></div>
+    <div class="hero-stat"><div class="hero-stat-value">3</div><div class="hero-stat-label">Learning Paths</div></div>
+    <div class="hero-stat"><div class="hero-stat-value">50+</div><div class="hero-stat-label">Chief Complaints</div></div>
+  </div>
+</div>
+
+<div class="tagline">
+  <div class="tagline-card">
+    <h2>See → Reflect → Learn → Return Smarter</h2>
+    <p style="color:var(--pm-muted);font-size:14px;">Every clinical encounter is a learning opportunity. ReasonDx Premed meets you where you are — in clinics, hospitals, and shadowing experiences — and gives you the framework to learn from every patient interaction.</p>
+    <div class="cycle">
+      <span class="cycle-step">👁️ Observe</span><span class="cycle-arrow">→</span>
+      <span class="cycle-step">📝 Log</span><span class="cycle-arrow">→</span>
+      <span class="cycle-step">💡 Learn</span><span class="cycle-arrow">→</span>
+      <span class="cycle-step">❓ Ask Better Questions</span><span class="cycle-arrow">→</span>
+      <span class="cycle-step" style="background:#f5f3ff;color:#7c3aed;border-color:#c4b5fd;">🔄 Return</span>
+    </div>
+  </div>
+</div>
+
+<div class="audience-section">
+  <h2>Built for Two Audiences</h2>
+  <div class="audience-grid">
+    <div class="audience-card audience-shadower">
+      <div style="font-size:36px;margin-bottom:8px;">👁️</div>
+      <h3>Traditional Shadowers</h3>
+      <p class="hook">"Make your shadowing hours actually count"</p>
+      <div class="shift"><strong>Mindset shift:</strong> "Watch and wonder" → "Watch with purpose"</div>
+    </div>
+    <div class="audience-card audience-ma">
+      <div style="font-size:36px;margin-bottom:8px;">🩺</div>
+      <h3>Medical Assistants</h3>
+      <p class="hook">"You already have the experience — now build the reasoning"</p>
+      <div class="shift"><strong>Mindset shift:</strong> "Doing the work" → "Thinking like the doctor"</div>
+    </div>
+  </div>
+</div>
+
+<div class="features">
+  <h2>Core Platform Features</h2>
+  <div class="grid">
+    <a href="premed-encounter.html" class="card">
+      <span class="card-icon">📋</span>
+      <div class="card-name">Clinical Encounter Companion</div>
+      <div class="card-desc">Log encounters in under 2 minutes. Get personalized "Questions to Ask Tomorrow," observation prompts, and prereq connections. Mobile-friendly.</div>
+      <span class="card-tag tag-core">Core Feature</span>
+    </a>
+    <a href="premed-shadowing.html" class="card">
+      <span class="card-icon">👁️</span>
+      <div class="card-name">Shadowing Companion</div>
+      <div class="card-desc">Setting-specific observation prompts for ED, primary care, and specialty clinics. Pre-shadowing prep, during prompts, and post-shadowing reflection guides.</div>
+      <span class="card-tag tag-core">Core Feature</span>
+    </a>
+    <a href="premed-journal.html" class="card">
+      <span class="card-icon">📓</span>
+      <div class="card-name">Guided Reflection Journal</div>
+      <div class="card-desc">Process clinical experiences with structured prompts. Theme detection across entries. Export for personal statements and secondary essays.</div>
+      <span class="card-tag tag-grow">Growth</span>
+    </a>
+    <a href="premed-lor.html" class="card">
+      <span class="card-icon">✉️</span>
+      <div class="card-name">LOR Strategy & Physician Toolkit</div>
+      <div class="card-desc">Track physician relationships, generate evidence packets for letter writers, and build a portfolio of clinical growth moments.</div>
+      <span class="card-tag tag-apply">Application</span>
+    </a>
+    <a href="premed-paths.html" class="card">
+      <span class="card-icon">🗺️</span>
+      <div class="card-name">Learning Paths</div>
+      <div class="card-desc">Three structured paths (Explorer, Foundation, Bridge) that match your stage. Prereq-to-Practice modules connecting coursework to clinical reasoning.</div>
+      <span class="card-tag tag-core">Core Feature</span>
+    </a>
+    <a href="premed-challenges.html" class="card">
+      <span class="card-icon">🧩</span>
+      <div class="card-name">Weekly Diagnostic Challenges</div>
+      <div class="card-desc">Progressive clinical reasoning puzzles starting from basic pattern recognition. Track accuracy improvement over time. Compete on leaderboards.</div>
+      <span class="card-tag tag-grow">Growth</span>
+    </a>
+    <a href="premed-mmi.html" class="card">
+      <span class="card-icon">🎤</span>
+      <div class="card-name">MMI & Interview Practice</div>
+      <div class="card-desc">20 scenarios across 6 categories with timed practice, rubrics, and the STAR-E framework.</div>
+      <span class="card-tag tag-apply">Application</span>
+    </a>
+    <a href="premed-specialties.html" class="card">
+      <span class="card-icon">🔬</span>
+      <div class="card-name">Specialty Explorer</div>
+      <div class="card-desc">13 specialty profiles with lifestyle metrics, personality fit, and matching quiz.</div>
+      <span class="card-tag tag-grow">Growth</span>
+    </a>
+    <a href="premed-mcat-bridge.html" class="card">
+      <span class="card-icon">🔗</span>
+      <div class="card-name">MCAT Clinical Bridge</div>
+      <div class="card-desc">33 topic maps connecting MCAT concepts to real clinical scenarios and diagnoses.</div>
+      <span class="card-tag tag-core">Core</span>
+    </a>
+    <a href="premed-essays.html" class="card">
+      <span class="card-icon">✍️</span>
+      <div class="card-name">Secondary Essay Workshop</div>
+      <div class="card-desc">10 guided prompts with strategy frameworks, do/don't lists, and draft space.</div>
+      <span class="card-tag tag-apply">Application</span>
+    </a>
+    <a href="premed-lesson-hdt.html" class="card">
+      <span class="card-icon">🤔</span>
+      <div class="card-name">How Doctors Think</div>
+      <div class="card-desc">Interactive lesson on clinical reasoning systems, cognitive biases, and expert development.</div>
+      <span class="card-tag tag-core">Core</span>
+    </a>
+    <a href="premed-lesson-cp.html" class="card">
+      <span class="card-icon">❤️</span>
+      <div class="card-name">Chest Pain: 5 Diagnoses</div>
+      <div class="card-desc">The five can't-miss chest pain diagnoses every physician thinks about first.</div>
+      <span class="card-tag tag-core">Core</span>
+    </a>
+    <a href="premed-lesson-biostats.html" class="card">
+      <span class="card-icon">📊</span>
+      <div class="card-name">Biostatistics in Medicine</div>
+      <div class="card-desc">Sensitivity, specificity, PPV, NPV, NNT — the stats that drive clinical decisions.</div>
+      <span class="card-tag tag-core">Core</span>
+    </a>
+    <a href="premed-tracker.html" class="card">
+      <span class="card-icon">🎯</span>
+      <div class="card-name">Accountability Tracker</div>
+      <div class="card-desc">Weekly goals, daily habits, streak tracking, and 20 premed milestones. Stay consistent on the journey.</div>
+      <span class="card-tag tag-community">Community</span>
+    </a>
+  </div>
+</div>
+
+<div class="paths">
+  <h2>Three Learning Paths</h2>
+  <p class="sub">Choose based on where you are in your premed journey</p>
+  <div class="path-grid">
+    <a href="premed-paths.html#explorer" class="path-card path-explorer">
+      <h3>🔭 Explorer</h3>
+      <p class="audience">Early premeds · Prereqs in progress</p>
+      <ul>
+        <li>"Why doctors think differently"</li>
+        <li>Intro to clinical reasoning as a concept</li>
+        <li>Basic pattern recognition</li>
+        <li>Connecting biology to the bedside</li>
+      </ul>
+    </a>
+    <a href="premed-paths.html#foundation" class="path-card path-foundation">
+      <h3>🏗️ Foundation</h3>
+      <p class="audience">Post-prereqs · MCAT prep · Active shadowing</p>
+      <ul>
+        <li>Mechanism-based thinking</li>
+        <li>Connecting physiology to pathophysiology</li>
+        <li>Clinical decision-making frameworks</li>
+        <li>MCAT clinical bridge content</li>
+      </ul>
+    </a>
+    <a href="premed-paths.html#bridge" class="path-card path-bridge">
+      <h3>🌉 Bridge</h3>
+      <p class="audience">Gap year · Post-bac · Accepted students</p>
+      <ul>
+        <li>Case-based clinical previews</li>
+        <li>Building clerkship-ready frameworks</li>
+        <li>Advanced reasoning challenges</li>
+        <li>Head start on M1/M2 thinking</li>
+      </ul>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  <p><a href="../index.html">← ReasonDx Home</a> · ReasonDx Platform · February 2026</p>
+</div>
+
+</body>
+</html>

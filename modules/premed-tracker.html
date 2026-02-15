@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accountability Tracker | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-rose:#e11d48;--pm-rose-50:#fff1f2;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-teal:#0f766e;--pm-teal-50:#f0fdfa;--pm-green:#059669;--pm-green-50:#ecfdf5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#e11d48,#be123c);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;flex:1;}
+.container{max-width:760px;margin:0 auto;padding:24px;}
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
+.tab{flex:1;padding:10px 12px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-rose);color:#fff;}
+
+/* Dashboard */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.dash-stat{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:18px;text-align:center;box-shadow:var(--pm-shadow);}
+.dash-stat .num{font-size:28px;font-weight:700;color:var(--pm-rose);}
+.dash-stat .label{font-size:12px;color:var(--pm-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-top:2px;}
+.streak-bar{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.streak-bar h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.streak-days{display:flex;gap:4px;flex-wrap:wrap;}
+.streak-day{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid var(--pm-border);}
+.streak-day.done{background:var(--pm-green-50);border-color:#86efac;color:var(--pm-green);}
+.streak-day.today{border:2px solid var(--pm-rose);color:var(--pm-rose);}
+.streak-day.future{background:#f8fafc;color:#cbd5e1;}
+
+/* Weekly Goals */
+.section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.section h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.goal-input-row{display:flex;gap:8px;margin-bottom:16px;}
+.goal-input-row input{flex:1;padding:10px 14px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:14px;}
+.goal-input-row select{width:auto;padding:10px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:13px;}
+.goal-input-row button{padding:10px 18px;border:none;border-radius:8px;background:var(--pm-rose);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;}
+.goal-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--pm-border);border-radius:10px;margin-bottom:8px;transition:.2s;}
+.goal-item.completed{background:var(--pm-green-50);border-color:#86efac;}
+.goal-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--pm-border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:.2s;}
+.goal-check.checked{background:var(--pm-green);border-color:var(--pm-green);color:#fff;}
+.goal-text{flex:1;font-size:14px;}
+.goal-text.done{text-decoration:line-through;color:var(--pm-muted);}
+.goal-cat{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;flex-shrink:0;}
+.cat-clinical{background:#dbeafe;color:#1e40af;}.cat-academic{background:#fce7f3;color:#9d174d;}
+.cat-app{background:#fef3c7;color:#92400e;}.cat-wellness{background:#d1fae5;color:#065f46;}
+.cat-research{background:#ede9fe;color:#5b21b6;}
+.goal-delete{color:#cbd5e1;cursor:pointer;font-size:18px;padding:0 4px;}
+.goal-delete:hover{color:var(--pm-rose);}
+
+/* Milestones */
+.milestone{padding:16px;border:1.5px solid var(--pm-border);border-radius:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;transition:.2s;}
+.milestone.achieved{border-color:#86efac;background:var(--pm-green-50);}
+.milestone-icon{font-size:28px;flex-shrink:0;}
+.milestone-info{flex:1;}
+.milestone-name{font-weight:700;font-size:14px;}
+.milestone-desc{font-size:12px;color:var(--pm-muted);}
+.milestone-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--pm-border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.milestone-check.done{background:var(--pm-green);border-color:var(--pm-green);color:#fff;}
+
+/* Habits */
+.habit-row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--pm-border);border-radius:10px;margin-bottom:8px;}
+.habit-name{flex:1;font-size:14px;font-weight:600;}
+.habit-dots{display:flex;gap:4px;}
+.habit-dot{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--pm-border);display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;transition:.2s;}
+.habit-dot.filled{background:var(--pm-rose);border-color:var(--pm-rose);color:#fff;}
+.habit-count{font-size:13px;font-weight:700;color:var(--pm-rose);min-width:40px;text-align:right;}
+
+.hidden{display:none!important;}
+.footer{text-align:center;padding:32px 24px;color:var(--pm-muted);font-size:13px;border-top:1px solid var(--pm-border);margin-top:40px;}
+.footer a{color:var(--pm-rose);text-decoration:none;}
+.empty{text-align:center;padding:32px;color:var(--pm-muted);font-size:14px;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>🎯 Accountability Tracker</h1></div>
+<div class="container">
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('dash',this)">📊 Dashboard</button>
+  <button class="tab" onclick="showTab('goals',this)">🎯 Weekly Goals</button>
+  <button class="tab" onclick="showTab('habits',this)">🔄 Daily Habits</button>
+  <button class="tab" onclick="showTab('milestones',this)">🏆 Milestones</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="tab-dash">
+  <div class="dash-grid" id="dash-stats"></div>
+  <div class="streak-bar">
+    <h3>🔥 Activity Streak</h3>
+    <div class="streak-days" id="streak-grid"></div>
+  </div>
+  <div class="section">
+    <h3>📋 This Week's Goals</h3>
+    <div id="dash-goals"></div>
+  </div>
+</div>
+
+<!-- WEEKLY GOALS -->
+<div id="tab-goals" class="hidden">
+  <div class="section">
+    <h3>🎯 Set Weekly Goals</h3>
+    <div class="goal-input-row">
+      <input type="text" id="goal-input" placeholder="What do you want to accomplish this week?">
+      <select id="goal-cat">
+        <option value="clinical">🏥 Clinical</option>
+        <option value="academic">📚 Academic</option>
+        <option value="app">📝 Application</option>
+        <option value="research">🔬 Research</option>
+        <option value="wellness">💚 Wellness</option>
+      </select>
+      <button onclick="addGoal()">Add</button>
+    </div>
+    <div id="goal-list"></div>
+  </div>
+  <div class="section">
+    <h3>📜 Past Weeks</h3>
+    <div id="past-goals"></div>
+  </div>
+</div>
+
+<!-- DAILY HABITS -->
+<div id="tab-habits" class="hidden">
+  <div class="section">
+    <h3>🔄 Daily Habit Tracker — This Week</h3>
+    <p style="font-size:13px;color:var(--pm-muted);margin-bottom:16px;">Click a day to mark it complete. Build consistency, not perfection.</p>
+    <div id="habit-list"></div>
+  </div>
+  <div class="section">
+    <h3>➕ Add a Habit</h3>
+    <div class="goal-input-row">
+      <input type="text" id="habit-input" placeholder="e.g., Review 10 flashcards, Reflect on shadowing...">
+      <button onclick="addHabit()">Add Habit</button>
+    </div>
+  </div>
+</div>
+
+<!-- MILESTONES -->
+<div id="tab-milestones" class="hidden">
+  <div class="section">
+    <h3>🏆 Premed Milestone Checklist</h3>
+    <p style="font-size:13px;color:var(--pm-muted);margin-bottom:16px;">Track your progress through the major milestones of the premed journey. Check each one as you complete it.</p>
+    <div id="milestone-list"></div>
+  </div>
+</div>
+
+</div>
+<div class="footer"><a href="premed-journal.html">📓 Journal</a> · <a href="premed-encounter.html">📋 Encounters</a> · <a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a></div>
+
+<script>
+const MILESTONES=[
+  {id:"m1",icon:"📋",name:"First Clinical Shadowing Session",desc:"Observed a physician in any clinical setting"},
+  {id:"m2",icon:"📝",name:"First Encounter Logged",desc:"Documented a clinical encounter in the Companion"},
+  {id:"m3",icon:"🧩",name:"First Diagnostic Challenge Completed",desc:"Worked through a case in the Challenge module"},
+  {id:"m4",icon:"👁️",name:"10 Shadowing Hours Logged",desc:"Accumulated 10+ hours of clinical observation"},
+  {id:"m5",icon:"🤔",name:"Completed 'How Doctors Think'",desc:"Finished the clinical reasoning foundations module"},
+  {id:"m6",icon:"❤️",name:"Completed 'Chest Pain: 5 Diagnoses'",desc:"Can recognize the five can't-miss chest pain presentations"},
+  {id:"m7",icon:"📊",name:"Completed 'Biostatistics in Medicine'",desc:"Understand sensitivity, specificity, PPV, NPV, and NNT"},
+  {id:"m8",icon:"🎤",name:"First MMI Practice Session",desc:"Practiced at least one MMI scenario with timer"},
+  {id:"m9",icon:"✉️",name:"First Physician Relationship Logged",desc:"Started tracking a physician in the LOR toolkit"},
+  {id:"m10",icon:"🔬",name:"Specialty Explorer Quiz Completed",desc:"Took the matching quiz and explored specialty profiles"},
+  {id:"m11",icon:"📚",name:"MCAT Registration",desc:"Registered for the MCAT exam"},
+  {id:"m12",icon:"✍️",name:"Personal Statement First Draft",desc:"Completed a full draft of your personal statement"},
+  {id:"m13",icon:"🏫",name:"First Secondary Essay Drafted",desc:"Drafted at least one secondary essay in the Workshop"},
+  {id:"m14",icon:"🎯",name:"50 Shadowing Hours Logged",desc:"Accumulated 50+ hours across multiple settings"},
+  {id:"m15",icon:"📬",name:"AMCAS Submitted",desc:"Primary application submitted"},
+  {id:"m16",icon:"🎉",name:"First Interview Invitation",desc:"Received your first medical school interview invite"},
+  {id:"m17",icon:"💪",name:"30-Day Streak",desc:"Engaged with the platform for 30 consecutive days"},
+  {id:"m18",icon:"🌟",name:"All Three Lessons Completed",desc:"Finished How Doctors Think, Chest Pain, and Biostatistics"},
+  {id:"m19",icon:"🧠",name:"All 20 Diagnostic Challenges Completed",desc:"Worked through every challenge scenario"},
+  {id:"m20",icon:"🏆",name:"Application Season Complete",desc:"Submitted all secondaries and completed all interviews"}
+];
+
+const DEFAULT_HABITS=[
+  {id:"h1",name:"📚 Review flashcards / study (30 min)"},
+  {id:"h2",name:"📓 Write in reflection journal"},
+  {id:"h3",name:"🔗 Connect one prereq topic to clinical medicine"},
+  {id:"h4",name:"💚 Exercise or mindful break"}
+];
+
+let data = JSON.parse(localStorage.getItem('rdx-tracker') || 'null') || {
+  goals: [],
+  pastGoals: [],
+  habits: DEFAULT_HABITS.map(h => ({...h})),
+  habitLog: {},
+  milestones: {},
+  streakLog: {},
+  weekStart: getWeekStart()
+};
+
+function getWeekStart() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(d.getFullYear(), d.getMonth(), diff).toISOString().split('T')[0];
+}
+
+function save() { localStorage.setItem('rdx-tracker', JSON.stringify(data)); }
+
+function checkWeekRollover() {
+  const currentWeek = getWeekStart();
+  if (data.weekStart !== currentWeek) {
+    if (data.goals.length) {
+      data.pastGoals.unshift({ week: data.weekStart, goals: data.goals });
+      if (data.pastGoals.length > 12) data.pastGoals = data.pastGoals.slice(0, 12);
+    }
+    data.goals = [];
+    data.weekStart = currentWeek;
+    save();
+  }
+}
+
+function today() { return new Date().toISOString().split('T')[0]; }
+
+function showTab(tab, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  ['dash','goals','habits','milestones'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('hidden', t !== tab);
+  });
+  renderAll();
+}
+
+// GOALS
+function addGoal() {
+  const input = document.getElementById('goal-input');
+  const cat = document.getElementById('goal-cat').value;
+  const text = input.value.trim();
+  if (!text) return;
+  data.goals.push({ id: Date.now(), text, cat, done: false, created: today() });
+  input.value = '';
+  save(); renderAll();
+}
+
+function toggleGoal(id) {
+  const g = data.goals.find(g => g.id === id);
+  if (g) { g.done = !g.done; if (g.done) g.completedDate = today(); }
+  save(); renderAll();
+}
+
+function deleteGoal(id) {
+  data.goals = data.goals.filter(g => g.id !== id);
+  save(); renderAll();
+}
+
+function renderGoals(container, goals, interactive) {
+  const el = document.getElementById(container);
+  if (!goals.length) { el.innerHTML = '<div class="empty">No goals yet. Set your first weekly goal!</div>'; return; }
+  el.innerHTML = goals.map(g => {
+    const catClass = {clinical:'cat-clinical',academic:'cat-academic',app:'cat-app',research:'cat-research',wellness:'cat-wellness'}[g.cat];
+    const catLabel = {clinical:'Clinical',academic:'Academic',app:'Application',research:'Research',wellness:'Wellness'}[g.cat];
+    return `<div class="goal-item ${g.done?'completed':''}">
+      <div class="goal-check ${g.done?'checked':''}" ${interactive?`onclick="toggleGoal(${g.id})"`:''} >${g.done?'✓':''}</div>
+      <div class="goal-text ${g.done?'done':''}">${g.text}</div>
+      <span class="goal-cat ${catClass}">${catLabel}</span>
+      ${interactive?`<span class="goal-delete" onclick="deleteGoal(${g.id})">×</span>`:''}
+    </div>`;
+  }).join('');
+}
+
+// HABITS
+function addHabit() {
+  const input = document.getElementById('habit-input');
+  const text = input.value.trim();
+  if (!text) return;
+  data.habits.push({ id: 'h'+Date.now(), name: text });
+  input.value = '';
+  save(); renderAll();
+}
+
+function toggleHabit(habitId, dateStr) {
+  const key = habitId + ':' + dateStr;
+  data.habitLog[key] = !data.habitLog[key];
+  if (data.habitLog[key]) data.streakLog[dateStr] = true;
+  save(); renderAll();
+}
+
+function renderHabits() {
+  const el = document.getElementById('habit-list');
+  const days = [];
+  const ws = new Date(data.weekStart);
+  const dayLabels = ['M','T','W','T','F','S','S'];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(ws); d.setDate(ws.getDate() + i);
+    days.push(d.toISOString().split('T')[0]);
+  }
+  el.innerHTML = data.habits.map(h => {
+    const filled = days.filter(d => data.habitLog[h.id+':'+d]).length;
+    return `<div class="habit-row">
+      <div class="habit-name">${h.name}</div>
+      <div class="habit-dots">${days.map((d,i) => {
+        const done = data.habitLog[h.id+':'+d];
+        const isToday = d === today();
+        return `<div class="habit-dot ${done?'filled':''}" onclick="toggleHabit('${h.id}','${d}')" title="${dayLabels[i]}">${done?'✓':dayLabels[i]}</div>`;
+      }).join('')}</div>
+      <div class="habit-count">${filled}/7</div>
+    </div>`;
+  }).join('');
+}
+
+// MILESTONES
+function toggleMilestone(id) {
+  data.milestones[id] = !data.milestones[id];
+  save(); renderAll();
+}
+
+function renderMilestones() {
+  const el = document.getElementById('milestone-list');
+  el.innerHTML = MILESTONES.map(m => {
+    const done = data.milestones[m.id];
+    return `<div class="milestone ${done?'achieved':''}">
+      <div class="milestone-icon">${m.icon}</div>
+      <div class="milestone-info"><div class="milestone-name">${m.name}</div><div class="milestone-desc">${m.desc}</div></div>
+      <div class="milestone-check ${done?'done':''}" onclick="toggleMilestone('${m.id}')">${done?'✓':''}</div>
+    </div>`;
+  }).join('');
+}
+
+// DASHBOARD
+function renderDash() {
+  const totalGoals = data.goals.length;
+  const doneGoals = data.goals.filter(g => g.done).length;
+  const totalMilestones = MILESTONES.length;
+  const doneMilestones = Object.values(data.milestones).filter(Boolean).length;
+  
+  // Streak calculation
+  let streak = 0;
+  const d = new Date();
+  for (let i = 0; i < 365; i++) {
+    const check = new Date(d); check.setDate(d.getDate() - i);
+    const key = check.toISOString().split('T')[0];
+    if (data.streakLog[key] || (i === 0 && false)) { streak++; } // don't count today unless active
+    else if (i === 0) continue; // today might not be done yet
+    else break;
+  }
+  // Check if today has activity
+  if (data.streakLog[today()]) streak = Math.max(streak, 1);
+
+  document.getElementById('dash-stats').innerHTML = `
+    <div class="dash-stat"><div class="num">${doneGoals}/${totalGoals}</div><div class="label">Weekly Goals</div></div>
+    <div class="dash-stat"><div class="num">${doneMilestones}/${totalMilestones}</div><div class="label">Milestones</div></div>
+    <div class="dash-stat"><div class="num">${streak}</div><div class="label">Day Streak 🔥</div></div>
+    <div class="dash-stat"><div class="num">${Object.values(data.streakLog).filter(Boolean).length}</div><div class="label">Active Days</div></div>
+  `;
+
+  // Streak grid (last 28 days)
+  const grid = document.getElementById('streak-grid');
+  const cells = [];
+  for (let i = 27; i >= -7; i--) {
+    const check = new Date(); check.setDate(check.getDate() - i);
+    const key = check.toISOString().split('T')[0];
+    const isToday = key === today();
+    const isFuture = i < 0;
+    const done = data.streakLog[key];
+    const label = check.getDate();
+    cells.push(`<div class="streak-day ${done?'done':''} ${isToday?'today':''} ${isFuture?'future':''}">${label}</div>`);
+  }
+  grid.innerHTML = cells.join('');
+
+  renderGoals('dash-goals', data.goals, false);
+}
+
+function renderAll() {
+  checkWeekRollover();
+  renderDash();
+  renderGoals('goal-list', data.goals, true);
+  renderHabits();
+  renderMilestones();
+  
+  // Past goals
+  const past = document.getElementById('past-goals');
+  if (!data.pastGoals.length) {
+    past.innerHTML = '<div class="empty">Past weeks will appear here after your first week.</div>';
+  } else {
+    past.innerHTML = data.pastGoals.map(pw => {
+      const done = pw.goals.filter(g => g.done).length;
+      return `<div style="margin-bottom:12px;padding:14px;border:1px solid var(--pm-border);border-radius:10px;">
+        <div style="font-weight:700;font-size:14px;margin-bottom:6px;">Week of ${pw.week} — ${done}/${pw.goals.length} completed</div>
+        ${pw.goals.map(g => `<div style="font-size:13px;color:${g.done?'var(--pm-green)':'var(--pm-muted)'};padding:2px 0;">${g.done?'✓':'○'} ${g.text}</div>`).join('')}
+      </div>`;
+    }).join('');
+  }
+}
+
+renderAll();
+</script>
+</body>
+</html>

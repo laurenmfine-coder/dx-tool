@@ -41,15 +41,15 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family:'Inter',sans-serif;
-            background: #1e293b;
+            font-family:'DM Sans','Inter',sans-serif;
+            background:var(--rdx-bg-card);
             min-height: 100vh;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         /* EMR Header */
         .emr-header {
-            background: #0f172a;
+            background:var(--rdx-bg);
             border-bottom: 1px solid #334155;
             padding: 8px 16px;
             display: flex;
@@ -150,7 +150,7 @@
         
         /* Sidebar */
         .emr-sidebar {
-            background: #0f172a;
+            background:var(--rdx-bg);
             border-right: 1px solid #334155;
             padding: 16px;
             overflow-y: auto;
@@ -177,7 +177,7 @@
             color: var(--text-muted);
             transition: all 0.15s;
         }
-        .sidebar-item:hover { background: #1e293b; color: #fff; }
+        .sidebar-item:hover { background:var(--rdx-bg-card); color: #fff; }
         .sidebar-item.active { background: var(--primary); color: #fff; }
         .sidebar-item-icon { font-size: 16px; }
         .sidebar-badge {
@@ -191,14 +191,14 @@
         
         /* Content Area */
         .emr-content {
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             overflow-y: auto;
             padding: 20px;
         }
         
         /* Lab Results Panel */
         .lab-panel {
-            background: #0f172a;
+            background:var(--rdx-bg);
             border-radius: 12px;
             border: 1px solid #334155;
             margin-bottom: 20px;
@@ -226,7 +226,7 @@
             background: #334155;
         }
         .lab-result-item {
-            background: #0f172a;
+            background:var(--rdx-bg);
             padding: 14px 16px;
         }
         .lab-name {
@@ -386,7 +386,7 @@
         
         /* Right Panel - Clinical Context */
         .clinical-panel {
-            background: #0f172a;
+            background:var(--rdx-bg);
             border-left: 1px solid #334155;
             padding: 16px;
             overflow-y: auto;
@@ -405,7 +405,7 @@
             gap: 6px;
         }
         .clinical-card {
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             border-radius: 8px;
             padding: 14px;
             margin-bottom: 8px;
@@ -452,7 +452,7 @@
             gap: 8px;
         }
         .vital-item {
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             border-radius: 6px;
             padding: 10px;
             text-align: center;
@@ -471,7 +471,7 @@
         
         /* Case Selector */
         .case-selector {
-            background: #0f172a;
+            background:var(--rdx-bg);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -487,7 +487,7 @@
             gap: 12px;
         }
         .case-option {
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             border: 2px solid #334155;
             border-radius: 10px;
             padding: 14px;
@@ -598,9 +598,9 @@
 
 [data-theme="ocean-dark"] {
     --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
+    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
 }
 
 [data-theme="midnight-teal"] {
@@ -664,6 +664,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     </style>
         <link rel="stylesheet" href="../dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 
@@ -1639,7 +1640,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
                     <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
                     <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
@@ -1713,5 +1714,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <script src="dx-tools-integration.js"></script>
 <script src="../data/rdx-persist.js"></script>
 <script src="dx-tools-nav.js"></script>
+<script src="../js/rdx-nav.js"></script>
 </body>
 </html>

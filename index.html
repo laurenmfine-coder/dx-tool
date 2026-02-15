@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -37,6 +37,27 @@
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+}
+
+/* Dark theme overrides for landing page variables */
+[data-theme="dark"] {
+  --white: #1e293b;
+  --slate-50: #0f172a;
+  --slate-100: #1e293b;
+  --slate-200: #334155;
+  --slate-300: #475569;
+  --slate-400: #64748b;
+  --slate-500: #94a3b8;
+  --slate-600: #cbd5e1;
+  --slate-700: #e2e8f0;
+  --slate-800: #f1f5f9;
+  --slate-900: #f8fafc;
+  --teal-50: rgba(13, 148, 136, 0.15);
+  --teal-light: rgba(20, 184, 166, 0.2);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -4px rgba(0,0,0,0.2);
 }
 
 body {
@@ -621,6 +642,23 @@ body {
 }
 .level-pill:hover { border-color: var(--teal); color: var(--teal-dark); }
 .level-pill.active { background: var(--teal); color: white; border-color: var(--teal); }
+.level-pill.premed-pill.active { background: linear-gradient(135deg, #0f766e, #0d9488); }
+
+/* Premed path cards */
+.premed-paths { max-width: 960px; margin: 0 auto; padding: 16px 24px 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.premed-path-card {
+  background: var(--white); border: 2px solid var(--slate-200); border-radius: var(--radius);
+  padding: 28px 24px; text-decoration: none; color: inherit; transition: all 0.2s; position: relative; overflow: hidden;
+}
+.premed-path-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.premed-path-card .path-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 22px; }
+.premed-path-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--slate-900); }
+.premed-path-card p { font-size: 14px; color: var(--slate-500); line-height: 1.5; margin-bottom: 12px; }
+.premed-path-card .path-count { font-size: 12px; font-weight: 600; color: var(--teal-dark); letter-spacing: 0.3px; text-transform: uppercase; }
+.premed-path-card:nth-child(1) { border-color: #99f6e4; }
+.premed-path-card:nth-child(2) { border-color: #c4b5fd; }
+.premed-path-card:nth-child(3) { border-color: #fed7aa; }
+.premed-path-card:nth-child(4) { border-color: #fecaca; }
 .level-badge-tag {
   display: inline-block;
   padding: 2px 8px;
@@ -636,6 +674,18 @@ body {
 .level-badge-tag.m4 { background: #fce7f3; color: #9d174d; }
 .level-badge-tag.all-levels { background: #dcfce7; color: #166534; }
 </style>
+<link rel="stylesheet" href="./css/rdx-theme.css">
+<script>
+  // Apply saved theme immediately to prevent flash
+  (function(){
+    var t = localStorage.getItem('rdx-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('rdx-theme-btn-home');
+      if (btn) btn.innerHTML = t === 'dark' ? '☀️' : '🌙';
+    });
+  })();
+</script>
 </head>
 <body>
 
@@ -646,7 +696,9 @@ body {
     <a href="#" class="active">Home</a>
     <a href="cases/clinical-reasoning-trainer.html">Browse</a>
     <a href="modules/training.html">CRT</a>
+    <a href="modules/premed-hub.html" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1);color:#0f766e;font-weight:600">🩺 Premed</a>
     <a href="#" onclick="return false;">My Progress</a>
+    <button id="rdx-theme-btn-home" onclick="(function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('rdx-theme',t);document.getElementById('rdx-theme-btn-home').innerHTML=t==='dark'?'☀️':'🌙'})()" style="background:none;border:1px solid var(--slate-200,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1" title="Toggle theme">🌙</button>
   </div>
 </nav>
 
@@ -668,9 +720,10 @@ body {
   <div class="level-label">I'm studying for:</div>
   <div class="level-pills">
     <button class="level-pill active" onclick="setLevel('all', this)" data-level="all">All Content</button>
-    <button class="level-pill" onclick="setLevel('m2', this)" data-level="m2">M2 · Pathophysiology</button>
-    <button class="level-pill" onclick="setLevel('m3', this)" data-level="m3">M3 · Shelf Exams</button>
-    <button class="level-pill" onclick="setLevel('m4', this)" data-level="m4">M4 · Step 2 / COMLEX</button>
+    <button class="level-pill premed-pill" onclick="setLevel('premed', this)" data-level="premed">🩺 Premed</button>
+    <button class="level-pill" onclick="setLevel('m2', this)" data-level="m2">Pathophysiology</button>
+    <button class="level-pill" onclick="setLevel('m3', this)" data-level="m3">Shelf Exams</button>
+    <button class="level-pill" onclick="setLevel('m4', this)" data-level="m4">Step 2 / COMLEX</button>
   </div>
 </section>
 
@@ -2923,6 +2976,26 @@ const TOPICS = [
   }
 ];
 
+// Premed modules — searchable alongside med student content
+const PREMED_TOPICS = [
+  {t:"Clinical Encounter Companion",m:"modules/premed-encounter.html",c:1,premed:true,tags:"shadowing clinical encounter logging follow-up"},
+  {t:"Shadowing Companion",m:"modules/premed-shadowing.html",c:1,premed:true,tags:"shadowing observation pediatrics obgyn psychiatry cardiology dermatology orthopedics"},
+  {t:"Guided Reflection Journal",m:"modules/premed-journal.html",c:1,premed:true,tags:"reflection journal writing personal statement"},
+  {t:"LOR Strategy & Physician Toolkit",m:"modules/premed-lor.html",c:1,premed:true,tags:"letter recommendation physician relationship LOR"},
+  {t:"Premed Learning Paths",m:"modules/premed-paths.html",c:1,premed:true,tags:"learning path curriculum guide premed"},
+  {t:"Diagnostic Challenges",m:"modules/premed-challenges.html",c:1,premed:true,tags:"diagnostic challenge case clinical reasoning quiz"},
+  {t:"MMI & Interview Practice",m:"modules/premed-mmi.html",c:1,premed:true,tags:"MMI interview medical school ethical dilemma communication"},
+  {t:"Specialty Explorer",m:"modules/premed-specialties.html",c:1,premed:true,tags:"specialty career match residency lifestyle"},
+  {t:"How Doctors Think (Premed Lesson)",m:"modules/premed-lesson-hdt.html",c:1,premed:true,tags:"clinical reasoning cognitive bias System 1 System 2 pattern recognition"},
+  {t:"Chest Pain: 5 Diagnoses (Premed Lesson)",m:"modules/premed-lesson-cp.html",c:1,premed:true,tags:"chest pain ACS PE aortic dissection pneumothorax Boerhaave"},
+  {t:"Biostatistics in Medicine (Premed Lesson)",m:"modules/premed-lesson-biostats.html",c:1,premed:true,tags:"biostatistics sensitivity specificity PPV NPV NNT"},
+  {t:"MCAT Clinical Bridge",m:"modules/premed-mcat-bridge.html",c:1,premed:true,tags:"MCAT biochemistry physiology psychology sociology clinical connection"},
+  {t:"Secondary Essay Workshop",m:"modules/premed-essays.html",c:1,premed:true,tags:"secondary essay personal statement application writing diversity why medicine"},
+  {t:"Accountability Tracker",m:"modules/premed-tracker.html",c:1,premed:true,tags:"goals habits milestones streak accountability tracker"},
+  {t:"Premed Hub",m:"modules/premed-hub.html",c:1,premed:true,tags:"premed hub home dashboard"}
+];
+TOPICS.push(...PREMED_TOPICS);
+
 // Specialty keyword mapping
 const SPECIALTIES = {
   'Cardiology': ['acs','afib','heart-failure','cardiac','svt','syncope','aortic','htn','dvt','pe','cardiac-tamponade','valvular','conotruncal','septal-defects','pda-coarctation'],
@@ -2985,22 +3058,33 @@ function doSearch() {
   const q = searchInput.value.trim().toLowerCase();
   if (q.length < 2) { searchResults.classList.remove('open'); return; }
   
-  const matches = TOPICS.filter(t => t.t.toLowerCase().includes(q)).slice(0, 8);
+  const matches = TOPICS.filter(t => 
+    t.t.toLowerCase().includes(q) || (t.tags && t.tags.toLowerCase().includes(q))
+  ).slice(0, 10);
   
   if (matches.length === 0) {
     searchResults.innerHTML = '<div class="search-empty">No topics found for "' + q + '"</div>';
   } else {
     searchResults.innerHTML = matches.map(t => {
       let links = '';
-      if (t.m) links += `<a href="${t.m}" class="tag-review" onclick="event.stopPropagation()">Topic Review</a>`;
-      if (t.a) links += `<a href="${t.a}" class="tag-case" onclick="event.stopPropagation()">Interactive Case</a>`;
-      if (t.d) links += `<a href="deep-dive-player.html?file=${t.d}" class="tag-guide" onclick="event.stopPropagation()">Study Guide</a>`;
+      const isPremed = t.premed;
+      if (isPremed) {
+        links += `<a href="${t.m}" class="tag-review" style="background:#f0fdfa;color:#0f766e" onclick="event.stopPropagation()">Open Module</a>`;
+        links += `<a href="modules/premed-hub.html" class="tag-guide" style="background:#ccfbf1;color:#0f766e" onclick="event.stopPropagation()">Premed Hub</a>`;
+      } else {
+        if (t.m) links += `<a href="${t.m}" class="tag-review" onclick="event.stopPropagation()">Topic Review</a>`;
+        if (t.a) links += `<a href="${t.a}" class="tag-case" onclick="event.stopPropagation()">Interactive Case</a>`;
+        if (t.d) links += `<a href="deep-dive-player.html?file=${t.d}" class="tag-guide" onclick="event.stopPropagation()">Study Guide</a>`;
+      }
       // Level-aware hint
       let levelHint = '';
-      if (currentLevel !== 'all') {
+      if (isPremed) {
+        levelHint = '<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:#f0fdfa;color:#0f766e;font-weight:600;margin-left:6px;vertical-align:middle">PREMED</span>';
+      } else if (currentLevel !== 'all' && currentLevel !== 'premed') {
         const lvl = currentLevel;
         const tips = { m2: 'Start with Topic Review', m3: 'Try the Interactive Case', m4: 'Board-focused review' };
-        levelHint = `<span class="level-badge-tag ${lvl}" style="font-size:10px;margin-left:6px;vertical-align:middle">${lvl.toUpperCase()}: ${tips[lvl]}</span>`;
+        const labels = { m2: 'PATHOPHYS', m3: 'SHELF', m4: 'STEP 2' };
+        levelHint = `<span class="level-badge-tag ${lvl}" style="font-size:10px;margin-left:6px;vertical-align:middle">${labels[lvl]}: ${tips[lvl]}</span>`;
       }
       return `<div class="search-result" onclick="window.location.href='${t.p || t.m || t.a || ''}'">
         <div class="search-result-title">${highlightMatch(t.t, q)} <span style="font-size:11px;color:var(--slate-400);font-weight:400">${t.c} resource${t.c > 1 ? "s" : ""}</span>${levelHint}</div>
@@ -3144,7 +3228,8 @@ function openPath(key) {
       ${data.items.map(item => {
         const isRecommended = !guidance || (item.levels && item.levels.includes(currentLevel)) || (guidance.recommended && guidance.recommended.includes(item.title));
         const dimStyle = guidance && !isRecommended ? 'opacity:0.45;' : '';
-        const badge = guidance && isRecommended && item.levels ? '<span class="level-badge-tag ' + currentLevel + '">' + currentLevel.toUpperCase() + '</span>' : '';
+        const levelLabels = {m2:'PATHOPHYS',m3:'SHELF',m4:'STEP 2'};
+        const badge = guidance && isRecommended && item.levels ? '<span class="level-badge-tag ' + currentLevel + '">' + (levelLabels[currentLevel] || currentLevel.toUpperCase()) + '</span>' : '';
         return `
         <a href="${item.href}" class="path-item" style="${dimStyle}">
           <div class="path-item-icon" style="background:${item.bg}">${item.icon}</div>
@@ -3171,7 +3256,7 @@ let currentLevel = 'all';
 
 const LEVEL_GUIDANCE = {
   m2: {
-    title: 'M2 · Pathophysiology Focus',
+    title: 'Pathophysiology Focus',
     hint: 'Focus on pathophysiology modules and embryology. Interactive cases help reinforce mechanisms.',
     recommended: ['Pathophysiology Modules', 'Study Guides', 'Embryology', 'Interactive Cases', 'ECG Quiz', 'Flashcard Studio', 'Calculator Hub'],
     pathDescs: {
@@ -3182,7 +3267,7 @@ const LEVEL_GUIDANCE = {
     }
   },
   m3: {
-    title: 'M3 · Shelf Exam Prep',
+    title: 'Shelf Exam Prep',
     hint: 'Prioritize clinical reasoning cases and board questions. Use DDx Builder for clinical rotations.',
     recommended: ['Pathophysiology Modules', 'Interactive Cases', 'Clinical Reasoning Trainer', 'AI Coach Sessions', 'Board Review Questions', 'ECG Quiz', 'DDx Builder', 'Calculator Hub', 'EPA Dashboard'],
     pathDescs: {
@@ -3193,7 +3278,7 @@ const LEVEL_GUIDANCE = {
     }
   },
   m4: {
-    title: 'M4 · Step 2 / COMLEX Review',
+    title: 'Step 2 / COMLEX Review',
     hint: 'Comprehensive board review. Board questions, coverage tracking, and high-yield case review.',
     recommended: ['Pathophysiology Modules', 'Interactive Cases', 'Clinical Reasoning Trainer', 'AI Coach Sessions', 'Board Review Questions', 'ECG Quiz', 'Board Coverage Tracker', 'Calculator Hub', 'DDx Builder', 'Learning Dashboard', 'Scoreboard'],
     pathDescs: {
@@ -3209,11 +3294,62 @@ function setLevel(level, el) {
   currentLevel = level;
   document.querySelectorAll('.level-pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
+
+  const pathsSection = document.querySelector('.paths');
+  const premedSection = document.getElementById('premed-paths-section');
+
+  // PREMED MODE — swap entire paths section
+  if (level === 'premed') {
+    pathsSection.style.display = 'none';
+    if (premedSection) { premedSection.style.display = ''; }
+    else {
+      const pm = document.createElement('section');
+      pm.id = 'premed-paths-section';
+      pm.className = 'premed-paths';
+      pm.innerHTML = `
+        <a href="modules/premed-hub.html" class="premed-path-card">
+          <div class="path-icon" style="background:#f0fdfa">🩺</div>
+          <h3>Premed Hub</h3>
+          <p>Your home base — all 15 modules, learning paths, and clinical reasoning tools in one place</p>
+          <span class="path-count">15 modules</span>
+        </a>
+        <a href="modules/premed-paths.html" class="premed-path-card">
+          <div class="path-icon" style="background:#f5f3ff">🗺️</div>
+          <h3>Learning Paths</h3>
+          <p>Three guided tracks: Explorer, Foundation, and Bridge — structured progression from premed to medical thinking</p>
+          <span class="path-count">3 paths · 3 lessons</span>
+        </a>
+        <a href="modules/premed-mcat-bridge.html" class="premed-path-card">
+          <div class="path-icon" style="background:#fff7ed">🔗</div>
+          <h3>MCAT Clinical Bridge</h3>
+          <p>Connect your prereq coursework to real clinical medicine — 33 topic maps across all MCAT sections</p>
+          <span class="path-count">33 topic bridges</span>
+        </a>
+        <a href="modules/premed-tracker.html" class="premed-path-card">
+          <div class="path-icon" style="background:#fef2f2">🎯</div>
+          <h3>Accountability</h3>
+          <p>Weekly goals, daily habits, streak tracking, and 20 milestones to keep you on track</p>
+          <span class="path-count">20 milestones</span>
+        </a>
+      `;
+      pathsSection.parentNode.insertBefore(pm, pathsSection.nextSibling);
+    }
+    // Update hero text for premed
+    document.querySelector('.hero h1').textContent = 'Start thinking like a physician.';
+    document.querySelector('.hero p').textContent = 'Clinical reasoning tools, shadowing guides, MCAT bridges, and application prep — built for premeds.';
+    return;
+  }
+
+  // NON-PREMED — restore normal paths
+  pathsSection.style.display = '';
+  if (premedSection) premedSection.style.display = 'none';
+  document.querySelector('.hero h1').textContent = 'What do you want to study?';
+  document.querySelector('.hero p').textContent = 'Search 315 clinical topics, each with interactive cases, review modules, and study guides.';
   
   // Update path card descriptions based on level
   if (level !== 'all') {
     const guidance = LEVEL_GUIDANCE[level];
-    const pathCards = document.querySelectorAll('.path-card');
+    const pathCards = document.querySelectorAll('.paths .path-card');
     const pathKeys = ['learn', 'practice', 'test', 'tools'];
     pathCards.forEach((card, i) => {
       const desc = card.querySelector('p');
@@ -3224,7 +3360,7 @@ function setLevel(level, el) {
   } else {
     // Reset to default descriptions
     const defaults = ['Topic reviews that build pathophysiology understanding from the ground up', 'Interactive clinical scenarios where your decisions shape patient outcomes', 'Board-style questions, quizzes, and ECG practice for exam readiness', 'Calculators, ECG practice, and clinical reference at your fingertips'];
-    document.querySelectorAll('.path-card').forEach((card, i) => {
+    document.querySelectorAll('.paths .path-card').forEach((card, i) => {
       const desc = card.querySelector('p');
       if (desc) desc.textContent = defaults[i];
     });
@@ -3240,6 +3376,5 @@ renderSpecialties();
 document.querySelector('.specialty-pill')?.click();
 </script>
 
-<script src="js/dx-universal-nav.js"></script>
 </body>
 </html>

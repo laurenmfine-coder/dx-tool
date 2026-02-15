@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -10,7 +10,7 @@
     <title>Tension Pneumothorax | Clinical Adventure</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(127, 29, 29, 0.9); border-radius: 16px; margin-bottom: 20px; }
         .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #dc2626; margin-left: 10px; }
@@ -30,7 +30,7 @@
         .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
         .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
-        .btn { padding: 16px 28px; background: linear-gradient(135deg, #dc2626, #991b1b); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .btn { padding: 16px 28px; background:linear-gradient(135deg,#0f766e,#0d9488); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
         .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
@@ -68,6 +68,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container" id="app"></div>
@@ -512,5 +513,18 @@
 <script src="dx-adventure-tracker.js"></script>
 <script src="../dx-cross-links.js"></script>
 <script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1136/thoraxjnl-2022-220465" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">BTS/SIGN Guideline for Spontaneous Pneumothorax</a> — <em style="color:var(--rdx-text-muted,#64748b)">Thorax</em></li></ul></div>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CXR</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Visceral pleural line, deep sulcus sign (supine), mediastinal shift in tension</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-chest.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/pneumothorax" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
 </body>
 </html>

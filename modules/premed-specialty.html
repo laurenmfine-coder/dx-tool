@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specialty Explorer | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#0284c7,#0369a1);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.container{max-width:900px;margin:0 auto;padding:24px;}
+.intro{text-align:center;margin-bottom:28px;}
+.intro h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:8px;}
+.intro p{color:var(--pm-muted);font-size:14px;max-width:560px;margin:0 auto;}
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
+.tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-sky);color:#fff;}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:24px;}
+.spec-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:18px;cursor:pointer;transition:.2s;box-shadow:var(--pm-shadow);}
+.spec-card:hover{transform:translateY(-2px);border-color:var(--pm-sky);box-shadow:0 4px 16px rgba(0,0,0,.08);}
+.spec-card.active{border-color:var(--pm-sky);border-width:2px;background:var(--pm-sky-50);}
+.spec-icon{font-size:28px;margin-bottom:6px;}
+.spec-name{font-weight:700;font-size:15px;margin-bottom:2px;}
+.spec-brief{font-size:12px;color:var(--pm-muted);}
+.detail{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:28px;box-shadow:var(--pm-shadow);margin-bottom:20px;}
+.detail h2{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:640px){.detail-grid{grid-template-columns:1fr;}}
+.detail-box{background:var(--pm-bg);border-radius:10px;padding:16px;}
+.detail-box h4{font-size:13px;text-transform:uppercase;letter-spacing:.3px;color:var(--pm-muted);margin-bottom:8px;}
+.detail-box p{font-size:14px;}
+.meter{height:8px;background:#e2e8f0;border-radius:4px;margin-top:8px;}
+.meter-fill{height:100%;border-radius:4px;transition:.3s;}
+.meter-label{display:flex;justify-content:space-between;font-size:12px;color:var(--pm-muted);margin-top:4px;}
+.reasoning-box{background:linear-gradient(135deg,var(--pm-teal-50),#e0f2fe);border:1.5px solid #99f6e4;border-radius:10px;padding:16px;margin-bottom:16px;}
+.reasoning-box h4{color:var(--pm-teal);font-size:14px;margin-bottom:8px;}
+.reasoning-box p{font-size:14px;line-height:1.6;}
+.link-box{background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:10px;padding:16px;}
+.link-box h4{color:#7c3aed;font-size:14px;margin-bottom:8px;}
+.link-box a{color:#7c3aed;text-decoration:none;font-size:14px;display:block;padding:4px 0;}
+.quiz-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;box-shadow:var(--pm-shadow);}
+.quiz-card h3{font-size:18px;margin-bottom:16px;font-family:'DM Serif Display',serif;font-weight:400;}
+.quiz-q{background:var(--pm-bg);border-radius:10px;padding:16px;margin-bottom:12px;}
+.quiz-q p{font-size:14px;font-weight:600;margin-bottom:10px;}
+.quiz-opts{display:flex;flex-direction:column;gap:6px;}
+.quiz-opt{padding:10px 14px;border:1.5px solid var(--pm-border);border-radius:8px;cursor:pointer;font-size:14px;transition:.2s;}
+.quiz-opt:hover{border-color:var(--pm-sky);background:var(--pm-sky-50);}
+.quiz-opt.selected{background:var(--pm-sky);color:#fff;border-color:var(--pm-sky);}
+.quiz-result{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:12px;padding:20px;margin-top:20px;}
+.quiz-result h4{color:var(--pm-teal);margin-bottom:12px;}
+.quiz-match{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #e2e8f0;}
+.quiz-match:last-child{border:none;}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-hub.html">← Hub</a><h1>🔬 Specialty Explorer</h1></div>
+<div class="container">
+  <div class="intro"><h2>Discover Your Fit</h2><p>Explore 25 specialties through the lens of clinical reasoning style, training demands, and daily reality.</p></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('browse')">🔬 Browse</button>
+    <button class="tab" onclick="showTab('quiz')">🧭 Find My Fit</button>
+  </div>
+  <div id="tab-browse">
+    <div class="spec-grid" id="spec-grid"></div>
+    <div id="spec-detail"></div>
+  </div>
+  <div id="tab-quiz" class="hidden">
+    <div class="quiz-card">
+      <h3>🧭 Specialty Matching Quiz</h3>
+      <p style="font-size:14px;color:var(--pm-muted);margin-bottom:20px;">Answer 8 questions about your preferences and reasoning style. We'll suggest specialties that match your profile.</p>
+      <div id="quiz-questions"></div>
+      <div id="quiz-results" class="hidden"></div>
+    </div>
+  </div>
+</div>
+<script>
+const SPECS=[
+{id:"fm",icon:"🏥",name:"Family Medicine",brief:"Cradle-to-grave primary care",category:"Primary Care",
+ reasoning:"Breadth-based pattern recognition across all organ systems and ages. Managing diagnostic uncertainty with limited resources. Long-term relationship-based reasoning — you track patients over decades.",
+ training:"3-year residency. No fellowship required (optional sports medicine, geriatrics, etc.)",hours:"40-55 hrs/week office-based. Call varies by practice model.",income:"$235K-$290K median",lifestyle:"Among the most flexible schedules in medicine. Rural vs urban options.",personality:"You enjoy variety, relationships, and being the 'medical home.' You'd rather know a patient's whole story than one organ system deeply.",
+ platform:["Primary Care shadowing prompts","Chronic disease management cases","Preventive medicine modules"]},
+{id:"im",icon:"🩺",name:"Internal Medicine",brief:"Adult medicine specialist",category:"Primary Care",
+ reasoning:"Diagnostic depth in complex adult patients. Managing multiple comorbidities simultaneously. Bayesian reasoning — updating probabilities with each piece of data.",
+ training:"3-year residency. Hospitalist or outpatient. Many subspecialize (cardiology, GI, etc.)",hours:"Varies widely: outpatient 40-50 hrs, hospitalist 7-on/7-off shifts.",income:"$270K-$320K (general), subspecialties significantly higher",lifestyle:"Hospitalist model offers predictable schedules. Outpatient is more traditional.",personality:"You love diagnostic puzzles with complex adult patients. You want to be the doctor other doctors call when they're stuck.",
+ platform:["Complex case reasoning","Diagnostic challenge modules","Mechanism-based thinking"]},
+{id:"peds",icon:"👶",name:"Pediatrics",brief:"Birth through adolescence",category:"Primary Care",
+ reasoning:"Age-stratified reasoning — the same symptom means completely different things at 2 days, 2 months, and 2 years. Family-centered care. Developmental milestones as diagnostic tools.",
+ training:"3-year residency. Many subspecialties available.",hours:"40-55 hrs/week. Call varies. Inpatient pediatrics involves night shifts.",income:"$230K-$280K median (among lower-compensated specialties)",lifestyle:"Generally favorable work-life balance. Most children recover — emotionally rewarding.",personality:"You love kids and families. You're comfortable with crying, uncertainty, and explaining complex concepts to worried parents in simple terms.",
+ platform:["Pediatric CRT cases","RadDx: Pediatric Imaging","Age-based reasoning modules"]},
+{id:"em",icon:"🚑",name:"Emergency Medicine",brief:"Acute undifferentiated care",category:"Acute Care",
+ reasoning:"Rapid pattern recognition under time pressure. Rule-out thinking — identify life threats first. High-stakes decision-making with incomplete information. Protocol-driven for critical conditions.",
+ training:"3 or 4-year residency. Few fellowship options (toxicology, ultrasound, sports).",hours:"12-hour shifts, typically 12-16 shifts/month. No call, no rounding, no clinic.",income:"$340K-$400K median",lifestyle:"Shift-based = no pager when off. But nights, weekends, holidays forever. Burnout rates are high.",personality:"You thrive on adrenaline and variety. You want definitive action, not follow-up in 2 weeks. You can handle anything that walks through the door.",
+ platform:["ED shadowing prompts","RadDx: Trauma module","Acute case reasoning"]},
+{id:"surg",icon:"🔪",name:"General Surgery",brief:"Operative and perioperative care",category:"Surgical",
+ reasoning:"Binary decision-making: operate or don't. Real-time problem-solving with hands. Anatomy as the language of reasoning. Managing the entire perioperative journey.",
+ training:"5-year residency (longest core residencies). Many fellowships: trauma, surgical oncology, MIS, etc.",hours:"60-80+ hrs/week during residency. Attending: 50-70 hrs/week. Significant call burden.",income:"$400K-$500K+ median",lifestyle:"Demanding training and practice. Delayed gratification is built into the culture.",personality:"You want to fix things with your hands. You're decisive under pressure. You can handle long hours and delayed gratification.",
+ platform:["OR shadowing prompts","Surgical anatomy cases","RadDx: Abdominal Imaging"]},
+{id:"obgyn",icon:"🤰",name:"OB/GYN",brief:"Reproductive health and surgery",category:"Surgical",
+ reasoning:"Dual-patient reasoning (mother and fetus). Combining surgical skills with longitudinal primary care. Managing emergencies (hemorrhage, eclampsia) alongside routine wellness.",
+ training:"4-year residency. Fellowships: maternal-fetal medicine, REI, gyn-oncology, urogyn.",hours:"50-70 hrs/week. Unpredictable call (babies come when they want).",income:"$310K-$380K median",lifestyle:"Unpredictable hours due to deliveries. Some shift toward laborist model. GYN-only practices have better lifestyle.",personality:"You want both surgery AND longitudinal relationships. You're comfortable with unpredictability and the emotional intensity of childbirth.",
+ platform:["OB/GYN CRT cases","RadDx: OB/GYN Imaging","Prenatal reasoning modules"]},
+{id:"psych",icon:"🧠",name:"Psychiatry",brief:"Mental health and behavioral medicine",category:"Medical",
+ reasoning:"Biopsychosocial model — integrating neuroscience, psychology, and social context. Longitudinal relationship-based reasoning. Managing risk (suicidality, violence) with imperfect tools.",
+ training:"4-year residency. Fellowships: child/adolescent, addiction, forensic, consult-liaison.",hours:"40-50 hrs/week. Some inpatient, mostly outpatient. Telepsychiatry expanding rapidly.",income:"$280K-$340K median (rising due to demand)",lifestyle:"Among the best lifestyle specialties. High demand = job flexibility.",personality:"You're fascinated by the mind-brain connection. You're comfortable with ambiguity and slow progress. You believe the therapeutic relationship IS the treatment.",
+ platform:["Psych encounter reasoning","Communication modules","MMI ethics scenarios"]},
+{id:"derm",icon:"🔍",name:"Dermatology",brief:"Skin, hair, nails",category:"Medical",
+ reasoning:"Pattern recognition mastery — dermatology is the most visual specialty. Morphological reasoning: describe what you see precisely, then match to patterns. Mix of medical and procedural.",
+ training:"4 years (1 prelim + 3 derm). Extremely competitive (top 5 competitiveness).",hours:"40-50 hrs/week. Mostly outpatient. Minimal call.",income:"$400K-$500K+ median",lifestyle:"Among the best lifestyle/income ratios in medicine.",personality:"You're a visual learner and pattern matcher. You want variety (medical + procedural) with excellent lifestyle.",
+ platform:["Rash reasoning module","Visual pattern recognition","Dermatology encounter prompts"]},
+{id:"ortho",icon:"🦴",name:"Orthopedic Surgery",brief:"Musculoskeletal system",category:"Surgical",
+ reasoning:"Biomechanical reasoning — understanding forces, mechanics, and structural failure. Combining imaging interpretation with hands-on assessment. Both acute (fracture fixation) and elective (joint replacement).",
+ training:"5-year residency. Fellowships: sports, spine, hand, trauma, joints, pediatric.",hours:"50-70 hrs/week. Call for trauma.",income:"$500K-$700K+ median (highest-compensated surgical specialty)",lifestyle:"Demanding training but excellent career opportunities. Sports medicine subspecialty has better lifestyle.",personality:"You're active, physical, and enjoy fixing structural problems. You think in terms of mechanics and forces.",
+ platform:["MSK CRT cases","RadDx: MSK Imaging","Sports injury modules"]},
+{id:"cards",icon:"💓",name:"Cardiology",brief:"Heart and vascular (IM subspecialty)",category:"Subspecialty",
+ reasoning:"EKG interpretation, hemodynamic reasoning, imaging integration. Combining diagnostic depth with interventional procedures (PCI, ablation). Acute management (STEMI, HF) + chronic optimization.",
+ training:"3yr IM + 3yr cardiology fellowship. Interventional = additional 1yr.",hours:"50-65 hrs/week. Significant call for interventional.",income:"$450K-$600K+ (interventional higher)",lifestyle:"Variable. Non-invasive cardiology has better lifestyle than interventional.",personality:"You love physiology and hemodynamics. You want both diagnostic complexity and procedural skills.",
+ platform:["Cardiology CRT cases","RadDx: Cardiac Imaging","MechanismDx: Cardiac"]},
+{id:"gi",icon:"🔬",name:"Gastroenterology",brief:"Digestive system (IM subspecialty)",category:"Subspecialty",
+ reasoning:"Combining medical management with procedural skills (endoscopy, colonoscopy). Hepatology reasoning for complex liver disease. Nutritional and functional GI disorders require different reasoning frameworks.",
+ training:"3yr IM + 3yr GI fellowship.",hours:"45-60 hrs/week. Endoscopy days + clinic days.",income:"$430K-$550K median",lifestyle:"Favorable among subspecialties. Procedural days are predictable.",personality:"You enjoy procedures AND medical management. You want a subspecialty with good lifestyle and income.",
+ platform:["GI CRT cases","RadDx: Abdominal Imaging","MechanismDx: GI"]},
+{id:"neuro",icon:"🧩",name:"Neurology",brief:"Brain, spinal cord, peripheral nerves",category:"Medical",
+ reasoning:"Localization reasoning — where is the lesion? The neurological exam is the most sophisticated diagnostic tool in medicine. Combining anatomy, physiology, and imaging for precise localization.",
+ training:"4-year residency (1yr preliminary + 3yr neurology). Many fellowships.",hours:"45-60 hrs/week. Stroke call is demanding.",income:"$290K-$380K median",lifestyle:"Variable. Outpatient neurology is favorable. Stroke neurology has heavy call.",personality:"You love the neurological exam and localization puzzles. You're comfortable with serious diagnoses and complex patient conversations.",
+ platform:["Neuro CRT cases","RadDx: Neuroimaging","Brain localization modules"]},
+{id:"anes",icon:"💤",name:"Anesthesiology",brief:"Perioperative medicine and pain",category:"Acute Care",
+ reasoning:"Physiology-based real-time reasoning. Managing hemodynamics, ventilation, and pharmacology simultaneously. Crisis management under extreme time pressure.",
+ training:"4-year residency (1yr preliminary + 3yr CA). Fellowships: cardiac, pain, critical care, regional.",hours:"50-60 hrs/week. Early mornings, late finishes. Call varies.",income:"$400K-$480K median",lifestyle:"Shift-based when off. No clinic, no rounding. Pain medicine fellowship = outpatient lifestyle.",personality:"You love physiology and pharmacology in real-time. You're calm under pressure and detail-oriented.",
+ platform:["Cardiac physiology modules","Pharmacology content","OR shadowing prompts"]},
+{id:"rads",icon:"📷",name:"Radiology",brief:"Diagnostic imaging",category:"Medical",
+ reasoning:"Visual pattern recognition at expert level. Integrating clinical context with imaging findings. Every other specialty depends on your interpretation. AI is changing the field but not replacing it.",
+ training:"5-year residency (1yr preliminary + 4yr radiology). Fellowships in subspecialties.",hours:"40-55 hrs/week. Nighthawk call (reading from home) common.",income:"$400K-$500K median",lifestyle:"Among the best lifestyle specialties. Teleradiology enables remote work.",personality:"You're a visual learner who loves anatomy. You want to be the doctor's doctor — the person everyone calls for answers.",
+ platform:["RadDx: All imaging modules","Visual pattern recognition","Anatomy-based reasoning"]},
+{id:"ai",icon:"🤧",name:"Allergy/Immunology",brief:"Allergic and immunologic disease",category:"Subspecialty",
+ reasoning:"Immune system reasoning — understanding when the immune system overreacts (allergy), underreacts (immunodeficiency), or misdirects (autoimmunity). Mix of detective work (identifying triggers) and management (desensitization, immunotherapy).",
+ training:"2-3yr fellowship after IM or Pediatrics residency.",hours:"40-50 hrs/week. Almost entirely outpatient. Minimal call.",income:"$340K-$400K median",lifestyle:"Excellent. Mostly outpatient, predictable hours, growing demand.",personality:"You enjoy detective work (what's the trigger?), patient education, and managing chronic conditions. You like seeing patients improve with proper treatment.",
+ platform:["A/I CRT cases","MechanismDx: Immune Hypersensitivity","Environmental exposure modules"]}
+];
+
+const QUIZ=[
+{q:"When you encounter a clinical problem, what excites you most?",opts:["Figuring out which organ system is involved","Fixing the problem with my hands","Understanding the patient's whole story","Managing the immediate crisis"],dim:["diagnostic","procedural","relationship","acute"]},
+{q:"Which type of uncertainty are you most comfortable with?",opts:["Diagnostic uncertainty — what does this patient have?","Technical uncertainty — will this procedure work?","Emotional uncertainty — is this patient going to be okay?","Time uncertainty — how fast do I need to act?"],dim:["diagnostic","procedural","relationship","acute"]},
+{q:"What's your ideal patient relationship?",opts:["See them once, solve the problem, move on","Follow them for years through life stages","Intensive short-term relationship (days to weeks)","Ongoing management of a specific condition"],dim:["acute","primary","inpatient","subspecialty"]},
+{q:"How do you feel about procedures?",opts:["Want them to be the core of my practice","Want a mix of procedures and clinic","Prefer medical management and thinking","Procedures make me nervous"],dim:["procedural","mixed","medical","medical"]},
+{q:"What's your ideal work schedule?",opts:["Predictable 9-5, minimal call","Shift-based (intense but off when off)","Flexible but willing to work hard","Don't care — I'll do whatever the specialty requires"],dim:["lifestyle","shift","flex","dedication"]},
+{q:"Which patient population draws you most?",opts:["Children and families","Adults with complex medical problems","Healthy people needing prevention","People in crisis"],dim:["peds","complexity","prevention","acute"]},
+{q:"How important is income vs lifestyle?",opts:["Lifestyle is #1 — I want balance","Income is important — I have debt and goals","I want both (willing to train longer)","Neither — I'll follow my passion"],dim:["lifestyle","income","both","passion"]},
+{q:"How visual is your thinking?",opts:["Very — I learn best from images and patterns","Moderate — I can use visual and verbal equally","I prefer words, logic, and conversation","I learn best by doing with my hands"],dim:["visual","balanced","verbal","kinesthetic"]}
+];
+
+let currentSpec=null;
+let quizAnswers=[];
+
+function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');['browse','quiz'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==t));if(t==='quiz')renderQuiz();}
+
+function selectSpec(id){
+  currentSpec=SPECS.find(s=>s.id===id);
+  document.querySelectorAll('.spec-card').forEach(c=>c.classList.toggle('active',c.dataset.id===id));
+  renderDetail();
+}
+
+function renderGrid(){
+  document.getElementById('spec-grid').innerHTML=SPECS.map(s=>
+    `<div class="spec-card" data-id="${s.id}" onclick="selectSpec('${s.id}')"><div class="spec-icon">${s.icon}</div><div class="spec-name">${s.name}</div><div class="spec-brief">${s.brief}</div></div>`
+  ).join('');
+}
+
+function renderDetail(){
+  if(!currentSpec){document.getElementById('spec-detail').innerHTML='';return;}
+  const s=currentSpec;
+  document.getElementById('spec-detail').innerHTML=`
+    <div class="detail">
+      <h2>${s.icon} ${s.name}</h2>
+      <div class="reasoning-box"><h4>🧠 Clinical Reasoning Style</h4><p>${s.reasoning}</p></div>
+      <div class="detail-grid">
+        <div class="detail-box"><h4>🎓 Training Path</h4><p>${s.training}</p></div>
+        <div class="detail-box"><h4>⏰ Typical Hours</h4><p>${s.hours}</p></div>
+        <div class="detail-box"><h4>💰 Income Range</h4><p>${s.income}</p></div>
+        <div class="detail-box"><h4>⚖️ Lifestyle</h4><p>${s.lifestyle}</p></div>
+      </div>
+      <div class="detail-box" style="margin-bottom:16px;"><h4>🧬 Who Thrives Here</h4><p>${s.personality}</p></div>
+      <div class="link-box"><h4>📚 Related Platform Content</h4>${s.platform.map(l=>`<a href="#">→ ${l}</a>`).join('')}</div>
+    </div>`;
+}
+
+function renderQuiz(){
+  quizAnswers=[];
+  document.getElementById('quiz-results').classList.add('hidden');
+  document.getElementById('quiz-questions').innerHTML=QUIZ.map((q,qi)=>`
+    <div class="quiz-q"><p>${qi+1}. ${q.q}</p><div class="quiz-opts">${q.opts.map((o,oi)=>
+      `<div class="quiz-opt" onclick="quizSelect(${qi},${oi},this)">${o}</div>`
+    ).join('')}</div></div>`).join('')+`<div style="text-align:center;margin-top:20px;"><button onclick="calcQuiz()" style="padding:14px 32px;background:var(--pm-sky);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;">🧭 Find My Match</button></div>`;
+}
+
+function quizSelect(qi,oi,el){
+  el.parentElement.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  quizAnswers[qi]=QUIZ[qi].dim[oi];
+}
+
+function calcQuiz(){
+  if(quizAnswers.filter(Boolean).length<6){alert('Please answer at least 6 questions.');return;}
+  const scores={};
+  SPECS.forEach(s=>{scores[s.id]=0;});
+  // Simple matching heuristic
+  const dimMap={
+    diagnostic:["im","neuro","rads","ai"],procedural:["surg","ortho","gi","cards"],
+    relationship:["fm","peds","psych"],acute:["em","anes","surg"],
+    primary:["fm","im","peds"],inpatient:["im","surg","em"],subspecialty:["cards","gi","ai","neuro"],
+    mixed:["obgyn","em","gi"],medical:["im","neuro","psych","derm","ai"],
+    lifestyle:["derm","rads","psych","ai","fm"],shift:["em","anes"],flex:["fm","peds"],dedication:["surg","ortho"],
+    peds:["peds"],complexity:["im","neuro"],prevention:["fm","peds"],
+    income:["ortho","cards","derm","gi","rads"],both:["cards","gi","derm","anes"],passion:["psych","peds","em"],
+    visual:["rads","derm","neuro"],balanced:["im","em","fm"],verbal:["psych","fm","im"],kinesthetic:["surg","ortho","obgyn","anes"]
+  };
+  quizAnswers.filter(Boolean).forEach(d=>{(dimMap[d]||[]).forEach(id=>{scores[id]=(scores[id]||0)+1;});});
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxScore=sorted[0][1]||1;
+  const res=document.getElementById('quiz-results');
+  res.classList.remove('hidden');
+  res.innerHTML=`<div class="quiz-result"><h4>🧭 Your Top Specialty Matches</h4>${sorted.map(([id,sc])=>{const s=SPECS.find(x=>x.id===id);const pct=Math.round(sc/maxScore*100);return`<div class="quiz-match"><span style="font-size:24px;">${s.icon}</span><div style="flex:1;"><div style="font-weight:700;">${s.name}</div><div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px;"><div style="height:100%;width:${pct}%;background:var(--pm-sky);border-radius:3px;"></div></div></div><span style="font-weight:700;color:var(--pm-sky);">${pct}%</span></div>`;}).join('')}<p style="font-size:13px;color:var(--pm-muted);margin-top:16px;">This is a starting point, not a prediction. Explore your top matches by clicking them in the Browse tab. Shadowing and clinical experience will teach you far more than any quiz.</p></div>`;
+}
+
+renderGrid();
+</script>
+</body>
+</html>

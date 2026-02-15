@@ -35,8 +35,8 @@
 
 /* Multi-Theme Support */
 :root {
-    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
-    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
+    --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
     --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
@@ -49,7 +49,7 @@
     --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
-    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
 [data-theme="high-contrast"] {
@@ -73,7 +73,7 @@
 body { transition: background 0.3s, color 0.3s; }
 
         body { 
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
             -webkit-font-smoothing: antialiased;
         }
         
@@ -865,7 +865,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .radiology-report {
             background: #1a202c;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             padding: 16px;
             font-size: 0.9rem;
         }
@@ -1965,7 +1965,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .dx-pill .remove-btn:hover {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
         }
         
         /* Floating Timer */
@@ -2014,7 +2014,7 @@ body { transition: background 0.3s, color 0.3s; }
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             color: white;
             padding: 8px 12px;
             border-radius: 8px;
@@ -2198,7 +2198,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .breadcrumb-separator {
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
         }
         
         /* Notification Toast */
@@ -2206,7 +2206,7 @@ body { transition: background 0.3s, color 0.3s; }
             position: fixed;
             bottom: 80px;
             right: 20px;
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             color: white;
             padding: 16px 24px;
             border-radius: 12px;
@@ -3294,7 +3294,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .breadcrumb-separator {
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
         }
         
         .breadcrumb-current {
@@ -3601,7 +3601,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .order-item {
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .order-label {
@@ -3701,7 +3701,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Stage content styles */
         .stage-content {
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .stage-title {
@@ -3732,7 +3732,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 12px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             padding: 16px;
             font-size: 1rem;
             resize: vertical;
@@ -3751,7 +3751,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Feedback panel */
         .feedback-panel {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -3802,7 +3802,7 @@ body { transition: background 0.3s, color 0.3s; }
             border-radius: 20px;
             font-size: 0.85rem;
             background: rgba(255,255,255,0.1);
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .finding-tag.critical { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; }
@@ -3823,7 +3823,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .expert-box p {
             margin: 0;
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             line-height: 1.6;
         }
         
@@ -3861,7 +3861,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Differential list */
         .differential-list {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 20px;
@@ -3897,7 +3897,7 @@ body { transition: background 0.3s, color 0.3s; }
             color: white;
         }
         
-        .diff-name { flex: 1; color: #e2e8f0; }
+        .diff-name { flex: 1; color:var(--rdx-text); }
         .diff-prev-rank { color: #64748b; font-size: 0.8rem; }
         
         /* History and Exam selection */
@@ -3922,7 +3922,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             cursor: pointer;
             margin-bottom: 8px;
             transition: all 0.2s;
@@ -3948,7 +3948,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .revealed-question { color: #94a3b8; font-size: 0.9rem; margin-bottom: 6px; }
-        .revealed-answer { color: #e2e8f0; font-weight: 500; margin-bottom: 8px; }
+        .revealed-answer { color:var(--rdx-text); font-weight: 500; margin-bottom: 8px; }
         
         .relevance-badge {
             font-size: 0.8rem;
@@ -4001,7 +4001,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         /* History insights */
@@ -4018,14 +4018,14 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .insight-card {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 10px;
         }
         
         .insight-qa {
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             font-size: 0.9rem;
             margin-bottom: 8px;
         }
@@ -4072,7 +4072,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: flex;
             align-items: center;
             gap: 30px;
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 24px;
@@ -4117,14 +4117,14 @@ body { transition: background 0.3s, color 0.3s; }
         
         .teaching-section p {
             margin: 0;
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             line-height: 1.7;
         }
         
         .teaching-section ul {
             margin: 0;
             padding-left: 20px;
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
         }
         
         .teaching-section li {
@@ -4199,7 +4199,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 12px 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .eiq-image-container {
@@ -4280,7 +4280,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 12px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             padding: 16px;
             font-size: 1rem;
             resize: vertical;
@@ -4293,7 +4293,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .eiq-feedback {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -4344,7 +4344,7 @@ body { transition: background 0.3s, color 0.3s; }
             border-radius: 20px;
             font-size: 0.85rem;
             background: rgba(255,255,255,0.1);
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .eiq-finding.critical { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); }
@@ -4365,7 +4365,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-expert p {
             margin: 0;
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             line-height: 1.6;
         }
         
@@ -4402,7 +4402,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Differential Diagnosis List */
         .eiq-differential-list {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 20px;
@@ -4448,7 +4448,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-diff-name {
             flex: 1;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .eiq-diff-was {
@@ -4486,7 +4486,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             cursor: pointer;
             margin-bottom: 8px;
             transition: all 0.2s;
@@ -4523,7 +4523,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .eiq-answer-a {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             font-weight: 500;
             margin-bottom: 8px;
         }
@@ -4553,14 +4553,14 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .eiq-insight {
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 10px;
         }
         
         .eiq-insight-qa {
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             font-size: 0.9rem;
             margin-bottom: 8px;
         }
@@ -4588,7 +4588,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .eiq-exam-buttons {
@@ -4602,7 +4602,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 8px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -4688,7 +4688,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: flex;
             align-items: center;
             gap: 30px;
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 24px;
@@ -4733,14 +4733,14 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-section p {
             margin: 0;
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
             line-height: 1.7;
         }
         
         .eiq-section ul {
             margin: 0;
             padding-left: 20px;
-            color: #cbd5e1;
+            color:var(--rdx-text-secondary);
         }
         
         .eiq-section li {
@@ -4800,7 +4800,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 12px 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .imaging-display {
@@ -5043,7 +5043,7 @@ body { transition: background 0.3s, color 0.3s; }
         .imaging-score-display.excellent { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
         .imaging-score-display.good { background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%); }
         .imaging-score-display.fair { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
-        .imaging-score-display.needs-work { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); }
+        .imaging-score-display.needs-work { background:linear-gradient(135deg,#0f766e,#0d9488); }
         
         .imaging-score-circle {
             width: 100px;
@@ -5120,7 +5120,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(255,255,255,0.05);
             border-radius: 8px;
             margin-bottom: 8px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             font-size: 0.9rem;
         }
         
@@ -5162,7 +5162,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-teaching-box p {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             margin: 0 0 8px 0;
             font-size: 0.95rem;
         }
@@ -5221,7 +5221,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(255,255,255,0.05);
             padding: 10px 16px;
             border-radius: 8px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             margin-bottom: 16px;
             font-size: 0.95rem;
         }
@@ -5663,7 +5663,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-management-box p {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             margin: 0;
         }
         
@@ -5680,7 +5680,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-teaching-section ul {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             margin: 0;
             padding-left: 20px;
         }
@@ -5714,7 +5714,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .pearl-item.pearl {
             background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border:1px solid var(--rdx-info);
             color: #c4b5fd;
         }
         
@@ -5943,7 +5943,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .consult-phone-header {
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             border-radius: 16px 16px 0 0;
             padding: 16px;
             display: flex;
@@ -6038,7 +6038,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 12px;
             border: 2px solid #334155;
             border-radius: 8px;
-            background: #1e293b;
+            background:var(--rdx-bg-card);
             color: white;
             font-size: 0.95rem;
             resize: vertical;
@@ -6085,7 +6085,7 @@ body { transition: background 0.3s, color 0.3s; }
            ============================================================ */
         
         .spaced-rep-banner {
-            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            background:linear-gradient(135deg,#0f766e,#14b8a6);
             border-radius: 16px;
             padding: 20px;
             color: white;
@@ -6604,7 +6604,7 @@ body { transition: background 0.3s, color 0.3s; }
         .branching-tree {
             margin: 20px 0;
             padding: 20px;
-            background: rgba(0,0,0,0.2);
+            background:var(--rdx-bg-hover);
             border-radius: 12px;
         }
         
@@ -6757,7 +6757,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .order-item {
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .order-label {
@@ -6945,7 +6945,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .feedback-section h4 {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             font-size: 0.95rem;
             margin: 0 0 10px 0;
         }
@@ -6994,7 +6994,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .expert-section {
             background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border:1px solid var(--rdx-info);
             border-radius: 10px;
             padding: 16px;
         }
@@ -7006,7 +7006,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .expert-text {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             line-height: 1.6;
             margin: 0;
         }
@@ -7062,7 +7062,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .dx-name {
             flex: 1;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .dx-was {
@@ -7108,7 +7108,7 @@ body { transition: background 0.3s, color 0.3s; }
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 12px 16px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             text-align: left;
             cursor: pointer;
             transition: all 0.2s;
@@ -7171,7 +7171,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .answer-a {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             font-size: 0.95rem;
             margin-bottom: 10px;
         }
@@ -7223,7 +7223,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .summary-a {
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         /* Physical Exam Stage */
@@ -7293,7 +7293,7 @@ body { transition: background 0.3s, color 0.3s; }
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 12px 16px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
             text-align: left;
             cursor: pointer;
             transition: all 0.2s;
@@ -7356,7 +7356,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .finding-result {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             margin-bottom: 10px;
         }
         
@@ -7546,7 +7546,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .teaching-section p {
-            color: #e2e8f0;
+            color:var(--rdx-text);
             line-height: 1.6;
             margin: 0;
         }
@@ -7554,7 +7554,7 @@ body { transition: background 0.3s, color 0.3s; }
         .teaching-list {
             margin: 0;
             padding-left: 20px;
-            color: #e2e8f0;
+            color:var(--rdx-text);
         }
         
         .teaching-list li {
@@ -7564,7 +7564,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .anatomy-highlight {
             background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border:1px solid var(--rdx-info);
         }
         
         .next-steps {
@@ -8790,9 +8790,9 @@ body { transition: background 0.3s, color 0.3s; }
 
 [data-theme="ocean-dark"] {
     --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
+    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
 }
 
 [data-theme="midnight-teal"] {
@@ -8939,11 +8939,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 /* ========== END MOBILE FIX ========== */
 
 </style>
+<link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body class="p-4 md:p-8" data-theme="light">
 
 <div style="position: fixed; top: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
+    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
     <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
     <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
     <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
@@ -9492,8 +9493,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
 /* Multi-Theme Support */
 :root {
-    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
-    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
+    --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
     --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
@@ -9506,7 +9507,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
-    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
 [data-theme="high-contrast"] {
@@ -9631,7 +9632,7 @@ body { transition: background 0.3s, color 0.3s; }
                         <!-- Step 2: Registration Form -->
                         <div style="background: #f8fafc; border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
                             <h2 style="color: #1e293b; font-size: 1.1rem; margin: 0 0 20px 0; font-weight: 700; display: flex; align-items: center; gap: 10px;">
-                                <span style="background: #1e293b; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">2</span>
+                                <span style="background:var(--rdx-bg-card); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">2</span>
                                 Register for Access Code
                             </h2>
                             
@@ -9721,8 +9722,8 @@ body { transition: background 0.3s, color 0.3s; }
 
 /* Multi-Theme Support */
 :root {
-    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
-    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
+    --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
     --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
@@ -9735,7 +9736,7 @@ body { transition: background 0.3s, color 0.3s; }
     --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
-    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
 [data-theme="high-contrast"] {
@@ -9880,7 +9881,7 @@ body { transition: background 0.3s, color 0.3s; }
                     <!-- Footer -->
                     <p style="color: #94a3b8; font-size: 0.8rem; margin-top: 32px; text-align: center; line-height: 1.6;">
                         Part of the Dx Learning Ecosystem<br>
-                        <span style="color: #cbd5e1;">ReasonDx • MechanismDx • CoachDx</span>
+                        <span style="color:var(--rdx-text-secondary);">ReasonDx • MechanismDx • CoachDx</span>
                     </p>
                 </div>
             </div>
@@ -51863,7 +51864,7 @@ This patient's presentation details include everything from the history question
                             <div style="display: grid; gap: 8px;">
                                 ${section.criteria.map(c => `
                                     <div style="display: flex; justify-content: space-between; align-items: center; 
-                                                padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 8px;
+                                                padding: 8px 12px; background:var(--rdx-bg-hover); border-radius: 8px;
                                                 ${c.required ? 'border-left: 3px solid #f59e0b;' : ''}">
                                         <span style="font-size: 0.9rem; ${c.required ? 'color: white;' : 'color: #94a3b8;'}">
                                             ${c.text}
@@ -51920,7 +51921,7 @@ This patient's presentation details include everything from the history question
                     <!-- HPI -->
                     <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
                         <div style="font-weight: 600; color: #2dd4bf; margin-bottom: 12px;">📋 History of Present Illness</div>
-                        <div style="font-size: 0.9rem; line-height: 1.6; color: #e2e8f0; margin-bottom: 12px;">${caseData.hpi.narrative}</div>
+                        <div style="font-size: 0.9rem; line-height: 1.6; color:var(--rdx-text); margin-bottom: 12px;">${caseData.hpi.narrative}</div>
                         <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Select pertinent findings to include in your SBAR:</div>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                             ${caseData.hpi.keyPoints.map(p => `
@@ -51938,13 +51939,13 @@ This patient's presentation details include everything from the history question
                     <!-- PMH -->
                     <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
                         <div style="font-weight: 600; color: #2dd4bf; margin-bottom: 12px;">📁 Past Medical History</div>
-                        <div style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 8px;">
+                        <div style="font-size: 0.9rem; color:var(--rdx-text); margin-bottom: 8px;">
                             <strong>Conditions:</strong> ${caseData.pmh.conditions.join(', ')}
                         </div>
-                        <div style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 8px;">
+                        <div style="font-size: 0.9rem; color:var(--rdx-text); margin-bottom: 8px;">
                             <strong>Medications:</strong> ${caseData.medications.join(', ')}
                         </div>
-                        <div style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 8px;">
+                        <div style="font-size: 0.9rem; color:var(--rdx-text); margin-bottom: 8px;">
                             <strong>Allergies:</strong> ${caseData.allergies.join(', ')}
                         </div>
                         <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Select pertinent findings:</div>
@@ -51971,7 +51972,7 @@ This patient's presentation details include everything from the history question
                             <div><strong>Temp:</strong> ${caseData.physicalExam.vitals.temp}°F</div>
                             <div><strong>SpO2:</strong> ${caseData.physicalExam.vitals.spo2}</div>
                         </div>
-                        <div style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 8px;">
+                        <div style="font-size: 0.85rem; color:var(--rdx-text); margin-bottom: 8px;">
                             <strong>General:</strong> ${caseData.physicalExam.general}<br>
                             <strong>Cardiac:</strong> ${caseData.physicalExam.cardiac}<br>
                             <strong>Lungs:</strong> ${caseData.physicalExam.lungs}<br>
@@ -52029,7 +52030,7 @@ This patient's presentation details include everything from the history question
                         ${caseData.imaging.results.map(i => `
                             <div style="margin-bottom: 8px;">
                                 <strong style="font-size: 0.9rem;">${i.type}:</strong>
-                                <div style="font-size: 0.85rem; color: #e2e8f0; margin-top: 4px;">${i.findings}</div>
+                                <div style="font-size: 0.85rem; color:var(--rdx-text); margin-top: 4px;">${i.findings}</div>
                             </div>
                         `).join('')}
                         <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 12px; margin-bottom: 8px;">Select pertinent findings:</div>
@@ -52198,7 +52199,7 @@ This patient's presentation details include everything from the history question
                                 section.feedback.length > 0 ? `
                                     <div style="margin-bottom: 8px;">
                                         <strong style="color: white;">${key.charAt(0).toUpperCase() + key.slice(1)}:</strong>
-                                        <ul style="margin: 4px 0 0 20px; color: #e2e8f0; font-size: 0.9rem;">
+                                        <ul style="margin: 4px 0 0 20px; color:var(--rdx-text); font-size: 0.9rem;">
                                             ${sbarConfig.feedbackDepth === 'minimal' 
                                                 ? `<li>${section.feedback[0]}</li>` 
                                                 : section.feedback.map(f => `<li>${f}</li>`).join('')}
@@ -52223,7 +52224,7 @@ This patient's presentation details include everything from the history question
                             ].map(s => `
                                 <div style="margin-bottom: 16px;">
                                     <div style="font-weight: 600; color: #2dd4bf; margin-bottom: 4px;">${s.label}</div>
-                                    <div style="font-size: 0.9rem; color: #e2e8f0; line-height: 1.5; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                                    <div style="font-size: 0.9rem; color:var(--rdx-text); line-height: 1.5; padding: 12px; background:var(--rdx-bg-hover); border-radius: 8px;">
                                         "${caseData.modelSbar[s.key]}"
                                     </div>
                                 </div>
@@ -52242,7 +52243,7 @@ This patient's presentation details include everything from the history question
                         ].map(s => `
                             <div style="margin-bottom: 12px;">
                                 <div style="font-weight: 600; color: #64748b; margin-bottom: 4px; font-size: 0.85rem;">${s.label}</div>
-                                <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                                <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; padding: 8px; background:var(--rdx-bg-hover); border-radius: 8px;">
                                     ${sbarState.sbarInputs[s.key] || '<em>Not provided</em>'}
                                 </div>
                             </div>
@@ -60949,8 +60950,8 @@ This patient's presentation details include everything from the history question
 
 /* Multi-Theme Support */
 :root {
-    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
-    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
+    --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
     --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
@@ -60963,7 +60964,7 @@ This patient's presentation details include everything from the history question
     --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
-    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
 [data-theme="high-contrast"] {
@@ -60999,7 +61000,7 @@ body { transition: background 0.3s, color 0.3s; }
             <body>
 
 <div style="position: fixed; top: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
+    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
     <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
     <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
     <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
@@ -61047,7 +61048,7 @@ body { transition: background 0.3s, color 0.3s; }
                 
                 <scr` + `ipt>window.print();<` + `/script>
             <script src="data/rdx-persist.js"></script>
-<script src="js/dx-universal-nav.js"></script>
+<script src="./js/rdx-nav.js"></script>
 </body>
             </html>
         `);
@@ -69377,7 +69378,7 @@ body { transition: background 0.3s, color 0.3s; }
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
                     <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
                     <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div><div class="dx-theme-name">Purple Night</div></div>
                     <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div><div class="dx-theme-name">Forest Night</div></div>
@@ -69409,6 +69410,5 @@ body { transition: background 0.3s, color 0.3s; }
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDxThemeModal(); });
     </script>
 
-<script src="js/dx-universal-nav.js"></script>
 </body>
 </html>

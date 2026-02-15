@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
 <script>
 // Auth Guard - Redirect if not logged in
@@ -63,6 +63,7 @@
         .progress-dot.active { background: white; transform: scale(1.3); }
         .progress-dot.completed { background: #48bb78; }
     </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -710,20 +711,20 @@
 
 <style id="mcq-inject-css">
 .mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
-.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}
 .mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
 .mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
 .mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
 .mcq-card-body{padding:24px}
 .mcq-choices{display:grid;gap:12px}
-.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
 .mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
-.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
-.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}
 .mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
 .mcq-choice-title{font-weight:600;font-size:.95rem}
 .mcq-hidden{display:none!important}
-.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
 .mcq-score-label{font-size:.9rem;font-weight:600}
 .mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
 </style>
@@ -781,9 +782,19 @@
 <script id="mcq-inject-js">
 let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
 </script>
-<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=allergic-rhinitis-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/allergic-rhinitis-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1111/all.15644" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Allergic Rhinitis: ARIA 2023 Update</a> — <em style="color:var(--rdx-text-muted,#64748b)">Allergy</em></li><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1016/j.jaci.2020.10.003" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Practice Parameter: Allergic Rhinitis</a> — <em style="color:var(--rdx-text-muted,#64748b)">JACI</em></li><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/rhinitis" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Allergic Rhinitis Overview</a> — <em style="color:var(--rdx-text-muted,#64748b)">AAAAI</em></li></ul></div>
+<div class="cross-links"><a href="../deep-dive-player.html?module=allergic-rhinitis-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/allergic-rhinitis-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
 <script src="../dx-progress.js"></script>
 <script src="../dx-cross-links.js"></script>
-<script src="../js/dx-universal-nav.js"></script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+<li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
+</ol>
+</div>
+
 </body>
 </html>

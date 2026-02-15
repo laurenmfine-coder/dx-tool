@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specialty Shadowing Guides | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.container{max-width:760px;margin:0 auto;padding:24px;}
+.spec-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;}
+.spec-btn{padding:12px 18px;border-radius:12px;border:2px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.spec-btn:hover{border-color:var(--pm-teal-light);background:var(--pm-teal-50);}
+.spec-btn.active{background:var(--pm-teal);color:#fff;border-color:var(--pm-teal);}
+.spec-guide{display:none;}
+.spec-guide.active{display:block;}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--pm-teal);margin-bottom:16px;}
+.card h3{font-size:15px;font-weight:700;margin:16px 0 8px;display:flex;align-items:center;gap:8px;}
+.card p{font-size:14px;margin-bottom:12px;line-height:1.7;}
+.tip{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:10px;padding:16px;margin:12px 0;font-size:13px;line-height:1.7;}
+.tip strong{color:var(--pm-teal);}
+.warn{background:#fefce8;border:1.5px solid #fde68a;border-radius:10px;padding:16px;margin:12px 0;font-size:13px;line-height:1.7;}
+.warn strong{color:#92400e;}
+.prompt-list{margin:12px 0;}
+.prompt{padding:12px 16px;border-radius:8px;margin-bottom:6px;font-size:14px;background:#f8fafc;border:1px solid var(--pm-border);cursor:pointer;transition:.2s;position:relative;}
+.prompt:hover{background:var(--pm-teal-50);border-color:var(--pm-teal-light);}
+.prompt.checked{opacity:.5;text-decoration:line-through;}
+.prompt::after{content:'☐';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--pm-muted);}
+.prompt.checked::after{content:'☑';color:var(--pm-teal);}
+.vocab{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
+.vocab-item{padding:10px 14px;background:#f8fafc;border-radius:8px;font-size:13px;}
+.vocab-item strong{display:block;color:var(--pm-teal);font-size:12px;text-transform:uppercase;margin-bottom:2px;}
+</style>
+</head>
+<body>
+<div class="header"><a href="premed-shadowing.html">← Shadowing</a><h1>🩺 Specialty Shadowing Guides</h1></div>
+<div class="container">
+  <p style="text-align:center;margin-bottom:24px;color:var(--pm-muted);">Deep preparation guides for specific specialties. Read before your shadowing day to maximize what you observe and learn.</p>
+  <div class="spec-nav" id="spec-nav"></div>
+  <div id="guides"></div>
+</div>
+<script>
+const SPECS=[
+{id:"peds",icon:"👶",name:"Pediatrics",
+ overview:"Pediatric visits are fast — often 15 minutes — and involve two customers: the child AND the parent. Watch how the physician splits attention, uses age-appropriate language, and manages parental anxiety alongside the clinical problem.",
+ before:[
+  "Review normal developmental milestones: when do children walk, talk, point, follow commands?",
+  "Look up the childhood vaccine schedule — you'll hear about it at every well-child visit",
+  "Understand that vital sign normals change by age: a HR of 150 is normal for an infant, alarming in an adult",
+  "Review the 'red flags' in pediatric fever: age-stratified approach (neonates vs toddlers vs older children)"
+ ],
+ observe:[
+  "How does the physician examine a scared toddler? Watch the order (auscultate before otoscope — save the painful parts for last)",
+  "How does the physician address the parent's concerns versus the child's actual symptoms?",
+  "What anticipatory guidance is given at well-child visits? (Screen time, nutrition, sleep, safety)",
+  "How are vaccines discussed with hesitant parents? Watch the communication technique",
+  "Notice the growth chart — is the physician tracking percentiles or trajectory?"
+ ],
+ ask:[
+  "What's the most common mistake premeds make when observing pediatric visits?",
+  "How do you decide between watchful waiting vs antibiotics for otitis media?",
+  "What developmental red flags would prompt you to refer to a specialist?",
+  "How has pediatric practice changed since you started training?"
+ ],
+ vocab:[
+  {term:"AOM",def:"Acute otitis media (ear infection)"},
+  {term:"Well-child check",def:"Preventive visit for growth, development, vaccines"},
+  {term:"Percentile",def:"Growth relative to same-age peers"},
+  {term:"Anticipatory guidance",def:"Proactive safety/development counseling"},
+  {term:"Febrile seizure",def:"Seizure triggered by fever in young children"},
+  {term:"FTT",def:"Failure to thrive — poor weight gain"}
+ ],
+ tips:"Sit at the child's eye level. Don't tower over them. If the child is crying, don't take it personally — they're scared. Bring stickers if the office allows it. The physician will notice your bedside manner with kids.",
+ warning:"Never examine, touch, or pick up a child without explicit permission from both the parent and physician. Even friendly gestures can be misinterpreted."
+},
+{id:"obgyn",icon:"🤰",name:"OB/GYN",
+ overview:"OB/GYN is a unique blend of primary care, surgery, and emergency medicine. You may see prenatal visits, deliveries, gynecologic surgery, and emergency C-sections in a single day. The pace shifts dramatically between routine and critical.",
+ before:[
+  "Review basic obstetric terminology: gravida/para, gestational age, trimesters, fundal height",
+  "Understand what happens at each prenatal visit: vitals, urine, fundal height, fetal heart tones",
+  "Look up the stages of labor and the basics of a normal vaginal delivery",
+  "Review the indications for cesarean delivery (malpresentation, failure to progress, fetal distress)"
+ ],
+ observe:[
+  "How does the physician discuss sensitive topics (contraception, STIs, sexual health) — watch the normalizing language",
+  "In prenatal visits: how is risk stratified? (Gestational diabetes screening, preeclampsia risk, genetic testing)",
+  "In L&D: how are decisions made about intervention vs watchful waiting during labor?",
+  "How does the team communicate during emergencies (crash C-section, postpartum hemorrhage)?",
+  "How is informed consent handled for procedures, especially under time pressure?"
+ ],
+ ask:[
+  "How do you counsel patients who want an unmedicated birth vs an epidural?",
+  "What's the most critical emergency in OB/GYN and how do you prepare for it?",
+  "How has the field changed with increasing C-section rates?",
+  "What role does shared decision-making play in reproductive health?"
+ ],
+ vocab:[
+  {term:"G/P",def:"Gravida (pregnancies) / Para (deliveries)"},
+  {term:"GA",def:"Gestational age in weeks"},
+  {term:"FHR",def:"Fetal heart rate (normal: 110-160)"},
+  {term:"NSVD",def:"Normal spontaneous vaginal delivery"},
+  {term:"Preeclampsia",def:"Hypertension + protein in urine in pregnancy"},
+  {term:"APGAR",def:"Newborn assessment score at 1 and 5 minutes"}
+ ],
+ tips:"Respect patient privacy absolutely. Many patients feel vulnerable during OB/GYN exams. Always introduce yourself and explain your role. Ask permission before entering the room during exams. If a patient declines your presence, accept gracefully — it's not about you.",
+ warning:"Reproductive health is deeply personal. Never comment on a patient's choices about contraception, pregnancy, or delivery plans. Your job is to observe and learn, not to judge."
+},
+{id:"psych",icon:"🧠",name:"Psychiatry",
+ overview:"Psychiatric encounters are fundamentally different from other specialties. The 'exam' is the conversation itself. You'll watch the physician use questions, silence, and observation to build a diagnostic formulation. Pay attention to HOW questions are asked, not just WHAT is asked.",
+ before:[
+  "Review the basic mental status exam (MSE): appearance, behavior, speech, mood, affect, thought process, thought content, cognition, insight, judgment",
+  "Understand the difference between mood and affect (mood = patient's subjective report; affect = what you observe)",
+  "Look up the DSM-5 criteria for major depression, generalized anxiety, and bipolar disorder",
+  "Review the difference between psychosis, delirium, and dementia"
+ ],
+ observe:[
+  "How does the physician build rapport with patients who may be paranoid, manic, or severely depressed?",
+  "Watch for safety assessment: how is suicidal ideation explored? (Direct, compassionate questioning)",
+  "How does the physician distinguish between psychiatric and medical causes of symptoms? (Medical mimics: thyroid, substance use, neurological)",
+  "Notice the therapeutic alliance — how does the physician balance empathy with clinical objectivity?",
+  "How are medications discussed? Watch for shared decision-making about side effects and expectations"
+ ],
+ ask:[
+  "How do you approach a patient who doesn't believe they need treatment?",
+  "What's the hardest part of psychiatry that people don't expect?",
+  "How do you differentiate between normal grief and clinical depression?",
+  "How has your approach to psychiatric diagnosis changed over your career?"
+ ],
+ vocab:[
+  {term:"MSE",def:"Mental Status Exam — the 'physical exam' of psychiatry"},
+  {term:"SI/HI",def:"Suicidal ideation / Homicidal ideation"},
+  {term:"Affect",def:"Observed emotional expression (flat, blunted, labile)"},
+  {term:"Insight",def:"Patient's awareness of their illness"},
+  {term:"Psychosis",def:"Disconnect from reality (hallucinations, delusions)"},
+  {term:"Involuntary hold",def:"Legal mechanism for holding patients who are dangerous to self/others"}
+ ],
+ tips:"Silence is a tool in psychiatry. Resist the urge to fill every pause. Watch how the physician uses silence to give patients space to share. Also: maintain a neutral facial expression — patients are watching YOU as much as you're watching them.",
+ warning:"Psychiatric patients are among the most stigmatized in medicine. Never use casual language ('that patient is crazy') or discuss patients outside the clinical setting. Confidentiality is paramount — these patients have often been betrayed by trust before."
+},
+{id:"ortho",icon:"🦴",name:"Orthopedics",
+ overview:"Orthopedic visits are fast-paced and physical. You'll see a lot of hands-on examination, imaging review, and procedural skills. The reasoning is mechanical — think about forces, alignment, and structural integrity. If you're athletic, you'll connect instantly.",
+ before:[
+  "Review basic MSK anatomy: major joints, ligaments, and their functions (ACL, rotator cuff, meniscus)",
+  "Understand fracture terminology: open vs closed, displaced vs nondisplaced, comminuted",
+  "Look up common orthopedic exam maneuvers: Lachman test (ACL), McMurray test (meniscus), Hawkins test (shoulder impingement)",
+  "Review the Ottawa Ankle and Knee Rules (evidence-based imaging guidelines)"
+ ],
+ observe:[
+  "How does the physician examine a joint systematically? (Inspection, palpation, range of motion, special tests, neurovascular exam)",
+  "Watch the X-ray reading technique: how do they systematically evaluate alignment, bone, cartilage, soft tissue?",
+  "How are surgical decisions made? What tips the balance from conservative management to operative intervention?",
+  "In the OR: watch the team dynamics, sterile technique, and how the surgeon communicates during the procedure",
+  "How are post-operative expectations set? (Rehab timeline, return to activity, pain management)"
+ ],
+ ask:[
+  "How do you decide between surgery and conservative management for this patient?",
+  "What's the most common injury you see, and what's the most commonly missed?",
+  "How has minimally invasive surgery changed orthopedic outcomes?",
+  "What physical activities do you recommend for joint health?"
+ ],
+ vocab:[
+  {term:"ORIF",def:"Open Reduction Internal Fixation (surgical fracture repair)"},
+  {term:"TKA/THA",def:"Total Knee/Hip Arthroplasty (joint replacement)"},
+  {term:"ROM",def:"Range of Motion (measured in degrees)"},
+  {term:"NVI",def:"Neurovascularly Intact (circulation and sensation normal)"},
+  {term:"Weight-bearing status",def:"NWB, WBAT, FWB (non/as tolerated/full)"},
+  {term:"Compartment syndrome",def:"Emergency: pressure buildup in muscle compartment"}
+ ],
+ tips:"Orthopedic culture tends to be action-oriented and direct. Come prepared with specific questions. If you're in the OR, study the anatomy of the planned procedure beforehand. Surgeons notice when you know the relevant anatomy.",
+ warning:"Never touch instruments, implants, or the sterile field. If you feel faint during a procedure (completely normal), step back and sit down — better to sit than fall into the sterile field."
+},
+{id:"cards",icon:"❤️",name:"Cardiology",
+ overview:"Cardiology is a data-rich specialty. You'll see EKGs, echocardiograms, stress tests, and catheterization reports. The reasoning revolves around hemodynamics — pressure, flow, and resistance. Understanding basic cardiac physiology will make your shadowing dramatically more useful.",
+ before:[
+  "Review the cardiac cycle: systole/diastole, the pressure-volume loop, and what generates heart sounds (S1, S2, S3, S4)",
+  "Learn to identify normal sinus rhythm on an EKG: P wave, QRS complex, T wave, PR interval, QT interval",
+  "Understand the coronary artery anatomy: LAD, RCA, LCx — and which territories they supply",
+  "Review the basic pathophysiology of heart failure: systolic vs diastolic, left vs right"
+ ],
+ observe:[
+  "How does the cardiologist read an EKG? Watch the systematic approach (rate, rhythm, axis, intervals, ST changes)",
+  "During echo: how do they assess ventricular function, valve integrity, and wall motion?",
+  "How are medication decisions made? (ACE inhibitors, beta-blockers, statins — watch the evidence-based reasoning)",
+  "In the cath lab: how is the decision made to stent vs medical management vs surgical referral (CABG)?",
+  "How are lifestyle modifications discussed? (Exercise, diet, smoking cessation, medication adherence)"
+ ],
+ ask:[
+  "What's the most important thing a premed should understand about cardiac physiology?",
+  "How do you approach a patient with chest pain — what's your mental algorithm?",
+  "How has interventional cardiology changed outcomes for heart disease?",
+  "What's the role of prevention vs intervention in modern cardiology?"
+ ],
+ vocab:[
+  {term:"EF",def:"Ejection Fraction (normal >55%; HF <40%)"},
+  {term:"NSR",def:"Normal Sinus Rhythm"},
+  {term:"PCI",def:"Percutaneous Coronary Intervention (stent)"},
+  {term:"CABG",def:"Coronary Artery Bypass Grafting (open-heart surgery)"},
+  {term:"BNP",def:"Brain Natriuretic Peptide (heart failure biomarker)"},
+  {term:"Cath",def:"Cardiac catheterization (invasive coronary imaging)"}
+ ],
+ tips:"If you can read a basic EKG before your cardiology shadowing day, you'll stand out dramatically. Even just identifying normal sinus rhythm vs atrial fibrillation will impress. Ask the cardiologist to walk you through one EKG interpretation — they almost always will.",
+ warning:"In the cath lab, radiation exposure is real. Stay behind the lead barrier. Wear a lead vest if offered. Ask about radiation safety before entering."
+},
+{id:"derm",icon:"🔍",name:"Dermatology",
+ overview:"Dermatology is visual pattern recognition at its purest. The physician looks at the skin and the diagnosis often comes within seconds. Watch the vocabulary they use — the precise description of a lesion IS the diagnosis in many cases.",
+ before:[
+  "Learn basic lesion morphology: macule, papule, patch, plaque, vesicle, bulla, pustule, nodule",
+  "Understand distribution patterns: dermatomal, photodistributed, flexural, extensor, acral",
+  "Review the ABCDEs of melanoma: Asymmetry, Border, Color, Diameter, Evolution",
+  "Look up common conditions you'll likely see: acne, eczema, psoriasis, skin cancer (BCC, SCC, melanoma)"
+ ],
+ observe:[
+  "How does the dermatologist describe what they see? Listen for the precise morphologic vocabulary",
+  "Watch the full-body skin exam technique — systematic, efficient, and thorough",
+  "How are biopsy decisions made? What triggers the decision to cut vs watch vs treat empirically?",
+  "In Mohs surgery: how does the surgeon track margins and ensure complete excision?",
+  "How are cosmetic concerns (acne, aging) balanced with medical dermatology (cancer screening)?"
+ ],
+ ask:[
+  "How do you train your eye to recognize patterns — does it come naturally or through deliberate practice?",
+  "What's the most commonly missed dermatologic diagnosis?",
+  "How do you approach a rash you've never seen before?",
+  "What role does dermoscopy play in your diagnostic process?"
+ ],
+ vocab:[
+  {term:"Papule",def:"Raised, solid, <1 cm"},
+  {term:"Plaque",def:"Raised, flat-topped, >1 cm"},
+  {term:"Vesicle/Bulla",def:"Fluid-filled blister (small/large)"},
+  {term:"Dermatomal",def:"Following a nerve distribution (think shingles)"},
+  {term:"BCC/SCC",def:"Basal Cell / Squamous Cell Carcinoma"},
+  {term:"Mohs",def:"Microscopic margin-controlled skin cancer surgery"}
+ ],
+ tips:"Dermatology is the most visual specialty in medicine. If you can learn to describe a lesion using proper morphologic terms (not 'it's a red bump'), you'll demonstrate real clinical vocabulary. Try to describe every lesion you see using: morphology + color + distribution + arrangement.",
+ warning:"Some patients present undressed for full-body skin exams. Maintain professionalism and clinical detachment at all times. Ask for permission before entering the room during any exam."
+}
+];
+
+function init(){
+  document.getElementById('spec-nav').innerHTML = SPECS.map((s,i) => 
+    `<button class="spec-btn${i===0?' active':''}" onclick="showSpec('${s.id}',this)">${s.icon} ${s.name}</button>`
+  ).join('');
+  renderGuides();
+  document.getElementById('guide-'+SPECS[0].id).classList.add('active');
+}
+
+function showSpec(id, el){
+  document.querySelectorAll('.spec-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.spec-guide').forEach(g=>g.classList.remove('active'));
+  document.getElementById('guide-'+id).classList.add('active');
+}
+
+function renderGuides(){
+  document.getElementById('guides').innerHTML = SPECS.map(s => `
+    <div class="spec-guide" id="guide-${s.id}">
+      <div class="card">
+        <h2>${s.icon} ${s.name} Shadowing Guide</h2>
+        <p>${s.overview}</p>
+      </div>
+      <div class="card">
+        <h3>📚 Before Your Shadowing Day</h3>
+        <div class="prompt-list">${s.before.map(b => `<div class="prompt" onclick="this.classList.toggle('checked')">${b}</div>`).join('')}</div>
+      </div>
+      <div class="card">
+        <h3>👁️ What to Observe</h3>
+        <div class="prompt-list">${s.observe.map(o => `<div class="prompt" onclick="this.classList.toggle('checked')">${o}</div>`).join('')}</div>
+      </div>
+      <div class="card">
+        <h3>❓ Questions to Ask the Physician</h3>
+        <div class="prompt-list">${s.ask.map(a => `<div class="prompt" onclick="this.classList.toggle('checked')">${a}</div>`).join('')}</div>
+      </div>
+      <div class="card">
+        <h3>📖 Vocabulary to Know</h3>
+        <div class="vocab">${s.vocab.map(v => `<div class="vocab-item"><strong>${v.term}</strong>${v.def}</div>`).join('')}</div>
+      </div>
+      <div class="tip"><strong>💡 Insider Tip:</strong> ${s.tips}</div>
+      <div class="warn"><strong>⚠️ Important:</strong> ${s.warning}</div>
+    </div>
+  `).join('');
+}
+
+function togglePrompt(el){ el.classList.toggle('checked'); }
+init();
+</script>
+</body>
+</html>

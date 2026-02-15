@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RadDx: Cardiac Imaging | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+body{font-family:'DM Sans',sans-serif;background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
+.header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 20px;position:sticky;top:56px;z-index:100}
+.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
+.header-title{font-size:1.1rem;font-weight:600;color:#fff}
+.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}
+.main{max-width:900px;margin:0 auto;padding:24px}
+.framework-intro{background:linear-gradient(135deg,rgba(217,119,6,.08),rgba(245,158,11,.08));border:1px solid rgba(217,119,6,.2);border-radius:16px;padding:24px;margin-bottom:28px}
+.framework-intro h3{font-size:1rem;color:#92400e;margin-bottom:8px}
+.framework-intro p{font-size:.9rem;color:var(--rdx-text);margin:0}
+.framework-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.framework-step{padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;color:#fff}
+.framework-step.ctx{background:#d97706}.framework-step.ord{background:#0d9488}.framework-step.exp{background:#0891b2}.framework-step.int{background:#7c3aed}.framework-step.mgmt{background:#dc2626}
+.scenario{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:16px;margin-bottom:28px;overflow:hidden}
+.scenario-header{padding:20px 24px;border-bottom:1px solid var(--rdx-border);display:flex;align-items:center;gap:12px}
+.scenario-modality{background:var(--rdx-teal-50);color:var(--rdx-teal-dark);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+.scenario-title{font-size:1.2rem;font-weight:700}
+.scenario-body{padding:24px}
+.vignette{background:var(--rdx-bg-hover);border-left:4px solid var(--rdx-teal);padding:16px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;font-size:.95rem}
+.vignette-label{font-size:.75rem;font-weight:700;color:var(--rdx-teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.reasoning-steps{display:flex;flex-direction:column;gap:16px}
+.reasoning-step{border:1px solid var(--rdx-border);border-radius:12px;overflow:hidden}
+.step-trigger{width:100%;display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--rdx-bg-card);border:none;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;color:var(--rdx-text);text-align:left;transition:background .15s}
+.step-trigger:hover{background:var(--rdx-teal-50)}
+.step-num-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
+.step-0 .step-num-badge{background:#d97706;font-size:1rem}.step-1 .step-num-badge{background:#0d9488}.step-2 .step-num-badge{background:#0891b2}.step-3 .step-num-badge{background:#7c3aed}.step-4 .step-num-badge{background:#dc2626}
+.step-arrow{margin-left:auto;font-size:1.2rem;color:var(--rdx-text-muted);transition:transform .2s}
+.step-trigger[aria-expanded="true"] .step-arrow{transform:rotate(180deg)}
+.step-content{padding:0 20px 20px;display:none}.step-content.open{display:block}
+.choices{display:grid;gap:10px;margin:12px 0}
+.choice{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);padding:12px 16px;border-radius:10px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:all .2s;font-size:.9rem}
+.choice:hover{border-color:var(--rdx-teal);transform:translateX(3px)}
+.choice.correct{border-color:var(--rdx-success);background:rgba(34,197,94,.08);pointer-events:none}
+.choice.wrong{border-color:var(--rdx-danger);background:rgba(239,68,68,.08);pointer-events:none}
+.choice-letter{font-weight:700;min-width:20px;color:var(--rdx-teal)}
+.explanation{background:var(--rdx-teal-50);border:1px solid var(--rdx-teal);border-radius:10px;padding:16px;margin-top:12px;font-size:.9rem;display:none}.explanation.show{display:block}
+.explanation h5{color:var(--rdx-teal-dark);margin-bottom:6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+.pearl{background:linear-gradient(135deg,rgba(217,119,6,.1),rgba(245,158,11,.1));border-left:4px solid #d97706;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
+.pearl strong{color:#92400e}
+.danger-box{background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(239,68,68,.08));border-left:4px solid var(--rdx-danger);padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
+.danger-box strong{color:var(--rdx-danger)}
+.radiopaedia-link{display:inline-flex;align-items:center;gap:8px;background:var(--rdx-bg-hover);border:1px solid var(--rdx-border);border-radius:8px;padding:10px 16px;margin-top:16px;text-decoration:none;color:var(--rdx-teal);font-size:.85rem;font-weight:600;transition:all .15s}
+.radiopaedia-link:hover{border-color:var(--rdx-teal);background:var(--rdx-teal-50)}
+.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.cross-link{padding:14px;background:var(--rdx-teal-50);border:1px solid var(--rdx-border);border-radius:10px;text-decoration:none;color:var(--rdx-text);transition:all .15s}
+.cross-link:hover{border-color:var(--rdx-teal)}
+.cross-link-title{font-weight:600;font-size:.9rem}.cross-link-desc{font-size:.8rem;color:var(--rdx-text-muted);margin-top:2px}
+@media(max-width:640px){.main{padding:16px}.scenario-body{padding:16px}.vignette{padding:12px 14px}.framework-steps{gap:4px}.framework-step{font-size:.7rem;padding:4px 10px}}
+</style>
+</head>
+<body>
+
+<div class="header"><div class="header-row"><div class="header-title">❤️ RadDx: Cardiac Imaging<span class="badge">CARDIOLOGY</span></div></div></div>
+<div class="main">
+
+<!-- FRAMEWORK INTRODUCTION -->
+<div class="framework-intro">
+<h3>5-Step Imaging Reasoning Framework</h3>
+<p>Each scenario uses a structured approach that begins with epidemiological context before imaging decisions. This reflects real clinical practice — knowing <em>who</em> the patient is changes <em>what</em> you look for.</p>
+<div class="framework-steps">
+<span class="framework-step ctx">🌍 Context</span>
+<span class="framework-step ord">1. Order</span>
+<span class="framework-step exp">2. Expect</span>
+<span class="framework-step int">3. Interpret</span>
+<span class="framework-step mgmt">4. Integrate</span>
+</div>
+</div>
+
+
+<!-- SCENARIO 1: ACUTE CORONARY SYNDROME -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">ECG + Coronary Angiography</span><span class="scenario-title">Acute Coronary Syndrome</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>58-year-old male</strong> presents to the ED with crushing substernal chest pain radiating to his left arm for 45 minutes. Diaphoretic, pale, nauseated. PMH: hypertension, hyperlipidemia, type 2 diabetes, 30 pack-year smoking history. Vitals: HR 98, BP 154/92, RR 22, SpO₂ 96%.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>His age alone — ACS is rare under age 65</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>His smoking history is the only relevant risk factor</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>The clustering of diabetes, hypertension, hyperlipidemia, and smoking creates multiplicative risk — each factor compounds the others</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>His sex is irrelevant to pre-test probability for ACS</span></div></div>
+<div class="explanation"><h5>Epidemiological Context Matters</h5><p>Framingham risk factors are multiplicative, not additive. A 58-year-old male with diabetes, HTN, HLD, and heavy smoking has dramatically higher pre-test probability than any single factor suggests. Sex matters: men have higher ACS rates at this age, though women's risk is frequently underestimated (atypical presentations in women are a major diagnostic pitfall). <strong>Cocaine use</strong> should also be screened — it can cause ACS in young patients with zero traditional risk factors. Always ask about stimulant use, especially in patients under 45.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  In South Florida, the large Caribbean and Latin American populations have high rates of metabolic syndrome and often delayed presentation due to health access barriers. Consider that patients presenting with 'first MI' may have had years of uncontrolled risk factors without primary care.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>12-lead ECG immediately (within 10 minutes of arrival)</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Stat troponin first, then ECG based on results</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>CXR to rule out aortic dissection first</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Echocardiogram at bedside</span></div></div>
+<div class="explanation"><h5>ECG Within 10 Minutes</h5><p>ACC/AHA guidelines mandate ECG within 10 minutes of first medical contact. Troponin takes 1-3 hours to rise — it cannot rule out STEMI. ECG identifies ST-elevation that triggers cath lab activation. CXR is important but secondary. Echo is useful for wall motion abnormalities but shouldn't delay ECG.</p><div class="pearl"><strong>🌍 Modality Reasoning:</strong>  ECG is the most time-sensitive test in medicine. Door-to-ECG time predicts door-to-balloon time. Every minute of delay = more myocardial death.</div></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Normal sinus rhythm with nonspecific T-wave changes</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>ST elevation in leads II, III, aVF with reciprocal ST depression in I, aVL</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Diffuse ST elevation with PR depression</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>New left bundle branch block</span></div></div>
+<div class="explanation"><h5>Territory-Based ECG Patterns</h5><p>The clinical picture (crushing substernal, radiation, diaphoresis, risk factors) with inferior leads (II, III, aVF) = RCA territory. Reciprocal changes in lateral leads (I, aVL) increase specificity for true STEMI. Option C describes pericarditis (diffuse + PR depression). New LBBB can indicate STEMI but is less common.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Activate cath lab for PCI within 90 minutes</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Give thrombolytics immediately since this is clearly STEMI</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Activate cath lab AND check right-sided leads (V4R) — inferior STEMI may involve the right ventricle</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Repeat ECG in 15 minutes to confirm before activating cath</span></div></div>
+<div class="explanation"><h5>The Right Ventricle Question</h5><p>Inferior STEMI (RCA territory) frequently involves the right ventricle. V4R showing ST elevation confirms RV involvement, which has critical management implications: <strong>avoid nitrates and aggressive diuresis</strong> (RV is preload-dependent). IV fluids may be needed instead. This is a common board question and a real clinical trap.</p><div class="pearl"><strong>🌍 Clinical Pearl:</strong>  RV infarct complicates ~30-50% of inferior STEMIs. The triad of hypotension + clear lungs + elevated JVP in inferior STEMI = RV involvement until proven otherwise.</div></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>PCI + dual antiplatelet therapy + aggressive IV furosemide</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>PCI + dual antiplatelet therapy + cautious IV fluids (RV-dependent) + hold nitrates</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Thrombolytics + heparin + morphine</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Medical management with heparin and serial troponins</span></div></div>
+<div class="explanation"><h5>RV-Aware Management</h5><p>With confirmed RV involvement, management shifts: fluids instead of diuretics, avoid nitrates (drops preload), PCI to open the culprit vessel ASAP. This is where imaging interpretation directly changes the treatment plan — the same STEMI requires completely different supportive care based on the V4R finding.</p><a href="https://radiopaedia.org/articles/acute-coronary-syndrome" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 2: ACUTE DECOMPENSATED HEART FAILURE -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CXR + Echocardiogram</span><span class="scenario-title">Acute Decompensated Heart Failure</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>72-year-old woman</strong> with known HFrEF (EF 25%) presents with 3 days of worsening dyspnea, orthopnea (sleeps on 4 pillows), and 15-lb weight gain over 2 weeks. She ran out of her furosemide 10 days ago. Vitals: HR 108, BP 162/94, RR 28, SpO₂ 88% on room air. JVP elevated to ear, bilateral crackles to mid-lung fields, 3+ pitting edema to knees.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Family history of cardiomyopathy</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Dietary sodium intake over the past month</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Whether she has been using NSAIDs for any reason</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>All of the above — medication non-adherence, dietary indiscretion, NSAID use, and socioeconomic barriers to medication access are the top precipitants of HF decompensation</span></div></div>
+<div class="explanation"><h5>Social Determinants Drive HF Exacerbations</h5><p>The most common cause of HF decompensation is <strong>medication non-adherence</strong>, often driven by cost, access, or health literacy barriers. This patient ran out of furosemide — was it cost? Transportation? Understanding of the medication's importance? NSAIDs (available OTC) cause fluid retention and are a hidden trigger. Dietary sodium excess is another major contributor. <strong>Understanding the 'why' behind the exacerbation is as important as treating the current episode.</strong></p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  HF readmission rates are highest in low-income ZIP codes with limited pharmacy access. Identifying and addressing the social determinant (medication assistance programs, 90-day prescriptions, community health worker follow-up) reduces 30-day readmission more than any single medication change.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Portable AP chest X-ray + bedside echocardiogram</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>CT chest with contrast</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Right heart catheterization</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Cardiac MRI for EF assessment</span></div></div>
+<div class="explanation"><h5>CXR + Echo: The HF Workup</h5><p>Portable CXR assesses pulmonary edema severity, cardiomegaly, pleural effusions, and rules out pneumonia as a trigger. Bedside echo confirms EF, wall motion, valvular function, and pericardial effusion. This guides whether the patient needs IV diuretics alone vs. inotropes vs. mechanical support. CT adds radiation and contrast without changing management. RHC is for refractory cases.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Clear lung fields with normal cardiac silhouette</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Unilateral opacity suggesting pneumonia</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Cardiomegaly, cephalization, Kerley B lines, bilateral pleural effusions</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Widened mediastinum suggesting dissection</span></div></div>
+<div class="explanation"><h5>The CXR Tells the Hemodynamic Story</h5><p>Classic CHF CXR progresses: <strong>(1) Cephalization</strong> (upper lobe vessel distension, PCWP 12-18) → <strong>(2) Interstitial edema/Kerley B lines</strong> (PCWP 18-25) → <strong>(3) Alveolar edema (bat-wing pattern)</strong> (PCWP >25) → <strong>(4) Pleural effusions</strong> (bilateral, R>L typical). Cardiomegaly (CTR >0.5) present in chronic HF.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Start IV nitroglycerin for afterload reduction</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Assess the CXR in context of exam: bilateral effusions + edema = volume overload → IV diuresis is the priority; echo will assess whether inotropes are needed</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Order CT pulmonary angiography to rule out PE as the cause of dyspnea</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Perform emergent thoracentesis for the pleural effusions</span></div></div>
+<div class="explanation"><h5>CXR Guides Diuretic Strategy</h5><p>The CXR confirms what the exam shows: severe volume overload. IV furosemide (bolus or drip) is first-line. Echo determines whether the heart needs inotropic support (severely depressed EF with cardiogenic shock signs) or if diuresis alone will suffice. Bilateral effusions in HF = transudative; thoracentesis only if asymmetric, febrile, or refractory to diuresis.</p><a href="https://radiopaedia.org/articles/congestive-cardiac-failure" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Discharge once oxygen improved with plan for outpatient follow-up</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>IV diuresis alone, discharge in 24 hours</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Add digoxin and metolazone, discharge in 48 hours</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>IV diuresis to euvolemia, restart GDMT, address medication access barriers (cost, transportation), ensure follow-up within 7 days, and consider cardiology referral for device therapy evaluation given EF 25%</span></div></div>
+<div class="explanation"><h5>Integration: Imaging + Social Context = Plan</h5><p>The imaging confirms severe decompensation. But the root cause was medication non-adherence due to running out. The discharge plan must address the precipitant: medication assistance programs, 90-day prescriptions, pharmacy delivery, health literacy about daily weights. EF 25% qualifies for ICD evaluation (primary prevention if EF ≤35% despite 3 months optimal medical therapy). The imaging findings trigger both acute management and long-term device consideration.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 3: CARDIAC TAMPONADE -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">Echocardiogram</span><span class="scenario-title">Cardiac Tamponade</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>45-year-old woman</strong> with recently diagnosed metastatic breast cancer presents with progressive dyspnea, light-headedness when standing, and muffled heart sounds. Vitals: HR 118, BP 92/70 (narrowed pulse pressure), RR 24, SpO₂ 93%. Pulsus paradoxus measured at 18 mmHg. Neck veins distended.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Her sex — women are more likely to have takotsubo cardiomyopathy</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Metastatic cancer is the most common cause of malignant pericardial effusion, and breast, lung, and lymphoma are the top three — this patient has a high pre-test probability for malignant tamponade</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>She likely has PE from cancer-related hypercoagulability</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Her age suggests viral pericarditis as most likely</span></div></div>
+<div class="explanation"><h5>Cancer Changes the Pericardial Differential</h5><p>In a patient with known malignancy, pericardial effusion has a different epidemiological profile than in the general population. <strong>Malignant effusions</strong> (breast, lung, lymphoma, melanoma) account for most symptomatic pericardial effusions in oncology patients. They tend to accumulate gradually, becoming hemodynamically significant at larger volumes. Radiation pericarditis (if prior chest radiation), drug-induced pericarditis (immune checkpoint inhibitors), and infectious causes (immunosuppression) must also be considered. The cancer history completely reframes the diagnostic approach.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Immune checkpoint inhibitors (pembrolizumab, nivolumab) cause myocarditis and pericarditis in 1-2% of patients. Always ask about recent immunotherapy. Also consider that cancer patients on anticoagulation for VTE prophylaxis can develop hemorrhagic pericardial effusions.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Bedside echocardiogram (point-of-care)</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>CT chest with contrast</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Chest X-ray followed by formal transthoracic echo</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Cardiac MRI</span></div></div>
+<div class="explanation"><h5>Bedside Echo Is Emergent</h5><p>In suspected tamponade with hemodynamic compromise, bedside echo is diagnostic within minutes. You're looking for: (1) pericardial effusion, (2) RV diastolic collapse, (3) RA systolic collapse, (4) IVC plethora without respiratory variation, (5) respiratory variation in mitral/tricuspid inflow. CXR can show 'water bottle' heart but doesn't assess hemodynamic significance. CT delays care in an unstable patient.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Small pericardial effusion with normal RV function</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Dilated RV with septal bowing (PE pattern)</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Large circumferential effusion with RV diastolic collapse and IVC plethora</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Severe aortic stenosis with LVH</span></div></div>
+<div class="explanation"><h5>Tamponade Echo Findings</h5><p>Malignant effusions are typically large and circumferential. Hemodynamic significance is determined by <strong>chamber collapse</strong> (RV diastolic collapse is most specific, RA systolic collapse is most sensitive) and <strong>IVC plethora</strong> (dilated IVC without respiratory variation = elevated RA pressure). The 'swinging heart' sign (electrical alternans on ECG) correlates with large effusions.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Emergent pericardiocentesis — the echo confirms tamponade physiology with hemodynamic compromise</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Start IV fluids and observe — this could resolve spontaneously</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Consult cardiothoracic surgery for pericardial window — but this can wait until morning</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Order CT chest to characterize the effusion before draining</span></div></div>
+<div class="explanation"><h5>Echo Drives Immediate Intervention</h5><p>Echo-guided pericardiocentesis is both diagnostic and therapeutic. In malignant tamponade, fluid analysis (cytology, tumor markers) helps confirm the cause. A pericardial drain is typically left in place until output drops below 25-50 mL/day. <strong>Pericardial window</strong> is definitive for recurrent malignant effusions but is a surgical procedure — not first-line in acute tamponade.</p><a href="https://radiopaedia.org/articles/cardiac-tamponade" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Pericardiocentesis and discharge with oncology follow-up</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Pericardiocentesis and radiation therapy to the pericardium</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Pericardiocentesis with drain placement, pericardial fluid cytology, oncology consultation for systemic therapy assessment, and discussion of goals of care given metastatic disease</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>IV fluids and vasopressors as a bridge to surgery</span></div></div>
+<div class="explanation"><h5>Imaging Triggers the Full Clinical Picture</h5><p>The echo finding of malignant tamponade triggers a cascade: acute intervention (pericardiocentesis), diagnostic workup (cytology to confirm malignant etiology), oncologic reassessment (is systemic therapy controlling disease?), and palliative care integration (this represents disease progression). For recurrent effusions, options include pericardial window, intrapericardial sclerotherapy, or indwelling catheter. The imaging doesn't just diagnose — it reframes the goals of care conversation.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 4: AORTIC DISSECTION -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CTA Chest</span><span class="scenario-title">Aortic Dissection</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>62-year-old male</strong> with poorly controlled hypertension (takes medications 'sometimes') presents with sudden-onset 'tearing' chest pain radiating to his back. BP 210/110 in right arm, 170/90 in left arm. A <strong>new diastolic murmur</strong> is heard at the right sternal border. He appears acutely uncomfortable.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Only chronic hypertension matters — it accounts for 70% of dissections</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Age over 60 increases the risk, but sex is not relevant</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Cocaine use should be screened — it causes acute hypertensive surges that trigger dissection</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Chronic uncontrolled hypertension (the most common cause) PLUS medication non-adherence (likely cause of current BP crisis) PLUS screen for cocaine/stimulant use, connective tissue disorders (Marfan, Ehlers-Danlos if younger), and bicuspid aortic valve</span></div></div>
+<div class="explanation"><h5>Dissection Risk Profiling</h5><p>Aortic dissection has a distinct epidemiological profile. <strong>Hypertension</strong> is present in 70-80% of cases and is the dominant modifiable risk factor. In patients under 40, consider <strong>connective tissue disease</strong> (Marfan, Loeys-Dietz, vascular EDS), <strong>bicuspid aortic valve</strong>, and <strong>cocaine/methamphetamine use</strong>. <strong>Pregnancy</strong> (third trimester and postpartum) is a risk factor due to aortic wall changes. Iatrogenic dissection occurs after cardiac surgery or catheterization. The BP differential between arms (>20 mmHg systolic) is itself an epidemiological red flag.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Men are affected 21 over women, but women with dissection have higher mortality — partly because they present atypically and are diagnosed later. In patients with cocaine-related chest pain, dissection must be considered alongside ACS. Always ask about stimulant use.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>CXR first to look for widened mediastinum</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>CT angiography of the chest, abdomen, and pelvis — the definitive test for dissection</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Transthoracic echocardiogram to assess the aortic root</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>MRI of the aorta</span></div></div>
+<div class="explanation"><h5>CTA Is the Gold Standard</h5><p>CTA has >95% sensitivity and specificity for dissection and can be obtained rapidly. It shows the intimal flap, true and false lumens, extent of dissection, branch vessel involvement, and complications (pericardial effusion, malperfusion). CXR is insensitive (~60% show widened mediastinum). TEE is an alternative in unstable patients who can't go to CT. MRI is most accurate but impractical in acute settings.</p><div class="pearl"><strong>🌍 Scan must include abdomen/pelvis — dissection can extend to iliac arteries, and branch vessel malperfusion (renal, mesenteric, limb) must be identified.:</strong> </div></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Intimal flap in the ascending aorta with true and false lumens — Stanford Type A given the new aortic regurgitation murmur</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Intimal flap limited to the descending aorta distal to the left subclavian</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Ascending aortic aneurysm without dissection flap</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Normal aorta with pericardial effusion</span></div></div>
+<div class="explanation"><h5>Stanford Classification Drives Surgery</h5><p>The new diastolic murmur (aortic regurgitation) + BP differential = ascending aortic involvement (Stanford Type A). The flap disrupts the aortic valve apparatus. <strong>Type A (involves ascending) = surgical emergency</strong>. Type B (descending only) = medical management unless complicated (malperfusion, rupture, refractory pain).</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Emergent cardiothoracic surgery consultation — Type A dissection with aortic regurgitation has >50% 48-hour mortality without surgery</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Start IV esmolol and nitroprusside, admit to ICU for medical management</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Endovascular stent-graft placement</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Repeat CTA in 6 hours to assess progression</span></div></div>
+<div class="explanation"><h5>Type A = Emergent Surgery</h5><p>Type A dissection is a surgical emergency with ~1-2% mortality per hour if untreated. While awaiting surgery: IV beta-blocker first (esmolol or labetalol to HR <60), then add nitroprusside if BP remains elevated. Target SBP 100-120. Avoid isolated nitroprusside (increases aortic wall shear stress without HR control). Pain control reduces sympathetic drive.</p><a href="https://radiopaedia.org/articles/aortic-dissection" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Surgery alone is definitive — no long-term follow-up needed</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Emergent surgery + lifelong BP control + serial aortic imaging surveillance + screen first-degree relatives if connective tissue disease suspected + address medication non-adherence that contributed to this event</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Endovascular repair + anticoagulation</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Medical management only — surgery is too risky at age 62</span></div></div>
+<div class="explanation"><h5>Imaging → Surgery → Lifelong Surveillance</h5><p>Post-repair, patients need lifelong aortic imaging surveillance (CTA or MRA annually) because the residual false lumen can expand. BP control is critical (target <130/80). If the patient is under 50, genetic testing for connective tissue disorders should be pursued. The underlying cause — medication non-adherence with uncontrolled hypertension — must be addressed to prevent recurrence.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 5: INFECTIVE ENDOCARDITIS -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">Echocardiogram (TTE/TEE)</span><span class="scenario-title">Infective Endocarditis</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>32-year-old male</strong> with a history of IV drug use presents with 2 weeks of fever, chills, night sweats, and new-onset pleuritic chest pain. Track marks on bilateral arms. Vitals: Temp 39.4°C, HR 112, BP 110/60. A <strong>new holosystolic murmur</strong> is best heard at the left lower sternal border, louder with inspiration. Splinter hemorrhages noted on exam.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>IV drug use only affects the left-sided valves</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>The patient's age makes endocarditis unlikely — it primarily affects the elderly</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>IVDU-associated endocarditis typically involves the TRICUSPID valve (right-sided), most commonly from Staphylococcus aureus, and presents with septic pulmonary emboli rather than systemic emboli — this patient's pleuritic chest pain likely reflects septic lung infarcts</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Splinter hemorrhages are nonspecific and do not help narrow the differential</span></div></div>
+<div class="explanation"><h5>IVDU Endocarditis Epidemiology</h5><p>The epidemiology of endocarditis varies dramatically by population. <strong>IVDU-associated</strong>: 50-70% tricuspid valve, S. aureus (including MRSA) in >60% of cases, presents with septic pulmonary emboli (pulmonary infiltrates, chest pain, hemoptysis). <strong>Non-IVDU native valve</strong>: mitral > aortic, viridans streptococci traditionally most common (though S. aureus is rising). <strong>Prosthetic valve</strong>: early (<60 days) = S. aureus, S. epidermidis; late = similar to native valve. Geography matters too: Coxiella burnetii (Q fever) is common in rural settings with livestock contact. Bartonella in homeless populations with louse exposure.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  The opioid epidemic has driven a surge in right-sided endocarditis in young adults. In communities with high IV drug use prevalence, any febrile IVDU with new murmur = endocarditis until proven otherwise. MRSA rates in IVDU endocarditis exceed 50% in many US regions — empiric vancomycin is essential.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>CT chest to evaluate for septic emboli first</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Cardiac MRI for vegetation detection</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Blood cultures × 3 from separate sites PLUS transthoracic echocardiogram (TTE)</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Go directly to TEE — TTE misses most vegetations</span></div></div>
+<div class="explanation"><h5>Modified Duke Criteria Imaging</h5><p>Blood cultures (3 sets, 30 min apart, before antibiotics) + TTE is the initial approach. TTE detects vegetations >2mm with ~70% sensitivity for native valves. If TTE is negative but clinical suspicion remains high, TEE increases sensitivity to >90%. For IVDU with suspected right-sided disease, TTE is actually quite good for tricuspid valve visualization. TEE is essential for prosthetic valves and left-sided disease.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Mitral valve vegetation with severe regurgitation</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Tricuspid valve vegetation with moderate-to-severe tricuspid regurgitation — consistent with IVDU-associated right-sided endocarditis</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Aortic root abscess</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Normal valves with pericardial effusion</span></div></div>
+<div class="explanation"><h5>Right-Sided Endocarditis Pattern</h5><p>In IVDU endocarditis, the injected organisms hit the tricuspid valve first (venous return → right heart). The murmur increasing with inspiration (Carvallo sign) localizes to the tricuspid valve. Septic emboli from tricuspid vegetations seed the lungs → septic pulmonary infarcts → the patient's pleuritic chest pain.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Vegetation size doesn't matter — start antibiotics regardless</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Any vegetation means immediate surgery</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Only vegetation mobility predicts embolic risk</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Vegetation size (>10mm = higher embolic risk), mobility, and valve function all guide the surgical vs. medical decision</span></div></div>
+<div class="explanation"><h5>Echo Findings Drive Surgery Decisions</h5><p>Echo provides three critical pieces: (1) <strong>Vegetation size</strong> — >10mm = increased embolic risk, >20mm = strong surgical indication; (2) <strong>Valve function</strong> — severe regurgitation with heart failure = surgery; (3) <strong>Complications</strong> — abscess, fistula, pseudoaneurysm = surgery. For isolated right-sided endocarditis, surgery is generally reserved for failure of medical therapy, large vegetations (>20mm), or recurrent septic PE despite antibiotics.</p><a href="https://radiopaedia.org/articles/infective-endocarditis" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>IV antibiotics for 2 weeks and discharge</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Immediate surgery given the vegetation</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>IV vancomycin + gentamicin empirically (high MRSA probability in IVDU), narrow based on culture results, 4-6 weeks of IV therapy, CXR for pulmonary emboli, addiction medicine consultation, and harm reduction counseling</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Oral antibiotics for 6 weeks as outpatient</span></div></div>
+<div class="explanation"><h5>Comprehensive Treatment Plan</h5><p>Empiric vancomycin covers MRSA (most likely organism in IVDU endocarditis). The CXR will likely show septic emboli (multiple peripheral nodules ± cavitation). Treatment duration: right-sided = 4 weeks minimum, left-sided = 6 weeks. <strong>Addiction medicine consultation is essential</strong> — without addressing the underlying substance use disorder, reinfection rates are very high. Harm reduction strategies (naloxone, needle exchange referral, buprenorphine) are part of comprehensive care.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 6: VALVULAR HEART DISEASE — AORTIC STENOSIS -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">Echocardiogram</span><span class="scenario-title">Valvular Heart Disease — Aortic Stenosis</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>78-year-old male</strong> presents after a syncopal episode while climbing stairs. Over the past 6 months, he has noticed progressive exertional dyspnea and one prior episode of exertional chest pressure. A <strong>crescendo-decrescendo systolic murmur</strong> radiating to the carotids is heard with diminished S2 and pulsus parvus et tardus. He is a retired construction worker.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>At age 78, rheumatic heart disease is the most common cause</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Degenerative calcific aortic stenosis is the most common cause over age 65, driven by the same atherosclerotic risk factors as CAD (age, smoking, hypertension, hyperlipidemia) — his construction work with possible silica/dust exposure may have accelerated chronic inflammation</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Bicuspid aortic valve is the most likely cause at any age</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>This is likely radiation-induced valvular disease</span></div></div>
+<div class="explanation"><h5>Age-Dependent Etiology of AS</h5><p>Aortic stenosis etiology shifts with age: <strong><40:</strong> congenital bicuspid valve (1-2% of population); <strong>40-65:</strong> bicuspid valve with superimposed calcification; <strong>>65:</strong> degenerative calcific disease of a trileaflet valve. Rheumatic AS (commissural fusion) is now uncommon in developed countries but remains a major cause globally. <strong>Occupational exposures</strong> that promote chronic systemic inflammation (silica, asbestos, diesel exhaust) may accelerate atherosclerotic-type valve calcification — an emerging area of research.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Prior chest radiation (e.g., for Hodgkin lymphoma) causes radiation-associated valvular disease 10-20 years later, often affecting the aortic valve. Always ask about prior cancer treatment — 'survivor' patients are now presenting with late cardiac complications.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>CT calcium scoring to quantify valve calcification</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Transthoracic echocardiogram — the definitive test for valvular assessment</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Cardiac catheterization</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Chest X-ray first</span></div></div>
+<div class="explanation"><h5>Echo Is the Valvular Gold Standard</h5><p>TTE provides valve area (by continuity equation), peak/mean gradient, jet velocity, LV function, wall thickness, and associated findings. Severe AS: valve area <1.0 cm², mean gradient >40 mmHg, peak velocity >4 m/s. Catheterization is reserved for discrepant echo/clinical findings or pre-surgical coronary assessment.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Heavily calcified aortic valve with restricted leaflet motion, valve area <1.0 cm², mean gradient >40 mmHg, concentric LVH</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Mitral valve prolapse with moderate regurgitation</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Dilated cardiomyopathy with global hypokinesis</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Normal valve with dynamic LVOT obstruction (HCM)</span></div></div>
+<div class="explanation"><h5>Severe Calcific AS Pattern</h5><p>Syncope + exertional dyspnea + exertional angina = the classic 'SAD' triad of severe AS. The murmur character (late peaking, diminished A2, parvus et tardus pulse) correlates with severity. Echo will confirm: calcified trileaflet valve with restricted opening, high gradient, and compensatory concentric LVH.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Medical management — aortic stenosis responds well to vasodilators</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Balloon valvuloplasty as definitive treatment</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Refer for aortic valve replacement (SAVR or TAVR) — severe symptomatic AS with syncope has >50% 1-year mortality without intervention</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Serial echocardiograms every 3 months to monitor progression</span></div></div>
+<div class="explanation"><h5>Severe Symptomatic AS = Valve Replacement</h5><p>Severe symptomatic AS is a <strong>class I indication for valve replacement</strong>. Prognosis without intervention: average survival 5 years after angina onset, 3 years after syncope, 2 years after heart failure. TAVR vs SAVR decision depends on surgical risk score (STS), anatomy, age, and patient preference. At 78, TAVR is often preferred (lower procedural risk).</p><a href="https://radiopaedia.org/articles/aortic-stenosis" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>SAVR regardless of risk — it's the traditional gold standard</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Heart team discussion (cardiology, cardiac surgery) for SAVR vs TAVR based on STS score, pre-procedural coronary angiography, and assessment of comorbidities including occupational lung disease from construction exposure</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Medical management with diuretics and ACE inhibitors</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Palliative care only — he is too old for intervention</span></div></div>
+<div class="explanation"><h5>Heart Team + Occupational History</h5><p>The 'heart team' approach is standard for severe AS. Coronary angiography is performed pre-operatively (PCI concurrent or staged with SAVR, or done before TAVR). His construction work history means screening for <strong>occupational lung disease</strong> is important — restrictive lung disease from silica/asbestos exposure affects surgical risk and anesthesia planning. TAVR may be preferred if pulmonary function testing shows significant impairment.</p></div>
+</div></div>
+
+</div></div></div>
+
+<div style="margin-top:32px"><h3 style="font-size:1rem;color:var(--rdx-teal);margin-bottom:12px">Related RadDx Modules</h3>
+<div class="cross-links"><a href="raddx-chest.html" class="cross-link"><div class="cross-link-title">🫁 Chest Imaging</div><div class="cross-link-desc">Pneumonia, PE, pneumothorax</div></a><a href="raddx-abdominal.html" class="cross-link"><div class="cross-link-title">🩻 Abdominal Imaging</div><div class="cross-link-desc">CT abdomen, US, HIDA</div></a><a href="raddx-neuro.html" class="cross-link"><div class="cross-link-title">🧠 Neuroimaging</div><div class="cross-link-desc">CT/MRI brain, stroke</div></a><a href="raddx-hub.html" class="cross-link"><div class="cross-link-title">← RadDx Hub</div><div class="cross-link-desc">All body systems</div></a></div></div>
+<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--rdx-border)"><h4 style="font-size:.85rem;color:var(--rdx-text-muted);margin-bottom:8px">References</h4>
+<ol style="font-size:.8rem;color:var(--rdx-text-muted);padding-left:18px;line-height:1.8"><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK532281/" target="_blank">ACS / STEMI Management — StatPearls</a></li><li><a href="https://doi.org/10.1161/CIR.0000000000000336" target="_blank">AHA/ACC STEMI Guidelines 2013 (updated 2015)</a></li><li><a href="https://doi.org/10.1161/CIR.0000000000001063" target="_blank">AHA/ACC/HFSA Heart Failure Guideline 2022</a></li><li><a href="https://doi.org/10.1161/CIR.0000000000000923" target="_blank">AHA/ACC Valvular Heart Disease Guideline 2020</a></li><li><a href="https://doi.org/10.1093/eurheartj/ehad193" target="_blank">ESC Infective Endocarditis Guidelines 2023</a></li><li><a href="https://radiopaedia.org" target="_blank">Radiopaedia.org — Open-access radiology reference</a></li></ol></div>
+</div>
+
+<script>
+function toggleStep(btn){const e=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',!e);btn.nextElementSibling.classList.toggle('open')}
+function selectChoice(el,letter){const c=el.closest('.choices'),correct=c.dataset.correct;c.querySelectorAll('.choice').forEach(ch=>{ch.style.pointerEvents='none';const l=ch.querySelector('.choice-letter').textContent.trim().replace('.','');if(l===correct)ch.classList.add('correct');else if(ch===el&&l!==correct)ch.classList.add('wrong')});const ex=c.nextElementSibling;if(ex&&ex.classList.contains('explanation'))ex.classList.add('show')}
+</script>
+<script src="../js/rdx-nav.js" defer></script>
+</body></html>
