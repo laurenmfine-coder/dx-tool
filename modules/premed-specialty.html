@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Specialty Explorer | ReasonDx Premed</title>
@@ -58,6 +62,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 </style>
 </head>
 <body>
+<script src="../rdx-nav.js"></script>
 <div class="header"><a href="premed-hub.html">← Hub</a><h1>🔬 Specialty Explorer</h1></div>
 <div class="container">
   <div class="intro"><h2>Discover Your Fit</h2><p>Explore 25 specialties through the lens of clinical reasoning style, training demands, and daily reality.</p></div>
@@ -227,6 +232,9 @@ function calcQuiz(){
 }
 
 renderGrid();
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
 </body>
 </html>

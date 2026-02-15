@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -410,5 +414,8 @@ Present bilaterally in 80%!
 <script src="../dx-progress.js"></script>
 <script src="../dx-cross-links.js"></script>
 <script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

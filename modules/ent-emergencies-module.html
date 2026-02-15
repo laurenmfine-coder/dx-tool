@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -15,7 +19,7 @@
         <div class="section"><h2>🔬 Pathophysiology</h2><h3 style="margin:16px 0 8px">Airway Threats</h3><p>ENT emergencies often involve airway compromise.</p><div class="pathway-box"><div class="pathway-steps"><span class="pathway-step">Anatomic or infectious cause</span><span class="pathway-arrow">→</span><span class="pathway-step">Swelling or obstruction</span><span class="pathway-arrow">→</span><span class="pathway-step">Progressive airway compromise</span><span class="pathway-arrow">→</span><span class="pathway-step">Assessment of severity</span><span class="pathway-arrow">→</span><span class="pathway-step">Airway management + treatment</span></div></div></div>
         <div class="section"><h2>🏥 Clinical Correlations</h2><div class="clinical-box"><h4>Ludwig angina</h4><p><strong>Mechanism:</strong> Floor of mouth infection → airway obstruction</p></div><div class="clinical-box"><h4>Peritonsillar abscess</h4><p><strong>Mechanism:</strong> "Hot potato" voice, uvular deviation, trismus</p></div></div>
         <div class="section"><h2>🔑 Key Points</h2><div class="key-point"><strong>✓</strong> Epiglottitis: stridor, drooling, tripod position</div><div class="key-point"><strong>✓</strong> Ludwig angina: bilateral submandibular swelling, airway emergency</div><div class="key-point"><strong>✓</strong> Peritonsillar abscess: needle aspiration or I&D</div><div class="key-point"><strong>✓</strong> Retropharyngeal abscess: CT scan, surgical drainage</div><div class="key-point"><strong>✓</strong> Epistaxis: direct pressure, packing, ENT if severe</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link next">Practice →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link next">Practice →</a></div>
     </div>
 
     <!-- DxSuite AI Tutor Integration -->
@@ -92,5 +96,8 @@
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -48,7 +52,7 @@
         <div class="section"><h2>📝 Knowledge Check</h2>
 <div class="mcq-container" id="mcq0"><div class="mcq-question">1. Enlarged ovary with absent Doppler flow?</div><div class="mcq-options"><div class="mcq-option" onclick="check(0,0,false)">A. Ovarian cyst</div><div class="mcq-option" onclick="check(0,1,true)">B. Ovarian torsion</div><div class="mcq-option" onclick="check(0,2,false)">C. PID</div><div class="mcq-option" onclick="check(0,3,false)">D. Ectopic</div></div><div class="mcq-feedback" id="fb0"></div></div></div>
         <div class="section"><h2>🔑 Key Takeaways</h2><div class="key-point"><strong>✓</strong> Risk: cyst/mass, pregnancy</div><div class="key-point"><strong>✓</strong> Right side more common</div><div class="key-point"><strong>✓</strong> Absent flow concerning but presence doesnt rule out</div><div class="key-point"><strong>✓</strong> Surgical emergency - detorsion</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link adventure">Practice →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link adventure">Practice →</a></div>
     </div>
     <script>
 const fb=[{"c":"Enlarged + absent flow = torsion. Surgical emergency.","i":"Absent flow in enlarged ovary is torsion until proven otherwise."}];
@@ -129,5 +133,8 @@ function check(q,o,correct){const c=document.getElementById('mcq'+q);c.querySele
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

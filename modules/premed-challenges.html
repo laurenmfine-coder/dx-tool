@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weekly Diagnostic Challenges | ReasonDx Premed</title>
@@ -51,6 +55,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 </style>
 </head>
 <body>
+<script src="../rdx-nav.js"></script>
 <div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>🧩 Weekly Diagnostic Challenges</h1></div>
 <div class="container">
   <div class="stats">
@@ -76,6 +81,9 @@ function checkAnswer(cIdx){const ch=document.getElementById('ch-'+cIdx);const se
 function updateStats(){const done=results.length;const corr=results.filter(r=>r.correct).length;const acc=done?Math.round(corr/done*100)+'%':'—';document.getElementById('s-done').textContent=done;document.getElementById('s-acc').textContent=acc;const dates=[...new Set(results.map(r=>r.date))].sort().reverse();let streak=0;if(dates.length){let check=new Date();for(const d of dates){if(Math.floor((check-new Date(d))/86400000)<=1){streak++;check=new Date(d);}else break;}}document.getElementById('s-streak').textContent=streak;}
 function render(){const challenges=C[currentDiff];const badgeCls={beginner:'badge-beginner',intermediate:'badge-intermediate',advanced:'badge-advanced'};document.getElementById('challenges').innerHTML=challenges.map((c,i)=>`<div class="challenge" id="ch-${i}"><div class="challenge-header"><span class="challenge-title">${c.title}</span><span class="challenge-badge ${badgeCls[c.badge]}">${c.badge}</span></div><div class="vignette">${c.vignette}</div><div class="choices">${Object.entries(c.options).map(([l,t])=>`<div class="choice" data-letter="${l}" onclick="selectChoice(${i},'${l}',this)"><span class="choice-letter">${l}.</span><span>${t}</span></div>`).join('')}</div><button class="btn btn-check show" onclick="checkAnswer(${i})">Check Answer</button><div class="explanation"><h4>${c.correct===Object.keys(c.options).find(k=>k)?'✅':'✅'} Explanation</h4><p>${c.explanation}</p><div class="clinical-pearl">💡 ${c.pearl}</div></div></div>`).join('');updateStats();}
 render();
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
 </body>
 </html>

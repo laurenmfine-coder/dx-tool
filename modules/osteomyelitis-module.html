@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -67,7 +71,7 @@
 <div class="key-point"><strong>✓</strong> MRI is most sensitive imaging; X-ray changes delayed 2-3 weeks</div>
 <div class="key-point"><strong>✓</strong> Bone biopsy with culture is gold standard for diagnosis</div>
 <div class="key-point"><strong>✓</strong> Requires prolonged antibiotics (4-6 weeks IV) ± surgical debridement</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
     </div>
     <script>
 const fb=[{"c":"Bone biopsy with culture identifies the organism and guides antibiotic therapy. MRI is most sensitive imaging modality but doesn't identify organism. X-ray changes take 2-3 weeks to appear.","i":"Bone biopsy with culture is gold standard - identifies organism for targeted therapy."}];
@@ -188,5 +192,8 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

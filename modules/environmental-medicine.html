@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
@@ -450,7 +454,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
 </svg>
             </a>
-            <div class="dx-nav-links">
+            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="dx-nav-links">
                 <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
                 <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
                 <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
@@ -1064,5 +1068,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

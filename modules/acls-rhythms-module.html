@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -48,7 +52,7 @@
         <div class="section"><h2>📝 Knowledge Check</h2>
 <div class="mcq-container" id="mcq0"><div class="mcq-question">1. VF arrest. After 1 shock + 2min CPR, still VF. Next drug?</div><div class="mcq-options"><div class="mcq-option" onclick="check(0,0,false)">A. Atropine</div><div class="mcq-option" onclick="check(0,1,true)">B. Epinephrine</div><div class="mcq-option" onclick="check(0,2,false)">C. Amiodarone</div><div class="mcq-option" onclick="check(0,3,false)">D. Lidocaine</div></div><div class="mcq-feedback" id="fb0"></div></div></div>
         <div class="section"><h2>🔑 Key Takeaways</h2><div class="key-point"><strong>✓</strong> Shockable: VF, pVT</div><div class="key-point"><strong>✓</strong> Non-shockable: asystole, PEA</div><div class="key-point"><strong>✓</strong> Hs and Ts for reversible causes</div><div class="key-point"><strong>✓</strong> Epi q3-5min, amio after 3rd shock</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link adventure">Practice →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link adventure">Practice →</a></div>
     </div>
     <script>
 const fb=[{"c":"Epi after 2nd shock, amio after 3rd shock.","i":"Epinephrine comes after second shock."}];
@@ -129,5 +133,8 @@ function check(q,o,correct){const c=document.getElementById('mcq'+q);c.querySele
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

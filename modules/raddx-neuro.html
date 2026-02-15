@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>RadDx: Neuroimaging | ReasonDx</title>
@@ -354,4 +358,7 @@ function toggleStep(btn){const e=btn.getAttribute('aria-expanded')==='true';btn.
 function selectChoice(el,letter){const c=el.closest('.choices'),correct=c.dataset.correct;c.querySelectorAll('.choice').forEach(ch=>{ch.style.pointerEvents='none';const l=ch.querySelector('.choice-letter').textContent.trim().replace('.','');if(l===correct)ch.classList.add('correct');else if(ch===el&&l!==correct)ch.classList.add('wrong')});const ex=c.nextElementSibling;if(ex&&ex.classList.contains('explanation'))ex.classList.add('show')}
 </script>
 <script src="../js/rdx-nav.js" defer></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body></html>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -66,7 +70,7 @@
 <div class="key-point"><strong>✓</strong> CT sensitivity decreases with time; LP if CT negative</div>
 <div class="key-point"><strong>✓</strong> Nimodipine for vasospasm prevention (not BP control)</div>
 <div class="key-point"><strong>✓</strong> Vasospasm peaks days 3-14; leading cause of morbidity</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
     </div>
     <script>
 const fb=[{"c":"Vasospasm peaks days 3-14 after SAH and is the leading cause of delayed morbidity. Blood breakdown products cause arterial constriction → ischemia. Prevention: nimodipine. Treatment: induced hypertension, angioplasty.","i":"Day 7 with new focal deficits is classic timing for vasospasm-induced delayed cerebral ischemia."}];
@@ -125,5 +129,8 @@ f.className='mcq-feedback show '+(correct?'correct':'incorrect');f.innerHTML='<s
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

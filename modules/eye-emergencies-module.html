@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -15,7 +19,7 @@
         <div class="section"><h2>🔬 Pathophysiology</h2><h3 style="margin:16px 0 8px">Vision-Threatening Conditions</h3><p>Conditions requiring immediate intervention to preserve vision.</p><div class="pathway-box"><div class="pathway-steps"><span class="pathway-step">Acute eye complaint</span><span class="pathway-arrow">→</span><span class="pathway-step">Identify red flags</span><span class="pathway-arrow">→</span><span class="pathway-step">Emergent vs urgent</span><span class="pathway-arrow">→</span><span class="pathway-step">Specialist consultation</span><span class="pathway-arrow">→</span><span class="pathway-step">Time-sensitive treatment</span></div></div></div>
         <div class="section"><h2>🏥 Clinical Correlations</h2><div class="clinical-box"><h4>Central retinal artery occlusion</h4><p><strong>Mechanism:</strong> Sudden painless vision loss - "cherry red spot"</p></div><div class="clinical-box"><h4>Acute angle closure glaucoma</h4><p><strong>Mechanism:</strong> Eye pain + halos + mid-dilated pupil</p></div></div>
         <div class="section"><h2>🔑 Key Points</h2><div class="key-point"><strong>✓</strong> CRAO: 90-minute window for treatment</div><div class="key-point"><strong>✓</strong> Acute angle closure: emergent IOP lowering</div><div class="key-point"><strong>✓</strong> Chemical burns: immediate copious irrigation</div><div class="key-point"><strong>✓</strong> Endophthalmitis: intravitreal antibiotics</div><div class="key-point"><strong>✓</strong> Always check visual acuity</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link next">Practice →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link next">Practice →</a></div>
     </div>
 
     <!-- DxSuite AI Tutor Integration -->
@@ -92,5 +96,8 @@
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

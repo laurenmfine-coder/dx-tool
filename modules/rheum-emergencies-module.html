@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -15,7 +18,7 @@
         <div class="section"><h2>🔬 Pathophysiology</h2><h3 style="margin:16px 0 8px">Autoimmune Crisis</h3><p>Acute manifestations of rheumatic diseases.</p><div class="pathway-box"><div class="pathway-steps"><span class="pathway-step">Underlying autoimmune disease</span><span class="pathway-arrow">→</span><span class="pathway-step">Flare or complication</span><span class="pathway-arrow">→</span><span class="pathway-step">Organ-threatening involvement</span><span class="pathway-arrow">→</span><span class="pathway-step">Rapid assessment needed</span><span class="pathway-arrow">→</span><span class="pathway-step">Immunosuppression + supportive care</span></div></div></div>
         <div class="section"><h2>🏥 Clinical Correlations</h2><div class="clinical-box"><h4>Septic arthritis</h4><p><strong>Mechanism:</strong> Hot swollen joint - infection until proven otherwise</p></div><div class="clinical-box"><h4>Scleroderma renal crisis</h4><p><strong>Mechanism:</strong> Hypertensive emergency with AKI - treat with ACE-I</p></div></div>
         <div class="section"><h2>🔑 Key Points</h2><div class="key-point"><strong>✓</strong> Septic arthritis: aspirate joint, empiric antibiotics</div><div class="key-point"><strong>✓</strong> Scleroderma renal crisis: ACE inhibitors (not contraindicated!)</div><div class="key-point"><strong>✓</strong> Lupus flare: high-dose steroids for major organs</div><div class="key-point"><strong>✓</strong> Vasculitis: may need cyclophosphamide</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link next">Practice →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back</a><a href="../adventure-hub.html" class="nav-link next">Practice →</a></div>
     </div>
 
     <!-- DxSuite AI Tutor Integration -->
@@ -92,5 +95,8 @@
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

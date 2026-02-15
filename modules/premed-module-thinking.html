@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How Doctors Think | ReasonDx Premed</title>
@@ -46,6 +50,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 </style>
 </head>
 <body>
+<script src="../rdx-nav.js"></script>
 <div class="header"><a href="premed-paths.html#explorer">← Explorer Path</a><h1>🤔 How Doctors Think</h1></div>
 <div class="container">
   <div class="progress"><div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:20%"></div></div><span class="progress-text" id="prog-text">1 / 5</span></div>
@@ -145,6 +150,9 @@ function goTo(n){
   document.getElementById('prog-text').textContent=n+' / 5';
   window.scrollTo({top:0,behavior:'smooth'});
 }
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
 </body>
 </html>

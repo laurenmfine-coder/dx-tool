@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guided Reflection Journal | ReasonDx Premed</title>
@@ -54,6 +58,7 @@ textarea{min-height:120px;resize:vertical;}
 </style>
 </head>
 <body>
+<script src="../rdx-nav.js"></script>
 <div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>📓 Guided Reflection Journal</h1></div>
 <div class="container">
   <div class="tabs">
@@ -133,6 +138,9 @@ function saveEntry(){const cat=document.getElementById('j-cat').value;const text
 function renderEntries(){const total=entries.length;const words=entries.reduce((s,e)=>s+e.words,0);document.getElementById('s-total').textContent=total;document.getElementById('s-words').textContent=words;const weeks=new Set(entries.map(e=>{const d=new Date(e.date);const w=Math.ceil((d.getDate())/7);return d.getFullYear()+'-'+d.getMonth()+'-'+w;}));document.getElementById('s-streak').textContent=weeks.size;const list=document.getElementById('entry-list');if(!entries.length){list.innerHTML='<div class="empty"><span>📓</span><p>No journal entries yet. Start reflecting!</p></div>';return;}list.innerHTML=entries.slice(0,30).map(e=>`<div class="entry"><div class="entry-meta"><span>📅 ${e.date}</span><span>${e.words} words</span></div><div class="entry-prompt">${PROMPTS[e.category]?.title||'Free Write'}</div><div class="entry-text">${e.text.slice(0,200)}${e.text.length>200?'...':''}</div>${e.tags.length?'<div style="margin-top:8px;">'+e.tags.map(t=>'<span class="tag">'+t+'</span>').join('')+'</div>':''}</div>`).join('');}
 function renderThemes(){const cats={};const tags={};entries.forEach(e=>{cats[e.category]=(cats[e.category]||0)+1;e.tags.forEach(t=>{tags[t]=(tags[t]||0)+1;});});const panel=document.getElementById('theme-panel');if(!entries.length){panel.innerHTML='<h3>🔍 Theme Detection</h3><p style="color:var(--pm-muted);font-size:14px;">Write 3+ journal entries to see your emerging themes.</p>';return;}const maxCat=Math.max(...Object.values(cats),1);let h='<h3>🔍 Your Emerging Themes</h3><p style="font-size:13px;color:#6b21a8;margin-bottom:16px;">Based on '+entries.length+' journal entries</p>';h+='<h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:#7c3aed;margin-bottom:8px;">By Category</h4>';Object.entries(cats).sort((a,b)=>b[1]-a[1]).forEach(([c,n])=>{const pct=Math.round(n/maxCat*100);const label=PROMPTS[c]?.title||'Free Write';h+=`<div class="theme-item"><span class="theme-label">${label}</span><div style="flex:1;background:#ede9fe;border-radius:4px;height:8px;"><div class="theme-bar" style="width:${pct}%;"></div></div><span class="theme-count">${n}</span></div>`;});if(Object.keys(tags).length){const maxTag=Math.max(...Object.values(tags),1);h+='<h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:#7c3aed;margin:16px 0 8px;">By Tag</h4>';Object.entries(tags).sort((a,b)=>b[1]-a[1]).slice(0,10).forEach(([t,n])=>{const pct=Math.round(n/maxTag*100);h+=`<div class="theme-item"><span class="theme-label">${t}</span><div style="flex:1;background:#ede9fe;border-radius:4px;height:8px;"><div class="theme-bar" style="width:${pct}%;"></div></div><span class="theme-count">${n}</span></div>`;});}panel.innerHTML=h;}
 function exportEntries(){const txt=entries.map(e=>`Date: ${e.date}\nCategory: ${PROMPTS[e.category]?.title||'Free Write'}\nTags: ${e.tags.join(', ')||'none'}\n\n${e.text}\n\n---`).join('\n\n');const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ReasonDx-Journal-Export.txt';a.click();}
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
 </body>
 </html>

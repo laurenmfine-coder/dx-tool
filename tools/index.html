@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,7 +90,7 @@
     <nav class="nav">
         <div class="nav-inner">
             <a href="../index.html" class="nav-brand">🩺 DxSuite</a>
-            <div class="nav-links">
+            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links">
                 <a href="../mechanism/index.html" class="nav-link">Learn</a>
                 <a href="index.html" class="nav-link active">Tools</a>
                 <a href="../ReasonDx/training.html" class="nav-link">Practice</a>
@@ -316,5 +320,8 @@
     </script>
 <script src="../data/rdx-persist.js"></script>
 <script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

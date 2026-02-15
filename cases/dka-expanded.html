@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -418,5 +422,8 @@ function toggleReferences() {
 <script src="../data/rdx-persist.js"></script>
 <script src="../js/rdx-nav.js"></script>
 <div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.2337/dci21-0043" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ADA Consensus Report: DKA & HHS</a> — <em style="color:var(--rdx-text-muted,#64748b)">Diabetes Care</em></li><li style="padding:6px 0;font-size:0.85rem"><a href="https://diabetes.org/about-diabetes/complications/dka" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Diabetic Ketoacidosis Management</a> — <em style="color:var(--rdx-text-muted,#64748b)">ADA</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

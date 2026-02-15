@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -70,7 +73,7 @@
 <div class="key-point"><strong>✓</strong> Viridans streptococci in native valve, subacute presentation</div>
 <div class="key-point"><strong>✓</strong> Right-sided (IVDU) → pulmonary emboli; Left-sided → systemic emboli</div>
 <div class="key-point"><strong>✓</strong> Get 3 sets of blood cultures before antibiotics</div></div>
-        <div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
     </div>
     <script>
 const fb=[{"c":"Definite IE: 2 major, OR 1 major + 3 minor, OR 5 minor. Major criteria: positive blood cultures (typical organisms, persistent), endocardial involvement on echo. Minor: predisposition, fever, vascular/immunologic phenomena, suggestive echo/cultures.","i":"Modified Duke: 2 major OR 1 major + 3 minor OR 5 minor for definite IE."},{"c":"IVDU → right-sided (tricuspid) endocarditis → septic pulmonary emboli → bilateral nodules/cavities on CXR. Most common organism: S. aureus. Left-sided IE causes systemic emboli (stroke, splenic infarcts).","i":"IVDU typically causes right-sided (tricuspid) endocarditis with pulmonary emboli."}];
@@ -130,5 +133,8 @@ f.className='mcq-feedback show '+(correct?'correct':'incorrect');f.innerHTML='<s
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How Doctors Think | ReasonDx Premed</title>
@@ -53,6 +57,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 </style>
 </head>
 <body>
+<script src="../rdx-nav.js"></script>
 <div class="header"><a href="premed-paths.html">← Paths</a> <a href="premed-hub.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:4px">· Home →</a><h1>🤔 How Doctors Think</h1></div>
 <div class="progress-bar"><div class="progress-fill" id="prog" style="width:12.5%"></div></div>
 <div class="container">
@@ -271,6 +276,9 @@ function checkQ(qid,correct){
   });
   document.getElementById(qid+'-explain').classList.add('show');
 }
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
 </body>
 </html>

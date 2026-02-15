@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
@@ -560,7 +564,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             <a href="../index.html" class="dx-nav-brand">
                 <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
             </a>
-            <div class="dx-nav-links">
+            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="dx-nav-links">
                 <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
                 <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
                 <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
@@ -2514,5 +2518,8 @@ document.addEventListener('DOMContentLoaded', () => R.init());
 </ol>
 </div>
 
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
 </body>
 </html>
