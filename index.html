@@ -72,48 +72,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ============================================
-   NAV — Minimal, 4 items max
-   ============================================ */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--white);
-  border-bottom: 1px solid var(--slate-200);
-  padding: 0 24px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-brand {
-  font-family: 'DM Serif Display', serif;
-  font-size: 20px;
-  color: var(--teal-dark);
-  text-decoration: none;
-  letter-spacing: -0.3px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--slate-600);
-  padding: 6px 14px;
-  border-radius: 8px;
-  transition: all 0.15s;
-}
-
-.nav-links a:hover { background: var(--slate-100); color: var(--slate-900); }
-.nav-links a.active { background: var(--teal-50); color: var(--teal-dark); }
+/* Old nav CSS removed: rdx-nav.js handles navigation */
 
 /* ============================================
    HERO — Search-first
@@ -492,7 +451,7 @@ body {
   .hero h1 { font-size: 28px; }
   .paths { grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px 20px 48px; }
   .path-card { padding: 20px 16px; }
-  .nav-links a span { display: none; }
+  /* .nav-links mobile override removed */
   .stats-bar { gap: 24px; }
   .topic-grid { grid-template-columns: 1fr; }
 }
@@ -695,17 +654,7 @@ body {
 <script src="rdx-nav.js"></script>
 
 <!-- NAV — Only 4 items -->
-<nav class="nav">
-  <a href="#" class="nav-brand">ReasonDx</a>
-  <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links">
-    <a href="#" class="active">Home</a>
-    <a href="cases/clinical-reasoning-trainer.html">Browse</a>
-    <a href="modules/training.html">CRT</a>
-    <a href="modules/premed-hub.html" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1);color:#0f766e;font-weight:600">🩺 Premed</a>
-    <a href="#" onclick="return false;">My Progress</a>
-    <button id="rdx-theme-btn-home" onclick="(function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('rdx-theme',t);document.getElementById('rdx-theme-btn-home').innerHTML=t==='dark'?'☀️':'🌙'})()" style="background:none;border:1px solid var(--slate-200,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1" title="Toggle theme">🌙</button>
-  </div>
-</nav>
+
 
 <!-- HERO — Search-first -->
 <section class="hero">
@@ -810,7 +759,7 @@ body {
 
 <!-- FOOTER -->
 <footer class="footer">
-  ReasonDx — Clinical Reasoning Platform &nbsp;·&nbsp; Nova Southeastern University
+  ReasonDx — Clinical Reasoning Platform
 </footer>
 
 <!-- PATH OVERLAY -->

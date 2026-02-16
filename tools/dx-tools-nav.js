@@ -1,5 +1,5 @@
 /**
- * DxSuite Floating Tools Menu
+ * ReasonDx Floating Tools Menu
  * ============================
  * Drop-in navigation component that appears on every tool page.
  * Provides quick access to all tools without returning to the hub.

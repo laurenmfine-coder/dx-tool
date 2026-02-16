@@ -1,5 +1,5 @@
 /**
- * DxSuite Tools Integration
+ * ReasonDx Tools Integration
  * ==========================
  * Lightweight hooks for tools that aren't primary learning modules
  * but should still contribute to the learner profile.

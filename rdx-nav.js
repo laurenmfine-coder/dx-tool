@@ -1,5 +1,5 @@
 /* ============================================================
-   rdx-nav.js — Unified ReasonDx Navigation + Theme Toggle
+   rdx-nav.js — Unified ReasonDx Navigation + Theme Toggle + Logout
    Auto-injects a consistent nav on every page.
    Removes any old inline navs to prevent duplicates.
    ============================================================ */
@@ -22,8 +22,9 @@
   else if (/board-prep|training/i.test(path)) section = 'practice';
   else if (/\/tools\/|\/ecg\//i.test(path)) section = 'tools';
 
-  // --- Theme ---
+  // --- Theme (light/dark only) ---
   var saved = localStorage.getItem('rdx-theme') || 'light';
+  if (saved !== 'light' && saved !== 'dark') saved = 'light';
   document.documentElement.setAttribute('data-theme', saved);
 
   // --- Link helper ---
@@ -50,6 +51,9 @@
       navLink(toRoot + 'tools/index.html', '🔧', 'Tools', section === 'tools') +
       '<button id="rdx-theme-toggle" aria-label="Toggle theme" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;">' +
         (saved === 'dark' ? '☀️' : '🌙') +
+      '</button>' +
+      '<button id="rdx-logout-btn" aria-label="Logout" title="Logout" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px;line-height:1;flex-shrink:0;color:var(--rdx-text-muted,#475569);font-family:inherit;">' +
+        '🚪' +
       '</button>' +
     '</div>';
 
@@ -79,18 +83,16 @@
 
   // --- Remove ALL old inline navs ---
   function removeOldNavs() {
-    // Pattern 1: <nav class="nav">
-    var old1 = document.querySelectorAll('nav.nav:not(#rdx-unified-nav)');
-    for (var i = 0; i < old1.length; i++) old1[i].parentNode.removeChild(old1[i]);
-    // Pattern 2: <nav class="dx-nav">
-    var old2 = document.querySelectorAll('nav.dx-nav');
-    for (var i = 0; i < old2.length; i++) old2[i].parentNode.removeChild(old2[i]);
-    // Pattern 3: old rdx-nav
-    var old3 = document.querySelectorAll('nav.rdx-nav:not(#rdx-unified-nav)');
-    for (var i = 0; i < old3.length; i++) old3[i].parentNode.removeChild(old3[i]);
-    // Pattern 4: dx-universal-nav
-    var old4 = document.querySelectorAll('.dx-universal-nav');
-    for (var i = 0; i < old4.length; i++) old4[i].parentNode.removeChild(old4[i]);
+    var selectors = [
+      'nav.nav:not(#rdx-unified-nav)',
+      'nav.dx-nav',
+      'nav.rdx-nav:not(#rdx-unified-nav)',
+      '.dx-universal-nav'
+    ];
+    for (var s = 0; s < selectors.length; s++) {
+      var els = document.querySelectorAll(selectors[s]);
+      for (var i = 0; i < els.length; i++) els[i].parentNode.removeChild(els[i]);
+    }
   }
 
   // --- Insert ---
@@ -108,7 +110,7 @@
         document.getElementById('rdx-nav-menu').classList.toggle('open');
       });
     }
-    // Wire theme toggle
+    // Wire theme toggle (light/dark only)
     var themeBtn = document.getElementById('rdx-theme-toggle');
     if (themeBtn) {
       themeBtn.addEventListener('click', function() {
@@ -117,6 +119,17 @@
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('rdx-theme', next);
         this.textContent = next === 'dark' ? '☀️' : '🌙';
+      });
+    }
+    // Wire logout button
+    var logoutBtn = document.getElementById('rdx-logout-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to logout?')) {
+          localStorage.removeItem('reasondx-user');
+          localStorage.removeItem('rdx-theme');
+          window.location.href = toRoot + 'index.html';
+        }
       });
     }
   }

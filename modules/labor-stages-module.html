@@ -72,31 +72,7 @@
 </head>
 <body>
 
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
-            </a>
-            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
-                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../index.html" class="dx-nav-link ">📚 References</a>
-                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
+    
 
     <section class="hero">
         <div class="hero-inner">
@@ -141,7 +117,7 @@
                     <li><strong>7. Expulsion:</strong> Anterior then posterior shoulder delivers, followed by body</li>
                 </ul>
             </div>
-            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #f59e0b; border-radius: 12px; padding: 20px; margin: 20px 0;">
+            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #0f766e; border-radius: 12px; padding: 20px; margin: 20px 0;">
                 <h4 style="color: #b45309; margin-bottom: 8px;">💎 Bishop Score</h4>
                 <p style="color: #92400e; margin: 0;">Assesses cervical readiness for induction. Components: Dilation (0-3), Effacement (0-3), Station (-3 to +2 → scored 0-3), Consistency (firm to soft), Position (posterior to anterior). Score ≥8 = favorable cervix, likely successful induction. Score <6 = unfavorable, consider cervical ripening first.</p>
             </div>
@@ -267,21 +243,6 @@
     </script>
 
     <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div><div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div></div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div><div class="dx-theme-name">Deeper Teal</div></div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div><div class="dx-theme-name">Steel Blue</div></div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div><div class="dx-theme-name">Muted Sage</div></div>
-                </div>
-            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
@@ -294,17 +255,11 @@
 
     <script>
     (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('rdx-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-    function setDxTheme(theme) { document.body.setAttribute('data-theme', theme); localStorage.setItem('dx-theme', theme); updateThemeOptions(); closeDxThemeModal(); }
-    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
-    function openDxThemeModal() { document.getElementById('dxThemeModal')?.classList.add('open'); }
-    function closeDxThemeModal() { document.getElementById('dxThemeModal')?.classList.remove('open'); }
-    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
-    </script>
+</script>
     <script src="../js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
 

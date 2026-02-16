@@ -14,27 +14,27 @@
     <title>Acute Coronary Syndrome - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
         .container { max-width: 900px; margin: 0 auto; }
-        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid #e2e8f0; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
         .scene-phase { font-size: 0.85rem; color: #fca5a5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .scene-title { font-size: 1.5rem; font-weight: 700; color: #fef2f2; }
-        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ef4444; line-height: 1.7; }
+        .narrative { background: #ffffff; border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ef4444; line-height: 1.7; }
         .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
         .safe { color: #4ade80; font-weight: 600; }
-        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(239,68,68,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
-        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
-        .ecg-box { background: rgba(0,0,0,0.4); border: 2px solid #fbbf24; border-radius: 12px; padding: 20px; margin: 16px 0; font-family: 'SF Mono', Monaco, monospace; }
-        .ecg-title { color: #fbbf24; font-weight: 700; margin-bottom: 12px; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(239,68,68,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
+        .ecg-box { background: #f1f5f9; border: 2px solid #0f766e; border-radius: 12px; padding: 20px; margin: 16px 0; font-family: 'SF Mono', Monaco, monospace; }
+        .ecg-title { color: #0f766e; font-weight: 700; margin-bottom: 12px; }
         .question-box { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fef2f2; margin-bottom: 16px; line-height: 1.5; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
-        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
-        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option { background: #ffffff; border: 2px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
         .mcq-option.disabled { cursor: default; opacity: 0.7; }
         .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
         .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
@@ -56,21 +56,21 @@
         .teaching-point ul, .teaching-point ol { margin-left: 20px; }
         .teaching-point li { margin-bottom: 6px; line-height: 1.5; color:var(--rdx-text); }
         .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 0.9rem; }
-        .teaching-point td, .teaching-point th { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .teaching-point td, .teaching-point th { padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
         .teaching-point th { color: #c4b5fd; font-size: 0.85rem; text-transform: uppercase; }
         .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
         .why-chain.show { display: block; animation: fadeIn 0.3s ease; }
-        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
         .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
-        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-q { color: #0f766e; font-weight: 600; margin-bottom: 4px; }
         .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(239,68,68,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
         .btn { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #fbbf24); border-radius: 3px; transition: width 0.5s; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #99f6e4, #0f766e); border-radius: 3px; transition: width 0.5s; }
         .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
         .score-label { font-size: 0.8rem; color: #94a3b8; }
         .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
@@ -85,16 +85,16 @@
         .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .alert-title { font-weight: 700; color: #f87171; margin-bottom: 8px; }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: #fca5a5; }
         .completion { text-align: center; padding: 60px 40px; }
         .completion-grade { font-size: 2.5rem; font-weight: 700; }
         .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
         .completion-breakdown { text-align: left; max-width: 600px; margin: 24px auto; }
-        .crossplatform { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-top: 24px; }
+        .crossplatform { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-top: 24px; }
         .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; }
         .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #fca5a5; text-decoration: none; }
+        .crossplatform-link { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #fca5a5; text-decoration: none; }
         @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
     
 /* Visual Debrief Styles */
@@ -109,7 +109,7 @@
 .decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
 .path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
 .path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
-.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
 .path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
 .path-stage { font-weight: 700; color: #1f2937; }
 .path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
@@ -119,11 +119,11 @@
 .debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
 .debrief-summary ul { margin-left: 20px; }
 .debrief-summary li { margin-bottom: 8px; }
-.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
 .debrief-btn:hover { opacity: 0.9; }
 
 /* References Panel Styles */
-.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
 .references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
 .references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -131,7 +131,7 @@
 .references-content a:hover { background: #0d9488; color: white; }
 
 /* Platform Panel Styles */
-.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
 .platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
@@ -539,7 +539,7 @@ function showCompletion() {
     else if(p>=80){g='Great Work!';clr='#14b8a6';m='Strong grasp of ACS concepts.';}
     else if(p>=70){g='Good Progress';clr='#f59e0b';m='Solid foundation. Review WHY chains.';}
     else{g='Keep Learning';clr='#ef4444';m='Review ECG localization and management.';}
-    document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'✓':'✗'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}pts</span></div>`).join('')}</div><div class="crossplatform"><h4>Continue Learning</h4><div class="crossplatform-links"><a href="#" class="crossplatform-link">🧬 MechanismDx: Coronary Circulation</a><a href="#" class="crossplatform-link">📚 Related: Heart Failure</a><a href="javascript:location.reload()" class="crossplatform-link">🔄 Restart</a></div></div></div>`;
+    document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'✓':'✗'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}pts</span></div>`).join('')}</div><div class="crossplatform"><h4>Continue Learning</h4><div class="crossplatform-links"><a href="#" class="crossplatform-link">🧬 MechanismDx: Coronary Circulation</a><a href="#" class="crossplatform-link">📚 Related: Heart Failure</a><a href="javascript:location.reload()" class="crossplatform-link">🔄 Restart</a></div></div></div>`;
     document.getElementById('progress').style.width='100%';
 }
 
@@ -593,7 +593,7 @@ function showDebrief() {
             <h4>🎯 Performance Legend</h4>
             <ul>
                 <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
-                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
                 <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
             </ul>
         </div>

@@ -362,7 +362,7 @@ body { transition: background 0.3s, color 0.3s; }
 }
 
 [data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
     --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
     --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
     --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
@@ -401,12 +401,12 @@ body { transition: background 0.3s, color 0.3s; }
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+
 .dx-theme-modal.open { display: flex; }
-.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
-.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+
+
+
+
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
@@ -497,22 +497,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <!-- Theme selector moved to nav area, not fixed -->
 
     <!-- UNIFIED DX NAVIGATION -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <span style="font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;">Reason<span style="color:#059669;font-weight:800;">Dx</span></span>
-            </a>
-            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="dx-nav-links">
-                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
+    
 
     <div class="app" id="app">
         <div class="loading">
@@ -2176,49 +2161,6 @@ document.addEventListener('DOMContentLoaded', () => App.init());
 </script>
 
     <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
-                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
-                        <div class="dx-theme-name">Deeper Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
-                        <div class="dx-theme-name">Eucalyptus</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
-                        <div class="dx-theme-name">Teal on Cream</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
-                        <div class="dx-theme-name">Steel Blue</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
-                        <div class="dx-theme-name">Muted Sage</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
-                        <div class="dx-theme-name">Muted Lavender</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
-                        <div class="dx-theme-name">Slate + Teal</div>
-                    </div>
-                </div>
-            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
@@ -2246,34 +2188,13 @@ document.addEventListener('DOMContentLoaded', () => App.init());
     <script>
     // Theme System
     (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('rdx-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-    
-    function setDxTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('dx-theme', theme);
-        updateThemeOptions();
-        closeDxThemeModal();
+);
     }
-    
-    function updateThemeOptions() {
-        const current = document.body.getAttribute('data-theme');
-        document.querySelectorAll('.dx-theme-option').forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.theme === current);
-        });
-    }
-    
-    function openDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.add('open');
-    }
-    
-    function closeDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.remove('open');
-    }
-    
-    document.addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
     });
     document.addEventListener('keydown', (e) => {

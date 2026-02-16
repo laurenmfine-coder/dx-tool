@@ -73,7 +73,7 @@ body { transition: background 0.3s, color 0.3s; }
 }
 
 [data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
     --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
     --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border);
 }
@@ -371,7 +371,7 @@ body {
 </head>
 <body data-theme="muted-teal">
 
-<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
+<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: #f1f5f9; padding: 8px 12px; border-radius: 20px;">
     <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
     <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
     <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
@@ -379,31 +379,7 @@ body {
 </div>
 
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-                    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#1a1a1a">D</text>
-                    <line x1="38" y1="30" x2="52" y2="46" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-                    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#1a1a1a"/>
-                    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#1a1a1a"/>
-                    <circle cx="48" cy="67" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.8"/>
-                    <circle cx="48" cy="67" r="2.5" fill="#1a1a1a"/>
-                    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-                </svg>
-            </a>
-            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links">
-                <a href="index.html" class="nav-link">🏠 Home</a>
-                <a href="index.html" class="nav-link">⚙️ MechanismDx</a>
-                <a href="index.html" class="nav-link active">🔬 ReasonDx</a>
-                <a href="index.html" class="nav-link">🧠 CoachDx</a>
-                <a href="index.html" class="nav-link">📚 References</a>
-                <a href="index.html" class="nav-link">📊 Dashboard</a>
-                <button class="theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
+    
 
     <!-- Logo Header -->
     <header class="logo-header">
@@ -511,17 +487,7 @@ body {
         <!-- Cases will be loaded dynamically -->
     </section>
 
-    <!-- Theme Modal (same as other pages) -->
-    <div class="theme-modal" id="dxThemeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
-        <div style="background:var(--bg-card); padding:24px; border-radius:16px; max-width:400px; width:90%;">
-            <h3 style="margin-bottom:16px;">🎨 Choose Theme</h3>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                <button onclick="setTheme('muted-teal')" style="padding:12px; border:1px solid var(--border); border-radius:8px; cursor:pointer;">Muted Teal</button>
-                <button onclick="setTheme('ocean-dark')" style="padding:12px; border:1px solid var(--border); border-radius:8px; cursor:pointer;">Ocean Dark</button>
-            </div>
-            <button onclick="closeDxThemeModal()" style="margin-top:16px; width:100%; padding:10px; border:none; background:var(--border); border-radius:8px; cursor:pointer;">Close</button>
-        </div>
-    </div>
+    <!-- Theme handled by rdx-nav.js -->
 
     <script>
     // Deep Dive Cases Data
@@ -708,16 +674,7 @@ body {
         });
         renderCases();
     }
-    
-    function openDxThemeModal() {
-        document.getElementById('dxThemeModal').style.display = 'flex';
-    }
-    
-    function closeDxThemeModal() {
-        document.getElementById('dxThemeModal').style.display = 'none';
-    }
-    
-    function setTheme(theme) {
+function setTheme(theme) {
         document.body.setAttribute('data-theme', theme);
         localStorage.setItem('dx-theme', theme);
         closeDxThemeModal();

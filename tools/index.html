@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Tools | DxSuite</title>
+    <title>Learning Tools | ReasonDx</title>
     
     <style>
         :root { --primary: #059669; --primary-dark: #047857; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
@@ -87,17 +87,7 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="../index.html" class="nav-brand">🩺 DxSuite</a>
-            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links">
-                <a href="../mechanism/index.html" class="nav-link">Learn</a>
-                <a href="index.html" class="nav-link active">Tools</a>
-                <a href="../ReasonDx/training.html" class="nav-link">Practice</a>
-                <a href="learning-dashboard.html" class="nav-link">My Progress</a>
-            </div>
-        </div>
-    </nav>
+    
 
     <header class="header">
         <h1>🛠️ Learning Tools</h1>
@@ -273,7 +263,7 @@
             document.getElementById('tourTooltip').classList.remove('active');
             document.getElementById('tourSkip').classList.remove('active');
             document.getElementById('tourSpotlight').style.display = 'none';
-            localStorage.setItem('dxsuite-tools-tour', 'done');
+            localStorage.setItem('rdx-tools-tour', 'done');
         }
 
         function showStep(i) {
@@ -315,8 +305,8 @@
             else if (e.key === 'Escape') endTour();
         });
 
-        // Auto-start on first visit
-        if (!localStorage.getItem('dxsuite-tools-tour')) setTimeout(startTour, 800);
+        // Tour is opt-in: click 'Take the Tools Tour' link to start
+        // Previously auto-started on first visit, now disabled for better UX
     </script>
 <script src="../data/rdx-persist.js"></script>
 <script src="../js/rdx-nav.js"></script>

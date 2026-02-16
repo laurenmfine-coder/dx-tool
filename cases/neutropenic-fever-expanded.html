@@ -14,19 +14,19 @@
     <title>Neutropenic Fever - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #164e63 0%, #0891b2 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #164e63 0%, #0891b2 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
         .container { max-width: 900px; margin: 0 auto; }
-        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
-        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
         .scene-phase { font-size: 0.85rem; color: #67e8f9; text-transform: uppercase; }
         .scene-title { font-size: 1.5rem; font-weight: 700; color: #a5f3fc; }
-        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #0891b2; line-height: 1.7; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
+        .narrative { background: #ffffff; border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #0891b2; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
         .question-box { background: linear-gradient(135deg, rgba(8,145,178,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(8,145,178,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .question-prompt { font-size: 1.1rem; font-weight: 600; color: #a5f3fc; margin-bottom: 16px; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
-        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option { background: #ffffff; border: 2px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
         .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
         .mcq-option.disabled { cursor: default; opacity: 0.7; }
         .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
@@ -40,7 +40,7 @@
         .teaching-point.show { display: block; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(8,145,178,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
         .btn { background: linear-gradient(135deg, #0891b2, #164e63); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
@@ -48,8 +48,8 @@
         .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
         .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); color: #67e8f9; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: #67e8f9; }
         .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
         .completion { text-align: center; padding: 60px 40px; }
@@ -66,7 +66,7 @@
 .decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
 .path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
 .path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
-.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
 .path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
 .path-stage { font-weight: 700; color: #1f2937; }
 .path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
@@ -76,11 +76,11 @@
 .debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
 .debrief-summary ul { margin-left: 20px; }
 .debrief-summary li { margin-bottom: 8px; }
-.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #14b8a6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
 .debrief-btn:hover { opacity: 0.9; }
 
 /* References Panel Styles */
-.references-panel { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #99f6e4; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
 .references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
 .references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -88,7 +88,7 @@
 .references-content a:hover { background: #0d9488; color: white; }
 
 /* Platform Panel Styles */
-.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
 .platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
@@ -119,10 +119,10 @@
 
     
 /* Crossplatform Navigation */
-.rdx-crossplatform-nav { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
-.rdx-crossplatform-nav h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
 .rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
-.rdx-crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #5eead4; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
@@ -215,7 +215,7 @@ function showDebrief() {
             <h4>🎯 Performance Legend</h4>
             <ul>
                 <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
-                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
                 <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
             </ul>
         </div>

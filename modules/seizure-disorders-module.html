@@ -72,31 +72,7 @@
 </head>
 <body>
 
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
-            </a>
-            <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../modules/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
-                <a href="../training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="#" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../index.html" class="dx-nav-link ">📚 References</a>
-                <a href="#" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
+    
 
     <section class="hero">
         <div class="hero-inner">
@@ -275,21 +251,6 @@
     </script>
 
     <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div><div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div></div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div><div class="dx-theme-name">Deeper Teal</div></div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div><div class="dx-theme-name">Steel Blue</div></div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div><div class="dx-theme-name">Muted Sage</div></div>
-                </div>
-            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
@@ -302,17 +263,11 @@
 
     <script>
     (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('rdx-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-    function setDxTheme(theme) { document.body.setAttribute('data-theme', theme); localStorage.setItem('dx-theme', theme); updateThemeOptions(); closeDxThemeModal(); }
-    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
-    function openDxThemeModal() { document.getElementById('dxThemeModal')?.classList.add('open'); }
-    function closeDxThemeModal() { document.getElementById('dxThemeModal')?.classList.remove('open'); }
-    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
-    </script>
+</script>
     <div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body">
 <div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">A 25-year-old presents with a witnessed episode of rhythmic jerking of all extremities lasting 90 seconds with post-ictal confusion. What type of seizure is this?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Focal aware seizures preserve consciousness and are typically limited to one body region." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Focal aware seizure</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Bilateral rhythmic jerking (clonic phase) with loss of consciousness and post-ictal confusion is classic for a generalized tonic-clonic (GTC) seizure." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Generalized tonic-clonic seizure</div></div></div><div class="choice" data-fb="Absence seizures feature brief staring spells (seconds) without post-ictal confusion, typically in children." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Absence seizure</div></div></div><div class="choice" data-fb="While possible, the classic presentation of rhythmic jerking with post-ictal confusion is most consistent with a true GTC seizure." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Psychogenic non-epileptic event</div></div></div></div><div id="mcqFb0" class="hidden" style="margin-top:12px"><div id="mcqFbText0" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
 <div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">Which EEG pattern is pathognomonic for absence seizures?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Focal sharp waves suggest focal epilepsy, not absence seizures." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Focal sharp waves</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Generalized 3 Hz spike-and-wave is the hallmark EEG finding in childhood absence epilepsy. It is provoked by hyperventilation." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">3 Hz spike-and-wave discharges</div></div></div><div class="choice" data-fb="PLEDs are associated with acute structural lesions or herpes encephalitis, not absence epilepsy." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Periodic lateralized epileptiform discharges</div></div></div><div class="choice" data-fb="Burst suppression indicates severe diffuse cerebral dysfunction, often in coma or deep anesthesia." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Burst suppression</div></div></div></div><div id="mcqFb1" class="hidden" style="margin-top:12px"><div id="mcqFbText1" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>

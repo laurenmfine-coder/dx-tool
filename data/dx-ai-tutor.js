@@ -1,5 +1,5 @@
 // =====================================================
-// DxSuite AI Tutor - Clinical Reasoning Assistant
+// ReasonDx AI Tutor - Clinical Reasoning Assistant
 // =====================================================
 // Uses Cloudflare Worker proxy - no student API keys needed
 // ReasonDx AI Clinical Reasoning Tutor
