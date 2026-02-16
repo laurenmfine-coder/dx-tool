@@ -7,10 +7,12 @@
   'use strict';
   if (document.getElementById('rdx-unified-nav')) return;
 
-  // --- Path prefix ---
+  // --- Path prefix (handles any nesting depth) ---
   var path = window.location.pathname;
-  var inSubdir = /\/(topics|modules|cases|tools|ecg|CoachDx|auth|data|mechanism|ReasonDx)\//i.test(path);
-  var toRoot = inSubdir ? '../' : './';
+  var slashCount = (path.match(/\//g) || []).length;
+  var depth = slashCount - 1; // /index.html = 0, /cases/x.html = 1, /tools/mechanism/x.html = 2
+  var toRoot = './';
+  if (depth > 0) { toRoot = ''; for (var d = 0; d < depth; d++) toRoot += '../'; }
 
   // --- Detect section ---
   var section = 'home';
@@ -126,9 +128,12 @@
     if (logoutBtn) {
       logoutBtn.addEventListener('click', function() {
         if (confirm('Are you sure you want to logout?')) {
+          // Clear all auth-related keys
           localStorage.removeItem('reasondx-user');
-          localStorage.removeItem('rdx-theme');
-          window.location.href = toRoot + 'index.html';
+          localStorage.removeItem('reasondx_student_code');
+          // Keep rdx-theme — theme preference persists across sessions
+          // Redirect to login page
+          window.location.href = toRoot + 'auth/login.html';
         }
       });
     }
