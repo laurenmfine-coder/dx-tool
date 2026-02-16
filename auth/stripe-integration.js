@@ -1,5 +1,5 @@
 /**
- * DxSuite Stripe Payment Integration
+ * ReasonDx Stripe Payment Integration
  * 
  * This file handles payment processing with Stripe.
  * It uses Stripe Checkout for a secure, hosted payment page.
@@ -79,7 +79,7 @@ async function startCheckout(priceKey, quantity = 1) {
         // Ensure user is logged in
         if (!DxAuth.isLoggedIn()) {
             // Save intended purchase and redirect to login
-            sessionStorage.setItem('dxsuite-pending-checkout', JSON.stringify({ priceKey, quantity }));
+            sessionStorage.setItem('reasondx-pending-checkout', JSON.stringify({ priceKey, quantity }));
             window.location.href = '/auth/login.html';
             return;
         }
@@ -166,11 +166,11 @@ async function openCustomerPortal() {
 // ============================================
 
 // After login, check if user was trying to checkout
-window.addEventListener('dxsuite-auth-change', async (e) => {
+window.addEventListener('reasondx-auth-change', async (e) => {
     if (e.detail.event === 'SIGNED_IN') {
-        const pendingCheckout = sessionStorage.getItem('dxsuite-pending-checkout');
+        const pendingCheckout = sessionStorage.getItem('reasondx-pending-checkout');
         if (pendingCheckout) {
-            sessionStorage.removeItem('dxsuite-pending-checkout');
+            sessionStorage.removeItem('reasondx-pending-checkout');
             const { priceKey, quantity } = JSON.parse(pendingCheckout);
             await startCheckout(priceKey, quantity);
         }

@@ -91,7 +91,7 @@
             handleSignedIn();
         }
         
-        window.dispatchEvent(new CustomEvent('dxsuite-auth-change', {
+        window.dispatchEvent(new CustomEvent('reasondx-auth-change', {
             detail: { event, session, user: currentUser, profile: userProfile }
         }));
     }
@@ -252,7 +252,7 @@
 
     function requireAuth(redirectUrl = window.location.href) {
         if (!isLoggedIn()) {
-            sessionStorage.setItem('dxsuite-redirect-after-login', redirectUrl);
+            sessionStorage.setItem('reasondx-redirect-after-login', redirectUrl);
             window.location.href = '/auth/login.html';
             return false;
         }
@@ -338,20 +338,20 @@
 
         // Handle post-login redirect (check both key names)
         const redirectUrl = sessionStorage.getItem('reasondx-redirect')
-            || sessionStorage.getItem('dxsuite-redirect-after-login');
+            || sessionStorage.getItem('reasondx-redirect-after-login');
         if (redirectUrl) {
             sessionStorage.removeItem('reasondx-redirect');
-            sessionStorage.removeItem('dxsuite-redirect-after-login');
+            sessionStorage.removeItem('reasondx-redirect-after-login');
             window.location.href = redirectUrl;
         }
     }
 
     function showUpgradeModal(featureName) {
-        let modal = document.getElementById('dxsuite-upgrade-modal');
+        let modal = document.getElementById('reasondx-upgrade-modal');
         
         if (!modal) {
             modal = document.createElement('div');
-            modal.id = 'dxsuite-upgrade-modal';
+            modal.id = 'reasondx-upgrade-modal';
             modal.innerHTML = `
                 <div class="dx-modal-overlay" onclick="closeUpgradeModal()">
                     <div class="dx-modal-content" onclick="event.stopPropagation()">
@@ -390,7 +390,7 @@
     }
 
     window.closeUpgradeModal = function() {
-        const modal = document.getElementById('dxsuite-upgrade-modal');
+        const modal = document.getElementById('reasondx-upgrade-modal');
         if (modal) modal.style.display = 'none';
     };
 

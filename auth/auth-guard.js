@@ -1,5 +1,5 @@
 /**
- * DxSuite Auth Guard
+ * ReasonDx Auth Guard
  * ==================
  * Centralized authentication guard for all ReasonDx pages.
  * Drop this script into any page's <head> to enforce login.

@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * DXSUITE REGISTRATION SYSTEM - Google Apps Script
+ * REASONDX REGISTRATION SYSTEM - Google Apps Script
  * ============================================================
  * 
  * SIMPLIFIED FLOW:
@@ -69,7 +69,7 @@ function doPost(e) {
 
 function doGet(e) {
   return ContentService.createTextOutput(
-    'DxSuite Registration System Active\n' +
+    'ReasonDx Registration System Active\n' +
     'Tracks: Learner, Faculty\n' +
     'Email verification required (.edu)\n' +
     'Status: Running'
@@ -399,7 +399,7 @@ function generateStats() {
  */
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
-  ui.createMenu('DxSuite')
+  ui.createMenu('ReasonDx')
     .addItem('Initialize Sheets', 'initializeSheets')
     .addItem('Generate Stats', 'generateStats')
     .addToUi();

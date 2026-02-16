@@ -1,5 +1,5 @@
 /**
- * DxSuite Referral & Coupon System — Stripe Integration
+ * ReasonDx Referral & Coupon System — Stripe Integration
  * 
  * This module handles the referral program's backend logic:
  * - Generating unique referral codes per user

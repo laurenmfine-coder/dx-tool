@@ -1,5 +1,5 @@
 /**
- * DxSuite Email Service
+ * ReasonDx Email Service
  * 
  * Handles sending verification codes and password reset emails.
  * Supports multiple email providers - configure one based on your needs.
@@ -20,8 +20,8 @@ const EMAIL_CONFIG = {
     provider: 'demo',
     
     // Your "from" email address
-    fromEmail: 'noreply@dxsuite.edu',
-    fromName: 'DxSuite',
+    fromEmail: 'noreply@reasondx.com',
+    fromName: 'ReasonDx',
     
     // API Keys (set these for your chosen provider)
     resendApiKey: 'YOUR_RESEND_API_KEY',
@@ -36,12 +36,12 @@ const EMAIL_CONFIG = {
 // ============================================
 
 async function sendVerificationEmail(toEmail, code) {
-    const subject = 'Your DxSuite Verification Code';
+    const subject = 'Your ReasonDx Verification Code';
     const html = `
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 24px;">
                 <span style="font-size: 48px;">🩺</span>
-                <h1 style="color: #059669; margin: 16px 0 8px;">DxSuite</h1>
+                <h1 style="color: #059669; margin: 16px 0 8px;">ReasonDx</h1>
                 <p style="color: #64748b; margin: 0;">Clinical Reasoning Education</p>
             </div>
             
@@ -63,13 +63,13 @@ async function sendVerificationEmail(toEmail, code) {
         </div>
     `;
     
-    const text = `Your DxSuite verification code is: ${code}\n\nThis code expires in 10 minutes.\n\nIf you didn't request this code, you can safely ignore this email.`;
+    const text = `Your ReasonDx verification code is: ${code}\n\nThis code expires in 10 minutes.\n\nIf you didn't request this code, you can safely ignore this email.`;
     
     return sendEmail(toEmail, subject, html, text);
 }
 
 async function sendPasswordResetEmail(toEmail, code) {
-    const subject = 'Reset Your DxSuite Password';
+    const subject = 'Reset Your ReasonDx Password';
     const html = `
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 24px;">
@@ -95,18 +95,18 @@ async function sendPasswordResetEmail(toEmail, code) {
         </div>
     `;
     
-    const text = `Your DxSuite password reset code is: ${code}\n\nThis code expires in 10 minutes.\n\nIf you didn't request this, you can safely ignore this email.`;
+    const text = `Your ReasonDx password reset code is: ${code}\n\nThis code expires in 10 minutes.\n\nIf you didn't request this, you can safely ignore this email.`;
     
     return sendEmail(toEmail, subject, html, text);
 }
 
 async function sendWelcomeEmail(toEmail, studyId, isFaculty = false) {
-    const subject = 'Welcome to DxSuite!';
+    const subject = 'Welcome to ReasonDx!';
     const html = `
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 24px;">
                 <span style="font-size: 48px;">${isFaculty ? '👨‍🏫' : '🎉'}</span>
-                <h1 style="color: #059669; margin: 16px 0 8px;">Welcome to DxSuite!</h1>
+                <h1 style="color: #059669; margin: 16px 0 8px;">Welcome to ReasonDx!</h1>
             </div>
             
             <p style="color: #475569; font-size: 14px; line-height: 1.6;">
@@ -126,7 +126,7 @@ async function sendWelcomeEmail(toEmail, studyId, isFaculty = false) {
             </p>
             
             <div style="text-align: center; margin-top: 24px;">
-                <a href="https://dxsuite.vercel.app" style="display: inline-block; background: #059669; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                <a href="https://reasondx.com" style="display: inline-block; background: #059669; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
                     Start Learning →
                 </a>
             </div>
