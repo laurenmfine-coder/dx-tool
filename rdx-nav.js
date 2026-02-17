@@ -151,9 +151,10 @@
     if (logoutBtn) {
       logoutBtn.addEventListener('click', function() {
         localStorage.removeItem('reasondx-user');
+        localStorage.removeItem('reasondx_student_code');
         localStorage.removeItem('rdx-progress');
         sessionStorage.clear();
-        window.location.href = toRoot + 'index.html';
+        window.location.href = toRoot + 'auth/login.html';
       });
     }
     // --- About ReasonDx modal ---
