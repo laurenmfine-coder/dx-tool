@@ -1,5 +1,5 @@
 /**
- * ReasonDx Case Navigation System
+ * DxSuite Case Navigation System
  * Provides consistent navigation for adventure cases and content pages
  * 
  * Usage: Include this script and call DxCaseNav.init() with config options
@@ -43,18 +43,18 @@ const DxCaseNav = {
         // Add body class for padding
         document.body.classList.add('has-dx-nav');
         
-        // Create exit modal (MUST be before setupEventListeners so buttons exist)
-        if (this.config.confirmExit) {
-            this.createExitModal();
-        }
+        // Setup event listeners
+        this.setupEventListeners();
         
         // Create quick nav if enabled
         if (this.config.showQuickNav) {
             this.createQuickNav();
         }
         
-        // Setup event listeners
-        this.setupEventListeners();
+        // Create exit modal
+        if (this.config.confirmExit) {
+            this.createExitModal();
+        }
     },
 
     detectPageType() {
@@ -159,7 +159,7 @@ const DxCaseNav = {
         const crumbs = [];
         
         // Platform root
-        crumbs.push(`<a href="${this.config.platformRoot}index.html">ReasonDx</a>`);
+        crumbs.push(`<a href="${this.config.platformRoot}index.html">DxSuite</a>`);
         
         // Section based on page type
         if (this.pageType === 'adventure-case') {

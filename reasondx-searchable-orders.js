@@ -3,9 +3,7 @@
  */
 (function() {
     'use strict';
-    console.log('[SearchableOrders] Initializing...');
-
-    const LABS = {
+const LABS = {
         'cbc': { name: 'Complete Blood Count (CBC)', aliases: ['CBC', 'blood count', 'WBC', 'hemoglobin', 'hematocrit', 'platelets'], category: 'hematology' },
         'cbc-diff': { name: 'CBC with Differential', aliases: ['CBC diff', 'differential', 'neutrophils', 'lymphocytes', 'eosinophils'], category: 'hematology' },
         'bmp': { name: 'Basic Metabolic Panel (BMP)', aliases: ['BMP', 'chem 7', 'sodium', 'potassium', 'chloride', 'BUN', 'creatinine', 'glucose', 'electrolytes'], category: 'chemistry' },
@@ -334,6 +332,5 @@
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
-
-    console.log('[SearchableOrders] Loaded ' + Object.keys(LABS).length + ' labs and ' + Object.keys(IMAGING).length + ' imaging studies');
+.length + ' labs and ' + Object.keys(IMAGING).length + ' imaging studies');
 })();

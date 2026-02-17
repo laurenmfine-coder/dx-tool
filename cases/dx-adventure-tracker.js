@@ -22,4 +22,3 @@ window.DxAdventureTracker = {
   _load() { this._state = window.RdxPersist?.load('adventures') || {}; }
 };
 DxAdventureTracker._load();
-console.log('[DxAdventureTracker] Loaded');

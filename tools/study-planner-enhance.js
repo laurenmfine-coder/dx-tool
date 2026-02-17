@@ -103,7 +103,7 @@
         // Dashboard link
         html += `<div style="text-align: center; margin-top: 12px;">
             <a href="learning-dashboard.html" style="display: inline-block; padding: 10px 24px;
-               background: rgba(255,255,255,0.15); color: white; border-radius: 10px; text-decoration: none;
+               background: rgba(255,255,255,0.15); color: white; border-radius:12px; text-decoration: none;
                font-weight: 600; font-size: 0.9rem;">📊 Full Learning Dashboard</a>
         </div>`;
 

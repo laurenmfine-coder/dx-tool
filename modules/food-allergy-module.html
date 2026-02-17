@@ -12,41 +12,23 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Allergy: Diagnosis & Management | MechanismDx</title>
+    <meta name="description" content="Interactive pathophysiology module: Food Allergy: Diagnosis & Management. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Food Allergy: Diagnosis & Management | ReasonDx</title>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+            font-family:var(--rdx-font);
             background: var(--bg-main);
             color: var(--text-primary);
             line-height: 1.7;
             min-height: 100vh;
         }
         
-        .dx-nav {
-            background: var(--bg-card);
-            padding: 12px 24px;
-            border-bottom: 1px solid var(--border);
-        }
-        .dx-nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .dx-nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        
+        
+        
+        
         .dx-nav-link {
             padding: 8px 14px;
             border-radius: 8px;
@@ -88,7 +70,7 @@
             padding: 32px;
             margin-bottom: 32px;
             border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow:var(--rdx-shadow);
         }
         .section h2 {
             color: var(--text-primary);
@@ -101,7 +83,7 @@
         .section p { margin-bottom: 16px; color: var(--text-secondary); }
         
         .key-point {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
             border-left: 4px solid #f59e0b;
             padding: 16px 20px;
             border-radius: 0 12px 12px 0;
@@ -179,7 +161,7 @@
             text-align: center;
         }
         .algorithm-step {
-            background: white;
+            background:var(--rdx-bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 16px;
@@ -224,7 +206,7 @@
         }
         .quiz-section h3 { color: var(--primary-dark); margin-bottom: 20px; }
         .quiz-question {
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -332,95 +314,35 @@
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
@@ -428,19 +350,19 @@
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
 .dx-theme-modal.open { display: flex; }
-
-
-
-
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
 .dx-theme-option:hover { border-color: var(--primary); }
 .dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
 .dx-theme-preview-nav { width: 30%; }
 .dx-theme-preview-main { width: 70%; }
 .dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
@@ -450,7 +372,7 @@
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -460,14 +382,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </head>
 <body>
 
-    <!-- UNIFIED DX NAVIGATION -->
-    
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <!-- Unified Navigation -->
     <header class="header">
         <div class="header-inner">
             <div class="breadcrumb">
-                <a href="mechanismdx-index.html">MechanismDx</a> → 
+                <a href="mechanismdx-index.html">ReasonDx</a> → 
                 <a href="allergy-immunology.html">Allergy & Immunology</a> → 
                 Food Allergy
             </div>
@@ -1144,22 +1065,24 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </script>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
                         <div class="dx-theme-name">Midnight Teal</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
                         <div class="dx-theme-name">Purple Night</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
                         <div class="dx-theme-name">Forest Night</div>
                     </div>
@@ -1171,13 +1094,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <script>
     // Theme System
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-);
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
     }
-document.addEventListener('click', (e) => {
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
     });
     document.addEventListener('keydown', (e) => {
@@ -1237,8 +1172,10 @@ document.addEventListener('click', (e) => {
 <style>.choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.choice-title{font-weight:600;font-size:.95rem}</style>
 <script>function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).style.display='block'}</script>
 
-<script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
-<div data-dx-tutor
+<script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
          data-module-title="Food Allergy: Diagnosis & Management"
          data-key-points="🎯 Learning Objectives, 📊 Classification of Food Allergy, 🥛 Major Food Allergens (FALCPA + Sesame), 🔬 Diagnostic Testing for Food Allergy, 💊 Peanut Oral Immunotherapy (Palforzia), 🏥 Food Allergy Management, 📚 Open-Access References, Skin Prick Testing (SPT), pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
@@ -1253,5 +1190,7 @@ document.addEventListener('click', (e) => {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/food-allergy.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

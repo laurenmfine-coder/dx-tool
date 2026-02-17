@@ -7,34 +7,35 @@
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hypercalcemia of Malignancy | Clinical Adventure</title>
+    <meta name="description" content="Interactive clinical adventure: Hypercalcemia of Malignancy | Clinical. Make real-time diagnostic decisions in this branching case scenario on ReasonDx.">
+<title>Hypercalcemia of Malignancy | Clinical Adventure</title>
     <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
 <link href="../css/rdx-a11y.css" rel="stylesheet">
 <style>
         :root { --primary: #4A90A4; --primary-dark: #2D5A6A; --accent: #F4A261; --success: #2A9D8F; --danger: #E63946; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: #F8FAFC; }
+        body { font-family:var(--rdx-font); background: #F8FAFC; }
         .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
         .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
         .header h1 { font-size: 1.5rem; }
         .progress-bar { height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin-top: 1rem; }
         .progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
-        .scene { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .scene { background:var(--rdx-bg-card); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
         .scene-title { font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 1rem; }
         .patient-info { background: #E3F2FD; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
         .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
-        .vital { background: white; padding: 0.5rem; border-radius: 6px; text-align: center; border: 1px solid #ddd; }
+        .vital { background:var(--rdx-bg-card); padding: 0.5rem; border-radius:8px; text-align: center; border: 1px solid #ddd; }
         .vital-label { font-size: 0.7rem; color: #666; }
         .vital-value { font-weight: 600; }
         .vital-value.critical { color: var(--danger); }
         .narrative { line-height: 1.7; margin-bottom: 1.5rem; }
         .question { background: #FFF8E1; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left:4px solid var(--rdx-teal); }
         .options { display: flex; flex-direction: column; gap: 0.75rem; }
-        .option { padding: 1rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: white; text-align: left; }
+        .option { padding: 1rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background:var(--rdx-bg-card); text-align: left; }
         .option:hover { border-color: var(--primary); }
         .option.correct { border-color: var(--success); background: #E8F5E9; }
         .option.incorrect { border-color: var(--danger); background: #FFEBEE; }
@@ -53,7 +54,7 @@
 .rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
 .rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
 .rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
-.rdx-crossplatform-link { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
@@ -163,7 +164,7 @@ const scenes = [
     <script src="dx-ai-tutor.js"></script>
 
 <div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:var(--rdx-bg-hover);border-radius:12px;border: 1px solid #e2e8f0">
-<h3 style="color: #0f766e;margin-bottom:12px">📚 References & Evidence Base</h3>
+<h3 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px">📚 References & Evidence Base</h3>
 <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/31917820/" target="_blank" style="color: #64748b">Sickle Cell Disease Guidelines</a> — ASH Guidelines 2020</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/11251676/" target="_blank" style="color: #64748b">DIC Diagnosis and Management - ISTH</a> — J Thromb Haemost 2001</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK560490/" target="_blank" style="color: #64748b">Acute Leukemia - NCBI Bookshelf</a> — StatPearls</li></ul>
 <p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
 </div>
@@ -173,19 +174,13 @@ const scenes = [
 <script src="../dx-cross-links.js"></script>
 <script src="../data/rdx-persist.js"></script>
 
-<div class="rdx-crossplatform-nav">
-    <h4>🎯 Continue Your Learning Journey</h4>
-    <div class="rdx-crossplatform-links">
-                <a href="../deep-dive-player.html?module=hypercalcemia-malignancy" class="rdx-crossplatform-link">📚 Hypercalcemia of Malignancy Deep Dive</a>
-        <a href="../deep-dive-player.html?module=aki" class="rdx-crossplatform-link">🔬 Acute Kidney Injury</a>
-        <a href="../deep-dive-player.html?module=hyponatremia" class="rdx-crossplatform-link">🔬 Hyponatremia</a>
-        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
-    </div>
+
 </div>
 
 <script src="../js/rdx-nav.js"></script>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

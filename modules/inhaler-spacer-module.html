@@ -2,7 +2,8 @@
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="stylesheet" href="../mobile.css"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Inhaler Spacer | ReasonDx</title><link rel="stylesheet" href="../css/rdx-theme.css">
+<link rel="stylesheet" href="../mobile.css"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Interactive pathophysiology module: Inhaler Spacer. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Inhaler Spacer | ReasonDx</title><link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 -60%</text>
                             <text x="100" y="175" text-anchor="middle" font-size="10" fill="#166534">Lungs</text>
@@ -400,27 +401,29 @@
         </div>
 
         <footer class="footer">
-        <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+        <p>© 2025-2026 ReasonDx · Part of the <a href="../index.html">ReasonDx</a></p>
         
     </footer>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
                         <div class="dx-theme-name">Midnight Teal</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
                         <div class="dx-theme-name">Purple Night</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
                         <div class="dx-theme-name">Forest Night</div>
                     </div>
@@ -432,13 +435,25 @@
     <script>
     // Theme System
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-);
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
     }
-document.addEventListener('click', (e) => {
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
     });
     document.addEventListener('keydown', (e) => {
@@ -447,8 +462,10 @@ document.addEventListener('click', (e) => {
     </script>
 
     <script src="../js/dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
-<div data-dx-tutor
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
          data-module-title="Clinical Module"
          data-key-points="2. MDI + Spacer Technique (Recommended), 3. Dry Powder Inhaler (DPI) Technique, 4. Device Selection Guide, 5. Common Technique Errors, 6. Patient Teaching Strategies, Demonstrate, Don't Just Tell, Key Messages for Patients, 📚 References, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
@@ -515,7 +532,7 @@ document.addEventListener('click', (e) => {
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
 <li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
@@ -525,5 +542,7 @@ document.addEventListener('click', (e) => {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/inhaler-spacer.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

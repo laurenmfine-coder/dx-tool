@@ -11,12 +11,13 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrolyte Disorders | MechanismDx</title>
+    <meta name="description" content="Interactive pathophysiology module: Electrolyte Disorders. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Electrolyte Disorders | ReasonDx</title>
     
     <style>
         :root { --primary: #059669; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #fafafa; --bg-card: #ffffff; --border: #e4e4e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
         .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
         .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
         .header { background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%); padding: 40px 24px; }
@@ -57,14 +58,16 @@
         .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
         .comparison-table th { background: #f1f5f9; font-weight: 600; }
-        .mnemonic-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; }
+        .mnemonic-box { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; }
         .mnemonic-box h4 { color: #92400e; margin-bottom: 8px; }
         .mnemonic-box p { color: #78350f; font-size: 18px; font-weight: 600; }
     </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-    
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/electrolytes.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Electrolyte Disorders</a> → Module</div>
+
+    <!-- nav removed: unified via rdx-nav.js -->
     <header class="header"><div class="header-inner"><h1>Electrolyte Disorders</h1><p class="header-subtitle">Sodium, Potassium, Calcium, Magnesium, Phosphate</p></div></header>
 
     <main class="content">
@@ -478,7 +481,7 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Electrolyte Disorders</strong>. <em>StatPearls</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK459316/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/NBK459316/</a></li>
 <li><strong>Fluid &amp; Electrolyte Management</strong>. <em>NEJM 2015</em>. <a href="https://doi.org/10.1056/NEJMra1614179" target="_blank" rel="noopener">https://doi.org/10.1056/NEJMra1614179</a></li>
@@ -488,5 +491,6 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Specialty Shadowing Guides. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>Specialty Shadowing Guides | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
 .header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .container{max-width:760px;margin:0 auto;padding:24px;}
 .spec-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;}
 .spec-btn{padding:12px 18px;border-radius:12px;border:2px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
@@ -23,13 +24,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .spec-btn.active{background:var(--pm-teal);color:#fff;border-color:var(--pm-teal);}
 .spec-guide{display:none;}
 .spec-guide.active{display:block;}
-.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
-.card h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--pm-teal);margin-bottom:16px;}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card h2{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;color:var(--pm-teal);margin-bottom:16px;}
 .card h3{font-size:15px;font-weight:700;margin:16px 0 8px;display:flex;align-items:center;gap:8px;}
 .card p{font-size:14px;margin-bottom:12px;line-height:1.7;}
-.tip{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:10px;padding:16px;margin:12px 0;font-size:13px;line-height:1.7;}
+.tip{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:12px;padding:16px;margin:12px 0;font-size:13px;line-height:1.7;}
 .tip strong{color:var(--pm-teal);}
-.warn{background:#fefce8;border:1.5px solid #fde68a;border-radius:10px;padding:16px;margin:12px 0;font-size:13px;line-height:1.7;}
+.warn{background:#fefce8;border:1.5px solid #fde68a;border-radius:12px;padding:16px;margin:12px 0;font-size:13px;line-height:1.7;}
 .warn strong{color:#92400e;}
 .prompt-list{margin:12px 0;}
 .prompt{padding:12px 16px;border-radius:8px;margin-bottom:6px;font-size:14px;background:#f8fafc;border:1px solid var(--pm-border);cursor:pointer;transition:.2s;position:relative;}
@@ -40,7 +41,34 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .vocab{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
 .vocab-item{padding:10px 14px;background:#f8fafc;border-radius:8px;font-size:13px;}
 .vocab-item strong{display:block;color:var(--pm-teal);font-size:12px;text-transform:uppercase;margin-bottom:2px;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -296,5 +324,6 @@ init();
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

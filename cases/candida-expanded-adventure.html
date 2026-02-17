@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Candida species. Interactive Socratic clinical case with guided reasoning on ReasonDx.">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<title>Candida species | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--rdx-font);background:var(--rdx-bg,#f8fafc);min-height:100vh;color:var(--rdx-text,#1e293b)}.container{max-width:800px;margin:0 auto;padding:20px}.progress-bar{background:var(--rdx-border,#e2e8f0);border-radius:8px;height:6px;margin-bottom:24px;overflow:hidden}.progress-fill{background:linear-gradient(90deg,#0d9488,#14b8a6);height:100%;border-radius:8px;transition:width 0.5s}.score-tracker{position:fixed;top:12px;right:60px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:8px 16px;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;gap:8px;font-size:14px}.score-label{color:var(--rdx-text-muted,#64748b);font-size:12px}.score-value{font-weight:700;color:var(--rdx-teal,#0d9488);font-size:18px}.difficulty-panel{text-align:center;margin-bottom:20px}.diff-btn{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--rdx-text-muted,#64748b);transition:all 0.2s}.diff-btn.active{background:var(--rdx-teal,#0d9488);color:#fff;border-color:var(--rdx-teal,#0d9488)}.diff-btn:hover{border-color:var(--rdx-teal,#0d9488)}.scene-title{font-family:var(--rdx-font-serif);font-size:1.6rem;color:var(--rdx-teal-dark,#0f766e);margin-bottom:16px}.narrative{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin-bottom:16px;line-height:1.7}.narrative .highlight{background:rgba(13,148,136,0.1);padding:2px 6px;border-radius:4px;font-weight:600}.narrative .critical{background:rgba(220,38,38,0.1);color:#dc2626;padding:2px 6px;border-radius:4px;font-weight:600}.vital-signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin:12px 0;padding:12px;background:rgba(13,148,136,0.04);border-radius:8px;border:1px solid rgba(13,148,136,0.1)}.vital-item{text-align:center;font-size:13px}.vital-item .label{color:var(--rdx-text-muted,#64748b);font-size:11px;display:block}.vital-item .value{font-weight:700;color:var(--rdx-teal-dark,#0f766e)}.socratic-prompt{background:linear-gradient(135deg,rgba(124,58,237,0.06),rgba(13,148,136,0.06));border:1px solid rgba(124,58,237,0.15);border-radius:12px;padding:16px 20px;margin:16px 0}.socratic-prompt h4{color:var(--rdx-purple,#7c3aed);font-size:0.95rem;margin-bottom:8px}.hint-box{background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);border-radius:8px;padding:12px;margin:8px 0;font-size:0.9rem;color:#92400e;display:none}.options-grid{display:grid;gap:10px;margin:16px 0}.option-btn{background:var(--rdx-bg-card,#fff);border:2px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:14px 18px;cursor:pointer;text-align:left;font-size:14px;transition:all 0.2s;font-family:var(--rdx-font)}.option-btn:hover{border-color:var(--rdx-teal,#0d9488);background:rgba(13,148,136,0.03)}.option-btn.correct{border-color:#16a34a;background:rgba(22,163,74,0.06)}.option-btn.incorrect{border-color:#dc2626;background:rgba(220,38,38,0.04)}.option-btn.disabled{pointer-events:none;opacity:0.7}.explanation-box{border-radius:12px;padding:16px;margin:12px 0;display:none}.explanation-box.correct{background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.2)}.explanation-box.incorrect{background:rgba(220,38,38,0.04);border:1px solid rgba(220,38,38,0.15)}.mechanism-box{background:linear-gradient(135deg,rgba(13,148,136,0.06),rgba(13,148,136,0.02));border:1px solid rgba(13,148,136,0.15);border-radius:12px;padding:20px;margin:16px 0}.mechanism-title{color:var(--rdx-teal-dark,#0f766e);font-weight:700;font-size:0.95rem;margin-bottom:10px}.pathway{line-height:1.8;font-size:0.93rem;color:var(--rdx-text,#1e293b)}.why-chain{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px;margin:8px 0}.why-q{font-weight:600;color:var(--rdx-purple,#7c3aed);cursor:pointer;font-size:0.9rem}.why-a{display:none;margin-top:6px;font-size:0.88rem;color:var(--rdx-text-muted,#64748b)}.next-btn{background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:600;cursor:pointer;margin:20px 0;display:none;font-family:var(--rdx-font)}.next-btn:hover{opacity:0.9;transform:translateY(-1px)}.completion-card{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:16px;padding:32px;text-align:center;margin:24px 0}.completion-card h2{font-family:var(--rdx-font-serif);color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px}.references-panel{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:16px;margin:20px 0}.references-panel a{display:block;color:var(--rdx-teal,#0d9488);font-size:13px;margin:4px 0;text-decoration:none;word-break:break-all}.references-panel a:hover{text-decoration:underline}.rdx-crossplatform-nav{background:var(--rdx-bg-card,#f8fafc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin:24px 0}.rdx-crossplatform-nav h4{color:var(--rdx-text-muted,#64748b);margin-bottom:12px;font-size:0.9rem}.rdx-crossplatform-links{display:flex;gap:12px;flex-wrap:wrap}.rdx-crossplatform-link{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px 16px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:all 0.2s}.rdx-crossplatform-link:hover{background:rgba(13,148,136,0.05);transform:translateY(-2px)}@media(max-width:640px){.score-tracker{top:auto;bottom:12px;right:12px}.container{padding:12px}.vital-signs{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+<div class="container">
+    <div style="margin-bottom:12px"><a href="../adventure-hub.html" style="color:var(--rdx-teal,#0d9488);text-decoration:none;font-size:14px;font-weight:600">&larr; Back to Cases</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:var(--rdx-text-muted,#64748b);margin-bottom:8px;font-weight:600">Difficulty</div>
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div>
+    <div class="references-panel" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="toggleReferences()">
+            <span>&#128218; Open-Access References</span><span id="refToggle">&#9656;</span>
+        </div>
+        <div id="referencesContent" style="display:none;margin-top:8px">
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK560624/" target="_blank" rel="noopener">Candidiasis - StatPearls</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK553112/" target="_blank" rel="noopener">C. auris - CDC</a>
+        </div>
+    </div>
+    <div id="scene-container"></div>
+    <div class="rdx-crossplatform-nav">
+        <h4>&#128279; Continue Learning</h4>
+        <div class="rdx-crossplatform-links">
+<a href="../modules/index.html" class="rdx-crossplatform-link">🧬 Mechanism Module</a>
+<a href="../board-prep.html" class="rdx-crossplatform-link">📝 Board Prep</a>
+<a href="../training.html" class="rdx-crossplatform-link">🏋️ Training Hub</a>
+<a href="../adventure-hub.html" class="rdx-crossplatform-link">🗺️ More Cases</a>
+        </div>
+    </div>
+</div>
+<script>
+let currentStage=0,score=0,difficulty='standard';
+const stages=[
+{
+    title:"The Presenting Patient",
+    content:`<div class="narrative"><p>65-year-old in ICU on broad-spectrum antibiotics with persistent fever. Blood cultures grow yeast.</p><div class="vital-signs"><div class="vital-item"><span class="label">HR</span><span class="value">102</span></div><div class="vital-item"><span class="label">Temp</span><span class="value">38.8°C</span></div></div></div>`,
+    hint_beginner:"What organisms commonly cause this presentation?",
+    hint_advanced:"Consider the Yeast classification and most likely pathogens for this clinical scenario.",
+    question:{
+        prompt:"Based on this presentation, which organism is most likely?",
+        options:[{text:"Candida species",correct:true,explanation:""},{text:"Consider the clinical clues carefully",correct:false,explanation:"The presentation is classic for Candida species"},{text:"A viral pathogen",correct:false,explanation:"The clinical features suggest a bacterial/fungal/parasitic etiology."},{text:"An atypical organism",correct:false,explanation:"While possible, the classic presentation points to Candida species"}],
+        explanation:{correct:"Correct! This is a classic presentation for Candida species. Key clues in the history and exam guide you toward this organism.",incorrect:"The clinical presentation is classic for Candida species. Review the key features that distinguish this organism."},
+        teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 Candida species — Key Features</div><div class="pathway"><strong>Classification:</strong> Yeast<br><br><strong>Classic presentation:</strong> 65-year-old in ICU on broad-spectrum antibiotics with persistent fever. Blood cultures grow yeast.<br><br><strong>Key diseases:</strong> Thrush, vulvovaginal, esophageal candidiasis (AIDS), candidemia, hepatosplenic, endocarditis</div></div>`,
+        why_chain:[{q:"Why is this organism likely in this setting?",a:"The clinical scenario, patient demographics, and risk factors are classic for Candida species. Key identifying features include the Yeast classification and typical disease manifestations."}],
+        points:10
+    }
+},
+{
+    title:"Laboratory Identification",
+    content:`<div class="narrative"><p>Specimens are sent to the lab. The microbiology report describes: <span class="highlight">Yeast</span>.</p><div class="socratic-prompt"><h4>Organism Identification</h4><p>Lab features: Germ tube+ (C. albicans), Sabouraud agar, CHROMagar for speciation. C. auris: emerging threat</p></div></div>`,
+    hint_beginner:"What lab tests distinguish this organism from similar ones?",
+    hint_advanced:"Consider the specific biochemical and culture characteristics that are pathognomonic.",
+    question:{
+        prompt:"Which test identifies C. albicans?",
+        options:[{text:"Gram stain morphology alone",correct:false,explanation:"Gram stain narrows the differential but additional tests are needed."},{text:"Germ tube test (positive in C. albicans)",correct:true,explanation:""},{text:"Blood culture growth pattern",correct:false,explanation:"Growth pattern helps but specific biochemical tests are more definitive."},{text:"Clinical presentation only",correct:false,explanation:"Lab confirmation is essential for definitive identification."}],
+        explanation:{correct:"Correct! Germ tube test (positive in C. albicans) is the key distinguishing test for Candida species.",incorrect:"The definitive identification relies on: Germ tube test (positive in C. albicans). Remember: Germ tube+ (C. albicans), Sabouraud agar, CHROMagar for speciation. C. auris: emerging threat"},
+        teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 Identifying Candida species</div><div class="pathway"><strong>Gram stain:</strong> Yeast<br><br><strong>Key identification:</strong> Germ tube+ (C. albicans), Sabouraud agar, CHROMagar for speciation. C. auris: emerging threat<br><br><strong>Definitive test:</strong> Germ tube test (positive in C. albicans)</div></div>`,
+        why_chain:[{q:"What other organisms look similar on Gram stain?",a:"Several organisms share the Yeast morphology. The specific biochemical tests (Germ tube test (positive in C. albicans)) are what differentiate Candida species from its look-alikes."}],
+        points:10
+    }
+},
+{
+    title:"Virulence & Pathogenesis",
+    content:`<div class="narrative"><p>Understanding how Candida species causes disease is critical for both diagnosis and treatment.</p><div class="socratic-prompt"><h4>Virulence Factors</h4><p>Morphologic switching (yeast↔hyphae), biofilm on devices, adhesins, secreted aspartyl proteases</p></div></div>`,
+    hint_beginner:"Which virulence factor is the most important for causing disease?",
+    hint_advanced:"Consider how each virulence factor contributes to immune evasion, tissue damage, or toxin production.",
+    question:{
+        prompt:"Why is biofilm formation clinically important?",
+        options:[{text:"Endotoxin/LPS",correct:false,explanation:"While important in gram-negatives, this is not the key factor for this question."},{text:"Iron acquisition systems",correct:false,explanation:"Siderophores help with growth but are not the most important virulence factor."},{text:"Biofilm on catheters/devices is resistant to antifungals — line removal is often necessary",correct:true,explanation:""},{text:"Biofilm formation",correct:false,explanation:"Biofilm contributes to persistence but is not the primary virulence factor here."}],
+        explanation:{correct:"Correct! Biofilm on catheters/devices is resistant to antifungals — line removal is often necessary is the critical virulence factor.",incorrect:"The key virulence factor is: Biofilm on catheters/devices is resistant to antifungals — line removal is often necessary. This drives the pathogenesis of disease caused by Candida species."},
+        teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 Candida species Virulence Factors</div><div class="pathway"><strong>Key virulence factors:</strong><br>Morphologic switching (yeast↔hyphae), biofilm on devices, adhesins, secreted aspartyl proteases<br><br><strong>Most important:</strong> Biofilm on catheters/devices is resistant to antifungals — line removal is often necessary</div></div>`,
+        why_chain:[{q:"How does this virulence factor help the organism evade the immune system?",a:"Biofilm on catheters/devices is resistant to antifungals — line removal is often necessary — this factor is critical because it directly impacts the organism's ability to establish and maintain infection."}],
+        points:10
+    }
+},
+{
+    title:"Empiric Treatment",
+    content:`<div class="narrative"><p>With Candida species identified, you need to initiate appropriate antimicrobial therapy.</p><div class="socratic-prompt"><h4>Treatment Selection</h4><p>Current guidelines: Mucosal: fluconazole. Candidemia: echinocandin (micafungin/caspofungin). Remove central lines</p></div></div>`,
+    hint_beginner:"What is the first-line treatment for this organism?",
+    hint_advanced:"Consider mechanism of action, spectrum, and potential resistance patterns when selecting therapy.",
+    question:{
+        prompt:"First-line for candidemia?",
+        options:[{text:"Observation without antibiotics",correct:false,explanation:"This infection requires antimicrobial treatment."},{text:"Combination therapy with 3 agents",correct:false,explanation:"Multi-drug regimens are reserved for specific situations (TB, endocarditis)."},{text:"Broad-spectrum carbapenem",correct:false,explanation:"Carbapenems may be appropriate for resistant strains but are not first-line for routine infections."},{text:"Echinocandin (micafungin or caspofungin) + source control (remove lines)",correct:true,explanation:""}],
+        explanation:{correct:"Correct! Echinocandin (micafungin or caspofungin) + source control (remove lines) is the appropriate treatment approach.",incorrect:"First-line treatment: Echinocandin (micafungin or caspofungin) + source control (remove lines). Guidelines recommend: Mucosal: fluconazole. Candidemia: echinocandin (micafungin/caspofungin). Remove central lines"},
+        teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 Treating Candida species</div><div class="pathway"><strong>Treatment summary:</strong><br>Mucosal: fluconazole. Candidemia: echinocandin (micafungin/caspofungin). Remove central lines<br><br><strong>First-line:</strong> Echinocandin (micafungin or caspofungin) + source control (remove lines)</div></div>`,
+        why_chain:[{q:"Why this specific antibiotic choice?",a:"The treatment selection is based on the organism's susceptibility profile, the site of infection, and current guideline recommendations. Echinocandin (micafungin or caspofungin) + source control (remove lines)"}],
+        points:10
+    }
+},
+{
+    title:"Resistance & Treatment Failure",
+    content:`<div class="narrative"><p>The patient is not improving after 48 hours. You need to consider resistance mechanisms.</p><div class="socratic-prompt"><h4>Resistance Patterns</h4><p>C. glabrata: dose-dependent fluconazole. C. krusei: intrinsic fluconazole R. C. auris: multidrug resistant</p></div></div>`,
+    hint_beginner:"What resistance mechanisms does this organism use?",
+    hint_advanced:"Think about the molecular mechanisms: altered targets, enzyme production, efflux, permeability changes.",
+    question:{
+        prompt:"Why is C. auris especially concerning?",
+        options:[{text:"Multidrug resistance (fluconazole, amphotericin, sometimes echinocandins) + environmental persistence",correct:true,explanation:""},{text:"Spontaneous clearance of infection",correct:false,explanation:"Resistance, not resolution, is the concern when treatment fails."},{text:"Patient non-compliance only",correct:false,explanation:"While adherence matters, understanding organism resistance is critical."},{text:"Drug-drug interaction reducing levels",correct:false,explanation:"Pharmacokinetic issues should be considered but organism resistance is the primary concern."}],
+        explanation:{correct:"Correct! Multidrug resistance (fluconazole, amphotericin, sometimes echinocandins) + environmental persistence",incorrect:"Key resistance mechanism: Multidrug resistance (fluconazole, amphotericin, sometimes echinocandins) + environmental persistence. Full resistance profile: C. glabrata: dose-dependent fluconazole. C. krusei: intrinsic fluconazole R. C. auris: multidrug resistant"},
+        teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 Candida species Resistance</div><div class="pathway"><strong>Resistance mechanisms:</strong><br>C. glabrata: dose-dependent fluconazole. C. krusei: intrinsic fluconazole R. C. auris: multidrug resistant<br><br><strong>Key mechanism:</strong> Multidrug resistance (fluconazole, amphotericin, sometimes echinocandins) + environmental persistence</div></div>`,
+        why_chain:[{q:"How does this resistance mechanism work at the molecular level?",a:"Multidrug resistance (fluconazole, amphotericin, sometimes echinocandins) + environmental persistence — understanding this mechanism guides selection of alternative antibiotics that bypass the resistance."}],
+        points:10
+    }
+},
+{
+    title:"Prevention & Stewardship",
+    content:`<div class="narrative"><p>After successful treatment, you discuss prevention strategies with the patient and team.</p><div class="socratic-prompt"><h4>Prevention Strategies</h4><p>Antifungal stewardship, remove catheters, C. auris infection control (contact precautions)</p></div></div>`,
+    hint_beginner:"What prevention strategies are available?",
+    hint_advanced:"Consider vaccines, prophylaxis, infection control measures, and antimicrobial stewardship.",
+    question:{
+        prompt:"C. auris infection control?",
+        options:[{text:"Patient isolation for life",correct:false,explanation:"Isolation is not necessary for most resolved infections."},{text:"Contact precautions + EPA-registered disinfectants (C. auris persists on surfaces)",correct:true,explanation:""},{text:"No prevention measures exist",correct:false,explanation:"Multiple prevention strategies are available for this organism."},{text:"Universal prophylactic antibiotics",correct:false,explanation:"Universal prophylaxis promotes resistance and is not recommended."}],
+        explanation:{correct:"Correct! Contact precautions + EPA-registered disinfectants (C. auris persists on surfaces)",incorrect:"Prevention: Contact precautions + EPA-registered disinfectants (C. auris persists on surfaces). Comprehensive approach: Antifungal stewardship, remove catheters, C. auris infection control (contact precautions)"},
+        teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 Preventing Candida species Infections</div><div class="pathway"><strong>Prevention strategies:</strong><br>Antifungal stewardship, remove catheters, C. auris infection control (contact precautions)<br><br><strong>Key measure:</strong> Contact precautions + EPA-registered disinfectants (C. auris persists on surfaces)</div></div>`,
+        why_chain:[{q:"What is the role of antimicrobial stewardship?",a:"Appropriate antibiotic use, avoiding unnecessary broad-spectrum agents, and de-escalating therapy when possible all help prevent resistance development in Candida species and other organisms."}],
+        points:10
+    }
+}];
+document.getElementById('maxScore').textContent=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);
+function setDifficulty(d,btn){difficulty=d;document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const hb=document.querySelector('.hint-box');if(hb)hb.style.display=d==='beginner'?'block':'none'}
+function toggleReferences(){const c=document.getElementById('referencesContent');const t=document.getElementById('refToggle');if(c.style.display==='none'){c.style.display='block';t.textContent='\u25BE'}else{c.style.display='none';t.textContent='\u25B8'}}
+function renderStage(idx){if(idx>=stages.length){showCompletion();return}const st=stages[idx];const pct=((idx)/stages.length*100);document.getElementById('progress').style.width=pct+'%';let h='<h2 class="scene-title">'+st.title+'</h2>';h+='<div class="scene-content">'+st.content+'</div>';if(st.hint_beginner)h+='<div class="hint-box" id="hint-box"'+(difficulty==='beginner'?' style="display:block"':'')+'>\ud83d\udca1 '+st.hint_beginner+'</div>';if(difficulty==='advanced'&&st.hint_advanced)h+='<div class="hint-box" style="display:block;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.15);color:#5b21b6">\ud83c\udf93 '+st.hint_advanced+'</div>';if(st.question){h+='<div class="socratic-prompt"><h4>Clinical Question</h4><p>'+st.question.prompt+'</p></div>';h+='<div class="options-grid" id="options-'+idx+'">';st.question.options.forEach((opt,oi)=>{h+='<button class="option-btn" id="option-'+idx+'-'+oi+'" onclick="checkAnswer('+idx+','+oi+')">'+String.fromCharCode(65+oi)+'. '+opt.text+'</button>'});h+='</div>';h+='<div class="explanation-box" id="explain-'+idx+'"></div>';h+='<div id="teaching-'+idx+'" style="display:none">'+st.question.teaching+'</div>';if(st.question.why_chain&&st.question.why_chain.length>0){h+='<div id="why-'+idx+'" style="display:none">';st.question.why_chain.forEach((wc,wi)=>{h+='<div class="why-chain"><div class="why-q" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'none\'?\'block\':\'none\'">\ud83d\udd0d '+wc.q+'</div><div class="why-a">'+wc.a+'</div></div>'});h+='</div>'}}h+='<button class="next-btn" id="next-'+idx+'" onclick="nextStage()">Continue \u2192</button>';document.getElementById('scene-container').innerHTML=h}
+function checkAnswer(si,oi){const st=stages[si];const opt=st.question.options[oi];document.querySelectorAll('#options-'+si+' .option-btn').forEach((b,i)=>{b.classList.add('disabled');if(st.question.options[i].correct)b.classList.add('correct');if(i===oi&&!opt.correct)b.classList.add('incorrect')});const eb=document.getElementById('explain-'+si);if(opt.correct){score+=st.question.points;document.getElementById('score').textContent=score;eb.className='explanation-box correct';eb.innerHTML='<strong>\u2713 Correct!</strong> '+st.question.explanation.correct}else{eb.className='explanation-box incorrect';eb.innerHTML='<strong>\u2717 Not quite.</strong> '+st.question.explanation.incorrect}eb.style.display='block';document.getElementById('teaching-'+si).style.display='block';const why=document.getElementById('why-'+si);if(why)why.style.display='block';document.getElementById('next-'+si).style.display='inline-block'}
+function nextStage(){currentStage++;renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'})}
+function showCompletion(){const mx=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);const pct=mx>0?Math.round(score/mx*100):0;document.getElementById('progress').style.width='100%';let lvl='Developing';if(pct>=90)lvl='Mastery';else if(pct>=70)lvl='Proficient';else if(pct>=50)lvl='Competent';document.getElementById('scene-container').innerHTML='<div class="completion-card"><h2>\ud83c\udf89 Case Complete!</h2><p style="font-size:2rem;font-weight:700;color:var(--rdx-teal,#0d9488)">'+pct+'%</p><p style="color:var(--rdx-text-muted,#64748b)">Score: '+score+'/'+mx+'</p><p style="margin:12px 0;font-weight:600">Level: '+lvl+'</p><div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="../adventure-hub.html" style="padding:10px 20px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">More Cases</a><a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:var(--rdx-purple,#7c3aed);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">\ud83d\udcca Dashboard</a><button onclick="currentStage=0;score=0;document.getElementById(\'score\').textContent=0;renderStage(0)" style="padding:10px 20px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;cursor:pointer;font-weight:600">\ud83d\udd04 Retry</button></div></div>';try{const progress=JSON.parse(localStorage.getItem('reasondx-progress')||'{}'  );if(!progress.cases)progress.cases={};progress.cases['candida']=Math.max(progress.cases['candida']||0,pct);localStorage.setItem('reasondx-progress',JSON.stringify(progress))}catch(e){}}
+renderStage(0);
+</script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

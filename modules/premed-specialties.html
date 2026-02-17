@@ -7,23 +7,24 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Specialty Explorer. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>Specialty Explorer | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-emerald:#059669;--pm-emerald-50:#ecfdf5;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
 .header{background:linear-gradient(135deg,#059669,#047857);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .container{max-width:860px;margin:0 auto;padding:24px;}
 .tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
 .tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
 .tab.active{background:var(--pm-emerald);color:#fff;}
-.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
 .card h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
-.filter-btn{padding:8px 14px;border-radius:10px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;}
+.filter-btn{padding:8px 14px;border-radius:12px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;}
 .filter-btn:hover{border-color:var(--pm-emerald);}
 .filter-btn.active{background:var(--pm-emerald);color:#fff;border-color:var(--pm-emerald);}
 .spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
@@ -49,15 +50,42 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .detail-bar-val{font-size:12px;color:var(--pm-muted);min-width:30px;text-align:right;}
 .detail-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
 .detail-tag{padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600;background:var(--pm-emerald-50);color:var(--pm-emerald);}
-.match-card{background:linear-gradient(135deg,var(--pm-emerald-50),#d1fae5);border:2px solid #a7f3d0;border-radius:14px;padding:24px;margin-bottom:16px;}
-.match-card h3{font-family:'DM Serif Display',serif;font-weight:400;color:#065f46;margin-bottom:8px;}
+.match-card{background:linear-gradient(135deg,var(--pm-emerald-50),#d1fae5);border:2px solid #a7f3d0;border-radius:16px;padding:24px;margin-bottom:16px;}
+.match-card h3{font-family:var(--rdx-font-serif);font-weight:400;color:#065f46;margin-bottom:8px;}
 .match-card p{font-size:14px;color:#064e3b;}
-.match-result{display:flex;align-items:center;gap:16px;padding:14px;background:rgba(255,255,255,.7);border-radius:10px;margin-top:12px;}
+.match-result{display:flex;align-items:center;gap:16px;padding:14px;background:rgba(255,255,255,.7);border-radius:12px;margin-top:12px;}
 .match-score{font-size:24px;font-weight:700;color:var(--pm-emerald);min-width:48px;text-align:center;}
 .match-info .match-name{font-weight:700;font-size:15px;}
 .match-info .match-reason{font-size:13px;color:var(--pm-muted);}
 .hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -89,7 +117,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
       <h3>📋 Quick Preference Quiz</h3>
       <div id="quiz-questions"></div>
       <div style="display:flex;justify-content:flex-end;margin-top:20px;">
-        <button style="padding:12px 24px;border:none;border-radius:10px;background:var(--pm-emerald);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;" onclick="runMatch()">🎯 See My Matches</button>
+        <button style="padding:12px 24px;border:none;border-radius:12px;background:var(--pm-emerald);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;" onclick="runMatch()">🎯 See My Matches</button>
       </div>
     </div>
     <div id="match-results" class="hidden"></div>
@@ -119,7 +147,7 @@ const SPECS = [
    dayInLife:"Hospitalist: Rounding on 15-18 patients, interpreting labs and imaging, coordinating with specialists, discharge planning. Outpatient: Complex chronic disease management, diagnostic workups, preventive care.",
    whyLove:"The diagnostic challenge. Internal medicine attracts people who love figuring things out and can hold multiple problems in their head simultaneously.",
    whyHard:"Hospital patients are sicker and more complex than ever. Documentation burden is heavy. If you subspecialize, add 2-3 more years of training.",
-   rdxLink:"Diagnostic challenges, MechanismDx modules"},
+   rdxLink:"Diagnostic challenges, ReasonDx modules"},
   {id:"em",name:"Emergency Medicine",icon:"🚑",type:"medical",brief:"The first responder. Rapid triage, stabilization, ruling out emergencies. High-acuity, shift-based work.",
    reasoning:"Rapid risk stratification. You don't need the final diagnosis — you need to know: is this patient dying right now? What's the worst thing this could be?",
    training:"3-4 year residency. Fellowships: toxicology, ultrasound, critical care, sports medicine.",
@@ -200,7 +228,7 @@ const SPECS = [
    dayInLife:"Pre-op: Assess patients, plan anesthetic. Intra-op: Intubation, maintaining anesthesia, monitoring vitals, managing crises. Post-op: Recovery room care. Call: Emergency cases, labor epidurals.",
    whyLove:"You master physiology and pharmacology at the deepest level. The OR is a unique team environment. Pain medicine fellowship opens a growing field.",
    whyHard:"Can feel isolated behind the drape. Substance abuse rates are historically higher in anesthesia. Call is demanding.",
-   rdxLink:"Respiratory/cardiac MechanismDx, OR shadowing prompts"},
+   rdxLink:"Respiratory/cardiac ReasonDx, OR shadowing prompts"},
   {id:"neuro",name:"Neurology",icon:"🧩",type:"medical",brief:"Brain, spinal cord, and peripheral nerve disorders. The ultimate diagnostic specialty.",
    reasoning:"Localization reasoning — where is the lesion? Is it cortical, subcortical, brainstem, spinal cord, peripheral nerve, or NMJ? The neurological exam is your most powerful tool.",
    training:"4-year residency. Fellowships: stroke, epilepsy, movement disorders, neuromuscular, MS.",
@@ -218,7 +246,7 @@ const SPECS = [
    dayInLife:"Clinic: Allergy testing (skin pricks, patch testing), asthma management, food allergy evaluation, immunotherapy (allergy shots), drug allergy assessments, immunodeficiency workups.",
    whyLove:"Excellent lifestyle — outpatient, minimal call. You dramatically improve quality of life (treating chronic allergies, preventing anaphylaxis). Immunotherapy is one of the few disease-modifying treatments in medicine.",
    whyHard:"Can be perceived as a 'niche' specialty. Building a practice takes time. Some conditions are chronic without cure.",
-   rdxLink:"MechanismDx: Immune Hypersensitivity, environmental modules"}
+   rdxLink:"ReasonDx: Immune Hypersensitivity, environmental modules"}
 ];
 
 const QUIZ = [
@@ -323,5 +351,6 @@ renderGrid();
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

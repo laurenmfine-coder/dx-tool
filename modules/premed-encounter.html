@@ -7,19 +7,16 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Clinical Encounter Companion. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>Clinical Encounter Companion | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root {
-  --pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;
-  --pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;
-  --pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
-}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
 .header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .container{max-width:720px;margin:0 auto;padding:24px;}
 
 /* Tabs */
@@ -28,7 +25,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .tab.active{background:var(--pm-teal);color:#fff;}
 
 /* Form */
-.form-section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.form-section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
 .form-section h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
 .form-row{margin-bottom:16px;}
 .form-row label{display:block;font-size:13px;font-weight:600;color:var(--pm-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;}
@@ -54,26 +51,26 @@ textarea{min-height:80px;resize:vertical;}
 .cc-item .cc-system{font-size:11px;color:var(--pm-muted);text-transform:uppercase;letter-spacing:.3px;}
 
 /* Response panel */
-.response{background:linear-gradient(135deg,var(--pm-teal-50),#e0f2fe);border:2px solid #99f6e4;border-radius:14px;padding:24px;margin-bottom:20px;}
-.response h3{font-size:17px;color:var(--pm-teal);margin-bottom:16px;font-family:'DM Serif Display',serif;font-weight:400;}
-.response-block{background:rgba(255,255,255,.8);border-radius:10px;padding:16px;margin-bottom:12px;}
+.response{background:linear-gradient(135deg,var(--pm-teal-50),#e0f2fe);border:2px solid #99f6e4;border-radius:16px;padding:24px;margin-bottom:20px;}
+.response h3{font-size:17px;color:var(--pm-teal);margin-bottom:16px;font-family:var(--rdx-font-serif);font-weight:400;}
+.response-block{background:rgba(255,255,255,.8);border-radius:12px;padding:16px;margin-bottom:12px;}
 .response-block h4{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
 .response-block p,.response-block li{font-size:14px;line-height:1.6;}
 .response-block ul{padding-left:20px;}
 .response-block li{margin-bottom:4px;}
-.q-tomorrow{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:16px;margin-bottom:12px;}
+.q-tomorrow{background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:16px;margin-bottom:12px;}
 .q-tomorrow h4{color:#92400e;font-size:14px;margin-bottom:8px;}
 .q-tomorrow li{font-size:14px;color:#78350f;margin-bottom:6px;}
 
 /* Btn */
-.btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-primary{background:var(--pm-teal);color:#fff;}
 .btn-primary:hover{background:#0d9488;}
 .btn-secondary{background:var(--pm-card);color:var(--pm-teal);border:1.5px solid var(--pm-teal);}
 .btn-row{display:flex;gap:12px;justify-content:flex-end;margin-top:20px;}
 
 /* History */
-.history-item{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer;transition:.2s;}
+.history-item{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;transition:.2s;}
 .history-item:hover{border-color:var(--pm-teal-light);box-shadow:var(--pm-shadow);}
 .history-meta{display:flex;gap:12px;align-items:center;margin-bottom:6px;font-size:13px;color:var(--pm-muted);}
 .history-cc{font-weight:700;font-size:15px;}
@@ -85,7 +82,34 @@ textarea{min-height:80px;resize:vertical;}
 .empty{text-align:center;padding:48px;color:var(--pm-muted);}
 .empty span{font-size:48px;display:block;margin-bottom:12px;}
 .hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -271,7 +295,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Cardiology CRT cases",
-      "MechanismDx: Cardiac Physiology",
+      "ReasonDx: Cardiac Physiology",
       "RadDx: Cardiac Imaging"
     ]
   },
@@ -294,7 +318,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "GI CRT cases",
-      "MechanismDx: GI Physiology",
+      "ReasonDx: GI Physiology",
       "RadDx: Abdominal Imaging"
     ]
   },
@@ -317,7 +341,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Neuro CRT cases",
-      "MechanismDx: Neurophysiology",
+      "ReasonDx: Neurophysiology",
       "RadDx: Neuroimaging"
     ]
   },
@@ -340,7 +364,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Pulmonary CRT cases",
-      "MechanismDx: Respiratory Physiology",
+      "ReasonDx: Respiratory Physiology",
       "RadDx: Chest Imaging"
     ]
   },
@@ -386,7 +410,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Infectious Disease CRT cases",
-      "MechanismDx: Immune Response"
+      "ReasonDx: Immune Response"
     ]
   },
   "rash": {
@@ -408,7 +432,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Dermatology modules",
-      "MechanismDx: Immune Hypersensitivity"
+      "ReasonDx: Immune Hypersensitivity"
     ]
   },
   "joint pain": {
@@ -430,7 +454,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "MSK CRT cases",
-      "MechanismDx: Musculoskeletal",
+      "ReasonDx: Musculoskeletal",
       "RadDx: MSK Imaging"
     ]
   },
@@ -475,7 +499,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Neuro CRT cases",
-      "MechanismDx: Neurophysiology"
+      "ReasonDx: Neurophysiology"
     ]
   },
   "palpitations": {
@@ -497,7 +521,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Cardiology CRT cases",
-      "MechanismDx: Cardiac Physiology"
+      "ReasonDx: Cardiac Physiology"
     ]
   },
   "anxiety": {
@@ -519,7 +543,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Psychiatry modules",
-      "MechanismDx: Neurophysiology"
+      "ReasonDx: Neurophysiology"
     ]
   },
   "uti": {
@@ -541,7 +565,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Renal/GU CRT cases",
-      "MechanismDx: Renal Physiology"
+      "ReasonDx: Renal Physiology"
     ]
   },
   "diabetes": {
@@ -563,7 +587,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Endocrine CRT cases",
-      "MechanismDx: Endocrine Physiology"
+      "ReasonDx: Endocrine Physiology"
     ]
   },
   "pediatric fever": {
@@ -651,7 +675,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Endocrine CRT cases",
-      "MechanismDx: Endocrine Physiology"
+      "ReasonDx: Endocrine Physiology"
     ]
   },
   "wound": {
@@ -695,7 +719,7 @@ const RESPONSE_DB = {
     ],
     "modules": [
       "Cardiology CRT cases",
-      "MechanismDx: Cardiac Physiology"
+      "ReasonDx: Cardiac Physiology"
     ]
   }
 };
@@ -706,7 +730,7 @@ const DEFAULT_RESPONSE = {
   prereqs: ["Anatomy: What structures are in the area of the complaint?", "Physiology: What's the normal function of the affected system?", "Pathophysiology: What mechanisms could produce these symptoms?"],
   questions: ["What was at the top of your differential and why?", "What one piece of the history most changed your thinking?", "What would have made you more worried about this patient?"],
   watchFor: ["Notice the order of the workup — it reveals what the physician considers most dangerous", "Watch how the physician communicates the plan to the patient — this is shared decision-making in action", "Pay attention to what gets documented — documentation reflects clinical reasoning priorities"],
-  modules: ["Explore related CRT cases", "MechanismDx: System-specific pathophysiology"]
+  modules: ["Explore related CRT cases", "ReasonDx: System-specific pathophysiology"]
 };
 
 // State
@@ -924,7 +948,7 @@ function renderFollowups() {
   list.innerHTML = encounters.slice(0, 30).map((e, i) => {
     const fuCount = (e.followups || []).length;
     const reasoningLabels = { system1: '⚡ Sys 1', system2: '🧠 Sys 2', differential: '📋 DDx', ruled_out: '🚫 Danger first', slowed_down: '⏸️ Slowed', bias_possible: '⚠️ Bias' };
-    const tags = (e.reasoning || []).map(r => `<span style="background:#f0fdfa;padding:1px 6px;border-radius:6px;color:#0f766e;font-size:10px;">${reasoningLabels[r] || r}</span>`).join(' ');
+    const tags = (e.reasoning || []).map(r => `<span style="background:#f0fdfa;padding:1px 6px;border-radius:8px;color:#0f766e;font-size:10px;">${reasoningLabels[r] || r}</span>`).join(' ');
     return `
     <div style="background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:var(--pm-shadow);">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
@@ -975,5 +999,6 @@ function saveFollowup(idx) {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

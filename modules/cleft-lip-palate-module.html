@@ -10,7 +10,8 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechanismDx: Cleft Lip & Palate</title>
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Cleft Lip & Palate. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>ReasonDx: Cleft Lip & Palate</title>
   <style>
     :root {
       --primary: #8B5CF6;
@@ -25,8 +26,8 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family:'DM Sans','Inter',sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      font-family:var(--rdx-font);
+      background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
       color: #E5E7EB;
       min-height: 100vh;
       line-height: 1.6;
@@ -775,8 +776,10 @@
       document.getElementById('explanation3').style.display = 'block';
     }
   </script>
-<div data-dx-tutor
-         data-module-title="MechanismDx: Cleft Lip & Palate"
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Cleft Lip & Palate"
          data-key-points="📚 Core Definition & Epidemiology, 🧬 Embryology: Why Clefts Happen, 📋 Classification Systems, 🧩 Syndromic Associations, 👥 The Multidisciplinary Cleft Team, 🔪 Surgical Timing & Techniques, 🎯 Long-Term Outcomes & Follow-up, 🔄 Risk Factors & Prevention, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
          style="display:none;"></div>
@@ -842,5 +845,7 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/cleft-lip-palate.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

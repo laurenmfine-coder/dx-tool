@@ -10,4 +10,3 @@ window.DxAiTutor = {
     if (el) el.innerHTML = '<div style="padding:12px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:8px;color:#0d9488;font-size:14px;">AI Tutor available in future update</div>';
   }
 };
-console.log('[DxAiTutor] Loaded');

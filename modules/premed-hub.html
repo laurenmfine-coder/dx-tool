@@ -8,21 +8,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx Premed — Clinical Reasoning for Pre-Medical Students</title>
+<meta name="description" content="ReasonDx Premed Hub: Clinical thinking tools for pre-medical students — MCAT bridges, clinical exposure guides, specialty exploration, and essay support.">
+<meta property="og:title" content="ReasonDx Premed — Clinical Reasoning for Pre-Medical Students">
+<meta property="og:description" content="ReasonDx Premed Hub: Clinical thinking tools for pre-medical students — MCAT bridges, clinical exposure guides, specialty exploration, and essay support.">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root {
-  --pm-teal: #0f766e; --pm-teal-light: #14b8a6; --pm-teal-50: #f0fdfa;
-  --pm-amber: #d97706; --pm-amber-50: #fffbeb;
-  --pm-violet: #7c3aed; --pm-violet-50: #f5f3ff;
-  --pm-rose: #e11d48; --pm-rose-50: #fff1f2;
-  --pm-sky: #0284c7; --pm-sky-50: #f0f9ff;
-  --pm-emerald: #059669; --pm-emerald-50: #ecfdf5;
-  --pm-bg: #fafbfc; --pm-card: #fff; --pm-text: #1e293b; --pm-muted: #64748b;
-  --pm-border: #e2e8f0; --pm-shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
-  --pm-shadow-lg: 0 4px 24px rgba(0,0,0,.08);
-}
+
 * { margin:0; padding:0; box-sizing: border-box; }
-body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm-text); line-height:1.6; }
+body { font-family:var(--rdx-font); background:var(--pm-bg); color:var(--pm-text); line-height:1.6; }
 
 .hero {
   background: linear-gradient(135deg, #0f766e 0%, #0d9488 40%, #7c3aed 100%);
@@ -30,7 +24,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
 }
 .hero::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(124,58,237,.3), transparent 50%); }
 .hero * { position:relative; z-index:1; }
-.hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(28px,5vw,44px); font-weight:400; margin-bottom:8px; }
+.hero h1 { font-family:var(--rdx-font-serif); font-size:clamp(28px,5vw,44px); font-weight:400; margin-bottom:8px; }
 .hero .subtitle { font-size:18px; opacity:.92; max-width:640px; margin:0 auto 28px; }
 .hero-stats { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
 .hero-stat-value { font-size:30px; font-weight:700; }
@@ -43,7 +37,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
   background:var(--pm-card); border:1px solid var(--pm-border); border-radius:16px;
   padding:28px 32px; box-shadow:var(--pm-shadow-lg); text-align:center;
 }
-.tagline-card h2 { font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:12px; font-weight:400; color:var(--pm-teal); }
+.tagline-card h2 { font-family:var(--rdx-font-serif); font-size:22px; margin-bottom:12px; font-weight:400; color:var(--pm-teal); }
 .cycle { display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin-top:16px; }
 .cycle-step {
   background:var(--pm-teal-50); padding:10px 18px; border-radius:24px; font-weight:600;
@@ -52,10 +46,10 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
 .cycle-arrow { color:var(--pm-teal-light); font-size:20px; }
 
 .features { max-width:960px; margin:48px auto; padding:0 24px; }
-.features h2 { font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:24px; text-align:center; font-weight:400; }
+.features h2 { font-family:var(--rdx-font-serif); font-size:26px; margin-bottom:24px; text-align:center; font-weight:400; }
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
 .card {
-  background:var(--pm-card); border:1px solid var(--pm-border); border-radius:14px;
+  background:var(--pm-card); border:1px solid var(--pm-border); border-radius:16px;
   padding:28px 24px; box-shadow:var(--pm-shadow); text-decoration:none; color:inherit;
   transition: transform .2s, box-shadow .2s; display:block;
 }
@@ -73,11 +67,11 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
 .tag-community { background:var(--pm-rose-50); color:var(--pm-rose); }
 
 .paths { max-width:960px; margin:48px auto; padding:0 24px; }
-.paths h2 { font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:8px; text-align:center; font-weight:400; }
+.paths h2 { font-family:var(--rdx-font-serif); font-size:26px; margin-bottom:8px; text-align:center; font-weight:400; }
 .paths .sub { text-align:center; color:var(--pm-muted); margin-bottom:28px; font-size:15px; }
 .path-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
 .path-card {
-  border-radius:14px; padding:28px 24px; border:2px solid transparent; text-decoration:none; color:inherit;
+  border-radius:16px; padding:28px 24px; border:2px solid transparent; text-decoration:none; color:inherit;
   transition: transform .2s, box-shadow .2s; display:block;
 }
 .path-card:hover { transform:translateY(-3px); box-shadow:var(--pm-shadow-lg); }
@@ -91,11 +85,11 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
 .path-card li::before { content:'→'; position:absolute; left:0; color:var(--pm-teal-light); font-weight:700; }
 
 .audience-section { max-width:960px; margin:48px auto; padding:0 24px; }
-.audience-section h2 { font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:24px; text-align:center; font-weight:400; }
+.audience-section h2 { font-family:var(--rdx-font-serif); font-size:26px; margin-bottom:24px; text-align:center; font-weight:400; }
 .audience-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 @media(max-width:640px){ .audience-grid { grid-template-columns:1fr; } }
 .audience-card {
-  border-radius:14px; padding:28px 24px; text-align:center;
+  border-radius:16px; padding:28px 24px; text-align:center;
 }
 .audience-shadower { background: linear-gradient(135deg, var(--pm-sky-50), #e0f2fe); border:1px solid #bae6fd; }
 .audience-ma { background: linear-gradient(135deg, var(--pm-emerald-50), #d1fae5); border:1px solid #a7f3d0; }
@@ -108,7 +102,34 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
   border-top:1px solid var(--pm-border); margin-top:48px;
 }
 .footer a { color:var(--pm-teal); text-decoration:none; }
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -289,5 +310,14 @@ body { font-family:'DM Sans',sans-serif; background:var(--pm-bg); color:var(--pm
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="padding:4px 20px;"><a href="premed-lesson-cp5.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--pm-teal-50,#f0fdfa);border:1px solid var(--pm-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--pm-text,#1e293b);font-size:13px;font-weight:500;">🫀 Chest Pain: 5 Diagnoses</a>
+</div>
+<div style="padding:4px 20px;"><a href="premed-module-thinking.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--pm-teal-50,#f0fdfa);border:1px solid var(--pm-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--pm-text,#1e293b);font-size:13px;font-weight:500;">🧠 How Doctors Think</a>
+</div>
+<div style="padding:4px 20px;"><a href="premed-shadow-specialties.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--pm-teal-50,#f0fdfa);border:1px solid var(--pm-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--pm-text,#1e293b);font-size:13px;font-weight:500;">👥 Specialty Shadowing Guides</a>
+</div>
+<div style="padding:4px 20px;"><a href="premed-specialty.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--pm-teal-50,#f0fdfa);border:1px solid var(--pm-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--pm-text,#1e293b);font-size:13px;font-weight:500;">🔬 Specialty Explorer</a>
+</div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

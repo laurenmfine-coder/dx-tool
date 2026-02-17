@@ -12,16 +12,17 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antidepressant Pharmacology | MechanismDx</title>
+    <meta name="description" content="Interactive pathophysiology module: Antidepressant Pharmacology. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Antidepressant Pharmacology | ReasonDx</title>
     <script src="../dx-scoring.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
-        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
-        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
-        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
+        
+        
+        
+        
         .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
         .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
         .dx-nav-link.active { background: var(--primary); color: #fff; }
@@ -34,7 +35,7 @@
         .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
         .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 32px; }
         .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; width: 0%; }
-        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow:var(--rdx-shadow); }
         .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
         .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
         .section p { margin-bottom: 16px; color: var(--text-secondary); }
@@ -54,7 +55,7 @@
         .quiz-question { margin-bottom: 24px; }
         .quiz-question p { font-weight: 500; margin-bottom: 12px; }
         .quiz-options { display: grid; gap: 8px; }
-        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius:12px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
         .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
         .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
         .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
@@ -71,8 +72,10 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/antidepressant.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Antidepressant Pharmacology</a> → Module</div>
 
-    
+
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <section class="hero">
         <div class="hero-inner">
@@ -249,11 +252,13 @@
     </script>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
                 </div>
             </div>
         </div>
@@ -261,13 +266,19 @@
 
     <script>
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-</script>
+    
+    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
+    
+    
+    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
+    </script>
     <script src="../js/dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
 
     <div data-dx-tutor data-module-title="Antidepressant Pharmacology" data-key-points="SSRI, SNRI, TCA, MAOI, serotonin syndrome, discontinuation syndrome, black box warning, QTc prolongation" style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
@@ -357,5 +368,6 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

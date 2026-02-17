@@ -9,28 +9,29 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EPA Dashboard — clinical education tool on ReasonDx. Interactive learning resource for medical students and educators.">
 <title>EPA Dashboard | ReasonDx</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
-.header{background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
+body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100vh}
+.header{background:var(--rdx-bg-card);border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
 .header a{color:#0d9488;text-decoration:none;font-size:14px;font-weight:500}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px}
 .container{max-width:1100px;margin:0 auto;padding:24px}
 .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
 @media(max-width:768px){.summary-grid{grid-template-columns:repeat(2,1fr)}}
-.summary-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;text-align:center}
-.summary-card .num{font-family:'DM Serif Display',serif;font-size:36px;color:#0d9488}
+.summary-card{background:var(--rdx-bg-card);border:1px solid #e2e8f0;border-radius:12px;padding:20px;text-align:center}
+.summary-card .num{font-family:var(--rdx-font-serif);font-size:36px;color:#0d9488}
 .summary-card .label{font-size:13px;color:#64748b;margin-top:4px}
 .epa-list{display:flex;flex-direction:column;gap:16px}
-.epa-item{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px;transition:.2s}
+.epa-item{background:var(--rdx-bg-card);border:1px solid #e2e8f0;border-radius:16px;padding:20px;transition:.2s}
 .epa-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .epa-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}
-.epa-num{font-size:12px;font-weight:700;color:#0d9488;background:#f0fdfa;padding:4px 10px;border-radius:6px}
+.epa-num{font-size:12px;font-weight:700;color:#0d9488;background:#f0fdfa;padding:4px 10px;border-radius:8px}
 .epa-level{display:flex;gap:4px;align-items:center;font-size:13px;font-weight:600}
 .level-dot{width:12px;height:12px;border-radius:50%}
-.epa-title{font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:8px}
+.epa-title{font-family:var(--rdx-font-serif);font-size:17px;margin-bottom:8px}
 .epa-desc{font-size:13px;color:#64748b;margin-bottom:12px;line-height:1.5}
 .epa-progress{display:flex;gap:3px;margin-bottom:8px}
 .epa-progress .seg{flex:1;height:8px;border-radius:4px;background:#e2e8f0;transition:.3s}
@@ -40,16 +41,16 @@ body{font-family:'DM Sans',sans-serif;background:#f8fafc;color:#1e293b;min-heigh
 .legend{display:flex;gap:16px;margin-bottom:24px;font-size:13px;color:#64748b;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:6px}
 .legend-dot{width:12px;height:12px;border-radius:50%}
-.log-btn{background:#0d9488;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.log-btn{background:#0d9488;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;align-items:center;justify-content:center}
 .modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:16px;padding:32px;max-width:500px;width:90%}
-.modal h3{font-family:'DM Serif Display',serif;margin-bottom:16px}
+.modal{background:var(--rdx-bg-card);border-radius:16px;padding:32px;max-width:500px;width:90%}
+.modal h3{font-family:var(--rdx-font-serif);margin-bottom:16px}
 .modal .form-group{margin-bottom:16px}
 .modal .form-group label{display:block;font-weight:600;font-size:13px;color:#475569;margin-bottom:6px}
 .modal .form-group select,.modal .form-group textarea,.modal .form-group input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;font-family:inherit}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end}
-.modal-btns button{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid #e2e8f0;background:#fff}
+.modal-btns button{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid #e2e8f0;background:var(--rdx-bg-card)}
 .modal-btns .primary{background:#0d9488;color:#fff;border:none}
 </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
@@ -241,5 +242,6 @@ render();
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

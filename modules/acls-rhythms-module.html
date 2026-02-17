@@ -10,33 +10,34 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACLS Rhythms: Pathophysiology | MechanismDx</title>
+    <meta name="description" content="Interactive pathophysiology module: ACLS Rhythms: Pathophysiology. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>ACLS Rhythms: Pathophysiology | ReasonDx</title>
     <style>
         :root{--primary:#0891b2;--primary-dark:#0e7490;--primary-bg:#ecfeff;--bg:#f8fafc;--card:#fff;--border:#e2e8f0;--text:#1e293b}
-        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans','Inter',-apple-system,sans-serif;background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
         .header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);padding:32px 24px;color:#fff}
         .header-inner{max-width:900px;margin:0 auto}.header h1{font-size:28px;font-weight:700;margin-bottom:8px}
         .content{max-width:900px;margin:0 auto;padding:32px 24px}
         .objectives{background:linear-gradient(135deg,var(--primary-bg) 0%,#d1fae5 100%);border:1px solid var(--primary);border-radius:16px;padding:24px;margin-bottom:32px}
         .objectives h2{color:#047857;font-size:16px;margin-bottom:12px}.objectives ul{margin-left:24px;color:#065f46}
-        .section{background:var(--rdx-bg-card);border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        .section{background:var(--rdx-bg-card);border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:var(--rdx-shadow)}
         .section h2{color:var(--primary-dark);font-size:1.25rem;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--primary-bg)}
         .section h3{color:var(--text);font-size:1rem;margin:16px 0 8px}.section p{margin-bottom:12px}
         .pathway-box{background:#fef3c7;border: 1px solid #0f766e;border-radius:12px;padding:16px;margin:16px 0}
         .pathway-box h4{color:#92400e;font-size:0.9rem;margin-bottom:8px}
         .pathway-steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-        .pathway-step{background:#fff;border: 1px solid #0f766e;padding:8px 14px;border-radius:8px;font-size:0.85rem}
+        .pathway-step{background:var(--rdx-bg-card);border: 1px solid #0f766e;padding:8px 14px;border-radius:8px;font-size:0.85rem}
         .pathway-arrow{color: #0f766e;font-weight:bold}
         .clinical-box{background:#f0fdf4;border:1px solid #22c55e;border-radius:12px;padding:16px;margin:16px 0}
         .clinical-box h4{color:#166534;font-size:0.9rem;margin-bottom:8px}
         .key-point{background:#f0fdfa;border-left:4px solid #14b8a6;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0}
         .mcq-container{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:20px;margin:20px 0}
         .mcq-question{font-weight:600;margin-bottom:16px}.mcq-options{display:flex;flex-direction:column;gap:8px}
-        .mcq-option{padding:12px 16px;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s}
+        .mcq-option{padding:12px 16px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s}
         .mcq-option:hover{border-color:var(--primary);background:var(--primary-bg)}
         .mcq-option.correct{border-color:#22c55e;background:#f0fdf4}.mcq-option.incorrect{border-color:#ef4444;background:#fef2f2}
         .mcq-feedback{margin-top:12px;padding:12px;border-radius:8px;display:none}.mcq-feedback.show{display:block}
-        .nav-links{display:flex;gap:12px;margin-top:32px}.nav-link{padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:600}
+        .nav-links{display:flex;gap:12px;margin-top:32px}.nav-link{padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:600}
         .nav-link.back{background:var(--rdx-bg-card);border:1px solid var(--border);color:var(--text)}.nav-link.adventure{background:var(--primary);color:#fff}
     </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
@@ -58,7 +59,9 @@
 const fb=[{"c":"Epi after 2nd shock, amio after 3rd shock.","i":"Epinephrine comes after second shock."}];
 function check(q,o,correct){const c=document.getElementById('mcq'+q);c.querySelectorAll('.mcq-option').forEach((e,i)=>{e.style.pointerEvents='none';if(i===o)e.classList.add(correct?'correct':'incorrect');});const f=document.getElementById('fb'+q);f.className='mcq-feedback show '+(correct?'correct':'incorrect');f.innerHTML='<strong>'+(correct?'✓ Correct!':'✗ Not quite')+'</strong><br>'+(correct?fb[q].c:fb[q].i);}
     </script>
-<div data-dx-tutor
+
+    
+    <div data-dx-tutor
          data-module-title="ACLS Rhythms: Pathophysiology"
          data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Shockable Rhythms, Non-Shockable, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
@@ -124,7 +127,7 @@ function check(q,o,correct){const c=document.getElementById('mcq'+q);c.querySele
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Advanced Cardiac Life Support</strong>. <em>StatPearls</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK482181/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/NBK482181/</a></li>
 <li><strong>AHA ACLS Guidelines</strong>. <em>Circulation 2020</em>. <a href="https://doi.org/10.1161/CIR.0000000000000916" target="_blank" rel="noopener">https://doi.org/10.1161/CIR.0000000000000916</a></li>
@@ -134,5 +137,7 @@ function check(q,o,correct){const c=document.getElementById('mcq'+q);c.querySele
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/acls-rhythms.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

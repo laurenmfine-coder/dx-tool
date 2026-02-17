@@ -9,13 +9,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Tools | ReasonDx</title>
+<meta name="description" content="ReasonDx Tools: ABG analyzer, DDx builder, ECG integration, EPA dashboard, flashcard studio, SBAR trainer, EMR simulator, and more.">
+<meta property="og:title" content="Learning Tools | ReasonDx">
+<meta property="og:description" content="ReasonDx Tools: ABG analyzer, DDx builder, ECG integration, EPA dashboard, flashcard studio, SBAR trainer, EMR simulator, and more.">
+<meta property="og:type" content="website">
     
     <style>
         :root { --primary: #059669; --primary-dark: #047857; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
         
-        .nav { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav { background:var(--rdx-bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .nav-links { display: flex; gap: 8px; }
@@ -23,7 +27,7 @@
         .nav-link:hover { background: #f1f5f9; color: var(--text-primary); }
         .nav-link.active { background: var(--primary); color: white; }
 
-        .header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 48px 24px; text-align: center; color: white; }
+        .header { background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); padding: 48px 24px; text-align: center; color: white; }
         .header h1 { font-size: 32px; margin-bottom: 8px; }
         .header p { font-size: 16px; opacity: 0.9; max-width: 600px; margin: 0 auto; }
         
@@ -32,7 +36,7 @@
         .quick-access { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
         .quick-access h2 { font-size: 18px; margin-bottom: 16px; color: #166534; }
         .quick-links { display: flex; flex-wrap: wrap; gap: 12px; }
-        .quick-link { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border-radius: 10px; text-decoration: none; color: var(--text-primary); font-size: 14px; font-weight: 500; border: 1px solid #a7f3d0; }
+        .quick-link { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: var(--text-primary); font-size: 14px; font-weight: 500; border: 1px solid #a7f3d0; }
         .quick-link:hover { background: #f0fdf4; }
         
         .section-title { font-size: 18px; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
@@ -40,7 +44,7 @@
         
         .tool-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; cursor: pointer; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
         .tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-color: var(--primary); }
-        .tool-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px; }
+        .tool-icon { width: 56px; height: 56px; border-radius:16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px; }
         .tool-card h3 { font-size: 18px; margin-bottom: 8px; }
         .tool-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
         .tool-tag { display: inline-block; padding: 4px 10px; background: #f1f5f9; border-radius: 12px; font-size: 11px; color: var(--text-secondary); margin-right: 4px; }
@@ -48,7 +52,7 @@
         .tool-tag.soon { background: #fef3c7; color: #92400e; }
         .tool-card.coming-soon { opacity: 0.7; position: relative; }
         .tool-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); cursor: default; }
-        .tool-card.coming-soon::after { content: 'Coming Soon'; position: absolute; top: 16px; right: 16px; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 10px; }
+        .tool-card.coming-soon::after { content: 'Coming Soon'; position: absolute; top: 16px; right: 16px; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius:12px; }
         
         .icon-blue { background: #ccfbf1; }
         .icon-green { background: #dcfce7; }
@@ -62,15 +66,15 @@
         .dx-tour-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9998; }
         .dx-tour-overlay.active { display: block; }
         .dx-tour-spotlight { position: absolute; box-shadow: 0 0 0 9999px rgba(0,0,0,0.6); border-radius: 12px; z-index: 9999; pointer-events: none; transition: all 0.4s ease; display: none; }
-        .dx-tour-tooltip { display: none; position: fixed; width: 340px; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 10000; overflow: hidden; animation: tooltipIn 0.3s ease; }
+        .dx-tour-tooltip { display: none; position: fixed; width: 340px; background:var(--rdx-bg-card); border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 10000; overflow: hidden; animation: tooltipIn 0.3s ease; }
         .dx-tour-tooltip.active { display: block; }
         @keyframes tooltipIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .dx-tour-tooltip-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; padding: 16px 20px; }
+        .dx-tour-tooltip-header { background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); color: white; padding: 16px 20px; }
         .dx-tour-step { font-size: 11px; opacity: 0.8; margin-bottom: 4px; }
         .dx-tour-title { font-size: 18px; font-weight: 700; }
         .dx-tour-tooltip-body { padding: 20px; }
         .dx-tour-tooltip-body p { font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 16px; }
-        .dx-tour-tip { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #f0fdf4; border-radius: 10px; font-size: 13px; color: #166534; }
+        .dx-tour-tip { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #f0fdf4; border-radius:12px; font-size: 13px; color: #166534; }
         .dx-tour-tooltip-footer { padding: 16px 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
         .dx-tour-progress { display: flex; gap: 6px; }
         .dx-tour-dot { width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0; }
@@ -87,12 +91,24 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-    
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <header class="header">
         <h1>🛠️ Learning Tools</h1>
         <p>Everything you need to study smarter and track your progress</p>
     </header>
+<!-- Mastery Dashboard CTA -->
+<div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
+  <a href="../tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+    <div style="font-size:28px;flex-shrink:0;">📊</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
+    </div>
+    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+  </a>
+</div>
+
 
     <main class="content">
         <div class="quick-access">
@@ -204,7 +220,7 @@
         <div style="text-align: center; padding: 32px; color: var(--text-secondary); font-size: 14px;">
             <p>💡 Tip: All tools are accessible from anywhere in the platform via the top navigation</p>
             <p style="margin-top: 8px;"><a href="#" onclick="startTour(); return false;" style="color: var(--primary);">Take the Tools Tour</a></p>
-        </div>
+        <a href="referral-letter-generator.html" class="tool-card"><div class="tool-icon">📝</div><h3>Referral Letter Generator</h3><p>Generate professional referral letters for clinical scenarios</p></a></div>
     </main>
 
     <!-- Tour Elements -->
@@ -263,7 +279,7 @@
             document.getElementById('tourTooltip').classList.remove('active');
             document.getElementById('tourSkip').classList.remove('active');
             document.getElementById('tourSpotlight').style.display = 'none';
-            localStorage.setItem('rdx-tools-tour', 'done');
+            localStorage.setItem('dxsuite-tools-tour', 'done');
         }
 
         function showStep(i) {
@@ -305,13 +321,14 @@
             else if (e.key === 'Escape') endTour();
         });
 
-        // Tour is opt-in: click 'Take the Tools Tour' link to start
-        // Previously auto-started on first visit, now disabled for better UX
+        // Auto-start on first visit
+        if (!localStorage.getItem('dxsuite-tools-tour')) setTimeout(startTour, 800);
     </script>
 <script src="../data/rdx-persist.js"></script>
 <script src="../js/rdx-nav.js"></script>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

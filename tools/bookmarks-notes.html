@@ -8,32 +8,33 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmarks & Notes | ReasonDx</title>
+    <meta name="description" content="Bookmarks & Notes — clinical education tool on ReasonDx. Interactive learning resource for medical students and educators.">
+<title>Bookmarks & Notes | ReasonDx</title>
     
     <style>
         :root { --primary: #059669; --primary-dark: #047857; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; padding-bottom: 60px; }
-        .header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 24px; color: white; text-align: center; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; padding-bottom: 60px; }
+        .header { background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); padding: 24px; color: white; text-align: center; }
         .header h1 { font-size: 24px; margin-bottom: 4px; }
         .header p { opacity: 0.9; font-size: 14px; }
         .header .stat-bar { display: flex; justify-content: center; gap: 24px; margin-top: 12px; font-size: 13px; opacity: 0.85; }
         .content { max-width: 900px; margin: 0 auto; padding: 24px; }
         .tabs { display: flex; gap: 4px; margin-bottom: 24px; background: #f1f5f9; padding: 4px; border-radius: 12px; }
-        .tab { flex: 1; padding: 10px; text-align: center; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text-secondary); border: none; background: none; font-family: inherit; transition: all 0.2s; }
-        .tab.active { background: white; color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tab { flex: 1; padding: 10px; text-align: center; border-radius:12px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text-secondary); border: none; background: none; font-family: inherit; transition: all 0.2s; }
+        .tab.active { background:var(--rdx-bg-card); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .tab:hover:not(.active) { color: var(--text-primary); }
         .toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-        .search-box { flex: 1; min-width: 200px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-family: inherit; }
+        .search-box { flex: 1; min-width: 200px; padding: 10px 16px; border: 1px solid var(--border); border-radius:12px; font-size: 14px; font-family: inherit; }
         .search-box:focus { outline: none; border-color: var(--primary); }
-        .add-btn { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px; white-space: nowrap; }
+        .add-btn { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius:12px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px; white-space: nowrap; }
         .add-btn:hover { background: var(--primary-dark); }
         .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-        .pill { padding: 5px 12px; border: 1px solid var(--border); background: white; border-radius: 16px; font-size: 12px; cursor: pointer; font-family: inherit; color: var(--text-secondary); }
+        .pill { padding: 5px 12px; border: 1px solid var(--border); background:var(--rdx-bg-card); border-radius: 16px; font-size: 12px; cursor: pointer; font-family: inherit; color: var(--text-secondary); }
         .pill:hover { border-color: var(--primary); }
         .pill.active { background: var(--primary); color: white; border-color: var(--primary); }
         .item-list { display: grid; gap: 12px; }
@@ -48,7 +49,7 @@
         .item-tag.type-crt-case { background: #dcfce7; color: #166534; }
         .item-tag.type-mechanism { background: #fae8ff; color: #a21caf; }
         .item-actions { display: flex; gap: 6px; flex-shrink: 0; }
-        .icon-btn { width: 32px; height: 32px; border: 1px solid var(--border); background: white; border-radius: 8px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+        .icon-btn { width: 32px; height: 32px; border: 1px solid var(--border); background:var(--rdx-bg-card); border-radius: 8px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
         .icon-btn:hover { background: #f1f5f9; }
         .icon-btn.flagged { background: #fef3c7; border-color: #fde68a; }
         .note-content { margin-top: 8px; font-size: 14px; color: var(--text-secondary); white-space: pre-wrap; max-height: 120px; overflow: hidden; }
@@ -58,7 +59,7 @@
         .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
         .modal-overlay { display: none; position: fixed; inset: 0; background: #f1f5f9; z-index: 1000; align-items: center; justify-content: center; }
         .modal-overlay.show { display: flex; }
-        .modal { background: white; border-radius: 16px; width: 90%; max-width: 500px; padding: 24px; max-height: 90vh; overflow-y: auto; }
+        .modal { background:var(--rdx-bg-card); border-radius: 16px; width: 90%; max-width: 500px; padding: 24px; max-height: 90vh; overflow-y: auto; }
         .modal h3 { font-size: 18px; margin-bottom: 16px; }
         .modal label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; margin-top: 12px; }
         .modal input, .modal textarea, .modal select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
@@ -128,7 +129,7 @@
                 <option value="general">General</option>
                 <option value="deep-dive">Deep Dive Question</option>
                 <option value="crt-case">CRT Case</option>
-                <option value="mechanism">MechanismDx Module</option>
+                <option value="mechanism">ReasonDx Module</option>
             </select>
             <label>URL (optional)</label>
             <input type="text" id="bk-url" placeholder="Link to the resource">
@@ -437,5 +438,6 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

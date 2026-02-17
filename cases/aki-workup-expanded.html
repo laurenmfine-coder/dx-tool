@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AKI Workup - Expanded Deep Dive Adventure</title>
+    <meta name="description" content="In-depth clinical case study: AKI Workup - Expanded Deep Dive Adventure. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>AKI Workup - Expanded Deep Dive Adventure</title>
     <link href="../css/tailwind.min.css" rel="stylesheet">
     <style>
         .stage-card { transition: all 0.3s ease; }
-        .why-chain { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+        .why-chain { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
         .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
         .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
         .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
@@ -39,8 +40,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -303,13 +304,13 @@
 <!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
 <style>
 .rdx-difficulty-panel { display: inline-block; top: 80px; right: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
-.rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background:var(--rdx-bg-card); cursor: pointer; font-size: 14px; transition: all 0.2s; }
 .rdx-diff-btn:hover { border-color: #14b8a6; background: #f0fdfa; }
 .rdx-diff-btn.active { border-color: #14b8a6; background: #14b8a6; color: white; }
 .rdx-refs-panel { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-radius: 12px; padding: 16px; margin: 20px 0; border: 1px solid #99f6e4; }
 .rdx-refs-title { font-weight: 700; color: #115e59; margin-bottom: 12px; font-size: 16px; }
 .rdx-refs-links { display: flex; flex-wrap: wrap; gap: 10px; }
-.rdx-refs-links a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 13px; border: 1px solid #99f6e4; transition: all 0.2s; }
+.rdx-refs-links a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 13px; border: 1px solid #99f6e4; transition: all 0.2s; }
 .rdx-refs-links a:hover { background: #0d9488; color: white; }
 .rdx-hint-beginner { display: none; }
 .rdx-hint-advanced { display: none; }
@@ -332,8 +333,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -350,17 +351,17 @@
 
 
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning Journey</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#0f766e); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning Journey</h4>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 MechanismDx Modules</h5>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 ReasonDx Modules</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Master the pathophysiology</p>
             <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ AKI/CKD Pathophysiology</a>
             <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Acid-Base Disorders</a>
         </div>
         
-        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #14b8a6;">
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 16px; border-left: 4px solid #14b8a6;">
             <h5 style="color: #14b8a6; font-weight: 600; margin-bottom: 8px;">🎮 Related ReasonDx Cases</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice similar scenarios</p>
             <a href="aki-expanded-adventure.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ AKI Management</a>
@@ -369,7 +370,7 @@
             <a href="rhabdomyolysis-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Rhabdomyolysis</a>
         </div>
         
-        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #10b981;">
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 16px; border-left: 4px solid #10b981;">
             <h5 style="color: #10b981; font-weight: 600; margin-bottom: 8px;">💬 CoachDx Practice</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice communication skills</p>
             <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ AKI Management Coach</a>
@@ -424,7 +425,7 @@ window.rdxShowDebrief = function() {
         </div>`;
     }).join('');
     
-    overlay.innerHTML = `<div style="background:white;border-radius:16px;max-width:700px;max-height:90vh;overflow-y:auto;padding:24px;">
+    overlay.innerHTML = `<div style="background:var(--rdx-bg-card);border-radius:16px;max-width:700px;max-height:90vh;overflow-y:auto;padding:24px;">
         <h2 style="font-size:24px;margin-bottom:8px;">📊 Performance Summary</h2>
         <div style="font-size:36px;font-weight:700;color:#0d9488;">${pct}%</div>
         <div style="font-size:18px;margin-bottom:20px;">${grade}</div>
@@ -459,5 +460,6 @@ window.rdxShowDebrief = function() {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

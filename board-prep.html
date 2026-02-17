@@ -16,7 +16,7 @@
         var d = (location.pathname.match(/\//g) || []).length - 1;
         var p = "";
         for (var i = 0; i < d; i++) p += "../";
-        return p + "auth/login.html";
+        return p + "training.html";
     }
     
     function isAuth() {
@@ -50,6 +50,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ReasonDx Board Prep</title>
+<meta name="description" content="ReasonDx Board Prep: 615 USMLE Step 2 and COMLEX practice questions across 15+ specialties with detailed explanations and spaced repetition.">
+<meta property="og:title" content="ReasonDx Board Prep">
+<meta property="og:description" content="ReasonDx Board Prep: 615 USMLE Step 2 and COMLEX practice questions across 15+ specialties with detailed explanations and spaced repetition.">
+<meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -74,24 +78,8 @@
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
-[data-theme="high-contrast"] {
-    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
-    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
-    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
-    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
-    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
-    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
-    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
-}
-[data-theme="sepia"] {
-    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
-    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
-    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
-    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
-    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
-    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
-    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
-}
+
+
 body { transition: background 0.3s, color 0.3s; }
 
         :root {
@@ -105,7 +93,7 @@ body { transition: background 0.3s, color 0.3s; }
             --radius: 4px; --radius-lg: 8px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', 'Inter', -apple-system, sans-serif; background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         .serif { font-family: 'Source Serif 4', Georgia, serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
 
@@ -168,7 +156,7 @@ body { transition: background 0.3s, color 0.3s; }
 
         .vignette { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; line-height: 1.8; margin-bottom: 24px; color: var(--text); }
         .vignette p { margin-bottom: 12px; }
-        .clinical-data { font-family: 'DM Sans', 'Inter', sans-serif; font-size: 13px; color: var(--text-secondary); background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius); margin: 14px 0; }
+        .clinical-data { font-family:var(--rdx-font); font-size: 13px; color: var(--text-secondary); background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius); margin: 14px 0; }
         .clinical-data .label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
         .data-row { display: flex; flex-wrap: wrap; gap: 4px 14px; }
         .data-item { display: flex; gap: 4px; }
@@ -358,95 +346,35 @@ body { transition: background 0.3s, color 0.3s; }
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
@@ -454,19 +382,19 @@ body { transition: background 0.3s, color 0.3s; }
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
 .dx-theme-modal.open { display: flex; }
-
-
-
-
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
 .dx-theme-option:hover { border-color: var(--primary); }
 .dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
 .dx-theme-preview-nav { width: 30%; }
 .dx-theme-preview-main { width: 70%; }
 .dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
@@ -476,7 +404,7 @@ body { transition: background 0.3s, color 0.3s; }
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -497,8 +425,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -509,17 +437,28 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body>
+<!-- Mastery Dashboard CTA -->
+<div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+    <div style="font-size:28px;flex-shrink:0;">📊</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
+    </div>
+    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+  </a>
+</div>
+
 
 <div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: #f1f5f9; padding: 8px 12px; border-radius: 20px;">
     <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
     <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
+    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg,#0f172a); cursor: pointer;" title="High Contrast"></button>
     <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
 </div>
 
 
-    <!-- UNIFIED DX NAVIGATION -->
-    
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <div id="startScreen" class="start-screen">
         <div class="start-card">
@@ -646,13 +585,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const errors = [];
             for (const path of paths) {
                 try {
-                    console.log('Trying to load from:', path);
-                    const response = await fetch(path);
+const response = await fetch(path);
                     if (response.ok) {
                         const text = await response.text();
                         questionBank = JSON.parse(text);
-                        console.log('✓ Loaded', questionBank.length, 'questions from:', path);
-                        initializeUI();
+initializeUI();
                         return;
                     } else {
                         errors.push(`${path}: HTTP ${response.status}`);
@@ -1029,7 +966,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 if (q.resources.platform && q.resources.platform.length) {
                     resourcesHTML += `<div class="resources-section"><div class="resources-title">Platform Resources</div><div class="resource-list">${q.resources.platform.map(p => `
                         <a href="${p.url || '#'}" class="resource-link">
-                            <div class="resource-icon">${p.type === 'MechanismDx' ? '🧬' : '💬'}</div>
+                            <div class="resource-icon">${p.type === 'ReasonDx' ? '🧬' : '💬'}</div>
                             <div class="resource-info"><div class="resource-name">${p.title}</div><div class="resource-desc">${p.type} · ${p.desc || ''}</div></div>
                             <div class="resource-arrow">→</div>
                         </a>
@@ -1256,22 +1193,24 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </script>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
                         <div class="dx-theme-name">Midnight Teal</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
                         <div class="dx-theme-name">Purple Night</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
                         <div class="dx-theme-name">Forest Night</div>
                     </div>
@@ -1283,13 +1222,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <script>
     // Theme System
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-);
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
     }
-document.addEventListener('click', (e) => {
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
     });
     document.addEventListener('keydown', (e) => {
@@ -1299,7 +1250,9 @@ document.addEventListener('click', (e) => {
 
     <script src="js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
-<div data-dx-adaptive-tutor
+
+    
+    <div data-dx-adaptive-tutor
          data-case-title="ReasonDx Board Prep"
          data-key-points="Session Complete, 🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts, isomorphic variants, knowledge transfer"
          data-objectives="Develop systematic clinical reasoning, master illness scripts, detect cognitive biases"
@@ -1310,6 +1263,7 @@ document.addEventListener('click', (e) => {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 </script>
+<script src="js/rdx-help-widget.js"></script>
 </body>
 </html>
 
@@ -1400,11 +1354,9 @@ async function loadVariantManifest() {
         const response = await fetch('data/board-prep-manifest.json');
         if (response.ok) {
             variantManifest = await response.json();
-            console.log('✓ Loaded variant manifest with', variantManifest.variantGroups?.length || 0, 'groups');
-        }
+}
     } catch (e) {
-        console.log('Variant manifest not available');
-    }
+}
 }
 
 function getVariantGroup(questionId) {
@@ -1439,11 +1391,9 @@ function trackVariantPerformance(questionId, isCorrect) {
         const latest = groupStats.attempts[questionId];
         
         if (!first.correct && latest.correct) {
-            console.log('📈 Knowledge transfer detected for:', group.groupId);
-            // Could trigger badge or notification here
+// Could trigger badge or notification here
         } else if (first.correct && !latest.correct) {
-            console.log('⚠️ Knowledge regression for:', group.groupId);
-        }
+}
     }
     
     localStorage.setItem('boardPrepVariants', JSON.stringify(variantStats));

@@ -7,11 +7,12 @@
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SBAR Communication Trainer | Dx Learning Ecosystem</title>
+    <meta name="description" content="SBAR Communication Trainer — clinical education tool on ReasonDx. Interactive learning resource for medical students and educators.">
+<title>SBAR Communication Trainer | ReasonDx</title>
     <style>
         :root {
             --primary: #1E3A5F;
@@ -33,7 +34,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family:'DM Sans','Inter',sans-serif;
+            font-family:var(--rdx-font);
             background:var(--rdx-bg);
             min-height: 100vh;
             color:var(--rdx-text);
@@ -41,7 +42,7 @@
         
         /* Patient Chart Styles */
         .patient-chart {
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 25px;
@@ -70,7 +71,7 @@
             border: none;
             color: white;
             padding: 6px 12px;
-            border-radius: 6px;
+            border-radius:8px;
             cursor: pointer;
             font-size: 0.85rem;
         }
@@ -87,7 +88,7 @@
         
         .chart-section {
             background: #f9fafb;
-            border-radius: 10px;
+            border-radius:12px;
             padding: 15px;
         }
         
@@ -125,7 +126,7 @@
         .vital-item {
             text-align: center;
             padding: 10px;
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 8px;
         }
         
@@ -172,7 +173,7 @@
         }
         
         .conversation-container {
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             overflow: hidden;
@@ -295,7 +296,7 @@
             align-items: center;
             gap: 20px;
             padding: 20px;
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 12px;
         }
         
@@ -362,7 +363,7 @@
         .verbal-feedback {
             margin-top: 20px;
             padding: 20px;
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 12px;
             display: none;
         }
@@ -444,7 +445,7 @@
             border: 1px solid var(--text-light);
             color: var(--text-light);
             padding: 8px 16px;
-            border-radius: 6px;
+            border-radius:8px;
             cursor: pointer;
             font-size: 0.85rem;
             margin-top: 15px;
@@ -532,7 +533,7 @@
             border: 2px solid var(--border);
             border-radius: 8px;
             font-size: 1rem;
-            background: white;
+            background:var(--rdx-bg-card);
             cursor: pointer;
         }
         
@@ -566,7 +567,7 @@
             border: none;
             padding: 14px 32px;
             font-size: 1.1rem;
-            border-radius: 10px;
+            border-radius:12px;
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s;
@@ -709,7 +710,7 @@
             min-height: 100px;
             padding: 15px;
             border: 2px solid var(--border);
-            border-radius: 10px;
+            border-radius:12px;
             font-size: 1rem;
             font-family: inherit;
             resize: vertical;
@@ -908,7 +909,7 @@
         }
         
         .action-btn.outline {
-            background: white;
+            background:var(--rdx-bg-card);
             color: var(--text);
             border: 2px solid var(--border);
         }
@@ -956,13 +957,12 @@
 </head>
 <body>
 
-    <!-- UNIFIED DX NAVIGATION -->
-    
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <!-- Profession Banner -->
     <div class="profession-banner" id="professionBanner" style="background: linear-gradient(135deg, #f0fdf4 0%, var(--primary-bg) 100%); border-bottom: 1px solid #86efac; padding: 10px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
         <span style="font-size: 14px; color: #166534;">📋 Training as: <strong id="professionLabel">Medical Student</strong></span>
-        <select id="professionSelector" onchange="updateProfession(this.value)" style="padding: 6px 12px; border: 1px solid #86efac; border-radius: 6px; background: white; font-size: 13px; color: #166534; cursor: pointer;">
+        <select id="professionSelector" onchange="updateProfession(this.value)" style="padding: 6px 12px; border: 1px solid #86efac; border-radius:8px; background:var(--rdx-bg-card); font-size: 13px; color: #166534; cursor: pointer;">
             <option value="medical-student">Medical Student</option>
             <option value="resident">Resident</option>
             <option value="nursing">Nursing Student</option>
@@ -982,7 +982,7 @@
     <header class="header">
         <h1>📞 SBAR Communication Trainer 
             <span class="info-badge" style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: rgba(255,255,255,0.2); border-radius: 50%; font-size: 12px; cursor: help; position: relative; margin-left: 8px;">?
-                <span class="header-tooltip" style="visibility: hidden; opacity: 0; position: absolute; top: 130%; left: 50%; transform: translateX(-50%); background: #1f2937; color: white; padding: 14px 18px; border-radius: 10px; font-size: 13px; font-weight: 400; width: 300px; text-align: left; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: opacity 0.2s, visibility 0.2s;">
+                <span class="header-tooltip" style="visibility: hidden; opacity: 0; position: absolute; top: 130%; left: 50%; transform: translateX(-50%); background: #1f2937; color: white; padding: 14px 18px; border-radius:12px; font-size: 13px; font-weight: 400; width: 300px; text-align: left; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: opacity 0.2s, visibility 0.2s;">
                     <strong style="display: block; margin-bottom: 8px; font-size: 14px;">What is SBAR?</strong>
                     <strong>S</strong>ituation – What's happening right now?<br>
                     <strong>B</strong>ackground – What's the clinical context?<br>
@@ -1024,95 +1024,35 @@
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
@@ -1120,19 +1060,19 @@
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
 .dx-theme-modal.open { display: flex; }
-
-
-
-
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
 .dx-theme-option:hover { border-color: var(--primary); }
 .dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
 .dx-theme-preview-nav { width: 30%; }
 .dx-theme-preview-main { width: 70%; }
 .dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
@@ -1142,7 +1082,7 @@
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1500,22 +1440,22 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                             <h5>🎯 Verbal Delivery Review</h5>
                             
                             <div class="delivery-stats" style="display: flex; gap: 20px; margin-bottom: 20px;">
-                                <div style="background: #F0FDF4; padding: 15px 25px; border-radius: 10px; text-align: center;">
+                                <div style="background: #F0FDF4; padding: 15px 25px; border-radius:12px; text-align: center;">
                                     <div style="font-size: 1.8rem; font-weight: 700; color: #166534;" id="finalDuration">0:00</div>
                                     <div style="font-size: 0.85rem; color: #15803d;">Duration</div>
                                 </div>
-                                <div style="background: #f0fdfa; padding: 15px 25px; border-radius: 10px; text-align: center;">
+                                <div style="background: #f0fdfa; padding: 15px 25px; border-radius:12px; text-align: center;">
                                     <div style="font-size: 1.8rem; font-weight: 700; color: #0f766e;">60-90s</div>
                                     <div style="font-size: 0.85rem; color: #14b8a6;">Target Range</div>
                                 </div>
                             </div>
                             
-                            <div style="background: #F9FAFB; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                            <div style="background: #F9FAFB; border-radius:12px; padding: 20px; margin-bottom: 20px;">
                                 <h6 style="color: var(--primary); margin-bottom: 15px;">📝 Compare to What You Wrote:</h6>
                                 <div id="writtenSummary" style="line-height: 1.7;"></div>
                             </div>
                             
-                            <div class="self-assessment" style="background: #FEF3C7; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                            <div class="self-assessment" style="background: #FEF3C7; border-radius:12px; padding: 20px; margin-bottom: 20px;">
                                 <h6 style="color: #92400E; margin-bottom: 15px;">🤔 Self-Assessment Questions:</h6>
                                 <ul style="list-style: none; padding: 0; color: #78350F;">
                                     <li style="padding: 8px 0; display: flex; align-items: flex-start; gap: 10px;">
@@ -2932,7 +2872,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             // ═══════════════════════════════════════════════
             feedback.forEach(item => {
                 const div = document.createElement('div');
-                div.style.cssText = 'border: 1px solid ' + (item.good ? '#a7f3d0' : '#fde68a') + '; border-radius: 10px; padding: 14px; margin-bottom: 10px; background: ' + (item.good ? '#f0fdf4' : '#fffbeb');
+                div.style.cssText = 'border: 1px solid ' + (item.good ? '#a7f3d0' : '#fde68a') + '; border-radius:12px; padding: 14px; margin-bottom: 10px; background: ' + (item.good ? '#f0fdf4' : '#fffbeb');
                 
                 let matchedHtml = '';
                 if (item.matched.length > 0) {
@@ -3080,7 +3020,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                             Use what you learned about <strong>${context.patient?.name || 'the patient'}</strong> to make your SBAR call.
                         </p>
                     </div>
-                    <button onclick="newScenario()" style="background: white; border: 1px solid var(--primary); color: #115e59; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <button onclick="newScenario()" style="background:var(--rdx-bg-card); border: 1px solid var(--primary); color: #115e59; padding: 8px 16px; border-radius:8px; cursor: pointer; font-size: 0.9rem;">
                         Choose Different Scenario
                     </button>
                 </div>
@@ -3315,22 +3255,24 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </script>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
                         <div class="dx-theme-name">Midnight Teal</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
                         <div class="dx-theme-name">Purple Night</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
                         <div class="dx-theme-name">Forest Night</div>
                     </div>
@@ -3342,13 +3284,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <script>
     // Theme System
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-);
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
     }
-document.addEventListener('click', (e) => {
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
     });
     document.addEventListener('keydown', (e) => {
@@ -3365,5 +3319,6 @@ document.addEventListener('click', (e) => {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

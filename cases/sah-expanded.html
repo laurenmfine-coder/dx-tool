@@ -7,20 +7,21 @@
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Subarachnoid Hemorrhage | Clinical Adventure</title>
+    <meta name="description" content="In-depth clinical case study: Subarachnoid Hemorrhage | Clinical Adventure. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Subarachnoid Hemorrhage | Clinical Adventure</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #0891b2 100%); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0d9488 100%); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(88, 28, 135, 0.9); border-radius: 16px; margin-bottom: 20px; }
         .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #0891b2; margin-left: 10px; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #0891b2, #d8b4fe); border-radius: 3px; }
-        .scene { background: linear-gradient(135deg, #1e3a5f, #7c3aed); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene { background: linear-gradient(135deg, #115e59, #7c3aed); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
         .scene-header { background: rgba(147, 51, 234, 0.15); padding: 16px 20px; }
         .scene-phase { font-size: 0.75rem; color: #d8b4fe; text-transform: uppercase; }
         .scene-title { font-size: 1.4rem; font-weight: 700; }
@@ -43,7 +44,7 @@
         .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
         .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
         .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: #4ade80; }
+        .pearl .tip-header { color: var(--rdx-teal-light,#ccfbf1); }
         .pitfall .tip-header { color: #f87171; }
         @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
     /* Mobile Responsive - iPhone 16/17 optimized */
@@ -63,8 +64,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -193,7 +194,7 @@
     };
 
     window.render_debrief = function() {
-        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🧠</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">SAH Mastery Complete!</div></div><div class="scene-body">
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🧠</div><div style="font-size:1.8rem;font-weight:700;color:var(--rdx-teal-light,#ccfbf1);">SAH Mastery Complete!</div></div><div class="scene-body">
                 <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Always check glucose - hypoglycemia can mimic stroke</p>
                 </div>
@@ -209,11 +210,11 @@
 <style>
 /* Enhanced Feature Styles */
 .rdx-difficulty-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 16px;
     padding: 16px 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow:var(--rdx-shadow-md);
     position: fixed;
     top: 10px;
     right: 10px;
@@ -279,7 +280,7 @@
     padding: 20px;
 }
 .rdx-debrief-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 20px;
     padding: 32px;
     max-width: 800px;
@@ -340,8 +341,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -361,19 +362,19 @@
 
 <!-- CROSS-PLATFORM LEARNING LINKS -->
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#0f766e); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
             <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Subarachnoid Hemorrhage</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #14b8a6;">
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #14b8a6;">
             <h5 style="color: #14b8a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
             <a href="tbi-icp-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
             <a href="spinal-cord-compression-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Spinal Cord Compression</a>
             <a href="febrile-seizure-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Peds Febrile Seizure</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
             <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
             <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Practice with AI Coach</a>
             <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ SBAR Communication</a>
@@ -465,15 +466,15 @@
         document.getElementById('rdxDebriefContent').innerHTML = 
             '<div style="text-align:center;margin-bottom:24px;">' +
             '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:var(--rdx-text,#1e293b);">Case Complete!</h2>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
             '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
             '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
             '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<h3 style="font-weight:700;color:var(--rdx-text-secondary,#475569);margin-bottom:16px;">📊 Your Decision Path</h3>' +
             '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
             '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<h4 style="font-weight:600;color:var(--rdx-text-secondary,#475569);margin-bottom:8px;">🎯 Performance Legend</h4>' +
             '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
@@ -490,8 +491,7 @@
     // Auto-inject hint examples into existing content
     window.rdxInit = function() {
         // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Sah Expanded Adventure');
-    };
+};
     
     // Initialize on load
     if (document.readyState === 'loading') {
@@ -532,5 +532,6 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

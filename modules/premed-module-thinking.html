@@ -7,47 +7,75 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: How Doctors Think. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>How Doctors Think | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
 .header{background:linear-gradient(135deg,var(--pm-sky),#0369a1);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .container{max-width:740px;margin:0 auto;padding:24px;}
 .progress{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;}
 .progress-bar{flex:1;height:8px;background:#e2e8f0;border-radius:4px;}
 .progress-fill{height:100%;background:var(--pm-sky);border-radius:4px;transition:.3s;}
 .progress-text{font-size:13px;font-weight:600;color:var(--pm-sky);min-width:70px;text-align:right;}
-.section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
-.section h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-sky);}
+.section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.section h2{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-sky);}
 .section h3{font-size:17px;margin:20px 0 10px;color:var(--pm-text);}
 .section p{font-size:15px;margin-bottom:14px;}
 .highlight{background:var(--pm-sky-50);border-left:4px solid var(--pm-sky);padding:16px;border-radius:0 10px 10px 0;margin:16px 0;font-size:14px;}
 .highlight strong{color:var(--pm-sky);}
-.scenario{background:#fefce8;border:1.5px solid #fde68a;border-radius:10px;padding:18px;margin:16px 0;}
+.scenario{background:#fefce8;border:1.5px solid #fde68a;border-radius:12px;padding:18px;margin:16px 0;}
 .scenario h4{color:#92400e;margin-bottom:8px;font-size:15px;}
 .scenario p{font-size:14px;color:#78350f;margin-bottom:8px;}
-.think-box{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:10px;padding:16px;margin:16px 0;}
+.think-box{background:var(--pm-teal-50);border:1.5px solid #99f6e4;border-radius:12px;padding:16px;margin:16px 0;}
 .think-box h4{color:var(--pm-teal);font-size:14px;margin-bottom:6px;}
-.think-box textarea{width:100%;padding:10px;border:1px solid var(--pm-border);border-radius:6px;font-family:inherit;font-size:14px;min-height:80px;resize:vertical;background:#fff;}
+.think-box textarea{width:100%;padding:10px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:14px;min-height:80px;resize:vertical;background:var(--rdx-bg-card);}
 .reveal-btn{background:var(--pm-sky);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s;margin-top:8px;}
 .reveal-btn:hover{background:#0369a1;}
-.reveal{display:none;background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:10px;padding:16px;margin-top:12px;}
+.reveal{display:none;background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:12px;padding:16px;margin-top:12px;}
 .reveal.show{display:block;}
 .reveal h4{color:#059669;margin-bottom:8px;}
-.bias-card{background:var(--pm-card);border:1.5px solid #fecdd3;border-radius:10px;padding:16px;margin:12px 0;}
+.bias-card{background:var(--pm-card);border:1.5px solid #fecdd3;border-radius:12px;padding:16px;margin:12px 0;}
 .bias-card h4{color:#e11d48;font-size:15px;margin-bottom:6px;}
 .bias-card p{font-size:14px;}
 .bias-card .example{font-style:italic;color:var(--pm-muted);margin-top:6px;}
 .nav-btns{display:flex;justify-content:space-between;margin-top:24px;}
-.nav-btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.nav-btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .nav-next{background:var(--pm-sky);color:#fff;}
 .nav-prev{background:var(--pm-card);color:var(--pm-sky);border:1.5px solid var(--pm-sky);}
 .hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -132,7 +160,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
       <div class="scenario"><h4>🎯 Your Challenge</h4><p>For your next 5 clinical encounters, try this: before the physician gives their assessment, write down YOUR top 3 diagnoses. Then compare to theirs. Track your accuracy. You'll be surprised how quickly you improve.</p></div>
       <div class="think-box"><h4>📝 Key Takeaways</h4><textarea placeholder="What's the single most important thing you learned from this module? How will it change how you observe during your next clinical experience?"></textarea></div>
     </div>
-    <div style="text-align:center;margin-top:24px;padding:24px;background:var(--pm-sky-50);border-radius:14px;">
+    <div style="text-align:center;margin-top:24px;padding:24px;background:var(--pm-sky-50);border-radius:16px;">
       <p style="font-size:16px;font-weight:600;color:var(--pm-sky);margin-bottom:8px;">🎉 Module Complete!</p>
       <p style="font-size:14px;color:var(--pm-muted);margin-bottom:16px;">You've completed "How Doctors Think" — the foundation of clinical reasoning.</p>
       <a href="premed-paths.html#explorer" style="color:var(--pm-sky);font-weight:600;">← Back to Explorer Path</a>
@@ -154,5 +182,6 @@ function goTo(n){
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

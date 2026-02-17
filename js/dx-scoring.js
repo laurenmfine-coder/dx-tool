@@ -12,4 +12,3 @@ window.DxScoring = {
     if (result.passed) window.DxProgress?.addXP(10);
   }
 };
-console.log('[DxScoring] Loaded');

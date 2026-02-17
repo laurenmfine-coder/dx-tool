@@ -10,11 +10,12 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Calibration - Predict the Labs</title>
+    <meta name="description" content="Lab Calibration - Predict the Labs — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
+<title>Lab Calibration - Predict the Labs</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
-            font-family:'DM Sans','Inter',sans-serif; 
+            font-family:var(--rdx-font); 
             background: linear-gradient(135deg, var(--rdx-bg) 0%, var(--rdx-bg-card) 100%); 
             min-height: 100vh; 
             color: #f8fafc; 
@@ -52,7 +53,7 @@
         .system-tab.active { background: #8b5cf6; border-color: #8b5cf6; }
         
         .scenario-card {
-            background: #ffffff;
+            background:var(--rdx-bg-card);
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 20px;
@@ -80,7 +81,7 @@
         .scenario-text {
             background: #f1f5f9;
             padding: 16px;
-            border-radius: 10px;
+            border-radius:12px;
             line-height: 1.7;
             margin-bottom: 20px;
         }
@@ -101,8 +102,8 @@
         }
         
         .lab-item {
-            background: #ffffff;
-            border-radius: 10px;
+            background:var(--rdx-bg-card);
+            border-radius:12px;
             padding: 16px;
             margin-bottom: 12px;
         }
@@ -121,7 +122,7 @@
         .lab-option {
             padding: 10px 20px;
             border-radius: 8px;
-            background: #ffffff;
+            background:var(--rdx-bg-card);
             border: 2px solid rgba(255,255,255,0.15);
             cursor: pointer;
             transition: all 0.2s;
@@ -150,7 +151,7 @@
             color: white;
             border: none;
             padding: 14px 32px;
-            border-radius: 10px;
+            border-radius:12px;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
@@ -191,7 +192,7 @@
         
         .explanation-box {
             background: #f1f5f9;
-            border-radius: 10px;
+            border-radius:12px;
             padding: 16px;
             margin-top: 16px;
         }
@@ -212,7 +213,7 @@
             color: white;
             border: none;
             padding: 14px 32px;
-            border-radius: 10px;
+            border-radius:12px;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
@@ -238,8 +239,8 @@
             display: flex;
             justify-content: space-between;
             padding: 12px 16px;
-            background: #ffffff;
-            border-radius: 10px;
+            background:var(--rdx-bg-card);
+            border-radius:12px;
             margin-bottom: 20px;
             font-size: 0.9rem;
         }
@@ -820,16 +821,18 @@
     </script>
     
     <!-- Open-Access References -->
-    <div style="margin-top: 40px; padding: 20px; background: #ffffff; border-radius: 12px; font-size: 0.85rem;">
+    <div style="margin-top: 40px; padding: 20px; background:var(--rdx-bg-card); border-radius: 12px; font-size: 0.85rem;">
         <h3 style="color: #8b5cf6; margin-bottom: 12px;">📚 Evidence-Based References</h3>
         <ul style="list-style: none; padding: 0;">
-            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK482182/" target="_blank" style="color: #a78bfa;">StatPearls: Acid-Base Interpretation</a> - Anion gap, Winter's formula</li>
-            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK470381/" target="_blank" style="color: #a78bfa;">StatPearls: Acute Kidney Injury</a> - BUN/Cr ratios, prerenal vs intrinsic</li>
-            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK519070/" target="_blank" style="color: #a78bfa;">StatPearls: DKA</a> - Expected electrolyte changes</li>
-            <li style="margin-bottom: 8px;">• <a href="https://pubmed.ncbi.nlm.nih.gov/25295502/" target="_blank" style="color: #a78bfa;">NEJM 2014: Acid-Base Disturbances</a> - Compensation rules</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK482182/" target="_blank" style="color: var(--rdx-purple,#a78bfa);">StatPearls: Acid-Base Interpretation</a> - Anion gap, Winter's formula</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK470381/" target="_blank" style="color: var(--rdx-purple,#a78bfa);">StatPearls: Acute Kidney Injury</a> - BUN/Cr ratios, prerenal vs intrinsic</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK519070/" target="_blank" style="color: var(--rdx-purple,#a78bfa);">StatPearls: DKA</a> - Expected electrolyte changes</li>
+            <li style="margin-bottom: 8px;">• <a href="https://pubmed.ncbi.nlm.nih.gov/25295502/" target="_blank" style="color: var(--rdx-purple,#a78bfa);">NEJM 2014: Acid-Base Disturbances</a> - Compensation rules</li>
         </ul>
     </div>
-<div data-dx-tutor
+
+    
+    <div data-dx-tutor
          data-module-title="Lab Calibration"
          data-key-points="📚 Evidence-Based References, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
@@ -840,5 +843,6 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

@@ -5,12 +5,13 @@
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
-<script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
+<script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="RadDx: Trauma Imaging — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
 <title>RadDx: Trauma Imaging | ReasonDx</title>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 <style>
-body{font-family:'DM Sans',sans-serif;background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
+body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
 .header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 20px;position:sticky;top:56px;z-index:100}
 .header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
 .header-title{font-size:1.1rem;font-weight:600;color:#fff}
@@ -24,7 +25,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--rdx-bg);color:var(--rdx-t
 .framework-step.ctx{background:#d97706}.framework-step.ord{background:#0d9488}.framework-step.exp{background:#0891b2}.framework-step.int{background:#7c3aed}.framework-step.mgmt{background:#dc2626}
 .scenario{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:16px;margin-bottom:28px;overflow:hidden}
 .scenario-header{padding:20px 24px;border-bottom:1px solid var(--rdx-border);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.scenario-modality{background:var(--rdx-teal-50);color:var(--rdx-teal-dark);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+.scenario-modality{background:var(--rdx-teal-50);color:var(--rdx-teal-dark);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:8px;text-transform:uppercase;letter-spacing:.5px}
 .scenario-title{font-size:1.2rem;font-weight:700}
 .scenario-body{padding:24px}
 .vignette{background:var(--rdx-bg-hover);border-left:4px solid var(--rdx-teal);padding:16px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;font-size:.95rem}
@@ -39,12 +40,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--rdx-bg);color:var(--rdx-t
 .step-trigger[aria-expanded="true"] .step-arrow{transform:rotate(180deg)}
 .step-content{padding:0 20px 20px;display:none}.step-content.open{display:block}
 .choices{display:grid;gap:10px;margin:12px 0}
-.choice{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);padding:12px 16px;border-radius:10px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:all .2s;font-size:.9rem}
+.choice{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);padding:12px 16px;border-radius:12px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:all .2s;font-size:.9rem}
 .choice:hover{border-color:var(--rdx-teal);transform:translateX(3px)}
 .choice.correct{border-color:var(--rdx-success);background:rgba(34,197,94,.08);pointer-events:none}
 .choice.wrong{border-color:var(--rdx-danger);background:rgba(239,68,68,.08);pointer-events:none}
 .choice-letter{font-weight:700;min-width:20px;color:var(--rdx-teal)}
-.explanation{background:var(--rdx-teal-50);border:1px solid var(--rdx-teal);border-radius:10px;padding:16px;margin-top:12px;font-size:.9rem;display:none}.explanation.show{display:block}
+.explanation{background:var(--rdx-teal-50);border:1px solid var(--rdx-teal);border-radius:12px;padding:16px;margin-top:12px;font-size:.9rem;display:none}.explanation.show{display:block}
 .explanation h5{color:var(--rdx-teal-dark);margin-bottom:6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
 .pearl{background:linear-gradient(135deg,rgba(217,119,6,.1),rgba(245,158,11,.1));border-left:4px solid #d97706;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
 .pearl strong{color:#92400e}
@@ -53,7 +54,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--rdx-bg);color:var(--rdx-t
 .radiopaedia-link{display:inline-flex;align-items:center;gap:8px;background:var(--rdx-bg-hover);border:1px solid var(--rdx-border);border-radius:8px;padding:10px 16px;margin-top:16px;text-decoration:none;color:var(--rdx-teal);font-size:.85rem;font-weight:600;transition:all .15s}
 .radiopaedia-link:hover{border-color:var(--rdx-teal);background:var(--rdx-teal-50)}
 .cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
-.cross-link{padding:14px;background:var(--rdx-teal-50);border:1px solid var(--rdx-border);border-radius:10px;text-decoration:none;color:var(--rdx-text);transition:all .15s}
+.cross-link{padding:14px;background:var(--rdx-teal-50);border:1px solid var(--rdx-border);border-radius:12px;text-decoration:none;color:var(--rdx-text);transition:all .15s}
 .cross-link:hover{border-color:var(--rdx-teal)}
 .cross-link-title{font-weight:600;font-size:.9rem}.cross-link-desc{font-size:.8rem;color:var(--rdx-text-muted);margin-top:2px}
 @media(max-width:640px){.main{padding:16px}.scenario-body{padding:16px}.vignette{padding:12px 14px}}
@@ -103,4 +104,5 @@ function selectChoice(el,letter){const c=el.closest('.choices'),correct=c.datase
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body></html>

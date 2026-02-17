@@ -10,36 +10,37 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardiac Tamponade: Pathophysiology | MechanismDx</title>
+    <meta name="description" content="Interactive pathophysiology module: Cardiac Tamponade: Pathophysiology. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Cardiac Tamponade: Pathophysiology | ReasonDx</title>
     <style>
         :root{--primary:#0891b2;--primary-dark:#0e7490;--primary-bg:#ecfeff;--bg:#f8fafc;--card:#fff;--border:#e2e8f0;--text:#1e293b}
-        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans','Inter',-apple-system,sans-serif;background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
         .header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);padding:32px 24px;color:#fff}
         .header-inner{max-width:900px;margin:0 auto}.breadcrumb{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:12px}
         .breadcrumb a{color:rgba(255,255,255,0.9);text-decoration:none}.header h1{font-size:28px;font-weight:700;margin-bottom:8px}
         .content{max-width:900px;margin:0 auto;padding:32px 24px}
         .objectives{background:linear-gradient(135deg,var(--primary-bg) 0%,#d1fae5 100%);border:1px solid var(--primary);border-radius:16px;padding:24px;margin-bottom:32px}
         .objectives h2{color:#047857;font-size:16px;margin-bottom:12px}.objectives ul{margin-left:24px;color:#065f46}
-        .section{background:var(--rdx-bg-card);border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        .section{background:var(--rdx-bg-card);border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:var(--rdx-shadow)}
         .section h2{color:var(--primary-dark);font-size:1.25rem;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--primary-bg)}
         .section h3{color:var(--text);font-size:1rem;margin:16px 0 8px}.section p{margin-bottom:12px}
         .pathway-box{background:#fef3c7;border: 1px solid #0f766e;border-radius:12px;padding:16px;margin:16px 0}
         .pathway-box h4{color:#92400e;font-size:0.9rem;margin-bottom:8px}
         .pathway-steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-        .pathway-step{background:#fff;border: 1px solid #0f766e;padding:8px 14px;border-radius:8px;font-size:0.85rem}
+        .pathway-step{background:var(--rdx-bg-card);border: 1px solid #0f766e;padding:8px 14px;border-radius:8px;font-size:0.85rem}
         .pathway-arrow{color: #0f766e;font-weight:bold}
         .clinical-box{background:#f0fdf4;border:1px solid #22c55e;border-radius:12px;padding:16px;margin:16px 0}
         .clinical-box h4{color:#166534;font-size:0.9rem;margin-bottom:8px}
         .key-point{background:#f0fdfa;border-left:4px solid #14b8a6;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0}
         .mcq-container{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:20px;margin:20px 0}
         .mcq-question{font-weight:600;margin-bottom:16px}.mcq-options{display:flex;flex-direction:column;gap:8px}
-        .mcq-option{padding:12px 16px;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s}
+        .mcq-option{padding:12px 16px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s}
         .mcq-option:hover{border-color:var(--primary);background:var(--primary-bg)}
         .mcq-option.correct{border-color:#22c55e;background:#f0fdf4}.mcq-option.incorrect{border-color:#ef4444;background:#fef2f2}
         .mcq-feedback{margin-top:12px;padding:12px;border-radius:8px;display:none}.mcq-feedback.show{display:block}
         .mcq-feedback.correct{background:#f0fdf4;color:#166534}.mcq-feedback.incorrect{background:#fef2f2;color:#991b1b}
         .nav-links{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-        .nav-link{padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.9rem}
+        .nav-link{padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:600;font-size:0.9rem}
         .nav-link.back{background:var(--rdx-bg-card);border:1px solid var(--border);color:var(--text)}
         .nav-link.adventure{background:var(--primary);color:#fff}
         .warning-box{background:#fef2f2;border:1px solid #ef4444;border-radius:12px;padding:16px;margin:16px 0}
@@ -52,7 +53,7 @@
 </head>
 <body>
     <header class="header"><div class="header-inner">
-        <div class="breadcrumb"><a href="../index.html">ReasonDx</a> → <a href="index.html">MechanismDx</a> → Cardiac Tamponade</div>
+        <div class="breadcrumb"><a href="../index.html">ReasonDx</a> → <a href="index.html">ReasonDx</a> → Cardiac Tamponade</div>
         <h1>⚙️ Cardiac Tamponade</h1>
         <div style="font-size:15px;color:rgba(255,255,255,0.85)">Pathophysiology | Cardiology</div>
     </div></header>
@@ -80,7 +81,7 @@
 <div class="key-point"><strong>✓</strong> RA collapses first (lowest pressure chamber)</div>
 <div class="key-point"><strong>✓</strong> Treatment: pericardiocentesis; IV fluids as bridge</div>
 <div class="key-point"><strong>✓</strong> Avoid diuretics, vasodilators, and negative inotropes</div></div>
-        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back to MechanismDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links"><a href="index.html" class="nav-link back">← Back to ReasonDx</a><a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a></div>
     </div>
     <script>
 const fb=[{"c":"The right atrium has the lowest intracavitary pressure and thinnest wall, making it the first chamber to be compressed. This is why RA collapse in diastole is an early echo finding of tamponade.","i":"The RA is compressed first due to its low pressure and thin wall."},{"c":"IV fluids increase preload, helping maintain CO until definitive drainage. Diuretics and vasodilators would worsen hypotension. Beta-blockers would prevent compensatory tachycardia.","i":"Patients need volume to maintain preload while awaiting pericardiocentesis."}];
@@ -88,7 +89,9 @@ function check(q,o,correct){const c=document.getElementById('mcq'+q);const opts=
 opts.forEach((e,i)=>{e.style.pointerEvents='none';if(i===o)e.classList.add(correct?'correct':'incorrect');});
 f.className='mcq-feedback show '+(correct?'correct':'incorrect');f.innerHTML='<strong>'+(correct?'✓ Correct!':'✗ Not quite')+'</strong><br>'+(correct?fb[q].c:fb[q].i);}
     </script>
-<div data-dx-tutor
+
+    
+    <div data-dx-tutor
          data-module-title="Cardiac Tamponade: Pathophysiology"
          data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Pericardial Pressure Dynamics, Compensatory Mechanisms, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
@@ -184,7 +187,7 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">🩻 Imaging Resources</h4>
 <p style="font-size:0.85rem;margin-bottom:8px;color:var(--rdx-text-muted,#64748b)"><strong>Primary modality:</strong> Echocardiogram</p>
 <p style="font-size:0.85rem;margin-bottom:8px;color:var(--rdx-text-muted,#64748b)"><strong>Key findings:</strong> Pericardial effusion, RV diastolic collapse, IVC plethora, respiratory variation</p>
-<a href="https://radiopaedia.org/articles/cardiac-tamponade" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600">📖 Explore Cases on Radiopaedia →</a>
+<a href="https://radiopaedia.org/articles/cardiac-tamponade" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600">📖 Explore Cases on Radiopaedia →</a>
 </div>
 <div class="cross-links"><a href="../deep-dive-player.html?module=cardiac-tamponade-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/cardiac-tamponade-adventure.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
 <script src="../dx-progress.js"></script>
@@ -192,7 +195,7 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Cardiac Embryology</strong>. <em>StatPearls</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK537313/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/NBK537313/</a></li>
 <li><strong>Congenital Heart Disease</strong>. <em>StatPearls</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK537047/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/NBK537047/</a></li>
@@ -202,5 +205,7 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/cardiac-tamponade.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

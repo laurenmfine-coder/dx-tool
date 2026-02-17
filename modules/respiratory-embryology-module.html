@@ -10,17 +10,18 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechanismDx: Respiratory Embryology - Lung Development & Congenital Anomalies</title>
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Respiratory Embryology - Lung Development & Congenital Anomalies. Learn mechanisms, clinical features, and mana...">
+<title>ReasonDx: Respiratory Embryology - Lung Development & Congenital Anomalies</title>
   <style>
     :root { --primary: #0EA5E9; --primary-dark: #0284C7; --secondary: #06B6D4; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info:var(--rdx-info); }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%); color: var(--text-primary, #E5E7EB); min-height: 100vh; line-height: 1.6; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%); color: var(--text-primary, #E5E7EB); min-height: 100vh; line-height: 1.6; }
     .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
     header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; border: 1px solid rgba(14, 165, 233, 0.3); }
     header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .subtitle { color: #9CA3AF; font-size: 1.1rem; }
     .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .nav-tab { padding: 0.6rem 1.2rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
     .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
@@ -35,7 +36,7 @@
     table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
     th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     th { background: rgba(14, 165, 233, 0.2); color: var(--primary); }
-    tr:hover { background: #ffffff; }
+    tr:hover { background:var(--rdx-bg-card); }
     ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
     li { margin: 0.5rem 0; }
     .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
@@ -56,7 +57,7 @@
     .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
     .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
   
-    
+    /* ReasonDx Theme System Override */
     body { background: var(--bg-main) !important; color: var(--text-primary) !important; transition: background 0.3s, color 0.3s; }
     .container { background: transparent; }
     .module-section { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); }
@@ -93,95 +94,35 @@
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
@@ -189,19 +130,19 @@
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
 .dx-theme-modal.open { display: flex; }
-
-
-
-
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
 .dx-theme-option:hover { border-color: var(--primary); }
 .dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
 .dx-theme-preview-nav { width: 30%; }
 .dx-theme-preview-main { width: 70%; }
 .dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
@@ -211,7 +152,7 @@
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -220,8 +161,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-<!-- UNIFIED DX NAVIGATION -->
-    
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/respiratory-embryology.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Respiratory Embryology</a> → Module</div>
+
+<!-- nav removed: unified via rdx-nav.js -->
   <div class="container">
     <header>
       <h1>🫁 Respiratory Embryology</h1>
@@ -790,27 +732,27 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <!-- REFERENCES -->
     <section class="module-section" style="margin-top:1.5rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
-      <h2 style="color: #5eead4;">📖 References</h2>
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">📖 References</h2>
       <ul style="list-style: none; padding-left: 0;">
-        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK544372/" target="_blank" style="color: #5eead4;">StatPearls: Embryology, Lung</a></li>
-        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK513268/" target="_blank" style="color: #5eead4;">StatPearls: Congenital Diaphragmatic Hernia</a></li>
-        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK537160/" target="_blank" style="color: #5eead4;">StatPearls: Neonatal Respiratory Distress Syndrome</a></li>
-        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK532269/" target="_blank" style="color: #5eead4;">StatPearls: Tracheoesophageal Fistula</a></li>
-        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK551664/" target="_blank" style="color: #5eead4;">StatPearls: Pulmonary Sequestration</a></li>
-        <li style="margin: 0.75rem 0;"><a href="https://radiopaedia.org/articles/congenital-pulmonary-airway-malformation" target="_blank" style="color: #5eead4;">Radiopaedia: CPAM</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK544372/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Embryology, Lung</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK513268/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Congenital Diaphragmatic Hernia</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK537160/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Neonatal Respiratory Distress Syndrome</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK532269/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Tracheoesophageal Fistula</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK551664/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Pulmonary Sequestration</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://radiopaedia.org/articles/congenital-pulmonary-airway-malformation" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Radiopaedia: CPAM</a></li>
       </ul>
     </section>
 
     <!-- CROSS-LINKS -->
     <section class="module-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
-      <h2 style="color: #6ee7b7;">🔗 Related Modules</h2>
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Modules</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-        <a href="gi-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">GI Embryology</a>
-        <a href="cardiac-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Cardiac Embryology</a>
-        <a href="neuro-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Neuro Embryology</a>
-        <a href="#" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Teratology</a>
+        <a href="gi-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">GI Embryology</a>
+        <a href="cardiac-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">Cardiac Embryology</a>
+        <a href="neuro-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">Neuro Embryology</a>
+        <a href="#" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">Teratology</a>
       </div>
-      <h3 style="color: #86efac; margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+      <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1rem;">Clinical Reasoning Trainers</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
         <a href="../cases/tef-esophageal-atresia-crt.html" class="condition-link">TEF/EA CRT</a>
         <a href="../cases/cdh-crt.html" class="condition-link">CDH CRT</a>
@@ -836,8 +778,10 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
       document.getElementById('exp-' + qId).style.display = 'block';
     }
   </script>
-<div data-dx-tutor
-         data-module-title="MechanismDx: Respiratory Embryology"
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Respiratory Embryology"
          data-key-points="📚 Respiratory Development Overview, 📅 Stages of Lung Development, 🫀 Diaphragm Development, 🧪 Surfactant Biology, ⚠️ Congenital Respiratory Anomalies, 📝 Test Your Knowledge, 📖 References, 🔗 Related Modules, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
          data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
          style="display:none;"></div>
@@ -864,7 +808,46 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         </div>
     </div>
     
-<!-- THEME PICKER MODAL --><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<!-- THEME PICKER MODAL -->
+    
+
+<script>
+(function() {
+    const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+    document.body.setAttribute('data-theme', saved);
+    document.addEventListener('DOMContentLoaded', updateThemeOptions);
+})();
+
+
+
+function updateThemeOptions() {
+    const current = document.body.getAttribute('data-theme');
+    document.querySelectorAll('.dx-theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === current);
+    });
+}
+
+
+
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDxThemeModal();
+});
+</script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">The respiratory diverticulum (lung bud) arises from which embryologic structure during week 4?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The midgut gives rise to the small intestine and proximal colon, not the respiratory system." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Midgut endoderm</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="The lung bud evaginates from the ventral foregut endoderm during week 4. The tracheoesophageal septum separates it from the dorsal esophagus. Failure of this septation → tracheoesophageal fistula (TEF). The endoderm forms the epithelial lining; splanchnic mesoderm forms cartilage, smooth muscle, and vasculature." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Ventral wall of the foregut endoderm</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest contributes to craniofacial structures and the enteric nervous system, not respiratory epithelium." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Neural crest ectoderm</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Intermediate mesoderm forms the urogenital system, not the respiratory system." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Intermediate mesoderm</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
 <div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Type II pneumocytes begin producing surfactant at approximately which gestational age?</div></div><div class="mcq-card-body"><div class="mcq-choices">
 <div class="mcq-choice" data-correct="false" data-fb="At 16 weeks, the lungs are in the pseudoglandular stage — no alveolar development or surfactant production yet." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">16 weeks</div></div></div>
 <div class="mcq-choice" data-correct="true" data-fb="Type II pneumocytes appear during the canalicular stage (~24 weeks) and begin producing surfactant (dipalmitoylphosphatidylcholine/DPPC). Adequate surfactant for extrauterine life is usually present by 35 weeks. Premature infants &lt;35 weeks → surfactant deficiency → neonatal respiratory distress syndrome (RDS). Antenatal corticosteroids accelerate surfactant production." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">24-28 weeks (with adequate amounts by 35 weeks)</div></div></div>
@@ -927,5 +910,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

@@ -171,5 +171,4 @@ window.DxProgress = (() => {
   return { addXP, markComplete, addEpaObservation, getEpaObservations, get, reset };
 })();
 
-console.log('[RdxPersist] v2 loaded — localStorage persistence active');
-console.log('[DxProgress] Initialized — XP:', DxProgress.get().xp, '| Level:', DxProgress.get().level);
+.xp, '| Level:', DxProgress.get().level);

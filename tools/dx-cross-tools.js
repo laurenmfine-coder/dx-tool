@@ -1,5 +1,5 @@
 /**
- * ReasonDx Cross-Tool Actions
+ * DxSuite Cross-Tool Actions
  * ============================
  * Adds contextual action buttons between tools:
  * - ABG Analyzer → "Save as Flashcard"
@@ -56,7 +56,7 @@
             padding: 12px 20px;
             background: #166534;
             color: white;
-            border-radius: 10px;
+            border-radius:12px;
             font-size: 14px;
             font-family: 'Inter', system-ui, sans-serif;
             box-shadow: 0 4px 16px rgba(0,0,0,0.2);
@@ -143,7 +143,7 @@
         whenStorage(function() {
             const id = DxStorage.generateId('bk');
             DxStorage.save('bookmarks', id, {
-                title: title || document.title.replace(' | ReasonDx', '').replace(' | ReasonDx', ''),
+                title: title || document.title.replace(' | ReasonDx', '').replace(' | DxSuite', ''),
                 url: location.href,
                 type: type || 'general',
                 tags: [],

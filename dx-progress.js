@@ -10,4 +10,3 @@ window.DxProgress = {
   _save() { window.RdxPersist?.save('progress', this._data); }
 };
 DxProgress.init();
-console.log('[DxProgress] Loaded');

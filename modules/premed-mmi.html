@@ -7,26 +7,27 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: MMI & Interview Practice. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>MMI & Interview Practice | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-rose:#e11d48;--pm-rose-50:#fff1f2;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
-.header{background:linear-gradient(135deg,#e11d48,#be123c);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg, #042f2e, #0f766e);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .container{max-width:720px;margin:0 auto;padding:24px;}
 .tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
 .tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
 .tab.active{background:var(--pm-rose);color:#fff;}
-.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
 .card h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .cat-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
-.cat-btn{padding:8px 16px;border-radius:10px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.cat-btn{padding:8px 16px;border-radius:12px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
 .cat-btn:hover{border-color:var(--pm-rose);background:var(--pm-rose-50);}
 .cat-btn.active{background:var(--pm-rose);color:#fff;border-color:var(--pm-rose);}
-.scenario{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;overflow:hidden;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.scenario{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:var(--pm-shadow);}
 .scenario-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--pm-border);}
 .scenario-title{font-weight:700;font-size:15px;}
 .scenario-cat{padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:var(--pm-rose-50);color:var(--pm-rose);}
@@ -44,17 +45,44 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .rubric h4{font-size:14px;color:#059669;margin-bottom:12px;}
 .rubric-item{padding:10px 14px;background:rgba(255,255,255,.7);border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.6;}
 .rubric-item strong{color:#065f46;display:block;margin-bottom:2px;}
-.tip-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;color:#78350f;}
+.tip-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;color:#78350f;}
 .tip-box strong{color:#92400e;}
 .stats{display:flex;gap:16px;margin-bottom:24px;}
 .stat{flex:1;text-align:center;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:16px;}
 .stat-val{font-size:24px;font-weight:700;color:var(--pm-rose);}
 .stat-lbl{font-size:11px;color:var(--pm-muted);text-transform:uppercase;}
-.guide-section{background:linear-gradient(135deg,var(--pm-rose-50),#ffe4e6);border:2px solid #fecdd3;border-radius:14px;padding:24px;margin-bottom:16px;}
-.guide-section h3{font-family:'DM Serif Display',serif;font-weight:400;color:#9f1239;margin-bottom:12px;}
+.guide-section{background:linear-gradient(135deg,var(--pm-rose-50),#ffe4e6);border:2px solid #fecdd3;border-radius:16px;padding:24px;margin-bottom:16px;}
+.guide-section h3{font-family:var(--rdx-font-serif);font-weight:400;color:#9f1239;margin-bottom:12px;}
 .guide-section p{font-size:14px;line-height:1.7;color:#881337;}
 .hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -248,5 +276,6 @@ renderScenarios();
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

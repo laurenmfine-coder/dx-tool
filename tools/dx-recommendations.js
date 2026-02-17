@@ -15,5 +15,4 @@
         .map(([id]) => id);
     }
   };
-  console.log('[DxRecommendations] Engine loaded');
 })();

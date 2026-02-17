@@ -12,16 +12,17 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seizure Disorders & Epilepsy | MechanismDx</title>
+    <meta name="description" content="Interactive pathophysiology module: Seizure Disorders & Epilepsy. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Seizure Disorders & Epilepsy | ReasonDx</title>
     <script src="../dx-scoring.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
-        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
-        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
-        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
+        
+        
+        
+        
         .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
         .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
         .dx-nav-link.active { background: var(--primary); color: #fff; }
@@ -34,7 +35,7 @@
         .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
         .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 32px; }
         .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; width: 0%; }
-        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow:var(--rdx-shadow); }
         .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
         .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
         .section p { margin-bottom: 16px; color: var(--text-secondary); }
@@ -54,7 +55,7 @@
         .quiz-question { margin-bottom: 24px; }
         .quiz-question p { font-weight: 500; margin-bottom: 12px; }
         .quiz-options { display: grid; gap: 8px; }
-        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius:12px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
         .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
         .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
         .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
@@ -71,8 +72,10 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/seizure-disorders.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Seizure Disorders & Epilepsy</a> → Module</div>
 
-    
+
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <section class="hero">
         <div class="hero-inner">
@@ -251,11 +254,13 @@
     </script>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
                 </div>
             </div>
         </div>
@@ -263,11 +268,17 @@
 
     <script>
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-</script>
+    
+    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
+    
+    
+    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
+    </script>
     <div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body">
 <div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">A 25-year-old presents with a witnessed episode of rhythmic jerking of all extremities lasting 90 seconds with post-ictal confusion. What type of seizure is this?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Focal aware seizures preserve consciousness and are typically limited to one body region." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Focal aware seizure</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Bilateral rhythmic jerking (clonic phase) with loss of consciousness and post-ictal confusion is classic for a generalized tonic-clonic (GTC) seizure." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Generalized tonic-clonic seizure</div></div></div><div class="choice" data-fb="Absence seizures feature brief staring spells (seconds) without post-ictal confusion, typically in children." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Absence seizure</div></div></div><div class="choice" data-fb="While possible, the classic presentation of rhythmic jerking with post-ictal confusion is most consistent with a true GTC seizure." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Psychogenic non-epileptic event</div></div></div></div><div id="mcqFb0" class="hidden" style="margin-top:12px"><div id="mcqFbText0" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
 <div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">Which EEG pattern is pathognomonic for absence seizures?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Focal sharp waves suggest focal epilepsy, not absence seizures." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Focal sharp waves</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Generalized 3 Hz spike-and-wave is the hallmark EEG finding in childhood absence epilepsy. It is provoked by hyperventilation." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">3 Hz spike-and-wave discharges</div></div></div><div class="choice" data-fb="PLEDs are associated with acute structural lesions or herpes encephalitis, not absence epilepsy." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Periodic lateralized epileptiform discharges</div></div></div><div class="choice" data-fb="Burst suppression indicates severe diffuse cerebral dysfunction, often in coma or deep anesthesia." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Burst suppression</div></div></div></div><div id="mcqFb1" class="hidden" style="margin-top:12px"><div id="mcqFbText1" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
@@ -280,7 +291,7 @@
 </div></div>
 
 <script src="../js/dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
 
     <div data-dx-tutor data-module-title="Seizure Disorders & Epilepsy" data-key-points="Focal vs generalized, status epilepticus, AED selection, first seizure workup, driving restrictions, SUDEP" style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
@@ -301,7 +312,7 @@
 <h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">🩻 Imaging Resources</h4>
 <p style="font-size:0.85rem;margin-bottom:8px;color:var(--rdx-text-muted,#64748b)"><strong>Primary modality:</strong> CT Head (acute) → MRI Brain</p>
 <p style="font-size:0.85rem;margin-bottom:8px;color:var(--rdx-text-muted,#64748b)"><strong>Key findings:</strong> CT for acute (hemorrhage, mass); MRI epilepsy protocol for structural causes</p>
-<a href="https://radiopaedia.org/articles/seizure" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600">📖 Explore Cases on Radiopaedia →</a>
+<a href="https://radiopaedia.org/articles/seizure" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600">📖 Explore Cases on Radiopaedia →</a>
 </div>
 <div class="cross-links"><a href="status-epilepticus-module.html" class="cross-link"><div class="cross-link-title">📘 Status Epilepticus</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
 <a href="stroke-module.html" class="cross-link"><div class="cross-link-title">📘 Stroke</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
@@ -315,5 +326,6 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

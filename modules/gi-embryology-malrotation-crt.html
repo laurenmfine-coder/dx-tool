@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Green Vomit | GI Embryology | ReasonDx CRT</title>
+    <meta name="description" content="Embryology module: The Green Vomit | GI Embryology CRT. Interactive developmental biology with clinical correlations on ReasonDx.">
+<title>The Green Vomit | GI Embryology | ReasonDx CRT</title>
     <style>
         :root { --bg:var(--rdx-bg); --card:var(--rdx-bg-card); --border:var(--rdx-border); --text:var(--rdx-text); --muted:var(--rdx-text-muted); --accent: #F59E0B; --success:var(--rdx-success); --warning: #F59E0B; --danger:var(--rdx-danger); --info:var(--rdx-info); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:'DM Sans','Inter',sans-serif; background:var(--rdx-bg); color:var(--rdx-text); min-height: 100vh; line-height: 1.6; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); color:var(--rdx-text); min-height: 100vh; line-height: 1.6; }
         .header { background: linear-gradient(135deg, #78350F, #F59E0B); padding: 12px 20px; position:sticky;top:56px; z-index: 100; }
         .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; }
         .header-title { font-size: 1.1rem; font-weight: 600; }
@@ -35,7 +36,7 @@
         .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(251,191,36,0.1)); border-left:4px solid var(--rdx-teal); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px; }
         .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
         .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
-        .vital { background:var(--rdx-bg-hover); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital { background:var(--rdx-bg-hover); padding: 12px; border-radius:12px; text-align: center; }
         .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
         .vital-label { font-size: 0.7rem; color: var(--muted); }
         .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
@@ -63,16 +64,18 @@
         .outcome { text-align: center; padding: 40px; }
         .outcome-icon { font-size: 4rem; }
         .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin: 16px 0 8px; }
-        .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn { padding: 12px 24px; border-radius:12px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
         .btn-primary { background: var(--accent); color: white; }
         .hidden { display: none !important; }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
         .pulse { animation: pulse 1s infinite; }
-        .xray-box { background: #000; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; font-family: monospace; color: #888; }
+        .xray-box { background:var(--rdx-bg); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; font-family: monospace; color: #888; }
     </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/gi-embryology-malrotation.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Intestinal Malrotation & Volvulus</a> → Module</div>
+
     <div class="header">
         <div class="header-row">
             <div class="header-title">🤢 The Green Vomit<span class="badge">SURGICAL EMERGENCY</span></div>
@@ -291,7 +294,9 @@ function check(n, el, ok) {
             }, 2500);
         }
     </script>
-<div data-dx-tutor
+
+    
+    <div data-dx-tutor
          data-module-title="The Green Vomit"
          data-key-points="clinical reasoning, pathophysiology, diagnosis, evidence-based management"
          data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
@@ -303,7 +308,7 @@ function check(n, el, ok) {
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Embryology Overview</strong>. <em>StatPearls</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK554437/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/NBK554437/</a></li>
 <li><strong>Langman&#x27;s Medical Embryology (reference)</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
@@ -313,5 +318,6 @@ function check(n, el, ok) {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

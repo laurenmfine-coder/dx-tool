@@ -1,5 +1,5 @@
 /**
- * ReasonDx Tools — Platform Nav Integration
+ * DxSuite Tools — Platform Nav Integration
  * ==========================================
  * Drop this script into ANY platform page to add a "🛠️ Tools" 
  * dropdown in the navigation. Works with the unified nav bar.
@@ -200,7 +200,7 @@
             return true;
         }
 
-        // Pattern 4: ReasonDx-specific — look for the user bar
+        // Pattern 4: DxSuite-specific — look for the user bar
         const userBar = document.querySelector('.dx-user-bar, #dx-user-bar');
         if (userBar) {
             userBar.insertBefore(trigger, userBar.firstChild);

@@ -7,11 +7,15 @@
 <link rel="stylesheet" href="mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Deep Dive Hub | ReasonDx</title>
+<meta name="description" content="ReasonDx Deep Dives: 280+ layered study guides covering pathophysiology, diagnosis, and management for clinical topics from common presentations to rare emergencies.">
+<meta property="og:title" content="Deep Dive Hub | ReasonDx">
+<meta property="og:description" content="ReasonDx Deep Dives: 280+ layered study guides covering pathophysiology, diagnosis, and management for clinical topics from common presentations to rare emergencies.">
+<meta property="og:type" content="website">
     <style>
 
 /* Multi-Theme Support */
@@ -33,24 +37,8 @@
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
-[data-theme="high-contrast"] {
-    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
-    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
-    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
-    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
-    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
-    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
-    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
-}
-[data-theme="sepia"] {
-    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
-    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
-    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
-    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
-    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
-    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
-    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
-}
+
+
 body { transition: background 0.3s, color 0.3s; }
 
 /* Theme Variables */
@@ -72,16 +60,12 @@ body { transition: background 0.3s, color 0.3s; }
     --radius: 12px;
 }
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border);
-}
+
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family:'DM Sans','Inter',sans-serif;
+    font-family:var(--rdx-font);
     background: var(--bg-main);
     color: var(--text-primary);
     min-height: 100vh;
@@ -107,7 +91,7 @@ body {
 }
 .tagline {
     margin-top: 12px;
-    font-family: Georgia, serif;
+    font-family:var(--rdx-font-serif);
     font-size: 18px;
     font-style: italic;
     color: var(--text-secondary);
@@ -202,7 +186,7 @@ body {
     min-width: 250px;
     padding: 12px 16px;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius:12px;
     font-size: 15px;
     background: var(--bg-card);
     color: var(--text-primary);
@@ -214,7 +198,7 @@ body {
 .filter-btn {
     padding: 12px 20px;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius:12px;
     background: var(--bg-card);
     color: var(--text-secondary);
     font-size: 14px;
@@ -301,7 +285,7 @@ body {
 .case-badge {
     font-size: 11px;
     padding: 3px 8px;
-    border-radius: 6px;
+    border-radius:8px;
     background: var(--primary-bg);
     color: var(--primary);
     font-weight: 500;
@@ -358,8 +342,8 @@ body {
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -369,29 +353,34 @@ body {
     <link rel="stylesheet" href="js/dx-case-nav.css">
 <link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
-<body data-theme="muted-teal">
-
-<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: #f1f5f9; padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
-    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
-    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
+<body data-theme="light">
+<!-- Mastery Dashboard CTA -->
+<div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+    <div style="font-size:28px;flex-shrink:0;">📊</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
+    </div>
+    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+  </a>
 </div>
 
-    <!-- Navigation -->
-    
+
+<!-- Navigation -->
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <!-- Logo Header -->
     <header class="logo-header">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 90" style="height: 60px;">
-            <text x="10" y="58" font-family="Georgia, serif" font-size="46" fill="#1a1a1a" letter-spacing="-1">Reason</text>
-            <text x="165" y="58" font-family="Georgia, serif" font-size="46" fill="#1a1a1a">D</text>
-            <line x1="198" y1="34" x2="214" y2="54" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-            <ellipse cx="196.5" cy="31.5" rx="2" ry="3" transform="rotate(-28 196.5 31.5)" fill="#1a1a1a"/>
-            <path d="M 214 34 L 204 45 Q 200 50 200 57 Q 200 64 205 68 Q 210 72 210 78" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <ellipse cx="215.5" cy="31.5" rx="2" ry="3" transform="rotate(28 215.5 31.5)" fill="#1a1a1a"/>
-            <circle cx="210" cy="78" r="6" fill="none" stroke="#1a1a1a" stroke-width="2"/>
-            <circle cx="210" cy="78" r="3" fill="#1a1a1a"/>
+            <text x="10" y="58" font-family="Georgia, serif" font-size="46" fill="currentColor" letter-spacing="-1">Reason</text>
+            <text x="165" y="58" font-family="Georgia, serif" font-size="46" fill="currentColor">D</text>
+            <line x1="198" y1="34" x2="214" y2="54" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="196.5" cy="31.5" rx="2" ry="3" transform="rotate(-28 196.5 31.5)" fill="currentColor"/>
+            <path d="M 214 34 L 204 45 Q 200 50 200 57 Q 200 64 205 68 Q 210 72 210 78" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <ellipse cx="215.5" cy="31.5" rx="2" ry="3" transform="rotate(28 215.5 31.5)" fill="currentColor"/>
+            <circle cx="210" cy="78" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="210" cy="78" r="3" fill="currentColor"/>
         </svg>
         <div class="tagline">Deep Dive Cases - Master clinical reasoning layer by layer</div>
     </header>
@@ -412,7 +401,7 @@ body {
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h4>Choose a Case</h4>
-                        <p>Select from 70+ cases organized by category - from common presentations to rare emergencies.</p>
+                        <p>Select from 280+ deep dives organized by category - from common presentations to rare emergencies.</p>
                     </div>
                 </div>
                 <div class="step">
@@ -479,7 +468,7 @@ body {
             <button class="filter-btn" data-filter="gi" onclick="setFilter('gi')">🫃 GI</button>
             <button class="filter-btn" data-filter="allergy" onclick="setFilter('allergy')">🤧 Allergy</button>
         </div>
-        <div class="results-count" id="resultsCount">Showing all 70+ cases</div>
+        <div class="results-count" id="resultsCount">Showing all 282 cases</div>
     </section>
 
     <!-- Cases -->
@@ -487,7 +476,17 @@ body {
         <!-- Cases will be loaded dynamically -->
     </section>
 
-    <!-- Theme handled by rdx-nav.js -->
+    <!-- Theme Modal (same as other pages) -->
+    <div class="theme-modal" id="" style="display:none; position:fixed; inset:0; background: #f1f5f9; z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:var(--bg-card); padding:24px; border-radius:16px; max-width:400px; width:90%;">
+            <h3 style="margin-bottom:16px;">🎨 Choose Theme</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <button onclick="setTheme('muted-teal')" style="padding:12px; border:1px solid var(--border); border-radius:8px; cursor:pointer;">Muted Teal</button>
+                <button onclick="setTheme('ocean-dark')" style="padding:12px; border:1px solid var(--border); border-radius:8px; cursor:pointer;">Ocean Dark</button>
+            </div>
+            <button onclick="closeDxThemeModal()" style="margin-top:16px; width:100%; padding:10px; border:none; background:var(--border); border-radius:8px; cursor:pointer;">Close</button>
+        </div>
+    </div>
 
     <script>
     // Deep Dive Cases Data
@@ -593,6 +592,15 @@ body {
         heme: { name: 'Heme/Onc', icon: '🩸' },
         tox: { name: 'Toxicology', icon: '☠️' },
         allergy: { name: 'Allergy & Immunology', icon: '🤧' }
+            surgery: { name: 'Surgery', icon: '🔪' },
+        derm: { name: 'Dermatology', icon: '🩹' },
+        peds: { name: 'Pediatrics', icon: '👶' },
+        msk: { name: 'MSK', icon: '🦴' },
+        obgyn: { name: 'OB/GYN', icon: '🤰' },
+        psych: { name: 'Psychiatry', icon: '🧠' },
+        general: { name: 'General', icon: '📋' },
+        urology: { name: 'Urology', icon: '💧' },
+        ent: { name: 'ENT', icon: '👂' },
     };
     
     let currentFilter = 'all';
@@ -612,7 +620,7 @@ body {
         
         // Update results count
         document.getElementById('resultsCount').textContent = 
-            `Showing ${filteredCases.length} of ${DEEP_DIVE_CASES.length} cases`;
+            `Showing ${filteredCases.length} of ${DEEP_DIVE_CASES.length} deep dives`;
         
         if (filteredCases.length === 0) {
             container.innerHTML = `
@@ -627,7 +635,224 @@ body {
         // Group by category
         const grouped = {};
         filteredCases.forEach(c => {
-            if (!grouped[c.category]) grouped[c.category] = [];
+            if (!grouped[c.category]) grouped[c.category] = [,
+        { id: 'acid-base-disorders', title: 'Acid-Base Disorders', category: 'general', icon: '📋', description: 'Deep dive into Acid-Base Disorders', file: 'acid-base-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acid-base-interpretation', title: 'Acid-Base Interpretation: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Acid-Base Interpretation: A Systematic Approach', file: 'acid-base-interpretation-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acls-rhythms', title: 'ACLS Cardiac Arrest Rhythms', category: 'critical', icon: '📋', description: 'Deep dive into ACLS Cardiac Arrest Rhythms', file: 'acls-rhythms-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-abdomen', title: 'Acute Abdomen', category: 'surgery', icon: '📋', description: 'Deep dive into Acute Abdomen', file: 'acute-abdomen-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-appendicitis', title: 'Acute Appendicitis', category: 'critical', icon: '📋', description: 'Deep dive into Acute Appendicitis', file: 'acute-appendicitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-cholecystitis', title: 'Acute Cholecystitis', category: 'gi', icon: '📋', description: 'Deep dive into Acute Cholecystitis', file: 'acute-cholecystitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-leukemia', title: 'Acute Leukemia: ALL vs AML', category: 'heme', icon: '📋', description: 'Deep dive into Acute Leukemia: ALL vs AML', file: 'acute-leukemia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-pancreatitis', title: 'Acute Pancreatitis', category: 'gi', icon: '📋', description: 'Deep dive into Acute Pancreatitis', file: 'acute-pancreatitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-sinusitis-clinical', title: 'Acute Sinusitis', category: 'ent', icon: '📋', description: 'Deep dive into Acute Sinusitis', file: 'acute-sinusitis-clinical-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-sinusitis', title: 'Acute Rhinosinusitis', category: 'ent', icon: '📋', description: 'Deep dive into Acute Rhinosinusitis', file: 'acute-sinusitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'adrenal-disorders', title: 'Adrenal Disorders: Cushing & Addison', category: 'endo', icon: '📋', description: 'Deep dive into Adrenal Disorders: Cushing & Addison', file: 'adrenal-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'allergy-testing', title: 'Allergy Testing: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Allergy Testing: A Systematic Approach', file: 'allergy-testing-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'altered-mental-status', title: 'Altered Mental Status', category: 'ent', icon: '📋', description: 'Deep dive into Altered Mental Status', file: 'altered-mental-status-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'amniotic-band', title: 'Amniotic Band Syndrome: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Amniotic Band Syndrome: A Systematic Approach', file: 'amniotic-band-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'anemia', title: 'Anemia', category: 'heme', icon: '📋', description: 'Deep dive into Anemia', file: 'anemia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'angioedema', title: 'Angioedema', category: 'allergy', icon: '📋', description: 'Deep dive into Angioedema', file: 'angioedema-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'anorectal-malformations', title: 'Anorectal Malformations: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Anorectal Malformations: A Systematic Approach', file: 'anorectal-malformations-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'antidepressant', title: 'Antidepressant Pharmacology', category: 'general', icon: '📋', description: 'Deep dive into Antidepressant Pharmacology', file: 'antidepressant-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'antiphospholipid-syndrome', title: 'Antiphospholipid Syndrome: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Antiphospholipid Syndrome: A Systematic Approach', file: 'antiphospholipid-syndrome-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'antipsychotic', title: 'Antipsychotic Pharmacology', category: 'general', icon: '📋', description: 'Deep dive into Antipsychotic Pharmacology', file: 'antipsychotic-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'anxiety', title: 'Anxiety Disorders: A Systematic Approach', category: 'psych', icon: '📋', description: 'Deep dive into Anxiety Disorders: A Systematic Approach', file: 'anxiety-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'apap-overdose', title: 'Acetaminophen Overdose', category: 'tox', icon: '📋', description: 'Deep dive into Acetaminophen Overdose', file: 'apap-overdose-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'appendicitis', title: 'Appendicitis', category: 'critical', icon: '📋', description: 'Deep dive into Appendicitis', file: 'appendicitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'asthma-biologics', title: 'Asthma Biologics Selection', category: 'pulm', icon: '📋', description: 'Deep dive into Asthma Biologics Selection', file: 'asthma-biologics-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'asthma-phenotyping', title: 'Asthma Phenotyping & Biologics', category: 'pulm', icon: '📋', description: 'Deep dive into Asthma Phenotyping & Biologics', file: 'asthma-phenotyping-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'aub', title: 'Abnormal Uterine Bleeding: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Abnormal Uterine Bleeding: A Systematic Approach', file: 'aub-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'biliary-disease', title: 'Biliary Disease', category: 'general', icon: '📋', description: 'Deep dive into Biliary Disease', file: 'biliary-disease-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'bipolar-disorder', title: 'Bipolar Disorder', category: 'psych', icon: '📋', description: 'Deep dive into Bipolar Disorder', file: 'bipolar-disorder-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'bladder-cancer', title: 'Bladder Cancer: Diagnosis and Management', category: 'ent', icon: '📋', description: 'Deep dive into Bladder Cancer: Diagnosis and Management', file: 'bladder-cancer-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'bph', title: 'Benign Prostatic Hyperplasia: Diagnosis and Management', category: 'ent', icon: '📋', description: 'Deep dive into Benign Prostatic Hyperplasia: Diagnosis and Management', file: 'bph-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'branchial-cleft-anomalies', title: 'Branchial Cleft Anomalies: Embryology and Management', category: 'ent', icon: '📋', description: 'Deep dive into Branchial Cleft Anomalies: Embryology and Management', file: 'branchial-cleft-anomalies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'breast-mass', title: 'Breast Disease: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Breast Disease: A Systematic Approach', file: 'breast-mass-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'bronchiolitis', title: 'Bronchiolitis', category: 'peds', icon: '📋', description: 'Deep dive into Bronchiolitis', file: 'bronchiolitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'burns', title: 'Burns', category: 'general', icon: '📋', description: 'Comprehensive burn assessment covering TBSA, fluid resuscitation, depth class...', file: 'burns-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'calcium-disorders', title: 'Calcium & Parathyroid Disorders', category: 'endo', icon: '📋', description: 'Deep dive into Calcium & Parathyroid Disorders', file: 'calcium-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'capacity', title: 'Decision-Making Capacity: A Systematic Approach', category: 'renal', icon: '📋', description: 'Deep dive into Decision-Making Capacity: A Systematic Approach', file: 'capacity-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'carbon-monoxide', title: 'Carbon Monoxide Poisoning: A Systematic Approach', category: 'tox', icon: '📋', description: 'Deep dive into Carbon Monoxide Poisoning: A Systematic Approach', file: 'carbon-monoxide-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cardiac-embryology', title: 'Cardiac Embryology', category: 'general', icon: '📋', description: 'Deep dive into Cardiac Embryology', file: 'cardiac-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cdh-congenital-diaphragmatic-hernia', title: 'Congenital Diaphragmatic Hernia: A Systematic Approach', category: 'surgery', icon: '📋', description: 'Deep dive into Congenital Diaphragmatic Hernia: A Systematic Approach', file: 'cdh-congenital-diaphragmatic-hernia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cdh-crt', title: 'Congenital Diaphragmatic Hernia', category: 'surgery', icon: '📋', description: 'Deep dive into Congenital Diaphragmatic Hernia', file: 'cdh-crt-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cdiff', title: 'C. difficile Infection', category: 'gi', icon: '📋', description: 'Deep dive into C. difficile Infection', file: 'cdiff-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'celiac', title: 'Celiac Disease & Malabsorption: A Systematic Approach', category: 'gi', icon: '📋', description: 'Deep dive into Celiac Disease & Malabsorption: A Systematic Approach', file: 'celiac-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cellulitis-necfasc', title: 'Cellulitis vs Necrotizing Fasciitis', category: 'id', icon: '📋', description: 'Deep dive into Cellulitis vs Necrotizing Fasciitis', file: 'cellulitis-necfasc-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'chest-pain', title: 'Chest Pain Algorithm', category: 'general', icon: '📋', description: 'Deep dive into Chest Pain Algorithm', file: 'chest-pain-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'chiari-malformation', title: 'Chiari Malformation: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Chiari Malformation: A Systematic Approach', file: 'chiari-malformation-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'chronic-urticaria', title: 'Chronic Urticaria', category: 'allergy', icon: '📋', description: 'Deep dive into Chronic Urticaria', file: 'chronic-urticaria-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cirrhosis', title: 'Cirrhosis & Liver Disease', category: 'gi', icon: '📋', description: 'Deep dive into Cirrhosis & Liver Disease', file: 'cirrhosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cleft-lip-palate', title: 'Cleft Lip and Palate: Comprehensive Management', category: 'ent', icon: '📋', description: 'Deep dive into Cleft Lip and Palate: Comprehensive Management', file: 'cleft-lip-palate-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'clinical-reasoning', title: 'Clinical Reasoning Trainer', category: 'general', icon: '📋', description: 'Deep dive into Clinical Reasoning Trainer', file: 'clinical-reasoning-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'clubfoot-limb-development', title: 'Clubfoot & Limb Development: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Clubfoot & Limb Development: A Systematic Approach', file: 'clubfoot-limb-development-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'congenital-hydrocephalus', title: 'Congenital Hydrocephalus: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Congenital Hydrocephalus: A Systematic Approach', file: 'congenital-hydrocephalus-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'congenital-lobar-emphysema', title: 'Congenital Lobar Emphysema: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Congenital Lobar Emphysema: A Systematic Approach', file: 'congenital-lobar-emphysema-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'conotruncal-defects', title: 'Conotruncal Defects: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Conotruncal Defects: A Systematic Approach', file: 'conotruncal-defects-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'contraception', title: 'Contraception', category: 'general', icon: '📋', description: 'Deep dive into Contraception', file: 'contraception-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'corpus-callosum-agenesis', title: 'Agenesis of Corpus Callosum: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Agenesis of Corpus Callosum: A Systematic Approach', file: 'corpus-callosum-agenesis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cpam-bronchogenic-cyst', title: 'CPAM & Bronchogenic Cyst: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into CPAM & Bronchogenic Cyst: A Systematic Approach', file: 'cpam-bronchogenic-cyst-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'craniosynostosis', title: 'Craniosynostosis: Diagnosis and Management', category: 'ent', icon: '📋', description: 'Deep dive into Craniosynostosis: Diagnosis and Management', file: 'craniosynostosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'croup', title: 'Croup (Laryngotracheobronchitis)', category: 'peds', icon: '📋', description: 'Deep dive into Croup (Laryngotracheobronchitis)', file: 'croup-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cryptorchidism', title: 'Cryptorchidism', category: 'urology', icon: '📋', description: 'Deep dive into Cryptorchidism', file: 'cryptorchidism-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dandy-walker', title: 'Dandy-Walker Malformation: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Dandy-Walker Malformation: A Systematic Approach', file: 'dandy-walker-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ddh-developmental-dysplasia', title: 'Developmental Dysplasia of the Hip: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Developmental Dysplasia of the Hip: A Systematic Approach', file: 'ddh-developmental-dysplasia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'delirium', title: 'Delirium', category: 'neuro', icon: '📋', description: 'Deep dive into Delirium', file: 'delirium-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'depression', title: 'Major Depressive Disorder', category: 'psych', icon: '📋', description: 'Deep dive into Major Depressive Disorder', file: 'depression-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'derm-emergencies', title: 'Dermatologic Emergencies', category: 'derm', icon: '📋', description: 'Deep dive into Dermatologic Emergencies', file: 'derm-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'developmental-milestones', title: 'Developmental Milestones: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Developmental Milestones: A Systematic Approach', file: 'developmental-milestones-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dfi', title: 'Diabetic Foot Infection', category: 'endo', icon: '📋', description: 'Deep dive into Diabetic Foot Infection', file: 'dfi-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'diabetes-dka', title: 'Diabetes & DKA', category: 'endo', icon: '📋', description: 'Deep dive into Diabetes & DKA', file: 'diabetes-dka-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'diabetic-emergencies', title: 'Diabetic Emergencies', category: 'endo', icon: '📋', description: 'Deep dive into Diabetic Emergencies', file: 'diabetic-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'diabetic-foot-infection', title: 'Diabetic Foot Infection (DFI)', category: 'endo', icon: '📋', description: 'Deep dive into Diabetic Foot Infection (DFI)', file: 'diabetic-foot-infection-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'diabetic-ketoacidosis', title: 'Diabetic Ketoacidosis', category: 'endo', icon: '📋', description: 'Diagnostic criteria for DKA', file: 'diabetic-ketoacidosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dka-hhs', title: 'DKA vs Hyperosmolar Hyperglycemic State', category: 'endo', icon: '📋', description: 'Deep dive into DKA vs Hyperosmolar Hyperglycemic State', file: 'dka-hhs-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dress-scars', title: 'DRESS & SCARs', category: 'derm', icon: '📋', description: 'Deep dive into DRESS & SCARs', file: 'dress-scars-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dress-sjs', title: 'DRESS, SJS & TEN', category: 'derm', icon: '📋', description: 'Deep dive into DRESS, SJS & TEN', file: 'dress-sjs-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'duodenal-atresia', title: 'Duodenal Atresia', category: 'general', icon: '📋', description: 'Deep dive into Duodenal Atresia', file: 'duodenal-atresia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dvt', title: 'Deep Vein Thrombosis', category: 'heme', icon: '📋', description: 'Deep dive into Deep Vein Thrombosis', file: 'dvt-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dvt-pe', title: 'DVT & Pulmonary Embolism', category: 'pulm', icon: '📋', description: 'Deep dive into DVT & Pulmonary Embolism', file: 'dvt-pe-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ectopic-pregnancy', title: 'Ectopic Pregnancy', category: 'obgyn', icon: '📋', description: 'Deep dive into Ectopic Pregnancy', file: 'ectopic-pregnancy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ekg', title: 'EKG Interpretation: A Systematic Approach', category: 'cardio', icon: '📋', description: 'Deep dive into EKG Interpretation: A Systematic Approach', file: 'ekg-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'electrolyte-disorders', title: 'Electrolyte Disorders', category: 'renal', icon: '📋', description: 'Deep dive into Electrolyte Disorders', file: 'electrolyte-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'electrolyte-emergencies', title: 'Electrolyte Emergencies', category: 'renal', icon: '📋', description: 'Deep dive into Electrolyte Emergencies', file: 'electrolyte-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'endocrine-embryology', title: 'Endocrine Embryology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Endocrine Embryology: A Systematic Approach', file: 'endocrine-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ent-emergencies', title: 'ENT Emergencies', category: 'ent', icon: '📋', description: 'Deep dive into ENT Emergencies', file: 'ent-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'epinephrine', title: 'Epinephrine in Allergy: A Systematic Approach', category: 'renal', icon: '📋', description: 'Deep dive into Epinephrine in Allergy: A Systematic Approach', file: 'epinephrine-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'eye-emergencies', title: 'Ophthalmologic Emergencies', category: 'general', icon: '📋', description: 'Deep dive into Ophthalmologic Emergencies', file: 'eye-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'febrile-seizure', title: 'Febrile Seizures', category: 'neuro', icon: '📋', description: 'Deep dive into Febrile Seizures', file: 'febrile-seizure-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'fuo', title: 'Fever of Unknown Origin: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Fever of Unknown Origin: A Systematic Approach', file: 'fuo-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gbs', title: 'Guillain-Barré Syndrome: A Systematic Approach', category: 'neuro', icon: '📋', description: 'Deep dive into Guillain-Barré Syndrome: A Systematic Approach', file: 'gbs-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gerd-pud', title: 'GERD & Peptic Ulcer Disease: A Systematic Approach', category: 'gi', icon: '📋', description: 'Deep dive into GERD & Peptic Ulcer Disease: A Systematic Approach', file: 'gerd-pud-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gi-bleeding', title: 'GI Bleeding', category: 'gi', icon: '📋', description: 'Deep dive into GI Bleeding', file: 'gi-bleeding-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gi-embryology', title: 'GI Embryology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into GI Embryology: A Systematic Approach', file: 'gi-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gi-embryology-malrotation', title: 'Intestinal Malrotation & Volvulus: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Intestinal Malrotation & Volvulus: A Systematic Approach', file: 'gi-embryology-malrotation-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gout-pseudogout', title: 'Gout & Pseudogout: A Systematic Approach', category: 'msk', icon: '📋', description: 'Deep dive into Gout & Pseudogout: A Systematic Approach', file: 'gout-pseudogout-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gu-embryology', title: 'GU Embryology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into GU Embryology: A Systematic Approach', file: 'gu-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'gyn-oncology', title: 'Gynecologic Oncology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Gynecologic Oncology: A Systematic Approach', file: 'gyn-oncology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'headache', title: 'Headache: A Systematic Approach', category: 'neuro', icon: '📋', description: 'Deep dive into Headache: A Systematic Approach', file: 'headache-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'headache-icp', title: 'Headache & Intracranial Pressure: A Systematic Approach', category: 'neuro', icon: '📋', description: 'Deep dive into Headache & Intracranial Pressure: A Systematic Approach', file: 'headache-icp-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hematuria', title: 'Hematuria Workup', category: 'urology', icon: '📋', description: 'Deep dive into Hematuria Workup', file: 'hematuria-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hemifacial-microsomia', title: 'Hemifacial Microsomia and Oculo-Auriculo-Vertebral Spectrum', category: 'general', icon: '📋', description: 'Deep dive into Hemifacial Microsomia and Oculo-Auriculo-Vertebral Spectrum', file: 'hemifacial-microsomia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hernia', title: 'Hernias: A Systematic Approach', category: 'surgery', icon: '📋', description: 'Deep dive into Hernias: A Systematic Approach', file: 'hernia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hirschsprung-disease', title: 'Hirschsprung Disease: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Hirschsprung Disease: A Systematic Approach', file: 'hirschsprung-disease-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hiv-aids', title: 'HIV/AIDS: A Systematic Approach', category: 'id', icon: '📋', description: 'Deep dive into HIV/AIDS: A Systematic Approach', file: 'hiv-aids-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'holoprosencephaly', title: 'Holoprosencephaly: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Holoprosencephaly: A Systematic Approach', file: 'holoprosencephaly-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'horseshoe-kidney', title: 'Horseshoe Kidney: A Systematic Approach', category: 'renal', icon: '📋', description: 'Deep dive into Horseshoe Kidney: A Systematic Approach', file: 'horseshoe-kidney-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hypospadias', title: 'Hypospadias', category: 'urology', icon: '📋', description: 'Deep dive into Hypospadias', file: 'hypospadias-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ibd', title: 'Inflammatory Bowel Disease', category: 'gi', icon: '📋', description: 'Deep dive into Inflammatory Bowel Disease', file: 'ibd-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'immunodeficiency', title: 'Immunodeficiency', category: 'allergy', icon: '📋', description: 'Deep dive into Immunodeficiency', file: 'immunodeficiency-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'immunotherapy-allergy', title: 'Allergen Immunotherapy: A Systematic Approach', category: 'allergy', icon: '📋', description: 'Deep dive into Allergen Immunotherapy: A Systematic Approach', file: 'immunotherapy-allergy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'immunotherapy-onc', title: 'Immunotherapy', category: 'allergy', icon: '📋', description: 'Deep dive into Immunotherapy', file: 'immunotherapy-onc-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'inflammatory-myopathy', title: 'Inflammatory Myopathies: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Inflammatory Myopathies: A Systematic Approach', file: 'inflammatory-myopathy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'inhaler-spacer', title: 'Inhaler & Spacer Technique: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Inhaler & Spacer Technique: A Systematic Approach', file: 'inhaler-spacer-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'intracranial-hemorrhage', title: 'Intracranial Hemorrhage', category: 'general', icon: '📋', description: 'Deep dive into Intracranial Hemorrhage', file: 'intracranial-hemorrhage-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'intussusception', title: 'Intussusception', category: 'peds', icon: '📋', description: 'Deep dive into Intussusception', file: 'intussusception-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ivig-scig', title: 'IVIG & SCIG Therapy: A Systematic Approach', category: 'allergy', icon: '📋', description: 'Deep dive into IVIG & SCIG Therapy: A Systematic Approach', file: 'ivig-scig-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'jejunal-ileal-atresia', title: 'Jejunal/Ileal Atresia: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Jejunal/Ileal Atresia: A Systematic Approach', file: 'jejunal-ileal-atresia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'kawasaki-disease', title: 'Kawasaki Disease', category: 'renal', icon: '📋', description: 'Deep dive into Kawasaki Disease', file: 'kawasaki-disease-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'kidney-stones', title: 'Nephrolithiasis: Diagnosis and Management', category: 'renal', icon: '📋', description: 'Deep dive into Nephrolithiasis: Diagnosis and Management', file: 'kidney-stones-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'labor-delivery', title: 'Labor & Delivery: A Systematic Approach', category: 'gi', icon: '📋', description: 'Deep dive into Labor & Delivery: A Systematic Approach', file: 'labor-delivery-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'labor-stages', title: 'Stages of Labor: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Stages of Labor: A Systematic Approach', file: 'labor-stages-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'laryngotracheal-development', title: 'Laryngotracheal Development: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Laryngotracheal Development: A Systematic Approach', file: 'laryngotracheal-development-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'liver-cirrhosis', title: 'Liver Disease & Cirrhosis', category: 'gi', icon: '📋', description: 'Deep dive into Liver Disease & Cirrhosis', file: 'liver-cirrhosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'meckel-diverticulum', title: 'Meckel Diverticulum: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Meckel Diverticulum: A Systematic Approach', file: 'meckel-diverticulum-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'meningitis-encephalitis', title: 'Meningitis & Encephalitis', category: 'neuro', icon: '📋', description: 'Deep dive into Meningitis & Encephalitis', file: 'meningitis-encephalitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'mse', title: 'Mental Status Examination: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Mental Status Examination: A Systematic Approach', file: 'mse-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'msk-embryology', title: 'MSK Embryology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into MSK Embryology: A Systematic Approach', file: 'msk-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'multiple-sclerosis', title: 'Multiple Sclerosis: A Systematic Approach', category: 'neuro', icon: '📋', description: 'Deep dive into Multiple Sclerosis: A Systematic Approach', file: 'multiple-sclerosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'myasthenia-gravis', title: 'Myasthenia Gravis', category: 'neuro', icon: '📋', description: 'Deep dive into Myasthenia Gravis', file: 'myasthenia-gravis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'necrotizing-fasciitis', title: 'Necrotizing Fasciitis', category: 'general', icon: '📋', description: 'Deep dive into Necrotizing Fasciitis', file: 'necrotizing-fasciitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neonatal-respiratory', title: 'Neonatal Respiratory Distress', category: 'peds', icon: '📋', description: 'Deep dive into Neonatal Respiratory Distress', file: 'neonatal-respiratory-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neonatal-screening', title: 'Newborn Screening & Neonatal Conditions: A Systematic Approach', category: 'peds', icon: '📋', description: 'Deep dive into Newborn Screening & Neonatal Conditions: A Systematic Approach', file: 'neonatal-screening-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neural-tube-defects', title: 'Neural Tube Defects: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Neural Tube Defects: A Systematic Approach', file: 'neural-tube-defects-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neuro-embryology', title: 'Neuro Embryology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Neuro Embryology: A Systematic Approach', file: 'neuro-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neurogenic-bladder', title: 'Neurogenic Bladder: Assessment and Management', category: 'ent', icon: '📋', description: 'Deep dive into Neurogenic Bladder: Assessment and Management', file: 'neurogenic-bladder-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neuronal-migration', title: 'Neuronal Migration Disorders: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Neuronal Migration Disorders: A Systematic Approach', file: 'neuronal-migration-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'obstructive-lung', title: 'Obstructive Lung Disease', category: 'general', icon: '📋', description: 'Deep dive into Obstructive Lung Disease', file: 'obstructive-lung-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'omphalocele-gastroschisis', title: 'Omphalocele & Gastroschisis: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Omphalocele & Gastroschisis: A Systematic Approach', file: 'omphalocele-gastroschisis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'organophosphate', title: 'Organophosphate Poisoning: A Systematic Approach', category: 'tox', icon: '📋', description: 'Deep dive into Organophosphate Poisoning: A Systematic Approach', file: 'organophosphate-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ovarian-torsion', title: 'Ovarian Torsion', category: 'general', icon: '📋', description: 'Deep dive into Ovarian Torsion', file: 'ovarian-torsion-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'parkinson', title: 'Parkinson Disease: A Systematic Approach', category: 'neuro', icon: '📋', description: 'Deep dive into Parkinson Disease: A Systematic Approach', file: 'parkinson-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pda-coarctation', title: 'PDA & Coarctation', category: 'general', icon: '📋', description: 'Deep dive into PDA & Coarctation', file: 'pda-coarctation-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pediatric-emergencies', title: 'Pediatric Emergencies', category: 'general', icon: '📋', description: 'Deep dive into Pediatric Emergencies', file: 'pediatric-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pediatric-urology', title: 'Pediatric Urology Essentials', category: 'ent', icon: '📋', description: 'Deep dive into Pediatric Urology Essentials', file: 'pediatric-urology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'peds-anaphylaxis', title: 'Pediatric Anaphylaxis', category: 'allergy', icon: '📋', description: 'Deep dive into Pediatric Anaphylaxis', file: 'peds-anaphylaxis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'peds-dka', title: 'The Sleepy Child', category: 'endo', icon: '📋', description: 'Deep dive into The Sleepy Child', file: 'peds-dka-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'penicillin-delabeling', title: 'Penicillin Allergy Delabeling', category: 'general', icon: '📋', description: 'Deep dive into Penicillin Allergy Delabeling', file: 'penicillin-delabeling-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'personality-disorders', title: 'Personality Disorders', category: 'general', icon: '📋', description: 'Deep dive into Personality Disorders', file: 'personality-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pft', title: 'PFT Interpretation', category: 'general', icon: '📋', description: 'Deep dive into PFT Interpretation', file: 'pft-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pharyngeal-apparatus', title: 'Pharyngeal Apparatus', category: 'general', icon: '📋', description: 'Pharyngeal arch, pouch, cleft derivatives with clinical correlations to crani...', file: 'pharyngeal-apparatus-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pid-toa', title: 'PID & Tubo-ovarian Abscess', category: 'id', icon: '📋', description: 'Deep dive into PID & Tubo-ovarian Abscess', file: 'pid-toa-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pierre-robin', title: 'Pierre Robin Sequence: Airway, Feeding, and Management', category: 'ent', icon: '📋', description: 'Deep dive into Pierre Robin Sequence: Airway, Feeding, and Management', file: 'pierre-robin-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pituitary', title: 'Pituitary Disorders', category: 'endo', icon: '📋', description: 'Deep dive into Pituitary Disorders', file: 'pituitary-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'placental-abruption', title: 'Placental Abruption', category: 'obgyn', icon: '📋', description: 'Deep dive into Placental Abruption', file: 'placental-abruption-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'placental-disorders', title: 'Placental Disorders', category: 'obgyn', icon: '📋', description: 'Deep dive into Placental Disorders', file: 'placental-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'plastic-surgery', title: 'Plastic Surgery', category: 'general', icon: '📋', description: 'High-yield plastic surgery emergencies including facial trauma, hand injuries...', file: 'plastic-surgery-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pleural-effusion', title: 'Pleural Effusion: A Systematic Approach', category: 'pulm', icon: '📋', description: 'Deep dive into Pleural Effusion: A Systematic Approach', file: 'pleural-effusion-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'polydactyly-syndactyly', title: 'Polydactyly & Syndactyly: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Polydactyly & Syndactyly: A Systematic Approach', file: 'polydactyly-syndactyly-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'postpartum-hemorrhage', title: 'Postpartum Hemorrhage', category: 'obgyn', icon: '📋', description: 'Deep dive into Postpartum Hemorrhage', file: 'postpartum-hemorrhage-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'potassium', title: 'Potassium Disorders', category: 'renal', icon: '📋', description: 'Deep dive into Potassium Disorders', file: 'potassium-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'preeclampsia', title: 'Preeclampsia & Eclampsia', category: 'obgyn', icon: '📋', description: 'Deep dive into Preeclampsia & Eclampsia', file: 'preeclampsia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'preop-postop', title: 'Pre/Post-Operative Management: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Pre/Post-Operative Management: A Systematic Approach', file: 'preop-postop-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'prostate-cancer', title: 'Prostate Cancer: Screening, Diagnosis, and Management', category: 'ent', icon: '📋', description: 'Deep dive into Prostate Cancer: Screening, Diagnosis, and Management', file: 'prostate-cancer-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'psychopharmacology', title: 'Psychopharmacology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Psychopharmacology: A Systematic Approach', file: 'psychopharmacology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'psychosis', title: 'Psychosis & Schizophrenia', category: 'psych', icon: '📋', description: 'Deep dive into Psychosis & Schizophrenia', file: 'psychosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pulmonary-sequestration', title: 'Pulmonary Sequestration: A Systematic Approach', category: 'pulm', icon: '📋', description: 'Deep dive into Pulmonary Sequestration: A Systematic Approach', file: 'pulmonary-sequestration-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'puv', title: 'Posterior Urethral Valves: A Systematic Approach', category: 'urology', icon: '📋', description: 'Deep dive into Posterior Urethral Valves: A Systematic Approach', file: 'puv-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'puv-obstructive-uropathy', title: 'Posterior Urethral Valves: A Systematic Approach', category: 'urology', icon: '📋', description: 'Deep dive into Posterior Urethral Valves: A Systematic Approach', file: 'puv-obstructive-uropathy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pyelonephritis', title: 'Pyelonephritis', category: 'renal', icon: '📋', description: 'Deep dive into Pyelonephritis', file: 'pyelonephritis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pyloric-stenosis', title: 'Pyloric Stenosis', category: 'peds', icon: '📋', description: 'Deep dive into Pyloric Stenosis', file: 'pyloric-stenosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'rcc', title: 'Renal Cell Carcinoma: Diagnosis and Management', category: 'ent', icon: '📋', description: 'Deep dive into Renal Cell Carcinoma: Diagnosis and Management', file: 'rcc-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'renal-acid-base', title: 'Renal Function & Acid-Base', category: 'general', icon: '📋', description: 'Deep dive into Renal Function & Acid-Base', file: 'renal-acid-base-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'renal-embryology', title: 'Renal Embryology: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Renal Embryology: A Systematic Approach', file: 'renal-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'respiratory-embryology', title: 'Respiratory Embryology', category: 'general', icon: '📋', description: 'Deep dive into Respiratory Embryology', file: 'respiratory-embryology-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'respiratory-pft', title: 'Respiratory PFTs: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Respiratory PFTs: A Systematic Approach', file: 'respiratory-pft-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'rheum-emergencies', title: 'Rheumatologic Emergencies', category: 'general', icon: '📋', description: 'Deep dive into Rheumatologic Emergencies', file: 'rheum-emergencies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'rheumatoid-arthritis', title: 'Rheumatoid Arthritis: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Rheumatoid Arthritis: A Systematic Approach', file: 'rheumatoid-arthritis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'salicylate', title: 'Salicylate Poisoning: A Systematic Approach', category: 'tox', icon: '📋', description: 'Deep dive into Salicylate Poisoning: A Systematic Approach', file: 'salicylate-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'sbo', title: 'Small Bowel Obstruction', category: 'gi', icon: '📋', description: 'Deep dive into Small Bowel Obstruction', file: 'sbo-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'schizophrenia', title: 'Schizophrenia: A Systematic Approach', category: 'psych', icon: '📋', description: 'Deep dive into Schizophrenia: A Systematic Approach', file: 'schizophrenia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'scleroderma', title: 'Scleroderma (Systemic Sclerosis): A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Scleroderma (Systemic Sclerosis): A Systematic Approach', file: 'scleroderma-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'seizure-disorders', title: 'Seizure Disorders & Epilepsy', category: 'neuro', icon: '📋', description: 'Deep dive into Seizure Disorders & Epilepsy', file: 'seizure-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'sepsis-shock', title: 'Sepsis & Shock', category: 'critical', icon: '📋', description: 'Deep dive into Sepsis & Shock', file: 'sepsis-shock-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'septal-defects', title: 'Atrial & Ventricular Septal Defects: A Systematic Approach', category: 'ent', icon: '📋', description: 'Deep dive into Atrial & Ventricular Septal Defects: A Systematic Approach', file: 'septal-defects-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'sickle-cell', title: 'Sickle Cell Disease: A Systematic Approach', category: 'heme', icon: '📋', description: 'Deep dive into Sickle Cell Disease: A Systematic Approach', file: 'sickle-cell-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'skeletal-dysplasia', title: 'Skeletal Dysplasia & Bone Formation: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Skeletal Dysplasia & Bone Formation: A Systematic Approach', file: 'skeletal-dysplasia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'sle', title: 'Systemic Lupus Erythematosus: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Systemic Lupus Erythematosus: A Systematic Approach', file: 'sle-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'spinal-cord-compression', title: 'Spinal Cord Compression', category: 'neuro', icon: '📋', description: 'Deep dive into Spinal Cord Compression', file: 'spinal-cord-compression-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'spondyloarthropathy', title: 'Spondyloarthropathies: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Spondyloarthropathies: A Systematic Approach', file: 'spondyloarthropathy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'substance-use', title: 'Substance Use Disorders: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Substance Use Disorders: A Systematic Approach', file: 'substance-use-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'surfactant-deficiency-rds', title: 'Surfactant Deficiency & RDS: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Surfactant Deficiency & RDS: A Systematic Approach', file: 'surfactant-deficiency-rds-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'svt-wpw', title: 'SVT & WPW Syndrome', category: 'general', icon: '📋', description: 'Deep dive into SVT & WPW Syndrome', file: 'svt-wpw-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'syncope-arrhythmia', title: 'Syncope & Arrhythmia', category: 'cardio', icon: '📋', description: 'Deep dive into Syncope & Arrhythmia', file: 'syncope-arrhythmia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'syncope', title: 'Syncope', category: 'cardio', icon: '📋', description: 'Deep dive into Syncope', file: 'syncope-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'tbi-icp', title: 'TBI & ICP Management', category: 'pulm', icon: '📋', description: 'Deep dive into TBI & ICP Management', file: 'tbi-icp-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'tef-esophageal-atresia', title: 'TEF & Esophageal Atresia: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into TEF & Esophageal Atresia: A Systematic Approach', file: 'tef-esophageal-atresia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'testicular-cancer', title: 'Testicular Cancer: Diagnosis and Management', category: 'ent', icon: '📋', description: 'Deep dive into Testicular Cancer: Diagnosis and Management', file: 'testicular-cancer-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'testicular-torsion', title: 'Testicular Torsion: A Time-Critical Urologic Emergency', category: 'urology', icon: '📋', description: 'Deep dive into Testicular Torsion: A Time-Critical Urologic Emergency', file: 'testicular-torsion-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'thrombocytopenia', title: 'Thrombocytopenia: ITP, TTP, HUS & DIC', category: 'critical', icon: '📋', description: 'Deep dive into Thrombocytopenia: ITP, TTP, HUS & DIC', file: 'thrombocytopenia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'thyroglossal-branchial', title: 'Thyroglossal Duct Cysts: Embryology, Diagnosis, and Sistrunk Procedure', category: 'general', icon: '📋', description: 'Deep dive into Thyroglossal Duct Cysts: Embryology, Diagnosis, and Sistrunk P...', file: 'thyroglossal-branchial-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'thyroid-disorders', title: 'Thyroid Disorders', category: 'endo', icon: '📋', description: 'Deep dive into Thyroid Disorders', file: 'thyroid-disorders-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'toxic-alcohols', title: 'Toxic Alcohol Ingestion: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Toxic Alcohol Ingestion: A Systematic Approach', file: 'toxic-alcohols-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'toxidromes', title: 'Toxidromes & Overdose Management', category: 'tox', icon: '📋', description: 'Deep dive into Toxidromes & Overdose Management', file: 'toxidromes-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'transfusion-medicine', title: 'Transfusion Medicine & Blood Products', category: 'critical', icon: '📋', description: 'Deep dive into Transfusion Medicine & Blood Products', file: 'transfusion-medicine-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'trauma', title: 'Trauma', category: 'general', icon: '📋', description: 'ATLS primary survey, hemorrhagic shock, tension pneumothorax, C-spine clearan...', file: 'trauma-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'treacher-collins', title: 'Treacher Collins Syndrome: Diagnosis and Multidisciplinary Management', category: 'ent', icon: '📋', description: 'Deep dive into Treacher Collins Syndrome: Diagnosis and Multidisciplinary Man...', file: 'treacher-collins-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'tuberculosis', title: 'Tuberculosis: A Systematic Approach', category: 'pulm', icon: '📋', description: 'Deep dive into Tuberculosis: A Systematic Approach', file: 'tuberculosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'upj', title: 'UPJ Obstruction', category: 'general', icon: '📋', description: 'Deep dive into UPJ Obstruction', file: 'upj-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'urinary-incontinence', title: 'Urinary Incontinence: Types and Treatment', category: 'ent', icon: '📋', description: 'Deep dive into Urinary Incontinence: Types and Treatment', file: 'urinary-incontinence-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'urticaria-angioedema', title: 'Urticaria & Angioedema', category: 'allergy', icon: '📋', description: 'Deep dive into Urticaria & Angioedema', file: 'urticaria-angioedema-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'valvular-disease', title: 'Valvular Heart Disease', category: 'cardio', icon: '📋', description: 'Deep dive into Valvular Heart Disease', file: 'valvular-disease-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'vasculitis', title: 'Vasculitis: A Systematic Approach', category: 'general', icon: '📋', description: 'Deep dive into Vasculitis: A Systematic Approach', file: 'vasculitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'venom-vit', title: 'Venom Immunotherapy', category: 'allergy', icon: '📋', description: 'Deep dive into Venom Immunotherapy', file: 'venom-vit-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'viral-hepatitis', title: 'Viral Hepatitis', category: 'gi', icon: '📋', description: 'Deep dive into Viral Hepatitis', file: 'viral-hepatitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'vte', title: 'Venous Thromboembolism', category: 'general', icon: '📋', description: 'Deep dive into Venous Thromboembolism', file: 'vte-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'vur', title: 'Vesicoureteral Reflux: A Systematic Approach', category: 'urology', icon: '📋', description: 'Deep dive into Vesicoureteral Reflux: A Systematic Approach', file: 'vur-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'well-child', title: 'Well-Child Milestones', category: 'general', icon: '📋', description: 'Deep dive into Well-Child Milestones', file: 'well-child-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'wilms-tumor', title: 'Wilms Tumor (Nephroblastoma): A Systematic Approach', category: 'renal', icon: '📋', description: 'Deep dive into Wilms Tumor (Nephroblastoma): A Systematic Approach', file: 'wilms-tumor-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'wound-healing', title: 'Wound Healing', category: 'general', icon: '📋', description: 'Wound healing phases, collagen biology, tensile strength, closure strategies,...', file: 'wound-healing-deep-dive.json', layers: 6, difficulty: 'Intermediate' }
+    ];
             grouped[c.category].push(c);
         });
         
@@ -674,7 +899,12 @@ body {
         });
         renderCases();
     }
-function setTheme(theme) {
+    
+    
+    
+    
+    
+    function setTheme(theme) {
         document.body.setAttribute('data-theme', theme);
         localStorage.setItem('dx-theme', theme);
         closeDxThemeModal();
@@ -695,5 +925,6 @@ function setTheme(theme) {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 </script>
+<script src="js/rdx-help-widget.js"></script>
 </body>
 </html>

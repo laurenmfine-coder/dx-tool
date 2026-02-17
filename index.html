@@ -10,69 +10,70 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx — Clinical Reasoning Platform</title>
+<meta name="description" content="ReasonDx: Interactive clinical reasoning education platform for medical students. 316 topics, 400+ modules, 344+ Cases, and 615 board-prep questions across all specialties.">
+<meta property="og:title" content="ReasonDx — Clinical Reasoning Platform">
+<meta property="og:description" content="ReasonDx: Interactive clinical reasoning education platform for medical students. 316 topics, 400+ modules, 320+ cases, and 615 board-prep questions across all specialties.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  --teal: #0d9488;
-  --teal-light: #ccfbf1;
-  --teal-dark: #0f766e;
-  --teal-50: #f0fdfa;
-  --slate-900: #0f172a;
-  --slate-800: #1e293b;
-  --slate-700: #334155;
-  --slate-600: #475569;
-  --slate-500: #64748b;
-  --slate-400: #94a3b8;
-  --slate-300: #cbd5e1;
-  --slate-200: #e2e8f0;
-  --slate-100: #f1f5f9;
-  --slate-50: #f8fafc;
-  --white: #ffffff;
-  --blue: #14b8a6;
-  --purple: #7c3aed;
-  --amber: #f59e0b;
-  --rose: #f43f5e;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
-}
+
 
 /* Dark theme overrides for landing page variables */
-[data-theme="dark"] {
-  --white: #1e293b;
-  --slate-50: #0f172a;
-  --slate-100: #1e293b;
-  --slate-200: #334155;
-  --slate-300: #475569;
-  --slate-400: #64748b;
-  --slate-500: #94a3b8;
-  --slate-600: #cbd5e1;
-  --slate-700: #e2e8f0;
-  --slate-800: #f1f5f9;
-  --slate-900: #f8fafc;
-  --teal-50: rgba(13, 148, 136, 0.15);
-  --teal-light: rgba(20, 184, 166, 0.2);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.2);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -4px rgba(0,0,0,0.2);
-}
+
 
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:var(--rdx-font);
   background: var(--slate-50);
   color: var(--slate-800);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Old nav CSS removed: rdx-nav.js handles navigation */
+/* ============================================
+   NAV — Minimal, 4 items max
+   ============================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--slate-200);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family:var(--rdx-font-serif);
+  font-size: 20px;
+  color: var(--teal-dark);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate-600);
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+
+.nav-links a:hover { background: var(--slate-100); color: var(--slate-900); }
+.nav-links a.active { background: var(--teal-50); color: var(--teal-dark); }
 
 /* ============================================
    HERO — Search-first
@@ -84,7 +85,7 @@ body {
 }
 
 .hero h1 {
-  font-family: 'DM Serif Display', serif;
+  font-family:var(--rdx-font-serif);
   font-size: clamp(28px, 5vw, 44px);
   color: var(--slate-900);
   letter-spacing: -0.5px;
@@ -249,7 +250,7 @@ body {
 .path-icon {
   width: 44px;
   height: 44px;
-  border-radius: 10px;
+  border-radius:12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +302,7 @@ body {
 }
 
 .section-header h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family:var(--rdx-font-serif);
   font-size: 24px;
   color: var(--slate-900);
   font-weight: 400;
@@ -419,7 +420,7 @@ body {
 }
 
 .stat-number {
-  font-family: 'DM Serif Display', serif;
+  font-family:var(--rdx-font-serif);
   font-size: 32px;
   color: var(--teal-dark);
 }
@@ -444,6 +445,191 @@ body {
 }
 
 /* ============================================
+   EMAIL SIGNUP SECTION
+   ============================================ */
+.email-signup {
+  padding: 64px 24px;
+  background: linear-gradient(135deg, #1a2332 0%, #2874a6 100%);
+  text-align: center;
+}
+
+.signup-inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.email-signup h2 {
+  font-family: var(--rdx-font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.email-signup p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.signup-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.signup-form input {
+  flex: 1;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.signup-form input::placeholder { color: rgba(255,255,255,0.5); }
+.signup-form input:focus { border-color: rgba(255,255,255,0.5); }
+
+.signup-form button {
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  background: #ffffff;
+  color: #2874a6;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.signup-form button:hover { background: #f0f7fc; transform: translateY(-1px); }
+
+.signup-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+}
+
+.signup-success {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 20px 0;
+}
+
+/* ============================================
+   EMAIL POPUP
+   ============================================ */
+.email-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.email-popup-overlay.active { display: flex; }
+
+.email-popup {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 36px;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--slate-400);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.popup-close:hover { color: var(--slate-700); }
+
+.email-popup h3 {
+  font-family: var(--rdx-font-serif);
+  font-size: 24px;
+  color: #2f3640;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.email-popup p {
+  font-size: 14px;
+  color: var(--slate-500);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.popup-input {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 2px solid var(--slate-200);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  color: var(--slate-800);
+}
+
+.popup-input:focus { border-color: #2874a6; }
+
+.popup-btn {
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  background: #2874a6;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.popup-btn:hover { background: #1f5f8b; }
+
+.popup-dismiss {
+  font-size: 12px;
+  color: var(--slate-400);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.popup-dismiss:hover { color: var(--slate-600); }
+
+@media (max-width: 640px) {
+  .signup-form { flex-direction: column; }
+  .signup-form button { width: 100%; }
+  .email-popup { padding: 32px 24px; }
+}
+
+/* ============================================
    MOBILE
    ============================================ */
 @media (max-width: 640px) {
@@ -451,7 +637,7 @@ body {
   .hero h1 { font-size: 28px; }
   .paths { grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px 20px 48px; }
   .path-card { padding: 20px 16px; }
-  /* .nav-links mobile override removed */
+  .nav-links a span { display: none; }
   .stats-bar { gap: 24px; }
   .topic-grid { grid-template-columns: 1fr; }
 }
@@ -493,7 +679,7 @@ body {
 }
 
 .path-panel-header h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family:var(--rdx-font-serif);
   font-size: 24px;
   color: var(--slate-900);
 }
@@ -576,7 +762,7 @@ body {
   justify-content: center;
   gap: 12px;
   padding: 12px 24px;
-  background: #fff;
+  background:var(--rdx-bg-card);
   border-bottom: 1px solid var(--slate-200);
 }
 .level-label {
@@ -595,12 +781,12 @@ body {
   padding: 6px 16px;
   border: 1.5px solid var(--slate-200);
   border-radius: 20px;
-  background: #fff;
+  background:var(--rdx-bg-card);
   font-size: 13px;
   font-weight: 600;
   color: var(--slate-500);
   cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
+  font-family:var(--rdx-font);
   transition: all 0.15s;
 }
 .level-pill:hover { border-color: var(--teal); color: var(--teal-dark); }
@@ -614,7 +800,7 @@ body {
   padding: 28px 24px; text-decoration: none; color: inherit; transition: all 0.2s; position: relative; overflow: hidden;
 }
 .premed-path-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.premed-path-card .path-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 22px; }
+.premed-path-card .path-icon { width: 44px; height: 44px; border-radius:12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 22px; }
 .premed-path-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--slate-900); }
 .premed-path-card p { font-size: 14px; color: var(--slate-500); line-height: 1.5; margin-bottom: 12px; }
 .premed-path-card .path-count { font-size: 12px; font-weight: 600; color: var(--teal-dark); letter-spacing: 0.3px; text-transform: uppercase; }
@@ -651,15 +837,26 @@ body {
 </script>
 </head>
 <body>
+<!-- Mastery Dashboard CTA -->
+<div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+    <div style="font-size:28px;flex-shrink:0;">📊</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
+    </div>
+    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+  </a>
+</div>
+
 <script src="rdx-nav.js"></script>
 
-<!-- NAV — Only 4 items -->
-
+<!-- nav removed: unified via rdx-nav.js -->
 
 <!-- HERO — Search-first -->
 <section class="hero">
   <h1>What do you want to study?</h1>
-  <p>Search 315 clinical topics, each with interactive cases, review modules, and study guides.</p>
+  <p>Search 316 clinical topics, each with interactive cases, review modules, and study guides.</p>
   
   <div class="search-wrap">
     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -687,14 +884,14 @@ body {
     <div class="path-icon learn">📖</div>
     <h3>Learn</h3>
     <p>Topic reviews that build pathophysiology understanding from the ground up</p>
-    <span class="path-count">220 modules</span>
+    <span class="path-count">400+ modules</span>
   </a>
   
   <a href="#" class="path-card" onclick="openPath('practice'); return false;">
     <div class="path-icon practice">🩺</div>
     <h3>Practice Cases</h3>
     <p>Interactive clinical scenarios where your decisions shape patient outcomes</p>
-    <span class="path-count">239 cases</span>
+    <span class="path-count">320+ cases</span>
   </a>
   
   <a href="#" class="path-card" onclick="openPath('test'); return false;">
@@ -715,15 +912,15 @@ body {
 <!-- STATS -->
 <section class="stats-bar">
   <div class="stat">
-    <div class="stat-number">315</div>
+    <div class="stat-number">316</div>
     <div class="stat-label">Topics</div>
   </div>
   <div class="stat">
-    <div class="stat-number">220</div>
+    <div class="stat-number">400+</div>
     <div class="stat-label">Modules</div>
   </div>
   <div class="stat">
-    <div class="stat-number">239</div>
+    <div class="stat-number">320+</div>
     <div class="stat-label">Cases</div>
   </div>
   <div class="stat">
@@ -757,9 +954,38 @@ body {
   <div class="topic-grid" id="specialtyTopics"></div>
 </section>
 
+<!-- EMAIL SIGNUP -->
+<section class="email-signup" id="emailSignup">
+  <div class="signup-inner">
+    <h2>Stay Sharp Between Cases</h2>
+    <p>Get weekly clinical reasoning tips, new case announcements, and study strategies — straight from a physician-educator who's been where you are.</p>
+    <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
+      <input type="text" id="signupName" placeholder="First name" required>
+      <input type="email" id="signupEmail" placeholder="Email address" required>
+      <button type="submit">Join the List</button>
+    </form>
+    <div class="signup-note">Free. No spam. Unsubscribe anytime.</div>
+  </div>
+</section>
+
+<!-- EMAIL POPUP -->
+<div class="email-popup-overlay" id="emailPopup">
+  <div class="email-popup">
+    <button class="popup-close" onclick="closePopup()">&times;</button>
+    <h3>Don't miss what's next</h3>
+    <p>Weekly clinical reasoning tips & new case alerts — built for students like you.</p>
+    <form class="popup-form" onsubmit="handleSignup(event)">
+      <input type="text" class="popup-input" placeholder="First name" required>
+      <input type="email" class="popup-input" placeholder="Email address" required>
+      <button type="submit" class="popup-btn">Get Early Access</button>
+    </form>
+    <div class="popup-dismiss" onclick="closePopup()">No thanks, I'll explore on my own</div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="footer">
-  ReasonDx — Clinical Reasoning Platform
+  ReasonDx — Clinical Reasoning Platform 
 </footer>
 
 <!-- PATH OVERLAY -->
@@ -787,7 +1013,8 @@ const TOPICS = [
     "a": "cases/apap-overdose-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/apap-overdose-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "APAP tylenol paracetamol"},
   {
     "t": "Acid-Base Disorders",
     "p": "topics/acid-base.html",
@@ -848,7 +1075,8 @@ const TOPICS = [
     "a": "cases/acs-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/acs-deep-dive-complete.json",
     "c": 2
-  },
+  ,
+    "tags": "ACS STEMI NSTEMI"},
   {
     "t": "Acute Kidney Injury",
     "p": "topics/aki.html",
@@ -872,7 +1100,8 @@ const TOPICS = [
     "d": "deep-dive-player.html?file=data/deep-dives/acute-liver-failure-deep-dive.json",
     "c": 1,
     "m": "modules/acute-liver-failure-module.html"
-  },
+  ,
+    "tags": "ALF fulminant hepatic"},
   {
     "t": "Acute Pancreatitis",
     "p": "topics/acute-pancreatitis.html",
@@ -880,7 +1109,8 @@ const TOPICS = [
     "a": "cases/pancreatitis-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/acute-pancreatitis-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "pancreatitis gallstone lipase"},
   {
     "t": "Acute Rhinosinusitis",
     "p": "topics/acute-sinusitis.html",
@@ -1065,7 +1295,8 @@ const TOPICS = [
     "a": "cases/asthma-exacerbation-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/asthma-exacerbation-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "asthma status asthmaticus"},
   {
     "t": "Asthma Phenotyping & Biologic Selection",
     "p": "topics/asthma-phenotyping-biologics.html",
@@ -1104,7 +1335,8 @@ const TOPICS = [
     "a": "cases/afib-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/afib-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "AFib AF anticoagulation"},
   {
     "t": "Benign Prostatic Hyperplasia (BPH)",
     "p": "topics/bph.html",
@@ -1127,7 +1359,8 @@ const TOPICS = [
     "a": "cases/bipolar-disorder-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/bipolar-disorder-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "bipolar mania lithium"},
   {
     "t": "Bladder Cancer",
     "p": "topics/bladder-cancer.html",
@@ -1149,7 +1382,8 @@ const TOPICS = [
     "a": "cases/branchial-cleft-crt.html",
     "d": "deep-dive-player.html?file=data/deep-dives/branchial-cleft-anomalies-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "branchial cleft pharyngeal arch"},
   {
     "t": "Breast Disease",
     "p": "topics/breast-mass.html",
@@ -1366,7 +1600,8 @@ const TOPICS = [
     "a": "cases/copd-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/copd-exacerbation-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "COPD chronic obstructive"},
   {
     "t": "CPAM & Bronchogenic Cyst",
     "p": "topics/cpam-bronchogenic-cyst.html",
@@ -1422,7 +1657,8 @@ const TOPICS = [
     "a": "cases/dermatologic-emergencies-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/derm-emergencies-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "derm SJS TEN DRESS"},
   {
     "t": "Developmental Dysplasia of the Hip",
     "p": "topics/ddh-developmental-dysplasia.html",
@@ -1476,7 +1712,8 @@ const TOPICS = [
     "d": "deep-dive-player.html?file=data/deep-dives/diabetic-ketoacidosis-deep-dive.json",
     "c": 2,
     "m": "modules/diabetic-ketoacidosis-module.html"
-  },
+  ,
+    "tags": "DKA diabetic keto"},
   {
     "t": "Disseminated Intravascular Coagulation",
     "p": "topics/dic.html",
@@ -1702,7 +1939,8 @@ const TOPICS = [
     "a": "cases/gbs-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/gbs-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "GBS guillain barre"},
   {
     "t": "Gynecologic Oncology",
     "p": "topics/gyn-oncology.html",
@@ -1734,7 +1972,8 @@ const TOPICS = [
     "a": "cases/heart-failure-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/heart-failure-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "HF CHF congestive"},
   {
     "t": "Hematuria Workup",
     "p": "topics/hematuria.html",
@@ -1758,7 +1997,8 @@ const TOPICS = [
     "a": "cases/hae-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/hereditary-angioedema-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "HAE C1 inhibitor bradykinin"},
   {
     "t": "Hernias",
     "p": "topics/hernia.html",
@@ -1913,7 +2153,8 @@ const TOPICS = [
     "m": "modules/ich-module.html",
     "d": "deep-dive-player.html?file=data/deep-dives/intracranial-hemorrhage-deep-dive.json",
     "c": 1
-  },
+  ,
+    "tags": "ICH intracerebral"},
   {
     "t": "Intussusception",
     "p": "topics/intussusception.html",
@@ -1945,7 +2186,8 @@ const TOPICS = [
     "a": "cases/kawasaki-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/kawasaki-disease-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "kawasaki mucocutaneous"},
   {
     "t": "Labor &amp; Delivery",
     "p": "topics/labor-delivery.html",
@@ -2045,7 +2287,8 @@ const TOPICS = [
     "a": "cases/multiple-sclerosis-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/multiple-sclerosis-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "MS demyelinating"},
   {
     "t": "Myasthenia Gravis",
     "p": "topics/myasthenia-gravis.html",
@@ -2060,7 +2303,8 @@ const TOPICS = [
     "a": "cases/myasthenic-crisis-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/myasthenia-crisis-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "myasthenia gravis MG"},
   {
     "t": "Myxedema Coma",
     "p": "topics/myxedema-coma.html",
@@ -2129,7 +2373,8 @@ const TOPICS = [
     "a": "cases/nms-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/neuroleptic-malignant-syndrome-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "NMS neuroleptic"},
   {
     "t": "Neuronal Migration Disorders",
     "p": "topics/neuronal-migration.html",
@@ -2200,7 +2445,8 @@ const TOPICS = [
     "a": "cases/parkinson-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/parkinson-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "parkinsons PD dopamine"},
   {
     "t": "PDA & Coarctation",
     "p": "topics/pda-coarctation.html",
@@ -2344,7 +2590,8 @@ const TOPICS = [
     "a": "cases/pph-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/postpartum-hemorrhage-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "PPH postpartum bleeding"},
   {
     "t": "Potassium Disorders",
     "p": "topics/potassium.html",
@@ -2406,7 +2653,8 @@ const TOPICS = [
     "a": "cases/pe-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/pe-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "PE DVT VTE"},
   {
     "t": "Pulmonary Sequestration",
     "p": "topics/pulmonary-sequestration.html",
@@ -2476,7 +2724,8 @@ const TOPICS = [
     "a": "cases/rhabdomyolysis-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/rhabdomyolysis-deep-dive.json",
     "c": 3
-  },
+  ,
+    "tags": "rhabdo CK myoglobin"},
   {
     "t": "Rheumatoid Arthritis",
     "p": "topics/rheumatoid-arthritis.html",
@@ -2500,7 +2749,8 @@ const TOPICS = [
     "a": "cases/salicylate-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/salicylate-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "aspirin salicylate ASA"},
   {
     "t": "Schizophrenia",
     "p": "topics/schizophrenia.html",
@@ -2569,7 +2819,8 @@ const TOPICS = [
     "a": "cases/sickle-cell-disease-expanded-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/sickle-cell-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "SCD sickle crisis vasoocclusive"},
   {
     "t": "Skeletal Dysplasia & Bone Formation",
     "p": "topics/skeletal-dysplasia.html",
@@ -2593,7 +2844,8 @@ const TOPICS = [
     "a": "cases/spinal-cord-compression-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/spinal-cord-compression-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "cord compression cauda equina"},
   {
     "t": "Spondyloarthropathies",
     "p": "topics/spondyloarthropathy.html",
@@ -2632,7 +2884,8 @@ const TOPICS = [
     "a": "cases/sah-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/subarachnoid-hemorrhage-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "SAH berry aneurysm"},
   {
     "t": "Substance Use Disorders",
     "p": "topics/substance-use.html",
@@ -2703,7 +2956,8 @@ const TOPICS = [
     "a": "cases/tension-ptx-expanded.html",
     "d": "deep-dive-player.html?file=data/deep-dives/tension-pneumothorax-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "tension PTX pneumo"},
   {
     "t": "Testicular Cancer",
     "p": "topics/testicular-cancer.html",
@@ -2820,7 +3074,8 @@ const TOPICS = [
     "a": "cases/tumor-lysis-syndrome-adventure.html",
     "d": "deep-dive-player.html?file=data/deep-dives/tumor-lysis-syndrome-deep-dive.json",
     "c": 2
-  },
+  ,
+    "tags": "TLS tumor lysis"},
   {
     "t": "UPJ Obstruction",
     "p": "topics/upj-obstruction.html",
@@ -2928,6 +3183,49 @@ const TOPICS = [
     "d": "deep-dive-player.html?file=data/deep-dives/wound-healing-deep-dive.json",
     "c": 3
   }
+
+,
+  {
+    "t": "AKI Workup",
+    "p": "topics/aki-workup.html",
+    "m": "modules/aki-module.html",
+    "d": "deep-dive-player.html?file=data/deep-dives/aki-deep-dive.json",
+    "c": 2,
+    "tags": "AKI acute kidney injury creatinine BUN"
+  },
+  {
+    "t": "CoachDx SBAR: Pediatric Urology",
+    "p": "topics/pediatric-urology-sbar.html",
+    "c": 2,
+    "tags": "SBAR pediatric urology communication"
+  },
+  {
+    "t": "Posterior Urethral Valves: Systematic Approach",
+    "p": "topics/puv-obstructive-uropathy.html",
+    "m": "modules/posterior-urethral-valves-module.html",
+    "c": 2,
+    "tags": "PUV posterior urethral valves obstructive uropathy"
+  },
+  {
+    "t": "RadDx: Imaging Reasoning",
+    "p": "topics/radiology-raddx.html",
+    "c": 1,
+    "tags": "RadDx radiology imaging xray CT MRI"
+  },
+  {
+    "t": "TTP/HUS",
+    "p": "topics/ttp.html",
+    "m": "modules/ttp-module.html",
+    "d": "deep-dive-player.html?file=data/deep-dives/ttp-hus-deep-dive.json",
+    "c": 3,
+    "tags": "TTP HUS thrombotic thrombocytopenic purpura hemolytic uremic MAHA"
+  },
+  {
+    "t": "CoachDx SBAR: Urology Essentials",
+    "p": "topics/urology-sbar-collection.html",
+    "c": 2,
+    "tags": "SBAR urology essentials communication"
+  }
 ];
 
 // Premed modules — searchable alongside med student content
@@ -3033,7 +3331,7 @@ function doSearch() {
       // Level-aware hint
       let levelHint = '';
       if (isPremed) {
-        levelHint = '<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:#f0fdfa;color:#0f766e;font-weight:600;margin-left:6px;vertical-align:middle">PREMED</span>';
+        levelHint = '<span style="font-size:10px;padding:2px 8px;border-radius:12px;background:#f0fdfa;color:#0f766e;font-weight:600;margin-left:6px;vertical-align:middle">PREMED</span>';
       } else if (currentLevel !== 'all' && currentLevel !== 'premed') {
         const lvl = currentLevel;
         const tips = { m2: 'Start with Topic Review', m3: 'Try the Interactive Case', m4: 'Board-focused review' };
@@ -3298,7 +3596,7 @@ function setLevel(level, el) {
   pathsSection.style.display = '';
   if (premedSection) premedSection.style.display = 'none';
   document.querySelector('.hero h1').textContent = 'What do you want to study?';
-  document.querySelector('.hero p').textContent = 'Search 315 clinical topics, each with interactive cases, review modules, and study guides.';
+  document.querySelector('.hero p').textContent = 'Search 316 clinical topics, each with interactive cases, review modules, and study guides.';
   
   // Update path card descriptions based on level
   if (level !== 'all') {
@@ -3333,39 +3631,188 @@ document.querySelector('.specialty-pill')?.click();
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 </script>
-<div class="pwa-install-banner" id="pwa-banner">
-  <div class="pwa-inner">
-    <div class="pwa-text"><strong>Install ReasonDx</strong>Add to your home screen for app-like access</div>
-    <div style="display:flex;gap:8px;">
-      <button class="pwa-install-btn" id="pwa-install-btn">Install</button>
-      <button class="pwa-dismiss-btn" onclick="document.getElementById('pwa-banner').style.display='none';localStorage.setItem('rdx-pwa-dismissed','1')">Later</button>
+<!-- PWA Install Modal (session-based, shows each visit) -->
+<div class="pwa-modal-overlay" id="pwa-modal" style="display:none">
+  <div class="pwa-modal-card">
+    <div class="pwa-modal-icon">📱</div>
+    <h2 class="pwa-modal-title">Use ReasonDx as an App</h2>
+    <p class="pwa-modal-subtitle">Add to your home screen for full-screen, app-like access — works offline too.</p>
+    <div class="pwa-modal-steps" id="pwa-steps-android">
+      <button class="pwa-modal-install-btn" id="pwa-modal-install">Install ReasonDx</button>
     </div>
+    <div class="pwa-modal-steps" id="pwa-steps-ios" style="display:none">
+      <div class="pwa-ios-step"><span class="pwa-step-num">1</span> Tap the <strong>Share</strong> button <span style="font-size:1.2em">⬆</span> at the bottom of Safari</div>
+      <div class="pwa-ios-step"><span class="pwa-step-num">2</span> Scroll down and tap <strong>Add to Home Screen</strong></div>
+      <div class="pwa-ios-step"><span class="pwa-step-num">3</span> Tap <strong>Add</strong> to confirm</div>
+    </div>
+    <button class="pwa-modal-later" id="pwa-modal-later">Continue to site →</button>
   </div>
 </div>
+<style>
+.pwa-modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px}
+.pwa-modal-card{background:#fff;border-radius:20px;padding:36px 28px 28px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:pwaSlideUp 0.35s ease}
+@keyframes pwaSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.pwa-modal-icon{font-size:48px;margin-bottom:12px}
+.pwa-modal-title{font-family:var(--rdx-font-serif,Georgia,serif);font-size:1.5rem;color:#0f766e;margin-bottom:8px}
+.pwa-modal-subtitle{font-size:0.95rem;color:#64748b;line-height:1.5;margin-bottom:24px}
+.pwa-modal-install-btn{width:100%;padding:16px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:12px;box-shadow:0 4px 12px rgba(13,148,136,0.3)}
+.pwa-modal-install-btn:hover{opacity:0.92;transform:translateY(-1px)}
+.pwa-modal-later{background:none;border:none;color:#94a3b8;font-size:14px;cursor:pointer;padding:10px;font-family:inherit;font-weight:500}
+.pwa-modal-later:hover{color:#64748b}
+.pwa-ios-step{display:flex;align-items:center;gap:12px;text-align:left;padding:10px 0;font-size:0.93rem;color:#334155;border-bottom:1px solid #f1f5f9}
+.pwa-ios-step:last-child{border-bottom:none}
+.pwa-step-num{width:28px;height:28px;border-radius:50%;background:#0d9488;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+/* Inline hero banner (persistent, smaller) */
+.pwa-hero-banner{background:linear-gradient(135deg,rgba(13,148,136,0.08),rgba(124,58,237,0.06));border:1px solid rgba(13,148,136,0.2);border-radius:12px;padding:12px 18px;display:flex;align-items:center;justify-content:center;gap:10px;max-width:580px;margin:16px auto 0;font-size:14px;color:#0f766e;font-weight:500}
+.pwa-hero-banner .pwa-hero-btn{background:#0f766e;color:#fff;border:none;border-radius:8px;padding:7px 16px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap;font-family:inherit}
+.pwa-hero-banner .pwa-hero-btn:hover{opacity:0.9}
+@media(max-width:480px){.pwa-hero-banner{flex-direction:column;text-align:center;gap:8px}}
+</style>
 <script>
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e => {
+(function(){
+  let deferredPrompt = null;
+  const modal = document.getElementById('pwa-modal');
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  
+  // Show modal on each new session (sessionStorage resets per tab session)
+  function showModal(){
+    if(isStandalone) return; // Already installed
+    if(sessionStorage.getItem('rdx-pwa-seen')) return; // Already shown this session
+    
+    if(isIOS){
+      document.getElementById('pwa-steps-android').style.display='none';
+      document.getElementById('pwa-steps-ios').style.display='block';
+    }
+    modal.style.display='flex';
+  }
+  
+  // Android: Capture the install prompt
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showModal();
+  });
+  
+  // Android install button
+  document.getElementById('pwa-modal-install').addEventListener('click', async () => {
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      const result = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if(result.outcome === 'accepted'){
+        modal.style.display='none';
+        sessionStorage.setItem('rdx-pwa-seen','1');
+        return;
+      }
+    }
+    modal.style.display='none';
+    sessionStorage.setItem('rdx-pwa-seen','1');
+  });
+  
+  // "Continue to site" button — dismiss for this session only
+  document.getElementById('pwa-modal-later').addEventListener('click', () => {
+    modal.style.display='none';
+    sessionStorage.setItem('rdx-pwa-seen','1');
+  });
+  
+  // iOS: Show modal after short delay (no beforeinstallprompt event on iOS)
+  if(isIOS && !isStandalone){
+    setTimeout(showModal, 800);
+  }
+  
+  // Inline hero banner: inject below hero if not standalone
+  if(!isStandalone){
+    const hero = document.querySelector('.hero');
+    if(hero){
+      const banner = document.createElement('div');
+      banner.className = 'pwa-hero-banner';
+      banner.id = 'pwa-hero-inline';
+      if(isIOS){
+        banner.innerHTML = '📱 For the best experience, add ReasonDx to your Home Screen <button class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Show Me How</button>';
+      } else {
+        banner.innerHTML = '📱 Install ReasonDx as an app for offline access <button class="pwa-hero-btn" id="pwa-hero-install-btn">Install App</button>';
+      }
+      hero.after(banner);
+      // Wire up inline install button for Android
+      const inlineBtn = document.getElementById('pwa-hero-install-btn');
+      if(inlineBtn){
+        inlineBtn.addEventListener('click', async () => {
+          if(deferredPrompt){
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+          } else {
+            document.getElementById('pwa-modal').style.display='flex';
+          }
+        });
+      }
+    }
+  }
+  
+  // Hide everything if already running as PWA
+  if(isStandalone){
+    const inl = document.getElementById('pwa-hero-inline');
+    if(inl) inl.style.display='none';
+  }
+})();
+</script>
+
+<!-- Additional Tools -->
+<div style="max-width:900px;margin:24px auto;padding:0 20px;">
+  <h3 style="font-family:var(--rdx-font-serif);font-size:1.1rem;color:var(--rdx-teal-dark,#0f766e);margin-bottom:10px;">Additional Tools</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="study-mode.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">📖 Study Mode</a>
+<a href="validation-roadmap.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🗺️ Validation Roadmap</a>
+</div>
+</div>
+<script src="js/rdx-help-widget.js"></script>
+<!-- Email Signup & Popup Logic -->
+<script>
+const FLODESK_URL = 'https://graceful-paper-87888.myflodesk.com/ar69dn04i8';
+
+// Handle form submissions — redirect to Flodesk landing page
+function handleSignup(e) {
   e.preventDefault();
-  deferredPrompt = e;
-  if(!localStorage.getItem('rdx-pwa-dismissed')){
-    document.getElementById('pwa-banner').style.display='block';
+  window.open(FLODESK_URL, '_blank');
+  // Show inline success message if it was the embedded form
+  const section = document.getElementById('signupForm');
+  if (section && e.target === section) {
+    section.innerHTML = '<div class="signup-success">🎉 Redirecting you to sign up — check the new tab!</div>';
   }
-});
-document.getElementById('pwa-install-btn').addEventListener('click', async () => {
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  }
-  document.getElementById('pwa-banner').style.display='none';
-});
-// iOS detection
-if(/iPhone|iPad/.test(navigator.userAgent) && !window.navigator.standalone && !localStorage.getItem('rdx-pwa-dismissed')){
-  const b = document.getElementById('pwa-banner');
-  b.querySelector('.pwa-text').innerHTML = '<strong>Install ReasonDx</strong>Tap <strong>Share</strong> then <strong>Add to Home Screen</strong>';
-  b.querySelector('.pwa-install-btn').style.display = 'none';
-  b.style.display = 'block';
 }
+
+// Popup logic — show after 30s, only once per session
+function closePopup() {
+  document.getElementById('emailPopup').classList.remove('active');
+  sessionStorage.setItem('rdx-popup-dismissed', 'true');
+}
+
+function showPopup() {
+  if (sessionStorage.getItem('rdx-popup-dismissed')) return;
+  if (sessionStorage.getItem('rdx-popup-shown')) return;
+  document.getElementById('emailPopup').classList.add('active');
+  sessionStorage.setItem('rdx-popup-shown', 'true');
+}
+
+// Close popup on overlay click
+document.getElementById('emailPopup').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+
+// Close popup on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePopup();
+});
+
+// Show popup after 30 seconds
+setTimeout(showPopup, 30000);
+
+// Also redirect popup form to Flodesk
+document.querySelector('.popup-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  window.open(FLODESK_URL, '_blank');
+  closePopup();
+});
 </script>
 </body>
 </html>

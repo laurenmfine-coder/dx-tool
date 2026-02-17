@@ -9,21 +9,22 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechanismDx: Renal Embryology - Kidney Development & Congenital Anomalies</title>
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Renal Embryology - Kidney Development & Congenital Anomalies. Learn mechanisms, clinical features, and manageme...">
+<title>ReasonDx: Renal Embryology - Kidney Development & Congenital Anomalies</title>
   <style>
     :root { --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #A78BFA; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info: #06B6D4; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #0f0a1a 0%, #1a1030 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #0f0a1a 0%, #1a1030 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
     .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
     header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
     header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .subtitle { color: #9CA3AF; font-size: 1.1rem; }
     .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .nav-tab { padding: 0.6rem 1.2rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
     .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .module-section { background: #ffffff; border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .module-section { background:var(--rdx-bg-card); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
     .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
     .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
     .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
@@ -34,7 +35,7 @@
     table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
     th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
     th { background: rgba(139,92,246,0.2); color: var(--primary); }
-    tr:hover { background: #ffffff; }
+    tr:hover { background:var(--rdx-bg-card); }
     ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
     li { margin: 0.5rem 0; }
     .mnemonic { background: rgba(16,185,129,0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
@@ -49,11 +50,11 @@
     .condition-link:hover { background: rgba(139,92,246,0.4); }
     .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
     .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
-    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
     .quiz-option:hover { background: rgba(139,92,246,0.2); }
     .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
     .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
-    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: #ffffff; border-radius: 0.5rem; }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background:var(--rdx-bg-card); border-radius: 0.5rem; }
     .flow-diagram { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
     .flow-box { background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; text-align: center; }
     .flow-arrow { color: var(--accent); font-size: 1.2rem; font-weight: bold; }
@@ -62,11 +63,13 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/renal-embryology.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Renal Embryology</a> → Module</div>
+
   <div class="container">
     <header>
       <h1>🫘 Renal Embryology</h1>
       <p class="subtitle">Kidney Development, Ureteric Bud Branching & Congenital Anomalies</p>
-      <p style="color: #6B7280; margin-top: 0.5rem; font-size: 0.9rem;">MechanismDx Module | Open-Access Sources Only</p>
+      <p style="color: #6B7280; margin-top: 0.5rem; font-size: 0.9rem;">ReasonDx Module | Open-Access Sources Only</p>
     </header>
 
     <div class="nav-tabs">
@@ -498,18 +501,18 @@ Key: Everything from MM = excretory nephron (glomerulus through DCT)
       </div>
 
       <div class="module-section" style="margin-top: 2rem;">
-        <h2 style="color: #5eead4;">📖 References</h2>
+        <h2 style="color:var(--rdx-teal-dark,#0f766e);">📖 References</h2>
         <ul>
-          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK557770/" target="_blank" style="color: #5eead4;">Embryology, Kidney - StatPearls</a></li>
-          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK431105/" target="_blank" style="color: #5eead4;">Horseshoe Kidney - StatPearls</a></li>
-          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK430796/" target="_blank" style="color: #5eead4;">Posterior Urethral Valves - StatPearls</a></li>
-          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK482259/" target="_blank" style="color: #5eead4;">Autosomal Dominant PKD - StatPearls</a></li>
-          <li><a href="https://radiopaedia.org/articles/horseshoe-kidney" target="_blank" style="color: #5eead4;">Horseshoe Kidney - Radiopaedia</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK557770/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Embryology, Kidney - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK431105/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Horseshoe Kidney - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK430796/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Posterior Urethral Valves - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK482259/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Autosomal Dominant PKD - StatPearls</a></li>
+          <li><a href="https://radiopaedia.org/articles/horseshoe-kidney" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Horseshoe Kidney - Radiopaedia</a></li>
         </ul>
       </div>
 
       <div class="module-section">
-        <h2 style="color: #6ee7b7;">🔗 Related Modules</h2>
+        <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Modules</h2>
         <p>
           <a href="cardiac-embryology-module.html" class="condition-link">❤️ Cardiac Embryology</a>
           <a href="gi-embryology-module.html" class="condition-link">🍽️ GI Embryology</a>
@@ -517,7 +520,7 @@ Key: Everything from MM = excretory nephron (glomerulus through DCT)
           <a href="respiratory-embryology-module.html" class="condition-link">🫁 Respiratory Embryology</a>
           <a href="msk-embryology-module.html" class="condition-link">🦴 MSK Embryology</a>
         </p>
-        <h3 style="color: #86efac; margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+        <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1rem;">Clinical Reasoning Trainers</h3>
         <p>
           <a href="horseshoe-kidney-crt.html" class="condition-link">🫘 Horseshoe Kidney CRT</a>
           <a href="puv-obstructive-uropathy-crt.html" class="condition-link">🚿 PUV & Obstructive Uropathy CRT</a>
@@ -607,5 +610,6 @@ Key: Everything from MM = excretory nephron (glomerulus through DCT)
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

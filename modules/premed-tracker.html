@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Accountability Tracker. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>Accountability Tracker | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-rose:#e11d48;--pm-rose-50:#fff1f2;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-teal:#0f766e;--pm-teal-50:#f0fdfa;--pm-green:#059669;--pm-green-50:#ecfdf5;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
-.header{background:linear-gradient(135deg,#e11d48,#be123c);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg, #042f2e, #0f766e);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;flex:1;}
 .container{max-width:760px;margin:0 auto;padding:24px;}
 .tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
 .tab{flex:1;padding:10px 12px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
@@ -29,25 +30,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .streak-bar{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
 .streak-bar h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .streak-days{display:flex;gap:4px;flex-wrap:wrap;}
-.streak-day{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid var(--pm-border);}
-.streak-day.done{background:var(--pm-green-50);border-color:#86efac;color:var(--pm-green);}
+.streak-day{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid var(--pm-border);}
+.streak-day.done{background:var(--pm-green-50);border-color:var(--rdx-teal-light,#ccfbf1);color:var(--pm-green);}
 .streak-day.today{border:2px solid var(--pm-rose);color:var(--pm-rose);}
 .streak-day.future{background:#f8fafc;color:#cbd5e1;}
 
 /* Weekly Goals */
-.section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
 .section h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
 .goal-input-row{display:flex;gap:8px;margin-bottom:16px;}
 .goal-input-row input{flex:1;padding:10px 14px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:14px;}
 .goal-input-row select{width:auto;padding:10px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:13px;}
 .goal-input-row button{padding:10px 18px;border:none;border-radius:8px;background:var(--pm-rose);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;}
-.goal-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--pm-border);border-radius:10px;margin-bottom:8px;transition:.2s;}
-.goal-item.completed{background:var(--pm-green-50);border-color:#86efac;}
-.goal-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--pm-border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:.2s;}
+.goal-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--pm-border);border-radius:12px;margin-bottom:8px;transition:.2s;}
+.goal-item.completed{background:var(--pm-green-50);border-color:var(--rdx-teal-light,#ccfbf1);}
+.goal-check{width:22px;height:22px;border-radius:8px;border:2px solid var(--pm-border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:.2s;}
 .goal-check.checked{background:var(--pm-green);border-color:var(--pm-green);color:#fff;}
 .goal-text{flex:1;font-size:14px;}
 .goal-text.done{text-decoration:line-through;color:var(--pm-muted);}
-.goal-cat{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;flex-shrink:0;}
+.goal-cat{padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;flex-shrink:0;}
 .cat-clinical{background:#dbeafe;color:#1e40af;}.cat-academic{background:#fce7f3;color:#9d174d;}
 .cat-app{background:#fef3c7;color:#92400e;}.cat-wellness{background:#d1fae5;color:#065f46;}
 .cat-research{background:#ede9fe;color:#5b21b6;}
@@ -56,7 +57,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 
 /* Milestones */
 .milestone{padding:16px;border:1.5px solid var(--pm-border);border-radius:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;transition:.2s;}
-.milestone.achieved{border-color:#86efac;background:var(--pm-green-50);}
+.milestone.achieved{border-color:var(--rdx-teal-light,#ccfbf1);background:var(--pm-green-50);}
 .milestone-icon{font-size:28px;flex-shrink:0;}
 .milestone-info{flex:1;}
 .milestone-name{font-weight:700;font-size:14px;}
@@ -65,10 +66,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .milestone-check.done{background:var(--pm-green);border-color:var(--pm-green);color:#fff;}
 
 /* Habits */
-.habit-row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--pm-border);border-radius:10px;margin-bottom:8px;}
+.habit-row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--pm-border);border-radius:12px;margin-bottom:8px;}
 .habit-name{flex:1;font-size:14px;font-weight:600;}
 .habit-dots{display:flex;gap:4px;}
-.habit-dot{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--pm-border);display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;transition:.2s;}
+.habit-dot{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--pm-border);display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;transition:.2s;}
 .habit-dot.filled{background:var(--pm-rose);border-color:var(--pm-rose);color:#fff;}
 .habit-count{font-size:13px;font-weight:700;color:var(--pm-rose);min-width:40px;text-align:right;}
 
@@ -76,7 +77,34 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .footer{text-align:center;padding:32px 24px;color:var(--pm-muted);font-size:13px;border-top:1px solid var(--pm-border);margin-top:40px;}
 .footer a{color:var(--pm-rose);text-decoration:none;}
 .empty{text-align:center;padding:32px;color:var(--pm-muted);font-size:14px;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -381,7 +409,7 @@ function renderAll() {
   } else {
     past.innerHTML = data.pastGoals.map(pw => {
       const done = pw.goals.filter(g => g.done).length;
-      return `<div style="margin-bottom:12px;padding:14px;border:1px solid var(--pm-border);border-radius:10px;">
+      return `<div style="margin-bottom:12px;padding:14px;border:1px solid var(--pm-border);border-radius:12px;">
         <div style="font-weight:700;font-size:14px;margin-bottom:6px;">Week of ${pw.week} — ${done}/${pw.goals.length} completed</div>
         ${pw.goals.map(g => `<div style="font-size:13px;color:${g.done?'var(--pm-green)':'var(--pm-muted)'};padding:2px 0;">${g.done?'✓':'○'} ${g.text}</div>`).join('')}
       </div>`;
@@ -394,5 +422,6 @@ renderAll();
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

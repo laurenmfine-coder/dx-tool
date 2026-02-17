@@ -1,5 +1,5 @@
 // =====================================================
-// ReasonDx AI Tutor - Clinical Reasoning Assistant
+// DxSuite AI Tutor - Clinical Reasoning Assistant
 // =====================================================
 // Uses Cloudflare Worker proxy - no student API keys needed
 // ReasonDx AI Clinical Reasoning Tutor
@@ -733,8 +733,7 @@ const DxAITutor = (function() {
             // Inject styles and create UI
             injectStyles();
             createTutorUI();
-            
-            console.log('DxAITutor initialized (using Cloudflare Worker)');
+');
         },
         
         /**

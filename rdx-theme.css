@@ -48,7 +48,7 @@
   --rdx-shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
   --rdx-font:       'DM Sans', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
   --rdx-font-serif: 'DM Serif Display', Georgia, serif;
-  /* Legacy compat — maps old dark-theme vars to light equivalents */
+  /* Legacy compat — maps old vars to rdx-* equivalents */
   --bg:             var(--rdx-bg);
   --card:           var(--rdx-bg-card);
   --border:         var(--rdx-border);
@@ -58,6 +58,22 @@
   --success:        var(--rdx-success);
   --danger:         var(--rdx-danger);
   --info:           var(--rdx-info);
+  /* Phase-2 legacy aliases (previously undefined — 4,000+ references) */
+  --primary:        var(--rdx-teal);
+  --primary-dark:   var(--rdx-teal-dark);
+  --primary-bg:     var(--rdx-teal-light);
+  --primary-light:  var(--rdx-teal-light);
+  --bg-card:        var(--rdx-bg-card);
+  --bg-main:        var(--rdx-bg);
+  --bg-subtle:      var(--rdx-bg-hover);
+  --border-strong:  var(--rdx-border-hover);
+  --accent-light:   var(--rdx-teal-light);
+  --correct:        var(--rdx-success);
+  --correct-bg:     var(--rdx-success-bg);
+  --wrong:          var(--rdx-danger);
+  --wrong-bg:       var(--rdx-danger-bg);
+  --font-display:   var(--rdx-font-serif);
+  --font-mono:      'Monaco', 'Consolas', monospace;
 }
 
 /* ---------- DARK TOKENS ---------- */
@@ -105,6 +121,21 @@
   --success:        var(--rdx-success);
   --danger:         var(--rdx-danger);
   --info:           var(--rdx-info);
+  --primary:        var(--rdx-teal);
+  --primary-dark:   var(--rdx-teal-dark);
+  --primary-bg:     var(--rdx-teal-light);
+  --primary-light:  var(--rdx-teal-light);
+  --bg-card:        var(--rdx-bg-card);
+  --bg-main:        var(--rdx-bg);
+  --bg-subtle:      var(--rdx-bg-hover);
+  --border-strong:  var(--rdx-border-hover);
+  --accent-light:   var(--rdx-teal-light);
+  --correct:        var(--rdx-success);
+  --correct-bg:     var(--rdx-success-bg);
+  --wrong:          var(--rdx-danger);
+  --wrong-bg:       var(--rdx-danger-bg);
+  --font-display:   var(--rdx-font-serif);
+  --font-mono:      'Monaco', 'Consolas', monospace;
 }
 
 /* ---------- BASE RESETS ---------- */
@@ -314,3 +345,59 @@ a:hover { color: var(--rdx-teal-dark); }
   .main, .rdx-main { padding: 12px; }
   .card-body, .rdx-card-body { padding: 16px; }
 }
+
+/* ---------- HERO BANNERS ---------- */
+.rdx-hero-primary {
+  background: linear-gradient(135deg, #0f766e, #0d9488);
+  color: #fff;
+}
+.rdx-hero-light {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  color: var(--rdx-text);
+}
+.rdx-hero-dark {
+  background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+  color: #fff;
+}
+[data-theme="dark"] .rdx-hero-light {
+  background: linear-gradient(135deg, rgba(20,184,166,0.08) 0%, rgba(20,184,166,0.15) 100%);
+}
+
+/* ---------- BUTTON SYSTEM ---------- */
+.rdx-btn-secondary {
+  background: var(--rdx-bg-hover);
+  color: var(--rdx-text);
+  border: 1px solid var(--rdx-border);
+}
+.rdx-btn-secondary:hover {
+  background: var(--rdx-border);
+}
+.rdx-btn-info {
+  background: var(--rdx-blue);
+  color: #fff;
+}
+.rdx-btn-info:hover {
+  background: #1d4ed8;
+}
+.rdx-btn-accent {
+  background: var(--rdx-purple);
+  color: #fff;
+}
+.rdx-btn-accent:hover {
+  background: #6d28d9;
+}
+.rdx-btn-danger {
+  background: var(--rdx-danger);
+  color: #fff;
+}
+.rdx-btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* ---------- HEADING HIERARCHY ---------- */
+.rdx-h1 { color: var(--rdx-teal-dark); font-family: var(--rdx-font-serif); }
+.rdx-h2 { color: var(--rdx-text); }
+.rdx-h3 { color: var(--rdx-text-secondary); }
+.rdx-h4 { color: var(--rdx-teal-dark); }
+[data-theme="dark"] .rdx-h1 { color: var(--rdx-teal); }
+[data-theme="dark"] .rdx-h4 { color: var(--rdx-teal); }

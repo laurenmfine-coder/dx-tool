@@ -9,11 +9,12 @@
 
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Mode - ReasonDx</title>
+    <meta name="description" content="Study Mode — clinical reasoning education platform for medical students and healthcare professionals.">
+<title>Study Mode - ReasonDx</title>
     
     <link rel="stylesheet" href="dx-unified-styles.css">
     <style>
@@ -463,7 +464,7 @@
     <main class="main">
         <div class="page-header">
             <h1>🎯 Study Mode</h1>
-            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, Board Prep MCQs, MechanismDx, and CoachDx</p>
+            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, Board Prep MCQs, ReasonDx, and CoachDx</p>
         </div>
 
         <!-- Search -->
@@ -1085,11 +1086,11 @@
                 `;
             }
 
-            // MechanismDx
+            // ReasonDx
             if (r.mechanism) {
                 bodyHTML += `
                     <div class="modal-section">
-                        <div class="modal-section-title">⚙️ MechanismDx</div>
+                        <div class="modal-section-title">⚙️ ReasonDx</div>
                         <a href="${r.mechanism.url}" class="resource-link">
                             <div class="resource-link-icon" style="background: var(--dx-success-light);">⚙️</div>
                             <div class="resource-link-info">
@@ -1200,7 +1201,9 @@
     </script>
     <script src="js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
-<div data-dx-tutor
+
+    
+    <div data-dx-tutor
          data-module-title="Study Mode"
          data-key-points="${topic.name}, No topics found, ${topic.name}, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
@@ -1211,5 +1214,6 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 </script>
+<script src="js/rdx-help-widget.js"></script>
 </body>
 </html>

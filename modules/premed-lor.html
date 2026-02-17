@@ -7,27 +7,28 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: LOR Strategy & Physician Toolkit. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>LOR Strategy & Physician Toolkit | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-amber:#d97706;--pm-amber-50:#fffbeb;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
 .header{background:linear-gradient(135deg,#d97706,#b45309);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .container{max-width:720px;margin:0 auto;padding:24px;}
 .tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
 .tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
 .tab.active{background:var(--pm-amber);color:#fff;}
-.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
 .card h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
 label{display:block;font-size:13px;font-weight:600;color:var(--pm-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;}
 input,select,textarea{width:100%;padding:10px 14px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:15px;background:var(--pm-bg);}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pm-amber);box-shadow:0 0 0 3px rgba(217,119,6,.1);}
 textarea{min-height:80px;resize:vertical;}
 .form-row{margin-bottom:16px;}
-.btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-primary{background:var(--pm-amber);color:#fff;}
 .btn-primary:hover{background:#b45309;}
 .btn-secondary{background:var(--pm-card);color:var(--pm-amber);border:1.5px solid var(--pm-amber);}
@@ -36,13 +37,13 @@ textarea{min-height:80px;resize:vertical;}
 .physician-card:hover{border-color:var(--pm-amber);box-shadow:var(--pm-shadow);}
 .physician-name{font-weight:700;font-size:17px;}
 .physician-meta{font-size:13px;color:var(--pm-muted);margin-top:2px;}
-.physician-strength{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;margin-right:4px;margin-top:8px;}
+.physician-strength{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-right:4px;margin-top:8px;}
 .str-strong{background:#ecfdf5;color:#059669;}
 .str-building{background:var(--pm-amber-50);color:var(--pm-amber);}
 .str-new{background:#f0f9ff;color:#0284c7;}
 .interaction{padding:12px;background:var(--pm-bg);border-radius:8px;margin-top:8px;font-size:13px;}
 .interaction-date{font-weight:600;color:var(--pm-amber);}
-.milestone{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--pm-amber-50);border:1.5px solid #fde68a;border-radius:10px;margin-bottom:8px;}
+.milestone{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--pm-amber-50);border:1.5px solid #fde68a;border-radius:12px;margin-bottom:8px;}
 .milestone-icon{font-size:24px;}
 .milestone-text{font-size:14px;}
 .milestone-text strong{display:block;}
@@ -50,7 +51,34 @@ textarea{min-height:80px;resize:vertical;}
 .tip h4{color:#92400e;margin-bottom:8px;}
 .tip p{color:#78350f;}
 .hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -151,7 +179,7 @@ function previewPacket(){
   const lastDate=ints[ints.length-1]?.date||'N/A';
   
   let html='';
-  html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:10px;margin-bottom:12px;">';
+  html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:12px;">';
   html+='<h4 style="font-size:15px;margin-bottom:8px;">1. Relationship Summary</h4>';
   html+='<p style="font-size:14px;line-height:1.6;">Dear Dr. '+p.name.replace('Dr. ','')+':<br><br>';
   html+='Thank you for agreeing to write a letter of recommendation for my medical school application. ';
@@ -161,7 +189,7 @@ function previewPacket(){
   html+='Below are specific moments that demonstrate my growth, curiosity, and character that you may find helpful to reference.</p></div>';
   
   if(growthMoments.length){
-    html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:10px;margin-bottom:12px;">';
+    html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:12px;">';
     html+='<h4 style="font-size:15px;margin-bottom:8px;">2. Key Growth Moments ('+growthMoments.length+')</h4>';
     growthMoments.forEach((g,i)=>{
       html+='<div style="padding:10px;background:#fffbeb;border-radius:8px;margin-bottom:8px;border-left:3px solid #d97706;">';
@@ -174,7 +202,7 @@ function previewPacket(){
   }
   
   if(ints.length){
-    html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:10px;margin-bottom:12px;">';
+    html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:12px;">';
     html+='<h4 style="font-size:15px;margin-bottom:8px;">3. Complete Interaction Timeline</h4>';
     ints.forEach(i=>{
       html+='<div style="padding:8px;border-bottom:1px solid #fde68a;font-size:13px;">';
@@ -184,7 +212,7 @@ function previewPacket(){
     html+='</div>';
   }
   
-  html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:10px;">';
+  html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;">';
   html+='<h4 style="font-size:15px;margin-bottom:8px;">4. Additional Context</h4>';
   html+='<p style="font-size:14px;line-height:1.6;">[Add your personal statement themes, schools you\'re applying to, and deadlines here before sharing with your physician.]</p>';
   html+='</div>';
@@ -240,5 +268,6 @@ function exportPacket(){
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

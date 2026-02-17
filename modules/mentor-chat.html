@@ -11,25 +11,26 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoachDx - AI Attending Session</title>
+    <meta name="description" content="CoachDx - AI Attending Session — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
+<title>CoachDx - AI Attending Session</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
     <!-- Voice Input Module -->
     <script src="voice-input.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; }
+        body { font-family:var(--rdx-font); background: #fafafa; color: #18181b; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; }
         
         .header { background: var(--bg-card); border-bottom: 1px solid #e4e4e7; padding: 12px 24px; flex-shrink: 0; }
         .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 18px; font-weight: 700; color: #8b5cf6; text-decoration: none; }
         .case-info { display: flex; align-items: center; gap: 16px; }
-        .case-badge { background: #f4f4f5; padding: 6px 12px; border-radius: 6px; font-size: 13px; }
+        .case-badge { background: #f4f4f5; padding: 6px 12px; border-radius:8px; font-size: 13px; }
         .case-badge.parallel { background: #fef3c7; color: #92400e; }
         .case-badge.critical { background: #fee2e2; color: #991b1b; }
         .timer { font-family: monospace; font-size: 14px; color: #71717a; }
         .nav-links { display: flex; gap: 12px; }
-        .nav-link { color: #71717a; text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 6px; }
+        .nav-link { color: #71717a; text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius:8px; }
         .nav-link:hover { background: #f4f4f5; color: #18181b; }
         
         /* Profession Selector in Header */
@@ -40,7 +41,7 @@
             padding: 4px 8px;
             background: #f0fdf4;
             border: 1px solid #86efac;
-            border-radius: 6px;
+            border-radius:8px;
             font-size: 12px;
             color: #166534;
         }
@@ -102,9 +103,9 @@
         .parallel-link { color: #8b5cf6; text-decoration: none; font-weight: 500; }
         .parallel-link:hover { text-decoration: underline; }
         
-        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; transition: background 0.15s; }
+        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius:8px; text-decoration: none; color: inherit; transition: background 0.15s; }
         .related-item:hover { background: #f4f4f5; }
-        .related-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .related-icon { width: 32px; height: 32px; border-radius:8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
         .related-icon.mechanism { background: #dcfce7; }
         .related-icon.reasondx { background: var(--primary-bg); }
         .related-icon.parallel { background: #fef3c7; }
@@ -139,7 +140,7 @@
             gap: 10px; 
             padding: 12px; 
             background: var(--bg-card); 
-            border-radius: 10px; 
+            border-radius:12px; 
             border: 1px solid var(--border); 
             text-decoration: none; 
             color: inherit; 
@@ -246,8 +247,7 @@
 </head>
 <body>
 
-    <!-- UNIFIED DX NAVIGATION -->
-    
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <header class="header">
         <div class="header-inner">
@@ -636,15 +636,14 @@
         // Explicitly add allergy cases if available (fallback)
         if (typeof COACHDX_ALLERGY_CASES !== 'undefined') {
             Object.assign(merged, COACHDX_ALLERGY_CASES);
-            console.log('[MentorChat] Added', Object.keys(COACHDX_ALLERGY_CASES).length, 'allergy cases');
+.length, 'allergy cases');
         }
         
         // Also check window versions
         if (typeof window.COACHDX_ALLERGY_CASES !== 'undefined' && window.COACHDX_ALLERGY_CASES !== COACHDX_ALLERGY_CASES) {
             Object.assign(merged, window.COACHDX_ALLERGY_CASES);
         }
-        
-        console.log('[MentorChat] Total cases available:', Object.keys(merged).length);
+.length);
         return merged;
     })();
     
@@ -862,95 +861,35 @@
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
@@ -958,19 +897,19 @@
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
 .dx-theme-modal.open { display: flex; }
-
-
-
-
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
 .dx-theme-option:hover { border-color: var(--primary); }
 .dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
 .dx-theme-preview-nav { width: 30%; }
 .dx-theme-preview-main { width: 70%; }
 .dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
@@ -980,7 +919,7 @@
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1037,7 +976,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="cross-platform-section">
                     <div class="cps-header">
                         <span class="cps-header-icon">🎯</span>
-                        Explore the Dx Ecosystem
+                        Explore ReasonDx
                     </div>
                     <a href="#" class="cps-card fingerprint">
                         <div class="cps-stripe fingerprint"></div>
@@ -1060,12 +999,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     Continue Learning: ${matched.topic}
                     <span class="cps-subtitle">Cross-platform</span>
                 </div>
-                <a href="../MechanismDx/${matched.mechanism}" class="cps-card mechanismdx">
+                <a href="../ReasonDx/${matched.mechanism}" class="cps-card mechanismdx">
                     <div class="cps-stripe mechanismdx"></div>
                     <div class="cps-icon mechanismdx">⚙️</div>
                     <div class="cps-info">
                         <div class="cps-title">Master the Pathophysiology</div>
-                        <div class="cps-meta"><span class="platform-tag mechanismdx">MechanismDx</span> • Deep dive</div>
+                        <div class="cps-meta"><span class="platform-tag mechanismdx">ReasonDx</span> • Deep dive</div>
                     </div>
                     <span class="cps-arrow">→</span>
                 </a>
@@ -1175,8 +1114,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const data = await response.json();
             return data.response || data.content || generateFallbackResponse(userMessage);
         } catch (error) {
-            console.log('Worker unavailable, using fallback response');
-            return generateFallbackResponse(userMessage);
+return generateFallbackResponse(userMessage);
         }
     }
     
@@ -1304,9 +1242,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <strong>🎯 Continue Learning: ${matched.topic}</strong>
                 </p>
                 <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
-                    <a href="../MechanismDx/${matched.mechanism}" style="padding:6px 12px; background:#dcfce7; color:#166534; border-radius:6px; font-size:12px; text-decoration:none;">⚙️ MechanismDx</a>
-                    <a href="../training.html?case=${matched.reasondx}" style="padding:6px 12px; background:var(--primary-bg); color:var(--primary-dark); border-radius:6px; font-size:12px; text-decoration:none;">🩺 ReasonDx</a>
-                    <a href="../predict-labs/${matched.predictlabs}" style="padding:6px 12px; background:#ffedd5; color:#c2410c; border-radius:6px; font-size:12px; text-decoration:none;">🔮 PredictLabs</a>
+                    <a href="../ReasonDx/${matched.mechanism}" style="padding:6px 12px; background:#dcfce7; color:#166534; border-radius:8px; font-size:12px; text-decoration:none;">⚙️ ReasonDx</a>
+                    <a href="../training.html?case=${matched.reasondx}" style="padding:6px 12px; background:var(--primary-bg); color:var(--primary-dark); border-radius:8px; font-size:12px; text-decoration:none;">🩺 ReasonDx</a>
+                    <a href="../predict-labs/${matched.predictlabs}" style="padding:6px 12px; background:#ffedd5; color:#c2410c; border-radius:8px; font-size:12px; text-decoration:none;">🔮 PredictLabs</a>
                 </div>
             </div>
         `;
@@ -1328,10 +1266,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             conceptsExplored: session.conceptsExplored,
             timestamp: new Date().toISOString()
         };
-        
-        console.log('Session data:', data);
-        
-        // Record session in unified scoring system
+// Record session in unified scoring system
         if (typeof DxScoring !== 'undefined') {
             DxScoring.recordCoachSession();
             
@@ -1339,8 +1274,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             if (Object.keys(conceptsExplored).length >= 5) {
                 DxScoring.recordCoachMastery(currentCase.title);
             }
-            
-            console.log('[DxScoring] Session recorded. Total XP:', DxScoring.getTotalXP());
+);
         }
         
         // Store in localStorage for fingerprint dashboard
@@ -1356,22 +1290,24 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </script>
 
     <!-- THEME PICKER MODAL -->
+    
+            </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
                         <div class="dx-theme-name">Midnight Teal</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
                         <div class="dx-theme-name">Purple Night</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
                         <div class="dx-theme-name">Forest Night</div>
                     </div>
@@ -1383,13 +1319,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <script>
     // Theme System
     (function() {
-        const saved = localStorage.getItem('rdx-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', saved);
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
-);
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
     }
-document.addEventListener('click', (e) => {
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
     });
     document.addEventListener('keydown', (e) => {
@@ -1402,7 +1350,7 @@ document.addEventListener('click', (e) => {
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
 <li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
@@ -1412,5 +1360,6 @@ document.addEventListener('click', (e) => {
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

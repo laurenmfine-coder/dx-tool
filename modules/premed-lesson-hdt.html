@@ -7,30 +7,31 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: How Doctors Think. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>How Doctors Think | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-teal:#0f766e;--pm-teal-light:#14b8a6;--pm-teal-50:#f0fdfa;--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
 .header{background:linear-gradient(135deg,var(--pm-sky),#0369a1);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
 .progress-bar{height:6px;background:#e0f2fe;border-radius:3px;overflow:hidden;margin:0 24px;}
 .progress-fill{height:100%;background:var(--pm-sky);border-radius:3px;transition:.4s;}
 .container{max-width:720px;margin:0 auto;padding:24px;}
 .section{display:none;}
 .section.active{display:block;}
-.lesson-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
-.lesson-card h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-sky);}
+.lesson-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.lesson-card h2{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-sky);}
 .lesson-card h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--pm-text);}
 .lesson-card p{font-size:15px;margin-bottom:14px;}
-.concept-box{background:var(--pm-sky-50);border:1.5px solid #bae6fd;border-radius:10px;padding:18px;margin:16px 0;font-size:14px;line-height:1.7;}
+.concept-box{background:var(--pm-sky-50);border:1.5px solid #bae6fd;border-radius:12px;padding:18px;margin:16px 0;font-size:14px;line-height:1.7;}
 .concept-box strong{color:var(--pm-sky);}
-.example-box{background:#fefce8;border:1.5px solid #fde68a;border-radius:10px;padding:18px;margin:16px 0;font-size:14px;}
+.example-box{background:#fefce8;border:1.5px solid #fde68a;border-radius:12px;padding:18px;margin:16px 0;font-size:14px;}
 .example-box strong{color:#92400e;}
 .example-box .scenario{font-style:italic;margin-bottom:8px;}
-.quiz-card{background:var(--pm-card);border:2px solid var(--pm-sky);border-radius:14px;padding:24px;margin-bottom:20px;}
+.quiz-card{background:var(--pm-card);border:2px solid var(--pm-sky);border-radius:16px;padding:24px;margin-bottom:20px;}
 .quiz-card h3{font-size:15px;font-weight:700;margin-bottom:16px;color:var(--pm-sky);}
 .quiz-stem{font-size:14px;line-height:1.7;margin-bottom:16px;padding:14px;background:var(--pm-sky-50);border-radius:8px;}
 .choice{padding:12px 14px;border:2px solid var(--pm-border);border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:.2s;display:flex;align-items:flex-start;gap:8px;}
@@ -42,11 +43,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .quiz-explain{padding:16px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;margin-top:12px;font-size:14px;display:none;}
 .quiz-explain.show{display:block;}
 .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
-.btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-primary{background:var(--pm-sky);color:#fff;}
 .btn-primary:hover{background:#0369a1;}
 .btn-ghost{background:none;color:var(--pm-muted);border:1px solid var(--pm-border);}
-.interactive{background:var(--pm-card);border:2px solid #c4b5fd;border-radius:14px;padding:24px;margin:20px 0;}
+.interactive{background:var(--pm-card);border:2px solid #c4b5fd;border-radius:16px;padding:24px;margin:20px 0;}
 .interactive h3{color:#7c3aed;margin-bottom:12px;}
 .drag-area{min-height:60px;border:2px dashed var(--pm-border);border-radius:8px;padding:12px;margin:8px 0;}
 .drag-item{display:inline-block;padding:8px 16px;margin:4px;border-radius:8px;background:#ede9fe;color:#5b21b6;font-size:13px;font-weight:600;cursor:grab;user-select:none;}
@@ -54,7 +55,34 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--pm-sky);color:#fff;font-weight:700;font-size:13px;margin-right:8px;flex-shrink:0;}
 .footer{text-align:center;padding:32px 24px;color:var(--pm-muted);font-size:13px;border-top:1px solid var(--pm-border);margin-top:40px;}
 .footer a{color:var(--pm-sky);text-decoration:none;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -280,5 +308,6 @@ function checkQ(qid,correct){
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

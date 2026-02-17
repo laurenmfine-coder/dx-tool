@@ -7,21 +7,22 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Chest Pain: 5 Diagnoses. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>Chest Pain: 5 Diagnoses | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-red:#dc2626;--pm-red-50:#fef2f2;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;--pm-teal:#0f766e;--pm-teal-50:#f0fdfa;--pm-amber:#d97706;--pm-amber-50:#fffbeb;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
-.header{background:linear-gradient(135deg,#dc2626,#b91c1c);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
+.header{background:linear-gradient(135deg, #042f2e, #0f766e);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;flex:1;}
 .progress-bar{height:6px;background:#fecaca;border-radius:3px;overflow:hidden;margin:0 24px;}
 .progress-fill{height:100%;background:var(--pm-red);border-radius:3px;transition:.4s;}
 .container{max-width:720px;margin:0 auto;padding:24px;}
 .section{display:none;}.section.active{display:block;}
-.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
-.card h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-red);}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.card h2{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-red);}
 .card h3{font-size:16px;font-weight:700;margin:20px 0 10px;}
 .card p{font-size:15px;margin-bottom:14px;}
 .dx-box{border-radius:12px;padding:20px;margin:16px 0;}
@@ -32,12 +33,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .dx-box h4{font-size:15px;margin-bottom:8px;}
 .dx-box p{font-size:14px;margin-bottom:8px;}
 .dx-row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0;}
-.dx-tag{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.7);}
+.dx-tag{padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(255,255,255,.7);}
 .compare-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;}
 .compare-table th{background:#fee2e2;padding:10px;border:1px solid #fecaca;text-align:left;font-weight:700;}
 .compare-table td{padding:10px;border:1px solid var(--pm-border);vertical-align:top;}
 .compare-table tr:nth-child(even) td{background:#fafbfc;}
-.quiz-card{background:var(--pm-card);border:2px solid var(--pm-red);border-radius:14px;padding:24px;margin-bottom:20px;}
+.quiz-card{background:var(--pm-card);border:2px solid var(--pm-red);border-radius:16px;padding:24px;margin-bottom:20px;}
 .quiz-card h3{font-size:15px;font-weight:700;margin-bottom:16px;color:var(--pm-red);}
 .quiz-stem{font-size:14px;line-height:1.7;margin-bottom:16px;padding:14px;background:var(--pm-red-50);border-radius:8px;}
 .choice{padding:12px 14px;border:2px solid var(--pm-border);border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:.2s;display:flex;align-items:flex-start;gap:8px;}
@@ -48,14 +49,41 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .choice-ltr{font-weight:700;color:var(--pm-red);min-width:20px;}
 .quiz-explain{padding:16px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;margin-top:12px;font-size:14px;display:none;}
 .quiz-explain.show{display:block;}
-.concept{background:var(--pm-sky-50);border:1.5px solid #bae6fd;border-radius:10px;padding:18px;margin:16px 0;font-size:14px;}
+.concept{background:var(--pm-sky-50);border:1.5px solid #bae6fd;border-radius:12px;padding:18px;margin:16px 0;font-size:14px;}
 .concept strong{color:var(--pm-sky);}
 .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
-.btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-primary{background:var(--pm-red);color:#fff;}.btn-primary:hover{background:#b91c1c;}
 .btn-ghost{background:none;color:var(--pm-muted);border:1px solid var(--pm-border);}
 .hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -293,5 +321,6 @@ function checkQ(qid,correct){const container=document.getElementById(qid+'-choic
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

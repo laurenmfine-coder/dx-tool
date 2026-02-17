@@ -7,33 +7,34 @@
 <link rel="stylesheet" href="../mobile.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Biostatistics That Actually Matter. Build foundational clinical thinking skills for future physicians on ReasonDx.">
 <title>Biostatistics That Actually Matter | ReasonDx Premed</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--pm-purple:#7c3aed;--pm-purple-50:#f5f3ff;--pm-bg:#fafbfc;--pm-card:#fff;--pm-text:#1e293b;--pm-muted:#64748b;--pm-border:#e2e8f0;--pm-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);--pm-sky:#0284c7;--pm-sky-50:#f0f9ff;--pm-teal:#0f766e;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
-.header{background:linear-gradient(135deg,#7c3aed,#6d28d9);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
+.header{background:linear-gradient(135deg, #0f766e, #5b21b6);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
-.header h1{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;flex:1;}
+.header h1{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;flex:1;}
 .progress-bar{height:6px;background:#ede9fe;border-radius:3px;overflow:hidden;margin:0 24px;}
 .progress-fill{height:100%;background:var(--pm-purple);border-radius:3px;transition:.4s;}
 .container{max-width:720px;margin:0 auto;padding:24px;}
 .section{display:none;}.section.active{display:block;}
-.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
-.card h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-purple);}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.card h2{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;margin-bottom:16px;color:var(--pm-purple);}
 .card h3{font-size:16px;font-weight:700;margin:20px 0 10px;}
 .card p{font-size:15px;margin-bottom:14px;}
-.concept{background:var(--pm-purple-50);border:1.5px solid #c4b5fd;border-radius:10px;padding:18px;margin:16px 0;font-size:14px;}
+.concept{background:var(--pm-purple-50);border:1.5px solid #c4b5fd;border-radius:12px;padding:18px;margin:16px 0;font-size:14px;}
 .concept strong{color:var(--pm-purple);}
-.example{background:#fefce8;border:1.5px solid #fde68a;border-radius:10px;padding:18px;margin:16px 0;font-size:14px;}
+.example{background:#fefce8;border:1.5px solid #fde68a;border-radius:12px;padding:18px;margin:16px 0;font-size:14px;}
 .example strong{color:#92400e;}
-.math-box{background:#f8fafc;border:1px solid var(--pm-border);border-radius:10px;padding:16px;margin:12px 0;font-family:'DM Sans',monospace;font-size:14px;text-align:center;}
-.grid-2x2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--pm-border);border:1px solid var(--pm-border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.math-box{background:#f8fafc;border:1px solid var(--pm-border);border-radius:12px;padding:16px;margin:12px 0;font-family:'DM Sans',monospace;font-size:14px;text-align:center;}
+.grid-2x2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--pm-border);border:1px solid var(--pm-border);border-radius:12px;overflow:hidden;margin:16px 0;}
 .grid-2x2 div{padding:16px;background:var(--pm-card);text-align:center;font-size:14px;}
 .grid-2x2 div:first-child{background:#ede9fe;font-weight:700;}
 .grid-label{background:#f8fafc!important;font-weight:600!important;}
-.quiz-card{background:var(--pm-card);border:2px solid var(--pm-purple);border-radius:14px;padding:24px;margin-bottom:20px;}
+.quiz-card{background:var(--pm-card);border:2px solid var(--pm-purple);border-radius:16px;padding:24px;margin-bottom:20px;}
 .quiz-card h3{font-size:15px;font-weight:700;margin-bottom:16px;color:var(--pm-purple);}
 .quiz-stem{font-size:14px;line-height:1.7;margin-bottom:16px;padding:14px;background:var(--pm-purple-50);border-radius:8px;}
 .choice{padding:12px 14px;border:2px solid var(--pm-border);border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:.2s;display:flex;align-items:flex-start;gap:8px;}
@@ -45,10 +46,37 @@ body{font-family:'DM Sans',sans-serif;background:var(--pm-bg);color:var(--pm-tex
 .quiz-explain{padding:16px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;margin-top:12px;font-size:14px;display:none;}
 .quiz-explain.show{display:block;}
 .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
-.btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-primary{background:var(--pm-purple);color:#fff;}.btn-primary:hover{background:#6d28d9;}
 .btn-ghost{background:none;color:var(--pm-muted);border:1px solid var(--pm-border);}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
 </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 <script src="../rdx-nav.js"></script>
@@ -256,5 +284,6 @@ function checkQ(qid,correct){const container=document.getElementById(qid+'-choic
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

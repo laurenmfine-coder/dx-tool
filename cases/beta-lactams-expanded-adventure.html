@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Beta-Lactam Antibiotics. Interactive Socratic clinical case with guided reasoning on ReasonDx.">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<title>Beta-Lactam Antibiotics | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--rdx-font);background:var(--rdx-bg,#f8fafc);min-height:100vh;color:var(--rdx-text,#1e293b)}.container{max-width:800px;margin:0 auto;padding:20px}.progress-bar{background:var(--rdx-border,#e2e8f0);border-radius:8px;height:6px;margin-bottom:24px;overflow:hidden}.progress-fill{background:linear-gradient(90deg,#0d9488,#14b8a6);height:100%;border-radius:8px;transition:width 0.5s}.score-tracker{position:fixed;top:12px;right:60px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:8px 16px;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;gap:8px;font-size:14px}.score-label{color:var(--rdx-text-muted,#64748b);font-size:12px}.score-value{font-weight:700;color:var(--rdx-teal,#0d9488);font-size:18px}.difficulty-panel{text-align:center;margin-bottom:20px}.diff-btn{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--rdx-text-muted,#64748b);transition:all 0.2s}.diff-btn.active{background:var(--rdx-teal,#0d9488);color:#fff;border-color:var(--rdx-teal,#0d9488)}.diff-btn:hover{border-color:var(--rdx-teal,#0d9488)}.scene-title{font-family:var(--rdx-font-serif);font-size:1.6rem;color:var(--rdx-teal-dark,#0f766e);margin-bottom:16px}.narrative{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin-bottom:16px;line-height:1.7}.narrative .highlight{background:rgba(13,148,136,0.1);padding:2px 6px;border-radius:4px;font-weight:600}.narrative .critical{background:rgba(220,38,38,0.1);color:#dc2626;padding:2px 6px;border-radius:4px;font-weight:600}.vital-signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin:12px 0;padding:12px;background:rgba(13,148,136,0.04);border-radius:8px;border:1px solid rgba(13,148,136,0.1)}.vital-item{text-align:center;font-size:13px}.vital-item .label{color:var(--rdx-text-muted,#64748b);font-size:11px;display:block}.vital-item .value{font-weight:700;color:var(--rdx-teal-dark,#0f766e)}.socratic-prompt{background:linear-gradient(135deg,rgba(124,58,237,0.06),rgba(13,148,136,0.06));border:1px solid rgba(124,58,237,0.15);border-radius:12px;padding:16px 20px;margin:16px 0}.socratic-prompt h4{color:var(--rdx-purple,#7c3aed);font-size:0.95rem;margin-bottom:8px}.hint-box{background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);border-radius:8px;padding:12px;margin:8px 0;font-size:0.9rem;color:#92400e;display:none}.options-grid{display:grid;gap:10px;margin:16px 0}.option-btn{background:var(--rdx-bg-card,#fff);border:2px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:14px 18px;cursor:pointer;text-align:left;font-size:14px;transition:all 0.2s;font-family:var(--rdx-font)}.option-btn:hover{border-color:var(--rdx-teal,#0d9488);background:rgba(13,148,136,0.03)}.option-btn.correct{border-color:#16a34a;background:rgba(22,163,74,0.06)}.option-btn.incorrect{border-color:#dc2626;background:rgba(220,38,38,0.04)}.option-btn.disabled{pointer-events:none;opacity:0.7}.explanation-box{border-radius:12px;padding:16px;margin:12px 0;display:none}.explanation-box.correct{background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.2)}.explanation-box.incorrect{background:rgba(220,38,38,0.04);border:1px solid rgba(220,38,38,0.15)}.mechanism-box{background:linear-gradient(135deg,rgba(13,148,136,0.06),rgba(13,148,136,0.02));border:1px solid rgba(13,148,136,0.15);border-radius:12px;padding:20px;margin:16px 0}.mechanism-title{color:var(--rdx-teal-dark,#0f766e);font-weight:700;font-size:0.95rem;margin-bottom:10px}.pathway{line-height:1.8;font-size:0.93rem}.why-chain{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px;margin:8px 0}.why-q{font-weight:600;color:var(--rdx-purple,#7c3aed);cursor:pointer;font-size:0.9rem}.why-a{display:none;margin-top:6px;font-size:0.88rem;color:var(--rdx-text-muted,#64748b)}.next-btn{background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:600;cursor:pointer;margin:20px 0;display:none;font-family:var(--rdx-font)}.next-btn:hover{opacity:0.9;transform:translateY(-1px)}.completion-card{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:16px;padding:32px;text-align:center;margin:24px 0}.completion-card h2{font-family:var(--rdx-font-serif);color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px}.references-panel{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:16px;margin:20px 0}.references-panel a{display:block;color:var(--rdx-teal,#0d9488);font-size:13px;margin:4px 0;text-decoration:none}.references-panel a:hover{text-decoration:underline}.rdx-crossplatform-nav{background:var(--rdx-bg-card,#f8fafc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin:24px 0}.rdx-crossplatform-nav h4{color:var(--rdx-text-muted,#64748b);margin-bottom:12px;font-size:0.9rem}.rdx-crossplatform-links{display:flex;gap:12px;flex-wrap:wrap}.rdx-crossplatform-link{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px 16px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:all 0.2s}.rdx-crossplatform-link:hover{background:rgba(13,148,136,0.05);transform:translateY(-2px)}@media(max-width:640px){.score-tracker{top:auto;bottom:12px;right:12px}.container{padding:12px}.vital-signs{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+<div class="container">
+    <div style="margin-bottom:12px"><a href="../adventure-hub.html" style="color:var(--rdx-teal,#0d9488);text-decoration:none;font-size:14px;font-weight:600">&larr; Back to Cases</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:var(--rdx-text-muted,#64748b);margin-bottom:8px;font-weight:600">Difficulty</div>
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div>
+    <div class="references-panel" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="toggleReferences()">
+            <span>&#128218; Open-Access References</span><span id="refToggle">&#9656;</span>
+        </div>
+        <div id="referencesContent" style="display:none;margin-top:8px">
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK545311/" target="_blank" rel="noopener">Beta-Lactam Antibiotics - StatPearls</a>
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6563324/" target="_blank" rel="noopener">Penicillin Allergy - JACI</a>
+        </div>
+    </div>
+    <div id="scene-container"></div>
+    <div class="rdx-crossplatform-nav">
+        <h4>&#128279; Continue Learning</h4>
+        <div class="rdx-crossplatform-links">
+<a href="../modules/index.html" class="rdx-crossplatform-link">🧬 Mechanism Module</a>
+<a href="../board-prep.html" class="rdx-crossplatform-link">📝 Board Prep</a>
+<a href="../training.html" class="rdx-crossplatform-link">🏋️ Training Hub</a>
+<a href="../tools/learning-dashboard.html" class="rdx-crossplatform-link">📊 Dashboard</a>
+        </div>
+    </div>
+</div>
+<script>
+let currentStage=0,score=0,difficulty='standard';
+const stages=[
+    {
+        title: "The Cellulitis Patient",
+        content: `<div class="narrative"><p>A <span class="highlight">45-year-old man</span> presents with progressive left leg erythema, warmth, and swelling for 2 days after a minor skin abrasion. Streaking lymphangitis visible.</p><div class="vital-signs"><div class="vital-item"><span class="label">HR</span><span class="value">88</span></div><div class="vital-item"><span class="label">Temp</span><span class="value">38.4°C</span></div><div class="vital-item"><span class="label">BP</span><span class="value">132/82</span></div></div></div>`,
+        hint_beginner: "What organisms commonly cause cellulitis?",
+        hint_advanced: "Consider the mechanism of action shared by all beta-lactams — what is the common target?",
+        question: {
+            prompt: "All beta-lactam antibiotics share which mechanism of action?",
+            options: [{ text: "Disruption of cell membrane integrity", correct: false },{ text: "Inhibition of folic acid synthesis", correct: false },{ text: "Inhibition of cell wall synthesis by binding penicillin-binding proteins (PBPs)", correct: true },{ text: "Inhibition of protein synthesis at the 30S ribosome", correct: false }],
+            explanation: { correct: "Correct! All beta-lactams bind PBPs (transpeptidases) that cross-link peptidoglycan in bacterial cell walls. Without cross-linking, the wall weakens → osmotic lysis. This is why beta-lactams are bactericidal.", incorrect: "Beta-lactams bind PBPs to inhibit peptidoglycan cross-linking. They are bactericidal (kill bacteria) and work best on actively dividing organisms." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Beta-Lactam MOA</div><div class="pathway"><strong>Target:</strong> Penicillin-binding proteins (PBPs/transpeptidases)<br><strong>Effect:</strong> Block peptidoglycan cross-linking → weakened cell wall → osmotic lysis<br><strong>Bactericidal:</strong> Kill (not just inhibit) bacteria<br><strong>Time-dependent killing:</strong> Efficacy depends on time above MIC, not peak concentration<br><br><strong>The beta-lactam ring:</strong> All share the 4-membered ring structure. Destruction of this ring (by beta-lactamases) = resistance</div></div>`,
+            why_chain: [{q:"Why are beta-lactams time-dependent killers?",a:"PBP binding is saturable — once all PBPs are occupied, higher drug concentrations add no benefit. What matters is maintaining concentrations above the MIC for as long as possible during the dosing interval."}],
+            points: 10
+        }
+    },
+    {
+        title: "Spectrum of Activity",
+        content: `<div class="narrative"><p>You need to choose the right beta-lactam. Understanding the spectrum differences between subclasses is essential for appropriate prescribing.</p></div>`,
+        hint_beginner: "How do penicillins, cephalosporins, and carbapenems differ in spectrum?",
+        hint_advanced: "Think about the progressive widening of gram-negative coverage from narrow-spectrum penicillins → aminopenicillins → antipseudomonal → carbapenems.",
+        question: {
+            prompt: "Which beta-lactam subclass has the BROADEST gram-negative coverage?",
+            options: [{ text: "Aminopenicillins (ampicillin, amoxicillin)", correct: false },{ text: "Antistaphylococcal penicillins (nafcillin)", correct: false },{ text: "Third-generation cephalosporins", correct: false },{ text: "Carbapenems (meropenem, imipenem, ertapenem)", correct: true }],
+            explanation: { correct: "Correct! Carbapenems are the broadest-spectrum beta-lactams, covering most gram-positives, gram-negatives (including ESBL-producers), and anaerobes. They are resistant to most beta-lactamases. Reserved for serious/resistant infections.", incorrect: "Carbapenems > cephalosporins > aminopenicillins in gram-negative coverage. Carbapenems are resistant to most beta-lactamases but should be reserved to prevent resistance." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Beta-Lactam Spectrum</div><div class="pathway"><strong>Narrow-spectrum penicillins:</strong> Penicillin G/V → strep, syphilis, meningococcus<br><strong>Antistaphylococcal:</strong> Nafcillin, oxacillin, dicloxacillin → MSSA (not MRSA)<br><strong>Aminopenicillins:</strong> Ampicillin, amoxicillin → above + E. coli, H. flu, Listeria, Enterococcus<br><strong>Antipseudomonal:</strong> Piperacillin-tazobactam → broad + Pseudomonas<br><strong>1st-gen cephalosporins:</strong> Cefazolin → gram+ focus, surgical prophylaxis<br><strong>3rd-gen:</strong> Ceftriaxone → gram-negative focus, CSF penetration<br><strong>Carbapenems:</strong> Broadest spectrum, ESBL coverage</div></div>`,
+            why_chain: [{q:"Why doesnt ertapenem cover Pseudomonas?",a:"Ertapenem has a unique structure that is efficiently expelled by Pseudomonas efflux pumps (MexAB-OprM). Meropenem, imipenem, and doripenem enter through OprD porin and resist efflux better."}],
+            points: 10
+        }
+    },
+    {
+        title: "Beta-Lactamase Inhibitors",
+        content: `<div class="narrative"><p>The culture grows E. coli resistant to ampicillin but susceptible to amoxicillin-clavulanate. Understanding beta-lactamase inhibitors is crucial.</p></div>`,
+        hint_beginner: "How do beta-lactamase inhibitors work?",
+        hint_advanced: "Compare the generations: clavulanate/sulbactam vs tazobactam vs avibactam — what makes newer ones better?",
+        question: {
+            prompt: "What is the mechanism of beta-lactamase inhibitors like clavulanate?",
+            options: [{ text: "Suicide substrates that irreversibly bind and inactivate beta-lactamase enzymes", correct: true },{ text: "Efflux pump blockers", correct: false },{ text: "Porin channel openers", correct: false },{ text: "Direct PBP inhibition", correct: false }],
+            explanation: { correct: "Correct! Classic inhibitors (clavulanate, sulbactam, tazobactam) are suicide substrates — they irreversibly bind beta-lactamase active sites. Newer inhibitors (avibactam, vaborbactam) use different mechanisms and cover KPC/carbapenemases.", incorrect: "Beta-lactamase inhibitors sacrifice themselves to protect the partner beta-lactam. They have little intrinsic antibacterial activity (except sulbactam vs Acinetobacter)." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 BLI Combinations</div><div class="pathway"><strong>Classic BLIs (suicide substrates):</strong><br>• Amoxicillin-clavulanate (Augmentin)<br>• Ampicillin-sulbactam (Unasyn)<br>• Piperacillin-tazobactam (Zosyn)<br><br><strong>Novel BLIs (cover carbapenemases):</strong><br>• Ceftazidime-avibactam → KPC, OXA-48<br>• Meropenem-vaborbactam → KPC<br>• Imipenem-relebactam → KPC, AmpC<br><br><strong>NOT covered by any BLI:</strong> Metallo-beta-lactamases/MBL (NDM, VIM, IMP) — need ceftazidime-avibactam + aztreonam</div></div>`,
+            why_chain: [{q:"Why is avibactam special?",a:"Avibactam is a non-beta-lactam inhibitor that covalently binds beta-lactamases (serine-based) including KPC and OXA-48. Unlike suicide substrates, the binding is reversible — avibactam regenerates and can inhibit multiple enzyme molecules."}],
+            points: 10
+        }
+    },
+    {
+        title: "Penicillin Allergy",
+        content: `<div class="narrative"><p>The patient reports a penicillin allergy — he had a rash as a child. His mother doesnt remember details. You need to decide whether cephalosporins are safe.</p></div>`,
+        hint_beginner: "What percentage of patients labeled penicillin-allergic are truly allergic?",
+        hint_advanced: "Consider the cross-reactivity rates between penicillins, cephalosporins, and carbapenems.",
+        question: {
+            prompt: "What percentage of patients with a penicillin allergy label are truly allergic on formal testing?",
+            options: [{ text: "Greater than 80%", correct: false },{ text: "Less than 10% (most have lost sensitivity or were never truly allergic)", correct: true },{ text: "About 50%", correct: false },{ text: "Exactly 25%", correct: false }],
+            explanation: { correct: "Correct! Over 90% of patients labeled penicillin-allergic are NOT truly allergic when formally tested. Penicillin allergy delabeling is a critical antimicrobial stewardship intervention — mislabeling leads to broader-spectrum, more toxic alternatives.", incorrect: "Over 90% of penicillin allergy labels are inaccurate. Formal testing (skin test + oral challenge) can safely delabel most patients." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Penicillin Allergy</div><div class="pathway"><strong>True IgE-mediated allergy:</strong> Anaphylaxis, urticaria, angioedema within 1 hour. Risk diminishes over time (~10%/year).<br><br><strong>Cross-reactivity rates:</strong><br>• Penicillin → cephalosporin: ~2% (R1 side chain dependent, NOT the beta-lactam ring)<br>• Penicillin → carbapenem: <1%<br>• Penicillin → aztreonam: 0% (no cross-reactivity)<br><br><strong>Delabeling:</strong> Skin testing + graded oral challenge. Safe in >95% of labeled patients.</div></div>`,
+            why_chain: [{q:"Why is delabeling important for patient outcomes?",a:"Patients labeled penicillin-allergic receive broader-spectrum alternatives (vancomycin, fluoroquinolones, clindamycin) that have more side effects, higher C. diff risk, worse outcomes for surgical prophylaxis, and contribute to antimicrobial resistance."}],
+            points: 10
+        }
+    },
+    {
+        title: "Dosing Principles",
+        content: `<div class="narrative"><p>You clear the allergy concern and prescribe cephalexin. Understanding beta-lactam pharmacokinetics is essential for dosing.</p></div>`,
+        hint_beginner: "Why are beta-lactams dosed by time above MIC rather than peak concentration?",
+        hint_advanced: "Compare time-dependent (beta-lactams) vs concentration-dependent (aminoglycosides) killing.",
+        question: {
+            prompt: "What PK/PD parameter best predicts beta-lactam efficacy?",
+            options: [{ text: "Peak-to-MIC ratio (Cmax/MIC)", correct: false },{ text: "Area under the curve to MIC ratio (AUC/MIC)", correct: false },{ text: "Time above MIC (fT>MIC) — aim for >40-70% of dosing interval", correct: true },{ text: "Trough level", correct: false }],
+            explanation: { correct: "Correct! Beta-lactams show time-dependent killing — once PBPs are saturated, higher concentrations dont kill faster. The goal is maintaining levels above MIC for >40-70% of the dosing interval. This is why continuous/extended infusions are used for serious infections.", incorrect: "Beta-lactams are time-dependent killers. Maximize time above MIC with frequent dosing or extended infusions. Peak concentrations dont matter once PBPs are saturated." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 PK/PD Principles</div><div class="pathway"><strong>Time-dependent (beta-lactams, vancomycin):</strong> Maximize time above MIC → frequent dosing, extended infusions<br><strong>Concentration-dependent (aminoglycosides, fluoroquinolones):</strong> Maximize peak → high single daily doses<br><br><strong>Extended infusion strategy:</strong><br>• Piperacillin-tazobactam 4.5g over 4 hours (vs standard 30 min)<br>• Meropenem 2g over 3 hours<br>• Increases fT>MIC from ~50% to >90% → better outcomes for serious infections</div></div>`,
+            why_chain: [{q:"When do you use continuous infusion beta-lactams?",a:"For serious infections (sepsis, febrile neutropenia) caused by organisms with higher MICs. Continuous infusion maintains drug levels above MIC 100% of the time. Evidence shows mortality benefit in ICU patients with severe sepsis."}],
+            points: 10
+        }
+    },
+    {
+        title: "Adverse Effects",
+        content: `<div class="narrative"><p>Three days into treatment, the patient develops diarrhea. Understanding beta-lactam adverse effects is important for monitoring and patient counseling.</p></div>`,
+        hint_beginner: "What are the most common beta-lactam side effects?",
+        hint_advanced: "Consider the unique adverse effects of specific beta-lactams: seizures with imipenem, biliary sludge with ceftriaxone, disulfiram with cefotetan.",
+        question: {
+            prompt: "Which adverse effect is specific to ceftriaxone and should be considered in neonates?",
+            options: [{ text: "Red man syndrome", correct: false },{ text: "Tendon rupture", correct: false },{ text: "QT prolongation", correct: false },{ text: "Biliary sludge/pseudolithiasis (contraindicated with calcium-containing IV solutions in neonates)", correct: true }],
+            explanation: { correct: "Correct! Ceftriaxone causes biliary sludge in ~25% of patients (usually asymptomatic). In neonates, ceftriaxone + IV calcium can form a fatal precipitate → use cefotaxime instead. QT prolongation is fluoroquinolones; tendon rupture is fluoroquinolones; red man syndrome is vancomycin.", incorrect: "Ceftriaxone causes biliary sludge and must not be co-infused with calcium in neonates. Other unique beta-lactam toxicities: imipenem seizures, cefepime neurotoxicity in renal failure." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Beta-Lactam Side Effects</div><div class="pathway"><strong>Common (all):</strong> Diarrhea, rash, nausea, C. difficile risk<br><strong>Serious (all):</strong> Anaphylaxis, drug fever, interstitial nephritis, cytopenias<br><br><strong>Drug-specific:</strong><br>• Ceftriaxone: biliary sludge, avoid with IV calcium in neonates<br>• Imipenem: seizures (especially renal failure, CNS pathology)<br>• Cefepime: neurotoxicity in renal impairment (dose-adjust!)<br>• Cefotetan/cefoperazone: disulfiram-like reaction with alcohol<br>• Nafcillin: interstitial nephritis, neutropenia</div></div>`,
+            why_chain: [{q:"Why does imipenem cause seizures more than other carbapenems?",a:"Imipenem has higher affinity for GABA receptors in the CNS, blocking inhibitory neurotransmission. Meropenem and doripenem have much lower seizure risk. Always use meropenem for CNS infections."}],
+            points: 10
+        }
+    }
+];
+document.getElementById('maxScore').textContent=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);
+function setDifficulty(d,btn){difficulty=d;document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const hb=document.querySelector('.hint-box');if(hb)hb.style.display=d==='beginner'?'block':'none'}
+function toggleReferences(){const c=document.getElementById('referencesContent');const t=document.getElementById('refToggle');if(c.style.display==='none'){c.style.display='block';t.innerHTML='&#9662;'}else{c.style.display='none';t.innerHTML='&#9656;'}}
+function renderStage(idx){if(idx>=stages.length){showCompletion();return}const st=stages[idx];const pct=((idx)/stages.length*100);document.getElementById('progress').style.width=pct+'%';let h='<h2 class="scene-title">'+st.title+'</h2>';h+='<div class="scene-content">'+st.content+'</div>';if(st.hint_beginner)h+='<div class="hint-box" id="hint-box"'+(difficulty==='beginner'?' style="display:block"':'')+'>&#128161; '+st.hint_beginner+'</div>';if(difficulty==='advanced'&&st.hint_advanced)h+='<div class="hint-box" style="display:block;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.15);color:#5b21b6">&#127891; '+st.hint_advanced+'</div>';if(st.question){h+='<div class="socratic-prompt"><h4>Clinical Question</h4><p>'+st.question.prompt+'</p></div>';h+='<div class="options-grid" id="options-'+idx+'">';st.question.options.forEach((opt,oi)=>{h+='<button class="option-btn" id="option-'+idx+'-'+oi+'" onclick="checkAnswer('+idx+','+oi+')">'+String.fromCharCode(65+oi)+'. '+opt.text+'</button>'});h+='</div>';h+='<div class="explanation-box" id="explain-'+idx+'"></div>';h+='<div id="teaching-'+idx+'" style="display:none">'+st.question.teaching+'</div>';if(st.question.why_chain&&st.question.why_chain.length>0){h+='<div id="why-'+idx+'" style="display:none">';st.question.why_chain.forEach((wc,wi)=>{h+='<div class="why-chain"><div class="why-q" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'none\'?\'block\':\'none\'">&#128270; '+wc.q+'</div><div class="why-a">'+wc.a+'</div></div>'});h+='</div>'}}h+='<button class="next-btn" id="next-'+idx+'" onclick="nextStage()">Continue &rarr;</button>';document.getElementById('scene-container').innerHTML=h}
+function checkAnswer(si,oi){const st=stages[si];const opt=st.question.options[oi];document.querySelectorAll('#options-'+si+' .option-btn').forEach((b,i)=>{b.classList.add('disabled');if(st.question.options[i].correct)b.classList.add('correct');if(i===oi&&!opt.correct)b.classList.add('incorrect')});const eb=document.getElementById('explain-'+si);if(opt.correct){score+=st.question.points;document.getElementById('score').textContent=score;eb.className='explanation-box correct';eb.innerHTML='<strong>&#10003; Correct!</strong> '+st.question.explanation.correct}else{eb.className='explanation-box incorrect';eb.innerHTML='<strong>&#10007; Not quite.</strong> '+st.question.explanation.incorrect}eb.style.display='block';document.getElementById('teaching-'+si).style.display='block';const wy=document.getElementById('why-'+si);if(wy)wy.style.display='block';document.getElementById('next-'+si).style.display='inline-block'}
+function nextStage(){currentStage++;renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'})}
+function showCompletion(){const mx=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);const pct=mx>0?Math.round(score/mx*100):0;document.getElementById('progress').style.width='100%';let lvl='Developing';if(pct>=90)lvl='Mastery';else if(pct>=70)lvl='Proficient';else if(pct>=50)lvl='Competent';document.getElementById('scene-container').innerHTML='<div class="completion-card"><h2>&#127881; Case Complete!</h2><p style="font-size:2rem;font-weight:700;color:var(--rdx-teal,#0d9488)">'+pct+'%</p><p style="color:var(--rdx-text-muted,#64748b)">Score: '+score+'/'+mx+'</p><p style="margin:12px 0;font-weight:600">Level: '+lvl+'</p><div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="../adventure-hub.html" style="padding:10px 20px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">More Cases</a><a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:var(--rdx-purple,#7c3aed);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">&#128202; Dashboard</a><button onclick="currentStage=0;score=0;document.getElementById(\'score\').textContent=0;renderStage(0)" style="padding:10px 20px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;cursor:pointer;font-weight:600">&#128260; Retry</button></div></div>';try{const progress=JSON.parse(localStorage.getItem('reasondx-progress')||'{}'  );if(!progress.cases)progress.cases={};progress.cases['beta-lactams']=Math.max(progress.cases['beta-lactams']||0,pct);localStorage.setItem('reasondx-progress',JSON.stringify(progress))}catch(e){}}
+renderStage(0);
+</script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

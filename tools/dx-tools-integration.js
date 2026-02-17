@@ -1,5 +1,5 @@
 /**
- * ReasonDx Tools Integration
+ * DxSuite Tools Integration
  * ==========================
  * Lightweight hooks for tools that aren't primary learning modules
  * but should still contribute to the learner profile.
@@ -65,8 +65,7 @@
 
         // Also record on page unload
         window.addEventListener('beforeunload', recordFlashcardSession);
-        console.log('DxToolsIntegration: Flashcard tracking active');
-    }
+}
 
     // Hook DDx builder
     function hookDDxBuilder() {
@@ -103,8 +102,7 @@
                 // Silent fail
             }
         };
-        console.log('DxToolsIntegration: DDx builder tracking active');
-    }
+}
 
     // Log calculator usage
     function hookCalculators() {
@@ -129,8 +127,7 @@
             };
         });
         if (calcCount === 0) {
-            console.log('DxToolsIntegration: Calculator tracking active');
-        }
+}
     }
 
     // Add navigation bar to all tools
@@ -169,8 +166,6 @@
             toolType: tool,
             accessTime: Date.now()
         });
-
-        console.log(`DxToolsIntegration: Active for ${tool}`);
-    });
+});
 
 })();

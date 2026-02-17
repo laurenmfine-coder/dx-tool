@@ -10,16 +10,17 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechanismDx: Intussusception</title>
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Intussusception. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>ReasonDx: Intussusception</title>
   <style>
     :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1a1a2e, #16213e); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59, #0f766e); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
     .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
     header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
     header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .subtitle { color: #9CA3AF; font-size: 1.1rem; }
-    .module-section { background: #ffffff; border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .module-section { background:var(--rdx-bg-card); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
     .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
     .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
     .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
@@ -35,11 +36,11 @@
     li { margin: 0.5rem 0; }
     .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
     .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
-    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; }
     .quiz-option:hover { background: rgba(139,92,246,0.2); }
     .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
     .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
-    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: #ffffff; border-radius: 0.5rem; }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background:var(--rdx-bg-card); border-radius: 0.5rem; }
     .back-link { display: inline-block; margin-top: 2rem; padding: 0.75rem 1.5rem; background: var(--primary); color: white; text-decoration: none; border-radius: 0.5rem; }
   </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
@@ -219,8 +220,10 @@
       document.getElementById('explanation').style.display = 'block';
     }
   </script>
-<div data-dx-tutor
-         data-module-title="MechanismDx: Intussusception"
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Intussusception"
          data-key-points="📚 Core Definition, ⚙️ Pathophysiology, 🔍 Lead Points, 🩺 Clinical Presentation, 🔬 Diagnosis, 💊 Management, 📚 Open-Access References, Why &quot;Currant Jelly&quot; Stools?, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
          style="display:none;"></div>
@@ -317,5 +320,7 @@ let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorA
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/intussusception.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

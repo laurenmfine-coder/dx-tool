@@ -10,16 +10,17 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechanismDx: Benign Prostatic Hyperplasia (BPH)</title>
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Benign Prostatic Hyperplasia (BPH). Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>ReasonDx: Benign Prostatic Hyperplasia (BPH)</title>
   <style>
     :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info: #14b8a6; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family:'DM Sans','Inter',sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0f766e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
     .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
     header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
     header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .subtitle { color: #9CA3AF; }
-    .module-section { background: #ffffff; border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .module-section { background:var(--rdx-bg-card); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
     .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
     .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
     .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
@@ -34,15 +35,17 @@
     li { margin: 0.5rem 0; }
     .pathway-box { background: #f1f5f9; border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
     .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
-    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; }
     .quiz-option:hover { background: rgba(139,92,246,0.2); }
     .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
     .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
-    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: #ffffff; border-radius: 0.5rem; }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background:var(--rdx-bg-card); border-radius: 0.5rem; }
   </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/bph.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Benign Prostatic Hyperplasia (BPH)</a> → Module</div>
+
   <div class="container">
     <header>
       <h1>🔵 Benign Prostatic Hyperplasia</h1>
@@ -265,7 +268,7 @@ inhibitors (shrink prostate)    (relax smooth muscle)</div>
     </section>
   
     <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
-      <h2 style="color: #2dd4bf;">📚 Open-Access References</h2>
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">📚 Open-Access References</h2>
       <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
         <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
           <span style="position: absolute; left: 0;">📖</span>
@@ -287,7 +290,7 @@ inhibitors (shrink prostate)    (relax smooth muscle)</div>
     </section>
 
     <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
-      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Learning Modules</h2>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
         <a href="bph-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
           <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
@@ -299,11 +302,11 @@ inhibitors (shrink prostate)    (relax smooth muscle)</div>
           <strong>📞 SBAR Practice</strong><br><span style="font-size: 0.85rem; color: #fbcfe8;">Communication skills</span>
         </a>
       </div>
-      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-        <a href="prostate-cancer-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Prostate Cancer (differential)</a>
-        <a href="neurogenic-bladder-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Neurogenic Bladder</a>
-        <a href="urinary-incontinence-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Urinary Incontinence</a>
+        <a href="prostate-cancer-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Prostate Cancer (differential)</a>
+        <a href="neurogenic-bladder-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Neurogenic Bladder</a>
+        <a href="urinary-incontinence-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Urinary Incontinence</a>
       </div>
     </section>
   </div>
@@ -315,8 +318,10 @@ inhibitors (shrink prostate)    (relax smooth muscle)</div>
       document.getElementById('explanation1').style.display = 'block';
     }
   </script>
-<div data-dx-tutor
-         data-module-title="MechanismDx: Benign Prostatic Hyperplasia (BPH)"
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Benign Prostatic Hyperplasia (BPH)"
          data-key-points="📚 Overview, 🔬 Prostate Anatomy, 🧬 Pathophysiology, 🔍 Clinical Presentation (LUTS), 🔬 Diagnostic Evaluation, 💊 Medical Management, 🔪 Surgical Management, 📋 Key Clinical Pearls, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
          style="display:none;"></div>
@@ -382,5 +387,6 @@ inhibitors (shrink prostate)    (relax smooth muscle)</div>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

@@ -9,17 +9,38 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MechanismDx | Pathophysiology Mastery</title>
+    <title>ReasonDx | Pathophysiology Mastery</title>
+<meta name="description" content="ReasonDx Learning Modules: 400+ pathophysiology and clinical reasoning modules with interactive content, quizzes, and evidence-based references.">
+<meta property="og:title" content="ReasonDx | Pathophysiology Mastery">
+<meta property="og:description" content="ReasonDx Learning Modules: 400+ pathophysiology and clinical reasoning modules with interactive content, quizzes, and evidence-based references.">
+<meta property="og:type" content="website">
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
         
         .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 24px; position:sticky;top:56px; z-index: 100; }
         .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: Georgia, serif; font-size: 26px; color: var(--text-primary); text-decoration: none; }
+        .logo { font-family:var(--rdx-font-serif); font-size: 26px; color: var(--text-primary); text-decoration: none; }
         .logo span { color: var(--primary); }
-        /* Dropdown nav CSS removed */
+        .nav { display: flex; gap: 8px; align-items: center; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.2s; }
+        .nav-link:hover { background: #f1f5f9; color: var(--text-primary); }
+        .nav-link.active { color: var(--primary); }
+        .nav-signin { background: #059669 !important; color: white !important; }
+        .nav-signin:hover { background: #047857 !important; }
+        
+        /* Dropdown Navigation */
+        .nav-dropdown { position: relative; }
+        
+        .nav-dropdown:hover 
+        .dropdown-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-decoration: none; color: #1e293b; border-radius: 8px; transition: background 0.15s; }
+        .dropdown-item:hover { background: #f0fdf4; }
+        .dropdown-icon { font-size: 1.25rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; flex-shrink: 0; }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { font-size: 0.9rem; font-weight: 600; }
+        .dropdown-text small { font-size: 0.75rem; color: #64748b; }
+        .dropdown-divider { height: 1px; background: #e2e8f0; margin: 8px 0; }
         
         .hero { background: linear-gradient(135deg, var(--primary-bg) 0%, #f0fdf4 50%, #fff 100%); padding: 64px 24px; text-align: center; border-bottom: 1px solid var(--border); }
         .hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
@@ -54,7 +75,7 @@
         .tools-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 48px; }
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
         .tool-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .tool-card:hover { background: #f0fdf4; border-color: #86efac; }
+        .tool-card:hover { background: #f0fdf4; border-color: var(--rdx-teal-light,#ccfbf1); }
         .tool-icon { font-size: 28px; margin-bottom: 8px; }
         .tool-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
         
@@ -63,7 +84,26 @@
         .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
 
         /* Logo Header Styles */
-        /* .mechanismdx-logo-header CSS removed */
+        .mechanismdx-logo-header {
+            background: #fafafa;
+            padding: 24px 24px 48px 24px;
+            text-align: center;
+        }
+        .mechanismdx-logo-container {
+            display: inline-block;
+            min-height: 85px;
+        }
+        .mechanismdx-logo-container svg {
+            height: 70px;
+            width: auto;
+        }
+        .mechanismdx-tagline {
+            margin-top: 8px;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #6b7280;
+        }
     
 
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
@@ -90,126 +130,66 @@
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #99f6e4; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary:var(--rdx-text-muted); --bg-main:var(--rdx-bg); --bg-card:var(--rdx-bg-card);
-    --bg-nav:var(--rdx-bg-nav); --border:var(--rdx-border); --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text:var(--rdx-teal-dark);
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
-/* dx-theme CSS removed */
-
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-
-/* dx-theme-modal CSS removed */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
 
 /* Body theming */
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
     
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
     </style>
@@ -218,19 +198,51 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+<!-- Mastery Dashboard CTA -->
+<div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
+  <a href="../tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+    <div style="font-size:28px;flex-shrink:0;">📊</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
+    </div>
+    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+  </a>
+</div>
 
-    <!-- UNIFIED DX NAVIGATION -->
-    <!-- Logo header removed: rdx-nav.js provides navigation -->
 
+    <!-- nav removed: unified via rdx-nav.js -->
+
+    <!-- Logo Header -->
+    <header class="mechanismdx-logo-header">
+        <div class="mechanismdx-logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115">
+                <text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
+                <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
+                <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
+                <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
+                <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                <circle cx="266" cy="103" r="5" fill="currentColor"/>
+            </svg>
+        </div>
+        <div class="mechanismdx-tagline">Understanding why makes the difference.</div>
+    </header>
+
+    
+    </div>
+    </header>
+    
     <!-- Content Overview - Shows All Learning Areas -->
     <section style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%); padding: 48px 24px; border-bottom: 1px solid #e2e8f0;">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="text-align: center; font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 8px;">All Learning Content</h2>
+            <h2 style="text-align: center; font-size: 1.75rem; font-weight: 700; color:var(--rdx-text,#1e293b); margin-bottom: 8px;">All Learning Content</h2>
             <p style="text-align: center; color: #64748b; margin-bottom: 32px;">279 interactive modules across three areas</p>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 <!-- Pathophysiology Card -->
-                <a href="#pathophysiology" style="background: white; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block;">
+                <a href="#pathophysiology" style="background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
                         <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">⚙️</div>
                         <div>
@@ -242,7 +254,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 </a>
                 
                 <!-- Microbiology Card -->
-                <a href="../modules/index.html" style="background: white; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block;">
+                <a href="../modules/index.html" style="background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
                         <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">🦠</div>
                         <div>
@@ -254,7 +266,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 </a>
                 
                 <!-- Pharmacology Card -->
-                <a href="../modules/index.html" style="background: white; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block;">
+                <a href="../modules/index.html" style="background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
                         <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #ccfbf1, #99f6e4); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">💊</div>
                         <div>
@@ -280,7 +292,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
                 <div style="flex:1;min-width:250px;position:relative;">
                     <input type="text" id="mechSearch" placeholder="Search modules by name, topic, or keyword..."
-                        style="width:100%;padding:12px 16px 12px 42px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--bg-card);color:var(--text-primary);outline:none;transition:border .2s;"
+                        style="width:100%;padding:12px 16px 12px 42px;border:1px solid var(--border);border-radius:12px;font-size:14px;background:var(--bg-card);color:var(--text-primary);outline:none;transition:border .2s;"
                         oninput="filterModules()" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
                     <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;">🔍</span>
                 </div>
@@ -304,7 +316,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         <!-- Platform Tools (preserved) -->
         <div class="tools-section">
             <h2 class="section-title">🛠️ Platform Tools</h2>
-            <p class="section-subtitle">Cross-platform integration with the ReasonDx Learning Platform</p>
+            <p class="section-subtitle">Cross-platform integration with the ReasonDx</p>
             <div class="tools-grid">
                 <a href="../modules/index.html" class="tool-card"><div class="tool-icon">📚</div><div class="tool-name">Full Catalog</div></a>
                 <a href="../modules/training.html" class="tool-card"><div class="tool-icon">🧠</div><div class="tool-name">CRT Hub</div></a>
@@ -510,13 +522,72 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             <a href="#">CoachDx</a>
             <a href="#">Scoreboard</a>
         </div>
-        <p>© 2025-2026 MechanismDx · Part of the <a href="index.html">ReasonDx Learning Platform</a></p>
+        <p>© 2025-2026 ReasonDx · <a href="../index.html">Home</a></p>
         <p style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">Created by Lauren Fine, MD, FAAAAI · Medical Education</p>
     </footer>
-    <!-- Theme modal + dx-case-nav removed: rdx-nav.js handles theme & navigation -->
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
-<div data-dx-tutor
-         data-module-title="MechanismDx"
+
+    <!-- THEME PICKER MODAL -->
+    
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx"
          data-key-points="🛠️ Platform Tools, 🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
          style="display:none;"></div>
@@ -525,7 +596,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <script src="../js/rdx-nav.js"></script>
 
 <div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
-<h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
 <ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
 <li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
 <li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
@@ -535,5 +606,59 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+
+<!-- Browse by Specialty -->
+<div style="max-width:900px;margin:32px auto 0;padding:0 20px;">
+  <h2 style="font-family:var(--rdx-font-serif);font-size:1.3rem;color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px;">Browse by Specialty</h2>
+  <p style="color:var(--rdx-text-muted,#64748b);font-size:14px;margin-bottom:16px;">Explore deep mechanism modules organized by clinical specialty.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="ecg-patterns.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🫀 ECG Patterns</a>
+<a href="dermatology.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🔬 Dermatology</a>
+<a href="trauma-emergency.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🚨 Trauma & Emergency</a>
+<a href="endocrine-emergencies.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">⚡ Endocrine Emergencies</a>
+<a href="environmental-medicine.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🌿 Environmental Medicine</a>
+<a href="ethics-biostats.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">📊 Ethics & Biostatistics</a>
+<a href="gi-hepatology.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🔬 GI/Hepatology</a>
+<a href="geriatrics.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">👴 Geriatrics</a>
+<a href="global-health.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🌍 Global Health</a>
+<a href="hematology.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🩸 Hematology</a>
+<a href="infectious-disease.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🦠 Infectious Disease</a>
+<a href="msk-derm.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🦴 MSK & Dermatology</a>
+<a href="microbiology.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🧫 Microbiology</a>
+<a href="musculoskeletal.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">💪 Musculoskeletal</a>
+<a href="neurology.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🧠 Neurology</a>
+<a href="obgyn.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🤰 OB/GYN</a>
+<a href="patient-safety.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🛡️ Patient Safety</a>
+<a href="pediatrics.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">👶 Pediatrics</a>
+<a href="preventive-medicine.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🏥 Preventive Medicine</a>
+<a href="psychiatry.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">🧠 Psychiatry</a>
+<a href="electrolytes-acidbase.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">💧 Electrolytes & Acid-Base</a>
+<a href="toxicology.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:background 0.15s;">☣️ Toxicology</a>
+
+  </div>
+</div>
+
+<!-- Tools & Utilities -->
+<div style="max-width:900px;margin:24px auto 0;padding:0 20px;">
+  <h2 style="font-family:var(--rdx-font-serif);font-size:1.3rem;color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px;">Tools & Utilities</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="academic-resources-library.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">📚 Academic Resources</a>
+    <a href="cross-system.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🔗 Cross-System Explorer</a>
+    <a href="challenges.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🎯 Active Learning Challenges</a>
+    <a href="build-pathway.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🛤️ Build the Pathway</a>
+    <a href="lab-calibration.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🔬 Lab Calibration</a>
+    <a href="what-if.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🤔 What-If Scenarios</a>
+    <a href="whats-the-link.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🔗 What's the Link?</a>
+    <a href="saved.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">💾 Saved Items</a>
+    <a href="clinical-reasoning-trainer-module.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🏋️ CRT Module</a>
+    <a href="sbar-trainer.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">📋 SBAR Trainer</a>
+    <a href="coachdx-dashboard-mddo.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🤖 CoachDx Dashboard</a>
+
+    <a href="instructor-dashboard.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">👨‍🏫 Instructor Dashboard</a>
+
+  </div>
+</div>
+
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

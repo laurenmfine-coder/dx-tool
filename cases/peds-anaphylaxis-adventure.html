@@ -7,22 +7,23 @@
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pediatric Anaphylaxis Adventure | ReasonDx</title>
+    <meta name="description" content="Interactive clinical adventure: Pediatric Anaphylaxis. Make real-time diagnostic decisions in this branching case scenario on ReasonDx.">
+<title>Pediatric Anaphylaxis Adventure | ReasonDx</title>
     <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
 <link href="../css/rdx-a11y.css" rel="stylesheet">
 <style>
         :root {
-            --primary: #1e3a5f; --accent: #dc2626; --peds: #ec4899;
+            --primary: #0f766e; --accent: #dc2626; --peds: #ec4899;
             --success: #059669; --warning: #d97706;
             --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
             --text: #1e293b; --text-secondary: #64748b;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', 'Inter', -apple-system, sans-serif; background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.6; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.6; }
         .container { max-width: 900px; margin: 0 auto; padding: 24px; }
         .header { background: linear-gradient(135deg, var(--peds) 0%, var(--accent) 100%); color: white; padding: 32px 24px; border-radius: 16px; margin-bottom: 24px; }
         .header h1 { font-size: 1.75rem; margin-bottom: 8px; }
@@ -35,7 +36,7 @@
         .scene-tag { background: #fdf2f8; color: var(--peds); padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-left: auto; }
         .narrative { font-size: 1rem; margin-bottom: 20px; padding: 16px; background: #fdf2f8; border-radius: 12px; border-left: 4px solid var(--peds); }
         .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 16px 0; }
-        .vital { background: #f8fafc; padding: 12px; border-radius: 10px; text-align: center; border: 1px solid var(--border); }
+        .vital { background: #f8fafc; padding: 12px; border-radius:12px; text-align: center; border: 1px solid var(--border); }
         .vital-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
         .vital-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
         .vital-value.critical { color: var(--accent); }
@@ -57,7 +58,7 @@
         .dose-table th, .dose-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
         .dose-table th { background: #fdf2f8; color: var(--peds); font-weight: 600; }
         .dose-highlight { background: #fef3c7; font-weight: 600; }
-        .nav-btn { background: var(--peds); color: white; border: none; padding: 12px 24px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.95rem; margin-top: 16px; }
+        .nav-btn { background: var(--peds); color: white; border: none; padding: 12px 24px; border-radius:12px; cursor: pointer; font-weight: 600; font-size: 0.95rem; margin-top: 16px; }
         .nav-btn:hover { background: #db2777; }
         .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--peds), var(--accent)); transition: width 0.3s; }
@@ -66,7 +67,7 @@
         .epi-calculator h4 { color: #92400e; margin-bottom: 12px; }
         .calc-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; flex-wrap: wrap; }
         .calc-input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; width: 100px; font-size: 1rem; }
-        .calc-result { font-size: 1.25rem; font-weight: 700; color: #92400e; padding: 8px 16px; background: white; border-radius: 8px; }
+        .calc-result { font-size: 1.25rem; font-weight: 700; color: #92400e; padding: 8px 16px; background:var(--rdx-bg-card); border-radius: 8px; }
         .summary-card { background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border: 1px solid var(--peds); border-radius: 16px; padding: 24px; margin-top: 20px; }
         .summary-card h3 { color: #be185d; margin-bottom: 16px; }
         .key-points { list-style: none; }
@@ -77,7 +78,7 @@
 .rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
 .rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
 .rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
-.rdx-crossplatform-link { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
@@ -334,7 +335,7 @@
     <script src="dx-ai-tutor.js"></script>
 
 <div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:var(--rdx-bg-hover);border-radius:12px;border: 1px solid #e2e8f0">
-<h3 style="color: #0f766e;margin-bottom:12px">📚 References & Evidence Base</h3>
+<h3 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px">📚 References & Evidence Base</h3>
 <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" style="color: #64748b">Peds Anaphylaxis - StatPearls/NCBI</a> — NCBI Bookshelf</li></ul>
 <p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
 </div>
@@ -344,14 +345,7 @@
 <script src="../dx-cross-links.js"></script>
 <script src="../data/rdx-persist.js"></script>
 
-<div class="rdx-crossplatform-nav">
-    <h4>🎯 Continue Your Learning Journey</h4>
-    <div class="rdx-crossplatform-links">
-                <a href="../deep-dive-player.html?module=anaphylaxis" class="rdx-crossplatform-link">📚 Anaphylaxis Deep Dive</a>
-        <a href="../deep-dive-player.html?module=drug-allergy" class="rdx-crossplatform-link">🔬 Drug Allergy & Hypersensitivity</a>
-        <a href="../deep-dive-player.html?module=food-allergy" class="rdx-crossplatform-link">🔬 Food Allergy</a>
-        <a href="../deep-dive-hub.html" class="rdx-crossplatform-link">🗂️ All Deep Dives</a>
-    </div>
+
 </div>
 
 <script src="../js/rdx-nav.js"></script>
@@ -359,5 +353,6 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

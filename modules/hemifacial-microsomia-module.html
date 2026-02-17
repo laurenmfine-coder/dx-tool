@@ -10,7 +10,8 @@
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechanismDx: Hemifacial Microsomia</title>
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Hemifacial Microsomia. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>ReasonDx: Hemifacial Microsomia</title>
   <style>
     :root {
       --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #EC4899;
@@ -18,8 +19,8 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family:'DM Sans','Inter',sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      font-family:var(--rdx-font);
+      background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
       color: #E5E7EB; min-height: 100vh; line-height: 1.6;
     }
     .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
@@ -305,7 +306,7 @@
     </section>
   
     <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
-      <h2 style="color: #2dd4bf;">📚 Open-Access References</h2>
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">📚 Open-Access References</h2>
       <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
         <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
           <span style="position: absolute; left: 0;">📖</span>
@@ -327,7 +328,7 @@
     </section>
 
     <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
-      <h2 style="color: #6ee7b7;">🔗 Related Learning Modules</h2>
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Learning Modules</h2>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
         <a href="hemifacial-microsomia-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
           <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
@@ -336,11 +337,11 @@
           <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
         </a>
       </div>
-      <h3 style="color: #86efac; margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-        <a href="treacher-collins-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Treacher Collins</a>
-        <a href="pharyngeal-apparatus-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Pharyngeal Apparatus</a>
-        <a href="branchial-cleft-anomalies-module.html" style="display: inline-block; padding: 0.5rem 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Branchial Cleft Anomalies</a>
+        <a href="treacher-collins-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Treacher Collins</a>
+        <a href="pharyngeal-apparatus-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Pharyngeal Apparatus</a>
+        <a href="branchial-cleft-anomalies-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Branchial Cleft Anomalies</a>
       </div>
     </section>
   </div>
@@ -360,8 +361,10 @@
       document.getElementById('explanation1').style.display = 'block';
     }
   </script>
-<div data-dx-tutor
-         data-module-title="MechanismDx: Hemifacial Microsomia"
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Hemifacial Microsomia"
          data-key-points="📚 Core Definition & Terminology, 🧬 Pathophysiology, 📋 OMENS Classification, 🎯 Associated Anomalies, 🔪 Surgical Management, 📊 Prognosis, 📚 References, 📚 Open-Access References, pathophysiology, clinical presentation, diagnosis, management, complications"
          data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
          style="display:none;"></div>
@@ -427,5 +430,7 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/hemifacial-microsomia.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

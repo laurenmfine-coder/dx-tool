@@ -8,4 +8,3 @@ window.DxCrossLinks = {
   },
   getRelated(topic) { return []; }
 };
-console.log('[DxCrossLinks] Loaded');
