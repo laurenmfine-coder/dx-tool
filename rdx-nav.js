@@ -39,7 +39,7 @@
 
   // --- Build nav ---
   var html =
-    '<a href="' + toRoot + 'index.html" style="font-family:Georgia,serif;font-size:20px;color:#0f766e;text-decoration:none;font-weight:700;letter-spacing:-0.3px;flex-shrink:0;">ReasonDx</a>' +
+    '<a href="' + toRoot + 'index.html" style="text-decoration:none;flex-shrink:0;display:flex;align-items:center;"><img src="' + toRoot + 'images/reasondx-logo.png" alt="ReasonDx" style="height:28px;width:auto;"></a>' +
     '<button id="rdx-hamburger" aria-label="Menu" style="display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);-webkit-tap-highlight-color:transparent;">☰</button>' +
     '<div id="rdx-nav-menu" style="display:flex;gap:6px;align-items:center;margin-left:auto;">' +
       navLink(toRoot + 'index.html', '🏠', 'Home', section === 'home') +
@@ -154,7 +154,7 @@
         localStorage.removeItem('reasondx_student_code');
         localStorage.removeItem('rdx-progress');
         sessionStorage.clear();
-        window.location.href = toRoot + 'auth/login.html';
+        window.location.href = toRoot + 'auth/register.html';
       });
     }
     // --- About ReasonDx modal ---

@@ -123,7 +123,7 @@
 <body>
     <div class="page-container">
         <div class="page-header">
-            <h1>🩺 ReasonDx</h1>
+            <h1><img src="../images/reasondx-logo.png" alt="ReasonDx" style="height:48px;vertical-align:middle;"></h1>
             <p>Master clinical reasoning. Crush your boards.</p>
             <div class="board-tags">
                 <span class="board-tag step1">Step 1 Ready</span>
@@ -929,6 +929,11 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Auto-show sign-in if redirected with #signin hash
+            if (window.location.hash === '#signin') {
+                showLogin();
+            }
+
             var params = new URLSearchParams(window.location.search);
 
             // Handle Stripe Checkout return

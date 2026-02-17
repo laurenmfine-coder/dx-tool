@@ -22,7 +22,7 @@
         var depth = (location.pathname.match(/\//g) || []).length - 1;
         var prefix = '';
         for (var i = 0; i < depth; i++) prefix += '../';
-        return prefix + 'auth/login.html';
+        return prefix + 'auth/register.html';
     }
     
     function isAuthenticated() {
