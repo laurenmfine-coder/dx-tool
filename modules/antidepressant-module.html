@@ -259,32 +259,6 @@
         }
     </script>
 
-    <!-- THEME PICKER MODAL -->
-    
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Dark Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
-                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-    (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
-        document.addEventListener('DOMContentLoaded', updateThemeOptions);
-    })();
-    
-    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
-    
-    
-    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
-    </script>
     <script src="../js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
 

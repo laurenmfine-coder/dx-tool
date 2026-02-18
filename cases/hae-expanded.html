@@ -54,7 +54,7 @@
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #d8b4fe); border-radius: 3px; transition: width 0.5s; }
         .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
-        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#d4e8f7); }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal, #2874a6); }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
         .comparison-table th { background: #f1f5f9; color: #d8b4fe; }
@@ -186,7 +186,7 @@ function showDebrief() {
     
     if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
     else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3a90c0'; }
-    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#b45309'; }
     else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
     
     let pathHTML = '';
@@ -202,7 +202,7 @@ function showDebrief() {
                             <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
                             ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
                         </div>
-                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#b45309'}">${d.points}/${d.maxPoints || 10}</div>
                     </div>
                 </div>
             `;

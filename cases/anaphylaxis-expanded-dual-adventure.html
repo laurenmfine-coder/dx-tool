@@ -39,7 +39,7 @@
         .scene-phase { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
         .scene-title { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
         .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #3a90c0; line-height: 1.7; }
-        .highlight { color: var(--rdx-teal-light,#d4e8f7); font-weight: 600; }
+        .highlight { color: var(--rdx-teal, #2874a6); font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
         .lab-value { color: #1f5f8b; font-weight: 600; }
         .question-box { background:var(--rdx-teal-50); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
@@ -74,7 +74,7 @@
         .path-incorrect { background: #fee2e2; border-left: 4px solid #ef4444; }
         .refs { margin-top: 24px; padding: 16px; background:var(--rdx-bg-card); border-radius: 12px; }
         .refs h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
-        .refs a { color: var(--rdx-teal-light,#d4e8f7); text-decoration: none; display: block; margin-bottom: 8px; }
+        .refs a { color: var(--rdx-teal, #2874a6); text-decoration: none; display: block; margin-bottom: 8px; }
         .refs a:hover { text-decoration: underline; }
     /* Mobile Responsive - iPhone 16/17 optimized */
         @media (max-width: 480px) {
@@ -303,7 +303,7 @@
         let grade, emoji, color;
         if (percentage >= 90) { grade = 'Outstanding!'; emoji = '🏆'; color = '#22c55e'; }
         else if (percentage >= 80) { grade = 'Excellent!'; emoji = '🌟'; color = '#3a90c0'; }
-        else if (percentage >= 70) { grade = 'Good Work!'; emoji = '👍'; color = '#f59e0b'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; emoji = '👍'; color = '#b45309'; }
         else { grade = 'Keep Learning!'; emoji = '📚'; color = '#ef4444'; }
         
         const pathHtml = decisionPath.map(d => `
@@ -314,7 +314,7 @@
                         <span style="font-size:0.9rem;color:#666;">Your choice: ${d.choice}</span>
                         ${!d.isOptimal ? `<br><span style="font-size:0.85rem;color:#888;">💡 Better: ${d.optimalChoice}</span>` : ''}
                     </div>
-                    <div style="font-weight:600;color:${d.isOptimal ? '#22c55e' : '#f59e0b'};">${d.points}/10</div>
+                    <div style="font-weight:600;color:${d.isOptimal ? '#22c55e' : '#b45309'};">${d.points}/10</div>
                 </div>
             </div>
         `).join('');

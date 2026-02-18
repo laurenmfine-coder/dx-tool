@@ -27,8 +27,8 @@
         .container { max-width: 900px; margin: 0 auto; }
         .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
         .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
-        .scene-phase { font-size: 0.85rem; color: var(--rdx-teal-light,#d4e8f7); text-transform: uppercase; }
-        .scene-title { font-size: 1.5rem; font-weight: 700; color: #d4e8f7; }
+        .scene-phase { font-size: 0.85rem; color: var(--rdx-teal, #2874a6); text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #2874a6; }
         .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #3a90c0; line-height: 1.7; }
         .highlight { color: #1f5f8b; font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
@@ -36,7 +36,7 @@
         .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
         .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
         .question-box { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #d4e8f7; margin-bottom: 16px; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #2874a6; margin-bottom: 16px; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
         .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
         .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
@@ -67,17 +67,17 @@
         .progress-fill { height: 100%; background: linear-gradient(90deg, #3a90c0, #7cb8d9); border-radius: 3px; transition: width 0.5s; }
         .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
         .score-label { font-size: 0.8rem; color: #94a3b8; }
-        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#d4e8f7); }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal, #2874a6); }
         .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
         .diff-btns { display: flex; gap: 4px; }
         .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
         .diff-btn.active { background: #3a90c0; color: white; }
         .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
-        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal-light,#d4e8f7); }
-        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal, #2874a6); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #eab308; }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
-        .comparison-table th { background: #f1f5f9; color: var(--rdx-teal-light,#d4e8f7); }
+        .comparison-table th { background: #f1f5f9; color: var(--rdx-teal, #2874a6); }
         .completion { text-align: center; padding: 60px 40px; }
         @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
     
@@ -436,7 +436,7 @@ function showDebrief() {
     
     if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
     else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3a90c0'; }
-    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#b45309'; }
     else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
     
     let pathHTML = '';
@@ -452,7 +452,7 @@ function showDebrief() {
                             <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
                             ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
                         </div>
-                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#b45309'}">${d.points}/${d.maxPoints || 10}</div>
                     </div>
                 </div>
             `;
