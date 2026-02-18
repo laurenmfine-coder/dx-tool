@@ -625,7 +625,7 @@
         // ============================================
         // EMAIL VERIFICATION
         // ============================================
-        function sendVerificationCode() {
+        async function sendVerificationCode() {
             var email = document.getElementById('emailInput').value.trim().toLowerCase();
             var err = document.getElementById('emailError');
             err.className = 'message';
@@ -639,9 +639,27 @@
             else if (ref) { err.textContent = 'That referral code doesn\'t look right. Format: REF-XX0000. Leave blank to skip.'; err.className = 'message error'; return; }
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             state.verifiedEmail = email;
-            if (CONFIG.DEMO_MODE) alert('Demo Mode: Your verification code is ' + state.generatedCode);
             document.getElementById('sentToEmail').textContent = email;
             nextSection();
+            // Send verification email
+            var emailSent = false;
+            if (typeof DxEmail !== 'undefined' && DxEmail.sendVerificationEmail) {
+                try {
+                    var result = await DxEmail.sendVerificationEmail(email, state.generatedCode);
+                    if (result && result.success) {
+                        console.log('Verification email sent successfully');
+                        emailSent = true;
+                    }
+                } catch(e) { console.error('Email send error:', e); }
+            }
+            // TEMPORARY FALLBACK: show code if email fails (remove once edge function is deployed)
+            if (!emailSent) {
+                var verifyErr = document.getElementById('verifyError');
+                if (verifyErr) {
+                    verifyErr.innerHTML = '<strong>Email service connecting...</strong> For testing, your code is: <code style="font-size:16px;font-weight:bold;color:#2874A6;">' + state.generatedCode + '</code>';
+                    verifyErr.className = 'message info';
+                }
+            }
         }
 
         function handleCodeInput(input) {
@@ -669,9 +687,16 @@
                 document.querySelector('.code-input').focus();
             }
         }
-        function resendCode() {
+        async function resendCode() {
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            if (CONFIG.DEMO_MODE) alert('Demo: New code is ' + state.generatedCode);
+            if (typeof DxEmail !== 'undefined' && DxEmail.sendVerificationEmail) {
+                try {
+                    var result = await DxEmail.sendVerificationEmail(state.verifiedEmail, state.generatedCode);
+                    if (result && result.success) {
+                        console.log('Verification code resent successfully');
+                    }
+                } catch(e) { console.error('Resend error:', e); }
+            }
         }
 
         // ============================================
