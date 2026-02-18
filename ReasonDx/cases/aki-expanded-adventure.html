@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Interactive clinical adventure: Acute Kidney Injury. Make real-time diagnostic decisions in this branching case scenario on ReasonDx.">
+<title>Acute Kidney Injury - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family:var(--rdx-font);
+            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background:var(--rdx-bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #e2e8f0;
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background:var(--rdx-bg-card);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #14b8a6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: var(--rdx-teal-light,#ccfbf1); font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .lab-value { color: #0f766e; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background:var(--rdx-teal-50);
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background:var(--rdx-bg-hover); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: var(--rdx-teal-light,#ccfbf1); }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color:var(--rdx-text);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background:var(--rdx-bg-card);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius:12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius:12px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: var(--rdx-teal-light,#ccfbf1); }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color:var(--rdx-text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background:var(--rdx-info-bg);
+            border:1px solid var(--rdx-info);
+            border-radius:12px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: var(--rdx-purple,#a78bfa);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color:var(--rdx-text); }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color:var(--rdx-text); }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid #e2e8f0; 
+            text-align: left;
+        }
+        .teaching-point th { color: var(--rdx-purple,#a78bfa); font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius:12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #14b8a6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius:12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius:12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius:8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #14b8a6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: var(--rdx-teal-light,#ccfbf1);
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background:var(--rdx-bg-card);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--rdx-teal-light,#ccfbf1);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://kdigo.org/guidelines/acute-kidney-injury/" target="_blank" rel="noopener">KDIGO AKI Guidelines (KDIGO)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK441896/" target="_blank" rel="noopener">Acute Kidney Injury - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">71-year-old man</span> is admitted with pneumonia. On day 2, labs show rising creatinine.</p>\n                <p style=\"margin-top:12px;\"><strong>Baseline Cr:</strong> 1.0 mg/dL (from 3 months ago)</p>\n                <p><strong>Admission Cr:</strong> 1.3 mg/dL</p>\n                <p><strong>Today Cr:</strong> 2.1 mg/dL</p>\n                <p><strong>Urine output:</strong> 350 mL over past 12 hours</p>\n            </div>",
+        "hint_beginner": "What defines AKI? What staging system is used?",
+        "hint_advanced": "Calculate his KDIGO stage. How does oliguria affect staging?",
+        "question": {
+            "prompt": "What KDIGO stage is this AKI?",
+            "options": [
+                {
+                    "text": "Stage 2 - Cr 2.0-2.9x baseline OR urine output less than 0.5 mL/kg/hr for 12+ hours",
+                    "correct": true
+                },
+                {
+                    "text": "Stage 1 - Cr only doubled, not tripled",
+                    "correct": false
+                },
+                {
+                    "text": "Stage 3 - any AKI requiring hospitalization is stage 3",
+                    "correct": false
+                },
+                {
+                    "text": "Not AKI - creatinine must exceed 4.0 to qualify",
+                    "correct": false
+                },
+                {
+                    "text": "Cannot stage without knowing urine sodium and osmolality",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "KDIGO Stage 2: Cr 2.0-2.9x baseline (his is 2.1x) OR UOP <0.5 mL/kg/hr for \u226512 hours. His UOP of 350 mL/12h in a ~70kg patient = ~0.4 mL/kg/hr, also meeting Stage 2 criteria by urine output.",
+                "incorrect": "KDIGO staging: Stage 1 (1.5-1.9x or UOP <0.5 for 6-12h), Stage 2 (2.0-2.9x or UOP <0.5 for \u226512h), Stage 3 (\u22653x, Cr \u22654, or UOP <0.3 for \u226524h, or RRT). His Cr is 2.1x baseline = Stage 2."
+            },
+            "teaching": "<h4>\ud83d\udcda KDIGO AKI Staging</h4>\n                    <table>\n                        <tr><th>Stage</th><th>Creatinine Criteria</th><th>Urine Output Criteria</th></tr>\n                        <tr><td>1</td><td>1.5-1.9x baseline OR \u22650.3 mg/dL increase</td><td>Less than 0.5 mL/kg/hr for 6-12h</td></tr>\n                        <tr><td>2</td><td>2.0-2.9x baseline</td><td>Less than 0.5 mL/kg/hr for \u226512h</td></tr>\n                        <tr><td>3</td><td>\u22653x baseline OR Cr \u22654 OR RRT initiation</td><td>Less than 0.3 mL/kg/hr for \u226524h OR anuria \u226512h</td></tr>\n                    </table>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Determining Etiology",
+        "content": "<div class=\"narrative\">\n                <p>You categorize AKI as prerenal, intrinsic, or postrenal.</p>\n                <p style=\"margin-top:12px;\"><strong>History:</strong> Started on vancomycin and piperacillin-tazobactam for pneumonia. Received IV contrast for CT 24 hours ago.</p>\n                <p><strong>Exam:</strong> Dry mucous membranes, BP 98/62, no Foley catheter</p>\n                <p><strong>Meds:</strong> Home lisinopril continued, ibuprofen given yesterday for fever</p>\n            </div>",
+        "hint_beginner": "What are the three categories of AKI? What clues point to each?",
+        "hint_advanced": "He has multiple potential insults - how do you prioritize the differential?",
+        "question": {
+            "prompt": "What is the MOST likely primary etiology?",
+            "options": [
+                {
+                    "text": "Prerenal azotemia - hypotension, volume depletion, ACE-I and NSAID use all reducing renal perfusion",
+                    "correct": true
+                },
+                {
+                    "text": "Contrast-induced nephropathy - recent CT with IV contrast",
+                    "correct": false
+                },
+                {
+                    "text": "Vancomycin nephrotoxicity - known to cause AKI",
+                    "correct": false
+                },
+                {
+                    "text": "Acute interstitial nephritis from piperacillin-tazobactam",
+                    "correct": false
+                },
+                {
+                    "text": "Obstructive uropathy - needs bladder scan to rule out",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Multiple factors point to prerenal: hypotension/volume depletion (dry, BP 98/62), ACE-I (blocks efferent arteriolar constriction), NSAID (blocks afferent arteriolar dilation). The \"triple whammy\" of dehydration + ACE-I + NSAID is a classic prerenal setup. Address this first.",
+                "incorrect": "While multiple nephrotoxins are present, the clinical picture (hypotension, dry, triple whammy of volume depletion + ACE-I + NSAID) strongly suggests prerenal. Contrast nephropathy and drug nephrotoxicity are possible contributors but prerenal should be addressed first."
+            },
+            "teaching": "<h4>\ud83d\udcda AKI Differential</h4>\n                    <p><strong>Prerenal (most common, ~60%):</strong></p>\n                    <ul>\n                        <li>Volume depletion, hypotension, heart failure</li>\n                        <li>\"Triple whammy\": dehydration + ACE-I/ARB + NSAID</li>\n                    </ul>\n                    <p><strong>Intrinsic renal:</strong></p>\n                    <ul>\n                        <li>ATN (ischemic or nephrotoxic)</li>\n                        <li>AIN (drug-induced interstitial nephritis)</li>\n                        <li>Glomerulonephritis</li>\n                    </ul>\n                    <p><strong>Postrenal:</strong> Obstruction (BPH, stones, tumor)</p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Diagnostic Workup",
+        "content": "<div class=\"narrative\">\n                <p>You send urine studies:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Urine Na:</strong> 8 mEq/L</li>\n                    <li><strong>Urine Cr:</strong> 120 mg/dL</li>\n                    <li><strong>Serum Cr:</strong> 2.1 mg/dL</li>\n                    <li><strong>FENa:</strong> ?</li>\n                    <li><strong>Urine sediment:</strong> Few hyaline casts, no cells</li>\n                </ul>\n            </div>",
+        "hint_beginner": "How do you calculate FENa? What does it tell you?",
+        "hint_advanced": "When is FENa unreliable? What about FEUrea?",
+        "question": {
+            "prompt": "The FENa calculates to 0.3%. What does this indicate?",
+            "options": [
+                {
+                    "text": "Prerenal azotemia - FENa less than 1% indicates avid sodium retention consistent with renal hypoperfusion",
+                    "correct": true
+                },
+                {
+                    "text": "Intrinsic renal disease - low FENa rules out prerenal causes",
+                    "correct": false
+                },
+                {
+                    "text": "FENa is uninterpretable without knowing urine osmolality",
+                    "correct": false
+                },
+                {
+                    "text": "Need to repeat FENa after IV fluids to get accurate result",
+                    "correct": false
+                },
+                {
+                    "text": "Postrenal obstruction - low FENa is characteristic of obstruction",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "FENa <1% indicates the kidneys are avidly retaining sodium, which occurs in prerenal states (hypoperfusion). The kidneys are \"sensing\" low volume and holding onto sodium. FENa >2% typically indicates ATN (tubules damaged, cannot reabsorb sodium). His 0.3% strongly supports prerenal etiology.",
+                "incorrect": "FENa = (Urine Na \u00d7 Serum Cr) / (Serum Na \u00d7 Urine Cr) \u00d7 100. FENa <1% = prerenal (sodium avidity). FENa >2% = intrinsic (ATN). His 0.3% confirms prerenal azotemia. Note: FENa unreliable on diuretics; use FEUrea instead."
+            },
+            "teaching": "<h4>\ud83d\udcda Urine Studies in AKI</h4>\n                    <table>\n                        <tr><th>Parameter</th><th>Prerenal</th><th>ATN (Intrinsic)</th></tr>\n                        <tr><td>FENa</td><td>Less than 1%</td><td>Greater than 2%</td></tr>\n                        <tr><td>Urine Na</td><td>Less than 20</td><td>Greater than 40</td></tr>\n                        <tr><td>Urine osmolality</td><td>Greater than 500</td><td>Less than 350</td></tr>\n                        <tr><td>BUN:Cr ratio</td><td>Greater than 20:1</td><td>Less than 15:1</td></tr>\n                        <tr><td>Urine sediment</td><td>Bland/hyaline casts</td><td>Muddy brown casts</td></tr>\n                    </table>\n                    <p><em>If on diuretics: Use FEUrea (less than 35% = prerenal)</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Management",
+        "content": "<div class=\"narrative\">\n                <p>You diagnose prerenal AKI. Now you plan management.</p>\n            </div>",
+        "hint_beginner": "What is the treatment for prerenal AKI?",
+        "hint_advanced": "Which medications should be held? When can they be restarted?",
+        "question": {
+            "prompt": "What is the most appropriate management?",
+            "options": [
+                {
+                    "text": "IV fluid resuscitation, hold ACE-I and NSAID, monitor Cr and urine output; avoid nephrotoxins if possible",
+                    "correct": true
+                },
+                {
+                    "text": "Start low-dose dopamine to improve renal perfusion",
+                    "correct": false
+                },
+                {
+                    "text": "Urgent hemodialysis consult for Stage 2 AKI",
+                    "correct": false
+                },
+                {
+                    "text": "Continue ACE-I for renal protection but stop NSAID",
+                    "correct": false
+                },
+                {
+                    "text": "Diuretics to increase urine output and \"flush\" the kidneys",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Prerenal AKI treatment: 1) Restore volume (IV fluids), 2) Hold offending medications (ACE-I, NSAID), 3) Monitor closely (Cr, UOP), 4) Minimize additional insults (avoid contrast, nephrotoxins). Low-dose dopamine has no proven benefit. Diuretics may worsen prerenal AKI.",
+                "incorrect": "Treat the underlying cause: volume resuscitation and remove offending meds. Hold ACE-I (not protective in acute setting) and NSAID. Dopamine does not improve outcomes in AKI. Diuretics can worsen prerenal state. Dialysis not indicated for Stage 2 without urgent indications."
+            },
+            "teaching": "<h4>\ud83d\udcda AKI Management Principles</h4>\n                    <p><strong>General approach:</strong></p>\n                    <ul>\n                        <li>Identify and treat underlying cause</li>\n                        <li>Optimize volume status</li>\n                        <li>Avoid nephrotoxins</li>\n                        <li>Adjust medication dosing for renal function</li>\n                    </ul>\n                    <p><strong>Medications to HOLD:</strong></p>\n                    <ul>\n                        <li>ACE-I/ARB (can restart when Cr stabilizes)</li>\n                        <li>NSAIDs</li>\n                        <li>Metformin (lactic acidosis risk)</li>\n                        <li>Potassium-sparing diuretics</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Dialysis Indications",
+        "content": "<div class=\"narrative\">\n                <p>A different patient: <span class=\"highlight\">58-year-old woman</span> with AKI Stage 3. Despite fluids, her labs worsen:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>K:</strong> 6.8 mEq/L with peaked T waves on ECG</li>\n                    <li><strong>pH:</strong> 7.18</li>\n                    <li><strong>HCO3:</strong> 12 mEq/L</li>\n                    <li><strong>Cr:</strong> 8.2 mg/dL</li>\n                    <li><strong>Patient:</strong> Confused, volume overloaded</li>\n                </ul>\n            </div>",
+        "hint_beginner": "What are the indications for urgent dialysis?",
+        "hint_advanced": "What is the mnemonic for dialysis indications?",
+        "question": {
+            "prompt": "Does this patient need urgent dialysis?",
+            "options": [
+                {
+                    "text": "Yes - she has multiple urgent indications: refractory hyperkalemia with ECG changes, severe metabolic acidosis, and uremic encephalopathy",
+                    "correct": true
+                },
+                {
+                    "text": "No - try medical management first with insulin/glucose, bicarbonate, and diuretics",
+                    "correct": false
+                },
+                {
+                    "text": "No - dialysis is only indicated when creatinine exceeds 10 mg/dL",
+                    "correct": false
+                },
+                {
+                    "text": "Yes but only for hyperkalemia - the other findings are not dialysis indications",
+                    "correct": false
+                },
+                {
+                    "text": "Need to wait for nephrology consult before initiating dialysis",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "She has MULTIPLE urgent dialysis indications (AEIOU): Acidosis (pH 7.18, severe), Electrolyte (K 6.8 with ECG changes - refractory), Ingestion (not applicable), Overload (volume overloaded), Uremia (encephalopathy - confused). Any single indication is sufficient; she has several.",
+                "incorrect": "The AEIOU indications for urgent dialysis: Acidosis (severe/refractory), Electrolytes (hyperkalemia with ECG changes), Ingestion (toxic alcohols, lithium), Overload (pulmonary edema refractory to diuretics), Uremia (encephalopathy, pericarditis). She meets multiple criteria."
+            },
+            "teaching": "<h4>\ud83d\udcda Urgent Dialysis Indications (AEIOU)</h4>\n                    <table>\n                        <tr><th>Letter</th><th>Indication</th><th>Details</th></tr>\n                        <tr><td>A</td><td>Acidosis</td><td>Severe (pH less than 7.1) or refractory metabolic acidosis</td></tr>\n                        <tr><td>E</td><td>Electrolytes</td><td>Hyperkalemia refractory to medical management or with ECG changes</td></tr>\n                        <tr><td>I</td><td>Ingestion</td><td>Toxic alcohols (methanol, ethylene glycol), lithium, salicylates</td></tr>\n                        <tr><td>O</td><td>Overload</td><td>Volume overload refractory to diuretics (pulmonary edema)</td></tr>\n                        <tr><td>U</td><td>Uremia</td><td>Encephalopathy, pericarditis, bleeding</td></tr>\n                    </table>",
+            "points": 15
+        }
+    }
+,
+{
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\"><p>You assess the severity and risk factors to guide management intensity.</p></div>",
+        "hint_beginner": "What clinical features indicate higher severity?",
+        "hint_advanced": "What validated scoring systems exist for this condition?",
+        "question": {
+                "prompt": "Which factor most influences prognosis and management intensity?",
+                "options": [
+                        {
+                                "text": "Integration of clinical presentation, comorbidities, vital signs, and objective findings",
+                                "correct": true
+                        },
+                        {
+                                "text": "A single laboratory value in isolation",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient age alone",
+                                "correct": false
+                        },
+                        {
+                                "text": "Time of presentation to the ED",
+                                "correct": false
+                        },
+                        {
+                                "text": "Insurance status or ability to follow up",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Clinical decision-making integrates multiple factors including presentation severity, comorbidities, vital signs, laboratory findings, and patient-specific factors. No single element should drive management in isolation.",
+                        "incorrect": "Risk stratification requires integration of multiple clinical factors, not reliance on any single element."
+                },
+                "teaching": "<h4>\ud83d\udcca Risk Stratification Principles</h4><ul><li>Assess severity of presenting illness</li><li>Consider relevant comorbidities</li><li>Review vital signs and trajectory</li><li>Integrate laboratory and imaging findings</li><li>Apply validated scoring tools when available</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Treatment Selection",
+        "content": "<div class=\"narrative\"><p>Based on your assessment, you must select the most appropriate initial treatment approach.</p></div>",
+        "hint_beginner": "What are the first-line evidence-based treatments?",
+        "hint_advanced": "How do patient-specific factors modify treatment selection?",
+        "question": {
+                "prompt": "What principle guides initial treatment selection?",
+                "options": [
+                        {
+                                "text": "Evidence-based guidelines tailored to patient-specific factors (comorbidities, allergies, severity)",
+                                "correct": true
+                        },
+                        {
+                                "text": "Always use the newest available medication",
+                                "correct": false
+                        },
+                        {
+                                "text": "Most expensive treatments provide best outcomes",
+                                "correct": false
+                        },
+                        {
+                                "text": "Whatever was used for the last similar patient",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient preference alone should determine treatment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Treatment should follow current evidence-based guidelines while accounting for individual patient factors including comorbidities, allergies, contraindications, disease severity, and patient preferences when appropriate.",
+                        "incorrect": "Evidence-based medicine combined with patient-centered care guides optimal treatment selection."
+                },
+                "teaching": "<h4>\ud83d\udc8a Treatment Principles</h4><ul><li>Follow current evidence-based guidelines</li><li>Assess for contraindications and allergies</li><li>Consider patient-specific factors</li><li>Start with first-line agents unless contraindicated</li><li>Monitor for response and adverse effects</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Monitoring and Reassessment",
+        "content": "<div class=\"narrative\"><p>After initiating treatment, you must establish monitoring parameters and reassessment criteria.</p></div>",
+        "hint_beginner": "What should you monitor to assess treatment response?",
+        "hint_advanced": "What triggers require escalation or change in management?",
+        "question": {
+                "prompt": "What is most important in the monitoring plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for expected response timeline and specific triggers for escalation",
+                                "correct": true
+                        },
+                        {
+                                "text": "Scheduling a follow-up appointment",
+                                "correct": false
+                        },
+                        {
+                                "text": "Completing documentation thoroughly",
+                                "correct": false
+                        },
+                        {
+                                "text": "Ensuring patient satisfaction scores",
+                                "correct": false
+                        },
+                        {
+                                "text": "Waiting for specialist consultation before any reassessment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Effective monitoring requires defining what improvement to expect and when, establishing clear escalation triggers, and setting specific reassessment timepoints. This allows early identification of treatment failure.",
+                        "incorrect": "While all aspects of care matter, defining response criteria and escalation triggers is critical for patient safety."
+                },
+                "teaching": "<h4>\ud83d\udcc8 Monitoring Essentials</h4><ul><li>Define expected response and timeline</li><li>Establish vital sign parameters</li><li>Set escalation triggers (specific criteria for concern)</li><li>Plan reassessment intervals</li><li>Document baseline for comparison</li></ul>",
+                "points": 10
+        }
+}];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#14b8a6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: var(--rdx-teal-light,#ccfbf1)' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 AKI Pathophysiology</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Acute Kidney Injury"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+
+<div style="max-width:800px;margin:24px auto;padding:16px 20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+<a href="../adventure-hub.html" style="padding:10px 20px;background:#0f766e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">🎮 Adventure Hub</a>
+<a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:#f1f5f9;color:#0f766e;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0">📊 Dashboard</a>
+<a href="../index.html" style="padding:10px 20px;background:#f1f5f9;color:#334155;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0">🏠 Home</a>
+</div>
+</body>
+</html>

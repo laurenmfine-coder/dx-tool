@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive clinical adventure: Neuroleptic Malignant Syndrome. Make real-time diagnostic decisions in this branching case scenario on ReasonDx.">
+<title>Neuroleptic Malignant Syndrome Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --primary: #0f766e; --primary-dark: #0f2744; --accent: #7c3aed;
+            --success: #0f766e; --warning: #d97706; --danger:var(--rdx-danger);
+            --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
+            --text: #1e293b; --text-secondary: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.6; min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 32px 24px; border-radius: 16px; margin-bottom: 24px; }
+        .header h1 { font-size: 1.75rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 12px; }
+        .scene { background:var(--rdx-bg-card); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        .scene-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .scene-icon { font-size: 1.5rem; }
+        .scene-title { font-size: 1.1rem; font-weight: 700; }
+        .scene-tag { background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-left: auto; }
+        .narrative { font-size: 1rem; color: var(--text); margin-bottom: 20px; padding: 16px; background: #f1f5f9; border-radius: 12px; border-left:4px solid var(--rdx-teal); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 16px 0; }
+        .vital { background: #f8fafc; padding: 12px; border-radius:12px; text-align: center; border: 1px solid var(--border); }
+        .vital-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        .vital-value.critical { color: var(--danger); }
+        .choices { display: flex; flex-direction: column; gap: 10px; }
+        .choice-btn { background:var(--rdx-bg-card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn:hover { border-color: var(--accent); background: #f8fafc; }
+        .choice-btn.selected { border-color: var(--accent); background: #f5f3ff; }
+        .choice-btn.correct { border-color: var(--success); background: #f0fdfa; }
+        .choice-btn.incorrect { border-color: var(--danger); background: #fef2f2; }
+        .choice-letter { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+        .choice-text { flex: 1; font-size: 0.95rem; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #f0fdfa; border: 1px solid #0f766e; color: #065f46; }
+        .feedback.incorrect { background: #fef2f2; border: 1px solid #dc2626; color: #991b1b; }
+        .feedback h4 { font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .teaching-point { background: #f5f3ff; border: 1px solid #7c3aed; border-radius: 12px; padding: 16px; margin-top: 16px; }
+        .teaching-point h4 { color: #5b21b6; font-size: 0.85rem; margin-bottom: 8px; }
+        .teaching-point p { color: #6b21a8; font-size: 0.9rem; }
+        .nav-btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius:12px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; margin-top: 16px; }
+        .nav-btn:hover { background: #6d28d9; }
+        .nav-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+        .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s; }
+        .hidden { display: none !important; }
+        .labs-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        .labs-table th, .labs-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        .labs-table th { background: #f8fafc; font-weight: 600; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; }
+        .abnormal { color: var(--danger); font-weight: 600; }
+        .summary-card { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border: 1px solid #7c3aed; border-radius: 16px; padding: 24px; margin-top: 20px; }
+        .summary-card h3 { color: #5b21b6; margin-bottom: 16px; }
+        .key-points { list-style: none; }
+        .key-points li { padding: 8px 0; padding-left: 24px; position: relative; color: #6b21a8; }
+        .key-points li::before { content: "✓"; position: absolute; left: 0; color: #7c3aed; font-weight: bold; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th { background: var(--accent); color: white; padding: 12px; text-align: left; }
+        .comparison-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        @media (max-width: 640px) {
+            .container { padding: 16px; }
+            .scene { padding: 20px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
+        
+        <header class="header">
+            <h1>🧠 Neuroleptic Malignant Syndrome</h1>
+            <p>A 34-year-old man with schizophrenia presents with altered mental status and rigidity</p>
+            <span class="badge">⚡ Neurologic Emergency</span>
+        </header>
+
+        <!-- Scene 1: Initial Presentation -->
+        <div class="scene" id="scene1">
+            <div class="scene-header">
+                <span class="scene-icon">🏥</span>
+                <span class="scene-title">ED Presentation</span>
+                <span class="scene-tag">Scene 1 of 6</span>
+            </div>
+            <div class="narrative">
+                A 34-year-old man with schizophrenia is brought to the ED by group home staff. Over the past 2 days, he has become increasingly confused and developed a fever. His haloperidol was increased 5 days ago for worsening psychosis. He appears to be "locked up" and is barely verbal.
+            </div>
+            <div class="vitals-grid">
+                <div class="vital"><div class="vital-label">HR</div><div class="vital-value critical">124</div></div>
+                <div class="vital"><div class="vital-label">BP</div><div class="vital-value">165/105</div></div>
+                <div class="vital"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+                <div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">94% RA</div></div>
+                <div class="vital"><div class="vital-label">Temp</div><div class="vital-value critical">40.2°C</div></div>
+            </div>
+            <p style="margin: 16px 0; font-size: 0.95rem;"><strong>Exam:</strong> Diaphoretic, minimally responsive to verbal commands. Severe generalized "lead-pipe" rigidity. No tremor at rest. Pupils 4mm bilaterally, reactive.</p>
+            <p style="margin-bottom: 20px; font-weight: 600;">What is the most likely diagnosis?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Serotonin syndrome</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Neuroleptic malignant syndrome (NMS)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Malignant hyperthermia</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Meningitis/encephalitis</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+            <button class="nav-btn hidden" id="next1" onclick="nextScene(2)">Continue →</button>
+        </div>
+
+        <!-- Scene 2: Labs -->
+        <div class="scene hidden" id="scene2">
+            <div class="scene-header">
+                <span class="scene-icon">🔬</span>
+                <span class="scene-title">Laboratory Evaluation</span>
+                <span class="scene-tag">Scene 2 of 6</span>
+            </div>
+            <div class="narrative">
+                You suspect NMS and order a comprehensive laboratory evaluation while starting supportive care.
+            </div>
+            <table class="labs-table">
+                <tr><th colspan="2">Laboratory Results</th></tr>
+                <tr><td>WBC</td><td class="abnormal">15,800/μL (mild leukocytosis)</td></tr>
+                <tr><td>Creatine Kinase (CK)</td><td class="abnormal">24,500 U/L (normal < 200)</td></tr>
+                <tr><td>Creatinine</td><td class="abnormal">2.1 mg/dL (normal 0.7-1.3)</td></tr>
+                <tr><td>Potassium</td><td class="abnormal">5.6 mEq/L</td></tr>
+                <tr><td>AST</td><td class="abnormal">285 U/L</td></tr>
+                <tr><td>Iron</td><td class="abnormal">28 μg/dL (low)</td></tr>
+                <tr><td>Myoglobin (urine)</td><td class="abnormal">Positive</td></tr>
+            </table>
+            <p style="margin-bottom: 20px; font-weight: 600;">What laboratory finding is MOST characteristic of NMS (though not specific)?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Leukocytosis</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Elevated CK (creatine kinase)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Elevated liver enzymes</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Low serum iron</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+            <button class="nav-btn hidden" id="next2" onclick="nextScene(3)">Continue →</button>
+        </div>
+
+        <!-- Scene 3: Differentiation -->
+        <div class="scene hidden" id="scene3">
+            <div class="scene-header">
+                <span class="scene-icon">🔍</span>
+                <span class="scene-title">Differential Diagnosis</span>
+                <span class="scene-tag">Scene 3 of 6</span>
+            </div>
+            <div class="narrative">
+                The consulting resident asks how you differentiated NMS from serotonin syndrome, as both can present with altered mental status and hyperthermia.
+            </div>
+            <table class="comparison-table">
+                <tr><th>Feature</th><th>This Patient</th></tr>
+                <tr><td>Onset after medication change</td><td>5 days (gradual)</td></tr>
+                <tr><td>Rigidity type</td><td>Lead-pipe (severe)</td></tr>
+                <tr><td>Reflexes</td><td>Normal to decreased</td></tr>
+                <tr><td>Tremor/myoclonus</td><td>Absent</td></tr>
+                <tr><td>GI symptoms</td><td>Minimal</td></tr>
+                <tr><td>Pupils</td><td>Normal</td></tr>
+            </table>
+            <p style="margin-bottom: 20px; font-weight: 600;">Which feature BEST distinguishes NMS from serotonin syndrome?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Presence of hyperthermia</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Lead-pipe rigidity vs. hyperreflexia/clonus</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Elevated CK levels</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Mental status changes</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+            <button class="nav-btn hidden" id="next3" onclick="nextScene(4)">Continue →</button>
+        </div>
+
+        <!-- Scene 4: Initial Management -->
+        <div class="scene hidden" id="scene4">
+            <div class="scene-header">
+                <span class="scene-icon">💊</span>
+                <span class="scene-title">Initial Management</span>
+                <span class="scene-tag">Scene 4 of 6</span>
+            </div>
+            <div class="narrative">
+                You confirm the diagnosis of NMS. The patient's temperature is now 40.5°C despite cooling measures. The CK continues to rise. You need to implement definitive treatment.
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">What is the MOST critical initial intervention?</p>
+            <div class="choices">
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Stop all dopamine-blocking agents and aggressively cool</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Start dantrolene immediately</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Begin bromocriptine and continue antipsychotic</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Administer IV benzodiazepines only</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+            <button class="nav-btn hidden" id="next4" onclick="nextScene(5)">Continue →</button>
+        </div>
+
+        <!-- Scene 5: Pharmacologic Treatment -->
+        <div class="scene hidden" id="scene5">
+            <div class="scene-header">
+                <span class="scene-icon">💉</span>
+                <span class="scene-title">Pharmacologic Treatment</span>
+                <span class="scene-tag">Scene 5 of 6</span>
+            </div>
+            <div class="narrative">
+                You've stopped all antipsychotics and started aggressive cooling. The patient's temperature is still 40.1°C, and he remains severely rigid. The ICU team is ready to start specific pharmacotherapy for NMS.
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">Which medication combination is MOST appropriate for severe NMS?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Cyproheptadine + benzodiazepines</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Dantrolene alone</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Dantrolene + bromocriptine (or amantadine)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">High-dose corticosteroids</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback5"></div>
+            <button class="nav-btn hidden" id="next5" onclick="nextScene(6)">Continue →</button>
+        </div>
+
+        <!-- Scene 6: Summary -->
+        <div class="scene hidden" id="scene6">
+            <div class="scene-header">
+                <span class="scene-icon">🎓</span>
+                <span class="scene-title">Case Summary</span>
+                <span class="scene-tag">Scene 6 of 6</span>
+            </div>
+            <div class="narrative">
+                Day 7: After stopping haloperidol, aggressive cooling, IV fluids, dantrolene, and bromocriptine, the patient's rigidity has resolved. Temperature normalized on day 3. CK peaked at 45,000 but is now trending down. He is being transferred out of the ICU for monitoring and psychiatric re-evaluation.
+            </div>
+            <div class="teaching-point">
+                <h4>📊 NMS vs Serotonin Syndrome vs Malignant Hyperthermia</h4>
+                <table class="comparison-table" style="margin-top: 12px;">
+                    <tr><th>Feature</th><th>NMS</th><th>Serotonin Syndrome</th><th>Malignant Hyperthermia</th></tr>
+                    <tr><td>Onset</td><td>Days to weeks</td><td>Hours to < 24h</td><td>Minutes (OR)</td></tr>
+                    <tr><td>Rigidity</td><td>Lead-pipe</td><td>Mild (lower > upper)</td><td>Masseter then generalized</td></tr>
+                    <tr><td>Reflexes</td><td>Normal/↓</td><td>↑↑ + Clonus</td><td>Absent (paralysis)</td></tr>
+                    <tr><td>Treatment</td><td>Dantrolene ± DA agonist</td><td>Cyproheptadine</td><td>Dantrolene</td></tr>
+                </table>
+            </div>
+            <div class="summary-card">
+                <h3>🔑 Key Learning Points</h3>
+                <ul class="key-points">
+                    <li><strong>NMS tetrad:</strong> Hyperthermia, rigidity (lead-pipe), altered mental status, autonomic instability</li>
+                    <li><strong>Timeline:</strong> Develops over days to weeks after starting/increasing antipsychotic</li>
+                    <li><strong>CK elevation:</strong> Often markedly elevated (>1000 U/L); monitor for rhabdomyolysis</li>
+                    <li><strong>First step:</strong> STOP the offending agent immediately</li>
+                    <li><strong>Treatment:</strong> Supportive care + cooling + dantrolene (muscle relaxant) ± bromocriptine/amantadine (dopamine agonists)</li>
+                    <li><strong>Complications:</strong> Rhabdomyolysis, AKI, aspiration, DIC, respiratory failure</li>
+                    <li><strong>Restarting antipsychotics:</strong> Wait at least 2 weeks; use a different class with lower D2 affinity</li>
+                </ul>
+            </div>
+            <div class="teaching-point">
+                <h4>⚠️ High-Risk Medications for NMS</h4>
+                <p><strong>Highest risk:</strong> High-potency typical antipsychotics (haloperidol, fluphenazine)<br>
+                <strong>Moderate risk:</strong> Atypical antipsychotics, metoclopramide (high doses)<br>
+                <strong>Risk factors:</strong> Dehydration, agitation, recent dose increase, polypharmacy, prior NMS episode</p>
+            </div>
+            <button class="nav-btn" onclick="location.href='../adventure-hub.html'">← Back to Adventures</button>
+            <button class="nav-btn" style="margin-left: 12px; background: var(--success);" onclick="location.href='../deep-dive-player.html?topic=neuroleptic-malignant-syndrome'">📖 Deep Dive</button>
+        </div>
+    </div>
+
+    <script>
+        let currentScene = 1;
+        const totalScenes = 6;
+        
+        function updateProgress() {
+            const progress = ((currentScene - 1) / (totalScenes - 1)) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        function checkAnswer(btn, scene) {
+            const choices = btn.parentElement.querySelectorAll('.choice-btn');
+            const isCorrect = btn.dataset.correct === 'true';
+            
+            choices.forEach(c => {
+                c.disabled = true;
+                if (c.dataset.correct === 'true') c.classList.add('correct');
+                else if (c === btn && !isCorrect) c.classList.add('incorrect');
+            });
+            
+            const feedback = document.getElementById('feedback' + scene);
+            feedback.classList.add('show');
+            
+            const feedbackContent = {
+                1: {
+                    correct: "Correct! Classic NMS: recent antipsychotic change + fever + lead-pipe rigidity + altered mental status + autonomic instability. Onset is typically days to weeks after medication change.",
+                    incorrect: "The combination of recent antipsychotic dose increase, high fever, lead-pipe rigidity, AMS, and autonomic instability is classic for NMS. Serotonin syndrome typically has hyperreflexia and clonus, not lead-pipe rigidity."
+                },
+                2: {
+                    correct: "Correct! Elevated CK is the most characteristic lab finding in NMS, reflecting muscle breakdown from sustained rigidity. Levels can exceed 10,000-100,000 U/L. This also helps monitor for rhabdomyolysis.",
+                    incorrect: "While all these findings can occur in NMS, elevated CK is the most characteristic and helps monitor disease severity and risk of rhabdomyolysis. Low iron is an interesting marker but less specific."
+                },
+                3: {
+                    correct: "Correct! Lead-pipe rigidity (extrapyramidal) vs hyperreflexia/clonus (neuromuscular hyperactivity) is the key distinguishing feature. NMS = dopamine blockade = rigidity. Serotonin syndrome = serotonin excess = hyperreflexia/clonus.",
+                    incorrect: "Both conditions cause hyperthermia and AMS. The key difference is the neuromuscular findings: NMS has lead-pipe rigidity with normal/decreased reflexes; serotonin syndrome has hyperreflexia, clonus, and only mild rigidity."
+                },
+                4: {
+                    correct: "Correct! The FIRST and most critical step is to STOP all dopamine-blocking agents. This includes antipsychotics, metoclopramide, and antiemetics. Aggressive cooling and supportive care are simultaneously initiated.",
+                    incorrect: "While dantrolene and bromocriptine may be used, the FIRST step is always to STOP the offending dopamine-blocking agent. Pharmacotherapy is added for severe cases not responding to supportive care."
+                },
+                5: {
+                    correct: "Correct! Severe NMS is treated with dantrolene (direct muscle relaxant for rigidity/hyperthermia) PLUS a dopamine agonist (bromocriptine or amantadine) to restore dopaminergic tone. Benzodiazepines are adjunctive for agitation.",
+                    incorrect: "Cyproheptadine is for serotonin syndrome, not NMS. For severe NMS, the combination of dantrolene (muscle relaxant) plus a dopamine agonist (bromocriptine/amantadine) addresses both the rigidity and the underlying dopamine deficiency."
+                }
+            };
+            
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = `<h4>✓ Correct!</h4><p>${feedbackContent[scene].correct}</p>`;
+            } else {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = `<h4>✗ Not quite</h4><p>${feedbackContent[scene].incorrect}</p>`;
+            }
+            
+            document.getElementById('next' + scene).classList.remove('hidden');
+        }
+        
+        function nextScene(scene) {
+            document.getElementById('scene' + (scene - 1)).classList.add('hidden');
+            document.getElementById('scene' + scene).classList.remove('hidden');
+            currentScene = scene;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        updateProgress();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Neuroleptic Malignant Syndrome Adventure"
+         data-key-points="🔑 Key Learning Points, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:var(--rdx-bg-hover);border-radius:12px;border: 1px solid #e2e8f0">
+<h3 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/30662385/" target="_blank" style="color: #64748b">AHA/ASA Stroke Guidelines</a> — Stroke 2019</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/25646267/" target="_blank" style="color: #64748b">AAN Epilepsy Practice Parameter</a> — Neurology 2015</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK499849/" target="_blank" style="color: #64748b">Multiple Sclerosis - NCBI Bookshelf</a> — StatPearls</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

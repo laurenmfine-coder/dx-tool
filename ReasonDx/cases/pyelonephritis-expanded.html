@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: Pyelonephritis. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Pyelonephritis - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background:linear-gradient(135deg,#0f766e,#14b8a6); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid #e2e8f0; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #f3e8ff; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a855f7; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(168,85,247,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
+        .question-box { background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #f3e8ff; margin-bottom: 16px; line-height: 1.5; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; flex-shrink: 0; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #0f766e; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; padding: 14px 28px; border-radius:12px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #d8b4fe); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #a855f7; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; font-size: 0.95rem; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal-light,#ccfbf1); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: #d8b4fe; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div class="diff-label">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK519537/" target="_blank" rel="noopener">Pyelonephritis - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
+
+const stages = [
+    {
+        title: "The Febrile Patient",
+        content: `<div class="narrative"><p>A <span class="highlight">28-year-old woman</span> presents with <span class="critical">fever, chills, and flank pain</span> for 2 days. She had dysuria and urinary frequency starting 5 days ago.</p></div>
+        <div class="socratic-prompt"><h4>Before Examining the Patient</h4><p>She started with lower urinary tract symptoms (dysuria, frequency) and now has fever and flank pain. What does this progression tell you about the infection's location?</p></div>`,
+        hint_beginner: "Lower tract = bladder (cystitis). Fever + flank pain = kidney involvement.",
+        hint_advanced: "How does bacterial virulence (P-fimbriae) relate to ascending infection?",
+        question: {
+            prompt: "What is the HALLMARK finding that distinguishes pyelonephritis from uncomplicated cystitis?",
+            options: [
+                { text: "Costovertebral angle tenderness (CVA tenderness) - indicates kidney involvement", correct: true },
+                { text: "Dysuria and urinary frequency", correct: false },
+                { text: "Positive urine leukocyte esterase", correct: false },
+                { text: "Bacteriuria on urinalysis", correct: false }
+            ],
+            explanation: {
+                correct: "Excellent! CVA tenderness is the clinical hallmark of pyelonephritis. Cystitis causes bladder symptoms but NO fever and NO flank/CVA tenderness.",
+                incorrect: "Dysuria, frequency, pyuria, and bacteriuria occur in BOTH conditions. The distinguishing features of pyelonephritis are: CVA tenderness and fever."
+            },
+            teaching: `<h4>Cystitis vs Pyelonephritis</h4><table class="comparison-table"><tr><th>Feature</th><th>Cystitis</th><th>Pyelonephritis</th></tr><tr><td>Location</td><td>Bladder</td><td>Kidney</td></tr><tr><td>Symptoms</td><td>Dysuria, frequency</td><td>Fever, chills, flank pain</td></tr><tr><td>Exam</td><td>Suprapubic tenderness</td><td><strong>CVA tenderness</strong></td></tr><tr><td>Systemic</td><td>No fever</td><td>Fever, tachycardia</td></tr></table>`,
+            why_chain: [{q: "Why does pyelonephritis cause flank pain?", a: "The renal capsule is stretched by kidney inflammation. The capsule is richly innervated and refers pain to the flank."}, {q: "What causes fever and chills?", a: "Bacterial invasion of kidney triggers systemic inflammation. Gram-negative bacteremia occurs in 20-30% of cases."}],
+            points: 10
+        }
+    },
+    {
+        title: "Complicated vs Uncomplicated",
+        content: `<div class="narrative"><p>You examine the patient:</p><ul><li><strong>Vitals:</strong> T 102.4°F, HR 105, BP 118/72</li><li><strong>Back:</strong> <span class="critical">Marked right CVA tenderness</span></li></ul></div>
+        <div class="socratic-prompt"><h4>Risk Stratification</h4><p>What factors would make this a "complicated" pyelonephritis requiring more aggressive management?</p></div>`,
+        hint_beginner: "Think: anatomic abnormalities, immunocompromise, pregnancy, male gender",
+        hint_advanced: "Why are diabetics at risk for emphysematous pyelonephritis?",
+        question: {
+            prompt: "Which factor makes pyelonephritis 'COMPLICATED'?",
+            options: [
+                { text: "Diabetes, pregnancy, urinary obstruction, or male gender", correct: true },
+                { text: "Temperature greater than 101°F", correct: false },
+                { text: "WBC count greater than 15,000", correct: false },
+                { text: "Bilateral CVA tenderness", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Complicated UTI involves factors increasing treatment failure risk: diabetes, obstruction, pregnancy, male gender, catheter, immunocompromise.",
+                incorrect: "Complicated is defined by host/anatomic factors, not severity markers. Male UTI is always complicated."
+            },
+            teaching: `<h4>Complicated vs Uncomplicated</h4><table class="comparison-table"><tr><th>Uncomplicated</th><th>Complicated</th></tr><tr><td>Young healthy woman</td><td>Diabetes mellitus</td></tr><tr><td>No anatomic abnormalities</td><td>Obstruction (stone, stricture)</td></tr><tr><td>Community-acquired</td><td>Pregnancy</td></tr><tr><td>Can treat outpatient</td><td>Male gender</td></tr></table>`,
+            why_chain: [{q: "Why is male UTI complicated?", a: "UTI in men is rare due to longer urethra. When it occurs, it usually indicates underlying abnormality."}, {q: "Why are diabetics high risk?", a: "Impaired immunity, glucosuria promotes growth, neuropathic bladder, risk of emphysematous pyelo."}],
+            points: 10
+        }
+    },
+    {
+        title: "Uropathogens",
+        content: `<div class="narrative"><p><strong>UA:</strong> Positive LE, positive nitrites, WBC 50-100/hpf, bacteria many<br><strong>CBC:</strong> WBC 16,400 with left shift</p></div>
+        <div class="socratic-prompt"><h4>Testing Interpretation</h4><p>What organism MOST commonly causes pyelonephritis? Which is suggested by positive nitrites?</p></div>`,
+        hint_beginner: "E. coli causes 80% of community-acquired UTI.",
+        hint_advanced: "Why don't Enterococcus and Pseudomonas produce positive nitrites?",
+        question: {
+            prompt: "Which organism causes approximately 80% of community-acquired pyelonephritis?",
+            options: [
+                { text: "Escherichia coli (E. coli)", correct: true },
+                { text: "Klebsiella pneumoniae", correct: false },
+                { text: "Enterococcus species", correct: false },
+                { text: "Pseudomonas aeruginosa", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! E. coli causes ~80% of cases. It produces positive nitrites (nitrate→nitrite conversion).",
+                incorrect: "E. coli causes 80% of pyelonephritis. It has P-fimbriae allowing ascent to kidney."
+            },
+            teaching: `<h4>Uropathogens</h4><table class="comparison-table"><tr><th>Organism</th><th>Frequency</th><th>Nitrite</th></tr><tr><td>E. coli</td><td>80%</td><td>Positive</td></tr><tr><td>Klebsiella</td><td>5-10%</td><td>Positive</td></tr><tr><td>Proteus</td><td>5%</td><td>Positive</td></tr><tr><td>Enterococcus</td><td>5%</td><td>Negative</td></tr></table>`,
+            why_chain: [{q: "Why is E. coli so common?", a: "P-fimbriae bind uroepithelial cells, resisting washout. UPEC strains have specific virulence factors."}, {q: "When suspect other organisms?", a: "Healthcare-associated, recent antibiotics, recurrent UTI, catheter."}],
+            points: 10
+        }
+    },
+    {
+        title: "When to Image",
+        content: `<div class="narrative"><p>This healthy young woman has uncomplicated pyelonephritis. Should you get imaging?</p></div>
+        <div class="socratic-prompt"><h4>Imaging Decision</h4><p>Imaging is NOT routine. When WOULD you order CT or ultrasound?</p></div>`,
+        hint_beginner: "Think: obstruction, abscess, treatment failure",
+        hint_advanced: "What findings would change management?",
+        question: {
+            prompt: "Which scenario MOST indicates need for renal imaging?",
+            options: [
+                { text: "No improvement after 48-72 hours of appropriate antibiotics", correct: true },
+                { text: "First episode in healthy young woman", correct: false },
+                { text: "Temperature of 103°F at presentation", correct: false },
+                { text: "WBC count of 18,000", correct: false }
+            ],
+            explanation: {
+                correct: "Yes! Failure to improve after 48-72h suggests obstruction, abscess, or emphysematous changes.",
+                incorrect: "High fever and elevated WBC don't mandate imaging if patient responds to treatment."
+            },
+            teaching: `<h4>Indications for Imaging</h4><ul><li>No improvement after 48-72h antibiotics</li><li>Complicated pyelonephritis (diabetes, stones)</li><li>Recurrent pyelonephritis</li><li>Concern for abscess</li><li>Severe sepsis</li></ul>`,
+            why_chain: [{q: "Why not image everyone?", a: "Most cases resolve with antibiotics. CT adds radiation and cost without changing management."}, {q: "What is emphysematous pyelo?", a: "Gas-forming infection in diabetics. 20-40% mortality. Often needs nephrectomy."}],
+            points: 10
+        }
+    },
+    {
+        title: "Outpatient Antibiotics",
+        content: `<div class="narrative"><p>This healthy woman can tolerate oral intake. You decide on outpatient treatment.</p></div>
+        <div class="socratic-prompt"><h4>Antibiotic Selection</h4><p>Which antibiotics achieve adequate renal tissue levels? (Some UTI drugs work only in bladder.)</p></div>`,
+        hint_beginner: "Fluoroquinolones reach kidney. Nitrofurantoin does NOT.",
+        hint_advanced: "Fluoroquinolone resistance is 20-30% in many areas.",
+        question: {
+            prompt: "Which antibiotic is CONTRAINDICATED for pyelonephritis?",
+            options: [
+                { text: "Nitrofurantoin - only achieves bladder levels, not renal tissue", correct: true },
+                { text: "Ciprofloxacin", correct: false },
+                { text: "Trimethoprim-sulfamethoxazole", correct: false },
+                { text: "Ceftriaxone", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Nitrofurantoin concentrates in bladder urine but NOT renal parenchyma. Great for cystitis, contraindicated for pyelo.",
+                incorrect: "Nitrofurantoin is the answer - excellent for cystitis but doesn't reach kidney tissue."
+            },
+            teaching: `<h4>Outpatient Regimens</h4><table class="comparison-table"><tr><th>Drug</th><th>Duration</th></tr><tr><td>Ciprofloxacin 500mg BID</td><td>7 days</td></tr><tr><td>TMP-SMX DS BID</td><td>14 days</td></tr><tr><td>Ceftriaxone 1g IM × 1 + oral</td><td>10-14 days</td></tr></table><p><strong>Never use:</strong> Nitrofurantoin, fosfomycin</p>`,
+            why_chain: [{q: "Why doesn't nitrofurantoin work?", a: "Rapidly excreted into urine but doesn't accumulate in renal tissue. High bladder levels but subtherapeutic in parenchyma."}],
+            points: 10
+        }
+    },
+    {
+        title: "Inpatient Management",
+        content: `<div class="narrative"><p>Another patient: 55-year-old <span class="highlight">diabetic woman</span> with pyelo, T 103.5°F, BP 88/54. Vomiting, cannot take oral meds.</p></div>
+        <div class="socratic-prompt"><h4>Admission Criteria</h4><p>This patient needs admission. What IV antibiotic would you choose?</p></div>`,
+        hint_beginner: "Ceftriaxone covers most uropathogens.",
+        hint_advanced: "Consider ESBL risk in diabetics.",
+        question: {
+            prompt: "Which IV antibiotic is MOST appropriate for severe pyelonephritis?",
+            options: [
+                { text: "Ceftriaxone 1-2g IV daily - covers most uropathogens", correct: true },
+                { text: "Vancomycin - must cover gram-positive organisms", correct: false },
+                { text: "Azithromycin - covers atypicals", correct: false },
+                { text: "Nitrofurantoin IV", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Ceftriaxone covers E. coli and most uropathogens. For ESBL risk, use pip-tazo or carbapenem.",
+                incorrect: "Ceftriaxone is best - covers gram-negatives. Vancomycin doesn't cover uropathogens."
+            },
+            teaching: `<h4>IV Antibiotic Selection</h4><table class="comparison-table"><tr><th>Severity</th><th>First-Line</th></tr><tr><td>Moderate</td><td>Ceftriaxone 1g IV daily</td></tr><tr><td>Severe/Septic</td><td>Pip-tazo or Cefepime</td></tr><tr><td>ESBL suspected</td><td>Meropenem</td></tr></table>`,
+            why_chain: [{q: "When suspect ESBL?", a: "Healthcare-associated, recent hospitalization, nursing home, recent antibiotics, prior ESBL."}, {q: "When step down to oral?", a: "Afebrile 24-48h, tolerating PO, clinically improving."}],
+            points: 10
+        }
+    },
+    {
+        title: "Obstructive Pyelonephritis",
+        content: `<div class="narrative"><p>A 45-year-old man with <span class="critical">fever, left flank pain, hypotension</span>. CT shows hydronephrosis with obstructing 7mm ureteral stone.</p><p>This is <span class="critical">obstructed infected kidney</span> - urologic emergency!</p></div>
+        <div class="socratic-prompt"><h4>Emergency Management</h4><p>Antibiotics alone cannot sterilize an obstructed infected collecting system. What EMERGENT intervention is required?</p></div>`,
+        hint_beginner: "The pus is trapped behind the stone - needs drainage.",
+        hint_advanced: "Stent vs nephrostomy - when to choose each?",
+        question: {
+            prompt: "What is the MOST important intervention for obstructive pyelonephritis?",
+            options: [
+                { text: "Emergent urologic decompression (stent or nephrostomy)", correct: true },
+                { text: "Broad-spectrum IV antibiotics alone", correct: false },
+                { text: "Urgent lithotripsy", correct: false },
+                { text: "Serial imaging to monitor", correct: false }
+            ],
+            explanation: {
+                correct: "Yes! Obstructed infected kidney = EMERGENCY. Antibiotics cannot penetrate the obstruction. Must decompress via stent or nephrostomy.",
+                incorrect: "This is a urologic emergency! Antibiotics alone cannot work - must drain the obstructed system."
+            },
+            teaching: `<h4>Obstructed Infected Kidney Protocol</h4><ul><li><strong>Step 1:</strong> Resuscitate</li><li><strong>Step 2:</strong> Broad antibiotics</li><li><strong>Step 3:</strong> EMERGENT decompression (hours, not days)</li><li><strong>Step 4:</strong> Definitive stone treatment weeks later</li></ul>`,
+            why_chain: [{q: "Why can't antibiotics alone work?", a: "Closed-space infection. Antibiotics can't reach trapped infected urine. Only drainage can decompress."}, {q: "Why delay stone treatment?", a: "Operating on infected field causes sepsis. Control infection first, then remove stone."}],
+            points: 15
+        }
+    },
+    {
+        title: "Pregnancy",
+        content: `<div class="narrative"><p>A <span class="highlight">26-year-old at 24 weeks gestation</span> presents with fever, flank pain, dysuria.</p></div>
+        <div class="socratic-prompt"><h4>Special Population</h4><p>Pyelonephritis in pregnancy is always COMPLICATED. Which antibiotics are safe?</p></div>`,
+        hint_beginner: "Cephalosporins safe. Fluoroquinolones contraindicated.",
+        hint_advanced: "What are fetal risks of untreated pyelo?",
+        question: {
+            prompt: "Which antibiotic is CONTRAINDICATED in pregnancy?",
+            options: [
+                { text: "Fluoroquinolones - risk of cartilage damage", correct: true },
+                { text: "Cephalosporins", correct: false },
+                { text: "Penicillins", correct: false },
+                { text: "Nitrofurantoin in first trimester", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Fluoroquinolones cause fetal cartilage damage. Use cephalosporins or penicillins.",
+                incorrect: "Fluoroquinolones are contraindicated - cartilage toxicity. Cephalosporins and penicillins are safe."
+            },
+            teaching: `<h4>UTI in Pregnancy</h4><table class="comparison-table"><tr><th>Drug</th><th>Safety</th></tr><tr><td>Cephalosporins</td><td>✓ Safe</td></tr><tr><td>Penicillins</td><td>✓ Safe</td></tr><tr><td>Nitrofurantoin</td><td>⚠️ Avoid near term</td></tr><tr><td>Fluoroquinolones</td><td>✗ Contraindicated</td></tr></table>`,
+            why_chain: [{q: "Why more UTI in pregnancy?", a: "Ureteral dilation from progesterone, bladder compression, glucosuria. 20-30x more likely to develop pyelo from bacteriuria."}, {q: "Fetal risks?", a: "Preterm labor (leading cause), low birth weight, perinatal mortality."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Summary",
+        content: `<div class="narrative"><p>Excellent work on pyelonephritis!</p></div>
+        <div class="mechanism-box"><div class="mechanism-title">🎯 Key Takeaways</div><div class="pathway">1. CVA tenderness + fever = pyelonephritis
+2. E. coli causes 80% of cases
+3. Nitrofurantoin CANNOT be used (bladder only)
+4. Uncomplicated: FQ or TMP-SMX outpatient
+5. No improvement 48-72h → Get imaging
+6. Obstructed + infected = urologic EMERGENCY
+7. Pregnancy: Hospitalize, no fluoroquinolones
+8. Diabetics: Risk for emphysematous pyelo</div></div>`,
+        hint_beginner: "Review complicated vs uncomplicated criteria.",
+        hint_advanced: "Consider recurrent pyelo management.",
+        question: {
+            prompt: "A diabetic woman with pyelo has been on ceftriaxone 72h but remains febrile. BEST next step?",
+            options: [
+                { text: "CT abdomen/pelvis to evaluate for abscess or emphysematous changes", correct: true },
+                { text: "Continue antibiotics - can take 5-7 days", correct: false },
+                { text: "Switch to nitrofurantoin", correct: false },
+                { text: "Discharge with oral fluoroquinolone", correct: false }
+            ],
+            explanation: {
+                correct: "Perfect! Failure to improve after 48-72h in a diabetic requires imaging for abscess or emphysematous pyelo.",
+                incorrect: "No improvement after 48-72h = imaging, especially in diabetics at risk for complications."
+            },
+            teaching: `<h4>Treatment Failure Algorithm</h4><ul><li>Confirm appropriate antibiotic</li><li>CT to evaluate for complications</li><li>If abscess >5cm → Drainage</li><li>If obstruction → Decompression</li><li>If emphysematous → Consider nephrectomy</li></ul>`,
+            why_chain: [{q: "Why image diabetics?", a: "High risk for emphysematous pyelo (gas-forming infection). 20-40% mortality. Often needs nephrectomy."}],
+            points: 15
+        }
+    }
+];
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderStage();
+}
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function renderStage() {
+    const stage = stages[currentStage];
+    const progress = ((currentStage + 1) / stages.length) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+    
+    let html = `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>${stage.content}`;
+    
+    if (difficulty === 'beginner' && stage.hint_beginner) html += `<div class="hint-beginner" style="display:block">🌱 <strong>Beginner:</strong> ${stage.hint_beginner}</div>`;
+    if (difficulty === 'advanced' && stage.hint_advanced) html += `<div class="hint-advanced" style="display:block">🎯 <strong>Advanced:</strong> ${stage.hint_advanced}</div>`;
+    
+    if (stage.question) {
+        const q = stage.question, questionId = `q${currentStage}`, answered = answeredQuestions.has(questionId);
+        if (!answered) { maxScore += q.points; document.getElementById('maxScore').textContent = maxScore; }
+        const shuffledOptions = answered ? q.options : shuffleArray(q.options);
+        if (!answered) stage.shuffledOptions = shuffledOptions;
+        
+        html += `<div class="question-box"><div class="question-prompt">${q.prompt}</div><div class="mcq-options">`;
+        shuffledOptions.forEach((opt, i) => {
+            const letter = String.fromCharCode(65 + i);
+            html += `<div class="mcq-option ${answered ? (opt.correct ? 'correct' : 'incorrect') + ' disabled' : ''}" onclick="handleAnswer(${currentStage}, ${opt.correct}, this, '${questionId}')" data-correct="${opt.correct}"><div class="option-letter">${letter}</div><div class="option-text">${opt.text}</div></div>`;
+        });
+        html += `</div><div class="feedback ${answered ? 'show' : ''} ${answered ? (decisionPath[currentStage]?.correct ? 'correct-feedback' : 'incorrect-feedback') : ''}" id="feedback${currentStage}"><div class="feedback-title">${answered ? (decisionPath[currentStage]?.correct ? '✓ Correct!' : '✗ Not Quite') : ''}</div><div>${answered ? (decisionPath[currentStage]?.correct ? q.explanation.correct : q.explanation.incorrect) : ''}</div></div>`;
+        if (q.teaching) html += `<div class="teaching-point ${answered ? 'show' : ''}">${q.teaching}</div>`;
+        if (q.why_chain) {
+            html += `<div class="why-chain ${answered ? 'show' : ''}"><h4>🔗 Why Chain</h4>`;
+            q.why_chain.forEach(w => html += `<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`);
+            html += `</div>`;
+        }
+    }
+    
+    const isLast = currentStage === stages.length - 1, answered = stage.question ? answeredQuestions.has(`q${currentStage}`) : true;
+    html += `<button class="btn ${answered ? 'show' : ''}" onclick="${isLast ? 'showCompletion()' : 'nextStage()'}">${isLast ? 'Complete Case' : 'Continue →'}</button></div>`;
+    document.getElementById('scene-container').innerHTML = html;
+}
+
+function handleAnswer(stageIndex, correct, element, questionId) {
+    if (answeredQuestions.has(questionId)) return;
+    answeredQuestions.add(questionId);
+    const stage = stages[stageIndex];
+    if (correct) { score += stage.question.points; document.getElementById('score').textContent = score; }
+    decisionPath[stageIndex] = { correct };
+    document.querySelectorAll('.mcq-option').forEach(opt => { opt.classList.add('disabled'); if (opt.dataset.correct === 'true') opt.classList.add('correct'); else if (opt === element && !correct) opt.classList.add('incorrect'); });
+    document.getElementById(`feedback${stageIndex}`).classList.add('show', correct ? 'correct-feedback' : 'incorrect-feedback');
+    document.querySelectorAll('.teaching-point, .why-chain').forEach(el => el.classList.add('show'));
+    document.querySelector('.btn').classList.add('show');
+}
+
+function nextStage() { currentStage++; renderStage(); window.scrollTo(0, 0); }
+
+function showCompletion() {
+    const percent = Math.round((score / maxScore) * 100);
+    let grade = percent >= 90 ? 'Outstanding!' : percent >= 80 ? 'Excellent!' : percent >= 70 ? 'Good Work!' : 'Keep Learning!';
+    let color = percent >= 90 ? '#22c55e' : percent >= 80 ? '#84cc16' : percent >= 70 ? '#eab308' : '#f97316';
+    document.getElementById('scene-container').innerHTML = `<div class="scene completion"><div style="font-size:2.5rem;font-weight:700;color:${color}">${grade}</div><div style="font-size:3rem;font-weight:700;color:${color};margin:20px 0">${percent}%</div><p>Score: ${score} / ${maxScore}</p><button class="btn show" onclick="location.reload()" style="margin-top:24px">Restart Case</button></div>`;
+}
+
+renderStage();
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Pyelonephritis"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1093/cid/ciq257" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">IDSA/ESCMID Guidelines for Urinary Tract Infections</a> — <em style="color:var(--rdx-text-muted,#64748b)">Clin Infect Dis</em></li></ul></div>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CT Abdomen/Pelvis with Contrast</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Wedge-shaped hypoperfusion, perinephric stranding, abscess, obstructing stone</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-renal-gu.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/acute-pyelonephritis" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

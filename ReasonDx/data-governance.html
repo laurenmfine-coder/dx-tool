@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Data Governance — clinical reasoning education platform for medical students and healthcare professionals.">
 <title>Data Governance | ReasonDx</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#0f172a;--bg2:#1e293b;--card:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;--accent:#3b82f6;--accent-light:rgba(59,130,246,.15);--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--danger-light:rgba(239,68,68,.15);--purple:#8b5cf6;--teal:#14b8a6}
-[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#2563eb;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1);--danger-light:rgba(220,38,38,.1)}
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem}
+:root{--bg:var(--rdx-bg);--bg2:#1e293b;--card:var(--rdx-bg-card);--border:var(--rdx-border);--text:var(--rdx-text);--text2:#cbd5e1;--muted:var(--rdx-text-muted);--accent:#14b8a6;--accent-light:rgba(59,130,246,.15);--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--danger-light:rgba(239,68,68,.15);--purple:#8b5cf6;--teal:#14b8a6}
+[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#0d9488;--success:#16a34a;--warning:#d97706;--danger:var(--rdx-danger);--purple:#7c3aed;--teal:#0d9488;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1);--danger-light:rgba(220,38,38,.1)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);min-height:100vh;padding:1.5rem}
 .header{text-align:center;margin-bottom:2rem}.header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}.header p{color:var(--muted);font-size:.95rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;max-width:1200px;margin:0 auto 2rem}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:.2s}.card:hover{border-color:var(--accent);transform:translateY(-2px)}.card h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.8rem}
+.card{background:var(--rdx-bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:.2s}.card:hover{border-color:var(--accent);transform:translateY(-2px)}.card h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.8rem}
 .stat{font-size:2.2rem;font-weight:800;line-height:1}.stat-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.5rem}.stat-label{font-size:.85rem;color:var(--text2)}
-.bar-bg{background:var(--border);border-radius:6px;height:8px;margin-top:.8rem;overflow:hidden}.bar-fill{height:100%;border-radius:6px;transition:width .8s ease}
+.bar-bg{background:var(--border);border-radius:8px;height:8px;margin-top:.8rem;overflow:hidden}.bar-fill{height:100%;border-radius:8px;transition:width .8s ease}
 .green{background:var(--success)}.blue{background:var(--accent)}.yellow{background:var(--warning)}.purple{background:var(--purple)}.teal{background:var(--teal)}
 .badge{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.75rem;font-weight:600}.badge-green{background:var(--success-light);color:var(--success)}.badge-yellow{background:var(--warning-light);color:var(--warning)}.badge-red{background:var(--danger-light);color:var(--danger)}
 .section{max-width:1200px;margin:0 auto 2rem}.section h2{font-size:1.2rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}.section h2::before{content:'';width:4px;height:20px;background:var(--accent);border-radius:2px}
-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}th,td{padding:.65rem 1rem;text-align:left;border-bottom:1px solid var(--border)}th{background:var(--bg2);color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}td{font-size:.85rem;color:var(--text2)}tr:last-child td{border-bottom:none}
+table{width:100%;border-collapse:collapse;background:var(--rdx-bg-card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}th,td{padding:.65rem 1rem;text-align:left;border-bottom:1px solid var(--border)}th{background:var(--bg2);color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}td{font-size:.85rem;color:var(--text2)}tr:last-child td{border-bottom:none}
 .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:1.5rem}.back-link:hover{text-decoration:underline}
 .source-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}.source-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}.source-card .num{font-size:1.6rem;font-weight:800;color:var(--accent)}.source-card .label{font-size:.78rem;color:var(--muted);margin-top:.3rem}
 .stamp{display:flex;align-items:center;gap:.4rem;font-size:.8rem;padding:.3rem .6rem;border-radius:8px;background:var(--success-light);color:var(--success);width:fit-content}
 @media(max-width:640px){.grid{grid-template-columns:1fr}body{padding:1rem}.stat{font-size:1.8rem}}
 </style>
+<link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body>
 <a href="index.html" class="back-link">← Back to ReasonDx</a>
@@ -71,5 +87,10 @@ async function load(){
 }
 load();
 </script>
-<script src="../data/rdx-persist.js"></script>
+<script src="data/rdx-persist.js"></script>
+<script src="./js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+<script src="js/rdx-help-widget.js"></script>
 </body></html>

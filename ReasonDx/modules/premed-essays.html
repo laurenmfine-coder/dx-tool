@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Secondary Essay Workshop. Build foundational clinical thinking skills for future physicians on ReasonDx.">
+<title>Secondary Essay Workshop | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#4f46e5,#4338ca);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;flex:1;}
+.container{max-width:760px;margin:0 auto;padding:24px;}
+.intro{text-align:center;padding:16px 0 24px;}
+.intro h2{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;color:var(--pm-indigo);margin-bottom:8px;}
+.intro p{font-size:14px;color:var(--pm-muted);}
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;flex-wrap:wrap;}
+.tab{flex:1;min-width:120px;padding:10px 12px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-indigo);color:#fff;}
+.prompt-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.prompt-card h3{font-size:16px;margin-bottom:6px;color:var(--pm-indigo);}
+.prompt-card .prompt-meta{font-size:12px;color:var(--pm-muted);margin-bottom:12px;}
+.prompt-question{font-size:15px;font-weight:600;margin-bottom:16px;padding:16px;background:var(--pm-indigo-50);border-radius:12px;border-left:4px solid var(--pm-indigo);}
+.strategy{margin-bottom:16px;}
+.strategy h4{font-size:13px;font-weight:700;color:var(--pm-indigo);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;}
+.strategy p{font-size:14px;line-height:1.7;margin-bottom:6px;}
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+.do-box{padding:14px;border-radius:12px;font-size:13px;line-height:1.6;}
+.do-box.do{background:#f0fdfa;border:1px solid #a7f3d0;}.do-box.do h5{color:#065f46;}
+.do-box.dont{background:#fef2f2;border:1px solid #fecaca;}.do-box.dont h5{color:#991b1b;}
+.do-box h5{font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.brainstorm{margin:16px 0;}
+.brainstorm h4{font-size:13px;font-weight:700;color:var(--pm-muted);margin-bottom:8px;}
+.brainstorm textarea{width:100%;min-height:120px;padding:14px;border:1.5px solid var(--pm-border);border-radius:12px;font-family:inherit;font-size:14px;resize:vertical;transition:.2s;}
+.brainstorm textarea:focus{outline:none;border-color:var(--pm-indigo);box-shadow:0 0 0 3px rgba(79,70,229,.1);}
+.word-count{text-align:right;font-size:12px;color:var(--pm-muted);margin-top:4px;}
+.save-row{display:flex;gap:8px;margin-top:8px;}
+.btn{padding:10px 20px;border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-primary{background:var(--pm-indigo);color:#fff;}.btn-primary:hover{background:#4338ca;}
+.btn-ghost{background:none;color:var(--pm-muted);border:1px solid var(--pm-border);}
+.saved-badge{display:none;padding:6px 12px;background:#f0fdfa;color:#065f46;border-radius:8px;font-size:12px;font-weight:600;}
+.hidden{display:none!important;}
+.footer{text-align:center;padding:32px 24px;color:var(--pm-muted);font-size:13px;border-top:1px solid var(--pm-border);margin-top:40px;}
+.footer a{color:var(--pm-indigo);text-decoration:none;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<script src="../rdx-nav.js"></script>
+<div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>✍️ Secondary Essay Workshop</h1></div>
+<div class="container">
+<div class="intro">
+  <h2>Write Essays That Admissions Committees Remember</h2>
+  <p>Guided prompts, strategic frameworks, and brainstorming space for the most common secondary essay archetypes. Write drafts here, then refine with advisors.</p>
+</div>
+<div class="tabs" id="tabs"></div>
+<div id="content"></div>
+</div>
+<div class="footer"><a href="premed-mmi.html">🎭 MMI Practice</a> · <a href="premed-journal.html">📓 Journal</a> · <a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a></div>
+<script>
+const ESSAYS=[
+{cat:"Why Medicine",title:"Why Do You Want to Be a Physician?",meta:"Asked by ~90% of schools · Usually 500-1000 words",
+ prompt:"Describe your motivation for pursuing a career in medicine. What experiences have confirmed your commitment to this path?",
+ strategy:"This is not a timeline of experiences — it's a narrative about transformation. Admissions committees read thousands of 'I shadowed a doctor and it was inspiring' essays. Yours must show SPECIFIC moments of insight and HOW they changed your understanding of medicine.",
+ framework:["Start with a specific, vivid moment (not childhood illness or Grey's Anatomy)","Show the arc: What did you believe about medicine BEFORE → what happened → what you understand NOW","Connect clinical experiences to YOUR values (not generic 'helping people')","End by looking forward: what kind of physician do you want to become and why?"],
+ doList:["Use concrete sensory details from real experiences","Show intellectual curiosity about disease mechanisms","Demonstrate self-awareness about what you don't yet know","Connect your non-medical experiences to physician qualities"],
+ dontList:["Start with 'I've always wanted to be a doctor since I was 5'","List activities chronologically like a résumé","Use generic phrases like 'passion for helping others'","Focus only on clinical exposure — integrate your whole identity"]},
+
+{cat:"Why Medicine",title:"Alternate Career / What If Not Medicine?",meta:"Common at top-tier schools · 200-500 words",
+ prompt:"If you could not pursue medicine, what career would you choose and why?",
+ strategy:"This question tests self-awareness and intellectual breadth. The best answers reveal a common thread between the alternate career and medicine — showing that your core values would express themselves regardless of the path.",
+ framework:["Choose something genuine that you're actually passionate about","Explain WHY this career appeals — connect it to your values","Draw the parallel: what does this alternate career share with medicine?","Show that you've thought deeply about yourself, not just medicine"],
+ doList:["Pick something specific and authentic (not 'medical researcher')","Show how transferable skills would apply","Demonstrate that you're a well-rounded thinker","Reveal genuine intellectual interests beyond medicine"],
+ dontList:["Say 'Nothing else — medicine is my only option'","Pick another healthcare career (too safe/obvious)","Pick something random you can't defend with real interest","Use this to just talk more about why you want medicine"]},
+
+{cat:"Diversity",title:"Diversity Contribution",meta:"Asked by ~70% of schools · 300-700 words",
+ prompt:"How will your background, experiences, or identity contribute to the diversity of our class and the medical profession?",
+ strategy:"Diversity is BROAD — it includes culture, socioeconomic background, geography, experiences, perspectives, AND identity. The key is showing how your unique lens will make you a different kind of physician who sees things others might miss.",
+ framework:["Name the specific aspect of your background that shapes your perspective","Give a concrete example of how this perspective revealed something others missed","Connect to medicine: how will this perspective improve your patient care?","Show, don't tell: a story beats a statement every time"],
+ doList:["Be specific about your lived experience","Show how your background gives you clinical insight others lack","Connect diversity to PATIENT CARE, not just representation","Include perspectives from your community or family"],
+ dontList:["Reduce diversity to a single demographic checkbox","Speak for an entire group ('As a [identity], we all...')","Focus only on challenges without showing growth/strength","Be vague — 'I've been exposed to many cultures'"]},
+
+{cat:"Diversity",title:"Overcoming Adversity / Challenge",meta:"Common archetype · 300-700 words",
+ prompt:"Describe a significant challenge you have faced and how it has shaped your character and preparedness for medicine.",
+ strategy:"Adversity essays are about GROWTH, not suffering. The committee wants to see resilience, self-awareness, and the ability to learn from difficulty — all essential physician qualities. The challenge is the setup; the growth is the essay.",
+ framework:["Briefly describe the challenge (1-2 paragraphs max — don't dwell)","Focus on what you DID — actions, not just feelings","What did you learn about yourself?","How does this make you a better future physician?"],
+ doList:["Show concrete actions you took (agency, not victimhood)","Demonstrate self-awareness and emotional intelligence","Connect the growth to specific physician qualities (resilience, empathy, adaptability)","Be vulnerable but not raw — show you've processed the experience"],
+ dontList:["Make the reader feel sorry for you (pity ≠ admissions)","Describe ongoing unresolved trauma without showing coping","Choose a trivial challenge to seem relatable","Focus entirely on the challenge with no resolution/growth"]},
+
+{cat:"School-Specific",title:"Why Our School?",meta:"Asked by ~80% of schools · 200-500 words",
+ prompt:"Why are you applying to [School Name]? What about our program makes it a good fit for you?",
+ strategy:"This essay tests whether you've done your homework. Generic answers ('great reputation, wonderful faculty') scream copy-paste. Specific answers ('Dr. X's research in Y aligns with my interest in Z, and your longitudinal community clinic model matches how I want to practice') show genuine fit.",
+ framework:["Name 2-3 SPECIFIC features (curriculum, research, community, clinical sites, mission)","For each: explain WHY it matters to YOU specifically","Show you've read beyond the brochure — mention specific programs, faculty, or initiatives","Connect their mission to your values and career goals"],
+ doList:["Reference specific curriculum features by name","Mention faculty members whose work interests you","Connect school-specific opportunities to YOUR goals","Show geographic or mission alignment if applicable"],
+ dontList:["Say 'I love your location' without substance","Copy-paste the same essay to every school","Only mention rankings or prestige","Be generic: 'collaborative environment and dedicated faculty'"]},
+
+{cat:"School-Specific",title:"Gap Year / Non-Traditional Path",meta:"Common for non-trad applicants · 300-500 words",
+ prompt:"Please describe what you have been doing since graduation / explain any gaps in your education or career.",
+ strategy:"This is an OPPORTUNITY, not an apology. Non-traditional paths often produce the most interesting physicians. Frame your experiences as assets that give you perspectives traditional applicants lack.",
+ framework:["Own your timeline — no apologizing","What did you learn/gain during this time that a traditional applicant doesn't have?","How do these experiences make you a more complete future physician?","Show intentionality: these weren't random years, they were growth"],
+ doList:["Frame non-medical work as transferable skills","Show maturity and self-knowledge gained from real-world experience","Connect your unique path to how you'll practice medicine differently","Demonstrate that you've used the time productively"],
+ dontList:["Apologize for not going straight through","Call yourself 'non-traditional' negatively","Leave gaps unexplained","Focus only on what you wish you'd done differently"]},
+
+{cat:"Ethics",title:"Ethical Dilemma",meta:"Common at top-tier schools · 300-500 words",
+ prompt:"Describe an ethical dilemma you have faced. How did you resolve it?",
+ strategy:"This tests your ethical reasoning process, not your moral perfection. Use the same framework you'd use in an MMI station: identify stakeholders, name the competing values, show your reasoning, acknowledge complexity.",
+ framework:["Describe the situation briefly — set up the tension between competing values","Identify the stakeholders and what was at stake for each","Explain your reasoning process (not just what you did, but HOW you decided)","Reflect on what you'd do differently or what you learned about ethical decision-making"],
+ doList:["Choose a real dilemma with genuine tension (not 'I found a wallet')","Show nuanced thinking — acknowledge the other side","Demonstrate that you consulted others or sought guidance","Connect to medical ethics principles (autonomy, beneficence, justice, non-maleficence)"],
+ dontList:["Pick a situation with an obvious right answer","Present yourself as morally superior","Avoid acknowledging complexity or uncertainty","Use hypothetical scenarios — they want YOUR experience"]},
+
+{cat:"Ethics",title:"Healthcare Inequity",meta:"Increasingly common · 300-700 words",
+ prompt:"Describe an experience that exposed you to healthcare disparities. How has this shaped your approach to medicine?",
+ strategy:"This essay shows you understand that medicine exists in a social context. The best essays move beyond 'I saw inequality and felt bad' to 'I understand the SYSTEMS that create disparities and here's how I plan to address them.'",
+ framework:["Describe a specific moment you witnessed or experienced a disparity","Analyze the systemic factors (not just individual circumstances)","What did you learn about the physician's role in addressing inequity?","How will this shape your practice, research, or advocacy?"],
+ doList:["Be specific about what you witnessed and where","Show systems-level thinking (social determinants, policy, access)","Connect to action: what have you done or plan to do?","Demonstrate cultural humility, not saviorism"],
+ dontList:["Describe a 'voluntourism' trip without critical reflection","Position yourself as a savior to marginalized communities","Be vague about what you actually witnessed","Ignore your own privilege or positionality in the story"]},
+
+{cat:"Personal",title:"Something Not in Your Application",meta:"Common · 200-500 words",
+ prompt:"Is there anything else you would like the admissions committee to know about you that is not reflected elsewhere in your application?",
+ strategy:"This is your wildcard — use it strategically. Fill a GAP in your application or add DEPTH to something briefly mentioned. Don't repeat what's already covered. The best use is revealing a dimension of yourself that makes you memorable and three-dimensional.",
+ framework:["What's missing from your application? What would they not know about you?","Choose ONE thing and go deep (not a list of extras)","Show how this hidden dimension makes you a more interesting/complete person","Connect subtly to medicine if possible, but don't force it"],
+ doList:["Reveal something genuinely personal and memorable","Show a dimension of yourself beyond academics and clinical work","Be authentic — this is where your personality shines","Use vivid writing — make them remember you"],
+ dontList:["Repeat information from your personal statement","List more activities or achievements","Write about something too trivial to matter","Use this as a dumping ground for leftover content"]},
+
+{cat:"Personal",title:"Meaningful Extracurricular / Leadership",meta:"Common · 200-500 words",
+ prompt:"Describe your most meaningful extracurricular activity and what you have learned from it.",
+ strategy:"Depth over breadth. Pick ONE activity and show transformation — how you grew, what you learned about leadership, teamwork, or yourself. The activity matters less than what it reveals about your character.",
+ framework:["Choose the activity where you grew the MOST, not the most impressive-sounding one","Describe a specific moment of challenge or growth within it","What did you learn about yourself, others, or leadership?","How do these lessons translate to being a physician?"],
+ doList:["Pick something you genuinely care about (passion is readable)","Show evolution: how your role or understanding changed over time","Include a specific anecdote that illustrates your point","Connect to physician qualities without being heavy-handed"],
+ dontList:["Pick the activity with the fanciest title","List accomplishments without reflection","Describe the organization instead of your experience","Choose something purely to look good"]}
+];
+
+const CATS = [...new Set(ESSAYS.map(e => e.cat))];
+let currentCat = CATS[0];
+const saved = JSON.parse(localStorage.getItem('rdx-essay-drafts') || '{}');
+
+function buildTabs() {
+  document.getElementById('tabs').innerHTML = CATS.map(c => 
+    `<button class="tab ${c===currentCat?'active':''}" onclick="switchCat('${c}',this)">${c}</button>`
+  ).join('');
+}
+
+function switchCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderEssays();
+}
+
+function renderEssays() {
+  const items = ESSAYS.filter(e => e.cat === currentCat);
+  document.getElementById('content').innerHTML = items.map((e, i) => {
+    const key = currentCat + '-' + i;
+    const draft = saved[key] || '';
+    return `
+    <div class="prompt-card">
+      <h3>${e.title}</h3>
+      <div class="prompt-meta">${e.meta}</div>
+      <div class="prompt-question">${e.prompt}</div>
+      <div class="strategy">
+        <h4>🎯 Strategy</h4>
+        <p>${e.strategy}</p>
+      </div>
+      <div class="strategy">
+        <h4>📐 Framework</h4>
+        ${e.framework.map((f, fi) => `<p><strong>${fi+1}.</strong> ${f}</p>`).join('')}
+      </div>
+      <div class="do-dont">
+        <div class="do-box do"><h5>✅ Do</h5>${e.doList.map(d => `<p>• ${d}</p>`).join('')}</div>
+        <div class="do-box dont"><h5>❌ Don't</h5>${e.dontList.map(d => `<p>• ${d}</p>`).join('')}</div>
+      </div>
+      <div class="brainstorm">
+        <h4>📝 Your Draft / Brainstorm</h4>
+        <textarea id="draft-${key}" placeholder="Start brainstorming here. Key moments, specific experiences, phrases you want to use..."
+          oninput="updateWC('${key}')">${draft}</textarea>
+        <div class="word-count" id="wc-${key}">${draft ? draft.trim().split(/\s+/).filter(Boolean).length + ' words' : '0 words'}</div>
+        <div class="save-row">
+          <button class="btn btn-primary" onclick="saveDraft('${key}')">💾 Save Draft</button>
+          <button class="btn btn-ghost" onclick="exportDraft('${key}','${e.title.replace(/'/g,"\\'")}')">📋 Copy to Clipboard</button>
+          <span class="saved-badge" id="saved-${key}">✓ Saved</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateWC(key) {
+  const text = document.getElementById('draft-' + key).value;
+  const wc = text.trim() ? text.trim().split(/\s+/).length : 0;
+  document.getElementById('wc-' + key).textContent = wc + ' words';
+}
+
+function saveDraft(key) {
+  const text = document.getElementById('draft-' + key).value;
+  saved[key] = text;
+  localStorage.setItem('rdx-essay-drafts', JSON.stringify(saved));
+  const badge = document.getElementById('saved-' + key);
+  badge.style.display = 'inline-block';
+  setTimeout(() => badge.style.display = 'none', 2000);
+}
+
+function exportDraft(key, title) {
+  const text = document.getElementById('draft-' + key).value;
+  if (!text.trim()) { alert('Write something first!'); return; }
+  navigator.clipboard.writeText(title + '\n\n' + text).then(() => alert('Copied to clipboard!'));
+}
+
+buildTabs();
+renderEssays();
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

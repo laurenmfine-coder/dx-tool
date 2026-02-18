@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: ACLS Rhythms. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>ACLS Rhythms - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #1e3a8a 0%, #14b8a6 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: var(--rdx-teal-light,#ccfbf1); text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #99f6e4; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #14b8a6; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #99f6e4; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #14b8a6, #1e3a8a); color: white; border: none; padding: 14px 28px; border-radius:12px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #14b8a6, #5eead4); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: var(--rdx-teal-light,#ccfbf1); }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.heart.org/en/cpr-first-aid-emergency-cardiovascular-care/about-ecc-quality-and-science/acls" target="_blank" rel="noopener">ACLS Guidelines (AHA)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK470215/" target="_blank" rel="noopener">Cardiac Arrest - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"Shockable vs Non-Shockable",content:'<div class="narrative"><p>A patient is found unresponsive. CPR is started. The monitor shows a rhythm. Your first decision: <span class="critical">Is this shockable?</span></p></div><div class="alert-box"><div class="alert-title">🚨 The Critical Question</div><p>Shockable rhythms: VF, pulseless VT. Non-shockable: Asystole, PEA</p></div>',question:{prompt:"Which rhythm is SHOCKABLE?",options:[{text:"Asystole",correct:false},{text:"Pulseless electrical activity (PEA)",correct:false},{text:"Ventricular fibrillation (VF)",correct:true},{text:"Sinus bradycardia with pulse",correct:false}],explanation:{correct:"Correct! VF and pulseless VT are shockable. Asystole and PEA are non-shockable - you cannot shock a flatline or organized rhythm without pulse.",incorrect:"Only VF and pulseless VT are shockable. You cannot shock asystole (flatline) or PEA (organized rhythm, no pulse)."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Cardiac Arrest Rhythms</div><div class="pathway">SHOCKABLE (defibrillate!):\n• Ventricular Fibrillation (VF)\n• Pulseless Ventricular Tachycardia (pVT)\n\nNON-SHOCKABLE (CPR + epinephrine):\n• Asystole (flatline)\n• PEA (organized rhythm, no pulse)</div></div>',why_chain:[],points:10}},
+        {title:"VF/pVT Algorithm",content:'<div class="narrative"><p>You see <span class="critical">VF on the monitor</span>. This is shockable!</p></div>',question:{prompt:"After shocking VF, what is the NEXT step?",options:[{text:"Check pulse immediately",correct:false},{text:"Resume CPR immediately for 2 minutes",correct:true},{text:"Give epinephrine",correct:false},{text:"Give amiodarone",correct:false}],explanation:{correct:"Correct! After ANY shock, immediately resume CPR for 2 minutes. Do not stop to check pulse - it delays perfusion. Check rhythm after 2-minute cycle.",incorrect:"Resume CPR immediately after shock for 2 minutes. Do not pause to check pulse - this wastes time."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 VF/pVT Algorithm</div><div class="pathway">1. SHOCK\n2. CPR x 2 min (no pulse check!)\n3. Check rhythm\n\nAfter 2nd shock:\n• Epinephrine 1mg IV q3-5min\n• Consider advanced airway\n\nAfter 3rd shock:\n• Amiodarone 300mg IV\n  (or Lidocaine 1-1.5 mg/kg)\n• 2nd dose amio: 150mg</div></div>',why_chain:[],points:10}},
+        {title:"Asystole/PEA Algorithm",content:'<div class="narrative"><p>Different scenario: the monitor shows <span class="critical">organized rhythm but no pulse</span>. This is PEA.</p></div>',question:{prompt:"What is the FIRST drug in asystole/PEA?",options:[{text:"Atropine",correct:false},{text:"Amiodarone",correct:false},{text:"Epinephrine 1mg IV",correct:true},{text:"Vasopressin",correct:false}],explanation:{correct:"Correct! Epinephrine 1mg IV is given immediately in non-shockable rhythms (asystole/PEA), then q3-5min. No defibrillation for these rhythms!",incorrect:"Epinephrine 1mg IV is first-line. Atropine is no longer in ACLS for asystole. Amiodarone is for VF/pVT only."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Asystole/PEA Algorithm</div><div class="pathway">1. CPR\n2. Epinephrine 1mg IV ASAP\n3. CPR x 2 min\n4. Check rhythm\n5. Epi q3-5min\n\nSEARCH FOR REVERSIBLE CAUSES:\nH\'s and T\'s!\n\nNo shocking, no amiodarone</div></div>',why_chain:[],points:10}},
+        {title:"The H\'s and T\'s",content:'<div class="narrative"><p>In PEA, you must identify and treat reversible causes. The mnemonic: <span class="highlight">H\'s and T\'s</span></p></div>',question:{prompt:"A post-surgical patient arrests with PEA. Neck veins are distended, heart sounds are muffled. Most likely cause?",options:[{text:"Hypovolemia",correct:false},{text:"Hypoxia",correct:false},{text:"Cardiac tamponade",correct:true},{text:"Tension pneumothorax",correct:false}],explanation:{correct:"Correct! Beck\'s triad (JVD, muffled heart sounds, hypotension) = tamponade. Post-surgical patient = high risk. Needs emergent pericardiocentesis.",incorrect:"JVD + muffled heart sounds + hypotension = Beck\'s triad = tamponade. Tension PTX also causes JVD but has absent breath sounds."},teaching:'<h4>H\'s and T\'s</h4><table class="comparison-table"><tr><th>H\'s</th><th>T\'s</th></tr><tr><td>Hypovolemia</td><td>Tension pneumothorax</td></tr><tr><td>Hypoxia</td><td>Tamponade (cardiac)</td></tr><tr><td>Hydrogen ion (acidosis)</td><td>Toxins</td></tr><tr><td>Hypo/Hyperkalemia</td><td>Thrombosis (PE)</td></tr><tr><td>Hypothermia</td><td>Thrombosis (MI)</td></tr></table>',why_chain:[],points:10}},
+        {title:"Bradycardia with Pulse",content:'<div class="narrative"><p>Patient has <span class="highlight">HR 35</span>, BP 78/50, confused and diaphoretic. Has a pulse but symptomatic!</p></div>',question:{prompt:"First-line drug for symptomatic bradycardia?",options:[{text:"Epinephrine",correct:false},{text:"Atropine 1mg IV",correct:true},{text:"Dopamine",correct:false},{text:"Transcutaneous pacing",correct:false}],explanation:{correct:"Correct! Atropine 1mg IV is first-line for symptomatic bradycardia. Can repeat q3-5min, max 3mg. If atropine fails → pacing or dopamine/epinephrine drip.",incorrect:"Atropine 1mg IV first. If fails, then TCP or dopamine/epinephrine infusion."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Bradycardia Algorithm</div><div class="pathway">Is patient symptomatic?\n(Hypotension, AMS, shock, chest pain)\n\nYES → Atropine 1mg IV q3-5min (max 3mg)\n\nIf atropine ineffective:\n• Transcutaneous pacing\n• Dopamine 5-20 mcg/kg/min\n• Epinephrine 2-10 mcg/min\n\nPrepare for transvenous pacing</div></div>',why_chain:[],points:10}},
+        {title:"Tachycardia with Pulse",content:'<div class="narrative"><p>Patient with <span class="critical">HR 180</span>, BP 85/60, chest pain. Narrow complex, regular rhythm. Has a pulse but unstable!</p></div>',question:{prompt:"For UNSTABLE tachycardia with pulse, what is first-line treatment?",options:[{text:"Adenosine",correct:false},{text:"Amiodarone",correct:false},{text:"Synchronized cardioversion",correct:true},{text:"Vagal maneuvers",correct:false}],explanation:{correct:"Correct! Unstable tachycardia (hypotension, AMS, chest pain, HF) = synchronized cardioversion. Don\'t waste time with drugs if unstable!",incorrect:"Unstable = cardiovert! Adenosine and other drugs are for STABLE patients only."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Tachycardia Algorithm</div><div class="pathway">UNSTABLE (hypotension, AMS, chest pain, HF):\n→ Synchronized cardioversion!\n\nSTABLE - determine rhythm type:\n\nNarrow regular: Vagal → Adenosine 6mg → 12mg\nNarrow irregular: Rate control (diltiazem, BB)\nWide regular: Adenosine or Amiodarone\nWide irregular: Amio (or cardiovert if WPW+AFib)</div></div>',why_chain:[],points:10}},
+        {title:"SVT Management",content:'<div class="narrative"><p>Stable patient, narrow complex regular tachycardia at 170 bpm. Likely SVT.</p></div>',question:{prompt:"What is the correct adenosine dosing for SVT?",options:[{text:"3mg, then 6mg, then 12mg",correct:false},{text:"6mg, then 12mg (can repeat 12mg)",correct:true},{text:"12mg first",correct:false},{text:"6mg once only",correct:false}],explanation:{correct:"Correct! Adenosine: 6mg rapid IV push → flush → if no response, 12mg → can repeat 12mg once. Must be given fast with immediate flush!",incorrect:"Adenosine: 6mg first, then 12mg, can repeat 12mg. Give rapid IV push with flush."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Adenosine Pearls</div><div class="pathway">DOSING: 6mg → 12mg → 12mg\n\nTECHNIQUE:\n• Large bore IV, proximal site\n• Rapid push followed by 20mL flush\n• Warn patient: brief chest discomfort\n\nHalf-life: 6 seconds!\n\nContraindications:\n• WPW with pre-excited AFib\n• Heart transplant (use 3mg first)</div></div>',why_chain:[],points:10}},
+        {title:"Post-Arrest Care",content:'<div class="narrative"><p>ROSC achieved! Now what? Post-arrest care is critical for survival.</p></div>',question:{prompt:"What is the target temperature for post-arrest targeted temperature management (TTM)?",options:[{text:"32-34°C for all patients",correct:false},{text:"36°C or 32-34°C (either acceptable)",correct:true},{text:"Normal temperature (37°C)",correct:false},{text:"38°C to prevent shivering",correct:false}],explanation:{correct:"Correct! TTM2 trial showed 36°C is as good as 32-34°C. Either target is acceptable. Avoid hyperthermia (fever worsens outcomes)!",incorrect:"Either 36°C or 32-34°C is acceptable per current guidelines. The key is avoiding fever."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Post-ROSC Care</div><div class="pathway">1. Optimize oxygenation (SpO2 92-98%)\n2. Avoid hyperventilation\n3. MAP goal ≥65 mmHg\n4. TTM: 32-34°C OR 36°C x 24h\n5. Control glucose (avoid hypoglycemia)\n6. Emergent cath if STEMI\n7. Consider cath even without STEMI\n8. EEG monitoring for seizures</div></div>',why_chain:[],points:10}},
+        {title:"Case Resolution",content:'<div class="narrative"><p>You successfully resuscitated a VF arrest with 2 shocks, epinephrine, and amiodarone. ROSC after 12 minutes. Patient went to cath lab for STEMI and TTM was initiated.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 ACLS Summary</div><div class="pathway">SHOCKABLE (VF/pVT):\nShock → CPR 2min → Epi after 2nd shock\n→ Amio after 3rd shock\n\nNON-SHOCKABLE (Asystole/PEA):\nCPR → Epi immediately → Find H\'s and T\'s\n\nBRADYCARDIA: Atropine → Pacing/Drip\n\nTACHYCARDIA: Unstable = cardiovert\nStable = based on rhythm type\n\nPOST-ROSC: TTM, avoid fever, cath if indicated</div></div>',question:{prompt:"In VF arrest, when should epinephrine be given?",options:[{text:"Immediately after first shock",correct:false},{text:"After the second shock",correct:true},{text:"Only if ROSC not achieved after 10 min",correct:false},{text:"Epinephrine is not used in VF",correct:false}],explanation:{correct:"Correct! In VF/pVT, give epinephrine after the 2nd shock (during CPR), then q3-5min. Amiodarone comes after 3rd shock.",incorrect:"Epi after 2nd shock in VF/pVT. In asystole/PEA, epi is given immediately."},teaching:'<h4>Key Takeaways</h4><ul style="line-height:2;margin-left:20px;"><li>VF/pVT = shockable</li><li>Asystole/PEA = non-shockable</li><li>CPR immediately after every shock</li><li>Epi 1mg q3-5min</li><li>Amiodarone for refractory VF/pVT</li><li>Atropine for symptomatic bradycardia</li><li>Unstable tachycardia = cardiovert</li></ul>',why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><p>You mastered ACLS Rhythms!</p></div>';}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="ACLS Rhythms"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1161/CIR.0000000000000916" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">AHA ACLS Guidelines</a> — <em style="color:var(--rdx-text-muted,#64748b)">Circulation</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

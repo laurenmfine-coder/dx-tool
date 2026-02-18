@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="RadDx: Neuroimaging — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
+<title>RadDx: Neuroimaging | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);line-height:1.7}
+.header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 20px;position:sticky;top:56px;z-index:100}
+.header-row{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto}
+.header-title{font-size:1.1rem;font-weight:600;color:#fff}
+.badge{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.7rem;margin-left:10px;color:#fff}
+.main{max-width:900px;margin:0 auto;padding:24px}
+.framework-intro{background:linear-gradient(135deg,rgba(217,119,6,.08),rgba(245,158,11,.08));border:1px solid rgba(217,119,6,.2);border-radius:16px;padding:24px;margin-bottom:28px}
+.framework-intro h3{font-size:1rem;color:#92400e;margin-bottom:8px}
+.framework-intro p{font-size:.9rem;color:var(--rdx-text);margin:0}
+.framework-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.framework-step{padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;color:#fff}
+.framework-step.ctx{background:#d97706}.framework-step.ord{background:#0d9488}.framework-step.exp{background:#0891b2}.framework-step.int{background:#7c3aed}.framework-step.mgmt{background:#dc2626}
+.scenario{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:16px;margin-bottom:28px;overflow:hidden}
+.scenario-header{padding:20px 24px;border-bottom:1px solid var(--rdx-border);display:flex;align-items:center;gap:12px}
+.scenario-modality{background:var(--rdx-teal-50);color:var(--rdx-teal-dark);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:8px;text-transform:uppercase;letter-spacing:.5px}
+.scenario-title{font-size:1.2rem;font-weight:700}
+.scenario-body{padding:24px}
+.vignette{background:var(--rdx-bg-hover);border-left:4px solid var(--rdx-teal);padding:16px 20px;border-radius:0 12px 12px 0;margin-bottom:20px;font-size:.95rem}
+.vignette-label{font-size:.75rem;font-weight:700;color:var(--rdx-teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.reasoning-steps{display:flex;flex-direction:column;gap:16px}
+.reasoning-step{border:1px solid var(--rdx-border);border-radius:12px;overflow:hidden}
+.step-trigger{width:100%;display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--rdx-bg-card);border:none;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;color:var(--rdx-text);text-align:left;transition:background .15s}
+.step-trigger:hover{background:var(--rdx-teal-50)}
+.step-num-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
+.step-0 .step-num-badge{background:#d97706;font-size:1rem}.step-1 .step-num-badge{background:#0d9488}.step-2 .step-num-badge{background:#0891b2}.step-3 .step-num-badge{background:#7c3aed}.step-4 .step-num-badge{background:#dc2626}
+.step-arrow{margin-left:auto;font-size:1.2rem;color:var(--rdx-text-muted);transition:transform .2s}
+.step-trigger[aria-expanded="true"] .step-arrow{transform:rotate(180deg)}
+.step-content{padding:0 20px 20px;display:none}.step-content.open{display:block}
+.choices{display:grid;gap:10px;margin:12px 0}
+.choice{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);padding:12px 16px;border-radius:12px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:all .2s;font-size:.9rem}
+.choice:hover{border-color:var(--rdx-teal);transform:translateX(3px)}
+.choice.correct{border-color:var(--rdx-success);background:rgba(34,197,94,.08);pointer-events:none}
+.choice.wrong{border-color:var(--rdx-danger);background:rgba(239,68,68,.08);pointer-events:none}
+.choice-letter{font-weight:700;min-width:20px;color:var(--rdx-teal)}
+.explanation{background:var(--rdx-teal-50);border:1px solid var(--rdx-teal);border-radius:12px;padding:16px;margin-top:12px;font-size:.9rem;display:none}.explanation.show{display:block}
+.explanation h5{color:var(--rdx-teal-dark);margin-bottom:6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+.pearl{background:linear-gradient(135deg,rgba(217,119,6,.1),rgba(245,158,11,.1));border-left:4px solid #d97706;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
+.pearl strong{color:#92400e}
+.danger-box{background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(239,68,68,.08));border-left:4px solid var(--rdx-danger);padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:.9rem}
+.danger-box strong{color:var(--rdx-danger)}
+.radiopaedia-link{display:inline-flex;align-items:center;gap:8px;background:var(--rdx-bg-hover);border:1px solid var(--rdx-border);border-radius:8px;padding:10px 16px;margin-top:16px;text-decoration:none;color:var(--rdx-teal);font-size:.85rem;font-weight:600;transition:all .15s}
+.radiopaedia-link:hover{border-color:var(--rdx-teal);background:var(--rdx-teal-50)}
+.cross-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.cross-link{padding:14px;background:var(--rdx-teal-50);border:1px solid var(--rdx-border);border-radius:12px;text-decoration:none;color:var(--rdx-text);transition:all .15s}
+.cross-link:hover{border-color:var(--rdx-teal)}
+.cross-link-title{font-weight:600;font-size:.9rem}.cross-link-desc{font-size:.8rem;color:var(--rdx-text-muted);margin-top:2px}
+@media(max-width:640px){.main{padding:16px}.scenario-body{padding:16px}.vignette{padding:12px 14px}.framework-steps{gap:4px}.framework-step{font-size:.7rem;padding:4px 10px}}
+</style>
+</head>
+<body>
+
+<div class="header"><div class="header-row"><div class="header-title">🧠 RadDx: Neuroimaging<span class="badge">NEUROLOGY</span></div></div></div>
+<div class="main">
+
+<!-- FRAMEWORK INTRODUCTION -->
+<div class="framework-intro">
+<h3>5-Step Imaging Reasoning Framework</h3>
+<p>Each scenario uses a structured approach that begins with epidemiological context before imaging decisions. This reflects real clinical practice — knowing <em>who</em> the patient is changes <em>what</em> you look for.</p>
+<div class="framework-steps">
+<span class="framework-step ctx">🌍 Context</span>
+<span class="framework-step ord">1. Order</span>
+<span class="framework-step exp">2. Expect</span>
+<span class="framework-step int">3. Interpret</span>
+<span class="framework-step mgmt">4. Integrate</span>
+</div>
+</div>
+
+
+<!-- SCENARIO 1: ACUTE ISCHEMIC STROKE -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CT Head → CTA → CT Perfusion</span><span class="scenario-title">Sudden-Onset Hemiplegia and Aphasia</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>68-year-old male</strong> with atrial fibrillation (not on anticoagulation — stopped it himself 3 months ago) presents with sudden-onset right-sided hemiplegia and aphasia. Symptoms began 90 minutes ago. NIHSS score: 18 (severe). Vitals: HR 88 (irregular), BP 178/96.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>His age is the only relevant risk factor</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Atrial fibrillation alone explains the stroke — no further workup needed</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Medication non-adherence is a personal choice and not relevant to clinical management</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>AFib without anticoagulation is the most likely cause</span></div></div>
+<div class="explanation"><h5>Stroke Epidemiology and Social Context</h5><p>Stroke etiology varies by demographics and geography. <strong>Cardioembolic</strong> (AFib, valvular disease) causes the largest, most disabling strokes. <strong>Large vessel atherosclerosis</strong> (carotid stenosis) is more common in patients with traditional cardiovascular risk factors. <strong>Small vessel (lacunar)</strong> strokes associate with hypertension and diabetes. <strong>Young stroke (<50)</strong> has a different differential: dissection (trauma, chiropractic manipulation), PFO with paradoxical embolism, hypercoagulable states, substance use (cocaine, amphetamines), and vasculitis. In this case, the social determinant — why he stopped anticoagulation — is as important as the acute imaging.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Stroke disparities are profound Black Americans have 2× the stroke incidence and higher mortality than White Americans, driven by hypertension prevalence, healthcare access, and time-to-treatment delays. Rural areas have longer door-to-needle times. Hispanic populations have higher stroke rates at younger ages. Social context determines both risk and treatment access.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Non-contrast CT head IMMEDIATELY</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>MRI brain with diffusion-weighted imaging</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Carotid duplex ultrasound</span></div></div>
+<div class="explanation"><h5>Stroke Imaging Protocol</h5><p>The stroke imaging protocol is sequential and time-critical: (1) <strong>Non-contrast CT</strong> within 20 minutes of arrival — rules out hemorrhage (the absolute contraindication to tPA). (2) <strong>CTA head/neck</strong> — identifies large vessel occlusion (LVO) for thrombectomy candidacy. (3) <strong>CT perfusion</strong> (where available) — quantifies ischemic core vs salvageable penumbra, extending the thrombectomy window to 24 hours (DAWN/DEFUSE-3 criteria). MRI/DWI is more sensitive but takes longer and is less available emergently.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Large hyperdense area indicating hemorrhagic stroke</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Non-contrast CT may be normal or show early ischemic signs</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Large right MCA territory infarction</span></div></div>
+<div class="explanation"><h5>Early CT Signs of Ischemia</h5><p>At 90 minutes, non-contrast CT may show subtle early ischemic changes: <strong>hyperdense MCA sign</strong> (thrombus visible as bright vessel), <strong>loss of the insular ribbon</strong> (early cortical edema), sulcal effacement. ASPECTS score (Alberta Stroke Program Early CT Score, 0-10) quantifies early changes — score ≤5 suggests large established infarct and poorer thrombectomy outcomes. CTA is the critical image: left MCA occlusion (M1 or M2 segment) explains this patient's right hemiplegia + aphasia.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Give IV tPA only — thrombectomy is experimental</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Thrombectomy only — tPA is outdated</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>IV alteplase immediately (within 4.5h window) PLUS activate thrombectomy team</span></div></div>
+<div class="explanation"><h5>Dual Therapy: tPA + Thrombectomy</h5><p>For LVO strokes within 4.5 hours: <strong>IV tPA first (don't delay for thrombectomy)</strong> + mechanical thrombectomy. The evidence is overwhelming (MR CLEAN, ESCAPE, EXTEND-IA, SWIFT PRIME, REVASCAT trials): thrombectomy for anterior circulation LVO with NIHSS ≥6 and ASPECTS ≥6 within 6 hours — or up to 24 hours if CT perfusion shows favorable mismatch (DAWN, DEFUSE-3). The NNT for thrombectomy is approximately 2.6 — one of the most effective interventions in medicine.</p><a href="https://radiopaedia.org/articles/ischaemic-stroke" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Thrombectomy and discharge on aspirin</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Thrombectomy and restart warfarin immediately</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Thrombectomy and observation only</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>IV tPA + thrombectomy → post-procedure imaging</span></div></div>
+<div class="explanation"><h5>Acute Treatment + Root Cause + Prevention</h5><p>The imaging drove emergent intervention, but long-term stroke prevention requires understanding and fixing the root cause. This patient's stroke was preventable — he had a known indication for anticoagulation. The discharge plan must include: affordable DOAC access (patient assistance programs, generic apixaban), health literacy about stroke prevention, adherence support, and rehabilitation for the resulting deficits. The imaging finding (LVO) → acute treatment (tPA + thrombectomy) → secondary prevention (anticoagulation + addressing the social determinant that led to non-adherence).</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 2: SUBARACHNOID HEMORRHAGE -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CT Head → CTA → DSA</span><span class="scenario-title">Thunderclap Headache</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>48-year-old woman</strong> presents with sudden-onset 'worst headache of my life' while straining during a bowel movement. She had a brief loss of consciousness and now has neck stiffness and photophobia. She smokes 1 pack per day and has poorly controlled hypertension. Her mother died of a 'brain bleed' at age 52. Vitals: HR 68, BP 192/104, Temp 37.8°C.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Only her headache severity matters — thunderclap headaches are always SAH</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Family history of brain hemorrhage is too nonspecific to be useful</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>First-degree relative with aneurysmal SAH doubles her risk.</span></div></div>
+<div class="explanation"><h5>SAH Risk Factor Clustering</h5><p>Aneurysmal SAH has identifiable risk factors: <strong>smoking</strong> is the strongest modifiable risk (2-3× increased risk, dose-dependent), <strong>hypertension</strong> promotes aneurysm growth and rupture, and <strong>family history</strong> (first-degree relative with SAH = 2× risk; ≥2 first-degree relatives = screening indication). <strong>Autosomal dominant polycystic kidney disease</strong> (ADPKD) carries 5-10% aneurysm prevalence. Connective tissue disorders (Ehlers-Danlos type IV, Marfan) increase risk. <strong>Cocaine/amphetamine use</strong> causes acute hypertensive surges that trigger rupture. Female sex, particularly post-menopause, is independently associated (estrogen may be protective).</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  First-degree relatives of SAH patients should be offered screening MRA if ≥2 family members affected. Screening detects unruptured aneurysms in ~10% of first-degree relatives. Japanese and Finnish populations have higher SAH incidence than other groups, suggesting genetic predisposition beyond known risk factors.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Non-contrast CT head — >95% sensitive for SAH within 6 hours of onset;</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>MRI brain with FLAIR sequences</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>CTA head directly</span></div></div>
+<div class="explanation"><h5>CT → LP → CTA Protocol</h5><p>Non-contrast CT head is >95% sensitive for SAH within 6 hours (drops to ~50% by day 5). If CT is positive → CTA to identify the aneurysm. If CT is negative but clinical suspicion remains → LP (xanthochromia in CSF supernatant confirms SAH). Modern CT at high-quality centers approaches 100% sensitivity at 6h, but LP remains the safety net. If SAH confirmed → digital subtraction angiography (DSA) is the gold standard for aneurysm characterization and treatment planning.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Normal CT — SAH is excluded</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Hyperdense blood in basal cisterns, sylvian fissures, and/or</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Large intracerebral hemorrhage without subarachnoid blood</span></div></div>
+<div class="explanation"><h5>SAH Distribution Pattern</h5><p>Blood distribution on CT suggests aneurysm location: <strong>basal cisterns + anterior interhemispheric fissure</strong> = AComm aneurysm (most common, 30-35%). <strong>Sylvian fissure (unilateral)</strong> = MCA aneurysm. <strong>Prepontine cistern</strong> = basilar tip. Fisher Grade (1-4) based on blood distribution predicts vasospasm risk: Grade 3 (thick subarachnoid clot >1mm) carries highest vasospasm risk.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Start anticoagulation to prevent further clotting</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Serial CT scans every 6 hours to monitor</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Immediate craniotomy for clot evacuation</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>CTA identifies a 7mm AComm aneurysm → secure the aneurysm within 24-72 hours</span></div></div>
+<div class="explanation"><h5>Imaging Guides Definitive Treatment</h5><p>CTA identifies aneurysm location, size, and morphology to plan treatment. <strong>Endovascular coiling</strong> is preferred when feasible (ISAT trial showed lower morbidity than clipping for most anterior circulation aneurysms). <strong>Surgical clipping</strong> for wide-necked aneurysms, MCA aneurysms, or aneurysms with significant hematoma requiring evacuation. <strong>Nimodipine 60mg q4h × 21 days</strong> reduces poor outcomes from vasospasm (the leading cause of delayed morbidity after SAH).</p><a href="https://radiopaedia.org/articles/subarachnoid-haemorrhage-aneurysmal" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Coil the aneurysm and discharge in 48 hours</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Coil the aneurysm + ICU monitoring for 14 days</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Secure aneurysm (coiling/clipping) + ICU × 14-21 days for vasospasm monitoring</span></div></div>
+<div class="explanation"><h5>Acute Treatment + Lifelong Surveillance</h5><p>SAH management extends weeks beyond the acute bleed: vasospasm peaks at days 7-10 and can cause devastating delayed infarction. The epidemiological context drives long-term care: smoking cessation is the single most impactful intervention for preventing new aneurysm formation; BP control prevents growth of any existing unruptured aneurysms; family history warrants genetic counseling and family screening. The imaging finding (SAH + AComm aneurysm) triggered immediate neurosurgical intervention and a lifelong surveillance program.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 3: EPIDURAL VS. SUBDURAL HEMATOMA -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CT Head → MRI</span><span class="scenario-title">Post-Traumatic Altered Mental Status</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>Two patients arrive within an hour. <strong>Patient A:</strong> 22-year-old male after being hit in the temporal region with a baseball bat. Brief loss of consciousness, then 'lucid interval,' now rapidly deteriorating with blown left pupil. <strong>Patient B:</strong> 82-year-old woman on warfarin who fell 3 weeks ago, now with progressive confusion, gait instability, and right-sided weakness over 2 weeks.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Age is the only difference — head injuries are the same at any age</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Warfarin use is irrelevant to hematoma presentation</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Patient A has a classic epidural hematoma profile: young, temporal bone fracture → middle meningeal</span></div></div>
+<div class="explanation"><h5>Epidemiology Predicts Hematoma Type</h5><p><strong>Epidural hematoma</strong>: young patients (temporal bone is thinnest), trauma with fracture through middle meningeal artery groove, 90% have skull fracture. The classic 'lucid interval' occurs as arterial blood rapidly accumulates between skull and dura. <strong>Subdural hematoma</strong>: elderly (brain atrophy stretches bridging veins), anticoagulation (warfarin, DOACs, antiplatelets), trivial or forgotten trauma, alcohol use disorder (atrophy + falls + coagulopathy). <strong>The fastest-growing demographic for chronic SDH is elderly patients on anticoagulation</strong> — a direct consequence of aging population + widespread DOAC/antiplatelet use.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Child abuse (non-accidental trauma) must be considered in infants with subdural hematoma, retinal hemorrhages, and inconsistent mechanism — this is a medicolegal obligation. In adults >65 on anticoagulation who present with any cognitive change, always consider chronic SDH, even without a remembered fall.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Non-contrast CT head for BOTH patients</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>MRI for both — better soft tissue resolution</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>CT with IV contrast to look for active bleeding</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Skull X-rays for Patient A to check for fracture</span></div></div>
+<div class="explanation"><h5>CT Is the Acute Hemorrhage Modality</h5><p>Non-contrast CT detects acute blood (hyperdense on CT) with >95% sensitivity. It differentiates epidural from subdural location, identifies mass effect and midline shift, and guides emergent surgical decision-making. MRI is superior for subacute/chronic SDH and for detecting diffuse axonal injury, but CT is faster and more available in emergencies. Skull X-rays are obsolete for trauma workup.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Both show crescent-shaped collections crossing suture lines</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Both show biconvex (lens-shaped) collections</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Patient A: crescent-shaped; Patient B: biconvex</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Patient A: BICONVEX (lens-shaped) hyperdense collection in the temporal region, NOT</span></div></div>
+<div class="explanation"><h5>EDH vs SDH: Shape Tells the Story</h5><p><strong>Epidural</strong>: biconvex/lens-shaped because blood is confined between skull and tightly adherent dura (stops at suture lines where dura is firmly attached). Typically temporal location with associated fracture. <strong>Subdural</strong>: crescent-shaped because blood spreads freely in the subdural space (crosses suture lines, stops at falx and tentorium). Chronic SDH may be isodense or hypodense (same density as brain or darker), making it subtle. The 'swirl sign' (mixed density within hematoma) suggests active or recent bleeding.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Patient A: emergent craniotomy for epidural evacuation (neurosurgical emergency —</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Both patients need emergent craniotomy</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Patient A can be observed; Patient B needs surgery</span></div></div>
+<div class="explanation"><h5>Imaging Drives Urgency</h5><p>Patient A with epidural hematoma + blown pupil = immediate neurosurgical emergency. Mortality approaches 100% without evacuation, but outcomes are excellent if decompressed quickly. Patient B with chronic SDH: (1) reverse anticoagulation immediately, (2) neurosurgical decision depends on hematoma thickness (>10mm or midline shift >5mm typically warrants drainage via burr hole or craniotomy), (3) small chronic SDH may be observed with serial imaging.</p><a href="https://radiopaedia.org/articles/epidural-haematoma" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Surgery for both and discharge</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Surgery + restart anticoagulation immediately for Patient B</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Patient A: emergent evacuation → monitor for rebleed → concussion/TBI</span></div></div>
+<div class="explanation"><h5>Two Different Clinical Trajectories</h5><p>The same imaging modality (CT head) reveals two fundamentally different disease processes driven by different epidemiological profiles. Patient A's trajectory is: trauma → rapid arterial bleed → surgical emergency → usually excellent recovery if treated quickly. Patient B's trajectory reflects a geriatric epidemic: anticoagulation + age-related atrophy + falls → chronic subdural → complex decision about anticoagulation resumption. The decision about whether and when to restart anticoagulation after SDH evacuation requires balancing stroke prevention against rebleeding risk — and is one of the most debated topics in neurology/neurosurgery.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 4: MENINGITIS — WHEN TO IMAGE BEFORE LP -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CT Head (pre-LP) → MRI</span><span class="scenario-title">Fever with Nuchal Rigidity — Pre-LP Decision</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>28-year-old male</strong> college student presents with 2 days of worsening headache, fever (39.6°C), and neck stiffness. His roommate says he has been 'not making sense' for the last few hours. On exam: lethargic, positive Kernig and Brudzinski signs, no focal neurological deficits. No rash. He lives in a dormitory and attended a large gathering last weekend.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>College dormitory living is irrelevant — meningitis affects all populations equally</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Only children get bacterial meningitis</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>The gathering is relevant only for viral meningitis</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>College dormitory living + recent crowded gathering = high risk for Neisseria meningitidis</span></div></div>
+<div class="explanation"><h5>Meningitis Epidemiology by Population</h5><p>Bacterial meningitis etiology varies by age and setting: <strong>Neonates:</strong> Group B Strep, E. coli, Listeria. <strong>Children 3mo-18yr:</strong> N. meningitidis, S. pneumoniae. <strong>18-50yr:</strong> S. pneumoniae (#1), N. meningitidis (#2). <strong>>50yr:</strong> S. pneumoniae, Listeria (immunosenescence), gram-negative bacilli. <strong>Immunocompromised:</strong> Listeria, Cryptococcus (HIV with CD4 <100), TB meningitis. <strong>Post-neurosurgery/VP shunt:</strong> S. aureus, gram-negatives. The dormitory setting raises meningococcal probability — and triggers public health notification and contact prophylaxis.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Meningococcal outbreaks in college dorms, military barracks, and Hajj pilgrims follow predictable epidemiological patterns driven by close-quarter living. Serogroup B (MenB) is not covered by MenACWY vaccine — some universities now require both. Geographic variation meningococcal meningitis belt in sub-Saharan Africa has seasonal epidemics during dry season.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>CT head first, then LP, then antibiotics</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>LP immediately without imaging</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Blood cultures + empiric antibiotics + dexamethasone IMMEDIATELY → then CT head</span></div></div>
+<div class="explanation"><h5>Don't Delay Antibiotics for Imaging</h5><p>This is one of the most important teaching points in emergency medicine: <strong>NEVER delay antibiotics for imaging in suspected bacterial meningitis.</strong> Indications for CT before LP: (1) altered mental status, (2) immunocompromised, (3) history of CNS disease, (4) new-onset seizure, (5) papilledema, (6) focal neurological deficit. This patient has altered mental status → needs CT before LP. But antibiotics are given BEFORE the CT. Blood cultures should be drawn before antibiotics if it takes <2 minutes; otherwise, start antibiotics first.</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>CT is likely NORMAL in uncomplicated bacterial meningitis —</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Diffuse meningeal enhancement</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Hydrocephalus</span></div></div>
+<div class="explanation"><h5>CT Is Often Normal in Meningitis</h5><p>CT in bacterial meningitis is usually normal or shows only subtle findings (cerebral edema, leptomeningeal enhancement with contrast). Its PURPOSE is not to diagnose meningitis but to rule out contraindications to LP (mass lesion, midline shift, obstructive hydrocephalus). If CT is normal → safe to proceed with LP. <strong>MRI with gadolinium</strong> is much more sensitive for meningeal inflammation and complications (ventriculitis, subdural empyema, cerebral infarction from vasculitis) but is obtained later, not as the initial imaging.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Normal CT means meningitis is ruled out — discharge with oral antibiotics</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Normal CT = safe to perform LP → CSF analysis</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Repeat CT in 24 hours before deciding on LP</span></div></div>
+<div class="explanation"><h5>CT Clears for LP — LP Makes the Diagnosis</h5><p>The imaging role in meningitis is permissive (allows LP to be safely performed), not diagnostic. LP findings in bacterial meningitis: WBC >1000 (neutrophil predominant), protein >250 mg/dL, glucose <40 mg/dL (or CSF/serum ratio <0.4), positive Gram stain in ~60-90%. Empiric therapy: <strong>ceftriaxone + vancomycin + dexamethasone</strong> (dex before or with first antibiotic dose reduces mortality in pneumococcal meningitis). Add <strong>ampicillin</strong> if Listeria risk (neonates, elderly, immunocompromised, pregnancy).</p><a href="https://radiopaedia.org/articles/meningitis" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Complete antibiotics and discharge</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Treat and notify only the roommate</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Wait for cultures before notifying public health</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Continue empiric antibiotics + dexamethasone → narrow based on CSF culture →</span></div></div>
+<div class="explanation"><h5>Clinical + Public Health Response</h5><p>Meningitis management uniquely combines acute clinical care with public health response. The epidemiological context (college dormitory) amplifies the public health urgency. Close contacts of meningococcal cases have a 500-800× increased risk of disease in the following days. Post-exposure prophylaxis must begin within 24 hours of case identification. The imaging (CT clearing for LP) triggered the diagnostic cascade, which triggers both treatment and a public health intervention.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 5: HEADACHE WITH RED FLAGS — PSEUDOTUMOR CEREBRI -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CT Head → MRI → LP</span><span class="scenario-title">Chronic Headache with Visual Changes</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>26-year-old woman</strong> with BMI 38 presents with 6 weeks of progressive daily headaches, worse in the morning and with Valsalva maneuvers. She reports transient visual obscurations (brief 'graying out' of vision lasting seconds) and pulsatile tinnitus. On exam: <strong>bilateral papilledema</strong> on fundoscopy. Visual acuity is mildly reduced. She recently started oral contraceptives and tetracycline for acne.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Headache is common in young women — no special workup is needed</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Papilledema always indicates a brain tumor</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Obesity is the only risk factor for IIH</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>IIH has a classic demographic profile: young, obese, female.</span></div></div>
+<div class="explanation"><h5>IIH Risk Factor Profile</h5><p>IIH (pseudotumor cerebri) has one of the most specific demographic profiles in neurology: <strong>90% are women of childbearing age</strong>, and <strong>obesity (BMI >30)</strong> is present in >90% of cases. The incidence increases with BMI: 19/100,000 in women with BMI >40 vs 1/100,000 in general population. <strong>Medication triggers</strong> are critical to identify because drug cessation may be curative: tetracycline antibiotics, oral contraceptives, retinoids (vitamin A, isotretinoin), corticosteroid withdrawal, lithium, and growth hormone. Recent weight gain of even 5-10% can precipitate IIH.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  IIH incidence is rising in parallel with the obesity epidemic. In men or atypical demographics presenting with elevated ICP, consider cerebral venous sinus thrombosis (MRV required to rule out) before diagnosing IIH — the treatment is completely different (anticoagulation vs acetazolamide).</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Lumbar puncture first — measure opening pressure</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>MRI only — CT adds nothing</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>CT or MRI first (to exclude mass lesion and</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Visual field testing only</span></div></div>
+<div class="explanation"><h5>Image BEFORE LP in Papilledema</h5><p>Papilledema means elevated intracranial pressure — you must exclude a mass lesion or hydrocephalus before LP. <strong>MRI with MRV</strong> is preferred: it rules out mass, evaluates for empty sella and enlarged optic nerve sheaths (IIH signs), and critically excludes cerebral venous sinus thrombosis (which mimics IIH). If MRI is unavailable, CT with CT venography is acceptable. After imaging clears structural cause → LP with opening pressure measurement (>25 cmH₂O in lateral decubitus = elevated).</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Large posterior fossa tumor with hydrocephalus</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>MRI shows empty sella, enlarged optic nerve sheaths with tortuous optic nerves</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>MRI shows complete transverse sinus thrombosis</span></div></div>
+<div class="explanation"><h5>IIH Imaging Signs</h5><p>MRI findings in IIH (none are required for diagnosis, but they increase confidence): (1) <strong>empty sella</strong> (CSF pressure compresses pituitary), (2) <strong>enlarged optic nerve sheaths</strong> (perioptic CSF distension), (3) <strong>flattened posterior sclera</strong>, (4) <strong>tortuous optic nerves</strong>, (5) <strong>bilateral transverse sinus stenosis</strong> (common in IIH, but don't confuse with thrombosis). The CRITICAL MRV finding: sinuses are patent (no thrombosis). If thrombosed → completely different treatment.</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Start IV mannitol for acute ICP reduction</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>The imaging alone confirms IIH — LP is not needed</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>MRI/MRV excludes structural/vascular cause → LP with opening pressure</span></div></div>
+<div class="explanation"><h5>LP Confirms + Initiates Treatment</h5><p>IIH diagnosis requires: (1) papilledema, (2) normal neurological exam except CN6 palsy (falsely localizing), (3) normal brain imaging, (4) opening pressure >25 cmH₂O, (5) normal CSF composition. Treatment: <strong>acetazolamide</strong> (reduces CSF production), <strong>weight loss</strong> (5-10% weight reduction can be curative — the most effective long-term intervention), <strong>stop offending medications</strong>. LP with large-volume CSF removal provides immediate symptomatic relief. VP shunt or optic nerve sheath fenestration reserved for refractory cases with progressive vision loss.</p><a href="https://radiopaedia.org/articles/idiopathic-intracranial-hypertension" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Acetazolamide only and follow up in 6 months</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Stop tetracycline and OCPs</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>VP shunt placement</span></div></div>
+<div class="explanation"><h5>Medication Exposures Drive the Cure</h5><p>This case beautifully demonstrates how epidemiology and exposure history drive treatment. The imaging ruled out structural causes, LP confirmed the diagnosis, but the TREATMENT is fundamentally about modifying the risk factors: stopping causative medications and achieving weight loss. The ophthalmology follow-up is critical — IIH's most feared complication is progressive visual loss from chronic papilledema, which can lead to irreversible optic atrophy. Serial visual field testing (every 1-3 months initially) detects deterioration before irreversible damage occurs.</p></div>
+</div></div>
+
+</div></div></div>
+<!-- SCENARIO 6: NEW-ONSET SEIZURE IN AN IMMIGRANT PATIENT -->
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">CT Head → MRI</span><span class="scenario-title">New-Onset Seizure in a Recent Immigrant</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>34-year-old male</strong> from rural Mexico presents after a witnessed generalized tonic-clonic seizure. No prior seizure history. He is postictal and slowly recovering. No fever. He works as a farm laborer and has been in the US for 2 years. Family reports occasional headaches for the past few months. He has no access to regular healthcare.</div>
+<div class="reasoning-steps">
+
+<!-- STEP 0: CONTEXT -->
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>New-onset seizures in adults always mean brain tumor</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>His immigration status is irrelevant to the medical workup</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Rural Mexico + farm work = high pre-test probability for neurocysticercosis</span></div></div>
+<div class="explanation"><h5>Geography Transforms the Seizure Differential</h5><p>Neurocysticercosis (NCC) is the most common cause of acquired epilepsy in Latin America, sub-Saharan Africa, and Southeast Asia. In the US, NCC is most prevalent in immigrants from endemic areas, particularly rural Mexico and Central America. <strong>Critical epidemiological nuance:</strong> NCC is acquired through fecal-oral transmission of T. solium eggs (from a human tapeworm carrier), NOT from eating undercooked pork (which causes intestinal taeniasis, not cysticercosis). This means a household contact who is a tapeworm carrier can transmit NCC to others — including US-born individuals. <strong>Screening household contacts for intestinal taeniasis is a public health intervention.</strong></p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong>  Any immigrant from Latin America, sub-Saharan Africa, India, or Southeast Asia presenting with new-onset seizures should have NCC on the differential. In the US, NCC is estimated to cause 10-20% of seizure-related ED visits in areas with large immigrant populations (Southern California, Texas, Florida). Farm workers may also have co-infections Chagas disease, hookworm, Strongyloides.</div></div>
+</div></div>
+
+<!-- STEP 1: ORDER -->
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>CT head first (fast, available in ED) → MRI brain for definitive</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>MRI only — CT cannot detect cysticercosis</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>EEG as the most important initial test</span></div></div>
+<div class="explanation"><h5>CT → MRI Imaging Sequence</h5><p>CT head is the initial ED imaging for new-onset seizures — it detects calcified granulomas (dead cysts), hydrocephalus, and acute complications. <strong>MRI is essential for definitive NCC diagnosis</strong> — it shows cyst stages with exquisite detail (vesicular cysts with scolex, colloidal/degenerating cysts, calcified remnants) and detects intraventricular cysts that CT misses. <strong>Cysticercosis serology</strong> (enzyme-linked immunoelectrotransfer blot, EITB) has ~98% specificity but sensitivity varies by cyst burden (may be negative with single cyst).</p></div>
+</div></div>
+
+<!-- STEP 2: EXPECT -->
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Normal CT and MRI — must be idiopathic epilepsy</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Large enhancing mass with surrounding edema (tumor)</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>CT: scattered calcified lesions ± ring-enhancing lesion.</span></div></div>
+<div class="explanation"><h5>NCC Imaging Stages</h5><p>NCC has four MRI stages that often coexist: (1) <strong>Vesicular</strong>: well-defined cyst with clear fluid and visible scolex (eccentric nodule = 'hole-with-a-dot') — minimal surrounding edema, may not cause seizures. (2) <strong>Colloidal</strong>: cyst contents become turbid, ring enhancement, surrounding edema — this stage causes seizures and inflammation. (3) <strong>Granular-nodular</strong>: retracting cyst with thick wall, decreasing edema. (4) <strong>Calcified</strong>: small calcified granuloma (may continue to cause seizures).</p></div>
+</div></div>
+
+<!-- STEP 3: INTERPRET -->
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="B"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Start anti-parasitic treatment immediately</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Start anti-epileptic medication</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Surgical removal of all cysts</span></div></div>
+<div class="explanation"><h5>Treatment Depends on Imaging Stage</h5><p>NCC treatment is nuanced and imaging-guided: <strong>Active/viable cysts</strong>: antiparasitic therapy (albendazole 15mg/kg/day × 10-14 days ± praziquantel) + corticosteroids (started 1-2 days before antiparasitics to prevent cyst-death inflammatory flare). <strong>Single enhancing lesion</strong>: may be treated with AEDs alone or AEDs + antiparasitics. <strong>Calcified only</strong>: AEDs only (cysts are dead, antiparasitics won't help). <strong>Intraventricular cysts</strong>: may require endoscopic removal (risk of hydrocephalus). <strong>Subarachnoid (racemose)</strong>: most dangerous form, requires prolonged antiparasitic + anti-inflammatory therapy.</p><a href="https://radiopaedia.org/articles/neurocysticercosis" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div>
+</div></div>
+
+<!-- STEP 4: INTEGRATE -->
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content">
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Treat with albendazole and discharge</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Antiepileptics only — the cysts will calcify on their own</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Refer to neurosurgery for cyst removal</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>AED for seizure control + albendazole + dexamethasone</span></div></div>
+<div class="explanation"><h5>Clinical + Public Health Integration</h5><p>Like meningitis, NCC management bridges clinical care and public health. The imaging identified the cause, but the complete plan addresses: acute seizure control, targeted antiparasitic therapy guided by cyst stage and location, household contact screening (tapeworm carriers perpetuate the cycle of transmission), and connection to healthcare for a patient who has had no regular medical care. The epidemiological context (rural Mexico, farm labor, no healthcare access) drove the differential, and addressing those same social factors is essential for preventing reinfection and ensuring treatment completion.</p></div>
+</div></div>
+
+</div></div></div>
+
+
+<div class="scenario"><div class="scenario-header"><span class="scenario-modality">MRI Spine with Contrast</span><span class="scenario-title">Progressive Lower Extremity Weakness in a Cancer Patient</span></div>
+<div class="scenario-body">
+<div class="vignette"><div class="vignette-label">Clinical Vignette</div>A <strong>64-year-old male</strong> with metastatic non-small cell lung cancer (diagnosed 8 months ago, on immunotherapy) presents with 1 week of progressive mid-back pain that is WORSE when lying down (unlike mechanical back pain). Over the past 48 hours, he has developed bilateral leg weakness, difficulty walking, and urinary hesitancy. On exam: bilateral lower extremity weakness (4/5), hyperreflexia, bilateral Babinski signs, and a sensory level at approximately T8.</div>
+<div class="reasoning-steps">
+<div class="reasoning-step step-0"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">🌍</span><span>Epidemiological Context</span><span class="step-arrow">▾</span></button>
+<div class="step-content"><p class="stem" style="font-weight:600;font-size:1rem;margin-bottom:12px;color:var(--rdx-text,#1e293b);">Which of the following best describes the epidemiological and clinical significance of this presentation?</p>
+<div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Back pain in cancer patients is usually muscular</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Spinal cord compression only occurs with spinal tumors</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Urinary symptoms are unrelated to spinal pathology</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>MSCC affects 5-10% of all cancer patients</span></div></div><div class="explanation"><h5>MSCC — A Time-Critical Oncologic Emergency</h5><p><strong>MSCC epidemiology by primary cancer</strong>: lung (most common), breast, prostate, renal cell, myeloma, lymphoma. <strong>Vertebral level</strong> correlates with cancer type: thoracic (60-70% — most common overall), lumbar (20-30%), cervical (10%). <strong>The neurological window</strong>: cord compression causes progressive ischemia — initially reversible (edema and venous congestion) but becoming irreversible (infarction) within hours to days. <strong>Ambulatory status is the single best prognostic factor</strong>: 80-90% of patients ambulatory at diagnosis remain so after treatment; <10-20% of non-ambulatory patients regain walking ability. This makes EARLY diagnosis critical — back pain in ANY cancer patient should trigger immediate evaluation.</p><div class="pearl"><strong>🌍 Epidemiologic Pearl:</strong> The 'red flags' for MSCC should be memorized by every physician: cancer history + new back pain (especially worse at night/supine, unrelenting, progressive), progressive neurological deficit, bowel/bladder dysfunction. The median time from symptom onset to diagnosis is 2 MONTHS — this delay is the primary reason for poor outcomes. Every cancer patient presenting with new back pain deserves urgent MRI, not 'conservative management with NSAIDs and follow-up in 2 weeks.'</div></div></div></div>
+<div class="reasoning-step step-1"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">1</span><span>What imaging would you order?</span><span class="step-arrow">▾</span></button>
+<div class="step-content"><div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>EMERGENT MRI of the ENTIRE spine with and without gadolinium contrast —</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>CT spine without contrast</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Spine X-rays first</span></div></div><div class="explanation"><h5>Whole-Spine MRI — Emergent, Not Urgent</h5><p>MRI is the definitive study: shows cord compression, epidural tumor mass, vertebral body involvement, paraspinal extension, and the number/location of all metastatic sites. <strong>CRITICAL: image the ENTIRE spine</strong> (cervical through sacrum) — multiple non-contiguous sites are found in 10-38% of patients, and missing a second level of compression leads to incomplete treatment. MRI also distinguishes: epidural tumor compression (most common), pathological fracture with retropulsed bone, and intradural/intramedullary metastases (rare). <strong>If MRI is contraindicated or unavailable</strong>: CT myelography is the alternative. <strong>Plain X-rays and bone scans are inadequate</strong> — they detect bony changes but cannot evaluate the spinal cord.</p></div></div></div>
+<div class="reasoning-step step-2"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">2</span><span>What findings do you expect?</span><span class="step-arrow">▾</span></button>
+<div class="step-content"><div class="choices" data-correct="C"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Normal MRI — the symptoms are from spinal stenosis</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Disc herniation causing cord compression</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Vertebral body metastasis at T7-T8 with epidural soft tissue mass compressing the</span></div></div><div class="explanation"><h5>MSCC MRI Pattern</h5><p>MRI findings: <strong>vertebral body metastasis</strong> (T1 low signal replacing normal bright marrow, T2 variable, post-contrast enhancement), <strong>epidural mass</strong> extending into the spinal canal and compressing the thecal sac/cord, <strong>cord signal change</strong> (T2 hyperintensity = edema/myelopathy — a poor prognostic sign), and possible <strong>pathological fracture</strong> with retropulsed bone fragment. The <strong>Bilsky scale</strong> grades epidural involvement: 0 (bone only), 1a-c (epidural but no cord compression), 2 (cord compression but CSF visible), 3 (cord compression with no CSF visible around the cord = high-grade compression requiring urgent intervention).</p></div></div></div>
+<div class="reasoning-step step-3"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">3</span><span>How do you interpret these findings?</span><span class="step-arrow">▾</span></button>
+<div class="step-content"><div class="choices" data-correct="A"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>MRI confirms MSCC → START DEXAMETHASONE IMMEDIATELY (10mg IV bolus then 4mg IV q6h —</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Start chemotherapy and repeat MRI in 2 weeks</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Pain management and palliative care only</span></div></div><div class="explanation"><h5>Steroids + Definitive Treatment (RT vs Surgery)</h5><p><strong>Dexamethasone</strong> is the immediate first step — it reduces cord edema and can improve neurological function within hours. <strong>Definitive treatment decision</strong>: <strong>Radiation therapy alone</strong>: for patients with radiosensitive tumors (lymphoma, myeloma, small cell lung cancer), poor surgical candidates, or very advanced disease. <strong>Surgical decompression + stabilization followed by radiation</strong>: the Patchell trial showed surgical decompression + RT was superior to RT alone for maintaining ambulation (84% vs 57%) in patients with a single level of compression, good prognosis, and non-radiosensitive tumors. <strong>Surgery first</strong> is also indicated for: spinal instability, pathological fracture with bone retropulsion, unknown primary (tissue needed for diagnosis), and neurological deterioration during radiation.</p><a href="https://radiopaedia.org/articles/spinal-cord-compression" target="_blank" rel="noopener" class="radiopaedia-link">📚 Explore on Radiopaedia →</a></div></div></div>
+<div class="reasoning-step step-4"><button class="step-trigger" aria-expanded="false" onclick="toggleStep(this)"><span class="step-num-badge">4</span><span>How does this change your management?</span><span class="step-arrow">▾</span></button>
+<div class="step-content"><div class="choices" data-correct="D"><div class="choice" onclick="selectChoice(this,'A')"><span class="choice-letter">A.</span><span>Dexamethasone and radiation only</span></div><div class="choice" onclick="selectChoice(this,'B')"><span class="choice-letter">B.</span><span>Surgery for all patients</span></div><div class="choice" onclick="selectChoice(this,'C')"><span class="choice-letter">C.</span><span>Palliative care without treatment</span></div><div class="choice" onclick="selectChoice(this,'D')"><span class="choice-letter">D.</span><span>Immediate dexamethasone + multidisciplinary decision</span></div></div><div class="explanation"><h5>Steroids + Definitive Treatment + Rehabilitation + Goals of Care</h5><p>The MRI confirmed the oncologic emergency and directed urgent intervention. The comprehensive plan addresses: acute cord decompression (steroids + RT/surgery), complications prevention (VTE in an immobile cancer patient is extremely high risk), rehabilitation (physiotherapy to preserve ambulatory function — the most important prognostic factor for quality of remaining life), and goals of care (MSCC is a prognostic turning point — median survival is 3-6 months, making honest discussions about treatment goals essential). The key systemic lesson: back pain in a cancer patient is MSCC until proven otherwise, and delays in diagnosis are the primary reason for poor outcomes.</p></div></div></div>
+</div></div></div>
+<div style="margin-top:32px"><h3 style="font-size:1rem;color:var(--rdx-teal);margin-bottom:12px">Related RadDx Modules</h3>
+<div class="cross-links"><a href="raddx-chest.html" class="cross-link"><div class="cross-link-title">🫁 Chest Imaging</div><div class="cross-link-desc">Pneumonia, PE, pneumothorax</div></a><a href="raddx-cardiac.html" class="cross-link"><div class="cross-link-title">❤️ Cardiac Imaging</div><div class="cross-link-desc">ECG, echo, angiography</div></a><a href="raddx-abdominal.html" class="cross-link"><div class="cross-link-title">🩻 Abdominal Imaging</div><div class="cross-link-desc">CT abdomen, US, HIDA</div></a><a href="raddx-hub.html" class="cross-link"><div class="cross-link-title">← RadDx Hub</div><div class="cross-link-desc">All body systems</div></a></div></div>
+<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--rdx-border)"><h4 style="font-size:.85rem;color:var(--rdx-text-muted);margin-bottom:8px">References</h4>
+<ol style="font-size:.8rem;color:var(--rdx-text-muted);padding-left:18px;line-height:1.8"><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK499997/" target="_blank">Ischemic Stroke — StatPearls</a></li><li><a href="https://doi.org/10.1161/STR.0000000000000211" target="_blank">AHA/ASA Acute Ischemic Stroke Guidelines 2019</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK441958/" target="_blank">Subarachnoid Hemorrhage — StatPearls</a></li><li><a href="https://doi.org/10.1212/01.wnl.0000145580.59610.c3" target="_blank">AAN Meningitis Practice Parameter</a></li><li><a href="https://doi.org/10.1093/cid/cix585" target="_blank">Neurocysticercosis Management — IDSA/ASTMH Guidelines</a></li><li><a href="https://radiopaedia.org" target="_blank">Radiopaedia.org — Open-access radiology reference</a></li></ol></div>
+</div>
+
+<script>
+function toggleStep(btn){const e=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',!e);btn.nextElementSibling.classList.toggle('open')}
+function selectChoice(el,letter){const c=el.closest('.choices'),correct=c.dataset.correct;c.querySelectorAll('.choice').forEach(ch=>{ch.style.pointerEvents='none';const l=ch.querySelector('.choice-letter').textContent.trim().replace('.','');if(l===correct)ch.classList.add('correct');else if(ch===el&&l!==correct)ch.classList.add('wrong')});const ex=c.nextElementSibling;if(ex&&ex.classList.contains('explanation'))ex.classList.add('show')}
+</script>
+<script src="../js/rdx-nav.js" defer></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body></html>

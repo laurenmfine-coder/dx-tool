@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: Clinical Encounter Companion. Build foundational clinical thinking skills for future physicians on ReasonDx.">
+<title>Clinical Encounter Companion | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#0f766e,#0d9488);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
+.container{max-width:720px;margin:0 auto;padding:24px;}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
+.tab{flex:1;padding:10px 16px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-teal);color:#fff;}
+
+/* Form */
+.form-section{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:var(--pm-shadow);}
+.form-section h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.form-row{margin-bottom:16px;}
+.form-row label{display:block;font-size:13px;font-weight:600;color:var(--pm-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;}
+select,input[type="text"],input[type="date"],input[type="time"],textarea{
+  width:100%;padding:10px 14px;border:1px solid var(--pm-border);border-radius:8px;
+  font-family:inherit;font-size:15px;background:var(--pm-bg);transition:.2s;
+}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--pm-teal);box-shadow:0 0 0 3px rgba(15,118,110,.1);}
+textarea{min-height:80px;resize:vertical;}
+
+/* Chips */
+.chip-group{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{padding:8px 16px;border-radius:20px;border:1.5px solid var(--pm-border);background:var(--pm-card);font-size:13px;cursor:pointer;transition:.2s;font-weight:500;}
+.chip:hover{border-color:var(--pm-teal-light);background:var(--pm-teal-50);}
+.chip.selected{background:var(--pm-teal);color:#fff;border-color:var(--pm-teal);}
+
+/* CC Search */
+.cc-search{position:relative;}
+.cc-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:8px;box-shadow:var(--pm-shadow);max-height:240px;overflow-y:auto;z-index:10;display:none;}
+.cc-dropdown.open{display:block;}
+.cc-item{padding:10px 14px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--pm-border);}
+.cc-item:hover{background:var(--pm-teal-50);}
+.cc-item .cc-system{font-size:11px;color:var(--pm-muted);text-transform:uppercase;letter-spacing:.3px;}
+
+/* Response panel */
+.response{background:linear-gradient(135deg,var(--pm-teal-50),#e0f2fe);border:2px solid #99f6e4;border-radius:16px;padding:24px;margin-bottom:20px;}
+.response h3{font-size:17px;color:var(--pm-teal);margin-bottom:16px;font-family:var(--rdx-font-serif);font-weight:400;}
+.response-block{background:rgba(255,255,255,.8);border-radius:12px;padding:16px;margin-bottom:12px;}
+.response-block h4{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.response-block p,.response-block li{font-size:14px;line-height:1.6;}
+.response-block ul{padding-left:20px;}
+.response-block li{margin-bottom:4px;}
+.q-tomorrow{background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:16px;margin-bottom:12px;}
+.q-tomorrow h4{color:#92400e;font-size:14px;margin-bottom:8px;}
+.q-tomorrow li{font-size:14px;color:#78350f;margin-bottom:6px;}
+
+/* Btn */
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-primary{background:var(--pm-teal);color:#fff;}
+.btn-primary:hover{background:#0d9488;}
+.btn-secondary{background:var(--pm-card);color:var(--pm-teal);border:1.5px solid var(--pm-teal);}
+.btn-row{display:flex;gap:12px;justify-content:flex-end;margin-top:20px;}
+
+/* History */
+.history-item{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;transition:.2s;}
+.history-item:hover{border-color:var(--pm-teal-light);box-shadow:var(--pm-shadow);}
+.history-meta{display:flex;gap:12px;align-items:center;margin-bottom:6px;font-size:13px;color:var(--pm-muted);}
+.history-cc{font-weight:700;font-size:15px;}
+.history-note{font-size:13px;color:var(--pm-muted);margin-top:4px;}
+.stat-bar{display:flex;gap:20px;margin-bottom:24px;padding:16px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;}
+.stat{text-align:center;flex:1;}
+.stat-val{font-size:22px;font-weight:700;color:var(--pm-teal);}
+.stat-lbl{font-size:11px;color:var(--pm-muted);text-transform:uppercase;}
+.empty{text-align:center;padding:48px;color:var(--pm-muted);}
+.empty span{font-size:48px;display:block;margin-bottom:12px;}
+.hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<script src="../rdx-nav.js"></script>
+
+<div class="header">
+  <a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a>
+  <h1>📋 Clinical Encounter Companion</h1>
+</div>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('log')">📝 Log Encounter</button>
+    <button class="tab" onclick="showTab('followup')">🔄 Follow Up</button>
+    <button class="tab" onclick="showTab('history')">📊 My Encounters</button>
+  </div>
+
+  <!-- LOG TAB -->
+  <div id="tab-log">
+    <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:20px;">🔒</span>
+      <div>
+        <div style="font-weight:700;color:#991b1b;font-size:14px;margin-bottom:2px;">No Patient Information</div>
+        <div style="font-size:13px;color:#b91c1c;line-height:1.5;">Never enter patient names, dates of birth, room numbers, or other identifying information. This tool tracks <strong>clinical reasoning patterns</strong> you observe, not patient details. All fields use structured categories only.</div>
+      </div>
+    </div>
+    <div class="form-section">
+      <h3>⚡ Quick Entry <span style="font-size:13px;color:var(--pm-muted);font-weight:400;">(Under 2 minutes)</span></h3>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-row"><label>Date</label><input type="date" id="enc-date"></div>
+        <div class="form-row"><label>Time</label><input type="time" id="enc-time"></div>
+      </div>
+
+      <div class="form-row">
+        <label>Setting</label>
+        <div class="chip-group" id="setting-chips">
+          <div class="chip" data-val="Primary Care" onclick="selectChip(this,'setting')">🏥 Primary Care</div>
+          <div class="chip" data-val="ED" onclick="selectChip(this,'setting')">🚑 Emergency Dept</div>
+          <div class="chip" data-val="Specialty" onclick="selectChip(this,'setting')">🔬 Specialty Clinic</div>
+          <div class="chip" data-val="Urgent Care" onclick="selectChip(this,'setting')">⏰ Urgent Care</div>
+          <div class="chip" data-val="Inpatient" onclick="selectChip(this,'setting')">🛏️ Inpatient</div>
+          <div class="chip" data-val="OR" onclick="selectChip(this,'setting')">🔪 OR / Procedure</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Your Role</label>
+        <div class="chip-group" id="role-chips">
+          <div class="chip" data-val="Shadowing" onclick="selectChip(this,'role')">👁️ Shadowing</div>
+          <div class="chip" data-val="MA" onclick="selectChip(this,'role')">🩺 Medical Assistant</div>
+          <div class="chip" data-val="Scribe" onclick="selectChip(this,'role')">✍️ Scribe</div>
+          <div class="chip" data-val="Volunteer" onclick="selectChip(this,'role')">🤝 Volunteer</div>
+          <div class="chip" data-val="CNA" onclick="selectChip(this,'role')">💊 CNA / Tech</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Chief Complaint Category</label>
+        <select id="cc-select" onchange="pickCCFromSelect()">
+          <option value="">— Select chief complaint category —</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>Reasoning Patterns Observed</label>
+        <div class="chip-group" id="reasoning-chips" style="flex-wrap:wrap;">
+          <div class="chip" data-val="system1" onclick="toggleMultiChip(this,'reasoning')">⚡ System 1 (instant recognition)</div>
+          <div class="chip" data-val="system2" onclick="toggleMultiChip(this,'reasoning')">🧠 System 2 (deliberate analysis)</div>
+          <div class="chip" data-val="differential" onclick="toggleMultiChip(this,'reasoning')">📋 Differential discussed</div>
+          <div class="chip" data-val="ruled_out" onclick="toggleMultiChip(this,'reasoning')">🚫 Ruled out dangerous dx first</div>
+          <div class="chip" data-val="slowed_down" onclick="toggleMultiChip(this,'reasoning')">⏸️ Physician slowed down</div>
+          <div class="chip" data-val="bias_possible" onclick="toggleMultiChip(this,'reasoning')">⚠️ Possible bias observed</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>If bias observed, which type?</label>
+        <select id="bias-select">
+          <option value="">— None / Not sure —</option>
+          <option value="anchoring">Anchoring (locked onto first impression)</option>
+          <option value="premature_closure">Premature Closure (stopped searching too early)</option>
+          <option value="availability">Availability Bias (recent cases overweighted)</option>
+          <option value="confirmation">Confirmation Bias (ignored contradictory data)</option>
+          <option value="diagnosis_momentum">Diagnosis Momentum (accepted prior label)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>What do you want to learn more about?</label>
+        <select id="learn-more-select">
+          <option value="">— Select one —</option>
+          <option value="differential">Differential diagnosis for this complaint</option>
+          <option value="pathophys">Pathophysiology behind this condition</option>
+          <option value="treatment">Treatment approach / reasoning</option>
+          <option value="communication">Communication technique observed</option>
+          <option value="procedure">Procedural skill observed</option>
+          <option value="workup">Diagnostic workup / test ordering logic</option>
+          <option value="nothing">Nothing specific — just logging</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="submitEncounter()">💡 Log & Get Recommendations</button>
+      </div>
+    </div>
+
+    <!-- Response Panel (hidden until submit) -->
+    <div id="response-panel" class="hidden">
+      <div class="response">
+        <h3>💡 Your Personalized Learning Response</h3>
+        <div id="response-content"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="resetForm()">Log Another Encounter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div id="tab-followup" class="hidden">
+    <div class="form-section">
+      <h3>🔄 Follow Up on Past Encounters</h3>
+      <p style="font-size:14px;color:var(--pm-muted);margin-bottom:16px;">Track your growth by marking how your understanding has changed since past encounters. No patient details — just your learning patterns.</p>
+      <div id="followup-list"></div>
+    </div>
+  </div>
+
+  <div id="tab-history" class="hidden">
+    <div class="stat-bar">
+      <div class="stat"><div class="stat-val" id="stat-total">0</div><div class="stat-lbl">Encounters</div></div>
+      <div class="stat"><div class="stat-val" id="stat-streak">0</div><div class="stat-lbl">Day Streak</div></div>
+      <div class="stat"><div class="stat-val" id="stat-settings">0</div><div class="stat-lbl">Settings</div></div>
+      <div class="stat"><div class="stat-val" id="stat-ccs">0</div><div class="stat-lbl">Chief Complaints</div></div>
+    </div>
+    <div id="history-list"></div>
+  </div>
+</div>
+
+<script>
+// Chief Complaint Taxonomy (50+ by system)
+const CC_TAXONOMY = {
+  "Cardiovascular": ["Chest pain","Palpitations","Syncope/Fainting","Leg swelling","Shortness of breath on exertion","High blood pressure visit","Heart murmur evaluation"],
+  "Respiratory": ["Cough","Shortness of breath","Wheezing","Hemoptysis","Asthma exacerbation","COPD flare"],
+  "GI": ["Abdominal pain","Nausea/Vomiting","Diarrhea","Constipation","GI bleeding","Heartburn/GERD","Jaundice","Weight loss"],
+  "Neurological": ["Headache","Dizziness","Seizure","Numbness/Tingling","Weakness","Confusion/Altered mental status","Back pain"],
+  "Musculoskeletal": ["Joint pain","Extremity injury","Falls","Sports injury","Chronic pain","Fracture"],
+  "Dermatology": ["Rash","Skin lesion","Wound/Laceration","Abscess","Itching"],
+  "Endocrine": ["Diabetes follow-up","Thyroid concerns","Fatigue","Weight gain","Weight loss"],
+  "Infectious Disease": ["Fever","URI symptoms","UTI symptoms","Cellulitis","COVID/Flu"],
+  "OB/GYN": ["Pregnancy visit","Pelvic pain","Vaginal bleeding","Contraception","Prenatal care"],
+  "Psych/Behavioral": ["Anxiety","Depression","Insomnia","Substance use","Suicidal ideation evaluation"],
+  "Pediatric": ["Well-child check","Ear pain","Pediatric fever","Developmental concerns","Vaccination visit"],
+  "Renal/GU": ["Flank pain","Hematuria","Urinary retention","Kidney stone"],
+  "Heme/Onc": ["Anemia evaluation","Lymphadenopathy","Cancer follow-up","Abnormal labs"],
+  "ENT": ["Sore throat","Ear pain","Nosebleed","Hearing loss","Neck mass"],
+  "Eyes": ["Eye pain","Vision changes","Red eye","Eye injury"],
+  "General": ["Annual physical","Pre-op clearance","Medication refill","Follow-up visit","New patient visit","Chronic disease management"]
+};
+
+const ALL_CCS = [];
+Object.entries(CC_TAXONOMY).forEach(([sys, ccs]) => {
+  ccs.forEach(cc => ALL_CCS.push({ cc, system: sys }));
+});
+
+// Response Engine Data (keyed by chief complaint patterns)
+const RESPONSE_DB = {
+  "chest pain": {
+    "happening": "The physician was likely running through a mental differential: Is this cardiac (ACS, PE, aortic dissection), pulmonary (pneumothorax, pneumonia), GI (GERD, esophageal spasm), or musculoskeletal? The order of the workup — EKG first, troponin, chest X-ray — reflects the need to rule out life-threatening causes before considering benign ones.",
+    "prereqs": [
+      "Cardiac physiology (bio): How the heart generates electrical signals → why EKG is the first test",
+      "Biochemistry: Troponin as a biomarker of myocardial injury — enzyme kinetics in real life",
+      "Anatomy: Coronary artery distribution → why different arteries cause different symptoms"
+    ],
+    "questions": [
+      "What made you decide to order an EKG first vs. a chest X-ray?",
+      "How do you differentiate cardiac chest pain from GI chest pain on history alone?",
+      "What’s the one question you always ask chest pain patients?"
+    ],
+    "watchFor": [
+      "Notice the physician’s body language — do they seem more urgent with some chest pain patients than others? That’s clinical gestalt.",
+      "Watch what happens when the EKG comes back — does the physician’s demeanor change?",
+      "Pay attention to risk factor assessment: age, smoking, diabetes, family history — this is Framingham in action."
+    ],
+    "modules": [
+      "Cardiology CRT cases",
+      "ReasonDx: Cardiac Physiology",
+      "RadDx: Cardiac Imaging"
+    ]
+  },
+  "abdominal pain": {
+    "happening": "Abdominal pain has one of the broadest differentials in medicine. The physician was localizing (which quadrant?), characterizing (sharp vs dull, constant vs colicky), and considering organ systems by location. RLQ in a young person → appendicitis until proven otherwise. Epigastric → gastric/pancreatic. RUQ → gallbladder/liver.",
+    "prereqs": [
+      "Anatomy: Abdominal quadrant mapping — which organs live where",
+      "Physiology: Visceral vs somatic pain pathways — why early appendicitis hurts at the umbilicus before migrating to RLQ",
+      "Biochemistry: Lipase and amylase as markers of pancreatic inflammation"
+    ],
+    "questions": [
+      "How did you narrow the differential based on the location of pain?",
+      "When do you decide a patient needs imaging vs. a trial of treatment?",
+      "What’s the most commonly missed abdominal emergency?"
+    ],
+    "watchFor": [
+      "Watch the physical exam closely — palpation order matters (they start AWAY from the pain)",
+      "Notice if they check for rebound tenderness and Murphy’s sign — these are named exam maneuvers with specific diagnostic value",
+      "Pay attention to whether they order labs before or after the exam"
+    ],
+    "modules": [
+      "GI CRT cases",
+      "ReasonDx: GI Physiology",
+      "RadDx: Abdominal Imaging"
+    ]
+  },
+  "headache": {
+    "happening": "The physician was screening for ‘red flags’ that indicate a dangerous secondary headache (SAH, meningitis, mass, temporal arteritis) vs a primary headache (migraine, tension, cluster). The key question: ‘Is this the worst headache of your life?’ screens for subarachnoid hemorrhage.",
+    "prereqs": [
+      "Neuroanatomy: Meningeal layers and why subarachnoid bleeding causes the ‘worst headache of my life’",
+      "Physiology: Intracranial pressure dynamics — why headaches worse in the morning suggest elevated ICP",
+      "Pharmacology: Triptans for migraines — serotonin receptor agonists (5-HT1B/1D)"
+    ],
+    "questions": [
+      "What are the ‘red flags’ that make you worry a headache is dangerous?",
+      "How do you decide between ordering a CT scan vs treating and sending home?",
+      "What’s the difference between how you approach a first-time headache vs a chronic headache patient?"
+    ],
+    "watchFor": [
+      "Notice if the physician does a neurological exam (pupil check, strength testing, coordination)",
+      "Listen for the temporal artery question in older patients",
+      "Watch how they assess neck stiffness — this is meningismus testing"
+    ],
+    "modules": [
+      "Neuro CRT cases",
+      "ReasonDx: Neurophysiology",
+      "RadDx: Neuroimaging"
+    ]
+  },
+  "shortness of breath": {
+    "happening": "Dyspnea has a broad differential spanning cardiac (heart failure, ACS), pulmonary (PE, pneumonia, asthma, COPD, pneumothorax), and other systems (anemia, anxiety, metabolic acidosis). The physician was using history to narrow: acute vs chronic, positional (orthopnea → HF), associated symptoms, and risk factors.",
+    "prereqs": [
+      "Physiology: Gas exchange mechanics — why V/Q mismatch causes hypoxemia",
+      "Biochemistry: Oxygen-hemoglobin dissociation curve — why some patients tolerate low O2 better than others",
+      "Physics: Boyle’s law and respiratory mechanics — negative pressure ventilation"
+    ],
+    "questions": [
+      "What’s your approach when a patient says ‘I can’t breathe’?",
+      "How do you differentiate cardiac from pulmonary causes of dyspnea?",
+      "When do you decide someone needs admission vs can go home?"
+    ],
+    "watchFor": [
+      "Watch pulse oximetry — does the physician check it immediately?",
+      "Notice if they listen to lungs AND heart — both systems cause dyspnea",
+      "Pay attention to legs (edema → HF) and neck veins (JVP → fluid overload)"
+    ],
+    "modules": [
+      "Pulmonary CRT cases",
+      "ReasonDx: Respiratory Physiology",
+      "RadDx: Chest Imaging"
+    ]
+  },
+  "back pain": {
+    "happening": "The physician was risk-stratifying: is this mechanical (>95% of cases) or is there a red flag? Red flags: cancer history, fever (infection), trauma, neurological deficits (weakness, numbness, bowel/bladder dysfunction → cauda equina or cord compression), IV drug use, recent procedure. Mechanical back pain gets conservative treatment. Red flags get imaging.",
+    "prereqs": [
+      "Anatomy: Spinal column structure — vertebral bodies, discs, nerve roots, spinal cord",
+      "Physiology: Dermatome mapping — which nerve root causes which pattern of numbness",
+      "Pathophysiology: Disc herniation mechanics — why flexion loads stress the posterior annulus"
+    ],
+    "questions": [
+      "What red flags do you screen for with every back pain patient?",
+      "How do you decide who needs imaging vs conservative treatment?",
+      "What would make you worried about cauda equina syndrome?"
+    ],
+    "watchFor": [
+      "Watch for the straight leg raise test — positive = nerve root irritation",
+      "Notice if they check strength, sensation, and reflexes in the legs — this maps to specific nerve roots",
+      "Pay attention to whether they ask about bowel and bladder function — this screens for cauda equina"
+    ],
+    "modules": [
+      "MSK CRT cases",
+      "RadDx: MSK Imaging",
+      "RadDx: Neuroimaging (spinal cord compression)"
+    ]
+  },
+  "fever": {
+    "happening": "Fever triggers a systematic search for the source: respiratory (pneumonia), urinary (UTI/pyelonephritis), abdominal (appendicitis, cholecystitis, abscess), skin/soft tissue (cellulitis), CNS (meningitis), bloodstream (bacteremia/sepsis). The physician was asking organ-system-specific questions to localize the infection, then deciding if this is simple outpatient treatment or sepsis requiring emergent intervention.",
+    "prereqs": [
+      "Physiology: Thermoregulation — how pyrogens reset the hypothalamic set point",
+      "Microbiology: Bacterial vs viral vs fungal patterns — which infections cause which fever patterns",
+      "Immunology: The inflammatory cascade — IL-1, IL-6, TNF-alpha and their role in fever generation"
+    ],
+    "questions": [
+      "How do you decide if a fever is viral vs bacterial?",
+      "What makes you worried about sepsis vs a simple infection?",
+      "When do you start antibiotics empirically vs waiting for culture results?"
+    ],
+    "watchFor": [
+      "Watch whether they order blood cultures before starting antibiotics — this sequence matters",
+      "Notice the sepsis screening: HR, BP, respiratory rate, mental status, lactate",
+      "Pay attention to whether they perform a complete exam looking for a source — the source isn’t always obvious"
+    ],
+    "modules": [
+      "Infectious Disease CRT cases",
+      "ReasonDx: Immune Response"
+    ]
+  },
+  "rash": {
+    "happening": "Dermatology reasoning is uniquely visual: the physician was describing the morphology (macule, papule, vesicle, plaque), distribution (central vs peripheral, dermatomal, sun-exposed), and pattern (acute vs chronic, spreading vs stable). Then matching to a pattern: is this allergic, infectious, autoimmune, or malignant?",
+    "prereqs": [
+      "Anatomy: Skin structure — epidermis, dermis, subcutaneous tissue",
+      "Immunology: Type I-IV hypersensitivity reactions — urticaria (Type I) vs contact dermatitis (Type IV)",
+      "Microbiology: Viral exanthems — measles, varicella, hand-foot-mouth patterns"
+    ],
+    "questions": [
+      "How do you describe this rash using dermatology terminology?",
+      "What’s your approach to an unknown rash — where do you start?",
+      "When does a rash make you worried about a systemic disease?"
+    ],
+    "watchFor": [
+      "Watch the physician describe the rash out loud — they’re using a specific vocabulary (morphology + distribution + pattern)",
+      "Notice if they press on the rash (blanching vs non-blanching — non-blanching = petechiae = possible emergency)",
+      "Pay attention to whether they ask about medications — drug rashes are extremely common"
+    ],
+    "modules": [
+      "Dermatology modules",
+      "ReasonDx: Immune Hypersensitivity"
+    ]
+  },
+  "joint pain": {
+    "happening": "Joint pain reasoning starts with: monoarticular (one joint) vs polyarticular (many joints), acute vs chronic, inflammatory (warm, swollen, morning stiffness >30min) vs mechanical (worse with use, better with rest). Acute monoarticular = must rule out septic arthritis (a joint emergency). The physician was risk-stratifying for this worst-case first.",
+    "prereqs": [
+      "Anatomy: Synovial joint structure — cartilage, synovium, synovial fluid",
+      "Immunology: Autoimmune joint disease — rheumatoid arthritis (Type III hypersensitivity)",
+      "Biochemistry: Uric acid metabolism — why gout is a disease of purine catabolism"
+    ],
+    "questions": [
+      "How do you differentiate inflammatory from mechanical joint pain?",
+      "What makes you worried about septic arthritis?",
+      "How do you decide between X-ray, MRI, and joint aspiration?"
+    ],
+    "watchFor": [
+      "Watch if they aspirate the joint — synovial fluid analysis is the gold standard for acute monoarthritis",
+      "Notice the pattern: which joints are involved tells you the diagnosis (DIP = OA, MCP/PIP = RA, 1st MTP = gout)",
+      "Pay attention to morning stiffness duration — >30 min = inflammatory, <30 min = mechanical"
+    ],
+    "modules": [
+      "MSK CRT cases",
+      "ReasonDx: Musculoskeletal",
+      "RadDx: MSK Imaging"
+    ]
+  },
+  "cough": {
+    "happening": "Cough reasoning is timeline-driven: acute (<3 weeks) vs subacute (3-8 weeks) vs chronic (>8 weeks). Acute = usually infectious (viral URI, pneumonia) or concerning (PE, HF). Chronic = the big three are upper airway cough syndrome (post-nasal drip), asthma, and GERD. The physician was asking about duration, productivity (dry vs wet), associated symptoms, and red flags (hemoptysis, weight loss).",
+    "prereqs": [
+      "Physiology: Cough reflex arc — vagal afferents, medullary cough center, efferent muscles",
+      "Anatomy: Airway anatomy — where receptors are concentrated explains why different conditions cause cough",
+      "Pharmacology: ACE inhibitors cause cough in 5-20% of patients via bradykinin accumulation"
+    ],
+    "questions": [
+      "How does the duration of a cough change your differential?",
+      "When does a cough warrant a chest X-ray?",
+      "What’s the most common cause of chronic cough that patients don’t expect?"
+    ],
+    "watchFor": [
+      "Listen for whether they ask about ACE inhibitor use — it’s one of the most common medication causes of chronic cough",
+      "Notice if they ask about GERD symptoms — acid reflux causes cough even without heartburn",
+      "Watch whether they order a chest X-ray or treat empirically — this reveals their risk assessment"
+    ],
+    "modules": [
+      "Pulmonary CRT cases",
+      "RadDx: Chest Imaging"
+    ]
+  },
+  "dizziness": {
+    "happening": "Dizziness is one of the most diagnostically challenging complaints because the word means different things to different patients. The physician was clarifying: vertigo (room spinning = vestibular), presyncope (feeling like going to faint = cardiovascular), disequilibrium (unsteadiness = neurological), or lightheadedness (vague = multifactorial). Each has a completely different workup.",
+    "prereqs": [
+      "Neuroanatomy: Vestibular system — semicircular canals, otolith organs, vestibular nerve",
+      "Physiology: Baroreceptor reflex — why standing up too fast causes presyncope",
+      "Pharmacology: Vestibular suppressants — meclizine, benzodiazepines and their mechanisms"
+    ],
+    "questions": [
+      "How do you get patients to describe their dizziness more specifically?",
+      "What exam maneuvers help you differentiate central from peripheral vertigo?",
+      "When does dizziness make you worried about a stroke?"
+    ],
+    "watchFor": [
+      "Watch for the Dix-Hallpike maneuver — the diagnostic test for BPPV (the most common cause of vertigo)",
+      "Notice if they check orthostatic vitals (lying → sitting → standing) — this tests for presyncope",
+      "Pay attention to the HINTS exam if done (Head Impulse, Nystagmus, Test of Skew) — this differentiates peripheral from central vertigo"
+    ],
+    "modules": [
+      "Neuro CRT cases",
+      "ReasonDx: Neurophysiology"
+    ]
+  },
+  "palpitations": {
+    "happening": "The physician was determining: is this benign (PVCs, anxiety, caffeine) or dangerous (SVT, AFib, VT)? History is key: duration (seconds vs hours), regularity, associated symptoms (syncope or near-syncope = dangerous), triggers (caffeine, alcohol, stress, exercise). An EKG during symptoms is the gold standard but symptoms are often intermittent.",
+    "prereqs": [
+      "Physiology: Cardiac conduction system — SA node, AV node, His-Purkinje and what happens when each misfires",
+      "Biochemistry: Ion channels — Na+, K+, Ca2+ channels and how they create action potentials",
+      "Pharmacology: Beta-blockers and calcium channel blockers — how they control heart rate"
+    ],
+    "questions": [
+      "What features of palpitations worry you most?",
+      "How do you decide between an EKG, Holter monitor, or event monitor?",
+      "When do palpitations need urgent evaluation vs reassurance?"
+    ],
+    "watchFor": [
+      "Watch if they order an EKG — capturing the rhythm during symptoms is diagnostic gold",
+      "Notice if they ask about caffeine, alcohol, stimulant medications, and supplements",
+      "Pay attention to whether they feel the pulse — regular vs irregular tells you a lot"
+    ],
+    "modules": [
+      "Cardiology CRT cases",
+      "ReasonDx: Cardiac Physiology"
+    ]
+  },
+  "anxiety": {
+    "happening": "The physician was doing two things simultaneously: (1) assessing the mental health complaint (severity, duration, functional impairment, safety screening for suicidal ideation), and (2) ruling out medical mimics — hyperthyroidism, cardiac arrhythmia, pheochromocytoma, substance use, and medication side effects can all present as anxiety. This dual approach is critical.",
+    "prereqs": [
+      "Neuroscience: Amygdala and fear circuitry — the neurobiology of anxiety",
+      "Physiology: Sympathetic nervous system activation — the fight-or-flight response",
+      "Pharmacology: SSRIs, SNRIs, benzodiazepines — different mechanisms for treating anxiety"
+    ],
+    "questions": [
+      "How do you screen for medical causes of anxiety before diagnosing a primary anxiety disorder?",
+      "What’s your approach to safety screening (suicidal ideation)?",
+      "How do you decide between therapy, medication, or both?"
+    ],
+    "watchFor": [
+      "Notice if they order thyroid labs (TSH) — hyperthyroidism mimics anxiety almost perfectly",
+      "Watch the safety screening — asking about suicidal ideation directly is standard of care and does NOT increase risk",
+      "Pay attention to the treatment discussion — CBT has equal efficacy to SSRIs for many anxiety disorders"
+    ],
+    "modules": [
+      "Psychiatry modules",
+      "ReasonDx: Neurophysiology"
+    ]
+  },
+  "uti": {
+    "happening": "The physician was distinguishing uncomplicated UTI (lower tract: dysuria, frequency, urgency in a young non-pregnant woman) from complicated UTI (upper tract/pyelonephritis: fever, flank pain) and from conditions that mimic UTI (STIs, vaginitis, interstitial cystitis). Uncomplicated UTI in young women may be treated empirically without urine culture.",
+    "prereqs": [
+      "Microbiology: E. coli as the #1 uropathogen (80%) — virulence factors (fimbriae, adhesins)",
+      "Anatomy: Female vs male urethral anatomy — why UTIs are 30x more common in women",
+      "Pharmacology: Antibiotic stewardship — nitrofurantoin and TMP-SMX as first-line vs fluoroquinolones"
+    ],
+    "questions": [
+      "How do you differentiate UTI from pyelonephritis clinically?",
+      "When do you send a urine culture vs treat empirically?",
+      "Why are fluoroquinolones no longer first-line for uncomplicated UTI?"
+    ],
+    "watchFor": [
+      "Notice if they do a pelvic exam — STIs and vaginitis cause similar symptoms",
+      "Watch if they order a urine culture or just a urinalysis — this depends on whether it’s complicated or uncomplicated",
+      "Pay attention to antibiotic choice — this reflects stewardship principles and local resistance patterns"
+    ],
+    "modules": [
+      "Renal/GU CRT cases",
+      "ReasonDx: Renal Physiology"
+    ]
+  },
+  "diabetes": {
+    "happening": "Diabetes follow-up is a masterclass in chronic disease management. The physician was reviewing: glycemic control (A1c trends), medication adherence and side effects, screening for complications (retinopathy, nephropathy, neuropathy, cardiovascular risk), lifestyle factors (diet, exercise, weight), and preventive care (flu vaccine, foot exams). This is population health at the individual level.",
+    "prereqs": [
+      "Biochemistry: Insulin signaling and glucose metabolism — why Type 1 vs Type 2 have different mechanisms",
+      "Physiology: Gluconeogenesis, glycogenolysis, and how the body maintains glucose homeostasis",
+      "Pharmacology: Metformin, sulfonylureas, SGLT2 inhibitors, GLP-1 agonists — each works differently"
+    ],
+    "questions": [
+      "How do you set A1c goals for different patients?",
+      "What’s your approach when a patient isn’t meeting their A1c target?",
+      "How do you screen for diabetic complications and how often?"
+    ],
+    "watchFor": [
+      "Watch the foot exam — monofilament testing screens for neuropathy (diabetic foot ulcers are the #1 cause of non-traumatic amputation)",
+      "Notice if they review the medication list for kidney protection (ACE inhibitors) and cardiovascular benefit (SGLT2i, GLP-1 agonists)",
+      "Pay attention to the lifestyle conversation — how does the physician motivate behavior change?"
+    ],
+    "modules": [
+      "Endocrine CRT cases",
+      "ReasonDx: Endocrine Physiology"
+    ]
+  },
+  "pediatric fever": {
+    "happening": "Pediatric fever reasoning is age-stratified: neonates (<28 days) get a full sepsis workup regardless of how well they look (blood, urine, CSF). Infants 29-90 days use risk-stratification tools (Rochester criteria, Step-by-Step). Older infants and children are assessed clinically. The younger the child, the more aggressive the workup — because neonates can’t tell you what hurts.",
+    "prereqs": [
+      "Microbiology: Age-based pathogens — GBS and E. coli in neonates, Strep pneumo and Haemophilus in infants",
+      "Immunology: Neonatal immune immaturity — why newborns are vulnerable to overwhelming sepsis",
+      "Physiology: Thermoregulation in neonates — why temperature instability (hypo OR hyperthermia) is a red flag"
+    ],
+    "questions": [
+      "How does the patient’s age change your approach to fever?",
+      "What makes you do a full sepsis workup vs treating conservatively?",
+      "What’s the most important thing parents should know about fever in their newborn?"
+    ],
+    "watchFor": [
+      "Watch if the physician checks the child’s activity level, feeding, and consolability — these are more important than the number on the thermometer",
+      "Notice age-based decision-making: a 2-week-old with 100.4°F gets a lumbar puncture; a 3-year-old does not",
+      "Pay attention to whether they reassure vs worry the parents — communication in pediatrics is a unique skill"
+    ],
+    "modules": [
+      "Pediatric CRT cases",
+      "RadDx: Pediatric Imaging"
+    ]
+  },
+  "ear pain": {
+    "happening": "Ear pain (otalgia) can be primary (otitis media, otitis externa, TM perforation) or referred (TMJ, dental, pharyngeal, cervical spine). The physician was using the otoscope to visualize the tympanic membrane — a bulging, erythematous TM with effusion = acute otitis media. A normal TM with ear pain = look elsewhere (referred pain).",
+    "prereqs": [
+      "Anatomy: Middle ear anatomy — TM, ossicles, Eustachian tube, and why children get more ear infections (shorter, more horizontal tube)",
+      "Microbiology: Strep pneumo, H. influenzae, Moraxella — the triad of AOM pathogens",
+      "Pharmacology: Watchful waiting vs antibiotics in AOM — AAP guidelines by age and severity"
+    ],
+    "questions": [
+      "How do you decide between watchful waiting and antibiotics for an ear infection?",
+      "What does a normal vs abnormal tympanic membrane look like?",
+      "When do ear infections need ENT referral?"
+    ],
+    "watchFor": [
+      "Watch the otoscope exam technique — pulling the pinna up and back (adults) or down and back (children) straightens the canal",
+      "Notice the pneumatic otoscopy — squeezing the bulb tests TM mobility (immobile = effusion)",
+      "Pay attention to whether they check for mastoid tenderness — this screens for the dangerous complication of mastoiditis"
+    ],
+    "modules": [
+      "ENT modules",
+      "RadDx: Head & Neck Imaging"
+    ]
+  },
+  "pelvic pain": {
+    "happening": "Pelvic pain in a reproductive-age female requires ruling out: ectopic pregnancy (life-threatening — pregnancy test is ALWAYS first), ovarian torsion (surgical emergency), ruptured ovarian cyst, PID/tubo-ovarian abscess, appendicitis, and endometriosis. The physician was taking a menstrual and sexual history and ordering a pregnancy test before anything else.",
+    "prereqs": [
+      "Anatomy: Female reproductive anatomy — ovaries, fallopian tubes, uterus and their anatomic relationships",
+      "Physiology: Menstrual cycle physiology — how hormonal fluctuations cause cyclic vs non-cyclic pelvic pain",
+      "Embryology: Ectopic pregnancy pathophysiology — why the fallopian tube can’t sustain a pregnancy"
+    ],
+    "questions": [
+      "Why is a pregnancy test the first thing you order for ANY reproductive-age woman with pelvic pain?",
+      "How do you differentiate ovarian torsion from a ruptured cyst clinically?",
+      "What makes you worried about PID and why does it matter for future fertility?"
+    ],
+    "watchFor": [
+      "Watch whether the pregnancy test is ordered BEFORE imaging — this changes the entire differential and workup",
+      "Notice the pelvic exam technique and what they’re assessing (cervical motion tenderness = PID or ectopic)",
+      "Pay attention to the ultrasound order — transvaginal is more sensitive than transabdominal for pelvic pathology"
+    ],
+    "modules": [
+      "OB/GYN CRT cases",
+      "RadDx: OB/GYN Imaging"
+    ]
+  },
+  "fatigue": {
+    "happening": "Fatigue is one of the most common and most challenging complaints. The physician was screening for medical causes: anemia (CBC), thyroid disease (TSH), diabetes (glucose/A1c), depression (PHQ-9), sleep disorders (sleep apnea screen), and medication side effects. Fatigue is often multifactorial — rarely does one test explain everything.",
+    "prereqs": [
+      "Physiology: Energy metabolism — ATP production, mitochondrial function",
+      "Endocrinology: Thyroid hormone and metabolic rate — why hypothyroidism causes fatigue",
+      "Hematology: Oxygen delivery — why anemia causes fatigue (reduced O2 carrying capacity)"
+    ],
+    "questions": [
+      "What’s your standard workup for unexplained fatigue?",
+      "How do you screen for depression when a patient presents with physical symptoms?",
+      "When do you worry that fatigue is a sign of something serious like cancer?"
+    ],
+    "watchFor": [
+      "Watch the screening questions — sleep quality, mood, stress, diet, exercise all matter",
+      "Notice if they use a standardized depression screening tool (PHQ-2 or PHQ-9)",
+      "Pay attention to the lab panel — CBC, TSH, BMP, and glucose cover most medical causes"
+    ],
+    "modules": [
+      "Endocrine CRT cases",
+      "ReasonDx: Endocrine Physiology"
+    ]
+  },
+  "wound": {
+    "happening": "Wound management reasoning includes: mechanism (laceration, puncture, crush, bite), contamination risk (dirty vs clean, time since injury), tetanus status, need for imaging (foreign body, fracture underneath), repair technique (sutures, staples, glue, secondary intention), and infection risk. The physician was deciding the optimal closure method and antibiotic need.",
+    "prereqs": [
+      "Anatomy: Skin layers and wound healing biology — inflammatory, proliferative, and remodeling phases",
+      "Microbiology: Wound infection pathogens — Staph aureus, Strep, anaerobes, Pasteurella (animal bites)",
+      "Immunology: Tetanus pathophysiology and why boosters are needed every 10 years"
+    ],
+    "questions": [
+      "How do you decide between sutures, staples, and glue?",
+      "What’s your approach to tetanus prophylaxis — when does a wound need it?",
+      "When does a wound need antibiotics vs just good wound care?"
+    ],
+    "watchFor": [
+      "Watch the wound exploration — the physician checks for tendon/nerve/vessel injury before closing",
+      "Notice the irrigation technique — high-pressure irrigation with saline reduces infection more than any antibiotic",
+      "Pay attention to the tetanus question — this is a real-time vaccine decision"
+    ],
+    "modules": [
+      "Emergency Medicine modules",
+      "Wound care references"
+    ]
+  },
+  "syncope": {
+    "happening": "Syncope (fainting) requires risk stratification: benign (vasovagal, orthostatic, situational) vs dangerous (cardiac arrhythmia, structural heart disease, PE, aortic dissection). The physician was asking about prodrome (lightheadedness, nausea, tunnel vision = vasovagal), position (standing = orthostatic), exertional (= cardiac until proven otherwise), and whether there was true loss of consciousness vs near-syncope.",
+    "prereqs": [
+      "Physiology: Cerebral perfusion and autoregulation — why the brain faints when blood pressure drops",
+      "Cardiology: Arrhythmia mechanisms — long QT, WPW, complete heart block",
+      "Pharmacology: Medications that cause orthostatic hypotension — antihypertensives, diuretics, alpha-blockers"
+    ],
+    "questions": [
+      "What features of syncope make you worried about a cardiac cause?",
+      "How do you differentiate syncope from a seizure?",
+      "What’s your approach to the EKG in a syncope patient — what are you looking for?"
+    ],
+    "watchFor": [
+      "Watch if they order an EKG — this is standard for ALL syncope to screen for arrhythmia",
+      "Notice if they check orthostatic vitals (lying → standing) — a drop in BP = orthostatic cause",
+      "Pay attention to whether exertion was involved — exertional syncope is ALWAYS cardiac until proven otherwise (hypertrophic cardiomyopathy in young athletes)"
+    ],
+    "modules": [
+      "Cardiology CRT cases",
+      "ReasonDx: Cardiac Physiology"
+    ]
+  }
+};
+
+// Default response for complaints not in the specific DB
+const DEFAULT_RESPONSE = {
+  happening: "The physician was gathering a focused history (using OLDCARTS: Onset, Location, Duration, Character, Aggravating/Alleviating, Radiation, Timing, Severity), performing a targeted physical exam based on the differential diagnosis, and then deciding whether labs, imaging, or empiric treatment was the next best step.",
+  prereqs: ["Anatomy: What structures are in the area of the complaint?", "Physiology: What's the normal function of the affected system?", "Pathophysiology: What mechanisms could produce these symptoms?"],
+  questions: ["What was at the top of your differential and why?", "What one piece of the history most changed your thinking?", "What would have made you more worried about this patient?"],
+  watchFor: ["Notice the order of the workup — it reveals what the physician considers most dangerous", "Watch how the physician communicates the plan to the patient — this is shared decision-making in action", "Pay attention to what gets documented — documentation reflects clinical reasoning priorities"],
+  modules: ["Explore related CRT cases", "ReasonDx: System-specific pathophysiology"]
+};
+
+// State
+let selectedSetting = null;
+let selectedRole = null;
+let selectedCC = null;
+let encounters = JSON.parse(localStorage.getItem('rdx-premed-encounters') || '[]');
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  document.getElementById('enc-date').value = now.toISOString().split('T')[0];
+  document.getElementById('enc-time').value = now.toTimeString().slice(0,5);
+  renderHistory();
+});
+
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-log').classList.toggle('hidden', tab !== 'log');
+  document.getElementById('tab-followup').classList.toggle('hidden', tab !== 'followup');
+  document.getElementById('tab-history').classList.toggle('hidden', tab !== 'history');
+  if (tab === 'history') renderHistory();
+  if (tab === 'followup') renderFollowups();
+}
+
+function selectChip(el, group) {
+  el.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  if (group === 'setting') selectedSetting = el.dataset.val;
+  if (group === 'role') selectedRole = el.dataset.val;
+}
+
+// Populate CC select dropdown
+function populateCCSelect() {
+  const sel = document.getElementById('cc-select');
+  Object.entries(CC_TAXONOMY).forEach(([sys, ccs]) => {
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = sys;
+    ccs.forEach(cc => {
+      const opt = document.createElement('option');
+      opt.value = JSON.stringify({ cc, system: sys });
+      opt.textContent = cc;
+      optgroup.appendChild(opt);
+    });
+    sel.appendChild(optgroup);
+  });
+}
+populateCCSelect();
+
+function pickCCFromSelect() {
+  const val = document.getElementById('cc-select').value;
+  if (val) {
+    selectedCC = JSON.parse(val);
+  } else {
+    selectedCC = null;
+  }
+}
+
+// Multi-select chip toggle
+let selectedReasoning = new Set();
+function toggleMultiChip(el, group) {
+  const val = el.dataset.val;
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    selectedReasoning.delete(val);
+  } else {
+    el.classList.add('selected');
+    selectedReasoning.add(val);
+  }
+}
+
+document.addEventListener('click', e => {});
+
+function getResponse(cc) {
+  const lower = cc.toLowerCase();
+  for (const [key, resp] of Object.entries(RESPONSE_DB)) {
+    if (lower.includes(key)) return resp;
+  }
+  return DEFAULT_RESPONSE;
+}
+
+function submitEncounter() {
+  if (!selectedSetting) { alert('Please select a setting.'); return; }
+  if (!selectedRole) { alert('Please select your role.'); return; }
+  if (!selectedCC) { alert('Please select a chief complaint category.'); return; }
+
+  const encounter = {
+    id: Date.now(),
+    date: document.getElementById('enc-date').value,
+    time: document.getElementById('enc-time').value,
+    setting: selectedSetting,
+    role: selectedRole,
+    cc: selectedCC.cc,
+    system: selectedCC.system,
+    reasoning: [...selectedReasoning],
+    bias: document.getElementById('bias-select').value || null,
+    learnMore: document.getElementById('learn-more-select').value || null
+  };
+
+  encounters.unshift(encounter);
+  localStorage.setItem('rdx-premed-encounters', JSON.stringify(encounters));
+
+  // Generate response
+  const resp = getResponse(selectedCC.cc);
+  const roleIsMA = selectedRole === 'MA' || selectedRole === 'CNA';
+
+  let html = '';
+  
+  // What Was Happening
+  html += `<div class="response-block"><h4>🧠 What Was Likely Happening</h4><p>${resp.happening}</p></div>`;
+
+  // Prereq Connections
+  html += `<div class="response-block"><h4>🔗 Connect to Your Prereqs</h4><ul>${resp.prereqs.map(p => `<li>${p}</li>`).join('')}</ul></div>`;
+
+  // Questions to Ask Tomorrow
+  html += `<div class="q-tomorrow"><h4>❓ Questions to Ask ${roleIsMA ? 'the Physician at Work' : 'During Your Next Shadowing'}</h4><ul>${resp.questions.map(q => `<li>"${q}"</li>`).join('')}</ul></div>`;
+
+  // What to Watch For
+  html += `<div class="response-block"><h4>👁️ ${roleIsMA ? 'Reframe for Tomorrow\'s Shift' : 'What to Watch For Next Time'}</h4><ul>${resp.watchFor.map(w => `<li>${w}</li>`).join('')}</ul></div>`;
+
+  // MA-specific daily reframe
+  if (roleIsMA) {
+    html += `<div class="response-block" style="background:#f0fdfa;"><h4>🩺 MA Daily Reframe Challenge</h4>
+      <p style="font-weight:600;margin-bottom:8px;">Before your next shift, try this:</p>
+      <ul>
+        <li>When you room the next patient with a similar complaint, <strong>predict</strong> what the physician will focus on before they walk in</li>
+        <li>After the visit, ask yourself: could you explain <em>why</em> they ordered what they ordered?</li>
+        <li>Track your prediction accuracy over a week — you'll be surprised how quickly you improve</li>
+      </ul></div>`;
+  }
+
+  // Recommended modules
+  html += `<div class="response-block"><h4>📚 Recommended Platform Modules</h4><ul>${resp.modules.map(m => `<li>→ ${m}</li>`).join('')}</ul></div>`;
+
+  document.getElementById('response-content').innerHTML = html;
+  document.getElementById('response-panel').classList.remove('hidden');
+  document.querySelector('.form-section').classList.add('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  document.querySelector('.form-section').classList.remove('hidden');
+  document.getElementById('response-panel').classList.add('hidden');
+  document.getElementById('cc-select').value = '';
+  document.getElementById('bias-select').value = '';
+  document.getElementById('learn-more-select').value = '';
+  document.querySelectorAll('#reasoning-chips .chip').forEach(c => c.classList.remove('selected'));
+  selectedReasoning.clear();
+  selectedCC = null;
+  const now = new Date();
+  document.getElementById('enc-date').value = now.toISOString().split('T')[0];
+  document.getElementById('enc-time').value = now.toTimeString().slice(0,5);
+}
+
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  
+  // Stats
+  const uniqueSettings = new Set(encounters.map(e => e.setting));
+  const uniqueCCs = new Set(encounters.map(e => e.cc));
+  document.getElementById('stat-total').textContent = encounters.length;
+  document.getElementById('stat-settings').textContent = uniqueSettings.size;
+  document.getElementById('stat-ccs').textContent = uniqueCCs.size;
+  
+  // Streak calc
+  let streak = 0;
+  const today = new Date().toISOString().split('T')[0];
+  const dates = [...new Set(encounters.map(e => e.date))].sort().reverse();
+  if (dates.length) {
+    let check = new Date(today);
+    for (const d of dates) {
+      const diff = Math.floor((check - new Date(d)) / 86400000);
+      if (diff <= 1) { streak++; check = new Date(d); }
+      else break;
+    }
+  }
+  document.getElementById('stat-streak').textContent = streak;
+
+  if (!encounters.length) {
+    list.innerHTML = '<div class="empty"><span>📋</span><p>No encounters logged yet.<br>Start by logging your first clinical encounter!</p></div>';
+    return;
+  }
+
+  list.innerHTML = encounters.slice(0, 50).map((e, i) => {
+    const reasoningLabels = { system1: '⚡ System 1', system2: '🧠 System 2', differential: '📋 Differential', ruled_out: '🚫 Ruled out danger', slowed_down: '⏸️ Slowed down', bias_possible: '⚠️ Bias' };
+    const biasLabels = { anchoring: 'Anchoring', premature_closure: 'Premature Closure', availability: 'Availability', confirmation: 'Confirmation', diagnosis_momentum: 'Dx Momentum' };
+    const reasoningTags = (e.reasoning || []).map(r => `<span style="background:#f0fdfa;padding:2px 8px;border-radius:8px;color:#0f766e;font-size:11px;font-weight:500;">${reasoningLabels[r] || r}</span>`).join(' ');
+    const biasTag = e.bias ? `<span style="background:#fef3c7;padding:2px 8px;border-radius:8px;color:#92400e;font-size:11px;font-weight:500;">⚠️ ${biasLabels[e.bias] || e.bias}</span>` : '';
+    return `
+    <div class="history-item">
+      <div class="history-meta">
+        <span>📅 ${e.date}</span>
+        <span>🏥 ${e.setting}</span>
+        <span>👤 ${e.role}</span>
+        <span style="background:var(--pm-teal-50);padding:2px 8px;border-radius:8px;color:var(--pm-teal);font-weight:600;font-size:11px;">${e.system}</span>
+        ${e.followups && e.followups.length ? `<span style="background:#ede9fe;padding:2px 8px;border-radius:8px;color:#7c3aed;font-weight:600;font-size:11px;">🔄 ${e.followups.length} follow-up${e.followups.length>1?'s':''}</span>` : ''}
+      </div>
+      <div class="history-cc">${e.cc}</div>
+      ${reasoningTags || biasTag ? `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">${reasoningTags} ${biasTag}</div>` : ''}
+      ${e.notes ? `<div class="history-note">${e.notes.slice(0, 120)}${e.notes.length > 120 ? '...' : ''}</div>` : ''}
+      ${e.followups ? e.followups.map(f => `<div class="history-note" style="border-left:3px solid #7c3aed;margin-top:6px;padding-left:10px;"><strong style="color:#7c3aed;">🔄 ${f.date}:</strong> ${f.type ? fuTypeLabels[f.type] || f.type : ''}</div>`).join('') : ''}
+    </div>
+  `}).join('');
+}
+
+const fuTypeLabels = { saw_again: '🔄 Saw this complaint again', asked_question: '❓ Asked a follow-up question', learned: '💡 Learned something new', connected: '🔗 Connected to coursework', growth: '📈 My understanding deepened' };
+
+function renderFollowups() {
+  const list = document.getElementById('followup-list');
+  if (!encounters.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--pm-muted);"><span style="font-size:40px;display:block;margin-bottom:12px;">📋</span><p>No encounters to follow up on yet.<br>Log your first encounter to get started.</p></div>';
+    return;
+  }
+  list.innerHTML = encounters.slice(0, 30).map((e, i) => {
+    const fuCount = (e.followups || []).length;
+    const reasoningLabels = { system1: '⚡ Sys 1', system2: '🧠 Sys 2', differential: '📋 DDx', ruled_out: '🚫 Danger first', slowed_down: '⏸️ Slowed', bias_possible: '⚠️ Bias' };
+    const tags = (e.reasoning || []).map(r => `<span style="background:#f0fdfa;padding:1px 6px;border-radius:8px;color:#0f766e;font-size:10px;">${reasoningLabels[r] || r}</span>`).join(' ');
+    return `
+    <div style="background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:var(--pm-shadow);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+        <div>
+          <div style="font-weight:700;font-size:15px;">${e.cc}</div>
+          <div style="font-size:12px;color:var(--pm-muted);">${e.date} · ${e.setting} · ${e.role}</div>
+        </div>
+        <span style="padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:${fuCount ? '#ede9fe' : '#fff7ed'};color:${fuCount ? '#7c3aed' : '#c2410c'};">${fuCount ? fuCount + ' follow-up' + (fuCount>1?'s':'') : 'No follow-up'}</span>
+      </div>
+      ${tags ? `<div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;">${tags}</div>` : ''}
+      ${(e.followups || []).map(f => `<div style="font-size:13px;padding:8px;background:#f5f3ff;border-radius:8px;margin-bottom:6px;border-left:3px solid #7c3aed;"><strong>${f.date}:</strong> ${fuTypeLabels[f.type] || f.type}${f.growth ? ' — Confidence: ' + f.growth + '/5' : ''}</div>`).join('')}
+      <div style="margin-top:8px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <select id="fu-type-${i}" style="width:auto;font-size:13px;padding:6px 10px;flex:1;min-width:200px;">
+            <option value="saw_again">🔄 Saw this complaint again</option>
+            <option value="asked_question">❓ Asked follow-up question</option>
+            <option value="learned">💡 Learned something new</option>
+            <option value="connected">🔗 Connected to coursework</option>
+            <option value="growth">📈 My understanding deepened</option>
+          </select>
+          <select id="fu-confidence-${i}" style="width:auto;font-size:13px;padding:6px 10px;">
+            <option value="1">Confidence: 1/5</option>
+            <option value="2">Confidence: 2/5</option>
+            <option value="3" selected>Confidence: 3/5</option>
+            <option value="4">Confidence: 4/5</option>
+            <option value="5">Confidence: 5/5</option>
+          </select>
+          <button onclick="saveFollowup(${i})" style="padding:6px 16px;border:none;border-radius:8px;background:var(--pm-teal);color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;">Add Follow-Up</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function saveFollowup(idx) {
+  const type = document.getElementById('fu-type-' + idx).value;
+  const growth = document.getElementById('fu-confidence-' + idx).value;
+  if (!encounters[idx].followups) encounters[idx].followups = [];
+  encounters[idx].followups.push({
+    date: new Date().toISOString().split('T')[0],
+    type: type,
+    growth: parseInt(growth)
+  });
+  localStorage.setItem('rdx-premed-encounters', JSON.stringify(encounters));
+  renderFollowups();
+}
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Trauma & Emergency Medicine — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
+<title>Trauma & Emergency Medicine - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family:var(--rdx-font);
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        
+        
+        
+        
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #115e59; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow:var(--rdx-shadow);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #f0fdfa; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #115e59; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #ccfbf1; color: #115e59; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius:12px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius:12px; padding: 14px; }
+        .branch-negative { background: #f0fdfa; border: 1px solid var(--primary); border-radius:12px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius:12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius:8px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #5eead4;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius:12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
+        .quiz-option.correct { border-color: #22c55e; background: #ccfbf1; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius:12px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #ccfbf1; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow:var(--rdx-shadow-md); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius:12px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #0d9488;
+    --primary-light: #5eead4;
+    --primary-dark: #0f766e;
+    --primary-bg: #f0fdfa;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #0d9488;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Unified Navigation */
+
+
+
+
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="../js/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+
+    <!-- nav removed: unified via rdx-nav.js -->
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div>
+<div class="card-content"><div class="case-narrative" id="caseNarrative"></div>
+<div class="clinical-pearl"><div class="pearl-title">💡 Mechanism Pearl</div><div class="pearl-text" id="pearlText"></div></div>
+</div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Trauma & Emergency Medicine with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=em01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../training.html?filter=trauma,emergency,accident" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%);
+                          border: 1px solid #5eead4; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Emergency Medicine Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 12+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    <div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1111/jth.14462" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ISTH Guidance on DIC</a> — <em style="color:var(--rdx-text-muted,#64748b)">J Thromb Haemost</em></li><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ATLS 10th Edition</a> — <em style="color:var(--rdx-text-muted,#64748b)">ACS Committee on Trauma</em></li><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://www.east.org/education-career-development/practice-management-guidelines" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">EAST Practice Management Guidelines</a> — <em style="color:var(--rdx-text-muted,#64748b)">J Trauma Acute Care Surg</em></li></ul></div>
+</main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Primary Survey</strong>: ABCDE - systematic assessment treating life threats as found.',pearl:'Hypotension in trauma = hemorrhage until proven otherwise. GCS ≤8 = definitive airway. Treat, then reassess.',objectives:['Apply ATLS primary survey','Identify life-threatening injuries','Prioritize interventions','Know OR indications'],refs:[{t:'ATLS 10th Edition (ACS)',u:'https://www.facs.org/quality-programs/trauma/atls/'},{t:'Trauma Resuscitation (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra1609326'}]},
+2:{qs:[6,7,8,9,10],narrative:'<strong>Hemorrhagic Shock</strong>: Classification, damage control resuscitation, massive transfusion.',pearl:'Class III-IV shock needs blood, not crystalloid. 1:1:1 ratio. Permissive hypotension (SBP 80-90) until surgical control.',objectives:['Classify hemorrhagic shock','Apply damage control resuscitation','Activate massive transfusion','Recognize trauma coagulopathy'],refs:[{t:'PROPPR Trial (JAMA)',u:'https://jamanetwork.com/journals/jama/fullarticle/2107789'},{t:'CRASH-2 TXA Trial',u:'https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(10)60835-5/fulltext'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Thoracic Trauma</strong>: Pneumothorax, hemothorax, cardiac tamponade.',pearl:'Tension PTX is clinical - dont wait for CXR. Decompress immediately. Becks triad = tamponade.',objectives:['Diagnose tension pneumothorax','Perform needle decompression','Recognize cardiac tamponade','Know thoracotomy indications'],refs:[{t:'Chest Trauma (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra1612591'},{t:'EAST Thoracic Guidelines',u:'https://www.east.org/education/practice-management-guidelines'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Head, Spine, Orthopedic Trauma</strong>: TBI, spinal cord injury, pelvic and long bone fractures.',pearl:'Cushings triad (HTN, bradycardia, irregular breathing) = herniation. Pelvic binder for unstable pelvis. 6 Ps of compartment syndrome.',objectives:['Manage traumatic brain injury','Apply C-spine clearance','Stabilize pelvic fractures','Diagnose compartment syndrome'],refs:[{t:'TBI Guidelines (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra1708407'},{t:'NEXUS C-Spine Criteria',u:'https://pubmed.ncbi.nlm.nih.gov/10891517/'}]}
+};
+var Qs={
+1:{type:'Primary Survey',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'What is the correct sequence of the ATLS primary survey?',
+opts:[['a','Airway (C-spine) → Breathing → Circulation → Disability → Exposure; treat life threats as found'],['b','Circulation first'],['c','Full neuro exam first'],['d','Imaging before intervention']],
+exp:'<strong>ABCDE:</strong> A-Airway with C-spine protection, B-Breathing, C-Circulation with hemorrhage control, D-Disability (neuro), E-Exposure. Treat life-threatening problems AS YOU FIND THEM.',
+kp:'Dont complete entire survey before treating. Adjuncts: ECG, Foley, NG tube, monitoring. Secondary survey after stabilization.',
+dd:{mechanism:{title:'ATLS Primary Survey',content:'<h4>ABCDE</h4><table><tr><th>Step</th><th>Assess</th><th>Intervene</th></tr><tr><td>A</td><td>Airway, C-spine</td><td>Jaw thrust, intubate, cric</td></tr><tr><td>B</td><td>Breathing, chest</td><td>Decompress, chest tube</td></tr><tr><td>C</td><td>Circulation, bleeding</td><td>Pressure, IV, blood, OR</td></tr><tr><td>D</td><td>GCS, pupils</td><td>Glucose, mannitol</td></tr><tr><td>E</td><td>Expose, temp</td><td>Log roll, warm</td></tr></table>',bw:['ABCDE sequence','Treat as you find','C-spine protection','Reassess frequently']}},dist:{b:'Airway first',c:'Part of D',d:'Delays care'},related:[2]},
+
+2:{type:'Airway Management',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'A trauma patient has GCS 6 and blood in airway. Approach?',
+opts:[['a','Suction, jaw thrust with inline C-spine, RSI; surgical airway if failed; avoid nasal with basilar skull fracture'],['b','Nasotracheal intubation'],['c','CT first'],['d','Bag-mask only']],
+exp:'<strong>Trauma airway:</strong> GCS ≤8 = definitive airway. Inline C-spine stabilization. RSI standard. Failed = surgical cricothyrotomy. Avoid nasal if basilar skull fracture (raccoon eyes, Battle sign, CSF leak).',
+kp:'Cricothyrotomy in adults; needle cric + jet ventilation in children <12.',
+dd:{mechanism:{title:'Trauma Airway',content:'<h4>Intubation Indications</h4><ul><li>GCS ≤8</li><li>Airway compromise</li><li>Severe facial trauma</li><li>Respiratory failure</li></ul><h4>Basilar Skull Fracture Signs</h4><ul><li>Raccoon eyes</li><li>Battle sign</li><li>CSF rhinorrhea/otorrhea</li><li>Hemotympanum</li></ul>',bw:['GCS ≤8 = intubate','Inline C-spine','Cric if failed','No nasal with skull fracture']}},dist:{b:'Risk of cranial entry',c:'Airway priority',d:'Need definitive airway'},related:[1]},
+
+3:{type:'Breathing Assessment',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'What are immediately life-threatening thoracic injuries in primary survey?',
+opts:[['a','Tension pneumothorax, open pneumothorax, massive hemothorax, flail chest - all require immediate intervention'],['b','Simple rib fractures'],['c','Small pneumothorax'],['d','Pulmonary contusion alone']],
+exp:'<strong>Life-threatening chest injuries:</strong> Tension PTX: decompress immediately. Open PTX: 3-sided dressing then tube. Massive hemothorax: chest tube ± OR. Flail chest: pain control, possible intubation.',
+kp:'Tension PTX = clinical diagnosis: hypotension, JVD, absent breath sounds, tracheal deviation. Needle 2nd ICS MCL or 5th ICS MAL.',
+dd:{mechanism:{title:'Chest Injuries',content:'<table><tr><th>Injury</th><th>Signs</th><th>Treatment</th></tr><tr><td>Tension PTX</td><td>Hypotension, JVD, ↓BS</td><td>Needle → tube</td></tr><tr><td>Open PTX</td><td>Sucking wound</td><td>3-sided dressing → tube</td></tr><tr><td>Massive hemothorax</td><td>Dull, shock</td><td>Tube ± OR</td></tr><tr><td>Flail chest</td><td>Paradoxical movement</td><td>Pain control ± vent</td></tr></table>',bw:['Tension PTX clinical diagnosis','Needle then tube','3-sided dressing','Massive = >1500mL']}},dist:{b:'Not immediately life-threatening',c:'May observe',d:'Monitor only'},related:[11]},
+
+4:{type:'Circulation Assessment',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'Priorities in "C" of primary survey?',
+opts:[['a','Control external bleeding, assess perfusion, 2 large-bore IVs, type and cross, begin resuscitation'],['b','Central line first'],['c','Crystalloid only'],['d','Wait for labs']],
+exp:'<strong>Circulation:</strong> STOP BLEEDING first - pressure, tourniquet, pelvic binder. Assess shock: tachycardia (earliest), weak pulse, delayed cap refill, AMS. Two 16-18G IVs. Assume hemorrhage.',
+kp:'Tourniquets save lives. Pelvic binder reduces volume. In trauma, hypotension = hemorrhage until proven otherwise.',
+dd:{mechanism:{title:'Circulation',content:'<h4>Hemorrhage Control</h4><ul><li>Direct pressure</li><li>Tourniquet</li><li>Pelvic binder</li><li>OR for internal</li></ul><h4>Shock Signs</h4><ul><li>Tachycardia (earliest)</li><li>Narrowed pulse pressure</li><li>Delayed cap refill</li><li>Altered mental status</li></ul>',bw:['Tourniquet saves lives','Tachycardia earliest','2 large-bore IVs','Assume hemorrhage']}},dist:{b:'Slower in trauma',c:'Blood for shock',d:'Dont delay'},related:[6]},
+
+5:{type:'Disability & Exposure',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'What is assessed during D and E of primary survey?',
+opts:[['a','D: GCS, pupils, lateralizing signs, glucose; E: complete exposure, log roll, prevent hypothermia'],['b','Full neuro exam'],['c','Pupils only'],['d','Skip in hypothermia']],
+exp:'<strong>D:</strong> GCS (E+V+M), pupils, gross motor, lateralizing signs. CHECK GLUCOSE. <strong>E:</strong> Remove clothing, log roll for back, but prevent hypothermia (warm blankets, fluids, room).',
+kp:'GCS ≤8 = intubate. Trauma triad of death: hypothermia, acidosis, coagulopathy.',
+dd:{mechanism:{title:'D and E',content:'<h4>GCS</h4><table><tr><td>Eye 1-4</td><td>Verbal 1-5</td><td>Motor 1-6</td></tr></table><p>Min 3, Max 15. ≤8 = intubate</p><h4>Exposure</h4><ul><li>Remove all clothing</li><li>Log roll</li><li>Prevent hypothermia</li></ul>',bw:['GCS ≤8 = intubate','Check glucose','Log roll','Prevent hypothermia']}},dist:{b:'Too detailed for primary',c:'More than pupils',d:'Still need full exam'},related:[1]},
+
+6:{type:'Shock Classification',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'Patient: HR 130, BP 80/60, RR 30, confused, UOP 5mL/hr, estimated blood loss 2L. Classification?',
+opts:[['a','Class III hemorrhagic shock (30-40% blood loss) - requires blood products, not just crystalloid'],['b','Class I - observation only'],['c','Class II - crystalloid sufficient'],['d','Class IV - futile']],
+exp:'<strong>Class III shock (30-40% loss, 1500-2000mL):</strong> HR >120, BP decreased, RR 30-40, confused, UOP 5-15mL/hr. Requires blood products. Class IV (>40%) has severe hypotension, lethargy.',
+kp:'Class I-II: crystalloid may suffice. Class III-IV: need blood. Early blood saves lives.',
+dd:{mechanism:{title:'Hemorrhagic Shock Classes',content:'<table><tr><th></th><th>I</th><th>II</th><th>III</th><th>IV</th></tr><tr><td>Loss</td><td><15%</td><td>15-30%</td><td>30-40%</td><td>>40%</td></tr><tr><td>HR</td><td><100</td><td>100-120</td><td>120-140</td><td>>140</td></tr><tr><td>BP</td><td>Normal</td><td>Normal</td><td>Decreased</td><td>Very low</td></tr><tr><td>Mental</td><td>Anxious</td><td>Anxious</td><td>Confused</td><td>Lethargic</td></tr><tr><td>Fluid</td><td>Crystalloid</td><td>Crystalloid</td><td>Blood</td><td>Blood + OR</td></tr></table>',bw:['Class III-IV need blood','Tachycardia before hypotension','Mental status changes','UOP indicator']}},dist:{b:'Would have normal vitals',c:'Still hypotensive',d:'Treatable'},related:[7]},
+
+7:{type:'Massive Transfusion',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'When should massive transfusion protocol be activated and what ratio?',
+opts:[['a','Anticipated need >10 units PRBC/24h or ongoing hemorrhage; 1:1:1 ratio of PRBC:FFP:platelets; give TXA within 3 hours'],['b','After type and cross complete'],['c','PRBC only'],['d','4:1:1 ratio']],
+exp:'<strong>Massive transfusion:</strong> >10 units PRBC in 24h or ongoing hemorrhage. PROPPR trial showed 1:1:1 (PRBC:FFP:platelets) reduces mortality. TXA within 3 hours of injury (CRASH-2).',
+kp:'Dont wait for labs. Use O-neg (or O-pos for males) until crossmatch. Warm products. Monitor calcium (citrate binds Ca).',
+dd:{mechanism:{title:'Massive Transfusion',content:'<h4>Activation Criteria</h4><ul><li>>10 units anticipated</li><li>Ongoing hemorrhage</li><li>Penetrating torso trauma</li><li>Unstable despite 2 units</li></ul><h4>Protocol</h4><ul><li>1:1:1 ratio</li><li>O-neg until crossmatch</li><li>Warm products</li><li>TXA within 3 hours</li><li>Calcium replacement</li></ul>',bw:['1:1:1 ratio','TXA within 3h','O-neg uncrossmatched','Warm products']}},dist:{b:'Delays treatment',c:'Need all components',d:'Worse outcomes'},related:[6]},
+
+8:{type:'Damage Control Resuscitation',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'What is damage control resuscitation?',
+opts:[['a','Permissive hypotension (SBP 80-90), minimize crystalloid, 1:1:1 blood products, early surgical hemorrhage control, prevent trauma triad of death'],['b','Aggressive crystalloid boluses'],['c','Normalize BP before OR'],['d','Complete repair at first surgery']],
+exp:'<strong>Damage control:</strong> Permissive hypotension prevents clot disruption. Minimize crystalloid (causes dilution, hypothermia). 1:1:1 balanced resuscitation. Damage control surgery: stop bleeding, contamination control, temporary closure, ICU resuscitation, return for definitive repair.',
+kp:'Trauma triad of death: hypothermia → acidosis → coagulopathy. Each worsens the others. Break the cycle.',
+dd:{mechanism:{title:'Damage Control',content:'<h4>Principles</h4><ul><li>Permissive hypotension (SBP 80-90)</li><li>Minimize crystalloid</li><li>1:1:1 blood products</li><li>Prevent hypothermia</li><li>Early hemorrhage control</li></ul><h4>Damage Control Surgery</h4><ol><li>Stop hemorrhage</li><li>Control contamination</li><li>Temporary closure</li><li>ICU resuscitation</li><li>Return for definitive repair</li></ol>',bw:['Permissive hypotension','Minimize crystalloid','Trauma triad of death','Damage control surgery']}},dist:{b:'Causes dilution',c:'May disrupt clot',d:'Staged approach'},related:[7]},
+
+9:{type:'Trauma Coagulopathy',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'What causes acute traumatic coagulopathy?',
+opts:[['a','Tissue injury activates protein C → factor inactivation + hyperfibrinolysis; worsened by hypothermia, acidosis, hemodilution'],['b','Simple dilution'],['c','DIC only'],['d','Platelet dysfunction alone']],
+exp:'<strong>Acute traumatic coagulopathy:</strong> Tissue injury + shock → activated protein C → inactivates Va/VIIIa + promotes fibrinolysis. NOT just dilution. Worsened by hypothermia (<35°C), acidosis (pH <7.2), hemodilution.',
+kp:'TEG/ROTEM guides component therapy. TXA inhibits fibrinolysis. Calcium for citrate toxicity. Fibrinogen <150 = cryoprecipitate.',
+dd:{mechanism:{title:'Trauma Coagulopathy',content:'<h4>Mechanism</h4><ul><li>Tissue injury + shock</li><li>Activated protein C</li><li>Factor inactivation</li><li>Hyperfibrinolysis</li></ul><h4>Worsening Factors</h4><ul><li>Hypothermia <35°C</li><li>Acidosis pH <7.2</li><li>Hemodilution</li></ul><h4>Treatment</h4><ul><li>1:1:1 transfusion</li><li>TXA</li><li>Warm patient</li><li>Calcium</li><li>TEG-guided</li></ul>',bw:['Activated protein C','Not just dilution','TXA for fibrinolysis','Hypothermia worsens']}},dist:{b:'More complex',c:'Different mechanism',d:'Part of picture'},related:[8]},
+
+10:{type:'TXA in Trauma',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'When and how should TXA be administered in trauma?',
+opts:[['a','Within 3 hours of injury; 1g IV bolus then 1g over 8 hours; inhibits fibrinolysis; do NOT give after 3 hours'],['b','Anytime'],['c','Only with documented coagulopathy'],['d','IM administration']],
+exp:'<strong>TXA (tranexamic acid):</strong> CRASH-2 showed mortality benefit when given within 3 hours. Dose: 1g bolus + 1g over 8h. After 3 hours, may INCREASE mortality. Lysine analog inhibits plasminogen activation.',
+kp:'Give early or not at all. No waiting for labs. Contraindications: >3 hours, isolated TBI (may be harmful - CRASH-3 inconclusive).',
+dd:{mechanism:{title:'TXA',content:'<h4>CRASH-2 Evidence</h4><ul><li>Within 1h: greatest benefit</li><li>1-3h: still beneficial</li><li>>3h: may increase mortality</li></ul><h4>Dosing</h4><ul><li>1g IV bolus over 10 min</li><li>1g IV infusion over 8h</li></ul><h4>Mechanism</h4><ul><li>Lysine analog</li><li>Blocks plasminogen → plasmin</li><li>Inhibits fibrinolysis</li></ul>',bw:['Within 3 hours','1g + 1g over 8h','Not after 3 hours','Inhibits fibrinolysis']}},dist:{b:'Harmful after 3h',c:'Give empirically',d:'IV only'},related:[7]},
+
+11:{type:'Tension Pneumothorax',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'How do you diagnose and treat tension pneumothorax?',
+opts:[['a','Clinical diagnosis: hypotension, JVD, absent breath sounds, tracheal deviation; needle decompression 2nd ICS MCL or 5th ICS MAL; then chest tube'],['b','Wait for CXR'],['c','Chest tube first'],['d','Pericardiocentesis']],
+exp:'<strong>Tension PTX:</strong> Air accumulates, mediastinal shift, impaired venous return → shock. CLINICAL diagnosis - dont wait for imaging. Decompress immediately. Needle then tube.',
+kp:'5th ICS MAL may be more reliable than 2nd ICS MCL. Use 14G angiocath. Tube thoracostomy is definitive.',
+dd:{mechanism:{title:'Tension Pneumothorax',content:'<h4>Pathophysiology</h4><ul><li>One-way valve effect</li><li>Progressive air accumulation</li><li>Mediastinal shift</li><li>Impaired venous return</li><li>Cardiac arrest if untreated</li></ul><h4>Signs</h4><ul><li>Hypotension</li><li>JVD (may be absent if hypovolemic)</li><li>Absent breath sounds</li><li>Tracheal deviation (late)</li></ul><h4>Treatment</h4><ol><li>Needle decompression</li><li>Tube thoracostomy</li></ol>',bw:['Clinical diagnosis','Dont wait for CXR','Needle then tube','5th ICS MAL']}},dist:{b:'Delays treatment',c:'Needle first if unstable',d:'Wrong diagnosis'},related:[3]},
+
+12:{type:'Massive Hemothorax',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'When does hemothorax require surgical intervention?',
+opts:[['a','Initial output >1500mL, ongoing >200mL/hr for 2-4 hours, or hemodynamic instability despite resuscitation'],['b','Any amount'],['c','Only if >3000mL'],['d','Never - always conservative']],
+exp:'<strong>Massive hemothorax surgical indications:</strong> >1500mL initial output (or 1/3 blood volume), >200mL/hr ongoing for 2-4 hours, hemodynamic instability. Sources: intercostal, internal mammary, pulmonary vessels.',
+kp:'Chest tube is diagnostic AND therapeutic. Autotransfusion possible. Retained hemothorax → empyema risk.',
+dd:{mechanism:{title:'Hemothorax',content:'<h4>OR Indications</h4><ul><li>>1500mL initial</li><li>>200mL/hr ongoing</li><li>Hemodynamic instability</li><li>Penetrating mediastinal injury</li></ul><h4>Sources</h4><ul><li>Intercostal arteries</li><li>Internal mammary</li><li>Pulmonary vessels</li><li>Great vessels</li></ul>',bw:['>1500mL initial','>200mL/hr ongoing','Hemodynamic instability','Autotransfusion possible']}},dist:{b:'Most dont need OR',c:'Too conservative',d:'May need surgery'},related:[11]},
+
+13:{type:'Cardiac Tamponade',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'How do you recognize and treat traumatic cardiac tamponade?',
+opts:[['a','Becks triad (hypotension, JVD, muffled heart sounds) + PEA; pericardiocentesis temporizing; definitive = OR thoracotomy or sternotomy'],['b','Chest tube'],['c','Same as tension PTX'],['d','Observation']],
+exp:'<strong>Cardiac tamponade:</strong> Blood in pericardium → impaired filling → decreased CO. Becks triad. May present as PEA. FAST shows pericardial fluid. Pericardiocentesis is bridge to OR. Definitive = surgical.',
+kp:'JVD may be absent if hypovolemic. Kussmaul sign (JVD on inspiration). Electrical alternans on ECG. Subxiphoid pericardiocentesis.',
+dd:{mechanism:{title:'Cardiac Tamponade',content:'<h4>Becks Triad</h4><ol><li>Hypotension</li><li>JVD</li><li>Muffled heart sounds</li></ol><h4>Other Signs</h4><ul><li>PEA</li><li>Pulsus paradoxus</li><li>Kussmaul sign</li><li>Electrical alternans</li></ul><h4>Treatment</h4><ul><li>FAST confirmation</li><li>Pericardiocentesis (bridge)</li><li>OR for definitive repair</li></ul>',bw:['Becks triad','PEA arrest','FAST for pericardial fluid','Pericardiocentesis bridge to OR']}},dist:{b:'Wrong treatment',c:'Different pathophys',d:'Lethal if untreated'},related:[11]},
+
+14:{type:'ED Thoracotomy',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'What are the indications for emergency department thoracotomy?',
+opts:[['a','Penetrating thoracic trauma with witnessed arrest or recent (<15min) loss of vitals; allows pericardiotomy, aortic cross-clamp, cardiac massage, hemorrhage control'],['b','All traumatic arrests'],['c','Blunt trauma with prolonged CPR'],['d','Never indicated']],
+exp:'<strong>ED thoracotomy:</strong> Best outcomes in penetrating cardiac injury with witnessed arrest. Allows: release tamponade, control hemorrhage, cross-clamp aorta, internal cardiac massage. Poor outcomes in blunt trauma or prolonged arrest.',
+kp:'Survival: penetrating cardiac 10-35%, penetrating thoracic 5-15%, blunt <2%. Not indicated if >15min CPR (penetrating) or >10min (blunt) or asystole without tamponade.',
+dd:{mechanism:{title:'ED Thoracotomy',content:'<h4>Indications</h4><ul><li>Penetrating thoracic trauma</li><li>Witnessed arrest or signs of life</li><li><15min CPR</li><li>PEA arrest</li></ul><h4>Allows</h4><ul><li>Pericardiotomy for tamponade</li><li>Aortic cross-clamp</li><li>Internal cardiac massage</li><li>Hemorrhage control</li></ul><h4>Contraindications</h4><ul><li>Blunt trauma with prolonged CPR</li><li>No signs of life</li><li>Asystole without tamponade</li></ul>',bw:['Penetrating > blunt','Witnessed arrest','<15min down time','Release tamponade']}},dist:{b:'Blunt poor outcomes',c:'Very poor outcomes',d:'Can be lifesaving'},related:[13]},
+
+15:{type:'Flail Chest',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'What defines flail chest and what is the management?',
+opts:[['a','≥3 consecutive ribs fractured in ≥2 places creating free segment with paradoxical movement; underlying pulmonary contusion drives hypoxia; pain control primary, intubation if respiratory failure'],['b','Any rib fracture'],['c','Always requires intubation'],['d','Surgical rib fixation always']],
+exp:'<strong>Flail chest:</strong> ≥3 ribs broken in ≥2 places → free-floating segment moves paradoxically. UNDERLYING PULMONARY CONTUSION causes respiratory failure, not the flail itself. Pain control crucial (epidural, nerve blocks). Intubate for respiratory failure.',
+kp:'Pulmonary contusion peaks at 24-48h. Fluid restriction may help. Surgical stabilization emerging for some cases.',
+dd:{mechanism:{title:'Flail Chest',content:'<h4>Definition</h4><ul><li>≥3 consecutive ribs</li><li>Fractured in ≥2 places</li><li>Free-floating segment</li><li>Paradoxical movement</li></ul><h4>Pathophysiology</h4><ul><li>Underlying pulmonary contusion</li><li>NOT the mechanical flail</li><li>Contusion peaks 24-48h</li></ul><h4>Management</h4><ul><li>Pain control (epidural)</li><li>Pulmonary toilet</li><li>Intubate if respiratory failure</li><li>Surgical fixation in select cases</li></ul>',bw:['≥3 ribs in ≥2 places','Contusion causes hypoxia','Pain control primary','Contusion peaks 24-48h']}},dist:{b:'Specific definition',c:'Only if resp failure',d:'Selective cases'},related:[3]},
+
+16:{type:'Traumatic Brain Injury',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'A patient has GCS 7 after head trauma. What are the priorities?',
+opts:[['a','Intubate (GCS≤8), prevent secondary injury (avoid hypoxia, hypotension), head CT, monitor for herniation (Cushing triad), consider ICP management'],['b','CT before securing airway'],['c','Hyperventilate prophylactically'],['d','Steroids for brain swelling']],
+exp:'<strong>Severe TBI (GCS ≤8):</strong> Intubate for airway protection. Prevent secondary injury: avoid hypoxia (SaO2 >90%), hypotension (SBP >90). Head CT. Cushings triad = herniation (HTN, bradycardia, irregular breathing). ICP >20 requires treatment.',
+kp:'Hyperventilation only for acute herniation (temporizing). No steroids (CRASH trial - harmful). Mannitol or hypertonic saline for elevated ICP.',
+dd:{mechanism:{title:'Severe TBI Management',content:'<h4>Priorities</h4><ol><li>Airway (GCS ≤8 = intubate)</li><li>Prevent secondary injury</li><li>Head CT</li><li>Neuro monitoring</li></ol><h4>Avoid</h4><ul><li>Hypoxia (SaO2 <90%)</li><li>Hypotension (SBP <90)</li><li>Hyperthermia</li><li>Hyperglycemia</li></ul><h4>Herniation Signs (Cushing)</h4><ul><li>Hypertension</li><li>Bradycardia</li><li>Irregular breathing</li></ul>',bw:['GCS ≤8 = intubate','Prevent hypoxia/hypotension','Cushings triad','No steroids']}},dist:{b:'Airway first',c:'Only for herniation',d:'Harmful (CRASH)'},related:[17]},
+
+17:{type:'C-Spine Clearance',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],stem:'When can cervical spine be cleared clinically without imaging?',
+opts:[['a','NEXUS criteria: no midline tenderness, no focal neuro deficit, normal alertness, no intoxication, no distracting injury; or Canadian C-Spine Rule'],['b','Never - always image'],['c','After normal X-ray only'],['d','If patient denies pain']],
+exp:'<strong>Clinical clearance:</strong> NEXUS: all 5 criteria must be met. Canadian C-Spine Rule more sensitive - if any high-risk factors, image. Low-risk + able to rotate neck 45° = clear. CT is imaging of choice (not X-ray).',
+kp:'Maintain precautions until cleared. CT misses ligamentous injury - MRI if neuro deficit with normal CT. Obtunded = leave collar, MRI when able.',
+dd:{mechanism:{title:'C-Spine Clearance',content:'<h4>NEXUS Criteria (All 5)</h4><ol><li>No midline tenderness</li><li>No focal neuro deficit</li><li>Normal alertness</li><li>No intoxication</li><li>No distracting injury</li></ol><h4>Canadian C-Spine Rule</h4><ul><li>High risk → image</li><li>Low risk + rotation → clear</li></ul><h4>Imaging</h4><ul><li>CT (not X-ray)</li><li>MRI if neuro deficit</li><li>MRI for ligamentous</li></ul>',bw:['NEXUS all 5 criteria','CT not X-ray','MRI for ligamentous','Obtunded = keep collar']}},dist:{b:'Can clear clinically',c:'CT preferred',d:'Must meet criteria'},related:[16]},
+
+18:{type:'Pelvic Fracture',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'Patient has unstable vital signs after MVC. Pelvic X-ray shows widened symphysis. Management?',
+opts:[['a','Pelvic binder immediately to reduce volume and tamponade bleeding; massive transfusion; angiography or preperitoneal packing if unstable; avoid Foley if blood at meatus'],['b','CT first'],['c','External fixation only'],['d','Exploratory laparotomy first']],
+exp:'<strong>Pelvic fracture with hemorrhage:</strong> Pelvic binder reduces volume, promotes tamponade. Bleeding from venous plexus (80%) and arteries (20%). FAST to rule out intraabdominal source. Angioembolization or preperitoneal packing for arterial bleeding.',
+kp:'Blood at meatus or high-riding prostate = urethral injury → retrograde urethrogram before Foley. Open book fracture most unstable.',
+dd:{mechanism:{title:'Pelvic Fracture',content:'<h4>Initial Management</h4><ul><li>Pelvic binder</li><li>Massive transfusion</li><li>FAST exam</li><li>Avoid Foley if urethral injury</li></ul><h4>Hemorrhage Control</h4><ul><li>Binder (venous tamponade)</li><li>Angioembolization (arterial)</li><li>Preperitoneal packing</li><li>REBOA (bridge)</li></ul><h4>Urethral Injury Signs</h4><ul><li>Blood at meatus</li><li>High-riding prostate</li><li>Perineal hematoma</li></ul>',bw:['Pelvic binder immediately','Blood at meatus = RUG first','80% venous bleeding','Angio for arterial']}},dist:{b:'Binder first',c:'Part of management',d:'Rule out other sources'},related:[6]},
+
+19:{type:'Compartment Syndrome',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'After tibial fracture fixation, patient has severe pain with passive stretch, tense compartment. What is the diagnosis and treatment?',
+opts:[['a','Compartment syndrome - 6 Ps but pain with passive stretch earliest and most reliable; pressure >30mmHg or delta <30 from diastolic; emergent fasciotomy'],['b','Deep vein thrombosis'],['c','Arterial injury'],['d','Observe with serial exams']],
+exp:'<strong>Compartment syndrome:</strong> Increased pressure in closed fascial space → muscle/nerve ischemia. 6 Ps: Pain (with passive stretch - earliest), Pressure, Paresthesias, Paralysis (late), Pulselessness (late), Pallor. Measure compartment pressure. Fasciotomy within 6 hours.',
+kp:'Pulse may be present! Pain out of proportion, pain with passive stretch. High-risk: tibial fractures, crush injury, tight casts. Delta pressure (diastolic - compartment) <30 = fasciotomy.',
+dd:{mechanism:{title:'Compartment Syndrome',content:'<h4>6 Ps</h4><ul><li><b>Pain</b> (passive stretch) - EARLIEST</li><li>Pressure</li><li>Paresthesias</li><li>Paralysis (late)</li><li>Pulselessness (late)</li><li>Pallor</li></ul><h4>Diagnosis</h4><ul><li>Clinical</li><li>Compartment pressure >30mmHg</li><li>Delta pressure <30</li></ul><h4>Treatment</h4><ul><li>Remove constricting dressings</li><li>Emergent fasciotomy</li><li>Within 6 hours to prevent necrosis</li></ul>',bw:['Pain with passive stretch','Pulse may be present','Fasciotomy within 6h','Delta pressure <30']}},dist:{b:'Different presentation',c:'Would have pulse deficit',d:'Surgical emergency'},related:[18]},
+
+20:{type:'Damage Control Orthopedics',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],stem:'A polytrauma patient has femur and tibial fractures with borderline hemodynamics. Approach?',
+opts:[['a','Damage control orthopedics: temporary external fixation for stability and hemorrhage control; definitive fixation after resuscitation (typically 5-10 days); avoid early intramedullary nailing in unstable patients'],['b','Immediate definitive ORIF'],['c','Traction only'],['d','Ignore fractures until stable']],
+exp:'<strong>Damage control orthopedics:</strong> Temporary external fixation provides stability, controls hemorrhage, allows resuscitation. Definitive fixation after patient stabilized (second hit theory - avoid inflammatory insult). Femur fractures can lose 1-2L blood each.',
+kp:'Long bone fractures contribute to fat embolism, ARDS, coagulopathy. Early temporary stabilization reduces complications. Definitive surgery when lactate normalizes, coagulopathy corrected.',
+dd:{mechanism:{title:'Damage Control Ortho',content:'<h4>Indications</h4><ul><li>Polytrauma</li><li>Hemodynamic instability</li><li>Coagulopathy</li><li>Hypothermia</li><li>Acidosis</li></ul><h4>Approach</h4><ol><li>External fixation</li><li>ICU resuscitation</li><li>Definitive fixation day 5-10</li></ol><h4>Femur Fracture</h4><ul><li>1-2L blood loss each</li><li>Temporary ex-fix</li><li>IM nail when stable</li></ul>',bw:['External fixation first','Definitive at day 5-10','Femur = 1-2L blood loss','Second hit theory']}},dist:{b:'Too much insult',c:'Doesnt control bleeding',d:'Fractures worsen outcomes'},related:[8]}
+};
+var answers={1:'a',2:'b',3:'a',4:'a',5:'d',6:'a',7:'c',8:'c',9:'b',10:'c',11:'b',12:'d',13:'b',14:'d',15:'c',16:'b',17:'d',18:'a',19:'c',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs&&ph.refs.length){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)"><div style="font-size:10px;font-weight:600;color: var(--text-secondary);margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:var(--primary-dark);text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';if(q.isNBME)html+='<span class="quiz-tag nbme">NBME</span>';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div class="exp-header '+(isCorrect?'correct':'incorrect')+'">'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
+         data-module-title="Trauma & Emergency Medicine"
+         data-key-points="🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

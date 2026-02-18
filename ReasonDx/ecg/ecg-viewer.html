@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ECG Integrated Viewer - Dx Ecosystem</title>
+    <meta name="description" content="ECG Integrated Viewer — interactive ECG learning tool on ReasonDx. Practice rhythm interpretation and waveform analysis.">
+<title>ECG Integrated Viewer | ReasonDx</title>
     <style>
 
 /* Multi-Theme Support */
 :root {
     --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
     --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
-    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -23,30 +36,14 @@
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
     --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
 }
-[data-theme="high-contrast"] {
-    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
-    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
-    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
-    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
-    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
-    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
-    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
-}
-[data-theme="sepia"] {
-    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
-    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
-    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
-    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
-    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
-    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
-    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
-}
+
+
 body { transition: background 0.3s, color 0.3s; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -63,14 +60,14 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family:var(--rdx-font);
             background: var(--bg-main);
             color: var(--text-primary);
             line-height: 1.6;
         }
         
         .ecg-viewer {
-            background: white;
+            background:var(--rdx-bg-card);
             border-radius: 16px;
             border: 1px solid var(--border);
             overflow: hidden;
@@ -165,7 +162,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         .finding-icon { font-size: 1rem; flex-shrink: 0; }
         .finding-item.abnormal { background: #fef2f2; border-left: 3px solid #ef4444; }
-        .finding-item.normal { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .finding-item.normal { background: #f0fdfa; border-left: 3px solid #22c55e; }
         
         .ecg-teaching { padding: 20px 24px; background: var(--bg-main); border-top: 1px solid var(--border); }
         .teaching-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 600; color: var(--primary); }
@@ -177,22 +174,22 @@ body { transition: background 0.3s, color 0.3s; }
         .quiz-options { display: grid; gap: 8px; }
         .quiz-option {
             padding: 12px 16px; background: var(--bg-main); border: 2px solid var(--border);
-            border-radius: 10px; cursor: pointer; transition: all 0.15s; font-size: 0.9rem;
+            border-radius:12px; cursor: pointer; transition: all 0.15s; font-size: 0.9rem;
         }
-        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
         .quiz-option.correct { border-color: var(--success); background: #d1fae5; }
         .quiz-option.incorrect { border-color: var(--danger); background: #fee2e2; }
         
-        .pattern-browser { padding: 20px; background: white; margin: 20px; border-radius: 16px; border: 1px solid var(--border); }
+        .pattern-browser { padding: 20px; background:var(--rdx-bg-card); margin: 20px; border-radius: 16px; border: 1px solid var(--border); }
         .pattern-browser h3 { margin-bottom: 16px; font-size: 1.1rem; }
         .pattern-categories { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
         .category-btn {
             padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border);
-            background: white; font-size: 0.85rem; cursor: pointer; transition: all 0.15s;
+            background:var(--rdx-bg-card); font-size: 0.85rem; cursor: pointer; transition: all 0.15s;
         }
         .category-btn:hover, .category-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
         .pattern-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-        .pattern-card { background: var(--bg-main); border-radius: 10px; padding: 12px; cursor: pointer; transition: all 0.15s; border: 2px solid transparent; }
+        .pattern-card { background: var(--bg-main); border-radius:12px; padding: 12px; cursor: pointer; transition: all 0.15s; border: 2px solid transparent; }
         .pattern-card:hover { border-color: var(--primary); transform: translateY(-2px); }
         .pattern-card .pattern-name { font-weight: 500; font-size: 0.9rem; margin-bottom: 4px; }
         .pattern-card .pattern-category { font-size: 0.75rem; color: var(--text-secondary); }
@@ -204,10 +201,10 @@ body { transition: background 0.3s, color 0.3s; }
 
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
+    --primary: #0d9488;
+    --primary-light: #5eead4;
+    --primary-dark: #0f766e;
+    --primary-bg: #f0fdfa;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
@@ -218,7 +215,7 @@ body { transition: background 0.3s, color 0.3s; }
     --border-light: #f1f5f9;
     --nav-text: #1e293b;
     --nav-link: #64748b;
-    --nav-active-bg: #10b981;
+    --nav-active-bg: #0d9488;
     --nav-active-text: #ffffff;
     --shadow: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
@@ -226,95 +223,35 @@ body { transition: background 0.3s, color 0.3s; }
     --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
-}
 
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
 
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
 
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+
+
+
 .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
 .dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
 .dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
@@ -322,7 +259,7 @@ body { transition: background 0.3s, color 0.3s; }
 .dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 /* Theme Modal */
-.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
 .dx-theme-modal.open { display: flex; }
 .dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
 .dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
@@ -331,10 +268,10 @@ body { transition: background 0.3s, color 0.3s; }
 .dx-theme-section { margin-bottom: 20px; }
 .dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
 .dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
 .dx-theme-option:hover { border-color: var(--primary); }
 .dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
 .dx-theme-preview-nav { width: 30%; }
 .dx-theme-preview-main { width: 70%; }
 .dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
@@ -344,7 +281,7 @@ body { transition: background 0.3s, color 0.3s; }
 body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    
     .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -365,52 +302,28 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
         @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
 
     </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
 
-<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
+<div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: #f1f5f9; padding: 8px 12px; border-radius: 20px;">
     <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
     <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
+    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg,#0f172a); cursor: pointer;" title="High Contrast"></button>
     <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
 </div>
 
 
-    <!-- UNIFIED DX NAVIGATION -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
-            </a>
-            <div class="dx-nav-links">
-                <a href="../../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="../index.html" class="dx-nav-link active">🔬 ReasonDx</a>
-                <a href="../../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
+    <!-- nav removed: unified via rdx-nav.js -->
 
     <div class="ecg-viewer" id="ecgViewer">
         <div class="ecg-header">
@@ -751,7 +664,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <span>${f.text}</span>
                 </div>
             `).join('') + `
-                <div class="finding-item" style="background:#eff6ff;border-left-color:var(--primary);">
+                <div class="finding-item" style="background:#f0fdfa;border-left-color:var(--primary);">
                     <span class="finding-icon">📋</span>
                     <span><strong>Interpretation:</strong> ${pattern.interpretation}</span>
                 </div>
@@ -777,7 +690,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             if (!document.getElementById('quizExplanation')) {
                 const div = document.createElement('div');
                 div.id = 'quizExplanation';
-                div.style.cssText = 'margin-top:16px;padding:16px;background:#f0fdf4;border-radius:10px;border-left:3px solid #22c55e;';
+                div.style.cssText = 'margin-top:16px;padding:16px;background:#f0fdfa;border-radius:12px;border-left:3px solid #22c55e;';
                 div.innerHTML = `<strong>Explanation:</strong> ${pattern.quiz.explanation}`;
                 document.getElementById('ecgQuiz').appendChild(div);
             }
@@ -844,65 +757,24 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </script>
 
     <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
-                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
-                        <div class="dx-theme-name">Deeper Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
-                        <div class="dx-theme-name">Eucalyptus</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
-                        <div class="dx-theme-name">Teal on Cream</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
-                        <div class="dx-theme-name">Steel Blue</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
-                        <div class="dx-theme-name">Muted Sage</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
-                        <div class="dx-theme-name">Muted Lavender</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
-                        <div class="dx-theme-name">Slate + Teal</div>
-                    </div>
-                </div>
+    
             </div>
             <div class="dx-theme-section">
                 <div class="dx-theme-section-title">Dark Themes</div>
                 <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
                         <div class="dx-theme-name">Ocean Dark</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
                         <div class="dx-theme-name">Midnight Teal</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
                         <div class="dx-theme-name">Purple Night</div>
                     </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
                         <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
                         <div class="dx-theme-name">Forest Night</div>
                     </div>
@@ -919,12 +791,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         document.addEventListener('DOMContentLoaded', updateThemeOptions);
     })();
     
-    function setDxTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('dx-theme', theme);
-        updateThemeOptions();
-        closeDxThemeModal();
-    }
+    
     
     function updateThemeOptions() {
         const current = document.body.getAttribute('data-theme');
@@ -933,13 +800,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         });
     }
     
-    function openDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.add('open');
-    }
     
-    function closeDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.remove('open');
-    }
+    
+    
     
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
@@ -949,16 +812,21 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     });
     </script>
 
-    <script src="dx-case-nav.js"></script>
+    <script src="../js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "../training.html", parentName: "Training" }); });</script>
 
-    <!-- DxSuite AI Tutor Integration -->
+    
     <div data-dx-tutor
          data-module-title="ECG Integrated Viewer"
          data-key-points="12-Lead ECG, 🔍 ECG Interpretation, 📚 ECG Pattern Library, 🎨 Choose Theme, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
 </body>
 </html>

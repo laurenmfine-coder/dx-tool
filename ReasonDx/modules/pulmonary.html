@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pulmonary — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
+<title>Pulmonary - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family:var(--rdx-font);
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        
+        
+        
+        
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #115e59; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow:var(--rdx-shadow);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #f0fdfa; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #115e59; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #ccfbf1; color: #115e59; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius:12px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius:12px; padding: 14px; }
+        .branch-negative { background: #f0fdfa; border: 1px solid var(--primary); border-radius:12px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius:12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius:8px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #5eead4;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius:12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
+        .quiz-option.correct { border-color: #22c55e; background: #ccfbf1; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius:12px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #ccfbf1; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow:var(--rdx-shadow-md); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius:12px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #0d9488;
+    --primary-light: #5eead4;
+    --primary-dark: #0f766e;
+    --primary-bg: #f0fdfa;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #0d9488;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Unified Navigation */
+
+
+
+
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="../js/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+
+    <!-- nav removed: unified via rdx-nav.js -->
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Pulm Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Pulmonary Physiology with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=pulm03" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../training.html?filter=pulmonary,dyspnea" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%);
+                          border: 1px solid #5eead4; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Pulmonary Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 15+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Maria</strong>, 28F, presents with wheezing and dyspnea. History of allergies. FEV1/FVC ratio 65%. Symptoms improve with bronchodilators.',pearl:'Obstructive = air trapping. FEV1/FVC <70%. Asthma is reversible, COPD is not. PFTs differentiate obstructive from restrictive.',objectives:['Interpret PFTs','Differentiate asthma from COPD','Know asthma severity classification','Choose appropriate therapy']},
+2:{qs:[6,7,8,9,10],narrative:'<strong>James</strong>, 62M, presents with progressive dyspnea. CXR shows bilateral reticular opacities. PFTs show reduced TLC and DLCO.',pearl:'Restrictive = small lungs. TLC reduced, FEV1/FVC normal or high. ARDS: bilateral opacities, PaO2/FiO2 <300, not cardiogenic.',objectives:['Recognize restrictive pattern','Know ARDS Berlin criteria','Understand ILD types','Manage acute respiratory failure']},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Sarah</strong>, 45F, post-op day 3, suddenly dyspneic with pleuritic chest pain. HR 110, SpO2 91%. Wells score suggests PE.',pearl:'PE: Wells score risk stratifies. D-dimer to rule out low-risk. CT-PA confirms. Anticoagulation is treatment. Thrombolytics if massive.',objectives:['Apply Wells criteria','Know when to use D-dimer','Interpret V/Q mismatch','Choose anticoagulation strategy']},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Robert</strong>, 70M, in ICU with COPD exacerbation, CO2 rising despite BiPAP. Discussing intubation and ventilator settings.',pearl:'Resp failure: Type 1 (hypoxemic) vs Type 2 (hypercapnic). Ventilator: low tidal volume (6 mL/kg IBW) for ARDS. PEEP maintains recruitment.',objectives:['Classify respiratory failure','Know indications for intubation','Set initial ventilator parameters','Troubleshoot ventilator alarms']}
+};
+var Qs={
+1:{type:'PFTs',difficulty:'medium',tags:['Pulm'],stem:'PFTs show FEV1/FVC 62%, FEV1 55% predicted, with 15% improvement after bronchodilator. What is the diagnosis?',
+opts:[['a','Restrictive lung disease with reduced total lung capacity'],['b','Asthma with reversible airflow obstruction'],['c','COPD without significant bronchodilator response'],['d','Normal spirometry with no lung pathology']],
+ans:'b',
+exp:'<strong>Obstructive pattern:</strong> FEV1/FVC <70% = obstruction. >12% AND 200mL improvement with bronchodilator = reversible = asthma. COPD has minimal reversibility.',
+kp:'FEV1/FVC <70% = obstruction. >12% reversibility = asthma.'},
+2:{type:'Asthma Severity',difficulty:'medium',tags:['Pulm'],stem:'A patient uses rescue inhaler 4x/week and wakes with symptoms 3x/month. What severity is this?',
+opts:[['a','Intermittent asthma requiring no controller'],['b','Mild persistent asthma'],['c','Moderate persistent asthma'],['d','Severe persistent asthma']],
+ans:'b',
+exp:'<strong>Asthma classification:</strong> Mild persistent: >2 days/week (but not daily) or >2 nights/month. Needs daily controller (low-dose ICS).',
+kp:'Mild persistent: symptoms >2/week or nights >2/month. Add low-dose ICS.'},
+3:{type:'Asthma Treatment',difficulty:'medium',tags:['Pulm'],stem:'What is first-line controller therapy for persistent asthma?',
+opts:[['a','Long-acting beta-agonist alone'],['b','Inhaled corticosteroid'],['c','Oral corticosteroid'],['d','Leukotriene receptor antagonist alone']],
+ans:'b',
+exp:'<strong>Asthma controller:</strong> ICS is cornerstone of persistent asthma treatment. LABAs never alone (black box warning). Add LABA if ICS alone insufficient.',
+kp:'ICS first-line for persistent asthma. LABA only with ICS, never alone.'},
+4:{type:'COPD',difficulty:'medium',tags:['Pulm'],stem:'A 65-year-old smoker has FEV1/FVC 60% with minimal bronchodilator response. What confirms COPD diagnosis?',
+opts:[['a','Post-bronchodilator FEV1/FVC remains less than 0.70'],['b','Positive bronchodilator response greater than 12%'],['c','Elevated total lung capacity on testing'],['d','Normal diffusing capacity for carbon monoxide']],
+ans:'a',
+exp:'<strong>COPD diagnosis:</strong> Post-bronchodilator FEV1/FVC <0.70 confirms airflow limitation. GOLD stages by FEV1 % predicted. COPD has minimal reversibility.',
+kp:'COPD: post-BD FEV1/FVC <0.70. GOLD stages by FEV1.'},
+5:{type:'COPD Exacerbation',difficulty:'hard',tags:['Pulm'],stem:'A COPD patient presents with increased dyspnea, purulent sputum, and increased sputum volume. What treatment is indicated?',
+opts:[['a','Supportive care with hydration only'],['b','Bronchodilators, systemic steroids, and antibiotics'],['c','Inhaled corticosteroids alone are sufficient'],['d','Immediate intubation and mechanical ventilation']],
+ans:'b',
+exp:'<strong>COPD exacerbation:</strong> Anthonisen criteria (dyspnea, sputum volume, purulence). Treatment: bronchodilators, systemic steroids (5 days), antibiotics if purulent sputum.',
+kp:'COPD exacerbation: bronchodilators + steroids + antibiotics (if purulent).'},
+6:{type:'Restrictive Pattern',difficulty:'medium',tags:['Pulm'],stem:'PFTs show TLC 60% predicted, FEV1/FVC 85%. What pattern is this?',
+opts:[['a','Obstructive lung disease'],['b','Restrictive lung disease'],['c','Mixed obstructive and restrictive pattern'],['d','Normal pulmonary function testing']],
+ans:'b',
+exp:'<strong>Restrictive pattern:</strong> TLC <80% with normal or high FEV1/FVC. Lung cant expand fully. Causes: ILD, chest wall disease, neuromuscular disease.',
+kp:'Restrictive: TLC reduced, FEV1/FVC normal or high.'},
+7:{type:'ARDS',difficulty:'hard',tags:['Pulm'],stem:'Berlin criteria for ARDS include all EXCEPT:',
+opts:[['a','Onset within 1 week of known insult'],['b','Bilateral opacities on chest imaging'],['c','Elevated BNP confirming cardiac etiology'],['d','PaO2/FiO2 ratio 300 mmHg or less with PEEP 5 or more']],
+ans:'c',
+exp:'<strong>ARDS Berlin criteria:</strong> Acute onset (<1 week), bilateral opacities, NOT explained by cardiac failure/fluid overload, PaO2/FiO2 ≤300. Severity by P/F ratio.',
+kp:'ARDS: acute, bilateral, non-cardiogenic, P/F ≤300.'},
+8:{type:'ARDS Management',difficulty:'hard',tags:['Pulm'],stem:'What tidal volume should be used in ARDS?',
+opts:[['a','10-12 mL/kg actual body weight'],['b','6 mL/kg ideal body weight'],['c','8-10 mL/kg ideal body weight'],['d','Tidal volume does not matter in ARDS']],
+ans:'b',
+exp:'<strong>Low tidal volume ventilation:</strong> 6 mL/kg IBW reduces mortality in ARDS (ARDSNet). Prevents volutrauma. Allow permissive hypercapnia if needed.',
+kp:'ARDS: 6 mL/kg IBW. Low tidal volume reduces mortality.'},
+9:{type:'ILD',difficulty:'medium',tags:['Pulm'],stem:'A patient with rheumatoid arthritis has progressive dyspnea and velcro crackles. HRCT shows honeycombing. What is the likely diagnosis?',
+opts:[['a','Usual interstitial pneumonia and pulmonary fibrosis'],['b','Acute respiratory distress syndrome'],['c','Chronic obstructive pulmonary disease'],['d','Pulmonary hypertension without lung disease']],
+ans:'a',
+exp:'<strong>ILD/pulmonary fibrosis:</strong> UIP pattern: honeycombing, basilar predominance, traction bronchiectasis. Associated with RA, IPF. Velcro crackles on exam.',
+kp:'UIP: honeycombing, basilar, velcro crackles. IPF is idiopathic UIP.'},
+10:{type:'Pleural Effusion',difficulty:'medium',tags:['Pulm'],stem:'Pleural fluid has protein 4.5, LDH 250, serum protein 6.0, serum LDH 200. Is this transudative or exudative?',
+opts:[['a','Transudative effusion from heart failure'],['b','Exudative effusion meeting Light criteria'],['c','Cannot determine from these values'],['d','Hemothorax requiring chest tube']],
+ans:'b',
+exp:'<strong>Lights criteria:</strong> Exudate if ANY: pleural/serum protein >0.5, pleural/serum LDH >0.6, pleural LDH >2/3 upper normal. Here: 4.5/6=0.75 (>0.5) = exudate.',
+kp:'Lights criteria: protein ratio >0.5, LDH ratio >0.6 = exudate.'},
+11:{type:'PE Wells Score',difficulty:'medium',tags:['Pulm'],stem:'A post-surgical patient has leg swelling, HR 105, and is immobilized. Wells score is 7. What is the next step?',
+opts:[['a','D-dimer testing to rule out pulmonary embolism'],['b','CT pulmonary angiography'],['c','Reassurance since PE is unlikely'],['d','Empiric thrombolytic therapy']],
+ans:'b',
+exp:'<strong>PE workup:</strong> Wells >6 = high probability. Go directly to CT-PA (skip D-dimer, which is for ruling out low-probability PE). Start anticoagulation.',
+kp:'High probability PE (Wells >6): go to CT-PA, skip D-dimer.'},
+12:{type:'D-dimer',difficulty:'medium',tags:['Pulm'],stem:'When is D-dimer useful in PE evaluation?',
+opts:[['a','To confirm PE diagnosis in all patients'],['b','To rule out PE in low probability patients'],['c','To monitor anticoagulation therapy'],['d','To determine PE severity']],
+ans:'b',
+exp:'<strong>D-dimer:</strong> High sensitivity, low specificity. Negative D-dimer rules OUT PE in low/intermediate probability. Not useful if high probability (too many false negatives).',
+kp:'D-dimer rules out PE in low probability. Not useful if high probability.'},
+13:{type:'PE Treatment',difficulty:'hard',tags:['Pulm'],stem:'A patient with PE has BP 85/50 and RV strain on echo. What is indicated?',
+opts:[['a','Anticoagulation with heparin alone'],['b','Systemic thrombolysis or embolectomy'],['c','IVC filter placement only'],['d','Observation in the ICU']],
+ans:'b',
+exp:'<strong>Massive PE:</strong> Hemodynamic instability (SBP <90) + RV dysfunction = massive PE. Thrombolytics (tPA) indicated. Consider embolectomy if contraindicated.',
+kp:'Massive PE (hypotension + RV strain): thrombolytics or embolectomy.'},
+14:{type:'Anticoagulation',difficulty:'medium',tags:['Pulm'],stem:'What is the duration of anticoagulation for a first unprovoked PE?',
+opts:[['a','3 months then reassess for extended therapy'],['b','6 weeks of treatment'],['c','Lifelong anticoagulation always required'],['d','Until symptoms resolve completely']],
+ans:'a',
+exp:'<strong>PE anticoagulation duration:</strong> Provoked (surgery, trauma): 3 months. Unprovoked: at least 3 months, then reassess for extended therapy based on risk-benefit.',
+kp:'Unprovoked PE: minimum 3 months, consider extended therapy.'},
+15:{type:'Pulmonary Hypertension',difficulty:'hard',tags:['Pulm'],stem:'What defines pulmonary arterial hypertension on right heart catheterization?',
+opts:[['a','Mean pulmonary artery pressure greater than 20 mmHg at rest'],['b','Systolic blood pressure greater than 140 mmHg'],['c','PCWP greater than 15 mmHg'],['d','Cardiac output less than 4 L/min']],
+ans:'a',
+exp:'<strong>PAH definition:</strong> mPAP >20 mmHg at rest (updated 2018). Pre-capillary (PAH): PCWP ≤15. Post-capillary (PVH): PCWP >15.',
+kp:'PAH: mPAP >20 mmHg, PCWP ≤15 (pre-capillary).'},
+16:{type:'Respiratory Failure',difficulty:'medium',tags:['Pulm'],stem:'A patient has PaO2 55 on room air and PaCO2 35. What type of respiratory failure is this?',
+opts:[['a','Type 1 hypoxemic respiratory failure'],['b','Type 2 hypercapnic respiratory failure'],['c','Type 3 perioperative respiratory failure'],['d','Type 4 shock-related respiratory failure']],
+ans:'a',
+exp:'<strong>Type 1:</strong> Hypoxemic (low O2, normal/low CO2). Due to V/Q mismatch, shunt, diffusion impairment. Type 2: hypercapnic (high CO2) - hypoventilation.',
+kp:'Type 1: hypoxemic (low O2). Type 2: hypercapnic (high CO2).'},
+17:{type:'BiPAP',difficulty:'medium',tags:['Pulm'],stem:'When is BiPAP indicated for COPD exacerbation?',
+opts:[['a','All COPD exacerbations regardless of severity'],['b','Respiratory acidosis with pH 7.25-7.35 despite initial treatment'],['c','Only after intubation has failed'],['d','When patient is fully alert without distress']],
+ans:'b',
+exp:'<strong>NIV for COPD:</strong> Indicated for respiratory acidosis (pH 7.25-7.35) despite initial therapy. Reduces intubation and mortality. Contraindicated if severely altered.',
+kp:'BiPAP for COPD: pH 7.25-7.35 with hypercapnia. Reduces intubation.'},
+18:{type:'Intubation',difficulty:'hard',tags:['Pulm'],stem:'What is an indication for emergent intubation?',
+opts:[['a','Mild hypoxemia responding to supplemental oxygen'],['b','Failure to protect airway or impending respiratory arrest'],['c','Anxiety about breathing'],['d','Stable vital signs with dyspnea']],
+ans:'b',
+exp:'<strong>Intubation indications:</strong> Failure to protect airway, apnea/impending arrest, refractory hypoxemia, severe respiratory distress, airway obstruction.',
+kp:'Intubate: cant protect airway, respiratory arrest, refractory hypoxemia.'},
+19:{type:'Ventilator Settings',difficulty:'hard',tags:['Pulm'],stem:'Initial ventilator settings for a 70 kg male intubated for ARDS should include:',
+opts:[['a','Tidal volume 700 mL with minimal PEEP'],['b','Tidal volume 420 mL with PEEP 5-10 cmH2O'],['c','Pressure support mode only'],['d','FiO2 21% to prevent oxygen toxicity']],
+ans:'b',
+exp:'<strong>ARDS ventilation:</strong> TV 6 mL/kg IBW (70kg IBW ≈ 420 mL), PEEP to maintain oxygenation, plateau pressure ≤30 cmH2O. Start FiO2 100%, wean down.',
+kp:'ARDS: 6 mL/kg IBW, PEEP 5-10, plateau ≤30 cmH2O.'},
+20:{type:'Ventilator Troubleshooting',difficulty:'hard',tags:['Pulm'],stem:'Ventilator alarms for high peak pressure but plateau pressure is normal. What is the cause?',
+opts:[['a','Decreased lung compliance from ARDS'],['b','Airway resistance from bronchospasm or mucus plug'],['c','Tension pneumothorax'],['d','Right mainstem intubation']],
+ans:'b',
+exp:'<strong>High peak, normal plateau:</strong> Indicates airway resistance (bronchospasm, secretions, kinked tube). High peak AND plateau = low compliance (ARDS, pneumothorax).',
+kp:'High peak only = airway resistance. High peak + plateau = low compliance.'}
+};
+var answers={1:'b',2:'b',3:'c',4:'d',5:'d',6:'c',7:'b',8:'a',9:'a',10:'c',11:'a',12:'c',13:'d',14:'a',15:'d',16:'c',17:'b',18:'a',19:'b',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+(q.difficulty||'medium')+'">'+(q.difficulty||'medium')+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
+         data-module-title="Pulmonary"
+         data-key-points="🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+<li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
+</ol>
+</div>
+
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

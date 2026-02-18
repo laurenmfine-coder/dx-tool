@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: Postpartum Hemorrhage - Expanded Deep Dive Adventure. Explore pathophysiology, diagnosis, and management with teaching points o...">
+<title>Postpartum Hemorrhage - Expanded Deep Dive Adventure</title>
+    <link href="../css/tailwind.min.css" rel="stylesheet">
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-pink-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🩸 Postpartum Hemorrhage</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-pink-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-pink-500 to-red-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "Postpartum Hemorrhage",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "Recognizing PPH",
+            scenario: "A 32-year-old G3P3 just delivered vaginally after a prolonged labor (18 hours) with oxytocin augmentation. The placenta delivered intact 10 minutes ago.\n\nYou notice significant bleeding continuing from the vagina. The fundus feels soft and 'boggy' on palpation, rising above the umbilicus.\n\nEstimated blood loss so far: 600mL and continuing\n\nVitals: HR 95, BP 115/70",
+            question: "What defines postpartum hemorrhage and what is the most likely cause here?",
+            options: [
+                { id: "A", text: "PPH is >1000mL blood loss; this doesn't qualify yet", outcome: "Outdated definition", feedback: "The 2017 ACOG reVITALize definition changed PPH to ≥1000mL OR bleeding with hemodynamic instability regardless of delivery type. However, >500mL after vaginal delivery is still clinically concerning and warrants intervention.", points: 4, isOptimal: false },
+                { id: "B", text: "PPH with uterine atony (boggy uterus) - the most common cause; begin uterine massage and uterotonics", outcome: "Correct diagnosis and action", feedback: "Correct! Uterine atony (failure of uterus to contract) causes 70-80% of PPH. Risk factors here: prolonged labor, oxytocin use. The 'boggy' uterus confirms atony. First steps: bimanual uterine massage and uterotonics.", points: 10, isOptimal: true },
+                { id: "C", text: "Normal postpartum bleeding - observe and reassess", outcome: "Underestimates bleeding", feedback: "600mL with ongoing bleeding and a boggy uterus is NOT normal. Normal postpartum blood loss is ~500mL for vaginal delivery. Active intervention is needed NOW.", points: 2, isOptimal: false },
+                { id: "D", text: "Retained placenta - manual exploration needed", outcome: "Placenta already delivered intact", feedback: "The placenta delivered intact. While retained placental fragments are possible, the boggy uterus strongly suggests atony as the primary cause. Address atony first.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does atony cause hemorrhage?", steps: ["Placental site has large open spiral arteries", "After placenta delivers, uterine contraction compresses these vessels", "This 'living ligature' is the primary hemostatic mechanism", "If uterus fails to contract (atony), vessels remain open", "Result: Rapid, massive hemorrhage from placental site", "Can lose entire blood volume within minutes if untreated"] },
+            mechanism: { title: "Postpartum Hemorrhage: The 4 T's", content: "DEFINITION (ACOG 2017):\n• ≥1000mL blood loss within 24 hours of delivery, OR\n• Bleeding with signs of hypovolemia\n• Regardless of delivery route\n\nTHE 4 T's OF PPH:\n\n1. TONE (70-80%) - Uterine Atony\n• Most common cause\n• Risk factors: Prolonged labor, oxytocin use, overdistension (multiples, polyhydramnios, macrosomia), chorioamnionitis, grand multiparity\n• Finding: Boggy, soft uterus\n\n2. TRAUMA (20%)\n• Lacerations (cervical, vaginal, perineal)\n• Hematomas\n• Uterine rupture\n• Uterine inversion\n• Finding: Firm uterus but continued bleeding\n\n3. TISSUE (10%)\n• Retained placenta or membranes\n• Abnormal placentation (accreta spectrum)\n• Finding: Incomplete placenta, uterus doesn't contract fully\n\n4. THROMBIN (<1%)\n• Coagulopathy (DIC, dilutional, pre-existing)\n• Finding: Bleeding from IV sites, no clot formation\n\nRISK FACTORS:\n• Previous PPH (recurrence 10%)\n• Prolonged labor\n• Augmented labor\n• Overdistended uterus\n• Chorioamnionitis\n• Operative delivery\n• Placenta previa/accreta\n• Pre-eclampsia\n• Obesity" },
+            pearl: "Visual estimation underestimates blood loss by 30-50%. Use quantitative blood loss (QBL) measurement - weigh blood-soaked materials and measure collected blood. 1mL blood = 1 gram weight.",
+            pitfall: "Young healthy women compensate well for blood loss. Tachycardia and hypotension are LATE signs - don't wait for vital sign changes to act on PPH."
+        },
+        {
+            id: 2,
+            title: "Uterotonic Medications",
+            scenario: "You begin bimanual uterine massage. The fundus remains boggy despite massage.\n\nThe patient has a history of mild asthma (well-controlled, no recent exacerbations).\n\nVitals: BP 95/60, HR 115, still bleeding.",
+            question: "What is the first-line uterotonic and what are contraindications to know?",
+            options: [
+                { id: "A", text: "Methylergonovine (Methergine) - give IM immediately", outcome: "Not first-line and has contraindications", feedback: "Methylergonovine is second-line. It's contraindicated in HYPERTENSION (causes vasoconstriction). It can be used if oxytocin fails, but oxytocin is first-line.", points: 4, isOptimal: false },
+                { id: "B", text: "Oxytocin (Pitocin) IV infusion - first-line; methylergonovine contraindicated in HTN, carboprost (Hemabate) contraindicated in asthma", outcome: "Correct first-line and contraindications", feedback: "Correct! Oxytocin IV is first-line (10-40 units in 1L saline, run wide open). Key contraindications: Methergine - hypertension. Hemabate (carboprost/15-methyl PGF2α) - asthma. Misoprostol has no major contraindications.", points: 10, isOptimal: true },
+                { id: "C", text: "Carboprost (Hemabate) IM - it's the strongest uterotonic", outcome: "Contraindicated in asthma", feedback: "Carboprost IS potent, but it's contraindicated in this patient with asthma (causes bronchospasm). It's also contraindicated in active cardiac/pulmonary disease. Use oxytocin first.", points: 3, isOptimal: false },
+                { id: "D", text: "Misoprostol rectally - safest option", outcome: "Not first-line despite safety", feedback: "Misoprostol is indeed safe (no major contraindications) and useful, but oxytocin IV remains first-line due to rapid onset. Misoprostol is often given when other agents fail or for resource-limited settings.", points: 5, isOptimal: false }
+            ],
+            whyChain: { title: "WHY know contraindications?", steps: ["Different uterotonics work via different mechanisms", "Methergine (ergot alkaloid): Causes vasoconstriction → dangerous in HTN", "Carboprost (prostaglandin F2α): Causes bronchospasm → dangerous in asthma", "Misoprostol (prostaglandin E1): Safest profile, no major contraindications", "In emergency, giving contraindicated drug can cause additional harm", "Know your drugs' contraindications before you need them"] },
+            mechanism: { title: "Uterotonic Medications", content: "FIRST-LINE: OXYTOCIN (Pitocin)\n• Dose: 10-40 units in 1L NS, run wide open; or 10 units IM\n• Onset: 1 minute IV, 3-5 minutes IM\n• Mechanism: Binds oxytocin receptors → uterine contraction\n• Contraindications: None absolute\n• Side effects: Water intoxication with large volumes (ADH effect)\n\nSECOND-LINE OPTIONS:\n\nMethylergonovine (Methergine)\n• Dose: 0.2mg IM (can repeat q2-4h)\n• Mechanism: Ergot alkaloid → sustained uterine contraction\n• Contraindication: HYPERTENSION (causes vasoconstriction)\n• Caution: Preeclampsia, cardiac disease\n\nCarboprost (Hemabate, 15-methyl PGF2α)\n• Dose: 250mcg IM (can repeat q15-90 min, max 8 doses)\n• Mechanism: Prostaglandin → uterine contraction\n• Contraindication: ASTHMA (bronchospasm)\n• Side effects: Diarrhea, fever, hypertension\n\nMisoprostol (Cytotec)\n• Dose: 800-1000mcg rectally, SL, or buccally\n• Mechanism: Prostaglandin E1 analog\n• Contraindications: None absolute\n• Advantages: Stable at room temp, cheap, no injection needed\n• Side effects: Fever, shivering, diarrhea\n\nTRANEXAMIC ACID (TXA)\n• Dose: 1g IV over 10 minutes (within 3 hours of delivery)\n• Mechanism: Antifibrinolytic\n• WOMAN trial: Reduced death from bleeding\n• Give early - most effective within 3 hours\n• Not a uterotonic but important adjunct" },
+            pearl: "Give tranexamic acid (TXA) early in PPH - the WOMAN trial showed reduced death from bleeding. Most effective within 3 hours of delivery. 1g IV over 10 minutes.",
+            pitfall: "Don't give Methergine to hypertensive patients - it can cause severe hypertension, stroke, or MI. Many postpartum patients have elevated BP, so always check before giving."
+        },
+        {
+            id: 3,
+            title: "Escalating Management",
+            scenario: "Despite oxytocin infusion, uterine massage, and a dose of misoprostol, bleeding continues. Estimated blood loss is now 1500mL.\n\nVitals: HR 115, BP 95/60\n\nLabs being drawn. No IV access in the other arm yet.\n\nThe uterus is slightly firmer but still not well-contracted.",
+            question: "What are the next steps in escalation?",
+            options: [
+                { id: "A", text: "Continue current management - need to give medications more time", outcome: "Delays needed escalation", feedback: "At 1500mL blood loss with hemodynamic changes, you need to escalate NOW. Waiting allows further hemorrhage. Multiple simultaneous interventions are needed.", points: 1, isOptimal: false },
+                { id: "B", text: "Activate massive transfusion protocol, second IV access, consider intrauterine balloon tamponade, call for help", outcome: "Appropriate escalation", feedback: "Correct! At this point: (1) Activate MTP, (2) Second large-bore IV, (3) Consider balloon tamponade if available, (4) Give additional uterotonics (Methergine if no HTN), (5) Call for help (OB, anesthesia, OR). This is multi-system emergency.", points: 10, isOptimal: true },
+                { id: "C", text: "Proceed directly to hysterectomy", outcome: "Skipping intermediate steps", feedback: "Hysterectomy is definitive but last resort. Multiple less invasive options exist: balloon tamponade, B-Lynch suture, uterine artery ligation/embolization. Try these first if patient is stable enough.", points: 3, isOptimal: false },
+                { id: "D", text: "Check labs before making decisions about transfusion", outcome: "Labs shouldn't delay resuscitation", feedback: "Don't wait for labs to transfuse in active hemorrhage with vital sign changes. Transfuse based on clinical picture. Labs will guide ongoing resuscitation but shouldn't delay initial blood products.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY early activation of MTP?", steps: ["PPH can progress from stable to life-threatening in minutes", "Getting blood products takes time (type and cross, thawing FFP)", "Early activation ensures products are ready when needed", "Massive transfusion = replacing entire blood volume in 24h", "1:1:1 ratio (RBC:FFP:platelets) improves outcomes", "Better to cancel MTP if not needed than delay if needed"] },
+            mechanism: { title: "PPH Escalation Pathway", content: "STAGE 1: Initial Response (Blood loss <1000mL)\n• Uterine massage\n• Oxytocin IV\n• Empty bladder\n• Quantify blood loss\n• Establish IV access\n\nSTAGE 2: Ongoing Hemorrhage (1000-1500mL)\n• Second IV access\n• Labs: CBC, coags, type and screen\n• Additional uterotonics\n• TXA 1g IV\n• Exam for lacerations\n• Consider balloon tamponade\n• Notify OR, anesthesia, blood bank\n\nSTAGE 3: Refractory Hemorrhage (>1500mL or unstable)\n• Activate massive transfusion protocol\n• Intrauterine balloon tamponade\n• Notify surgical team\n• Move to OR if not already there\n• Consider interventional radiology (uterine artery embolization)\n\nSTAGE 4: Surgical Intervention\n• B-Lynch compression suture\n• Uterine artery ligation\n• Internal iliac artery ligation\n• Hysterectomy (definitive)\n\nBALLOON TAMPONADE:\n• Bakri balloon, Foley catheter, or condom catheter\n• Insert into uterus, inflate with saline\n• Provides direct pressure on placental site\n• 'Tamponade test' - if bleeding stops, surgery may be avoided\n• Can be temporizing or definitive\n\nMASSIVE TRANSFUSION:\n• 1:1:1 ratio of RBC:FFP:Platelets\n• Prevents dilutional coagulopathy\n• Goal: Hgb >7-8, fibrinogen >200, platelets >50k\n• Consider cryoprecipitate if fibrinogen low" },
+            pearl: "The intrauterine balloon is your friend. The 'tamponade test' - if bleeding stops with balloon inflation, the patient may avoid surgery. Have low threshold to place it.",
+            pitfall: "Don't do one intervention at a time and wait. In PPH, do EVERYTHING simultaneously: massage, medications, IV access, call for help, activate MTP. Parallel, not serial."
+        },
+        {
+            id: 4,
+            title: "Trauma - Lacerations",
+            scenario: "Different patient: A 28-year-old G1P1 just delivered via vacuum-assisted vaginal delivery. The placenta delivered complete. The uterus is firm and well-contracted.\n\nDespite the firm uterus, there is brisk bleeding from the vagina.\n\nEstimated blood loss: 800mL",
+            question: "With a firm, contracted uterus but continued bleeding, what is the most likely cause?",
+            options: [
+                { id: "A", text: "Uterine atony - give more oxytocin", outcome: "Uterus is already firm", feedback: "The uterus is described as 'firm and well-contracted' - this is NOT atony. More oxytocin won't help. You need to look for another cause of bleeding.", points: 2, isOptimal: false },
+                { id: "B", text: "Genital tract trauma (lacerations) - perform systematic inspection of cervix, vagina, and perineum", outcome: "Correct - trauma with firm uterus", feedback: "Correct! Firm uterus + continued bleeding = TRAUMA until proven otherwise. Risk factors: Operative vaginal delivery (vacuum, forceps), precipitous delivery, macrosomia. Systematically inspect cervix, vaginal walls, and perineum.", points: 10, isOptimal: true },
+                { id: "C", text: "Coagulopathy - check coagulation studies", outcome: "Less likely as primary cause", feedback: "Coagulopathy is possible but rare as primary cause of PPH. With operative vaginal delivery and firm uterus, trauma is much more likely. Check coags but don't delay laceration repair.", points: 4, isOptimal: false },
+                { id: "D", text: "Retained placental fragments - manual exploration", outcome: "Placenta was complete", feedback: "The placenta delivered complete. While small fragments can be retained, the firm uterus and operative delivery history point to laceration as the cause. Inspect the genital tract.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does operative delivery increase laceration risk?", steps: ["Vacuum/forceps require traction on fetal head", "This force transmits to maternal soft tissues", "Vaginal walls and cervix can tear", "Rapid delivery doesn't allow tissues to stretch gradually", "Perineal lacerations more common and severe", "Must systematically inspect after any operative delivery"] },
+            mechanism: { title: "Genital Tract Trauma", content: "TYPES OF LACERATIONS:\n\nPerineal:\n• 1st degree: Vaginal mucosa/perineal skin only\n• 2nd degree: Into perineal muscles (not sphincter)\n• 3rd degree: Into anal sphincter\n• 4th degree: Through rectal mucosa\n\nVaginal:\n• Sidewall lacerations\n• Sulcus tears (deep lateral)\n• Can be high and difficult to visualize\n\nCervical:\n• Often at 3 or 9 o'clock positions\n• Can extend into lower uterine segment\n• May require OR for repair\n\nRISK FACTORS:\n• Operative vaginal delivery (vacuum, forceps)\n• Precipitous delivery\n• Macrosomia\n• Shoulder dystocia\n• Episiotomy extension\n• First vaginal delivery\n\nSYSTEMATIC INSPECTION:\n1. Good lighting and exposure\n2. Adequate anesthesia\n3. Inspect cervix with ring forceps (360°)\n4. Inspect vaginal walls (anterior, posterior, sulci)\n5. Inspect perineum\n6. Rectal exam (rule out 3rd/4th degree)\n\nREPAIR PRINCIPLES:\n• Achieve hemostasis first\n• Good visualization\n• Absorbable suture\n• Repair in layers\n• Account for all sponges\n• High lacerations may need OR\n\nHEMATOMAS:\n• Vulvar: Usually conservative management\n• Vaginal: May need incision and drainage\n• Retroperitoneal: May be occult, can be massive\n• Consider if pain out of proportion or hemodynamic instability" },
+            pearl: "Always do a rectal exam after vaginal delivery, especially operative delivery. A 4th-degree laceration (through rectal mucosa) can be missed if you don't check.",
+            pitfall: "High vaginal lacerations and cervical lacerations can be missed on initial inspection. Use good exposure, retractors, and ring forceps to visualize the entire cervix."
+        },
+        {
+            id: 5,
+            title: "Retained Placenta",
+            scenario: "A 35-year-old G2P2 delivered 45 minutes ago. The placenta has not yet delivered despite gentle cord traction and oxytocin.\n\nShe is having moderate bleeding. Vitals stable.\n\nThe cord is intact but the placenta remains in the uterus.",
+            question: "What is the management of retained placenta?",
+            options: [
+                { id: "A", text: "Continue waiting - placenta can take up to 2 hours to deliver normally", outcome: "Waiting too long", feedback: "While there's no absolute time limit, most placentas deliver within 30 minutes. At 45 minutes with bleeding, intervention is appropriate. Risk of hemorrhage increases with time.", points: 3, isOptimal: false },
+                { id: "B", text: "Retained placenta after 30 minutes with bleeding - manual removal under adequate anesthesia/analgesia", outcome: "Correct approach", feedback: "Correct! Retained placenta (typically >30 min after delivery) with bleeding requires manual removal. Ensure adequate anesthesia (regional or general), IV access, and blood available. Technique: Follow cord to placenta, develop cleavage plane, remove.", points: 10, isOptimal: true },
+                { id: "C", text: "Aggressive cord traction to deliver the placenta", outcome: "Dangerous - can cause uterine inversion", feedback: "Aggressive cord traction can cause uterine inversion (turning the uterus inside-out) - a catastrophic complication. Controlled cord traction with counter-pressure on fundus is acceptable; aggressive pulling is not.", points: 0, isOptimal: false },
+                { id: "D", text: "IV nitroglycerin to relax the uterus, then deliver placenta", outcome: "Specific indication", feedback: "IV nitroglycerin (or terbutaline) can help with trapped placenta (cervix closing on placenta) but shouldn't delay manual removal if needed. It's more useful when placenta is partially separated but trapped.", points: 5, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does retained placenta cause bleeding?", steps: ["Placenta partially separates but doesn't deliver", "Uterus can't fully contract around remaining tissue", "Open spiral arteries continue to bleed", "Additionally, tissue can cause infection if left", "Manual removal allows uterus to contract completely", "Must ensure ALL placental tissue removed"] },
+            mechanism: { title: "Retained Placenta", content: "DEFINITION:\n• Placenta not delivered within 30 minutes of delivery\n• Or placenta delivered but inspection shows missing fragments\n\nTYPES:\n\nTrapped placenta:\n• Placenta separated but can't pass through closing cervix\n• May respond to uterine relaxants (nitroglycerin, terbutaline)\n\nAdherent placenta:\n• Placenta hasn't separated from uterine wall\n• Requires manual separation\n\nPlacenta accreta spectrum:\n• Abnormally adherent/invasive placenta\n• Cannot be manually removed (attached to myometrium)\n• Discussed in next stage\n\nMANUAL REMOVAL TECHNIQUE:\n1. Adequate anesthesia (regional or general)\n2. Empty bladder\n3. IV access, blood available\n4. One hand on fundus externally\n5. Other hand follows cord into uterus\n6. Find cleavage plane between placenta and uterine wall\n7. Sweep fingers to separate placenta\n8. Remove placenta and membranes\n9. Inspect placenta for completeness\n10. Administer uterotonics\n11. Consider antibiotics\n\nCOMPLICATIONS OF MANUAL REMOVAL:\n• Hemorrhage\n• Infection/endometritis\n• Uterine perforation\n• Incomplete removal\n\nRETAINED PLACENTAL FRAGMENTS:\n• Can cause delayed PPH (24h - 12 weeks postpartum)\n• Present with bleeding, infection, subinvolution\n• Diagnosis: Ultrasound\n• Treatment: D&C or expectant with uterotonics" },
+            pearl: "Inspect every placenta after delivery - both maternal (cotyledons complete?) and fetal (membranes complete?) surfaces. Missing tissue means retained fragments.",
+            pitfall: "If placenta cannot be manually separated easily, STOP - this may be placenta accreta. Forcing removal can cause massive hemorrhage. Get senior help immediately."
+        },
+        {
+            id: 6,
+            title: "Placenta Accreta Spectrum",
+            scenario: "A 38-year-old G4P3 with 3 prior cesarean deliveries presents at 36 weeks. Ultrasound shows placenta previa with suspected placenta accreta (loss of clear zone, placental lacunae).\n\nShe's being counseled about delivery planning.",
+            question: "What is placenta accreta spectrum and what is the delivery approach?",
+            options: [
+                { id: "A", text: "Placenta accreta can usually be managed with manual removal at delivery", outcome: "Dangerous misunderstanding", feedback: "Placenta accreta CANNOT be manually removed - it's attached directly to the myometrium. Attempting manual removal causes massive hemorrhage. Planned cesarean hysterectomy is often required.", points: 0, isOptimal: false },
+                { id: "B", text: "Abnormally invasive placenta; planned cesarean delivery at center with expertise, blood products available, possible hysterectomy", outcome: "Correct understanding and approach", feedback: "Correct! Placenta accreta spectrum: Placenta invades myometrium and can't be removed. Management: Delivery at high-volume center, multidisciplinary team, massive transfusion protocol ready, plan for cesarean hysterectomy if confirmed.", points: 10, isOptimal: true },
+                { id: "C", text: "Vaginal delivery is still possible with careful placental management", outcome: "Contraindicated with previa/accreta", feedback: "With placenta previa (placenta covering cervix) and suspected accreta, vaginal delivery is contraindicated. This requires cesarean delivery with preparation for hysterectomy.", points: 1, isOptimal: false },
+                { id: "D", text: "Wait until 39 weeks for fetal lung maturity before delivery", outcome: "Higher risk of emergency", feedback: "With high suspicion for accreta, delivery at 34-36 weeks (with steroids) is recommended to avoid emergency delivery. Waiting until 39 weeks increases risk of labor, bleeding, and emergent unplanned surgery.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does prior cesarean increase accreta risk?", steps: ["Cesarean creates scar in uterine wall", "Subsequent placentas can implant over scar (especially with previa)", "Scar lacks normal decidua (protective layer)", "Without decidua, placenta invades directly into myometrium", "Risk increases with each cesarean: 1 CS = 0.3%, 2 CS = 0.6%, 3+ CS = 2-3%", "With previa + prior CS, risk is much higher (up to 40-60% with ≥3 CS)"] },
+            mechanism: { title: "Placenta Accreta Spectrum", content: "SPECTRUM OF INVASION:\n\n• Accreta: Placenta attaches to myometrium (no intervening decidua)\n• Increta: Placenta invades INTO myometrium\n• Percreta: Placenta invades THROUGH myometrium (to serosa or beyond - bladder, bowel)\n\nRISK FACTORS:\n• Prior cesarean delivery (major risk)\n• Placenta previa\n• Prior uterine surgery (myomectomy, D&C)\n• Advanced maternal age\n• Multiparity\n• IVF pregnancies\n\nPREVALENCE:\n• Increasing (more cesarean deliveries)\n• Now ~1 in 500 pregnancies\n\nDIAGNOSIS:\n\nUltrasound findings:\n• Loss of clear zone (retroplacental hypoechoic area)\n• Placental lacunae (irregular vascular spaces - 'Swiss cheese')\n• Abnormal color Doppler (turbulent flow)\n• Bladder wall interruption (percreta)\n\nMRI:\n• If ultrasound inconclusive\n• Better for posterior placenta\n• Helps delineate extent\n\nMANAGEMENT:\n\nAntepartum:\n• Referral to center of excellence\n• Multidisciplinary team planning\n• Blood bank preparation\n• Delivery timing: 34-36 weeks with steroids\n\nDelivery:\n• Scheduled cesarean (avoid labor/bleeding emergency)\n• Vertical skin incision often needed\n• Fundal or high uterine incision (avoid placenta)\n• If accreta confirmed: Leave placenta in place → proceed to hysterectomy\n• DO NOT attempt manual removal\n\nCONSERVATIVE MANAGEMENT:\n• Leave placenta in place\n• Methotrexate sometimes used\n• Risk of delayed hemorrhage, infection\n• Selected cases only" },
+            pearl: "The combination of placenta previa + prior cesarean delivery should trigger high suspicion for accreta. Risk with previa + 3 prior CS is up to 60%.",
+            pitfall: "If you encounter unexpected accreta at delivery, DO NOT attempt to remove the placenta. Close the uterus, call for help, prepare for hysterectomy. Forcing removal causes fatal hemorrhage."
+        },
+        {
+            id: 7,
+            title: "Uterine Inversion",
+            scenario: "A 30-year-old G1P1 just delivered. Immediately after delivery of the placenta, she becomes pale, hypotensive (BP 70/40), and bradycardic.\n\nOn exam, you cannot palpate the uterine fundus abdominally. Instead, there is a mass protruding from the vagina with the placenta still attached.",
+            question: "What is this obstetric emergency and what is the immediate management?",
+            options: [
+                { id: "A", text: "Uterine prolapse - replace uterus when patient is stable", outcome: "Wrong diagnosis", feedback: "This is NOT prolapse. Uterine prolapse doesn't cause this degree of shock. The fundus not palpable + vaginal mass + severe shock = uterine INVERSION (the uterus has turned inside-out).", points: 2, isOptimal: false },
+                { id: "B", text: "Uterine inversion - do NOT remove placenta, replace uterus immediately using Johnson maneuver, then resuscitate", outcome: "Correct diagnosis and action", feedback: "Correct! Uterine inversion: Fundus inverts through cervix. Causes profound neurogenic (vagal) shock. Management: (1) Do NOT remove placenta (helps as a handle, removing increases bleeding), (2) Replace uterus immediately (Johnson maneuver), (3) Resuscitate.", points: 10, isOptimal: true },
+                { id: "C", text: "Hypovolemic shock from PPH - start massive transfusion and find the bleeding source", outcome: "Misses the cause", feedback: "The shock is neurogenic (vagal response to fundal stretch/traction), not primarily hypovolemic. The key finding is 'cannot palpate fundus' + vaginal mass = inversion. Replacing the uterus treats the shock.", points: 3, isOptimal: false },
+                { id: "D", text: "Call for immediate hysterectomy", outcome: "Wrong first step", feedback: "Uterine inversion is usually correctable without hysterectomy. Replace the uterus first. Hysterectomy is only for rare cases where replacement fails after all other measures.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does inversion cause shock?", steps: ["Uterus turns inside-out (fundus through cervix)", "Stretching and traction on uterine ligaments and peritoneum", "Triggers profound VAGAL (neurogenic) response", "Results in bradycardia and hypotension (parasympathetic)", "Can also have hypovolemic component from bleeding", "Replacing uterus relieves the vagal stimulus"] },
+            mechanism: { title: "Uterine Inversion", content: "DEFINITION:\n• Uterine fundus collapses into endometrial cavity\n• Can protrude through cervix or out of vagina\n• Rare but life-threatening (1 in 2000-20000 deliveries)\n\nDEGREES:\n• 1st: Fundus dimples but doesn't pass through cervix\n• 2nd: Fundus passes through cervix into vagina\n• 3rd: Fundus protrudes from vaginal introitus\n• 4th: Complete inversion with vaginal wall involvement\n\nCAUSES:\n• Excessive cord traction (most common)\n• Fundal pressure before placental separation\n• Fundal implantation of placenta\n• Abnormally adherent placenta\n• Short umbilical cord\n• Uterine relaxation (MgSO4, general anesthesia)\n\nCLINICAL FEATURES:\n• Sudden severe pelvic pain\n• Profound shock (disproportionate to blood loss)\n• Bradycardia (vagal)\n• Fundus not palpable abdominally\n• Mass in vagina with or without attached placenta\n\nMANAGEMENT:\n\nImmediate:\n1. Call for help\n2. Do NOT remove placenta if still attached\n3. Attempt immediate manual replacement\n4. IV access, fluid resuscitation\n5. Discontinue oxytocin\n\nJohnson Maneuver:\n• Grasp fundus in palm of hand\n• Push fundus back through cervix toward umbilicus\n• Apply steady pressure for several minutes\n• May need uterine relaxation (nitroglycerin, terbutaline, or general anesthesia)\n\nAfter replacement:\n• Hold fundus in place\n• Start uterotonics (oxytocin) to contract uterus\n• Remove placenta AFTER uterus replaced\n• Resuscitate patient\n\nIf manual reduction fails:\n• Hydrostatic reduction (fill vagina with saline)\n• Laparotomy with surgical correction\n• Hysterectomy (rare, last resort)" },
+            pearl: "Inversion shock is neurogenic (vagal), not just hypovolemic. The patient may be in profound shock with bradycardia and relatively little external bleeding. Replacing the uterus treats the shock.",
+            pitfall: "Do NOT remove the placenta before replacing the uterus - it helps as a handle for replacement and removal increases bleeding. Replace first, remove placenta second."
+        },
+        {
+            id: 8,
+            title: "Coagulopathy in PPH",
+            scenario: "A patient with ongoing PPH (blood loss now 2500mL) has received 4 units PRBCs and 2 units FFP.\n\nShe's now oozing from IV sites and her blood doesn't seem to be clotting.\n\nLabs:\n• Hgb 7.2\n• Platelets 45,000\n• PT/INR 18/1.8\n• PTT 55\n• Fibrinogen 85 (normal >200)",
+            question: "What is happening and how should it be managed?",
+            options: [
+                { id: "A", text: "Dilutional coagulopathy only - give more crystalloid", outcome: "Will worsen coagulopathy", feedback: "More crystalloid will further dilute clotting factors. She has consumptive coagulopathy (using up factors) AND dilutional. She needs blood products, not crystalloid.", points: 1, isOptimal: false },
+                { id: "B", text: "DIC/consumptive coagulopathy - give cryoprecipitate for fibrinogen, more FFP, platelets; 1:1:1 ratio", outcome: "Correct management", feedback: "Correct! Fibrinogen <200 (hers is 85) in PPH is critical. Give cryoprecipitate (10 units raises fibrinogen ~100). Continue massive transfusion with 1:1:1 ratio. Goal: Fibrinogen >200, platelets >50k.", points: 10, isOptimal: true },
+                { id: "C", text: "Stop blood products - she's having a transfusion reaction", outcome: "Wrong assessment", feedback: "Coagulopathy from PPH is not a transfusion reaction. The bleeding and consumption of clotting factors causes this, not the blood products. She needs MORE products, not fewer.", points: 0, isOptimal: false },
+                { id: "D", text: "Give vitamin K and wait for clotting to improve", outcome: "Won't help acutely", feedback: "Vitamin K takes 6-24 hours to work. This is acute consumptive coagulopathy - she needs immediate factor replacement (FFP, cryoprecipitate), not vitamin K.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is fibrinogen so important in PPH?", steps: ["Fibrinogen is the substrate for clot formation", "It's consumed during hemorrhage (used to make clots)", "Pregnant women have higher baseline (400-600 mg/dL)", "Fibrinogen <200 in PPH associated with severe hemorrhage", "Cryoprecipitate is concentrated fibrinogen source", "Fibrinogen level is a key resuscitation target"] },
+            mechanism: { title: "Coagulopathy in PPH", content: "MECHANISMS:\n\nConsumptive coagulopathy (DIC):\n• Massive tissue factor exposure\n• Widespread activation of coagulation\n• Consumption of factors and platelets\n• Secondary fibrinolysis\n\nDilutional coagulopathy:\n• Crystalloid/RBC resuscitation dilutes factors\n• Massive transfusion without FFP/platelets\n• Hypothermia impairs clotting\n\nTRIAD OF DEATH:\n• Hypothermia\n• Acidosis\n• Coagulopathy\n• Each worsens the others - must address all\n\nLAB GOALS:\n• Fibrinogen >200 mg/dL (most important)\n• Platelets >50,000\n• PT/INR <1.5x normal\n• pH >7.2\n• Temperature >36°C\n\nBLOOD PRODUCTS:\n\nPRBCs:\n• Increase oxygen-carrying capacity\n• Goal Hgb >7-8\n\nFFP:\n• Contains all coagulation factors\n• 1 unit increases factors ~3%\n• 4-6 units often needed\n\nPlatelets:\n• 1 apheresis unit raises count ~30-50k\n• Goal >50k in active bleeding\n\nCryoprecipitate:\n• Concentrated fibrinogen, factor VIII, vWF, factor XIII\n• 10 units raises fibrinogen ~100 mg/dL\n• Give if fibrinogen <200\n\nMTP RATIOS:\n• 1:1:1 (RBC:FFP:Platelets) improves outcomes\n• Prevents dilutional coagulopathy\n• Based on trauma literature, applied to obstetrics\n\nADJUNCTS:\n• Tranexamic acid (TXA) - antifibrinolytic\n• Calcium replacement (citrate in blood products binds calcium)\n• Warming of blood products and patient" },
+            pearl: "Fibrinogen <200 is an ominous sign in PPH. Cryoprecipitate is the fastest way to replace fibrinogen. Don't wait for critically low levels - treat early.",
+            pitfall: "Hypothermia worsens coagulopathy. Use blood warmers, warming blankets, and warm fluids. The 'triad of death' (hypothermia, acidosis, coagulopathy) is a vicious cycle."
+        },
+        {
+            id: 9,
+            title: "Surgical Interventions",
+            scenario: "Despite maximum medical management, balloon tamponade, and correction of coagulopathy, a patient continues to bleed. Blood loss is now 4000mL. She's in the OR.\n\nSurgical intervention is needed.",
+            question: "What are the surgical options in order of invasiveness?",
+            options: [
+                { id: "A", text: "Proceed directly to hysterectomy - it's the only definitive option", outcome: "Skipping uterine-sparing options", feedback: "Hysterectomy is definitive but ends fertility. Less invasive options should be tried first if patient is stable enough: compression sutures, vascular ligation, embolization.", points: 4, isOptimal: false },
+                { id: "B", text: "B-Lynch suture → uterine artery ligation → internal iliac ligation → hysterectomy (if all else fails)", outcome: "Correct escalation", feedback: "Correct! Uterine-sparing procedures first: (1) B-Lynch compression suture, (2) Uterine artery ligation, (3) Internal iliac artery ligation. Hysterectomy if these fail or patient too unstable. Uterine artery embolization also an option if IR available.", points: 10, isOptimal: true },
+                { id: "C", text: "Uterine artery embolization is first-line surgical treatment", outcome: "Requires IR availability", feedback: "UAE is excellent if interventional radiology is immediately available. However, it's not always available, and if patient is unstable in the OR, surgical options may be faster. It's an option, not always first-line.", points: 6, isOptimal: false },
+                { id: "D", text: "Internal iliac ligation first - it reduces blood flow the most", outcome: "Not first-line", feedback: "Internal iliac ligation is difficult, has variable success, and doesn't reduce flow as much as you'd think (collaterals). Uterine artery ligation is easier and often more effective. B-Lynch is often tried first.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY try uterine-sparing procedures?", steps: ["Preserves fertility (important for many women)", "Avoids major surgery (hysterectomy has complications)", "Often successful and can be done quickly", "B-Lynch suture is fast and effective for atony", "Uterine artery ligation directly targets blood supply", "Hysterectomy always available as backup"] },
+            mechanism: { title: "Surgical Management of PPH", content: "UTERINE COMPRESSION SUTURES:\n\nB-Lynch Suture:\n• Compresses uterus with external vertical sutures\n• Like 'braces' squeezing the uterus\n• Effective for atony\n• Preserves fertility\n• Can be done quickly\n\nOther compression sutures:\n• Cho (multiple square sutures)\n• Hayman (simplified B-Lynch)\n\nVASCULAR LIGATION:\n\nUterine artery ligation:\n• Ligate ascending branches bilaterally\n• Relatively easy to perform\n• Good success rate (~90%)\n• Preserves fertility (collaterals maintain blood flow)\n\nInternal iliac (hypogastric) artery ligation:\n• Reduces pulse pressure by ~50%\n• Technically challenging\n• Variable success (~40-50%)\n• Collateral circulation often maintains bleeding\n\nOvarian artery ligation:\n• Can be added if uterine ligation fails\n• Usually preserves fertility\n\nUTERINE ARTERY EMBOLIZATION:\n• Interventional radiology\n• Highly effective (85-95%)\n• Requires hemodynamically stable patient\n• Requires IR team availability\n• May preserve fertility\n\nHYSTERECTOMY:\n• Definitive treatment\n• Subtotal (supracervical) vs total\n• Subtotal often faster, less bleeding\n• Reserved for when other measures fail\n• Or if patient too unstable for sequential attempts\n\nDECISION MAKING:\n• Patient stability determines how long to try each option\n• Fertility desires influence aggressiveness of uterine-sparing\n• Experienced team needed for optimal outcomes\n• Don't delay hysterectomy if patient deteriorating" },
+            pearl: "B-Lynch suture is fast, effective, and preserves the uterus. If atony isn't responding to medical management, don't delay surgical intervention - do a B-Lynch early.",
+            pitfall: "Don't spend too long on uterine-sparing procedures if the patient is deteriorating. Know when to proceed to hysterectomy - it's life over uterus."
+        },
+        {
+            id: 10,
+            title: "PPH Summary and Prevention",
+            scenario: "Review: A patient just delivered and begins bleeding heavily.\n\nQuick assessment shows: Boggy uterus, estimated blood loss 1200mL, HR 110, BP 100/65.",
+            question: "What is the correct sequence of management?",
+            options: [
+                { id: "A", text: "Call for blood → massage → medications → examine for lacerations → balloon → surgery", outcome: "Wrong order", feedback: "Massage and medications should happen FIRST and SIMULTANEOUSLY. You can call for blood while doing these. Don't wait for blood before starting treatment.", points: 4, isOptimal: false },
+                { id: "B", text: "Bimanual massage + oxytocin simultaneously → TXA → examine/repair lacerations → second-line uterotonics → activate MTP → balloon → surgical options", outcome: "Correct sequence", feedback: "Correct! (1) Massage + oxytocin (simultaneously), (2) TXA early, (3) Examine for lacerations/retained tissue, (4) Second-line uterotonics, (5) Activate MTP based on ongoing loss, (6) Balloon tamponade, (7) Surgical options. Parallel processing, not serial.", points: 10, isOptimal: true },
+                { id: "C", text: "Examine for lacerations first - can't treat without knowing the cause", outcome: "Delays empiric treatment", feedback: "With a boggy uterus, atony is the obvious cause. Start massage and oxytocin WHILE examining. Don't delay treatment waiting for complete evaluation.", points: 3, isOptimal: false },
+                { id: "D", text: "Give all uterotonics at once for maximum effect", outcome: "Not recommended", feedback: "Sequential uterotonic therapy is preferred. Give oxytocin first, then add others if not responding. Giving all at once increases side effects without clear benefit.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY parallel processing in PPH?", steps: ["PPH can progress to life-threatening in minutes", "Serial approach (finish one thing before starting next) wastes time", "Multiple interventions can happen simultaneously", "Team-based approach: different people do different tasks", "Example: One person massages while another gives medications while another calls for blood", "Time is blood - every minute of delay increases transfusion needs"] },
+            mechanism: { title: "PPH Prevention and Summary", content: "PREVENTION:\n\nActive management of third stage (AMTSL):\n• Oxytocin after delivery of anterior shoulder\n• Controlled cord traction (gentle)\n• Uterine massage after placenta delivery\n• Reduces PPH by ~60%\n\nRisk assessment:\n• Identify high-risk patients antepartum\n• Type and screen for at-risk patients\n• Deliver high-risk patients at appropriate facility\n\nPPH BUNDLES:\n• Standardized protocols improve outcomes\n• Example: California Maternal Quality Care Collaborative\n• Components: Recognition, Response, Reporting\n\nSUMMARY - THE 4 T's:\n\n1. TONE (70-80%)\n• Massage + oxytocin first\n• Add uterotonics sequentially\n• Balloon tamponade\n• Surgical compression if needed\n\n2. TRAUMA (20%)\n• Systematic inspection\n• Repair lacerations\n• Drain hematomas\n\n3. TISSUE (10%)\n• Inspect placenta for completeness\n• Manual removal if retained\n• US if uncertain\n• Beware accreta spectrum\n\n4. THROMBIN (<1%)\n• Correct coagulopathy\n• Fibrinogen >200\n• 1:1:1 transfusion\n• Treat DIC\n\nKEY MEDICATIONS:\n• Oxytocin: First-line, no contraindications\n• Methergine: Avoid in hypertension\n• Carboprost: Avoid in asthma\n• Misoprostol: No major contraindications\n• TXA: Give early (<3 hours)\n\nESCALATION:\n• Don't do one thing at a time\n• Call for help early\n• Activate MTP early\n• Proceed to surgery if medical management fails" },
+            pearl: "Active management of third stage labor (AMTSL) - oxytocin after anterior shoulder, controlled cord traction, uterine massage - reduces PPH by 60%. Prevention is better than treatment.",
+            pitfall: "The most common error in PPH is underestimating blood loss and delaying escalation. If you think you should activate MTP or call for help, you're probably already behind."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+function init() { caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); }); renderStage(currentStage); }
+function renderStage(stageNum) { const stage = caseData.stages[stageNum - 1]; if (!stage) { renderSummary(); return; } const answered = answeredStages[stageNum]; document.getElementById('gameContainer').innerHTML = `<div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden"><div class="bg-gradient-to-r from-pink-600 to-red-600 text-white p-6"><span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span><h2 class="text-2xl font-bold mt-3">${stage.title}</h2></div><div class="p-6"><div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div><div class="bg-pink-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-pink-800 mb-2">🤔 Clinical Question</h3><p class="text-pink-900 font-medium">${stage.question}</p></div><div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-pink-300 hover:bg-pink-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div></button>`).join('')}</div>${answered ? renderFeedback(stage, answered) : ''}</div></div>`; updateProgress(); }
+function renderFeedback(stage, answered) { const selected = stage.options.find(o => o.id === answered.selected); const optimal = stage.options.find(o => o.isOptimal); return `<div class="mt-6 space-y-4"><div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5"><h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4><p class="text-gray-700">${selected.feedback}</p></div>${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}<div class="why-chain rounded-xl p-5"><h4 class="font-bold text-teal-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-teal-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div><div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div><div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div><button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button></div>`; }
+function selectOption(stageNum, optionId) { if (answeredStages[stageNum]) return; const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId); answeredStages[stageNum] = { selected: optionId, points: option.points }; totalScore += option.points; renderStage(stageNum); }
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() { const pct = Math.round(totalScore / maxPossibleScore * 100); document.getElementById('gameContainer').classList.add('hidden'); document.getElementById('summaryPanel').classList.remove('hidden'); document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ 4 T's: Tone (70-80%), Trauma, Tissue, Thrombin</li><li>✓ Boggy uterus = atony → massage + oxytocin first</li><li>✓ Firm uterus + bleeding = trauma (lacerations)</li><li>✓ Uterotonics: Methergine avoid in HTN, Carboprost avoid in asthma</li><li>✓ TXA early (within 3 hours) reduces death from bleeding</li><li>✓ Fibrinogen <200 is critical - give cryoprecipitate</li><li>✓ Placenta accreta: Don't manually remove - plan for hysterectomy</li><li>✓ Uterine inversion: Replace BEFORE removing placenta</li><li>✓ B-Lynch suture for atony before proceeding to hysterectomy</li><li>✓ Parallel processing - do multiple things simultaneously</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`; }
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background:var(--rdx-bg-card);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow:var(--rdx-shadow-md);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #14b8a6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+    border: 1px solid #5eead4;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #115e59;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #0d9488;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background:var(--rdx-bg-card);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #ccfbf1;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #f0fdfa;
+    border: 1px solid #5eead4;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#0f766e); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
+            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Postpartum Hemorrhage</a>
+        </div>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #14b8a6;">
+            <h5 style="color: #14b8a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="preeclampsia-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Preeclampsia</a>
+            <a href="pid-toa-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Pid Toa</a>
+            <a href="placental-abruption-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Placental Abruption</a>
+        </div>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #0d9488;">
+            <h5 style="color: #0d9488; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.acog.org/clinical/clinical-guidance" target="_blank" class="text-teal-600 hover:underline">ACOG Practice Bulletins</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK570611/" target="_blank" class="text-teal-600 hover:underline">StatPearls: Obstetric Emergencies</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#0d9488'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:var(--rdx-text,#1e293b);">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:var(--rdx-text-secondary,#475569);margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:var(--rdx-text-secondary,#475569);margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#14b8a6,#14b8a6);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+};
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Postpartum Hemorrhage"
+         data-key-points="${stage.title}, Case Complete!, 📋 Clinical Scenario, 🤔 Clinical Question, 📚 Key Learning Points, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1097/AOG.0000000000002351" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ACOG Practice Bulletin: Postpartum Hemorrhage</a> — <em style="color:var(--rdx-text-muted,#64748b)">Obstet Gynecol</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

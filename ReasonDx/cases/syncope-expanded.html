@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: Syncope. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Syncope - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #0f766e 0%, #5b21b6 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #ddd6fe; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #7c3aed; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(124,58,237,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
+        .question-box { background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(124,58,237,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #ddd6fe; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #0f766e; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(124,58,237,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background:linear-gradient(135deg,#0f766e,#14b8a6); color: white; border: none; padding: 14px 28px; border-radius:12px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #c4b5fd); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #7c3aed; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal-light,#ccfbf1); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: #c4b5fd; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:#475569;margin-bottom:8px;font-weight:600">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK526027/" target="_blank" rel="noopener">Syncope - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/703/san-francisco-syncope-rule" target="_blank" rel="noopener">San Francisco Syncope Rule (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0, difficulty = 'standard';
+    const stages = [
+    {
+        title: "The Passing Out Spell",
+        content: `<div class="narrative"><p>A <span class="highlight">28-year-old woman</span> presents after <span class="critical">passing out at work</span>. She was standing in a meeting when she felt lightheaded, warm, and nauseated. Coworkers caught her as she slumped to the ground.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 68, BP 118/72, T 36.8°C<br><strong>Exam:</strong> Alert, oriented, no injuries. Normal cardiac and neuro exam.</p></div>
+        <div class="socratic-prompt"><h4>Defining the Problem</h4><p>What defines syncope and distinguishes it from other causes of loss of consciousness?</p></div>`,
+        hint_beginner: "Syncope is caused by temporary brain hypoperfusion. What makes it different from seizures?",
+        hint_advanced: "What causes transient global cerebral hypoperfusion?",
+        question: {
+            prompt: "What is the DEFINING characteristic of syncope?",
+            options: [
+                { text: "Any episode of loss of consciousness", correct: false },
+                { text: "Transient LOC due to cerebral hypoperfusion with spontaneous recovery", correct: true },
+                { text: "Fainting that lasts more than 5 minutes", correct: false },
+                { text: "Loss of consciousness with seizure activity", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Syncope is transient LOC due to global cerebral hypoperfusion, with rapid onset, short duration, and complete spontaneous recovery.",
+                incorrect: "Syncope is specifically transient LOC from cerebral hypoperfusion with spontaneous recovery. This distinguishes it from seizures, coma, or other causes."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Syncope Definition</div><div class="pathway">SYNCOPE = Transient LOC from global cerebral hypoperfusion
+
+Key features:
+• Rapid onset (seconds)
+• Short duration (usually <1 minute)
+• Complete spontaneous recovery
+• No residual neurologic deficit
+
+NOT syncope: Seizures, hypoglycemia, intoxication</div></div>`,
+            why_chain: [{q: "Why does cerebral hypoperfusion cause LOC?", a: "The brain is extremely sensitive to blood flow. Just 6-8 seconds of interrupted cerebral perfusion causes LOC."}, {q: "What is presyncope?", a: "Presyncope is the prodromal feeling without actual LOC. Same differential applies."}],
+            points: 10
+        }
+    },
+    {
+        title: "Etiology Classification",
+        content: `<div class="narrative"><p>You need to determine the cause. The differential ranges from benign to life-threatening.</p></div>
+        <div class="socratic-prompt"><h4>Risk Stratification</h4><p>How do you categorize syncope causes and which are most dangerous?</p></div>`,
+        hint_beginner: "Three main buckets: reflex, orthostatic, and cardiac.",
+        hint_advanced: "What percentage of syncope is cardiac, and why does this matter?",
+        question: {
+            prompt: "Which category of syncope carries the HIGHEST mortality risk?",
+            options: [
+                { text: "Reflex (vasovagal) syncope", correct: false },
+                { text: "Orthostatic syncope", correct: false },
+                { text: "Cardiac syncope (arrhythmic or structural)", correct: true },
+                { text: "Psychogenic pseudosyncope", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Cardiac syncope carries significant mortality risk. While only 10-15% of syncope is cardiac, it causes most syncope-related deaths.",
+                incorrect: "Cardiac syncope is most dangerous. Though reflex syncope is most common (~60%), cardiac causes have the highest mortality."
+            },
+            teaching: `<h4>Syncope Classification</h4><table class="comparison-table"><tr><th>Category</th><th>Examples</th><th>Risk</th></tr><tr><td><strong>Reflex</strong></td><td>Vasovagal, situational</td><td style="color:var(--rdx-teal-light,#ccfbf1);">Benign</td></tr><tr><td><strong>Orthostatic</strong></td><td>Volume depletion, meds</td><td style="color: #0f766e;">Low-moderate</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Cardiac</strong></td><td>VT, Long QT, AS, HCM</td><td style="color:#f87171;">HIGH</td></tr></table>`,
+            why_chain: [{q: "Why is cardiac syncope dangerous?", a: "Cardiac syncope often results from arrhythmias or structural disease that can cause sudden cardiac death."}, {q: "What percentage is cardiac?", a: "About 10-15% overall, but higher in ED patients and elderly."}],
+            points: 10
+        }
+    },
+    {
+        title: "History: Critical Clues",
+        content: `<div class="narrative"><p>The patient describes feeling <span class="highlight">lightheaded, warm, and nauseated</span> for 30 seconds before passing out. She had been standing for 20 minutes in a warm room. She recovered within seconds of lying down.</p><p>No palpitations, chest pain, or dyspnea.</p></div>
+        <div class="socratic-prompt"><h4>Pattern Recognition</h4><p>What features distinguish benign from dangerous syncope?</p></div>`,
+        hint_beginner: "A prodrome is generally reassuring. What would be concerning?",
+        hint_advanced: "What historical features have best sensitivity/specificity for cardiac syncope?",
+        question: {
+            prompt: "Which historical feature is MOST concerning for cardiac syncope?",
+            options: [
+                { text: "Prodrome of lightheadedness and warmth", correct: false },
+                { text: "Syncope while standing in a warm room", correct: false },
+                { text: "Syncope during exertion or while supine", correct: true },
+                { text: "Rapid recovery after lying down", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Exertional and supine syncope are red flags. Exertion triggers arrhythmias or unmasks outflow obstruction. Supine syncope rules out orthostatic causes.",
+                incorrect: "Exertional or supine syncope are major red flags. Prodromes and triggers suggest benign reflex syncope."
+            },
+            teaching: `<h4>History Red Flags</h4><table class="comparison-table"><tr><th>Red Flag</th><th>Concern</th></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Exertional syncope</strong></td><td>AS, HCM, arrhythmia</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Supine syncope</strong></td><td>Must be cardiac</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>No prodrome</strong></td><td>Arrhythmia</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Palpitations before</strong></td><td>Arrhythmia</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Family hx sudden death</strong></td><td>Channelopathy, HCM</td></tr></table>`,
+            why_chain: [{q: "Why is exertional syncope concerning?", a: "Exercise increases oxygen demand and catecholamines, triggering VT in HCM, ARVC, or channelopathies."}, {q: "What about swimming syncope?", a: "Red flag for Long QT syndrome (LQT1). Cold water and exertion are triggers."}],
+            points: 10
+        }
+    },
+    {
+        title: "The Essential Test: ECG",
+        content: `<div class="narrative"><p>You order an ECG. It shows <span class="highlight">normal sinus rhythm at 72 bpm, normal intervals, no ST changes</span>.</p></div>
+        <div class="alert-box"><div class="alert-title">🚨 ECG is Mandatory in ALL Syncope</div><p>ECG can identify arrhythmias, channelopathies (Long QT, Brugada), HCM, and ischemia.</p></div>
+        <div class="socratic-prompt"><h4>ECG Interpretation</h4><p>What ECG findings indicate high-risk cardiac syncope?</p></div>`,
+        hint_beginner: "Think about Long QT, Brugada, WPW, and HCM findings.",
+        hint_advanced: "How do you calculate QTc and what are abnormal cutoffs?",
+        question: {
+            prompt: "Which ECG finding requires immediate cardiology consultation?",
+            options: [
+                { text: "Sinus bradycardia at 55 bpm", correct: false },
+                { text: "Nonspecific T wave changes", correct: false },
+                { text: "QTc >500 ms or Brugada pattern", correct: true },
+                { text: "First-degree AV block", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! QTc >500 ms indicates high torsades risk. Brugada pattern carries similar VF risk. Both require urgent cardiology evaluation.",
+                incorrect: "Severely prolonged QTc and Brugada pattern are high-risk findings requiring immediate cardiology involvement."
+            },
+            teaching: `<h4>High-Risk ECG Findings</h4><table class="comparison-table"><tr><th>Finding</th><th>Diagnosis</th><th>Risk</th></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>QTc >500 ms</strong></td><td>Long QT</td><td>Torsades, SCD</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Brugada pattern</strong></td><td>Brugada</td><td>VF, SCD</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Delta wave</strong></td><td>WPW</td><td>AF → VF</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>LVH + repolarization</strong></td><td>HCM</td><td>VT, SCD</td></tr></table>`,
+            why_chain: [{q: "Why is QTc different for men vs women?", a: "Women have naturally longer QT intervals due to sex hormones. Drug-induced QT prolongation is more dangerous in women."}, {q: "What is Brugada pattern?", a: "Type 1: Coved ST elevation ≥2mm in V1-V3 followed by negative T wave. High risk for VF."}],
+            points: 10
+        }
+    },
+    {
+        title: "Syncope vs Seizure",
+        content: `<div class="narrative"><p>The patient's coworker mentions she had <span class="highlight">"some twitching"</span> while she was out. You need to determine if this was syncope with convulsive movements or a seizure.</p></div>
+        <div class="socratic-prompt"><h4>Differential Diagnosis</h4><p>How do you distinguish syncope from seizure based on history?</p></div>`,
+        hint_beginner: "Key differences: duration of movements, recovery time, tongue biting location.",
+        hint_advanced: "What is convulsive syncope and how common is it?",
+        question: {
+            prompt: "Which feature BEST distinguishes syncope from seizure?",
+            options: [
+                { text: "Presence of any body movements during the episode", correct: false },
+                { text: "Rapid recovery vs prolonged postictal confusion", correct: true },
+                { text: "Occurrence while standing", correct: false },
+                { text: "Urinary incontinence during episode", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Syncope has rapid, complete recovery. Seizures typically have prolonged postictal confusion lasting minutes to hours. Brief myoclonic movements can occur in both.",
+                incorrect: "Recovery pattern is the best distinguisher. Syncope: rapid recovery. Seizure: prolonged postictal confusion. Movements can occur in both."
+            },
+            teaching: `<h4>Syncope vs Seizure</h4><table class="comparison-table"><tr><th>Feature</th><th>Syncope</th><th>Seizure</th></tr><tr><td><strong>Trigger</strong></td><td>Positional, situational</td><td>Often none</td></tr><tr><td><strong>Prodrome</strong></td><td>Lightheadedness, warmth</td><td>Aura (if any)</td></tr><tr><td><strong>Duration</strong></td><td><1 minute</td><td>1-2 minutes</td></tr><tr><td><strong>Movements</strong></td><td>Brief myoclonus possible</td><td>Rhythmic, sustained</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Recovery</strong></td><td>Rapid, complete</td><td>Postictal confusion</td></tr><tr><td><strong>Tongue biting</strong></td><td>Tip of tongue</td><td>Lateral tongue</td></tr></table>`,
+            why_chain: [{q: "What is convulsive syncope?", a: "Up to 10% of syncope has brief myoclonic jerks due to cerebral hypoxia - NOT epilepsy. Key: very brief, no postictal state."}, {q: "Can incontinence help distinguish them?", a: "No - urinary incontinence can occur in both syncope and seizure, so it's not a reliable distinguishing feature."}],
+            points: 10
+        }
+    },
+    {
+        title: "Risk Stratification",
+        content: `<div class="narrative"><p>You've completed your evaluation. The patient has:</p><ul style="margin:12px 0 0 20px;"><li>Clear vasovagal prodrome</li><li>Identifiable trigger (prolonged standing, warm room)</li><li>Normal cardiac exam</li><li>Normal ECG</li><li>No concerning history features</li></ul></div>
+        <div class="socratic-prompt"><h4>Disposition Decision</h4><p>Who can be safely discharged and who needs admission?</p></div>`,
+        hint_beginner: "Low-risk features: prodrome, trigger, normal exam, normal ECG.",
+        hint_advanced: "What validated risk scores exist for syncope (San Francisco, Canadian, OESIL)?",
+        question: {
+            prompt: "Which patient with syncope can be SAFELY discharged from the ED?",
+            options: [
+                { text: "65-year-old with exertional syncope and systolic murmur", correct: false },
+                { text: "45-year-old with syncope and QTc of 520 ms", correct: false },
+                { text: "28-year-old with vasovagal syncope, normal exam and ECG", correct: true },
+                { text: "50-year-old with syncope and new atrial fibrillation", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Classic vasovagal syncope with clear trigger, prodrome, normal cardiac exam, and normal ECG is low-risk. This patient can be discharged with counseling.",
+                incorrect: "The 28-year-old with classic vasovagal features and normal workup is safe for discharge. The others have high-risk features requiring admission."
+            },
+            teaching: `<h4>Admission Criteria</h4><table class="comparison-table"><tr><th>ADMIT If:</th></tr><tr style="background:rgba(239,68,68,0.2);"><td>Suspected cardiac cause</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Abnormal ECG (ischemia, arrhythmia, long QT)</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Structural heart disease</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Exertional syncope</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Syncope causing serious injury</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>Family history sudden death</td></tr></table>`,
+            why_chain: [{q: "What are validated risk scores?", a: "San Francisco Syncope Rule, Canadian Syncope Risk Score, OESIL score all attempt to identify high-risk patients. None are perfect - clinical judgment remains essential."}, {q: "What counseling for vasovagal syncope?", a: "Hydration, salt intake, recognize prodrome and lie down immediately, counter-pressure maneuvers, avoid triggers."}],
+            points: 10
+        }
+    },
+    {
+        title: "Vasovagal Syncope Management",
+        content: `<div class="narrative"><p>You diagnose this patient with <span class="highlight">vasovagal syncope</span>. Before discharge, you provide education on prevention and management of future episodes.</p></div>
+        <div class="socratic-prompt"><h4>Patient Education</h4><p>What strategies can prevent recurrent vasovagal syncope?</p></div>`,
+        hint_beginner: "Think about triggers, recognition of prodrome, and physical maneuvers.",
+        hint_advanced: "What is the evidence for counter-pressure maneuvers?",
+        question: {
+            prompt: "What is the MOST effective immediate intervention when a patient recognizes vasovagal prodrome?",
+            options: [
+                { text: "Take deep breaths and try to stay standing", correct: false },
+                { text: "Lie down immediately or perform counter-pressure maneuvers", correct: true },
+                { text: "Drink a glass of water", correct: false },
+                { text: "Call 911 immediately", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Lying down immediately (if possible) or performing counter-pressure maneuvers (leg crossing, hand grip, arm tensing) can abort the episode by increasing venous return and blood pressure.",
+                incorrect: "Lying down or counter-pressure maneuvers are most effective. Standing worsens venous pooling. The goal is to increase venous return before cerebral hypoperfusion occurs."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Vasovagal Syncope Prevention</div><div class="pathway">IMMEDIATE (when prodrome starts):
+• Lie down with legs elevated
+• If can't lie down: counter-pressure maneuvers
+  - Leg crossing with tensing
+  - Hand grip (squeeze hard)
+  - Arm tensing
+
+LONG-TERM:
+• Increase fluid intake (2-3 L/day)
+• Increase salt intake (if no contraindication)
+• Avoid triggers (prolonged standing, heat)
+• Recognize prodrome early
+• Compression stockings (waist-high best)</div></div>`,
+            why_chain: [{q: "How do counter-pressure maneuvers work?", a: "They increase peripheral resistance and venous return by compressing muscles and blood vessels, raising BP and preventing cerebral hypoperfusion."}, {q: "What about medications?", a: "Midodrine, fludrocortisone, and SSRIs have been tried but evidence is mixed. Most guidelines recommend non-pharmacologic measures first."}],
+            points: 10
+        }
+    },
+    {
+        title: "Special Populations: Elderly Syncope",
+        content: `<div class="narrative"><p>Later that day, you see a <span class="highlight">78-year-old man</span> with syncope. He was walking to his car when he <span class="critical">suddenly collapsed without warning</span>. He has a history of <span class="highlight">coronary artery disease and heart failure</span>.</p><p><strong>ECG:</strong> Sinus rhythm with LBBB and Q waves in V1-V3</p></div>
+        <div class="socratic-prompt"><h4>High-Risk Features</h4><p>How does this presentation differ from the previous patient?</p></div>`,
+        hint_beginner: "Count the red flags: age, no prodrome, cardiac history, abnormal ECG.",
+        hint_advanced: "What is the likely etiology and what workup is needed?",
+        question: {
+            prompt: "What is the MOST appropriate disposition for this elderly patient?",
+            options: [
+                { text: "Discharge with cardiology follow-up in 1 week", correct: false },
+                { text: "Admission for cardiac monitoring and further evaluation", correct: true },
+                { text: "Discharge after normal troponin", correct: false },
+                { text: "Observation unit for 6 hours then discharge", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! This patient has multiple high-risk features: elderly, no prodrome, cardiac history, abnormal ECG. He needs admission for cardiac monitoring and evaluation for arrhythmic or structural cause.",
+                incorrect: "This patient requires admission. Multiple high-risk features: age >65, no warning, structural heart disease history, abnormal ECG with ischemic changes. High probability of cardiac syncope."
+            },
+            teaching: `<h4>High-Risk Features in This Patient</h4><table class="comparison-table"><tr><th>Feature</th><th>Concern</th></tr><tr style="background:rgba(239,68,68,0.2);"><td>Age >65</td><td>Higher cardiac syncope rate</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>No prodrome</td><td>Suggests arrhythmia</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>CAD/CHF history</td><td>Substrate for VT</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>LBBB + Q waves</td><td>Prior MI, scar tissue</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">📋 Workup for High-Risk Syncope</div><div class="pathway">• Continuous telemetry monitoring
+• Echocardiogram (assess EF, structure)
+• Consider electrophysiology consult
+• Troponin (rule out ACS)
+• Consider stress testing if ischemia suspected
+• May need ICD if EF reduced</div></div>`,
+            why_chain: [{q: "Why does structural heart disease increase arrhythmia risk?", a: "Scar tissue from MI creates reentrant circuits. Reduced EF is associated with ventricular arrhythmias. These patients may need ICDs for primary prevention."}, {q: "What if monitoring is negative?", a: "May need implantable loop recorder for prolonged monitoring if high suspicion but no diagnosis. Can monitor for years."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Resolution",
+        content: `<div class="narrative"><p>You discharge your 28-year-old patient with diagnosis of <span class="highlight">vasovagal syncope</span>. You provide education on hydration, trigger avoidance, and counter-pressure maneuvers.</p><p>Your 78-year-old patient is admitted. Telemetry captures a 15-second run of <span class="critical">ventricular tachycardia</span>. Echocardiogram shows EF 30%. Cardiology is consulted for ICD evaluation.</p></div>
+        <div class="mechanism-box"><div class="mechanism-title">📚 Syncope Evaluation Algorithm</div><div class="pathway">ALL SYNCOPE PATIENTS:
+• Detailed history (triggers, prodrome, exertion, family hx)
+• Physical exam (cardiac exam, orthostatics, neuro)
+• ECG (MANDATORY)
+          ↓
+Risk Stratify:
+          ↓
+LOW RISK                    HIGH RISK
+• Clear trigger             • No prodrome
+• Prodrome present          • Exertional
+• Normal exam               • Cardiac history
+• Normal ECG                • Abnormal ECG
+• Young, healthy            • Elderly
+          ↓                          ↓
+DISCHARGE                   ADMIT
++ Education                 + Monitoring
+                            + Echo
+                            + Cardiology</div></div>`,
+        question: {
+            prompt: "What is the SINGLE most important test in syncope evaluation?",
+            options: [
+                { text: "CT head", correct: false },
+                { text: "Echocardiogram", correct: false },
+                { text: "ECG", correct: true },
+                { text: "Troponin", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! ECG is mandatory for ALL syncope patients. It's inexpensive, quick, and can identify life-threatening conditions (Long QT, Brugada, WPW, HCM, ischemia, heart block).",
+                incorrect: "ECG is the single most important test - mandatory for all syncope. It can identify multiple high-risk conditions. CT head is rarely indicated. Echo and troponin are selective."
+            },
+            teaching: `<h4>Key Takeaways</h4>
+<ul style="line-height:2;margin-left:20px;">
+<li><strong>Definition:</strong> Transient LOC from cerebral hypoperfusion + spontaneous recovery</li>
+<li><strong>ECG:</strong> Mandatory for ALL syncope patients</li>
+<li><strong>Most common:</strong> Vasovagal (reflex) syncope</li>
+<li><strong>Most dangerous:</strong> Cardiac syncope (10-15%)</li>
+<li><strong>Red flags:</strong> Exertional, supine, no prodrome, palpitations, family hx sudden death</li>
+<li><strong>High-risk ECG:</strong> Long QT, Brugada, WPW, heart block, ischemia</li>
+<li><strong>Vasovagal management:</strong> Hydration, salt, counter-pressure maneuvers</li>
+</ul>`,
+            why_chain: [],
+            points: 10
+        }
+    }
+];
+    function setDifficulty(d, btn) {
+        difficulty = d;
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.hint-beginner').forEach(h => h.style.display = d === 'beginner' ? 'block' : 'none');
+        document.querySelectorAll('.hint-advanced').forEach(h => h.style.display = d === 'advanced' ? 'block' : 'none');
+    }
+    function updateProgress() {
+        document.getElementById('progress').style.width = ((currentStage + 1) / stages.length * 100) + '%';
+        document.getElementById('maxScore').textContent = stages.length * 10;
+    }
+    function renderStage() {
+        const stage = stages[currentStage];
+        const container = document.getElementById('scene-container');
+        let html = `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>`;
+        if (stage.hint_beginner) html += `<div class="hint-beginner" style="display:${difficulty === 'beginner' ? 'block' : 'none'}">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+        if (stage.hint_advanced) html += `<div class="hint-advanced" style="display:${difficulty === 'advanced' ? 'block' : 'none'}">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+        html += stage.content;
+        if (stage.question) {
+            html += `<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;
+            stage.question.options.forEach((opt, i) => {
+                html += `<div class="mcq-option" onclick="checkAnswer(${i}, ${opt.correct})"><div class="option-letter">${String.fromCharCode(65 + i)}</div><div>${opt.text}</div></div>`;
+            });
+            html += `</div><div class="feedback correct-feedback" id="fb-correct"><div class="feedback-title">✓ Correct!</div>${stage.question.explanation.correct}</div>`;
+            html += `<div class="feedback incorrect-feedback" id="fb-incorrect"><div class="feedback-title">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;
+            if (stage.question.teaching) html += `<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;
+            if (stage.question.why_chain && stage.question.why_chain.length > 0) {
+                html += `<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain - Dig Deeper</h4>`;
+                stage.question.why_chain.forEach(w => {
+                    html += `<div class="why-item"><div class="why-q">${w.q}</div><div class="why-a">${w.a}</div></div>`;
+                });
+                html += `</div>`;
+            }
+            html += `<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;
+        }
+        html += `</div>`;
+        container.innerHTML = html;
+        updateProgress();
+    }
+    function checkAnswer(idx, correct) {
+        const options = document.querySelectorAll('.mcq-option');
+        if (options[0].classList.contains('disabled')) return;
+        options.forEach((opt, i) => {
+            opt.classList.add('disabled');
+            if (stages[currentStage].question.options[i].correct) opt.classList.add('correct');
+            else if (i === idx && !correct) opt.classList.add('incorrect');
+        });
+        if (correct) {
+            document.getElementById('fb-correct').classList.add('show');
+            score += stages[currentStage].question.points;
+            document.getElementById('score').textContent = score;
+        } else {
+            document.getElementById('fb-incorrect').classList.add('show');
+        }
+        const teaching = document.getElementById('teaching');
+        if (teaching) teaching.classList.add('show');
+        const whyChain = document.getElementById('why-chain');
+        if (whyChain) whyChain.classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    function nextStage() {
+        if (currentStage < stages.length - 1) { currentStage++; renderStage(); window.scrollTo(0, 0); }
+        else {
+            document.getElementById('scene-container').innerHTML = `<div class="scene completion"><h2 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length * 10}</p><p style="margin-bottom:30px;">You've mastered Syncope Evaluation!</p><div style="text-align:left;max-width:500px;margin:0 auto;"><h4 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px;">Key Points:</h4><ul style="line-height:2;"><li>ECG is mandatory for ALL syncope</li><li>Cardiac syncope = highest mortality</li><li>Red flags: exertional, supine, no prodrome</li><li>Vasovagal: prodrome + trigger = reassuring</li><li>High-risk ECG: Long QT, Brugada, WPW</li></ul></div></div>`;
+        }
+    }
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Syncope"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1016/j.jacc.2017.03.003" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">2017 ACC/AHA/HRS Guideline for Syncope</a> — <em style="color:var(--rdx-text-muted,#64748b)">JACC</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

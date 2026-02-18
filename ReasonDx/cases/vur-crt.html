@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive clinical reasoning case: Vesicoureteral Reflux. Work through history, exam, labs, and diagnosis step by step on ReasonDx.">
+<title>Vesicoureteral Reflux - Clinical Reasoning Case</title>
+    <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
+<link href="../css/rdx-a11y.css" rel="stylesheet">
+<style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .header h1 { font-size: 1.5rem; color: var(--rdx-teal-light,#ccfbf1); }
+        .score-display { display: flex; gap: 20px; font-size: 0.9rem; margin-top: 10px; }
+        .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #99f6e4, #0f766e); border-radius: 3px; transition: width 0.3s; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-phase { font-size: 0.85rem; color: var(--rdx-teal-light,#ccfbf1); text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #ccfbf1; margin-top: 4px; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #14b8a6; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(251,191,36,0.2)); border: 1px solid rgba(20,184,166,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #ccfbf1; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.2) !important; }
+        .option-letter { width: 28px; height: 28px; background: rgba(20,184,166,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius:12px; }
+        .feedback.show { display: block; }
+        .correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { display: none; margin-top: 20px; background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.3); border-radius: 12px; padding: 20px; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background:var(--rdx-bg-hover); border-radius:12px; padding: 16px; margin: 12px 0; }
+        .mechanism-title { color: var(--rdx-teal-light,#ccfbf1); font-weight: 600; margin-bottom: 10px; }
+        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; }
+        .btn { background: #0f766e; color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⬆️ Vesicoureteral Reflux</h1>
+            <div class="score-display">
+                <div class="score-item">Score: <strong id="score">0</strong>/<span id="maxScore">70</span></div>
+                <div class="score-item">Stage: <span id="stageNum">1</span>/7</div>
+            </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 14%"></div></div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let currentStage = 0, score = 0;
+    const stages = [
+        {title:"Febrile Infant",content:'<div class="narrative"><p>A <span class="highlight">6-month-old girl</span> presents with <span class="critical">fever of 39.5°C for 2 days</span>. She\'s been irritable and feeding poorly. No URI symptoms, no diarrhea. Urinalysis shows <span class="highlight">positive leukocyte esterase and nitrites</span>.</p></div>',question:{prompt:"What is the most likely diagnosis?",options:[{text:"Viral syndrome",correct:false},{text:"Urinary tract infection",correct:true},{text:"Gastroenteritis",correct:false},{text:"Meningitis",correct:false}],explanation:{correct:"Correct! In infants, UTI often presents with nonspecific symptoms - just fever and irritability. The positive UA (leukocyte esterase, nitrites) confirms the diagnosis. Always consider UTI in febrile infants!",incorrect:"Fever + irritability + positive UA = UTI. In infants, UTI often presents without classic urinary symptoms."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 UTI in Infants</div><div class="pathway">PRESENTATION IN INFANTS:\n• Fever (often only symptom)\n• Irritability, poor feeding\n• Vomiting\n• NO classic dysuria/frequency\n\nDIAGNOSIS:\n• UA: Leukocyte esterase, nitrites\n• Urine culture: >50,000 CFU/mL\n  (catheterized specimen)\n\nWHY VUR MATTERS:\nUTI + VUR → pyelonephritis → renal scarring</div></div>',points:10}},
+        
+        {title:"Why Investigate?",content:'<div class="narrative"><p>Culture confirms E. coli UTI with >100,000 CFU/mL. This is her first febrile UTI. You start antibiotics.</p></div>',question:{prompt:"After treatment, what imaging study is recommended to evaluate for underlying VUR?",options:[{text:"Renal ultrasound only",correct:false},{text:"CT scan",correct:false},{text:"Voiding cystourethrogram (VCUG)",correct:true},{text:"No imaging needed for first UTI",correct:false}],explanation:{correct:"Correct! VCUG is the gold standard to diagnose VUR. Current guidelines recommend VCUG after first febrile UTI in infants <2 years, especially if renal ultrasound is abnormal or there are atypical features.",incorrect:"VCUG is the gold standard for diagnosing VUR. It directly visualizes reflux during bladder filling and voiding."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Imaging After Febrile UTI</div><div class="pathway">RENAL ULTRASOUND:\n• First-line screening\n• Shows hydronephrosis, scarring\n• Does NOT diagnose VUR directly\n\nVCUG:\n• GOLD STANDARD for VUR\n• Shows reflux during filling/voiding\n• Grades severity (I-V)\n• Wait 4-6 weeks after UTI treatment\n\nDMSA SCAN:\n• Gold standard for SCARRING\n• Use if concern for renal damage</div></div>',points:10}},
+
+        {title:"VCUG Results",content:'<div class="narrative"><p>Renal ultrasound shows <span class="highlight">mild left hydronephrosis</span>. VCUG is performed and shows <span class="critical">bilateral reflux - Grade II on right, Grade IV on left</span> with ureteral dilation and blunting of the calyces.</p></div>',question:{prompt:"Which side is MORE likely to resolve spontaneously?",options:[{text:"Left (Grade IV)",correct:false},{text:"Right (Grade II)",correct:true},{text:"Both have equal chance",correct:false},{text:"Neither will resolve",correct:false}],explanation:{correct:"Correct! Lower grades have higher spontaneous resolution rates. Grade II has ~80% resolution, while Grade IV has only ~30% resolution. Higher grade = more severe = less likely to resolve.",incorrect:"Lower grade VUR is more likely to resolve spontaneously. Grade II resolves ~80% of the time; Grade IV only ~30%."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 VUR Grading & Resolution</div><div class="pathway">INTERNATIONAL GRADING:\nGrade I   → Ureter only         (>90% resolve)\nGrade II  → Reaches pelvis      (~80% resolve)\nGrade III → Mild dilation       (~50% resolve)\nGrade IV  → Moderate dilation   (~30% resolve)\nGrade V   → Severe, tortuous    (Rare resolution)\n\nFACTORS FAVORING RESOLUTION:\n• Lower grade\n• Unilateral\n• Younger age at diagnosis\n• Improving on serial VCUG</div></div>',points:10}},
+
+        {title:"Understanding the Mechanism",content:'<div class="narrative"><p>The parents ask why their daughter has reflux. You explain the embryologic basis.</p></div>',question:{prompt:"What is the embryologic cause of PRIMARY vesicoureteral reflux?",options:[{text:"Obstruction at the bladder outlet",correct:false},{text:"Abnormal ureteric bud position leading to short intramural tunnel",correct:true},{text:"Incomplete kidney development",correct:false},{text:"Neurologic bladder dysfunction",correct:false}],explanation:{correct:"Correct! Primary VUR results from abnormal ureteric bud position during development. If the bud arises too caudally, the final ureteral orifice is lateralized with a SHORT intramural tunnel, which fails to provide an effective valve mechanism.",incorrect:"Primary VUR is due to abnormal ureteric bud origin → lateral orifice position → short intramural tunnel → incompetent valve."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Embryology of VUR</div><div class="pathway">NORMAL:\nUreteric bud origin → proper orifice position\n→ Long intramural tunnel\n→ Effective flap valve\n→ No reflux\n\nPRIMARY VUR:\nAbnormal (caudal) bud origin\n→ Lateral orifice position\n→ SHORT intramural tunnel\n→ Incompetent valve\n→ REFLUX\n\nAs bladder grows → tunnel lengthens\n→ May resolve spontaneously</div></div>',points:10}},
+
+        {title:"Management Decision",content:'<div class="narrative"><p>With bilateral VUR (Grade II right, Grade IV left), you discuss management options.</p></div>',question:{prompt:"What is the FIRST-LINE management for this patient?",options:[{text:"Immediate surgical correction",correct:false},{text:"Continuous antibiotic prophylaxis (CAP) with surveillance",correct:true},{text:"No treatment, just observation",correct:false},{text:"Bladder augmentation",correct:false}],explanation:{correct:"Correct! Initial management is typically continuous antibiotic prophylaxis (CAP) to prevent UTIs while monitoring for spontaneous resolution. Surgery is reserved for breakthrough infections, worsening, or failure to resolve.",incorrect:"First-line is antibiotic prophylaxis + surveillance. Surgery is for CAP failures or persistent high-grade VUR."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 VUR Management Options</div><div class="pathway">CONSERVATIVE:\n• Continuous antibiotic prophylaxis\n  - TMP-SMX, nitrofurantoin, amoxicillin\n  - 1/4 to 1/3 treatment dose at night\n• Serial VCUG (yearly) to monitor\n• Treat breakthrough UTIs promptly\n\nINTERVENTION INDICATIONS:\n• Breakthrough febrile UTIs on CAP\n• Persistent high-grade VUR\n• New renal scarring\n• Non-compliance with CAP\n\nRIVUR TRIAL (2014):\nCAP reduced UTI recurrence by 50%\nbut no significant difference in scarring</div></div>',points:10}},
+
+        {title:"Surgical Options",content:'<div class="narrative"><p>After 2 years of CAP, the left Grade IV VUR persists and she\'s had 2 breakthrough febrile UTIs. Surgery is now indicated.</p></div>',question:{prompt:"What are the surgical options for VUR correction?",options:[{text:"Nephrectomy",correct:false},{text:"Ureteral reimplantation or endoscopic injection (Deflux)",correct:true},{text:"Bladder augmentation",correct:false},{text:"Vesicostomy",correct:false}],explanation:{correct:"Correct! Surgical options include: 1) Endoscopic injection (Deflux) - 70-85% success, may need repeat; 2) Open/robotic ureteral reimplantation - 95-98% success (Cohen or Politano-Leadbetter techniques).",incorrect:"Surgical options are endoscopic injection (Deflux) or ureteral reimplantation. Both aim to create a longer submucosal tunnel."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Surgical Options</div><div class="pathway">ENDOSCOPIC INJECTION (Deflux):\n• Inject bulking agent at ureteral orifice\n• Outpatient, minimally invasive\n• Success: 70-85% (may need repeat)\n• Good for lower grades\n\nURETERAL REIMPLANTATION:\n• Creates longer submucosal tunnel\n• Techniques: Cohen, Politano-Leadbetter\n• Success: 95-98%\n• Open, laparoscopic, or robotic\n• Better for high-grade VUR\n\nGOAL: Create effective flap valve\nby lengthening intramural tunnel</div></div>',points:10}},
+
+        {title:"Long-term Considerations",content:'<div class="narrative"><p>After successful reimplantation, the parents ask about long-term follow-up and implications.</p></div>',question:{prompt:"What is the MAIN long-term concern in patients with history of VUR and febrile UTIs?",options:[{text:"Bladder cancer",correct:false},{text:"Kidney stones",correct:false},{text:"Renal scarring leading to hypertension and CKD",correct:true},{text:"Infertility",correct:false}],explanation:{correct:"Correct! The combination of VUR + UTI → pyelonephritis → renal scarring (reflux nephropathy). This can lead to hypertension, proteinuria, and progressive CKD. Sterile reflux rarely causes damage; infection is the key factor.",incorrect:"VUR + UTI → pyelonephritis → scarring → hypertension/CKD. This is 'reflux nephropathy.' Preventing UTIs is crucial."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Reflux Nephropathy</div><div class="pathway">PATHOPHYSIOLOGY:\nVUR + INFECTION → Pyelonephritis\n→ Renal Scarring\n→ Reflux Nephropathy\n\nCONSEQUENCES:\n• Hypertension\n• Proteinuria\n• Chronic kidney disease\n• ESRD (in severe cases)\n\nKEY POINT:\n• Sterile reflux rarely damages kidneys\n• INFECTION is the key factor\n• Goal: Prevent febrile UTIs\n\nFOLLOW-UP:\n• Blood pressure monitoring\n• Urinalysis for proteinuria\n• Renal function tests\n• DMSA scan for scarring</div></div>',points:10}}
+    ];
+    
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('stageNum').textContent=currentStage+1;document.getElementById('maxScore').textContent=stages.length*10;}
+    
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><strong>✓ Correct!</strong> '+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><strong>✗ Not quite.</strong> '+stage.question.explanation.incorrect+'</div><div class="teaching-point" id="teaching">'+stage.question.teaching+'</div><button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=10;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}document.getElementById('teaching').classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/70</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal-light,#ccfbf1);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/vur-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=pediatric+urology" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK482140/" target="_blank" style="color:var(--rdx-teal-light,#ccfbf1);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Vesicoureteral Reflux!</p></div>';}}
+    
+    renderStage();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Vesicoureteral Reflux"
+         data-key-points="🎉 Case Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

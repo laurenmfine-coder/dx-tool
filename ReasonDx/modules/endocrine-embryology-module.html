@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Endocrine Embryology - Pharyngeal Apparatus, Thyroid & Adrenal Development. Learn mechanisms, clinical features...">
+<title>ReasonDx: Endocrine Embryology - Pharyngeal Apparatus, Thyroid & Adrenal Development</title>
+  <style>
+    :root { --primary: #F97316; --primary-dark: #EA580C; --secondary: #FB923C; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info:var(--rdx-info); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #1a0f05 0%, #2d1a0a 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(249,115,22,0.1); border-radius: 1rem; border: 1px solid rgba(249,115,22,0.3); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #F97316 0%, #FB923C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background:var(--rdx-bg-card); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background: rgba(249,115,22,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left:4px solid var(--rdx-teal); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background:var(--rdx-info-bg); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: rgba(249,115,22,0.2); color: var(--primary); }
+    tr:hover { background:var(--rdx-bg-card); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(16,185,129,0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .dev-card { background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .timeline-item { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 2px solid #1a0f05; }
+    .timeline-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .pathway-box { background: #f1f5f9; border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; overflow-x: auto; }
+    .condition-link { display: inline-block; background: rgba(249,115,22,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem; font-size: 0.85rem; color: #fdba74; text-decoration: none; transition: all 0.2s; }
+    .condition-link:hover { background: rgba(249,115,22,0.4); }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option:hover { background: rgba(249,115,22,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background:var(--rdx-bg-card); border-radius: 0.5rem; }
+    @media (max-width: 600px) { .container { padding: 1rem; } header h1 { font-size: 1.8rem; } }
+  </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/endocrine-embryology.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Endocrine Embryology</a> → Module</div>
+
+  <div class="container">
+    <header>
+      <h1>🦋 Endocrine Embryology</h1>
+      <p class="subtitle">Pharyngeal Apparatus, Thyroid Development & Adrenal Glands</p>
+      <p style="color: #6B7280; margin-top: 0.5rem; font-size: 0.9rem;">ReasonDx Module | Open-Access Sources Only</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('pharyngeal')">Pharyngeal Apparatus</div>
+      <div class="nav-tab" onclick="showTab('thyroid')">Thyroid</div>
+      <div class="nav-tab" onclick="showTab('parathyroid')">Parathyroid & Thymus</div>
+      <div class="nav-tab" onclick="showTab('adrenal')">Adrenal Glands</div>
+      <div class="nav-tab" onclick="showTab('anomalies')">Anomalies</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Endocrine Development Overview</h2>
+        <p>The endocrine glands of the head and neck derive primarily from the <strong>pharyngeal apparatus</strong> — a series of arches, pouches, and clefts that form during weeks 4-8. The adrenal glands have a dual origin: cortex from <strong>mesoderm</strong> and medulla from <strong>neural crest</strong>.</p>
+
+        <h3>Pharyngeal Apparatus Components</h3>
+        <table>
+          <tr><th>Component</th><th>Germ Layer</th><th>Description</th></tr>
+          <tr><td>Pharyngeal arches (1-6)</td><td>Mesoderm core + neural crest</td><td>Bar-like structures with cartilage, muscle, artery, nerve</td></tr>
+          <tr><td>Pharyngeal pouches (1-4)</td><td>Endoderm</td><td>Internal outpocketings between arches → glands and organs</td></tr>
+          <tr><td>Pharyngeal clefts (1-4)</td><td>Ectoderm</td><td>External grooves between arches → mostly obliterated</td></tr>
+          <tr><td>Pharyngeal membranes</td><td>Ectoderm + endoderm</td><td>Between cleft and pouch → only 1st persists (tympanic membrane)</td></tr>
+        </table>
+
+        <div class="key-concept">
+          <strong>🔑 Critical Distinction:</strong> Pouches are ENDODERM (internal, form glands). Clefts are ECTODERM (external, mostly obliterated). The 1st cleft is the only one that persists → external auditory meatus.
+        </div>
+
+        <h3>Key Endocrine Derivatives</h3>
+        <table>
+          <tr><th>Gland</th><th>Origin</th></tr>
+          <tr><td>Thyroid (follicular cells)</td><td>Floor of pharynx (endoderm) — foramen cecum</td></tr>
+          <tr><td>Thyroid (parafollicular/C cells)</td><td>Neural crest (via ultimobranchial body from 4th/5th pouch)</td></tr>
+          <tr><td>Inferior parathyroids</td><td>3rd pharyngeal pouch (endoderm)</td></tr>
+          <tr><td>Superior parathyroids</td><td>4th pharyngeal pouch (endoderm)</td></tr>
+          <tr><td>Thymus</td><td>3rd pharyngeal pouch (endoderm)</td></tr>
+          <tr><td>Adrenal cortex</td><td>Intermediate mesoderm (mesodermal)</td></tr>
+          <tr><td>Adrenal medulla</td><td>Neural crest cells (ectodermal)</td></tr>
+          <tr><td>Pituitary (anterior)</td><td>Rathke's pouch (oral ectoderm)</td></tr>
+          <tr><td>Pituitary (posterior)</td><td>Infundibulum (neuroectoderm/diencephalon)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: PHARYNGEAL APPARATUS -->
+    <div id="pharyngeal" class="tab-content">
+      <div class="module-section">
+        <h2>🏗️ Pharyngeal Arches, Pouches & Clefts</h2>
+
+        <h3>Pharyngeal Arch Derivatives</h3>
+        <table>
+          <tr><th>Arch</th><th>Nerve</th><th>Cartilage</th><th>Muscles</th><th>Artery</th></tr>
+          <tr><td><strong>1st</strong> (Mandibular)</td><td>CN V (V2, V3)</td><td>Meckel's → malleus, incus, mandible</td><td>Muscles of mastication, mylohyoid, anterior digastric, tensor tympani, tensor veli palatini</td><td>Maxillary artery</td></tr>
+          <tr><td><strong>2nd</strong> (Hyoid)</td><td>CN VII</td><td>Reichert's → stapes, styloid process, lesser horn of hyoid, stylohyoid ligament</td><td>Muscles of facial expression, stapedius, stylohyoid, posterior digastric</td><td>Stapedial artery</td></tr>
+          <tr><td><strong>3rd</strong></td><td>CN IX</td><td>Greater horn of hyoid, lower body of hyoid</td><td>Stylopharyngeus (only muscle of 3rd arch!)</td><td>Common carotid, internal carotid</td></tr>
+          <tr><td><strong>4th</strong></td><td>CN X (SLN)</td><td>Thyroid cartilage, epiglottic cartilage</td><td>Cricothyroid, levator veli palatini, constrictors</td><td>Aortic arch (L), subclavian (R)</td></tr>
+          <tr><td><strong>6th</strong></td><td>CN X (RLN)</td><td>Cricoid, arytenoid, corniculate, cuneiform</td><td>All intrinsic laryngeal muscles (except cricothyroid)</td><td>Pulmonary arteries, ductus arteriosus</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>🧠 Arch Nerves: "1-2-3-4-6, That's the pharyngeal mix"</strong><br>
+          1st = V (trigeminal) | 2nd = VII (facial) | 3rd = IX (glossopharyngeal) | 4th = X-SLN | 6th = X-RLN
+        </div>
+
+        <h3>Pharyngeal Pouch Derivatives (Endoderm)</h3>
+        <table>
+          <tr><th>Pouch</th><th>Derivatives</th><th>Key Points</th></tr>
+          <tr><td><strong>1st</strong></td><td>Middle ear cavity, Eustachian tube</td><td>Endoderm lines the middle ear</td></tr>
+          <tr><td><strong>2nd</strong></td><td>Palatine tonsils (tonsillar fossa)</td><td>Endoderm → epithelial lining of tonsils</td></tr>
+          <tr><td><strong>3rd</strong></td><td>INFERIOR parathyroids + THYMUS</td><td>Dorsal wing → inferior parathyroids; Ventral wing → thymus. Both migrate caudally (thymus to mediastinum).</td></tr>
+          <tr><td><strong>4th</strong></td><td>SUPERIOR parathyroids + C cells (ultimobranchial body)</td><td>Dorsal wing → superior parathyroids; C cells migrate to thyroid.</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>⚠️ 3rd Pouch Paradox:</strong> The INFERIOR parathyroids come from the 3rd pouch (higher pouch), and the SUPERIOR parathyroids come from the 4th pouch (lower pouch). This seems backward! It's because 3rd pouch derivatives DESCEND farther during development (the thymus drags them down to the mediastinum), so they end up BELOW the 4th pouch derivatives. This explains why ectopic inferior parathyroids can be found anywhere from the angle of the mandible down to the mediastinum.
+        </div>
+
+        <h3>Pharyngeal Cleft Derivatives (Ectoderm)</h3>
+        <ul>
+          <li><strong>1st cleft</strong> → External auditory meatus (only cleft that persists)</li>
+          <li><strong>2nd-4th clefts</strong> → Obliterated by overgrowth of the 2nd arch (cervical sinus)</li>
+          <li>Failure of obliteration → <strong>branchial cleft cyst</strong> (2nd cleft most common → anterior to SCM)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 3: THYROID -->
+    <div id="thyroid" class="tab-content">
+      <div class="module-section">
+        <h2>🦋 Thyroid Development</h2>
+
+        <h3>Origin & Descent</h3>
+        <p>The thyroid is the first endocrine gland to develop (day 24). It originates as a <strong>diverticulum</strong> from the <strong>floor of the pharynx</strong> at the <strong>foramen cecum</strong> (junction of anterior 2/3 and posterior 1/3 of the tongue).</p>
+
+        <div class="pathway-box">Foramen cecum (base of tongue, between 1st and 2nd arch territory)
+  → Thyroid diverticulum descends through the neck
+  → Connected by thyroglossal duct during descent
+  → Duct normally degenerates by week 7
+  → Thyroid reaches final position anterior to trachea (C5-T1) by week 7
+  → Bilobed gland connected by isthmus</div>
+
+        <h3>Thyroglossal Duct</h3>
+        <div class="key-concept">
+          <strong>🔑 The thyroglossal duct normally obliterates by week 7.</strong> It descends from the foramen cecum, passes <strong>anterior to the hyoid bone</strong> (or through it), and reaches the thyroid. Persistence → thyroglossal duct cyst or fistula.
+        </div>
+
+        <h3>Two Cell Types, Two Origins</h3>
+        <table>
+          <tr><th>Cell Type</th><th>Origin</th><th>Function</th></tr>
+          <tr><td>Follicular cells</td><td>Endoderm (floor of pharynx/foramen cecum)</td><td>Produce T3 and T4</td></tr>
+          <tr><td>Parafollicular (C) cells</td><td>Neural crest → ultimobranchial body (4th/5th pouch)</td><td>Produce calcitonin; give rise to medullary thyroid carcinoma</td></tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Clinical Pearl:</strong> Because C cells are neural crest-derived, medullary thyroid carcinoma (MTC) is a neuroendocrine tumor. MTC is the thyroid malignancy in MEN2A and MEN2B (both from RET gain-of-function mutations). C cells also produce calcitonin, which is a tumor marker for MTC.
+        </div>
+
+        <h3>Thyroglossal Duct Cyst</h3>
+        <div class="dev-card">
+          <h4>Most Common Congenital Neck Mass in Children</h4>
+          <ul>
+            <li>Presents as a painless <strong>midline</strong> neck mass</li>
+            <li>Moves with <strong>swallowing AND tongue protrusion</strong> (attached to hyoid via remnant duct)</li>
+            <li>Can occur anywhere along the descent path: base of tongue → hyoid → anterior neck</li>
+            <li>Most common location: at or just below the hyoid bone</li>
+            <li>Risk of infection → presents as enlarging, tender midline mass</li>
+            <li>~1% risk of thyroid carcinoma within the cyst (usually papillary)</li>
+            <li>Treatment: <strong>Sistrunk procedure</strong> — excise cyst + central hyoid body + tract to foramen cecum (reduces recurrence from ~50% to ~5%)</li>
+          </ul>
+        </div>
+
+        <h3>Ectopic Thyroid Tissue</h3>
+        <ul>
+          <li><strong>Lingual thyroid</strong> — thyroid tissue at the base of tongue (foramen cecum) that failed to descend. May be the ONLY thyroid tissue present — always confirm normal thyroid before excision!</li>
+          <li><strong>Pyramidal lobe</strong> — present in ~50% of people, represents a persistent inferior portion of the thyroglossal duct</li>
+          <li>Ectopic thyroid can occur anywhere along the descent path</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 4: PARATHYROID & THYMUS -->
+    <div id="parathyroid" class="tab-content">
+      <div class="module-section">
+        <h2>🔬 Parathyroid & Thymus Development</h2>
+
+        <h3>Parathyroid Glands</h3>
+        <table>
+          <tr><th>Feature</th><th>Inferior Parathyroids</th><th>Superior Parathyroids</th></tr>
+          <tr><td>Origin</td><td>3rd pharyngeal pouch (dorsal wing)</td><td>4th pharyngeal pouch (dorsal wing)</td></tr>
+          <tr><td>Migration</td><td>Descend WITH thymus (long migration → more variable position)</td><td>Short migration → more consistent position</td></tr>
+          <tr><td>Final position</td><td>Posterior surface of lower thyroid poles</td><td>Posterior surface of upper thyroid poles</td></tr>
+          <tr><td>Ectopic location risk</td><td>HIGH — anywhere from angle of mandible to anterior mediastinum</td><td>LOW — usually near upper thyroid poles</td></tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Surgical Pearl:</strong> Ectopic inferior parathyroids are the most common cause of failed parathyroid surgery for hyperparathyroidism. Because they migrate with the thymus, they can end up in the mediastinum (thyrothymic tract), requiring sternotomy. Superior parathyroids are more consistently located and easier to find surgically.
+        </div>
+
+        <h3>Thymus Development</h3>
+        <ul>
+          <li>Arises from the <strong>ventral wing of the 3rd pharyngeal pouch</strong> (endoderm)</li>
+          <li>Descends from the neck to the <strong>anterior superior mediastinum</strong></li>
+          <li>Populated by <strong>T-cell precursors</strong> from the bone marrow</li>
+          <li>Site of T-cell maturation and selection (positive and negative selection)</li>
+          <li>Largest relative to body size at birth; involutes after puberty (replaced by fat)</li>
+        </ul>
+
+        <div class="danger-box">
+          <strong>⚠️ DiGeorge Syndrome (22q11.2 deletion):</strong> Neural crest cells are required for 3rd and 4th pharyngeal pouch development. 22q11.2 deletion → impaired neural crest → aplasia/hypoplasia of 3rd and 4th pouch derivatives:
+          <ul>
+            <li><strong>Thymic aplasia</strong> → T-cell deficiency → immunodeficiency</li>
+            <li><strong>Parathyroid aplasia</strong> → hypocalcemia → seizures, tetany</li>
+            <li><strong>Cardiac defects</strong> (conotruncal: truncus arteriosus, interrupted arch, TOF)</li>
+            <li><strong>Cleft palate</strong></li>
+            <li><strong>Abnormal facies</strong></li>
+          </ul>
+          <p style="margin-top:0.5rem">CATCH-22: Cardiac, Abnormal facies, Thymic aplasia, Cleft palate, Hypocalcemia — chromosome 22</p>
+        </div>
+
+        <h3>Pituitary Gland (Dual Origin)</h3>
+        <table>
+          <tr><th>Component</th><th>Origin</th><th>Derivatives</th></tr>
+          <tr><td>Anterior pituitary (adenohypophysis)</td><td>Rathke's pouch (oral ectoderm — from roof of stomodeum)</td><td>FLAT PeG: FSH, LH, ACTH, TSH, Prolactin, Endorphins, GH</td></tr>
+          <tr><td>Posterior pituitary (neurohypophysis)</td><td>Infundibulum (neuroectoderm — downward extension of diencephalon/hypothalamus)</td><td>Stores and releases: ADH (vasopressin) and Oxytocin (made in hypothalamus)</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>🔬 Rathke's Pouch Remnant:</strong> Craniopharyngioma — a benign but locally aggressive tumor arising from Rathke's pouch remnants. Presents in children/adolescents with headache, visual field defects (bitemporal hemianopia from optic chiasm compression), growth failure, and diabetes insipidus. Calcified, cystic, suprasellar mass on imaging.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: ADRENAL GLANDS -->
+    <div id="adrenal" class="tab-content">
+      <div class="module-section">
+        <h2>🔶 Adrenal Gland Development</h2>
+
+        <h3>Dual Origin</h3>
+        <p>The adrenal gland has TWO distinct embryologic origins that reflect its TWO functional components:</p>
+
+        <table>
+          <tr><th>Component</th><th>Origin</th><th>Function</th></tr>
+          <tr><td><strong>Adrenal cortex</strong></td><td>Intermediate mesoderm (mesodermal)</td><td>Steroid hormones: GFR = Glomerulosa (aldosterone), Fasciculata (cortisol), Reticularis (androgens)</td></tr>
+          <tr><td><strong>Adrenal medulla</strong></td><td>Neural crest cells (ectodermal)</td><td>Catecholamines: epinephrine, norepinephrine (chromaffin cells)</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>🧠 Cortex Layers: "GFR" or "Salt, Sugar, Sex"</strong><br>
+          <strong>G</strong>lomerulosa → Aldosterone (salt) | <strong>F</strong>asciculata → Cortisol (sugar) | <strong>R</strong>eticularis → Androgens (sex)<br>
+          "The deeper you go, the sweeter it gets" (Salt → Sugar → Sex, from outside in)
+        </div>
+
+        <h3>Fetal Adrenal Cortex</h3>
+        <div class="dev-card">
+          <h4>The Fetal Zone</h4>
+          <p>The fetal adrenal has a large <strong>fetal zone</strong> (~80% of the gland) that produces <strong>DHEA-S</strong> (dehydroepiandrosterone sulfate). The placenta converts fetal DHEA-S into estriol (E3) — this is the basis of the <strong>fetoplacental unit</strong> for estrogen production during pregnancy.</p>
+          <ul>
+            <li>Fetal zone involutes after birth (loss of ACTH and HCG stimulation)</li>
+            <li>The definitive (adult) cortex takes over postnatally</li>
+            <li>Low maternal estriol (E3) on prenatal screening may indicate fetal adrenal insufficiency, anencephaly, or placental sulfatase deficiency</li>
+          </ul>
+        </div>
+
+        <h3>Adrenal Medulla: Neural Crest Migration</h3>
+        <ul>
+          <li>Neural crest cells from the sympathetic chain migrate INTO the developing cortex</li>
+          <li>They differentiate into <strong>chromaffin cells</strong> (modified postganglionic sympathetic neurons)</li>
+          <li>Chromaffin cells are innervated by preganglionic sympathetic fibers (no synapse — they ARE the postganglionic neuron equivalent)</li>
+          <li>Tumors: <strong>pheochromocytoma</strong> (adults) and <strong>neuroblastoma</strong> (children, most common extracranial solid tumor in children)</li>
+        </ul>
+
+        <div class="key-concept">
+          <strong>🔑 Neural Crest → Adrenal Medulla → Tumors:</strong>
+          <ul>
+            <li><strong>Neuroblastoma:</strong> Neural crest-derived, children <5y. Can arise anywhere along sympathetic chain. Elevated VMA/HVA in urine. Can spontaneously regress (stage 4S).</li>
+            <li><strong>Pheochromocytoma:</strong> Chromaffin cell tumor, adults. Rule of 10s: 10% bilateral, 10% extra-adrenal, 10% malignant, 10% familial. Associated with MEN2A/2B, VHL, NF1.</li>
+          </ul>
+        </div>
+
+        <h3>Congenital Adrenal Hyperplasia (CAH)</h3>
+        <div class="danger-box">
+          <strong>⚠️ 21-Hydroxylase Deficiency (Most Common CAH, ~95%):</strong>
+          <ul>
+            <li>Autosomal recessive. CYP21A2 gene mutation.</li>
+            <li>Block in cortisol synthesis → ↑ACTH → adrenal hyperplasia + androgen excess</li>
+            <li>Females: ambiguous genitalia at birth (virilized external, normal internal — because ovaries don't produce AMH, so Müllerian structures persist)</li>
+            <li>Males: may present with salt-wasting crisis at 1-2 weeks (undetected because genitalia appear normal)</li>
+            <li>Salt-wasting form: also blocks aldosterone → hyponatremia, hyperkalemia, hypotension</li>
+            <li>Detected on newborn screening (elevated 17-hydroxyprogesterone)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: ANOMALIES -->
+    <div id="anomalies" class="tab-content">
+      <div class="module-section">
+        <h2>⚠️ Congenital Endocrine Anomalies</h2>
+
+        <h3>Branchial Cleft Cysts</h3>
+        <table>
+          <tr><th>Type</th><th>Origin</th><th>Location</th><th>Key Features</th></tr>
+          <tr><td><strong>1st cleft cyst</strong></td><td>1st pharyngeal cleft</td><td>Near EAC, parotid, angle of mandible</td><td>Rare. Near facial nerve (surgical risk). Type I (ectoderm only) vs Type II (ectoderm + mesoderm).</td></tr>
+          <tr><td><strong>2nd cleft cyst</strong></td><td>2nd pharyngeal cleft (cervical sinus)</td><td>Anterior to SCM, lateral neck</td><td>MOST COMMON (95%). Presents in teens/young adults. Anterior to upper 1/3 of SCM. Internal opening at tonsillar fossa.</td></tr>
+          <tr><td><strong>3rd/4th cleft</strong></td><td>Pyriform sinus</td><td>Left side > right, near thyroid</td><td>Rare. May present as recurrent thyroid abscess or suppurative thyroiditis.</td></tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Differential: Midline vs Lateral Neck Mass in Children</strong>
+          <ul>
+            <li><strong>MIDLINE:</strong> Thyroglossal duct cyst (moves with swallowing + tongue protrusion), dermoid cyst, thyroid nodule</li>
+            <li><strong>LATERAL:</strong> Branchial cleft cyst (anterior to SCM), cystic hygroma/lymphatic malformation, reactive lymphadenopathy</li>
+          </ul>
+        </div>
+
+        <h3>Ectopic Thyroid & Thyroglossal Anomalies</h3>
+        <table>
+          <tr><th>Anomaly</th><th>Mechanism</th><th>Key Features</th></tr>
+          <tr><td>Thyroglossal duct cyst</td><td>Failed duct obliteration</td><td>Midline, moves with swallowing AND tongue protrusion. Sistrunk procedure.</td></tr>
+          <tr><td>Lingual thyroid</td><td>Failed descent from foramen cecum</td><td>Mass at tongue base. May be only thyroid tissue — scan before excision!</td></tr>
+          <tr><td>Pyramidal lobe</td><td>Persistent inferior thyroglossal duct</td><td>Normal variant (~50%). Ascending from isthmus.</td></tr>
+          <tr><td>Ectopic thyroid (substernal)</td><td>Excessive descent past normal position</td><td>Substernal goiter. May cause tracheal compression.</td></tr>
+        </table>
+
+        <h3>Summary: Pouch → Anomaly Connections</h3>
+        <table>
+          <tr><th>Structure</th><th>Origin</th><th>Associated Anomalies</th></tr>
+          <tr><td>Thyroid</td><td>Floor of pharynx (foramen cecum)</td><td>Thyroglossal duct cyst, lingual thyroid, ectopic thyroid</td></tr>
+          <tr><td>Inferior parathyroid</td><td>3rd pouch</td><td>Ectopic location (mediastinum), DiGeorge</td></tr>
+          <tr><td>Superior parathyroid</td><td>4th pouch</td><td>DiGeorge (aplasia → hypocalcemia)</td></tr>
+          <tr><td>Thymus</td><td>3rd pouch</td><td>DiGeorge (aplasia → T-cell deficiency), ectopic thymic tissue</td></tr>
+          <tr><td>C cells</td><td>Neural crest (ultimobranchial body)</td><td>MEN2A/2B (medullary thyroid carcinoma from RET mutations)</td></tr>
+          <tr><td>Adrenal cortex</td><td>Mesoderm</td><td>CAH (21-hydroxylase deficiency)</td></tr>
+          <tr><td>Adrenal medulla</td><td>Neural crest</td><td>Neuroblastoma, pheochromocytoma</td></tr>
+          <tr><td>Anterior pituitary</td><td>Rathke's pouch (oral ectoderm)</td><td>Craniopharyngioma</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 7: QUIZ -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>The inferior parathyroid glands develop from which pharyngeal pouch?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) 2nd pouch</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) 3rd pouch</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) 4th pouch</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) 5th pouch</div>
+          <div class="explanation">The 3rd pouch gives rise to the INFERIOR parathyroids (dorsal wing) and the thymus (ventral wing). The 3rd pouch paradox: inferior parathyroids from the higher (3rd) pouch, superior parathyroids from the lower (4th) pouch — because 3rd pouch derivatives descend farther.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>A midline neck mass in a child that moves with both swallowing AND tongue protrusion is most likely:</p>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">A) Thyroglossal duct cyst</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">B) Branchial cleft cyst</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Cystic hygroma</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Dermoid cyst</div>
+          <div class="explanation">Thyroglossal duct cysts are midline and move with swallowing (attached to thyroid) AND tongue protrusion (attached to foramen cecum via remnant duct through/near the hyoid). Branchial cleft cysts are lateral. Dermoid cysts are midline but don't move with tongue protrusion.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>The adrenal medulla is derived from which embryonic structure?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Intermediate mesoderm</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Neural crest cells</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Endoderm</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Lateral plate mesoderm</div>
+          <div class="explanation">The adrenal medulla = neural crest cells (chromaffin cells). The cortex = intermediate mesoderm. Neural crest origin explains why medullary tumors (pheochromocytoma, neuroblastoma) are neuroendocrine tumors that produce catecholamines.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>Which pharyngeal arch gives rise to the muscles of facial expression?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) 1st arch (CN V)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) 2nd arch (CN VII)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) 3rd arch (CN IX)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) 4th arch (CN X)</div>
+          <div class="explanation">The 2nd (hyoid) arch is innervated by CN VII (facial nerve) and gives rise to muscles of facial expression, stapedius, stylohyoid, and posterior belly of digastric. The 1st arch (CN V) gives muscles of mastication.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>A craniopharyngioma arises from remnants of which embryologic structure?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Thyroglossal duct</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Rathke's pouch</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Infundibulum</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Notochord</div>
+          <div class="explanation">Rathke's pouch (oral ectoderm from the stomodeum roof) gives rise to the anterior pituitary. Remnants → craniopharyngioma: calcified, cystic suprasellar mass causing bitemporal hemianopia, growth failure, and diabetes insipidus in children.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 6</h3>
+          <p>The parafollicular (C) cells of the thyroid are derived from neural crest and give rise to which malignancy?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Papillary thyroid carcinoma</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Medullary thyroid carcinoma</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Follicular thyroid carcinoma</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Anaplastic thyroid carcinoma</div>
+          <div class="explanation">C cells (neural crest → ultimobranchial body) produce calcitonin and give rise to medullary thyroid carcinoma (MTC). MTC is associated with MEN2A/2B (RET gain-of-function). Calcitonin is a tumor marker. Papillary and follicular carcinomas arise from follicular cells (endoderm).</div>
+        </div>
+      </div>
+
+      <div class="module-section" style="margin-top: 2rem;">
+        <h2 style="color:var(--rdx-teal-dark,#0f766e);">📖 References</h2>
+        <ul>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK539789/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Pharyngeal Arches - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK470452/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Thyroglossal Duct Cyst - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK557623/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">DiGeorge Syndrome - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK559218/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Branchial Cleft Cyst - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK525989/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Adrenal Gland Embryology - StatPearls</a></li>
+        </ul>
+      </div>
+
+      <div class="module-section">
+        <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Modules</h2>
+        <p>
+          <a href="cardiac-embryology-module.html" class="condition-link">❤️ Cardiac Embryology</a>
+          <a href="renal-embryology-module.html" class="condition-link">🫘 Renal Embryology</a>
+          <a href="neuro-embryology-module.html" class="condition-link">🧠 Neuro Embryology</a>
+          <a href="gi-embryology-module.html" class="condition-link">🍽️ GI Embryology</a>
+        </p>
+        <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+        <p>
+          <a href="thyroglossal-branchial-crt.html" class="condition-link">🦋 Thyroglossal & Branchial CRT</a>
+          <a href="hirschsprung-disease-crt.html" class="condition-link">🧬 Hirschsprung Disease CRT</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    function checkQuiz(el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(o => { o.style.pointerEvents = 'none'; o.style.opacity = '0.6'; });
+      el.style.opacity = '1';
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      section.querySelector('.explanation').style.display = 'block';
+    }
+  </script>
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">The anterior pituitary (adenohypophysis) develops from which structure?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The diencephalon (neuroectoderm) gives rise to the POSTERIOR pituitary (neurohypophysis), not the anterior." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Neuroectoderm of the diencephalon</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Anterior pituitary: Rathke&#x27;s pouch evaginates from the roof of the stomodeum (oral ectoderm) → migrates upward → detaches from oral cavity → differentiates into adenohypophysis. Produces ACTH, GH, TSH, FSH, LH, prolactin. Craniopharyngioma arises from Rathke&#x27;s pouch remnants (calcified suprasellar tumor, bimodal age: children and 50-70)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Rathke's pouch (oral ectoderm)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest contributes to the adrenal medulla and C cells of thyroid, not the anterior pituitary." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Neural crest cells</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Pharyngeal pouches give rise to parathyroids, thymus, and other structures — not the pituitary." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Endoderm of the pharyngeal pouches</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">The thyroid gland descends from which embryonic origin?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The first pharyngeal pouch gives rise to the middle ear cavity and Eustachian tube." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">First pharyngeal pouch</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Thyroid: arises from endoderm at the foramen cecum → descends via the thyroglossal duct → reaches its final pretracheal position by week 7. The thyroglossal duct normally obliterates. Persistence → thyroglossal duct cyst (midline neck mass that elevates with swallowing/tongue protrusion). Lingual thyroid: failure to descend. Always confirm normal thyroid tissue exists elsewhere before excision (may be only thyroid tissue)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Foramen cecum of the tongue (floor of the pharynx) at the junction of the anterior 2/3 and posterior 1/3 of the tongue</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The third pouch gives rise to the inferior parathyroids and thymus." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Third pharyngeal pouch</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest contributes parafollicular C cells to the thyroid (from the ultimobranchial body/4th pouch), but the main thyroid gland is endodermal from the foramen cecum." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Neural crest ectoderm</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">The parathyroid glands derive from which pharyngeal pouches?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="First pouch → middle ear; second pouch → palatine tonsil epithelium. Neither forms parathyroids." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">First and second pouches</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Third pharyngeal pouch → inferior parathyroids AND thymus. Fourth pouch → superior parathyroids AND ultimobranchial body (C cells). The inferior parathyroids descend farther (with thymus) → can have variable ectopic positions (mediastinum). The superior parathyroids are more consistently located. DiGeorge syndrome (22q11.2 deletion): 3rd/4th pouch failure → absent parathyroids (hypocalcemia) + absent thymus (T-cell deficiency)." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Third pouch (inferior parathyroids) and fourth pouch (superior parathyroids)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The inferior parathyroids come from the third pouch, not the fifth." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Fourth and fifth pouches only</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The parathyroids specifically derive from the pharyngeal pouches, not the general foregut." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Foregut endoderm (same origin as thyroid)</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">DiGeorge syndrome results from abnormal development of which pharyngeal structures?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="First/second arch anomalies cause mandibular hypoplasia and ear defects (Treacher Collins), not DiGeorge." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">First and second pharyngeal arches</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="DiGeorge (22q11.2 deletion): failed 3rd/4th pouch development → absent thymus (T-cell immunodeficiency) + absent parathyroids (hypocalcemia/tetany). Also: conotruncal cardiac defects (neural crest contribution to outflow tract), characteristic facies, palatal abnormalities. CATCH-22 mnemonic: Cardiac, Abnormal facies, Thymic aplasia, Cleft palate, Hypocalcemia — chromosome 22q11.2." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Third and fourth pharyngeal pouches</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The ultimobranchial body contributes C cells. While it&#x27;s involved, the primary DiGeorge features come from 3rd/4th pouch failure." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Fifth pharyngeal pouch (ultimobranchial body)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Rathke&#x27;s pouch forms the anterior pituitary. Its abnormalities cause craniopharyngioma, not DiGeorge." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Rathke's pouch</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">The adrenal cortex and adrenal medulla have different embryonic origins. The medulla derives from:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Intermediate mesoderm gives rise to the adrenal CORTEX (and kidneys/gonads), not the medulla." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Mesoderm (intermediate mesoderm)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Adrenal medulla: neural crest cells migrate to the adrenal anlage → differentiate into chromaffin cells (modified postganglionic sympathetic neurons). Produce catecholamines (epinephrine, norepinephrine). Adrenal cortex: from intermediate mesoderm. This dual origin explains why pheochromocytoma (medulla) and cortical tumors (adenoma, carcinoma) are completely different neoplasms." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Neural crest cells (modified postganglionic sympathetic neurons)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Foregut endoderm forms GI organs and respiratory epithelium, not adrenal tissue." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Endoderm of the foregut</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Surface ectoderm forms the epidermis and lens. The adrenal medulla is neural crest-derived." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Surface ectoderm</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">A midline neck mass in a child that moves upward with swallowing and tongue protrusion is MOST likely:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Branchial cleft cysts are typically LATERAL (along the anterior border of the SCM), not midline." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Branchial cleft cyst</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Thyroglossal duct cyst: most common congenital midline neck mass. Remnant of the thyroglossal duct (thyroid descent pathway). Moves with swallowing AND tongue protrusion (attached to foramen cecum via the duct tract through the hyoid bone). Treatment: Sistrunk procedure (excise cyst + central hyoid body + tract to foramen cecum). Always rule out ectopic thyroid tissue first." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Thyroglossal duct cyst</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Dermoid cysts can be midline but do NOT elevate with tongue protrusion (no connection to the hyoid/tongue base)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Dermoid cyst</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Reactive lymph nodes don&#x27;t move with tongue protrusion and are usually lateral." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Lymphadenopathy</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Congenital adrenal hyperplasia (CAH) most commonly results from deficiency of which enzyme?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="11β-hydroxylase deficiency is the second most common cause (~5-8%) and causes hypertension (excess 11-deoxycorticosterone)." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">11-beta-hydroxylase</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="21-hydroxylase deficiency: ~95% of CAH. Impaired cortisol synthesis → elevated ACTH → adrenal hyperplasia → excess androgens (virilization). Classic form: salt-wasting (aldosterone deficiency → hyponatremia, hyperkalemia, dehydration) or simple virilizing. Female infants: ambiguous genitalia at birth. Newborn screening detects elevated 17-hydroxyprogesterone." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">21-hydroxylase</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="17α-hydroxylase deficiency is rare → hypertension, hypokalemia, absent sex steroids → genotypic males appear female (46,XY DSD)." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">17-alpha-hydroxylase</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Aromatase deficiency prevents conversion of androgens to estrogens → maternal/fetal virilization, but is not classified as CAH." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Aromatase</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">The pancreatic islets of Langerhans derive from:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest contributes to the adrenal medulla and enteric neurons, not pancreatic islets." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Neural crest cells</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Both exocrine and endocrine pancreas derive from foregut endoderm. Dorsal bud → body/tail/accessory duct; ventral bud → uncinate process/main duct. Islet cells (alpha, beta, delta, PP) differentiate from the same endodermal progenitors. Annular pancreas: abnormal ventral bud rotation. Pancreas divisum: failed fusion of dorsal and ventral ducts." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Endoderm of the foregut (dorsal and ventral pancreatic buds)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The peritoneal mesoderm forms the mesentery and serosa, not the pancreatic parenchyma." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Mesodermal lining of the peritoneal cavity</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Splanchnic mesoderm contributes to the vascular and connective tissue framework of the pancreas, but the functional (endocrine and exocrine) cells are endodermal." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Splanchnic mesoderm</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="thyroglossal-branchial-crt.html" class="cross-link"><div class="cross-link-title">🧪 Thyroglossal & Branchial CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="thyroid-module.html" class="cross-link"><div class="cross-link-title">📘 Thyroid Disorders</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="thyroid-deep-dive-module.html" class="cross-link"><div class="cross-link-title">📘 Thyroid Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="adrenal-disorders-module.html" class="cross-link"><div class="cross-link-title">📘 Adrenal Disorders</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="adrenal-crisis-module.html" class="cross-link"><div class="cross-link-title">📘 Adrenal Crisis</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="pituitary-disorders-module.html" class="cross-link"><div class="cross-link-title">📘 Pituitary Disorders</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="diabetes-dka-module.html" class="cross-link"><div class="cross-link-title">📘 Diabetes & DKA</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

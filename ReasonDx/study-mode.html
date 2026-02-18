@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Mode - ReasonDx</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../dx-unified-styles.css">
+    <meta name="description" content="Study Mode — clinical reasoning education platform for medical students and healthcare professionals.">
+<title>Study Mode - ReasonDx</title>
+    
+    <link rel="stylesheet" href="dx-unified-styles.css">
     <style>
         .main {
             max-width: 1400px;
@@ -199,11 +214,11 @@
 
         /* Category colors */
         .cat-cardiology { background: #fef2f2; }
-        .cat-pulmonary { background: #eff6ff; }
+        .cat-pulmonary { background: #f0fdfa; }
         .cat-neurology { background: #faf5ff; }
         .cat-gi { background: #fff7ed; }
         .cat-renal { background: #ecfeff; }
-        .cat-infectious { background: #f0fdf4; }
+        .cat-infectious { background: #f0fdfa; }
         .cat-endocrine { background: #fdf2f8; }
         .cat-hematology { background: #fef2f2; }
         .cat-allergy { background: #ccfbf1; }
@@ -447,7 +462,8 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="dx-case-nav.css">
+    <link rel="stylesheet" href="js/dx-case-nav.css">
+<link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -456,7 +472,7 @@
     <main class="main">
         <div class="page-header">
             <h1>🎯 Study Mode</h1>
-            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, Board Prep MCQs, MechanismDx, and CoachDx</p>
+            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, Board Prep MCQs, ReasonDx, and CoachDx</p>
         </div>
 
         <!-- Search -->
@@ -505,7 +521,7 @@
     </div>
 
     <!-- Navigation Script -->
-    <script src="../dx-nav.js"></script>
+    <script src="js/dx-case-nav.js"></script>
 
     <script>
         // ============ TOPIC DATABASE ============
@@ -518,7 +534,7 @@
                 icon: '🫀',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=acs-deep-dive-complete', questions: 33, layers: 7 },
-                    mechanism: { url: '../mechanism/acs-module.html', modules: 1 },
+                    mechanism: { url: 'modules/acs-module.html', modules: 1 },
                     mcq: { count: 12, tags: ['acs', 'stemi', 'nstemi', 'cardiac-enzymes'] },
                     cases: { url: 'training.html?case=acs', count: 3 },
                     coach: { url: '../CoachDx/coachdx-dashboard.html?topic=acs', scenarios: 2 }
@@ -531,7 +547,7 @@
                 icon: '💔',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=heart-failure-deep-dive', questions: 28, layers: 7 },
-                    mechanism: { url: '../mechanism/heart-failure-module.html', modules: 1 },
+                    mechanism: { url: 'modules/heart-failure-module.html', modules: 1 },
                     mcq: { count: 8, tags: ['hfref', 'hfpef', 'bnp'] },
                     cases: { url: 'training.html?case=chf', count: 2 },
                     coach: { url: '../CoachDx/coachdx-dashboard.html?topic=hf', scenarios: 1 }
@@ -575,7 +591,7 @@
                 icon: '⚠️',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=shock-deep-dive', questions: 24, layers: 7 },
-                    mechanism: { url: '../mechanism/shock-module.html', modules: 1 },
+                    mechanism: { url: 'modules/shock-module.html', modules: 1 },
                     mcq: { count: 8, tags: ['shock', 'cardiogenic', 'hypovolemic', 'distributive'] }
                 }
             },
@@ -588,7 +604,7 @@
                 icon: '🫁',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=pe-deep-dive', questions: 30, layers: 7 },
-                    mechanism: { url: '../mechanism/pe-module.html', modules: 1 },
+                    mechanism: { url: 'modules/pe-module.html', modules: 1 },
                     mcq: { count: 10, tags: ['pe', 'dvt', 'wells-score', 'anticoagulation'] },
                     cases: { url: 'training.html?case=pe', count: 2 },
                     coach: { url: '../CoachDx/coachdx-dashboard.html?topic=pe', scenarios: 1 }
@@ -612,7 +628,7 @@
                 icon: '💨',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=asthma-exacerbation-deep-dive', questions: 22, layers: 7 },
-                    mechanism: { url: '../mechanism/asthma-module.html', modules: 1 },
+                    mechanism: { url: 'modules/asthma-module.html', modules: 1 },
                     mcq: { count: 6, tags: ['asthma', 'bronchodilator', 'status-asthmaticus'] }
                 }
             },
@@ -623,7 +639,7 @@
                 icon: '🌬️',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=copd-exacerbation-deep-dive', questions: 24, layers: 7 },
-                    mechanism: { url: '../mechanism/copd-module.html', modules: 1 },
+                    mechanism: { url: 'modules/copd-module.html', modules: 1 },
                     mcq: { count: 5, tags: ['copd', 'gold-criteria'] }
                 }
             },
@@ -646,7 +662,7 @@
                 icon: '🦠',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=sepsis-deep-dive', questions: 22, layers: 7 },
-                    mechanism: { url: '../mechanism/sepsis-module.html', modules: 1 },
+                    mechanism: { url: 'modules/sepsis-module.html', modules: 1 },
                     mcq: { count: 14, tags: ['sepsis', 'sofa', 'qsofa', 'hour-1-bundle'] },
                     cases: { url: 'training.html?case=sepsis', count: 4 },
                     coach: { url: '../CoachDx/coachdx-dashboard.html?topic=sepsis', scenarios: 2 }
@@ -682,7 +698,7 @@
                 icon: '🧠',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=stroke-deep-dive', questions: 28, layers: 7 },
-                    mechanism: { url: '../mechanism/stroke-module.html', modules: 1 },
+                    mechanism: { url: 'modules/stroke-module.html', modules: 1 },
                     mcq: { count: 10, tags: ['stroke', 'tpa', 'nihss', 'thrombectomy'] },
                     cases: { url: 'training.html?case=stroke', count: 2 }
                 }
@@ -749,7 +765,7 @@
                 icon: '🫘',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=aki-deep-dive', questions: 24, layers: 7 },
-                    mechanism: { url: '../mechanism/aki-module.html', modules: 1 },
+                    mechanism: { url: 'modules/aki-module.html', modules: 1 },
                     mcq: { count: 10, tags: ['aki', 'kdigo', 'fena', 'prerenal'] },
                     cases: { url: 'training.html?case=aki', count: 2 }
                 }
@@ -783,7 +799,7 @@
                 icon: '🍬',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=dka-deep-dive', questions: 24, layers: 7 },
-                    mechanism: { url: '../mechanism/diabetes-dka-module.html', modules: 1 },
+                    mechanism: { url: 'modules/diabetes-dka-module.html', modules: 1 },
                     mcq: { count: 8, tags: ['dka', 'hhs', 'anion-gap', 'insulin'] },
                     cases: { url: 'training.html?case=dka', count: 2 }
                 }
@@ -817,7 +833,7 @@
                 icon: '🚨',
                 resources: {
                     deepDive: { url: 'deep-dive-player.html?module=anaphylaxis-deep-dive', questions: 24, layers: 7 },
-                    mechanism: { url: '../mechanism/anaphylaxis-module.html', modules: 1 },
+                    mechanism: { url: 'modules/anaphylaxis-module.html', modules: 1 },
                     mcq: { count: 8, tags: ['anaphylaxis', 'epinephrine', 'biphasic'] },
                     cases: { url: 'training.html?case=anaphylaxis', count: 2 },
                     coach: { url: '../CoachDx/coachdx-dashboard.html?topic=anaphylaxis', scenarios: 1 }
@@ -1078,11 +1094,11 @@
                 `;
             }
 
-            // MechanismDx
+            // ReasonDx
             if (r.mechanism) {
                 bodyHTML += `
                     <div class="modal-section">
-                        <div class="modal-section-title">⚙️ MechanismDx</div>
+                        <div class="modal-section-title">⚙️ ReasonDx</div>
                         <a href="${r.mechanism.url}" class="resource-link">
                             <div class="resource-link-icon" style="background: var(--dx-success-light);">⚙️</div>
                             <div class="resource-link-info">
@@ -1191,16 +1207,21 @@
         // ============ INIT ============
         renderTopics();
     </script>
-    <script src="dx-case-nav.js"></script>
+    <script src="js/dx-case-nav.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
 
-    <!-- DxSuite AI Tutor Integration -->
+    
     <div data-dx-tutor
          data-module-title="Study Mode"
          data-key-points="${topic.name}, No topics found, ${topic.name}, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../data/rdx-persist.js"></script>
+<script src="data/rdx-persist.js"></script>
+<script src="./js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+<script src="js/rdx-help-widget.js"></script>
 </body>
 </html>

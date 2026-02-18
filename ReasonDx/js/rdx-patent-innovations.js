@@ -738,6 +738,6 @@
     //  Public API
     // ================================================================
     window.RdxPatent = { RPFS, CRDA, LRDT, MMD, EPE, SAE, DTW, AFC, STORAGE_KEYS };
-    console.log('ReasonDx Patent Innovations (Enhanced) loaded: RPFS, CRDA, LRDT, MMD, EPE, SAE, DTW, AFC');
+loaded: RPFS, CRDA, LRDT, MMD, EPE, SAE, DTW, AFC');
 
 })(window);

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Inhaler &amp; Spacer Technique. Interactive Socratic clinical case with guided reasoning on ReasonDx.">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<title>Inhaler &amp; Spacer Technique | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--rdx-font);background:var(--rdx-bg,#f8fafc);min-height:100vh;color:var(--rdx-text,#1e293b)}
+.container{max-width:800px;margin:0 auto;padding:20px}
+.progress-bar{background:var(--rdx-border,#e2e8f0);border-radius:8px;height:6px;margin-bottom:24px;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,#0d9488,#14b8a6);height:100%;border-radius:8px;transition:width 0.5s}
+.score-tracker{position:fixed;top:12px;right:60px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:8px 16px;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;gap:8px;font-size:14px}
+.score-label{color:var(--rdx-text-muted,#64748b);font-size:12px}
+.score-value{font-weight:700;color:var(--rdx-teal,#0d9488);font-size:18px}
+.difficulty-panel{text-align:center;margin-bottom:20px}
+.diff-btn{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--rdx-text-muted,#64748b);transition:all 0.2s}
+.diff-btn.active{background:var(--rdx-teal,#0d9488);color:#fff;border-color:var(--rdx-teal,#0d9488)}
+.diff-btn:hover{border-color:var(--rdx-teal,#0d9488)}
+.scene-title{font-family:var(--rdx-font-serif);font-size:1.6rem;color:var(--rdx-teal-dark,#0f766e);margin-bottom:16px}
+.narrative{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin-bottom:16px;line-height:1.7}
+.narrative .highlight{background:rgba(13,148,136,0.1);padding:2px 6px;border-radius:4px;font-weight:600}
+.narrative .critical{background:rgba(220,38,38,0.1);color:#dc2626;padding:2px 6px;border-radius:4px;font-weight:600}
+.vital-signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin:12px 0;padding:12px;background:rgba(13,148,136,0.04);border-radius:8px;border:1px solid rgba(13,148,136,0.1)}
+.vital-item{text-align:center;font-size:13px}.vital-item .label{color:var(--rdx-text-muted,#64748b);font-size:11px;display:block}.vital-item .value{font-weight:700;color:var(--rdx-teal-dark,#0f766e)}
+.socratic-prompt{background:linear-gradient(135deg,rgba(124,58,237,0.06),rgba(13,148,136,0.06));border:1px solid rgba(124,58,237,0.15);border-radius:12px;padding:16px 20px;margin:16px 0}
+.socratic-prompt h4{color:var(--rdx-purple,#7c3aed);font-size:0.95rem;margin-bottom:8px}
+.hint-box{background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);border-radius:8px;padding:12px;margin:8px 0;font-size:0.9rem;color:#92400e;display:none}
+.options-grid{display:grid;gap:10px;margin:16px 0}
+.option-btn{background:var(--rdx-bg-card,#fff);border:2px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:14px 18px;cursor:pointer;text-align:left;font-size:14px;transition:all 0.2s;font-family:var(--rdx-font)}
+.option-btn:hover{border-color:var(--rdx-teal,#0d9488);background:rgba(13,148,136,0.03)}
+.option-btn.correct{border-color:#16a34a;background:rgba(22,163,74,0.06)}
+.option-btn.incorrect{border-color:#dc2626;background:rgba(220,38,38,0.04)}
+.option-btn.disabled{pointer-events:none;opacity:0.7}
+.explanation-box{border-radius:12px;padding:16px;margin:12px 0;display:none}
+.explanation-box.correct{background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.2)}
+.explanation-box.incorrect{background:rgba(220,38,38,0.04);border:1px solid rgba(220,38,38,0.15)}
+.mechanism-box{background:linear-gradient(135deg,rgba(13,148,136,0.06),rgba(13,148,136,0.02));border:1px solid rgba(13,148,136,0.15);border-radius:12px;padding:20px;margin:16px 0}
+.mechanism-title{color:var(--rdx-teal-dark,#0f766e);font-weight:700;font-size:0.95rem;margin-bottom:10px}
+.pathway{line-height:1.8;font-size:0.93rem;color:var(--rdx-text,#1e293b)}
+.why-chain{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px;margin:8px 0}
+.why-q{font-weight:600;color:var(--rdx-purple,#7c3aed);cursor:pointer;font-size:0.9rem}.why-a{display:none;margin-top:6px;font-size:0.88rem;color:var(--rdx-text-muted,#64748b)}
+.next-btn{background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:600;cursor:pointer;margin:20px 0;display:none;font-family:var(--rdx-font)}
+.next-btn:hover{opacity:0.9;transform:translateY(-1px)}
+.completion-card{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:16px;padding:32px;text-align:center;margin:24px 0}
+.completion-card h2{font-family:var(--rdx-font-serif);color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px}
+.references-panel{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:16px;margin:20px 0}
+.references-panel a{display:block;color:var(--rdx-teal,#0d9488);font-size:13px;margin:4px 0;text-decoration:none;word-break:break-all}
+.references-panel a:hover{text-decoration:underline}
+.rdx-crossplatform-nav{background:var(--rdx-bg-card,#f8fafc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin:24px 0}
+.rdx-crossplatform-nav h4{color:var(--rdx-text-muted,#64748b);margin-bottom:12px;font-size:0.9rem}
+.rdx-crossplatform-links{display:flex;gap:12px;flex-wrap:wrap}
+.rdx-crossplatform-link{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px 16px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:all 0.2s}
+.rdx-crossplatform-link:hover{background:rgba(13,148,136,0.05);transform:translateY(-2px)}
+@media(max-width:640px){.score-tracker{top:auto;bottom:12px;right:12px}.container{padding:12px}.vital-signs{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+<div class="container">
+    <div style="margin-bottom:12px"><a href="../adventure-hub.html" style="color:var(--rdx-teal,#0d9488);text-decoration:none;font-size:14px;font-weight:600">← Back to Cases</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:var(--rdx-text-muted,#64748b);margin-bottom:8px;font-weight:600">Difficulty</div>
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div>
+    <div class="references-panel" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="toggleReferences()">
+            <span>📚 Open-Access References</span><span id="refToggle">▸</span>
+        </div>
+        <div id="referencesContent" style="display:none;margin-top:8px">
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK7232/" target="_blank" rel="noopener">Asthma Management - NAEPP Guidelines</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK539840/" target="_blank" rel="noopener">Inhaler Technique - StatPearls</a>
+        </div>
+    </div>
+    <div id="scene-container"></div>
+    <div class="rdx-crossplatform-nav">
+        <h4>🔗 Continue Learning</h4>
+        <div class="rdx-crossplatform-links">
+<a href="../modules/asthma-module.html" class="rdx-crossplatform-link">🧬 Mechanism Module</a>
+<a href="../board-prep.html" class="rdx-crossplatform-link">📝 Board Prep</a>
+<a href="../training.html" class="rdx-crossplatform-link">🏋️ Training Hub</a>
+        </div>
+    </div>
+</div>
+<script>
+let currentStage=0,score=0,difficulty='standard';
+const stages=[
+    {
+        title: "The Follow-Up Visit",
+        content: `<div class="narrative"><p>A <span class="highlight">9-year-old boy</span> with moderate persistent asthma returns for follow-up. Despite being prescribed fluticasone MDI 110 mcg twice daily, his asthma remains poorly controlled with nighttime awakenings 3×/week.</p><div class="vital-signs"><div class="vital-item"><span class="label">HR</span><span class="value">88</span></div><div class="vital-item"><span class="label">RR</span><span class="value">18</span></div><div class="vital-item"><span class="label">SpO2</span><span class="value">97%</span></div></div></div>`,
+        hint_beginner: "What are common reasons for poor asthma control despite appropriate prescriptions?",
+        hint_advanced: "Consider the difference between medication adherence and medication delivery efficiency.",
+        question: {
+            prompt: "What is the MOST likely reason for this patient's poor control?",
+            options: [{ text: "The fluticasone dose is too low", correct: false, explanation: "Dose is appropriate for moderate persistent asthma." }, { text: "Poor inhaler technique leading to inadequate drug delivery", correct: true, explanation: "" }, { text: "He needs a long-acting beta-agonist added", correct: false, explanation: "Before stepping up, always verify technique and adherence." }, { text: "Fluticasone is the wrong ICS for children", correct: false, explanation: "Fluticasone is appropriate for pediatric use." }],
+            explanation: { correct: "Correct! Studies show up to 70-90% of patients use MDIs incorrectly. Before stepping up therapy, always assess and correct inhaler technique — it's the most common cause of apparent treatment failure.", incorrect: "Poor inhaler technique is the most common and correctable cause of uncontrolled asthma. Always verify technique before escalating therapy." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Inhaler Technique Errors</div><div class="pathway"><strong>Most common MDI errors:</strong><br>1. Failure to coordinate actuation with inhalation<br>2. Inadequate breath-hold (<5 seconds)<br>3. Breathing too fast (should be slow, steady)<br>4. Not shaking MDI before use<br>5. Not using a spacer (especially in children)<br><br><strong>Impact:</strong> Up to 90% of patients demonstrate ≥1 critical error → drug deposits in oropharynx instead of lungs.</div></div>`,
+            why_chain: [{q: "Why does poor technique matter so much?", a: "Without proper coordination, only 10-20% of the dose reaches the lungs. The rest deposits in the mouth/throat, causing local side effects (thrush) without therapeutic benefit."}, {q: "At what age can children use MDIs without spacers?", a: "Most guidelines recommend spacers for all ages with MDIs. By age 5-6, children can begin coordinating, but spacers improve delivery at any age."}],
+            points: 10
+        }
+    },
+    {
+        title: "The Technique Assessment",
+        content: `<div class="narrative"><p>You ask the patient to demonstrate his inhaler technique. He shakes the MDI, brings it to his lips, presses the canister, and takes a quick breath in. He does not use a spacer and does not hold his breath afterward.</p></div>`,
+        hint_beginner: "How many errors can you identify?",
+        hint_advanced: "Think about the physics of aerosol deposition — particle size, velocity, and airway anatomy.",
+        question: {
+            prompt: "Which error has the GREATEST impact on drug delivery to the lower airways?",
+            options: [{ text: "Not shaking the MDI adequately", correct: false, explanation: "He did shake it — this is important but not the biggest error here." }, { text: "Breathing in too quickly", correct: false, explanation: "Fast inhalation is a significant error but not the most impactful single change." }, { text: "Not using a valved holding chamber (spacer)", correct: true, explanation: "" }, { text: "Not holding breath after inhalation", correct: false, explanation: "Important but secondary to getting the drug into the lungs in the first place." }],
+            explanation: { correct: "Correct! A spacer eliminates the need for coordination between actuation and inhalation, reduces oropharyngeal deposition by 80%, and increases lung deposition from ~10% to ~20%. For children, it is the single most important intervention.", incorrect: "A valved holding chamber (spacer) provides the biggest improvement in drug delivery for MDI users, especially children." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Spacer Benefits</div><div class="pathway"><strong>Spacer/VHC advantages:</strong><br>• Eliminates need for hand-breath coordination<br>• Reduces oropharyngeal deposition by ~80%<br>• Increases lung deposition from ~10% to ~20%<br>• Reduces risk of oral candidiasis with ICS<br>• Reduces systemic absorption of ICS<br><br><strong>Types:</strong> Valved holding chambers (preferred), simple tube spacers. Anti-static spacers improve delivery further.</div></div>`,
+            why_chain: [{q: "Why does fast inhalation reduce delivery?", a: "Fast airflow increases inertial impaction in the oropharynx. Slow, steady inhalation (about 3-5 seconds) allows smaller particles to travel deeper into the bronchial tree."}],
+            points: 10
+        }
+    },
+    {
+        title: "Choosing the Right Device",
+        content: `<div class="narrative"><p>The mother asks about switching to a dry powder inhaler (DPI) since her son finds the MDI frustrating. She has also heard about nebulizers.</p></div>`,
+        hint_beginner: "What are the key differences between MDI, DPI, and nebulizer delivery?",
+        hint_advanced: "Consider the inspiratory flow requirements for each device and how that relates to a 9-year-old's respiratory mechanics.",
+        question: {
+            prompt: "What is the minimum inspiratory flow rate typically required for effective DPI use?",
+            options: [{ text: "15 L/min", correct: false, explanation: "Too low — this is adequate for MDI+spacer but not most DPIs." }, { text: "30 L/min", correct: false, explanation: "Some newer DPIs work at this flow, but most require higher." }, { text: "60 L/min", correct: true, explanation: "" }, { text: "90 L/min", correct: false, explanation: "Only needed for high-resistance DPIs; standard threshold is lower." }],
+            explanation: { correct: "Correct! Most DPIs require an inspiratory flow of ≥60 L/min to adequately deaggregate the powder. Children under 6 often cannot generate sufficient flow. This 9-year-old likely can, but technique should be verified with an In-Check device.", incorrect: "DPIs require adequate inspiratory flow (typically ≥60 L/min). Always verify the patient can generate sufficient flow before switching." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Device Comparison</div><div class="pathway"><strong>MDI + Spacer:</strong> Best for young children, requires no inspiratory effort, most studied<br><strong>DPI:</strong> Breath-actuated (no coordination needed), requires ≥60 L/min flow, humidity-sensitive<br><strong>SMI (Respimat):</strong> Slow mist, good deposition, no propellant<br><strong>Nebulizer:</strong> No technique needed, time-consuming (10-15 min), useful in acute settings or very young children</div></div>`,
+            why_chain: [{q: "Can DPIs be used during acute exacerbations?", a: "Generally no — during exacerbations, patients may not generate adequate inspiratory flow. MDI+spacer or nebulizer preferred in acute settings."}],
+            points: 10
+        }
+    },
+    {
+        title: "Correcting the Technique",
+        content: `<div class="narrative"><p>You decide to keep the MDI but add a spacer and reteach technique. You demonstrate the correct steps and ask the patient to practice.</p></div>`,
+        hint_beginner: "What are the correct steps for MDI + spacer use?",
+        hint_advanced: "Consider what happens if the patient actuates more than one puff into the spacer at a time.",
+        question: {
+            prompt: "What is the correct number of puffs to actuate into the spacer at one time?",
+            options: [{ text: "One puff at a time, with full inhalation between each", correct: true, explanation: "" }, { text: "Two puffs simultaneously to save time", correct: false, explanation: "Multiple actuations into a spacer cause drug to clump and reduces delivery." }, { text: "All prescribed puffs at once, then breathe normally", correct: false, explanation: "This defeats the purpose of the spacer." }, { text: "It does not matter — the spacer holds all the medication", correct: false, explanation: "Spacer volume is limited; multiple puffs cause particle aggregation." }],
+            explanation: { correct: "Correct! Always one puff at a time into the spacer, followed by slow deep inhalation and 10-second breath hold (or tidal breathing ×4-6 breaths for young children).", incorrect: "Only actuate one puff at a time into the spacer. Multiple simultaneous puffs reduce delivery through particle aggregation." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Correct MDI + Spacer Steps</div><div class="pathway"><strong>1.</strong> Remove cap, shake MDI well (5 seconds)<br><strong>2.</strong> Insert MDI into spacer<br><strong>3.</strong> Exhale fully (away from spacer)<br><strong>4.</strong> Place mouthpiece in mouth, seal lips<br><strong>5.</strong> Actuate ONE puff<br><strong>6.</strong> Inhale slowly and deeply (3-5 seconds)<br><strong>7.</strong> Hold breath 10 seconds (or tidal breathe ×4-6)<br><strong>8.</strong> Wait 30-60 seconds before next puff<br><strong>9.</strong> Rinse mouth after ICS use</div></div>`,
+            why_chain: [{q: "Why rinse after ICS?", a: "Inhaled corticosteroids deposited in the oropharynx cause local immunosuppression → oral candidiasis (thrush) and dysphonia. Rinsing removes deposited drug."}],
+            points: 10
+        }
+    },
+    {
+        title: "The Spacer Problem",
+        content: `<div class="narrative"><p>At the 4-week follow-up, the mother reports the spacer makes a whistling sound when her son inhales. His nighttime symptoms have improved but not resolved.</p></div>`,
+        hint_beginner: "What does the whistling sound from the spacer indicate?",
+        hint_advanced: "Consider what happens to drug delivery when the flow indicator whistle activates.",
+        question: {
+            prompt: "What does the whistle sound in a valved holding chamber indicate?",
+            options: [{ text: "The spacer is broken and needs replacement", correct: false, explanation: "The whistle is a built-in feature, not a defect." }, { text: "The patient is inhaling too fast — the whistle is a flow indicator", correct: true, explanation: "" }, { text: "The valve is stuck and the medication cannot exit", correct: false, explanation: "A stuck valve would prevent any inhalation, not produce a whistle." }, { text: "The medication has expired", correct: false, explanation: "Medication status has no effect on spacer sounds." }],
+            explanation: { correct: "Correct! Many VHCs have built-in flow indicators that whistle when inspiratory flow exceeds the optimal range. The whistle means the patient is breathing too fast, increasing oropharyngeal impaction and reducing lung deposition.", incorrect: "The spacer whistle is a flow feedback tool — it means the patient is inhaling too fast and should slow down to optimize drug delivery." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Spacer Troubleshooting</div><div class="pathway"><strong>Whistle = too fast:</strong> Coach slower inhalation until no whistle<br><strong>Valve stuck:</strong> Wash with warm soapy water, air dry (do NOT towel dry — static charge attracts drug particles)<br><strong>Static charge:</strong> New plastic spacers accumulate static → prime by washing with dilute detergent, air dry before first use<br><strong>Replace:</strong> Every 6-12 months or if cracked</div></div>`,
+            why_chain: [{q: "Why does static matter?", a: "Electrostatic charge on plastic spacer walls attracts aerosolized drug particles, reducing the dose available for inhalation by up to 50%. Washing with detergent dissipates static."}],
+            points: 10
+        }
+    },
+    {
+        title: "Reassessment and Step Therapy",
+        content: `<div class="narrative"><p>After correcting technique (slow inhalation, no whistle), you reassess in 4 more weeks. Nighttime symptoms now only 1×/month. Daytime symptoms well controlled. FEV1 improved from 78% to 92% predicted.</p></div>`,
+        hint_beginner: "When is it appropriate to consider stepping down therapy?",
+        hint_advanced: "What is the minimum duration of well-controlled asthma before step-down is recommended?",
+        question: {
+            prompt: "When should you consider stepping down this patient's therapy?",
+            options: [{ text: "Immediately — symptoms are well controlled", correct: false, explanation: "Need at least 3 months of sustained control before step-down." }, { text: "After 3 months of well-controlled asthma, attempt step-down", correct: true, explanation: "" }, { text: "Never step down once control is achieved", correct: false, explanation: "Overtreatment carries risks; step-down should always be attempted." }, { text: "Switch directly to PRN albuterol only", correct: false, explanation: "Skipping steps risks loss of control; step down gradually." }],
+            explanation: { correct: "Correct! NAEPP/GINA guidelines recommend maintaining well-controlled asthma for at least 3 months before attempting step-down. Step down gradually (e.g., reduce ICS dose by 25-50%), monitor for 4-6 weeks at each step.", incorrect: "Step-down should be attempted after ≥3 months of well-controlled asthma. Step down gradually and monitor at each level." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Step-Down Principles</div><div class="pathway"><strong>When:</strong> ≥3 months well-controlled asthma<br><strong>How:</strong> Reduce ICS dose by 25-50% OR remove add-on therapy<br><strong>Monitor:</strong> 4-6 weeks at each step-down level<br><strong>Step back up:</strong> If control worsens, return to previous step<br><strong>Goal:</strong> Find minimum effective therapy that maintains control<br><br><strong>Key principle:</strong> Technique correction alone may provide the equivalent of stepping up therapy — always check before adding medications.</div></div>`,
+            why_chain: [{q: "What's the risk of never stepping down?", a: "Chronic unnecessary ICS exposure in children risks growth suppression (average 0.5-1 cm reduction in final adult height with medium-dose ICS), adrenal suppression, and decreased bone density."}],
+            points: 10
+        }
+    }
+];
+document.getElementById('maxScore').textContent=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);
+function setDifficulty(d,btn){difficulty=d;document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const hb=document.querySelector('.hint-box');if(hb)hb.style.display=d==='beginner'?'block':'none'}
+function toggleReferences(){const c=document.getElementById('referencesContent');const t=document.getElementById('refToggle');if(c.style.display==='none'){c.style.display='block';t.textContent='▾'}else{c.style.display='none';t.textContent='▸'}}
+function renderStage(idx){if(idx>=stages.length){showCompletion();return}const st=stages[idx];const pct=((idx)/stages.length*100);document.getElementById('progress').style.width=pct+'%';let h='<h2 class="scene-title">'+st.title+'</h2>';h+='<div class="scene-content">'+st.content+'</div>';if(st.hint_beginner)h+='<div class="hint-box" id="hint-box"'+(difficulty==='beginner'?' style="display:block"':'')+'>💡 '+st.hint_beginner+'</div>';if(difficulty==='advanced'&&st.hint_advanced)h+='<div class="hint-box" style="display:block;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.15);color:#5b21b6">🎓 '+st.hint_advanced+'</div>';if(st.question){h+='<div class="socratic-prompt"><h4>Clinical Question</h4><p>'+st.question.prompt+'</p></div>';h+='<div class="options-grid" id="options-'+idx+'">';st.question.options.forEach((opt,oi)=>{h+='<button class="option-btn" id="option-'+idx+'-'+oi+'" onclick="checkAnswer('+idx+','+oi+')">'+String.fromCharCode(65+oi)+'. '+opt.text+'</button>'});h+='</div>';h+='<div class="explanation-box" id="explain-'+idx+'"></div>';h+='<div id="teaching-'+idx+'" style="display:none">'+st.question.teaching+'</div>';if(st.question.why_chain&&st.question.why_chain.length>0){h+='<div id="why-'+idx+'" style="display:none">';st.question.why_chain.forEach((wc,wi)=>{h+='<div class="why-chain"><div class="why-q" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'none\'?\'block\':\'none\'">🔍 '+wc.q+'</div><div class="why-a">'+wc.a+'</div></div>'});h+='</div>'}}h+='<button class="next-btn" id="next-'+idx+'" onclick="nextStage()">Continue →</button>';document.getElementById('scene-container').innerHTML=h}
+function checkAnswer(si,oi){const st=stages[si];const opt=st.question.options[oi];document.querySelectorAll('#options-'+si+' .option-btn').forEach((b,i)=>{b.classList.add('disabled');if(st.question.options[i].correct)b.classList.add('correct');if(i===oi&&!opt.correct)b.classList.add('incorrect')});const eb=document.getElementById('explain-'+si);if(opt.correct){score+=st.question.points;document.getElementById('score').textContent=score;eb.className='explanation-box correct';eb.innerHTML='<strong>✓ Correct!</strong> '+st.question.explanation.correct}else{eb.className='explanation-box incorrect';eb.innerHTML='<strong>✗ Not quite.</strong> '+st.question.explanation.incorrect}eb.style.display='block';document.getElementById('teaching-'+si).style.display='block';const why=document.getElementById('why-'+si);if(why)why.style.display='block';document.getElementById('next-'+si).style.display='inline-block'}
+function nextStage(){currentStage++;renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'})}
+function showCompletion(){const mx=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);const pct=mx>0?Math.round(score/mx*100):0;document.getElementById('progress').style.width='100%';let lvl='Developing';if(pct>=90)lvl='Mastery';else if(pct>=70)lvl='Proficient';else if(pct>=50)lvl='Competent';document.getElementById('scene-container').innerHTML='<div class="completion-card"><h2>🎉 Case Complete!</h2><p style="font-size:2rem;font-weight:700;color:var(--rdx-teal,#0d9488)">'+pct+'%</p><p style="color:var(--rdx-text-muted,#64748b)">Score: '+score+'/'+mx+'</p><p style="margin:12px 0;font-weight:600">Level: '+lvl+'</p><div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="../adventure-hub.html" style="padding:10px 20px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">More Cases</a><a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:var(--rdx-purple,#7c3aed);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">📊 Dashboard</a><button onclick="currentStage=0;score=0;document.getElementById(\'score\').textContent=0;renderStage(0)" style="padding:10px 20px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;cursor:pointer;font-weight:600">🔄 Retry</button></div></div>';try{const progress=JSON.parse(localStorage.getItem('reasondx-progress')||'{}');if(!progress.cases)progress.cases={};progress.cases['inhaler-spacer']=Math.max(progress.cases['inhaler-spacer']||0,pct);localStorage.setItem('reasondx-progress',JSON.stringify(progress))}catch(e){}}
+renderStage(0);
+</script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

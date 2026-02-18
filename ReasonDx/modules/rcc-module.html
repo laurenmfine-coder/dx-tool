@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Renal Cell Carcinoma. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>ReasonDx: Renal Cell Carcinoma</title>
+  <style>
+    :root { --primary: #8B5CF6; --secondary: #EC4899; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info: #14b8a6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0f766e 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #9CA3AF; }
+    .module-section { background:var(--rdx-bg-card); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem; }
+    .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left:4px solid var(--rdx-teal); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59,130,246,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .pathway-box { background: #f1f5f9; border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; }
+    .subtype-card { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); padding: 1rem; border-radius: 0.5rem; margin: 0.5rem 0; }
+    .subtype-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background:var(--rdx-bg-card); border-radius: 0.5rem; }
+  </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/rcc.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Renal Cell Carcinoma</a> → Module</div>
+
+  <div class="container">
+    <header>
+      <h1>🫘 Renal Cell Carcinoma</h1>
+      <p class="subtitle">The "Internist's Tumor" - Classic Triad & Paraneoplastic Syndromes</p>
+    </header>
+
+    <section class="module-section">
+      <h2>📚 Overview</h2>
+      <div class="key-concept">
+        <strong>Renal Cell Carcinoma (RCC)</strong> is the most common primary malignancy of the kidney in adults, arising from the <strong>renal tubular epithelium</strong>. It's known as the "internist's tumor" due to its diverse paraneoplastic manifestations.
+      </div>
+      <h3>Epidemiology</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Rank</td><td>~3% of adult malignancies; 6th most common</td></tr>
+        <tr><td>Male:Female</td><td>2:1</td></tr>
+        <tr><td>Peak age</td><td>60-70 years</td></tr>
+        <tr><td>Incidental detection</td><td>>50% now found incidentally on imaging</td></tr>
+        <tr><td>5-year survival (localized)</td><td>~93%</td></tr>
+        <tr><td>5-year survival (metastatic)</td><td>~12%</td></tr>
+      </table>
+
+      <h3>Risk Factors</h3>
+      <ul>
+        <li><strong>Smoking</strong> (2x risk)</li>
+        <li><strong>Obesity</strong></li>
+        <li><strong>Hypertension</strong></li>
+        <li><strong>Chronic kidney disease/dialysis</strong></li>
+        <li><strong>Acquired cystic kidney disease</strong></li>
+        <li><strong>Family history</strong></li>
+        <li><strong>Genetic syndromes</strong> (VHL, hereditary papillary RCC)</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>🧬 Genetics & Subtypes</h2>
+      
+      <div class="subtype-card">
+        <h4>Clear Cell RCC (70-80%)</h4>
+        <ul>
+          <li>Most common subtype</li>
+          <li><strong>VHL gene</strong> inactivation (chromosome 3p)</li>
+          <li>Clear cytoplasm (lipid/glycogen)</li>
+          <li>Highly vascular</li>
+          <li>Responds to targeted therapy (TKIs, immunotherapy)</li>
+        </ul>
+      </div>
+
+      <div class="subtype-card">
+        <h4>Papillary RCC (10-15%)</h4>
+        <ul>
+          <li>Type 1: MET mutations; better prognosis</li>
+          <li>Type 2: More aggressive</li>
+          <li>Papillary architecture</li>
+          <li>Less vascular than clear cell</li>
+        </ul>
+      </div>
+
+      <div class="subtype-card">
+        <h4>Chromophobe RCC (5%)</h4>
+        <ul>
+          <li>Birt-Hogg-Dubé syndrome association</li>
+          <li>Best prognosis of main subtypes</li>
+          <li>Large cells with pale cytoplasm</li>
+        </ul>
+      </div>
+
+      <div class="subtype-card">
+        <h4>Collecting Duct (Bellini Duct) Carcinoma (<1%)</h4>
+        <ul>
+          <li>Very aggressive</li>
+          <li>Poor prognosis</li>
+          <li>Central/medullary location</li>
+        </ul>
+      </div>
+
+      <h3>Hereditary RCC Syndromes</h3>
+      <table>
+        <tr><th>Syndrome</th><th>Gene</th><th>Features</th></tr>
+        <tr><td><strong>Von Hippel-Lindau</strong></td><td>VHL (3p25)</td><td>Clear cell RCC, hemangioblastomas (CNS/retina), pheochromocytoma, pancreatic cysts</td></tr>
+        <tr><td><strong>Hereditary Papillary RCC</strong></td><td>MET (7q31)</td><td>Bilateral, multifocal papillary RCC</td></tr>
+        <tr><td><strong>Birt-Hogg-Dubé</strong></td><td>FLCN</td><td>Chromophobe/oncocytic RCC, fibrofolliculomas, lung cysts, pneumothorax</td></tr>
+        <tr><td><strong>Hereditary Leiomyomatosis</strong></td><td>FH</td><td>Aggressive papillary type 2 RCC, cutaneous/uterine leiomyomas</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>🔍 Clinical Presentation</h2>
+      <h3>Classic Triad (Now Uncommon)</h3>
+      <div class="clinical-pearl">
+        <strong>Classic Triad</strong> (seen in only 10% of patients):
+        <ol>
+          <li><strong>Hematuria</strong> (gross or microscopic)</li>
+          <li><strong>Flank pain</strong></li>
+          <li><strong>Palpable abdominal mass</strong></li>
+        </ol>
+        This triad usually indicates advanced disease.
+      </div>
+
+      <h3>Modern Presentation</h3>
+      <ul>
+        <li><strong>>50% incidental</strong> - found on imaging for other reasons</li>
+        <li>Constitutional symptoms (fever, weight loss, fatigue)</li>
+        <li>Paraneoplastic syndromes</li>
+        <li>Metastatic disease symptoms (bone pain, dyspnea)</li>
+      </ul>
+
+      <h3>Paraneoplastic Syndromes</h3>
+      <div class="danger-box">
+        <strong>RCC = "The Internist's Tumor"</strong> - Paraneoplastic syndromes in up to 40%!
+      </div>
+      <table>
+        <tr><th>Syndrome</th><th>Mechanism</th><th>Features</th></tr>
+        <tr><td><strong>Hypercalcemia</strong></td><td>PTHrP secretion</td><td>Most common; polyuria, confusion</td></tr>
+        <tr><td><strong>Erythrocytosis</strong></td><td>EPO production</td><td>↑ Hematocrit (not polycythemia vera)</td></tr>
+        <tr><td><strong>Hypertension</strong></td><td>Renin secretion</td><td>Secondary hypertension</td></tr>
+        <tr><td><strong>Stauffer syndrome</strong></td><td>Unknown (cytokines?)</td><td>Hepatic dysfunction without liver mets; resolves with nephrectomy</td></tr>
+        <tr><td><strong>Anemia</strong></td><td>Chronic disease</td><td>More common than erythrocytosis</td></tr>
+        <tr><td><strong>Fever</strong></td><td>Cytokine release</td><td>May be only symptom</td></tr>
+      </table>
+
+      <h3>Varicocele</h3>
+      <div class="clinical-pearl">
+        <strong>New LEFT varicocele in an older male</strong> should raise concern for RCC with renal vein involvement blocking the left gonadal vein. Right varicocele is concerning for IVC involvement.
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2>📷 Diagnosis & Staging</h2>
+      <h3>Imaging</h3>
+      <table>
+        <tr><th>Study</th><th>Role</th></tr>
+        <tr><td><strong>CT abdomen/pelvis with contrast</strong></td><td>Primary staging; renal mass characterization</td></tr>
+        <tr><td><strong>MRI</strong></td><td>IVC thrombus evaluation; contrast allergy</td></tr>
+        <tr><td><strong>Chest CT</strong></td><td>Pulmonary metastases</td></tr>
+        <tr><td><strong>Bone scan</strong></td><td>If symptomatic or elevated alk phos</td></tr>
+        <tr><td><strong>Brain MRI</strong></td><td>If neurologic symptoms</td></tr>
+      </table>
+
+      <h3>Bosniak Classification (Renal Cysts)</h3>
+      <table>
+        <tr><th>Category</th><th>Features</th><th>Malignancy Risk</th></tr>
+        <tr><td>I</td><td>Simple cyst; thin wall, no septa</td><td>0%</td></tr>
+        <tr><td>II</td><td>Few thin septa, fine calcifications</td><td>0%</td></tr>
+        <tr><td>IIF</td><td>More septa, minimal enhancement</td><td>5%</td></tr>
+        <tr><td>III</td><td>Thick septa, measurable enhancement</td><td>50%</td></tr>
+        <tr><td>IV</td><td>Solid enhancing component</td><td>90%</td></tr>
+      </table>
+
+      <h3>TNM Staging (Simplified)</h3>
+      <table>
+        <tr><th>Stage</th><th>Description</th></tr>
+        <tr><td>T1a</td><td>≤4 cm, limited to kidney</td></tr>
+        <tr><td>T1b</td><td>>4-7 cm, limited to kidney</td></tr>
+        <tr><td>T2</td><td>>7 cm, limited to kidney</td></tr>
+        <tr><td>T3a</td><td>Invades perinephric fat or renal vein</td></tr>
+        <tr><td>T3b</td><td>IVC below diaphragm</td></tr>
+        <tr><td>T3c</td><td>IVC above diaphragm or invades IVC wall</td></tr>
+        <tr><td>T4</td><td>Beyond Gerota's fascia or into adrenal</td></tr>
+      </table>
+    </section>
+
+    <section class="module-section">
+      <h2>💊 Treatment</h2>
+      <h3>Localized Disease</h3>
+      <div class="pathway-box">LOCALIZED RCC (T1-T3, N0, M0)
+        ↓
+┌─────────────────────────────────────────────────┐
+│ T1a (≤4 cm)        │ T1b-T3               │
+│ Options:           │ RADICAL NEPHRECTOMY  │
+│ • Partial Nx       │ (or Partial if       │
+│ • Active surveil.  │ technically feasible)│
+│   (small, elderly) │                      │
+└─────────────────────────────────────────────────┘
+
+Partial (nephron-sparing) preferred when feasible
+Preserves renal function, equivalent oncologic outcomes for small tumors</div>
+
+      <h3>Metastatic Disease</h3>
+      <div class="info-box">
+        <strong>Systemic Therapy for Metastatic RCC:</strong>
+        <ul>
+          <li><strong>Immunotherapy:</strong> Checkpoint inhibitors (nivolumab, ipilimumab, pembrolizumab)</li>
+          <li><strong>TKIs:</strong> Sunitinib, pazopanib, cabozantinib, axitinib</li>
+          <li><strong>mTOR inhibitors:</strong> Temsirolimus, everolimus</li>
+          <li><strong>Combination therapy:</strong> Now standard first-line (IO/IO or IO/TKI)</li>
+        </ul>
+        RCC is generally resistant to conventional chemotherapy and radiation.
+      </div>
+
+      <h3>Cytoreductive Nephrectomy</h3>
+      <ul>
+        <li>Removing primary tumor even with metastases</li>
+        <li>May improve response to systemic therapy</li>
+        <li>Reduces tumor burden</li>
+        <li>Patient selection important (good performance status)</li>
+      </ul>
+    </section>
+
+    <section class="module-section">
+      <h2>📋 Key Clinical Pearls</h2>
+      <div class="success-box">
+        <strong>High-Yield Points:</strong>
+        <ul>
+          <li>Most RCC now found incidentally on imaging</li>
+          <li>Clear cell (70-80%) is most common; VHL pathway</li>
+          <li>Paraneoplastic syndromes in up to 40%</li>
+          <li>New varicocele in older man → suspect RCC</li>
+          <li>Partial nephrectomy preferred for small tumors</li>
+          <li>Immunotherapy + TKIs are mainstay for metastatic disease</li>
+          <li>Can metastasize to unusual sites (skin, thyroid)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>🧠 Quick Quiz</h3>
+      <p><strong>A 55-year-old man presents with hematuria and is found to have elevated calcium. CT shows a 6 cm renal mass. The hypercalcemia is most likely due to:</strong></p>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">A. Bone metastases</div>
+      <div class="quiz-option" onclick="checkAnswer(this, true)">B. PTHrP secretion by the tumor</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">C. Primary hyperparathyroidism</div>
+      <div class="quiz-option" onclick="checkAnswer(this, false)">D. Vitamin D excess</div>
+      <div class="explanation" id="explanation1"><strong>Correct: B - PTHrP secretion</strong><br>Hypercalcemia is the most common paraneoplastic syndrome in RCC, caused by tumor secretion of PTHrP (parathyroid hormone-related peptide). This is humoral hypercalcemia of malignancy, not bone metastases.</div>
+    </section>
+
+    <section class="module-section" style="margin-top:2rem;">
+      <h2>📚 References</h2>
+      <ul style="font-size:0.9rem;">
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK470336/" target="_blank" style="color:var(--primary);">StatPearls: Renal Cell Carcinoma</a></li>
+        <li><a href="https://www.auanet.org/guidelines-and-quality/guidelines/renal-cancer-guideline" target="_blank" style="color:var(--primary);">AUA Renal Mass Guidelines</a></li>
+      </ul>
+    </section>
+  
+    <section class="module-section references-section" style="margin-top:2rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">📚 Open-Access References</h2>
+      <ul style="font-size:0.95rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/books/NBK470336/" target="_blank" rel="noopener" style="color: #0f766e; text-decoration: none; border-bottom: 1px dotted #5eead4;">StatPearls: Renal Cell Carcinoma</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.auanet.org/guidelines-and-quality/guidelines/renal-cancer-guideline" target="_blank" rel="noopener" style="color: #0f766e; text-decoration: none; border-bottom: 1px dotted #5eead4;">AUA Guideline: Renal Mass and Localized RCC</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://radiopaedia.org/articles/renal-cell-carcinoma" target="_blank" rel="noopener" style="color: #0f766e; text-decoration: none; border-bottom: 1px dotted #5eead4;">Radiopaedia: Renal Cell Carcinoma</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6027648/" target="_blank" rel="noopener" style="color: #0f766e; text-decoration: none; border-bottom: 1px dotted #5eead4;">NCBI PMC: VHL and RCC</a>
+        </li>
+        <li style="margin: 0.75rem 0; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">📖</span>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5753428/" target="_blank" rel="noopener" style="color: #0f766e; text-decoration: none; border-bottom: 1px dotted #5eead4;">NCBI PMC: Paraneoplastic Syndromes in RCC</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="module-section crosslinks-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Learning Modules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="rcc-crt.html" style="display: block; padding: 1rem; background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 0.5rem; color: #fcd34d; text-decoration: none; text-align: center;">
+          <strong>🎯 Clinical Case</strong><br><span style="font-size: 0.85rem; color: #fde68a;">Practice reasoning</span>
+        </a>
+        <a href="#" style="display: block; padding: 1rem; background:var(--rdx-info-bg); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.5rem; color: #c4b5fd; text-decoration: none; text-align: center;">
+          <strong>📊 Deep Dive</strong><br><span style="font-size: 0.85rem; color: #ddd6fe;">Complete reference</span>
+        </a>
+      </div>
+      <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1.5rem; margin-bottom: 0.75rem;">Related Topics</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="wilms-tumor-module.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Wilms Tumor (pediatric renal)</a>
+        <a href="hematuria-crt.html" style="display: inline-block; padding: 0.5rem 1rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 2rem; color: #a5f3fc; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Hematuria Workup</a>
+      </div>
+    </section>
+  </div>
+  <script>
+    function checkAnswer(el, correct) {
+      document.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct','incorrect'); opt.style.pointerEvents='none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) document.querySelectorAll('.quiz-option').forEach(opt => { if(opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('explanation1').style.display = 'block';
+    }
+  </script>
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Renal Cell Carcinoma"
+         data-key-points="📚 Overview, 🧬 Genetics & Subtypes, 🔍 Clinical Presentation, 📷 Diagnosis & Staging, 💊 Treatment, 📋 Key Clinical Pearls, 📚 References, 📚 Open-Access References, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">What is the classic triad of renal cell carcinoma, though seen in only ~10% of patients at presentation?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="These are B-symptoms of lymphoma, not the classic RCC triad." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Fever, weight loss, night sweats</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Classic RCC triad: hematuria + flank pain + palpable mass. Only ~10% present with all three (often late-stage). Most RCCs today are found incidentally on cross-sectional imaging. RCC is the &#x27;internist&#x27;s tumor&#x27; due to diverse paraneoplastic syndromes." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Hematuria, flank pain, palpable abdominal mass</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes cystitis or lower urinary tract infection, not RCC." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Dysuria, urgency, suprapubic pain</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes nephritic syndrome, not renal cell carcinoma." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Oliguria, edema, hypertension</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the MOST common histologic subtype of RCC?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Clear cell RCC: 70-80% of all RCC. Associated with VHL gene inactivation (chromosome 3p). Clear cytoplasm on histology from lipid/glycogen accumulation. Most responsive to targeted therapy (anti-VEGF, mTOR inhibitors) and immunotherapy (checkpoint inhibitors)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Clear cell (conventional) RCC</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Papillary RCC is the second most common subtype (10-15%). Type 1 and Type 2 variants. Associated with MET and fumarate hydratase mutations." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Papillary RCC</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chromophobe: ~5% of RCC. Generally better prognosis than clear cell. Associated with Birt-Hogg-Dubé syndrome." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Chromophobe RCC</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Collecting duct (Bellini duct) carcinoma is rare (&lt;1%) and aggressive, with poor prognosis." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Collecting duct carcinoma</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which paraneoplastic syndrome is MOST commonly associated with RCC?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="SIADH is most commonly associated with small cell lung cancer, not RCC." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Syndrome of inappropriate ADH (SIADH)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="RCC produces EPO → erythrocytosis (3-10% of cases). Other paraneoplastic features: hypercalcemia (PTHrP), hypertension (renin), Stauffer syndrome (hepatic dysfunction without liver mets), amyloidosis. RCC is called the &#x27;great mimicker.&#x27;" onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Erythrocytosis (from ectopic EPO production)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Ectopic ACTH is more commonly from small cell lung cancer or carcinoid tumors, not RCC." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Cushing syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="MG is associated with thymoma, not renal cell carcinoma." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Myasthenia gravis</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">A 4 cm renal mass is found incidentally on CT. What is the MOST appropriate surgical management?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Radical nephrectomy (entire kidney) is generally reserved for larger tumors (&gt;7 cm, T2+) or unfavorable anatomy. For a small mass, nephron-sparing surgery is preferred." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Radical nephrectomy</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Partial nephrectomy is standard for T1a tumors (≤4 cm) and increasingly for T1b (4-7 cm) when technically feasible. Equivalent oncologic outcomes to radical nephrectomy with better long-term renal function preservation. Can be performed robotically." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Partial nephrectomy (nephron-sparing surgery)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="RCC is notoriously chemoresistant. Primary treatment is surgical. Biopsy may be considered for small masses in select cases but is not required before surgery for most enhancing renal masses." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Percutaneous biopsy followed by chemotherapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="RCC is generally radioresistant. Surgery is the primary treatment for localized disease." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Radiation therapy alone</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which genetic syndrome is MOST strongly associated with bilateral/multifocal clear cell RCC in young adults?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Li-Fraumeni predisposes to sarcomas, breast cancer, brain tumors, and adrenocortical carcinoma — not specifically RCC." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Li-Fraumeni syndrome (TP53)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="VHL: autosomal dominant, chromosome 3p25. Clear cell RCC (bilateral, multifocal), hemangioblastomas (CNS, retina), pheochromocytoma, pancreatic cysts/NETs. VHL protein normally targets HIF for degradation → loss leads to VEGF overproduction → tumor angiogenesis." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Von Hippel-Lindau disease (VHL)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="TSC is associated with angiomyolipomas (benign renal tumors) and rarely RCC. VHL is the primary RCC-associated syndrome." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Tuberous sclerosis (TSC)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="FAP predisposes to colorectal cancer, not renal cell carcinoma." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Familial adenomatous polyposis (APC)</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">What first-line systemic therapy is used for metastatic clear cell RCC?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="RCC is resistant to conventional cytotoxic chemotherapy. Targeted therapy and immunotherapy are the standard." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Cisplatin-based chemotherapy</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Metastatic ccRCC first-line: checkpoint inhibitor combinations (ipi/nivo for intermediate/poor risk) or TKI + IO (cabozantinib + nivolumab, pembrolizumab + axitinib). VHL-driven VEGF pathway makes RCC highly responsive to anti-angiogenic TKIs and immunotherapy." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Immune checkpoint inhibitor combination (e.g., ipilimumab + nivolumab) or TKI + immunotherapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hormonal therapy has no established role in RCC treatment." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hormonal therapy (tamoxifen)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="RCC is radioresistant. Radiation may be used palliatively for bone/brain metastases but is not a systemic treatment." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Whole-kidney radiation</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A patient with RCC has a tumor thrombus extending into the inferior vena cava. What does this indicate about staging?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="T1 tumors are ≤7 cm and confined to the kidney without vascular invasion." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Stage T1 — confined to kidney</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="T3a: invades renal vein or perinephric fat. T3b: extends into IVC below diaphragm. T3c: extends into IVC above diaphragm or invades IVC wall. Despite seeming advanced, IVC tumor thrombus is still potentially curable with surgical thrombectomy + radical nephrectomy." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Stage T3 — extends into major veins or perinephric tissue</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="T4 invades beyond Gerota&#x27;s fascia or into the ipsilateral adrenal gland. IVC extension alone is T3." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Stage T4 — invades beyond Gerota's fascia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Venous extension (T3) is local/regional, not distant metastatic disease (M1). These patients can still be cured surgically." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Automatically stage IV (metastatic)</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Stauffer syndrome in RCC refers to which laboratory finding?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Stauffer syndrome: nonmetastatic hepatic dysfunction in RCC — elevated ALP, transaminases, prolonged PT, hepatosplenomegaly. Paraneoplastic mechanism (IL-6 mediated). Resolves after nephrectomy. Recurrence suggests tumor recurrence. Do NOT assume liver metastases based on LFT elevation alone." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Elevated liver enzymes without hepatic metastases</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="RCC more commonly causes hypercalcemia (PTHrP), not hypocalcemia." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Severe hypocalcemia from bone metastases</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bone marrow infiltration is not characteristic of Stauffer syndrome." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Pancytopenia from bone marrow infiltration</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Stauffer syndrome specifically involves hepatic dysfunction, not pancreatic abnormalities." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Elevated serum amylase from pancreatic involvement</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../deep-dive-player.html?module=rcc-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/rcc-crt.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

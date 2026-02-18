@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: Cellulitis vs Necrotizing Fasciitis. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Cellulitis vs Necrotizing Fasciitis - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #042f2e 0%, #0f766e 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid #e2e8f0; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: #fca5a5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fee2e2; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #dc2626; line-height: 1.7; }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .safe { color: var(--rdx-teal-light,#ccfbf1); font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(220,38,38,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
+        .question-box { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(220,38,38,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fee2e2; margin-bottom: 16px; line-height: 1.5; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; flex-shrink: 0; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; font-size: 1.05rem; }
+        .feedback.correct-feedback .feedback-title { color: var(--rdx-teal-light,#ccfbf1); }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color:var(--rdx-text); }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 0.9rem; }
+        .teaching-point td, .teaching-point th { padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+        .teaching-point th { color: #fca5a5; font-size: 0.85rem; text-transform: uppercase; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; animation: fadeIn 0.3s ease; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #0f766e; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(220,38,38,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background:linear-gradient(135deg,#0f766e,#0d9488); color: white; border: none; padding: 14px 28px; border-radius:12px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #dc2626, #fca5a5); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #dc2626; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; font-size: 0.95rem; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal-light,#ccfbf1); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: #fca5a5; }
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div class="diff-label">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK549770/" target="_blank" rel="noopener">Cellulitis - StatPearls (StatPearls)</a>
+<a href="https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/" target="_blank" rel="noopener">IDSA Skin Infection Guidelines (IDSA)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
+
+const stages = [
+    {
+        title: "The Red Leg",
+        content: `<div class="narrative"><p>A <span class="highlight">58-year-old diabetic man</span> presents with <span class="critical">rapidly progressive leg pain, swelling, and erythema</span> over 2 days. He cut his leg while gardening.</p><p style="margin-top:12px;">He appears toxic - confused and febrile.</p></div>
+        <div class="socratic-prompt"><h4>Before Seeing Vitals</h4><p>This patient has a red, swollen leg. What SINGLE clinical feature, if present, would make you most concerned this is necrotizing fasciitis rather than simple cellulitis?</p></div>`,
+        hint_beginner: "Think about what distinguishes superficial infection from deep tissue destruction...",
+        hint_advanced: "Consider why nec fasc causes severe pain early but may cause numbness later.",
+        question: {
+            prompt: "Which clinical feature is MOST specific for necrotizing fasciitis over cellulitis?",
+            options: [
+                { text: "Pain out of proportion to skin findings - severe deep pain despite mild-appearing erythema", correct: true },
+                { text: "Fever and elevated white blood cell count", correct: false },
+                { text: "Red, warm, swollen skin", correct: false },
+                { text: "History of diabetes mellitus", correct: false }
+            ],
+            explanation: {
+                correct: "Excellent! PAIN OUT OF PROPORTION is the most important early clue! In nec fasc, the deep fascia is necrotic while skin may look deceptively benign. The severe deep tissue destruction causes intense pain that seems 'too much' for what you see on the surface. Later, when cutaneous nerves are destroyed, paradoxical ANESTHESIA develops - an even worse prognostic sign.",
+                incorrect: "While these can occur in nec fasc, they're not specific. PAIN OUT OF PROPORTION is the key early clue - severe deep pain despite relatively mild-appearing skin. This occurs because deep fascia is necrotic while skin initially looks okay."
+            },
+            teaching: `<h4>Hard Signs vs Soft Signs of Nec Fasc</h4><table class="comparison-table"><tr><th>Hard Signs (OR NOW!)</th><th>Soft Signs (High Suspicion)</th></tr><tr><td>Crepitus (gas in tissue)</td><td><strong>Pain out of proportion</strong></td></tr><tr><td>Skin necrosis/bullae</td><td>Edema beyond erythema</td></tr><tr><td>Gas on imaging</td><td>Tense woody swelling</td></tr><tr><td>Gray "dishwater" drainage</td><td>Rapid progression despite antibiotics</td></tr><tr><td>Hemodynamic instability</td><td>High fever, tachycardia</td></tr></table>`,
+            why_chain: [{q: "Why does pain out of proportion occur?", a: "Deep fascial necrosis destroys tissue below the skin while the epidermis/dermis remain relatively intact early on. The massive tissue destruction causes severe pain, but the skin 'looks okay' - creating a dangerous mismatch."}, {q: "Why does numbness develop later?", a: "As infection spreads, cutaneous nerves are destroyed. Paradoxically, the patient may report LESS pain as the disease worsens - this is an ominous sign of extensive necrosis."}],
+            points: 15
+        }
+    },
+    {
+        title: "Risk Stratification",
+        content: `<div class="narrative"><p>Now you examine the patient:</p><ul style="margin-top:12px;"><li><strong>Vitals:</strong> HR 118, BP 92/58, T 102.8°F (39.3°C), RR 24</li><li><strong>Leg exam:</strong> Dusky erythema, tense edema, <span class="critical">crepitus palpable</span></li><li><strong>Labs:</strong> WBC 24,000, Cr 2.1, Glucose 380, Na 131</li></ul></div>
+        <div class="socratic-prompt"><h4>Critical Decision Point</h4><p>You feel CREPITUS (crackling under the skin). What does this physical finding represent, and what is your IMMEDIATE next step?</p></div>`,
+        hint_beginner: "Crepitus = gas in the tissues. Where does gas in soft tissue come from?",
+        hint_advanced: "Think about which organisms produce gas and the implications for time to OR.",
+        question: {
+            prompt: "Crepitus is palpated. What is the IMMEDIATE next action?",
+            options: [
+                { text: "Emergent surgical consultation - this is a hard sign requiring immediate debridement", correct: true },
+                { text: "Order CT scan to confirm gas before calling surgery", correct: false },
+                { text: "Start broad-spectrum antibiotics and observe for 6 hours", correct: false },
+                { text: "Calculate LRINEC score to determine if surgery is needed", correct: false }
+            ],
+            explanation: {
+                correct: "YES! Crepitus is a HARD SIGN - it indicates gas-producing organisms in tissue and mandates IMMEDIATE surgical consultation. Don't delay for imaging or scoring systems. Mortality increases 7-9% per HOUR of delayed surgery. 'When in doubt, cut it out.'",
+                incorrect: "CREPITUS IS A HARD SIGN - surgery cannot wait! Each hour of delay increases mortality 7-9%. Imaging, scoring systems, and observation periods waste critical time. Call surgery IMMEDIATELY."
+            },
+            teaching: `<h4>The Time Factor in Necrotizing Fasciitis</h4><ul><li><strong>Mortality with early surgery (&lt;12h):</strong> ~20%</li><li><strong>Mortality with delayed surgery (&gt;24h):</strong> >50%</li><li><strong>Each hour of delay:</strong> 7-9% increased mortality</li></ul><div class="mechanism-box"><div class="mechanism-title">🧬 Gas in Tissue = Anaerobic Infection</div><div class="pathway">Gas-producing organisms:
+→ Clostridium species (most virulent)
+→ Mixed anaerobic/aerobic (Type I)
+→ Group A Strep (Type II) can also produce gas
+
+Crepitus = surgical emergency
+Do NOT delay for imaging!</div></div>`,
+            why_chain: [{q: "Why is delay so deadly?", a: "Nec fasc spreads along fascial planes at 1 inch/hour. The infection outpaces the immune system and antibiotics cannot penetrate necrotic tissue. Only surgical removal of dead tissue can control the infection."}, {q: "Why not wait for CT confirmation?", a: "Clinical crepitus IS the diagnosis. CT may miss early gas, and the hour spent getting imaging could mean the difference between amputation and death."}],
+            points: 15
+        }
+    },
+    {
+        title: "LRINEC Score",
+        content: `<div class="narrative"><p>While awaiting the surgeon, the medical student asks about the LRINEC score. The patient's labs show:</p><ul style="margin-top:12px;"><li>WBC: 24,000 (2 points)</li><li>Hemoglobin: 10.2 (1 point)</li><li>Sodium: 131 (2 points)</li><li>Glucose: 380 (1 point)</li><li>Creatinine: 2.1 (2 points)</li><li>CRP: 280 (4 points)</li></ul><p style="margin-top:12px;"><strong>Total: 12 points</strong></p></div>
+        <div class="socratic-prompt"><h4>Understanding the Tool</h4><p>The LRINEC score is ≥6 (high risk). But you've already called surgery based on clinical findings. When is LRINEC actually useful?</p></div>`,
+        hint_beginner: "Think about when you're NOT sure if it's nec fasc vs cellulitis...",
+        hint_advanced: "Consider LRINEC's sensitivity and specificity - what are its limitations?",
+        question: {
+            prompt: "When is the LRINEC score MOST useful clinically?",
+            options: [
+                { text: "When clinical findings are equivocal - soft signs present but no hard signs", correct: true },
+                { text: "To rule out nec fasc when you're confident it's just cellulitis", correct: false },
+                { text: "To decide whether surgery should be emergent vs urgent", correct: false },
+                { text: "To replace clinical judgment in septic patients", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! LRINEC is useful when you have SOFT signs (pain out of proportion, rapid progression) but no HARD signs (crepitus, necrosis). A high score supports your suspicion; a low score should NOT override clinical concern. It's a 'rule-in' tool, not a 'rule-out' tool.",
+                incorrect: "LRINEC has good specificity but poor sensitivity (~80%). It should NEVER be used to rule out nec fasc or delay surgery when clinical suspicion is high. It's most useful when clinical findings are equivocal."
+            },
+            teaching: `<h4>LRINEC Score Interpretation</h4><table class="comparison-table"><tr><th>Score</th><th>Risk</th><th>Action</th></tr><tr><td>≤5</td><td>Low (&lt;50%)</td><td>Low but NOT zero - clinical judgment trumps</td></tr><tr><td>6-7</td><td>Intermediate (50-75%)</td><td>High suspicion - surgical consult</td></tr><tr><td>≥8</td><td>High (&gt;75%)</td><td>Strong predictor - emergent surgery</td></tr></table><p style="margin-top:12px;"><strong>Key limitation:</strong> Sensitivity only ~80%. A low score does NOT rule out nec fasc!</p>`,
+            why_chain: [{q: "Why can't LRINEC rule out nec fasc?", a: "Early nec fasc may have normal labs before systemic inflammation develops. Additionally, 20% of true cases have low LRINEC scores. Clinical suspicion must drive decision-making."}, {q: "Why include CRP?", a: "CRP rises rapidly with tissue destruction and bacterial infection. Values >150 mg/L strongly suggest nec fasc over simple cellulitis. It's the most heavily weighted component (4 points)."}],
+            points: 10
+        }
+    },
+    {
+        title: "Antibiotic Selection",
+        content: `<div class="narrative"><p>Surgery is on the way. You need to start empiric antibiotics BEFORE the OR. The patient has no known drug allergies.</p></div>
+        <div class="socratic-prompt"><h4>Coverage Considerations</h4><p>Nec fasc can be Type I (polymicrobial) or Type II (monomicrobial). What organisms must your empiric regimen cover?</p></div>`,
+        hint_beginner: "Think: Gram positives (including MRSA), Gram negatives, AND anaerobes",
+        hint_advanced: "Why is clindamycin specifically recommended even when other drugs cover the same organisms?",
+        question: {
+            prompt: "Which empiric antibiotic regimen is MOST appropriate for necrotizing fasciitis?",
+            options: [
+                { text: "Vancomycin + piperacillin-tazobactam + clindamycin", correct: true },
+                { text: "Ceftriaxone + metronidazole", correct: false },
+                { text: "Vancomycin alone (MRSA coverage is most important)", correct: false },
+                { text: "Ciprofloxacin + clindamycin", correct: false }
+            ],
+            explanation: {
+                correct: "Perfect! This triple regimen covers: (1) MRSA (vancomycin), (2) Gram-negatives + anaerobes (pip-tazo), (3) Toxin suppression (clindamycin). Clindamycin is added specifically because it inhibits toxin production by GAS and Staph, even when other drugs cover the bacteria.",
+                incorrect: "Empiric therapy must cover MRSA, Gram-negatives, AND anaerobes. Additionally, clindamycin is specifically recommended for its anti-toxin effect - it inhibits protein synthesis and toxin production even when bacteria are covered by other antibiotics."
+            },
+            teaching: `<h4>Why Clindamycin is Special</h4><div class="mechanism-box"><div class="mechanism-title">🧬 Toxin Suppression</div><div class="pathway">GAS produces:
+• Streptococcal pyrogenic exotoxins (SPE)
+• Streptococcal toxic shock syndrome
+
+Clindamycin = protein synthesis inhibitor
+→ Stops toxin production
+→ Works even at high bacterial loads
+→ Add to β-lactam (which don't suppress toxins)
+
+"The Eagle Effect": β-lactams less effective when bacterial load high (stationary phase). Clindamycin works regardless of growth phase.</div></div>`,
+            why_chain: [{q: "What is the Eagle Effect?", a: "At high bacterial loads (stationary phase), bacteria have reduced cell wall synthesis. β-lactams, which target cell wall production, become less effective. Clindamycin works by inhibiting protein synthesis and remains effective regardless of growth phase."}, {q: "Should antibiotics be given before or after surgical cultures?", a: "BEFORE! Never delay antibiotics for cultures. Blood cultures can be drawn, but tissue cultures will be obtained in the OR. Early antibiotics improve survival."}],
+            points: 10
+        }
+    },
+    {
+        title: "Surgical Principles",
+        content: `<div class="narrative"><p>The surgeon takes the patient to the OR. Intraoperatively, they find:</p><ul style="margin-top:12px;"><li>Gray, necrotic fascia</li><li>"Dishwater" purulent fluid</li><li>Easy tissue plane dissection (finger test positive)</li><li>Lack of bleeding from tissue</li></ul></div>
+        <div class="socratic-prompt"><h4>Surgical Decision Making</h4><p>The surgeon debrided extensively, but the margins are still concerning. What is the planned approach?</p></div>`,
+        hint_beginner: "One surgery is rarely enough...",
+        hint_advanced: "What determines when to stop debriding and how often to return?",
+        question: {
+            prompt: "What is the standard surgical approach for necrotizing fasciitis?",
+            options: [
+                { text: "Serial debridements every 24-48 hours until tissue is clearly viable", correct: true },
+                { text: "Single radical debridement, then close primarily", correct: false },
+                { text: "Minimal debridement to preserve tissue, with antibiotic reliance", correct: false },
+                { text: "Amputation as first-line treatment", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Serial debridements ('second look' operations) every 24-48 hours are standard. Necrosis continues to demarcate after initial surgery, and margins that looked viable may become necrotic. Average patient requires 3-4 debridements. Wounds are left open and managed with negative pressure wound therapy.",
+                incorrect: "Single debridement is rarely sufficient. Necrosis continues to evolve, and tissue that appeared viable initially may become necrotic. Serial 'second look' surgeries every 24-48 hours are standard until clear margins are achieved."
+            },
+            teaching: `<h4>Surgical Principles</h4><ul><li><strong>Finger test:</strong> If finger easily dissects along fascial plane = necrotic fascia</li><li><strong>Healthy tissue:</strong> Bleeds briskly, resists dissection</li><li><strong>Average debridements:</strong> 3-4 operations</li><li><strong>Wound management:</strong> Leave open, negative pressure therapy</li><li><strong>Amputation:</strong> Reserved for uncontrollable spread threatening life</li></ul>`,
+            why_chain: [{q: "Why does necrosis continue after debridement?", a: "Thrombosis of small vessels leads to progressive tissue ischemia beyond the initial infection zone. Bacterial toxins and inflammatory mediators continue to damage tissue. It takes time for the demarcation between viable and non-viable tissue to become clear."}, {q: "When is amputation indicated?", a: "When infection cannot be controlled with debridement and is spreading proximally threatening the patient's life. This is a life-over-limb decision. Delay in amputation when indicated increases mortality."}],
+            points: 10
+        }
+    },
+    {
+        title: "Fournier's Gangrene",
+        content: `<div class="narrative"><p>Later that week, another patient presents - a 62-year-old diabetic man with <span class="critical">severe perineal pain, scrotal swelling, and crepitus</span>. He had a perirectal abscess drained 5 days ago.</p></div>
+        <div class="socratic-prompt"><h4>Special Location</h4><p>This is necrotizing fasciitis of a specific anatomic region. What is unique about this presentation and its management?</p></div>`,
+        hint_beginner: "Fournier's gangrene = nec fasc of the perineum/genitalia",
+        hint_advanced: "Consider the anatomy - where does perineal infection spread?",
+        question: {
+            prompt: "Which statement about Fournier's gangrene is CORRECT?",
+            options: [
+                { text: "It can spread rapidly along fascial planes to the abdominal wall and thighs", correct: true },
+                { text: "It is usually monomicrobial (Group A Strep)", correct: false },
+                { text: "It rarely requires surgical debridement - antibiotics are usually sufficient", correct: false },
+                { text: "Testicular involvement is common because they share blood supply", correct: false }
+            ],
+            explanation: {
+                correct: "Yes! Fournier's spreads along Colles' fascia to the anterior abdominal wall (Scarpa's fascia) and along Buck's fascia to the thighs. It's almost always POLYMICROBIAL (Type I). Importantly, testes are usually SPARED because they have independent blood supply from the abdominal aorta (testicular arteries).",
+                incorrect: "Fournier's is Type I (polymicrobial), spreads along fascial planes to abdomen and thighs, REQUIRES surgery (antibiotics alone = death), and usually SPARES the testes because they have independent blood supply from testicular arteries."
+            },
+            teaching: `<h4>Fournier's Gangrene Key Points</h4><table class="comparison-table"><tr><th>Feature</th><th>Detail</th></tr><tr><td>Type</td><td>Type I (polymicrobial) - GI/GU flora</td></tr><tr><td>Sources</td><td>Perirectal abscess, GU procedures, trauma</td></tr><tr><td>Spread</td><td>Colles'→Scarpa's (abdomen), Buck's (thighs)</td></tr><tr><td>Testes</td><td>Usually SPARED (independent blood supply)</td></tr><tr><td>Mortality</td><td>20-40% (higher with delay)</td></tr></table>`,
+            why_chain: [{q: "Why are testes usually spared?", a: "Testicular blood supply comes from testicular arteries arising directly from the abdominal aorta. The scrotal skin and dartos are affected, but the testes have an independent vascular supply that is not involved in the fascial infection."}, {q: "Why is Fournier's more deadly than extremity nec fasc?", a: "Proximity to perineal flora (polymicrobial), difficulty examining the area (delayed diagnosis), rapid spread along multiple fascial planes, and risk of involvement of intra-abdominal structures."}],
+            points: 10
+        }
+    },
+    {
+        title: "Differentiating Cellulitis",
+        content: `<div class="narrative"><p>A week later, a 45-year-old woman presents with <span class="highlight">left leg erythema and swelling</span> for 3 days. No fever, minimal pain, and she looks well.</p><p style="margin-top:12px;"><strong>Vitals:</strong> Normal<br><strong>Exam:</strong> Well-demarcated erythema, warmth, mild tenderness, no crepitus</p></div>
+        <div class="socratic-prompt"><h4>The Contrast Case</h4><p>How does this presentation differ from the nec fasc cases? What makes you confident this is simple cellulitis?</p></div>`,
+        hint_beginner: "Compare: systemic toxicity, pain severity, exam findings, progression rate",
+        hint_advanced: "What are common cellulitis mimics you should consider?",
+        question: {
+            prompt: "Which feature MOST reliably distinguishes uncomplicated cellulitis from necrotizing fasciitis?",
+            options: [
+                { text: "Pain proportionate to clinical findings, no systemic toxicity, slow progression", correct: true },
+                { text: "Presence of erythema and warmth", correct: false },
+                { text: "History of minor skin break as entry point", correct: false },
+                { text: "Unilateral leg involvement", correct: false }
+            ],
+            explanation: {
+                correct: "Exactly! The KEY differentiators are: (1) Pain PROPORTIONATE to findings (not out of proportion), (2) No systemic toxicity (patient looks well), (3) Slow progression over days (not hours). All these point to superficial dermis/subcutaneous infection rather than deep fascial necrosis.",
+                incorrect: "Erythema, warmth, skin breaks, and unilateral involvement occur in BOTH conditions. The distinguishing features are: proportionate pain, absence of systemic toxicity, and slow progression - all pointing to superficial rather than deep infection."
+            },
+            teaching: `<h4>Cellulitis vs Nec Fasc: Key Distinctions</h4><table class="comparison-table"><tr><th>Feature</th><th>Cellulitis</th><th>Nec Fasc</th></tr><tr><td>Pain</td><td>Proportionate to findings</td><td>OUT OF PROPORTION</td></tr><tr><td>Appearance</td><td>Looks well</td><td>Toxic, septic</td></tr><tr><td>Progression</td><td>Days</td><td>Hours</td></tr><tr><td>Skin</td><td>Erythema, intact</td><td>Dusky, bullae, necrosis</td></tr><tr><td>Crepitus</td><td>Absent</td><td>May be present</td></tr><tr><td>Response to Abx</td><td>Improves in 24-48h</td><td>Worsens or no change</td></tr></table>`,
+            why_chain: [{q: "What are common cellulitis mimics?", a: "DVT, stasis dermatitis, contact dermatitis, gout, septic arthritis. Always consider DVT in unilateral leg swelling. Mark borders and reassess in 24-48 hours to confirm cellulitis is responding to antibiotics."}, {q: "Why mark borders?", a: "Expanding erythema despite 24-48 hours of appropriate antibiotics suggests either wrong diagnosis (not cellulitis), wrong antibiotic (resistant organism), or evolution to deeper infection. Marked borders provide objective evidence of progression vs improvement."}],
+            points: 10
+        }
+    },
+    {
+        title: "Cellulitis Treatment",
+        content: `<div class="narrative"><p>You diagnose uncomplicated cellulitis. The patient asks about treatment options.</p><p style="margin-top:12px;"><strong>PMH:</strong> No diabetes, no immunocompromise<br><strong>Allergies:</strong> None<br><strong>No purulence or abscess on exam</strong></p></div>
+        <div class="socratic-prompt"><h4>Antibiotic Selection</h4><p>For non-purulent cellulitis (no abscess), which organisms need coverage and what's the first-line outpatient regimen?</p></div>`,
+        hint_beginner: "Non-purulent cellulitis is usually caused by streptococci. MRSA is less common without purulence.",
+        hint_advanced: "When would you add MRSA coverage to a non-purulent cellulitis regimen?",
+        question: {
+            prompt: "What is the FIRST-LINE outpatient treatment for non-purulent cellulitis?",
+            options: [
+                { text: "Cephalexin 500mg QID - covers streptococci which cause most non-purulent cellulitis", correct: true },
+                { text: "TMP-SMX - must cover MRSA in all cellulitis cases", correct: false },
+                { text: "Ciprofloxacin - broad spectrum covers everything", correct: false },
+                { text: "Vancomycin IV - can't risk missing MRSA", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Non-purulent cellulitis is predominantly streptococcal (GAS). Cephalexin provides excellent coverage. MRSA coverage (TMP-SMX, doxycycline) is added if: purulence/abscess, prior MRSA infection, failed beta-lactam therapy, or high local MRSA prevalence. For PURULENT cellulitis/abscess, MRSA coverage IS first-line.",
+                incorrect: "Non-purulent cellulitis is predominantly STREPTOCOCCAL. Cephalexin is first-line. MRSA coverage is added for: purulent cellulitis/abscess, prior MRSA, failed initial therapy, or high-risk patient. Fluoroquinolones have poor strep coverage."
+            },
+            teaching: `<h4>Cellulitis Antibiotic Selection</h4><table class="comparison-table"><tr><th>Presentation</th><th>Likely Organism</th><th>First-Line</th></tr><tr><td>Non-purulent</td><td>Streptococcus</td><td>Cephalexin, Pen VK</td></tr><tr><td>Purulent/Abscess</td><td>MRSA</td><td>TMP-SMX, Doxycycline + I&D</td></tr><tr><td>Severe/Septic</td><td>Either/Both</td><td>Vanc + Pip-Tazo</td></tr></table><p style="margin-top:12px;"><strong>Key point:</strong> I&D is PRIMARY treatment for abscess. Antibiotics alone are insufficient.</p>`,
+            why_chain: [{q: "Why isn't MRSA the main concern in non-purulent cellulitis?", a: "MRSA typically causes purulent infections (abscesses, boils). Non-purulent spreading erythema is characteristic of streptococcal infection, which spreads through lymphatics. When there's no pus, think Strep; when there's pus, think Staph/MRSA."}, {q: "What if cellulitis doesn't improve in 48-72 hours?", a: "Re-evaluate diagnosis (consider DVT, nec fasc, abscess that needs I&D), consider resistant organism (add MRSA coverage if not already), and consider hospitalization for IV antibiotics."}],
+            points: 10
+        }
+    },
+    {
+        title: "Special Populations",
+        content: `<div class="narrative"><p>Consider these special scenarios in soft tissue infections:</p><ul style="margin-top:12px;"><li><strong>Diabetic foot:</strong> 65-year-old with neuropathy, foot ulcer</li><li><strong>Water exposure:</strong> 50-year-old cut hand while cleaning fish tank</li><li><strong>Dog bite:</strong> 40-year-old with hand bite 6 hours ago</li></ul></div>
+        <div class="socratic-prompt"><h4>Coverage Considerations</h4><p>Each of these scenarios requires specific additional antimicrobial coverage. What organisms are you targeting?</p></div>`,
+        hint_beginner: "Diabetic foot = polymicrobial. Water = special water organisms. Bites = mouth flora.",
+        hint_advanced: "What is the mortality of Vibrio vulnificus? Who gets it?",
+        question: {
+            prompt: "Which antibiotic is ESSENTIAL for saltwater/shellfish exposure with soft tissue infection?",
+            options: [
+                { text: "Doxycycline - covers Vibrio vulnificus which has 50% mortality", correct: true },
+                { text: "Cephalexin - standard skin flora coverage", correct: false },
+                { text: "Metronidazole - anaerobic coverage", correct: false },
+                { text: "TMP-SMX - MRSA is the main concern", correct: false }
+            ],
+            explanation: {
+                correct: "Yes! Vibrio vulnificus causes rapidly progressive soft tissue infection after saltwater/shellfish exposure, especially in patients with liver disease or iron overload. Mortality is ~50% even with treatment. Doxycycline + a third-generation cephalosporin is the regimen. Think of Vibrio in Gulf Coast exposures.",
+                incorrect: "Saltwater/shellfish exposure, especially with liver disease, requires coverage for VIBRIO VULNIFICUS - a highly lethal pathogen (~50% mortality). Doxycycline (or fluoroquinolone) + ceftriaxone is the recommended regimen."
+            },
+            teaching: `<h4>Special Situations in Soft Tissue Infections</h4><table class="comparison-table"><tr><th>Scenario</th><th>Organisms</th><th>Treatment</th></tr><tr><td>Saltwater/shellfish</td><td>Vibrio vulnificus</td><td>Doxycycline + ceftriaxone</td></tr><tr><td>Freshwater</td><td>Aeromonas</td><td>Fluoroquinolone or TMP-SMX</td></tr><tr><td>Dog/cat bite</td><td>Pasteurella, anaerobes</td><td>Amox-clav (first-line)</td></tr><tr><td>Human bite</td><td>Eikenella, anaerobes</td><td>Amox-clav</td></tr><tr><td>Diabetic foot</td><td>Polymicrobial + Pseudomonas</td><td>Broad spectrum (pip-tazo, etc.)</td></tr></table>`,
+            why_chain: [{q: "Why is Vibrio so deadly?", a: "Vibrio produces cytotoxins causing rapid tissue destruction, similar to nec fasc. In patients with liver disease or iron overload, organisms multiply rapidly (Vibrio requires iron). Can progress from minor wound to death in 24-48 hours."}, {q: "Why amox-clav for bites?", a: "Covers Pasteurella (dog/cat), Eikenella (human), and oral anaerobes. Also provides standard skin flora coverage. First-generation cephalosporins don't reliably cover Pasteurella."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Summary",
+        content: `<div class="narrative"><p>Excellent work! You've mastered the critical distinction between cellulitis and necrotizing fasciitis.</p></div>
+        <div class="mechanism-box"><div class="mechanism-title">🎯 Key Takeaways</div><div class="pathway">1. PAIN OUT OF PROPORTION = Think nec fasc
+2. Hard signs (crepitus, necrosis) = OR NOW
+3. Don't delay surgery for imaging or scoring
+4. Mortality increases 7-9% per hour of delay
+5. Triple antibiotics: Vanc + Pip-tazo + Clindamycin
+6. Clindamycin for toxin suppression (Eagle effect)
+7. Serial debridements until viable margins
+8. Non-purulent cellulitis = Strep = Cephalexin
+9. Purulent/abscess = MRSA = I&D + TMP-SMX
+10. Water exposure = Think Vibrio/Aeromonas</div></div>`,
+        hint_beginner: "Review the hard signs that mandate immediate surgery.",
+        hint_advanced: "Consider how you would teach this to a junior resident.",
+        question: {
+            prompt: "A 55-year-old diabetic presents with leg erythema, fever, and 'pain that seems worse than it looks.' Labs show WBC 22k, Na 132. No crepitus, no bullae. What is your BEST next step?",
+            options: [
+                { text: "Emergent surgical consultation - soft signs warrant high suspicion despite absent hard signs", correct: true },
+                { text: "Calculate LRINEC score to determine if surgery is needed", correct: false },
+                { text: "Start cephalexin and observe for 24 hours", correct: false },
+                { text: "Order CT to look for gas before involving surgery", correct: false }
+            ],
+            explanation: {
+                correct: "Perfect clinical reasoning! This patient has SOFT SIGNS (pain out of proportion, systemic illness, hyponatremia) without hard signs. This still warrants EMERGENT surgical consultation. The surgeon may take the patient to OR based on clinical picture, or may do bedside 'finger test' incision. Never wait for hard signs to develop - that means tissue is already extensively necrotic.",
+                incorrect: "Soft signs with high clinical suspicion warrant emergent surgical consultation even without hard signs. Don't wait for crepitus or necrosis - those are late findings. Pain out of proportion + systemic toxicity + risk factors (diabetes) = call surgery now."
+            },
+            teaching: `<h4>Clinical Decision Framework</h4><ul><li><strong>Hard signs present:</strong> OR immediately, no delay</li><li><strong>Soft signs, high suspicion:</strong> Emergent surgical consult, likely OR</li><li><strong>Equivocal:</strong> LRINEC score may help, close monitoring</li><li><strong>Low suspicion:</strong> Treat as cellulitis, mark borders, reassess 24-48h</li></ul><p style="margin-top:12px;"><strong>When in doubt, have surgery evaluate!</strong> A negative exploration is far better than missing nec fasc.</p>`,
+            why_chain: [{q: "Why involve surgery before hard signs develop?", a: "Hard signs = late findings with extensive necrosis already present. Earlier surgical intervention when soft signs are present leads to smaller debridements and better outcomes. Negative explorations are acceptable - missing nec fasc is not."}, {q: "What makes this clinical picture concerning?", a: "The triad of: (1) Pain out of proportion - suggests deep tissue involvement, (2) Systemic toxicity (fever, elevated WBC), (3) Risk factors (diabetes). Together these should trigger immediate escalation."}],
+            points: 15
+        }
+    }
+];
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderStage();
+}
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function renderStage() {
+    const stage = stages[currentStage];
+    const progress = ((currentStage + 1) / stages.length) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+    
+    let html = `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>${stage.content}`;
+    
+    if (difficulty === 'beginner' && stage.hint_beginner) {
+        html += `<div class="hint-beginner" style="display:block">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+    }
+    if (difficulty === 'advanced' && stage.hint_advanced) {
+        html += `<div class="hint-advanced" style="display:block">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+    }
+    
+    if (stage.question) {
+        const q = stage.question;
+        const questionId = `q${currentStage}`;
+        const answered = answeredQuestions.has(questionId);
+        
+        if (!answered) {
+            maxScore += q.points;
+            document.getElementById('maxScore').textContent = maxScore;
+        }
+        
+        const shuffledOptions = answered ? q.options : shuffleArray(q.options);
+        if (!answered) stage.shuffledOptions = shuffledOptions;
+        else if (stage.shuffledOptions) shuffledOptions.splice(0, shuffledOptions.length, ...stage.shuffledOptions);
+        
+        html += `<div class="question-box"><div class="question-prompt">${q.prompt}</div><div class="mcq-options">`;
+        
+        shuffledOptions.forEach((opt, i) => {
+            const letter = String.fromCharCode(65 + i);
+            const optionClass = answered ? (opt.correct ? 'correct' : 'incorrect') + ' disabled' : '';
+            html += `<div class="mcq-option ${optionClass}" onclick="handleAnswer(${currentStage}, ${opt.correct}, this, '${questionId}')" data-correct="${opt.correct}"><div class="option-letter">${letter}</div><div class="option-text">${opt.text}</div></div>`;
+        });
+        
+        html += `</div><div class="feedback ${answered ? 'show' : ''} ${answered ? (decisionPath[currentStage]?.correct ? 'correct-feedback' : 'incorrect-feedback') : ''}" id="feedback${currentStage}"><div class="feedback-title">${answered ? (decisionPath[currentStage]?.correct ? '✓ Correct!' : '✗ Not Quite') : ''}</div><div class="feedback-text">${answered ? (decisionPath[currentStage]?.correct ? q.explanation.correct : q.explanation.incorrect) : ''}</div></div>`;
+        
+        if (q.teaching) {
+            html += `<div class="teaching-point ${answered ? 'show' : ''}" id="teaching${currentStage}">${q.teaching}</div>`;
+        }
+        
+        if (q.why_chain) {
+            html += `<div class="why-chain ${answered ? 'show' : ''}" id="why${currentStage}"><h4>🔗 Why Chain - Deep Dive</h4>`;
+            q.why_chain.forEach(w => {
+                html += `<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`;
+            });
+            html += `</div>`;
+        }
+    }
+    
+    const isLastStage = currentStage === stages.length - 1;
+    const answered = stage.question ? answeredQuestions.has(`q${currentStage}`) : true;
+    html += `<button class="btn ${answered ? 'show' : ''}" onclick="${isLastStage ? 'showCompletion()' : 'nextStage()'}">${isLastStage ? 'Complete Case' : 'Continue →'}</button></div>`;
+    
+    document.getElementById('scene-container').innerHTML = html;
+}
+
+function handleAnswer(stageIndex, correct, element, questionId) {
+    if (answeredQuestions.has(questionId)) return;
+    
+    answeredQuestions.add(questionId);
+    const stage = stages[stageIndex];
+    
+    if (correct) {
+        score += stage.question.points;
+        document.getElementById('score').textContent = score;
+    }
+    
+    decisionPath[stageIndex] = { correct };
+    
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+        else if (opt === element && !correct) opt.classList.add('incorrect');
+    });
+    
+    const feedback = document.getElementById(`feedback${stageIndex}`);
+    feedback.classList.add('show', correct ? 'correct-feedback' : 'incorrect-feedback');
+    feedback.querySelector('.feedback-title').textContent = correct ? '✓ Correct!' : '✗ Not Quite';
+    feedback.querySelector('.feedback-text').textContent = correct ? stage.question.explanation.correct : stage.question.explanation.incorrect;
+    
+    const teaching = document.getElementById(`teaching${stageIndex}`);
+    if (teaching) teaching.classList.add('show');
+    
+    const why = document.getElementById(`why${stageIndex}`);
+    if (why) why.classList.add('show');
+    
+    document.querySelector('.btn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    renderStage();
+    window.scrollTo(0, 0);
+}
+
+function showCompletion() {
+    const percent = Math.round((score / maxScore) * 100);
+    let grade, color;
+    if (percent >= 90) { grade = 'Outstanding!'; color = '#22c55e'; }
+    else if (percent >= 80) { grade = 'Excellent!'; color = '#84cc16'; }
+    else if (percent >= 70) { grade = 'Good Work!'; color = '#eab308'; }
+    else { grade = 'Keep Learning!'; color = '#f97316'; }
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div class="completion-grade" style="color:${color}">${grade}</div>
+            <div class="completion-percent" style="color:${color}">${percent}%</div>
+            <p style="font-size:1.2rem;margin-bottom:24px;">Score: ${score} / ${maxScore} points</p>
+            <div class="completion-breakdown">
+                <h4 style="margin-bottom:16px;color:#fca5a5;">Key Learning Points:</h4>
+                <ul style="text-align:left;margin-left:20px;">
+                    <li><strong>Pain out of proportion</strong> - Most important early sign of nec fasc</li>
+                    <li><strong>Hard signs</strong> (crepitus, necrosis) - OR immediately</li>
+                    <li><strong>Each hour of delay</strong> - 7-9% increased mortality</li>
+                    <li><strong>Triple therapy</strong> - Vanc + Pip-tazo + Clindamycin (toxin suppression)</li>
+                    <li><strong>Serial debridements</strong> - Average 3-4 operations needed</li>
+                    <li><strong>Non-purulent cellulitis</strong> - Strep, use cephalexin</li>
+                    <li><strong>Purulent/abscess</strong> - MRSA, I&D + TMP-SMX</li>
+                    <li><strong>Water exposure</strong> - Think Vibrio, add doxycycline</li>
+                </ul>
+            </div>
+            <button class="btn show" onclick="location.reload()" style="margin-top:24px;">Restart Case</button>
+        </div>`;
+}
+
+// Initialize
+renderStage();
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Cellulitis vs Necrotizing Fasciitis"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1093/cid/ciu296" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">IDSA Practice Guidelines for SSTI</a> — <em style="color:var(--rdx-text-muted,#64748b)">Clin Infect Dis</em></li><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1186/s13017-018-0175-2" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">WSES Guidelines for Necrotizing Soft Tissue Infections</a> — <em style="color:var(--rdx-text-muted,#64748b)">World J Emerg Surg</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pre-medical education: LOR Strategy & Physician Toolkit. Build foundational clinical thinking skills for future physicians on ReasonDx.">
+<title>LOR Strategy & Physician Toolkit | ReasonDx Premed</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.6;}
+.header{background:linear-gradient(135deg,#d97706,#b45309);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
+.header h1{font-family:var(--rdx-font-serif);font-size:24px;font-weight:400;flex:1;}
+.container{max-width:720px;margin:0 auto;padding:24px;}
+.tabs{display:flex;gap:4px;background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:4px;margin-bottom:24px;}
+.tab{flex:1;padding:10px;border:none;background:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--pm-muted);transition:.2s;}
+.tab.active{background:var(--pm-amber);color:#fff;}
+.card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--pm-shadow);}
+.card h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+label{display:block;font-size:13px;font-weight:600;color:var(--pm-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;}
+input,select,textarea{width:100%;padding:10px 14px;border:1px solid var(--pm-border);border-radius:8px;font-family:inherit;font-size:15px;background:var(--pm-bg);}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pm-amber);box-shadow:0 0 0 3px rgba(217,119,6,.1);}
+textarea{min-height:80px;resize:vertical;}
+.form-row{margin-bottom:16px;}
+.btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-primary{background:var(--pm-amber);color:#fff;}
+.btn-primary:hover{background:#b45309;}
+.btn-secondary{background:var(--pm-card);color:var(--pm-amber);border:1.5px solid var(--pm-amber);}
+.btn-row{display:flex;gap:12px;justify-content:flex-end;margin-top:20px;}
+.physician-card{background:var(--pm-card);border:1px solid var(--pm-border);border-radius:12px;padding:20px;margin-bottom:12px;transition:.2s;}
+.physician-card:hover{border-color:var(--pm-amber);box-shadow:var(--pm-shadow);}
+.physician-name{font-weight:700;font-size:17px;}
+.physician-meta{font-size:13px;color:var(--pm-muted);margin-top:2px;}
+.physician-strength{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-right:4px;margin-top:8px;}
+.str-strong{background:#f0fdfa;color:#0f766e;}
+.str-building{background:var(--pm-amber-50);color:var(--pm-amber);}
+.str-new{background:#f0f9ff;color:#0284c7;}
+.interaction{padding:12px;background:var(--pm-bg);border-radius:8px;margin-top:8px;font-size:13px;}
+.interaction-date{font-weight:600;color:var(--pm-amber);}
+.milestone{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--pm-amber-50);border:1.5px solid #fde68a;border-radius:12px;margin-bottom:8px;}
+.milestone-icon{font-size:24px;}
+.milestone-text{font-size:14px;}
+.milestone-text strong{display:block;}
+.tip{background:linear-gradient(135deg,var(--pm-amber-50),#fef3c7);border:1.5px solid #fde68a;border-radius:12px;padding:18px;margin-bottom:16px;font-size:14px;line-height:1.6;}
+.tip h4{color:#92400e;margin-bottom:8px;}
+.tip p{color:#78350f;}
+.hidden{display:none!important;}
+
+/* Dark mode overrides for premed pages */
+[data-theme="dark"] {
+  --pm-bg: var(--rdx-bg, #1a1a2e);
+  --pm-card: var(--rdx-bg-card, #232340);
+  --pm-text: var(--rdx-text, #e2e8f0);
+  --pm-muted: var(--rdx-text-muted, #94a3b8);
+  --pm-border: var(--rdx-border, #334155);
+  --pm-accent: #14b8a6;
+}
+[data-theme="high-contrast"] {
+  --pm-bg: #000;
+  --pm-card: #111;
+  --pm-text: #fff;
+  --pm-muted: #ccc;
+  --pm-border: #555;
+  --pm-accent: #2dd4bf;
+}
+[data-theme="sepia"] {
+  --pm-bg: #f4ecd8;
+  --pm-card: #faf6ee;
+  --pm-text: #3d3322;
+  --pm-muted: #7a6b52;
+  --pm-border: #d4c5a9;
+  --pm-accent: #0f766e;
+}
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<script src="../rdx-nav.js"></script>
+<div class="header"><a href="premed-hub.html">← Hub</a> <a href="../index.html" style="color:#fff;text-decoration:none;opacity:.55;font-size:12px;margin-left:8px">ReasonDx Home →</a><h1>✉️ LOR Strategy & Physician Toolkit</h1></div>
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('track')">👨‍⚕️ Physicians</button>
+    <button class="tab" onclick="showTab('add')">➕ Add / Log</button>
+    <button class="tab" onclick="showTab('packet')">📦 Evidence Packet</button>
+    <button class="tab" onclick="showTab('guide')">📖 Strategy Guide</button>
+  </div>
+
+  <div id="tab-track">
+    <div id="physician-list"></div>
+  </div>
+
+  <div id="tab-add" class="hidden">
+    <div class="card">
+      <h3>➕ Add a Physician</h3>
+      <div class="form-row"><label>Name</label><input type="text" id="p-name" placeholder="Dr. Smith"></div>
+      <div class="form-row"><label>Specialty</label><input type="text" id="p-spec" placeholder="Family Medicine"></div>
+      <div class="form-row"><label>Setting</label><input type="text" id="p-setting" placeholder="Community clinic, hospital, etc."></div>
+      <div class="form-row"><label>Relationship Strength</label>
+        <select id="p-strength"><option value="new">🔵 New — just started</option><option value="building">🟡 Building — they know my name</option><option value="strong">🟢 Strong — would write a letter</option></select></div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="addPhysician()">Add Physician</button></div>
+    </div>
+    <div class="card">
+      <h3>📝 Log an Interaction</h3>
+      <div class="form-row"><label>Physician</label><select id="i-physician"></select></div>
+      <div class="form-row"><label>Date</label><input type="date" id="i-date"></div>
+      <div class="form-row"><label>What happened?</label><textarea id="i-notes" placeholder="Describe the interaction — a question you asked, feedback they gave, a case you discussed..."></textarea></div>
+      <div class="form-row"><label>Growth moment?</label><textarea id="i-growth" style="min-height:60px;" placeholder="Did this interaction show your growth, curiosity, or character? (This feeds your LOR evidence packet)"></textarea></div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="addInteraction()">Log Interaction</button></div>
+    </div>
+  </div>
+
+  
+  <div id="tab-packet" class="hidden">
+    <div class="card">
+      <h3>📦 Generate Evidence Packet</h3>
+      <p style="font-size:14px;color:var(--pm-muted);margin-bottom:16px;">When it's time to ask for a letter, this tool compiles everything your physician needs to write a specific, powerful letter. Select a physician to generate their packet.</p>
+      <div class="form-row"><label>Select Physician</label><select id="packet-physician" onchange="previewPacket()"><option value="">Choose a physician...</option></select></div>
+    </div>
+    <div id="packet-preview" class="hidden">
+      <div class="card" style="background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fde68a;">
+        <h3>📦 Evidence Packet Preview</h3>
+        <div id="packet-content"></div>
+        <div class="btn-row" style="margin-top:20px;">
+          <button class="btn btn-secondary" onclick="exportPacket()">📤 Export as Text</button>
+          <button class="btn btn-primary" onclick="exportPacket()">📋 Copy to Clipboard</button>
+        </div>
+      </div>
+      <div class="tip"><h4>💡 How to Use This Packet</h4><p>Print or email this to your physician when you ask for the letter. Say: "I put together some notes about our time together and specific moments you might want to reference. I hope this makes writing the letter easier for you." Physicians LOVE this — it shows professionalism and makes their job easier.</p></div>
+    </div>
+  </div>
+  <div id="tab-guide" class="hidden">
+    <div class="tip"><h4>🎯 The LOR Strategy Framework</h4><p>A strong letter comes from a physician who can write <em>specific stories</em> about you — not generic praise. Your job is to give them those stories over time.</p></div>
+    <div class="card"><h3>📋 The LOR Timeline</h3>
+      <div class="milestone"><span class="milestone-icon">1️⃣</span><div class="milestone-text"><strong>Months 1-3: Be Present</strong>Show up consistently. Ask thoughtful questions. Learn their patients' names. Be reliable.</div></div>
+      <div class="milestone"><span class="milestone-icon">2️⃣</span><div class="milestone-text"><strong>Months 3-6: Show Growth</strong>Ask progressively better questions. Reference things you've learned. Start predicting diagnoses. The physician will notice.</div></div>
+      <div class="milestone"><span class="milestone-icon">3️⃣</span><div class="milestone-text"><strong>Months 6-9: Deepen</strong>Have conversations about medicine beyond the patient — healthcare systems, ethics, your motivations. Show your character.</div></div>
+      <div class="milestone"><span class="milestone-icon">4️⃣</span><div class="milestone-text"><strong>Month 9+: The Ask</strong>When you ask for a letter, provide your evidence packet: key interactions, growth moments, specific examples they can reference.</div></div>
+    </div>
+    <div class="tip"><h4>📦 The Evidence Packet</h4><p>When you ask for a letter, give the physician: (1) A summary of your relationship and time together, (2) 3-5 specific moments that demonstrate your growth, curiosity, or character, (3) Your personal statement or key themes, (4) Schools you're applying to and deadlines. This transforms a generic letter into a powerful, specific endorsement.</p></div>
+    <div class="card"><h3>⚡ Quick Wins for Better Letters</h3>
+      <p style="font-size:14px;line-height:1.8;">
+        → Ask questions that show you've been thinking, not just watching<br>
+        → Follow up: "Last week you mentioned X — I read about it and wanted to ask..."<br>
+        → Share what you're learning: "I used the platform to look up that condition"<br>
+        → Be honest about what you don't understand — curiosity > pretending to know<br>
+        → After a meaningful interaction, write it down (this tool helps!)<br>
+        → Ask early — give physicians at least 6 weeks before the deadline
+      </p>
+    </div>
+  </div>
+</div>
+<script>
+let physicians=JSON.parse(localStorage.getItem('rdx-lor-physicians')||'[]');
+let interactions=JSON.parse(localStorage.getItem('rdx-lor-interactions')||'[]');
+document.getElementById('i-date').value=new Date().toISOString().split('T')[0];
+function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');['track','add','packet','guide'].forEach(x=>document.getElementById('tab-'+x).classList.toggle('hidden',x!==t));if(t==='track')renderPhysicians();if(t==='add')renderPhysicianSelect();}
+function addPhysician(){const n=document.getElementById('p-name').value.trim();if(!n){alert('Please enter a name.');return;}physicians.push({id:Date.now(),name:n,specialty:document.getElementById('p-spec').value.trim(),setting:document.getElementById('p-setting').value.trim(),strength:document.getElementById('p-strength').value});localStorage.setItem('rdx-lor-physicians',JSON.stringify(physicians));document.getElementById('p-name').value='';document.getElementById('p-spec').value='';document.getElementById('p-setting').value='';alert('Physician added!');}
+function renderPhysicianSelect(){const sel=document.getElementById('i-physician');sel.innerHTML='<option value="">Select physician...</option>'+physicians.map(p=>`<option value="${p.id}">${p.name} — ${p.specialty}</option>`).join('');}
+function addInteraction(){const pid=document.getElementById('i-physician').value;if(!pid){alert('Select a physician.');return;}const notes=document.getElementById('i-notes').value.trim();if(!notes){alert('Describe the interaction.');return;}interactions.push({id:Date.now(),physicianId:parseInt(pid),date:document.getElementById('i-date').value,notes,growth:document.getElementById('i-growth').value.trim()});localStorage.setItem('rdx-lor-interactions',JSON.stringify(interactions));document.getElementById('i-notes').value='';document.getElementById('i-growth').value='';alert('Interaction logged!');}
+function renderPhysicians(){const list=document.getElementById('physician-list');if(!physicians.length){list.innerHTML='<div style="text-align:center;padding:48px;color:var(--pm-muted);"><span style="font-size:48px;display:block;margin-bottom:12px;">✉️</span><p>No physicians tracked yet.<br>Add your first physician to start building your LOR strategy.</p></div>';return;}
+list.innerHTML=physicians.map(p=>{const ints=interactions.filter(i=>i.physicianId===p.id).sort((a,b)=>new Date(b.date)-new Date(a.date));const strCls={new:'str-new',building:'str-building',strong:'str-strong'}[p.strength];const strLabel={new:'🔵 New',building:'🟡 Building',strong:'🟢 Strong'}[p.strength];return`<div class="physician-card"><div class="physician-name">${p.name}</div><div class="physician-meta">${p.specialty} · ${p.setting}</div><span class="physician-strength ${strCls}">${strLabel}</span><span class="physician-strength" style="background:#f0f9ff;color:#0284c7;">${ints.length} interactions logged</span>${ints.slice(0,3).map(i=>`<div class="interaction"><span class="interaction-date">${i.date}</span> — ${i.notes.slice(0,120)}${i.notes.length>120?'...':''}</div>`).join('')}</div>`;}).join('');}
+renderPhysicians();
+
+function previewPacket(){
+  const pid=document.getElementById('packet-physician').value;
+  if(!pid){document.getElementById('packet-preview').classList.add('hidden');return;}
+  const p=physicians.find(x=>x.id===parseInt(pid));
+  if(!p){return;}
+  const ints=interactions.filter(i=>i.physicianId===parseInt(pid)).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const growthMoments=ints.filter(i=>i.growth);
+  const totalTime=ints.length;
+  const firstDate=ints[0]?.date||'N/A';
+  const lastDate=ints[ints.length-1]?.date||'N/A';
+  
+  let html='';
+  html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:12px;">';
+  html+='<h4 style="font-size:15px;margin-bottom:8px;">1. Relationship Summary</h4>';
+  html+='<p style="font-size:14px;line-height:1.6;">Dear Dr. '+p.name.replace('Dr. ','')+':<br><br>';
+  html+='Thank you for agreeing to write a letter of recommendation for my medical school application. ';
+  html+='We have worked together at <strong>'+p.setting+'</strong> ('+p.specialty+') since <strong>'+firstDate+'</strong>. ';
+  html+='Over the course of our relationship, I have logged <strong>'+totalTime+' meaningful interactions</strong> ';
+  html+='spanning from '+firstDate+' to '+lastDate+'. ';
+  html+='Below are specific moments that demonstrate my growth, curiosity, and character that you may find helpful to reference.</p></div>';
+  
+  if(growthMoments.length){
+    html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:12px;">';
+    html+='<h4 style="font-size:15px;margin-bottom:8px;">2. Key Growth Moments ('+growthMoments.length+')</h4>';
+    growthMoments.forEach((g,i)=>{
+      html+='<div style="padding:10px;background:#fffbeb;border-radius:8px;margin-bottom:8px;border-left:3px solid #d97706;">';
+      html+='<div style="font-size:12px;color:var(--pm-muted);margin-bottom:4px;">'+g.date+'</div>';
+      html+='<div style="font-size:14px;margin-bottom:4px;"><strong>Interaction:</strong> '+g.notes+'</div>';
+      html+='<div style="font-size:14px;color:#92400e;"><strong>Growth demonstrated:</strong> '+g.growth+'</div>';
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+  
+  if(ints.length){
+    html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:12px;">';
+    html+='<h4 style="font-size:15px;margin-bottom:8px;">3. Complete Interaction Timeline</h4>';
+    ints.forEach(i=>{
+      html+='<div style="padding:8px;border-bottom:1px solid #fde68a;font-size:13px;">';
+      html+='<strong>'+i.date+':</strong> '+i.notes;
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+  
+  html+='<div style="padding:16px;background:rgba(255,255,255,.7);border-radius:12px;">';
+  html+='<h4 style="font-size:15px;margin-bottom:8px;">4. Additional Context</h4>';
+  html+='<p style="font-size:14px;line-height:1.6;">[Add your personal statement themes, schools you\'re applying to, and deadlines here before sharing with your physician.]</p>';
+  html+='</div>';
+  
+  document.getElementById('packet-content').innerHTML=html;
+  document.getElementById('packet-preview').classList.remove('hidden');
+  
+  // Also populate the select in packet tab
+  renderPacketSelect();
+}
+
+function renderPacketSelect(){
+  const sel=document.getElementById('packet-physician');
+  if(sel.options.length<=1){
+    physicians.forEach(p=>{
+      const opt=document.createElement('option');
+      opt.value=p.id;opt.textContent=p.name+' — '+p.specialty;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+function exportPacket(){
+  const pid=document.getElementById('packet-physician').value;
+  const p=physicians.find(x=>x.id===parseInt(pid));
+  if(!p)return;
+  const ints=interactions.filter(i=>i.physicianId===parseInt(pid)).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const growthMoments=ints.filter(i=>i.growth);
+  
+  let txt='LETTER OF RECOMMENDATION — EVIDENCE PACKET\n';
+  txt+='Prepared for: '+p.name+'\n';
+  txt+='Specialty: '+p.specialty+'\n';
+  txt+='Setting: '+p.setting+'\n';
+  txt+='Generated: '+new Date().toISOString().split('T')[0]+'\n';
+  txt+='\n=== RELATIONSHIP SUMMARY ===\n';
+  txt+='Interactions logged: '+ints.length+'\n';
+  txt+='Date range: '+(ints[0]?.date||'N/A')+' to '+(ints[ints.length-1]?.date||'N/A')+'\n';
+  txt+='\n=== KEY GROWTH MOMENTS ===\n';
+  growthMoments.forEach((g,i)=>{
+    txt+='\n['+(i+1)+'] '+g.date+'\n';
+    txt+='Interaction: '+g.notes+'\n';
+    txt+='Growth demonstrated: '+g.growth+'\n';
+  });
+  txt+='\n=== COMPLETE TIMELINE ===\n';
+  ints.forEach(i=>{txt+=i.date+': '+i.notes+'\n';});
+  
+  const blob=new Blob([txt],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='LOR-Evidence-Packet-'+p.name.replace(/\s+/g,'-')+'.txt';a.click();
+}
+
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

@@ -2,14 +2,6 @@
 <!-- SIMPLIFIED NAVIGATION VERSION: 4-item nav, hub pages, cleaner menu -->
 <html lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EKCVJ1SMN3');
-</script>
 <meta name="theme-color" content="#0f766e">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
@@ -17,7 +9,7 @@
 
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -8681,7 +8673,12 @@ body { transition: background 0.3s, color 0.3s; }
             height: 70px;
             width: auto;
         }
-        .dark .reasondx-logo-container svg text,
+        .dark .reasondx-logo-container svg text {
+            fill: #e2e8f0 !important;
+        }
+        .dark .reasondx-logo-container svg rect {
+            fill: #2874a6 !important;
+        }
         .dark .reasondx-logo-container svg line,
         .dark .reasondx-logo-container svg path {
             stroke: #fafafa;
@@ -8911,15 +8908,10 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <header class="reasondx-logo-header">
         <div class="reasondx-logo-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style=""><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="">
+            <text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+            <rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/>
+        </svg>
         </div>
         <div class="reasondx-tagline">Asking the right questions can change everything.</div>
     </header>
@@ -9210,15 +9202,7 @@ return true;
                 <header class="border-b border-zinc-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
                     <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 50px; width: auto;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 50px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                         </div>
                         <nav class="flex items-center gap-6">
                             <a href="#features" class="text-zinc-600 hover:text-zinc-900 text-sm">Features</a>
@@ -9402,15 +9386,7 @@ return true;
             app.innerHTML = `
                 <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
                     <div style="text-align: center; color: white;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 60px; width: auto; margin-bottom: 16px; animation: pulse 1.5s infinite;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 60px; width: auto; margin-bottom: 16px; animation: pulse 1.5s infinite;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                         <p style="font-size: 1.1rem; opacity: 0.9;">Loading...</p>
                     </div>
                 </div>
@@ -9497,15 +9473,7 @@ body { transition: background 0.3s, color 0.3s; }
                         
                         <!-- Header -->
                         <div style="text-align: center; margin-bottom: 28px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 50px; width: auto; margin: 0 auto 12px;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 50px; width: auto; margin: 0 auto 12px;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                             <h1 style="color: #1e293b; font-size: 1.5rem; margin: 0 0 4px 0; font-weight: 700;">New User Registration</h1>
                             <p style="color: #64748b; margin: 0; font-size: 0.9rem;">Create your account to access the platform</p>
                         </div>
@@ -9674,16 +9642,7 @@ body { transition: background 0.3s, color 0.3s; }
                         
                         <!-- Header -->
                         <div style="text-align: center; margin-bottom: 32px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 135" style="height: 80px; width: auto; margin: 0 auto 12px;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                              <text x="170" y="130" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-style="italic" fill="currentColor" opacity="0.6" text-anchor="middle">Asking the right questions can change everything.</text>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 80px; width: auto; margin: 0 auto 12px;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                             <p style="color: #64748b; margin: 0; font-size: 0.95rem;">Welcome back!</p>
                         </div>
                         
@@ -9737,16 +9696,7 @@ body { transition: background 0.3s, color 0.3s; }
                     
                     <!-- Header -->
                     <div style="text-align: center; margin-bottom: 36px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 135" style="height: 90px; width: auto; margin: 0 auto 16px;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                              <text x="170" y="130" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-style="italic" fill="currentColor" opacity="0.6" text-anchor="middle">Asking the right questions can change everything.</text>
-                            </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 90px; width: auto; margin: 0 auto 16px;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                         <p style="color: #64748b; margin: 0; font-size: 1rem;">Clinical Reasoning Trainer</p>
                     </div>
                     
@@ -16904,15 +16854,7 @@ casesLoadPromise = (async () => {
             <div class="bg-gradient-to-r from-slate-50 to-zinc-100 dark:from-slate-900 dark:to-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-3xl mx-auto px-6 py-6">
                     <div class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 100px; width: auto;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 100px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                         <p class="text-lg font-medium italic text-zinc-600 dark:text-zinc-400 ml-4 self-end pb-1">Asking the right questions<br/>can change everything.</p>
                     </div>
                 </div>
@@ -17459,15 +17401,7 @@ casesLoadPromise = (async () => {
                 <header class="border-b border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
                     <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-4">
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 40px; width: auto;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 40px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                         </div>
                         <div class="flex items-center gap-3">
                             <button onclick="toggleDarkMode()" class="p-2 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
@@ -17571,15 +17505,7 @@ casesLoadPromise = (async () => {
                 <header class="border-b border-zinc-200 dark:border-zinc-700 sticky top-0 bg-white dark:bg-zinc-900 z-50">
                     <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-3">
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 115" style="height: 36px; width: auto;"><text x="20" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                              <text x="200" y="65" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="currentColor">D</text>
-                              <line x1="248" y1="37" x2="272" y2="67" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-                              <ellipse cx="246" cy="34" rx="2.5" ry="4.5" transform="rotate(-28 246 34)" fill="currentColor"/>
-                              <path d="M 272 37 L 256 53 Q 250 61 250 71 Q 250 81 258 87 Q 266 93 266 103" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                              <ellipse cx="274" cy="34" rx="2.5" ry="4.5" transform="rotate(28 274 34)" fill="currentColor"/>
-                              <circle cx="266" cy="103" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                              <circle cx="266" cy="103" r="5" fill="currentColor"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 36px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="text-right">
@@ -17768,16 +17694,7 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-3xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
                     </a>
                     <nav class="hidden sm:flex items-center gap-6 text-sm">
                         <a href="#" onclick="goToScreen('menu'); return false;" class="${activeNav === 'train' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">Train</a>
@@ -19218,16 +19135,7 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
                     </a>
                     <nav class="hidden sm:flex items-center gap-6 text-sm">
                         <a href="#" onclick="goToScreen('menu'); return false;" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline">Train</a>
@@ -19967,16 +19875,7 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-4xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
                     </a>
                     <div class="flex items-center gap-3">
                         <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
@@ -20249,16 +20148,7 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
-                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
-                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
-                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
-                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
                     </a>
                     <div class="flex items-center gap-3">
                         <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
@@ -60752,7 +60642,7 @@ to apply changes.');
             <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
                 <title>Case Summary - ${caseData.title}</title>
                 <style>
 

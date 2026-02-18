@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive pathophysiology module: Mast Cell Disorders. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Mast Cell Disorders - ReasonDx</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: white; text-align: center; margin-bottom: 10px; font-size: 2.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .subtitle { color: rgba(255,255,255,0.9); text-align: center; margin-bottom: 30px; font-size: 1.1em; }
+        .card { background:var(--rdx-bg-card); border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .card h2 { color: #c53030; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #fed7d7; }
+        .card h3 { color: #9b2c2c; margin: 20px 0 10px 0; }
+        .mechanism-box { background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); border-left: 4px solid #c53030; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .pathway { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .pathway-step { background: #c53030; color: white; padding: 10px 15px; border-radius: 20px; font-weight: 500; }
+        .pathway-arrow { color: #c53030; font-size: 1.5em; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border-bottom: 1px solid #fed7d7; }
+        .comparison-table th { background: #c53030; color: white; }
+        .comparison-table tr:nth-child(even) { background: #fff5f5; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .clinical-pearl strong { color: #b45309; }
+        .danger-box { background: #fff5f5; border: 2px solid #e53e3e; border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .danger-box h4 { color: #c53030; margin-bottom: 10px; }
+        .criteria-box { background: #f0fff4; border: 2px solid #48bb78; border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .criteria-box h4 { color: #276749; margin-bottom: 10px; }
+        .symptom-list { list-style: none; padding: 0; }
+        .symptom-list li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .symptom-list li::before { content: "•"; color: #c53030; font-size: 1.5em; position: absolute; left: 0; top: 5px; }
+        .quiz-section { background: #fff5f5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .quiz-question { font-weight: 600; color: #9b2c2c; margin-bottom: 15px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 12px 15px; background:var(--rdx-bg-card); border: 2px solid #feb2b2; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .quiz-option:hover { border-color: #fc8181; background: #fff5f5; }
+        .quiz-option.correct { background: #c6f6d5; border-color: #48bb78; }
+        .quiz-option.incorrect { background: #fed7d7; border-color: #f56565; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #c6f6d5; color: #276749; }
+        .feedback.incorrect { background: #fed7d7; color: #c53030; }
+        .organ-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0; }
+        .organ-card { background: #fff5f5; border-radius: 8px; padding: 15px; border-left: 4px solid #c53030; }
+        .organ-card h4 { color: #9b2c2c; margin-bottom: 8px; }
+        .algorithm-step { background:var(--rdx-bg-card); border: 2px solid #c53030; border-radius: 8px; padding: 15px; margin: 10px 0; position: relative; }
+        .algorithm-step::after { content: "↓"; display: block; text-align: center; color: #c53030; font-size: 1.5em; margin-top: 10px; }
+        .algorithm-step:last-child::after { display: none; }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.85em; font-weight: 600; margin: 3px; }
+        .badge-sm { background: #c6f6d5; color: #276749; }
+        .badge-ism { background: #fef3c7; color: #b45309; }
+        .badge-advanced { background: #fed7d7; color: #9b2c2c; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        .nav-btn { padding: 12px 25px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; }
+        .nav-btn.primary { background: #c53030; color: white; }
+        .nav-btn.primary:hover { background: #9b2c2c; }
+        .nav-btn.secondary { background: #fed7d7; color: #9b2c2c; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .progress-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: all 0.3s; }
+        .progress-dot.active { background:var(--rdx-bg-card); transform: scale(1.3); }
+        .progress-dot.completed { background: #48bb78; }
+    </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔴 Mast Cell Disorders</h1>
+        <p class="subtitle">ReasonDx — Mastocytosis, MCAS & Hereditary Alpha-Tryptasemia</p>
+        
+        <div class="progress-bar">
+            <div class="progress-dot active" data-section="0"></div>
+            <div class="progress-dot" data-section="1"></div>
+            <div class="progress-dot" data-section="2"></div>
+            <div class="progress-dot" data-section="3"></div>
+            <div class="progress-dot" data-section="4"></div>
+            <div class="progress-dot" data-section="5"></div>
+        </div>
+
+        <!-- Section 0: Overview -->
+        <div class="section active" id="section-0">
+            <div class="card">
+                <h2>📚 Overview: The Mast Cell Disorder Spectrum</h2>
+                
+                <p>Mast cell disorders represent a spectrum of conditions characterized by <strong>abnormal mast cell accumulation</strong> (mastocytosis) or <strong>excessive mast cell activation</strong> without clonal expansion (MCAS).</p>
+                
+                <div class="mechanism-box">
+                    <h3>The Three Main Categories</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Disorder</th>
+                            <th>Key Feature</th>
+                            <th>Prevalence</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Mastocytosis</strong></td>
+                            <td>Clonal mast cell proliferation (KIT mutation)</td>
+                            <td>~1:10,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MCAS</strong></td>
+                            <td>Mast cell activation without clonal disease</td>
+                            <td>Unknown (controversial)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HαT</strong></td>
+                            <td>Elevated baseline tryptase (genetic)</td>
+                            <td>4-6% of population</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Why This Matters</h3>
+                <ul class="symptom-list">
+                    <li><strong>Anaphylaxis risk:</strong> Patients with mastocytosis have severe anaphylaxis with hypotension more frequently</li>
+                    <li><strong>Anesthesia considerations:</strong> Certain medications can trigger mast cell degranulation</li>
+                    <li><strong>Venom allergy:</strong> Higher rates and more severe reactions in mastocytosis</li>
+                    <li><strong>Osteoporosis:</strong> Systemic mastocytosis causes bone disease even in young patients</li>
+                </ul>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> Always check a baseline serum tryptase after anaphylaxis! Elevated baseline (&gt;11.4 ng/mL) suggests mastocytosis or HαT and changes management (lifelong epinephrine, venom immunotherapy evaluation).
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" disabled>← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Mastocytosis →</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Mastocytosis -->
+        <div class="section" id="section-1">
+            <div class="card">
+                <h2>🔬 Mastocytosis: Classification & Pathophysiology</h2>
+                
+                <h3>WHO Classification (2022)</h3>
+                <div class="mechanism-box">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Category</th>
+                            <th>Subtypes</th>
+                            <th>Prognosis</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Cutaneous Mastocytosis (CM)</strong></td>
+                            <td>
+                                <span class="badge badge-sm">Urticaria pigmentosa</span>
+                                <span class="badge badge-sm">Diffuse CM</span>
+                                <span class="badge badge-sm">Mastocytoma</span>
+                            </td>
+                            <td>Excellent, especially in children (often resolves)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Indolent SM (ISM)</strong></td>
+                            <td>
+                                <span class="badge badge-ism">Bone marrow involvement</span>
+                                <span class="badge badge-ism">No organ damage</span>
+                            </td>
+                            <td>Normal life expectancy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Smoldering SM (SSM)</strong></td>
+                            <td>
+                                <span class="badge badge-ism">High mast cell burden</span>
+                                <span class="badge badge-ism">≥2 B findings</span>
+                            </td>
+                            <td>Risk of progression</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Advanced SM</strong></td>
+                            <td>
+                                <span class="badge badge-advanced">SM-AHN</span>
+                                <span class="badge badge-advanced">Aggressive SM</span>
+                                <span class="badge badge-advanced">Mast Cell Leukemia</span>
+                            </td>
+                            <td>Poor, requires cytoreductive therapy</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>The KIT D816V Mutation</h3>
+                <div class="pathway">
+                    <span class="pathway-step">KIT D816V mutation</span>
+                    <span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Constitutive KIT activation</span>
+                    <span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Mast cell proliferation & survival</span>
+                    <span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Clonal accumulation</span>
+                </div>
+                
+                <ul class="symptom-list">
+                    <li><strong>Present in &gt;90%</strong> of adult systemic mastocytosis</li>
+                    <li>Activating point mutation at codon 816 (Asp→Val)</li>
+                    <li><strong>Treatment implication:</strong> Resistant to imatinib (use avapritinib, midostaurin)</li>
+                    <li>Can be detected by sensitive PCR even at low allele burden</li>
+                </ul>
+
+                <h3>Diagnostic Criteria for Systemic Mastocytosis</h3>
+                <div class="criteria-box">
+                    <h4>WHO Criteria: 1 Major + 1 Minor OR 3 Minor</h4>
+                    <p><strong>MAJOR:</strong></p>
+                    <ul class="symptom-list">
+                        <li>Multifocal dense mast cell aggregates (≥15 mast cells) in bone marrow or extracutaneous organ</li>
+                    </ul>
+                    <p><strong>MINOR:</strong></p>
+                    <ul class="symptom-list">
+                        <li>&gt;25% of mast cells are spindle-shaped or atypical</li>
+                        <li>KIT D816V mutation detected</li>
+                        <li>Mast cells express CD25 and/or CD2</li>
+                        <li>Serum tryptase &gt;20 ng/mL (not valid if associated hematologic neoplasm)</li>
+                    </ul>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> The "Darier sign" (urticaria when skin lesion is stroked) is classic for cutaneous mastocytosis but NOT pathognomonic. It results from local mast cell degranulation when lesions are mechanically stimulated.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Clinical Features →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Clinical Features -->
+        <div class="section" id="section-2">
+            <div class="card">
+                <h2>🩺 Clinical Manifestations</h2>
+                
+                <h3>Organ-Specific Symptoms</h3>
+                <div class="organ-grid">
+                    <div class="organ-card">
+                        <h4>🔴 Skin</h4>
+                        <ul>
+                            <li>Urticaria pigmentosa (maculopapular)</li>
+                            <li>Flushing</li>
+                            <li>Pruritus</li>
+                            <li>Darier sign positive</li>
+                        </ul>
+                    </div>
+                    <div class="organ-card">
+                        <h4>💓 Cardiovascular</h4>
+                        <ul>
+                            <li>Hypotension/syncope</li>
+                            <li>Tachycardia</li>
+                            <li>Anaphylaxis</li>
+                            <li>Shock (severe)</li>
+                        </ul>
+                    </div>
+                    <div class="organ-card">
+                        <h4>🫁 GI</h4>
+                        <ul>
+                            <li>Abdominal pain/cramping</li>
+                            <li>Diarrhea</li>
+                            <li>Nausea/vomiting</li>
+                            <li>Peptic ulcer disease</li>
+                        </ul>
+                    </div>
+                    <div class="organ-card">
+                        <h4>🦴 Skeletal</h4>
+                        <ul>
+                            <li>Osteoporosis/osteopenia</li>
+                            <li>Pathologic fractures</li>
+                            <li>Bone pain</li>
+                            <li>Osteosclerosis (advanced)</li>
+                        </ul>
+                    </div>
+                    <div class="organ-card">
+                        <h4>🧠 Neuropsychiatric</h4>
+                        <ul>
+                            <li>"Brain fog"</li>
+                            <li>Depression</li>
+                            <li>Headaches</li>
+                            <li>Cognitive impairment</li>
+                        </ul>
+                    </div>
+                    <div class="organ-card">
+                        <h4>⚡ Constitutional</h4>
+                        <ul>
+                            <li>Fatigue</li>
+                            <li>Anemia</li>
+                            <li>Weight loss (advanced)</li>
+                            <li>Night sweats</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Triggers for Mast Cell Degranulation</h3>
+                <div class="danger-box">
+                    <h4>⚠️ Common Triggers to Avoid/Manage</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Category</th>
+                            <th>Examples</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Physical</strong></td>
+                            <td>Heat, cold, friction, exercise, stress</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Medications</strong></td>
+                            <td>NSAIDs, opioids (morphine > fentanyl), vancomycin (red man), muscle relaxants, radiocontrast</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Venoms</strong></td>
+                            <td>Hymenoptera stings (high anaphylaxis risk!)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alcohol</strong></td>
+                            <td>Direct mast cell degranulation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anesthesia</strong></td>
+                            <td>Atracurium, thiopental (avoid); propofol, fentanyl (safer)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Anaphylaxis in Mastocytosis</h3>
+                <div class="mechanism-box">
+                    <ul class="symptom-list">
+                        <li><strong>Hypotension-predominant:</strong> Cardiovascular symptoms with ABSENCE of skin findings is classic</li>
+                        <li><strong>Hymenoptera venom:</strong> Up to 5% of venom anaphylaxis patients have mastocytosis</li>
+                        <li><strong>Idiopathic anaphylaxis:</strong> Always evaluate for mastocytosis/HαT</li>
+                        <li><strong>More severe:</strong> Greater hypotension, longer duration, higher epinephrine requirements</li>
+                    </ul>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> Anaphylaxis WITHOUT urticaria/angioedema (just hypotension and syncope) should raise suspicion for mastocytosis! Up to 50% of mastocytosis patients lack skin findings during anaphylaxis.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Workup →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Workup -->
+        <div class="section" id="section-3">
+            <div class="card">
+                <h2>🔍 Diagnostic Workup</h2>
+                
+                <h3>When to Suspect Mastocytosis</h3>
+                <ul class="symptom-list">
+                    <li>Recurrent anaphylaxis (especially hypotension-predominant or idiopathic)</li>
+                    <li>Urticaria pigmentosa skin lesions</li>
+                    <li>Elevated baseline tryptase (&gt;11.4 ng/mL, ideally &gt;20 ng/mL)</li>
+                    <li>Unexplained osteoporosis in young patient</li>
+                    <li>Severe hymenoptera anaphylaxis</li>
+                    <li>Recurrent flushing + GI symptoms</li>
+                </ul>
+
+                <h3>Diagnostic Algorithm</h3>
+                <div class="algorithm-step">
+                    <strong>Step 1: Baseline Serum Tryptase</strong>
+                    <p>Draw at baseline (NOT during acute episode). If elevated (&gt;11.4 ng/mL), proceed.</p>
+                    <p><em>Note: If tryptase 8-11.4, consider HαT genetics</em></p>
+                </div>
+                <div class="algorithm-step">
+                    <strong>Step 2: Additional Labs</strong>
+                    <p>CBC with differential, comprehensive metabolic panel, LDH, vitamin D, DEXA scan</p>
+                </div>
+                <div class="algorithm-step">
+                    <strong>Step 3: Skin Examination</strong>
+                    <p>Look for urticaria pigmentosa (red-brown macules/papules). Test Darier sign.</p>
+                    <p>If present → skin biopsy</p>
+                </div>
+                <div class="algorithm-step">
+                    <strong>Step 4: Bone Marrow Biopsy</strong>
+                    <p>Gold standard for systemic mastocytosis diagnosis</p>
+                    <ul>
+                        <li>Morphology: Look for mast cell aggregates, spindle shapes</li>
+                        <li>Immunophenotype: CD25+, CD2+ mast cells (aberrant)</li>
+                        <li>Molecular: KIT D816V mutation testing</li>
+                    </ul>
+                </div>
+                <div class="algorithm-step" style="border-color: #48bb78;">
+                    <strong>Step 5: Stage the Disease</strong>
+                    <p>Evaluate B and C findings to classify ISM vs SSM vs Advanced SM</p>
+                </div>
+
+                <h3>Tryptase Interpretation</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Tryptase Level</th>
+                        <th>Interpretation</th>
+                        <th>Next Steps</th>
+                    </tr>
+                    <tr>
+                        <td>&lt;11.4 ng/mL</td>
+                        <td>Normal</td>
+                        <td>Mastocytosis unlikely (doesn't exclude MCAS)</td>
+                    </tr>
+                    <tr>
+                        <td>11.4-20 ng/mL</td>
+                        <td>Mildly elevated</td>
+                        <td>Consider HαT, repeat, clinical correlation</td>
+                    </tr>
+                    <tr>
+                        <td>&gt;20 ng/mL</td>
+                        <td>WHO minor criterion</td>
+                        <td>High suspicion for SM → bone marrow biopsy</td>
+                    </tr>
+                    <tr>
+                        <td>&gt;200 ng/mL</td>
+                        <td>Very high</td>
+                        <td>Suggests high mast cell burden or advanced SM</td>
+                    </tr>
+                </table>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> The "20% + 2" rule for acute anaphylaxis: Tryptase is elevated if it's &gt;20% above baseline PLUS 2 ng/mL. This helps distinguish mast cell activation from baseline elevation. A peak:baseline ratio &gt;1.2 + 2 suggests anaphylaxis.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Treatment →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Treatment & MCAS -->
+        <div class="section" id="section-4">
+            <div class="card">
+                <h2>💊 Treatment & MCAS</h2>
+                
+                <h3>Management of Indolent Systemic Mastocytosis</h3>
+                <div class="mechanism-box">
+                    <h4>Symptom-Directed Therapy</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Symptom</th>
+                            <th>Treatment</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Flushing, pruritus, urticaria</strong></td>
+                            <td>H1 antihistamines (high dose if needed, up to 4x)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GI symptoms</strong></td>
+                            <td>H2 blockers, PPIs, cromolyn sodium</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anaphylaxis prevention</strong></td>
+                            <td>Epinephrine autoinjectors (multiple!), medical alert</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Osteoporosis</strong></td>
+                            <td>Bisphosphonates, calcium/vitamin D, DEXA monitoring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Refractory symptoms</strong></td>
+                            <td>Omalizumab (anti-IgE), consider cytoreduction</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Advanced SM Treatment</h3>
+                <div class="danger-box">
+                    <h4>Cytoreductive Therapy (Hematology-Oncology)</h4>
+                    <ul class="symptom-list">
+                        <li><strong>Midostaurin:</strong> Multi-kinase inhibitor, FDA approved for advanced SM</li>
+                        <li><strong>Avapritinib:</strong> Selective KIT D816V inhibitor, highly effective</li>
+                        <li><strong>Cladribine:</strong> For aggressive SM, SM-AHN</li>
+                        <li><strong>Imatinib:</strong> Only for rare non-D816V KIT mutations</li>
+                    </ul>
+                </div>
+
+                <h3>Mast Cell Activation Syndrome (MCAS)</h3>
+                <div class="criteria-box">
+                    <h4>Consensus Diagnostic Criteria (2019)</h4>
+                    <p>ALL of the following must be met:</p>
+                    <ul class="symptom-list">
+                        <li><strong>1. Typical clinical symptoms</strong> affecting ≥2 organ systems (skin, GI, cardiovascular, respiratory)</li>
+                        <li><strong>2. Documented mast cell mediator elevation</strong> during symptomatic episode (tryptase increase ≥20% + 2 ng/mL above baseline, or elevated urinary prostaglandins/histamine metabolites)</li>
+                        <li><strong>3. Response to mast cell-targeted therapy</strong> (antihistamines, mast cell stabilizers)</li>
+                        <li><strong>4. Exclusion of other diagnoses</strong> that better explain symptoms</li>
+                    </ul>
+                </div>
+
+                <div class="mechanism-box">
+                    <h4>MCAS Subtypes</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Subtype</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary (Clonal) MCAS</strong></td>
+                            <td>Meets 1-2 minor criteria for SM but not full SM diagnosis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secondary MCAS</strong></td>
+                            <td>Due to allergy, chronic infection, autoimmune disease</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Idiopathic MCAS</strong></td>
+                            <td>No identifiable cause, diagnosis of exclusion</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Hereditary Alpha-Tryptasemia (HαT)</h3>
+                <div class="mechanism-box">
+                    <ul class="symptom-list">
+                        <li><strong>Prevalence:</strong> 4-6% of general population (common!)</li>
+                        <li><strong>Genetics:</strong> Extra copies of TPSAB1 gene (autosomal dominant)</li>
+                        <li><strong>Tryptase:</strong> Elevated baseline (typically 8-20 ng/mL)</li>
+                        <li><strong>Symptoms:</strong> Variable - some asymptomatic, others have MCAS-like symptoms, more severe anaphylaxis</li>
+                        <li><strong>Testing:</strong> Droplet digital PCR for TPSAB1 copy number</li>
+                        <li><strong>Management:</strong> Symptom-directed, treat like MCAS if symptomatic</li>
+                    </ul>
+                </div>
+
+                <div class="clinical-pearl">
+                    <strong>🔑 Clinical Pearl:</strong> MCAS is real but OVER-diagnosed! The key is DOCUMENTED mediator elevation during symptoms. Many patients are labeled "MCAS" without objective evidence. Insist on proper criteria before the diagnosis.
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="nextSection()">Next: Quiz →</button>
+            </div>
+        </div>
+
+        <!-- Section 5: Quiz -->
+        <div class="section" id="section-5">
+            <div class="card">
+                <h2>📝 Knowledge Check</h2>
+                
+                <div class="quiz-section">
+                    <p class="quiz-question">1. A 45-year-old man presents after a bee sting caused syncope and hypotension without any skin findings. Baseline tryptase is 18 ng/mL. What is the most likely diagnosis?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Typical IgE-mediated venom anaphylaxis</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Systemic mastocytosis with venom anaphylaxis</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. Vasovagal syncope</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Idiopathic anaphylaxis</div>
+                    </div>
+                    <div class="feedback" id="feedback-1">
+                        <strong>Correct!</strong> Hypotension-predominant anaphylaxis WITHOUT skin findings + elevated baseline tryptase is classic for mastocytosis. Up to 5% of patients with severe hymenoptera anaphylaxis have underlying mastocytosis. This patient needs bone marrow biopsy and should receive venom immunotherapy.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">2. Which mutation is found in >90% of adult systemic mastocytosis and confers resistance to imatinib?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. BCR-ABL</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. JAK2 V617F</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. KIT D816V</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. FLT3-ITD</div>
+                    </div>
+                    <div class="feedback" id="feedback-2">
+                        <strong>Correct!</strong> KIT D816V is the hallmark mutation in systemic mastocytosis, present in >90% of adult cases. This specific mutation causes constitutive activation of the KIT receptor and is RESISTANT to imatinib. Avapritinib and midostaurin are effective for D816V-positive disease.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">3. A patient has recurrent episodes of flushing, GI cramping, and near-syncope. Tryptase during symptoms was 14 ng/mL; baseline 4 weeks later is 11 ng/mL. Does this meet criteria for MCAS?</p>
+                    <div class="quiz-options" data-correct="0">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. Yes - tryptase increased >20% + 2 ng/mL above baseline</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. No - the absolute tryptase is normal (<11.4)</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. No - MCAS requires tryptase >20 ng/mL</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Cannot determine without skin biopsy</div>
+                    </div>
+                    <div class="feedback" id="feedback-3">
+                        <strong>Correct!</strong> The "20% + 2" formula: 11 × 1.2 + 2 = 15.2 ng/mL threshold. The acute tryptase of 14 is just below this threshold but very close. Technically doesn't quite meet criteria. However, with strong clinical history, consider other mast cell mediators (urinary prostaglandins, histamine metabolites) or repeat testing during a symptomatic episode.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">4. Which finding on bone marrow biopsy is the MAJOR criterion for systemic mastocytosis?</p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. CD25+ mast cells</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. Multifocal dense aggregates of ≥15 mast cells</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. KIT D816V mutation</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. Serum tryptase >20 ng/mL</div>
+                    </div>
+                    <div class="feedback" id="feedback-4">
+                        <strong>Correct!</strong> The ONLY major criterion is multifocal dense aggregates of ≥15 mast cells in bone marrow or extracutaneous organs. CD25 expression, KIT mutation, atypical morphology, and elevated tryptase are all MINOR criteria. Diagnosis requires 1 major + 1 minor OR 3 minor criteria.
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <p class="quiz-question">5. What is hereditary alpha-tryptasemia (HαT)?</p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">A. A rare form of mast cell leukemia</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">B. An autoimmune disease targeting tryptase</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 2)">C. A common genetic condition with extra TPSAB1 gene copies causing elevated baseline tryptase</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 3)">D. An acquired tryptase deficiency</div>
+                    </div>
+                    <div class="feedback" id="feedback-5">
+                        <strong>Correct!</strong> HαT is caused by extra copies of the TPSAB1 gene (autosomal dominant) and affects 4-6% of the population! It causes elevated baseline tryptase without clonal mast cell disease. Some individuals are asymptomatic; others have MCAS-like symptoms or more severe anaphylaxis. Testing is via droplet digital PCR.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Key Takeaways</h2>
+                <ul class="symptom-list">
+                    <li>Mastocytosis = clonal mast cell proliferation; KIT D816V mutation in >90% of adults</li>
+                    <li>Anaphylaxis without skin findings + elevated baseline tryptase → think mastocytosis</li>
+                    <li>WHO criteria: 1 major + 1 minor OR 3 minor criteria for diagnosis</li>
+                    <li>MCAS requires DOCUMENTED mediator elevation during symptoms</li>
+                    <li>HαT affects 4-6% of population - common cause of mildly elevated tryptase</li>
+                    <li>All mastocytosis patients need: epinephrine, medical alert, venom allergy evaluation, DEXA</li>
+                </ul>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="prevSection()">← Previous</button>
+                <button class="nav-btn primary" onclick="location.reload()">🔄 Restart Module</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        const totalSections = 6;
+
+        function updateProgress() {
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index < currentSection) dot.classList.add('completed');
+                if (index === currentSection) dot.classList.add('active');
+            });
+        }
+
+        function showSection(index) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(`section-${index}`).classList.add('active');
+            currentSection = index;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections - 1) showSection(currentSection + 1);
+        }
+
+        function prevSection() {
+            if (currentSection > 0) showSection(currentSection - 1);
+        }
+
+        function checkAnswer(element, selectedIndex) {
+            const options = element.parentElement;
+            const correctIndex = parseInt(options.dataset.correct);
+            
+            if (options.querySelector('.correct, .incorrect')) return;
+            
+            options.querySelectorAll('.quiz-option').forEach((opt, idx) => {
+                if (idx === correctIndex) opt.classList.add('correct');
+                else if (idx === selectedIndex) opt.classList.add('incorrect');
+            });
+            
+            const feedback = options.nextElementSibling;
+            feedback.classList.add('show');
+            if (selectedIndex === correctIndex) {
+                feedback.classList.add('correct');
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.innerHTML = '<strong>Incorrect.</strong> ' + feedback.innerHTML.replace('<strong>Correct!</strong> ', '');
+            }
+        }
+    </script>
+
+    
+    <div data-dx-tutor
+         data-module-title="Mast Cell Disorders"
+         data-key-points="📚 Overview: The Mast Cell Disorder Spectrum, 🔬 Mastocytosis: Classification & Pathophysiology, 🩺 Clinical Manifestations, 🔍 Diagnostic Workup, 💊 Treatment & MCAS, 📝 Knowledge Check, 🎯 Key Takeaways, The Three Main Categories, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A patient presents with episodic flushing, tachycardia, and hypotension without urticaria. Baseline tryptase is 6 ng/mL (normal). During an episode, tryptase rises to 18 ng/mL. What criteria must be met for a diagnosis of mast cell activation syndrome (MCAS)?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Elevated baseline tryptase suggests systemic mastocytosis (increased mast cell burden). In MCAS, the baseline tryptase is typically NORMAL." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Elevated baseline tryptase >20 ng/mL</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="MCAS consensus criteria (all three required): (1) recurrent episodic symptoms affecting ≥2 organ systems consistent with mast cell mediator release, (2) acute tryptase rise ≥20% + 2 ng/mL above baseline (here: 20% of 6 = 1.2 + 2 = 3.2 → threshold 9.2, and 18 exceeds this), (3) response to medications targeting mast cell mediators (antihistamines, mast cell stabilizers)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Episodic symptoms + acute tryptase rise (≥20% above baseline + 2 ng/mL) + response to mast cell-directed therapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="UP skin lesions suggest cutaneous mastocytosis, not MCAS. MCAS typically lacks fixed skin lesions." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Urticaria pigmentosa on skin examination</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="KIT mutation suggests clonal mast cell disease (monoclonal MCAS or mastocytosis). Most MCAS is idiopathic without clonal markers." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">KIT D816V mutation detected</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What FIRST-LINE pharmacotherapy is used for symptom control in mast cell activation syndrome?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Chronic systemic steroids are not first-line due to significant side effects. They may be used for refractory flares." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Systemic corticosteroids daily</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Dual antihistamine blockade: H1 blocker (cetirizine, fexofenadine) for urticaria/pruritus/flushing + H2 blocker (famotidine) for GI symptoms/gastric acid. Start this combination first. Add-on therapies: cromolyn sodium (mast cell stabilizer, especially for GI symptoms), montelukast (leukotriene blocker), aspirin (prostaglandin D2 inhibitor — only if tolerated)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">H1 and H2 antihistamine combination</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Omalizumab may help in refractory MCAS but is not first-line. It&#x27;s typically considered after failure of antihistamines and mast cell stabilizers." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Omalizumab (anti-IgE) as initial therapy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chemotherapy is for advanced systemic mastocytosis with organ damage, not for MCAS." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cytoreductive chemotherapy</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">What distinguishes hereditary alpha-tryptasemia (HaT) from systemic mastocytosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Both can present with anaphylaxis, and many HaT carriers are asymptomatic." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">HaT always causes anaphylaxis while mastocytosis does not</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="HaT: autosomal dominant, extra copies of TPSAB1 → constitutively elevated baseline tryptase (often &gt;8-12 ng/mL) WITHOUT increased mast cell burden. Prevalence ~5% of the population. Many are asymptomatic; some have MCAS-like symptoms, connective tissue laxity, or increased anaphylaxis risk. Key distinction from mastocytosis: no dense mast cell infiltrates on biopsy, no KIT mutation." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">HaT is caused by extra copies of the TPSAB1 gene with elevated baseline tryptase but no clonal mast cell proliferation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="HaT specifically RAISES baseline tryptase — that&#x27;s its hallmark. The distinction is whether the tryptase elevation reflects increased gene copies (HaT) or increased mast cell mass (mastocytosis)." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">HaT has low tryptase while mastocytosis has high tryptase</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="HaT is a genetic trait present from birth and persists lifelong. Both conditions can present at any age." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">HaT only affects children while mastocytosis affects adults</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Cromolyn sodium is used in mast cell disorders because it:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Cromolyn does not block histamine receptors — antihistamines do that. Cromolyn acts upstream." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Blocks histamine receptors competitively</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Cromolyn sodium: mast cell stabilizer — prevents calcium influx needed for degranulation → reduces histamine, prostaglandin, and leukotriene release. Most effective for GI symptoms (oral formulation) and prophylactically (nasal, ophthalmic). Must be taken regularly (not PRN). Minimal systemic absorption → excellent safety profile." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Stabilizes mast cell membranes to prevent degranulation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="No clinically available drug directly inhibits tryptase activity. Cromolyn prevents its release." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Inhibits tryptase enzymatic activity</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Cromolyn stabilizes mast cells; it does not destroy them. Cytoreductive therapy targets mast cell destruction." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Destroys abnormal mast cells selectively</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">A 45-year-old with indolent systemic mastocytosis asks about prognosis. What is the expected clinical course?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Indolent SM (ISM) has excellent prognosis with very low transformation risk. Aggressive transformation is uncommon." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Rapid progression to mast cell leukemia within 5 years</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Indolent SM: near-normal life expectancy, &lt;5% lifetime risk of progression to advanced SM. Management focuses on symptom control (antihistamines, mast cell stabilizers, trigger avoidance) and anaphylaxis prevention. Annual monitoring: tryptase levels, CBC, liver function, bone density. Escalation to cytoreductive therapy only if B-findings or C-findings develop." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Near-normal life expectancy with symptom management; low risk of progression</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Organ damage (C-findings) defines aggressive SM, not indolent. ISM does not inevitably progress." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Inevitable organ damage requiring transplant</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="ISM is a chronic condition. Spontaneous remission is not expected, though symptoms may fluctuate." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Spontaneous remission expected within 2 years</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Which medication class should be avoided or used with extreme caution in mastocytosis patients due to mast cell degranulation risk?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="ACE inhibitors are generally safe in mastocytosis. They don&#x27;t trigger mast cell degranulation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">ACE inhibitors</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Certain opioids (morphine, codeine, meperidine) directly activate mast cells via MRGPRX2 receptor → non-IgE-mediated degranulation → flushing, urticaria, or anaphylactoid reactions. Safer alternatives: fentanyl, hydromorphone (lower mast cell activation potential). Other triggers to avoid: NSAIDs (in some patients), radiocontrast (premedicate), alcohol, extreme temperatures." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Opioid analgesics (morphine, codeine)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Beta-2 agonists (albuterol) actually stabilize mast cells by increasing intracellular cAMP and are safe to use." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Beta-2 agonists</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PPIs are safe and often beneficial in mastocytosis for GI symptoms and acid hypersecretion." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Proton pump inhibitors</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">What bone complication should be screened for in systemic mastocytosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Mastocytosis does not predispose to primary bone tumors." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Osteosarcoma</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Mastocytosis → mast cell infiltration of bone + local mediator release (histamine, heparin, cytokines) → osteoporosis and osteopenia, even in premenopausal women and young men. Screen with DEXA scan at diagnosis and periodically. Pathologic fractures can be the presenting feature. Treat with bisphosphonates or denosumab. Osteoporosis in a young male should prompt consideration of mastocytosis." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Osteoporosis (even in young males)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="AVN is associated with corticosteroids and sickle cell disease, not mastocytosis specifically." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Avascular necrosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Rickets is a vitamin D/phosphate deficiency disease of childhood, unrelated to mastocytosis." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Rickets</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Avapritinib and midostaurin are used in advanced systemic mastocytosis because they target:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="These are not antihistamines. They are targeted kinase inhibitors." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Histamine H1 receptors with ultra-high affinity</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Avapritinib and midostaurin are potent inhibitors of KIT D816V — the constitutively active mutant kinase driving mast cell proliferation. Imatinib (the original KIT inhibitor) does NOT work against D816V due to a conformational change. Avapritinib has greater selectivity for D816V. These agents reduce mast cell burden, tryptase levels, and organ damage in advanced SM." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">The KIT D816V mutant tyrosine kinase</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Anti-IgE (omalizumab) targets surface IgE. Avapritinib and midostaurin target the intracellular KIT signaling pathway." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">IgE on mast cell surfaces</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Aspirin/NSAIDs inhibit prostaglandin synthesis. These targeted therapies act on KIT kinase." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Prostaglandin D2 synthesis pathway</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1016/j.jaip.2021.03.003" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Mastocytosis Consensus Guidelines</a> — <em style="color:var(--rdx-text-muted,#64748b)">JACI: In Practice</em></li></ul></div>
+<div class="cross-links"><a href="../deep-dive-player.html?module=mast-cell-disorders-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/mast-cell-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK549770/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+<li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
+</ol>
+</div>
+
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/mast-cell-disorders.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

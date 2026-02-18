@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predict Labs | ReasonDx</title>
+    <meta name="description" content="Predict Labs — clinical reasoning education platform for medical students and healthcare professionals.">
+<title>Predict Labs | ReasonDx</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family:var(--rdx-font);
             background: #f8fafc;
             color: #1e293b;
             min-height: 100vh;
@@ -51,7 +64,7 @@
         }
         .category-tab {
             padding: 10px 20px;
-            background: #fff;
+            background:var(--rdx-bg-card);
             border: 1px solid #e2e8f0;
             border-radius: 25px;
             cursor: pointer;
@@ -76,7 +89,7 @@
         }
         
         .scenario-card {
-            background: #fff;
+            background:var(--rdx-bg-card);
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 20px;
@@ -110,14 +123,14 @@
             border-radius: 12px;
             color: #475569;
         }
-        .tag.difficulty-easy { background: #dcfce7; color: #166534; }
+        .tag.difficulty-easy { background: #ccfbf1; color: #166534; }
         .tag.difficulty-medium { background: #fef3c7; color: #92400e; }
         .tag.difficulty-hard { background: #fee2e2; color: #991b1b; }
         
         /* Active Scenario Panel */
         .scenario-panel {
             display: none;
-            background: #fff;
+            background:var(--rdx-bg-card);
             border: 1px solid #e2e8f0;
             border-radius: 16px;
             overflow: hidden;
@@ -163,7 +176,7 @@
         .lab-item {
             background: #f8fafc;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border-radius:12px;
             padding: 14px;
             transition: all 0.2s;
         }
@@ -185,8 +198,8 @@
             flex: 1;
             padding: 8px 4px;
             border: 1px solid #e2e8f0;
-            background: #fff;
-            border-radius: 6px;
+            background:var(--rdx-bg-card);
+            border-radius:8px;
             cursor: pointer;
             font-size: 0.8rem;
             transition: all 0.2s;
@@ -253,7 +266,7 @@
         .score-display {
             text-align: center;
             padding: 24px;
-            background: #fff;
+            background:var(--rdx-bg-card);
             border-radius: 12px;
             margin-bottom: 20px;
         }
@@ -268,7 +281,7 @@
         }
         
         .explanation-box {
-            background: #fff;
+            background:var(--rdx-bg-card);
             border-radius: 12px;
             padding: 20px;
             border-left: 4px solid #8b5cf6;
@@ -299,10 +312,9 @@
             }
         }
     </style>
+<link rel="stylesheet" href="./css/rdx-theme.css">
 </head>
 <body>
-    <script src="/dx-universal-nav.js"></script>
-    
     <div class="container">
         <div class="header">
             <h1>🧪 Predict Labs</h1>
@@ -680,13 +692,18 @@
         init();
     </script>
 
-    <!-- DxSuite AI Tutor Integration -->
+    
     <div data-dx-tutor
          data-module-title="Predict Labs"
          data-key-points="📊 Predict the Lab Results, ${s.title}, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../data/rdx-persist.js"></script>
+<script src="data/rdx-persist.js"></script>
+<script src="./js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+<script src="js/rdx-help-widget.js"></script>
 </body>
 </html>

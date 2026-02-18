@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Renal Embryology - Kidney Development & Congenital Anomalies. Learn mechanisms, clinical features, and manageme...">
+<title>ReasonDx: Renal Embryology - Kidney Development & Congenital Anomalies</title>
+  <style>
+    :root { --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #A78BFA; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info: #06B6D4; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:var(--rdx-font); background: linear-gradient(135deg, #0f0a1a 0%, #1a1030 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139,92,246,0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background:var(--rdx-bg-card); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239,68,68,0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16,185,129,0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245,158,11,0.15); border-left:4px solid var(--rdx-teal); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(6,182,212,0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: rgba(139,92,246,0.2); color: var(--primary); }
+    tr:hover { background:var(--rdx-bg-card); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(16,185,129,0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .dev-card { background: rgba(139,92,246,0.1); border:1px solid var(--rdx-info); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .timeline-item { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 2px solid #0f0a1a; }
+    .timeline-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .pathway-box { background: #f1f5f9; border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco','Consolas',monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; overflow-x: auto; }
+    .condition-link { display: inline-block; background: rgba(139,92,246,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem; font-size: 0.85rem; color: #c4b5fd; text-decoration: none; transition: all 0.2s; }
+    .condition-link:hover { background: rgba(139,92,246,0.4); }
+    .quiz-section { background: rgba(16,185,129,0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option:hover { background: rgba(139,92,246,0.2); }
+    .quiz-option.correct { background: rgba(16,185,129,0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background:var(--rdx-bg-card); border-radius: 0.5rem; }
+    .flow-diagram { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+    .flow-box { background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; text-align: center; }
+    .flow-arrow { color: var(--accent); font-size: 1.2rem; font-weight: bold; }
+    @media (max-width: 600px) { .container { padding: 1rem; } header h1 { font-size: 1.8rem; } }
+  </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/renal-embryology.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Renal Embryology</a> → Module</div>
+
+  <div class="container">
+    <header>
+      <h1>🫘 Renal Embryology</h1>
+      <p class="subtitle">Kidney Development, Ureteric Bud Branching & Congenital Anomalies</p>
+      <p style="color: #6B7280; margin-top: 0.5rem; font-size: 0.9rem;">ReasonDx Module | Open-Access Sources Only</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('three')">Three Kidney Systems</div>
+      <div class="nav-tab" onclick="showTab('metanephros')">Metanephros</div>
+      <div class="nav-tab" onclick="showTab('ascent')">Ascent & Rotation</div>
+      <div class="nav-tab" onclick="showTab('bladder')">Bladder & Urethra</div>
+      <div class="nav-tab" onclick="showTab('anomalies')">Anomalies</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Renal Development Overview</h2>
+        <p>The urinary system develops from <strong>intermediate mesoderm</strong> through three successive kidney systems that develop in a cranial-to-caudal sequence. Only the third system (metanephros) becomes the permanent kidney. The development involves a critical reciprocal induction between the <strong>ureteric bud</strong> and the <strong>metanephric mesenchyme</strong>.</p>
+
+        <h3>Embryonic Origins</h3>
+        <table>
+          <tr><th>Structure</th><th>Embryonic Origin</th></tr>
+          <tr><td>Kidney parenchyma (nephrons, glomeruli, tubules through DCT)</td><td>Metanephric mesenchyme (intermediate mesoderm)</td></tr>
+          <tr><td>Collecting ducts, calyces, renal pelvis, ureter</td><td>Ureteric bud (mesonephric/Wolffian duct outgrowth)</td></tr>
+          <tr><td>Bladder (except trigone)</td><td>Urogenital sinus (endoderm)</td></tr>
+          <tr><td>Bladder trigone</td><td>Mesonephric duct (mesoderm)</td></tr>
+          <tr><td>Male reproductive ducts</td><td>Mesonephric (Wolffian) duct</td></tr>
+          <tr><td>Female reproductive ducts</td><td>Paramesonephric (Müllerian) duct</td></tr>
+        </table>
+
+        <div class="key-concept">
+          <strong>🔑 Critical Concept — Reciprocal Induction:</strong> The ureteric bud (UB) and metanephric mesenchyme (MM) MUST interact for either to develop. UB signals (including <strong>GDNF/RET</strong>) induce MM to condense into nephrons. MM signals induce UB to branch (forming the collecting system). Failure of this interaction → renal agenesis.
+        </div>
+
+        <h3>Key Timeline</h3>
+        <div class="timeline-item">
+          <h4>Week 4: Pronephros</h4>
+          <p>Rudimentary, non-functional. Appears in the cervical region and degenerates by end of week 4. Duct persists as the pronephric duct → becomes the mesonephric (Wolffian) duct.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 4-8: Mesonephros</h4>
+          <p>Functional interim kidney in the thoracolumbar region. Produces urine briefly. Mesonephric tubules degenerate in females; in males, some become efferent ductules of the testis. Mesonephric (Wolffian) duct persists → gives rise to the ureteric bud + male reproductive tract.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Week 5: Ureteric Bud Formation</h4>
+          <p>The ureteric bud sprouts from the distal mesonephric duct and grows into the metanephric mesenchyme. This is the critical initiating event for permanent kidney development.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 5-36: Metanephros (Permanent Kidney)</h4>
+          <p>Reciprocal induction between UB and MM. UB branches ~15 times → collecting system. MM condenses into nephrons (through MET: mesenchymal-to-epithelial transition). Nephrogenesis complete by ~36 weeks.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 6-9: Ascent & Rotation</h4>
+          <p>Kidneys "ascend" from the pelvis to the lumbar region (actually differential growth — the body grows caudally relative to the kidneys). During ascent, kidneys rotate 90° medially (hilum faces medially in adult).</p>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Clinical Pearl:</strong> Nephrogenesis is complete by ~36 weeks of gestation. Premature infants born before this have fewer nephrons, which may contribute to hypertension and chronic kidney disease in adulthood (Brenner hypothesis / fetal programming of adult disease).
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: THREE KIDNEY SYSTEMS -->
+    <div id="three" class="tab-content">
+      <div class="module-section">
+        <h2>🔄 Three Kidney Systems</h2>
+        <p>Three sequential kidney systems develop from intermediate mesoderm, progressing cranial → caudal. Each degenerates as the next forms, except the metanephros which becomes permanent.</p>
+
+        <div class="dev-card">
+          <h4>1. Pronephros (Week 4)</h4>
+          <ul>
+            <li><strong>Location:</strong> Cervical region</li>
+            <li><strong>Function:</strong> Non-functional in humans (vestigial)</li>
+            <li><strong>Fate:</strong> Degenerates completely by end of week 4</li>
+            <li><strong>Legacy:</strong> Its duct persists → becomes the <strong>pronephric duct</strong> → mesonephric (Wolffian) duct</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>2. Mesonephros (Weeks 4-8)</h4>
+          <ul>
+            <li><strong>Location:</strong> Thoracolumbar region</li>
+            <li><strong>Function:</strong> Functional interim kidney — produces urine, has glomeruli and tubules</li>
+            <li><strong>Fate:</strong> Most tubules degenerate; some persist in males as efferent ductules</li>
+            <li><strong>Legacy:</strong> Mesonephric (Wolffian) duct → ureteric bud + epididymis + vas deferens + seminal vesicle + ejaculatory duct</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>3. Metanephros (Week 5 → Adult)</h4>
+          <ul>
+            <li><strong>Location:</strong> Initially sacral, ascends to lumbar</li>
+            <li><strong>Function:</strong> Permanent kidney — begins producing urine by week 10-12</li>
+            <li><strong>Two components:</strong> Ureteric bud (collecting system) + metanephric mesenchyme (nephrons)</li>
+            <li><strong>Nephrogenesis:</strong> ~1 million nephrons per kidney, complete by 36 weeks</li>
+          </ul>
+        </div>
+
+        <div class="mnemonic">
+          <strong>🧠 Mnemonic: Three Kidney Systems</strong><br>
+          "<strong>P</strong>lease <strong>M</strong>ake <strong>M</strong>e a kidney" = <strong>P</strong>ronephros → <strong>M</strong>esonephros → <strong>M</strong>etanephros<br>
+          Cranial → Caudal | Transient → Transient → Permanent
+        </div>
+
+        <h3>Mesonephric (Wolffian) vs Paramesonephric (Müllerian) Ducts</h3>
+        <table>
+          <tr><th>Feature</th><th>Mesonephric (Wolffian)</th><th>Paramesonephric (Müllerian)</th></tr>
+          <tr><td>Persists in</td><td>Males (testosterone-dependent)</td><td>Females (default pathway)</td></tr>
+          <tr><td>Degenerates in</td><td>Females (absence of testosterone)</td><td>Males (AMH from Sertoli cells)</td></tr>
+          <tr><td>Derivatives</td><td>Epididymis, vas deferens, seminal vesicle, ejaculatory duct, ureteric bud</td><td>Fallopian tubes, uterus, upper 2/3 vagina</td></tr>
+          <tr><td>Signal to persist</td><td>Testosterone (from Leydig cells)</td><td>Absence of AMH</td></tr>
+          <tr><td>Signal to degenerate</td><td>Absence of testosterone</td><td>AMH / MIS (from Sertoli cells)</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>⚠️ Persistent Müllerian Duct Syndrome:</strong> Males with normal external genitalia but have a uterus and fallopian tubes (discovered incidentally during hernia repair or cryptorchidism surgery). Caused by mutations in AMH gene or AMH receptor. Testes present but Müllerian structures weren't resorbed.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: METANEPHROS -->
+    <div id="metanephros" class="tab-content">
+      <div class="module-section">
+        <h2>🔬 Metanephric Development</h2>
+
+        <h3>Ureteric Bud &amp; Collecting System</h3>
+        <p>The ureteric bud (UB) sprouts from the <strong>distal mesonephric duct</strong> at week 5 and invades the metanephric mesenchyme. It undergoes ~15 generations of dichotomous branching:</p>
+
+        <div class="pathway-box">Ureteric bud (from mesonephric duct)
+  → Stalk = URETER
+  → First branches = RENAL PELVIS → MAJOR CALYCES
+  → Next branches = MINOR CALYCES
+  → Subsequent branches = COLLECTING DUCTS (papillary → cortical)
+
+Key: Everything from UB = collecting system (ureter → pelvis → calyces → collecting ducts)</div>
+
+        <h3>Metanephric Mesenchyme &amp; Nephron Formation</h3>
+        <p>The metanephric mesenchyme (MM) is induced by UB signals to undergo <strong>mesenchymal-to-epithelial transition (MET)</strong> — one of the best-studied examples of this process in development.</p>
+
+        <div class="pathway-box">Metanephric mesenchyme (induced by UB)
+  → Condensation (cap mesenchyme)
+  → Renal vesicle
+  → Comma-shaped body
+  → S-shaped body
+  → Mature nephron: Bowman's capsule → PCT → Loop of Henle → DCT
+
+Key: Everything from MM = excretory nephron (glomerulus through DCT)
+     The nephron CONNECTS to the collecting duct (from UB) at the DCT-CD junction</div>
+
+        <h3>GDNF/RET Signaling</h3>
+        <div class="key-concept">
+          <strong>🔑 GDNF/RET is THE critical pathway:</strong>
+          <ul>
+            <li><strong>GDNF</strong> (Glial cell-Derived Neurotrophic Factor) — secreted by metanephric mesenchyme</li>
+            <li><strong>RET</strong> — receptor tyrosine kinase on the ureteric bud</li>
+            <li>GDNF from MM activates RET on UB → stimulates UB outgrowth and branching</li>
+            <li>RET mutations → failure of UB outgrowth → <strong>renal agenesis</strong></li>
+            <li>RET is also a proto-oncogene: gain-of-function mutations → <strong>MEN2A/2B</strong> (medullary thyroid carcinoma, pheochromocytoma)</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <strong>🧪 Other Key Signaling:</strong>
+          <ul>
+            <li><strong>Wnt9b / Wnt4</strong> — from UB, induces MET in the mesenchyme</li>
+            <li><strong>WT1</strong> (Wilms' tumor 1) — transcription factor essential for MM survival; mutations → Wilms' tumor + WAGR syndrome</li>
+            <li><strong>PAX2</strong> — required for UB outgrowth and nephron differentiation; mutations → renal coloboma syndrome</li>
+            <li><strong>BMP4</strong> — inhibits ectopic UB budding (prevents duplex systems)</li>
+          </ul>
+        </div>
+
+        <h3>Nephron Endowment</h3>
+        <p>Each kidney contains approximately <strong>200,000-1,800,000 nephrons</strong> (average ~1 million), with wide variation. Nephrogenesis begins at ~week 8-9 and is complete by <strong>~36 weeks</strong>. NO new nephrons form after birth.</p>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Brenner Hypothesis:</strong> Low nephron number at birth (from prematurity, IUGR, maternal malnutrition, or genetic factors) → compensatory hyperfiltration in remaining nephrons → progressive glomerulosclerosis → hypertension and CKD in adulthood. This links low birth weight to adult cardiovascular and renal disease.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: ASCENT & ROTATION -->
+    <div id="ascent" class="tab-content">
+      <div class="module-section">
+        <h2>⬆️ Renal Ascent &amp; Rotation</h2>
+
+        <h3>The "Ascent"</h3>
+        <p>From weeks 6-9, the kidneys appear to migrate from the sacral region to the lumbar region (L1-L3). This is not true migration — the body grows caudally (elongates) while the kidneys remain relatively fixed, creating the appearance of ascent.</p>
+
+        <div class="dev-card">
+          <h4>During Ascent:</h4>
+          <ul>
+            <li>Kidneys pass through the fork of the umbilical arteries</li>
+            <li>Blood supply changes: initially from common iliac → progressively higher aortic branches → final renal arteries from L1-L2 aorta</li>
+            <li>Lower vessels degenerate as new, higher vessels form</li>
+            <li><strong>Accessory renal arteries</strong> (~25% of people) = persistent lower vessels that failed to degenerate</li>
+          </ul>
+        </div>
+
+        <h3>Rotation</h3>
+        <p>During ascent, each kidney rotates <strong>90° medially</strong>. Initially, the hilum faces anteriorly. After rotation, the hilum faces medially (adult position).</p>
+
+        <h3>Anomalies of Ascent &amp; Rotation</h3>
+        <table>
+          <tr><th>Anomaly</th><th>Mechanism</th><th>Clinical Features</th></tr>
+          <tr><td><strong>Pelvic kidney</strong></td><td>Failure to ascend — kidney remains in the pelvis</td><td>Usually asymptomatic. Risk of trauma, obstruction. Often incidental finding.</td></tr>
+          <tr><td><strong>Horseshoe kidney</strong></td><td>Lower poles fuse across midline → fused kidney gets trapped by IMA during ascent</td><td>Most common fusion anomaly (1/400-600). Located low (L3-L5). Associated with Turner syndrome (45,X). Trapped by inferior mesenteric artery.</td></tr>
+          <tr><td><strong>Malrotated kidney</strong></td><td>Failure of 90° medial rotation → hilum faces anteriorly or laterally</td><td>Usually asymptomatic. May cause UPJ obstruction.</td></tr>
+          <tr><td><strong>Crossed ectopia</strong></td><td>Kidney crosses to opposite side (both kidneys on same side)</td><td>Often fused. Usually asymptomatic. Increased UTI risk.</td></tr>
+          <tr><td><strong>Accessory renal arteries</strong></td><td>Persistent lower segmental vessels that failed to degenerate</td><td>Present in ~25%. Surgical significance during transplant/AAA repair. May cause UPJ obstruction if crossing the ureter.</td></tr>
+        </table>
+
+        <div class="key-concept">
+          <strong>🔑 Horseshoe Kidney — Board Favorite:</strong>
+          <ul>
+            <li>Lower poles fuse across the midline (90% are lower pole fusion)</li>
+            <li>Fused kidney gets caught on the <strong>inferior mesenteric artery (IMA)</strong> during ascent → sits low at L3-L5</li>
+            <li>Associated with <strong>Turner syndrome</strong> (45,X) — ~7% of Turner patients have horseshoe kidney</li>
+            <li>Increased risk of: UPJ obstruction, kidney stones, UTIs, Wilms' tumor (slight increase)</li>
+            <li>Usually asymptomatic and found incidentally on imaging</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: BLADDER & URETHRA -->
+    <div id="bladder" class="tab-content">
+      <div class="module-section">
+        <h2>🫗 Bladder &amp; Lower Urinary Tract</h2>
+
+        <h3>Urogenital Sinus Division</h3>
+        <p>The <strong>cloaca</strong> (common chamber for the hindgut and allantois) is divided by the <strong>urorectal septum</strong> into:</p>
+        <ul>
+          <li><strong>Anterior:</strong> Urogenital sinus → bladder + urethra + prostate (males) / lower vagina (females)</li>
+          <li><strong>Posterior:</strong> Anorectal canal → rectum + upper anal canal</li>
+        </ul>
+
+        <div class="pathway-box">Cloaca
+  │
+  ├── Urorectal septum divides (week 7)
+  │
+  ├── ANTERIOR → Urogenital sinus
+  │     ├── Upper (vesical) → BLADDER body
+  │     ├── Middle (pelvic) → Prostatic + membranous urethra (M) / entire urethra (F)
+  │     └── Lower (phallic) → Penile urethra (M) / vestibule (F)
+  │
+  └── POSTERIOR → Anorectal canal → Rectum + Anal canal (above pectinate line)</div>
+
+        <h3>Bladder Development</h3>
+        <table>
+          <tr><th>Structure</th><th>Origin</th></tr>
+          <tr><td>Bladder body (majority)</td><td>Urogenital sinus (endoderm)</td></tr>
+          <tr><td>Trigone</td><td>Mesonephric duct (mesoderm) — absorbed into posterior bladder wall</td></tr>
+          <tr><td>Urachus</td><td>Allantois remnant → median umbilical ligament</td></tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>⚠️ Urachal Anomalies:</strong>
+          <ul>
+            <li><strong>Patent urachus</strong> — complete persistence → urine drains from umbilicus (fistula)</li>
+            <li><strong>Urachal cyst</strong> — focal persistence → fluid-filled cyst between bladder and umbilicus (risk of infection)</li>
+            <li><strong>Urachal sinus</strong> — opens at the umbilical end only → drains at umbilicus</li>
+            <li><strong>Vesicourachal diverticulum</strong> — opens at the bladder end only</li>
+            <li>Urachal remnants have a small risk of <strong>adenocarcinoma</strong> (urachal carcinoma — very rare but high-yield)</li>
+          </ul>
+        </div>
+
+        <h3>Posterior Urethral Valves (PUV)</h3>
+        <div class="key-concept">
+          <strong>🔑 Most common cause of lower urinary tract obstruction in male neonates:</strong>
+          <ul>
+            <li>Abnormal folds of mucosa in the prostatic urethra (type I most common — from the verumontanum)</li>
+            <li>Causes bilateral <strong>hydronephrosis</strong>, <strong>megacystis</strong> (distended bladder), <strong>oligohydramnios</strong></li>
+            <li>Oligohydramnios → <strong>Potter sequence</strong>: pulmonary hypoplasia + limb deformities + flattened facies</li>
+            <li>Only in MALES (urethra anatomy)</li>
+            <li>Prenatal: bilateral hydronephrosis + distended bladder + oligohydramnios on ultrasound</li>
+            <li>Treatment: postnatal valve ablation (endoscopic); prenatal vesicoamniotic shunt if severe</li>
+          </ul>
+        </div>
+
+        <h3>Potter Sequence</h3>
+        <div class="danger-box">
+          <strong>⚠️ Potter Sequence (Oligohydramnios Sequence):</strong> Any cause of severe oligohydramnios → fetal compression + lack of amniotic fluid for lung development:
+          <ul>
+            <li><strong>Pulmonary hypoplasia</strong> (most lethal consequence — lungs need amniotic fluid to expand)</li>
+            <li><strong>Limb deformities</strong> (compression: clubfoot, joint contractures)</li>
+            <li><strong>Flattened facies</strong> (Potter facies: recessed chin, flattened nose, low-set ears)</li>
+          </ul>
+          <p style="margin-top:0.5rem">Causes: bilateral renal agenesis (classic Potter syndrome), PUV, bilateral MCDK, prolonged PROM, uteroplacental insufficiency.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: ANOMALIES -->
+    <div id="anomalies" class="tab-content">
+      <div class="module-section">
+        <h2>⚠️ Congenital Renal Anomalies</h2>
+
+        <h3>Renal Agenesis</h3>
+        <table>
+          <tr><th>Feature</th><th>Unilateral</th><th>Bilateral</th></tr>
+          <tr><td>Incidence</td><td>~1/1000</td><td>~1/4000-10,000</td></tr>
+          <tr><td>Cause</td><td>Failure of UB-MM interaction on one side</td><td>Complete failure bilaterally</td></tr>
+          <tr><td>Outcome</td><td>Compatible with life; compensatory hypertrophy</td><td>FATAL — Potter sequence (anhydramnios)</td></tr>
+          <tr><td>Associated</td><td>Check for contralateral anomalies, VACTERL</td><td>Potter facies, pulmonary hypoplasia, limb defects</td></tr>
+        </table>
+
+        <h3>Cystic Kidney Diseases</h3>
+        <table>
+          <tr><th>Disease</th><th>Inheritance</th><th>Gene</th><th>Key Features</th></tr>
+          <tr><td><strong>ARPKD</strong> (Autosomal Recessive PKD)</td><td>AR</td><td>PKHD1 (fibrocystin)</td><td>Infantile presentation. Bilateral enlarged echogenic kidneys. Associated hepatic fibrosis (congenital hepatic fibrosis). Collecting duct cysts. Can cause Potter sequence if severe.</td></tr>
+          <tr><td><strong>ADPKD</strong> (Autosomal Dominant PKD)</td><td>AD</td><td>PKD1 (85%) / PKD2</td><td>Adult presentation (30-50y). Bilateral large kidneys with cysts of variable size. Berry aneurysms, hepatic cysts, mitral valve prolapse. Leading genetic cause of ESRD.</td></tr>
+          <tr><td><strong>MCDK</strong> (Multicystic Dysplastic Kidney)</td><td>Sporadic</td><td>Various</td><td>Non-communicating cysts, no functional parenchyma. Most common cystic kidney disease in children. Usually unilateral → involutes over time. Bilateral = fatal (Potter).</td></tr>
+        </table>
+
+        <div class="info-box">
+          <strong>🔬 ARPKD vs ADPKD — Board Comparison:</strong>
+          <ul>
+            <li><strong>ARPKD:</strong> AR, infantile, PKHD1, collecting duct cysts, hepatic fibrosis, often fatal early</li>
+            <li><strong>ADPKD:</strong> AD, adult, PKD1/PKD2, variable-sized cysts, berry aneurysms + hepatic cysts, ESRD by 50-60y</li>
+            <li><strong>Key distinguisher:</strong> ARPKD = both kidneys uniformly enlarged and echogenic (prenatal US); ADPKD = bilateral cysts of different sizes, typically detected in adulthood</li>
+          </ul>
+        </div>
+
+        <h3>Duplex Collecting System</h3>
+        <div class="dev-card">
+          <h4>Embryology &amp; Weigert-Meyer Rule</h4>
+          <p>Early bifurcation of the ureteric bud (or two separate buds) → two separate collecting systems draining one kidney. Each has its own ureter.</p>
+          <ul>
+            <li><strong>Upper pole ureter:</strong> inserts LOW and MEDIALLY → prone to OBSTRUCTION (ureterocele) → hydronephrosis</li>
+            <li><strong>Lower pole ureter:</strong> inserts HIGH and LATERALLY → prone to REFLUX (short intramural tunnel)</li>
+          </ul>
+        </div>
+
+        <div class="mnemonic">
+          <strong>🧠 Weigert-Meyer Rule:</strong><br>
+          Upper pole = <strong>obstructs</strong> (inserts low → ureterocele) | Lower pole = <strong>reflux</strong> (inserts high → incompetent)
+        </div>
+
+        <h3>Vesicoureteral Reflux (VUR)</h3>
+        <ul>
+          <li>Retrograde flow of urine from bladder → ureter → kidney</li>
+          <li>Caused by short or absent intramural ureter → incompetent flap valve at UVJ</li>
+          <li>Most common in young girls</li>
+          <li>Risk of recurrent pyelonephritis → reflux nephropathy → renal scarring → CKD</li>
+          <li>Grading I-V (I = reflux into ureter only → V = massive dilation + intrarenal reflux)</li>
+          <li>Low grades (I-III) often resolve spontaneously with growth; high grades may need surgery (ureteral reimplantation)</li>
+        </ul>
+
+        <h3>Summary: Anomaly → Embryologic Defect</h3>
+        <table>
+          <tr><th>Anomaly</th><th>Embryologic Mechanism</th></tr>
+          <tr><td>Renal agenesis</td><td>Failed UB-MM reciprocal induction (GDNF/RET)</td></tr>
+          <tr><td>Horseshoe kidney</td><td>Lower pole fusion + arrest by IMA</td></tr>
+          <tr><td>Pelvic kidney</td><td>Failure of ascent</td></tr>
+          <tr><td>Malrotated kidney</td><td>Failure of 90° medial rotation during ascent</td></tr>
+          <tr><td>Duplex system</td><td>Early UB bifurcation or double budding</td></tr>
+          <tr><td>PUV</td><td>Abnormal urethral fold persistence (males only)</td></tr>
+          <tr><td>MCDK</td><td>Failed UB-MM interaction → dysplastic parenchyma</td></tr>
+          <tr><td>ARPKD</td><td>PKHD1 mutation → ciliary dysfunction → collecting duct cysts</td></tr>
+          <tr><td>ADPKD</td><td>PKD1/2 mutation → ciliary dysfunction → variable cysts</td></tr>
+          <tr><td>Patent urachus</td><td>Failure of allantois obliteration → urine at umbilicus</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 7: QUIZ -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>A horseshoe kidney fails to ascend to its normal position because it gets trapped by which structure?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Superior mesenteric artery</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Inferior mesenteric artery</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Aortic bifurcation</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Common iliac arteries</div>
+          <div class="explanation">The fused lower poles of a horseshoe kidney get caught on the IMA as they try to ascend past it, trapping the kidney at L3-L5 (below its normal L1-L2 position). Associated with Turner syndrome (45,X).</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>The ureteric bud gives rise to all of the following EXCEPT:</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Collecting ducts</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">B) Renal pelvis</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">C) Proximal convoluted tubule</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Ureter</div>
+          <div class="explanation">The PCT develops from metanephric mesenchyme (along with glomerulus, Bowman's capsule, loop of Henle, and DCT). The ureteric bud forms the collecting system: ureter → pelvis → calyces → collecting ducts.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>Bilateral renal agenesis causes Potter sequence. What is the most lethal component?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">A) Pulmonary hypoplasia</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">B) Limb deformities</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Flattened facies</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Adrenal insufficiency</div>
+          <div class="explanation">Pulmonary hypoplasia is the lethal component. Fetal breathing movements of amniotic fluid are essential for lung development. Without amniotic fluid (from absent urine production), the lungs cannot expand and develop → fatal respiratory failure at birth.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>Which receptor on the ureteric bud is activated by GDNF from the metanephric mesenchyme to initiate kidney development?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) FGFR2</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) RET</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) WT1</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) PAX2</div>
+          <div class="explanation">GDNF (from MM) → RET receptor (on UB) → UB outgrowth and branching. RET loss-of-function → renal agenesis. RET gain-of-function → MEN2A/2B (medullary thyroid carcinoma). This dual role makes RET a high-yield board topic.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>An infant with a distended bladder, bilateral hydronephrosis, and oligohydramnios is most likely male. What is the diagnosis?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Vesicoureteral reflux</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Posterior urethral valves</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Ureterocele</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Ureteropelvic junction obstruction</div>
+          <div class="explanation">PUV is the most common cause of lower urinary tract obstruction in male neonates. The triad of distended bladder + bilateral hydronephrosis + oligohydramnios in a male = PUV until proven otherwise. Treatment: postnatal endoscopic valve ablation.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 6</h3>
+          <p>In a duplex kidney system, which pole's ureter is prone to vesicoureteral reflux per the Weigert-Meyer rule?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Upper pole (inserts low and medially)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Lower pole (inserts high and laterally)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Both equally</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Neither — duplex systems don't reflux</div>
+          <div class="explanation">Weigert-Meyer rule: upper pole ureter inserts low → obstructs (ureterocele). Lower pole ureter inserts high → refluxes (short intramural tunnel = incompetent flap valve).</div>
+        </div>
+      </div>
+
+      <div class="module-section" style="margin-top: 2rem;">
+        <h2 style="color:var(--rdx-teal-dark,#0f766e);">📖 References</h2>
+        <ul>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK557770/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Embryology, Kidney - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK431105/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Horseshoe Kidney - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK430796/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Posterior Urethral Valves - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK482259/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Autosomal Dominant PKD - StatPearls</a></li>
+          <li><a href="https://radiopaedia.org/articles/horseshoe-kidney" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Horseshoe Kidney - Radiopaedia</a></li>
+        </ul>
+      </div>
+
+      <div class="module-section">
+        <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Modules</h2>
+        <p>
+          <a href="cardiac-embryology-module.html" class="condition-link">❤️ Cardiac Embryology</a>
+          <a href="gi-embryology-module.html" class="condition-link">🍽️ GI Embryology</a>
+          <a href="neuro-embryology-module.html" class="condition-link">🧠 Neuro Embryology</a>
+          <a href="respiratory-embryology-module.html" class="condition-link">🫁 Respiratory Embryology</a>
+          <a href="msk-embryology-module.html" class="condition-link">🦴 MSK Embryology</a>
+        </p>
+        <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+        <p>
+          <a href="horseshoe-kidney-crt.html" class="condition-link">🫘 Horseshoe Kidney CRT</a>
+          <a href="puv-obstructive-uropathy-crt.html" class="condition-link">🚿 PUV & Obstructive Uropathy CRT</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    function checkQuiz(el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(o => { o.style.pointerEvents = 'none'; o.style.opacity = '0.6'; });
+      el.style.opacity = '1';
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      section.querySelector('.explanation').style.display = 'block';
+    }
+  </script>
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">Which of the three embryonic kidney systems persists as the definitive adult kidney?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The pronephros (week 4) is vestigial in humans and completely degenerates." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Pronephros</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Three sequential systems: Pronephros (weeks 3-4, degenerates), Mesonephros (weeks 4-8, functions transiently, duct becomes Wolffian duct), Metanephros (begins week 5, becomes permanent kidney). Metanephros develops from two sources: ureteric bud (collecting system) and metanephric mesenchyme (nephrons)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Metanephros</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The mesonephros functions transiently but degenerates. Its duct persists as the Wolffian duct in males." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Mesonephros</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Only the metanephros persists. The others degenerate (with mesonephric duct remnants persisting)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">All three persist and fuse</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Bilateral renal agenesis is lethal primarily because of:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="While waste accumulation occurs, the immediate lethal consequence is pulmonary hypoplasia, not uremia." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Inability to excrete waste products</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Bilateral renal agenesis → no fetal urine → severe oligohydramnios → pulmonary hypoplasia (lungs cannot expand without amniotic fluid) → respiratory failure at birth. Also causes Potter facies and limb deformities from compression. Incompatible with life. Embryology: failure of ureteric bud to induce metanephric mesenchyme differentiation." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Pulmonary hypoplasia from severe oligohydramnios (Potter sequence)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Without kidneys, fluid would actually be decreased, not overloaded. The lethal issue is pulmonary hypoplasia." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Cardiac failure from fluid overload</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Absent renin would cause hypotension, not hypertension. Regardless, pulmonary hypoplasia is the lethal complication." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Severe hypertension from absent renin production</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">What signaling molecule from the ureteric bud induces metanephric mesenchyme to differentiate into nephrons?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="SHH is important in CNS and limb patterning but not the primary ureteric bud signal for nephron induction." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Sonic hedgehog (SHH)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Reciprocal induction: Ureteric bud secretes WNT9b/WNT11 and FGF → induces mesenchyme-to-epithelial transition (MET) → nephron formation. In return, metanephric mesenchyme secretes GDNF → binds RET receptor on ureteric bud → promotes branching. Disruption of either signal → renal agenesis or hypoplasia." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">WNT signals and FGF, with reciprocal GDNF from the mesenchyme</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Testosterone drives male reproductive development, not nephrogenesis." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Testosterone from Leydig cells</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="EPO regulates red blood cell production. It&#x27;s produced by the kidney but doesn&#x27;t induce nephron development." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Erythropoietin (EPO)</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Multicystic dysplastic kidney (MCDK) in a neonate is thought to result from:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="MCDK is a developmental anomaly, distinct from autosomal dominant or recessive PKD which are genetic ciliopathies." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Polycystic kidney disease gene mutation</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="MCDK: abnormal ureteric bud-mesenchyme interaction → non-functional kidney replaced by variably sized cysts with no normal parenchyma. Usually unilateral (bilateral is lethal). Non-functioning — no renal uptake on DMSA/MAG3 scan. Often involutes over time. Contralateral kidney must be evaluated (may have VUR or UPJ obstruction)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Abnormal interaction between the ureteric bud and metanephric mesenchyme leading to failed nephron induction</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PUV causes bilateral hydronephrosis with renal dysplasia, not the classic unilateral MCDK picture." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Obstruction by posterior urethral valves</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Renal artery thrombosis causes infarction, not cystic dysplasia." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">In utero renal artery thrombosis</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">During renal ascent from the pelvis to the lumbar region, the kidneys' blood supply changes. The final arterial supply comes from:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Internal iliac arteries supply the pelvic kidney transiently during early ascent. The kidneys later acquire more cranial vessels." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Internal iliac arteries</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="During ascent (weeks 6-9), kidneys acquire successively higher arterial branches: iliac → aortic. Lower vessels degenerate as higher ones form. Final renal arteries arise at L1-L2. Accessory renal arteries (25-30% of people): persistence of embryonic branches that didn&#x27;t degenerate. These are end-arteries — ligation causes segmental infarction." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Abdominal aorta (renal arteries at L1-L2)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The celiac trunk supplies foregut derivatives (stomach, liver, spleen), not the kidneys." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Celiac trunk</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The SMA supplies the midgut. In horseshoe kidney, the IMA traps the isthmus, but the renal arterial supply is still from the aorta." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Superior mesenteric artery</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Autosomal recessive polycystic kidney disease (ARPKD) presents in neonates with:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="This describes multicystic dysplastic kidney (MCDK), not ARPKD." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Multiple variably sized cysts replacing normal renal tissue unilaterally</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="ARPKD (PKHD1 gene, fibrocystin): bilateral enlarged echogenic kidneys at birth, microcystic dilation of collecting ducts (fusiform cysts radiate from medulla to cortex). Always associated with congenital hepatic fibrosis (biliary ductal plate malformation). Severe cases: oligohydramnios, pulmonary hypoplasia. Milder cases: progressive CKD + portal hypertension." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Bilaterally enlarged kidneys with microcysts in collecting ducts and congenital hepatic fibrosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes ADPKD (PKD1/PKD2), which typically manifests in adults with variably sized cortical cysts and liver cysts." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Multiple cortical cysts with liver cysts appearing in adulthood</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Simple renal cysts are common benign findings in adults, not a presentation of ARPKD." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Single large renal cyst requiring aspiration</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Duplex collecting system (duplicated ureter) results from:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The mesenchyme doesn&#x27;t split. The abnormality is in the ureteric bud." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Splitting of the metanephric mesenchyme</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Duplex system: premature splitting or two separate ureteric buds → two separate collecting systems draining one kidney. Weigert-Meyer rule: upper pole ureter inserts ectopically (medial and inferior) → may obstruct (ureterocele) or insert below sphincter (incontinence). Lower pole ureter inserts normally but may reflux (lateral, short tunnel)." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Early bifurcation or duplication of the ureteric bud</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Persistent mesonephric duct causes Gartner duct cysts in females, not duplex collecting systems." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Failure of the mesonephric duct to degenerate</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Cloacal anomalies affect the bladder/rectum junction, not ureteral duplication." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Abnormal cloacal septation</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Nephrogenesis is complete by what gestational age?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Nephrogenesis is very active at 20 weeks but not yet complete." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">20 weeks</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Nephrogenesis completes by ~36 weeks (~1 million nephrons per kidney). No new nephrons form after birth — premature infants and those with intrauterine growth restriction may have reduced nephron endowment → increased lifelong risk of hypertension and CKD (Brenner hypothesis). This is why nephrotoxic medications in premature neonates are particularly concerning." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">36 weeks</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Nephrogenesis finishes before term, at approximately 36 weeks." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">At birth (40 weeks)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="No postnatal nephrogenesis occurs. All nephrons are formed prenatally by 36 weeks." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">By age 2 years</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="horseshoe-kidney-crt.html" class="cross-link"><div class="cross-link-title">🧪 Horseshoe Kidney CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="kidney-stones-module.html" class="cross-link"><div class="cross-link-title">📘 Kidney Stones</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="renal-acid-base-module.html" class="cross-link"><div class="cross-link-title">📘 Renal Acid-Base</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="upj-obstruction-module.html" class="cross-link"><div class="cross-link-title">📘 UPJ Obstruction</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="electrolytes-module.html" class="cross-link"><div class="cross-link-title">📘 Electrolyte Disorders</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

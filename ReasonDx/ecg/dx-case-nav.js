@@ -93,7 +93,7 @@ const DxCaseNav = {
 
     getRelativePath(filename) {
         const path = window.location.pathname;
-        if (path.includes('/adventure-cases/')) {
+        if (path.includes('/cases/')) {
             return '../' + filename;
         } else if (path.includes('/ecg/')) {
             return '../' + filename;
@@ -220,7 +220,7 @@ const DxCaseNav = {
                     <span class="dx-menu-item-icon">💓</span>
                     ECG Generator
                 </a>
-                <a href="${platformRoot}reference-library.html" class="dx-menu-item">
+                <a href="${platformRoot}#" class="dx-menu-item">
                     <span class="dx-menu-item-icon">📚</span>
                     Reference Library
                 </a>

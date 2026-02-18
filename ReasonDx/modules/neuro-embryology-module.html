@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive pathophysiology module: ReasonDx: Neuro Embryology - Neural Tube, Brain Development & Defects. Learn mechanisms, clinical features, and managemen...">
+<title>ReasonDx: Neuro Embryology - Neural Tube, Brain Development & Defects</title>
+  <style>
+    :root { --primary: #8B5CF6; --primary-dark: #7C3AED; --secondary: #EC4899; --accent: #F59E0B; --success:var(--rdx-success); --danger: #EF4444; --info: #14b8a6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family:var(--rdx-font); background: var(--bg-main, linear-gradient(135deg, #115e59 0%, #0f766e 100%)); color: var(--text-primary, #E5E7EB); min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(139, 92, 246, 0.1); border-radius: 1rem; border:1px solid var(--rdx-info); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background:var(--rdx-info-bg); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(13, 148, 136, 0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245, 158, 11, 0.15); border-left:4px solid var(--rdx-teal); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(59, 130, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(139, 92, 246, 0.2); color: var(--primary); }
+    tr:hover { background:var(--rdx-bg-card); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(13, 148, 136, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .dev-card { background: rgba(139, 92, 246, 0.1); border:1px solid var(--rdx-info); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .timeline-item { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 2px solid var(--rdx-border); }
+    .timeline-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .pathway-box { background: #f1f5f9; border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; overflow-x: auto; }
+    .condition-link { display: inline-block; background: rgba(139,92,246,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem; font-size: 0.85rem; color: #c4b5fd; text-decoration: none; transition: all 0.2s; }
+    .condition-link:hover { background: rgba(139,92,246,0.4); }
+    .quiz-section { background: rgba(13, 148, 136, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option:hover { background: rgba(139, 92, 246, 0.2); }
+    .quiz-option.correct { background: rgba(13, 148, 136, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+    .brain-diagram { background: #f1f5f9; border-radius: 0.75rem; padding: 1.5rem; margin: 1rem 0; text-align: center; font-family: monospace; font-size: 0.9rem; }
+  
+    /* ReasonDx Theme System Override */
+    body { background: var(--bg-main) !important; color: var(--text-primary) !important; transition: background 0.3s, color 0.3s; }
+    .container { background: transparent; }
+    .module-section { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); }
+    header { background: var(--primary-bg, rgba(245,158,11,0.1)); border-color: var(--primary, rgba(245,158,11,0.3)); }
+    header h1 { -webkit-text-fill-color: var(--primary, unset); }
+    .nav-tab { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); color: var(--text-secondary, #9CA3AF); }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: var(--nav-active-text, white); border-color: var(--primary); }
+    table th { background: var(--primary-bg, rgba(245,158,11,0.2)); color: var(--primary); }
+    table td { border-color: var(--border, rgba(255,255,255,0.1)); }
+    .quiz-option { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border); color: var(--text-primary); }
+    .quiz-option:hover { background: var(--primary-bg); }
+    .pathway-box { background: var(--bg-card, rgba(0,0,0,0.3)); color: var(--text-primary); }
+    /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #0d9488;
+    --primary-light: #5eead4;
+    --primary-dark: #0f766e;
+    --primary-bg: #f0fdfa;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #0d9488;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Unified Navigation */
+
+
+
+
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/neuro-embryology.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Neuro Embryology</a> → Module</div>
+
+<!-- nav removed: unified via rdx-nav.js -->
+  <div class="container">
+    <header>
+      <h1>🧠 Neuro Embryology</h1>
+      <p class="subtitle">Neural Tube • Brain Vesicles • Spinal Cord • Neural Crest • Congenital Defects</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('neurulation')">Neurulation</div>
+      <div class="nav-tab" onclick="showTab('brain')">Brain Vesicles</div>
+      <div class="nav-tab" onclick="showTab('spinal')">Spinal Cord</div>
+      <div class="nav-tab" onclick="showTab('neural-crest')">Neural Crest</div>
+      <div class="nav-tab" onclick="showTab('defects')">NTDs & Defects</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Neural Development Overview</h2>
+        <div class="key-concept">
+          The nervous system develops from <strong>ectoderm</strong> through <strong>neurulation</strong>. The neural plate folds to form the neural tube (future CNS) and neural crest cells (future PNS and more). Failure of neural tube closure causes devastating birth defects.
+        </div>
+        <h3>Developmental Timeline</h3>
+        <table>
+          <tr><th>Time</th><th>Event</th><th>Clinical Relevance</th></tr>
+          <tr><td>Day 18</td><td>Neural plate forms</td><td>Thickening of ectoderm above notochord</td></tr>
+          <tr><td>Day 22</td><td>Fusion begins (cervical)</td><td>Closure proceeds bidirectionally</td></tr>
+          <tr><td>Day 24-26</td><td>Anterior neuropore closes</td><td>Failure → anencephaly</td></tr>
+          <tr><td>Day 26-28</td><td>Posterior neuropore closes</td><td>Failure → spina bifida</td></tr>
+          <tr><td>Week 4</td><td>3 primary brain vesicles</td><td>Prosencephalon, Mesencephalon, Rhombencephalon</td></tr>
+          <tr><td>Week 5</td><td>5 secondary brain vesicles</td><td>Final brain organization</td></tr>
+        </table>
+        <div class="clinical-pearl">
+          <strong>🎯 Critical Pearl:</strong> Neural tube closure is complete by <strong>day 28</strong> - often before a woman knows she's pregnant! This is why <strong>periconceptional folic acid</strong> (400 mcg daily) is crucial for ALL women of reproductive age.
+        </div>
+        <h3>Key Structures & Origins</h3>
+        <div class="pathway-box">ECTODERM
+    ├── SURFACE ECTODERM → Skin, lens, inner ear, anterior pituitary
+    ├── NEURAL TUBE → CNS (brain + spinal cord)
+    │       ├── CNS neurons, Oligodendrocytes, Astrocytes
+    │       ├── Ependymal cells, Retina, Posterior pituitary
+    └── NEURAL CREST → PNS and much more
+            ├── Sensory ganglia (DRG), Autonomic ganglia
+            ├── Schwann cells, Adrenal medulla, Melanocytes
+            ├── Craniofacial bones, Aorticopulmonary septum
+            └── Enteric nervous system (gut ganglia)</div>
+        <div class="mnemonic">
+          <strong>💡 Neural Crest = "The 4th Germ Layer"</strong><br>
+          <strong>MOTEL CAPS</strong>: Melanocytes, Odontoblasts, Tracheal cartilage, Enteric NS, Laryngeal cartilage, C-cells thyroid, Adrenal medulla, PNS/Schwann, Skull bones
+        </div>
+      </div>
+    </div>
+
+    <!-- NEURULATION TAB -->
+    <div id="neurulation" class="tab-content">
+      <div class="module-section">
+        <h2>🔄 Neurulation</h2>
+        <div class="key-concept">
+          <strong>Primary neurulation</strong> (folding) forms brain + most spinal cord. <strong>Secondary neurulation</strong> (canalization) forms caudal spinal cord.
+        </div>
+        <h3>Primary Neurulation (Days 18-28)</h3>
+        <div class="timeline-item">
+          <h4>Step 1: Neural Plate (Day 18)</h4>
+          <p>Notochord induces overlying ectoderm to thicken via Sonic hedgehog (SHH) and BMPs.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Step 2: Neural Groove & Folds (Days 20-21)</h4>
+          <p>Neural plate invaginates, creating neural groove with elevated neural folds.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Step 3: Fusion (Days 22-28)</h4>
+          <p>Folds fuse at cervical region, proceeding bidirectionally. Neural crest cells emigrate.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Step 4: Neuropore Closure</h4>
+          <ul>
+            <li><strong>Anterior neuropore:</strong> Closes day 24-26</li>
+            <li><strong>Posterior neuropore:</strong> Closes day 26-28</li>
+          </ul>
+        </div>
+        <div class="danger-box">
+          <strong>⚠️ Teratogens Affecting Neurulation</strong>
+          <ul>
+            <li><strong>Valproic acid:</strong> 1-2% NTD risk</li>
+            <li><strong>Carbamazepine:</strong> 0.5-1% NTD risk</li>
+            <li><strong>Maternal diabetes:</strong> 2-3x increased risk</li>
+            <li><strong>Folic acid deficiency:</strong> Most preventable cause</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRAIN VESICLES TAB -->
+    <div id="brain" class="tab-content">
+      <div class="module-section">
+        <h2>🧩 Brain Vesicle Development</h2>
+        <div class="key-concept">
+          After neural tube closure, the cranial end expands into <strong>3 primary vesicles</strong> (week 4), then <strong>5 secondary vesicles</strong> (week 5).
+        </div>
+        <h3>Secondary Brain Vesicles (Week 5)</h3>
+        <table>
+          <tr><th>Vesicle</th><th>Adult Structure</th><th>Ventricle</th></tr>
+          <tr><td><strong>Telencephalon</strong></td><td>Cerebral hemispheres, basal ganglia</td><td>Lateral ventricles</td></tr>
+          <tr><td><strong>Diencephalon</strong></td><td>Thalamus, hypothalamus, retina</td><td>Third ventricle</td></tr>
+          <tr><td><strong>Mesencephalon</strong></td><td>Midbrain</td><td>Cerebral aqueduct</td></tr>
+          <tr><td><strong>Metencephalon</strong></td><td>Pons, cerebellum</td><td>Upper 4th ventricle</td></tr>
+          <tr><td><strong>Myelencephalon</strong></td><td>Medulla</td><td>Lower 4th ventricle</td></tr>
+        </table>
+        <div class="mnemonic">
+          <strong>💡 "3 to 5" Mnemonic:</strong><br>
+          <strong>P</strong>rosencephalon → <strong>T</strong>elencephalon + <strong>D</strong>iencephalon<br>
+          <strong>M</strong>esencephalon → Mesencephalon<br>
+          <strong>R</strong>hombencephalon → <strong>M</strong>etencephalon + <strong>M</strong>yelencephalon
+        </div>
+        <div class="danger-box">
+          <strong>⚠️ Holoprosencephaly</strong><br>
+          Failure of prosencephalon to divide into two hemispheres. Associated with deficient SHH, diabetes, alcohol, trisomy 13.<br>
+          <strong>"The face predicts the brain"</strong> - facial defect severity correlates with brain malformation.
+        </div>
+      </div>
+    </div>
+
+    <!-- SPINAL CORD TAB -->
+    <div id="spinal" class="tab-content">
+      <div class="module-section">
+        <h2>🦴 Spinal Cord Development</h2>
+        <div class="key-concept">
+          Organization: <strong>motor ventral, sensory dorsal</strong> - established by SHH (ventral) and BMPs (dorsal).
+        </div>
+        <h3>Dorsoventral Patterning</h3>
+        <div class="pathway-box">ROOF PLATE → BMPs → ALAR PLATE → SENSORY neurons (dorsal horn)
+           ↓
+      SULCUS LIMITANS (dividing line)
+           ↓
+FLOOR PLATE → SHH → BASAL PLATE → MOTOR neurons (ventral horn)</div>
+        <div class="mnemonic">
+          <strong>💡 "SAME DAVE"</strong><br>
+          <strong>S</strong>ensory = <strong>A</strong>lar, <strong>M</strong>otor = <strong>E</strong>fferent<br>
+          <strong>D</strong>orsal = <strong>A</strong>fferent, <strong>V</strong>entral = <strong>E</strong>fferent
+        </div>
+        <h3>Cord vs. Vertebral Growth</h3>
+        <ul>
+          <li><strong>Birth:</strong> Cord ends at L3</li>
+          <li><strong>Adult:</strong> Cord ends at <strong>L1-L2</strong> (conus medullaris)</li>
+        </ul>
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> Lumbar punctures at <strong>L3-L4 or L4-L5</strong> - below conus to avoid cord injury.
+        </div>
+      </div>
+    </div>
+
+    <!-- NEURAL CREST TAB -->
+    <div id="neural-crest" class="tab-content">
+      <div class="module-section">
+        <h2>⭐ Neural Crest Cells</h2>
+        <div class="key-concept">
+          <strong>Neural crest cells</strong> emigrate from dorsal neural tube, migrate extensively, and give rise to diverse cell types - the "4th germ layer."
+        </div>
+        <h3>Neural Crest Derivatives</h3>
+        <table>
+          <tr><th>Category</th><th>Derivatives</th></tr>
+          <tr><td><strong>PNS</strong></td><td>Sensory ganglia, autonomic ganglia, Schwann cells, enteric NS</td></tr>
+          <tr><td><strong>Endocrine</strong></td><td>Adrenal medulla, C-cells of thyroid</td></tr>
+          <tr><td><strong>Craniofacial</strong></td><td>Facial bones, cartilage, odontoblasts</td></tr>
+          <tr><td><strong>Cardiovascular</strong></td><td>Aorticopulmonary septum, smooth muscle of great vessels</td></tr>
+          <tr><td><strong>Pigment</strong></td><td>Melanocytes</td></tr>
+        </table>
+        <div class="danger-box">
+          <strong>⚠️ Neurocristopathies</strong>
+          <ul>
+            <li><strong>Hirschsprung:</strong> Failed vagal neural crest → aganglionic bowel</li>
+            <li><strong>DiGeorge:</strong> Failed cardiac neural crest → conotruncal defects</li>
+            <li><strong>Waardenburg:</strong> Deafness, pigmentation abnormalities</li>
+            <li><strong>Treacher Collins:</strong> Facial hypoplasia</li>
+          </ul>
+        </div>
+        <div class="clinical-pearl">
+          <strong>🎯 Hirschsprung - The Key Story:</strong> Neural crest migrates <strong>cranial to caudal</strong>. Rectum is ALWAYS involved because it's the most distal structure.
+        </div>
+      </div>
+    </div>
+
+    <!-- DEFECTS TAB -->
+    <div id="defects" class="tab-content">
+      <div class="module-section">
+        <h2>⚠️ Neural Tube Defects</h2>
+        <div class="key-concept">
+          <strong>NTDs</strong> result from failure of neural tube closure. Most are <strong>preventable with folic acid</strong>.
+        </div>
+        <div class="danger-box">
+          <strong>🔴 Anencephaly</strong> - Anterior neuropore failure (day 24-26)<br>
+          Absence of brain and calvarium. <strong>Incompatible with life.</strong>
+        </div>
+        <h3>Spina Bifida Spectrum</h3>
+        <table>
+          <tr><th>Type</th><th>Description</th><th>Prognosis</th></tr>
+          <tr><td><strong>Occulta</strong></td><td>Vertebral arch defect, cord intact</td><td>Usually asymptomatic (~10% population)</td></tr>
+          <tr><td><strong>Meningocele</strong></td><td>Meninges herniate</td><td>Good (no neural tissue)</td></tr>
+          <tr><td><strong>Myelomeningocele</strong></td><td>Cord + meninges herniate</td><td>Paralysis, Chiari II, hydrocephalus</td></tr>
+        </table>
+        <h3>Chiari Malformations</h3>
+        <table>
+          <tr><th>Type</th><th>Features</th></tr>
+          <tr><td><strong>Chiari I</strong></td><td>Tonsils >5mm below foramen magnum; may have syringomyelia</td></tr>
+          <tr><td><strong>Chiari II</strong></td><td>Tonsils + vermis + brainstem herniate; <strong>always with myelomeningocele</strong></td></tr>
+        </table>
+        <div class="dev-card">
+          <h4>📍 Other Malformations</h4>
+          <ul>
+            <li><strong>Dandy-Walker:</strong> Cystic 4th ventricle, vermis hypoplasia</li>
+            <li><strong>Corpus callosum agenesis:</strong> Variable presentation</li>
+            <li><strong>Syringomyelia:</strong> Fluid cavity in cord; "cape-like" sensory loss</li>
+          </ul>
+        </div>
+        <div class="success-box">
+          <strong>🟢 Prevention</strong>
+          <ul>
+            <li>All women: 400 mcg folic acid daily</li>
+            <li>Previous NTD: 4 mg/day</li>
+            <li>Reduces NTD risk by <strong>50-70%</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>Anencephaly results from failure of closure of which structure?</p>
+          <div class="quiz-option" onclick="checkQ('q1', this, true)">A. Anterior (cranial) neuropore</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">B. Posterior (caudal) neuropore</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">C. Neural crest cells</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">D. Notochord</div>
+          <div id="exp-q1" class="explanation"><strong>Answer: A.</strong> Anencephaly = anterior neuropore failure (days 24-26). Posterior neuropore failure → spina bifida.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>Which is derived from neural crest cells?</p>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">A. Oligodendrocytes</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">B. Astrocytes</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, true)">C. Schwann cells</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">D. Ependymal cells</div>
+          <div id="exp-q2" class="explanation"><strong>Answer: C.</strong> Schwann cells (PNS myelin) = neural crest. Oligodendrocytes (CNS myelin), astrocytes, ependymal = neural tube.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>Failure of prosencephalon division causes which malformation?</p>
+          <div class="quiz-option" onclick="checkQ('q3', this, true)">A. Holoprosencephaly</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">B. Dandy-Walker</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">C. Chiari II</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">D. Anencephaly</div>
+          <div id="exp-q3" class="explanation"><strong>Answer: A.</strong> Holoprosencephaly = prosencephalon fails to divide. Associated with SHH deficiency, diabetes, trisomy 13.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>A newborn has myelomeningocele. Which is found in nearly 100% of cases?</p>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">A. Chiari I</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, true)">B. Chiari II</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">C. Dandy-Walker</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">D. Corpus callosum agenesis</div>
+          <div id="exp-q4" class="explanation"><strong>Answer: B.</strong> Chiari II is present in ~100% of myelomeningocele cases.</div>
+        </div>
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>Motor neurons develop from which neural tube region?</p>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">A. Alar plate</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, true)">B. Basal plate</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">C. Roof plate</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">D. Floor plate</div>
+          <div id="exp-q5" class="explanation"><strong>Answer: B.</strong> Basal plate (ventral) → motor neurons (SHH influence). Alar plate (dorsal) → sensory (BMP influence).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFERENCES -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">📖 References</h2>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK542234/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Embryology, Neural Tube</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK538528/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Neural Tube Defects</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK534232/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Chiari Malformations</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK562142/" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">StatPearls: Hirschsprung Disease</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://radiopaedia.org/articles/neural-tube-defects" target="_blank" style="color: var(--rdx-teal-light,#ccfbf1);">Radiopaedia: Neural Tube Defects</a></li>
+      </ul>
+    </section>
+
+    <!-- CROSS-LINKS -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color:var(--rdx-teal-dark,#0f766e);">🔗 Related Modules</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+        <a href="gi-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">GI Embryology</a>
+        <a href="cardiac-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">Cardiac Embryology</a>
+        <a href="pharyngeal-apparatus-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">Pharyngeal Apparatus</a>
+        <a href="#" class="condition-link" style="background: rgba(16,185,129,0.2); color: var(--rdx-teal-light,#ccfbf1);">Teratology</a>
+      </div>
+      <h3 style="color:var(--rdx-text-secondary,#475569); margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="../cases/hirschsprung-disease-crt.html" class="condition-link">Hirschsprung CRT</a>
+        <a href="../cases/#" class="condition-link">DiGeorge CRT</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(qId, el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct', 'incorrect'); opt.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('exp-' + qId).style.display = 'block';
+    }
+  </script>
+
+    
+    <div data-dx-tutor
+         data-module-title="ReasonDx: Neuro Embryology"
+         data-key-points="📚 Neural Development Overview, 🔄 Neurulation, 🧩 Brain Vesicle Development, 🦴 Spinal Cord Development, ⭐ Neural Crest Cells, ⚠️ Neural Tube Defects, 📝 Test Your Knowledge, 📖 References, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+    <!-- Cross-Platform Links -->
+    <div style="max-width:950px;margin:2rem auto;padding:0 2rem;">
+        <div style="background:var(--bg-card,rgba(255,255,255,0.05));border:1px solid var(--border,rgba(255,255,255,0.1));border-radius:1rem;padding:1.5rem;">
+            <h3 style="color:var(--primary);margin-bottom:1rem;">📚 Related Platform Content</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+                <a href="../board-prep.html" style="padding:12px;background:var(--primary-bg,rgba(59,130,246,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">📝 Board Prep MCQs</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">Test your embryology knowledge</div>
+                </a>
+                <a href="../training.html" style="padding:12px;background:var(--primary-bg,rgba(16,185,129,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">🩺 Clinical Cases</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">Apply concepts in clinical scenarios</div>
+                </a>
+                <a href="#" style="padding:12px;background:var(--primary-bg,rgba(139,92,246,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">💬 CoachDx Sessions</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">AI-guided case discussion</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+<!-- THEME PICKER MODAL -->
+    
+
+<script>
+(function() {
+    const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+    document.body.setAttribute('data-theme', saved);
+    document.addEventListener('DOMContentLoaded', updateThemeOptions);
+})();
+
+
+
+function updateThemeOptions() {
+    const current = document.body.getAttribute('data-theme');
+    document.querySelectorAll('.dx-theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === current);
+    });
+}
+
+
+
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDxThemeModal();
+});
+</script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">The neural tube closes in which direction?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Closure is bidirectional, not unidirectional from cranial to caudal." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Cranial to caudal only</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Neural tube closure begins in the cervical region (day 22) and zips bidirectionally. Anterior neuropore closes ~day 25 (failure → anencephaly). Posterior neuropore closes ~day 28 (failure → spina bifida). Folic acid supplementation reduces neural tube defects by ~70% — recommended 400 μg/day starting before conception." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Bidirectionally from the cervical region, with anterior neuropore closing first (day 25), then posterior neuropore (day 28)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Closure proceeds bidirectionally from the cervical region, not solely caudal-to-cranial." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Caudal to cranial only</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Closure is sequential, starting at the cervical region and progressing in both directions." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Simultaneously along the entire length</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">A newborn has a hair-covered midline lumbar dimple with a lipoma. MRI shows a tethered spinal cord with the conus below L3. What embryologic process failed?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Primary neurulation forms the brain and spinal cord down to the sacral level. This defect is consistent with a failure of secondary neurulation or post-closure caudal development." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Primary neurulation</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Spina bifida occulta/tethered cord: defect in secondary neurulation (formation of the caudal neural tube from the caudal cell mass by canalization, weeks 5-6). Cutaneous markers: sacral dimple &gt;2.5 cm from anus, hairy patch, lipoma, hemangioma. Tethered cord → progressive neurologic deficit (gait, bladder) with growth. Surgical untethering indicated." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Secondary neurulation (caudal cell mass canalization)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest migration failures cause conditions like Hirschsprung disease and craniofacial anomalies, not tethered cord." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Neural crest migration</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Cortical migration defects cause lissencephaly and heterotopias, not spinal cord tethering." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cortical neuronal migration</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Holoprosencephaly results from failure of which embryologic process?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Neural tube closure defects cause anencephaly and spina bifida, not holoprosencephaly." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Neural tube closure</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Holoprosencephaly: failure of the prosencephalon to divide into two cerebral hemispheres (and associated midline structures). Spectrum: alobar (most severe, single ventricle, no interhemispheric fissure) → semilobar → lobar (mildest). Associated with trisomy 13, SHH gene mutations, fetal alcohol syndrome. Facial anomalies: cyclopia (severe) to midline cleft lip." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Prosencephalon (forebrain) cleavage into two hemispheres</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Posterior fossa anomalies cause Dandy-Walker malformation and Chiari malformations." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Posterior fossa development</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Premature disjunction causes spinal lipomas, not holoprosencephaly." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Disjunction of surface ectoderm from neuroectoderm</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Chiari II malformation is defined by herniation of which structures through the foramen magnum?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Tonsillar herniation alone defines Chiari I. Chiari II is more extensive." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Cerebellar tonsils only (>5 mm below foramen magnum)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Chiari II: vermis, 4th ventricle, and brainstem herniate through the foramen magnum. Nearly always associated with myelomeningocele (open spina bifida). Causes obstructive hydrocephalus, brainstem compression (stridor, apnea, dysphagia). Prenatal repair of myelomeningocele (MOMS trial) reduces need for VP shunting and improves hindbrain herniation." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Cerebellar vermis, fourth ventricle, and lower brainstem</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This extent of herniation is not characteristic of any Chiari type. Chiari II involves specific posterior fossa structures." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Entire cerebellum into the cervical spinal canal</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes an occipital encephalocele, not a Chiari malformation." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Occipital lobe through a calvarial defect</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Lissencephaly (smooth brain) results from defective:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Myelination disorders cause leukodystrophies, not lissencephaly." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Myelination of white matter tracts</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Lissencephaly: failure of neuronal migration → absent gyri (agyria) or reduced gyri (pachygyria) → smooth cortical surface, thick cortex with only 4 layers instead of 6. Causes: LIS1/PAFAH1B1 (Miller-Dieker syndrome, chromosome 17), DCX (X-linked). Presents with severe intellectual disability, seizures, and feeding difficulties." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Neuronal migration from the ventricular zone to the cortical plate</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Synaptogenesis occurs after migration and doesn&#x27;t affect cortical folding." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Synaptogenesis in the cortex</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Purkinje cell issues affect cerebellar function, not cerebral cortical folding." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cerebellar Purkinje cell maturation</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Dandy-Walker malformation is characterized by:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Corpus callosum agenesis is a separate midline anomaly (though it can co-occur with Dandy-Walker)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Absence of the corpus callosum only</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Dandy-Walker triad: absent/hypoplastic cerebellar vermis + cystic 4th ventricle + enlarged posterior fossa with elevation of the torcula and tentorium. ~80% develop hydrocephalus. Associated with other CNS anomalies (corpus callosum agenesis) and chromosomal abnormalities. Treatment: VP shunt or cyst shunting." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Hypoplasia/absence of the cerebellar vermis, cystic dilation of the fourth ventricle, and enlarged posterior fossa</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Periventricular heterotopia is a neuronal migration disorder, not a posterior fossa malformation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Bilateral periventricular nodular heterotopia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Schizencephaly is a cerebral cortical defect, not a cerebellar/posterior fossa anomaly." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Schizencephaly (full-thickness cortical cleft)</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Neural crest cells give rise to all of the following EXCEPT:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Schwann cells ARE neural crest derivatives — they myelinate peripheral nerves." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Schwann cells</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Melanocytes ARE neural crest derivatives — they migrate to the skin and produce melanin." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Melanocytes</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Motor neurons derive from the basal plate of the neural tube (not neural crest). Neural crest derivatives: peripheral ganglia (DRG, autonomic), Schwann cells, melanocytes, chromaffin cells (adrenal medulla), craniofacial skeleton/cartilage, odontoblasts, aorticopulmonary septum, enteric neurons, C cells of thyroid." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Lower motor neurons in the spinal cord</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Chromaffin cells ARE neural crest derivatives — they are modified postganglionic sympathetic neurons." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Adrenal medullary chromaffin cells</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">A prenatal ultrasound shows a large sac protruding through a posterior skull defect containing brain tissue. What is this anomaly?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Encephalocele: herniation of brain tissue ± meninges through a skull defect (most commonly occipital in Western populations, frontal in Southeast Asian populations). Results from failure of the anterior neuropore region to properly close. Contains neural tissue (encephalocele) or just meninges (meningocele). Prognosis depends on amount of brain tissue involved." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Cephalocele (encephalocele)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Anencephaly: absence of the calvarium and cerebral hemispheres above the brainstem. No protruding sac — the brain simply fails to develop." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Anencephaly</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hydrocephalus causes head enlargement from ventricular dilation, not an external protruding sac." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hydrocephalus</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Craniosynostosis is premature suture fusion causing skull shape deformity, not a herniation through a defect." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Craniosynostosis</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="neural-tube-defects-crt.html" class="cross-link"><div class="cross-link-title">🧪 Neural Tube Defects CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="neuronal-migration-crt.html" class="cross-link"><div class="cross-link-title">🧪 Neuronal Migration CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="chiari-malformation-crt.html" class="cross-link"><div class="cross-link-title">🧪 Chiari Malformation CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="holoprosencephaly-crt.html" class="cross-link"><div class="cross-link-title">🧪 Holoprosencephaly CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="dandy-walker-crt.html" class="cross-link"><div class="cross-link-title">🧪 Dandy-Walker CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="congenital-hydrocephalus-crt.html" class="cross-link"><div class="cross-link-title">🧪 Congenital Hydrocephalus CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="corpus-callosum-agenesis-crt.html" class="cross-link"><div class="cross-link-title">🧪 Corpus Callosum Agenesis CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="seizure-disorders-module.html" class="cross-link"><div class="cross-link-title">📘 Seizure Disorders</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="tbi-icp-module.html" class="cross-link"><div class="cross-link-title">📘 TBI & ICP</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="altered-mental-status-module.html" class="cross-link"><div class="cross-link-title">📘 Altered Mental Status</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

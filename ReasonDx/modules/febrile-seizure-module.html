@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive pathophysiology module: Febrile Seizures. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Febrile Seizures | ReasonDx</title>
+    <script src="../dx-scoring.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.7; min-height: 100vh; }
+        
+        
+        
+        
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 40px 24px; text-align: center; color: #fff; }
+        .hero-inner { max-width: 900px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 12px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .hero p { font-size: 16px; opacity: 0.85; }
+        .hero-meta { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 14px; opacity: 0.75; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 32px; }
+        .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; width: 0%; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow:var(--rdx-shadow); }
+        .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .concept-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .concept-card h3 { margin: 0 0 12px; font-size: 16px; }
+        .concept-card ul { margin-left: 20px; }
+        .concept-card li { margin-bottom: 8px; color: var(--text-secondary); }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+        .comparison-table th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; }
+        .comparison-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .comparison-table tr:hover { background: var(--border-light); }
+        .danger-box { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .danger-box h4 { color: #b91c1c; margin-bottom: 8px; }
+        .danger-box p { color: #991b1b; margin: 0; }
+        .quiz-section { background: var(--bg-card); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .quiz-section h3 { color: var(--primary-dark); margin-bottom: 16px; }
+        .quiz-question { margin-bottom: 24px; }
+        .quiz-question p { font-weight: 500; margin-bottom: 12px; }
+        .quiz-options { display: grid; gap: 8px; }
+        .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius:12px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
+        .quiz-option.correct { background: #ccfbf1; border-color: #22c55e; color: #166534; }
+        .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.7; }
+        .quiz-feedback { margin-top: 8px; padding: 12px; border-radius: 8px; font-size: 13px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdfa; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        @media (max-width: 640px) { .section { padding: 20px; } .hero h1 { font-size: 24px; } }
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../js/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/febrile-seizure.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Febrile Seizures</a> → Module</div>
+
+
+    <!-- nav removed: unified via rdx-nav.js -->
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🌡️</div>
+            <h1>Febrile Seizures</h1>
+            <p>Classification, workup, management, and parental counseling for simple and complex febrile seizures.</p>
+            <div class="hero-meta">
+                <span>📚 2 Sections</span>
+                <span>❓ 4 MCQs</span>
+                <span>⏱ ~20 min</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+        <section class="section">
+            <h2 class="section-title">📊 Classification & Workup</h2>
+            <div class="concept-card">
+                <h3>Simple vs Complex Febrile Seizures</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Feature</th><th>Simple</th><th>Complex</th></tr></thead>
+                    <tbody>
+                        <tr><td>Duration</td><td><15 minutes</td><td>≥15 minutes or status febrilis</td></tr>
+                        <tr><td>Type</td><td>Generalized tonic-clonic</td><td>Focal onset or focal features</td></tr>
+                        <tr><td>Recurrence</td><td>Single in 24 hours</td><td>Multiple in 24 hours</td></tr>
+                        <tr><td>Post-ictal</td><td>Brief, full recovery</td><td>Prolonged, possible Todd paralysis</td></tr>
+                        <tr><td>Proportion</td><td>~70-75% of febrile seizures</td><td>~25-30%</td></tr>
+                        <tr><td>Epilepsy risk</td><td>No increase over baseline (1-2%)</td><td>~2-5% risk</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="concept-card">
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Age:</strong> 6 months to 5 years (peak 12-18 months)</li>
+                    <li><strong>Temperature:</strong> Usually >38°C (100.4°F); often rising rapidly</li>
+                    <li><strong>Incidence:</strong> 2-5% of children; most common seizure type in childhood</li>
+                    <li><strong>Recurrence:</strong> ~30% overall; higher if: age <18 months, lower fever at seizure, family history, short duration of fever before seizure</li>
+                    <li><strong>Genetics:</strong> Strong familial tendency; ~25-40% have positive family history</li>
+                </ul>
+            </div>
+            <div class="concept-card">
+                <h3>Workup Guidelines (AAP)</h3>
+                <ul>
+                    <li><strong>Simple febrile seizure, ≥12 months, immunizations current:</strong> NO routine LP, imaging, labs, or EEG. Focus on fever source.</li>
+                    <li><strong>Consider LP if:</strong> Age <12 months, incomplete Hib/pneumococcal vaccination, pretreated with antibiotics (may mask meningitis), meningeal signs</li>
+                    <li><strong>Complex febrile seizure:</strong> Consider LP, neuroimaging if focal features, and EEG (especially if prolonged or focal)</li>
+                    <li><strong>EEG:</strong> NOT recommended after simple febrile seizure (does not predict epilepsy)</li>
+                    <li><strong>Neuroimaging:</strong> NOT routine; only if focal features, abnormal neuro exam, or suspicion of structural cause</li>
+                </ul>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="fs1">
+                <p>A well-appearing 18-month-old with up-to-date immunizations has a 90-second generalized tonic-clonic seizure with fever of 39.5°C. Post-ictally he is alert and playful with no focal deficits. What workup is indicated?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('fs1', this, false)">Lumbar puncture, CBC, blood culture, CT head</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs1', this, true)">Focus on identifying fever source; no routine seizure workup</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs1', this, false)">EEG to assess epilepsy risk</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs1', this, false)">MRI brain to rule out structural lesion</div>
+                </div>
+                <div class="quiz-feedback" id="fs1-feedback"></div>
+            </div>
+            <div class="quiz-question" id="fs2">
+                <p>A 7-month-old with incomplete pneumococcal vaccination has a 2-minute generalized seizure with fever. She appears well post-ictally. What additional workup should be considered?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('fs2', this, false)">No additional workup — simple febrile seizure</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs2', this, true)">Lumbar puncture</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs2', this, false)">CT head only</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs2', this, false)">EEG and MRI</div>
+                </div>
+                <div class="quiz-feedback" id="fs2-feedback"></div>
+            </div>
+        </div>
+        <section class="section">
+            <h2 class="section-title">💊 Management & Counseling</h2>
+            <div class="concept-card">
+                <h3>Acute Management</h3>
+                <ul>
+                    <li><strong>Most self-resolve</strong> within 1-2 minutes. Protect child from injury, position on side.</li>
+                    <li><strong>Prolonged seizure (>5 min):</strong> Benzodiazepines — rectal diazepam, intranasal midazolam, or IV lorazepam</li>
+                    <li><strong>Febrile status epilepticus (>30 min):</strong> Treat aggressively per status epilepticus protocol</li>
+                    <li><strong>Antipyretics:</strong> Acetaminophen or ibuprofen for comfort. DO NOT prevent febrile seizures but treat underlying illness.</li>
+                </ul>
+            </div>
+            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #0f766e; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #b45309; margin-bottom: 8px;">💎 No AED Prophylaxis</h4>
+                <p style="color: #92400e; margin: 0;">Neither continuous AEDs (valproate, phenobarbital) nor intermittent benzodiazepines are recommended for simple febrile seizures. The risks of medication side effects outweigh benefits given the benign nature and low epilepsy risk. AAP strongly recommends AGAINST prophylactic treatment.</p>
+            </div>
+            <div class="concept-card">
+                <h3>Parental Counseling Points</h3>
+                <ul>
+                    <li><strong>Prognosis is excellent:</strong> Simple febrile seizures do NOT cause brain damage, intellectual disability, or death</li>
+                    <li><strong>Risk of epilepsy:</strong> Not increased after simple febrile seizure (same as general population ~1-2%)</li>
+                    <li><strong>Recurrence:</strong> ~30% chance of another febrile seizure, but this is still benign</li>
+                    <li><strong>What to do if recurs:</strong> Stay calm, place child on side, do not put anything in mouth, time the seizure, call 911 if >5 minutes</li>
+                    <li><strong>Antipyretics do NOT prevent febrile seizures</strong> — important to set expectations</li>
+                </ul>
+            </div>
+        </section>
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="fs3">
+                <p>After a simple febrile seizure, parents ask if daily medication can prevent future seizures. What is the AAP recommendation?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('fs3', this, false)">Daily phenobarbital reduces recurrence</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs3', this, true)">Prophylactic AEDs are NOT recommended</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs3', this, false)">Daily valproic acid until age 5</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs3', this, false)">Intermittent diazepam with every fever</div>
+                </div>
+                <div class="quiz-feedback" id="fs3-feedback"></div>
+            </div>
+            <div class="quiz-question" id="fs4">
+                <p>A child has a febrile seizure with LEFT arm jerking only, lasting 20 minutes, with Todd paralysis afterward. How is this classified and what workup is needed?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('fs4', this, false)">Simple febrile seizure — no workup needed</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs4', this, true)">Complex febrile seizure — LP, neuroimaging, and EEG should be considered</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs4', this, false)">Complex — EEG only</div>
+                    <div class="quiz-option" onclick="checkAnswer('fs4', this, false)">Status epilepticus — admit to ICU</div>
+                </div>
+                <div class="quiz-feedback" id="fs4-feedback"></div>
+            </div>
+        </div>
+
+        <div class="concept-card" style="background: linear-gradient(135deg, #fefce8, #fef08a); border-color: #facc15; text-align: center; padding: 32px;">
+            <h3 style="color: #a16207; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #ca8a04;" id="scoreDisplay">Score: 0/0 correct (4 remaining)</p>
+        </div>
+
+        <section style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 2px solid #a855f7; margin: 40px auto; max-width: 900px; padding: 30px; border-radius: 16px;">
+            <h2 style="color: #7c3aed; margin-bottom: 20px;">📚 Open-Access References</h2>
+            <div style="font-size: 14px;">
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>1. AAP Febrile Seizure Guidelines</strong><br>
+                    Subcommittee on Febrile Seizures. Neurodiagnostic evaluation of the child with a simple febrile seizure. Pediatrics. 2011;127(2):389-394.<br>
+                    PMID: 21285335
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #d8b4fe;">
+                    <strong>2. StatPearls: Febrile Seizures</strong><br>
+                    Leung AKC, et al. Febrile Seizures. StatPearls [Updated 2024].<br>
+                     | <a href="https://www.ncbi.nlm.nih.gov/books/NBK448204/" target="_blank" style="color: #7c3aed;">Free Full Text</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+        const totalQuestions = 4;
+        const feedbackText = {
+            fs1: { correct: "Correct! Simple febrile seizure in a well-appearing child ≥12 months with current immunizations: no LP, no EEG, no neuroimaging, no routine labs for the seizure itself. Find and treat the fever source.", incorrect: "Simple febrile seizure in well-appearing, vaccinated child ≥12 months = no seizure workup. Find the fever source." },
+            fs2: { correct: "Correct! LP should be considered when <12 months (developing meningeal signs less reliable) AND incomplete Hib/pneumococcal vaccination. These children are at higher risk for meningitis that could mimic a febrile seizure.", incorrect: "Age <12 months + incomplete pneumococcal vaccination = consider LP. Meningeal signs are unreliable in infants, and incomplete vaccination increases meningitis risk." },
+            fs3: { correct: "Correct! AAP recommends AGAINST prophylactic AEDs for simple febrile seizures. Medication side effects outweigh benefits given the benign nature. Neither continuous AEDs nor intermittent benzodiazepines are indicated.", incorrect: "AAP strongly recommends against prophylactic medications. Side effects outweigh benefits — simple febrile seizures are benign." },
+            fs4: { correct: "Correct! THREE complex features: focal (left arm only), prolonged (>15 min), and Todd paralysis. Complex febrile seizures warrant LP (rule out meningitis), neuroimaging (focal = structural concern), and EEG.", incorrect: "This has three complex features (focal, prolonged, Todd paralysis). Complex febrile seizures require more extensive evaluation including LP, imaging, and EEG." }
+        };
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => { opt.classList.add('disabled'); if (opt === element) opt.classList.add(isCorrect ? 'correct' : 'incorrect'); });
+            if (!isCorrect) options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) { correctAnswers++; if (typeof DxScoring !== 'undefined') DxScoring.addXP(25, 'MECH'); }
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / totalQuestions) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = 'Score: ' + correctAnswers + '/' + answeredQuestions.size + ' correct (' + (totalQuestions - answeredQuestions.size) + ' remaining)';
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div><div class="dx-theme-name">Ocean Dark</div></div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')"><div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div><div class="dx-theme-name">Midnight Teal</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function updateThemeOptions() { const c = document.body.getAttribute('data-theme'); document.querySelectorAll('.dx-theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === c)); }
+    
+    
+    document.addEventListener('click', e => { if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDxThemeModal(); });
+    </script>
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    <div data-dx-tutor data-module-title="Febrile Seizures" data-key-points="Simple vs complex, LP indications, no AED prophylaxis, recurrence risk, parental counseling" style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">An 18-month-old presents with a 90-second generalized tonic-clonic seizure during a febrile illness (temp 39.5°C). No focal features, no prior seizures. Which is the MOST appropriate classification?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Simple febrile seizure: generalized, &lt;15 minutes, once in 24 hours, age 6 months–5 years, no focal features. This is the classic presentation — occurs in 2-5% of children." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Simple febrile seizure</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Complex febrile seizures have ≥1 of: focal onset, duration &gt;15 min, recurrence within 24 hours, or Todd&#x27;s paralysis. This child has none of these features." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Complex febrile seizure</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Epilepsy requires ≥2 unprovoked seizures. A single febrile seizure is provoked and does not meet criteria for epilepsy." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Epilepsy with febrile trigger</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Status epilepticus requires seizure duration ≥5 minutes (by current definition) or recurrent seizures without return to baseline. A 90-second seizure does not qualify." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Status epilepticus</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Which workup is recommended for a well-appearing 2-year-old with a first simple febrile seizure who is now back to baseline?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The AAP does NOT recommend routine EEG, neuroimaging, or LP for simple febrile seizures in well-appearing children with an identified fever source." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">EEG, brain MRI, and lumbar puncture</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="AAP guidelines: for a simple febrile seizure in a well-appearing child &gt;12 months, the priority is identifying the fever source. No routine EEG, MRI, or LP. Consider LP only if meningeal signs present." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Identify fever source; no routine neurologic workup needed</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CT head exposes the child to radiation and is not indicated for a simple febrile seizure. BMP is not routinely needed." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">CT head and basic metabolic panel</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="LP is NOT mandatory. Consider LP for children &lt;12 months (where meningeal signs may be subtle) or if meningeal signs are present. It&#x27;s no longer a blanket recommendation." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Lumbar puncture is mandatory for all first febrile seizures</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">A parent asks about the risk of their child developing epilepsy after a simple febrile seizure. What is the approximate lifetime risk?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="After a simple febrile seizure, the risk of developing epilepsy is only slightly above the general population (~1-2%). Simple febrile seizures are benign and do not cause brain damage." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Same as general population (~1-2%)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This overestimates the risk. Only COMPLEX febrile seizures carry modestly elevated epilepsy risk (~2-5%). Simple febrile seizures have near-baseline risk." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">10-15%</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This is far too high. It&#x27;s important to reassure parents that simple febrile seizures carry an excellent prognosis with minimal long-term risk." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">25-30%</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Grossly overestimated. Even with complex febrile seizures, the epilepsy risk is only ~2-5%. Simple febrile seizures have near-normal population risk." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">50%</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Which of the following is a feature of a COMPLEX febrile seizure?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="This describes a simple febrile seizure. Complex features include focal onset, prolonged duration, or recurrence." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Generalized onset with duration <5 minutes</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Any ONE of these makes it complex: focal/lateralized features, duration &gt;15 min, recurrence within 24 hours, or post-ictal Todd&#x27;s paralysis. Complex febrile seizures warrant closer follow-up." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Focal onset, duration >15 minutes, or recurrence within 24 hours</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Febrile seizures occur in children aged 6 months to 5 years. A seizure with fever in a child &gt;5-6 years should raise concern for other diagnoses (epilepsy, CNS infection)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Occurrence in a child older than 6 years</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The height of fever does not determine simple vs complex classification. The rate of temperature rise may be more relevant than absolute temperature." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Temperature >40°C at time of seizure</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">What is the recommended treatment approach for preventing recurrent simple febrile seizures?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Continuous AED prophylaxis is NOT recommended for simple febrile seizures. The risks of medication side effects outweigh benefits given the benign prognosis." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Daily prophylactic antiepileptic medication</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Studies show antipyretics do NOT prevent febrile seizures. The seizure often occurs as the initial manifestation of fever, before parents can intervene." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Aggressive antipyretic use at onset of any fever</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="AAP: No prophylactic treatment recommended. Educate parents that febrile seizures are benign, don&#x27;t cause brain damage, and recurrence risk is ~30% (higher if younger age, family history)." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Parental reassurance; no pharmacologic prevention needed</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Intermittent oral/rectal diazepam at fever onset may be considered for select cases with very frequent recurrences, but is NOT routine recommendation for simple febrile seizures." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Rectal diazepam at onset of any febrile illness</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">A 14-month-old has a focal seizure lasting 20 minutes during a fever. Post-ictally, there is right-sided weakness. Which risk factor for future epilepsy is present?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Family history of febrile seizures increases recurrence risk but not specifically epilepsy risk. This child has multiple complex features." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Family history of febrile seizures</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="This child has THREE complex features: focal onset, duration &gt;15 min, and Todd&#x27;s paralysis (post-ictal focal weakness). Complex febrile seizures carry ~2-5% epilepsy risk vs ~1% for simple." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Complex febrile seizure features (focal, prolonged, Todd's paralysis)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Young age increases recurrence risk of febrile seizures but the complex features (focal, prolonged, Todd&#x27;s) are the specific epilepsy risk factors here." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Age under 18 months</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="High fever is associated with febrile seizures generally but is not a risk factor for developing epilepsy. The complex features are the key prognostic markers." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Temperature >39°C</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">At what age range do febrile seizures typically occur?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Neonatal seizures (0-3 months) are NOT febrile seizures — they require full sepsis workup and different management. Febrile seizures don&#x27;t occur in neonates." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Birth to 3 months</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Febrile seizures occur in children 6 months to 5 years, with peak incidence at 12-18 months. Seizures with fever outside this age range warrant investigation for other causes." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">6 months to 5 years</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This extends too old and starts too late. Peak incidence is 12-18 months. By age 5-6, children typically outgrow febrile seizure susceptibility." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">2 years to 10 years</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The upper limit is too high. Febrile seizures typically don&#x27;t occur after age 5-6. A child &gt;6 with febrile seizure needs evaluation for epilepsy or CNS infection." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">6 months to 12 years</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Which is the MOST important acute management step for a child actively seizing with fever in the ED?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Never perform LP during an active seizure. The priority is stopping the seizure and stabilizing the airway first." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Immediate lumbar puncture to rule out meningitis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Antipyretics won&#x27;t stop an active seizure. Fever treatment is secondary to seizure management and airway protection." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Administer acetaminophen rectally to lower the fever</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Acute management: protect airway, position on side, time the seizure. If ≥5 minutes, administer benzodiazepine (IV lorazepam, IM midazolam, or rectal diazepam). Most febrile seizures stop spontaneously." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">ABCs, position safely, benzodiazepine if seizure >5 minutes</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Phenytoin is a second-line agent for status epilepticus, not first-line for an active febrile seizure. Benzodiazepines are first-line." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Start IV phenytoin immediately</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CT Head (acute) → MRI Brain</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> CT for acute (hemorrhage, mass); MRI epilepsy protocol for structural causes</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-neuro.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/seizure" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1177/1535759720949462" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">AES/AAN Guideline for Status Epilepticus</a> — <em style="color:var(--rdx-text-muted,#64748b)">Epilepsy Currents</em></li><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1111/epi.13670" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ILAE Classification of Epilepsies</a> — <em style="color:var(--rdx-text-muted,#64748b)">Epilepsia</em></li><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1542/peds.2010-3318" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">AAP Clinical Practice Guideline: Febrile Seizures</a> — <em style="color:var(--rdx-text-muted,#64748b)">Pediatrics</em></li></ul></div>
+<div class="rdx-imaging-ref" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">🩻 Imaging Resources</h4>
+<p style="font-size:0.85rem;margin-bottom:8px;color:var(--rdx-text-muted,#64748b)"><strong>Primary modality:</strong> CT Head (acute) → MRI Brain</p>
+<p style="font-size:0.85rem;margin-bottom:8px;color:var(--rdx-text-muted,#64748b)"><strong>Key findings:</strong> CT for acute (hemorrhage, mass); MRI epilepsy protocol for structural causes</p>
+<a href="https://radiopaedia.org/articles/seizure" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:0.8rem;font-weight:600">📖 Explore Cases on Radiopaedia →</a>
+</div>
+<div class="cross-links"><a href="../deep-dive-player.html?module=febrile-seizure-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/febrile-seizure-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* rdx-a11y.css — Accessibility enhancements for ReasonDx */
+/* Focus indicators */
+*:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+/* Skip nav link */
+.skip-link {
+  position: absolute; top: -40px; left: 0; z-index: 10000;
+  background: #0d9488; color: #fff; padding: 8px 16px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+/* Screen reader only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); border: 0;
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .adventure-container { border: 2px solid currentColor; }
+  button, .btn { border: 2px solid currentColor; }
+}

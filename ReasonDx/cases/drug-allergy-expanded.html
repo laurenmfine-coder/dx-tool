@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: Drug Allergy. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Drug Allergy - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0d9488 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: #e9d5ff; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #faf5ff; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a855f7; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(147,51,234,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #334155; }
+        .question-box { background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(147,51,234,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: var(--rdx-teal-light,#ccfbf1); }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #0f766e; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; padding: 14px 28px; border-radius:12px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #e9d5ff); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #0891b2; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal-light,#ccfbf1); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-message { font-size: 1.2rem; color:var(--rdx-text); margin-bottom: 32px; }
+        .completion-breakdown { text-align: left; background:var(--rdx-bg-hover); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.aaaai.org/conditions-treatments/allergies/drug-allergy" target="_blank" rel="noopener">Drug Allergy - AAAAI (AAAAI)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK532272/" target="_blank" rel="noopener">Drug Hypersensitivity - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    
+<!-- Platform Recommendations -->
+<div class="platform-panel">
+    <div class="platform-header">🔗 Continue Learning</div>
+    <div class="platform-item"><span class="platform-icon">🔬</span><span>ReasonDx: Immunology Module</span></div><div class="platform-item"><span class="platform-icon">🎯</span><span>CoachDx: Drug Reaction Scenario</span></div><div class="platform-item"><span class="platform-icon">📖</span><span>Deep Dive: Hypersensitivity Classifications</span></div>
+</div>
+
+</div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Penicillin Label",content:`<div class="narrative"><p>35-year-old woman listed as "penicillin allergic" needs antibiotics for cellulitis. Her chart says "allergic to penicillin - rash" from childhood.</p><p style="margin-top:12px;">She doesn't remember the details but her mother told her she "broke out" as a child.</p></div><div class="socratic-prompt"><h4>Evaluate the Label</h4><p>How reliable is this "penicillin allergy" label, and what is the likelihood of true IgE-mediated allergy?</p></div>`,
+hint_beginner:"90% of patients labeled penicillin allergic are NOT truly allergic when tested",hint_advanced:"What happens to IgE-mediated penicillin allergy over time?",
+question:{prompt:"What is the likelihood this patient has true IgE-mediated penicillin allergy?",
+options:[{text:"Low - 90% of labeled patients test negative; childhood rashes are often viral exanthems or non-IgE reactions that wane over time",correct:true},
+{text:"High - any history of rash means lifelong allergy",correct:false},
+{text:"Moderate - need to avoid all beta-lactams forever",correct:false},
+{text:"Cannot determine - treat as allergic regardless of history",correct:false}],
+explanation:{correct:"KEY FACT: 90% of patients labeled penicillin allergic are NOT truly allergic when tested. Childhood rashes are often viral exanthems misattributed to antibiotics. Even true IgE-mediated allergy wanes - 80% lose sensitivity after 10 years.",incorrect:"Most penicillin allergy labels are incorrect. Childhood rashes are often viral. Testing can safely de-label most patients."},
+teaching:`<h4>Penicillin Allergy Reality</h4><p><strong>90%</strong> of labeled patients test NEGATIVE</p><p><strong>Causes of false labels:</strong> Viral exanthems, GI upset, family history, unknown</p><p><strong>IgE wanes:</strong> 50% lose at 5 years, 80% at 10 years</p><p><strong>Impact:</strong> Unnecessary broad-spectrum abx, increased C. diff, resistance</p>`,
+why_chain:[{q:"Why does penicillin IgE wane?",a:"Without re-exposure, IgE-producing B cells and memory cells decline. Half-life of sensitization is about 5 years. Testing can confirm tolerance."},{q:"Why does de-labeling matter?",a:"Penicillin-allergic patients receive broader spectrum antibiotics (vancomycin, fluoroquinolones) with more side effects, resistance, and C. diff risk."}],points:10}},
+
+{title:"Reaction Timing",content:`<div class="narrative"><p>You obtain more history. The patient recalls taking amoxicillin for an ear infection as a child and developing a rash "a few days later."</p></div><div class="socratic-prompt"><h4>Immediate vs Delayed</h4><p>What does the timing of the reaction tell you about the mechanism?</p></div>`,
+hint_beginner:"IgE reactions occur within 1-6 hours; delayed reactions are T-cell mediated",hint_advanced:"What delayed reactions are contraindications to rechallenge?",
+question:{prompt:"A rash appearing 'a few days' after starting amoxicillin suggests what mechanism?",
+options:[{text:"Delayed T-cell mediated reaction - NOT IgE mediated; penicillin skin testing would not detect this type",correct:true},
+{text:"IgE-mediated allergy requiring skin testing",correct:false},
+{text:"Anaphylaxis risk on re-exposure",correct:false},
+{text:"Timing is irrelevant to mechanism",correct:false}],
+explanation:{correct:"Timing is CRITICAL. IgE-mediated (immediate): within 1-6 hours. Delayed (T-cell): days to weeks. A rash appearing days later is T-cell mediated, not IgE. Penicillin skin testing detects IgE only - it would be negative here.",incorrect:"Reactions after 24-72 hours are delayed (T-cell mediated), not IgE. Different mechanism, different risk, different testing."},
+teaching:`<h4>Reaction Timing and Mechanism</h4><p><strong>Immediate (under 1-6h):</strong> IgE-mediated - urticaria, angioedema, anaphylaxis</p><p><strong>Delayed (days-weeks):</strong> T-cell mediated - maculopapular rash, DRESS, SJS</p><p><strong>Skin testing:</strong> Only detects IgE - not useful for delayed reactions</p>`,
+why_chain:[{q:"Why does timing matter for management?",a:"IgE reactions can be anaphylactic and are detected by skin testing. Delayed reactions are rarely anaphylactic but can include severe SCARs (DRESS, SJS/TEN) - these are contraindications to rechallenge."},{q:"Can delayed reactions be dangerous?",a:"Yes - DRESS, SJS, TEN are delayed T-cell reactions that can be fatal. Benign maculopapular rashes are also delayed but are not dangerous."}],points:10}},
+
+{title:"Beta-Lactam Cross-Reactivity",content:`<div class="narrative"><p>The patient asks if she can take cephalosporins since she's "allergic to penicillin."</p></div><div class="socratic-prompt"><h4>Understand Cross-Reactivity</h4><p>What is the true cross-reactivity risk between penicillins and cephalosporins?</p></div>`,
+hint_beginner:"Cross-reactivity is lower than historically quoted - related to side chains, not just the ring",hint_advanced:"Which cephalosporins share side chains with amoxicillin?",
+question:{prompt:"What is the actual cross-reactivity between penicillins and cephalosporins?",
+options:[{text:"1-2% with modern cephalosporins; cross-reactivity relates to R-group side chains, not the beta-lactam ring itself",correct:true},
+{text:"10% - the historically quoted rate is accurate",correct:false},
+{text:"Zero - completely different drugs",correct:false},
+{text:"100% - all beta-lactams cross-react",correct:false}],
+explanation:{correct:"The old 10% cross-reactivity rate was inflated by contaminated early cephalosporins. True rate is 1-2%. Cross-reactivity is due to SIDE CHAIN similarity, not the beta-lactam ring. Amoxicillin shares side chains with cefadroxil and cephalexin.",incorrect:"The 10% rate is outdated. Modern studies show 1-2% cross-reactivity, primarily based on side chain similarity."},
+teaching:`<h4>Beta-Lactam Cross-Reactivity</h4><p><strong>True rate:</strong> 1-2% (not 10%)</p><p><strong>Mechanism:</strong> Side chain (R-group) similarity</p><p><strong>Amoxicillin cross-reacts with:</strong> Cefadroxil, cephalexin, cefprozil (similar side chain)</p><p><strong>Safe alternatives:</strong> Cefuroxime, ceftriaxone, cefepime (different side chains)</p>`,
+why_chain:[{q:"Why was the old 10% rate wrong?",a:"Early cephalosporins were contaminated with penicillin. Also, studies counted any reaction, not confirmed IgE-mediated allergy. Modern studies with skin-test-confirmed allergy show 1-2%."},{q:"What about carbapenems?",a:"Carbapenem cross-reactivity with penicillin is less than 1%. Most penicillin-allergic patients can safely receive carbapenems."}],points:15}},
+
+{title:"Penicillin Skin Testing",content:`<div class="narrative"><p>You decide to evaluate this patient's penicillin allergy more definitively.</p></div><div class="socratic-prompt"><h4>Testing Strategy</h4><p>When is penicillin skin testing indicated, and what does a negative result mean?</p></div>`,
+hint_beginner:"Negative skin test + oral challenge = can safely receive penicillins",hint_advanced:"What is the negative predictive value of penicillin skin testing?",
+question:{prompt:"What does negative penicillin skin testing indicate?",
+options:[{text:"Greater than 99% negative predictive value for IgE-mediated reaction; patient can receive penicillins safely after oral challenge",correct:true},
+{text:"Only rules out anaphylaxis, not other reactions",correct:false},
+{text:"Must still avoid penicillins regardless of result",correct:false},
+{text:"Testing is unreliable and not recommended",correct:false}],
+explanation:{correct:"Penicillin skin testing has greater than 99% negative predictive value for IgE-mediated reactions. Negative test followed by oral amoxicillin challenge confirms tolerance. Patient can be de-labeled and receive penicillins safely.",incorrect:"Penicillin skin testing is highly reliable. Negative result + oral challenge allows safe de-labeling."},
+teaching:`<h4>Penicillin Skin Testing</h4><p><strong>NPV:</strong> Greater than 99% for IgE reactions</p><p><strong>Includes:</strong> Major determinant (penicilloyl) + minor determinants</p><p><strong>Protocol:</strong> Prick then intradermal, followed by oral challenge if negative</p><p><strong>Outcome:</strong> De-label if negative testing + tolerated challenge</p>`,
+why_chain:[{q:"Why oral challenge after negative skin test?",a:"Skin testing is highly sensitive but not 100%. Oral challenge confirms tolerance. Start with low dose, observe, then give full therapeutic dose."},{q:"Who should NOT undergo testing?",a:"Patients with history of severe non-IgE reactions (DRESS, SJS, TEN, AGEP) should never be rechallenged regardless of skin testing."}],points:10}},
+
+{title:"AERD - Samter's Triad",content:`<div class="narrative"><p>Different patient: 42-year-old woman with asthma and recurrent nasal polyps takes ibuprofen and develops severe bronchospasm and nasal congestion within 2 hours.</p></div><div class="socratic-prompt"><h4>Recognize the Pattern</h4><p>What syndrome does asthma + nasal polyps + NSAID reaction suggest?</p></div>`,
+hint_beginner:"Samter's triad = asthma + polyps + NSAID sensitivity",hint_advanced:"Is AERD an IgE-mediated allergy or something else?",
+question:{prompt:"What is the diagnosis and mechanism?",
+options:[{text:"AERD (Aspirin-Exacerbated Respiratory Disease) - NOT IgE mediated; caused by COX-1 inhibition shifting arachidonic acid toward leukotrienes",correct:true},
+{text:"IgE-mediated NSAID allergy",correct:false},
+{text:"Coincidental asthma exacerbation",correct:false},
+{text:"Allergic reaction to tablet coating",correct:false}],
+explanation:{correct:"AERD (Samter's triad): asthma + nasal polyps + NSAID sensitivity. This is NOT an IgE allergy - it's a pharmacologic reaction. COX-1 inhibition shifts arachidonic acid metabolism toward leukotrienes, causing bronchoconstriction. Cross-reactive to ALL COX-1 inhibitors.",incorrect:"AERD is a metabolic/pharmacologic reaction to COX-1 inhibition, not IgE-mediated allergy. This distinction determines safe alternatives."},
+teaching:`<h4>AERD (Samter's Triad)</h4><p><strong>Triad:</strong> Asthma + nasal polyps + NSAID sensitivity</p><p><strong>Mechanism:</strong> COX-1 inhibition shifts metabolism to leukotrienes (NOT IgE)</p><p><strong>Cross-reactive to:</strong> ALL COX-1 NSAIDs</p><p><strong>SAFE:</strong> COX-2 selective (celecoxib), acetaminophen</p><p><strong>Treatment:</strong> Aspirin desensitization (reduces polyp recurrence)</p>`,
+why_chain:[{q:"Why does COX-1 inhibition cause symptoms in AERD?",a:"AERD patients have abnormal arachidonic acid metabolism with overproduction of cysteinyl leukotrienes. Blocking COX-1 shifts more substrate to the leukotriene pathway, causing bronchoconstriction and nasal symptoms."},{q:"What about aspirin desensitization?",a:"Paradoxically, daily aspirin after desensitization has therapeutic benefit - reduces polyp recurrence and improves asthma control."}],points:15}},
+
+{title:"DRESS Syndrome",content:`<div class="narrative"><p>28-year-old man started allopurinol 3 weeks ago. Now presents with fever (103F), diffuse rash over 50% BSA, facial edema, lymphadenopathy, AST 450, ALT 520, eosinophils 18%.</p></div><div class="socratic-prompt"><h4>Recognize the SCAR</h4><p>What severe cutaneous adverse reaction is this, and what is the management?</p></div>`,
+hint_beginner:"Rash + fever + eosinophilia + organ involvement = think DRESS",hint_advanced:"What is the role of HHV-6 in DRESS?",
+question:{prompt:"What is the diagnosis and key management principle?",
+options:[{text:"DRESS syndrome - stop allopurinol IMMEDIATELY, systemic steroids, NEVER rechallenge (can be fatal)",correct:true},
+{text:"Simple drug rash - continue allopurinol with antihistamines",correct:false},
+{text:"Stevens-Johnson syndrome - transfer to burn unit",correct:false},
+{text:"Viral illness unrelated to allopurinol",correct:false}],
+explanation:{correct:"DRESS: Rash + fever + eosinophilia + organ involvement (liver), onset 2-8 weeks. Classic causes: allopurinol, anticonvulsants, sulfonamides. STOP the drug immediately. Systemic steroids. NEVER rechallenge - recurrence is often more severe and can be fatal.",incorrect:"This is DRESS, not a simple rash. Fever, eosinophilia, and hepatitis indicate systemic involvement. Continuing the drug could be fatal."},
+teaching:`<h4>DRESS Syndrome</h4><p><strong>Features:</strong> Rash, fever, lymphadenopathy, eosinophilia, organ involvement</p><p><strong>Timing:</strong> 2-8 weeks after drug</p><p><strong>Organs:</strong> Liver most common, also kidney, heart, lung</p><p><strong>Treatment:</strong> Stop drug, systemic steroids</p><p><strong>NEVER rechallenge</strong></p>`,
+why_chain:[{q:"Why is DRESS life-threatening?",a:"DRESS causes systemic inflammation affecting multiple organs. Liver failure, myocarditis, nephritis can occur. Even after stopping the drug, course can be prolonged with flares."},{q:"What about HHV-6?",a:"HHV-6 reactivation occurs in many DRESS cases and may drive ongoing inflammation. Monitor for weeks even after apparent improvement."}],points:15}},
+
+{title:"Local Anesthetic 'Allergy'",content:`<div class="narrative"><p>Patient insists she's "allergic to lidocaine." She became lightheaded with palpitations during dental work. The dentist said she had an "allergic reaction."</p></div><div class="socratic-prompt"><h4>True Allergy vs Mimic</h4><p>What is the most likely explanation for this reaction?</p></div>`,
+hint_beginner:"True local anesthetic allergy is extremely rare - under 1%",hint_advanced:"What causes palpitations during dental procedures?",
+question:{prompt:"What is the most likely cause of this 'reaction'?",
+options:[{text:"Vasovagal syncope or epinephrine effect - true IgE-mediated local anesthetic allergy is under 1% of reported reactions",correct:true},
+{text:"True lidocaine allergy - avoid all local anesthetics",correct:false},
+{text:"Allergy to lidocaine only - other locals are safe",correct:false},
+{text:"Cannot determine without extensive testing",correct:false}],
+explanation:{correct:"True local anesthetic allergy is extremely rare (under 1%). Most reactions are: vasovagal (anxiety, lightheadedness), epinephrine effects (palpitations, tremor from epi in the anesthetic), or toxic reactions. Over 99% of patients can be cleared with testing.",incorrect:"Lightheadedness and palpitations are classic for vasovagal or epinephrine effect, not allergy. True local anesthetic allergy is vanishingly rare."},
+teaching:`<h4>Local Anesthetic Reactions</h4><p><strong>Most common causes:</strong></p><p>- Vasovagal (anxiety)</p><p>- Epinephrine effect (palpitations, tremor)</p><p>- Toxic (intravascular injection)</p><p><strong>True IgE allergy:</strong> Under 1%, extremely rare</p><p><strong>Testing:</strong> Can clear over 99% of patients</p>`,
+why_chain:[{q:"Why are palpitations common during dental work?",a:"Local anesthetics contain EPINEPHRINE for vasoconstriction. Epinephrine causes expected effects: tachycardia, palpitations, tremor, anxiety. This is pharmacologic, not allergic."},{q:"What about ester vs amide classes?",a:"Esters (procaine, benzocaine) cross-react with PABA and are slightly more allergenic. Amides (lidocaine, bupivacaine) have extremely rare allergy and no cross-reactivity with esters."}],points:10}},
+
+{title:"Sulfa Cross-Reactivity",content:`<div class="narrative"><p>Patient labeled "sulfa allergic" due to rash with trimethoprim-sulfamethoxazole now needs a thiazide diuretic for hypertension.</p></div><div class="socratic-prompt"><h4>Myths vs Reality</h4><p>Is there cross-reactivity between sulfonamide antibiotics and non-antibiotic sulfonamides?</p></div>`,
+hint_beginner:"Sulfonamide antibiotics and non-antibiotics have different structures",hint_advanced:"What structural feature causes sulfonamide antibiotic allergy?",
+question:{prompt:"Can this 'sulfa allergic' patient safely take thiazide diuretics?",
+options:[{text:"YES - clinically meaningful cross-reactivity between sulfonamide antibiotics and non-antibiotic sulfonamides (thiazides, furosemide, celecoxib) is NOT established",correct:true},
+{text:"No - all sulfa-containing drugs cross-react",correct:false},
+{text:"Only if skin testing is negative",correct:false},
+{text:"Must use alternative antihypertensive class",correct:false}],
+explanation:{correct:"Sulfonamide ANTIBIOTICS (sulfamethoxazole) contain an arylamine group that causes reactions. Non-antibiotic sulfonamides (thiazides, furosemide, celecoxib, sumatriptan) lack this structure. Cross-reactivity is NOT established. Most patients can safely receive non-antibiotic sulfonamides.",incorrect:"The 'sulfa' allergy label is often misunderstood. Sulfonamide antibiotics and non-antibiotic sulfonamides have different structures. Cross-reactivity is not established."},
+teaching:`<h4>Sulfonamide Cross-Reactivity</h4><p><strong>Sulfonamide ANTIBIOTICS:</strong> Sulfamethoxazole, sulfasalazine - contain arylamine</p><p><strong>Non-antibiotic sulfonamides:</strong> Thiazides, furosemide, celecoxib - different structure</p><p><strong>Cross-reactivity:</strong> NOT established</p><p><strong>Bottom line:</strong> Sulfa antibiotic allergy does NOT preclude thiazides</p>`,
+why_chain:[{q:"Why the confusion about sulfa allergy?",a:"The term 'sulfa' is applied broadly but the allergenic structure (arylamine at N4 position) is specific to sulfonamide antibiotics. Non-antibiotic sulfonamides lack this structure."},{q:"What about sulfite allergy?",a:"Sulfites (preservatives) are completely different from sulfonamides. No cross-reactivity. Sulfite sensitivity causes bronchospasm in some asthmatics."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>You've evaluated multiple drug allergy scenarios. Each requires different approaches based on mechanism, timing, and severity.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the critical principles for evaluating drug allergy?</p></div>`,
+hint_beginner:"Timing differentiates IgE (immediate) from T-cell (delayed) reactions",hint_advanced:"What reactions are absolute contraindications to rechallenge?",
+question:{prompt:"What are the key principles of drug allergy evaluation?",
+options:[{text:"Timing determines mechanism; most penicillin labels are wrong; severe delayed reactions (DRESS, SJS, TEN) are never rechallenged; cross-reactivity is often overestimated",correct:true},
+{text:"All drug allergies are lifelong and should never be questioned",correct:false},
+{text:"Skin testing works for all types of drug allergy",correct:false},
+{text:"Cross-reactivity is always 10% between related drugs",correct:false}],
+explanation:{correct:"Key principles: 1) Timing matters - immediate (IgE) vs delayed (T-cell), 2) 90% of penicillin labels are wrong, 3) DRESS/SJS/TEN are contraindications to rechallenge, 4) Cross-reactivity is often overestimated (penicillin-cephalosporin is 1-2%, not 10%), 5) Many reactions are not allergic (AERD, vasovagal, epinephrine effect).",incorrect:"Drug allergy evaluation requires careful history taking, understanding of mechanisms, and knowledge of when testing/rechallenge is appropriate vs contraindicated."},
+teaching:`<h4>Drug Allergy Evaluation Summary</h4><p>1. <strong>Timing:</strong> Immediate (under 6h) = IgE; Delayed = T-cell</p><p>2. <strong>De-labeling:</strong> 90% of penicillin allergies can be de-labeled</p><p>3. <strong>Never rechallenge:</strong> DRESS, SJS, TEN, AGEP</p><p>4. <strong>Cross-reactivity:</strong> Often overestimated</p><p>5. <strong>Non-allergic reactions:</strong> AERD, vasovagal, pharmacologic</p>`,
+why_chain:[{q:"Why does accurate drug allergy evaluation matter?",a:"Incorrect allergy labels lead to suboptimal treatment, increased antibiotic resistance, higher costs, and more adverse effects from alternative drugs. De-labeling improves patient care."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent drug allergy evaluation!';}
+else if(p>=80){g='Great Work!';clr='#14b8a6';m='Strong grasp. Review cross-reactivity patterns.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on timing and mechanism.';}
+else{g='Keep Learning';clr='#ef4444';m='Review reaction types and de-labeling.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'Yes':'No'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Drug Allergy"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

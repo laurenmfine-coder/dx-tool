@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive pathophysiology module: Bronchiolitis: Pathophysiology. Learn mechanisms, clinical features, and management on ReasonDx.">
+<title>Bronchiolitis: Pathophysiology | ReasonDx</title>
+    <style>
+        :root { --primary: #0891b2; --primary-dark: #0e7490; --primary-bg: #ecfeff; --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --text: #1e293b; --text-secondary: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); color:var(--rdx-text); line-height: 1.7; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 32px 24px; color: white; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .header-subtitle { font-size: 15px; color: rgba(255,255,255,0.85); }
+        .content { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .objectives { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border: 1px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .objectives h2 { color: #115e59; font-size: 16px; margin-bottom: 12px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 6px; font-size: 0.95rem; }
+        .section { background:var(--rdx-bg-card); border-radius: 16px; padding: 28px; margin-bottom: 24px; box-shadow:var(--rdx-shadow); }
+        .section h2 { color: var(--primary-dark); font-size: 1.25rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-bg); }
+        .section h3 { color: var(--text); font-size: 1rem; margin: 16px 0 8px; }
+        .section p { margin-bottom: 12px; }
+        .pathway-box { background: #fef3c7; border: 1px solid #0f766e; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .pathway-box h4 { color: #92400e; font-size: 0.9rem; margin-bottom: 8px; }
+        .pathway-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .pathway-step { background:var(--rdx-bg-card); border: 1px solid #0f766e; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; }
+        .pathway-arrow { color: #0f766e; font-weight: bold; }
+        .clinical-box { background: #f0fdfa; border: 1px solid #22c55e; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .clinical-box h4 { color: #166534; font-size: 0.9rem; margin-bottom: 8px; }
+        .key-point { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: #115e59; }
+        .mcq-container { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mcq-question { font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-option { padding: 12px 16px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: all 0.2s; }
+        .mcq-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .mcq-option.correct { border-color: #22c55e; background: #f0fdfa; }
+        .mcq-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .mcq-feedback { margin-top: 12px; padding: 12px; border-radius: 8px; display: none; }
+        .mcq-feedback.show { display: block; }
+        .mcq-feedback.correct { background: #f0fdfa; color: #166534; }
+        .mcq-feedback.incorrect { background: #fef2f2; color: #991b1b; }
+        .nav-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+        .nav-link { padding: 12px 24px; border-radius:12px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .nav-link.back { background:var(--rdx-bg-card); border: 1px solid var(--border); color: var(--text); }
+        .nav-link.adventure { background: var(--primary); color: white; }
+        .nav-link:hover { opacity: 0.9; }
+        @media (max-width: 640px) { .content { padding: 20px 16px; } .section { padding: 20px; } }
+    </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="../index.html">ReasonDx</a> → <a href="index.html">ReasonDx</a> → Bronchiolitis</div>
+            <h1>⚙️ Bronchiolitis</h1>
+            <div class="header-subtitle">Pathophysiology & Clinical Correlations | Pediatrics</div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>RSV is the most common cause; peak age 2-6 months</li>
+                <li>Supportive care is mainstay - no proven benefit from bronchodilators or steroids</li>
+                <li>Airway diameter is critical - small changes cause large resistance increases</li>
+                <li>Red flags: apnea, poor feeding, respiratory fatigue, hypoxia</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔬 Core Pathophysiology</h2>
+
+            <h3>Viral Injury Cascade</h3>
+            <p>RSV and other viruses cause small airway inflammation and obstruction in infants.</p>
+            <div class="pathway-box">
+                <h4>Pathway</h4>
+                <div class="pathway-steps">
+                    <span class="pathway-step">Viral infection (RSV most common)</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Bronchiolar epithelial necrosis</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Inflammatory infiltrate + edema</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Mucus plugging of small airways</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Air trapping + V/Q mismatch</span>
+                </div>
+            </div>
+
+            <h3>Why Infants Are Vulnerable</h3>
+            <p>Anatomic and immunologic factors make infants susceptible to severe disease.</p>
+            <div class="pathway-box">
+                <h4>Pathway</h4>
+                <div class="pathway-steps">
+                    <span class="pathway-step">Small airway diameter (resistance ∝ 1/r⁴)</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Immature immune response</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Less collateral ventilation</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Compliant chest wall</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Prone to respiratory fatigue</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>🏥 Clinical Correlations</h2>
+
+            <div class="clinical-box">
+                <h4>Wheezing and crackles</h4>
+                <p><strong>Mechanism:</strong> Air moving through narrowed, mucus-filled bronchioles</p>
+                <p><strong>Clinical Significance:</strong> Classic auscultatory finding; may have both inspiratory and expiratory components</p>
+            </div>
+
+            <div class="clinical-box">
+                <h4>Hyperinflation on CXR</h4>
+                <p><strong>Mechanism:</strong> Air trapping distal to obstructed bronchioles</p>
+                <p><strong>Clinical Significance:</strong> Flattened diaphragms, increased AP diameter</p>
+            </div>
+
+            <div class="clinical-box">
+                <h4>Apnea in young infants</h4>
+                <p><strong>Mechanism:</strong> Immature respiratory control + increased work of breathing</p>
+                <p><strong>Clinical Significance:</strong> Red flag - indicates need for admission/monitoring</p>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>📝 Knowledge Check</h2>
+
+            <div class="mcq-container" id="mcq0">
+                <div class="mcq-question">1. Why does a 50% reduction in bronchiolar diameter cause a 16-fold increase in resistance?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="checkMCQ(0, 0, false)">A. Resistance is inversely proportional to radius squared</div>
+                    <div class="mcq-option" onclick="checkMCQ(0, 1, true)">B. Resistance is inversely proportional to radius to the fourth power</div>
+                    <div class="mcq-option" onclick="checkMCQ(0, 2, false)">C. Mucus viscosity increases exponentially</div>
+                    <div class="mcq-option" onclick="checkMCQ(0, 3, false)">D. Surfactant deficiency causes collapse</div>
+                </div>
+                <div class="mcq-feedback" id="feedback0"></div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>🔑 Key Takeaways</h2>
+            <div class="key-point"><strong>✓</strong> RSV is the most common cause; peak age 2-6 months</div>
+            <div class="key-point"><strong>✓</strong> Supportive care is mainstay - no proven benefit from bronchodilators or steroids</div>
+            <div class="key-point"><strong>✓</strong> Airway diameter is critical - small changes cause large resistance increases</div>
+            <div class="key-point"><strong>✓</strong> Red flags: apnea, poor feeding, respiratory fatigue, hypoxia</div>
+        </div>
+
+        <button class="mobile-menu-btn" onclick="this.nextElementSibling.classList.toggle(\'open\')" aria-label="Menu">☰</button><div class="nav-links">
+            <a href="index.html" class="nav-link back">← Back to ReasonDx</a>
+            <a href="../adventure-hub.html" class="nav-link adventure">Practice Cases →</a>
+        </div>
+    </div>
+
+    <script>
+        const mcqFeedback = [{"correct":"Per Poiseuille's law, resistance ∝ 1/r⁴. Halving the radius (50% reduction) increases resistance by 2⁴ = 16-fold. This is why small airways in infants are so vulnerable to even mild inflammation.","incorrect":"Review Poiseuille's law - the fourth power relationship explains why infants with small airways are so vulnerable."}];
+        
+        function checkMCQ(qIdx, optIdx, isCorrect) {
+            const container = document.getElementById('mcq' + qIdx);
+            const options = container.querySelectorAll('.mcq-option');
+            const feedback = document.getElementById('feedback' + qIdx);
+            
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === optIdx) {
+                    opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            });
+            
+            feedback.className = 'mcq-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct!' : '✗ Not quite') + '</strong><br>' + 
+                (isCorrect ? mcqFeedback[qIdx].correct : mcqFeedback[qIdx].incorrect);
+        }
+    </script>
+
+    
+    <div data-dx-tutor
+         data-module-title="Bronchiolitis: Pathophysiology"
+         data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Viral Injury Cascade, Why Infants Are Vulnerable, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 6-month-old presents in winter with nasal congestion, wheezing, and respiratory distress. Chest X-ray shows hyperinflation with peribronchial thickening. What is the MOST likely pathogen?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="RSV causes 50-80% of bronchiolitis cases. Peak season: November-March. Infants &lt;12 months are most affected. CXR shows hyperinflation ± atelectasis." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Respiratory syncytial virus (RSV)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Influenza can cause respiratory illness in infants but typically presents with high fever and systemic symptoms. RSV is the #1 cause of bronchiolitis." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Influenza A</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="S. pneumoniae causes bacterial pneumonia with lobar consolidation, not the diffuse wheezing and hyperinflation pattern of bronchiolitis." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Streptococcus pneumoniae</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Mycoplasma (&quot;walking pneumonia&quot;) typically affects school-age children and adolescents, not 6-month-old infants." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Mycoplasma pneumoniae</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">According to AAP guidelines, which intervention has the STRONGEST evidence for managing bronchiolitis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="AAP does NOT recommend routine albuterol for bronchiolitis. It has not been shown to improve outcomes and may cause tachycardia. A single trial may be attempted but should be discontinued if no response." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Nebulized albuterol</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="AAP 2014 guidelines (reaffirmed): supportive care is the mainstay. Nasal suctioning, adequate hydration (oral or IV), and supplemental O2 for SpO2 &lt;90%. No routine medications are recommended." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Supportive care: suctioning, hydration, and oxygen as needed</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Corticosteroids do NOT improve outcomes in bronchiolitis (unlike croup or asthma). AAP recommends against routine use." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Systemic corticosteroids</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hypertonic saline may reduce length of stay in ADMITTED patients but is not recommended for ED-only visits. Evidence is mixed." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Nebulized hypertonic saline in the ED</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which infant is at HIGHEST risk for severe bronchiolitis requiring hospitalization?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="A healthy, older infant has relatively low risk. High-risk factors include prematurity, young age, and cardiopulmonary disease." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Full-term 10-month-old with no comorbidities</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Highest risk: premature infants (&lt;29 weeks), age &lt;12 weeks, chronic lung disease (BPD), hemodynamically significant CHD, immunodeficiency. These infants may qualify for palivizumab prophylaxis." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Premature infant (28 weeks GA) now 2 months old with BPD</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Atopic dermatitis is not a risk factor for severe bronchiolitis. The risk factors are related to pulmonary and cardiac comorbidities." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Full-term 8-month-old with eczema</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="An older toddler with mild symptoms is low risk. Severity typically peaks in the first 6 months of life." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Full-term 14-month-old with mild URI symptoms</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">Palivizumab (Synagis) prophylaxis against RSV is MOST appropriate for which patient?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Palivizumab is expensive and targeted to high-risk infants only, not for universal use. (Note: nirsevimab/Beyfortus is now available for broader use.)" onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">All infants during RSV season</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="AAP recommends palivizumab for infants born &lt;29 weeks in their first RSV season, infants with hemodynamically significant CHD, and those with CLD/BPD requiring medical therapy in the prior 6 months." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Infant born at 29 weeks GA, now <12 months, entering RSV season</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Recurrent wheezing alone is not an indication. Palivizumab is for specific high-risk groups based on prematurity, CHD, or CLD criteria." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Any child with recurrent wheezing episodes</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Healthy full-term infants are not candidates for palivizumab. They may be candidates for the newer nirsevimab if available." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Healthy full-term newborn being discharged in October</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">What is the PRIMARY mechanism of airway obstruction in bronchiolitis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Bronchospasm is the mechanism in asthma, not bronchiolitis. This explains why bronchodilators are generally ineffective in bronchiolitis." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Bronchospasm of airway smooth muscle</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Bronchiolitis pathophysiology: viral infection → bronchiolar epithelial necrosis → inflammatory infiltrate + edema + mucus debris → small airway obstruction → air trapping and atelectasis." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Inflammation, edema, and mucus plugging of small airways</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Subglottic narrowing describes croup (laryngotracheobronchitis), not bronchiolitis. Croup presents with stridor, not wheezing." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Subglottic narrowing from laryngeal edema</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes bacterial pneumonia. Bronchiolitis affects the bronchioles, not the alveoli, and the process is inflammatory debris rather than purulent infection." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Alveolar filling with purulent exudate</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">A 4-month-old with bronchiolitis is admitted. On day 3, the infant develops apneic episodes. Which statement is CORRECT?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="RSV-associated apnea is well-recognized, especially in young infants &lt;2 months and premature infants. It may be the presenting symptom." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Apnea is not associated with RSV and suggests a different diagnosis</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="RSV-associated apnea: most common in infants &lt;2 months and premature infants. The mechanism may be central (direct CNS effect) rather than obstructive. May require CPAP, high-flow nasal cannula, or intubation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Apnea in bronchiolitis is more common in young and premature infants and may require escalation of care</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Apnea is a danger sign requiring close monitoring and possible respiratory support escalation — not a benign progression." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">This is a normal progression of bronchiolitis and requires no intervention</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Apnea in bronchiolitis is typically from the viral illness itself, not bacterial superinfection. Antibiotics are not indicated without clear evidence of secondary bacterial infection." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Apnea indicates bacterial superinfection requiring antibiotics</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Which clinical finding would be MOST concerning for impending respiratory failure in an infant with bronchiolitis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Wheezing is expected in bronchiolitis and doesn&#x27;t indicate failure. Paradoxically, LOSS of wheezing with continued distress is more concerning." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Intermittent bilateral wheezing</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Quiet tachypnea → decreasing effort with persistent hypoxia = impending respiratory failure. The infant is tiring out. Other red flags: grunting, head bobbing, cyanosis, poor feeding." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Decreasing respiratory effort with persistent hypoxia and lethargy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Nasal congestion is the most common early finding of bronchiolitis and does not indicate respiratory failure." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Nasal congestion with clear rhinorrhea</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Low-grade fever is common in bronchiolitis and is not a sign of respiratory failure. The key indicators are work of breathing and oxygenation status." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Temperature of 38.5°C</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">A healthy 8-month-old with mild bronchiolitis (SpO2 94%, good feeding, mild retractions) is seen in the ED. What is the MOST appropriate disposition?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="This infant has mild disease with adequate oxygenation and oral intake. Admission is not necessary for mild bronchiolitis." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Admit for IV hydration and continuous pulse oximetry</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Mild bronchiolitis with SpO2 ≥90%, adequate feeding, and reliable caregivers can be managed outpatient. Educate on suctioning, hydration, and red flags (apnea, poor feeding, worsening distress)." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Discharge home with close follow-up and return precautions</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Corticosteroids are not recommended for bronchiolitis. They do not improve outcomes in this condition." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Prescribe oral prednisolone and discharge</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Nebulized epinephrine is not routinely recommended. It may be tried in hospitalized patients but is not standard outpatient management." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Start nebulized epinephrine and observe for 4 hours</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1542/peds.2014-2742" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">AAP Clinical Practice Guideline: Bronchiolitis</a> — <em style="color:var(--rdx-text-muted,#64748b)">Pediatrics</em></li></ul></div>
+<div class="cross-links"><a href="../deep-dive-player.html?module=bronchiolitis-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/bronchiolitis-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+<li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
+</ol>
+</div>
+
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<div style="text-align:center;padding:16px;margin-top:24px;border-top:1px solid var(--rdx-border,#e2e8f0)"><a href="../topics/bronchiolitis.html" style="color:var(--rdx-accent,#0f766e);font-size:14px;text-decoration:none">← Back to Topic Overview</a></div>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

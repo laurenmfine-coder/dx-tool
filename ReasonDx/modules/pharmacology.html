@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pharmacology — interactive medical education module with clinical reasoning and evidence-based content on ReasonDx.">
+<title>Pharmacology | ReasonDx</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family:var(--rdx-font);
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        
+        
+        
+        
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #115e59; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow:var(--rdx-shadow);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #f0fdfa; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #115e59; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #ccfbf1; color: #115e59; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius:12px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius:12px; padding: 14px; }
+        .branch-negative { background: #f0fdfa; border: 1px solid var(--primary); border-radius:12px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius:12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius:8px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #5eead4;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius:12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #f0fdfa; }
+        .quiz-option.correct { border-color: #22c55e; background: #ccfbf1; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius:12px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #ccfbf1; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow:var(--rdx-shadow-md); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius:12px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #0d9488;
+    --primary-light: #5eead4;
+    --primary-dark: #0f766e;
+    --primary-bg: #f0fdfa;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #0d9488;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Unified Navigation */
+
+
+
+
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f1f5f9; z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius:12px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius:8px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="../js/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+
+    <!-- nav removed: unified via rdx-nav.js -->
+
+    
+    </div>
+    </header>
+    <main class="main">
+        <div class="module-header">
+            <h1 class="module-title">💊 Pharmacology</h1>
+            <p class="module-subtitle">Drug mechanisms, pharmacokinetics, adverse effects, and clinical therapeutics</p>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+            <p id="progressText">Question 1 of 20</p>
+        </div>
+        <div id="questionContainer"></div>
+        <div id="resultsContainer" class="hidden">
+            <div class="question-card">
+                <h2 style="text-align:center; margin-bottom:24px;">Module Complete!</h2>
+                <div class="stats">
+                    <div class="stat"><div class="stat-value" id="scoreValue">0%</div><div class="stat-label">Score</div></div>
+                    <div class="stat"><div class="stat-value" id="timeValue">0:00</div><div class="stat-label">Time</div></div>
+                    <div class="stat"><div class="stat-value" id="calibrationValue">--</div><div class="stat-label">Calibration</div></div>
+                </div>
+                <div style="text-align:center; margin-top:32px;">
+                    <button class="btn btn-primary" onclick="restartModule()">Try Again</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">All Modules</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Clinical Pharmacology with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=cc01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../training.html?filter=medication,drug,toxicology" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%);
+                          border: 1px solid #5eead4; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Pharmacology-Related Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 15+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+    <script>
+    const questions = [
+        {id:'PHARM-001',domains:['Cardiovascular','Mechanism'],vignette:'A 58-year-old man with heart failure and reduced ejection fraction (25%) is started on a medication that blocks beta-1 receptors. Initially his symptoms worsen slightly, but after 3 months his EF improves to 35%.',question:'What is the mechanism of long-term benefit from this drug class?',options:[{id:'A',text:'Decreased myocardial oxygen demand through reduced heart rate and contractility',correct:false},{id:'B',text:'Prevention of adverse cardiac remodeling from chronic catecholamine exposure',correct:true},{id:'C',text:'Increased cardiac output through enhanced myocardial calcium sensitivity',correct:false},{id:'D',text:'Reduced preload through venodilation and decreased venous return',correct:false},{id:'E',text:'Decreased afterload through arterial vasodilation reducing systemic resistance',correct:false}],explanation:'Beta-blockers (carvedilol, metoprolol succinate, bisoprolol) reduce mortality in HFrEF by blocking chronic catecholamine toxicity and preventing adverse remodeling. Start low, go slow. Initial negative inotropy may worsen symptoms, but long-term benefits include improved EF and survival.',reference:'Yancy CW. Heart Failure Guidelines. JACC 2017.'},
+        {id:'PHARM-002',domains:['Renal','Mechanism'],vignette:'A 65-year-old woman with hypertension and type 2 diabetes is started on lisinopril. One week later, her creatinine rises from 1.2 to 1.6 mg/dL. Her potassium is 5.4 mEq/L.',question:'What is the mechanism of the creatinine rise?',options:[{id:'A',text:'Direct nephrotoxicity causing acute tubular necrosis and epithelial injury',correct:false},{id:'B',text:'Allergic interstitial nephritis with eosinophilic infiltration of renal parenchyma',correct:false},{id:'C',text:'Efferent arteriolar dilation reducing glomerular filtration pressure gradient',correct:true},{id:'D',text:'Prerenal azotemia from decreased cardiac output and renal hypoperfusion',correct:false},{id:'E',text:'Renal artery thrombosis causing acute ischemic kidney injury bilaterally',correct:false}],explanation:'ACE inhibitors block angiotensin II, which normally constricts the efferent arteriole. Efferent dilation reduces intraglomerular pressure and GFR. A 20-30% creatinine rise is acceptable and often nephroprotective long-term. Hyperkalemia occurs due to reduced aldosterone. Check for bilateral renal artery stenosis if >30% rise.',reference:'Bakris GL. ACE inhibitors and renal function. JASN 2000.'},
+        {id:'PHARM-003',domains:['Hematology','Adverse Effects'],vignette:'A 72-year-old man on warfarin for atrial fibrillation has an INR of 8.5 without bleeding. He recently completed a course of trimethoprim-sulfamethoxazole for a urinary tract infection.',question:'What is the mechanism of this drug interaction?',options:[{id:'A',text:'Increased warfarin absorption from gastrointestinal tract mucosal changes',correct:false},{id:'B',text:'Decreased warfarin protein binding displacing it from albumin sites',correct:false},{id:'C',text:'Inhibition of CYP2C9 reducing warfarin hepatic metabolism significantly',correct:true},{id:'D',text:'Decreased vitamin K absorption from altered gut bacterial flora',correct:false},{id:'E',text:'Enhanced warfarin receptor binding affinity at vitamin K epoxide reductase',correct:false}],explanation:'TMP-SMX inhibits CYP2C9, the primary enzyme metabolizing the more potent S-warfarin enantiomer. This decreases warfarin clearance and elevates INR. Other CYP2C9 inhibitors: metronidazole, fluconazole, amiodarone. CYP inducers (rifampin, phenytoin) decrease INR.',reference:'Holbrook AM. Warfarin drug interactions. Arch Intern Med 2005.'},
+        {id:'PHARM-004',domains:['Endocrine','Mechanism'],vignette:'A 55-year-old woman with type 2 diabetes starts metformin 500 mg twice daily. Her HbA1c improves from 8.5% to 7.2% over 3 months without significant hypoglycemia episodes.',question:'What is the primary mechanism of metformin action?',options:[{id:'A',text:'Stimulation of pancreatic beta cells to increase insulin secretion',correct:false},{id:'B',text:'Inhibition of intestinal alpha-glucosidase delaying carbohydrate absorption',correct:false},{id:'C',text:'Activation of PPAR-gamma receptors improving insulin sensitivity peripherally',correct:false},{id:'D',text:'Inhibition of hepatic gluconeogenesis reducing fasting glucose production',correct:true},{id:'E',text:'Inhibition of SGLT2 transporters increasing renal glucose excretion',correct:false}],explanation:'Metformin primarily inhibits hepatic gluconeogenesis via AMP-kinase activation. It also improves peripheral insulin sensitivity. No hypoglycemia risk as monotherapy (doesnt stimulate insulin release). Lactic acidosis is rare but avoid in renal failure. GI side effects common.',reference:'Rena G. Metformin mechanisms. Diabetologia 2017.'},
+        {id:'PHARM-005',domains:['Psychiatry','Adverse Effects'],vignette:'A 28-year-old woman on lithium for bipolar disorder presents with tremor, confusion, and diarrhea. She recently started ibuprofen for knee pain. Lithium level is 2.1 mEq/L (therapeutic 0.6-1.2).',question:'What is the mechanism of this toxicity?',options:[{id:'A',text:'Increased lithium absorption from gastrointestinal tract due to NSAID effect',correct:false},{id:'B',text:'Displacement of lithium from protein binding sites by ibuprofen molecules',correct:false},{id:'C',text:'Inhibition of lithium hepatic metabolism by cytochrome P450 enzymes',correct:false},{id:'D',text:'Decreased renal lithium excretion due to prostaglandin inhibition by NSAIDs',correct:true},{id:'E',text:'Enhanced lithium CNS penetration through blood-brain barrier disruption',correct:false}],explanation:'NSAIDs inhibit prostaglandin synthesis in the kidney, reducing renal blood flow and lithium clearance (lithium is renally excreted). This causes lithium toxicity. Other precipitants: dehydration, ACE inhibitors, thiazides. Toxicity: tremor, ataxia, confusion, seizures, arrhythmias. Hold lithium and hydrate.',reference:'Finley PR. Lithium drug interactions. Clin Pharmacokinet 2016.'},
+        {id:'PHARM-006',domains:['Cardiology','Toxicity'],vignette:'A 78-year-old woman on digoxin for atrial fibrillation presents with nausea, visual disturbances (yellow halos), and new heart block. Her potassium is 2.9 mEq/L and digoxin level is 2.8 ng/mL.',question:'What factor most increases digoxin toxicity risk in this patient?',options:[{id:'A',text:'Advanced age reducing hepatic metabolism of digoxin significantly',correct:false},{id:'B',text:'Hypokalemia enhancing digoxin binding to Na/K-ATPase pump sites',correct:true},{id:'C',text:'Renal impairment reducing digoxin elimination through kidneys',correct:false},{id:'D',text:'Concurrent calcium channel blocker use slowing AV node conduction',correct:false},{id:'E',text:'Low body weight increasing digoxin serum concentration per dose',correct:false}],explanation:'Hypokalemia enhances digoxin toxicity by increasing digoxin binding to Na/K-ATPase. Digoxin and K+ compete for the same binding site. Other risk factors: renal failure (digoxin is renally cleared), hypomagnesemia, hypercalcemia. Treatment: stop digoxin, correct K+, Digibind for severe toxicity.',reference:'Pincus M. Management of digoxin toxicity. Aust Prescr 2016.'},
+        {id:'PHARM-007',domains:['Infectious Disease','Mechanism'],vignette:'A 45-year-old woman with tuberculosis is started on rifampin-based therapy. She also takes oral contraceptives. Two months later, she has an unplanned pregnancy.',question:'What is the mechanism of this drug interaction?',options:[{id:'A',text:'Rifampin induction of CYP3A4 increasing estrogen metabolism significantly',correct:true},{id:'B',text:'Rifampin inhibition of estrogen absorption from gastrointestinal tract',correct:false},{id:'C',text:'Rifampin displacement of estrogen from serum protein binding sites',correct:false},{id:'D',text:'Rifampin interference with estrogen receptor binding in target tissues',correct:false},{id:'E',text:'Rifampin enhancement of estrogen renal excretion through tubular transport',correct:false}],explanation:'Rifampin is a potent inducer of CYP3A4 and other P450 enzymes. It dramatically increases metabolism of oral contraceptives, reducing their efficacy. Women on rifampin need alternative contraception. Other CYP inducers: phenytoin, carbamazepine, phenobarbital, St. Johns wort.',reference:'LeBel M. Rifampin drug interactions. Clin Infect Dis 1998.'},
+        {id:'PHARM-008',domains:['Neurology','Mechanism'],vignette:'A 65-year-old man with Parkinson disease takes carbidopa-levodopa. He develops involuntary writhing movements of his limbs (dyskinesias) after 5 years of treatment.',question:'What is the mechanism of levodopa-induced dyskinesias?',options:[{id:'A',text:'Direct toxicity to dopaminergic neurons accelerating disease progression',correct:false},{id:'B',text:'Pulsatile dopamine receptor stimulation causing receptor sensitization',correct:true},{id:'C',text:'Accumulation of toxic levodopa metabolites in the basal ganglia',correct:false},{id:'D',text:'Depletion of serotonin stores from competitive synthesis pathway inhibition',correct:false},{id:'E',text:'Irreversible binding to dopamine receptors preventing normal signaling',correct:false}],explanation:'Long-term pulsatile levodopa stimulation (peak-dose effect) causes dopamine receptor sensitization and downstream signaling changes, leading to dyskinesias. Strategies: use sustained-release formulations, add COMT/MAO-B inhibitors for smoother dopamine levels, consider deep brain stimulation.',reference:'Olanow CW. Levodopa motor complications. Mov Disord 2004.'},
+        {id:'PHARM-009',domains:['Rheumatology','Monitoring'],vignette:'A 55-year-old woman with rheumatoid arthritis is started on methotrexate 15 mg weekly. She also takes folic acid 1 mg daily. What monitoring is essential while on this medication?',question:'What is the most important laboratory monitoring?',options:[{id:'A',text:'Serum methotrexate levels to ensure therapeutic drug concentration',correct:false},{id:'B',text:'Bone density scans to monitor for drug-induced osteoporosis progression',correct:false},{id:'C',text:'Complete blood count and liver function tests performed periodically',correct:true},{id:'D',text:'Renal function tests as methotrexate is primarily hepatically metabolized',correct:false},{id:'E',text:'Pulmonary function tests to detect early interstitial lung disease',correct:false}],explanation:'Methotrexate requires CBC (myelosuppression) and LFTs (hepatotoxicity) monitoring. Start every 2-4 weeks, then every 2-3 months when stable. Folic acid reduces side effects. Avoid in pregnancy (teratogenic), renal failure, and heavy alcohol use. Pneumonitis is rare but serious.',reference:'Singh JA. ACR RA Treatment Guidelines. Arthritis Care Res 2016.'},
+        {id:'PHARM-010',domains:['Cardiovascular','Mechanism'],vignette:'A 62-year-old man with stable angina is prescribed nitroglycerin sublingual tablets for chest pain episodes. He is also taking sildenafil for erectile dysfunction.',question:'Why is concurrent use of these medications contraindicated?',options:[{id:'A',text:'Both drugs prolong QT interval increasing risk of torsades de pointes',correct:false},{id:'B',text:'Both drugs increase nitric oxide signaling causing severe hypotension',correct:true},{id:'C',text:'Sildenafil inhibits nitroglycerin metabolism increasing toxic levels',correct:false},{id:'D',text:'Nitroglycerin reduces sildenafil efficacy through receptor competition',correct:false},{id:'E',text:'Both drugs cause coronary vasospasm worsening myocardial ischemia',correct:false}],explanation:'Nitrates release NO causing vasodilation via cGMP. Sildenafil inhibits PDE5 which breaks down cGMP. Together they cause severe, potentially fatal hypotension. Wait 24 hours after sildenafil (48 hours for tadalafil) before nitrates. Absolute contraindication.',reference:'Kloner RA. Cardiovascular effects of PDE5 inhibitors. Am J Cardiol 2005.'},
+        {id:'PHARM-011',domains:['Psychiatry','Mechanism'],vignette:'A 45-year-old woman with major depression is switched from fluoxetine to phenelzine (MAO inhibitor). She develops fever, hypertension, altered mental status, and myoclonus 2 days later.',question:'What is the diagnosis and mechanism?',options:[{id:'A',text:'Neuroleptic malignant syndrome from dopamine receptor blockade effect',correct:false},{id:'B',text:'Serotonin syndrome from excessive serotonergic activity in CNS',correct:true},{id:'C',text:'Malignant hyperthermia from calcium release channel dysfunction',correct:false},{id:'D',text:'Anticholinergic toxicity from muscarinic receptor blockade centrally',correct:false},{id:'E',text:'Tyramine crisis from MAO inhibition with dietary amine ingestion',correct:false}],explanation:'Serotonin syndrome: excessive serotonergic activity causing hyperthermia, altered mental status, autonomic instability, and neuromuscular hyperactivity (myoclonus, hyperreflexia). Fluoxetine has long half-life (5 weeks for norfluoxetine). Need 5-week washout before MAOI. Treatment: stop drugs, supportive care, cyproheptadine.',reference:'Boyer EW. Serotonin syndrome. NEJM 2005.'},
+        {id:'PHARM-012',domains:['Pulmonary','Adverse Effects'],vignette:'A 55-year-old man with atrial fibrillation on amiodarone for 3 years develops progressive dyspnea. Chest CT shows bilateral reticular opacities and ground-glass infiltrates consistent with interstitial lung disease.',question:'What is the mechanism of amiodarone pulmonary toxicity?',options:[{id:'A',text:'Allergic hypersensitivity reaction with eosinophilic lung infiltration',correct:false},{id:'B',text:'Direct pneumocyte toxicity with phospholipid accumulation and fibrosis',correct:true},{id:'C',text:'Pulmonary edema from negative inotropic effect and heart failure',correct:false},{id:'D',text:'Bronchospasm from beta-blocking activity of amiodarone molecule',correct:false},{id:'E',text:'Pulmonary embolism from procoagulant effect of amiodarone therapy',correct:false}],explanation:'Amiodarone accumulates in tissues (long half-life ~60 days) and is directly toxic to type II pneumocytes. Causes phospholipidosis and fibrosis. Risk increases with high doses and long duration. Monitor with PFTs and chest imaging. Other toxicities: thyroid (hypo/hyper), hepatic, corneal deposits, photosensitivity.',reference:'Wolkove N. Amiodarone pulmonary toxicity. Chest 2009.'},
+        {id:'PHARM-013',domains:['Oncology','Mechanism'],vignette:'A 58-year-old woman receiving doxorubicin chemotherapy for breast cancer develops dyspnea and peripheral edema after cumulative dose of 550 mg/m2. Echocardiogram shows EF of 35%.',question:'What is the mechanism of this cardiotoxicity?',options:[{id:'A',text:'Coronary vasospasm causing acute myocardial ischemia and infarction',correct:false},{id:'B',text:'Pericardial inflammation with effusion causing tamponade physiology',correct:false},{id:'C',text:'Free radical formation causing oxidative damage to cardiomyocytes',correct:true},{id:'D',text:'Cardiac arrhythmias from ion channel blockade in myocardial cells',correct:false},{id:'E',text:'Myocarditis from immune-mediated inflammation of heart muscle tissue',correct:false}],explanation:'Anthracyclines (doxorubicin) generate free radicals that damage cardiomyocytes. Toxicity is cumulative and dose-dependent (lifetime limit ~550 mg/m2). Monitor with serial echocardiograms. Dexrazoxane is cardioprotective. Risk factors: prior radiation, age, hypertension. Cardiomyopathy may be irreversible.',reference:'Swain SM. Anthracycline cardiotoxicity. NEJM 2003.'},
+        {id:'PHARM-014',domains:['Nephrology','Adverse Effects'],vignette:'A 60-year-old man with osteomyelitis receives gentamicin IV for 2 weeks. He develops rising creatinine (1.0 to 3.2 mg/dL) and new hearing loss. Urine shows granular casts.',question:'What is the mechanism of gentamicin nephrotoxicity?',options:[{id:'A',text:'Allergic interstitial nephritis with eosinophilic infiltration and rash',correct:false},{id:'B',text:'Prerenal azotemia from volume depletion and decreased renal perfusion',correct:false},{id:'C',text:'Proximal tubular cell toxicity causing acute tubular necrosis pattern',correct:true},{id:'D',text:'Crystal nephropathy from drug precipitation in renal tubular lumen',correct:false},{id:'E',text:'Glomerular injury from immune complex deposition in basement membrane',correct:false}],explanation:'Aminoglycosides accumulate in proximal tubular cells, causing ATN (non-oliguric, granular casts). Risk factors: high trough levels, prolonged therapy, volume depletion, other nephrotoxins. Also causes ototoxicity (vestibular and cochlear). Monitor levels and renal function. Usually reversible if caught early.',reference:'Mingeot-Leclercq MP. Aminoglycoside nephrotoxicity. Antimicrob Agents Chemother 1999.'},
+        {id:'PHARM-015',domains:['Hematology','Mechanism'],vignette:'A 50-year-old man with DVT is started on heparin. Five days later, his platelet count drops from 250,000 to 80,000/μL. He develops new thrombosis in his left leg.',question:'What is the mechanism of this complication?',options:[{id:'A',text:'Direct bone marrow suppression by heparin reducing platelet production',correct:false},{id:'B',text:'Antibodies to platelet factor 4-heparin complex causing platelet activation',correct:true},{id:'C',text:'Heparin-induced splenic sequestration of platelets reducing circulating count',correct:false},{id:'D',text:'Dilutional thrombocytopenia from IV fluid administration with heparin',correct:false},{id:'E',text:'Immune thrombocytopenic purpura triggered independently by underlying DVT',correct:false}],explanation:'HIT type II: antibodies against PF4-heparin complexes activate platelets causing thrombocytopenia AND paradoxical thrombosis. Occurs 5-10 days after heparin exposure. Stop all heparin immediately. Use alternative anticoagulation (argatroban, fondaparinux). 4Ts score helps diagnosis.',reference:'Greinacher A. Heparin-induced thrombocytopenia. NEJM 2015.'},
+        {id:'PHARM-016',domains:['GI','Adverse Effects'],vignette:'A 68-year-old woman on long-term prednisone 20 mg daily for polymyalgia rheumatica develops hip pain without trauma. X-ray shows femoral head collapse consistent with avascular necrosis.',question:'What is the mechanism of steroid-induced AVN?',options:[{id:'A',text:'Direct osteocyte apoptosis from glucocorticoid receptor activation signaling',correct:true},{id:'B',text:'Osteoporosis with pathologic fracture of weakened subchondral bone',correct:false},{id:'C',text:'Septic arthritis from immunosuppression causing bacterial joint infection',correct:false},{id:'D',text:'Inflammatory arthritis exacerbation from steroid withdrawal rebound effect',correct:false},{id:'E',text:'Crystal arthropathy from altered uric acid metabolism with steroids',correct:false}],explanation:'Corticosteroids cause AVN through multiple mechanisms: fat cell hypertrophy compressing sinusoids, direct osteocyte apoptosis, altered lipid metabolism. Most common sites: femoral head, humeral head. Risk increases with dose and duration. May need joint replacement.',reference:'Weinstein RS. Glucocorticoid-induced osteonecrosis. Endocrine 2012.'},
+        {id:'PHARM-017',domains:['Neurology','Mechanism'],vignette:'A 25-year-old woman with epilepsy on carbamazepine develops diplopia and ataxia. Her carbamazepine level is 18 μg/mL (therapeutic 4-12). She recently started erythromycin for bronchitis.',question:'What is the mechanism of this drug interaction?',options:[{id:'A',text:'Erythromycin displacement of carbamazepine from protein binding sites',correct:false},{id:'B',text:'Erythromycin inhibition of CYP3A4 decreasing carbamazepine metabolism',correct:true},{id:'C',text:'Erythromycin induction of carbamazepine absorption from gut mucosa',correct:false},{id:'D',text:'Erythromycin inhibition of carbamazepine renal tubular secretion',correct:false},{id:'E',text:'Additive CNS depression from combined sedating drug effects',correct:false}],explanation:'Erythromycin inhibits CYP3A4, which metabolizes carbamazepine. This raises carbamazepine levels causing toxicity (diplopia, ataxia, nystagmus, nausea). Other CYP3A4 inhibitors: azole antifungals, grapefruit juice, protease inhibitors. Carbamazepine is also a CYP3A4 inducer (autoinduction).',reference:'Spina E. Carbamazepine drug interactions. Clin Pharmacokinet 1996.'},
+        {id:'PHARM-018',domains:['Endocrine','Mechanism'],vignette:'A 45-year-old woman with Graves disease is started on methimazole. Three weeks later, she develops fever, sore throat, and oral ulcers. WBC is 800/μL with absolute neutrophil count of 100.',question:'What is the mechanism of this adverse effect?',options:[{id:'A',text:'Bone marrow infiltration by autoimmune thyroid inflammatory cells',correct:false},{id:'B',text:'Direct myelosuppression from dose-dependent drug toxicity on precursors',correct:false},{id:'C',text:'Immune-mediated destruction of neutrophil precursors in bone marrow',correct:true},{id:'D',text:'Splenic sequestration of neutrophils from drug-induced splenomegaly',correct:false},{id:'E',text:'Vitamin B12 deficiency from drug interference with intrinsic factor',correct:false}],explanation:'Methimazole causes agranulocytosis (0.2-0.5% incidence) through immune-mediated destruction of neutrophil precursors. Occurs within first 3 months. Presents with fever, sore throat, infections. Stop drug immediately. May need G-CSF and antibiotics. Warn patients to report fever/sore throat.',reference:'Cooper DS. Antithyroid drugs. NEJM 2005.'},
+        {id:'PHARM-019',domains:['Cardiology','Mechanism'],vignette:'A 65-year-old man with heart failure is on furosemide 80 mg daily. He develops muscle cramps and palpitations. ECG shows prominent U waves and frequent PVCs. Potassium is 2.8 mEq/L.',question:'What is the mechanism of furosemide-induced hypokalemia?',options:[{id:'A',text:'Increased potassium excretion in sweat from diuretic-induced diaphoresis',correct:false},{id:'B',text:'Decreased intestinal potassium absorption from altered gut transport',correct:false},{id:'C',text:'Increased potassium secretion in distal tubule from enhanced sodium delivery',correct:true},{id:'D',text:'Intracellular potassium shift from metabolic alkalosis induced by diuretic',correct:false},{id:'E',text:'Direct inhibition of potassium reabsorption in loop of Henle segment',correct:false}],explanation:'Loop diuretics inhibit Na-K-2Cl cotransporter in thick ascending limb. More sodium reaches distal tubule, where it is reabsorbed in exchange for potassium secretion (aldosterone effect). This causes hypokalemia. Also causes hypomagnesemia, which worsens hypokalemia resistance to correction.',reference:'Ellison DH. Diuretic mechanisms. Kidney Int 2001.'},
+        {id:'PHARM-020',domains:['Toxicology','Antidote'],vignette:'A 22-year-old woman presents with confusion, tinnitus, hyperpnea, and fever after intentionally ingesting a large quantity of aspirin tablets. ABG shows pH 7.32, pCO2 18, HCO3 12.',question:'What is the antidote for severe salicylate toxicity?',options:[{id:'A',text:'N-acetylcysteine replenishing glutathione stores for metabolism support',correct:false},{id:'B',text:'Flumazenil reversing benzodiazepine receptor binding in brain tissue',correct:false},{id:'C',text:'Sodium bicarbonate alkalinizing urine to enhance salicylate excretion',correct:true},{id:'D',text:'Naloxone reversing opioid receptor binding in central nervous system',correct:false},{id:'E',text:'Fomepizole inhibiting alcohol dehydrogenase enzyme preventing metabolism',correct:false}],explanation:'Salicylate toxicity causes mixed respiratory alkalosis (stimulates respiratory center) and anion gap metabolic acidosis (uncouples oxidative phosphorylation). Sodium bicarbonate alkalinizes blood and urine, trapping ionized salicylate in urine for excretion. Hemodialysis for severe toxicity. NAC = acetaminophen, fomepizole = toxic alcohols.',reference:'Palmer BF. Salicylate toxicity. NEJM 2020.'}
+    ];
+    let currentQuestion=0,score=0,startTime=Date.now(),confidenceRatings=[],answers=[],selectedOption=null;
+    function renderQuestion(){const q=questions[currentQuestion],container=document.getElementById('questionContainer'),domainsHTML=q.domains.map(d=>`<span class="domain-tag">${d}</span>`).join('');container.innerHTML=`<div class="question-card"><div class="question-number">Question ${currentQuestion+1} of ${questions.length}</div>${domainsHTML}<div class="vignette">${q.vignette}</div><div class="question-text">${q.question}</div><div class="confidence-slider"><label>How confident are you? <span id="confValue" class="confidence-value">50%</span></label><input type="range" min="0" max="100" value="50" id="confidenceSlider" oninput="document.getElementById('confValue').textContent=this.value+'%'"></div><div class="options">${q.options.map((opt,i)=>`<div class="option" onclick="selectOption(${i})" id="opt${i}"><strong>${opt.id}.</strong> ${opt.text}</div>`).join('')}</div><div style="margin-top:24px;text-align:center;"><button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()" disabled>Submit Answer</button></div><div class="explanation" id="explanation"><h4>Explanation</h4><p>${q.explanation}</p><p style="margin-top:12px;font-size:13px;color: var(--text-secondary);"><strong>Reference:</strong> ${q.reference}</p><div style="margin-top:20px;text-align:center;"><button class="btn btn-primary" onclick="nextQuestion()">Next Question</button></div></div></div>`;document.getElementById('progressFill').style.width=`${(currentQuestion/questions.length)*100}%`;document.getElementById('progressText').textContent=`Question ${currentQuestion+1} of ${questions.length}`;}
+    function selectOption(index){document.querySelectorAll('.option').forEach((opt,i)=>{opt.classList.remove('selected');if(i===index)opt.classList.add('selected');});selectedOption=index;document.getElementById('submitBtn').disabled=false;}
+    function submitAnswer(){const q=questions[currentQuestion],confidence=parseInt(document.getElementById('confidenceSlider').value);confidenceRatings.push(confidence);const isCorrect=q.options[selectedOption].correct;answers.push({questionId:q.id,selected:selectedOption,correct:isCorrect,confidence});if(isCorrect)score++;document.querySelectorAll('.option').forEach((opt,i)=>{opt.onclick=null;if(q.options[i].correct)opt.classList.add('correct');else if(i===selectedOption&&!isCorrect)opt.classList.add('incorrect');});document.getElementById('submitBtn').style.display='none';document.getElementById('explanation').classList.add('show');}
+    function nextQuestion(){currentQuestion++;selectedOption=null;if(currentQuestion>=questions.length)showResults();else renderQuestion();}
+    function showResults(){document.getElementById('questionContainer').classList.add('hidden');document.getElementById('resultsContainer').classList.remove('hidden');const elapsed=Math.floor((Date.now()-startTime)/1000),minutes=Math.floor(elapsed/60),seconds=elapsed%60,avgConfidence=confidenceRatings.reduce((a,b)=>a+b,0)/confidenceRatings.length,actualScore=(score/questions.length)*100,calibration=Math.abs(avgConfidence-actualScore);document.getElementById('scoreValue').textContent=Math.round(actualScore)+'%';document.getElementById('timeValue').textContent=`${minutes}:${seconds.toString().padStart(2,'0')}`;document.getElementById('calibrationValue').textContent=calibration<10?'Excellent':calibration<20?'Good':'Needs Work';}
+    function restartModule(){currentQuestion=0;score=0;startTime=Date.now();confidenceRatings=[];answers=[];selectedOption=null;document.getElementById('questionContainer').classList.remove('hidden');document.getElementById('resultsContainer').classList.add('hidden');renderQuestion();}
+    renderQuestion();
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:var(--rdx-bg)"></div><div class="dx-theme-preview-main" style="background:var(--rdx-bg-card)"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="light" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    
+    
+    
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "ReasonDx", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
+         data-module-title="Pharmacology"
+         data-key-points="Module Complete!, 🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Clinical Medicine Overview</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+<li><strong>Evidence-Based Medicine Resources</strong>. <em>Cochrane Library</em>. <a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">https://www.cochranelibrary.com/</a></li>
+</ol>
+</div>
+
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

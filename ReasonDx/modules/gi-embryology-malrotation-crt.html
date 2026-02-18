@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Embryology module: The Green Vomit | GI Embryology CRT. Interactive developmental biology with clinical correlations on ReasonDx.">
+<title>The Green Vomit | GI Embryology | ReasonDx CRT</title>
+    <style>
+        :root { --bg:var(--rdx-bg); --card:var(--rdx-bg-card); --border:var(--rdx-border); --text:var(--rdx-text); --muted:var(--rdx-text-muted); --accent: #F59E0B; --success:var(--rdx-success); --warning: #F59E0B; --danger:var(--rdx-danger); --info:var(--rdx-info); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); color:var(--rdx-text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #78350F, #F59E0B); padding: 12px 20px; position:sticky;top:56px; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; margin-left: 10px; }
+        .stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background:var(--rdx-bg-hover); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+        .card { background:var(--rdx-bg-card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(251,191,36,0.1)); border-left:4px solid var(--rdx-teal); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px; }
+        .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background:var(--rdx-bg-hover); padding: 12px; border-radius:12px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .choices { display: grid; gap: 12px; margin-top: 20px; }
+        .choice { background:var(--rdx-bg-card); border: 2px solid var(--border); padding: 16px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
+        .choice:hover { border-color: var(--accent); transform: translateX(4px); }
+        .choice.correct { border-color: var(--success); background: rgba(16,185,129,0.2); }
+        .choice.wrong { border-color: var(--danger); background: rgba(220,38,38,0.2); }
+        .choice-icon { font-size: 1.5rem; }
+        .choice-title { font-weight: 600; }
+        .choice-desc { font-size: 0.85rem; color: var(--muted); }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 12px; }
+        .feedback.show { display: block; }
+        .feedback.good { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.bad { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert { padding: 16px; border-radius: 12px; margin: 20px 0; display: flex; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.info { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 600; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .teaching { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 12px; padding: 16px; margin: 20px 0; }
+        .teaching h4 { color: var(--info); margin-bottom: 8px; }
+        .outcome { text-align: center; padding: 40px; }
+        .outcome-icon { font-size: 4rem; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin: 16px 0 8px; }
+        .btn { padding: 12px 24px; border-radius:12px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .hidden { display: none !important; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+        .pulse { animation: pulse 1s infinite; }
+        .xray-box { background:var(--rdx-bg); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; font-family: monospace; color: #888; }
+    </style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/gi-embryology-malrotation.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Intestinal Malrotation & Volvulus</a> → Module</div>
+
+    <div class="header">
+        <div class="header-row">
+            <div class="header-title">🤢 The Green Vomit<span class="badge">SURGICAL EMERGENCY</span></div>
+            <div class="stats">
+                <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Score</div></div>
+                <div class="stat"><div class="stat-value" id="stage">1/7</div><div class="stat-label">Stage</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:14%"></div></div>
+
+        <!-- STAGE 1 -->
+        <div id="s1" class="stage">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 1 of 7</div><div class="card-title">🚨 Newborn Nursery Call</div></div>
+                <div class="card-body">
+                    <div class="narrative"><strong>Urgent page:</strong> "3-day-old baby started vomiting this morning. The vomit is <span class="hl">bright green</span>. He was feeding fine yesterday but now won't eat and looks uncomfortable. We're worried."</div>
+                    <div class="vitals">
+                        <div class="vital"><div class="vital-label">HR</div><div class="vital-value">175</div></div>
+                        <div class="vital"><div class="vital-label">RR</div><div class="vital-value">55</div></div>
+                        <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">97.8°F</div></div>
+                        <div class="vital critical"><div class="vital-label">Last Feed</div><div class="vital-value pulse">Refused</div></div>
+                    </div>
+                    <p style="color:var(--muted)">You arrive to see an irritable infant with a distended abdomen. Green-stained emesis in the basin.</p>
+                    
+                    <div class="alert danger">
+                        <div class="alert-icon">⚠️</div>
+                        <div><div class="alert-title">Critical Recognition</div><div class="alert-desc">What makes bilious (green) vomiting in a newborn a surgical emergency?</div></div>
+                    </div>
+
+                    <div class="choices" id="c1">
+                        <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🦠</div><div><div class="choice-title">Suggests severe infection</div><div class="choice-desc">Green = infected bile</div></div></div>
+                        <div class="choice" onclick="check(1,this,true)"><div class="choice-icon">🚨</div><div><div class="choice-title">Bilious vomiting = obstruction DISTAL to ampulla of Vater</div><div class="choice-desc">Must rule out malrotation with volvulus - a surgical emergency</div></div></div>
+                        <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">🍼</div><div><div class="choice-title">Indicates formula intolerance</div><div class="choice-desc">Need to switch formulas</div></div></div>
+                        <div class="choice" onclick="check(1,this,false)"><div class="choice-icon">😰</div><div><div class="choice-title">Normal in stressed newborns</div><div class="choice-desc">Common and usually benign</div></div></div>
+                    </div>
+                    <div class="feedback" id="f1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div id="s2" class="stage hidden">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 2 of 7</div><div class="card-title">🔬 Understanding the Embryology</div></div>
+                <div class="card-body">
+                    <div class="teaching">
+                        <h4>💡 Midgut Rotation - Normal Development</h4>
+                        <p>During weeks 6-10, the midgut herniates into the umbilical cord, rotates <strong>270° counterclockwise</strong> around the SMA, and returns to the abdomen. The duodenojejunal junction (ligament of Treitz) ends up in the <strong>left upper quadrant</strong>, and the cecum ends up in the <strong>right lower quadrant</strong>.</p>
+                    </div>
+                    <p style="margin-bottom:16px">In malrotation, the gut fails to rotate properly. Why does this lead to volvulus?</p>
+                    <div class="choices" id="c2">
+                        <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">📍</div><div><div class="choice-title">The cecum is in the wrong position</div><div class="choice-desc">Position alone causes problems</div></div></div>
+                        <div class="choice" onclick="check(2,this,true)"><div class="choice-icon">🔗</div><div><div class="choice-title">Narrow mesenteric base allows the entire midgut to twist</div><div class="choice-desc">SMA becomes the axis of rotation → ischemia</div></div></div>
+                        <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🧬</div><div><div class="choice-title">Neural crest cells fail to migrate</div><div class="choice-desc">Like Hirschsprung disease</div></div></div>
+                        <div class="choice" onclick="check(2,this,false)"><div class="choice-icon">🫁</div><div><div class="choice-title">The diaphragm doesn't form properly</div><div class="choice-desc">Bowel herniates into chest</div></div></div>
+                    </div>
+                    <div class="feedback" id="f2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3 -->
+        <div id="s3" class="stage hidden">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 3 of 7</div><div class="card-title">📋 Physical Examination</div></div>
+                <div class="card-body">
+                    <div class="narrative">On exam, the baby is <span class="hl">irritable</span>, with a <span class="hl">distended, tense abdomen</span>. Bowel sounds are hypoactive. You note some <span class="hl">bloody mucus in the diaper</span>.</div>
+                    
+                    <div class="alert danger">
+                        <div class="alert-icon">🩸</div>
+                        <div><div class="alert-title">Bloody Stool + Bilious Vomiting</div><div class="alert-desc">This combination is highly concerning. What does blood in stool suggest in this context?</div></div>
+                    </div>
+
+                    <div class="choices" id="c3">
+                        <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🥛</div><div><div class="choice-title">Milk protein allergy</div><div class="choice-desc">Common cause of bloody stool</div></div></div>
+                        <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">💊</div><div><div class="choice-title">Vitamin K deficiency bleeding</div><div class="choice-desc">Didn't get vitamin K at birth</div></div></div>
+                        <div class="choice" onclick="check(3,this,true)"><div class="choice-icon">⚠️</div><div><div class="choice-title">Intestinal ischemia - bowel may be dying</div><div class="choice-desc">Volvulus has compromised blood supply</div></div></div>
+                        <div class="choice" onclick="check(3,this,false)"><div class="choice-icon">🦠</div><div><div class="choice-title">Infectious colitis</div><div class="choice-desc">C. diff or bacterial infection</div></div></div>
+                    </div>
+                    <div class="feedback" id="f3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 4 -->
+        <div id="s4" class="stage hidden">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 4 of 7</div><div class="card-title">🔍 Diagnostic Approach</div></div>
+                <div class="card-body">
+                    <p style="margin-bottom:16px">You suspect malrotation with volvulus. What is the BEST initial imaging study?</p>
+                    <div class="choices" id="c4">
+                        <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">📷</div><div><div class="choice-title">Abdominal X-ray</div><div class="choice-desc">Quick and available</div></div></div>
+                        <div class="choice" onclick="check(4,this,true)"><div class="choice-icon">🎯</div><div><div class="choice-title">Upper GI contrast study (UGI)</div><div class="choice-desc">Gold standard - shows position of ligament of Treitz</div></div></div>
+                        <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">🔊</div><div><div class="choice-title">Abdominal ultrasound</div><div class="choice-desc">Good for pyloric stenosis</div></div></div>
+                        <div class="choice" onclick="check(4,this,false)"><div class="choice-icon">💉</div><div><div class="choice-title">CT with contrast</div><div class="choice-desc">Most detailed imaging</div></div></div>
+                    </div>
+                    <div class="feedback" id="f4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 5 -->
+        <div id="s5" class="stage hidden">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 5 of 7</div><div class="card-title">📊 Imaging Results</div></div>
+                <div class="card-body">
+                    <div class="xray-box">
+                        <p style="color:#F59E0B;font-size:1.2rem;margin-bottom:10px">📋 UPPER GI STUDY REPORT</p>
+                        <p>Duodenojejunal junction located to the RIGHT of midline</p>
+                        <p style="color:#EF4444;font-weight:bold">"Corkscrew" appearance of distal duodenum</p>
+                        <p>Consistent with MALROTATION WITH MIDGUT VOLVULUS</p>
+                    </div>
+                    
+                    <div class="teaching">
+                        <h4>💡 Key UGI Findings in Malrotation</h4>
+                        <p><strong>Normal:</strong> DJ junction (ligament of Treitz) is LEFT of spine, at level of pylorus</p>
+                        <p><strong>Malrotation:</strong> DJ junction is RIGHT of spine or midline</p>
+                        <p><strong>Volvulus:</strong> "Corkscrew" or "bird's beak" appearance from twisted bowel</p>
+                    </div>
+
+                    <p style="margin-bottom:16px">The study confirms malrotation with volvulus. What is the next step?</p>
+                    <div class="choices" id="c5">
+                        <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">📞</div><div><div class="choice-title">GI consult for endoscopy</div><div class="choice-desc">Evaluate the obstruction directly</div></div></div>
+                        <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">💊</div><div><div class="choice-title">NG decompression and observation</div><div class="choice-desc">See if it resolves</div></div></div>
+                        <div class="choice" onclick="check(5,this,true)"><div class="choice-icon">🔪</div><div><div class="choice-title">EMERGENT surgery - Ladd procedure</div><div class="choice-desc">Every minute of delay = more bowel ischemia</div></div></div>
+                        <div class="choice" onclick="check(5,this,false)"><div class="choice-icon">🩺</div><div><div class="choice-title">Repeat imaging in 6 hours</div><div class="choice-desc">Confirm findings before surgery</div></div></div>
+                    </div>
+                    <div class="feedback" id="f5"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 6 -->
+        <div id="s6" class="stage hidden">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 6 of 7</div><div class="card-title">🔪 The Ladd Procedure</div></div>
+                <div class="card-body">
+                    <div class="narrative">The baby is taken emergently to the OR. The surgeon finds <span class="hl">dusky but viable small bowel</span> that pinks up after the volvulus is reduced. They proceed with the Ladd procedure.</div>
+                    
+                    <p style="margin-bottom:16px">What are the key steps of the Ladd procedure?</p>
+                    <div class="choices" id="c6">
+                        <div class="choice" onclick="check(6,this,true)"><div class="choice-icon">✅</div><div><div class="choice-title">Reduce volvulus, lyse Ladd bands, widen mesentery, appendectomy, place bowel in non-rotation</div><div class="choice-desc">Complete procedure addresses the anatomy</div></div></div>
+                        <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">❌</div><div><div class="choice-title">Resect the malrotated segment and anastomose</div><div class="choice-desc">Remove the problem area</div></div></div>
+                        <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">❌</div><div><div class="choice-title">Create a gastrostomy and ileostomy</div><div class="choice-desc">Divert until inflammation resolves</div></div></div>
+                        <div class="choice" onclick="check(6,this,false)"><div class="choice-icon">❌</div><div><div class="choice-title">Simply untwist the bowel and close</div><div class="choice-desc">Quick fix</div></div></div>
+                    </div>
+                    <div class="feedback" id="f6"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 7 -->
+        <div id="s7" class="stage hidden">
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stage 7 of 7</div><div class="card-title">🎓 Case Complete</div></div>
+                <div class="card-body">
+                    <div class="outcome">
+                        <div class="outcome-icon">🎉</div>
+                        <div class="outcome-title">Bowel Saved!</div>
+                        <p style="color:var(--muted)">You recognized bilious vomiting as a surgical emergency and expedited care. The baby's bowel was viable and will recover fully.</p>
+                    </div>
+
+                    <div class="teaching">
+                        <h4>🔑 Key Learning Points</h4>
+                        <ul style="margin:10px 0 0 20px">
+                            <li><strong>Bilious vomiting in newborn = surgical emergency</strong> until proven otherwise</li>
+                            <li><strong>Malrotation:</strong> Failure of 270° CCW rotation during weeks 6-10</li>
+                            <li><strong>Narrow mesenteric base</strong> allows entire midgut to twist around SMA</li>
+                            <li><strong>UGI is gold standard:</strong> Shows DJ junction position + corkscrew sign</li>
+                            <li><strong>Ladd procedure:</strong> Reduce volvulus, lyse bands, widen mesentery, appendectomy</li>
+                            <li><strong>Bloody stool = ischemia:</strong> Indicates vascular compromise, increases urgency</li>
+                        </ul>
+                    </div>
+
+                    <div class="teaching" style="background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.3);">
+                        <h4 style="color: var(--accent);">📚 Embryology Connection</h4>
+                        <p>Malrotation occurs when the midgut fails to complete its normal 270° counterclockwise rotation around the SMA. The result is a narrow mesenteric pedicle that can twist (volvulus), cutting off blood supply to the entire midgut (duodenum to mid-transverse colon).</p>
+                        <p style="margin-top: 10px;"><a href="gi-embryology-module.html" style="color: var(--accent);">→ Review GI Embryology Module</a></p>
+                    </div>
+
+                    <div class="alert info"><div class="alert-icon">📊</div><div><div class="alert-title">Final Score: <span id="final">0</span>/600</div></div></div>
+                    <div style="text-align:center;margin-top:24px"><button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0; const crtId='gi-embryology-malrotation-crt';
+        const fb = {
+            1: { y: "Exactly! BILIOUS (green) vomiting means the obstruction is DISTAL to the ampulla of Vater where bile enters. In a newborn, this is malrotation with volvulus until proven otherwise - a true surgical emergency.", n: "Bilious vomiting in a newborn is always concerning for obstruction DISTAL to the ampulla of Vater. Malrotation with volvulus can cause midgut ischemia and death within hours." },
+            2: { y: "Correct! In malrotation, the mesentery has a narrow base (normally it's broad, from ligament of Treitz to cecum). This narrow pedicle can twist around the SMA like a ribbon around a maypole, cutting off blood supply to the entire midgut.", n: "The key problem is the NARROW MESENTERIC BASE. Normally the mesentery is broadly attached. In malrotation, it has a narrow pedicle that can twist (volvulus) around the SMA, causing ischemia." },
+            3: { y: "Exactly! Bloody stool in this context indicates intestinal ischemia - the blood supply is compromised and the bowel is suffering. This dramatically increases the urgency - without surgery, the bowel will die.", n: "Blood in stool + bilious vomiting = ISCHEMIA. The twisted bowel has compromised blood flow. This is dying gut. Every minute counts." },
+            4: { y: "Correct! Upper GI contrast study is the gold standard. It shows the position of the duodenojejunal junction (ligament of Treitz). Normally it's LEFT of spine at pylorus level. In malrotation it's RIGHT of midline. Volvulus shows 'corkscrew' sign.", n: "Upper GI is gold standard for malrotation. It shows DJ junction position (should be LEFT of spine). Plain X-ray may be normal or show 'double bubble.' Ultrasound can show 'whirlpool sign' but UGI is definitive." },
+            5: { y: "Correct! This is a SURGICAL EMERGENCY. Malrotation with volvulus requires EMERGENT Ladd procedure. Every minute of delay means more ischemic bowel. No time to observe - the bowel may be dying.", n: "Malrotation with volvulus = EMERGENT SURGERY (Ladd procedure). There is no role for observation. The bowel is twisting on its blood supply and dying. Minutes matter." },
+            6: { y: "Exactly! The Ladd procedure: (1) Counterclockwise reduction of volvulus, (2) Division of Ladd bands (peritoneal bands crossing duodenum), (3) Broadening the mesenteric base, (4) Appendectomy (cecum will be in abnormal position), (5) Place small bowel on RIGHT, colon on LEFT (intentional non-rotation).", n: "Ladd procedure components: Reduce volvulus (CCW), lyse Ladd bands, widen mesentery, appendectomy (cecum abnormally positioned), place in non-rotation (small bowel right, colon left)." }
+        };
+        function saveCrtScore(){try{var cs=JSON.parse(localStorage.getItem('crtScores')||'{}')||{};if(!cs[crtId])cs[crtId]={attempts:0,best:0,last:null};cs[crtId].last=new Date().toISOString();localStorage.setItem('crtScores',JSON.stringify(cs))}catch(e){}}
+function check(n, el, ok) {
+            document.querySelectorAll(`#c${n} .choice`).forEach(c => { c.style.pointerEvents='none'; if(c.onclick.toString().includes('true')) c.classList.add('correct'); });
+            el.classList.add(ok ? 'correct' : 'wrong');
+            if (ok) score += 100;
+            document.getElementById('score').textContent = score;
+            const f = document.getElementById(`f${n}`);
+            f.className = `feedback show ${ok?'good':'bad'}`;
+            f.innerHTML = `<strong>${ok?'✅ Correct! +100':'❌ Not quite'}</strong><br><br>${ok?fb[n].y:fb[n].n}`;
+            setTimeout(() => {
+                document.getElementById(`s${n}`).classList.add('hidden');
+                document.getElementById(`s${n+1}`).classList.remove('hidden');
+                document.getElementById('stage').textContent = `${n+1}/7`;
+                document.getElementById('progress').style.width = `${((n+1)/7)*100}%`;
+                if (n+1===7) document.getElementById('final').textContent = score;
+                window.scrollTo({top:0,behavior:'smooth'});
+            }, 2500);
+        }
+    </script>
+
+    
+    <div data-dx-tutor
+         data-module-title="The Green Vomit"
+         data-key-points="clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="gi-embryology-malrotation-crt.html" class="cross-link"><div class="cross-link-title">🧪 Clinical Reasoning Trainer</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a></div></div></div>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+
+<div class="rdx-references" style="max-width:900px;margin:32px auto;padding:24px;border-top:1px solid var(--rdx-border,#e2e8f0)">
+<h3 style="font-family:var(--rdx-font-serif);font-size:18px;color:var(--rdx-text,#1e293b);margin-bottom:12px;font-weight:400">References</h3>
+<ol class="rdx-ref-list" style="list-style:none;padding:0;counter-reset:ref-counter">
+<li><strong>Embryology Overview</strong>. <em>StatPearls</em>. <a href="https://www.ncbi.nlm.nih.gov/books/NBK554437/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/NBK554437/</a></li>
+<li><strong>Langman&#x27;s Medical Embryology (reference)</strong>. <em>NLM Bookshelf</em>. <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank" rel="noopener">https://www.ncbi.nlm.nih.gov/books/</a></li>
+</ol>
+</div>
+
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

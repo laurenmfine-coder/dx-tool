@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EKCVJ1SMN3');
-</script>
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
@@ -16,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,7 +151,6 @@
             cursor: pointer;
             position: relative;
         }
-        .heatmap-cell.level-0 { background: #f1f5f9; border: 1px dashed #e2e8f0; }
         .heatmap-cell.level-1 { background: #dcfce7; }
         .heatmap-cell.level-2 { background: #86efac; }
         .heatmap-cell.level-3 { background: #22c55e; }
@@ -337,7 +328,7 @@
                 <p>Keep up the momentum — you're making great progress</p>
             </div>
             <div class="streak-badge">
-                🔥 <span id="streak-count">0</span> day streak
+                🔥 <span id="streak-count">7</span> day streak
             </div>
         </div>
     </header>
@@ -378,22 +369,22 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="icon blue">📚</div>
-                <div class="value" id="modules-completed">0</div>
+                <div class="value" id="modules-completed">47</div>
                 <div class="label">Modules Completed</div>
             </div>
             <div class="stat-card">
                 <div class="icon green">⏱️</div>
-                <div class="value" id="hours-studied">0</div>
+                <div class="value" id="hours-studied">23.5</div>
                 <div class="label">Hours Studied</div>
             </div>
             <div class="stat-card">
                 <div class="icon purple">🎯</div>
-                <div class="value" id="avg-score">0%</div>
+                <div class="value" id="avg-score">78%</div>
                 <div class="label">Average Quiz Score</div>
             </div>
             <div class="stat-card">
                 <div class="icon orange">📈</div>
-                <div class="value" id="mastery-level">Not Started</div>
+                <div class="value" id="mastery-level">Intermediate</div>
                 <div class="label">Current Level</div>
             </div>
         </div>
@@ -404,8 +395,41 @@
                 <!-- Progress by Category -->
                 <div class="card">
                     <h2>📊 Progress by Category</h2>
-                    <div id="categoryProgress">
-                        <p style="font-size: 13px; color: var(--text-secondary);">Complete modules and cases to see your progress by specialty.</p>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Microbiology</span>
+                            <span class="value">32/40 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill green" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Pharmacology</span>
+                            <span class="value">10/16 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill blue" style="width: 62%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Cardiology</span>
+                            <span class="value">8/15 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill purple" style="width: 53%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="label">Renal/Electrolytes</span>
+                            <span class="value">4/12 modules</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill orange" style="width: 33%"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -427,10 +451,30 @@
                 <!-- Recommended Next -->
                 <div class="card">
                     <h2>🎯 Recommended Next</h2>
-                    <div id="recommendedNext">
-                        <p style="font-size: 13px; color: var(--text-secondary);">Complete a few modules or cases to get personalized recommendations.</p>
+                    <div class="rec-item" onclick="alert('Opening module...')">
+                        <div class="icon" style="background: #fee2e2;">🦠</div>
+                        <div class="info">
+                            <div class="title">Mucormycosis</div>
+                            <div class="reason">Related to your recent Aspergillus study</div>
+                        </div>
+                        <span class="arrow">→</span>
                     </div>
-                </div>
+                    <div class="rec-item" onclick="alert('Opening module...')">
+                        <div class="icon" style="background: #ccfbf1;">💊</div>
+                        <div class="info">
+                            <div class="title">Anti-TB Drugs</div>
+                            <div class="reason">Complete your pharmacology series</div>
+                        </div>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="rec-item" onclick="alert('Opening module...')">
+                        <div class="icon" style="background: #fef3c7;">⚡</div>
+                        <div class="info">
+                            <div class="title">Electrolyte Disorders Review</div>
+                            <div class="reason">Due for spaced repetition (last: 8 days ago)</div>
+                        </div>
+                        <span class="arrow">→</span>
+                    </div>
                 </div>
             </div>
 
@@ -468,25 +512,24 @@
                 <!-- Daily Goals -->
                 <div class="card">
                     <h2>✅ Today's Goals</h2>
-                    <div id="todaysGoals">
-                        <div class="goal-item">
-                            <div class="goal-checkbox" id="goal-module-check"></div>
-                            <span class="goal-text" id="goal-module-text">Complete 1 new module</span>
-                        </div>
-                        <div class="goal-item">
-                            <div class="goal-checkbox" id="goal-case-check"></div>
-                            <span class="goal-text" id="goal-case-text">Try 1 clinical case</span>
-                        </div>
-                        <div class="goal-item">
-                            <div class="goal-checkbox" id="goal-quiz-check"></div>
-                            <span class="goal-text" id="goal-quiz-text">Take 1 practice quiz</span>
-                        </div>
-                        <div class="goal-item">
-                            <div class="goal-checkbox" id="goal-time-check"></div>
-                            <span class="goal-text" id="goal-time-text">Spend 30 min studying</span>
-                        </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox done" onclick="this.classList.toggle('done')">✓</div>
+                        <span class="goal-text done">Complete 1 new module</span>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox" onclick="this.classList.toggle('done')"></div>
+                        <span class="goal-text">Review 5 flashcards</span>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox" onclick="this.classList.toggle('done')"></div>
+                        <span class="goal-text">Take 1 practice quiz</span>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-checkbox" onclick="this.classList.toggle('done')"></div>
+                        <span class="goal-text">Spend 30 min studying</span>
                     </div>
                 </div>
+
                 <!-- Study Calendar -->
                 <div class="card">
                     <h2>📅 Study Streak</h2>
@@ -515,9 +558,34 @@
                 <!-- Recent Activity -->
                 <div class="card">
                     <h2>🕐 Recent Activity</h2>
-                    <ul class="activity-list" id="recentActivity">
-                        <li class="activity-item" style="color: var(--text-secondary); font-size: 13px;">
-                            No activity yet. Start exploring modules and cases!
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">📖</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Completed: Aspergillus</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">🎯</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Quiz: Fungi (85%)</div>
+                                <div class="activity-time">Yesterday</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">📖</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Completed: Cryptococcus</div>
+                                <div class="activity-time">Yesterday</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">🔖</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Bookmarked: AKI Module</div>
+                                <div class="activity-time">2 days ago</div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -525,371 +593,47 @@
         </div>
     </main>
 
-    <script src="../data/rdx-persist.js"></script>
+    <script src="../dx-progress.js"></script>
     <script src="../dx-recommendations.js"></script>
     <script>
         // Generate Heat Map
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Knowledge Map from topic-map.json + DxProgress
-        // ═══════════════════════════════════════════════
-        async function buildKnowledgeMap() {
-            var heatmap = document.getElementById('heatmap');
-            if (!heatmap) return;
-            heatmap.innerHTML = '';
+        const topics = [
+            'S. aureus', 'E. coli', 'Pseudomonas', 'Klebsiella', 'Strep pneumo', 'Enterococcus', 'C. diff',
+            'Candida', 'Aspergillus', 'Crypto', 'PCP', 'Histo', 'Cocci', 'Blasto',
+            'HIV', 'Hepatitis', 'Influenza', 'RSV', 'Herpes', 'TB', 'Syphilis',
+            'Beta-lactams', 'Vancomycin', 'Aminoglycosides', 'FQs', 'Macrolides', 'Antifungals', 'Antivirals',
+            'AKI', 'Acid-Base', 'Electrolytes', 'CHF', 'ACS', 'Arrhythmias', 'Shock'
+        ];
+        const levels = [4, 4, 3, 3, 4, 2, 3, 3, 4, 2, 1, 2, 1, 1, 4, 3, 2, 2, 3, 4, 3, 4, 3, 2, 3, 4, 2, 3, 1, 1, 1, 2, 3, 2, 2];
+        
+        const heatmap = document.getElementById('heatmap');
+        topics.forEach((topic, i) => {
+            const cell = document.createElement('div');
+            cell.className = `heatmap-cell level-${levels[i]}`;
+            cell.setAttribute('data-topic', topic);
+            heatmap.appendChild(cell);
+        });
 
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            var completedModules = (progress && progress.completed && progress.completed.modules) || [];
-            var completedCases = (progress && progress.completed && progress.completed.cases) || [];
-            var scores = (progress && progress.scores) || {};
-            var allCompleted = completedModules.concat(completedCases);
-
-            // Load topic-map for real topic names
-            var topics = [];
-            try {
-                var resp = await fetch('../data/topic-map.json');
-                var tm = await resp.json();
-                var topicData = tm.topics || {};
-                for (var key in topicData) {
-                    var val = topicData[key];
-                    topics.push({
-                        id: key,
-                        name: val.displayName || key.replace(/-/g, ' '),
-                        category: val.category || 'General'
-                    });
-                }
-            } catch(e) {
-                // Fallback: show empty state
-                heatmap.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);">Unable to load topic data.</p>';
-                return;
-            }
-
-            // Sort topics by category for visual grouping
-            topics.sort(function(a, b) { return a.category.localeCompare(b.category) || a.name.localeCompare(b.name); });
-
-            // Calculate mastery level per topic (0-4)
-            topics.forEach(function(t) {
-                var level = 0;
-                var isCompleted = allCompleted.some(function(c) { return c.indexOf(t.id) >= 0; });
-                var scoreEntry = scores[t.id];
-                if (isCompleted && scoreEntry && scoreEntry.score >= 90) level = 4;
-                else if (isCompleted && scoreEntry && scoreEntry.score >= 70) level = 3;
-                else if (isCompleted) level = 2;
-                else if (scoreEntry) level = 1;
-
-                var cell = document.createElement('div');
-                cell.className = 'heatmap-cell level-' + level;
-                cell.setAttribute('data-topic', t.name + ' (' + t.category + ')');
-                heatmap.appendChild(cell);
-            });
+        // Generate Calendar
+        const calendar = document.getElementById('calendar');
+        const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        days.forEach(d => {
+            const label = document.createElement('div');
+            label.className = 'calendar-day-label';
+            label.textContent = d;
+            calendar.appendChild(label);
+        });
+        
+        // Last 28 days
+        const activeDays = [1, 2, 3, 4, 5, 8, 9, 10, 12, 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 27, 28];
+        for (let i = 1; i <= 28; i++) {
+            const day = document.createElement('div');
+            day.className = 'calendar-day';
+            if (activeDays.includes(i)) day.classList.add('active');
+            if (i === 28) day.classList.add('today');
+            day.textContent = i;
+            calendar.appendChild(day);
         }
-        buildKnowledgeMap();
-
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Study Streak Calendar from DxProgress activities
-        // ═══════════════════════════════════════════════
-        function buildCalendar() {
-            var calendar = document.getElementById('calendar');
-            if (!calendar) return;
-            calendar.innerHTML = '';
-
-            var days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-            days.forEach(function(d) {
-                var label = document.createElement('div');
-                label.className = 'calendar-day-label';
-                label.textContent = d;
-                calendar.appendChild(label);
-            });
-
-            // Get real activity dates
-            var activeDates = {};
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            if (progress && progress.activities) {
-                progress.activities.forEach(function(a) {
-                    if (a.ts) activeDates[new Date(a.ts).toDateString()] = true;
-                });
-            }
-            if (progress && progress.lastStudy) {
-                activeDates[progress.lastStudy] = true;
-            }
-
-            var today = new Date();
-            // Pad to start on the right day of week
-            var startDate = new Date(today.getTime() - 27 * 86400000);
-            var padDays = startDate.getDay(); // 0=Sun
-            for (var p = 0; p < padDays; p++) {
-                var spacer = document.createElement('div');
-                spacer.className = 'calendar-day';
-                spacer.style.visibility = 'hidden';
-                calendar.appendChild(spacer);
-            }
-
-            for (var i = 27; i >= 0; i--) {
-                var d = new Date(today.getTime() - i * 86400000);
-                var day = document.createElement('div');
-                day.className = 'calendar-day';
-                if (activeDates[d.toDateString()]) day.classList.add('active');
-                if (i === 0) day.classList.add('today');
-                day.textContent = d.getDate();
-                calendar.appendChild(day);
-            }
-        }
-        buildCalendar();
-
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Category Progress from topic-map.json + DxProgress
-        // ═══════════════════════════════════════════════
-        async function buildCategoryProgress() {
-            var container = document.getElementById('categoryProgress');
-            if (!container) return;
-
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            var completedModules = (progress && progress.completed && progress.completed.modules) || [];
-
-            var topicsByCategory = {};
-            try {
-                var resp = await fetch('../data/topic-map.json');
-                var tm = await resp.json();
-                var topicData = tm.topics || {};
-                for (var key in topicData) {
-                    var val = topicData[key];
-                    if (!val.mechanism) continue; // only count modules
-                    var cat = val.category || 'General';
-                    if (cat === 'GI Embryology' || cat === 'Neuro Embryology' || cat === 'MSK Embryology' || cat === 'Respiratory Embryology') cat = 'Embryology';
-                    if (!topicsByCategory[cat]) topicsByCategory[cat] = { total: 0, completed: 0 };
-                    topicsByCategory[cat].total += 1;
-                    if (completedModules.some(function(c) { return c.indexOf(key) >= 0; })) {
-                        topicsByCategory[cat].completed += 1;
-                    }
-                }
-            } catch(e) { return; }
-
-            // Sort by completion percentage descending
-            var cats = Object.keys(topicsByCategory).sort(function(a, b) {
-                var pctA = topicsByCategory[a].completed / topicsByCategory[a].total;
-                var pctB = topicsByCategory[b].completed / topicsByCategory[b].total;
-                return pctB - pctA;
-            });
-
-            // Check if any progress exists
-            var hasAnyProgress = cats.some(function(c) { return topicsByCategory[c].completed > 0; });
-            if (!hasAnyProgress) {
-                container.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);">Complete modules to see your progress by specialty.</p>';
-                return;
-            }
-
-            var colors = ['green', 'blue', 'purple', 'orange', 'green', 'blue', 'purple', 'orange'];
-            var html = '';
-            var shown = 0;
-            cats.forEach(function(cat, idx) {
-                var d = topicsByCategory[cat];
-                if (d.completed === 0) return; // only show categories with progress
-                var pct = Math.round((d.completed / d.total) * 100);
-                html += '<div class="progress-item">' +
-                    '<div class="progress-header">' +
-                    '<span class="label">' + cat + '</span>' +
-                    '<span class="value">' + d.completed + '/' + d.total + ' modules</span>' +
-                    '</div>' +
-                    '<div class="progress-bar">' +
-                    '<div class="progress-fill ' + colors[idx % colors.length] + '" style="width:' + pct + '%"></div>' +
-                    '</div></div>';
-                shown++;
-            });
-
-            if (shown > 0) container.innerHTML = html;
-        }
-        buildCategoryProgress();
-
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Update mastery level based on real progress
-        // ═══════════════════════════════════════════════
-        function updateMasteryLevel() {
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            if (!progress) return;
-            var c = progress.completed || {};
-            var total = (c.modules || []).length + (c.cases || []).length + (c.quizzes || []).length;
-            var el = document.getElementById('mastery-level');
-            if (!el) return;
-            if (total >= 200) el.textContent = 'Advanced';
-            else if (total >= 100) el.textContent = 'Proficient';
-            else if (total >= 50) el.textContent = 'Intermediate';
-            else if (total >= 10) el.textContent = 'Developing';
-            else if (total > 0) el.textContent = 'Beginner';
-            else el.textContent = 'Not Started';
-        }
-        updateMasteryLevel();
-
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Today's Goals based on real activity
-        // ═══════════════════════════════════════════════
-        function updateTodaysGoals() {
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            if (!progress) return;
-
-            var today = new Date().toDateString();
-            var todayActivities = (progress.activities || []).filter(function(a) {
-                return a.ts && new Date(a.ts).toDateString() === today;
-            });
-
-            // Check module goal
-            var todayModules = todayActivities.filter(function(a) { return a.type === 'module' || a.desc.indexOf('module') >= 0; });
-            if (todayModules.length > 0) {
-                var el = document.getElementById('goal-module-check');
-                var txt = document.getElementById('goal-module-text');
-                if (el) { el.classList.add('done'); el.textContent = '✓'; }
-                if (txt) txt.classList.add('done');
-            }
-
-            // Check case goal
-            var todayCases = todayActivities.filter(function(a) { return a.type === 'case' || a.desc.indexOf('case') >= 0; });
-            if (todayCases.length > 0) {
-                var el = document.getElementById('goal-case-check');
-                var txt = document.getElementById('goal-case-text');
-                if (el) { el.classList.add('done'); el.textContent = '✓'; }
-                if (txt) txt.classList.add('done');
-            }
-
-            // Check quiz goal
-            var todayQuizzes = todayActivities.filter(function(a) { return a.type === 'quiz' || a.desc.indexOf('Quiz') >= 0 || a.desc.indexOf('quiz') >= 0; });
-            if (todayQuizzes.length > 0) {
-                var el = document.getElementById('goal-quiz-check');
-                var txt = document.getElementById('goal-quiz-text');
-                if (el) { el.classList.add('done'); el.textContent = '✓'; }
-                if (txt) txt.classList.add('done');
-            }
-
-            // Check time goal (30 min = ~6 activities)
-            if (todayActivities.length >= 6) {
-                var el = document.getElementById('goal-time-check');
-                var txt = document.getElementById('goal-time-text');
-                if (el) { el.classList.add('done'); el.textContent = '✓'; }
-                if (txt) txt.classList.add('done');
-            }
-        }
-        updateTodaysGoals();
-
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Recent Activity from DxProgress
-        // ═══════════════════════════════════════════════
-        function renderRecentActivity() {
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            var container = document.getElementById('recentActivity');
-            if (!progress || !container) return;
-
-            var activities = progress.activities || [];
-            if (activities.length === 0) return; // keep default "no activity" message
-
-            var icons = { module: '📖', case: '🩺', quiz: '🎯', study: '📚', bookmark: '🔖' };
-            var html = '';
-            var shown = activities.slice(0, 8);
-            shown.forEach(function(a) {
-                var icon = icons[a.type] || '📖';
-                var timeAgo = getTimeAgo(a.ts);
-                var xpBadge = a.xp ? ' <span style="color:#10b981;font-size:12px;font-weight:600;">+' + a.xp + ' XP</span>' : '';
-                html += '<li class="activity-item">' +
-                    '<div class="activity-icon">' + icon + '</div>' +
-                    '<div class="activity-content">' +
-                    '<div class="activity-title">' + (a.desc || 'Activity') + xpBadge + '</div>' +
-                    '<div class="activity-time">' + timeAgo + '</div>' +
-                    '</div></li>';
-            });
-            container.innerHTML = html;
-        }
-
-        function getTimeAgo(ts) {
-            if (!ts) return '';
-            var diff = Date.now() - ts;
-            var mins = Math.floor(diff / 60000);
-            if (mins < 1) return 'Just now';
-            if (mins < 60) return mins + ' min ago';
-            var hours = Math.floor(mins / 60);
-            if (hours < 24) return hours + ' hour' + (hours > 1 ? 's' : '') + ' ago';
-            var days = Math.floor(hours / 24);
-            if (days === 1) return 'Yesterday';
-            if (days < 7) return days + ' days ago';
-            return Math.floor(days / 7) + ' week' + (Math.floor(days / 7) > 1 ? 's' : '') + ' ago';
-        }
-        renderRecentActivity();
-
-        // ═══════════════════════════════════════════════
-        // DYNAMIC DATA: Recommended Next from topic-map.json + DxProgress
-        // ═══════════════════════════════════════════════
-        async function buildRecommendations() {
-            var container = document.getElementById('recommendedNext');
-            if (!container) return;
-
-            var progress = window.DxProgress ? DxProgress.get() : null;
-            var completedModules = (progress && progress.completed && progress.completed.modules) || [];
-            if (completedModules.length === 0) return; // keep default message
-
-            try {
-                var resp = await fetch('../data/topic-map.json');
-                var tm = await resp.json();
-                var topicData = tm.topics || {};
-
-                // Find topics in categories where user has some but not all progress
-                var catProgress = {};
-                for (var key in topicData) {
-                    var val = topicData[key];
-                    var cat = val.category || 'General';
-                    if (!catProgress[cat]) catProgress[cat] = { done: [], notDone: [] };
-                    var isDone = completedModules.some(function(c) { return c.indexOf(key) >= 0; });
-                    if (isDone) catProgress[cat].done.push(key);
-                    else catProgress[cat].notDone.push(key);
-                }
-
-                // Prioritize: categories with some progress but not complete
-                var recs = [];
-                var catIcons = { 'Infectious Disease': '🦠', 'Cardiology': '❤️', 'Neurology': '🧠', 'Pulmonary': '🫁', 'Pharmacology': '💊', 'Nephrology': '🫘', 'Hematology': '🩸', 'GI': '🔬', 'Endocrine': '🌡️', 'Surgery': '🔪', 'Psychiatry': '🧩', 'Pediatrics': '👶' };
-                var catColors = { 'Infectious Disease': '#fee2e2', 'Cardiology': '#fce7f3', 'Neurology': '#ede9fe', 'Pulmonary': '#dbeafe', 'Pharmacology': '#ccfbf1', 'Nephrology': '#fef3c7' };
-
-                Object.keys(catProgress).forEach(function(cat) {
-                    var c = catProgress[cat];
-                    if (c.done.length > 0 && c.notDone.length > 0) {
-                        c.notDone.slice(0, 1).forEach(function(id) {
-                            var t = topicData[id];
-                            recs.push({
-                                id: id,
-                                name: t.displayName || id.replace(/-/g, ' '),
-                                category: cat,
-                                reason: 'Continue your ' + cat + ' series (' + c.done.length + '/' + (c.done.length + c.notDone.length) + ' done)',
-                                icon: catIcons[cat] || '📖',
-                                bg: catColors[cat] || '#f1f5f9'
-                            });
-                        });
-                    }
-                });
-
-                // Also add spaced rep items
-                var dueItems = window.DxProgress ? DxProgress.getDueForReview() : [];
-                dueItems.slice(0, 2).forEach(function(item) {
-                    var t = topicData[item.id];
-                    if (t) {
-                        recs.push({
-                            id: item.id,
-                            name: t.displayName || item.id.replace(/-/g, ' '),
-                            category: t.category || 'Review',
-                            reason: 'Due for review (score: ' + item.score + '%, ' + item.daysSince + ' days ago)',
-                            icon: '🔄',
-                            bg: '#fef3c7'
-                        });
-                    }
-                });
-
-                if (recs.length === 0) return;
-
-                var html = '';
-                recs.slice(0, 4).forEach(function(r) {
-                    var href = '../modules/' + r.id + '.html';
-                    html += '<a href="' + href + '" class="rec-item" style="text-decoration:none;color:inherit;">' +
-                        '<div class="icon" style="background:' + r.bg + ';">' + r.icon + '</div>' +
-                        '<div class="info"><div class="title">' + r.name + '</div>' +
-                        '<div class="reason">' + r.reason + '</div></div>' +
-                        '<span class="arrow">→</span></a>';
-                });
-                container.innerHTML = html;
-            } catch(e) { /* keep default message */ }
-        }
-        buildRecommendations();
 
         // Load saved data from DxProgress unified engine
         function loadProgress() {
@@ -1000,6 +744,7 @@
         loadProgress();
     </script>
 <script src="../dx-epa-integration.js"></script>
+<script src="../data/rdx-persist.js"></script>
 <script src="dx-tools-nav.js"></script>
 <script src="../js/rdx-nav.js"></script>
 <script>

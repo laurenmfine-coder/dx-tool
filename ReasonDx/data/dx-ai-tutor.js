@@ -387,7 +387,7 @@ const DxAITutor = (function() {
                 width: auto;
                 height: 48px;
                 padding: 0 20px;
-                background: linear-gradient(135deg, #059669 0%, #047857 100%);
+                background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
                 border: none;
                 border-radius: 24px;
                 color: white;
@@ -448,7 +448,7 @@ const DxAITutor = (function() {
             
             /* Header */
             .tutor-header {
-                background: linear-gradient(135deg, #059669 0%, #047857 100%);
+                background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
                 padding: 16px;
                 display: flex;
                 justify-content: space-between;
@@ -541,7 +541,7 @@ const DxAITutor = (function() {
             }
             
             .tutor-message.user .message-bubble {
-                background: #059669;
+                background: #0f766e;
                 color: white;
                 border-bottom-right-radius: 4px;
             }
@@ -576,7 +576,7 @@ const DxAITutor = (function() {
             .thinking-indicator .dot {
                 width: 8px;
                 height: 8px;
-                background: #059669;
+                background: #0f766e;
                 border-radius: 50%;
                 animation: bounce 1.4s infinite ease-in-out;
             }
@@ -635,14 +635,14 @@ const DxAITutor = (function() {
             }
             
             #tutor-input:focus {
-                border-color: #059669;
+                border-color: #0f766e;
             }
             
             #tutor-send-btn {
                 width: 44px;
                 height: 44px;
                 border: none;
-                background: #059669;
+                background: #0f766e;
                 border-radius: 12px;
                 color: white;
                 cursor: pointer;
@@ -654,7 +654,7 @@ const DxAITutor = (function() {
             }
             
             #tutor-send-btn:hover:not(:disabled) {
-                background: #047857;
+                background: #115e59;
             }
             
             #tutor-send-btn:disabled {
@@ -733,8 +733,7 @@ const DxAITutor = (function() {
             // Inject styles and create UI
             injectStyles();
             createTutorUI();
-            
-            console.log('DxAITutor initialized (using Cloudflare Worker)');
+');
         },
         
         /**

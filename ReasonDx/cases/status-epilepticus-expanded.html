@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="In-depth clinical case study: Status Epilepticus. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Status Epilepticus - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0d9488 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: var(--rdx-teal-light,#ccfbf1); text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #99f6e4; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #0d9488; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(37,99,235,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
+        .question-box { background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(37,99,235,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #99f6e4; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #0f766e; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(37,99,235,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #0d9488, #115e59); color: white; border: none; padding: 14px 28px; border-radius:12px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0d9488, #5eead4); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #0d9488; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal-light,#ccfbf1); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: var(--rdx-teal-light,#ccfbf1); }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #ccfbf1; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
+.references-content a:hover { background: #0d9488; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            
+            
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:#475569;margin-bottom:8px;font-weight:600">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK430765/" target="_blank" rel="noopener">Status Epilepticus - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0, difficulty = 'standard';
+    const stages = [
+    {
+        title: "The Seizing Patient",
+        content: `<div class="narrative"><p>EMS brings a <span class="highlight">45-year-old man</span> with <span class="critical">ongoing generalized tonic-clonic seizure</span> for 12 minutes. History of epilepsy, ran out of medications 3 days ago.</p><p style="margin-top:12px;"><strong>EMS report:</strong> Witnessed onset, continuous convulsions, one dose of IM midazolam (10 mg) given en route<br><strong>Vitals:</strong> HR 130, BP 180/100, RR agonal, SpO2 88%<br><strong>Exam:</strong> Generalized tonic-clonic activity, cyanotic, unresponsive</p></div>
+        <div class="alert-box"><div class="alert-title">🚨 Time Is Brain!</div><p>Seizures >5 minutes unlikely to stop spontaneously. Prolonged seizures cause excitotoxic neuronal injury. Treat immediately!</p></div>
+        <div class="socratic-prompt"><h4>Critical Thinking</h4><p>What defines status epilepticus and why has the definition changed from 30 minutes to 5 minutes?</p></div>`,
+        hint_beginner: "Most self-limited seizures stop within 2-3 minutes. Think about why 5 minutes is the new threshold.",
+        hint_advanced: "What molecular changes occur at the GABA receptor level during prolonged seizures that affect treatment?",
+        question: {
+            prompt: "What is the CURRENT operational definition of status epilepticus that should trigger immediate treatment?",
+            options: [
+                { text: "Continuous seizure activity for ≥30 minutes", correct: false },
+                { text: "Continuous seizure activity for ≥5 minutes", correct: true },
+                { text: "Two or more seizures with full recovery between", correct: false },
+                { text: "Any seizure lasting longer than 2 minutes", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! The operational definition is ≥5 minutes of continuous seizure activity. Most self-limited seizures stop within 2-3 minutes, so after 5 minutes, self-termination is unlikely and treatment should begin immediately.",
+                incorrect: "The 30-minute definition is outdated. Current guidelines define status epilepticus as ≥5 minutes of continuous seizure activity. By 30 minutes, permanent neuronal injury has already begun."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Why 5 Minutes Matters</div><div class="pathway">Most self-limited seizures stop within 2-3 minutes
+
+After 5 minutes of continuous seizure:
+• GABA receptor internalization begins
+• Benzodiazepines become LESS effective
+• Glutamate excitotoxicity increases
+• Self-termination becomes unlikely
+• Each additional minute → worse outcomes
+
+Old definition (30 min) → permanent injury already occurring
+New definition (5 min) → TREAT NOW before injury begins</div></div>`,
+            why_chain: [{q: "Why do benzodiazepines become less effective over time?", a: "During prolonged seizures, GABA-A receptors are internalized from the cell surface into the cytoplasm. This reduces the number of receptors available for benzodiazepines to enhance. By 30 minutes, benzo efficacy drops dramatically."}, {q: "What is the significance of 30 minutes then?", a: "30 minutes marks when permanent neuronal injury reliably begins due to excitotoxicity. This is why early aggressive treatment is critical - we want to stop seizures BEFORE this point, not at this point."}],
+            points: 10
+        }
+    },
+    {
+        title: "Initial Stabilization",
+        content: `<div class="narrative"><p>You take over care in the ED. The patient continues seizing. EMS gave IM midazolam 5 minutes ago with no response.</p><p>Your team needs to stabilize the patient while preparing treatment.</p></div>
+        <div class="socratic-prompt"><h4>Immediate Actions</h4><p>What are the critical stabilization steps in the first 5 minutes while preparing definitive treatment?</p></div>`,
+        hint_beginner: "Think ABCs plus the 'don't forget' reversible cause. What metabolic derangement can both cause and result from seizures?",
+        hint_advanced: "Why do we give thiamine before glucose in certain populations?",
+        question: {
+            prompt: "Which immediate action is MOST critical and should be done within the first minute?",
+            options: [
+                { text: "CT head to rule out structural cause", correct: false },
+                { text: "Point-of-care glucose check", correct: true },
+                { text: "Lumbar puncture for CSF analysis", correct: false },
+                { text: "EEG to confirm seizure activity", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Hypoglycemia is a rapidly reversible cause of seizures. Point-of-care glucose should be checked within the first minute - it takes seconds and can identify a treatable cause immediately.",
+                incorrect: "Checking glucose is the most critical immediate action. Hypoglycemia causes seizures and is rapidly reversible with dextrose. CT, LP, and EEG are important but not first-minute priorities."
+            },
+            teaching: `<h4>First 5 Minutes - Stabilization</h4><table class="comparison-table"><tr><th>Action</th><th>Rationale</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Airway</strong></td><td>Position, suction, NPA/OPA - do NOT force anything in mouth</td></tr><tr><td><strong>Breathing</strong></td><td>Supplemental O2, BVM if needed</td></tr><tr><td><strong>Circulation</strong></td><td>IV/IO access (2 lines if possible)</td></tr><tr style="background:rgba(251,191,36,0.2);"><td><strong>Glucose</strong></td><td>Check immediately - give D50 if low</td></tr><tr><td><strong>Thiamine</strong></td><td>Give before glucose in alcoholics/malnourished</td></tr><tr><td><strong>Labs</strong></td><td>BMP, CBC, AED levels, toxicology</td></tr></table>`,
+            why_chain: [{q: "Why thiamine before glucose?", a: "In thiamine-deficient patients (alcoholics, malnourished), giving glucose can precipitate Wernicke encephalopathy by depleting remaining thiamine stores. Giving thiamine first prevents this complication."}, {q: "What labs are most important?", a: "BMP (electrolytes, glucose), AED levels (in known epileptics), toxicology screen. CBC and LFTs are helpful but less immediately actionable."}],
+            points: 10
+        }
+    },
+    {
+        title: "First-Line Treatment",
+        content: `<div class="narrative"><p>IV access is established. Glucose is 110 mg/dL. The patient has now been seizing for approximately 15 minutes total.</p><p>EMS already gave IM midazolam 10 mg with no response.</p></div>
+        <div class="socratic-prompt"><h4>Benzodiazepine Strategy</h4><p>Given that one dose of midazolam has failed, what is your next move for first-line treatment?</p></div>`,
+        hint_beginner: "How many total doses of benzodiazepines should you give before moving to second-line agents?",
+        hint_advanced: "What did the RAMPART trial demonstrate about IM vs IV benzodiazepines?",
+        question: {
+            prompt: "What is the appropriate NEXT step given that IM midazolam was given 5 minutes ago without response?",
+            options: [
+                { text: "Give another dose of IM midazolam", correct: false },
+                { text: "Give IV lorazepam 4 mg as second benzodiazepine dose", correct: true },
+                { text: "Skip benzos entirely, move directly to fosphenytoin", correct: false },
+                { text: "Wait another 10 minutes for midazolam to work", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Give a second benzodiazepine dose. IV lorazepam 4 mg is appropriate since you now have IV access. Maximum of 2 benzodiazepine doses, then move to second-line agents.",
+                incorrect: "A second benzodiazepine dose is indicated. After one dose fails (wait ~5 min), give a second dose. Now that IV access is available, IV lorazepam is preferred. Don't skip to second-line without trying 2 benzo doses."
+            },
+            teaching: `<h4>Benzodiazepine Options</h4><table class="comparison-table"><tr><th>Drug</th><th>Route</th><th>Adult Dose</th><th>Notes</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Midazolam</strong></td><td>IM</td><td>10 mg</td><td>No IV needed - RAMPART showed = IV lorazepam</td></tr><tr><td><strong>Lorazepam</strong></td><td>IV</td><td>4 mg</td><td>Preferred if IV available</td></tr><tr><td><strong>Diazepam</strong></td><td>IV/PR</td><td>10 mg IV / 20 mg PR</td><td>Alternative options</td></tr><tr><td><strong>Midazolam</strong></td><td>IN</td><td>10 mg</td><td>For prehospital/no IV</td></tr></table>
+<div class="alert-box"><div class="alert-title">⚠️ Maximum 2 Benzodiazepine Doses</div><p>Further doses have diminishing returns and increase respiratory depression risk. After 2 doses, move to second-line agent.</p></div>`,
+            why_chain: [{q: "Why is IM midazolam as effective as IV lorazepam?", a: "The RAMPART trial showed IM midazolam was non-inferior to IV lorazepam. Though IV onset is faster, the time saved by not needing IV access makes IM equally effective in practice."}, {q: "Why limit to 2 benzodiazepine doses?", a: "After 2 doses, additional benzos show diminishing efficacy (GABA receptor trafficking) but continuing respiratory depression risk. Better to escalate to second-line agents with different mechanisms."}],
+            points: 10
+        }
+    },
+    {
+        title: "Second-Line Agent Selection",
+        content: `<div class="narrative"><p>Despite two adequate doses of benzodiazepines, the patient continues seizing (now ~20 minutes).</p><p>You need to select a <span class="highlight">second-line antiepileptic drug</span>.</p></div>
+        <div class="socratic-prompt"><h4>Evidence-Based Choice</h4><p>What did the ESETT trial teach us about second-line agent selection in status epilepticus?</p></div>`,
+        hint_beginner: "Three drugs are commonly used: levetiracetam, fosphenytoin, and valproate. Which has the fewest drug interactions?",
+        hint_advanced: "In what patient populations should you specifically AVOID valproate?",
+        question: {
+            prompt: "Based on the ESETT trial, which statement about second-line agents is TRUE?",
+            options: [
+                { text: "Fosphenytoin is clearly superior with ~70% efficacy", correct: false },
+                { text: "Levetiracetam, fosphenytoin, and valproate are similarly effective (~50%)", correct: true },
+                { text: "Valproate is preferred in all patients due to safety profile", correct: false },
+                { text: "Phenobarbital should be first choice as second-line", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! The ESETT trial showed that levetiracetam, fosphenytoin, and valproate are similarly effective (~47-50% success rate). Choice depends on patient factors and availability.",
+                incorrect: "The ESETT trial demonstrated equivalence among levetiracetam, fosphenytoin, and valproate at approximately 50% efficacy. No single agent is clearly superior - selection is based on patient factors."
+            },
+            teaching: `<h4>Second-Line Options (Choose ONE)</h4><table class="comparison-table"><tr><th>Drug</th><th>Dose</th><th>Considerations</th></tr><tr><td><strong>Levetiracetam</strong></td><td>60 mg/kg (max 4500 mg)</td><td>Fewest interactions, well-tolerated, no cardiac monitoring</td></tr><tr><td><strong>Fosphenytoin</strong></td><td>20 mg PE/kg</td><td>Requires cardiac monitoring, avoid if phenytoin allergy</td></tr><tr><td><strong>Valproate</strong></td><td>40 mg/kg (max 3000 mg)</td><td>AVOID in pregnancy, liver disease, mitochondrial disease, &lt;2 years</td></tr></table>`,
+            why_chain: [{q: "Why not use phenytoin directly?", a: "Phenytoin requires slow infusion (max 50 mg/min) due to hypotension and arrhythmia risk from the propylene glycol diluent. Fosphenytoin is a water-soluble prodrug that can be infused 3x faster."}, {q: "When specifically avoid valproate?", a: "Pregnancy (teratogenic - neural tube defects), liver disease (hepatotoxic), mitochondrial disorders (can trigger hepatic failure), and children <2 years (increased hepatotoxicity risk)."}],
+            points: 10
+        }
+    },
+    {
+        title: "Refractory Status Epilepticus",
+        content: `<div class="narrative"><p>You've given levetiracetam 4500 mg IV. After 10 more minutes, <span class="critical">the patient continues seizing</span>.</p><p>This is now <span class="highlight">refractory status epilepticus</span> - defined as seizures persisting despite benzodiazepine + one second-line agent.</p></div>
+        <div class="alert-box"><div class="alert-title">🚨 Critical Decision Point</div><p>Refractory SE requires anesthetic infusion and ICU admission. This patient needs intubation.</p></div>
+        <div class="socratic-prompt"><h4>Escalation of Care</h4><p>What are the options for treating refractory status epilepticus and what monitoring is required?</p></div>`,
+        hint_beginner: "Think about what level of care these patients need - why do they need intubation?",
+        hint_advanced: "What is the EEG target when titrating anesthetic infusions in refractory SE?",
+        question: {
+            prompt: "What is REQUIRED when initiating continuous anesthetic infusion for refractory status epilepticus?",
+            options: [
+                { text: "Serial CT scans every 6 hours", correct: false },
+                { text: "Intubation and continuous EEG monitoring", correct: true },
+                { text: "Transfer to neurosurgical service", correct: false },
+                { text: "Lumbar drain placement", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Continuous anesthetic infusions (midazolam, propofol, or pentobarbital) cause respiratory depression requiring intubation. Continuous EEG is essential to confirm electrical seizure cessation and guide titration.",
+                incorrect: "Refractory SE treatment with anesthetic infusions requires intubation (for respiratory support) and continuous EEG monitoring (to confirm electrical seizure cessation and guide medication titration)."
+            },
+            teaching: `<h4>Refractory SE Treatment Options</h4><table class="comparison-table"><tr><th>Agent</th><th>Loading</th><th>Infusion</th><th>Concerns</th></tr><tr><td><strong>Midazolam</strong></td><td>0.2 mg/kg</td><td>0.1-0.4 mg/kg/hr</td><td>Tachyphylaxis</td></tr><tr><td><strong>Propofol</strong></td><td>2 mg/kg</td><td>1-5 mg/kg/hr</td><td>Propofol infusion syndrome</td></tr><tr><td><strong>Pentobarbital</strong></td><td>5-15 mg/kg</td><td>0.5-5 mg/kg/hr</td><td>Hypotension, immunosuppression</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">🧬 EEG Goals</div><div class="pathway">Target: Burst suppression or seizure freedom
+
+Continuous EEG monitoring essential for:
+• Confirming electrical seizure cessation
+• Detecting nonconvulsive SE (no visible movements!)
+• Guiding anesthetic titration
+
+Maintain suppression for 24-48 hours
+Then slowly wean anesthetics</div></div>`,
+            why_chain: [{q: "What is propofol infusion syndrome?", a: "PRIS is a rare but fatal complication of prolonged high-dose propofol: metabolic acidosis, rhabdomyolysis, hyperlipidemia, cardiac failure. Risk increases with >48 hours or >4 mg/kg/hr."}, {q: "What is burst suppression?", a: "An EEG pattern showing periods of electrical activity (bursts) alternating with periods of near-silence (suppression). This deep level of sedation reliably terminates seizure activity."}],
+            points: 10
+        }
+    },
+    {
+        title: "Common Etiologies",
+        content: `<div class="narrative"><p>While the ICU team prepares for intubation, you review possible causes of this patient's status epilepticus.</p><p>History: Known epilepsy, <span class="highlight">stopped phenytoin 3 days ago</span> when prescription ran out.</p></div>
+        <div class="socratic-prompt"><h4>Etiology Assessment</h4><p>What is the most common cause of status epilepticus in adults with known epilepsy?</p></div>`,
+        hint_beginner: "What did this patient's history tell us about why he's seizing?",
+        hint_advanced: "In a patient presenting with new-onset SE and no epilepsy history, what etiologies should you consider?",
+        question: {
+            prompt: "What is the MOST common cause of status epilepticus in patients with known epilepsy?",
+            options: [
+                { text: "New brain tumor", correct: false },
+                { text: "AED non-compliance or withdrawal", correct: true },
+                { text: "Acute stroke", correct: false },
+                { text: "CNS infection", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! AED non-compliance or abrupt withdrawal is the most common cause of SE in known epileptics. Our patient stopped his phenytoin 3 days ago - this is the likely trigger.",
+                incorrect: "In patients with known epilepsy, AED non-compliance or withdrawal is the most common cause. This patient stopped his phenytoin 3 days ago - classic presentation."
+            },
+            teaching: `<h4>Common Causes of Status Epilepticus</h4><table class="comparison-table"><tr><th>Category</th><th>Examples</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>AED-related</strong></td><td>Non-compliance, withdrawal (most common in known epileptics)</td></tr><tr><td><strong>Alcohol</strong></td><td>Withdrawal, intoxication</td></tr><tr><td><strong>CNS infection</strong></td><td>Meningitis, encephalitis</td></tr><tr><td><strong>Stroke</strong></td><td>Especially hemorrhagic</td></tr><tr><td><strong>Metabolic</strong></td><td>Hypoglycemia, hyponatremia, uremia, hypocalcemia</td></tr><tr><td><strong>Drugs/toxins</strong></td><td>Cocaine, theophylline, isoniazid, bupropion</td></tr><tr><td><strong>Tumor</strong></td><td>Primary or metastatic brain lesion</td></tr><tr><td><strong>Trauma</strong></td><td>TBI, subdural hematoma</td></tr></table>`,
+            why_chain: [{q: "Why does stopping AEDs abruptly cause SE?", a: "Chronic AED use leads to neuronal adaptation. Abrupt withdrawal removes seizure suppression, causing rebound hyperexcitability. This is why AEDs should always be tapered, not stopped suddenly."}, {q: "What about new-onset SE without epilepsy history?", a: "Think about CNS infection, stroke, tumor, metabolic derangement, or toxins. These patients need broader workup including imaging and often lumbar puncture."}],
+            points: 10
+        }
+    },
+    {
+        title: "Special Antidote: Isoniazid Toxicity",
+        content: `<div class="narrative"><p>A different scenario: A patient presents with refractory seizures after intentional overdose. Family found empty bottles of <span class="highlight">isoniazid</span> (INH) prescribed for latent TB.</p></div>
+        <div class="socratic-prompt"><h4>Toxin-Induced SE</h4><p>What is the specific antidote for isoniazid-induced seizures and why do standard treatments often fail?</p></div>`,
+        hint_beginner: "Isoniazid depletes a vitamin that's essential for GABA synthesis. Which vitamin?",
+        hint_advanced: "How do you calculate the dose of pyridoxine for INH overdose?",
+        question: {
+            prompt: "What is the SPECIFIC treatment for isoniazid-induced seizures?",
+            options: [
+                { text: "High-dose benzodiazepines only", correct: false },
+                { text: "Pyridoxine (Vitamin B6) gram-for-gram with INH ingested", correct: true },
+                { text: "Fomepizole infusion", correct: false },
+                { text: "N-acetylcysteine loading dose", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Pyridoxine (B6) is the specific antidote for INH-induced seizures. INH depletes pyridoxine, which is required for GABA synthesis. Give gram-for-gram (or 5g empirically if amount unknown).",
+                incorrect: "Pyridoxine (Vitamin B6) is the specific antidote. INH inhibits pyridoxine phosphokinase, depleting B6 which is essential for GABA synthesis. Benzos alone often fail without B6 replacement."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 INH Toxicity Mechanism</div><div class="pathway">Isoniazid inhibits pyridoxine phosphokinase
+→ Depletes active vitamin B6 (pyridoxal phosphate)
+→ B6 required for glutamic acid decarboxylase (GAD)
+→ GAD converts glutamate → GABA
+→ Without B6: ↓↓ GABA synthesis
+→ Seizures refractory to benzodiazepines
+
+Treatment: Pyridoxine IV
+• Dose: gram-for-gram with INH ingested
+• Unknown amount: give 5g empirically
+• May repeat if seizures continue</div></div>`,
+            why_chain: [{q: "Why don't benzos work well alone?", a: "Benzodiazepines enhance GABA's effect at the receptor, but INH toxicity prevents GABA synthesis entirely. Enhancing zero GABA = zero effect. You must restore GABA production with pyridoxine."}, {q: "What other toxins cause refractory seizures?", a: "Remember: theophylline, cocaine, synthetic cannabinoids, organophosphates. Each may require specific treatment beyond standard AEDs."}],
+            points: 10
+        }
+    },
+    {
+        title: "Nonconvulsive Status Epilepticus",
+        content: `<div class="narrative"><p>After successful treatment, your patient's tonic-clonic movements stop. However, 2 hours later he remains <span class="critical">persistently unresponsive</span> despite adequate sedation washout.</p><p>Continuous EEG shows ongoing <span class="highlight">electrographic seizure activity</span>.</p></div>
+        <div class="alert-box"><div class="alert-title">⚠️ Nonconvulsive Status Epilepticus (NCSE)</div><p>Seizures continue electrically without obvious motor manifestations. Can only be diagnosed with EEG!</p></div>
+        <div class="socratic-prompt"><h4>Hidden Seizures</h4><p>Why is nonconvulsive SE dangerous and who should you suspect has it?</p></div>`,
+        hint_beginner: "If seizures stop visibly but the patient doesn't wake up, what might be happening?",
+        hint_advanced: "What percentage of patients with convulsive SE who are 'controlled' actually have ongoing NCSE on EEG?",
+        question: {
+            prompt: "Which patients are at HIGHEST risk for nonconvulsive status epilepticus?",
+            options: [
+                { text: "Young patients with first-time seizure", correct: false },
+                { text: "Patients who remain obtunded after convulsive SE is 'controlled'", correct: true },
+                { text: "Patients with normal EEG during convulsive seizure", correct: false },
+                { text: "Patients who wake up immediately after treatment", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Patients who remain persistently altered after apparent control of convulsive SE are at high risk for NCSE. Studies show up to 48% of such patients have ongoing electrographic seizures.",
+                incorrect: "Patients who remain obtunded after convulsive SE appears controlled are at highest risk. Up to 48% have ongoing NCSE detectable only by EEG. If they don't wake up, check EEG!"
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 NCSE Risk Factors</div><div class="pathway">HIGH RISK for ongoing NCSE:
+• Post-convulsive SE with persistent altered mental status
+• ICU patients with unexplained encephalopathy
+• Post-cardiac arrest
+• Acute brain injury with altered consciousness
+• Elderly with acute confusion
+
+Up to 48% of "controlled" convulsive SE 
+has ongoing NCSE on EEG monitoring
+
+NCSE causes the same excitotoxic injury
+as convulsive SE - must be treated!</div></div>`,
+            why_chain: [{q: "How is NCSE treated?", a: "Same as convulsive SE: benzodiazepines, second-line AEDs, anesthetics if refractory. The key is recognizing it through EEG monitoring."}, {q: "Why can't you just watch the patient?", a: "NCSE causes the same neuronal injury as convulsive SE through excitotoxicity. The absence of motor activity doesn't protect the brain - ongoing electrical seizures are still damaging."}],
+            points: 10
+        }
+    },
+    {
+        title: "Super-Refractory SE",
+        content: `<div class="narrative"><p>Despite 48 hours of propofol infusion with burst suppression on EEG, seizures return when you attempt to wean the anesthetic.</p><p>This is <span class="highlight">super-refractory status epilepticus</span>: SE that continues or recurs ≥24 hours after anesthetic initiation.</p></div>
+        <div class="socratic-prompt"><h4>When Standard Treatment Fails</h4><p>What additional options exist for super-refractory SE and what underlying causes must be investigated?</p></div>`,
+        hint_beginner: "Think about immunologic causes - what if the patient's immune system is attacking their brain?",
+        hint_advanced: "Name specific antibodies associated with autoimmune encephalitis presenting as refractory SE.",
+        question: {
+            prompt: "In super-refractory SE, which diagnosis should be strongly considered if no clear etiology is found?",
+            options: [
+                { text: "Malingering or conversion disorder", correct: false },
+                { text: "Autoimmune encephalitis", correct: true },
+                { text: "Simple partial seizures", correct: false },
+                { text: "Drug-seeking behavior", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Autoimmune encephalitis (anti-NMDA receptor, anti-LGI1, etc.) should be considered in cryptogenic super-refractory SE. These patients may respond to immunotherapy.",
+                incorrect: "Autoimmune encephalitis is an important consideration in super-refractory SE without clear cause. Anti-NMDA receptor encephalitis, anti-LGI1, and other autoimmune conditions may present as refractory seizures."
+            },
+            teaching: `<h4>Super-Refractory SE Options</h4><table class="comparison-table"><tr><th>Intervention</th><th>Notes</th></tr><tr><td><strong>Ketamine</strong></td><td>NMDA antagonist - different mechanism than GABAergic drugs</td></tr><tr><td><strong>Additional AEDs</strong></td><td>Lacosamide, phenobarbital, topiramate</td></tr><tr><td><strong>Immunotherapy</strong></td><td>If autoimmune suspected: steroids, IVIG, plasmapheresis</td></tr><tr><td><strong>Ketogenic diet</strong></td><td>Metabolic approach</td></tr><tr><td><strong>Hypothermia</strong></td><td>Neuroprotective</td></tr><tr><td><strong>Surgery evaluation</strong></td><td>If focal onset identified</td></tr></table>
+<div class="alert-box"><div class="alert-title">⚠️ Mortality</div><p>Super-refractory SE mortality: 30-50%. Survivors often have significant neurologic morbidity. Outcome depends heavily on underlying etiology.</p></div>`,
+            why_chain: [{q: "What autoantibodies should be tested?", a: "Anti-NMDA receptor, anti-LGI1, anti-CASPR2, anti-GABA-B, anti-AMPA. Also consider paraneoplastic panel (anti-Hu, anti-Yo) and evaluate for occult malignancy."}, {q: "When should you try ketamine?", a: "Ketamine works via NMDA receptor antagonism - a completely different mechanism than GABA-enhancing drugs. Consider adding it in refractory SE, especially if GABA-targeted drugs are failing."}],
+            points: 10
+        }
+    },
+    {
+        title: "Complications of Prolonged SE",
+        content: `<div class="narrative"><p>Your patient is now intubated in the ICU. Labs return showing: <span class="critical">lactate 6.2</span>, <span class="critical">CK 12,000</span>, <span class="highlight">K+ 5.8</span>, creatinine 2.1 (baseline 0.9).</p></div>
+        <div class="socratic-prompt"><h4>Systemic Effects</h4><p>What complications of prolonged status epilepticus are evident in these labs?</p></div>`,
+        hint_beginner: "Continuous muscle contraction during tonic-clonic activity releases what enzyme?",
+        hint_advanced: "What is the mechanism of lactic acidosis in status epilepticus?",
+        question: {
+            prompt: "The elevated CK and acute kidney injury in this patient are MOST likely due to:",
+            options: [
+                { text: "Medication side effects from benzodiazepines", correct: false },
+                { text: "Rhabdomyolysis from prolonged muscle contraction", correct: true },
+                { text: "Primary cardiac injury from arrhythmia", correct: false },
+                { text: "Hepatorenal syndrome", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Prolonged tonic-clonic activity causes massive muscle breakdown (rhabdomyolysis). The released myoglobin can cause AKI through tubular obstruction and direct toxicity.",
+                incorrect: "Rhabdomyolysis from continuous muscle contraction is the cause. CK >10,000 with AKI is classic. Treatment includes aggressive IV fluids to prevent further renal injury."
+            },
+            teaching: `<h4>Systemic Complications of SE</h4><table class="comparison-table"><tr><th>System</th><th>Complication</th></tr><tr><td>Respiratory</td><td>Aspiration pneumonia, hypoxia, neurogenic pulmonary edema</td></tr><tr><td>Cardiac</td><td>Arrhythmias, takotsubo cardiomyopathy, troponin elevation</td></tr><tr><td>Metabolic</td><td>Lactic acidosis, hyperthermia, rhabdomyolysis</td></tr><tr><td>Renal</td><td>AKI from rhabdo, dehydration, contrast if CT done</td></tr><tr><td>Neurologic</td><td>Excitotoxic injury, cerebral edema, herniation</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">🧬 Excitotoxicity Cascade</div><div class="pathway">Prolonged seizures → excessive glutamate release
+→ NMDA receptor activation
+→ Massive Ca²⁺ influx into neurons
+→ Mitochondrial dysfunction
+→ Free radical generation
+→ Neuronal death
+
+Injury focuses on hippocampus, cortex
+→ Memory deficits, cognitive impairment
+→ Increased epilepsy risk</div></div>`,
+            why_chain: [{q: "How do you treat the rhabdomyolysis?", a: "Aggressive IV crystalloid resuscitation (goal urine output 200-300 mL/hr), monitor electrolytes closely (watch for hyperkalemia), may need bicarbonate to alkalinize urine in severe cases."}, {q: "Why the lactic acidosis?", a: "Two mechanisms: anaerobic metabolism from muscle hypoxia during tonic activity, plus impaired hepatic lactate clearance from hypoperfusion. Usually resolves once seizures stop."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Resolution",
+        content: `<div class="narrative"><p>After 72 hours, your patient is successfully weaned from propofol without seizure recurrence. He is extubated and gradually awakens.</p><p>His phenytoin level on admission was <span class="highlight">undetectable</span>. He is reloaded and discharged on his home regimen with neurology follow-up and resources for medication assistance programs.</p></div>
+        <div class="mechanism-box"><div class="mechanism-title">📚 Status Epilepticus Algorithm Summary</div><div class="pathway">0-5 min: Stabilize + Check glucose + First benzo
+          ↓ (no response after 5 min)
+5-10 min: Second benzodiazepine dose
+          ↓ (no response)
+10-30 min: Second-line agent (LEV, fosphenytoin, or VPA)
+          ↓ (no response = REFRACTORY)
+30+ min: Intubate + Continuous infusion + cEEG
+          ↓ (≥24 hrs or recurs on wean = SUPER-REFRACTORY)
+Super-refractory: Ketamine, immunotherapy, 
+                  additional AEDs, surgery evaluation</div></div>`,
+        question: {
+            prompt: "What is the MOST important teaching point for this patient at discharge?",
+            options: [
+                { text: "Avoid all physical activity to prevent seizures", correct: false },
+                { text: "Never stop antiepileptic medications abruptly", correct: true },
+                { text: "EEG monitoring at home is required", correct: false },
+                { text: "Status epilepticus cannot recur if treated once", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! The key message is NEVER stop AEDs abruptly. This patient's SE was triggered by medication non-compliance. Addressing barriers to adherence (cost, access, education) is critical.",
+                incorrect: "The most important teaching point is to never stop AEDs abruptly. This patient's SE was caused by stopping phenytoin suddenly. Address barriers to adherence to prevent recurrence."
+            },
+            teaching: `<h4>Key Takeaways</h4>
+<ul style="line-height:2;margin-left:20px;">
+<li><strong>Status epilepticus = ≥5 minutes</strong> - don't wait for 30 minutes</li>
+<li><strong>Treat aggressively and early</strong> - benzos become less effective over time</li>
+<li><strong>Maximum 2 benzodiazepine doses</strong> → then second-line agent</li>
+<li><strong>ESETT:</strong> LEV = fosphenytoin = valproate (~50% efficacy)</li>
+<li><strong>Refractory SE needs</strong> intubation + cEEG + anesthetic infusion</li>
+<li><strong>Check for NCSE</strong> if patient doesn't wake up</li>
+<li><strong>Consider autoimmune</strong> in cryptogenic super-refractory SE</li>
+<li><strong>AED non-compliance</strong> is the most common cause in known epileptics</li>
+</ul>`,
+            why_chain: [],
+            points: 10
+        }
+    }
+];
+    function setDifficulty(d, btn) {
+        difficulty = d;
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.hint-beginner').forEach(h => h.style.display = d === 'beginner' ? 'block' : 'none');
+        document.querySelectorAll('.hint-advanced').forEach(h => h.style.display = d === 'advanced' ? 'block' : 'none');
+    }
+    function updateProgress() {
+        document.getElementById('progress').style.width = ((currentStage + 1) / stages.length * 100) + '%';
+        document.getElementById('maxScore').textContent = stages.length * 10;
+    }
+    function renderStage() {
+        const stage = stages[currentStage];
+        const container = document.getElementById('scene-container');
+        let html = `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>`;
+        if (stage.hint_beginner) html += `<div class="hint-beginner" style="display:${difficulty === 'beginner' ? 'block' : 'none'}">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+        if (stage.hint_advanced) html += `<div class="hint-advanced" style="display:${difficulty === 'advanced' ? 'block' : 'none'}">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+        html += stage.content;
+        if (stage.question) {
+            html += `<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;
+            stage.question.options.forEach((opt, i) => {
+                html += `<div class="mcq-option" onclick="checkAnswer(${i}, ${opt.correct})"><div class="option-letter">${String.fromCharCode(65 + i)}</div><div>${opt.text}</div></div>`;
+            });
+            html += `</div><div class="feedback correct-feedback" id="fb-correct"><div class="feedback-title">✓ Correct!</div>${stage.question.explanation.correct}</div>`;
+            html += `<div class="feedback incorrect-feedback" id="fb-incorrect"><div class="feedback-title">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;
+            if (stage.question.teaching) html += `<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;
+            if (stage.question.why_chain && stage.question.why_chain.length > 0) {
+                html += `<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain - Dig Deeper</h4>`;
+                stage.question.why_chain.forEach(w => {
+                    html += `<div class="why-item"><div class="why-q">${w.q}</div><div class="why-a">${w.a}</div></div>`;
+                });
+                html += `</div>`;
+            }
+            html += `<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;
+        }
+        html += `</div>`;
+        container.innerHTML = html;
+        updateProgress();
+    }
+    function checkAnswer(idx, correct) {
+        const options = document.querySelectorAll('.mcq-option');
+        if (options[0].classList.contains('disabled')) return;
+        options.forEach((opt, i) => {
+            opt.classList.add('disabled');
+            if (stages[currentStage].question.options[i].correct) opt.classList.add('correct');
+            else if (i === idx && !correct) opt.classList.add('incorrect');
+        });
+        if (correct) {
+            document.getElementById('fb-correct').classList.add('show');
+            score += stages[currentStage].question.points;
+            document.getElementById('score').textContent = score;
+        } else {
+            document.getElementById('fb-incorrect').classList.add('show');
+        }
+        const teaching = document.getElementById('teaching');
+        if (teaching) teaching.classList.add('show');
+        const whyChain = document.getElementById('why-chain');
+        if (whyChain) whyChain.classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    function nextStage() {
+        if (currentStage < stages.length - 1) { currentStage++; renderStage(); window.scrollTo(0, 0); }
+        else {
+            document.getElementById('scene-container').innerHTML = `<div class="scene completion"><h2 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length * 10}</p><p style="margin-bottom:30px;">You've mastered the approach to Status Epilepticus!</p><div style="text-align:left;max-width:500px;margin:0 auto;"><h4 style="color:var(--rdx-teal-light,#ccfbf1);margin-bottom:12px;">Key Points:</h4><ul style="line-height:2;"><li>SE definition: ≥5 minutes continuous seizure</li><li>First line: Benzodiazepines (max 2 doses)</li><li>Second line: LEV, fosphenytoin, or VPA (ESETT: equivalent)</li><li>Refractory: Intubate + cEEG + anesthetic infusion</li><li>Always check glucose, consider pyridoxine for INH</li><li>Watch for NCSE if patient doesn't wake up</li></ul></div></div>`;
+        }
+    }
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Status Epilepticus"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>

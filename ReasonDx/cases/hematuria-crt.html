@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive clinical reasoning case: Hematuria Workup. Work through history, exam, labs, and diagnosis step by step on ReasonDx.">
+<title>Hematuria Workup - Clinical Reasoning Case</title>
+    <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
+<link href="../css/rdx-a11y.css" rel="stylesheet">
+<style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0d9488 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .header h1 { font-size: 1.5rem; color: #fed7aa; }
+        .score-display { display: flex; gap: 20px; font-size: 0.9rem; margin-top: 10px; }
+        .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #99f6e4, #0f766e); border-radius: 3px; transition: width 0.3s; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-phase { font-size: 0.85rem; color: #fed7aa; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fff7ed; margin-top: 4px; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ea580c; line-height: 1.7; }
+        .highlight { color: #0f766e; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(234,88,12,0.2), rgba(251,191,36,0.2)); border: 1px solid rgba(234,88,12,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fff7ed; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.2) !important; }
+        .option-letter { width: 28px; height: 28px; background: rgba(234,88,12,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius:12px; }
+        .feedback.show { display: block; }
+        .correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { display: none; margin-top: 20px; background: rgba(234,88,12,0.15); border: 1px solid rgba(234,88,12,0.3); border-radius: 12px; padding: 20px; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background:var(--rdx-bg-hover); border-radius:12px; padding: 16px; margin: 12px 0; }
+        .mechanism-title { color: #fed7aa; font-weight: 600; margin-bottom: 10px; }
+        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; }
+        .btn { background: #0f766e; color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔴 Hematuria Workup</h1>
+            <div class="score-display">
+                <div class="score-item">Score: <strong id="score">0</strong>/<span id="maxScore">60</span></div>
+                <div class="score-item">Stage: <span id="stageNum">1</span>/6</div>
+            </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 16%"></div></div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Referral",content:'<div class="narrative"><p>A <span class="highlight">62-year-old man</span> is referred to you after his PCP found <span class="critical">painless gross hematuria</span>. He noticed bright red blood in his urine for the past 2 weeks. He has a <span class="highlight">40 pack-year smoking history</span>. No dysuria, no flank pain, no recent trauma.</p></div>',question:{prompt:"What is the MOST concerning diagnosis to rule out?",options:[{text:"Kidney stones",correct:false},{text:"Urinary tract infection",correct:false},{text:"Bladder cancer",correct:true},{text:"Benign prostatic hyperplasia",correct:false}],explanation:{correct:"Correct! Painless gross hematuria in an older patient with smoking history is bladder cancer until proven otherwise. Smoking is the #1 risk factor for bladder cancer.",incorrect:"Painless gross hematuria + smoking history = bladder cancer until proven otherwise. This is the most important diagnosis to exclude."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Hematuria Red Flags</div><div class="pathway">BLADDER CANCER RISK FACTORS:\n• Smoking (#1 risk factor)\n• Age >50\n• Male gender\n• Occupational exposure (dyes, rubber)\n• Prior pelvic radiation\n\nCONCERNING FEATURES:\n• Painless gross hematuria\n• Intermittent bleeding\n• Clots in urine\n• Irritative symptoms (frequency, urgency)\n\n→ COMPLETE WORKUP REQUIRED</div></div>',points:10}},
+        
+        {title:"The Workup",content:'<div class="narrative"><p>You explain that a complete hematuria workup is needed.</p></div>',question:{prompt:"What does a COMPLETE hematuria workup include?",options:[{text:"Urinalysis and urine culture only",correct:false},{text:"Renal ultrasound only",correct:false},{text:"CT urogram + cystoscopy",correct:true},{text:"PSA and prostate biopsy",correct:false}],explanation:{correct:"Correct! Complete hematuria workup requires BOTH upper tract imaging (CT urogram) AND cystoscopy to visualize the bladder directly. You must evaluate the entire urinary tract.",incorrect:"Complete workup = upper tract imaging (CT urogram) + cystoscopy. You must evaluate the ENTIRE urinary tract."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Complete Hematuria Workup</div><div class="pathway">REQUIRED COMPONENTS:\n\n1. UPPER TRACT IMAGING\n   • CT urogram (preferred)\n   • Evaluate kidneys, ureters\n   • Rules out RCC, stones, upper tract TCC\n\n2. CYSTOSCOPY\n   • Direct visualization of bladder\n   • Can biopsy suspicious lesions\n   • Gold standard for bladder cancer\n\n3. URINE STUDIES\n   • Urinalysis, culture\n   • Cytology (low sensitivity)\n\nDO BOTH even if one is negative!</div></div>',points:10}},
+
+        {title:"Cystoscopy Findings",content:'<div class="narrative"><p>CT urogram shows normal kidneys and ureters. Cystoscopy reveals a <span class="critical">2cm papillary tumor</span> on the left lateral bladder wall.</p></div>',question:{prompt:"What is the next step in management?",options:[{text:"Cystectomy (bladder removal)",correct:false},{text:"Radiation therapy",correct:false},{text:"TURBT (transurethral resection of bladder tumor)",correct:true},{text:"Intravesical BCG",correct:false}],explanation:{correct:"Correct! TURBT is both DIAGNOSTIC and THERAPEUTIC. It resects the tumor for pathology (determines grade and stage) and treats non-muscle invasive disease. Must include detrusor muscle in specimen!",incorrect:"TURBT is the next step - it's diagnostic (staging/grading) AND therapeutic. You need pathology before deciding on further treatment."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 TURBT</div><div class="pathway">TURBT = Transurethral Resection of\n        Bladder Tumor\n\nPURPOSE:\n• DIAGNOSTIC: Provides tissue for\n  histology, grade, and stage\n• THERAPEUTIC: Removes visible tumor\n\nCRITICAL:\n• MUST include detrusor muscle\n• Without muscle → can\'t stage properly\n• Incomplete? → Repeat TURBT in 4-6 weeks\n\nAfter TURBT → Pathology determines\nnext steps (observation, BCG, cystectomy)</div></div>',points:10}},
+
+        {title:"Pathology Results",content:'<div class="narrative"><p>TURBT pathology returns: <span class="highlight">High-grade urothelial carcinoma</span>, invading lamina propria. Detrusor muscle is present and NOT involved.</p></div>',question:{prompt:"What is the stage of this tumor?",options:[{text:"Ta (papillary, mucosa only)",correct:false},{text:"T1 (invades lamina propria)",correct:true},{text:"T2 (invades muscle)",correct:false},{text:"T3 (invades perivesical fat)",correct:false}],explanation:{correct:"Correct! T1 = invasion of lamina propria (submucosa) but NOT muscle. The presence of uninvolved detrusor muscle confirms adequate sampling and rules out muscle invasion.",incorrect:"T1 invades lamina propria but NOT muscle. Ta is mucosa only. T2 is muscle invasive."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Bladder Cancer Staging</div><div class="pathway">NON-MUSCLE INVASIVE (NMIBC):\n• Ta - Papillary, mucosa only\n• Tis - Carcinoma in situ (flat, high-grade)\n• T1 - Invades lamina propria\n\nMUSCLE-INVASIVE (MIBC):\n• T2 - Invades muscle (a=inner, b=outer)\n• T3 - Invades perivesical fat\n• T4 - Invades adjacent organs\n\nT1 HIGH-GRADE = High-risk NMIBC\n→ Requires BCG therapy</div></div>',points:10}},
+
+        {title:"Treatment Planning",content:'<div class="narrative"><p>This patient has T1 high-grade urothelial carcinoma - high-risk non-muscle invasive bladder cancer (NMIBC).</p></div>',question:{prompt:"What is the recommended treatment?",options:[{text:"Observation only with surveillance cystoscopy",correct:false},{text:"Intravesical BCG induction + maintenance",correct:true},{text:"Immediate radical cystectomy",correct:false},{text:"Systemic chemotherapy",correct:false}],explanation:{correct:"Correct! High-risk NMIBC (T1 high-grade) requires intravesical BCG - induction (weekly x6) followed by maintenance. BCG is the most effective intravesical therapy and induces an immune response against the tumor.",incorrect:"High-risk NMIBC requires BCG therapy. Observation alone has high recurrence/progression risk. Cystectomy is reserved for BCG failures or muscle-invasive disease."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 BCG Therapy</div><div class="pathway">BCG = Bacillus Calmette-Guérin\n(Live attenuated Mycobacterium bovis)\n\nMECHANISM:\n• Induces immune response vs tumor\n• Most effective intravesical therapy\n\nPROTOCOL:\n• Induction: Weekly x 6 weeks\n• Maintenance: Essential for efficacy\n  (monthly → quarterly x 3 years)\n\nSIDE EFFECTS:\n• Dysuria, frequency, flu-like symptoms\n• BCG sepsis (rare but serious)\n\nCONTRAINDICATIONS:\n• Active UTI, gross hematuria\n• Immunocompromised\n• <2 weeks post-TURBT</div></div>',points:10}},
+
+        {title:"Surveillance",content:'<div class="narrative"><p>The patient completes BCG induction and is doing well. He asks about follow-up.</p></div>',question:{prompt:"What is the appropriate surveillance for high-risk NMIBC?",options:[{text:"No follow-up needed after BCG",correct:false},{text:"Annual cystoscopy for 2 years",correct:false},{text:"Cystoscopy every 3 months for first 2 years, then less frequently",correct:true},{text:"CT scan every 6 months only",correct:false}],explanation:{correct:"Correct! High-risk NMIBC has high recurrence rates (50-70%). Requires intensive surveillance: cystoscopy every 3 months for 2 years, then every 6 months for 2 years, then annually. Lifelong surveillance!",incorrect:"NMIBC has 50-70% recurrence rate. Requires frequent cystoscopy: q3 months x2 years, then q6 months, then yearly. Lifelong!"},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 NMIBC Surveillance</div><div class="pathway">HIGH RECURRENCE RATE: 50-70%!\n\nSURVEILLANCE SCHEDULE (High-risk):\n• Cystoscopy q3 months x 2 years\n• Then q6 months x 2 years  \n• Then annually - LIFELONG\n\nALSO CONSIDER:\n• Upper tract imaging periodically\n  (field effect - 5% develop upper\n  tract TCC)\n• Urine cytology\n\nRED FLAGS ON FOLLOW-UP:\n• Positive cytology\n• New/recurrent tumor\n• BCG failure → consider cystectomy</div></div>',points:10}}
+    ];
+    
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('stageNum').textContent=currentStage+1;document.getElementById('maxScore').textContent=stages.length*10;}
+    
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><strong>✓ Correct!</strong> '+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><strong>✗ Not quite.</strong> '+stage.question.explanation.incorrect+'</div><div class="teaching-point" id="teaching">'+stage.question.teaching+'</div><button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=10;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}document.getElementById('teaching').classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:#fed7aa;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/60</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal-light,#ccfbf1);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/bladder-cancer-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=bladder+cancer" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK536923/" target="_blank" style="color:var(--rdx-teal-light,#ccfbf1);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Hematuria Workup!</p></div>';}}
+    
+    renderStage();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Hematuria Workup"
+         data-key-points="🎉 Case Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CT Urogram / Ultrasound</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Three-phase CT urogram for complete evaluation; US for initial screening</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-renal-gu.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/haematuria" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+</body>
+</html>
