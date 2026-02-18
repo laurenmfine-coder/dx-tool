@@ -11,7 +11,7 @@
 
 const EMAIL_CONFIG = {
     provider: 'supabase',
-    fromEmail: 'onboarding@resend.dev',
+    fromEmail: 'noreply@reasondx.com',
     fromName: 'ReasonDx',
     supabaseEmailFunction: 'https://lpwbiqpojisqgezycupw.supabase.co/functions/v1/send-email'
 };
