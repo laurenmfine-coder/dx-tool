@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -363,7 +371,7 @@
             min-height: 24px;
         }
         .heatmap-cell.level-0 { background: var(--gray-100); }
-        .heatmap-cell.level-1 { background: #bbf7d0; }
+        .heatmap-cell.level-1 { background: #a3cfe6; }
         .heatmap-cell.level-2 { background: #86efac; }
         .heatmap-cell.level-3 { background: #4ade80; }
         .heatmap-cell.level-4 { background: #22c55e; }
@@ -474,10 +482,10 @@
 
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
+    --primary: #2874a6;
+    --primary-light: #7cb8d9;
+    --primary-dark: #1f5f8b;
+    --primary-bg: #f0f7fc;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
@@ -488,7 +496,7 @@
     --border-light: #f1f5f9;
     --nav-text: #1e293b;
     --nav-link: #64748b;
-    --nav-active-bg: #10b981;
+    --nav-active-bg: #2874a6;
     --nav-active-text: #ffffff;
     --shadow: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
@@ -564,13 +572,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <body>
 <!-- Mastery Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
-  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(40,116,166,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
     <div style="font-size:28px;flex-shrink:0;">📊</div>
     <div style="flex:1;min-width:0;">
-      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
       <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
     </div>
-    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+    <div style="color:var(--rdx-teal,#2874a6);font-size:20px;flex-shrink:0;">→</div>
   </a>
 </div>
 
@@ -759,7 +767,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         
         <!-- Board Prep Analytics -->
         <h2 class="section-title">
-            <span class="icon" style="background: #f0fdfa;">📝</span>
+            <span class="icon" style="background: #f0f7fc;">📝</span>
             Board Prep Analytics
         </h2>
         <div class="platform-grid">
@@ -767,7 +775,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             <div class="platform-card">
                 <div class="platform-header">
                     <div class="platform-info">
-                        <div class="platform-icon" style="background: linear-gradient(135deg, #14b8a6, #0f766e); color: white;">📝</div>
+                        <div class="platform-icon" style="background: linear-gradient(135deg, #3a90c0, #1f5f8b); color: white;">📝</div>
                         <div>
                             <div class="platform-name">Board Prep MCQ</div>
                             <div class="platform-subtitle">536 Questions · 20 Systems</div>
@@ -797,7 +805,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                         <div style="font-size: 0.75rem; color: var(--gray-500);">Incorrect</div>
                     </div>
                     <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
-                        <div style="font-size: 1.5rem; font-weight: 700; color: #14b8a6;" id="bpSessionCount">0</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #3a90c0;" id="bpSessionCount">0</div>
                         <div style="font-size: 0.75rem; color: var(--gray-500);">Sessions</div>
                     </div>
                 </div>
@@ -822,7 +830,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 </div>
                 <div id="bpSpacedRepStats">
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
-                        <div style="text-align: center; padding: 10px; background: #f0fdf4; border-radius: 8px;">
+                        <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
                             <div style="font-size: 1.25rem; font-weight: 700; color: #16a34a;" id="bpMastered">0</div>
                             <div style="font-size: 0.7rem; color: var(--gray-500);">Mastered</div>
                         </div>
@@ -856,7 +864,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div id="bpVariantStats">
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px;">
                         <div style="text-align: center; padding: 12px; background: #f0f9ff; border-radius: 8px;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #0f766e;" id="bpVariantGroups">185</div>
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #1f5f8b;" id="bpVariantGroups">185</div>
                             <div style="font-size: 0.7rem; color: var(--gray-500);">Variant Groups</div>
                         </div>
                         <div style="text-align: center; padding: 12px; background: #f5f3ff; border-radius: 8px;">
@@ -1376,7 +1384,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const transferListEl = document.getElementById('bpTransferList');
             if (transfers > 0) {
                 transferListEl.innerHTML = transferList.slice(0, 5).map(t => 
-                    `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f0fdf4;border-radius:8px;font-size:0.75rem;">
+                    `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f0f7fc;border-radius:8px;font-size:0.75rem;">
                         <span style="color:#16a34a;">📈</span>
                         <span style="color:var(--gray-700);">${t.group}</span>
                     </div>`
@@ -1412,7 +1420,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             biasEl.innerHTML = biasTypes.map(b => {
                 const count = biasCount[b.key] || 0;
-                const color = count === 0 ? '#e2e8f0' : count <= 2 ? '#0f766e' : '#ef4444';
+                const color = count === 0 ? '#e2e8f0' : count <= 2 ? '#1f5f8b' : '#ef4444';
                 return `<div style="padding:12px;background:var(--gray-50);border-radius:8px;border-left:3px solid ${color};">
                     <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
                         <span>${b.icon}</span>
@@ -1451,11 +1459,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     const key = sys + '|' + t;
                     const td = typeStats[key];
                     const pct = td && td.total > 0 ? Math.round(td.correct / td.total * 100) : -1;
-                    const color = pct < 0 ? '#f1f5f9' : pct >= 80 ? '#dcfce7' : pct >= 60 ? '#fef3c7' : '#fee2e2';
+                    const color = pct < 0 ? '#f1f5f9' : pct >= 80 ? '#d4e8f7' : pct >= 60 ? '#fef3c7' : '#fee2e2';
                     const text = pct < 0 ? '—' : pct + '%';
                     html += `<td style="text-align:center;padding:4px;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:${color};font-weight:600;min-width:40px;">${text}</span></td>`;
                 });
-                const oColor = overallPct < 0 ? '#f1f5f9' : overallPct >= 80 ? '#dcfce7' : overallPct >= 60 ? '#fef3c7' : '#fee2e2';
+                const oColor = overallPct < 0 ? '#f1f5f9' : overallPct >= 80 ? '#d4e8f7' : overallPct >= 60 ? '#fef3c7' : '#fee2e2';
                 html += `<td style="text-align:center;padding:4px;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:${oColor};font-weight:700;min-width:40px;">${overallPct < 0 ? '—' : overallPct + '%'}</span></td></tr>`;
             });
             html += '</tbody></table>';
@@ -1506,7 +1514,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 const completed = d && d.completed;
                 const best = d ? d.best : 0;
                 const pct = Math.round(best / meta.total * 100);
-                const bg = !d ? 'var(--gray-100)' : completed ? (pct >= 80 ? '#dcfce7' : '#fef3c7') : '#f1f5f9';
+                const bg = !d ? 'var(--gray-100)' : completed ? (pct >= 80 ? '#d4e8f7' : '#fef3c7') : '#f1f5f9';
                 const border = !d ? 'var(--gray-200)' : completed ? (pct >= 80 ? '#86efac' : '#fcd34d') : 'var(--gray-200)';
                 return `<a href="../modules/${id}.html" style="display:block;padding:10px;background:${bg};border:1px solid ${border};border-radius:8px;text-decoration:none;color:var(--gray-800);font-size:12px;">
                     <div style="display:flex;justify-content:space-between;align-items:center;">

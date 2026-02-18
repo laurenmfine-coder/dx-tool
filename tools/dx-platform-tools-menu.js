@@ -128,7 +128,7 @@
         }
         .dx-nav-tools-dropdown .all-tools {
             font-weight: 600;
-            color: #059669;
+            color: #1f5f8b;
         }
     `;
     document.head.appendChild(style);

@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
@@ -14,7 +22,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);line-height:1.7;}
-.header{background:linear-gradient(135deg, #0f766e, #5b21b6);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
+.header{background:linear-gradient(135deg, #1f5f8b, #5b21b6);padding:24px;color:#fff;display:flex;align-items:center;gap:16px;}
 .header a{color:#fff;text-decoration:none;opacity:.8;font-size:14px;}
 .header h1{font-family:var(--rdx-font-serif);font-size:22px;font-weight:400;flex:1;}
 .progress-bar{height:6px;background:#ede9fe;border-radius:3px;overflow:hidden;margin:0 24px;}
@@ -40,10 +48,10 @@ body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);li
 .choice{padding:12px 14px;border:2px solid var(--pm-border);border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:.2s;display:flex;align-items:flex-start;gap:8px;}
 .choice:hover{border-color:var(--pm-purple);background:var(--pm-purple-50);}
 .choice.selected{border-color:var(--pm-purple);background:var(--pm-purple-50);}
-.choice.correct{border-color:#059669;background:#ecfdf5;}
+.choice.correct{border-color:#1f5f8b;background:#f0f7fc;}
 .choice.incorrect{border-color:#dc2626;background:#fef2f2;}
 .choice-ltr{font-weight:700;color:var(--pm-purple);min-width:20px;}
-.quiz-explain{padding:16px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;margin-top:12px;font-size:14px;display:none;}
+.quiz-explain{padding:16px;background:#f0f7fc;border:1.5px solid #86efac;border-radius:8px;margin-top:12px;font-size:14px;display:none;}
 .quiz-explain.show{display:block;}
 .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
 .btn{padding:12px 24px;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
@@ -57,7 +65,7 @@ body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);li
   --pm-text: var(--rdx-text, #e2e8f0);
   --pm-muted: var(--rdx-text-muted, #94a3b8);
   --pm-border: var(--rdx-border, #334155);
-  --pm-accent: #14b8a6;
+  --pm-accent: #3a90c0;
 }
 [data-theme="high-contrast"] {
   --pm-bg: #000;
@@ -65,7 +73,7 @@ body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);li
   --pm-text: #fff;
   --pm-muted: #ccc;
   --pm-border: #555;
-  --pm-accent: #2dd4bf;
+  --pm-accent: #5ba3cc;
 }
 [data-theme="sepia"] {
   --pm-bg: #f4ecd8;
@@ -73,7 +81,7 @@ body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);li
   --pm-text: #3d3322;
   --pm-muted: #7a6b52;
   --pm-border: #d4c5a9;
-  --pm-accent: #0f766e;
+  --pm-accent: #1f5f8b;
 }
 </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
@@ -103,8 +111,8 @@ body{font-family:var(--rdx-font);background:var(--pm-bg);color:var(--pm-text);li
     <div style="overflow-x:auto;">
     <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;">
       <tr><td style="border:1px solid #ccc;padding:12px;background:#ede9fe;font-weight:700;"></td><td style="border:1px solid #ccc;padding:12px;background:#ede9fe;font-weight:700;text-align:center;">Disease Present</td><td style="border:1px solid #ccc;padding:12px;background:#ede9fe;font-weight:700;text-align:center;">Disease Absent</td></tr>
-      <tr><td style="border:1px solid #ccc;padding:12px;background:#f5f3ff;font-weight:700;">Test Positive</td><td style="border:1px solid #ccc;padding:12px;background:#dcfce7;text-align:center;"><strong>True Positive (TP)</strong><br>✅ Test correctly detected disease</td><td style="border:1px solid #ccc;padding:12px;background:#fef2f2;text-align:center;"><strong>False Positive (FP)</strong><br>❌ Test said yes, but no disease</td></tr>
-      <tr><td style="border:1px solid #ccc;padding:12px;background:#f5f3ff;font-weight:700;">Test Negative</td><td style="border:1px solid #ccc;padding:12px;background:#fef2f2;text-align:center;"><strong>False Negative (FN)</strong><br>❌ Test missed the disease</td><td style="border:1px solid #ccc;padding:12px;background:#dcfce7;text-align:center;"><strong>True Negative (TN)</strong><br>✅ Test correctly ruled out disease</td></tr>
+      <tr><td style="border:1px solid #ccc;padding:12px;background:#f5f3ff;font-weight:700;">Test Positive</td><td style="border:1px solid #ccc;padding:12px;background:#d4e8f7;text-align:center;"><strong>True Positive (TP)</strong><br>✅ Test correctly detected disease</td><td style="border:1px solid #ccc;padding:12px;background:#fef2f2;text-align:center;"><strong>False Positive (FP)</strong><br>❌ Test said yes, but no disease</td></tr>
+      <tr><td style="border:1px solid #ccc;padding:12px;background:#f5f3ff;font-weight:700;">Test Negative</td><td style="border:1px solid #ccc;padding:12px;background:#fef2f2;text-align:center;"><strong>False Negative (FN)</strong><br>❌ Test missed the disease</td><td style="border:1px solid #ccc;padding:12px;background:#d4e8f7;text-align:center;"><strong>True Negative (TN)</strong><br>✅ Test correctly ruled out disease</td></tr>
     </table>
     </div>
     <p>Every statistic in this module is derived from this table. If you can draw it from memory, you can derive sensitivity, specificity, PPV, and NPV on the spot.</p>

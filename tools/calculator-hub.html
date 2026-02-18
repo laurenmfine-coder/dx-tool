@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +25,8 @@
     
     <style>
         :root {
-            --primary: #059669;
-            --primary-dark: #047857;
+            --primary: #1f5f8b;
+            --primary-dark: #1a4971;
             --text-primary: #18181b;
             --text-secondary: #52525b;
             --bg-main: #f8fafc;
@@ -29,7 +37,7 @@
         body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
         
         .header {
-            background: linear-gradient(135deg, #065f46 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #065f46 0%, #2874a6 100%);
             padding: 32px 24px;
             text-align: center;
             color: white;
@@ -132,7 +140,7 @@
         .calc-btn:hover { background: var(--primary-dark); }
         
         .result-box {
-            background: #ecfdf5;
+            background: #f0f7fc;
             border: 1px solid #a7f3d0;
             border-radius: 8px;
             padding: 16px;
@@ -143,13 +151,13 @@
         .result-box .result-label {
             font-size: 12px;
             text-transform: uppercase;
-            color: #047857;
+            color: #1a4971;
             margin-bottom: 4px;
         }
         .result-box .result-value {
             font-size: 28px;
             font-weight: 700;
-            color: #047857;
+            color: #1a4971;
         }
         .result-box .result-interpretation {
             font-size: 13px;

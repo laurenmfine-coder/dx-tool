@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
@@ -16,19 +24,19 @@
 <title>Renal Function & Acid-Base | ReasonDx</title>
     
     <style>
-        :root { --primary: #059669; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #fafafa; --bg-card: #ffffff; --border: #e4e4e7; }
+        :root { --primary: #1f5f8b; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #fafafa; --bg-card: #ffffff; --border: #e4e4e7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
         .nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
         .nav-brand { font-weight: 700; font-size: 18px; color: var(--primary); text-decoration: none; }
-        .header { background: linear-gradient(135deg, #0f766e 0%, #5b21b6 100%); padding: 40px 24px; }
+        .header { background: linear-gradient(135deg, #1f5f8b 0%, #5b21b6 100%); padding: 40px 24px; }
         .header-inner { max-width: 1000px; margin: 0 auto; }
         .header h1 { font-size: 36px; color: white; margin-bottom: 8px; }
         .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); }
         .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
         .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
         .section h2 { font-size: 24px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); color: #7c3aed; }
-        .section h3 { font-size: 18px; color: #047857; margin: 24px 0 12px; }
+        .section h3 { font-size: 18px; color: #1a4971; margin: 24px 0 12px; }
         .section p { margin-bottom: 16px; color: var(--text-secondary); }
         .formula-box { background: #1f2937; color: #f9fafb; padding: 16px 20px; border-radius: 8px; font-family: monospace; margin: 12px 0; font-size: 15px; }
         .step-box { background: #f3e8ff; border: 2px solid #c4b5fd; border-radius: 12px; padding: 20px; margin: 16px 0; }
@@ -38,8 +46,8 @@
         .column-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
         .column-box h5 { margin-bottom: 8px; font-size: 14px; }
         .column-box ul { margin-left: 16px; font-size: 14px; color: var(--text-secondary); }
-        .key-point { background: #ecfdf5; border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
-        .key-point strong { color: #047857; }
+        .key-point { background: #f0f7fc; border-left: 4px solid var(--primary); padding: 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: #1a4971; }
         .warning-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; padding: 20px; margin: 20px 0; }
         .warning-box h4 { color: #991b1b; margin-bottom: 12px; }
         .warning-box ul { margin-left: 20px; color: #7f1d1d; }
@@ -48,21 +56,21 @@
         .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
         .comparison-table th { background: #f3e8ff; color: #6d28d9; font-weight: 600; }
-        .mnemonic-box { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; }
+        .mnemonic-box { background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; }
         .mnemonic-box h4 { color: #92400e; margin-bottom: 8px; }
         .mnemonic-box p { color: #78350f; font-size: 16px; font-weight: 600; }
         .flowchart { background: #f8fafc; border: 2px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; }
         .flowchart h4 { text-align: center; margin-bottom: 16px; color: #1f2937; }
         .aki-card { border-radius: 12px; padding: 20px; margin: 12px 0; }
-        .aki-card.prerenal { background: #ccfbf1; border: 2px solid #14b8a6; }
+        .aki-card.prerenal { background: #d4e8f7; border: 2px solid #3a90c0; }
         .aki-card.intrinsic { background: #fee2e2; border: 2px solid #f87171; }
-        .aki-card.postrenal { background: #fef3c7; border: 2px solid #0f766e; }
+        .aki-card.postrenal { background: #fef3c7; border: 2px solid #1f5f8b; }
         .aki-card h5 { margin-bottom: 8px; }
     </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/renal-acid-base.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Renal Function & Acid-Base</a> → Module</div>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#1f5f8b);text-decoration:none">Learn Hub</a> → <a href="../topics/renal-acid-base.html" style="color:var(--rdx-accent,#1f5f8b);text-decoration:none">Renal Function & Acid-Base</a> → Module</div>
 
     <!-- nav removed: unified via rdx-nav.js -->
     <header class="header"><div class="header-inner"><h1>Renal Function & Acid-Base</h1><p class="header-subtitle">AKI, CKD, Acid-Base Interpretation, Renal Tubular Acidosis</p></div></header>
@@ -110,7 +118,7 @@
             <h3>Classification: Pre-renal vs Intrinsic vs Post-renal</h3>
             
             <div class="aki-card prerenal">
-                <h5 style="color: #0f766e;">🩸 Pre-renal (Most Common ~55%)</h5>
+                <h5 style="color: #1f5f8b;">🩸 Pre-renal (Most Common ~55%)</h5>
                 <p><strong>Mechanism:</strong> Decreased renal perfusion (kidneys structurally normal)</p>
                 <p><strong>Causes:</strong> Hypovolemia, CHF, cirrhosis, sepsis, NSAIDs, ACEi/ARBs</p>
                 <p><strong>Labs:</strong> BUN:Cr &gt;20:1, FENa &lt;1%, UOsm &gt;500, UNa &lt;20</p>
@@ -250,7 +258,7 @@
             <h3>Causes — Chloride Responsive vs Resistant</h3>
             <div class="two-column">
                 <div class="column-box">
-                    <h5 style="color: #059669;">Chloride-Responsive (UCl &lt;20)</h5>
+                    <h5 style="color: #1f5f8b;">Chloride-Responsive (UCl &lt;20)</h5>
                     <ul>
                         <li>Vomiting / NG suction</li>
                         <li>Diuretics (after effect)</li>
@@ -322,7 +330,7 @@
     <div data-dx-tutor data-module-title="Renal Function and Acid-Base" data-key-points="AKI prerenal intrinsic postrenal FENa, HAGMA MUDPILES anion gap, NAGMA diarrhea RTA, Type 4 RTA hyperkalemia, Winter formula compensation, metabolic alkalosis urine chloride" style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
 
-<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:var(--rdx-bg-card);border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:var(--rdx-bg-card);border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:var(--rdx-success-bg);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:var(--rdx-danger-bg);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
 <div class="mcq-section">
 <div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
 <div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A patient presents with pH 7.30, PaCO2 25 mmHg, HCO3 12 mEq/L. What is the primary acid-base disorder?</div></div><div class="mcq-card-body"><div class="mcq-choices">
@@ -374,8 +382,8 @@
 <div class="mcq-choice" data-correct="false" data-fb="Salicylate causes a mixed respiratory alkalosis + anion gap metabolic acidosis but typically does not significantly elevate the osmolal gap." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Salicylate overdose</div></div></div>
 </div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
 </div>
-<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
-<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1053/j.ajkd.2020.01.016" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Approach to Acid-Base Disorders: A Practical Review</a> — <em style="color:var(--rdx-text-muted,#64748b)">Am J Kidney Dis</em></li></ul></div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(22,163,74,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(22,163,74,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1053/j.ajkd.2020.01.016" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">Approach to Acid-Base Disorders: A Practical Review</a> — <em style="color:var(--rdx-text-muted,#64748b)">Am J Kidney Dis</em></li></ul></div>
 <div class="cross-links"><a href="../deep-dive-player.html?module=acid-base-interpretation-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../cases/acid-base-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
 <script src="../dx-progress.js"></script>
 <script src="../dx-cross-links.js"></script>

@@ -28,7 +28,7 @@
             align-items: center;
             gap: 6px;
             padding: 8px 14px;
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            background: linear-gradient(135deg, #f0f7fc, #d4e8f7);
             border: 1px solid #a7f3d0;
             border-radius: 8px;
             color: #166534;
@@ -40,13 +40,13 @@
             margin-top: 12px;
         }
         .dx-cross-action:hover {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            background: linear-gradient(135deg, #d4e8f7, #a3cfe6);
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(5,150,105,0.15);
         }
         .dx-cross-action.saved {
-            background: #dcfce7;
-            border-color: #059669;
+            background: #d4e8f7;
+            border-color: #1f5f8b;
             pointer-events: none;
         }
         .dx-cross-toast {

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +25,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family:var(--rdx-font);
-            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
+            background: linear-gradient(135deg, #f0f7fc 0%, var(--primary-bg) 100%);
             min-height: 100vh;
             color: var(--text-primary);
         }
         
         .header {
             background:var(--rdx-bg-card);
-            border-bottom: 1px solid #99f6e4;
+            border-bottom: 1px solid #a3cfe6;
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
@@ -39,7 +47,7 @@
         .logo-text {
             font-size: 20px;
             font-weight: 600;
-            color: #115e59;
+            color: #1a4971;
         }
         
         .main-content {
@@ -54,7 +62,7 @@
         }
         .hero h1 {
             font-size: 32px;
-            color: #115e59;
+            color: #1a4971;
             margin-bottom: 8px;
         }
         .hero p {
@@ -80,7 +88,7 @@
         }
         
         .panel h2 {
-            color: #115e59;
+            color: #1a4971;
             font-size: 18px;
             margin-bottom: 20px;
             padding-bottom: 12px;
@@ -238,7 +246,7 @@
         }
         .template-card h4 {
             font-size: 13px;
-            color: #0f766e;
+            color: #1f5f8b;
             margin-bottom: 4px;
         }
         .template-card p {
@@ -282,15 +290,15 @@
         .badge-gi { background: #fce7f3; color: #be185d; }
         .badge-pulm { background: var(--primary-bg); color: var(--primary-dark); }
         .badge-derm { background: #fef3c7; color: #b45309; }
-        .badge-ent { background: #d1fae5; color: #047857; }
+        .badge-ent { background: #d1fae5; color: #1a4971; }
     
 
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
+    --primary: #2874a6;
+    --primary-light: #7cb8d9;
+    --primary-dark: #1f5f8b;
+    --primary-bg: #f0f7fc;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
@@ -301,7 +309,7 @@
     --border-light: #f1f5f9;
     --nav-text: #1e293b;
     --nav-link: #64748b;
-    --nav-active-bg: #10b981;
+    --nav-active-bg: #2874a6;
     --nav-active-text: #ffffff;
     --shadow: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);

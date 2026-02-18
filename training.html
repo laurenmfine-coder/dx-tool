@@ -2,14 +2,22 @@
 <!-- SIMPLIFIED NAVIGATION VERSION: 4-item nav, hub pages, cleaner menu -->
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -44,7 +52,7 @@
 :root {
     --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
     --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
-    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #3a90c0; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -53,7 +61,7 @@
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
+    --accent: #2874a6; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
@@ -140,13 +148,13 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .dx-card:hover {
-            border-color: #14b8a6;
-            background: #f0fdfa;
+            border-color: #3a90c0;
+            background: #f0f7fc;
         }
         
         .dx-card.selected-likely {
             border-color: #22c55e;
-            background: #f0fdf4;
+            background: #f0f7fc;
             border-left: 4px solid #22c55e;
         }
         
@@ -166,13 +174,13 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .category-zone.drag-over {
-            border-color: #14b8a6;
-            background: #f0fdfa;
+            border-color: #3a90c0;
+            background: #f0f7fc;
         }
         
         .category-zone.likely {
-            border-color: var(--rdx-teal-light,#ccfbf1);
-            background: #f0fdf4;
+            border-color: var(--rdx-teal-light,#d4e8f7);
+            background: #f0f7fc;
         }
         
         .category-zone.must-not-miss {
@@ -197,8 +205,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .ranked-dx-item.drag-over {
-            border-color: #14b8a6 !important;
-            background-color: #f0fdfa !important;
+            border-color: #3a90c0 !important;
+            background-color: #f0f7fc !important;
         }
         
         /* Rank number pulse on reorder */
@@ -223,7 +231,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #14b8a6;
+            background: #3a90c0;
             cursor: pointer;
             border: 2px solid white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -233,7 +241,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #14b8a6;
+            background: #3a90c0;
             cursor: pointer;
             border: 2px solid white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -252,13 +260,13 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .selection-btn:hover:not(.selected):not(:disabled) {
-            border-color: #14b8a6;
-            background: #f0fdfa;
+            border-color: #3a90c0;
+            background: #f0f7fc;
         }
         
         .selection-btn.selected {
-            border-color: #14b8a6;
-            background: #ccfbf1;
+            border-color: #3a90c0;
+            background: #d4e8f7;
         }
         
         .selection-btn:disabled {
@@ -277,8 +285,8 @@ body { transition: background 0.3s, color 0.3s; }
             font-weight: 600;
         }
         
-        .badge-essential { background: #dcfce7; color: #166534; }
-        .badge-helpful { background: #ccfbf1; color: #115e59; }
+        .badge-essential { background: #d4e8f7; color: #166534; }
+        .badge-helpful { background: #d4e8f7; color: #1a4971; }
         .badge-neutral { background: #f3f4f6; color: #4b5563; }
         .badge-low-yield { background: #fef3c7; color: #92400e; }
         
@@ -322,7 +330,7 @@ body { transition: background 0.3s, color 0.3s; }
         /* Thinking prompt */
         .thinking-prompt {
             background: #f8fafc;
-            border-left: 4px solid #14b8a6;
+            border-left: 4px solid #3a90c0;
             border-radius: 0 8px 8px 0;
             padding: 16px 20px;
         }
@@ -409,12 +417,12 @@ body { transition: background 0.3s, color 0.3s; }
         
         body.dark-mode .selection-btn:hover:not(.selected):not(:disabled) {
             background: #4b5563;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         body.dark-mode .selection-btn.selected {
             background: #312e81;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         body.dark-mode .dx-card {
@@ -431,7 +439,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         body.dark-mode .thinking-prompt {
             background: #312e81;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         body.dark-mode .workup-category {
@@ -456,8 +464,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .badge-card.earned {
-            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-            border-color: #0f766e;
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+            border-color: #1f5f8b;
         }
         
         .badge-card.locked {
@@ -495,7 +503,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .level-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #0f766e, #0891b2);
+            background: linear-gradient(90deg, #1f5f8b, #0891b2);
             transition: width 0.5s ease;
         }
         
@@ -509,7 +517,7 @@ body { transition: background 0.3s, color 0.3s; }
             top: 20px;
             right: 20px;
             background:var(--rdx-bg-card);
-            border-left: 4px solid #0f766e;
+            border-left: 4px solid #1f5f8b;
             border-radius: 0 8px 8px 0;
             padding: 16px 24px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -538,7 +546,7 @@ body { transition: background 0.3s, color 0.3s; }
             left: 50%;
             transform: translate(-50%, -50%);
             background:var(--rdx-bg-card);
-            border-left: 4px solid #0f766e;
+            border-left: 4px solid #1f5f8b;
             border-radius: 0 12px 12px 0;
             padding: 24px 40px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
@@ -576,8 +584,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .recommendation-card:hover {
-            border-color: #0f766e;
-            background: #f0fdfa;
+            border-color: #1f5f8b;
+            background: #f0f7fc;
         }
         
         body.dark-mode .recommendation-card {
@@ -587,7 +595,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         body.dark-mode .recommendation-card:hover {
             background: #4b5563;
-            border-color: #0f766e;
+            border-color: #1f5f8b;
         }
         
         body.dark-mode .challenge-code-display {
@@ -919,7 +927,7 @@ body { transition: background 0.3s, color 0.3s; }
            ============================================================ */
         
         .voice-recorder {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             border-radius: 16px;
             padding: 24px;
             color: white;
@@ -990,7 +998,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .waveform-bar {
             width: 4px;
-            background: #14b8a6;
+            background: #3a90c0;
             border-radius: 2px;
             transition: height 0.1s;
         }
@@ -1010,7 +1018,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .transcription-box.listening {
-            border-color: #14b8a6;
+            border-color: #3a90c0;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
@@ -1034,7 +1042,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .rubric-header {
-            background: linear-gradient(135deg, #0f766e 0%, #5b21b6 100%);
+            background: linear-gradient(135deg, #1f5f8b 0%, #5b21b6 100%);
             color: white;
             padding: 16px 20px;
         }
@@ -1065,7 +1073,7 @@ body { transition: background 0.3s, color 0.3s; }
             margin-top: 2px;
         }
         
-        .rubric-check.found { background: #dcfce7; color: #166534; }
+        .rubric-check.found { background: #d4e8f7; color: #166534; }
         .rubric-check.missing { background: #fee2e2; color: #991b1b; }
         .rubric-check.partial { background: #fef3c7; color: #92400e; }
         
@@ -1081,7 +1089,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: inline-block;
         }
         
-        .rubric-item-impact.positive { background: #dcfce7; color: #166534; }
+        .rubric-item-impact.positive { background: #d4e8f7; color: #166534; }
         .rubric-item-impact.negative { background: #fee2e2; color: #991b1b; }
         
         .diff-impact-container {
@@ -1121,7 +1129,7 @@ body { transition: background 0.3s, color 0.3s; }
             border: 2px solid #e5e7eb;
         }
         
-        .diff-column.listener { border-color: #0f766e; }
+        .diff-column.listener { border-color: #1f5f8b; }
         .diff-column.correct { border-color: #22c55e; }
         
         .diff-column-header {
@@ -1155,7 +1163,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-size: 0.8rem;
         }
         
-        .diff-item.correct-position { background: #dcfce7; }
+        .diff-item.correct-position { background: #d4e8f7; }
         .diff-item.correct-position .rank { background: #22c55e; color: white; }
         .diff-item.wrong-position { background: #fef3c7; }
         .diff-item.wrong-position .rank { background: #f59e0b; color: white; }
@@ -1163,7 +1171,7 @@ body { transition: background 0.3s, color 0.3s; }
         .diff-arrow { font-size: 2rem; color: #9ca3af; }
         
         .presentation-score {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             border-radius: 16px;
             padding: 24px;
             color: white;
@@ -1184,8 +1192,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .score-circle.excellent { border-color: #22c55e; }
-        .score-circle.good { border-color: #14b8a6; }
-        .score-circle.needs-work { border-color: #0f766e; }
+        .score-circle.good { border-color: #3a90c0; }
+        .score-circle.needs-work { border-color: #1f5f8b; }
         .score-circle.poor { border-color: #ef4444; }
         
         .score-number { font-size: 2.5rem; font-weight: bold; }
@@ -1234,15 +1242,15 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .presentation-tips {
-            background: #f0fdfa;
-            border: 2px solid #14b8a6;
+            background: #f0f7fc;
+            border: 2px solid #3a90c0;
             border-radius: 12px;
             padding: 16px;
             margin-top: 16px;
         }
         
         .presentation-tips h4 {
-            color: #115e59;
+            color: #1a4971;
             margin-bottom: 12px;
         }
         
@@ -1252,7 +1260,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .presentation-tips li {
-            color: #115e59;
+            color: #1a4971;
             margin-bottom: 6px;
             font-size: 0.9rem;
         }
@@ -1274,7 +1282,7 @@ body { transition: background 0.3s, color 0.3s; }
            ============================================================ */
         
         .exposure-checkpoint {
-            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
             border: 3px solid #f59e0b;
             border-radius: 16px;
             padding: 24px;
@@ -1331,23 +1339,23 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .exposure-option:hover {
-            border-color: #0f766e;
+            border-color: #1f5f8b;
             background: #fffbeb;
         }
         
         .exposure-option.selected {
-            border-color: #0f766e;
+            border-color: #1f5f8b;
             background: #fef3c7;
         }
         
         .exposure-option.correct {
             border-color: #22c55e;
-            background: #dcfce7;
+            background: #d4e8f7;
         }
         
         .exposure-option.relevant {
-            border-color: #14b8a6;
-            background: #ccfbf1;
+            border-color: #3a90c0;
+            background: #d4e8f7;
         }
         
         .exposure-checkbox {
@@ -1364,7 +1372,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .exposure-option.selected .exposure-checkbox {
             background: #f59e0b;
-            border-color: #0f766e;
+            border-color: #1f5f8b;
             color: white;
         }
         
@@ -1384,8 +1392,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .exposure-reveal {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border: 2px solid #10b981;
+            background: linear-gradient(135deg, #f0f7fc 0%, #d1fae5 100%);
+            border: 2px solid #2874a6;
             border-radius: 12px;
             padding: 20px;
             margin-top: 16px;
@@ -1402,7 +1410,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .exposure-reveal-text {
             font-size: 1.1rem;
-            color: #047857;
+            color: #1a4971;
             font-weight: 500;
         }
         
@@ -1433,7 +1441,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .diff-shift-column.after {
-            border-color: var(--rdx-teal-light,#ccfbf1);
+            border-color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .diff-shift-header {
@@ -1472,7 +1480,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .diff-shift-item.elevated {
-            background: #dcfce7;
+            background: #d4e8f7;
         }
         
         .diff-shift-item.elevated .rank {
@@ -1499,15 +1507,15 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .exposure-teaching-point {
-            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-            border: 2px solid #14b8a6;
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+            border: 2px solid #3a90c0;
             border-radius: 12px;
             padding: 16px;
             margin-top: 16px;
         }
         
         .exposure-teaching-point h4 {
-            color: #115e59;
+            color: #1a4971;
             font-weight: 600;
             margin-bottom: 8px;
             display: flex;
@@ -1523,7 +1531,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         body.dark-mode .exposure-checkpoint {
             background: linear-gradient(135deg, #422006 0%, #78350f 100%);
-            border-color: #0f766e;
+            border-color: #1f5f8b;
         }
         
         body.dark-mode .exposure-prompt {
@@ -1574,12 +1582,12 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .step-item.completed {
-            background: #dcfce7;
+            background: #d4e8f7;
             color: #166534;
         }
         
         .step-item.current {
-            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #2874a6 100%);
             color: white;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
             transform: scale(1.05);
@@ -1590,7 +1598,7 @@ body { transition: background 0.3s, color 0.3s; }
             color: #94a3b8;
         }
         
-        body.dark-mode .step-item.completed { background: #166534; color: #dcfce7; }
+        body.dark-mode .step-item.completed { background: #166534; color: #d4e8f7; }
         body.dark-mode .step-item.upcoming { background: #2d2d44; color: #64748b; }
         
         .step-number {
@@ -1611,7 +1619,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .step-item.current .step-number {
             background:var(--rdx-bg-card);
-            color: #14b8a6;
+            color: #3a90c0;
         }
         
         .step-item.upcoming .step-number {
@@ -1632,7 +1640,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Floating Case Header */
         .case-header-bar {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             color: white;
             padding: 12px 20px;
             display: flex;
@@ -1660,7 +1668,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+            background: linear-gradient(135deg, #5ba3cc 0%, #3a90c0 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1705,12 +1713,12 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .header-btn.evidence-btn {
-            background: linear-gradient(135deg, #059669, #0d9488);
+            background: linear-gradient(135deg, #1f5f8b, #2874a6);
             animation: pulse-evidence 2s infinite;
         }
         
         .header-btn.evidence-btn:hover {
-            background: linear-gradient(135deg, #047857, #0f766e);
+            background: linear-gradient(135deg, #1a4971, #1f5f8b);
         }
         
         @keyframes pulse-evidence {
@@ -1804,8 +1812,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .quick-action-btn:hover {
-            border-color: #14b8a6;
-            background: #f0fdfa;
+            border-color: #3a90c0;
+            background: #f0f7fc;
         }
         
         .quick-action-btn .icon {
@@ -1864,7 +1872,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Enhanced Buttons */
         .btn-primary-modern {
-            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #2874a6 100%);
             color: white;
             padding: 14px 28px;
             border-radius: 12px;
@@ -1901,9 +1909,9 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .btn-secondary-modern:hover {
-            border-color: #14b8a6;
-            color: #14b8a6;
-            background: #f0fdfa;
+            border-color: #3a90c0;
+            color: #3a90c0;
+            background: #f0f7fc;
         }
         
         body.dark-mode .btn-secondary-modern {
@@ -1927,9 +1935,9 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .dx-pill.likely {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            background: linear-gradient(135deg, #d4e8f7 0%, #a3cfe6 100%);
             color: #166534;
-            border-color: var(--rdx-teal-light,#ccfbf1);
+            border-color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .dx-pill.must-not-miss {
@@ -1964,7 +1972,7 @@ body { transition: background 0.3s, color 0.3s; }
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             color: white;
             padding: 12px 20px;
             border-radius: 50px;
@@ -2039,7 +2047,7 @@ body { transition: background 0.3s, color 0.3s; }
             height: 120px;
             border-radius: 50%;
             background: conic-gradient(
-                var(--score-color, #14b8a6) calc(var(--score, 0) * 3.6deg),
+                var(--score-color, #3a90c0) calc(var(--score, 0) * 3.6deg),
                 #e5e7eb calc(var(--score, 0) * 3.6deg)
             );
             display: flex;
@@ -2123,13 +2131,13 @@ body { transition: background 0.3s, color 0.3s; }
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--accent-color, #14b8a6);
+            background: var(--accent-color, #3a90c0);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
         
         .menu-card-modern:hover {
-            border-color: var(--accent-color, #14b8a6);
+            border-color: var(--accent-color, #3a90c0);
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.12);
         }
@@ -2184,7 +2192,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .breadcrumb-item.active {
-            color: #14b8a6;
+            color: #3a90c0;
             font-weight: 600;
         }
         
@@ -2273,7 +2281,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .patient-status.status-improving {
-            background: #dcfce7;
+            background: #d4e8f7;
             color: #166534;
         }
         
@@ -2310,7 +2318,7 @@ body { transition: background 0.3s, color 0.3s; }
         .day-node.current {
             background:var(--rdx-bg-card);
             box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-            border: 2px solid #14b8a6;
+            border: 2px solid #3a90c0;
         }
         
         .day-node.completed {
@@ -2358,7 +2366,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .day-outcome.good {
-            background: #dcfce7;
+            background: #d4e8f7;
             color: #166534;
         }
         
@@ -2442,7 +2450,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Nurse Report */
         .nurse-report {
-            border-left: 4px solid #14b8a6;
+            border-left: 4px solid #3a90c0;
         }
         
         /* Day Labs */
@@ -2472,7 +2480,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .day-lab-item.down {
-            border-left: 3px solid #14b8a6;
+            border-left: 3px solid #3a90c0;
         }
         
         .lab-name {
@@ -2490,7 +2498,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .day-lab-item.up .lab-trend { color: #ef4444; }
-        .day-lab-item.down .lab-trend { color: #14b8a6; }
+        .day-lab-item.down .lab-trend { color: #3a90c0; }
         
         .lab-flag {
             font-size: 0.7rem;
@@ -2504,8 +2512,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .lab-flag.LOW {
-            background: #ccfbf1;
-            color: #115e59;
+            background: #d4e8f7;
+            color: #1a4971;
         }
         
         .lab-flag.CRITICAL {
@@ -2540,8 +2548,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .decision-option:hover {
-            border-color: #14b8a6;
-            background: #f0fdfa;
+            border-color: #3a90c0;
+            background: #f0f7fc;
             transform: translateX(4px);
         }
         
@@ -2582,7 +2590,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .decision-choice {
-            color: #14b8a6;
+            color: #3a90c0;
         }
         
         /* ============================================================
@@ -2741,7 +2749,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%);
             color: white;
             border: none;
             font-size: 1.5rem;
@@ -2961,7 +2969,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .command-result.selected {
             background: #e0f2fe;
-            border-left: 3px solid #14b8a6;
+            border-left: 3px solid #3a90c0;
             padding-left: 17px;
         }
         
@@ -2971,8 +2979,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body.dark-mode .command-result.selected {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
-            border-left: 3px solid #2dd4bf;
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
+            border-left: 3px solid #5ba3cc;
             padding-left: 17px;
         }
         
@@ -3024,7 +3032,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Quick Resume Banner */
         .quick-resume-banner {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
             border: 2px solid #86efac;
             border-radius: 16px;
             padding: 16px 20px;
@@ -3064,17 +3072,17 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body.dark-mode .quick-resume-text h4 {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .quick-resume-text p {
             margin: 0;
             font-size: 0.85rem;
-            color: #15803d;
+            color: #1a4971;
         }
         
         body.dark-mode .quick-resume-text p {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         /* Case Filter Bar */
@@ -3110,7 +3118,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .filter-search:focus {
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .filter-dropdown {
@@ -3148,11 +3156,11 @@ body { transition: background 0.3s, color 0.3s; }
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--path-color, #14b8a6);
+            background: var(--path-color, #3a90c0);
         }
         
         .learning-path-card:hover {
-            border-color: var(--path-color, #14b8a6);
+            border-color: var(--path-color, #3a90c0);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
@@ -3192,7 +3200,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .learning-path-progress-fill {
             height: 100%;
-            background: var(--path-color, #14b8a6);
+            background: var(--path-color, #3a90c0);
             border-radius: 4px;
             transition: width 0.5s ease;
         }
@@ -3206,8 +3214,8 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Contextual Tips */
         .contextual-tip {
-            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-            border-left: 4px solid #14b8a6;
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+            border-left: 4px solid #3a90c0;
             border-radius: 0 12px 12px 0;
             padding: 16px;
             margin-bottom: 16px;
@@ -3217,7 +3225,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body.dark-mode .contextual-tip {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
         }
         
         .contextual-tip-icon {
@@ -3232,11 +3240,11 @@ body { transition: background 0.3s, color 0.3s; }
         .contextual-tip-title {
             font-weight: 600;
             margin-bottom: 4px;
-            color: #115e59;
+            color: #1a4971;
         }
         
         body.dark-mode .contextual-tip-title {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .contextual-tip-text {
@@ -3245,13 +3253,13 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body.dark-mode .contextual-tip-text {
-            color: #99f6e4;
+            color: #a3cfe6;
         }
         
         .contextual-tip-dismiss {
             background: none;
             border: none;
-            color: #14b8a6;
+            color: #3a90c0;
             cursor: pointer;
             font-size: 1.2rem;
             padding: 4px;
@@ -3281,7 +3289,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .breadcrumb-link:hover {
-            color: #14b8a6;
+            color: #3a90c0;
         }
         
         .breadcrumb-separator {
@@ -3312,7 +3320,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .bookmark-btn.active {
-            color: #0f766e;
+            color: #1f5f8b;
         }
         
         /* ============================================================
@@ -3438,7 +3446,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .image-quiz-option.selected {
-            border-color: #14b8a6;
+            border-color: #3a90c0;
             background: rgba(59, 130, 246, 0.2);
         }
         
@@ -3460,7 +3468,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .image-quiz-feedback.correct {
-            background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+            background: linear-gradient(135deg, #166534 0%, #1a4971 100%);
         }
         
         .image-quiz-feedback.incorrect {
@@ -3502,8 +3510,8 @@ body { transition: background 0.3s, color 0.3s; }
             color: white;
         }
         
-        .quiz-type-badge.xray { background: linear-gradient(135deg, #14b8a6, #0f766e); }
-        .quiz-type-badge.ct { background: linear-gradient(135deg, #8b5cf6, #14b8a6); }
+        .quiz-type-badge.xray { background: linear-gradient(135deg, #3a90c0, #1f5f8b); }
+        .quiz-type-badge.ct { background: linear-gradient(135deg, #8b5cf6, #3a90c0); }
         
         .quiz-stage-label {
             color: #94a3b8;
@@ -3538,7 +3546,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .quiz-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
+            background: linear-gradient(90deg, #2874a6, #5ba3cc);
             border-radius: 4px;
             transition: width 0.5s ease;
         }
@@ -3570,15 +3578,15 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .stage-marker.completed {
-            background: #10b981;
+            background: #2874a6;
             color: white;
-            border-color: #10b981;
+            border-color: #2874a6;
         }
         
         .stage-marker.current {
-            background: #14b8a6;
+            background: #3a90c0;
             color: white;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
             transform: scale(1.2);
         }
         
@@ -3733,7 +3741,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .interpretation-textarea:focus {
             outline: none;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .interpretation-textarea::placeholder {
@@ -3749,8 +3757,8 @@ body { transition: background 0.3s, color 0.3s; }
             border-left: 4px solid;
         }
         
-        .feedback-panel.excellent { border-left-color: #10b981; }
-        .feedback-panel.good { border-left-color: #0f766e; }
+        .feedback-panel.excellent { border-left-color: #2874a6; }
+        .feedback-panel.good { border-left-color: #1f5f8b; }
         .feedback-panel.needs-work { border-left-color: #ef4444; }
         
         .feedback-header {
@@ -3779,8 +3787,8 @@ body { transition: background 0.3s, color 0.3s; }
             font-size: 0.95rem;
         }
         
-        .findings-section.found h4 { color: #10b981; }
-        .findings-section.missed h4 { color: #0f766e; }
+        .findings-section.found h4 { color: #2874a6; }
+        .findings-section.missed h4 { color: #1f5f8b; }
         
         .finding-tags {
             display: flex;
@@ -3797,8 +3805,8 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .finding-tag.critical { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; }
-        .finding-tag.supportive { background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: var(--rdx-teal-light,#ccfbf1); }
-        .finding-tag.pertinent-negative { background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--rdx-teal-light,#ccfbf1); }
+        .finding-tag.supportive { background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: var(--rdx-teal-light,#d4e8f7); }
+        .finding-tag.pertinent-negative { background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--rdx-teal-light,#d4e8f7); }
         
         .expert-box {
             background: rgba(59, 130, 246, 0.1);
@@ -3809,7 +3817,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .expert-box h4 {
             margin: 0 0 10px 0;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .expert-box p {
@@ -3835,7 +3843,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .stage-btn.primary {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #3a90c0, #2874a6);
             color: white;
         }
         
@@ -3878,7 +3886,7 @@ body { transition: background 0.3s, color 0.3s; }
         .diff-rank {
             width: 28px;
             height: 28px;
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #3a90c0, #2874a6);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -3948,8 +3956,8 @@ body { transition: background 0.3s, color 0.3s; }
             display: inline-block;
         }
         
-        .relevance-badge.high { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-        .relevance-badge.medium { background: rgba(245, 158, 11, 0.2); color: #0f766e; }
+        .relevance-badge.high { background: rgba(16, 185, 129, 0.2); color: #5ba3cc; }
+        .relevance-badge.medium { background: rgba(245, 158, 11, 0.2); color: #1f5f8b; }
         .relevance-badge.low { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
         
         .reasoning-note {
@@ -3960,13 +3968,13 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .anatomy-link {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             font-size: 0.85rem;
             margin-top: 6px;
         }
         
         .clinical-pearl {
-            color: #0f766e;
+            color: #1f5f8b;
             font-size: 0.85rem;
             background: rgba(245, 158, 11, 0.1);
             padding: 8px 12px;
@@ -4056,7 +4064,7 @@ body { transition: background 0.3s, color 0.3s; }
         .diagnosis-banner h3 {
             margin: 0;
             font-size: 1.8rem;
-            color: #34d399;
+            color: #5ba3cc;
         }
         
         .score-display {
@@ -4073,7 +4081,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: #0f766e;
+            background: #1f5f8b;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -4103,7 +4111,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .teaching-section h4 {
             margin: 0 0 12px 0;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .teaching-section p {
@@ -4146,8 +4154,8 @@ body { transition: background 0.3s, color 0.3s; }
             color: white;
         }
         
-        .eiq-badge.xray { background: linear-gradient(135deg, #14b8a6, #0f766e); }
-        .eiq-badge.ct { background: linear-gradient(135deg, #8b5cf6, #14b8a6); }
+        .eiq-badge.xray { background: linear-gradient(135deg, #3a90c0, #1f5f8b); }
+        .eiq-badge.ct { background: linear-gradient(135deg, #8b5cf6, #3a90c0); }
         
         .eiq-stage-label {
             color: #94a3b8;
@@ -4179,7 +4187,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
+            background: linear-gradient(90deg, #2874a6, #5ba3cc);
             transition: width 0.5s ease;
         }
         
@@ -4280,7 +4288,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-textarea:focus {
             outline: none;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .eiq-feedback {
@@ -4291,8 +4299,8 @@ body { transition: background 0.3s, color 0.3s; }
             border-left: 4px solid;
         }
         
-        .eiq-feedback.excellent { border-left-color: #10b981; }
-        .eiq-feedback.good { border-left-color: #0f766e; }
+        .eiq-feedback.excellent { border-left-color: #2874a6; }
+        .eiq-feedback.good { border-left-color: #1f5f8b; }
         .eiq-feedback.needs-work { border-left-color: #ef4444; }
         
         .eiq-feedback-header {
@@ -4321,8 +4329,8 @@ body { transition: background 0.3s, color 0.3s; }
             font-size: 0.95rem;
         }
         
-        .eiq-found h4 { color: #10b981; }
-        .eiq-missed h4 { color: #0f766e; }
+        .eiq-found h4 { color: #2874a6; }
+        .eiq-missed h4 { color: #1f5f8b; }
         
         .eiq-finding-list {
             display: flex;
@@ -4351,7 +4359,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-expert h4 {
             margin: 0 0 10px 0;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .eiq-expert p {
@@ -4376,7 +4384,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .eiq-btn.primary {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #3a90c0, #2874a6);
             color: white;
         }
         
@@ -4428,7 +4436,7 @@ body { transition: background 0.3s, color 0.3s; }
         .eiq-diff-rank {
             width: 28px;
             height: 28px;
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #3a90c0, #2874a6);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -4526,8 +4534,8 @@ body { transition: background 0.3s, color 0.3s; }
             display: inline-block;
         }
         
-        .eiq-answer-relevance.high { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-        .eiq-answer-relevance.medium { background: rgba(245, 158, 11, 0.2); color: #0f766e; }
+        .eiq-answer-relevance.high { background: rgba(16, 185, 129, 0.2); color: #5ba3cc; }
+        .eiq-answer-relevance.medium { background: rgba(245, 158, 11, 0.2); color: #1f5f8b; }
         .eiq-answer-relevance.low { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
         
         /* History Insights */
@@ -4600,7 +4608,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-exam-btn:hover:not(.disabled) {
             background: rgba(59, 130, 246, 0.2);
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .eiq-exam-btn.disabled {
@@ -4623,18 +4631,18 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .eiq-exam-result {
-            color: #34d399;
+            color: #5ba3cc;
             margin-bottom: 8px;
         }
         
         .eiq-exam-anatomy {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             font-size: 0.85rem;
             margin-bottom: 6px;
         }
         
         .eiq-clinical-pearl {
-            color: #0f766e;
+            color: #1f5f8b;
             font-size: 0.85rem;
             background: rgba(245, 158, 11, 0.1);
             padding: 8px 12px;
@@ -4672,7 +4680,7 @@ body { transition: background 0.3s, color 0.3s; }
         .eiq-diagnosis-reveal h3 {
             margin: 0;
             font-size: 1.8rem;
-            color: #34d399;
+            color: #5ba3cc;
         }
         
         .eiq-score-summary {
@@ -4689,7 +4697,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: #0f766e;
+            background: #1f5f8b;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -4719,7 +4727,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .eiq-section h4 {
             margin: 0 0 12px 0;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .eiq-section p {
@@ -4755,7 +4763,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-case-badge {
-            background: linear-gradient(135deg, #8b5cf6 0%, #14b8a6 100%);
+            background: linear-gradient(135deg, #8b5cf6 0%, #3a90c0 100%);
             color: white;
             padding: 6px 16px;
             border-radius: 20px;
@@ -4871,7 +4879,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-attribution a {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             text-decoration: none;
         }
         
@@ -4886,7 +4894,7 @@ body { transition: background 0.3s, color 0.3s; }
             background: rgba(59, 130, 246, 0.2);
             border: 1px solid rgba(59, 130, 246, 0.4);
             border-radius: 8px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.2s;
@@ -4902,7 +4910,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            background: linear-gradient(135deg, #1f5f8b 0%, #2874a6 100%);
             padding: 12px 24px;
             border-radius: 12px;
             color: white;
@@ -4927,7 +4935,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body.dark-mode .free-edu-badge {
-            background: linear-gradient(135deg, #047857 0%, #059669 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
         }
         
         .imaging-instruction {
@@ -4987,7 +4995,7 @@ body { transition: background 0.3s, color 0.3s; }
         .imaging-primary-btn {
             width: 100%;
             padding: 16px 24px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #14b8a6 100%);
+            background: linear-gradient(135deg, #8b5cf6 0%, #3a90c0 100%);
             color: white;
             border: none;
             border-radius: 12px;
@@ -5031,10 +5039,10 @@ body { transition: background 0.3s, color 0.3s; }
             margin-bottom: 24px;
         }
         
-        .imaging-score-display.excellent { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
-        .imaging-score-display.good { background: #0f766e; }
+        .imaging-score-display.excellent { background: linear-gradient(135deg, #1f5f8b 0%, #2874a6 100%); }
+        .imaging-score-display.good { background: #1f5f8b; }
         .imaging-score-display.fair { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
-        .imaging-score-display.needs-work { background:linear-gradient(135deg,#0f766e,#0d9488); }
+        .imaging-score-display.needs-work { background:linear-gradient(135deg,#1f5f8b,#2874a6); }
         
         .imaging-score-circle {
             width: 100px;
@@ -5130,7 +5138,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .finding-badge.present { background: #22c55e; }
-        .finding-badge.absent { background: #14b8a6; }
+        .finding-badge.absent { background: #3a90c0; }
         .finding-badge.technical { background: #8b5cf6; }
         
         .finding-points {
@@ -5148,7 +5156,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-teaching-box h4 {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             margin: 0 0 8px 0;
         }
         
@@ -5308,7 +5316,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 12px;
             background: rgba(34, 197, 94, 0.1);
             border-radius: 8px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             font-size: 0.95rem;
         }
         
@@ -5346,7 +5354,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-weight: 500;
         }
         
-        .impact-chip.up { background: rgba(34, 197, 94, 0.2); color: var(--rdx-teal-light,#ccfbf1); }
+        .impact-chip.up { background: rgba(34, 197, 94, 0.2); color: var(--rdx-teal-light,#d4e8f7); }
         .impact-chip.down { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
         
         /* Dynamic Differential Display */
@@ -5393,7 +5401,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .ddi-bar {
             height: 100%;
-            background: linear-gradient(90deg, #8b5cf6, #14b8a6);
+            background: linear-gradient(90deg, #8b5cf6, #3a90c0);
             border-radius: 3px;
             transition: width 0.5s ease;
         }
@@ -5467,7 +5475,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 12px;
             background: rgba(34, 197, 94, 0.1);
             border-radius: 8px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .pe-correlation {
@@ -5475,7 +5483,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 12px;
             background: rgba(59, 130, 246, 0.1);
             border-radius: 8px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             font-size: 0.9rem;
         }
         
@@ -5483,7 +5491,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-weight: 600;
             font-size: 0.8rem;
             margin-bottom: 4px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .pe-anatomy-note {
@@ -5621,7 +5629,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .improvement-banner {
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            background: linear-gradient(135deg, #1f5f8b 0%, #2874a6 100%);
             color: white;
             padding: 16px;
             border-radius: 12px;
@@ -5631,7 +5639,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .success-banner {
-            background: #0f766e;
+            background: #1f5f8b;
             color: white;
             padding: 16px;
             border-radius: 12px;
@@ -5649,7 +5657,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-management-box h3 {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             margin: 0 0 8px 0;
         }
         
@@ -5666,7 +5674,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .imaging-teaching-section h3 {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             margin: 0 0 12px 0;
         }
         
@@ -5761,7 +5769,7 @@ body { transition: background 0.3s, color 0.3s; }
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%);
             color: white;
         }
         
@@ -5798,7 +5806,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .reference-cards-search input:focus {
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .reference-cards-content {
@@ -5892,7 +5900,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-size: 0.8rem;
         }
         
-        .reference-score-badge.low { background: #dcfce7; color: #166534; }
+        .reference-score-badge.low { background: #d4e8f7; color: #166534; }
         .reference-score-badge.medium { background: #fef3c7; color: #92400e; }
         .reference-score-badge.high { background: #fee2e2; color: #991b1b; }
         
@@ -5903,7 +5911,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #2874a6 0%, #1f5f8b 100%);
             color: white;
             border: none;
             font-size: 1.3rem;
@@ -5947,7 +5955,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -5985,7 +5993,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .sbar-step.active {
-            border-left-color: #14b8a6;
+            border-left-color: #3a90c0;
             background: rgba(59, 130, 246, 0.1);
         }
         
@@ -6013,7 +6021,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .sbar-step.active .sbar-letter {
-            background: #14b8a6;
+            background: #3a90c0;
         }
         
         .sbar-step.completed .sbar-letter {
@@ -6037,7 +6045,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .sbar-input:focus {
-            border-color: #14b8a6;
+            border-color: #3a90c0;
             outline: none;
         }
         
@@ -6048,7 +6056,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .consult-response {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             border-radius: 12px;
             padding: 16px;
             margin-top: 20px;
@@ -6065,7 +6073,7 @@ body { transition: background 0.3s, color 0.3s; }
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: #14b8a6;
+            background: #3a90c0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -6076,7 +6084,7 @@ body { transition: background 0.3s, color 0.3s; }
            ============================================================ */
         
         .spaced-rep-banner {
-            background:linear-gradient(135deg,#0f766e,#14b8a6);
+            background:linear-gradient(135deg,#1f5f8b,#3a90c0);
             border-radius: 16px;
             padding: 20px;
             color: white;
@@ -6177,7 +6185,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .interruption-header.nurse {
-            background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%);
             color: white;
         }
         
@@ -6247,7 +6255,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .interruption-option:hover {
-            border-color: #14b8a6;
+            border-color: #3a90c0;
             transform: translateX(4px);
         }
         
@@ -6263,7 +6271,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .interruption-feedback.good {
-            background: #dcfce7;
+            background: #d4e8f7;
             color: #166534;
         }
         
@@ -6282,7 +6290,7 @@ body { transition: background 0.3s, color 0.3s; }
            ============================================================ */
         
         .consequences-container {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             border-radius: 16px;
             padding: 24px;
             margin: 20px 0;
@@ -6462,7 +6470,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .outcome-path.correct .timeline-step.final .timeline-event {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .outcome-path.missed .timeline-step.final .timeline-event {
@@ -6509,8 +6517,8 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Near Miss Alert */
         .near-miss-alert {
-            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-            border: 2px solid #0f766e;
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+            border: 2px solid #1f5f8b;
             border-radius: 12px;
             padding: 16px;
             margin-top: 16px;
@@ -6558,7 +6566,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .reflection-point .icon {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         /* Collapse/Expand */
@@ -6608,7 +6616,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .branch-node.decision {
-            background: #14b8a6;
+            background: #3a90c0;
             font-weight: 600;
         }
         
@@ -6662,7 +6670,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .quiz-type-badge.xray {
-            background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%);
         }
         
         .quiz-type-badge.ct {
@@ -6699,7 +6707,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .quiz-progress-fill {
-            background: linear-gradient(90deg, #14b8a6, #8b5cf6);
+            background: linear-gradient(90deg, #3a90c0, #8b5cf6);
             height: 100%;
             border-radius: 4px;
             transition: width 0.5s ease;
@@ -6729,7 +6737,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .stage-marker.completed {
-            background: #14b8a6;
+            background: #3a90c0;
         }
         
         .stage-marker.current {
@@ -6883,7 +6891,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .interpretation-textarea:focus {
             outline: none;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .interpretation-textarea::placeholder {
@@ -6902,11 +6910,11 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .interpretation-feedback.good {
-            border: 2px solid #14b8a6;
+            border: 2px solid #3a90c0;
         }
         
         .interpretation-feedback.needs-work {
-            border: 2px solid #0f766e;
+            border: 2px solid #1f5f8b;
         }
         
         .feedback-header {
@@ -6960,12 +6968,12 @@ body { transition: background 0.3s, color 0.3s; }
         
         .finding-tag.supportive {
             background: rgba(59, 130, 246, 0.2);
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .finding-tag.pertinent-negative {
             background: rgba(34, 197, 94, 0.2);
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .finding-tag.missed {
@@ -6978,7 +6986,7 @@ body { transition: background 0.3s, color 0.3s; }
             border: 1px solid rgba(34, 197, 94, 0.3);
             border-radius: 8px;
             padding: 10px 16px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             font-weight: 500;
             margin-bottom: 16px;
         }
@@ -7030,7 +7038,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .differential-item.dragging {
             opacity: 0.5;
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .drag-handle {
@@ -7108,7 +7116,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .question-btn:hover:not(.disabled) {
             background: rgba(59, 130, 246, 0.1);
-            border-color: #14b8a6;
+            border-color: #3a90c0;
         }
         
         .question-btn.disabled {
@@ -7140,7 +7148,7 @@ body { transition: background 0.3s, color 0.3s; }
             background:var(--rdx-bg-card);
             border-radius:12px;
             padding: 14px;
-            border-left: 4px solid #14b8a6;
+            border-left: 4px solid #3a90c0;
         }
         
         .history-answer.high {
@@ -7148,7 +7156,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .history-answer.medium {
-            border-left-color: #0f766e;
+            border-left-color: #1f5f8b;
         }
         
         .history-answer.low {
@@ -7227,7 +7235,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .vitals-card h4 {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             margin: 0 0 12px 0;
             font-size: 0.95rem;
         }
@@ -7333,11 +7341,11 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .exam-finding.high {
-            border-left-color: #14b8a6;
+            border-left-color: #3a90c0;
         }
         
         .exam-finding.medium {
-            border-left-color: #0f766e;
+            border-left-color: #1f5f8b;
         }
         
         .finding-name {
@@ -7402,7 +7410,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .diagnosis-reveal.close {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
-            border: 2px solid #14b8a6;
+            border: 2px solid #3a90c0;
         }
         
         .reveal-icon {
@@ -7423,7 +7431,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .diagnosis-reveal.close .primary-diagnosis {
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         
         .score-card {
@@ -7513,7 +7521,7 @@ body { transition: background 0.3s, color 0.3s; }
             border: 1px solid rgba(34, 197, 94, 0.3);
             border-radius: 8px;
             padding: 12px 16px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             text-align: center;
             margin-top: 16px;
         }
@@ -7572,7 +7580,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #14b8a6 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #3a90c0 0%, #8b5cf6 100%);
             border: none;
             color: white;
             padding: 14px 28px;
@@ -7611,7 +7619,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .action-hint {
-            color: #0f766e;
+            color: #1f5f8b;
             text-align: center;
             margin: 0;
         }
@@ -7655,7 +7663,7 @@ body { transition: background 0.3s, color 0.3s; }
         .stat-value {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #0f766e;
+            color: #1f5f8b;
         }
         
         .stat-label {
@@ -7671,7 +7679,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         body.dark-mode .stat-value {
-            color: #14b8a6;
+            color: #3a90c0;
         }
         
         body.dark-mode .stat-label {
@@ -7697,7 +7705,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Professional Primary Button */
         .btn-primary {
-            background: linear-gradient(135deg, #0f766e 0%, #0891b2 100%);
+            background: linear-gradient(135deg, #1f5f8b 0%, #0891b2 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 8px;
@@ -7744,17 +7752,17 @@ body { transition: background 0.3s, color 0.3s; }
             align-items: center;
             gap: 4px;
             padding: 4px 10px;
-            background: #f0fdfa;
-            border: 1px solid #99f6e4;
+            background: #f0f7fc;
+            border: 1px solid #a3cfe6;
             border-radius: 4px;
             font-size: 0.75rem;
-            color: #0f766e;
+            color: #1f5f8b;
         }
         
         body.dark-mode .finding-tag {
             background: #134e4a;
-            border-color: #14b8a6;
-            color: #99f6e4;
+            border-color: #3a90c0;
+            color: #a3cfe6;
         }
         
         /* ============================================
@@ -7791,7 +7799,7 @@ body { transition: background 0.3s, color 0.3s; }
             justify-content: space-between;
             align-items: center;
             padding: 12px 20px;
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             color: white;
         }
         
@@ -7819,7 +7827,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .lab-report-header {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             color: white;
             padding: 15px 20px;
             border-bottom: 3px solid #f59e0b;
@@ -7869,7 +7877,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-family:var(--rdx-font);
             font-size: 12px;
             color: #374151;
-            border-left: 4px solid #14b8a6;
+            border-left: 4px solid #3a90c0;
         }
         
         .lab-result-table {
@@ -7908,7 +7916,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .lab-value-low {
-            color: #0d9488;
+            color: #2874a6;
             font-weight: bold;
         }
         
@@ -7946,10 +7954,10 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .rad-report-header {
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             color: white;
             padding: 15px 20px;
-            border-bottom: 3px solid #10b981;
+            border-bottom: 3px solid #2874a6;
         }
         
         .rad-report-hospital {
@@ -8065,7 +8073,7 @@ body { transition: background 0.3s, color 0.3s; }
             align-items: center;
             gap: 6px;
             padding: 6px 12px;
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             color: white;
             border: none;
             border-radius: 4px;
@@ -8119,7 +8127,7 @@ body { transition: background 0.3s, color 0.3s; }
         .history-feedback-container .score {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #115e59;
+            color: #1a4971;
         }
         
         .history-feedback-container .grade {
@@ -8129,8 +8137,8 @@ body { transition: background 0.3s, color 0.3s; }
             font-size: 1rem;
         }
         
-        .history-feedback-container .grade-a { background: #dcfce7; color: #166534; }
-        .history-feedback-container .grade-b { background: #ccfbf1; color: #115e59; }
+        .history-feedback-container .grade-a { background: #d4e8f7; color: #166534; }
+        .history-feedback-container .grade-b { background: #d4e8f7; color: #1a4971; }
         .history-feedback-container .grade-c { background: #fef9c3; color: #854d0e; }
         .history-feedback-container .grade-d { background: #fed7aa; color: #9a3412; }
         .history-feedback-container .grade-f { background: #fecaca; color: #991b1b; }
@@ -8164,7 +8172,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .history-feedback-container .progress {
             height: 100%;
-            background: linear-gradient(90deg, #14b8a6, #0f766e);
+            background: linear-gradient(90deg, #3a90c0, #1f5f8b);
             border-radius: 4px;
             transition: width 0.3s ease;
         }
@@ -8188,12 +8196,12 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .history-feedback-container .strengths {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
+            background: #f0f7fc;
+            border: 1px solid #a3cfe6;
         }
         
         .history-feedback-container .strengths h4 { color: #166534; }
-        .history-feedback-container .strengths ul { color: #15803d; }
+        .history-feedback-container .strengths ul { color: #1a4971; }
         
         .history-feedback-container .improvements {
             background: #fefce8;
@@ -8236,12 +8244,12 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .history-feedback-container .asked-questions {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
+            background: #f0f7fc;
+            border: 1px solid #a3cfe6;
         }
         
         .history-feedback-container .asked-questions h4 { color: #166534; }
-        .history-feedback-container .asked-questions ul { color: #15803d; list-style: none; padding: 0; }
+        .history-feedback-container .asked-questions ul { color: #1a4971; list-style: none; padding: 0; }
         .history-feedback-container .asked-questions li::before { content: "✓ "; color: #22c55e; }
         
         /* Question Coverage Display */
@@ -8263,7 +8271,7 @@ body { transition: background 0.3s, color 0.3s; }
         }
         
         .question-coverage .coverage-category.complete {
-            background: #dcfce7;
+            background: #d4e8f7;
             color: #166534;
         }
         
@@ -8279,15 +8287,15 @@ body { transition: background 0.3s, color 0.3s; }
         
         /* Follow-up Suggestions */
         .follow-up-suggestions {
-            background: #f0fdfa;
-            border: 1px solid #99f6e4;
+            background: #f0f7fc;
+            border: 1px solid #a3cfe6;
             border-radius: 8px;
             padding: 12px;
             margin-top: 8px;
         }
         
         .follow-up-suggestions h5 {
-            color: #115e59;
+            color: #1a4971;
             font-size: 0.75rem;
             margin-bottom: 6px;
         }
@@ -8295,14 +8303,14 @@ body { transition: background 0.3s, color 0.3s; }
         .follow-up-suggestions ul {
             margin: 0;
             padding-left: 16px;
-            color: #14b8a6;
+            color: #3a90c0;
             font-size: 0.75rem;
         }
         
         /* Doorknob Moment */
         .doorknob-moment {
             background: #fef3c7;
-            border: 2px solid #0f766e;
+            border: 2px solid #1f5f8b;
             border-radius: 12px;
             padding: 16px;
             margin-top: 12px;
@@ -8347,7 +8355,7 @@ body { transition: background 0.3s, color 0.3s; }
             gap: 8px;
             padding: 8px 16px;
             background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 1px solid #0f766e;
+            border: 1px solid #1f5f8b;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.875rem;
@@ -8362,7 +8370,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .learning-hint-panel {
             background: #fffbeb;
-            border: 2px solid #0f766e;
+            border: 2px solid #1f5f8b;
             border-radius: 12px;
             padding: 16px;
             margin: 12px 0;
@@ -8420,7 +8428,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .submit-prompt-banner {
             background: #fef3c7;
-            border: 1px solid #0f766e;
+            border: 1px solid #1f5f8b;
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 12px;
@@ -8453,7 +8461,7 @@ body { transition: background 0.3s, color 0.3s; }
             padding: 6px 12px;
             background: transparent;
             color: #92400e;
-            border: 1px solid #0f766e;
+            border: 1px solid #1f5f8b;
             border-radius:8px;
             cursor: pointer;
             font-size: 0.85rem;
@@ -8473,7 +8481,7 @@ body { transition: background 0.3s, color 0.3s; }
         
         .time-pressure-display.warning {
             background: #fef3c7;
-            border: 2px solid #0f766e;
+            border: 2px solid #1f5f8b;
             animation: pulse 1s infinite;
         }
         
@@ -8563,7 +8571,7 @@ body { transition: background 0.3s, color 0.3s; }
             font-size: 12px;
             font-weight: 600;
             color: #18181b;
-            background: linear-gradient(135deg, #f0fdf4, #ede9fe, #ccfbf1);
+            background: linear-gradient(135deg, #f0f7fc, #ede9fe, #d4e8f7);
             border: 1px solid #e4e4e7;
             border-radius: 8px;
             cursor: pointer;
@@ -8630,9 +8638,9 @@ body { transition: background 0.3s, color 0.3s; }
             background: #3f3f46;
             color: #f4f4f5;
         }
-        .dx-menu-item.mechanism { border-left-color: #10b981; }
+        .dx-menu-item.mechanism { border-left-color: #2874a6; }
         .dx-menu-item.coach { border-left-color: #8b5cf6; }
-        .dx-menu-item.scoreboard { border-left-color: #0f766e; }
+        .dx-menu-item.scoreboard { border-left-color: #1f5f8b; }
         .dx-menu-item.predict { border-left-color: #06b6d4; }
         .dx-menu-item.fingerprint { border-left-color: #8b5cf6; }
         .dx-menu-item.innovations { border-left-color: #ec4899; }
@@ -8673,12 +8681,7 @@ body { transition: background 0.3s, color 0.3s; }
             height: 70px;
             width: auto;
         }
-        .dark .reasondx-logo-container svg text {
-            fill: #e2e8f0 !important;
-        }
-        .dark .reasondx-logo-container svg rect {
-            fill: #2874a6 !important;
-        }
+        .dark .reasondx-logo-container svg text,
         .dark .reasondx-logo-container svg line,
         .dark .reasondx-logo-container svg path {
             stroke: #fafafa;
@@ -8706,10 +8709,10 @@ body { transition: background 0.3s, color 0.3s; }
     
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
+    --primary: #2874a6;
+    --primary-light: #7cb8d9;
+    --primary-dark: #1f5f8b;
+    --primary-bg: #f0f7fc;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
@@ -8720,7 +8723,7 @@ body { transition: background 0.3s, color 0.3s; }
     --border-light: #f1f5f9;
     --nav-text: #1e293b;
     --nav-link: #64748b;
-    --nav-active-bg: #10b981;
+    --nav-active-bg: #2874a6;
     --nav-active-text: #ffffff;
     --shadow: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
@@ -8732,7 +8735,7 @@ body { transition: background 0.3s, color 0.3s; }
     --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
     --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
     --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+    --nav-active-bg: #2874a6; --nav-active-text: #ffffff;
 }
 
 
@@ -8885,13 +8888,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <body class="p-4 md:p-8" data-theme="light">
 <!-- Mastery Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
-  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(40,116,166,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
     <div style="font-size:28px;flex-shrink:0;">📊</div>
     <div style="flex:1;min-width:0;">
-      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
       <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
     </div>
-    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+    <div style="color:var(--rdx-teal,#2874a6);font-size:20px;flex-shrink:0;">→</div>
   </a>
 </div>
 
@@ -8908,10 +8911,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <header class="reasondx-logo-header">
         <div class="reasondx-logo-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="">
-            <text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
-            <rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/>
-        </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style=""><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
         </div>
         <div class="reasondx-tagline">Asking the right questions can change everything.</div>
     </header>
@@ -9202,7 +9204,9 @@ return true;
                 <header class="border-b border-zinc-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
                     <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 50px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style="height: 50px; width: auto;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
                         </div>
                         <nav class="flex items-center gap-6">
                             <a href="#features" class="text-zinc-600 hover:text-zinc-900 text-sm">Features</a>
@@ -9386,7 +9390,9 @@ return true;
             app.innerHTML = `
                 <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
                     <div style="text-align: center; color: white;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 60px; width: auto; margin-bottom: 16px; animation: pulse 1.5s infinite;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style="height: 60px; width: auto; margin-bottom: 16px; animation: pulse 1.5s infinite;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
                         <p style="font-size: 1.1rem; opacity: 0.9;">Loading...</p>
                     </div>
                 </div>
@@ -9396,7 +9402,7 @@ return true;
 :root {
     --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
     --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
-    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #3a90c0; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -9405,7 +9411,7 @@ return true;
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
+    --accent: #2874a6; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
@@ -9434,7 +9440,7 @@ body { transition: background 0.3s, color 0.3s; }
                 <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 20px;">
                     <div style="background:var(--rdx-bg-card); border-radius: 24px; padding: 48px; max-width: 500px; width: 100%; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); text-align: center;">
                         
-                        <div style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                        <div style="background: linear-gradient(135deg, #d4e8f7 0%, #a3cfe6 100%); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
                             <span style="font-size: 2.5rem;">✓</span>
                         </div>
                         
@@ -9454,7 +9460,7 @@ body { transition: background 0.3s, color 0.3s; }
                         </div>
                         
                         <button onclick="handleCodeDisplayContinue()"
-                                style="width: 100%; padding: 18px 28px; background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%); color: white; border: none; border-radius:16px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);"
+                                style="width: 100%; padding: 18px 28px; background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%); color: white; border: none; border-radius:16px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);"
                                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(59, 130, 246, 0.4)'"
                                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 14px rgba(59, 130, 246, 0.3)'">
                             Continue to ReasonDx →
@@ -9473,31 +9479,33 @@ body { transition: background 0.3s, color 0.3s; }
                         
                         <!-- Header -->
                         <div style="text-align: center; margin-bottom: 28px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 50px; width: auto; margin: 0 auto 12px;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style="height: 50px; width: auto; margin: 0 auto 12px;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
                             <h1 style="color: #1e293b; font-size: 1.5rem; margin: 0 0 4px 0; font-weight: 700;">New User Registration</h1>
                             <p style="color: #64748b; margin: 0; font-size: 0.9rem;">Create your account to access the platform</p>
                         </div>
                         
                         <!-- Step 1: Consent Form -->
-                        <div style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-radius: 16px; padding: 24px; margin-bottom: 24px; border: 2px solid #5eead4;">
-                            <h2 style="color: #115e59; font-size: 1.1rem; margin: 0 0 12px 0; font-weight: 700; display: flex; align-items: center; gap: 10px;">
-                                <span style="background: #115e59; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">1</span>
+                        <div style="background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); border-radius: 16px; padding: 24px; margin-bottom: 24px; border: 2px solid #7cb8d9;">
+                            <h2 style="color: #1a4971; font-size: 1.1rem; margin: 0 0 12px 0; font-weight: 700; display: flex; align-items: center; gap: 10px;">
+                                <span style="background: #1a4971; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">1</span>
                                 Complete Consent & Survey
                             </h2>
-                            <p style="color: #14b8a6; font-size: 0.9rem; margin: 0 0 16px 0; line-height: 1.6;">
+                            <p style="color: #3a90c0; font-size: 0.9rem; margin: 0 0 16px 0; line-height: 1.6;">
                                 Before registering, please review and accept the terms of service.
                             </p>
                             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                                 <a href="${MS_FORMS_STUDENT}" target="_blank" 
-                                   style="flex: 1; min-width: 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; background: #115e59; color: white; text-decoration: none; border-radius:12px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;"
+                                   style="flex: 1; min-width: 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; background: #1a4971; color: white; text-decoration: none; border-radius:12px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;"
                                    onmouseover="this.style.background='#1e3a8a'"
-                                   onmouseout="this.style.background='#115e59'">
+                                   onmouseout="this.style.background='#1a4971'">
                                     📋 Student Consent & Survey
                                     <span style="font-size: 1.1rem;">↗</span>
                                 </a>
                                 <a href="${MS_FORMS_FACULTY}" target="_blank"
-                                   style="flex: 1; min-width: 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; background:var(--rdx-bg-card); color: #115e59; text-decoration: none; border-radius:12px; font-weight: 600; font-size: 0.95rem; border: 2px solid #115e59; transition: all 0.2s;"
-                                   onmouseover="this.style.background='#f0fdfa'"
+                                   style="flex: 1; min-width: 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; background:var(--rdx-bg-card); color: #1a4971; text-decoration: none; border-radius:12px; font-weight: 600; font-size: 0.95rem; border: 2px solid #1a4971; transition: all 0.2s;"
+                                   onmouseover="this.style.background='#f0f7fc'"
                                    onmouseout="this.style.background='white'">
                                     🎓 Faculty Consent & Survey
                                     <span style="font-size: 1.1rem;">↗</span>
@@ -9519,7 +9527,7 @@ body { transition: background 0.3s, color 0.3s; }
                                     </label>
                                     <input type="text" id="reg-first-name" placeholder="Enter first name"
                                            style="width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius:12px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.2s;"
-                                           onfocus="this.style.borderColor='#14b8a6'" onblur="this.style.borderColor='#e5e7eb'">
+                                           onfocus="this.style.borderColor='#3a90c0'" onblur="this.style.borderColor='#e5e7eb'">
                                 </div>
                                 <div>
                                     <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 6px; font-size: 0.85rem;">
@@ -9527,7 +9535,7 @@ body { transition: background 0.3s, color 0.3s; }
                                     </label>
                                     <input type="text" id="reg-last-name" placeholder="Enter last name"
                                            style="width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius:12px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.2s;"
-                                           onfocus="this.style.borderColor='#14b8a6'" onblur="this.style.borderColor='#e5e7eb'">
+                                           onfocus="this.style.borderColor='#3a90c0'" onblur="this.style.borderColor='#e5e7eb'">
                                 </div>
                             </div>
                             
@@ -9537,7 +9545,7 @@ body { transition: background 0.3s, color 0.3s; }
                                 </label>
                                 <input type="email" id="reg-email" placeholder="your.email@nova.edu"
                                        style="width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius:12px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.2s;"
-                                       onfocus="this.style.borderColor='#14b8a6'" onblur="this.style.borderColor='#e5e7eb'">
+                                       onfocus="this.style.borderColor='#3a90c0'" onblur="this.style.borderColor='#e5e7eb'">
                             </div>
                             
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
@@ -9579,7 +9587,7 @@ body { transition: background 0.3s, color 0.3s; }
                         
                         <!-- Submit Button -->
                         <button id="reg-submit-btn" onclick="handleRegistration()"
-                                style="width: 100%; padding: 18px 28px; background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); color: white; border: none; border-radius:16px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3); margin-bottom: 16px;"
+                                style="width: 100%; padding: 18px 28px; background: linear-gradient(135deg, #065f46 0%, #2874a6 100%); color: white; border: none; border-radius:16px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3); margin-bottom: 16px;"
                                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(5, 150, 105, 0.4)'"
                                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 14px rgba(5, 150, 105, 0.3)'">
                             Register & Get My Code →
@@ -9601,7 +9609,7 @@ body { transition: background 0.3s, color 0.3s; }
 :root {
     --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
     --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
-    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #3a90c0; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -9610,7 +9618,7 @@ body { transition: background 0.3s, color 0.3s; }
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
+    --accent: #2874a6; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
@@ -9642,7 +9650,10 @@ body { transition: background 0.3s, color 0.3s; }
                         
                         <!-- Header -->
                         <div style="text-align: center; margin-bottom: 32px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 80px; width: auto; margin: 0 auto 12px;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 135" style="height: 80px; width: auto; margin: 0 auto 12px;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                              <text x="170" y="130" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-style="italic" fill="currentColor" opacity="0.6" text-anchor="middle">Asking the right questions can change everything.</text>
+                            </svg>
                             <p style="color: #64748b; margin: 0; font-size: 0.95rem;">Welcome back!</p>
                         </div>
                         
@@ -9655,7 +9666,7 @@ body { transition: background 0.3s, color 0.3s; }
                                 <input type="text" id="student-code-input" placeholder="e.g., MED001"
                                        autocomplete="off" autocapitalize="characters"
                                        style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 1.1rem; box-sizing: border-box; transition: border-color 0.2s; text-transform: uppercase; letter-spacing: 2px; text-align: center; font-family: monospace;"
-                                       onfocus="this.style.borderColor='#14b8a6'" onblur="this.style.borderColor='#e5e7eb'">
+                                       onfocus="this.style.borderColor='#3a90c0'" onblur="this.style.borderColor='#e5e7eb'">
                             </div>
                             
                             <!-- Error Message -->
@@ -9663,7 +9674,7 @@ body { transition: background 0.3s, color 0.3s; }
                             
                             <!-- Submit Button -->
                             <button id="auth-submit-btn" type="submit"
-                                    style="width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px;"
+                                    style="width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px;"
                                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px -5px rgba(59,130,246,0.4)'"
                                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                                 Login →
@@ -9696,14 +9707,17 @@ body { transition: background 0.3s, color 0.3s; }
                     
                     <!-- Header -->
                     <div style="text-align: center; margin-bottom: 36px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 90px; width: auto; margin: 0 auto 16px;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 135" style="height: 90px; width: auto; margin: 0 auto 16px;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                              <text x="170" y="130" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-style="italic" fill="currentColor" opacity="0.6" text-anchor="middle">Asking the right questions can change everything.</text>
+                            </svg>
                         <p style="color: #64748b; margin: 0; font-size: 1rem;">Clinical Reasoning Trainer</p>
                     </div>
                     
                     <!-- Choice Buttons -->
                     <div style="display: flex; flex-direction: column; gap: 16px;">
                         <button onclick="authScreenMode='register'; renderAuthScreen();"
-                                style="width: 100%; padding: 20px 28px; background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); color: white; border: none; border-radius:16px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3); display: flex; align-items: center; justify-content: center; gap: 12px;"
+                                style="width: 100%; padding: 20px 28px; background: linear-gradient(135deg, #065f46 0%, #2874a6 100%); color: white; border: none; border-radius:16px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3); display: flex; align-items: center; justify-content: center; gap: 12px;"
                                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(5, 150, 105, 0.4)'"
                                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 14px rgba(5, 150, 105, 0.3)'">
                             <span style="font-size: 1.4rem;">🆕</span>
@@ -9712,7 +9726,7 @@ body { transition: background 0.3s, color 0.3s; }
                         
                         <button onclick="authScreenMode='login'; renderAuthScreen();"
                                 style="width: 100%; padding: 20px 28px; background:var(--rdx-bg-card); color: #374151; border: 2px solid #d1d5db; border-radius:16px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 12px;"
-                                onmouseover="this.style.borderColor='#14b8a6'; this.style.color='#115e59'"
+                                onmouseover="this.style.borderColor='#3a90c0'; this.style.color='#1a4971'"
                                 onmouseout="this.style.borderColor='#d1d5db'; this.style.color='#374151'">
                             <span style="font-size: 1.4rem;">🔑</span>
                             Returning User - Login
@@ -9993,7 +10007,7 @@ body { transition: background 0.3s, color 0.3s; }
                                    onkeydown="handleNameKeydown(event)"
                                    maxlength="30"
                                    style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.2s;"
-                                   onfocus="this.style.borderColor='#14b8a6'"
+                                   onfocus="this.style.borderColor='#3a90c0'"
                                    onblur="this.style.borderColor='#e5e7eb'">
                         </div>
                         
@@ -10004,8 +10018,8 @@ body { transition: background 0.3s, color 0.3s; }
                         <!-- Submit Button -->
                         <button id="auth-submit-btn"
                                 type="submit"
-                                style="width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
-                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px -5px rgba(16,185,129,0.4)'"
+                                style="width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #2874a6 0%, #1f5f8b 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px -5px rgba(22,163,74,0.4)'"
                                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             ${isHelper ? 'Get Started →' : 'Start Learning →'}
                         </button>
@@ -10040,7 +10054,7 @@ body { transition: background 0.3s, color 0.3s; }
                        value="${currentName}"
                        maxlength="30"
                        style="width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius:12px; font-size: 1rem; box-sizing: border-box;"
-                       onfocus="this.style.borderColor='#14b8a6'"
+                       onfocus="this.style.borderColor='#3a90c0'"
                        onblur="this.style.borderColor='#e5e7eb'">
             </div>
             
@@ -10050,7 +10064,7 @@ body { transition: background 0.3s, color 0.3s; }
                     Cancel
                 </button>
                 <button onclick="handleChangeDisplayName()" 
-                        style="flex: 1; padding: 12px 20px; background: #14b8a6; color: white; border: none; border-radius:12px; font-size: 0.95rem; font-weight: 600; cursor: pointer;">
+                        style="flex: 1; padding: 12px 20px; background: #3a90c0; color: white; border: none; border-radius:12px; font-size: 0.95rem; font-weight: 600; cursor: pointer;">
                     Save
                 </button>
             </div>
@@ -11078,7 +11092,7 @@ await generateStudentCodes(200, 'MED');
             shortName: 'UME',
             subtitle: 'M1-M4',
             icon: '🎓',
-            color: '#14b8a6', // indigo
+            color: '#3a90c0', // indigo
             description: 'Focus on history-taking, physical exam skills, and building clinical reasoning foundations',
             emphasis: {
                 history: 'high',      // Heavy focus on asking right questions
@@ -11098,7 +11112,7 @@ await generateStudentCodes(200, 'MED');
             shortName: 'GME',
             subtitle: 'PGY1-5',
             icon: '🏥',
-            color: '#059669', // emerald
+            color: '#1f5f8b', // emerald
             description: 'Focus on efficient workup, management decisions, and presenting to attendings',
             emphasis: {
                 history: 'medium',    // Should be efficient
@@ -11502,7 +11516,7 @@ await generateStudentCodes(200, 'MED');
         if (pct >= config.scoreThresholds.excellent) {
             return { grade: 'Excellent', phrases: config.feedbackPhrases.excellent, color: '#22c55e' };
         } else if (pct >= config.scoreThresholds.good) {
-            return { grade: 'Good', phrases: config.feedbackPhrases.good, color: '#14b8a6' };
+            return { grade: 'Good', phrases: config.feedbackPhrases.good, color: '#3a90c0' };
         } else if (pct >= config.scoreThresholds.satisfactory) {
             return { grade: 'Satisfactory', phrases: config.feedbackPhrases.satisfactory, color: '#f59e0b' };
         } else {
@@ -11881,28 +11895,28 @@ render(); // Re-render now that we're ready
     const TEAMS = {
         // 25 Teams - names can be customized in Instructor Dashboard
         team1: { id: 'team1', name: 'Team 1', color: '#ef4444', icon: '🔴' },
-        team2: { id: 'team2', name: 'Team 2', color: '#14b8a6', icon: '🔵' },
+        team2: { id: 'team2', name: 'Team 2', color: '#3a90c0', icon: '🔵' },
         team3: { id: 'team3', name: 'Team 3', color: '#22c55e', icon: '🟢' },
         team4: { id: 'team4', name: 'Team 4', color: '#f59e0b', icon: '🟡' },
         team5: { id: 'team5', name: 'Team 5', color: '#8b5cf6', icon: '🟣' },
         team6: { id: 'team6', name: 'Team 6', color: '#ec4899', icon: '🩷' },
-        team7: { id: 'team7', name: 'Team 7', color: '#14b8a6', icon: '🩵' },
+        team7: { id: 'team7', name: 'Team 7', color: '#3a90c0', icon: '🩵' },
         team8: { id: 'team8', name: 'Team 8', color: '#f97316', icon: '🟠' },
-        team9: { id: 'team9', name: 'Team 9', color: '#14b8a6', icon: '💜' },
+        team9: { id: 'team9', name: 'Team 9', color: '#3a90c0', icon: '💜' },
         team10: { id: 'team10', name: 'Team 10', color: '#84cc16', icon: '💚' },
         team11: { id: 'team11', name: 'Team 11', color: '#06b6d4', icon: '💙' },
         team12: { id: 'team12', name: 'Team 12', color: '#e11d48', icon: '❤️' },
         team13: { id: 'team13', name: 'Team 13', color: '#7c3aed', icon: '💟' },
         team14: { id: 'team14', name: 'Team 14', color: '#0891b2', icon: '🔷' },
         team15: { id: 'team15', name: 'Team 15', color: '#c026d3', icon: '🔮' },
-        team16: { id: 'team16', name: 'Team 16', color: '#059669', icon: '🌿' },
+        team16: { id: 'team16', name: 'Team 16', color: '#1f5f8b', icon: '🌿' },
         team17: { id: 'team17', name: 'Team 17', color: '#dc2626', icon: '🌹' },
-        team18: { id: 'team18', name: 'Team 18', color: '#0d9488', icon: '💎' },
+        team18: { id: 'team18', name: 'Team 18', color: '#2874a6', icon: '💎' },
         team19: { id: 'team19', name: 'Team 19', color: '#65a30d', icon: '🍀' },
         team20: { id: 'team20', name: 'Team 20', color: '#9333ea', icon: '🦋' },
-        team21: { id: 'team21', name: 'Team 21', color: '#0d9488', icon: '🌊' },
+        team21: { id: 'team21', name: 'Team 21', color: '#2874a6', icon: '🌊' },
         team22: { id: 'team22', name: 'Team 22', color: '#ea580c', icon: '🔥' },
-        team23: { id: 'team23', name: 'Team 23', color: '#0d9488', icon: '⭐' },
+        team23: { id: 'team23', name: 'Team 23', color: '#2874a6', icon: '⭐' },
         team24: { id: 'team24', name: 'Team 24', color: '#16a34a', icon: '🌲' },
         team25: { id: 'team25', name: 'Team 25', color: '#db2777', icon: '🌸' }
     };
@@ -15663,7 +15677,7 @@ casesLoadPromise = (async () => {
         // Render ordered labs first
         if (orderedResultsExist) {
             reportHtml += `
-                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 8px; margin: 8px 0;">
+                <div style="background: #f0f7fc; border: 1px solid #a3cfe6; border-radius: 4px; padding: 8px; margin: 8px 0;">
                     <strong style="color: #166534;">✓ Labs You Ordered</strong>
                 </div>
             `;
@@ -16854,7 +16868,9 @@ casesLoadPromise = (async () => {
             <div class="bg-gradient-to-r from-slate-50 to-zinc-100 dark:from-slate-900 dark:to-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-3xl mx-auto px-6 py-6">
                     <div class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 100px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style="height: 100px; width: auto;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
                         <p class="text-lg font-medium italic text-zinc-600 dark:text-zinc-400 ml-4 self-end pb-1">Asking the right questions<br/>can change everything.</p>
                     </div>
                 </div>
@@ -17401,7 +17417,9 @@ casesLoadPromise = (async () => {
                 <header class="border-b border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
                     <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-4">
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 40px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style="height: 40px; width: auto;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
                         </div>
                         <div class="flex items-center gap-3">
                             <button onclick="toggleDarkMode()" class="p-2 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
@@ -17505,7 +17523,9 @@ casesLoadPromise = (async () => {
                 <header class="border-b border-zinc-200 dark:border-zinc-700 sticky top-0 bg-white dark:bg-zinc-900 z-50">
                     <div class="max-w-2xl mx-auto flex items-center justify-between px-6 py-3">
                         <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height: 36px; width: auto;"><text x="20" y="55" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text><rect x="225" y="61" width="90" height="4" fill="#2874a6" rx="2"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" style="height: 36px; width: auto;"><text x="250" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" fill="#2f3640" letter-spacing="-2">ReasonDx</text>
+                <rect x="335" y="80" width="90" height="4" fill="#2874a6" rx="2"/>
+                            </svg>
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="text-right">
@@ -17694,7 +17714,16 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-3xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
+                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
+                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
+                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
+                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
+                        </svg>
                     </a>
                     <nav class="hidden sm:flex items-center gap-6 text-sm">
                         <a href="#" onclick="goToScreen('menu'); return false;" class="${activeNav === 'train' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'} no-underline">Train</a>
@@ -19135,7 +19164,16 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
+                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
+                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
+                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
+                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
+                        </svg>
                     </a>
                     <nav class="hidden sm:flex items-center gap-6 text-sm">
                         <a href="#" onclick="goToScreen('menu'); return false;" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 no-underline">Train</a>
@@ -19875,7 +19913,16 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-4xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
+                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
+                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
+                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
+                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
+                        </svg>
                     </a>
                     <div class="flex items-center gap-3">
                         <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
@@ -20148,7 +20195,16 @@ casesLoadPromise = (async () => {
             <header class="border-b border-zinc-200 dark:border-zinc-800">
                 <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
                     <a href="#" onclick="goToScreen('menu'); return false;" class="no-underline text-zinc-900 dark:text-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" style="height: 40px; width: auto;"><text x="5" y="42" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#2f3640" letter-spacing="-1.5">ReasonDx</text><rect x="170" y="47" width="65" height="3" fill="#2874a6" rx="1.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" style="height: 40px; width: auto;">
+                          <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Reason</text>
+                          <text x="148" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                          <line x1="182" y1="24" x2="198" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                          <ellipse cx="180" cy="22" rx="2" ry="3.5" transform="rotate(-28 180 22)" fill="currentColor"/>
+                          <path d="M 198 24 L 188 35 Q 184 40 184 47 Q 184 54 189 58 Q 194 62 194 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                          <ellipse cx="200" cy="22" rx="2" ry="3.5" transform="rotate(28 200 22)" fill="currentColor"/>
+                          <circle cx="194" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                          <circle cx="194" cy="68" r="3.5" fill="currentColor"/>
+                        </svg>
                     </a>
                     <div class="flex items-center gap-3">
                         <button onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition p-2">
@@ -20615,7 +20671,7 @@ casesLoadPromise = (async () => {
                     <h3 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 12px;">🏥 Performance by Category</h3>
                     <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                         ${Object.entries(detail.summary.categoryScores || {}).map(([cat, data]) => {
-                            const color = data.average >= 80 ? '#dcfce7' : data.average >= 60 ? '#fef9c3' : '#fee2e2';
+                            const color = data.average >= 80 ? '#d4e8f7' : data.average >= 60 ? '#fef9c3' : '#fee2e2';
                             return `
                                 <div style="background: ${color}; padding: 6px 12px; border-radius:8px; font-size: 0.75rem;">
                                     <strong>${cat}:</strong> ${data.average}% (${data.count} cases)
@@ -20805,7 +20861,7 @@ Generated by ReasonDx Clinical Reasoning Trainer
                 <textarea id="weekly-report-text" readonly style="width: 100%; height: 400px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; font-family: monospace; font-size: 0.75rem; line-height: 1.5; resize: none; background: #f8fafc;">${report}</textarea>
                 
                 <div style="display: flex; gap: 12px; margin-top: 16px;">
-                    <button onclick="copyWeeklyReport()" style="flex: 1; padding: 12px; background: #14b8a6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    <button onclick="copyWeeklyReport()" style="flex: 1; padding: 12px; background: #3a90c0; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
                         📋 Copy to Clipboard
                     </button>
                     <button onclick="closeModal()" style="flex: 1; padding: 12px; background: #f1f5f9; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">
@@ -20877,7 +20933,7 @@ Generated by ReasonDx Clinical Reasoning Trainer
                     </ul>
                 </div>
                 
-                <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                <div style="background: #f0f7fc; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
                     <p style="margin: 0; font-size: 0.875rem; color: #166534;">
                         <strong>💡 Quick Tip:</strong> Most instructors find the manual weekly report sufficient. It takes about 30 seconds and gives you full control over what gets shared.
                     </p>
@@ -21209,7 +21265,7 @@ Generated by ReasonDx Clinical Reasoning Trainer
         const info = {
             'emergent': { color: '#dc2626', bg: '#fef2f2', label: '🚨 Emergent', description: 'Life-threatening, immediate action' },
             'urgent': { color: '#f59e0b', bg: '#fffbeb', label: '⚡ Urgent', description: 'Needs prompt evaluation' },
-            'routine': { color: '#22c55e', bg: '#f0fdf4', label: '📅 Routine', description: 'Can be scheduled' },
+            'routine': { color: '#22c55e', bg: '#f0f7fc', label: '📅 Routine', description: 'Can be scheduled' },
             'varies': { color: '#8b5cf6', bg: '#f5f3ff', label: '🔀 Varies', description: 'Depends on presentation' }
         };
         return info[urgency] || info['routine'];
@@ -21218,7 +21274,7 @@ Generated by ReasonDx Clinical Reasoning Trainer
     // Get difficulty level info
     function getDifficultyInfo(difficulty) {
         const info = {
-            'foundational': { color: '#22c55e', bg: '#f0fdf4', label: '📚 Foundational', icon: '📚' },
+            'foundational': { color: '#22c55e', bg: '#f0f7fc', label: '📚 Foundational', icon: '📚' },
             'intermediate': { color: '#f59e0b', bg: '#fffbeb', label: '📈 Intermediate', icon: '📈' },
             'advanced': { color: '#ef4444', bg: '#fef2f2', label: '🎯 Advanced', icon: '🎯' }
         };
@@ -37067,8 +37123,8 @@ render();
         
         return `
             <div class="struggling-hint" id="strugglingHint" 
-                 style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); 
-                        border: 1px solid #0f766e; border-radius: 12px; padding: 16px; margin: 16px 0;">
+                 style="background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); 
+                        border: 1px solid #1f5f8b; border-radius: 12px; padding: 16px; margin: 16px 0;">
                 <div style="display: flex; align-items: flex-start; gap: 12px;">
                     <span style="font-size: 24px;">💡</span>
                     <div style="flex: 1;">
@@ -37078,7 +37134,7 @@ render();
                         </p>
                         <a href="modules/${mechanismLink.file}" target="_blank"
                            style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
-                                  background:var(--rdx-bg-card); border: 1px solid #0f766e; border-radius: 8px;
+                                  background:var(--rdx-bg-card); border: 1px solid #1f5f8b; border-radius: 8px;
                                   text-decoration: none; color: #92400e; font-weight: 500; font-size: 14px;">
                             ⚙️ ${mechanismLink.title}
                             <span style="font-size: 12px;">↗</span>
@@ -42853,7 +42909,7 @@ state.epeShowCapture = true;
                             
                             ${consequenceData.summary ? `
                                 <div class="outcome-summary">
-                                    <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1);">Expected Outcome</div>
+                                    <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7);">Expected Outcome</div>
                                     <div class="outcome-summary-stat">
                                         <div class="outcome-stat">
                                             <div class="outcome-stat-value">${consequenceData.summary.correct.los}</div>
@@ -42922,7 +42978,7 @@ state.epeShowCapture = true;
                     ${studentGotCorrect ? `
                         <div style="background: rgba(34, 197, 94, 0.2); border-radius: 12px; padding: 16px; margin-top: 16px; text-align: center;">
                             <span style="font-size: 2rem;">🎯</span>
-                            <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-top: 8px;">
+                            <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-top: 8px;">
                                 You Got It Right!
                             </div>
                             <div style="color: #d1d5db; font-size: 0.9rem; margin-top: 4px;">
@@ -43053,7 +43109,7 @@ state.epeShowCapture = true;
                         <div class="patient-avatar">${patientIcon}</div>
                         <div class="patient-info">
                             <h3>Patient Case</h3>
-                            ${variant.setting ? `<p style="color: #14b8a6; font-size: 0.75rem; margin: 2px 0;">${window.getSettingDisplayName ? window.getSettingDisplayName(variant.setting) : variant.setting}</p>` : ''}
+                            ${variant.setting ? `<p style="color: #3a90c0; font-size: 0.75rem; margin: 2px 0;">${window.getSettingDisplayName ? window.getSettingDisplayName(variant.setting) : variant.setting}</p>` : ''}
                             <p>${variant.chiefComplaint?.substring(0, 40)}${variant.chiefComplaint?.length > 40 ? '...' : ''}</p>
                         </div>
                     </div>
@@ -43491,7 +43547,7 @@ state.epeShowCapture = true;
                 ${dayData.nurseReport ? `
                     <div class="nurse-report modern-card">
                         <div class="modern-card-header">
-                            <div class="icon" style="background: #ccfbf1;">👩‍⚕️</div>
+                            <div class="icon" style="background: #d4e8f7;">👩‍⚕️</div>
                             <div>
                                 <h3>Nurse's Report</h3>
                                 <p style="color: #64748b; font-size: 0.85rem;">Overnight/morning update</p>
@@ -43521,7 +43577,7 @@ state.epeShowCapture = true;
                 ${dayData.newImaging ? `
                     <div class="new-imaging modern-card" style="margin-top: 16px;">
                         <div class="modern-card-header">
-                            <div class="icon" style="background: #ccfbf1;">📷</div>
+                            <div class="icon" style="background: #d4e8f7;">📷</div>
                             <h3>New Imaging</h3>
                         </div>
                         <div class="modern-card-body">
@@ -43531,8 +43587,8 @@ state.epeShowCapture = true;
                 ` : ''}
                 
                 ${dayData.decisionPoint ? `
-                    <div class="decision-point modern-card" style="margin-top: 20px; border: 2px solid #0f766e;">
-                        <div class="modern-card-header" style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);">
+                    <div class="decision-point modern-card" style="margin-top: 20px; border: 2px solid #1f5f8b;">
+                        <div class="modern-card-header" style="background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);">
                             <div class="icon" style="background: #f59e0b;">🤔</div>
                             <div>
                                 <h3>Decision Point</h3>
@@ -43658,7 +43714,7 @@ state.epeShowCapture = true;
                 
                 <div class="modern-card" style="margin-top: 20px;">
                     <div class="modern-card-header">
-                        <div class="icon" style="background: #ccfbf1;">📊</div>
+                        <div class="icon" style="background: #d4e8f7;">📊</div>
                         <h3>Your Decisions</h3>
                     </div>
                     <div class="modern-card-body">
@@ -43673,7 +43729,7 @@ state.epeShowCapture = true;
                 
                 <div class="modern-card" style="margin-top: 20px;">
                     <div class="modern-card-header">
-                        <div class="icon" style="background: ${longitudinalState.patientStatus === 'improving' ? '#dcfce7' : '#fee2e2'};">
+                        <div class="icon" style="background: ${longitudinalState.patientStatus === 'improving' ? '#d4e8f7' : '#fee2e2'};">
                             ${longitudinalState.patientStatus === 'improving' ? '📈' : '📉'}
                         </div>
                         <h3>Patient Outcome</h3>
@@ -43756,7 +43812,7 @@ state.epeShowCapture = true;
             id: 'im-clerkship',
             title: 'Internal Medicine Clerkship',
             icon: '🏥',
-            color: '#14b8a6',
+            color: '#3a90c0',
             categories: ['Internal Medicine', 'Cardiology', 'Pulmonology', 'GI', 'Nephrology', 'Endocrine'],
             description: 'Core cases for your IM rotation'
         },
@@ -43796,7 +43852,7 @@ state.epeShowCapture = true;
             id: 'psych-clerkship',
             title: 'Psychiatry Clerkship',
             icon: '🧘',
-            color: '#14b8a6',
+            color: '#3a90c0',
             categories: ['Psychiatry'],
             description: 'Mental health presentations'
         }
@@ -51364,7 +51420,7 @@ enhancedQuizState = {
                 difficulty: 'Advanced',
                 duration: '20-30 min',
                 icon: '🫁',
-                color: '#14b8a6',
+                color: '#3a90c0',
                 available: false,
                 file: null
             },
@@ -51526,7 +51582,7 @@ enhancedQuizState = {
                                 style="background:var(--rdx-bg-card); border: 1px solid #334155; border-radius: 12px; 
                                        padding: 16px; text-align: left; cursor: pointer; transition: all 0.2s;
                                        display: flex; justify-content: space-between; align-items: center;"
-                                onmouseover="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='#14b8a6';"
+                                onmouseover="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='#3a90c0';"
                                 onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='#334155';">
                             <div>
                                 <div style="font-weight: 600; color: white; margin-bottom: 4px;">${c.title}</div>
@@ -51562,8 +51618,8 @@ enhancedQuizState = {
                     </p>
                 </div>
                 
-                <div style="background: rgba(59,130,246,0.1); border: 1px solid #14b8a6; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
-                    <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 8px;">Selected Case: ${caseData.title}</div>
+                <div style="background: rgba(59,130,246,0.1); border: 1px solid #3a90c0; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                    <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 8px;">Selected Case: ${caseData.title}</div>
                     <div style="font-size: 0.9rem; color: #94a3b8;">
                         ${caseData.setting.type.toUpperCase()} • Calling ${caseData.setting.consultant} • ${caseData.presentation.urgency.toUpperCase()} priority
                     </div>
@@ -51573,7 +51629,7 @@ enhancedQuizState = {
                     ${Object.entries(SBAR_RUBRIC).map(([key, section]) => `
                         <div style="background:var(--rdx-bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--rdx-teal-light,#ccfbf1);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--rdx-teal-light,#d4e8f7);">
                                     ${section.name[0]} - ${section.name}
                                 </div>
                                 <div style="font-size: 0.85rem; color: #94a3b8;">${section.maxPoints} points</div>
@@ -51585,7 +51641,7 @@ enhancedQuizState = {
                                                 ${c.required ? 'border-left: 3px solid #f59e0b;' : ''}">
                                         <span style="font-size: 0.9rem; ${c.required ? 'color: white;' : 'color: #94a3b8;'}">
                                             ${c.text}
-                                            ${c.required ? '<span style="color: #0f766e; font-size: 0.75rem;"> (Required)</span>' : ''}
+                                            ${c.required ? '<span style="color: #1f5f8b; font-size: 0.75rem;"> (Required)</span>' : ''}
                                         </span>
                                         <span style="font-size: 0.85rem; color: #64748b;">${c.points} pts</span>
                                     </div>
@@ -51637,7 +51693,7 @@ enhancedQuizState = {
                 <div style="margin-top: 16px; max-height: 350px; overflow-y: auto;">
                     <!-- HPI -->
                     <div style="background:var(--rdx-bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-                        <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px;">📋 History of Present Illness</div>
+                        <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px;">📋 History of Present Illness</div>
                         <div style="font-size: 0.9rem; line-height: 1.6; color:var(--rdx-text); margin-bottom: 12px;">${caseData.hpi.narrative}</div>
                         <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Select pertinent findings to include in your SBAR:</div>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -51645,7 +51701,7 @@ enhancedQuizState = {
                                 <button onclick="toggleFinding('hpi', '${p.id}')" 
                                         style="padding: 6px 12px; border-radius: 9999px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
                                                ${sbarState.selectedFindings.hpi.includes(p.id) 
-                                                   ? 'background: #14b8a6; border: 1px solid #14b8a6; color: white;' 
+                                                   ? 'background: #3a90c0; border: 1px solid #3a90c0; color: white;' 
                                                    : 'background:var(--rdx-bg-card); border: 1px solid #334155; color: #94a3b8;'}">
                                     ${p.isPositive ? '✓' : '✗'} ${p.text}
                                 </button>
@@ -51655,7 +51711,7 @@ enhancedQuizState = {
                     
                     <!-- PMH -->
                     <div style="background:var(--rdx-bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-                        <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px;">📁 Past Medical History</div>
+                        <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px;">📁 Past Medical History</div>
                         <div style="font-size: 0.9rem; color:var(--rdx-text); margin-bottom: 8px;">
                             <strong>Conditions:</strong> ${caseData.pmh.conditions.join(', ')}
                         </div>
@@ -51671,7 +51727,7 @@ enhancedQuizState = {
                                 <button onclick="toggleFinding('pmh', '${p.id}')" 
                                         style="padding: 6px 12px; border-radius: 9999px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
                                                ${sbarState.selectedFindings.pmh.includes(p.id) 
-                                                   ? 'background: #14b8a6; border: 1px solid #14b8a6; color: white;' 
+                                                   ? 'background: #3a90c0; border: 1px solid #3a90c0; color: white;' 
                                                    : 'background:var(--rdx-bg-card); border: 1px solid #334155; color: #94a3b8;'}">
                                     ${p.isPositive ? '✓' : '✗'} ${p.text}
                                 </button>
@@ -51681,7 +51737,7 @@ enhancedQuizState = {
                     
                     <!-- Physical Exam -->
                     <div style="background:var(--rdx-bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-                        <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px;">🩺 Physical Examination</div>
+                        <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px;">🩺 Physical Examination</div>
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 0.85rem; margin-bottom: 12px;">
                             <div><strong>BP:</strong> ${caseData.physicalExam.vitals.bp}</div>
                             <div><strong>HR:</strong> ${caseData.physicalExam.vitals.hr}</div>
@@ -51704,7 +51760,7 @@ enhancedQuizState = {
                                 <button onclick="toggleFinding('exam', '${p.id}')" 
                                         style="padding: 6px 12px; border-radius: 9999px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
                                                ${sbarState.selectedFindings.exam.includes(p.id) 
-                                                   ? 'background: #14b8a6; border: 1px solid #14b8a6; color: white;' 
+                                                   ? 'background: #3a90c0; border: 1px solid #3a90c0; color: white;' 
                                                    : 'background:var(--rdx-bg-card); border: 1px solid #334155; color: #94a3b8;'}">
                                     ${p.isPositive ? '✓' : '✗'} ${p.text}
                                 </button>
@@ -51714,7 +51770,7 @@ enhancedQuizState = {
                     
                     <!-- Labs -->
                     <div style="background:var(--rdx-bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-                        <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px;">🧪 Laboratory Results</div>
+                        <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px;">🧪 Laboratory Results</div>
                         ${caseData.labs.results.length > 0 ? `
                             <div style="display: grid; gap: 4px; font-size: 0.85rem; margin-bottom: 12px;">
                                 ${caseData.labs.results.map(l => `
@@ -51733,7 +51789,7 @@ enhancedQuizState = {
                                 <button onclick="toggleFinding('labs', '${p.id}')" 
                                         style="padding: 6px 12px; border-radius: 9999px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
                                                ${sbarState.selectedFindings.labs.includes(p.id) 
-                                                   ? 'background: #14b8a6; border: 1px solid #14b8a6; color: white;' 
+                                                   ? 'background: #3a90c0; border: 1px solid #3a90c0; color: white;' 
                                                    : 'background:var(--rdx-bg-card); border: 1px solid #334155; color: #94a3b8;'}">
                                     ${p.isPositive ? '✓' : '✗'} ${p.text}
                                 </button>
@@ -51743,7 +51799,7 @@ enhancedQuizState = {
                     
                     <!-- Imaging -->
                     <div style="background:var(--rdx-bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-                        <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px;">📷 Imaging</div>
+                        <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px;">📷 Imaging</div>
                         ${caseData.imaging.results.map(i => `
                             <div style="margin-bottom: 8px;">
                                 <strong style="font-size: 0.9rem;">${i.type}:</strong>
@@ -51756,7 +51812,7 @@ enhancedQuizState = {
                                 <button onclick="toggleFinding('imaging', '${p.id}')" 
                                         style="padding: 6px 12px; border-radius: 9999px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
                                                ${sbarState.selectedFindings.imaging.includes(p.id) 
-                                                   ? 'background: #14b8a6; border: 1px solid #14b8a6; color: white;' 
+                                                   ? 'background: #3a90c0; border: 1px solid #3a90c0; color: white;' 
                                                    : 'background:var(--rdx-bg-card); border: 1px solid #334155; color: #94a3b8;'}">
                                     ${p.isPositive ? '✓' : '✗'} ${p.text}
                                 </button>
@@ -51834,7 +51890,7 @@ enhancedQuizState = {
                         return `
                         <div class="sbar-step active">
                             <div class="sbar-step-header">
-                                <div class="sbar-letter" style="background: #14b8a6;">${section.letter}</div>
+                                <div class="sbar-letter" style="background: #3a90c0;">${section.letter}</div>
                                 <div class="sbar-step-title">${section.title}</div>
                             </div>
                             ${sbarConfig.showHints ? `
@@ -51908,8 +51964,8 @@ enhancedQuizState = {
                     
                     <!-- Feedback - depth varies by level -->
                     ${Object.entries(score.sections).some(([k, s]) => s.feedback.length > 0) ? `
-                        <div style="background: rgba(245,158,11,0.1); border: 1px solid #0f766e; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
-                            <div style="font-weight: 600; color: #0f766e; margin-bottom: 12px;">
+                        <div style="background: rgba(245,158,11,0.1); border: 1px solid #1f5f8b; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #1f5f8b; margin-bottom: 12px;">
                                 ${sbarConfig.feedbackDepth === 'detailed' ? '💡 Areas for Improvement' : sbarConfig.feedbackDepth === 'focused' ? '📌 Key Points' : '📋 Notes'}
                             </div>
                             ${Object.entries(score.sections).map(([key, section]) => 
@@ -51940,7 +51996,7 @@ enhancedQuizState = {
                                 { key: 'recommendation', label: 'R - Recommendation' }
                             ].map(s => `
                                 <div style="margin-bottom: 16px;">
-                                    <div style="font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 4px;">${s.label}</div>
+                                    <div style="font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 4px;">${s.label}</div>
                                     <div style="font-size: 0.9rem; color:var(--rdx-text); line-height: 1.5; padding: 12px; background:var(--rdx-bg-hover); border-radius: 8px;">
                                         "${caseData.modelSbar[s.key]}"
                                     </div>
@@ -60642,7 +60698,7 @@ to apply changes.');
             <head>
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
                 <title>Case Summary - ${caseData.title}</title>
                 <style>
 
@@ -60650,7 +60706,7 @@ to apply changes.');
 :root {
     --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
     --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
-    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #3a90c0; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -60659,7 +60715,7 @@ to apply changes.');
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
+    --accent: #2874a6; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
@@ -60675,7 +60731,7 @@ body { transition: background 0.3s, color 0.3s; }
                     .section { margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 8px; }
                     .diagnosis { font-size: 1.2em; font-weight: bold; color: #dc3545; }
                     ul { margin: 10px 0; }
-                    .competency { display: inline-block; padding: 3px 8px; margin: 2px; background: #ccfbf1; border-radius: 4px; font-size: 0.9em; }
+                    .competency { display: inline-block; padding: 3px 8px; margin: 2px; background: #d4e8f7; border-radius: 4px; font-size: 0.9em; }
                     @media print { body { margin: 20px; } }
                 </style>
             </head>

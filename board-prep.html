@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -63,7 +71,7 @@
 :root {
     --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
     --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
-    --accent: #14b8a6; --accent-light: rgba(59,130,246,0.15);
+    --accent: #3a90c0; --accent-light: rgba(59,130,246,0.15);
     --success: #22c55e; --success-light: rgba(34,197,94,0.15);
     --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
     --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
@@ -72,7 +80,7 @@
 [data-theme="light"] {
     --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
     --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #0d9488; --accent-light: rgba(37,99,235,0.1);
+    --accent: #2874a6; --accent-light: rgba(37,99,235,0.1);
     --success: #16a34a; --success-light: rgba(22,163,74,0.1);
     --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
     --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
@@ -86,8 +94,8 @@ body { transition: background 0.3s, color 0.3s; }
             --bg: #fafafa; --bg-card: #ffffff; --bg-subtle: #f5f5f5;
             --text: #1a1a1a; --text-secondary: #525252; --text-muted: #737373;
             --border: #e5e5e5; --border-strong: #d4d4d4;
-            --accent: #115e59; --accent-light: var(--primary-bg);
-            --correct: #166534; --correct-bg: #dcfce7;
+            --accent: #1a4971; --accent-light: var(--primary-bg);
+            --correct: #166534; --correct-bg: #d4e8f7;
             --incorrect: #991b1b; --incorrect-bg: #fee2e2;
             --warning: #92400e;
             --radius: 4px; --radius-lg: 8px;
@@ -99,8 +107,8 @@ body { transition: background 0.3s, color 0.3s; }
 
         .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 24px; }
-        .logo { font-weight: 700; font-size: 15px; color: #2f3640; text-decoration: none; display: flex; align-items: center; gap: 8px; font-family: Georgia, serif; }
-        .logo-mark { width: 24px; height: 24px; background: #2874a6; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
+        .logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-mark { width: 24px; height: 24px; background: var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
         .header-center { display: flex; align-items: center; gap: 32px; }
         .timer { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-secondary); }
         .timer.warning { color: var(--warning); }
@@ -254,7 +262,7 @@ body { transition: background 0.3s, color 0.3s; }
         .start-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px; }
         .start-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; max-width: 520px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .start-header { text-align: center; margin-bottom: 28px; }
-        .start-logo { width: 40px; height: 40px; background: #2874a6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; margin: 0 auto 16px; }
+        .start-logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; margin: 0 auto 16px; }
         .start-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
         .start-subtitle { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
         .start-stats { display: flex; justify-content: center; gap: 24px; margin: 20px 0; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); }
@@ -324,10 +332,10 @@ body { transition: background 0.3s, color 0.3s; }
 
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
+    --primary: #2874a6;
+    --primary-light: #7cb8d9;
+    --primary-dark: #1f5f8b;
+    --primary-bg: #f0f7fc;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
@@ -338,7 +346,7 @@ body { transition: background 0.3s, color 0.3s; }
     --border-light: #f1f5f9;
     --nav-text: #1e293b;
     --nav-link: #64748b;
-    --nav-active-bg: #10b981;
+    --nav-active-bg: #2874a6;
     --nav-active-text: #ffffff;
     --shadow: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
@@ -439,13 +447,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 <body>
 <!-- Mastery Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
-  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(13,148,136,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(40,116,166,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
     <div style="font-size:28px;flex-shrink:0;">📊</div>
     <div style="flex:1;min-width:0;">
-      <div style="font-weight:700;color:var(--rdx-teal-dark,#0f766e);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
       <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
     </div>
-    <div style="color:var(--rdx-teal,#0d9488);font-size:20px;flex-shrink:0;">→</div>
+    <div style="color:var(--rdx-teal,#2874a6);font-size:20px;flex-shrink:0;">→</div>
   </a>
 </div>
 

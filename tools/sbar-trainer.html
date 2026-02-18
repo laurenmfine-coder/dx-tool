@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -264,8 +272,8 @@
         
         /* Verbal Practice Section */
         .verbal-practice-section {
-            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-            border: 2px solid #14b8a6;
+            background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+            border: 2px solid #3a90c0;
             border-radius: 16px;
             padding: 25px;
             margin-top: 25px;
@@ -277,7 +285,7 @@
         }
         
         .verbal-practice-section h4 {
-            color: #0f766e;
+            color: #1f5f8b;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -285,7 +293,7 @@
         }
         
         .verbal-intro {
-            color: #0f766e;
+            color: #1f5f8b;
             margin-bottom: 20px;
             line-height: 1.6;
         }
@@ -325,7 +333,7 @@
         }
         
         .record-btn.recording {
-            background:linear-gradient(135deg,#0f766e,#0d9488);
+            background:linear-gradient(135deg,#1f5f8b,#2874a6);
             animation: pulse-record 1.5s infinite;
         }
         
@@ -412,7 +420,7 @@
         }
         
         .comparison-column.spoken {
-            border-left: 3px solid #14b8a6;
+            border-left: 3px solid #3a90c0;
         }
         
         .delivery-tips {
@@ -635,8 +643,8 @@
         }
         
         .patient-badge {
-            background: linear-gradient(135deg, #f0fdfa 0%, var(--primary-bg) 100%);
-            border: 1px solid #5eead4;
+            background: linear-gradient(135deg, #f0f7fc 0%, var(--primary-bg) 100%);
+            border: 1px solid #7cb8d9;
             border-radius: 12px;
             padding: 15px 20px;
         }
@@ -774,7 +782,7 @@
         
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 6px 20px rgba(40, 116, 166, 0.3);
         }
         
         /* Response Section */
@@ -960,7 +968,7 @@
     <!-- nav removed: unified via rdx-nav.js -->
 
     <!-- Profession Banner -->
-    <div class="profession-banner" id="professionBanner" style="background: linear-gradient(135deg, #f0fdf4 0%, var(--primary-bg) 100%); border-bottom: 1px solid #86efac; padding: 10px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
+    <div class="profession-banner" id="professionBanner" style="background: linear-gradient(135deg, #f0f7fc 0%, var(--primary-bg) 100%); border-bottom: 1px solid #86efac; padding: 10px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
         <span style="font-size: 14px; color: #166534;">📋 Training as: <strong id="professionLabel">Medical Student</strong></span>
         <select id="professionSelector" onchange="updateProfession(this.value)" style="padding: 6px 12px; border: 1px solid #86efac; border-radius:8px; background:var(--rdx-bg-card); font-size: 13px; color: #166534; cursor: pointer;">
             <option value="medical-student">Medical Student</option>
@@ -1002,10 +1010,10 @@
 
 /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
+    --primary: #2874a6;
+    --primary-light: #7cb8d9;
+    --primary-dark: #1f5f8b;
+    --primary-bg: #f0f7fc;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
@@ -1016,7 +1024,7 @@
     --border-light: #f1f5f9;
     --nav-text: #1e293b;
     --nav-link: #64748b;
-    --nav-active-bg: #10b981;
+    --nav-active-bg: #2874a6;
     --nav-active-text: #ffffff;
     --shadow: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
@@ -1393,9 +1401,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     
                     <div class="feedback-section">
                         <h4>📊 SBAR Feedback</h4>
-                        <div id="rubricDisplay" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #a7f3d0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                        <div id="rubricDisplay" style="background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); border: 1px solid #a7f3d0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
                             <div style="font-weight: 600; font-size: 14px; color: #166534; margin-bottom: 10px;">📋 Scoring Rubric — What We're Looking For:</div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: #15803d;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: #1a4971;">
                                 <div><strong>S (Situation):</strong> Patient ID, location, specific concern, urgency</div>
                                 <div><strong>B (Background):</strong> Admission reason, relevant history, baseline status, recent changes</div>
                                 <div><strong>A (Assessment):</strong> YOUR clinical judgment — "I'm concerned about…", key data points supporting your concern</div>
@@ -1442,11 +1450,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                             <div class="delivery-stats" style="display: flex; gap: 20px; margin-bottom: 20px;">
                                 <div style="background: #F0FDF4; padding: 15px 25px; border-radius:12px; text-align: center;">
                                     <div style="font-size: 1.8rem; font-weight: 700; color: #166534;" id="finalDuration">0:00</div>
-                                    <div style="font-size: 0.85rem; color: #15803d;">Duration</div>
+                                    <div style="font-size: 0.85rem; color: #1a4971;">Duration</div>
                                 </div>
-                                <div style="background: #f0fdfa; padding: 15px 25px; border-radius:12px; text-align: center;">
-                                    <div style="font-size: 1.8rem; font-weight: 700; color: #0f766e;">60-90s</div>
-                                    <div style="font-size: 0.85rem; color: #14b8a6;">Target Range</div>
+                                <div style="background: #f0f7fc; padding: 15px 25px; border-radius:12px; text-align: center;">
+                                    <div style="font-size: 1.8rem; font-weight: 700; color: #1f5f8b;">60-90s</div>
+                                    <div style="font-size: 0.85rem; color: #3a90c0;">Target Range</div>
                                 </div>
                             </div>
                             
@@ -2189,9 +2197,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             // Show summary
             const summaryHtml = `
-                <div style="background: #f0fdf4; border: 1px solid #22c55e; border-radius: 12px; padding: 20px; margin-top: 20px;">
+                <div style="background: #f0f7fc; border: 1px solid #22c55e; border-radius: 12px; padding: 20px; margin-top: 20px;">
                     <h3 style="color: #166534; margin-bottom: 10px;">✅ Conversation Complete</h3>
-                    <p style="color: #15803d;">Great job! You practiced both your SBAR communication and the follow-up conversation with ${currentResponder.name}.</p>
+                    <p style="color: #1a4971;">Great job! You practiced both your SBAR communication and the follow-up conversation with ${currentResponder.name}.</p>
                     <div style="margin-top: 15px; display: flex; gap: 10px;">
                         <button onclick="newScenario()" class="action-btn primary">Try Another Scenario</button>
                         <button onclick="goBack()" class="action-btn outline">Back to Dashboard</button>
@@ -2857,7 +2865,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const pct = Math.round((totalPoints / maxPoints) * 100);
             const scoreBar = document.getElementById('scoreBar');
             scoreBar.style.display = 'block';
-            scoreBar.style.background = pct >= 75 ? 'linear-gradient(135deg, #f0fdf4, #dcfce7)' :
+            scoreBar.style.background = pct >= 75 ? 'linear-gradient(135deg, #f0f7fc, #d4e8f7)' :
                                          pct >= 50 ? 'linear-gradient(135deg, #fefce8, #fef3c7)' :
                                                      'linear-gradient(135deg, #fef2f2, #fee2e2)';
             scoreBar.style.border = '1px solid ' + (pct >= 75 ? '#a7f3d0' : pct >= 50 ? '#fde68a' : '#fecaca');
@@ -2872,12 +2880,12 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             // ═══════════════════════════════════════════════
             feedback.forEach(item => {
                 const div = document.createElement('div');
-                div.style.cssText = 'border: 1px solid ' + (item.good ? '#a7f3d0' : '#fde68a') + '; border-radius:12px; padding: 14px; margin-bottom: 10px; background: ' + (item.good ? '#f0fdf4' : '#fffbeb');
+                div.style.cssText = 'border: 1px solid ' + (item.good ? '#a7f3d0' : '#fde68a') + '; border-radius:12px; padding: 14px; margin-bottom: 10px; background: ' + (item.good ? '#f0f7fc' : '#fffbeb');
                 
                 let matchedHtml = '';
                 if (item.matched.length > 0) {
                     const unique = [...new Set(item.matched)].slice(0, 5);
-                    matchedHtml = '<div style="margin-top: 6px; font-size: 11px; color: #6b7280;">Keywords detected: ' + unique.map(m => '<span style="background: #ccfbf1; color: #0f766e; padding: 2px 6px; border-radius: 4px; margin: 0 2px;">' + m + '</span>').join(' ') + '</div>';
+                    matchedHtml = '<div style="margin-top: 6px; font-size: 11px; color: #6b7280;">Keywords detected: ' + unique.map(m => '<span style="background: #d4e8f7; color: #1f5f8b; padding: 2px 6px; border-radius: 4px; margin: 0 2px;">' + m + '</span>').join(' ') + '</div>';
                 }
                 
                 let tipsHtml = '';
@@ -3010,17 +3018,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         function showCaseContextBanner(context) {
             const banner = document.createElement('div');
             banner.id = 'caseContextBanner';
-            banner.style.cssText = 'background: linear-gradient(135deg, var(--primary-bg) 0%, #99f6e4 100%); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 25px;';
+            banner.style.cssText = 'background: linear-gradient(135deg, var(--primary-bg) 0%, #a3cfe6 100%); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 25px;';
             banner.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <div style="font-size: 2.5rem;">📋</div>
                     <div style="flex: 1;">
-                        <h3 style="color: #115e59; margin: 0 0 5px 0; font-size: 1.1rem;">Continuing from: ${context.caseTitle}</h3>
+                        <h3 style="color: #1a4971; margin: 0 0 5px 0; font-size: 1.1rem;">Continuing from: ${context.caseTitle}</h3>
                         <p style="color: #1e3a8a; margin: 0; font-size: 0.95rem;">
                             Use what you learned about <strong>${context.patient?.name || 'the patient'}</strong> to make your SBAR call.
                         </p>
                     </div>
-                    <button onclick="newScenario()" style="background:var(--rdx-bg-card); border: 1px solid var(--primary); color: #115e59; padding: 8px 16px; border-radius:8px; cursor: pointer; font-size: 0.9rem;">
+                    <button onclick="newScenario()" style="background:var(--rdx-bg-card); border: 1px solid var(--primary); color: #1a4971; padding: 8px 16px; border-radius:8px; cursor: pointer; font-size: 0.9rem;">
                         Choose Different Scenario
                     </button>
                 </div>
