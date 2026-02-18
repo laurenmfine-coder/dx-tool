@@ -30,10 +30,8 @@
 const REFERRAL_CONFIG = {
     // Stripe Price IDs — replace with your actual IDs from Stripe Dashboard
     STRIPE_PRICES: {
-        pro_monthly:  'price_pro_monthly_placeholder',
-        pro_annual:   'price_pro_annual_placeholder',
-        beta_monthly: 'price_beta_monthly_placeholder',
-        beta_annual:  'price_beta_annual_placeholder'
+        pro_monthly:  'price_1T21xA1MnPQG4LfN6EXHi4qU',
+        pro_annual:   'price_1T22141MnPQG4LfNFdajhzsI'
     },
 
     // Referral reward tiers
@@ -51,7 +49,7 @@ const REFERRAL_CONFIG = {
     CODE_PATTERN: /^REF-[A-Z]{2}\d{4}$/,
 
     // Backend endpoint (Google Apps Script or Edge Function)
-    BACKEND_URL: 'YOUR_BACKEND_URL_HERE'
+    BACKEND_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec'
 };
 
 

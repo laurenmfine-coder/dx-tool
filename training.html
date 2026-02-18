@@ -36901,13 +36901,40 @@ render();
                     <!-- Cross-Platform Learning Recommendations -->
                     ${renderCrossPlatformRecommendations(caseData, dx)}
                     
+                    <!-- Call the Consult — SBAR Integration -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">📞</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg" style="color:#1a4971">Ready to Call the Consult?</h3>
+                                <p class="text-sm text-gray-600 mt-1 mb-3">
+                                    You've worked up <strong>${variant.name || 'the patient'}</strong> and arrived at your diagnosis. 
+                                    Now practice the next critical skill: communicating your findings using SBAR. 
+                                    The SBAR Trainer will load this patient's chart — you compose the call.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700">Active Learning</span>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700">Communication Skills</span>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700">Scored Feedback</span>
+                                </div>
+                                <button onclick="launchSBARFromCase()"
+                                        class="py-3 px-6 rounded-lg font-bold text-white hover:opacity-90 transition-opacity"
+                                        style="background: linear-gradient(135deg, #2874A6, #1f5f8b)">
+                                    📞 Call the Consult →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="flex gap-4">
                         <button onclick="resetAndGoToMenu()"
-                                class="flex-1 py-3 rounded-lg font-bold text-white bg-teal-600 hover:bg-teal-700">
+                                class="flex-1 py-3 rounded-lg font-bold text-white hover:opacity-90"
+                                style="background-color:#2874A6">
                             ← Back to Menu
                         </button>
                         <button onclick="restartCase()"
-                                class="flex-1 py-3 rounded-lg font-bold text-teal-600 border-2 border-teal-600 hover:bg-teal-50">
+                                class="flex-1 py-3 rounded-lg font-bold border-2 hover:bg-blue-50"
+                                style="color:#2874A6; border-color:#2874A6">
                             Try Another Case
                         </button>
                     </div>
@@ -58615,6 +58642,123 @@ to apply changes.');
         render();
     }
     
+    /**
+     * Launch SBAR Trainer with current CRT case patient data
+     * Packages the completed case into sbarCaseContext for the SBAR trainer to consume
+     */
+    function launchSBARFromCase() {
+        const caseData = cases.find(c => c.id === state.caseType);
+        const variant = caseData?.variants?.[state.variantKey];
+        if (!caseData || !variant) {
+            alert('Case data not found. Please try again.');
+            return;
+        }
+        
+        // Determine the consulting specialty from the case category
+        const specialtyMap = {
+            'allergy-immunology': 'Allergy/Immunology',
+            'cardiovascular': 'Cardiology',
+            'dermatology': 'Dermatology',
+            'emergency': 'Emergency Medicine',
+            'endocrine': 'Endocrinology',
+            'gi': 'Gastroenterology',
+            'hematology': 'Hematology',
+            'infectious': 'Infectious Disease',
+            'infectious-disease': 'Infectious Disease',
+            'internal-medicine': 'Internal Medicine',
+            'msk': 'Orthopedics',
+            'neurology': 'Neurology',
+            'obgyn': 'OB/GYN',
+            'oncology': 'Oncology',
+            'pediatrics': 'Pediatrics',
+            'psychiatry': 'Psychiatry',
+            'pulmonary': 'Pulmonology',
+            'renal-gu': 'Nephrology',
+            'rheumatology': 'Rheumatology',
+            'surgery': 'Surgery',
+            'toxicology': 'Toxicology',
+            'urology': 'Urology'
+        };
+        
+        const consultSpecialty = specialtyMap[caseData.category] || caseData.category || 'Attending Physician';
+        
+        // Build expected SBAR elements from the case data
+        const diagnosisName = variant.actualDiagnosis?.name || variant.correctDiagnosis || 'the diagnosis';
+        const chiefComplaint = variant.chiefComplaint || variant.oldcartsNarrative?.substring(0, 100) || caseData.title;
+        
+        // Extract key findings from history and physical that the student discovered
+        const essentialHistory = (variant.historyQuestions || [])
+            .filter(q => q.tier === 'essential' && state.selectedHistory.includes(q.id))
+            .map(q => q.text?.toLowerCase()?.replace(/[?.]/g, '') || '')
+            .filter(Boolean);
+            
+        const essentialExams = (variant.physicalExam || [])
+            .filter(e => e.tier === 'essential' && state.selectedPhysical.includes(e.id))
+            .map(e => e.label?.toLowerCase() || '')
+            .filter(Boolean);
+        
+        // Build SBAR expected elements
+        const expectedSBAR = {
+            situation: [
+                'calling about', variant.name?.split(' ')[1]?.toLowerCase() || 'patient',
+                chiefComplaint.toLowerCase().split(' ').slice(0, 3).join(' ')
+            ].filter(Boolean),
+            background: [
+                'admitted', 'history',
+                ...(variant.patientProfile?.pmhCategory ? [variant.patientProfile.pmhCategory] : []),
+                ...(variant.patientProfile?.allergyType ? ['allerg'] : [])
+            ].filter(Boolean),
+            assessment: [
+                'vital', 'exam',
+                diagnosisName.toLowerCase().split(' ')[0],
+                'concerned', 'assessment'
+            ].filter(Boolean),
+            recommendation: [
+                'recommend', 'requesting', 'evaluate',
+                ...(caseData.urgency === 'emergent' ? ['urgent', 'immediately'] : ['consult', 'opinion'])
+            ].filter(Boolean)
+        };
+        
+        // Build the case context for the SBAR trainer
+        const sbarContext = {
+            caseTitle: caseData.title + ' — ' + diagnosisName,
+            caseId: caseData.id,
+            fromCRT: true,
+            patient: {
+                name: variant.name || 'Patient',
+                age: variant.age || '',
+                sex: variant.gender ? variant.gender.charAt(0).toUpperCase() : '',
+                room: Math.floor(Math.random() * 400 + 200).toString(),
+                setting: variant.setting?.replace(/_/g, ' ') || 'inpatient unit',
+                chiefComplaint: chiefComplaint,
+                dx: diagnosisName,
+                vitals: variant.vitalSigns || {},
+                pmh: variant.patientProfile?.pmhCategory || '',
+                allergies: variant.patientProfile?.allergyType || 'none documented',
+                medications: variant.medications || []
+            },
+            scenario: {
+                expectedSBAR: expectedSBAR,
+                callingTo: consultSpecialty + ' on call',
+                consultReason: 'Requesting ' + consultSpecialty + ' consult for ' + diagnosisName
+            },
+            role: 'medical-student',
+            studentFindings: {
+                historyAsked: state.selectedHistory,
+                examsPerformed: state.selectedPhysical,
+                workupOrdered: state.selectedWorkup || [],
+                finalDiagnosis: state.rankedDifferential?.[0]?.name || diagnosisName,
+                wasCorrect: state.rankedDifferential?.[0]?.name === diagnosisName.split(' (')[0]
+            }
+        };
+        
+        // Save to sessionStorage for the SBAR trainer to read
+        sessionStorage.setItem('sbarCaseContext', JSON.stringify(sbarContext));
+        
+        // Navigate to the SBAR trainer
+        window.location.href = 'tools/sbar-trainer.html?fromCase=true&scenario=crt-consult';
+    }
+    
     // Initialize
     
     // Check for URL parameters to auto-start a case
@@ -59189,6 +59333,7 @@ to apply changes.');
     window.advanceToResults = advanceToResults;
     window.restartCase = restartCase;
     window.resetAndGoToMenu = resetAndGoToMenu;
+    window.launchSBARFromCase = launchSBARFromCase;
     window.confirmExitCase = confirmExitCase;
     window.printCaseSummary = printCaseSummary;
     window.navigateToStage = navigateToStage;
