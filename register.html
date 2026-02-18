@@ -829,18 +829,24 @@
 
                 var baseUrl = window.location.origin + window.location.pathname;
 
-                var stripe = Stripe(CONFIG.STRIPE_PUBLIC_KEY);
-                var result = await stripe.redirectToCheckout({
-                    lineItems: [{ price: priceId, quantity: 1 }],
-                    mode: 'subscription',
-                    customerEmail: state.verifiedEmail,
-                    successUrl: baseUrl + '?checkout=success&session_id={CHECKOUT_SESSION_ID}',
-                    cancelUrl: baseUrl + '?checkout=cancelled'
+                var response = await fetch('https://lpwbiqpojisqgezycupw.supabase.co/functions/v1/create-checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        priceId: priceId,
+                        customerEmail: state.verifiedEmail,
+                        successUrl: baseUrl + '?checkout=success&session_id={CHECKOUT_SESSION_ID}',
+                        cancelUrl: baseUrl + '?checkout=cancelled'
+                    })
                 });
 
-                if (result.error) {
-                    throw new Error(result.error.message);
+                var data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to create checkout session');
                 }
+
+                window.location.href = data.url;
 
             } catch (error) {
                 console.error('Checkout error:', error);
